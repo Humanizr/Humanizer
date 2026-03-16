@@ -117,6 +117,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bajtov</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>bajt</value>
+  </data>
+  <data name="DataUnit_Byte_Paucal" xml:space="preserve">
+    <value>bajty</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobajtov</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Singular" xml:space="preserve">
+    <value>kilobajt</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Paucal" xml:space="preserve">
+    <value>kilobajty</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabajtov</value>
+  </data>
+  <data name="DataUnit_Megabyte_Singular" xml:space="preserve">
+    <value>megabajt</value>
+  </data>
+  <data name="DataUnit_Megabyte_Paucal" xml:space="preserve">
+    <value>megabajty</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabajtov</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>gigabajt</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Paucal" xml:space="preserve">
+    <value>gigabajty</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabajtov</value>
+  </data>
+  <data name="DataUnit_Terabyte_Singular" xml:space="preserve">
+    <value>terabajt</value>
+  </data>
+  <data name="DataUnit_Terabyte_Paucal" xml:space="preserve">
+    <value>terabajty</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>pred {0} dňami</value>
   </data>
@@ -191,6 +251,15 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>teraz</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nikdy</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>pred 2 dňami</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>o 2 dni</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>včera</value>
@@ -276,6 +345,9 @@
   <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
     <value>{0} roky</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 deň</value>
   </data>
@@ -302,5 +374,77 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>žiadny čas</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>deň</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mesiac</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>týždeň</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>rok</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>sever</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>severovýchod</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>východ</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>juhovýchod</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>juh</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>juhozápad</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>západ</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>severozápad</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>SV</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>JV</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>J</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>JZ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>SZ</value>
   </data>
 </root>

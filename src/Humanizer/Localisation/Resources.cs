@@ -50,7 +50,7 @@ public static class Resources
     }
 
     /// <summary>
-    /// Tries to get the value of the specified string resource, without fallback
+    /// Tries to get the value of the specified string resource using the standard fallback chain
     /// </summary>
     /// <param name="resourceKey">The name of the resource to retrieve.</param>
     /// <param name="culture">The culture of the resource to retrieve. If not specified, current thread's UI culture is used.</param>
@@ -59,8 +59,15 @@ public static class Resources
     public static bool TryGetResource(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result)
     {
         culture ??= CultureInfo.CurrentUICulture;
-        var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
+
+        // Force the exact culture's resource set to load so TryGetResource behaves consistently
+        // across target frameworks instead of depending on prior satellite assembly load order.
+        var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: true, tryParents: false);
         result = resourceSet?.GetString(resourceKey);
+
+        // If the exact culture doesn't contain the resource, fall back through the standard
+        // ResourceManager chain so specific cultures can resolve parent-culture resources.
+        result ??= ResourceManager.GetString(resourceKey, culture);
         return result is not null;
     }
 }

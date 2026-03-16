@@ -23,7 +23,7 @@ public class DateHumanizeTests
 
     [Theory]
     [InlineData(2, "2 ώρες από τώρα")]
-    [InlineData(1, "πρίν από μία ώρα από τώρα")]
+    [InlineData(1, "μία ώρα από τώρα")]
     public void HoursFromNow(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
 
@@ -36,7 +36,7 @@ public class DateHumanizeTests
 
     [Theory]
     [InlineData(2, "2 λεπτά από τώρα")]
-    [InlineData(1, "πρίν από ένα λεπτό από τώρα")]
+    [InlineData(1, "ένα λεπτό από τώρα")]
     public void MinutesFromNow(int minutes, string expected) =>
         DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
 
@@ -48,7 +48,7 @@ public class DateHumanizeTests
 
     [Theory]
     [InlineData(2, "2 μήνες από τώρα")]
-    [InlineData(1, "πριν από έναν μήνα από τώρα")]
+    [InlineData(1, "έναν μήνα από τώρα")]
     public void MonthsFromNow(int months, string expected) =>
         DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
 
@@ -60,7 +60,7 @@ public class DateHumanizeTests
 
     [Theory]
     [InlineData(2, "2 δευτερόλεπτα από τώρα")]
-    [InlineData(1, "πριν από ένα δευτερόλεπτο από τώρα")]
+    [InlineData(1, "ένα δευτερόλεπτο από τώρα")]
     public void SecondsFromNow(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
 
@@ -72,7 +72,7 @@ public class DateHumanizeTests
 
     [Theory]
     [InlineData(2, "2 χρόνια από τώρα")]
-    [InlineData(1, "πριν από έναν χρόνο από τώρα")]
+    [InlineData(1, "έναν χρόνο από τώρα")]
     public void YearsFromNow(int years, string expected) =>
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
 }

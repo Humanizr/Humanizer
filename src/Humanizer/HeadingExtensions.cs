@@ -80,11 +80,10 @@ public static class HeadingExtensions
 
         culture ??= CultureInfo.CurrentCulture;
 
-        var upperCaseHeading = culture.TextInfo.ToUpper(heading);
         for (var index = 0; index < HeadingsShort.Length; ++index)
         {
             var localizedShortHeading = Resources.GetResource(HeadingsShort[index], culture);
-            if (culture.CompareInfo.Compare(upperCaseHeading, localizedShortHeading) == 0)
+            if (culture.CompareInfo.Compare(heading, localizedShortHeading, CompareOptions.IgnoreCase) == 0)
             {
                 return index * 22.5;
             }

@@ -79,4 +79,31 @@ public class DateHumanizeTests
     [Fact]
     public void Now() =>
         DateHumanize.Verify("indi", 0, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void TwoDaysAgoHasExplicitAzerbaijaniResource()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("az"), out var value));
+        Assert.Equal("srağagün", value);
+    }
+
+    [Fact]
+    public void TwoDaysFromNowHasExplicitAzerbaijaniResource()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("az"), out var value));
+        Assert.Equal("birigün", value);
+    }
+
+    [Fact]
+    public void DayResidualResourcesExist()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("az"), out var ago));
+        Assert.Equal("{0} gün əvvəl", ago);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("az"), out var fromNow));
+        Assert.Equal("{0} gün sonra", fromNow);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("az"), out var never));
+        Assert.Equal("heç vaxt", never);
+    }
 }

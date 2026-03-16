@@ -4,19 +4,19 @@
 public class DateHumanizeDefaultStrategyTests
 {
     [Theory]
-    [InlineData(1, "пре секунд")]
+    [InlineData(1, "пре секунде")]
     [InlineData(10, "пре 10 секунди")]
     public void SecondsAgo(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
 
     [Theory]
-    [InlineData(1, "за секунд")]
+    [InlineData(1, "за секунду")]
     [InlineData(10, "за 10 секунди")]
     public void SecondsFromNow(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
 
     [Theory]
-    [InlineData(1, "пре минут")]
+    [InlineData(1, "пре минута")]
     [InlineData(10, "пре 10 минута")]
     [InlineData(60, "пре сат времена")]
     public void MinutesAgo(int minutes, string expected) =>
@@ -30,12 +30,14 @@ public class DateHumanizeDefaultStrategyTests
 
     [Theory]
     [InlineData(1, "пре сат времена")]
+    [InlineData(12, "пре 12 сати")]
     [InlineData(10, "пре 10 сати")]
     public void HoursAgo(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
 
     [Theory]
     [InlineData(1, "за сат времена")]
+    [InlineData(12, "за 12 сати")]
     [InlineData(10, "за 10 сати")]
     public void HoursFromNow(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
@@ -79,4 +81,12 @@ public class DateHumanizeDefaultStrategyTests
     [Fact]
     public void Now() =>
         DateHumanize.Verify("сада", 0, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void TwoDaysAgo() =>
+        DateHumanize.Verify("пре 2 дана", 2, TimeUnit.Day, Tense.Past);
+
+    [Fact]
+    public void TwoDaysFromNow() =>
+        DateHumanize.Verify("за 2 дана", 2, TimeUnit.Day, Tense.Future);
 }

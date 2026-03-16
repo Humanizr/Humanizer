@@ -459,6 +459,9 @@
   <data name="S_Short" xml:space="preserve">
     <value>Ю</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} дней</value>
   </data>

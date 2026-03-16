@@ -19,6 +19,33 @@ public class DateHumanizeTests
     public void DaysFromNow(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
 
+    [Fact]
+    public void TwoDaysAgoHasExplicitKurdishResource()
+    {
+        var found = Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("ku"), out var value);
+
+        Assert.True(found);
+        Assert.Equal("2 ڕۆژ لەمەوبەر", value);
+    }
+
+    [Fact]
+    public void TwoDaysFromNowHasExplicitKurdishResource()
+    {
+        var found = Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("ku"), out var value);
+
+        Assert.True(found);
+        Assert.Equal("2 ڕۆژی دیکە", value);
+    }
+
+    [Fact]
+    public void DayPaucalResourcesExist()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("ku"), out var ago));
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("ku"), out var fromNow));
+        Assert.Equal("{0} ڕۆژ لەمەوبەر", ago);
+        Assert.Equal("{0} ڕۆژی دیکە", fromNow);
+    }
+
     [Theory]
     [InlineData(-2, "2 کاتژمێر لەمەوبەر")]
     [InlineData(-1, "کاتژمێرێک لەمەوبەر")]

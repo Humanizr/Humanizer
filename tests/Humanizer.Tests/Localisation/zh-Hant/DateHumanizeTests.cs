@@ -77,4 +77,18 @@ public class DateHumanizeTests
     [InlineData(1, "明年")]
     public void YearsFromNow(int years, string expected) =>
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void TwoDaysAgoHasExplicitTraditionalChineseResource()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("zh-Hant"), out var value));
+        Assert.Equal("前天", value);
+    }
+
+    [Fact]
+    public void TwoDaysFromNowHasExplicitTraditionalChineseResource()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("zh-Hant"), out var value));
+        Assert.Equal("後天", value);
+    }
 }

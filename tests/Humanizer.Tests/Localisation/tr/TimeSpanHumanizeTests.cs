@@ -90,4 +90,11 @@ public class TimeSpanHumanizeTests
         var actual = noTime.Humanize(toWords: true);
         Assert.Equal("zaman farkı yok", actual);
     }
+
+    [Theory]
+    [InlineData(14, false, "2 hafta yaşında")]
+    [InlineData(366, false, "1 yıl yaşında")]
+    [InlineData(366, true, "bir yıl yaşında")]
+    public void Age(int days, bool toWords, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
 }

@@ -30,12 +30,14 @@ public class DateHumanizeDefaultStrategyTests
 
     [Theory]
     [InlineData(1, "pre sat vremena")]
+    [InlineData(12, "pre 12 sati")]
     [InlineData(10, "pre 10 sati")]
     public void HoursAgo(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
 
     [Theory]
     [InlineData(1, "za sat vremena")]
+    [InlineData(12, "za 12 sati")]
     [InlineData(10, "za 10 sati")]
     public void HoursFromNow(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
@@ -79,4 +81,12 @@ public class DateHumanizeDefaultStrategyTests
     [Fact]
     public void Now() =>
         DateHumanize.Verify("sada", 0, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void TwoDaysAgo() =>
+        DateHumanize.Verify("pre 2 dana", 2, TimeUnit.Day, Tense.Past);
+
+    [Fact]
+    public void TwoDaysFromNow() =>
+        DateHumanize.Verify("za 2 dana", 2, TimeUnit.Day, Tense.Future);
 }

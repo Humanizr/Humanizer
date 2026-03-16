@@ -75,4 +75,23 @@ public class DateHumanizeTests
     [InlineData(2, "2 tahun dari sekarang")]
     public void YearsFromNow(int years, string expected) =>
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void HasExplicitResidualDateResources()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("id"), out var never));
+        Assert.Equal("tidak pernah", never);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("id"), out var twoDaysAgo));
+        Assert.Equal("2 hari yang lalu", twoDaysAgo);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("id"), out var twoDaysFromNow));
+        Assert.Equal("lusa", twoDaysFromNow);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("id"), out var daysAgoPaucal));
+        Assert.Equal("{0} hari yang lalu", daysAgoPaucal);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("id"), out var daysFromNowPaucal));
+        Assert.Equal("{0} hari dari sekarang", daysFromNowPaucal);
+    }
 }

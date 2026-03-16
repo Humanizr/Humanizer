@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>μπάιτ</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>γιγαμπάιτ</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>πριν από {0} ημέρες</value>
   </data>
@@ -156,6 +168,12 @@
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>ποτέ</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>προχθές</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>μεθαύριο</value>
+  </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>τώρα</value>
   </data>
@@ -169,31 +187,31 @@
     <value>πριν από μία ώρα</value>
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>πρίν από μία ώρα από τώρα</value>
+    <value>μία ώρα από τώρα</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>πριν από ένα λεπτό</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>πρίν από ένα λεπτό από τώρα</value>
+    <value>ένα λεπτό από τώρα</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>πριν από έναν μήνα</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>πριν από έναν μήνα από τώρα</value>
+    <value>έναν μήνα από τώρα</value>
   </data>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>πριν από ένα δευτερόλεπτο</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>πριν από ένα δευτερόλεπτο από τώρα</value>
+    <value>ένα δευτερόλεπτο από τώρα</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>πριν από έναν χρόνο</value>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>πριν από έναν χρόνο από τώρα</value>
+    <value>έναν χρόνο από τώρα</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} μέρες</value>
@@ -219,6 +237,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} χρόνια</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 μέρα</value>
   </data>
@@ -226,7 +247,7 @@
     <value>1 ώρα</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 χιλιοσtό του δευτερολέπτου</value>
+    <value>1 χιλιοστό του δευτερολέπτου</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 λεπτό</value>
@@ -244,6 +265,78 @@
     <value>1 χρόνο</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>μηδέν χρόνος</value>
+    <value>μηδενικός χρόνος</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>ημέρα</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ώρα</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>χιλ.δ.</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>λεπτ.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>μήνας</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>δευτ.</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>εβδομάδα</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>χρόνος</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>βορράς</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>βορειοανατολικά</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>ανατολή</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>νοτιοανατολικά</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>νότος</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>νοτιοδυτικά</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>δύση</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>βορειοδυτικά</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>Β</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ΒΑ</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>Α</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ΝΑ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>Ν</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ΝΔ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>Δ</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ΒΔ</value>
   </data>
 </root>

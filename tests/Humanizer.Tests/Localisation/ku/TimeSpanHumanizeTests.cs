@@ -58,6 +58,21 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
 
     [Fact]
+    public void AgeHasExplicitKurdishResource()
+    {
+        var found = Resources.TryGetResource("TimeSpanHumanize_Age", new("ku"), out var value);
+
+        Assert.True(found);
+        Assert.Equal("{0}", value);
+    }
+
+    [Theory]
+    [InlineData(7, "1 هەفتە")]
+    [InlineData(366, "1 ساڵ")]
+    public void Age(int days, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
+
+    [Fact]
     public void NoTime() =>
         Assert.Equal("0 میلیچرکە", TimeSpan.Zero.Humanize());
 

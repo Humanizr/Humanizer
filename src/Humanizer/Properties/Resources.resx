@@ -365,6 +365,22 @@
     <value>{0} second from now</value>
     <comment>Time, number in word form, singular</comment>
   </data>
+  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
+    <value>{0} weeks ago</value>
+    <comment>Date, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
+    <value>{0} weeks from now</value>
+    <comment>Date, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
+    <value>{0} milliseconds ago</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
+    <value>{0} milliseconds from now</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} years ago</value>
     <comment>Date, number in word form, ambiguous</comment>
@@ -451,6 +467,22 @@
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>one second from now</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
+    <value>one week ago</value>
+    <comment>Date</comment>
+  </data>
+  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
+    <value>one week from now</value>
+    <comment>Date</comment>
+  </data>
+  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
+    <value>one millisecond ago</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
+    <value>one millisecond from now</value>
     <comment>Time</comment>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">

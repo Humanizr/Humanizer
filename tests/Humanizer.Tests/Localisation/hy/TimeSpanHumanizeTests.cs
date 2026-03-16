@@ -125,5 +125,5 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void NoTimeToWords() =>
         // This one doesn't make a lot of sense but ... w/e
-        Assert.Equal("ժամանակը բացակայում է", TimeSpan.Zero.Humanize(toWords: true));
+        Assert.Equal("ժամանակ չկա", TimeSpan.Zero.Humanize(toWords: true));
 }

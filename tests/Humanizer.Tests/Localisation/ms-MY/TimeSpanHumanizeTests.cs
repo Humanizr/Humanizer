@@ -13,6 +13,12 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
     [Theory]
+    [InlineData(14, "2 minggu")]
+    [InlineData(366, "1 tahun")]
+    public void Age(int days, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
+
+    [Theory]
     [Trait("Translation", "Google")]
     [InlineData(31, "1 bulan")]
     [InlineData(61, "2 bulan")]

@@ -2,21 +2,11 @@
 
 namespace Humanizer;
 
-class DefaultTimeOnlyToClockNotationConverter(CultureInfo? culture = null) : ITimeOnlyToClockNotationConverter
+class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
-        var cultureInfo = culture ?? CultureInfo.CurrentCulture;
-        var normalizedTime = roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
-            ? time.AddMinutes(5 * Math.Round(time.Minute / 5.0) - time.Minute)
-            : time;
-
-        if (cultureInfo.TwoLetterISOLanguageName != "en")
-        {
-            return normalizedTime.ToString("t", cultureInfo);
-        }
-
-        switch (normalizedTime)
+        switch (time)
         {
             case { Hour: 0, Minute: 0 }:
                 return "midnight";
@@ -24,8 +14,10 @@ class DefaultTimeOnlyToClockNotationConverter(CultureInfo? culture = null) : ITi
                 return "noon";
         }
 
-        var normalizedHour = normalizedTime.Hour % 12;
-        var normalizedMinutes = normalizedTime.Minute;
+        var normalizedHour = time.Hour % 12;
+        var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
+            ? 5 * Math.Round(time.Minute / 5.0)
+            : time.Minute);
 
         return normalizedMinutes switch
         {

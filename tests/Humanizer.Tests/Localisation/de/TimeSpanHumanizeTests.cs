@@ -115,6 +115,15 @@ public class TimeSpanHumanizeTests
     public void MillisecondsToWords(int milliseconds, string expected) =>
         Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize(toWords: true));
 
+    [Theory]
+    [InlineData(4, false, "4 Tage alt")]
+    [InlineData(23, false, "3 Wochen alt")]
+    [InlineData(64, false, "2 Monate alt")]
+    [InlineData(367, true, "ein Jahr alt")]
+    [InlineData(750, true, "zwei Jahre alt")]
+    public void Age(int days, bool toWords, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
+
     [Fact]
     public void NoTime() =>
         Assert.Equal("0 Millisekunden", TimeSpan.Zero.Humanize());

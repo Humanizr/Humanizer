@@ -145,69 +145,14 @@ public class WordsToNumberTests_GB
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("es-ES", 21)]
-    [InlineData("fr-FR", 42)]
-    [InlineData("de-DE", 105)]
-    [InlineData("pt-BR", 99)]
-    [InlineData("ru-RU", 73)]
-    [InlineData("ar", 18)]
-    [InlineData("da-DK", 21)]
-    [InlineData("fil-PH", 21)]
-    [InlineData("id-ID", 21)]
-    [InlineData("zh-CN", 12)]
-    [InlineData("ja-JP", 31)]
-    [InlineData("ms-MY", 21)]
-    [InlineData("sk-SK", 21)]
-    [InlineData("tr-TR", 64)]
-    public void RoundTripsSupportedLocalizedWords(string cultureName, int number)
+    [InlineData("es-ES", "veinte")]
+    [InlineData("fr-FR", "vingt")]
+    public void ThrowsForNonEnglishWords(string cultureName, string word)
     {
         var culture = new CultureInfo(cultureName);
-        var word = number.ToWords(culture);
+        var ex = Assert.Throws<NotSupportedException>(() =>
+            word.ToNumber(culture));
 
-        Assert.True(word.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
-        Assert.Equal(number, parsedNumber);
-        Assert.Null(unrecognizedWord);
-        Assert.Equal(number, word.ToNumber(culture));
-    }
-
-    [Theory]
-    [InlineData("pt-BR", "123", 123)]
-    [InlineData("zh-CN", "-42", -42)]
-    public void Accepts_numeric_literals_for_supported_localized_cultures(string cultureName, string input, int expected)
-    {
-        var culture = new CultureInfo(cultureName);
-
-        Assert.True(input.TryToNumber(out var parsedNumber, culture));
-        Assert.Equal(expected, parsedNumber);
-        Assert.Equal(expected, input.ToNumber(culture));
-    }
-
-    [Theory]
-    [InlineData("pt-BR", 10001)]
-    [InlineData("ru-RU", -10001)]
-    public void Rejects_localized_round_trips_outside_supported_range(string cultureName, int number)
-    {
-        var culture = new CultureInfo(cultureName);
-        var word = number.ToWords(culture);
-
-        Assert.False(word.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
-        Assert.Equal(0, parsedNumber);
-        Assert.False(string.IsNullOrWhiteSpace(unrecognizedWord));
-
-        var ex = Assert.Throws<ArgumentException>(() => word.ToNumber(culture));
-        Assert.Contains("round-trip values from -10000 to 10000", ex.Message);
-    }
-
-    [Theory]
-    [InlineData("eo", "one")]
-    [InlineData("ga-IE", "one")]
-    public void ThrowsForUnsupportedCultureWithoutEnglishFallback(string cultureName, string word)
-    {
-        var culture = new CultureInfo(cultureName);
-
-        var ex = Assert.Throws<NotSupportedException>(() => word.ToNumber(culture));
-        Assert.Contains($"'{culture.Name}'", ex.Message);
-
-        Assert.Throws<NotSupportedException>(() => word.TryToNumber(out _, culture));
+        Assert.Contains($"'{culture.TwoLetterISOLanguageName}'", ex.Message);
     }
 }

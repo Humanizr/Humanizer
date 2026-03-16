@@ -46,11 +46,35 @@ public class DateHumanizeTests
     public void DaysAgo(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
 
+    [Fact]
+    public void TwoDaysAgoResourceExists()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("es-ES"), out var value));
+        Assert.Equal("anteayer", value);
+    }
+
     [Theory]
     [InlineData(1, "mañana")]
     [InlineData(2, "en 2 días")]
     public void DaysFromNow(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
+
+    [Fact]
+    public void TwoDaysFromNowResourceExists()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("es-ES"), out var value));
+        Assert.Equal("pasado mañana", value);
+    }
+
+    [Fact]
+    public void DayPaucalResourcesExist()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("es-ES"), out var past));
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("es-ES"), out var future));
+
+        Assert.Equal("hace {0} días", past);
+        Assert.Equal("en {0} días", future);
+    }
 
     [Theory]
     [InlineData(1, "hace un mes")]

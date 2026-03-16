@@ -47,9 +47,6 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("bg", _ => new BulgarianNumberToWordsConverter());
         Register("hy", _ => new ArmenianNumberToWordsConverter());
         Register("az", _ => new AzerbaijaniNumberToWordsConverter());
-        Register("da", _ => new DanishNumberToWordsConverter());
-        Register("fil", _ => new FilipinoNumberToWordsConverter());
-        Register("id", _ => new IndonesianNumberToWordsConverter());
         Register("ja", _ => new JapaneseNumberToWordsConverter());
         Register("ku", _ => new CentralKurdishNumberToWordsConverter());
         Register("el", _ => new GreekNumberToWordsConverter());
@@ -59,9 +56,7 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("en-IN", _ => new IndianNumberToWordsConverter());
         Register("lt", _ => new LithuanianNumberToWordsConverter());
         Register("lb", _ => new LuxembourgishNumberToWordsConverter());
-        Register("ms", _ => new MalayNumberToWordsConverter());
         Register("hu", _ => new HungarianNumberToWordsConverter());
         Register("ca", _ => new CatalanNumberToWordsConverter());
-        Register("sk", c => new SlovakNumberToWordsConverter(c));
     }
 }

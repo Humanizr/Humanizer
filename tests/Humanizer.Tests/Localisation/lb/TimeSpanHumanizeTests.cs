@@ -4,6 +4,26 @@ namespace lb;
 public class TimeSpanHumanizeTests
 {
     [Theory]
+    [InlineData(4, false, "4 Deeg al")]
+    [InlineData(366, true, "ee Joer al")]
+    public void Age(int days, bool toWords, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
+
+    [Fact]
+    public void AgeHasExplicitLuxembourgishResource()
+    {
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_Age", new("lb-LU"), out var value));
+        Assert.Equal("{0} al", value);
+    }
+
+    [Fact]
+    public void DayPaucalResourceExists()
+    {
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_MultipleDays_Paucal", new("lb-LU"), out var value));
+        Assert.Equal("{0} Deeg", value);
+    }
+
+    [Theory]
     [Trait("Translation", "Native speaker")]
     [InlineData(366, "1 Joer")]
     [InlineData(731, "2 Joer")]

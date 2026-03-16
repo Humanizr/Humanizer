@@ -6,6 +6,9 @@ class ArabicFormatter(CultureInfo culture) :
     const string DualPostfix = "_Dual";
     const string PluralPostfix = "_Plural";
 
+    public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
+        base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');
+
     protected override string GetResourceKey(string resourceKey, int number)
     {
         //In Arabic pluralization 2 entities gets a different word.

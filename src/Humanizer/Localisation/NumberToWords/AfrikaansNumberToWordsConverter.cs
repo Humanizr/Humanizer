@@ -111,8 +111,7 @@ class AfrikaansNumberToWordsConverter :
                 var lastPart = TensMap[number / 10];
                 if (number % 10 > 0)
                 {
-                    var joiner = !isOrdinal && parts.Count == 0 ? "-en-" : " en ";
-                    lastPart = $"{GetUnitValue(number % 10, false)}{joiner}{(isOrdinal ? GetUnitValue(lastPartValue, true) : lastPart)}";
+                    lastPart = $"{GetUnitValue(number % 10, false)} en {(isOrdinal ? GetUnitValue(lastPartValue, true) : lastPart)}";
                 }
                 else if (number % 10 == 0)
                 {

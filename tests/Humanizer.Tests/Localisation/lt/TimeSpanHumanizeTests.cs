@@ -91,4 +91,8 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void NoTimeToWords() =>
         Assert.Equal("nėra laiko", TimeSpan.Zero.Humanize(toWords: true));
+
+    [Fact]
+    public void ToAge() =>
+        Assert.Equal("1 metai", TimeSpan.FromDays(366).ToAge());
 }

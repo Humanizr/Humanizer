@@ -7,7 +7,6 @@ public class AfrikaansNumberToWordsTests
     [InlineData(10, "tien")]
     [InlineData(11, "elf")]
     [InlineData(20, "twintig")]
-    [InlineData(21, "een-en-twintig")]
     [InlineData(122, "een honderd twee en twintig")]
     [InlineData(3501, "drie duisend vyf honderd en een")]
     [InlineData(100, "een honderd")]

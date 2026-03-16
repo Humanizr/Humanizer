@@ -117,44 +117,89 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bayt</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabayt</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobayt</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabayt</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabayt</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} kun avval</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} kun avval</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} kundan so`ng</value>
+    <value>{0} kundan so'ng</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>{0} kundan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} soat avval</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} soatdan so`ng</value>
+    <value>{0} soatdan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minut avval</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} minutdan so`ng</value>
+    <value>{0} minutdan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} oy avval</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} oydan so`ng</value>
+    <value>{0} oydan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} sekund avval</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} sekunddan so`ng</value>
+    <value>{0} sekunddan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} yil avval</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} yildan so`ng</value>
+    <value>{0} yildan so'ng</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>hozir</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>hech qachon</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>kecha</value>
@@ -166,31 +211,88 @@
     <value>bir soat avval</value>
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>bir soatdan so`ng</value>
+    <value>bir soatdan so'ng</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>bir daqiqa avval</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>bir daqiqadan so`ng</value>
+    <value>bir daqiqadan so'ng</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>bir oy avval</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>bir oydan so`ng</value>
+    <value>bir oydan so'ng</value>
   </data>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>bir soniya avval</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>bir soniyadan so`ng</value>
+    <value>bir soniyadan so'ng</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>bir yil avval</value>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>bir yildan so`ng</value>
+    <value>bir yildan so'ng</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>2 kun avval</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>indinga</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>shimol</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>shimoli-sharq</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>sharq</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>janubi-sharq</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>janub</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>janubi-g'arb</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>g'arb</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>shimoli-g'arb</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>Sh</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ShSh</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>Sharq</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>JSh</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>J</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>JG</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ShG</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} yosh</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} kun</value>
@@ -241,6 +343,30 @@
     <value>1 yil</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>vaqt yo`q</value>
+    <value>vaqt yo'q</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>kun</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>soat</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>millisekund</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>minut</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>oy</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>sekund</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>hafta</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>yil</value>
   </data>
 </root>

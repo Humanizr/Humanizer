@@ -123,6 +123,9 @@
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>{0} ڕۆژ لەمەوبەر</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
     <value>{0} ڕۆژ لەمەوبەر</value>
   </data>
@@ -133,6 +136,9 @@
     <value>{0} ڕۆژی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>{0} ڕۆژی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>{0} ڕۆژی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
@@ -332,6 +338,15 @@
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>ساڵێکی دیکە</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>2 ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>2 ڕۆژی دیکە</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} ڕۆژ</value>

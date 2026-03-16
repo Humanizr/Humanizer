@@ -11,7 +11,7 @@ public class DateHumanizeTests
 
     [Theory]
     [InlineData(1, "i morgen")]
-    [InlineData(10, "om 10 dage")]
+    [InlineData(10, "10 dage fra nu")]
     public void DaysFromNow(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
 

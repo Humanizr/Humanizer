@@ -1,0 +1,17 @@
+namespace pl;
+
+[UseCulture("pl")]
+public class TimeUnitToSymbolTests
+{
+    [Theory]
+    [InlineData(TimeUnit.Millisecond, "ms")]
+    [InlineData(TimeUnit.Second, "s")]
+    [InlineData(TimeUnit.Minute, "min")]
+    [InlineData(TimeUnit.Hour, "h")]
+    [InlineData(TimeUnit.Day, "dzień")]
+    [InlineData(TimeUnit.Week, "tydzień")]
+    [InlineData(TimeUnit.Month, "miesiąc")]
+    [InlineData(TimeUnit.Year, "rok")]
+    public void ToSymbol(TimeUnit unit, string expected) =>
+        Assert.Equal(expected, unit.ToSymbol());
+}
