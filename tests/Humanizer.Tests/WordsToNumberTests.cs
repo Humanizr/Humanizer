@@ -151,8 +151,13 @@ public class WordsToNumberTests_NonEnglish
     [InlineData("pt-BR", 99)]
     [InlineData("ru-RU", 73)]
     [InlineData("ar", 18)]
+    [InlineData("da-DK", 21)]
+    [InlineData("fil-PH", 21)]
+    [InlineData("id-ID", 21)]
     [InlineData("zh-CN", 12)]
     [InlineData("ja-JP", 31)]
+    [InlineData("ms-MY", 21)]
+    [InlineData("sk-SK", 21)]
     [InlineData("tr-TR", 64)]
     public void RoundTripsSupportedLocalizedWords(string cultureName, int number)
     {
@@ -194,14 +199,8 @@ public class WordsToNumberTests_NonEnglish
     }
 
     [Theory]
-    [InlineData("da", "one")]
-    [InlineData("da-DK", "one")]
-    [InlineData("fil", "one")]
-    [InlineData("fil-PH", "one")]
-    [InlineData("id-ID", "one")]
-    [InlineData("ms-MY", "one")]
-    [InlineData("sk", "one")]
-    [InlineData("sk-SK", "one")]
+    [InlineData("eo", "one")]
+    [InlineData("ga-IE", "one")]
     public void ThrowsForUnsupportedCultureWithoutEnglishFallback(string cultureName, string word)
     {
         var culture = new CultureInfo(cultureName);

@@ -55,7 +55,12 @@ internal class LocalizedWordsToNumberConverter(CultureInfo culture) : Genderless
     {
         var map = new Dictionary<string, int>(StringComparer.Ordinal);
 
-        for (var value = MinSupportedValue; value <= MaxSupportedValue; value++)
+        for (var value = 0; value <= MaxSupportedValue; value++)
+        {
+            TryAddMapping(map, value, () => value.ToWords(culture));
+        }
+
+        for (var value = -1; value >= MinSupportedValue; value--)
         {
             TryAddMapping(map, value, () => value.ToWords(culture));
         }
@@ -78,6 +83,9 @@ internal class LocalizedWordsToNumberConverter(CultureInfo culture) : Genderless
         {
         }
         catch (ArgumentOutOfRangeException)
+        {
+        }
+        catch (IndexOutOfRangeException)
         {
         }
     }
