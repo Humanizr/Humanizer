@@ -33,7 +33,7 @@ class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWord
         RegisterDefaultConverter("ku");
         Register("lb", _ => new LongDateToOrdinalWordsConverter());
         Register("lt", _ => new LtDateToOrdinalWordsConverter());
-        Register("lv", _ => new LongDateToOrdinalWordsConverter());
+        Register("lv", _ => new LvDateToOrdinalWordsConverter());
         RegisterDefaultConverter("ms");
         RegisterDefaultConverter("mt");
         RegisterDefaultConverter("nb");

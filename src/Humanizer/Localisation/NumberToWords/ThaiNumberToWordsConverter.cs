@@ -99,7 +99,7 @@ class ThaiNumberToWordsConverter : GenderlessNumberToWordsConverter
                 Textreturn += tensMap[numbermoney / 10];
                 if (numbermoney % 10 > 0)
                 {
-                    Textreturn += "" + unitsMap[numbermoney % 10];
+                    Textreturn += numbermoney % 10 == 1 ? "เอ็ด" : unitsMap[numbermoney % 10];
                 }
             }
         }

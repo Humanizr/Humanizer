@@ -6,7 +6,7 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         : base(_ => new DefaultCollectionFormatter("&"))
     {
         Register("af", _ => new DefaultCollectionFormatter("en"));
-        Register("ar", _ => new DefaultCollectionFormatter("و"));
+        Register("ar", _ => new CompactCollectionFormatter(" و", "، "));
         Register("az", _ => new DefaultCollectionFormatter("və"));
         Register("bg", _ => new DefaultCollectionFormatter("и"));
         Register("bn", _ => new DefaultCollectionFormatter("ও"));
@@ -21,14 +21,14 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("fi", _ => new DefaultCollectionFormatter("ja"));
         Register("fil", _ => new DefaultCollectionFormatter("at"));
         Register("fr", _ => new DefaultCollectionFormatter("et"));
-        Register("he", _ => new DefaultCollectionFormatter("ו"));
+        Register("he", _ => new CompactCollectionFormatter(" ו", ", "));
         Register("hr", _ => new DefaultCollectionFormatter("i"));
         Register("hu", _ => new DefaultCollectionFormatter("és"));
         Register("hy", _ => new DefaultCollectionFormatter("և"));
         Register("id", _ => new DefaultCollectionFormatter("dan"));
         Register("is", _ => new DefaultCollectionFormatter("og"));
         Register("it", _ => new DefaultCollectionFormatter("e"));
-        Register("ja", _ => new DefaultCollectionFormatter("と"));
+        Register("ja", _ => new CompactCollectionFormatter("と"));
         Register("ko", _ => new DefaultCollectionFormatter("및"));
         Register("ku", _ => new DefaultCollectionFormatter("و"));
         Register("lb", _ => new DefaultCollectionFormatter("an"));
@@ -54,8 +54,8 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("uz-Cyrl-UZ", _ => new DefaultCollectionFormatter("ва"));
         Register("uz-Latn-UZ", _ => new DefaultCollectionFormatter("va"));
         Register("vi", _ => new DefaultCollectionFormatter("và"));
-        Register("zh-CN", _ => new DefaultCollectionFormatter("和"));
-        Register("zh-Hans", _ => new DefaultCollectionFormatter("和"));
-        Register("zh-Hant", _ => new DefaultCollectionFormatter("和"));
+        Register("zh-CN", _ => new CompactCollectionFormatter("和"));
+        Register("zh-Hans", _ => new CompactCollectionFormatter("和"));
+        Register("zh-Hant", _ => new CompactCollectionFormatter("和"));
     }
 }

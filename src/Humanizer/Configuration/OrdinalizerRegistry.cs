@@ -5,24 +5,24 @@ class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
     public OrdinalizerRegistry()
         : base(_ => new DefaultOrdinalizer())
     {
-        RegisterDefaultOrdinalizer("af");
+        Register("af", _ => new AfrikaansOrdinalizer());
         RegisterDefaultOrdinalizer("ar");
         Register("az", _ => new AzerbaijaniOrdinalizer());
-        RegisterDefaultOrdinalizer("bg");
+        RegisterNumericSuffixOrdinalizer("bg", ".");
         RegisterDefaultOrdinalizer("bn");
         Register("ca", _ => new CatalanOrdinalizer());
-        RegisterDefaultOrdinalizer("cs");
-        RegisterDefaultOrdinalizer("da");
+        RegisterNumericSuffixOrdinalizer("cs", ".");
+        RegisterNumericSuffixOrdinalizer("da", ".");
         Register("de", _ => new GermanOrdinalizer());
         Register("en", _ => new EnglishOrdinalizer());
         RegisterDefaultOrdinalizer("el");
         Register("es", c => new SpanishOrdinalizer(c));
         RegisterDefaultOrdinalizer("fa");
-        RegisterDefaultOrdinalizer("fi");
+        RegisterNumericSuffixOrdinalizer("fi", ".");
         RegisterDefaultOrdinalizer("fil");
         Register("fr", _ => new FrenchOrdinalizer());
         RegisterDefaultOrdinalizer("he");
-        RegisterDefaultOrdinalizer("hr");
+        RegisterNumericSuffixOrdinalizer("hr", ".");
         Register("hu", _ => new HungarianOrdinalizer());
         Register("hy", _ => new ArmenianOrdinalizer());
         RegisterDefaultOrdinalizer("id");
@@ -31,28 +31,28 @@ class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
         RegisterDefaultOrdinalizer("ja");
         RegisterDefaultOrdinalizer("ko");
         RegisterDefaultOrdinalizer("ku");
-        RegisterDefaultOrdinalizer("lt");
-        RegisterDefaultOrdinalizer("lv");
+        RegisterNumericSuffixOrdinalizer("lt", ".");
+        RegisterNumericSuffixOrdinalizer("lv", ".");
         Register("lb", _ => new LuxembourgishOrdinalizer());
         RegisterDefaultOrdinalizer("ms");
         RegisterDefaultOrdinalizer("mt");
-        RegisterDefaultOrdinalizer("nb");
+        RegisterNumericSuffixOrdinalizer("nb", ".");
         Register("nl", _ => new DutchOrdinalizer());
-        RegisterDefaultOrdinalizer("pl");
+        RegisterNumericSuffixOrdinalizer("pl", ".");
         Register("pt", _ => new PortugueseOrdinalizer());
         Register("pt-BR", _ => new PortugueseOrdinalizer());
         Register("ro", _ => new RomanianOrdinalizer());
         Register("ru", _ => new RussianOrdinalizer());
-        RegisterDefaultOrdinalizer("sk");
-        RegisterDefaultOrdinalizer("sl");
-        RegisterDefaultOrdinalizer("sr");
-        RegisterDefaultOrdinalizer("sr-Latn");
-        RegisterDefaultOrdinalizer("sv");
+        RegisterNumericSuffixOrdinalizer("sk", ".");
+        RegisterNumericSuffixOrdinalizer("sl", ".");
+        RegisterNumericSuffixOrdinalizer("sr", ".");
+        RegisterNumericSuffixOrdinalizer("sr-Latn", ".");
+        Register("sv", _ => new SwedishOrdinalizer());
         RegisterDefaultOrdinalizer("th");
         Register("tr", _ => new TurkishOrdinalizer());
         Register("uk", _ => new UkrainianOrdinalizer());
-        RegisterDefaultOrdinalizer("uz-Cyrl-UZ");
-        RegisterDefaultOrdinalizer("uz-Latn-UZ");
+        Register("uz-Cyrl-UZ", _ => new UzbekCyrillicOrdinalizer());
+        Register("uz-Latn-UZ", _ => new UzbekLatinOrdinalizer());
         RegisterDefaultOrdinalizer("vi");
         RegisterDefaultOrdinalizer("zh-CN");
         RegisterDefaultOrdinalizer("zh-Hans");
@@ -61,4 +61,7 @@ class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
 
     void RegisterDefaultOrdinalizer(string localeCode) =>
         Register(localeCode, _ => new DefaultOrdinalizer());
+
+    void RegisterNumericSuffixOrdinalizer(string localeCode, string suffix) =>
+        Register(localeCode, _ => new NumericSuffixOrdinalizer(suffix));
 }

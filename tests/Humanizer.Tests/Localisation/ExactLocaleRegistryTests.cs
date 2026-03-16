@@ -11,7 +11,22 @@ public class ExactLocaleRegistryTests
     [Fact]
     [UseCulture("zh-Hans")]
     public void Collection_formatter_resolves_script_specific_locale() =>
-        Assert.Equal("1 和 2", new[] { 1, 2 }.Humanize());
+        Assert.Equal("1和2", new[] { 1, 2 }.Humanize());
+
+    [Fact]
+    [UseCulture("ja-JP")]
+    public void Collection_formatter_compacts_japanese_conjunction_spacing() =>
+        Assert.Equal("1、2と3", new[] { 1, 2, 3 }.Humanize());
+
+    [Fact]
+    [UseCulture("ar")]
+    public void Collection_formatter_compacts_arabic_conjunction_spacing() =>
+        Assert.Equal("1، 2 و3", new[] { 1, 2, 3 }.Humanize());
+
+    [Fact]
+    [UseCulture("he")]
+    public void Collection_formatter_compacts_hebrew_conjunction_spacing() =>
+        Assert.Equal("1, 2 ו3", new[] { 1, 2, 3 }.Humanize());
 
     [Fact]
     [UseCulture("ja-JP")]
@@ -42,6 +57,28 @@ public class ExactLocaleRegistryTests
     [UseCulture("pt-BR")]
     public void Ordinalizer_resolves_exact_locale() =>
         Assert.Equal("1º", 1.Ordinalize(GrammaticalGender.Masculine));
+
+    [Theory]
+    [InlineData("af", "1ste")]
+    [InlineData("bg", "1.")]
+    [InlineData("cs-CZ", "1.")]
+    [InlineData("da-DK", "1.")]
+    [InlineData("fi-FI", "1.")]
+    [InlineData("hr-HR", "1.")]
+    [InlineData("lt", "1.")]
+    [InlineData("lv", "1.")]
+    [InlineData("nb-NO", "1.")]
+    [InlineData("pl", "1.")]
+    [InlineData("sk-SK", "1.")]
+    [InlineData("sl", "1.")]
+    [InlineData("sr", "1.")]
+    [InlineData("sr-Latn", "1.")]
+    [InlineData("sv-SE", "1:a")]
+    [InlineData("az", "1-ci")]
+    [InlineData("uz-Latn-UZ", "1-chi")]
+    [InlineData("uz-Cyrl-UZ", "1-чи")]
+    public void Ordinalizer_uses_locale_specific_non_cardinal_output(string cultureName, string expected) =>
+        Assert.Equal(expected, 1.Ordinalize(new CultureInfo(cultureName)));
 
     [Fact]
     [UseCulture("pt-BR")]

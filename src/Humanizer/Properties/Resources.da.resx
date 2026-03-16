@@ -121,7 +121,7 @@
     <value>{0} dage siden</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} dage fra nu</value>
+      <value>om {0} dage</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} timer siden</value>

@@ -7,6 +7,7 @@ public class NumberToWordsTests
     [InlineData(10, "สิบ")]
     [InlineData(11, "สิบเอ็ด")]
     [InlineData(20, "ยี่สิบ")]
+    [InlineData(21, "ยี่สิบเอ็ด")]
     [InlineData(-122, "ลบหนึ่งร้อยยี่สิบสอง")]
     [InlineData(3501, "สามพันห้าร้อยหนึ่ง")]
     [InlineData(100, "หนึ่งร้อย")]
