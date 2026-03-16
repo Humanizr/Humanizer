@@ -14,7 +14,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.5.2" />
     <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="2.1.0" />
-    <PackageVersion Include="Polyfill" Version="9.18.0" />
+    <PackageVersion Include="Polyfill" Version="9.22.0" />
     <PackageVersion Include="PublicApiGenerator" Version="11.5.4" />
     <PackageVersion Include="System.Collections.Immutable" Version="$(SystemDependencyVersion)" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
