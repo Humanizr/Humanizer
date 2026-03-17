@@ -499,6 +499,42 @@ public class WordsToNumberTests_Swedish
     }
 }
 
+[UseCulture("is-IS")]
+public class WordsToNumberTests_Icelandic
+{
+    [Theory]
+    [InlineData("núll", 0, null)]
+    [InlineData("mínus fimm", -5, null)]
+    [InlineData("tuttugu og eitt", 21, null)]
+    [InlineData("tuttugu og tvö", 22, null)]
+    [InlineData("fjörutíu og fimm", 45, null)]
+    [InlineData("tvö hundruð sextíu", 260, null)]
+    [InlineData("eitt hundrað og þrjú", 103, null)]
+    [InlineData("þúsund tvö hundruð þrjátíu og fjögur", 1234, null)]
+    [InlineData("milljón tvö þúsund", 1002000, null)]
+    [InlineData("tveir milljónir", 2000000, null)]
+    [InlineData("milljarður", 1000000000, null)]
+    public void TryToNumber_ValidInput_Icelandic(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("tuttugu foo", 0, "foo")]
+    [InlineData("hundrað og xxx", 0, "xxx")]
+    [InlineData("tvö þúsund abc", 0, "abc")]
+    [InlineData("milljón og foo", 0, "foo")]
+    [InlineData("fimmz", 0, "fimmz")]
+    public void TryToNumber_InvalidInput_Icelandic(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
