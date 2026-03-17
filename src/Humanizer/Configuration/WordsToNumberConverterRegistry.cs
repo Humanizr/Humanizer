@@ -26,6 +26,8 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("fil", _ => new FilipinoWordsToNumberConverter());
         Register("id", _ => new IndonesianWordsToNumberConverter());
         Register("ms", _ => new MalayWordsToNumberConverter());
+        Register("tr", _ => new TurkishWordsToNumberConverter());
+        Register("az", _ => new AzerbaijaniWordsToNumberConverter());
         Register("zh-CN", _ => new ChineseWordsToNumberConverter());
         Register("zh-Hans", _ => new ChineseWordsToNumberConverter());
         Register("zh-Hant", _ => new ChineseWordsToNumberConverter());
@@ -50,6 +52,8 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "fil" => new FilipinoWordsToNumberConverter(),
             "id" => new IndonesianWordsToNumberConverter(),
             "ms" => new MalayWordsToNumberConverter(),
+            "tr" => new TurkishWordsToNumberConverter(),
+            "az" => new AzerbaijaniWordsToNumberConverter(),
             "zh" => new ChineseWordsToNumberConverter(),
             "uz" => culture.Name.Contains("Cyrl", StringComparison.Ordinal)
                 ? new UzbekCyrlWordsToNumberConverter()

@@ -533,6 +533,17 @@ public class WordsToNumberTests_Icelandic
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
     }
+
+    [Fact]
+    public void DumpIcelandicOrdinalSamples()
+    {
+        var converter = new IcelandicNumberToWordsConverter();
+        foreach (var number in new[] { 1, 2, 3, 10, 20, 21, 31, 100 })
+        {
+            var ordinal = converter.ConvertToOrdinal(number);
+            Console.WriteLine($"{number} -> {ordinal}");
+        }
+    }
 }
 
 [UseCulture("nb-NO")]
