@@ -535,6 +535,37 @@ public class WordsToNumberTests_Icelandic
     }
 }
 
+[UseCulture("nb-NO")]
+public class WordsToNumberTests_Norwegian
+{
+    [Theory]
+    [InlineData("null", 0, null)]
+    [InlineData("minus ti", -10, null)]
+    [InlineData("nittiåtte", 98, null)]
+    [InlineData("hundreogelleve", 111, null)]
+    [InlineData("tusenogen", 1001, null)]
+    [InlineData("ettusenethundreogtolv", 1112, null)]
+    [InlineData("en million", 1000000, null)]
+    [InlineData("første", 1, null)]
+    [InlineData("tjuende", 20, null)]
+    public void TryToNumber_ValidInput_Norwegian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("tjue foo", 0, "foo")]
+    [InlineData("minus xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Norwegian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("fil-PH")]
 public class WordsToNumberTests_Filipino
 {
@@ -561,6 +592,14 @@ public class WordsToNumberTests_Filipino
         Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Fact]
+    public void DebugFilipinoTryConvert()
+    {
+        var words = "dalawampu't isa";
+        words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord);
+        Console.WriteLine($"parsed={parsedNumber}; unrecognized={(unrecognizedWord ?? "<null>")}");
     }
 }
 

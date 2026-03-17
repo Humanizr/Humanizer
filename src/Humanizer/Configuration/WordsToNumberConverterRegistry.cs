@@ -21,6 +21,8 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("nl", _ => new DutchWordsToNumberConverter());
         Register("sv", _ => new SwedishWordsToNumberConverter());
         Register("is", _ => new IcelandicWordsToNumberConverter());
+        Register("nb", _ => new NorwegianBokmalWordsToNumberConverter());
+        Register("nb-NO", _ => new NorwegianBokmalWordsToNumberConverter());
         Register("fil", _ => new FilipinoWordsToNumberConverter());
         Register("id", _ => new IndonesianWordsToNumberConverter());
         Register("ms", _ => new MalayWordsToNumberConverter());
@@ -39,6 +41,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "nl" => new DutchWordsToNumberConverter(),
             "sv" => new SwedishWordsToNumberConverter(),
             "is" => new IcelandicWordsToNumberConverter(),
+            "nb" => new NorwegianBokmalWordsToNumberConverter(),
             "fil" => new FilipinoWordsToNumberConverter(),
             "id" => new IndonesianWordsToNumberConverter(),
             "ms" => new MalayWordsToNumberConverter(),
