@@ -142,6 +142,45 @@ public class WordsToNumberTests_GB
     }
 
 }
+
+[UseCulture("de-DE")]
+public class WordsToNumberTests_German
+{
+    [Theory]
+    [InlineData("null", 0, null)]
+    [InlineData("minus fünf", -5, null)]
+    [InlineData("einundzwanzig", 21, null)]
+    [InlineData("zweiunddreißig", 32, null)]
+    [InlineData("einhundertneunundvierzig", 149, null)]
+    [InlineData("zweitausendachtundzwanzig", 2028, null)]
+    [InlineData("dreißigste", 30, null)]
+    [InlineData("einundzwanzigste", 21, null)]
+    public void TryToNumber_ValidInput_German(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("zwanzig foo", 0, "foo")]
+    [InlineData("minus xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_German(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("de-CH")]
+    [InlineData("de-LI")]
+    public void ResolveForSwissVariants(string cultureName)
+    {
+        var culture = new CultureInfo(cultureName);
+        Assert.Equal(21, "einundzwanzig".ToNumber(culture));
+    }
+}
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]

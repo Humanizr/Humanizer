@@ -1,10 +1,23 @@
 namespace Humanizer;
 
+using System.Globalization;
+
 internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumberConverter>
 {
     public WordsToNumberConverterRegistry()
-        : base(culture => culture.TwoLetterISOLanguageName == "en"
-            ? new EnglishWordsToNumberConverter()
-            : new DefaultWordsToNumberConverter(culture)) =>
-             Register("en", _ => new EnglishWordsToNumberConverter());
+        : base(CreateConverter)
+    {
+        Register("en", _ => new EnglishWordsToNumberConverter());
+        Register("de", _ => new GermanWordsToNumberConverter());
+        Register("de-CH", _ => new GermanWordsToNumberConverter());
+        Register("de-LI", _ => new GermanWordsToNumberConverter());
+    }
+
+    private static IWordsToNumberConverter CreateConverter(CultureInfo culture) =>
+        culture.TwoLetterISOLanguageName switch
+        {
+            "en" => new EnglishWordsToNumberConverter(),
+            "de" => new GermanWordsToNumberConverter(),
+            _ => new DefaultWordsToNumberConverter(culture)
+        };
 }
