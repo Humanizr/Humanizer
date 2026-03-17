@@ -216,11 +216,43 @@ public class WordsToNumberTests_Catalan
         Assert.Equal(expectedNumber, parsedNumber);
     }
 }
+
+[UseCulture("fr-FR")]
+public class WordsToNumberTests_French
+{
+    [Theory]
+    [InlineData("zéro", 0, null)]
+    [InlineData("moins cinq", -5, null)]
+    [InlineData("vingt et un", 21, null)]
+    [InlineData("trente-et-un", 31, null)]
+    [InlineData("soixante et onze", 71, null)]
+    [InlineData("quatre-vingt-un", 81, null)]
+    [InlineData("quatre-vingt-dix-neuf", 99, null)]
+    [InlineData("cent vingt-deux", 122, null)]
+    [InlineData("mille deux cent trente-quatre", 1234, null)]
+    [InlineData("premier", 1, null)]
+    [InlineData("première", 1, null)]
+    public void TryToNumber_ValidInput_French(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("vingt foo", 0, "foo")]
+    [InlineData("moins xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_French(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
     [InlineData("es-ES", "veinte")]
-    [InlineData("fr-FR", "vingt")]
     public void ThrowsForNonEnglishWords(string cultureName, string word)
     {
         var culture = new CultureInfo(cultureName);
