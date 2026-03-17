@@ -94,7 +94,7 @@ public static class Vocabularies
         _default.AddIrregular("clove", "cloves");
         _default.AddIrregular("valve", "valves");
         _default.AddIrregular("explosive", "explosives");
-        _default.AddIrregular("safe", "saves", matchEnding: false);
+        _default.AddIrregular("safe", "saves");
         _default.AddIrregular("curve", "curves");
         _default.AddIrregular("carve", "carves");
         _default.AddIrregular("starve", "starves");
