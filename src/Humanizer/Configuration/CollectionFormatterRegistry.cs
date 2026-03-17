@@ -49,8 +49,10 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("es", _ => new DefaultCollectionFormatter("y"));
         Register("lb", _ => new DefaultCollectionFormatter("an"));
         Register("ca", _ => new DefaultCollectionFormatter("i"));
+        Register("th", _ => new DefaultCollectionFormatter("และ"));
         Register("tr", _ => new DefaultCollectionFormatter("ve"));
         Register("uk", _ => new DefaultCollectionFormatter("і"));
+        Register("uz-Cyrl-UZ", _ => new DefaultCollectionFormatter("ва"));
         Register("uz-Latn-UZ", _ => new DefaultCollectionFormatter("va"));
         Register("vi", _ => new DefaultCollectionFormatter("và"));
         Register("zh-CN", _ => new DelimitedCollectionFormatter("、"));

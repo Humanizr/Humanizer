@@ -27,8 +27,10 @@ public class CollectionFormatterRegistryTests
     [InlineData("sl", "1 in 2", "1, 2 in 3")]
     [InlineData("sr", "1 и 2", "1, 2 и 3")]
     [InlineData("sr-Latn", "1 i 2", "1, 2 i 3")]
+    [InlineData("th", "1 และ 2", "1, 2 และ 3")]
     [InlineData("tr", "1 ve 2", "1, 2 ve 3")]
     [InlineData("uk", "1 і 2", "1, 2 і 3")]
+    [InlineData("uz-Cyrl-UZ", "1 ва 2", "1, 2 ва 3")]
     [InlineData("uz-Latn-UZ", "1 va 2", "1, 2 va 3")]
     [InlineData("vi", "1 và 2", "1, 2 và 3")]
     public void RegisteredCollectionFormatterProducesExpectedConjunction(string locale, string expectedTwo, string expectedThree)
