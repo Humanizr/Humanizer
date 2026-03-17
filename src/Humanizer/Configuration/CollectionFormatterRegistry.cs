@@ -11,6 +11,7 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("da", _ => new DefaultCollectionFormatter("og"));
         Register("nl", _ => new DefaultCollectionFormatter("en"));
         Register("pt", _ => new DefaultCollectionFormatter("e"));
+        Register("fr", _ => new DefaultCollectionFormatter("et"));
         Register("ro", _ => new DefaultCollectionFormatter("și"));
         Register("nn", _ => new DefaultCollectionFormatter("og"));
         Register("nb", _ => new DefaultCollectionFormatter("og"));
