@@ -534,15 +534,23 @@ public class WordsToNumberTests_Icelandic
         Assert.Equal(expectedNumber, parsedNumber);
     }
 
-    [Fact]
-    public void DumpIcelandicOrdinalSamples()
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
+    [InlineData(10)]
+    [InlineData(21)]
+    [InlineData(31)]
+    [InlineData(100)]
+    public void TryToNumber_OrdinalRoundTrip_Icelandic(int number)
     {
         var converter = new IcelandicNumberToWordsConverter();
-        foreach (var number in new[] { 1, 2, 3, 10, 20, 21, 31, 100 })
-        {
-            var ordinal = converter.ConvertToOrdinal(number);
-            Console.WriteLine($"{number} -> {ordinal}");
-        }
+        var ordinal = converter.ConvertToOrdinal(number);
+        Assert.True(ordinal.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Null(unrecognizedWord);
+        Assert.Equal(number, parsedNumber);
     }
 }
 
