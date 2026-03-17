@@ -675,6 +675,37 @@ public class WordsToNumberTests_Chinese
     }
 }
 
+[UseCulture("vi-VN")]
+public class WordsToNumberTests_Vietnamese
+{
+    [Theory]
+    [InlineData("không", 0, null)]
+    [InlineData("trừ một", -1, null)]
+    [InlineData("mười một", 11, null)]
+    [InlineData("hai mươi mốt", 21, null)]
+    [InlineData("một trăm linh năm", 105, null)]
+    [InlineData("một nghìn", 1000, null)]
+    [InlineData("một triệu", 1000000, null)]
+    [InlineData("thứ nhất", 1, null)]
+    [InlineData("thứ hai mươi mốt", 21, null)]
+    public void TryToNumber_ValidInput_Vietnamese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("hai mươi foo", 0, "foo")]
+    [InlineData("trừ xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Vietnamese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("fil-PH")]
 public class WordsToNumberTests_Filipino
 {
