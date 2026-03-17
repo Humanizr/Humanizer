@@ -249,6 +249,108 @@ public class WordsToNumberTests_French
         Assert.Equal(expectedNumber, parsedNumber);
     }
 }
+
+[UseCulture("it")]
+public class WordsToNumberTests_Italian
+{
+    [Theory]
+    [InlineData("zero", 0, null)]
+    [InlineData("meno cinque", -5, null)]
+    [InlineData("uno", 1, null)]
+    [InlineData("ventuno", 21, null)]
+    [InlineData("venti uno", 21, null)]
+    [InlineData("venti-otto", 28, null)]
+    [InlineData("trentotto", 38, null)]
+    [InlineData("centoventidue", 122, null)]
+    [InlineData("duemilatrecentoquaranta", 2340, null)]
+    [InlineData("un milione duecentomila", 1200000, null)]
+    [InlineData("quattromilacinquecentosessantasette", 4567, null)]
+    public void TryToNumber_ValidInput_Italian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("primo", 1, null)]
+    [InlineData("prima", 1, null)]
+    [InlineData("secondo", 2, null)]
+    [InlineData("seconda", 2, null)]
+    [InlineData("ventunesimo", 21, null)]
+    [InlineData("ventunesima", 21, null)]
+    [InlineData("centounesimo", 101, null)]
+    [InlineData("centounesima", 101, null)]
+    public void TryToNumber_ValidOrdinalInput_Italian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("venti foo", 0, "foo")]
+    [InlineData("meno xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Italian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("pt-PT")]
+public class WordsToNumberTests_Portuguese
+{
+    [Theory]
+    [InlineData("zero", 0)]
+    [InlineData("menos cinco", -5)]
+    [InlineData("vinte e um", 21)]
+    [InlineData("cento e cinco", 105)]
+    [InlineData("duzentos e uma", 201)]
+    [InlineData("mil e vinte", 1020)]
+    [InlineData("um milhão e dois", 1000002)]
+    [InlineData("primeiro", 1)]
+    [InlineData("primeira", 1)]
+    [InlineData("vigésimo primeiro", 21)]
+    [InlineData("1º", 1)]
+    [InlineData("1ª", 1)]
+    public void ToNumber_Portuguese(string words, int expectedNumber) =>
+        Assert.Equal(expectedNumber, words.ToNumber(CultureInfo.CurrentCulture));
+
+    [Theory]
+    [InlineData("zero", 0, null)]
+    [InlineData("menos cinco", -5, null)]
+    [InlineData("vinte e um", 21, null)]
+    [InlineData("cento e cinco", 105, null)]
+    [InlineData("duzentos e uma", 201, null)]
+    [InlineData("mil e vinte", 1020, null)]
+    [InlineData("um milhão e dois", 1000002, null)]
+    [InlineData("primeiro", 1, null)]
+    [InlineData("primeira", 1, null)]
+    [InlineData("vigésimo primeiro", 21, null)]
+    [InlineData("1º", 1, null)]
+    [InlineData("1ª", 1, null)]
+    public void TryToNumber_ValidInput_Portuguese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("vinte foo", 0, "foo")]
+    [InlineData("menos xyz", 0, "xyz")]
+    [InlineData("treze e direfente", 0, "direfente")]
+    [InlineData("123abc", 0, "123abc")]
+    public void TryToNumber_InvalidInput_Portuguese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
