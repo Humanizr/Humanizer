@@ -54,7 +54,8 @@ internal partial class PortugueseWordsToNumberConverter : GenderlessWordsToNumbe
         ["novecentas"] = 900,
         ["mil"] = 1000,
         ["milhão"] = 1_000_000,
-        ["milhões"] = 1_000_000
+        ["milhões"] = 1_000_000,
+        ["milhar"] = 1_000_000_000
     }.ToFrozenDictionary(StringComparer.Ordinal);
 
     static readonly FrozenDictionary<string, int> OrdinalMap = new Dictionary<string, int>(StringComparer.Ordinal)

@@ -14,7 +14,7 @@ public class NumberToWordsTests
     [InlineData(1000, "isang libo")]
     [InlineData(1234, "isang libo dalawang daan at tatlumpu't apat")]
     [InlineData(2000000, "dalawang milyon")]
-[InlineData(2147483647, "dalawang bilyon isang daan at apatnapu't pitong milyon apat na daan at walumpu't tatlo libo anim na daan at apatnapu't pito")]
+[InlineData(2147483647, "dalawang bilyon isang daan at apatnapu't pitong milyon apat na daan at walumpu't tatlong libo anim na daan at apatnapu't pito")]
     public void ToWords(long number, string expected) =>
         Assert.Equal(expected, number.ToWords());
 }
