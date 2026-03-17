@@ -18,6 +18,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("it", _ => new ItalianWordsToNumberConverter());
         Register("es", _ => new SpanishWordsToNumberConverter());
         Register("es-ES", _ => new SpanishWordsToNumberConverter());
+        Register("nl", _ => new DutchWordsToNumberConverter());
     }
 
     private static IWordsToNumberConverter CreateConverter(CultureInfo culture) =>
@@ -30,6 +31,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "pt" => new PortugueseWordsToNumberConverter(),
             "it" => new ItalianWordsToNumberConverter(),
             "es" => new SpanishWordsToNumberConverter(),
+            "nl" => new DutchWordsToNumberConverter(),
             _ => new DefaultWordsToNumberConverter(culture)
         };
 }

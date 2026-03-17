@@ -438,6 +438,36 @@ public class WordsToNumberTests_Spanish
     }
 }
 
+[UseCulture("nl-NL")]
+public class WordsToNumberTests_Dutch
+{
+    [Theory]
+    [InlineData("nul", 0, null)]
+    [InlineData("min tien", -10, null)]
+    [InlineData("eenentwintig", 21, null)]
+    [InlineData("honderdacht", 108, null)]
+    [InlineData("duizend honderdelf", 1111, null)]
+    [InlineData("een miljoen", 1000000, null)]
+    [InlineData("eerste", 1, null)]
+    [InlineData("eenentwintigste", 21, null)]
+    public void TryToNumber_ValidInput_Dutch(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("twintig foo", 0, "foo")]
+    [InlineData("min xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Dutch(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
