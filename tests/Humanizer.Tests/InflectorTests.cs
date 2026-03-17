@@ -404,6 +404,13 @@ class PluralTestSource : IEnumerable<object[]>
 
         //Issue #1042
         yield return ["database", "databases"];
+
+        //Issue #1674
+        yield return ["arrive", "arrives"];
+        yield return ["drive", "drives"];
+        yield return ["curve", "curves"];
+        yield return ["behave", "behaves"];
+
     }
 
     IEnumerator IEnumerable.GetEnumerator() =>
