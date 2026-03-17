@@ -49,6 +49,8 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
         ["milljarðar"] = 1_000_000_000
     }.ToFrozenDictionary(StringComparer.Ordinal);
 
+    static readonly string[] Tens = ["tuttugu", "þrjátíu", "fjörutíu", "fimmtíu", "sextíu", "sjötíu", "áttatíu", "níutíu"];
+    static readonly string[] LargeScales = ["milljarðar", "milljarður", "milljónir", "milljón", "þúsund", "hundruð", "hundrað"];
     static readonly FrozenDictionary<string, int> OrdinalMap = BuildOrdinalMap();
 
     public override int Convert(string words)
@@ -79,6 +81,11 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
             negative = true;
             normalized = normalized["mínus ".Length..].Trim();
         }
+        else if (normalized.StartsWith("minus ", StringComparison.Ordinal))
+        {
+            negative = true;
+            normalized = normalized["minus ".Length..].Trim();
+        }
 
         if (OrdinalMap.TryGetValue(normalized, out parsedValue) ||
             TryParseCardinal(normalized, out parsedValue))
@@ -92,19 +99,11 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
             return true;
         }
 
-        unrecognizedWord = normalized.Split(' ', StringSplitOptions.RemoveEmptyEntries).LastOrDefault() ?? normalized;
+        var tokens = normalized.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        unrecognizedWord = tokens.LastOrDefault() ?? normalized;
         parsedValue = default;
         return false;
     }
-
-    static string Normalize(string words) =>
-        Regex.Replace(words.Replace(",", string.Empty)
-                .Replace(".", string.Empty)
-                .Replace("-", " ")
-                .ToLowerInvariant()
-                .Trim(),
-            @"\s+",
-            " ");
 
     static bool TryParseCardinal(string words, out int value)
     {
@@ -113,20 +112,25 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
             return true;
         }
 
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        if (tokens.Length > 1)
+        if (string.IsNullOrEmpty(words))
+        {
+            value = default;
+            return false;
+        }
+
+        if (words.Contains(' '))
         {
             var total = 0;
             var current = 0;
 
-            foreach (var token in tokens)
+            foreach (var token in words.Split(' ', StringSplitOptions.RemoveEmptyEntries))
             {
                 if (token == "og")
                 {
                     continue;
                 }
 
-                if (!TryParseCardinal(token, out var tokenValue))
+                if (!CardinalMap.TryGetValue(token, out var tokenValue))
                 {
                     value = default;
                     return false;
@@ -137,7 +141,7 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
                     total += (current == 0 ? 1 : current) * tokenValue;
                     current = 0;
                 }
-                else if (tokenValue == 100)
+                else if (tokenValue >= 100)
                 {
                     current = (current == 0 ? 1 : current) * tokenValue;
                 }
@@ -151,41 +155,47 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
             return true;
         }
 
-        foreach (var scale in new[] { "trilljón", "billjarður", "billjón", "milljarður", "milljón", "þúsund", "hundrað" })
+        foreach (var scale in LargeScales)
         {
             var index = words.IndexOf(scale, StringComparison.Ordinal);
-            if (index >= 0)
+            if (index < 0)
             {
-                var left = words[..index].Trim();
-                var right = words[(index + scale.Length)..].Trim();
-                var factor = 1;
-
-                if ((string.IsNullOrEmpty(left) || TryParseCardinal(left, out factor)) &&
-                    TryParseOptional(right, out var remainder))
-                {
-                    value = factor * CardinalMap[scale] + remainder;
-                    return true;
-                }
+                continue;
             }
+
+            var left = words[..index].Trim();
+            var right = words[(index + scale.Length)..].Trim();
+
+            var multiplier = 1;
+            if (!string.IsNullOrEmpty(left) && !TryParseCardinal(left, out multiplier))
+            {
+                value = default;
+                return false;
+            }
+
+            if (!TryParseOptional(right, out var remainder))
+            {
+                value = default;
+                return false;
+            }
+
+            value = multiplier * CardinalMap[scale] + remainder;
+            return true;
         }
 
-        foreach (var tens in new[] { "tuttugu", "þrjátíu", "fjörutíu", "fimmtíu", "sextíu", "sjötíu", "áttatíu", "níutíu" })
+        foreach (var tens in Tens)
         {
             if (words.StartsWith(tens, StringComparison.Ordinal))
             {
                 var remainder = words[tens.Length..].Trim();
+
                 if (string.IsNullOrEmpty(remainder))
                 {
                     value = CardinalMap[tens];
                     return true;
                 }
 
-                if (remainder.StartsWith("og ", StringComparison.Ordinal))
-                {
-                    remainder = remainder["og ".Length..];
-                }
-
-                if (TryParseCardinal(remainder, out var unit) && unit is >= 1 and <= 9)
+                if (TryParseCardinal(remainder, out var unit) && unit >= 1 && unit <= 9)
                 {
                     value = CardinalMap[tens] + unit;
                     return true;
@@ -205,12 +215,21 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
             return true;
         }
 
-        if (words.StartsWith("og ", StringComparison.Ordinal))
-        {
-            words = words["og ".Length..];
-        }
-
         return TryParseCardinal(words, out value);
+    }
+
+    static string Normalize(string words)
+    {
+        var cleaned = words.Replace(",", string.Empty)
+            .Replace(".", string.Empty)
+            .Replace(":", string.Empty)
+            .Replace("-", " ")
+            .ToLowerInvariant()
+            .Trim();
+
+        cleaned = Regex.Replace(cleaned, @"\bog\b", string.Empty, RegexOptions.CultureInvariant);
+        cleaned = Regex.Replace(cleaned, @"\s+", " ", RegexOptions.CultureInvariant);
+        return cleaned.Trim();
     }
 
     static FrozenDictionary<string, int> BuildOrdinalMap()
@@ -220,9 +239,7 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
 
         for (var number = 1; number <= 200; number++)
         {
-            ordinals[Normalize(converter.ConvertToOrdinal(number, GrammaticalGender.Masculine))] = number;
-            ordinals[Normalize(converter.ConvertToOrdinal(number, GrammaticalGender.Feminine))] = number;
-            ordinals[Normalize(converter.ConvertToOrdinal(number, GrammaticalGender.Neuter))] = number;
+            ordinals[Normalize(converter.ConvertToOrdinal(number))] = number;
         }
 
         return ordinals.ToFrozenDictionary(StringComparer.Ordinal);

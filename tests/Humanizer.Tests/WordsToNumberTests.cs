@@ -535,6 +535,93 @@ public class WordsToNumberTests_Icelandic
     }
 }
 
+[UseCulture("fil-PH")]
+public class WordsToNumberTests_Filipino
+{
+    [Theory]
+    [InlineData("sero", 0, null)]
+    [InlineData("minus tatlo", -3, null)]
+    [InlineData("labing-isa", 11, null)]
+    [InlineData("dalawampu't isa", 21, null)]
+    [InlineData("isang daan at lima", 105, null)]
+    [InlineData("isang libo", 1000, null)]
+    [InlineData("dalawang milyon", 2000000, null)]
+    public void TryToNumber_ValidInput_Filipino(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("dalawampu foo", 0, "foo")]
+    [InlineData("minus xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Filipino(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("id-ID")]
+public class WordsToNumberTests_Indonesian
+{
+    [Theory]
+    [InlineData("nol", 0, null)]
+    [InlineData("minus satu", -1, null)]
+    [InlineData("sebelas", 11, null)]
+    [InlineData("dua puluh satu", 21, null)]
+    [InlineData("seratus lima", 105, null)]
+    [InlineData("seribu", 1000, null)]
+    [InlineData("satu juta", 1000000, null)]
+    public void TryToNumber_ValidInput_Indonesian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("dua puluh foo", 0, "foo")]
+    [InlineData("minus xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Indonesian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("ms-MY")]
+public class WordsToNumberTests_Malay
+{
+    [Theory]
+    [InlineData("kosong", 0, null)]
+    [InlineData("minus satu", -1, null)]
+    [InlineData("sebelas", 11, null)]
+    [InlineData("dua puluh satu", 21, null)]
+    [InlineData("seratus lima", 105, null)]
+    [InlineData("seribu", 1000, null)]
+    [InlineData("satu juta", 1000000, null)]
+    public void TryToNumber_ValidInput_Malay(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("dua puluh foo", 0, "foo")]
+    [InlineData("minus xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Malay(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]

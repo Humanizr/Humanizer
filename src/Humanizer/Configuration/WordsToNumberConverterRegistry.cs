@@ -21,6 +21,9 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("nl", _ => new DutchWordsToNumberConverter());
         Register("sv", _ => new SwedishWordsToNumberConverter());
         Register("is", _ => new IcelandicWordsToNumberConverter());
+        Register("fil", _ => new FilipinoWordsToNumberConverter());
+        Register("id", _ => new IndonesianWordsToNumberConverter());
+        Register("ms", _ => new MalayWordsToNumberConverter());
     }
 
     private static IWordsToNumberConverter CreateConverter(CultureInfo culture) =>
@@ -36,6 +39,9 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "nl" => new DutchWordsToNumberConverter(),
             "sv" => new SwedishWordsToNumberConverter(),
             "is" => new IcelandicWordsToNumberConverter(),
+            "fil" => new FilipinoWordsToNumberConverter(),
+            "id" => new IndonesianWordsToNumberConverter(),
+            "ms" => new MalayWordsToNumberConverter(),
             _ => new DefaultWordsToNumberConverter(culture)
         };
 }
