@@ -706,6 +706,64 @@ public class WordsToNumberTests_Vietnamese
     }
 }
 
+[UseCulture("ja-JP")]
+public class WordsToNumberTests_Japanese
+{
+    [Theory]
+    [InlineData("〇", 0, null)]
+    [InlineData("十一", 11, null)]
+    [InlineData("百二十二", 122, null)]
+    [InlineData("三千五百一", 3501, null)]
+    [InlineData("一億", 100000000, null)]
+    [InlineData("一番目", 1, null)]
+    [InlineData("百十二番目", 112, null)]
+    public void TryToNumber_ValidInput_Japanese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("二十foo", 0, "二")]
+    [InlineData("百xyz", 0, "百")]
+    public void TryToNumber_InvalidInput_Japanese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("ko-KR")]
+public class WordsToNumberTests_Korean
+{
+    [Theory]
+    [InlineData("영", 0, null)]
+    [InlineData("십일", 11, null)]
+    [InlineData("백이십이", 122, null)]
+    [InlineData("삼천오백일", 3501, null)]
+    [InlineData("일억", 100000000, null)]
+    [InlineData("첫번째", 1, null)]
+    [InlineData("백십이번째", 112, null)]
+    public void TryToNumber_ValidInput_Korean(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("이십foo", 0, "이")]
+    [InlineData("백xyz", 0, "백")]
+    public void TryToNumber_InvalidInput_Korean(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("fil-PH")]
 public class WordsToNumberTests_Filipino
 {
