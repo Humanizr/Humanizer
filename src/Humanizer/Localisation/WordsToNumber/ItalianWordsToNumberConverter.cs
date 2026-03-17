@@ -229,6 +229,8 @@ internal class ItalianWordsToNumberConverter : GenderlessWordsToNumberConverter
                 .Replace("'", string.Empty)
                 .Replace("’", string.Empty)
                 .Replace("-", " ")
+                .Replace(" ed ", " ")
+                .Replace(" e ", " ")
                 .ToLowerInvariant(),
             @"\s+",
             " ")

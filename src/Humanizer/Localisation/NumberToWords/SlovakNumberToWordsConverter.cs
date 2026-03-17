@@ -92,6 +92,13 @@ class SlovakNumberToWordsConverter(CultureInfo culture) :
             return;
         }
 
+        if (divisor == 1_000 && n == 1)
+        {
+            parts.Add(map[0]);
+            number %= divisor;
+            return;
+        }
+
         CollectLessThanThousand(parts, n, n < 19 ? gender : null);
 
         var units = n % 1000;

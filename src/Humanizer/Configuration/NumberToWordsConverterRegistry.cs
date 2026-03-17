@@ -18,9 +18,14 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("ro", _ => new RomanianNumberToWordsConverter());
         Register("ru", _ => new RussianNumberToWordsConverter());
         Register("fi", _ => new FinnishNumberToWordsConverter());
+        Register("fil", _ => new FilipinoNumberToWordsConverter());
+        Register("fil-PH", _ => new FilipinoNumberToWordsConverter());
         Register("fr-BE", _ => new FrenchBelgianNumberToWordsConverter());
         Register("fr-CH", _ => new FrenchSwissNumberToWordsConverter());
         Register("fr", _ => new FrenchNumberToWordsConverter());
+        Register("id", _ => new IndonesianNumberToWordsConverter());
+        Register("ms", _ => new MalayNumberToWordsConverter());
+        Register("ms-MY", _ => new MalayNumberToWordsConverter());
         Register("nl", _ => new DutchNumberToWordsConverter());
         Register("he", c => new HebrewNumberToWordsConverter(c));
         Register("sl", c => new SlovenianNumberToWordsConverter(c));
