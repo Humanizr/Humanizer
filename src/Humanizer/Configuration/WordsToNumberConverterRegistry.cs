@@ -29,6 +29,8 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("zh-CN", _ => new ChineseWordsToNumberConverter());
         Register("zh-Hans", _ => new ChineseWordsToNumberConverter());
         Register("zh-Hant", _ => new ChineseWordsToNumberConverter());
+        Register("uz-Latn-UZ", _ => new UzbekLatnWordsToNumberConverter());
+        Register("uz-Cyrl-UZ", _ => new UzbekCyrlWordsToNumberConverter());
     }
 
     private static IWordsToNumberConverter CreateConverter(CultureInfo culture) =>
@@ -49,6 +51,9 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "id" => new IndonesianWordsToNumberConverter(),
             "ms" => new MalayWordsToNumberConverter(),
             "zh" => new ChineseWordsToNumberConverter(),
+            "uz" => culture.Name.Contains("Cyrl", StringComparison.Ordinal)
+                ? new UzbekCyrlWordsToNumberConverter()
+                : new UzbekLatnWordsToNumberConverter(),
             _ => new DefaultWordsToNumberConverter(culture)
         };
 }
