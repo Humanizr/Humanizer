@@ -26,6 +26,9 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("fil", _ => new FilipinoWordsToNumberConverter());
         Register("id", _ => new IndonesianWordsToNumberConverter());
         Register("ms", _ => new MalayWordsToNumberConverter());
+        Register("zh-CN", _ => new ChineseWordsToNumberConverter());
+        Register("zh-Hans", _ => new ChineseWordsToNumberConverter());
+        Register("zh-Hant", _ => new ChineseWordsToNumberConverter());
     }
 
     private static IWordsToNumberConverter CreateConverter(CultureInfo culture) =>
@@ -45,6 +48,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "fil" => new FilipinoWordsToNumberConverter(),
             "id" => new IndonesianWordsToNumberConverter(),
             "ms" => new MalayWordsToNumberConverter(),
+            "zh" => new ChineseWordsToNumberConverter(),
             _ => new DefaultWordsToNumberConverter(culture)
         };
 }

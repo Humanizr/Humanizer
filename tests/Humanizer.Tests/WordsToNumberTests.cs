@@ -566,6 +566,36 @@ public class WordsToNumberTests_Norwegian
     }
 }
 
+[UseCulture("zh-CN")]
+public class WordsToNumberTests_Chinese
+{
+    [Theory]
+    [InlineData("零", 0, null)]
+    [InlineData("负 五", -5, null)]
+    [InlineData("十三", 13, null)]
+    [InlineData("一百", 100, null)]
+    [InlineData("五百零七", 507, null)]
+    [InlineData("二万零八十九", 20089, null)]
+    [InlineData("第 一", 1, null)]
+    [InlineData("第 三万一千二百三十四", 31234, null)]
+    public void TryToNumber_ValidInput_Chinese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("二十foo", 0, "二")]
+    [InlineData("负 xyz", 0, "x")]
+    public void TryToNumber_InvalidInput_Chinese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("fil-PH")]
 public class WordsToNumberTests_Filipino
 {
@@ -594,13 +624,6 @@ public class WordsToNumberTests_Filipino
         Assert.Equal(expectedNumber, parsedNumber);
     }
 
-    [Fact]
-    public void DebugFilipinoTryConvert()
-    {
-        var words = "dalawampu't isa";
-        words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord);
-        Console.WriteLine($"parsed={parsedNumber}; unrecognized={(unrecognizedWord ?? "<null>")}");
-    }
 }
 
 [UseCulture("id-ID")]
@@ -664,7 +687,7 @@ public class WordsToNumberTests_Malay
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("zh-CN", "二十")]
+    [InlineData("ar", "عشرون")]
     public void ThrowsForNonEnglishWords(string cultureName, string word)
     {
         var culture = new CultureInfo(cultureName);
