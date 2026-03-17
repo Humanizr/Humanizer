@@ -9,6 +9,7 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("en", _ => new EnglishNumberToWordsConverter());
         Register("ar", _ => new ArabicNumberToWordsConverter());
         Register("cs", c => new CzechNumberToWordsConverter(c));
+        Register("da", _ => new DanishNumberToWordsConverter());
         Register("fa", _ => new FarsiNumberToWordsConverter());
         Register("es", _ => new SpanishNumberToWordsConverter());
         Register("pl", c => new PolishNumberToWordsConverter(c));
@@ -23,6 +24,7 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("nl", _ => new DutchNumberToWordsConverter());
         Register("he", c => new HebrewNumberToWordsConverter(c));
         Register("sl", c => new SlovenianNumberToWordsConverter(c));
+        Register("sk", c => new SlovakNumberToWordsConverter(c));
         Register("de", _ => new GermanNumberToWordsConverter());
         Register("de-CH", _ => new GermanSwissLiechtensteinNumberToWordsConverter());
         Register("de-LI", _ => new GermanSwissLiechtensteinNumberToWordsConverter());
