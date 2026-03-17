@@ -468,6 +468,37 @@ public class WordsToNumberTests_Dutch
     }
 }
 
+[UseCulture("sv-SE")]
+public class WordsToNumberTests_Swedish
+{
+    [Theory]
+    [InlineData("noll", 0, null)]
+    [InlineData("minus tio", -10, null)]
+    [InlineData("tjugoett", 21, null)]
+    [InlineData("hundraåtta", 108, null)]
+    [InlineData("ett tusen", 1000, null)]
+    [InlineData("ett tusen hundraelva", 1111, null)]
+    [InlineData("en miljon", 1000000, null)]
+    [InlineData("första", 1, null)]
+    [InlineData("tjugoförsta", 21, null)]
+    public void TryToNumber_ValidInput_Swedish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("tjugo foo", 0, "foo")]
+    [InlineData("minus xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Swedish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
