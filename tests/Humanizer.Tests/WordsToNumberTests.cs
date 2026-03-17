@@ -585,6 +585,66 @@ public class WordsToNumberTests_Norwegian
     }
 }
 
+[UseCulture("tr-TR")]
+public class WordsToNumberTests_Turkish
+{
+    [Theory]
+    [InlineData("sıfır", 0, null)]
+    [InlineData("eksi beş", -5, null)]
+    [InlineData("yirmi iki", 22, null)]
+    [InlineData("yüz on iki", 112, null)]
+    [InlineData("üç bin beş yüz bir", 3501, null)]
+    [InlineData("bir milyon bir", 1000001, null)]
+    [InlineData("birinci", 1, null)]
+    [InlineData("yüz yirminci", 120, null)]
+    public void TryToNumber_ValidInput_Turkish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("yirmi foo", 0, "foo")]
+    [InlineData("eksi xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Turkish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("az")]
+public class WordsToNumberTests_Azerbaijani
+{
+    [Theory]
+    [InlineData("sıfır", 0, null)]
+    [InlineData("mənfi beş", -5, null)]
+    [InlineData("iyirmi iki", 22, null)]
+    [InlineData("yüz on iki", 112, null)]
+    [InlineData("üç min beş yüz bir", 3501, null)]
+    [InlineData("bir milyon bir", 1000001, null)]
+    [InlineData("birinci", 1, null)]
+    [InlineData("yüz iyirminci", 120, null)]
+    public void TryToNumber_ValidInput_Azerbaijani(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("iyirmi foo", 0, "foo")]
+    [InlineData("mənfi xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Azerbaijani(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("zh-CN")]
 public class WordsToNumberTests_Chinese
 {
