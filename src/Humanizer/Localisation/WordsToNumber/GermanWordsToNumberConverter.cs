@@ -14,7 +14,7 @@ internal partial class GermanWordsToNumberConverter : GenderlessWordsToNumberCon
         {"null",0}, {"ein",1}, {"eins",1}, {"eine",1}, {"einen",1}, {"zwei",2}, {"drei",3}, {"vier",4}, {"fünf",5},
         {"sechs",6}, {"sieben",7}, {"acht",8}, {"neun",9}, {"zehn",10}, {"elf",11}, {"zwölf",12}, {"dreizehn",13},
         {"vierzehn",14}, {"fünfzehn",15}, {"sechzehn",16}, {"siebzehn",17}, {"achtzehn",18}, {"neunzehn",19},
-        {"zwanzig",20}, {"dreissig",30}, {"vierzig",40}, {"fünfzig",50}, {"sechzig",60}, {"siebzig",70}, {"achtzig",80},
+        {"zwanzig",20}, {"dreißig",30}, {"dreissig",30}, {"vierzig",40}, {"fünfzig",50}, {"sechzig",60}, {"siebzig",70}, {"achtzig",80},
         {"neunzig",90}, {"hundert",100}, {"tausend",1000}, {"million",1_000_000}, {"millionen",1_000_000}, {"milliarde",1_000_000_000},
         {"milliarden",1_000_000_000}
     }.ToFrozenDictionary();

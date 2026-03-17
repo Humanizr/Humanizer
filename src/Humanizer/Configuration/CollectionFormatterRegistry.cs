@@ -7,6 +7,7 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
     {
         Register("en", _ => new OxfordStyleCollectionFormatter());
         Register("af", _ => new DefaultCollectionFormatter("en"));
+        Register("ar", _ => new CliticCollectionFormatter("و"));
         Register("az", _ => new DefaultCollectionFormatter("və"));
         Register("bg", _ => new DefaultCollectionFormatter("и"));
         Register("bn", _ => new DefaultCollectionFormatter("ও"));
@@ -17,13 +18,16 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("nl", _ => new DefaultCollectionFormatter("en"));
         Register("pt", _ => new DefaultCollectionFormatter("e"));
         Register("el", _ => new DefaultCollectionFormatter("και"));
+        Register("fa", _ => new CliticCollectionFormatter("و"));
         Register("fi", _ => new DefaultCollectionFormatter("ja"));
         Register("fil", _ => new DefaultCollectionFormatter("at"));
         Register("fr", _ => new DefaultCollectionFormatter("et"));
+        Register("he", _ => new CliticCollectionFormatter("ו"));
         Register("hr", _ => new DefaultCollectionFormatter("i"));
         Register("hu", _ => new DefaultCollectionFormatter("és"));
         Register("hy", _ => new DefaultCollectionFormatter("և"));
         Register("id", _ => new DefaultCollectionFormatter("dan"));
+        Register("ja", _ => new DelimitedCollectionFormatter("、"));
         Register("ko", _ => new DefaultCollectionFormatter("및"));
         Register("ku", _ => new DefaultCollectionFormatter("û"));
         Register("lt", _ => new DefaultCollectionFormatter("ir"));
@@ -49,5 +53,8 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("uk", _ => new DefaultCollectionFormatter("і"));
         Register("uz-Latn-UZ", _ => new DefaultCollectionFormatter("va"));
         Register("vi", _ => new DefaultCollectionFormatter("và"));
+        Register("zh-CN", _ => new DelimitedCollectionFormatter("、"));
+        Register("zh-Hans", _ => new DelimitedCollectionFormatter("、"));
+        Register("zh-Hant", _ => new DelimitedCollectionFormatter("、"));
     }
 }
