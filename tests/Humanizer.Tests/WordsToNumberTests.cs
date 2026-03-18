@@ -554,6 +554,279 @@ public class WordsToNumberTests_Icelandic
     }
 }
 
+[UseCulture("da")]
+public class WordsToNumberTests_Danish
+{
+    [Theory]
+    [InlineData("nul", 0, null)]
+    [InlineData("minus femoghalvtreds", -55, null)]
+    [InlineData("enogtyve", 21, null)]
+    [InlineData("nioghalvfems", 99, null)]
+    [InlineData("et hundrede og en", 101, null)]
+    [InlineData("to hundrede og toogtres", 262, null)]
+    [InlineData("et tusind og en", 1001, null)]
+    [InlineData("to millioner", 2_000_000, null)]
+    public void TryToNumber_ValidInput_Danish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("enogtyve foo", 0, "foo")]
+    [InlineData("minus xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Danish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("bg")]
+public class WordsToNumberTests_Bulgarian
+{
+    [Theory]
+    [InlineData("нула", 0, null)]
+    [InlineData("сто и единадесет", 111, null)]
+    [InlineData("петстотин петдесет и пет", 555, null)]
+    [InlineData("четири хиляди двеста и тринадесет", 4213, null)]
+    [InlineData("четири милиона двеста и десет", 4_000_210, null)]
+    public void TryToNumber_ValidInput_Bulgarian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("петдесет foo", 0, "foo")]
+    public void TryToNumber_InvalidInput_Bulgarian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("cs-CZ")]
+public class WordsToNumberTests_Czech
+{
+    [Theory]
+    [InlineData("nula", 0, null)]
+    [InlineData("sto dvanáct", 112, null)]
+    [InlineData("jeden tisíc", 1000, null)]
+    [InlineData("dvě miliardy sto čtyřicet sedm milionů čtyři sta osmdesát tři tisíc šest set čtyřicet sedm", 2147483647, null)]
+    [InlineData("mínus jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dva", -1501001892, null)]
+    public void TryToNumber_ValidInput_Czech(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("he")]
+public class WordsToNumberTests_Hebrew
+{
+    [Theory]
+    [InlineData("אפס", 0, null)]
+    [InlineData("מינוס שתיים", -2, null)]
+    [InlineData("מאה ואחת", 101, null)]
+    [InlineData("מאתיים ארבעים ואחת", 241, null)]
+    [InlineData("שבע מאות עשרים וחמש", 725, null)]
+    [InlineData("אלף ואחת עשרה", 1011, null)]
+    [InlineData("שבעת אלפים עשרים ואחת", 7021, null)]
+    [InlineData("עשרים ושמונה אלף מאה עשרים ושלוש", 28123, null)]
+    [InlineData("מיליון ואחת", 1_000_001, null)]
+    [InlineData("מיליארד ואחד", 1_000_000_001, null)]
+    [InlineData("שני מיליון ארבע מאות ושמונה", 2_000_408, null)]
+    public void TryToNumber_ValidInput_Hebrew(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("עשרים ושמונה hello", 0, "hello")]
+    [InlineData("מינוס xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Hebrew(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("hr-HR")]
+public class WordsToNumberTests_Croatian
+{
+    [Theory]
+    [InlineData("nula", 0, null)]
+    [InlineData("tri tisuće petsto jedan", 3501, null)]
+    [InlineData("dvjesto dvadeset dvije tisuće dvjesto dvadeset dva", 222222, null)]
+    [InlineData("minus sedam tisuća petsto šesnaest", -7516, null)]
+    public void TryToNumber_ValidInput_Croatian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("ru-RU")]
+public class WordsToNumberTests_Russian
+{
+    [Theory]
+    [InlineData("ноль", 0, null)]
+    [InlineData("минус сто двадцать три", -123, null)]
+    [InlineData("одна тысяча сто двенадцать", 1112, null)]
+    [InlineData("сто двадцать одна тысяча триста четырнадцать", 121314, null)]
+    [InlineData("два миллиона сто тридцать две тысячи четыреста пятнадцать", 2132415, null)]
+    [InlineData("первый", 1, null)]
+    [InlineData("третья", 3, null)]
+    [InlineData("десятое", 10, null)]
+    [InlineData("двадцать вторая", 22, null)]
+    public void TryToNumber_ValidInput_Russian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("двадцать foo", 0, "foo")]
+    [InlineData("минус xyz", 0, "xyz")]
+    public void TryToNumber_InvalidInput_Russian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("ro-RO")]
+public class WordsToNumberTests_Romanian
+{
+    [Theory]
+    [InlineData("zero", 0, null)]
+    [InlineData("minus unu", -1, null)]
+    [InlineData("o sută douăzeci și unu", 121, null)]
+    [InlineData("douăzeci și una de mii", 21000, null)]
+    [InlineData("două milioane", 2_000_000, null)]
+    public void TryToNumber_ValidInput_Romanian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("douăzeci foo", 0, "foo")]
+    public void TryToNumber_InvalidInput_Romanian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("sl-SI")]
+public class WordsToNumberTests_Slovenian
+{
+    [Theory]
+    [InlineData("nič", 0, null)]
+    [InlineData("sto dvaindvajset", 122, null)]
+    [InlineData("tri tisoč petsto ena", 3501, null)]
+    [InlineData("dva milijona sto dvaintrideset tisoč štiristo petnajst", 2132415, null)]
+    [InlineData("minus sedemsto enainpetdeset milijonov šeststo triintrideset tisoč šeststo devetnajst", -751633619, null)]
+    public void TryToNumber_ValidInput_Slovenian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("sr")]
+public class WordsToNumberTests_SerbianCyrillic
+{
+    [Theory]
+    [InlineData("нула", 0, null)]
+    [InlineData("четрдесет три", 43, null)]
+    [InlineData("петсто четрдесет седам", 547, null)]
+    [InlineData("десет милиона", 10000000, null)]
+    public void TryToNumber_ValidInput_SerbianCyrillic(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("sr-Latn")]
+public class WordsToNumberTests_SerbianLatin
+{
+    [Theory]
+    [InlineData("nula", 0, null)]
+    [InlineData("četrdeset tri", 43, null)]
+    [InlineData("petsto četrdeset sedam", 547, null)]
+    [InlineData("deset miliona", 10000000, null)]
+    public void TryToNumber_ValidInput_SerbianLatin(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("sk")]
+public class WordsToNumberTests_Slovak
+{
+    [Theory]
+    [InlineData("nula", 0, null)]
+    [InlineData("mínus deväťdesiat deväť", -99, null)]
+    [InlineData("sto jeden", 101, null)]
+    [InlineData("dve miliardy sto štyridsať sedem miliónov štyristo osemdesiat tri tisíc šesťsto štyridsať sedem", 2147483647, null)]
+    public void TryToNumber_ValidInput_Slovak(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("sto foo", 0, "foo")]
+    public void TryToNumber_InvalidInput_Slovak(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("uk-UA")]
+public class WordsToNumberTests_Ukrainian
+{
+    [Theory]
+    [InlineData("нуль", 0, null)]
+    [InlineData("мінус сто двадцять три", -123, null)]
+    [InlineData("одна тисяча сто дванадцять", 1112, null)]
+    [InlineData("сто двадцять одна тисяча триста чотирнадцять", 121314, null)]
+    [InlineData("два мільйона сто тридцять дві тисячі чотириста п'ятнадцять", 2132415, null)]
+    [InlineData("перший", 1, null)]
+    [InlineData("третя", 3, null)]
+    [InlineData("десяте", 10, null)]
+    public void TryToNumber_ValidInput_Ukrainian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("nb-NO")]
 public class WordsToNumberTests_Norwegian
 {
