@@ -11,6 +11,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("af", _ => new AfrikaansWordsToNumberConverter());
         Register("ar", _ => new ArabicWordsToNumberConverter());
         Register("bg", _ => new BulgarianWordsToNumberConverter());
+        Register("bn", _ => new BengaliWordsToNumberConverter());
         Register("ca", _ => new CatalanWordsToNumberConverter());
         Register("cs", _ => new CzechWordsToNumberConverter());
         Register("da", _ => new DanishWordsToNumberConverter());
@@ -23,6 +24,8 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("fr", _ => new FrenchWordsToNumberConverter());
         Register("he", _ => new HebrewWordsToNumberConverter());
         Register("hr", _ => new CroatianWordsToNumberConverter());
+        Register("ku", _ => new KurdishWordsToNumberConverter());
+        Register("lb", _ => new LuxembourgishWordsToNumberConverter());
         Register("hu", _ => new HungarianWordsToNumberConverter());
         Register("lt", _ => new LithuanianWordsToNumberConverter());
         Register("lv", _ => new LatvianWordsToNumberConverter());
@@ -38,8 +41,12 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("sr-Latn", _ => new SerbianLatinWordsToNumberConverter());
         Register("es", _ => new SpanishWordsToNumberConverter());
         Register("es-ES", _ => new SpanishWordsToNumberConverter());
+        Register("fa", _ => new PersianWordsToNumberConverter());
         Register("nl", _ => new DutchWordsToNumberConverter());
         Register("sv", _ => new SwedishWordsToNumberConverter());
+        Register("th", _ => new ThaiWordsToNumberConverter());
+        Register("th-TH", _ => new ThaiWordsToNumberConverter());
+        Register("hy", _ => new ArmenianWordsToNumberConverter());
         Register("is", _ => new IcelandicWordsToNumberConverter());
         Register("nb", _ => new NorwegianBokmalWordsToNumberConverter());
         Register("nb-NO", _ => new NorwegianBokmalWordsToNumberConverter());
@@ -70,6 +77,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "af" => new AfrikaansWordsToNumberConverter(),
             "ar" => new ArabicWordsToNumberConverter(),
             "bg" => new BulgarianWordsToNumberConverter(),
+            "bn" => new BengaliWordsToNumberConverter(),
             "ca" => new CatalanWordsToNumberConverter(),
             "cs" => new CzechWordsToNumberConverter(),
             "da" => new DanishWordsToNumberConverter(),
@@ -79,6 +87,8 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "fr" => new FrenchWordsToNumberConverter(),
             "he" => new HebrewWordsToNumberConverter(),
             "hr" => new CroatianWordsToNumberConverter(),
+            "ku" => new KurdishWordsToNumberConverter(),
+            "lb" => new LuxembourgishWordsToNumberConverter(),
             "hu" => new HungarianWordsToNumberConverter(),
             "lt" => new LithuanianWordsToNumberConverter(),
             "lv" => new LatvianWordsToNumberConverter(),
@@ -92,6 +102,8 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
                 ? new SerbianLatinWordsToNumberConverter()
                 : new SerbianCyrillicWordsToNumberConverter(),
             "es" => new SpanishWordsToNumberConverter(),
+            "fa" => new PersianWordsToNumberConverter(),
+            "hy" => new ArmenianWordsToNumberConverter(),
             "nl" => new DutchWordsToNumberConverter(),
             "sv" => new SwedishWordsToNumberConverter(),
             "is" => new IcelandicWordsToNumberConverter(),
@@ -102,6 +114,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "ru" => new RussianWordsToNumberConverter(),
             "sk" => new SlovakWordsToNumberConverter(),
             "tr" => new TurkishWordsToNumberConverter(),
+            "th" => new ThaiWordsToNumberConverter(),
             "uk" => new UkrainianWordsToNumberConverter(),
             "az" => new AzerbaijaniWordsToNumberConverter(),
             "ja" => new JapaneseWordsToNumberConverter(),

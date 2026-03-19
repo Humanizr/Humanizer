@@ -610,6 +610,23 @@ public class WordsToNumberTests_Bulgarian
     }
 }
 
+[UseCulture("bn-BD")]
+public class WordsToNumberTests_Bengali
+{
+    [Theory]
+    [InlineData("এক", 1, null)]
+    [InlineData("একশ বাইশ", 122, null)]
+    [InlineData("তিন হাজার পাঁচশ এক", 3501, null)]
+    [InlineData("এক কোটি তেইশ লক্ষ পঁয়তাল্লিশ হাজার ছয়শ আটাত্তর", 12345678, null)]
+    [InlineData("ঋণাত্মক একশ তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশ নব্বই", -1234567890, null)]
+    public void TryToNumber_ValidInput_Bengali(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("fi-FI")]
 public class WordsToNumberTests_Finnish
 {
@@ -727,6 +744,23 @@ public class WordsToNumberTests_Hebrew
     }
 }
 
+[UseCulture("hy")]
+public class WordsToNumberTests_Armenian
+{
+    [Theory]
+    [InlineData("մեկ", 1, null)]
+    [InlineData("տասներկու", 12, null)]
+    [InlineData("երեք հազար հինգ հարյուր մեկ", 3501, null)]
+    [InlineData("մեկ միլիոն", 1000000, null)]
+    [InlineData("մինուս հինգ հարյուր", -500, null)]
+    public void TryToNumber_ValidInput_Armenian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("hu-HU")]
 public class WordsToNumberTests_Hungarian
 {
@@ -745,6 +779,23 @@ public class WordsToNumberTests_Hungarian
     }
 }
 
+[UseCulture("ku")]
+public class WordsToNumberTests_Kurdish
+{
+    [Theory]
+    [InlineData("یەک", 1, null)]
+    [InlineData("سەد و بیست و دوو", 122, null)]
+    [InlineData("سێ هەزار و پێنج سەد و یەک", 3501, null)]
+    [InlineData("یەک میلیۆن و یەک", 1000001, null)]
+    [InlineData("نێگەتیڤ نۆ سەد و نەوەد و نۆ", -999, null)]
+    public void TryToNumber_ValidInput_Kurdish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("lt")]
 public class WordsToNumberTests_Lithuanian
 {
@@ -755,6 +806,22 @@ public class WordsToNumberTests_Lithuanian
     [InlineData("du tūkstančiai trys šimtai keturiasdešimt penki", 2345, null)]
     [InlineData("šeši milijonai", 6000000, null)]
     public void TryToNumber_ValidInput_Lithuanian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("lb-LU")]
+public class WordsToNumberTests_Luxembourgish
+{
+    [Theory]
+    [InlineData("null", 0, null)]
+    [InlineData("eenhonnertzweeanzwanzeg", 122, null)]
+    [InlineData("dräidausendfënnefhonnerteen", 3501, null)]
+    [InlineData("eng Milliard eenhonnerteelef Milliounen eenhonnerteelefdausendeenhonnertuechtzéng", 1111111118, null)]
+    public void TryToNumber_ValidInput_Luxembourgish(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
@@ -885,6 +952,23 @@ public class WordsToNumberTests_Polish
     }
 }
 
+[UseCulture("fa")]
+public class WordsToNumberTests_Persian
+{
+    [Theory]
+    [InlineData("یک", 1, null)]
+    [InlineData("صد و بیست و دو", 122, null)]
+    [InlineData("سه هزار و پانصد و یک", 3501, null)]
+    [InlineData("یک میلیون و دویست و سی و چهار هزار و پانصد و شصت و هفت", 1234567, null)]
+    [InlineData("یک میلیارد و دویست و سی و چهار میلیون و پانصد و شصت و هفت هزار و هشتصد و نود", 1234567890, null)]
+    public void TryToNumber_ValidInput_Persian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("sl-SI")]
 public class WordsToNumberTests_Slovenian
 {
@@ -972,6 +1056,23 @@ public class WordsToNumberTests_Ukrainian
     [InlineData("третя", 3, null)]
     [InlineData("десяте", 10, null)]
     public void TryToNumber_ValidInput_Ukrainian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("th-TH")]
+public class WordsToNumberTests_Thai
+{
+    [Theory]
+    [InlineData("หนึ่ง", 1, null)]
+    [InlineData("สิบเอ็ด", 11, null)]
+    [InlineData("สามพันห้าร้อยหนึ่ง", 3501, null)]
+    [InlineData("หนึ่งพันหนึ่งร้อยสิบเอ็ด", 1111, null)]
+    [InlineData("ลบหนึ่งร้อยยี่สิบสอง", -122, null)]
+    public void TryToNumber_ValidInput_Thai(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
@@ -1280,7 +1381,7 @@ public class WordsToNumberTests_Malay
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("bn", "এক")]
+    [InlineData("ta", "ஒன்று")]
     public void ThrowsForNonEnglishWords(string cultureName, string word)
     {
         var culture = new CultureInfo(cultureName);
