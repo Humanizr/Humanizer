@@ -610,6 +610,23 @@ public class WordsToNumberTests_Bulgarian
     }
 }
 
+[UseCulture("fi-FI")]
+public class WordsToNumberTests_Finnish
+{
+    [Theory]
+    [InlineData("nolla", 0, null)]
+    [InlineData("satayksi", 101, null)]
+    [InlineData("tuhat kaksi", 1002, null)]
+    [InlineData("yksitoista", 11, null)]
+    [InlineData("miinus viisitoista", -15, null)]
+    public void TryToNumber_ValidInput_Finnish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("af")]
 public class WordsToNumberTests_Afrikaans
 {
@@ -671,6 +688,24 @@ public class WordsToNumberTests_Hebrew
     public void TryToNumber_InvalidInput_Hebrew(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("hu-HU")]
+public class WordsToNumberTests_Hungarian
+{
+    [Theory]
+    [InlineData("nulla", 0, null)]
+    [InlineData("huszonegy", 21, null)]
+    [InlineData("száztizenegy", 111, null)]
+    [InlineData("kétezer-egy", 2001, null)]
+    [InlineData("egymilliárd-kétszázharmincnégymillió-ötszázhatvanhétezer-nyolcszázkilencven", 1234567890, null)]
+    [InlineData("mínusz tizennyolc", -18, null)]
+    public void TryToNumber_ValidInput_Hungarian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
     }
