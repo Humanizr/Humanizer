@@ -9,6 +9,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
     {
         Register("en", _ => new EnglishWordsToNumberConverter());
         Register("af", _ => new AfrikaansWordsToNumberConverter());
+        Register("ar", _ => new ArabicWordsToNumberConverter());
         Register("bg", _ => new BulgarianWordsToNumberConverter());
         Register("ca", _ => new CatalanWordsToNumberConverter());
         Register("cs", _ => new CzechWordsToNumberConverter());
@@ -16,6 +17,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("de", _ => new GermanWordsToNumberConverter());
         Register("de-CH", _ => new GermanWordsToNumberConverter());
         Register("de-LI", _ => new GermanWordsToNumberConverter());
+        Register("el", _ => new GreekWordsToNumberConverter());
         Register("fi", _ => new FinnishWordsToNumberConverter());
         Register("fi-FI", _ => new FinnishWordsToNumberConverter());
         Register("fr", _ => new FrenchWordsToNumberConverter());
@@ -66,11 +68,13 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         {
             "en" => new EnglishWordsToNumberConverter(),
             "af" => new AfrikaansWordsToNumberConverter(),
+            "ar" => new ArabicWordsToNumberConverter(),
             "bg" => new BulgarianWordsToNumberConverter(),
             "ca" => new CatalanWordsToNumberConverter(),
             "cs" => new CzechWordsToNumberConverter(),
             "da" => new DanishWordsToNumberConverter(),
             "de" => new GermanWordsToNumberConverter(),
+            "el" => new GreekWordsToNumberConverter(),
             "fi" => new FinnishWordsToNumberConverter(),
             "fr" => new FrenchWordsToNumberConverter(),
             "he" => new HebrewWordsToNumberConverter(),

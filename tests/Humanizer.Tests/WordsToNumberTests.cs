@@ -643,6 +643,23 @@ public class WordsToNumberTests_Afrikaans
     }
 }
 
+[UseCulture("ar")]
+public class WordsToNumberTests_Arabic
+{
+    [Theory]
+    [InlineData("صفر", 0, null)]
+    [InlineData("اثنان و عشرون", 22, null)]
+    [InlineData("ثلاثة آلاف و خمس مئة و واحد", 3501, null)]
+    [InlineData("مليون و واحد", 1000001, null)]
+    [InlineData("سالب أحد عشر", -11, null)]
+    public void TryToNumber_ValidInput_Arabic(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("cs-CZ")]
 public class WordsToNumberTests_Czech
 {
@@ -653,6 +670,23 @@ public class WordsToNumberTests_Czech
     [InlineData("dvě miliardy sto čtyřicet sedm milionů čtyři sta osmdesát tři tisíc šest set čtyřicet sedm", 2147483647, null)]
     [InlineData("mínus jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dva", -1501001892, null)]
     public void TryToNumber_ValidInput_Czech(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("el")]
+public class WordsToNumberTests_Greek
+{
+    [Theory]
+    [InlineData("ένα", 1, null)]
+    [InlineData("πενήντα τρία", 53, null)]
+    [InlineData("χίλια τετρακόσια εξήντα εννέα", 1469, null)]
+    [InlineData("δεκατέσσερα εκατομμύρια", 14000000, null)]
+    [InlineData("ένα δισεκατομμύριο ένα", 1000000001, null)]
+    public void TryToNumber_ValidInput_Greek(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
@@ -1246,7 +1280,7 @@ public class WordsToNumberTests_Malay
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("ar", "عشرون")]
+    [InlineData("bn", "এক")]
     public void ThrowsForNonEnglishWords(string cultureName, string word)
     {
         var culture = new CultureInfo(cultureName);
