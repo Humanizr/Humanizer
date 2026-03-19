@@ -676,6 +676,56 @@ public class WordsToNumberTests_Hebrew
     }
 }
 
+[UseCulture("lt")]
+public class WordsToNumberTests_Lithuanian
+{
+    [Theory]
+    [InlineData("minus vienas", -1, null)]
+    [InlineData("dvidešimt vienas", 21, null)]
+    [InlineData("šimtas penkiasdešimt vienas", 151, null)]
+    [InlineData("du tūkstančiai trys šimtai keturiasdešimt penki", 2345, null)]
+    [InlineData("šeši milijonai", 6000000, null)]
+    public void TryToNumber_ValidInput_Lithuanian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("lv-LV")]
+public class WordsToNumberTests_Latvian
+{
+    [Theory]
+    [InlineData("divdesmit viens", 21, null)]
+    [InlineData("simtu piecdesmit viens", 151, null)]
+    [InlineData("divi tūkstoši trīs simti četrdesmit pieci", 2345, null)]
+    [InlineData("seši miljoni", 6000000, null)]
+    public void TryToNumber_ValidInput_Latvian(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("mt")]
+public class WordsToNumberTests_Maltese
+{
+    [Theory]
+    [InlineData("wieħed", 1, null)]
+    [InlineData("mija u tlieta u għoxrin", 123, null)]
+    [InlineData("tlett elef u ħames mija u wieħed", 3501, null)]
+    [InlineData("miljun u mitejn u erbgħa u tletin elf u ħames mija u sebgħa u sittin", 1234567, null)]
+    [InlineData("għoxrin inqas minn żero", -20, null)]
+    public void TryToNumber_ValidInput_Maltese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("hr-HR")]
 public class WordsToNumberTests_Croatian
 {
@@ -744,6 +794,23 @@ public class WordsToNumberTests_Romanian
     public void TryToNumber_InvalidInput_Romanian(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("pl")]
+public class WordsToNumberTests_Polish
+{
+    [Theory]
+    [InlineData("zero", 0, null)]
+    [InlineData("minus miliard pięćset jeden milionów tysiąc osiemset dziewięćdziesiąt dwa", -1501001892, null)]
+    [InlineData("sto dwanaście", 112, null)]
+    [InlineData("dwadzieścia dwa tysiące", 22000, null)]
+    [InlineData("dwa miliardy sto czterdzieści siedem milionów czterysta osiemdziesiąt trzy tysiące sześćset czterdzieści siedem", 2147483647, null)]
+    public void TryToNumber_ValidInput_Polish(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
     }

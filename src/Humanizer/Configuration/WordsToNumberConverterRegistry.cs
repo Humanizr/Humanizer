@@ -19,6 +19,10 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("fr", _ => new FrenchWordsToNumberConverter());
         Register("he", _ => new HebrewWordsToNumberConverter());
         Register("hr", _ => new CroatianWordsToNumberConverter());
+        Register("lt", _ => new LithuanianWordsToNumberConverter());
+        Register("lv", _ => new LatvianWordsToNumberConverter());
+        Register("mt", _ => new MalteseWordsToNumberConverter());
+        Register("pl", _ => new PolishWordsToNumberConverter());
         Register("pt", _ => new PortugueseWordsToNumberConverter());
         Register("pt-BR", _ => new PortugueseWordsToNumberConverter());
         Register("it", _ => new ItalianWordsToNumberConverter());
@@ -67,6 +71,10 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
             "fr" => new FrenchWordsToNumberConverter(),
             "he" => new HebrewWordsToNumberConverter(),
             "hr" => new CroatianWordsToNumberConverter(),
+            "lt" => new LithuanianWordsToNumberConverter(),
+            "lv" => new LatvianWordsToNumberConverter(),
+            "mt" => new MalteseWordsToNumberConverter(),
+            "pl" => new PolishWordsToNumberConverter(),
             "pt" => new PortugueseWordsToNumberConverter(),
             "it" => new ItalianWordsToNumberConverter(),
             "ro" => new RomanianWordsToNumberConverter(),
