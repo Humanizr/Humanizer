@@ -11,4 +11,18 @@ public class DefaultFormatterTests
 
         Assert.Equal(a[0] + " & " + a[1], b);
     }
+
+    [Theory]
+    [InlineData("af", "gister")]
+    [InlineData("da", "i går")]
+    [InlineData("es", "ayer")]
+    [InlineData("ku", "دوێنێ")]
+    [InlineData("nl", "gisteren")]
+    [InlineData("pt", "ontem")]
+    public void DefaultFormatterFallbackLocalesStillResolveLocalizedDateStrings(string cultureName, string expected)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(new(cultureName));
+
+        Assert.Equal(expected, formatter.DateHumanize(TimeUnit.Day, Tense.Past, 1));
+    }
 }

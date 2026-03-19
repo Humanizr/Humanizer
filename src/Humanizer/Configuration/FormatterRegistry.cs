@@ -20,20 +20,13 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterCzechSlovakPolishFormatter("pl");
         RegisterCzechSlovakPolishFormatter("sk");
         Register("bg", c => new BulgarianFormatter(c));
-        RegisterDefaultFormatter("ku");
-        RegisterDefaultFormatter("pt");
         Register("sv", c => new SwedishFormatter(c));
         Register("tr", c => new TrimPluralSuffixFormatter(c));
         Register("vi", c => new TrimPluralSuffixFormatter(c));
-        RegisterDefaultFormatter("en");
-        RegisterDefaultFormatter("af");
         Register("az", c => new TrimPluralSuffixFormatter(c));
-        RegisterDefaultFormatter("da");
         Register("el", c => new TrimPluralSuffixFormatter(c));
-        RegisterDefaultFormatter("es");
         Register("fa", c => new TrimPluralSuffixFormatter(c));
         Register("fi", c => new FinnishFormatter(c));
-        RegisterDefaultFormatter("fil");
         Register("hu", c => new HungarianFormatter(c));
         Register("hy", c => new TrimPluralSuffixFormatter(c));
         Register("id", c => new TrimPluralSuffixFormatter(c));
@@ -44,10 +37,8 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("mt", c => new MalteseFormatter(c));
         Register("ms", c => new TrimPluralSuffixFormatter(c));
         Register("nb", c => new TrimPluralSuffixFormatter(c));
-        RegisterDefaultFormatter("nl");
         Register("bn", c => new TrimPluralSuffixFormatter(c));
         Register("it", c => new ItalianFormatter(c));
-        RegisterDefaultFormatter("ta");
         Register("uz-Latn-UZ", c => new TrimPluralSuffixFormatter(c));
         Register("uz-Cyrl-UZ", c => new TrimPluralSuffixFormatter(c));
         Register("zh-CN", c => new TrimPluralSuffixFormatter(c));
@@ -58,9 +49,6 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("lb", c => new LuxembourgishFormatter(c));
         Register("ca", c => new CatalanFormatter(c));
     }
-
-    void RegisterDefaultFormatter(string localeCode) =>
-        Register(localeCode, c => new DefaultFormatter(c));
 
     void RegisterCzechSlovakPolishFormatter(string localeCode) =>
         Register(localeCode, c => new CzechSlovakPolishFormatter(c));

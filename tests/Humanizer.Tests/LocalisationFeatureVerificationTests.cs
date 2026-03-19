@@ -24,6 +24,21 @@ public class LocalisationFeatureVerificationTests
     }
 
     [Fact]
+    public void FormatterDefaultAcceptedLocalesNeedNoExplicitRegistration()
+    {
+        var locales = GetRegisteredLocales("FormatterRegistry.cs");
+
+        Assert.DoesNotContain("af", locales);
+        Assert.DoesNotContain("da", locales);
+        Assert.DoesNotContain("es", locales);
+        Assert.DoesNotContain("fil", locales);
+        Assert.DoesNotContain("ku", locales);
+        Assert.DoesNotContain("nl", locales);
+        Assert.DoesNotContain("pt", locales);
+        Assert.DoesNotContain("ta", locales);
+    }
+
+    [Fact]
     public void CollectionFormatterDefaultUsesAmpersand()
     {
         var formatter = new DefaultCollectionFormatter("&");
