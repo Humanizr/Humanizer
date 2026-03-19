@@ -610,6 +610,22 @@ public class WordsToNumberTests_Bulgarian
     }
 }
 
+[UseCulture("af")]
+public class WordsToNumberTests_Afrikaans
+{
+    [Theory]
+    [InlineData("een", 1, null)]
+    [InlineData("een honderd twee en twintig", 122, null)]
+    [InlineData("drie duisend vyf honderd en een", 3501, null)]
+    [InlineData("een miljard een honderd en elf miljoen een honderd en elf duisend een honderd en elf", 1111111111, null)]
+    public void TryToNumber_ValidInput_Afrikaans(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
 [UseCulture("cs-CZ")]
 public class WordsToNumberTests_Czech
 {

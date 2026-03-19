@@ -8,6 +8,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         : base(CreateConverter)
     {
         Register("en", _ => new EnglishWordsToNumberConverter());
+        Register("af", _ => new AfrikaansWordsToNumberConverter());
         Register("bg", _ => new BulgarianWordsToNumberConverter());
         Register("ca", _ => new CatalanWordsToNumberConverter());
         Register("cs", _ => new CzechWordsToNumberConverter());
@@ -57,6 +58,7 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         culture.TwoLetterISOLanguageName switch
         {
             "en" => new EnglishWordsToNumberConverter(),
+            "af" => new AfrikaansWordsToNumberConverter(),
             "bg" => new BulgarianWordsToNumberConverter(),
             "ca" => new CatalanWordsToNumberConverter(),
             "cs" => new CzechWordsToNumberConverter(),
