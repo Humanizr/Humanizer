@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 public class LocalisationFeatureVerificationTests
@@ -137,6 +138,32 @@ public class LocalisationFeatureVerificationTests
     public void SupportedNonResourceCulturesAreTracked()
     {
         Assert.Equal(["en-IN", "nn", "ta"], SupportedNonResourceCultures);
+    }
+
+    [Fact]
+    public void SavedLocaleMatrixHasNoPendingCells()
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(
+            Path.Combine(RepoRoot, "docs", "plans", "2026-03-17-locale-feature-matrix.json")));
+
+        var pendingCells = document.RootElement
+            .GetProperty("locales")
+            .EnumerateArray()
+            .SelectMany(locale => locale.GetProperty("registries").EnumerateArray().Select(registry => new
+            {
+                Locale = locale.GetProperty("locale").GetString()!,
+                Registry = registry.GetProperty("registry").GetString()!,
+                CurrentState = registry.GetProperty("currentState").GetString()!,
+                VerifiedOutcome = registry.GetProperty("verifiedOutcome").GetString()!
+            }))
+            .Where(cell => cell.CurrentState.Contains("pending", StringComparison.Ordinal) ||
+                           cell.VerifiedOutcome == "pending")
+            .Select(cell => $"{cell.Locale}/{cell.Registry}: {cell.CurrentState} -> {cell.VerifiedOutcome}")
+            .ToArray();
+
+        Assert.True(
+            pendingCells.Length == 0,
+            "Pending locale matrix cells remain:" + Environment.NewLine + string.Join(Environment.NewLine, pendingCells));
     }
 
     internal static string RepoRoot
