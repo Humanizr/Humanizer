@@ -1,0 +1,3178 @@
+{
+  "generated": "2026-03-17",
+  "supportedNonResourceCultures": [
+    "en-IN",
+    "nn",
+    "ta"
+  ],
+  "locales": [
+    {
+      "locale": "af",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "az",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "bg",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "bn",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ca",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "cs",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "da",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "de",
+      "childCultures": [
+        "de-CH",
+        "de-LI"
+      ],
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "el",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "es",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "fa",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "fi",
+      "childCultures": "fi-FI",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "fil",
+      "childCultures": "fil-PH",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "fr",
+      "childCultures": [
+        "fr-BE",
+        "fr-CH"
+      ],
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "he",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "hr",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "hu",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "hy",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "id",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "is",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "it",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ja",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "childCultures": "ko-KR",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ku",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "lb",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "lt",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "lv",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ms",
+      "childCultures": "ms-MY",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "mt",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "nb",
+      "childCultures": "nb-NO",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "nl",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "pl",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "pt",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ro",
+      "childCultures": "ro-RO",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "childCultures": "ru-RU",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "sk",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "sl",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "sr",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "sr-Latn",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "sv",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "th",
+      "childCultures": "th-TH",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "tr",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "uk",
+      "childCultures": "uk-UA",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "uz-Latn-UZ",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "vi",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "childCultures": null,
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "childCultures": "zh-HK",
+      "registries": [
+        {
+          "registry": "CollectionFormatterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "ampersand_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "FormatterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "resource_backed_default_formatter",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "NumberToWordsConverterRegistry",
+          "registrationPresent": true,
+          "currentState": "existing_registration_present",
+          "defaultProfile": "english_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "OrdinalizerRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "raw_number_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "DateOnlyToOrdinalWordsConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_shaped_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "TimeOnlyToClockNotationConvertersRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "english_phrase_default",
+          "verifiedOutcome": "pending"
+        },
+        {
+          "registry": "WordsToNumberConverterRegistry",
+          "registrationPresent": false,
+          "currentState": "default_backed_pending_verification",
+          "defaultProfile": "throws_for_non_english",
+          "verifiedOutcome": "pending"
+        }
+      ]
+    }
+  ]
+}

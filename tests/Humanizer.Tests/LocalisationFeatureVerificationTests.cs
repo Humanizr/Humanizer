@@ -2,7 +2,14 @@ using System.Text.RegularExpressions;
 
 public class LocalisationFeatureVerificationTests
 {
-    static readonly Regex registryPattern = new("Register\\(\"(?<locale>[^\"]+)\"", RegexOptions.Compiled);
+    static readonly Regex[] registryPatterns =
+    [
+        new("Register\\(\"(?<locale>[^\"]+)\"", RegexOptions.Compiled),
+        new("RegisterDefaultConverter\\(\"(?<locale>[^\"]+)\"", RegexOptions.Compiled),
+        new("RegisterDefaultOrdinalizer\\(\"(?<locale>[^\"]+)\"", RegexOptions.Compiled),
+        new("RegisterNumericSuffixOrdinalizer\\(\"(?<locale>[^\"]+)\"", RegexOptions.Compiled),
+        new("RegisterCzechSlovakPolishFormatter\\(\"(?<locale>[^\"]+)\"", RegexOptions.Compiled)
+    ];
 
     [Fact]
     public void LocalizedResourceLocalesCanBeEnumeratedFromSource()
@@ -36,6 +43,25 @@ public class LocalisationFeatureVerificationTests
         Assert.DoesNotContain("nl", locales);
         Assert.DoesNotContain("pt", locales);
         Assert.DoesNotContain("ta", locales);
+    }
+
+    [Fact]
+    public void OrdinalizerRegistryCoversAllLocalizedResourceLocales()
+    {
+        var localizedLocales = GetLocalizedResourceLocales();
+        var registeredLocales = GetRegisteredLocales("OrdinalizerRegistry.cs");
+
+        Assert.Empty(localizedLocales.Except(registeredLocales));
+    }
+
+    [Fact]
+    public void DateToOrdinalWordsRegistryCoversAllLocalizedResourceLocales()
+    {
+        var localizedLocales = GetLocalizedResourceLocales();
+        var registeredLocales = GetRegisteredLocales("DateToOrdinalWordsConverterRegistry.cs");
+
+        Assert.Empty(localizedLocales.Except(registeredLocales));
+        Assert.Contains("en-US", registeredLocales);
     }
 
     [Fact]
@@ -77,6 +103,25 @@ public class LocalisationFeatureVerificationTests
         var converter = new DefaultTimeOnlyToClockNotationConverter();
 
         Assert.Equal("five past five", converter.Convert(new(5, 5), ClockNotationRounding.None));
+    }
+
+    [Fact]
+    public void DateOnlyToOrdinalWordsRegistryCoversAllLocalizedResourceLocales()
+    {
+        var localizedLocales = GetLocalizedResourceLocales();
+        var registeredLocales = GetRegisteredLocales("DateOnlyToOrdinalWordsConverterRegistry.cs");
+
+        Assert.Empty(localizedLocales.Except(registeredLocales));
+        Assert.Contains("en-US", registeredLocales);
+    }
+
+    [Fact]
+    public void TimeOnlyClockNotationRegistryCoversAllLocalizedResourceLocales()
+    {
+        var localizedLocales = GetLocalizedResourceLocales();
+        var registeredLocales = GetRegisteredLocales("TimeOnlyToClockNotationConvertersRegistry.cs");
+
+        Assert.Empty(localizedLocales.Except(registeredLocales));
     }
 #endif
 
@@ -127,8 +172,8 @@ public class LocalisationFeatureVerificationTests
     {
         var source = File.ReadAllText(Path.Combine(RepoRoot, "src", "Humanizer", "Configuration", registryFileName));
 
-        return registryPattern.Matches(source)
-            .Select(match => match.Groups["locale"].Value)
+        return registryPatterns
+            .SelectMany(pattern => pattern.Matches(source).Select(match => match.Groups["locale"].Value))
             .Distinct(StringComparer.Ordinal)
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();

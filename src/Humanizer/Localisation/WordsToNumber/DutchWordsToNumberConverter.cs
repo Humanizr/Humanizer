@@ -196,7 +196,7 @@ internal class DutchWordsToNumberConverter : GenderlessWordsToNumberConverter
             }
 
             prefix = prefix[..^2];
-            prefix = prefix.Replace("ë", "e", StringComparison.Ordinal);
+            prefix = prefix.Replace("ë", "e");
 
             if (TryParseCardinal(prefix, out var unit) && unit is >= 1 and <= 9)
             {

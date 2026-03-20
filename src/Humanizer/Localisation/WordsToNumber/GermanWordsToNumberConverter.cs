@@ -74,8 +74,8 @@ internal partial class GermanWordsToNumberConverter : GenderlessWordsToNumberCon
         var isNegative = normalized.StartsWith("minus ", StringComparison.Ordinal) || normalized.StartsWith("negativ ", StringComparison.Ordinal);
         if (isNegative)
         {
-            normalized = normalized.Replace("minus ", "", StringComparison.Ordinal);
-            normalized = normalized.Replace("negativ ", "", StringComparison.Ordinal);
+            normalized = normalized.Replace("minus ", string.Empty);
+            normalized = normalized.Replace("negativ ", string.Empty);
             normalized = normalized.Trim();
         }
 
