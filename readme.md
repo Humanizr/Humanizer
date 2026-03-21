@@ -699,7 +699,7 @@ new TimeOnly(14, 30).ToClockNotation() => "duas e meia"
 
 // Round to nearest 5 minutes
 new TimeOnly(15, 7).ToClockNotation(ClockNotationRounding.NearestFiveMinutes) 
-    => "five past three"
+    => "five past three."
 ```
 
 
@@ -743,7 +743,7 @@ Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/By
 Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
 Here are a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
-```c#
+```csharp
 var fileSize = (10).Kilobytes();
 
 fileSize.Bits      => 81920
