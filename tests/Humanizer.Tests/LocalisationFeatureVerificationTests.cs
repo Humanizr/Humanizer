@@ -173,7 +173,7 @@ public class LocalisationFeatureVerificationTests
         var source = File.ReadAllText(Path.Combine(RepoRoot, "src", "Humanizer", "Configuration", registryFileName));
 
         return registryPatterns
-            .SelectMany(pattern => pattern.Matches(source).Select(match => match.Groups["locale"].Value))
+            .SelectMany(pattern => pattern.Matches(source).Cast<Match>().Select(match => match.Groups["locale"].Value))
             .Distinct(StringComparer.Ordinal)
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();

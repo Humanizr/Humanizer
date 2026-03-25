@@ -119,7 +119,7 @@ public class ResourceKeyTests
     ];
 
     public static IEnumerable<object[]> TimeUnitSymbolResourceKeys =>
-        Enum.GetValues<TimeUnit>()
+        GetTimeUnits()
             .Select(unit => new object[] { unit, ResourceKeys.TimeUnitSymbol.GetResourceKey(unit) });
 
     public static IEnumerable<object[]> DataUnitResourceKeys =>
@@ -142,5 +142,14 @@ public class ResourceKeyTests
         HeadingExtensions.Headings
             .Concat(HeadingExtensions.HeadingsShort)
             .Select(resourceKey => new object[] { resourceKey });
+
+    static TimeUnit[] GetTimeUnits()
+    {
+#if NET6_0_OR_GREATER
+        return Enum.GetValues<TimeUnit>();
+#else
+        return (TimeUnit[])Enum.GetValues(typeof(TimeUnit));
+#endif
+    }
 }
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
