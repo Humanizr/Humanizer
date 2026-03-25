@@ -13,24 +13,15 @@ class LithuanianFormatter(CultureInfo culture) :
         }
 
         var resourceKey = $"DataUnit_{dataUnit}";
-        if (count == 1)
+        if (count == 1 && Resources.TryGetResourceWithFallback(resourceKey + "_Singular", Culture, out var singularResource))
         {
-            try
-            {
-                return Resources.GetResource(resourceKey + "_Singular", Culture);
-            }
-            catch (ArgumentException)
-            {
-            }
+            return singularResource;
         }
 
         var resolvedKey = GetResourceKey(resourceKey, (int)count);
-        try
+        if (Resources.TryGetResourceWithFallback(resolvedKey, Culture, out var resource))
         {
-            return Resources.GetResource(resolvedKey, Culture);
-        }
-        catch (ArgumentException)
-        {
+            return resource;
         }
 
         return base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');

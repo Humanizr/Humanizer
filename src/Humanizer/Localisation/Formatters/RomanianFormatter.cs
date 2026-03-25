@@ -29,23 +29,14 @@ class RomanianFormatter(CultureInfo culture) :
         }
 
         var resourceKey = $"DataUnit_{dataUnit}";
-        if (count == 1)
+        if (count == 1 && Resources.TryGetResourceWithFallback(resourceKey + SingularPostfix, Culture, out var singularResource))
         {
-            try
-            {
-                return Resources.GetResource(resourceKey + SingularPostfix, Culture);
-            }
-            catch (ArgumentException)
-            {
-            }
+            return singularResource;
         }
 
-        try
+        if (Resources.TryGetResourceWithFallback(resourceKey, Culture, out var resource))
         {
-            return Resources.GetResource(resourceKey, Culture);
-        }
-        catch (ArgumentException)
-        {
+            return resource;
         }
 
         return base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');

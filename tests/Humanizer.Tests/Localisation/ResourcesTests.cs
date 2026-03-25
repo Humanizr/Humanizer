@@ -16,4 +16,12 @@ public class ResourcesTests
         var format = Resources.GetResource("DateHumanize_MultipleYearsAgo", new("ro"));
         Assert.Equal("acum {0}{1} ani", format);
     }
+
+    [Fact]
+    public void GetResourceFallsBackToParentCulture()
+    {
+        var format = Resources.GetResource("DateHumanize_MultipleYearsAgo", new("de-CH"));
+
+        Assert.Equal("vor {0} Jahren", format);
+    }
 }

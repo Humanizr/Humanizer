@@ -18,4 +18,11 @@ public class ToFullWordsTests
     [Fact]
     public void ReturnsPluralGigabytes() =>
         Assert.Equal("10 гигабајтова", ByteSize.FromGigabytes(10).ToFullWords());
+
+    [Theory]
+    [InlineData(112, "112 бајтова")]
+    [InlineData(113, "113 бајтова")]
+    [InlineData(114, "114 бајтова")]
+    public void ReturnsPluralBytesForTeenSuffixes(int value, string expected) =>
+        Assert.Equal(expected, ByteSize.FromBytes(value).ToFullWords());
 }

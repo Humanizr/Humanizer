@@ -5,7 +5,7 @@ using System.Globalization;
 internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumberConverter>
 {
     public WordsToNumberConverterRegistry()
-        : base(CreateConverter)
+        : base(culture => new DefaultWordsToNumberConverter(culture))
     {
         Register("en", _ => new EnglishWordsToNumberConverter());
         Register("af", _ => new AfrikaansWordsToNumberConverter());
@@ -69,61 +69,4 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         Register("uz-Latn-UZ", _ => new UzbekLatnWordsToNumberConverter());
         Register("uz-Cyrl-UZ", _ => new UzbekCyrlWordsToNumberConverter());
     }
-
-    private static IWordsToNumberConverter CreateConverter(CultureInfo culture) =>
-        culture.TwoLetterISOLanguageName switch
-        {
-            "en" => new EnglishWordsToNumberConverter(),
-            "af" => new AfrikaansWordsToNumberConverter(),
-            "ar" => new ArabicWordsToNumberConverter(),
-            "bg" => new BulgarianWordsToNumberConverter(),
-            "bn" => new BengaliWordsToNumberConverter(),
-            "ca" => new CatalanWordsToNumberConverter(),
-            "cs" => new CzechWordsToNumberConverter(),
-            "da" => new DanishWordsToNumberConverter(),
-            "de" => new GermanWordsToNumberConverter(),
-            "el" => new GreekWordsToNumberConverter(),
-            "fi" => new FinnishWordsToNumberConverter(),
-            "fr" => new FrenchWordsToNumberConverter(),
-            "he" => new HebrewWordsToNumberConverter(),
-            "hr" => new CroatianWordsToNumberConverter(),
-            "ku" => new KurdishWordsToNumberConverter(),
-            "lb" => new LuxembourgishWordsToNumberConverter(),
-            "hu" => new HungarianWordsToNumberConverter(),
-            "lt" => new LithuanianWordsToNumberConverter(),
-            "lv" => new LatvianWordsToNumberConverter(),
-            "mt" => new MalteseWordsToNumberConverter(),
-            "pl" => new PolishWordsToNumberConverter(),
-            "pt" => new PortugueseWordsToNumberConverter(),
-            "it" => new ItalianWordsToNumberConverter(),
-            "ro" => new RomanianWordsToNumberConverter(),
-            "sl" => new SlovenianWordsToNumberConverter(),
-            "sr" => culture.Name.Contains("Latn", StringComparison.Ordinal)
-                ? new SerbianLatinWordsToNumberConverter()
-                : new SerbianCyrillicWordsToNumberConverter(),
-            "es" => new SpanishWordsToNumberConverter(),
-            "fa" => new PersianWordsToNumberConverter(),
-            "hy" => new ArmenianWordsToNumberConverter(),
-            "nl" => new DutchWordsToNumberConverter(),
-            "sv" => new SwedishWordsToNumberConverter(),
-            "is" => new IcelandicWordsToNumberConverter(),
-            "nb" => new NorwegianBokmalWordsToNumberConverter(),
-            "fil" => new FilipinoWordsToNumberConverter(),
-            "id" => new IndonesianWordsToNumberConverter(),
-            "ms" => new MalayWordsToNumberConverter(),
-            "ru" => new RussianWordsToNumberConverter(),
-            "sk" => new SlovakWordsToNumberConverter(),
-            "tr" => new TurkishWordsToNumberConverter(),
-            "th" => new ThaiWordsToNumberConverter(),
-            "uk" => new UkrainianWordsToNumberConverter(),
-            "az" => new AzerbaijaniWordsToNumberConverter(),
-            "ja" => new JapaneseWordsToNumberConverter(),
-            "ko" => new KoreanWordsToNumberConverter(),
-            "vi" => new VietnameseWordsToNumberConverter(),
-            "zh" => new ChineseWordsToNumberConverter(),
-            "uz" => culture.Name.Contains("Cyrl", StringComparison.Ordinal)
-                ? new UzbekCyrlWordsToNumberConverter()
-                : new UzbekLatnWordsToNumberConverter(),
-            _ => new DefaultWordsToNumberConverter(culture)
-        };
 }

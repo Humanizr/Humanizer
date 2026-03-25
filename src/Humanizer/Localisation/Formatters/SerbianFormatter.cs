@@ -14,24 +14,15 @@ class SerbianFormatter(CultureInfo culture) :
         }
 
         var resourceKey = $"DataUnit_{dataUnit}";
-        if (count == 1)
+        if (count == 1 && Resources.TryGetResourceWithFallback(resourceKey + SingularPostfix, Culture, out var singularResource))
         {
-            try
-            {
-                return Resources.GetResource(resourceKey + SingularPostfix, Culture);
-            }
-            catch (ArgumentException)
-            {
-            }
+            return singularResource;
         }
 
         var resolvedKey = GetResourceKey(resourceKey, (int)count);
-        try
+        if (Resources.TryGetResourceWithFallback(resolvedKey, Culture, out var resource))
         {
-            return Resources.GetResource(resolvedKey, Culture);
-        }
-        catch (ArgumentException)
-        {
+            return resource;
         }
 
         return base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');
@@ -40,7 +31,8 @@ class SerbianFormatter(CultureInfo culture) :
     protected override string GetResourceKey(string resourceKey, int number)
     {
         var mod10 = number % 10;
-        if (mod10 is > 1 and < 5 && number != 12 && number != 13 && number != 14)
+        var mod100 = number % 100;
+        if (mod10 is > 1 and < 5 && mod100 is not 12 and not 13 and not 14)
         {
             return resourceKey + PaucalPostfix;
         }

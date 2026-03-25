@@ -58,16 +58,18 @@ public static class Resources
     /// <returns>true if the specified string resource was found for the given culture; otherwise, false.</returns>
     public static bool TryGetResource(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result)
     {
-        culture ??= CultureInfo.CurrentUICulture;
+        string? resource = null;
 
-        // Force the exact culture's resource set to load so TryGetResource behaves consistently
-        // across target frameworks instead of depending on prior satellite assembly load order.
-        var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: true, tryParents: false);
-        result = resourceSet?.GetString(resourceKey);
+        if (culture != null)
+        {
+            var exactResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: true, tryParents: false);
+            resource = exactResourceSet?.GetString(resourceKey);
+        }
 
-        // If the exact culture doesn't contain the resource, fall back through the standard
-        // ResourceManager chain so specific cultures can resolve parent-culture resources.
-        result ??= ResourceManager.GetString(resourceKey, culture);
+        result = resource ?? ResourceManager.GetString(resourceKey, culture);
         return result is not null;
     }
+
+    internal static bool TryGetResourceWithFallback(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result) =>
+        TryGetResource(resourceKey, culture, out result);
 }

@@ -675,4 +675,28 @@
   <data name="W_Short" xml:space="preserve">
     <value>З</value>
   </data>
-<data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>миллисекунду назад</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>через миллисекунду</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>{0} миллисекунд назад</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>через {0} миллисекунд</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>неделю назад</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>через неделю</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>{0} недель назад</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>через {0} недель</value></data></root>
+  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
+    <value>миллисекунду назад</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
+    <value>через миллисекунду</value>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
+    <value>{0} миллисекунд назад</value>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
+    <value>через {0} миллисекунд</value>
+  </data>
+  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
+    <value>неделю назад</value>
+  </data>
+  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
+    <value>через неделю</value>
+  </data>
+  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
+    <value>{0} недель назад</value>
+  </data>
+  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
+    <value>через {0} недель</value>
+  </data>
+</root>
