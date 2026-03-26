@@ -6,61 +6,29 @@ class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToC
 {
     public TimeOnlyToClockNotationConvertersRegistry() : base(culture => new DefaultTimeOnlyToClockNotationConverter(culture))
     {
-        RegisterDefaultConverter("af");
-        RegisterDefaultConverter("ar");
-        RegisterDefaultConverter("az");
-        RegisterDefaultConverter("bg");
-        RegisterDefaultConverter("bn");
+        RegisterDefaultConverters("af", "ar", "az", "bg", "bn");
         Register("ca", _ => new CaTimeOnlyToClockNotationConverter());
-        RegisterDefaultConverter("cs");
-        RegisterDefaultConverter("da");
+        RegisterDefaultConverters("cs", "da");
         Register("de", _ => new GermanTimeOnlyToClockNotationConverter());
-        RegisterDefaultConverter("el");
+        RegisterDefaultConverters("el");
         Register("es", _ => new EsTimeOnlyToClockNotationConverter());
-        RegisterDefaultConverter("fa");
-        RegisterDefaultConverter("fi");
-        RegisterDefaultConverter("fil");
+        RegisterDefaultConverters("fa", "fi", "fil");
         Register("fr", _ => new FrTimeOnlyToClockNotationConverter());
-        RegisterDefaultConverter("he");
-        RegisterDefaultConverter("hr");
-        RegisterDefaultConverter("hu");
-        RegisterDefaultConverter("hy");
-        RegisterDefaultConverter("id");
-        RegisterDefaultConverter("is");
-        RegisterDefaultConverter("it");
-        RegisterDefaultConverter("ja");
-        RegisterDefaultConverter("ko");
-        RegisterDefaultConverter("ku");
+        RegisterDefaultConverters("he", "hr", "hu", "hy", "id", "is", "it", "ja", "ko", "ku");
         Register("lb", _ => new LbTimeOnlyToClockNotationConverter());
-        RegisterDefaultConverter("lt");
-        RegisterDefaultConverter("lv");
-        RegisterDefaultConverter("ms");
-        RegisterDefaultConverter("mt");
-        RegisterDefaultConverter("nb");
-        RegisterDefaultConverter("nl");
-        RegisterDefaultConverter("pl");
+        RegisterDefaultConverters("lt", "lv", "ms", "mt", "nb", "nl", "pl");
         Register("pt", _ => new PortugueseTimeOnlyToClockNotationConverter());
         Register("pt-BR", _ => new BrazilianPortugueseTimeOnlyToClockNotationConverter());
-        RegisterDefaultConverter("ro");
-        RegisterDefaultConverter("ru");
-        RegisterDefaultConverter("sk");
-        RegisterDefaultConverter("sl");
-        RegisterDefaultConverter("sr");
-        RegisterDefaultConverter("sr-Latn");
-        RegisterDefaultConverter("sv");
-        RegisterDefaultConverter("th");
-        RegisterDefaultConverter("tr");
-        RegisterDefaultConverter("uk");
-        RegisterDefaultConverter("uz-Cyrl-UZ");
-        RegisterDefaultConverter("uz-Latn-UZ");
-        RegisterDefaultConverter("vi");
-        RegisterDefaultConverter("zh-CN");
-        RegisterDefaultConverter("zh-Hans");
-        RegisterDefaultConverter("zh-Hant");
+        RegisterDefaultConverters("ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "th", "tr", "uk", "uz-Cyrl-UZ", "uz-Latn-UZ", "vi", "zh-CN", "zh-Hans", "zh-Hant");
     }
 
-    void RegisterDefaultConverter(string localeCode) =>
-        Register(localeCode, culture => new DefaultTimeOnlyToClockNotationConverter(culture));
+    void RegisterDefaultConverters(params string[] localeCodes)
+    {
+        foreach (var localeCode in localeCodes)
+        {
+            Register(localeCode, culture => new DefaultTimeOnlyToClockNotationConverter(culture));
+        }
+    }
 }
 
 #endif
