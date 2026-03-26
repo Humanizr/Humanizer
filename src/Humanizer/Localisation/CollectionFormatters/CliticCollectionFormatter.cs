@@ -21,17 +21,44 @@ class CliticCollectionFormatter(string conjunction) : ICollectionFormatter
         ArgumentNullException.ThrowIfNull(collection);
         ArgumentNullException.ThrowIfNull(objectFormatter);
 
-        var items = collection.Select(objectFormatter)
-            .Select(item => item?.Trim())
-            .Where(item => !string.IsNullOrWhiteSpace(item))
-            .ToArray();
+        StringBuilder? head = null;
+        string? lastItem = null;
+        var count = 0;
 
-        return items.Length switch
+        foreach (var item in collection)
+        {
+            var formatted = objectFormatter(item)?.Trim();
+            if (string.IsNullOrWhiteSpace(formatted))
+            {
+                continue;
+            }
+
+            if (count == 0)
+            {
+                lastItem = formatted;
+                count = 1;
+                continue;
+            }
+
+            if (count == 1)
+            {
+                head = new StringBuilder(lastItem);
+                lastItem = formatted;
+                count = 2;
+                continue;
+            }
+
+            head!.Append(", ");
+            head.Append(lastItem);
+            lastItem = formatted;
+            count++;
+        }
+
+        return count switch
         {
             0 => string.Empty,
-            1 => items[0]!,
-            2 => $"{items[0]} {separator}{items[1]}",
-            _ => $"{string.Join(", ", items, 0, items.Length - 1)} {separator}{items[^1]}"
+            1 => lastItem!,
+            _ => string.Concat(head, " ", separator, lastItem)
         };
     }
 
