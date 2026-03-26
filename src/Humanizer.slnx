@@ -84,6 +84,7 @@
   <Project Path="Benchmarks/Benchmarks.csproj" />
   <Project Path="../tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj" />
   <Project Path="Humanizer.Analyzers/Humanizer.Analyzers.csproj" />
+  <Project Path="Humanizer.SourceGenerators/Humanizer.SourceGenerators.csproj" />
   <Project Path="../tests/Humanizer.Tests/Humanizer.Tests.csproj" />
   <Project Path="Humanizer/Humanizer.csproj" />
 </Solution>

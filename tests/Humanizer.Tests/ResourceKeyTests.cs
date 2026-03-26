@@ -1,6 +1,14 @@
 ﻿#pragma warning disable xUnit1026 // Theory methods should use all of their parameters
 public class ResourceKeyTests
 {
+    [Fact]
+    public void GeneratedResourceNameConstantsMatchKnownKeys()
+    {
+        Assert.Equal("DateHumanize_Never", ResourceKeys.Names.DateHumanize_Never);
+        Assert.Equal("TimeSpanHumanize_Age", ResourceKeys.Names.TimeSpanHumanize_Age);
+        Assert.Equal("DataUnit_ByteSymbol", ResourceKeys.Names.DataUnit_ByteSymbol);
+    }
+
     [Theory]
     [MemberData(nameof(DateHumanizeResourceKeys))]
     public void DateHumanizeKeysGeneration(int instance, string expected, string actual) =>

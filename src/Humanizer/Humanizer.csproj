@@ -11,6 +11,12 @@
     <PackageReference Include="System.Memory" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'" />
     <PackageReference Include="System.ComponentModel.Annotations"  Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
   </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="CodeGen\*.manifest" />
+    <AdditionalFiles Include="CodeGen\*.json" />
+    <AdditionalFiles Include="Properties\Resources.resx" />
+  </ItemGroup>
   
   <ItemGroup>
     <None Update="FluentDate\InDate.Months.tt">
@@ -55,6 +61,7 @@
   <ItemGroup>
     <!-- Reference the analyzer project to ensure it builds first and its outputs are available for packing -->
     <ProjectReference Include="..\Humanizer.Analyzers\Humanizer.Analyzers.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Humanizer.SourceGenerators\Humanizer.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   
   <Target Name="BuildAnalyzerVariants">
