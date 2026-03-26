@@ -99,3 +99,4 @@ Only English (`en`) is currently supported. Passing a non-English culture throws
 - [Number to Ordinal Words](number-to-ordinal-words.md) - Convert numbers to "first", "second", etc.
 - [Ordinalization](ordinalization.md) - Convert numbers to "1st", "2nd", "3rd", etc.
 - [Roman Numerals](roman-numerals.md) - Convert to and from Roman numerals
+- [Metric Numerals](metric-numerals.md) - Human-friendly metric representations

@@ -51,7 +51,7 @@ A single call registers both the plural and singular forms. You do not need to c
 By default, `matchEnding` is `true`. This means the rule also applies when the word appears as the ending of a longer word.
 
 ```csharp
-// matchEnding: true (default) — matches "person" and "salesperson"
+// matchEnding: true (default) - matches "person" and "salesperson"
 Vocabularies.Default.AddIrregular("person", "people");
 
 "person".Pluralize()       // => "people"
@@ -61,7 +61,7 @@ Vocabularies.Default.AddIrregular("person", "people");
 Set `matchEnding: false` to match only the exact word.
 
 ```csharp
-// matchEnding: false — matches only "person", not "salesperson"
+// matchEnding: false - matches only "person", not "salesperson"
 Vocabularies.Default.AddIrregular("person", "people", matchEnding: false);
 
 "person".Pluralize()       // => "people"

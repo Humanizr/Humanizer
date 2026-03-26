@@ -25,6 +25,19 @@ public static string Humanize(this TimeSpan timeSpan,
     bool toWords = false)
 ```
 
+A second overload accepts a `countEmptyUnits` parameter:
+
+```csharp
+public static string Humanize(this TimeSpan timeSpan,
+    int precision,
+    bool countEmptyUnits,
+    CultureInfo? culture = null,
+    TimeUnit maxUnit = TimeUnit.Week,
+    TimeUnit minUnit = TimeUnit.Millisecond,
+    string? collectionSeparator = ", ",
+    bool toWords = false)
+```
+
 ## Precision
 
 The `precision` parameter controls the maximum number of time units returned. The default is 1, which returns only the largest unit:
