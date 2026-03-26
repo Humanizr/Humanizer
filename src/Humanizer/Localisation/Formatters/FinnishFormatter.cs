@@ -12,7 +12,7 @@ class FinnishFormatter(CultureInfo culture) :
             return base.DataUnitHumanize(dataUnit, count, toSymbol);
         }
 
-        var resourceKey = $"DataUnit_{dataUnit}";
+        var resourceKey = DataUnitResourceKeys.GetResourceKey(dataUnit, false);
         if (count == 1 && Resources.TryGetResourceWithFallback(resourceKey + SingularPostfix, Culture, out var singularResource))
         {
             return singularResource;
