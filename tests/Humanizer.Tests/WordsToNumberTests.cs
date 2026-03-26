@@ -192,6 +192,7 @@ public class WordsToNumberTests_Catalan
     [InlineData("trenta-una", 31, null)]
     [InlineData("dos-cents", 200, null)]
     [InlineData("dues-centes", 200, null)]
+    [InlineData("dos cents i una", 201, null)]
     [InlineData("cent vint-i-una", 121, null)]
     [InlineData("dos mil vint-i-u", 2021, null)]
     [InlineData("un milió una", 1000001, null)]
@@ -683,6 +684,7 @@ public class WordsToNumberTests_Czech
     [Theory]
     [InlineData("nula", 0, null)]
     [InlineData("sto dvanáct", 112, null)]
+    [InlineData("dvě sta pět", 205, null)]
     [InlineData("jeden tisíc", 1000, null)]
     [InlineData("dvě miliardy sto čtyřicet sedm milionů čtyři sta osmdesát tři tisíc šest set čtyřicet sedm", 2147483647, null)]
     [InlineData("mínus jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dva", -1501001892, null)]
@@ -991,6 +993,7 @@ public class WordsToNumberTests_SerbianCyrillic
 {
     [Theory]
     [InlineData("нула", 0, null)]
+    [InlineData("минус четрдесет три", -43, null)]
     [InlineData("четрдесет три", 43, null)]
     [InlineData("петсто четрдесет седам", 547, null)]
     [InlineData("десет милиона", 10000000, null)]
@@ -1007,6 +1010,7 @@ public class WordsToNumberTests_SerbianLatin
 {
     [Theory]
     [InlineData("nula", 0, null)]
+    [InlineData("minus četrdeset tri", -43, null)]
     [InlineData("četrdeset tri", 43, null)]
     [InlineData("petsto četrdeset sedam", 547, null)]
     [InlineData("deset miliona", 10000000, null)]
@@ -1389,5 +1393,53 @@ public class WordsToNumberTests_NonEnglish
             word.ToNumber(culture));
 
         Assert.Contains($"'{culture.TwoLetterISOLanguageName}'", ex.Message);
+    }
+}
+
+[UseCulture("uz-Latn-UZ")]
+public class WordsToNumberTests_UzbekLatin
+{
+    [Theory]
+    [InlineData("bir", 1, null)]
+    [InlineData("minus yuz yigirmanchi", -120, null)]
+    [InlineData("uch ming besh yuz bir", 3501, null)]
+    public void TryToNumber_ValidInput_UzbekLatin(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("yigirma foo", 0, "foo")]
+    public void TryToNumber_InvalidInput_UzbekLatin(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("uz-Cyrl-UZ")]
+public class WordsToNumberTests_UzbekCyrillic
+{
+    [Theory]
+    [InlineData("бир", 1, null)]
+    [InlineData("минус юз йигирманчи", -120, null)]
+    [InlineData("уч минг беш юз бир", 3501, null)]
+    public void TryToNumber_ValidInput_UzbekCyrillic(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("йигирма foo", 0, "foo")]
+    public void TryToNumber_InvalidInput_UzbekCyrillic(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
     }
 }
