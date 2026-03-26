@@ -70,7 +70,7 @@ internal class FilipinoWordsToNumberConverter : GenderlessWordsToNumberConverter
             return true;
         }
 
-        unrecognizedWord = normalized.Split(' ', StringSplitOptions.RemoveEmptyEntries).LastOrDefault() ?? normalized;
+        unrecognizedWord = WordsToNumberTokenizer.GetLastTokenOrSelf(normalized);
         parsedValue = default;
         return false;
     }
@@ -92,12 +92,13 @@ internal class FilipinoWordsToNumberConverter : GenderlessWordsToNumberConverter
             return true;
         }
 
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var total = 0;
         var current = 0;
 
-        foreach (var token in tokens)
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var token = tokenSpan.ToString();
+
             if (token == "at")
             {
                 continue;

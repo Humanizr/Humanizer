@@ -84,7 +84,7 @@ internal class DutchWordsToNumberConverter : GenderlessWordsToNumberConverter
             return true;
         }
 
-        unrecognizedWord = normalized.Split(' ', StringSplitOptions.RemoveEmptyEntries).LastOrDefault() ?? normalized;
+        unrecognizedWord = WordsToNumberTokenizer.GetLastTokenOrSelf(normalized);
         parsedValue = default;
         return false;
     }
@@ -110,8 +110,10 @@ internal class DutchWordsToNumberConverter : GenderlessWordsToNumberConverter
             var total = 0;
             var current = 0;
 
-            foreach (var token in words.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+            foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
             {
+                var token = tokenSpan.ToString();
+
                 if (!TryParseCardinal(token, out var tokenValue))
                 {
                     value = default;

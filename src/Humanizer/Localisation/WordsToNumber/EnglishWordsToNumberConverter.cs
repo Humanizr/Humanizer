@@ -98,14 +98,15 @@ internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberCo
 
     private static bool TryConvertWordsToNumber(string words, out int result, out string? unrecognizedWord)
     {
-        var wordsArray = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         result = 0;
         unrecognizedWord = null;
         var current = 0;
         var hasOrdinal = false;
 
-        foreach (var word in wordsArray)
+        foreach (var token in WordsToNumberTokenizer.Enumerate(words))
         {
+            var word = token.ToString();
+
             if (OrdinalsMap.TryGetValue(word, out var ordinalValue))
             {
                 result += current + ordinalValue;

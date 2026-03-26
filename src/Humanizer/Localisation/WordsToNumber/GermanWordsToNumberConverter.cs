@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 internal partial class GermanWordsToNumberConverter : GenderlessWordsToNumberConverter
 {
     private const string CompoundNumberPattern = @"(?<unit>ein|eins|eine|einen|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|dreizehn|vierzehn|fünfzehn|sechzehn|siebzehn|achtzehn|neunzehn)und(?<ten>zwanzig|dreißig|dreissig|vierzig|fünfzig|sechzig|siebzig|achtzig|neunzig)";
-    private const string ScalePattern = @"(hundert|tausend|million(en)?|milliarde(n)?)";
 
     private static readonly FrozenDictionary<string, int> NumbersMap = new Dictionary<string, int>
     {
@@ -32,21 +31,17 @@ internal partial class GermanWordsToNumberConverter : GenderlessWordsToNumberCon
         {"dreissigste",30}, {"dreissigster",30}, {"dreissigstes",30}, {"dreißigsten",30}
     }.ToFrozenDictionary();
 
+    private static readonly string[] OrdinalSuffixes = ["ste", "sten", "ster", "stes", "te", "ten", "ter", "tes"];
+
 #if NET7_0_OR_GREATER
     [GeneratedRegex(CompoundNumberPattern, RegexOptions.Compiled | RegexOptions.CultureInvariant)]
     private static partial Regex CompoundNumberRegexGenerated();
 
-    [GeneratedRegex(ScalePattern, RegexOptions.Compiled | RegexOptions.CultureInvariant)]
-    private static partial Regex ScaleRegexGenerated();
-
     private static Regex CompoundNumberRegex() => CompoundNumberRegexGenerated();
-    private static Regex ScaleRegex() => ScaleRegexGenerated();
 #else
     private static readonly Regex CompoundNumberRegexField = new(CompoundNumberPattern, RegexOptions.Compiled | RegexOptions.CultureInvariant);
-    private static readonly Regex ScaleRegexField = new(ScalePattern, RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private static Regex CompoundNumberRegex() => CompoundNumberRegexField;
-    private static Regex ScaleRegex() => ScaleRegexField;
 #endif
 
     public override int Convert(string words)
@@ -114,14 +109,15 @@ internal partial class GermanWordsToNumberConverter : GenderlessWordsToNumberCon
 
     private static bool TryConvertWordsToNumber(string words, out int result, out string? unrecognizedWord)
     {
-        var wordsArray = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         result = 0;
         unrecognizedWord = null;
         var current = 0;
         var hasOrdinal = false;
 
-        foreach (var word in wordsArray)
+        foreach (var token in WordsToNumberTokenizer.Enumerate(words))
         {
+            var word = token.ToString();
+
             if (OrdinalsMap.TryGetValue(word, out var ordinalValue))
             {
                 result += current + ordinalValue;
@@ -213,7 +209,7 @@ internal partial class GermanWordsToNumberConverter : GenderlessWordsToNumberCon
 
     private static bool TryParseOrdinalStem(string word, out int value)
     {
-        foreach (var suffix in new[] { "ste", "sten", "ster", "stes", "te", "ten", "ter", "tes" })
+        foreach (var suffix in OrdinalSuffixes)
         {
             if (word.EndsWith(suffix, StringComparison.Ordinal) && word.Length > suffix.Length)
             {

@@ -107,8 +107,10 @@ internal class PersianWordsToNumberConverter : GenderlessWordsToNumberConverter
         var current = 0L;
         unrecognizedWord = null;
 
-        foreach (var token in words.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var token = tokenSpan.ToString();
+
             if (token == "و")
             {
                 continue;

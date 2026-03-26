@@ -114,8 +114,10 @@ internal class SerbianLatinWordsToNumberConverter : GenderlessWordsToNumberConve
         var current = 0;
         unrecognizedWord = null;
 
-        foreach (var token in words.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var token = tokenSpan.ToString();
+
             if (!CardinalMap.TryGetValue(token, out var numeric))
             {
                 value = default;

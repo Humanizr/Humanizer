@@ -74,8 +74,10 @@ internal class KurdishWordsToNumberConverter : GenderlessWordsToNumberConverter
         var current = 0;
         unrecognizedWord = null;
 
-        foreach (var token in words.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var token = tokenSpan.ToString();
+
             if (token == "و")
             {
                 continue;

@@ -99,8 +99,7 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
             return true;
         }
 
-        var tokens = normalized.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        unrecognizedWord = tokens.LastOrDefault() ?? normalized;
+        unrecognizedWord = WordsToNumberTokenizer.GetLastTokenOrSelf(normalized);
         parsedValue = default;
         return false;
     }
@@ -123,8 +122,10 @@ internal class IcelandicWordsToNumberConverter : GenderlessWordsToNumberConverte
             var total = 0;
             var current = 0;
 
-            foreach (var token in words.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+            foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
             {
+                var token = tokenSpan.ToString();
+
                 if (token == "og")
                 {
                     continue;

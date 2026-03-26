@@ -146,8 +146,10 @@ internal class SlovenianWordsToNumberConverter : GenderlessWordsToNumberConverte
         var current = 0;
         unrecognizedWord = null;
 
-        foreach (var rawToken in words.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var rawToken = tokenSpan.ToString();
+
             if (!TryParseToken(rawToken, out var numeric))
             {
                 value = default;
