@@ -139,7 +139,7 @@ To contribute a new language or improve existing localizations:
 3. Register the formatter in `Configurator`
 4. Add tests for the new language
 
-See the [Contributing Guide](../CONTRIBUTING.md) for details.
+See the [Contributing Guide](../.github/CONTRIBUTING.md) for details.
 
 ## Related Topics
 
