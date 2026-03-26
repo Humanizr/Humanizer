@@ -91,11 +91,9 @@ internal class BengaliWordsToNumberConverter : GenderlessWordsToNumberConverter
         var total = 0;
         var current = 0;
         unrecognizedWord = null;
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-        for (var i = 0; i < tokens.Length; i++)
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
-            var token = tokens[i];
+            var token = tokenSpan.ToString();
             if (!CardinalMap.TryGetValue(token, out var numeric))
             {
                 value = default;

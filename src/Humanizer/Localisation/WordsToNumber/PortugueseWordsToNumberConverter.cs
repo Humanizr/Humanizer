@@ -145,27 +145,30 @@ internal partial class PortugueseWordsToNumberConverter : GenderlessWordsToNumbe
 
     static bool TryParseCardinal(string words, out int value, out string? unrecognizedWord)
     {
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var total = 0;
         var current = 0;
         unrecognizedWord = null;
+        var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
+        string? pendingToken = null;
 
-        for (var i = 0; i < tokens.Length; i++)
+        while (WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var token))
         {
-            var token = tokens[i];
             if (token == "e")
             {
                 continue;
             }
 
             if (token == "mil" &&
-                i + 1 < tokens.Length &&
-                tokens[i + 1] == "milhões")
+                WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var milhoesToken))
             {
-                total += (current == 0 ? 1 : current) * 1_000_000_000;
-                current = 0;
-                i++;
-                continue;
+                if (milhoesToken == "milhões")
+                {
+                    total += (current == 0 ? 1 : current) * 1_000_000_000;
+                    current = 0;
+                    continue;
+                }
+
+                pendingToken = milhoesToken;
             }
 
             if (!CardinalMap.TryGetValue(token, out var numeric))

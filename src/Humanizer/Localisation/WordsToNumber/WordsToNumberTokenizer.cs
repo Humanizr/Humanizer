@@ -16,6 +16,25 @@ static class WordsToNumberTokenizer
         return lastToken.IsEmpty ? words : lastToken.ToString();
     }
 
+    public static bool TryReadNext(ref Enumerator enumerator, ref string? pendingToken, [NotNullWhen(true)] out string? token)
+    {
+        if (pendingToken != null)
+        {
+            token = pendingToken;
+            pendingToken = null;
+            return true;
+        }
+
+        if (enumerator.MoveNext())
+        {
+            token = enumerator.Current.ToString();
+            return true;
+        }
+
+        token = null;
+        return false;
+    }
+
     public ref struct TokenEnumerable(string words)
     {
         readonly ReadOnlySpan<char> words = words.AsSpan();

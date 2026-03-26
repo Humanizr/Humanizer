@@ -145,13 +145,14 @@ internal class BulgarianWordsToNumberConverter : GenderlessWordsToNumberConverte
 
     static bool TryParseCardinal(string words, out long value, out string? unrecognizedWord)
     {
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         long total = 0;
         long current = 0;
         unrecognizedWord = null;
 
-        foreach (var token in tokens)
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var token = tokenSpan.ToString();
+
             if (token == "и")
             {
                 continue;

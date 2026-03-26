@@ -98,35 +98,41 @@ internal class FrenchWordsToNumberConverter : GenderlessWordsToNumberConverter
 
     static bool TryParseCardinal(string words, out int value, out string? unrecognizedWord)
     {
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var total = 0;
         var current = 0;
         unrecognizedWord = null;
+        var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
+        string? pendingToken = null;
 
-        for (var i = 0; i < tokens.Length; i++)
+        while (WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var token))
         {
-            var token = tokens[i];
             if (token == "et")
             {
                 continue;
             }
 
             if (token == "quatre" &&
-                i + 1 < tokens.Length &&
-                tokens[i + 1] is "vingt" or "vingts")
+                WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var quatreVingtToken))
             {
-                current += 80;
-                i++;
-                continue;
+                if (quatreVingtToken is "vingt" or "vingts")
+                {
+                    current += 80;
+                    continue;
+                }
+
+                pendingToken = quatreVingtToken;
             }
 
-            if (token is "dix" && current is 60 or 80 && i + 1 < tokens.Length &&
-                CardinalMap.TryGetValue(tokens[i + 1], out var teenPart) &&
-                teenPart is >= 1 and <= 9)
+            if (token is "dix" && current is 60 or 80 &&
+                WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var teenToken))
             {
-                current += 10 + teenPart;
-                i++;
-                continue;
+                if (CardinalMap.TryGetValue(teenToken, out var teenPart) && teenPart is >= 1 and <= 9)
+                {
+                    current += 10 + teenPart;
+                    continue;
+                }
+
+                pendingToken = teenToken;
             }
 
             if (!CardinalMap.TryGetValue(token, out var numeric))

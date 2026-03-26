@@ -120,27 +120,30 @@ internal class FinnishWordsToNumberConverter : GenderlessWordsToNumberConverter
 
     static bool TryParsePhrase(string words, out long value, out string? unrecognizedWord)
     {
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         long total = 0;
         unrecognizedWord = null;
+        var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
+        string? pendingToken = null;
 
-        for (var i = 0; i < tokens.Length; i++)
+        while (WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var token))
         {
-            if (!TryParseCompound(tokens[i], out var segmentValue))
+            if (!TryParseCompound(token, out var segmentValue))
             {
                 value = default;
-                unrecognizedWord = tokens[i];
+                unrecognizedWord = token;
                 return false;
             }
 
             if (segmentValue < 1000 &&
-                i + 1 < tokens.Length &&
-                BareScaleMap.TryGetValue(tokens[i + 1], out var scaleValue) &&
-                scaleValue >= 1_000)
+                WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var scaleToken))
             {
-                total += segmentValue * scaleValue;
-                i++;
-                continue;
+                if (BareScaleMap.TryGetValue(scaleToken, out var scaleValue) && scaleValue >= 1_000)
+                {
+                    total += segmentValue * scaleValue;
+                    continue;
+                }
+
+                pendingToken = scaleToken;
             }
 
             total += segmentValue;

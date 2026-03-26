@@ -94,28 +94,31 @@ internal class HebrewWordsToNumberConverter : GenderlessWordsToNumberConverter
             return true;
         }
 
-        var tokens = normalized.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        if (tokens.Length == 0)
+        var tokenizer = WordsToNumberTokenizer.Enumerate(normalized).GetEnumerator();
+        string? pendingToken = null;
+        if (!WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var firstToken))
         {
             throw new ArgumentException("Input words cannot be empty.");
         }
 
         var negative = false;
-        if (IsNegative(tokens[0]))
+        pendingToken = firstToken;
+        if (IsNegative(firstToken))
         {
             negative = true;
-            var remainingTokens = new string[tokens.Length - 1];
-            Array.Copy(tokens, 1, remainingTokens, 0, remainingTokens.Length);
-            tokens = remainingTokens;
-            if (tokens.Length == 0)
+            pendingToken = null;
+
+            if (!WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var numberToken))
             {
                 parsedValue = default;
                 unrecognizedWord = "מינוס";
                 return false;
             }
+
+            pendingToken = numberToken;
         }
 
-        if (!TryParse(tokens, out var parsedLong, out unrecognizedWord))
+        if (!TryParse(ref tokenizer, ref pendingToken, out var parsedLong, out unrecognizedWord))
         {
             parsedValue = default;
             return false;
@@ -138,15 +141,14 @@ internal class HebrewWordsToNumberConverter : GenderlessWordsToNumberConverter
         return true;
     }
 
-    static bool TryParse(string[] tokens, out long parsedValue, out string? unrecognizedWord)
+    static bool TryParse(ref WordsToNumberTokenizer.Enumerator tokenizer, ref string? pendingToken, out long parsedValue, out string? unrecognizedWord)
     {
         long total = 0;
         long current = 0;
         unrecognizedWord = null;
 
-        for (var i = 0; i < tokens.Length; i++)
+        while (WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var rawToken))
         {
-            var rawToken = tokens[i];
             if (rawToken.Length == 0 || rawToken == "ו")
             {
                 continue;
@@ -178,22 +180,22 @@ internal class HebrewWordsToNumberConverter : GenderlessWordsToNumberConverter
                 return false;
             }
 
-            if (i + 1 < tokens.Length)
+            if (WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var nextToken))
             {
-                var nextToken = TrimLeadingConjunction(tokens[i + 1]);
+                nextToken = TrimLeadingConjunction(nextToken);
                 if (IsTeenSuffix(nextToken))
                 {
                     current += 10 + unitValue;
-                    i++;
                     continue;
                 }
 
                 if (nextToken == "מאות" && unitValue is >= 3 and <= 9)
                 {
                     current += unitValue * 100;
-                    i++;
                     continue;
                 }
+
+                pendingToken = nextToken;
             }
 
             current += unitValue;

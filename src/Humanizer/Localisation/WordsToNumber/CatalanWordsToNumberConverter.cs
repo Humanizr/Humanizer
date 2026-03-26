@@ -125,13 +125,14 @@ internal partial class CatalanWordsToNumberConverter : GenderlessWordsToNumberCo
 
     static bool TryParseCardinal(string words, out int value, out string? unrecognizedWord)
     {
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var total = 0;
         var current = 0;
         unrecognizedWord = null;
 
-        foreach (var token in tokens)
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var token = tokenSpan.ToString();
+
             if (token == "i")
             {
                 continue;

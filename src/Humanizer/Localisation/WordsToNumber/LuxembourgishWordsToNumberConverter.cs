@@ -127,13 +127,14 @@ internal class LuxembourgishWordsToNumberConverter : GenderlessWordsToNumberConv
 
     static bool TryParsePhrase(string words, out int value, out string? unrecognizedWord)
     {
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var total = 0;
         var current = 0;
         unrecognizedWord = null;
 
-        foreach (var rawToken in tokens)
+        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
+            var rawToken = tokenSpan.ToString();
+
             if (CardinalMap.TryGetValue(rawToken, out var scale) && scale >= 1_000_000)
             {
                 total += (current == 0 ? 1 : current) * scale;

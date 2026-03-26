@@ -159,14 +159,14 @@ internal partial class SpanishWordsToNumberConverter : GenderlessWordsToNumberCo
 
     static bool TryParseCardinal(string words, out int value, out string? unrecognizedWord)
     {
-        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var total = 0;
         var current = 0;
         unrecognizedWord = null;
+        var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
+        string? pendingToken = null;
 
-        for (var i = 0; i < tokens.Length; i++)
+        while (WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var token))
         {
-            var token = tokens[i];
             if (token == "y")
             {
                 continue;
