@@ -394,7 +394,7 @@ public static class MetricNumeralExtensions
         if (decimals.HasValue)
         {
             var rounded = Math.Round(input, decimals.Value);
-            if (rounded != 0)
+            if (!rounded.Equals(0d))
             {
                 var roundedExponent = (int)Math.Floor(Math.Log10(Math.Abs(rounded)) / 3);
                 if (!roundedExponent.Equals(0))
