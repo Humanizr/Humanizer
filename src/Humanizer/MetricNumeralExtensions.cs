@@ -517,15 +517,27 @@ public static class MetricNumeralExtensions
     /// </summary>
     static readonly HashSet<string> LongScaleCultures =
     [
-        "de", "de-DE",  // German
-        "fr", "fr-FR",  // French
-        "it", "it-IT",  // Italian
-        "es", "es-ES",  // Spanish
-        "pt", "pt-PT",  // Portuguese
-        "nl", "nl-NL",  // Dutch
-        "ru", "ru-RU",  // Russian
-        "pl", "pl-PL",  // Polish
-        "tr", "tr-TR"   // Turkish
-                        // Short scale cultures (not listed): en, en-US, en-GB, zh, ja, etc.
+        "de", "de-DE", "de-AT", "de-CH",  // German
+        "fr", "fr-FR", "fr-BE", "fr-CH",  // French
+        "it", "it-IT", "it-CH",            // Italian
+        "es", "es-ES",                     // Spanish
+        "pt", "pt-PT",                     // Portuguese (NOT pt-BR - Brazil uses short scale)
+        "nl", "nl-NL", "nl-BE",            // Dutch
+        "ru", "ru-RU",                     // Russian
+        "pl", "pl-PL",                     // Polish
+        "tr", "tr-TR",                     // Turkish
+        "cs", "cs-CZ",                     // Czech (miliarda for 1E9)
+        "sk", "sk-SK",                     // Slovak
+        "hr", "hr-HR",                     // Croatian
+        "ro", "ro-RO",                     // Romanian
+        "sl", "sl-SI",                     // Slovenian
+        "uk", "uk-UA",                     // Ukrainian
+        "he", "he-IL",                     // Hebrew (מיליארד for 1E9)
+        "ar", "ar-SA",                     // Arabic
+        "hu", "hu-HU",                     // Hungarian
+        "fi", "fi-FI",                     // Finnish
+        "nb", "nb-NO",                     // Norwegian
+        "sv", "sv-SE",                     // Swedish
+        "da", "da-DK",                     // Danish
     ];
 }
