@@ -454,6 +454,16 @@ public static class MetricNumeralExtensions
             {
                 return UnitPrefixes[symbol].LongScaleWord;
             }
+            
+            if (formatValue.HasFlag(MetricNumeralFormats.UseScaleWord))
+            {
+                var culture = CultureInfo.CurrentUICulture;
+                var isLongScale = LongScaleCultures.Contains(culture.Name)
+                               || LongScaleCultures.Contains(culture.TwoLetterISOLanguageName);
+                return isLongScale
+                    ? UnitPrefixes[symbol].LongScaleWord
+                    : UnitPrefixes[symbol].ShortScaleWord;
+            }
         }
 
         return symbol.ToString();
@@ -496,4 +506,26 @@ public static class MetricNumeralExtensions
         public string ShortScaleWord { get; } = shortScaleWord;
         public readonly string LongScaleWord => longScaleWord ?? ShortScaleWord;
     }
+
+
+    /// <summary>
+    /// A set of culture codes that use the <a href="https://en.wikipedia.org/wiki/Long_and_short_scales">long scale</a> system.
+    /// In the long scale, <c>1E9</c> is a <c>milliard</c> and <c>1E12</c> is a <c>billion</c>.
+    /// Cultures not in this set are assumed to use the short scale, where <c>1E9</c> is a <c>billion</c>.
+    /// Used by <see cref="MetricNumeralFormats.UseScaleWord"/> to automatically select the correct scale word
+    /// based on <see cref="System.Globalization.CultureInfo.CurrentUICulture"/>.
+    /// </summary>
+    static readonly HashSet<string> LongScaleCultures =
+    [
+        "de", "de-DE",  // German
+        "fr", "fr-FR",  // French
+        "it", "it-IT",  // Italian
+        "es", "es-ES",  // Spanish
+        "pt", "pt-PT",  // Portuguese
+        "nl", "nl-NL",  // Dutch
+        "ru", "ru-RU",  // Russian
+        "pl", "pl-PL",  // Polish
+        "tr", "tr-TR"   // Turkish
+                        // Short scale cultures (not listed): en, en-US, en-GB, zh, ja, etc.
+    ];
 }
