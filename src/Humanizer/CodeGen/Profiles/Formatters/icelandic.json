@@ -1,0 +1,14 @@
+{
+  "engine": "profiled",
+  "dataUnitFallbackTransform": "trim-trailing-s",
+  "timeUnitGenders": {
+    "millisecond": "feminine",
+    "second": "feminine",
+    "minute": "feminine",
+    "hour": "feminine",
+    "day": "masculine",
+    "week": "feminine",
+    "month": "masculine",
+    "year": "neuter"
+  }
+}

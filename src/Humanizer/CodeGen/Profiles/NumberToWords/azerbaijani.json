@@ -1,0 +1,25 @@
+{
+  "engine": "turkic-family",
+  "minimumValue": -2147483648,
+  "maximumValue": 2147483647,
+  "minusWord": "mənfi",
+  "hundredWord": "yüz",
+  "unitsMap": ["sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz"],
+  "tensMap": ["sıfır", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan"],
+  "scales": [
+    { "value": 1000000000, "name": "milyard" },
+    { "value": 1000000, "name": "milyon" },
+    { "value": 1000, "name": "min", "omitOneWhenSingular": true }
+  ],
+  "ordinalSuffixes": {
+    "ı": "ıncı",
+    "i": "inci",
+    "u": "uncu",
+    "ü": "üncü",
+    "o": "uncu",
+    "ö": "üncü",
+    "e": "inci",
+    "a": "ıncı",
+    "ə": "inci"
+  }
+}

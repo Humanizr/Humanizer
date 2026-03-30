@@ -1,0 +1,6 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: 및
+formatter: trim-plural-suffix
+numberToWords: korean
+wordsToNumber: korean

@@ -1,0 +1,12 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: i
+formatter: catalan
+numberToWords: catalan
+ordinalizer: catalan
+dateToOrdinalWords: catalan
+dateOnlyToOrdinalWords: catalan
+timeOnlyToClockNotation: catalan
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: ca

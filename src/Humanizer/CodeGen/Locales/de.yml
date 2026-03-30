@@ -1,0 +1,10 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: und
+formatter: trim-plural-suffix
+numberToWords: german
+ordinalizer: period-suffix
+dateToOrdinalWords: written-month
+dateOnlyToOrdinalWords: written-month
+timeOnlyToClockNotation: german
+wordsToNumber: german

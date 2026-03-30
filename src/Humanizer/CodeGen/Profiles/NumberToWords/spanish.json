@@ -1,0 +1,33 @@
+{
+  "engine": "long-scale-stem-ordinal",
+  "zeroWord": "cero",
+  "negativeWord": "menos",
+  "exactHundredWord": "cien",
+  "thousandWord": "mil",
+  "tensJoiner": "y",
+  "thousandOrdinalStem": "ésim",
+  "masculineOrdinalEnding": "o",
+  "feminineOrdinalEnding": "a",
+  "minLongValueWord": "menos nueve trillones doscientos veintitrés mil trescientos setenta y dos billones treinta y seis mil ochocientos cincuenta y cuatro millones setecientos setenta y cinco mil ochocientos ocho",
+  "highestScaleValue": 1000000,
+  "roundHigherScaleCompactValue": 1000000000,
+  "highestScaleOrdinalSource": "milésim",
+  "highestScaleOrdinalTarget": "millonésim",
+  "tupleFallbackSuffix": " veces",
+  "hundredsMasculine": ["cero", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"],
+  "hundredsFeminine": ["cero", "ciento", "doscientas", "trescientas", "cuatrocientas", "quinientas", "seiscientas", "setecientas", "ochocientas", "novecientas"],
+  "hundredthsRoots": ["", "centésim", "ducentésim", "tricentésim", "cuadringentésim", "quingentésim", "sexcentésim", "septingentésim", "octingentésim", "noningentésim"],
+  "ordinalUnitRoots": ["", "primer", "segund", "tercer", "cuart", "quint", "sext", "séptim", "octav", "noven"],
+  "tensMap": ["cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"],
+  "tenthsRoots": ["", "décim", "vigésim", "trigésim", "cuadragésim", "quincuagésim", "sexagésim", "septuagésim", "octogésim", "nonagésim"],
+  "thousandthsRoots": ["", "milésim", "dosmilésim", "tresmilésim", "cuatromilésim", "cincomilésim", "seismilésim", "sietemilésim", "ochomilésim", "nuevemilésim"],
+  "tupleMap": ["cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuple", "séxtuple", "séptuple", "óctuple", "nonuplo", "décuplo", "undécuplo", "duodécuplo", "terciodécuplo"],
+  "unitsMasculine": ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno", "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"],
+  "unitsMasculineAbbreviation": ["cero", "un", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiún", "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"],
+  "unitsFeminine": ["cero", "una", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuna", "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"],
+  "largeScales": [
+    { "value": 1000000000000000000, "singularPrefix": "un", "singular": "trillón", "plural": "trillones" },
+    { "value": 1000000000000, "singularPrefix": "un", "singular": "billón", "plural": "billones" },
+    { "value": 1000000, "singularPrefix": "un", "singular": "millón", "plural": "millones" }
+  ]
+}

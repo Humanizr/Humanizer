@@ -1,0 +1,12 @@
+{
+  "engine": "uzbek-family",
+  "minusWord": "минус",
+  "hundredWord": "юз",
+  "thousandWord": "минг",
+  "millionWord": "миллион",
+  "billionWord": "миллиард",
+  "secondOrdinalSuffixCharacters": "иа",
+  "unitsMap": ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"],
+  "tensMap": ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"],
+  "ordinalSuffixes": ["инчи", "нчи"]
+}

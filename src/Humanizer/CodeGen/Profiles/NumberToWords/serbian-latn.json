@@ -1,0 +1,20 @@
+{
+  "engine": "south-slavic-cardinal",
+  "useCulture": true,
+  "maximumValue": 9223372036854775807,
+  "allowLongMin": true,
+  "zeroWord": "nula",
+  "minusWord": "-",
+  "unitsMap": ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset", "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šesnaest", "sedamnaest", "osamnaest", "devetnaest"],
+  "tensMap": ["nula", "deset", "dvadeset", "trideset", "četrdeset", "petdeset", "šestdeset", "sedamdeset", "osamdeset", "devetdeset"],
+  "hundredsMap": ["nula", "sto", "dvesto", "tristo", "četiristo", "petsto", "šeststo", "sedamsto", "osamsto", "devetsto"],
+  "feminineOne": "jedna",
+  "feminineTwo": "dve",
+  "scales": [
+    { "value": 1000000000000000, "gender": "feminine", "oneForm": "bilijarda", "singular": "bilijarda", "paucal": "bilijarde", "plural": "bilijardi" },
+    { "value": 1000000000000, "gender": "masculine", "oneForm": "bilion", "singular": "bilion", "paucal": "biliona", "plural": "biliona" },
+    { "value": 1000000000, "gender": "feminine", "oneForm": "milijarda", "singular": "milijarda", "paucal": "milijarde", "plural": "milijardi" },
+    { "value": 1000000, "gender": "masculine", "oneForm": "milion", "singular": "milion", "paucal": "miliona", "plural": "miliona" },
+    { "value": 1000, "gender": "feminine", "oneForm": "hiljadu", "singular": "hiljada", "paucal": "hiljade", "plural": "hiljada" }
+  ]
+}

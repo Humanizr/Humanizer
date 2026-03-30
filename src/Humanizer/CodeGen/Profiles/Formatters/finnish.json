@@ -1,0 +1,8 @@
+{
+  "engine": "profiled",
+  "dataUnitDetector": "singular-plural",
+  "dataUnitSuffixes": {
+    "singular": "_Singular"
+  },
+  "dataUnitFallbackTransform": "trim-trailing-s"
+}

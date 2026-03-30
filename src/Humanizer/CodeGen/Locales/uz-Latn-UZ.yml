@@ -1,0 +1,9 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: va
+formatter: trim-plural-suffix
+numberToWords: uzbek-latn
+ordinalizer: uzbek-latin
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: uz-Latn-UZ

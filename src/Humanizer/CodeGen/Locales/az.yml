@@ -1,0 +1,9 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: və
+formatter: trim-plural-suffix
+numberToWords: azerbaijani
+ordinalizer: period-suffix
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: az

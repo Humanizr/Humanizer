@@ -1,0 +1,14 @@
+{
+  "engine": "modulo-suffix",
+  "defaultSuffix": ":e",
+  "useAbsoluteValue": true,
+  "lastTwoDigitsRange": {
+    "start": 11,
+    "end": 19,
+    "suffix": ":e"
+  },
+  "lastDigitSuffixes": {
+    "1": ":a",
+    "2": ":a"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "int64", "property": "minimumValue" },
+        { "kind": "int64", "property": "maximumValue" },
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "string", "property": "hundredWord" },
+        { "kind": "string-array", "property": "unitsMap" },
+        { "kind": "string-array", "property": "tensMap" },
+        { "kind": "builder", "property": "scales", "builder": "turkic-scale-array" },
+        { "kind": "char-string-dictionary", "property": "ordinalSuffixes" },
+        { "kind": "nullable-char-string-dictionary", "property": "tupleSuffixes" },
+        { "kind": "nullable-int-string-dictionary", "property": "namedTuples" }
+      ]
+    }
+  ]
+}

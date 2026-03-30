@@ -1,0 +1,8 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: ও
+formatter: trim-plural-suffix
+numberToWords: bangla
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: bn

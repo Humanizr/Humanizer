@@ -1,0 +1,33 @@
+{
+  "engine": "joined-scale",
+  "maximumValue": 9223372036854775807,
+  "zeroWord": "զրո",
+  "minusWord": "մինուս",
+  "negativeJoinWord": " ",
+  "joinWord": " ",
+  "scaleCountJoinWord": " ",
+  "underHundredJoinWord": "",
+  "omitOneWhenSingularAlways": true,
+  "defaultOrdinalSuffix": "երորդ",
+  "matchingOrdinalSuffix": null,
+  "ordinalSuffixMatchCharacters": null,
+  "unitsMap": ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"],
+  "tensMap": ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"],
+  "hundredsMap": [],
+  "scales": [
+    { "value": 1000000000000000000, "name": "քվինտիլիոն" },
+    { "value": 1000000000000000, "name": "կվադրիլիոն" },
+    { "value": 1000000000000, "name": "տրիլիոն" },
+    { "value": 1000000000, "name": "միլիարդ" },
+    { "value": 1000000, "name": "միլիոն" },
+    { "value": 1000, "name": "հազար", "omitOneWhenSingular": true },
+    { "value": 100, "name": "հարյուր", "omitOneWhenSingular": true }
+  ],
+  "ordinalExceptions": {
+    "0": "զրոյական",
+    "1": "առաջին",
+    "2": "երկրորդ",
+    "3": "երրորդ",
+    "4": "չորրորդ"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "pattern": "yyyy 'm.' MMMM {day} 'd.'",
+  "dayMode": "Numeric"
+}

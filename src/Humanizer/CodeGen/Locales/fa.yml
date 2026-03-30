@@ -1,0 +1,8 @@
+﻿collectionFormatter:
+  kind: clitic
+  value: و
+formatter: trim-plural-suffix
+numberToWords: farsi
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: fa

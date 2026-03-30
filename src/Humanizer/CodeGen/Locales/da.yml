@@ -1,0 +1,6 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: og
+numberToWords: danish
+ordinalizer: period-suffix
+wordsToNumber: danish

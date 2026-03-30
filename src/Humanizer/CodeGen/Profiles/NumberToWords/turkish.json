@@ -1,0 +1,41 @@
+{
+  "engine": "turkic-family",
+  "minimumValue": -9223372036854775807,
+  "maximumValue": 9223372036854775807,
+  "minusWord": "eksi",
+  "hundredWord": "yüz",
+  "unitsMap": ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"],
+  "tensMap": ["sıfır", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"],
+  "scales": [
+    { "value": 1000000000000000000, "name": "kentilyon" },
+    { "value": 1000000000000000, "name": "katrilyon" },
+    { "value": 1000000000000, "name": "trilyon" },
+    { "value": 1000000000, "name": "milyar" },
+    { "value": 1000000, "name": "milyon" },
+    { "value": 1000, "name": "bin", "omitOneWhenSingular": true }
+  ],
+  "ordinalSuffixes": {
+    "ı": "ıncı",
+    "i": "inci",
+    "u": "uncu",
+    "ü": "üncü",
+    "o": "uncu",
+    "ö": "üncü",
+    "e": "inci",
+    "a": "ıncı"
+  },
+  "tupleSuffixes": {
+    "ı": "lı",
+    "i": "li",
+    "u": "lu",
+    "ü": "lü",
+    "o": "lu",
+    "ö": "lü",
+    "e": "li",
+    "a": "lı"
+  },
+  "namedTuples": {
+    "1": "tek",
+    "2": "çift"
+  }
+}

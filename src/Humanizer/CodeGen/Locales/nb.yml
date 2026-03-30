@@ -1,0 +1,7 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: og
+formatter: trim-plural-suffix
+numberToWords: norwegian-bokmal
+ordinalizer: period-suffix
+wordsToNumber: norwegian-bokmal

@@ -1,0 +1,17 @@
+{
+  "engine": "maltese",
+  "conjunction": "u",
+  "minusSuffix": "inqas minn żero",
+  "feminineOneWord": "waħda",
+  "hundredWord": "mija",
+  "dualHundredsWord": "mitejn",
+  "hundredPrefixWord": "mitt",
+  "ordinalOverrideMap": ["0", "l-ewwel", "it-tieni", "it-tielet", "ir-raba'", "il-ħames", "is-sitt", "is-seba'", "it-tmien", "id-disa'", "l-għaxar", "il-ħdax", "it-tnax", "it-tlettax", "l-erbatax", "il-ħmistax", "is-sittax", "is-sbatax", "it-tmintax", "id-dsatax", "l-għoxrin"],
+  "unitsMap": ["żero", "wieħed", "tnejn", "tlieta", "erbgħa", "ħamsa", "sitta", "sebgħa", "tmienja", "disgħa", "għaxra", "ħdax", "tnax", "tlettax", "erbatax", "ħmistax", "sittax", "sbatax", "tmintax", "dsatax"],
+  "tensMap": ["zero", "għaxra", "għoxrin", "tletin", "erbgħin", "ħamsin", "sittin", "sebgħin", "tmenin", "disgħin"],
+  "hundredsMap": ["", "", "", "tlett", "erbgħa", "ħames", "sitt", "sebgħa", "tminn", "disgħa", "għaxar"],
+  "prefixMap": ["", "", "", "tlett", "erbat", "ħamest", "sitt", "sebat", "tmint", "disat", "għaxart", "ħdax-il", "tnax-il", "tletax-il", "erbatax-il", "ħmistax-il", "sittax-il", "sbatax-il", "tmintax-il", "dsatax-il"],
+  "thousandScale": { "singular": "elf", "dual": "elfejn", "plural": "elef", "usePrefixMapForLowerDigits": true },
+  "millionScale": { "singular": "miljun", "dual": "żewġ miljuni", "plural": "miljuni", "usePrefixMapForLowerDigits": false },
+  "billionScale": { "singular": "biljun", "dual": "żewġ biljuni", "plural": "biljuni", "usePrefixMapForLowerDigits": false }
+}

@@ -1,0 +1,15 @@
+{
+  "engine": "profiled",
+  "resourceKeyDetector": "arabic-like",
+  "resourceKeySuffixes": {
+    "dual": "_Dual",
+    "plural": "_Plural"
+  },
+  "dataUnitDetector": "arabic-like",
+  "dataUnitSuffixes": {
+    "singular": "_Singular",
+    "dual": "_Dual",
+    "plural": "_Plural"
+  },
+  "dataUnitFallbackTransform": "trim-trailing-s"
+}

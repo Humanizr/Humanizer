@@ -1,0 +1,31 @@
+{
+  "engine": "terminal-ordinal-scale",
+  "zeroWord": "nulle",
+  "minusWord": "mīnus",
+  "unitStems": ["", "vien", "div", "trīs", "četr", "piec", "seš", "septiņ", "astoņ", "deviņ", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit"],
+  "ordinalUnitStems": ["", "pirm", "otr", "treš", "ceturt", "piekt", "sest", "septīt", "astot", "devīt", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit"],
+  "tensMap": ["", "desmit", "divdesmit", "trīsdesmit", "četrdesmit", "piecdesmit", "sešdesmit", "septiņdesmit", "astoņdesmit", "deviņdesmit"],
+  "hundredsExactStems": ["", "simt", "divsimt", "trīssimt", "četrsimt", "piecsimt", "sešsimt", "septiņsimt", "astoņsimt", "deviņsimt"],
+  "exactOneHundredCardinal": "simts",
+  "exactOneHundredAfterHigherScale": "viens simts",
+  "oneHundredWithRemainder": "simtu",
+  "hundredsPluralWord": "simti",
+  "masculineOrdinalSuffix": "ais",
+  "feminineOrdinalSuffix": "ā",
+  "scales": [
+    {
+      "value": 1000000,
+      "exactSingularCardinal": "miljons",
+      "singularWithRemainderCardinal": "viens miljons",
+      "pluralCardinal": "miljoni",
+      "ordinalStem": "miljon"
+    },
+    {
+      "value": 1000,
+      "exactSingularCardinal": "tūkstotis",
+      "singularWithRemainderCardinal": "tūkstoš",
+      "pluralCardinal": "tūkstoši",
+      "ordinalStem": "tūkstoš"
+    }
+  ]
+}

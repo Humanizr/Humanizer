@@ -1,0 +1,7 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: û
+numberToWords: central-kurdish
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: ku

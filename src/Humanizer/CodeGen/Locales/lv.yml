@@ -1,0 +1,11 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: un
+formatter: latvian
+numberToWords: latvian
+ordinalizer: period-suffix
+dateToOrdinalWords: latvian
+dateOnlyToOrdinalWords: latvian
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: lv

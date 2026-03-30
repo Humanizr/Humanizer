@@ -1,0 +1,15 @@
+{
+  "engine": "west-slavic-gendered",
+  "useCulture": true,
+  "minusWord": "mínus",
+  "unitsMap": ["nula", "jeden", "dva", "tri", "štyri", "päť", "šesť", "sedem", "osem", "deväť", "desať", "jedenásť", "dvanásť", "trinásť", "štrnásť", "pätnásť", "šestnásť", "sedemnásť", "osemnásť", "devätnásť"],
+  "tensMap": ["nula", "desať", "dvadsať", "tridsať", "štyridsať", "päťdesiat", "šesťdesiat", "sedemdesiat", "osemdesiat", "deväťdesiat"],
+  "hundredsMap": ["nula", "sto", "dvesto", "tristo", "štyristo", "päťsto", "šesťsto", "sedemsto", "osemsto", "deväťsto"],
+  "unitsMasculineOverrides": ["jeden", "dva"],
+  "unitsFeminineOverrides": ["jedna", "dve"],
+  "unitsNeuterOverrides": ["jedno", "dva"],
+  "unitsInvariantOverrides": ["jedna", "dva"],
+  "thousands": { "singular": "tisíc", "paucal": "tisíce", "plural": "tisíc", "omitLeadingOne": true },
+  "millions": { "singular": "milión", "paucal": "milióny", "plural": "miliónov" },
+  "billions": { "singular": "miliarda", "paucal": "miliardy", "plural": "miliárd" }
+}

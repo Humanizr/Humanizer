@@ -1,0 +1,18 @@
+{
+  "engine": "malay-family",
+  "zeroWord": "nol",
+  "minusWord": "minus",
+  "thousandOneWord": "seribu",
+  "hundredWord": "seratus",
+  "hundredUnitWord": "ratus",
+  "units": ["nol", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", "enam belas", "tujuh belas", "delapan belas", "sembilan belas"],
+  "tens": ["", "", "dua puluh", "tiga puluh", "empat puluh", "lima puluh", "enam puluh", "tujuh puluh", "delapan puluh", "sembilan puluh"],
+  "scales": [
+    { "value": 1000000000000000000, "name": "kuintiliun" },
+    { "value": 1000000000000000, "name": "kuadriliun" },
+    { "value": 1000000000000, "name": "triliun" },
+    { "value": 1000000000, "name": "miliar" },
+    { "value": 1000000, "name": "juta" },
+    { "value": 1000, "name": "ribu" }
+  ]
+}

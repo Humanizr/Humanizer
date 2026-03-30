@@ -1,0 +1,14 @@
+{
+  "engine": "phrase-hour",
+  "midnight": "meia-noite",
+  "midday": "meio-dia",
+  "oclockFormat": "{0} em ponto",
+  "quarterPastFormat": "{0} e quinze",
+  "halfPastFormat": "{0} e meia",
+  "twentyToFormat": "vinte para as {0}",
+  "quarterToFormat": "quinze para as {0}",
+  "tenToFormat": "dez para as {0}",
+  "fiveToFormat": "cinco para as {0}",
+  "roundHourFormat": "{0} em ponto",
+  "genericMinutesFormat": "{0} e {1}"
+}

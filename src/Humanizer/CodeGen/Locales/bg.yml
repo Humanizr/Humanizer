@@ -1,0 +1,9 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: и
+formatter: bulgarian
+numberToWords: bulgarian
+ordinalizer: period-suffix
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: bg

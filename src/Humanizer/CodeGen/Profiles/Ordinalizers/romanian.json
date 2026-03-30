@@ -1,0 +1,25 @@
+{
+  "engine": "template",
+  "zeroAsPlainNumber": true,
+  "masculine": {
+    "prefix": "al ",
+    "defaultSuffix": "-lea",
+    "exactReplacements": {
+      "1": "primul"
+    }
+  },
+  "feminine": {
+    "prefix": "a ",
+    "defaultSuffix": "-a",
+    "exactReplacements": {
+      "1": "prima"
+    }
+  },
+  "neuter": {
+    "prefix": "al ",
+    "defaultSuffix": "-lea",
+    "exactReplacements": {
+      "1": "primul"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: et
+formatter: french
+numberToWords: french
+ordinalizer: french
+dateToOrdinalWords: french
+dateOnlyToOrdinalWords: french
+timeOnlyToClockNotation: french
+wordsToNumber: french

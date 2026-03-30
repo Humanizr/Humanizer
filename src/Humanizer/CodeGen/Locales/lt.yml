@@ -1,0 +1,11 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: ir
+formatter: lithuanian
+numberToWords: lithuanian
+ordinalizer: period-suffix
+dateToOrdinalWords: lithuanian
+dateOnlyToOrdinalWords: lithuanian
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: lt

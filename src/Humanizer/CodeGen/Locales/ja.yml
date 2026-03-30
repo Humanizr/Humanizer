@@ -1,0 +1,6 @@
+﻿collectionFormatter:
+  kind: delimited
+  value: 、
+formatter: trim-plural-suffix
+numberToWords: japanese
+wordsToNumber: japanese

@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "int-string-dictionary", "property": "cardinalMap" },
+        { "kind": "builder", "builder": "greedy-compound-ordinal-map" },
+        { "kind": "optional-string-array", "property": "negativePrefixes" },
+        { "kind": "optional-string-array", "property": "ignoredTokens" },
+        { "kind": "optional-string-array", "property": "ordinalAbbreviationSuffixes" },
+        { "kind": "string", "property": "charactersToRemove", "defaultValue": "" },
+        { "kind": "string", "property": "charactersToReplaceWithSpace", "defaultValue": "" },
+        { "kind": "builder", "property": "textReplacements", "builder": "string-replacement-array", "missingValue": "empty" },
+        { "kind": "bool", "property": "lowercase" },
+        { "kind": "bool", "property": "removeDiacritics" },
+        { "kind": "int32", "property": "hundredValue", "defaultValue": "100" },
+        { "kind": "int32", "property": "scaleThreshold", "defaultValue": "1000" }
+      ]
+    }
+  ]
+}

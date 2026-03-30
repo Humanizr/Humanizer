@@ -1,0 +1,13 @@
+{
+  "engine": "profiled",
+  "timeUnitGenders": {
+    "millisecond": "masculine",
+    "second": "masculine",
+    "minute": "masculine",
+    "hour": "feminine",
+    "day": "masculine",
+    "week": "feminine",
+    "month": "masculine",
+    "year": "masculine"
+  }
+}

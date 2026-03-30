@@ -1,0 +1,10 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "enum", "property": "style", "enumType": "FrenchNumberingStyle" }
+      ]
+    }
+  ]
+}

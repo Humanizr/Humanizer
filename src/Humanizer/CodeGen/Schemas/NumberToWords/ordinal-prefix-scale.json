@@ -1,0 +1,27 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "enum", "property": "defaultGender", "enumType": "GrammaticalGender", "defaultValue": "masculine" },
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "string", "property": "andWord" },
+        { "kind": "string", "property": "masculineOrdinalEnding", "defaultValue": "i" },
+        { "kind": "string", "property": "nonMasculineOrdinalEnding", "defaultValue": "a" },
+        { "kind": "string-array", "property": "unitsMap" },
+        { "kind": "string-array", "property": "masculineUnitsMap" },
+        { "kind": "string-array", "property": "feminineUnitsMap" },
+        { "kind": "string-array", "property": "neuterUnitsMap" },
+        { "kind": "string-array", "property": "tensMap" },
+        { "kind": "string-array", "property": "unitsOrdinalPrefixes" },
+        { "kind": "string-array", "property": "tensOrdinalPrefixes" },
+        { "kind": "string", "property": "hundredSingular" },
+        { "kind": "string", "property": "hundredPlural" },
+        { "kind": "string", "property": "ordinalTwoMasculine" },
+        { "kind": "string", "property": "ordinalTwoFeminine" },
+        { "kind": "string", "property": "ordinalTwoNeuter" },
+        { "kind": "builder", "property": "scales", "builder": "ordinal-prefix-scale-array" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "engine": "inverted-tens",
+  "minusWord": "minus",
+  "unitsMap": ["nul", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege", "tien", "elf", "twaalf", "dertien", "veertien", "vyftien", "sestien", "sewentien", "agtien", "negentien"],
+  "tensMap": ["nul", "tien", "twintig", "dertig", "veertig", "vyftig", "sestig", "sewentig", "tagtig", "negentig"],
+  "hundredsPrefixMap": ["", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege"],
+  "oneHundredWord": "een honderd",
+  "hundredWord": "honderd",
+  "hundredJoiner": " ",
+  "hundredRemainderSeparator": " ",
+  "scaleTailPrefix": "en ",
+  "scaleTailPrefixMode": "low-or-exact-tens",
+  "hundredTailPrefix": "en ",
+  "hundredTailPrefixMode": "low-or-exact-tens",
+  "unitTensJoiner": " en ",
+  "scales": [
+    { "value": 1000000000, "oneForm": "een miljard", "manyForm": "miljard", "countJoiner": " ", "remainderSeparator": " " },
+    { "value": 1000000, "oneForm": "een miljoen", "manyForm": "miljoen", "countJoiner": " ", "remainderSeparator": " " },
+    { "value": 1000, "oneForm": "een duisend", "manyForm": "duisend", "countJoiner": " ", "remainderSeparator": " " }
+  ],
+  "ordinalMode": "suffix",
+  "ordinalExceptions": {
+    "nul": "nulste",
+    "een": "eerste",
+    "drie": "derde",
+    "sewe": "sewende",
+    "agt": "agste",
+    "nege": "negende",
+    "tien": "tiende",
+    "miljoen": "miljoenste"
+  },
+  "ordinalSteSuffixEndingChars": "tgd",
+  "ordinalSteSuffix": "ste",
+  "ordinalDefaultSuffix": "de",
+  "removeLeadingOneInOrdinal": true,
+  "leadingOneWord": "een ",
+  "leadingOnePreservePrefix": "een en "
+}

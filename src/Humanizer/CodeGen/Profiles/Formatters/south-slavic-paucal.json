@@ -1,0 +1,13 @@
+{
+  "engine": "profiled",
+  "resourceKeyDetector": "south-slavic",
+  "resourceKeySuffixes": {
+    "paucal": "_Paucal"
+  },
+  "dataUnitDetector": "south-slavic",
+  "dataUnitSuffixes": {
+    "singular": "_Singular",
+    "paucal": "_Paucal"
+  },
+  "dataUnitFallbackTransform": "trim-trailing-s"
+}

@@ -1,0 +1,20 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "string", "property": "zeroWord" },
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "string", "property": "ordinalPrefix" },
+        { "kind": "string", "property": "tenWord" },
+        { "kind": "string", "property": "tensWord" },
+        { "kind": "string", "property": "zeroTensWord" },
+        { "kind": "string-array", "property": "digitWords" },
+        { "kind": "builder", "property": "scales", "builder": "contextual-decimal-scale-array" },
+        { "kind": "nullable-int-string-dictionary", "property": "teenUnitOverrides", "missingValue": "empty" },
+        { "kind": "nullable-int-string-dictionary", "property": "postTensUnitOverrides", "missingValue": "empty" },
+        { "kind": "nullable-int-string-dictionary", "property": "ordinalUnitOverrides", "missingValue": "empty" }
+      ]
+    }
+  ]
+}

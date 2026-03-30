@@ -1,0 +1,15 @@
+{
+  "engine": "modulo-suffix",
+  "defaultSuffix": "th",
+  "useAbsoluteValue": true,
+  "lastTwoDigitsRange": {
+    "start": 11,
+    "end": 20,
+    "suffix": "th"
+  },
+  "lastDigitSuffixes": {
+    "1": "st",
+    "2": "nd",
+    "3": "rd"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "int-string-dictionary", "property": "cardinalMap" }
+      ]
+    }
+  ]
+}

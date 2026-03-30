@@ -1,0 +1,7 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: och
+formatter: swedish
+numberToWords: swedish
+ordinalizer: swedish
+wordsToNumber: swedish

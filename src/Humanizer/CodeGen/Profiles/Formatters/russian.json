@@ -1,0 +1,19 @@
+{
+  "engine": "profiled",
+  "resourceKeyDetector": "russian",
+  "resourceKeySuffixes": {
+    "singular": "_Singular",
+    "paucal": "_Paucal"
+  },
+  "dataUnitFallbackTransform": "trim-trailing-s",
+  "timeUnitGenders": {
+    "millisecond": "feminine",
+    "second": "feminine",
+    "minute": "feminine",
+    "hour": "masculine",
+    "day": "masculine",
+    "week": "feminine",
+    "month": "masculine",
+    "year": "masculine"
+  }
+}

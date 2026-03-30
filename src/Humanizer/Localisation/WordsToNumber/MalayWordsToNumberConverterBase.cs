@@ -1,10 +1,8 @@
 namespace Humanizer;
 
-abstract class MalayWordsToNumberConverterBase : GenderlessWordsToNumberConverter
+class MalayFamilyWordsToNumberConverter(MalayWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
-    protected abstract string MinusWord { get; }
-    protected abstract string ZeroWord { get; }
-    protected abstract FrozenDictionary<string, int> Cardinals { get; }
+    readonly MalayWordsToNumberProfile profile = profile;
 
     public override int Convert(string words)
     {
@@ -29,10 +27,10 @@ abstract class MalayWordsToNumberConverterBase : GenderlessWordsToNumberConverte
         var normalized = Normalize(words);
         var negative = false;
 
-        if (normalized.StartsWith(MinusWord + " ", StringComparison.Ordinal))
+        if (normalized.StartsWith(profile.MinusWord + " ", StringComparison.Ordinal))
         {
             negative = true;
-            normalized = normalized[(MinusWord.Length + 1)..].Trim();
+            normalized = normalized[(profile.MinusWord.Length + 1)..].Trim();
         }
 
         if (TryParseCardinal(normalized, out parsedValue))
@@ -62,7 +60,7 @@ abstract class MalayWordsToNumberConverterBase : GenderlessWordsToNumberConverte
 
     bool TryParseCardinal(string words, out int value)
     {
-        if (Cardinals.TryGetValue(words, out value))
+        if (profile.Cardinals.TryGetValue(words, out value))
         {
             return true;
         }
@@ -79,7 +77,7 @@ abstract class MalayWordsToNumberConverterBase : GenderlessWordsToNumberConverte
                 continue;
             }
 
-            if (!Cardinals.TryGetValue(token, out var tokenValue))
+            if (!profile.Cardinals.TryGetValue(token, out var tokenValue))
             {
                 value = default;
                 return false;
@@ -111,4 +109,10 @@ abstract class MalayWordsToNumberConverterBase : GenderlessWordsToNumberConverte
         value = total + current;
         return true;
     }
+}
+
+sealed class MalayWordsToNumberProfile(string minusWord, FrozenDictionary<string, int> cardinals)
+{
+    public string MinusWord { get; } = minusWord;
+    public FrozenDictionary<string, int> Cardinals { get; } = cardinals;
 }

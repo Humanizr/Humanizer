@@ -1,0 +1,49 @@
+{
+  "engine": "prefixed-tens-scale",
+  "cardinalMap": {
+    "nulla": 0,
+    "egy": 1,
+    "ket": 2,
+    "ketto": 2,
+    "harom": 3,
+    "negy": 4,
+    "ot": 5,
+    "hat": 6,
+    "het": 7,
+    "nyolc": 8,
+    "kilenc": 9,
+    "tiz": 10,
+    "husz": 20,
+    "harminc": 30,
+    "negyven": 40,
+    "otven": 50,
+    "hatvan": 60,
+    "hetven": 70,
+    "nyolcvan": 80,
+    "kilencven": 90,
+    "szaz": 100,
+    "ezer": 1000,
+    "millio": 1000000,
+    "milliard": 1000000000
+  },
+  "tensMap": {
+    "harminc": 30,
+    "negyven": 40,
+    "otven": 50,
+    "hatvan": 60,
+    "hetven": 70,
+    "nyolcvan": 80,
+    "kilencven": 90
+  },
+  "scales": [
+    { "token": "milliard", "value": 1000000000 },
+    { "token": "millio", "value": 1000000 },
+    { "token": "ezer", "value": 1000 },
+    { "token": "szaz", "value": 100 }
+  ],
+  "prefixRules": [
+    { "prefix": "tizen", "baseValue": 10 },
+    { "prefix": "huszon", "baseValue": 20 }
+  ],
+  "negativePrefixes": ["minusz ", "minus "]
+}

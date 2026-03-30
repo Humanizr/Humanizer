@@ -547,7 +547,7 @@ public class WordsToNumberTests_Icelandic
     [InlineData(100)]
     public void TryToNumber_OrdinalRoundTrip_Icelandic(int number)
     {
-        var converter = new IcelandicNumberToWordsConverter();
+        var converter = Configurator.NumberToWordsConverters.ResolveForCulture(CultureInfo.CurrentCulture);
         var ordinal = converter.ConvertToOrdinal(number);
         Assert.True(ordinal.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Null(unrecognizedWord);

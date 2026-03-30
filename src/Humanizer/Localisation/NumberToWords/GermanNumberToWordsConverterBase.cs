@@ -1,68 +1,34 @@
 namespace Humanizer;
 
-abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
+class GermanFamilyNumberToWordsConverter(GermanNumberToWordsProfile profile) : GenderedNumberToWordsConverter
 {
-    static readonly string[] UnitsMap = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
-    static readonly string[] TensMap = ["null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];
-    static readonly string[] UnitsOrdinal = [string.Empty, "ers", "zwei", "drit", "vier", "fünf", "sechs", "sieb", "ach", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
-    static readonly string[] HundredOrdinalSingular = ["einhundert"];
-    static readonly string[] HundredOrdinalPlural = ["{0}hundert"];
-    static readonly string[] ThousandOrdinalSingular = ["eintausend"];
-    static readonly string[] ThousandOrdinalPlural = ["{0}tausend"];
-    static readonly string[] MillionOrdinalSingular = ["einmillion", "einemillion"];
-    static readonly string[] MillionOrdinalPlural = ["{0}million", "{0}millionen"];
-    static readonly string[] BillionOrdinalSingular = ["einmilliard", "einemilliarde"];
-    static readonly string[] BillionOrdinalPlural = ["{0}milliard", "{0}milliarden"];
+    readonly GermanNumberToWordsProfile profile = profile;
 
-    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true) =>
+        Convert(number, WordForm.Normal, gender, addAnd);
+
+    public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
     {
         if (number == 0)
         {
-            return UnitsMap[number];
+            return profile.ZeroWord;
         }
 
         var parts = new List<string>();
         if (number < 0)
         {
-            parts.Add("minus ");
+            parts.Add(profile.MinusWord);
             number = -number;
         }
 
-        CollectParts(parts, ref number, 1000000000000000000, true, "{0} Trillionen", "eine Trillion");
-        CollectParts(parts, ref number, 1000000000000000, true, "{0} Billiarden", "eine Billiarde");
-        CollectParts(parts, ref number, 1000000000000, true, "{0} Billionen", "eine Billion");
-        CollectParts(parts, ref number, 1000000000, true, "{0} Milliarden", "eine Milliarde");
-        CollectParts(parts, ref number, 1000000, true, "{0} Millionen", "eine Million");
-        CollectParts(parts, ref number, 1000, false, "{0}tausend", "eintausend");
-        CollectParts(parts, ref number, 100, false, "{0}hundert", "einhundert");
+        foreach (var scale in profile.Scales)
+        {
+            CollectParts(parts, ref number, scale);
+        }
 
         if (number > 0)
         {
-            if (number < 20)
-            {
-                if (number == 1 && gender == GrammaticalGender.Feminine)
-                {
-                    parts.Add("eine");
-                }
-                else if (number == 1)
-                {
-                    parts.Add($"{UnitsMap[number]}s");
-                }
-                else
-                {
-                    parts.Add(UnitsMap[number]);
-                }
-            }
-            else
-            {
-                var units = number % 10;
-                if (units > 0)
-                {
-                    parts.Add($"{UnitsMap[units]}und");
-                }
-
-                parts.Add(GetTens(number / 10));
-            }
+            parts.Add(ConvertUnderOneHundred((int)number, wordForm, gender));
         }
 
         return string.Concat(parts);
@@ -72,29 +38,31 @@ abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
         if (number == 0)
         {
-            return UnitsMap[number] + GetEndingForGender(gender);
+            return profile.ZeroWord + GetEndingForGender(gender);
         }
 
         var parts = new List<string>();
-        if (number < 0)
+        long remaining = number;
+        if (remaining < 0)
         {
-            parts.Add("minus ");
-            number = -number;
+            parts.Add(profile.MinusWord);
+            remaining = -remaining;
         }
 
-        CollectOrdinalParts(parts, ref number, 1000000000, true, BillionOrdinalPlural, BillionOrdinalSingular);
-        CollectOrdinalParts(parts, ref number, 1000000, true, MillionOrdinalPlural, MillionOrdinalSingular);
-        CollectOrdinalParts(parts, ref number, 1000, false, ThousandOrdinalPlural, ThousandOrdinalSingular);
-        CollectOrdinalParts(parts, ref number, 100, false, HundredOrdinalPlural, HundredOrdinalSingular);
-
-        if (number > 0)
+        foreach (var scale in profile.Scales)
         {
-            parts.Add(number < 20 ? UnitsOrdinal[number] : Convert(number));
+            CollectOrdinalParts(parts, ref remaining, scale);
         }
 
-        if (number is 0 or >= 20)
+        if (remaining > 0)
         {
-            parts.Add("s");
+            var residual = (int)remaining;
+            parts.Add(residual < 20 ? profile.UnitsOrdinal[residual] : Convert(residual));
+        }
+
+        if (remaining is 0 or >= 20)
+        {
+            parts.Add(profile.OrdinalStemSuffix);
         }
 
         parts.Add(GetEndingForGender(gender));
@@ -102,51 +70,186 @@ abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
         return string.Concat(parts);
     }
 
-    void CollectParts(List<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)
+    void CollectParts(List<string> parts, ref long number, GermanFamilyScale scale)
     {
-        if (number / divisor > 0)
+        var count = number / scale.Value;
+        if (count == 0)
         {
-            parts.Add(Part(pluralFormat, singular, number / divisor));
-            number %= divisor;
-            if (addSpaceBeforeNextPart && number > 0)
-            {
-                parts.Add(" ");
-            }
+            return;
+        }
+
+        parts.Add(BuildCardinalScalePart(count, scale));
+        number %= scale.Value;
+        if (scale.AddSpaceBeforeNextPart && number > 0)
+        {
+            parts.Add(" ");
         }
     }
 
-    void CollectOrdinalParts(List<string> parts, ref int number, int divisor, bool evaluateNoRest, string[] pluralFormats, string[] singulars)
+    void CollectOrdinalParts(List<string> parts, ref long number, GermanFamilyScale scale)
     {
-        if (number / divisor > 0)
+        var count = number / scale.Value;
+        if (count == 0)
         {
-            var noRest = evaluateNoRest ? NoRestIndex(number % divisor) : 0;
-            parts.Add(Part(pluralFormats[noRest], singulars[noRest], number / divisor));
-            number %= divisor;
+            return;
         }
+
+        var hasRemainder = number % scale.Value != 0;
+        parts.Add(BuildOrdinalScalePart(count, scale, hasRemainder));
+        number %= scale.Value;
     }
 
-    string Part(string pluralFormat, string singular, long number)
+    string BuildCardinalScalePart(long count, GermanFamilyScale scale)
+    {
+        if (count == 1)
+        {
+            return scale.SingularCardinal;
+        }
+
+        return string.Format(
+            scale.PluralCardinalFormat,
+            ConvertCount(count, scale));
+    }
+
+    string BuildOrdinalScalePart(long count, GermanFamilyScale scale, bool hasRemainder)
+    {
+        if (count == 1)
+        {
+            return scale.OrdinalSingular[hasRemainder ? 1 : 0];
+        }
+
+        return string.Format(
+            scale.OrdinalPlural[hasRemainder ? 1 : 0],
+            ConvertCount(count, scale));
+    }
+
+    string ConvertCount(long count, GermanFamilyScale scale)
+    {
+        var wordForm = profile.TensJoinerTransform == GermanicTensJoinerTransform.Eifeler &&
+                       scale.CountWordFormNextWord is { Length: > 0 } nextWord &&
+                       EifelerRule.DoesApply(nextWord)
+            ? WordForm.Eifeler
+            : WordForm.Normal;
+
+        return Convert(count, wordForm, scale.CountGender);
+    }
+
+    string ConvertUnderOneHundred(int number, WordForm wordForm, GrammaticalGender gender)
+    {
+        if (number < 20)
+        {
+            return GetUnit(number, gender, wordForm);
+        }
+
+        var units = number % 10;
+        var tensWord = profile.TensMap[number / 10];
+        if (units == 0)
+        {
+            return tensWord;
+        }
+
+        return GetCompoundUnit(units) + GetTensJoiner(tensWord) + tensWord;
+    }
+
+    string GetUnit(int number, GrammaticalGender gender, WordForm wordForm)
     {
         if (number == 1)
         {
-            return singular;
+            return gender switch
+            {
+                GrammaticalGender.Feminine => profile.FeminineOne,
+                GrammaticalGender.Neuter => profile.NeuterOne,
+                _ => profile.MasculineOne
+            };
         }
 
-        return string.Format(pluralFormat, Convert(number));
+        if (number == 2 &&
+            gender == GrammaticalGender.Feminine &&
+            profile.FeminineTwo is not null)
+        {
+            return profile.FeminineTwo;
+        }
+
+        var unit = profile.UnitsMap[number];
+        return profile.SupportsEifelerRule &&
+               wordForm == WordForm.Eifeler &&
+               number is 1 or 7
+            ? EifelerRule.Apply(unit)
+            : unit;
     }
 
-    static int NoRestIndex(int number) =>
-        number == 0 ? 0 : 1;
+    string GetCompoundUnit(int number) => profile.CompoundUnitsMap[number];
 
-    static string GetEndingForGender(GrammaticalGender gender) =>
-        gender switch
+    string GetTensJoiner(string nextWord) =>
+        profile.TensJoinerTransform switch
         {
-            GrammaticalGender.Masculine => "ter",
-            GrammaticalGender.Feminine => "te",
-            GrammaticalGender.Neuter => "tes",
-            _ => throw new ArgumentOutOfRangeException(nameof(gender))
+            GermanicTensJoinerTransform.None => profile.TensJoiner,
+            GermanicTensJoinerTransform.Eifeler => EifelerRule.ApplyIfNeeded(profile.TensJoiner, nextWord),
+            _ => throw new InvalidOperationException("Unknown Germanic tens joiner transform.")
         };
 
-    protected virtual string GetTens(long tens) =>
-        TensMap[tens];
+    string GetEndingForGender(GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Masculine => profile.MasculineOrdinalEnding,
+            GrammaticalGender.Feminine => profile.FeminineOrdinalEnding,
+            GrammaticalGender.Neuter => profile.NeuterOrdinalEnding,
+            _ => throw new ArgumentOutOfRangeException(nameof(gender))
+        };
+}
+
+sealed class GermanNumberToWordsProfile(
+    string zeroWord,
+    string minusWord,
+    string masculineOne,
+    string feminineOne,
+    string neuterOne,
+    string? feminineTwo,
+    string tensJoiner,
+    GermanicTensJoinerTransform tensJoinerTransform,
+    string ordinalStemSuffix,
+    string masculineOrdinalEnding,
+    string feminineOrdinalEnding,
+    string neuterOrdinalEnding,
+    bool supportsEifelerRule,
+    string[] unitsMap,
+    string[] compoundUnitsMap,
+    string[] tensMap,
+    string[] unitsOrdinal,
+    GermanFamilyScale[] scales)
+{
+    public string ZeroWord { get; } = zeroWord;
+    public string MinusWord { get; } = minusWord;
+    public string MasculineOne { get; } = masculineOne;
+    public string FeminineOne { get; } = feminineOne;
+    public string NeuterOne { get; } = neuterOne;
+    public string? FeminineTwo { get; } = feminineTwo;
+    public string TensJoiner { get; } = tensJoiner;
+    public GermanicTensJoinerTransform TensJoinerTransform { get; } = tensJoinerTransform;
+    public string OrdinalStemSuffix { get; } = ordinalStemSuffix;
+    public string MasculineOrdinalEnding { get; } = masculineOrdinalEnding;
+    public string FeminineOrdinalEnding { get; } = feminineOrdinalEnding;
+    public string NeuterOrdinalEnding { get; } = neuterOrdinalEnding;
+    public bool SupportsEifelerRule { get; } = supportsEifelerRule;
+    public string[] UnitsMap { get; } = unitsMap;
+    public string[] CompoundUnitsMap { get; } = compoundUnitsMap;
+    public string[] TensMap { get; } = tensMap;
+    public string[] UnitsOrdinal { get; } = unitsOrdinal;
+    public GermanFamilyScale[] Scales { get; } = scales;
+}
+
+readonly record struct GermanFamilyScale(
+    long Value,
+    bool AddSpaceBeforeNextPart,
+    GrammaticalGender CountGender,
+    string SingularCardinal,
+    string PluralCardinalFormat,
+    string[] OrdinalSingular,
+    string[] OrdinalPlural,
+    string? CountWordFormNextWord = null);
+
+enum GermanicTensJoinerTransform
+{
+    None,
+    Eifeler
 }

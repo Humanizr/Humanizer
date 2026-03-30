@@ -1,0 +1,5 @@
+inherits: pt
+numberToWords: brazilian-portuguese
+dateToOrdinalWords: brazilian-portuguese
+dateOnlyToOrdinalWords: brazilian-portuguese
+timeOnlyToClockNotation: brazilian-portuguese

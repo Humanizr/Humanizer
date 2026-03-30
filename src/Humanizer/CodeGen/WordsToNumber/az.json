@@ -1,0 +1,34 @@
+{
+  "normalizationProfile": "CollapseWhitespace",
+  "cardinalMap": {
+    "sıfır": 0,
+    "bir": 1,
+    "iki": 2,
+    "üç": 3,
+    "dörd": 4,
+    "beş": 5,
+    "altı": 6,
+    "yeddi": 7,
+    "səkkiz": 8,
+    "doqquz": 9,
+    "on": 10,
+    "iyirmi": 20,
+    "otuz": 30,
+    "qırx": 40,
+    "əlli": 50,
+    "altmış": 60,
+    "yetmiş": 70,
+    "səksən": 80,
+    "doxsan": 90,
+    "yüz": 100,
+    "min": 1000,
+    "milyon": 1000000
+  },
+  "ordinalNumberToWordsKind": "azerbaijani",
+  "ordinalGenderVariant": "none",
+  "useHundredMultiplier": true,
+  "negativePrefixes": [
+    "mənfi "
+  ]
+}
+

@@ -1,0 +1,26 @@
+{
+  "engine": "pluralized-scale",
+  "zeroWord": "nulis",
+  "minusWord": "minus",
+  "zeroOrdinalStem": "nulin",
+  "formDetector": "lithuanian",
+  "unitVariantStrategy": "lithuanian",
+  "ordinalMode": "lithuanian",
+  "supportsNeuter": false,
+  "masculineOrdinalSuffix": "as",
+  "feminineOrdinalSuffix": "a",
+  "unitsMap": ["nulis", "vienas", "du", "trys", "keturi", "penki", "šeši", "septyni", "aštuoni", "devyni", "dešimt", "vienuolika", "dvylika", "trylika", "keturiolika", "penkiolika", "šešiolika", "septyniolika", "aštuoniolika", "devyniolika"],
+  "tensMap": ["", "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"],
+  "hundredsMap": ["", "šimtas", "du šimtai", "trys šimtai", "keturi šimtai", "penki šimtai", "šeši šimtai", "septyni šimtai", "aštuoni šimtai", "devyni šimtai"],
+  "ordinalUnitsMap": ["", "pirm", "antr", "treči", "ketvirt", "penkt", "šešt", "septint", "aštunt", "devint", "dešimt", "vienuolikt", "dvylikt", "trylikt", "keturiolikt", "penkiolikt", "šešiolikt", "septyniolikt", "aštuoniolikt", "devyniolikt", "dvidešimt"],
+  "ordinalTensMap": ["", "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"],
+  "ordinalHundredsMap": ["", "šimt", "du šimt", "trys šimt", "keturi šimt", "penki šimt", "šeši šimt", "septyni šimt", "aštuoni šimt", "devyni šimt"],
+  "scales": [
+    { "value": 1000000000000000000, "countGender": "masculine", "singular": "kvintilijonas", "paucal": "kvintilijonai", "plural": "kvintilijonų" },
+    { "value": 1000000000000000, "countGender": "masculine", "singular": "kvadrilijonas", "paucal": "kvadrilijonai", "plural": "kvadrilijonų" },
+    { "value": 1000000000000, "countGender": "masculine", "singular": "trilijonas", "paucal": "trilijonai", "plural": "trilijonų" },
+    { "value": 1000000000, "countGender": "masculine", "singular": "milijardas", "paucal": "milijardai", "plural": "milijardų", "ordinalStem": "milijard" },
+    { "value": 1000000, "countGender": "masculine", "singular": "milijonas", "paucal": "milijonai", "plural": "milijonų", "ordinalStem": "milijon" },
+    { "value": 1000, "countGender": "masculine", "singular": "tūkstantis", "paucal": "tūkstančiai", "plural": "tūkstančių", "ordinalStem": "tūkstant" }
+  ]
+}

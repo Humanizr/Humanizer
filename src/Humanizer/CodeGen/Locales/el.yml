@@ -1,0 +1,8 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: και
+formatter: trim-plural-suffix
+numberToWords: greek
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: el

@@ -1,0 +1,6 @@
+﻿collectionFormatter: oxford
+numberToWords: english
+ordinalizer: english
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: en

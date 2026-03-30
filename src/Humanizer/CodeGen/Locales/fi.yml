@@ -1,0 +1,7 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: ja
+formatter: finnish
+numberToWords: finnish
+ordinalizer: period-suffix
+wordsToNumber: finnish

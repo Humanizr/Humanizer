@@ -16,7 +16,7 @@ internal class DefaultWordsToNumberConverter(CultureInfo culture) : GenderlessWo
     {
         if (cultureInfo.TwoLetterISOLanguageName == "en")
         {
-            return new EnglishWordsToNumberConverter().TryConvert(words, out parsedValue, out unrecognizedWord);
+            return TokenMapWordsToNumberConverters.En.TryConvert(words, out parsedValue, out unrecognizedWord);
         }
         throw new NotSupportedException($"Words-to-number conversion is not supported for '{cultureInfo.TwoLetterISOLanguageName}'.");
     }

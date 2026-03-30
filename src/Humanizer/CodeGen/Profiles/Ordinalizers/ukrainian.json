@@ -1,0 +1,18 @@
+{
+  "engine": "template",
+  "masculine": {
+    "defaultSuffix": "-й"
+  },
+  "feminine": {
+    "defaultSuffix": "-а",
+    "lastDigitSuffixes": {
+      "3": "-я"
+    }
+  },
+  "neuter": {
+    "defaultSuffix": "-е",
+    "lastDigitSuffixes": {
+      "3": "-є"
+    }
+  }
+}

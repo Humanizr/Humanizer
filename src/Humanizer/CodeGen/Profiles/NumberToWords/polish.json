@@ -1,0 +1,21 @@
+{
+  "engine": "pluralized-scale",
+  "useCulture": true,
+  "zeroWord": "zero",
+  "minusWord": "minus",
+  "formDetector": "polish",
+  "unitVariantStrategy": "polish",
+  "ordinalMode": "numeric-culture",
+  "supportsNeuter": true,
+  "unitsMap": ["zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście"],
+  "tensMap": ["zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt"],
+  "hundredsMap": ["zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset"],
+  "scales": [
+    { "value": 1000000000000000000, "countGender": "masculine", "singular": "trylion", "paucal": "tryliony", "plural": "trylionów" },
+    { "value": 1000000000000000, "countGender": "masculine", "singular": "biliard", "paucal": "biliardy", "plural": "biliardów" },
+    { "value": 1000000000000, "countGender": "masculine", "singular": "bilion", "paucal": "biliony", "plural": "bilionów" },
+    { "value": 1000000000, "countGender": "masculine", "singular": "miliard", "paucal": "miliardy", "plural": "miliardów" },
+    { "value": 1000000, "countGender": "masculine", "singular": "milion", "paucal": "miliony", "plural": "milionów" },
+    { "value": 1000, "countGender": "masculine", "singular": "tysiąc", "paucal": "tysiące", "plural": "tysięcy" }
+  ]
+}

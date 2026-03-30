@@ -1,0 +1,17 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "string-long-dictionary", "property": "cardinalMap" },
+        { "kind": "string-long-dictionary", "property": "bareScaleMap" },
+        { "kind": "builder", "property": "scales", "builder": "suffix-scale-word-array" },
+        { "kind": "string", "property": "hundredSingularToken" },
+        { "kind": "string", "property": "hundredPluralToken" },
+        { "kind": "string", "property": "tensSuffixToken" },
+        { "kind": "string", "property": "teenSuffixToken" },
+        { "kind": "optional-string-array", "property": "negativePrefixes" }
+      ]
+    }
+  ]
+}

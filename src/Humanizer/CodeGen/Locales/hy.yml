@@ -1,0 +1,9 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: և
+formatter: trim-plural-suffix
+numberToWords: armenian
+ordinalizer: armenian
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: hy

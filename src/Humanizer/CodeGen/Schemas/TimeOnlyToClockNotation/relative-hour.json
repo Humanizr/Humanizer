@@ -1,0 +1,27 @@
+{
+  "runtimeType": "RelativeHourClockNotationConverter",
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "typeName": "RelativeHourClockNotationProfile",
+      "arguments": [
+        { "kind": "string", "property": "midnight" },
+        { "kind": "string", "property": "midday" },
+        { "kind": "string", "property": "singularArticle" },
+        { "kind": "string", "property": "pluralArticle" },
+        { "kind": "string", "property": "and" },
+        { "kind": "string", "property": "quarterPast" },
+        { "kind": "string", "property": "halfPast" },
+        { "kind": "string", "property": "twentyFiveTo" },
+        { "kind": "string", "property": "twentyTo" },
+        { "kind": "string", "property": "quarterTo" },
+        { "kind": "string", "property": "tenTo" },
+        { "kind": "string", "property": "fiveTo" },
+        { "kind": "string", "property": "lateNightPeriod" },
+        { "kind": "string", "property": "morningPeriod" },
+        { "kind": "string", "property": "afternoonPeriod" },
+        { "kind": "string", "property": "eveningPeriod" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "engine": "linking-scale",
+  "zeroWord": "sero",
+  "minusWord": "minus",
+  "conjunctionWord": "at",
+  "tensRemainderJoiner": "'t ",
+  "unitsMap": [
+    "sero", "isa", "dalawa", "tatlo", "apat", "lima", "anim", "pito", "walo", "siyam", "sampu",
+    "labing-isa", "labing-dalawa", "labing-tatlo", "labing-apat", "labing-lima", "labing-anim", "labing-pito",
+    "labing-walo", "labing-siyam"
+  ],
+  "tensMap": ["", "", "dalawampu", "tatlumpu", "apatnapu", "limampu", "animnapu", "pitumpu", "walumpu", "siyamnapu"],
+  "hundredWords": ["", "isang daan", "dalawang daan", "tatlong daan", "apat na daan", "limang daan", "anim na daan", "pitong daan", "walong daan", "siyam na daan"],
+  "scalePrefixes": ["", "isang", "dalawang", "tatlong", "apat na", "limang", "anim na", "pitong", "walong", "siyam na"],
+  "scales": [
+    { "value": 1000000000000000000, "name": "kwintilyon" },
+    { "value": 1000000000000000, "name": "kwadrilyon" },
+    { "value": 1000000000000, "name": "trilyon" },
+    { "value": 1000000000, "name": "bilyon" },
+    { "value": 1000000, "name": "milyon" },
+    { "value": 1000, "name": "libo" }
+  ],
+  "scaleLinkRules": [
+    { "suffix": " isa", "replacement": " isang" },
+    { "suffix": " dalawa", "replacement": " dalawang" },
+    { "suffix": " tatlo", "replacement": " tatlong" },
+    { "suffix": " apat", "replacement": " apat na" },
+    { "suffix": " lima", "replacement": " limang" },
+    { "suffix": " anim", "replacement": " anim na" },
+    { "suffix": " pito", "replacement": " pitong" },
+    { "suffix": " walo", "replacement": " walong" },
+    { "suffix": " siyam", "replacement": " siyam na" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "runtimeType": "ConjoinedGenderedScaleNumberToWordsConverter",
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "string", "property": "conjunction" },
+        { "kind": "string-array", "property": "unitsMap" },
+        { "kind": "string-array", "property": "tensMap" },
+        { "kind": "string-array", "property": "hundredsMap" },
+        { "kind": "string-array", "property": "hundredsOrdinalMap" },
+        { "kind": "string-array", "property": "unitsOrdinal" },
+        { "kind": "builder", "property": "scales", "builder": "conjoined-gendered-scale-array" }
+      ]
+    }
+  ]
+}

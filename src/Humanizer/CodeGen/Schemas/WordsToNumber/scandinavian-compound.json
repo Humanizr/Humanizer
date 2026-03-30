@@ -1,0 +1,16 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "int-string-dictionary", "property": "cardinalMap" },
+        { "kind": "string-array", "property": "tens" },
+        { "kind": "string-array", "property": "largeScales" },
+        { "kind": "string", "property": "ignoredToken", "defaultValue": "" },
+        { "kind": "builder", "builder": "scandinavian-ordinal-map" },
+        { "kind": "optional-string-array", "property": "negativePrefixes" },
+        { "kind": "nullable-int64", "property": "sequenceMultiplierThreshold" }
+      ]
+    }
+  ]
+}

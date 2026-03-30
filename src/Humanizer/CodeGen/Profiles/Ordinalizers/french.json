@@ -1,0 +1,21 @@
+{
+  "engine": "template",
+  "masculine": {
+    "defaultSuffix": "ème",
+    "exactSuffixes": {
+      "1": "er"
+    }
+  },
+  "feminine": {
+    "defaultSuffix": "ème",
+    "exactSuffixes": {
+      "1": "ère"
+    }
+  },
+  "neuter": {
+    "defaultSuffix": "ème",
+    "exactSuffixes": {
+      "1": "er"
+    }
+  }
+}

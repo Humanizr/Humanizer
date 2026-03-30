@@ -1,0 +1,9 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: i
+formatter: south-slavic-paucal
+numberToWords: croatian
+ordinalizer: period-suffix
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: hr

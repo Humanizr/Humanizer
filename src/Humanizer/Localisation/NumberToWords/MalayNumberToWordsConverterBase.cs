@@ -2,25 +2,20 @@ using System.Collections.Generic;
 
 namespace Humanizer;
 
-abstract class MalayNumberToWordsConverterBase : GenderlessNumberToWordsConverter
+class MalayFamilyNumberToWordsConverter(MalayNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
 {
-    protected abstract string ZeroWord { get; }
-    protected abstract string MinusWord { get; }
-    protected abstract string ThousandOneWord { get; }
-    protected abstract string[] Units { get; }
-    protected abstract string[] Tens { get; }
-    protected abstract Scale[] Scales { get; }
+    readonly MalayNumberToWordsProfile profile = profile;
 
     public override string Convert(long number)
     {
         if (number == 0)
         {
-            return ZeroWord;
+            return profile.ZeroWord;
         }
 
         if (number < 0)
         {
-            return $"{MinusWord} {Convert(-number)}";
+            return $"{profile.MinusWord} {Convert(-number)}";
         }
 
         return ConvertPositive(number);
@@ -30,7 +25,7 @@ abstract class MalayNumberToWordsConverterBase : GenderlessNumberToWordsConverte
     {
         var parts = new List<string>();
 
-        foreach (var scale in Scales)
+        foreach (var scale in profile.Scales)
         {
             if (number < scale.Value)
             {
@@ -47,7 +42,7 @@ abstract class MalayNumberToWordsConverterBase : GenderlessNumberToWordsConverte
 
             if (scale.Value == 1_000 && part == 1)
             {
-                parts.Add(ThousandOneWord);
+                parts.Add(profile.ThousandOneWord);
             }
             else
             {
@@ -64,7 +59,7 @@ abstract class MalayNumberToWordsConverterBase : GenderlessNumberToWordsConverte
     }
 
     protected virtual string GetHundredsWord(long count) =>
-        count == 1 ? "seratus" : $"{Units[count]} ratus";
+        count == 1 ? profile.HundredWord : $"{profile.Units[count]} {profile.HundredUnitWord}";
 
     string ConvertUnderThousand(long number)
     {
@@ -87,23 +82,23 @@ abstract class MalayNumberToWordsConverterBase : GenderlessNumberToWordsConverte
 
     string ConvertUnderHundred(long number)
     {
-        if (number < Units.Length)
+        if (number < profile.Units.Length)
         {
-            return Units[number];
+            return profile.Units[number];
         }
 
         var tens = (int)(number / 10);
         var remainder = number % 10;
-        var tensWord = Tens[tens];
+        var tensWord = profile.Tens[tens];
 
         return remainder == 0
             ? tensWord
-            : $"{tensWord} {Units[remainder]}";
+            : $"{tensWord} {profile.Units[remainder]}";
     }
 
     public override string ConvertToOrdinal(int number) => Convert(number);
 
-    protected readonly struct Scale
+    internal readonly struct Scale
     {
         public long Value { get; }
         public string Name { get; }
@@ -114,4 +109,24 @@ abstract class MalayNumberToWordsConverterBase : GenderlessNumberToWordsConverte
             Name = name;
         }
     }
+}
+
+sealed class MalayNumberToWordsProfile(
+    string zeroWord,
+    string minusWord,
+    string thousandOneWord,
+    string hundredWord,
+    string hundredUnitWord,
+    string[] units,
+    string[] tens,
+    MalayFamilyNumberToWordsConverter.Scale[] scales)
+{
+    public string ZeroWord { get; } = zeroWord;
+    public string MinusWord { get; } = minusWord;
+    public string ThousandOneWord { get; } = thousandOneWord;
+    public string HundredWord { get; } = hundredWord;
+    public string HundredUnitWord { get; } = hundredUnitWord;
+    public string[] Units { get; } = units;
+    public string[] Tens { get; } = tens;
+    public MalayFamilyNumberToWordsConverter.Scale[] Scales { get; } = scales;
 }

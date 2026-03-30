@@ -1,0 +1,11 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: y
+numberToWords: spanish
+ordinalizer: spanish
+dateToOrdinalWords: spanish
+dateOnlyToOrdinalWords: spanish
+timeOnlyToClockNotation: spanish
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: es

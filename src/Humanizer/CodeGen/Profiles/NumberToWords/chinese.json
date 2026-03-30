@@ -1,0 +1,15 @@
+{
+  "engine": "east-asian-grouped",
+  "zeroWord": "零",
+  "negativePrefix": "负 ",
+  "ordinalPrefix": "第 ",
+  "digitWords": [ "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" ],
+  "smallUnitWords": [ "", "十", "百", "千" ],
+  "largeUnits": [ "", "万", "亿", "兆" ],
+  "omitOneBeforeTen": true,
+  "omitOneBeforeTenOnlyWhenLeading": true,
+  "omitOneBeforeHundred": false,
+  "omitOneBeforeThousand": false,
+  "insertZeroInGroup": true,
+  "insertZeroBetweenGroups": true
+}

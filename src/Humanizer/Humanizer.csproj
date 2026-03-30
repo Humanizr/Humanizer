@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0;net8.0;net48;netstandard2.0</TargetFrameworks>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields, etc, into a human friendly format</Description>
@@ -13,8 +13,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="CodeGen\*.manifest" />
-    <AdditionalFiles Include="CodeGen\*.json" />
+    <AdditionalFiles Include="CodeGen\Locales\*.yml" />
+    <AdditionalFiles Include="CodeGen\Profiles\Formatters\*.json" />
+    <AdditionalFiles Include="CodeGen\Profiles\NumberToWords\*.json" />
+    <AdditionalFiles Include="CodeGen\Schemas\NumberToWords\*.json" />
+    <AdditionalFiles Include="CodeGen\Profiles\Ordinalizers\*.json" />
+    <AdditionalFiles Include="CodeGen\Profiles\OrdinalDates\*.json" />
+    <AdditionalFiles Include="CodeGen\Profiles\TimeOnlyToClockNotation\*.json" />
+    <AdditionalFiles Include="CodeGen\Schemas\TimeOnlyToClockNotation\*.json" />
+    <AdditionalFiles Include="CodeGen\Profiles\WordsToNumber\*.json" />
+    <AdditionalFiles Include="CodeGen\Schemas\WordsToNumber\*.json" />
+    <AdditionalFiles Include="CodeGen\WordsToNumber\*.json" />
     <AdditionalFiles Include="Properties\Resources.resx" />
   </ItemGroup>
   

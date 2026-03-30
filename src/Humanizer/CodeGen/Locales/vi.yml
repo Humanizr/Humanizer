@@ -1,0 +1,8 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: và
+formatter: trim-plural-suffix
+numberToWords: vietnamese
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: vi

@@ -1,0 +1,29 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "enum", "property": "style", "enumType": "ScandinavianFamilyStyle" },
+        { "kind": "int64", "property": "maximumValue" },
+        { "kind": "enum", "property": "defaultGender", "enumType": "GrammaticalGender" },
+        { "kind": "string", "property": "zeroWord" },
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "string", "property": "oneDefault" },
+        { "kind": "string", "property": "oneMasculine" },
+        { "kind": "string", "property": "oneFeminine" },
+        { "kind": "string", "property": "oneNeuter" },
+        { "kind": "string", "property": "tensLinker" },
+        { "kind": "string", "property": "hundredWord" },
+        { "kind": "string", "property": "hundredCompositeSingularWord" },
+        { "kind": "string", "property": "thousandWord" },
+        { "kind": "string", "property": "thousandSingularWord" },
+        { "kind": "string", "property": "thousandCompositeSingularWord" },
+        { "kind": "string-array", "property": "unitsMap" },
+        { "kind": "string-array", "property": "tensMap" },
+        { "kind": "string-array", "property": "hundredUnitMap" },
+        { "kind": "builder", "property": "scales", "builder": "scandinavian-scale-array" },
+        { "kind": "nullable-int-string-dictionary", "property": "ordinalExceptions", "missingValue": "empty" }
+      ]
+    }
+  ]
+}

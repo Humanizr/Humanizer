@@ -1,0 +1,6 @@
+﻿collectionFormatter:
+  kind: clitic
+  value: ו
+formatter: hebrew
+numberToWords: hebrew
+wordsToNumber: hebrew

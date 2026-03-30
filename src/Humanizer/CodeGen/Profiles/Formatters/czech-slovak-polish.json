@@ -1,0 +1,13 @@
+{
+  "engine": "profiled",
+  "resourceKeyDetector": "between2-and4-paucal",
+  "resourceKeySuffixes": {
+    "paucal": "_Paucal"
+  },
+  "dataUnitDetector": "between2-and4-paucal",
+  "dataUnitSuffixes": {
+    "singular": "_Singular",
+    "paucal": "_Paucal"
+  },
+  "dataUnitFallbackTransform": "trim-trailing-s"
+}

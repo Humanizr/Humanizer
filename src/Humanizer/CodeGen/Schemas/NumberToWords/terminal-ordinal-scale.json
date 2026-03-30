@@ -1,0 +1,22 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "string", "property": "zeroWord" },
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "string-array", "property": "unitStems" },
+        { "kind": "string-array", "property": "ordinalUnitStems" },
+        { "kind": "string-array", "property": "tensMap" },
+        { "kind": "string-array", "property": "hundredsExactStems" },
+        { "kind": "string", "property": "exactOneHundredCardinal" },
+        { "kind": "string", "property": "exactOneHundredAfterHigherScale" },
+        { "kind": "string", "property": "oneHundredWithRemainder" },
+        { "kind": "string", "property": "hundredsPluralWord" },
+        { "kind": "string", "property": "masculineOrdinalSuffix" },
+        { "kind": "string", "property": "feminineOrdinalSuffix" },
+        { "kind": "builder", "property": "scales", "builder": "terminal-ordinal-scale-array" }
+      ]
+    }
+  ]
+}

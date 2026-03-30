@@ -19,7 +19,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         brazilianConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static readonly FrTimeOnlyToClockNotationConverter frConverter = new();
+    static readonly FrenchTimeOnlyToClockNotationConverter frConverter = new();
     [Benchmark]
     public void FrClockNotationConverter()
     {
@@ -27,7 +27,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         frConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static readonly LbTimeOnlyToClockNotationConverter lbConverter = new();
+    static readonly LuxembourgishTimeOnlyToClockNotationConverter lbConverter = new();
     [Benchmark]
     public void LbClockNotationConverter()
     {

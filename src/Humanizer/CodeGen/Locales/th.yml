@@ -1,0 +1,6 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: และ
+formatter: trim-plural-suffix
+numberToWords: thai
+wordsToNumber: thai

@@ -1,0 +1,7 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: in
+formatter: slovenian
+numberToWords: slovenian
+ordinalizer: period-suffix
+wordsToNumber: slovenian

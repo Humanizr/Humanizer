@@ -1,0 +1,15 @@
+{
+  "engine": "profiled",
+  "resourceKeyDetector": "slovenian",
+  "resourceKeySuffixes": {
+    "dual": "_Dual",
+    "paucal": "_Paucal"
+  },
+  "dataUnitDetector": "slovenian",
+  "dataUnitSuffixes": {
+    "singular": "_Singular",
+    "dual": "_Dual",
+    "paucal": "_Paucal"
+  },
+  "dataUnitFallbackTransform": "trim-trailing-s"
+}

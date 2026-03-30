@@ -1,0 +1,28 @@
+{
+  "arguments": [
+    {
+      "kind": "profile-object",
+      "arguments": [
+        { "kind": "enum", "property": "defaultGender", "enumType": "GrammaticalGender" },
+        { "kind": "string", "property": "zeroWord" },
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "string", "property": "andPrefix" },
+        { "kind": "string", "property": "teenMasculineWord" },
+        { "kind": "string", "property": "teenFeminineWord" },
+        { "kind": "string", "property": "teenNormalizationOld" },
+        { "kind": "string", "property": "teenNormalizationNew" },
+        { "kind": "string-array", "property": "unitsFeminine" },
+        { "kind": "string-array", "property": "unitsMasculine" },
+        { "kind": "string-array", "property": "tensMap" },
+        { "kind": "string", "property": "oneHundredWord" },
+        { "kind": "string", "property": "twoHundredsWord" },
+        { "kind": "string", "property": "hundredsPluralSuffix" },
+        { "kind": "string", "property": "thousandsPluralSuffix" },
+        { "kind": "string", "property": "thousandsSingularSuffix" },
+        { "kind": "nullable-int-string-dictionary", "property": "thousandsSpecialCases", "missingValue": "empty" },
+        { "kind": "builder", "property": "scales", "builder": "construct-state-scale-array" }
+      ]
+    },
+    { "kind": "culture" }
+  ]
+}

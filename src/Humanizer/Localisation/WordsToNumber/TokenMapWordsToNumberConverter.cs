@@ -46,6 +46,32 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             break;
         }
 
+        foreach (var ordinalPrefix in rules.OrdinalPrefixes)
+        {
+            if (!normalized.StartsWith(ordinalPrefix, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            normalized = normalized[ordinalPrefix.Length..].Trim();
+            break;
+        }
+
+        if (!negative)
+        {
+            foreach (var negativeSuffix in rules.NegativeSuffixes)
+            {
+                if (!normalized.EndsWith(negativeSuffix, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                negative = true;
+                normalized = normalized[..^negativeSuffix.Length].Trim();
+                break;
+            }
+        }
+
         if (TryParseOrdinal(normalized, out parsedValue) ||
             TryParseCardinal(normalized, out parsedValue, out unrecognizedWord))
         {
@@ -127,13 +153,20 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         long total = 0;
         long current = 0;
         unrecognizedWord = null;
+        var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
+        string? pendingToken = null;
 
-        foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
+        while (TryReadNextToken(ref tokenizer, ref pendingToken, out var token))
         {
-            var token = tokenSpan.ToString();
-
-            if (ShouldIgnore(token))
+            if (TryParseTerminalOrdinal(token, ref tokenizer, ref pendingToken, total, current, out value, out unrecognizedWord))
             {
+                return true;
+            }
+
+            if (TryGetCompositeScaleValue(token, ref tokenizer, ref pendingToken, out var compositeScaleValue))
+            {
+                total += (current == 0 ? 1 : current) * compositeScaleValue;
+                current = 0;
                 continue;
             }
 
@@ -144,6 +177,12 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 return false;
             }
 
+            if (TryApplyLookaheadCompound(tokenValue, ref tokenizer, ref pendingToken, out var compoundValue))
+            {
+                current += compoundValue;
+                continue;
+            }
+
             if (tokenValue >= rules.ScaleThreshold)
             {
                 total += (current == 0 ? 1 : current) * tokenValue;
@@ -151,7 +190,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 continue;
             }
 
-            if (rules.UseHundredMultiplier && tokenValue == 100)
+            if (ShouldMultiplyToken(token, tokenValue))
             {
                 current = (current == 0 ? 1 : current) * tokenValue;
                 continue;
@@ -172,11 +211,173 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         return true;
     }
 
+    bool TryParseTerminalOrdinal(
+        string token,
+        ref WordsToNumberTokenizer.Enumerator tokenizer,
+        ref string? pendingToken,
+        long total,
+        long current,
+        out int value,
+        out string? unrecognizedWord)
+    {
+        if (!rules.AllowTerminalOrdinalToken ||
+            rules.OrdinalMap?.TryGetValue(token, out var ordinalValue) != true)
+        {
+            value = default;
+            unrecognizedWord = null;
+            return false;
+        }
+
+        while (TryReadNextToken(ref tokenizer, ref pendingToken, out var trailingToken))
+        {
+            value = default;
+            unrecognizedWord = trailingToken;
+            return false;
+        }
+
+        var parsedLong = total + current + ordinalValue;
+        if (parsedLong is > int.MaxValue or < int.MinValue)
+        {
+            value = default;
+            unrecognizedWord = token;
+            return false;
+        }
+
+        value = (int)parsedLong;
+        unrecognizedWord = null;
+        return true;
+    }
+
     bool ShouldIgnore(string token)
     {
         foreach (var ignoredToken in rules.IgnoredTokens)
         {
             if (token == ignoredToken)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool ShouldMultiplyToken(string token, long tokenValue)
+    {
+        if (rules.UseHundredMultiplier && tokenValue == 100)
+        {
+            return true;
+        }
+
+        foreach (var multiplierToken in rules.MultiplierTokens)
+        {
+            if (token == multiplierToken)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool TryGetCompositeScaleValue(
+        string token,
+        ref WordsToNumberTokenizer.Enumerator tokenizer,
+        ref string? pendingToken,
+        out long tokenValue)
+    {
+        if (rules.CompositeScaleMap is null ||
+            rules.CompositeScaleMap.Count == 0 ||
+            !TryReadNextToken(ref tokenizer, ref pendingToken, out var nextToken))
+        {
+            tokenValue = default;
+            return false;
+        }
+
+        if (rules.CompositeScaleMap.TryGetValue(token + " " + nextToken, out tokenValue))
+        {
+            return true;
+        }
+
+        pendingToken = nextToken;
+        tokenValue = default;
+        return false;
+    }
+
+    bool TryApplyLookaheadCompound(long tokenValue, ref WordsToNumberTokenizer.Enumerator tokenizer, ref string? pendingToken, out long compoundValue)
+    {
+        if (!TryGetUnitTokenValue(tokenValue, out var unitValue) ||
+            !TryReadNextToken(ref tokenizer, ref pendingToken, out var nextToken))
+        {
+            compoundValue = default;
+            return false;
+        }
+
+        if (IsMatch(rules.TeenSuffixTokens, nextToken))
+        {
+            compoundValue = rules.TeenBaseValue + unitValue;
+            return true;
+        }
+
+        if (unitValue >= rules.HundredSuffixMinValue &&
+            unitValue <= rules.HundredSuffixMaxValue &&
+            IsMatch(rules.HundredSuffixTokens, nextToken))
+        {
+            compoundValue = unitValue * rules.HundredSuffixValue;
+            return true;
+        }
+
+        pendingToken = nextToken;
+        compoundValue = default;
+        return false;
+    }
+
+    bool TryReadNextToken(ref WordsToNumberTokenizer.Enumerator tokenizer, ref string? pendingToken, out string token)
+    {
+        while (WordsToNumberTokenizer.TryReadNext(ref tokenizer, ref pendingToken, out var rawToken))
+        {
+            token = NormalizeToken(rawToken);
+            if (token.Length == 0 || ShouldIgnore(token))
+            {
+                continue;
+            }
+
+            return true;
+        }
+
+        token = string.Empty;
+        return false;
+    }
+
+    string NormalizeToken(string token)
+    {
+        foreach (var prefix in rules.LeadingTokenPrefixesToTrim)
+        {
+            if (token.StartsWith(prefix, StringComparison.Ordinal))
+            {
+                return token[prefix.Length..];
+            }
+        }
+
+        return token;
+    }
+
+    bool TryGetUnitTokenValue(long tokenValue, out long unitValue)
+    {
+        if (tokenValue >= rules.UnitTokenMinValue && tokenValue <= rules.UnitTokenMaxValue)
+        {
+            unitValue = tokenValue;
+            return true;
+        }
+
+        unitValue = default;
+        return false;
+    }
+
+    static bool IsMatch(string[] candidates, string token)
+    {
+        foreach (var candidate in candidates)
+        {
+            if (token == candidate)
             {
                 return true;
             }
@@ -214,13 +415,27 @@ internal sealed class TokenMapWordsToNumberRules
 {
     public required FrozenDictionary<string, long> CardinalMap { get; init; }
     public FrozenDictionary<string, int>? OrdinalMap { get; init; }
+    public FrozenDictionary<string, long>? CompositeScaleMap { get; init; }
     public TokenMapNormalizationProfile NormalizationProfile { get; init; }
     public string[] NegativePrefixes { get; init; } = [];
+    public string[] NegativeSuffixes { get; init; } = [];
+    public string[] OrdinalPrefixes { get; init; } = [];
     public string[] IgnoredTokens { get; init; } = [];
+    public string[] LeadingTokenPrefixesToTrim { get; init; } = [];
+    public string[] MultiplierTokens { get; init; } = [];
     public string[] TokenSuffixesToStrip { get; init; } = [];
     public string[] OrdinalAbbreviationSuffixes { get; init; } = [];
+    public string[] TeenSuffixTokens { get; init; } = [];
+    public string[] HundredSuffixTokens { get; init; } = [];
+    public bool AllowTerminalOrdinalToken { get; init; }
     public bool UseHundredMultiplier { get; init; }
     public bool AllowInvariantIntegerInput { get; init; }
+    public long TeenBaseValue { get; init; } = 10;
+    public long HundredSuffixValue { get; init; } = 100;
+    public long UnitTokenMinValue { get; init; } = 1;
+    public long UnitTokenMaxValue { get; init; } = 9;
+    public long HundredSuffixMinValue { get; init; } = long.MaxValue;
+    public long HundredSuffixMaxValue { get; init; } = long.MinValue;
     public long ScaleThreshold { get; init; } = 1000;
 }
 
@@ -228,14 +443,24 @@ internal enum TokenMapNormalizationProfile
 {
     CollapseWhitespace,
     LowercaseRemovePeriods,
-    LowercaseReplacePeriodsWithSpaces
+    LowercaseReplacePeriodsWithSpaces,
+    LowercaseRemovePeriodsAndDiacritics,
+    PunctuationToSpacesRemoveDiacritics,
+    Persian
 }
 
 static class TokenMapWordsToNumberNormalizer
 {
     public static string Normalize(string words, TokenMapNormalizationProfile profile)
     {
-        var source = words.AsSpan().Trim();
+        var sourceString = profile switch
+        {
+            TokenMapNormalizationProfile.LowercaseRemovePeriodsAndDiacritics => RemoveDiacritics(words),
+            TokenMapNormalizationProfile.PunctuationToSpacesRemoveDiacritics => RemoveDiacritics(words),
+            TokenMapNormalizationProfile.Persian => NormalizePersian(words),
+            _ => words
+        };
+        var source = sourceString.AsSpan().Trim();
         if (source.IsEmpty)
         {
             return string.Empty;
@@ -277,6 +502,46 @@ static class TokenMapWordsToNumberNormalizer
 
                     current = char.ToLowerInvariant(current);
                     break;
+                case TokenMapNormalizationProfile.LowercaseRemovePeriodsAndDiacritics:
+                    if (current == ',' || current == '.')
+                    {
+                        continue;
+                    }
+
+                    if (current == '-')
+                    {
+                        current = ' ';
+                    }
+
+                    current = char.ToLowerInvariant(current);
+                    break;
+                case TokenMapNormalizationProfile.PunctuationToSpacesRemoveDiacritics:
+                    switch (current)
+                    {
+                        case ',':
+                        case '.':
+                        case ':':
+                        case ';':
+                        case '"':
+                        case '\'':
+                        case '״':
+                        case '׳':
+                        case '-':
+                        case '־':
+                        case '/':
+                        case '\\':
+                        case '(':
+                        case ')':
+                        case '[':
+                        case ']':
+                        case '{':
+                        case '}':
+                            current = ' ';
+                            break;
+                    }
+                    break;
+                case TokenMapNormalizationProfile.Persian:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(profile), profile, null);
             }
@@ -303,5 +568,29 @@ static class TokenMapWordsToNumberNormalizer
         }
 
         return builder.ToString();
+    }
+
+    static string NormalizePersian(string words) =>
+        words.Replace(",", string.Empty)
+             .Replace(".", string.Empty)
+             .Replace("،", string.Empty)
+             .Replace("\u200c", " ")
+             .Replace('ي', 'ی')
+             .Replace('ك', 'ک');
+
+    internal static string RemoveDiacritics(string text)
+    {
+        var normalized = text.Normalize(NormalizationForm.FormD);
+        var builder = new StringBuilder(text.Length);
+
+        foreach (var character in normalized)
+        {
+            if (CharUnicodeInfo.GetUnicodeCategory(character) != UnicodeCategory.NonSpacingMark)
+            {
+                builder.Append(character);
+            }
+        }
+
+        return builder.ToString().Normalize(NormalizationForm.FormC);
     }
 }

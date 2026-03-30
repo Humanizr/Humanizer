@@ -1,0 +1,4 @@
+{
+  "pattern": "{day} 'de' MMMM 'de' yyyy",
+  "dayMode": "MasculineOrdinalWhenDayIsOne"
+}

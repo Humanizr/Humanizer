@@ -1,0 +1,9 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: a
+formatter: czech-slovak-polish
+numberToWords: czech
+ordinalizer: period-suffix
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: cs

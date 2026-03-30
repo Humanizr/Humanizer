@@ -1,0 +1,6 @@
+﻿collectionFormatter:
+  kind: clitic
+  value: و
+formatter: arabic
+numberToWords: arabic
+wordsToNumber: arabic

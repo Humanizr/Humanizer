@@ -1,0 +1,19 @@
+{
+  "engine": "relative-hour",
+  "midnight": "medianoche",
+  "midday": "mediodía",
+  "singularArticle": "la",
+  "pluralArticle": "las",
+  "and": "y",
+  "quarterPast": "y cuarto",
+  "halfPast": "y media",
+  "twentyFiveTo": "menos veinticinco",
+  "twentyTo": "menos veinte",
+  "quarterTo": "menos cuarto",
+  "tenTo": "menos diez",
+  "fiveTo": "menos cinco",
+  "lateNightPeriod": "de la madrugada",
+  "morningPeriod": "de la mañana",
+  "afternoonPeriod": "de la tarde",
+  "eveningPeriod": "de la noche"
+}

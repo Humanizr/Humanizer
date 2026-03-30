@@ -1,0 +1,9 @@
+﻿collectionFormatter:
+  kind: conjunction
+  value: e
+numberToWords: portuguese
+ordinalizer: portuguese
+timeOnlyToClockNotation: portuguese
+wordsToNumber:
+  kind: lexicon
+  sourceLocale: pt

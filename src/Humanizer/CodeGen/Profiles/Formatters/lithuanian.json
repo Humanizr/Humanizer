@@ -1,0 +1,24 @@
+{
+  "engine": "profiled",
+  "resourceKeyOverrides": [
+    {
+      "number": 0,
+      "suffix": "",
+      "keys": [
+        "TimeSpanHumanize_Zero",
+        "DateHumanize_Now"
+      ]
+    }
+  ],
+  "resourceKeyDetector": "lithuanian",
+  "resourceKeySuffixes": {
+    "singular": "_Singular",
+    "plural": "_Plural"
+  },
+  "dataUnitDetector": "lithuanian",
+  "dataUnitSuffixes": {
+    "singular": "_Singular",
+    "plural": "_Plural"
+  },
+  "dataUnitFallbackTransform": "trim-trailing-s"
+}

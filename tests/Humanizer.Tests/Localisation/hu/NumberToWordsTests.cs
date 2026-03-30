@@ -3,7 +3,8 @@ namespace hu;
 [UseCulture("hu-HU")]
 public class NumberToWordsTests
 {
-    private readonly HungarianNumberToWordsConverter converter = new();
+    private static readonly INumberToWordsConverter converter =
+        Configurator.NumberToWordsConverters.ResolveForCulture(new CultureInfo("hu-HU"));
 
     [Theory]
     [InlineData(0, "nulla")]
