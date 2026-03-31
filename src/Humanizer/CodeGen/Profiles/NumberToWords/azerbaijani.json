@@ -4,8 +4,12 @@
   "maximumValue": 2147483647,
   "minusWord": "mənfi",
   "hundredWord": "yüz",
+  "hundredStrategy": "omit-one-when-singular",
   "unitsMap": ["sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz"],
   "tensMap": ["sıfır", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan"],
+  "ordinalSuffixStrategy": "last-vowel-map",
+  "softenTerminalTBeforeSuffix": false,
+  "dropTerminalVowelBeforeHarmonySuffix": true,
   "scales": [
     { "value": 1000000000, "name": "milyard" },
     { "value": 1000000, "name": "milyon" },

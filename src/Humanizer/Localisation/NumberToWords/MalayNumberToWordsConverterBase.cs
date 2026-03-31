@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace Humanizer;
 
+// Shared Malay-family engine. Scale-level one-word overrides are generated so the converter does not hardcode thousand-specific behavior.
 class MalayFamilyNumberToWordsConverter(MalayNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
 {
     readonly MalayNumberToWordsProfile profile = profile;
@@ -40,9 +41,10 @@ class MalayFamilyNumberToWordsConverter(MalayNumberToWordsProfile profile) : Gen
                 continue;
             }
 
-            if (scale.Value == 1_000 && part == 1)
+            // Some Malay-family locales contract "one + scale" into a dedicated word such as "seribu".
+            if (part == 1 && scale.OneWord is not null)
             {
-                parts.Add(profile.ThousandOneWord);
+                parts.Add(scale.OneWord);
             }
             else
             {
@@ -61,6 +63,7 @@ class MalayFamilyNumberToWordsConverter(MalayNumberToWordsProfile profile) : Gen
     protected virtual string GetHundredsWord(long count) =>
         count == 1 ? profile.HundredWord : $"{profile.Units[count]} {profile.HundredUnitWord}";
 
+    // Hundreds remain shared; only the singular one-word form and scale words vary by generated data.
     string ConvertUnderThousand(long number)
     {
         if (number < 100)
@@ -102,19 +105,21 @@ class MalayFamilyNumberToWordsConverter(MalayNumberToWordsProfile profile) : Gen
     {
         public long Value { get; }
         public string Name { get; }
+        public string? OneWord { get; }
 
-        public Scale(long value, string name)
+        public Scale(long value, string name, string? oneWord = null)
         {
             Value = value;
             Name = name;
+            OneWord = oneWord;
         }
     }
 }
 
+// Holds the generated Malay-family lexicon and scale metadata.
 sealed class MalayNumberToWordsProfile(
     string zeroWord,
     string minusWord,
-    string thousandOneWord,
     string hundredWord,
     string hundredUnitWord,
     string[] units,
@@ -123,7 +128,6 @@ sealed class MalayNumberToWordsProfile(
 {
     public string ZeroWord { get; } = zeroWord;
     public string MinusWord { get; } = minusWord;
-    public string ThousandOneWord { get; } = thousandOneWord;
     public string HundredWord { get; } = hundredWord;
     public string HundredUnitWord { get; } = hundredUnitWord;
     public string[] Units { get; } = units;

@@ -1,12 +1,20 @@
 {
-  "engine": "uzbek-family",
+  "engine": "turkic-family",
+  "minimumValue": -2147483648,
+  "maximumValue": 2147483647,
   "minusWord": "минус",
   "hundredWord": "юз",
-  "thousandWord": "минг",
-  "millionWord": "миллион",
-  "billionWord": "миллиард",
+  "hundredStrategy": "allow-explicit-one-in-composite",
+  "ordinalSuffixStrategy": "final-character-membership",
+  "softenTerminalTBeforeSuffix": false,
+  "dropTerminalVowelBeforeHarmonySuffix": false,
+  "scales": [
+    { "value": 1000000000, "name": "миллиард" },
+    { "value": 1000000, "name": "миллион", "allowBareHundredInCount": true },
+    { "value": 1000, "name": "минг", "allowBareHundredInCount": true }
+  ],
   "secondOrdinalSuffixCharacters": "иа",
   "unitsMap": ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"],
   "tensMap": ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"],
-  "ordinalSuffixes": ["инчи", "нчи"]
+  "ordinalSuffixPair": ["инчи", "нчи"]
 }

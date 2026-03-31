@@ -356,6 +356,80 @@ public class HumanizerSourceGeneratorTests
         Assert.DoesNotContain("case \"maltese\":", wordsCatalogSource);
     }
 
+    [Fact]
+    public void ExistingNumberToWordsFamiliesPreferExplicitStrategiesOverLocaleSpecificBranches()
+    {
+        var sourceRoot = Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "CodeGen", "Schemas", "NumberToWords");
+        var englishSchema = File.ReadAllText(Path.Combine(sourceRoot, "english-family.json"));
+        var frenchSchema = File.ReadAllText(Path.Combine(sourceRoot, "french-family.json"));
+        var malaySchema = File.ReadAllText(Path.Combine(sourceRoot, "malay-family.json"));
+        var portugueseSchema = File.ReadAllText(Path.Combine(sourceRoot, "portuguese-family.json"));
+        var scandinavianSchema = File.ReadAllText(Path.Combine(sourceRoot, "scandinavian-family.json"));
+
+        Assert.Contains("\"addAndMode\"", englishSchema);
+        Assert.Contains("\"andStrategy\"", englishSchema);
+        Assert.Contains("\"tupleSuffix\"", englishSchema);
+        Assert.Contains("\"ordinalLeadingOneStrategy\"", englishSchema);
+        Assert.DoesNotContain("\"respectAddAndFlag\"", englishSchema);
+        Assert.DoesNotContain("\"useAndWithinGroup\"", englishSchema);
+        Assert.DoesNotContain("\"useAndAfterScaleForSubHundredRemainder\"", englishSchema);
+        Assert.DoesNotContain("\"omitLeadingOneInOrdinal\"", englishSchema);
+
+        Assert.Contains("\"seventyStrategy\"", frenchSchema);
+        Assert.Contains("\"ninetyStrategy\"", frenchSchema);
+        Assert.Contains("\"specialSeventyOneWord\"", frenchSchema);
+        Assert.Contains("\"pluralizeExactEighty\"", frenchSchema);
+        Assert.Contains("\"tensUsingEtWhenUnitIsOne\"", frenchSchema);
+        Assert.Contains("\"tensMap\"", frenchSchema);
+        Assert.DoesNotContain("\"style\"", frenchSchema);
+
+        Assert.Contains("\"billionCardinalStrategy\"", portugueseSchema);
+        Assert.Contains("\"billionOrdinalStrategy\"", portugueseSchema);
+        Assert.Contains("\"millionSingularWord\"", portugueseSchema);
+        Assert.Contains("\"millionPluralWord\"", portugueseSchema);
+        Assert.Contains("\"thousandWord\"", portugueseSchema);
+        Assert.Contains("\"billionSingularWord\"", portugueseSchema);
+        Assert.Contains("\"billionPluralWord\"", portugueseSchema);
+        Assert.Contains("\"thousandOrdinalWord\"", portugueseSchema);
+        Assert.Contains("\"millionOrdinalWord\"", portugueseSchema);
+        Assert.Contains("\"billionOrdinalWord\"", portugueseSchema);
+        Assert.DoesNotContain("\"style\"", portugueseSchema);
+
+        Assert.Contains("\"oneWord\"", File.ReadAllText(Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "CodeGen", "Profiles", "NumberToWords", "malay.json")));
+        Assert.DoesNotContain("\"thousandOneWord\"", malaySchema);
+
+        Assert.Contains("\"cardinalStrategy\"", scandinavianSchema);
+        Assert.Contains("\"ordinalStrategy\"", scandinavianSchema);
+        Assert.Contains("\"largeScaleRemainderJoiner\"", scandinavianSchema);
+        Assert.Contains("\"exactLargeScaleOrdinalSuffix\"", scandinavianSchema);
+        Assert.Contains("\"exactDefaultOrdinalSuffix\"", scandinavianSchema);
+        Assert.Contains("\"tensOrdinalTrimEndCharacters\"", scandinavianSchema);
+        Assert.Contains("\"tensOrdinalSuffix\"", scandinavianSchema);
+        Assert.Contains("\"shortOrdinalUpperBoundExclusive\"", scandinavianSchema);
+        Assert.Contains("\"shortOrdinalTrimEndCharacters\"", scandinavianSchema);
+        Assert.Contains("\"shortOrdinalTrimmedSuffix\"", scandinavianSchema);
+        Assert.Contains("\"shortOrdinalSuffix\"", scandinavianSchema);
+        Assert.DoesNotContain("\"style\"", scandinavianSchema);
+
+        var turkicSchema = File.ReadAllText(Path.Combine(sourceRoot, "turkic-family.json"));
+        Assert.Contains("\"softenTerminalTBeforeSuffix\"", turkicSchema);
+        Assert.Contains("\"dropTerminalVowelBeforeHarmonySuffix\"", turkicSchema);
+    }
+
+    [Fact]
+    public void UzbekProfilesAreAbsorbedIntoTheSharedTurkicFamily()
+    {
+        var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
+        var profilesRoot = Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "CodeGen", "Profiles", "NumberToWords");
+        var uzbekLatinProfile = File.ReadAllText(Path.Combine(profilesRoot, "uzbek-latn.json"));
+        var uzbekCyrillicProfile = File.ReadAllText(Path.Combine(profilesRoot, "uzbek-cyrl.json"));
+
+        Assert.Contains("\"engine\": \"turkic-family\"", uzbekLatinProfile);
+        Assert.Contains("\"engine\": \"turkic-family\"", uzbekCyrillicProfile);
+        Assert.Contains("new TurkicFamilyNumberToWordsConverter(", source);
+        Assert.DoesNotContain("new UzbekFamilyNumberToWordsConverter(", source);
+    }
+
     static string GetGeneratedSource(string hintName) =>
         generatedSources.Value.TryGetValue(hintName, out var source)
             ? source

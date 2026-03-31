@@ -3,7 +3,13 @@
     {
       "kind": "profile-object",
       "arguments": [
-        { "kind": "enum", "property": "style", "enumType": "FrenchNumberingStyle" }
+        { "kind": "string", "property": "minusWord" },
+        { "kind": "enum", "property": "seventyStrategy", "enumType": "FrenchSeventyStrategy" },
+        { "kind": "enum", "property": "ninetyStrategy", "enumType": "FrenchNinetyStrategy" },
+        { "kind": "string", "property": "specialSeventyOneWord" },
+        { "kind": "bool", "property": "pluralizeExactEighty" },
+        { "kind": "nullable-int-set", "property": "tensUsingEtWhenUnitIsOne", "missingValue": "empty" },
+        { "kind": "string-array", "property": "tensMap" }
       ]
     }
   ]

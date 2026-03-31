@@ -5,7 +5,6 @@
       "arguments": [
         { "kind": "string", "property": "zeroWord" },
         { "kind": "string", "property": "minusWord" },
-        { "kind": "string", "property": "thousandOneWord" },
         { "kind": "string", "property": "hundredWord" },
         { "kind": "string", "property": "hundredUnitWord" },
         { "kind": "string-array", "property": "units" },

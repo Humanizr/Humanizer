@@ -2,128 +2,30 @@ using System.Text;
 
 namespace Humanizer;
 
+// Shared engine for the Scandinavian profiles that still share most lexical data but differ in cardinal and ordinal composition rules.
+// The goal is to keep Norwegian and Swedish on one decomposition engine while pushing their stem/suffix differences into generated data.
 class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile profile)
     : GenderedNumberToWordsConverter(profile.DefaultGender)
 {
     readonly ScandinavianNumberToWordsProfile profile = profile;
 
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true) =>
-        profile.Style switch
+        profile.CardinalStrategy switch
         {
-            ScandinavianFamilyStyle.Danish => ConvertDanish(number),
-            ScandinavianFamilyStyle.NorwegianBokmal => ConvertNorwegian(number, gender),
-            ScandinavianFamilyStyle.Swedish => ConvertSwedish(number, profile.DefaultGender),
-            _ => throw new InvalidOperationException("Unsupported Scandinavian family style.")
+            ScandinavianCardinalStrategy.NorwegianBokmal => ConvertNorwegian(number, gender),
+            ScandinavianCardinalStrategy.Swedish => ConvertSwedish(number, profile.DefaultGender),
+            _ => throw new InvalidOperationException("Unsupported Scandinavian cardinal strategy.")
         };
 
     public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-        profile.Style switch
+        profile.OrdinalStrategy switch
         {
-            ScandinavianFamilyStyle.Danish => number.ToString(),
-            ScandinavianFamilyStyle.NorwegianBokmal => ConvertNorwegianOrdinal(number, gender),
-            ScandinavianFamilyStyle.Swedish => ConvertSwedishOrdinal(number, profile.DefaultGender),
-            _ => throw new InvalidOperationException("Unsupported Scandinavian family style.")
+            ScandinavianOrdinalStrategy.NorwegianBokmal => ConvertNorwegianOrdinal(number, gender),
+            ScandinavianOrdinalStrategy.Swedish => ConvertSwedishOrdinal(number, profile.DefaultGender),
+            _ => throw new InvalidOperationException("Unsupported Scandinavian ordinal strategy.")
         };
 
-    string ConvertDanish(long number)
-    {
-        if (number > profile.MaximumValue || number < -profile.MaximumValue)
-        {
-            throw new NotImplementedException();
-        }
-
-        if (number == 0)
-        {
-            return profile.ZeroWord;
-        }
-
-        if (number < 0)
-        {
-            return $"{profile.MinusWord} {ConvertDanish(-number)}";
-        }
-
-        var parts = new List<string>();
-        var remainder = number;
-
-        foreach (var scale in profile.Scales)
-        {
-            if (scale.Value < 1_000_000)
-            {
-                continue;
-            }
-
-            var count = remainder / scale.Value;
-            if (count == 0)
-            {
-                continue;
-            }
-
-            parts.Add(count == 1
-                ? scale.Name
-                : $"{ConvertDanish(count)} {scale.Plural}");
-            remainder %= scale.Value;
-        }
-
-        AppendDanishThousands(parts, ref remainder);
-
-        if (remainder > 0)
-        {
-            var tail = remainder < 100 && parts.Count > 0
-                ? $"og {ConvertDanishLessThanHundred((int)remainder)}"
-                : ConvertDanishLessThanThousand((int)remainder);
-
-            parts.Add(tail);
-        }
-
-        return string.Join(" ", parts);
-    }
-
-    void AppendDanishThousands(List<string> parts, ref long remainder)
-    {
-        var thousands = remainder / 1000;
-        if (thousands == 0)
-        {
-            return;
-        }
-
-        parts.Add(thousands == 1
-            ? profile.ThousandSingularWord
-            : $"{ConvertDanish(thousands)} {profile.ThousandWord}");
-        remainder %= 1000;
-    }
-
-    string ConvertDanishLessThanThousand(int number)
-    {
-        if (number >= 100)
-        {
-            var prefix = profile.HundredUnitMap[number / 100];
-            var words = $"{prefix} {profile.HundredWord}";
-            var remainder = number % 100;
-            if (remainder > 0)
-            {
-                words = $"{words} og {ConvertDanishLessThanHundred(remainder)}";
-            }
-
-            return words;
-        }
-
-        return ConvertDanishLessThanHundred(number);
-    }
-
-    string ConvertDanishLessThanHundred(int number)
-    {
-        if (number < 20)
-        {
-            return profile.UnitsMap[number];
-        }
-
-        var tensWord = profile.TensMap[number / 10];
-        var unit = number % 10;
-        return unit == 0
-            ? tensWord
-            : $"{profile.UnitsMap[unit]}{profile.TensLinker}{tensWord}";
-    }
-
+    // Norwegian compounds are mostly concatenative, but large-scale spacing and exact ordinals still vary by generated suffix settings.
     string ConvertNorwegian(long number, GrammaticalGender gender)
     {
         if (number is > int.MaxValue or < int.MinValue)
@@ -137,6 +39,7 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
     string ConvertNorwegianOrdinal(int number, GrammaticalGender gender) =>
         ConvertNorwegian(number, true, gender);
 
+    // The generated profile decides where explicit spaces remain; the algorithm only decomposes the number into large scales, thousands, hundreds, and tens.
     string ConvertNorwegian(int number, bool isOrdinal, GrammaticalGender gender)
     {
         if (number == 0)
@@ -204,7 +107,7 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
             if (parts.Count != 0)
             {
                 parts.Add(hasLargeScale && !hasHundred && !hasThousand
-                    ? "og "
+                    ? profile.LargeScaleRemainderJoiner
                     : profile.TensLinker);
             }
 
@@ -214,12 +117,13 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
         }
         else if (isOrdinal)
         {
-            parts[^1] += hasLargeScale ? "te" : "de";
+            parts[^1] += hasLargeScale ? profile.ExactLargeScaleOrdinalSuffix : profile.ExactDefaultOrdinalSuffix;
         }
 
         return string.Concat(parts).Trim();
     }
 
+    // Large-scale exact ordinals reuse the generated suffix metadata instead of hardcoded locale strings.
     string FormatNorwegianLargeScale(ScandinavianScale scale, int count, bool exactOrdinal)
     {
         if (count == 1)
@@ -248,6 +152,7 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
                 : profile.HundredWord
             : $"{ConvertNorwegian(count, false, GrammaticalGender.Masculine)}{profile.HundredWord}";
 
+    // Tens stay shared; the profile now decides both the stem trim and appended ordinal suffix.
     string ConvertNorwegianTens(int number, bool isOrdinal)
     {
         var lastPart = profile.TensMap[number / 10];
@@ -259,7 +164,7 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
         }
 
         return isOrdinal
-            ? lastPart.TrimEnd('e') + "ende"
+            ? lastPart.TrimEnd(profile.TensOrdinalTrimEndCharacters.ToCharArray()) + profile.TensOrdinalSuffix
             : lastPart;
     }
 
@@ -275,11 +180,16 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
             return exactValue;
         }
 
-        return number < 13
-            ? profile.UnitsMap[number].TrimEnd('e') + "ende"
-            : profile.UnitsMap[number] + "de";
+        if (number < profile.ShortOrdinalUpperBoundExclusive)
+        {
+            return profile.UnitsMap[number].TrimEnd(profile.ShortOrdinalTrimEndCharacters.ToCharArray()) + profile.ShortOrdinalTrimmedSuffix;
+        }
+
+        return profile.UnitsMap[number] + profile.ShortOrdinalSuffix;
     }
 
+    // Swedish keeps more of the scale composition in metadata, so the converter mostly stitches together generated scale records.
+    // Exact ordinals are intentionally looked up directly from the generated exception map instead of depending on a hardcoded threshold.
     string ConvertSwedish(long number, GrammaticalGender gender)
     {
         if (number is > int.MaxValue or < int.MinValue)
@@ -293,6 +203,7 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
     string ConvertSwedishOrdinal(int number, GrammaticalGender gender) =>
         ConvertSwedish(number, true, gender);
 
+    // Exact scale ordinals, plural suffixes, and spacing all come from the generated scale array.
     string ConvertSwedish(int number, bool isOrdinal, GrammaticalGender gender)
     {
         if (number == 0)
@@ -352,7 +263,7 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
             return word.ToString();
         }
 
-        if (number <= 20 && isOrdinal && profile.OrdinalExceptions.TryGetValue(number, out var exactOrdinal))
+        if (isOrdinal && profile.OrdinalExceptions.TryGetValue(number, out var exactOrdinal))
         {
             word.Append(exactOrdinal);
             return word.ToString();
@@ -377,7 +288,7 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
                 else
                 {
                     word.Append(tens);
-                    word.Append("nde");
+                    word.Append(profile.TensOrdinalSuffix);
                 }
 
                 return word.ToString();
@@ -401,15 +312,24 @@ class ScandinavianFamilyNumberToWordsConverter(ScandinavianNumberToWordsProfile 
             : profile.UnitsMap[number];
 }
 
-enum ScandinavianFamilyStyle
+// Separates cardinal composition from ordinal composition so future Scandinavian variants can mix strategies explicitly.
+enum ScandinavianCardinalStrategy
 {
-    Danish,
     NorwegianBokmal,
     Swedish
 }
 
+// The ordinal rules diverge more sharply than the cardinal rules, so they are modeled separately.
+enum ScandinavianOrdinalStrategy
+{
+    NorwegianBokmal,
+    Swedish
+}
+
+// Holds the generated lexicon and strategy selections for the Scandinavian shared engine.
 sealed class ScandinavianNumberToWordsProfile(
-    ScandinavianFamilyStyle style,
+    ScandinavianCardinalStrategy cardinalStrategy,
+    ScandinavianOrdinalStrategy ordinalStrategy,
     long maximumValue,
     GrammaticalGender defaultGender,
     string zeroWord,
@@ -419,6 +339,15 @@ sealed class ScandinavianNumberToWordsProfile(
     string oneFeminine,
     string oneNeuter,
     string tensLinker,
+    string largeScaleRemainderJoiner,
+    string exactLargeScaleOrdinalSuffix,
+    string exactDefaultOrdinalSuffix,
+    string tensOrdinalTrimEndCharacters,
+    string tensOrdinalSuffix,
+    int shortOrdinalUpperBoundExclusive,
+    string shortOrdinalTrimEndCharacters,
+    string shortOrdinalTrimmedSuffix,
+    string shortOrdinalSuffix,
     string hundredWord,
     string hundredCompositeSingularWord,
     string thousandWord,
@@ -430,7 +359,8 @@ sealed class ScandinavianNumberToWordsProfile(
     ScandinavianScale[] scales,
     FrozenDictionary<int, string> ordinalExceptions)
 {
-    public ScandinavianFamilyStyle Style { get; } = style;
+    public ScandinavianCardinalStrategy CardinalStrategy { get; } = cardinalStrategy;
+    public ScandinavianOrdinalStrategy OrdinalStrategy { get; } = ordinalStrategy;
     public long MaximumValue { get; } = maximumValue;
     public GrammaticalGender DefaultGender { get; } = defaultGender;
     public string ZeroWord { get; } = zeroWord;
@@ -440,6 +370,15 @@ sealed class ScandinavianNumberToWordsProfile(
     public string OneFeminine { get; } = oneFeminine;
     public string OneNeuter { get; } = oneNeuter;
     public string TensLinker { get; } = tensLinker;
+    public string LargeScaleRemainderJoiner { get; } = largeScaleRemainderJoiner;
+    public string ExactLargeScaleOrdinalSuffix { get; } = exactLargeScaleOrdinalSuffix;
+    public string ExactDefaultOrdinalSuffix { get; } = exactDefaultOrdinalSuffix;
+    public string TensOrdinalTrimEndCharacters { get; } = tensOrdinalTrimEndCharacters;
+    public string TensOrdinalSuffix { get; } = tensOrdinalSuffix;
+    public int ShortOrdinalUpperBoundExclusive { get; } = shortOrdinalUpperBoundExclusive;
+    public string ShortOrdinalTrimEndCharacters { get; } = shortOrdinalTrimEndCharacters;
+    public string ShortOrdinalTrimmedSuffix { get; } = shortOrdinalTrimmedSuffix;
+    public string ShortOrdinalSuffix { get; } = shortOrdinalSuffix;
     public string HundredWord { get; } = hundredWord;
     public string HundredCompositeSingularWord { get; } = hundredCompositeSingularWord;
     public string ThousandWord { get; } = thousandWord;
@@ -452,6 +391,7 @@ sealed class ScandinavianNumberToWordsProfile(
     public FrozenDictionary<int, string> OrdinalExceptions { get; } = ordinalExceptions;
 }
 
+// Scale metadata is data-driven; the strategy enums decide how those pieces are composed.
 readonly record struct ScandinavianScale(
     long Value,
     string Name,

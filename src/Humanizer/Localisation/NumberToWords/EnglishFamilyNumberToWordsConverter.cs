@@ -1,5 +1,6 @@
 namespace Humanizer;
 
+// Covers English-derived cardinal/ordinal systems whose main differences are conjunction and scale rules.
 class EnglishFamilyNumberToWordsConverter(EnglishFamilyNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
 {
     readonly EnglishFamilyNumberToWordsProfile profile = profile;
@@ -8,7 +9,10 @@ class EnglishFamilyNumberToWordsConverter(EnglishFamilyNumberToWordsProfile prof
         Convert(number, profile.DefaultAddAnd);
 
     public override string Convert(long number, bool addAnd) =>
-        ConvertCore(number, isOrdinal: false, profile.RespectAddAndFlag ? addAnd : profile.DefaultAddAnd);
+        ConvertCore(
+            number,
+            isOrdinal: false,
+            profile.AddAndMode == EnglishFamilyAddAndMode.UseCallerFlag ? addAnd : profile.DefaultAddAnd);
 
     public override string ConvertToOrdinal(int number) =>
         profile.OrdinalMode == EnglishFamilyOrdinalMode.Cardinal
@@ -18,10 +22,11 @@ class EnglishFamilyNumberToWordsConverter(EnglishFamilyNumberToWordsProfile prof
     public override string ConvertToTuple(int number) =>
         profile.NamedTuples is not null && profile.NamedTuples.TryGetValue(number, out var namedTuple)
             ? namedTuple
-            : profile.NamedTuples is not null
-                ? $"{number}-tuple"
+            : profile.TupleSuffix.Length != 0
+                ? $"{number}{profile.TupleSuffix}"
                 : base.ConvertToTuple(number);
 
+    // Large scales recurse through the same engine so cultures only vary by generated lexicon and strategies.
     string ConvertCore(long number, bool isOrdinal, bool addAnd)
     {
         if (number == 0)
@@ -52,25 +57,12 @@ class EnglishFamilyNumberToWordsConverter(EnglishFamilyNumberToWordsProfile prof
 
         AppendUnderThousand(parts, remainder, isOrdinal, addAnd);
 
-        if (isOrdinal &&
-            profile.OmitLeadingOneInOrdinal &&
-            parts.Count > 0 &&
-            (parts[0] == profile.UnitsMap[1] ||
-             parts[0].StartsWith(profile.UnitsMap[1] + " ", StringComparison.Ordinal)))
-        {
-            if (parts[0] == profile.UnitsMap[1])
-            {
-                parts.RemoveAt(0);
-            }
-            else
-            {
-                parts[0] = parts[0][profile.UnitsMap[1].Length..].TrimStart();
-            }
-        }
+        ApplyOrdinalLeadingOneStrategy(parts, isOrdinal);
 
         return string.Join(" ", parts);
     }
 
+    // The under-thousand path is the real family algorithm: hundreds are fixed, while conjunction and tens joining are profile-driven.
     void AppendUnderThousand(List<string> parts, long number, bool isOrdinal, bool addAnd)
     {
         var hasHundreds = false;
@@ -87,9 +79,7 @@ class EnglishFamilyNumberToWordsConverter(EnglishFamilyNumberToWordsProfile prof
             return;
         }
 
-        if (addAnd &&
-            ((hasHundreds && profile.UseAndWithinGroup) ||
-             (!hasHundreds && parts.Count > 0 && profile.UseAndAfterScaleForSubHundredRemainder)))
+        if (ShouldAddAnd(addAnd, hasHundreds, parts.Count > 0))
         {
             parts.Add(profile.AndWord);
         }
@@ -117,8 +107,39 @@ class EnglishFamilyNumberToWordsConverter(EnglishFamilyNumberToWordsProfile prof
 
     string GetUnitValue(long number, bool isOrdinal) =>
         isOrdinal ? profile.OrdinalUnitsMap[number] : profile.UnitsMap[number];
+
+    // "and" placement is a culture rule, not a locale-specific branch, so the profile chooses the insertion points.
+    bool ShouldAddAnd(bool addAnd, bool hasHundreds, bool hasScalePrefix) =>
+        addAnd && profile.AndStrategy switch
+        {
+            EnglishFamilyAndStrategy.WithinGroupAndAfterScaleSubHundredRemainder => hasHundreds || hasScalePrefix,
+            EnglishFamilyAndStrategy.WithinGroupOnly => hasHundreds,
+            EnglishFamilyAndStrategy.AfterScaleSubHundredRemainderOnly => !hasHundreds && hasScalePrefix,
+            EnglishFamilyAndStrategy.Never => false,
+            _ => throw new InvalidOperationException("Unsupported English-family conjunction strategy.")
+        };
+
+    void ApplyOrdinalLeadingOneStrategy(List<string> parts, bool isOrdinal)
+    {
+        if (!isOrdinal || profile.OrdinalLeadingOneStrategy != EnglishFamilyOrdinalLeadingOneStrategy.OmitLeadingOne || parts.Count == 0)
+        {
+            return;
+        }
+
+        if (parts[0] == profile.UnitsMap[1])
+        {
+            parts.RemoveAt(0);
+            return;
+        }
+
+        if (parts[0].StartsWith(profile.UnitsMap[1] + " ", StringComparison.Ordinal))
+        {
+            parts[0] = parts[0][profile.UnitsMap[1].Length..].TrimStart();
+        }
+    }
 }
 
+// Holds the immutable lexicon and strategy switches emitted from JSON profiles.
 sealed class EnglishFamilyNumberToWordsProfile(
     string minusWord,
     string andWord,
@@ -126,10 +147,10 @@ sealed class EnglishFamilyNumberToWordsProfile(
     string hundredOrdinalWord,
     string tensUnitsSeparator,
     bool defaultAddAnd,
-    bool respectAddAndFlag,
-    bool useAndWithinGroup,
-    bool useAndAfterScaleForSubHundredRemainder,
-    bool omitLeadingOneInOrdinal,
+    EnglishFamilyAddAndMode addAndMode,
+    EnglishFamilyAndStrategy andStrategy,
+    string tupleSuffix,
+    EnglishFamilyOrdinalLeadingOneStrategy ordinalLeadingOneStrategy,
     EnglishFamilyOrdinalMode ordinalMode,
     string[] unitsMap,
     string[] ordinalUnitsMap,
@@ -144,10 +165,10 @@ sealed class EnglishFamilyNumberToWordsProfile(
     public string HundredOrdinalWord { get; } = hundredOrdinalWord;
     public string TensUnitsSeparator { get; } = tensUnitsSeparator;
     public bool DefaultAddAnd { get; } = defaultAddAnd;
-    public bool RespectAddAndFlag { get; } = respectAddAndFlag;
-    public bool UseAndWithinGroup { get; } = useAndWithinGroup;
-    public bool UseAndAfterScaleForSubHundredRemainder { get; } = useAndAfterScaleForSubHundredRemainder;
-    public bool OmitLeadingOneInOrdinal { get; } = omitLeadingOneInOrdinal;
+    public EnglishFamilyAddAndMode AddAndMode { get; } = addAndMode;
+    public EnglishFamilyAndStrategy AndStrategy { get; } = andStrategy;
+    public string TupleSuffix { get; } = tupleSuffix;
+    public EnglishFamilyOrdinalLeadingOneStrategy OrdinalLeadingOneStrategy { get; } = ordinalLeadingOneStrategy;
     public EnglishFamilyOrdinalMode OrdinalMode { get; } = ordinalMode;
     public string[] UnitsMap { get; } = unitsMap;
     public string[] OrdinalUnitsMap { get; } = ordinalUnitsMap;
@@ -157,10 +178,35 @@ sealed class EnglishFamilyNumberToWordsProfile(
     public FrozenDictionary<int, string>? NamedTuples { get; } = namedTuples;
 }
 
+// Controls whether callers may override the family default "and" behavior.
+enum EnglishFamilyAddAndMode
+{
+    UseCallerFlag,
+    AlwaysDefault
+}
+
+// Determines where the family injects conjunctions for sub-hundred remainders.
+enum EnglishFamilyAndStrategy
+{
+    WithinGroupAndAfterScaleSubHundredRemainder,
+    WithinGroupOnly,
+    AfterScaleSubHundredRemainderOnly,
+    Never
+}
+
+// Some locales drop the leading "one" in scale ordinals ("thousandth"), while others keep the cardinal phrase.
+enum EnglishFamilyOrdinalLeadingOneStrategy
+{
+    KeepLeadingOne,
+    OmitLeadingOne
+}
+
+// Some English-derived locales expose true ordinals; others intentionally reuse cardinal wording.
 enum EnglishFamilyOrdinalMode
 {
     English,
     Cardinal
 }
 
+// Large-scale words stay pure data so new English-derived locales mostly add profile rows, not converter code.
 readonly record struct EnglishFamilyScale(long Value, string Name, string OrdinalName);

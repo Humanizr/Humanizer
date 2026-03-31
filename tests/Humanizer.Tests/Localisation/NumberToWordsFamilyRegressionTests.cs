@@ -33,10 +33,18 @@ public class NumberToWordsFamilyRegressionTests
         Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
 
     [Theory]
+    [InlineData(3501, "en-US", false, "three thousand five hundred one")]
+    [InlineData(3501, "en-IN", false, "three thousand five hundred and one")]
+    public void EnglishFamilyConvertersPreserveCultureSpecificAndBehavior(int number, string culture, bool addAnd, string expected) =>
+        Assert.Equal(expected, number.ToWords(addAnd, new CultureInfo(culture)));
+
+    [Theory]
     [InlineData(1000000000, "uz-Latn-UZ", "bir milliardinchi")]
     [InlineData(1000000000, "uz-Cyrl-UZ", "бир миллиардинчи")]
     [InlineData(1000000000, "pt", "milésimo milionésimo")]
+    [InlineData(2000000, "pt", "segundo milionésimo")]
     [InlineData(1000000000, "pt-BR", "bilionésimo")]
+    [InlineData(2000000, "pt-BR", "segundomilionésimo")]
     [InlineData(1021, "en-US", "thousand and twenty-first")]
     [InlineData(1021, "en-IN", "one thousand twenty one")]
     [InlineData(21, "cs-CZ", "21")]
@@ -45,6 +53,8 @@ public class NumberToWordsFamilyRegressionTests
     [InlineData(1021, "is", "eitt þúsund tuttugasti og fyrsti")]
     [InlineData(1000010, "nb-NO", "en million og tiende")]
     [InlineData(1000000, "sv-SE", "en miljonte")]
+    [InlineData(21, "sv-SE", "tjugoförsta")]
+    [InlineData(30, "nb-NO", "trettiende")]
     [InlineData(21, "pl", "21")]
     [InlineData(2000, "lt", "du tūkstantas")]
     [InlineData(121000, "hy", "հարյուր քսանմեկ հազարերորդ")]

@@ -4,8 +4,12 @@
   "maximumValue": 9223372036854775807,
   "minusWord": "eksi",
   "hundredWord": "yüz",
+  "hundredStrategy": "omit-one-when-singular",
   "unitsMap": ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"],
   "tensMap": ["sıfır", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"],
+  "ordinalSuffixStrategy": "last-vowel-map",
+  "softenTerminalTBeforeSuffix": true,
+  "dropTerminalVowelBeforeHarmonySuffix": true,
   "scales": [
     { "value": 1000000000000000000, "name": "kentilyon" },
     { "value": 1000000000000000, "name": "katrilyon" },

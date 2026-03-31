@@ -1,9 +1,9 @@
 namespace Humanizer;
 
+// Shared French-family engine. Locale differences in the 70/80/90 decades are generated decade strategies, not locale-name branches.
 class FrenchFamilyNumberToWordsConverter(FrenchNumberToWordsProfile profile) : GenderedNumberToWordsConverter
 {
     static readonly string[] UnitsMap = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"];
-    static readonly string[] TensMap = ["zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "septante", "octante", "nonante"];
     readonly FrenchNumberToWordsProfile profile = profile;
 
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
@@ -17,7 +17,7 @@ class FrenchFamilyNumberToWordsConverter(FrenchNumberToWordsProfile profile) : G
 
         if (number < 0)
         {
-            parts.Add("moins");
+            parts.Add(profile.MinusWord);
             number = -number;
         }
 
@@ -165,47 +165,35 @@ class FrenchFamilyNumberToWordsConverter(FrenchNumberToWordsProfile profile) : G
         {
             parts.Add(GetUnits(number, gender));
         }
-        else if (profile.Style == FrenchNumberingStyle.Metropolitan && number == 71)
+        else if (profile.SeventyStrategy == FrenchSeventyStrategy.SixtyPlusTeens && number is >= 70 and < 80)
         {
-            parts.Add("soixante et onze");
+            parts.Add(number == 71 && profile.SpecialSeventyOneWord.Length != 0
+                ? profile.SpecialSeventyOneWord
+                : $"{profile.TensMap[6]}-{GetUnits(number - 60, gender)}");
         }
-        else if (UsesQuatreVingt(number))
+        else if (profile.NinetyStrategy == FrenchNinetyStrategy.EightyPlusTeens && number is >= 90 and < 100)
         {
-            if (number == 80)
-            {
-                parts.Add(pluralize ? "quatre-vingts" : "quatre-vingt");
-            }
-            else if (profile.Style == FrenchNumberingStyle.Belgian && number == 81)
-            {
-                parts.Add(gender == GrammaticalGender.Feminine ? "quatre-vingt-une" : "quatre-vingt-un");
-            }
-            else if (profile.Style == FrenchNumberingStyle.Metropolitan && number >= 70)
-            {
-                var @base = number < 80 ? 60 : 80;
-                var units = number - @base;
-                var tens = @base / 10;
-                parts.Add($"{GetTens(tens)}-{GetUnits(units, gender)}");
-            }
-            else
-            {
-                AppendStandardTens(parts, number, gender);
-            }
+            parts.Add($"{profile.TensMap[8]}-{GetUnits(number - 80, gender)}");
         }
         else
         {
-            AppendStandardTens(parts, number, gender);
+            AppendStandardTens(parts, number, gender, pluralize);
         }
     }
 
-    void AppendStandardTens(List<string> parts, long number, GrammaticalGender gender)
+    // Exact 80-pluralization and "et un" join behavior now come from generated decade metadata.
+    void AppendStandardTens(List<string> parts, long number, GrammaticalGender gender, bool pluralize)
     {
         var units = number % 10;
-        var tens = GetTens(number / 10);
+        var tensIndex = (int)(number / 10);
+        var tens = profile.TensMap[tensIndex];
         if (units == 0)
         {
-            parts.Add(tens);
+            parts.Add(number == 80 && pluralize && profile.PluralizeExactEighty
+                ? tens + "s"
+                : tens);
         }
-        else if (units == 1)
+        else if (units == 1 && profile.TensUsingEtWhenUnitIsOne.Contains(tensIndex))
         {
             parts.Add(tens);
             parts.Add("et");
@@ -217,31 +205,37 @@ class FrenchFamilyNumberToWordsConverter(FrenchNumberToWordsProfile profile) : G
         }
     }
 
-    bool UsesQuatreVingt(long number) =>
-        profile.Style switch
-        {
-            FrenchNumberingStyle.Metropolitan => number >= 70,
-            FrenchNumberingStyle.Belgian => number is >= 80 and < 90,
-            _ => false
-        };
-
-    string GetTens(long tens) =>
-        tens == 8 && UsesQuatreVingtTens()
-            ? "quatre-vingt"
-            : TensMap[tens];
-
-    bool UsesQuatreVingtTens() =>
-        profile.Style == FrenchNumberingStyle.Metropolitan || profile.Style == FrenchNumberingStyle.Belgian;
 }
 
-enum FrenchNumberingStyle
+// 70 can stay regular ("septante") or reuse 60-plus-teens ("soixante-dix") depending on locale profile data.
+enum FrenchSeventyStrategy
 {
-    Swiss,
-    Belgian,
-    Metropolitan
+    Regular,
+    SixtyPlusTeens
 }
 
-sealed class FrenchNumberToWordsProfile(FrenchNumberingStyle style)
+// 90 can stay regular ("nonante") or reuse 80-plus-teens ("quatre-vingt-dix") depending on locale profile data.
+enum FrenchNinetyStrategy
 {
-    public FrenchNumberingStyle Style { get; } = style;
+    Regular,
+    EightyPlusTeens
+}
+
+// Carries the generated decade strategies for the French family so new locale variants are mostly profile edits.
+sealed class FrenchNumberToWordsProfile(
+    string minusWord,
+    FrenchSeventyStrategy seventyStrategy,
+    FrenchNinetyStrategy ninetyStrategy,
+    string specialSeventyOneWord,
+    bool pluralizeExactEighty,
+    FrozenSet<int> tensUsingEtWhenUnitIsOne,
+    string[] tensMap)
+{
+    public string MinusWord { get; } = minusWord;
+    public FrenchSeventyStrategy SeventyStrategy { get; } = seventyStrategy;
+    public FrenchNinetyStrategy NinetyStrategy { get; } = ninetyStrategy;
+    public string SpecialSeventyOneWord { get; } = specialSeventyOneWord;
+    public bool PluralizeExactEighty { get; } = pluralizeExactEighty;
+    public FrozenSet<int> TensUsingEtWhenUnitIsOne { get; } = tensUsingEtWhenUnitIsOne;
+    public string[] TensMap { get; } = tensMap;
 }

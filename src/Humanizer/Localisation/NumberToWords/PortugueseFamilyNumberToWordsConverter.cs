@@ -1,5 +1,6 @@
 namespace Humanizer;
 
+// Shared Portuguese-family engine. Locale differences at billion scale and ordinal joining are profile data, not converter forks.
 class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile profile) : GenderedNumberToWordsConverter
 {
     readonly PortugueseNumberToWordsProfile profile = profile;
@@ -20,7 +21,7 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
 
         if (number < 0)
         {
-            return $"menos {Convert(Math.Abs(number), gender)}";
+            return $"{profile.MinusWord} {Convert(Math.Abs(number), gender)}";
         }
 
         var parts = new List<string>();
@@ -34,15 +35,17 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
         if (number / 1_000_000 > 0)
         {
             parts.Add(number / 1_000_000 >= 2
-                ? $"{Convert(number / 1_000_000, GrammaticalGender.Masculine)} milhões"
-                : $"{Convert(number / 1_000_000, GrammaticalGender.Masculine)} milhão");
+                ? $"{Convert(number / 1_000_000, GrammaticalGender.Masculine)} {profile.MillionPluralWord}"
+                : $"{Convert(number / 1_000_000, GrammaticalGender.Masculine)} {profile.MillionSingularWord}");
 
             number %= 1_000_000;
         }
 
         if (number / 1000 > 0)
         {
-            parts.Add(number / 1000 == 1 ? "mil" : $"{Convert(number / 1000, GrammaticalGender.Masculine)} mil");
+            parts.Add(number / 1000 == 1
+                ? profile.ThousandWord
+                : $"{Convert(number / 1000, GrammaticalGender.Masculine)} {profile.ThousandWord}");
             number %= 1000;
         }
 
@@ -50,7 +53,9 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
         {
             if (number == 100)
             {
-                parts.Add(parts.Count > 0 ? "e cem" : "cem");
+                parts.Add(parts.Count > 0
+                    ? $"{profile.AndWord} {profile.HundredExactWord}"
+                    : profile.HundredExactWord);
             }
             else
             {
@@ -64,7 +69,7 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
         {
             if (parts.Count != 0)
             {
-                parts.Add("e");
+                parts.Add(profile.AndWord);
             }
 
             if (number < 20)
@@ -76,7 +81,7 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
                 var lastPart = profile.TensMap[number / 10];
                 if (number % 10 > 0)
                 {
-                    lastPart += $" e {ApplyGender(profile.UnitsMap[number % 10], gender)}";
+                    lastPart += $" {profile.AndWord} {ApplyGender(profile.UnitsMap[number % 10], gender)}";
                 }
 
                 parts.Add(lastPart);
@@ -86,6 +91,7 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
         return string.Join(" ", parts);
     }
 
+    // Higher-scale ordinal wording differs between pt and pt-BR, so the profile chooses the billion strategy and separator behavior.
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
         if (number == 0)
@@ -104,10 +110,10 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
         if (number / 1_000_000 > 0)
         {
             parts.Add(number / 1_000_000 == 1
-                ? ApplyOrdinalGender("milionésimo", gender)
+                ? ApplyOrdinalGender(profile.MillionOrdinalWord, gender)
                 : string.Format(
-                    "{0}" + profile.OrdinalMillionSeparator + ApplyOrdinalGender("milionésimo", gender),
-                    ConvertToOrdinal(number / 1_000_000_000, gender)));
+                    "{0}" + profile.OrdinalMillionSeparator + ApplyOrdinalGender(profile.MillionOrdinalWord, gender),
+                    ConvertToOrdinal(number / 1_000_000, gender)));
 
             number %= 1_000_000;
         }
@@ -115,8 +121,8 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
         if (number / 1000 > 0)
         {
             parts.Add(number / 1000 == 1
-                ? ApplyOrdinalGender("milésimo", gender)
-                : string.Format("{0} " + ApplyOrdinalGender("milésimo", gender), ConvertToOrdinal(number / 1000, gender)));
+                ? ApplyOrdinalGender(profile.ThousandOrdinalWord, gender)
+                : string.Format("{0} " + ApplyOrdinalGender(profile.ThousandOrdinalWord, gender), ConvertToOrdinal(number / 1000, gender)));
 
             number %= 1000;
         }
@@ -143,30 +149,30 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
 
     string BuildBillions(long billions)
     {
-        if (profile.Style == PortugueseNumberingStyle.European)
+        return profile.BillionCardinalStrategy switch
         {
-            return billions == 1
-                ? "mil milhões"
-                : $"{Convert(billions)} mil milhões";
-        }
-
-        return billions >= 2
-            ? $"{Convert(billions, GrammaticalGender.Masculine)} bilhões"
-            : $"{Convert(billions, GrammaticalGender.Masculine)} bilhão";
+            PortugueseBillionCardinalStrategy.ThousandMillions => billions == 1
+                ? $"{profile.ThousandWord} {profile.MillionPluralWord}"
+                : $"{Convert(billions)} {profile.ThousandWord} {profile.MillionPluralWord}",
+            PortugueseBillionCardinalStrategy.BillionWord => billions >= 2
+                ? $"{Convert(billions, GrammaticalGender.Masculine)} {profile.BillionPluralWord}"
+                : $"{Convert(billions, GrammaticalGender.Masculine)} {profile.BillionSingularWord}",
+            _ => throw new InvalidOperationException("Unsupported Portuguese-family billion cardinal strategy.")
+        };
     }
 
     string BuildOrdinalBillions(int number, GrammaticalGender gender)
     {
-        if (profile.Style == PortugueseNumberingStyle.European)
+        return profile.BillionOrdinalStrategy switch
         {
-            return number / 1_000_000_000 == 1
-                ? $"{ApplyOrdinalGender("milésimo", gender)} {ApplyOrdinalGender("milionésimo", gender)}"
-                : $"{Convert(number / 1_000_000_000)} {ApplyOrdinalGender("milésimo", gender)} {ApplyOrdinalGender("milionésimo", gender)}";
-        }
-
-        return number / 1_000_000_000 == 1
-            ? ApplyOrdinalGender("bilionésimo", gender)
-            : string.Format("{0} " + ApplyOrdinalGender("bilionésimo", gender), ConvertToOrdinal(number / 1_000_000_000, gender));
+            PortugueseBillionOrdinalStrategy.ThousandthMillionth => number / 1_000_000_000 == 1
+                ? $"{ApplyOrdinalGender(profile.ThousandOrdinalWord, gender)} {ApplyOrdinalGender(profile.MillionOrdinalWord, gender)}"
+                : $"{Convert(number / 1_000_000_000)} {ApplyOrdinalGender(profile.ThousandOrdinalWord, gender)} {ApplyOrdinalGender(profile.MillionOrdinalWord, gender)}",
+            PortugueseBillionOrdinalStrategy.BillionWord => number / 1_000_000_000 == 1
+                ? ApplyOrdinalGender(profile.BillionOrdinalWord, gender)
+                : string.Format("{0} " + ApplyOrdinalGender(profile.BillionOrdinalWord, gender), ConvertToOrdinal(number / 1_000_000_000, gender)),
+            _ => throw new InvalidOperationException("Unsupported Portuguese-family billion ordinal strategy.")
+        };
     }
 
     static string ApplyGender(string toWords, GrammaticalGender gender)
@@ -207,14 +213,35 @@ class PortugueseFamilyNumberToWordsConverter(PortugueseNumberToWordsProfile prof
     }
 }
 
-enum PortugueseNumberingStyle
+// European Portuguese uses "mil milhões"; Brazilian Portuguese uses dedicated billion words.
+enum PortugueseBillionCardinalStrategy
 {
-    Brazilian,
-    European
+    ThousandMillions,
+    BillionWord
 }
 
+// Ordinal billions follow the same split: thousandth-millionth in pt, bilionésimo forms in pt-BR.
+enum PortugueseBillionOrdinalStrategy
+{
+    ThousandthMillionth,
+    BillionWord
+}
+
+// Holds the generated Portuguese-family lexicon and billion-scale strategy choices.
 sealed class PortugueseNumberToWordsProfile(
-    PortugueseNumberingStyle style,
+    string minusWord,
+    string andWord,
+    string hundredExactWord,
+    string millionSingularWord,
+    string millionPluralWord,
+    string thousandWord,
+    PortugueseBillionCardinalStrategy billionCardinalStrategy,
+    PortugueseBillionOrdinalStrategy billionOrdinalStrategy,
+    string billionSingularWord,
+    string billionPluralWord,
+    string thousandOrdinalWord,
+    string millionOrdinalWord,
+    string billionOrdinalWord,
     string ordinalMillionSeparator,
     string[] unitsMap,
     string[] tensMap,
@@ -223,7 +250,19 @@ sealed class PortugueseNumberToWordsProfile(
     string[] ordinalTensMap,
     string[] ordinalHundredsMap)
 {
-    public PortugueseNumberingStyle Style { get; } = style;
+    public string MinusWord { get; } = minusWord;
+    public string AndWord { get; } = andWord;
+    public string HundredExactWord { get; } = hundredExactWord;
+    public string MillionSingularWord { get; } = millionSingularWord;
+    public string MillionPluralWord { get; } = millionPluralWord;
+    public string ThousandWord { get; } = thousandWord;
+    public PortugueseBillionCardinalStrategy BillionCardinalStrategy { get; } = billionCardinalStrategy;
+    public PortugueseBillionOrdinalStrategy BillionOrdinalStrategy { get; } = billionOrdinalStrategy;
+    public string BillionSingularWord { get; } = billionSingularWord;
+    public string BillionPluralWord { get; } = billionPluralWord;
+    public string ThousandOrdinalWord { get; } = thousandOrdinalWord;
+    public string MillionOrdinalWord { get; } = millionOrdinalWord;
+    public string BillionOrdinalWord { get; } = billionOrdinalWord;
     public string OrdinalMillionSeparator { get; } = ordinalMillionSeparator;
     public string[] UnitsMap { get; } = unitsMap;
     public string[] TensMap { get; } = tensMap;

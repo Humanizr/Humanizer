@@ -700,7 +700,16 @@ public sealed partial class HumanizerSourceGenerator
             builder.Append(", ");
             builder.Append(QuoteLiteral(GetRequiredString(item, "name")));
 
-            if (GetBoolean(item, "omitOneWhenSingular"))
+            var omitOneWhenSingular = GetBoolean(item, "omitOneWhenSingular");
+            var allowBareHundredInCount = GetBoolean(item, "allowBareHundredInCount");
+
+            if (omitOneWhenSingular || allowBareHundredInCount)
+            {
+                builder.Append(", ");
+                builder.Append(omitOneWhenSingular ? "true" : "false");
+            }
+
+            if (allowBareHundredInCount)
             {
                 builder.Append(", true");
             }
@@ -739,6 +748,12 @@ public sealed partial class HumanizerSourceGenerator
             builder.Append(GetRequiredInt64(item, "value").ToString(CultureInfo.InvariantCulture));
             builder.Append(", ");
             builder.Append(QuoteLiteral(GetRequiredString(item, "name")));
+            if (GetOptionalString(item, "oneWord") is { } oneWord)
+            {
+                builder.Append(", ");
+                builder.Append(QuoteLiteral(oneWord));
+            }
+
             builder.Append(')');
             first = false;
         }
