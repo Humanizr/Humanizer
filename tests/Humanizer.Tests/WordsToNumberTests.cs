@@ -1,3 +1,6 @@
+using System.Collections.Frozen;
+using System.Collections.Generic;
+
 namespace Humanizer.Tests;
 
 [UseCulture("en-US")]
@@ -342,6 +345,7 @@ public class WordsToNumberTests_Portuguese
     [InlineData("primeiro", 1)]
     [InlineData("primeira", 1)]
     [InlineData("vigésimo primeiro", 21)]
+    [InlineData("milésimo", 1000)]
     [InlineData("1º", 1)]
     [InlineData("1ª", 1)]
     public void ToNumber_Portuguese(string words, int expectedNumber) =>
@@ -358,6 +362,7 @@ public class WordsToNumberTests_Portuguese
     [InlineData("primeiro", 1, null)]
     [InlineData("primeira", 1, null)]
     [InlineData("vigésimo primeiro", 21, null)]
+    [InlineData("milésimo", 1000, null)]
     [InlineData("1º", 1, null)]
     [InlineData("1ª", 1, null)]
     public void TryToNumber_ValidInput_Portuguese(string words, int expectedNumber, string? expectedUnrecognizedWord)
@@ -375,6 +380,19 @@ public class WordsToNumberTests_Portuguese
     public void TryToNumber_InvalidInput_Portuguese(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("pt-BR")]
+public class WordsToNumberTests_BrazilianPortuguese
+{
+    [Theory]
+    [InlineData("milésimo", 1000, null)]
+    public void TryToNumber_ValidInput_BrazilianPortuguese(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
     }
@@ -410,6 +428,8 @@ public class WordsToNumberTests_Spanish
     [InlineData("segundo", 2, null)]
     [InlineData("vigésimo primero", 21, null)]
     [InlineData("vigésima primera", 21, null)]
+    [InlineData("milésimo", 1000, null)]
+    [InlineData("dosmilésimo", 2000, null)]
     public void TryToNumber_ValidOrdinalInput_Spanish(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
@@ -1059,6 +1079,7 @@ public class WordsToNumberTests_Ukrainian
     [InlineData("перший", 1, null)]
     [InlineData("третя", 3, null)]
     [InlineData("десяте", 10, null)]
+    [InlineData("тисячний", 1000, null)]
     public void TryToNumber_ValidInput_Ukrainian(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
@@ -1156,6 +1177,7 @@ public class WordsToNumberTests_Azerbaijani
     [InlineData("üç min beş yüz bir", 3501, null)]
     [InlineData("bir milyon bir", 1000001, null)]
     [InlineData("birinci", 1, null)]
+    [InlineData("mininci", 1000, null)]
     [InlineData("yüz iyirminci", 120, null)]
     public void TryToNumber_ValidInput_Azerbaijani(string words, int expectedNumber, string? expectedUnrecognizedWord)
     {
@@ -1172,6 +1194,42 @@ public class WordsToNumberTests_Azerbaijani
         Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+public class TokenMapWordsToNumberConverterTests
+{
+    [Fact]
+    public void ExactOrdinalEntriesBeatDerivedOrdinalParsing()
+    {
+        var converter = new TokenMapWordsToNumberConverter(new()
+        {
+            CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["foo"] = 2
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            ExactOrdinalMap = new Dictionary<string, int>(StringComparer.Ordinal)
+            {
+                ["foox"] = 7,
+                ["foo"] = 11
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            OrdinalScaleMap = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["foo"] = 1000
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            GluedOrdinalScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["x"] = 10
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            AllowTerminalOrdinalToken = true,
+            NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace
+        });
+
+        Assert.True(converter.TryConvert("foox", out var gluedOrdinalValue));
+        Assert.Equal(7, gluedOrdinalValue);
+
+        Assert.True(converter.TryConvert("foo", out var scaleOrdinalValue));
+        Assert.Equal(11, scaleOrdinalValue);
     }
 }
 

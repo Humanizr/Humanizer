@@ -91,11 +91,13 @@ public sealed partial class HumanizerSourceGenerator
                     continue;
                 }
 
-                builder.Append("    static IOrdinalizer ");
-                builder.Append(GetCatalogPropertyName(profile.ProfileName));
-                builder.Append(" { get; } = ");
-                builder.Append(CreateOrdinalizerExpression(profile, useCultureParameter: false));
-                builder.AppendLine(";");
+                AppendLazyCachedMember(
+                    builder,
+                    "    ",
+                    "static",
+                    "IOrdinalizer",
+                    GetCatalogPropertyName(profile.ProfileName),
+                    CreateOrdinalizerExpression(profile, useCultureParameter: false));
                 builder.AppendLine();
             }
 

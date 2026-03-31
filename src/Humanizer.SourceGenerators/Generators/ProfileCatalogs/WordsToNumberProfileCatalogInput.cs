@@ -84,11 +84,13 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var profile in profiles.OrderBy(static profile => profile.ProfileName, StringComparer.Ordinal))
             {
-                builder.Append("    static IWordsToNumberConverter ");
-                builder.Append(GetCatalogPropertyName(profile.ProfileName));
-                builder.Append(" { get; } = ");
-                builder.Append(WordsToNumberSchemaExpressionFactory.Create(profile, schemas));
-                builder.AppendLine(";");
+                AppendLazyCachedMember(
+                    builder,
+                    "    ",
+                    "static",
+                    "IWordsToNumberConverter",
+                    GetCatalogPropertyName(profile.ProfileName),
+                    WordsToNumberSchemaExpressionFactory.Create(profile, schemas));
                 builder.AppendLine();
             }
 

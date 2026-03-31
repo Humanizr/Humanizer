@@ -81,11 +81,13 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var profile in profiles.OrderBy(static profile => profile.ProfileName, StringComparer.Ordinal))
             {
-                builder.Append("    static ITimeOnlyToClockNotationConverter ");
-                builder.Append(GetCatalogPropertyName(profile.ProfileName));
-                builder.Append(" { get; } = ");
-                builder.Append(TimeOnlyToClockNotationSchemaExpressionFactory.Create(profile, schemas));
-                builder.AppendLine(";");
+                AppendLazyCachedMember(
+                    builder,
+                    "    ",
+                    "static",
+                    "ITimeOnlyToClockNotationConverter",
+                    GetCatalogPropertyName(profile.ProfileName),
+                    TimeOnlyToClockNotationSchemaExpressionFactory.Create(profile, schemas));
                 builder.AppendLine();
             }
 

@@ -52,7 +52,9 @@ public sealed partial class HumanizerSourceGenerator
         string normalizationProfile,
         string? ordinalNumberToWordsKind,
         string? ordinalGenderVariant,
-        ImmutableArray<TokenMapEntry> ordinalEntries,
+        ImmutableArray<TokenMapEntry> exactOrdinalEntries,
+        ImmutableArray<TokenMapEntry> ordinalScaleEntries,
+        ImmutableArray<TokenMapEntry> gluedOrdinalScaleSuffixEntries,
         ImmutableArray<TokenMapEntry> compositeScaleEntries,
         ImmutableArray<string> negativePrefixes,
         ImmutableArray<string> negativeSuffixes,
@@ -72,7 +74,9 @@ public sealed partial class HumanizerSourceGenerator
         public string NormalizationProfile { get; } = normalizationProfile;
         public string? OrdinalNumberToWordsKind { get; } = ordinalNumberToWordsKind;
         public string? OrdinalGenderVariant { get; } = ordinalGenderVariant;
-        public ImmutableArray<TokenMapEntry> OrdinalEntries { get; } = ordinalEntries;
+        public ImmutableArray<TokenMapEntry> ExactOrdinalEntries { get; } = exactOrdinalEntries;
+        public ImmutableArray<TokenMapEntry> OrdinalScaleEntries { get; } = ordinalScaleEntries;
+        public ImmutableArray<TokenMapEntry> GluedOrdinalScaleSuffixEntries { get; } = gluedOrdinalScaleSuffixEntries;
         public ImmutableArray<TokenMapEntry> CompositeScaleEntries { get; } = compositeScaleEntries;
         public ImmutableArray<string> NegativePrefixes { get; } = negativePrefixes;
         public ImmutableArray<string> NegativeSuffixes { get; } = negativeSuffixes;

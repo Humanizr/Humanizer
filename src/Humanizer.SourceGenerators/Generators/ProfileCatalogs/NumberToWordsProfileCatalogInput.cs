@@ -92,11 +92,13 @@ public sealed partial class HumanizerSourceGenerator
                     continue;
                 }
 
-                builder.Append("    static INumberToWordsConverter ");
-                builder.Append(GetCatalogPropertyName(profile.ProfileName));
-                builder.Append(" { get; } = ");
-                builder.Append(NumberToWordsSchemaExpressionFactory.Create(profile, schemas, useCultureParameter: false));
-                builder.AppendLine(";");
+                AppendLazyCachedMember(
+                    builder,
+                    "    ",
+                    "static",
+                    "INumberToWordsConverter",
+                    GetCatalogPropertyName(profile.ProfileName),
+                    NumberToWordsSchemaExpressionFactory.Create(profile, schemas, useCultureParameter: false));
                 builder.AppendLine();
             }
 

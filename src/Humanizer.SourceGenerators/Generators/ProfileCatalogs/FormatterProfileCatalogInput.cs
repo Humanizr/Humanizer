@@ -84,11 +84,13 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var profile in generatedProfiles)
             {
-                builder.Append("    static FormatterProfile ");
-                builder.Append(GetCatalogPropertyName(profile.ProfileName));
-                builder.Append(" { get; } = ");
-                builder.Append(CreateFormatterProfileExpression(profile));
-                builder.AppendLine(";");
+                AppendLazyCachedMember(
+                    builder,
+                    "    ",
+                    "static",
+                    "FormatterProfile",
+                    GetCatalogPropertyName(profile.ProfileName),
+                    CreateFormatterProfileExpression(profile));
                 builder.AppendLine();
             }
 

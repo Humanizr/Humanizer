@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version ="0.15.4" />
+    <PackageReference Include="BenchmarkDotNet" Version ="0.15.8" />
   </ItemGroup>
 
   <!-- Use baseline package from NuGet for comparison -->

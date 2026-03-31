@@ -105,17 +105,17 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var profile in profiles.OrderBy(static profile => profile.ProfileName, StringComparer.Ordinal))
             {
-                builder.Append("    static ");
-                builder.Append(interfaceName);
-                builder.Append(" ");
-                builder.Append(GetCatalogPropertyName(profile.ProfileName));
-                builder.Append(" { get; } = new ");
-                builder.Append(converterTypeName);
-                builder.Append("(new OrdinalDatePattern(");
-                builder.Append(QuoteLiteral(profile.Pattern));
-                builder.Append(", OrdinalDateDayMode.");
-                builder.Append(profile.DayMode);
-                builder.AppendLine("));");
+                AppendLazyCachedMember(
+                    builder,
+                    "    ",
+                    "static",
+                    interfaceName,
+                    GetCatalogPropertyName(profile.ProfileName),
+                    "new " + converterTypeName + "(new OrdinalDatePattern(" +
+                    QuoteLiteral(profile.Pattern) +
+                    ", OrdinalDateDayMode." +
+                    profile.DayMode +
+                    "))");
                 builder.AppendLine();
             }
 

@@ -77,7 +77,9 @@ public class HumanizerSourceGeneratorTests
         Assert.Contains("case \"german\": return german;", source);
         Assert.Contains("case \"luxembourgish\": return luxembourgish;", source);
         Assert.Contains("new FrenchTimeOnlyToClockNotationConverter()", source);
-        Assert.Contains("static ITimeOnlyToClockNotationConverter german { get; } = new GermanTimeOnlyToClockNotationConverter();", source);
+        Assert.Contains("static ITimeOnlyToClockNotationConverter german => german_cache.Value;", source);
+        Assert.Contains("static class german_cache", source);
+        Assert.Contains("internal static readonly ITimeOnlyToClockNotationConverter Value = new GermanTimeOnlyToClockNotationConverter();", source);
         Assert.Contains("new LuxembourgishTimeOnlyToClockNotationConverter()", source);
         Assert.DoesNotContain("TryResolveCustom", source);
     }
@@ -233,15 +235,90 @@ public class HumanizerSourceGeneratorTests
     public void TokenMapOrdinalMapsAreGeneratedFromLocaleData()
     {
         var azerbaijani = GetGeneratedSource("TokenMapWordsToNumberConverters.Az.g.cs");
-        var catalan = GetGeneratedSource("TokenMapWordsToNumberConverters.Ca.g.cs");
+        var spanish = GetGeneratedSource("TokenMapWordsToNumberConverters.Es.g.cs");
         var ukrainian = GetGeneratedSource("TokenMapWordsToNumberConverters.Uk.g.cs");
 
-        Assert.Contains("TokenMapWordsToNumberOrdinalMapBuilder.Build(\"azerbaijani\", TokenMapNormalizationProfile.CollapseWhitespace, TokenMapOrdinalGenderVariant.None)", azerbaijani);
-        Assert.Contains("TokenMapWordsToNumberOrdinalMapBuilder.Build(\"catalan\", TokenMapNormalizationProfile.LowercaseRemovePeriods, TokenMapOrdinalGenderVariant.MasculineAndFeminine)", catalan);
-        Assert.Contains("TokenMapWordsToNumberOrdinalMapBuilder.Build(\"ukrainian\", TokenMapNormalizationProfile.LowercaseRemovePeriods, TokenMapOrdinalGenderVariant.All)", ukrainian);
-        Assert.DoesNotContain("TokenMapWordsToNumberOrdinalProfiles.Resolve", azerbaijani);
-        Assert.DoesNotContain("TokenMapWordsToNumberOrdinalProfiles.Resolve", catalan);
-        Assert.DoesNotContain("TokenMapWordsToNumberOrdinalProfiles.Resolve", ukrainian);
+        Assert.DoesNotContain("TokenMapWordsToNumberOrdinalMapBuilder.Build(", azerbaijani);
+        Assert.DoesNotContain("TokenMapWordsToNumberOrdinalMapBuilder.Build(", spanish);
+        Assert.DoesNotContain("TokenMapWordsToNumberOrdinalMapBuilder.Build(", ukrainian);
+        Assert.DoesNotContain("NumberToWordsProfileCatalog.Resolve(", azerbaijani);
+        Assert.DoesNotContain("NumberToWordsProfileCatalog.Resolve(", spanish);
+        Assert.DoesNotContain("NumberToWordsProfileCatalog.Resolve(", ukrainian);
+        Assert.Contains("ExactOrdinalMap = ", azerbaijani);
+        Assert.Contains("OrdinalScaleMap = ", spanish);
+        Assert.Contains("OrdinalScaleMap = ", ukrainian);
+        Assert.Contains("GluedOrdinalScaleSuffixes = ", spanish);
+    }
+
+    [Fact]
+    public void TokenMapLocalesReportDiagnosticsAndSkipGenerationWhenInputIsMalformed()
+    {
+        const string invalidLocale = """
+{
+  "normalizationProfile": 42,
+  "cardinalMap": {
+    "one": "1"
+  },
+  "ordinalGenderVariant": "bogus",
+  "negativePrefixes": [
+    "minus ",
+    5
+  ],
+  "scaleThreshold": "1000"
+}
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText(
+                @"E:\Dev\Humanizer\src\Humanizer\CodeGen\WordsToNumber\zz-invalid.json",
+                invalidLocale));
+
+        var diagnostics = runResult.Diagnostics
+            .Where(static diagnostic => diagnostic.Id == "HSG001")
+            .Select(static diagnostic => diagnostic.GetMessage())
+            .ToArray();
+
+        Assert.Contains(diagnostics, static message => message.Contains("zz-invalid.normalizationProfile", StringComparison.Ordinal));
+        Assert.Contains(diagnostics, static message => message.Contains("zz-invalid.cardinalMap.one", StringComparison.Ordinal));
+        Assert.Contains(diagnostics, static message => message.Contains("zz-invalid.ordinalGenderVariant", StringComparison.Ordinal));
+        Assert.Contains(diagnostics, static message => message.Contains("zz-invalid.negativePrefixes[1]", StringComparison.Ordinal));
+        Assert.Contains(diagnostics, static message => message.Contains("zz-invalid.scaleThreshold", StringComparison.Ordinal));
+        Assert.DoesNotContain(runResult.Results[0].GeneratedSources, static source => source.HintName == "TokenMapWordsToNumberConverters.ZzInvalid.g.cs");
+    }
+
+    [Fact]
+    public void GeneratedCatalogsUsePerEntryLazyHolders()
+    {
+        var formatterCatalog = GetGeneratedSource("FormatterProfileCatalog.g.cs");
+        var numberToWordsCatalog = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
+        var wordsToNumberCatalog = GetGeneratedSource("WordsToNumberProfileCatalog.g.cs");
+        var timeOnlyCatalog = GetGeneratedSource("TimeOnlyToClockNotationProfileCatalog.g.cs");
+        var dateCatalog = GetGeneratedSource("OrdinalDateProfileCatalog.DateTo.g.cs");
+        var dateOnlyCatalog = GetGeneratedSource("OrdinalDateProfileCatalog.DateOnly.g.cs");
+
+        Assert.Contains("static FormatterProfile luxembourgish => luxembourgish_cache.Value;", formatterCatalog);
+        Assert.Contains("static class luxembourgish_cache", formatterCatalog);
+        Assert.DoesNotContain("static FormatterProfile luxembourgish { get; } =", formatterCatalog);
+
+        Assert.Contains("static INumberToWordsConverter english => english_cache.Value;", numberToWordsCatalog);
+        Assert.Contains("static class english_cache", numberToWordsCatalog);
+        Assert.DoesNotContain("static INumberToWordsConverter english { get; } =", numberToWordsCatalog);
+
+        Assert.Contains("static IWordsToNumberConverter arabic => arabic_cache.Value;", wordsToNumberCatalog);
+        Assert.Contains("static class arabic_cache", wordsToNumberCatalog);
+        Assert.DoesNotContain("static IWordsToNumberConverter arabic { get; } =", wordsToNumberCatalog);
+
+        Assert.Contains("static ITimeOnlyToClockNotationConverter german => german_cache.Value;", timeOnlyCatalog);
+        Assert.Contains("static class german_cache", timeOnlyCatalog);
+        Assert.DoesNotContain("static ITimeOnlyToClockNotationConverter german { get; } =", timeOnlyCatalog);
+
+        Assert.Contains("static IDateToOrdinalWordConverter spanish => spanish_cache.Value;", dateCatalog);
+        Assert.Contains("static class spanish_cache", dateCatalog);
+        Assert.DoesNotContain("static IDateToOrdinalWordConverter spanish { get; } =", dateCatalog);
+
+        Assert.Contains("static IDateOnlyToOrdinalWordConverter spanish => spanish_cache.Value;", dateOnlyCatalog);
+        Assert.Contains("static class spanish_cache", dateOnlyCatalog);
+        Assert.DoesNotContain("static IDateOnlyToOrdinalWordConverter spanish { get; } =", dateOnlyCatalog);
     }
 
     [Fact]
@@ -286,15 +363,7 @@ public class HumanizerSourceGeneratorTests
 
     static ImmutableDictionary<string, string> GenerateSources()
     {
-        var compilation = CreateCompilation();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(
-            [new HumanizerSourceGenerator().AsSourceGenerator()],
-            GetAdditionalTexts(),
-            (CSharpParseOptions)compilation.SyntaxTrees.Single().Options);
-
-        driver = driver.RunGenerators(compilation);
-
-        var runResult = driver.GetRunResult();
+        var runResult = RunGenerator();
         Assert.Empty(runResult.Diagnostics);
         Assert.Single(runResult.Results);
 
@@ -349,7 +418,19 @@ public class HumanizerSourceGeneratorTests
         return references.Values.ToImmutableArray();
     }
 
-    static ImmutableArray<AdditionalText> GetAdditionalTexts()
+    static GeneratorDriverRunResult RunGenerator(params AdditionalText[] extraAdditionalTexts)
+    {
+        var compilation = CreateCompilation();
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            [new HumanizerSourceGenerator().AsSourceGenerator()],
+            GetAdditionalTexts(extraAdditionalTexts),
+            (CSharpParseOptions)compilation.SyntaxTrees.Single().Options);
+
+        driver = driver.RunGenerators(compilation);
+        return driver.GetRunResult();
+    }
+
+    static ImmutableArray<AdditionalText> GetAdditionalTexts(params AdditionalText[] extraAdditionalTexts)
     {
         var root = FindRepositoryRoot();
         var sourceRoot = Path.Combine(root, "src", "Humanizer");
@@ -370,10 +451,14 @@ public class HumanizerSourceGeneratorTests
         AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Schemas", "WordsToNumber"), "*.json");
         AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "WordsToNumber"), "*.json");
 
-        return filePaths
+        var additionalTexts = filePaths
             .OrderBy(static path => path, StringComparer.OrdinalIgnoreCase)
             .Select(static path => (AdditionalText)new FileAdditionalText(path))
             .ToImmutableArray();
+
+        return extraAdditionalTexts.Length == 0
+            ? additionalTexts
+            : additionalTexts.AddRange(extraAdditionalTexts);
     }
 
     static void AddFiles(List<string> filePaths, string directory, string searchPattern)
@@ -410,5 +495,16 @@ public class HumanizerSourceGeneratorTests
 
         public override SourceText GetText(CancellationToken cancellationToken = default) =>
             SourceText.From(File.ReadAllText(path), Encoding.UTF8);
+    }
+
+    sealed class InMemoryAdditionalText(string path, string text) : AdditionalText
+    {
+        readonly string path = path;
+        readonly string text = text;
+
+        public override string Path => path;
+
+        public override SourceText GetText(CancellationToken cancellationToken = default) =>
+            SourceText.From(text, Encoding.UTF8);
     }
 }

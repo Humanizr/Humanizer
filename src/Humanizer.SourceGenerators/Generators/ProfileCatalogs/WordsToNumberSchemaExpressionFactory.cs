@@ -111,7 +111,9 @@ public sealed partial class HumanizerSourceGenerator
         static string CreateTokenMapRulesExpression(JsonElement root) =>
             "new() { " +
             "CardinalMap = " + CreateStringLongFrozenDictionaryExpression(ExpressionSchemaUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
-            "OrdinalMap = " + CreateOptionalStringIntFrozenDictionaryExpression(root, "ordinalMap") + ", " +
+            "ExactOrdinalMap = " + CreateOptionalStringIntFrozenDictionaryExpression(root, "ordinalMap") + ", " +
+            "OrdinalScaleMap = " + (root.TryGetProperty("ordinalScaleMap", out var ordinalScaleMap) ? CreateStringLongFrozenDictionaryExpression(ordinalScaleMap) : "null") + ", " +
+            "GluedOrdinalScaleSuffixes = " + (root.TryGetProperty("gluedOrdinalScaleSuffixes", out var gluedOrdinalScaleSuffixes) ? CreateStringLongFrozenDictionaryExpression(gluedOrdinalScaleSuffixes) : "null") + ", " +
             "CompositeScaleMap = " + (root.TryGetProperty("compositeScaleMap", out var compositeScaleMap) ? CreateStringLongFrozenDictionaryExpression(compositeScaleMap) : "null") + ", " +
             "NormalizationProfile = TokenMapNormalizationProfile." + ToEnumMemberName(GetRequiredString(root, "normalizationProfile")) + ", " +
             "NegativePrefixes = " + CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +

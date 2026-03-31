@@ -3,6 +3,9 @@ namespace Humanizer;
 internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) : GenderlessWordsToNumberConverter
 {
     readonly TokenMapWordsToNumberRules rules = rules;
+    readonly FrozenDictionary<string, int>? exactOrdinalMap = rules.ExactOrdinalMap;
+    readonly FrozenDictionary<string, long>? ordinalScaleMap = rules.OrdinalScaleMap;
+    readonly FrozenDictionary<string, long>? gluedOrdinalScaleSuffixes = rules.GluedOrdinalScaleSuffixes;
 
     public override int Convert(string words)
     {
@@ -95,7 +98,36 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return true;
         }
 
-        return rules.OrdinalMap?.TryGetValue(words, out value) == true;
+        return ordinalScaleMap is null
+            ? TryParseExactOrdinal(words, out value)
+            : TryParseExtendedOrdinal(words, ordinalScaleMap, out value);
+    }
+
+    bool TryParseExactOrdinal(string words, out int value)
+    {
+        if (exactOrdinalMap?.TryGetValue(words, out value) == true)
+        {
+            return true;
+        }
+
+        return TryParseGluedOrdinalScale(words, out value);
+    }
+
+    bool TryParseExtendedOrdinal(string words, FrozenDictionary<string, long> ordinalScaleMap, out int value)
+    {
+        if (exactOrdinalMap?.TryGetValue(words, out value) == true)
+        {
+            return true;
+        }
+
+        if (ordinalScaleMap.TryGetValue(words, out var scaleValue) &&
+            scaleValue is <= int.MaxValue and >= int.MinValue)
+        {
+            value = (int)scaleValue;
+            return true;
+        }
+
+        return TryParseGluedOrdinalScale(words, out value);
     }
 
     bool TryParseOrdinalAbbreviation(string words, out int value)
@@ -220,22 +252,44 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         out int value,
         out string? unrecognizedWord)
     {
-        if (!rules.AllowTerminalOrdinalToken ||
-            rules.OrdinalMap?.TryGetValue(token, out var ordinalValue) != true)
+        if (!rules.AllowTerminalOrdinalToken)
         {
             value = default;
             unrecognizedWord = null;
             return false;
         }
 
-        while (TryReadNextToken(ref tokenizer, ref pendingToken, out var trailingToken))
+        return ordinalScaleMap is null
+            ? TryParseTerminalExactOrdinal(token, exactOrdinalMap, ref tokenizer, ref pendingToken, total, current, out value, out unrecognizedWord)
+            : TryParseTerminalExtendedOrdinal(token, exactOrdinalMap, ordinalScaleMap, ref tokenizer, ref pendingToken, total, current, out value, out unrecognizedWord);
+    }
+
+    bool TryParseTerminalExactOrdinal(
+        string token,
+        FrozenDictionary<string, int>? exactOrdinalMap,
+        ref WordsToNumberTokenizer.Enumerator tokenizer,
+        ref string? pendingToken,
+        long total,
+        long current,
+        out int value,
+        out string? unrecognizedWord)
+    {
+        if (exactOrdinalMap?.TryGetValue(token, out var exactOrdinalValue) != true)
         {
             value = default;
-            unrecognizedWord = trailingToken;
+            unrecognizedWord = null;
             return false;
         }
 
-        var parsedLong = total + current + ordinalValue;
+        if (TryReadNextToken(ref tokenizer, ref pendingToken, out var trailingToken))
+        {
+            pendingToken = trailingToken;
+            value = default;
+            unrecognizedWord = null;
+            return false;
+        }
+
+        var parsedLong = total + current + exactOrdinalValue;
         if (parsedLong is > int.MaxValue or < int.MinValue)
         {
             value = default;
@@ -246,6 +300,87 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         value = (int)parsedLong;
         unrecognizedWord = null;
         return true;
+    }
+
+    bool TryParseTerminalExtendedOrdinal(
+        string token,
+        FrozenDictionary<string, int>? exactOrdinalMap,
+        FrozenDictionary<string, long> ordinalScaleMap,
+        ref WordsToNumberTokenizer.Enumerator tokenizer,
+        ref string? pendingToken,
+        long total,
+        long current,
+        out int value,
+        out string? unrecognizedWord)
+    {
+        var ordinalValue = default(int);
+        var ordinalScaleValue = default(long);
+        var isExactOrdinal = exactOrdinalMap?.TryGetValue(token, out ordinalValue) == true;
+        var isOrdinalScale = ordinalScaleMap.TryGetValue(token, out ordinalScaleValue);
+        if (!isExactOrdinal && !isOrdinalScale)
+        {
+            value = default;
+            unrecognizedWord = null;
+            return false;
+        }
+
+        if (TryReadNextToken(ref tokenizer, ref pendingToken, out var trailingToken))
+        {
+            pendingToken = trailingToken;
+            value = default;
+            unrecognizedWord = null;
+            return false;
+        }
+
+        var parsedLong = isOrdinalScale
+            ? total + ((current == 0 ? 1 : current) * ordinalScaleValue)
+            : total + current + ordinalValue;
+
+        if (parsedLong is > int.MaxValue or < int.MinValue)
+        {
+            value = default;
+            unrecognizedWord = token;
+            return false;
+        }
+
+        value = (int)parsedLong;
+        unrecognizedWord = null;
+        return true;
+    }
+
+    bool TryParseGluedOrdinalScale(string words, out int value)
+    {
+        if (gluedOrdinalScaleSuffixes is null || gluedOrdinalScaleSuffixes.Count == 0)
+        {
+            value = default;
+            return false;
+        }
+
+        foreach (var suffix in gluedOrdinalScaleSuffixes)
+        {
+            if (!words.EndsWith(suffix.Key, StringComparison.Ordinal) || words.Length == suffix.Key.Length)
+            {
+                continue;
+            }
+
+            if (!TryParseCardinal(words[..^suffix.Key.Length], out value, out _))
+            {
+                continue;
+            }
+
+            var scaledValue = (long)value * suffix.Value;
+            if (scaledValue is > int.MaxValue or < int.MinValue)
+            {
+                value = default;
+                return false;
+            }
+
+            value = (int)scaledValue;
+            return true;
+        }
+
+        value = default;
+        return false;
     }
 
     bool ShouldIgnore(string token)
@@ -414,7 +549,9 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 internal sealed class TokenMapWordsToNumberRules
 {
     public required FrozenDictionary<string, long> CardinalMap { get; init; }
-    public FrozenDictionary<string, int>? OrdinalMap { get; init; }
+    public FrozenDictionary<string, int>? ExactOrdinalMap { get; init; }
+    public FrozenDictionary<string, long>? OrdinalScaleMap { get; init; }
+    public FrozenDictionary<string, long>? GluedOrdinalScaleSuffixes { get; init; }
     public FrozenDictionary<string, long>? CompositeScaleMap { get; init; }
     public TokenMapNormalizationProfile NormalizationProfile { get; init; }
     public string[] NegativePrefixes { get; init; } = [];
@@ -453,14 +590,157 @@ static class TokenMapWordsToNumberNormalizer
 {
     public static string Normalize(string words, TokenMapNormalizationProfile profile)
     {
-        var sourceString = profile switch
+        return profile switch
         {
-            TokenMapNormalizationProfile.LowercaseRemovePeriodsAndDiacritics => RemoveDiacritics(words),
-            TokenMapNormalizationProfile.PunctuationToSpacesRemoveDiacritics => RemoveDiacritics(words),
-            TokenMapNormalizationProfile.Persian => NormalizePersian(words),
-            _ => words
+            TokenMapNormalizationProfile.CollapseWhitespace => NormalizeCollapseWhitespace(words),
+            TokenMapNormalizationProfile.LowercaseRemovePeriods => NormalizeLowercaseRemovePeriods(words),
+            TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces => NormalizeLowercaseReplacePeriodsWithSpaces(words),
+            TokenMapNormalizationProfile.LowercaseRemovePeriodsAndDiacritics => NormalizeWithBuilder(RemoveDiacritics(words), profile),
+            TokenMapNormalizationProfile.PunctuationToSpacesRemoveDiacritics => NormalizeWithBuilder(RemoveDiacritics(words), profile),
+            TokenMapNormalizationProfile.Persian => NormalizeWithBuilder(NormalizePersian(words), profile),
+            _ => throw new ArgumentOutOfRangeException(nameof(profile), profile, null)
         };
-        var source = sourceString.AsSpan().Trim();
+    }
+
+    static string NormalizeCollapseWhitespace(string words)
+    {
+        var source = words.AsSpan().Trim();
+        if (source.IsEmpty)
+        {
+            return string.Empty;
+        }
+
+        var previousWasSpace = false;
+        foreach (var current in source)
+        {
+            if (char.IsWhiteSpace(current))
+            {
+                if (previousWasSpace)
+                {
+                    return NormalizeWithBuilder(words, TokenMapNormalizationProfile.CollapseWhitespace);
+                }
+
+                previousWasSpace = true;
+                continue;
+            }
+
+            previousWasSpace = false;
+        }
+
+        return source.Length == words.Length ? words : source.ToString();
+    }
+
+    static string NormalizeLowercaseRemovePeriods(string words)
+    {
+        var source = words.AsSpan().Trim();
+        if (source.IsEmpty)
+        {
+            return string.Empty;
+        }
+
+        var needsNormalization = false;
+        var previousWasSpace = false;
+
+        foreach (var current in source)
+        {
+            if (current is ',' or '.')
+            {
+                needsNormalization = true;
+                break;
+            }
+
+            if (current == '-')
+            {
+                needsNormalization = true;
+                break;
+            }
+
+            if (char.IsWhiteSpace(current))
+            {
+                if (current != ' ' || previousWasSpace)
+                {
+                    needsNormalization = true;
+                    break;
+                }
+
+                previousWasSpace = true;
+                continue;
+            }
+
+            if (char.IsUpper(current))
+            {
+                needsNormalization = true;
+                break;
+            }
+
+            previousWasSpace = false;
+        }
+
+        if (!needsNormalization)
+        {
+            return source.Length == words.Length ? words : source.ToString();
+        }
+
+        return NormalizeWithBuilder(words, TokenMapNormalizationProfile.LowercaseRemovePeriods);
+    }
+
+    static string NormalizeLowercaseReplacePeriodsWithSpaces(string words)
+    {
+        var source = words.AsSpan().Trim();
+        if (source.IsEmpty)
+        {
+            return string.Empty;
+        }
+
+        var needsNormalization = false;
+        var previousWasSpace = false;
+
+        foreach (var current in source)
+        {
+            if (current == ',')
+            {
+                needsNormalization = true;
+                break;
+            }
+
+            if (current is '.' or '-')
+            {
+                needsNormalization = true;
+                break;
+            }
+
+            if (char.IsWhiteSpace(current))
+            {
+                if (current != ' ' || previousWasSpace)
+                {
+                    needsNormalization = true;
+                    break;
+                }
+
+                previousWasSpace = true;
+                continue;
+            }
+
+            if (char.IsUpper(current))
+            {
+                needsNormalization = true;
+                break;
+            }
+
+            previousWasSpace = false;
+        }
+
+        if (!needsNormalization)
+        {
+            return source.Length == words.Length ? words : source.ToString();
+        }
+
+        return NormalizeWithBuilder(words, TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces);
+    }
+
+    static string NormalizeWithBuilder(string words, TokenMapNormalizationProfile profile)
+    {
+        var source = words.AsSpan().Trim();
         if (source.IsEmpty)
         {
             return string.Empty;

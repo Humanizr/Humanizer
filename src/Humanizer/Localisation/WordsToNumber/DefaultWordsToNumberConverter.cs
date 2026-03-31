@@ -2,7 +2,9 @@ namespace Humanizer;
 
 internal class DefaultWordsToNumberConverter(CultureInfo culture) : GenderlessWordsToNumberConverter
 {
-    private readonly CultureInfo cultureInfo = culture;
+    static readonly EnglishWordsToNumberConverter englishConverter = new();
+
+    readonly CultureInfo cultureInfo = culture;
 
     public override int Convert(string words)
     {
@@ -16,7 +18,7 @@ internal class DefaultWordsToNumberConverter(CultureInfo culture) : GenderlessWo
     {
         if (cultureInfo.TwoLetterISOLanguageName == "en")
         {
-            return TokenMapWordsToNumberConverters.En.TryConvert(words, out parsedValue, out unrecognizedWord);
+            return englishConverter.TryConvert(words, out parsedValue, out unrecognizedWord);
         }
         throw new NotSupportedException($"Words-to-number conversion is not supported for '{cultureInfo.TwoLetterISOLanguageName}'.");
     }

@@ -1,3 +1,0 @@
-<Project>
-  <Import Project="../src/Directory.Build.props" />
-</Project>

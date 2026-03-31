@@ -3,7 +3,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
 {
     static readonly TimeOnly time = new(13, 6, 2, 88, 987);
 
-    static readonly EsTimeOnlyToClockNotationConverter esConverter = new();
+    static readonly ITimeOnlyToClockNotationConverter esConverter = Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(new("es-ES"));
     [Benchmark]
     public void EsClockNotationConverter()
     {
@@ -11,7 +11,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         esConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static readonly BrazilianPortugueseTimeOnlyToClockNotationConverter brazilianConverter = new();
+    static readonly ITimeOnlyToClockNotationConverter brazilianConverter = Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(new("pt-BR"));
     [Benchmark]
     public void BrazilianPortugueseClockNotationConverter()
     {
@@ -19,7 +19,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         brazilianConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static readonly FrenchTimeOnlyToClockNotationConverter frConverter = new();
+    static readonly ITimeOnlyToClockNotationConverter frConverter = Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(new("fr"));
     [Benchmark]
     public void FrClockNotationConverter()
     {
@@ -27,7 +27,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         frConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static readonly LuxembourgishTimeOnlyToClockNotationConverter lbConverter = new();
+    static readonly ITimeOnlyToClockNotationConverter lbConverter = Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(new("lb"));
     [Benchmark]
     public void LbClockNotationConverter()
     {
@@ -35,7 +35,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         lbConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static readonly DefaultTimeOnlyToClockNotationConverter defaultConverter = new();
+    static readonly ITimeOnlyToClockNotationConverter defaultConverter = Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(new("en-US"));
     [Benchmark]
     public void DefaultClockNotationConverter()
     {

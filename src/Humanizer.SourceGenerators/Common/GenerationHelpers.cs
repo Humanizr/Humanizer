@@ -125,6 +125,41 @@ public sealed partial class HumanizerSourceGenerator
 
     static string GetCatalogPropertyName(string profileName) => SanitizeIdentifier(profileName);
 
+    static void AppendLazyCachedMember(
+        StringBuilder builder,
+        string indent,
+        string accessModifier,
+        string typeName,
+        string propertyName,
+        string expression)
+    {
+        var cacheName = propertyName + "_cache";
+        builder.Append(indent);
+        builder.Append(accessModifier);
+        builder.Append(' ');
+        builder.Append(typeName);
+        builder.Append(' ');
+        builder.Append(propertyName);
+        builder.Append(" => ");
+        builder.Append(cacheName);
+        builder.AppendLine(".Value;");
+        builder.AppendLine();
+        builder.Append(indent);
+        builder.Append("static class ");
+        builder.Append(cacheName);
+        builder.AppendLine();
+        builder.Append(indent);
+        builder.AppendLine("{");
+        builder.Append(indent);
+        builder.Append("    internal static readonly ");
+        builder.Append(typeName);
+        builder.Append(" Value = ");
+        builder.Append(expression);
+        builder.AppendLine(";");
+        builder.Append(indent);
+        builder.AppendLine("}");
+    }
+
     static string CreateParameterizedExpression(string typeName, string argumentExpression, string? trailingArgument = null)
     {
         if (string.IsNullOrEmpty(trailingArgument))

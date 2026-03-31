@@ -1,16 +1,19 @@
-using BenchmarkDotNet.Attributes;
-using Humanizer;
 using System.Globalization;
+using BenchmarkDotNet.Attributes;
+
+using Humanizer;
 
 namespace Benchmarks;
 
 /// <summary>
-/// Benchmarks for words-to-number conversions - demonstrates FrozenDictionary and source-generated regex
+/// Benchmarks for words-to-number conversions and generated profile resolution.
 /// </summary>
 [MemoryDiagnoser]
 public class WordsToNumberBenchmarks
 {
     static readonly CultureInfo EnglishCulture = new("en-US");
+    static readonly CultureInfo PortugueseCulture = new("pt-PT");
+    static readonly CultureInfo SpanishCulture = new("es-ES");
 
     [Benchmark(Description = "Simple word")]
     public int SimpleWord() =>
@@ -24,11 +27,19 @@ public class WordsToNumberBenchmarks
     public int ComplexNumber() =>
         "one thousand two hundred thirty-four".ToNumber(EnglishCulture);
 
-    [Benchmark(Description = "Ordinal word")]
-    public int OrdinalWord() =>
-        "fifth".ToNumber(EnglishCulture);
+    [Benchmark(Description = "Steady-state small ordinal parse")]
+    public int SmallOrdinalWord() =>
+        "vigésimo primero".ToNumber(SpanishCulture);
 
-    [Benchmark(Description = "Large number")]
-    public int LargeNumber() =>
-        "nine hundred ninety-nine million".ToNumber(EnglishCulture);
+    [Benchmark(Description = "Steady-state scale ordinal parse")]
+    public int ScaleOrdinalWord() =>
+        "milésimo".ToNumber(PortugueseCulture);
+
+    [Benchmark(Description = "Steady-state glued ordinal parse")]
+    public int GluedScaleOrdinalWord() =>
+        "dosmilésimo".ToNumber(SpanishCulture);
+
+    [Benchmark(Description = "First-touch locale/profile resolution")]
+    public string FirstTouchLocaleProfileResolution() =>
+        Configurator.GetWordsToNumberConverter(SpanishCulture).GetType().FullName!;
 }
