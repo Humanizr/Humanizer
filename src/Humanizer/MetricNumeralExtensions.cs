@@ -374,7 +374,7 @@ public static class MetricNumeralExtensions
             {
                 if (fractionalPart > roundingPoint)
                     number += Math.Sign(number);
-                else
+                else if (fractionalPart == roundingPoint)
                 {
                     // Use banker's rounding for consistency with Math.Round used elsewhere on floats.
                     number += Math.Sign(number % 2);
