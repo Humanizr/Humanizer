@@ -92,6 +92,14 @@ public class MetricNumeralTests
             }
         }
 
+        // Verify banker's rounding is used
+        data.Add(2400, 0, "2k");
+        data.Add(2500, 0, "2k");
+        data.Add(2600, 0, "3k");
+        data.Add(3400, 0, "3k");
+        data.Add(3500, 0, "4k");
+        data.Add(3600, 0, "4k");
+
         // 1,000-999,999
         foreach (var value in (long[])[23456, 123456, 123056, 123999])
         {

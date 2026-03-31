@@ -368,8 +368,18 @@ public static class MetricNumeralExtensions
 
         if (decimals == 0)
         {
-            if ((divisor > 1) && (fractionalPart >= divisor / 2))
-                number += Math.Sign(number);
+            var roundingPoint = divisor / 2;
+
+            if (divisor > 1)
+            {
+                if (fractionalPart > roundingPoint)
+                    number += Math.Sign(number);
+                else
+                {
+                    // Use banker's rounding for consistency with Math.Round used elsewhere on floats.
+                    number += Math.Sign(number % 2);
+                }
+            }
 
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
             return number + space + unitText;
