@@ -379,6 +379,13 @@ public static class MetricNumeralExtensions
                     // Use banker's rounding for consistency with Math.Round used elsewhere on floats.
                     number += Math.Sign(number % 2);
                 }
+
+                if (Math.Abs(number) == 1000)
+                {
+                    number /= 1000;
+                    scale++;
+                    unitText = GetUnitText(Symbols[0][scale - 1], formats);
+                }
             }
 
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;

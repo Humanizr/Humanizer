@@ -92,14 +92,6 @@ public class MetricNumeralTests
             }
         }
 
-        // Verify banker's rounding is used
-        data.Add(2400, 0, "2k");
-        data.Add(2500, 0, "2k");
-        data.Add(2600, 0, "3k");
-        data.Add(3400, 0, "3k");
-        data.Add(3500, 0, "4k");
-        data.Add(3600, 0, "4k");
-
         // 1,000-999,999
         foreach (var value in (long[])[23456, 123456, 123056, 123999])
         {
@@ -220,6 +212,21 @@ public class MetricNumeralTests
                 data.Add(value, decimals, expected);
             }
         }
+
+        // Verify banker's rounding is used
+        data.Add(2400, 0, "2k");
+        data.Add(2500, 0, "2k");
+        data.Add(2600, 0, "3k");
+        data.Add(3400, 0, "3k");
+        data.Add(3500, 0, "4k");
+        data.Add(3600, 0, "4k");
+
+        // Verify scale changes due to rounding are handled.
+        data.Add(999500, 0, "1M");
+        data.Add(999600000, 0, "1G");
+        data.Add(999700000000, 0, "1T");
+        data.Add(999500000000001, 0, "1P");
+        data.Add(999500000000000000, 0, "1E");
 
         foreach (var positiveTestCase in data.ToList())
         {
