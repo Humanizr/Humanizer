@@ -169,7 +169,7 @@ public static class MetricNumeralExtensions
     /// <returns>A valid Metric representation</returns>
     public static string ToMetric(this long input, MetricNumeralFormats? formats = null, int? decimals = null)
     {
-        if (input.Equals(0) && (!decimals.HasValue || (decimals == 0)))
+        if (input.Equals(0))
         {
             return input.ToString();
         }
@@ -292,16 +292,7 @@ public static class MetricNumeralExtensions
 
         var scale = exponent / 3;
 
-        if (!scale.Equals(0))
-        {
-            return BuildMetricRepresentation(input, scale, formats, decimals);
-        }
-
-        var representation = decimals > 0
-            ? $"{input}.{new string('0', decimals.Value)}"
-            : input.ToString();
-        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
-        return representation + space;
+        return BuildMetricRepresentation(input, scale, formats, decimals);
     }
 
     /// <summary>
@@ -337,41 +328,62 @@ public static class MetricNumeralExtensions
             fractionalPart = Math.Abs(input % divisor);
         }
 
-        if (decimals.HasValue)
-        {
-            for (var i = decimals.Value; i < exponent; i++)
-            {
-                var roundUp = (i + 1 == exponent);
-
-                fractionalPart = (fractionalPart + (roundUp ? 5 : 0)) / 10;
-            }
-        }
-        else
-        {
+        if (!decimals.HasValue)
             decimals = exponent;
-        }
 
-        var symbol = Math.Sign(scale) == 1
-            ? Symbols[0][scale - 1]
-            : Symbols[1][-scale - 1];
+        var unitText =
+            Math.Sign(scale) switch
+            {
+                +1 => GetUnitText(Symbols[0][scale - 1], formats),
+                -1 => GetUnitText(Symbols[1][-scale - 1], formats),
+                _ => string.Empty
+            };
+
+        var fractionalPartCharacters = Array.Empty<char>();
+
+        if (decimals > 0)
+        {
+            fractionalPartCharacters = fractionalPart.ToString().PadLeft(exponent, '0').ToCharArray();
+
+            if (!decimals.HasValue || (decimals >= fractionalPartCharacters.Length))
+                decimals = fractionalPartCharacters.Length;
+            else if (fractionalPartCharacters[decimals.Value] >= '5')
+            {
+                // Apply rounding. Find a digit we can increment, carrying as needed.
+                for (var i = decimals.Value - 1; i >= 0; i--)
+                {
+                    if (fractionalPartCharacters[i] < '9')
+                    {
+                        fractionalPartCharacters[i]++;
+                        break;
+                    }
+
+                    fractionalPartCharacters[i] = '0'; // loop to carry
+                }
+            }
+
+            while ((decimals > 0) && (fractionalPartCharacters[decimals.Value - 1] == '0'))
+                decimals--;
+        }
 
         if (decimals == 0)
         {
+            if ((divisor > 1) && (fractionalPart >= divisor / 2))
+                number += Math.Sign(number);
+
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
-            return number + space + GetUnitText(symbol, formats);
+            return number + space + unitText;
         }
         else
         {
-            var decimalPlaces = Math.Min(decimals.Value, exponent);
-            var extraZeroes = (decimals.Value - decimalPlaces);
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
 
-            return number
-                 + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
-                 + fractionalPart.ToString("d" + decimalPlaces)
-                 + (extraZeroes <= 0 ? string.Empty : new string('0', extraZeroes))
-                 + space
-                 + GetUnitText(symbol, formats);
+            return string.Concat(
+                number.ToString(),
+                CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator,
+                new string(fractionalPartCharacters, 0, decimals.Value),
+                space,
+                unitText);
         }
     }
 
