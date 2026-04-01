@@ -39,7 +39,8 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
         }
         else
         {
-            // In hungarian there is no separator between one thousand and the rest of the numbers
+            // Some hyphenated-scale locales inline the one-thousand segment directly into the
+            // under-a-thousand remainder instead of emitting an extra dash boundary.
             var lastPart = 1_000 <= number ? GetOneThousandPart(ref number, isOrdinal) : "";
             lastPart += GetUnderAThousandPart(number, isOrdinal, false, isLessThanTen);
 

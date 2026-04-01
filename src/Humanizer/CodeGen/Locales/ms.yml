@@ -1,6 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: dan
-formatter: trim-plural-suffix
-numberToWords: malay
-wordsToNumber: malay

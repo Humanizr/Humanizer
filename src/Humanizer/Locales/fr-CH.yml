@@ -1,0 +1,31 @@
+# Locale-owned generator data for fr-CH.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+inherits: 'fr'
+numberToWords:
+  engine: 'variant-decade'
+  minusWord: 'moins'
+  seventyStrategy: 'regular'
+  ninetyStrategy: 'regular'
+  specialSeventyOneWord: ''
+  pluralizeExactEighty: false
+  tensUsingEtWhenUnitIsOne:
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+  tensMap:
+    - 'zéro'
+    - 'dix'
+    - 'vingt'
+    - 'trente'
+    - 'quarante'
+    - 'cinquante'
+    - 'soixante'
+    - 'septante'
+    - 'octante'
+    - 'nonante'

@@ -13,17 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="CodeGen\Locales\*.yml" />
-    <AdditionalFiles Include="CodeGen\Profiles\Formatters\*.json" />
-    <AdditionalFiles Include="CodeGen\Profiles\NumberToWords\*.json" />
-    <AdditionalFiles Include="CodeGen\Schemas\NumberToWords\*.json" />
-    <AdditionalFiles Include="CodeGen\Profiles\Ordinalizers\*.json" />
-    <AdditionalFiles Include="CodeGen\Profiles\OrdinalDates\*.json" />
-    <AdditionalFiles Include="CodeGen\Profiles\TimeOnlyToClockNotation\*.json" />
-    <AdditionalFiles Include="CodeGen\Schemas\TimeOnlyToClockNotation\*.json" />
-    <AdditionalFiles Include="CodeGen\Profiles\WordsToNumber\*.json" />
-    <AdditionalFiles Include="CodeGen\Schemas\WordsToNumber\*.json" />
-    <AdditionalFiles Include="CodeGen\WordsToNumber\*.json" />
+    <AdditionalFiles Include="Locales\*.yml" />
     <AdditionalFiles Include="Properties\Resources.resx" />
   </ItemGroup>
   

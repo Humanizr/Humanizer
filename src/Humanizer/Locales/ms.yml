@@ -1,0 +1,89 @@
+# Locale-owned generator data for ms.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'dan'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'contracted-one-scale'
+  zeroWord: 'kosong'
+  minusWord: 'minus'
+  hundredWord: 'seratus'
+  hundredUnitWord: 'ratus'
+  units:
+    - 'kosong'
+    - 'satu'
+    - 'dua'
+    - 'tiga'
+    - 'empat'
+    - 'lima'
+    - 'enam'
+    - 'tujuh'
+    - 'lapan'
+    - 'sembilan'
+    - 'sepuluh'
+    - 'sebelas'
+    - 'dua belas'
+    - 'tiga belas'
+    - 'empat belas'
+    - 'lima belas'
+    - 'enam belas'
+    - 'tujuh belas'
+    - 'lapan belas'
+    - 'sembilan belas'
+  tens:
+    2: 'dua puluh'
+    3: 'tiga puluh'
+    4: 'empat puluh'
+    5: 'lima puluh'
+    6: 'enam puluh'
+    7: 'tujuh puluh'
+    8: 'lapan puluh'
+    9: 'sembilan puluh'
+  scales:
+    -
+      value: 1000000000000000000
+      name: 'kuintilion'
+    -
+      value: 1000000000000000
+      name: 'kuadrilion'
+    -
+      value: 1000000000000
+      name: 'trilion'
+    -
+      value: 1000000000
+      name: 'bilion'
+    -
+      value: 1000000
+      name: 'juta'
+    -
+      value: 1000
+      name: 'ribu'
+      oneWord: 'seribu'
+wordsToNumber:
+  engine: 'contracted-scale'
+  minusWord: 'minus'
+  cardinalMap:
+    kosong: 0
+    satu: 1
+    dua: 2
+    tiga: 3
+    empat: 4
+    lima: 5
+    enam: 6
+    tujuh: 7
+    lapan: 8
+    sembilan: 9
+    sepuluh: 10
+    sebelas: 11
+    belas: 10
+    puluh: 10
+    seratus: 100
+    ratus: 100
+    seribu: 1000
+    ribu: 1000
+    juta: 1000000
+    bilion: 1000000000

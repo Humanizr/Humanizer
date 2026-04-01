@@ -1,0 +1,320 @@
+# Locale-owned generator data for de-CH.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+inherits: 'de'
+numberToWords:
+  engine: 'unit-leading-compound'
+  zeroWord: 'null'
+  minusWord: 'minus '
+  masculineOne: 'eins'
+  feminineOne: 'eine'
+  neuterOne: 'eins'
+  tensJoiner: 'und'
+  ordinalStemSuffix: 's'
+  masculineOrdinalEnding: 'ter'
+  feminineOrdinalEnding: 'te'
+  neuterOrdinalEnding: 'tes'
+  supportsEifelerRule: false
+  unitsMap:
+    0: 'null'
+    1: 'ein'
+    2: 'zwei'
+    3: 'drei'
+    4: 'vier'
+    5: 'fünf'
+    6: 'sechs'
+    7: 'sieben'
+    8: 'acht'
+    9: 'neun'
+    10: 'zehn'
+    11: 'elf'
+    12: 'zwölf'
+    13: 'dreizehn'
+    14: 'vierzehn'
+    15: 'fünfzehn'
+    16: 'sechzehn'
+    17: 'siebzehn'
+    18: 'achtzehn'
+    19: 'neunzehn'
+  compoundUnitsMap:
+    0: 'null'
+    1: 'ein'
+    2: 'zwei'
+    3: 'drei'
+    4: 'vier'
+    5: 'fünf'
+    6: 'sechs'
+    7: 'sieben'
+    8: 'acht'
+    9: 'neun'
+    10: 'zehn'
+    11: 'elf'
+    12: 'zwölf'
+    13: 'dreizehn'
+    14: 'vierzehn'
+    15: 'fünfzehn'
+    16: 'sechzehn'
+    17: 'siebzehn'
+    18: 'achtzehn'
+    19: 'neunzehn'
+  tensMap:
+    0: 'null'
+    1: 'zehn'
+    2: 'zwanzig'
+    3: 'dreissig'
+    4: 'vierzig'
+    5: 'fünfzig'
+    6: 'sechzig'
+    7: 'siebzig'
+    8: 'achtzig'
+    9: 'neunzig'
+  unitsOrdinal:
+    1: 'ers'
+    2: 'zwei'
+    3: 'drit'
+    4: 'vier'
+    5: 'fünf'
+    6: 'sechs'
+    7: 'sieb'
+    8: 'ach'
+    9: 'neun'
+    10: 'zehn'
+    11: 'elf'
+    12: 'zwölf'
+    13: 'dreizehn'
+    14: 'vierzehn'
+    15: 'fünfzehn'
+    16: 'sechzehn'
+    17: 'siebzehn'
+    18: 'achtzehn'
+    19: 'neunzehn'
+  scales:
+    -
+      value: 1000000000000000000
+      addSpaceBeforeNextPart: true
+      singularCardinal: 'eine Trillion'
+      pluralCardinalFormat: '{0} Trillionen'
+      ordinalSingular:
+        - 'eintrillion'
+        - 'einetrillion'
+      ordinalPlural:
+        - '{0}trillion'
+        - '{0}trillionen'
+    -
+      value: 1000000000000000
+      addSpaceBeforeNextPart: true
+      singularCardinal: 'eine Billiarde'
+      pluralCardinalFormat: '{0} Billiarden'
+      ordinalSingular:
+        - 'einbilliard'
+        - 'einebilliarde'
+      ordinalPlural:
+        - '{0}billiard'
+        - '{0}billiarden'
+    -
+      value: 1000000000000
+      addSpaceBeforeNextPart: true
+      singularCardinal: 'eine Billion'
+      pluralCardinalFormat: '{0} Billionen'
+      ordinalSingular:
+        - 'einbillion'
+        - 'einebillion'
+      ordinalPlural:
+        - '{0}billion'
+        - '{0}billionen'
+    -
+      value: 1000000000
+      addSpaceBeforeNextPart: true
+      singularCardinal: 'eine Milliarde'
+      pluralCardinalFormat: '{0} Milliarden'
+      ordinalSingular:
+        - 'einmilliard'
+        - 'einemilliarde'
+      ordinalPlural:
+        - '{0}milliard'
+        - '{0}milliarden'
+    -
+      value: 1000000
+      addSpaceBeforeNextPart: true
+      singularCardinal: 'eine Million'
+      pluralCardinalFormat: '{0} Millionen'
+      ordinalSingular:
+        - 'einmillion'
+        - 'einemillion'
+      ordinalPlural:
+        - '{0}million'
+        - '{0}millionen'
+    -
+      value: 1000
+      addSpaceBeforeNextPart: false
+      singularCardinal: 'eintausend'
+      pluralCardinalFormat: '{0}tausend'
+      ordinalSingular:
+        - 'eintausend'
+        - 'eintausend'
+      ordinalPlural:
+        - '{0}tausend'
+        - '{0}tausend'
+    -
+      value: 100
+      addSpaceBeforeNextPart: false
+      singularCardinal: 'einhundert'
+      pluralCardinalFormat: '{0}hundert'
+      ordinalSingular:
+        - 'einhundert'
+        - 'einhundert'
+      ordinalPlural:
+        - '{0}hundert'
+        - '{0}hundert'
+wordsToNumber:
+  engine: 'inverted-tens'
+  cardinalMap:
+    ein: 1
+    eins: 1
+    eine: 1
+    einen: 1
+    zwei: 2
+    drei: 3
+    vier: 4
+    'fünf': 5
+    sechs: 6
+    sieben: 7
+    acht: 8
+    neun: 9
+    zehn: 10
+    elf: 11
+    'zwölf': 12
+    dreizehn: 13
+    vierzehn: 14
+    'fünfzehn': 15
+    sechzehn: 16
+    siebzehn: 17
+    achtzehn: 18
+    neunzehn: 19
+    zwanzig: 20
+    'dreißig': 30
+    dreissig: 30
+    vierzig: 40
+    'fünfzig': 50
+    sechzig: 60
+    siebzig: 70
+    achtzig: 80
+    neunzig: 90
+    hundert: 100
+    tausend: 1000
+    million: 1000000
+    millionen: 1000000
+    milliarde: 1000000000
+    milliarden: 1000000000
+  unitMap:
+    ein: 1
+    eins: 1
+    eine: 1
+    einen: 1
+    zwei: 2
+    drei: 3
+    vier: 4
+    'fünf': 5
+    sechs: 6
+    sieben: 7
+    acht: 8
+    neun: 9
+  tensTokens:
+    -
+      word: 'neunzig'
+      value: 90
+    -
+      word: 'achtzig'
+      value: 80
+    -
+      word: 'siebzig'
+      value: 70
+    -
+      word: 'sechzig'
+      value: 60
+    -
+      word: 'fünfzig'
+      value: 50
+    -
+      word: 'vierzig'
+      value: 40
+    -
+      word: 'dreißig'
+      value: 30
+    -
+      word: 'dreissig'
+      value: 30
+    -
+      word: 'zwanzig'
+      value: 20
+  tensLinker: 'und'
+  scaleTokens:
+    - 'milliarden'
+    - 'milliarde'
+    - 'millionen'
+    - 'million'
+    - 'tausend'
+    - 'hundert'
+  ordinalMap:
+    erste: 1
+    erster: 1
+    erstes: 1
+    zweite: 2
+    zweiter: 2
+    zweites: 2
+    dritte: 3
+    dritter: 3
+    drittes: 3
+    vierte: 4
+    vierter: 4
+    viertes: 4
+    'fünfte': 5
+    'fünfter': 5
+    'fünftes': 5
+    sechste: 6
+    sechster: 6
+    sechstes: 6
+    siebte: 7
+    siebter: 7
+    siebtes: 7
+    achte: 8
+    achter: 8
+    achtes: 8
+    neunte: 9
+    neunter: 9
+    neuntes: 9
+    zehnte: 10
+    zehnter: 10
+    zehntes: 10
+    elfte: 11
+    'zwölfte': 12
+    dreizehnte: 13
+    vierzehnte: 14
+    'fünfzehnte': 15
+    sechzehnte: 16
+    siebzehnte: 17
+    achtzehnte: 18
+    neunzehnte: 19
+    zwanzigste: 20
+    einundzwanzigste: 21
+    einundzwanzigster: 21
+    einundzwanzigstes: 21
+    einundzwanzigsten: 21
+    'dreißigste': 30
+    dreissigste: 30
+    dreissigster: 30
+    dreissigstes: 30
+    'dreißigsten': 30
+  negativePrefixes:
+    - 'minus '
+    - 'negativ '
+  ordinalSuffixes:
+    - 'ste'
+    - 'sten'
+    - 'ster'
+    - 'stes'
+    - 'te'
+    - 'ten'
+    - 'ter'
+    - 'tes'
+  allowInvariantIntegerInput: true

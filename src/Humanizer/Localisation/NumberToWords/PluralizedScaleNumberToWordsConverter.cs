@@ -1,9 +1,31 @@
 namespace Humanizer;
 
+/// <summary>
+/// Shared renderer for languages whose large-scale words change by grammatical number and whose
+/// low digits may also vary by gender or adjective agreement.
+///
+/// The algorithm is:
+/// - walk the scale table from largest to smallest
+/// - render each scale count under one thousand
+/// - choose the scale form through a generated plural-form detector
+/// - render the terminal under-thousand segment in the requested gender
+///
+/// Ordinals in this family are intentionally more specialized. For Lithuanian-style profiles the
+/// final segment becomes ordinal while everything above it stays cardinal. The generated profile
+/// supplies the exact suffixes, unit variants, and plural detectors needed to reach the expected
+/// natural-language phrase.
+/// </summary>
 class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile profile, CultureInfo culture) :
     GenderedNumberToWordsConverter
 {
+    /// <summary>
+    /// Immutable generated profile that owns the pluralized scale lexicon and strategy choices.
+    /// </summary>
     readonly PluralizedScaleNumberToWordsProfile profile = profile;
+
+    /// <summary>
+    /// Culture used when the ordinal mode delegates to numeric culture formatting.
+    /// </summary>
     readonly CultureInfo culture = culture;
 
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
@@ -23,6 +45,9 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
             parts.Add(profile.MinusWord);
         }
 
+        // The family stays shared because the structural walk is the same across these locales:
+        // count each large scale, render the count, then choose the correct singular/paucal/plural
+        // scale word from generated data.
         foreach (var scale in profile.Scales)
         {
             var count = remaining / scale.Value;
@@ -79,6 +104,9 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
             parts.Add(profile.MinusWord);
         }
 
+        // Lithuanian ordinals only mutate the terminal segment. All earlier scale segments stay
+        // cardinal, so the algorithm must postpone ordinal suffix application until it can prove
+        // which segment actually ends the phrase.
         foreach (var scale in profile.Scales)
         {
             var count = remaining / scale.Value;
@@ -107,6 +135,9 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
         return string.Join(" ", parts);
     }
 
+    // Under one thousand, the family rule is "emit hundreds, then tens, then the gender-aware
+    // unit word". Higher-order context is passed in so languages like Polish can choose different
+    // one-forms when the unit appears after a scale word.
     void AppendCardinalUnderOneThousand(List<string> parts, int number, GrammaticalGender gender, bool hasHigherOrderParts = false)
     {
         var hasMagnitudeParts = hasHigherOrderParts;
@@ -132,6 +163,9 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
         parts.Add(GetCardinalUnit(number, gender, hasHigherOrderParts: hasMagnitudeParts));
     }
 
+    // Lithuanian ordinal rendering mirrors the cardinal structure, but only the terminal hundreds,
+    // tens, or units segment takes the ordinal suffix. This method therefore tracks whether the
+    // current sub-segment is terminal before switching to the ordinal lexicon.
     void AppendLithuanianOrdinalUnderOneThousand(List<string> parts, int number, GrammaticalGender gender, bool isTerminal)
     {
         if (number >= 100)
@@ -162,6 +196,9 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
         }
     }
 
+    // Unit rendering is the second axis of variability in this family. Some locales vary only the
+    // scale forms, while others also vary one/two or adjective-like endings by gender and context.
+    // The goal is still one natural-language phrase, not a mechanical concatenation of invariant digits.
     string GetCardinalUnit(int number, GrammaticalGender gender, bool hasHigherOrderParts = false)
     {
         var word = profile.UnitsMap[number];
@@ -214,6 +251,8 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
             _ => throw new InvalidOperationException("Unknown scale form.")
         };
 
+    // Plural detection is locale-owned grammar, not converter logic. The converter calls into the
+    // generated detector choice so the same traversal can serve Lithuanian, Polish, and Russian-style families.
     PluralizedScaleForm DetectScaleForm(ulong number) =>
         profile.FormDetector switch
         {
@@ -267,6 +306,9 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
         value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }
 
+/// <summary>
+/// Describes the plural-form detector used for scale words.
+/// </summary>
 enum PluralizedScaleFormDetector
 {
     RussianPaucal,
@@ -274,6 +316,9 @@ enum PluralizedScaleFormDetector
     Lithuanian
 }
 
+/// <summary>
+/// Represents the three scale-form buckets used by the shared pluralized-scale engine.
+/// </summary>
 enum PluralizedScaleForm
 {
     Singular,
@@ -281,6 +326,9 @@ enum PluralizedScaleForm
     Plural
 }
 
+/// <summary>
+/// Describes how low units vary by gender or context.
+/// </summary>
 enum PluralizedScaleUnitVariantStrategy
 {
     None,
@@ -288,12 +336,18 @@ enum PluralizedScaleUnitVariantStrategy
     Lithuanian
 }
 
+/// <summary>
+/// Describes how ordinals are produced for the locale.
+/// </summary>
 enum PluralizedScaleOrdinalMode
 {
     NumericCulture,
     Lithuanian
 }
 
+/// <summary>
+/// Immutable generated profile for <see cref="PluralizedScaleNumberToWordsConverter"/>.
+/// </summary>
 sealed class PluralizedScaleNumberToWordsProfile(
     string zeroWord,
     string minusWord,
@@ -312,24 +366,43 @@ sealed class PluralizedScaleNumberToWordsProfile(
     string[] ordinalTensMap,
     string[] ordinalHundredsMap)
 {
+    /// <summary>Gets the cardinal zero word.</summary>
     public string ZeroWord { get; } = zeroWord;
+    /// <summary>Gets the word used to prefix negative values.</summary>
     public string MinusWord { get; } = minusWord;
+    /// <summary>Gets the stem used to build the zero ordinal.</summary>
     public string ZeroOrdinalStem { get; } = zeroOrdinalStem;
+    /// <summary>Gets the cardinal units lexicon.</summary>
     public string[] UnitsMap { get; } = unitsMap;
+    /// <summary>Gets the cardinal tens lexicon.</summary>
     public string[] TensMap { get; } = tensMap;
+    /// <summary>Gets the cardinal hundreds lexicon.</summary>
     public string[] HundredsMap { get; } = hundredsMap;
+    /// <summary>Gets the descending scale rows used during decomposition.</summary>
     public PluralizedScale[] Scales { get; } = scales;
+    /// <summary>Gets the plural-form detector used for scale words.</summary>
     public PluralizedScaleFormDetector FormDetector { get; } = formDetector;
+    /// <summary>Gets the strategy used for gendered or contextual unit variants.</summary>
     public PluralizedScaleUnitVariantStrategy UnitVariantStrategy { get; } = unitVariantStrategy;
+    /// <summary>Gets the ordinal rendering mode.</summary>
     public PluralizedScaleOrdinalMode OrdinalMode { get; } = ordinalMode;
+    /// <summary>Gets a value indicating whether neuter gender is supported by the locale.</summary>
     public bool SupportsNeuter { get; } = supportsNeuter;
+    /// <summary>Gets the masculine ordinal suffix.</summary>
     public string MasculineOrdinalSuffix { get; } = masculineOrdinalSuffix;
+    /// <summary>Gets the feminine ordinal suffix.</summary>
     public string FeminineOrdinalSuffix { get; } = feminineOrdinalSuffix;
+    /// <summary>Gets the ordinal unit lexicon.</summary>
     public string[] OrdinalUnitsMap { get; } = ordinalUnitsMap;
+    /// <summary>Gets the ordinal tens lexicon.</summary>
     public string[] OrdinalTensMap { get; } = ordinalTensMap;
+    /// <summary>Gets the ordinal hundreds lexicon.</summary>
     public string[] OrdinalHundredsMap { get; } = ordinalHundredsMap;
 }
 
+/// <summary>
+/// One descending scale row for <see cref="PluralizedScaleNumberToWordsConverter"/>.
+/// </summary>
 readonly record struct PluralizedScale(
     ulong Value,
     GrammaticalGender CountGender,

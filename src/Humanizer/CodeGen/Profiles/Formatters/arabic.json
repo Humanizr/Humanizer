@@ -1,9 +1,0 @@
-{
-  "engine": "profiled",
-  "resourceKeyDetector": "arabic-like",
-  "resourceKeySuffixes": {
-    "dual": "_Dual",
-    "plural": "_Plural"
-  },
-  "dataUnitFallbackTransform": "trim-trailing-s"
-}

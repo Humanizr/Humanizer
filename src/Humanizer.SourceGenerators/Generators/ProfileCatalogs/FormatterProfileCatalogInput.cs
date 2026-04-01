@@ -21,22 +21,23 @@ public sealed partial class HumanizerSourceGenerator
             .Select(static profile => profile.ProfileName)
             .ToImmutableHashSet(StringComparer.Ordinal);
 
-        public static FormatterProfileCatalogInput Create(ImmutableArray<JsonProfileFile?> files)
+        public static FormatterProfileCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
             var profiles = ImmutableArray.CreateBuilder<FormatterProfileDefinition>();
-            foreach (var file in files)
+            var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var locale in localeCatalog.Locales)
             {
-                if (file is null)
+                var feature = locale.Formatter;
+                if (feature is not { UsesGeneratedProfile: true } ||
+                    !seenProfiles.Add(feature.ProfileName!))
                 {
                     continue;
                 }
 
-                using var document = JsonDocument.Parse(file.FileText);
-                var root = document.RootElement;
                 profiles.Add(new FormatterProfileDefinition(
-                    file.ProfileName,
-                    GetRequiredString(root, "engine"),
-                    root.Clone()));
+                    feature.ProfileName!,
+                    GetRequiredString(feature.ProfileRoot, "engine"),
+                    feature.ProfileRoot.Clone()));
             }
 
             return new FormatterProfileCatalogInput(profiles.ToImmutable());

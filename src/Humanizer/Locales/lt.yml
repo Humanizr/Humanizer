@@ -1,0 +1,238 @@
+# Locale-owned generator data for lt.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'ir'
+formatter:
+  engine: 'profiled'
+  resourceKeyOverrides:
+    -
+      number: 0
+      suffix: ''
+      keys:
+        - 'TimeSpanHumanize_Zero'
+        - 'DateHumanize_Now'
+  resourceKeyDetector: 'lithuanian'
+  resourceKeySuffixes:
+    singular: '_Singular'
+    plural: '_Plural'
+  dataUnitDetector: 'lithuanian'
+  dataUnitSuffixes:
+    singular: '_Singular'
+    plural: '_Plural'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'pluralized-scale'
+  zeroWord: 'nulis'
+  minusWord: 'minus'
+  zeroOrdinalStem: 'nulin'
+  formDetector: 'lithuanian'
+  unitVariantStrategy: 'lithuanian'
+  ordinalMode: 'lithuanian'
+  supportsNeuter: false
+  masculineOrdinalSuffix: 'as'
+  feminineOrdinalSuffix: 'a'
+  unitsMap:
+    - 'nulis'
+    - 'vienas'
+    - 'du'
+    - 'trys'
+    - 'keturi'
+    - 'penki'
+    - 'šeši'
+    - 'septyni'
+    - 'aštuoni'
+    - 'devyni'
+    - 'dešimt'
+    - 'vienuolika'
+    - 'dvylika'
+    - 'trylika'
+    - 'keturiolika'
+    - 'penkiolika'
+    - 'šešiolika'
+    - 'septyniolika'
+    - 'aštuoniolika'
+    - 'devyniolika'
+  tensMap:
+    1: 'dešimt'
+    2: 'dvidešimt'
+    3: 'trisdešimt'
+    4: 'keturiasdešimt'
+    5: 'penkiasdešimt'
+    6: 'šešiasdešimt'
+    7: 'septyniasdešimt'
+    8: 'aštuoniasdešimt'
+    9: 'devyniasdešimt'
+  hundredsMap:
+    1: 'šimtas'
+    2: 'du šimtai'
+    3: 'trys šimtai'
+    4: 'keturi šimtai'
+    5: 'penki šimtai'
+    6: 'šeši šimtai'
+    7: 'septyni šimtai'
+    8: 'aštuoni šimtai'
+    9: 'devyni šimtai'
+  ordinalUnitsMap:
+    1: 'pirm'
+    2: 'antr'
+    3: 'treči'
+    4: 'ketvirt'
+    5: 'penkt'
+    6: 'šešt'
+    7: 'septint'
+    8: 'aštunt'
+    9: 'devint'
+    10: 'dešimt'
+    11: 'vienuolikt'
+    12: 'dvylikt'
+    13: 'trylikt'
+    14: 'keturiolikt'
+    15: 'penkiolikt'
+    16: 'šešiolikt'
+    17: 'septyniolikt'
+    18: 'aštuoniolikt'
+    19: 'devyniolikt'
+    20: 'dvidešimt'
+  ordinalTensMap:
+    1: 'dešimt'
+    2: 'dvidešimt'
+    3: 'trisdešimt'
+    4: 'keturiasdešimt'
+    5: 'penkiasdešimt'
+    6: 'šešiasdešimt'
+    7: 'septyniasdešimt'
+    8: 'aštuoniasdešimt'
+    9: 'devyniasdešimt'
+  ordinalHundredsMap:
+    1: 'šimt'
+    2: 'du šimt'
+    3: 'trys šimt'
+    4: 'keturi šimt'
+    5: 'penki šimt'
+    6: 'šeši šimt'
+    7: 'septyni šimt'
+    8: 'aštuoni šimt'
+    9: 'devyni šimt'
+  scales:
+    -
+      value: 1000000000000000000
+      countGender: 'masculine'
+      singular: 'kvintilijonas'
+      paucal: 'kvintilijonai'
+      plural: 'kvintilijonų'
+    -
+      value: 1000000000000000
+      countGender: 'masculine'
+      singular: 'kvadrilijonas'
+      paucal: 'kvadrilijonai'
+      plural: 'kvadrilijonų'
+    -
+      value: 1000000000000
+      countGender: 'masculine'
+      singular: 'trilijonas'
+      paucal: 'trilijonai'
+      plural: 'trilijonų'
+    -
+      value: 1000000000
+      countGender: 'masculine'
+      singular: 'milijardas'
+      paucal: 'milijardai'
+      plural: 'milijardų'
+      ordinalStem: 'milijard'
+    -
+      value: 1000000
+      countGender: 'masculine'
+      singular: 'milijonas'
+      paucal: 'milijonai'
+      plural: 'milijonų'
+      ordinalStem: 'milijon'
+    -
+      value: 1000
+      countGender: 'masculine'
+      singular: 'tūkstantis'
+      paucal: 'tūkstančiai'
+      plural: 'tūkstančių'
+      ordinalStem: 'tūkstant'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+dateToOrdinalWords:
+  pattern: 'yyyy ''m.'' MMMM {day} ''d.'''
+  dayMode: 'Numeric'
+dateOnlyToOrdinalWords:
+  pattern: 'yyyy ''m.'' MMMM {day} ''d.'''
+  dayMode: 'Numeric'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriods'
+  cardinalMap:
+    nulis: 0
+    vienas: 1
+    viena: 1
+    du: 2
+    dvi: 2
+    trys: 3
+    keturi: 4
+    keturios: 4
+    penki: 5
+    penkios: 5
+    'šeši': 6
+    sesi: 6
+    'šešios': 6
+    sesios: 6
+    septyni: 7
+    septynios: 7
+    'aštuoni': 8
+    astuoni: 8
+    'aštuonios': 8
+    astuonios: 8
+    devyni: 9
+    devynios: 9
+    'dešimt': 10
+    desimt: 10
+    vienuolika: 11
+    dvylika: 12
+    trylika: 13
+    keturiolika: 14
+    penkiolika: 15
+    'šešiolika': 16
+    sesiolika: 16
+    septyniolika: 17
+    'aštuoniolika': 18
+    astuoniolika: 18
+    devyniolika: 19
+    'dvidešimt': 20
+    dvidesimt: 20
+    'trisdešimt': 30
+    trisdesimt: 30
+    'keturiasdešimt': 40
+    keturiasdesimt: 40
+    'penkiasdešimt': 50
+    penkiasdesimt: 50
+    'šešiasdešimt': 60
+    sesiasdesimt: 60
+    'septyniasdešimt': 70
+    septyniasdesimt: 70
+    'aštuoniasdešimt': 80
+    astuoniasdesimt: 80
+    'devyniasdešimt': 90
+    devyniasdesimt: 90
+    'šimtas': 100
+    simtas: 100
+    'šimtai': 100
+    simtai: 100
+    'tūkstantis': 1000
+    tukstantis: 1000
+    'tūkstančiai': 1000
+    tukstanciai: 1000
+    'tūkstančių': 1000
+    tukstanciu: 1000
+    milijonas: 1000000
+    milijonai: 1000000
+    'milijonų': 1000000
+    milijonu: 1000000
+  useHundredMultiplier: true
+  negativePrefixes:
+    - 'minus '

@@ -1,0 +1,115 @@
+# Locale-owned generator data for fr.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'et'
+formatter:
+  engine: 'profiled'
+  resourceKeyOverrides:
+    -
+      number: 2
+      suffix: '_Dual'
+      keys:
+        - 'DateHumanize_MultipleDaysAgo'
+        - 'DateHumanize_MultipleDaysFromNow'
+    -
+      number: 0
+      suffix: '_Singular'
+      prefixes:
+        - 'TimeSpanHumanize_Multiple'
+numberToWords:
+  engine: 'variant-decade'
+  minusWord: 'moins'
+  seventyStrategy: 'sixty-plus-teens'
+  ninetyStrategy: 'eighty-plus-teens'
+  specialSeventyOneWord: 'soixante et onze'
+  pluralizeExactEighty: true
+  tensUsingEtWhenUnitIsOne:
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+  tensMap:
+    - 'zéro'
+    - 'dix'
+    - 'vingt'
+    - 'trente'
+    - 'quarante'
+    - 'cinquante'
+    - 'soixante'
+    - 'soixante'
+    - 'quatre-vingt'
+    - 'quatre-vingt'
+ordinalizer:
+  engine: 'template'
+  masculine:
+    defaultSuffix: 'ème'
+    exactSuffixes:
+      '1': 'er'
+  feminine:
+    defaultSuffix: 'ème'
+    exactSuffixes:
+      '1': 'ère'
+  neuter:
+    defaultSuffix: 'ème'
+    exactSuffixes:
+      '1': 'er'
+dateToOrdinalWords:
+  pattern: '{day} MMMM yyyy'
+  dayMode: 'OrdinalWhenDayIsOne'
+dateOnlyToOrdinalWords:
+  pattern: '{day} MMMM yyyy'
+  dayMode: 'OrdinalWhenDayIsOne'
+timeOnlyToClockNotation:
+  engine: 'french'
+wordsToNumber:
+  engine: 'vigesimal-compound'
+  cardinalMap:
+    'zéro': 0
+    un: 1
+    une: 1
+    deux: 2
+    trois: 3
+    quatre: 4
+    cinq: 5
+    six: 6
+    sept: 7
+    huit: 8
+    neuf: 9
+    dix: 10
+    onze: 11
+    douze: 12
+    treize: 13
+    quatorze: 14
+    quinze: 15
+    seize: 16
+    vingt: 20
+    trente: 30
+    quarante: 40
+    cinquante: 50
+    soixante: 60
+    cent: 100
+    cents: 100
+    mille: 1000
+    million: 1000000
+    millions: 1000000
+    milliard: 1000000000
+    milliards: 1000000000
+  ordinalMap:
+    premier: 1
+    'première': 1
+  negativePrefixes:
+    - 'moins '
+  ignoredTokens:
+    - 'et'
+  vigesimalLeadingToken: 'quatre'
+  vigesimalFollowerTokens:
+    - 'vingt'
+    - 'vingts'
+  vigesimalValue: 80
+  teenLeaderToken: 'dix'
+  teenLeaderBases:
+    - 60
+    - 80

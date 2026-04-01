@@ -1,9 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: și
-formatter: romanian
-numberToWords: romanian
-ordinalizer: romanian
-wordsToNumber:
-  kind: lexicon
-  sourceLocale: ro

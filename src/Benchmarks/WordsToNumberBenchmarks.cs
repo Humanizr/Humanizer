@@ -40,6 +40,10 @@ public class WordsToNumberBenchmarks
         "dosmilésimo".ToNumber(SpanishCulture);
 
     [Benchmark(Description = "First-touch locale/profile resolution")]
-    public string FirstTouchLocaleProfileResolution() =>
+    public string FirstTouchEnglishLocaleProfileResolution() =>
+        Configurator.GetWordsToNumberConverter(EnglishCulture).GetType().FullName!;
+
+    [Benchmark(Description = "First-touch non-English locale/profile resolution")]
+    public string FirstTouchNonEnglishLocaleProfileResolution() =>
         Configurator.GetWordsToNumberConverter(SpanishCulture).GetType().FullName!;
 }

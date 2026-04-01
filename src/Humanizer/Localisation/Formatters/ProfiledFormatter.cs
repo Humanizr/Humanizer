@@ -42,6 +42,9 @@ enum FormatterSecondaryPlaceholderMode
     LuxembourgishEifelerN
 }
 
+// Shared formatter kernel used whenever a locale can be expressed as declarative resource-key,
+// suffix, preposition, and gender-selection rules. The generator builds FormatterProfile
+// instances from locale-owned YAML so runtime formatting stays branch-light and parse-free.
 sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : DefaultFormatter(culture)
 {
     const char LuxembourgishEifelerSuffix = 'n';
@@ -206,6 +209,8 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     }
 }
 
+// Compact generated rule object for ProfiledFormatter. Each field corresponds to one structural
+// formatting concern rather than to a locale name so new locales usually stay data-only.
 sealed class FormatterProfile(
     FormatterNumberDetectorKind resourceKeyDetector,
     FormatterSuffixMap resourceSuffixes,
@@ -230,6 +235,8 @@ sealed class FormatterProfile(
     public FrozenDictionary<TimeUnit, GrammaticalGender> UnitGenders { get; } = unitGenders ?? FrozenDictionary<TimeUnit, GrammaticalGender>.Empty;
 }
 
+// Keeps the common singular/dual/paucal/plural suffix bundle together so the generator can emit
+// formatter rule tables without duplicating boilerplate constructor calls at every use site.
 readonly record struct FormatterSuffixMap(
     string Singular,
     string Dual,
@@ -253,6 +260,8 @@ readonly record struct FormatterSuffixMap(
         };
 }
 
+// Resource overrides let a profile pin exact exceptional keys without turning the shared
+// formatter engine into a locale-specific if/else chain.
 readonly record struct FormatterResourceKeyOverride(
     int Number,
     string Suffix,

@@ -1,7 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: és
-formatter: trim-plural-suffix
-numberToWords: hungarian
-ordinalizer: period-suffix
-wordsToNumber: hungarian

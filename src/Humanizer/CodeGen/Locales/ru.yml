@@ -1,9 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: и
-formatter: russian
-numberToWords: russian
-ordinalizer: russian
-wordsToNumber:
-  kind: lexicon
-  sourceLocale: ru

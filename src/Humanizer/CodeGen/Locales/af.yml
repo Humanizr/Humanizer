@@ -1,8 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: en
-numberToWords: afrikaans
-ordinalizer: afrikaans
-wordsToNumber:
-  kind: lexicon
-  sourceLocale: af

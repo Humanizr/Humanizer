@@ -1,0 +1,95 @@
+# Locale-owned generator data for th.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'และ'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'joined-scale'
+  maximumValue: 9223372036854775807
+  zeroWord: 'ศูนย์'
+  minusWord: 'ลบ'
+  negativeJoinWord: ''
+  joinWord: ''
+  scaleCountJoinWord: ''
+  underHundredJoinWord: ''
+  defaultOrdinalSuffix: ''
+  matchingOrdinalSuffix: null
+  ordinalSuffixMatchCharacters: null
+  unitsMap:
+    - 'ศูนย์'
+    - 'หนึ่ง'
+    - 'สอง'
+    - 'สาม'
+    - 'สี่'
+    - 'ห้า'
+    - 'หก'
+    - 'เจ็ด'
+    - 'แปด'
+    - 'เก้า'
+    - 'สิบ'
+    - 'สิบเอ็ด'
+    - 'สิบสอง'
+    - 'สิบสาม'
+    - 'สิบสี่'
+    - 'สิบห้า'
+    - 'สิบหก'
+    - 'สิบเจ็ด'
+    - 'สิบแปด'
+    - 'สิบเก้า'
+  tensMap:
+    - 'ศูนย์'
+    - 'สิบ'
+    - 'ยี่สิบ'
+    - 'สามสิบ'
+    - 'สี่สิบ'
+    - 'ห้าสิบ'
+    - 'หกสิบ'
+    - 'เจ็ดสิบ'
+    - 'แปดสิบ'
+    - 'เก้าสิบ'
+  hundredsMap: []
+  scales:
+    -
+      value: 1000000
+      name: 'ล้าน'
+    -
+      value: 100000
+      name: 'แสน'
+    -
+      value: 10000
+      name: 'หมื่น'
+    -
+      value: 1000
+      name: 'พัน'
+    -
+      value: 100
+      name: 'ร้อย'
+wordsToNumber:
+  engine: 'east-asian-positional'
+  negativePrefixes:
+    - 'ลบ'
+  digits:
+    'ศูนย์': 0
+    'หนึ่ง': 1
+    'เอ็ด': 1
+    'ยี่': 2
+    'สอง': 2
+    'สาม': 3
+    'สี่': 4
+    'ห้า': 5
+    'หก': 6
+    'เจ็ด': 7
+    'แปด': 8
+    'เก้า': 9
+  smallUnits:
+    'สิบ': 10
+    'ร้อย': 100
+    'พัน': 1000
+    'หมื่น': 10000
+    'แสน': 100000
+  largeUnits:
+    'ล้าน': 1000000

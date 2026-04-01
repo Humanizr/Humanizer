@@ -1,0 +1,159 @@
+# Locale-owned generator data for sr.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'и'
+formatter:
+  engine: 'profiled'
+  resourceKeyDetector: 'south-slavic'
+  resourceKeySuffixes:
+    paucal: '_Paucal'
+  dataUnitDetector: 'south-slavic'
+  dataUnitSuffixes:
+    singular: '_Singular'
+    paucal: '_Paucal'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'south-slavic-cardinal'
+  useCulture: true
+  maximumValue: 9223372036854775807
+  allowLongMin: true
+  zeroWord: 'нула'
+  minusWord: '-'
+  unitsMap:
+    - 'нула'
+    - 'један'
+    - 'два'
+    - 'три'
+    - 'четири'
+    - 'пет'
+    - 'шест'
+    - 'седам'
+    - 'осам'
+    - 'девет'
+    - 'десет'
+    - 'једанаест'
+    - 'дванаест'
+    - 'тринаест'
+    - 'четрнаест'
+    - 'петнаест'
+    - 'шеснаест'
+    - 'седамнаест'
+    - 'осамнаест'
+    - 'деветнаест'
+  tensMap:
+    - 'нула'
+    - 'десет'
+    - 'двадесет'
+    - 'тридесет'
+    - 'четрдесет'
+    - 'петдесет'
+    - 'шестдесет'
+    - 'седамдесет'
+    - 'осамдесет'
+    - 'деветдесет'
+  hundredsMap:
+    - 'нула'
+    - 'сто'
+    - 'двесто'
+    - 'тристо'
+    - 'четиристо'
+    - 'петсто'
+    - 'шестсто'
+    - 'седамсто'
+    - 'осамсто'
+    - 'деветсто'
+  feminineOne: 'једна'
+  feminineTwo: 'две'
+  scales:
+    -
+      value: 1000000000000000
+      gender: 'feminine'
+      oneForm: 'билијарда'
+      singular: 'билијарда'
+      paucal: 'билијарде'
+      plural: 'билијарди'
+    -
+      value: 1000000000000
+      gender: 'masculine'
+      oneForm: 'билион'
+      singular: 'билион'
+      paucal: 'билиона'
+      plural: 'билиона'
+    -
+      value: 1000000000
+      gender: 'feminine'
+      oneForm: 'милијарда'
+      singular: 'милијарда'
+      paucal: 'милијарде'
+      plural: 'милијарди'
+    -
+      value: 1000000
+      gender: 'masculine'
+      oneForm: 'милион'
+      singular: 'милион'
+      paucal: 'милиона'
+      plural: 'милиона'
+    -
+      value: 1000
+      gender: 'feminine'
+      oneForm: 'хиљаду'
+      singular: 'хиљада'
+      paucal: 'хиљаде'
+      plural: 'хиљада'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriods'
+  cardinalMap:
+    'нула': 0
+    'један': 1
+    'једна': 1
+    'једно': 1
+    'два': 2
+    'две': 2
+    'три': 3
+    'четири': 4
+    'пет': 5
+    'шест': 6
+    'седам': 7
+    'осам': 8
+    'девет': 9
+    'десет': 10
+    'једанаест': 11
+    'дванаест': 12
+    'тринаест': 13
+    'четрнаест': 14
+    'петнаест': 15
+    'шеснаест': 16
+    'седамнаест': 17
+    'осамнаест': 18
+    'деветнаест': 19
+    'двадесет': 20
+    'тридесет': 30
+    'четрдесет': 40
+    'педесет': 50
+    'шестдесет': 60
+    'седамдесет': 70
+    'осамдесет': 80
+    'деветдесет': 90
+    'сто': 100
+    'двесто': 200
+    'тристо': 300
+    'четиристо': 400
+    'петсто': 500
+    'шестсто': 600
+    'седамсто': 700
+    'осамсто': 800
+    'деветсто': 900
+    'хиљаду': 1000
+    'хиљада': 1000
+    'милион': 1000000
+    'милиона': 1000000
+    'милијарда': 1000000000
+    'милијарде': 1000000000
+  negativePrefixes:
+    - 'минус '

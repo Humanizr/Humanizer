@@ -1,0 +1,75 @@
+# Locale-owned generator data for ja.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'delimited'
+  value: '、'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'east-asian-grouped'
+  zeroWord: '〇'
+  negativePrefix: 'マイナス '
+  ordinalSuffix: '番目'
+  digitWords:
+    - '〇'
+    - '一'
+    - '二'
+    - '三'
+    - '四'
+    - '五'
+    - '六'
+    - '七'
+    - '八'
+    - '九'
+  smallUnitWords:
+    1: '十'
+    2: '百'
+    3: '千'
+  largeUnits:
+    1: '万'
+    2: '億'
+    3: '兆'
+    4: '京'
+    5: '垓'
+    6: '𥝱'
+    7: '穣'
+    8: '溝'
+    9: '澗'
+    10: '正'
+    11: '載'
+    12: '極'
+    13: '恒河沙'
+    14: '阿僧祇'
+    15: '那由他'
+    16: '不可思議'
+    17: '無量大数'
+  omitOneBeforeTen: true
+  omitOneBeforeHundred: true
+  omitOneBeforeThousand: true
+  insertZeroInGroup: false
+  insertZeroBetweenGroups: false
+wordsToNumber:
+  engine: 'east-asian-positional'
+  negativePrefixes:
+    - 'マイナス'
+  ordinalSuffix: '番目'
+  digits:
+    '〇': 0
+    '一': 1
+    '二': 2
+    '三': 3
+    '四': 4
+    '五': 5
+    '六': 6
+    '七': 7
+    '八': 8
+    '九': 9
+  smallUnits:
+    '十': 10
+    '百': 100
+    '千': 1000
+  largeUnits:
+    '万': 10000
+    '億': 100000000

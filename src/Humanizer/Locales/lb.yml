@@ -1,0 +1,327 @@
+# Locale-owned generator data for lb.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'an'
+formatter:
+  engine: 'profiled'
+  resourceKeyOverrides:
+    -
+      number: 2
+      suffix: '_Dual'
+      keys:
+        - 'DateHumanize_MultipleDaysAgo'
+        - 'DateHumanize_MultipleDaysFromNow'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+  secondaryPlaceholderMode: 'luxembourgish-eifeler-n'
+  timeUnitGenders:
+    millisecond: 'feminine'
+    second: 'feminine'
+    minute: 'feminine'
+    hour: 'feminine'
+    day: 'masculine'
+    week: 'feminine'
+    month: 'masculine'
+    year: 'masculine'
+numberToWords:
+  engine: 'unit-leading-compound'
+  zeroWord: 'null'
+  minusWord: 'minus '
+  masculineOne: 'een'
+  feminineOne: 'eng'
+  neuterOne: 'een'
+  feminineTwo: 'zwou'
+  tensJoiner: 'an'
+  tensJoinerTransform: 'eifeler'
+  ordinalStemSuffix: 's'
+  masculineOrdinalEnding: 'ten'
+  feminineOrdinalEnding: 't'
+  neuterOrdinalEnding: 't'
+  supportsEifelerRule: true
+  unitsMap:
+    0: 'null'
+    1: 'een'
+    2: 'zwee'
+    3: 'dräi'
+    4: 'véier'
+    5: 'fënnef'
+    6: 'sechs'
+    7: 'siwen'
+    8: 'aacht'
+    9: 'néng'
+    10: 'zéng'
+    11: 'eelef'
+    12: 'zwielef'
+    13: 'dräizéng'
+    14: 'véierzéng'
+    15: 'fofzéng'
+    16: 'siechzéng'
+    17: 'siwwenzéng'
+    18: 'uechtzéng'
+    19: 'nonzéng'
+  compoundUnitsMap:
+    0: 'null'
+    1: 'een'
+    2: 'zwee'
+    3: 'dräi'
+    4: 'véier'
+    5: 'fënnef'
+    6: 'sechs'
+    7: 'siwen'
+    8: 'aacht'
+    9: 'néng'
+    10: 'zéng'
+    11: 'eelef'
+    12: 'zwielef'
+    13: 'dräizéng'
+    14: 'véierzéng'
+    15: 'fofzéng'
+    16: 'siechzéng'
+    17: 'siwwenzéng'
+    18: 'uechtzéng'
+    19: 'nonzéng'
+  tensMap:
+    0: 'null'
+    1: 'zéng'
+    2: 'zwanzeg'
+    3: 'drësseg'
+    4: 'véierzeg'
+    5: 'fofzeg'
+    6: 'sechzeg'
+    7: 'siwwenzeg'
+    8: 'achtzeg'
+    9: 'nonzeg'
+  unitsOrdinal:
+    1: 'éisch'
+    2: 'zwee'
+    3: 'drët'
+    4: 'véier'
+    5: 'fënnef'
+    6: 'sechs'
+    7: 'siwen'
+    8: 'aach'
+    9: 'néng'
+    10: 'zéng'
+    11: 'eelef'
+    12: 'zwielef'
+    13: 'dräizéng'
+    14: 'véierzéng'
+    15: 'fofzéng'
+    16: 'siechzéng'
+    17: 'siwwenzéng'
+    18: 'uechtzéng'
+    19: 'nonzéng'
+  scales:
+    -
+      value: 1000000000000000000
+      addSpaceBeforeNextPart: true
+      countGender: 'masculine'
+      singularCardinal: 'eng Trillioun'
+      pluralCardinalFormat: '{0} Trilliounen'
+      ordinalSingular:
+        - 'engtrillioun'
+        - 'engtrillioun'
+      ordinalPlural:
+        - '{0}trillioun'
+        - '{0}trilliounen'
+      countWordFormNextWord: 'Trilliounen'
+    -
+      value: 1000000000000000
+      addSpaceBeforeNextPart: true
+      countGender: 'feminine'
+      singularCardinal: 'eng Billiard'
+      pluralCardinalFormat: '{0} Billiarden'
+      ordinalSingular:
+        - 'eebilliard'
+        - 'engbilliard'
+      ordinalPlural:
+        - '{0}billiard'
+        - '{0}billiarden'
+      countWordFormNextWord: 'Billiarden'
+    -
+      value: 1000000000000
+      addSpaceBeforeNextPart: true
+      countGender: 'masculine'
+      singularCardinal: 'eng Billioun'
+      pluralCardinalFormat: '{0} Billiounen'
+      ordinalSingular:
+        - 'engbillioun'
+        - 'engbillioun'
+      ordinalPlural:
+        - '{0}billioun'
+        - '{0}billiounen'
+      countWordFormNextWord: 'Billiounen'
+    -
+      value: 1000000000
+      addSpaceBeforeNextPart: true
+      countGender: 'feminine'
+      singularCardinal: 'eng Milliard'
+      pluralCardinalFormat: '{0} Milliarden'
+      ordinalSingular:
+        - 'eemilliard'
+        - 'engmilliard'
+      ordinalPlural:
+        - '{0}milliard'
+        - '{0}milliarden'
+      countWordFormNextWord: 'Milliarden'
+    -
+      value: 1000000
+      addSpaceBeforeNextPart: true
+      countGender: 'feminine'
+      singularCardinal: 'eng Millioun'
+      pluralCardinalFormat: '{0} Milliounen'
+      ordinalSingular:
+        - 'eemillioun'
+        - 'engmillioun'
+      ordinalPlural:
+        - '{0}millioun'
+        - '{0}milliounen'
+      countWordFormNextWord: 'Milliounen'
+    -
+      value: 1000
+      addSpaceBeforeNextPart: false
+      countGender: 'masculine'
+      singularCardinal: 'eendausend'
+      pluralCardinalFormat: '{0}dausend'
+      ordinalSingular:
+        - 'eendausend'
+        - 'eendausend'
+      ordinalPlural:
+        - '{0}dausend'
+        - '{0}dausend'
+      countWordFormNextWord: 'dausend'
+    -
+      value: 100
+      addSpaceBeforeNextPart: false
+      countGender: 'masculine'
+      singularCardinal: 'eenhonnert'
+      pluralCardinalFormat: '{0}honnert'
+      ordinalSingular:
+        - 'eenhonnert'
+        - 'eenhonnert'
+      ordinalPlural:
+        - '{0}honnert'
+        - '{0}honnert'
+      countWordFormNextWord: 'honnert'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+dateToOrdinalWords:
+  pattern: '{day} MMMM yyyy'
+  dayMode: 'Ordinal'
+dateOnlyToOrdinalWords:
+  pattern: '{day} MMMM yyyy'
+  dayMode: 'Ordinal'
+timeOnlyToClockNotation:
+  engine: 'luxembourgish'
+wordsToNumber:
+  engine: 'inverted-tens'
+  cardinalMap:
+    'null': 0
+    een: 1
+    eng: 1
+    zwee: 2
+    zwou: 2
+    'dräi': 3
+    drai: 3
+    'véier': 4
+    veier: 4
+    'fënnef': 5
+    fennef: 5
+    sechs: 6
+    siwen: 7
+    aacht: 8
+    'néng': 9
+    neng: 9
+    'zéng': 10
+    zeng: 10
+    eelef: 11
+    zwielef: 12
+    'dräizéng': 13
+    draizeng: 13
+    'véierzéng': 14
+    veierzeng: 14
+    'fofzéng': 15
+    fofzeng: 15
+    'sechzéng': 16
+    sechzeng: 16
+    'siwwenzéng': 17
+    siwwenzeng: 17
+    'uechtzéng': 18
+    uechtzeng: 18
+    'nonzéng': 19
+    nonzeng: 19
+    zwanzeg: 20
+    'drësseg': 30
+    dresseg: 30
+    'véierzeg': 40
+    veierzeg: 40
+    fofzeg: 50
+    sechzeg: 60
+    siwwenzeg: 70
+    achtzeg: 80
+    nonzeg: 90
+    honnert: 100
+    dausend: 1000
+    millioun: 1000000
+    milliounen: 1000000
+    milliard: 1000000000
+    milliarden: 1000000000
+  unitMap:
+    een: 1
+    eng: 1
+    zwee: 2
+    zwou: 2
+    'dräi': 3
+    drai: 3
+    'véier': 4
+    veier: 4
+    'fënnef': 5
+    fennef: 5
+    sechs: 6
+    siwen: 7
+    aacht: 8
+    'néng': 9
+    neng: 9
+  tensTokens:
+    -
+      word: 'nonzeg'
+      value: 90
+    -
+      word: 'achtzeg'
+      value: 80
+    -
+      word: 'siwwenzeg'
+      value: 70
+    -
+      word: 'sechzeg'
+      value: 60
+    -
+      word: 'fofzeg'
+      value: 50
+    -
+      word: 'véierzeg'
+      value: 40
+    -
+      word: 'veierzeg'
+      value: 40
+    -
+      word: 'drësseg'
+      value: 30
+    -
+      word: 'dresseg'
+      value: 30
+    -
+      word: 'zwanzeg'
+      value: 20
+  tensLinker: 'an'
+  scaleTokens:
+    - 'milliarden'
+    - 'milliard'
+    - 'milliounen'
+    - 'millioun'
+    - 'dausend'
+    - 'honnert'
+  negativePrefixes:
+    - 'minus '

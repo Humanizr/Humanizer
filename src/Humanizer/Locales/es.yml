@@ -1,0 +1,753 @@
+# Locale-owned generator data for es.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'y'
+numberToWords:
+  engine: 'long-scale-stem-ordinal'
+  zeroWord: 'cero'
+  negativeWord: 'menos'
+  exactHundredWord: 'cien'
+  thousandWord: 'mil'
+  tensJoiner: 'y'
+  thousandOrdinalStem: 'ésim'
+  masculineOrdinalEnding: 'o'
+  feminineOrdinalEnding: 'a'
+  minLongValueWord: 'menos nueve trillones doscientos veintitrés mil trescientos setenta y dos billones treinta y seis mil ochocientos cincuenta y cuatro millones setecientos setenta y cinco mil ochocientos ocho'
+  highestScaleValue: 1000000
+  roundHigherScaleCompactValue: 1000000000
+  highestScaleOrdinalSource: 'milésim'
+  highestScaleOrdinalTarget: 'millonésim'
+  tupleFallbackSuffix: ' veces'
+  hundredsMasculine:
+    - 'cero'
+    - 'ciento'
+    - 'doscientos'
+    - 'trescientos'
+    - 'cuatrocientos'
+    - 'quinientos'
+    - 'seiscientos'
+    - 'setecientos'
+    - 'ochocientos'
+    - 'novecientos'
+  hundredsFeminine:
+    - 'cero'
+    - 'ciento'
+    - 'doscientas'
+    - 'trescientas'
+    - 'cuatrocientas'
+    - 'quinientas'
+    - 'seiscientas'
+    - 'setecientas'
+    - 'ochocientas'
+    - 'novecientas'
+  hundredthsRoots:
+    1: 'centésim'
+    2: 'ducentésim'
+    3: 'tricentésim'
+    4: 'cuadringentésim'
+    5: 'quingentésim'
+    6: 'sexcentésim'
+    7: 'septingentésim'
+    8: 'octingentésim'
+    9: 'noningentésim'
+  ordinalUnitRoots:
+    1: 'primer'
+    2: 'segund'
+    3: 'tercer'
+    4: 'cuart'
+    5: 'quint'
+    6: 'sext'
+    7: 'séptim'
+    8: 'octav'
+    9: 'noven'
+  tensMap:
+    - 'cero'
+    - 'diez'
+    - 'veinte'
+    - 'treinta'
+    - 'cuarenta'
+    - 'cincuenta'
+    - 'sesenta'
+    - 'setenta'
+    - 'ochenta'
+    - 'noventa'
+  tenthsRoots:
+    1: 'décim'
+    2: 'vigésim'
+    3: 'trigésim'
+    4: 'cuadragésim'
+    5: 'quincuagésim'
+    6: 'sexagésim'
+    7: 'septuagésim'
+    8: 'octogésim'
+    9: 'nonagésim'
+  thousandthsRoots:
+    1: 'milésim'
+    2: 'dosmilésim'
+    3: 'tresmilésim'
+    4: 'cuatromilésim'
+    5: 'cincomilésim'
+    6: 'seismilésim'
+    7: 'sietemilésim'
+    8: 'ochomilésim'
+    9: 'nuevemilésim'
+  tupleMap:
+    - 'cero veces'
+    - 'una vez'
+    - 'doble'
+    - 'triple'
+    - 'cuádruple'
+    - 'quíntuple'
+    - 'séxtuple'
+    - 'séptuple'
+    - 'óctuple'
+    - 'nonuplo'
+    - 'décuplo'
+    - 'undécuplo'
+    - 'duodécuplo'
+    - 'terciodécuplo'
+  unitsMasculine:
+    - 'cero'
+    - 'uno'
+    - 'dos'
+    - 'tres'
+    - 'cuatro'
+    - 'cinco'
+    - 'seis'
+    - 'siete'
+    - 'ocho'
+    - 'nueve'
+    - 'diez'
+    - 'once'
+    - 'doce'
+    - 'trece'
+    - 'catorce'
+    - 'quince'
+    - 'dieciséis'
+    - 'diecisiete'
+    - 'dieciocho'
+    - 'diecinueve'
+    - 'veinte'
+    - 'veintiuno'
+    - 'veintidós'
+    - 'veintitrés'
+    - 'veinticuatro'
+    - 'veinticinco'
+    - 'veintiséis'
+    - 'veintisiete'
+    - 'veintiocho'
+    - 'veintinueve'
+  unitsMasculineAbbreviation:
+    - 'cero'
+    - 'un'
+    - 'dos'
+    - 'tres'
+    - 'cuatro'
+    - 'cinco'
+    - 'seis'
+    - 'siete'
+    - 'ocho'
+    - 'nueve'
+    - 'diez'
+    - 'once'
+    - 'doce'
+    - 'trece'
+    - 'catorce'
+    - 'quince'
+    - 'dieciséis'
+    - 'diecisiete'
+    - 'dieciocho'
+    - 'diecinueve'
+    - 'veinte'
+    - 'veintiún'
+    - 'veintidós'
+    - 'veintitrés'
+    - 'veinticuatro'
+    - 'veinticinco'
+    - 'veintiséis'
+    - 'veintisiete'
+    - 'veintiocho'
+    - 'veintinueve'
+  unitsFeminine:
+    - 'cero'
+    - 'una'
+    - 'dos'
+    - 'tres'
+    - 'cuatro'
+    - 'cinco'
+    - 'seis'
+    - 'siete'
+    - 'ocho'
+    - 'nueve'
+    - 'diez'
+    - 'once'
+    - 'doce'
+    - 'trece'
+    - 'catorce'
+    - 'quince'
+    - 'dieciséis'
+    - 'diecisiete'
+    - 'dieciocho'
+    - 'diecinueve'
+    - 'veinte'
+    - 'veintiuna'
+    - 'veintidós'
+    - 'veintitrés'
+    - 'veinticuatro'
+    - 'veinticinco'
+    - 'veintiséis'
+    - 'veintisiete'
+    - 'veintiocho'
+    - 'veintinueve'
+  largeScales:
+    -
+      value: 1000000000000000000
+      singularPrefix: 'un'
+      singular: 'trillón'
+      plural: 'trillones'
+    -
+      value: 1000000000000
+      singularPrefix: 'un'
+      singular: 'billón'
+      plural: 'billones'
+    -
+      value: 1000000
+      singularPrefix: 'un'
+      singular: 'millón'
+      plural: 'millones'
+ordinalizer:
+  engine: 'word-form-template'
+  useCulture: true
+  zeroAsPlainNumber: true
+  minValueAsPlainNumber: true
+  negativeNumberMode: 'absolute-culture'
+  masculine:
+    defaultSuffix: '.º'
+    abbreviation:
+      defaultSuffix: '.º'
+      lastDigitSuffixes:
+        '1': '.er'
+        '3': '.er'
+  feminine:
+    defaultSuffix: '.ª'
+  neuter:
+    defaultSuffix: '.º'
+    abbreviation:
+      defaultSuffix: '.º'
+      lastDigitSuffixes:
+        '1': '.er'
+        '3': '.er'
+dateToOrdinalWords:
+  pattern: '{day} ''de'' MMMM ''de'' yyyy'
+  dayMode: 'Numeric'
+dateOnlyToOrdinalWords:
+  pattern: '{day} ''de'' MMMM ''de'' yyyy'
+  dayMode: 'Numeric'
+timeOnlyToClockNotation:
+  engine: 'relative-hour'
+  midnight: 'medianoche'
+  midday: 'mediodía'
+  singularArticle: 'la'
+  pluralArticle: 'las'
+  and: 'y'
+  quarterPast: 'y cuarto'
+  halfPast: 'y media'
+  twentyFiveTo: 'menos veinticinco'
+  twentyTo: 'menos veinte'
+  quarterTo: 'menos cuarto'
+  tenTo: 'menos diez'
+  fiveTo: 'menos cinco'
+  lateNightPeriod: 'de la madrugada'
+  morningPeriod: 'de la mañana'
+  afternoonPeriod: 'de la tarde'
+  eveningPeriod: 'de la noche'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriods'
+  cardinalMap:
+    cero: 0
+    uno: 1
+    una: 1
+    un: 1
+    dos: 2
+    tres: 3
+    cuatro: 4
+    cinco: 5
+    seis: 6
+    siete: 7
+    ocho: 8
+    nueve: 9
+    diez: 10
+    once: 11
+    doce: 12
+    trece: 13
+    catorce: 14
+    quince: 15
+    'dieciséis': 16
+    dieciseis: 16
+    diecisiete: 17
+    dieciocho: 18
+    diecinueve: 19
+    veinte: 20
+    veintiuno: 21
+    'veintiún': 21
+    veintiun: 21
+    veintiuna: 21
+    'veintidós': 22
+    veintidos: 22
+    'veintitrés': 23
+    veintitres: 23
+    veinticuatro: 24
+    veinticinco: 25
+    'veintiséis': 26
+    veintiseis: 26
+    veintisiete: 27
+    veintiocho: 28
+    veintinueve: 29
+    treinta: 30
+    cuarenta: 40
+    cincuenta: 50
+    sesenta: 60
+    setenta: 70
+    ochenta: 80
+    noventa: 90
+    cien: 100
+    ciento: 100
+    doscientos: 200
+    doscientas: 200
+    trescientos: 300
+    trescientas: 300
+    cuatrocientos: 400
+    cuatrocientas: 400
+    quinientos: 500
+    quinientas: 500
+    seiscientos: 600
+    seiscientas: 600
+    setecientos: 700
+    setecientas: 700
+    ochocientos: 800
+    ochocientas: 800
+    novecientos: 900
+    novecientas: 900
+    mil: 1000
+    'millón': 1000000
+    millon: 1000000
+    millones: 1000000
+  ordinalNumberToWordsKind: 'self'
+  ordinalGenderVariant: 'masculine-and-feminine'
+  negativePrefixes:
+    - 'menos '
+  ignoredTokens:
+    - 'y'
+  ordinalAbbreviationSuffixes:
+    - 'º'
+    - 'ª'
+  ordinalMap:
+    'centésima': 100
+    'centésima cuadragésima': 140
+    'centésima cuadragésima cuarta': 144
+    'centésima cuadragésima novena': 149
+    'centésima cuadragésima octava': 148
+    'centésima cuadragésima primera': 141
+    'centésima cuadragésima quinta': 145
+    'centésima cuadragésima segunda': 142
+    'centésima cuadragésima sexta': 146
+    'centésima cuadragésima séptima': 147
+    'centésima cuadragésima tercera': 143
+    'centésima cuarta': 104
+    'centésima décima': 110
+    'centésima décima cuarta': 114
+    'centésima décima novena': 119
+    'centésima décima octava': 118
+    'centésima décima primera': 111
+    'centésima décima quinta': 115
+    'centésima décima segunda': 112
+    'centésima décima sexta': 116
+    'centésima décima séptima': 117
+    'centésima décima tercera': 113
+    'centésima nonagésima': 190
+    'centésima nonagésima cuarta': 194
+    'centésima nonagésima novena': 199
+    'centésima nonagésima octava': 198
+    'centésima nonagésima primera': 191
+    'centésima nonagésima quinta': 195
+    'centésima nonagésima segunda': 192
+    'centésima nonagésima sexta': 196
+    'centésima nonagésima séptima': 197
+    'centésima nonagésima tercera': 193
+    'centésima novena': 109
+    'centésima octava': 108
+    'centésima octogésima': 180
+    'centésima octogésima cuarta': 184
+    'centésima octogésima novena': 189
+    'centésima octogésima octava': 188
+    'centésima octogésima primera': 181
+    'centésima octogésima quinta': 185
+    'centésima octogésima segunda': 182
+    'centésima octogésima sexta': 186
+    'centésima octogésima séptima': 187
+    'centésima octogésima tercera': 183
+    'centésima primera': 101
+    'centésima quincuagésima': 150
+    'centésima quincuagésima cuarta': 154
+    'centésima quincuagésima novena': 159
+    'centésima quincuagésima octava': 158
+    'centésima quincuagésima primera': 151
+    'centésima quincuagésima quinta': 155
+    'centésima quincuagésima segunda': 152
+    'centésima quincuagésima sexta': 156
+    'centésima quincuagésima séptima': 157
+    'centésima quincuagésima tercera': 153
+    'centésima quinta': 105
+    'centésima segunda': 102
+    'centésima septuagésima': 170
+    'centésima septuagésima cuarta': 174
+    'centésima septuagésima novena': 179
+    'centésima septuagésima octava': 178
+    'centésima septuagésima primera': 171
+    'centésima septuagésima quinta': 175
+    'centésima septuagésima segunda': 172
+    'centésima septuagésima sexta': 176
+    'centésima septuagésima séptima': 177
+    'centésima septuagésima tercera': 173
+    'centésima sexagésima': 160
+    'centésima sexagésima cuarta': 164
+    'centésima sexagésima novena': 169
+    'centésima sexagésima octava': 168
+    'centésima sexagésima primera': 161
+    'centésima sexagésima quinta': 165
+    'centésima sexagésima segunda': 162
+    'centésima sexagésima sexta': 166
+    'centésima sexagésima séptima': 167
+    'centésima sexagésima tercera': 163
+    'centésima sexta': 106
+    'centésima séptima': 107
+    'centésima tercera': 103
+    'centésima trigésima': 130
+    'centésima trigésima cuarta': 134
+    'centésima trigésima novena': 139
+    'centésima trigésima octava': 138
+    'centésima trigésima primera': 131
+    'centésima trigésima quinta': 135
+    'centésima trigésima segunda': 132
+    'centésima trigésima sexta': 136
+    'centésima trigésima séptima': 137
+    'centésima trigésima tercera': 133
+    'centésima vigésima': 120
+    'centésima vigésima cuarta': 124
+    'centésima vigésima novena': 129
+    'centésima vigésima octava': 128
+    'centésima vigésima primera': 121
+    'centésima vigésima quinta': 125
+    'centésima vigésima segunda': 122
+    'centésima vigésima sexta': 126
+    'centésima vigésima séptima': 127
+    'centésima vigésima tercera': 123
+    'centésimo': 100
+    'centésimo cuadragésimo': 140
+    'centésimo cuadragésimo cuarto': 144
+    'centésimo cuadragésimo noveno': 149
+    'centésimo cuadragésimo octavo': 148
+    'centésimo cuadragésimo primero': 141
+    'centésimo cuadragésimo quinto': 145
+    'centésimo cuadragésimo segundo': 142
+    'centésimo cuadragésimo sexto': 146
+    'centésimo cuadragésimo séptimo': 147
+    'centésimo cuadragésimo tercero': 143
+    'centésimo cuarto': 104
+    'centésimo décimo': 110
+    'centésimo décimo cuarto': 114
+    'centésimo décimo noveno': 119
+    'centésimo décimo octavo': 118
+    'centésimo décimo primero': 111
+    'centésimo décimo quinto': 115
+    'centésimo décimo segundo': 112
+    'centésimo décimo sexto': 116
+    'centésimo décimo séptimo': 117
+    'centésimo décimo tercero': 113
+    'centésimo nonagésimo': 190
+    'centésimo nonagésimo cuarto': 194
+    'centésimo nonagésimo noveno': 199
+    'centésimo nonagésimo octavo': 198
+    'centésimo nonagésimo primero': 191
+    'centésimo nonagésimo quinto': 195
+    'centésimo nonagésimo segundo': 192
+    'centésimo nonagésimo sexto': 196
+    'centésimo nonagésimo séptimo': 197
+    'centésimo nonagésimo tercero': 193
+    'centésimo noveno': 109
+    'centésimo octavo': 108
+    'centésimo octogésimo': 180
+    'centésimo octogésimo cuarto': 184
+    'centésimo octogésimo noveno': 189
+    'centésimo octogésimo octavo': 188
+    'centésimo octogésimo primero': 181
+    'centésimo octogésimo quinto': 185
+    'centésimo octogésimo segundo': 182
+    'centésimo octogésimo sexto': 186
+    'centésimo octogésimo séptimo': 187
+    'centésimo octogésimo tercero': 183
+    'centésimo primero': 101
+    'centésimo quincuagésimo': 150
+    'centésimo quincuagésimo cuarto': 154
+    'centésimo quincuagésimo noveno': 159
+    'centésimo quincuagésimo octavo': 158
+    'centésimo quincuagésimo primero': 151
+    'centésimo quincuagésimo quinto': 155
+    'centésimo quincuagésimo segundo': 152
+    'centésimo quincuagésimo sexto': 156
+    'centésimo quincuagésimo séptimo': 157
+    'centésimo quincuagésimo tercero': 153
+    'centésimo quinto': 105
+    'centésimo segundo': 102
+    'centésimo septuagésimo': 170
+    'centésimo septuagésimo cuarto': 174
+    'centésimo septuagésimo noveno': 179
+    'centésimo septuagésimo octavo': 178
+    'centésimo septuagésimo primero': 171
+    'centésimo septuagésimo quinto': 175
+    'centésimo septuagésimo segundo': 172
+    'centésimo septuagésimo sexto': 176
+    'centésimo septuagésimo séptimo': 177
+    'centésimo septuagésimo tercero': 173
+    'centésimo sexagésimo': 160
+    'centésimo sexagésimo cuarto': 164
+    'centésimo sexagésimo noveno': 169
+    'centésimo sexagésimo octavo': 168
+    'centésimo sexagésimo primero': 161
+    'centésimo sexagésimo quinto': 165
+    'centésimo sexagésimo segundo': 162
+    'centésimo sexagésimo sexto': 166
+    'centésimo sexagésimo séptimo': 167
+    'centésimo sexagésimo tercero': 163
+    'centésimo sexto': 106
+    'centésimo séptimo': 107
+    'centésimo tercero': 103
+    'centésimo trigésimo': 130
+    'centésimo trigésimo cuarto': 134
+    'centésimo trigésimo noveno': 139
+    'centésimo trigésimo octavo': 138
+    'centésimo trigésimo primero': 131
+    'centésimo trigésimo quinto': 135
+    'centésimo trigésimo segundo': 132
+    'centésimo trigésimo sexto': 136
+    'centésimo trigésimo séptimo': 137
+    'centésimo trigésimo tercero': 133
+    'centésimo vigésimo': 120
+    'centésimo vigésimo cuarto': 124
+    'centésimo vigésimo noveno': 129
+    'centésimo vigésimo octavo': 128
+    'centésimo vigésimo primero': 121
+    'centésimo vigésimo quinto': 125
+    'centésimo vigésimo segundo': 122
+    'centésimo vigésimo sexto': 126
+    'centésimo vigésimo séptimo': 127
+    'centésimo vigésimo tercero': 123
+    'cuadragésima': 40
+    'cuadragésima cuarta': 44
+    'cuadragésima novena': 49
+    'cuadragésima octava': 48
+    'cuadragésima primera': 41
+    'cuadragésima quinta': 45
+    'cuadragésima segunda': 42
+    'cuadragésima sexta': 46
+    'cuadragésima séptima': 47
+    'cuadragésima tercera': 43
+    'cuadragésimo': 40
+    'cuadragésimo cuarto': 44
+    'cuadragésimo noveno': 49
+    'cuadragésimo octavo': 48
+    'cuadragésimo primero': 41
+    'cuadragésimo quinto': 45
+    'cuadragésimo segundo': 42
+    'cuadragésimo sexto': 46
+    'cuadragésimo séptimo': 47
+    'cuadragésimo tercero': 43
+    cuarta: 4
+    cuarto: 4
+    'ducentésima': 200
+    'ducentésimo': 200
+    'décima': 10
+    'décima cuarta': 14
+    'décima novena': 19
+    'décima octava': 18
+    'décima primera': 11
+    'décima quinta': 15
+    'décima segunda': 12
+    'décima sexta': 16
+    'décima séptima': 17
+    'décima tercera': 13
+    'décimo': 10
+    'décimo cuarto': 14
+    'décimo noveno': 19
+    'décimo octavo': 18
+    'décimo primero': 11
+    'décimo quinto': 15
+    'décimo segundo': 12
+    'décimo sexto': 16
+    'décimo séptimo': 17
+    'décimo tercero': 13
+    'nonagésima': 90
+    'nonagésima cuarta': 94
+    'nonagésima novena': 99
+    'nonagésima octava': 98
+    'nonagésima primera': 91
+    'nonagésima quinta': 95
+    'nonagésima segunda': 92
+    'nonagésima sexta': 96
+    'nonagésima séptima': 97
+    'nonagésima tercera': 93
+    'nonagésimo': 90
+    'nonagésimo cuarto': 94
+    'nonagésimo noveno': 99
+    'nonagésimo octavo': 98
+    'nonagésimo primero': 91
+    'nonagésimo quinto': 95
+    'nonagésimo segundo': 92
+    'nonagésimo sexto': 96
+    'nonagésimo séptimo': 97
+    'nonagésimo tercero': 93
+    novena: 9
+    noveno: 9
+    octava: 8
+    octavo: 8
+    'octogésima': 80
+    'octogésima cuarta': 84
+    'octogésima novena': 89
+    'octogésima octava': 88
+    'octogésima primera': 81
+    'octogésima quinta': 85
+    'octogésima segunda': 82
+    'octogésima sexta': 86
+    'octogésima séptima': 87
+    'octogésima tercera': 83
+    'octogésimo': 80
+    'octogésimo cuarto': 84
+    'octogésimo noveno': 89
+    'octogésimo octavo': 88
+    'octogésimo primero': 81
+    'octogésimo quinto': 85
+    'octogésimo segundo': 82
+    'octogésimo sexto': 86
+    'octogésimo séptimo': 87
+    'octogésimo tercero': 83
+    primera: 1
+    primero: 1
+    'quincuagésima': 50
+    'quincuagésima cuarta': 54
+    'quincuagésima novena': 59
+    'quincuagésima octava': 58
+    'quincuagésima primera': 51
+    'quincuagésima quinta': 55
+    'quincuagésima segunda': 52
+    'quincuagésima sexta': 56
+    'quincuagésima séptima': 57
+    'quincuagésima tercera': 53
+    'quincuagésimo': 50
+    'quincuagésimo cuarto': 54
+    'quincuagésimo noveno': 59
+    'quincuagésimo octavo': 58
+    'quincuagésimo primero': 51
+    'quincuagésimo quinto': 55
+    'quincuagésimo segundo': 52
+    'quincuagésimo sexto': 56
+    'quincuagésimo séptimo': 57
+    'quincuagésimo tercero': 53
+    quinta: 5
+    quinto: 5
+    segunda: 2
+    segundo: 2
+    'septuagésima': 70
+    'septuagésima cuarta': 74
+    'septuagésima novena': 79
+    'septuagésima octava': 78
+    'septuagésima primera': 71
+    'septuagésima quinta': 75
+    'septuagésima segunda': 72
+    'septuagésima sexta': 76
+    'septuagésima séptima': 77
+    'septuagésima tercera': 73
+    'septuagésimo': 70
+    'septuagésimo cuarto': 74
+    'septuagésimo noveno': 79
+    'septuagésimo octavo': 78
+    'septuagésimo primero': 71
+    'septuagésimo quinto': 75
+    'septuagésimo segundo': 72
+    'septuagésimo sexto': 76
+    'septuagésimo séptimo': 77
+    'septuagésimo tercero': 73
+    'sexagésima': 60
+    'sexagésima cuarta': 64
+    'sexagésima novena': 69
+    'sexagésima octava': 68
+    'sexagésima primera': 61
+    'sexagésima quinta': 65
+    'sexagésima segunda': 62
+    'sexagésima sexta': 66
+    'sexagésima séptima': 67
+    'sexagésima tercera': 63
+    'sexagésimo': 60
+    'sexagésimo cuarto': 64
+    'sexagésimo noveno': 69
+    'sexagésimo octavo': 68
+    'sexagésimo primero': 61
+    'sexagésimo quinto': 65
+    'sexagésimo segundo': 62
+    'sexagésimo sexto': 66
+    'sexagésimo séptimo': 67
+    'sexagésimo tercero': 63
+    sexta: 6
+    sexto: 6
+    'séptima': 7
+    'séptimo': 7
+    tercera: 3
+    tercero: 3
+    'trigésima': 30
+    'trigésima cuarta': 34
+    'trigésima novena': 39
+    'trigésima octava': 38
+    'trigésima primera': 31
+    'trigésima quinta': 35
+    'trigésima segunda': 32
+    'trigésima sexta': 36
+    'trigésima séptima': 37
+    'trigésima tercera': 33
+    'trigésimo': 30
+    'trigésimo cuarto': 34
+    'trigésimo noveno': 39
+    'trigésimo octavo': 38
+    'trigésimo primero': 31
+    'trigésimo quinto': 35
+    'trigésimo segundo': 32
+    'trigésimo sexto': 36
+    'trigésimo séptimo': 37
+    'trigésimo tercero': 33
+    'vigésima': 20
+    'vigésima cuarta': 24
+    'vigésima novena': 29
+    'vigésima octava': 28
+    'vigésima primera': 21
+    'vigésima quinta': 25
+    'vigésima segunda': 22
+    'vigésima sexta': 26
+    'vigésima séptima': 27
+    'vigésima tercera': 23
+    'vigésimo': 20
+    'vigésimo cuarto': 24
+    'vigésimo noveno': 29
+    'vigésimo octavo': 28
+    'vigésimo primero': 21
+    'vigésimo quinto': 25
+    'vigésimo segundo': 22
+    'vigésimo sexto': 26
+    'vigésimo séptimo': 27
+    'vigésimo tercero': 23
+  ordinalScaleMap:
+    'milésima': 1000
+    'milésimo': 1000
+  gluedOrdinalScaleSuffixes:
+    'milésima': 1000
+    'milésimo': 1000

@@ -12,36 +12,40 @@ namespace Humanizer.SourceGenerators;
 
 public sealed partial class HumanizerSourceGenerator
 {
+    /// <summary>
+    /// Builds the generated clock-notation profile catalog from locale-owned YAML.
+    /// Only structurally shared clock-notation engines are emitted here; accepted
+    /// residual locale leaves remain handwritten and are registered directly.
+    /// </summary>
     sealed class TimeOnlyToClockNotationProfileCatalogInput(
         ImmutableArray<TimeOnlyToClockNotationProfileDefinition> profiles,
-        ImmutableDictionary<string, ExpressionSchema> schemas)
+        ImmutableDictionary<string, EngineContract> contracts)
     {
         readonly ImmutableArray<TimeOnlyToClockNotationProfileDefinition> profiles = profiles;
-        readonly ImmutableDictionary<string, ExpressionSchema> schemas = schemas;
+        readonly ImmutableDictionary<string, EngineContract> contracts = contracts;
 
-        public static TimeOnlyToClockNotationProfileCatalogInput Create(
-            ImmutableArray<JsonProfileFile?> files,
-            ImmutableArray<JsonSchemaFile?> schemaFiles)
+        public static TimeOnlyToClockNotationProfileCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
             var profiles = ImmutableArray.CreateBuilder<TimeOnlyToClockNotationProfileDefinition>();
-            foreach (var file in files)
+            var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var locale in localeCatalog.Locales)
             {
-                if (file is null)
+                var feature = locale.TimeOnlyToClockNotation;
+                if (feature is not { UsesGeneratedProfile: true } ||
+                    !seenProfiles.Add(feature.ProfileName!))
                 {
                     continue;
                 }
 
-                using var document = JsonDocument.Parse(file.FileText);
-                var root = document.RootElement;
                 profiles.Add(new TimeOnlyToClockNotationProfileDefinition(
-                    file.ProfileName,
-                    GetRequiredString(root, "engine"),
-                    root.Clone()));
+                    feature.ProfileName!,
+                    GetRequiredString(feature.ProfileRoot, "engine"),
+                    feature.ProfileRoot.Clone()));
             }
 
             return new TimeOnlyToClockNotationProfileCatalogInput(
                 profiles.ToImmutable(),
-                ExpressionSchemaLoader.Load(schemaFiles));
+                EngineContractCatalog.TimeOnlyToClockNotation);
         }
 
         public void Emit(SourceProductionContext context)
@@ -87,7 +91,7 @@ public sealed partial class HumanizerSourceGenerator
                     "static",
                     "ITimeOnlyToClockNotationConverter",
                     GetCatalogPropertyName(profile.ProfileName),
-                    TimeOnlyToClockNotationSchemaExpressionFactory.Create(profile, schemas));
+                    TimeOnlyToClockNotationEngineContractFactory.Create(profile, contracts));
                 builder.AppendLine();
             }
 

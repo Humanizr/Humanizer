@@ -1,0 +1,100 @@
+# Locale-owned generator data for ko.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: '및'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'east-asian-grouped'
+  zeroWord: '영'
+  negativePrefix: '마이너스 '
+  ordinalSuffix: '번째'
+  digitWords:
+    - '영'
+    - '일'
+    - '이'
+    - '삼'
+    - '사'
+    - '오'
+    - '육'
+    - '칠'
+    - '팔'
+    - '구'
+  smallUnitWords:
+    1: '십'
+    2: '백'
+    3: '천'
+  largeUnits:
+    1: '만'
+    2: '억'
+    3: '조'
+    4: '경'
+    5: '해'
+    6: '자'
+    7: '양'
+    8: '구'
+    9: '간'
+    10: '정'
+    11: '재'
+    12: '극'
+    13: '항하사'
+    14: '아승기'
+    15: '나유타'
+    16: '불가사의'
+    17: '무량대수'
+  omitOneBeforeTen: true
+  omitOneBeforeHundred: true
+  omitOneBeforeThousand: true
+  insertZeroInGroup: false
+  insertZeroBetweenGroups: false
+  ordinalMap:
+    '0': '영번째'
+    '1': '첫번째'
+    '2': '두번째'
+    '3': '세번째'
+    '4': '네번째'
+    '5': '다섯번째'
+    '6': '여섯번째'
+    '7': '일곱번째'
+    '8': '여덟번째'
+    '9': '아홉번째'
+    '10': '열번째'
+    '11': '열한번째'
+    '12': '열두번째'
+    '13': '열세번째'
+    '14': '열네번째'
+    '15': '열다섯번째'
+    '16': '열여섯번째'
+    '17': '열일곱번째'
+    '18': '열여덟번째'
+    '19': '열아홉째'
+wordsToNumber:
+  engine: 'east-asian-positional'
+  negativePrefixes:
+    - '마이너스'
+  ordinalSuffix: '번째'
+  digits:
+    '영': 0
+    '일': 1
+    '이': 2
+    '삼': 3
+    '사': 4
+    '오': 5
+    '육': 6
+    '칠': 7
+    '팔': 8
+    '구': 9
+  smallUnits:
+    '십': 10
+    '백': 100
+    '천': 1000
+  largeUnits:
+    '만': 10000
+    '억': 100000000
+  ordinalMap:
+    '첫번째': 1
+    '두번째': 2
+    '세번째': 3

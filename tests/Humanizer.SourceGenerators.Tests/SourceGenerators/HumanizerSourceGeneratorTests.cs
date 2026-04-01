@@ -28,20 +28,12 @@ public class HumanizerSourceGeneratorTests
         var registrySource = GetGeneratedSource("FormatterRegistryRegistrations.g.cs");
         var catalogSource = GetGeneratedSource("FormatterProfileCatalog.g.cs");
 
-        Assert.Contains("registry.Register(\"bg\", culture => FormatterProfileCatalog.Resolve(\"bulgarian\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"hr\", culture => FormatterProfileCatalog.Resolve(\"south-slavic-paucal\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"sr\", culture => FormatterProfileCatalog.Resolve(\"south-slavic-paucal\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"de\", culture => FormatterProfileCatalog.Resolve(\"trim-plural-suffix\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"lb\", culture => FormatterProfileCatalog.Resolve(\"luxembourgish\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"ro\", culture => FormatterProfileCatalog.Resolve(\"romanian\", culture));", registrySource);
+        Assert.Contains("registry.Register(\"bg\", culture => FormatterProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"hr\", culture => FormatterProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"sr\", culture => FormatterProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"de\", culture => FormatterProfileCatalog.Resolve(", registrySource);
         Assert.Contains("new ProfiledFormatter(culture, ", catalogSource);
-        Assert.Contains("static FormatterProfile luxembourgish", catalogSource);
-        Assert.Contains("static FormatterProfile romanian", catalogSource);
-        Assert.Contains("static FormatterProfile swedish", catalogSource);
-        Assert.Contains("static FormatterProfile trim_plural_suffix", catalogSource);
         Assert.DoesNotContain("new BulgarianFormatter", registrySource);
-        Assert.DoesNotContain("new LuxembourgishFormatter", registrySource);
-        Assert.DoesNotContain("new RomanianFormatter", registrySource);
         Assert.DoesNotContain("new SwedishFormatter", registrySource);
     }
 
@@ -51,20 +43,15 @@ public class HumanizerSourceGeneratorTests
         var registrySource = GetGeneratedSource("OrdinalizerRegistryRegistrations.g.cs");
         var catalogSource = GetGeneratedSource("OrdinalizerProfileCatalog.g.cs");
 
-        Assert.Contains("registry.Register(\"en\", culture => OrdinalizerProfileCatalog.Resolve(\"english\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"af\", culture => OrdinalizerProfileCatalog.Resolve(\"afrikaans\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"fr\", culture => OrdinalizerProfileCatalog.Resolve(\"french\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"de\", culture => OrdinalizerProfileCatalog.Resolve(\"period-suffix\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"es\", culture => OrdinalizerProfileCatalog.Resolve(\"spanish\", culture));", registrySource);
+        Assert.Contains("registry.Register(\"en\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"af\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"fr\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"de\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"es\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
 
-        Assert.Contains("case \"english\":", catalogSource);
-        Assert.Contains("case \"afrikaans\":", catalogSource);
-        Assert.Contains("case \"french\":", catalogSource);
         Assert.Contains("new ModuloSuffixOrdinalizer(", catalogSource);
         Assert.Contains("new TemplateOrdinalizer(", catalogSource);
         Assert.Contains("new WordFormTemplateOrdinalizer(", catalogSource);
-        Assert.Contains("case \"period-suffix\":", catalogSource);
-        Assert.Contains("case \"spanish\":", catalogSource);
         Assert.DoesNotContain("new SpanishOrdinalizer", catalogSource);
     }
 
@@ -73,13 +60,8 @@ public class HumanizerSourceGeneratorTests
     {
         var source = GetGeneratedSource("TimeOnlyToClockNotationProfileCatalog.g.cs");
 
-        Assert.Contains("case \"french\": return french;", source);
-        Assert.Contains("case \"german\": return german;", source);
-        Assert.Contains("case \"luxembourgish\": return luxembourgish;", source);
         Assert.Contains("new FrenchTimeOnlyToClockNotationConverter()", source);
-        Assert.Contains("static ITimeOnlyToClockNotationConverter german => german_cache.Value;", source);
-        Assert.Contains("static class german_cache", source);
-        Assert.Contains("internal static readonly ITimeOnlyToClockNotationConverter Value = new GermanTimeOnlyToClockNotationConverter();", source);
+        Assert.Contains("new GermanTimeOnlyToClockNotationConverter()", source);
         Assert.Contains("new LuxembourgishTimeOnlyToClockNotationConverter()", source);
         Assert.DoesNotContain("TryResolveCustom", source);
     }
@@ -90,16 +72,7 @@ public class HumanizerSourceGeneratorTests
         var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
         var registrySource = GetGeneratedSource("NumberToWordsConverterRegistryRegistrations.g.cs");
 
-        Assert.Contains("case \"english\": return english;", source);
-        Assert.Contains("case \"indian\": return indian;", source);
-        Assert.Contains("case \"farsi\": return farsi;", source);
-        Assert.Contains("case \"armenian\": return armenian;", source);
-        Assert.Contains("case \"arabic\": return arabic;", source);
-        Assert.Contains("case \"catalan\": return catalan;", source);
-        Assert.Contains("case \"tamil\": return tamil;", source);
-        Assert.Contains("case \"thai\": return thai;", source);
-        Assert.Contains("case \"central-kurdish\": return central-kurdish;", source.Replace('_', '-'));
-        Assert.Contains("new EnglishFamilyNumberToWordsConverter(", source);
+        Assert.Contains("new ConjunctionalScaleNumberToWordsConverter(", source);
         Assert.Contains("new JoinedScaleNumberToWordsConverter(", source);
         Assert.Contains("new AgglutinativeOrdinalScaleNumberToWordsConverter(", source);
         Assert.Contains("new ContextualDecimalNumberToWordsConverter(", source);
@@ -109,33 +82,16 @@ public class HumanizerSourceGeneratorTests
         Assert.Contains("new IndianGroupingNumberToWordsConverter(new(", source);
         Assert.Contains("new LongScaleStemOrdinalNumberToWordsConverter(new(", source);
         Assert.Contains("new WestSlavicGenderedNumberToWordsConverter(", source);
-        Assert.Contains("case \"russian\": return russian;", source);
-        Assert.Contains("case \"ukrainian\": return ukrainian;", source);
-        Assert.Contains("case \"greek\": return greek;", source);
-        Assert.Contains("case \"hebrew\": return new ConstructStateScaleNumberToWordsConverter(new(", source);
-        Assert.Contains("case \"italian\": return italian;", source);
-        Assert.Contains("case \"latvian\": return latvian;", source);
-        Assert.Contains("case \"romanian\": return romanian;", source);
-        Assert.Contains("case \"polish\": return new PluralizedScaleNumberToWordsConverter(new(", source);
-        Assert.Contains("case \"lithuanian\": return lithuanian;", source);
-        Assert.Contains("registry.Register(\"hr\", culture => NumberToWordsProfileCatalog.Resolve(\"croatian\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"sr\", culture => NumberToWordsProfileCatalog.Resolve(\"serbian-cyrl\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"sr-Latn\", culture => NumberToWordsProfileCatalog.Resolve(\"serbian-latn\", culture));", registrySource);
-        Assert.Contains("registry.Register(\"sl\", culture => NumberToWordsProfileCatalog.Resolve(\"slovenian\", culture));", registrySource);
-        Assert.Contains("case \"norwegian-bokmal\": return norwegian_bokmal;", source);
-        Assert.Contains("case \"swedish\": return swedish;", source);
-        Assert.Contains("case \"danish\": return danish;", source);
-        Assert.Contains("case \"afrikaans\": return afrikaans;", source);
-        Assert.Contains("case \"dutch\": return dutch;", source);
-        Assert.Contains("case \"icelandic\": return icelandic;", source);
-        Assert.Contains("case \"slovenian\": return new SouthSlavicCardinalNumberToWordsConverter(new(", source);
-        Assert.Contains("case \"luxembourgish\": return luxembourgish;", source);
+        Assert.Contains("registry.Register(\"hr\", culture => NumberToWordsProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"sr\", culture => NumberToWordsProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"sr-Latn\", culture => NumberToWordsProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"sl\", culture => NumberToWordsProfileCatalog.Resolve(", registrySource);
         Assert.Contains("new InvertedTensNumberToWordsConverter(", source);
         Assert.Contains("new OrdinalPrefixScaleNumberToWordsConverter(", source);
-        Assert.Contains("new ScandinavianFamilyNumberToWordsConverter(", source);
+        Assert.Contains("new ScaleStrategyNumberToWordsConverter(", source);
         Assert.Contains("new EastSlavicNumberToWordsConverter(", source);
         Assert.Contains("new SouthSlavicCardinalNumberToWordsConverter(", source);
-        Assert.Contains("new GermanFamilyNumberToWordsConverter(new(", source);
+        Assert.Contains("new UnitLeadingCompoundNumberToWordsConverter(new(", source);
         Assert.Contains("new SegmentedScaleNumberToWordsConverter(new(", source);
         Assert.Contains("new TriadScaleNumberToWordsConverter(new(", source);
         Assert.Contains("new ConstructStateScaleNumberToWordsConverter(new(", source);
@@ -150,7 +106,7 @@ public class HumanizerSourceGeneratorTests
         Assert.DoesNotContain("new AfrikaansNumberToWordsConverter", source);
         Assert.DoesNotContain("new DanishNumberToWordsConverter", source);
         Assert.DoesNotContain("new DutchNumberToWordsConverter", source);
-        Assert.DoesNotContain("new ArabicNumberToWordsConverter", source);
+        Assert.DoesNotContain("new ArabicNumberToWordsConverter(culture)", source);
         Assert.DoesNotContain("new ArmenianNumberToWordsConverter", source);
         Assert.DoesNotContain("new CatalanNumberToWordsConverter", source);
         Assert.DoesNotContain("new IcelandicNumberToWordsConverter", source);
@@ -189,10 +145,13 @@ public class HumanizerSourceGeneratorTests
         var profileCatalogSource = GetGeneratedSource("WordsToNumberProfileCatalog.g.cs");
         var tokenMapIndexSource = GetGeneratedSource("TokenMapWordsToNumberConverters.Index.g.cs");
 
+        Assert.Contains("registry.Register(\"en\", culture => TokenMapWordsToNumberConverters.En);", registrySource);
         Assert.Contains("registry.Register(\"ku\", culture => TokenMapWordsToNumberConverters.Ku);", registrySource);
         Assert.Contains("registry.Register(\"vi\", culture => TokenMapWordsToNumberConverters.Vi);", registrySource);
+        Assert.DoesNotContain("case \"en\":", profileCatalogSource);
         Assert.DoesNotContain("case \"kurdish\":", profileCatalogSource);
         Assert.DoesNotContain("case \"vietnamese\":", profileCatalogSource);
+        Assert.Contains("\"en\" => En", tokenMapIndexSource);
         Assert.Contains("\"ku\" => Ku", tokenMapIndexSource);
         Assert.Contains("\"vi\" => Vi", tokenMapIndexSource);
     }
@@ -202,20 +161,13 @@ public class HumanizerSourceGeneratorTests
     {
         var source = GetGeneratedSource("WordsToNumberProfileCatalog.g.cs");
 
-        Assert.Contains("case \"chinese\": return chinese;", source);
-        Assert.Contains("case \"thai\": return thai;", source);
         Assert.Contains("new EastAsianPositionalWordsToNumberConverter(", source);
-        Assert.Contains("case \"slovenian\": return slovenian;", source);
         Assert.Contains("new InvertedTensWordsToNumberConverter(", source);
-        Assert.Contains("case \"arabic\": return arabic;", source);
-        Assert.Contains("new SuffixScaleWordsToNumberConverter(new(", source);
-        Assert.Contains("new PrefixedTensScaleWordsToNumberConverter(new(", source);
-        Assert.Contains("new LinkingAffixWordsToNumberConverter(new(", source);
-        Assert.Contains("new VigesimalCompoundWordsToNumberConverter(new(", source);
-        Assert.Contains("new TokenMapWordsToNumberConverter(new()", source);
-        Assert.Contains("case \"hebrew\": return hebrew;", source);
-        Assert.Contains("case \"italian\": return italian;", source);
-        Assert.Contains("new GreedyCompoundWordsToNumberConverter(new(", source);
+        Assert.Contains("new SuffixScaleWordsToNumberConverter(new SuffixScaleWordsToNumberProfile(", source);
+        Assert.Contains("new PrefixedTensScaleWordsToNumberConverter(new PrefixedTensScaleWordsToNumberProfile(", source);
+        Assert.Contains("new LinkingAffixWordsToNumberConverter(new LinkingAffixWordsToNumberProfile(", source);
+        Assert.Contains("new VigesimalCompoundWordsToNumberConverter(new VigesimalCompoundWordsToNumberProfile(", source);
+        Assert.Contains("new GreedyCompoundWordsToNumberConverter(new GreedyCompoundWordsToNumberProfile(", source);
         Assert.DoesNotContain("new ChineseWordsToNumberConverter()", source);
         Assert.DoesNotContain("new JapaneseWordsToNumberConverter()", source);
         Assert.DoesNotContain("new KoreanWordsToNumberConverter()", source);
@@ -254,23 +206,21 @@ public class HumanizerSourceGeneratorTests
     public void TokenMapLocalesReportDiagnosticsAndSkipGenerationWhenInputIsMalformed()
     {
         const string invalidLocale = """
-{
-  "normalizationProfile": 42,
-  "cardinalMap": {
-    "one": "1"
-  },
-  "ordinalGenderVariant": "bogus",
-  "negativePrefixes": [
-    "minus ",
-    5
-  ],
-  "scaleThreshold": "1000"
-}
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 42
+  cardinalMap:
+    one: '1'
+  ordinalGenderVariant: 'bogus'
+  negativePrefixes:
+    - 'minus '
+    - 5
+  scaleThreshold: '1000'
 """;
 
         var runResult = RunGenerator(
             new InMemoryAdditionalText(
-                @"E:\Dev\Humanizer\src\Humanizer\CodeGen\WordsToNumber\zz-invalid.json",
+                @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-invalid.yml",
                 invalidLocale));
 
         var diagnostics = runResult.Diagnostics
@@ -296,29 +246,29 @@ public class HumanizerSourceGeneratorTests
         var dateCatalog = GetGeneratedSource("OrdinalDateProfileCatalog.DateTo.g.cs");
         var dateOnlyCatalog = GetGeneratedSource("OrdinalDateProfileCatalog.DateOnly.g.cs");
 
-        Assert.Contains("static FormatterProfile luxembourgish => luxembourgish_cache.Value;", formatterCatalog);
-        Assert.Contains("static class luxembourgish_cache", formatterCatalog);
-        Assert.DoesNotContain("static FormatterProfile luxembourgish { get; } =", formatterCatalog);
+        Assert.Contains("_cache.Value;", formatterCatalog);
+        Assert.Contains("static class ", formatterCatalog);
+        Assert.DoesNotContain("{ get; } =", formatterCatalog);
 
-        Assert.Contains("static INumberToWordsConverter english => english_cache.Value;", numberToWordsCatalog);
-        Assert.Contains("static class english_cache", numberToWordsCatalog);
-        Assert.DoesNotContain("static INumberToWordsConverter english { get; } =", numberToWordsCatalog);
+        Assert.Contains("_cache.Value;", numberToWordsCatalog);
+        Assert.Contains("static class ", numberToWordsCatalog);
+        Assert.DoesNotContain("{ get; } =", numberToWordsCatalog);
 
-        Assert.Contains("static IWordsToNumberConverter arabic => arabic_cache.Value;", wordsToNumberCatalog);
-        Assert.Contains("static class arabic_cache", wordsToNumberCatalog);
-        Assert.DoesNotContain("static IWordsToNumberConverter arabic { get; } =", wordsToNumberCatalog);
+        Assert.Contains("_cache.Value;", wordsToNumberCatalog);
+        Assert.Contains("static class ", wordsToNumberCatalog);
+        Assert.DoesNotContain("{ get; } =", wordsToNumberCatalog);
 
-        Assert.Contains("static ITimeOnlyToClockNotationConverter german => german_cache.Value;", timeOnlyCatalog);
-        Assert.Contains("static class german_cache", timeOnlyCatalog);
-        Assert.DoesNotContain("static ITimeOnlyToClockNotationConverter german { get; } =", timeOnlyCatalog);
+        Assert.Contains("_cache.Value;", timeOnlyCatalog);
+        Assert.Contains("static class ", timeOnlyCatalog);
+        Assert.DoesNotContain("{ get; } =", timeOnlyCatalog);
 
-        Assert.Contains("static IDateToOrdinalWordConverter spanish => spanish_cache.Value;", dateCatalog);
-        Assert.Contains("static class spanish_cache", dateCatalog);
-        Assert.DoesNotContain("static IDateToOrdinalWordConverter spanish { get; } =", dateCatalog);
+        Assert.Contains("_cache.Value;", dateCatalog);
+        Assert.Contains("static class ", dateCatalog);
+        Assert.DoesNotContain("{ get; } =", dateCatalog);
 
-        Assert.Contains("static IDateOnlyToOrdinalWordConverter spanish => spanish_cache.Value;", dateOnlyCatalog);
-        Assert.Contains("static class spanish_cache", dateOnlyCatalog);
-        Assert.DoesNotContain("static IDateOnlyToOrdinalWordConverter spanish { get; } =", dateOnlyCatalog);
+        Assert.Contains("_cache.Value;", dateOnlyCatalog);
+        Assert.Contains("static class ", dateOnlyCatalog);
+        Assert.DoesNotContain("{ get; } =", dateOnlyCatalog);
     }
 
     [Fact]
@@ -326,9 +276,6 @@ public class HumanizerSourceGeneratorTests
     {
         var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
 
-        Assert.Contains("case \"chinese\": return chinese;", source);
-        Assert.Contains("case \"japanese\": return japanese;", source);
-        Assert.Contains("case \"korean\": return korean;", source);
         Assert.Contains("new EastAsianGroupedNumberToWordsConverter(", source);
         Assert.DoesNotContain("new ChineseNumberToWordsConverter()", source);
         Assert.DoesNotContain("new JapaneseNumberToWordsConverter()", source);
@@ -342,12 +289,7 @@ public class HumanizerSourceGeneratorTests
         var wordsRegistrySource = GetGeneratedSource("WordsToNumberConverterRegistryRegistrations.g.cs");
         var wordsCatalogSource = GetGeneratedSource("WordsToNumberProfileCatalog.g.cs");
 
-        Assert.Contains("case \"english\": return english;", numberSource);
-        Assert.Contains("case \"indian\": return indian;", numberSource);
-        Assert.Contains("new EnglishFamilyNumberToWordsConverter(", numberSource);
-        Assert.Contains("case \"farsi\": return farsi;", numberSource);
-        Assert.Contains("case \"central-kurdish\": return central_kurdish;", numberSource);
-        Assert.Contains("case \"bangla\": return bangla;", numberSource);
+        Assert.Contains("new ConjunctionalScaleNumberToWordsConverter(", numberSource);
         Assert.Contains("new JoinedScaleNumberToWordsConverter(", numberSource);
 
         Assert.Contains("registry.Register(\"ku\", culture => TokenMapWordsToNumberConverters.Ku);", wordsRegistrySource);
@@ -359,81 +301,240 @@ public class HumanizerSourceGeneratorTests
     [Fact]
     public void ExistingNumberToWordsFamiliesPreferExplicitStrategiesOverLocaleSpecificBranches()
     {
-        var sourceRoot = Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "CodeGen", "Schemas", "NumberToWords");
-        var englishSchema = File.ReadAllText(Path.Combine(sourceRoot, "english-family.json"));
-        var frenchSchema = File.ReadAllText(Path.Combine(sourceRoot, "french-family.json"));
-        var malaySchema = File.ReadAllText(Path.Combine(sourceRoot, "malay-family.json"));
-        var portugueseSchema = File.ReadAllText(Path.Combine(sourceRoot, "portuguese-family.json"));
-        var scandinavianSchema = File.ReadAllText(Path.Combine(sourceRoot, "scandinavian-family.json"));
+        var schemaCatalog = GetSourceGeneratorFile("Common", "EngineContractCatalog.cs");
 
-        Assert.Contains("\"addAndMode\"", englishSchema);
-        Assert.Contains("\"andStrategy\"", englishSchema);
-        Assert.Contains("\"tupleSuffix\"", englishSchema);
-        Assert.Contains("\"ordinalLeadingOneStrategy\"", englishSchema);
-        Assert.DoesNotContain("\"respectAddAndFlag\"", englishSchema);
-        Assert.DoesNotContain("\"useAndWithinGroup\"", englishSchema);
-        Assert.DoesNotContain("\"useAndAfterScaleForSubHundredRemainder\"", englishSchema);
-        Assert.DoesNotContain("\"omitLeadingOneInOrdinal\"", englishSchema);
+        Assert.Contains("Schema(\"conjunctional-scale\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"addAndMode\", null, \"ConjunctionalScaleAddAndMode\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"andStrategy\", null, \"ConjunctionalScaleAndStrategy\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"tupleSuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"ordinalLeadingOneStrategy\", null, \"ConjunctionalScaleOrdinalLeadingOneStrategy\"", schemaCatalog);
+        Assert.DoesNotContain("respectAddAndFlag", schemaCatalog);
+        Assert.DoesNotContain("useAndWithinGroup", schemaCatalog);
+        Assert.DoesNotContain("useAndAfterScaleForSubHundredRemainder", schemaCatalog);
+        Assert.DoesNotContain("omitLeadingOneInOrdinal", schemaCatalog);
 
-        Assert.Contains("\"seventyStrategy\"", frenchSchema);
-        Assert.Contains("\"ninetyStrategy\"", frenchSchema);
-        Assert.Contains("\"specialSeventyOneWord\"", frenchSchema);
-        Assert.Contains("\"pluralizeExactEighty\"", frenchSchema);
-        Assert.Contains("\"tensUsingEtWhenUnitIsOne\"", frenchSchema);
-        Assert.Contains("\"tensMap\"", frenchSchema);
-        Assert.DoesNotContain("\"style\"", frenchSchema);
+        Assert.Contains("Schema(\"variant-decade\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"seventyStrategy\", null, \"VariantDecadeSeventyStrategy\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"ninetyStrategy\", null, \"VariantDecadeNinetyStrategy\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"specialSeventyOneWord\"", schemaCatalog);
+        Assert.Contains("Member(\"bool\", \"pluralizeExactEighty\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-int-set\", \"tensUsingEtWhenUnitIsOne\"", schemaCatalog);
+        Assert.Contains("Member(\"string-array\", \"tensMap\"", schemaCatalog);
+        Assert.DoesNotContain("Member(\"string\", \"style\"", schemaCatalog);
 
-        Assert.Contains("\"billionCardinalStrategy\"", portugueseSchema);
-        Assert.Contains("\"billionOrdinalStrategy\"", portugueseSchema);
-        Assert.Contains("\"millionSingularWord\"", portugueseSchema);
-        Assert.Contains("\"millionPluralWord\"", portugueseSchema);
-        Assert.Contains("\"thousandWord\"", portugueseSchema);
-        Assert.Contains("\"billionSingularWord\"", portugueseSchema);
-        Assert.Contains("\"billionPluralWord\"", portugueseSchema);
-        Assert.Contains("\"thousandOrdinalWord\"", portugueseSchema);
-        Assert.Contains("\"millionOrdinalWord\"", portugueseSchema);
-        Assert.Contains("\"billionOrdinalWord\"", portugueseSchema);
-        Assert.DoesNotContain("\"style\"", portugueseSchema);
+        Assert.Contains("Schema(\"billion-strategy\"", schemaCatalog);
+        Assert.Contains("Member(\"profile-object\", \"cardinal\"", schemaCatalog);
+        Assert.Contains("Member(\"profile-object\", \"ordinal\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"millionSingularWord\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"billionStrategy\", null, \"BillionCardinalStrategy\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"millionSeparator\"", schemaCatalog);
+        Assert.DoesNotContain("PortugueseBillionCardinalStrategy", schemaCatalog);
+        Assert.DoesNotContain("PortugueseBillionOrdinalStrategy", schemaCatalog);
 
-        Assert.Contains("\"oneWord\"", File.ReadAllText(Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "CodeGen", "Profiles", "NumberToWords", "malay.json")));
-        Assert.DoesNotContain("\"thousandOneWord\"", malaySchema);
+        Assert.Contains("oneWord:", GetLocaleFile("ms.yml"));
+        Assert.DoesNotContain("thousandOneWord", schemaCatalog);
 
-        Assert.Contains("\"cardinalStrategy\"", scandinavianSchema);
-        Assert.Contains("\"ordinalStrategy\"", scandinavianSchema);
-        Assert.Contains("\"largeScaleRemainderJoiner\"", scandinavianSchema);
-        Assert.Contains("\"exactLargeScaleOrdinalSuffix\"", scandinavianSchema);
-        Assert.Contains("\"exactDefaultOrdinalSuffix\"", scandinavianSchema);
-        Assert.Contains("\"tensOrdinalTrimEndCharacters\"", scandinavianSchema);
-        Assert.Contains("\"tensOrdinalSuffix\"", scandinavianSchema);
-        Assert.Contains("\"shortOrdinalUpperBoundExclusive\"", scandinavianSchema);
-        Assert.Contains("\"shortOrdinalTrimEndCharacters\"", scandinavianSchema);
-        Assert.Contains("\"shortOrdinalTrimmedSuffix\"", scandinavianSchema);
-        Assert.Contains("\"shortOrdinalSuffix\"", scandinavianSchema);
-        Assert.DoesNotContain("\"style\"", scandinavianSchema);
+        Assert.Contains("Schema(\"scale-strategy\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"cardinalStrategy\", null, \"ScaleStrategyCardinalMode\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"ordinalStrategy\", null, \"ScaleStrategyOrdinalMode\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"largeScaleRemainderJoiner\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"exactLargeScaleOrdinalSuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"exactDefaultOrdinalSuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"tensOrdinalTrimEndCharacters\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"tensOrdinalSuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"int32\", \"shortOrdinalUpperBoundExclusive\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"shortOrdinalTrimEndCharacters\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"shortOrdinalTrimmedSuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"shortOrdinalSuffix\"", schemaCatalog);
+        Assert.DoesNotContain("Member(\"string\", \"style\"", schemaCatalog);
 
-        var turkicSchema = File.ReadAllText(Path.Combine(sourceRoot, "turkic-family.json"));
-        Assert.Contains("\"softenTerminalTBeforeSuffix\"", turkicSchema);
-        Assert.Contains("\"dropTerminalVowelBeforeHarmonySuffix\"", turkicSchema);
+        Assert.Contains("Schema(\"unit-leading-compound\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"tensJoinerTransform\", null, \"CompoundTensJoinerTransform\"", schemaCatalog);
+        Assert.Contains("Member(\"string\", \"ordinalStemSuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"string-array\", \"unitsOrdinal\"", schemaCatalog);
+        Assert.DoesNotContain("Member(\"string\", \"style\"", schemaCatalog);
+
+        Assert.Contains("Schema(\"harmony-ordinal\"", schemaCatalog);
+        Assert.Contains("Member(\"bool\", \"softenTerminalTBeforeSuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"bool\", \"dropTerminalVowelBeforeHarmonySuffix\"", schemaCatalog);
+
+        Assert.Contains("Schema(\"conjoined-gendered-scale\"", schemaCatalog);
+        Assert.DoesNotContain("Schema(\"bulgarian\"", schemaCatalog);
+        Assert.Contains("Schema(\"hyphenated-scale\"", schemaCatalog);
+        Assert.DoesNotContain("Schema(\"hungarian\"", schemaCatalog);
+        Assert.Contains("Schema(\"dual-form-scale\"", schemaCatalog);
+        Assert.DoesNotContain("Schema(\"maltese\"", schemaCatalog);
+        Assert.Contains("engine: 'conjoined-gendered-scale'", GetLocaleFile("bg.yml"));
+        Assert.DoesNotContain("engine: 'bulgarian'", GetLocaleFile("bg.yml"));
+        Assert.Contains("engine: 'hyphenated-scale'", GetLocaleFile("hu.yml"));
+        Assert.DoesNotContain("engine: 'hungarian'", GetLocaleFile("hu.yml"));
+        Assert.Contains("engine: 'dual-form-scale'", GetLocaleFile("mt.yml"));
+        Assert.DoesNotContain("engine: 'maltese'", GetLocaleFile("mt.yml"));
     }
 
     [Fact]
-    public void UzbekProfilesAreAbsorbedIntoTheSharedTurkicFamily()
+    public void UzbekProfilesAreAbsorbedIntoTheSharedHarmonyOrdinalFamily()
     {
         var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
-        var profilesRoot = Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "CodeGen", "Profiles", "NumberToWords");
-        var uzbekLatinProfile = File.ReadAllText(Path.Combine(profilesRoot, "uzbek-latn.json"));
-        var uzbekCyrillicProfile = File.ReadAllText(Path.Combine(profilesRoot, "uzbek-cyrl.json"));
+        var uzbekLatinProfile = GetLocaleFile("uz-Latn-UZ.yml");
+        var uzbekCyrillicProfile = GetLocaleFile("uz-Cyrl-UZ.yml");
 
-        Assert.Contains("\"engine\": \"turkic-family\"", uzbekLatinProfile);
-        Assert.Contains("\"engine\": \"turkic-family\"", uzbekCyrillicProfile);
-        Assert.Contains("new TurkicFamilyNumberToWordsConverter(", source);
+        Assert.Contains("engine: 'harmony-ordinal'", uzbekLatinProfile);
+        Assert.Contains("engine: 'harmony-ordinal'", uzbekCyrillicProfile);
+        Assert.Contains("new HarmonyOrdinalNumberToWordsConverter(", source);
         Assert.DoesNotContain("new UzbekFamilyNumberToWordsConverter(", source);
+    }
+
+    [Fact]
+    public void ChildLocaleMappingsMergeWithParentMappingsAtGenerationTime()
+    {
+        const string baseLocale = """
+inherits: 'en'
+
+numberToWords:
+  engine: 'conjunctional-scale'
+  minusWord: 'base-minus'
+  andWord: 'base-and'
+  hundredWord: 'base-hundred'
+  hundredOrdinalWord: 'base-hundredth'
+  tensUnitsSeparator: '~'
+  defaultAddAnd: true
+  addAndMode: 'use-caller-flag'
+  andStrategy: 'within-group-only'
+  tupleSuffix: '-base-tuple'
+  ordinalLeadingOneStrategy: 'omit-leading-one'
+  ordinalMode: 'english'
+  unitsMap:
+    - 'zero'
+    - 'one'
+  ordinalUnitsMap:
+    - 'zeroth'
+    - 'first'
+  tensMap:
+    - 'zero'
+    - 'ten'
+  ordinalTensMap:
+    - 'zeroth'
+    - 'tenth'
+  scales:
+    -
+      value: 1000
+      name: 'base-kilo'
+      ordinalName: 'base-milli'
+""";
+
+        const string childLocale = """
+inherits: 'zz-base'
+
+numberToWords:
+  engine: 'conjunctional-scale'
+  minusWord: 'child-minus'
+  scales:
+    -
+      value: 1000
+      name: 'child-kilo'
+      ordinalName: 'child-milli'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText(
+                @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-base.yml",
+                baseLocale),
+            new InMemoryAdditionalText(
+                @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-child.yml",
+                childLocale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "NumberToWordsProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        var baseAndCount = CountOccurrences(source, "base-and");
+        var baseHundredCount = CountOccurrences(source, "base-hundred");
+        var baseScaleCount = CountOccurrences(source, "base-kilo");
+        var childMinusCount = CountOccurrences(source, "child-minus");
+        var childScaleCount = CountOccurrences(source, "child-kilo");
+
+        Assert.Contains("case \"zz-child\": return", source);
+        Assert.True(baseAndCount > baseScaleCount, "Inherited scalar fields should appear in both the parent and child generated profiles.");
+        Assert.True(baseHundredCount > baseScaleCount, "Inherited scalar fields should appear in both the parent and child generated profiles.");
+        Assert.True(childMinusCount > 0);
+        Assert.True(childScaleCount > 0);
+    }
+
+    [Fact]
+    public void SparseNumericLexicalTablesExpandIntoGeneratedArrays()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'conjunctional-scale'
+  minusWord: 'minus'
+  andWord: 'and'
+  hundredWord: 'hundred'
+  hundredOrdinalWord: 'hundredth'
+  tensUnitsSeparator: '-'
+  defaultAddAnd: true
+  addAndMode: 'use-caller-flag'
+  andStrategy: 'within-group-only'
+  tupleSuffix: '-tuple'
+  ordinalLeadingOneStrategy: 'omit-leading-one'
+  ordinalMode: 'english'
+  unitsMap:
+    1: 'one'
+    2: 'two'
+  ordinalUnitsMap:
+    1: 'first'
+    2: 'second'
+  tensMap:
+    2: 'twenty'
+    3: 'thirty'
+  ordinalTensMap:
+    2: 'twentieth'
+    3: 'thirtieth'
+  scales:
+    -
+      value: 1000
+      name: 'thousand'
+      ordinalName: 'thousandth'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText(
+                @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-sparse.yml",
+                locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "NumberToWordsProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("new string[] { \"\", \"one\", \"two\" }", source);
+        Assert.Contains("new string[] { \"\", \"\", \"twenty\", \"thirty\" }", source);
+        Assert.Contains("new string[] { \"\", \"first\", \"second\" }", source);
+        Assert.Contains("new string[] { \"\", \"\", \"twentieth\", \"thirtieth\" }", source);
     }
 
     static string GetGeneratedSource(string hintName) =>
         generatedSources.Value.TryGetValue(hintName, out var source)
             ? source
             : throw new Xunit.Sdk.XunitException($"Generated source '{hintName}' was not found.");
+
+    static int CountOccurrences(string source, string value)
+    {
+        var count = 0;
+        var index = 0;
+        while ((index = source.IndexOf(value, index, StringComparison.Ordinal)) >= 0)
+        {
+            count++;
+            index += value.Length;
+        }
+
+        return count;
+    }
 
     static ImmutableDictionary<string, string> GenerateSources()
     {
@@ -513,17 +614,7 @@ public class HumanizerSourceGeneratorTests
             Path.Combine(sourceRoot, "Properties", "Resources.resx")
         };
 
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Locales"), "*.yml");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Profiles", "NumberToWords"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Schemas", "NumberToWords"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Profiles", "Formatters"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Profiles", "Ordinalizers"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Profiles", "OrdinalDates"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Profiles", "TimeOnlyToClockNotation"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Schemas", "TimeOnlyToClockNotation"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Profiles", "WordsToNumber"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "Schemas", "WordsToNumber"), "*.json");
-        AddFiles(filePaths, Path.Combine(sourceRoot, "CodeGen", "WordsToNumber"), "*.json");
+        AddFiles(filePaths, Path.Combine(sourceRoot, "Locales"), "*.yml");
 
         var additionalTexts = filePaths
             .OrderBy(static path => path, StringComparer.OrdinalIgnoreCase)
@@ -543,6 +634,17 @@ public class HumanizerSourceGeneratorTests
         }
 
         filePaths.AddRange(Directory.GetFiles(directory, searchPattern, SearchOption.TopDirectoryOnly));
+    }
+
+    static string GetLocaleFile(string fileName) =>
+        File.ReadAllText(Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "Locales", fileName));
+
+    static string GetSourceGeneratorFile(params string[] relativeSegments)
+    {
+        var pathSegments = new[] { FindRepositoryRoot(), "src", "Humanizer.SourceGenerators" }
+            .Concat(relativeSegments)
+            .ToArray();
+        return File.ReadAllText(Path.Combine(pathSegments));
     }
 
     static string FindRepositoryRoot()

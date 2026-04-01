@@ -1,0 +1,62 @@
+# Locale-owned generator data for zh-Hans.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'delimited'
+  value: '、'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'east-asian-grouped'
+  zeroWord: '零'
+  negativePrefix: '负 '
+  ordinalPrefix: '第 '
+  digitWords:
+    - '零'
+    - '一'
+    - '二'
+    - '三'
+    - '四'
+    - '五'
+    - '六'
+    - '七'
+    - '八'
+    - '九'
+  smallUnitWords:
+    1: '十'
+    2: '百'
+    3: '千'
+  largeUnits:
+    1: '万'
+    2: '亿'
+    3: '兆'
+  omitOneBeforeTen: true
+  omitOneBeforeTenOnlyWhenLeading: true
+  omitOneBeforeHundred: false
+  omitOneBeforeThousand: false
+  insertZeroInGroup: true
+  insertZeroBetweenGroups: true
+wordsToNumber:
+  engine: 'east-asian-positional'
+  negativePrefixes:
+    - '负'
+  ordinalPrefix: '第'
+  digits:
+    '零': 0
+    '一': 1
+    '二': 2
+    '三': 3
+    '四': 4
+    '五': 5
+    '六': 6
+    '七': 7
+    '八': 8
+    '九': 9
+  smallUnits:
+    '十': 10
+    '百': 100
+    '千': 1000
+  largeUnits:
+    '万': 10000
+    '亿': 100000000

@@ -35,7 +35,7 @@ public class NumberToWordsFamilyRegressionTests
     [Theory]
     [InlineData(3501, "en-US", false, "three thousand five hundred one")]
     [InlineData(3501, "en-IN", false, "three thousand five hundred and one")]
-    public void EnglishFamilyConvertersPreserveCultureSpecificAndBehavior(int number, string culture, bool addAnd, string expected) =>
+    public void ConjunctionalScaleConvertersPreserveCultureSpecificAndBehavior(int number, string culture, bool addAnd, string expected) =>
         Assert.Equal(expected, number.ToWords(addAnd, new CultureInfo(culture)));
 
     [Theory]

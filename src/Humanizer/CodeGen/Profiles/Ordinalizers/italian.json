@@ -1,7 +1,0 @@
-{
-  "engine": "suffix",
-  "masculineSuffix": "\u00b0",
-  "feminineSuffix": "\u00aa",
-  "neuterSuffix": "\u00b0",
-  "zeroAsPlainNumber": true
-}

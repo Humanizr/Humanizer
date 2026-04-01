@@ -1,0 +1,193 @@
+# Locale-owned generator data for pl.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'i'
+formatter:
+  engine: 'profiled'
+  resourceKeyDetector: 'between2-and4-paucal'
+  resourceKeySuffixes:
+    paucal: '_Paucal'
+  dataUnitDetector: 'between2-and4-paucal'
+  dataUnitSuffixes:
+    singular: '_Singular'
+    paucal: '_Paucal'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'pluralized-scale'
+  useCulture: true
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  formDetector: 'polish'
+  unitVariantStrategy: 'polish'
+  ordinalMode: 'numeric-culture'
+  supportsNeuter: true
+  unitsMap:
+    - 'zero'
+    - 'jeden'
+    - 'dwa'
+    - 'trzy'
+    - 'cztery'
+    - 'pięć'
+    - 'sześć'
+    - 'siedem'
+    - 'osiem'
+    - 'dziewięć'
+    - 'dziesięć'
+    - 'jedenaście'
+    - 'dwanaście'
+    - 'trzynaście'
+    - 'czternaście'
+    - 'piętnaście'
+    - 'szesnaście'
+    - 'siedemnaście'
+    - 'osiemnaście'
+    - 'dziewiętnaście'
+  tensMap:
+    - 'zero'
+    - 'dziesięć'
+    - 'dwadzieścia'
+    - 'trzydzieści'
+    - 'czterdzieści'
+    - 'pięćdziesiąt'
+    - 'sześćdziesiąt'
+    - 'siedemdziesiąt'
+    - 'osiemdziesiąt'
+    - 'dziewięćdziesiąt'
+  hundredsMap:
+    - 'zero'
+    - 'sto'
+    - 'dwieście'
+    - 'trzysta'
+    - 'czterysta'
+    - 'pięćset'
+    - 'sześćset'
+    - 'siedemset'
+    - 'osiemset'
+    - 'dziewięćset'
+  scales:
+    -
+      value: 1000000000000000000
+      countGender: 'masculine'
+      singular: 'trylion'
+      paucal: 'tryliony'
+      plural: 'trylionów'
+    -
+      value: 1000000000000000
+      countGender: 'masculine'
+      singular: 'biliard'
+      paucal: 'biliardy'
+      plural: 'biliardów'
+    -
+      value: 1000000000000
+      countGender: 'masculine'
+      singular: 'bilion'
+      paucal: 'biliony'
+      plural: 'bilionów'
+    -
+      value: 1000000000
+      countGender: 'masculine'
+      singular: 'miliard'
+      paucal: 'miliardy'
+      plural: 'miliardów'
+    -
+      value: 1000000
+      countGender: 'masculine'
+      singular: 'milion'
+      paucal: 'miliony'
+      plural: 'milionów'
+    -
+      value: 1000
+      countGender: 'masculine'
+      singular: 'tysiąc'
+      paucal: 'tysiące'
+      plural: 'tysięcy'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriods'
+  cardinalMap:
+    zero: 0
+    jeden: 1
+    jedna: 1
+    jedno: 1
+    dwa: 2
+    dwie: 2
+    trzy: 3
+    cztery: 4
+    'pięć': 5
+    piec: 5
+    'sześć': 6
+    szesc: 6
+    siedem: 7
+    osiem: 8
+    'dziewięć': 9
+    dziewiec: 9
+    'dziesięć': 10
+    dziesiec: 10
+    'jedenaście': 11
+    jedenascie: 11
+    'dwanaście': 12
+    dwanascie: 12
+    'trzynaście': 13
+    trzynascie: 13
+    'czternaście': 14
+    czternascie: 14
+    'piętnaście': 15
+    pietnascie: 15
+    'szesnaście': 16
+    szesnascie: 16
+    'siedemnaście': 17
+    siedemnascie: 17
+    'osiemnaście': 18
+    osiemnascie: 18
+    'dziewiętnaście': 19
+    dziewietnascie: 19
+    'dwadzieścia': 20
+    dwadziescia: 20
+    'trzydzieści': 30
+    trzydziesci: 30
+    'czterdzieści': 40
+    czterdziesci: 40
+    'pięćdziesiąt': 50
+    piecdziesiat: 50
+    'sześćdziesiąt': 60
+    szescdziesiat: 60
+    'siedemdziesiąt': 70
+    siedemdziesiat: 70
+    'osiemdziesiąt': 80
+    osiemdziesiat: 80
+    'dziewięćdziesiąt': 90
+    dziewiecdziesiat: 90
+    sto: 100
+    'dwieście': 200
+    dwiescie: 200
+    trzysta: 300
+    czterysta: 400
+    'pięćset': 500
+    piecset: 500
+    'sześćset': 600
+    szescset: 600
+    siedemset: 700
+    osiemset: 800
+    'dziewięćset': 900
+    dziewiecset: 900
+    'tysiąc': 1000
+    tysiac: 1000
+    'tysiące': 1000
+    tysiace: 1000
+    'tysięcy': 1000
+    tysiecy: 1000
+    milion: 1000000
+    miliony: 1000000
+    'milionów': 1000000
+    milionow: 1000000
+    miliard: 1000000000
+    miliardy: 1000000000
+    'miliardów': 1000000000
+    miliardow: 1000000000
+  negativePrefixes:
+    - 'minus '

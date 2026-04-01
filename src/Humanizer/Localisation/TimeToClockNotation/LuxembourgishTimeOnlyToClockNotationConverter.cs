@@ -6,6 +6,10 @@ class LuxembourgishTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationCo
 {
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
+        // Luxembourgish shares the same broad half-hour family as German, but it also needs
+        // morphology-aware number rendering ("eng"/"zwou", Eifeler handling for seven, singular
+        // vs plural minute nouns). That additional inflection logic is why it remains a dedicated
+        // leaf for now instead of being forced into a weaker generic schema.
         var roundedTime = roundToNearestFive is ClockNotationRounding.NearestFiveMinutes
             ? GetRoundedTime(time)
             : time;
@@ -36,6 +40,8 @@ class LuxembourgishTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationCo
         };
     }
 
+    // Rounding is performed before phrase selection so the rest of the converter can reason over
+    // the spoken-minute buckets instead of carrying dual rounded/unrounded branches.
     private static TimeOnly GetRoundedTime(TimeOnly time)
     {
         var tempRoundedMinutes = (int)(5 * Math.Round(time.Minute / 5.0));

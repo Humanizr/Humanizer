@@ -1,7 +1,23 @@
 namespace Humanizer;
 
+/// <summary>
+/// Shared East Slavic renderer for languages whose cardinals are mostly regular once the scale
+/// gender and paucal/plural form are known, but whose ordinals are built by combining an ordinal
+/// stem with a gender-specific terminal ending.
+///
+/// The intended result is a phrase where:
+/// - large scales use generated singular/paucal/plural forms
+/// - the final cardinal units respect feminine/neuter overrides for one and two
+/// - ordinals mutate only the terminal segment, while earlier scale segments stay cardinal
+///
+/// The generated profile supplies the scale forms, ordinal stems, and terminal-ending overrides so
+/// this converter can stay structural instead of language-branded.
+/// </summary>
 class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) : GenderedNumberToWordsConverter
 {
+    /// <summary>
+    /// Immutable generated profile that owns the East Slavic scale forms, ordinal stems, and endings.
+    /// </summary>
     readonly EastSlavicNumberToWordsProfile profile = profile;
 
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
@@ -19,6 +35,8 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
             parts.Add(profile.MinusWord);
         }
 
+        // Cardinal rendering is a straight scale walk once the generated profile provides the
+        // gender and singular/paucal/plural words for each scale row.
         foreach (var scale in profile.Scales)
         {
             var count = remaining / scale.Value;
@@ -55,6 +73,9 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
             parts.Add(profile.MinusWord);
         }
 
+        // Ordinals are different: only the terminal segment becomes ordinal, while earlier scale
+        // segments stay cardinal. The converter therefore keeps cardinal traversal until it can
+        // prove which segment terminates the phrase and which ending family applies there.
         foreach (var scale in profile.Scales)
         {
             if (scale.OrdinalStem is null || remaining < scale.Value)
@@ -116,6 +137,9 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
         return string.Join(" ", parts);
     }
 
+    // Under one thousand, the family is regular except for the gendered one/two variants.
+    // The expected result is the same phrase a speaker would use inside a larger scale count,
+    // such as "two thousand" versus "two millions", with the correct gendered low digit.
     void AppendCardinalUnderOneThousand(List<string> parts, int number, GrammaticalGender gender)
     {
         if (number >= 100)
@@ -144,6 +168,8 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
         });
     }
 
+    // Ordinal prefixes are concatenative in this family: hundreds, tens, and units each contribute
+    // a stem which is later combined with the gender-specific terminal ending for the final phrase.
     string GetOrdinalPrefix(int number)
     {
         var parts = new List<string>(3);
@@ -197,6 +223,9 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
         value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }
 
+/// <summary>
+/// Immutable generated profile for <see cref="EastSlavicNumberToWordsConverter"/>.
+/// </summary>
 sealed class EastSlavicNumberToWordsProfile(
     string zeroWord,
     string minusWord,
@@ -217,26 +246,47 @@ sealed class EastSlavicNumberToWordsProfile(
     EastSlavicGenderEnding feminineEnding,
     EastSlavicGenderEnding neuterEnding)
 {
+    /// <summary>Gets the cardinal zero word.</summary>
     public string ZeroWord { get; } = zeroWord;
+    /// <summary>Gets the word used to prefix negative values.</summary>
     public string MinusWord { get; } = minusWord;
+    /// <summary>Gets the stem used to build the zero ordinal.</summary>
     public string ZeroOrdinalStem { get; } = zeroOrdinalStem;
+    /// <summary>Gets the hundreds lexicon.</summary>
     public string[] HundredsMap { get; } = hundredsMap;
+    /// <summary>Gets the tens lexicon.</summary>
     public string[] TensMap { get; } = tensMap;
+    /// <summary>Gets the base units lexicon.</summary>
     public string[] UnitsMap { get; } = unitsMap;
+    /// <summary>Gets the unit ordinal prefixes used in concatenative ordinal stems.</summary>
     public string[] UnitsOrdinalPrefixes { get; } = unitsOrdinalPrefixes;
+    /// <summary>Gets the tens ordinal prefixes used in concatenative ordinal stems.</summary>
     public string[] TensOrdinalPrefixes { get; } = tensOrdinalPrefixes;
+    /// <summary>Gets the exact tens ordinal lexicon.</summary>
     public string[] TensOrdinal { get; } = tensOrdinal;
+    /// <summary>Gets the exact unit ordinal lexicon.</summary>
     public string[] UnitsOrdinal { get; } = unitsOrdinal;
+    /// <summary>Gets the feminine word for one.</summary>
     public string FeminineOne { get; } = feminineOne;
+    /// <summary>Gets the neuter word for one.</summary>
     public string NeuterOne { get; } = neuterOne;
+    /// <summary>Gets the feminine word for two.</summary>
     public string FeminineTwo { get; } = feminineTwo;
+    /// <summary>Gets the special ordinal prefix for one.</summary>
     public string OneOrdinalPrefix { get; } = oneOrdinalPrefix;
+    /// <summary>Gets the descending scale rows used during decomposition.</summary>
     public EastSlavicScale[] Scales { get; } = scales;
+    /// <summary>Gets the masculine terminal-ending resolver.</summary>
     public EastSlavicGenderEnding MasculineEnding { get; } = masculineEnding;
+    /// <summary>Gets the feminine terminal-ending resolver.</summary>
     public EastSlavicGenderEnding FeminineEnding { get; } = feminineEnding;
+    /// <summary>Gets the neuter terminal-ending resolver.</summary>
     public EastSlavicGenderEnding NeuterEnding { get; } = neuterEnding;
 }
 
+/// <summary>
+/// One descending scale row for <see cref="EastSlavicNumberToWordsConverter"/>.
+/// </summary>
 readonly record struct EastSlavicScale(
     ulong Value,
     GrammaticalGender Gender,
@@ -245,8 +295,14 @@ readonly record struct EastSlavicScale(
     string Plural,
     string? OrdinalStem = null);
 
+/// <summary>
+/// Resolves the gender-specific ending for the terminal ordinal segment.
+/// </summary>
 readonly record struct EastSlavicGenderEnding(string Default, FrozenDictionary<int, string> Overrides)
 {
+    // Some terminal values override the default gender ending, for example exact tens, hundreds,
+    // or scale ordinals that do not use the normal masculine/feminine/neuter suffix. Keeping
+    // those overrides in generated data avoids locale-specific branching in the converter.
     public string Resolve(int terminalValue) =>
         Overrides.TryGetValue(terminalValue, out var ending) ? ending : Default;
 }

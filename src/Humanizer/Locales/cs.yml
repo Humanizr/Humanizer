@@ -1,0 +1,163 @@
+# Locale-owned generator data for cs.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'a'
+formatter:
+  engine: 'profiled'
+  resourceKeyDetector: 'between2-and4-paucal'
+  resourceKeySuffixes:
+    paucal: '_Paucal'
+  dataUnitDetector: 'between2-and4-paucal'
+  dataUnitSuffixes:
+    singular: '_Singular'
+    paucal: '_Paucal'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'west-slavic-gendered'
+  useCulture: true
+  minusWord: 'mínus'
+  unitsMap:
+    - 'nula'
+    - 'jeden'
+    - 'dva'
+    - 'tři'
+    - 'čtyři'
+    - 'pět'
+    - 'šest'
+    - 'sedm'
+    - 'osm'
+    - 'devět'
+    - 'deset'
+    - 'jedenáct'
+    - 'dvanáct'
+    - 'třináct'
+    - 'čtrnáct'
+    - 'patnáct'
+    - 'šestnáct'
+    - 'sedmnáct'
+    - 'osmnáct'
+    - 'devatenáct'
+  tensMap:
+    - 'nula'
+    - 'deset'
+    - 'dvacet'
+    - 'třicet'
+    - 'čtyřicet'
+    - 'padesát'
+    - 'šedesát'
+    - 'sedmdesát'
+    - 'osmdesát'
+    - 'devadesát'
+  hundredsMap:
+    - 'nula'
+    - 'sto'
+    - 'dvě stě'
+    - 'tři sta'
+    - 'čtyři sta'
+    - 'pět set'
+    - 'šest set'
+    - 'sedm set'
+    - 'osm set'
+    - 'devět set'
+  unitsMasculineOverrides:
+    - 'jeden'
+    - 'dva'
+  unitsFeminineOverrides:
+    - 'jedna'
+    - 'dvě'
+  unitsNeuterOverrides:
+    - 'jedno'
+    - 'dvě'
+  unitsInvariantOverrides:
+    - 'jedna'
+    - 'dva'
+  thousands:
+    singular: 'tisíc'
+    paucal: 'tisíce'
+    plural: 'tisíc'
+  millions:
+    singular: 'milion'
+    paucal: 'miliony'
+    plural: 'milionů'
+  billions:
+    singular: 'miliarda'
+    paucal: 'miliardy'
+    plural: 'miliard'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriods'
+  cardinalMap:
+    nula: 0
+    jeden: 1
+    jedna: 1
+    jedno: 1
+    dva: 2
+    'dvě': 2
+    dve: 2
+    'tři': 3
+    tri: 3
+    'čtyři': 4
+    ctyri: 4
+    'pět': 5
+    pet: 5
+    'šest': 6
+    sest: 6
+    sedm: 7
+    osm: 8
+    'devět': 9
+    devet: 9
+    deset: 10
+    'jedenáct': 11
+    jedenact: 11
+    'dvanáct': 12
+    dvanact: 12
+    'třináct': 13
+    trinact: 13
+    'čtrnáct': 14
+    ctrnact: 14
+    'patnáct': 15
+    patnact: 15
+    'šestnáct': 16
+    sestnact: 16
+    'sedmnáct': 17
+    sedmnact: 17
+    'osmnáct': 18
+    osmnact: 18
+    'devatenáct': 19
+    devatenact: 19
+    dvacet: 20
+    'třicet': 30
+    tricet: 30
+    'čtyřicet': 40
+    ctyricet: 40
+    'padesát': 50
+    padesat: 50
+    'šedesát': 60
+    'sedmdesát': 70
+    sedmdesat: 70
+    'osmdesát': 80
+    osmdesat: 80
+    'devadesát': 90
+    devadesat: 90
+    sto: 100
+    sta: 100
+    set: 100
+    'tisíc': 1000
+    tisic: 1000
+    'tisíce': 1000
+    tisice: 1000
+    milion: 1000000
+    miliony: 1000000
+    'milionů': 1000000
+    milionu: 1000000
+    miliarda: 1000000000
+    miliardy: 1000000000
+  useHundredMultiplier: true
+  negativePrefixes:
+    - 'mínus '
+    - 'minus '

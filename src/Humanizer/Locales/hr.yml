@@ -1,0 +1,179 @@
+# Locale-owned generator data for hr.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'i'
+formatter:
+  engine: 'profiled'
+  resourceKeyDetector: 'south-slavic'
+  resourceKeySuffixes:
+    paucal: '_Paucal'
+  dataUnitDetector: 'south-slavic'
+  dataUnitSuffixes:
+    singular: '_Singular'
+    paucal: '_Paucal'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'south-slavic-cardinal'
+  useCulture: true
+  maximumValue: 9223372036854775807
+  allowLongMin: true
+  zeroWord: 'nula'
+  minusWord: 'minus'
+  unitsMap:
+    - 'nula'
+    - 'jedan'
+    - 'dva'
+    - 'tri'
+    - 'četiri'
+    - 'pet'
+    - 'šest'
+    - 'sedam'
+    - 'osam'
+    - 'devet'
+    - 'deset'
+    - 'jedanaest'
+    - 'dvanaest'
+    - 'trinaest'
+    - 'četrnaest'
+    - 'petnaest'
+    - 'šesnaest'
+    - 'sedamnaest'
+    - 'osamnaest'
+    - 'devetnaest'
+  tensMap:
+    - 'nula'
+    - 'deset'
+    - 'dvadeset'
+    - 'trideset'
+    - 'četrdeset'
+    - 'pedeset'
+    - 'šezdeset'
+    - 'sedamdeset'
+    - 'osamdeset'
+    - 'devedeset'
+  hundredsMap:
+    - 'nula'
+    - 'sto'
+    - 'dvjesto'
+    - 'tristo'
+    - 'četiristo'
+    - 'petsto'
+    - 'šeststo'
+    - 'sedamsto'
+    - 'osamsto'
+    - 'devetsto'
+  feminineOne: 'jedna'
+  feminineTwo: 'dvije'
+  scales:
+    -
+      value: 1000000000000000000
+      gender: 'masculine'
+      oneForm: 'trilijun'
+      singular: 'trilijun'
+      paucal: 'trilijuna'
+      plural: 'trilijuna'
+    -
+      value: 1000000000000000
+      gender: 'feminine'
+      oneForm: 'bilijarda'
+      singular: 'bilijarda'
+      paucal: 'bilijarde'
+      plural: 'bilijardi'
+    -
+      value: 1000000000000
+      gender: 'masculine'
+      oneForm: 'bilijun'
+      singular: 'bilijun'
+      paucal: 'bilijuna'
+      plural: 'bilijuna'
+    -
+      value: 1000000000
+      gender: 'feminine'
+      oneForm: 'milijarda'
+      singular: 'milijarda'
+      paucal: 'milijarde'
+      plural: 'milijardi'
+    -
+      value: 1000000
+      gender: 'masculine'
+      oneForm: 'milijun'
+      singular: 'milijun'
+      paucal: 'milijuna'
+      plural: 'milijuna'
+    -
+      value: 1000
+      gender: 'feminine'
+      oneForm: 'tisuću'
+      singular: 'tisuća'
+      paucal: 'tisuće'
+      plural: 'tisuća'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriods'
+  cardinalMap:
+    nula: 0
+    jedan: 1
+    jedna: 1
+    jedno: 1
+    dva: 2
+    dvije: 2
+    tri: 3
+    'četiri': 4
+    cetiri: 4
+    pet: 5
+    'šest': 6
+    sest: 6
+    sedam: 7
+    osam: 8
+    devet: 9
+    deset: 10
+    jedanaest: 11
+    dvanaest: 12
+    trinaest: 13
+    'četrnaest': 14
+    cetrnaest: 14
+    petnaest: 15
+    'šesnaest': 16
+    sesnaest: 16
+    sedamnaest: 17
+    osamnaest: 18
+    devetnaest: 19
+    dvadeset: 20
+    trideset: 30
+    'četrdeset': 40
+    cetrdeset: 40
+    pedeset: 50
+    'šezdeset': 60
+    sezdeset: 60
+    sedamdeset: 70
+    osamdeset: 80
+    devedeset: 90
+    sto: 100
+    dvjesto: 200
+    tristo: 300
+    'četiristo': 400
+    cetiristo: 400
+    petsto: 500
+    'šeststo': 600
+    seststo: 600
+    sedamsto: 700
+    osamsto: 800
+    devetsto: 900
+    'tisuću': 1000
+    tisucu: 1000
+    'tisuće': 1000
+    tisuce: 1000
+    'tisuća': 1000
+    tisuca: 1000
+    milijun: 1000000
+    milijuna: 1000000
+    milijarda: 1000000000
+    milijarde: 1000000000
+    milijardi: 1000000000
+  negativePrefixes:
+    - 'minus '

@@ -15,36 +15,30 @@ namespace Humanizer.SourceGenerators;
 
 public sealed partial class HumanizerSourceGenerator
 {
-    sealed class WordsToNumberProfileCatalogInput(
-        ImmutableArray<WordsToNumberProfileDefinition> profiles,
-        ImmutableDictionary<string, ExpressionSchema> schemas)
+    sealed class WordsToNumberProfileCatalogInput(ImmutableArray<WordsToNumberProfileDefinition> profiles)
     {
         readonly ImmutableArray<WordsToNumberProfileDefinition> profiles = profiles;
-        readonly ImmutableDictionary<string, ExpressionSchema> schemas = schemas;
 
-        public static WordsToNumberProfileCatalogInput Create(
-            ImmutableArray<JsonProfileFile?> files,
-            ImmutableArray<JsonSchemaFile?> schemaFiles)
+        public static WordsToNumberProfileCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
             var profiles = ImmutableArray.CreateBuilder<WordsToNumberProfileDefinition>();
-            foreach (var file in files)
+            var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var locale in localeCatalog.Locales)
             {
-                if (file is null)
+                var feature = locale.WordsToNumber;
+                if (feature is not { UsesGeneratedProfile: true } ||
+                    !seenProfiles.Add(feature.ProfileName!))
                 {
                     continue;
                 }
 
-                using var document = JsonDocument.Parse(file.FileText);
-                var root = document.RootElement;
                 profiles.Add(new WordsToNumberProfileDefinition(
-                    file.ProfileName,
-                    GetRequiredString(root, "engine"),
-                    root.Clone()));
+                    feature.ProfileName!,
+                    GetRequiredString(feature.ProfileRoot, "engine"),
+                    feature.ProfileRoot.Clone()));
             }
 
-            return new WordsToNumberProfileCatalogInput(
-                profiles.ToImmutable(),
-                ExpressionSchemaLoader.Load(schemaFiles));
+            return new WordsToNumberProfileCatalogInput(profiles.ToImmutable());
         }
 
         public void Emit(SourceProductionContext context)
@@ -90,7 +84,7 @@ public sealed partial class HumanizerSourceGenerator
                     "static",
                     "IWordsToNumberConverter",
                     GetCatalogPropertyName(profile.ProfileName),
-                    WordsToNumberSchemaExpressionFactory.Create(profile, schemas));
+                    WordsToNumberEngineContractFactory.Create(profile));
                 builder.AppendLine();
             }
 

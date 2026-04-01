@@ -1,0 +1,146 @@
+# Locale-owned generator data for ro.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'și'
+formatter:
+  engine: 'profiled'
+  dataUnitDetector: 'singular-plural'
+  dataUnitSuffixes:
+    singular: '_Singular'
+  prepositionMode: 'romanian-de'
+numberToWords:
+  engine: 'gendered-scale-ordinal'
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  feminineSingular: 'o'
+  masculineOrdinalPrefix: 'al'
+  feminineOrdinalPrefix: 'a'
+  masculineOrdinalSuffix: 'lea'
+  feminineOrdinalSuffix: 'a'
+  joinGroups: 'și'
+  joinAboveTwenty: 'de'
+  unitsVariants:
+    1: 'unu|una|unu'
+    2: 'doi|două|două'
+    3: 'trei'
+    4: 'patru'
+    5: 'cinci'
+    6: 'șase'
+    7: 'șapte'
+    8: 'opt'
+    9: 'nouă'
+  teensVariants:
+    - 'zece'
+    - 'unsprezece'
+    - 'doisprezece|douăsprezece|douăsprezece'
+    - 'treisprezece'
+    - 'paisprezece'
+    - 'cincisprezece'
+    - 'șaisprezece'
+    - 'șaptesprezece'
+    - 'optsprezece'
+    - 'nouăsprezece'
+  tensMap:
+    2: 'douăzeci'
+    3: 'treizeci'
+    4: 'patruzeci'
+    5: 'cincizeci'
+    6: 'șaizeci'
+    7: 'șaptezeci'
+    8: 'optzeci'
+    9: 'nouăzeci'
+  ordinalUnderTenVariants:
+    1: 'primul|prima'
+    2: 'doilea|doua'
+    3: 'treilea|treia'
+    4: 'patrulea|patra'
+    5: 'cincilea|cincea'
+    6: 'șaselea|șasea'
+    7: 'șaptelea|șaptea'
+    8: 'optulea|opta'
+    9: 'nouălea|noua'
+  scales:
+    -
+      singular: 'o mie'
+      plural: 'mii'
+      countGender: 'feminine'
+    -
+      singular: 'un milion'
+      plural: 'milioane'
+      countGender: 'feminine'
+    -
+      singular: 'un miliard'
+      plural: 'miliarde'
+      countGender: 'feminine'
+ordinalizer:
+  engine: 'template'
+  zeroAsPlainNumber: true
+  masculine:
+    prefix: 'al '
+    defaultSuffix: '-lea'
+    exactReplacements:
+      '1': 'primul'
+  feminine:
+    prefix: 'a '
+    defaultSuffix: '-a'
+    exactReplacements:
+      '1': 'prima'
+  neuter:
+    prefix: 'al '
+    defaultSuffix: '-lea'
+    exactReplacements:
+      '1': 'primul'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriodsAndDiacritics'
+  cardinalMap:
+    zero: 0
+    un: 1
+    unu: 1
+    o: 1
+    una: 1
+    doi: 2
+    doua: 2
+    trei: 3
+    patru: 4
+    cinci: 5
+    sase: 6
+    sapte: 7
+    opt: 8
+    noua: 9
+    zece: 10
+    unsprezece: 11
+    doisprezece: 12
+    douasprezece: 12
+    treisprezece: 13
+    paisprezece: 14
+    cincisprezece: 15
+    saisprezece: 16
+    saptesprezece: 17
+    optsprezece: 18
+    nouasprezece: 19
+    douazeci: 20
+    treizeci: 30
+    patruzeci: 40
+    cincizeci: 50
+    saizeci: 60
+    saptezeci: 70
+    optzeci: 80
+    nouazeci: 90
+    suta: 100
+    sute: 100
+    mie: 1000
+    mii: 1000
+    milion: 1000000
+    milioane: 1000000
+    miliard: 1000000000
+    miliarde: 1000000000
+  negativePrefixes:
+    - 'minus '
+  ignoredTokens:
+    - 'si'
+    - 'de'
+  useHundredMultiplier: true
+  allowInvariantIntegerInput: true

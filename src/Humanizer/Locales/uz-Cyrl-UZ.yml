@@ -1,0 +1,94 @@
+# Locale-owned generator data for uz-Cyrl-UZ.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'ва'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'harmony-ordinal'
+  minimumValue: -2147483648
+  maximumValue: 2147483647
+  minusWord: 'минус'
+  hundredWord: 'юз'
+  hundredStrategy: 'allow-explicit-one-in-composite'
+  ordinalSuffixStrategy: 'final-character-membership'
+  softenTerminalTBeforeSuffix: false
+  dropTerminalVowelBeforeHarmonySuffix: false
+  scales:
+    -
+      value: 1000000000
+      name: 'миллиард'
+    -
+      value: 1000000
+      name: 'миллион'
+      allowBareHundredInCount: true
+    -
+      value: 1000
+      name: 'минг'
+      allowBareHundredInCount: true
+  secondOrdinalSuffixCharacters: 'иа'
+  unitsMap:
+    - 'нол'
+    - 'бир'
+    - 'икки'
+    - 'уч'
+    - 'тўрт'
+    - 'беш'
+    - 'олти'
+    - 'етти'
+    - 'саккиз'
+    - 'тўққиз'
+  tensMap:
+    - 'нол'
+    - 'ўн'
+    - 'йигирма'
+    - 'ўттиз'
+    - 'қирқ'
+    - 'эллик'
+    - 'олтмиш'
+    - 'етмиш'
+    - 'саксон'
+    - 'тўқсон'
+  ordinalSuffixPair:
+    - 'инчи'
+    - 'нчи'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '-чи'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'CollapseWhitespace'
+  cardinalMap:
+    'нол': 0
+    'бир': 1
+    'иккинчи': 2
+    'икки': 2
+    'уч': 3
+    'тўрт': 4
+    'беш': 5
+    'олти': 6
+    'етти': 7
+    'саккиз': 8
+    'тўққиз': 9
+    'ўн': 10
+    'йигирма': 20
+    'ўттиз': 30
+    'қирқ': 40
+    'эллик': 50
+    'олтмиш': 60
+    'етмиш': 70
+    'саксон': 80
+    'тўқсон': 90
+    'юз': 100
+    'минг': 1000
+    'миллион': 1000000
+    'миллиард': 1000000000
+  useHundredMultiplier: true
+  negativePrefixes:
+    - 'минус '
+  tokenSuffixesToStrip:
+    - 'инчи'
+    - 'нчи'

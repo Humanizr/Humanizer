@@ -17,34 +17,33 @@ public sealed partial class HumanizerSourceGenerator
 {
     sealed class NumberToWordsProfileCatalogInput(
         ImmutableArray<NumberToWordsProfileDefinition> profiles,
-        ImmutableDictionary<string, ExpressionSchema> schemas)
+        ImmutableDictionary<string, EngineContract> contracts)
     {
         readonly ImmutableArray<NumberToWordsProfileDefinition> profiles = profiles;
-        readonly ImmutableDictionary<string, ExpressionSchema> schemas = schemas;
+        readonly ImmutableDictionary<string, EngineContract> contracts = contracts;
 
-        public static NumberToWordsProfileCatalogInput Create(
-            ImmutableArray<JsonProfileFile?> files,
-            ImmutableArray<JsonSchemaFile?> schemaFiles)
+        public static NumberToWordsProfileCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
             var profiles = ImmutableArray.CreateBuilder<NumberToWordsProfileDefinition>();
-            foreach (var file in files)
+            var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var locale in localeCatalog.Locales)
             {
-                if (file is null)
+                var feature = locale.NumberToWords;
+                if (feature is not { UsesGeneratedProfile: true } ||
+                    !seenProfiles.Add(feature.ProfileName!))
                 {
                     continue;
                 }
 
-                using var document = JsonDocument.Parse(file.FileText);
-                var root = document.RootElement;
                 profiles.Add(new NumberToWordsProfileDefinition(
-                    file.ProfileName,
-                    GetRequiredString(root, "engine"),
-                    root.Clone()));
+                    feature.ProfileName!,
+                    GetRequiredString(feature.ProfileRoot, "engine"),
+                    feature.ProfileRoot.Clone()));
             }
 
             return new NumberToWordsProfileCatalogInput(
                 profiles.ToImmutable(),
-                ExpressionSchemaLoader.Load(schemaFiles));
+                EngineContractCatalog.NumberToWords);
         }
 
         public void Emit(SourceProductionContext context)
@@ -71,12 +70,11 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var profile in profiles.OrderBy(static profile => profile.ProfileName, StringComparer.Ordinal))
             {
+                var expression = CreateProfileExpression(profile, useCultureParameter: RequiresCulture(profile));
                 builder.Append("            case ");
                 builder.Append(QuoteLiteral(profile.ProfileName));
                 builder.Append(": return ");
-                builder.Append(RequiresCulture(profile)
-                    ? NumberToWordsSchemaExpressionFactory.Create(profile, schemas, useCultureParameter: true)
-                    : GetCatalogPropertyName(profile.ProfileName));
+                builder.Append(RequiresCulture(profile) ? expression : GetCatalogPropertyName(profile.ProfileName));
                 builder.AppendLine(";");
             }
 
@@ -98,7 +96,7 @@ public sealed partial class HumanizerSourceGenerator
                     "static",
                     "INumberToWordsConverter",
                     GetCatalogPropertyName(profile.ProfileName),
-                    NumberToWordsSchemaExpressionFactory.Create(profile, schemas, useCultureParameter: false));
+                    CreateProfileExpression(profile, useCultureParameter: false));
                 builder.AppendLine();
             }
 
@@ -108,6 +106,20 @@ public sealed partial class HumanizerSourceGenerator
 
         static bool RequiresCulture(NumberToWordsProfileDefinition profile) =>
             GetBoolean(profile.Root, "useCulture");
+
+        string CreateProfileExpression(NumberToWordsProfileDefinition profile, bool useCultureParameter)
+        {
+            try
+            {
+                return NumberToWordsEngineContractFactory.Create(profile, contracts, useCultureParameter);
+            }
+            catch (Exception exception)
+            {
+                throw new InvalidOperationException(
+                    $"Failed to generate number-to-words profile '{profile.ProfileName}' using engine '{profile.Engine}': {exception.Message}",
+                    exception);
+            }
+        }
     }
 
 }

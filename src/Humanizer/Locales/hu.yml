@@ -1,0 +1,170 @@
+# Locale-owned generator data for hu.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'és'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'hyphenated-scale'
+  zeroWord: 'nulla'
+  zeroOrdinalWord: 'nulladik'
+  minusWord: 'mínusz'
+  twoPrefixWord: 'két'
+  unitsMap:
+    1: 'egy'
+    2: 'kettő'
+    3: 'három'
+    4: 'négy'
+    5: 'öt'
+    6: 'hat'
+    7: 'hét'
+    8: 'nyolc'
+    9: 'kilenc'
+  ordinalUnitsMap:
+    1: 'első'
+    2: 'második'
+    3: 'harmadik'
+    4: 'negyedik'
+    5: 'ötödik'
+    6: 'hatodik'
+    7: 'hetedik'
+    8: 'nyolcadik'
+    9: 'kilencedik'
+  tensMap:
+    1: 'tizen'
+    2: 'huszon'
+    3: 'harminc'
+    4: 'negyven'
+    5: 'ötven'
+    6: 'hatvan'
+    7: 'hetven'
+    8: 'nyolcvan'
+    9: 'kilencven'
+  ordinalTensMap:
+    1: 'tizedik'
+    2: 'huszadik'
+    3: 'harmincadik'
+    4: 'negyvenedik'
+    5: 'ötvenedik'
+    6: 'hatvanadik'
+    7: 'hetvenedik'
+    8: 'nyolcvanadik'
+    9: 'kilencvenedik'
+  hundredsMap:
+    1: 'száz'
+    2: 'kétszáz'
+    3: 'háromszáz'
+    4: 'négyszáz'
+    5: 'ötszáz'
+    6: 'hatszáz'
+    7: 'hétszáz'
+    8: 'nyolcszáz'
+    9: 'kilencszáz'
+  ordinalUnitsExceptions:
+    '1': 'egyedik'
+    '2': 'kettedik'
+  wholeTensExceptions:
+    '10': 'tíz'
+    '20': 'húsz'
+  scales:
+    -
+      divisor: 1000000000000000000
+      cardinal: 'trillió'
+      ordinal: 'trilliomodik'
+    -
+      divisor: 1000000000000000
+      cardinal: 'billiárd'
+      ordinal: 'billiárdodik'
+    -
+      divisor: 1000000000000
+      cardinal: 'billió'
+      ordinal: 'billiomodik'
+    -
+      divisor: 1000000000
+      cardinal: 'milliárd'
+      ordinal: 'milliárdodik'
+    -
+      divisor: 1000000
+      cardinal: 'millió'
+      ordinal: 'milliomodik'
+  thousandScale:
+    divisor: 1000
+    cardinal: 'ezer'
+    ordinal: 'ezredik'
+  tupleMap:
+    '1': 'szimpla'
+    '2': 'dupla'
+    '3': 'tripla'
+    '4': 'kvadrupla'
+    '5': 'pentapla'
+    '6': 'hexapla'
+    '7': 'heptapla'
+    '8': 'octapla'
+    '9': 'nonapla'
+    '10': 'dekapla'
+    '100': 'hektapla'
+    '1000': 'kiliapla'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+wordsToNumber:
+  engine: 'prefixed-tens-scale'
+  cardinalMap:
+    nulla: 0
+    egy: 1
+    ket: 2
+    ketto: 2
+    harom: 3
+    negy: 4
+    ot: 5
+    hat: 6
+    het: 7
+    nyolc: 8
+    kilenc: 9
+    tiz: 10
+    husz: 20
+    harminc: 30
+    negyven: 40
+    otven: 50
+    hatvan: 60
+    hetven: 70
+    nyolcvan: 80
+    kilencven: 90
+    szaz: 100
+    ezer: 1000
+    millio: 1000000
+    milliard: 1000000000
+  tensMap:
+    harminc: 30
+    negyven: 40
+    otven: 50
+    hatvan: 60
+    hetven: 70
+    nyolcvan: 80
+    kilencven: 90
+  scales:
+    -
+      token: 'milliard'
+      value: 1000000000
+    -
+      token: 'millio'
+      value: 1000000
+    -
+      token: 'ezer'
+      value: 1000
+    -
+      token: 'szaz'
+      value: 100
+  prefixRules:
+    -
+      prefix: 'tizen'
+      baseValue: 10
+    -
+      prefix: 'huszon'
+      baseValue: 20
+  negativePrefixes:
+    - 'minusz '
+    - 'minus '

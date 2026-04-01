@@ -1,0 +1,119 @@
+# Locale-owned generator data for fi.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'ja'
+formatter:
+  engine: 'profiled'
+  dataUnitDetector: 'singular-plural'
+  dataUnitSuffixes:
+    singular: '_Singular'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'agglutinative-ordinal-scale'
+  minusWord: 'miinus '
+  tensSuffix: 'kymmentä'
+  teenSuffix: 'toista'
+  ordinalTensSuffix: 'kymmenes'
+  unitsMap:
+    - 'nolla'
+    - 'yksi'
+    - 'kaksi'
+    - 'kolme'
+    - 'neljä'
+    - 'viisi'
+    - 'kuusi'
+    - 'seitsemän'
+    - 'kahdeksan'
+    - 'yhdeksän'
+    - 'kymmenen'
+  ordinalUnitsMap:
+    - 'nollas'
+    - 'ensimmäinen'
+    - 'toinen'
+    - 'kolmas'
+    - 'neljäs'
+    - 'viides'
+    - 'kuudes'
+    - 'seitsemäs'
+    - 'kahdeksas'
+    - 'yhdeksäs'
+    - 'kymmenes'
+  ordinalExceptions:
+    '1': 'yhdes'
+    '2': 'kahdes'
+  scales:
+    -
+      value: 1000000000
+      singularCardinal: 'miljardi'
+      pluralCardinal: 'miljardia'
+      ordinalWord: 'miljardis'
+    -
+      value: 1000000
+      singularCardinal: 'miljoona'
+      pluralCardinal: 'miljoonaa'
+      ordinalWord: 'miljoonas'
+    -
+      value: 1000
+      singularCardinal: 'tuhat'
+      pluralCardinal: 'tuhatta'
+      ordinalWord: 'tuhannes'
+    -
+      value: 100
+      singularCardinal: 'sata'
+      pluralCardinal: 'sataa'
+      ordinalWord: 'sadas'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+wordsToNumber:
+  engine: 'suffix-scale'
+  cardinalMap:
+    nolla: 0
+    yksi: 1
+    kaksi: 2
+    kolme: 3
+    'neljä': 4
+    viisi: 5
+    kuusi: 6
+    'seitsemän': 7
+    kahdeksan: 8
+    'yhdeksän': 9
+    kymmenen: 10
+    yksitoista: 11
+    kaksitoista: 12
+    kolmetoista: 13
+    'neljätoista': 14
+    viisitoista: 15
+    kuusitoista: 16
+    'seitsemäntoista': 17
+    kahdeksantoista: 18
+    'yhdeksäntoista': 19
+  bareScaleMap:
+    sata: 100
+    tuhat: 1000
+    tuhatta: 1000
+    miljoona: 1000000
+    miljoonaa: 1000000
+    miljardi: 1000000000
+    miljardia: 1000000000
+  scales:
+    -
+      singular: 'miljardi'
+      plural: 'miljardia'
+      value: 1000000000
+    -
+      singular: 'miljoona'
+      plural: 'miljoonaa'
+      value: 1000000
+    -
+      singular: 'tuhat'
+      plural: 'tuhatta'
+      value: 1000
+  hundredSingularToken: 'sata'
+  hundredPluralToken: 'sataa'
+  tensSuffixToken: 'kymmentä'
+  teenSuffixToken: 'toista'
+  negativePrefixes:
+    - 'miinus '

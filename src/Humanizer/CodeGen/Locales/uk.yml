@@ -1,9 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: і
-formatter: ukrainian
-numberToWords: ukrainian
-ordinalizer: ukrainian
-wordsToNumber:
-  kind: lexicon
-  sourceLocale: uk

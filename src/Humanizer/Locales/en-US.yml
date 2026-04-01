@@ -1,0 +1,9 @@
+# Locale-owned generator data for en-US.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+dateToOrdinalWords:
+  pattern: 'MMMM {day}, yyyy'
+  dayMode: 'Ordinal'
+dateOnlyToOrdinalWords:
+  pattern: 'MMMM {day}, yyyy'
+  dayMode: 'Ordinal'

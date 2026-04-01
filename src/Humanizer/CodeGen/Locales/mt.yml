@@ -1,8 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: u
-formatter: maltese
-numberToWords: maltese
-wordsToNumber:
-  kind: lexicon
-  sourceLocale: mt

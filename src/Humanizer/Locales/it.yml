@@ -1,0 +1,200 @@
+# Locale-owned generator data for it.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'e'
+formatter:
+  engine: 'profiled'
+  dataUnitDetector: 'singular-plural'
+  dataUnitSuffixes:
+    singular: '_Singular'
+numberToWords:
+  engine: 'triad-scale'
+  zeroWord: 'zero'
+  minusWord: 'meno'
+  feminineOneWord: 'una'
+  leadingOneWord: 'un'
+  tenWord: 'dieci'
+  tenOrdinalStem: 'decim'
+  commonOrdinalStem: 'esim'
+  masculineOrdinalSuffix: 'o'
+  feminineOrdinalSuffix: 'a'
+  ordinalUnit3RestoredVowel: 'e'
+  ordinalUnit6RestoredVowel: 'i'
+  unitsMap:
+    1: 'uno'
+    2: 'due'
+    3: 'tre'
+    4: 'quattro'
+    5: 'cinque'
+    6: 'sei'
+    7: 'sette'
+    8: 'otto'
+    9: 'nove'
+  unitsFinalAccent:
+    1: 'uno'
+    2: 'due'
+    3: 'tré'
+    4: 'quattro'
+    5: 'cinque'
+    6: 'sei'
+    7: 'sette'
+    8: 'otto'
+    9: 'nove'
+  tensMap:
+    2: 'venti'
+    3: 'trenta'
+    4: 'quaranta'
+    5: 'cinquanta'
+    6: 'sessanta'
+    7: 'settanta'
+    8: 'ottanta'
+    9: 'novanta'
+  teensMap:
+    - 'dieci'
+    - 'undici'
+    - 'dodici'
+    - 'tredici'
+    - 'quattordici'
+    - 'quindici'
+    - 'sedici'
+    - 'diciassette'
+    - 'diciotto'
+    - 'diciannove'
+  hundredsMap:
+    1: 'cento'
+    2: 'duecento'
+    3: 'trecento'
+    4: 'quattrocento'
+    5: 'cinquecento'
+    6: 'seicento'
+    7: 'settecento'
+    8: 'ottocento'
+    9: 'novecento'
+  ordinalUnderTen:
+    1: 'prim'
+    2: 'second'
+    3: 'terz'
+    4: 'quart'
+    5: 'quint'
+    6: 'sest'
+    7: 'settim'
+    8: 'ottav'
+    9: 'non'
+  scales:
+    -
+      value: 1000
+      singular: 'mille'
+      plural: 'mila'
+      countToScaleJoiner: ''
+      countUsesFinalAccent: false
+      appendTrailingSpace: false
+      ordinalCompactionMatch: ''
+      ordinalCompactionReplacement: ''
+      removeLeadingOneOnExactOrdinal: false
+      exactOrdinalSuffix: 'l'
+    -
+      value: 1000000
+      singular: 'un milione '
+      plural: 'milioni'
+      countToScaleJoiner: ' '
+      countUsesFinalAccent: true
+      appendTrailingSpace: true
+      ordinalCompactionMatch: ' milion'
+      ordinalCompactionReplacement: 'milion'
+      removeLeadingOneOnExactOrdinal: true
+      exactOrdinalSuffix: ''
+    -
+      value: 1000000000
+      singular: 'un miliardo '
+      plural: 'miliardi'
+      countToScaleJoiner: ' '
+      countUsesFinalAccent: false
+      appendTrailingSpace: true
+      ordinalCompactionMatch: ' miliard'
+      ordinalCompactionReplacement: 'miliard'
+      removeLeadingOneOnExactOrdinal: true
+      exactOrdinalSuffix: ''
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '°'
+  feminineSuffix: 'ª'
+  neuterSuffix: '°'
+  zeroAsPlainNumber: true
+wordsToNumber:
+  engine: 'greedy-compound'
+  ordinalNumberToWordsKind: 'self'
+  negativePrefixes:
+    - 'meno '
+  ordinalAbbreviationSuffixes:
+    - 'º'
+    - '°'
+    - 'ª'
+    - 'o'
+    - 'a'
+  charactersToRemove: ',.''’'
+  charactersToReplaceWithSpace: '-'
+  textReplacements:
+    -
+      old: ' ed '
+      new: ' '
+    -
+      old: ' e '
+      new: ' '
+  lowercase: true
+  removeDiacritics: true
+  cardinalMap:
+    zero: 0
+    uno: 1
+    una: 1
+    un: 1
+    due: 2
+    tre: 3
+    quattro: 4
+    cinque: 5
+    sei: 6
+    sette: 7
+    otto: 8
+    nove: 9
+    dieci: 10
+    undici: 11
+    dodici: 12
+    tredici: 13
+    quattordici: 14
+    quindici: 15
+    sedici: 16
+    diciassette: 17
+    diciotto: 18
+    diciannove: 19
+    venti: 20
+    ventuno: 21
+    ventotto: 28
+    trenta: 30
+    trentuno: 31
+    trentotto: 38
+    quaranta: 40
+    quarantuno: 41
+    quarantotto: 48
+    cinquanta: 50
+    cinquantuno: 51
+    cinquantotto: 58
+    sessanta: 60
+    sessantuno: 61
+    sessantotto: 68
+    settanta: 70
+    settantuno: 71
+    settantotto: 78
+    ottanta: 80
+    ottantuno: 81
+    ottantotto: 88
+    novanta: 90
+    novantuno: 91
+    novantotto: 98
+    cento: 100
+    mille: 1000
+    mila: 1000
+    milione: 1000000
+    milioni: 1000000
+    miliardo: 1000000000
+    miliardi: 1000000000

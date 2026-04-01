@@ -21,98 +21,51 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
             input.Emit(productionContext);
         });
 
-        var tokenMapFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => TokenMapLocaleFile.Create(additionalText, cancellationToken))
-            .Where(static file => file is not null)
-            .Collect()
-            .Select(static (files, _) => TokenMapWordsToNumberInput.Create(files));
-
-        context.RegisterSourceOutput(tokenMapFiles, static (productionContext, input) => input.Emit(productionContext));
-
         var localeFiles = context.AdditionalTextsProvider
             .Select(static (additionalText, cancellationToken) => LocaleDefinitionFile.Create(additionalText, cancellationToken))
             .Where(static file => file is not null)
             .Collect();
 
-        var formatterProfileFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonProfileFile.Create(additionalText, cancellationToken, "\\CodeGen\\Profiles\\Formatters\\"))
-            .Where(static file => file is not null)
-            .Collect()
-            .Select(static (files, _) => FormatterProfileCatalogInput.Create(files));
+        var localeCatalog = localeFiles
+            .Select(static (files, _) => LocaleCatalogInput.Create(files));
 
-        context.RegisterSourceOutput(formatterProfileFiles, static (productionContext, input) => input.Emit(productionContext));
+        var tokenMapLocales = localeCatalog
+            .Select(static (catalog, _) => TokenMapWordsToNumberInput.Create(catalog));
 
-        var numberToWordsProfileFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonProfileFile.Create(additionalText, cancellationToken, "\\CodeGen\\Profiles\\NumberToWords\\"))
-            .Where(static file => file is not null)
-            .Collect();
+        context.RegisterSourceOutput(tokenMapLocales, static (productionContext, input) => input.Emit(productionContext));
 
-        var numberToWordsSchemaFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonSchemaFile.Create(additionalText, cancellationToken, "\\CodeGen\\Schemas\\NumberToWords\\"))
-            .Where(static file => file is not null)
-            .Collect();
+        var formatterProfiles = localeCatalog
+            .Select(static (catalog, _) => FormatterProfileCatalogInput.Create(catalog));
 
-        var numberToWordsProfiles = numberToWordsProfileFiles
-            .Combine(numberToWordsSchemaFiles)
-            .Select(static (input, _) => NumberToWordsProfileCatalogInput.Create(input.Left, input.Right));
+        context.RegisterSourceOutput(formatterProfiles, static (productionContext, input) => input.Emit(productionContext));
+
+        var numberToWordsProfiles = localeCatalog
+            .Select(static (catalog, _) => NumberToWordsProfileCatalogInput.Create(catalog));
 
         context.RegisterSourceOutput(numberToWordsProfiles, static (productionContext, input) => input.Emit(productionContext));
 
-        var ordinalizerProfileFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonProfileFile.Create(additionalText, cancellationToken, "\\CodeGen\\Profiles\\Ordinalizers\\"))
-            .Where(static file => file is not null)
-            .Collect()
-            .Select(static (files, _) => OrdinalizerProfileCatalogInput.Create(files));
+        var ordinalizerProfiles = localeCatalog
+            .Select(static (catalog, _) => OrdinalizerProfileCatalogInput.Create(catalog));
 
-        context.RegisterSourceOutput(ordinalizerProfileFiles, static (productionContext, input) => input.Emit(productionContext));
+        context.RegisterSourceOutput(ordinalizerProfiles, static (productionContext, input) => input.Emit(productionContext));
 
-        var localeRegistryInput = localeFiles
-            .Combine(formatterProfileFiles)
-            .Combine(ordinalizerProfileFiles)
-            .Select(static (input, _) => LocaleRegistryInput.Create(
-                input.Left.Left,
-                input.Left.Right.DataBackedProfileNames,
-                input.Right.DataBackedProfileNames));
+        var localeRegistryInput = localeCatalog
+            .Select(static (catalog, _) => LocaleRegistryInput.Create(catalog));
 
         context.RegisterSourceOutput(localeRegistryInput, static (productionContext, input) => input.Emit(productionContext));
 
-        var ordinalDateProfileFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonProfileFile.Create(additionalText, cancellationToken, "\\CodeGen\\Profiles\\OrdinalDates\\"))
-            .Where(static file => file is not null)
-            .Collect()
-            .Select(static (files, _) => OrdinalDateProfileCatalogInput.Create(files));
+        var ordinalDateProfiles = localeCatalog
+            .Select(static (catalog, _) => OrdinalDateProfileCatalogInput.Create(catalog));
 
-        context.RegisterSourceOutput(ordinalDateProfileFiles, static (productionContext, input) => input.Emit(productionContext));
+        context.RegisterSourceOutput(ordinalDateProfiles, static (productionContext, input) => input.Emit(productionContext));
 
-        var timeOnlyProfileFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonProfileFile.Create(additionalText, cancellationToken, "\\CodeGen\\Profiles\\TimeOnlyToClockNotation\\"))
-            .Where(static file => file is not null)
-            .Collect();
-
-        var timeOnlySchemaFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonSchemaFile.Create(additionalText, cancellationToken, "\\CodeGen\\Schemas\\TimeOnlyToClockNotation\\"))
-            .Where(static file => file is not null)
-            .Collect();
-
-        var timeOnlyProfiles = timeOnlyProfileFiles
-            .Combine(timeOnlySchemaFiles)
-            .Select(static (input, _) => TimeOnlyToClockNotationProfileCatalogInput.Create(input.Left, input.Right));
+        var timeOnlyProfiles = localeCatalog
+            .Select(static (catalog, _) => TimeOnlyToClockNotationProfileCatalogInput.Create(catalog));
 
         context.RegisterSourceOutput(timeOnlyProfiles, static (productionContext, input) => input.Emit(productionContext));
 
-        var wordsToNumberProfileFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonProfileFile.Create(additionalText, cancellationToken, "\\CodeGen\\Profiles\\WordsToNumber\\"))
-            .Where(static file => file is not null)
-            .Collect();
-
-        var wordsToNumberSchemaFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => JsonSchemaFile.Create(additionalText, cancellationToken, "\\CodeGen\\Schemas\\WordsToNumber\\"))
-            .Where(static file => file is not null)
-            .Collect();
-
-        var wordsToNumberProfiles = wordsToNumberProfileFiles
-            .Combine(wordsToNumberSchemaFiles)
-            .Select(static (input, _) => WordsToNumberProfileCatalogInput.Create(input.Left, input.Right));
+        var wordsToNumberProfiles = localeCatalog
+            .Select(static (catalog, _) => WordsToNumberProfileCatalogInput.Create(catalog));
 
         context.RegisterSourceOutput(wordsToNumberProfiles, static (productionContext, input) => input.Emit(productionContext));
     }

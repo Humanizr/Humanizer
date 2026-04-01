@@ -1454,6 +1454,21 @@ public class WordsToNumberTests_NonEnglish
     }
 }
 
+[UseCulture("en-US")]
+public class WordsToNumberTests_EnglishFallback
+{
+    [Fact]
+    public void DefaultWordsToNumberConverterDoesNotSpecialCaseEnglish()
+    {
+        var converter = new DefaultWordsToNumberConverter(new CultureInfo("en"));
+
+        var ex = Assert.Throws<NotSupportedException>(() =>
+            converter.Convert("one"));
+
+        Assert.Contains("'en'", ex.Message);
+    }
+}
+
 [UseCulture("uz-Latn-UZ")]
 public class WordsToNumberTests_UzbekLatin
 {

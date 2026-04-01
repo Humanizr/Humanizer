@@ -1,8 +1,0 @@
-{
-  "engine": "modulo-suffix",
-  "defaultSuffix": "-րդ",
-  "useAbsoluteValue": true,
-  "exactSuffixes": {
-    "1": "-ին"
-  }
-}

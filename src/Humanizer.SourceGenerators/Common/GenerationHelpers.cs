@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -9,13 +9,14 @@ using System.Text.Json;
 using System.Xml.Linq;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Humanizer.SourceGenerators;
 
 public sealed partial class HumanizerSourceGenerator
 {
-    delegate string? JsonConstructorArgumentEmitter(JsonElement element);
+    delegate string? JsonConstructorValueEmitter(JsonElement element);
 
     static class RegistryExpressionFactory
     {
@@ -120,7 +121,11 @@ public sealed partial class HumanizerSourceGenerator
             builder.Insert(0, '_');
         }
 
-        return builder.ToString();
+        var identifier = builder.ToString();
+        return SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None ||
+               SyntaxFacts.GetContextualKeywordKind(identifier) != SyntaxKind.None
+            ? "_" + identifier
+            : identifier;
     }
 
     static string GetCatalogPropertyName(string profileName) => SanitizeIdentifier(profileName);
@@ -160,14 +165,14 @@ public sealed partial class HumanizerSourceGenerator
         builder.AppendLine("}");
     }
 
-    static string CreateParameterizedExpression(string typeName, string argumentExpression, string? trailingArgument = null)
+    static string CreateParameterizedExpression(string typeName, string constructorValueExpression, string? trailingValue = null)
     {
-        if (string.IsNullOrEmpty(trailingArgument))
+        if (string.IsNullOrEmpty(trailingValue))
         {
-            return "new " + typeName + "(" + argumentExpression + ")";
+            return "new " + typeName + "(" + constructorValueExpression + ")";
         }
 
-        return "new " + typeName + "(" + argumentExpression + ", " + trailingArgument + ")";
+        return "new " + typeName + "(" + constructorValueExpression + ", " + trailingValue + ")";
     }
 
     static string GetConventionalNumberToWordsTypeName(string engine) => CreateTypeName(engine, "NumberToWordsConverter");
@@ -231,8 +236,36 @@ public sealed partial class HumanizerSourceGenerator
         return property.TryGetInt64(out var value) ? value : null;
     }
 
+    /// <summary>
+    /// Emits a generated <c>string[]</c> from either a plain YAML sequence or a sparse
+    /// numeric-slot mapping.
+    ///
+    /// Supported source shapes:
+    ///
+    /// 1. Plain array:
+    ///    <code>
+    ///    unitsMap:
+    ///      - 'zero'
+    ///      - 'one'
+    ///    </code>
+    ///
+    /// 2. Indexed mapping:
+    ///    <code>
+    ///    tensMap:
+    ///      2: 'twenty'
+    ///      3: 'thirty'
+    ///    </code>
+    ///
+    /// The numeric-slot form keeps YAML readable by replacing alignment hacks such as leading
+    /// empty strings with explicit indices. Missing slots are emitted as empty strings.
+    /// </summary>
     static string CreateStringArrayExpression(JsonElement arrayElement)
     {
+        if (arrayElement.ValueKind == JsonValueKind.Object)
+        {
+            return CreateNumericSlotStringArrayExpression(arrayElement);
+        }
+
         if (arrayElement.ValueKind != JsonValueKind.Array)
         {
             throw new InvalidOperationException("Expected JSON array.");
@@ -261,8 +294,51 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
+    static string CreateNumericSlotStringArrayExpression(JsonElement objectElement)
+    {
+        if (!objectElement.EnumerateObject().Any())
+        {
+            return "Array.Empty<string>()";
+        }
+
+        var indexedValues = new SortedDictionary<int, string>();
+        foreach (var property in objectElement.EnumerateObject())
+        {
+            if (!int.TryParse(property.Name, NumberStyles.Integer, CultureInfo.InvariantCulture, out var index) || index < 0)
+            {
+                throw new InvalidOperationException($"Indexed string arrays require non-negative integer keys. Invalid key '{property.Name}'.");
+            }
+
+            if (property.Value.ValueKind != JsonValueKind.String)
+            {
+                throw new InvalidOperationException($"Indexed string arrays require string values. Property '{property.Name}' was {property.Value.ValueKind}.");
+            }
+
+            indexedValues[index] = property.Value.GetString()!;
+        }
+
+        var builder = new StringBuilder("new string[] { ");
+        var first = true;
+        var lastIndex = indexedValues.Keys.Max();
+
+        for (var index = 0; index <= lastIndex; index++)
+        {
+            if (!first)
+            {
+                builder.Append(", ");
+            }
+
+            builder.Append(QuoteLiteral(indexedValues.TryGetValue(index, out var value) ? value : string.Empty));
+            first = false;
+        }
+
+        builder.Append(" }");
+        return builder.ToString();
+    }
+
     static string CreateOptionalStringArrayExpression(JsonElement element, string propertyName) =>
-        element.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.Array
+        element.TryGetProperty(propertyName, out var property) &&
+        property.ValueKind is JsonValueKind.Array or JsonValueKind.Object
             ? CreateStringArrayExpression(property)
             : "Array.Empty<string>()";
 
@@ -305,8 +381,8 @@ public sealed partial class HumanizerSourceGenerator
         return CreateTypedConstructorArrayExpression(
             "FormatterResourceKeyOverride",
             property,
-            RequiredInt64Argument("number"),
-            RequiredStringArgument("suffix"),
+            RequiredInt64Value("number"),
+            RequiredStringValue("suffix"),
             static item => item.TryGetProperty("keys", out var keys) && keys.ValueKind == JsonValueKind.Array
                 ? CreateStringArrayExpression(keys)
                 : "Array.Empty<string>()",
@@ -348,7 +424,7 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
-    static string CreateTargetTypedConstructorExpression(JsonElement element, params JsonConstructorArgumentEmitter[] emitters)
+    static string CreateTargetTypedConstructorExpression(JsonElement element, params JsonConstructorValueEmitter[] emitters)
     {
         if (element.ValueKind != JsonValueKind.Object)
         {
@@ -356,12 +432,12 @@ public sealed partial class HumanizerSourceGenerator
         }
 
         var builder = new StringBuilder("new(");
-        AppendConstructorArguments(builder, element, emitters);
+        AppendConstructorValues(builder, element, emitters);
         builder.Append(')');
         return builder.ToString();
     }
 
-    static string CreateTypedConstructorArrayExpression(string elementTypeName, JsonElement arrayElement, params JsonConstructorArgumentEmitter[] emitters)
+    static string CreateTypedConstructorArrayExpression(string elementTypeName, JsonElement arrayElement, params JsonConstructorValueEmitter[] emitters)
     {
         if (arrayElement.ValueKind != JsonValueKind.Array)
         {
@@ -393,7 +469,7 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
-    static void AppendConstructorArguments(StringBuilder builder, JsonElement element, params JsonConstructorArgumentEmitter[] emitters)
+    static void AppendConstructorValues(StringBuilder builder, JsonElement element, params JsonConstructorValueEmitter[] emitters)
     {
         var first = true;
 
@@ -415,34 +491,34 @@ public sealed partial class HumanizerSourceGenerator
         }
     }
 
-    static JsonConstructorArgumentEmitter RequiredInt64Argument(string propertyName, string suffix = "") =>
+    static JsonConstructorValueEmitter RequiredInt64Value(string propertyName, string suffix = "") =>
         element => GetRequiredInt64(element, propertyName).ToString(CultureInfo.InvariantCulture) + suffix;
 
-    static JsonConstructorArgumentEmitter RequiredStringArgument(string propertyName) =>
+    static JsonConstructorValueEmitter RequiredStringValue(string propertyName) =>
         element => QuoteLiteral(GetRequiredString(element, propertyName));
 
-    static JsonConstructorArgumentEmitter RequiredEnumArgument(string propertyName, string enumTypeName) =>
+    static JsonConstructorValueEmitter RequiredEnumValue(string propertyName, string enumTypeName) =>
         element => enumTypeName + "." + ToEnumMemberName(GetRequiredString(element, propertyName));
 
-    static JsonConstructorArgumentEmitter OptionalEnumArgument(string propertyName, string enumTypeName, string defaultValue) =>
+    static JsonConstructorValueEmitter OptionalEnumValue(string propertyName, string enumTypeName, string defaultValue) =>
         element => enumTypeName + "." + ToEnumMemberName(GetOptionalString(element, propertyName) ?? defaultValue);
 
-    static JsonConstructorArgumentEmitter OptionalStringArgument(string propertyName, string defaultValue = "") =>
+    static JsonConstructorValueEmitter OptionalStringValue(string propertyName, string defaultValue = "") =>
         element => QuoteLiteral(GetOptionalString(element, propertyName) ?? defaultValue);
 
-    static JsonConstructorArgumentEmitter OptionalStringArgumentOrFallback(string propertyName, string fallbackPropertyName) =>
+    static JsonConstructorValueEmitter OptionalStringValueOrFallback(string propertyName, string fallbackPropertyName) =>
         element => QuoteLiteral(GetOptionalString(element, propertyName) ?? GetRequiredString(element, fallbackPropertyName));
 
-    static JsonConstructorArgumentEmitter OptionalStringArgumentOmitIfMissing(string propertyName) =>
+    static JsonConstructorValueEmitter OptionalStringValueOmitIfMissing(string propertyName) =>
         element => GetOptionalString(element, propertyName) is { } value ? QuoteLiteral(value) : null;
 
-    static JsonConstructorArgumentEmitter BooleanArgument(string propertyName) =>
+    static JsonConstructorValueEmitter BooleanValue(string propertyName) =>
         element => GetBoolean(element, propertyName) ? "true" : "false";
 
-    static JsonConstructorArgumentEmitter OptionalTrueArgument(string propertyName) =>
+    static JsonConstructorValueEmitter OptionalTrueValue(string propertyName) =>
         element => GetBoolean(element, propertyName) ? "true" : null;
 
-    static JsonConstructorArgumentEmitter OptionalBooleanArgument(string propertyName) =>
+    static JsonConstructorValueEmitter OptionalBooleanValue(string propertyName) =>
         element => element.TryGetProperty(propertyName, out var property) && property.ValueKind is JsonValueKind.True or JsonValueKind.False
             ? (property.GetBoolean() ? "true" : "false")
             : null;
@@ -673,14 +749,14 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
-    static string CreateTurkicScaleArrayExpression(JsonElement arrayElement)
+    static string CreateHarmonyOrdinalScaleArrayExpression(JsonElement arrayElement)
     {
         if (arrayElement.ValueKind != JsonValueKind.Array)
         {
             throw new InvalidOperationException("Expected JSON array.");
         }
 
-        var builder = new StringBuilder("new TurkicScale[] { ");
+        var builder = new StringBuilder("new HarmonyOrdinalScale[] { ");
         var first = true;
 
         foreach (var item in arrayElement.EnumerateArray())
@@ -722,14 +798,14 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
-    static string CreateMalayScaleArrayExpression(JsonElement arrayElement)
+    static string CreateContractedOneScaleArrayExpression(JsonElement arrayElement)
     {
         if (arrayElement.ValueKind != JsonValueKind.Array)
         {
             throw new InvalidOperationException("Expected JSON array.");
         }
 
-        var builder = new StringBuilder("new MalayFamilyNumberToWordsConverter.Scale[] { ");
+        var builder = new StringBuilder("new ContractedOneScaleNumberToWordsConverter.Scale[] { ");
         var first = true;
 
         foreach (var item in arrayElement.EnumerateArray())
@@ -766,40 +842,40 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "LinkingScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("name"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("name"));
 
     static string CreateLinkingSuffixRuleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "LinkingSuffixRule",
             arrayElement,
-            RequiredStringArgument("suffix"),
-            RequiredStringArgument("replacement"));
+            RequiredStringValue("suffix"),
+            RequiredStringValue("replacement"));
 
     static string CreateAgglutinativeOrdinalScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "AgglutinativeOrdinalScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("singularCardinal"),
-            RequiredStringArgument("pluralCardinal"),
-            RequiredStringArgument("ordinalWord"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("singularCardinal"),
+            RequiredStringValue("pluralCardinal"),
+            RequiredStringValue("ordinalWord"));
 
     static string CreateContextualDecimalScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "ContextualDecimalScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("name"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("name"));
 
-    static string CreateEnglishFamilyScaleArrayExpression(JsonElement arrayElement)
+    static string CreateConjunctionalScaleArrayExpression(JsonElement arrayElement)
     {
         if (arrayElement.ValueKind != JsonValueKind.Array)
         {
             throw new InvalidOperationException("Expected JSON array.");
         }
 
-        var builder = new StringBuilder("new EnglishFamilyScale[] { ");
+        var builder = new StringBuilder("new ConjunctionalScale[] { ");
         var first = true;
 
         foreach (var item in arrayElement.EnumerateArray())
@@ -832,19 +908,19 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "JoinedScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("name"),
-            OptionalTrueArgument("omitOneWhenSingular"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("name"),
+            OptionalTrueValue("omitOneWhenSingular"));
 
     static string CreateOrdinalPrefixScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "OrdinalPrefixScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("plural"),
-            RequiredStringArgument("ordinalPrefix"),
-            RequiredEnumArgument("gender", "GrammaticalGender"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredStringValue("ordinalPrefix"),
+            RequiredEnumValue("gender", "GrammaticalGender"));
 
     static string CreateNullableIntFrozenSetExpression(JsonElement element, string propertyName)
     {
@@ -888,22 +964,22 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "EastSlavicScale",
             arrayElement,
-            RequiredInt64Argument("value", "UL"),
-            RequiredEnumArgument("gender", "GrammaticalGender"),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("paucal"),
-            RequiredStringArgument("plural"),
-            OptionalStringArgumentOmitIfMissing("ordinalStem"));
+            RequiredInt64Value("value", "UL"),
+            RequiredEnumValue("gender", "GrammaticalGender"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("paucal"),
+            RequiredStringValue("plural"),
+            OptionalStringValueOmitIfMissing("ordinalStem"));
 
     static string CreatePluralizedScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "PluralizedScale",
             arrayElement,
-            RequiredInt64Argument("value", "UL"),
-            RequiredEnumArgument("countGender", "GrammaticalGender"),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("paucal"),
-            RequiredStringArgument("plural"),
+            RequiredInt64Value("value", "UL"),
+            RequiredEnumValue("countGender", "GrammaticalGender"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("paucal"),
+            RequiredStringValue("plural"),
             element =>
             {
                 if (GetOptionalString(element, "ordinalStem") is { } ordinalStem)
@@ -915,7 +991,7 @@ public sealed partial class HumanizerSourceGenerator
                     ? "null"
                     : null;
             },
-            OptionalBooleanArgument("omitLeadingOne"));
+            OptionalBooleanValue("omitLeadingOne"));
 
     static string CreateEastSlavicGenderEndingExpression(JsonElement objectElement) =>
         "new(" +
@@ -927,150 +1003,150 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "SouthSlavicScale",
             arrayElement,
-            RequiredInt64Argument("value", "UL"),
-            RequiredEnumArgument("gender", "GrammaticalGender"),
-            OptionalStringArgumentOrFallback("oneForm", "singular"),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("paucal"),
-            RequiredStringArgument("plural"),
-            OptionalStringArgument("dual"),
-            OptionalStringArgument("trialQuadral"));
+            RequiredInt64Value("value", "UL"),
+            RequiredEnumValue("gender", "GrammaticalGender"),
+            OptionalStringValueOrFallback("oneForm", "singular"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("paucal"),
+            RequiredStringValue("plural"),
+            OptionalStringValue("dual"),
+            OptionalStringValue("trialQuadral"));
 
     static string CreateInvertedTensScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "InvertedTensScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("oneForm"),
-            RequiredStringArgument("manyForm"),
-            RequiredStringArgument("countJoiner"),
-            RequiredStringArgument("remainderSeparator"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("oneForm"),
+            RequiredStringValue("manyForm"),
+            RequiredStringValue("countJoiner"),
+            RequiredStringValue("remainderSeparator"));
 
-    static string CreateScandinavianScaleArrayExpression(JsonElement arrayElement)
+    static string CreateScaleStrategyScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
-            "ScandinavianScale",
+            "ScaleStrategyScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("name"),
-            RequiredStringArgument("plural"),
-            OptionalStringArgument("prefix"),
-            OptionalStringArgument("postfix"),
-            OptionalStringArgument("pluralSuffix"),
-            OptionalStringArgument("ordinalSuffix"),
-            BooleanArgument("displayOneUnit"),
-            OptionalEnumArgument("gender", "GrammaticalGender", "masculine"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("name"),
+            RequiredStringValue("plural"),
+            OptionalStringValue("prefix"),
+            OptionalStringValue("postfix"),
+            OptionalStringValue("pluralSuffix"),
+            OptionalStringValue("ordinalSuffix"),
+            BooleanValue("displayOneUnit"),
+            OptionalEnumValue("gender", "GrammaticalGender", "masculine"));
 
-    static string CreateGermanFamilyScaleArrayExpression(JsonElement arrayElement)
+    static string CreateUnitLeadingCompoundScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
-            "GermanFamilyScale",
+            "UnitLeadingCompoundScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            BooleanArgument("addSpaceBeforeNextPart"),
-            OptionalEnumArgument("countGender", "GrammaticalGender", "masculine"),
-            RequiredStringArgument("singularCardinal"),
-            RequiredStringArgument("pluralCardinalFormat"),
+            RequiredInt64Value("value"),
+            BooleanValue("addSpaceBeforeNextPart"),
+            OptionalEnumValue("countGender", "GrammaticalGender", "masculine"),
+            RequiredStringValue("singularCardinal"),
+            RequiredStringValue("pluralCardinalFormat"),
             static element => element.TryGetProperty("ordinalSingular", out var ordinalSingular) && ordinalSingular.ValueKind == JsonValueKind.Array
                 ? CreateStringArrayExpression(ordinalSingular)
                 : throw new InvalidOperationException("Missing required property 'ordinalSingular'."),
             static element => element.TryGetProperty("ordinalPlural", out var ordinalPlural) && ordinalPlural.ValueKind == JsonValueKind.Array
                 ? CreateStringArrayExpression(ordinalPlural)
                 : throw new InvalidOperationException("Missing required property 'ordinalPlural'."),
-            OptionalStringArgument("countWordFormNextWord"));
+            OptionalStringValue("countWordFormNextWord"));
 
     static string CreateConjoinedGenderedScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "ConjoinedGenderedScale",
             arrayElement,
-            RequiredInt64Argument("divisor"),
-            RequiredEnumArgument("gender", "GrammaticalGender"),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("plural"),
-            RequiredStringArgument("ordinalStem"));
+            RequiredInt64Value("divisor"),
+            RequiredEnumValue("gender", "GrammaticalGender"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredStringValue("ordinalStem"));
 
     static string CreateSegmentedScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "SegmentedScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("plural"),
-            RequiredEnumArgument("countVariant", "SegmentedScaleVariant"),
-            RequiredEnumArgument("singularRemainderVariant", "SegmentedScaleVariant"),
-            RequiredEnumArgument("pluralRemainderVariant", "SegmentedScaleVariant"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredEnumValue("countVariant", "SegmentedScaleVariant"),
+            RequiredEnumValue("singularRemainderVariant", "SegmentedScaleVariant"),
+            RequiredEnumValue("pluralRemainderVariant", "SegmentedScaleVariant"));
 
     static string CreateTerminalOrdinalScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "TerminalOrdinalScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("exactSingularCardinal"),
-            RequiredStringArgument("singularWithRemainderCardinal"),
-            RequiredStringArgument("pluralCardinal"),
-            RequiredStringArgument("ordinalStem"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("exactSingularCardinal"),
+            RequiredStringValue("singularWithRemainderCardinal"),
+            RequiredStringValue("pluralCardinal"),
+            RequiredStringValue("ordinalStem"));
 
     static string CreateConstructStateScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "ConstructStateScale",
             arrayElement,
             element => checked((int)GetRequiredInt64(element, "value")).ToString(CultureInfo.InvariantCulture),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("dualPrefix"),
-            RequiredEnumArgument("countGender", "GrammaticalGender"));
+            RequiredStringValue("singular"),
+            RequiredStringValue("dualPrefix"),
+            RequiredEnumValue("countGender", "GrammaticalGender"));
 
     static string CreateHyphenatedScaleExpression(JsonElement element) =>
         CreateTargetTypedConstructorExpression(
             element,
-            RequiredInt64Argument("divisor"),
-            RequiredStringArgument("cardinal"),
-            RequiredStringArgument("ordinal"));
+            RequiredInt64Value("divisor"),
+            RequiredStringValue("cardinal"),
+            RequiredStringValue("ordinal"));
 
     static string CreateHyphenatedScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "HyphenatedScale",
             arrayElement,
-            RequiredInt64Argument("divisor"),
-            RequiredStringArgument("cardinal"),
-            RequiredStringArgument("ordinal"));
+            RequiredInt64Value("divisor"),
+            RequiredStringValue("cardinal"),
+            RequiredStringValue("ordinal"));
 
     static string CreateDualFormScaleExpression(JsonElement element) =>
         CreateTargetTypedConstructorExpression(
             element,
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("dual"),
-            RequiredStringArgument("plural"),
-            BooleanArgument("usePrefixMapForLowerDigits"));
+            RequiredStringValue("singular"),
+            RequiredStringValue("dual"),
+            RequiredStringValue("plural"),
+            BooleanValue("usePrefixMapForLowerDigits"));
 
     static string CreateTriadScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "TriadScaleNumberToWordsConverter.TriadScale",
             arrayElement,
             element => checked((int)GetRequiredInt64(element, "value")).ToString(CultureInfo.InvariantCulture),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("plural"),
-            RequiredStringArgument("countToScaleJoiner"),
-            BooleanArgument("countUsesFinalAccent"),
-            BooleanArgument("appendTrailingSpace"),
-            RequiredStringArgument("ordinalCompactionMatch"),
-            RequiredStringArgument("ordinalCompactionReplacement"),
-            BooleanArgument("removeLeadingOneOnExactOrdinal"),
-            RequiredStringArgument("exactOrdinalSuffix"));
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredStringValue("countToScaleJoiner"),
+            BooleanValue("countUsesFinalAccent"),
+            BooleanValue("appendTrailingSpace"),
+            RequiredStringValue("ordinalCompactionMatch"),
+            RequiredStringValue("ordinalCompactionReplacement"),
+            BooleanValue("removeLeadingOneOnExactOrdinal"),
+            RequiredStringValue("exactOrdinalSuffix"));
 
     static string CreateGenderedScaleOrdinalArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "GenderedScaleOrdinalNumberToWordsConverter.Scale",
             arrayElement,
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("plural"),
-            RequiredEnumArgument("countGender", "GrammaticalGender"));
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredEnumValue("countGender", "GrammaticalGender"));
 
     static string CreateLongScaleWordArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "LongScaleStemOrdinalNumberToWordsConverter.LargeScale",
             arrayElement,
-            RequiredInt64Argument("value"),
-            RequiredStringArgument("singularPrefix"),
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("plural"));
+            RequiredInt64Value("value"),
+            RequiredStringValue("singularPrefix"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"));
 
     static string CreateWestSlavicScaleFormsExpression(JsonElement objectElement)
     {
@@ -1162,22 +1238,22 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "SuffixScaleWord",
             arrayElement,
-            RequiredStringArgument("singular"),
-            RequiredStringArgument("plural"),
-            RequiredInt64Argument("value"));
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredInt64Value("value"));
 
     static string CreatePrefixedScaleWordArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "PrefixedScaleWord",
             arrayElement,
-            RequiredStringArgument("token"),
+            RequiredStringValue("token"),
             element => checked((int)GetRequiredInt64(element, "value")).ToString(CultureInfo.InvariantCulture));
 
     static string CreatePrefixedTensRuleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "PrefixedTensRule",
             arrayElement,
-            RequiredStringArgument("prefix"),
+            RequiredStringValue("prefix"),
             element => checked((int)GetRequiredInt64(element, "baseValue")).ToString(CultureInfo.InvariantCulture));
 
     static string CreateIntFrozenSetExpression(JsonElement arrayElement)
@@ -1257,3 +1333,4 @@ public sealed partial class HumanizerSourceGenerator
         };
 
 }
+

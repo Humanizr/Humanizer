@@ -19,25 +19,34 @@ public sealed partial class HumanizerSourceGenerator
     {
         readonly ImmutableArray<OrdinalDateProfileDefinition> profiles = profiles;
 
-        public static OrdinalDateProfileCatalogInput Create(ImmutableArray<JsonProfileFile?> files)
+        public static OrdinalDateProfileCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
             var profiles = ImmutableArray.CreateBuilder<OrdinalDateProfileDefinition>();
-            foreach (var file in files)
+            var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var locale in localeCatalog.Locales)
             {
-                if (file is null)
-                {
-                    continue;
-                }
-
-                using var document = JsonDocument.Parse(file.FileText);
-                var root = document.RootElement;
-                profiles.Add(new OrdinalDateProfileDefinition(
-                    file.ProfileName,
-                    GetRequiredString(root, "pattern"),
-                    GetRequiredString(root, "dayMode")));
+                AddProfile(profiles, locale.DateToOrdinalWords, seenProfiles);
+                AddProfile(profiles, locale.DateOnlyToOrdinalWords, seenProfiles);
             }
 
             return new OrdinalDateProfileCatalogInput(profiles.ToImmutable());
+        }
+
+        static void AddProfile(
+            ImmutableArray<OrdinalDateProfileDefinition>.Builder profiles,
+            LocaleFeature? feature,
+            HashSet<string> seenProfiles)
+        {
+            if (feature is not { UsesGeneratedProfile: true } ||
+                !seenProfiles.Add(feature.ProfileName!))
+            {
+                return;
+            }
+
+            profiles.Add(new OrdinalDateProfileDefinition(
+                feature.ProfileName!,
+                GetRequiredString(feature.ProfileRoot, "pattern"),
+                GetRequiredString(feature.ProfileRoot, "dayMode")));
         }
 
         public void Emit(SourceProductionContext context)

@@ -60,13 +60,22 @@ public sealed partial class HumanizerSourceGenerator
         ImmutableArray<string> negativeSuffixes,
         ImmutableArray<string> ordinalPrefixes,
         ImmutableArray<string> ignoredTokens,
+        ImmutableArray<string> leadingTokenPrefixesToTrim,
         ImmutableArray<string> multiplierTokens,
         ImmutableArray<string> tokenSuffixesToStrip,
         ImmutableArray<string> ordinalAbbreviationSuffixes,
+        ImmutableArray<string> teenSuffixTokens,
+        ImmutableArray<string> hundredSuffixTokens,
         ImmutableArray<string> aliases,
         bool allowTerminalOrdinalToken,
         bool useHundredMultiplier,
         bool allowInvariantIntegerInput,
+        long? teenBaseValue,
+        long? hundredSuffixValue,
+        long? unitTokenMinValue,
+        long? unitTokenMaxValue,
+        long? hundredSuffixMinValue,
+        long? hundredSuffixMaxValue,
         long? scaleThreshold,
         ImmutableArray<TokenMapEntry> cardinalEntries)
     {
@@ -82,13 +91,22 @@ public sealed partial class HumanizerSourceGenerator
         public ImmutableArray<string> NegativeSuffixes { get; } = negativeSuffixes;
         public ImmutableArray<string> OrdinalPrefixes { get; } = ordinalPrefixes;
         public ImmutableArray<string> IgnoredTokens { get; } = ignoredTokens;
+        public ImmutableArray<string> LeadingTokenPrefixesToTrim { get; } = leadingTokenPrefixesToTrim;
         public ImmutableArray<string> MultiplierTokens { get; } = multiplierTokens;
         public ImmutableArray<string> TokenSuffixesToStrip { get; } = tokenSuffixesToStrip;
         public ImmutableArray<string> OrdinalAbbreviationSuffixes { get; } = ordinalAbbreviationSuffixes;
+        public ImmutableArray<string> TeenSuffixTokens { get; } = teenSuffixTokens;
+        public ImmutableArray<string> HundredSuffixTokens { get; } = hundredSuffixTokens;
         public ImmutableArray<string> Aliases { get; } = aliases;
         public bool AllowTerminalOrdinalToken { get; } = allowTerminalOrdinalToken;
         public bool UseHundredMultiplier { get; } = useHundredMultiplier;
         public bool AllowInvariantIntegerInput { get; } = allowInvariantIntegerInput;
+        public long? TeenBaseValue { get; } = teenBaseValue;
+        public long? HundredSuffixValue { get; } = hundredSuffixValue;
+        public long? UnitTokenMinValue { get; } = unitTokenMinValue;
+        public long? UnitTokenMaxValue { get; } = unitTokenMaxValue;
+        public long? HundredSuffixMinValue { get; } = hundredSuffixMinValue;
+        public long? HundredSuffixMaxValue { get; } = hundredSuffixMaxValue;
         public long? ScaleThreshold { get; } = scaleThreshold;
         public ImmutableArray<TokenMapEntry> CardinalEntries { get; } = cardinalEntries;
     }

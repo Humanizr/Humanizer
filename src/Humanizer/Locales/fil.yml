@@ -1,0 +1,145 @@
+# Locale-owned generator data for fil.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'at'
+numberToWords:
+  engine: 'linking-scale'
+  zeroWord: 'sero'
+  minusWord: 'minus'
+  conjunctionWord: 'at'
+  tensRemainderJoiner: '''t '
+  unitsMap:
+    - 'sero'
+    - 'isa'
+    - 'dalawa'
+    - 'tatlo'
+    - 'apat'
+    - 'lima'
+    - 'anim'
+    - 'pito'
+    - 'walo'
+    - 'siyam'
+    - 'sampu'
+    - 'labing-isa'
+    - 'labing-dalawa'
+    - 'labing-tatlo'
+    - 'labing-apat'
+    - 'labing-lima'
+    - 'labing-anim'
+    - 'labing-pito'
+    - 'labing-walo'
+    - 'labing-siyam'
+  tensMap:
+    2: 'dalawampu'
+    3: 'tatlumpu'
+    4: 'apatnapu'
+    5: 'limampu'
+    6: 'animnapu'
+    7: 'pitumpu'
+    8: 'walumpu'
+    9: 'siyamnapu'
+  hundredWords:
+    1: 'isang daan'
+    2: 'dalawang daan'
+    3: 'tatlong daan'
+    4: 'apat na daan'
+    5: 'limang daan'
+    6: 'anim na daan'
+    7: 'pitong daan'
+    8: 'walong daan'
+    9: 'siyam na daan'
+  scalePrefixes:
+    1: 'isang'
+    2: 'dalawang'
+    3: 'tatlong'
+    4: 'apat na'
+    5: 'limang'
+    6: 'anim na'
+    7: 'pitong'
+    8: 'walong'
+    9: 'siyam na'
+  scales:
+    -
+      value: 1000000000000000000
+      name: 'kwintilyon'
+    -
+      value: 1000000000000000
+      name: 'kwadrilyon'
+    -
+      value: 1000000000000
+      name: 'trilyon'
+    -
+      value: 1000000000
+      name: 'bilyon'
+    -
+      value: 1000000
+      name: 'milyon'
+    -
+      value: 1000
+      name: 'libo'
+  scaleLinkRules:
+    -
+      suffix: ' isa'
+      replacement: ' isang'
+    -
+      suffix: ' dalawa'
+      replacement: ' dalawang'
+    -
+      suffix: ' tatlo'
+      replacement: ' tatlong'
+    -
+      suffix: ' apat'
+      replacement: ' apat na'
+    -
+      suffix: ' lima'
+      replacement: ' limang'
+    -
+      suffix: ' anim'
+      replacement: ' anim na'
+    -
+      suffix: ' pito'
+      replacement: ' pitong'
+    -
+      suffix: ' walo'
+      replacement: ' walong'
+    -
+      suffix: ' siyam'
+      replacement: ' siyam na'
+wordsToNumber:
+  engine: 'linking-affix'
+  cardinalMap:
+    sero: 0
+    isa: 1
+    dalawa: 2
+    tatlo: 3
+    apat: 4
+    lima: 5
+    anim: 6
+    pito: 7
+    walo: 8
+    siyam: 9
+    sampu: 10
+    labing: 10
+    dalawampu: 20
+    tatlumpu: 30
+    apatnapu: 40
+    limampu: 50
+    animnapu: 60
+    pitumpu: 70
+    walumpu: 80
+    siyamnapu: 90
+    daan: 100
+    libo: 1000
+    milyon: 1000000
+    bilyon: 1000000000
+  teenPrefix: 'labing'
+  teenBaseValue: 10
+  linkedSuffixes:
+    - 'ng'
+    - 't'
+  ignoredTokens:
+    - 'at'
+  negativePrefixes:
+    - 'minus '

@@ -1,6 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: en
-numberToWords: dutch
-ordinalizer: dutch
-wordsToNumber: dutch

@@ -1,0 +1,194 @@
+# Locale-owned generator data for mt.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'u'
+formatter:
+  engine: 'profiled'
+  resourceKeyOverrides:
+    -
+      number: 2
+      suffix: '_Dual'
+      keys:
+        - 'DateHumanize_MultipleDaysAgo'
+        - 'DateHumanize_MultipleDaysFromNow'
+        - 'DateHumanize_MultipleHoursAgo'
+        - 'DateHumanize_MultipleHoursFromNow'
+        - 'DateHumanize_MultipleMonthsAgo'
+        - 'DateHumanize_MultipleMonthsFromNow'
+        - 'DateHumanize_MultipleYearsAgo'
+        - 'DateHumanize_MultipleYearsFromNow'
+        - 'TimeSpanHumanize_MultipleDays'
+        - 'TimeSpanHumanize_MultipleYears'
+        - 'TimeSpanHumanize_MultipleMonths'
+        - 'TimeSpanHumanize_MultipleHours'
+        - 'TimeSpanHumanize_MultipleWeeks'
+numberToWords:
+  engine: 'dual-form-scale'
+  conjunction: 'u'
+  minusSuffix: 'inqas minn żero'
+  feminineOneWord: 'waħda'
+  hundredWord: 'mija'
+  dualHundredsWord: 'mitejn'
+  hundredPrefixWord: 'mitt'
+  ordinalOverrideMap:
+    - '0'
+    - 'l-ewwel'
+    - 'it-tieni'
+    - 'it-tielet'
+    - 'ir-raba'''
+    - 'il-ħames'
+    - 'is-sitt'
+    - 'is-seba'''
+    - 'it-tmien'
+    - 'id-disa'''
+    - 'l-għaxar'
+    - 'il-ħdax'
+    - 'it-tnax'
+    - 'it-tlettax'
+    - 'l-erbatax'
+    - 'il-ħmistax'
+    - 'is-sittax'
+    - 'is-sbatax'
+    - 'it-tmintax'
+    - 'id-dsatax'
+    - 'l-għoxrin'
+  unitsMap:
+    - 'żero'
+    - 'wieħed'
+    - 'tnejn'
+    - 'tlieta'
+    - 'erbgħa'
+    - 'ħamsa'
+    - 'sitta'
+    - 'sebgħa'
+    - 'tmienja'
+    - 'disgħa'
+    - 'għaxra'
+    - 'ħdax'
+    - 'tnax'
+    - 'tlettax'
+    - 'erbatax'
+    - 'ħmistax'
+    - 'sittax'
+    - 'sbatax'
+    - 'tmintax'
+    - 'dsatax'
+  tensMap:
+    - 'zero'
+    - 'għaxra'
+    - 'għoxrin'
+    - 'tletin'
+    - 'erbgħin'
+    - 'ħamsin'
+    - 'sittin'
+    - 'sebgħin'
+    - 'tmenin'
+    - 'disgħin'
+  hundredsMap:
+    3: 'tlett'
+    4: 'erbgħa'
+    5: 'ħames'
+    6: 'sitt'
+    7: 'sebgħa'
+    8: 'tminn'
+    9: 'disgħa'
+    10: 'għaxar'
+  prefixMap:
+    3: 'tlett'
+    4: 'erbat'
+    5: 'ħamest'
+    6: 'sitt'
+    7: 'sebat'
+    8: 'tmint'
+    9: 'disat'
+    10: 'għaxart'
+    11: 'ħdax-il'
+    12: 'tnax-il'
+    13: 'tletax-il'
+    14: 'erbatax-il'
+    15: 'ħmistax-il'
+    16: 'sittax-il'
+    17: 'sbatax-il'
+    18: 'tmintax-il'
+    19: 'dsatax-il'
+  thousandScale:
+    singular: 'elf'
+    dual: 'elfejn'
+    plural: 'elef'
+    usePrefixMapForLowerDigits: true
+  millionScale:
+    singular: 'miljun'
+    dual: 'żewġ miljuni'
+    plural: 'miljuni'
+    usePrefixMapForLowerDigits: false
+  billionScale:
+    singular: 'biljun'
+    dual: 'żewġ biljuni'
+    plural: 'biljuni'
+    usePrefixMapForLowerDigits: false
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'LowercaseRemovePeriods'
+  cardinalMap:
+    'żero': 0
+    zero: 0
+    'wieħed': 1
+    wiehed: 1
+    'waħda': 1
+    wahda: 1
+    tnejn: 2
+    tlieta: 3
+    tlett: 3
+    'erbgħa': 4
+    erbgha: 4
+    'ħames': 5
+    hames: 5
+    sitt: 6
+    'sebgħa': 7
+    sebgha: 7
+    tmienja: 8
+    tminn: 8
+    'disgħa': 9
+    disgha: 9
+    'għaxra': 10
+    ghaxra: 10
+    'ħdax': 11
+    hdax: 11
+    tnax: 12
+    tlettax: 13
+    erbatax: 14
+    'ħmistax': 15
+    hmistax: 15
+    sittax: 16
+    sbatax: 17
+    tmintax: 18
+    dsatax: 19
+    'għoxrin': 20
+    ghoxrin: 20
+    tletin: 30
+    'erbgħin': 40
+    erbghin: 40
+    'ħamsin': 50
+    hamsin: 50
+    sittin: 60
+    'sebgħin': 70
+    sebghin: 70
+    'disgħin': 90
+    disghin: 90
+    mija: 100
+    mitejn: 200
+    elf: 1000
+    elfejn: 2000
+    elef: 1000
+    miljun: 1000000
+    miljuni: 1000000
+    biljun: 1000000000
+    biljuni: 1000000000
+  negativeSuffixes:
+    - ' inqas minn żero'
+    - ' inqas minn zero'
+  ignoredTokens:
+    - 'u'
+  useHundredMultiplier: true

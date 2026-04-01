@@ -1,0 +1,207 @@
+# Locale-owned generator data for sv.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'och'
+formatter:
+  engine: 'profiled'
+  dataUnitDetector: 'singular-plural'
+  dataUnitSuffixes:
+    singular: '_Singular'
+numberToWords:
+  engine: 'scale-strategy'
+  cardinalStrategy: 'swedish'
+  ordinalStrategy: 'swedish'
+  maximumValue: 2147483647
+  defaultGender: 'neuter'
+  zeroWord: 'noll'
+  minusWord: 'minus'
+  oneDefault: 'ett'
+  oneMasculine: 'en'
+  oneFeminine: 'ett'
+  oneNeuter: 'ett'
+  tensLinker: ''
+  largeScaleRemainderJoiner: ''
+  exactLargeScaleOrdinalSuffix: ''
+  exactDefaultOrdinalSuffix: ''
+  tensOrdinalTrimEndCharacters: ''
+  tensOrdinalSuffix: 'nde'
+  shortOrdinalUpperBoundExclusive: 0
+  shortOrdinalTrimEndCharacters: ''
+  shortOrdinalTrimmedSuffix: ''
+  shortOrdinalSuffix: ''
+  hundredWord: 'hundra'
+  hundredCompositeSingularWord: 'hundra'
+  thousandWord: 'tusen'
+  thousandSingularWord: 'ett tusen'
+  thousandCompositeSingularWord: 'ett tusen'
+  unitsMap:
+    - 'noll'
+    - 'ett'
+    - 'två'
+    - 'tre'
+    - 'fyra'
+    - 'fem'
+    - 'sex'
+    - 'sju'
+    - 'åtta'
+    - 'nio'
+    - 'tio'
+    - 'elva'
+    - 'tolv'
+    - 'tretton'
+    - 'fjorton'
+    - 'femton'
+    - 'sexton'
+    - 'sjutton'
+    - 'arton'
+    - 'nitton'
+  tensMap:
+    - 'noll'
+    - 'tio'
+    - 'tjugo'
+    - 'trettio'
+    - 'fyrtio'
+    - 'femtio'
+    - 'sextio'
+    - 'sjuttio'
+    - 'åttio'
+    - 'nittio'
+  hundredUnitMap: []
+  scales:
+    -
+      value: 1000000000
+      name: 'miljard'
+      plural: 'miljard'
+      prefix: ' '
+      postfix: ' '
+      pluralSuffix: 'er'
+      ordinalSuffix: 'de'
+      displayOneUnit: true
+      gender: 'masculine'
+    -
+      value: 1000000
+      name: 'miljon'
+      plural: 'miljon'
+      prefix: ' '
+      postfix: ' '
+      pluralSuffix: 'er'
+      ordinalSuffix: 'te'
+      displayOneUnit: true
+      gender: 'masculine'
+    -
+      value: 1000
+      name: 'tusen'
+      plural: 'tusen'
+      prefix: ' '
+      postfix: ' '
+      ordinalSuffix: 'de'
+      displayOneUnit: true
+      gender: 'neuter'
+    -
+      value: 100
+      name: 'hundra'
+      plural: 'hundra'
+      prefix: ''
+      postfix: ''
+      ordinalSuffix: 'de'
+      displayOneUnit: false
+      gender: 'neuter'
+  ordinalExceptions:
+    '0': 'nollte'
+    '1': 'första'
+    '2': 'andra'
+    '3': 'tredje'
+    '4': 'fjärde'
+    '5': 'femte'
+    '6': 'sjätte'
+    '7': 'sjunde'
+    '8': 'åttonde'
+    '9': 'nionde'
+    '10': 'tionde'
+    '11': 'elfte'
+    '12': 'tolfte'
+    '13': 'trettonde'
+    '14': 'fjortonde'
+    '15': 'femtonde'
+    '16': 'sextonde'
+    '17': 'sjuttonde'
+    '18': 'artonde'
+    '19': 'nittonde'
+    '20': 'tjugonde'
+    '30': 'trettionde'
+    '40': 'fyrtionde'
+    '50': 'femtionde'
+    '60': 'sextionde'
+    '70': 'sjuttionde'
+    '80': 'åttionde'
+    '90': 'nittionde'
+ordinalizer:
+  engine: 'modulo-suffix'
+  defaultSuffix: ':e'
+  useAbsoluteValue: true
+  lastTwoDigitsRange:
+    start: 11
+    end: 19
+    suffix: ':e'
+  lastDigitSuffixes:
+    '1': ':a'
+    '2': ':a'
+wordsToNumber:
+  engine: 'compound-scale'
+  cardinalMap:
+    noll: 0
+    ett: 1
+    en: 1
+    'två': 2
+    tre: 3
+    fyra: 4
+    fem: 5
+    sex: 6
+    sju: 7
+    'åtta': 8
+    nio: 9
+    tio: 10
+    elva: 11
+    tolv: 12
+    tretton: 13
+    fjorton: 14
+    femton: 15
+    sexton: 16
+    sjutton: 17
+    arton: 18
+    nitton: 19
+    tjugo: 20
+    trettio: 30
+    fyrtio: 40
+    femtio: 50
+    sextio: 60
+    sjuttio: 70
+    'åttio': 80
+    nittio: 90
+    hundra: 100
+    tusen: 1000
+    miljon: 1000000
+    miljoner: 1000000
+    miljard: 1000000000
+    miljarder: 1000000000
+  tens:
+    - 'tjugo'
+    - 'trettio'
+    - 'fyrtio'
+    - 'femtio'
+    - 'sextio'
+    - 'sjuttio'
+    - 'åttio'
+    - 'nittio'
+  largeScales:
+    - 'miljard'
+    - 'miljoner'
+    - 'miljon'
+    - 'tusen'
+    - 'hundra'
+  ignoredToken: ''
+  ordinalNumberToWordsKind: 'self'
+  negativePrefixes:
+    - 'minus '

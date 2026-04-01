@@ -1,0 +1,87 @@
+# Locale-owned generator data for vi.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'và'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'contextual-decimal'
+  zeroWord: 'không'
+  minusWord: 'trừ '
+  ordinalPrefix: 'thứ '
+  tenWord: 'mười'
+  tensWord: 'mươi'
+  zeroTensWord: 'linh'
+  digitWords:
+    1: 'một'
+    2: 'hai'
+    3: 'ba'
+    4: 'bốn'
+    5: 'năm'
+    6: 'sáu'
+    7: 'bảy'
+    8: 'tám'
+    9: 'chín'
+  scales:
+    -
+      value: 1000000000
+      name: 'tỉ'
+    -
+      value: 1000000
+      name: 'triệu'
+    -
+      value: 1000
+      name: 'nghìn'
+    -
+      value: 100
+      name: 'trăm'
+  teenUnitOverrides:
+    '5': 'lăm'
+  postTensUnitOverrides:
+    '1': 'mốt'
+    '4': 'tư'
+    '5': 'lăm'
+  ordinalUnitOverrides:
+    '1': 'nhất'
+    '2': 'nhì'
+    '4': 'tư'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'CollapseWhitespace'
+  cardinalMap:
+    'không': 0
+    'một': 1
+    'mốt': 1
+    hai: 2
+    ba: 3
+    'bốn': 4
+    'tư': 4
+    'năm': 5
+    'lăm': 5
+    'sáu': 6
+    'bảy': 7
+    'tám': 8
+    'chín': 9
+    'mười': 10
+    'mươi': 10
+    'trăm': 100
+    'nghìn': 1000
+    'triệu': 1000000
+    'tỉ': 1000000000
+  ordinalMap:
+    'nhất': 1
+    'nhì': 2
+    'tư': 4
+  negativePrefixes:
+    - 'trừ '
+  ordinalPrefixes:
+    - 'thứ '
+  ignoredTokens:
+    - 'linh'
+  multiplierTokens:
+    - 'mươi'
+  allowTerminalOrdinalToken: true
+  useHundredMultiplier: true

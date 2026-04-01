@@ -6,6 +6,9 @@ class GermanTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
+        // German sits in a separate spoken-time family built around "vor/nach halb" buckets and a
+        // plain numeric fallback for uncommon minute values. That mix still does not match the
+        // existing generated clock families cleanly enough to justify a larger schema.
         switch (time)
         {
             case { Hour: 0, Minute: 0 }:
@@ -34,6 +37,8 @@ class GermanTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             50 => $"zehn vor {(normalizedHour + 1).ToWords()}",
             55 => $"fünf vor {(normalizedHour + 1).ToWords()}",
             60 => $"{(normalizedHour + 1).ToWords()} Uhr",
+            // When the spoken bucket rules do not apply, German falls back to a direct numeric
+            // reading instead of trying to force every minute into a relative-time phrase.
             _ => $"{normalizedHour.ToWords()} Uhr {normalizedMinutes.ToWords()}"
         };
     }

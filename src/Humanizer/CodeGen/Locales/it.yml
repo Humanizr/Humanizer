@@ -1,7 +1,0 @@
-﻿collectionFormatter:
-  kind: conjunction
-  value: e
-formatter: italian
-numberToWords: italian
-ordinalizer: italian
-wordsToNumber: italian

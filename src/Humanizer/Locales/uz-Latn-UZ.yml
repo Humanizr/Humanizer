@@ -1,0 +1,94 @@
+# Locale-owned generator data for uz-Latn-UZ.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'va'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+numberToWords:
+  engine: 'harmony-ordinal'
+  minimumValue: -2147483648
+  maximumValue: 2147483647
+  minusWord: 'minus'
+  hundredWord: 'yuz'
+  hundredStrategy: 'allow-explicit-one-in-composite'
+  ordinalSuffixStrategy: 'final-character-membership'
+  softenTerminalTBeforeSuffix: false
+  dropTerminalVowelBeforeHarmonySuffix: false
+  scales:
+    -
+      value: 1000000000
+      name: 'milliard'
+    -
+      value: 1000000
+      name: 'million'
+      allowBareHundredInCount: true
+    -
+      value: 1000
+      name: 'ming'
+      allowBareHundredInCount: true
+  secondOrdinalSuffixCharacters: 'ia'
+  unitsMap:
+    - 'nol'
+    - 'bir'
+    - 'ikki'
+    - 'uch'
+    - 'to`rt'
+    - 'besh'
+    - 'olti'
+    - 'yetti'
+    - 'sakkiz'
+    - 'to`qqiz'
+  tensMap:
+    - 'nol'
+    - 'o`n'
+    - 'yigirma'
+    - 'o`ttiz'
+    - 'qirq'
+    - 'ellik'
+    - 'oltmish'
+    - 'yetmish'
+    - 'sakson'
+    - 'to`qson'
+  ordinalSuffixPair:
+    - 'inchi'
+    - 'nchi'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '-chi'
+wordsToNumber:
+  engine: 'token-map'
+  normalizationProfile: 'CollapseWhitespace'
+  cardinalMap:
+    nol: 0
+    bir: 1
+    ikkinchi: 2
+    ikki: 2
+    uch: 3
+    'to`rt': 4
+    besh: 5
+    olti: 6
+    yetti: 7
+    sakkiz: 8
+    'to`qqiz': 9
+    'o`n': 10
+    yigirma: 20
+    'o`ttiz': 30
+    qirq: 40
+    ellik: 50
+    oltmish: 60
+    yetmish: 70
+    sakson: 80
+    'to`qson': 90
+    yuz: 100
+    ming: 1000
+    million: 1000000
+    milliard: 1000000000
+  useHundredMultiplier: true
+  negativePrefixes:
+    - 'minus '
+  tokenSuffixesToStrip:
+    - 'inchi'
+    - 'nchi'

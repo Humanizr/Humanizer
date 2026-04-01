@@ -37,36 +37,37 @@ public sealed partial class HumanizerSourceGenerator
 
         public ImmutableArray<TokenMapLocaleDefinition> Locales => locales;
 
-        public static TokenMapWordsToNumberInput Create(ImmutableArray<TokenMapLocaleFile?> files)
+        public static TokenMapWordsToNumberInput Create(LocaleCatalogInput localeCatalog)
         {
             var diagnostics = ImmutableArray.CreateBuilder<Diagnostic>();
             var locales = ImmutableArray.CreateBuilder<TokenMapLocaleDefinition>();
+            var seenLocales = new HashSet<string>(StringComparer.Ordinal);
 
-            foreach (var file in files)
+            foreach (var locale in localeCatalog.Locales)
             {
-                if (file is null)
+                var feature = locale.WordsToNumber;
+                if (feature is not { Kind: "lexicon" })
                 {
                     continue;
                 }
 
                 try
                 {
-                    using var document = JsonDocument.Parse(file.FileText);
-                    if (document.RootElement.ValueKind != JsonValueKind.Object)
+                    if (feature.ProfileRoot.ValueKind != JsonValueKind.Object)
                     {
-                        diagnostics.Add(CreateDiagnostic(file.LocaleCode, file.LocaleCode, "must be a JSON object."));
+                        diagnostics.Add(CreateDiagnostic(locale.LocaleCode, locale.LocaleCode, "must be a YAML mapping."));
                         continue;
                     }
 
-                    var locale = TryCreateLocale(file.LocaleCode, document.RootElement, diagnostics);
-                    if (locale is not null)
+                    var tokenMapLocale = TryCreateLocale(locale.LocaleCode, feature.ProfileRoot, diagnostics);
+                    if (tokenMapLocale is not null && seenLocales.Add(tokenMapLocale.LocaleCode))
                     {
-                        locales.Add(locale);
+                        locales.Add(tokenMapLocale);
                     }
                 }
-                catch (JsonException exception)
+                catch (Exception exception)
                 {
-                    diagnostics.Add(CreateDiagnostic(file.LocaleCode, file.LocaleCode, "contains invalid JSON: " + exception.Message));
+                    diagnostics.Add(CreateDiagnostic(locale.LocaleCode, locale.LocaleCode, "contains invalid locale-owned YAML data: " + exception.Message));
                 }
             }
 
@@ -105,13 +106,22 @@ public sealed partial class HumanizerSourceGenerator
             var negativeSuffixes = ReadStringArray(localeCode, localeElement, "negativeSuffixes", diagnostics, ref hasErrors);
             var ordinalPrefixes = ReadStringArray(localeCode, localeElement, "ordinalPrefixes", diagnostics, ref hasErrors);
             var ignoredTokens = ReadStringArray(localeCode, localeElement, "ignoredTokens", diagnostics, ref hasErrors);
+            var leadingTokenPrefixesToTrim = ReadStringArray(localeCode, localeElement, "leadingTokenPrefixesToTrim", diagnostics, ref hasErrors);
             var multiplierTokens = ReadStringArray(localeCode, localeElement, "multiplierTokens", diagnostics, ref hasErrors);
             var tokenSuffixesToStrip = ReadStringArray(localeCode, localeElement, "tokenSuffixesToStrip", diagnostics, ref hasErrors);
             var ordinalAbbreviationSuffixes = ReadStringArray(localeCode, localeElement, "ordinalAbbreviationSuffixes", diagnostics, ref hasErrors);
+            var teenSuffixTokens = ReadStringArray(localeCode, localeElement, "teenSuffixTokens", diagnostics, ref hasErrors);
+            var hundredSuffixTokens = ReadStringArray(localeCode, localeElement, "hundredSuffixTokens", diagnostics, ref hasErrors);
             var aliases = ReadStringArray(localeCode, localeElement, "aliases", diagnostics, ref hasErrors);
             var allowTerminalOrdinalToken = ReadBoolean(localeCode, localeElement, "allowTerminalOrdinalToken", diagnostics, ref hasErrors);
             var useHundredMultiplier = ReadBoolean(localeCode, localeElement, "useHundredMultiplier", diagnostics, ref hasErrors);
             var allowInvariantIntegerInput = ReadBoolean(localeCode, localeElement, "allowInvariantIntegerInput", diagnostics, ref hasErrors);
+            var teenBaseValue = ReadLong(localeCode, localeElement, "teenBaseValue", diagnostics, ref hasErrors);
+            var hundredSuffixValue = ReadLong(localeCode, localeElement, "hundredSuffixValue", diagnostics, ref hasErrors);
+            var unitTokenMinValue = ReadLong(localeCode, localeElement, "unitTokenMinValue", diagnostics, ref hasErrors);
+            var unitTokenMaxValue = ReadLong(localeCode, localeElement, "unitTokenMaxValue", diagnostics, ref hasErrors);
+            var hundredSuffixMinValue = ReadLong(localeCode, localeElement, "hundredSuffixMinValue", diagnostics, ref hasErrors);
+            var hundredSuffixMaxValue = ReadLong(localeCode, localeElement, "hundredSuffixMaxValue", diagnostics, ref hasErrors);
             var scaleThreshold = ReadLong(localeCode, localeElement, "scaleThreshold", diagnostics, ref hasErrors);
             var cardinalEntries = ReadMap(localeCode, localeElement, "cardinalMap", diagnostics, ref hasErrors);
 
@@ -133,13 +143,22 @@ public sealed partial class HumanizerSourceGenerator
                 negativeSuffixes,
                 ordinalPrefixes,
                 ignoredTokens,
+                leadingTokenPrefixesToTrim,
                 multiplierTokens,
                 tokenSuffixesToStrip,
                 ordinalAbbreviationSuffixes,
+                teenSuffixTokens,
+                hundredSuffixTokens,
                 aliases,
                 allowTerminalOrdinalToken,
                 useHundredMultiplier,
                 allowInvariantIntegerInput,
+                teenBaseValue,
+                hundredSuffixValue,
+                unitTokenMinValue,
+                unitTokenMaxValue,
+                hundredSuffixMinValue,
+                hundredSuffixMaxValue,
                 scaleThreshold,
                 cardinalEntries);
         }
@@ -189,9 +208,12 @@ public sealed partial class HumanizerSourceGenerator
                 AppendStringArray(builder, "            ", "NegativeSuffixes", locale.NegativeSuffixes);
                 AppendStringArray(builder, "            ", "OrdinalPrefixes", locale.OrdinalPrefixes);
                 AppendStringArray(builder, "            ", "IgnoredTokens", locale.IgnoredTokens);
+                AppendStringArray(builder, "            ", "LeadingTokenPrefixesToTrim", locale.LeadingTokenPrefixesToTrim);
                 AppendStringArray(builder, "            ", "MultiplierTokens", locale.MultiplierTokens);
                 AppendStringArray(builder, "            ", "TokenSuffixesToStrip", locale.TokenSuffixesToStrip);
                 AppendStringArray(builder, "            ", "OrdinalAbbreviationSuffixes", locale.OrdinalAbbreviationSuffixes);
+                AppendStringArray(builder, "            ", "TeenSuffixTokens", locale.TeenSuffixTokens);
+                AppendStringArray(builder, "            ", "HundredSuffixTokens", locale.HundredSuffixTokens);
 
                 if (locale.AllowTerminalOrdinalToken)
                 {
@@ -208,6 +230,12 @@ public sealed partial class HumanizerSourceGenerator
                     builder.AppendLine("            AllowInvariantIntegerInput = true,");
                 }
 
+                AppendLongValue(builder, "            ", "TeenBaseValue", locale.TeenBaseValue, defaultValue: 10);
+                AppendLongValue(builder, "            ", "HundredSuffixValue", locale.HundredSuffixValue, defaultValue: 100);
+                AppendLongValue(builder, "            ", "UnitTokenMinValue", locale.UnitTokenMinValue, defaultValue: 1);
+                AppendLongValue(builder, "            ", "UnitTokenMaxValue", locale.UnitTokenMaxValue, defaultValue: 9);
+                AppendLongValue(builder, "            ", "HundredSuffixMinValue", locale.HundredSuffixMinValue, defaultValue: long.MaxValue);
+                AppendLongValue(builder, "            ", "HundredSuffixMaxValue", locale.HundredSuffixMaxValue, defaultValue: long.MinValue);
                 if (locale.ScaleThreshold.HasValue)
                 {
                     builder.Append("            ScaleThreshold = ");
@@ -309,6 +337,20 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("}.ToFrozenDictionary(StringComparer.Ordinal),");
         }
 
+        static void AppendLongValue(StringBuilder builder, string indent, string propertyName, long? value, long defaultValue)
+        {
+            if (value is not { } explicitValue || explicitValue == defaultValue)
+            {
+                return;
+            }
+
+            builder.Append(indent);
+            builder.Append(propertyName);
+            builder.Append(" = ");
+            builder.Append(explicitValue.ToString(CultureInfo.InvariantCulture));
+            builder.AppendLine(",");
+        }
+
         static string? ReadRequiredEnumString(
             string localeCode,
             JsonElement element,
@@ -323,7 +365,8 @@ public sealed partial class HumanizerSourceGenerator
                 return null;
             }
 
-            if (!allowedValues.Contains(value, StringComparer.Ordinal))
+            var normalizedValue = NormalizeEnumToken(value);
+            if (!allowedValues.Any(allowed => NormalizeEnumToken(allowed) == normalizedValue))
             {
                 diagnostics.Add(CreateDiagnostic(
                     localeCode,
@@ -333,7 +376,7 @@ public sealed partial class HumanizerSourceGenerator
                 return null;
             }
 
-            return value;
+            return normalizedValue;
         }
 
         static string? ReadOptionalEnumString(
@@ -350,7 +393,8 @@ public sealed partial class HumanizerSourceGenerator
                 return null;
             }
 
-            if (!allowedValues.Contains(value, StringComparer.Ordinal))
+            var normalizedValue = NormalizeEnumToken(value);
+            if (!allowedValues.Any(allowed => NormalizeEnumToken(allowed) == normalizedValue))
             {
                 diagnostics.Add(CreateDiagnostic(
                     localeCode,
@@ -360,7 +404,34 @@ public sealed partial class HumanizerSourceGenerator
                 return null;
             }
 
-            return value;
+            return normalizedValue;
+        }
+
+        static string NormalizeEnumToken(string value)
+        {
+            if (value.IndexOfAny(['-', '_']) < 0)
+            {
+                return value;
+            }
+
+            var segments = value.Split(['-', '_'], StringSplitOptions.RemoveEmptyEntries);
+            var builder = new StringBuilder(value.Length);
+
+            foreach (var segment in segments)
+            {
+                if (segment.Length == 0)
+                {
+                    continue;
+                }
+
+                builder.Append(char.ToUpperInvariant(segment[0]));
+                if (segment.Length > 1)
+                {
+                    builder.Append(segment.Substring(1));
+                }
+            }
+
+            return builder.ToString();
         }
 
         static string? ReadRequiredString(
@@ -399,7 +470,7 @@ public sealed partial class HumanizerSourceGenerator
         {
             if (valueElement.ValueKind != JsonValueKind.String)
             {
-                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a JSON string."));
+                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a string."));
                 hasErrors = true;
                 return null;
             }
@@ -429,7 +500,7 @@ public sealed partial class HumanizerSourceGenerator
 
             if (valuesElement.ValueKind != JsonValueKind.Array)
             {
-                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a JSON array."));
+                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a YAML sequence."));
                 hasErrors = true;
                 return [];
             }
@@ -443,7 +514,7 @@ public sealed partial class HumanizerSourceGenerator
 
                 if (valueElement.ValueKind != JsonValueKind.String)
                 {
-                    diagnostics.Add(CreateDiagnostic(localeCode, path, "must be a JSON string."));
+                    diagnostics.Add(CreateDiagnostic(localeCode, path, "must be a string."));
                     hasErrors = true;
                     continue;
                 }
@@ -477,7 +548,7 @@ public sealed partial class HumanizerSourceGenerator
 
             if (mapElement.ValueKind != JsonValueKind.Object)
             {
-                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a JSON object."));
+                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a YAML mapping."));
                 hasErrors = true;
                 return [];
             }
@@ -495,7 +566,7 @@ public sealed partial class HumanizerSourceGenerator
 
                 if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
                 {
-                    diagnostics.Add(CreateDiagnostic(localeCode, path, "must be an integer JSON number."));
+                    diagnostics.Add(CreateDiagnostic(localeCode, path, "must be an integer."));
                     hasErrors = true;
                     continue;
                 }
@@ -527,7 +598,7 @@ public sealed partial class HumanizerSourceGenerator
 
             if (valueElement.ValueKind != JsonValueKind.Number || !valueElement.TryGetInt64(out var value))
             {
-                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be an integer JSON number."));
+                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be an integer."));
                 hasErrors = true;
                 return null;
             }
@@ -549,7 +620,7 @@ public sealed partial class HumanizerSourceGenerator
 
             if (valueElement.ValueKind is not JsonValueKind.True and not JsonValueKind.False)
             {
-                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a JSON boolean."));
+                diagnostics.Add(CreateDiagnostic(localeCode, localeCode + "." + propertyName, "must be a boolean."));
                 hasErrors = true;
                 return false;
             }

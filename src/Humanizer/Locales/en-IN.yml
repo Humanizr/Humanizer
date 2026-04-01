@@ -1,0 +1,31 @@
+# Locale-owned generator data for en-IN.
+# Omit a feature to inherit it from the parent locale.
+# Within a mapped feature, omit unchanged fields to inherit them from the parent feature.
+inherits: 'en'
+
+numberToWords:
+  engine: 'conjunctional-scale'
+  minusWord: '(Negative)'
+  hundredOrdinalWord: 'hundred'
+  tensUnitsSeparator: ' '
+  addAndMode: 'always-default'
+  andStrategy: 'within-group-only'
+  ordinalLeadingOneStrategy: 'keep-leading-one'
+  ordinalMode: 'cardinal'
+  unitsMap:
+    0: ''
+  ordinalUnitsMap:
+    0: ''
+  scales:
+    -
+      value: 10000000
+      name: 'crore'
+      ordinalName: 'crore'
+    -
+      value: 100000
+      name: 'lakh'
+      ordinalName: 'lakh'
+    -
+      value: 1000
+      name: 'thousand'
+      ordinalName: 'thousand'

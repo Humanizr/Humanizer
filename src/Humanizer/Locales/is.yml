@@ -1,0 +1,211 @@
+# Locale-owned generator data for is.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+collectionFormatter:
+  engine: 'conjunction'
+  value: 'og'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+  timeUnitGenders:
+    millisecond: 'feminine'
+    second: 'feminine'
+    minute: 'feminine'
+    hour: 'feminine'
+    day: 'masculine'
+    week: 'feminine'
+    month: 'masculine'
+    year: 'neuter'
+numberToWords:
+  engine: 'ordinal-prefix-scale'
+  defaultGender: 'masculine'
+  minusWord: 'mínus'
+  andWord: 'og'
+  masculineOrdinalEnding: 'i'
+  nonMasculineOrdinalEnding: 'a'
+  unitsMap:
+    0: 'núll'
+    5: 'fimm'
+    6: 'sex'
+    7: 'sjö'
+    8: 'átta'
+    9: 'níu'
+    10: 'tíu'
+    11: 'ellefu'
+    12: 'tólf'
+    13: 'þrettán'
+    14: 'fjórtán'
+    15: 'fimmtán'
+    16: 'sextán'
+    17: 'sautján'
+    18: 'átján'
+    19: 'nítján'
+  masculineUnitsMap:
+    1: 'einn'
+    2: 'tveir'
+    3: 'þrír'
+    4: 'fjórir'
+  feminineUnitsMap:
+    1: 'ein'
+    2: 'tvær'
+    3: 'þrjár'
+    4: 'fjórar'
+  neuterUnitsMap:
+    1: 'eitt'
+    2: 'tvö'
+    3: 'þrjú'
+    4: 'fjögur'
+  tensMap:
+    1: 'tíu'
+    2: 'tuttugu'
+    3: 'þrjátíu'
+    4: 'fjörutíu'
+    5: 'fimmtíu'
+    6: 'sextíu'
+    7: 'sjötíu'
+    8: 'áttatíu'
+    9: 'níutíu'
+  unitsOrdinalPrefixes:
+    0: 'núllt'
+    1: 'fyrst'
+    3: 'þriðj'
+    4: 'fjórð'
+    5: 'fimmt'
+    6: 'sjött'
+    7: 'sjöund'
+    8: 'áttund'
+    9: 'níund'
+    10: 'tíund'
+    11: 'elleft'
+    12: 'tólft'
+    13: 'þrettánd'
+    14: 'fjórtánd'
+    15: 'fimmtánd'
+    16: 'sextánd'
+    17: 'sautjánd'
+    18: 'átjánd'
+    19: 'nítjánd'
+  tensOrdinalPrefixes:
+    1: 'tíund'
+    2: 'tuttugast'
+    3: 'þrítugast'
+    4: 'fertugast'
+    5: 'fimmtugast'
+    6: 'sextugast'
+    7: 'sjötugast'
+    8: 'áttugast'
+    9: 'nítugast'
+  hundredSingular: 'hundrað'
+  hundredPlural: 'hundruð'
+  ordinalTwoMasculine: 'annar'
+  ordinalTwoFeminine: 'önnur'
+  ordinalTwoNeuter: 'annað'
+  scales:
+    -
+      value: 1000000000000000000
+      singular: 'ein trilljón'
+      plural: 'trilljónir'
+      ordinalPrefix: 'trilljónast'
+      gender: 'feminine'
+    -
+      value: 1000000000000000
+      singular: 'einn billjarður'
+      plural: 'billjarðar'
+      ordinalPrefix: 'billjarðast'
+      gender: 'masculine'
+    -
+      value: 1000000000000
+      singular: 'ein billjón'
+      plural: 'billjónir'
+      ordinalPrefix: 'billjónast'
+      gender: 'feminine'
+    -
+      value: 1000000000
+      singular: 'einn milljarður'
+      plural: 'milljarðar'
+      ordinalPrefix: 'milljarðast'
+      gender: 'masculine'
+    -
+      value: 1000000
+      singular: 'ein milljón'
+      plural: 'milljónir'
+      ordinalPrefix: 'milljónast'
+      gender: 'feminine'
+    -
+      value: 1000
+      singular: 'eitt þúsund'
+      plural: 'þúsund'
+      ordinalPrefix: 'þúsundast'
+      gender: 'neuter'
+ordinalizer:
+  engine: 'suffix'
+  masculineSuffix: '.'
+wordsToNumber:
+  engine: 'compound-scale'
+  cardinalMap:
+    'núll': 0
+    einn: 1
+    ein: 1
+    eitt: 1
+    tveir: 2
+    'tvær': 2
+    'tvö': 2
+    'þrír': 3
+    'þrjár': 3
+    'þrjú': 3
+    'fjórir': 4
+    'fjórar': 4
+    'fjögur': 4
+    fimm: 5
+    sex: 6
+    'sjö': 7
+    'átta': 8
+    'níu': 9
+    'tíu': 10
+    ellefu: 11
+    'tólf': 12
+    'þrettán': 13
+    'fjórtán': 14
+    'fimmtán': 15
+    'sextán': 16
+    'sautján': 17
+    'átján': 18
+    'nítján': 19
+    tuttugu: 20
+    'þrjátíu': 30
+    'fjörutíu': 40
+    'fimmtíu': 50
+    'sextíu': 60
+    'sjötíu': 70
+    'áttatíu': 80
+    'níutíu': 90
+    'hundrað': 100
+    'hundruð': 100
+    'þúsund': 1000
+    'milljón': 1000000
+    'milljónir': 1000000
+    'milljarður': 1000000000
+    'milljarðar': 1000000000
+  tens:
+    - 'tuttugu'
+    - 'þrjátíu'
+    - 'fjörutíu'
+    - 'fimmtíu'
+    - 'sextíu'
+    - 'sjötíu'
+    - 'áttatíu'
+    - 'níutíu'
+  largeScales:
+    - 'milljarðar'
+    - 'milljarður'
+    - 'milljónir'
+    - 'milljón'
+    - 'þúsund'
+    - 'hundruð'
+    - 'hundrað'
+  ignoredToken: 'og'
+  ordinalNumberToWordsKind: 'self'
+  negativePrefixes:
+    - 'mínus '
+    - 'minus '
+  sequenceMultiplierThreshold: 100
