@@ -108,3 +108,7 @@ docs/.sass-cache/
 
 # BenchmarkDotNet artifacts
 **/BenchmarkDotNet.Artifacts/
+
+# Clairvoyance workspace knowledge (machine-specific)
+.clairvoyance/
+.Clairvoyance/
