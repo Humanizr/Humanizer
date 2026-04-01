@@ -132,4 +132,17 @@ public class GeneratedFormatterRuntimeTests
         Assert.Equal("0 milliseconde", TimeSpan.Zero.Humanize(minUnit: TimeUnit.Millisecond, culture: new CultureInfo("fr")));
     }
 
+    [Fact]
+    public void GeneratedPhraseTablesFallBackToEnglishForUnknownCultures()
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("zu-ZA"));
+
+        Assert.Equal("now", formatter.DateHumanize_Now());
+        Assert.Equal("never", formatter.DateHumanize_Never());
+        Assert.Equal("2 days ago", formatter.DateHumanize(TimeUnit.Day, Tense.Past, 2));
+        Assert.Equal("2 days", formatter.TimeSpanHumanize(TimeUnit.Day, 2));
+        Assert.Equal("bytes", formatter.DataUnitHumanize(DataUnit.Byte, 2, toSymbol: false));
+        Assert.Equal("d", formatter.TimeUnitHumanize(TimeUnit.Day));
+    }
+
 }

@@ -204,4 +204,14 @@ public class HeadingTests
             CultureInfo.CurrentUICulture = originalUiCulture;
         }
     }
+
+    [Fact]
+    public void ToHeadingFallsBackToEnglishForUnknownCultures()
+    {
+        var culture = new CultureInfo("zu-ZA");
+
+        Assert.Equal("north", 0d.ToHeading(HeadingStyle.Full, culture));
+        Assert.Equal("N", 0d.ToHeading(HeadingStyle.Abbreviated, culture));
+        Assert.Equal(337.5, "NNW".FromAbbreviatedHeading(culture));
+    }
 }
