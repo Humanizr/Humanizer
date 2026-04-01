@@ -55,16 +55,15 @@ stages:
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: build
-        projects: ./src/Humanizer/Humanizer.csproj
-        arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)/Packages 
+        command: pack
+        packagesToPack: ./src/Humanizer/Humanizer.csproj
+        arguments: -c $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)/Packages
       displayName: Restore, Build, and Pack
 
     - pwsh: |
         $(Build.SourcesDirectory)/tests/verify-packages.ps1 `
           -PackageVersion '$(NBGV_NuGetPackageVersion)' `
-          -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages' `
-          -IncludeWapProjSmokeTest
+          -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
       displayName: Verify Package Structure and Dependencies
       failOnStderr: false
 

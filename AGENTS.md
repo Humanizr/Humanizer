@@ -36,7 +36,7 @@ These instructions apply to the entire repository.
 - Do not introduce new compiler warnings or break existing build/test workflows.
 
 ## Localization Guidance
-- When adding a locale, duplicate and translate the relevant resource files under `src/Humanizer/Properties`.
+- When adding a locale, duplicate and translate the relevant YAML locale file under `src/Humanizer/Locales`.
 - Register new formatters/converters in the appropriate registries (see `Configuration/FormatterRegistry.cs` and number converter factories).
 - Cover new localization behavior with targeted tests under `tests/Humanizer.Tests/Localisation/{culture}`.
 
