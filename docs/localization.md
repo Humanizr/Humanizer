@@ -10,22 +10,15 @@ Humanizer includes localization for:
 
 Arabic (ar), Azerbaijani (az), Bulgarian (bg), Bengali (bn-BD), Czech (cs), Danish (da), German (de), Greek (el), Spanish (es), Persian (fa), Finnish (fi), French (fr), Hebrew (he), Croatian (hr), Hungarian (hu), Armenian (hy), Indonesian (id), Icelandic (is), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Malay (ms-MY), Maltese (mt), Norwegian Bokmal (nb, nb-NO), Dutch (nl), Polish (pl), Portuguese (pt, pt-BR), Romanian (ro), Russian (ru), Slovak (sk), Slovenian (sl), Serbian (sr, sr-Latn), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Chinese (zh-CN, zh-Hans, zh-Hant).
 
-## Installing Language Packages
+## Installing Humanizer
 
-### All Languages
+### Package
 
 ```bash
 dotnet add package Humanizer
 ```
 
-### Specific Languages
-
-```bash
-dotnet add package Humanizer.Core
-dotnet add package Humanizer.Core.fr  # French
-dotnet add package Humanizer.Core.es  # Spanish
-dotnet add package Humanizer.Core.de  # German
-```
+The `Humanizer` package already includes all generated locale data.
 
 ## Using Cultures
 
@@ -226,8 +219,8 @@ Recommended verification commands:
 dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
-dotnet build src/Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=artifacts/plan-validation
-pwsh ./tests/verify-packages.ps1 -PackageOutputPath ./artifacts/plan-validation -MinimumPassingSdkVersion 9.0.200
+dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
+pwsh ./tests/verify-packages.ps1 -PackageVersion <version> -PackagesDirectory ./artifacts/plan-validation
 ```
 
 ## Related Topics

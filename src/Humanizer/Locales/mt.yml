@@ -192,3 +192,289 @@ wordsToNumber:
   ignoredTokens:
     - 'u'
   useHundredMultiplier: true
+
+phrases:
+  dateHumanize:
+    now: 'issa'
+    never: 'qatt'
+    past:
+      millisecond:
+        single: 'millisekonda ilu'
+        multiple:
+          forms:
+            default: 'millisekondi'
+          afterCount: 'ilu'
+      second:
+        single: 'sekonda ilu'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} sekondi ilu'
+            singular: 'sekonda ilu'
+      minute:
+        single: 'minuta ilu'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} minuti ilu'
+            singular: 'minuta ilu'
+      hour:
+        single: 'siegħa ilu'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} siegħat ilu'
+            singular: 'siegħa ilu'
+            dual: 'sagħtejn ilu'
+      day:
+        single: 'il-bieraħ'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} jiem ilu'
+            singular: 'il-bieraħ'
+            dual: 'jumejn ilu'
+        template:
+          name: 'two'
+          value: 'jumejn ilu'
+      week:
+        single: 'ġimgħa ilu'
+        multiple:
+          forms:
+            default: 'ġimgħat'
+          afterCount: 'ilu'
+      month:
+        single: 'xahar ilu'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} xhur ilu'
+            singular: 'xahar ilu'
+            dual: 'xahrejn ilu'
+      year:
+        single: 'sena ilu'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} snin ilu'
+            singular: 'sena ilu'
+            dual: 'sentejn ilu'
+    future:
+      millisecond:
+        single: 'millisekonda oħra'
+        multiple:
+          forms:
+            default: 'millisekondi'
+          afterCount: 'oħra'
+      second:
+        single: 'sekonda oħra'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} sekondi oħra'
+            singular: 'sekonda oħra'
+      minute:
+        single: 'minuta oħra'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} minuti oħra'
+            singular: 'minuta oħra'
+      hour:
+        single: 'siegħa oħra'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} siegħat oħra'
+            singular: 'siegħa oħra'
+            dual: 'sagħtejn oħra'
+      day:
+        single: 'għada'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} jiem oħra'
+            singular: 'għada'
+            dual: 'pitgħada'
+        template:
+          name: 'two'
+          value: 'pitgħada'
+      week:
+        single: 'ġimgħa oħra'
+        multiple:
+          forms:
+            default: 'ġimgħat'
+          afterCount: 'oħra'
+      month:
+        single: 'xahar ieħor'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} xhur oħra'
+            singular: 'xahar ieħor'
+            dual: 'xahrejn oħra'
+      year:
+        single: 'sena oħra'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} snin oħra'
+            singular: 'sena oħra'
+            dual: 'sentejn oħra'
+  timeSpan:
+    zero: 'xejn'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: 'millisekonda'
+        words: 'millisekonda'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} millisekondi'
+          singular: 'millisekonda'
+    second:
+      single:
+        numeric: 'sekonda'
+        words: 'sekonda'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} sekondi'
+          singular: 'sekonda'
+    minute:
+      single:
+        numeric: 'minuta'
+        words: 'minuta'
+      multiple:
+        forms:
+          default: 'minuti'
+          singular: 'minuta'
+    hour:
+      single:
+        numeric: 'siegħa'
+        words: 'siegħa'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} siegħat'
+          singular: 'siegħa'
+          dual: 'sagħtejn'
+    day:
+      single:
+        numeric: 'ġurnata'
+        words: 'ġurnata'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} jiem'
+          singular: 'jum'
+          dual: 'jumejn'
+    week:
+      single:
+        numeric: 'ġimgħa'
+        words: 'ġimgħa'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} ġimgħat'
+          singular: 'ġimgħa'
+          dual: 'ġimgħatejn'
+    month:
+      single:
+        numeric: 'xahar'
+        words: 'xahar'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} xhur'
+          singular: 'xahar'
+          dual: 'xahrejn'
+    year:
+      single:
+        numeric: 'sena'
+        words: 'sena'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} snin'
+          singular: '{count} sena'
+          dual: 'sentejn'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'sie'
+    day:
+      symbol: 'jum'
+    week:
+      symbol: 'ġimgħa'
+    month:
+      symbol: 'xahar'
+    year:
+      symbol: 'sena'
+headings:
+  full:
+    - 'tramuntana'
+    - 'grieg it-tramuntana'
+    - 'grigal'
+    - 'grieg il-lvant'
+    - 'lvant'
+    - 'xlokk il-lvant'
+    - 'xlokk'
+    - 'nofsinhar ix-xlokk'
+    - 'nofsinhar'
+    - 'nofsinhar il-lbiċ'
+    - 'lbiċ'
+    - 'punent il-lbiċ'
+    - 'punent'
+    - 'punent majjistru'
+    - 'majjistral'
+    - 'majjistral it-tramuntana'
+  short:
+    - 'T'
+    - 'GT'
+    - 'G'
+    - 'GL'
+    - 'L'
+    - 'XL'
+    - 'X'
+    - 'NX'
+    - 'N'
+    - 'NL'
+    - 'L'
+    - 'PL'
+    - 'P'
+    - 'PM'
+    - 'M'
+    - 'MT'

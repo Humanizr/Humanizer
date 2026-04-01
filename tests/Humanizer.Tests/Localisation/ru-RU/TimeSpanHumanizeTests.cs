@@ -16,10 +16,6 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void AgeFormatResourceExists() =>
-        Assert.Equal("{0}", Resources.GetResource("TimeSpanHumanize_Age", new("ru-RU")));
-
     [Theory]
     [Trait("Translation", "Native speaker")]
     [InlineData(366, "один год", true)]
@@ -156,12 +152,4 @@ public class TimeSpanHumanizeTests
         // This one doesn't make a lot of sense but ... w/e
         Assert.Equal("нет времени", TimeSpan.Zero.Humanize(toWords: true));
 
-    [Fact]
-    public void AgeHasExplicitRussianResource()
-    {
-        var found = Resources.TryGetResource("TimeSpanHumanize_Age", new("ru-RU"), out var ageFormat);
-
-        Assert.True(found);
-        Assert.Equal("{0}", ageFormat);
-    }
 }

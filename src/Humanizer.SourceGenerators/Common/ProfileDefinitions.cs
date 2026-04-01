@@ -26,11 +26,12 @@ public sealed partial class HumanizerSourceGenerator
         public JsonElement Root { get; } = root;
     }
 
-    sealed class FormatterProfileDefinition(string profileName, string engine, JsonElement root)
+    sealed class FormatterProfileDefinition(string profileName, string engine, JsonElement root, SimpleYamlMapping? grammar)
     {
         public string ProfileName { get; } = profileName;
         public string Engine { get; } = engine;
         public JsonElement Root { get; } = root;
+        public SimpleYamlMapping? Grammar { get; } = grammar;
     }
 
     sealed class NumberToWordsProfileDefinition(string profileName, string engine, JsonElement root)
@@ -45,6 +46,12 @@ public sealed partial class HumanizerSourceGenerator
         public string ProfileName { get; } = profileName;
         public string Engine { get; } = engine;
         public JsonElement Root { get; } = root;
+    }
+
+    sealed class LocalePhraseProfileDefinition(string profileName, LocalePhraseCatalog catalog)
+    {
+        public string ProfileName { get; } = profileName;
+        public LocalePhraseCatalog Catalog { get; } = catalog;
     }
 
     sealed class TokenMapLocaleDefinition(

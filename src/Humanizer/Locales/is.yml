@@ -209,3 +209,267 @@ wordsToNumber:
     - 'mínus '
     - 'minus '
   sequenceMultiplierThreshold: 100
+
+phrases:
+  dateHumanize:
+    now: 'núna'
+    never: 'aldrei'
+    past:
+      millisecond:
+        single: 'fyrir einni millisekúndu'
+        multiple:
+          forms:
+            default: 'millisekúndum'
+          beforeCount: 'fyrir'
+      second:
+        single: 'fyrir einni sekúndu'
+        multiple:
+          forms:
+            default: 'sekúndum'
+            singular: 'sekúndu'
+          beforeCount: 'fyrir'
+      minute:
+        single: 'fyrir einni mínútu'
+        multiple:
+          forms:
+            default: 'mínútum'
+            singular: 'mínútu'
+          beforeCount: 'fyrir'
+      hour:
+        single: 'fyrir einni klukkustund'
+        multiple:
+          forms:
+            default: 'klukkustundum'
+            singular: 'klukkustund'
+          beforeCount: 'fyrir'
+      day:
+        single: 'í gær'
+        multiple:
+          forms:
+            default: 'dögum'
+            singular: 'degi'
+          beforeCount: 'fyrir'
+        template:
+          name: 'two'
+          value: 'fyrir 2 dögum'
+      week:
+        single: 'fyrir einni viku'
+        multiple:
+          forms:
+            default: 'vikum'
+          beforeCount: 'fyrir'
+      month:
+        single: 'fyrir einum mánuði'
+        multiple:
+          forms:
+            default: 'mánuðum'
+            singular: 'mánuði'
+          beforeCount: 'fyrir'
+      year:
+        single: 'fyrir einu ári'
+        multiple:
+          forms:
+            default: 'árum'
+            singular: 'ári'
+          beforeCount: 'fyrir'
+    future:
+      millisecond:
+        single: 'eftir eina millisekúndu'
+        multiple:
+          forms:
+            default: 'millisekúndur'
+          beforeCount: 'eftir'
+      second:
+        single: 'eftir eina sekúndu'
+        multiple:
+          forms:
+            default: 'sekúndur'
+            singular: 'sekúndu'
+          beforeCount: 'eftir'
+      minute:
+        single: 'eftir eina mínútu'
+        multiple:
+          forms:
+            default: 'mínútur'
+            singular: 'mínútu'
+          beforeCount: 'eftir'
+      hour:
+        single: 'eftir eina klukkustund'
+        multiple:
+          forms:
+            default: 'klukkustundir'
+            singular: 'klukkustund'
+          beforeCount: 'eftir'
+      day:
+        single: 'á morgun'
+        multiple:
+          forms:
+            default: 'daga'
+            singular: 'dag'
+          beforeCount: 'eftir'
+        template:
+          name: 'two'
+          value: 'eftir 2 daga'
+      week:
+        single: 'eftir eina viku'
+        multiple:
+          forms:
+            default: 'vikur'
+          beforeCount: 'eftir'
+      month:
+        single: 'eftir einn mánuð'
+        multiple:
+          forms:
+            default: 'mánuði'
+            singular: 'mánuð'
+          beforeCount: 'eftir'
+      year:
+        single: 'eftir eitt ár'
+        multiple:
+          forms:
+            default: 'ár'
+          beforeCount: 'eftir'
+  timeSpan:
+    zero: 'engin stund'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: 'ein millisekúnda'
+        words: 'ein millisekúnda'
+      multiple:
+        forms:
+          default: 'millisekúndur'
+          singular: 'millisekúnda'
+    second:
+      single:
+        numeric: 'ein sekúnda'
+        words: 'ein sekúnda'
+      multiple:
+        forms:
+          default: 'sekúndur'
+          singular: 'sekúnda'
+    minute:
+      single:
+        numeric: 'ein mínúta'
+        words: 'ein mínúta'
+      multiple:
+        forms:
+          default: 'mínútur'
+          singular: 'mínúta'
+    hour:
+      single:
+        numeric: 'ein klukkustund'
+        words: 'ein klukkustund'
+      multiple:
+        forms:
+          default: 'klukkustundir'
+          singular: 'klukkustund'
+    day:
+      single:
+        numeric: 'einn dagur'
+        words: 'einn dagur'
+      multiple:
+        forms:
+          default: 'dagar'
+          singular: 'dagur'
+    week:
+      single:
+        numeric: 'ein vika'
+        words: 'ein vika'
+      multiple:
+        forms:
+          default: 'vikur'
+          singular: 'vika'
+    month:
+      single:
+        numeric: '1 mánuður'
+        words: 'einn mánuður'
+      multiple:
+        forms:
+          default: 'mánuðir'
+          singular: 'mánuður'
+    year:
+      single:
+        numeric: '1 ár'
+        words: 'eitt ár'
+      multiple:
+        forms:
+          default: 'ár'
+  dataUnit:
+    bit:
+      forms:
+        default: 'biti'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bæti'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kílóbæti'
+      symbol: 'kB'
+    megabyte:
+      forms:
+        default: 'megabæti'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gígabæti'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabæti'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'millisekúnda'
+    second:
+      symbol: 'sekúnda'
+    minute:
+      symbol: 'mínúta'
+    hour:
+      symbol: 'klukkustund'
+    day:
+      symbol: 'dagur'
+    week:
+      symbol: 'vika'
+    month:
+      symbol: 'mánuður'
+    year:
+      symbol: 'ár'
+headings:
+  full:
+    - 'norður'
+    - 'norðnorðaustur'
+    - 'norðaustur'
+    - 'austnorðaustur'
+    - 'austur'
+    - 'austsuðaustur'
+    - 'suðaustur'
+    - 'suðsuðaustur'
+    - 'suður'
+    - 'suðsuðvestur'
+    - 'suðvestur'
+    - 'vestsuðvestur'
+    - 'vestur'
+    - 'vestnorðvestur'
+    - 'norðvestur'
+    - 'norðnorðvestur'
+  short:
+    - 'N'
+    - 'NNA'
+    - 'NA'
+    - 'ANA'
+    - 'A'
+    - 'ASA'
+    - 'SA'
+    - 'SSA'
+    - 'S'
+    - 'SSV'
+    - 'SV'
+    - 'VSV'
+    - 'V'
+    - 'VNV'
+    - 'NV'
+    - 'NNV'

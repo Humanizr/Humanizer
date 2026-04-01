@@ -184,6 +184,32 @@ public class HumanizerSourceGeneratorTests
     }
 
     [Fact]
+    public void LocalePhraseTablesUsePerLocaleLazyHoldersAndGeneratedArrays()
+    {
+        var source = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");
+
+        Assert.Contains("static partial class LocalePhraseTableCatalog", source);
+        Assert.Contains("static partial LocalePhraseTable? ResolveCore(string localeCode)", source);
+        Assert.Contains("\"en\" => en,", source);
+        Assert.Contains("new LocalizedDatePhrase?[]", source);
+        Assert.Contains("new LocalizedTimeSpanPhrase?[]", source);
+        Assert.Contains("new LocalizedUnitPhrase?[]", source);
+    }
+
+    [Fact]
+    public void LocalePhraseTablesInlineRepresentativePhrasesAndExactOverrides()
+    {
+        var source = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");
+
+        Assert.Contains("new PhraseTemplate(\"two\",", source);
+        Assert.Contains("через два дня", source);
+        Assert.Contains("vorgestern", source);
+        Assert.Contains("PhraseCountPlacement.BeforeForm", source);
+        Assert.Contains("new LocalizedPhraseForms(\"days\", \"day\"", source);
+        Assert.Contains("new LocalizedUnitPhrase(new LocalizedPhraseForms(\"byte\"", source);
+    }
+
+    [Fact]
     public void TokenMapOrdinalMapsAreGeneratedFromLocaleData()
     {
         var azerbaijani = GetGeneratedSource("TokenMapWordsToNumberConverters.Az.g.cs");
@@ -383,6 +409,107 @@ wordsToNumber:
         Assert.Contains("engine: 'harmony-ordinal'", uzbekCyrillicProfile);
         Assert.Contains("new HarmonyOrdinalNumberToWordsConverter(", source);
         Assert.DoesNotContain("new UzbekFamilyNumberToWordsConverter(", source);
+    }
+
+    [Fact]
+    public void UnitLeadingCompoundScalesAcceptNamedOrdinalCases()
+    {
+        const string locale = """
+inherits: 'en'
+
+numberToWords:
+  engine: 'unit-leading-compound'
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  masculineOne: 'one'
+  feminineOne: 'one'
+  neuterOne: 'one'
+  tensJoiner: 'and'
+  ordinalStemSuffix: 's'
+  masculineOrdinalEnding: 'th'
+  feminineOrdinalEnding: 'th'
+  neuterOrdinalEnding: 'th'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  compoundUnitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  unitsOrdinal:
+    - 'zer'
+    - 'fir'
+    - 'sec'
+  scales:
+    -
+      value: 1000
+      addSpaceBeforeNextPart: true
+      singularCardinal: 'one thousand'
+      pluralCardinalFormat: '{0} thousand'
+      ordinalSingular:
+        terminal: 'one-thousandth'
+        continuing: 'one-thousand'
+      ordinalPlural:
+        terminal: '{0}-thousandth'
+        continuing: '{0}-thousand'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-semantic-unit-leading.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "NumberToWordsProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("new string[] { \"one-thousandth\", \"one-thousand\" }", source);
+        Assert.Contains("new string[] { \"{0}-thousandth\", \"{0}-thousand\" }", source);
+    }
+
+    [Fact]
+    public void FormatterProfilesAcceptGrammarAliasesAndPreferThemOverLegacyFields()
+    {
+        const string locale = """
+formatter:
+  engine: 'profiled'
+  resourceKeyDetector: 'arabic-like'
+  dataUnitDetector: 'singular-plural'
+  prepositionMode: 'none'
+grammar:
+  pluralRule: 'russian'
+  dataUnitPluralRule: 'slovenian'
+  dataUnitNonIntegralForm: 'plural'
+  prepositionMode: 'romanian-de'
+  secondaryPlaceholderMode: 'luxembourgish-eifeler-n'
+  timeUnitGenders:
+    day: 'masculine'
+    minute: 'feminine'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-grammar.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "FormatterProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains(
+            "new FormatterProfile(FormatterNumberDetectorKind.Russian, Array.Empty<FormatterDateFormOverride>(), Array.Empty<FormatterTimeSpanFormOverride>(), FormatterNumberDetectorKind.Slovenian, FormatterNumberForm.Plural, FormatterDataUnitFallbackTransform.None, FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN",
+            source);
+        Assert.Contains("[TimeUnit.Day] = GrammaticalGender.Masculine", source);
+        Assert.Contains("[TimeUnit.Minute] = GrammaticalGender.Feminine", source);
     }
 
     [Fact]
@@ -609,10 +736,7 @@ numberToWords:
     {
         var root = FindRepositoryRoot();
         var sourceRoot = Path.Combine(root, "src", "Humanizer");
-        var filePaths = new List<string>
-        {
-            Path.Combine(sourceRoot, "Properties", "Resources.resx")
-        };
+        var filePaths = new List<string>();
 
         AddFiles(filePaths, Path.Combine(sourceRoot, "Locales"), "*.yml");
 

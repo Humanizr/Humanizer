@@ -113,6 +113,39 @@ Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
 Related:
 - Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
 
+6. Legacy localized resource-key lookup APIs were removed.
+
+The string-keyed resource model is no longer part of Humanizer's supported surface. Locale data is now generated from YAML locale definitions rather than `.resx` files.
+
+Removed APIs:
+
+- `Resources.GetResource(...)`
+- `Resources.TryGetResource(...)`
+- `ResourceKeys`
+- `ResourceKeys.DateHumanize`
+- `ResourceKeys.TimeSpanHumanize`
+- `ResourceKeys.TimeUnitSymbol`
+- `DefaultFormatter` protected resource-key override helpers:
+  - `Format(string resourceKey)`
+  - `Format(TimeUnit unit, string resourceKey, int number, bool toWords = false)`
+  - `GetResourceKey(string resourceKey)`
+  - `GetResourceKey(string resourceKey, int number)`
+
+Before:
+
+```csharp
+var key = ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, Tense.Past, 2);
+var text = Resources.GetResource(key, culture);
+```
+
+After:
+
+```csharp
+var text = DateTime.UtcNow.AddDays(-2).Humanize(culture: culture);
+```
+
+Use the typed Humanizer APIs (`Humanize`, `ToAge`, `ToFullWords`, `ToSymbol`, and formatter implementations based on `IFormatter`) instead of string resource-key lookup.
+
 ### Enum API Signature Changes
 
 Enum APIs moved from `Enum`-based extension signatures to constrained generics:
@@ -161,13 +194,15 @@ Before:
 protected virtual string Format(string resourceKey, int number, bool toWords = false)
 ```
 
-After:
+Intermediate v3 shape:
 
 ```csharp
 protected virtual string Format(TimeUnit unit, string resourceKey, int number, bool toWords = false)
 ```
 
-If you had custom `DefaultFormatter` subclasses overriding the old signature, they must be migrated.
+Current shape:
+
+Those legacy resource-key override hooks are now removed entirely. `DefaultFormatter` implementations should override the typed formatter members such as `DateHumanize(...)`, `TimeSpanHumanize(...)`, `TimeUnitHumanize(...)`, `DataUnitHumanize(...)`, `DateHumanize_Now()`, `DateHumanize_Never()`, `TimeSpanHumanize_Zero()`, and `TimeSpanHumanize_Age()` instead.
 
 Related:
 - API introduction that expanded formatter contract: [PR #1068](https://github.com/Humanizr/Humanizer/pull/1068)

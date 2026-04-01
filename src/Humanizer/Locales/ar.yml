@@ -4,12 +4,10 @@
 collectionFormatter:
   engine: 'clitic'
   value: 'و'
+grammar:
+  pluralRule: 'arabic-like'
 formatter:
   engine: 'profiled'
-  resourceKeyDetector: 'arabic-like'
-  resourceKeySuffixes:
-    dual: '_Dual'
-    plural: '_Plural'
   dataUnitFallbackTransform: 'trim-trailing-s'
 numberToWords:
   engine: 'appended-group'
@@ -210,3 +208,339 @@ wordsToNumber:
     'مليار': 1000000000
     'ملياراً': 1000000000
     'مليارات': 1000000000
+
+phrases:
+  dateHumanize:
+    now: 'الآن'
+    never: 'أبدًا'
+    past:
+      millisecond:
+        single: 'منذ مللي ثانية واحدة'
+        multiple:
+          forms:
+            default: 'مللي'
+          beforeCount: 'منذ'
+          afterCount: 'ثانية'
+      second:
+        single: 'منذ ثانية واحدة'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'منذ {count} ثانية'
+            singular: 'منذ ثانيتين'
+            dual: 'منذ ثانيتين'
+            paucal: 'منذ ثانيتين'
+            plural: 'منذ {count} ثوان'
+      minute:
+        single: 'منذ دقيقة واحدة'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'منذ {count} دقيقة'
+            singular: 'منذ دقيقتين'
+            dual: 'منذ دقيقتين'
+            paucal: 'منذ دقيقتين'
+            plural: 'منذ {count} دقائق'
+      hour:
+        single: 'منذ ساعة واحدة'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'منذ {count} ساعة'
+            singular: 'منذ ساعتين'
+            dual: 'منذ ساعتين'
+            paucal: 'منذ ساعتين'
+            plural: 'منذ {count} ساعات'
+      day:
+        single: 'أمس'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'منذ {count} يوم'
+            singular: 'منذ يومين'
+            dual: 'منذ يومين'
+            paucal: 'منذ يومين'
+            plural: 'منذ {count} أيام'
+        template:
+          name: 'two'
+          value: 'أول أمس'
+      week:
+        single: 'منذ أسبوع واحد'
+        multiple:
+          forms:
+            default: 'أسبوع'
+          beforeCount: 'منذ'
+      month:
+        single: 'منذ شهر واحد'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'منذ {count} شهر'
+            singular: 'منذ شهرين'
+            dual: 'منذ شهرين'
+            paucal: 'منذ شهرين'
+            plural: 'منذ {count} أشهر'
+      year:
+        single: 'العام السابق'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'منذ {count} عام'
+            singular: 'منذ عامين'
+            dual: 'منذ عامين'
+            paucal: 'منذ عامين'
+            plural: 'منذ {count} أعوام'
+    future:
+      millisecond:
+        single: 'في غضون مللي ثانية واحدة من الآن'
+        multiple:
+          forms:
+            default: 'مللي'
+          beforeCount: 'في غضون'
+          afterCount: 'ثانية من الآن'
+      second:
+        single: 'في غضون ثانية واحدة من الآن'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'في غضون {count} ثانية من الآن'
+            singular: 'في غضون ثانيتين من الآن'
+            dual: 'في غضون ثانيتين من الآن'
+            paucal: 'في غضون ثانيتين من الآن'
+            plural: 'في غضون {count} ثوان من الآن'
+      minute:
+        single: 'في غضون دقيقة واحدة من الآن'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'في غضون {count} دقيقة من الآن'
+            singular: 'في غضون دقيقتين من الآن'
+            dual: 'في غضون دقيقتين من الآن'
+            paucal: 'في غضون دقيقتين من الآن'
+            plural: 'في غضون {count} دقائق من الآن'
+      hour:
+        single: 'في غضون ساعة واحدة من الآن'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'في غضون {count} ساعة من الآن'
+            singular: 'في غضون ساعتين من الآن'
+            dual: 'في غضون ساعتين من الآن'
+            paucal: 'في غضون ساعتين من الآن'
+            plural: 'في غضون {count} ساعات من الآن'
+      day:
+        single: 'في غضون يوم واحد من الآن'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'في غضون {count} يوم من الآن'
+            singular: 'في غضون يومين من الآن'
+            dual: 'في غضون يومين من الآن'
+            paucal: 'في غضون يومين من الآن'
+            plural: 'في غضون {count} أيام من الآن'
+        template:
+          name: 'two'
+          value: 'بعد غد'
+      week:
+        single: 'في غضون أسبوع واحد من الآن'
+        multiple:
+          forms:
+            default: 'أسبوع'
+          beforeCount: 'في غضون'
+          afterCount: 'من الآن'
+      month:
+        single: 'في غضون شهر واحد من الآن'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'في غضون {count} شهر من الآن'
+            singular: 'في غضون شهرين من الآن'
+            dual: 'في غضون شهرين من الآن'
+            paucal: 'في غضون شهرين من الآن'
+            plural: 'في غضون {count} أشهر من الآن'
+      year:
+        single: 'في غضون سنة واحدة من الآن'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'في غضون {count} سنة من الآن'
+            singular: 'في غضون سنتين من الآن'
+            dual: 'في غضون سنتين من الآن'
+            paucal: 'في غضون سنتين من الآن'
+            plural: 'في غضون {count} سنوات من الآن'
+  timeSpan:
+    zero: 'حالاً'
+    age:
+      template: '{value} من العمر'
+    millisecond:
+      single:
+        numeric: 'جزء من الثانية'
+        words: 'جزء من الثانية'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} ملي ثانية'
+          singular: 'ملي ثانيتين'
+          dual: 'ملي ثانيتين'
+          paucal: 'ملي ثانيتين'
+    second:
+      single:
+        numeric: 'ثانية واحدة'
+        words: 'ثانية واحدة'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} ثانية'
+          singular: 'ثانيتين'
+          dual: 'ثانيتين'
+          paucal: 'ثانيتين'
+          plural: '{count} ثوان'
+    minute:
+      single:
+        numeric: 'دقيقة واحدة'
+        words: 'دقيقة واحدة'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} دقيقة'
+          singular: 'دقيقتين'
+          dual: 'دقيقتين'
+          paucal: 'دقيقتين'
+          plural: '{count} دقائق'
+    hour:
+      single:
+        numeric: 'ساعة واحدة'
+        words: 'ساعة واحدة'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} ساعة'
+          singular: 'ساعتين'
+          dual: 'ساعتين'
+          paucal: 'ساعتين'
+          plural: '{count} ساعات'
+    day:
+      single:
+        numeric: 'يوم واحد'
+        words: 'يوم واحد'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} يوم'
+          singular: 'يومين'
+          dual: 'يومين'
+          paucal: 'يومين'
+          plural: '{count} أيام'
+    week:
+      single:
+        numeric: 'أسبوع واحد'
+        words: 'أسبوع واحد'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} أسبوع'
+          singular: 'أسبوعين'
+          dual: 'أسبوعين'
+          paucal: 'أسبوعين'
+          plural: '{count} أسابيع'
+    month:
+      single:
+        numeric: 'شهر واحد'
+        words: 'شهر واحد'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} شهر'
+          singular: 'شهرين'
+          dual: 'شهرين'
+          paucal: 'شهرين'
+          plural: '{count} أشهر'
+    year:
+      single:
+        numeric: 'سنة واحدة'
+        words: 'سنة واحدة'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} سنة'
+          singular: 'سنتين'
+          dual: 'سنتين'
+          paucal: 'سنتين'
+          plural: '{count} سنوات'
+  dataUnit:
+    bit:
+      forms:
+        default: 'بت'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'بايت'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'كيلوبايت'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'ميجابايت'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'جيجابايت'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'تيرابايت'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'مللي ثانية'
+    second:
+      symbol: 'ثانية'
+    minute:
+      symbol: 'دقيقة'
+    hour:
+      symbol: 'ساعة'
+    day:
+      symbol: 'يوم'
+    week:
+      symbol: 'أسبوع'
+    month:
+      symbol: 'شهر'
+    year:
+      symbol: 'سنة'
+headings:
+  full:
+    - 'شمال'
+    - 'شمال-شمال-شرق'
+    - 'شمال-شرق'
+    - 'شرق-شمال-شرق'
+    - 'شرق'
+    - 'شرق-جنوب-شرق'
+    - 'جنوب-شرق'
+    - 'جنوب-جنوب-شرق'
+    - 'جنوب'
+    - 'جنوب-جنوب-غرب'
+    - 'جنوب-غرب'
+    - 'غرب-جنوب-غرب'
+    - 'غرب'
+    - 'غرب-شمال-غرب'
+    - 'شمال-غرب'
+    - 'شمال-شمال-غرب'
+  short:
+    - 'ش'
+    - 'ش.ش.ق'
+    - 'ش.ق'
+    - 'ق.ش.ق'
+    - 'ق'
+    - 'ق.ج.ق'
+    - 'ج.ق'
+    - 'ج.ج.ق'
+    - 'ج'
+    - 'ج.ج.غ'
+    - 'ج.غ'
+    - 'غ.ج.غ'
+    - 'غ'
+    - 'غ.ش.غ'
+    - 'ش.غ'
+    - 'ش.ش.غ'

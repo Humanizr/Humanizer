@@ -7,20 +7,6 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var additionalFiles = context.AdditionalTextsProvider
-            .Select(static (additionalText, cancellationToken) => GeneratorInput.Create(additionalText, cancellationToken))
-            .Where(static input => input is not null);
-
-        context.RegisterSourceOutput(additionalFiles, static (productionContext, input) =>
-        {
-            if (input is null)
-            {
-                return;
-            }
-
-            input.Emit(productionContext);
-        });
-
         var localeFiles = context.AdditionalTextsProvider
             .Select(static (additionalText, cancellationToken) => LocaleDefinitionFile.Create(additionalText, cancellationToken))
             .Where(static file => file is not null)
@@ -28,6 +14,16 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 
         var localeCatalog = localeFiles
             .Select(static (files, _) => LocaleCatalogInput.Create(files));
+
+        var localePhraseTables = localeCatalog
+            .Select(static (catalog, _) => LocalePhraseTableCatalogInput.Create(catalog));
+
+        context.RegisterSourceOutput(localePhraseTables, static (productionContext, input) => input.Emit(productionContext));
+
+        var headingTables = localeCatalog
+            .Select(static (catalog, _) => HeadingTableCatalogInput.Create(catalog));
+
+        context.RegisterSourceOutput(headingTables, static (productionContext, input) => input.Emit(productionContext));
 
         var tokenMapLocales = localeCatalog
             .Select(static (catalog, _) => TokenMapWordsToNumberInput.Create(catalog));

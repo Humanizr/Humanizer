@@ -157,3 +157,317 @@ wordsToNumber:
     'милијарде': 1000000000
   negativePrefixes:
     - 'минус '
+
+phrases:
+  dateHumanize:
+    now: 'сада'
+    never: 'никада'
+    past:
+      millisecond:
+        single: 'пре милисекунде'
+        multiple:
+          forms:
+            default: 'милисекунди'
+          beforeCount: 'пре'
+      second:
+        single: 'пре секунде'
+        multiple:
+          forms:
+            default: 'секунди'
+            singular: 'секунде'
+            dual: 'секунде'
+            paucal: 'секунде'
+            plural: 'секунде'
+          beforeCount: 'пре'
+      minute:
+        single: 'пре минута'
+        multiple:
+          forms:
+            default: 'минута'
+          beforeCount: 'пре'
+      hour:
+        single: 'пре сат времена'
+        multiple:
+          forms:
+            default: 'сати'
+            singular: 'сата'
+            dual: 'сата'
+            paucal: 'сата'
+            plural: 'сата'
+          beforeCount: 'пре'
+      day:
+        single: 'јуче'
+        multiple:
+          forms:
+            default: 'дана'
+          beforeCount: 'пре'
+        template:
+          name: 'two'
+          value: 'пре 2 дана'
+      week:
+        single: 'пре недељу дана'
+        multiple:
+          forms:
+            default: 'недеља'
+          beforeCount: 'пре'
+      month:
+        single: 'пре месец дана'
+        multiple:
+          forms:
+            default: 'месеци'
+            singular: 'месеца'
+            dual: 'месеца'
+            paucal: 'месеца'
+            plural: 'месеца'
+          beforeCount: 'пре'
+      year:
+        single: 'пре годину дана'
+        multiple:
+          forms:
+            default: 'година'
+            singular: 'године'
+            dual: 'године'
+            paucal: 'године'
+            plural: 'године'
+          beforeCount: 'пре'
+    future:
+      millisecond:
+        single: 'за милисекунду'
+        multiple:
+          forms:
+            default: 'милисекунди'
+          beforeCount: 'за'
+      second:
+        single: 'за секунду'
+        multiple:
+          forms:
+            default: 'секунди'
+            singular: 'секунде'
+            dual: 'секунде'
+            paucal: 'секунде'
+            plural: 'секунде'
+          beforeCount: 'за'
+      minute:
+        single: 'за минут'
+        multiple:
+          forms:
+            default: 'минута'
+          beforeCount: 'за'
+      hour:
+        single: 'за сат времена'
+        multiple:
+          forms:
+            default: 'сати'
+            singular: 'сата'
+            dual: 'сата'
+            paucal: 'сата'
+            plural: 'сата'
+          beforeCount: 'за'
+      day:
+        single: 'сутра'
+        multiple:
+          forms:
+            default: 'дана'
+          beforeCount: 'за'
+        template:
+          name: 'two'
+          value: 'за 2 дана'
+      week:
+        single: 'за недељу дана'
+        multiple:
+          forms:
+            default: 'недеља'
+          beforeCount: 'за'
+      month:
+        single: 'за месец дана'
+        multiple:
+          forms:
+            default: 'месеци'
+            singular: 'месеца'
+            dual: 'месеца'
+            paucal: 'месеца'
+            plural: 'месеца'
+          beforeCount: 'за'
+      year:
+        single: 'за годину дана'
+        multiple:
+          forms:
+            default: 'година'
+            singular: 'године'
+            dual: 'године'
+            paucal: 'године'
+            plural: 'године'
+          beforeCount: 'за'
+  timeSpan:
+    zero: 'без протеклог времена'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 милисекунда'
+        words: 'one милисекунда'
+      multiple:
+        forms:
+          default: 'милисекунди'
+          singular: 'милисекунде'
+          dual: 'милисекунде'
+          paucal: 'милисекунде'
+          plural: 'милисекунде'
+    second:
+      single:
+        numeric: '1 секунда'
+        words: 'one секунда'
+      multiple:
+        forms:
+          default: 'секунди'
+          singular: 'секунде'
+          dual: 'секунде'
+          paucal: 'секунде'
+          plural: 'секунде'
+    minute:
+      single:
+        numeric: '1 минут'
+        words: 'one минут'
+      multiple:
+        forms:
+          default: 'минута'
+    hour:
+      single:
+        numeric: '1 сат'
+        words: 'one сат'
+      multiple:
+        forms:
+          default: 'сати'
+          singular: 'сата'
+          dual: 'сата'
+          paucal: 'сата'
+          plural: 'сата'
+    day:
+      single:
+        numeric: '1 дан'
+        words: 'one дан'
+      multiple:
+        forms:
+          default: 'дана'
+    week:
+      single:
+        numeric: '1 недеља'
+        words: 'one недеља'
+      multiple:
+        forms:
+          default: 'недеља'
+          singular: 'недеље'
+          dual: 'недеље'
+          paucal: 'недеље'
+          plural: 'недеље'
+    month:
+      single:
+        numeric: '1 месец'
+        words: 'one месец'
+      multiple:
+        forms:
+          default: 'месеци'
+          singular: 'месеца'
+          dual: 'месеца'
+          paucal: 'месеца'
+          plural: 'месеца'
+    year:
+      single:
+        numeric: '1 година'
+        words: 'one година'
+      multiple:
+        forms:
+          default: 'година'
+          singular: 'године'
+          dual: 'године'
+          paucal: 'године'
+          plural: 'године'
+  dataUnit:
+    bit:
+      forms:
+        default: 'битова'
+        singular: 'бит'
+        paucal: 'бита'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'бајтова'
+        singular: 'бајт'
+        paucal: 'бајта'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'килобајтова'
+        singular: 'килобајт'
+        paucal: 'килобајта'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'мегабајтова'
+        singular: 'мегабајт'
+        paucal: 'мегабајта'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'гигабајтова'
+        singular: 'гигабајт'
+        paucal: 'гигабајта'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'терабајтова'
+        singular: 'терабајт'
+        paucal: 'терабајта'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'мс'
+    second:
+      symbol: 'с'
+    minute:
+      symbol: 'мин'
+    hour:
+      symbol: 'ч'
+    day:
+      symbol: 'дан'
+    week:
+      symbol: 'нед'
+    month:
+      symbol: 'мес'
+    year:
+      symbol: 'год'
+headings:
+  full:
+    - 'север'
+    - 'север-североисток'
+    - 'североисток'
+    - 'исток-североисток'
+    - 'исток'
+    - 'исток-југоисток'
+    - 'југоисток'
+    - 'југ-југоисток'
+    - 'југ'
+    - 'југ-југозапад'
+    - 'југозапад'
+    - 'запад-југозапад'
+    - 'запад'
+    - 'запад-северозапад'
+    - 'северозапад'
+    - 'север-северозапад'
+  short:
+    - 'С'
+    - 'ССИ'
+    - 'СИ'
+    - 'ИСИ'
+    - 'И'
+    - 'ИЈИ'
+    - 'ЈИ'
+    - 'ЈЈИ'
+    - 'Ј'
+    - 'ЈЈЗ'
+    - 'ЈЗ'
+    - 'ЗЈЗ'
+    - 'З'
+    - 'ЗСЗ'
+    - 'СЗ'
+    - 'ССЗ'

@@ -41,16 +41,15 @@ Currently Humanizer supports quite a few localisations for `DateTime.Humanize`, 
 
 Humanizer could definitely do with more translations.
 To add a translation for `DateTime.Humanize` and `TimeSpan.Humanize`,
-fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx)
-to the end (e.g. resources.ru.resx for Russian), translate the values to your language, register your formatter in [FormatterRegistry.cs](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Configuration/FormatterRegistry.cs), write unit tests for the translation, commit, and send a pull request for it. Thanks.
+fork the repository if you haven't done yet, duplicate one of the YAML locale files under [`src/Humanizer/Locales`](https://github.com/Humanizr/Humanizer/tree/main/src/Humanizer/Locales), rename it to your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx)
+(for example `ru.yml` for Russian), translate the locale data, write unit tests for the translation, commit, and send a pull request for it. Thanks.
 
 Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومان" not "2 يوم".
-Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
-In cases like this, in addition to creating a resource file, you should also subclass [`DefaultFormatter`](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Localisation/Formatters/DefaultFormatter.cs) in a class that represents your language;
-e.g. [`RomanianFormatter`](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Localisation/Formatters/RomanianFormatter.cs) and then override the methods that need the complex rules.
-We think overriding the `GetResourceKey` method should be enough.
-To see how to do that check out `RomanianFormatter` and `RussianFormatter`.
-Then you return an instance of your class in the [`Configurator`](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Configuration/Configurator.cs) based on the current culture.
+The YAML schema supports exact phrases, counted forms, aliases, and profile data, so most languages can be expressed entirely in locale data without custom runtime code.
+If your language still needs formatter-specific behavior beyond the locale schema, subclass [`DefaultFormatter`](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Localisation/Formatters/DefaultFormatter.cs) in a class that represents your language;
+e.g. [`RomanianFormatter`](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Localisation/Formatters/RomanianFormatter.cs) and override the typed formatter methods that need custom rules.
+Check out `RomanianFormatter` and `RussianFormatter` for examples.
+Then return an instance of your class in the [`Configurator`](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Configuration/Configurator.cs) based on the current culture.
 
 Translations for `ToWords` and `ToOrdinalWords` methods are currently done in code as there is a huge difference between the way different languages deal with number words.
 Check out [Dutch](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Localisation/NumberToWords/DutchNumberToWordsConverter.cs) and

@@ -4,17 +4,17 @@ namespace koKR;
 public class DateHumanizeTests
 {
     [Fact]
-    public void TwoDaysAgoHasExplicitKoreanResource() =>
-        Assert.Equal("2일 전", Resources.GetResource("DateHumanize_TwoDaysAgo", new("ko-KR")));
+    public void TwoDaysAgo() =>
+        DateHumanize.Verify("2일 전", 2, TimeUnit.Day, Tense.Past);
 
     [Fact]
-    public void TwoDaysFromNowHasExplicitKoreanResource() =>
-        Assert.Equal("2일 후", Resources.GetResource("DateHumanize_TwoDaysFromNow", new("ko-KR")));
+    public void TwoDaysFromNow() =>
+        DateHumanize.Verify("2일 후", 2, TimeUnit.Day, Tense.Future);
 
     [Fact]
-    public void DayPaucalResourcesExist()
+    public void MultipleDaysUseNoSpaceCountedForm()
     {
-        Assert.Equal("{0}일 전", Resources.GetResource("DateHumanize_MultipleDaysAgo_Paucal", new("ko-KR")));
-        Assert.Equal("{0}일 후", Resources.GetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("ko-KR")));
+        DateHumanize.Verify("3일 전", 3, TimeUnit.Day, Tense.Past);
+        DateHumanize.Verify("3일 후", 3, TimeUnit.Day, Tense.Future);
     }
 }

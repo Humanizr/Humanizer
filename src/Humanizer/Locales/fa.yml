@@ -136,3 +136,249 @@ wordsToNumber:
     - 'منفی '
   ignoredTokens:
     - 'و'
+
+phrases:
+  dateHumanize:
+    now: 'الآن'
+    never: 'هرگز'
+    past:
+      millisecond:
+        single: 'یک میلی‌ثانیه پیش'
+        multiple:
+          forms:
+            default: 'میلی‌ثانیه'
+          afterCount: 'پیش'
+      second:
+        single: 'یک ثانیه پیش'
+        multiple:
+          forms:
+            default: 'ثانیه'
+          afterCount: 'پیش'
+      minute:
+        single: 'یک دقیقه پیش'
+        multiple:
+          forms:
+            default: 'دقیقه'
+          afterCount: 'پیش'
+      hour:
+        single: 'یک ساعت پیش'
+        multiple:
+          forms:
+            default: 'ساعت'
+          afterCount: 'پیش'
+      day:
+        single: 'دیروز'
+        multiple:
+          forms:
+            default: 'روز'
+          afterCount: 'پیش'
+        template:
+          name: 'two'
+          value: 'پریروز'
+      week:
+        single: 'یک هفته پیش'
+        multiple:
+          forms:
+            default: 'هفته'
+          afterCount: 'پیش'
+      month:
+        single: 'یک ماه پیش'
+        multiple:
+          forms:
+            default: 'ماه'
+          afterCount: 'پیش'
+      year:
+        single: 'یک سال پیش'
+        multiple:
+          forms:
+            default: 'سال'
+          afterCount: 'پیش'
+    future:
+      millisecond:
+        single: 'یک میلی‌ثانیه بعد'
+        multiple:
+          forms:
+            default: 'میلی‌ثانیه'
+          afterCount: 'بعد'
+      second:
+        single: 'یک ثانیه بعد'
+        multiple:
+          forms:
+            default: 'ثانیه'
+          afterCount: 'بعد'
+      minute:
+        single: 'یک دقیقه بعد'
+        multiple:
+          forms:
+            default: 'دقیقه'
+          afterCount: 'بعد'
+      hour:
+        single: 'یک ساعت بعد'
+        multiple:
+          forms:
+            default: 'ساعت'
+          afterCount: 'بعد'
+      day:
+        single: 'فردا'
+        multiple:
+          forms:
+            default: 'روز'
+          afterCount: 'بعد'
+        template:
+          name: 'two'
+          value: 'پس‌فردا'
+      week:
+        single: 'یک هفته بعد'
+        multiple:
+          forms:
+            default: 'هفته'
+          afterCount: 'بعد'
+      month:
+        single: 'یک ماه بعد'
+        multiple:
+          forms:
+            default: 'ماه'
+          afterCount: 'بعد'
+      year:
+        single: 'یک سال بعد'
+        multiple:
+          forms:
+            default: 'سال'
+          afterCount: 'بعد'
+  timeSpan:
+    zero: 'الآن'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: 'یک میلی‌ثانیه'
+        words: 'یک میلی‌ثانیه'
+      multiple:
+        forms:
+          default: 'میلی‌ثانیه'
+    second:
+      single:
+        numeric: 'یک ثانیه'
+        words: 'یک ثانیه'
+      multiple:
+        forms:
+          default: 'ثانیه'
+    minute:
+      single:
+        numeric: 'یک دقیقه'
+        words: 'یک دقیقه'
+      multiple:
+        forms:
+          default: 'دقیقه'
+    hour:
+      single:
+        numeric: 'یک ساعت'
+        words: 'یک ساعت'
+      multiple:
+        forms:
+          default: 'ساعت'
+    day:
+      single:
+        numeric: 'یک روز'
+        words: 'یک روز'
+      multiple:
+        forms:
+          default: 'روز'
+    week:
+      single:
+        numeric: 'یک هفته'
+        words: 'یک هفته'
+      multiple:
+        forms:
+          default: 'هفته'
+    month:
+      single:
+        numeric: 'یک ماه'
+        words: 'یک ماه'
+      multiple:
+        forms:
+          default: 'ماه'
+    year:
+      single:
+        numeric: 'یک سال'
+        words: 'یک سال'
+      multiple:
+        forms:
+          default: 'سال'
+  dataUnit:
+    bit:
+      forms:
+        default: 'بیت'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'بایت'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'کیلوبایت'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'مگابایت'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'گیگابایت'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'ترابایت'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'میلی‌ثانیه'
+    second:
+      symbol: 'ثانیه'
+    minute:
+      symbol: 'دقیقه'
+    hour:
+      symbol: 'ساعت'
+    day:
+      symbol: 'روز'
+    week:
+      symbol: 'هفته'
+    month:
+      symbol: 'ماه'
+    year:
+      symbol: 'سال'
+headings:
+  full:
+    - 'شمال'
+    - 'شمال‌شمال‌شرق'
+    - 'شمال‌شرق'
+    - 'شرق‌شمال‌شرق'
+    - 'شرق'
+    - 'شرق‌جنوب‌شرق'
+    - 'جنوب‌شرق'
+    - 'جنوب‌جنوب‌شرق'
+    - 'جنوب'
+    - 'جنوب‌جنوب‌غرب'
+    - 'جنوب‌غرب'
+    - 'غرب‌جنوب‌غرب'
+    - 'غرب'
+    - 'غرب‌شمال‌غرب'
+    - 'شمال‌غرب'
+    - 'شمال‌شمال‌غرب'
+  short:
+    - 'ش'
+    - 'ش‌ش‌شر'
+    - 'ش‌شر'
+    - 'شر‌ش‌شر'
+    - 'شر'
+    - 'شر‌ج‌شر'
+    - 'ج‌شر'
+    - 'ج‌ج‌شر'
+    - 'ج'
+    - 'ج‌ج‌غر'
+    - 'ج‌غر'
+    - 'غر‌ج‌غر'
+    - 'غر'
+    - 'غر‌ش‌غر'
+    - 'ش‌غر'
+    - 'ش‌ش‌غر'

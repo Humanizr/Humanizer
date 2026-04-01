@@ -4,6 +4,9 @@
 collectionFormatter:
   engine: 'conjunction'
   value: 'ir'
+grammar:
+  pluralRule: 'lithuanian'
+  dataUnitPluralRule: 'lithuanian'
 formatter:
   engine: 'profiled'
   resourceKeyOverrides:
@@ -13,14 +16,6 @@ formatter:
       keys:
         - 'TimeSpanHumanize_Zero'
         - 'DateHumanize_Now'
-  resourceKeyDetector: 'lithuanian'
-  resourceKeySuffixes:
-    singular: '_Singular'
-    plural: '_Plural'
-  dataUnitDetector: 'lithuanian'
-  dataUnitSuffixes:
-    singular: '_Singular'
-    plural: '_Plural'
   dataUnitFallbackTransform: 'trim-trailing-s'
 numberToWords:
   engine: 'pluralized-scale'
@@ -236,3 +231,333 @@ wordsToNumber:
   useHundredMultiplier: true
   negativePrefixes:
     - 'minus '
+
+phrases:
+  dateHumanize:
+    now: 'dabar'
+    never: 'niekada'
+    past:
+      millisecond:
+        single: 'prieš vieną milisekundę'
+        multiple:
+          forms:
+            default: 'milisekundes'
+          beforeCount: 'prieš'
+      second:
+        single: 'prieš vieną sekundę'
+        multiple:
+          forms:
+            default: 'sekundes'
+            singular: 'sekundę'
+            dual: 'sekundžių'
+            paucal: 'sekundžių'
+            plural: 'sekundžių'
+          beforeCount: 'prieš'
+      minute:
+        single: 'prieš minutę'
+        multiple:
+          forms:
+            default: 'minutes'
+            singular: 'minutę'
+            dual: 'minučių'
+            paucal: 'minučių'
+            plural: 'minučių'
+          beforeCount: 'prieš'
+      hour:
+        single: 'prieš valandą'
+        multiple:
+          forms:
+            default: 'valandas'
+            singular: 'valandą'
+            dual: 'valandų'
+            paucal: 'valandų'
+            plural: 'valandų'
+          beforeCount: 'prieš'
+      day:
+        single: 'vakar'
+        multiple:
+          forms:
+            default: 'dienas'
+            singular: 'dieną'
+            dual: 'dienų'
+            paucal: 'dienų'
+            plural: 'dienų'
+          beforeCount: 'prieš'
+        template:
+          name: 'two'
+          value: 'prieš 2 dienas'
+      week:
+        single: 'prieš vieną savaitę'
+        multiple:
+          forms:
+            default: 'savaites'
+          beforeCount: 'prieš'
+      month:
+        single: 'prieš vieną mėnesį'
+        multiple:
+          forms:
+            default: 'mėnesius'
+            singular: 'mėnesį'
+            dual: 'mėnesių'
+            paucal: 'mėnesių'
+            plural: 'mėnesių'
+          beforeCount: 'prieš'
+      year:
+        single: 'prieš vienerius metus'
+        multiple:
+          forms:
+            default: 'metus'
+            dual: 'metų'
+            paucal: 'metų'
+            plural: 'metų'
+          beforeCount: 'prieš'
+    future:
+      millisecond:
+        single: 'po vienos milisekundės'
+        multiple:
+          forms:
+            default: 'milisekundžių'
+          beforeCount: 'po'
+      second:
+        single: 'po vienos sekundės'
+        multiple:
+          forms:
+            default: 'sekundžių'
+            singular: 'sekundės'
+            dual: 'sekundės'
+            paucal: 'sekundės'
+            plural: 'sekundės'
+          beforeCount: 'po'
+      minute:
+        single: 'po minutės'
+        multiple:
+          forms:
+            default: 'minučių'
+            singular: 'minutės'
+            dual: 'minutės'
+            paucal: 'minutės'
+            plural: 'minutės'
+          beforeCount: 'po'
+      hour:
+        single: 'po valandos'
+        multiple:
+          forms:
+            default: 'valandų'
+            singular: 'valandos'
+            dual: 'valandos'
+            paucal: 'valandos'
+            plural: 'valandos'
+          beforeCount: 'po'
+      day:
+        single: 'rytoj'
+        multiple:
+          forms:
+            default: 'dienų'
+            singular: 'dienos'
+            dual: 'dienos'
+            paucal: 'dienos'
+            plural: 'dienos'
+          beforeCount: 'po'
+        template:
+          name: 'two'
+          value: 'po 2 dienų'
+      week:
+        single: 'po vienos savaitės'
+        multiple:
+          forms:
+            default: 'savaičių'
+          beforeCount: 'po'
+      month:
+        single: 'po vieno mėnesio'
+        multiple:
+          forms:
+            default: 'mėnesių'
+            singular: 'mėnesio'
+            dual: 'mėnesio'
+            paucal: 'mėnesio'
+            plural: 'mėnesio'
+          beforeCount: 'po'
+      year:
+        single: 'po vienerių metų'
+        multiple:
+          forms:
+            default: 'metų'
+          beforeCount: 'po'
+  timeSpan:
+    zero: 'nėra laiko'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milisekundė'
+        words: 'viena milisekundė'
+      multiple:
+        forms:
+          default: 'milisekundės'
+          singular: 'milisekundė'
+          dual: 'milisekundžių'
+          paucal: 'milisekundžių'
+          plural: 'milisekundžių'
+    second:
+      single:
+        numeric: '1 sekundė'
+        words: 'viena sekundė'
+      multiple:
+        forms:
+          default: 'sekundės'
+          singular: 'sekundė'
+          dual: 'sekundžių'
+          paucal: 'sekundžių'
+          plural: 'sekundžių'
+    minute:
+      single:
+        numeric: '1 minutė'
+        words: 'viena minutė'
+      multiple:
+        forms:
+          default: 'minutės'
+          singular: 'minutė'
+          dual: 'minučių'
+          paucal: 'minučių'
+          plural: 'minučių'
+    hour:
+      single:
+        numeric: '1 valanda'
+        words: 'viena valanda'
+      multiple:
+        forms:
+          default: 'valandos'
+          singular: 'valanda'
+          dual: 'valandų'
+          paucal: 'valandų'
+          plural: 'valandų'
+    day:
+      single:
+        numeric: '1 diena'
+        words: 'viena diena'
+      multiple:
+        forms:
+          default: 'dienos'
+          singular: 'diena'
+          dual: 'dienų'
+          paucal: 'dienų'
+          plural: 'dienų'
+    week:
+      single:
+        numeric: '1 savaitė'
+        words: 'viena savaitė'
+      multiple:
+        forms:
+          default: 'savaitės'
+          singular: 'savaitė'
+          dual: 'savaičių'
+          paucal: 'savaičių'
+          plural: 'savaičių'
+    month:
+      single:
+        numeric: '1 mėnuo'
+        words: 'vienas mėnuo'
+      multiple:
+        forms:
+          default: 'mėnesiai'
+          singular: 'mėnuo'
+          dual: 'mėnesių'
+          paucal: 'mėnesių'
+          plural: 'mėnesių'
+    year:
+      single:
+        numeric: '1 metai'
+        words: 'vieni metai'
+      multiple:
+        forms:
+          default: 'metai'
+          dual: 'metų'
+          paucal: 'metų'
+          plural: 'metų'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bitai'
+        singular: 'bitas'
+        plural: 'bitų'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'baitas'
+        plural: 'baitų'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobaitai'
+        singular: 'kilobaitas'
+        plural: 'kilobaitų'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabaitai'
+        singular: 'megabaitas'
+        plural: 'megabaitų'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabaitas'
+        plural: 'gigabaitų'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabaitai'
+        singular: 'terabaitas'
+        plural: 'terabaitų'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min.'
+    hour:
+      symbol: 'val.'
+    day:
+      symbol: 'd.'
+    week:
+      symbol: 'sav.'
+    month:
+      symbol: 'mėn.'
+    year:
+      symbol: 'm.'
+headings:
+  full:
+    - 'šiaurė'
+    - 'šiaurės šiaurės rytai'
+    - 'šiaurės rytai'
+    - 'rytų šiaurės rytai'
+    - 'rytai'
+    - 'rytų pietryčiai'
+    - 'pietryčiai'
+    - 'pietų pietryčiai'
+    - 'pietūs'
+    - 'pietų pietvakariai'
+    - 'pietvakariai'
+    - 'vakarų pietvakariai'
+    - 'vakarai'
+    - 'vakarų šiaurės vakarai'
+    - 'šiaurės vakarai'
+    - 'šiaurės šiaurės vakarai'
+  short:
+    - 'Š'
+    - 'ŠŠR'
+    - 'ŠR'
+    - 'RŠR'
+    - 'R'
+    - 'RPR'
+    - 'PR'
+    - 'PPR'
+    - 'P'
+    - 'PPV'
+    - 'PV'
+    - 'VPV'
+    - 'V'
+    - 'VŠV'
+    - 'ŠV'
+    - 'ŠŠV'

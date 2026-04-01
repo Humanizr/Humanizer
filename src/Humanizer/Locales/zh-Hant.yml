@@ -60,3 +60,233 @@ wordsToNumber:
   largeUnits:
     '万': 10000
     '亿': 100000000
+
+phrases:
+  dateHumanize:
+    now: '現在'
+    never: '從不'
+    past:
+      millisecond:
+        single: '1 毫秒前'
+        multiple:
+          forms:
+            default: '毫秒前'
+      second:
+        single: '1 秒鐘前'
+        multiple:
+          forms:
+            default: '秒鐘前'
+      minute:
+        single: '1 分鐘前'
+        multiple:
+          forms:
+            default: '分鐘前'
+      hour:
+        single: '1 小時前'
+        multiple:
+          forms:
+            default: '小時前'
+      day:
+        single: '昨天'
+        multiple:
+          forms:
+            default: '天前'
+        template:
+          name: 'two'
+          value: '前天'
+      week:
+        single: '1 週前'
+        multiple:
+          forms:
+            default: '週前'
+      month:
+        single: '1 個月前'
+        multiple:
+          forms:
+            default: '個月前'
+      year:
+        single: '去年'
+        multiple:
+          forms:
+            default: '年前'
+    future:
+      millisecond:
+        single: '1 毫秒後'
+        multiple:
+          forms:
+            default: '毫秒後'
+      second:
+        single: '1 秒鐘後'
+        multiple:
+          forms:
+            default: '秒鐘後'
+      minute:
+        single: '1 分鐘後'
+        multiple:
+          forms:
+            default: '分鐘後'
+      hour:
+        single: '1 小時後'
+        multiple:
+          forms:
+            default: '小時後'
+      day:
+        single: '明天'
+        multiple:
+          forms:
+            default: '天後'
+        template:
+          name: 'two'
+          value: '後天'
+      week:
+        single: '1 週後'
+        multiple:
+          forms:
+            default: '週後'
+      month:
+        single: '1 個月後'
+        multiple:
+          forms:
+            default: '個月後'
+      year:
+        single: '明年'
+        multiple:
+          forms:
+            default: '年後'
+  timeSpan:
+    zero: '沒有時間'
+    age:
+      template: '{value} 歲'
+    millisecond:
+      single:
+        numeric: '1 毫秒'
+        words: 'one 毫秒'
+      multiple:
+        forms:
+          default: '毫秒'
+    second:
+      single:
+        numeric: '1 秒'
+        words: 'one 秒'
+      multiple:
+        forms:
+          default: '秒'
+    minute:
+      single:
+        numeric: '1 分'
+        words: 'one 分'
+      multiple:
+        forms:
+          default: '分'
+    hour:
+      single:
+        numeric: '1 小時'
+        words: 'one 小時'
+      multiple:
+        forms:
+          default: '小時'
+    day:
+      single:
+        numeric: '1 天'
+        words: 'one 天'
+      multiple:
+        forms:
+          default: '天'
+    week:
+      single:
+        numeric: '1 週'
+        words: 'one 週'
+      multiple:
+        forms:
+          default: '週'
+    month:
+      single:
+        numeric: '1 個月'
+        words: 'one 個月'
+      multiple:
+        forms:
+          default: '個月'
+    year:
+      single:
+        numeric: '1 年'
+        words: 'one 年'
+      multiple:
+        forms:
+          default: '年'
+  dataUnit:
+    bit:
+      forms:
+        default: '位元'
+      symbol: 'b'
+    byte:
+      forms:
+        default: '位元組'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: '千位元組'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: '百萬位元組'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: '十億位元組'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: '兆位元組'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: '毫秒'
+    second:
+      symbol: '秒'
+    minute:
+      symbol: '分'
+    hour:
+      symbol: '小時'
+    day:
+      symbol: '天'
+    week:
+      symbol: '週'
+    month:
+      symbol: '月'
+    year:
+      symbol: '年'
+headings:
+  full:
+    - '北'
+    - '北東北'
+    - '東北'
+    - '東北東'
+    - '東'
+    - '東南東'
+    - '東南'
+    - '南東南'
+    - '南'
+    - '南西南'
+    - '西南'
+    - '西南西'
+    - '西'
+    - '西北西'
+    - '西北'
+    - '北西北'
+  short:
+    - '北'
+    - '北東北'
+    - '東北'
+    - '東北東'
+    - '東'
+    - '東南東'
+    - '東南'
+    - '南東南'
+    - '南'
+    - '南西南'
+    - '西南'
+    - '西南西'
+    - '西'
+    - '西北西'
+    - '西北'
+    - '北西北'

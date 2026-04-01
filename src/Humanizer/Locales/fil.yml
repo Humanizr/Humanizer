@@ -143,3 +143,251 @@ wordsToNumber:
     - 'at'
   negativePrefixes:
     - 'minus '
+
+phrases:
+  dateHumanize:
+    now: 'ngayon'
+    never: 'hindi kailanman'
+    past:
+      millisecond:
+        single: 'isang milisegundo ang nakalipas'
+        multiple:
+          forms:
+            default: 'milisegundong'
+          afterCount: 'nakalipas'
+      second:
+        single: 'isang segundo ang nakalipas'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} segundong nakalipas'
+            singular: '{count} segundo ang nakalipas'
+      minute:
+        single: 'isang minutong nakalipas'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count} minutong nakalipas'
+            singular: '{count} minuto ang nakalipas'
+      hour:
+        single: 'isang oras ang nakalipas'
+        multiple:
+          forms:
+            default: 'oras'
+          afterCount: 'ang nakalipas'
+      day:
+        single: 'kahapon'
+        multiple:
+          forms:
+            default: 'araw'
+          afterCount: 'ang nakalipas'
+        template:
+          name: 'two'
+          value: '2 araw ang nakalipas'
+      week:
+        single: 'isang linggo ang nakalipas'
+        multiple:
+          forms:
+            default: 'linggong'
+          afterCount: 'nakalipas'
+      month:
+        single: 'isang buwan ang nakalipas'
+        multiple:
+          forms:
+            default: 'buwan'
+          afterCount: 'ang nakalipas'
+      year:
+        single: 'isang taong nakalipas'
+        multiple:
+          forms:
+            default: 'taong'
+          afterCount: 'nakalipas'
+    future:
+      millisecond:
+        single: 'isang milisegundo mula ngayon'
+        multiple:
+          forms:
+            default: 'milisegundo'
+          afterCount: 'mula ngayon'
+      second:
+        single: 'isang segundo mula ngayon'
+        multiple:
+          forms:
+            default: 'segundo'
+          afterCount: 'mula ngayon'
+      minute:
+        single: 'isang minuto mula ngayon'
+        multiple:
+          forms:
+            default: 'minuto'
+          afterCount: 'mula ngayon'
+      hour:
+        single: 'isang oras mula ngayon'
+        multiple:
+          forms:
+            default: 'oras'
+          afterCount: 'mula ngayon'
+      day:
+        single: 'bukas'
+        multiple:
+          forms:
+            default: 'araw'
+          afterCount: 'mula ngayon'
+        template:
+          name: 'two'
+          value: '2 araw mula ngayon'
+      week:
+        single: 'isang linggo mula ngayon'
+        multiple:
+          forms:
+            default: 'linggo'
+          afterCount: 'mula ngayon'
+      month:
+        single: 'isang buwan mula ngayon'
+        multiple:
+          forms:
+            default: 'buwan'
+          afterCount: 'mula ngayon'
+      year:
+        single: 'isang taon mula ngayon'
+        multiple:
+          forms:
+            default: 'taon'
+          afterCount: 'mula ngayon'
+  timeSpan:
+    zero: 'walang oras'
+    age:
+      template: '{value} na gulang'
+    millisecond:
+      single:
+        numeric: '1 milisegundo'
+        words: 'isang milisegundo'
+      multiple:
+        forms:
+          default: 'milisegundo'
+    second:
+      single:
+        numeric: '1 segundo'
+        words: 'isang segundo'
+      multiple:
+        forms:
+          default: 'segundo'
+    minute:
+      single:
+        numeric: '1 minuto'
+        words: 'isang minuto'
+      multiple:
+        forms:
+          default: 'minuto'
+    hour:
+      single:
+        numeric: '1 oras'
+        words: 'isang oras'
+      multiple:
+        forms:
+          default: 'oras'
+    day:
+      single:
+        numeric: '1 araw'
+        words: 'isang araw'
+      multiple:
+        forms:
+          default: 'araw'
+    week:
+      single:
+        numeric: '1 linggo'
+        words: 'isang linggo'
+      multiple:
+        forms:
+          default: 'linggo'
+    month:
+      single:
+        numeric: '1 buwan'
+        words: 'isang buwan'
+      multiple:
+        forms:
+          default: 'buwan'
+    year:
+      single:
+        numeric: '1 taon'
+        words: 'isang taon'
+      multiple:
+        forms:
+          default: 'taon'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'oras'
+    day:
+      symbol: 'araw'
+    week:
+      symbol: 'linggo'
+    month:
+      symbol: 'buwan'
+    year:
+      symbol: 'taon'
+headings:
+  full:
+    - 'hilaga'
+    - 'hilaga-hilagang-silangan'
+    - 'hilagang-silangan'
+    - 'silangan-hilagang-silangan'
+    - 'silangan'
+    - 'silangan-timog-silangan'
+    - 'timog-silangan'
+    - 'timog-timog-silangan'
+    - 'timog'
+    - 'timog-timog-kanluran'
+    - 'timog-kanluran'
+    - 'kanluran-timog-kanluran'
+    - 'kanluran'
+    - 'kanluran-hilagang-kanluran'
+    - 'hilagang-kanluran'
+    - 'hilaga-hilagang-kanluran'
+  short:
+    - 'N'
+    - 'NNE'
+    - 'NE'
+    - 'ENE'
+    - 'E'
+    - 'ESE'
+    - 'SE'
+    - 'SSE'
+    - 'S'
+    - 'SSW'
+    - 'SW'
+    - 'WSW'
+    - 'W'
+    - 'WNW'
+    - 'NW'
+    - 'NNW'

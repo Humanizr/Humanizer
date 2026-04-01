@@ -342,58 +342,49 @@ public sealed partial class HumanizerSourceGenerator
             ? CreateStringArrayExpression(property)
             : "Array.Empty<string>()";
 
-    static string CreateFormatterSuffixMapExpression(JsonElement element, string propertyName)
-    {
-        if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Object)
-        {
-            return "new FormatterSuffixMap(string.Empty, string.Empty, string.Empty, string.Empty)";
-        }
-
-        return "new FormatterSuffixMap(" +
-               QuoteLiteral(GetOptionalString(property, "singular") ?? string.Empty) + ", " +
-               QuoteLiteral(GetOptionalString(property, "dual") ?? string.Empty) + ", " +
-               QuoteLiteral(GetOptionalString(property, "paucal") ?? string.Empty) + ", " +
-               QuoteLiteral(GetOptionalString(property, "plural") ?? string.Empty) + ")";
-    }
-
     static string CreateFormatterNumberDetectorExpression(JsonElement element, string propertyName) =>
-        "FormatterNumberDetectorKind." + ToEnumMemberName(GetOptionalString(element, propertyName) ?? "none");
+        CreateFormatterNumberDetectorExpression(GetOptionalString(element, propertyName));
+
+    static string CreateFormatterNumberDetectorExpression(string? value) =>
+        "FormatterNumberDetectorKind." + ToEnumMemberName(value ?? "none");
 
     static string CreateFormatterNumberFormExpression(JsonElement element, string propertyName, string defaultValue = "default") =>
-        "FormatterNumberForm." + ToEnumMemberName(GetOptionalString(element, propertyName) ?? defaultValue);
+        CreateFormatterNumberFormExpression(GetOptionalString(element, propertyName), defaultValue);
+
+    static string CreateFormatterNumberFormExpression(string? value, string defaultValue = "default") =>
+        "FormatterNumberForm." + ToEnumMemberName(value ?? defaultValue);
 
     static string CreateFormatterFallbackTransformExpression(JsonElement element, string propertyName) =>
-        "FormatterDataUnitFallbackTransform." + ToEnumMemberName(GetOptionalString(element, propertyName) ?? "none");
+        CreateFormatterFallbackTransformExpression(GetOptionalString(element, propertyName));
+
+    static string CreateFormatterFallbackTransformExpression(string? value) =>
+        "FormatterDataUnitFallbackTransform." + ToEnumMemberName(value ?? "none");
 
     static string CreateFormatterPrepositionModeExpression(JsonElement element, string propertyName) =>
-        "FormatterPrepositionMode." + ToEnumMemberName(GetOptionalString(element, propertyName) ?? "none");
+        CreateFormatterPrepositionModeExpression(GetOptionalString(element, propertyName));
+
+    static string CreateFormatterPrepositionModeExpression(string? value) =>
+        "FormatterPrepositionMode." + ToEnumMemberName(value ?? "none");
 
     static string CreateFormatterSecondaryPlaceholderModeExpression(JsonElement element, string propertyName) =>
-        "FormatterSecondaryPlaceholderMode." + ToEnumMemberName(GetOptionalString(element, propertyName) ?? "none");
+        CreateFormatterSecondaryPlaceholderModeExpression(GetOptionalString(element, propertyName));
 
-    static string CreateFormatterResourceKeyOverrideArrayExpression(JsonElement element, string propertyName)
-    {
-        if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Array)
-        {
-            return "Array.Empty<FormatterResourceKeyOverride>()";
-        }
-
-        return CreateTypedConstructorArrayExpression(
-            "FormatterResourceKeyOverride",
-            property,
-            RequiredInt64Value("number"),
-            RequiredStringValue("suffix"),
-            static item => item.TryGetProperty("keys", out var keys) && keys.ValueKind == JsonValueKind.Array
-                ? CreateStringArrayExpression(keys)
-                : "Array.Empty<string>()",
-            static item => item.TryGetProperty("prefixes", out var prefixes) && prefixes.ValueKind == JsonValueKind.Array
-                ? CreateStringArrayExpression(prefixes)
-                : "Array.Empty<string>()");
-    }
+    static string CreateFormatterSecondaryPlaceholderModeExpression(string? value) =>
+        "FormatterSecondaryPlaceholderMode." + ToEnumMemberName(value ?? "none");
 
     static string CreateTimeUnitGenderMapExpression(JsonElement element, string propertyName)
     {
         if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Object)
+        {
+            return "FrozenDictionary<TimeUnit, GrammaticalGender>.Empty";
+        }
+
+        return CreateTimeUnitGenderMapExpression(property);
+    }
+
+    static string CreateTimeUnitGenderMapExpression(JsonElement property)
+    {
+        if (property.ValueKind != JsonValueKind.Object)
         {
             return "FrozenDictionary<TimeUnit, GrammaticalGender>.Empty";
         }
@@ -1045,13 +1036,37 @@ public sealed partial class HumanizerSourceGenerator
             OptionalEnumValue("countGender", "GrammaticalGender", "masculine"),
             RequiredStringValue("singularCardinal"),
             RequiredStringValue("pluralCardinalFormat"),
-            static element => element.TryGetProperty("ordinalSingular", out var ordinalSingular) && ordinalSingular.ValueKind == JsonValueKind.Array
-                ? CreateStringArrayExpression(ordinalSingular)
-                : throw new InvalidOperationException("Missing required property 'ordinalSingular'."),
-            static element => element.TryGetProperty("ordinalPlural", out var ordinalPlural) && ordinalPlural.ValueKind == JsonValueKind.Array
-                ? CreateStringArrayExpression(ordinalPlural)
-                : throw new InvalidOperationException("Missing required property 'ordinalPlural'."),
+            static element => CreateUnitLeadingCompoundOrdinalPairExpression(element, "ordinalSingular"),
+            static element => CreateUnitLeadingCompoundOrdinalPairExpression(element, "ordinalPlural"),
             OptionalStringValue("countWordFormNextWord"));
+
+    static string CreateUnitLeadingCompoundOrdinalPairExpression(JsonElement element, string propertyName)
+    {
+        if (!element.TryGetProperty(propertyName, out var property))
+        {
+            throw new InvalidOperationException($"Missing required property '{propertyName}'.");
+        }
+
+        return property.ValueKind switch
+        {
+            JsonValueKind.Array => CreateStringArrayExpression(property),
+            JsonValueKind.Object => CreateTerminalContinuingStringArrayExpression(property, propertyName),
+            _ => throw new InvalidOperationException($"Property '{propertyName}' must be an array or mapping.")
+        };
+    }
+
+    static string CreateTerminalContinuingStringArrayExpression(JsonElement objectElement, string propertyName)
+    {
+        if (objectElement.ValueKind != JsonValueKind.Object)
+        {
+            throw new InvalidOperationException($"Property '{propertyName}' must be a mapping.");
+        }
+
+        return "new string[] { " +
+               QuoteLiteral(GetRequiredString(objectElement, "terminal")) + ", " +
+               QuoteLiteral(GetRequiredString(objectElement, "continuing")) +
+               " }";
+    }
 
     static string CreateConjoinedGenderedScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(

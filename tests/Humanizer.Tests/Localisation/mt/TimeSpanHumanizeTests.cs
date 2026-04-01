@@ -18,13 +18,6 @@ public class TimeSpanHumanizeTests
     public void Age(int days, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 
-    [Fact]
-    public void AgeHasExplicitMalteseResource()
-    {
-        Assert.True(Resources.TryGetResource("TimeSpanHumanize_Age", new("mt"), out var value));
-        Assert.Equal("{0}", value);
-    }
-
     [Theory]
     [Trait("Translation", "Google")]
     [InlineData(31, "xahar")]

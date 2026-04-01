@@ -76,21 +76,9 @@ public class DateHumanizeTests
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
 
     [Fact]
-    public void HasExplicitResidualDateResources()
+    public void NeverUsesLocaleSpecificPhrase()
     {
-        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("vi"), out var never));
-        Assert.Equal("không bao giờ", never);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("vi"), out var twoDaysAgo));
-        Assert.Equal("hôm kia", twoDaysAgo);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("vi"), out var twoDaysFromNow));
-        Assert.Equal("ngày kia", twoDaysFromNow);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("vi"), out var daysAgoPaucal));
-        Assert.Equal("cách đây {0} ngày", daysAgoPaucal);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("vi"), out var daysFromNowPaucal));
-        Assert.Equal("{0} ngày nữa", daysFromNowPaucal);
+        DateTime? never = null;
+        Assert.Equal("không bao giờ", never.Humanize());
     }
 }

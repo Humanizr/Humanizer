@@ -168,3 +168,241 @@ wordsToNumber:
   negativePrefixes:
     - 'minusz '
     - 'minus '
+
+phrases:
+  dateHumanize:
+    now: 'most'
+    never: 'soha'
+    past:
+      millisecond:
+        single: 'egy ezredmásodperce'
+        multiple:
+          forms:
+            default: 'ezredmásodperce'
+      second:
+        single: 'egy másodperce'
+        multiple:
+          forms:
+            default: 'másodperce'
+      minute:
+        single: 'egy perce'
+        multiple:
+          forms:
+            default: 'perce'
+      hour:
+        single: 'egy órája'
+        multiple:
+          forms:
+            default: 'órája'
+      day:
+        single: 'tegnap'
+        multiple:
+          forms:
+            default: 'napja'
+        template:
+          name: 'two'
+          value: 'tegnapelőtt'
+      week:
+        single: 'egy hete'
+        multiple:
+          forms:
+            default: 'hete'
+      month:
+        single: 'egy hónapja'
+        multiple:
+          forms:
+            default: 'hónapja'
+      year:
+        single: 'egy éve'
+        multiple:
+          forms:
+            default: 'éve'
+    future:
+      millisecond:
+        single: 'egy ezredmásodperc múlva'
+        multiple:
+          forms:
+            default: 'ezredmásodperc'
+          afterCount: 'múlva'
+      second:
+        single: 'egy másodperc múlva'
+        multiple:
+          forms:
+            default: 'másodperc'
+          afterCount: 'múlva'
+      minute:
+        single: 'egy perc múlva'
+        multiple:
+          forms:
+            default: 'perc'
+          afterCount: 'múlva'
+      hour:
+        single: 'egy óra múlva'
+        multiple:
+          forms:
+            default: 'óra'
+          afterCount: 'múlva'
+      day:
+        single: 'holnap'
+        multiple:
+          forms:
+            default: 'nap'
+          afterCount: 'múlva'
+        template:
+          name: 'two'
+          value: 'holnapután'
+      week:
+        single: 'egy hét múlva'
+        multiple:
+          forms:
+            default: 'hét'
+          afterCount: 'múlva'
+      month:
+        single: 'egy hónap múlva'
+        multiple:
+          forms:
+            default: 'hónap'
+          afterCount: 'múlva'
+      year:
+        single: 'egy év múlva'
+        multiple:
+          forms:
+            default: 'év'
+          afterCount: 'múlva'
+  timeSpan:
+    zero: 'nincs idő'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 ezredmásodperc'
+        words: 'egy ezredmásodperc'
+      multiple:
+        forms:
+          default: 'ezredmásodperc'
+    second:
+      single:
+        numeric: '1 másodperc'
+        words: 'egy másodperc'
+      multiple:
+        forms:
+          default: 'másodperc'
+    minute:
+      single:
+        numeric: '1 perc'
+        words: 'egy perc'
+      multiple:
+        forms:
+          default: 'perc'
+    hour:
+      single:
+        numeric: '1 óra'
+        words: 'egy óra'
+      multiple:
+        forms:
+          default: 'óra'
+    day:
+      single:
+        numeric: '1 nap'
+        words: 'egy nap'
+      multiple:
+        forms:
+          default: 'nap'
+    week:
+      single:
+        numeric: '1 hét'
+        words: 'egy hét'
+      multiple:
+        forms:
+          default: 'hét'
+    month:
+      single:
+        numeric: '1 hónap'
+        words: 'egy hónap'
+      multiple:
+        forms:
+          default: 'hónap'
+    year:
+      single:
+        numeric: '1 év'
+        words: 'egy év'
+      multiple:
+        forms:
+          default: 'év'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bájt'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobájt'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabájt'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabájt'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabájt'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'm'
+    minute:
+      symbol: 'p'
+    hour:
+      symbol: 'ó'
+    day:
+      symbol: 'n'
+    week:
+      symbol: 'hét'
+    month:
+      symbol: 'h'
+    year:
+      symbol: 'é'
+headings:
+  full:
+    - 'észak'
+    - 'észak-északkelet'
+    - 'északkelet'
+    - 'kelet-északkelet'
+    - 'kelet'
+    - 'kelet-délkelet'
+    - 'délkelet'
+    - 'dél-délkelet'
+    - 'dél'
+    - 'dél-délnyugat'
+    - 'délnyugat'
+    - 'nyugat-délnyugat'
+    - 'nyugat'
+    - 'nyugat-északnyugat'
+    - 'északnyugat'
+    - 'észak-északnyugat'
+  short:
+    - 'É'
+    - 'ÉÉK'
+    - 'ÉK'
+    - 'KÉK'
+    - 'K'
+    - 'KDK'
+    - 'DK'
+    - 'DDK'
+    - 'D'
+    - 'DDNy'
+    - 'DNy'
+    - 'NyDNy'
+    - 'Ny'
+    - 'NyÉNy'
+    - 'ÉNy'
+    - 'ÉÉNy'

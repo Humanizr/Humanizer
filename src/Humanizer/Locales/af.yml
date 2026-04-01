@@ -146,3 +146,249 @@ wordsToNumber:
     - 'minus '
   ignoredTokens:
     - 'en'
+
+phrases:
+  dateHumanize:
+    now: 'nou'
+    never: 'nooit'
+    past:
+      millisecond:
+        single: '1 millisekonde terug'
+        multiple:
+          forms:
+            default: 'millisekondes'
+          afterCount: 'terug'
+      second:
+        single: '1 sekonde terug'
+        multiple:
+          forms:
+            default: 'sekondes'
+          afterCount: 'terug'
+      minute:
+        single: '1 minuut terug'
+        multiple:
+          forms:
+            default: 'minute'
+          afterCount: 'terug'
+      hour:
+        single: '1 uur terug'
+        multiple:
+          forms:
+            default: 'ure'
+          afterCount: 'gelede'
+      day:
+        single: 'gister'
+        multiple:
+          forms:
+            default: 'dae'
+          afterCount: 'gelede'
+        template:
+          name: 'two'
+          value: '2 dae gelede'
+      week:
+        single: '1 week gelede'
+        multiple:
+          forms:
+            default: 'weke'
+          afterCount: 'gelede'
+      month:
+        single: '1 maand gelede'
+        multiple:
+          forms:
+            default: 'maande'
+          afterCount: 'gelede'
+      year:
+        single: '1 jaar gelede'
+        multiple:
+          forms:
+            default: 'jaar'
+          afterCount: 'gelede'
+    future:
+      millisecond:
+        single: 'oor 1 millisekonde'
+        multiple:
+          forms:
+            default: 'millisekondes'
+          beforeCount: 'oor'
+      second:
+        single: 'oor 1 sekonde'
+        multiple:
+          forms:
+            default: 'sekondes'
+          beforeCount: 'oor'
+      minute:
+        single: 'oor 1 minuut'
+        multiple:
+          forms:
+            default: 'minute'
+          beforeCount: 'oor'
+      hour:
+        single: 'oor 1 uur'
+        multiple:
+          forms:
+            default: 'ure'
+          beforeCount: 'oor'
+      day:
+        single: 'môre'
+        multiple:
+          forms:
+            default: 'dae'
+          beforeCount: 'oor'
+        template:
+          name: 'two'
+          value: 'oor 2 dae'
+      week:
+        single: 'oor 1 week'
+        multiple:
+          forms:
+            default: 'weke'
+          beforeCount: 'oor'
+      month:
+        single: 'oor 1 maand'
+        multiple:
+          forms:
+            default: 'maande'
+          beforeCount: 'oor'
+      year:
+        single: 'oor 1 jaar'
+        multiple:
+          forms:
+            default: 'jaar'
+          beforeCount: 'oor'
+  timeSpan:
+    zero: 'geen tyd'
+    age:
+      template: '{value} oud'
+    millisecond:
+      single:
+        numeric: '1 millisekonde'
+        words: 'een millisekonde'
+      multiple:
+        forms:
+          default: 'millisekondes'
+    second:
+      single:
+        numeric: '1 sekonde'
+        words: 'een sekonde'
+      multiple:
+        forms:
+          default: 'sekondes'
+    minute:
+      single:
+        numeric: '1 minuut'
+        words: 'een minuut'
+      multiple:
+        forms:
+          default: 'minute'
+    hour:
+      single:
+        numeric: '1 uur'
+        words: 'een uur'
+      multiple:
+        forms:
+          default: 'ure'
+    day:
+      single:
+        numeric: '1 dag'
+        words: 'een dag'
+      multiple:
+        forms:
+          default: 'dae'
+    week:
+      single:
+        numeric: '1 week'
+        words: 'een week'
+      multiple:
+        forms:
+          default: 'weke'
+    month:
+      single:
+        numeric: '1 maand'
+        words: 'een maand'
+      multiple:
+        forms:
+          default: 'maande'
+    year:
+      single:
+        numeric: '1 jaar'
+        words: 'een jaar'
+      multiple:
+        forms:
+          default: 'jaar'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'sek.'
+    minute:
+      symbol: 'min.'
+    hour:
+      symbol: 'uur'
+    day:
+      symbol: 'dag'
+    week:
+      symbol: 'week'
+    month:
+      symbol: 'maand'
+    year:
+      symbol: 'jaar'
+headings:
+  full:
+    - 'noord'
+    - 'noordnoordoos'
+    - 'noordoos'
+    - 'oosnoordoos'
+    - 'oos'
+    - 'oossuidoos'
+    - 'suidoos'
+    - 'suidsuidoos'
+    - 'suid'
+    - 'suidsuidwes'
+    - 'suidwes'
+    - 'wessuidwes'
+    - 'wes'
+    - 'wesnoordwes'
+    - 'noordwes'
+    - 'noordnoordwes'
+  short:
+    - 'N'
+    - 'NNO'
+    - 'NO'
+    - 'ONO'
+    - 'O'
+    - 'OSO'
+    - 'SO'
+    - 'SSO'
+    - 'S'
+    - 'SSW'
+    - 'SW'
+    - 'WSW'
+    - 'W'
+    - 'WNW'
+    - 'NW'
+    - 'NNW'

@@ -2,6 +2,220 @@
 # Omit a feature to inherit it from the parent locale.
 # Inline mappings below are the source of truth for generated profiles and token-map lexicons.
 collectionFormatter: 'oxford'
+phrases:
+  dateHumanize:
+    now: 'now'
+    never: 'never'
+    past:
+      millisecond:
+        single: 'one millisecond ago'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            default: 'milliseconds'
+      second:
+        single: 'one second ago'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            singular: 'second'
+            default: 'seconds'
+      minute:
+        single: 'a minute ago'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            singular: 'minute'
+            default: 'minutes'
+      hour:
+        single: 'an hour ago'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            singular: 'hour'
+            default: 'hours'
+      day:
+        single: 'yesterday'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            singular: 'day'
+            default: 'days'
+      week:
+        single: 'one week ago'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            singular: 'week'
+            default: 'weeks'
+      month:
+        single: 'one month ago'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            default: 'months'
+      year:
+        single: 'one year ago'
+        multiple:
+          afterCount: 'ago'
+          forms:
+            default: 'years'
+    future:
+      millisecond:
+        single: 'one millisecond from now'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            default: 'milliseconds'
+      second:
+        single: 'one second from now'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            singular: 'second'
+            default: 'seconds'
+      minute:
+        single: 'a minute from now'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            singular: 'minute'
+            default: 'minutes'
+      hour:
+        single: 'an hour from now'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            singular: 'hour'
+            default: 'hours'
+      day:
+        single: 'tomorrow'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            singular: 'day'
+            default: 'days'
+      week:
+        single: 'one week from now'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            singular: 'week'
+            default: 'weeks'
+      month:
+        single: 'one month from now'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            default: 'months'
+      year:
+        single: 'one year from now'
+        multiple:
+          afterCount: 'from now'
+          forms:
+            default: 'years'
+  timeSpan:
+    zero: 'no time'
+    age:
+      template: '{value} old'
+    millisecond:
+      single:
+        numeric: '1 millisecond'
+        words: 'one millisecond'
+      multiple:
+        forms:
+          singular: 'millisecond'
+          default: 'milliseconds'
+    second:
+      single:
+        numeric: '1 second'
+        words: 'one second'
+      multiple:
+        forms:
+          singular: 'second'
+          default: 'seconds'
+    minute:
+      single:
+        numeric: '1 minute'
+        words: 'one minute'
+      multiple:
+        forms:
+          singular: 'minute'
+          default: 'minutes'
+    hour:
+      single:
+        numeric: '1 hour'
+        words: 'one hour'
+      multiple:
+        forms:
+          singular: 'hour'
+          default: 'hours'
+    day:
+      single:
+        numeric: '1 day'
+        words: 'one day'
+      multiple:
+        forms:
+          singular: 'day'
+          default: 'days'
+    week:
+      single:
+        numeric: '1 week'
+        words: 'one week'
+      multiple:
+        forms:
+          singular: 'week'
+          default: 'weeks'
+    month:
+      single:
+        numeric: '1 month'
+        words: 'one month'
+      multiple:
+        forms:
+          default: 'months'
+    year:
+      single:
+        numeric: '1 year'
+        words: 'one year'
+      multiple:
+        forms:
+          default: 'years'
+  dataUnit:
+    bit:
+      forms: 'bit'
+      symbol: 'b'
+    byte:
+      forms: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'h'
+    day:
+      symbol: 'd'
+    week:
+      symbol: 'week'
+    month:
+      symbol: 'mo'
+    year:
+      symbol: 'y'
 numberToWords:
   engine: 'conjunctional-scale'
   minusWord: 'minus'
@@ -208,3 +422,38 @@ wordsToNumber:
   allowTerminalOrdinalToken: true
   useHundredMultiplier: true
   allowInvariantIntegerInput: true
+headings:
+  full:
+    - 'north'
+    - 'north-northeast'
+    - 'northeast'
+    - 'east-northeast'
+    - 'east'
+    - 'east-southeast'
+    - 'southeast'
+    - 'south-southeast'
+    - 'south'
+    - 'south-southwest'
+    - 'southwest'
+    - 'west-southwest'
+    - 'west'
+    - 'west-northwest'
+    - 'northwest'
+    - 'north-northwest'
+  short:
+    - 'N'
+    - 'NNE'
+    - 'NE'
+    - 'ENE'
+    - 'E'
+    - 'ESE'
+    - 'SE'
+    - 'SSE'
+    - 'S'
+    - 'SSW'
+    - 'SW'
+    - 'WSW'
+    - 'W'
+    - 'WNW'
+    - 'NW'
+    - 'NNW'

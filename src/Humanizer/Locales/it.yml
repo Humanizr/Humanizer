@@ -198,3 +198,249 @@ wordsToNumber:
     milioni: 1000000
     miliardo: 1000000000
     miliardi: 1000000000
+
+phrases:
+  dateHumanize:
+    now: 'adesso'
+    never: 'mai'
+    past:
+      millisecond:
+        single: 'un millisecondo fa'
+        multiple:
+          forms:
+            default: 'millisecondi'
+          afterCount: 'fa'
+      second:
+        single: 'un secondo fa'
+        multiple:
+          forms:
+            default: 'secondi'
+          afterCount: 'fa'
+      minute:
+        single: 'un minuto fa'
+        multiple:
+          forms:
+            default: 'minuti'
+          afterCount: 'fa'
+      hour:
+        single: 'un''ora fa'
+        multiple:
+          forms:
+            default: 'ore'
+          afterCount: 'fa'
+      day:
+        single: 'ieri'
+        multiple:
+          forms:
+            default: 'giorni'
+          afterCount: 'fa'
+        template:
+          name: 'two'
+          value: 'l''altro ieri'
+      week:
+        single: 'una settimana fa'
+        multiple:
+          forms:
+            default: 'settimane'
+          afterCount: 'fa'
+      month:
+        single: 'un mese fa'
+        multiple:
+          forms:
+            default: 'mesi'
+          afterCount: 'fa'
+      year:
+        single: 'un anno fa'
+        multiple:
+          forms:
+            default: 'anni'
+          afterCount: 'fa'
+    future:
+      millisecond:
+        single: 'tra un millisecondo'
+        multiple:
+          forms:
+            default: 'millisecondi'
+          beforeCount: 'tra'
+      second:
+        single: 'tra un secondo'
+        multiple:
+          forms:
+            default: 'secondi'
+          beforeCount: 'tra'
+      minute:
+        single: 'tra un minuto'
+        multiple:
+          forms:
+            default: 'minuti'
+          beforeCount: 'tra'
+      hour:
+        single: 'tra un''ora'
+        multiple:
+          forms:
+            default: 'ore'
+          beforeCount: 'tra'
+      day:
+        single: 'domani'
+        multiple:
+          forms:
+            default: 'giorni'
+          beforeCount: 'tra'
+        template:
+          name: 'two'
+          value: 'dopodomani'
+      week:
+        single: 'tra una settimana'
+        multiple:
+          forms:
+            default: 'settimane'
+          beforeCount: 'tra'
+      month:
+        single: 'tra un mese'
+        multiple:
+          forms:
+            default: 'mesi'
+          beforeCount: 'tra'
+      year:
+        single: 'tra un anno'
+        multiple:
+          forms:
+            default: 'anni'
+          beforeCount: 'tra'
+  timeSpan:
+    zero: '0 secondi'
+    age:
+      template: '{value} anni'
+    millisecond:
+      single:
+        numeric: '1 millisecondo'
+        words: 'un millisecondo'
+      multiple:
+        forms:
+          default: 'millisecondi'
+    second:
+      single:
+        numeric: '1 secondo'
+        words: 'un secondo'
+      multiple:
+        forms:
+          default: 'secondi'
+    minute:
+      single:
+        numeric: '1 minuto'
+        words: 'un minuto'
+      multiple:
+        forms:
+          default: 'minuti'
+    hour:
+      single:
+        numeric: '1 ora'
+        words: 'un''ora'
+      multiple:
+        forms:
+          default: 'ore'
+    day:
+      single:
+        numeric: '1 giorno'
+        words: 'un giorno'
+      multiple:
+        forms:
+          default: 'giorni'
+    week:
+      single:
+        numeric: '1 settimana'
+        words: 'una settimana'
+      multiple:
+        forms:
+          default: 'settimane'
+    month:
+      single:
+        numeric: '1 mese'
+        words: 'un mese'
+      multiple:
+        forms:
+          default: 'mesi'
+    year:
+      single:
+        numeric: '1 anno'
+        words: 'un anno'
+      multiple:
+        forms:
+          default: 'anni'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'sec.'
+    minute:
+      symbol: 'min.'
+    hour:
+      symbol: 'ora'
+    day:
+      symbol: 'giorno'
+    week:
+      symbol: 'settimana'
+    month:
+      symbol: 'mese'
+    year:
+      symbol: 'anno'
+headings:
+  full:
+    - 'nord'
+    - 'nord-nord-est'
+    - 'nord-est'
+    - 'est-nord-est'
+    - 'est'
+    - 'est-sud-est'
+    - 'sud-est'
+    - 'sud-sud-est'
+    - 'sud'
+    - 'sud-sud-ovest'
+    - 'sud-ovest'
+    - 'ovest-sud-ovest'
+    - 'ovest'
+    - 'ovest-nord-ovest'
+    - 'nord-ovest'
+    - 'nord-nord-ovest'
+  short:
+    - 'N'
+    - 'NNE'
+    - 'NE'
+    - 'ENE'
+    - 'E'
+    - 'ESE'
+    - 'SE'
+    - 'SSE'
+    - 'S'
+    - 'SSO'
+    - 'SO'
+    - 'OSO'
+    - 'O'
+    - 'ONO'
+    - 'NO'
+    - 'NNO'

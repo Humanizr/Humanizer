@@ -18,15 +18,6 @@ public class TimeSpanHumanizeTests
     public void Age(int days, bool toWords, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
 
-    [Fact]
-    public void AgeHasExplicitPortugueseResource()
-    {
-        var found = Resources.TryGetResource("TimeSpanHumanize_Age", new("pt"), out var ageFormat);
-
-        Assert.True(found);
-        Assert.Equal("{0}", ageFormat);
-    }
-
     [Theory]
     [Trait("Translation", "Google")]
     [InlineData(31, "1 mês")]

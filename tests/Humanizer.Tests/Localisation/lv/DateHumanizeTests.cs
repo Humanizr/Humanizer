@@ -4,17 +4,17 @@ namespace lv;
 public class DateHumanizeTests
 {
     [Fact]
-    public void TwoDaysAgoHasExplicitLatvianResource() =>
-        Assert.Equal("pirms 2 dienām", Resources.GetResource("DateHumanize_TwoDaysAgo", new("lv")));
+    public void TwoDaysAgo() =>
+        DateHumanize.Verify("pirms 2 dienām", 2, TimeUnit.Day, Tense.Past);
 
     [Fact]
-    public void TwoDaysFromNowHasExplicitLatvianResource() =>
-        Assert.Equal("pēc 2 dienām", Resources.GetResource("DateHumanize_TwoDaysFromNow", new("lv")));
+    public void TwoDaysFromNow() =>
+        DateHumanize.Verify("pēc 2 dienām", 2, TimeUnit.Day, Tense.Future);
 
     [Fact]
-    public void DayPaucalResourcesExist()
+    public void MultipleDaysUseLatvianCountedForm()
     {
-        Assert.Equal("pirms {0} dienām", Resources.GetResource("DateHumanize_MultipleDaysAgo_Paucal", new("lv")));
-        Assert.Equal("pēc {0} dienām", Resources.GetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("lv")));
+        DateHumanize.Verify("pirms 3 dienām", 3, TimeUnit.Day, Tense.Past);
+        DateHumanize.Verify("pēc 3 dienām", 3, TimeUnit.Day, Tense.Future);
     }
 }

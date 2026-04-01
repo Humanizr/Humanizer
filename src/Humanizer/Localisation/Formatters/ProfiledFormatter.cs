@@ -8,7 +8,7 @@ namespace Humanizer;
 enum FormatterNumberDetectorKind
 {
     /// <summary>
-    /// Use the default resource key without adding a number-based suffix.
+    /// Use the default grammatical form without applying a number-specific override.
     /// </summary>
     None,
 
@@ -132,6 +132,30 @@ enum FormatterSecondaryPlaceholderMode
     LuxembourgishEifelerN
 }
 
+[Flags]
+enum FormatterTimeUnitMask
+{
+    None = 0,
+    Millisecond = 1 << 0,
+    Second = 1 << 1,
+    Minute = 1 << 2,
+    Hour = 1 << 3,
+    Day = 1 << 4,
+    Week = 1 << 5,
+    Month = 1 << 6,
+    Year = 1 << 7,
+    All = Millisecond | Second | Minute | Hour | Day | Week | Month | Year
+}
+
+[Flags]
+enum FormatterTenseMask
+{
+    None = 0,
+    Past = 1 << 0,
+    Future = 1 << 1,
+    Both = Past | Future
+}
+
 /// <summary>
 /// DefaultFormatter variant that applies declarative locale profile data.
 /// </summary>
@@ -144,47 +168,6 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     readonly FormatterProfile profile = profile;
 
     /// <summary>
-    /// Formats a data unit using the profile's exact-key, suffix, and fallback rules.
-    /// </summary>
-    public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
-    {
-        if (toSymbol)
-        {
-            // Symbol forms are shared across profiles, so they bypass the grammar-specific lookup path entirely.
-            return base.DataUnitHumanize(dataUnit, count, toSymbol);
-        }
-
-        // When a profile has no dedicated data-unit grammar, keep the base spelling and only apply the
-        // locale-specific fallback transform. That preserves simple locales without forcing them through
-        // the suffix machinery below.
-        if (profile.DataUnitDetector == FormatterNumberDetectorKind.None && profile.DataUnitSuffixes.IsEmpty)
-        {
-            return ApplyFallbackTransform(base.DataUnitHumanize(dataUnit, count, toSymbol), count, profile.DataUnitFallbackTransform);
-        }
-
-        var resourceKey = DataUnitResourceKeys.GetResourceKey(dataUnit, false);
-        var numberForm = DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
-        var suffix = profile.DataUnitSuffixes.GetSuffix(numberForm);
-
-        // Try the suffixed resource first because some locales only define special counted forms and leave the
-        // unsuffixed resource as the generic fallback.
-        if (suffix.Length != 0 &&
-            Resources.TryGetResourceWithFallback(resourceKey + suffix, Culture, out var exactForm))
-        {
-            return exactForm;
-        }
-
-        // If the exact form is missing, the unsuffixed resource is the next best match before we fall back
-        // to the base spellings and transforms.
-        if (Resources.TryGetResourceWithFallback(resourceKey, Culture, out var resource))
-        {
-            return resource;
-        }
-
-        return ApplyFallbackTransform(base.DataUnitHumanize(dataUnit, count, toSymbol), count, profile.DataUnitFallbackTransform);
-    }
-
-    /// <summary>
     /// Converts numbers using a gender-aware rule when the profile provides one.
     /// </summary>
     protected override string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
@@ -192,51 +175,53 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             ? number.ToWords(gender, culture)
             : base.NumberToWords(unit, number, culture);
 
-    /// <summary>
-    /// Formats a unit that may need a locale-specific preposition or secondary placeholder.
-    /// </summary>
-    protected override string Format(TimeUnit unit, string resourceKey, int number, bool toWords = false)
-    {
-        var resolvedKey = GetResourceKey(resourceKey, number);
-        var resourceString = Resources.GetResource(resolvedKey, Culture);
-        // Compute the word form once because the same formatted value may feed different placeholder shapes.
-        var numberAsWord = NumberToWords(unit, number, Culture);
-        object value = toWords ? numberAsWord : number;
+    internal override FormatterNumberForm GetDatePhraseForm(TimeUnit unit, Tense tense, int number)
+        => TryGetDateOverrideForm(unit, tense, number, out var form)
+            ? form
+            : DetectNumberForm(number, profile.PhraseDetector);
 
-        // The generator emits exactly one supported placeholder mode per profile. If a locale ever combines
-        // them unexpectedly, fail fast so the bad schema cannot silently produce the wrong grammar.
-        return (profile.PrepositionMode, profile.SecondaryPlaceholderMode) switch
-        {
-            (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.None) =>
-                string.Format(resourceString, value),
-            (FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None) =>
-                string.Format(resourceString, value, ShouldUseRomanianPreposition(number) ? " de" : string.Empty),
-            (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN) =>
-                string.Format(resourceString, value, EifelerRule.DoesApply(numberAsWord.AsSpan()) ? string.Empty : LuxembourgishEifelerSuffix),
-            _ => throw new UnreachableException()
-        };
-    }
+    internal override FormatterNumberForm GetTimeSpanPhraseForm(TimeUnit unit, int number, bool toWords)
+        => TryGetTimeSpanOverrideForm(unit, number, out var form)
+            ? form
+            : DetectNumberForm(number, profile.PhraseDetector);
 
-    /// <summary>
-    /// Applies the profile's key suffixes and exact overrides to the canonical resource key.
-    /// </summary>
-    protected override string GetResourceKey(string resourceKey, int number)
-    {
-        // Exact overrides win before generic suffix detection so exceptional keys do not inherit the wrong
-        // plural rule just because they share a common resource prefix.
-        foreach (var rule in profile.ResourceKeyOverrides)
-        {
-            if (rule.IsMatch(resourceKey, number))
-            {
-                return resourceKey + rule.Suffix;
-            }
-        }
+    internal override FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
+        DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
 
-        var suffix = profile.ResourceSuffixes.GetSuffix(DetectNumberForm(number, profile.ResourceKeyDetector));
-        return suffix.Length == 0
-            ? resourceKey
-            : resourceKey + suffix;
-    }
+    internal override string ResolveDatePhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
+        ResolveProfiledPhraseForms(forms, form, profile.PhraseDetector);
+
+    internal override string ResolveTimeSpanPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
+        ResolveProfiledPhraseForms(forms, form, profile.PhraseDetector);
+
+    internal override string ResolveDataUnitPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
+        ResolveProfiledPhraseForms(forms, form, profile.DataUnitDetector);
+
+    internal override bool ShouldUseDatePhraseTable(TimeUnit unit, Tense tense, int count, LocalizedDatePhrase phrase) =>
+        true;
+
+    internal override bool ShouldUseTimeSpanPhraseTable(TimeUnit unit, int count, bool toWords, LocalizedTimeSpanPhrase phrase) =>
+        true;
+
+    internal override bool ShouldUseDatePhraseTemplate(TimeUnit unit, Tense tense, int count, LocalizedDatePhrase phrase)
+        => count == 2 &&
+            phrase.Template is { Name: "two" } &&
+            HasDateExactTwoOverride(unit, tense, count);
+
+    internal override bool ShouldAppendImplicitDataUnitPluralSuffix(DataUnit dataUnit, double count, FormatterNumberForm form, LocalizedPhraseForms forms, PhraseTemplate? template) =>
+        base.ShouldAppendImplicitDataUnitPluralSuffix(dataUnit, count, form, forms, template);
+
+    internal override string TransformDataUnitResult(DataUnit dataUnit, double count, FormatterNumberForm form, string result, LocalizedPhraseForms forms, PhraseTemplate? template) =>
+        profile.DataUnitFallbackTransform == FormatterDataUnitFallbackTransform.None ||
+        profile.DataUnitDetector != FormatterNumberDetectorKind.None
+            ? result
+            : ApplyFallbackTransform(result, count, profile.DataUnitFallbackTransform);
+
+    internal override string GetDatePhraseSecondaryPlaceholder(TimeUnit unit, Tense tense, int count) =>
+        GetSecondaryPlaceholder(unit, count);
+
+    internal override string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, int count, bool toWords) =>
+        GetSecondaryPlaceholder(unit, count);
 
     /// <summary>
     /// Detects the grammatical form for data-unit counts.
@@ -302,6 +287,29 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         };
     }
 
+    static string ResolveProfiledPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form, FormatterNumberDetectorKind detector) =>
+        detector switch
+        {
+            FormatterNumberDetectorKind.Between2And4Paucal or FormatterNumberDetectorKind.SouthSlavic => form switch
+            {
+                FormatterNumberForm.Paucal => forms.Paucal ?? forms.Singular ?? forms.Dual ?? forms.Plural ?? forms.Default,
+                FormatterNumberForm.Dual => forms.Dual ?? forms.Singular ?? forms.Paucal ?? forms.Default,
+                _ => forms.Resolve(form)
+            },
+            FormatterNumberDetectorKind.Slovenian => form switch
+            {
+                FormatterNumberForm.Dual => forms.Dual ?? forms.Singular ?? forms.Default,
+                FormatterNumberForm.Paucal => forms.Paucal ?? forms.Default,
+                _ => forms.Resolve(form)
+            },
+            FormatterNumberDetectorKind.Russian => form switch
+            {
+                FormatterNumberForm.Paucal => forms.Paucal ?? forms.Dual ?? forms.Default,
+                _ => forms.Resolve(form)
+            },
+            _ => forms.Resolve(form)
+        };
+
     /// <summary>
     /// Detects the South Slavic singular and paucal forms.
     /// </summary>
@@ -335,6 +343,36 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             _ => throw new UnreachableException()
         };
 
+    bool TryGetDateOverrideForm(TimeUnit unit, Tense tense, int number, out FormatterNumberForm form)
+    {
+        foreach (var rule in profile.DateFormOverrides)
+        {
+            if (rule.AppliesTo(unit, tense, number))
+            {
+                form = rule.Form;
+                return true;
+            }
+        }
+
+        form = default;
+        return false;
+    }
+
+    bool TryGetTimeSpanOverrideForm(TimeUnit unit, int number, out FormatterNumberForm form)
+    {
+        foreach (var rule in profile.TimeSpanFormOverrides)
+        {
+            if (rule.AppliesTo(unit, number))
+            {
+                form = rule.Form;
+                return true;
+            }
+        }
+
+        form = default;
+        return false;
+    }
+
     /// <summary>
     /// Determines whether Romanian needs the <c>de</c> preposition for the current value.
     /// </summary>
@@ -342,6 +380,30 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     {
         var numeral = Math.Abs(number % 100);
         return numeral is < 1 or > 19;
+    }
+
+    string GetSecondaryPlaceholder(TimeUnit unit, int number) =>
+        (profile.PrepositionMode, profile.SecondaryPlaceholderMode) switch
+        {
+            (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.None) => string.Empty,
+            (FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None) =>
+                ShouldUseRomanianPreposition(number) ? " de" : string.Empty,
+            (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN) =>
+                EifelerRule.DoesApply(NumberToWords(unit, number, Culture).AsSpan()) ? string.Empty : LuxembourgishEifelerSuffix.ToString(),
+            _ => throw new UnreachableException()
+        };
+
+    bool HasDateExactTwoOverride(TimeUnit unit, Tense tense, int number)
+    {
+        foreach (var rule in profile.DateFormOverrides)
+        {
+            if (rule.AppliesTo(unit, tense, number))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 
@@ -355,33 +417,30 @@ sealed record FormatterProfile
     /// <summary>
     /// Initializes a profile with the generated rule tables for one locale.
     /// </summary>
-    /// <param name="resourceKeyDetector">The detector used for resource-key suffix selection.</param>
-    /// <param name="resourceSuffixes">The suffix map used when a resource key needs a number-based suffix.</param>
-    /// <param name="resourceKeyOverrides">Exact-number overrides that take precedence over suffix detection.</param>
+    /// <param name="phraseDetector">The detector used for date and time-span grammatical forms.</param>
+    /// <param name="dateFormOverrides">Exact-number date overrides that take precedence over the generic detector.</param>
+    /// <param name="timeSpanFormOverrides">Exact-number time-span overrides that take precedence over the generic detector.</param>
     /// <param name="dataUnitDetector">The detector used for data-unit word forms.</param>
-    /// <param name="dataUnitSuffixes">The suffix map used for data-unit word forms.</param>
     /// <param name="dataUnitNonIntegralForm">The form to use for non-integral data-unit counts.</param>
     /// <param name="dataUnitFallbackTransform">The fallback transform applied when an exact data-unit resource is missing.</param>
     /// <param name="prepositionMode">The mode that controls locale-specific preposition placeholders.</param>
     /// <param name="secondaryPlaceholderMode">The mode that controls locale-specific secondary placeholders.</param>
     /// <param name="unitGenders">Optional grammatical genders used when converting units to words.</param>
     public FormatterProfile(
-        FormatterNumberDetectorKind resourceKeyDetector,
-        FormatterSuffixMap resourceSuffixes,
-        FormatterResourceKeyOverride[] resourceKeyOverrides,
+        FormatterNumberDetectorKind phraseDetector,
+        FormatterDateFormOverride[] dateFormOverrides,
+        FormatterTimeSpanFormOverride[] timeSpanFormOverrides,
         FormatterNumberDetectorKind dataUnitDetector,
-        FormatterSuffixMap dataUnitSuffixes,
         FormatterNumberForm dataUnitNonIntegralForm,
         FormatterDataUnitFallbackTransform dataUnitFallbackTransform,
         FormatterPrepositionMode prepositionMode,
         FormatterSecondaryPlaceholderMode secondaryPlaceholderMode,
         FrozenDictionary<TimeUnit, GrammaticalGender>? unitGenders = null)
     {
-        ResourceKeyDetector = resourceKeyDetector;
-        ResourceSuffixes = resourceSuffixes;
-        ResourceKeyOverrides = resourceKeyOverrides;
+        PhraseDetector = phraseDetector;
+        DateFormOverrides = dateFormOverrides;
+        TimeSpanFormOverrides = timeSpanFormOverrides;
         DataUnitDetector = dataUnitDetector;
-        DataUnitSuffixes = dataUnitSuffixes;
         DataUnitNonIntegralForm = dataUnitNonIntegralForm;
         DataUnitFallbackTransform = dataUnitFallbackTransform;
         PrepositionMode = prepositionMode;
@@ -390,29 +449,24 @@ sealed record FormatterProfile
     }
 
     /// <summary>
-    /// Gets the detector used for resource-key suffix selection.
+    /// Gets the detector used for date and time-span grammatical forms.
     /// </summary>
-    public FormatterNumberDetectorKind ResourceKeyDetector { get; }
+    public FormatterNumberDetectorKind PhraseDetector { get; }
 
     /// <summary>
-    /// Gets the suffix map used when a resource key needs a number-based suffix.
+    /// Gets the exact-number date overrides that take precedence over the generic detector.
     /// </summary>
-    public FormatterSuffixMap ResourceSuffixes { get; }
+    public FormatterDateFormOverride[] DateFormOverrides { get; }
 
     /// <summary>
-    /// Gets the exact-number overrides that take precedence over generic suffix detection.
+    /// Gets the exact-number time-span overrides that take precedence over the generic detector.
     /// </summary>
-    public FormatterResourceKeyOverride[] ResourceKeyOverrides { get; }
+    public FormatterTimeSpanFormOverride[] TimeSpanFormOverrides { get; }
 
     /// <summary>
     /// Gets the detector used for data-unit word forms.
     /// </summary>
     public FormatterNumberDetectorKind DataUnitDetector { get; }
-
-    /// <summary>
-    /// Gets the suffix map used for data-unit word forms.
-    /// </summary>
-    public FormatterSuffixMap DataUnitSuffixes { get; }
 
     /// <summary>
     /// Gets the form to use for non-integral data-unit counts.
@@ -441,92 +495,23 @@ sealed record FormatterProfile
 }
 
 /// <summary>
-/// Keeps the common singular/dual/paucal/plural suffix bundle together for generated profiles.
+/// Describes an exact-number date override for a generated formatter profile.
 /// </summary>
-readonly record struct FormatterSuffixMap
+readonly record struct FormatterDateFormOverride
 {
     /// <summary>
-    /// Initializes the suffix map for all supported grammatical forms.
-    /// </summary>
-    /// <param name="singular">The suffix used for singular forms.</param>
-    /// <param name="dual">The suffix used for dual forms.</param>
-    /// <param name="paucal">The suffix used for paucal forms.</param>
-    /// <param name="plural">The suffix used for plural forms.</param>
-    public FormatterSuffixMap(string singular, string dual, string paucal, string plural)
-    {
-        Singular = singular;
-        Dual = dual;
-        Paucal = paucal;
-        Plural = plural;
-    }
-
-    /// <summary>
-    /// Gets the suffix used for singular forms.
-    /// </summary>
-    public string Singular { get; }
-
-    /// <summary>
-    /// Gets the suffix used for dual forms.
-    /// </summary>
-    public string Dual { get; }
-
-    /// <summary>
-    /// Gets the suffix used for paucal forms.
-    /// </summary>
-    public string Paucal { get; }
-
-    /// <summary>
-    /// Gets the suffix used for plural forms.
-    /// </summary>
-    public string Plural { get; }
-
-    /// <summary>
-    /// Gets a value indicating whether all suffixes are empty.
-    /// </summary>
-    public bool IsEmpty =>
-        Singular.Length == 0 &&
-        Dual.Length == 0 &&
-        Paucal.Length == 0 &&
-        Plural.Length == 0;
-
-    /// <summary>
-    /// Gets the suffix for the requested grammatical form.
-    /// </summary>
-    /// <param name="form">The grammatical form selected by the detector.</param>
-    /// <returns>The suffix associated with <paramref name="form"/>.</returns>
-    public string GetSuffix(FormatterNumberForm form) =>
-        form switch
-        {
-            FormatterNumberForm.Singular => Singular,
-            FormatterNumberForm.Dual => Dual,
-            FormatterNumberForm.Paucal => Paucal,
-            FormatterNumberForm.Plural => Plural,
-            _ => string.Empty
-        };
-}
-
-/// <summary>
-/// Describes an exact-number override for a generated resource key.
-/// </summary>
-/// <remarks>
-/// Resource overrides let a profile pin exact exceptional keys without turning the shared
-/// formatter engine into a locale-specific if/else chain.
-/// </remarks>
-readonly record struct FormatterResourceKeyOverride
-{
-    /// <summary>
-    /// Initializes an exact override for a specific number.
+    /// Initializes an exact-number date override.
     /// </summary>
     /// <param name="number">The number that triggers the override.</param>
-    /// <param name="suffix">The suffix appended when the override matches.</param>
-    /// <param name="exactKeys">Exact resource keys that match this override.</param>
-    /// <param name="keyPrefixes">Resource-key prefixes that match this override.</param>
-    public FormatterResourceKeyOverride(int number, string suffix, string[] exactKeys, string[] keyPrefixes)
+    /// <param name="units">The units covered by the override.</param>
+    /// <param name="tenses">The tenses covered by the override.</param>
+    /// <param name="form">The form selected when the override matches.</param>
+    public FormatterDateFormOverride(int number, FormatterTimeUnitMask units, FormatterTenseMask tenses, FormatterNumberForm form)
     {
         Number = number;
-        Suffix = suffix;
-        ExactKeys = exactKeys;
-        KeyPrefixes = keyPrefixes;
+        Units = units;
+        Tenses = tenses;
+        Form = form;
     }
 
     /// <summary>
@@ -535,49 +520,95 @@ readonly record struct FormatterResourceKeyOverride
     public int Number { get; }
 
     /// <summary>
-    /// Gets the suffix appended when this override matches.
+    /// Gets the units covered by the override.
     /// </summary>
-    public string Suffix { get; }
+    public FormatterTimeUnitMask Units { get; }
 
     /// <summary>
-    /// Gets the exact resource keys that match this override.
+    /// Gets the tenses covered by the override.
     /// </summary>
-    public string[] ExactKeys { get; }
+    public FormatterTenseMask Tenses { get; }
 
     /// <summary>
-    /// Gets the resource-key prefixes that match this override.
+    /// Gets the form selected when the override matches.
     /// </summary>
-    public string[] KeyPrefixes { get; }
+    public FormatterNumberForm Form { get; }
 
     /// <summary>
-    /// Determines whether the override applies to the given key and number.
+    /// Determines whether the override applies to the given date phrase.
     /// </summary>
-    /// <param name="resourceKey">The canonical resource key being requested.</param>
+    /// <param name="unit">The time unit being formatted.</param>
+    /// <param name="tense">The tense being formatted.</param>
+    /// <param name="number">The count being formatted.</param>
+    /// <returns><c>true</c> when the override applies; otherwise, <c>false</c>.</returns>
+    public bool AppliesTo(TimeUnit unit, Tense tense, int number) =>
+        number == Number &&
+        (Units & GetTimeUnitMask(unit)) != 0 &&
+        (Tenses & GetTenseMask(tense)) != 0;
+
+    /// <summary>
+    /// Maps runtime time units onto the generated override mask.
+    /// </summary>
+    internal static FormatterTimeUnitMask GetTimeUnitMask(TimeUnit unit) =>
+        unit switch
+        {
+            TimeUnit.Millisecond => FormatterTimeUnitMask.Millisecond,
+            TimeUnit.Second => FormatterTimeUnitMask.Second,
+            TimeUnit.Minute => FormatterTimeUnitMask.Minute,
+            TimeUnit.Hour => FormatterTimeUnitMask.Hour,
+            TimeUnit.Day => FormatterTimeUnitMask.Day,
+            TimeUnit.Week => FormatterTimeUnitMask.Week,
+            TimeUnit.Month => FormatterTimeUnitMask.Month,
+            TimeUnit.Year => FormatterTimeUnitMask.Year,
+            _ => FormatterTimeUnitMask.None
+        };
+
+    static FormatterTenseMask GetTenseMask(Tense tense) =>
+        tense == Tense.Future
+            ? FormatterTenseMask.Future
+            : FormatterTenseMask.Past;
+}
+
+/// <summary>
+/// Describes an exact-number time-span override for a generated formatter profile.
+/// </summary>
+readonly record struct FormatterTimeSpanFormOverride
+{
+    /// <summary>
+    /// Initializes an exact-number time-span override.
+    /// </summary>
+    /// <param name="number">The number that triggers the override.</param>
+    /// <param name="units">The units covered by the override.</param>
+    /// <param name="form">The form selected when the override matches.</param>
+    public FormatterTimeSpanFormOverride(int number, FormatterTimeUnitMask units, FormatterNumberForm form)
+    {
+        Number = number;
+        Units = units;
+        Form = form;
+    }
+
+    /// <summary>
+    /// Gets the number that triggers the override.
+    /// </summary>
+    public int Number { get; }
+
+    /// <summary>
+    /// Gets the units covered by the override.
+    /// </summary>
+    public FormatterTimeUnitMask Units { get; }
+
+    /// <summary>
+    /// Gets the form selected when the override matches.
+    /// </summary>
+    public FormatterNumberForm Form { get; }
+
+    /// <summary>
+     /// Determines whether the override applies to the given key and number.
+     /// </summary>
+    /// <param name="unit">The time unit being formatted.</param>
     /// <param name="number">The numeric value being formatted.</param>
     /// <returns><c>true</c> when the override applies; otherwise, <c>false</c>.</returns>
-    public bool IsMatch(string resourceKey, int number)
-    {
-        if (number != Number)
-        {
-            return false;
-        }
-
-        foreach (var key in ExactKeys)
-        {
-            if (resourceKey == key)
-            {
-                return true;
-            }
-        }
-
-        foreach (var prefix in KeyPrefixes)
-        {
-            if (resourceKey.StartsWith(prefix, StringComparison.Ordinal))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public bool AppliesTo(TimeUnit unit, int number) =>
+        number == Number &&
+        (Units & FormatterDateFormOverride.GetTimeUnitMask(unit)) != 0;
 }

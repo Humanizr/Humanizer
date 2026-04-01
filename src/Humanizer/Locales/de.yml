@@ -7,6 +7,192 @@ collectionFormatter:
 formatter:
   engine: 'profiled'
   dataUnitFallbackTransform: 'trim-trailing-s'
+phrases:
+  dateHumanize:
+    now: 'jetzt'
+    never: 'nie'
+    past:
+      millisecond:
+        single: 'vor einer Millisekunde'
+        multiple:
+          forms: 'Millisekunden'
+          beforeCount: 'vor'
+      second:
+        single: 'vor einer Sekunde'
+        multiple:
+          forms: 'Sekunden'
+          beforeCount: 'vor'
+      minute:
+        single: 'vor einer Minute'
+        multiple:
+          forms: 'Minuten'
+          beforeCount: 'vor'
+      hour:
+        single: 'vor einer Stunde'
+        multiple:
+          forms: 'Stunden'
+          beforeCount: 'vor'
+      day:
+        single: 'gestern'
+        template:
+          name: 'two'
+          value: 'vorgestern'
+        multiple:
+          forms: 'Tagen'
+          beforeCount: 'vor'
+      week:
+        single: 'vor einer Woche'
+        multiple:
+          forms: 'Wochen'
+          beforeCount: 'vor'
+      month:
+        single: 'vor einem Monat'
+        multiple:
+          forms: 'Monaten'
+          beforeCount: 'vor'
+      year:
+        single: 'vor einem Jahr'
+        multiple:
+          forms: 'Jahren'
+          beforeCount: 'vor'
+    future:
+      millisecond:
+        single: 'in einer Millisekunde'
+        multiple:
+          forms: 'Millisekunden'
+          beforeCount: 'in'
+      second:
+        single: 'in einer Sekunde'
+        multiple:
+          forms: 'Sekunden'
+          beforeCount: 'in'
+      minute:
+        single: 'in einer Minute'
+        multiple:
+          forms: 'Minuten'
+          beforeCount: 'in'
+      hour:
+        single: 'in einer Stunde'
+        multiple:
+          forms: 'Stunden'
+          beforeCount: 'in'
+      day:
+        single: 'morgen'
+        template:
+          name: 'two'
+          value: 'übermorgen'
+        multiple:
+          forms: 'Tagen'
+          beforeCount: 'in'
+      week:
+        single: 'in einer Woche'
+        multiple:
+          forms: 'Wochen'
+          beforeCount: 'in'
+      month:
+        single: 'in einem Monat'
+        multiple:
+          forms: 'Monaten'
+          beforeCount: 'in'
+      year:
+        single: 'in einem Jahr'
+        multiple:
+          forms: 'Jahren'
+          beforeCount: 'in'
+  timeSpan:
+    zero: 'Keine Zeit'
+    age:
+      template: '{value} alt'
+    millisecond:
+      single:
+        numeric: '1 Millisekunde'
+        words: 'eine Millisekunde'
+      multiple:
+        forms: 'Millisekunden'
+    second:
+      single:
+        numeric: '1 Sekunde'
+        words: 'eine Sekunde'
+      multiple:
+        forms: 'Sekunden'
+    minute:
+      single:
+        numeric: '1 Minute'
+        words: 'eine Minute'
+      multiple:
+        forms: 'Minuten'
+    hour:
+      single:
+        numeric: '1 Stunde'
+        words: 'eine Stunde'
+      multiple:
+        forms: 'Stunden'
+    day:
+      single:
+        numeric: '1 Tag'
+        words: 'ein Tag'
+      multiple:
+        forms: 'Tage'
+    week:
+      single:
+        numeric: '1 Woche'
+        words: 'eine Woche'
+      multiple:
+        forms: 'Wochen'
+    month:
+      single:
+        numeric: '1 Monat'
+        words: 'ein Monat'
+      multiple:
+        forms: 'Monate'
+    year:
+      single:
+        numeric: '1 Jahr'
+        words: 'ein Jahr'
+      multiple:
+        forms: 'Jahre'
+  dataUnit:
+    bit:
+      forms: 'Bit'
+      symbol: 'bit'
+      template: '{unit}'
+    byte:
+      forms: 'Byte'
+      symbol: 'B'
+      template: '{unit}'
+    kilobyte:
+      forms: 'Kilobyte'
+      symbol: 'kB'
+      template: '{unit}'
+    megabyte:
+      forms: 'Megabyte'
+      symbol: 'MB'
+      template: '{unit}'
+    gigabyte:
+      forms: 'Gigabyte'
+      symbol: 'GB'
+      template: '{unit}'
+    terabyte:
+      forms: 'Terabyte'
+      symbol: 'TB'
+      template: '{unit}'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'h'
+    day:
+      symbol: 'd'
+    week:
+      symbol: 'Woche'
+    month:
+      symbol: 'M'
+    year:
+      symbol: 'a'
 numberToWords:
   engine: 'unit-leading-compound'
   zeroWord: 'null'
@@ -335,3 +521,38 @@ wordsToNumber:
     - 'ter'
     - 'tes'
   allowInvariantIntegerInput: true
+headings:
+  full:
+    - 'Nord'
+    - 'Nordnordost'
+    - 'Nordost'
+    - 'Ostnordost'
+    - 'Ost'
+    - 'Ostsüdost'
+    - 'Südost'
+    - 'Südsüdost'
+    - 'Süd'
+    - 'Südsüdwest'
+    - 'Südwest'
+    - 'Westsüdwest'
+    - 'West'
+    - 'Westnordwest'
+    - 'Nordwest'
+    - 'Nordnordwest'
+  short:
+    - 'N'
+    - 'NNO'
+    - 'NO'
+    - 'ONO'
+    - 'O'
+    - 'OSO'
+    - 'SO'
+    - 'SSO'
+    - 'S'
+    - 'SSW'
+    - 'SW'
+    - 'WSW'
+    - 'W'
+    - 'WNW'
+    - 'NW'
+    - 'NNW'

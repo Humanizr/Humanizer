@@ -17,7 +17,7 @@ public sealed partial class HumanizerSourceGenerator
     /// Represents a checked-in locale-owned YAML document under <c>Locales</c>.
     /// These files are the single authoring surface for locale-specific generator data.
     /// </summary>
-    sealed class LocaleDefinitionFile(string localeCode, string fileText)
+    internal sealed class LocaleDefinitionFile(string localeCode, string fileText)
     {
         public string LocaleCode { get; } = localeCode;
         public string FileText { get; } = fileText;
@@ -45,7 +45,7 @@ public sealed partial class HumanizerSourceGenerator
     /// Parses locale YAML once, resolves locale inheritance, and exposes locale-owned feature data
     /// to the profile catalogs, token-map generator, and registry generator.
     /// </summary>
-    sealed class LocaleCatalogInput(
+    internal sealed class LocaleCatalogInput(
         ImmutableArray<ResolvedLocaleDefinition> locales,
         ImmutableArray<Diagnostic> diagnostics,
         ImmutableHashSet<string> dataBackedFormatterProfiles,
@@ -60,8 +60,11 @@ public sealed partial class HumanizerSourceGenerator
             "dateOnlyToOrdinalWords",
             "dateToOrdinalWords",
             "formatter",
+            "grammar",
+            "headings",
             "numberToWords",
             "ordinalizer",
+            "phrases",
             "timeOnlyToClockNotation",
             "wordsToNumber"
         ];
@@ -108,7 +111,18 @@ public sealed partial class HumanizerSourceGenerator
             var resolving = new HashSet<string>(StringComparer.Ordinal);
             foreach (var localeCode in parsedLocales.Keys.OrderBy(static locale => locale, StringComparer.Ordinal))
             {
-                ResolveLocale(localeCode, parsedLocales, resolving, resolvedLocales, diagnostics);
+                try
+                {
+                    ResolveLocale(localeCode, parsedLocales, resolving, resolvedLocales, diagnostics);
+                }
+                catch (Exception exception)
+                {
+                    diagnostics.Add(Diagnostic.Create(
+                        HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                        Location.None,
+                        localeCode,
+                        exception.Message));
+                }
             }
 
             var formatterProfiles = resolvedLocales
@@ -218,17 +232,68 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var resolvedFeatureMap = resolvedFeatures.ToImmutable();
+            var grammar = TryResolveLocalePart(
+                locale.LocaleCode,
+                diagnostics,
+                static (resolvedLocaleCode, features) => ResolveGrammar(resolvedLocaleCode, features),
+                resolvedFeatureMap);
+            var phraseCatalog = TryResolveLocalePart(
+                locale.LocaleCode,
+                diagnostics,
+                static (resolvedLocaleCode, features) => ResolvePhraseCatalog(resolvedLocaleCode, features),
+                resolvedFeatureMap);
+            var headings = TryResolveLocalePart(
+                locale.LocaleCode,
+                diagnostics,
+                static (resolvedLocaleCode, features) => ResolveHeadings(resolvedLocaleCode, features),
+                resolvedFeatureMap);
+
             var resolved = new ResolvedLocaleDefinition(
                 localeCode,
                 resolvedFeatureMap,
-                ResolveFeature(locale.LocaleCode, "collectionFormatter", resolvedFeatureMap),
-                ResolveFeature(locale.LocaleCode, "dateOnlyToOrdinalWords", resolvedFeatureMap),
-                ResolveFeature(locale.LocaleCode, "dateToOrdinalWords", resolvedFeatureMap),
-                ResolveFeature(locale.LocaleCode, "formatter", resolvedFeatureMap),
-                ResolveFeature(locale.LocaleCode, "numberToWords", resolvedFeatureMap),
-                ResolveFeature(locale.LocaleCode, "ordinalizer", resolvedFeatureMap),
-                ResolveFeature(locale.LocaleCode, "timeOnlyToClockNotation", resolvedFeatureMap),
-                ResolveFeature(locale.LocaleCode, "wordsToNumber", resolvedFeatureMap));
+                grammar,
+                headings,
+                phraseCatalog,
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "collectionFormatter", features),
+                    resolvedFeatureMap),
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "dateOnlyToOrdinalWords", features),
+                    resolvedFeatureMap),
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "dateToOrdinalWords", features),
+                    resolvedFeatureMap),
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "formatter", features),
+                    resolvedFeatureMap),
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "numberToWords", features),
+                    resolvedFeatureMap),
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "ordinalizer", features),
+                    resolvedFeatureMap),
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "timeOnlyToClockNotation", features),
+                    resolvedFeatureMap),
+                TryResolveLocalePart(
+                    locale.LocaleCode,
+                    diagnostics,
+                    static (resolvedLocaleCode, features) => ResolveFeature(resolvedLocaleCode, "wordsToNumber", features),
+                    resolvedFeatureMap));
 
             cache.Add(resolved);
             return resolved;
@@ -269,6 +334,114 @@ public sealed partial class HumanizerSourceGenerator
                 _ => throw new InvalidOperationException(
                     $"Feature '{featureName}' in locale '{localeCode}' must be a scalar or mapping.")
             };
+        }
+
+        static SimpleYamlMapping? ResolveGrammar(
+            string localeCode,
+            ImmutableDictionary<string, SimpleYamlValue> features)
+        {
+            if (!features.TryGetValue("grammar", out var grammarValue))
+            {
+                return null;
+            }
+
+            return grammarValue as SimpleYamlMapping
+                ?? throw new InvalidOperationException($"Locale '{localeCode}.grammar' must be a mapping.");
+        }
+
+        static LocalePhraseCatalog? ResolvePhraseCatalog(
+            string localeCode,
+            ImmutableDictionary<string, SimpleYamlValue> features)
+        {
+            if (!features.TryGetValue("phrases", out var phraseValue))
+            {
+                return null;
+            }
+
+            return phraseValue is SimpleYamlMapping mapping
+                ? LocalePhraseNormalization.Create(localeCode, mapping)
+                : throw new InvalidOperationException($"Locale '{localeCode}.phrases' must be a mapping.");
+        }
+
+        static HeadingSet? ResolveHeadings(
+            string localeCode,
+            ImmutableDictionary<string, SimpleYamlValue> features)
+        {
+            if (!features.TryGetValue("headings", out var headingValue))
+            {
+                return null;
+            }
+
+            if (headingValue is not SimpleYamlMapping mapping)
+            {
+                throw new InvalidOperationException($"Locale '{localeCode}.headings' must be a mapping.");
+            }
+
+            foreach (var property in mapping.Values.Keys)
+            {
+                if (property is not ("full" or "short"))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.headings' defines unsupported property '{property}'. Supported properties: full, short.");
+                }
+            }
+
+            return new HeadingSet(
+                ParseHeadingSequence(mapping, "full", localeCode),
+                ParseHeadingSequence(mapping, "short", localeCode));
+        }
+
+        static ImmutableArray<string> ParseHeadingSequence(SimpleYamlMapping mapping, string key, string localeCode)
+        {
+            if (!mapping.TryGetValue(key, out var headingValue))
+            {
+                throw new InvalidOperationException($"Locale '{localeCode}.headings' must define '{key}'.");
+            }
+
+            if (headingValue is not SimpleYamlSequence sequence)
+            {
+                throw new InvalidOperationException($"Locale '{localeCode}.headings.{key}' must be a sequence.");
+            }
+
+            if (sequence.Items.Length != 16)
+            {
+                throw new InvalidOperationException($"Locale '{localeCode}.headings.{key}' must contain exactly 16 entries.");
+            }
+
+            var headings = ImmutableArray.CreateBuilder<string>(16);
+            for (var index = 0; index < sequence.Items.Length; index++)
+            {
+                if (sequence.Items[index] is not SimpleYamlScalar scalar)
+                {
+                    throw new InvalidOperationException($"Locale '{localeCode}.headings.{key}[{index}]' must be a scalar.");
+                }
+
+                headings.Add(scalar.Value);
+            }
+
+            return headings.MoveToImmutable();
+        }
+
+        static T? TryResolveLocalePart<T>(
+            string localeCode,
+            ImmutableArray<Diagnostic>.Builder diagnostics,
+            Func<string, ImmutableDictionary<string, SimpleYamlValue>, T?> resolver,
+            ImmutableDictionary<string, SimpleYamlValue> features)
+            where T : class
+        {
+            try
+            {
+                return resolver(localeCode, features);
+            }
+            catch (Exception exception)
+            {
+                diagnostics.Add(Diagnostic.Create(
+                    HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                    Location.None,
+                    localeCode,
+                    exception.Message));
+                return null;
+            }
         }
 
         /// <summary>
@@ -394,7 +567,7 @@ public sealed partial class HumanizerSourceGenerator
             return new SimpleYamlMapping(values);
         }
 
-        static JsonElement ToJsonElement(SimpleYamlValue value)
+        internal static JsonElement ToJsonElement(SimpleYamlValue value)
         {
             using var stream = new MemoryStream();
             using (var writer = new Utf8JsonWriter(stream))
@@ -495,9 +668,12 @@ public sealed partial class HumanizerSourceGenerator
         public ImmutableDictionary<string, SimpleYamlValue> Features { get; } = features;
     }
 
-    sealed class ResolvedLocaleDefinition(
+    internal sealed class ResolvedLocaleDefinition(
         string localeCode,
         ImmutableDictionary<string, SimpleYamlValue> resolvedFeatures,
+        SimpleYamlMapping? grammar,
+        HeadingSet? headings,
+        LocalePhraseCatalog? phrases,
         LocaleFeature? collectionFormatter,
         LocaleFeature? dateOnlyToOrdinalWords,
         LocaleFeature? dateToOrdinalWords,
@@ -509,6 +685,9 @@ public sealed partial class HumanizerSourceGenerator
     {
         public string LocaleCode { get; } = localeCode;
         public ImmutableDictionary<string, SimpleYamlValue> ResolvedFeatures { get; } = resolvedFeatures;
+        public SimpleYamlMapping? Grammar { get; } = grammar;
+        public HeadingSet? Headings { get; } = headings;
+        public LocalePhraseCatalog? Phrases { get; } = phrases;
         public LocaleFeature? CollectionFormatter { get; } = collectionFormatter;
         public LocaleFeature? DateOnlyToOrdinalWords { get; } = dateOnlyToOrdinalWords;
         public LocaleFeature? DateToOrdinalWords { get; } = dateToOrdinalWords;
@@ -519,10 +698,10 @@ public sealed partial class HumanizerSourceGenerator
         public LocaleFeature? WordsToNumber { get; } = wordsToNumber;
 
         public static ResolvedLocaleDefinition Empty(string localeCode) =>
-            new(localeCode, ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal), null, null, null, null, null, null, null, null);
+            new(localeCode, ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal), null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    sealed class LocaleFeature(
+    internal sealed class LocaleFeature(
         string ownerLocaleCode,
         string featureName,
         string kind,
@@ -540,20 +719,20 @@ public sealed partial class HumanizerSourceGenerator
         public bool UsesGeneratedProfile { get; } = usesGeneratedProfile;
     }
 
-    abstract class SimpleYamlValue;
+    internal abstract class SimpleYamlValue;
 
-    sealed class SimpleYamlScalar(string value, bool isQuoted) : SimpleYamlValue
+    internal sealed class SimpleYamlScalar(string value, bool isQuoted) : SimpleYamlValue
     {
         public string Value { get; } = value;
         public bool IsQuoted { get; } = isQuoted;
     }
 
-    sealed class SimpleYamlSequence(ImmutableArray<SimpleYamlValue> items) : SimpleYamlValue
+    internal sealed class SimpleYamlSequence(ImmutableArray<SimpleYamlValue> items) : SimpleYamlValue
     {
         public ImmutableArray<SimpleYamlValue> Items { get; } = items;
     }
 
-    sealed class SimpleYamlMapping : SimpleYamlValue
+    internal sealed class SimpleYamlMapping : SimpleYamlValue
     {
         readonly ImmutableDictionary<string, SimpleYamlValue> values;
 

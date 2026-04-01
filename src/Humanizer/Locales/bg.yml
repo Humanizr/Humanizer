@@ -208,3 +208,255 @@ wordsToNumber:
     - 'минус '
   ignoredTokens:
     - 'и'
+
+phrases:
+  dateHumanize:
+    now: 'сега'
+    never: 'никога'
+    past:
+      millisecond:
+        single: 'преди милисекунда'
+        multiple:
+          forms:
+            default: 'милисекунди'
+          beforeCount: 'преди'
+      second:
+        single: 'преди секунда'
+        multiple:
+          forms:
+            default: 'секунди'
+          beforeCount: 'преди'
+      minute:
+        single: 'преди минута'
+        multiple:
+          forms:
+            default: 'минути'
+          beforeCount: 'преди'
+      hour:
+        single: 'преди час'
+        multiple:
+          forms:
+            default: 'часа'
+          beforeCount: 'преди'
+      day:
+        single: 'вчера'
+        multiple:
+          forms:
+            default: 'дни'
+          beforeCount: 'преди'
+        template:
+          name: 'two'
+          value: 'преди 2 дни'
+      week:
+        single: 'преди седмица'
+        multiple:
+          forms:
+            default: 'седмици'
+          beforeCount: 'преди'
+      month:
+        single: 'преди месец'
+        multiple:
+          forms:
+            default: 'месеца'
+          beforeCount: 'преди'
+      year:
+        single: 'преди година'
+        multiple:
+          forms:
+            default: 'години'
+          beforeCount: 'преди'
+    future:
+      millisecond:
+        single: 'след милисекунда'
+        multiple:
+          forms:
+            default: 'милисекунди'
+          beforeCount: 'след'
+      second:
+        single: 'след секунда'
+        multiple:
+          forms:
+            default: 'секунди'
+          beforeCount: 'след'
+      minute:
+        single: 'след минута'
+        multiple:
+          forms:
+            default: 'минути'
+          beforeCount: 'след'
+      hour:
+        single: 'след час'
+        multiple:
+          forms:
+            default: 'часа'
+          beforeCount: 'след'
+      day:
+        single: 'утре'
+        multiple:
+          forms:
+            default: 'дни'
+          beforeCount: 'след'
+        template:
+          name: 'two'
+          value: 'след 2 дни'
+      week:
+        single: 'след седмица'
+        multiple:
+          forms:
+            default: 'седмици'
+          beforeCount: 'след'
+      month:
+        single: 'след месец'
+        multiple:
+          forms:
+            default: 'месеца'
+          beforeCount: 'след'
+      year:
+        single: 'след година'
+        multiple:
+          forms:
+            default: 'години'
+          beforeCount: 'след'
+  timeSpan:
+    zero: 'няма време'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 милисекунда'
+        words: 'една милисекунда'
+      multiple:
+        forms:
+          default: 'милисекунди'
+    second:
+      single:
+        numeric: '1 секунда'
+        words: 'една секунда'
+      multiple:
+        forms:
+          default: 'секунди'
+    minute:
+      single:
+        numeric: '1 минута'
+        words: 'една минута'
+      multiple:
+        forms:
+          default: 'минути'
+    hour:
+      single:
+        numeric: '1 час'
+        words: 'един час'
+      multiple:
+        forms:
+          default: 'часа'
+    day:
+      single:
+        numeric: '1 ден'
+        words: 'един ден'
+      multiple:
+        forms:
+          default: 'дни'
+    week:
+      single:
+        numeric: '1 седмица'
+        words: 'една седмица'
+      multiple:
+        forms:
+          default: 'седмици'
+    month:
+      single:
+        numeric: '1 месец'
+        words: 'един месец'
+      multiple:
+        forms:
+          default: 'месеца'
+    year:
+      single:
+        numeric: '1 година'
+        words: 'една година'
+      multiple:
+        forms:
+          default: 'години'
+  dataUnit:
+    bit:
+      forms:
+        default: 'бита'
+        singular: 'бит'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'байт'
+        plural: 'байта'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'килобайта'
+        singular: 'килобайт'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'мегабайта'
+        singular: 'мегабайт'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'гигабайт'
+        plural: 'гигабайта'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'терабайта'
+        singular: 'терабайт'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'мс.'
+    second:
+      symbol: 'сек.'
+    minute:
+      symbol: 'мин.'
+    hour:
+      symbol: 'ч.'
+    day:
+      symbol: 'ден'
+    week:
+      symbol: 'седмица'
+    month:
+      symbol: 'месец'
+    year:
+      symbol: 'година'
+headings:
+  full:
+    - 'север'
+    - 'север-североизток'
+    - 'североизток'
+    - 'изток-североизток'
+    - 'изток'
+    - 'изток-югоизток'
+    - 'югоизток'
+    - 'юг-югоизток'
+    - 'юг'
+    - 'юг-югозапад'
+    - 'югозапад'
+    - 'запад-югозапад'
+    - 'запад'
+    - 'запад-северозапад'
+    - 'северозапад'
+    - 'север-северозапад'
+  short:
+    - 'С'
+    - 'ССИ'
+    - 'СИ'
+    - 'ИСИ'
+    - 'И'
+    - 'ИЮИ'
+    - 'ЮИ'
+    - 'ЮЮИ'
+    - 'Ю'
+    - 'ЮЮЗ'
+    - 'ЮЗ'
+    - 'ЗЮЗ'
+    - 'З'
+    - 'ЗСЗ'
+    - 'СЗ'
+    - 'ССЗ'

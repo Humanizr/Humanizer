@@ -203,3 +203,249 @@ wordsToNumber:
     'উননব্বই': 99
   negativePrefixes:
     - 'ঋণাত্মক '
+
+phrases:
+  dateHumanize:
+    now: 'এখন'
+    never: 'কখনও না'
+    past:
+      millisecond:
+        single: 'এক মিলিসেকেন্ড আগে'
+        multiple:
+          forms:
+            default: 'মিলিসেকেন্ড'
+          afterCount: 'আগে'
+      second:
+        single: 'এক সেকেন্ড আগে'
+        multiple:
+          forms:
+            default: 'সেকেন্ড'
+          afterCount: 'আগে'
+      minute:
+        single: 'এক মিনিট আগে'
+        multiple:
+          forms:
+            default: 'মিনিট'
+          afterCount: 'আগে'
+      hour:
+        single: 'এক ঘণ্টা আগে'
+        multiple:
+          forms:
+            default: 'ঘণ্টা'
+          afterCount: 'আগে'
+      day:
+        single: 'গতকাল'
+        multiple:
+          forms:
+            default: 'দিন'
+          afterCount: 'আগে'
+        template:
+          name: 'two'
+          value: 'পরশু'
+      week:
+        single: 'এক সপ্তাহ আগে'
+        multiple:
+          forms:
+            default: 'সপ্তাহ'
+          afterCount: 'আগে'
+      month:
+        single: 'এক মাস আগে'
+        multiple:
+          forms:
+            default: 'মাস'
+          afterCount: 'আগে'
+      year:
+        single: 'এক বছর আগে'
+        multiple:
+          forms:
+            default: 'বছর'
+          afterCount: 'আগে'
+    future:
+      millisecond:
+        single: 'এক মিলিসেকেন্ড পর'
+        multiple:
+          forms:
+            default: 'মিলিসেকেন্ড'
+          afterCount: 'পর'
+      second:
+        single: 'এক সেকেন্ড পর'
+        multiple:
+          forms:
+            default: 'সেকেন্ড'
+          afterCount: 'পর'
+      minute:
+        single: 'এক মিনিট পর'
+        multiple:
+          forms:
+            default: 'মিনিট'
+          afterCount: 'পর'
+      hour:
+        single: 'এক ঘণ্টা পর'
+        multiple:
+          forms:
+            default: 'ঘণ্টা'
+          afterCount: 'পর'
+      day:
+        single: 'আগামিকাল'
+        multiple:
+          forms:
+            default: 'দিন'
+          afterCount: 'পর'
+        template:
+          name: 'two'
+          value: 'পরশু'
+      week:
+        single: 'এক সপ্তাহ পর'
+        multiple:
+          forms:
+            default: 'সপ্তাহ'
+          afterCount: 'পর'
+      month:
+        single: 'এক মাস পর'
+        multiple:
+          forms:
+            default: 'মাস'
+          afterCount: 'পর'
+      year:
+        single: 'এক বছর পর'
+        multiple:
+          forms:
+            default: 'বছর'
+          afterCount: 'পর'
+  timeSpan:
+    zero: 'কোনো সময় নেই'
+    age:
+      template: '{value} বয়স'
+    millisecond:
+      single:
+        numeric: 'এক মিলিসেকেন্ড'
+        words: 'এক মিলিসেকেন্ড'
+      multiple:
+        forms:
+          default: 'মিলিসেকেন্ড'
+    second:
+      single:
+        numeric: 'এক সেকেন্ড'
+        words: 'এক সেকেন্ড'
+      multiple:
+        forms:
+          default: 'সেকেন্ড'
+    minute:
+      single:
+        numeric: 'এক মিনিট'
+        words: 'এক মিনিট'
+      multiple:
+        forms:
+          default: 'মিনিট'
+    hour:
+      single:
+        numeric: 'এক ঘণ্টা'
+        words: 'এক ঘণ্টা'
+      multiple:
+        forms:
+          default: 'ঘণ্টা'
+    day:
+      single:
+        numeric: 'এক দিন'
+        words: 'এক দিন'
+      multiple:
+        forms:
+          default: 'দিন'
+    week:
+      single:
+        numeric: 'এক সপ্তাহ'
+        words: 'এক সপ্তাহ'
+      multiple:
+        forms:
+          default: 'সপ্তাহ'
+    month:
+      single:
+        numeric: 'এক মাস'
+        words: 'এক মাস'
+      multiple:
+        forms:
+          default: 'মাস'
+    year:
+      single:
+        numeric: 'এক বছর'
+        words: 'এক বছর'
+      multiple:
+        forms:
+          default: 'বছর'
+  dataUnit:
+    bit:
+      forms:
+        default: 'বিট'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'বাইট'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'কিলোবাইট'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'মেগাবাইট'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'গিগাবাইট'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'টেরাবাইট'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'মিলিসেকেন্ড'
+    second:
+      symbol: 'সেকেন্ড'
+    minute:
+      symbol: 'মিনিট'
+    hour:
+      symbol: 'ঘণ্টা'
+    day:
+      symbol: 'দিন'
+    week:
+      symbol: 'সপ্তাহ'
+    month:
+      symbol: 'মাস'
+    year:
+      symbol: 'বছর'
+headings:
+  full:
+    - 'উত্তর'
+    - 'উত্তর-উত্তর-পূর্ব'
+    - 'উত্তর-পূর্ব'
+    - 'পূর্ব-উত্তর-পূর্ব'
+    - 'পূর্ব'
+    - 'পূর্ব-দক্ষিণ-পূর্ব'
+    - 'দক্ষিণ-পূর্ব'
+    - 'দক্ষিণ-দক্ষিণ-পূর্ব'
+    - 'দক্ষিণ'
+    - 'দক্ষিণ-দক্ষিণ-পশ্চিম'
+    - 'দক্ষিণ-পশ্চিম'
+    - 'পশ্চিম-দক্ষিণ-পশ্চিম'
+    - 'পশ্চিম'
+    - 'পশ্চিম-উত্তর-পশ্চিম'
+    - 'উত্তর-পশ্চিম'
+    - 'উত্তর-উত্তর-পশ্চিম'
+  short:
+    - 'উ'
+    - 'উ-উ-পূ'
+    - 'উ-পূ'
+    - 'পূ-উ-পূ'
+    - 'পূ'
+    - 'পূ-দ-পূ'
+    - 'দ-পূ'
+    - 'দ-দ-পূ'
+    - 'দ'
+    - 'দ-দ-প'
+    - 'দ-প'
+    - 'প-দ-প'
+    - 'প'
+    - 'প-উ-প'
+    - 'উ-প'
+    - 'উ-উ-প'

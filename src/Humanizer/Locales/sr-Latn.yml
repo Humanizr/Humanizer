@@ -165,3 +165,317 @@ wordsToNumber:
     milijarde: 1000000000
   negativePrefixes:
     - 'minus '
+
+phrases:
+  dateHumanize:
+    now: 'sada'
+    never: 'nikada'
+    past:
+      millisecond:
+        single: 'pre milisekund'
+        multiple:
+          forms:
+            default: 'milisekundi'
+          beforeCount: 'pre'
+      second:
+        single: 'pre sekund'
+        multiple:
+          forms:
+            default: 'sekundi'
+            singular: 'sekunde'
+            dual: 'sekunde'
+            paucal: 'sekunde'
+            plural: 'sekunde'
+          beforeCount: 'pre'
+      minute:
+        single: 'pre minut'
+        multiple:
+          forms:
+            default: 'minuta'
+          beforeCount: 'pre'
+      hour:
+        single: 'pre sat vremena'
+        multiple:
+          forms:
+            default: 'sati'
+            singular: 'sata'
+            dual: 'sata'
+            paucal: 'sata'
+            plural: 'sata'
+          beforeCount: 'pre'
+      day:
+        single: 'juče'
+        multiple:
+          forms:
+            default: 'dana'
+          beforeCount: 'pre'
+        template:
+          name: 'two'
+          value: 'pre 2 dana'
+      week:
+        single: 'pre nedelju dana'
+        multiple:
+          forms:
+            default: 'nedelja'
+          beforeCount: 'pre'
+      month:
+        single: 'pre mesec dana'
+        multiple:
+          forms:
+            default: 'meseci'
+            singular: 'meseca'
+            dual: 'meseca'
+            paucal: 'meseca'
+            plural: 'meseca'
+          beforeCount: 'pre'
+      year:
+        single: 'pre godinu dana'
+        multiple:
+          forms:
+            default: 'godina'
+            singular: 'godine'
+            dual: 'godine'
+            paucal: 'godine'
+            plural: 'godine'
+          beforeCount: 'pre'
+    future:
+      millisecond:
+        single: 'za milisekund'
+        multiple:
+          forms:
+            default: 'milisekundi'
+          beforeCount: 'za'
+      second:
+        single: 'za sekund'
+        multiple:
+          forms:
+            default: 'sekundi'
+            singular: 'sekunde'
+            dual: 'sekunde'
+            paucal: 'sekunde'
+            plural: 'sekunde'
+          beforeCount: 'za'
+      minute:
+        single: 'za minut'
+        multiple:
+          forms:
+            default: 'minuta'
+          beforeCount: 'za'
+      hour:
+        single: 'za sat vremena'
+        multiple:
+          forms:
+            default: 'sati'
+            singular: 'sata'
+            dual: 'sata'
+            paucal: 'sata'
+            plural: 'sata'
+          beforeCount: 'za'
+      day:
+        single: 'sutra'
+        multiple:
+          forms:
+            default: 'dana'
+          beforeCount: 'za'
+        template:
+          name: 'two'
+          value: 'za 2 dana'
+      week:
+        single: 'za nedelju dana'
+        multiple:
+          forms:
+            default: 'nedelja'
+          beforeCount: 'za'
+      month:
+        single: 'za mesec dana'
+        multiple:
+          forms:
+            default: 'meseci'
+            singular: 'meseca'
+            dual: 'meseca'
+            paucal: 'meseca'
+            plural: 'meseca'
+          beforeCount: 'za'
+      year:
+        single: 'za godinu dana'
+        multiple:
+          forms:
+            default: 'godina'
+            singular: 'godine'
+            dual: 'godine'
+            paucal: 'godine'
+            plural: 'godine'
+          beforeCount: 'za'
+  timeSpan:
+    zero: 'bez proteklog vremena'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milisekunda'
+        words: 'one milisekunda'
+      multiple:
+        forms:
+          default: 'milisekundi'
+          singular: 'milisekunde'
+          dual: 'milisekunde'
+          paucal: 'milisekunde'
+          plural: 'milisekunde'
+    second:
+      single:
+        numeric: '1 sekunda'
+        words: 'one sekunda'
+      multiple:
+        forms:
+          default: 'sekundi'
+          singular: 'sekunde'
+          dual: 'sekunde'
+          paucal: 'sekunde'
+          plural: 'sekunde'
+    minute:
+      single:
+        numeric: '1 minut'
+        words: 'one minut'
+      multiple:
+        forms:
+          default: 'minuta'
+    hour:
+      single:
+        numeric: '1 sat'
+        words: 'one sat'
+      multiple:
+        forms:
+          default: 'sati'
+          singular: 'sata'
+          dual: 'sata'
+          paucal: 'sata'
+          plural: 'sata'
+    day:
+      single:
+        numeric: '1 dan'
+        words: 'one dan'
+      multiple:
+        forms:
+          default: 'dana'
+    week:
+      single:
+        numeric: '1 nedelja'
+        words: 'one nedelja'
+      multiple:
+        forms:
+          default: 'nedelja'
+          singular: 'nedelje'
+          dual: 'nedelje'
+          paucal: 'nedelje'
+          plural: 'nedelje'
+    month:
+      single:
+        numeric: '1 mesec'
+        words: 'one mesec'
+      multiple:
+        forms:
+          default: 'meseci'
+          singular: 'meseca'
+          dual: 'meseca'
+          paucal: 'meseca'
+          plural: 'meseca'
+    year:
+      single:
+        numeric: '1 godina'
+        words: 'one godina'
+      multiple:
+        forms:
+          default: 'godina'
+          singular: 'godine'
+          dual: 'godine'
+          paucal: 'godine'
+          plural: 'godine'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bitova'
+        singular: 'bit'
+        paucal: 'bita'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bajtova'
+        singular: 'bajt'
+        paucal: 'bajta'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobajtova'
+        singular: 'kilobajt'
+        paucal: 'kilobajta'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabajtova'
+        singular: 'megabajt'
+        paucal: 'megabajta'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabajtova'
+        singular: 'gigabajt'
+        paucal: 'gigabajta'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabajtova'
+        singular: 'terabajt'
+        paucal: 'terabajta'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'č'
+    day:
+      symbol: 'dan'
+    week:
+      symbol: 'ned'
+    month:
+      symbol: 'mes'
+    year:
+      symbol: 'god'
+headings:
+  full:
+    - 'sever'
+    - 'sever-severoistok'
+    - 'severoistok'
+    - 'istok-severoistok'
+    - 'istok'
+    - 'istok-jugoistok'
+    - 'jugoistok'
+    - 'jug-jugoistok'
+    - 'jug'
+    - 'jug-jugozapad'
+    - 'jugozapad'
+    - 'zapad-jugozapad'
+    - 'zapad'
+    - 'zapad-severozapad'
+    - 'severozapad'
+    - 'sever-severozapad'
+  short:
+    - 'S'
+    - 'SSI'
+    - 'SI'
+    - 'ISI'
+    - 'I'
+    - 'IJI'
+    - 'JI'
+    - 'JJI'
+    - 'J'
+    - 'JJZ'
+    - 'JZ'
+    - 'ZJZ'
+    - 'Z'
+    - 'ZSZ'
+    - 'SZ'
+    - 'SSZ'

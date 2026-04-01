@@ -81,21 +81,9 @@ public class DateHumanizeTests
         DateHumanize.Verify("şimdi", 0, TimeUnit.Year, Tense.Future);
 
     [Fact]
-    public void HasExplicitResidualDateResources()
+    public void NeverUsesLocaleSpecificPhrase()
     {
-        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("tr"), out var never));
-        Assert.Equal("asla", never);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("tr"), out var twoDaysAgo));
-        Assert.Equal("evvelsi gün", twoDaysAgo);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("tr"), out var twoDaysFromNow));
-        Assert.Equal("yarından sonra", twoDaysFromNow);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("tr"), out var daysAgoPaucal));
-        Assert.Equal("{0} gün önce", daysAgoPaucal);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("tr"), out var daysFromNowPaucal));
-        Assert.Equal("{0} gün sonra", daysFromNowPaucal);
+        DateTime? never = null;
+        Assert.Equal("asla", never.Humanize());
     }
 }

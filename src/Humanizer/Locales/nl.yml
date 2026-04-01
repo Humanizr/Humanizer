@@ -192,3 +192,249 @@ wordsToNumber:
     -
       old: 'ë'
       new: 'e'
+
+phrases:
+  dateHumanize:
+    now: 'nu'
+    never: 'nooit'
+    past:
+      millisecond:
+        single: '1 milliseconde geleden'
+        multiple:
+          forms:
+            default: 'milliseconden'
+          afterCount: 'geleden'
+      second:
+        single: '1 seconde geleden'
+        multiple:
+          forms:
+            default: 'seconden'
+          afterCount: 'geleden'
+      minute:
+        single: '1 minuut geleden'
+        multiple:
+          forms:
+            default: 'minuten'
+          afterCount: 'geleden'
+      hour:
+        single: '1 uur geleden'
+        multiple:
+          forms:
+            default: 'uur'
+          afterCount: 'geleden'
+      day:
+        single: 'gisteren'
+        multiple:
+          forms:
+            default: 'dagen'
+          afterCount: 'geleden'
+        template:
+          name: 'two'
+          value: 'eergisteren'
+      week:
+        single: '1 week geleden'
+        multiple:
+          forms:
+            default: 'weken'
+          afterCount: 'geleden'
+      month:
+        single: '1 maand geleden'
+        multiple:
+          forms:
+            default: 'maanden'
+          afterCount: 'geleden'
+      year:
+        single: '1 jaar geleden'
+        multiple:
+          forms:
+            default: 'jaar'
+          afterCount: 'geleden'
+    future:
+      millisecond:
+        single: 'over 1 milliseconde'
+        multiple:
+          forms:
+            default: 'milliseconden'
+          beforeCount: 'over'
+      second:
+        single: 'over 1 seconde'
+        multiple:
+          forms:
+            default: 'seconden'
+          beforeCount: 'over'
+      minute:
+        single: 'over 1 minuut'
+        multiple:
+          forms:
+            default: 'minuten'
+          beforeCount: 'over'
+      hour:
+        single: 'over 1 uur'
+        multiple:
+          forms:
+            default: 'uur'
+          beforeCount: 'over'
+      day:
+        single: 'morgen'
+        multiple:
+          forms:
+            default: 'dagen'
+          beforeCount: 'over'
+        template:
+          name: 'two'
+          value: 'overmorgen'
+      week:
+        single: 'over 1 week'
+        multiple:
+          forms:
+            default: 'weken'
+          beforeCount: 'over'
+      month:
+        single: 'over 1 maand'
+        multiple:
+          forms:
+            default: 'maanden'
+          beforeCount: 'over'
+      year:
+        single: 'over 1 jaar'
+        multiple:
+          forms:
+            default: 'jaar'
+          beforeCount: 'over'
+  timeSpan:
+    zero: 'geen tijd'
+    age:
+      template: '{value} oud'
+    millisecond:
+      single:
+        numeric: '1 milliseconde'
+        words: 'one milliseconde'
+      multiple:
+        forms:
+          default: 'milliseconden'
+    second:
+      single:
+        numeric: '1 seconde'
+        words: 'one seconde'
+      multiple:
+        forms:
+          default: 'seconden'
+    minute:
+      single:
+        numeric: '1 minuut'
+        words: 'one minuut'
+      multiple:
+        forms:
+          default: 'minuten'
+    hour:
+      single:
+        numeric: '1 uur'
+        words: 'one uur'
+      multiple:
+        forms:
+          default: 'uur'
+    day:
+      single:
+        numeric: '1 dag'
+        words: 'one dag'
+      multiple:
+        forms:
+          default: 'dagen'
+    week:
+      single:
+        numeric: '1 week'
+        words: 'one week'
+      multiple:
+        forms:
+          default: 'weken'
+    month:
+      single:
+        numeric: '1 maand'
+        words: 'one maand'
+      multiple:
+        forms:
+          default: 'maanden'
+    year:
+      single:
+        numeric: '1 jaar'
+        words: 'one jaar'
+      multiple:
+        forms:
+          default: 'jaar'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'sec.'
+    minute:
+      symbol: 'min.'
+    hour:
+      symbol: 'uur'
+    day:
+      symbol: 'dag'
+    week:
+      symbol: 'week'
+    month:
+      symbol: 'maand'
+    year:
+      symbol: 'jaar'
+headings:
+  full:
+    - 'noord'
+    - 'noord-noordoost'
+    - 'noordoost'
+    - 'oost-noordoost'
+    - 'oost'
+    - 'oost-zuidoost'
+    - 'zuidoost'
+    - 'zuid-zuidoost'
+    - 'zuid'
+    - 'zuid-zuidwest'
+    - 'zuidwest'
+    - 'west-zuidwest'
+    - 'west'
+    - 'west-noordwest'
+    - 'noordwest'
+    - 'noord-noordwest'
+  short:
+    - 'N'
+    - 'NNO'
+    - 'NO'
+    - 'ONO'
+    - 'O'
+    - 'OZO'
+    - 'ZO'
+    - 'ZZO'
+    - 'Z'
+    - 'ZZW'
+    - 'ZW'
+    - 'WZW'
+    - 'W'
+    - 'WNW'
+    - 'NW'
+    - 'NNW'

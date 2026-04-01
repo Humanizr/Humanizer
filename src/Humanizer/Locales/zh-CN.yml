@@ -1,0 +1,4 @@
+# Locale-owned generator data for zh-CN.
+# Omit a feature to inherit it from the parent locale.
+# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
+inherits: 'zh-Hans'

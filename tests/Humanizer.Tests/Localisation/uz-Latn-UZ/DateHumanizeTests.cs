@@ -81,21 +81,9 @@ public class DateHumanizeTests
         DateHumanize.Verify("hozir", 0, TimeUnit.Year, Tense.Future);
 
     [Fact]
-    public void HasExplicitResidualDateResources()
+    public void NeverUsesLocaleSpecificPhrase()
     {
-        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("uz-Latn-UZ"), out var never));
-        Assert.Equal("hech qachon", never);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("uz-Latn-UZ"), out var twoDaysAgo));
-        Assert.Equal("2 kun avval", twoDaysAgo);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("uz-Latn-UZ"), out var twoDaysFromNow));
-        Assert.Equal("indinga", twoDaysFromNow);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("uz-Latn-UZ"), out var daysAgoPaucal));
-        Assert.Equal("{0} kun avval", daysAgoPaucal);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("uz-Latn-UZ"), out var daysFromNowPaucal));
-        Assert.Equal("{0} kundan so'ng", daysFromNowPaucal);
+        DateTime? never = null;
+        Assert.Equal("hech qachon", never.Humanize());
     }
 }

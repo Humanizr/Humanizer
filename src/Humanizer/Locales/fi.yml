@@ -117,3 +117,251 @@ wordsToNumber:
   teenSuffixToken: 'toista'
   negativePrefixes:
     - 'miinus '
+
+phrases:
+  dateHumanize:
+    now: 'nyt'
+    never: 'ei koskaan'
+    past:
+      millisecond:
+        single: '1 millisekunti sitten'
+        multiple:
+          forms:
+            default: 'millisekuntia'
+          afterCount: 'sitten'
+      second:
+        single: 'sekuntti sitten'
+        multiple:
+          forms:
+            default: 'sekuntia'
+          afterCount: 'sitten'
+      minute:
+        single: 'minuutti sitten'
+        multiple:
+          forms:
+            default: 'minuuttia'
+          afterCount: 'sitten'
+      hour:
+        single: 'tunti sitten'
+        multiple:
+          forms:
+            default: 'tuntia'
+          afterCount: 'sitten'
+      day:
+        single: 'eilen'
+        multiple:
+          forms:
+            default: 'päivää'
+          afterCount: 'sitten'
+        template:
+          name: 'two'
+          value: 'toissapäivänä'
+      week:
+        single: '1 viikko sitten'
+        multiple:
+          forms:
+            default: 'viikkoa'
+          afterCount: 'sitten'
+      month:
+        single: 'kuukausi sitten'
+        multiple:
+          forms:
+            default: 'kuukautta'
+          afterCount: 'sitten'
+      year:
+        single: 'vuosi sitten'
+        multiple:
+          forms:
+            default: 'vuotta'
+          afterCount: 'sitten'
+    future:
+      millisecond:
+        single: '1 millisekunnin päästä'
+        multiple:
+          forms:
+            default: 'millisekunnin'
+          afterCount: 'päästä'
+      second:
+        single: 'sekunnin päästä'
+        multiple:
+          forms:
+            default: 'sekunnin'
+          afterCount: 'päästä'
+      minute:
+        single: 'minuutin päästä'
+        multiple:
+          forms:
+            default: 'minuutin'
+          afterCount: 'päästä'
+      hour:
+        single: 'tunnin päästä'
+        multiple:
+          forms:
+            default: 'tunnin'
+          afterCount: 'päästä'
+      day:
+        single: 'huomenna'
+        multiple:
+          forms:
+            default: 'päivän'
+          afterCount: 'päästä'
+        template:
+          name: 'two'
+          value: 'ylihuomenna'
+      week:
+        single: '1 viikon päästä'
+        multiple:
+          forms:
+            default: 'viikon'
+          afterCount: 'päästä'
+      month:
+        single: 'kuukauden päästä'
+        multiple:
+          forms:
+            default: 'kuukauden'
+          afterCount: 'päästä'
+      year:
+        single: 'vuoden päästä'
+        multiple:
+          forms:
+            default: 'vuoden'
+          afterCount: 'päästä'
+  timeSpan:
+    zero: 'nyt'
+    age:
+      template: '{value} vanha'
+    millisecond:
+      single:
+        numeric: 'millisekunti'
+        words: 'millisekunti'
+      multiple:
+        forms:
+          default: 'millisekuntia'
+    second:
+      single:
+        numeric: 'sekunti'
+        words: 'sekunti'
+      multiple:
+        forms:
+          default: 'sekuntia'
+    minute:
+      single:
+        numeric: 'minuutti'
+        words: 'minuutti'
+      multiple:
+        forms:
+          default: 'minuuttia'
+    hour:
+      single:
+        numeric: 'tunti'
+        words: 'tunti'
+      multiple:
+        forms:
+          default: 'tuntia'
+    day:
+      single:
+        numeric: 'päivä'
+        words: 'päivä'
+      multiple:
+        forms:
+          default: 'päivää'
+    week:
+      single:
+        numeric: 'viikko'
+        words: 'viikko'
+      multiple:
+        forms:
+          default: 'viikkoa'
+    month:
+      single:
+        numeric: 'kuukausi'
+        words: 'kuukausi'
+      multiple:
+        forms:
+          default: 'kuukautta'
+    year:
+      single:
+        numeric: 'vuosi'
+        words: 'vuosi'
+      multiple:
+        forms:
+          default: 'vuotta'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bittiä'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'tavua'
+        singular: 'tavu'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilotavua'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megatavua'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigatavua'
+        singular: 'gigatavu'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'teratavua'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'tunti'
+    day:
+      symbol: 'päivä'
+    week:
+      symbol: 'viikko'
+    month:
+      symbol: 'kuukausi'
+    year:
+      symbol: 'vuosi'
+headings:
+  full:
+    - 'pohjoinen'
+    - 'pohjoiskoillinen'
+    - 'koillinen'
+    - 'itäkoillinen'
+    - 'itä'
+    - 'itäkaakko'
+    - 'kaakko'
+    - 'eteläkaakko'
+    - 'etelä'
+    - 'etelälounas'
+    - 'lounas'
+    - 'länsilounas'
+    - 'länsi'
+    - 'länsiluode'
+    - 'luode'
+    - 'pohjoisluode'
+  short:
+    - 'P'
+    - 'PKO'
+    - 'KO'
+    - 'IKO'
+    - 'I'
+    - 'IKA'
+    - 'KA'
+    - 'EKA'
+    - 'E'
+    - 'ELO'
+    - 'LO'
+    - 'LLO'
+    - 'L'
+    - 'LLU'
+    - 'LU'
+    - 'PLU'

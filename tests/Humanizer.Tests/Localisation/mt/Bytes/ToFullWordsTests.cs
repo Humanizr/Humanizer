@@ -57,28 +57,4 @@ public class ToFullWordsTests
     public void ToFullWordsFormatted(double input, string format, string expectedValue) =>
         Assert.Equal(expectedValue, ByteSize.FromBytes(input).ToFullWords(format));
 
-    [Fact]
-    public void HasExplicitMalteseDataUnitResources()
-    {
-        var keys = new[]
-        {
-            "DataUnit_Bit",
-            "DataUnit_BitSymbol",
-            "DataUnit_Byte",
-            "DataUnit_ByteSymbol",
-            "DataUnit_Kilobyte",
-            "DataUnit_KilobyteSymbol",
-            "DataUnit_Megabyte",
-            "DataUnit_MegabyteSymbol",
-            "DataUnit_Gigabyte",
-            "DataUnit_GigabyteSymbol",
-            "DataUnit_Terabyte",
-            "DataUnit_TerabyteSymbol"
-        };
-
-        foreach (var key in keys)
-        {
-            Assert.True(Resources.TryGetResource(key, new("mt"), out _), $"Missing resource: {key}");
-        }
-    }
 }

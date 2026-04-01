@@ -10,12 +10,6 @@ Install the Humanizer NuGet package:
 dotnet add package Humanizer
 ```
 
-For English-only:
-
-```bash
-dotnet add package Humanizer.Core
-```
-
 See [Installation](installation.md) for more options.
 
 ## Basic Examples

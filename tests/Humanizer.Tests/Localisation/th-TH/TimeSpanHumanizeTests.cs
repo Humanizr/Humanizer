@@ -9,7 +9,4 @@ public class TimeSpanHumanizeTests
     public void Age(int days, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 
-    [Fact]
-    public void AgeHasExplicitThaiResource() =>
-        Assert.Equal("{0}", Resources.GetResource("TimeSpanHumanize_Age", new("th-TH")));
 }

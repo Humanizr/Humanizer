@@ -299,3 +299,249 @@ wordsToNumber:
     mininci: 1000
   gluedOrdinalScaleSuffixes:
     mininci: 1000
+
+phrases:
+  dateHumanize:
+    now: 'indi'
+    never: 'heç vaxt'
+    past:
+      millisecond:
+        single: 'bir millisaniyə əvvəl'
+        multiple:
+          forms:
+            default: 'millisaniyə'
+          afterCount: 'əvvəl'
+      second:
+        single: 'bir saniyə əvvəl'
+        multiple:
+          forms:
+            default: 'saniyə'
+          afterCount: 'əvvəl'
+      minute:
+        single: 'bir dəqiqə əvvəl'
+        multiple:
+          forms:
+            default: 'dəqiqə'
+          afterCount: 'əvvəl'
+      hour:
+        single: 'bir saat əvvəl'
+        multiple:
+          forms:
+            default: 'saat'
+          afterCount: 'əvvəl'
+      day:
+        single: 'dünən'
+        multiple:
+          forms:
+            default: 'gün'
+          afterCount: 'əvvəl'
+        template:
+          name: 'two'
+          value: 'srağagün'
+      week:
+        single: 'bir həftə əvvəl'
+        multiple:
+          forms:
+            default: 'həftə'
+          afterCount: 'əvvəl'
+      month:
+        single: 'bir ay əvvəl'
+        multiple:
+          forms:
+            default: 'ay'
+          afterCount: 'əvvəl'
+      year:
+        single: 'bir il əvvəl'
+        multiple:
+          forms:
+            default: 'il'
+          afterCount: 'əvvəl'
+    future:
+      millisecond:
+        single: 'bir millisaniyə sonra'
+        multiple:
+          forms:
+            default: 'millisaniyə'
+          afterCount: 'sonra'
+      second:
+        single: 'bir saniyə sonra'
+        multiple:
+          forms:
+            default: 'saniyə'
+          afterCount: 'sonra'
+      minute:
+        single: 'bir dəqiqə sonra'
+        multiple:
+          forms:
+            default: 'dəqiqə'
+          afterCount: 'sonra'
+      hour:
+        single: 'bir saat sonra'
+        multiple:
+          forms:
+            default: 'saat'
+          afterCount: 'sonra'
+      day:
+        single: 'sabah'
+        multiple:
+          forms:
+            default: 'gün'
+          afterCount: 'sonra'
+        template:
+          name: 'two'
+          value: 'birigün'
+      week:
+        single: 'bir həftə sonra'
+        multiple:
+          forms:
+            default: 'həftə'
+          afterCount: 'sonra'
+      month:
+        single: 'bir ay sonra'
+        multiple:
+          forms:
+            default: 'ay'
+          afterCount: 'sonra'
+      year:
+        single: 'bir il sonra'
+        multiple:
+          forms:
+            default: 'il'
+          afterCount: 'sonra'
+  timeSpan:
+    zero: 'vaxt yoxdur'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 millisaniyə'
+        words: 'one millisaniyə'
+      multiple:
+        forms:
+          default: 'millisaniyə'
+    second:
+      single:
+        numeric: '1 saniyə'
+        words: 'one saniyə'
+      multiple:
+        forms:
+          default: 'saniyə'
+    minute:
+      single:
+        numeric: '1 dəqiqə'
+        words: 'one dəqiqə'
+      multiple:
+        forms:
+          default: 'dəqiqə'
+    hour:
+      single:
+        numeric: '1 saat'
+        words: 'one saat'
+      multiple:
+        forms:
+          default: 'saat'
+    day:
+      single:
+        numeric: '1 gün'
+        words: 'one gün'
+      multiple:
+        forms:
+          default: 'gün'
+    week:
+      single:
+        numeric: '1 həftə'
+        words: 'one həftə'
+      multiple:
+        forms:
+          default: 'həftə'
+    month:
+      single:
+        numeric: '1 ay'
+        words: 'one ay'
+      multiple:
+        forms:
+          default: 'ay'
+    year:
+      single:
+        numeric: '1 il'
+        words: 'one il'
+      multiple:
+        forms:
+          default: 'il'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bayt'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobayt'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'meqabayt'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'giqabayt'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabayt'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'saniyə'
+    minute:
+      symbol: 'dəqiqə'
+    hour:
+      symbol: 'saat'
+    day:
+      symbol: 'gün'
+    week:
+      symbol: 'həftə'
+    month:
+      symbol: 'ay'
+    year:
+      symbol: 'il'
+headings:
+  full:
+    - 'şimal'
+    - 'şimal-şimal-şərq'
+    - 'şimal-şərq'
+    - 'şərq-şimal-şərq'
+    - 'şərq'
+    - 'şərq-cənub-şərq'
+    - 'cənub-şərq'
+    - 'cənub-cənub-şərq'
+    - 'cənub'
+    - 'cənub-cənub-qərb'
+    - 'cənub-qərb'
+    - 'qərb-cənub-qərb'
+    - 'qərb'
+    - 'qərb-şimal-qərb'
+    - 'şimal-qərb'
+    - 'şimal-şimal-qərb'
+  short:
+    - 'Ş'
+    - 'ŞŞŞ'
+    - 'ŞŞ'
+    - 'Ş-ŞŞ'
+    - 'Şər'
+    - 'Ş-CŞ'
+    - 'CŞ'
+    - 'CCŞ'
+    - 'C'
+    - 'CCQ'
+    - 'CQ'
+    - 'Q-CQ'
+    - 'Q'
+    - 'Q-ŞQ'
+    - 'ŞQ'
+    - 'ŞŞQ'

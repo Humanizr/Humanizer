@@ -144,3 +144,259 @@ wordsToNumber:
     - 'de'
   useHundredMultiplier: true
   allowInvariantIntegerInput: true
+
+phrases:
+  dateHumanize:
+    now: 'acum'
+    never: 'niciodată'
+    past:
+      millisecond:
+        single: 'acum o milisecundă'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} milisecunde'
+      second:
+        single: 'acum o secundă'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} secunde'
+      minute:
+        single: 'acum un minut'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} minute'
+      hour:
+        single: 'acum o oră'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} ore'
+      day:
+        single: 'ieri'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} zile'
+        template:
+          name: 'two'
+          value: 'acum 2 zile'
+      week:
+        single: 'acum o săptămână'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} săptămâni'
+      month:
+        single: 'acum o lună'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} luni'
+      year:
+        single: 'acum un an'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'acum {count}{prep} ani'
+    future:
+      millisecond:
+        single: 'peste o milisecundă'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} milisecunde'
+      second:
+        single: 'peste o secundă'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} secunde'
+      minute:
+        single: 'peste un minut'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} minute'
+      hour:
+        single: 'peste o oră'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} ore'
+      day:
+        single: 'mâine'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} zile'
+        template:
+          name: 'two'
+          value: 'peste 2 zile'
+      week:
+        single: 'peste o săptămână'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} săptămâni'
+      month:
+        single: 'peste o lună'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} luni'
+      year:
+        single: 'peste un an'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'peste {count}{prep} ani'
+  timeSpan:
+    zero: '0 secunde'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milisecundă'
+        words: 'one milisecundă'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} milisecunde'
+    second:
+      single:
+        numeric: '1 secundă'
+        words: 'one secundă'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} secunde'
+    minute:
+      single:
+        numeric: '1 minut'
+        words: 'one minut'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} minute'
+    hour:
+      single:
+        numeric: '1 oră'
+        words: 'one oră'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} ore'
+    day:
+      single:
+        numeric: '1 zi'
+        words: 'one zi'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} zile'
+    week:
+      single:
+        numeric: '1 săptămână'
+        words: 'one săptămână'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} săptămâni'
+    month:
+      single:
+        numeric: '1 lună'
+        words: 'one lună'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} luni'
+    year:
+      single:
+        numeric: '1 an'
+        words: 'one an'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}{prep} ani'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bytes'
+        singular: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobytes'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabytes'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabytes'
+        singular: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabytes'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'sec.'
+    minute:
+      symbol: 'min.'
+    hour:
+      symbol: 'oră'
+    day:
+      symbol: 'zi'
+    week:
+      symbol: 'săptămână'
+    month:
+      symbol: 'lună'
+    year:
+      symbol: 'an'
+headings:
+  full:
+    - 'nord'
+    - 'nord-nord-est'
+    - 'nord-est'
+    - 'est-nord-est'
+    - 'est'
+    - 'est-sud-est'
+    - 'sud-est'
+    - 'sud-sud-est'
+    - 'sud'
+    - 'sud-sud-vest'
+    - 'sud-vest'
+    - 'vest-sud-vest'
+    - 'vest'
+    - 'vest-nord-vest'
+    - 'nord-vest'
+    - 'nord-nord-vest'
+  short:
+    - 'N'
+    - 'NNE'
+    - 'NE'
+    - 'ENE'
+    - 'E'
+    - 'ESE'
+    - 'SE'
+    - 'SSE'
+    - 'S'
+    - 'SSV'
+    - 'SV'
+    - 'VSV'
+    - 'V'
+    - 'VNV'
+    - 'NV'
+    - 'NNV'

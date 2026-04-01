@@ -92,3 +92,249 @@ wordsToNumber:
   tokenSuffixesToStrip:
     - 'инчи'
     - 'нчи'
+
+phrases:
+  dateHumanize:
+    now: 'ҳозир'
+    never: 'ҳеч қачон'
+    past:
+      millisecond:
+        single: 'бир миллисекунд аввал'
+        multiple:
+          forms:
+            default: 'миллисекунд'
+          afterCount: 'аввал'
+      second:
+        single: 'бир сония аввал'
+        multiple:
+          forms:
+            default: 'сония'
+          afterCount: 'аввал'
+      minute:
+        single: 'бир дақиқа аввал'
+        multiple:
+          forms:
+            default: 'дақиқа'
+          afterCount: 'аввал'
+      hour:
+        single: 'бир соат аввал'
+        multiple:
+          forms:
+            default: 'соат'
+          afterCount: 'аввал'
+      day:
+        single: 'кеча'
+        multiple:
+          forms:
+            default: 'кун'
+          afterCount: 'аввал'
+        template:
+          name: 'two'
+          value: '2 кун аввал'
+      week:
+        single: 'бир ҳафта аввал'
+        multiple:
+          forms:
+            default: 'ҳафта'
+          afterCount: 'аввал'
+      month:
+        single: 'бир ой аввал'
+        multiple:
+          forms:
+            default: 'ой'
+          afterCount: 'аввал'
+      year:
+        single: 'бир йил аввал'
+        multiple:
+          forms:
+            default: 'йил'
+          afterCount: 'аввал'
+    future:
+      millisecond:
+        single: 'бир миллисекунддан сўнг'
+        multiple:
+          forms:
+            default: 'миллисекунддан'
+          afterCount: 'сўнг'
+      second:
+        single: 'бир сониядан сўнг'
+        multiple:
+          forms:
+            default: 'сониядан'
+          afterCount: 'сўнг'
+      minute:
+        single: 'бир дақиқадан сўнг'
+        multiple:
+          forms:
+            default: 'дақиқадан'
+          afterCount: 'сўнг'
+      hour:
+        single: 'бир соатдан сўнг'
+        multiple:
+          forms:
+            default: 'соатдан'
+          afterCount: 'сўнг'
+      day:
+        single: 'эртага'
+        multiple:
+          forms:
+            default: 'кундан'
+          afterCount: 'сўнг'
+        template:
+          name: 'two'
+          value: '2 кундан сўнг'
+      week:
+        single: 'бир ҳафтадан сўнг'
+        multiple:
+          forms:
+            default: 'ҳафтадан'
+          afterCount: 'сўнг'
+      month:
+        single: 'бир ойдан сўнг'
+        multiple:
+          forms:
+            default: 'ойдан'
+          afterCount: 'сўнг'
+      year:
+        single: 'бир йилдан сўнг'
+        multiple:
+          forms:
+            default: 'йилдан'
+          afterCount: 'сўнг'
+  timeSpan:
+    zero: 'вақт йўқ'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 миллисекунд'
+        words: 'one миллисекунд'
+      multiple:
+        forms:
+          default: 'миллисекунд'
+    second:
+      single:
+        numeric: '1 сония'
+        words: 'one сония'
+      multiple:
+        forms:
+          default: 'сония'
+    minute:
+      single:
+        numeric: '1 дақиқа'
+        words: 'one дақиқа'
+      multiple:
+        forms:
+          default: 'дақиқа'
+    hour:
+      single:
+        numeric: '1 соат'
+        words: 'one соат'
+      multiple:
+        forms:
+          default: 'соат'
+    day:
+      single:
+        numeric: '1 кун'
+        words: 'one кун'
+      multiple:
+        forms:
+          default: 'кун'
+    week:
+      single:
+        numeric: '1 ҳафта'
+        words: 'one ҳафта'
+      multiple:
+        forms:
+          default: 'ҳафта'
+    month:
+      single:
+        numeric: '1 ой'
+        words: 'one ой'
+      multiple:
+        forms:
+          default: 'ой'
+    year:
+      single:
+        numeric: '1 йил'
+        words: 'one йил'
+      multiple:
+        forms:
+          default: 'йил'
+  dataUnit:
+    bit:
+      forms:
+        default: 'бит'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'байт'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'килобайт'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'мегабайт'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'гигабайт'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'терабайт'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'миллисекунд'
+    second:
+      symbol: 'сония'
+    minute:
+      symbol: 'дақиқа'
+    hour:
+      symbol: 'соат'
+    day:
+      symbol: 'кун'
+    week:
+      symbol: 'ҳафта'
+    month:
+      symbol: 'ой'
+    year:
+      symbol: 'йил'
+headings:
+  full:
+    - 'шимол'
+    - 'шимол-шимоли-шарқ'
+    - 'шимоли-шарқ'
+    - 'шарқ-шимоли-шарқ'
+    - 'шарқ'
+    - 'шарқ-жануби-шарқ'
+    - 'жануби-шарқ'
+    - 'жануб-жануби-шарқ'
+    - 'жануб'
+    - 'жануб-жануби-ғарб'
+    - 'жануби-ғарб'
+    - 'ғарб-жануби-ғарб'
+    - 'ғарб'
+    - 'ғарб-шимоли-ғарб'
+    - 'шимоли-ғарб'
+    - 'шимол-шимоли-ғарб'
+  short:
+    - 'N'
+    - 'NNE'
+    - 'NE'
+    - 'ENE'
+    - 'E'
+    - 'ESE'
+    - 'SE'
+    - 'SSE'
+    - 'S'
+    - 'SSW'
+    - 'SW'
+    - 'WSW'
+    - 'W'
+    - 'WNW'
+    - 'NW'
+    - 'NNW'

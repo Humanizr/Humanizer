@@ -320,3 +320,249 @@ wordsToNumber:
     bininci: 1000
   gluedOrdinalScaleSuffixes:
     bininci: 1000
+
+phrases:
+  dateHumanize:
+    now: 'şimdi'
+    never: 'asla'
+    past:
+      millisecond:
+        single: 'bir milisaniye önce'
+        multiple:
+          forms:
+            default: 'milisaniye'
+          afterCount: 'önce'
+      second:
+        single: 'bir saniye önce'
+        multiple:
+          forms:
+            default: 'saniye'
+          afterCount: 'önce'
+      minute:
+        single: 'bir dakika önce'
+        multiple:
+          forms:
+            default: 'dakika'
+          afterCount: 'önce'
+      hour:
+        single: 'bir saat önce'
+        multiple:
+          forms:
+            default: 'saat'
+          afterCount: 'önce'
+      day:
+        single: 'dün'
+        multiple:
+          forms:
+            default: 'gün'
+          afterCount: 'önce'
+        template:
+          name: 'two'
+          value: 'evvelsi gün'
+      week:
+        single: 'bir hafta önce'
+        multiple:
+          forms:
+            default: 'hafta'
+          afterCount: 'önce'
+      month:
+        single: 'bir ay önce'
+        multiple:
+          forms:
+            default: 'ay'
+          afterCount: 'önce'
+      year:
+        single: 'bir yıl önce'
+        multiple:
+          forms:
+            default: 'yıl'
+          afterCount: 'önce'
+    future:
+      millisecond:
+        single: 'bir milisaniye sonra'
+        multiple:
+          forms:
+            default: 'milisaniye'
+          afterCount: 'sonra'
+      second:
+        single: 'bir saniye sonra'
+        multiple:
+          forms:
+            default: 'saniye'
+          afterCount: 'sonra'
+      minute:
+        single: 'bir dakika sonra'
+        multiple:
+          forms:
+            default: 'dakika'
+          afterCount: 'sonra'
+      hour:
+        single: 'bir saat sonra'
+        multiple:
+          forms:
+            default: 'saat'
+          afterCount: 'sonra'
+      day:
+        single: 'yarın'
+        multiple:
+          forms:
+            default: 'gün'
+          afterCount: 'sonra'
+        template:
+          name: 'two'
+          value: 'yarından sonra'
+      week:
+        single: 'bir hafta sonra'
+        multiple:
+          forms:
+            default: 'hafta'
+          afterCount: 'sonra'
+      month:
+        single: 'bir ay sonra'
+        multiple:
+          forms:
+            default: 'ay'
+          afterCount: 'sonra'
+      year:
+        single: 'bir yıl sonra'
+        multiple:
+          forms:
+            default: 'yıl'
+          afterCount: 'sonra'
+  timeSpan:
+    zero: 'zaman farkı yok'
+    age:
+      template: '{value} yaşında'
+    millisecond:
+      single:
+        numeric: '1 milisaniye'
+        words: 'bir milisaniye'
+      multiple:
+        forms:
+          default: 'milisaniye'
+    second:
+      single:
+        numeric: '1 saniye'
+        words: 'bir saniye'
+      multiple:
+        forms:
+          default: 'saniye'
+    minute:
+      single:
+        numeric: '1 dakika'
+        words: 'bir dakika'
+      multiple:
+        forms:
+          default: 'dakika'
+    hour:
+      single:
+        numeric: '1 saat'
+        words: 'bir saat'
+      multiple:
+        forms:
+          default: 'saat'
+    day:
+      single:
+        numeric: '1 gün'
+        words: 'bir gün'
+      multiple:
+        forms:
+          default: 'gün'
+    week:
+      single:
+        numeric: '1 hafta'
+        words: 'bir hafta'
+      multiple:
+        forms:
+          default: 'hafta'
+    month:
+      single:
+        numeric: '1 ay'
+        words: 'bir ay'
+      multiple:
+        forms:
+          default: 'ay'
+    year:
+      single:
+        numeric: '1 yıl'
+        words: 'bir yıl'
+      multiple:
+        forms:
+          default: 'yıl'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bayt'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobayt'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabayt'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabayt'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabayt'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'saniye'
+    minute:
+      symbol: 'dakika'
+    hour:
+      symbol: 'saat'
+    day:
+      symbol: 'gün'
+    week:
+      symbol: 'hafta'
+    month:
+      symbol: 'ay'
+    year:
+      symbol: 'yıl'
+headings:
+  full:
+    - 'kuzey'
+    - 'kuzey-kuzeydoğu'
+    - 'kuzeydoğu'
+    - 'doğu-kuzeydoğu'
+    - 'doğu'
+    - 'doğu-güneydoğu'
+    - 'güneydoğu'
+    - 'güney-güneydoğu'
+    - 'güney'
+    - 'güney-güneybatı'
+    - 'güneybatı'
+    - 'batı-güneybatı'
+    - 'batı'
+    - 'batı-kuzeybatı'
+    - 'kuzeybatı'
+    - 'kuzey-kuzeybatı'
+  short:
+    - 'K'
+    - 'KKD'
+    - 'KD'
+    - 'DKD'
+    - 'D'
+    - 'DGD'
+    - 'GD'
+    - 'GGD'
+    - 'G'
+    - 'GGB'
+    - 'GB'
+    - 'BGB'
+    - 'B'
+    - 'BKB'
+    - 'KB'
+    - 'KKB'

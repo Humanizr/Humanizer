@@ -212,3 +212,250 @@ wordsToNumber:
     'δισεκατομμυριο': 1000000000
     'δισεκατομμύρια': 1000000000
     'δισεκατομμυρια': 1000000000
+
+phrases:
+  dateHumanize:
+    now: 'τώρα'
+    never: 'ποτέ'
+    past:
+      millisecond:
+        single: 'πριν από ένα χιλιοστό του δευτερολέπτου'
+        multiple:
+          forms:
+            default: 'χιλιοστά'
+          beforeCount: 'πριν από'
+          afterCount: 'του δευτερολέπτου'
+      second:
+        single: 'πριν από ένα δευτερόλεπτο'
+        multiple:
+          forms:
+            default: 'δευτερόλεπτα'
+          beforeCount: 'πριν από'
+      minute:
+        single: 'πριν από ένα λεπτό'
+        multiple:
+          forms:
+            default: 'λεπτά'
+          beforeCount: 'πριν από'
+      hour:
+        single: 'πριν από μία ώρα'
+        multiple:
+          forms:
+            default: 'ώρες'
+          beforeCount: 'πριν από'
+      day:
+        single: 'χθες'
+        multiple:
+          forms:
+            default: 'ημέρες'
+          beforeCount: 'πριν από'
+        template:
+          name: 'two'
+          value: 'προχθές'
+      week:
+        single: 'πριν από μία εβδομάδα'
+        multiple:
+          forms:
+            default: 'εβδομάδες'
+          beforeCount: 'πριν από'
+      month:
+        single: 'πριν από έναν μήνα'
+        multiple:
+          forms:
+            default: 'μήνες'
+          beforeCount: 'πριν από'
+      year:
+        single: 'πριν από έναν χρόνο'
+        multiple:
+          forms:
+            default: 'χρόνια'
+          beforeCount: 'πριν από'
+    future:
+      millisecond:
+        single: 'ένα χιλιοστό του δευτερολέπτου από τώρα'
+        multiple:
+          forms:
+            default: 'χιλιοστά'
+          afterCount: 'του δευτερολέπτου από τώρα'
+      second:
+        single: 'ένα δευτερόλεπτο από τώρα'
+        multiple:
+          forms:
+            default: 'δευτερόλεπτα'
+          afterCount: 'από τώρα'
+      minute:
+        single: 'ένα λεπτό από τώρα'
+        multiple:
+          forms:
+            default: 'λεπτά'
+          afterCount: 'από τώρα'
+      hour:
+        single: 'μία ώρα από τώρα'
+        multiple:
+          forms:
+            default: 'ώρες'
+          afterCount: 'από τώρα'
+      day:
+        single: 'αύριο'
+        multiple:
+          forms:
+            default: 'ημέρες'
+          afterCount: 'από τώρα'
+        template:
+          name: 'two'
+          value: 'μεθαύριο'
+      week:
+        single: 'μία εβδομάδα από τώρα'
+        multiple:
+          forms:
+            default: 'εβδομάδες'
+          afterCount: 'από τώρα'
+      month:
+        single: 'έναν μήνα από τώρα'
+        multiple:
+          forms:
+            default: 'μήνες'
+          afterCount: 'από τώρα'
+      year:
+        single: 'έναν χρόνο από τώρα'
+        multiple:
+          forms:
+            default: 'χρόνια'
+          afterCount: 'από τώρα'
+  timeSpan:
+    zero: 'μηδενικός χρόνος'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 χιλιοστό του δευτερολέπτου'
+        words: 'one χιλιοστό του δευτερολέπτου'
+      multiple:
+        forms:
+          default: 'χιλιοστά του δευτερολέπτου'
+    second:
+      single:
+        numeric: '1 δευτερόλεπτο'
+        words: 'one δευτερόλεπτο'
+      multiple:
+        forms:
+          default: 'δευτερόλεπτα'
+    minute:
+      single:
+        numeric: '1 λεπτό'
+        words: 'one λεπτό'
+      multiple:
+        forms:
+          default: 'λεπτά'
+    hour:
+      single:
+        numeric: '1 ώρα'
+        words: 'one ώρα'
+      multiple:
+        forms:
+          default: 'ώρες'
+    day:
+      single:
+        numeric: '1 μέρα'
+        words: 'one μέρα'
+      multiple:
+        forms:
+          default: 'μέρες'
+    week:
+      single:
+        numeric: '1 βδομάδα'
+        words: 'one βδομάδα'
+      multiple:
+        forms:
+          default: 'βδομάδες'
+    month:
+      single:
+        numeric: '1 μήνα'
+        words: 'one μήνα'
+      multiple:
+        forms:
+          default: 'μήνες'
+    year:
+      single:
+        numeric: '1 χρόνο'
+        words: 'one χρόνο'
+      multiple:
+        forms:
+          default: 'χρόνια'
+  dataUnit:
+    bit:
+      forms:
+        default: 'μπιτ'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'μπάιτ'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'κιλομπάιτ'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'μεγαμπάιτ'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'γιγαμπάιτ'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'τεραμπάιτ'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'χιλ.δ.'
+    second:
+      symbol: 'δευτ.'
+    minute:
+      symbol: 'λεπτ.'
+    hour:
+      symbol: 'ώρα'
+    day:
+      symbol: 'ημέρα'
+    week:
+      symbol: 'εβδομάδα'
+    month:
+      symbol: 'μήνας'
+    year:
+      symbol: 'χρόνος'
+headings:
+  full:
+    - 'βορράς'
+    - 'βόρεια-βορειοανατολικά'
+    - 'βορειοανατολικά'
+    - 'ανατολικά-βορειοανατολικά'
+    - 'ανατολή'
+    - 'ανατολικά-νοτιοανατολικά'
+    - 'νοτιοανατολικά'
+    - 'νότια-νοτιοανατολικά'
+    - 'νότος'
+    - 'νότια-νοτιοδυτικά'
+    - 'νοτιοδυτικά'
+    - 'δυτικά-νοτιοδυτικά'
+    - 'δύση'
+    - 'δυτικά-βορειοδυτικά'
+    - 'βορειοδυτικά'
+    - 'βόρεια-βορειοδυτικά'
+  short:
+    - 'Β'
+    - 'ΒΒΑ'
+    - 'ΒΑ'
+    - 'ΑΒΑ'
+    - 'Α'
+    - 'ΑΝΑ'
+    - 'ΝΑ'
+    - 'ΝΝΑ'
+    - 'Ν'
+    - 'ΝΝΔ'
+    - 'ΝΔ'
+    - 'ΔΝΔ'
+    - 'Δ'
+    - 'ΔΒΔ'
+    - 'ΒΔ'
+    - 'ΒΒΔ'

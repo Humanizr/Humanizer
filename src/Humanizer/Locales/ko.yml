@@ -98,3 +98,257 @@ wordsToNumber:
     '첫번째': 1
     '두번째': 2
     '세번째': 3
+
+phrases:
+  dateHumanize:
+    now: '지금'
+    never: '없음'
+    past:
+      millisecond:
+        single: '1밀리초 전'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}밀리초 전'
+      second:
+        single: '1초 전'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}초 전'
+      minute:
+        single: '1분 전'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}분 전'
+      hour:
+        single: '1시간 전'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}시간 전'
+      day:
+        single: '어제'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}일 전'
+        template:
+          name: 'two'
+          value: '2일 전'
+      week:
+        single: '1주 전'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}주 전'
+      month:
+        single: '1개월 전'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}개월 전'
+      year:
+        single: '1년 전'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}년 전'
+    future:
+      millisecond:
+        single: '1밀리초 후'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}밀리초 후'
+      second:
+        single: '1초 후'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}초 후'
+      minute:
+        single: '1분 후'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}분 후'
+      hour:
+        single: '1시간 후'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}시간 후'
+      day:
+        single: '내일'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}일 후'
+        template:
+          name: 'two'
+          value: '2일 후'
+      week:
+        single: '1주 후'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}주 후'
+      month:
+        single: '1개월 후'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}개월 후'
+      year:
+        single: '1년 후'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}년 후'
+  timeSpan:
+    zero: '방금'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1밀리초'
+        words: '1밀리초'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}밀리초'
+    second:
+      single:
+        numeric: '1초'
+        words: '1초'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}초'
+    minute:
+      single:
+        numeric: '1분'
+        words: '1분'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}분'
+    hour:
+      single:
+        numeric: '1시간'
+        words: '1시간'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}시간'
+    day:
+      single:
+        numeric: '1일'
+        words: '1일'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}일'
+    week:
+      single:
+        numeric: '1주'
+        words: '1주'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}주'
+    month:
+      single:
+        numeric: '1개월'
+        words: '1개월'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}개월'
+    year:
+      single:
+        numeric: '1년'
+        words: '1년'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count}년'
+  dataUnit:
+    bit:
+      forms:
+        default: '비트'
+      symbol: 'b'
+    byte:
+      forms:
+        default: '바이트'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: '킬로바이트'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: '메가바이트'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: '기가바이트'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: '테라바이트'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: '밀리초'
+    second:
+      symbol: '초'
+    minute:
+      symbol: '분'
+    hour:
+      symbol: '시간'
+    day:
+      symbol: '일'
+    week:
+      symbol: '주'
+    month:
+      symbol: '개월'
+    year:
+      symbol: '년'
+headings:
+  full:
+    - '북'
+    - '북북동'
+    - '북동'
+    - '동북동'
+    - '동'
+    - '동남동'
+    - '남동'
+    - '남남동'
+    - '남'
+    - '남남서'
+    - '남서'
+    - '서남서'
+    - '서'
+    - '서북서'
+    - '북서'
+    - '북북서'
+  short:
+    - '북'
+    - '북북동'
+    - '북동'
+    - '동북동'
+    - '동'
+    - '동남동'
+    - '남동'
+    - '남남동'
+    - '남'
+    - '남남서'
+    - '남서'
+    - '서남서'
+    - '서'
+    - '서북서'
+    - '북서'
+    - '북북서'

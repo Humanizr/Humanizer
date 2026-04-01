@@ -873,3 +873,320 @@ wordsToNumber:
     'тисячний': 1000
   gluedOrdinalScaleSuffixes: {}
 
+phrases:
+  dateHumanize:
+    now: 'зараз'
+    never: 'ніколи'
+    past:
+      millisecond:
+        single: 'мілісекунду тому'
+        multiple:
+          forms:
+            default: 'мілісекунд'
+          afterCount: 'тому'
+      second:
+        single: 'секунду тому'
+        multiple:
+          forms:
+            default: 'секунд'
+            singular: 'секунду'
+            dual: 'секунди'
+            paucal: 'секунди'
+          afterCount: 'тому'
+      minute:
+        single: 'хвилину тому'
+        multiple:
+          forms:
+            default: 'хвилин'
+            singular: 'хвилину'
+            dual: 'хвилини'
+            paucal: 'хвилини'
+          afterCount: 'тому'
+      hour:
+        single: 'годину тому'
+        multiple:
+          forms:
+            default: 'годин'
+            singular: 'годину'
+            dual: 'години'
+            paucal: 'години'
+          afterCount: 'тому'
+      day:
+        single: 'вчора'
+        multiple:
+          forms:
+            default: 'днів'
+            singular: 'день'
+            dual: 'дні'
+            paucal: 'дні'
+          afterCount: 'тому'
+        template:
+          name: 'two'
+          value: 'позавчора'
+      week:
+        single: 'тиждень тому'
+        multiple:
+          forms:
+            default: 'тижнів'
+          afterCount: 'тому'
+      month:
+        single: 'місяць тому'
+        multiple:
+          forms:
+            default: 'місяців'
+            singular: 'місяць'
+            dual: 'місяці'
+            paucal: 'місяці'
+          afterCount: 'тому'
+      year:
+        single: 'рік тому'
+        multiple:
+          forms:
+            default: 'років'
+            singular: 'рік'
+            dual: 'роки'
+            paucal: 'роки'
+          afterCount: 'тому'
+    future:
+      millisecond:
+        single: 'через мілісекунду'
+        multiple:
+          forms:
+            default: 'мілісекунд'
+          beforeCount: 'через'
+      second:
+        single: 'через секунду'
+        multiple:
+          forms:
+            default: 'секунд'
+            singular: 'секунду'
+            dual: 'секунди'
+            paucal: 'секунди'
+          beforeCount: 'через'
+      minute:
+        single: 'через хвилину'
+        multiple:
+          forms:
+            default: 'хвилин'
+            singular: 'хвилину'
+            dual: 'хвилини'
+            paucal: 'хвилини'
+          beforeCount: 'через'
+      hour:
+        single: 'через годину'
+        multiple:
+          forms:
+            default: 'годин'
+            singular: 'годину'
+            dual: 'години'
+            paucal: 'години'
+          beforeCount: 'через'
+      day:
+        single: 'завтра'
+        multiple:
+          forms:
+            default: 'днів'
+            singular: 'день'
+            dual: 'дні'
+            paucal: 'дні'
+          beforeCount: 'через'
+        template:
+          name: 'two'
+          value: 'післязавтра'
+      week:
+        single: 'через тиждень'
+        multiple:
+          forms:
+            default: 'тижнів'
+          beforeCount: 'через'
+      month:
+        single: 'через місяць'
+        multiple:
+          forms:
+            default: 'місяців'
+            singular: 'місяць'
+            dual: 'місяці'
+            paucal: 'місяці'
+          beforeCount: 'через'
+      year:
+        single: 'через рік'
+        multiple:
+          forms:
+            default: 'років'
+            singular: 'рік'
+            dual: 'роки'
+            paucal: 'роки'
+          beforeCount: 'через'
+  timeSpan:
+    zero: 'без часу'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 мілісекунда'
+        words: 'одна мілісекунда'
+      multiple:
+        forms:
+          default: 'мілісекунд'
+          singular: 'мілісекунда'
+          dual: 'мілісекунди'
+          paucal: 'мілісекунди'
+    second:
+      single:
+        numeric: '1 секунда'
+        words: 'одна секунда'
+      multiple:
+        forms:
+          default: 'секунд'
+          singular: 'секунда'
+          dual: 'секунди'
+          paucal: 'секунди'
+    minute:
+      single:
+        numeric: '1 хвилина'
+        words: 'одна хвилина'
+      multiple:
+        forms:
+          default: 'хвилин'
+          singular: 'хвилина'
+          dual: 'хвилини'
+          paucal: 'хвилини'
+    hour:
+      single:
+        numeric: '1 година'
+        words: 'одна година'
+      multiple:
+        forms:
+          default: 'годин'
+          singular: 'година'
+          dual: 'години'
+          paucal: 'години'
+    day:
+      single:
+        numeric: '1 день'
+        words: 'один день'
+      multiple:
+        forms:
+          default: 'днів'
+          singular: 'день'
+          dual: 'дні'
+          paucal: 'дні'
+    week:
+      single:
+        numeric: '1 тиждень'
+        words: 'один тиждень'
+      multiple:
+        forms:
+          default: 'тижнів'
+          singular: 'тиждень'
+          dual: 'тижні'
+          paucal: 'тижні'
+    month:
+      single:
+        numeric: '1 місяць'
+        words: 'один місяць'
+      multiple:
+        forms:
+          default: 'місяців'
+          singular: 'місяць'
+          dual: 'місяці'
+          paucal: 'місяці'
+    year:
+      single:
+        numeric: '1 рік'
+        words: 'один рік'
+      multiple:
+        forms:
+          default: 'років'
+          singular: 'рік'
+          dual: 'роки'
+          paucal: 'роки'
+  dataUnit:
+    bit:
+      forms:
+        default: 'біт'
+        paucal: 'біти'
+        plural: 'бітів'
+      symbol: 'б'
+    byte:
+      forms:
+        default: 'байт'
+        paucal: 'байти'
+        plural: 'байтів'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'кілобайт'
+        paucal: 'кілобайти'
+        plural: 'кілобайтів'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'мегабайт'
+        paucal: 'мегабайти'
+        plural: 'мегабайтів'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'гігабайт'
+        paucal: 'гігабайти'
+        plural: 'гігабайтів'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'терабайт'
+        paucal: 'терабайти'
+        plural: 'терабайтів'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'мс.'
+    second:
+      symbol: 'сек.'
+    minute:
+      symbol: 'хв.'
+    hour:
+      symbol: 'год.'
+    day:
+      symbol: 'д.'
+    week:
+      symbol: 'тиж.'
+    month:
+      symbol: 'міс.'
+    year:
+      symbol: 'р.'
+headings:
+  full:
+    - 'північ'
+    - 'північ-північний схід'
+    - 'північний схід'
+    - 'схід-північний схід'
+    - 'схід'
+    - 'схід-південний схід'
+    - 'південний схід'
+    - 'південь-південний схід'
+    - 'південь'
+    - 'південь-південний захід'
+    - 'південний захід'
+    - 'захід-південний захід'
+    - 'захід'
+    - 'захід-північний захід'
+    - 'північний захід'
+    - 'північ-північний захід'
+  short:
+    - 'Пн'
+    - 'ПнПнСх'
+    - 'ПнСх'
+    - 'СхПнСх'
+    - 'Сх'
+    - 'СхПдСх'
+    - 'ПдСх'
+    - 'ПдПдСх'
+    - 'Пд'
+    - 'ПдПдЗх'
+    - 'ПдЗх'
+    - 'ЗхПдЗх'
+    - 'Зх'
+    - 'ЗхПнЗх'
+    - 'ПнЗх'
+    - 'ПнПнЗх'

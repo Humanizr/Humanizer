@@ -589,3 +589,269 @@ wordsToNumber:
     'milésima': 1000
     'milésimo': 1000
   gluedOrdinalScaleSuffixes: {}
+
+phrases:
+  dateHumanize:
+    now: 'agora'
+    never: 'nunca'
+    past:
+      millisecond:
+        single: 'há um milissegundo'
+        multiple:
+          forms:
+            default: 'milissegundos'
+          beforeCount: 'há'
+      second:
+        single: 'há um segundo'
+        multiple:
+          forms:
+            default: 'segundos'
+            singular: 'segundo'
+          beforeCount: 'há'
+      minute:
+        single: 'há um minuto'
+        multiple:
+          forms:
+            default: 'minutos'
+            singular: 'minuto'
+          beforeCount: 'há'
+      hour:
+        single: 'há uma hora'
+        multiple:
+          forms:
+            default: 'horas'
+            singular: 'hora'
+          beforeCount: 'há'
+      day:
+        single: 'ontem'
+        multiple:
+          forms:
+            default: 'dias'
+            singular: 'dia'
+          beforeCount: 'há'
+        template:
+          name: 'two'
+          value: 'anteontem'
+      week:
+        single: 'há uma semana'
+        multiple:
+          forms:
+            default: 'semanas'
+          beforeCount: 'há'
+      month:
+        single: 'há um mês'
+        multiple:
+          forms:
+            default: 'meses'
+            singular: 'mês'
+          beforeCount: 'há'
+      year:
+        single: 'há um ano'
+        multiple:
+          forms:
+            default: 'anos'
+            singular: 'ano'
+          beforeCount: 'há'
+    future:
+      millisecond:
+        single: 'daqui a um milissegundo'
+        multiple:
+          forms:
+            default: 'milissegundos'
+          beforeCount: 'daqui a'
+      second:
+        single: 'daqui a um segundo'
+        multiple:
+          forms:
+            default: 'segundos'
+            singular: 'segundo'
+          beforeCount: 'daqui a'
+      minute:
+        single: 'daqui a um minuto'
+        multiple:
+          forms:
+            default: 'minutos'
+            singular: 'minuto'
+          beforeCount: 'daqui a'
+      hour:
+        single: 'daqui a uma hora'
+        multiple:
+          forms:
+            default: 'horas'
+            singular: 'hora'
+          beforeCount: 'daqui a'
+      day:
+        single: 'amanhã'
+        multiple:
+          forms:
+            default: 'dias'
+            singular: 'dia'
+          beforeCount: 'daqui a'
+        template:
+          name: 'two'
+          value: 'depois de amanhã'
+      week:
+        single: 'daqui a uma semana'
+        multiple:
+          forms:
+            default: 'semanas'
+          beforeCount: 'daqui a'
+      month:
+        single: 'daqui a um mês'
+        multiple:
+          forms:
+            default: 'meses'
+            singular: 'mês'
+          beforeCount: 'daqui a'
+      year:
+        single: 'daqui a um ano'
+        multiple:
+          forms:
+            default: 'anos'
+            singular: 'ano'
+          beforeCount: 'daqui a'
+  timeSpan:
+    zero: 'sem horário'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milisegundo'
+        words: 'um milisegundo'
+      multiple:
+        forms:
+          default: 'milisegundos'
+          singular: 'milisegundo'
+    second:
+      single:
+        numeric: '1 segundo'
+        words: 'um segundo'
+      multiple:
+        forms:
+          default: 'segundos'
+          singular: 'segundo'
+    minute:
+      single:
+        numeric: '1 minuto'
+        words: 'um minuto'
+      multiple:
+        forms:
+          default: 'minutos'
+          singular: 'minuto'
+    hour:
+      single:
+        numeric: '1 hora'
+        words: 'uma hora'
+      multiple:
+        forms:
+          default: 'horas'
+          singular: 'hora'
+    day:
+      single:
+        numeric: '1 dia'
+        words: 'um dia'
+      multiple:
+        forms:
+          default: 'dias'
+          singular: 'dia'
+    week:
+      single:
+        numeric: '1 semana'
+        words: 'uma semana'
+      multiple:
+        forms:
+          default: 'semanas'
+          singular: 'semana'
+    month:
+      single:
+        numeric: '1 mês'
+        words: 'um mês'
+      multiple:
+        forms:
+          default: 'meses'
+          singular: 'mês'
+    year:
+      single:
+        numeric: '1 ano'
+        words: 'um ano'
+      multiple:
+        forms:
+          default: 'anos'
+          singular: 'ano'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'bit'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'h'
+    day:
+      symbol: 'd'
+    week:
+      symbol: 'semana'
+    month:
+      symbol: 'm'
+    year:
+      symbol: 'a'
+headings:
+  full:
+    - 'norte'
+    - 'norte-nordeste'
+    - 'nordeste'
+    - 'leste-nordeste'
+    - 'leste'
+    - 'leste-sudeste'
+    - 'sudeste'
+    - 'sul-sudeste'
+    - 'sul'
+    - 'sul-sudoeste'
+    - 'sudoeste'
+    - 'oeste-sudoeste'
+    - 'oeste'
+    - 'oeste-noroeste'
+    - 'noroeste'
+    - 'norte-noroeste'
+  short:
+    - 'N'
+    - 'NNE'
+    - 'NE'
+    - 'LNE'
+    - 'L'
+    - 'LSE'
+    - 'SE'
+    - 'SSE'
+    - 'S'
+    - 'SSO'
+    - 'SO'
+    - 'OSO'
+    - 'O'
+    - 'ONO'
+    - 'NO'
+    - 'NNO'

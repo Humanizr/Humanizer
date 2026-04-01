@@ -155,3 +155,249 @@ wordsToNumber:
   ordinalNumberToWordsKind: 'self'
   negativePrefixes:
     - 'minus '
+
+phrases:
+  dateHumanize:
+    now: 'nå'
+    never: 'aldri'
+    past:
+      millisecond:
+        single: 'ett millisekund siden'
+        multiple:
+          forms:
+            default: 'millisekunder'
+          afterCount: 'siden'
+      second:
+        single: 'ett sekund siden'
+        multiple:
+          forms:
+            default: 'sekunder'
+          afterCount: 'siden'
+      minute:
+        single: 'ett minutt siden'
+        multiple:
+          forms:
+            default: 'minutter'
+          afterCount: 'siden'
+      hour:
+        single: 'en time siden'
+        multiple:
+          forms:
+            default: 'timer'
+          afterCount: 'siden'
+      day:
+        single: 'i går'
+        multiple:
+          forms:
+            default: 'dager'
+          afterCount: 'siden'
+        template:
+          name: 'two'
+          value: 'i forgårs'
+      week:
+        single: 'en uke siden'
+        multiple:
+          forms:
+            default: 'uker'
+          afterCount: 'siden'
+      month:
+        single: 'en måned siden'
+        multiple:
+          forms:
+            default: 'måneder'
+          afterCount: 'siden'
+      year:
+        single: 'ett år siden'
+        multiple:
+          forms:
+            default: 'år'
+          afterCount: 'siden'
+    future:
+      millisecond:
+        single: 'ett millisekund fra nå'
+        multiple:
+          forms:
+            default: 'millisekunder'
+          afterCount: 'fra nå'
+      second:
+        single: 'ett sekund fra nå'
+        multiple:
+          forms:
+            default: 'sekunder'
+          afterCount: 'fra nå'
+      minute:
+        single: 'ett minutt fra nå'
+        multiple:
+          forms:
+            default: 'minutter'
+          afterCount: 'fra nå'
+      hour:
+        single: 'en time fra nå'
+        multiple:
+          forms:
+            default: 'timer'
+          afterCount: 'fra nå'
+      day:
+        single: 'i morgen'
+        multiple:
+          forms:
+            default: 'dager'
+          afterCount: 'fra nå'
+        template:
+          name: 'two'
+          value: 'i overmorgen'
+      week:
+        single: 'en uke fra nå'
+        multiple:
+          forms:
+            default: 'uker'
+          afterCount: 'fra nå'
+      month:
+        single: 'en måned fra nå'
+        multiple:
+          forms:
+            default: 'måneder'
+          afterCount: 'fra nå'
+      year:
+        single: 'ett år fra nå'
+        multiple:
+          forms:
+            default: 'år'
+          afterCount: 'fra nå'
+  timeSpan:
+    zero: 'ingen tid'
+    age:
+      template: '{value} gammel'
+    millisecond:
+      single:
+        numeric: '1 millisekund'
+        words: 'ett millisekund'
+      multiple:
+        forms:
+          default: 'millisekunder'
+    second:
+      single:
+        numeric: '1 sekund'
+        words: 'ett sekund'
+      multiple:
+        forms:
+          default: 'sekunder'
+    minute:
+      single:
+        numeric: '1 minutt'
+        words: 'ett minutt'
+      multiple:
+        forms:
+          default: 'minutter'
+    hour:
+      single:
+        numeric: '1 time'
+        words: 'en time'
+      multiple:
+        forms:
+          default: 'timer'
+    day:
+      single:
+        numeric: '1 dag'
+        words: 'en dag'
+      multiple:
+        forms:
+          default: 'dager'
+    week:
+      single:
+        numeric: '1 uke'
+        words: 'en uke'
+      multiple:
+        forms:
+          default: 'uker'
+    month:
+      single:
+        numeric: '1 måned'
+        words: 'en måned'
+      multiple:
+        forms:
+          default: 'måneder'
+    year:
+      single:
+        numeric: '1 år'
+        words: 'ett år'
+      multiple:
+        forms:
+          default: 'år'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 'sek.'
+    minute:
+      symbol: 'min.'
+    hour:
+      symbol: 'time'
+    day:
+      symbol: 'dag'
+    week:
+      symbol: 'uke'
+    month:
+      symbol: 'måned'
+    year:
+      symbol: 'år'
+headings:
+  full:
+    - 'nord'
+    - 'nord-nordøst'
+    - 'nordøst'
+    - 'øst-nordøst'
+    - 'øst'
+    - 'øst-sørøst'
+    - 'sørøst'
+    - 'sør-sørøst'
+    - 'sør'
+    - 'sør-sørvest'
+    - 'sørvest'
+    - 'vest-sørvest'
+    - 'vest'
+    - 'vest-nordvest'
+    - 'nordvest'
+    - 'nord-nordvest'
+  short:
+    - 'N'
+    - 'NNØ'
+    - 'NØ'
+    - 'ØNØ'
+    - 'Ø'
+    - 'ØSØ'
+    - 'SØ'
+    - 'SSØ'
+    - 'S'
+    - 'SSV'
+    - 'SV'
+    - 'VSV'
+    - 'V'
+    - 'VNV'
+    - 'NV'
+    - 'NNV'

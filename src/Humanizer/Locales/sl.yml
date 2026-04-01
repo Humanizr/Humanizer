@@ -4,17 +4,11 @@
 collectionFormatter:
   engine: 'conjunction'
   value: 'in'
+grammar:
+  pluralRule: 'slovenian'
+  dataUnitPluralRule: 'slovenian'
 formatter:
   engine: 'profiled'
-  resourceKeyDetector: 'slovenian'
-  resourceKeySuffixes:
-    dual: '_Dual'
-    paucal: '_Paucal'
-  dataUnitDetector: 'slovenian'
-  dataUnitSuffixes:
-    singular: '_Singular'
-    dual: '_Dual'
-    paucal: '_Paucal'
   dataUnitFallbackTransform: 'trim-trailing-s'
 numberToWords:
   engine: 'south-slavic-cardinal'
@@ -217,3 +211,336 @@ wordsToNumber:
     - 'tisoc'
   negativePrefixes:
     - 'minus '
+
+phrases:
+  dateHumanize:
+    now: 'sedaj'
+    never: 'nikoli'
+    past:
+      millisecond:
+        single: 'pred eno milisekundo'
+        multiple:
+          forms:
+            default: 'milisekundami'
+          beforeCount: 'pred'
+      second:
+        single: 'pred eno sekundo'
+        multiple:
+          forms:
+            default: 'sekundami'
+            singular: 'sekundama'
+            dual: 'sekundama'
+            plural: 'sekundama'
+          beforeCount: 'pred'
+      minute:
+        single: 'pred eno minuto'
+        multiple:
+          forms:
+            default: 'minutami'
+            singular: 'minutama'
+            dual: 'minutama'
+            plural: 'minutama'
+          beforeCount: 'pred'
+      hour:
+        single: 'pred eno uro'
+        multiple:
+          forms:
+            default: 'urami'
+            singular: 'urama'
+            dual: 'urama'
+            plural: 'urama'
+          beforeCount: 'pred'
+      day:
+        single: 'včeraj'
+        multiple:
+          forms:
+            default: 'dnevi'
+            singular: 'dnevoma'
+            dual: 'dnevoma'
+            plural: 'dnevoma'
+          beforeCount: 'pred'
+        template:
+          name: 'two'
+          value: 'pred 2 dnevoma'
+      week:
+        single: 'pred enim tednom'
+        multiple:
+          forms:
+            default: 'tedni'
+          beforeCount: 'pred'
+      month:
+        single: 'pred enim mesecem'
+        multiple:
+          forms:
+            default: 'meseci'
+            singular: 'mesecema'
+            dual: 'mesecema'
+            plural: 'mesecema'
+          beforeCount: 'pred'
+      year:
+        single: 'pred enim letom'
+        multiple:
+          forms:
+            default: 'leti'
+            singular: 'letoma'
+            dual: 'letoma'
+            plural: 'letoma'
+          beforeCount: 'pred'
+    future:
+      millisecond:
+        single: 'čez eno milisekundo'
+        multiple:
+          forms:
+            default: 'milisekund'
+          beforeCount: 'čez'
+      second:
+        single: 'čez eno sekundo'
+        multiple:
+          forms:
+            default: 'sekund'
+            singular: 'sekundi'
+            dual: 'sekundi'
+            paucal: 'sekunde'
+            plural: 'sekundi'
+          beforeCount: 'čez'
+      minute:
+        single: 'čez eno minuto'
+        multiple:
+          forms:
+            default: 'minut'
+            singular: 'minuti'
+            dual: 'minuti'
+            paucal: 'minute'
+            plural: 'minuti'
+          beforeCount: 'čez'
+      hour:
+        single: 'čez eno uro'
+        multiple:
+          forms:
+            default: 'ur'
+            singular: 'uri'
+            dual: 'uri'
+            paucal: 'ure'
+            plural: 'uri'
+          beforeCount: 'čez'
+      day:
+        single: 'jutri'
+        multiple:
+          forms:
+            default: 'dni'
+          beforeCount: 'čez'
+        template:
+          name: 'two'
+          value: 'čez 2 dni'
+      week:
+        single: 'čez en teden'
+        multiple:
+          forms:
+            default: 'tednov'
+          beforeCount: 'čez'
+      month:
+        single: 'čez en mesec'
+        multiple:
+          forms:
+            default: 'mesecev'
+            singular: 'meseca'
+            dual: 'meseca'
+            paucal: 'mesece'
+            plural: 'meseca'
+          beforeCount: 'čez'
+      year:
+        single: 'čez eno leto'
+        multiple:
+          forms:
+            default: 'let'
+            singular: 'leti'
+            dual: 'leti'
+            paucal: 'leta'
+            plural: 'leti'
+          beforeCount: 'čez'
+  timeSpan:
+    zero: 'nič časa'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milisekunda'
+        words: 'one milisekunda'
+      multiple:
+        forms:
+          default: 'milisekund'
+          singular: 'milisekundi'
+          dual: 'milisekundi'
+          paucal: 'milisekunde'
+          plural: 'milisekundi'
+    second:
+      single:
+        numeric: '1 sekunda'
+        words: 'one sekunda'
+      multiple:
+        forms:
+          default: 'sekund'
+          singular: 'sekundi'
+          dual: 'sekundi'
+          paucal: 'sekunde'
+          plural: 'sekundi'
+    minute:
+      single:
+        numeric: '1 minuta'
+        words: 'one minuta'
+      multiple:
+        forms:
+          default: 'minut'
+          singular: 'minuti'
+          dual: 'minuti'
+          paucal: 'minute'
+          plural: 'minuti'
+    hour:
+      single:
+        numeric: '1 ura'
+        words: 'one ura'
+      multiple:
+        forms:
+          default: 'ur'
+          singular: 'uri'
+          dual: 'uri'
+          paucal: 'ure'
+          plural: 'uri'
+    day:
+      single:
+        numeric: '1 dan'
+        words: 'one dan'
+      multiple:
+        forms:
+          default: 'dni'
+          singular: 'dneva'
+          dual: 'dneva'
+          plural: 'dneva'
+    week:
+      single:
+        numeric: '1 teden'
+        words: 'one teden'
+      multiple:
+        forms:
+          default: 'tednov'
+          singular: 'tedna'
+          dual: 'tedna'
+          paucal: 'tedne'
+          plural: 'tedna'
+    month:
+      single:
+        numeric: '1 mesec'
+        words: 'one mesec'
+      multiple:
+        forms:
+          default: 'mesecev'
+          singular: 'meseca'
+          dual: 'meseca'
+          paucal: 'mesece'
+          plural: 'meseca'
+    year:
+      single:
+        numeric: '1 leto'
+        words: 'one leto'
+      multiple:
+        forms:
+          default: 'let'
+          singular: 'leti'
+          dual: 'leti'
+          paucal: 'leta'
+          plural: 'leti'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bitov'
+        singular: 'bit'
+        dual: 'bita'
+        paucal: 'biti'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bajtov'
+        singular: 'bajt'
+        dual: 'bajta'
+        paucal: 'bajti'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobajtov'
+        singular: 'kilobajt'
+        dual: 'kilobajta'
+        paucal: 'kilobajti'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabajtov'
+        singular: 'megabajt'
+        dual: 'megabajta'
+        paucal: 'megabajti'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabajtov'
+        singular: 'gigabajt'
+        dual: 'gigabajta'
+        paucal: 'gigabajti'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabajtov'
+        singular: 'terabajt'
+        dual: 'terabajta'
+        paucal: 'terabajti'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'h'
+    day:
+      symbol: 'd.'
+    week:
+      symbol: 'ted.'
+    month:
+      symbol: 'mes.'
+    year:
+      symbol: 'l.'
+headings:
+  full:
+    - 'sever'
+    - 'sever-severovzhod'
+    - 'severovzhod'
+    - 'vzhod-severovzhod'
+    - 'vzhod'
+    - 'vzhod-jugovzhod'
+    - 'jugovzhod'
+    - 'jug-jugovzhod'
+    - 'jug'
+    - 'jug-jugozahod'
+    - 'jugozahod'
+    - 'zahod-jugozahod'
+    - 'zahod'
+    - 'zahod-severozahod'
+    - 'severozahod'
+    - 'sever-severozahod'
+  short:
+    - 'S'
+    - 'SSV'
+    - 'SV'
+    - 'VSV'
+    - 'V'
+    - 'VJV'
+    - 'JV'
+    - 'JJV'
+    - 'J'
+    - 'JJZ'
+    - 'JZ'
+    - 'ZJZ'
+    - 'Z'
+    - 'ZSZ'
+    - 'SZ'
+    - 'SSZ'

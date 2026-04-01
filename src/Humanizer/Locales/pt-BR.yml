@@ -115,3 +115,277 @@ timeOnlyToClockNotation:
   fiveToFormat: 'cinco para as {0}'
   roundHourFormat: '{0} em ponto'
   genericMinutesFormat: '{0} e {1}'
+
+phrases:
+  dateHumanize:
+    now: 'agora'
+    never: 'nunca'
+    past:
+      millisecond:
+        single: 'um milissegundo atrás'
+        multiple:
+          forms:
+            default: 'milissegundos'
+          beforeCount: ''
+          afterCount: 'atrás'
+      second:
+        single: 'um segundo atrás'
+        multiple:
+          forms:
+            default: 'segundos'
+            singular: 'segundo'
+          beforeCount: ''
+          afterCount: 'atrás'
+      minute:
+        single: 'um minuto atrás'
+        multiple:
+          forms:
+            default: 'minutos'
+            singular: 'minuto'
+          beforeCount: ''
+          afterCount: 'atrás'
+      hour:
+        single: 'uma hora atrás'
+        multiple:
+          forms:
+            default: 'horas'
+            singular: 'hora'
+          beforeCount: ''
+          afterCount: 'atrás'
+      day:
+        single: 'ontem'
+        multiple:
+          forms:
+            default: 'dias'
+            singular: 'dia'
+          beforeCount: ''
+          afterCount: 'atrás'
+        template:
+          name: 'two'
+          value: '2 dias atrás'
+      week:
+        single: 'uma semana atrás'
+        multiple:
+          forms:
+            default: 'semanas'
+          beforeCount: ''
+          afterCount: 'atrás'
+      month:
+        single: 'um mês atrás'
+        multiple:
+          forms:
+            default: 'meses'
+            singular: 'mês'
+          beforeCount: ''
+          afterCount: 'atrás'
+      year:
+        single: 'um ano atrás'
+        multiple:
+          forms:
+            default: 'anos'
+            singular: 'ano'
+          beforeCount: ''
+          afterCount: 'atrás'
+    future:
+      millisecond:
+        single: 'em um milissegundo'
+        multiple:
+          forms:
+            default: 'milissegundos'
+          beforeCount: 'em'
+      second:
+        single: 'em um segundo'
+        multiple:
+          forms:
+            default: 'segundos'
+            singular: 'segundo'
+          beforeCount: 'em'
+      minute:
+        single: 'em um minuto'
+        multiple:
+          forms:
+            default: 'minutos'
+            singular: 'minuto'
+          beforeCount: 'em'
+      hour:
+        single: 'em uma hora'
+        multiple:
+          forms:
+            default: 'horas'
+            singular: 'hora'
+          beforeCount: 'em'
+      day:
+        single: 'amanhã'
+        multiple:
+          forms:
+            default: 'dias'
+            singular: 'dia'
+          beforeCount: 'em'
+        template:
+          name: 'two'
+          value: 'em 2 dias'
+      week:
+        single: 'em uma semana'
+        multiple:
+          forms:
+            default: 'semanas'
+          beforeCount: 'em'
+      month:
+        single: 'em um mês'
+        multiple:
+          forms:
+            default: 'meses'
+            singular: 'mês'
+          beforeCount: 'em'
+      year:
+        single: 'em um ano'
+        multiple:
+          forms:
+            default: 'anos'
+            singular: 'ano'
+          beforeCount: 'em'
+  timeSpan:
+    zero: 'sem tempo'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milissegundo'
+        words: 'um milissegundo'
+      multiple:
+        forms:
+          default: 'milissegundos'
+          singular: 'milissegundo'
+    second:
+      single:
+        numeric: '1 segundo'
+        words: 'um segundo'
+      multiple:
+        forms:
+          default: 'segundos'
+          singular: 'segundo'
+    minute:
+      single:
+        numeric: '1 minuto'
+        words: 'um minuto'
+      multiple:
+        forms:
+          default: 'minutos'
+          singular: 'minuto'
+    hour:
+      single:
+        numeric: '1 hora'
+        words: 'uma hora'
+      multiple:
+        forms:
+          default: 'horas'
+          singular: 'hora'
+    day:
+      single:
+        numeric: '1 dia'
+        words: 'um dia'
+      multiple:
+        forms:
+          default: 'dias'
+          singular: 'dia'
+    week:
+      single:
+        numeric: '1 semana'
+        words: 'uma semana'
+      multiple:
+        forms:
+          default: 'semanas'
+          singular: 'semana'
+    month:
+      single:
+        numeric: '1 mês'
+        words: 'um mês'
+      multiple:
+        forms:
+          default: 'meses'
+          singular: 'mês'
+    year:
+      single:
+        numeric: '1 ano'
+        words: 'um ano'
+      multiple:
+        forms:
+          default: 'anos'
+          singular: 'ano'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'bit'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'h'
+    day:
+      symbol: 'd'
+    week:
+      symbol: 'semana'
+    month:
+      symbol: 'm'
+    year:
+      symbol: 'a'
+headings:
+  full:
+    - 'norte'
+    - 'norte-nordeste'
+    - 'nordeste'
+    - 'leste-nordeste'
+    - 'leste'
+    - 'leste-sudeste'
+    - 'sudeste'
+    - 'sul-sudeste'
+    - 'sul'
+    - 'sul-sudoeste'
+    - 'sudoeste'
+    - 'oeste-sudoeste'
+    - 'oeste'
+    - 'oeste-noroeste'
+    - 'noroeste'
+    - 'norte-noroeste'
+  short:
+    - 'N'
+    - 'NNE'
+    - 'NE'
+    - 'LNE'
+    - 'L'
+    - 'LSE'
+    - 'SE'
+    - 'SSE'
+    - 'S'
+    - 'SSO'
+    - 'SO'
+    - 'OSO'
+    - 'O'
+    - 'ONO'
+    - 'NO'
+    - 'NNO'

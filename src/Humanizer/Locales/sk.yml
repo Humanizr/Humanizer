@@ -174,3 +174,315 @@ wordsToNumber:
   negativePrefixes:
     - 'mínus '
     - 'minus '
+
+phrases:
+  dateHumanize:
+    now: 'teraz'
+    never: 'nikdy'
+    past:
+      millisecond:
+        single: 'pred milisekundou'
+        multiple:
+          forms:
+            default: 'milisekundami'
+          beforeCount: 'pred'
+      second:
+        single: 'pred sekundou'
+        multiple:
+          forms:
+            default: 'sekundami'
+          beforeCount: 'pred'
+      minute:
+        single: 'pred minútou'
+        multiple:
+          forms:
+            default: 'minútami'
+          beforeCount: 'pred'
+      hour:
+        single: 'pred hodinou'
+        multiple:
+          forms:
+            default: 'hodinami'
+          beforeCount: 'pred'
+      day:
+        single: 'včera'
+        multiple:
+          forms:
+            default: 'dňami'
+          beforeCount: 'pred'
+        template:
+          name: 'two'
+          value: 'pred 2 dňami'
+      week:
+        single: 'pred týždňom'
+        multiple:
+          forms:
+            default: 'týždňami'
+          beforeCount: 'pred'
+      month:
+        single: 'pred mesiacom'
+        multiple:
+          forms:
+            default: 'mesiacmi'
+          beforeCount: 'pred'
+      year:
+        single: 'pred rokom'
+        multiple:
+          forms:
+            default: 'rokmi'
+          beforeCount: 'pred'
+    future:
+      millisecond:
+        single: 'o milisekundu'
+        multiple:
+          forms:
+            default: 'milisekúnd'
+          beforeCount: 'o'
+      second:
+        single: 'o sekundu'
+        multiple:
+          forms:
+            default: 'sekúnd'
+            singular: 'sekundy'
+            dual: 'sekundy'
+            paucal: 'sekundy'
+            plural: 'sekundy'
+          beforeCount: 'o'
+      minute:
+        single: 'o minútu'
+        multiple:
+          forms:
+            default: 'minút'
+            singular: 'minúty'
+            dual: 'minúty'
+            paucal: 'minúty'
+            plural: 'minúty'
+          beforeCount: 'o'
+      hour:
+        single: 'o hodinu'
+        multiple:
+          forms:
+            default: 'hodín'
+            singular: 'hodiny'
+            dual: 'hodiny'
+            paucal: 'hodiny'
+            plural: 'hodiny'
+          beforeCount: 'o'
+      day:
+        single: 'zajtra'
+        multiple:
+          forms:
+            default: 'dní'
+            singular: 'dni'
+            dual: 'dni'
+            paucal: 'dni'
+            plural: 'dni'
+          beforeCount: 'o'
+        template:
+          name: 'two'
+          value: 'o 2 dni'
+      week:
+        single: 'o týždeň'
+        multiple:
+          forms:
+            default: 'týždňov'
+          beforeCount: 'o'
+      month:
+        single: 'o mesiac'
+        multiple:
+          forms:
+            default: 'mesiacov'
+            singular: 'mesiace'
+            dual: 'mesiace'
+            paucal: 'mesiace'
+            plural: 'mesiace'
+          beforeCount: 'o'
+      year:
+        single: 'o rok'
+        multiple:
+          forms:
+            default: 'rokov'
+            singular: 'roky'
+            dual: 'roky'
+            paucal: 'roky'
+            plural: 'roky'
+          beforeCount: 'o'
+  timeSpan:
+    zero: 'žiadny čas'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milisekunda'
+        words: 'one milisekunda'
+      multiple:
+        forms:
+          default: 'milisekúnd'
+          singular: 'milisekundy'
+          dual: 'milisekundy'
+          paucal: 'milisekundy'
+          plural: 'milisekundy'
+    second:
+      single:
+        numeric: '1 sekunda'
+        words: 'one sekunda'
+      multiple:
+        forms:
+          default: 'sekúnd'
+          singular: 'sekundy'
+          dual: 'sekundy'
+          paucal: 'sekundy'
+          plural: 'sekundy'
+    minute:
+      single:
+        numeric: '1 minúta'
+        words: 'one minúta'
+      multiple:
+        forms:
+          default: 'minút'
+          singular: 'minúty'
+          dual: 'minúty'
+          paucal: 'minúty'
+          plural: 'minúty'
+    hour:
+      single:
+        numeric: '1 hodina'
+        words: 'one hodina'
+      multiple:
+        forms:
+          default: 'hodín'
+          singular: 'hodiny'
+          dual: 'hodiny'
+          paucal: 'hodiny'
+          plural: 'hodiny'
+    day:
+      single:
+        numeric: '1 deň'
+        words: 'one deň'
+      multiple:
+        forms:
+          default: 'dní'
+          singular: 'dni'
+          dual: 'dni'
+          paucal: 'dni'
+          plural: 'dni'
+    week:
+      single:
+        numeric: '1 týždeň'
+        words: 'one týždeň'
+      multiple:
+        forms:
+          default: 'týždňov'
+          singular: 'týždne'
+          dual: 'týždne'
+          paucal: 'týždne'
+          plural: 'týždne'
+    month:
+      single:
+        numeric: '1 mesiac'
+        words: 'one mesiac'
+      multiple:
+        forms:
+          default: 'mesiacov'
+          singular: 'mesiace'
+          dual: 'mesiace'
+          paucal: 'mesiace'
+          plural: 'mesiace'
+    year:
+      single:
+        numeric: '1 rok'
+        words: 'one rok'
+      multiple:
+        forms:
+          default: 'rokov'
+          singular: 'roky'
+          dual: 'roky'
+          paucal: 'roky'
+          plural: 'roky'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bitov'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'bajtov'
+        singular: 'bajt'
+        paucal: 'bajty'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobajtov'
+        singular: 'kilobajt'
+        paucal: 'kilobajty'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabajtov'
+        singular: 'megabajt'
+        paucal: 'megabajty'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabajtov'
+        singular: 'gigabajt'
+        paucal: 'gigabajty'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabajtov'
+        singular: 'terabajt'
+        paucal: 'terabajty'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'h'
+    day:
+      symbol: 'deň'
+    week:
+      symbol: 'týždeň'
+    month:
+      symbol: 'mesiac'
+    year:
+      symbol: 'rok'
+headings:
+  full:
+    - 'sever'
+    - 'severoseverovýchod'
+    - 'severovýchod'
+    - 'východoseverovýchod'
+    - 'východ'
+    - 'východojuhovýchod'
+    - 'juhovýchod'
+    - 'juhojuhovýchod'
+    - 'juh'
+    - 'juhojuhozápad'
+    - 'juhozápad'
+    - 'západojuhozápad'
+    - 'západ'
+    - 'západoseverozápad'
+    - 'severozápad'
+    - 'severoseverozápad'
+  short:
+    - 'S'
+    - 'SSV'
+    - 'SV'
+    - 'VSV'
+    - 'V'
+    - 'VJV'
+    - 'JV'
+    - 'JJV'
+    - 'J'
+    - 'JJZ'
+    - 'JZ'
+    - 'ZJZ'
+    - 'Z'
+    - 'ZSZ'
+    - 'SZ'
+    - 'SSZ'

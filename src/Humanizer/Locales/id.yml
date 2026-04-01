@@ -87,3 +87,249 @@ wordsToNumber:
     ribu: 1000
     juta: 1000000
     miliar: 1000000000
+
+phrases:
+  dateHumanize:
+    now: 'sekarang'
+    never: 'tidak pernah'
+    past:
+      millisecond:
+        single: 'satu milidetik yang lalu'
+        multiple:
+          forms:
+            default: 'milidetik'
+          afterCount: 'yang lalu'
+      second:
+        single: 'sedetik yang lalu'
+        multiple:
+          forms:
+            default: 'detik'
+          afterCount: 'yang lalu'
+      minute:
+        single: 'semenit yang lalu'
+        multiple:
+          forms:
+            default: 'menit'
+          afterCount: 'yang lalu'
+      hour:
+        single: 'sejam yang lalu'
+        multiple:
+          forms:
+            default: 'jam'
+          afterCount: 'yang lalu'
+      day:
+        single: 'kemarin'
+        multiple:
+          forms:
+            default: 'hari'
+          afterCount: 'yang lalu'
+        template:
+          name: 'two'
+          value: '2 hari yang lalu'
+      week:
+        single: 'seminggu yang lalu'
+        multiple:
+          forms:
+            default: 'minggu'
+          afterCount: 'yang lalu'
+      month:
+        single: 'sebulan yang lalu'
+        multiple:
+          forms:
+            default: 'bulan'
+          afterCount: 'yang lalu'
+      year:
+        single: 'setahun yang lalu'
+        multiple:
+          forms:
+            default: 'tahun'
+          afterCount: 'yang lalu'
+    future:
+      millisecond:
+        single: 'satu milidetik dari sekarang'
+        multiple:
+          forms:
+            default: 'milidetik'
+          afterCount: 'dari sekarang'
+      second:
+        single: 'sedetik dari sekarang'
+        multiple:
+          forms:
+            default: 'detik'
+          afterCount: 'dari sekarang'
+      minute:
+        single: 'semenit dari sekarang'
+        multiple:
+          forms:
+            default: 'menit'
+          afterCount: 'dari sekarang'
+      hour:
+        single: 'sejam dari sekarang'
+        multiple:
+          forms:
+            default: 'jam'
+          afterCount: 'dari sekarang'
+      day:
+        single: 'besok'
+        multiple:
+          forms:
+            default: 'hari'
+          afterCount: 'dari sekarang'
+        template:
+          name: 'two'
+          value: 'lusa'
+      week:
+        single: 'seminggu dari sekarang'
+        multiple:
+          forms:
+            default: 'minggu'
+          afterCount: 'dari sekarang'
+      month:
+        single: 'sebulan dari sekarang'
+        multiple:
+          forms:
+            default: 'bulan'
+          afterCount: 'dari sekarang'
+      year:
+        single: 'setahun dari sekarang'
+        multiple:
+          forms:
+            default: 'tahun'
+          afterCount: 'dari sekarang'
+  timeSpan:
+    zero: 'tidak ada waktu'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milidetik'
+        words: 'one milidetik'
+      multiple:
+        forms:
+          default: 'milidetik'
+    second:
+      single:
+        numeric: '1 detik'
+        words: 'one detik'
+      multiple:
+        forms:
+          default: 'detik'
+    minute:
+      single:
+        numeric: '1 menit'
+        words: 'one menit'
+      multiple:
+        forms:
+          default: 'menit'
+    hour:
+      single:
+        numeric: '1 jam'
+        words: 'one jam'
+      multiple:
+        forms:
+          default: 'jam'
+    day:
+      single:
+        numeric: '1 hari'
+        words: 'one hari'
+      multiple:
+        forms:
+          default: 'hari'
+    week:
+      single:
+        numeric: '1 minggu'
+        words: 'one minggu'
+      multiple:
+        forms:
+          default: 'minggu'
+    month:
+      single:
+        numeric: '1 bulan'
+        words: 'one bulan'
+      multiple:
+        forms:
+          default: 'bulan'
+    year:
+      single:
+        numeric: '1 tahun'
+        words: 'one tahun'
+      multiple:
+        forms:
+          default: 'tahun'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'milidetik'
+    second:
+      symbol: 'detik'
+    minute:
+      symbol: 'menit'
+    hour:
+      symbol: 'jam'
+    day:
+      symbol: 'hari'
+    week:
+      symbol: 'minggu'
+    month:
+      symbol: 'bulan'
+    year:
+      symbol: 'tahun'
+headings:
+  full:
+    - 'utara'
+    - 'utara-timur laut'
+    - 'timur laut'
+    - 'timur-timur laut'
+    - 'timur'
+    - 'timur-tenggara'
+    - 'tenggara'
+    - 'selatan-tenggara'
+    - 'selatan'
+    - 'selatan-barat daya'
+    - 'barat daya'
+    - 'barat-barat daya'
+    - 'barat'
+    - 'barat-barat laut'
+    - 'barat laut'
+    - 'utara-barat laut'
+  short:
+    - 'U'
+    - 'UTL'
+    - 'TL'
+    - 'TTL'
+    - 'T'
+    - 'TTG'
+    - 'TG'
+    - 'STG'
+    - 'S'
+    - 'SBD'
+    - 'BD'
+    - 'BBD'
+    - 'B'
+    - 'BBL'
+    - 'BL'
+    - 'UBL'

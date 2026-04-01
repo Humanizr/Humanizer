@@ -252,8 +252,8 @@ Recommended commands:
 dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
-dotnet build src/Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=artifacts/plan-validation
-pwsh ./tests/verify-packages.ps1 -PackageVersion <version> -PackagesDirectory ./src/Humanizer/artifacts/plan-validation -MinimumPassingSdkVersion 9.0.200
+dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
+pwsh ./tests/verify-packages.ps1 -PackageVersion <version> -PackagesDirectory ./artifacts/plan-validation
 ```
 
 When you change hot-path shared kernels, also run the relevant benchmark filters in `src/Benchmarks`.

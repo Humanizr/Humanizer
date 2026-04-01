@@ -149,3 +149,317 @@ wordsToNumber:
     'מליונים': 1000000
     'מיליארד': 1000000000
     'מיליארדים': 1000000000
+
+phrases:
+  dateHumanize:
+    now: 'כעת'
+    never: 'לעולם לא'
+    past:
+      millisecond:
+        single: 'לפני מילישנייה'
+        multiple:
+          forms:
+            default: 'מילישניות'
+          beforeCount: 'לפני'
+      second:
+        single: 'לפני שנייה'
+        multiple:
+          forms:
+            default: 'שניות'
+          beforeCount: 'לפני'
+      minute:
+        single: 'לפני דקה'
+        multiple:
+          forms:
+            default: 'דקות'
+          beforeCount: 'לפני'
+      hour:
+        single: 'לפני שעה'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'לפני {count} שעות'
+            singular: 'לפני שעתיים'
+            dual: 'לפני שעתיים'
+            paucal: 'לפני שעתיים'
+      day:
+        single: 'אתמול'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'לפני {count} יום'
+            singular: 'לפני יומיים'
+            dual: 'לפני יומיים'
+            paucal: 'לפני יומיים'
+            plural: 'לפני {count} ימים'
+        template:
+          name: 'two'
+          value: 'שלשום'
+      week:
+        single: 'לפני שבוע'
+        multiple:
+          forms:
+            default: 'שבועות'
+          beforeCount: 'לפני'
+      month:
+        single: 'לפני חודש'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'לפני {count} חודשים'
+            singular: 'לפני חודשיים'
+            dual: 'לפני חודשיים'
+            paucal: 'לפני חודשיים'
+      year:
+        single: 'לפני שנה'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'לפני {count} שנה'
+            singular: 'לפני שנתיים'
+            dual: 'לפני שנתיים'
+            paucal: 'לפני שנתיים'
+            plural: 'לפני {count} שנים'
+    future:
+      millisecond:
+        single: 'בעוד מילישנייה'
+        multiple:
+          forms:
+            default: 'מילישניות'
+          beforeCount: 'בעוד'
+      second:
+        single: 'בעוד שנייה'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'בעוד {count} שניות'
+            singular: 'בעוד 2 שניות'
+            dual: 'בעוד 2 שניות'
+            paucal: 'בעוד 2 שניות'
+      minute:
+        single: 'בעוד דקה'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'בעוד {count} דקות'
+            singular: 'בעוד 2 דקות'
+            dual: 'בעוד 2 דקות'
+            paucal: 'בעוד 2 דקות'
+      hour:
+        single: 'בעוד שעה'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'בעוד {count} שעות'
+            singular: 'בעוד שעתיים'
+            dual: 'בעוד שעתיים'
+            paucal: 'בעוד שעתיים'
+      day:
+        single: 'מחר'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'בעוד {count} יום'
+            singular: 'בעוד יומיים'
+            dual: 'בעוד יומיים'
+            paucal: 'בעוד יומיים'
+            plural: 'בעוד {count} ימים'
+        template:
+          name: 'two'
+          value: 'מחרתיים'
+      week:
+        single: 'בעוד שבוע'
+        multiple:
+          forms:
+            default: 'שבועות'
+          beforeCount: 'בעוד'
+      month:
+        single: 'בעוד חודש'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'בעוד {count} חודשים'
+            singular: 'בעוד חודשיים'
+            dual: 'בעוד חודשיים'
+            paucal: 'בעוד חודשיים'
+      year:
+        single: 'בעוד שנה'
+        multiple:
+          countPlacement: none
+          forms:
+            default: 'בעוד {count} שנה'
+            singular: 'בעוד שנתיים'
+            dual: 'בעוד שנתיים'
+            paucal: 'בעוד שנתיים'
+            plural: 'בעוד {count} שנים'
+  timeSpan:
+    zero: 'אין זמן'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: 'אלפית שנייה'
+        words: 'אלפית שנייה'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} אלפיות שנייה'
+          singular: 'שתי אלפיות שנייה'
+          dual: 'שתי אלפיות שנייה'
+          paucal: 'שתי אלפיות שנייה'
+    second:
+      single:
+        numeric: 'שנייה'
+        words: 'שנייה'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} שניות'
+          singular: 'שתי שניות'
+          dual: 'שתי שניות'
+          paucal: 'שתי שניות'
+    minute:
+      single:
+        numeric: 'דקה'
+        words: 'דקה'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} דקות'
+          singular: 'שתי דקות'
+          dual: 'שתי דקות'
+          paucal: 'שתי דקות'
+    hour:
+      single:
+        numeric: 'שעה'
+        words: 'שעה'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} שעות'
+          singular: 'שעתיים'
+          dual: 'שעתיים'
+          paucal: 'שעתיים'
+    day:
+      single:
+        numeric: 'יום'
+        words: 'יום'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} ימים'
+          singular: 'יומיים'
+          dual: 'יומיים'
+          paucal: 'יומיים'
+    week:
+      single:
+        numeric: 'שבוע'
+        words: 'שבוע'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} שבועות'
+          singular: 'שבועיים'
+          dual: 'שבועיים'
+          paucal: 'שבועיים'
+    month:
+      single:
+        numeric: 'חודש'
+        words: 'חודש'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} חודשים'
+          singular: 'חודשיים'
+          dual: 'חודשיים'
+          paucal: 'חודשיים'
+    year:
+      single:
+        numeric: 'שנה'
+        words: 'שנה'
+      multiple:
+        countPlacement: none
+        forms:
+          default: '{count} שנים'
+          singular: 'שנתיים'
+          dual: 'שנתיים'
+          paucal: 'שנתיים'
+  dataUnit:
+    bit:
+      forms:
+        default: 'ביטים'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'בייטים'
+        singular: 'בייט'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'קילובייטים'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'מגהבייטים'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'גיגהבייטים'
+        singular: 'גיגהבייט'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'טרהבייטים'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'מילישנייה'
+    second:
+      symbol: 'שנייה'
+    minute:
+      symbol: 'דקה'
+    hour:
+      symbol: 'שעה'
+    day:
+      symbol: 'יום'
+    week:
+      symbol: 'שבוע'
+    month:
+      symbol: 'חודש'
+    year:
+      symbol: 'שנה'
+headings:
+  full:
+    - 'צפון'
+    - 'צפון צפון מזרח'
+    - 'צפון מזרח'
+    - 'מזרח צפון מזרח'
+    - 'מזרח'
+    - 'מזרח דרום מזרח'
+    - 'דרום מזרח'
+    - 'דרום דרום מזרח'
+    - 'דרום'
+    - 'דרום דרום מערב'
+    - 'דרום מערב'
+    - 'מערב דרום מערב'
+    - 'מערב'
+    - 'מערב צפון מערב'
+    - 'צפון מערב'
+    - 'צפון צפון מערב'
+  short:
+    - 'צ'
+    - 'צצמז'
+    - 'צמז'
+    - 'מזצמז'
+    - 'מז'
+    - 'מזדמז'
+    - 'דמז'
+    - 'דדמז'
+    - 'ד'
+    - 'דדמע'
+    - 'דמע'
+    - 'מעדמע'
+    - 'מע'
+    - 'מעצמע'
+    - 'צמע'
+    - 'צצמע'

@@ -160,3 +160,267 @@ wordsToNumber:
     miljons: 1000000
     miljoni: 1000000
   useHundredMultiplier: true
+
+phrases:
+  dateHumanize:
+    now: 'tagad'
+    never: 'nekad'
+    past:
+      millisecond:
+        single: 'pirms milisekundes'
+        multiple:
+          forms:
+            default: 'milisekundēm'
+          beforeCount: 'pirms'
+      second:
+        single: 'pirms sekundes'
+        multiple:
+          forms:
+            default: 'sekundēm'
+            singular: 'sekundes'
+          beforeCount: 'pirms'
+      minute:
+        single: 'pirms minūtes'
+        multiple:
+          forms:
+            default: 'minūtēm'
+            singular: 'minūtes'
+          beforeCount: 'pirms'
+      hour:
+        single: 'pirms stundas'
+        multiple:
+          forms:
+            default: 'stundām'
+            singular: 'stundas'
+          beforeCount: 'pirms'
+      day:
+        single: 'vakardien'
+        multiple:
+          forms:
+            default: 'dienām'
+            singular: 'dienas'
+          beforeCount: 'pirms'
+        template:
+          name: 'two'
+          value: 'pirms 2 dienām'
+      week:
+        single: 'pirms nedēļas'
+        multiple:
+          forms:
+            default: 'nedēļām'
+          beforeCount: 'pirms'
+      month:
+        single: 'pirms mēneša'
+        multiple:
+          forms:
+            default: 'mēnešiem'
+            singular: 'mēneša'
+          beforeCount: 'pirms'
+      year:
+        single: 'pirms gada'
+        multiple:
+          forms:
+            default: 'gadiem'
+            singular: 'gada'
+          beforeCount: 'pirms'
+    future:
+      millisecond:
+        single: 'pēc milisekundes'
+        multiple:
+          forms:
+            default: 'milisekundēm'
+          beforeCount: 'pēc'
+      second:
+        single: 'pēc sekundes'
+        multiple:
+          forms:
+            default: 'sekundēm'
+            singular: 'sekundes'
+          beforeCount: 'pēc'
+      minute:
+        single: 'pēc minūtes'
+        multiple:
+          forms:
+            default: 'minūtēm'
+            singular: 'minūtes'
+          beforeCount: 'pēc'
+      hour:
+        single: 'pēc stundas'
+        multiple:
+          forms:
+            default: 'stundām'
+            singular: 'stundas'
+          beforeCount: 'pēc'
+      day:
+        single: 'rītdien'
+        multiple:
+          forms:
+            default: 'dienām'
+            singular: 'dienas'
+          beforeCount: 'pēc'
+        template:
+          name: 'two'
+          value: 'pēc 2 dienām'
+      week:
+        single: 'pēc nedēļas'
+        multiple:
+          forms:
+            default: 'nedēļām'
+          beforeCount: 'pēc'
+      month:
+        single: 'pēc mēneša'
+        multiple:
+          forms:
+            default: 'mēnešiem'
+            singular: 'mēneša'
+          beforeCount: 'pēc'
+      year:
+        single: 'pēc gada'
+        multiple:
+          forms:
+            default: 'gadiem'
+            singular: 'gada'
+          beforeCount: 'pēc'
+  timeSpan:
+    zero: 'bez laika'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 milisekunde'
+        words: 'one milisekunde'
+      multiple:
+        forms:
+          default: 'milisekundes'
+          singular: 'milisekunde'
+    second:
+      single:
+        numeric: '1 sekunde'
+        words: 'one sekunde'
+      multiple:
+        forms:
+          default: 'sekundes'
+          singular: 'sekunde'
+    minute:
+      single:
+        numeric: '1 minūte'
+        words: 'one minūte'
+      multiple:
+        forms:
+          default: 'minūtes'
+          singular: 'minūte'
+    hour:
+      single:
+        numeric: '1 stunda'
+        words: 'one stunda'
+      multiple:
+        forms:
+          default: 'stundas'
+          singular: 'stunda'
+    day:
+      single:
+        numeric: '1 diena'
+        words: 'one diena'
+      multiple:
+        forms:
+          default: 'dienas'
+          singular: 'diena'
+    week:
+      single:
+        numeric: '1 nedēļa'
+        words: 'one nedēļa'
+      multiple:
+        forms:
+          default: 'nedēļas'
+          singular: 'nedēļa'
+    month:
+      single:
+        numeric: '1 mēnesis'
+        words: 'one mēnesis'
+      multiple:
+        forms:
+          default: 'mēneši'
+    year:
+      single:
+        numeric: '1 gads'
+        words: 'one gads'
+      multiple:
+        forms:
+          default: 'gadi'
+  dataUnit:
+    bit:
+      forms:
+        default: 'biti'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'baiti'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobaiti'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabaiti'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabaiti'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabaiti'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'milisekunde'
+    second:
+      symbol: 'sekunde'
+    minute:
+      symbol: 'minūte'
+    hour:
+      symbol: 'stunda'
+    day:
+      symbol: 'diena'
+    week:
+      symbol: 'nedēļa'
+    month:
+      symbol: 'mēnesis'
+    year:
+      symbol: 'gads'
+headings:
+  full:
+    - 'ziemeļi'
+    - 'ziemeļziemeļaustrumi'
+    - 'ziemeļaustrumi'
+    - 'austrumziemeļaustrumi'
+    - 'austrumi'
+    - 'austrumdienvidaustrumi'
+    - 'dienvidaustrumi'
+    - 'dienviddienvidaustrumi'
+    - 'dienvidi'
+    - 'dienviddienvidrietumi'
+    - 'dienvidrietumi'
+    - 'rietumdienvidrietumi'
+    - 'rietumi'
+    - 'rietumziemeļrietumi'
+    - 'ziemeļrietumi'
+    - 'ziemeļziemeļrietumi'
+  short:
+    - 'Z'
+    - 'ZZA'
+    - 'ZA'
+    - 'AZA'
+    - 'A'
+    - 'ADA'
+    - 'DA'
+    - 'DDA'
+    - 'D'
+    - 'DDR'
+    - 'DR'
+    - 'RDR'
+    - 'R'
+    - 'RZR'
+    - 'ZR'
+    - 'ZZR'

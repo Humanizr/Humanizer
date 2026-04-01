@@ -60,11 +60,11 @@ public class Example
 
 ## Automated Migration with Roslyn Analyzer
 
-Humanizer v3 includes a Roslyn analyzer that automatically detects and fixes namespace usage. No separate installation is required—the analyzer is bundled with the `Humanizer.Core` package starting from v3.0.0.
+Humanizer v3 includes a Roslyn analyzer that automatically detects and fixes namespace usage. No separate installation is required—the analyzer is bundled with the `Humanizer` package.
 
 ### Usage
 
-Once you have installed or updated to `Humanizer.Core` v3.0.0 or later, the analyzer will be available automatically in your project.
+Once you have installed or updated to `Humanizer` v3.0.0 or later, the analyzer will be available automatically in your project.
 
 The package includes Roslyn-versioned analyzer assets, so modern .NET SDK/Visual Studio toolchains load a compatible analyzer automatically. You should not need to add manual `System.*` package references to make the analyzer load.
 

@@ -3,30 +3,6 @@
 [UseCulture("bn-BD")]
 public class DateHumanizeTests
 {
-    [Fact]
-    public void TwoDaysAgoHasExplicitBengaliResource()
-    {
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("bn-BD"), out var value));
-        Assert.Equal("পরশু", value);
-    }
-
-    [Fact]
-    public void TwoDaysFromNowHasExplicitBengaliResource()
-    {
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("bn-BD"), out var value));
-        Assert.Equal("পরশু", value);
-    }
-
-    [Fact]
-    public void DayPaucalResourcesExist()
-    {
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("bn-BD"), out var agoValue));
-        Assert.Equal("{0} দিন আগে", agoValue);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("bn-BD"), out var fromNowValue));
-        Assert.Equal("{0} দিন পর", fromNowValue);
-    }
-
     [Theory]
     [InlineData(1, "আগামিকাল")]
     [InlineData(13, "13 দিন পর")]
@@ -101,25 +77,9 @@ public class DateHumanizeTests
 
 
     [Fact]
-    public void WeekAndMillisecondResourcesExist()
+    public void NeverUsesBengaliPhrase()
     {
-        Assert.True(Resources.TryGetResource("DateHumanize_SingleWeekAgo", new("bn-BD"), out var singleWeekAgo));
-        Assert.Equal("এক সপ্তাহ আগে", singleWeekAgo);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_SingleWeekFromNow", new("bn-BD"), out var singleWeekFromNow));
-        Assert.Equal("এক সপ্তাহ পর", singleWeekFromNow);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_SingleMillisecondAgo", new("bn-BD"), out var singleMillisecondAgo));
-        Assert.Equal("এক মিলিসেকেন্ড আগে", singleMillisecondAgo);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_SingleMillisecondFromNow", new("bn-BD"), out var singleMillisecondFromNow));
-        Assert.Equal("এক মিলিসেকেন্ড পর", singleMillisecondFromNow);
-    }
-
-    [Fact]
-    public void NeverHasExplicitBengaliResource()
-    {
-        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("bn-BD"), out var value));
-        Assert.Equal("কখনও না", value);
+        DateTime? never = null;
+        Assert.Equal("কখনও না", never.Humanize());
     }
 }

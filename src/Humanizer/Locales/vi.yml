@@ -85,3 +85,250 @@ wordsToNumber:
     - 'mươi'
   allowTerminalOrdinalToken: true
   useHundredMultiplier: true
+
+phrases:
+  dateHumanize:
+    now: 'bây giờ'
+    never: 'không bao giờ'
+    past:
+      millisecond:
+        single: 'cách đây một mili giây'
+        multiple:
+          forms:
+            default: 'mili'
+          beforeCount: 'cách đây'
+          afterCount: 'giây'
+      second:
+        single: 'cách đây một giây'
+        multiple:
+          forms:
+            default: 'giây'
+          beforeCount: 'cách đây'
+      minute:
+        single: 'cách đây một phút'
+        multiple:
+          forms:
+            default: 'phút'
+          beforeCount: 'cách đây'
+      hour:
+        single: 'cách đây một tiếng'
+        multiple:
+          forms:
+            default: 'tiếng'
+          beforeCount: 'cách đây'
+      day:
+        single: 'hôm qua'
+        multiple:
+          forms:
+            default: 'ngày'
+          beforeCount: 'cách đây'
+        template:
+          name: 'two'
+          value: 'hôm kia'
+      week:
+        single: 'cách đây một tuần'
+        multiple:
+          forms:
+            default: 'tuần'
+          beforeCount: 'cách đây'
+      month:
+        single: 'cách đây một tháng'
+        multiple:
+          forms:
+            default: 'tháng'
+          beforeCount: 'cách đây'
+      year:
+        single: 'cách đây một năm'
+        multiple:
+          forms:
+            default: 'năm'
+          beforeCount: 'cách đây'
+    future:
+      millisecond:
+        single: 'một mili giây nữa'
+        multiple:
+          forms:
+            default: 'mili'
+          afterCount: 'giây nữa'
+      second:
+        single: 'một giây nữa'
+        multiple:
+          forms:
+            default: 'giây'
+          afterCount: 'nữa'
+      minute:
+        single: 'một phút nữa'
+        multiple:
+          forms:
+            default: 'phút'
+          afterCount: 'nữa'
+      hour:
+        single: 'một tiếng nữa'
+        multiple:
+          forms:
+            default: 'tiếng'
+          afterCount: 'nữa'
+      day:
+        single: 'ngày mai'
+        multiple:
+          forms:
+            default: 'ngày'
+          afterCount: 'nữa'
+        template:
+          name: 'two'
+          value: 'ngày kia'
+      week:
+        single: 'một tuần nữa'
+        multiple:
+          forms:
+            default: 'tuần'
+          afterCount: 'nữa'
+      month:
+        single: 'một tháng nữa'
+        multiple:
+          forms:
+            default: 'tháng'
+          afterCount: 'nữa'
+      year:
+        single: 'một năm nữa'
+        multiple:
+          forms:
+            default: 'năm'
+          afterCount: 'nữa'
+  timeSpan:
+    zero: 'không có thời lượng'
+    age:
+      template: '{value} tuổi'
+    millisecond:
+      single:
+        numeric: '1 mili giây'
+        words: 'one mili giây'
+      multiple:
+        forms:
+          default: 'mili giây'
+    second:
+      single:
+        numeric: '1 giây'
+        words: 'one giây'
+      multiple:
+        forms:
+          default: 'giây'
+    minute:
+      single:
+        numeric: '1 phút'
+        words: 'one phút'
+      multiple:
+        forms:
+          default: 'phút'
+    hour:
+      single:
+        numeric: '1 giờ'
+        words: 'one giờ'
+      multiple:
+        forms:
+          default: 'giờ'
+    day:
+      single:
+        numeric: '1 ngày'
+        words: 'one ngày'
+      multiple:
+        forms:
+          default: 'ngày'
+    week:
+      single:
+        numeric: '1 tuần'
+        words: 'one tuần'
+      multiple:
+        forms:
+          default: 'tuần'
+    month:
+      single:
+        numeric: '1 tháng'
+        words: 'one tháng'
+      multiple:
+        forms:
+          default: 'tháng'
+    year:
+      single:
+        numeric: '1 năm'
+        words: 'one năm'
+      multiple:
+        forms:
+          default: 'năm'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'mili giây'
+    second:
+      symbol: 'giây'
+    minute:
+      symbol: 'phút'
+    hour:
+      symbol: 'giờ'
+    day:
+      symbol: 'ngày'
+    week:
+      symbol: 'tuần'
+    month:
+      symbol: 'tháng'
+    year:
+      symbol: 'năm'
+headings:
+  full:
+    - 'bắc'
+    - 'bắc-đông bắc'
+    - 'đông bắc'
+    - 'đông-đông bắc'
+    - 'đông'
+    - 'đông-đông nam'
+    - 'đông nam'
+    - 'nam-đông nam'
+    - 'nam'
+    - 'nam-tây nam'
+    - 'tây nam'
+    - 'tây-tây nam'
+    - 'tây'
+    - 'tây-tây bắc'
+    - 'tây bắc'
+    - 'bắc-tây bắc'
+  short:
+    - 'B'
+    - 'BĐB'
+    - 'ĐB'
+    - 'ĐĐB'
+    - 'Đ'
+    - 'ĐĐN'
+    - 'ĐN'
+    - 'NĐN'
+    - 'N'
+    - 'NTN'
+    - 'TN'
+    - 'TTN'
+    - 'T'
+    - 'TTB'
+    - 'TB'
+    - 'BTB'

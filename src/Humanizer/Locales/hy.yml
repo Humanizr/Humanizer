@@ -128,3 +128,241 @@ wordsToNumber:
   useHundredMultiplier: true
   negativePrefixes:
     - 'մինուս '
+
+phrases:
+  dateHumanize:
+    now: 'հիմա'
+    never: 'երբեք'
+    past:
+      millisecond:
+        single: 'մեկ միլիվայրկյան առաջ'
+        multiple:
+          forms:
+            default: 'միլիվայրկյան'
+          afterCount: 'առաջ'
+      second:
+        single: 'մեկ վայրկյան առաջ'
+        multiple:
+          forms:
+            default: 'վայրկյան'
+          afterCount: 'առաջ'
+      minute:
+        single: 'մեկ րոպե առաջ'
+        multiple:
+          forms:
+            default: 'րոպե'
+          afterCount: 'առաջ'
+      hour:
+        single: 'մեկ ժամ առաջ'
+        multiple:
+          forms:
+            default: 'ժամ'
+          afterCount: 'առաջ'
+      day:
+        single: 'երեկ'
+        multiple:
+          forms:
+            default: 'օր'
+          afterCount: 'առաջ'
+        template:
+          name: 'two'
+          value: '2 օր առաջ'
+      week:
+        single: 'մեկ շաբաթ առաջ'
+        multiple:
+          forms:
+            default: 'շաբաթ'
+          afterCount: 'առաջ'
+      month:
+        single: 'մեկ ամիս առաջ'
+        multiple:
+          forms:
+            default: 'ամիս'
+          afterCount: 'առաջ'
+      year:
+        single: 'մեկ տարի առաջ'
+        multiple:
+          forms:
+            default: 'տարի'
+          afterCount: 'առաջ'
+    future:
+      millisecond:
+        single: 'մեկ միլիվայրկյանից'
+        multiple:
+          forms:
+            default: 'միլիվայրկյանից'
+      second:
+        single: 'մեկ վայրկյանից'
+        multiple:
+          forms:
+            default: 'վայրկյանից'
+      minute:
+        single: 'մեկ րոպեից'
+        multiple:
+          forms:
+            default: 'րոպեից'
+      hour:
+        single: 'մեկ ժամից'
+        multiple:
+          forms:
+            default: 'ժամից'
+      day:
+        single: 'վաղը'
+        multiple:
+          forms:
+            default: 'օրից'
+        template:
+          name: 'two'
+          value: '2 օրից'
+      week:
+        single: 'մեկ շաբաթից'
+        multiple:
+          forms:
+            default: 'շաբաթից'
+      month:
+        single: 'մեկ ամսից'
+        multiple:
+          forms:
+            default: 'ամսից'
+      year:
+        single: 'մեկ տարուց'
+        multiple:
+          forms:
+            default: 'տարուց'
+  timeSpan:
+    zero: 'ժամանակ չկա'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: 'մեկ միլիվայրկյան'
+        words: 'մեկ միլիվայրկյան'
+      multiple:
+        forms:
+          default: 'միլիվայրկյան'
+    second:
+      single:
+        numeric: 'մեկ վայրկյան'
+        words: 'մեկ վայրկյան'
+      multiple:
+        forms:
+          default: 'վայրկյան'
+    minute:
+      single:
+        numeric: 'մեկ րոպե'
+        words: 'մեկ րոպե'
+      multiple:
+        forms:
+          default: 'րոպե'
+    hour:
+      single:
+        numeric: 'մեկ ժամ'
+        words: 'մեկ ժամ'
+      multiple:
+        forms:
+          default: 'ժամ'
+    day:
+      single:
+        numeric: 'մեկ օր'
+        words: 'մեկ օր'
+      multiple:
+        forms:
+          default: 'օր'
+    week:
+      single:
+        numeric: 'մեկ շաբաթ'
+        words: 'մեկ շաբաթ'
+      multiple:
+        forms:
+          default: 'շաբաթ'
+    month:
+      single:
+        numeric: 'մեկ ամիս'
+        words: 'մեկ ամիս'
+      multiple:
+        forms:
+          default: 'ամիս'
+    year:
+      single:
+        numeric: 'մեկ տարի'
+        words: 'մեկ տարի'
+      multiple:
+        forms:
+          default: 'տարի'
+  dataUnit:
+    bit:
+      forms:
+        default: 'բիթ'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'բայթ'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'կիլոբայթ'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'մեգաբայթ'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'գիգաբայթ'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'տերաբայթ'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'մվ'
+    second:
+      symbol: 'վ'
+    minute:
+      symbol: 'ր'
+    hour:
+      symbol: 'ժամ'
+    day:
+      symbol: 'օր'
+    week:
+      symbol: 'շաբաթ'
+    month:
+      symbol: 'ամիս'
+    year:
+      symbol: 'տարի'
+headings:
+  full:
+    - 'հյուսիս'
+    - 'հյուսիս-հյուսիս-արևելք'
+    - 'հյուսիս-արևելք'
+    - 'արևելք-հյուսիս-արևելք'
+    - 'արևելք'
+    - 'արևելք-հարավ-արևելք'
+    - 'հարավ-արևելք'
+    - 'հարավ-հարավ-արևելք'
+    - 'հարավ'
+    - 'հարավ-հարավ-արևմուտք'
+    - 'հարավ-արևմուտք'
+    - 'արևմուտք-հարավ-արևմուտք'
+    - 'արևմուտք'
+    - 'արևմուտք-հյուսիս-արևմուտք'
+    - 'հյուսիս-արևմուտք'
+    - 'հյուսիս-հյուսիս-արևմուտք'
+  short:
+    - 'Հ'
+    - 'ՀՀԱ'
+    - 'ՀԱ'
+    - 'ԱՀԱ'
+    - 'Ա'
+    - 'ԱՀԱՐԱ'
+    - 'ՀԱՐԱ'
+    - 'ՀԱՐՀԱՐԱ'
+    - 'ՀԱՐ'
+    - 'ՀԱՐՀԱՐԱՄ'
+    - 'ՀԱՐԱՄ'
+    - 'ԱՄՀԱՐԱՄ'
+    - 'ԱՄ'
+    - 'ԱՄՀԱՄ'
+    - 'ՀԱՄ'
+    - 'ՀՀԱՄ'

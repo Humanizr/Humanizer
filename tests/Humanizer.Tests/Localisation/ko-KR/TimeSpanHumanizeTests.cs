@@ -68,10 +68,6 @@ public class TimeSpanHumanizeTests
     public void NoTime() =>
         Assert.Equal("0밀리초", TimeSpan.Zero.Humanize());
 
-    [Fact]
-    public void AgeHasExplicitKoreanResource() =>
-        Assert.Equal("{0}", Resources.GetResource("TimeSpanHumanize_Age", new("ko-KR")));
-
     [Theory]
     [InlineData(14, "2주")]
     [InlineData(366, "1년")]

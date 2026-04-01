@@ -12,17 +12,9 @@ public class DateHumanizeTests
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
 
     [Fact]
-    public void TwoDaysAgoHasExplicitThaiResource() =>
-        Assert.Equal("เมื่อวานซืน", Resources.GetResource("DateHumanize_TwoDaysAgo", new("th-TH")));
-
-    [Fact]
-    public void TwoDaysFromNowHasExplicitThaiResource() =>
-        Assert.Equal("มะรืนนี้", Resources.GetResource("DateHumanize_TwoDaysFromNow", new("th-TH")));
-
-    [Fact]
-    public void DayPaucalResourcesExist()
+    public void MultipleDaysUseThaiCountedForms()
     {
-        Assert.Equal("{0} วันที่แล้ว", Resources.GetResource("DateHumanize_MultipleDaysAgo_Paucal", new("th-TH")));
-        Assert.Equal("อีก {0} วัน", Resources.GetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("th-TH")));
+        DateHumanize.Verify("3 วันที่แล้ว", 3, TimeUnit.Day, Tense.Past);
+        DateHumanize.Verify("อีก 3 วัน", 3, TimeUnit.Day, Tense.Future);
     }
 }

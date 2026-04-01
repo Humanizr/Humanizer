@@ -673,3 +673,269 @@ wordsToNumber:
     'vuitè': 8
   ordinalScaleMap: {}
   gluedOrdinalScaleSuffixes: {}
+
+phrases:
+  dateHumanize:
+    now: 'ara'
+    never: 'mai'
+    past:
+      millisecond:
+        single: 'fa un mil·lisegon'
+        multiple:
+          forms:
+            default: 'mil·lisegons'
+          beforeCount: 'fa'
+      second:
+        single: 'fa un segon'
+        multiple:
+          forms:
+            default: 'segons'
+            singular: 'segon'
+          beforeCount: 'fa'
+      minute:
+        single: 'fa un minut'
+        multiple:
+          forms:
+            default: 'minuts'
+            singular: 'minut'
+          beforeCount: 'fa'
+      hour:
+        single: 'fa una hora'
+        multiple:
+          forms:
+            default: 'hores'
+            singular: 'hora'
+          beforeCount: 'fa'
+      day:
+        single: 'ahir'
+        multiple:
+          forms:
+            default: 'dies'
+            singular: 'dia'
+          beforeCount: 'fa'
+        template:
+          name: 'two'
+          value: 'abans-d''ahir'
+      week:
+        single: 'fa una setmana'
+        multiple:
+          forms:
+            default: 'setmanes'
+          beforeCount: 'fa'
+      month:
+        single: 'fa un mes'
+        multiple:
+          forms:
+            default: 'mesos'
+            singular: 'mes'
+          beforeCount: 'fa'
+      year:
+        single: 'fa un any'
+        multiple:
+          forms:
+            default: 'anys'
+            singular: 'any'
+          beforeCount: 'fa'
+    future:
+      millisecond:
+        single: 'd''aquí un mil·lisegon'
+        multiple:
+          forms:
+            default: 'mil·lisegons'
+          beforeCount: 'd''aquí'
+      second:
+        single: 'd''aquí un segon'
+        multiple:
+          forms:
+            default: 'segons'
+            singular: 'segon'
+          beforeCount: 'd''aquí'
+      minute:
+        single: 'd''aquí un minut'
+        multiple:
+          forms:
+            default: 'minuts'
+            singular: 'minut'
+          beforeCount: 'd''aquí'
+      hour:
+        single: 'd''aquí una hora'
+        multiple:
+          forms:
+            default: 'hores'
+            singular: 'hora'
+          beforeCount: 'd''aquí'
+      day:
+        single: 'demà'
+        multiple:
+          forms:
+            default: 'dies'
+            singular: 'dia'
+          beforeCount: 'd''aquí'
+        template:
+          name: 'two'
+          value: 'demà passat'
+      week:
+        single: 'd''aquí una setmana'
+        multiple:
+          forms:
+            default: 'setmanes'
+          beforeCount: 'd''aquí'
+      month:
+        single: 'd''aquí un mes'
+        multiple:
+          forms:
+            default: 'mesos'
+            singular: 'mes'
+          beforeCount: 'd''aquí'
+      year:
+        single: 'd''aquí un any'
+        multiple:
+          forms:
+            default: 'anys'
+            singular: 'any'
+          beforeCount: 'd''aquí'
+  timeSpan:
+    zero: 'res'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 mil·lisegon'
+        words: 'un mil·lisegon'
+      multiple:
+        forms:
+          default: 'mil·lisegons'
+          singular: 'mil·lisegon'
+    second:
+      single:
+        numeric: '1 segon'
+        words: 'un segon'
+      multiple:
+        forms:
+          default: 'segons'
+          singular: 'segon'
+    minute:
+      single:
+        numeric: '1 minut'
+        words: 'un minut'
+      multiple:
+        forms:
+          default: 'minuts'
+          singular: 'minut'
+    hour:
+      single:
+        numeric: '1 hora'
+        words: 'una hora'
+      multiple:
+        forms:
+          default: 'hores'
+          singular: 'hora'
+    day:
+      single:
+        numeric: '1 dia'
+        words: 'un dia'
+      multiple:
+        forms:
+          default: 'dies'
+          singular: 'dia'
+    week:
+      single:
+        numeric: '1 setmana'
+        words: 'una setmana'
+      multiple:
+        forms:
+          default: 'setmanes'
+          singular: 'setmana'
+    month:
+      single:
+        numeric: '1 mes'
+        words: 'un mes'
+      multiple:
+        forms:
+          default: 'mesos'
+          singular: 'mes'
+    year:
+      single:
+        numeric: '1 any'
+        words: 'un any'
+      multiple:
+        forms:
+          default: 'anys'
+          singular: 'any'
+  dataUnit:
+    bit:
+      forms:
+        default: 'bit'
+      symbol: 'b'
+    byte:
+      forms:
+        default: 'byte'
+      symbol: 'B'
+    kilobyte:
+      forms:
+        default: 'kilobyte'
+      symbol: 'KB'
+    megabyte:
+      forms:
+        default: 'megabyte'
+      symbol: 'MB'
+    gigabyte:
+      forms:
+        default: 'gigabyte'
+      symbol: 'GB'
+    terabyte:
+      forms:
+        default: 'terabyte'
+      symbol: 'TB'
+  timeUnit:
+    millisecond:
+      symbol: 'ms'
+    second:
+      symbol: 's'
+    minute:
+      symbol: 'min'
+    hour:
+      symbol: 'h'
+    day:
+      symbol: 'dia'
+    week:
+      symbol: 'setmana'
+    month:
+      symbol: 'mes'
+    year:
+      symbol: 'any'
+headings:
+  full:
+    - 'nord'
+    - 'nord-nord-est'
+    - 'nord-est'
+    - 'est-nord-est'
+    - 'est'
+    - 'est-sud-est'
+    - 'sud-est'
+    - 'sud-sud-est'
+    - 'sud'
+    - 'sud-sud-oest'
+    - 'sud-oest'
+    - 'oest-sud-oest'
+    - 'oest'
+    - 'oest-nord-oest'
+    - 'nord-oest'
+    - 'nord-nord-oest'
+  short:
+    - 'N'
+    - 'N-NE'
+    - 'NE'
+    - 'E-NE'
+    - 'E'
+    - 'E-SE'
+    - 'SE'
+    - 'S-SE'
+    - 'S'
+    - 'S-SO'
+    - 'SO'
+    - 'O-SO'
+    - 'O'
+    - 'O-NO'
+    - 'NO'
+    - 'N-NO'

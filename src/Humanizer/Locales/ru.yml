@@ -4,13 +4,8 @@
 collectionFormatter:
   engine: 'conjunction'
   value: 'и'
-formatter:
-  engine: 'profiled'
-  resourceKeyDetector: 'russian'
-  resourceKeySuffixes:
-    singular: '_Singular'
-    paucal: '_Paucal'
-  dataUnitFallbackTransform: 'trim-trailing-s'
+grammar:
+  pluralRule: 'russian'
   timeUnitGenders:
     millisecond: 'feminine'
     second: 'feminine'
@@ -20,6 +15,255 @@ formatter:
     week: 'feminine'
     month: 'masculine'
     year: 'masculine'
+formatter:
+  engine: 'profiled'
+  dataUnitFallbackTransform: 'trim-trailing-s'
+phrases:
+  dateHumanize:
+    now: 'сейчас'
+    never: 'никогда'
+    past:
+      millisecond:
+        single: 'миллисекунду назад'
+        multiple:
+          forms: 'миллисекунд'
+          afterCount: 'назад'
+      second:
+        single: 'секунду назад'
+        multiple:
+          forms:
+            default: 'секунд'
+            singular: 'секунду'
+            dual: 'секунды'
+          afterCount: 'назад'
+      minute:
+        single: 'минуту назад'
+        multiple:
+          forms:
+            default: 'минут'
+            singular: 'минуту'
+            dual: 'минуты'
+          afterCount: 'назад'
+      hour:
+        single: 'час назад'
+        multiple:
+          forms:
+            default: 'часов'
+            singular: 'час'
+            dual: 'часа'
+          afterCount: 'назад'
+      day:
+        single: 'вчера'
+        template:
+          name: 'two'
+          value: 'два дня назад'
+        multiple:
+          forms:
+            default: 'дней'
+            singular: 'день'
+            dual: 'дня'
+          afterCount: 'назад'
+      week:
+        single: 'неделю назад'
+        multiple:
+          forms: 'недель'
+          afterCount: 'назад'
+      month:
+        single: 'месяц назад'
+        multiple:
+          forms:
+            default: 'месяцев'
+            singular: 'месяц'
+            dual: 'месяца'
+          afterCount: 'назад'
+      year:
+        single: 'год назад'
+        multiple:
+          forms:
+            default: 'лет'
+            singular: 'год'
+            dual: 'года'
+          afterCount: 'назад'
+    future:
+      millisecond:
+        single: 'через миллисекунду'
+        multiple:
+          forms: 'миллисекунд'
+          beforeCount: 'через'
+      second:
+        single: 'через секунду'
+        multiple:
+          forms:
+            default: 'секунд'
+            singular: 'секунду'
+            dual: 'секунды'
+          beforeCount: 'через'
+      minute:
+        single: 'через минуту'
+        multiple:
+          forms:
+            default: 'минут'
+            singular: 'минуту'
+            dual: 'минуты'
+          beforeCount: 'через'
+      hour:
+        single: 'через час'
+        multiple:
+          forms:
+            default: 'часов'
+            singular: 'час'
+            dual: 'часа'
+          beforeCount: 'через'
+      day:
+        single: 'завтра'
+        template:
+          name: 'two'
+          value: 'через два дня'
+        multiple:
+          forms:
+            default: 'дней'
+            singular: 'день'
+            dual: 'дня'
+          beforeCount: 'через'
+      week:
+        single: 'через неделю'
+        multiple:
+          forms: 'недель'
+          beforeCount: 'через'
+      month:
+        single: 'через месяц'
+        multiple:
+          forms:
+            default: 'месяцев'
+            singular: 'месяц'
+            dual: 'месяца'
+          beforeCount: 'через'
+      year:
+        single: 'через год'
+        multiple:
+          forms:
+            default: 'лет'
+            singular: 'год'
+            dual: 'года'
+          beforeCount: 'через'
+  timeSpan:
+    zero: 'нет времени'
+    age:
+      template: '{value}'
+    millisecond:
+      single:
+        numeric: '1 миллисекунда'
+        words: 'одна миллисекунда'
+      multiple:
+        forms:
+          default: 'миллисекунд'
+          singular: 'миллисекунда'
+          dual: 'миллисекунды'
+    second:
+      single:
+        numeric: '1 секунда'
+        words: 'одна секунда'
+      multiple:
+        forms:
+          default: 'секунд'
+          singular: 'секунда'
+          dual: 'секунды'
+    minute:
+      single:
+        numeric: '1 минута'
+        words: 'одна минута'
+      multiple:
+        forms:
+          default: 'минут'
+          singular: 'минута'
+          dual: 'минуты'
+    hour:
+      single:
+        numeric: '1 час'
+        words: 'один час'
+      multiple:
+        forms:
+          default: 'часов'
+          singular: 'час'
+          dual: 'часа'
+    day:
+      single:
+        numeric: '1 день'
+        words: 'один день'
+      multiple:
+        forms:
+          default: 'дней'
+          singular: 'день'
+          dual: 'дня'
+    week:
+      single:
+        numeric: '1 неделя'
+        words: 'одна неделя'
+      multiple:
+        forms:
+          default: 'недель'
+          singular: 'неделя'
+          dual: 'недели'
+    month:
+      single:
+        numeric: '1 месяц'
+        words: 'один месяц'
+      multiple:
+        forms:
+          default: 'месяцев'
+          singular: 'месяц'
+          dual: 'месяца'
+    year:
+      single:
+        numeric: '1 год'
+        words: 'один год'
+      multiple:
+        forms:
+          default: 'лет'
+          singular: 'год'
+          dual: 'года'
+  dataUnit:
+    bit:
+      forms: 'бит'
+      symbol: 'бит'
+      template: '{unit}'
+    byte:
+      forms: 'байт'
+      symbol: 'Б'
+      template: '{unit}'
+    kilobyte:
+      forms: 'килобайт'
+      symbol: 'КБ'
+      template: '{unit}'
+    megabyte:
+      forms: 'мегабайт'
+      symbol: 'МБ'
+      template: '{unit}'
+    gigabyte:
+      forms: 'гигабайт'
+      symbol: 'ГБ'
+      template: '{unit}'
+    terabyte:
+      forms: 'терабайт'
+      symbol: 'ТБ'
+      template: '{unit}'
+  timeUnit:
+    millisecond:
+      symbol: 'мс.'
+    second:
+      symbol: 'сек.'
+    minute:
+      symbol: 'мин.'
+    hour:
+      symbol: 'ч.'
+    day:
+      symbol: 'д.'
+    week:
+      symbol: 'нед.'
+    month:
+      symbol: 'мес.'
+    year:
+      symbol: 'г.'
 numberToWords:
   engine: 'east-slavic'
   zeroWord: 'ноль'
@@ -858,3 +1102,38 @@ wordsToNumber:
     'тысячное': 1000
     'тысячный': 1000
   gluedOrdinalScaleSuffixes: {}
+headings:
+  full:
+    - 'север'
+    - 'северо-северо-восток'
+    - 'северо-восток'
+    - 'востоко-северо-восток'
+    - 'восток'
+    - 'востоко-юго-восток'
+    - 'юго-восток'
+    - 'юго-юго-восток'
+    - 'юг'
+    - 'юго-юго-запад'
+    - 'юго-запад'
+    - 'западо-юго-запад'
+    - 'запад'
+    - 'западо-северо-запад'
+    - 'северо-запад'
+    - 'северо-северо-запад'
+  short:
+    - 'С'
+    - 'ССВ'
+    - 'СВ'
+    - 'ВСВ'
+    - 'В'
+    - 'ВЮВ'
+    - 'ЮВ'
+    - 'ЮЮВ'
+    - 'Ю'
+    - 'ЮЮЗ'
+    - 'ЮЗ'
+    - 'ЗЮЗ'
+    - 'З'
+    - 'ЗСЗ'
+    - 'СЗ'
+    - 'ССЗ'

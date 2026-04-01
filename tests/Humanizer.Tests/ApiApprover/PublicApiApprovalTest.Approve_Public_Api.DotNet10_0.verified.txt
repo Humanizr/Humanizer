@@ -225,10 +225,6 @@ namespace Humanizer
         public virtual string DateHumanize(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int unit) { }
         public virtual string DateHumanize_Never() { }
         public virtual string DateHumanize_Now() { }
-        protected virtual string Format(string resourceKey) { }
-        protected virtual string Format(Humanizer.TimeUnit unit, string resourceKey, int number, bool toWords = false) { }
-        protected virtual string GetResourceKey(string resourceKey) { }
-        protected virtual string GetResourceKey(string resourceKey, int number) { }
         protected virtual string NumberToWords(Humanizer.TimeUnit unit, int number, System.Globalization.CultureInfo culture) { }
         public virtual string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords = false) { }
         public virtual string TimeSpanHumanize_Age() { }
@@ -1836,29 +1832,6 @@ namespace Humanizer
         public static System.DateTime AtMidnight(this System.DateTime date) { }
         public static System.DateTime AtNoon(this System.DateTime date) { }
         public static System.DateTime In(this System.DateTime date, int year) { }
-    }
-    public class ResourceKeys
-    {
-        public ResourceKeys() { }
-        public static class DateHumanize
-        {
-            public const string Never = "DateHumanize_Never";
-            public const string Now = "DateHumanize_Now";
-            public static string GetResourceKey(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int count = 1) { }
-        }
-        public static class TimeSpanHumanize
-        {
-            public static string GetResourceKey(Humanizer.TimeUnit unit, int count = 1, bool toWords = false) { }
-        }
-        public static class TimeUnitSymbol
-        {
-            public static string GetResourceKey(Humanizer.TimeUnit unit) { }
-        }
-    }
-    public static class Resources
-    {
-        public static string GetResource(string resourceKey, System.Globalization.CultureInfo? culture = null) { }
-        public static bool TryGetResource(string resourceKey, System.Globalization.CultureInfo? culture, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string? result) { }
     }
     public static class RomanNumeralExtensions
     {

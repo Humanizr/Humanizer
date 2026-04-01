@@ -3,6 +3,8 @@
     <TargetFrameworks>net10.0;net8.0;net48;netstandard2.0</TargetFrameworks>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields, etc, into a human friendly format</Description>
     <Product>Humanizer</Product>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup> 
   
   <ItemGroup>
@@ -14,7 +16,15 @@
 
   <ItemGroup>
     <AdditionalFiles Include="Locales\*.yml" />
-    <AdditionalFiles Include="Properties\Resources.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\logo.png" Pack="true" PackagePath="" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\readme.md" Pack="true" PackagePath="" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\bin\$(Configuration)\roslyn3.8\netstandard2.0\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn3.8/cs" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\bin\$(Configuration)\roslyn4.8\netstandard2.0\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.8/cs" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\bin\$(Configuration)\roslyn4.14\netstandard2.0\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.14/cs" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\build\Humanizer.Core.targets" Pack="true" PackagePath="buildTransitive/Humanizer.targets" Visible="false" />
   </ItemGroup>
   
   <ItemGroup>
@@ -63,7 +73,7 @@
     <ProjectReference Include="..\Humanizer.SourceGenerators\Humanizer.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   
-  <Target Name="BuildAnalyzerVariants">
+  <Target Name="BuildAnalyzerVariants" BeforeTargets="GenerateNuspec">
     <MSBuild
       Projects="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
       Targets="Restore;Rebuild"
@@ -74,23 +84,5 @@
       Targets="Restore;Rebuild"
       RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
       Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks=;RoslynVersion=4.14;AnalyzerVariant=roslyn4.14" />
-  </Target>
-
-  <Target Name="PackNuSpecs" DependsOnTargets="GetBuildVersion;Build;BuildAnalyzerVariants;_InitializeNuspecRepositoryInformationProperties">
-    <ItemGroup>
-      <NuspecFiles Include="$(MSBuildThisFileDirectory)..\..\NuSpecs\*.nuspec" />
-    </ItemGroup>
-    <PropertyGroup>
-      <NoWarn>$(NoWarn);NU5128</NoWarn>
-      <IncludeBuildOutput>false</IncludeBuildOutput>
-      <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-      <PackageOutputPath Condition=" '$(Configuration)' == '' ">$(MSBuildThisFileDirectory)..\..\artifacts\$(Configuration)\</PackageOutputPath>      
-      <NuspecBasePath>$(MSBuildThisFileDirectory)..\</NuspecBasePath>
-      <NuspecProperties>version=$(NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$(GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer</NuspecProperties>
-    </PropertyGroup>
-        
-    <Message Importance="High" Text="Packing %(NuspecFiles.Identity) → v$(NuGetPackageVersion)" />
-    
-    <PackTask PackItem="$(MSBuildProjectFullPath)" TargetFrameworks="$(TargetFrameworks)" PackageId="$(PackageId)" PackageVersion="$(NuGetPackageVersion)" Title="$(Product)" Authors="$(Authors)" Description="$(Description)" DevelopmentDependency="$(DevelopmentDependency)" Copyright="$(Copyright)" RequireLicenseAcceptance="$(PackageRequireLicenseAcceptance)" RestoreOutputPath="$(RestoreOutputPath)" LicenseUrl="$(PackageLicenseUrl)" ProjectUrl="$(PackageProjectUrl)" IconUrl="$(PackageIconUrl)" Tags="$(PackageTags)" ReleaseNotes="$(PackageReleaseNotes)" AssemblyName="$(AssemblyName)" PackageOutputPath="$(PackageOutputPath)" IsTool="$(IsTool)" IncludeSymbols="$(IncludeSymbols)" IncludeSource="$(IncludeSource)" InstallPackageToOutputPath="$(InstallPackageToOutputPath)" OutputFileNamesWithoutVersion="$(OutputFileNamesWithoutVersion)" RepositoryUrl="$(RepositoryUrl)" RepositoryType="$(RepositoryType)" RepositoryBranch="$(RepositoryBranch)" RepositoryCommit="$(RepositoryCommit)" NoPackageAnalysis="$(NoPackageAnalysis)" NuspecFile="%(NuspecFiles.Identity)" NuspecBasePath="$(NuspecBasePath)" NuspecProperties="$(NuspecProperties)" SymbolPackageFormat="$(SymbolPackageFormat)" MinClientVersion="$(MinClientVersion)" Serviceable="$(Serviceable)" ContinuePackingAfterGeneratingNuspec="true" NoDefaultExcludes="$(NoDefaultExcludes)" NuspecOutputPath="$(NuspecOutputPath)" IncludeBuildOutput="$(IncludeBuildOutput)" NoWarn="$(NoWarn)" TreatWarningsAsErrors="$(TreatWarningsAsErrors)" WarningsAsErrors="$(WarningsAsErrors)" WarningsNotAsErrors="$(WarningsNotAsErrors)" PackageLicenseExpression="$(PackageLicenseExpression)" PackageLicenseFile="$(PackageLicenseFile)" PackageLicenseExpressionVersion="$(PackageLicenseExpressionVersion)" Readme="$(Readme)" Deterministic="$(Deterministic)" PackageIcon="$(PackageIcon)" />
   </Target>
 </Project>

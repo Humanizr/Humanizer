@@ -441,7 +441,7 @@ Every localization change should end with:
 dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
-dotnet build src/Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=artifacts/plan-validation
+dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
 ```
 
 If the change touches a hot runtime path, also run the relevant benchmark suite.
