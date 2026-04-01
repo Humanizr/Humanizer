@@ -2,13 +2,22 @@
 
 namespace Humanizer;
 
+/// <summary>
+/// Provides German clock notation with bucketed relative-time phrases.
+/// </summary>
 class GermanTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
+    /// <summary>
+    /// Converts the given time to German clock notation.
+    /// </summary>
+    /// <returns>The localized clock-notation string.</returns>
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
         // German sits in a separate spoken-time family built around "vor/nach halb" buckets and a
         // plain numeric fallback for uncommon minute values. That mix still does not match the
         // existing generated clock families cleanly enough to justify a larger schema.
+        // The midnight/noon labels bypass the bucket logic because they are fixed phrases rather
+        // than computed from the hour and minute values.
         switch (time)
         {
             case { Hour: 0, Minute: 0 }:
@@ -18,10 +27,14 @@ class GermanTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         }
 
         var normalizedHour = time.Hour % 12;
+        // Keep the rounded minute as a separate value so the bucket phrases can decide whether the
+        // expression should point at the current hour or the next one.
         var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
             ? 5 * Math.Round(time.Minute / 5.0)
             : time.Minute);
 
+        // Minute buckets are intentionally split around "halb" because German changes the hour
+        // reference before the half-hour mark.
         return normalizedMinutes switch
         {
             00 => $"{normalizedHour.ToWords()} Uhr",

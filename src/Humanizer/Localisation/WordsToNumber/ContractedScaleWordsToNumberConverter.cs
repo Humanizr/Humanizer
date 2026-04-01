@@ -18,6 +18,7 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
     /// </summary>
     readonly ContractedScaleWordsToNumberProfile profile = profile;
 
+    /// <inheritdoc />
     public override int Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
@@ -28,9 +29,11 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
         return parsedValue;
     }
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
@@ -67,9 +70,11 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
 
     /// <summary>
     /// Normalizes punctuation, hyphenation, casing, and repeated whitespace before token parsing.
+    /// </summary>
+    /// <remarks>
     /// This keeps the parser semantics tied to lexical meaning rather than to user-specific input
     /// formatting.
-    /// </summary>
+    /// </remarks>
     protected virtual string Normalize(string words) =>
         Regex.Replace(words.Replace(",", string.Empty)
                 .Replace(".", string.Empty)
@@ -79,6 +84,13 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
             @"\s+",
             " ");
 
+    /// <summary>
+    /// Parses a normalized cardinal phrase that may contain contracted tens, teens, and scale
+    /// tokens.
+    /// </summary>
+    /// <param name="words">A normalized phrase ready for token-by-token parsing.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(string words, out int value)
     {
         if (profile.Cardinals.TryGetValue(words, out value))

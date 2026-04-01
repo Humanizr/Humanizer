@@ -20,20 +20,24 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
 {
     readonly ConjunctionalScaleNumberToWordsProfile profile = profile;
 
+    /// <inheritdoc />
     public override string Convert(long number) =>
         Convert(number, profile.DefaultAddAnd);
 
+    /// <inheritdoc />
     public override string Convert(long number, bool addAnd) =>
         ConvertCore(
             number,
             isOrdinal: false,
             profile.AddAndMode == ConjunctionalScaleAddAndMode.UseCallerFlag ? addAnd : profile.DefaultAddAnd);
 
+    /// <inheritdoc />
     public override string ConvertToOrdinal(int number) =>
         profile.OrdinalMode == ConjunctionalScaleOrdinalMode.Cardinal
             ? Convert(number, profile.DefaultAddAnd)
             : ConvertCore(number, isOrdinal: true, profile.DefaultAddAnd);
 
+    /// <inheritdoc />
     public override string ConvertToTuple(int number) =>
         profile.NamedTuples is not null && profile.NamedTuples.TryGetValue(number, out var namedTuple)
             ? namedTuple
@@ -178,6 +182,23 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
 /// It captures the locale-owned lexicon plus the conjunction and ordinal strategy switches that
 /// shape the final phrase.
 /// </summary>
+/// <param name="minusWord">The word used to prefix negative values.</param>
+/// <param name="andWord">The conjunction token inserted between hundreds and sub-hundred remainders.</param>
+/// <param name="hundredWord">The cardinal hundred word.</param>
+/// <param name="hundredOrdinalWord">The ordinal hundred word used for exact hundreds.</param>
+/// <param name="tensUnitsSeparator">The separator inserted between tens and units.</param>
+/// <param name="defaultAddAnd">A value indicating whether callers default to conjunction insertion.</param>
+/// <param name="addAndMode">The policy that decides whether callers may override <paramref name="defaultAddAnd"/>.</param>
+/// <param name="andStrategy">The structural rule used to place conjunctions within groups and after scales.</param>
+/// <param name="tupleSuffix">The suffix used when tuples fall back to a numeric affix form.</param>
+/// <param name="ordinalLeadingOneStrategy">The policy that decides whether leading one survives in ordinal scale phrases.</param>
+/// <param name="ordinalMode">The ordinal rendering mode used by the shared engine.</param>
+/// <param name="unitsMap">The cardinal unit lexicon keyed by value.</param>
+/// <param name="ordinalUnitsMap">The ordinal unit lexicon keyed by value.</param>
+/// <param name="tensMap">The cardinal tens lexicon keyed by decade value.</param>
+/// <param name="ordinalTensMap">The ordinal tens lexicon keyed by decade value.</param>
+/// <param name="scales">The descending scale rows used during recursive decomposition.</param>
+/// <param name="namedTuples">The optional exact tuple names that bypass the numeric suffix fallback.</param>
 sealed class ConjunctionalScaleNumberToWordsProfile(
     string minusWord,
     string andWord,
@@ -324,4 +345,7 @@ enum ConjunctionalScaleOrdinalMode
 /// <summary>
 /// One descending scale row for <see cref="ConjunctionalScaleNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="Value">The numeric value represented by the scale.</param>
+/// <param name="Name">The cardinal scale word.</param>
+/// <param name="OrdinalName">The ordinal scale word used when the scale terminates the phrase.</param>
 readonly record struct ConjunctionalScale(long Value, string Name, string OrdinalName);

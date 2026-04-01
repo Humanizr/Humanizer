@@ -19,6 +19,11 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     /// </summary>
     readonly HarmonyOrdinalNumberToWordsProfile profile = profile;
 
+    /// <summary>
+    /// Converts the given value using the locale's harmony-based cardinal rules.
+    /// </summary>
+    /// <param name="input">The number to convert.</param>
+    /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input)
     {
         if (input > profile.MaximumValue || input < profile.MinimumValue)
@@ -26,11 +31,17 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             throw new NotImplementedException();
         }
 
+        // The cardinal path shares one recursive engine for all supported magnitudes; the
+        // profile only constrains the legal range and the exact hundred behavior.
         return ConvertCore(input, allowExactHundredWord: true);
     }
 
     // Composite counts recurse through the same decimal-scale engine; only the generated
     // hundred/ordinal strategies vary per locale.
+    /// <summary>
+    /// Converts a number using the shared decimal decomposition while honoring the requested
+    /// exact-hundred behavior.
+    /// </summary>
     string ConvertCore(long input, bool allowExactHundredWord)
     {
         var number = input;
@@ -41,6 +52,8 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
 
         if (number < 0)
         {
+            // Keep the sign outside the recursive decomposition so harmony rules apply to the
+            // magnitude alone.
             return $"{profile.MinusWord} {ConvertCore(-number, allowExactHundredWord)}";
         }
 
@@ -48,6 +61,8 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             profile.HundredStrategy == HarmonyOrdinalHundredStrategy.AllowExplicitOneInComposite &&
             number == 100)
         {
+            // Some locales keep an explicit one in exact hundreds only when the hundred stands in a
+            // larger composite.
             return profile.HundredWord;
         }
 
@@ -61,6 +76,8 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
                 continue;
             }
 
+            // Scale counts recurse back into the same engine so each row can decide whether it
+            // suppresses an explicit one or needs the bare hundred form.
             parts.Add(scale.OmitOneWhenSingular && count == 1
                 ? scale.Name
                 : $"{ConvertCore(count, scale.AllowBareHundredInCount)} {scale.Name}");
@@ -70,6 +87,8 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
         var hundred = number / 100;
         if (hundred > 0)
         {
+            // Hundreds are the last scale boundary before tens and units; the locale decides whether
+            // the leading one is spoken or omitted.
             parts.Add(FormatHundreds(hundred));
             number %= 100;
         }
@@ -90,20 +109,32 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
 
     // Exact hundred behavior is one of the main family pivots: some locales keep the explicit
     // leading one in composite hundreds, others collapse it away.
+    /// <summary>
+    /// Renders the hundreds portion according to the locale's exact-hundred strategy.
+    /// </summary>
     string FormatHundreds(long hundred)
     {
         if (hundred > 1)
         {
+            // Larger hundreds recurse so the same exact-hundred rule can be applied consistently.
             return $"{ConvertCore(hundred, allowExactHundredWord: false)} {profile.HundredWord}";
         }
 
+        // The one-hundred case is the only place where the profile's exact-hundred strategy can
+        // preserve or suppress the leading one.
         return profile.HundredStrategy == HarmonyOrdinalHundredStrategy.AllowExplicitOneInComposite
             ? $"{profile.UnitsMap[1]} {profile.HundredWord}"
             : profile.HundredWord;
     }
 
+    /// <summary>
+    /// Converts the given value using the locale's harmony-based ordinal rules.
+    /// </summary>
+    /// <param name="number">The number to convert.</param>
+    /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number)
     {
+        // Ordinals are the cardinal form plus a suffix strategy chosen by the generated profile.
         var word = Convert(number);
         return profile.OrdinalSuffixStrategy switch
         {
@@ -116,8 +147,14 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
         };
     }
 
+    /// <summary>
+    /// Converts the given value to a tuple form, using either a named tuple or harmony suffixes.
+    /// </summary>
+    /// <param name="number">The number to convert.</param>
+    /// <returns>The localized tuple words for <paramref name="number"/>.</returns>
     public override string ConvertToTuple(int number)
     {
+        // Exact tuple names win first; only unknown tuples fall back to harmony-suffix rendering.
         if (profile.NamedTuples is not null && profile.NamedTuples.TryGetValue(number, out var namedTuple))
         {
             return namedTuple;
@@ -133,6 +170,9 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
 
     // Vowel-harmony ordinals are the common family rule. The runtime searches backward for the
     // last vowel with a configured suffix, then applies any configured stem adjustments first.
+    /// <summary>
+    /// Appends the harmony suffix selected by the last vowel in the word.
+    /// </summary>
     string AppendHarmonySuffix(string word, FrozenDictionary<char, string>? suffixes)
     {
         if (suffixes is null)
@@ -140,6 +180,8 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             throw new InvalidOperationException("Harmony-ordinal suffix data is missing.");
         }
 
+        // Walk backward so the suffix is chosen from the last vowel rather than from the first
+        // vowel or from a locale-specific hardcoded branch.
         var suffix = string.Empty;
         var suffixFoundOnLastVowel = false;
 
@@ -159,6 +201,9 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     // Some locales split between two ordinal suffixes by final-character membership rather than by
     // the last vowel. That alternative stays structural because the deciding character set and the
     // suffix pair still come from generated data.
+    /// <summary>
+    /// Appends the ordinal suffix selected by final-character membership.
+    /// </summary>
     static string AppendMembershipOrdinalSuffix(string word, string? secondOrdinalSuffixCharacters, string[] ordinalSuffixPair)
     {
         if (string.IsNullOrEmpty(secondOrdinalSuffixCharacters) || ordinalSuffixPair.Length != 2)
@@ -166,14 +211,21 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             throw new InvalidOperationException("Harmony-ordinal membership suffix data is incomplete.");
         }
 
+        // Membership-based locales still keep the suffix choice data-driven; the final character
+        // set selects which of the two generated suffixes should be used.
         var suffixIndex = secondOrdinalSuffixCharacters.Contains(word[^1]) ? 1 : 0;
         return word + ordinalSuffixPair[suffixIndex];
     }
 
     // Harmony adjustments operate on the already-rendered cardinal word so the family can model
     // softening and terminal-vowel dropping without duplicating the full cardinal renderer.
+    /// <summary>
+    /// Applies the locale's stem adjustments before a harmony suffix is appended.
+    /// </summary>
     string ApplyHarmonyStemAdjustments(string word, bool suffixFoundOnLastVowel)
     {
+        // The stem edits happen before the suffix is appended so the same base word can support
+        // softening and terminal-vowel loss without duplicating the cardinal renderer.
         if (profile.SoftenTerminalTBeforeSuffix && word[^1] == 't')
         {
             word = StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length - 1), 'd');
@@ -257,7 +309,13 @@ readonly record struct HarmonyOrdinalScale(
 /// </summary>
 enum HarmonyOrdinalHundredStrategy
 {
+    /// <summary>
+    /// Omits the leading one for exact hundreds and composite hundreds when possible.
+    /// </summary>
     OmitOneWhenSingular,
+    /// <summary>
+    /// Keeps an explicit leading one in composite hundreds when the locale requires it.
+    /// </summary>
     AllowExplicitOneInComposite
 }
 
@@ -266,6 +324,12 @@ enum HarmonyOrdinalHundredStrategy
 /// </summary>
 enum HarmonyOrdinalSuffixStrategy
 {
+    /// <summary>
+    /// Chooses the ordinal suffix from the last vowel in the rendered word.
+    /// </summary>
     LastVowelMap,
+    /// <summary>
+    /// Chooses the ordinal suffix from the final character's membership in a configured set.
+    /// </summary>
     FinalCharacterMembership
 }

@@ -1,21 +1,38 @@
 namespace Humanizer;
 
+/// <summary>
+/// Shared renderer for dual-form scale languages where singular, dual, and plural words depend on
+/// the count and on whether a prefixed form is required for lower digits.
+///
+/// The generated profile provides the scale lexicon and prefix maps while the runtime keeps the
+/// recursive decomposition and gender handling consistent.
+/// </summary>
 class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile profile) : GenderedNumberToWordsConverter
 {
     readonly DualFormScaleNumberToWordsProfile profile = profile;
 
+    /// <summary>
+    /// Converts the given value using the locale's dual-form cardinal rules.
+    /// </summary>
+    /// <param name="input">The number to convert.</param>
+    /// <param name="gender">The grammatical gender to use when rendering lower groups.</param>
+    /// <param name="addAnd">Reserved for compatibility with other converters; this implementation derives conjunction placement from the generated profile.</param>
+    /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
         var negativeNumber = false;
 
         if (input < 0)
         {
+            // Keep the sign separate so the recursive positive path can stay focused on scale
+            // morphology and gender selection.
             negativeNumber = true;
             input *= -1;
         }
 
         if (input < 1000000000)
         {
+            // Everything below a billion uses the same million/thousand/hundred decomposition.
             return GetMillions(input, gender) + (negativeNumber ? $" {profile.MinusSuffix}" : string.Empty);
         }
 
@@ -23,6 +40,8 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         var tensInBillions = billions % 100;
         var millions = input % 1000000000;
 
+        // The billion row uses the last two digits to decide whether the locale needs a singular
+        // or plural form.
         var billionsText = GetScaleText(billions, tensInBillions, profile.BillionScale, gender);
         var millionsText = GetMillions(millions, gender);
 
@@ -34,15 +53,25 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         return $"{billionsText} {profile.Conjunction} {millionsText}" + (negativeNumber ? $" {profile.MinusSuffix}" : string.Empty);
     }
 
+    /// <summary>
+    /// Converts the given value into a locale-specific ordinal phrase.
+    /// </summary>
+    /// <param name="number">The number to convert.</param>
+    /// <param name="gender">The grammatical gender to use when rendering the ordinal.</param>
+    /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
         if (number <= 20)
         {
+            // The first twenty ordinals are fully irregular and are therefore stored as exact
+            // overrides.
             return profile.OrdinalOverrideMap[number];
         }
 
         var ordinal = Convert(number, gender);
 
+        // Abbreviated ordinals are built from the cardinal spelling and then prefixed according to
+        // the locale's orthographic conventions.
         if (ordinal.StartsWith('d'))
         {
             return $"id-{Convert(number, gender)}";
@@ -62,25 +91,33 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         return $"il-{Convert(number, gender)}";
     }
 
+    /// <summary>
+    /// Renders a tens or unit fragment, optionally using the prefix map used by the locale.
+    /// </summary>
     string GetTens(long value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
     {
         if (value == 1 && gender == GrammaticalGender.Feminine)
         {
+            // Feminine "one" is a dedicated lexical item in this family.
             return profile.FeminineOneWord;
         }
 
         if (value < 11 && usePrefixMap && usePrefixMapForLowerDigits)
         {
+            // Some lower-digit combinations use the prefix map instead of the ordinary unit table.
             return profile.PrefixMap[value];
         }
 
         if (value < 11 && usePrefixMap && !usePrefixMapForLowerDigits)
         {
+            // Other scale rows prefer the hundreds map for the same low-digit range.
             return profile.HundredsMap[value];
         }
 
         if (value is > 10 and < 20 && usePrefixMap)
         {
+            // Teen forms can also come from the prefix map when the scale row needs a contracted
+            // stem.
             return profile.PrefixMap[value];
         }
 
@@ -96,6 +133,7 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
             return profile.TensMap[numberOfTens];
         }
 
+        // Compound tens are rendered as "unit + conjunction + tens" in the dual-form family.
         return $"{profile.UnitsMap[single]} {profile.Conjunction} {profile.TensMap[numberOfTens]}";
     }
 
@@ -116,10 +154,12 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         }
         else if (numberOfHundreds == 2)
         {
+            // Two hundred has its own form in the generated profile.
             hundredsText = profile.DualHundredsWord;
         }
         else
         {
+            // Larger hundreds are built from the digit table plus the shared hundred word.
             hundredsText = profile.HundredsMap[numberOfHundreds] + $" {profile.HundredWord}";
         }
 
@@ -180,33 +220,42 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
     {
         if (count == 1)
         {
+            // Singular, dual, and plural forms are all generated data; one is the simplest case.
             return scale.Singular;
         }
 
         if (count == 2)
         {
+            // The dual form is explicit and should not be forced through the plural fallback.
             return scale.Dual;
         }
 
         if (lastTwoDigits > 10)
         {
+            // Large counts keep the singular scale noun after the fully rendered count phrase.
             return $"{GetHundreds(count, true, scale.UsePrefixMapForLowerDigits, gender)} {scale.Singular}";
         }
 
         if (count == 100)
         {
+            // Exact one hundred uses a dedicated prefix form in some locales.
             return $"{profile.HundredPrefixWord} {scale.Singular}";
         }
 
         if (count == 101)
         {
+            // One hundred and one is the lone case that keeps the conjunction before the singular.
             return $"{profile.HundredWord} {profile.Conjunction} {scale.Singular}";
         }
 
+        // Everything else falls back to the plural scale noun after the rendered count.
         return $"{GetHundreds(count, true, scale.UsePrefixMapForLowerDigits, gender)} {scale.Plural}";
     }
 }
 
+/// <summary>
+/// Immutable generated profile for <see cref="DualFormScaleNumberToWordsConverter"/>.
+/// </summary>
 sealed class DualFormScaleNumberToWordsProfile(
     string conjunction,
     string minusSuffix,
@@ -223,22 +272,67 @@ sealed class DualFormScaleNumberToWordsProfile(
     DualFormScale millionScale,
     DualFormScale billionScale)
 {
+    /// <summary>
+    /// Gets the conjunction inserted between rendered parts.
+    /// </summary>
     public string Conjunction { get; } = conjunction;
+    /// <summary>
+    /// Gets the suffix appended to negative values.
+    /// </summary>
     public string MinusSuffix { get; } = minusSuffix;
+    /// <summary>
+    /// Gets the feminine word for one.
+    /// </summary>
     public string FeminineOneWord { get; } = feminineOneWord;
+    /// <summary>
+    /// Gets the standalone hundred word.
+    /// </summary>
     public string HundredWord { get; } = hundredWord;
+    /// <summary>
+    /// Gets the special dual-form hundred word.
+    /// </summary>
     public string DualHundredsWord { get; } = dualHundredsWord;
+    /// <summary>
+    /// Gets the prefix used when exactly one hundred precedes a scale.
+    /// </summary>
     public string HundredPrefixWord { get; } = hundredPrefixWord;
+    /// <summary>
+    /// Gets the ordinal overrides for values up to twenty.
+    /// </summary>
     public string[] OrdinalOverrideMap { get; } = ordinalOverrideMap;
+    /// <summary>
+    /// Gets the unit lexicon.
+    /// </summary>
     public string[] UnitsMap { get; } = unitsMap;
+    /// <summary>
+    /// Gets the tens lexicon.
+    /// </summary>
     public string[] TensMap { get; } = tensMap;
+    /// <summary>
+    /// Gets the hundreds lexicon.
+    /// </summary>
     public string[] HundredsMap { get; } = hundredsMap;
+    /// <summary>
+    /// Gets the prefix lexicon used by some low-digit combinations.
+    /// </summary>
     public string[] PrefixMap { get; } = prefixMap;
+    /// <summary>
+    /// Gets the thousand scale configuration.
+    /// </summary>
     public DualFormScale ThousandScale { get; } = thousandScale;
+    /// <summary>
+    /// Gets the million scale configuration.
+    /// </summary>
     public DualFormScale MillionScale { get; } = millionScale;
+    /// <summary>
+    /// Gets the billion scale configuration.
+    /// </summary>
     public DualFormScale BillionScale { get; } = billionScale;
 }
 
+/// <summary>
+/// One dual-form scale row for <see cref="DualFormScaleNumberToWordsConverter"/>.
+/// </summary>
 readonly record struct DualFormScale(
     string Singular,
     string Dual,

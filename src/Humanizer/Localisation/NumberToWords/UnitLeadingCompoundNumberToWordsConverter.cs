@@ -20,11 +20,19 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
     /// </summary>
     readonly UnitLeadingCompoundNumberToWordsProfile profile = profile;
 
+    /// <summary>
+    /// Converts the number using the locale's unit-leading compound cardinal rules.
+    /// </summary>
+    /// <inheritdoc />
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true) =>
         Convert(number, WordForm.Normal, gender, addAnd);
 
     // Cardinal rendering walks the descending scale rows first so the terminal under-hundred
     // segment can use the correct joiner and count morphology once all higher-order parts are known.
+    /// <summary>
+    /// Converts the number using the locale's unit-leading compound cardinal rules and the specified word form.
+    /// </summary>
+    /// <inheritdoc />
     public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
     {
         if (number == 0)
@@ -54,6 +62,10 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
 
     // Ordinals in this family mutate the terminal segment only once the higher-order scale walk is
     // complete. The ordinal stem suffix and gender ending are therefore appended at the end.
+    /// <summary>
+    /// Converts the number using the locale's unit-leading compound ordinal rules.
+    /// </summary>
+    /// <inheritdoc />
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
         if (number == 0)
@@ -80,6 +92,8 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
             parts.Add(residual < 20 ? profile.UnitsOrdinal[residual] : Convert(residual));
         }
 
+        // Only the terminal segment needs the ordinal stem suffix; under-20 ordinals already carry
+        // their own stem in the generated unit table.
         if (remaining is 0 or >= 20)
         {
             parts.Add(profile.OrdinalStemSuffix);
@@ -102,6 +116,8 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
         number %= scale.Value;
         if (scale.AddSpaceBeforeNextPart && number > 0)
         {
+            // Spaces are emitted as explicit segments so the final `string.Concat` preserves the
+            // exact boundary placement the locale expects between scale words.
             parts.Add(" ");
         }
     }
@@ -198,6 +214,8 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
         }
 
         var unit = profile.UnitsMap[number];
+        // The Eifeler rule is intentionally restricted to the profile's declared trigger digits;
+        // expanding it to every unit would change well-formed locale-specific compounds.
         return profile.SupportsEifelerRule &&
                wordForm == WordForm.Eifeler &&
                number is 1 or 7
@@ -229,6 +247,24 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
 /// <summary>
 /// Immutable generated profile for <see cref="UnitLeadingCompoundNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="zeroWord">The cardinal zero word.</param>
+/// <param name="minusWord">The word used to prefix negative values.</param>
+/// <param name="masculineOne">The masculine form of one.</param>
+/// <param name="feminineOne">The feminine form of one.</param>
+/// <param name="neuterOne">The neuter form of one.</param>
+/// <param name="feminineTwo">The optional feminine form of two.</param>
+/// <param name="tensJoiner">The base joiner inserted between the unit and tens stem.</param>
+/// <param name="tensJoinerTransform">The transform applied to <paramref name="tensJoiner"/> before emission.</param>
+/// <param name="ordinalStemSuffix">The shared ordinal stem suffix appended before the gender ending.</param>
+/// <param name="masculineOrdinalEnding">The masculine ordinal ending.</param>
+/// <param name="feminineOrdinalEnding">The feminine ordinal ending.</param>
+/// <param name="neuterOrdinalEnding">The neuter ordinal ending.</param>
+/// <param name="supportsEifelerRule">A value indicating whether the locale applies the Eifeler rule to units or joiners.</param>
+/// <param name="unitsMap">The base units lexicon.</param>
+/// <param name="compoundUnitsMap">The unit forms used inside compound tens.</param>
+/// <param name="tensMap">The tens lexicon.</param>
+/// <param name="unitsOrdinal">The exact ordinal unit lexicon.</param>
+/// <param name="scales">The descending scale rows used during decomposition.</param>
 sealed class UnitLeadingCompoundNumberToWordsProfile(
     string zeroWord,
     string minusWord,
@@ -290,6 +326,14 @@ sealed class UnitLeadingCompoundNumberToWordsProfile(
 /// <summary>
 /// One descending scale row for <see cref="UnitLeadingCompoundNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="Value">The numeric value represented by the scale.</param>
+/// <param name="AddSpaceBeforeNextPart">A value indicating whether a space is emitted before the next lower-order segment.</param>
+/// <param name="CountGender">The grammatical gender used when rendering the scale count.</param>
+/// <param name="SingularCardinal">The singular cardinal phrase used when the count is exactly one.</param>
+/// <param name="PluralCardinalFormat">The composite cardinal format string used for counts above one.</param>
+/// <param name="OrdinalSingular">The exact singular ordinal forms indexed by whether a remainder follows.</param>
+/// <param name="OrdinalPlural">The plural ordinal format strings indexed by whether a remainder follows.</param>
+/// <param name="CountWordFormNextWord">The optional next-word hint used when selecting the count word form.</param>
 readonly record struct UnitLeadingCompoundScale(
     long Value,
     bool AddSpaceBeforeNextPart,
@@ -305,6 +349,12 @@ readonly record struct UnitLeadingCompoundScale(
 /// </summary>
 enum CompoundTensJoinerTransform
 {
+    /// <summary>
+    /// Emits the configured joiner unchanged.
+    /// </summary>
     None,
+    /// <summary>
+    /// Applies the Eifeler rule when the following word triggers it.
+    /// </summary>
     Eifeler
 }

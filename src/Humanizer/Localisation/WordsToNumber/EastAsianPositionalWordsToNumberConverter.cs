@@ -1,9 +1,13 @@
 namespace Humanizer;
 
+/// <summary>
+/// Parses East Asian positional number words made up of digits, small units, and large units.
+/// </summary>
 internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
     readonly EastAsianPositionalWordsToNumberProfile profile = profile;
 
+    /// <inheritdoc />
     public override int Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
@@ -14,9 +18,11 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
         return parsedValue;
     }
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
@@ -39,6 +45,9 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
             break;
         }
 
+        // Exact ordinals are checked before stripping ordinal affixes because some locales encode
+        // the full ordinal spelling as a standalone token that should win over the positional
+        // parser.
         if (profile.OrdinalMap?.TryGetValue(normalized, out parsedValue) == true)
         {
             unrecognizedWord = null;
@@ -72,8 +81,18 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
         return false;
     }
 
+    /// <summary>
+    /// Parses a positional number after the input has been normalized and ordinal markers have
+    /// been stripped.
+    /// </summary>
+    /// <param name="text">The normalized text to parse.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="unrecognizedWord">When parsing fails, the token or fragment that was not recognized.</param>
+    /// <returns><c>true</c> if the text was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParse(ReadOnlySpan<char> text, out int value, out string? unrecognizedWord)
     {
+        // Single-character locales can use a tighter parser, but only when every digit and unit
+        // token is one rune wide. That keeps multi-character locales on the more general tokenizer.
         if (profile.HasSingleCharacterTokens)
         {
             return TryParseSingleCharacter(text, out value, out unrecognizedWord);
@@ -82,12 +101,21 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
         return TryParseMultiCharacter(text, out value, out unrecognizedWord);
     }
 
+    /// <summary>
+    /// Parses a positional number when every token is a single character.
+    /// </summary>
+    /// <param name="text">The normalized text to parse.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="unrecognizedWord">When parsing fails, the token or fragment that was not recognized.</param>
+    /// <returns><c>true</c> if the text was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseSingleCharacter(ReadOnlySpan<char> text, out int value, out string? unrecognizedWord)
     {
         var total = 0;
         var section = 0;
         var number = 0;
         var parsedAnyToken = false;
+        // Keep the first character around so a later failure can report the leading token the
+        // caller likely recognizes, not just the exact character that tripped the parse.
         var firstToken = text[..1].ToString();
 
         foreach (var character in text)
@@ -103,6 +131,8 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
             {
                 if (number == 0)
                 {
+                    // Positional languages omit an explicit one before a unit, so "十" still means
+                    // ten rather than zero tens.
                     number = 1;
                 }
 
@@ -117,6 +147,8 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
                 section += number;
                 if (section == 0)
                 {
+                    // Large units behave like "one * unit" when no smaller digit was seen in the
+                    // current section.
                     section = 1;
                 }
 
@@ -137,12 +169,21 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
         return true;
     }
 
+    /// <summary>
+    /// Parses a positional number when tokens can span multiple characters.
+    /// </summary>
+    /// <param name="text">The normalized text to parse.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="unrecognizedWord">When parsing fails, the token or fragment that was not recognized.</param>
+    /// <returns><c>true</c> if the text was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseMultiCharacter(ReadOnlySpan<char> text, out int value, out string? unrecognizedWord)
     {
         var total = 0;
         var section = 0;
         var number = 0;
         var position = 0;
+        // Track the first token length for the same reason as the single-character path: useful
+        // failure diagnostics should point at the first recognizable token in the phrase.
         var firstTokenLength = 0;
 
         while (position < text.Length)
@@ -171,6 +212,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
                 case EastAsianPositionalTokenKind.SmallUnit:
                     if (number == 0)
                     {
+                        // The unit is implied, so a bare small unit still contributes one group.
                         number = 1;
                     }
 
@@ -181,6 +223,8 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
                     section += number;
                     if (section == 0)
                     {
+                        // Large units also imply an omitted one when they appear without a leading
+                        // digit or small unit.
                         section = 1;
                     }
 
@@ -198,8 +242,18 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
         return true;
     }
 
+    /// <summary>
+    /// Tries to match the next token from the front of the remaining input.
+    /// </summary>
+    /// <param name="remaining">The unparsed tail of the input.</param>
+    /// <param name="kind">When this method returns, the token kind.</param>
+    /// <param name="value">When this method returns, the token value.</param>
+    /// <param name="length">When this method returns, the matched token length.</param>
+    /// <returns><c>true</c> if a token was matched; otherwise, <c>false</c>.</returns>
     bool TryReadToken(ReadOnlySpan<char> remaining, out EastAsianPositionalTokenKind kind, out int value, out int length)
     {
+        // Tokens are pre-sorted longest-first, so the first match is the greedy match the locale
+        // expects.
         foreach (var token in profile.Tokens)
         {
             if (!remaining.StartsWith(token.Text, StringComparison.Ordinal))
@@ -220,8 +274,21 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
     }
 }
 
+/// <summary>
+/// Immutable locale data used by <see cref="EastAsianPositionalWordsToNumberConverter"/>.
+/// </summary>
 internal sealed class EastAsianPositionalWordsToNumberProfile
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EastAsianPositionalWordsToNumberProfile"/> class.
+    /// </summary>
+    /// <param name="digits">The digit tokens recognized by the parser.</param>
+    /// <param name="smallUnits">The small-unit tokens such as tens or hundreds.</param>
+    /// <param name="largeUnits">The large-unit tokens such as thousands or ten-thousands.</param>
+    /// <param name="negativePrefixes">The prefixes that mark a negative number phrase.</param>
+    /// <param name="ordinalPrefix">The prefix that marks ordinal forms, if any.</param>
+    /// <param name="ordinalSuffix">The suffix that marks ordinal forms, if any.</param>
+    /// <param name="ordinalMap">An optional map of exact ordinal spellings.</param>
     public EastAsianPositionalWordsToNumberProfile(
         FrozenDictionary<string, int> digits,
         FrozenDictionary<string, int> smallUnits,
@@ -258,25 +325,76 @@ internal sealed class EastAsianPositionalWordsToNumberProfile
         .ToArray();
     }
 
+    /// <summary>
+    /// Gets the digit tokens recognized by the parser.
+    /// </summary>
     public FrozenDictionary<string, int> Digits { get; }
+    /// <summary>
+    /// Gets the small-unit tokens recognized by the parser.
+    /// </summary>
     public FrozenDictionary<string, int> SmallUnits { get; }
+    /// <summary>
+    /// Gets the large-unit tokens recognized by the parser.
+    /// </summary>
     public FrozenDictionary<string, int> LargeUnits { get; }
+    /// <summary>
+    /// Gets the prefixes that mark a negative number phrase.
+    /// </summary>
     public string[] NegativePrefixes { get; }
+    /// <summary>
+    /// Gets the prefix that marks ordinal forms.
+    /// </summary>
     public string OrdinalPrefix { get; }
+    /// <summary>
+    /// Gets the suffix that marks ordinal forms.
+    /// </summary>
     public string OrdinalSuffix { get; }
+    /// <summary>
+    /// Gets the optional exact ordinal map.
+    /// </summary>
     public FrozenDictionary<string, int>? OrdinalMap { get; }
+    /// <summary>
+    /// Gets a value indicating whether the locale uses single-character tokens.
+    /// </summary>
     public bool HasSingleCharacterTokens { get; }
+    /// <summary>
+    /// Gets the single-character digit lookup when the locale supports it.
+    /// </summary>
     public FrozenDictionary<char, int>? SingleCharacterDigits { get; }
+    /// <summary>
+    /// Gets the single-character small-unit lookup when the locale supports it.
+    /// </summary>
     public FrozenDictionary<char, int>? SingleCharacterSmallUnits { get; }
+    /// <summary>
+    /// Gets the single-character large-unit lookup when the locale supports it.
+    /// </summary>
     public FrozenDictionary<char, int>? SingleCharacterLargeUnits { get; }
+    /// <summary>
+    /// Gets the tokens ordered from longest to shortest for token matching.
+    /// </summary>
     public EastAsianPositionalToken[] Tokens { get; }
 }
 
+/// <summary>
+/// Describes one positional token and its role in the parser.
+/// </summary>
 internal enum EastAsianPositionalTokenKind
 {
+    /// <summary>
+    /// A digit token.
+    /// </summary>
     Digit,
+    /// <summary>
+    /// A small-unit token such as tens or hundreds.
+    /// </summary>
     SmallUnit,
+    /// <summary>
+    /// A large-unit token such as thousands or ten-thousands.
+    /// </summary>
     LargeUnit
 }
 
+/// <summary>
+/// Represents one positional token, its numeric value, and its parser role.
+/// </summary>
 internal readonly record struct EastAsianPositionalToken(string Text, int Value, EastAsianPositionalTokenKind Kind);

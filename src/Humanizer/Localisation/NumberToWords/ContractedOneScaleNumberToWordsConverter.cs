@@ -22,6 +22,11 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
     /// </summary>
     readonly ContractedOneScaleNumberToWordsProfile profile = profile;
 
+    /// <summary>
+    /// Converts the given value using the locale's contracted-one scale rules.
+    /// </summary>
+    /// <param name="number">The number to convert.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public override string Convert(long number)
     {
         if (number == 0)
@@ -37,12 +42,18 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
         return ConvertPositive(number);
     }
 
-    // Positive rendering is a simple descending scale walk. The only family-specific decision is
-    // whether a scale row has a dedicated contracted one-word form.
+    /// <summary>
+    /// Converts a positive number using the descending scale walk.
+    ///
+    /// The only family-specific decision is whether a scale row has a dedicated contracted
+    /// one-word form.
+    /// </summary>
     string ConvertPositive(long number)
     {
         var parts = new List<string>();
 
+        // Scale rows are processed largest to smallest so a singular contraction such as
+        // "seribu" can be emitted only when the generated profile says the locale has one.
         foreach (var scale in profile.Scales)
         {
             if (number < scale.Value)
@@ -65,6 +76,7 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
             }
             else
             {
+                // Non-singular counts keep the recursive under-thousand form plus the scale name.
                 parts.Add($"{ConvertUnderThousand(part)} {scale.Name}");
             }
         }
@@ -78,13 +90,16 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
     }
 
     /// <summary>
-    /// Gets the hundreds phrase for the current count. Derived types may override this when a
-    /// locale needs a slightly different hundred contraction while still fitting the family.
+    /// Gets the hundreds phrase for the current count.
     /// </summary>
+    /// <param name="count">The hundreds count within the current triad.</param>
+    /// <returns>The localized hundreds phrase for <paramref name="count"/>.</returns>
     protected virtual string GetHundredsWord(long count) =>
         count == 1 ? profile.HundredWord : $"{profile.Units[count]} {profile.HundredUnitWord}";
 
-    // Hundreds remain shared; only the singular one-word form and scale words vary by generated data.
+    /// <summary>
+    /// Converts a number below one thousand.
+    /// </summary>
     string ConvertUnderThousand(long number)
     {
         if (number < 100)
@@ -92,6 +107,7 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
             return ConvertUnderHundred(number);
         }
 
+        // Hundreds are the only place where the family needs a special dedicated one-word form.
         var hundreds = number / 100;
         var remainder = number % 100;
         var parts = new List<string> { GetHundredsWord(hundreds) };
@@ -104,12 +120,14 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
         return string.Join(" ", parts);
     }
 
-    // Under one hundred, the family is regular: look up direct units for 0-19, then combine a
-    // tens word with the unit remainder.
+    /// <summary>
+    /// Converts a number below one hundred.
+    /// </summary>
     string ConvertUnderHundred(long number)
     {
         if (number < profile.Units.Length)
         {
+            // Units and teens are stored as exact table lookups so the common path stays simple.
             return profile.Units[number];
         }
 
@@ -117,22 +135,47 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
         var remainder = number % 10;
         var tensWord = profile.Tens[tens];
 
+        // Tens are a straight tens-word + unit-word combination when the number is not a direct
+        // table lookup.
         return remainder == 0
             ? tensWord
             : $"{tensWord} {profile.Units[remainder]}";
     }
 
+    /// <summary>
+    /// Converts the given value to its locale-specific ordinal form.
+    /// </summary>
+    /// <remarks>
+    /// This family uses the same rendering for cardinals and ordinals.
+    /// </remarks>
+    /// <param name="number">The number to convert.</param>
+    /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number) => Convert(number);
 
+    /// <summary>
+    /// One descending scale row for <see cref="ContractedOneScaleNumberToWordsConverter"/>.
+    /// </summary>
     internal readonly struct Scale
     {
+        /// <summary>
+        /// Gets the scale value.
+        /// </summary>
         public long Value { get; }
+        /// <summary>
+        /// Gets the scale name.
+        /// </summary>
         public string Name { get; }
+        /// <summary>
+        /// Gets the optional one-word contraction for a singular scale.
+        /// </summary>
         public string? OneWord { get; }
 
         /// <summary>
         /// Initializes one descending scale row.
         /// </summary>
+        /// <param name="value">The numeric value represented by the scale.</param>
+        /// <param name="name">The scale word used when the count is not contracted.</param>
+        /// <param name="oneWord">The optional dedicated contraction used when the count is exactly one.</param>
         public Scale(long value, string name, string? oneWord = null)
         {
             Value = value;
@@ -145,6 +188,13 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
 /// <summary>
 /// Immutable generated profile for <see cref="ContractedOneScaleNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="zeroWord">The cardinal zero word.</param>
+/// <param name="minusWord">The word used to prefix negative values.</param>
+/// <param name="hundredWord">The dedicated one-hundred word.</param>
+/// <param name="hundredUnitWord">The hundred scale word used after non-one counts.</param>
+/// <param name="units">The units and teens lexicon.</param>
+/// <param name="tens">The tens lexicon.</param>
+/// <param name="scales">The descending scale rows used during positive rendering.</param>
 sealed class ContractedOneScaleNumberToWordsProfile(
     string zeroWord,
     string minusWord,

@@ -24,6 +24,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
     /// </summary>
     readonly ScaleStrategyNumberToWordsProfile profile = profile;
 
+    /// <inheritdoc/>
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true) =>
         profile.CardinalStrategy switch
         {
@@ -32,6 +33,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
             _ => throw new InvalidOperationException("Unsupported Scandinavian cardinal strategy.")
         };
 
+    /// <inheritdoc/>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
         profile.OrdinalStrategy switch
         {
@@ -346,7 +348,9 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
 /// </summary>
 enum ScaleStrategyCardinalMode
 {
+    /// <summary>Uses the Norwegian Bokmal-style cardinal strategy.</summary>
     NorwegianBokmal,
+    /// <summary>Uses the Swedish-style cardinal strategy.</summary>
     Swedish
 }
 
@@ -355,7 +359,9 @@ enum ScaleStrategyCardinalMode
 /// </summary>
 enum ScaleStrategyOrdinalMode
 {
+    /// <summary>Uses the Norwegian Bokmal-style ordinal strategy.</summary>
     NorwegianBokmal,
+    /// <summary>Uses the Swedish-style ordinal strategy.</summary>
     Swedish
 }
 
@@ -459,6 +465,15 @@ sealed class ScaleStrategyNumberToWordsProfile(
 /// <summary>
 /// One descending scale row for <see cref="ScaleStrategyNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="Value">The divisor for the scale row.</param>
+/// <param name="Name">The singular scale name.</param>
+/// <param name="Plural">The plural scale name.</param>
+/// <param name="Prefix">The prefix inserted before the scale name in concatenative forms.</param>
+/// <param name="Postfix">The postfix inserted after the scale name when the locale requires one.</param>
+/// <param name="PluralSuffix">The suffix appended when the count is plural.</param>
+/// <param name="OrdinalSuffix">The suffix appended when the scale row terminates an ordinal phrase.</param>
+/// <param name="DisplayOneUnit">Whether a count of one should still be rendered explicitly.</param>
+/// <param name="Gender">The grammatical gender used for the scale row.</param>
 readonly record struct ScaleStrategyScale(
     long Value,
     string Name,

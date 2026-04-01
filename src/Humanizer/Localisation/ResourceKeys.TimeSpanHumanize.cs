@@ -1,20 +1,23 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
+/// <inheritdoc cref="ResourceKeys"/>
 public partial class ResourceKeys
 {
     /// <summary>
-    /// Encapsulates the logic required to get the resource keys for TimeSpan.Humanize
-    /// Examples: TimeSpanHumanize_SingleMinute, TimeSpanHumanize_MultipleHours.
+    /// Builds resource keys for <see cref="TimeSpan"/> humanization.
     /// </summary>
     public static class TimeSpanHumanize
     {
         /// <summary>
-        /// Generates Resource Keys according to convention.
+        /// Generates the resource key for a <see cref="TimeSpan"/> phrase.
         /// </summary>
-        /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
-        /// <param name="count">Number of units, default is One.</param>
-        /// <param name="toWords">Result to words, default is false.</param>
-        /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
+        /// <param name="unit">The unit being described.</param>
+        /// <param name="count">The number of units. A value of <c>0</c> maps to the zero key when <paramref name="toWords"/> is <c>true</c>.</param>
+        /// <param name="toWords">Whether the number should be rendered as words.</param>
+        /// <returns>The resource key for the requested <see cref="TimeSpan"/> phrase.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown when <paramref name="count"/> is negative or <paramref name="unit"/> is unsupported.
+        /// </exception>
         public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false)
         {
             ValidateRange(count);

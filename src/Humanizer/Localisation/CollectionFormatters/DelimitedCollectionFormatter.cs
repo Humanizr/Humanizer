@@ -1,5 +1,8 @@
 namespace Humanizer;
 
+/// <summary>
+/// Formats collections by joining the display values with a delimiter.
+/// </summary>
 class DelimitedCollectionFormatter(string delimiter) : ICollectionFormatter
 {
     public string Humanize<T>(IEnumerable<T> collection) =>
@@ -20,6 +23,9 @@ class DelimitedCollectionFormatter(string delimiter) : ICollectionFormatter
     public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator) =>
         Join(collection, item => objectFormatter(item)?.ToString(), separator);
 
+    /// <summary>
+    /// Joins the formatted values with <paramref name="separator"/> while skipping blank items.
+    /// </summary>
     static string Join<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator)
     {
         ArgumentNullException.ThrowIfNull(collection);
@@ -38,10 +44,13 @@ class DelimitedCollectionFormatter(string delimiter) : ICollectionFormatter
 
             if (firstValue == null)
             {
+                // Keep the first visible item outside the builder so the common one-item path avoids allocation.
                 firstValue = formatted;
                 continue;
             }
 
+            // Delimited lists use the same separator between every visible item, so we can append uniformly
+            // once the first value has been established.
             builder ??= new StringBuilder(firstValue);
             builder.Append(separator);
             builder.Append(formatted);

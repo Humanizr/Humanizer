@@ -1,18 +1,19 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
+/// <inheritdoc cref="ResourceKeys"/>
 public partial class ResourceKeys
 {
     /// <summary>
-    /// Encapsulates the logic required to get the resource keys for TimeUnit.ToSymbol
+    /// Builds resource keys for localized <see cref="TimeUnit"/> symbols.
     /// </summary>
     public static class TimeUnitSymbol
     {
         /// <summary>
-        /// Generates Resource Keys according to convention.
-        /// Examples: TimeUnit_Minute, TimeUnit_Hour.
+        /// Generates the resource key for a localized <see cref="TimeUnit"/> symbol.
         /// </summary>
-        /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
-        /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
+        /// <param name="unit">The unit whose symbol key should be returned.</param>
+        /// <returns>The resource key for the requested <see cref="TimeUnit"/> symbol.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="unit"/> is unsupported.</exception>
         public static string GetResourceKey(TimeUnit unit) =>
             unit switch
             {

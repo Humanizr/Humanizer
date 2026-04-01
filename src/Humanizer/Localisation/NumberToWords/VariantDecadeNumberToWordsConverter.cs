@@ -19,6 +19,10 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
     /// </summary>
     readonly VariantDecadeNumberToWordsProfile profile = profile;
 
+    /// <summary>
+    /// Converts the number using the locale's variant-decade cardinal rules.
+    /// </summary>
+    /// <inheritdoc />
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
         if (number == 0)
@@ -50,6 +54,10 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
 
     // Ordinals in this family are derived from the rendered cardinal phrase through a small set of
     // stem adjustments plus the terminal "ième" suffix.
+    /// <summary>
+    /// Converts the number using the locale's variant-decade ordinal rules.
+    /// </summary>
+    /// <inheritdoc />
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
         if (number == 1)
@@ -57,6 +65,9 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
             return gender == GrammaticalGender.Feminine ? "première" : "premier";
         }
 
+        // The ordinal is derived from the cardinal surface first because the family only changes a
+        // handful of terminal stems; applying the rewrite rules in this order preserves those family
+        // exceptions without reimplementing the full cardinal grammar.
         var convertedNumber = Convert(number);
 
         if (convertedNumber.EndsWith('s') && !convertedNumber.EndsWith("trois"))
@@ -87,6 +98,12 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
         return convertedNumber;
     }
 
+    /// <summary>
+    /// Gets the unit word for the supplied value, including the feminine one-form when required.
+    /// </summary>
+    /// <param name="number">The unit value to render.</param>
+    /// <param name="gender">The grammatical gender requested for the terminal unit.</param>
+    /// <returns>The localized unit word for <paramref name="number"/>.</returns>
     protected static string GetUnits(long number, GrammaticalGender gender)
     {
         if (number == 1 && gender == GrammaticalGender.Feminine)
@@ -190,6 +207,8 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
         }
         else if (profile.SeventyStrategy == VariantDecadeSeventyStrategy.SixtyPlusTeens && number is >= 70 and < 80)
         {
+            // 70 is not a generic decade here; the profile chooses whether the locale spells it as
+            // 60 + teens, and 71 may still need a dedicated lexical entry.
             parts.Add(number == 71 && profile.SpecialSeventyOneWord.Length != 0
                 ? profile.SpecialSeventyOneWord
                 : $"{profile.TensMap[6]}-{GetUnits(number - 60, gender)}");
@@ -213,6 +232,8 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
         var tens = profile.TensMap[tensIndex];
         if (units == 0)
         {
+            // Exact 80 only pluralizes in locales whose generated profile says so; the `pluralize`
+            // flag prevents higher-scale contexts from accidentally forcing an 80 plural suffix.
             parts.Add(number == 80 && pluralize && profile.PluralizeExactEighty
                 ? tens + "s"
                 : tens);
@@ -236,7 +257,13 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
 /// </summary>
 enum VariantDecadeSeventyStrategy
 {
+    /// <summary>
+    /// Uses the locale's regular tens word for the seventies.
+    /// </summary>
     Regular,
+    /// <summary>
+    /// Reuses sixty plus the teen forms for the seventies.
+    /// </summary>
     SixtyPlusTeens
 }
 
@@ -245,13 +272,26 @@ enum VariantDecadeSeventyStrategy
 /// </summary>
 enum VariantDecadeNinetyStrategy
 {
+    /// <summary>
+    /// Uses the locale's regular tens word for the nineties.
+    /// </summary>
     Regular,
+    /// <summary>
+    /// Reuses eighty plus the teen forms for the nineties.
+    /// </summary>
     EightyPlusTeens
 }
 
 /// <summary>
 /// Immutable generated profile for <see cref="VariantDecadeNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="minusWord">The word used to prefix negative values.</param>
+/// <param name="seventyStrategy">The strategy used for the seventies.</param>
+/// <param name="ninetyStrategy">The strategy used for the nineties.</param>
+/// <param name="specialSeventyOneWord">The optional dedicated spelling for seventy-one.</param>
+/// <param name="pluralizeExactEighty">A value indicating whether exact eighty takes a plural suffix.</param>
+/// <param name="tensUsingEtWhenUnitIsOne">The tens indices that use an "et un" join pattern.</param>
+/// <param name="tensMap">The tens lexicon keyed by decade value.</param>
 sealed class VariantDecadeNumberToWordsProfile(
     string minusWord,
     VariantDecadeSeventyStrategy seventyStrategy,

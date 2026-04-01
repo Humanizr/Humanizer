@@ -1,16 +1,30 @@
 namespace Humanizer;
 
+/// <summary>
+/// Renders numbers for locales that hyphenate scale phrases and rely on generated tables for
+/// hundreds, tens, units, and ordinal exceptions.
+/// </summary>
+/// <remarks>
+/// The converter walks the configured scale rows from largest to smallest, then stitches the
+/// remaining under-thousand fragment with the locale's hyphenation and ordinal rules.
+/// </remarks>
 class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
 {
     readonly HyphenatedScaleNumberToWordsProfile profile = profile;
 
+    /// <inheritdoc/>
     public override string Convert(long number) => ConvertInternal(number, false);
 
+    /// <inheritdoc/>
     public override string ConvertToOrdinal(int number) => ConvertInternal(number, true);
 
+    /// <summary>
+    /// Shared cardinal and ordinal rendering path for the hyphenated-scale family.
+    /// </summary>
     string ConvertInternal(long number, bool isOrdinal)
     {
-        // Handle zero and negative numbers
+        // Zero and negative values short-circuit before the scale walk because this family only
+        // models the positive hyphenation grammar.
         switch (number)
         {
             case 0:
@@ -27,7 +41,8 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
             CollectParts(parts, ref number, isOrdinal, isLessThanTen, scale);
         }
 
-        // All numbers above 2000 should be separated by dashes per thousands
+        // Above 2,000 the thousand row becomes a hard hyphen boundary; folding it into the
+        // remaining under-thousand render would produce the wrong surface form.
         if (2_000 <= number)
         {
             CollectParts(parts, ref number, isOrdinal, isLessThanTen, profile.ThousandScale);
@@ -39,8 +54,8 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
         }
         else
         {
-            // Some hyphenated-scale locales inline the one-thousand segment directly into the
-            // under-a-thousand remainder instead of emitting an extra dash boundary.
+            // Some locales fuse 1,000 into the remainder instead of emitting a separate thousand
+            // dash, so the under-thousand fragment has to be rendered with that boundary context.
             var lastPart = 1_000 <= number ? GetOneThousandPart(ref number, isOrdinal) : "";
             lastPart += GetUnderAThousandPart(number, isOrdinal, false, isLessThanTen);
 
@@ -53,7 +68,9 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
         return string.Join("-", parts);
     }
 
-    // Thousands part for numbers between 1000 and 1999
+    /// <summary>
+    /// Returns the one-thousand segment used by locales that spell 1,000-1,999 as a direct prefix.
+    /// </summary>
     string GetOneThousandPart(ref long number, bool isOrdinal)
     {
         const int divisor = 1_000;
@@ -66,6 +83,9 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
         return oneThousandPart;
     }
 
+    /// <summary>
+    /// Decomposes the current scale row and appends the localized result to <paramref name="parts"/>.
+    /// </summary>
     void CollectParts(List<string> parts, ref long number, bool isOrdinal, bool isLessThanTen, HyphenatedScale scale)
     {
         var result = number / scale.Divisor;
@@ -80,12 +100,16 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
         parts.Add(number == 0 && isOrdinal ? prefixNumber + scale.Ordinal : prefixNumber + scale.Cardinal);
     }
 
+    /// <summary>
+    /// Renders the fragment below one thousand, optionally using ordinal forms for the terminal digit.
+    /// </summary>
     string GetUnderAThousandPart(long number, bool isOrdinal, bool isPrefix, bool originalLessThanTen)
     {
         var numberString = "";
         if (100 <= number)
         {
-            // Return hundred + "adik" if the number is exactly one of hundreds e.g.: századik, hétszázadik
+            // Exact hundreds use a dedicated ordinal stem, so the cardinal hundred word must not
+            // be reused with a generic suffix.
             if (isOrdinal && number % 100 == 0)
             {
                 return profile.HundredsMap[number / 100] + "adik";
@@ -97,7 +121,8 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
 
         if (10 <= number)
         {
-            // Return an ordinal ten if the number is exactly one of tens
+            // Exact tens follow the same rule: the locale already encodes the correct ordinal stem
+            // in the tens table, so suffixing the cardinal form would be wrong.
             if (isOrdinal && number % 10 == 0)
             {
                 return numberString + profile.OrdinalTensMap[number / 10];
@@ -121,6 +146,9 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
         return numberString;
     }
 
+    /// <summary>
+    /// Returns the ordinal unit word, including locale-specific exceptions when the value is not a direct suffix case.
+    /// </summary>
     string GetOrdinalOnes(long number, bool lessThanTen)
     {
         if (lessThanTen)
@@ -133,13 +161,16 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
             : profile.OrdinalUnitsMap[number];
     }
 
+    /// <inheritdoc/>
     public override string ConvertToTuple(int number) =>
         profile.TupleMap.TryGetValue(number, out var tuple)
             ? tuple
             : $"{number}";
-
 }
 
+/// <summary>
+/// Immutable generated data for <see cref="HyphenatedScaleNumberToWordsConverter"/>.
+/// </summary>
 sealed class HyphenatedScaleNumberToWordsProfile(
     string zeroWord,
     string zeroOrdinalWord,
@@ -156,20 +187,40 @@ sealed class HyphenatedScaleNumberToWordsProfile(
     HyphenatedScale thousandScale,
     FrozenDictionary<int, string> tupleMap)
 {
+    /// <summary>Gets the cardinal zero word.</summary>
     public string ZeroWord { get; } = zeroWord;
+    /// <summary>Gets the ordinal zero word.</summary>
     public string ZeroOrdinalWord { get; } = zeroOrdinalWord;
+    /// <summary>Gets the word used to prefix negative values.</summary>
     public string MinusWord { get; } = minusWord;
+    /// <summary>Gets the prefix used when the locale spells the unit digit as a leading stem.</summary>
     public string TwoPrefixWord { get; } = twoPrefixWord;
+    /// <summary>Gets the cardinal unit lexicon.</summary>
     public string[] UnitsMap { get; } = unitsMap;
+    /// <summary>Gets the ordinal unit lexicon.</summary>
     public string[] OrdinalUnitsMap { get; } = ordinalUnitsMap;
+    /// <summary>Gets the cardinal tens lexicon.</summary>
     public string[] TensMap { get; } = tensMap;
+    /// <summary>Gets the ordinal tens lexicon.</summary>
     public string[] OrdinalTensMap { get; } = ordinalTensMap;
+    /// <summary>Gets the cardinal hundreds lexicon.</summary>
     public string[] HundredsMap { get; } = hundredsMap;
+    /// <summary>Gets ordinal overrides for units that do not take the regular suffix.</summary>
     public FrozenDictionary<int, string> OrdinalUnitsExceptions { get; } = ordinalUnitsExceptions;
+    /// <summary>Gets cardinal overrides for whole tens that do not use the regular tens lexicon.</summary>
     public FrozenDictionary<int, string> WholeTensExceptions { get; } = wholeTensExceptions;
+    /// <summary>Gets the descending scale rows used during decomposition.</summary>
     public HyphenatedScale[] Scales { get; } = scales;
+    /// <summary>Gets the one-thousand row used by locales that special-case 1,000-1,999.</summary>
     public HyphenatedScale ThousandScale { get; } = thousandScale;
+    /// <summary>Gets named tuple overrides for small integers.</summary>
     public FrozenDictionary<int, string> TupleMap { get; } = tupleMap;
 }
 
+/// <summary>
+/// One descending scale row for <see cref="HyphenatedScaleNumberToWordsConverter"/>.
+/// </summary>
+/// <param name="Divisor">The divisor for the scale row.</param>
+/// <param name="Cardinal">The cardinal form of the scale row.</param>
+/// <param name="Ordinal">The ordinal form of the scale row.</param>
 readonly record struct HyphenatedScale(long Divisor, string Cardinal, string Ordinal);

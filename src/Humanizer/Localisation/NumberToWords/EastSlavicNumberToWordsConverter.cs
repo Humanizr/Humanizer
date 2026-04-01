@@ -20,6 +20,13 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
     /// </summary>
     readonly EastSlavicNumberToWordsProfile profile = profile;
 
+    /// <summary>
+    /// Converts the given value using the locale's East Slavic cardinal rules.
+    /// </summary>
+    /// <param name="input">The number to convert.</param>
+    /// <param name="gender">The grammatical gender to use for the terminal group.</param>
+    /// <param name="addAnd">Reserved for compatibility with other converters; this implementation derives conjunction placement from the generated profile.</param>
+    /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
         if (input == 0)
@@ -58,6 +65,12 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
         return string.Join(" ", parts);
     }
 
+    /// <summary>
+    /// Converts the given value into a locale-specific ordinal phrase.
+    /// </summary>
+    /// <param name="input">The number to convert.</param>
+    /// <param name="gender">The grammatical gender to use for the terminal ending.</param>
+    /// <returns>The localized ordinal words for <paramref name="input"/>.</returns>
     public override string ConvertToOrdinal(int input, GrammaticalGender gender)
     {
         if (input == 0)
@@ -216,9 +229,12 @@ class EastSlavicNumberToWordsConverter(EastSlavicNumberToWordsProfile profile) :
             _ => throw new ArgumentOutOfRangeException(nameof(gender))
         };
 
+    // Math.Abs(long.MinValue) overflows, so the converter uses the standard two's-complement safe
+    // transformation instead of a direct absolute-value call.
     static ulong GetAbsoluteValue(long value) =>
         value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
+    // The int overload uses the same overflow-safe pattern for consistency with the long path.
     static ulong GetAbsoluteValue(int value) =>
         value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }
@@ -300,9 +316,16 @@ readonly record struct EastSlavicScale(
 /// </summary>
 readonly record struct EastSlavicGenderEnding(string Default, FrozenDictionary<int, string> Overrides)
 {
-    // Some terminal values override the default gender ending, for example exact tens, hundreds,
-    // or scale ordinals that do not use the normal masculine/feminine/neuter suffix. Keeping
-    // those overrides in generated data avoids locale-specific branching in the converter.
+    /// <summary>
+    /// Resolves the terminal ordinal ending for the supplied value.
+    /// </summary>
+    /// <param name="terminalValue">The terminal value whose ending should be selected.</param>
+    /// <returns>The override ending when one exists; otherwise the default ending.</returns>
+    /// <remarks>
+    /// Some terminal values override the default gender ending, for example exact tens, hundreds,
+    /// or scale ordinals that do not use the normal masculine, feminine, or neuter suffix. Keeping
+    /// those overrides in generated data avoids locale-specific branching in the converter.
+    /// </remarks>
     public string Resolve(int terminalValue) =>
         Overrides.TryGetValue(terminalValue, out var ending) ? ending : Default;
 }

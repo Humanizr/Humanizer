@@ -71,6 +71,7 @@ public class NumberToWordsTests
     [InlineData(100000, "লক্ষ তম")]
     [InlineData(1000000, "দশ লক্ষ তম")]
     [InlineData(10000000, "কোটি তম")]
+    [InlineData(-100000, "ঋণাত্মক এক লক্ষ তম")]
     public void ToOrdinalWords(int number, string words) =>
         Assert.Equal(words, number.ToOrdinalWords());
 }

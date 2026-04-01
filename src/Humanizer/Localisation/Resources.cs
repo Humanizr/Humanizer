@@ -3,7 +3,7 @@ using System.Resources;
 namespace Humanizer;
 
 /// <summary>
-/// Provides access to the resources of Humanizer
+/// Provides access to Humanizer's localized string resources.
 /// </summary>
 public static class Resources
 {
@@ -11,11 +11,14 @@ public static class Resources
         .Assembly);
 
     /// <summary>
-    /// Returns the value of the specified string resource
+    /// Returns the value of the specified string resource.
     /// </summary>
     /// <param name="resourceKey">The name of the resource to retrieve.</param>
-    /// <param name="culture">The culture of the resource to retrieve. If not specified, current thread's UI culture is used.</param>
+    /// <param name="culture">
+    /// The culture of the resource to retrieve. If not specified, the current thread's UI culture is used.
+    /// </param>
     /// <returns>The value of the resource localized for the specified culture.</returns>
+    /// <exception cref="ArgumentException">Thrown when the resource key cannot be resolved for the requested culture.</exception>
     public static string GetResource(string resourceKey, CultureInfo? culture = null)
     {
         // When an explicit culture is provided, we must ensure the exact culture's resource set
@@ -27,7 +30,7 @@ public static class Resources
 
         string? resource = null;
 
-        // Only attempt to load the exact culture's resource set when an explicit culture is provided
+        // Only attempt to load the exact culture's resource set when an explicit culture is provided.
         // This preserves the previous behavior for callers that pass null (they fall through to GetString).
         if (culture != null)
         {
@@ -50,26 +53,37 @@ public static class Resources
     }
 
     /// <summary>
-    /// Tries to get the value of the specified string resource using the standard fallback chain
+    /// Tries to get the value of the specified string resource using the standard fallback chain.
     /// </summary>
     /// <param name="resourceKey">The name of the resource to retrieve.</param>
-    /// <param name="culture">The culture of the resource to retrieve. If not specified, current thread's UI culture is used.</param>
-    /// <param name="result">The value of the resource localized for the specified culture if found; null otherwise.</param>
-    /// <returns>true if the specified string resource was found for the given culture; otherwise, false.</returns>
+    /// <param name="culture">
+    /// The culture of the resource to retrieve. If not specified, the current thread's UI culture is used.
+    /// </param>
+    /// <param name="result">The localized value if the resource is found; otherwise, <c>null</c>.</param>
+    /// <returns><c>true</c> if the specified string resource was found for the given culture; otherwise, <c>false</c>.</returns>
     public static bool TryGetResource(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result)
     {
         string? resource = null;
 
+        // Keep the exact-culture preload here too. The non-throwing path shares the same Blazor
+        // WebAssembly satellite-loading pitfall as GetResource; only the final missing-resource
+        // behavior differs.
         if (culture != null)
         {
             var exactResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: true, tryParents: false);
             resource = exactResourceSet?.GetString(resourceKey);
         }
 
+        // Once the exact culture had a chance to populate its satellite assembly, fall back to the
+        // normal ResourceManager chain for parents and neutral resources.
         result = resource ?? ResourceManager.GetString(resourceKey, culture);
         return result is not null;
     }
 
-    internal static bool TryGetResourceWithFallback(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result) =>
-        TryGetResource(resourceKey, culture, out result);
+    /// <inheritdoc cref="TryGetResource"/>
+    internal static bool TryGetResourceWithFallback(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result)
+    {
+        // Keep the call site descriptive without duplicating the lookup path or changing fallback semantics.
+        return TryGetResource(resourceKey, culture, out result);
+    }
 }

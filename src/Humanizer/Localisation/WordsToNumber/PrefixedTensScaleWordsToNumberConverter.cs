@@ -4,10 +4,14 @@ using System.Text.RegularExpressions;
 
 namespace Humanizer;
 
+/// <summary>
+/// Parses languages that attach scale words and tens stems as prefixes inside a glued compound.
+/// </summary>
 internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
     readonly PrefixedTensScaleWordsToNumberProfile profile = profile;
 
+    /// <inheritdoc />
     public override int Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
@@ -18,9 +22,11 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         return parsedValue;
     }
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
@@ -62,6 +68,12 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         return false;
     }
 
+    /// <summary>
+    /// Parses a normalized and separator-collapsed cardinal phrase.
+    /// </summary>
+    /// <param name="word">The normalized phrase to parse.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(string word, out int value)
     {
         if (string.IsNullOrEmpty(word))
@@ -75,6 +87,9 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             return true;
         }
 
+        // Scale decomposition must run before prefix/tens handling because many glued compounds
+        // contain tokens that look like smaller prefixes. Once a scale token matches, the left and
+        // right fragments define the only valid recursive split for that branch.
         foreach (var scale in profile.Scales)
         {
             var index = word.IndexOf(scale.Token, StringComparison.Ordinal);
@@ -101,6 +116,9 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             return true;
         }
 
+        // Prefix rules only accept 1..9 as their suffix because the prefix already contributes the
+        // tens portion. Allowing larger suffix parses here would double-count scales or decades
+        // that the earlier branches are responsible for.
         foreach (var rule in profile.PrefixRules)
         {
             if (word.StartsWith(rule.Prefix, StringComparison.Ordinal) &&
@@ -112,6 +130,8 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             }
         }
 
+        // Tens prefixes are last for the same reason: after exact tokens, scales, and explicit
+        // prefixed forms have had their chance, the remaining valid suffix is a simple unit value.
         foreach (var tens in profile.TensMap)
         {
             if (!word.StartsWith(tens.Key, StringComparison.Ordinal))
@@ -137,6 +157,12 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         return false;
     }
 
+    /// <summary>
+    /// Parses an optional remainder after a scale or prefix token.
+    /// </summary>
+    /// <param name="word">The remainder to parse.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseOptional(string word, out int value)
     {
         if (string.IsNullOrEmpty(word))
@@ -148,6 +174,9 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         return TryParseCardinal(word, out value);
     }
 
+    /// <summary>
+    /// Normalizes punctuation, apostrophes, casing, and repeated whitespace before parsing.
+    /// </summary>
     static string Normalize(string words) =>
         Regex.Replace(RemoveDiacritics(words)
                 .Replace(",", string.Empty)
@@ -159,10 +188,16 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
             @"\s+",
             " ");
 
+    /// <summary>
+    /// Removes compound separators so glued scale and tens tokens can be matched as one word.
+    /// </summary>
     static string CollapseCompoundSeparators(string words) =>
         words.Replace("-", string.Empty)
             .Replace(" ", string.Empty);
 
+    /// <summary>
+    /// Removes non-spacing marks from the supplied text.
+    /// </summary>
     static string RemoveDiacritics(string text)
     {
         var normalized = text.Normalize(NormalizationForm.FormD);
@@ -180,6 +215,9 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     }
 }
 
+/// <summary>
+/// Immutable locale data used by <see cref="PrefixedTensScaleWordsToNumberConverter"/>.
+/// </summary>
 sealed class PrefixedTensScaleWordsToNumberProfile(
     FrozenDictionary<string, int> cardinalMap,
     FrozenDictionary<string, int> tensMap,
@@ -187,13 +225,34 @@ sealed class PrefixedTensScaleWordsToNumberProfile(
     PrefixedTensRule[] prefixRules,
     string[] negativePrefixes)
 {
+    /// <summary>
+    /// Gets the token-to-value map used by the parser.
+    /// </summary>
     public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    /// <summary>
+    /// Gets the tens tokens and their numeric values.
+    /// </summary>
     public FrozenDictionary<string, int> TensMap { get; } = tensMap;
+    /// <summary>
+    /// Gets the scale words that can appear inside prefixed compounds.
+    /// </summary>
     public PrefixedScaleWord[] Scales { get; } = scales;
+    /// <summary>
+    /// Gets the prefixes that add a fixed base value to the following unit token.
+    /// </summary>
     public PrefixedTensRule[] PrefixRules { get; } = prefixRules;
+    /// <summary>
+    /// Gets the prefixes that mark a negative number phrase.
+    /// </summary>
     public string[] NegativePrefixes { get; } = negativePrefixes;
 }
 
+/// <summary>
+/// Represents a scale token that may appear as part of a glued prefix compound.
+/// </summary>
 readonly record struct PrefixedScaleWord(string Token, int Value);
 
+/// <summary>
+/// Represents a locale-specific prefix that yields a base value when followed by a unit token.
+/// </summary>
 readonly record struct PrefixedTensRule(string Prefix, int BaseValue);

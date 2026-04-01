@@ -1,9 +1,14 @@
 namespace Humanizer;
 
+/// <summary>
+/// Parses languages that use linking affixes inside compounds, such as embedded teen stems or
+/// joined suffixes on cardinal tokens.
+/// </summary>
 internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
     readonly LinkingAffixWordsToNumberProfile profile = profile;
 
+    /// <inheritdoc />
     public override int Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
@@ -14,9 +19,11 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
         return parsedValue;
     }
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
+    /// <inheritdoc />
     public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
@@ -57,6 +64,12 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
         return false;
     }
 
+    /// <summary>
+    /// Parses a normalized cardinal phrase with linked suffixes and teen prefixes.
+    /// </summary>
+    /// <param name="words">A normalized phrase ready for token-by-token parsing.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
     bool TryParseCardinal(string words, out int value)
     {
         if (profile.CardinalMap.TryGetValue(words, out value))
@@ -75,6 +88,8 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
                 continue;
             }
 
+            // Teen tokens are parsed recursively so the suffix lookup stays independent from the
+            // locale's exact teen lexemes.
             if (token.StartsWith(profile.TeenPrefix, StringComparison.Ordinal) &&
                 token.Length > profile.TeenPrefix.Length &&
                 TryParseCardinal(token[profile.TeenPrefix.Length..], out var teenUnit))
@@ -114,6 +129,11 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
         return true;
     }
 
+    /// <summary>
+    /// Returns <c>true</c> when a token is configured to be ignored during parsing.
+    /// </summary>
+    /// <param name="token">The token to inspect.</param>
+    /// <returns><c>true</c> if the token should be skipped; otherwise, <c>false</c>.</returns>
     bool ShouldIgnore(string token)
     {
         foreach (var ignoredToken in profile.IgnoredTokens)
@@ -127,6 +147,12 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
         return false;
     }
 
+    /// <summary>
+    /// Tries to strip a linked suffix from a token and resolve the base token as a cardinal value.
+    /// </summary>
+    /// <param name="token">The token to inspect.</param>
+    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <returns><c>true</c> if the token ends with a known linked suffix; otherwise, <c>false</c>.</returns>
     bool TryParseLinkedToken(string token, out int value)
     {
         foreach (var suffix in profile.LinkedSuffixes)
@@ -147,6 +173,9 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     }
 }
 
+/// <summary>
+/// Immutable locale data used by <see cref="LinkingAffixWordsToNumberConverter"/>.
+/// </summary>
 sealed class LinkingAffixWordsToNumberProfile(
     FrozenDictionary<string, int> cardinalMap,
     string teenPrefix,
@@ -157,12 +186,36 @@ sealed class LinkingAffixWordsToNumberProfile(
     int hundredValue = 100,
     int scaleThreshold = 1000)
 {
+    /// <summary>
+    /// Gets the token-to-value map used by the parser.
+    /// </summary>
     public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    /// <summary>
+    /// Gets the prefix that marks a teen stem.
+    /// </summary>
     public string TeenPrefix { get; } = teenPrefix;
+    /// <summary>
+    /// Gets the base value added when a teen prefix is matched.
+    /// </summary>
     public int TeenBaseValue { get; } = teenBaseValue;
+    /// <summary>
+    /// Gets the suffixes that may be attached to a linked cardinal token.
+    /// </summary>
     public string[] LinkedSuffixes { get; } = linkedSuffixes;
+    /// <summary>
+    /// Gets the tokens that should be skipped during parsing.
+    /// </summary>
     public string[] IgnoredTokens { get; } = ignoredTokens;
+    /// <summary>
+    /// Gets the prefixes that mark a negative number phrase.
+    /// </summary>
     public string[] NegativePrefixes { get; } = negativePrefixes;
+    /// <summary>
+    /// Gets the value that represents a hundred token in the locale.
+    /// </summary>
     public int HundredValue { get; } = hundredValue;
+    /// <summary>
+    /// Gets the value at or above which tokens are treated as large scales.
+    /// </summary>
     public int ScaleThreshold { get; } = scaleThreshold;
 }

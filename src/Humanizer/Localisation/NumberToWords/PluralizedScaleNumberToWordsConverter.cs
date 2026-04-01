@@ -28,6 +28,10 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
     /// </summary>
     readonly CultureInfo culture = culture;
 
+    /// <summary>
+    /// Converts the number using the locale's pluralized-scale cardinal rules.
+    /// </summary>
+    /// <inheritdoc />
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
         EnsureGenderSupported(gender);
@@ -74,6 +78,10 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
         return string.Join(" ", parts);
     }
 
+    /// <summary>
+    /// Converts the number using the locale's pluralized-scale ordinal mode.
+    /// </summary>
+    /// <inheritdoc />
     public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
         profile.OrdinalMode switch
         {
@@ -311,8 +319,17 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
 /// </summary>
 enum PluralizedScaleFormDetector
 {
+    /// <summary>
+    /// Uses the Russian singular/paucal/plural detector.
+    /// </summary>
     RussianPaucal,
+    /// <summary>
+    /// Uses the Polish singular/paucal/plural detector.
+    /// </summary>
     Polish,
+    /// <summary>
+    /// Uses the Lithuanian singular/plural/genitive detector mapping.
+    /// </summary>
     Lithuanian
 }
 
@@ -321,8 +338,17 @@ enum PluralizedScaleFormDetector
 /// </summary>
 enum PluralizedScaleForm
 {
+    /// <summary>
+    /// The singular scale form.
+    /// </summary>
     Singular,
+    /// <summary>
+    /// The paucal or few-count scale form.
+    /// </summary>
     Paucal,
+    /// <summary>
+    /// The plural or many-count scale form.
+    /// </summary>
     Plural
 }
 
@@ -331,8 +357,17 @@ enum PluralizedScaleForm
 /// </summary>
 enum PluralizedScaleUnitVariantStrategy
 {
+    /// <summary>
+    /// Uses the base unit lexicon without gender or contextual variation.
+    /// </summary>
     None,
+    /// <summary>
+    /// Applies the Polish one/two gender and higher-order variants.
+    /// </summary>
     Polish,
+    /// <summary>
+    /// Applies the Lithuanian adjective-like unit endings.
+    /// </summary>
     Lithuanian
 }
 
@@ -341,13 +376,35 @@ enum PluralizedScaleUnitVariantStrategy
 /// </summary>
 enum PluralizedScaleOrdinalMode
 {
+    /// <summary>
+    /// Delegates ordinal rendering to numeric culture formatting.
+    /// </summary>
     NumericCulture,
+    /// <summary>
+    /// Builds Lithuanian word ordinals from the generated lexical tables.
+    /// </summary>
     Lithuanian
 }
 
 /// <summary>
 /// Immutable generated profile for <see cref="PluralizedScaleNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="zeroWord">The cardinal zero word.</param>
+/// <param name="minusWord">The word used to prefix negative values.</param>
+/// <param name="zeroOrdinalStem">The stem used to build the zero ordinal.</param>
+/// <param name="unitsMap">The cardinal units lexicon.</param>
+/// <param name="tensMap">The cardinal tens lexicon.</param>
+/// <param name="hundredsMap">The cardinal hundreds lexicon.</param>
+/// <param name="scales">The descending scale rows used during decomposition.</param>
+/// <param name="formDetector">The plural-form detector used for scale nouns.</param>
+/// <param name="unitVariantStrategy">The strategy used for low-unit gender or contextual variation.</param>
+/// <param name="ordinalMode">The ordinal rendering mode used by the shared engine.</param>
+/// <param name="supportsNeuter">A value indicating whether the locale supports neuter gender.</param>
+/// <param name="masculineOrdinalSuffix">The masculine ordinal suffix.</param>
+/// <param name="feminineOrdinalSuffix">The feminine ordinal suffix.</param>
+/// <param name="ordinalUnitsMap">The ordinal units lexicon.</param>
+/// <param name="ordinalTensMap">The ordinal tens lexicon.</param>
+/// <param name="ordinalHundredsMap">The ordinal hundreds lexicon.</param>
 sealed class PluralizedScaleNumberToWordsProfile(
     string zeroWord,
     string minusWord,
@@ -403,6 +460,13 @@ sealed class PluralizedScaleNumberToWordsProfile(
 /// <summary>
 /// One descending scale row for <see cref="PluralizedScaleNumberToWordsConverter"/>.
 /// </summary>
+/// <param name="Value">The numeric value represented by the scale.</param>
+/// <param name="CountGender">The grammatical gender used when rendering the scale count.</param>
+/// <param name="Singular">The singular scale noun.</param>
+/// <param name="Paucal">The paucal scale noun.</param>
+/// <param name="Plural">The plural scale noun.</param>
+/// <param name="OrdinalStem">The optional ordinal stem used when an exact scale value becomes ordinal.</param>
+/// <param name="OmitLeadingOne">A value indicating whether an exact single scale omits the leading one-word.</param>
 readonly record struct PluralizedScale(
     ulong Value,
     GrammaticalGender CountGender,

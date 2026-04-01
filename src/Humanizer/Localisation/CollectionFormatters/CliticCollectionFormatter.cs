@@ -1,5 +1,8 @@
 namespace Humanizer;
 
+/// <summary>
+/// Formats collections by treating the final separator as a clitic conjunction.
+/// </summary>
 class CliticCollectionFormatter(string conjunction) : ICollectionFormatter
 {
     readonly DefaultCollectionFormatter fallbackFormatter = new(conjunction);
@@ -35,6 +38,7 @@ class CliticCollectionFormatter(string conjunction) : ICollectionFormatter
 
             if (count == 0)
             {
+                // Hold the first visible item separately so the 0- and 1-item paths stay allocation-free.
                 lastItem = formatted;
                 count = 1;
                 continue;
@@ -42,12 +46,15 @@ class CliticCollectionFormatter(string conjunction) : ICollectionFormatter
 
             if (count == 1)
             {
+                // Once we have two visible items, build the comma-separated head and keep the tail isolated.
                 head = new StringBuilder(lastItem);
                 lastItem = formatted;
                 count = 2;
                 continue;
             }
 
+            // The penultimate item belongs in the comma-separated head; the last item stays separate so the
+            // locale-specific conjunction can decide whether it needs to cliticize the previous word.
             head!.Append(", ");
             head.Append(lastItem);
             lastItem = formatted;

@@ -1,29 +1,33 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
+/// <inheritdoc cref="ResourceKeys"/>
 public partial class ResourceKeys
 {
     /// <summary>
-    /// Encapsulates the logic required to get the resource keys for DateTime.Humanize
+    /// Builds resource keys for relative date phrases.
     /// </summary>
     public static class DateHumanize
     {
         /// <summary>
-        /// Resource key for Now.
+        /// Gets the resource key used for the "now" phrase.
         /// </summary>
         public const string Now = "DateHumanize_Now";
 
         /// <summary>
-        /// Resource key for Never.
+        /// Gets the resource key used for the "never" phrase.
         /// </summary>
         public const string Never = "DateHumanize_Never";
 
         /// <summary>
-        /// Generates Resource Keys according to convention.
+        /// Generates the resource key for a relative date phrase.
         /// </summary>
-        /// <param name="timeUnit">Time unit</param>
-        /// <param name="timeUnitTense">Is time unit in future or past</param>
-        /// <param name="count">Number of units, default is One.</param>
-        /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
+        /// <param name="timeUnit">The unit being described.</param>
+        /// <param name="timeUnitTense">Whether the date is in the past or the future.</param>
+        /// <param name="count">The number of units. A value of <c>0</c> returns <see cref="Now"/>.</param>
+        /// <returns>The resource key for the requested relative date phrase.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown when <paramref name="count"/> is negative or <paramref name="timeUnit"/> is unsupported.
+        /// </exception>
         public static string GetResourceKey(TimeUnit timeUnit, Tense timeUnitTense, int count = 1)
         {
             ValidateRange(count);

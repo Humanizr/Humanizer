@@ -1,7 +1,20 @@
 namespace Humanizer;
 
+/// <summary>
+/// Builds resource keys for localized data-unit names and symbols.
+/// </summary>
 static class DataUnitResourceKeys
 {
+    /// <summary>
+    /// Returns the resource key for a data unit name or symbol.
+    /// </summary>
+    /// <param name="dataUnit">The data unit whose resource key should be built.</param>
+    /// <param name="toSymbol">Whether to return the symbol key instead of the full-word key.</param>
+    /// <returns>The resource key for the requested data unit representation.</returns>
+    /// <remarks>
+    /// Unknown enum values fall back to the naming convention so future units can still resolve
+    /// to resources without requiring code changes for every new member.
+    /// </remarks>
     public static string GetResourceKey(DataUnit dataUnit, bool toSymbol) =>
         (toSymbol, dataUnit) switch
         {
