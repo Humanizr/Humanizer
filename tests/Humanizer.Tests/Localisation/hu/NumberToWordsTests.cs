@@ -3,7 +3,7 @@ namespace hu;
 [UseCulture("hu-HU")]
 public class NumberToWordsTests
 {
-    private static readonly INumberToWordsConverter converter =
+    private static readonly INumberToWordsConverter Converter =
         Configurator.NumberToWordsConverters.ResolveForCulture(new CultureInfo("hu-HU"));
 
     [Theory]
@@ -43,7 +43,7 @@ public class NumberToWordsTests
     [InlineData(-1, "mínusz egy")]
     [InlineData(-18, "mínusz tizennyolc")]
     public void TestNumberConversion(long number, string expected) =>
-        Assert.Equal(expected, converter.Convert(number));
+        Assert.Equal(expected, Converter.Convert(number));
 
 
     [Theory]
@@ -83,6 +83,6 @@ public class NumberToWordsTests
     [InlineData(-1, "mínusz első")]
     [InlineData(-18, "mínusz tizennyolcadik")]
     public void TestOrdinalConversion(int number, string expected) =>
-        Assert.Equal(expected, converter.ConvertToOrdinal(number));
+        Assert.Equal(expected, Converter.ConvertToOrdinal(number));
 
 }
