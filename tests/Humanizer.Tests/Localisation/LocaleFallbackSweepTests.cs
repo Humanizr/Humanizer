@@ -199,4 +199,55 @@ namespace ta
             Assert.Equal(new TimeOnly(13, 23).ToString("t", CultureInfo.CurrentCulture), new TimeOnly(13, 23).ToClockNotation());
     }
 }
+
+namespace zuZA
+{
+    [UseCulture("zu-ZA")]
+    public class LocaleFallbackSweepTests
+    {
+        static readonly CultureInfo UnknownCulture = new("zu-ZA");
+
+        [Fact]
+        public void UnknownCultureUsesDefaultCollectionFormatter() =>
+            Assert.Equal("1 & 2", Configurator.CollectionFormatters.ResolveForCulture(UnknownCulture).Humanize(["1", "2"]));
+
+        [Fact]
+        public void UnknownCultureFallsBackToEnglishFormatter() =>
+            Assert.Equal(
+                Configurator.Formatters.ResolveForCulture(new("en")).DateHumanize(TimeUnit.Day, Tense.Past, 1),
+                Configurator.Formatters.ResolveForCulture(UnknownCulture).DateHumanize(TimeUnit.Day, Tense.Past, 1));
+
+        [Fact]
+        public void UnknownCultureFallsBackToEnglishNumberToWords() =>
+            Assert.Equal(42.ToWords(new("en")), 42.ToWords(UnknownCulture));
+
+        [Fact]
+        public void UnknownCultureUsesDefaultWordsToNumberConverter() =>
+            Assert.Throws<NotSupportedException>(() => "one".ToNumber(UnknownCulture));
+
+        [Fact]
+        public void UnknownCultureUsesDefaultOrdinalizer() =>
+            Assert.Equal("1", 1.Ordinalize(UnknownCulture));
+
+        [Fact]
+        public void UnknownCultureUsesDefaultDateToOrdinalWordsConverter() =>
+            Assert.Equal(new DateTime(2015, 1, 1).ToString("d", CultureInfo.CurrentCulture), new DateTime(2015, 1, 1).ToOrdinalWords());
+
+        [Fact]
+        public void UnknownCultureUsesDefaultDateOnlyToOrdinalWordsConverter() =>
+            Assert.Equal(new DateOnly(2015, 1, 1).ToString("d", CultureInfo.CurrentCulture), new DateOnly(2015, 1, 1).ToOrdinalWords());
+
+        [Fact]
+        public void UnknownCultureUsesDefaultClockNotationConverter() =>
+            Assert.Equal(new TimeOnly(13, 23).ToString("t", CultureInfo.CurrentCulture), new TimeOnly(13, 23).ToClockNotation());
+
+        [Fact]
+        public void UnknownCultureFallsBackToEnglishHeadingTable()
+        {
+            Assert.Equal(0d.ToHeading(HeadingStyle.Full, new("en")), 0d.ToHeading(HeadingStyle.Full, UnknownCulture));
+            Assert.Equal(0d.ToHeading(HeadingStyle.Abbreviated, new("en")), 0d.ToHeading(HeadingStyle.Abbreviated, UnknownCulture));
+            Assert.Equal("NNW".FromAbbreviatedHeading(new("en")), "NNW".FromAbbreviatedHeading(UnknownCulture));
+        }
+    }
+}
 #endif
