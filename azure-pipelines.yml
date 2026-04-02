@@ -57,7 +57,8 @@ stages:
       inputs:
         command: pack
         packagesToPack: ./src/Humanizer/Humanizer.csproj
-        arguments: -c $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)/Packages
+        packDirectory: $(Build.ArtifactStagingDirectory)/Packages
+        arguments: -c $(BuildConfiguration)
       displayName: Restore, Build, and Pack
 
     - pwsh: |
