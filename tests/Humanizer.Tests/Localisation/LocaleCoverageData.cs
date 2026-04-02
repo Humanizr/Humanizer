@@ -1,32 +1,11 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Xml.Linq;
 
 namespace Humanizer.Tests.Localisation;
 
 static class LocaleCoverageData
 {
-    static readonly Lazy<string> repositoryRoot = new(FindRepositoryRoot);
-    static readonly Lazy<IReadOnlyList<string>> neutralResourceKeys = new(() => ReadResourceKeys(NeutralResourceFilePath));
-    static readonly Lazy<IReadOnlyList<string>> localizedResourceFilePaths = new(() =>
-        Directory.GetFiles(ResourceDirectoryPath, "Resources.*.resx", SearchOption.TopDirectoryOnly)
-            .Where(path => !path.EndsWith("Resources.resx", StringComparison.OrdinalIgnoreCase))
-            .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
-            .ToArray());
-
-    static readonly Lazy<IReadOnlyDictionary<string, IReadOnlyList<string>>> localizedResourceKeysByLocale = new(() =>
-        LocalizedResourceFilePaths.ToDictionary(
-            GetLocaleFromResourceFilePath,
-            ReadResourceKeys,
-            StringComparer.OrdinalIgnoreCase));
-    static readonly Lazy<IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>>> localizedResourceValuesByLocale = new(() =>
-        LocalizedResourceFilePaths.ToDictionary(
-            GetLocaleFromResourceFilePath,
-            ReadResourceEntries,
-            StringComparer.OrdinalIgnoreCase));
-
     static readonly Lazy<IReadOnlyList<string>> formatterLocales = new(() => GetRegisteredLocales<FormatterRegistry, IFormatter>());
     static readonly Lazy<IReadOnlyList<string>> collectionFormatterLocales = new(() => GetRegisteredLocales<CollectionFormatterRegistry, ICollectionFormatter>());
     static readonly Lazy<IReadOnlyList<string>> numberToWordsLocales = new(() => GetRegisteredLocales<NumberToWordsConverterRegistry, INumberToWordsConverter>());
@@ -37,20 +16,6 @@ static class LocaleCoverageData
     static readonly Lazy<IReadOnlyList<string>> dateOnlyToOrdinalWordsLocales = new(() => GetRegisteredLocales<DateOnlyToOrdinalWordsConverterRegistry, IDateOnlyToOrdinalWordConverter>());
     static readonly Lazy<IReadOnlyList<string>> timeOnlyToClockNotationLocales = new(() => GetRegisteredLocales<TimeOnlyToClockNotationConvertersRegistry, ITimeOnlyToClockNotationConverter>());
 #endif
-
-    public static string NeutralResourceFilePath => Path.Combine(ResourceDirectoryPath, "Resources.resx");
-
-    public static string ResourceDirectoryPath => Path.Combine(RepositoryRoot, "src", "Humanizer", "Properties");
-
-    public static string RepositoryRoot => repositoryRoot.Value;
-
-    public static IReadOnlyList<string> NeutralResourceKeys => neutralResourceKeys.Value;
-
-    public static IReadOnlyList<string> LocalizedResourceFilePaths => localizedResourceFilePaths.Value;
-
-    public static IReadOnlyDictionary<string, IReadOnlyList<string>> LocalizedResourceKeysByLocale => localizedResourceKeysByLocale.Value;
-
-    public static IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> LocalizedResourceValuesByLocale => localizedResourceValuesByLocale.Value;
 
     public static IReadOnlyList<string> FormatterLocales => formatterLocales.Value;
 
@@ -70,21 +35,7 @@ static class LocaleCoverageData
     public static IReadOnlyList<string> TimeOnlyToClockNotationLocales => timeOnlyToClockNotationLocales.Value;
 #endif
 
-    public static IReadOnlyList<string> HeadingKeys =>
-        HeadingExtensions.Headings
-            .Concat(HeadingExtensions.HeadingsShort)
-            .ToArray();
-
-    public static IReadOnlyList<string> LocalesWithCompleteHeadingResources =>
-        LocalizedResourceKeysByLocale
-            .Where(static pair => HeadingKeys.All(key => pair.Value.Contains(key, StringComparer.Ordinal)))
-            .Select(static pair => pair.Key)
-            .OrderBy(static locale => locale, StringComparer.Ordinal)
-            .ToArray();
-
     public static TheoryData<string> FormatterLocaleTheoryData => CreateLocaleTheoryData(FormatterLocales);
-
-    public static TheoryData<string> LocalizedResourceLocaleTheoryData => CreateLocaleTheoryData(LocalizedResourceKeysByLocale.Keys);
 
     public static TheoryData<string> CollectionFormatterLocaleTheoryData => CreateLocaleTheoryData(CollectionFormatterLocales);
 
@@ -212,50 +163,7 @@ static class LocaleCoverageData
             { "zu-ZA", "one" }
         };
 
-    public static string GetLocaleFromResourceFilePath(string resourceFilePath)
-    {
-        var fileName = Path.GetFileNameWithoutExtension(resourceFilePath);
-        const string prefix = "Resources.";
-        return fileName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
-            ? fileName[prefix.Length..]
-            : string.Empty;
-    }
-
-    public static IReadOnlyList<string> ReadResourceKeys(string resourceFilePath) =>
-        ReadResourceEntries(resourceFilePath)
-            .Keys
-            .OrderBy(static name => name, StringComparer.Ordinal)
-            .ToArray();
-
-    public static IReadOnlyDictionary<string, string> ReadResourceEntries(string resourceFilePath) =>
-        XDocument.Load(resourceFilePath)
-            .Root!
-            .Elements("data")
-            .Select(static element => new
-            {
-                Name = (string?)element.Attribute("name"),
-                Value = (string?)element.Element("value") ?? string.Empty
-            })
-            .Where(static element => !string.IsNullOrWhiteSpace(element.Name))
-            .ToDictionary(static element => element.Name!, static element => element.Value, StringComparer.Ordinal);
-
     public static CultureSwap UseCulture(string cultureName) => new(new(cultureName));
-
-    static string FindRepositoryRoot()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null)
-        {
-            if (File.Exists(Path.Combine(directory.FullName, "src", "Humanizer", "Humanizer.csproj")))
-            {
-                return directory.FullName;
-            }
-
-            directory = directory.Parent;
-        }
-
-        throw new Xunit.Sdk.XunitException("Could not locate the repository root.");
-    }
 
     static TheoryData<string> CreateLocaleTheoryData(IEnumerable<string> locales)
     {
