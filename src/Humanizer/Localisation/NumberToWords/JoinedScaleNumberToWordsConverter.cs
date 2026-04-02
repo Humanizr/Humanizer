@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Humanizer;
 
 /// <summary>
@@ -240,7 +238,6 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public FrozenSet<int> CompoundOrdinalExcludedValues { get; } = compoundOrdinalExcludedValues ?? FrozenSet<int>.Empty;
     /// <summary>Gets a value indicating whether the profile can represent <see cref="long.MinValue"/>.</summary>
     public bool AllowLongMinValue { get; } = maximumValue == long.MaxValue;
-
 }
 
 /// <summary>

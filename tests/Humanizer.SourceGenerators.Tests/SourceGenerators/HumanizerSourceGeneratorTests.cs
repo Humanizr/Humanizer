@@ -74,6 +74,7 @@ public class HumanizerSourceGeneratorTests
 
         Assert.Contains("new ConjunctionalScaleNumberToWordsConverter(", source);
         Assert.Contains("new JoinedScaleNumberToWordsConverter(", source);
+        Assert.DoesNotContain("JoinedScaleSeparatorMode", source);
         Assert.Contains("new AgglutinativeOrdinalScaleNumberToWordsConverter(", source);
         Assert.Contains("new ContextualDecimalNumberToWordsConverter(", source);
         Assert.Contains("new LinkingScaleNumberToWordsConverter(", source);
