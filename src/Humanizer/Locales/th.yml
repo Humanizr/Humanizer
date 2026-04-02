@@ -16,7 +16,6 @@ numberToWords:
   joinWord: ''
   scaleCountJoinWord: ''
   underHundredJoinWord: ''
-  defaultOrdinalSuffix: ''
   matchingOrdinalSuffix: null
   ordinalSuffixMatchCharacters: null
   unitsMap:

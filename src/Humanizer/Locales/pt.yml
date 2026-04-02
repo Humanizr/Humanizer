@@ -14,8 +14,6 @@ numberToWords:
     millionSingularWord: 'milhão'
     millionPluralWord: 'milhões'
     billionStrategy: 'thousand-millions'
-    billionSingularWord: ''
-    billionPluralWord: ''
     unitsMap:
       - 'zero'
       - 'um'
@@ -63,8 +61,7 @@ numberToWords:
     billionStrategy: 'thousandth-millionth'
     thousandWord: 'milésimo'
     millionWord: 'milionésimo'
-    billionWord: ''
-    millionSeparator: ' '
+    millionJoinMode: 'spaced'
     unitsMap:
       - 'zero'
       - 'primeiro'

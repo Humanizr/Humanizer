@@ -314,18 +314,18 @@ readonly record struct EastSlavicScale(
 /// <summary>
 /// Resolves the gender-specific ending for the terminal ordinal segment.
 /// </summary>
-readonly record struct EastSlavicGenderEnding(string Default, FrozenDictionary<int, string> Overrides)
+readonly record struct EastSlavicGenderEnding(string Default, FrozenDictionary<int, string> ExactEndings)
 {
     /// <summary>
     /// Resolves the terminal ordinal ending for the supplied value.
     /// </summary>
     /// <param name="terminalValue">The terminal value whose ending should be selected.</param>
-    /// <returns>The override ending when one exists; otherwise the default ending.</returns>
+    /// <returns>The exact ending when one exists; otherwise the default ending.</returns>
     /// <remarks>
-    /// Some terminal values override the default gender ending, for example exact tens, hundreds,
+    /// Some terminal values replace the default gender ending, for example exact tens, hundreds,
     /// or scale ordinals that do not use the normal masculine, feminine, or neuter suffix. Keeping
-    /// those overrides in generated data avoids locale-specific branching in the converter.
+    /// those exact endings in generated data avoids locale-specific branching in the converter.
     /// </remarks>
     public string Resolve(int terminalValue) =>
-        Overrides.TryGetValue(terminalValue, out var ending) ? ending : Default;
+        ExactEndings.TryGetValue(terminalValue, out var ending) ? ending : Default;
 }

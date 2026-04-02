@@ -51,11 +51,7 @@ numberToWords:
     9: 'negen'
   oneHundredWord: 'honderd'
   hundredWord: 'honderd'
-  hundredJoiner: ''
-  hundredRemainderSeparator: ''
-  scaleTailPrefix: ''
   scaleTailPrefixMode: 'none'
-  hundredTailPrefix: ''
   hundredTailPrefixMode: 'none'
   unitTensJoiner: 'en'
   unitTensAlternateJoinerUnitEnding: 'e'
@@ -95,7 +91,6 @@ numberToWords:
       value: 1000
       oneForm: 'duizend'
       manyForm: 'duizend'
-      countJoiner: ''
       remainderSeparator: ' '
   ordinalMode: 'suffix'
   ordinalExceptions:
@@ -155,30 +150,14 @@ wordsToNumber:
     acht: 8
     negen: 9
   tensTokens:
-    -
-      word: 'negentig'
-      value: 90
-    -
-      word: 'tachtig'
-      value: 80
-    -
-      word: 'zeventig'
-      value: 70
-    -
-      word: 'zestig'
-      value: 60
-    -
-      word: 'vijftig'
-      value: 50
-    -
-      word: 'veertig'
-      value: 40
-    -
-      word: 'dertig'
-      value: 30
-    -
-      word: 'twintig'
-      value: 20
+    negentig: 90
+    tachtig: 80
+    zeventig: 70
+    zestig: 60
+    vijftig: 50
+    veertig: 40
+    dertig: 30
+    twintig: 20
   tensLinker: 'en'
   scaleTokens:
     - 'miljard'

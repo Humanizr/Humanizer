@@ -29,13 +29,13 @@ class ContextualDecimalNumberToWordsConverter(ContextualDecimalNumberToWordsProf
     public override string ConvertToOrdinal(int number) =>
         profile.OrdinalPrefix + ConvertOrdinalBody(number);
 
-    string ConvertCardinal(long number, bool hasTens = false, bool hasHigherGroup = false, bool usePostTensUnitOverrides = false)
+    string ConvertCardinal(long number, bool hasTens = false, bool hasHigherGroup = false, bool usePostTensUnitExceptions = false)
     {
         if (number < 0)
         {
             // Preserve the sign separately so the positive path can stay focused on the locale's
             // recursive decimal syntax.
-            return profile.MinusWord + ConvertCardinal(-number, hasTens, hasHigherGroup, usePostTensUnitOverrides);
+            return profile.MinusWord + ConvertCardinal(-number, hasTens, hasHigherGroup, usePostTensUnitExceptions);
         }
 
         foreach (var scale in profile.Scales)
@@ -54,24 +54,24 @@ class ContextualDecimalNumberToWordsConverter(ContextualDecimalNumberToWordsProf
         {
             // Tens are rendered before the unit; some locales need a different unit form after the
             // tens word, so the recursive call carries that state forward.
-            return $"{profile.DigitWords[(int)(number / 10)]} {profile.TensWord} {ConvertCardinal(number % 10, hasTens: true, usePostTensUnitOverrides: true)}".TrimEnd();
+            return $"{profile.DigitWords[(int)(number / 10)]} {profile.TensWord} {ConvertCardinal(number % 10, hasTens: true, usePostTensUnitExceptions: true)}".TrimEnd();
         }
 
         if (number >= 10)
         {
             // Teen rendering is its own branch because some locales replace the unit with a teen
             // override while others keep the ten word plus a regular unit.
-            if (profile.TeenUnitOverrides.TryGetValue((int)(number % 10), out var teenOverride))
+            if (profile.TeenUnitExceptions.TryGetValue((int)(number % 10), out var teenExceptionWord))
             {
-                return $"{profile.TenWord} {teenOverride}";
+                return $"{profile.TenWord} {teenExceptionWord}";
             }
 
             return number == 10
                 ? profile.TenWord
-                : $"{profile.TenWord} {ConvertCardinal(number % 10, hasTens: true, usePostTensUnitOverrides: false)}".TrimEnd();
+                : $"{profile.TenWord} {ConvertCardinal(number % 10, hasTens: true, usePostTensUnitExceptions: false)}".TrimEnd();
         }
 
-        if (hasTens && usePostTensUnitOverrides && profile.PostTensUnitOverrides.TryGetValue((int)number, out var postTensUnit))
+        if (hasTens && usePostTensUnitExceptions && profile.PostTensUnitExceptions.TryGetValue((int)number, out var postTensUnit))
         {
             // Post-tens overrides only apply after we already emitted a tens word; that keeps the
             // ordinary unit table available for the base recursive call.
@@ -90,7 +90,7 @@ class ContextualDecimalNumberToWordsConverter(ContextualDecimalNumberToWordsProf
     string ConvertOrdinalBody(int number)
     {
         // Ordinals are mostly the cardinal form plus a thin exact-value override table.
-        if (profile.OrdinalUnitOverrides.TryGetValue(number, out var ordinalUnit))
+        if (profile.ExactOrdinals.TryGetValue(number, out var ordinalUnit))
         {
             return ordinalUnit;
         }
@@ -111,9 +111,9 @@ sealed class ContextualDecimalNumberToWordsProfile(
     string zeroTensWord,
     string[] digitWords,
     ContextualDecimalScale[] scales,
-    FrozenDictionary<int, string> teenUnitOverrides,
-    FrozenDictionary<int, string> postTensUnitOverrides,
-    FrozenDictionary<int, string> ordinalUnitOverrides)
+    FrozenDictionary<int, string> teenUnitExceptions,
+    FrozenDictionary<int, string> postTensUnitExceptions,
+    FrozenDictionary<int, string> exactOrdinals)
 {
     /// <summary>
     /// Gets the cardinal zero word.
@@ -148,17 +148,17 @@ sealed class ContextualDecimalNumberToWordsProfile(
     /// </summary>
     public ContextualDecimalScale[] Scales { get; } = scales;
     /// <summary>
-    /// Gets teen-specific unit overrides.
+    /// Gets teen-specific unit exceptions.
     /// </summary>
-    public FrozenDictionary<int, string> TeenUnitOverrides { get; } = teenUnitOverrides;
+    public FrozenDictionary<int, string> TeenUnitExceptions { get; } = teenUnitExceptions;
     /// <summary>
-    /// Gets unit overrides that apply immediately after a tens word.
+    /// Gets unit exceptions that apply immediately after a tens word.
     /// </summary>
-    public FrozenDictionary<int, string> PostTensUnitOverrides { get; } = postTensUnitOverrides;
+    public FrozenDictionary<int, string> PostTensUnitExceptions { get; } = postTensUnitExceptions;
     /// <summary>
-    /// Gets ordinal overrides for exact unit values.
+    /// Gets exact ordinal words for irregular unit values.
     /// </summary>
-    public FrozenDictionary<int, string> OrdinalUnitOverrides { get; } = ordinalUnitOverrides;
+    public FrozenDictionary<int, string> ExactOrdinals { get; } = exactOrdinals;
 }
 
 /// <summary>

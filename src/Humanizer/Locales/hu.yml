@@ -64,11 +64,11 @@ numberToWords:
     8: 'nyolcszáz'
     9: 'kilencszáz'
   ordinalUnitsExceptions:
-    '1': 'egyedik'
-    '2': 'kettedik'
+    1: 'egyedik'
+    2: 'kettedik'
   wholeTensExceptions:
-    '10': 'tíz'
-    '20': 'húsz'
+    10: 'tíz'
+    20: 'húsz'
   scales:
     -
       divisor: 1000000000000000000
@@ -95,18 +95,18 @@ numberToWords:
     cardinal: 'ezer'
     ordinal: 'ezredik'
   tupleMap:
-    '1': 'szimpla'
-    '2': 'dupla'
-    '3': 'tripla'
-    '4': 'kvadrupla'
-    '5': 'pentapla'
-    '6': 'hexapla'
-    '7': 'heptapla'
-    '8': 'octapla'
-    '9': 'nonapla'
-    '10': 'dekapla'
-    '100': 'hektapla'
-    '1000': 'kiliapla'
+    1: 'szimpla'
+    2: 'dupla'
+    3: 'tripla'
+    4: 'kvadrupla'
+    5: 'pentapla'
+    6: 'hexapla'
+    7: 'heptapla'
+    8: 'octapla'
+    9: 'nonapla'
+    10: 'dekapla'
+    100: 'hektapla'
+    1000: 'kiliapla'
 ordinalizer:
   engine: 'suffix'
   masculineSuffix: '.'
@@ -146,25 +146,13 @@ wordsToNumber:
     nyolcvan: 80
     kilencven: 90
   scales:
-    -
-      token: 'milliard'
-      value: 1000000000
-    -
-      token: 'millio'
-      value: 1000000
-    -
-      token: 'ezer'
-      value: 1000
-    -
-      token: 'szaz'
-      value: 100
-  prefixRules:
-    -
-      prefix: 'tizen'
-      baseValue: 10
-    -
-      prefix: 'huszon'
-      baseValue: 20
+    milliard: 1000000000
+    millio: 1000000
+    ezer: 1000
+    szaz: 100
+  prefixedTens:
+    tizen: 10
+    huszon: 20
   negativePrefixes:
     - 'minusz '
     - 'minus '

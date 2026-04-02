@@ -151,7 +151,7 @@ public class LocalePhraseNormalizationTests
     }
 
     [Fact]
-    public void NamedTemplateObjectsCanPreserveExactOverrideNames()
+    public void NamedTemplateObjectsCanPreserveExactTemplateNames()
     {
         var catalog = HumanizerSourceGenerator.LocalePhraseNormalization.ParseLocalePhraseCatalogForTests(
             "zz",
@@ -312,6 +312,44 @@ phrases:
         Assert.Equal("byte", bytePhrase.Forms!.Singular);
         Assert.Equal("bytes", bytePhrase.Forms.Default);
         Assert.Equal("B", bytePhrase.Symbol);
+    }
+
+    [Fact]
+    public void LocaleCatalogInputAllowsExplicitNullToClearInheritedOptionalPhraseLeaves()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+phrases:
+  dateHumanize:
+    past:
+      day:
+        multiple:
+          beforeCount: 'há'
+          forms:
+            singular: 'dia'
+            default: 'dias'
+"""),
+            ("zz-child", """
+inherits: 'zz'
+
+phrases:
+  dateHumanize:
+    past:
+      day:
+        multiple:
+          beforeCount: null
+          afterCount: 'atrás'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var locale = catalog.Locales.Single(static locale => locale.LocaleCode == "zz-child");
+        var dayPhrase = locale.Phrases!.DateHumanize.Past["day"].Multiple!;
+
+        Assert.Null(dayPhrase.BeforeCountText);
+        Assert.Equal("atrás", dayPhrase.AfterCountText);
+        Assert.Equal("dia", dayPhrase.Forms!.Singular);
+        Assert.Equal("dias", dayPhrase.Forms.Default);
     }
 
     [Fact]

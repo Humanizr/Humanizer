@@ -78,8 +78,8 @@ numberToWords:
     e: 'li'
     a: 'lı'
   namedTuples:
-    '1': 'tek'
-    '2': 'çift'
+    1: 'tek'
+    2: 'çift'
 ordinalizer:
   engine: 'suffix'
   masculineSuffix: '.'

@@ -171,36 +171,16 @@ wordsToNumber:
     osem: 8
     devet: 9
   tensTokens:
-    -
-      word: 'devetdeset'
-      value: 90
-    -
-      word: 'osemdeset'
-      value: 80
-    -
-      word: 'sedemdeset'
-      value: 70
-    -
-      word: 'šestdeset'
-      value: 60
-    -
-      word: 'sestdeset'
-      value: 60
-    -
-      word: 'petdeset'
-      value: 50
-    -
-      word: 'štirideset'
-      value: 40
-    -
-      word: 'stirideset'
-      value: 40
-    -
-      word: 'trideset'
-      value: 30
-    -
-      word: 'dvajset'
-      value: 20
+    devetdeset: 90
+    osemdeset: 80
+    sedemdeset: 70
+    'šestdeset': 60
+    sestdeset: 60
+    petdeset: 50
+    'štirideset': 40
+    stirideset: 40
+    trideset: 30
+    dvajset: 20
   tensLinker: 'in'
   scaleTokens:
     - 'milijardi'

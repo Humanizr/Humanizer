@@ -54,7 +54,6 @@ numberToWords:
   hundredRemainderSeparator: ' og '
   scaleTailPrefix: 'og '
   scaleTailPrefixMode: 'sub-hundred'
-  hundredTailPrefix: ''
   hundredTailPrefixMode: 'none'
   unitTensJoiner: 'og'
   scales:
@@ -130,30 +129,14 @@ wordsToNumber:
     otte: 8
     ni: 9
   tensTokens:
-    -
-      word: 'halvfems'
-      value: 90
-    -
-      word: 'firs'
-      value: 80
-    -
-      word: 'halvfjerds'
-      value: 70
-    -
-      word: 'tres'
-      value: 60
-    -
-      word: 'halvtreds'
-      value: 50
-    -
-      word: 'fyrre'
-      value: 40
-    -
-      word: 'tredive'
-      value: 30
-    -
-      word: 'tyve'
-      value: 20
+    halvfems: 90
+    firs: 80
+    halvfjerds: 70
+    tres: 60
+    halvtreds: 50
+    fyrre: 40
+    tredive: 30
+    tyve: 20
   tensLinker: 'og'
   scaleTokens:
     - 'milliarder'

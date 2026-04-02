@@ -61,16 +61,16 @@ numberToWords:
     - 'sedemsto'
     - 'osemsto'
     - 'deväťsto'
-  unitsMasculineOverrides:
+  unitsMasculineForms:
     - 'jeden'
     - 'dva'
-  unitsFeminineOverrides:
+  unitsFeminineForms:
     - 'jedna'
     - 'dve'
-  unitsNeuterOverrides:
+  unitsNeuterForms:
     - 'jedno'
     - 'dva'
-  unitsInvariantOverrides:
+  unitsInvariantForms:
     - 'jedna'
     - 'dva'
   thousands:

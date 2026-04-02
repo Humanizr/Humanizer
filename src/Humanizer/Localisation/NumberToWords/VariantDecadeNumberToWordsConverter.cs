@@ -209,7 +209,7 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
         {
             // 70 is not a generic decade here; the profile chooses whether the locale spells it as
             // 60 + teens, and 71 may still need a dedicated lexical entry.
-            parts.Add(number == 71 && profile.SpecialSeventyOneWord.Length != 0
+            parts.Add(number == 71 && profile.SpecialSeventyOneEnabled
                 ? profile.SpecialSeventyOneWord
                 : $"{profile.TensMap[6]}-{GetUnits(number - 60, gender)}");
         }
@@ -296,7 +296,8 @@ sealed class VariantDecadeNumberToWordsProfile(
     string minusWord,
     VariantDecadeSeventyStrategy seventyStrategy,
     VariantDecadeNinetyStrategy ninetyStrategy,
-    string specialSeventyOneWord,
+    bool specialSeventyOneEnabled,
+    string? specialSeventyOneWord,
     bool pluralizeExactEighty,
     FrozenSet<int> tensUsingEtWhenUnitIsOne,
     string[] tensMap)
@@ -307,8 +308,10 @@ sealed class VariantDecadeNumberToWordsProfile(
     public VariantDecadeSeventyStrategy SeventyStrategy { get; } = seventyStrategy;
     /// <summary>Gets the strategy used for the nineties.</summary>
     public VariantDecadeNinetyStrategy NinetyStrategy { get; } = ninetyStrategy;
+    /// <summary>Gets a value indicating whether the locale uses a dedicated spelling for 71.</summary>
+    public bool SpecialSeventyOneEnabled { get; } = specialSeventyOneEnabled;
     /// <summary>Gets the optional dedicated spelling for 71 when the locale needs one.</summary>
-    public string SpecialSeventyOneWord { get; } = specialSeventyOneWord;
+    public string SpecialSeventyOneWord { get; } = specialSeventyOneWord ?? throw new InvalidOperationException("A dedicated 71 spelling is required when specialSeventyOneEnabled is true.");
     /// <summary>Gets a value indicating whether exact 80 takes a plural suffix.</summary>
     public bool PluralizeExactEighty { get; } = pluralizeExactEighty;
     /// <summary>Gets the set of tens indices that use an "et un" style joiner when the unit is one.</summary>

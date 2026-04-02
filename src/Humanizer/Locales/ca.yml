@@ -189,19 +189,19 @@ ordinalizer:
   masculine:
     defaultSuffix: 'è'
     lastDigitSuffixes:
-      '1': 'r'
-      '2': 'n'
-      '3': 'r'
-      '4': 't'
+      1: 'r'
+      2: 'n'
+      3: 'r'
+      4: 't'
   feminine:
     defaultSuffix: 'a'
   neuter:
     defaultSuffix: 'è'
     lastDigitSuffixes:
-      '1': 'r'
-      '2': 'n'
-      '3': 'r'
-      '4': 't'
+      1: 'r'
+      2: 'n'
+      3: 'r'
+      4: 't'
 dateToOrdinalWords:
   pattern: '{day} MMMM ''de'' yyyy'
   dayMode: 'Numeric'

@@ -140,8 +140,8 @@ public sealed partial class HumanizerSourceGenerator
 
             return "new FormatterProfile(" +
                    CreateFormatterNumberDetectorExpression(phraseDetector) + ", " +
-                   CreateFormatterDateFormOverrideArrayExpression(profile.Root, "resourceKeyOverrides") + ", " +
-                   CreateFormatterTimeSpanFormOverrideArrayExpression(profile.Root, "resourceKeyOverrides") + ", " +
+                   CreateFormatterDateFormRuleArrayExpression(profile.Root, "exactDateForms") + ", " +
+                   CreateFormatterTimeSpanFormRuleArrayExpression(profile.Root, "exactTimeSpanForms") + ", " +
                    CreateFormatterNumberDetectorExpression(dataUnitDetector) + ", " +
                    CreateFormatterNumberFormExpression(dataUnitNonIntegralForm) + ", " +
                    CreateFormatterFallbackTransformExpression(fallbackTransform) + ", " +
@@ -166,227 +166,137 @@ public sealed partial class HumanizerSourceGenerator
             return HumanizerSourceGenerator.CreateTimeUnitGenderMapExpression(profile.Root, "timeUnitGenders");
         }
 
-        static string CreateFormatterDateFormOverrideArrayExpression(JsonElement element, string propertyName)
+        static string CreateFormatterDateFormRuleArrayExpression(JsonElement element, string propertyName)
         {
             if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Array)
             {
-                return "Array.Empty<FormatterDateFormOverride>()";
+                return "Array.Empty<FormatterDateFormRule>()";
             }
 
             var expressions = new List<string>();
             foreach (var item in property.EnumerateArray())
             {
-                if (!TryGetOverrideFormExpression(GetRequiredString(item, "suffix"), out var formExpression))
-                {
-                    continue;
-                }
-
-                var units = TimeUnitMask.None;
-                var tenses = TenseMask.None;
-                AccumulateDateOverrideMasks(item, ref units, ref tenses);
+                var units = ReadTimeUnitMask(item, "units", TimeUnitMask.All);
+                var tenses = ReadTenseMask(item, "tenses", TenseMask.Both);
                 if (units == TimeUnitMask.None || tenses == TenseMask.None)
                 {
                     continue;
                 }
 
                 expressions.Add(
-                    "new FormatterDateFormOverride(" +
+                    "new FormatterDateFormRule(" +
                     checked((int)GetRequiredInt64(item, "number")).ToString(CultureInfo.InvariantCulture) + ", " +
                     CreateTimeUnitMaskExpression(units) + ", " +
                     CreateTenseMaskExpression(tenses) + ", " +
-                    formExpression +
+                    CreateFormatterNumberFormExpression(GetRequiredString(item, "form")) +
                     ")");
             }
 
-            return CreateOverrideArrayExpression("FormatterDateFormOverride", expressions);
+            return CreateRuleArrayExpression("FormatterDateFormRule", expressions);
         }
 
-        static string CreateFormatterTimeSpanFormOverrideArrayExpression(JsonElement element, string propertyName)
+        static string CreateFormatterTimeSpanFormRuleArrayExpression(JsonElement element, string propertyName)
         {
             if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Array)
             {
-                return "Array.Empty<FormatterTimeSpanFormOverride>()";
+                return "Array.Empty<FormatterTimeSpanFormRule>()";
             }
 
             var expressions = new List<string>();
             foreach (var item in property.EnumerateArray())
             {
-                if (!TryGetOverrideFormExpression(GetRequiredString(item, "suffix"), out var formExpression))
-                {
-                    continue;
-                }
-
-                var units = TimeUnitMask.None;
-                AccumulateTimeSpanOverrideMasks(item, ref units);
+                var units = ReadTimeUnitMask(item, "units", TimeUnitMask.All);
                 if (units == TimeUnitMask.None)
                 {
                     continue;
                 }
 
                 expressions.Add(
-                    "new FormatterTimeSpanFormOverride(" +
+                    "new FormatterTimeSpanFormRule(" +
                     checked((int)GetRequiredInt64(item, "number")).ToString(CultureInfo.InvariantCulture) + ", " +
                     CreateTimeUnitMaskExpression(units) + ", " +
-                    formExpression +
+                    CreateFormatterNumberFormExpression(GetRequiredString(item, "form")) +
                     ")");
             }
 
-            return CreateOverrideArrayExpression("FormatterTimeSpanFormOverride", expressions);
+            return CreateRuleArrayExpression("FormatterTimeSpanFormRule", expressions);
         }
 
-        static string CreateOverrideArrayExpression(string elementType, IReadOnlyList<string> expressions) =>
+        static string CreateRuleArrayExpression(string elementType, IReadOnlyList<string> expressions) =>
             expressions.Count == 0
                 ? "Array.Empty<" + elementType + ">()"
                 : "new " + elementType + "[] { " + string.Join(", ", expressions) + " }";
 
-        static bool TryGetOverrideFormExpression(string suffix, out string expression)
+        static TimeUnitMask ReadTimeUnitMask(JsonElement item, string propertyName, TimeUnitMask defaultMask)
         {
-            expression = suffix switch
+            if (!item.TryGetProperty(propertyName, out var property))
             {
-                "_Singular" => "FormatterNumberForm.Singular",
-                "_Dual" => "FormatterNumberForm.Dual",
-                "_Paucal" => "FormatterNumberForm.Paucal",
-                "_Plural" => "FormatterNumberForm.Plural",
-                _ => string.Empty
-            };
+                return defaultMask;
+            }
 
-            return expression.Length != 0;
+            var mask = TimeUnitMask.None;
+            foreach (var value in EnumerateSelectorStrings(property))
+            {
+                mask |= value.ToLowerInvariant() switch
+                {
+                    "all" => TimeUnitMask.All,
+                    "millisecond" or "milliseconds" => TimeUnitMask.Millisecond,
+                    "second" or "seconds" => TimeUnitMask.Second,
+                    "minute" or "minutes" => TimeUnitMask.Minute,
+                    "hour" or "hours" => TimeUnitMask.Hour,
+                    "day" or "days" => TimeUnitMask.Day,
+                    "week" or "weeks" => TimeUnitMask.Week,
+                    "month" or "months" => TimeUnitMask.Month,
+                    "year" or "years" => TimeUnitMask.Year,
+                    _ => TimeUnitMask.None
+                };
+            }
+
+            return mask;
         }
 
-        static void AccumulateDateOverrideMasks(JsonElement item, ref TimeUnitMask units, ref TenseMask tenses)
+        static TenseMask ReadTenseMask(JsonElement item, string propertyName, TenseMask defaultMask)
         {
-            if (item.TryGetProperty("keys", out var keys) && keys.ValueKind == JsonValueKind.Array)
+            if (!item.TryGetProperty(propertyName, out var property))
             {
-                foreach (var key in keys.EnumerateArray())
-                {
-                    if (key.ValueKind == JsonValueKind.String)
-                    {
-                        AccumulateDateOverrideMask(key.GetString()!, ref units, ref tenses);
-                    }
-                }
+                return defaultMask;
             }
 
-            if (item.TryGetProperty("prefixes", out var prefixes) && prefixes.ValueKind == JsonValueKind.Array)
+            var mask = TenseMask.None;
+            foreach (var value in EnumerateSelectorStrings(property))
             {
-                foreach (var prefix in prefixes.EnumerateArray())
+                mask |= value.ToLowerInvariant() switch
                 {
-                    if (prefix.ValueKind == JsonValueKind.String)
-                    {
-                        AccumulateDateOverrideMask(prefix.GetString()!, ref units, ref tenses);
-                    }
-                }
+                    "all" or "both" => TenseMask.Both,
+                    "past" => TenseMask.Past,
+                    "future" => TenseMask.Future,
+                    _ => TenseMask.None
+                };
             }
+
+            return mask;
         }
 
-        static void AccumulateTimeSpanOverrideMasks(JsonElement item, ref TimeUnitMask units)
+        static IEnumerable<string> EnumerateSelectorStrings(JsonElement property)
         {
-            if (item.TryGetProperty("keys", out var keys) && keys.ValueKind == JsonValueKind.Array)
+            if (property.ValueKind == JsonValueKind.String)
             {
-                foreach (var key in keys.EnumerateArray())
+                yield return property.GetString()!;
+                yield break;
+            }
+
+            if (property.ValueKind != JsonValueKind.Array)
+            {
+                yield break;
+            }
+
+            foreach (var item in property.EnumerateArray())
+            {
+                if (item.ValueKind == JsonValueKind.String)
                 {
-                    if (key.ValueKind == JsonValueKind.String)
-                    {
-                        AccumulateTimeSpanOverrideMask(key.GetString()!, ref units);
-                    }
+                    yield return item.GetString()!;
                 }
             }
-
-            if (item.TryGetProperty("prefixes", out var prefixes) && prefixes.ValueKind == JsonValueKind.Array)
-            {
-                foreach (var prefix in prefixes.EnumerateArray())
-                {
-                    if (prefix.ValueKind == JsonValueKind.String)
-                    {
-                        AccumulateTimeSpanOverrideMask(prefix.GetString()!, ref units);
-                    }
-                }
-            }
-        }
-
-        static void AccumulateDateOverrideMask(string value, ref TimeUnitMask units, ref TenseMask tenses)
-        {
-            const string prefix = "DateHumanize_Multiple";
-            if (!value.StartsWith(prefix, StringComparison.Ordinal))
-            {
-                return;
-            }
-
-            var suffix = value.Substring(prefix.Length);
-            if (suffix.Length == 0)
-            {
-                units |= TimeUnitMask.All;
-                tenses |= TenseMask.Both;
-                return;
-            }
-
-            if (suffix.EndsWith("Ago", StringComparison.Ordinal))
-            {
-                var unit = suffix.Substring(0, suffix.Length - "Ago".Length);
-                if (TryParsePluralTimeUnitMask(unit, out var mask))
-                {
-                    units |= mask;
-                    tenses |= TenseMask.Past;
-                }
-
-                return;
-            }
-
-            if (suffix.EndsWith("FromNow", StringComparison.Ordinal))
-            {
-                var unit = suffix.Substring(0, suffix.Length - "FromNow".Length);
-                if (TryParsePluralTimeUnitMask(unit, out var mask))
-                {
-                    units |= mask;
-                    tenses |= TenseMask.Future;
-                }
-
-                return;
-            }
-
-            if (TryParsePluralTimeUnitMask(suffix, out var allTenseMask))
-            {
-                units |= allTenseMask;
-                tenses |= TenseMask.Both;
-            }
-        }
-
-        static void AccumulateTimeSpanOverrideMask(string value, ref TimeUnitMask units)
-        {
-            const string prefix = "TimeSpanHumanize_Multiple";
-            if (!value.StartsWith(prefix, StringComparison.Ordinal))
-            {
-                return;
-            }
-
-            var suffix = value.Substring(prefix.Length);
-            if (suffix.Length == 0)
-            {
-                units |= TimeUnitMask.All;
-                return;
-            }
-
-            if (TryParsePluralTimeUnitMask(suffix, out var mask))
-            {
-                units |= mask;
-            }
-        }
-
-        static bool TryParsePluralTimeUnitMask(string value, out TimeUnitMask mask)
-        {
-            mask = value switch
-            {
-                "Milliseconds" => TimeUnitMask.Millisecond,
-                "Seconds" => TimeUnitMask.Second,
-                "Minutes" => TimeUnitMask.Minute,
-                "Hours" => TimeUnitMask.Hour,
-                "Days" => TimeUnitMask.Day,
-                "Weeks" => TimeUnitMask.Week,
-                "Months" => TimeUnitMask.Month,
-                "Years" => TimeUnitMask.Year,
-                _ => TimeUnitMask.None
-            };
-
-            return mask != TimeUnitMask.None;
         }
 
         static string CreateTimeUnitMaskExpression(TimeUnitMask mask)

@@ -160,9 +160,12 @@ public class HumanizerSourceGeneratorTests
     public void WordsToNumberProfilesUseSharedEnginesForEastAsianAndTokenMaps()
     {
         var source = GetGeneratedSource("WordsToNumberProfileCatalog.g.cs");
+        var luxembourgishLocale = GetLocaleFile("lb.yml").Replace("\r\n", "\n", StringComparison.Ordinal);
 
         Assert.Contains("new EastAsianPositionalWordsToNumberConverter(", source);
         Assert.Contains("new InvertedTensWordsToNumberConverter(", source);
+        Assert.Contains("tensTokens:\n    nonzeg: 90\n    achtzeg: 80\n    siwwenzeg: 70", luxembourgishLocale);
+        Assert.DoesNotContain("\n      word:", luxembourgishLocale);
         Assert.Contains("new SuffixScaleWordsToNumberConverter(new SuffixScaleWordsToNumberProfile(", source);
         Assert.Contains("new PrefixedTensScaleWordsToNumberConverter(new PrefixedTensScaleWordsToNumberProfile(", source);
         Assert.Contains("new LinkingAffixWordsToNumberConverter(new LinkingAffixWordsToNumberProfile(", source);
@@ -197,7 +200,7 @@ public class HumanizerSourceGeneratorTests
     }
 
     [Fact]
-    public void LocalePhraseTablesInlineRepresentativePhrasesAndExactOverrides()
+    public void LocalePhraseTablesInlineRepresentativePhrasesAndExactForms()
     {
         var source = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");
 
@@ -342,7 +345,8 @@ wordsToNumber:
         Assert.Contains("Schema(\"variant-decade\"", schemaCatalog);
         Assert.Contains("Member(\"enum\", \"seventyStrategy\", null, \"VariantDecadeSeventyStrategy\"", schemaCatalog);
         Assert.Contains("Member(\"enum\", \"ninetyStrategy\", null, \"VariantDecadeNinetyStrategy\"", schemaCatalog);
-        Assert.Contains("Member(\"string\", \"specialSeventyOneWord\"", schemaCatalog);
+        Assert.Contains("Member(\"bool\", \"specialSeventyOneEnabled\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-string\", \"specialSeventyOneWord\"", schemaCatalog);
         Assert.Contains("Member(\"bool\", \"pluralizeExactEighty\"", schemaCatalog);
         Assert.Contains("Member(\"nullable-int-set\", \"tensUsingEtWhenUnitIsOne\"", schemaCatalog);
         Assert.Contains("Member(\"string-array\", \"tensMap\"", schemaCatalog);
@@ -353,7 +357,7 @@ wordsToNumber:
         Assert.Contains("Member(\"profile-object\", \"ordinal\"", schemaCatalog);
         Assert.Contains("Member(\"string\", \"millionSingularWord\"", schemaCatalog);
         Assert.Contains("Member(\"enum\", \"billionStrategy\", null, \"BillionCardinalStrategy\"", schemaCatalog);
-        Assert.Contains("Member(\"string\", \"millionSeparator\"", schemaCatalog);
+        Assert.Contains("Member(\"enum\", \"millionJoinMode\", null, \"BillionOrdinalMillionJoinMode\"", schemaCatalog);
         Assert.DoesNotContain("PortugueseBillionCardinalStrategy", schemaCatalog);
         Assert.DoesNotContain("PortugueseBillionOrdinalStrategy", schemaCatalog);
 
@@ -506,10 +510,291 @@ grammar:
             .ToString();
 
         Assert.Contains(
-            "new FormatterProfile(FormatterNumberDetectorKind.Russian, Array.Empty<FormatterDateFormOverride>(), Array.Empty<FormatterTimeSpanFormOverride>(), FormatterNumberDetectorKind.Slovenian, FormatterNumberForm.Plural, FormatterDataUnitFallbackTransform.None, FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN",
+            "new FormatterProfile(FormatterNumberDetectorKind.Russian, Array.Empty<FormatterDateFormRule>(), Array.Empty<FormatterTimeSpanFormRule>(), FormatterNumberDetectorKind.Slovenian, FormatterNumberForm.Plural, FormatterDataUnitFallbackTransform.None, FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN",
             source);
         Assert.Contains("[TimeUnit.Day] = GrammaticalGender.Masculine", source);
         Assert.Contains("[TimeUnit.Minute] = GrammaticalGender.Feminine", source);
+    }
+
+    [Fact]
+    public void GeneratedLocaleSchemasUseExactAndSpecialCaseNamesInsteadOfOverrideTerminology()
+    {
+        var schemaCatalog = GetSourceGeneratorFile("Common", "EngineContractCatalog.cs");
+        var profiledFormatter = File.ReadAllText(Path.Combine(
+            FindRepositoryRoot(),
+            "src",
+            "Humanizer",
+            "Localisation",
+            "Formatters",
+            "ProfiledFormatter.cs"));
+        var malteseLocale = GetLocaleFile("mt.yml");
+        var vietnameseLocale = GetLocaleFile("vi.yml");
+        var czechLocale = GetLocaleFile("cs.yml");
+        var slovakLocale = GetLocaleFile("sk.yml");
+        var frenchLocale = GetLocaleFile("fr.yml");
+
+        Assert.Contains("Member(\"nullable-int-string-dictionary\", \"exactOrdinals\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-int-string-dictionary\", \"teenUnitExceptions\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-int-string-dictionary\", \"postTensUnitExceptions\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-int-string-dictionary\", \"exactOrdinals\"", schemaCatalog);
+        Assert.Contains("Member(\"string-array\", \"unitsMasculineForms\"", schemaCatalog);
+        Assert.Contains("Member(\"string-array\", \"unitsFeminineForms\"", schemaCatalog);
+        Assert.Contains("Member(\"string-array\", \"unitsNeuterForms\"", schemaCatalog);
+        Assert.Contains("Member(\"string-array\", \"unitsInvariantForms\"", schemaCatalog);
+        Assert.DoesNotContain("ordinalOverrideMap", schemaCatalog);
+        Assert.DoesNotContain("teenUnitOverrides", schemaCatalog);
+        Assert.DoesNotContain("postTensUnitOverrides", schemaCatalog);
+        Assert.DoesNotContain("ordinalUnitOverrides", schemaCatalog);
+        Assert.DoesNotContain("unitsMasculineOverrides", schemaCatalog);
+        Assert.DoesNotContain("unitsFeminineOverrides", schemaCatalog);
+        Assert.DoesNotContain("unitsNeuterOverrides", schemaCatalog);
+        Assert.DoesNotContain("unitsInvariantOverrides", schemaCatalog);
+
+        Assert.Contains("ExactDateForms", profiledFormatter);
+        Assert.Contains("ExactTimeSpanForms", profiledFormatter);
+        Assert.DoesNotContain("DateFormOverrides", profiledFormatter);
+        Assert.DoesNotContain("TimeSpanFormOverrides", profiledFormatter);
+
+        Assert.Contains("exactOrdinals:", malteseLocale);
+        Assert.Contains("teenUnitExceptions:", vietnameseLocale);
+        Assert.Contains("postTensUnitExceptions:", vietnameseLocale);
+        Assert.Contains("exactOrdinals:", vietnameseLocale);
+        Assert.Contains("unitsMasculineForms:", czechLocale);
+        Assert.Contains("unitsInvariantForms:", slovakLocale);
+        Assert.Contains("exactDateForms:", frenchLocale);
+        Assert.DoesNotContain("ordinalOverrideMap", malteseLocale);
+        Assert.DoesNotContain("teenUnitOverrides", vietnameseLocale);
+        Assert.DoesNotContain("unitsMasculineOverrides", czechLocale);
+        Assert.DoesNotContain("dateFormOverrides", frenchLocale);
+    }
+
+    [Fact]
+    public void FormatterProfilesAcceptExactDateAndTimeSpanFormRules()
+    {
+        const string locale = """
+formatter:
+  engine: 'profiled'
+  resourceKeyDetector: 'singular-plural'
+  exactDateForms:
+    -
+      number: 2
+      form: 'dual'
+      units:
+        - 'day'
+      tenses:
+        - 'past'
+  exactTimeSpanForms:
+    -
+      number: 2
+      form: 'dual'
+      units:
+        - 'week'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-format-rules.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "FormatterProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("new FormatterDateFormRule(2, FormatterTimeUnitMask.Day, FormatterTenseMask.Past, FormatterNumberForm.Dual)", source);
+        Assert.Contains("new FormatterTimeSpanFormRule(2, FormatterTimeUnitMask.Week, FormatterNumberForm.Dual)", source);
+    }
+
+    [Fact]
+    public void NumberToWordsProfilesAcceptExactAndSpecialCaseLexiconNames()
+    {
+        const string dualFormLocale = """
+numberToWords:
+  engine: 'dual-form-scale'
+  conjunction: 'u'
+  minusSuffix: 'minus'
+  feminineOneWord: 'waħda'
+  hundredWord: 'mija'
+  dualHundredsWord: 'mitejn'
+  hundredPrefixWord: 'mitt'
+  exactOrdinals:
+    1: 'first'
+    2: 'second'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+    - 'three'
+    - 'four'
+    - 'five'
+    - 'six'
+    - 'seven'
+    - 'eight'
+    - 'nine'
+    - 'ten'
+    - 'eleven'
+    - 'twelve'
+    - 'thirteen'
+    - 'fourteen'
+    - 'fifteen'
+    - 'sixteen'
+    - 'seventeen'
+    - 'eighteen'
+    - 'nineteen'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  hundredsMap:
+    3: 'three'
+  prefixMap:
+    3: 'three'
+  thousandScale:
+    singular: 'thousand'
+    dual: 'two thousand'
+    plural: 'thousands'
+  millionScale:
+    singular: 'million'
+    dual: 'two million'
+    plural: 'millions'
+  billionScale:
+    singular: 'billion'
+    dual: 'two billion'
+    plural: 'billions'
+""";
+
+        const string contextualLocale = """
+numberToWords:
+  engine: 'contextual-decimal'
+  zeroWord: 'zero'
+  minusWord: 'minus '
+  ordinalPrefix: 'ordinal '
+  tenWord: 'ten'
+  tensWord: 'tens'
+  zeroTensWord: 'zero-tens'
+  digitWords:
+    1: 'one'
+    2: 'two'
+  scales:
+    -
+      value: 100
+      name: 'hundred'
+  teenUnitExceptions:
+    5: 'five-teen'
+  postTensUnitExceptions:
+    1: 'one-after-tens'
+  exactOrdinals:
+    2: 'second'
+""";
+
+        const string westSlavicLocale = """
+numberToWords:
+  engine: 'west-slavic-gendered'
+  useCulture: true
+  minusWord: 'minus'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  hundredsMap:
+    - 'zero'
+    - 'one hundred'
+    - 'two hundred'
+  unitsMasculineForms:
+    - 'one-m'
+    - 'two-m'
+  unitsFeminineForms:
+    - 'one-f'
+    - 'two-f'
+  unitsNeuterForms:
+    - 'one-n'
+    - 'two-n'
+  unitsInvariantForms:
+    - 'one-i'
+    - 'two-i'
+  thousands:
+    singular: 'thousand'
+    paucal: 'thousands'
+    plural: 'thousands-many'
+  millions:
+    singular: 'million'
+    paucal: 'millions'
+    plural: 'millions-many'
+  billions:
+    singular: 'billion'
+    paucal: 'billions'
+    plural: 'billions-many'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-dual.yml", dualFormLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-contextual.yml", contextualLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-west-slavic.yml", westSlavicLocale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "NumberToWordsProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("first", source);
+        Assert.Contains("second", source);
+        Assert.Contains("five-teen", source);
+        Assert.Contains("one-after-tens", source);
+        Assert.Contains("new string[] { \"one-m\", \"two-m\" }", source);
+        Assert.Contains("new string[] { \"one-i\", \"two-i\" }", source);
+    }
+
+    [Fact]
+    public void PrefixedTensScaleProfilesAcceptCompactScaleAndPrefixMappings()
+    {
+        const string locale = """
+wordsToNumber:
+  engine: 'prefixed-tens-scale'
+  cardinalMap:
+    egy: 1
+    ketto: 2
+    harom: 3
+    tiz: 10
+    husz: 20
+    szaz: 100
+    ezer: 1000
+  tensMap:
+    harminc: 30
+    negyven: 40
+  scales:
+    milliard: 1000000000
+    millio: 1000000
+    ezer: 1000
+    szaz: 100
+  prefixedTens:
+    tizen: 10
+    huszon: 20
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-prefixed-tens.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "WordsToNumberProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("new(\"milliard\", 1000000000)", source);
+        Assert.Contains("new(\"millio\", 1000000)", source);
+        Assert.Contains("new(\"ezer\", 1000)", source);
+        Assert.Contains("new(\"szaz\", 100)", source);
+        Assert.Contains("new(\"tizen\", 10)", source);
+        Assert.Contains("new(\"huszon\", 20)", source);
     }
 
     [Fact]
@@ -645,6 +930,308 @@ numberToWords:
         Assert.Contains("new string[] { \"\", \"\", \"twentieth\", \"thirtieth\" }", source);
     }
 
+    [Fact]
+    public void NumberToWordsProfilesAcceptOmittedEmptyStringDefaults()
+    {
+        const string variantLocale = """
+numberToWords:
+  engine: 'variant-decade'
+  minusWord: 'minus'
+  seventyStrategy: 'regular'
+  ninetyStrategy: 'regular'
+  pluralizeExactEighty: false
+  tensUsingEtWhenUnitIsOne:
+    - 2
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+    - 'thirty'
+    - 'forty'
+    - 'fifty'
+    - 'sixty'
+    - 'seventy'
+    - 'eighty'
+    - 'ninety'
+""";
+
+        const string triadLocale = """
+numberToWords:
+  engine: 'triad-scale'
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  feminineOneWord: 'one'
+  leadingOneWord: 'one'
+  tenWord: 'ten'
+  tenOrdinalStem: 'tenth'
+  commonOrdinalStem: 'th'
+  masculineOrdinalSuffix: ''
+  feminineOrdinalSuffix: ''
+  ordinalUnit3RestoredVowel: ''
+  ordinalUnit6RestoredVowel: ''
+  unitsMap:
+    1: 'one'
+    2: 'two'
+    3: 'three'
+    4: 'four'
+    5: 'five'
+    6: 'six'
+    7: 'seven'
+    8: 'eight'
+    9: 'nine'
+  unitsFinalAccent:
+    1: 'one'
+    2: 'two'
+    3: 'three'
+    4: 'four'
+    5: 'five'
+    6: 'six'
+    7: 'seven'
+    8: 'eight'
+    9: 'nine'
+  tensMap:
+    2: 'twenty'
+    3: 'thirty'
+    4: 'forty'
+    5: 'fifty'
+    6: 'sixty'
+    7: 'seventy'
+    8: 'eighty'
+    9: 'ninety'
+  teensMap:
+    - 'ten'
+    - 'eleven'
+    - 'twelve'
+    - 'thirteen'
+    - 'fourteen'
+    - 'fifteen'
+    - 'sixteen'
+    - 'seventeen'
+    - 'eighteen'
+    - 'nineteen'
+  hundredsMap:
+    1: 'one hundred'
+  ordinalUnderTen:
+    1: 'first'
+    2: 'second'
+    3: 'third'
+    4: 'fourth'
+    5: 'fifth'
+    6: 'sixth'
+    7: 'seventh'
+    8: 'eighth'
+    9: 'ninth'
+  scales:
+    -
+      value: 1000
+      singular: 'thousand'
+      plural: 'thousand'
+      countUsesFinalAccent: false
+      appendTrailingSpace: false
+      removeLeadingOneOnExactOrdinal: false
+""";
+
+        const string invertedLocale = """
+numberToWords:
+  engine: 'inverted-tens'
+  minusWord: 'minus'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+    - 'three'
+    - 'four'
+    - 'five'
+    - 'six'
+    - 'seven'
+    - 'eight'
+    - 'nine'
+    - 'ten'
+    - 'eleven'
+    - 'twelve'
+    - 'thirteen'
+    - 'fourteen'
+    - 'fifteen'
+    - 'sixteen'
+    - 'seventeen'
+    - 'eighteen'
+    - 'nineteen'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  hundredsPrefixMap:
+    1: 'one'
+  oneHundredWord: 'one hundred'
+  hundredWord: 'hundred'
+  scaleTailPrefixMode: 'none'
+  hundredTailPrefixMode: 'none'
+  unitTensJoiner: 'and'
+  scales:
+    -
+      value: 1000
+      oneForm: 'thousand'
+      manyForm: 'thousand'
+      remainderSeparator: ' '
+  ordinalMode: 'numeric-string'
+  removeLeadingOneInOrdinal: false
+""";
+
+        const string scaleLocale = """
+numberToWords:
+  engine: 'scale-strategy'
+  cardinalStrategy: 'swedish'
+  ordinalStrategy: 'swedish'
+  maximumValue: 2147483647
+  defaultGender: 'neuter'
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  oneDefault: 'one'
+  oneMasculine: 'one'
+  oneFeminine: 'one'
+  oneNeuter: 'one'
+  tensOrdinalSuffix: 'th'
+  shortOrdinalUpperBoundExclusive: 0
+  hundredWord: 'hundred'
+  hundredCompositeSingularWord: 'hundred'
+  thousandWord: 'thousand'
+  thousandSingularWord: 'one thousand'
+  thousandCompositeSingularWord: 'one thousand'
+  unitsMap:
+    - 'zero'
+    - 'one'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  hundredUnitMap: []
+  scales:
+    -
+      value: 1000
+      name: 'thousand'
+      plural: 'thousand'
+      ordinalSuffix: 'th'
+      displayOneUnit: true
+      gender: 'neuter'
+  ordinalExceptions:
+    '0': 'zeroth'
+""";
+
+        const string billionLocale = """
+numberToWords:
+  engine: 'billion-strategy'
+  minusWord: 'minus'
+  andWord: 'and'
+  cardinal:
+    hundredExactWord: 'one hundred'
+    thousandWord: 'thousand'
+    millionSingularWord: 'million'
+    millionPluralWord: 'millions'
+    billionStrategy: 'thousand-millions'
+    unitsMap:
+      - 'zero'
+      - 'one'
+    tensMap:
+      - 'zero'
+      - 'ten'
+    hundredsMap:
+      - 'zero'
+      - 'one hundred'
+  ordinal:
+    billionStrategy: 'thousandth-millionth'
+    thousandWord: 'thousandth'
+    millionWord: 'millionth'
+    unitsMap:
+      - 'zero'
+      - 'first'
+    tensMap:
+      - 'zero'
+      - 'tenth'
+    hundredsMap:
+      - 'zero'
+      - 'one hundredth'
+""";
+
+        const string joinedLocale = """
+numberToWords:
+  engine: 'joined-scale'
+  maximumValue: 1000
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  hundredsMap:
+    - 'zero'
+    - 'one hundred'
+  scales:
+    -
+      value: 1000
+      name: 'thousand'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-variant-defaults.yml", variantLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-triad-defaults.yml", triadLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-inverted-defaults.yml", invertedLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-scale-defaults.yml", scaleLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-billion-defaults.yml", billionLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-joined-defaults.yml", joinedLocale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var numberSource = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "NumberToWordsProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("case \"zz-variant-defaults\": return", numberSource);
+        Assert.Contains("case \"zz-triad-defaults\": return", numberSource);
+        Assert.Contains("case \"zz-inverted-defaults\": return", numberSource);
+        Assert.Contains("case \"zz-scale-defaults\": return", numberSource);
+        Assert.Contains("case \"zz-billion-defaults\": return", numberSource);
+        Assert.Contains("case \"zz-joined-defaults\": return", numberSource);
+    }
+
+    [Fact]
+    public void WordsToNumberProfilesAcceptOmittedEmptyIgnoredToken()
+    {
+        const string locale = """
+wordsToNumber:
+  engine: 'compound-scale'
+  cardinalMap:
+    one: 1
+    hundred: 100
+    thousand: 1000
+  tens:
+    - 'twenty'
+  largeScales:
+    - 'thousand'
+  negativePrefixes:
+    - 'minus '
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-compound-defaults.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = runResult.Results[0].GeneratedSources
+            .Single(static generatedSource => generatedSource.HintName == "WordsToNumberProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("case \"zz-compound-defaults\": return", source);
+        Assert.Contains("new CompoundScaleWordsToNumberProfile(", source);
+        Assert.Contains(", \"\", ", source);
+    }
+
     static string GetGeneratedSource(string hintName) =>
         generatedSources.Value.TryGetValue(hintName, out var source)
             ? source
@@ -766,6 +1353,14 @@ numberToWords:
     static string GetSourceGeneratorFile(params string[] relativeSegments)
     {
         var pathSegments = new[] { FindRepositoryRoot(), "src", "Humanizer.SourceGenerators" }
+            .Concat(relativeSegments)
+            .ToArray();
+        return File.ReadAllText(Path.Combine(pathSegments));
+    }
+
+    static string GetRuntimeFile(params string[] relativeSegments)
+    {
+        var pathSegments = new[] { FindRepositoryRoot(), "src", "Humanizer" }
             .Concat(relativeSegments)
             .ToArray();
         return File.ReadAllText(Path.Combine(pathSegments));

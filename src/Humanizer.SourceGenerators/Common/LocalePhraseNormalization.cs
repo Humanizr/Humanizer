@@ -418,6 +418,11 @@ public sealed partial class HumanizerSourceGenerator
                 throw new InvalidOperationException($"Phrase '{path}' must be a scalar string.");
             }
 
+            if (!scalar.IsQuoted && string.Equals(scalar.Value, "null", StringComparison.Ordinal))
+            {
+                return null;
+            }
+
             return ValidateLiteralText(path, scalar.Value, allowedPlaceholders);
         }
 

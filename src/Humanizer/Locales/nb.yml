@@ -35,7 +35,6 @@ numberToWords:
   thousandSingularWord: 'tusen'
   thousandCompositeSingularWord: 'ettusen'
   unitsMap:
-    0: 'null'
     1: 'en'
     2: 'to'
     3: 'tre'
@@ -56,7 +55,6 @@ numberToWords:
     18: 'atten'
     19: 'nitten'
   tensMap:
-    0: 'null'
     1: 'ti'
     2: 'tjue'
     3: 'tretti'
@@ -85,15 +83,15 @@ numberToWords:
       displayOneUnit: true
       gender: 'masculine'
   ordinalExceptions:
-    '0': 'nullte'
-    '1': 'første'
-    '2': 'andre'
-    '3': 'tredje'
-    '4': 'fjerde'
-    '5': 'femte'
-    '6': 'sjette'
-    '11': 'ellevte'
-    '12': 'tolvte'
+    0: 'nullte'
+    1: 'første'
+    2: 'andre'
+    3: 'tredje'
+    4: 'fjerde'
+    5: 'femte'
+    6: 'sjette'
+    11: 'ellevte'
+    12: 'tolvte'
 ordinalizer:
   engine: 'suffix'
   masculineSuffix: '.'

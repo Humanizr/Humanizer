@@ -7,7 +7,6 @@ numberToWords:
   minusWord: 'moins'
   seventyStrategy: 'regular'
   ninetyStrategy: 'regular'
-  specialSeventyOneWord: ''
   pluralizeExactEighty: false
   tensUsingEtWhenUnitIsOne:
     - 2

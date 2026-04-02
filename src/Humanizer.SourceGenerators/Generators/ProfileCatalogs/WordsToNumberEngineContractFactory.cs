@@ -120,7 +120,7 @@ public sealed partial class HumanizerSourceGenerator
             CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
             CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "tensMap")) + ", " +
             CreatePrefixedScaleWordArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
-            CreatePrefixedTensRuleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "prefixRules")) + ", " +
+            CreatePrefixedTensRuleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "prefixedTens")) + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
             "))";
 

@@ -14,7 +14,6 @@ numberToWords:
   minusWord: 'մինուս'
   negativeJoinWord: ' '
   joinWord: ' '
-  scaleCountJoinWord: ' '
   underHundredJoinWord: ''
   omitOneWhenSingularAlways: true
   defaultOrdinalSuffix: 'երորդ'
@@ -78,17 +77,17 @@ numberToWords:
       name: 'հարյուր'
       omitOneWhenSingular: true
   ordinalExceptions:
-    '0': 'զրոյական'
-    '1': 'առաջին'
-    '2': 'երկրորդ'
-    '3': 'երրորդ'
-    '4': 'չորրորդ'
+    0: 'զրոյական'
+    1: 'առաջին'
+    2: 'երկրորդ'
+    3: 'երրորդ'
+    4: 'չորրորդ'
 ordinalizer:
   engine: 'modulo-suffix'
   defaultSuffix: '-րդ'
   useAbsoluteValue: true
   exactSuffixes:
-    '1': '-ին'
+    1: '-ին'
 wordsToNumber:
   engine: 'token-map'
   normalizationProfile: 'CollapseWhitespace'

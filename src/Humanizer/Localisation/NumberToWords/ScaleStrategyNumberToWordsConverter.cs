@@ -63,7 +63,12 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
     {
         if (number == 0)
         {
-            return GetNorwegianUnitValue(0, isOrdinal);
+            if (isOrdinal && profile.OrdinalExceptions.TryGetValue(0, out var exactZeroOrdinal))
+            {
+                return exactZeroOrdinal;
+            }
+
+            return profile.ZeroWord;
         }
 
         if (number < 0)

@@ -119,7 +119,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
         // Prefix rules only accept 1..9 as their suffix because the prefix already contributes the
         // tens portion. Allowing larger suffix parses here would double-count scales or decades
         // that the earlier branches are responsible for.
-        foreach (var rule in profile.PrefixRules)
+        foreach (var rule in profile.PrefixedTens)
         {
             if (word.StartsWith(rule.Prefix, StringComparison.Ordinal) &&
                 TryParseCardinal(word[rule.Prefix.Length..], out var suffixValue) &&
@@ -222,7 +222,7 @@ sealed class PrefixedTensScaleWordsToNumberProfile(
     FrozenDictionary<string, int> cardinalMap,
     FrozenDictionary<string, int> tensMap,
     PrefixedScaleWord[] scales,
-    PrefixedTensRule[] prefixRules,
+    PrefixedTensRule[] prefixedTens,
     string[] negativePrefixes)
 {
     /// <summary>
@@ -240,7 +240,7 @@ sealed class PrefixedTensScaleWordsToNumberProfile(
     /// <summary>
     /// Gets the prefixes that add a fixed base value to the following unit token.
     /// </summary>
-    public PrefixedTensRule[] PrefixRules { get; } = prefixRules;
+    public PrefixedTensRule[] PrefixedTens { get; } = prefixedTens;
     /// <summary>
     /// Gets the prefixes that mark a negative number phrase.
     /// </summary>

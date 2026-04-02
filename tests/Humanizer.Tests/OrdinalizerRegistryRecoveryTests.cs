@@ -16,6 +16,6 @@ public class OrdinalizerRegistryRecoveryTests
     [InlineData("ar", 1, "1")]
     [InlineData("ja-JP", 2, "2")]
     [InlineData("zh-Hans", 3, "3")]
-    public void LocalesWithoutOrdinalizerOverridesUseTheRegistryDefault(string cultureName, int number, string expected) =>
+    public void LocalesWithoutOrdinalizerEntriesUseTheRegistryDefault(string cultureName, int number, string expected) =>
         Assert.Equal(expected, number.Ordinalize(new CultureInfo(cultureName)));
 }

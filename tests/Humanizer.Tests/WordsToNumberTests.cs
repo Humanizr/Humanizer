@@ -1443,29 +1443,27 @@ public class WordsToNumberTests_Malay
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("ta", "ஒன்று")]
-    public void ThrowsForNonEnglishWords(string cultureName, string word)
+    [InlineData("ta")]
+    [InlineData("zu-ZA")]
+    public void UnsupportedCulturesFallBackToEnglishParser(string cultureName)
     {
         var culture = new CultureInfo(cultureName);
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            word.ToNumber(culture));
-
-        Assert.Contains($"'{culture.TwoLetterISOLanguageName}'", ex.Message);
+        Assert.Equal(1, "one".ToNumber(culture));
     }
 }
 
-[UseCulture("en-US")]
-public class WordsToNumberTests_EnglishFallback
+public class WordsToNumberTests_UnsupportedCultureInput
 {
-    [Fact]
-    public void DefaultWordsToNumberConverterDoesNotSpecialCaseEnglish()
+    [Theory]
+    [InlineData("ta", "ஒன்று", "ஒன்று")]
+    [InlineData("zu-ZA", "okukodwa", "okukodwa")]
+    public void UnsupportedCultureTryToNumberReturnsFalseForUnrecognizedWords(string cultureName, string words, string unrecognizedWord)
     {
-        var converter = new DefaultWordsToNumberConverter(new CultureInfo("en"));
+        var culture = new CultureInfo(cultureName);
 
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            converter.Convert("one"));
-
-        Assert.Contains("'en'", ex.Message);
+        Assert.False(words.TryToNumber(out var value, culture, out var actualUnrecognizedWord));
+        Assert.Equal(0, value);
+        Assert.Equal(unrecognizedWord, actualUnrecognizedWord);
     }
 }
 

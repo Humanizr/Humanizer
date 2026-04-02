@@ -64,8 +64,8 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         if (number <= 20)
         {
             // The first twenty ordinals are fully irregular and are therefore stored as exact
-            // overrides.
-            return profile.OrdinalOverrideMap[number];
+            // words.
+            return profile.ExactOrdinals[number];
         }
 
         var ordinal = Convert(number, gender);
@@ -263,7 +263,7 @@ sealed class DualFormScaleNumberToWordsProfile(
     string hundredWord,
     string dualHundredsWord,
     string hundredPrefixWord,
-    string[] ordinalOverrideMap,
+    FrozenDictionary<int, string> exactOrdinals,
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap,
@@ -297,9 +297,9 @@ sealed class DualFormScaleNumberToWordsProfile(
     /// </summary>
     public string HundredPrefixWord { get; } = hundredPrefixWord;
     /// <summary>
-    /// Gets the ordinal overrides for values up to twenty.
+    /// Gets the exact ordinal words for values up to twenty.
     /// </summary>
-    public string[] OrdinalOverrideMap { get; } = ordinalOverrideMap;
+    public FrozenDictionary<int, string> ExactOrdinals { get; } = exactOrdinals;
     /// <summary>
     /// Gets the unit lexicon.
     /// </summary>

@@ -61,16 +61,16 @@ numberToWords:
     - 'sedm set'
     - 'osm set'
     - 'devět set'
-  unitsMasculineOverrides:
+  unitsMasculineForms:
     - 'jeden'
     - 'dva'
-  unitsFeminineOverrides:
+  unitsFeminineForms:
     - 'jedna'
     - 'dvě'
-  unitsNeuterOverrides:
+  unitsNeuterForms:
     - 'jedno'
     - 'dvě'
-  unitsInvariantOverrides:
+  unitsInvariantForms:
     - 'jedna'
     - 'dva'
   thousands:

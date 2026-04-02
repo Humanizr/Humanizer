@@ -6,23 +6,25 @@ collectionFormatter:
   value: 'et'
 formatter:
   engine: 'profiled'
-  resourceKeyOverrides:
+  exactDateForms:
     -
       number: 2
-      suffix: '_Dual'
-      keys:
-        - 'DateHumanize_MultipleDaysAgo'
-        - 'DateHumanize_MultipleDaysFromNow'
+      form: 'dual'
+      units:
+        - 'day'
+      tenses:
+        - 'past'
+        - 'future'
+  exactTimeSpanForms:
     -
       number: 0
-      suffix: '_Singular'
-      prefixes:
-        - 'TimeSpanHumanize_Multiple'
+      form: 'singular'
 numberToWords:
   engine: 'variant-decade'
   minusWord: 'moins'
   seventyStrategy: 'sixty-plus-teens'
   ninetyStrategy: 'eighty-plus-teens'
+  specialSeventyOneEnabled: true
   specialSeventyOneWord: 'soixante et onze'
   pluralizeExactEighty: true
   tensUsingEtWhenUnitIsOne:
@@ -47,15 +49,15 @@ ordinalizer:
   masculine:
     defaultSuffix: 'ème'
     exactSuffixes:
-      '1': 'er'
+      1: 'er'
   feminine:
     defaultSuffix: 'ème'
     exactSuffixes:
-      '1': 'ère'
+      1: 'ère'
   neuter:
     defaultSuffix: 'ème'
     exactSuffixes:
-      '1': 'er'
+      1: 'er'
 dateToOrdinalWords:
   pattern: '{day} MMMM yyyy'
   dayMode: 'OrdinalWhenDayIsOne'

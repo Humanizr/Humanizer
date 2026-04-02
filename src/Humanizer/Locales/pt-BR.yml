@@ -62,7 +62,7 @@ numberToWords:
     thousandWord: 'milésimo'
     millionWord: 'milionésimo'
     billionWord: 'bilionésimo'
-    millionSeparator: ''
+    millionJoinMode: 'compact'
     unitsMap:
       - 'zero'
       - 'primeiro'

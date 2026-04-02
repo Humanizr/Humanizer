@@ -3,6 +3,6 @@ namespace Humanizer;
 internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumberConverter>
 {
     public WordsToNumberConverterRegistry()
-        : base(culture => new DefaultWordsToNumberConverter(culture))
+        : base(TokenMapWordsToNumberConverters.En)
         => WordsToNumberConverterRegistryRegistrations.Register(this);
 }

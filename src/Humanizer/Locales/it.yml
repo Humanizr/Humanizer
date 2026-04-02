@@ -87,11 +87,8 @@ numberToWords:
       value: 1000
       singular: 'mille'
       plural: 'mila'
-      countToScaleJoiner: ''
       countUsesFinalAccent: false
       appendTrailingSpace: false
-      ordinalCompactionMatch: ''
-      ordinalCompactionReplacement: ''
       removeLeadingOneOnExactOrdinal: false
       exactOrdinalSuffix: 'l'
     -
@@ -104,7 +101,6 @@ numberToWords:
       ordinalCompactionMatch: ' milion'
       ordinalCompactionReplacement: 'milion'
       removeLeadingOneOnExactOrdinal: true
-      exactOrdinalSuffix: ''
     -
       value: 1000000000
       singular: 'un miliardo '
@@ -115,7 +111,6 @@ numberToWords:
       ordinalCompactionMatch: ' miliard'
       ordinalCompactionReplacement: 'miliard'
       removeLeadingOneOnExactOrdinal: true
-      exactOrdinalSuffix: ''
 ordinalizer:
   engine: 'suffix'
   masculineSuffix: '°'

@@ -152,7 +152,7 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
             parts.Add(number / 1_000_000 == 1
                 ? ApplyOrdinalGender(profile.Ordinal.MillionWord, gender)
                 : string.Format(
-                    "{0}" + profile.Ordinal.MillionSeparator + ApplyOrdinalGender(profile.Ordinal.MillionWord, gender),
+                    "{0}" + (profile.Ordinal.MillionJoinMode == BillionOrdinalMillionJoinMode.Compact ? string.Empty : " ") + ApplyOrdinalGender(profile.Ordinal.MillionWord, gender),
                     ConvertToOrdinal(number / 1_000_000, gender)));
 
             number %= 1_000_000;
@@ -204,8 +204,8 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
             // Other locales have a dedicated billion word, but the singular/plural choice still
             // comes from the profile instead of from hardcoded string branches.
             BillionCardinalStrategy.BillionWord => billions >= 2
-                ? $"{Convert(billions, GrammaticalGender.Masculine)} {profile.Cardinal.BillionPluralWord}"
-                : $"{Convert(billions, GrammaticalGender.Masculine)} {profile.Cardinal.BillionSingularWord}",
+                ? $"{Convert(billions, GrammaticalGender.Masculine)} {profile.Cardinal.BillionPluralWord ?? throw new InvalidOperationException("Billion-word cardinal strategy requires a plural billion word.")}"
+                : $"{Convert(billions, GrammaticalGender.Masculine)} {profile.Cardinal.BillionSingularWord ?? throw new InvalidOperationException("Billion-word cardinal strategy requires a singular billion word.")}",
             _ => throw new InvalidOperationException("Unsupported billion-strategy cardinal mode.")
         };
     }
@@ -226,8 +226,8 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
                 : $"{Convert(number / 1_000_000_000)} {ApplyOrdinalGender(profile.Ordinal.ThousandWord, gender)} {ApplyOrdinalGender(profile.Ordinal.MillionWord, gender)}",
             // Or it can use a dedicated ordinal billion word and recurse through the billion count.
             BillionOrdinalStrategy.BillionWord => number / 1_000_000_000 == 1
-                ? ApplyOrdinalGender(profile.Ordinal.BillionWord, gender)
-                : string.Format("{0} " + ApplyOrdinalGender(profile.Ordinal.BillionWord, gender), ConvertToOrdinal(number / 1_000_000_000, gender)),
+                ? ApplyOrdinalGender(profile.Ordinal.BillionWord ?? throw new InvalidOperationException("Billion-word ordinal strategy requires a billion ordinal word."), gender)
+                : string.Format("{0} " + ApplyOrdinalGender(profile.Ordinal.BillionWord ?? throw new InvalidOperationException("Billion-word ordinal strategy requires a billion ordinal word."), gender), ConvertToOrdinal(number / 1_000_000_000, gender)),
             _ => throw new InvalidOperationException("Unsupported billion-strategy ordinal mode.")
         };
     }
@@ -348,8 +348,8 @@ sealed class BillionStrategyCardinalLexicon(
     string millionSingularWord,
     string millionPluralWord,
     BillionCardinalStrategy billionStrategy,
-    string billionSingularWord,
-    string billionPluralWord,
+    string? billionSingularWord,
+    string? billionPluralWord,
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap)
@@ -382,12 +382,12 @@ sealed class BillionStrategyCardinalLexicon(
     /// <summary>
     /// Gets the singular billion word.
     /// </summary>
-    public string BillionSingularWord { get; } = billionSingularWord;
+    public string? BillionSingularWord { get; } = billionSingularWord;
 
     /// <summary>
     /// Gets the plural billion word.
     /// </summary>
-    public string BillionPluralWord { get; } = billionPluralWord;
+    public string? BillionPluralWord { get; } = billionPluralWord;
 
     /// <summary>
     /// Gets the cardinal units lexicon.
@@ -412,8 +412,8 @@ sealed class BillionStrategyOrdinalLexicon(
     BillionOrdinalStrategy billionStrategy,
     string thousandWord,
     string millionWord,
-    string billionWord,
-    string millionSeparator,
+    string? billionWord,
+    BillionOrdinalMillionJoinMode millionJoinMode,
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap)
@@ -436,12 +436,12 @@ sealed class BillionStrategyOrdinalLexicon(
     /// <summary>
     /// Gets the ordinal billion word.
     /// </summary>
-    public string BillionWord { get; } = billionWord;
+    public string? BillionWord { get; } = billionWord;
 
     /// <summary>
-    /// Gets the separator used between the recursive million count and the million ordinal word.
+    /// Gets how the recursive million count joins to the million ordinal word.
     /// </summary>
-    public string MillionSeparator { get; } = millionSeparator;
+    public BillionOrdinalMillionJoinMode MillionJoinMode { get; } = millionJoinMode;
 
     /// <summary>
     /// Gets the ordinal units lexicon.
@@ -457,4 +457,10 @@ sealed class BillionStrategyOrdinalLexicon(
     /// Gets the ordinal hundreds lexicon.
     /// </summary>
     public string[] HundredsMap { get; } = hundredsMap;
+}
+
+enum BillionOrdinalMillionJoinMode
+{
+    Spaced,
+    Compact
 }

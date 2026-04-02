@@ -9,7 +9,9 @@ numberToWords:
   maximumValue: 999999999999999999
   zeroWord: 'سفر'
   minusWord: 'نێگەتیڤ'
+  negativeJoinWord: ' '
   joinWord: ' و '
+  scaleCountJoinWord: ' '
   defaultOrdinalSuffix: 'ەم'
   matchingOrdinalSuffix: 'یەم'
   ordinalSuffixMatchCharacters: 'اێۆەی'

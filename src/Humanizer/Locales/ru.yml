@@ -418,22 +418,22 @@ numberToWords:
   endings:
     masculine:
       default: 'ый'
-      overrides:
-        '0': 'ой'
-        '2': 'ой'
-        '3': 'ий'
-        '6': 'ой'
-        '7': 'ой'
-        '8': 'ой'
-        '40': 'ой'
+      exactEndings:
+        0: 'ой'
+        2: 'ой'
+        3: 'ий'
+        6: 'ой'
+        7: 'ой'
+        8: 'ой'
+        40: 'ой'
     feminine:
       default: 'ая'
-      overrides:
-        '3': 'ья'
+      exactEndings:
+        3: 'ья'
     neuter:
       default: 'ое'
-      overrides:
-        '3': 'ье'
+      exactEndings:
+        3: 'ье'
 ordinalizer:
   engine: 'suffix'
   masculineSuffix: '-й'

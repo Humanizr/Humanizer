@@ -987,7 +987,7 @@ public sealed partial class HumanizerSourceGenerator
     static string CreateEastSlavicGenderEndingExpression(JsonElement objectElement) =>
         "new(" +
         QuoteLiteral(GetRequiredString(objectElement, "default")) + ", " +
-        CreateNullableIntStringFrozenDictionaryExpression(objectElement, "overrides").Replace("null", "FrozenDictionary<int, string>.Empty") +
+        CreateNullableIntStringFrozenDictionaryExpression(objectElement, "exactEndings").Replace("null", "FrozenDictionary<int, string>.Empty") +
         ")";
 
     static string CreateSouthSlavicScaleArrayExpression(JsonElement arrayElement)
@@ -1010,7 +1010,7 @@ public sealed partial class HumanizerSourceGenerator
             RequiredInt64Value("value"),
             RequiredStringValue("oneForm"),
             RequiredStringValue("manyForm"),
-            RequiredStringValue("countJoiner"),
+            OptionalStringValue("countJoiner"),
             RequiredStringValue("remainderSeparator"));
 
     static string CreateScaleStrategyScaleArrayExpression(JsonElement arrayElement)
@@ -1049,9 +1049,10 @@ public sealed partial class HumanizerSourceGenerator
 
         return property.ValueKind switch
         {
+            JsonValueKind.String => "new string[] { " + QuoteLiteral(property.GetString()!) + ", " + QuoteLiteral(property.GetString()!) + " }",
             JsonValueKind.Array => CreateStringArrayExpression(property),
             JsonValueKind.Object => CreateTerminalContinuingStringArrayExpression(property, propertyName),
-            _ => throw new InvalidOperationException($"Property '{propertyName}' must be an array or mapping.")
+            _ => throw new InvalidOperationException($"Property '{propertyName}' must be a string, array, or mapping.")
         };
     }
 
@@ -1138,13 +1139,13 @@ public sealed partial class HumanizerSourceGenerator
             element => checked((int)GetRequiredInt64(element, "value")).ToString(CultureInfo.InvariantCulture),
             RequiredStringValue("singular"),
             RequiredStringValue("plural"),
-            RequiredStringValue("countToScaleJoiner"),
+            OptionalStringValue("countToScaleJoiner"),
             BooleanValue("countUsesFinalAccent"),
             BooleanValue("appendTrailingSpace"),
-            RequiredStringValue("ordinalCompactionMatch"),
-            RequiredStringValue("ordinalCompactionReplacement"),
+            OptionalStringValue("ordinalCompactionMatch"),
+            OptionalStringValue("ordinalCompactionReplacement"),
             BooleanValue("removeLeadingOneOnExactOrdinal"),
-            RequiredStringValue("exactOrdinalSuffix"));
+            OptionalStringValue("exactOrdinalSuffix"));
 
     static string CreateGenderedScaleOrdinalArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
@@ -1183,32 +1184,63 @@ public sealed partial class HumanizerSourceGenerator
 
     static string CreateInvertedTensTokenArrayExpression(JsonElement arrayElement)
     {
-        if (arrayElement.ValueKind != JsonValueKind.Array)
+        if (arrayElement.ValueKind is not (JsonValueKind.Array or JsonValueKind.Object))
         {
-            throw new InvalidOperationException("Expected JSON array.");
+            throw new InvalidOperationException("Expected JSON array or mapping.");
         }
 
         var builder = new StringBuilder("new InvertedTensToken[] { ");
         var first = true;
 
-        foreach (var item in arrayElement.EnumerateArray())
+        if (arrayElement.ValueKind == JsonValueKind.Object)
         {
-            if (item.ValueKind != JsonValueKind.Object)
-            {
-                continue;
-            }
+            foreach (var property in arrayElement.EnumerateObject()
+                         .Select(static property =>
+                         {
+                             if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
+                             {
+                                 throw new InvalidOperationException($"Inverted tens token '{property.Name}' must map to an integer value.");
+                             }
 
-            if (!first)
+                             return (property.Name, Value: value);
+                         })
+                         .OrderByDescending(static entry => entry.Value)
+                         .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
             {
+                if (!first)
+                {
+                    builder.Append(", ");
+                }
+
+                builder.Append("new(");
+                builder.Append(QuoteLiteral(property.Name));
                 builder.Append(", ");
+                builder.Append(property.Value.ToString(CultureInfo.InvariantCulture));
+                builder.Append(')');
+                first = false;
             }
+        }
+        else
+        {
+            foreach (var item in arrayElement.EnumerateArray())
+            {
+                if (item.ValueKind != JsonValueKind.Object)
+                {
+                    continue;
+                }
 
-            builder.Append("new(");
-            builder.Append(QuoteLiteral(GetRequiredString(item, "word")));
-            builder.Append(", ");
-            builder.Append(GetRequiredInt64(item, "value").ToString(CultureInfo.InvariantCulture));
-            builder.Append(')');
-            first = false;
+                if (!first)
+                {
+                    builder.Append(", ");
+                }
+
+                builder.Append("new(");
+                builder.Append(QuoteLiteral(GetRequiredString(item, "word")));
+                builder.Append(", ");
+                builder.Append(GetRequiredInt64(item, "value").ToString(CultureInfo.InvariantCulture));
+                builder.Append(')');
+                first = false;
+            }
         }
 
         builder.Append(" }");
@@ -1258,18 +1290,134 @@ public sealed partial class HumanizerSourceGenerator
             RequiredInt64Value("value"));
 
     static string CreatePrefixedScaleWordArrayExpression(JsonElement arrayElement)
-        => CreateTypedConstructorArrayExpression(
-            "PrefixedScaleWord",
-            arrayElement,
-            RequiredStringValue("token"),
-            element => checked((int)GetRequiredInt64(element, "value")).ToString(CultureInfo.InvariantCulture));
+    {
+        if (arrayElement.ValueKind is not (JsonValueKind.Array or JsonValueKind.Object))
+        {
+            throw new InvalidOperationException("Expected JSON array or mapping.");
+        }
+
+        var builder = new StringBuilder("new PrefixedScaleWord[] { ");
+        var first = true;
+
+        if (arrayElement.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var property in arrayElement.EnumerateObject()
+                         .Select(static property =>
+                         {
+                             if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
+                             {
+                                 throw new InvalidOperationException($"Prefixed scale token '{property.Name}' must map to an integer value.");
+                             }
+
+                             return (property.Name, Value: checked((int)value));
+                         })
+                         .OrderByDescending(static entry => entry.Value)
+                         .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
+            {
+                if (!first)
+                {
+                    builder.Append(", ");
+                }
+
+                builder.Append("new(");
+                builder.Append(QuoteLiteral(property.Name));
+                builder.Append(", ");
+                builder.Append(property.Value.ToString(CultureInfo.InvariantCulture));
+                builder.Append(')');
+                first = false;
+            }
+        }
+        else
+        {
+            foreach (var item in arrayElement.EnumerateArray())
+            {
+                if (item.ValueKind != JsonValueKind.Object)
+                {
+                    continue;
+                }
+
+                if (!first)
+                {
+                    builder.Append(", ");
+                }
+
+                builder.Append("new(");
+                builder.Append(QuoteLiteral(GetRequiredString(item, "token")));
+                builder.Append(", ");
+                builder.Append(checked((int)GetRequiredInt64(item, "value")).ToString(CultureInfo.InvariantCulture));
+                builder.Append(')');
+                first = false;
+            }
+        }
+
+        builder.Append(" }");
+        return builder.ToString();
+    }
 
     static string CreatePrefixedTensRuleArrayExpression(JsonElement arrayElement)
-        => CreateTypedConstructorArrayExpression(
-            "PrefixedTensRule",
-            arrayElement,
-            RequiredStringValue("prefix"),
-            element => checked((int)GetRequiredInt64(element, "baseValue")).ToString(CultureInfo.InvariantCulture));
+    {
+        if (arrayElement.ValueKind is not (JsonValueKind.Array or JsonValueKind.Object))
+        {
+            throw new InvalidOperationException("Expected JSON array or mapping.");
+        }
+
+        var builder = new StringBuilder("new PrefixedTensRule[] { ");
+        var first = true;
+
+        if (arrayElement.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var property in arrayElement.EnumerateObject()
+                         .Select(static property =>
+                         {
+                             if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
+                             {
+                                 throw new InvalidOperationException($"Prefixed tens prefix '{property.Name}' must map to an integer base value.");
+                             }
+
+                             return (property.Name, Value: checked((int)value));
+                         })
+                         .OrderByDescending(static entry => entry.Name.Length)
+                         .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
+            {
+                if (!first)
+                {
+                    builder.Append(", ");
+                }
+
+                builder.Append("new(");
+                builder.Append(QuoteLiteral(property.Name));
+                builder.Append(", ");
+                builder.Append(property.Value.ToString(CultureInfo.InvariantCulture));
+                builder.Append(')');
+                first = false;
+            }
+        }
+        else
+        {
+            foreach (var item in arrayElement.EnumerateArray())
+            {
+                if (item.ValueKind != JsonValueKind.Object)
+                {
+                    continue;
+                }
+
+                if (!first)
+                {
+                    builder.Append(", ");
+                }
+
+                builder.Append("new(");
+                builder.Append(QuoteLiteral(GetRequiredString(item, "prefix")));
+                builder.Append(", ");
+                builder.Append(checked((int)GetRequiredInt64(item, "baseValue")).ToString(CultureInfo.InvariantCulture));
+                builder.Append(')');
+                first = false;
+            }
+        }
+
+        builder.Append(" }");
+        return builder.ToString();
+    }
 
     static string CreateIntFrozenSetExpression(JsonElement arrayElement)
     {

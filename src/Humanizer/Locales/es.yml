@@ -228,8 +228,8 @@ ordinalizer:
     abbreviation:
       defaultSuffix: '.º'
       lastDigitSuffixes:
-        '1': '.er'
-        '3': '.er'
+        1: '.er'
+        3: '.er'
   feminine:
     defaultSuffix: '.ª'
   neuter:
@@ -237,8 +237,8 @@ ordinalizer:
     abbreviation:
       defaultSuffix: '.º'
       lastDigitSuffixes:
-        '1': '.er'
-        '3': '.er'
+        1: '.er'
+        3: '.er'
 dateToOrdinalWords:
   pattern: '{day} ''de'' MMMM ''de'' yyyy'
   dayMode: 'Numeric'

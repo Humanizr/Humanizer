@@ -47,7 +47,7 @@ public class GeneratedFormatterRuntimeTests
     }
 
     [Fact]
-    public void LegacyPatternFallbackStillPreservesFrenchExactDayOverrides()
+    public void LegacyPatternFallbackStillPreservesFrenchExactDayForms()
     {
         var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("fr"));
 
@@ -121,7 +121,7 @@ public class GeneratedFormatterRuntimeTests
     }
 
     [Fact]
-    public void GeneratedPhraseTablesHonorProfiledExactCountOverridesForMalteseAndFrench()
+    public void GeneratedPhraseTablesHonorProfiledExactCountFormsForMalteseAndFrench()
     {
         var malteseFormatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("mt"));
         var frenchFormatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("fr"));

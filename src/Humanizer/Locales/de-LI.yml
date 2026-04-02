@@ -16,7 +16,6 @@ numberToWords:
   neuterOrdinalEnding: 'tes'
   supportsEifelerRule: false
   unitsMap:
-    0: 'null'
     1: 'ein'
     2: 'zwei'
     3: 'drei'
@@ -37,7 +36,6 @@ numberToWords:
     18: 'achtzehn'
     19: 'neunzehn'
   compoundUnitsMap:
-    0: 'null'
     1: 'ein'
     2: 'zwei'
     3: 'drei'
@@ -58,7 +56,6 @@ numberToWords:
     18: 'achtzehn'
     19: 'neunzehn'
   tensMap:
-    0: 'null'
     1: 'zehn'
     2: 'zwanzig'
     3: 'dreissig'
@@ -95,77 +92,69 @@ numberToWords:
       singularCardinal: 'eine Trillion'
       pluralCardinalFormat: '{0} Trillionen'
       ordinalSingular:
-        - 'eintrillion'
-        - 'einetrillion'
+        terminal: 'eintrillion'
+        continuing: 'einetrillion'
       ordinalPlural:
-        - '{0}trillion'
-        - '{0}trillionen'
+        terminal: '{0}trillion'
+        continuing: '{0}trillionen'
     -
       value: 1000000000000000
       addSpaceBeforeNextPart: true
       singularCardinal: 'eine Billiarde'
       pluralCardinalFormat: '{0} Billiarden'
       ordinalSingular:
-        - 'einbilliard'
-        - 'einebilliarde'
+        terminal: 'einbilliard'
+        continuing: 'einebilliarde'
       ordinalPlural:
-        - '{0}billiard'
-        - '{0}billiarden'
+        terminal: '{0}billiard'
+        continuing: '{0}billiarden'
     -
       value: 1000000000000
       addSpaceBeforeNextPart: true
       singularCardinal: 'eine Billion'
       pluralCardinalFormat: '{0} Billionen'
       ordinalSingular:
-        - 'einbillion'
-        - 'einebillion'
+        terminal: 'einbillion'
+        continuing: 'einebillion'
       ordinalPlural:
-        - '{0}billion'
-        - '{0}billionen'
+        terminal: '{0}billion'
+        continuing: '{0}billionen'
     -
       value: 1000000000
       addSpaceBeforeNextPart: true
       singularCardinal: 'eine Milliarde'
       pluralCardinalFormat: '{0} Milliarden'
       ordinalSingular:
-        - 'einmilliard'
-        - 'einemilliarde'
+        terminal: 'einmilliard'
+        continuing: 'einemilliarde'
       ordinalPlural:
-        - '{0}milliard'
-        - '{0}milliarden'
+        terminal: '{0}milliard'
+        continuing: '{0}milliarden'
     -
       value: 1000000
       addSpaceBeforeNextPart: true
       singularCardinal: 'eine Million'
       pluralCardinalFormat: '{0} Millionen'
       ordinalSingular:
-        - 'einmillion'
-        - 'einemillion'
+        terminal: 'einmillion'
+        continuing: 'einemillion'
       ordinalPlural:
-        - '{0}million'
-        - '{0}millionen'
+        terminal: '{0}million'
+        continuing: '{0}millionen'
     -
       value: 1000
       addSpaceBeforeNextPart: false
       singularCardinal: 'eintausend'
       pluralCardinalFormat: '{0}tausend'
-      ordinalSingular:
-        - 'eintausend'
-        - 'eintausend'
-      ordinalPlural:
-        - '{0}tausend'
-        - '{0}tausend'
+      ordinalSingular: 'eintausend'
+      ordinalPlural: '{0}tausend'
     -
       value: 100
       addSpaceBeforeNextPart: false
       singularCardinal: 'einhundert'
       pluralCardinalFormat: '{0}hundert'
-      ordinalSingular:
-        - 'einhundert'
-        - 'einhundert'
-      ordinalPlural:
-        - '{0}hundert'
-        - '{0}hundert'
+      ordinalSingular: 'einhundert'
+      ordinalPlural: '{0}hundert'
 wordsToNumber:
   engine: 'inverted-tens'
   cardinalMap:
@@ -220,33 +209,15 @@ wordsToNumber:
     acht: 8
     neun: 9
   tensTokens:
-    -
-      word: 'neunzig'
-      value: 90
-    -
-      word: 'achtzig'
-      value: 80
-    -
-      word: 'siebzig'
-      value: 70
-    -
-      word: 'sechzig'
-      value: 60
-    -
-      word: 'fünfzig'
-      value: 50
-    -
-      word: 'vierzig'
-      value: 40
-    -
-      word: 'dreißig'
-      value: 30
-    -
-      word: 'dreissig'
-      value: 30
-    -
-      word: 'zwanzig'
-      value: 20
+    neunzig: 90
+    achtzig: 80
+    siebzig: 70
+    sechzig: 60
+    'fünfzig': 50
+    vierzig: 40
+    'dreißig': 30
+    dreissig: 30
+    zwanzig: 20
   tensLinker: 'und'
   scaleTokens:
     - 'milliarden'

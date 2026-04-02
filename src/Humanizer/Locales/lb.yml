@@ -6,13 +6,15 @@ collectionFormatter:
   value: 'an'
 formatter:
   engine: 'profiled'
-  resourceKeyOverrides:
+  exactDateForms:
     -
       number: 2
-      suffix: '_Dual'
-      keys:
-        - 'DateHumanize_MultipleDaysAgo'
-        - 'DateHumanize_MultipleDaysFromNow'
+      form: 'dual'
+      units:
+        - 'day'
+      tenses:
+        - 'past'
+        - 'future'
   dataUnitFallbackTransform: 'trim-trailing-s'
   secondaryPlaceholderMode: 'luxembourgish-eifeler-n'
   timeUnitGenders:
@@ -40,7 +42,6 @@ numberToWords:
   neuterOrdinalEnding: 't'
   supportsEifelerRule: true
   unitsMap:
-    0: 'null'
     1: 'een'
     2: 'zwee'
     3: 'dräi'
@@ -61,7 +62,6 @@ numberToWords:
     18: 'uechtzéng'
     19: 'nonzéng'
   compoundUnitsMap:
-    0: 'null'
     1: 'een'
     2: 'zwee'
     3: 'dräi'
@@ -82,7 +82,6 @@ numberToWords:
     18: 'uechtzéng'
     19: 'nonzéng'
   tensMap:
-    0: 'null'
     1: 'zéng'
     2: 'zwanzeg'
     3: 'drësseg'
@@ -119,12 +118,10 @@ numberToWords:
       countGender: 'masculine'
       singularCardinal: 'eng Trillioun'
       pluralCardinalFormat: '{0} Trilliounen'
-      ordinalSingular:
-        - 'engtrillioun'
-        - 'engtrillioun'
+      ordinalSingular: 'engtrillioun'
       ordinalPlural:
-        - '{0}trillioun'
-        - '{0}trilliounen'
+        terminal: '{0}trillioun'
+        continuing: '{0}trilliounen'
       countWordFormNextWord: 'Trilliounen'
     -
       value: 1000000000000000
@@ -133,11 +130,11 @@ numberToWords:
       singularCardinal: 'eng Billiard'
       pluralCardinalFormat: '{0} Billiarden'
       ordinalSingular:
-        - 'eebilliard'
-        - 'engbilliard'
+        terminal: 'eebilliard'
+        continuing: 'engbilliard'
       ordinalPlural:
-        - '{0}billiard'
-        - '{0}billiarden'
+        terminal: '{0}billiard'
+        continuing: '{0}billiarden'
       countWordFormNextWord: 'Billiarden'
     -
       value: 1000000000000
@@ -145,12 +142,10 @@ numberToWords:
       countGender: 'masculine'
       singularCardinal: 'eng Billioun'
       pluralCardinalFormat: '{0} Billiounen'
-      ordinalSingular:
-        - 'engbillioun'
-        - 'engbillioun'
+      ordinalSingular: 'engbillioun'
       ordinalPlural:
-        - '{0}billioun'
-        - '{0}billiounen'
+        terminal: '{0}billioun'
+        continuing: '{0}billiounen'
       countWordFormNextWord: 'Billiounen'
     -
       value: 1000000000
@@ -159,11 +154,11 @@ numberToWords:
       singularCardinal: 'eng Milliard'
       pluralCardinalFormat: '{0} Milliarden'
       ordinalSingular:
-        - 'eemilliard'
-        - 'engmilliard'
+        terminal: 'eemilliard'
+        continuing: 'engmilliard'
       ordinalPlural:
-        - '{0}milliard'
-        - '{0}milliarden'
+        terminal: '{0}milliard'
+        continuing: '{0}milliarden'
       countWordFormNextWord: 'Milliarden'
     -
       value: 1000000
@@ -172,11 +167,11 @@ numberToWords:
       singularCardinal: 'eng Millioun'
       pluralCardinalFormat: '{0} Milliounen'
       ordinalSingular:
-        - 'eemillioun'
-        - 'engmillioun'
+        terminal: 'eemillioun'
+        continuing: 'engmillioun'
       ordinalPlural:
-        - '{0}millioun'
-        - '{0}milliounen'
+        terminal: '{0}millioun'
+        continuing: '{0}milliounen'
       countWordFormNextWord: 'Milliounen'
     -
       value: 1000
@@ -184,12 +179,8 @@ numberToWords:
       countGender: 'masculine'
       singularCardinal: 'eendausend'
       pluralCardinalFormat: '{0}dausend'
-      ordinalSingular:
-        - 'eendausend'
-        - 'eendausend'
-      ordinalPlural:
-        - '{0}dausend'
-        - '{0}dausend'
+      ordinalSingular: 'eendausend'
+      ordinalPlural: '{0}dausend'
       countWordFormNextWord: 'dausend'
     -
       value: 100
@@ -197,12 +188,8 @@ numberToWords:
       countGender: 'masculine'
       singularCardinal: 'eenhonnert'
       pluralCardinalFormat: '{0}honnert'
-      ordinalSingular:
-        - 'eenhonnert'
-        - 'eenhonnert'
-      ordinalPlural:
-        - '{0}honnert'
-        - '{0}honnert'
+      ordinalSingular: 'eenhonnert'
+      ordinalPlural: '{0}honnert'
       countWordFormNextWord: 'honnert'
 ordinalizer:
   engine: 'suffix'
@@ -285,36 +272,16 @@ wordsToNumber:
     'néng': 9
     neng: 9
   tensTokens:
-    -
-      word: 'nonzeg'
-      value: 90
-    -
-      word: 'achtzeg'
-      value: 80
-    -
-      word: 'siwwenzeg'
-      value: 70
-    -
-      word: 'sechzeg'
-      value: 60
-    -
-      word: 'fofzeg'
-      value: 50
-    -
-      word: 'véierzeg'
-      value: 40
-    -
-      word: 'veierzeg'
-      value: 40
-    -
-      word: 'drësseg'
-      value: 30
-    -
-      word: 'dresseg'
-      value: 30
-    -
-      word: 'zwanzeg'
-      value: 20
+    nonzeg: 90
+    achtzeg: 80
+    siwwenzeg: 70
+    sechzeg: 60
+    fofzeg: 50
+    'véierzeg': 40
+    veierzeg: 40
+    'drësseg': 30
+    dresseg: 30
+    zwanzeg: 20
   tensLinker: 'an'
   scaleTokens:
     - 'milliarden'

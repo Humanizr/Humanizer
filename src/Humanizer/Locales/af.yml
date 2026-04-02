@@ -101,10 +101,10 @@ ordinalizer:
     value: 20
     suffix: 'ste'
   exactSuffixes:
-    '1': 'ste'
-    '2': 'de'
-    '3': 'de'
-    '8': 'ste'
+    1: 'ste'
+    2: 'de'
+    3: 'de'
+    8: 'ste'
 wordsToNumber:
   engine: 'token-map'
   normalizationProfile: 'LowercaseRemovePeriods'

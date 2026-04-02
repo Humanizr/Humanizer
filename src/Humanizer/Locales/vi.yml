@@ -38,16 +38,16 @@ numberToWords:
     -
       value: 100
       name: 'trăm'
-  teenUnitOverrides:
-    '5': 'lăm'
-  postTensUnitOverrides:
-    '1': 'mốt'
-    '4': 'tư'
-    '5': 'lăm'
-  ordinalUnitOverrides:
-    '1': 'nhất'
-    '2': 'nhì'
-    '4': 'tư'
+  teenUnitExceptions:
+    5: 'lăm'
+  postTensUnitExceptions:
+    1: 'mốt'
+    4: 'tư'
+    5: 'lăm'
+  exactOrdinals:
+    1: 'nhất'
+    2: 'nhì'
+    4: 'tư'
 wordsToNumber:
   engine: 'token-map'
   normalizationProfile: 'CollapseWhitespace'

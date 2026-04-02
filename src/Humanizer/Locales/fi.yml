@@ -41,8 +41,8 @@ numberToWords:
     - 'yhdeksäs'
     - 'kymmenes'
   ordinalExceptions:
-    '1': 'yhdes'
-    '2': 'kahdes'
+    1: 'yhdes'
+    2: 'kahdes'
   scales:
     -
       value: 1000000000

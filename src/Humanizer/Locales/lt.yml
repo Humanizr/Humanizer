@@ -9,13 +9,6 @@ grammar:
   dataUnitPluralRule: 'lithuanian'
 formatter:
   engine: 'profiled'
-  resourceKeyOverrides:
-    -
-      number: 0
-      suffix: ''
-      keys:
-        - 'TimeSpanHumanize_Zero'
-        - 'DateHumanize_Now'
   dataUnitFallbackTransform: 'trim-trailing-s'
 numberToWords:
   engine: 'pluralized-scale'

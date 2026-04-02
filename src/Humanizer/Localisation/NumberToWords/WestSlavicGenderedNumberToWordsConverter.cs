@@ -107,10 +107,10 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
 
         return gender switch
         {
-            GrammaticalGender.Masculine => profile.UnitsMasculineOverrides[number - 1],
-            GrammaticalGender.Feminine => profile.UnitsFeminineOverrides[number - 1],
-            GrammaticalGender.Neuter => profile.UnitsNeuterOverrides[number - 1],
-            null => profile.UnitsInvariantOverrides[number - 1],
+            GrammaticalGender.Masculine => profile.UnitsMasculineForms[number - 1],
+            GrammaticalGender.Feminine => profile.UnitsFeminineForms[number - 1],
+            GrammaticalGender.Neuter => profile.UnitsNeuterForms[number - 1],
+            null => profile.UnitsInvariantForms[number - 1],
             _ => throw new ArgumentOutOfRangeException(nameof(gender))
         };
     }
@@ -123,10 +123,10 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
 /// <param name="unitsMap">The base unit lexicon.</param>
 /// <param name="tensMap">The tens lexicon.</param>
 /// <param name="hundredsMap">The hundreds lexicon.</param>
-/// <param name="unitsMasculineOverrides">The masculine overrides for units 1 and 2.</param>
-/// <param name="unitsFeminineOverrides">The feminine overrides for units 1 and 2.</param>
-/// <param name="unitsNeuterOverrides">The neuter overrides for units 1 and 2.</param>
-/// <param name="unitsInvariantOverrides">The fallback overrides when no gender-specific form is used.</param>
+/// <param name="unitsMasculineForms">The masculine forms for units 1 and 2.</param>
+/// <param name="unitsFeminineForms">The feminine forms for units 1 and 2.</param>
+/// <param name="unitsNeuterForms">The neuter forms for units 1 and 2.</param>
+/// <param name="unitsInvariantForms">The fallback forms when no gender-specific form is used.</param>
 /// <param name="thousands">The plural forms for the thousands scale.</param>
 /// <param name="millions">The plural forms for the millions scale.</param>
 /// <param name="billions">The plural forms for the billions scale.</param>
@@ -135,10 +135,10 @@ internal sealed class WestSlavicNumberToWordsProfile(
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap,
-    string[] unitsMasculineOverrides,
-    string[] unitsFeminineOverrides,
-    string[] unitsNeuterOverrides,
-    string[] unitsInvariantOverrides,
+    string[] unitsMasculineForms,
+    string[] unitsFeminineForms,
+    string[] unitsNeuterForms,
+    string[] unitsInvariantForms,
     WestSlavicScaleForms thousands,
     WestSlavicScaleForms millions,
     WestSlavicScaleForms billions)
@@ -151,14 +151,14 @@ internal sealed class WestSlavicNumberToWordsProfile(
     public string[] TensMap { get; } = tensMap;
     /// <summary>Gets the hundreds lexicon.</summary>
     public string[] HundredsMap { get; } = hundredsMap;
-    /// <summary>Gets the masculine overrides for units 1 and 2.</summary>
-    public string[] UnitsMasculineOverrides { get; } = unitsMasculineOverrides;
-    /// <summary>Gets the feminine overrides for units 1 and 2.</summary>
-    public string[] UnitsFeminineOverrides { get; } = unitsFeminineOverrides;
-    /// <summary>Gets the neuter overrides for units 1 and 2.</summary>
-    public string[] UnitsNeuterOverrides { get; } = unitsNeuterOverrides;
-    /// <summary>Gets the fallback overrides used when no explicit gender-specific form is selected.</summary>
-    public string[] UnitsInvariantOverrides { get; } = unitsInvariantOverrides;
+    /// <summary>Gets the masculine forms for units 1 and 2.</summary>
+    public string[] UnitsMasculineForms { get; } = unitsMasculineForms;
+    /// <summary>Gets the feminine forms for units 1 and 2.</summary>
+    public string[] UnitsFeminineForms { get; } = unitsFeminineForms;
+    /// <summary>Gets the neuter forms for units 1 and 2.</summary>
+    public string[] UnitsNeuterForms { get; } = unitsNeuterForms;
+    /// <summary>Gets the fallback forms used when no explicit gender-specific form is selected.</summary>
+    public string[] UnitsInvariantForms { get; } = unitsInvariantForms;
     /// <summary>Gets the plural forms for the thousands scale.</summary>
     public WestSlavicScaleForms Thousands { get; } = thousands;
     /// <summary>Gets the plural forms for the millions scale.</summary>

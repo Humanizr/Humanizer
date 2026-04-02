@@ -12,7 +12,9 @@ numberToWords:
   maximumValue: 9223372036854775807
   zeroWord: 'صفر'
   minusWord: 'منفی'
+  negativeJoinWord: ' '
   joinWord: ' و '
+  scaleCountJoinWord: ' '
   defaultOrdinalSuffix: 'م'
   matchingOrdinalSuffix: ' ام'
   ordinalSuffixMatchCharacters: 'ی'
@@ -79,8 +81,8 @@ numberToWords:
       value: 1000
       name: 'هزار'
   ordinalExceptions:
-    '1': 'اول'
-    '3': 'سوم'
+    1: 'اول'
+    3: 'سوم'
   compoundOrdinalRemainder: 3
   compoundOrdinalWord: 'سوم'
   compoundOrdinalExcludedValues:

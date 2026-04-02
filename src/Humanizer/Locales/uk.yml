@@ -178,16 +178,16 @@ numberToWords:
   endings:
     masculine:
       default: 'ий'
-      overrides:
-        '3': 'ій'
+      exactEndings:
+        3: 'ій'
     feminine:
       default: 'а'
-      overrides:
-        '3': 'я'
+      exactEndings:
+        3: 'я'
     neuter:
       default: 'е'
-      overrides:
-        '3': 'є'
+      exactEndings:
+        3: 'є'
 ordinalizer:
   engine: 'template'
   masculine:
@@ -195,11 +195,11 @@ ordinalizer:
   feminine:
     defaultSuffix: '-а'
     lastDigitSuffixes:
-      '3': '-я'
+      3: '-я'
   neuter:
     defaultSuffix: '-е'
     lastDigitSuffixes:
-      '3': '-є'
+      3: '-є'
 wordsToNumber:
   engine: 'token-map'
   normalizationProfile: 'LowercaseRemovePeriods'

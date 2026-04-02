@@ -172,7 +172,7 @@ Fields:
 
 Purpose:
 
-- owns formatter-specific grammar and resource-key selection metadata
+- owns formatter-specific grammar and phrase/form selection metadata
 - feeds `ProfiledFormatter`
 - should contain only information used while humanizing TimeSpan, dates, quantities, or data units through formatter resources
 
@@ -183,7 +183,8 @@ Supported engine:
 Fields:
 
 - `resourceKeyDetector`
-- `resourceKeyOverrides`
+- `exactDateForms`
+- `exactTimeSpanForms`
 - `resourceKeySuffixes`
 - `timeUnitGenders`
 - `prepositionMode`
@@ -196,7 +197,8 @@ Fields:
 Notes:
 
 - `resourceKeyDetector` selects the pluralization/resource-shape family.
-- `resourceKeyOverrides` maps specific units or counts to explicit resource keys.
+- `exactDateForms` maps exact date counts to a specific grammatical form for selected units and tenses.
+- `exactTimeSpanForms` maps exact time-span counts to a specific grammatical form for selected units.
 - `resourceKeySuffixes` supplies suffix fragments appended during resource-key construction.
 - `timeUnitGenders` carries grammatical gender metadata for time-unit resources.
 - `prepositionMode` selects locale-specific preposition handling.
@@ -585,7 +587,8 @@ Notes:
 Fields:
 
 - `resourceKeyDetector`
-- `resourceKeyOverrides`
+- `exactDateForms`
+- `exactTimeSpanForms`
 - `resourceKeySuffixes`
 - `timeUnitGenders`
 - `prepositionMode`
@@ -598,7 +601,7 @@ Fields:
 Authoring notes:
 
 - `resourceKeyDetector` and `dataUnitDetector` choose the plural/resource family; these are structural strategy values, not locale display strings.
-- `resourceKeyOverrides` and `resourceKeySuffixes` are the escape hatches for resources that do not fit the default key-construction pattern.
+- `exactDateForms`, `exactTimeSpanForms`, and `resourceKeySuffixes` are the escape hatches for locales that need exact-count or unit-specific form selection beyond the default detector.
 - `timeUnitGenders` belongs here because formatter resources often inflect by unit gender even when `numberToWords` does not.
 - `secondaryPlaceholderMode` is rare; if you add it, leave a YAML comment in the locale file explaining the grammatical rule being modeled.
 
@@ -755,7 +758,7 @@ Fields:
 - `cardinalMap`
 - `tensMap`
 - `scales`
-- `prefixRules`
+- `prefixedTens`
 - `negativePrefixes`
 
 ### `suffix-scale`
@@ -987,9 +990,9 @@ Fields:
 - `zeroTensWord`
 - `digitWords`
 - `scales`
-- `teenUnitOverrides`
-- `postTensUnitOverrides`
-- `ordinalUnitOverrides`
+- `teenUnitExceptions`
+- `postTensUnitExceptions`
+- `exactOrdinals`
 
 ### `contracted-one-scale`
 
@@ -1222,9 +1225,9 @@ Fields:
 - `zeroWord`
 - `minusWord`
 - `joinWord`
-- `negativeJoinWord`
-- `underHundredJoinWord`
-- `scaleCountJoinWord`
+- `negativeJoinMode`
+- `underHundredJoinMode`
+- `scaleCountJoinMode`
 - `compoundOrdinalWord`
 - `compoundOrdinalRemainder`
 - `defaultOrdinalSuffix`
@@ -1239,6 +1242,18 @@ Fields:
 - `scales`
 - `ordinalExceptions`
 - `compoundOrdinalExcludedValues`
+
+Separator modes:
+
+- `negativeJoinMode`
+- `underHundredJoinMode`
+- `scaleCountJoinMode`
+
+Allowed values:
+
+- `none`
+- `space`
+- `inherit-join-word`
 
 ### `linking-scale`
 
@@ -1301,7 +1316,7 @@ Fields:
 - `thousandScale`
 - `millionScale`
 - `billionScale`
-- `ordinalOverrideMap`
+- `exactOrdinals`
 - `minusSuffix`
 
 ### `ordinal-prefix-scale`
@@ -1510,10 +1525,10 @@ Fields:
 - `unitsMap`
 - `tensMap`
 - `hundredsMap`
-- `unitsMasculineOverrides`
-- `unitsFeminineOverrides`
-- `unitsNeuterOverrides`
-- `unitsInvariantOverrides`
+- `unitsMasculineForms`
+- `unitsFeminineForms`
+- `unitsNeuterForms`
+- `unitsInvariantForms`
 - `thousands`
 - `millions`
 - `billions`

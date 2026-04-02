@@ -176,12 +176,12 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             : base.NumberToWords(unit, number, culture);
 
     internal override FormatterNumberForm GetDatePhraseForm(TimeUnit unit, Tense tense, int number)
-        => TryGetDateOverrideForm(unit, tense, number, out var form)
+        => TryGetExactDateForm(unit, tense, number, out var form)
             ? form
             : DetectNumberForm(number, profile.PhraseDetector);
 
     internal override FormatterNumberForm GetTimeSpanPhraseForm(TimeUnit unit, int number, bool toWords)
-        => TryGetTimeSpanOverrideForm(unit, number, out var form)
+        => TryGetExactTimeSpanForm(unit, number, out var form)
             ? form
             : DetectNumberForm(number, profile.PhraseDetector);
 
@@ -206,7 +206,7 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     internal override bool ShouldUseDatePhraseTemplate(TimeUnit unit, Tense tense, int count, LocalizedDatePhrase phrase)
         => count == 2 &&
             phrase.Template is { Name: "two" } &&
-            HasDateExactTwoOverride(unit, tense, count);
+            HasExactDateTwoForm(unit, tense, count);
 
     internal override bool ShouldAppendImplicitDataUnitPluralSuffix(DataUnit dataUnit, double count, FormatterNumberForm form, LocalizedPhraseForms forms, PhraseTemplate? template) =>
         base.ShouldAppendImplicitDataUnitPluralSuffix(dataUnit, count, form, forms, template);
@@ -343,9 +343,9 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             _ => throw new UnreachableException()
         };
 
-    bool TryGetDateOverrideForm(TimeUnit unit, Tense tense, int number, out FormatterNumberForm form)
+    bool TryGetExactDateForm(TimeUnit unit, Tense tense, int number, out FormatterNumberForm form)
     {
-        foreach (var rule in profile.DateFormOverrides)
+        foreach (var rule in profile.ExactDateForms)
         {
             if (rule.AppliesTo(unit, tense, number))
             {
@@ -358,9 +358,9 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         return false;
     }
 
-    bool TryGetTimeSpanOverrideForm(TimeUnit unit, int number, out FormatterNumberForm form)
+    bool TryGetExactTimeSpanForm(TimeUnit unit, int number, out FormatterNumberForm form)
     {
-        foreach (var rule in profile.TimeSpanFormOverrides)
+        foreach (var rule in profile.ExactTimeSpanForms)
         {
             if (rule.AppliesTo(unit, number))
             {
@@ -393,9 +393,9 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             _ => throw new UnreachableException()
         };
 
-    bool HasDateExactTwoOverride(TimeUnit unit, Tense tense, int number)
+    bool HasExactDateTwoForm(TimeUnit unit, Tense tense, int number)
     {
-        foreach (var rule in profile.DateFormOverrides)
+        foreach (var rule in profile.ExactDateForms)
         {
             if (rule.AppliesTo(unit, tense, number))
             {
@@ -418,8 +418,8 @@ sealed record FormatterProfile
     /// Initializes a profile with the generated rule tables for one locale.
     /// </summary>
     /// <param name="phraseDetector">The detector used for date and time-span grammatical forms.</param>
-    /// <param name="dateFormOverrides">Exact-number date overrides that take precedence over the generic detector.</param>
-    /// <param name="timeSpanFormOverrides">Exact-number time-span overrides that take precedence over the generic detector.</param>
+    /// <param name="exactDateForms">Exact-number date form rules that take precedence over the generic detector.</param>
+    /// <param name="exactTimeSpanForms">Exact-number time-span form rules that take precedence over the generic detector.</param>
     /// <param name="dataUnitDetector">The detector used for data-unit word forms.</param>
     /// <param name="dataUnitNonIntegralForm">The form to use for non-integral data-unit counts.</param>
     /// <param name="dataUnitFallbackTransform">The fallback transform applied when an exact data-unit resource is missing.</param>
@@ -428,8 +428,8 @@ sealed record FormatterProfile
     /// <param name="unitGenders">Optional grammatical genders used when converting units to words.</param>
     public FormatterProfile(
         FormatterNumberDetectorKind phraseDetector,
-        FormatterDateFormOverride[] dateFormOverrides,
-        FormatterTimeSpanFormOverride[] timeSpanFormOverrides,
+        FormatterDateFormRule[] exactDateForms,
+        FormatterTimeSpanFormRule[] exactTimeSpanForms,
         FormatterNumberDetectorKind dataUnitDetector,
         FormatterNumberForm dataUnitNonIntegralForm,
         FormatterDataUnitFallbackTransform dataUnitFallbackTransform,
@@ -438,8 +438,8 @@ sealed record FormatterProfile
         FrozenDictionary<TimeUnit, GrammaticalGender>? unitGenders = null)
     {
         PhraseDetector = phraseDetector;
-        DateFormOverrides = dateFormOverrides;
-        TimeSpanFormOverrides = timeSpanFormOverrides;
+        ExactDateForms = exactDateForms;
+        ExactTimeSpanForms = exactTimeSpanForms;
         DataUnitDetector = dataUnitDetector;
         DataUnitNonIntegralForm = dataUnitNonIntegralForm;
         DataUnitFallbackTransform = dataUnitFallbackTransform;
@@ -456,12 +456,12 @@ sealed record FormatterProfile
     /// <summary>
     /// Gets the exact-number date overrides that take precedence over the generic detector.
     /// </summary>
-    public FormatterDateFormOverride[] DateFormOverrides { get; }
+    public FormatterDateFormRule[] ExactDateForms { get; }
 
     /// <summary>
     /// Gets the exact-number time-span overrides that take precedence over the generic detector.
     /// </summary>
-    public FormatterTimeSpanFormOverride[] TimeSpanFormOverrides { get; }
+    public FormatterTimeSpanFormRule[] ExactTimeSpanForms { get; }
 
     /// <summary>
     /// Gets the detector used for data-unit word forms.
@@ -495,18 +495,18 @@ sealed record FormatterProfile
 }
 
 /// <summary>
-/// Describes an exact-number date override for a generated formatter profile.
+/// Describes an exact-number date form rule for a generated formatter profile.
 /// </summary>
-readonly record struct FormatterDateFormOverride
+readonly record struct FormatterDateFormRule
 {
     /// <summary>
-    /// Initializes an exact-number date override.
+    /// Initializes an exact-number date form rule.
     /// </summary>
-    /// <param name="number">The number that triggers the override.</param>
-    /// <param name="units">The units covered by the override.</param>
-    /// <param name="tenses">The tenses covered by the override.</param>
-    /// <param name="form">The form selected when the override matches.</param>
-    public FormatterDateFormOverride(int number, FormatterTimeUnitMask units, FormatterTenseMask tenses, FormatterNumberForm form)
+    /// <param name="number">The number that triggers the rule.</param>
+    /// <param name="units">The units covered by the rule.</param>
+    /// <param name="tenses">The tenses covered by the rule.</param>
+    /// <param name="form">The form selected when the rule matches.</param>
+    public FormatterDateFormRule(int number, FormatterTimeUnitMask units, FormatterTenseMask tenses, FormatterNumberForm form)
     {
         Number = number;
         Units = units;
@@ -515,39 +515,39 @@ readonly record struct FormatterDateFormOverride
     }
 
     /// <summary>
-    /// Gets the number that triggers the override.
+    /// Gets the number that triggers the rule.
     /// </summary>
     public int Number { get; }
 
     /// <summary>
-    /// Gets the units covered by the override.
+    /// Gets the units covered by the rule.
     /// </summary>
     public FormatterTimeUnitMask Units { get; }
 
     /// <summary>
-    /// Gets the tenses covered by the override.
+    /// Gets the tenses covered by the rule.
     /// </summary>
     public FormatterTenseMask Tenses { get; }
 
     /// <summary>
-    /// Gets the form selected when the override matches.
+    /// Gets the form selected when the rule matches.
     /// </summary>
     public FormatterNumberForm Form { get; }
 
     /// <summary>
-    /// Determines whether the override applies to the given date phrase.
+    /// Determines whether the rule applies to the given date phrase.
     /// </summary>
     /// <param name="unit">The time unit being formatted.</param>
     /// <param name="tense">The tense being formatted.</param>
     /// <param name="number">The count being formatted.</param>
-    /// <returns><c>true</c> when the override applies; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> when the rule applies; otherwise, <c>false</c>.</returns>
     public bool AppliesTo(TimeUnit unit, Tense tense, int number) =>
         number == Number &&
         (Units & GetTimeUnitMask(unit)) != 0 &&
         (Tenses & GetTenseMask(tense)) != 0;
 
     /// <summary>
-    /// Maps runtime time units onto the generated override mask.
+    /// Maps runtime time units onto the generated rule mask.
     /// </summary>
     internal static FormatterTimeUnitMask GetTimeUnitMask(TimeUnit unit) =>
         unit switch
@@ -570,17 +570,17 @@ readonly record struct FormatterDateFormOverride
 }
 
 /// <summary>
-/// Describes an exact-number time-span override for a generated formatter profile.
+/// Describes an exact-number time-span form rule for a generated formatter profile.
 /// </summary>
-readonly record struct FormatterTimeSpanFormOverride
+readonly record struct FormatterTimeSpanFormRule
 {
     /// <summary>
-    /// Initializes an exact-number time-span override.
+    /// Initializes an exact-number time-span form rule.
     /// </summary>
-    /// <param name="number">The number that triggers the override.</param>
-    /// <param name="units">The units covered by the override.</param>
-    /// <param name="form">The form selected when the override matches.</param>
-    public FormatterTimeSpanFormOverride(int number, FormatterTimeUnitMask units, FormatterNumberForm form)
+    /// <param name="number">The number that triggers the rule.</param>
+    /// <param name="units">The units covered by the rule.</param>
+    /// <param name="form">The form selected when the rule matches.</param>
+    public FormatterTimeSpanFormRule(int number, FormatterTimeUnitMask units, FormatterNumberForm form)
     {
         Number = number;
         Units = units;
@@ -588,27 +588,27 @@ readonly record struct FormatterTimeSpanFormOverride
     }
 
     /// <summary>
-    /// Gets the number that triggers the override.
+    /// Gets the number that triggers the rule.
     /// </summary>
     public int Number { get; }
 
     /// <summary>
-    /// Gets the units covered by the override.
+    /// Gets the units covered by the rule.
     /// </summary>
     public FormatterTimeUnitMask Units { get; }
 
     /// <summary>
-    /// Gets the form selected when the override matches.
+    /// Gets the form selected when the rule matches.
     /// </summary>
     public FormatterNumberForm Form { get; }
 
     /// <summary>
-     /// Determines whether the override applies to the given key and number.
+     /// Determines whether the rule applies to the given key and number.
      /// </summary>
     /// <param name="unit">The time unit being formatted.</param>
     /// <param name="number">The numeric value being formatted.</param>
-    /// <returns><c>true</c> when the override applies; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> when the rule applies; otherwise, <c>false</c>.</returns>
     public bool AppliesTo(TimeUnit unit, int number) =>
         number == Number &&
-        (Units & FormatterDateFormOverride.GetTimeUnitMask(unit)) != 0;
+        (Units & FormatterDateFormRule.GetTimeUnitMask(unit)) != 0;
 }

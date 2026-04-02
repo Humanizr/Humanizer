@@ -222,8 +222,8 @@ namespace zuZA
             Assert.Equal(42.ToWords(new("en")), 42.ToWords(UnknownCulture));
 
         [Fact]
-        public void UnknownCultureUsesDefaultWordsToNumberConverter() =>
-            Assert.Throws<NotSupportedException>(() => "one".ToNumber(UnknownCulture));
+        public void UnknownCultureFallsBackToEnglishWordsToNumber() =>
+            Assert.Equal("one".ToNumber(new("en")), "one".ToNumber(UnknownCulture));
 
         [Fact]
         public void UnknownCultureUsesDefaultOrdinalizer() =>

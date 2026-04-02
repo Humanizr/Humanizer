@@ -66,9 +66,9 @@ numberToWords:
   thousandsPluralSuffix: 'ת אלפים'
   thousandsSingularSuffix: ' אלף'
   thousandsSpecialCases:
-    '1': 'אלף'
-    '2': 'אלפיים'
-    '8': 'שמונת אלפים'
+    1: 'אלף'
+    2: 'אלפיים'
+    8: 'שמונת אלפים'
   scales:
     -
       value: 1000000000
