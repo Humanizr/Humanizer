@@ -48,6 +48,34 @@ public class ResourceCoverageTests
         }
     }
 
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.LocalizedResourceLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void GetResourceReturnsEveryLocalizedResourceValueForItsExactLocale(string locale)
+    {
+        var culture = new CultureInfo(locale);
+        var entries = LocaleCoverageData.LocalizedResourceValuesByLocale[locale];
+
+        foreach (var (resourceKey, expectedValue) in entries)
+        {
+            Assert.Equal(expectedValue, Resources.GetResource(resourceKey, culture));
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.LocalizedResourceLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TryGetResourceReturnsEveryLocalizedResourceValueForItsExactLocaleAfterExactLookupLoadsTheSatellite(string locale)
+    {
+        var culture = new CultureInfo(locale);
+        var entries = LocaleCoverageData.LocalizedResourceValuesByLocale[locale];
+
+        foreach (var (resourceKey, expectedValue) in entries)
+        {
+            Assert.Equal(expectedValue, Resources.GetResource(resourceKey, culture));
+            Assert.True(Resources.TryGetResource(resourceKey, culture, out var actualValue), $"{locale} should resolve exact key {resourceKey}.");
+            Assert.Equal(expectedValue, actualValue);
+        }
+    }
+
     [Fact]
     public void HeadingResourcesRenderLocalizedStringsWhereLocalesShipHeadingKeys()
     {

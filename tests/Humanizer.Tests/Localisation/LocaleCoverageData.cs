@@ -84,6 +84,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string> FormatterLocaleTheoryData => CreateLocaleTheoryData(FormatterLocales);
 
+    public static TheoryData<string> LocalizedResourceLocaleTheoryData => CreateLocaleTheoryData(LocalizedResourceKeysByLocale.Keys);
+
     public static TheoryData<string> CollectionFormatterLocaleTheoryData => CreateLocaleTheoryData(CollectionFormatterLocales);
 
     public static TheoryData<string> NumberToWordsLocaleTheoryData => CreateLocaleTheoryData(NumberToWordsLocales);
