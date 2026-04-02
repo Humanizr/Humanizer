@@ -67,8 +67,10 @@ function Invoke-CommandText {
         }
 
         $output = & $FilePath @ArgumentList 2>&1 | ForEach-Object { $_.ToString() }
+        $exitCode = $LASTEXITCODE
+        $global:LASTEXITCODE = 0
         return [PSCustomObject]@{
-            ExitCode = $LASTEXITCODE
+            ExitCode = $exitCode
             Output   = ($output -join "`n")
         }
     } finally {
@@ -290,6 +292,10 @@ try {
     foreach ($smokeResult in $smokeResults) {
         Write-Host "  ✓ $($smokeResult.DisplayName)"
     }
+
+    # The analyzer smoke tests intentionally invoke a failing build to prove the analyzer fires.
+    # Clear the inherited native exit code so the script itself returns success when verification passes.
+    $global:LASTEXITCODE = 0
 } finally {
     if (Test-Path $tempDir) {
         Remove-Item -LiteralPath $tempDir -Recurse -Force -ErrorAction SilentlyContinue
