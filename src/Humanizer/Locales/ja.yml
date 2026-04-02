@@ -1,296 +1,302 @@
-# Locale-owned generator data for ja.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'delimited'
-  value: '、'
-phrases:
-  dateHumanize:
-    now: '今'
-    never: '決して'
-    past:
+locale: 'ja'
+
+surfaces:
+  list:
+    engine: 'delimited'
+    value: '、'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: '今'
+      never: '決して'
+      past:
+        millisecond:
+          single: '1 ミリ秒前'
+          multiple:
+            forms: 'ミリ秒'
+            template: '{count} {unit}前'
+        second:
+          single: '1 秒前'
+          multiple:
+            forms: '秒'
+            template: '{count} {unit}前'
+        minute:
+          single: '1 分前'
+          multiple:
+            forms: '分'
+            template: '{count} {unit}前'
+        hour:
+          single: '1 時間前'
+          multiple:
+            forms: '時間'
+            template: '{count} {unit}前'
+        day:
+          single: '昨日'
+          template:
+            name: 'two'
+            value: '2 日前'
+          multiple:
+            forms: '日'
+            template: '{count} {unit}前'
+        week:
+          single: '1 週間前'
+          multiple:
+            forms: '週間'
+            template: '{count} {unit}前'
+        month:
+          single: '先月'
+          multiple:
+            forms: 'か月'
+            template: '{count} {unit}前'
+        year:
+          single: '去年'
+          multiple:
+            forms: '年'
+            template: '{count} {unit}前'
+      future:
+        millisecond:
+          single: '1 ミリ秒後'
+          multiple:
+            forms: 'ミリ秒'
+            template: '{count} {unit}後'
+        second:
+          single: '1 秒後'
+          multiple:
+            forms: '秒'
+            template: '{count} {unit}後'
+        minute:
+          single: '1 分後'
+          multiple:
+            forms: '分'
+            template: '{count} {unit}後'
+        hour:
+          single: '1 時間後'
+          multiple:
+            forms: '時間'
+            template: '{count} {unit}後'
+        day:
+          single: '明日'
+          template:
+            name: 'two'
+            value: '2 日後'
+          multiple:
+            forms: '日'
+            template: '{count} {unit}後'
+        week:
+          single: '1 週間後'
+          multiple:
+            forms: '週間'
+            template: '{count} {unit}後'
+        month:
+          single: '来月'
+          multiple:
+            forms: 'か月'
+            template: '{count} {unit}後'
+        year:
+          single: '来年'
+          multiple:
+            forms: '年'
+            template: '{count} {unit}後'
+    duration:
+      zero: '0 秒'
+      age:
+        template: '{value}'
       millisecond:
-        single: '1 ミリ秒前'
+        single:
+          numeric: '1 ミリ秒'
+          words: '1 ミリ秒'
         multiple:
           forms: 'ミリ秒'
-          template: '{count} {unit}前'
       second:
-        single: '1 秒前'
+        single:
+          numeric: '1 秒'
+          words: '1 秒'
         multiple:
           forms: '秒'
-          template: '{count} {unit}前'
       minute:
-        single: '1 分前'
+        single:
+          numeric: '1 分'
+          words: '1 分'
         multiple:
           forms: '分'
-          template: '{count} {unit}前'
       hour:
-        single: '1 時間前'
+        single:
+          numeric: '1 時間'
+          words: '1 時間'
         multiple:
           forms: '時間'
-          template: '{count} {unit}前'
       day:
-        single: '昨日'
-        template:
-          name: 'two'
-          value: '2 日前'
+        single:
+          numeric: '1 日'
+          words: '1 日'
         multiple:
           forms: '日'
-          template: '{count} {unit}前'
       week:
-        single: '1 週間前'
+        single:
+          numeric: '1 週間'
+          words: '1 週間'
         multiple:
           forms: '週間'
-          template: '{count} {unit}前'
       month:
-        single: '先月'
+        single:
+          numeric: '1 ヶ月'
+          words: '1 ヶ月'
         multiple:
-          forms: 'か月'
-          template: '{count} {unit}前'
+          forms: 'ヶ月'
       year:
-        single: '去年'
+        single:
+          numeric: '1 年'
+          words: '1 年'
         multiple:
           forms: '年'
-          template: '{count} {unit}前'
-    future:
+    dataUnits:
+      bit:
+        forms: 'ビット'
+        symbol: 'b'
+        template: '{unit}'
+      byte:
+        forms: 'バイト'
+        symbol: 'B'
+        template: '{unit}'
+      kilobyte:
+        forms: 'キロバイト'
+        symbol: 'KB'
+        template: '{unit}'
+      megabyte:
+        forms: 'メガバイト'
+        symbol: 'MB'
+        template: '{unit}'
+      gigabyte:
+        forms: 'ギガバイト'
+        symbol: 'GB'
+        template: '{unit}'
+      terabyte:
+        forms: 'テラバイト'
+        symbol: 'TB'
+        template: '{unit}'
+    timeUnits:
       millisecond:
-        single: '1 ミリ秒後'
-        multiple:
-          forms: 'ミリ秒'
-          template: '{count} {unit}後'
+        symbol: 'ミリ秒'
       second:
-        single: '1 秒後'
-        multiple:
-          forms: '秒'
-          template: '{count} {unit}後'
+        symbol: '秒'
       minute:
-        single: '1 分後'
-        multiple:
-          forms: '分'
-          template: '{count} {unit}後'
+        symbol: '分'
       hour:
-        single: '1 時間後'
-        multiple:
-          forms: '時間'
-          template: '{count} {unit}後'
+        symbol: '時間'
       day:
-        single: '明日'
-        template:
-          name: 'two'
-          value: '2 日後'
-        multiple:
-          forms: '日'
-          template: '{count} {unit}後'
+        symbol: '日'
       week:
-        single: '1 週間後'
-        multiple:
-          forms: '週間'
-          template: '{count} {unit}後'
+        symbol: '週間'
       month:
-        single: '来月'
-        multiple:
-          forms: 'か月'
-          template: '{count} {unit}後'
+        symbol: 'ヶ月'
       year:
-        single: '来年'
-        multiple:
-          forms: '年'
-          template: '{count} {unit}後'
-  timeSpan:
-    zero: '0 秒'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1 ミリ秒'
-        words: '1 ミリ秒'
-      multiple:
-        forms: 'ミリ秒'
-    second:
-      single:
-        numeric: '1 秒'
-        words: '1 秒'
-      multiple:
-        forms: '秒'
-    minute:
-      single:
-        numeric: '1 分'
-        words: '1 分'
-      multiple:
-        forms: '分'
-    hour:
-      single:
-        numeric: '1 時間'
-        words: '1 時間'
-      multiple:
-        forms: '時間'
-    day:
-      single:
-        numeric: '1 日'
-        words: '1 日'
-      multiple:
-        forms: '日'
-    week:
-      single:
-        numeric: '1 週間'
-        words: '1 週間'
-      multiple:
-        forms: '週間'
-    month:
-      single:
-        numeric: '1 ヶ月'
-        words: '1 ヶ月'
-      multiple:
-        forms: 'ヶ月'
-    year:
-      single:
-        numeric: '1 年'
-        words: '1 年'
-      multiple:
-        forms: '年'
-  dataUnit:
-    bit:
-      forms: 'ビット'
-      symbol: 'b'
-      template: '{unit}'
-    byte:
-      forms: 'バイト'
-      symbol: 'B'
-      template: '{unit}'
-    kilobyte:
-      forms: 'キロバイト'
-      symbol: 'KB'
-      template: '{unit}'
-    megabyte:
-      forms: 'メガバイト'
-      symbol: 'MB'
-      template: '{unit}'
-    gigabyte:
-      forms: 'ギガバイト'
-      symbol: 'GB'
-      template: '{unit}'
-    terabyte:
-      forms: 'テラバイト'
-      symbol: 'TB'
-      template: '{unit}'
-  timeUnit:
-    millisecond:
-      symbol: 'ミリ秒'
-    second:
-      symbol: '秒'
-    minute:
-      symbol: '分'
-    hour:
-      symbol: '時間'
-    day:
-      symbol: '日'
-    week:
-      symbol: '週間'
-    month:
-      symbol: 'ヶ月'
-    year:
-      symbol: '年'
-formatter:
-  engine: 'profiled'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-numberToWords:
-  engine: 'east-asian-grouped'
-  zeroWord: '〇'
-  negativePrefix: 'マイナス '
-  ordinalSuffix: '番目'
-  digitWords:
-    - '〇'
-    - '一'
-    - '二'
-    - '三'
-    - '四'
-    - '五'
-    - '六'
-    - '七'
-    - '八'
-    - '九'
-  smallUnitWords:
-    1: '十'
-    2: '百'
-    3: '千'
-  largeUnits:
-    1: '万'
-    2: '億'
-    3: '兆'
-    4: '京'
-    5: '垓'
-    6: '𥝱'
-    7: '穣'
-    8: '溝'
-    9: '澗'
-    10: '正'
-    11: '載'
-    12: '極'
-    13: '恒河沙'
-    14: '阿僧祇'
-    15: '那由他'
-    16: '不可思議'
-    17: '無量大数'
-  omitOneBeforeTen: true
-  omitOneBeforeHundred: true
-  omitOneBeforeThousand: true
-  insertZeroInGroup: false
-  insertZeroBetweenGroups: false
-wordsToNumber:
-  engine: 'east-asian-positional'
-  negativePrefixes:
-    - 'マイナス'
-  ordinalSuffix: '番目'
-  digits:
-    '〇': 0
-    '一': 1
-    '二': 2
-    '三': 3
-    '四': 4
-    '五': 5
-    '六': 6
-    '七': 7
-    '八': 8
-    '九': 9
-  smallUnits:
-    '十': 10
-    '百': 100
-    '千': 1000
-  largeUnits:
-    '万': 10000
-    '億': 100000000
-headings:
-  full:
-    - '北'
-    - '北北東'
-    - '北東'
-    - '東北東'
-    - '東'
-    - '東南東'
-    - '南東'
-    - '南南東'
-    - '南'
-    - '南南西'
-    - '南西'
-    - '西南西'
-    - '西'
-    - '西北西'
-    - '北西'
-    - '北北西'
-  short:
-    - '北'
-    - '北北東'
-    - '北東'
-    - '東北東'
-    - '東'
-    - '東南東'
-    - '南東'
-    - '南南東'
-    - '南'
-    - '南南西'
-    - '南西'
-    - '西南西'
-    - '西'
-    - '西北西'
-    - '北西'
-    - '北北西'
+        symbol: '年'
+
+  number:
+    words:
+      engine: 'east-asian-grouped'
+      zeroWord: '〇'
+      negativePrefix: 'マイナス '
+      ordinalSuffix: '番目'
+      digitWords:
+        - '〇'
+        - '一'
+        - '二'
+        - '三'
+        - '四'
+        - '五'
+        - '六'
+        - '七'
+        - '八'
+        - '九'
+      smallUnitWords:
+        1: '十'
+        2: '百'
+        3: '千'
+      largeUnits:
+        1: '万'
+        2: '億'
+        3: '兆'
+        4: '京'
+        5: '垓'
+        6: '𥝱'
+        7: '穣'
+        8: '溝'
+        9: '澗'
+        10: '正'
+        11: '載'
+        12: '極'
+        13: '恒河沙'
+        14: '阿僧祇'
+        15: '那由他'
+        16: '不可思議'
+        17: '無量大数'
+      omitOneBeforeTen: true
+      omitOneBeforeHundred: true
+      omitOneBeforeThousand: true
+      insertZeroInGroup: false
+      insertZeroBetweenGroups: false
+
+    parse:
+      engine: 'east-asian-positional'
+      negativePrefixes:
+        - 'マイナス'
+      ordinalSuffix: '番目'
+      digits:
+        '〇': 0
+        '一': 1
+        '二': 2
+        '三': 3
+        '四': 4
+        '五': 5
+        '六': 6
+        '七': 7
+        '八': 8
+        '九': 9
+      smallUnits:
+        '十': 10
+        '百': 100
+        '千': 1000
+      largeUnits:
+        '万': 10000
+        '億': 100000000
+
+  compass:
+    full:
+      - '北'
+      - '北北東'
+      - '北東'
+      - '東北東'
+      - '東'
+      - '東南東'
+      - '南東'
+      - '南南東'
+      - '南'
+      - '南南西'
+      - '南西'
+      - '西南西'
+      - '西'
+      - '西北西'
+      - '北西'
+      - '北北西'
+    short:
+      - '北'
+      - '北北東'
+      - '北東'
+      - '東北東'
+      - '東'
+      - '東南東'
+      - '南東'
+      - '南南東'
+      - '南'
+      - '南南西'
+      - '南西'
+      - '西南西'
+      - '西'
+      - '西北西'
+      - '北西'
+      - '北北西'

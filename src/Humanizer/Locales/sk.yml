@@ -1,245 +1,172 @@
-# Locale-owned generator data for sk.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'a'
-formatter:
-  engine: 'profiled'
-  resourceKeyDetector: 'between2-and4-paucal'
-  resourceKeySuffixes:
-    paucal: '_Paucal'
-  dataUnitDetector: 'between2-and4-paucal'
-  dataUnitSuffixes:
-    singular: '_Singular'
-    paucal: '_Paucal'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-numberToWords:
-  engine: 'west-slavic-gendered'
-  useCulture: true
-  minusWord: 'mínus'
-  unitsMap:
-    - 'nula'
-    - 'jeden'
-    - 'dva'
-    - 'tri'
-    - 'štyri'
-    - 'päť'
-    - 'šesť'
-    - 'sedem'
-    - 'osem'
-    - 'deväť'
-    - 'desať'
-    - 'jedenásť'
-    - 'dvanásť'
-    - 'trinásť'
-    - 'štrnásť'
-    - 'pätnásť'
-    - 'šestnásť'
-    - 'sedemnásť'
-    - 'osemnásť'
-    - 'devätnásť'
-  tensMap:
-    - 'nula'
-    - 'desať'
-    - 'dvadsať'
-    - 'tridsať'
-    - 'štyridsať'
-    - 'päťdesiat'
-    - 'šesťdesiat'
-    - 'sedemdesiat'
-    - 'osemdesiat'
-    - 'deväťdesiat'
-  hundredsMap:
-    - 'nula'
-    - 'sto'
-    - 'dvesto'
-    - 'tristo'
-    - 'štyristo'
-    - 'päťsto'
-    - 'šesťsto'
-    - 'sedemsto'
-    - 'osemsto'
-    - 'deväťsto'
-  unitsMasculineForms:
-    - 'jeden'
-    - 'dva'
-  unitsFeminineForms:
-    - 'jedna'
-    - 'dve'
-  unitsNeuterForms:
-    - 'jedno'
-    - 'dva'
-  unitsInvariantForms:
-    - 'jedna'
-    - 'dva'
-  thousands:
-    singular: 'tisíc'
-    paucal: 'tisíce'
-    plural: 'tisíc'
-    omitLeadingOne: true
-  millions:
-    singular: 'milión'
-    paucal: 'milióny'
-    plural: 'miliónov'
-  billions:
-    singular: 'miliarda'
-    paucal: 'miliardy'
-    plural: 'miliárd'
-ordinalizer:
-  engine: 'suffix'
-  masculineSuffix: '.'
-wordsToNumber:
-  engine: 'token-map'
-  normalizationProfile: 'LowercaseRemovePeriods'
-  cardinalMap:
-    nula: 0
-    jeden: 1
-    jedna: 1
-    jedno: 1
-    dva: 2
-    dve: 2
-    tri: 3
-    'štyri': 4
-    styri: 4
-    'päť': 5
-    pat: 5
-    'šesť': 6
-    sest: 6
-    sedem: 7
-    osem: 8
-    'deväť': 9
-    devat: 9
-    'desať': 10
-    desat: 10
-    'jedenásť': 11
-    jedenast: 11
-    'dvanásť': 12
-    dvanast: 12
-    'trinásť': 13
-    trinast: 13
-    'štrnásť': 14
-    strnast: 14
-    'pätnásť': 15
-    patnast: 15
-    'šestnásť': 16
-    sestnast: 16
-    'sedemnásť': 17
-    sedemnast: 17
-    'osemnásť': 18
-    osemnast: 18
-    'devätnásť': 19
-    devatnast: 19
-    'dvadsať': 20
-    dvadsat: 20
-    'tridsať': 30
-    tridsat: 30
-    'štyridsať': 40
-    styridsat: 40
-    'päťdesiat': 50
-    patdesiat: 50
-    'šesťdesiat': 60
-    sestdesiat: 60
-    sedemdesiat: 70
-    osemdesiat: 80
-    'deväťdesiat': 90
-    devatdesiat: 90
-    sto: 100
-    dvesto: 200
-    tristo: 300
-    'štyristo': 400
-    styristo: 400
-    'päťsto': 500
-    patsto: 500
-    'šesťsto': 600
-    seststo: 600
-    sedemsto: 700
-    osemsto: 800
-    'deväťsto': 900
-    devatsto: 900
-    'tisíc': 1000
-    tisic: 1000
-    'tisíce': 1000
-    tisice: 1000
-    'milión': 1000000
-    milion: 1000000
-    'milióny': 1000000
-    miliony: 1000000
-    'miliónov': 1000000
-    milionov: 1000000
-    miliarda: 1000000000
-    miliardy: 1000000000
-    'miliárd': 1000000000
-    miliard: 1000000000
-  negativePrefixes:
-    - 'mínus '
-    - 'minus '
+locale: 'sk'
 
-phrases:
-  dateHumanize:
-    now: 'teraz'
-    never: 'nikdy'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'a'
+
+  formatter:
+    engine: 'profiled'
+    resourceKeyDetector: 'between2-and4-paucal'
+    resourceKeySuffixes:
+      paucal: '_Paucal'
+    dataUnitDetector: 'between2-and4-paucal'
+    dataUnitSuffixes:
+      singular: '_Singular'
+      paucal: '_Paucal'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'teraz'
+      never: 'nikdy'
+      past:
+        millisecond:
+          single: 'pred milisekundou'
+          multiple:
+            forms:
+              default: 'milisekundami'
+            beforeCount: 'pred'
+        second:
+          single: 'pred sekundou'
+          multiple:
+            forms:
+              default: 'sekundami'
+            beforeCount: 'pred'
+        minute:
+          single: 'pred minútou'
+          multiple:
+            forms:
+              default: 'minútami'
+            beforeCount: 'pred'
+        hour:
+          single: 'pred hodinou'
+          multiple:
+            forms:
+              default: 'hodinami'
+            beforeCount: 'pred'
+        day:
+          single: 'včera'
+          multiple:
+            forms:
+              default: 'dňami'
+            beforeCount: 'pred'
+          template:
+            name: 'two'
+            value: 'pred 2 dňami'
+        week:
+          single: 'pred týždňom'
+          multiple:
+            forms:
+              default: 'týždňami'
+            beforeCount: 'pred'
+        month:
+          single: 'pred mesiacom'
+          multiple:
+            forms:
+              default: 'mesiacmi'
+            beforeCount: 'pred'
+        year:
+          single: 'pred rokom'
+          multiple:
+            forms:
+              default: 'rokmi'
+            beforeCount: 'pred'
+      future:
+        millisecond:
+          single: 'o milisekundu'
+          multiple:
+            forms:
+              default: 'milisekúnd'
+            beforeCount: 'o'
+        second:
+          single: 'o sekundu'
+          multiple:
+            forms:
+              default: 'sekúnd'
+              singular: 'sekundy'
+              dual: 'sekundy'
+              paucal: 'sekundy'
+              plural: 'sekundy'
+            beforeCount: 'o'
+        minute:
+          single: 'o minútu'
+          multiple:
+            forms:
+              default: 'minút'
+              singular: 'minúty'
+              dual: 'minúty'
+              paucal: 'minúty'
+              plural: 'minúty'
+            beforeCount: 'o'
+        hour:
+          single: 'o hodinu'
+          multiple:
+            forms:
+              default: 'hodín'
+              singular: 'hodiny'
+              dual: 'hodiny'
+              paucal: 'hodiny'
+              plural: 'hodiny'
+            beforeCount: 'o'
+        day:
+          single: 'zajtra'
+          multiple:
+            forms:
+              default: 'dní'
+              singular: 'dni'
+              dual: 'dni'
+              paucal: 'dni'
+              plural: 'dni'
+            beforeCount: 'o'
+          template:
+            name: 'two'
+            value: 'o 2 dni'
+        week:
+          single: 'o týždeň'
+          multiple:
+            forms:
+              default: 'týždňov'
+            beforeCount: 'o'
+        month:
+          single: 'o mesiac'
+          multiple:
+            forms:
+              default: 'mesiacov'
+              singular: 'mesiace'
+              dual: 'mesiace'
+              paucal: 'mesiace'
+              plural: 'mesiace'
+            beforeCount: 'o'
+        year:
+          single: 'o rok'
+          multiple:
+            forms:
+              default: 'rokov'
+              singular: 'roky'
+              dual: 'roky'
+              paucal: 'roky'
+              plural: 'roky'
+            beforeCount: 'o'
+    duration:
+      zero: 'žiadny čas'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'pred milisekundou'
-        multiple:
-          forms:
-            default: 'milisekundami'
-          beforeCount: 'pred'
-      second:
-        single: 'pred sekundou'
-        multiple:
-          forms:
-            default: 'sekundami'
-          beforeCount: 'pred'
-      minute:
-        single: 'pred minútou'
-        multiple:
-          forms:
-            default: 'minútami'
-          beforeCount: 'pred'
-      hour:
-        single: 'pred hodinou'
-        multiple:
-          forms:
-            default: 'hodinami'
-          beforeCount: 'pred'
-      day:
-        single: 'včera'
-        multiple:
-          forms:
-            default: 'dňami'
-          beforeCount: 'pred'
-        template:
-          name: 'two'
-          value: 'pred 2 dňami'
-      week:
-        single: 'pred týždňom'
-        multiple:
-          forms:
-            default: 'týždňami'
-          beforeCount: 'pred'
-      month:
-        single: 'pred mesiacom'
-        multiple:
-          forms:
-            default: 'mesiacmi'
-          beforeCount: 'pred'
-      year:
-        single: 'pred rokom'
-        multiple:
-          forms:
-            default: 'rokmi'
-          beforeCount: 'pred'
-    future:
-      millisecond:
-        single: 'o milisekundu'
+        single:
+          numeric: '1 milisekunda'
+          words: 'one milisekunda'
         multiple:
           forms:
             default: 'milisekúnd'
-          beforeCount: 'o'
+            singular: 'milisekundy'
+            dual: 'milisekundy'
+            paucal: 'milisekundy'
+            plural: 'milisekundy'
       second:
-        single: 'o sekundu'
+        single:
+          numeric: '1 sekunda'
+          words: 'one sekunda'
         multiple:
           forms:
             default: 'sekúnd'
@@ -247,9 +174,10 @@ phrases:
             dual: 'sekundy'
             paucal: 'sekundy'
             plural: 'sekundy'
-          beforeCount: 'o'
       minute:
-        single: 'o minútu'
+        single:
+          numeric: '1 minúta'
+          words: 'one minúta'
         multiple:
           forms:
             default: 'minút'
@@ -257,9 +185,10 @@ phrases:
             dual: 'minúty'
             paucal: 'minúty'
             plural: 'minúty'
-          beforeCount: 'o'
       hour:
-        single: 'o hodinu'
+        single:
+          numeric: '1 hodina'
+          words: 'one hodina'
         multiple:
           forms:
             default: 'hodín'
@@ -267,9 +196,10 @@ phrases:
             dual: 'hodiny'
             paucal: 'hodiny'
             plural: 'hodiny'
-          beforeCount: 'o'
       day:
-        single: 'zajtra'
+        single:
+          numeric: '1 deň'
+          words: 'one deň'
         multiple:
           forms:
             default: 'dní'
@@ -277,18 +207,21 @@ phrases:
             dual: 'dni'
             paucal: 'dni'
             plural: 'dni'
-          beforeCount: 'o'
-        template:
-          name: 'two'
-          value: 'o 2 dni'
       week:
-        single: 'o týždeň'
+        single:
+          numeric: '1 týždeň'
+          words: 'one týždeň'
         multiple:
           forms:
             default: 'týždňov'
-          beforeCount: 'o'
+            singular: 'týždne'
+            dual: 'týždne'
+            paucal: 'týždne'
+            plural: 'týždne'
       month:
-        single: 'o mesiac'
+        single:
+          numeric: '1 mesiac'
+          words: 'one mesiac'
         multiple:
           forms:
             default: 'mesiacov'
@@ -296,9 +229,10 @@ phrases:
             dual: 'mesiace'
             paucal: 'mesiace'
             plural: 'mesiace'
-          beforeCount: 'o'
       year:
-        single: 'o rok'
+        single:
+          numeric: '1 rok'
+          words: 'one rok'
         multiple:
           forms:
             default: 'rokov'
@@ -306,183 +240,256 @@ phrases:
             dual: 'roky'
             paucal: 'roky'
             plural: 'roky'
-          beforeCount: 'o'
-  timeSpan:
-    zero: 'žiadny čas'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1 milisekunda'
-        words: 'one milisekunda'
-      multiple:
+    dataUnits:
+      bit:
         forms:
-          default: 'milisekúnd'
-          singular: 'milisekundy'
-          dual: 'milisekundy'
-          paucal: 'milisekundy'
-          plural: 'milisekundy'
-    second:
-      single:
-        numeric: '1 sekunda'
-        words: 'one sekunda'
-      multiple:
+          default: 'bitov'
+        symbol: 'b'
+      byte:
         forms:
-          default: 'sekúnd'
-          singular: 'sekundy'
-          dual: 'sekundy'
-          paucal: 'sekundy'
-          plural: 'sekundy'
-    minute:
-      single:
-        numeric: '1 minúta'
-        words: 'one minúta'
-      multiple:
+          default: 'bajtov'
+          singular: 'bajt'
+          paucal: 'bajty'
+        symbol: 'B'
+      kilobyte:
         forms:
-          default: 'minút'
-          singular: 'minúty'
-          dual: 'minúty'
-          paucal: 'minúty'
-          plural: 'minúty'
-    hour:
-      single:
-        numeric: '1 hodina'
-        words: 'one hodina'
-      multiple:
+          default: 'kilobajtov'
+          singular: 'kilobajt'
+          paucal: 'kilobajty'
+        symbol: 'KB'
+      megabyte:
         forms:
-          default: 'hodín'
-          singular: 'hodiny'
-          dual: 'hodiny'
-          paucal: 'hodiny'
-          plural: 'hodiny'
-    day:
-      single:
-        numeric: '1 deň'
-        words: 'one deň'
-      multiple:
+          default: 'megabajtov'
+          singular: 'megabajt'
+          paucal: 'megabajty'
+        symbol: 'MB'
+      gigabyte:
         forms:
-          default: 'dní'
-          singular: 'dni'
-          dual: 'dni'
-          paucal: 'dni'
-          plural: 'dni'
-    week:
-      single:
-        numeric: '1 týždeň'
-        words: 'one týždeň'
-      multiple:
+          default: 'gigabajtov'
+          singular: 'gigabajt'
+          paucal: 'gigabajty'
+        symbol: 'GB'
+      terabyte:
         forms:
-          default: 'týždňov'
-          singular: 'týždne'
-          dual: 'týždne'
-          paucal: 'týždne'
-          plural: 'týždne'
-    month:
-      single:
-        numeric: '1 mesiac'
-        words: 'one mesiac'
-      multiple:
-        forms:
-          default: 'mesiacov'
-          singular: 'mesiace'
-          dual: 'mesiace'
-          paucal: 'mesiace'
-          plural: 'mesiace'
-    year:
-      single:
-        numeric: '1 rok'
-        words: 'one rok'
-      multiple:
-        forms:
-          default: 'rokov'
-          singular: 'roky'
-          dual: 'roky'
-          paucal: 'roky'
-          plural: 'roky'
-  dataUnit:
-    bit:
-      forms:
-        default: 'bitov'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'bajtov'
-        singular: 'bajt'
-        paucal: 'bajty'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'kilobajtov'
-        singular: 'kilobajt'
-        paucal: 'kilobajty'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'megabajtov'
-        singular: 'megabajt'
-        paucal: 'megabajty'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'gigabajtov'
-        singular: 'gigabajt'
-        paucal: 'gigabajty'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'terabajtov'
-        singular: 'terabajt'
-        paucal: 'terabajty'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'ms'
-    second:
-      symbol: 's'
-    minute:
-      symbol: 'min'
-    hour:
-      symbol: 'h'
-    day:
-      symbol: 'deň'
-    week:
-      symbol: 'týždeň'
-    month:
-      symbol: 'mesiac'
-    year:
-      symbol: 'rok'
-headings:
-  full:
-    - 'sever'
-    - 'severoseverovýchod'
-    - 'severovýchod'
-    - 'východoseverovýchod'
-    - 'východ'
-    - 'východojuhovýchod'
-    - 'juhovýchod'
-    - 'juhojuhovýchod'
-    - 'juh'
-    - 'juhojuhozápad'
-    - 'juhozápad'
-    - 'západojuhozápad'
-    - 'západ'
-    - 'západoseverozápad'
-    - 'severozápad'
-    - 'severoseverozápad'
-  short:
-    - 'S'
-    - 'SSV'
-    - 'SV'
-    - 'VSV'
-    - 'V'
-    - 'VJV'
-    - 'JV'
-    - 'JJV'
-    - 'J'
-    - 'JJZ'
-    - 'JZ'
-    - 'ZJZ'
-    - 'Z'
-    - 'ZSZ'
-    - 'SZ'
-    - 'SSZ'
+          default: 'terabajtov'
+          singular: 'terabajt'
+          paucal: 'terabajty'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'deň'
+      week:
+        symbol: 'týždeň'
+      month:
+        symbol: 'mesiac'
+      year:
+        symbol: 'rok'
+
+  number:
+    words:
+      engine: 'west-slavic-gendered'
+      useCulture: true
+      minusWord: 'mínus'
+      unitsMap:
+        - 'nula'
+        - 'jeden'
+        - 'dva'
+        - 'tri'
+        - 'štyri'
+        - 'päť'
+        - 'šesť'
+        - 'sedem'
+        - 'osem'
+        - 'deväť'
+        - 'desať'
+        - 'jedenásť'
+        - 'dvanásť'
+        - 'trinásť'
+        - 'štrnásť'
+        - 'pätnásť'
+        - 'šestnásť'
+        - 'sedemnásť'
+        - 'osemnásť'
+        - 'devätnásť'
+      tensMap:
+        - 'nula'
+        - 'desať'
+        - 'dvadsať'
+        - 'tridsať'
+        - 'štyridsať'
+        - 'päťdesiat'
+        - 'šesťdesiat'
+        - 'sedemdesiat'
+        - 'osemdesiat'
+        - 'deväťdesiat'
+      hundredsMap:
+        - 'nula'
+        - 'sto'
+        - 'dvesto'
+        - 'tristo'
+        - 'štyristo'
+        - 'päťsto'
+        - 'šesťsto'
+        - 'sedemsto'
+        - 'osemsto'
+        - 'deväťsto'
+      unitsMasculineForms:
+        - 'jeden'
+        - 'dva'
+      unitsFeminineForms:
+        - 'jedna'
+        - 'dve'
+      unitsNeuterForms:
+        - 'jedno'
+        - 'dva'
+      unitsInvariantForms:
+        - 'jedna'
+        - 'dva'
+      thousands:
+        singular: 'tisíc'
+        paucal: 'tisíce'
+        plural: 'tisíc'
+        omitLeadingOne: true
+      millions:
+        singular: 'milión'
+        paucal: 'milióny'
+        plural: 'miliónov'
+      billions:
+        singular: 'miliarda'
+        paucal: 'miliardy'
+        plural: 'miliárd'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        nula: 0
+        jeden: 1
+        jedna: 1
+        jedno: 1
+        dva: 2
+        dve: 2
+        tri: 3
+        'štyri': 4
+        styri: 4
+        'päť': 5
+        pat: 5
+        'šesť': 6
+        sest: 6
+        sedem: 7
+        osem: 8
+        'deväť': 9
+        devat: 9
+        'desať': 10
+        desat: 10
+        'jedenásť': 11
+        jedenast: 11
+        'dvanásť': 12
+        dvanast: 12
+        'trinásť': 13
+        trinast: 13
+        'štrnásť': 14
+        strnast: 14
+        'pätnásť': 15
+        patnast: 15
+        'šestnásť': 16
+        sestnast: 16
+        'sedemnásť': 17
+        sedemnast: 17
+        'osemnásť': 18
+        osemnast: 18
+        'devätnásť': 19
+        devatnast: 19
+        'dvadsať': 20
+        dvadsat: 20
+        'tridsať': 30
+        tridsat: 30
+        'štyridsať': 40
+        styridsat: 40
+        'päťdesiat': 50
+        patdesiat: 50
+        'šesťdesiat': 60
+        sestdesiat: 60
+        sedemdesiat: 70
+        osemdesiat: 80
+        'deväťdesiat': 90
+        devatdesiat: 90
+        sto: 100
+        dvesto: 200
+        tristo: 300
+        'štyristo': 400
+        styristo: 400
+        'päťsto': 500
+        patsto: 500
+        'šesťsto': 600
+        seststo: 600
+        sedemsto: 700
+        osemsto: 800
+        'deväťsto': 900
+        devatsto: 900
+        'tisíc': 1000
+        tisic: 1000
+        'tisíce': 1000
+        tisice: 1000
+        'milión': 1000000
+        milion: 1000000
+        'milióny': 1000000
+        miliony: 1000000
+        'miliónov': 1000000
+        milionov: 1000000
+        miliarda: 1000000000
+        miliardy: 1000000000
+        'miliárd': 1000000000
+        miliard: 1000000000
+      negativePrefixes:
+        - 'mínus '
+        - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+  compass:
+    full:
+      - 'sever'
+      - 'severoseverovýchod'
+      - 'severovýchod'
+      - 'východoseverovýchod'
+      - 'východ'
+      - 'východojuhovýchod'
+      - 'juhovýchod'
+      - 'juhojuhovýchod'
+      - 'juh'
+      - 'juhojuhozápad'
+      - 'juhozápad'
+      - 'západojuhozápad'
+      - 'západ'
+      - 'západoseverozápad'
+      - 'severozápad'
+      - 'severoseverozápad'
+    short:
+      - 'S'
+      - 'SSV'
+      - 'SV'
+      - 'VSV'
+      - 'V'
+      - 'VJV'
+      - 'JV'
+      - 'JJV'
+      - 'J'
+      - 'JJZ'
+      - 'JZ'
+      - 'ZJZ'
+      - 'Z'
+      - 'ZSZ'
+      - 'SZ'
+      - 'SSZ'

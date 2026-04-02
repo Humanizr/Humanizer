@@ -1,391 +1,396 @@
-# Locale-owned generator data for pt-BR.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-inherits: 'pt'
-numberToWords:
-  engine: 'billion-strategy'
-  minusWord: 'menos'
-  andWord: 'e'
-  cardinal:
-    hundredExactWord: 'cem'
-    thousandWord: 'mil'
-    millionSingularWord: 'milhão'
-    millionPluralWord: 'milhões'
-    billionStrategy: 'billion-word'
-    billionSingularWord: 'bilhão'
-    billionPluralWord: 'bilhões'
-    unitsMap:
-      - 'zero'
-      - 'um'
-      - 'dois'
-      - 'três'
-      - 'quatro'
-      - 'cinco'
-      - 'seis'
-      - 'sete'
-      - 'oito'
-      - 'nove'
-      - 'dez'
-      - 'onze'
-      - 'doze'
-      - 'treze'
-      - 'quatorze'
-      - 'quinze'
-      - 'dezesseis'
-      - 'dezessete'
-      - 'dezoito'
-      - 'dezenove'
-    tensMap:
-      - 'zero'
-      - 'dez'
-      - 'vinte'
-      - 'trinta'
-      - 'quarenta'
-      - 'cinquenta'
-      - 'sessenta'
-      - 'setenta'
-      - 'oitenta'
-      - 'noventa'
-    hundredsMap:
-      - 'zero'
-      - 'cento'
-      - 'duzentos'
-      - 'trezentos'
-      - 'quatrocentos'
-      - 'quinhentos'
-      - 'seiscentos'
-      - 'setecentos'
-      - 'oitocentos'
-      - 'novecentos'
-  ordinal:
-    billionStrategy: 'billion-word'
-    thousandWord: 'milésimo'
-    millionWord: 'milionésimo'
-    billionWord: 'bilionésimo'
-    millionJoinMode: 'compact'
-    unitsMap:
-      - 'zero'
-      - 'primeiro'
-      - 'segundo'
-      - 'terceiro'
-      - 'quarto'
-      - 'quinto'
-      - 'sexto'
-      - 'sétimo'
-      - 'oitavo'
-      - 'nono'
-    tensMap:
-      - 'zero'
-      - 'décimo'
-      - 'vigésimo'
-      - 'trigésimo'
-      - 'quadragésimo'
-      - 'quinquagésimo'
-      - 'sexagésimo'
-      - 'septuagésimo'
-      - 'octogésimo'
-      - 'nonagésimo'
-    hundredsMap:
-      - 'zero'
-      - 'centésimo'
-      - 'ducentésimo'
-      - 'trecentésimo'
-      - 'quadringentésimo'
-      - 'quingentésimo'
-      - 'sexcentésimo'
-      - 'septingentésimo'
-      - 'octingentésimo'
-      - 'noningentésimo'
-dateToOrdinalWords:
-  pattern: '{day} ''de'' MMMM ''de'' yyyy'
-  dayMode: 'MasculineOrdinalWhenDayIsOne'
-dateOnlyToOrdinalWords:
-  pattern: '{day} ''de'' MMMM ''de'' yyyy'
-  dayMode: 'MasculineOrdinalWhenDayIsOne'
-timeOnlyToClockNotation:
-  engine: 'phrase-hour'
-  midnight: 'meia-noite'
-  midday: 'meio-dia'
-  oclockFormat: '{0} em ponto'
-  quarterPastFormat: '{0} e quinze'
-  halfPastFormat: '{0} e meia'
-  twentyToFormat: 'vinte para as {0}'
-  quarterToFormat: 'quinze para as {0}'
-  tenToFormat: 'dez para as {0}'
-  fiveToFormat: 'cinco para as {0}'
-  roundHourFormat: '{0} em ponto'
-  genericMinutesFormat: '{0} e {1}'
+locale: 'pt-BR'
+variantOf: 'pt'
 
-phrases:
-  dateHumanize:
-    now: 'agora'
-    never: 'nunca'
-    past:
+surfaces:
+  phrases:
+    relativeDate:
+      now: 'agora'
+      never: 'nunca'
+      past:
+        millisecond:
+          single: 'um milissegundo atrás'
+          multiple:
+            forms:
+              default: 'milissegundos'
+            beforeCount: ''
+            afterCount: 'atrás'
+        second:
+          single: 'um segundo atrás'
+          multiple:
+            forms:
+              default: 'segundos'
+              singular: 'segundo'
+            beforeCount: ''
+            afterCount: 'atrás'
+        minute:
+          single: 'um minuto atrás'
+          multiple:
+            forms:
+              default: 'minutos'
+              singular: 'minuto'
+            beforeCount: ''
+            afterCount: 'atrás'
+        hour:
+          single: 'uma hora atrás'
+          multiple:
+            forms:
+              default: 'horas'
+              singular: 'hora'
+            beforeCount: ''
+            afterCount: 'atrás'
+        day:
+          single: 'ontem'
+          multiple:
+            forms:
+              default: 'dias'
+              singular: 'dia'
+            beforeCount: ''
+            afterCount: 'atrás'
+          template:
+            name: 'two'
+            value: '2 dias atrás'
+        week:
+          single: 'uma semana atrás'
+          multiple:
+            forms:
+              default: 'semanas'
+            beforeCount: ''
+            afterCount: 'atrás'
+        month:
+          single: 'um mês atrás'
+          multiple:
+            forms:
+              default: 'meses'
+              singular: 'mês'
+            beforeCount: ''
+            afterCount: 'atrás'
+        year:
+          single: 'um ano atrás'
+          multiple:
+            forms:
+              default: 'anos'
+              singular: 'ano'
+            beforeCount: ''
+            afterCount: 'atrás'
+      future:
+        millisecond:
+          single: 'em um milissegundo'
+          multiple:
+            forms:
+              default: 'milissegundos'
+            beforeCount: 'em'
+        second:
+          single: 'em um segundo'
+          multiple:
+            forms:
+              default: 'segundos'
+              singular: 'segundo'
+            beforeCount: 'em'
+        minute:
+          single: 'em um minuto'
+          multiple:
+            forms:
+              default: 'minutos'
+              singular: 'minuto'
+            beforeCount: 'em'
+        hour:
+          single: 'em uma hora'
+          multiple:
+            forms:
+              default: 'horas'
+              singular: 'hora'
+            beforeCount: 'em'
+        day:
+          single: 'amanhã'
+          multiple:
+            forms:
+              default: 'dias'
+              singular: 'dia'
+            beforeCount: 'em'
+          template:
+            name: 'two'
+            value: 'em 2 dias'
+        week:
+          single: 'em uma semana'
+          multiple:
+            forms:
+              default: 'semanas'
+            beforeCount: 'em'
+        month:
+          single: 'em um mês'
+          multiple:
+            forms:
+              default: 'meses'
+              singular: 'mês'
+            beforeCount: 'em'
+        year:
+          single: 'em um ano'
+          multiple:
+            forms:
+              default: 'anos'
+              singular: 'ano'
+            beforeCount: 'em'
+    duration:
+      zero: 'sem tempo'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'um milissegundo atrás'
+        single:
+          numeric: '1 milissegundo'
+          words: 'um milissegundo'
         multiple:
           forms:
             default: 'milissegundos'
-          beforeCount: ''
-          afterCount: 'atrás'
+            singular: 'milissegundo'
       second:
-        single: 'um segundo atrás'
+        single:
+          numeric: '1 segundo'
+          words: 'um segundo'
         multiple:
           forms:
             default: 'segundos'
             singular: 'segundo'
-          beforeCount: ''
-          afterCount: 'atrás'
       minute:
-        single: 'um minuto atrás'
+        single:
+          numeric: '1 minuto'
+          words: 'um minuto'
         multiple:
           forms:
             default: 'minutos'
             singular: 'minuto'
-          beforeCount: ''
-          afterCount: 'atrás'
       hour:
-        single: 'uma hora atrás'
+        single:
+          numeric: '1 hora'
+          words: 'uma hora'
         multiple:
           forms:
             default: 'horas'
             singular: 'hora'
-          beforeCount: ''
-          afterCount: 'atrás'
       day:
-        single: 'ontem'
+        single:
+          numeric: '1 dia'
+          words: 'um dia'
         multiple:
           forms:
             default: 'dias'
             singular: 'dia'
-          beforeCount: ''
-          afterCount: 'atrás'
-        template:
-          name: 'two'
-          value: '2 dias atrás'
       week:
-        single: 'uma semana atrás'
+        single:
+          numeric: '1 semana'
+          words: 'uma semana'
         multiple:
           forms:
             default: 'semanas'
-          beforeCount: ''
-          afterCount: 'atrás'
+            singular: 'semana'
       month:
-        single: 'um mês atrás'
+        single:
+          numeric: '1 mês'
+          words: 'um mês'
         multiple:
           forms:
             default: 'meses'
             singular: 'mês'
-          beforeCount: ''
-          afterCount: 'atrás'
       year:
-        single: 'um ano atrás'
+        single:
+          numeric: '1 ano'
+          words: 'um ano'
         multiple:
           forms:
             default: 'anos'
             singular: 'ano'
-          beforeCount: ''
-          afterCount: 'atrás'
-    future:
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'bit'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
       millisecond:
-        single: 'em um milissegundo'
-        multiple:
-          forms:
-            default: 'milissegundos'
-          beforeCount: 'em'
+        symbol: 'ms'
       second:
-        single: 'em um segundo'
-        multiple:
-          forms:
-            default: 'segundos'
-            singular: 'segundo'
-          beforeCount: 'em'
+        symbol: 's'
       minute:
-        single: 'em um minuto'
-        multiple:
-          forms:
-            default: 'minutos'
-            singular: 'minuto'
-          beforeCount: 'em'
+        symbol: 'min'
       hour:
-        single: 'em uma hora'
-        multiple:
-          forms:
-            default: 'horas'
-            singular: 'hora'
-          beforeCount: 'em'
+        symbol: 'h'
       day:
-        single: 'amanhã'
-        multiple:
-          forms:
-            default: 'dias'
-            singular: 'dia'
-          beforeCount: 'em'
-        template:
-          name: 'two'
-          value: 'em 2 dias'
+        symbol: 'd'
       week:
-        single: 'em uma semana'
-        multiple:
-          forms:
-            default: 'semanas'
-          beforeCount: 'em'
+        symbol: 'semana'
       month:
-        single: 'em um mês'
-        multiple:
-          forms:
-            default: 'meses'
-            singular: 'mês'
-          beforeCount: 'em'
+        symbol: 'm'
       year:
-        single: 'em um ano'
-        multiple:
-          forms:
-            default: 'anos'
-            singular: 'ano'
-          beforeCount: 'em'
-  timeSpan:
-    zero: 'sem tempo'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1 milissegundo'
-        words: 'um milissegundo'
-      multiple:
-        forms:
-          default: 'milissegundos'
-          singular: 'milissegundo'
-    second:
-      single:
-        numeric: '1 segundo'
-        words: 'um segundo'
-      multiple:
-        forms:
-          default: 'segundos'
-          singular: 'segundo'
-    minute:
-      single:
-        numeric: '1 minuto'
-        words: 'um minuto'
-      multiple:
-        forms:
-          default: 'minutos'
-          singular: 'minuto'
-    hour:
-      single:
-        numeric: '1 hora'
-        words: 'uma hora'
-      multiple:
-        forms:
-          default: 'horas'
-          singular: 'hora'
-    day:
-      single:
-        numeric: '1 dia'
-        words: 'um dia'
-      multiple:
-        forms:
-          default: 'dias'
-          singular: 'dia'
-    week:
-      single:
-        numeric: '1 semana'
-        words: 'uma semana'
-      multiple:
-        forms:
-          default: 'semanas'
-          singular: 'semana'
-    month:
-      single:
-        numeric: '1 mês'
-        words: 'um mês'
-      multiple:
-        forms:
-          default: 'meses'
-          singular: 'mês'
-    year:
-      single:
-        numeric: '1 ano'
-        words: 'um ano'
-      multiple:
-        forms:
-          default: 'anos'
-          singular: 'ano'
-  dataUnit:
-    bit:
-      forms:
-        default: 'bit'
-      symbol: 'bit'
-    byte:
-      forms:
-        default: 'byte'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'kilobyte'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'megabyte'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'gigabyte'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'terabyte'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'ms'
-    second:
-      symbol: 's'
-    minute:
-      symbol: 'min'
-    hour:
-      symbol: 'h'
-    day:
-      symbol: 'd'
-    week:
-      symbol: 'semana'
-    month:
-      symbol: 'm'
-    year:
-      symbol: 'a'
-headings:
-  full:
-    - 'norte'
-    - 'norte-nordeste'
-    - 'nordeste'
-    - 'leste-nordeste'
-    - 'leste'
-    - 'leste-sudeste'
-    - 'sudeste'
-    - 'sul-sudeste'
-    - 'sul'
-    - 'sul-sudoeste'
-    - 'sudoeste'
-    - 'oeste-sudoeste'
-    - 'oeste'
-    - 'oeste-noroeste'
-    - 'noroeste'
-    - 'norte-noroeste'
-  short:
-    - 'N'
-    - 'NNE'
-    - 'NE'
-    - 'LNE'
-    - 'L'
-    - 'LSE'
-    - 'SE'
-    - 'SSE'
-    - 'S'
-    - 'SSO'
-    - 'SO'
-    - 'OSO'
-    - 'O'
-    - 'ONO'
-    - 'NO'
-    - 'NNO'
+        symbol: 'a'
+
+  number:
+    words:
+      engine: 'billion-strategy'
+      minusWord: 'menos'
+      andWord: 'e'
+      cardinal:
+        hundredExactWord: 'cem'
+        thousandWord: 'mil'
+        millionSingularWord: 'milhão'
+        millionPluralWord: 'milhões'
+        billionStrategy: 'billion-word'
+        billionSingularWord: 'bilhão'
+        billionPluralWord: 'bilhões'
+        unitsMap:
+          - 'zero'
+          - 'um'
+          - 'dois'
+          - 'três'
+          - 'quatro'
+          - 'cinco'
+          - 'seis'
+          - 'sete'
+          - 'oito'
+          - 'nove'
+          - 'dez'
+          - 'onze'
+          - 'doze'
+          - 'treze'
+          - 'quatorze'
+          - 'quinze'
+          - 'dezesseis'
+          - 'dezessete'
+          - 'dezoito'
+          - 'dezenove'
+        tensMap:
+          - 'zero'
+          - 'dez'
+          - 'vinte'
+          - 'trinta'
+          - 'quarenta'
+          - 'cinquenta'
+          - 'sessenta'
+          - 'setenta'
+          - 'oitenta'
+          - 'noventa'
+        hundredsMap:
+          - 'zero'
+          - 'cento'
+          - 'duzentos'
+          - 'trezentos'
+          - 'quatrocentos'
+          - 'quinhentos'
+          - 'seiscentos'
+          - 'setecentos'
+          - 'oitocentos'
+          - 'novecentos'
+      ordinal:
+        billionStrategy: 'billion-word'
+        thousandWord: 'milésimo'
+        millionWord: 'milionésimo'
+        billionWord: 'bilionésimo'
+        millionJoinMode: 'compact'
+        unitsMap:
+          - 'zero'
+          - 'primeiro'
+          - 'segundo'
+          - 'terceiro'
+          - 'quarto'
+          - 'quinto'
+          - 'sexto'
+          - 'sétimo'
+          - 'oitavo'
+          - 'nono'
+        tensMap:
+          - 'zero'
+          - 'décimo'
+          - 'vigésimo'
+          - 'trigésimo'
+          - 'quadragésimo'
+          - 'quinquagésimo'
+          - 'sexagésimo'
+          - 'septuagésimo'
+          - 'octogésimo'
+          - 'nonagésimo'
+        hundredsMap:
+          - 'zero'
+          - 'centésimo'
+          - 'ducentésimo'
+          - 'trecentésimo'
+          - 'quadringentésimo'
+          - 'quingentésimo'
+          - 'sexcentésimo'
+          - 'septingentésimo'
+          - 'octingentésimo'
+          - 'noningentésimo'
+
+  ordinal:
+    date:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'MasculineOrdinalWhenDayIsOne'
+    dateOnly:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'MasculineOrdinalWhenDayIsOne'
+
+  clock:
+    engine: 'phrase-hour'
+    midnight: 'meia-noite'
+    midday: 'meio-dia'
+    oclockFormat: '{0} em ponto'
+    quarterPastFormat: '{0} e quinze'
+    halfPastFormat: '{0} e meia'
+    twentyToFormat: 'vinte para as {0}'
+    quarterToFormat: 'quinze para as {0}'
+    tenToFormat: 'dez para as {0}'
+    fiveToFormat: 'cinco para as {0}'
+    roundHourFormat: '{0} em ponto'
+    genericMinutesFormat: '{0} e {1}'
+
+  compass:
+    full:
+      - 'norte'
+      - 'norte-nordeste'
+      - 'nordeste'
+      - 'leste-nordeste'
+      - 'leste'
+      - 'leste-sudeste'
+      - 'sudeste'
+      - 'sul-sudeste'
+      - 'sul'
+      - 'sul-sudoeste'
+      - 'sudoeste'
+      - 'oeste-sudoeste'
+      - 'oeste'
+      - 'oeste-noroeste'
+      - 'noroeste'
+      - 'norte-noroeste'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'LNE'
+      - 'L'
+      - 'LSE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSO'
+      - 'SO'
+      - 'OSO'
+      - 'O'
+      - 'ONO'
+      - 'NO'
+      - 'NNO'

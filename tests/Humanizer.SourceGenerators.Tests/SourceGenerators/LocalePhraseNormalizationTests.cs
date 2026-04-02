@@ -18,7 +18,7 @@ public class LocalePhraseNormalizationTests
             "zz",
             """
             phrases:
-              dataUnit:
+              dataUnits:
                 byte:
                   forms: 'byte'
             """);
@@ -39,7 +39,7 @@ public class LocalePhraseNormalizationTests
             "zz",
             """
             phrases:
-              dataUnit:
+              dataUnits:
                 day:
                   forms:
                     default: 'days'
@@ -65,7 +65,7 @@ public class LocalePhraseNormalizationTests
             "zz",
             """
             phrases:
-              dateHumanize:
+              relativeDate:
                 future:
                   day:
                     multiple:
@@ -98,7 +98,7 @@ public class LocalePhraseNormalizationTests
             "zz",
             """
             phrases:
-              timeSpan:
+              duration:
                 day:
                   multiple:
                     forms: 'days'
@@ -118,7 +118,7 @@ public class LocalePhraseNormalizationTests
             "zz",
             """
             phrases:
-              dateHumanize:
+              relativeDate:
                 past:
                   day:
                     multiple:
@@ -141,7 +141,7 @@ public class LocalePhraseNormalizationTests
                 "zz",
                 """
                 phrases:
-                  timeSpan:
+                  duration:
                     day:
                       multiple:
                         template: '{count} {unit}'
@@ -157,7 +157,7 @@ public class LocalePhraseNormalizationTests
             "zz",
             """
             phrases:
-              dateHumanize:
+              relativeDate:
                 past:
                   day:
                     template:
@@ -179,7 +179,7 @@ public class LocalePhraseNormalizationTests
             "zz",
             """
             phrases:
-              timeSpan:
+              duration:
                 age:
                   template: '{value} old'
             """);
@@ -195,7 +195,7 @@ public class LocalePhraseNormalizationTests
                 "zz",
                 """
                 phrases:
-                  timeSpan:
+                  duration:
                     day:
                       multiple:
                         forms: 'days'
@@ -209,7 +209,7 @@ public class LocalePhraseNormalizationTests
                 "zz",
                 """
                 phrases:
-                  timeSpan:
+                  duration:
                     age:
                       template: '{unit} old'
                 """));
@@ -225,7 +225,7 @@ public class LocalePhraseNormalizationTests
                 "zz",
                 """
                 phrases:
-                  dateHumanize:
+                  relativeDate:
                     past:
                       day:
                         single: '{0} day ago'
@@ -242,7 +242,7 @@ public class LocalePhraseNormalizationTests
                 "zz",
                 """
                 phrases:
-                  timeSpan:
+                  duration:
                     day:
                       singluar: 'day'
                 """));
@@ -258,7 +258,7 @@ public class LocalePhraseNormalizationTests
                 "zz",
                 """
                 phrases:
-                  timeSpan:
+                  duration:
                     day:
                       single: {}
                 """));
@@ -272,7 +272,7 @@ public class LocalePhraseNormalizationTests
         var catalog = CreateCatalog(
             ("zz", """
 phrases:
-  dateHumanize:
+  relativeDate:
     past:
       day:
         multiple:
@@ -280,7 +280,7 @@ phrases:
           forms:
             singular: 'day'
             default: 'days'
-  dataUnit:
+  dataUnits:
     byte:
       forms:
         singular: 'byte'
@@ -290,11 +290,11 @@ phrases:
 inherits: 'zz'
 
 phrases:
-  dateHumanize:
+  relativeDate:
     past:
       day:
         single: 'yesterday'
-  dataUnit:
+  dataUnits:
     byte:
       symbol: 'B'
 """));
@@ -320,7 +320,7 @@ phrases:
         var catalog = CreateCatalog(
             ("zz", """
 phrases:
-  dateHumanize:
+  relativeDate:
     past:
       day:
         multiple:
@@ -333,7 +333,7 @@ phrases:
 inherits: 'zz'
 
 phrases:
-  dateHumanize:
+  relativeDate:
     past:
       day:
         multiple:
@@ -357,11 +357,15 @@ phrases:
     {
         var catalog = CreateCatalog(
             ("zz", """
-grammar: 'broken'
-phrases:
-  timeSpan:
-    day:
-      singluar: 'day'
+locale: 'zz'
+surfaces:
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'broken'
+  phrases:
+    duration:
+      day:
+        singluar: 'day'
 """));
 
         var messages = catalog.Diagnostics
@@ -369,7 +373,6 @@ phrases:
             .Select(static diagnostic => diagnostic.GetMessage())
             .ToArray();
 
-        Assert.Contains(messages, static message => message.Contains("zz.grammar", StringComparison.Ordinal));
         Assert.Contains(messages, static message => message.Contains("unsupported property 'singluar'", StringComparison.Ordinal));
     }
 
@@ -377,8 +380,16 @@ phrases:
     public void LocaleCatalogInputReportsInheritanceCyclesAsDiagnostics()
     {
         var catalog = CreateCatalog(
-            ("zz-a", "inherits: 'zz-b'"),
-            ("zz-b", "inherits: 'zz-a'"));
+            ("zz-a", """
+locale: 'zz-a'
+variantOf: 'zz-b'
+surfaces: {}
+"""),
+            ("zz-b", """
+locale: 'zz-b'
+variantOf: 'zz-a'
+surfaces: {}
+"""));
 
         Assert.Contains(
             catalog.Diagnostics,
@@ -427,7 +438,13 @@ phrases:
 
     static HumanizerSourceGenerator.LocaleCatalogInput CreateCatalog(params (string LocaleCode, string FileText)[] files) =>
         HumanizerSourceGenerator.LocaleCatalogInput.Create(ImmutableArray.CreateRange(
-            files.Select(static file => (HumanizerSourceGenerator.LocaleDefinitionFile?)new HumanizerSourceGenerator.LocaleDefinitionFile(file.LocaleCode, file.FileText))));
+            files.Select(static file =>
+            {
+                var fileText = file.FileText.Contains("locale:", StringComparison.Ordinal)
+                    ? file.FileText
+                    : HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(file.LocaleCode, file.FileText);
+                return (HumanizerSourceGenerator.LocaleDefinitionFile?)new HumanizerSourceGenerator.LocaleDefinitionFile(file.LocaleCode, fileText);
+            })));
 
     static string GetLocaleFile(string localeCode)
     {

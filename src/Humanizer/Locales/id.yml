@@ -1,335 +1,340 @@
-# Locale-owned generator data for id.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'dan'
-formatter:
-  engine: 'profiled'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-numberToWords:
-  engine: 'contracted-one-scale'
-  zeroWord: 'nol'
-  minusWord: 'minus'
-  hundredWord: 'seratus'
-  hundredUnitWord: 'ratus'
-  units:
-    - 'nol'
-    - 'satu'
-    - 'dua'
-    - 'tiga'
-    - 'empat'
-    - 'lima'
-    - 'enam'
-    - 'tujuh'
-    - 'delapan'
-    - 'sembilan'
-    - 'sepuluh'
-    - 'sebelas'
-    - 'dua belas'
-    - 'tiga belas'
-    - 'empat belas'
-    - 'lima belas'
-    - 'enam belas'
-    - 'tujuh belas'
-    - 'delapan belas'
-    - 'sembilan belas'
-  tens:
-    2: 'dua puluh'
-    3: 'tiga puluh'
-    4: 'empat puluh'
-    5: 'lima puluh'
-    6: 'enam puluh'
-    7: 'tujuh puluh'
-    8: 'delapan puluh'
-    9: 'sembilan puluh'
-  scales:
-    -
-      value: 1000000000000000000
-      name: 'kuintiliun'
-    -
-      value: 1000000000000000
-      name: 'kuadriliun'
-    -
-      value: 1000000000000
-      name: 'triliun'
-    -
-      value: 1000000000
-      name: 'miliar'
-    -
-      value: 1000000
-      name: 'juta'
-    -
-      value: 1000
-      name: 'ribu'
-      oneWord: 'seribu'
-wordsToNumber:
-  engine: 'contracted-scale'
-  minusWord: 'minus'
-  cardinalMap:
-    nol: 0
-    satu: 1
-    dua: 2
-    tiga: 3
-    empat: 4
-    lima: 5
-    enam: 6
-    tujuh: 7
-    delapan: 8
-    sembilan: 9
-    sepuluh: 10
-    sebelas: 11
-    belas: 10
-    puluh: 10
-    seratus: 100
-    ratus: 100
-    seribu: 1000
-    ribu: 1000
-    juta: 1000000
-    miliar: 1000000000
+locale: 'id'
 
-phrases:
-  dateHumanize:
-    now: 'sekarang'
-    never: 'tidak pernah'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'dan'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'sekarang'
+      never: 'tidak pernah'
+      past:
+        millisecond:
+          single: 'satu milidetik yang lalu'
+          multiple:
+            forms:
+              default: 'milidetik'
+            afterCount: 'yang lalu'
+        second:
+          single: 'sedetik yang lalu'
+          multiple:
+            forms:
+              default: 'detik'
+            afterCount: 'yang lalu'
+        minute:
+          single: 'semenit yang lalu'
+          multiple:
+            forms:
+              default: 'menit'
+            afterCount: 'yang lalu'
+        hour:
+          single: 'sejam yang lalu'
+          multiple:
+            forms:
+              default: 'jam'
+            afterCount: 'yang lalu'
+        day:
+          single: 'kemarin'
+          multiple:
+            forms:
+              default: 'hari'
+            afterCount: 'yang lalu'
+          template:
+            name: 'two'
+            value: '2 hari yang lalu'
+        week:
+          single: 'seminggu yang lalu'
+          multiple:
+            forms:
+              default: 'minggu'
+            afterCount: 'yang lalu'
+        month:
+          single: 'sebulan yang lalu'
+          multiple:
+            forms:
+              default: 'bulan'
+            afterCount: 'yang lalu'
+        year:
+          single: 'setahun yang lalu'
+          multiple:
+            forms:
+              default: 'tahun'
+            afterCount: 'yang lalu'
+      future:
+        millisecond:
+          single: 'satu milidetik dari sekarang'
+          multiple:
+            forms:
+              default: 'milidetik'
+            afterCount: 'dari sekarang'
+        second:
+          single: 'sedetik dari sekarang'
+          multiple:
+            forms:
+              default: 'detik'
+            afterCount: 'dari sekarang'
+        minute:
+          single: 'semenit dari sekarang'
+          multiple:
+            forms:
+              default: 'menit'
+            afterCount: 'dari sekarang'
+        hour:
+          single: 'sejam dari sekarang'
+          multiple:
+            forms:
+              default: 'jam'
+            afterCount: 'dari sekarang'
+        day:
+          single: 'besok'
+          multiple:
+            forms:
+              default: 'hari'
+            afterCount: 'dari sekarang'
+          template:
+            name: 'two'
+            value: 'lusa'
+        week:
+          single: 'seminggu dari sekarang'
+          multiple:
+            forms:
+              default: 'minggu'
+            afterCount: 'dari sekarang'
+        month:
+          single: 'sebulan dari sekarang'
+          multiple:
+            forms:
+              default: 'bulan'
+            afterCount: 'dari sekarang'
+        year:
+          single: 'setahun dari sekarang'
+          multiple:
+            forms:
+              default: 'tahun'
+            afterCount: 'dari sekarang'
+    duration:
+      zero: 'tidak ada waktu'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'satu milidetik yang lalu'
+        single:
+          numeric: '1 milidetik'
+          words: 'one milidetik'
         multiple:
           forms:
             default: 'milidetik'
-          afterCount: 'yang lalu'
       second:
-        single: 'sedetik yang lalu'
+        single:
+          numeric: '1 detik'
+          words: 'one detik'
         multiple:
           forms:
             default: 'detik'
-          afterCount: 'yang lalu'
       minute:
-        single: 'semenit yang lalu'
+        single:
+          numeric: '1 menit'
+          words: 'one menit'
         multiple:
           forms:
             default: 'menit'
-          afterCount: 'yang lalu'
       hour:
-        single: 'sejam yang lalu'
+        single:
+          numeric: '1 jam'
+          words: 'one jam'
         multiple:
           forms:
             default: 'jam'
-          afterCount: 'yang lalu'
       day:
-        single: 'kemarin'
+        single:
+          numeric: '1 hari'
+          words: 'one hari'
         multiple:
           forms:
             default: 'hari'
-          afterCount: 'yang lalu'
-        template:
-          name: 'two'
-          value: '2 hari yang lalu'
       week:
-        single: 'seminggu yang lalu'
+        single:
+          numeric: '1 minggu'
+          words: 'one minggu'
         multiple:
           forms:
             default: 'minggu'
-          afterCount: 'yang lalu'
       month:
-        single: 'sebulan yang lalu'
+        single:
+          numeric: '1 bulan'
+          words: 'one bulan'
         multiple:
           forms:
             default: 'bulan'
-          afterCount: 'yang lalu'
       year:
-        single: 'setahun yang lalu'
+        single:
+          numeric: '1 tahun'
+          words: 'one tahun'
         multiple:
           forms:
             default: 'tahun'
-          afterCount: 'yang lalu'
-    future:
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
       millisecond:
-        single: 'satu milidetik dari sekarang'
-        multiple:
-          forms:
-            default: 'milidetik'
-          afterCount: 'dari sekarang'
+        symbol: 'milidetik'
       second:
-        single: 'sedetik dari sekarang'
-        multiple:
-          forms:
-            default: 'detik'
-          afterCount: 'dari sekarang'
+        symbol: 'detik'
       minute:
-        single: 'semenit dari sekarang'
-        multiple:
-          forms:
-            default: 'menit'
-          afterCount: 'dari sekarang'
+        symbol: 'menit'
       hour:
-        single: 'sejam dari sekarang'
-        multiple:
-          forms:
-            default: 'jam'
-          afterCount: 'dari sekarang'
+        symbol: 'jam'
       day:
-        single: 'besok'
-        multiple:
-          forms:
-            default: 'hari'
-          afterCount: 'dari sekarang'
-        template:
-          name: 'two'
-          value: 'lusa'
+        symbol: 'hari'
       week:
-        single: 'seminggu dari sekarang'
-        multiple:
-          forms:
-            default: 'minggu'
-          afterCount: 'dari sekarang'
+        symbol: 'minggu'
       month:
-        single: 'sebulan dari sekarang'
-        multiple:
-          forms:
-            default: 'bulan'
-          afterCount: 'dari sekarang'
+        symbol: 'bulan'
       year:
-        single: 'setahun dari sekarang'
-        multiple:
-          forms:
-            default: 'tahun'
-          afterCount: 'dari sekarang'
-  timeSpan:
-    zero: 'tidak ada waktu'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1 milidetik'
-        words: 'one milidetik'
-      multiple:
-        forms:
-          default: 'milidetik'
-    second:
-      single:
-        numeric: '1 detik'
-        words: 'one detik'
-      multiple:
-        forms:
-          default: 'detik'
-    minute:
-      single:
-        numeric: '1 menit'
-        words: 'one menit'
-      multiple:
-        forms:
-          default: 'menit'
-    hour:
-      single:
-        numeric: '1 jam'
-        words: 'one jam'
-      multiple:
-        forms:
-          default: 'jam'
-    day:
-      single:
-        numeric: '1 hari'
-        words: 'one hari'
-      multiple:
-        forms:
-          default: 'hari'
-    week:
-      single:
-        numeric: '1 minggu'
-        words: 'one minggu'
-      multiple:
-        forms:
-          default: 'minggu'
-    month:
-      single:
-        numeric: '1 bulan'
-        words: 'one bulan'
-      multiple:
-        forms:
-          default: 'bulan'
-    year:
-      single:
-        numeric: '1 tahun'
-        words: 'one tahun'
-      multiple:
-        forms:
-          default: 'tahun'
-  dataUnit:
-    bit:
-      forms:
-        default: 'bit'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'byte'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'kilobyte'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'megabyte'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'gigabyte'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'terabyte'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'milidetik'
-    second:
-      symbol: 'detik'
-    minute:
-      symbol: 'menit'
-    hour:
-      symbol: 'jam'
-    day:
-      symbol: 'hari'
-    week:
-      symbol: 'minggu'
-    month:
-      symbol: 'bulan'
-    year:
-      symbol: 'tahun'
-headings:
-  full:
-    - 'utara'
-    - 'utara-timur laut'
-    - 'timur laut'
-    - 'timur-timur laut'
-    - 'timur'
-    - 'timur-tenggara'
-    - 'tenggara'
-    - 'selatan-tenggara'
-    - 'selatan'
-    - 'selatan-barat daya'
-    - 'barat daya'
-    - 'barat-barat daya'
-    - 'barat'
-    - 'barat-barat laut'
-    - 'barat laut'
-    - 'utara-barat laut'
-  short:
-    - 'U'
-    - 'UTL'
-    - 'TL'
-    - 'TTL'
-    - 'T'
-    - 'TTG'
-    - 'TG'
-    - 'STG'
-    - 'S'
-    - 'SBD'
-    - 'BD'
-    - 'BBD'
-    - 'B'
-    - 'BBL'
-    - 'BL'
-    - 'UBL'
+        symbol: 'tahun'
+
+  number:
+    words:
+      engine: 'contracted-one-scale'
+      zeroWord: 'nol'
+      minusWord: 'minus'
+      hundredWord: 'seratus'
+      hundredUnitWord: 'ratus'
+      units:
+        - 'nol'
+        - 'satu'
+        - 'dua'
+        - 'tiga'
+        - 'empat'
+        - 'lima'
+        - 'enam'
+        - 'tujuh'
+        - 'delapan'
+        - 'sembilan'
+        - 'sepuluh'
+        - 'sebelas'
+        - 'dua belas'
+        - 'tiga belas'
+        - 'empat belas'
+        - 'lima belas'
+        - 'enam belas'
+        - 'tujuh belas'
+        - 'delapan belas'
+        - 'sembilan belas'
+      tens:
+        2: 'dua puluh'
+        3: 'tiga puluh'
+        4: 'empat puluh'
+        5: 'lima puluh'
+        6: 'enam puluh'
+        7: 'tujuh puluh'
+        8: 'delapan puluh'
+        9: 'sembilan puluh'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kuintiliun'
+        -
+          value: 1000000000000000
+          name: 'kuadriliun'
+        -
+          value: 1000000000000
+          name: 'triliun'
+        -
+          value: 1000000000
+          name: 'miliar'
+        -
+          value: 1000000
+          name: 'juta'
+        -
+          value: 1000
+          name: 'ribu'
+          oneWord: 'seribu'
+
+    parse:
+      engine: 'contracted-scale'
+      minusWord: 'minus'
+      cardinalMap:
+        nol: 0
+        satu: 1
+        dua: 2
+        tiga: 3
+        empat: 4
+        lima: 5
+        enam: 6
+        tujuh: 7
+        delapan: 8
+        sembilan: 9
+        sepuluh: 10
+        sebelas: 11
+        belas: 10
+        puluh: 10
+        seratus: 100
+        ratus: 100
+        seribu: 1000
+        ribu: 1000
+        juta: 1000000
+        miliar: 1000000000
+
+  compass:
+    full:
+      - 'utara'
+      - 'utara-timur laut'
+      - 'timur laut'
+      - 'timur-timur laut'
+      - 'timur'
+      - 'timur-tenggara'
+      - 'tenggara'
+      - 'selatan-tenggara'
+      - 'selatan'
+      - 'selatan-barat daya'
+      - 'barat daya'
+      - 'barat-barat daya'
+      - 'barat'
+      - 'barat-barat laut'
+      - 'barat laut'
+      - 'utara-barat laut'
+    short:
+      - 'U'
+      - 'UTL'
+      - 'TL'
+      - 'TTL'
+      - 'T'
+      - 'TTG'
+      - 'TG'
+      - 'STG'
+      - 'S'
+      - 'SBD'
+      - 'BD'
+      - 'BBD'
+      - 'B'
+      - 'BBL'
+      - 'BL'
+      - 'UBL'

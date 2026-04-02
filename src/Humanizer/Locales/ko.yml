@@ -1,354 +1,359 @@
-# Locale-owned generator data for ko.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: '및'
-formatter:
-  engine: 'profiled'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-numberToWords:
-  engine: 'east-asian-grouped'
-  zeroWord: '영'
-  negativePrefix: '마이너스 '
-  ordinalSuffix: '번째'
-  digitWords:
-    - '영'
-    - '일'
-    - '이'
-    - '삼'
-    - '사'
-    - '오'
-    - '육'
-    - '칠'
-    - '팔'
-    - '구'
-  smallUnitWords:
-    1: '십'
-    2: '백'
-    3: '천'
-  largeUnits:
-    1: '만'
-    2: '억'
-    3: '조'
-    4: '경'
-    5: '해'
-    6: '자'
-    7: '양'
-    8: '구'
-    9: '간'
-    10: '정'
-    11: '재'
-    12: '극'
-    13: '항하사'
-    14: '아승기'
-    15: '나유타'
-    16: '불가사의'
-    17: '무량대수'
-  omitOneBeforeTen: true
-  omitOneBeforeHundred: true
-  omitOneBeforeThousand: true
-  insertZeroInGroup: false
-  insertZeroBetweenGroups: false
-  ordinalMap:
-    0: '영번째'
-    1: '첫번째'
-    2: '두번째'
-    3: '세번째'
-    4: '네번째'
-    5: '다섯번째'
-    6: '여섯번째'
-    7: '일곱번째'
-    8: '여덟번째'
-    9: '아홉번째'
-    10: '열번째'
-    11: '열한번째'
-    12: '열두번째'
-    13: '열세번째'
-    14: '열네번째'
-    15: '열다섯번째'
-    16: '열여섯번째'
-    17: '열일곱번째'
-    18: '열여덟번째'
-    19: '열아홉째'
-wordsToNumber:
-  engine: 'east-asian-positional'
-  negativePrefixes:
-    - '마이너스'
-  ordinalSuffix: '번째'
-  digits:
-    '영': 0
-    '일': 1
-    '이': 2
-    '삼': 3
-    '사': 4
-    '오': 5
-    '육': 6
-    '칠': 7
-    '팔': 8
-    '구': 9
-  smallUnits:
-    '십': 10
-    '백': 100
-    '천': 1000
-  largeUnits:
-    '만': 10000
-    '억': 100000000
-  ordinalMap:
-    '첫번째': 1
-    '두번째': 2
-    '세번째': 3
+locale: 'ko'
 
-phrases:
-  dateHumanize:
-    now: '지금'
-    never: '없음'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: '및'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: '지금'
+      never: '없음'
+      past:
+        millisecond:
+          single: '1밀리초 전'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}밀리초 전'
+        second:
+          single: '1초 전'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}초 전'
+        minute:
+          single: '1분 전'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}분 전'
+        hour:
+          single: '1시간 전'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}시간 전'
+        day:
+          single: '어제'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}일 전'
+          template:
+            name: 'two'
+            value: '2일 전'
+        week:
+          single: '1주 전'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}주 전'
+        month:
+          single: '1개월 전'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}개월 전'
+        year:
+          single: '1년 전'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}년 전'
+      future:
+        millisecond:
+          single: '1밀리초 후'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}밀리초 후'
+        second:
+          single: '1초 후'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}초 후'
+        minute:
+          single: '1분 후'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}분 후'
+        hour:
+          single: '1시간 후'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}시간 후'
+        day:
+          single: '내일'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}일 후'
+          template:
+            name: 'two'
+            value: '2일 후'
+        week:
+          single: '1주 후'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}주 후'
+        month:
+          single: '1개월 후'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}개월 후'
+        year:
+          single: '1년 후'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count}년 후'
+    duration:
+      zero: '방금'
+      age:
+        template: '{value}'
       millisecond:
-        single: '1밀리초 전'
+        single:
+          numeric: '1밀리초'
+          words: '1밀리초'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}밀리초 전'
+            default: '{count}밀리초'
       second:
-        single: '1초 전'
+        single:
+          numeric: '1초'
+          words: '1초'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}초 전'
+            default: '{count}초'
       minute:
-        single: '1분 전'
+        single:
+          numeric: '1분'
+          words: '1분'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}분 전'
+            default: '{count}분'
       hour:
-        single: '1시간 전'
+        single:
+          numeric: '1시간'
+          words: '1시간'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}시간 전'
+            default: '{count}시간'
       day:
-        single: '어제'
+        single:
+          numeric: '1일'
+          words: '1일'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}일 전'
-        template:
-          name: 'two'
-          value: '2일 전'
+            default: '{count}일'
       week:
-        single: '1주 전'
+        single:
+          numeric: '1주'
+          words: '1주'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}주 전'
+            default: '{count}주'
       month:
-        single: '1개월 전'
+        single:
+          numeric: '1개월'
+          words: '1개월'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}개월 전'
+            default: '{count}개월'
       year:
-        single: '1년 전'
+        single:
+          numeric: '1년'
+          words: '1년'
         multiple:
           countPlacement: none
           forms:
-            default: '{count}년 전'
-    future:
+            default: '{count}년'
+    dataUnits:
+      bit:
+        forms:
+          default: '비트'
+        symbol: 'b'
+      byte:
+        forms:
+          default: '바이트'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: '킬로바이트'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: '메가바이트'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: '기가바이트'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: '테라바이트'
+        symbol: 'TB'
+    timeUnits:
       millisecond:
-        single: '1밀리초 후'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}밀리초 후'
+        symbol: '밀리초'
       second:
-        single: '1초 후'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}초 후'
+        symbol: '초'
       minute:
-        single: '1분 후'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}분 후'
+        symbol: '분'
       hour:
-        single: '1시간 후'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}시간 후'
+        symbol: '시간'
       day:
-        single: '내일'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}일 후'
-        template:
-          name: 'two'
-          value: '2일 후'
+        symbol: '일'
       week:
-        single: '1주 후'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}주 후'
+        symbol: '주'
       month:
-        single: '1개월 후'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}개월 후'
+        symbol: '개월'
       year:
-        single: '1년 후'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count}년 후'
-  timeSpan:
-    zero: '방금'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1밀리초'
-        words: '1밀리초'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}밀리초'
-    second:
-      single:
-        numeric: '1초'
-        words: '1초'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}초'
-    minute:
-      single:
-        numeric: '1분'
-        words: '1분'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}분'
-    hour:
-      single:
-        numeric: '1시간'
-        words: '1시간'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}시간'
-    day:
-      single:
-        numeric: '1일'
-        words: '1일'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}일'
-    week:
-      single:
-        numeric: '1주'
-        words: '1주'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}주'
-    month:
-      single:
-        numeric: '1개월'
-        words: '1개월'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}개월'
-    year:
-      single:
-        numeric: '1년'
-        words: '1년'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count}년'
-  dataUnit:
-    bit:
-      forms:
-        default: '비트'
-      symbol: 'b'
-    byte:
-      forms:
-        default: '바이트'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: '킬로바이트'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: '메가바이트'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: '기가바이트'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: '테라바이트'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: '밀리초'
-    second:
-      symbol: '초'
-    minute:
-      symbol: '분'
-    hour:
-      symbol: '시간'
-    day:
-      symbol: '일'
-    week:
-      symbol: '주'
-    month:
-      symbol: '개월'
-    year:
-      symbol: '년'
-headings:
-  full:
-    - '북'
-    - '북북동'
-    - '북동'
-    - '동북동'
-    - '동'
-    - '동남동'
-    - '남동'
-    - '남남동'
-    - '남'
-    - '남남서'
-    - '남서'
-    - '서남서'
-    - '서'
-    - '서북서'
-    - '북서'
-    - '북북서'
-  short:
-    - '북'
-    - '북북동'
-    - '북동'
-    - '동북동'
-    - '동'
-    - '동남동'
-    - '남동'
-    - '남남동'
-    - '남'
-    - '남남서'
-    - '남서'
-    - '서남서'
-    - '서'
-    - '서북서'
-    - '북서'
-    - '북북서'
+        symbol: '년'
+
+  number:
+    words:
+      engine: 'east-asian-grouped'
+      zeroWord: '영'
+      negativePrefix: '마이너스 '
+      ordinalSuffix: '번째'
+      digitWords:
+        - '영'
+        - '일'
+        - '이'
+        - '삼'
+        - '사'
+        - '오'
+        - '육'
+        - '칠'
+        - '팔'
+        - '구'
+      smallUnitWords:
+        1: '십'
+        2: '백'
+        3: '천'
+      largeUnits:
+        1: '만'
+        2: '억'
+        3: '조'
+        4: '경'
+        5: '해'
+        6: '자'
+        7: '양'
+        8: '구'
+        9: '간'
+        10: '정'
+        11: '재'
+        12: '극'
+        13: '항하사'
+        14: '아승기'
+        15: '나유타'
+        16: '불가사의'
+        17: '무량대수'
+      omitOneBeforeTen: true
+      omitOneBeforeHundred: true
+      omitOneBeforeThousand: true
+      insertZeroInGroup: false
+      insertZeroBetweenGroups: false
+      ordinalMap:
+        0: '영번째'
+        1: '첫번째'
+        2: '두번째'
+        3: '세번째'
+        4: '네번째'
+        5: '다섯번째'
+        6: '여섯번째'
+        7: '일곱번째'
+        8: '여덟번째'
+        9: '아홉번째'
+        10: '열번째'
+        11: '열한번째'
+        12: '열두번째'
+        13: '열세번째'
+        14: '열네번째'
+        15: '열다섯번째'
+        16: '열여섯번째'
+        17: '열일곱번째'
+        18: '열여덟번째'
+        19: '열아홉째'
+
+    parse:
+      engine: 'east-asian-positional'
+      negativePrefixes:
+        - '마이너스'
+      ordinalSuffix: '번째'
+      digits:
+        '영': 0
+        '일': 1
+        '이': 2
+        '삼': 3
+        '사': 4
+        '오': 5
+        '육': 6
+        '칠': 7
+        '팔': 8
+        '구': 9
+      smallUnits:
+        '십': 10
+        '백': 100
+        '천': 1000
+      largeUnits:
+        '만': 10000
+        '억': 100000000
+      ordinalMap:
+        '첫번째': 1
+        '두번째': 2
+        '세번째': 3
+
+  compass:
+    full:
+      - '북'
+      - '북북동'
+      - '북동'
+      - '동북동'
+      - '동'
+      - '동남동'
+      - '남동'
+      - '남남동'
+      - '남'
+      - '남남서'
+      - '남서'
+      - '서남서'
+      - '서'
+      - '서북서'
+      - '북서'
+      - '북북서'
+    short:
+      - '북'
+      - '북북동'
+      - '북동'
+      - '동북동'
+      - '동'
+      - '동남동'
+      - '남동'
+      - '남남동'
+      - '남'
+      - '남남서'
+      - '남서'
+      - '서남서'
+      - '서'
+      - '서북서'
+      - '북서'
+      - '북북서'

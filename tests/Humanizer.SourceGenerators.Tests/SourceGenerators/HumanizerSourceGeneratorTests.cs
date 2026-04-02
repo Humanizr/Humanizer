@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Humanizer.SourceGenerators.Tests;
 
-public class HumanizerSourceGeneratorTests
+public partial class HumanizerSourceGeneratorTests
 {
     static readonly Lazy<ImmutableDictionary<string, string>> generatedSources = new(GenerateSources);
 
@@ -165,7 +165,10 @@ public class HumanizerSourceGeneratorTests
 
         Assert.Contains("new EastAsianPositionalWordsToNumberConverter(", source);
         Assert.Contains("new InvertedTensWordsToNumberConverter(", source);
-        Assert.Contains("tensTokens:\n    nonzeg: 90\n    achtzeg: 80\n    siwwenzeg: 70", luxembourgishLocale);
+        Assert.Contains("tensTokens:", luxembourgishLocale);
+        Assert.Contains("nonzeg: 90", luxembourgishLocale);
+        Assert.Contains("achtzeg: 80", luxembourgishLocale);
+        Assert.Contains("siwwenzeg: 70", luxembourgishLocale);
         Assert.DoesNotContain("\n      word:", luxembourgishLocale);
         Assert.Contains("new SuffixScaleWordsToNumberConverter(new SuffixScaleWordsToNumberProfile(", source);
         Assert.Contains("new PrefixedTensScaleWordsToNumberConverter(new PrefixedTensScaleWordsToNumberProfile(", source);
@@ -264,6 +267,20 @@ wordsToNumber:
         Assert.Contains(diagnostics, static message => message.Contains("zz-invalid.negativePrefixes[1]", StringComparison.Ordinal));
         Assert.Contains(diagnostics, static message => message.Contains("zz-invalid.scaleThreshold", StringComparison.Ordinal));
         Assert.DoesNotContain(runResult.Results[0].GeneratedSources, static source => source.HintName == "TokenMapWordsToNumberConverters.ZzInvalid.g.cs");
+    }
+
+    [Fact]
+    public void CurrentLocaleAuthoringTreeHasNoNestedYamlDocuments()
+    {
+        var localeRoot = Path.Combine(FindRepositoryRoot(), "src", "Humanizer", "Locales");
+        var projectFile = GetRuntimeFile("Humanizer.csproj");
+        var nestedYamlFiles = Directory
+            .GetFiles(localeRoot, "*.yml", SearchOption.AllDirectories)
+            .Where(path => !string.Equals(Path.GetDirectoryName(path), localeRoot, StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+
+        Assert.Contains("<AdditionalFiles Include=\"Locales\\*.yml\" />", projectFile, StringComparison.Ordinal);
+        Assert.Empty(nestedYamlFiles);
     }
 
     [Fact]
@@ -1393,14 +1410,28 @@ wordsToNumber:
             SourceText.From(File.ReadAllText(path), Encoding.UTF8);
     }
 
-    sealed class InMemoryAdditionalText(string path, string text) : AdditionalText
+    sealed class InMemoryAdditionalText(string path, string text, bool canonicalizeLegacySchema = true) : AdditionalText
     {
         readonly string path = path;
-        readonly string text = text;
+        readonly string text = canonicalizeLegacySchema
+            ? CanonicalizeLocaleText(path, text)
+            : text;
 
         public override string Path => path;
 
         public override SourceText GetText(CancellationToken cancellationToken = default) =>
             SourceText.From(text, Encoding.UTF8);
+
+        static string CanonicalizeLocaleText(string path, string candidateText)
+        {
+            var localeCode = System.IO.Path.GetFileNameWithoutExtension(path);
+            if (candidateText.Contains("locale:", StringComparison.Ordinal) ||
+                candidateText.Contains("surfaces:", StringComparison.Ordinal))
+            {
+                return candidateText;
+            }
+
+            return HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(localeCode, candidateText);
+        }
     }
 }

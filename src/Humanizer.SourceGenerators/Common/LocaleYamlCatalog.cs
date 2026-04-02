@@ -51,9 +51,9 @@ public sealed partial class HumanizerSourceGenerator
         ImmutableHashSet<string> dataBackedFormatterProfiles,
         ImmutableHashSet<string> dataBackedOrdinalizerProfiles)
     {
-        // Locale YAML is intentionally closed over a fixed set of feature blocks. If a new block is
-        // needed, it should be added explicitly here and then wired through the generator rather
-        // than silently tolerated as dead data.
+        // The compiler lowers the canonical locale authoring model into the legacy internal feature
+        // buckets that the downstream generators already understand. The checked-in YAML surface is
+        // intentionally closed over locale/variantOf/surfaces and a fixed set of canonical surfaces.
         static readonly string[] supportedFeatureNames =
         [
             "collectionFormatter",
@@ -67,6 +67,34 @@ public sealed partial class HumanizerSourceGenerator
             "phrases",
             "timeOnlyToClockNotation",
             "wordsToNumber"
+        ];
+
+        static readonly string[] supportedTopLevelNames =
+        [
+            "locale",
+            "variantOf",
+            "surfaces"
+        ];
+
+        static readonly string[] supportedSurfaceNames =
+        [
+            "list",
+            "formatter",
+            "phrases",
+            "number",
+            "ordinal",
+            "clock",
+            "compass"
+        ];
+
+        static readonly string[] formatterGrammarKeys =
+        [
+            "pluralRule",
+            "dataUnitPluralRule",
+            "dataUnitNonIntegralForm",
+            "prepositionMode",
+            "secondaryPlaceholderMode",
+            "timeUnitGenders"
         ];
 
         readonly ImmutableArray<ResolvedLocaleDefinition> locales = locales;
@@ -93,7 +121,13 @@ public sealed partial class HumanizerSourceGenerator
 
                 try
                 {
-                    parsedLocales[file.LocaleCode] = ParseLocaleDefinition(file.LocaleCode, file.FileText);
+                    var parsedLocale = ParseLocaleDefinition(file.LocaleCode, file.FileText);
+                    if (parsedLocales.ContainsKey(parsedLocale.LocaleCode))
+                    {
+                        throw new InvalidOperationException($"Locale '{parsedLocale.LocaleCode}' is defined more than once.");
+                    }
+
+                    parsedLocales[parsedLocale.LocaleCode] = parsedLocale;
                 }
                 catch (Exception exception)
                 {
@@ -146,31 +180,170 @@ public sealed partial class HumanizerSourceGenerator
 
         static LocaleDefinition ParseLocaleDefinition(string localeCode, string fileText)
         {
-            var root = SimpleYamlParser.Parse(fileText);
-            var features = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
-
-            foreach (var featureName in supportedFeatureNames)
-            {
-                if (root.TryGetValue(featureName, out var featureValue))
-                {
-                    features[featureName] = featureValue;
-                }
-            }
-
-            foreach (var property in root.Values.Keys)
-            {
-                if (property == "inherits" || supportedFeatureNames.Contains(property, StringComparer.Ordinal))
-                {
-                    continue;
-                }
-
-                throw new InvalidOperationException(
-                    $"Locale '{localeCode}' defines unsupported top-level property '{property}'. " +
-                    $"Supported properties: inherits, {string.Join(", ", supportedFeatureNames)}.");
-            }
-
-            return new LocaleDefinition(localeCode, root.GetScalar("inherits"), features.ToImmutable());
+            var document = CanonicalLocaleAuthoring.Parse(localeCode, fileText);
+            return CanonicalLocaleAuthoring.ToLocaleDefinition(document);
         }
+
+        static void MapCanonicalSurfacesToFeatures(
+            string localeCode,
+            SimpleYamlMapping surfaces,
+            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
+        {
+            foreach (var surface in surfaces.Values)
+            {
+                if (!supportedSurfaceNames.Contains(surface.Key, StringComparer.Ordinal))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces' defines unsupported surface '{surface.Key}'. " +
+                        $"Supported surfaces: {string.Join(", ", supportedSurfaceNames)}.");
+                }
+
+                if (surface.Value is not SimpleYamlMapping surfaceMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.{surface.Key}' must be a mapping.");
+                }
+
+                switch (surface.Key)
+                {
+                    case "list":
+                        features["collectionFormatter"] = surfaceMapping;
+                        break;
+
+                    case "formatter":
+                        AddFormatterFeatures(surfaceMapping, features);
+                        break;
+
+                    case "phrases":
+                        features["phrases"] = surfaceMapping;
+                        break;
+
+                    case "number":
+                        AddNumberFeatures(localeCode, surfaceMapping, features);
+                        break;
+
+                    case "ordinal":
+                        AddOrdinalFeatures(localeCode, surfaceMapping, features);
+                        break;
+
+                    case "clock":
+                        features["timeOnlyToClockNotation"] = surfaceMapping;
+                        break;
+
+                    case "compass":
+                        features["headings"] = surfaceMapping;
+                        break;
+                }
+            }
+        }
+
+        static void AddNumberFeatures(
+            string localeCode,
+            SimpleYamlMapping numberSurface,
+            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
+        {
+            foreach (var property in numberSurface.Values.Keys)
+            {
+                if (property is not ("words" or "parse"))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number' defines unsupported property '{property}'. Supported properties: words, parse.");
+                }
+            }
+
+            if (numberSurface.TryGetValue("words", out var wordsValue))
+            {
+                if (wordsValue is not SimpleYamlMapping wordsMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.words' must be a mapping.");
+                }
+
+                features["numberToWords"] = wordsMapping;
+            }
+
+            if (numberSurface.TryGetValue("parse", out var parseValue))
+            {
+                if (parseValue is not SimpleYamlMapping parseMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.parse' must be a mapping.");
+                }
+
+                features["wordsToNumber"] = parseMapping;
+            }
+        }
+
+        static void AddOrdinalFeatures(
+            string localeCode,
+            SimpleYamlMapping ordinalSurface,
+            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
+        {
+            foreach (var property in ordinalSurface.Values.Keys)
+            {
+                if (property is not ("numeric" or "date" or "dateOnly"))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal' defines unsupported property '{property}'. Supported properties: numeric, date, dateOnly.");
+                }
+            }
+
+            if (ordinalSurface.TryGetValue("numeric", out var numericValue))
+            {
+                if (numericValue is not SimpleYamlMapping numericMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.numeric' must be a mapping.");
+                }
+
+                features["ordinalizer"] = numericMapping;
+            }
+
+            if (ordinalSurface.TryGetValue("date", out var dateValue))
+            {
+                if (dateValue is not SimpleYamlMapping dateMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.date' must be a mapping.");
+                }
+
+                features["dateToOrdinalWords"] = dateMapping;
+            }
+
+            if (ordinalSurface.TryGetValue("dateOnly", out var dateOnlyValue))
+            {
+                if (dateOnlyValue is not SimpleYamlMapping dateOnlyMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.dateOnly' must be a mapping.");
+                }
+
+                features["dateOnlyToOrdinalWords"] = dateOnlyMapping;
+            }
+        }
+
+        static void AddFormatterFeatures(
+            SimpleYamlMapping formatterSurface,
+            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
+        {
+            var grammarValues = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
+
+            foreach (var entry in formatterSurface.Values)
+            {
+                if (formatterGrammarKeys.Contains(entry.Key, StringComparer.Ordinal))
+                {
+                    grammarValues[entry.Key] = entry.Value;
+                }
+            }
+
+            features["formatter"] = formatterSurface;
+
+            if (grammarValues.Count > 0)
+            {
+                features["grammar"] = new SimpleYamlMapping(grammarValues.ToImmutable());
+            }
+        }
+
 
         static ResolvedLocaleDefinition ResolveLocale(
             string localeCode,
@@ -658,7 +831,7 @@ public sealed partial class HumanizerSourceGenerator
         static string CreateGeneratedProfileName(string localeCode) => localeCode;
     }
 
-    sealed class LocaleDefinition(
+    internal sealed class LocaleDefinition(
         string localeCode,
         string? inherits,
         ImmutableDictionary<string, SimpleYamlValue> features)

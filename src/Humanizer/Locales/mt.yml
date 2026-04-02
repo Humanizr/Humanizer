@@ -1,484 +1,489 @@
-# Locale-owned generator data for mt.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'u'
-formatter:
-  engine: 'profiled'
-  exactDateForms:
-    -
-      number: 2
-      form: 'dual'
-      units:
-        - 'day'
-        - 'hour'
-        - 'month'
-        - 'year'
-      tenses:
-        - 'past'
-        - 'future'
-  exactTimeSpanForms:
-    -
-      number: 2
-      form: 'dual'
-      units:
-        - 'day'
-        - 'hour'
-        - 'week'
-        - 'month'
-        - 'year'
-numberToWords:
-  engine: 'dual-form-scale'
-  conjunction: 'u'
-  minusSuffix: 'inqas minn żero'
-  feminineOneWord: 'waħda'
-  hundredWord: 'mija'
-  dualHundredsWord: 'mitejn'
-  hundredPrefixWord: 'mitt'
-  exactOrdinals:
-    0: '0'
-    1: 'l-ewwel'
-    2: 'it-tieni'
-    3: 'it-tielet'
-    4: 'ir-raba'''
-    5: 'il-ħames'
-    6: 'is-sitt'
-    7: 'is-seba'''
-    8: 'it-tmien'
-    9: 'id-disa'''
-    10: 'l-għaxar'
-    11: 'il-ħdax'
-    12: 'it-tnax'
-    13: 'it-tlettax'
-    14: 'l-erbatax'
-    15: 'il-ħmistax'
-    16: 'is-sittax'
-    17: 'is-sbatax'
-    18: 'it-tmintax'
-    19: 'id-dsatax'
-    20: 'l-għoxrin'
-  unitsMap:
-    - 'żero'
-    - 'wieħed'
-    - 'tnejn'
-    - 'tlieta'
-    - 'erbgħa'
-    - 'ħamsa'
-    - 'sitta'
-    - 'sebgħa'
-    - 'tmienja'
-    - 'disgħa'
-    - 'għaxra'
-    - 'ħdax'
-    - 'tnax'
-    - 'tlettax'
-    - 'erbatax'
-    - 'ħmistax'
-    - 'sittax'
-    - 'sbatax'
-    - 'tmintax'
-    - 'dsatax'
-  tensMap:
-    - 'zero'
-    - 'għaxra'
-    - 'għoxrin'
-    - 'tletin'
-    - 'erbgħin'
-    - 'ħamsin'
-    - 'sittin'
-    - 'sebgħin'
-    - 'tmenin'
-    - 'disgħin'
-  hundredsMap:
-    3: 'tlett'
-    4: 'erbgħa'
-    5: 'ħames'
-    6: 'sitt'
-    7: 'sebgħa'
-    8: 'tminn'
-    9: 'disgħa'
-    10: 'għaxar'
-  prefixMap:
-    3: 'tlett'
-    4: 'erbat'
-    5: 'ħamest'
-    6: 'sitt'
-    7: 'sebat'
-    8: 'tmint'
-    9: 'disat'
-    10: 'għaxart'
-    11: 'ħdax-il'
-    12: 'tnax-il'
-    13: 'tletax-il'
-    14: 'erbatax-il'
-    15: 'ħmistax-il'
-    16: 'sittax-il'
-    17: 'sbatax-il'
-    18: 'tmintax-il'
-    19: 'dsatax-il'
-  thousandScale:
-    singular: 'elf'
-    dual: 'elfejn'
-    plural: 'elef'
-    usePrefixMapForLowerDigits: true
-  millionScale:
-    singular: 'miljun'
-    dual: 'żewġ miljuni'
-    plural: 'miljuni'
-    usePrefixMapForLowerDigits: false
-  billionScale:
-    singular: 'biljun'
-    dual: 'żewġ biljuni'
-    plural: 'biljuni'
-    usePrefixMapForLowerDigits: false
-wordsToNumber:
-  engine: 'token-map'
-  normalizationProfile: 'LowercaseRemovePeriods'
-  cardinalMap:
-    'żero': 0
-    zero: 0
-    'wieħed': 1
-    wiehed: 1
-    'waħda': 1
-    wahda: 1
-    tnejn: 2
-    tlieta: 3
-    tlett: 3
-    'erbgħa': 4
-    erbgha: 4
-    'ħames': 5
-    hames: 5
-    sitt: 6
-    'sebgħa': 7
-    sebgha: 7
-    tmienja: 8
-    tminn: 8
-    'disgħa': 9
-    disgha: 9
-    'għaxra': 10
-    ghaxra: 10
-    'ħdax': 11
-    hdax: 11
-    tnax: 12
-    tlettax: 13
-    erbatax: 14
-    'ħmistax': 15
-    hmistax: 15
-    sittax: 16
-    sbatax: 17
-    tmintax: 18
-    dsatax: 19
-    'għoxrin': 20
-    ghoxrin: 20
-    tletin: 30
-    'erbgħin': 40
-    erbghin: 40
-    'ħamsin': 50
-    hamsin: 50
-    sittin: 60
-    'sebgħin': 70
-    sebghin: 70
-    'disgħin': 90
-    disghin: 90
-    mija: 100
-    mitejn: 200
-    elf: 1000
-    elfejn: 2000
-    elef: 1000
-    miljun: 1000000
-    miljuni: 1000000
-    biljun: 1000000000
-    biljuni: 1000000000
-  negativeSuffixes:
-    - ' inqas minn żero'
-    - ' inqas minn zero'
-  ignoredTokens:
-    - 'u'
-  useHundredMultiplier: true
+locale: 'mt'
 
-phrases:
-  dateHumanize:
-    now: 'issa'
-    never: 'qatt'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'u'
+
+  formatter:
+    engine: 'profiled'
+    exactDateForms:
+      -
+        number: 2
+        form: 'dual'
+        units:
+          - 'day'
+          - 'hour'
+          - 'month'
+          - 'year'
+        tenses:
+          - 'past'
+          - 'future'
+    exactTimeSpanForms:
+      -
+        number: 2
+        form: 'dual'
+        units:
+          - 'day'
+          - 'hour'
+          - 'week'
+          - 'month'
+          - 'year'
+
+  phrases:
+    relativeDate:
+      now: 'issa'
+      never: 'qatt'
+      past:
+        millisecond:
+          single: 'millisekonda ilu'
+          multiple:
+            forms:
+              default: 'millisekondi'
+            afterCount: 'ilu'
+        second:
+          single: 'sekonda ilu'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} sekondi ilu'
+              singular: 'sekonda ilu'
+        minute:
+          single: 'minuta ilu'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} minuti ilu'
+              singular: 'minuta ilu'
+        hour:
+          single: 'siegħa ilu'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} siegħat ilu'
+              singular: 'siegħa ilu'
+              dual: 'sagħtejn ilu'
+        day:
+          single: 'il-bieraħ'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} jiem ilu'
+              singular: 'il-bieraħ'
+              dual: 'jumejn ilu'
+          template:
+            name: 'two'
+            value: 'jumejn ilu'
+        week:
+          single: 'ġimgħa ilu'
+          multiple:
+            forms:
+              default: 'ġimgħat'
+            afterCount: 'ilu'
+        month:
+          single: 'xahar ilu'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} xhur ilu'
+              singular: 'xahar ilu'
+              dual: 'xahrejn ilu'
+        year:
+          single: 'sena ilu'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} snin ilu'
+              singular: 'sena ilu'
+              dual: 'sentejn ilu'
+      future:
+        millisecond:
+          single: 'millisekonda oħra'
+          multiple:
+            forms:
+              default: 'millisekondi'
+            afterCount: 'oħra'
+        second:
+          single: 'sekonda oħra'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} sekondi oħra'
+              singular: 'sekonda oħra'
+        minute:
+          single: 'minuta oħra'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} minuti oħra'
+              singular: 'minuta oħra'
+        hour:
+          single: 'siegħa oħra'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} siegħat oħra'
+              singular: 'siegħa oħra'
+              dual: 'sagħtejn oħra'
+        day:
+          single: 'għada'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} jiem oħra'
+              singular: 'għada'
+              dual: 'pitgħada'
+          template:
+            name: 'two'
+            value: 'pitgħada'
+        week:
+          single: 'ġimgħa oħra'
+          multiple:
+            forms:
+              default: 'ġimgħat'
+            afterCount: 'oħra'
+        month:
+          single: 'xahar ieħor'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} xhur oħra'
+              singular: 'xahar ieħor'
+              dual: 'xahrejn oħra'
+        year:
+          single: 'sena oħra'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} snin oħra'
+              singular: 'sena oħra'
+              dual: 'sentejn oħra'
+    duration:
+      zero: 'xejn'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'millisekonda ilu'
+        single:
+          numeric: 'millisekonda'
+          words: 'millisekonda'
         multiple:
+          countPlacement: none
           forms:
-            default: 'millisekondi'
-          afterCount: 'ilu'
+            default: '{count} millisekondi'
+            singular: 'millisekonda'
       second:
-        single: 'sekonda ilu'
+        single:
+          numeric: 'sekonda'
+          words: 'sekonda'
         multiple:
           countPlacement: none
           forms:
-            default: '{count} sekondi ilu'
-            singular: 'sekonda ilu'
+            default: '{count} sekondi'
+            singular: 'sekonda'
       minute:
-        single: 'minuta ilu'
+        single:
+          numeric: 'minuta'
+          words: 'minuta'
         multiple:
-          countPlacement: none
           forms:
-            default: '{count} minuti ilu'
-            singular: 'minuta ilu'
+            default: 'minuti'
+            singular: 'minuta'
       hour:
-        single: 'siegħa ilu'
+        single:
+          numeric: 'siegħa'
+          words: 'siegħa'
         multiple:
           countPlacement: none
           forms:
-            default: '{count} siegħat ilu'
-            singular: 'siegħa ilu'
-            dual: 'sagħtejn ilu'
+            default: '{count} siegħat'
+            singular: 'siegħa'
+            dual: 'sagħtejn'
       day:
-        single: 'il-bieraħ'
+        single:
+          numeric: 'ġurnata'
+          words: 'ġurnata'
         multiple:
           countPlacement: none
           forms:
-            default: '{count} jiem ilu'
-            singular: 'il-bieraħ'
-            dual: 'jumejn ilu'
-        template:
-          name: 'two'
-          value: 'jumejn ilu'
+            default: '{count} jiem'
+            singular: 'jum'
+            dual: 'jumejn'
       week:
-        single: 'ġimgħa ilu'
+        single:
+          numeric: 'ġimgħa'
+          words: 'ġimgħa'
         multiple:
+          countPlacement: none
           forms:
-            default: 'ġimgħat'
-          afterCount: 'ilu'
+            default: '{count} ġimgħat'
+            singular: 'ġimgħa'
+            dual: 'ġimgħatejn'
       month:
-        single: 'xahar ilu'
+        single:
+          numeric: 'xahar'
+          words: 'xahar'
         multiple:
           countPlacement: none
           forms:
-            default: '{count} xhur ilu'
-            singular: 'xahar ilu'
-            dual: 'xahrejn ilu'
+            default: '{count} xhur'
+            singular: 'xahar'
+            dual: 'xahrejn'
       year:
-        single: 'sena ilu'
+        single:
+          numeric: 'sena'
+          words: 'sena'
         multiple:
           countPlacement: none
           forms:
-            default: '{count} snin ilu'
-            singular: 'sena ilu'
-            dual: 'sentejn ilu'
-    future:
+            default: '{count} snin'
+            singular: '{count} sena'
+            dual: 'sentejn'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
       millisecond:
-        single: 'millisekonda oħra'
-        multiple:
-          forms:
-            default: 'millisekondi'
-          afterCount: 'oħra'
+        symbol: 'ms'
       second:
-        single: 'sekonda oħra'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count} sekondi oħra'
-            singular: 'sekonda oħra'
+        symbol: 's'
       minute:
-        single: 'minuta oħra'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count} minuti oħra'
-            singular: 'minuta oħra'
+        symbol: 'min'
       hour:
-        single: 'siegħa oħra'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count} siegħat oħra'
-            singular: 'siegħa oħra'
-            dual: 'sagħtejn oħra'
+        symbol: 'sie'
       day:
-        single: 'għada'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count} jiem oħra'
-            singular: 'għada'
-            dual: 'pitgħada'
-        template:
-          name: 'two'
-          value: 'pitgħada'
+        symbol: 'jum'
       week:
-        single: 'ġimgħa oħra'
-        multiple:
-          forms:
-            default: 'ġimgħat'
-          afterCount: 'oħra'
+        symbol: 'ġimgħa'
       month:
-        single: 'xahar ieħor'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count} xhur oħra'
-            singular: 'xahar ieħor'
-            dual: 'xahrejn oħra'
+        symbol: 'xahar'
       year:
-        single: 'sena oħra'
-        multiple:
-          countPlacement: none
-          forms:
-            default: '{count} snin oħra'
-            singular: 'sena oħra'
-            dual: 'sentejn oħra'
-  timeSpan:
-    zero: 'xejn'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: 'millisekonda'
-        words: 'millisekonda'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count} millisekondi'
-          singular: 'millisekonda'
-    second:
-      single:
-        numeric: 'sekonda'
-        words: 'sekonda'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count} sekondi'
-          singular: 'sekonda'
-    minute:
-      single:
-        numeric: 'minuta'
-        words: 'minuta'
-      multiple:
-        forms:
-          default: 'minuti'
-          singular: 'minuta'
-    hour:
-      single:
-        numeric: 'siegħa'
-        words: 'siegħa'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count} siegħat'
-          singular: 'siegħa'
-          dual: 'sagħtejn'
-    day:
-      single:
-        numeric: 'ġurnata'
-        words: 'ġurnata'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count} jiem'
-          singular: 'jum'
-          dual: 'jumejn'
-    week:
-      single:
-        numeric: 'ġimgħa'
-        words: 'ġimgħa'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count} ġimgħat'
-          singular: 'ġimgħa'
-          dual: 'ġimgħatejn'
-    month:
-      single:
-        numeric: 'xahar'
-        words: 'xahar'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count} xhur'
-          singular: 'xahar'
-          dual: 'xahrejn'
-    year:
-      single:
-        numeric: 'sena'
-        words: 'sena'
-      multiple:
-        countPlacement: none
-        forms:
-          default: '{count} snin'
-          singular: '{count} sena'
-          dual: 'sentejn'
-  dataUnit:
-    bit:
-      forms:
-        default: 'bit'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'byte'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'kilobyte'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'megabyte'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'gigabyte'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'terabyte'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'ms'
-    second:
-      symbol: 's'
-    minute:
-      symbol: 'min'
-    hour:
-      symbol: 'sie'
-    day:
-      symbol: 'jum'
-    week:
-      symbol: 'ġimgħa'
-    month:
-      symbol: 'xahar'
-    year:
-      symbol: 'sena'
-headings:
-  full:
-    - 'tramuntana'
-    - 'grieg it-tramuntana'
-    - 'grigal'
-    - 'grieg il-lvant'
-    - 'lvant'
-    - 'xlokk il-lvant'
-    - 'xlokk'
-    - 'nofsinhar ix-xlokk'
-    - 'nofsinhar'
-    - 'nofsinhar il-lbiċ'
-    - 'lbiċ'
-    - 'punent il-lbiċ'
-    - 'punent'
-    - 'punent majjistru'
-    - 'majjistral'
-    - 'majjistral it-tramuntana'
-  short:
-    - 'T'
-    - 'GT'
-    - 'G'
-    - 'GL'
-    - 'L'
-    - 'XL'
-    - 'X'
-    - 'NX'
-    - 'N'
-    - 'NL'
-    - 'L'
-    - 'PL'
-    - 'P'
-    - 'PM'
-    - 'M'
-    - 'MT'
+        symbol: 'sena'
+
+  number:
+    words:
+      engine: 'dual-form-scale'
+      conjunction: 'u'
+      minusSuffix: 'inqas minn żero'
+      feminineOneWord: 'waħda'
+      hundredWord: 'mija'
+      dualHundredsWord: 'mitejn'
+      hundredPrefixWord: 'mitt'
+      exactOrdinals:
+        0: '0'
+        1: 'l-ewwel'
+        2: 'it-tieni'
+        3: 'it-tielet'
+        4: 'ir-raba'''
+        5: 'il-ħames'
+        6: 'is-sitt'
+        7: 'is-seba'''
+        8: 'it-tmien'
+        9: 'id-disa'''
+        10: 'l-għaxar'
+        11: 'il-ħdax'
+        12: 'it-tnax'
+        13: 'it-tlettax'
+        14: 'l-erbatax'
+        15: 'il-ħmistax'
+        16: 'is-sittax'
+        17: 'is-sbatax'
+        18: 'it-tmintax'
+        19: 'id-dsatax'
+        20: 'l-għoxrin'
+      unitsMap:
+        - 'żero'
+        - 'wieħed'
+        - 'tnejn'
+        - 'tlieta'
+        - 'erbgħa'
+        - 'ħamsa'
+        - 'sitta'
+        - 'sebgħa'
+        - 'tmienja'
+        - 'disgħa'
+        - 'għaxra'
+        - 'ħdax'
+        - 'tnax'
+        - 'tlettax'
+        - 'erbatax'
+        - 'ħmistax'
+        - 'sittax'
+        - 'sbatax'
+        - 'tmintax'
+        - 'dsatax'
+      tensMap:
+        - 'zero'
+        - 'għaxra'
+        - 'għoxrin'
+        - 'tletin'
+        - 'erbgħin'
+        - 'ħamsin'
+        - 'sittin'
+        - 'sebgħin'
+        - 'tmenin'
+        - 'disgħin'
+      hundredsMap:
+        3: 'tlett'
+        4: 'erbgħa'
+        5: 'ħames'
+        6: 'sitt'
+        7: 'sebgħa'
+        8: 'tminn'
+        9: 'disgħa'
+        10: 'għaxar'
+      prefixMap:
+        3: 'tlett'
+        4: 'erbat'
+        5: 'ħamest'
+        6: 'sitt'
+        7: 'sebat'
+        8: 'tmint'
+        9: 'disat'
+        10: 'għaxart'
+        11: 'ħdax-il'
+        12: 'tnax-il'
+        13: 'tletax-il'
+        14: 'erbatax-il'
+        15: 'ħmistax-il'
+        16: 'sittax-il'
+        17: 'sbatax-il'
+        18: 'tmintax-il'
+        19: 'dsatax-il'
+      thousandScale:
+        singular: 'elf'
+        dual: 'elfejn'
+        plural: 'elef'
+        usePrefixMapForLowerDigits: true
+      millionScale:
+        singular: 'miljun'
+        dual: 'żewġ miljuni'
+        plural: 'miljuni'
+        usePrefixMapForLowerDigits: false
+      billionScale:
+        singular: 'biljun'
+        dual: 'żewġ biljuni'
+        plural: 'biljuni'
+        usePrefixMapForLowerDigits: false
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        'żero': 0
+        zero: 0
+        'wieħed': 1
+        wiehed: 1
+        'waħda': 1
+        wahda: 1
+        tnejn: 2
+        tlieta: 3
+        tlett: 3
+        'erbgħa': 4
+        erbgha: 4
+        'ħames': 5
+        hames: 5
+        sitt: 6
+        'sebgħa': 7
+        sebgha: 7
+        tmienja: 8
+        tminn: 8
+        'disgħa': 9
+        disgha: 9
+        'għaxra': 10
+        ghaxra: 10
+        'ħdax': 11
+        hdax: 11
+        tnax: 12
+        tlettax: 13
+        erbatax: 14
+        'ħmistax': 15
+        hmistax: 15
+        sittax: 16
+        sbatax: 17
+        tmintax: 18
+        dsatax: 19
+        'għoxrin': 20
+        ghoxrin: 20
+        tletin: 30
+        'erbgħin': 40
+        erbghin: 40
+        'ħamsin': 50
+        hamsin: 50
+        sittin: 60
+        'sebgħin': 70
+        sebghin: 70
+        'disgħin': 90
+        disghin: 90
+        mija: 100
+        mitejn: 200
+        elf: 1000
+        elfejn: 2000
+        elef: 1000
+        miljun: 1000000
+        miljuni: 1000000
+        biljun: 1000000000
+        biljuni: 1000000000
+      negativeSuffixes:
+        - ' inqas minn żero'
+        - ' inqas minn zero'
+      ignoredTokens:
+        - 'u'
+      useHundredMultiplier: true
+
+  compass:
+    full:
+      - 'tramuntana'
+      - 'grieg it-tramuntana'
+      - 'grigal'
+      - 'grieg il-lvant'
+      - 'lvant'
+      - 'xlokk il-lvant'
+      - 'xlokk'
+      - 'nofsinhar ix-xlokk'
+      - 'nofsinhar'
+      - 'nofsinhar il-lbiċ'
+      - 'lbiċ'
+      - 'punent il-lbiċ'
+      - 'punent'
+      - 'punent majjistru'
+      - 'majjistral'
+      - 'majjistral it-tramuntana'
+    short:
+      - 'T'
+      - 'GT'
+      - 'G'
+      - 'GL'
+      - 'L'
+      - 'XL'
+      - 'X'
+      - 'NX'
+      - 'N'
+      - 'NL'
+      - 'L'
+      - 'PL'
+      - 'P'
+      - 'PM'
+      - 'M'
+      - 'MT'

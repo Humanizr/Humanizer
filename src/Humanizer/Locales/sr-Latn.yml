@@ -1,184 +1,180 @@
-# Locale-owned generator data for sr-Latn.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'i'
-formatter:
-  engine: 'profiled'
-  resourceKeyDetector: 'south-slavic'
-  resourceKeySuffixes:
-    paucal: '_Paucal'
-  dataUnitDetector: 'south-slavic'
-  dataUnitSuffixes:
-    singular: '_Singular'
-    paucal: '_Paucal'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-numberToWords:
-  engine: 'south-slavic-cardinal'
-  useCulture: true
-  maximumValue: 9223372036854775807
-  allowLongMin: true
-  zeroWord: 'nula'
-  minusWord: '-'
-  unitsMap:
-    - 'nula'
-    - 'jedan'
-    - 'dva'
-    - 'tri'
-    - 'četiri'
-    - 'pet'
-    - 'šest'
-    - 'sedam'
-    - 'osam'
-    - 'devet'
-    - 'deset'
-    - 'jedanaest'
-    - 'dvanaest'
-    - 'trinaest'
-    - 'četrnaest'
-    - 'petnaest'
-    - 'šesnaest'
-    - 'sedamnaest'
-    - 'osamnaest'
-    - 'devetnaest'
-  tensMap:
-    - 'nula'
-    - 'deset'
-    - 'dvadeset'
-    - 'trideset'
-    - 'četrdeset'
-    - 'petdeset'
-    - 'šestdeset'
-    - 'sedamdeset'
-    - 'osamdeset'
-    - 'devetdeset'
-  hundredsMap:
-    - 'nula'
-    - 'sto'
-    - 'dvesto'
-    - 'tristo'
-    - 'četiristo'
-    - 'petsto'
-    - 'šeststo'
-    - 'sedamsto'
-    - 'osamsto'
-    - 'devetsto'
-  feminineOne: 'jedna'
-  feminineTwo: 'dve'
-  scales:
-    -
-      value: 1000000000000000
-      gender: 'feminine'
-      oneForm: 'bilijarda'
-      singular: 'bilijarda'
-      paucal: 'bilijarde'
-      plural: 'bilijardi'
-    -
-      value: 1000000000000
-      gender: 'masculine'
-      oneForm: 'bilion'
-      singular: 'bilion'
-      paucal: 'biliona'
-      plural: 'biliona'
-    -
-      value: 1000000000
-      gender: 'feminine'
-      oneForm: 'milijarda'
-      singular: 'milijarda'
-      paucal: 'milijarde'
-      plural: 'milijardi'
-    -
-      value: 1000000
-      gender: 'masculine'
-      oneForm: 'milion'
-      singular: 'milion'
-      paucal: 'miliona'
-      plural: 'miliona'
-    -
-      value: 1000
-      gender: 'feminine'
-      oneForm: 'hiljadu'
-      singular: 'hiljada'
-      paucal: 'hiljade'
-      plural: 'hiljada'
-ordinalizer:
-  engine: 'suffix'
-  masculineSuffix: '.'
-wordsToNumber:
-  engine: 'token-map'
-  normalizationProfile: 'LowercaseRemovePeriods'
-  cardinalMap:
-    nula: 0
-    jedan: 1
-    jedna: 1
-    jedno: 1
-    dva: 2
-    dve: 2
-    tri: 3
-    'četiri': 4
-    cetiri: 4
-    pet: 5
-    'šest': 6
-    sest: 6
-    sedam: 7
-    osam: 8
-    devet: 9
-    deset: 10
-    jedanaest: 11
-    dvanaest: 12
-    trinaest: 13
-    'četrnaest': 14
-    cetrnaest: 14
-    petnaest: 15
-    'šesnaest': 16
-    sesnaest: 16
-    sedamnaest: 17
-    osamnaest: 18
-    devetnaest: 19
-    dvadeset: 20
-    trideset: 30
-    'četrdeset': 40
-    cetrdeset: 40
-    pedeset: 50
-    'šestdeset': 60
-    sestdeset: 60
-    sedamdeset: 70
-    osamdeset: 80
-    devedeset: 90
-    sto: 100
-    dvesto: 200
-    tristo: 300
-    'četiristo': 400
-    cetiristo: 400
-    petsto: 500
-    'šeststo': 600
-    seststo: 600
-    sedamsto: 700
-    osamsto: 800
-    devetsto: 900
-    hiljadu: 1000
-    hiljada: 1000
-    milion: 1000000
-    miliona: 1000000
-    milijarda: 1000000000
-    milijarde: 1000000000
-  negativePrefixes:
-    - 'minus '
+locale: 'sr-Latn'
 
-phrases:
-  dateHumanize:
-    now: 'sada'
-    never: 'nikada'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'i'
+
+  formatter:
+    engine: 'profiled'
+    resourceKeyDetector: 'south-slavic'
+    resourceKeySuffixes:
+      paucal: '_Paucal'
+    dataUnitDetector: 'south-slavic'
+    dataUnitSuffixes:
+      singular: '_Singular'
+      paucal: '_Paucal'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'sada'
+      never: 'nikada'
+      past:
+        millisecond:
+          single: 'pre milisekund'
+          multiple:
+            forms:
+              default: 'milisekundi'
+            beforeCount: 'pre'
+        second:
+          single: 'pre sekund'
+          multiple:
+            forms:
+              default: 'sekundi'
+              singular: 'sekunde'
+              dual: 'sekunde'
+              paucal: 'sekunde'
+              plural: 'sekunde'
+            beforeCount: 'pre'
+        minute:
+          single: 'pre minut'
+          multiple:
+            forms:
+              default: 'minuta'
+            beforeCount: 'pre'
+        hour:
+          single: 'pre sat vremena'
+          multiple:
+            forms:
+              default: 'sati'
+              singular: 'sata'
+              dual: 'sata'
+              paucal: 'sata'
+              plural: 'sata'
+            beforeCount: 'pre'
+        day:
+          single: 'juče'
+          multiple:
+            forms:
+              default: 'dana'
+            beforeCount: 'pre'
+          template:
+            name: 'two'
+            value: 'pre 2 dana'
+        week:
+          single: 'pre nedelju dana'
+          multiple:
+            forms:
+              default: 'nedelja'
+            beforeCount: 'pre'
+        month:
+          single: 'pre mesec dana'
+          multiple:
+            forms:
+              default: 'meseci'
+              singular: 'meseca'
+              dual: 'meseca'
+              paucal: 'meseca'
+              plural: 'meseca'
+            beforeCount: 'pre'
+        year:
+          single: 'pre godinu dana'
+          multiple:
+            forms:
+              default: 'godina'
+              singular: 'godine'
+              dual: 'godine'
+              paucal: 'godine'
+              plural: 'godine'
+            beforeCount: 'pre'
+      future:
+        millisecond:
+          single: 'za milisekund'
+          multiple:
+            forms:
+              default: 'milisekundi'
+            beforeCount: 'za'
+        second:
+          single: 'za sekund'
+          multiple:
+            forms:
+              default: 'sekundi'
+              singular: 'sekunde'
+              dual: 'sekunde'
+              paucal: 'sekunde'
+              plural: 'sekunde'
+            beforeCount: 'za'
+        minute:
+          single: 'za minut'
+          multiple:
+            forms:
+              default: 'minuta'
+            beforeCount: 'za'
+        hour:
+          single: 'za sat vremena'
+          multiple:
+            forms:
+              default: 'sati'
+              singular: 'sata'
+              dual: 'sata'
+              paucal: 'sata'
+              plural: 'sata'
+            beforeCount: 'za'
+        day:
+          single: 'sutra'
+          multiple:
+            forms:
+              default: 'dana'
+            beforeCount: 'za'
+          template:
+            name: 'two'
+            value: 'za 2 dana'
+        week:
+          single: 'za nedelju dana'
+          multiple:
+            forms:
+              default: 'nedelja'
+            beforeCount: 'za'
+        month:
+          single: 'za mesec dana'
+          multiple:
+            forms:
+              default: 'meseci'
+              singular: 'meseca'
+              dual: 'meseca'
+              paucal: 'meseca'
+              plural: 'meseca'
+            beforeCount: 'za'
+        year:
+          single: 'za godinu dana'
+          multiple:
+            forms:
+              default: 'godina'
+              singular: 'godine'
+              dual: 'godine'
+              paucal: 'godine'
+              plural: 'godine'
+            beforeCount: 'za'
+    duration:
+      zero: 'bez proteklog vremena'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'pre milisekund'
+        single:
+          numeric: '1 milisekunda'
+          words: 'one milisekunda'
         multiple:
           forms:
             default: 'milisekundi'
-          beforeCount: 'pre'
+            singular: 'milisekunde'
+            dual: 'milisekunde'
+            paucal: 'milisekunde'
+            plural: 'milisekunde'
       second:
-        single: 'pre sekund'
+        single:
+          numeric: '1 sekunda'
+          words: 'one sekunda'
         multiple:
           forms:
             default: 'sekundi'
@@ -186,15 +182,17 @@ phrases:
             dual: 'sekunde'
             paucal: 'sekunde'
             plural: 'sekunde'
-          beforeCount: 'pre'
       minute:
-        single: 'pre minut'
+        single:
+          numeric: '1 minut'
+          words: 'one minut'
         multiple:
           forms:
             default: 'minuta'
-          beforeCount: 'pre'
       hour:
-        single: 'pre sat vremena'
+        single:
+          numeric: '1 sat'
+          words: 'one sat'
         multiple:
           forms:
             default: 'sati'
@@ -202,24 +200,28 @@ phrases:
             dual: 'sata'
             paucal: 'sata'
             plural: 'sata'
-          beforeCount: 'pre'
       day:
-        single: 'juče'
+        single:
+          numeric: '1 dan'
+          words: 'one dan'
         multiple:
           forms:
             default: 'dana'
-          beforeCount: 'pre'
-        template:
-          name: 'two'
-          value: 'pre 2 dana'
       week:
-        single: 'pre nedelju dana'
+        single:
+          numeric: '1 nedelja'
+          words: 'one nedelja'
         multiple:
           forms:
             default: 'nedelja'
-          beforeCount: 'pre'
+            singular: 'nedelje'
+            dual: 'nedelje'
+            paucal: 'nedelje'
+            plural: 'nedelje'
       month:
-        single: 'pre mesec dana'
+        single:
+          numeric: '1 mesec'
+          words: 'one mesec'
         multiple:
           forms:
             default: 'meseci'
@@ -227,9 +229,10 @@ phrases:
             dual: 'meseca'
             paucal: 'meseca'
             plural: 'meseca'
-          beforeCount: 'pre'
       year:
-        single: 'pre godinu dana'
+        single:
+          numeric: '1 godina'
+          words: 'one godina'
         multiple:
           forms:
             default: 'godina'
@@ -237,245 +240,249 @@ phrases:
             dual: 'godine'
             paucal: 'godine'
             plural: 'godine'
-          beforeCount: 'pre'
-    future:
+    dataUnits:
+      bit:
+        forms:
+          default: 'bitova'
+          singular: 'bit'
+          paucal: 'bita'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bajtova'
+          singular: 'bajt'
+          paucal: 'bajta'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobajtova'
+          singular: 'kilobajt'
+          paucal: 'kilobajta'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabajtova'
+          singular: 'megabajt'
+          paucal: 'megabajta'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabajtova'
+          singular: 'gigabajt'
+          paucal: 'gigabajta'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabajtova'
+          singular: 'terabajt'
+          paucal: 'terabajta'
+        symbol: 'TB'
+    timeUnits:
       millisecond:
-        single: 'za milisekund'
-        multiple:
-          forms:
-            default: 'milisekundi'
-          beforeCount: 'za'
+        symbol: 'ms'
       second:
-        single: 'za sekund'
-        multiple:
-          forms:
-            default: 'sekundi'
-            singular: 'sekunde'
-            dual: 'sekunde'
-            paucal: 'sekunde'
-            plural: 'sekunde'
-          beforeCount: 'za'
+        symbol: 's'
       minute:
-        single: 'za minut'
-        multiple:
-          forms:
-            default: 'minuta'
-          beforeCount: 'za'
+        symbol: 'min'
       hour:
-        single: 'za sat vremena'
-        multiple:
-          forms:
-            default: 'sati'
-            singular: 'sata'
-            dual: 'sata'
-            paucal: 'sata'
-            plural: 'sata'
-          beforeCount: 'za'
+        symbol: 'č'
       day:
-        single: 'sutra'
-        multiple:
-          forms:
-            default: 'dana'
-          beforeCount: 'za'
-        template:
-          name: 'two'
-          value: 'za 2 dana'
+        symbol: 'dan'
       week:
-        single: 'za nedelju dana'
-        multiple:
-          forms:
-            default: 'nedelja'
-          beforeCount: 'za'
+        symbol: 'ned'
       month:
-        single: 'za mesec dana'
-        multiple:
-          forms:
-            default: 'meseci'
-            singular: 'meseca'
-            dual: 'meseca'
-            paucal: 'meseca'
-            plural: 'meseca'
-          beforeCount: 'za'
+        symbol: 'mes'
       year:
-        single: 'za godinu dana'
-        multiple:
-          forms:
-            default: 'godina'
-            singular: 'godine'
-            dual: 'godine'
-            paucal: 'godine'
-            plural: 'godine'
-          beforeCount: 'za'
-  timeSpan:
-    zero: 'bez proteklog vremena'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1 milisekunda'
-        words: 'one milisekunda'
-      multiple:
-        forms:
-          default: 'milisekundi'
-          singular: 'milisekunde'
-          dual: 'milisekunde'
-          paucal: 'milisekunde'
-          plural: 'milisekunde'
-    second:
-      single:
-        numeric: '1 sekunda'
-        words: 'one sekunda'
-      multiple:
-        forms:
-          default: 'sekundi'
-          singular: 'sekunde'
-          dual: 'sekunde'
-          paucal: 'sekunde'
-          plural: 'sekunde'
-    minute:
-      single:
-        numeric: '1 minut'
-        words: 'one minut'
-      multiple:
-        forms:
-          default: 'minuta'
-    hour:
-      single:
-        numeric: '1 sat'
-        words: 'one sat'
-      multiple:
-        forms:
-          default: 'sati'
-          singular: 'sata'
-          dual: 'sata'
-          paucal: 'sata'
-          plural: 'sata'
-    day:
-      single:
-        numeric: '1 dan'
-        words: 'one dan'
-      multiple:
-        forms:
-          default: 'dana'
-    week:
-      single:
-        numeric: '1 nedelja'
-        words: 'one nedelja'
-      multiple:
-        forms:
-          default: 'nedelja'
-          singular: 'nedelje'
-          dual: 'nedelje'
-          paucal: 'nedelje'
-          plural: 'nedelje'
-    month:
-      single:
-        numeric: '1 mesec'
-        words: 'one mesec'
-      multiple:
-        forms:
-          default: 'meseci'
-          singular: 'meseca'
-          dual: 'meseca'
-          paucal: 'meseca'
-          plural: 'meseca'
-    year:
-      single:
-        numeric: '1 godina'
-        words: 'one godina'
-      multiple:
-        forms:
-          default: 'godina'
-          singular: 'godine'
-          dual: 'godine'
-          paucal: 'godine'
-          plural: 'godine'
-  dataUnit:
-    bit:
-      forms:
-        default: 'bitova'
-        singular: 'bit'
-        paucal: 'bita'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'bajtova'
-        singular: 'bajt'
-        paucal: 'bajta'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'kilobajtova'
-        singular: 'kilobajt'
-        paucal: 'kilobajta'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'megabajtova'
-        singular: 'megabajt'
-        paucal: 'megabajta'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'gigabajtova'
-        singular: 'gigabajt'
-        paucal: 'gigabajta'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'terabajtova'
-        singular: 'terabajt'
-        paucal: 'terabajta'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'ms'
-    second:
-      symbol: 's'
-    minute:
-      symbol: 'min'
-    hour:
-      symbol: 'č'
-    day:
-      symbol: 'dan'
-    week:
-      symbol: 'ned'
-    month:
-      symbol: 'mes'
-    year:
-      symbol: 'god'
-headings:
-  full:
-    - 'sever'
-    - 'sever-severoistok'
-    - 'severoistok'
-    - 'istok-severoistok'
-    - 'istok'
-    - 'istok-jugoistok'
-    - 'jugoistok'
-    - 'jug-jugoistok'
-    - 'jug'
-    - 'jug-jugozapad'
-    - 'jugozapad'
-    - 'zapad-jugozapad'
-    - 'zapad'
-    - 'zapad-severozapad'
-    - 'severozapad'
-    - 'sever-severozapad'
-  short:
-    - 'S'
-    - 'SSI'
-    - 'SI'
-    - 'ISI'
-    - 'I'
-    - 'IJI'
-    - 'JI'
-    - 'JJI'
-    - 'J'
-    - 'JJZ'
-    - 'JZ'
-    - 'ZJZ'
-    - 'Z'
-    - 'ZSZ'
-    - 'SZ'
-    - 'SSZ'
+        symbol: 'god'
+
+  number:
+    words:
+      engine: 'south-slavic-cardinal'
+      useCulture: true
+      maximumValue: 9223372036854775807
+      allowLongMin: true
+      zeroWord: 'nula'
+      minusWord: '-'
+      unitsMap:
+        - 'nula'
+        - 'jedan'
+        - 'dva'
+        - 'tri'
+        - 'četiri'
+        - 'pet'
+        - 'šest'
+        - 'sedam'
+        - 'osam'
+        - 'devet'
+        - 'deset'
+        - 'jedanaest'
+        - 'dvanaest'
+        - 'trinaest'
+        - 'četrnaest'
+        - 'petnaest'
+        - 'šesnaest'
+        - 'sedamnaest'
+        - 'osamnaest'
+        - 'devetnaest'
+      tensMap:
+        - 'nula'
+        - 'deset'
+        - 'dvadeset'
+        - 'trideset'
+        - 'četrdeset'
+        - 'petdeset'
+        - 'šestdeset'
+        - 'sedamdeset'
+        - 'osamdeset'
+        - 'devetdeset'
+      hundredsMap:
+        - 'nula'
+        - 'sto'
+        - 'dvesto'
+        - 'tristo'
+        - 'četiristo'
+        - 'petsto'
+        - 'šeststo'
+        - 'sedamsto'
+        - 'osamsto'
+        - 'devetsto'
+      feminineOne: 'jedna'
+      feminineTwo: 'dve'
+      scales:
+        -
+          value: 1000000000000000
+          gender: 'feminine'
+          oneForm: 'bilijarda'
+          singular: 'bilijarda'
+          paucal: 'bilijarde'
+          plural: 'bilijardi'
+        -
+          value: 1000000000000
+          gender: 'masculine'
+          oneForm: 'bilion'
+          singular: 'bilion'
+          paucal: 'biliona'
+          plural: 'biliona'
+        -
+          value: 1000000000
+          gender: 'feminine'
+          oneForm: 'milijarda'
+          singular: 'milijarda'
+          paucal: 'milijarde'
+          plural: 'milijardi'
+        -
+          value: 1000000
+          gender: 'masculine'
+          oneForm: 'milion'
+          singular: 'milion'
+          paucal: 'miliona'
+          plural: 'miliona'
+        -
+          value: 1000
+          gender: 'feminine'
+          oneForm: 'hiljadu'
+          singular: 'hiljada'
+          paucal: 'hiljade'
+          plural: 'hiljada'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        nula: 0
+        jedan: 1
+        jedna: 1
+        jedno: 1
+        dva: 2
+        dve: 2
+        tri: 3
+        'četiri': 4
+        cetiri: 4
+        pet: 5
+        'šest': 6
+        sest: 6
+        sedam: 7
+        osam: 8
+        devet: 9
+        deset: 10
+        jedanaest: 11
+        dvanaest: 12
+        trinaest: 13
+        'četrnaest': 14
+        cetrnaest: 14
+        petnaest: 15
+        'šesnaest': 16
+        sesnaest: 16
+        sedamnaest: 17
+        osamnaest: 18
+        devetnaest: 19
+        dvadeset: 20
+        trideset: 30
+        'četrdeset': 40
+        cetrdeset: 40
+        pedeset: 50
+        'šestdeset': 60
+        sestdeset: 60
+        sedamdeset: 70
+        osamdeset: 80
+        devedeset: 90
+        sto: 100
+        dvesto: 200
+        tristo: 300
+        'četiristo': 400
+        cetiristo: 400
+        petsto: 500
+        'šeststo': 600
+        seststo: 600
+        sedamsto: 700
+        osamsto: 800
+        devetsto: 900
+        hiljadu: 1000
+        hiljada: 1000
+        milion: 1000000
+        miliona: 1000000
+        milijarda: 1000000000
+        milijarde: 1000000000
+      negativePrefixes:
+        - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+  compass:
+    full:
+      - 'sever'
+      - 'sever-severoistok'
+      - 'severoistok'
+      - 'istok-severoistok'
+      - 'istok'
+      - 'istok-jugoistok'
+      - 'jugoistok'
+      - 'jug-jugoistok'
+      - 'jug'
+      - 'jug-jugozapad'
+      - 'jugozapad'
+      - 'zapad-jugozapad'
+      - 'zapad'
+      - 'zapad-severozapad'
+      - 'severozapad'
+      - 'sever-severozapad'
+    short:
+      - 'S'
+      - 'SSI'
+      - 'SI'
+      - 'ISI'
+      - 'I'
+      - 'IJI'
+      - 'JI'
+      - 'JJI'
+      - 'J'
+      - 'JJZ'
+      - 'JZ'
+      - 'ZJZ'
+      - 'Z'
+      - 'ZSZ'
+      - 'SZ'
+      - 'SSZ'

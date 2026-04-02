@@ -17,18 +17,20 @@ They are not parsed at runtime.
 1. There is exactly one locale YAML file per locale code.
 2. The file name is the locale code, for example `en.yml`, `en-US.yml`, `pt-BR.yml`.
 3. Top-level properties are limited to:
-   - `inherits`
-   - `collectionFormatter`
+   - `locale`
+   - `variantOf`
+   - `surfaces`
+4. Canonical surface names under `surfaces` are limited to:
+   - `list`
    - `formatter`
-   - `numberToWords`
-   - `ordinalizer`
-   - `wordsToNumber`
-   - `dateToOrdinalWords`
-   - `dateOnlyToOrdinalWords`
-   - `timeOnlyToClockNotation`
-4. Unknown top-level keys are rejected by the generator.
-5. Locale words, switches, tables, and strategy choices belong here.
-6. Generator implementation contracts do not belong here.
+   - `phrases`
+   - `number`
+   - `ordinal`
+   - `clock`
+   - `compass`
+5. Unknown top-level keys are rejected by the generator.
+6. Locale words, switches, tables, and strategy choices belong here.
+7. Generator implementation contracts do not belong here.
 
 ## Merge Rules
 
@@ -36,7 +38,7 @@ Locale inheritance is resolved during code generation.
 
 The rules are:
 
-1. Omitting a top-level feature block inherits the parent feature unchanged.
+1. Omitting a `surfaces.<surface>` block inherits the parent surface unchanged.
 2. A scalar child value replaces the parent scalar value.
 3. A sequence child value replaces the parent sequence value.
 4. A mapping child value merges recursively with the parent mapping.
@@ -47,29 +49,32 @@ That means regional variants can now override only the fields they actually diff
 Example:
 
 ```yaml
-inherits: 'en'
+locale: 'en-IN'
+variantOf: 'en'
 
-numberToWords:
-  engine: 'conjunctional-scale'
-  tensUnitsSeparator: ' '
-  scales:
-    -
-      value: 10000000
-      name: 'crore'
-      ordinalName: 'crore'
-    -
-      value: 100000
-      name: 'lakh'
-      ordinalName: 'lakh'
-    -
-      value: 1000
-      name: 'thousand'
-      ordinalName: 'thousand'
+surfaces:
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      tensUnitsSeparator: ' '
+      scales:
+        -
+          value: 10000000
+          name: 'crore'
+          ordinalName: 'crore'
+        -
+          value: 100000
+          name: 'lakh'
+          ordinalName: 'lakh'
+        -
+          value: 1000
+          name: 'thousand'
+          ordinalName: 'thousand'
 ```
 
 In that example:
 
-1. The locale still inherits the parent `andWord`, `unitsMap`, and `ordinalizer`.
+1. The locale still inherits the parent `number.words.andWord`, `number.words.unitsMap`, and `ordinal` surface.
 2. The `tensUnitsSeparator` scalar overrides only that one field.
 3. The `scales` sequence intentionally replaces the parent scale list.
 
@@ -126,7 +131,7 @@ These field-name patterns repeat across engines.
 | `negative*` | Fields used only for negative number rendering or parsing. |
 | `useCulture` | Instructs the generated runtime path to pass the current culture into the shared kernel. |
 
-## Top-Level Blocks
+## Canonical Surface Sections
 
 The sections below answer two things for every block:
 
@@ -135,10 +140,10 @@ The sections below answer two things for every block:
 
 If you need step-by-step authoring guidance, use this document together with [Locale YAML How-To](./locale-yaml-how-to.md).
 
-### `inherits`
+### `variantOf`
 
 - Type: scalar locale code
-- Purpose: declares the parent locale whose blocks and fields should be inherited.
+- Purpose: declares the parent locale whose surfaces and fields should be inherited.
 - Examples in the repo:
   - `'en'`
   - `'de'`
@@ -146,7 +151,7 @@ If you need step-by-step authoring guidance, use this document together with [Lo
   - `'pt'`
   - `'zh-Hans'`
 
-### `collectionFormatter`
+### `list`
 
 Purpose:
 
@@ -208,37 +213,22 @@ Notes:
 - `dataUnitNonIntegralForm` tells the formatter which grammatical number to use for non-integral values.
 - `secondaryPlaceholderMode` enables special placeholder behavior for locales with secondary article/consonant rules.
 
-### `dateToOrdinalWords`
+### `ordinal`
 
 Purpose:
 
-- owns date-specific day placement and day rendering mode
-- feeds the generated date-to-ordinal converter
-- should not be used to encode generic ordinal-number behavior
+- owns numeric ordinalization plus date-specific ordinal day rendering
+- feeds the numeric ordinalizer and generated date-to-ordinal converters
+- keeps all ordinal behavior under one conceptual surface
 
-No engine field is used today.
+Members:
 
-Fields:
+- `numeric`
+- `date`
+- `dateOnly`
 
-- `pattern`: output format string using `{day}` for the day component.
-- `dayMode`: day rendering strategy.
-
-### `dateOnlyToOrdinalWords`
-
-The same shape as `dateToOrdinalWords`.
-
-Fields:
-
-- `pattern`
-- `dayMode`
-
-### `ordinalizer`
-
-Purpose:
-
-- owns numeric ordinalization rules when the runtime output stays in numeric form
-- feeds ordinalizer registries directly
-- should not duplicate full `numberToWords` vocabularies unless a specific engine explicitly bridges to them
+`numeric` owns numeric ordinalization rules when the runtime output stays in numeric form.
+`date` and `dateOnly` own date-specific day placement and day rendering mode.
 
 Supported engines:
 
@@ -247,7 +237,14 @@ Supported engines:
 - `template`
 - `word-form-template`
 
-### `numberToWords`
+Date-specific fields:
+
+- `date.pattern`: output format string using `{day}` for the day component.
+- `date.dayMode`: day rendering strategy.
+- `dateOnly.pattern`
+- `dateOnly.dayMode`
+
+### `number.words`
 
 Purpose:
 
@@ -288,7 +285,7 @@ Supported engines in current checked-in YAML:
 - `variant-decade`
 - `west-slavic-gendered`
 
-### `wordsToNumber`
+### `number.parse`
 
 Purpose:
 
@@ -602,7 +599,7 @@ Authoring notes:
 
 - `resourceKeyDetector` and `dataUnitDetector` choose the plural/resource family; these are structural strategy values, not locale display strings.
 - `exactDateForms`, `exactTimeSpanForms`, and `resourceKeySuffixes` are the escape hatches for locales that need exact-count or unit-specific form selection beyond the default detector.
-- `timeUnitGenders` belongs here because formatter resources often inflect by unit gender even when `numberToWords` does not.
+- `timeUnitGenders` belongs here because formatter resources often inflect by unit gender even when `number.words` does not.
 - `secondaryPlaceholderMode` is rare; if you add it, leave a YAML comment in the locale file explaining the grammatical rule being modeled.
 
 ## Time-Only Clock Notation
@@ -680,9 +677,9 @@ Notes:
 - `tens` is the ordered tens vocabulary used by the shared parser.
 - `largeScales` is the ordered scale-token list.
 - `ignoredToken` is a single token skipped during parsing.
-- `ordinalNumberToWordsKind` links to a `numberToWords` profile whose ordinal outputs can be mined for parsing support.
+- `ordinalNumberToWordsKind` links to a `number.words` profile whose ordinal outputs can be mined for parsing support.
 - `sequenceMultiplierThreshold` changes how adjacent values are multiplied versus added.
-- `ordinalNumberToWordsKind` may use `self` when ordinal parsing should be derived from the locale's own `numberToWords` block at generation time.
+- `ordinalNumberToWordsKind` may use `self` when ordinal parsing should be derived from the locale's own `number.words` block at generation time.
 
 ### `contracted-scale`
 
@@ -1565,4 +1562,6 @@ Examples in the current repo:
 
 - `en-US.yml` exists because U.S. ordinal date formatting differs from `en`.
 - `ru-RU.yml` does not need to exist when `ru` already covers the generated behavior.
-- `en-IN.yml` inherits `en` and overrides only the `numberToWords` fields that genuinely differ.
+- `en-IN.yml` inherits `en` and overrides only the `number.words` fields that genuinely differ.
+
+

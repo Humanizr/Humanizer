@@ -1,394 +1,400 @@
-# Locale-owned generator data for af.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'en'
-numberToWords:
-  engine: 'inverted-tens'
-  minusWord: 'minus'
-  unitsMap:
-    - 'nul'
-    - 'een'
-    - 'twee'
-    - 'drie'
-    - 'vier'
-    - 'vyf'
-    - 'ses'
-    - 'sewe'
-    - 'agt'
-    - 'nege'
-    - 'tien'
-    - 'elf'
-    - 'twaalf'
-    - 'dertien'
-    - 'veertien'
-    - 'vyftien'
-    - 'sestien'
-    - 'sewentien'
-    - 'agtien'
-    - 'negentien'
-  tensMap:
-    - 'nul'
-    - 'tien'
-    - 'twintig'
-    - 'dertig'
-    - 'veertig'
-    - 'vyftig'
-    - 'sestig'
-    - 'sewentig'
-    - 'tagtig'
-    - 'negentig'
-  hundredsPrefixMap:
-    1: 'een'
-    2: 'twee'
-    3: 'drie'
-    4: 'vier'
-    5: 'vyf'
-    6: 'ses'
-    7: 'sewe'
-    8: 'agt'
-    9: 'nege'
-  oneHundredWord: 'een honderd'
-  hundredWord: 'honderd'
-  hundredJoiner: ' '
-  hundredRemainderSeparator: ' '
-  scaleTailPrefix: 'en '
-  scaleTailPrefixMode: 'low-or-exact-tens'
-  hundredTailPrefix: 'en '
-  hundredTailPrefixMode: 'low-or-exact-tens'
-  unitTensJoiner: ' en '
-  scales:
-    -
-      value: 1000000000
-      oneForm: 'een miljard'
-      manyForm: 'miljard'
-      countJoiner: ' '
-      remainderSeparator: ' '
-    -
-      value: 1000000
-      oneForm: 'een miljoen'
-      manyForm: 'miljoen'
-      countJoiner: ' '
-      remainderSeparator: ' '
-    -
-      value: 1000
-      oneForm: 'een duisend'
-      manyForm: 'duisend'
-      countJoiner: ' '
-      remainderSeparator: ' '
-  ordinalMode: 'suffix'
-  ordinalExceptions:
-    nul: 'nulste'
-    een: 'eerste'
-    drie: 'derde'
-    sewe: 'sewende'
-    agt: 'agste'
-    nege: 'negende'
-    tien: 'tiende'
-    miljoen: 'miljoenste'
-  ordinalSteSuffixEndingChars: 'tgd'
-  ordinalSteSuffix: 'ste'
-  ordinalDefaultSuffix: 'de'
-  removeLeadingOneInOrdinal: true
-  leadingOneWord: 'een '
-  leadingOnePreservePrefix: 'een en '
-ordinalizer:
-  engine: 'modulo-suffix'
-  defaultSuffix: 'de'
-  useAbsoluteValue: true
-  absoluteAtLeast:
-    value: 20
-    suffix: 'ste'
-  exactSuffixes:
-    1: 'ste'
-    2: 'de'
-    3: 'de'
-    8: 'ste'
-wordsToNumber:
-  engine: 'token-map'
-  normalizationProfile: 'LowercaseRemovePeriods'
-  cardinalMap:
-    nul: 0
-    een: 1
-    twee: 2
-    drie: 3
-    vier: 4
-    vyf: 5
-    ses: 6
-    sewe: 7
-    agt: 8
-    nege: 9
-    tien: 10
-    elf: 11
-    twaalf: 12
-    dertien: 13
-    veertien: 14
-    vyftien: 15
-    sestien: 16
-    sewentien: 17
-    agtien: 18
-    negentien: 19
-    twintig: 20
-    dertig: 30
-    veertig: 40
-    vyftig: 50
-    sestig: 60
-    sewentig: 70
-    tagtig: 80
-    negentig: 90
-    honderd: 100
-    duisend: 1000
-    miljoen: 1000000
-    miljard: 1000000000
-  useHundredMultiplier: true
-  negativePrefixes:
-    - 'minus '
-  ignoredTokens:
-    - 'en'
+locale: 'af'
 
-phrases:
-  dateHumanize:
-    now: 'nou'
-    never: 'nooit'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'en'
+
+  phrases:
+    relativeDate:
+      now: 'nou'
+      never: 'nooit'
+      past:
+        millisecond:
+          single: '1 millisekonde terug'
+          multiple:
+            forms:
+              default: 'millisekondes'
+            afterCount: 'terug'
+        second:
+          single: '1 sekonde terug'
+          multiple:
+            forms:
+              default: 'sekondes'
+            afterCount: 'terug'
+        minute:
+          single: '1 minuut terug'
+          multiple:
+            forms:
+              default: 'minute'
+            afterCount: 'terug'
+        hour:
+          single: '1 uur terug'
+          multiple:
+            forms:
+              default: 'ure'
+            afterCount: 'gelede'
+        day:
+          single: 'gister'
+          multiple:
+            forms:
+              default: 'dae'
+            afterCount: 'gelede'
+          template:
+            name: 'two'
+            value: '2 dae gelede'
+        week:
+          single: '1 week gelede'
+          multiple:
+            forms:
+              default: 'weke'
+            afterCount: 'gelede'
+        month:
+          single: '1 maand gelede'
+          multiple:
+            forms:
+              default: 'maande'
+            afterCount: 'gelede'
+        year:
+          single: '1 jaar gelede'
+          multiple:
+            forms:
+              default: 'jaar'
+            afterCount: 'gelede'
+      future:
+        millisecond:
+          single: 'oor 1 millisekonde'
+          multiple:
+            forms:
+              default: 'millisekondes'
+            beforeCount: 'oor'
+        second:
+          single: 'oor 1 sekonde'
+          multiple:
+            forms:
+              default: 'sekondes'
+            beforeCount: 'oor'
+        minute:
+          single: 'oor 1 minuut'
+          multiple:
+            forms:
+              default: 'minute'
+            beforeCount: 'oor'
+        hour:
+          single: 'oor 1 uur'
+          multiple:
+            forms:
+              default: 'ure'
+            beforeCount: 'oor'
+        day:
+          single: 'môre'
+          multiple:
+            forms:
+              default: 'dae'
+            beforeCount: 'oor'
+          template:
+            name: 'two'
+            value: 'oor 2 dae'
+        week:
+          single: 'oor 1 week'
+          multiple:
+            forms:
+              default: 'weke'
+            beforeCount: 'oor'
+        month:
+          single: 'oor 1 maand'
+          multiple:
+            forms:
+              default: 'maande'
+            beforeCount: 'oor'
+        year:
+          single: 'oor 1 jaar'
+          multiple:
+            forms:
+              default: 'jaar'
+            beforeCount: 'oor'
+    duration:
+      zero: 'geen tyd'
+      age:
+        template: '{value} oud'
       millisecond:
-        single: '1 millisekonde terug'
+        single:
+          numeric: '1 millisekonde'
+          words: 'een millisekonde'
         multiple:
           forms:
             default: 'millisekondes'
-          afterCount: 'terug'
       second:
-        single: '1 sekonde terug'
+        single:
+          numeric: '1 sekonde'
+          words: 'een sekonde'
         multiple:
           forms:
             default: 'sekondes'
-          afterCount: 'terug'
       minute:
-        single: '1 minuut terug'
+        single:
+          numeric: '1 minuut'
+          words: 'een minuut'
         multiple:
           forms:
             default: 'minute'
-          afterCount: 'terug'
       hour:
-        single: '1 uur terug'
+        single:
+          numeric: '1 uur'
+          words: 'een uur'
         multiple:
           forms:
             default: 'ure'
-          afterCount: 'gelede'
       day:
-        single: 'gister'
+        single:
+          numeric: '1 dag'
+          words: 'een dag'
         multiple:
           forms:
             default: 'dae'
-          afterCount: 'gelede'
-        template:
-          name: 'two'
-          value: '2 dae gelede'
       week:
-        single: '1 week gelede'
+        single:
+          numeric: '1 week'
+          words: 'een week'
         multiple:
           forms:
             default: 'weke'
-          afterCount: 'gelede'
       month:
-        single: '1 maand gelede'
+        single:
+          numeric: '1 maand'
+          words: 'een maand'
         multiple:
           forms:
             default: 'maande'
-          afterCount: 'gelede'
       year:
-        single: '1 jaar gelede'
+        single:
+          numeric: '1 jaar'
+          words: 'een jaar'
         multiple:
           forms:
             default: 'jaar'
-          afterCount: 'gelede'
-    future:
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
       millisecond:
-        single: 'oor 1 millisekonde'
-        multiple:
-          forms:
-            default: 'millisekondes'
-          beforeCount: 'oor'
+        symbol: 'ms'
       second:
-        single: 'oor 1 sekonde'
-        multiple:
-          forms:
-            default: 'sekondes'
-          beforeCount: 'oor'
+        symbol: 'sek.'
       minute:
-        single: 'oor 1 minuut'
-        multiple:
-          forms:
-            default: 'minute'
-          beforeCount: 'oor'
+        symbol: 'min.'
       hour:
-        single: 'oor 1 uur'
-        multiple:
-          forms:
-            default: 'ure'
-          beforeCount: 'oor'
+        symbol: 'uur'
       day:
-        single: 'môre'
-        multiple:
-          forms:
-            default: 'dae'
-          beforeCount: 'oor'
-        template:
-          name: 'two'
-          value: 'oor 2 dae'
+        symbol: 'dag'
       week:
-        single: 'oor 1 week'
-        multiple:
-          forms:
-            default: 'weke'
-          beforeCount: 'oor'
+        symbol: 'week'
       month:
-        single: 'oor 1 maand'
-        multiple:
-          forms:
-            default: 'maande'
-          beforeCount: 'oor'
+        symbol: 'maand'
       year:
-        single: 'oor 1 jaar'
-        multiple:
-          forms:
-            default: 'jaar'
-          beforeCount: 'oor'
-  timeSpan:
-    zero: 'geen tyd'
-    age:
-      template: '{value} oud'
-    millisecond:
-      single:
-        numeric: '1 millisekonde'
-        words: 'een millisekonde'
-      multiple:
-        forms:
-          default: 'millisekondes'
-    second:
-      single:
-        numeric: '1 sekonde'
-        words: 'een sekonde'
-      multiple:
-        forms:
-          default: 'sekondes'
-    minute:
-      single:
-        numeric: '1 minuut'
-        words: 'een minuut'
-      multiple:
-        forms:
-          default: 'minute'
-    hour:
-      single:
-        numeric: '1 uur'
-        words: 'een uur'
-      multiple:
-        forms:
-          default: 'ure'
-    day:
-      single:
-        numeric: '1 dag'
-        words: 'een dag'
-      multiple:
-        forms:
-          default: 'dae'
-    week:
-      single:
-        numeric: '1 week'
-        words: 'een week'
-      multiple:
-        forms:
-          default: 'weke'
-    month:
-      single:
-        numeric: '1 maand'
-        words: 'een maand'
-      multiple:
-        forms:
-          default: 'maande'
-    year:
-      single:
-        numeric: '1 jaar'
-        words: 'een jaar'
-      multiple:
-        forms:
-          default: 'jaar'
-  dataUnit:
-    bit:
-      forms:
-        default: 'bit'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'byte'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'kilobyte'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'megabyte'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'gigabyte'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'terabyte'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'ms'
-    second:
-      symbol: 'sek.'
-    minute:
-      symbol: 'min.'
-    hour:
-      symbol: 'uur'
-    day:
-      symbol: 'dag'
-    week:
-      symbol: 'week'
-    month:
-      symbol: 'maand'
-    year:
-      symbol: 'jaar'
-headings:
-  full:
-    - 'noord'
-    - 'noordnoordoos'
-    - 'noordoos'
-    - 'oosnoordoos'
-    - 'oos'
-    - 'oossuidoos'
-    - 'suidoos'
-    - 'suidsuidoos'
-    - 'suid'
-    - 'suidsuidwes'
-    - 'suidwes'
-    - 'wessuidwes'
-    - 'wes'
-    - 'wesnoordwes'
-    - 'noordwes'
-    - 'noordnoordwes'
-  short:
-    - 'N'
-    - 'NNO'
-    - 'NO'
-    - 'ONO'
-    - 'O'
-    - 'OSO'
-    - 'SO'
-    - 'SSO'
-    - 'S'
-    - 'SSW'
-    - 'SW'
-    - 'WSW'
-    - 'W'
-    - 'WNW'
-    - 'NW'
-    - 'NNW'
+        symbol: 'jaar'
+
+  number:
+    words:
+      engine: 'inverted-tens'
+      minusWord: 'minus'
+      unitsMap:
+        - 'nul'
+        - 'een'
+        - 'twee'
+        - 'drie'
+        - 'vier'
+        - 'vyf'
+        - 'ses'
+        - 'sewe'
+        - 'agt'
+        - 'nege'
+        - 'tien'
+        - 'elf'
+        - 'twaalf'
+        - 'dertien'
+        - 'veertien'
+        - 'vyftien'
+        - 'sestien'
+        - 'sewentien'
+        - 'agtien'
+        - 'negentien'
+      tensMap:
+        - 'nul'
+        - 'tien'
+        - 'twintig'
+        - 'dertig'
+        - 'veertig'
+        - 'vyftig'
+        - 'sestig'
+        - 'sewentig'
+        - 'tagtig'
+        - 'negentig'
+      hundredsPrefixMap:
+        1: 'een'
+        2: 'twee'
+        3: 'drie'
+        4: 'vier'
+        5: 'vyf'
+        6: 'ses'
+        7: 'sewe'
+        8: 'agt'
+        9: 'nege'
+      oneHundredWord: 'een honderd'
+      hundredWord: 'honderd'
+      hundredJoiner: ' '
+      hundredRemainderSeparator: ' '
+      scaleTailPrefix: 'en '
+      scaleTailPrefixMode: 'low-or-exact-tens'
+      hundredTailPrefix: 'en '
+      hundredTailPrefixMode: 'low-or-exact-tens'
+      unitTensJoiner: ' en '
+      scales:
+        -
+          value: 1000000000
+          oneForm: 'een miljard'
+          manyForm: 'miljard'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000
+          oneForm: 'een miljoen'
+          manyForm: 'miljoen'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000
+          oneForm: 'een duisend'
+          manyForm: 'duisend'
+          countJoiner: ' '
+          remainderSeparator: ' '
+      ordinalMode: 'suffix'
+      ordinalExceptions:
+        nul: 'nulste'
+        een: 'eerste'
+        drie: 'derde'
+        sewe: 'sewende'
+        agt: 'agste'
+        nege: 'negende'
+        tien: 'tiende'
+        miljoen: 'miljoenste'
+      ordinalSteSuffixEndingChars: 'tgd'
+      ordinalSteSuffix: 'ste'
+      ordinalDefaultSuffix: 'de'
+      removeLeadingOneInOrdinal: true
+      leadingOneWord: 'een '
+      leadingOnePreservePrefix: 'een en '
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        nul: 0
+        een: 1
+        twee: 2
+        drie: 3
+        vier: 4
+        vyf: 5
+        ses: 6
+        sewe: 7
+        agt: 8
+        nege: 9
+        tien: 10
+        elf: 11
+        twaalf: 12
+        dertien: 13
+        veertien: 14
+        vyftien: 15
+        sestien: 16
+        sewentien: 17
+        agtien: 18
+        negentien: 19
+        twintig: 20
+        dertig: 30
+        veertig: 40
+        vyftig: 50
+        sestig: 60
+        sewentig: 70
+        tagtig: 80
+        negentig: 90
+        honderd: 100
+        duisend: 1000
+        miljoen: 1000000
+        miljard: 1000000000
+      useHundredMultiplier: true
+      negativePrefixes:
+        - 'minus '
+      ignoredTokens:
+        - 'en'
+
+  ordinal:
+    numeric:
+      engine: 'modulo-suffix'
+      defaultSuffix: 'de'
+      useAbsoluteValue: true
+      absoluteAtLeast:
+        value: 20
+        suffix: 'ste'
+      exactSuffixes:
+        1: 'ste'
+        2: 'de'
+        3: 'de'
+        8: 'ste'
+
+  compass:
+    full:
+      - 'noord'
+      - 'noordnoordoos'
+      - 'noordoos'
+      - 'oosnoordoos'
+      - 'oos'
+      - 'oossuidoos'
+      - 'suidoos'
+      - 'suidsuidoos'
+      - 'suid'
+      - 'suidsuidwes'
+      - 'suidwes'
+      - 'wessuidwes'
+      - 'wes'
+      - 'wesnoordwes'
+      - 'noordwes'
+      - 'noordnoordwes'
+    short:
+      - 'N'
+      - 'NNO'
+      - 'NO'
+      - 'ONO'
+      - 'O'
+      - 'OSO'
+      - 'SO'
+      - 'SSO'
+      - 'S'
+      - 'SSW'
+      - 'SW'
+      - 'WSW'
+      - 'W'
+      - 'WNW'
+      - 'NW'
+      - 'NNW'

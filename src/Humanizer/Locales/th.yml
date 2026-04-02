@@ -1,332 +1,337 @@
-# Locale-owned generator data for th.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'และ'
-formatter:
-  engine: 'profiled'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-numberToWords:
-  engine: 'joined-scale'
-  maximumValue: 9223372036854775807
-  zeroWord: 'ศูนย์'
-  minusWord: 'ลบ'
-  negativeJoinWord: ''
-  joinWord: ''
-  scaleCountJoinWord: ''
-  underHundredJoinWord: ''
-  matchingOrdinalSuffix: null
-  ordinalSuffixMatchCharacters: null
-  unitsMap:
-    - 'ศูนย์'
-    - 'หนึ่ง'
-    - 'สอง'
-    - 'สาม'
-    - 'สี่'
-    - 'ห้า'
-    - 'หก'
-    - 'เจ็ด'
-    - 'แปด'
-    - 'เก้า'
-    - 'สิบ'
-    - 'สิบเอ็ด'
-    - 'สิบสอง'
-    - 'สิบสาม'
-    - 'สิบสี่'
-    - 'สิบห้า'
-    - 'สิบหก'
-    - 'สิบเจ็ด'
-    - 'สิบแปด'
-    - 'สิบเก้า'
-  tensMap:
-    - 'ศูนย์'
-    - 'สิบ'
-    - 'ยี่สิบ'
-    - 'สามสิบ'
-    - 'สี่สิบ'
-    - 'ห้าสิบ'
-    - 'หกสิบ'
-    - 'เจ็ดสิบ'
-    - 'แปดสิบ'
-    - 'เก้าสิบ'
-  hundredsMap: []
-  scales:
-    -
-      value: 1000000
-      name: 'ล้าน'
-    -
-      value: 100000
-      name: 'แสน'
-    -
-      value: 10000
-      name: 'หมื่น'
-    -
-      value: 1000
-      name: 'พัน'
-    -
-      value: 100
-      name: 'ร้อย'
-wordsToNumber:
-  engine: 'east-asian-positional'
-  negativePrefixes:
-    - 'ลบ'
-  digits:
-    'ศูนย์': 0
-    'หนึ่ง': 1
-    'เอ็ด': 1
-    'ยี่': 2
-    'สอง': 2
-    'สาม': 3
-    'สี่': 4
-    'ห้า': 5
-    'หก': 6
-    'เจ็ด': 7
-    'แปด': 8
-    'เก้า': 9
-  smallUnits:
-    'สิบ': 10
-    'ร้อย': 100
-    'พัน': 1000
-    'หมื่น': 10000
-    'แสน': 100000
-  largeUnits:
-    'ล้าน': 1000000
+locale: 'th'
 
-phrases:
-  dateHumanize:
-    now: 'ขณะนี้'
-    never: 'ไม่เคย'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'และ'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'ขณะนี้'
+      never: 'ไม่เคย'
+      past:
+        millisecond:
+          single: 'หนึ่งมิลลิวินาทีที่แล้ว'
+          multiple:
+            forms:
+              default: 'มิลลิวินาทีที่แล้ว'
+        second:
+          single: 'หนึ่งวินาทีที่แล้ว'
+          multiple:
+            forms:
+              default: 'วินาทีที่แล้ว'
+        minute:
+          single: 'หนึ่งนาทีที่แล้ว'
+          multiple:
+            forms:
+              default: 'นาทีที่แล้ว'
+        hour:
+          single: 'หนึ่งชั่วโมงที่แล้ว'
+          multiple:
+            forms:
+              default: 'ชั่วโมงที่แล้ว'
+        day:
+          single: 'เมื่อวานนี้'
+          multiple:
+            forms:
+              default: 'วันที่แล้ว'
+          template:
+            name: 'two'
+            value: 'เมื่อวานซืน'
+        week:
+          single: 'หนึ่งสัปดาห์ที่แล้ว'
+          multiple:
+            forms:
+              default: 'สัปดาห์ที่แล้ว'
+        month:
+          single: 'หนึ่งเดือนที่แล้ว'
+          multiple:
+            forms:
+              default: 'เดือนที่แล้ว'
+        year:
+          single: 'หนึ่งปีที่แล้ว'
+          multiple:
+            forms:
+              default: 'ปีที่แล้ว'
+      future:
+        millisecond:
+          single: 'อีกหนึ่งมิลลิวินาที'
+          multiple:
+            forms:
+              default: 'มิลลิวินาที'
+            beforeCount: 'อีก'
+        second:
+          single: 'อีกหนึ่งวินาที'
+          multiple:
+            forms:
+              default: 'วินาที'
+            beforeCount: 'อีก'
+        minute:
+          single: 'อีกหนึ่งนาที'
+          multiple:
+            forms:
+              default: 'นาที'
+            beforeCount: 'อีก'
+        hour:
+          single: 'อีกหนึ่งชั่วโมง'
+          multiple:
+            forms:
+              default: 'ชั่วโมง'
+            beforeCount: 'อีก'
+        day:
+          single: 'พรุ่งนี้'
+          multiple:
+            forms:
+              default: 'วัน'
+            beforeCount: 'อีก'
+          template:
+            name: 'two'
+            value: 'มะรืนนี้'
+        week:
+          single: 'อีกหนึ่งสัปดาห์'
+          multiple:
+            forms:
+              default: 'สัปดาห์'
+            beforeCount: 'อีก'
+        month:
+          single: 'อีกหนึ่งเดือน'
+          multiple:
+            forms:
+              default: 'เดือน'
+            beforeCount: 'อีก'
+        year:
+          single: 'อีกหนึ่งปี'
+          multiple:
+            forms:
+              default: 'ปี'
+            beforeCount: 'อีก'
+    duration:
+      zero: 'ไม่มีเวลา'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'หนึ่งมิลลิวินาทีที่แล้ว'
-        multiple:
-          forms:
-            default: 'มิลลิวินาทีที่แล้ว'
-      second:
-        single: 'หนึ่งวินาทีที่แล้ว'
-        multiple:
-          forms:
-            default: 'วินาทีที่แล้ว'
-      minute:
-        single: 'หนึ่งนาทีที่แล้ว'
-        multiple:
-          forms:
-            default: 'นาทีที่แล้ว'
-      hour:
-        single: 'หนึ่งชั่วโมงที่แล้ว'
-        multiple:
-          forms:
-            default: 'ชั่วโมงที่แล้ว'
-      day:
-        single: 'เมื่อวานนี้'
-        multiple:
-          forms:
-            default: 'วันที่แล้ว'
-        template:
-          name: 'two'
-          value: 'เมื่อวานซืน'
-      week:
-        single: 'หนึ่งสัปดาห์ที่แล้ว'
-        multiple:
-          forms:
-            default: 'สัปดาห์ที่แล้ว'
-      month:
-        single: 'หนึ่งเดือนที่แล้ว'
-        multiple:
-          forms:
-            default: 'เดือนที่แล้ว'
-      year:
-        single: 'หนึ่งปีที่แล้ว'
-        multiple:
-          forms:
-            default: 'ปีที่แล้ว'
-    future:
-      millisecond:
-        single: 'อีกหนึ่งมิลลิวินาที'
+        single:
+          numeric: '1 มิลลิวินาที'
+          words: 'one มิลลิวินาที'
         multiple:
           forms:
             default: 'มิลลิวินาที'
-          beforeCount: 'อีก'
       second:
-        single: 'อีกหนึ่งวินาที'
+        single:
+          numeric: '1 วินาที'
+          words: 'one วินาที'
         multiple:
           forms:
             default: 'วินาที'
-          beforeCount: 'อีก'
       minute:
-        single: 'อีกหนึ่งนาที'
+        single:
+          numeric: '1 นาที'
+          words: 'one นาที'
         multiple:
           forms:
             default: 'นาที'
-          beforeCount: 'อีก'
       hour:
-        single: 'อีกหนึ่งชั่วโมง'
+        single:
+          numeric: '1 ชั่วโมง'
+          words: 'one ชั่วโมง'
         multiple:
           forms:
             default: 'ชั่วโมง'
-          beforeCount: 'อีก'
       day:
-        single: 'พรุ่งนี้'
+        single:
+          numeric: '1 วัน'
+          words: 'one วัน'
         multiple:
           forms:
             default: 'วัน'
-          beforeCount: 'อีก'
-        template:
-          name: 'two'
-          value: 'มะรืนนี้'
       week:
-        single: 'อีกหนึ่งสัปดาห์'
+        single:
+          numeric: '1 สัปดาห์'
+          words: 'one สัปดาห์'
         multiple:
           forms:
             default: 'สัปดาห์'
-          beforeCount: 'อีก'
       month:
-        single: 'อีกหนึ่งเดือน'
+        single:
+          numeric: '1 เดือน'
+          words: 'one เดือน'
         multiple:
           forms:
             default: 'เดือน'
-          beforeCount: 'อีก'
       year:
-        single: 'อีกหนึ่งปี'
+        single:
+          numeric: '1 ปี'
+          words: 'one ปี'
         multiple:
           forms:
             default: 'ปี'
-          beforeCount: 'อีก'
-  timeSpan:
-    zero: 'ไม่มีเวลา'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1 มิลลิวินาที'
-        words: 'one มิลลิวินาที'
-      multiple:
+    dataUnits:
+      bit:
         forms:
-          default: 'มิลลิวินาที'
-    second:
-      single:
-        numeric: '1 วินาที'
-        words: 'one วินาที'
-      multiple:
+          default: 'บิต'
+        symbol: 'b'
+      byte:
         forms:
-          default: 'วินาที'
-    minute:
-      single:
-        numeric: '1 นาที'
-        words: 'one นาที'
-      multiple:
+          default: 'ไบต์'
+        symbol: 'B'
+      kilobyte:
         forms:
-          default: 'นาที'
-    hour:
-      single:
-        numeric: '1 ชั่วโมง'
-        words: 'one ชั่วโมง'
-      multiple:
+          default: 'กิโลไบต์'
+        symbol: 'KB'
+      megabyte:
         forms:
-          default: 'ชั่วโมง'
-    day:
-      single:
-        numeric: '1 วัน'
-        words: 'one วัน'
-      multiple:
+          default: 'เมกะไบต์'
+        symbol: 'MB'
+      gigabyte:
         forms:
-          default: 'วัน'
-    week:
-      single:
-        numeric: '1 สัปดาห์'
-        words: 'one สัปดาห์'
-      multiple:
+          default: 'กิกะไบต์'
+        symbol: 'GB'
+      terabyte:
         forms:
-          default: 'สัปดาห์'
-    month:
-      single:
-        numeric: '1 เดือน'
-        words: 'one เดือน'
-      multiple:
-        forms:
-          default: 'เดือน'
-    year:
-      single:
-        numeric: '1 ปี'
-        words: 'one ปี'
-      multiple:
-        forms:
-          default: 'ปี'
-  dataUnit:
-    bit:
-      forms:
-        default: 'บิต'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'ไบต์'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'กิโลไบต์'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'เมกะไบต์'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'กิกะไบต์'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'เทราไบต์'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'มิลลิวินาที'
-    second:
-      symbol: 'วินาที'
-    minute:
-      symbol: 'นาที'
-    hour:
-      symbol: 'ชั่วโมง'
-    day:
-      symbol: 'วัน'
-    week:
-      symbol: 'สัปดาห์'
-    month:
-      symbol: 'เดือน'
-    year:
-      symbol: 'ปี'
-headings:
-  full:
-    - 'เหนือ'
-    - 'เหนือค่อนไปทางตะวันออก'
-    - 'ตะวันออกเฉียงเหนือ'
-    - 'ตะวันออกค่อนไปทางเหนือ'
-    - 'ตะวันออก'
-    - 'ตะวันออกค่อนไปทางใต้'
-    - 'ตะวันออกเฉียงใต้'
-    - 'ใต้ค่อนไปทางตะวันออก'
-    - 'ใต้'
-    - 'ใต้ค่อนไปทางตะวันตก'
-    - 'ตะวันตกเฉียงใต้'
-    - 'ตะวันตกค่อนไปทางใต้'
-    - 'ตะวันตก'
-    - 'ตะวันตกค่อนไปทางเหนือ'
-    - 'ตะวันตกเฉียงเหนือ'
-    - 'เหนือค่อนไปทางตะวันตก'
-  short:
-    - 'น'
-    - 'น-ตอ'
-    - 'ตอฉน'
-    - 'ตอ-น'
-    - 'ตอ'
-    - 'ตอ-ต'
-    - 'ตอฉต'
-    - 'ต-ตอ'
-    - 'ต'
-    - 'ต-ตว'
-    - 'ตวฉต'
-    - 'ตว-ต'
-    - 'ตว'
-    - 'ตว-น'
-    - 'ตวฉน'
-    - 'น-ตว'
+          default: 'เทราไบต์'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'มิลลิวินาที'
+      second:
+        symbol: 'วินาที'
+      minute:
+        symbol: 'นาที'
+      hour:
+        symbol: 'ชั่วโมง'
+      day:
+        symbol: 'วัน'
+      week:
+        symbol: 'สัปดาห์'
+      month:
+        symbol: 'เดือน'
+      year:
+        symbol: 'ปี'
+
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'ศูนย์'
+      minusWord: 'ลบ'
+      negativeJoinWord: ''
+      joinWord: ''
+      scaleCountJoinWord: ''
+      underHundredJoinWord: ''
+      matchingOrdinalSuffix: null
+      ordinalSuffixMatchCharacters: null
+      unitsMap:
+        - 'ศูนย์'
+        - 'หนึ่ง'
+        - 'สอง'
+        - 'สาม'
+        - 'สี่'
+        - 'ห้า'
+        - 'หก'
+        - 'เจ็ด'
+        - 'แปด'
+        - 'เก้า'
+        - 'สิบ'
+        - 'สิบเอ็ด'
+        - 'สิบสอง'
+        - 'สิบสาม'
+        - 'สิบสี่'
+        - 'สิบห้า'
+        - 'สิบหก'
+        - 'สิบเจ็ด'
+        - 'สิบแปด'
+        - 'สิบเก้า'
+      tensMap:
+        - 'ศูนย์'
+        - 'สิบ'
+        - 'ยี่สิบ'
+        - 'สามสิบ'
+        - 'สี่สิบ'
+        - 'ห้าสิบ'
+        - 'หกสิบ'
+        - 'เจ็ดสิบ'
+        - 'แปดสิบ'
+        - 'เก้าสิบ'
+      hundredsMap: []
+      scales:
+        -
+          value: 1000000
+          name: 'ล้าน'
+        -
+          value: 100000
+          name: 'แสน'
+        -
+          value: 10000
+          name: 'หมื่น'
+        -
+          value: 1000
+          name: 'พัน'
+        -
+          value: 100
+          name: 'ร้อย'
+
+    parse:
+      engine: 'east-asian-positional'
+      negativePrefixes:
+        - 'ลบ'
+      digits:
+        'ศูนย์': 0
+        'หนึ่ง': 1
+        'เอ็ด': 1
+        'ยี่': 2
+        'สอง': 2
+        'สาม': 3
+        'สี่': 4
+        'ห้า': 5
+        'หก': 6
+        'เจ็ด': 7
+        'แปด': 8
+        'เก้า': 9
+      smallUnits:
+        'สิบ': 10
+        'ร้อย': 100
+        'พัน': 1000
+        'หมื่น': 10000
+        'แสน': 100000
+      largeUnits:
+        'ล้าน': 1000000
+
+  compass:
+    full:
+      - 'เหนือ'
+      - 'เหนือค่อนไปทางตะวันออก'
+      - 'ตะวันออกเฉียงเหนือ'
+      - 'ตะวันออกค่อนไปทางเหนือ'
+      - 'ตะวันออก'
+      - 'ตะวันออกค่อนไปทางใต้'
+      - 'ตะวันออกเฉียงใต้'
+      - 'ใต้ค่อนไปทางตะวันออก'
+      - 'ใต้'
+      - 'ใต้ค่อนไปทางตะวันตก'
+      - 'ตะวันตกเฉียงใต้'
+      - 'ตะวันตกค่อนไปทางใต้'
+      - 'ตะวันตก'
+      - 'ตะวันตกค่อนไปทางเหนือ'
+      - 'ตะวันตกเฉียงเหนือ'
+      - 'เหนือค่อนไปทางตะวันตก'
+    short:
+      - 'น'
+      - 'น-ตอ'
+      - 'ตอฉน'
+      - 'ตอ-น'
+      - 'ตอ'
+      - 'ตอ-ต'
+      - 'ตอฉต'
+      - 'ต-ตอ'
+      - 'ต'
+      - 'ต-ตว'
+      - 'ตวฉต'
+      - 'ตว-ต'
+      - 'ตว'
+      - 'ตว-น'
+      - 'ตวฉน'
+      - 'น-ตว'

@@ -102,46 +102,51 @@ For the practical authoring workflow, see [Locale YAML How-To](locale-yaml-how-t
 Principles:
 
 1. One locale file owns one locale.
-2. Locale inheritance is declared in that same file with `inherits`.
-3. Omit a feature block to inherit it unchanged from the parent locale.
-4. Inside a mapped feature, omit unchanged fields to inherit them from the parent mapping.
+2. Locale inheritance is declared in that same file with `variantOf`.
+3. Omit a `surfaces.<surface>` block to inherit it unchanged from the parent locale.
+4. Inside a mapped surface, omit unchanged fields to inherit them from the parent mapping.
 5. Child sequences replace parent sequences.
-6. Changing `engine` replaces that mapped feature instead of merging it.
+6. Changing `engine` replaces that mapped surface instead of merging it.
 7. Keep locale-specific words, switches, and mappings in YAML.
 8. Keep shared generator contracts in typed C# under `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`.
 9. Never make authors learn internal generated profile ids just to connect two features inside one locale file.
+10. The current authoring model keeps locale YAML at the top level of `src/Humanizer/Locales`.
+11. Do not split one locale across multiple YAML files unless there is an explicit redesign that updates the compiler contract, docs, and tests together.
 
 Example:
 
 ```yaml
 # Locale-owned generator data for en-US.
-inherits: 'en'
+locale: 'en-US'
+variantOf: 'en'
 
-collectionFormatter: 'oxford'
+surfaces:
+  list:
+    engine: 'oxford'
 
-numberToWords:
-  engine: 'conjunctional-scale'
-  minusWord: 'minus'
-  andWord: 'and'
-  defaultAddAnd: true
-  addAndMode: 'use-caller-flag'
-  andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
-  unitsMap:
-    - 'zero'
-    - 'one'
-    - 'two'
-
-wordsToNumber:
-  engine: 'token-map'
-  normalizationProfile: 'LowercaseRemovePeriods'
-  cardinalMap:
-    one: 1
-    two: 2
-    hundred: 100
-  ordinalNumberToWordsKind: 'self'
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'and'
+      defaultAddAnd: true
+      addAndMode: 'use-caller-flag'
+      andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        one: 1
+        two: 2
+        hundred: 100
+      ordinalNumberToWordsKind: 'self'
 ```
 
-`ordinalNumberToWordsKind: 'self'` is intentional. Locale YAML is authored in locale terms, not in generator-internal profile-key terms. The generator resolves `self` to the owning locale profile during code generation.
+`surfaces.number.parse.ordinalNumberToWordsKind: 'self'` is intentional. Locale YAML is authored in locale terms, not in generator-internal profile-key terms. The generator resolves `self` to the owning locale profile during code generation.
 
 ## How The Generator Pipeline Fits Together
 
@@ -150,7 +155,7 @@ The localization codegen flow is:
 1. `Locales/*.yml`
    Locale-owned authoring surface for all generated features.
 2. `LocaleYamlCatalog`
-   Parses YAML, resolves inheritance, and exposes per-locale feature roots.
+   Parses canonical YAML, resolves `variantOf` inheritance, and exposes per-locale feature roots.
 3. `EngineContractCatalog`
    Typed generator-side engine contracts that describe how a feature block maps onto a runtime profile object.
 4. `ProfileCatalogInput` generators
@@ -187,8 +192,8 @@ Current accepted residual leaves are limited to a small set of `TimeOnlyToClockN
 When a locale already fits an existing shared engine:
 
 1. Create or update `src/Humanizer/Locales/<locale>.yml`.
-2. Add `inherits` if the locale is a regional variant.
-3. Fill in the feature blocks that differ from the parent.
+2. Add `variantOf` if the locale is a regional variant.
+3. Fill in the `surfaces` blocks that differ from the parent.
 4. Reuse an existing structural engine name.
 5. Add or update resource files under `src/Humanizer/Properties` if the feature still depends on resources.
 6. Add tests under `tests/Humanizer.Tests`.
@@ -203,6 +208,7 @@ When a locale does not fit an existing shared engine:
 5. Document the decision in the adjacent locale docs and code comments so the rationale stays with the implementation rather than in a stale execution plan.
 
 Do not add a locale-specific converter just to avoid extending a clearly reusable shared family. Do not add a generic-sounding name if the implementation still hardcodes one language's rules.
+Do not split locale-owned YAML into extra files just to make the top-level locale file look smaller. If nested locale YAML documents ever become necessary, treat that as an intentional redesign instead of an incremental cleanup.
 
 ## Validation Expectations
 

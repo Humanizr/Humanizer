@@ -1,475 +1,482 @@
-# Locale-owned generator data for is.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'og'
-formatter:
-  engine: 'profiled'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-  timeUnitGenders:
-    millisecond: 'feminine'
-    second: 'feminine'
-    minute: 'feminine'
-    hour: 'feminine'
-    day: 'masculine'
-    week: 'feminine'
-    month: 'masculine'
-    year: 'neuter'
-numberToWords:
-  engine: 'ordinal-prefix-scale'
-  defaultGender: 'masculine'
-  minusWord: 'mínus'
-  andWord: 'og'
-  masculineOrdinalEnding: 'i'
-  nonMasculineOrdinalEnding: 'a'
-  unitsMap:
-    0: 'núll'
-    5: 'fimm'
-    6: 'sex'
-    7: 'sjö'
-    8: 'átta'
-    9: 'níu'
-    10: 'tíu'
-    11: 'ellefu'
-    12: 'tólf'
-    13: 'þrettán'
-    14: 'fjórtán'
-    15: 'fimmtán'
-    16: 'sextán'
-    17: 'sautján'
-    18: 'átján'
-    19: 'nítján'
-  masculineUnitsMap:
-    1: 'einn'
-    2: 'tveir'
-    3: 'þrír'
-    4: 'fjórir'
-  feminineUnitsMap:
-    1: 'ein'
-    2: 'tvær'
-    3: 'þrjár'
-    4: 'fjórar'
-  neuterUnitsMap:
-    1: 'eitt'
-    2: 'tvö'
-    3: 'þrjú'
-    4: 'fjögur'
-  tensMap:
-    1: 'tíu'
-    2: 'tuttugu'
-    3: 'þrjátíu'
-    4: 'fjörutíu'
-    5: 'fimmtíu'
-    6: 'sextíu'
-    7: 'sjötíu'
-    8: 'áttatíu'
-    9: 'níutíu'
-  unitsOrdinalPrefixes:
-    0: 'núllt'
-    1: 'fyrst'
-    3: 'þriðj'
-    4: 'fjórð'
-    5: 'fimmt'
-    6: 'sjött'
-    7: 'sjöund'
-    8: 'áttund'
-    9: 'níund'
-    10: 'tíund'
-    11: 'elleft'
-    12: 'tólft'
-    13: 'þrettánd'
-    14: 'fjórtánd'
-    15: 'fimmtánd'
-    16: 'sextánd'
-    17: 'sautjánd'
-    18: 'átjánd'
-    19: 'nítjánd'
-  tensOrdinalPrefixes:
-    1: 'tíund'
-    2: 'tuttugast'
-    3: 'þrítugast'
-    4: 'fertugast'
-    5: 'fimmtugast'
-    6: 'sextugast'
-    7: 'sjötugast'
-    8: 'áttugast'
-    9: 'nítugast'
-  hundredSingular: 'hundrað'
-  hundredPlural: 'hundruð'
-  ordinalTwoMasculine: 'annar'
-  ordinalTwoFeminine: 'önnur'
-  ordinalTwoNeuter: 'annað'
-  scales:
-    -
-      value: 1000000000000000000
-      singular: 'ein trilljón'
-      plural: 'trilljónir'
-      ordinalPrefix: 'trilljónast'
-      gender: 'feminine'
-    -
-      value: 1000000000000000
-      singular: 'einn billjarður'
-      plural: 'billjarðar'
-      ordinalPrefix: 'billjarðast'
-      gender: 'masculine'
-    -
-      value: 1000000000000
-      singular: 'ein billjón'
-      plural: 'billjónir'
-      ordinalPrefix: 'billjónast'
-      gender: 'feminine'
-    -
-      value: 1000000000
-      singular: 'einn milljarður'
-      plural: 'milljarðar'
-      ordinalPrefix: 'milljarðast'
-      gender: 'masculine'
-    -
-      value: 1000000
-      singular: 'ein milljón'
-      plural: 'milljónir'
-      ordinalPrefix: 'milljónast'
-      gender: 'feminine'
-    -
-      value: 1000
-      singular: 'eitt þúsund'
-      plural: 'þúsund'
-      ordinalPrefix: 'þúsundast'
-      gender: 'neuter'
-ordinalizer:
-  engine: 'suffix'
-  masculineSuffix: '.'
-wordsToNumber:
-  engine: 'compound-scale'
-  cardinalMap:
-    'núll': 0
-    einn: 1
-    ein: 1
-    eitt: 1
-    tveir: 2
-    'tvær': 2
-    'tvö': 2
-    'þrír': 3
-    'þrjár': 3
-    'þrjú': 3
-    'fjórir': 4
-    'fjórar': 4
-    'fjögur': 4
-    fimm: 5
-    sex: 6
-    'sjö': 7
-    'átta': 8
-    'níu': 9
-    'tíu': 10
-    ellefu: 11
-    'tólf': 12
-    'þrettán': 13
-    'fjórtán': 14
-    'fimmtán': 15
-    'sextán': 16
-    'sautján': 17
-    'átján': 18
-    'nítján': 19
-    tuttugu: 20
-    'þrjátíu': 30
-    'fjörutíu': 40
-    'fimmtíu': 50
-    'sextíu': 60
-    'sjötíu': 70
-    'áttatíu': 80
-    'níutíu': 90
-    'hundrað': 100
-    'hundruð': 100
-    'þúsund': 1000
-    'milljón': 1000000
-    'milljónir': 1000000
-    'milljarður': 1000000000
-    'milljarðar': 1000000000
-  tens:
-    - 'tuttugu'
-    - 'þrjátíu'
-    - 'fjörutíu'
-    - 'fimmtíu'
-    - 'sextíu'
-    - 'sjötíu'
-    - 'áttatíu'
-    - 'níutíu'
-  largeScales:
-    - 'milljarðar'
-    - 'milljarður'
-    - 'milljónir'
-    - 'milljón'
-    - 'þúsund'
-    - 'hundruð'
-    - 'hundrað'
-  ignoredToken: 'og'
-  ordinalNumberToWordsKind: 'self'
-  negativePrefixes:
-    - 'mínus '
-    - 'minus '
-  sequenceMultiplierThreshold: 100
+locale: 'is'
 
-phrases:
-  dateHumanize:
-    now: 'núna'
-    never: 'aldrei'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'og'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+    timeUnitGenders:
+      millisecond: 'feminine'
+      second: 'feminine'
+      minute: 'feminine'
+      hour: 'feminine'
+      day: 'masculine'
+      week: 'feminine'
+      month: 'masculine'
+      year: 'neuter'
+
+  phrases:
+    relativeDate:
+      now: 'núna'
+      never: 'aldrei'
+      past:
+        millisecond:
+          single: 'fyrir einni millisekúndu'
+          multiple:
+            forms:
+              default: 'millisekúndum'
+            beforeCount: 'fyrir'
+        second:
+          single: 'fyrir einni sekúndu'
+          multiple:
+            forms:
+              default: 'sekúndum'
+              singular: 'sekúndu'
+            beforeCount: 'fyrir'
+        minute:
+          single: 'fyrir einni mínútu'
+          multiple:
+            forms:
+              default: 'mínútum'
+              singular: 'mínútu'
+            beforeCount: 'fyrir'
+        hour:
+          single: 'fyrir einni klukkustund'
+          multiple:
+            forms:
+              default: 'klukkustundum'
+              singular: 'klukkustund'
+            beforeCount: 'fyrir'
+        day:
+          single: 'í gær'
+          multiple:
+            forms:
+              default: 'dögum'
+              singular: 'degi'
+            beforeCount: 'fyrir'
+          template:
+            name: 'two'
+            value: 'fyrir 2 dögum'
+        week:
+          single: 'fyrir einni viku'
+          multiple:
+            forms:
+              default: 'vikum'
+            beforeCount: 'fyrir'
+        month:
+          single: 'fyrir einum mánuði'
+          multiple:
+            forms:
+              default: 'mánuðum'
+              singular: 'mánuði'
+            beforeCount: 'fyrir'
+        year:
+          single: 'fyrir einu ári'
+          multiple:
+            forms:
+              default: 'árum'
+              singular: 'ári'
+            beforeCount: 'fyrir'
+      future:
+        millisecond:
+          single: 'eftir eina millisekúndu'
+          multiple:
+            forms:
+              default: 'millisekúndur'
+            beforeCount: 'eftir'
+        second:
+          single: 'eftir eina sekúndu'
+          multiple:
+            forms:
+              default: 'sekúndur'
+              singular: 'sekúndu'
+            beforeCount: 'eftir'
+        minute:
+          single: 'eftir eina mínútu'
+          multiple:
+            forms:
+              default: 'mínútur'
+              singular: 'mínútu'
+            beforeCount: 'eftir'
+        hour:
+          single: 'eftir eina klukkustund'
+          multiple:
+            forms:
+              default: 'klukkustundir'
+              singular: 'klukkustund'
+            beforeCount: 'eftir'
+        day:
+          single: 'á morgun'
+          multiple:
+            forms:
+              default: 'daga'
+              singular: 'dag'
+            beforeCount: 'eftir'
+          template:
+            name: 'two'
+            value: 'eftir 2 daga'
+        week:
+          single: 'eftir eina viku'
+          multiple:
+            forms:
+              default: 'vikur'
+            beforeCount: 'eftir'
+        month:
+          single: 'eftir einn mánuð'
+          multiple:
+            forms:
+              default: 'mánuði'
+              singular: 'mánuð'
+            beforeCount: 'eftir'
+        year:
+          single: 'eftir eitt ár'
+          multiple:
+            forms:
+              default: 'ár'
+            beforeCount: 'eftir'
+    duration:
+      zero: 'engin stund'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'fyrir einni millisekúndu'
-        multiple:
-          forms:
-            default: 'millisekúndum'
-          beforeCount: 'fyrir'
-      second:
-        single: 'fyrir einni sekúndu'
-        multiple:
-          forms:
-            default: 'sekúndum'
-            singular: 'sekúndu'
-          beforeCount: 'fyrir'
-      minute:
-        single: 'fyrir einni mínútu'
-        multiple:
-          forms:
-            default: 'mínútum'
-            singular: 'mínútu'
-          beforeCount: 'fyrir'
-      hour:
-        single: 'fyrir einni klukkustund'
-        multiple:
-          forms:
-            default: 'klukkustundum'
-            singular: 'klukkustund'
-          beforeCount: 'fyrir'
-      day:
-        single: 'í gær'
-        multiple:
-          forms:
-            default: 'dögum'
-            singular: 'degi'
-          beforeCount: 'fyrir'
-        template:
-          name: 'two'
-          value: 'fyrir 2 dögum'
-      week:
-        single: 'fyrir einni viku'
-        multiple:
-          forms:
-            default: 'vikum'
-          beforeCount: 'fyrir'
-      month:
-        single: 'fyrir einum mánuði'
-        multiple:
-          forms:
-            default: 'mánuðum'
-            singular: 'mánuði'
-          beforeCount: 'fyrir'
-      year:
-        single: 'fyrir einu ári'
-        multiple:
-          forms:
-            default: 'árum'
-            singular: 'ári'
-          beforeCount: 'fyrir'
-    future:
-      millisecond:
-        single: 'eftir eina millisekúndu'
+        single:
+          numeric: 'ein millisekúnda'
+          words: 'ein millisekúnda'
         multiple:
           forms:
             default: 'millisekúndur'
-          beforeCount: 'eftir'
+            singular: 'millisekúnda'
       second:
-        single: 'eftir eina sekúndu'
+        single:
+          numeric: 'ein sekúnda'
+          words: 'ein sekúnda'
         multiple:
           forms:
             default: 'sekúndur'
-            singular: 'sekúndu'
-          beforeCount: 'eftir'
+            singular: 'sekúnda'
       minute:
-        single: 'eftir eina mínútu'
+        single:
+          numeric: 'ein mínúta'
+          words: 'ein mínúta'
         multiple:
           forms:
             default: 'mínútur'
-            singular: 'mínútu'
-          beforeCount: 'eftir'
+            singular: 'mínúta'
       hour:
-        single: 'eftir eina klukkustund'
+        single:
+          numeric: 'ein klukkustund'
+          words: 'ein klukkustund'
         multiple:
           forms:
             default: 'klukkustundir'
             singular: 'klukkustund'
-          beforeCount: 'eftir'
       day:
-        single: 'á morgun'
+        single:
+          numeric: 'einn dagur'
+          words: 'einn dagur'
         multiple:
           forms:
-            default: 'daga'
-            singular: 'dag'
-          beforeCount: 'eftir'
-        template:
-          name: 'two'
-          value: 'eftir 2 daga'
+            default: 'dagar'
+            singular: 'dagur'
       week:
-        single: 'eftir eina viku'
+        single:
+          numeric: 'ein vika'
+          words: 'ein vika'
         multiple:
           forms:
             default: 'vikur'
-          beforeCount: 'eftir'
+            singular: 'vika'
       month:
-        single: 'eftir einn mánuð'
+        single:
+          numeric: '1 mánuður'
+          words: 'einn mánuður'
         multiple:
           forms:
-            default: 'mánuði'
-            singular: 'mánuð'
-          beforeCount: 'eftir'
+            default: 'mánuðir'
+            singular: 'mánuður'
       year:
-        single: 'eftir eitt ár'
+        single:
+          numeric: '1 ár'
+          words: 'eitt ár'
         multiple:
           forms:
             default: 'ár'
-          beforeCount: 'eftir'
-  timeSpan:
-    zero: 'engin stund'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: 'ein millisekúnda'
-        words: 'ein millisekúnda'
-      multiple:
+    dataUnits:
+      bit:
         forms:
-          default: 'millisekúndur'
-          singular: 'millisekúnda'
-    second:
-      single:
-        numeric: 'ein sekúnda'
-        words: 'ein sekúnda'
-      multiple:
+          default: 'biti'
+        symbol: 'b'
+      byte:
         forms:
-          default: 'sekúndur'
-          singular: 'sekúnda'
-    minute:
-      single:
-        numeric: 'ein mínúta'
-        words: 'ein mínúta'
-      multiple:
+          default: 'bæti'
+        symbol: 'B'
+      kilobyte:
         forms:
-          default: 'mínútur'
-          singular: 'mínúta'
-    hour:
-      single:
-        numeric: 'ein klukkustund'
-        words: 'ein klukkustund'
-      multiple:
+          default: 'kílóbæti'
+        symbol: 'kB'
+      megabyte:
         forms:
-          default: 'klukkustundir'
-          singular: 'klukkustund'
-    day:
-      single:
-        numeric: 'einn dagur'
-        words: 'einn dagur'
-      multiple:
+          default: 'megabæti'
+        symbol: 'MB'
+      gigabyte:
         forms:
-          default: 'dagar'
-          singular: 'dagur'
-    week:
-      single:
-        numeric: 'ein vika'
-        words: 'ein vika'
-      multiple:
+          default: 'gígabæti'
+        symbol: 'GB'
+      terabyte:
         forms:
-          default: 'vikur'
-          singular: 'vika'
-    month:
-      single:
-        numeric: '1 mánuður'
-        words: 'einn mánuður'
-      multiple:
-        forms:
-          default: 'mánuðir'
-          singular: 'mánuður'
-    year:
-      single:
-        numeric: '1 ár'
-        words: 'eitt ár'
-      multiple:
-        forms:
-          default: 'ár'
-  dataUnit:
-    bit:
-      forms:
-        default: 'biti'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'bæti'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'kílóbæti'
-      symbol: 'kB'
-    megabyte:
-      forms:
-        default: 'megabæti'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'gígabæti'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'terabæti'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'millisekúnda'
-    second:
-      symbol: 'sekúnda'
-    minute:
-      symbol: 'mínúta'
-    hour:
-      symbol: 'klukkustund'
-    day:
-      symbol: 'dagur'
-    week:
-      symbol: 'vika'
-    month:
-      symbol: 'mánuður'
-    year:
-      symbol: 'ár'
-headings:
-  full:
-    - 'norður'
-    - 'norðnorðaustur'
-    - 'norðaustur'
-    - 'austnorðaustur'
-    - 'austur'
-    - 'austsuðaustur'
-    - 'suðaustur'
-    - 'suðsuðaustur'
-    - 'suður'
-    - 'suðsuðvestur'
-    - 'suðvestur'
-    - 'vestsuðvestur'
-    - 'vestur'
-    - 'vestnorðvestur'
-    - 'norðvestur'
-    - 'norðnorðvestur'
-  short:
-    - 'N'
-    - 'NNA'
-    - 'NA'
-    - 'ANA'
-    - 'A'
-    - 'ASA'
-    - 'SA'
-    - 'SSA'
-    - 'S'
-    - 'SSV'
-    - 'SV'
-    - 'VSV'
-    - 'V'
-    - 'VNV'
-    - 'NV'
-    - 'NNV'
+          default: 'terabæti'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'millisekúnda'
+      second:
+        symbol: 'sekúnda'
+      minute:
+        symbol: 'mínúta'
+      hour:
+        symbol: 'klukkustund'
+      day:
+        symbol: 'dagur'
+      week:
+        symbol: 'vika'
+      month:
+        symbol: 'mánuður'
+      year:
+        symbol: 'ár'
+
+  number:
+    words:
+      engine: 'ordinal-prefix-scale'
+      defaultGender: 'masculine'
+      minusWord: 'mínus'
+      andWord: 'og'
+      masculineOrdinalEnding: 'i'
+      nonMasculineOrdinalEnding: 'a'
+      unitsMap:
+        0: 'núll'
+        5: 'fimm'
+        6: 'sex'
+        7: 'sjö'
+        8: 'átta'
+        9: 'níu'
+        10: 'tíu'
+        11: 'ellefu'
+        12: 'tólf'
+        13: 'þrettán'
+        14: 'fjórtán'
+        15: 'fimmtán'
+        16: 'sextán'
+        17: 'sautján'
+        18: 'átján'
+        19: 'nítján'
+      masculineUnitsMap:
+        1: 'einn'
+        2: 'tveir'
+        3: 'þrír'
+        4: 'fjórir'
+      feminineUnitsMap:
+        1: 'ein'
+        2: 'tvær'
+        3: 'þrjár'
+        4: 'fjórar'
+      neuterUnitsMap:
+        1: 'eitt'
+        2: 'tvö'
+        3: 'þrjú'
+        4: 'fjögur'
+      tensMap:
+        1: 'tíu'
+        2: 'tuttugu'
+        3: 'þrjátíu'
+        4: 'fjörutíu'
+        5: 'fimmtíu'
+        6: 'sextíu'
+        7: 'sjötíu'
+        8: 'áttatíu'
+        9: 'níutíu'
+      unitsOrdinalPrefixes:
+        0: 'núllt'
+        1: 'fyrst'
+        3: 'þriðj'
+        4: 'fjórð'
+        5: 'fimmt'
+        6: 'sjött'
+        7: 'sjöund'
+        8: 'áttund'
+        9: 'níund'
+        10: 'tíund'
+        11: 'elleft'
+        12: 'tólft'
+        13: 'þrettánd'
+        14: 'fjórtánd'
+        15: 'fimmtánd'
+        16: 'sextánd'
+        17: 'sautjánd'
+        18: 'átjánd'
+        19: 'nítjánd'
+      tensOrdinalPrefixes:
+        1: 'tíund'
+        2: 'tuttugast'
+        3: 'þrítugast'
+        4: 'fertugast'
+        5: 'fimmtugast'
+        6: 'sextugast'
+        7: 'sjötugast'
+        8: 'áttugast'
+        9: 'nítugast'
+      hundredSingular: 'hundrað'
+      hundredPlural: 'hundruð'
+      ordinalTwoMasculine: 'annar'
+      ordinalTwoFeminine: 'önnur'
+      ordinalTwoNeuter: 'annað'
+      scales:
+        -
+          value: 1000000000000000000
+          singular: 'ein trilljón'
+          plural: 'trilljónir'
+          ordinalPrefix: 'trilljónast'
+          gender: 'feminine'
+        -
+          value: 1000000000000000
+          singular: 'einn billjarður'
+          plural: 'billjarðar'
+          ordinalPrefix: 'billjarðast'
+          gender: 'masculine'
+        -
+          value: 1000000000000
+          singular: 'ein billjón'
+          plural: 'billjónir'
+          ordinalPrefix: 'billjónast'
+          gender: 'feminine'
+        -
+          value: 1000000000
+          singular: 'einn milljarður'
+          plural: 'milljarðar'
+          ordinalPrefix: 'milljarðast'
+          gender: 'masculine'
+        -
+          value: 1000000
+          singular: 'ein milljón'
+          plural: 'milljónir'
+          ordinalPrefix: 'milljónast'
+          gender: 'feminine'
+        -
+          value: 1000
+          singular: 'eitt þúsund'
+          plural: 'þúsund'
+          ordinalPrefix: 'þúsundast'
+          gender: 'neuter'
+
+    parse:
+      engine: 'compound-scale'
+      cardinalMap:
+        'núll': 0
+        einn: 1
+        ein: 1
+        eitt: 1
+        tveir: 2
+        'tvær': 2
+        'tvö': 2
+        'þrír': 3
+        'þrjár': 3
+        'þrjú': 3
+        'fjórir': 4
+        'fjórar': 4
+        'fjögur': 4
+        fimm: 5
+        sex: 6
+        'sjö': 7
+        'átta': 8
+        'níu': 9
+        'tíu': 10
+        ellefu: 11
+        'tólf': 12
+        'þrettán': 13
+        'fjórtán': 14
+        'fimmtán': 15
+        'sextán': 16
+        'sautján': 17
+        'átján': 18
+        'nítján': 19
+        tuttugu: 20
+        'þrjátíu': 30
+        'fjörutíu': 40
+        'fimmtíu': 50
+        'sextíu': 60
+        'sjötíu': 70
+        'áttatíu': 80
+        'níutíu': 90
+        'hundrað': 100
+        'hundruð': 100
+        'þúsund': 1000
+        'milljón': 1000000
+        'milljónir': 1000000
+        'milljarður': 1000000000
+        'milljarðar': 1000000000
+      tens:
+        - 'tuttugu'
+        - 'þrjátíu'
+        - 'fjörutíu'
+        - 'fimmtíu'
+        - 'sextíu'
+        - 'sjötíu'
+        - 'áttatíu'
+        - 'níutíu'
+      largeScales:
+        - 'milljarðar'
+        - 'milljarður'
+        - 'milljónir'
+        - 'milljón'
+        - 'þúsund'
+        - 'hundruð'
+        - 'hundrað'
+      ignoredToken: 'og'
+      ordinalNumberToWordsKind: 'self'
+      negativePrefixes:
+        - 'mínus '
+        - 'minus '
+      sequenceMultiplierThreshold: 100
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+  compass:
+    full:
+      - 'norður'
+      - 'norðnorðaustur'
+      - 'norðaustur'
+      - 'austnorðaustur'
+      - 'austur'
+      - 'austsuðaustur'
+      - 'suðaustur'
+      - 'suðsuðaustur'
+      - 'suður'
+      - 'suðsuðvestur'
+      - 'suðvestur'
+      - 'vestsuðvestur'
+      - 'vestur'
+      - 'vestnorðvestur'
+      - 'norðvestur'
+      - 'norðnorðvestur'
+    short:
+      - 'N'
+      - 'NNA'
+      - 'NA'
+      - 'ANA'
+      - 'A'
+      - 'ASA'
+      - 'SA'
+      - 'SSA'
+      - 'S'
+      - 'SSV'
+      - 'SV'
+      - 'VSV'
+      - 'V'
+      - 'VNV'
+      - 'NV'
+      - 'NNV'

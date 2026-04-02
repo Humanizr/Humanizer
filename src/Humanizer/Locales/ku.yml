@@ -1,357 +1,361 @@
-# Locale-owned generator data for ku.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'û'
-numberToWords:
-  engine: 'joined-scale'
-  maximumValue: 999999999999999999
-  zeroWord: 'سفر'
-  minusWord: 'نێگەتیڤ'
-  negativeJoinWord: ' '
-  joinWord: ' و '
-  scaleCountJoinWord: ' '
-  defaultOrdinalSuffix: 'ەم'
-  matchingOrdinalSuffix: 'یەم'
-  ordinalSuffixMatchCharacters: 'اێۆەی'
-  unitsMap:
-    - 'سفر'
-    - 'یەک'
-    - 'دوو'
-    - 'سێ'
-    - 'چوار'
-    - 'پێنج'
-    - 'شەش'
-    - 'حەوت'
-    - 'هەشت'
-    - 'نۆ'
-    - 'دە'
-    - 'یازدە'
-    - 'دوازدە'
-    - 'سێزدە'
-    - 'چواردە'
-    - 'پازدە'
-    - 'شازدە'
-    - 'حەڤدە'
-    - 'هەژدە'
-    - 'نۆزدە'
-  tensMap:
-    - 'سفر'
-    - 'دە'
-    - 'بیست'
-    - 'سی'
-    - 'چل'
-    - 'پەنجا'
-    - 'شەست'
-    - 'حەفتا'
-    - 'هەشتا'
-    - 'نەوەد'
-  hundredsMap:
-    - 'سفر'
-    - 'سەد'
-    - 'دوو سەد'
-    - 'سێ سەد'
-    - 'چوار سەد'
-    - 'پێنج سەد'
-    - 'شەش سەد'
-    - 'حەوت سەد'
-    - 'هەشت سەد'
-    - 'نۆ سەد'
-  scales:
-    -
-      value: 1000000000000000
-      name: 'کوادریلیۆن'
-    -
-      value: 1000000000000
-      name: 'تریلیۆن'
-    -
-      value: 1000000000
-      name: 'میلیارد'
-    -
-      value: 1000000
-      name: 'میلیۆن'
-    -
-      value: 1000
-      name: 'هەزار'
-      omitOneWhenSingular: true
-wordsToNumber:
-  engine: 'token-map'
-  normalizationProfile: 'CollapseWhitespace'
-  cardinalMap:
-    'سفر': 0
-    'یەک': 1
-    'دوو': 2
-    'سێ': 3
-    'چوار': 4
-    'پێنج': 5
-    'شەش': 6
-    'حەوت': 7
-    'هەشت': 8
-    'نۆ': 9
-    'دە': 10
-    'یازدە': 11
-    'دوازدە': 12
-    'بیست': 20
-    'سی': 30
-    'چل': 40
-    'پەنجا': 50
-    'شەست': 60
-    'حەفتا': 70
-    'هەشتا': 80
-    'نەوەد': 90
-    'سەد': 100
-    'هەزار': 1000
-    'میلیۆن': 1000000
-    'میلیارد': 1000000000
-  negativePrefixes:
-    - 'نێگەتیڤ '
-  ignoredTokens:
-    - 'و'
-  useHundredMultiplier: true
+locale: 'ku'
 
-phrases:
-  dateHumanize:
-    now: 'ئێستا'
-    never: 'هەرگیز'
-    past:
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'û'
+
+  phrases:
+    relativeDate:
+      now: 'ئێستا'
+      never: 'هەرگیز'
+      past:
+        millisecond:
+          single: 'میلیچرکەیەک لەمەوبەر'
+          multiple:
+            forms:
+              default: 'میلیچرکە'
+            afterCount: 'لەمەوبەر'
+        second:
+          single: 'چرکەیەک لەمەوبەر'
+          multiple:
+            forms:
+              default: 'چرکە'
+            afterCount: 'لەمەوبەر'
+        minute:
+          single: 'خولەکێک لەمەوبەر'
+          multiple:
+            forms:
+              default: 'خولەک'
+            afterCount: 'لەمەوبەر'
+        hour:
+          single: 'کاتژمێرێک لەمەوبەر'
+          multiple:
+            forms:
+              default: 'کاتژمێر'
+            afterCount: 'لەمەوبەر'
+        day:
+          single: 'دوێنێ'
+          multiple:
+            forms:
+              default: 'ڕۆژ'
+            afterCount: 'لەمەوبەر'
+          template:
+            name: 'two'
+            value: '2 ڕۆژ لەمەوبەر'
+        week:
+          single: 'هەفتەیەک لەمەوبەر'
+          multiple:
+            forms:
+              default: 'هەفتە'
+            afterCount: 'لەمەوبەر'
+        month:
+          single: 'مانگێک لەمەوبەر'
+          multiple:
+            forms:
+              default: 'مانگ'
+            afterCount: 'لەمەوبەر'
+        year:
+          single: 'ساڵێک لەمەوبەر'
+          multiple:
+            forms:
+              default: 'ساڵ'
+            afterCount: 'لەمەوبەر'
+      future:
+        millisecond:
+          single: 'میلیچرکەیەکی دیکە'
+          multiple:
+            forms:
+              default: 'میلیچرکەی'
+            afterCount: 'دیکە'
+        second:
+          single: 'چرکەیەکی دیکە'
+          multiple:
+            forms:
+              default: 'چرکەی'
+            afterCount: 'دیکە'
+        minute:
+          single: 'خولەکێکی دیکە'
+          multiple:
+            forms:
+              default: 'خولەکی'
+            afterCount: 'دیکە'
+        hour:
+          single: 'کاتژمێرێکی دیکە'
+          multiple:
+            forms:
+              default: 'کاتژمێری'
+            afterCount: 'دیکە'
+        day:
+          single: 'بەیانی'
+          multiple:
+            forms:
+              default: 'ڕۆژی'
+            afterCount: 'دیکە'
+          template:
+            name: 'two'
+            value: '2 ڕۆژی دیکە'
+        week:
+          single: 'هەفتەیەکی دیکە'
+          multiple:
+            forms:
+              default: 'هەفتەی'
+            afterCount: 'دیکە'
+        month:
+          single: 'مانگێکی دیکە'
+          multiple:
+            forms:
+              default: 'مانگی'
+            afterCount: 'دیکە'
+        year:
+          single: 'ساڵێکی دیکە'
+          multiple:
+            forms:
+              default: 'ساڵی'
+            afterCount: 'دیکە'
+    duration:
+      zero: 'ئێستا'
+      age:
+        template: '{value}'
       millisecond:
-        single: 'میلیچرکەیەک لەمەوبەر'
+        single:
+          numeric: '1 میلیچرکە'
+          words: 'یەک میلیچرکە'
         multiple:
           forms:
             default: 'میلیچرکە'
-          afterCount: 'لەمەوبەر'
       second:
-        single: 'چرکەیەک لەمەوبەر'
+        single:
+          numeric: '1 چرکە'
+          words: 'یەک چرکە'
         multiple:
           forms:
             default: 'چرکە'
-          afterCount: 'لەمەوبەر'
       minute:
-        single: 'خولەکێک لەمەوبەر'
+        single:
+          numeric: '1 خولەک'
+          words: 'یەک خولەک'
         multiple:
           forms:
             default: 'خولەک'
-          afterCount: 'لەمەوبەر'
       hour:
-        single: 'کاتژمێرێک لەمەوبەر'
+        single:
+          numeric: '1 کاتژمێر'
+          words: 'یەک کاتژمێر'
         multiple:
           forms:
             default: 'کاتژمێر'
-          afterCount: 'لەمەوبەر'
       day:
-        single: 'دوێنێ'
+        single:
+          numeric: '1 ڕۆژ'
+          words: 'یەک ڕۆژ'
         multiple:
           forms:
             default: 'ڕۆژ'
-          afterCount: 'لەمەوبەر'
-        template:
-          name: 'two'
-          value: '2 ڕۆژ لەمەوبەر'
       week:
-        single: 'هەفتەیەک لەمەوبەر'
+        single:
+          numeric: '1 هەفتە'
+          words: 'یەک هەفتە'
         multiple:
           forms:
             default: 'هەفتە'
-          afterCount: 'لەمەوبەر'
       month:
-        single: 'مانگێک لەمەوبەر'
+        single:
+          numeric: '1 مانگ'
+          words: 'یەک مانگ'
         multiple:
           forms:
             default: 'مانگ'
-          afterCount: 'لەمەوبەر'
       year:
-        single: 'ساڵێک لەمەوبەر'
+        single:
+          numeric: '1 ساڵ'
+          words: 'یەک ساڵ'
         multiple:
           forms:
             default: 'ساڵ'
-          afterCount: 'لەمەوبەر'
-    future:
+    dataUnits:
+      bit:
+        forms:
+          default: 'بیت'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'بایت'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'کیلۆبایت'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'مێگابایت'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'گیگابایت'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'تێرابایت'
+        symbol: 'TB'
+    timeUnits:
       millisecond:
-        single: 'میلیچرکەیەکی دیکە'
-        multiple:
-          forms:
-            default: 'میلیچرکەی'
-          afterCount: 'دیکە'
+        symbol: 'میلیچرکە'
       second:
-        single: 'چرکەیەکی دیکە'
-        multiple:
-          forms:
-            default: 'چرکەی'
-          afterCount: 'دیکە'
+        symbol: 'چرکە'
       minute:
-        single: 'خولەکێکی دیکە'
-        multiple:
-          forms:
-            default: 'خولەکی'
-          afterCount: 'دیکە'
+        symbol: 'خولەک'
       hour:
-        single: 'کاتژمێرێکی دیکە'
-        multiple:
-          forms:
-            default: 'کاتژمێری'
-          afterCount: 'دیکە'
+        symbol: 'کاتژمێر'
       day:
-        single: 'بەیانی'
-        multiple:
-          forms:
-            default: 'ڕۆژی'
-          afterCount: 'دیکە'
-        template:
-          name: 'two'
-          value: '2 ڕۆژی دیکە'
+        symbol: 'ڕۆژ'
       week:
-        single: 'هەفتەیەکی دیکە'
-        multiple:
-          forms:
-            default: 'هەفتەی'
-          afterCount: 'دیکە'
+        symbol: 'هەفتە'
       month:
-        single: 'مانگێکی دیکە'
-        multiple:
-          forms:
-            default: 'مانگی'
-          afterCount: 'دیکە'
+        symbol: 'مانگ'
       year:
-        single: 'ساڵێکی دیکە'
-        multiple:
-          forms:
-            default: 'ساڵی'
-          afterCount: 'دیکە'
-  timeSpan:
-    zero: 'ئێستا'
-    age:
-      template: '{value}'
-    millisecond:
-      single:
-        numeric: '1 میلیچرکە'
-        words: 'یەک میلیچرکە'
-      multiple:
-        forms:
-          default: 'میلیچرکە'
-    second:
-      single:
-        numeric: '1 چرکە'
-        words: 'یەک چرکە'
-      multiple:
-        forms:
-          default: 'چرکە'
-    minute:
-      single:
-        numeric: '1 خولەک'
-        words: 'یەک خولەک'
-      multiple:
-        forms:
-          default: 'خولەک'
-    hour:
-      single:
-        numeric: '1 کاتژمێر'
-        words: 'یەک کاتژمێر'
-      multiple:
-        forms:
-          default: 'کاتژمێر'
-    day:
-      single:
-        numeric: '1 ڕۆژ'
-        words: 'یەک ڕۆژ'
-      multiple:
-        forms:
-          default: 'ڕۆژ'
-    week:
-      single:
-        numeric: '1 هەفتە'
-        words: 'یەک هەفتە'
-      multiple:
-        forms:
-          default: 'هەفتە'
-    month:
-      single:
-        numeric: '1 مانگ'
-        words: 'یەک مانگ'
-      multiple:
-        forms:
-          default: 'مانگ'
-    year:
-      single:
-        numeric: '1 ساڵ'
-        words: 'یەک ساڵ'
-      multiple:
-        forms:
-          default: 'ساڵ'
-  dataUnit:
-    bit:
-      forms:
-        default: 'بیت'
-      symbol: 'b'
-    byte:
-      forms:
-        default: 'بایت'
-      symbol: 'B'
-    kilobyte:
-      forms:
-        default: 'کیلۆبایت'
-      symbol: 'KB'
-    megabyte:
-      forms:
-        default: 'مێگابایت'
-      symbol: 'MB'
-    gigabyte:
-      forms:
-        default: 'گیگابایت'
-      symbol: 'GB'
-    terabyte:
-      forms:
-        default: 'تێرابایت'
-      symbol: 'TB'
-  timeUnit:
-    millisecond:
-      symbol: 'میلیچرکە'
-    second:
-      symbol: 'چرکە'
-    minute:
-      symbol: 'خولەک'
-    hour:
-      symbol: 'کاتژمێر'
-    day:
-      symbol: 'ڕۆژ'
-    week:
-      symbol: 'هەفتە'
-    month:
-      symbol: 'مانگ'
-    year:
-      symbol: 'ساڵ'
-headings:
-  full:
-    - 'باکوور'
-    - 'باکوور-باکوور-ڕۆژهەڵات'
-    - 'باکوور-ڕۆژهەڵات'
-    - 'ڕۆژهەڵات-باکوور-ڕۆژهەڵات'
-    - 'ڕۆژهەڵات'
-    - 'ڕۆژهەڵات-باشوور-ڕۆژهەڵات'
-    - 'باشوور-ڕۆژهەڵات'
-    - 'باشوور-باشوور-ڕۆژهەڵات'
-    - 'باشوور'
-    - 'باشوور-باشوور-ڕۆژئاوا'
-    - 'باشوور-ڕۆژئاوا'
-    - 'ڕۆژئاوا-باشوور-ڕۆژئاوا'
-    - 'ڕۆژئاوا'
-    - 'ڕۆژئاوا-باکوور-ڕۆژئاوا'
-    - 'باکوور-ڕۆژئاوا'
-    - 'باکوور-باکوور-ڕۆژئاوا'
-  short:
-    - 'N'
-    - 'NNE'
-    - 'NE'
-    - 'ENE'
-    - 'E'
-    - 'ESE'
-    - 'SE'
-    - 'SSE'
-    - 'S'
-    - 'SSW'
-    - 'SW'
-    - 'WSW'
-    - 'W'
-    - 'WNW'
-    - 'NW'
-    - 'NNW'
+        symbol: 'ساڵ'
+
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 999999999999999999
+      zeroWord: 'سفر'
+      minusWord: 'نێگەتیڤ'
+      negativeJoinWord: ' '
+      joinWord: ' و '
+      scaleCountJoinWord: ' '
+      defaultOrdinalSuffix: 'ەم'
+      matchingOrdinalSuffix: 'یەم'
+      ordinalSuffixMatchCharacters: 'اێۆەی'
+      unitsMap:
+        - 'سفر'
+        - 'یەک'
+        - 'دوو'
+        - 'سێ'
+        - 'چوار'
+        - 'پێنج'
+        - 'شەش'
+        - 'حەوت'
+        - 'هەشت'
+        - 'نۆ'
+        - 'دە'
+        - 'یازدە'
+        - 'دوازدە'
+        - 'سێزدە'
+        - 'چواردە'
+        - 'پازدە'
+        - 'شازدە'
+        - 'حەڤدە'
+        - 'هەژدە'
+        - 'نۆزدە'
+      tensMap:
+        - 'سفر'
+        - 'دە'
+        - 'بیست'
+        - 'سی'
+        - 'چل'
+        - 'پەنجا'
+        - 'شەست'
+        - 'حەفتا'
+        - 'هەشتا'
+        - 'نەوەد'
+      hundredsMap:
+        - 'سفر'
+        - 'سەد'
+        - 'دوو سەد'
+        - 'سێ سەد'
+        - 'چوار سەد'
+        - 'پێنج سەد'
+        - 'شەش سەد'
+        - 'حەوت سەد'
+        - 'هەشت سەد'
+        - 'نۆ سەد'
+      scales:
+        -
+          value: 1000000000000000
+          name: 'کوادریلیۆن'
+        -
+          value: 1000000000000
+          name: 'تریلیۆن'
+        -
+          value: 1000000000
+          name: 'میلیارد'
+        -
+          value: 1000000
+          name: 'میلیۆن'
+        -
+          value: 1000
+          name: 'هەزار'
+          omitOneWhenSingular: true
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      cardinalMap:
+        'سفر': 0
+        'یەک': 1
+        'دوو': 2
+        'سێ': 3
+        'چوار': 4
+        'پێنج': 5
+        'شەش': 6
+        'حەوت': 7
+        'هەشت': 8
+        'نۆ': 9
+        'دە': 10
+        'یازدە': 11
+        'دوازدە': 12
+        'بیست': 20
+        'سی': 30
+        'چل': 40
+        'پەنجا': 50
+        'شەست': 60
+        'حەفتا': 70
+        'هەشتا': 80
+        'نەوەد': 90
+        'سەد': 100
+        'هەزار': 1000
+        'میلیۆن': 1000000
+        'میلیارد': 1000000000
+      negativePrefixes:
+        - 'نێگەتیڤ '
+      ignoredTokens:
+        - 'و'
+      useHundredMultiplier: true
+
+  compass:
+    full:
+      - 'باکوور'
+      - 'باکوور-باکوور-ڕۆژهەڵات'
+      - 'باکوور-ڕۆژهەڵات'
+      - 'ڕۆژهەڵات-باکوور-ڕۆژهەڵات'
+      - 'ڕۆژهەڵات'
+      - 'ڕۆژهەڵات-باشوور-ڕۆژهەڵات'
+      - 'باشوور-ڕۆژهەڵات'
+      - 'باشوور-باشوور-ڕۆژهەڵات'
+      - 'باشوور'
+      - 'باشوور-باشوور-ڕۆژئاوا'
+      - 'باشوور-ڕۆژئاوا'
+      - 'ڕۆژئاوا-باشوور-ڕۆژئاوا'
+      - 'ڕۆژئاوا'
+      - 'ڕۆژئاوا-باکوور-ڕۆژئاوا'
+      - 'باکوور-ڕۆژئاوا'
+      - 'باکوور-باکوور-ڕۆژئاوا'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSW'
+      - 'SW'
+      - 'WSW'
+      - 'W'
+      - 'WNW'
+      - 'NW'
+      - 'NNW'

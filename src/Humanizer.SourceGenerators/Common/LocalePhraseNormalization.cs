@@ -14,22 +14,22 @@ public sealed partial class HumanizerSourceGenerator
 
         internal static LocalePhraseCatalog Create(string localeCode, SimpleYamlMapping phrases)
         {
-            RejectUnknownKeys(phrases, $"{localeCode}.phrases", ["dateHumanize", "timeSpan", "dataUnit", "timeUnit"]);
+            RejectUnknownKeys(phrases, $"{localeCode}.phrases", ["relativeDate", "duration", "dataUnits", "timeUnits"]);
 
-            var dateHumanize = phrases.TryGetValue("dateHumanize", out var dateHumanizeValue)
-                ? ParseDateHumanize(localeCode, dateHumanizeValue, $"{localeCode}.phrases.dateHumanize")
+            var dateHumanize = phrases.TryGetValue("relativeDate", out var dateHumanizeValue)
+                ? ParseDateHumanize(localeCode, dateHumanizeValue, $"{localeCode}.phrases.relativeDate")
                 : DateHumanizePhraseSet.Empty;
 
-            var timeSpan = phrases.TryGetValue("timeSpan", out var timeSpanValue)
-                ? ParseTimeSpan(localeCode, timeSpanValue, $"{localeCode}.phrases.timeSpan")
+            var timeSpan = phrases.TryGetValue("duration", out var timeSpanValue)
+                ? ParseTimeSpan(localeCode, timeSpanValue, $"{localeCode}.phrases.duration")
                 : TimeSpanPhraseSet.Empty;
 
-            var dataUnit = phrases.TryGetValue("dataUnit", out var dataUnitValue)
-                ? ParseDataUnit(localeCode, dataUnitValue, $"{localeCode}.phrases.dataUnit")
+            var dataUnit = phrases.TryGetValue("dataUnits", out var dataUnitValue)
+                ? ParseDataUnit(localeCode, dataUnitValue, $"{localeCode}.phrases.dataUnits")
                 : DataUnitPhraseSet.Empty;
 
-            var timeUnit = phrases.TryGetValue("timeUnit", out var timeUnitValue)
-                ? ParseTimeUnit(localeCode, timeUnitValue, $"{localeCode}.phrases.timeUnit")
+            var timeUnit = phrases.TryGetValue("timeUnits", out var timeUnitValue)
+                ? ParseTimeUnit(localeCode, timeUnitValue, $"{localeCode}.phrases.timeUnits")
                 : TimeUnitPhraseSet.Empty;
 
             return new LocalePhraseCatalog(localeCode, dateHumanize, timeSpan, dataUnit, timeUnit);

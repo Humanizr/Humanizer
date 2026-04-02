@@ -1,29 +1,30 @@
-# Locale-owned generator data for fr-BE.
-# Omit a feature to inherit it from the parent locale.
-# Inline mappings below are the source of truth for generated profiles and token-map lexicons.
-inherits: 'fr'
-numberToWords:
-  engine: 'variant-decade'
-  minusWord: 'moins'
-  seventyStrategy: 'regular'
-  ninetyStrategy: 'regular'
-  pluralizeExactEighty: true
-  tensUsingEtWhenUnitIsOne:
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 7
-    - 9
-  tensMap:
-    - 'zéro'
-    - 'dix'
-    - 'vingt'
-    - 'trente'
-    - 'quarante'
-    - 'cinquante'
-    - 'soixante'
-    - 'septante'
-    - 'quatre-vingt'
-    - 'nonante'
+locale: 'fr-BE'
+variantOf: 'fr'
+
+surfaces:
+  number:
+    words:
+      engine: 'variant-decade'
+      minusWord: 'moins'
+      seventyStrategy: 'regular'
+      ninetyStrategy: 'regular'
+      pluralizeExactEighty: true
+      tensUsingEtWhenUnitIsOne:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 9
+      tensMap:
+        - 'zéro'
+        - 'dix'
+        - 'vingt'
+        - 'trente'
+        - 'quarante'
+        - 'cinquante'
+        - 'soixante'
+        - 'septante'
+        - 'quatre-vingt'
+        - 'nonante'

@@ -28,7 +28,7 @@ Work through these questions in order.
 1. Does the locale already work through culture fallback?
    If yes, do not add a file.
 2. Is this a regional variant of an existing neutral locale?
-   If yes, create a child file with `inherits` and override only the differences.
+   If yes, create a child file with `variantOf` and override only the differences.
 3. Does the locale fit an existing shared engine?
    If yes, reuse that engine and provide locale-owned data.
 4. Does the locale need a new shared structural engine?
@@ -41,46 +41,53 @@ Work through these questions in order.
 Each locale gets exactly one YAML file:
 
 ```yaml
-inherits: 'en'
+locale: 'en-US'
+variantOf: 'en'
 
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'and'
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'and'
 
-numberToWords:
-  engine: 'conjunctional-scale'
-  minusWord: 'minus'
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
 ```
 
 Supported top-level blocks are:
 
-- `inherits`
-- `collectionFormatter`
+- `locale`
+- `variantOf`
+- `surfaces`
+
+Supported `surfaces` members are:
+
+- `list`
 - `formatter`
-- `numberToWords`
-- `wordsToNumber`
-- `ordinalizer`
-- `dateToOrdinalWords`
-- `dateOnlyToOrdinalWords`
-- `timeOnlyToClockNotation`
+- `phrases`
+- `number`
+- `ordinal`
+- `clock`
+- `compass`
 
 Do not invent new top-level keys.
 
 ## Inheritance
 
-Use `inherits` when a locale is a true variant of another locale.
+Use `variantOf` when a locale is a true variant of another locale.
 
 ```yaml
-inherits: 'en'
+variantOf: 'en'
 ```
 
 Rules:
 
-1. Omitting a top-level block inherits the whole block from the parent locale.
-2. Inside a mapped feature block, omitted scalar fields inherit from the parent mapping.
+1. Omitting a `surfaces.<surface>` block inherits the whole surface from the parent locale.
+2. Inside a mapped surface block, omitted scalar fields inherit from the parent mapping.
 3. Child sequences replace parent sequences.
 4. Child mappings merge with parent mappings.
-5. If the child changes `engine`, the whole mapped feature is treated as a new block.
+5. If the child changes `engine`, the whole mapped surface is treated as a new block.
 
 Use inheritance to express real parent-child relationships. Do not use it to hide unrelated locale behavior.
 
@@ -166,7 +173,7 @@ What locale-owned data does this runtime surface need, and what shared engine sh
 
 Use these sections as ownership rules. If a value feels like it belongs to two blocks, pick the one whose runtime API actually consumes it.
 
-### `collectionFormatter`
+### `list`
 
 Use this block when the locale needs a generated collection joiner.
 
@@ -227,7 +234,7 @@ Checklist:
 3. Keep resource overrides close to the exact unit or plural forms they affect.
 4. Do not duplicate number words here just because a formatter output happens to contain them.
 
-### `numberToWords`
+### `number.words`
 
 Use this block when the locale supports cardinal or ordinal number rendering through a shared runtime kernel.
 
@@ -265,7 +272,7 @@ What usually does not live here:
 2. Resource-key rules for TimeSpan or byte-size formatters.
 3. Date-only ordinal patterns.
 
-### `wordsToNumber`
+### `number.parse`
 
 Use this block when the locale supports parsing written numbers.
 
@@ -301,7 +308,7 @@ What usually does not live here:
 2. Date or formatter metadata.
 3. Generator implementation hints.
 
-### `ordinalizer`
+### `ordinal`
 
 Use this block when the locale ordinalizes numeric forms directly.
 
@@ -318,13 +325,13 @@ Do not put here:
 
 Checklist:
 
-1. Use `ordinalizer` when the locale can ordinalize numeric output without spelling the whole number out.
+1. Use `ordinal.numeric` when the locale can ordinalize numeric output without spelling the whole number out.
 2. Prefer a suffix or template engine when the locale only varies by affix or gendered template.
-3. Keep whole-number lexical tables in `numberToWords`, not here.
+3. Keep whole-number lexical tables in `number.words`, not here.
 
-### `dateToOrdinalWords` and `dateOnlyToOrdinalWords`
+### `ordinal.date` and `ordinal.dateOnly`
 
-Use these blocks when the locale needs generated ordinal day rendering for dates.
+Use these nested members when the locale needs generated ordinal day rendering for dates.
 
 Put here:
 
@@ -351,7 +358,7 @@ Checklist:
 3. Pick `dayMode` based on whether the locale uses numeric, ordinal, or conditional ordinal day rendering.
 4. Keep month-name ownership in resources or culture data, not in this block.
 
-### `timeOnlyToClockNotation`
+### `clock`
 
 Use this block when the locale has generated clock-phrase output.
 
@@ -397,14 +404,14 @@ Keep a residual locale leaf only when forcing it into YAML would add imperative 
 
 When you are building a locale from scratch, use this order:
 
-1. Add `inherits` first if the locale is a regional variant.
-2. Add `collectionFormatter` only if list joining actually differs from the parent.
+1. Add `variantOf` first if the locale is a regional variant.
+2. Add `list` only if list joining actually differs from the parent.
 3. Add `formatter` only if formatter resource selection or unit grammar differs.
-4. Add `numberToWords` once you know the render-side engine family.
-5. Add `wordsToNumber` once you know the parse-side engine family.
-6. Add `ordinalizer` if numeric ordinalization exists independently from `numberToWords`.
-7. Add `dateToOrdinalWords` and `dateOnlyToOrdinalWords` only for date-specific day phrasing.
-8. Add `timeOnlyToClockNotation` last, after checking whether the locale really fits an existing clock engine.
+4. Add `number.words` once you know the render-side engine family.
+5. Add `number.parse` once you know the parse-side engine family.
+6. Add `ordinal.numeric` if numeric ordinalization exists independently from `number.words`.
+7. Add `ordinal.date` or `ordinal.dateOnly` only for date-specific day phrasing.
+8. Add `clock` last, after checking whether the locale really fits an existing clock engine.
 
 This keeps authoring pressure on the generated/shared surfaces first and makes it easier to spot when a new block is really necessary.
 
@@ -421,7 +428,7 @@ This keeps authoring pressure on the generated/shared surfaces first and makes i
 ### Add A Regional Variant
 
 1. Create `src/Humanizer/Locales/<locale>.yml`.
-2. Set `inherits` to the parent locale.
+2. Set `variantOf` to the parent locale.
 3. Override only the fields that truly differ.
 4. Do not copy the parent block unless the engine itself changes.
 

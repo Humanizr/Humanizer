@@ -41,8 +41,8 @@ These are the files and directories you usually need to understand:
 
 The pipeline works like this:
 
-1. A locale YAML file declares the locale's feature blocks.
-2. `LocaleYamlCatalog` reads every locale file and resolves inheritance.
+1. A locale YAML file declares `locale`, optional `variantOf`, and the locale's `surfaces`.
+2. `LocaleYamlCatalog` reads every locale file and resolves `variantOf` inheritance.
 3. Each feature block selects either:
    - a generated profile path
    - a token-map generation path
@@ -56,19 +56,23 @@ The pipeline works like this:
 
 A locale YAML file owns locale-specific words, switches, lists, mappings, and feature selection.
 
-Typical top-level keys are:
+Canonical top-level keys are:
 
-- `inherits`
-- `collectionFormatter`
+- `locale`
+- `variantOf`
+- `surfaces`
+
+Supported canonical surfaces are:
+
+- `list`
 - `formatter`
-- `numberToWords`
-- `wordsToNumber`
-- `ordinalizer`
-- `dateToOrdinalWords`
-- `dateOnlyToOrdinalWords`
-- `timeOnlyToClockNotation`
+- `phrases`
+- `number`
+- `ordinal`
+- `clock`
+- `compass`
 
-Every locale file does not need every block. If a block is missing, the locale inherits that feature unchanged from its parent, if it has one.
+Every locale file does not need every surface. If a `surfaces.<surface>` block is missing, the locale inherits that surface unchanged from its parent, if it has one.
 
 ## Locale File Example
 
@@ -76,60 +80,63 @@ This is the shape of a typical locale file:
 
 ```yaml
 # Locale-owned generator data for en-US.
-inherits: 'en'
+locale: 'en-US'
+variantOf: 'en'
 
-collectionFormatter: 'oxford'
+surfaces:
+  list:
+    engine: 'oxford'
 
-numberToWords:
-  engine: 'conjunctional-scale'
-  minusWord: 'minus'
-  andWord: 'and'
-  hundredWord: 'hundred'
-  hundredOrdinalWord: 'hundredth'
-  tensUnitsSeparator: '-'
-  defaultAddAnd: true
-  addAndMode: 'use-caller-flag'
-  andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
-  tupleSuffix: '-tuple'
-  ordinalLeadingOneStrategy: 'omit-leading-one'
-  ordinalMode: 'english'
-  unitsMap:
-    - 'zero'
-    - 'one'
-    - 'two'
-  ordinalUnitsMap:
-    - 'zeroth'
-    - 'first'
-    - 'second'
-  tensMap:
-    - 'zero'
-    - 'ten'
-    - 'twenty'
-  ordinalTensMap:
-    - 'zeroth'
-    - 'tenth'
-    - 'twentieth'
-  scales:
-    -
-      value: 1000
-      name: 'thousand'
-      ordinalName: 'thousandth'
-
-wordsToNumber:
-  engine: 'token-map'
-  normalizationProfile: 'LowercaseRemovePeriods'
-  cardinalMap:
-    one: 1
-    two: 2
-    hundred: 100
-  ordinalMap:
-    first: 1
-    second: 2
-    hundredth: 100
-  negativePrefixes:
-    - 'minus '
-  ignoredTokens:
-    - 'and'
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'and'
+      hundredWord: 'hundred'
+      hundredOrdinalWord: 'hundredth'
+      tensUnitsSeparator: '-'
+      defaultAddAnd: true
+      addAndMode: 'use-caller-flag'
+      andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
+      tupleSuffix: '-tuple'
+      ordinalLeadingOneStrategy: 'omit-leading-one'
+      ordinalMode: 'english'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+      ordinalUnitsMap:
+        - 'zeroth'
+        - 'first'
+        - 'second'
+      tensMap:
+        - 'zero'
+        - 'ten'
+        - 'twenty'
+      ordinalTensMap:
+        - 'zeroth'
+        - 'tenth'
+        - 'twentieth'
+      scales:
+        -
+          value: 1000
+          name: 'thousand'
+          ordinalName: 'thousandth'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        one: 1
+        two: 2
+        hundred: 100
+      ordinalMap:
+        first: 1
+        second: 2
+        hundredth: 100
+      negativePrefixes:
+        - 'minus '
+      ignoredTokens:
+        - 'and'
 ```
 
 Rules for authoring:
@@ -146,8 +153,8 @@ Inheritance is resolved per locale file, not per feature file, because there is 
 
 Rules:
 
-1. `inherits` points to the parent locale code.
-2. Omitting a feature block inherits it unchanged.
+1. `variantOf` points to the parent locale code.
+2. Omitting a `surfaces.<surface>` block inherits it unchanged.
 3. Scalar overrides replace the inherited scalar.
 4. Sequence overrides replace the inherited sequence.
 5. Mapping overrides merge recursively with the inherited mapping.
@@ -157,9 +164,9 @@ Rules:
 
 Examples:
 
-- `en-US` inherits `en`
-- `fr-BE` inherits `fr`
-- `de-CH` inherits `de`
+- `en-US` uses `variantOf: 'en'`
+- `fr-BE` uses `variantOf: 'fr'`
+- `de-CH` uses `variantOf: 'de'`
 
 ## When To Reuse An Existing Engine
 
@@ -211,7 +218,7 @@ If a runtime kernel still hard-codes language-specific behavior, do not pretend 
 1. Decide whether the locale is neutral or regional.
 2. Choose a parent locale if the locale is a regional variant.
 3. Create `src/Humanizer/Locales/<locale>.yml`.
-4. Add `inherits` if needed.
+4. Add `variantOf` if needed.
 5. Add the feature blocks that the locale supports.
 6. Reuse existing structural engines wherever possible.
 7. Add any required resources under `src/Humanizer/Properties` if the feature still depends on resources.
@@ -222,7 +229,7 @@ If a runtime kernel still hard-codes language-specific behavior, do not pretend 
 ## Step-By-Step: Add A Regional Variant
 
 1. Create `src/Humanizer/Locales/<locale>.yml`.
-2. Set `inherits` to the parent locale.
+2. Set `variantOf` to the parent locale.
 3. Add only the blocks that differ.
 4. Avoid copy-pasting the full parent locale.
 5. Add tests that prove the variant-specific behavior instead of retesting the entire parent locale.
