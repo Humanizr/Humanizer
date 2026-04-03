@@ -62,6 +62,17 @@ public class NumberToWordsTests
         Assert.Equal(expected, number.ToWords());
 
     [Theory]
+    [InlineData(11111111111111111L)]
+    [InlineData(1111111111111111111L)]
+    [InlineData(10000000000000000L)]
+    public void ToNumberHighRangeRoundTrips(long number)
+    {
+        var words = number.ToWords();
+
+        Assert.Equal(number, words.ToNumber(CultureInfo.CurrentCulture));
+    }
+
+    [Theory]
     [InlineData(0, "〇番目")]
     [InlineData(1, "一番目")]
     [InlineData(2, "二番目")]

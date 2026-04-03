@@ -168,7 +168,7 @@ public class LocaleRegistrySweepTests
     public void WordsToNumber_RegisteredLocales_RoundTripNativeWords(string localeName)
     {
         var culture = new CultureInfo(localeName);
-        const int expected = 105;
+        const long expected = 105;
         var words = expected.ToWords(culture);
 
         Assert.Equal(expected, words.ToNumber(culture));
@@ -178,11 +178,14 @@ public class LocaleRegistrySweepTests
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.WordsToNumberFallbackExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void WordsToNumber_FallbackCultures_UseDefaultLexicon(string localeName, string words, int expected)
+    [MemberData(nameof(LocaleCoverageData.WordsToNumberUnsupportedExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void WordsToNumber_UnsupportedCultures_UseDefaultLexicon(string localeName, string words, long expected)
     {
         var culture = new CultureInfo(localeName);
 
         Assert.Equal(expected, words.ToNumber(culture));
+        Assert.True(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
+        Assert.Equal(expected, parsedNumber);
+        Assert.Null(unrecognizedWord);
     }
 }

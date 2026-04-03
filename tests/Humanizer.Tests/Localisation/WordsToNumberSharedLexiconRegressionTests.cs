@@ -5,6 +5,8 @@ public class WordsToNumberSharedLexiconRegressionTests
     [Theory]
     [InlineData("en-US", "one hundred and third", 103)]
     [InlineData("en-GB", "five thousand and ninth", 5009)]
+    [InlineData("en-US", "three billion", 3_000_000_000L)]
+    [InlineData("en-GB", "negative three billion", -3_000_000_000L)]
     [InlineData("de-DE", "einundzwanzigste", 21)]
     [InlineData("da-DK", "et hundrede og en", 101)]
     [InlineData("nl-NL", "honderdacht", 108)]
@@ -20,7 +22,7 @@ public class WordsToNumberSharedLexiconRegressionTests
     [InlineData("mt", "għoxrin inqas minn żero", -20)]
     [InlineData("sk", "minus devatdesiat devat", -99)]
     [InlineData("vi", "thứ hai mươi mốt", 21)]
-    public void SharedLexiconConvertersPreserveExistingLocaleBehavior(string cultureName, string words, int expected)
+    public void SharedLexiconConvertersPreserveExistingLocaleBehavior(string cultureName, string words, long expected)
     {
         var culture = new CultureInfo(cultureName);
 

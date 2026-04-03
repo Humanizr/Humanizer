@@ -30,27 +30,8 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
             input *= -1;
         }
 
-        if (input < 1000000000)
-        {
-            // Everything below a billion uses the same million/thousand/hundred decomposition.
-            return GetMillions(input, gender) + (negativeNumber ? $" {profile.MinusSuffix}" : string.Empty);
-        }
-
-        var billions = input / 1000000000;
-        var tensInBillions = billions % 100;
-        var millions = input % 1000000000;
-
-        // The billion row uses the last two digits to decide whether the locale needs a singular
-        // or plural form.
-        var billionsText = GetScaleText(billions, tensInBillions, profile.BillionScale, gender);
-        var millionsText = GetMillions(millions, gender);
-
-        if (millions == 0)
-        {
-            return billionsText;
-        }
-
-        return $"{billionsText} {profile.Conjunction} {millionsText}" + (negativeNumber ? $" {profile.MinusSuffix}" : string.Empty);
+        var text = ConvertPositive(input, gender);
+        return text + (negativeNumber ? $" {profile.MinusSuffix}" : string.Empty);
     }
 
     /// <summary>
@@ -171,49 +152,32 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         return $"{hundredsText} {profile.Conjunction} {GetTens(tens, usePrefixMap, usePrefixMapForLowerValueDigits, gender)}";
     }
 
-    string GetThousands(long value, GrammaticalGender gender)
+    string ConvertPositive(long value, GrammaticalGender gender)
     {
         if (value < 1000)
         {
             return GetHundreds(value, false, false, gender);
         }
 
-        var thousands = value / 1000;
-        var tensInThousands = thousands % 100;
-        var hundreds = value % 1000;
-
-        var thousandsInText = GetScaleText(thousands, tensInThousands, profile.ThousandScale, gender);
-
-        var hundredsInText = GetHundreds(hundreds, false, false, gender);
-
-        if (hundreds == 0)
+        foreach (var scale in profile.Scales)
         {
-            return thousandsInText;
+            if (value < scale.Value)
+            {
+                continue;
+            }
+
+            var count = value / scale.Value;
+            var remainder = value % scale.Value;
+            var text = GetScaleText(count, count % 100, scale.Forms, gender);
+            if (remainder == 0)
+            {
+                return text;
+            }
+
+            return $"{text} {profile.Conjunction} {ConvertPositive(remainder, gender)}";
         }
 
-        return $"{thousandsInText} {profile.Conjunction} {hundredsInText}";
-    }
-
-    string GetMillions(long value, GrammaticalGender gender)
-    {
-        if (value < 1000000)
-        {
-            return GetThousands(value, gender);
-        }
-
-        var millions = value / 1000000;
-        var tensInMillions = millions % 100;
-        var thousands = value % 1000000;
-
-        var millionsText = GetScaleText(millions, tensInMillions, profile.MillionScale, gender);
-        var thousandsText = GetThousands(thousands, gender);
-
-        if (thousands == 0)
-        {
-            return millionsText;
-        }
-
-        return $"{millionsText} {profile.Conjunction} {thousandsText}";
+        return GetHundreds(value, false, false, gender);
     }
 
     string GetScaleText(long count, long lastTwoDigits, DualFormScale scale, GrammaticalGender gender)
@@ -270,7 +234,10 @@ sealed class DualFormScaleNumberToWordsProfile(
     string[] prefixMap,
     DualFormScale thousandScale,
     DualFormScale millionScale,
-    DualFormScale billionScale)
+    DualFormScale billionScale,
+    DualFormScale trillionScale,
+    DualFormScale quadrillionScale,
+    DualFormScale quintillionScale)
 {
     /// <summary>
     /// Gets the conjunction inserted between rendered parts.
@@ -328,6 +295,30 @@ sealed class DualFormScaleNumberToWordsProfile(
     /// Gets the billion scale configuration.
     /// </summary>
     public DualFormScale BillionScale { get; } = billionScale;
+    /// <summary>
+    /// Gets the trillion scale configuration.
+    /// </summary>
+    public DualFormScale TrillionScale { get; } = trillionScale;
+    /// <summary>
+    /// Gets the quadrillion scale configuration.
+    /// </summary>
+    public DualFormScale QuadrillionScale { get; } = quadrillionScale;
+    /// <summary>
+    /// Gets the quintillion scale configuration.
+    /// </summary>
+    public DualFormScale QuintillionScale { get; } = quintillionScale;
+    /// <summary>
+    /// Gets the scale ladder used for recursive high-range decomposition.
+    /// </summary>
+    public (long Value, DualFormScale Forms)[] Scales { get; } =
+    [
+        (1000000000000000000, quintillionScale),
+        (1000000000000000, quadrillionScale),
+        (1000000000000, trillionScale),
+        (1000000000, billionScale),
+        (1000000, millionScale),
+        (1000, thousandScale)
+    ];
 }
 
 /// <summary>

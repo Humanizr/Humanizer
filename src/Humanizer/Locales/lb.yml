@@ -465,6 +465,12 @@ surfaces:
         milliounen: 1000000
         milliard: 1000000000
         milliarden: 1000000000
+        billioun: 1000000000000
+        billiounen: 1000000000000
+        billiard: 1000000000000000
+        billiarden: 1000000000000000
+        trillioun: 1000000000000000000
+        trilliounen: 1000000000000000000
       unitMap:
         een: 1
         eng: 1
@@ -498,6 +504,12 @@ surfaces:
         - 'milliard'
         - 'milliounen'
         - 'millioun'
+        - 'billiounen'
+        - 'billioun'
+        - 'billiarden'
+        - 'billiard'
+        - 'trilliounen'
+        - 'trillioun'
         - 'dausend'
         - 'honnert'
       negativePrefixes:

@@ -3593,12 +3593,14 @@ static class LocaleNumberTheoryData
         { "ca", 2, "doble" },
     };
 
-    public static TheoryData<string, string, int> WordsToNumberEnglishCases => new()
+    public static TheoryData<string, string, long> WordsToNumberEnglishCases => new()
     {
         { "en", "one", 1 },
         { "en", "twenty-one", 21 },
         { "en", "one hundred and five", 105 },
         { "en", "one thousand two hundred thirty-four", 1234 },
+        { "en", "three billion", 3_000_000_000L },
+        { "en", "negative three billion", -3_000_000_000L },
         { "en-US", "one", 1 },
         { "en-US", "twenty-one", 21 },
         { "en-US", "one hundred and five", 105 },
@@ -3617,18 +3619,19 @@ static class LocaleNumberTheoryData
         { "en-AU", "one thousand two hundred thirty-four", 1234 },
     };
 
-    public static TheoryData<string, string, int> WordsToNumberLocalizedCases => new()
+    public static TheoryData<string, string, long> WordsToNumberLocalizedCases => new()
     {
         { "de-DE", "eins", 1 },
         { "es-ES", "veinte", 20 },
         { "fr-FR", "vingt", 20 },
         { "mt", "mija u ħamsa", 105 },
+        { "pt-PT", "um mil milhões e dois", 1_000_000_002L },
         { "zh-CN", "一", 1 },
     };
 
-    public static TheoryData<string, string, int> WordsToNumberFallbackCases => new()
+    public static TheoryData<string, string, long> WordsToNumberUnsupportedCases => new()
     {
-        { "zu-ZA", "one", 1 },
+        { "zu-ZA", "one", 1L },
     };
 }
 

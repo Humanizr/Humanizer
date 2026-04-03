@@ -14,7 +14,8 @@ namespace Humanizer;
 ///
 /// The end result should be a locale-correct Scandinavian cardinal or ordinal string without
 /// hardcoding locale names into the algorithm itself. Generated strategy enums decide whether the
-/// output follows the Norwegian Bokmal family or the Swedish family.
+/// output follows the Norwegian Bokmal family or the Swedish family, while the profile's scale
+/// ceiling controls how far the shared renderer is allowed to go.
 /// </summary>
 class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile profile)
     : GenderedNumberToWordsConverter(profile.DefaultGender)
@@ -43,6 +44,8 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
         };
 
     // Norwegian compounds are mostly concatenative, but large-scale spacing and exact ordinals still vary by generated suffix settings.
+    // The profile also controls how far this branch is allowed to scale; some locales stay int-
+    // bounded even though the public API accepts long.
     string ConvertNorwegian(long number, GrammaticalGender gender)
     {
         if (number is > int.MaxValue or < int.MinValue)
@@ -221,6 +224,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
     // Swedish keeps more of its morphology in the generated scale metadata than Norwegian does.
     // This branch is therefore mostly a stitching algorithm: append the emitted scale records in
     // order, then stop at the exact terminal scale when an ordinal is required.
+    // The profile's maximum value is still authoritative for the supported range.
     string ConvertSwedish(long number, GrammaticalGender gender)
     {
         if (number is > int.MaxValue or < int.MinValue)

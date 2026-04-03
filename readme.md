@@ -31,7 +31,7 @@ Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet
 
 ### Locale Data
 
-The `Humanizer` package includes all supported generated locale data. There is no separate English-only core package or locale satellite package split anymore.
+The `Humanizer` package includes all supported generated locale data. Locale authors now check in YAML under `src/Humanizer/Locales`, and the source generator turns that into the runtime tables shipped in the main package. There is no separate English-only core package or locale satellite package split anymore.
 
 
 ## Features
@@ -608,6 +608,10 @@ Convert numbers to their word representation:
 
 // Control "and" usage
 3501.ToWords(addAnd: false) => "three thousand five hundred one"
+
+// Culture-specific large-number behavior
+123456789.ToWords(new CultureInfo("en-GB")) => "one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine"
+123456789.ToWords(new CultureInfo("en-IN")) => "twelve crore thirty-four lakh fifty-six thousand seven hundred and eighty-nine"
 ```
 
 
@@ -630,12 +634,15 @@ Convert numbers to ordinal word form (first, second, third, etc.):
 
 ### Words to Number Conversion
 
-Convert English words to numbers (currently English-only):
+Convert localized number words back to numbers:
 
 ```csharp
 "twenty".ToNumber(new CultureInfo("en")) => 20
 "one hundred and five".ToNumber(new CultureInfo("en")) => 105
 "three thousand two hundred".ToNumber(new CultureInfo("en")) => 3200
+
+"twelve crore thirty-four lakh fifty-six thousand seven hundred and eighty-nine".ToNumber(new CultureInfo("en-IN")) => 123456789
+"ஒன்று சங்கம்".ToNumber(new CultureInfo("ta")) => 1000000000000000
 
 // Try pattern for safe conversion
 if ("forty-two".TryToNumber(out var number, new CultureInfo("en")))
@@ -646,7 +653,7 @@ if (!"tenn".TryToNumber(out var invalid, new CultureInfo("en"), out var badWord)
     Console.WriteLine($"Unrecognized word: {badWord}"); // Outputs: Unrecognized word: tenn
 ```
 
-> **Note:** Only English (`en`) is currently supported. Other languages throw `NotSupportedException`.
+> **Note:** Supported locales use their own authored number data and parent-locale inheritance. Unsupported cultures still fall back to the default English parser behavior.
 
 ### DateTime to ordinal words
 

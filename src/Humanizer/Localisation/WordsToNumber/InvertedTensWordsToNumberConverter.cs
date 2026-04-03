@@ -14,7 +14,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     readonly InvertedTensWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -25,11 +25,11 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -52,7 +52,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
         }
 
         if (profile.AllowInvariantIntegerInput &&
-            int.TryParse(normalized, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue))
+            long.TryParse(normalized, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue))
         {
             unrecognizedWord = null;
             if (negative)
@@ -63,9 +63,10 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
             return true;
         }
 
-        if (profile.OrdinalMap.TryGetValue(normalized, out parsedValue) ||
-            TryParsePhrase(normalized, out parsedValue, out unrecognizedWord))
+        if (profile.OrdinalMap.TryGetValue(normalized, out var value) ||
+            TryParsePhrase(normalized, out value, out unrecognizedWord))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -83,18 +84,18 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// Parses a tokenized phrase where scales and hundreds may appear as standalone words.
     /// </summary>
     /// <param name="words">The normalized phrase to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the first token that could not be parsed.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParsePhrase(string words, out int value, out string? unrecognizedWord)
+    bool TryParsePhrase(string words, out long value, out string? unrecognizedWord)
     {
         if (!words.Contains(' '))
         {
             return TryParseCompact(words, out value, out unrecognizedWord);
         }
 
-        var total = 0;
-        var current = 0;
+        long total = 0;
+        long current = 0;
         unrecognizedWord = null;
 
         foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
@@ -114,20 +115,20 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
 
             if (tokenValue >= 1000)
             {
-                total += (current == 0 ? 1 : current) * tokenValue;
+                total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
                 current = 0;
             }
             else if (tokenValue == 100)
             {
-                current = (current == 0 ? 1 : current) * tokenValue;
+                current = checked((current == 0 ? 1 : current) * tokenValue);
             }
             else
             {
-                current += tokenValue;
+                current = checked(current + tokenValue);
             }
         }
 
-        value = total + current;
+        value = checked(total + current);
         return true;
     }
 
@@ -135,10 +136,10 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// Parses either a single token or a collapsed multi-token compound.
     /// </summary>
     /// <param name="word">The normalized token or compact compound to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token or compound that was not recognized.</param>
     /// <returns><c>true</c> if the token was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCompact(string word, out int value, out string? unrecognizedWord)
+    bool TryParseCompact(string word, out long value, out string? unrecognizedWord)
     {
         if (profile.CardinalMap.TryGetValue(word, out value) ||
             profile.OrdinalMap.TryGetValue(word, out value))
@@ -165,7 +166,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
 
             var left = word[..index];
             var right = StripLeadingIgnoredTokens(word[(index + scale.Length)..].Trim());
-            var factor = 1;
+            long factor = 1;
 
             if (!string.IsNullOrEmpty(left) &&
                 !TryParseCompact(left, out factor, out _) ||
@@ -174,7 +175,7 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
                 continue;
             }
 
-            value = factor * profile.CardinalMap[scale] + remainder;
+            value = checked(checked(factor * profile.CardinalMap[scale]) + remainder);
             unrecognizedWord = null;
             return true;
         }
@@ -207,10 +208,10 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// Removes a configured ordinal suffix and reparses the remaining stem.
     /// </summary>
     /// <param name="word">The normalized token to inspect.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the stem that could not be parsed.</param>
     /// <returns><c>true</c> if an ordinal suffix was recognized and the stem parsed; otherwise, <c>false</c>.</returns>
-    bool TryParseOrdinalStem(string word, out int value, out string? unrecognizedWord)
+    bool TryParseOrdinalStem(string word, out long value, out string? unrecognizedWord)
     {
         foreach (var suffix in profile.OrdinalSuffixes)
         {
@@ -231,10 +232,10 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// Parses an optional trailing fragment, treating the empty string as zero.
     /// </summary>
     /// <param name="word">The normalized fragment to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the fragment that could not be parsed.</param>
     /// <returns><c>true</c> if the fragment was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string word, out int value, out string? unrecognizedWord)
+    bool TryParseOptional(string word, out long value, out string? unrecognizedWord)
     {
         if (string.IsNullOrEmpty(word))
         {
@@ -250,9 +251,9 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// Parses a compact unit-plus-tens form that ends with a configured tens token.
     /// </summary>
     /// <param name="word">The normalized compact token to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the token matched a supported unit-plus-tens pattern; otherwise, <c>false</c>.</returns>
-    bool TryParseCompoundTens(string word, out int value)
+    bool TryParseCompoundTens(string word, out long value)
     {
         foreach (var tensToken in profile.TensTokens)
         {
@@ -369,9 +370,9 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
     /// </summary>
     /// <param name="converter">The locale-specific number-to-words converter used to generate ordinal forms.</param>
     /// <returns>A frozen dictionary that maps normalized ordinal text back to its numeric value.</returns>
-    internal static FrozenDictionary<string, int> BuildOrdinalMap(INumberToWordsConverter converter)
+    internal static FrozenDictionary<string, long> BuildOrdinalMap(INumberToWordsConverter converter)
     {
-        var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
+        var ordinals = new Dictionary<string, long>(StringComparer.Ordinal);
 
         for (var number = 1; number <= 200; number++)
         {
@@ -386,12 +387,12 @@ internal class InvertedTensWordsToNumberConverter(InvertedTensWordsToNumberProfi
 /// Immutable locale data used by <see cref="InvertedTensWordsToNumberConverter"/>.
 /// </summary>
 internal sealed class InvertedTensWordsToNumberProfile(
-    FrozenDictionary<string, int> cardinalMap,
-    FrozenDictionary<string, int> unitMap,
+    FrozenDictionary<string, long> cardinalMap,
+    FrozenDictionary<string, long> unitMap,
     InvertedTensToken[] tensTokens,
     string tensLinker,
     string[] scaleTokens,
-    FrozenDictionary<string, int> ordinalMap,
+    FrozenDictionary<string, long> ordinalMap,
     string[] negativePrefixes,
     string[] ignoredTokens,
     string[] ordinalSuffixes,
@@ -401,11 +402,11 @@ internal sealed class InvertedTensWordsToNumberProfile(
     /// <summary>
     /// Gets the main token-to-value map used for direct token lookups.
     /// </summary>
-    public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    public FrozenDictionary<string, long> CardinalMap { get; } = cardinalMap;
     /// <summary>
     /// Gets the map used when resolving the unit portion of inverted tens compounds.
     /// </summary>
-    public FrozenDictionary<string, int> UnitMap { get; } = unitMap;
+    public FrozenDictionary<string, long> UnitMap { get; } = unitMap;
     /// <summary>
     /// Gets the supported tens tokens and their values.
     /// </summary>
@@ -421,7 +422,7 @@ internal sealed class InvertedTensWordsToNumberProfile(
     /// <summary>
     /// Gets the exact ordinal token map accepted before falling back to structural parsing.
     /// </summary>
-    public FrozenDictionary<string, int> OrdinalMap { get; } = ordinalMap;
+    public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap;
     /// <summary>
     /// Gets the prefixes that mark a negative phrase.
     /// </summary>
@@ -447,7 +448,7 @@ internal sealed class InvertedTensWordsToNumberProfile(
 /// <summary>
 /// Represents one tens token and the numeric value it contributes to a compact compound.
 /// </summary>
-internal readonly record struct InvertedTensToken(string Word, int Value);
+internal readonly record struct InvertedTensToken(string Word, long Value);
 
 /// <summary>
 /// Represents a literal replacement applied while normalizing compact unit fragments.

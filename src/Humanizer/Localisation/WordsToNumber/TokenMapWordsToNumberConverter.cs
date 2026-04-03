@@ -12,12 +12,12 @@ namespace Humanizer;
 internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) : GenderlessWordsToNumberConverter
 {
     readonly TokenMapWordsToNumberRules rules = rules;
-    readonly FrozenDictionary<string, int>? exactOrdinalMap = rules.ExactOrdinalMap;
+    readonly FrozenDictionary<string, long>? exactOrdinalMap = rules.ExactOrdinalMap;
     readonly FrozenDictionary<string, long>? ordinalScaleMap = rules.OrdinalScaleMap;
     readonly FrozenDictionary<string, long>? gluedOrdinalScaleSuffixes = rules.GluedOrdinalScaleSuffixes;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -28,11 +28,11 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -40,7 +40,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         }
 
         if (rules.AllowInvariantIntegerInput &&
-            int.TryParse(words.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue))
+            long.TryParse(words.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue))
         {
             unrecognizedWord = null;
             return true;
@@ -87,9 +87,10 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             }
         }
 
-        if (TryParseOrdinal(normalized, out parsedValue) ||
-            TryParseCardinal(normalized, out parsedValue, out unrecognizedWord))
+        if (TryParseOrdinal(normalized, out var value) ||
+            TryParseCardinal(normalized, out value, out unrecognizedWord))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -108,9 +109,9 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// scale rules.
     /// </summary>
     /// <param name="words">A normalized ordinal phrase.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was parsed as an ordinal; otherwise, <c>false</c>.</returns>
-    bool TryParseOrdinal(string words, out int value)
+    bool TryParseOrdinal(string words, out long value)
     {
         if (TryParseOrdinalAbbreviation(words, out value))
         {
@@ -126,9 +127,9 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// Parses an exact ordinal string or a glued ordinal-scale suffix.
     /// </summary>
     /// <param name="words">The normalized ordinal phrase.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was recognized; otherwise, <c>false</c>.</returns>
-    bool TryParseExactOrdinal(string words, out int value)
+    bool TryParseExactOrdinal(string words, out long value)
     {
         if (exactOrdinalMap?.TryGetValue(words, out value) == true)
         {
@@ -143,19 +144,18 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// </summary>
     /// <param name="words">The normalized ordinal phrase.</param>
     /// <param name="ordinalScaleMap">The ordinal scale lookup table.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was recognized; otherwise, <c>false</c>.</returns>
-    bool TryParseExtendedOrdinal(string words, FrozenDictionary<string, long> ordinalScaleMap, out int value)
+    bool TryParseExtendedOrdinal(string words, FrozenDictionary<string, long> ordinalScaleMap, out long value)
     {
         if (exactOrdinalMap?.TryGetValue(words, out value) == true)
         {
             return true;
         }
 
-        if (ordinalScaleMap.TryGetValue(words, out var scaleValue) &&
-            scaleValue is <= int.MaxValue and >= int.MinValue)
+        if (ordinalScaleMap.TryGetValue(words, out var scaleValue))
         {
-            value = (int)scaleValue;
+            value = scaleValue;
             return true;
         }
 
@@ -166,9 +166,9 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// Parses ordinal abbreviations such as <c>21st</c> when the locale supports them.
     /// </summary>
     /// <param name="words">The normalized ordinal phrase.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the text is a supported ordinal abbreviation; otherwise, <c>false</c>.</returns>
-    bool TryParseOrdinalAbbreviation(string words, out int value)
+    bool TryParseOrdinalAbbreviation(string words, out long value)
     {
         if (rules.OrdinalAbbreviationSuffixes.Length == 0)
         {
@@ -194,7 +194,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         foreach (var candidate in rules.OrdinalAbbreviationSuffixes)
         {
             if (suffix.Equals(candidate, StringComparison.Ordinal) &&
-                int.TryParse(span[..digitLength], NumberStyles.None, CultureInfo.InvariantCulture, out value))
+                long.TryParse(span[..digitLength], NumberStyles.None, CultureInfo.InvariantCulture, out value))
             {
                 return true;
             }
@@ -209,100 +209,94 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// compounds.
     /// </summary>
     /// <param name="words">A normalized cardinal phrase.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token that was not recognized.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out int value, out string? unrecognizedWord)
+    bool TryParseCardinal(string words, out long value, out string? unrecognizedWord)
     {
-        // Exact phrase matches win before tokenization so locale data can preserve irregular or
-        // ambiguous spellings that would otherwise be decomposed into the wrong grammar branch.
-        if (rules.CardinalMap.TryGetValue(words, out var directValue))
+        try
         {
-            if (directValue is > int.MaxValue or < int.MinValue)
+            // Exact phrase matches win before tokenization so locale data can preserve irregular or
+            // ambiguous spellings that would otherwise be decomposed into the wrong grammar branch.
+            if (rules.CardinalMap.TryGetValue(words, out var directValue))
             {
-                value = default;
-                unrecognizedWord = words;
-                return false;
-            }
-
-            value = (int)directValue;
-            unrecognizedWord = null;
-            return true;
-        }
-
-        long total = 0;
-        long current = 0;
-        unrecognizedWord = null;
-        var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
-        string? pendingToken = null;
-
-        // TokenMap locales are intentionally resolved in a strict order:
-        // 1. terminal ordinals, which must only win when they finish the phrase
-        // 2. composite scale pairs, which combine adjacent tokens before cardinal lookup
-        // 3. direct token values, including suffix-stripped variants
-        // 4. lookahead compounds such as "two" + "hundred" or "two" + "teen"
-        // 5. large scales and multiplier tokens
-        //
-        // This order keeps ambiguous inputs from being consumed by the wrong grammar branch.
-        while (TryReadNextToken(ref tokenizer, ref pendingToken, out var token))
-        {
-            if (TryParseTerminalOrdinal(token, ref tokenizer, ref pendingToken, total, current, out value, out unrecognizedWord))
-            {
+                value = directValue;
+                unrecognizedWord = null;
                 return true;
             }
 
-            if (TryGetCompositeScaleValue(token, ref tokenizer, ref pendingToken, out var compositeScaleValue))
+            long total = 0;
+            long current = 0;
+            unrecognizedWord = null;
+            var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
+            string? pendingToken = null;
+
+            // TokenMap locales are intentionally resolved in a strict order:
+            // 1. terminal ordinals, which must only win when they finish the phrase
+            // 2. composite scale pairs, which combine adjacent tokens before cardinal lookup
+            // 3. direct token values, including suffix-stripped variants
+            // 4. lookahead compounds such as "two" + "hundred" or "two" + "teen"
+            // 5. large scales and multiplier tokens
+            //
+            // This order keeps ambiguous inputs from being consumed by the wrong grammar branch.
+            while (TryReadNextToken(ref tokenizer, ref pendingToken, out var token))
             {
-                total += (current == 0 ? 1 : current) * compositeScaleValue;
-                current = 0;
-                continue;
+                if (TryParseTerminalOrdinal(token, ref tokenizer, ref pendingToken, total, current, out value, out unrecognizedWord))
+                {
+                    return true;
+                }
+
+                if (TryGetCompositeScaleValue(token, ref tokenizer, ref pendingToken, out var compositeScaleValue))
+                {
+                    total = checked(total + checked((current == 0 ? 1 : current) * compositeScaleValue));
+                    current = 0;
+                    continue;
+                }
+
+                if (!TryGetTokenValue(token, out var tokenValue))
+                {
+                    value = default;
+                    unrecognizedWord = token;
+                    return false;
+                }
+
+                if (TryApplyLookaheadCompound(tokenValue, ref tokenizer, ref pendingToken, out var compoundValue))
+                {
+                    current = checked(current + compoundValue);
+                    continue;
+                }
+
+                if (tokenValue >= rules.ScaleThreshold)
+                {
+                    // Large scales close the current group so "two hundred thousand" becomes
+                    // (2 * 100) * 1000 rather than 2 * (100 * 1000) or any other accidental nesting.
+                    total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
+                    current = 0;
+                    continue;
+                }
+
+                if (ShouldMultiplyToken(token, tokenValue))
+                {
+                    // Some locales encode multiplication with an explicit token rather than a scale
+                    // word, so the current group is rewritten in place instead of flushed.
+                    current = ApplyMultiplierToken(current, tokenValue);
+                    continue;
+                }
+
+                // Anything left is additive by default. This is the final fallback so that odd token
+                // shapes do not silently bypass the scale and multiplier rules above.
+                current = checked(current + tokenValue);
             }
 
-            if (!TryGetTokenValue(token, out var tokenValue))
-            {
-                value = default;
-                unrecognizedWord = token;
-                return false;
-            }
-
-            if (TryApplyLookaheadCompound(tokenValue, ref tokenizer, ref pendingToken, out var compoundValue))
-            {
-                current += compoundValue;
-                continue;
-            }
-
-            if (tokenValue >= rules.ScaleThreshold)
-            {
-                // Large scales close the current group so "two hundred thousand" becomes
-                // (2 * 100) * 1000 rather than 2 * (100 * 1000) or any other accidental nesting.
-                total += (current == 0 ? 1 : current) * tokenValue;
-                current = 0;
-                continue;
-            }
-
-            if (ShouldMultiplyToken(token, tokenValue))
-            {
-                // Some locales encode multiplication with an explicit token rather than a scale
-                // word, so the current group is rewritten in place instead of flushed.
-                current = (current == 0 ? 1 : current) * tokenValue;
-                continue;
-            }
-
-            // Anything left is additive by default. This is the final fallback so that odd token
-            // shapes do not silently bypass the scale and multiplier rules above.
-            current += tokenValue;
+            value = checked(total + current);
+            return true;
         }
-
-        var parsedLong = total + current;
-        if (parsedLong is > int.MaxValue or < int.MinValue)
+        catch (OverflowException)
         {
             value = default;
             unrecognizedWord = words;
             return false;
         }
-
-        value = (int)parsedLong;
-        return true;
     }
 
     /// <summary>
@@ -313,7 +307,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <param name="pendingToken">A token that should be returned before reading from <paramref name="tokenizer"/>.</param>
     /// <param name="total">The accumulated large-scale value.</param>
     /// <param name="current">The accumulated local group value.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token that was not recognized.</param>
     /// <returns><c>true</c> if the current token completed an ordinal parse; otherwise, <c>false</c>.</returns>
     bool TryParseTerminalOrdinal(
@@ -322,7 +316,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         ref string? pendingToken,
         long total,
         long current,
-        out int value,
+        out long value,
         out string? unrecognizedWord)
     {
         if (!rules.AllowTerminalOrdinalToken)
@@ -348,17 +342,17 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <param name="pendingToken">A token that should be returned before reading from <paramref name="tokenizer"/>.</param>
     /// <param name="total">The accumulated large-scale value.</param>
     /// <param name="current">The accumulated local group value.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token that was not recognized.</param>
     /// <returns><c>true</c> if the current token completed an exact ordinal parse; otherwise, <c>false</c>.</returns>
     bool TryParseTerminalExactOrdinal(
         string token,
-        FrozenDictionary<string, int>? exactOrdinalMap,
+        FrozenDictionary<string, long>? exactOrdinalMap,
         ref WordsToNumberTokenizer.Enumerator tokenizer,
         ref string? pendingToken,
         long total,
         long current,
-        out int value,
+        out long value,
         out string? unrecognizedWord)
     {
         if (exactOrdinalMap?.TryGetValue(token, out var exactOrdinalValue) != true)
@@ -378,17 +372,18 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return false;
         }
 
-        var parsedLong = total + current + exactOrdinalValue;
-        if (parsedLong is > int.MaxValue or < int.MinValue)
+        try
+        {
+            value = checked(total + current + exactOrdinalValue);
+            unrecognizedWord = null;
+            return true;
+        }
+        catch (OverflowException)
         {
             value = default;
             unrecognizedWord = token;
             return false;
         }
-
-        value = (int)parsedLong;
-        unrecognizedWord = null;
-        return true;
     }
 
     /// <summary>
@@ -401,21 +396,21 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <param name="pendingToken">A token that should be returned before reading from <paramref name="tokenizer"/>.</param>
     /// <param name="total">The accumulated large-scale value.</param>
     /// <param name="current">The accumulated local group value.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token that was not recognized.</param>
     /// <returns><c>true</c> if the current token completed an ordinal parse; otherwise, <c>false</c>.</returns>
     bool TryParseTerminalExtendedOrdinal(
         string token,
-        FrozenDictionary<string, int>? exactOrdinalMap,
+        FrozenDictionary<string, long>? exactOrdinalMap,
         FrozenDictionary<string, long> ordinalScaleMap,
         ref WordsToNumberTokenizer.Enumerator tokenizer,
         ref string? pendingToken,
         long total,
         long current,
-        out int value,
+        out long value,
         out string? unrecognizedWord)
     {
-        var ordinalValue = default(int);
+        var ordinalValue = default(long);
         var ordinalScaleValue = default(long);
         var isExactOrdinal = exactOrdinalMap?.TryGetValue(token, out ordinalValue) == true;
         var isOrdinalScale = ordinalScaleMap.TryGetValue(token, out ordinalScaleValue);
@@ -436,29 +431,30 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return false;
         }
 
-        var parsedLong = isOrdinalScale
-            ? total + ((current == 0 ? 1 : current) * ordinalScaleValue)
-            : total + current + ordinalValue;
+        try
+        {
+            value = isOrdinalScale
+                ? checked(total + checked((current == 0 ? 1 : current) * ordinalScaleValue))
+                : checked(total + current + ordinalValue);
 
-        if (parsedLong is > int.MaxValue or < int.MinValue)
+            unrecognizedWord = null;
+            return true;
+        }
+        catch (OverflowException)
         {
             value = default;
             unrecognizedWord = token;
             return false;
         }
-
-        value = (int)parsedLong;
-        unrecognizedWord = null;
-        return true;
     }
 
     /// <summary>
     /// Parses a glued ordinal scale such as a cardinal stem followed by a scale suffix.
     /// </summary>
     /// <param name="words">The normalized ordinal phrase.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase matched a glued ordinal scale; otherwise, <c>false</c>.</returns>
-    bool TryParseGluedOrdinalScale(string words, out int value)
+    bool TryParseGluedOrdinalScale(string words, out long value)
     {
         if (gluedOrdinalScaleSuffixes is null || gluedOrdinalScaleSuffixes.Count == 0)
         {
@@ -478,15 +474,16 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 continue;
             }
 
-            var scaledValue = (long)value * suffix.Value;
-            if (scaledValue is > int.MaxValue or < int.MinValue)
+            try
+            {
+                value = checked(value * suffix.Value);
+                return true;
+            }
+            catch (OverflowException)
             {
                 value = default;
                 return false;
             }
-
-            value = (int)scaledValue;
-            return true;
         }
 
         value = default;
@@ -533,6 +530,25 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         }
 
         return false;
+    }
+
+    long ApplyMultiplierToken(long current, long tokenValue)
+    {
+        if (current == 0)
+        {
+            return tokenValue;
+        }
+
+        if (tokenValue == 10 &&
+            current >= 100 &&
+            TryGetUnitTokenValue(current % 100, out var trailingUnit))
+        {
+            // Locales such as Vietnamese build "hundred + unit + tens-suffix" compounds where the
+            // tens token only multiplies the trailing unit rather than the whole accumulated group.
+            return checked(current - trailingUnit + trailingUnit * tokenValue);
+        }
+
+        return checked(current * tokenValue);
     }
 
     /// <summary>
@@ -726,7 +742,6 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         return false;
     }
 }
-
 /// <summary>
 /// Immutable rule set used by <see cref="TokenMapWordsToNumberConverter"/>.
 /// </summary>
@@ -745,7 +760,7 @@ internal sealed class TokenMapWordsToNumberRules
     /// <summary>
     /// Gets the exact ordinal lookup map.
     /// </summary>
-    public FrozenDictionary<string, int>? ExactOrdinalMap { get; init; }
+    public FrozenDictionary<string, long>? ExactOrdinalMap { get; init; }
     /// <summary>
     /// Gets the ordinal-scale lookup map used by locales with ordinal scale words.
     /// </summary>

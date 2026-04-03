@@ -465,6 +465,13 @@ surfaces:
         milijarda: 1000000000
         milijarde: 1000000000
         milijardi: 1000000000
+        bilijun: 1000000000000
+        bilijuna: 1000000000000
+        bilijarda: 1000000000000000
+        bilijarde: 1000000000000000
+        bilijardi: 1000000000000000
+        trilijun: 1000000000000000000
+        trilijuna: 1000000000000000000
       negativePrefixes:
         - 'minus '
 

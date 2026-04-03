@@ -13,7 +13,7 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
         .ToArray();
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -24,11 +24,11 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -54,10 +54,11 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
         // Greedy locales deliberately prefer abbreviation and exact-ordinal matches before the
         // cardinal parser; otherwise tokens like "21st" or a locale-specific ordinal spelling can
         // be consumed as an ordinary compound and lose their suffix semantics.
-        if (TryParseOrdinalAbbreviation(trimmed, out parsedValue) ||
-            profile.OrdinalMap.TryGetValue(normalized, out parsedValue) ||
-            TryParseCardinal(normalized, out parsedValue, out unrecognizedWord))
+        if (TryParseOrdinalAbbreviation(trimmed, out var value) ||
+            profile.OrdinalMap.TryGetValue(normalized, out value) ||
+            TryParseCardinal(normalized, out value, out unrecognizedWord))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -89,7 +90,7 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     /// </summary>
     /// <param name="converter">The locale-specific number-to-words converter.</param>
     /// <returns>A frozen map from normalized ordinal text to the corresponding integer.</returns>
-    internal static FrozenDictionary<string, int> BuildOrdinalMap(
+    internal static FrozenDictionary<string, long> BuildOrdinalMap(
         INumberToWordsConverter converter,
         string charactersToRemove,
         string charactersToReplaceWithSpace,
@@ -97,7 +98,7 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
         bool lowercase = false,
         bool removeDiacritics = false)
     {
-        var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
+        var ordinals = new Dictionary<string, long>(StringComparer.Ordinal);
 
         for (var number = 1; number <= 200; number++)
         {
@@ -197,10 +198,10 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     /// Parses a normalized phrase by greedily matching the longest known token at each position.
     /// </summary>
     /// <param name="words">A normalized phrase ready for token matching.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token or fragment that was not recognized.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out int value, out string? unrecognizedWord)
+    bool TryParseCardinal(string words, out long value, out string? unrecognizedWord)
     {
         if (profile.CardinalMap.TryGetValue(words, out value))
         {
@@ -210,8 +211,8 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
 
         value = default;
         unrecognizedWord = null;
-        var total = 0;
-        var current = 0;
+        long total = 0;
+        long current = 0;
         var position = 0;
 
         if (string.IsNullOrEmpty(words))
@@ -255,20 +256,20 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
 
             if (numeric == profile.HundredValue)
             {
-                current = (current == 0 ? 1 : current) * numeric;
+                current = checked((current == 0 ? 1 : current) * numeric);
             }
             else if (numeric >= profile.ScaleThreshold)
             {
-                total += (current == 0 ? 1 : current) * numeric;
+                total = checked(total + checked((current == 0 ? 1 : current) * numeric));
                 current = 0;
             }
             else
             {
-                current += numeric;
+                current = checked(current + numeric);
             }
         }
 
-        value = total + current;
+        value = checked(total + current);
         return true;
     }
 
@@ -276,9 +277,9 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     /// Parses an ordinal abbreviation such as <c>21st</c>.
     /// </summary>
     /// <param name="words">The trimmed input text.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the text is a supported ordinal abbreviation; otherwise, <c>false</c>.</returns>
-    bool TryParseOrdinalAbbreviation(string words, out int value)
+    bool TryParseOrdinalAbbreviation(string words, out long value)
     {
         if (profile.OrdinalAbbreviationSuffixes.Length == 0)
         {
@@ -304,7 +305,7 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
         foreach (var candidate in profile.OrdinalAbbreviationSuffixes)
         {
             if (suffix.Equals(candidate, StringComparison.Ordinal) &&
-                int.TryParse(span[..digitLength], NumberStyles.None, CultureInfo.InvariantCulture, out value))
+                long.TryParse(span[..digitLength], NumberStyles.None, CultureInfo.InvariantCulture, out value))
             {
                 return true;
             }
@@ -365,8 +366,8 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
 /// Immutable locale data used by <see cref="GreedyCompoundWordsToNumberConverter"/>.
 /// </summary>
 sealed class GreedyCompoundWordsToNumberProfile(
-    FrozenDictionary<string, int> cardinalMap,
-    FrozenDictionary<string, int> ordinalMap,
+    FrozenDictionary<string, long> cardinalMap,
+    FrozenDictionary<string, long> ordinalMap,
     string[] negativePrefixes,
     string[] ignoredTokens,
     string[] ordinalAbbreviationSuffixes,
@@ -375,17 +376,17 @@ sealed class GreedyCompoundWordsToNumberProfile(
     StringReplacement[] textReplacements,
     bool lowercase = false,
     bool removeDiacritics = false,
-    int hundredValue = 100,
-    int scaleThreshold = 1000)
+    long hundredValue = 100,
+    long scaleThreshold = 1000)
 {
     /// <summary>
     /// Gets the token-to-value map used by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    public FrozenDictionary<string, long> CardinalMap { get; } = cardinalMap;
     /// <summary>
     /// Gets the exact ordinal-token map accepted by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> OrdinalMap { get; } = ordinalMap;
+    public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap;
     /// <summary>
     /// Gets the prefixes that mark a negative number phrase.
     /// </summary>
@@ -421,9 +422,9 @@ sealed class GreedyCompoundWordsToNumberProfile(
     /// <summary>
     /// Gets the value that represents a hundred token in the locale.
     /// </summary>
-    public int HundredValue { get; } = hundredValue;
+    public long HundredValue { get; } = hundredValue;
     /// <summary>
     /// Gets the value at or above which tokens are treated as large scales.
     /// </summary>
-    public int ScaleThreshold { get; } = scaleThreshold;
+public long ScaleThreshold { get; } = scaleThreshold;
 }

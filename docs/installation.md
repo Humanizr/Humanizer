@@ -10,7 +10,7 @@ Humanizer is available as a single NuGet package with all supported locale data 
 dotnet add package Humanizer
 ```
 
-This package includes the full Humanizer runtime, all supported locale data, and the shipped analyzers.
+This package includes the full Humanizer runtime, all supported locale data, and the shipped analyzers. Locale data is generated from checked-in YAML and packaged with the main library, so you do not install separate locale packages.
 
 ## Supported Frameworks
 
@@ -25,7 +25,7 @@ Humanizer supports the following .NET target frameworks:
 
 ## Requirements for Humanizer 3.0
 
-Humanizer now ships as a single package, so there is no metapackage or locale satellite restore path to account for during installation.
+Humanizer now ships as a single package, so there is no metapackage or locale satellite restore path to account for during installation. The locale inheritance chain is resolved from the generated data at runtime, so supported locale variants travel with the main package.
 
 ## Source Link Support
 

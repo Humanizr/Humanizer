@@ -6,6 +6,18 @@ namespace Humanizer.Tests;
 [UseCulture("en-US")]
 public class WordsToNumberTests_US
 {
+    [Fact]
+    public void SupportsLongRangeValues_US()
+    {
+        const string words = "two billion one hundred forty seven million four hundred eighty three thousand six hundred forty eight";
+        const long expected = 2147483648L;
+
+        Assert.Equal(expected, words.ToNumber(CultureInfo.CurrentCulture));
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expected, parsedNumber);
+        Assert.Null(unrecognizedWord);
+    }
+
     [Theory]
     [InlineData("zero", 0)]
     [InlineData("one", 1)]
@@ -22,6 +34,8 @@ public class WordsToNumberTests_US
     [InlineData("minus twenty-first", -21)]
     [InlineData("two thousand twenty three", 2023)]
     [InlineData("one million two hundred thirty four thousand five hundred sixty seven", 1234567)]
+    [InlineData("three billion", 3000000000)]
+    [InlineData("negative three billion", -3000000000)]
     [InlineData("one hundred and third", 103)]
     [InlineData("two hundred and first", 201)]
     [InlineData("five thousand and ninth", 5009)]
@@ -33,7 +47,13 @@ public class WordsToNumberTests_US
     [InlineData("negative five", -5)]
     [InlineData("negative one hundred and five", -105)]
     [InlineData("negative twenty-first", -21)]
-    public void ToNumber_US(string words, int expectedNumber) => Assert.Equal(expectedNumber, words.ToNumber(CultureInfo.CurrentCulture));
+    public void ToNumber_US(string words, long expectedNumber) => Assert.Equal(expectedNumber, words.ToNumber(CultureInfo.CurrentCulture));
+
+    [Theory]
+    [InlineData("three billion", 3000000000L)]
+    [InlineData("negative three billion", -3000000000L)]
+    public void ToNumber_US_SupportsLongRangeValues(string words, long expectedNumber) =>
+        Assert.Equal(expectedNumber, words.ToNumber(CultureInfo.CurrentCulture));
 
     [Theory]
     [InlineData("zero", 0, null)]
@@ -51,6 +71,8 @@ public class WordsToNumberTests_US
     [InlineData("minus twenty-first", -21, null)]
     [InlineData("two thousand twenty three", 2023, null)]
     [InlineData("one million two hundred thirty four thousand five hundred sixty seven", 1234567, null)]
+    [InlineData("three billion", 3000000000, null)]
+    [InlineData("negative three billion", -3000000000, null)]
     [InlineData("one hundred and third", 103, null)]
     [InlineData("two hundred and first", 201, null)]
     [InlineData("five thousand and ninth", 5009, null)]
@@ -62,10 +84,20 @@ public class WordsToNumberTests_US
     [InlineData("negative five", -5, null)]
     [InlineData("negative one hundred and five", -105, null)]
     [InlineData("negative twenty-first", -21, null)]
-    public void TryToNumber_ValidInput_US(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    public void TryToNumber_ValidInput_US(string words, long expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(unrecognizedWord, expectedUnrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+
+    [Theory]
+    [InlineData("three billion", 3000000000L, null)]
+    [InlineData("negative three billion", -3000000000L, null)]
+    public void TryToNumber_ValidInput_US_SupportsLongRangeValues(string words, long expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
         Assert.Equal(expectedNumber, parsedNumber);
     }
 
@@ -108,6 +140,8 @@ public class WordsToNumberTests_GB
     [InlineData("minus twenty-first", -21, null)]
     [InlineData("two thousand twenty three", 2023, null)]
     [InlineData("one million two hundred thirty four thousand five hundred sixty seven", 1234567, null)]
+    [InlineData("three billion", 3000000000, null)]
+    [InlineData("negative three billion", -3000000000, null)]
     [InlineData("one hundred and third", 103, null)]
     [InlineData("two hundred and first", 201, null)]
     [InlineData("five thousand and ninth", 5009, null)]
@@ -119,7 +153,7 @@ public class WordsToNumberTests_GB
     [InlineData("negative five", -5, null)]
     [InlineData("negative one hundred and five", -105, null)]
     [InlineData("negative twenty-first", -21, null)]
-    public void TryToNumber_ValidInput_GB(string words, int expectedNumber, string? expectedUnrecognizedWord)
+    public void TryToNumber_ValidInput_GB(string words, long expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(unrecognizedWord, expectedUnrecognizedWord);
@@ -1208,7 +1242,7 @@ public class TokenMapWordsToNumberConverterTests
             {
                 ["foo"] = 2
             }.ToFrozenDictionary(StringComparer.Ordinal),
-            ExactOrdinalMap = new Dictionary<string, int>(StringComparer.Ordinal)
+            ExactOrdinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
             {
                 ["foox"] = 7,
                 ["foo"] = 11
@@ -1443,7 +1477,6 @@ public class WordsToNumberTests_Malay
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("ta")]
     [InlineData("zu-ZA")]
     public void UnsupportedCulturesFallBackToEnglishParser(string cultureName)
     {
@@ -1455,7 +1488,6 @@ public class WordsToNumberTests_NonEnglish
 public class WordsToNumberTests_UnsupportedCultureInput
 {
     [Theory]
-    [InlineData("ta", "ஒன்று", "ஒன்று")]
     [InlineData("zu-ZA", "okukodwa", "okukodwa")]
     public void UnsupportedCultureTryToNumberReturnsFalseForUnrecognizedWords(string cultureName, string words, string unrecognizedWord)
     {
@@ -1464,6 +1496,35 @@ public class WordsToNumberTests_UnsupportedCultureInput
         Assert.False(words.TryToNumber(out var value, culture, out var actualUnrecognizedWord));
         Assert.Equal(0, value);
         Assert.Equal(unrecognizedWord, actualUnrecognizedWord);
+    }
+}
+
+[UseCulture("en-IN")]
+public class WordsToNumberTests_IndianEnglish
+{
+    [Theory]
+    [InlineData("one arab ten lakh one", 1001000001L, null)]
+    [InlineData("forty three kharab twenty five arab one crore seven thousand eighteen", 4325010007018L, null)]
+    [InlineData("one shankh", 100000000000000000L, null)]
+    public void TryToNumber_ValidInput_IndianEnglish(string words, long expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("ta")]
+public class WordsToNumberTests_Tamil
+{
+    [Theory]
+    [InlineData("நூறு கோடியே பத்து இலட்சத்து ஒன்று", 1001000001L, null)]
+    [InlineData("ஒரு கோடியே ஏழாயிரத்து பதினெட்டு", 4325010007018L, null)]
+    public void TryToNumber_ValidInput_Tamil(string words, long expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
     }
 }
 

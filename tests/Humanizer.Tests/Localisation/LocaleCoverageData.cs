@@ -120,7 +120,7 @@ static class LocaleCoverageData
         };
 #endif
 
-    public static TheoryData<string, string, int> WordsToNumberFallbackExpectationTheoryData => CreateWordsToNumberFallbackExpectationTheoryData();
+    public static TheoryData<string, string, long> WordsToNumberUnsupportedExpectationTheoryData => CreateWordsToNumberUnsupportedExpectationTheoryData();
 
     public static CultureSwap UseCulture(string cultureName) => new(new(cultureName));
 
@@ -135,10 +135,10 @@ static class LocaleCoverageData
         return data;
     }
 
-    static TheoryData<string, string, int> CreateWordsToNumberFallbackExpectationTheoryData()
+    static TheoryData<string, string, long> CreateWordsToNumberUnsupportedExpectationTheoryData()
         => new()
         {
-            { "zu-ZA", "one", 1 }
+            { "zu-ZA", "one", 1L }
         };
 
     static string[] GetRegisteredLocales<TRegistry, TLocaliser>()

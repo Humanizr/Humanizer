@@ -22,11 +22,6 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        if (input is > int.MaxValue or < int.MinValue)
-        {
-            throw new NotImplementedException();
-        }
-
         if (input == 0)
         {
             return profile.ZeroWord;
@@ -39,7 +34,7 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
             return profile.MinusWord + " " + Convert(-input, gender);
         }
 
-        var number = (int)input;
+        var number = input;
         var parts = new List<string>(6);
 
         foreach (var scale in profile.Scales)
@@ -67,14 +62,14 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
 
         if (number >= 100)
         {
-            var hundreds = number / 100;
+            var hundreds = (int)(number / 100);
             parts.Add(BuildHundredsPart(hundreds));
             number %= 100;
         }
 
         if (number > 0)
         {
-            parts.Add(BuildUnderOneHundredPart(number, gender, parts.Count > 0));
+            parts.Add(BuildUnderOneHundredPart((int)number, gender, parts.Count > 0));
         }
 
         return string.Join(" ", parts);
@@ -89,7 +84,7 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
     public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
         number.ToString(culture);
 
-    string BuildLargeScalePart(int count, ConstructStateScale scale) =>
+    string BuildLargeScalePart(long count, ConstructStateScale scale) =>
         count switch
         {
             1 => scale.Singular,
@@ -97,9 +92,9 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
             _ => Convert(count, scale.CountGender) + " " + scale.Singular
         };
 
-    string BuildThousandsPart(int thousands)
+    string BuildThousandsPart(long thousands)
     {
-        if (profile.ThousandsSpecialCases.TryGetValue(thousands, out var special))
+        if (thousands <= int.MaxValue && profile.ThousandsSpecialCases.TryGetValue((int)thousands, out var special))
         {
             return special;
         }
@@ -258,7 +253,7 @@ sealed class ConstructStateScaleNumberToWordsProfile(
 /// One descending scale row for <see cref="ConstructStateScaleNumberToWordsConverter"/>.
 /// </summary>
 readonly record struct ConstructStateScale(
-    int Value,
+    long Value,
     string Singular,
     string DualPrefix,
     GrammaticalGender CountGender);

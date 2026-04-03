@@ -2,7 +2,7 @@
 
 This is the practical authoring guide for `src/Humanizer/Locales/*.yml`.
 
-Read this first when you need to add a locale, change a locale, or migrate a locale off a handwritten converter. Read [Locale YAML Reference](./locale-yaml-reference.md) beside it when you need the exhaustive field and strategy inventory.
+Read this first when you need to add a locale, change a locale, or migrate a locale off a residual runtime leaf. Read [Locale YAML Reference](./locale-yaml-reference.md) beside it when you need the exhaustive field and strategy inventory.
 
 ## Mental Model
 
@@ -53,6 +53,9 @@ surfaces:
     words:
       engine: 'conjunctional-scale'
       minusWord: 'minus'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
 ```
 
 Supported top-level blocks are:
@@ -88,6 +91,7 @@ Rules:
 3. Child sequences replace parent sequences.
 4. Child mappings merge with parent mappings.
 5. If the child changes `engine`, the whole mapped surface is treated as a new block.
+6. For supported number locales, do not rely on English fallback when the locale is supposed to provide its own number words or parser.
 
 Use inheritance to express real parent-child relationships. Do not use it to hide unrelated locale behavior.
 
@@ -114,7 +118,6 @@ Use a numeric-slot mapping when the table starts at an offset, has intentional h
 tensMap:
   2: 'twenty'
   3: 'thirty'
-  4: 'forty'
 ```
 
 ```yaml
@@ -133,45 +136,7 @@ Rules:
 
 Do not author lexical tables with placeholder padding.
 
-Do not do this:
-
-```yaml
-unitsMap:
-  - ''
-  - ''
-  - 'two'
-```
-
-```yaml
-tensMap:
-  2: 'twenty'
-```
-
-```yaml
-cardinalMap:
-  null: 0
-```
-
-Do this instead when the locale really uses the literal token `"null"`:
-
-```yaml
-cardinalMap:
-  'null': 0
-```
-
-Why:
-
-1. In lexical tables, a missing numeric slot means "no word at this index".
-2. In token maps, keys are literal input tokens.
-3. YAML keywords such as `null`, `true`, `false`, `yes`, and `no` must be quoted when you mean the literal word rather than the YAML scalar value.
-
 ## Top-Level Block Guide
-
-Every top-level block has the same authoring question:
-
-What locale-owned data does this runtime surface need, and what shared engine should consume it?
-
-Use these sections as ownership rules. If a value feels like it belongs to two blocks, pick the one whose runtime API actually consumes it.
 
 ### `list`
 
@@ -181,26 +146,6 @@ Put here:
 
 - the collection formatter engine
 - the locale-owned conjunction or delimiter token
-
-Do not put here:
-
-- time-unit formatting rules
-- number words
-- punctuation rules unrelated to list joining
-
-Minimal example:
-
-```yaml
-collectionFormatter:
-  engine: 'conjunction'
-  value: 'og'
-```
-
-Checklist:
-
-1. Decide whether the locale uses a built-in shorthand such as `oxford` or a mapped engine.
-2. Put only the actual join word or delimiter token here.
-3. Keep list-joining punctuation here only when the selected collection formatter engine consumes it directly.
 
 ### `formatter`
 
@@ -213,27 +158,6 @@ Put here:
 - grammatical metadata for units
 - data-unit fallback handling
 
-Do not put here:
-
-- number words
-- ordinal words
-- parser tokens
-
-Minimal example:
-
-```yaml
-formatter:
-  engine: 'profiled'
-  dataUnitFallbackTransform: 'trim-trailing-s'
-```
-
-Checklist:
-
-1. Start from the smallest possible formatter block.
-2. Add only the strategy selectors that change runtime resource selection.
-3. Keep resource overrides close to the exact unit or plural forms they affect.
-4. Do not duplicate number words here just because a formatter output happens to contain them.
-
 ### `number.words`
 
 Use this block when the locale supports cardinal or ordinal number rendering through a shared runtime kernel.
@@ -245,32 +169,38 @@ Put here:
 - conjunction and separator words
 - grammatical strategy values required by the engine
 
-Do not put here:
+Supported render engines in current checked-in YAML include:
 
-- parsing-only tokens
-- generator implementation details
-- locale fallback wiring
-
-Authoring order:
-
-1. Pick the engine.
-2. Fill in the required scalar words.
-3. Add lexical tables.
-4. Add scale metadata.
-5. Add only the optional strategy values the engine actually uses.
-
-What usually lives here:
-
-1. Cardinal and ordinal vocabularies used while rendering whole numbers.
-2. Scale rows such as thousand, million, crore, or billion.
-3. Joiners and separators used while composing number phrases.
-4. Gender, form, and ordinal strategy values that materially change composition.
-
-What usually does not live here:
-
-1. Tokens used only while parsing words back into numbers.
-2. Resource-key rules for TimeSpan or byte-size formatters.
-3. Date-only ordinal patterns.
+- `agglutinative-ordinal-scale`
+- `appended-group`
+- `billion-strategy`
+- `conjoined-gendered-scale`
+- `conjunctional-scale`
+- `construct-state-scale`
+- `contextual-decimal`
+- `contracted-one-scale`
+- `east-asian-grouped`
+- `east-slavic`
+- `gendered-scale-ordinal`
+- `harmony-ordinal`
+- `hyphenated-scale`
+- `hyphenated-ordinal`
+- `indian-grouping`
+- `inverted-tens`
+- `joined-scale`
+- `linking-scale`
+- `long-scale-stem-ordinal`
+- `dual-form-scale`
+- `ordinal-prefix-scale`
+- `pluralized-scale`
+- `scale-strategy`
+- `segmented-scale`
+- `south-slavic-cardinal`
+- `terminal-ordinal-scale`
+- `triad-scale`
+- `unit-leading-compound`
+- `variant-decade`
+- `west-slavic-gendered`
 
 ### `number.parse`
 
@@ -283,30 +213,20 @@ Put here:
 - normalization settings
 - negative prefixes and ignored tokens
 
-Do not put here:
+Supported parse engines in current checked-in YAML include:
 
-- rendering-only strings that the parser never consumes
-- formatter configuration
+- `compound-scale`
+- `contracted-scale`
+- `east-asian-positional`
+- `greedy-compound`
+- `inverted-tens`
+- `linking-affix`
+- `prefixed-tens-scale`
+- `suffix-scale`
+- `token-map`
+- `vigesimal-compound`
 
-Authoring order:
-
-1. Pick the engine.
-2. Add the main cardinal token map or positional maps.
-3. Add ordinal and scale maps if the engine supports them.
-4. Add normalization and ignored-token rules last.
-
-What usually lives here:
-
-1. Literal tokens the parser should recognize.
-2. Normalization switches that explain how user input should be cleaned before tokenization.
-3. Scale token lists and multiplier behavior.
-4. Negative markers, ignored filler words, and ordinal parsing support.
-
-What usually does not live here:
-
-1. Render-only forms that are never accepted as input.
-2. Date or formatter metadata.
-3. Generator implementation hints.
+For supported number locales, author `number.parse` alongside `number.words` so the locale can naturally round-trip the same high-range forms in both directions.
 
 ### `ordinal`
 
@@ -318,45 +238,11 @@ Put here:
 - modulo rules
 - gendered ordinal templates
 
-Do not put here:
+The nested forms are:
 
-- full number-to-words data
-- date formatting templates
-
-Checklist:
-
-1. Use `ordinal.numeric` when the locale can ordinalize numeric output without spelling the whole number out.
-2. Prefer a suffix or template engine when the locale only varies by affix or gendered template.
-3. Keep whole-number lexical tables in `number.words`, not here.
-
-### `ordinal.date` and `ordinal.dateOnly`
-
-Use these nested members when the locale needs generated ordinal day rendering for dates.
-
-Put here:
-
-- the date pattern
-- the day rendering mode
-
-Do not put here:
-
-- general date formatting rules
-- month translation tables
-
-Minimal example:
-
-```yaml
-dateToOrdinalWords:
-  pattern: '{day} MMMM yyyy'
-  dayMode: 'Ordinal'
-```
-
-Checklist:
-
-1. Put the finished output shape in `pattern`.
-2. Use `{day}` exactly where the rendered day should appear.
-3. Pick `dayMode` based on whether the locale uses numeric, ordinal, or conditional ordinal day rendering.
-4. Keep month-name ownership in resources or culture data, not in this block.
+- `ordinal.numeric`
+- `ordinal.date`
+- `ordinal.dateOnly`
 
 ### `clock`
 
@@ -367,29 +253,15 @@ Put here:
 - phrase templates for rounded or relative clock output
 - period-of-day words when the engine uses them
 
-Do not put here:
-
-- general time humanization rules
-- number parsing data
-
-If the locale still needs a residual handwritten clock-notation engine, keep the locale name honest. Do not pretend it is generic.
-
-Checklist:
-
-1. Reuse `phrase-hour` when the locale mostly rounds into fixed minute buckets such as quarter past or ten to.
-2. Reuse `relative-hour` when the locale phrases time relative to the current or upcoming hour plus a day-period label.
-3. Keep general time humanization out of this block.
-4. If a locale still needs a handwritten leaf, document why the phrase family does not fit the shared engines yet.
-
 ## Choosing Between A Shared Engine And A New One
 
-Reuse an existing engine when the locale differs only in:
+Reuse an existing engine when:
 
-- words
-- lexical tables
-- scales
-- grammatical metadata
-- strategy enum choices
+- the locale differs only in words
+- the locale differs only in lexical tables
+- the locale differs only in scales
+- the locale differs only in grammatical metadata
+- the locale differs only in strategy enum choices
 
 Add a new shared engine only when:
 

@@ -19,6 +19,11 @@ public sealed partial class HumanizerSourceGenerator
         ImmutableArray<NumberToWordsProfileDefinition> profiles,
         ImmutableDictionary<string, EngineContract> contracts)
     {
+        /// <summary>
+        /// Emits the generated number-to-words profile catalog.
+        /// The catalog preserves the locale-authored high-range scale data and the current
+        /// culture-specific number wording contract.
+        /// </summary>
         readonly ImmutableArray<NumberToWordsProfileDefinition> profiles = profiles;
         readonly ImmutableDictionary<string, EngineContract> contracts = contracts;
 

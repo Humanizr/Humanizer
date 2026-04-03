@@ -310,6 +310,7 @@ surfaces:
   number:
     words:
       engine: 'pluralized-scale'
+      maximumValue: 9223372036854775807
       zeroWord: 'nulis'
       minusWord: 'minus'
       zeroOrdinalStem: 'nulin'
@@ -511,6 +512,18 @@ surfaces:
         milijonai: 1000000
         'milijonų': 1000000
         milijonu: 1000000
+        'milijardas': 1000000000
+        'milijardai': 1000000000
+        'milijardų': 1000000000
+        'trilijonas': 1000000000000
+        'trilijonai': 1000000000000
+        'trilijonų': 1000000000000
+        'kvadrilijonas': 1000000000000000
+        'kvadrilijonai': 1000000000000000
+        'kvadrilijonų': 1000000000000000
+        'kvintilijonas': 1000000000000000000
+        'kvintilijonai': 1000000000000000000
+        'kvintilijonų': 1000000000000000000
       useHundredMultiplier: true
       negativePrefixes:
         - 'minus '

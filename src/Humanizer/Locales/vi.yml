@@ -242,6 +242,15 @@ surfaces:
         9: 'chín'
       scales:
         -
+          value: 1000000000000000000
+          name: 'tỉ tỉ'
+        -
+          value: 1000000000000000
+          name: 'triệu tỉ'
+        -
+          value: 1000000000000
+          name: 'nghìn tỉ'
+        -
           value: 1000000000
           name: 'tỉ'
         -
@@ -287,6 +296,10 @@ surfaces:
         'nghìn': 1000
         'triệu': 1000000
         'tỉ': 1000000000
+      compositeScaleMap:
+        'nghìn tỉ': 1000000000000
+        'triệu tỉ': 1000000000000000
+        'tỉ tỉ': 1000000000000000000
       ordinalMap:
         'nhất': 1
         'nhì': 2

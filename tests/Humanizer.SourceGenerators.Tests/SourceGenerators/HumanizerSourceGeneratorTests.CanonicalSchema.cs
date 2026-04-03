@@ -24,6 +24,15 @@ surfaces:
     relativeDate:
       now: 'now'
       never: 'never'
+  number:
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        one: 1
+        huge: 2147483648
+      ordinalMap:
+        first: 1
 """;
 
         const string childLocale = """
@@ -74,10 +83,25 @@ surfaces:
             .Single(source => source.HintName == "NumberToWordsProfileCatalog.g.cs")
             .SourceText
             .ToString();
+        var wordsToNumberSource = runResult.Results[0].GeneratedSources
+            .Single(source => source.HintName == "WordsToNumberProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+        var parentTokenMapSource = runResult.Results[0].GeneratedSources
+            .Single(source => source.HintName == "TokenMapWordsToNumberConverters.ZzParent.g.cs")
+            .SourceText
+            .ToString();
+        var childTokenMapSource = runResult.Results[0].GeneratedSources
+            .Single(source => source.HintName == "TokenMapWordsToNumberConverters.ZzChild.g.cs")
+            .SourceText
+            .ToString();
 
         Assert.Contains("registry.Register(\"zz-parent\"", registrySource, StringComparison.Ordinal);
         Assert.Contains("\"zz-parent\" => zz_parent", phraseTableSource, StringComparison.Ordinal);
         Assert.Contains("case \"zz-child\": return", numberToWordsSource, StringComparison.Ordinal);
+        Assert.Contains("new Dictionary<string, long>(StringComparer.Ordinal)", wordsToNumberSource, StringComparison.Ordinal);
+        Assert.Contains("[\"huge\"] = 2147483648", parentTokenMapSource, StringComparison.Ordinal);
+        Assert.Contains("[\"huge\"] = 2147483648", childTokenMapSource, StringComparison.Ordinal);
     }
 
     [Fact]

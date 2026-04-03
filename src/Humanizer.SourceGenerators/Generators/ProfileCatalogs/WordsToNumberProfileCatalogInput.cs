@@ -17,6 +17,11 @@ public sealed partial class HumanizerSourceGenerator
 {
     sealed class WordsToNumberProfileCatalogInput(ImmutableArray<WordsToNumberProfileDefinition> profiles)
     {
+        /// <summary>
+        /// Emits the generated words-to-number profile catalog.
+        /// The catalog must stay aligned with the locale-authored writer data so supported locales
+        /// can round-trip their natural high-range forms.
+        /// </summary>
         readonly ImmutableArray<WordsToNumberProfileDefinition> profiles = profiles;
 
         public static WordsToNumberProfileCatalogInput Create(LocaleCatalogInput localeCatalog)

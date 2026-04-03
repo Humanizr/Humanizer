@@ -34,8 +34,8 @@ static class TokenMapWordsToNumberOrdinalMapBuilder
     /// <param name="numberToWordsKind">The locale-specific number-to-words kind to resolve.</param>
     /// <param name="normalizationProfile">The normalization profile used to canonicalize ordinals.</param>
     /// <param name="genderVariant">Which grammatical gender forms should be included.</param>
-    /// <returns>A frozen dictionary that maps normalized ordinal text to integers.</returns>
-    public static FrozenDictionary<string, int> Build(
+    /// <returns>A frozen dictionary that maps normalized ordinal text to numeric values.</returns>
+    public static FrozenDictionary<string, long> Build(
         string numberToWordsKind,
         TokenMapNormalizationProfile normalizationProfile,
         TokenMapOrdinalGenderVariant genderVariant) =>
@@ -50,13 +50,13 @@ static class TokenMapWordsToNumberOrdinalMapBuilder
     /// <param name="converter">The number-to-words converter used to render ordinals.</param>
     /// <param name="normalizationProfile">The normalization profile used to canonicalize ordinals.</param>
     /// <param name="genderVariant">Which grammatical gender forms should be included.</param>
-    /// <returns>A frozen dictionary that maps normalized ordinal text to integers.</returns>
-    public static FrozenDictionary<string, int> Build(
+    /// <returns>A frozen dictionary that maps normalized ordinal text to numeric values.</returns>
+    public static FrozenDictionary<string, long> Build(
         INumberToWordsConverter converter,
         TokenMapNormalizationProfile normalizationProfile,
         TokenMapOrdinalGenderVariant genderVariant)
     {
-        var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
+        var ordinals = new Dictionary<string, long>(StringComparer.Ordinal);
 
         for (var number = 1; number <= 200; number++)
         {

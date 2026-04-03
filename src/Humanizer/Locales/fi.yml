@@ -261,6 +261,21 @@ surfaces:
         2: 'kahdes'
       scales:
         -
+          value: 1000000000000000000
+          singularCardinal: 'triljoona'
+          pluralCardinal: 'triljoonaa'
+          ordinalWord: 'triljoonas'
+        -
+          value: 1000000000000000
+          singularCardinal: 'biljardi'
+          pluralCardinal: 'biljardia'
+          ordinalWord: 'biljardis'
+        -
+          value: 1000000000000
+          singularCardinal: 'biljoona'
+          pluralCardinal: 'biljoonaa'
+          ordinalWord: 'biljoonas'
+        -
           value: 1000000000
           singularCardinal: 'miljardi'
           pluralCardinal: 'miljardia'
@@ -312,7 +327,25 @@ surfaces:
         miljoonaa: 1000000
         miljardi: 1000000000
         miljardia: 1000000000
+        biljoona: 1000000000000
+        biljoonaa: 1000000000000
+        biljardi: 1000000000000000
+        biljardia: 1000000000000000
+        triljoona: 1000000000000000000
+        triljoonaa: 1000000000000000000
       scales:
+        -
+          singular: 'triljoona'
+          plural: 'triljoonaa'
+          value: 1000000000000000000
+        -
+          singular: 'biljardi'
+          plural: 'biljardia'
+          value: 1000000000000000
+        -
+          singular: 'biljoona'
+          plural: 'biljoonaa'
+          value: 1000000000000
         -
           singular: 'miljardi'
           plural: 'miljardia'

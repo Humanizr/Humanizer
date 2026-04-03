@@ -519,6 +519,11 @@ public sealed partial class HumanizerSourceGenerator
             ? CreateStringIntFrozenDictionaryExpression(property)
             : "null";
 
+    static string CreateOptionalStringLongFrozenDictionaryExpression(JsonElement element, string propertyName) =>
+        element.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.Object
+            ? CreateStringLongFrozenDictionaryExpression(property)
+            : "null";
+
     static string CreateStringIntFrozenDictionaryExpression(JsonElement objectElement) =>
         CreateStringNumberFrozenDictionaryExpression(objectElement, "int", static value => checked((int)value));
 
@@ -1104,7 +1109,7 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "ConstructStateScale",
             arrayElement,
-            element => checked((int)GetRequiredInt64(element, "value")).ToString(CultureInfo.InvariantCulture),
+            RequiredInt64Value("value"),
             RequiredStringValue("singular"),
             RequiredStringValue("dualPrefix"),
             RequiredEnumValue("countGender", "GrammaticalGender"));
@@ -1309,7 +1314,7 @@ public sealed partial class HumanizerSourceGenerator
                                  throw new InvalidOperationException($"Prefixed scale token '{property.Name}' must map to an integer value.");
                              }
 
-                             return (property.Name, Value: checked((int)value));
+                              return (property.Name, Value: value);
                          })
                          .OrderByDescending(static entry => entry.Value)
                          .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
@@ -1344,7 +1349,7 @@ public sealed partial class HumanizerSourceGenerator
                 builder.Append("new(");
                 builder.Append(QuoteLiteral(GetRequiredString(item, "token")));
                 builder.Append(", ");
-                builder.Append(checked((int)GetRequiredInt64(item, "value")).ToString(CultureInfo.InvariantCulture));
+                builder.Append(GetRequiredInt64(item, "value").ToString(CultureInfo.InvariantCulture));
                 builder.Append(')');
                 first = false;
             }
@@ -1374,7 +1379,7 @@ public sealed partial class HumanizerSourceGenerator
                                  throw new InvalidOperationException($"Prefixed tens prefix '{property.Name}' must map to an integer base value.");
                              }
 
-                             return (property.Name, Value: checked((int)value));
+                              return (property.Name, Value: value);
                          })
                          .OrderByDescending(static entry => entry.Name.Length)
                          .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
@@ -1409,7 +1414,7 @@ public sealed partial class HumanizerSourceGenerator
                 builder.Append("new(");
                 builder.Append(QuoteLiteral(GetRequiredString(item, "prefix")));
                 builder.Append(", ");
-                builder.Append(checked((int)GetRequiredInt64(item, "baseValue")).ToString(CultureInfo.InvariantCulture));
+                builder.Append(GetRequiredInt64(item, "baseValue").ToString(CultureInfo.InvariantCulture));
                 builder.Append(')');
                 first = false;
             }
@@ -1449,6 +1454,36 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
+    static string CreateLongFrozenSetExpression(JsonElement arrayElement)
+    {
+        if (arrayElement.ValueKind != JsonValueKind.Array)
+        {
+            throw new InvalidOperationException("Expected JSON array.");
+        }
+
+        var builder = new StringBuilder("new long[] { ");
+        var first = true;
+
+        foreach (var item in arrayElement.EnumerateArray())
+        {
+            if (item.ValueKind != JsonValueKind.Number || !item.TryGetInt64(out var value))
+            {
+                continue;
+            }
+
+            if (!first)
+            {
+                builder.Append(", ");
+            }
+
+            builder.Append(value.ToString(CultureInfo.InvariantCulture));
+            first = false;
+        }
+
+        builder.Append(" }.ToFrozenSet()");
+        return builder.ToString();
+    }
+
     static string CreateWordsOrdinalMapExpression(JsonElement root, string builderMethodName)
     {
         if (root.TryGetProperty("ordinalNumberToWordsKind", out var ordinalProfile) && ordinalProfile.ValueKind == JsonValueKind.String)
@@ -1459,8 +1494,8 @@ public sealed partial class HumanizerSourceGenerator
         }
 
         return root.TryGetProperty("ordinalMap", out var ordinalMap) && ordinalMap.ValueKind == JsonValueKind.Object
-            ? CreateStringIntFrozenDictionaryExpression(ordinalMap)
-            : "new Dictionary<string, int>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)";
+            ? CreateStringLongFrozenDictionaryExpression(ordinalMap)
+            : "new Dictionary<string, long>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)";
     }
 
     static string CreateOptionalSequenceMultiplierThreshold(JsonElement root)

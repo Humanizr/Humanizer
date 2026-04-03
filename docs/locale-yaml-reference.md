@@ -31,6 +31,7 @@ They are not parsed at runtime.
 5. Unknown top-level keys are rejected by the generator.
 6. Locale words, switches, tables, and strategy choices belong here.
 7. Generator implementation contracts do not belong here.
+8. Supported number locales should describe both `number.words` and `number.parse` so the locale can round-trip naturally written forms.
 
 ## Merge Rules
 
@@ -252,6 +253,8 @@ Purpose:
 - feeds the generated number-to-words profile catalog
 - should contain words, lexical tables, scale rows, and structural strategy choices used while producing text from numbers
 
+For supported locales, `number.words` is the writer half of the number contract and should be planned together with `number.parse`.
+
 Supported engines in current checked-in YAML:
 
 - `agglutinative-ordinal-scale`
@@ -292,6 +295,8 @@ Purpose:
 - owns parse-side number lexicons and normalization settings
 - feeds the generated words-to-number profile catalog or token-map lexicon generator
 - should contain only input-facing tokens and parser behavior, not render-only vocabulary that users never type or speak
+
+For supported locales, `number.parse` is the parser half of the same number contract and should accept the same natural forms that `number.words` emits.
 
 Supported engines in current checked-in YAML:
 
@@ -496,7 +501,7 @@ These are the non-lexical option values that currently appear in checked-in loca
 
 ## Date And Ordinal Blocks
 
-### `dateToOrdinalWords` and `dateOnlyToOrdinalWords`
+### `ordinal.date` and `ordinal.dateOnly`
 
 Fields:
 
@@ -508,7 +513,7 @@ Notes:
 - `pattern` is a normal output template that must include `{day}` where the formatted day should appear.
 - `dayMode` controls whether the day is numeric, ordinal, or conditionally ordinal.
 - `pattern` is the owning block's complete output template; the generator does not infer extra punctuation or month placement for you.
-- if a locale has both `dateToOrdinalWords` and `dateOnlyToOrdinalWords`, document the reason in the locale file comments because most locales either share the same pattern family or omit one of the two blocks.
+- if a locale has both `ordinal.date` and `ordinal.dateOnly`, document the reason in the locale file comments because most locales either share the same pattern family or omit one of the two blocks.
 
 ### `ordinalizer: modulo-suffix`
 

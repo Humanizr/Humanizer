@@ -42,8 +42,10 @@ public sealed partial class HumanizerSourceGenerator
     }
 
     /// <summary>
-    /// Parses locale YAML once, resolves locale inheritance, and exposes locale-owned feature data
-    /// to the profile catalogs, token-map generator, and registry generator.
+    /// Parses locale YAML once, resolves <c>variantOf</c> inheritance, and exposes locale-owned
+    /// feature data to the profile catalogs, token-map generator, and registry generator.
+    /// Supported non-English locales are expected to inherit from localized parents rather than
+    /// falling back across languages for number surfaces.
     /// </summary>
     internal sealed class LocaleCatalogInput(
         ImmutableArray<ResolvedLocaleDefinition> locales,
@@ -141,6 +143,8 @@ public sealed partial class HumanizerSourceGenerator
 
             // Resolve inheritance once at the catalog boundary so every downstream generator sees a
             // fully merged locale payload instead of reimplementing merge semantics independently.
+            // That keeps supported locale variants on the localized parent chain instead of
+            // allowing each generator to guess its own fallback behavior.
             var resolvedLocales = ImmutableArray.CreateBuilder<ResolvedLocaleDefinition>();
             var resolving = new HashSet<string>(StringComparer.Ordinal);
             foreach (var localeCode in parsedLocales.Keys.OrderBy(static locale => locale, StringComparer.Ordinal))

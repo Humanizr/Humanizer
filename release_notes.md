@@ -49,6 +49,10 @@
 
 # vNext
 
+- Locale data now comes from checked-in YAML under `src/Humanizer/Locales` and is generated into the main `Humanizer` package.
+- High-range number support now includes locale-native `ToWords(long)` and `ToNumber(string)` coverage for supported locales, including English-family differences such as `en-GB` and `en-IN`.
+- The analyzer and namespace migration guidance now matches the bundled single-package layout.
+
 ### v2.1 - 2016-07-04
 
 [Fixed issues](https://github.com/Humanizr/Humanizer/issues?q=is%3Aclosed+milestone%3Av2.1)

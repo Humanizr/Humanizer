@@ -12,7 +12,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     readonly PrefixedTensScaleWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -23,11 +23,11 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -51,9 +51,15 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
 
         normalized = CollapseCompoundSeparators(normalized);
 
-        if (int.TryParse(normalized, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue) ||
-            TryParseCardinal(normalized, out parsedValue))
+        var value = default(long);
+        if (long.TryParse(normalized, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue) ||
+            TryParseCardinal(normalized, out value))
         {
+            if (parsedValue == default && value != default)
+            {
+                parsedValue = value;
+            }
+
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -72,9 +78,9 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     /// Parses a normalized and separator-collapsed cardinal phrase.
     /// </summary>
     /// <param name="word">The normalized phrase to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string word, out int value)
+    bool TryParseCardinal(string word, out long value)
     {
         if (string.IsNullOrEmpty(word))
         {
@@ -100,7 +106,7 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
 
             var left = word[..index];
             var right = word[(index + scale.Token.Length)..];
-            var factor = 1;
+            var factor = 1L;
 
             if (!string.IsNullOrEmpty(left) && !TryParseCardinal(left, out factor))
             {
@@ -112,8 +118,8 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                 continue;
             }
 
-            value = checked(factor * scale.Value + remainder);
-            return true;
+                value = checked(factor * scale.Value + remainder);
+                return true;
         }
 
         // Prefix rules only accept 1..9 as their suffix because the prefix already contributes the
@@ -161,9 +167,9 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
     /// Parses an optional remainder after a scale or prefix token.
     /// </summary>
     /// <param name="word">The remainder to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string word, out int value)
+    bool TryParseOptional(string word, out long value)
     {
         if (string.IsNullOrEmpty(word))
         {
@@ -219,8 +225,8 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
 /// Immutable locale data used by <see cref="PrefixedTensScaleWordsToNumberConverter"/>.
 /// </summary>
 sealed class PrefixedTensScaleWordsToNumberProfile(
-    FrozenDictionary<string, int> cardinalMap,
-    FrozenDictionary<string, int> tensMap,
+    FrozenDictionary<string, long> cardinalMap,
+    FrozenDictionary<string, long> tensMap,
     PrefixedScaleWord[] scales,
     PrefixedTensRule[] prefixedTens,
     string[] negativePrefixes)
@@ -228,11 +234,11 @@ sealed class PrefixedTensScaleWordsToNumberProfile(
     /// <summary>
     /// Gets the token-to-value map used by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    public FrozenDictionary<string, long> CardinalMap { get; } = cardinalMap;
     /// <summary>
     /// Gets the tens tokens and their numeric values.
     /// </summary>
-    public FrozenDictionary<string, int> TensMap { get; } = tensMap;
+    public FrozenDictionary<string, long> TensMap { get; } = tensMap;
     /// <summary>
     /// Gets the scale words that can appear inside prefixed compounds.
     /// </summary>
@@ -250,9 +256,9 @@ sealed class PrefixedTensScaleWordsToNumberProfile(
 /// <summary>
 /// Represents a scale token that may appear as part of a glued prefix compound.
 /// </summary>
-readonly record struct PrefixedScaleWord(string Token, int Value);
+readonly record struct PrefixedScaleWord(string Token, long Value);
 
 /// <summary>
 /// Represents a locale-specific prefix that yields a base value when followed by a unit token.
 /// </summary>
-readonly record struct PrefixedTensRule(string Prefix, int BaseValue);
+readonly record struct PrefixedTensRule(string Prefix, long BaseValue);

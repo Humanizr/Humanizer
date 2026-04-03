@@ -322,6 +322,9 @@ surfaces:
         bin: 1000
         milyon: 1000000
         milyar: 1000000000
+        trilyon: 1000000000000
+        katrilyon: 1000000000000000
+        kentilyon: 1000000000000000000
       ordinalNumberToWordsKind: 'self'
       ordinalGenderVariant: 'none'
       useHundredMultiplier: true

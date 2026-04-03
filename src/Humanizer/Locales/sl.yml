@@ -367,6 +367,33 @@ surfaces:
       feminineTwo: 'dve'
       scales:
         -
+          value: 1000000000000000000
+          gender: 'masculine'
+          oneForm: 'trilijon'
+          singular: 'trilijon'
+          paucal: 'trilijona'
+          dual: 'trilijona'
+          trialQuadral: 'trilijone'
+          plural: 'trilijonov'
+        -
+          value: 1000000000000000
+          gender: 'feminine'
+          oneForm: 'bilijarda'
+          singular: 'bilijarda'
+          paucal: 'bilijarde'
+          dual: 'bilijarde'
+          trialQuadral: 'bilijarde'
+          plural: 'bilijard'
+        -
+          value: 1000000000000
+          gender: 'masculine'
+          oneForm: 'bilijon'
+          singular: 'bilijon'
+          paucal: 'bilijona'
+          dual: 'bilijona'
+          trialQuadral: 'bilijone'
+          plural: 'bilijonov'
+        -
           value: 1000000000
           gender: 'feminine'
           oneForm: 'milijarda'
@@ -453,6 +480,15 @@ surfaces:
         milijonov: 1000000
         milijarda: 1000000000
         milijardi: 1000000000
+        bilijon: 1000000000000
+        bilijona: 1000000000000
+        bilijonov: 1000000000000
+        bilijarda: 1000000000000000
+        bilijarde: 1000000000000000
+        bilijard: 1000000000000000
+        trilijon: 1000000000000000000
+        trilijona: 1000000000000000000
+        trilijonov: 1000000000000000000
       unitMap:
         en: 1
         ena: 1

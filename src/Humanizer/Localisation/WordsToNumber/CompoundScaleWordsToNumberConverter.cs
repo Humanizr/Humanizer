@@ -9,7 +9,7 @@ namespace Humanizer;
 ///
 /// The parser normalizes the input, strips a configured negative prefix, then resolves either an
 /// exact ordinal token or a cardinal phrase assembled from token groups and scale multipliers.
-/// The end result should be the integer value the locale phrase denotes, not merely a best-effort
+/// The end result should be the numeric value the locale phrase denotes, not merely a best-effort
 /// token sum.
 /// </summary>
 internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
@@ -17,7 +17,7 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     readonly CompoundScaleWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -28,11 +28,11 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -58,9 +58,10 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
 
         // Ordinal spellings are checked before the cardinal parser so exact forms like "twelfth"
         // are not split into an unrelated cardinal phrase.
-        if (profile.OrdinalMap.TryGetValue(normalized, out parsedValue) ||
-            TryParseCardinal(normalized, out parsedValue))
+        if (profile.OrdinalMap.TryGetValue(normalized, out var value) ||
+            TryParseCardinal(normalized, out value))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -80,9 +81,9 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     /// large-scale words.
     /// </summary>
     /// <param name="words">A normalized, lowercase phrase with punctuation already removed.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out int value)
+    bool TryParseCardinal(string words, out long value)
     {
         if (profile.CardinalMap.TryGetValue(words, out value))
         {
@@ -91,8 +92,8 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
 
         if (words.Contains(' '))
         {
-            var total = 0;
-            var current = 0;
+            long total = 0;
+            long current = 0;
 
             // Multi-token phrases are reduced left to right. Small tokens accumulate into the
             // current group, while scale tokens flush the current group into the total using the
@@ -114,21 +115,21 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
 
                 if (tokenValue >= 1000)
                 {
-                    total += (current == 0 ? 1 : current) * tokenValue;
+                    total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
                     current = 0;
                 }
                 else if (profile.SequenceMultiplierThreshold.HasValue &&
                          tokenValue >= profile.SequenceMultiplierThreshold.Value)
                 {
-                    current = (current == 0 ? 1 : current) * tokenValue;
+                    current = checked((current == 0 ? 1 : current) * tokenValue);
                 }
                 else
                 {
-                    current += tokenValue;
+                    current = checked(current + tokenValue);
                 }
             }
 
-            value = total + current;
+            value = checked(total + current);
             return true;
         }
 
@@ -146,12 +147,12 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
 
             var left = words[..index].Trim();
             var right = words[(index + scale.Length)..].Trim();
-            var factor = 1;
+            long factor = 1;
 
             if ((string.IsNullOrEmpty(left) || TryParseCardinal(left, out factor)) &&
                 TryParseOptional(right, out var remainder))
             {
-                value = factor * profile.CardinalMap[scale] + remainder;
+                value = checked(checked(factor * profile.CardinalMap[scale]) + remainder);
                 return true;
             }
         }
@@ -175,7 +176,7 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
 
             if (TryParseCardinal(remainder, out var unit) && unit is >= 1 and <= 9)
             {
-                value = profile.CardinalMap[tens] + unit;
+                value = checked(profile.CardinalMap[tens] + unit);
                 return true;
             }
         }
@@ -190,7 +191,7 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     /// <param name="words">The remainder text following a scale token.</param>
     /// <param name="value">When this method returns, the parsed remainder value.</param>
     /// <returns><c>true</c> if the remainder is empty or parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseOptional(string words, out int value)
+    bool TryParseOptional(string words, out long value)
     {
         if (string.IsNullOrEmpty(words))
         {
@@ -235,9 +236,9 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
     /// </summary>
     /// <param name="converter">The number-to-words converter used to render ordinals.</param>
     /// <returns>A frozen map from normalized ordinal text to the corresponding integer.</returns>
-    internal static FrozenDictionary<string, int> BuildOrdinalMap(INumberToWordsConverter converter)
+    internal static FrozenDictionary<string, long> BuildOrdinalMap(INumberToWordsConverter converter)
     {
-        var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
+        var ordinals = new Dictionary<string, long>(StringComparer.Ordinal);
 
         // This generation-time bridge lets parsing reuse an existing ordinal renderer when the
         // locale would otherwise have to duplicate hundreds of ordinal spellings in YAML.
@@ -254,18 +255,18 @@ internal class CompoundScaleWordsToNumberConverter(CompoundScaleWordsToNumberPro
 /// Immutable locale data for <see cref="CompoundScaleWordsToNumberConverter"/>.
 /// </summary>
 sealed class CompoundScaleWordsToNumberProfile(
-    FrozenDictionary<string, int> cardinalMap,
+    FrozenDictionary<string, long> cardinalMap,
     string[] tens,
     string[] largeScales,
     string ignoredToken,
-    FrozenDictionary<string, int> ordinalMap,
+    FrozenDictionary<string, long> ordinalMap,
     string[] negativePrefixes,
-    int? sequenceMultiplierThreshold = null)
+    long? sequenceMultiplierThreshold = null)
 {
     /// <summary>
     /// Gets the exact token-to-value map for cardinal words and scale words.
     /// </summary>
-    public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    public FrozenDictionary<string, long> CardinalMap { get; } = cardinalMap;
 
     /// <summary>
     /// Gets the ordered tens stems that may participate in glued compounds.
@@ -285,7 +286,7 @@ sealed class CompoundScaleWordsToNumberProfile(
     /// <summary>
     /// Gets the exact ordinal-token map accepted by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> OrdinalMap { get; } = ordinalMap;
+    public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap;
 
     /// <summary>
     /// Gets the prefixes that mark a negative number phrase.
@@ -295,5 +296,5 @@ sealed class CompoundScaleWordsToNumberProfile(
     /// <summary>
     /// Gets the threshold above which adjacent values should multiply instead of simply adding.
     /// </summary>
-    public int? SequenceMultiplierThreshold { get; } = sequenceMultiplierThreshold;
+public long? SequenceMultiplierThreshold { get; } = sequenceMultiplierThreshold;
 }

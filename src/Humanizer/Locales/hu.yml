@@ -341,6 +341,9 @@ surfaces:
         ezer: 1000
         millio: 1000000
         milliard: 1000000000
+        billio: 1000000000000
+        billiard: 1000000000000000
+        trillio: 1000000000000000000
       tensMap:
         harminc: 30
         negyven: 40
@@ -350,6 +353,9 @@ surfaces:
         nyolcvan: 80
         kilencven: 90
       scales:
+        trillio: 1000000000000000000
+        billiard: 1000000000000000
+        billio: 1000000000000
         milliard: 1000000000
         millio: 1000000
         ezer: 1000

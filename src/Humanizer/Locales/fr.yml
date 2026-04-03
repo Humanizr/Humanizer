@@ -323,6 +323,12 @@ surfaces:
         millions: 1000000
         milliard: 1000000000
         milliards: 1000000000
+        billion: 1000000000000
+        billions: 1000000000000
+        billiard: 1000000000000000
+        billiards: 1000000000000000
+        trillion: 1000000000000000000
+        trillions: 1000000000000000000
       ordinalMap:
         premier: 1
         'première': 1

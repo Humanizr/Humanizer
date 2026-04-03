@@ -273,6 +273,24 @@ surfaces:
       unitTensJoiner: ' en '
       scales:
         -
+          value: 1000000000000000000
+          oneForm: 'een triljoen'
+          manyForm: 'triljoene'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000000
+          oneForm: 'een biljard'
+          manyForm: 'biljarde'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000
+          oneForm: 'een biljoen'
+          manyForm: 'biljoene'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
           value: 1000000000
           oneForm: 'een miljard'
           manyForm: 'miljard'
@@ -343,6 +361,12 @@ surfaces:
         duisend: 1000
         miljoen: 1000000
         miljard: 1000000000
+        biljoen: 1000000000000
+        biljoene: 1000000000000
+        biljard: 1000000000000000
+        biljarde: 1000000000000000
+        triljoen: 1000000000000000000
+        triljoene: 1000000000000000000
       useHundredMultiplier: true
       negativePrefixes:
         - 'minus '

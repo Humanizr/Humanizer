@@ -8,7 +8,7 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
     readonly VigesimalCompoundWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -19,11 +19,11 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -45,9 +45,10 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
             break;
         }
 
-        if (profile.OrdinalMap.TryGetValue(normalized, out parsedValue) ||
-            TryParseCardinal(normalized, out parsedValue, out unrecognizedWord))
+        if (profile.OrdinalMap.TryGetValue(normalized, out var value) ||
+            TryParseCardinal(normalized, out value, out unrecognizedWord))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -65,13 +66,13 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
     /// Parses a normalized cardinal phrase that may contain vigesimal and teen compounds.
     /// </summary>
     /// <param name="words">A normalized phrase ready for tokenization.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token that was not recognized.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out int value, out string? unrecognizedWord)
+    bool TryParseCardinal(string words, out long value, out string? unrecognizedWord)
     {
-        var total = 0;
-        var current = 0;
+        long total = 0;
+        long current = 0;
         unrecognizedWord = null;
         var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
         string? pendingToken = null;
@@ -92,7 +93,7 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
             {
                 if (IsVigesimalFollower(vigesimalFollower))
                 {
-                    current += profile.VigesimalValue;
+                    current = checked(current + profile.VigesimalValue);
                     continue;
                 }
 
@@ -105,7 +106,7 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
             {
                 if (profile.CardinalMap.TryGetValue(teenToken, out var teenPart) && teenPart is >= 1 and <= 9)
                 {
-                    current += profile.TeenBaseValue + teenPart;
+                    current = checked(current + checked(profile.TeenBaseValue + teenPart));
                     continue;
                 }
 
@@ -121,20 +122,20 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
 
             if (numeric == profile.HundredValue)
             {
-                current = (current == 0 ? 1 : current) * numeric;
+                current = checked((current == 0 ? 1 : current) * numeric);
             }
             else if (numeric >= profile.ScaleThreshold)
             {
-                total += (current == 0 ? 1 : current) * numeric;
+                total = checked(total + checked((current == 0 ? 1 : current) * numeric));
                 current = 0;
             }
             else
             {
-                current += numeric;
+                current = checked(current + numeric);
             }
         }
 
-        value = total + current;
+        value = checked(total + current);
         return true;
     }
 
@@ -179,27 +180,27 @@ internal class VigesimalCompoundWordsToNumberConverter(VigesimalCompoundWordsToN
 /// Immutable locale data used by <see cref="VigesimalCompoundWordsToNumberConverter"/>.
 /// </summary>
 sealed class VigesimalCompoundWordsToNumberProfile(
-    FrozenDictionary<string, int> cardinalMap,
-    FrozenDictionary<string, int> ordinalMap,
+    FrozenDictionary<string, long> cardinalMap,
+    FrozenDictionary<string, long> ordinalMap,
     string[] negativePrefixes,
     string[] ignoredTokens,
     string vigesimalLeadingToken,
     string[] vigesimalFollowerTokens,
-    int vigesimalValue,
+    long vigesimalValue,
     string teenLeaderToken,
-    FrozenSet<int> teenLeaderBases,
-    int teenBaseValue = 10,
-    int hundredValue = 100,
-    int scaleThreshold = 1000)
+    FrozenSet<long> teenLeaderBases,
+    long teenBaseValue = 10,
+    long hundredValue = 100,
+    long scaleThreshold = 1000)
 {
     /// <summary>
     /// Gets the token-to-value map used by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    public FrozenDictionary<string, long> CardinalMap { get; } = cardinalMap;
     /// <summary>
     /// Gets the exact ordinal-token map accepted by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> OrdinalMap { get; } = ordinalMap;
+    public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap;
     /// <summary>
     /// Gets the prefixes that mark a negative number phrase.
     /// </summary>
@@ -219,7 +220,7 @@ sealed class VigesimalCompoundWordsToNumberProfile(
     /// <summary>
     /// Gets the value contributed by the vigesimal leader.
     /// </summary>
-    public int VigesimalValue { get; } = vigesimalValue;
+    public long VigesimalValue { get; } = vigesimalValue;
     /// <summary>
     /// Gets the token that introduces a teen compound after a base value.
     /// </summary>
@@ -227,17 +228,17 @@ sealed class VigesimalCompoundWordsToNumberProfile(
     /// <summary>
     /// Gets the base values that can legally precede the teen leader token.
     /// </summary>
-    public FrozenSet<int> TeenLeaderBases { get; } = teenLeaderBases;
+    public FrozenSet<long> TeenLeaderBases { get; } = teenLeaderBases;
     /// <summary>
     /// Gets the base value used for teen compounds.
     /// </summary>
-    public int TeenBaseValue { get; } = teenBaseValue;
+    public long TeenBaseValue { get; } = teenBaseValue;
     /// <summary>
     /// Gets the value that represents a hundred token in the locale.
     /// </summary>
-    public int HundredValue { get; } = hundredValue;
+    public long HundredValue { get; } = hundredValue;
     /// <summary>
     /// Gets the value at or above which tokens are treated as large scales.
     /// </summary>
-    public int ScaleThreshold { get; } = scaleThreshold;
+public long ScaleThreshold { get; } = scaleThreshold;
 }

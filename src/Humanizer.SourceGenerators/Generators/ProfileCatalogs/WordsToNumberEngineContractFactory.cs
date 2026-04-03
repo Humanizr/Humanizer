@@ -44,7 +44,7 @@ public sealed partial class HumanizerSourceGenerator
             // interpretation and sequence-multiplier heuristics on top. The generator emits those
             // pieces directly so the runtime parser only walks tokens.
             return "new CompoundScaleWordsToNumberConverter(new CompoundScaleWordsToNumberProfile(" +
-                CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
+                CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
                 CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "tens")) + ", " +
                 CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "largeScales")) + ", " +
                 QuoteLiteral(GetOptionalString(root, "ignoredToken") ?? string.Empty) + ", " +
@@ -57,25 +57,25 @@ public sealed partial class HumanizerSourceGenerator
         static string CreateContractedScaleExpression(JsonElement root) =>
             "new ContractedScaleWordsToNumberConverter(new ContractedScaleWordsToNumberProfile(" +
             QuoteLiteral(GetRequiredString(root, "minusWord")) + ", " +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) +
             "))";
 
         static string CreateEastAsianPositionalExpression(JsonElement root) =>
             "new EastAsianPositionalWordsToNumberConverter(new EastAsianPositionalWordsToNumberProfile(" +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "digits")) + ", " +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "smallUnits")) + ", " +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "largeUnits")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "digits")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "smallUnits")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "largeUnits")) + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
             QuoteLiteral(GetOptionalString(root, "ordinalPrefix") ?? string.Empty) + ", " +
             QuoteLiteral(GetOptionalString(root, "ordinalSuffix") ?? string.Empty) + ", " +
-            CreateOptionalStringIntFrozenDictionaryExpression(root, "ordinalMap") +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") +
             "))";
 
         static string CreateGreedyCompoundExpression(WordsToNumberProfileDefinition profile)
         {
             var root = profile.Root;
             return "new GreedyCompoundWordsToNumberConverter(new GreedyCompoundWordsToNumberProfile(" +
-                CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
+                CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
                 CreateGreedyCompoundOrdinalMapExpression(profile) + ", " +
                 CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
                 CreateOptionalStringArrayExpression(root, "ignoredTokens") + ", " +
@@ -92,8 +92,8 @@ public sealed partial class HumanizerSourceGenerator
 
         static string CreateInvertedTensExpression(JsonElement root) =>
             "new InvertedTensWordsToNumberConverter(new InvertedTensWordsToNumberProfile(" +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "unitMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "unitMap")) + ", " +
             CreateInvertedTensTokenArrayExpression(EngineContractUtilities.GetRequiredElement(root, "tensTokens")) + ", " +
             QuoteLiteral(GetRequiredString(root, "tensLinker")) + ", " +
             CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scaleTokens")) + ", " +
@@ -107,9 +107,9 @@ public sealed partial class HumanizerSourceGenerator
 
         static string CreateLinkingAffixExpression(JsonElement root) =>
             "new LinkingAffixWordsToNumberConverter(new LinkingAffixWordsToNumberProfile(" +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
             QuoteLiteral(GetRequiredString(root, "teenPrefix")) + ", " +
-            checked((int)GetRequiredInt64(root, "teenBaseValue")).ToString(CultureInfo.InvariantCulture) + ", " +
+            GetRequiredInt64(root, "teenBaseValue").ToString(CultureInfo.InvariantCulture) + ", " +
             CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "linkedSuffixes")) + ", " +
             CreateOptionalStringArrayExpression(root, "ignoredTokens") + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
@@ -117,8 +117,8 @@ public sealed partial class HumanizerSourceGenerator
 
         static string CreatePrefixedTensScaleExpression(JsonElement root) =>
             "new PrefixedTensScaleWordsToNumberConverter(new PrefixedTensScaleWordsToNumberProfile(" +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "tensMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "tensMap")) + ", " +
             CreatePrefixedScaleWordArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
             CreatePrefixedTensRuleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "prefixedTens")) + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
@@ -138,15 +138,15 @@ public sealed partial class HumanizerSourceGenerator
 
         static string CreateVigesimalCompoundExpression(JsonElement root) =>
             "new VigesimalCompoundWordsToNumberConverter(new VigesimalCompoundWordsToNumberProfile(" +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
-            CreateStringIntFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "ordinalMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "ordinalMap")) + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
             CreateOptionalStringArrayExpression(root, "ignoredTokens") + ", " +
             QuoteLiteral(GetRequiredString(root, "vigesimalLeadingToken")) + ", " +
             CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "vigesimalFollowerTokens")) + ", " +
-            checked((int)GetRequiredInt64(root, "vigesimalValue")).ToString(CultureInfo.InvariantCulture) + ", " +
+            GetRequiredInt64(root, "vigesimalValue").ToString(CultureInfo.InvariantCulture) + ", " +
             QuoteLiteral(GetRequiredString(root, "teenLeaderToken")) + ", " +
-            CreateIntFrozenSetExpression(EngineContractUtilities.GetRequiredElement(root, "teenLeaderBases")) +
+            CreateLongFrozenSetExpression(EngineContractUtilities.GetRequiredElement(root, "teenLeaderBases")) +
             "))";
 
         /// <summary>
@@ -157,7 +157,7 @@ public sealed partial class HumanizerSourceGenerator
         static string CreateTokenMapRulesExpression(JsonElement root) =>
             "new() { " +
             "CardinalMap = " + CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
-            "ExactOrdinalMap = " + CreateOptionalStringIntFrozenDictionaryExpression(root, "ordinalMap") + ", " +
+            "ExactOrdinalMap = " + CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") + ", " +
             "OrdinalScaleMap = " + (root.TryGetProperty("ordinalScaleMap", out var ordinalScaleMap) ? CreateStringLongFrozenDictionaryExpression(ordinalScaleMap) : "null") + ", " +
             "GluedOrdinalScaleSuffixes = " + (root.TryGetProperty("gluedOrdinalScaleSuffixes", out var gluedOrdinalScaleSuffixes) ? CreateStringLongFrozenDictionaryExpression(gluedOrdinalScaleSuffixes) : "null") + ", " +
             "CompositeScaleMap = " + (root.TryGetProperty("compositeScaleMap", out var compositeScaleMap) ? CreateStringLongFrozenDictionaryExpression(compositeScaleMap) : "null") + ", " +
@@ -188,7 +188,7 @@ public sealed partial class HumanizerSourceGenerator
         {
             if (profile.Root.TryGetProperty("ordinalMap", out var ordinalMap) && ordinalMap.ValueKind == JsonValueKind.Object)
             {
-                return CreateStringIntFrozenDictionaryExpression(ordinalMap);
+                return CreateStringLongFrozenDictionaryExpression(ordinalMap);
             }
 
             // Some locales derive ordinal parsing data from their number-to-words profile instead of
@@ -206,7 +206,7 @@ public sealed partial class HumanizerSourceGenerator
                     ")";
             }
 
-            return "new Dictionary<string, int>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)";
+            return "new Dictionary<string, long>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)";
         }
     }
 }

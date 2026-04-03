@@ -1,7 +1,7 @@
 public class NumberToWordsFamilyRegressionTests
 {
     [Theory]
-    [InlineData(81, "fr-BE", "quatre-vingt-un")]
+    [InlineData(81L, "fr-BE", "quatre-vingt-un")]
     [InlineData(80, "fr-CH", "octante")]
     [InlineData(30, "de-CH", "dreissig")]
     [InlineData(30, "de-LI", "dreissig")]
@@ -28,8 +28,11 @@ public class NumberToWordsFamilyRegressionTests
     [InlineData(1111111111, "th-TH", "หนึ่งพันหนึ่งร้อยสิบเอ็ดล้านหนึ่งแสนหนึ่งหมื่นหนึ่งพันหนึ่งร้อยสิบเอ็ด")]
     [InlineData(1234567890, "fa", "یک میلیارد و دویست و سی و چهار میلیون و پانصد و شصت و هفت هزار و هشتصد و نود")]
     [InlineData(123456789, "ku", "سەد و بیست و سێ میلیۆن و چوار سەد و پەنجا و شەش هەزار و حەوت سەد و هەشتا و نۆ")]
-    [InlineData(1234567890, "bn-BD", "একশ তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশ নব্বই")]
-    public void FamilySharedConvertersPreserveCardinalOutputs(int number, string culture, string expected) =>
+    [InlineData(1234567890L, "bn-BD", "একশ তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশ নব্বই")]
+    [InlineData(10000000000L, "bn-BD", "এক খর্ব")]
+    [InlineData(1000000000000000L, "ta", "ஒன்று சங்கம்")]
+    [InlineData(1000000000000000000L, "ta", "ஒன்று அர்த்தம்")]
+    public void FamilySharedConvertersPreserveCardinalOutputs(long number, string culture, string expected) =>
         Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
 
     [Theory]
@@ -48,7 +51,7 @@ public class NumberToWordsFamilyRegressionTests
     [InlineData(1001000001L, "en", "one billion and one million and one")]
     [InlineData(1001000001L, "en-US", "one billion and one million and one")]
     [InlineData(1001000001L, "en-GB", "one billion one million and one")]
-    [InlineData(1001000001L, "en-IN", "one hundred crore ten lakh one")]
+    [InlineData(1001000001L, "en-IN", "one arab ten lakh one")]
     public void EnglishVariantsUseExpectedLargeNumberBehavior(long number, string culture, string expected) =>
         Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
 
@@ -85,8 +88,19 @@ public class NumberToWordsFamilyRegressionTests
         Assert.Equal(expected, number.ToTuple(new CultureInfo(culture)));
 
     [Theory]
-    [InlineData("seratus", "ms-MY", 100)]
-    [InlineData("satu miliar", "id", 1000000000)]
-    public void FamilySharedWordsToNumberConvertersPreserveParsing(string words, string culture, int expected) =>
+    [InlineData("seratus", "ms-MY", 100L)]
+    [InlineData("satu miliar", "id", 1000000000L)]
+    [InlineData("one kharab", "en-IN", 100000000000L)]
+    [InlineData("one neel", "en-IN", 10000000000000L)]
+    [InlineData("one padma", "en-IN", 1000000000000000L)]
+    [InlineData("এক খর্ব", "bn-BD", 10000000000L)]
+    [InlineData("এক মহাখর্ব", "bn-BD", 100000000000L)]
+    [InlineData("এক শঙ্খ", "bn-BD", 1000000000000L)]
+    [InlineData("এক পদ্ম", "bn-BD", 10000000000000L)]
+    [InlineData("এক মহাপদ্ম", "bn-BD", 100000000000000L)]
+    [InlineData("দশ মহাপদ্ম", "bn-BD", 1000000000000000L)]
+    [InlineData("ஒன்று சங்கம்", "ta", 1000000000000000L)]
+    [InlineData("ஒன்று அர்த்தம்", "ta", 1000000000000000000L)]
+    public void FamilySharedWordsToNumberConvertersPreserveParsing(string words, string culture, long expected) =>
         Assert.Equal(expected, words.ToNumber(new CultureInfo(culture)));
 }

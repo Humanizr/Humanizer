@@ -8,8 +8,8 @@ public sealed partial class HumanizerSourceGenerator
 {
     /// <summary>
     /// Defines the structural generator contracts in typed C# so locale YAML remains the only
-    /// checked-in data authoring surface. These schemas are generator implementation code, not
-    /// locale data, and they intentionally live beside the factories that consume them.
+    /// checked-in data authoring surface. These schemas mirror the canonical <c>surfaces</c>
+    /// layout and intentionally live beside the factories that consume them.
     /// </summary>
     static class EngineContractCatalog
     {
@@ -459,7 +459,10 @@ public sealed partial class HumanizerSourceGenerator
                         Member("string-array", "prefixMap", null, null, null, null, null, null),
                         Member("builder", "thousandScale", null, null, "dual-form-scale", null, null, null),
                         Member("builder", "millionScale", null, null, "dual-form-scale", null, null, null),
-                        Member("builder", "billionScale", null, null, "dual-form-scale", null, null, null)
+                        Member("builder", "billionScale", null, null, "dual-form-scale", null, null, null),
+                        Member("builder", "trillionScale", null, null, "dual-form-scale", null, null, null),
+                        Member("builder", "quadrillionScale", null, null, "dual-form-scale", null, null, null),
+                        Member("builder", "quintillionScale", null, null, "dual-form-scale", null, null, null)
                     )
         ),
         ["ordinal-prefix-scale"] = Schema("ordinal-prefix-scale", null,

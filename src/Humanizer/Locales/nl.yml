@@ -349,6 +349,12 @@ surfaces:
         duizend: 1000
         miljoen: 1000000
         miljard: 1000000000
+        biljoen: 1000000000000
+        biljoenen: 1000000000000
+        biljard: 1000000000000000
+        biljarden: 1000000000000000
+        triljoen: 1000000000000000000
+        triljoenen: 1000000000000000000
       unitMap:
         een: 1
         twee: 2
@@ -372,6 +378,9 @@ surfaces:
       scaleTokens:
         - 'miljard'
         - 'miljoen'
+        - 'biljoen'
+        - 'biljard'
+        - 'triljoen'
         - 'duizend'
         - 'honderd'
       ordinalNumberToWordsKind: 'self'

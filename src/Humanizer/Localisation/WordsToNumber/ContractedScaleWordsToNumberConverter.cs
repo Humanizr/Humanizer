@@ -8,7 +8,8 @@ namespace Humanizer;
 /// The parser normalizes punctuation and casing, removes the configured negative prefix, then
 /// walks the token stream from left to right. Contracted tens and teens such as <c>puluh</c> and
 /// <c>belas</c> are interpreted as structural operators over the current accumulated value rather
-/// than as plain additive words.
+/// than as plain additive words. Locale data can therefore express native high-range phrases and
+/// parse them back through the same token map.
 /// </summary>
 class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
 {
@@ -19,7 +20,7 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
     readonly ContractedScaleWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -30,11 +31,11 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -52,8 +53,9 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
             normalized = normalized[(profile.MinusWord.Length + 1)..].Trim();
         }
 
-        if (TryParseCardinal(normalized, out parsedValue))
+        if (TryParseCardinal(normalized, out var value))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -89,17 +91,17 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
     /// tokens.
     /// </summary>
     /// <param name="words">A normalized phrase ready for token-by-token parsing.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out int value)
+    bool TryParseCardinal(string words, out long value)
     {
         if (profile.Cardinals.TryGetValue(words, out value))
         {
             return true;
         }
 
-        var total = 0;
-        var current = 0;
+        long total = 0;
+        long current = 0;
 
         // The main parsing loop is a tiny state machine:
         // - additive tokens increase the current local group
@@ -123,28 +125,28 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
 
             if (token == "belas")
             {
-                current = (current == 0 ? 1 : current) + 10;
+                current = checked((current == 0 ? 1 : current) + 10);
             }
             else if (token == "puluh")
             {
-                current = (current == 0 ? 1 : current) * 10;
+                current = checked((current == 0 ? 1 : current) * 10);
             }
             else if (tokenValue >= 1000)
             {
-                total += (current == 0 ? 1 : current) * tokenValue;
+                total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
                 current = 0;
             }
             else if (tokenValue == 100)
             {
-                current = (current == 0 ? 1 : current) * tokenValue;
+                current = checked((current == 0 ? 1 : current) * tokenValue);
             }
             else
             {
-                current += tokenValue;
+                current = checked(current + tokenValue);
             }
         }
 
-        value = total + current;
+        value = checked(total + current);
         return true;
     }
 }
@@ -152,7 +154,7 @@ class ContractedScaleWordsToNumberConverter(ContractedScaleWordsToNumberProfile 
 /// <summary>
 /// Immutable locale data for <see cref="ContractedScaleWordsToNumberConverter"/>.
 /// </summary>
-sealed class ContractedScaleWordsToNumberProfile(string minusWord, FrozenDictionary<string, int> cardinals)
+sealed class ContractedScaleWordsToNumberProfile(string minusWord, FrozenDictionary<string, long> cardinals)
 {
     /// <summary>
     /// Gets the literal word that marks a negative number phrase.
@@ -162,5 +164,5 @@ sealed class ContractedScaleWordsToNumberProfile(string minusWord, FrozenDiction
     /// <summary>
     /// Gets the token-to-value dictionary used by the contracted scale parser.
     /// </summary>
-    public FrozenDictionary<string, int> Cardinals { get; } = cardinals;
+public FrozenDictionary<string, long> Cardinals { get; } = cardinals;
 }

@@ -2,7 +2,7 @@
 
 Humanizer supports many languages and cultures across number, date, time, ordinal, formatter, and collection-humanization surfaces.
 
-Most consumers only need to set a culture. Contributors now have a stricter authoring model too: locale-specific generated behavior should live in one YAML file per locale, and runtime implementations should be shared or generated whenever the behavior is structurally reusable.
+Most consumers only need to set a culture. Contributors now author locale-specific generated behavior in one YAML file per locale, and shared runtime kernels are used whenever the behavior is structurally reusable.
 
 ## Supported Languages
 
@@ -11,8 +11,6 @@ Humanizer includes localization for:
 Arabic (ar), Azerbaijani (az), Bulgarian (bg), Bengali (bn-BD), Czech (cs), Danish (da), German (de), Greek (el), Spanish (es), Persian (fa), Finnish (fi), French (fr), Hebrew (he), Croatian (hr), Hungarian (hu), Armenian (hy), Indonesian (id), Icelandic (is), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Malay (ms-MY), Maltese (mt), Norwegian Bokmal (nb, nb-NO), Dutch (nl), Polish (pl), Portuguese (pt, pt-BR), Romanian (ro), Russian (ru), Slovak (sk), Slovenian (sl), Serbian (sr, sr-Latn), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Chinese (zh-CN, zh-Hans, zh-Hant).
 
 ## Installing Humanizer
-
-### Package
 
 ```bash
 dotnet add package Humanizer
@@ -24,37 +22,21 @@ The `Humanizer` package already includes all generated locale data.
 
 Most Humanizer methods respect the current thread's `CurrentCulture` or `CurrentUICulture`. You can also explicitly specify a culture:
 
-### DateTime Humanization
-
 ```csharp
 var date = DateTime.UtcNow.AddHours(-2);
 
 date.Humanize();
 date.Humanize(culture: new CultureInfo("fr-FR"));
 date.Humanize(culture: new CultureInfo("es"));
-```
 
-### Number to Words
-
-```csharp
 1234.ToWords();
 1234.ToWords(new CultureInfo("es"));
-1234.ToWords(new CultureInfo("fr"));
-```
-
-### TimeSpan Humanization
-
-```csharp
-TimeSpan.FromDays(1).Humanize();
-TimeSpan.FromDays(1).Humanize(culture: new CultureInfo("de"));
-TimeSpan.FromDays(3).Humanize(culture: new CultureInfo("ru"));
+1234.ToNumber(new CultureInfo("es"));
 ```
 
 ## Grammatical Features
 
 Some languages require additional grammatical information:
-
-### Grammatical Gender
 
 ```csharp
 1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru"));
@@ -62,25 +44,13 @@ Some languages require additional grammatical information:
 
 1.Ordinalize(GrammaticalGender.Masculine);
 1.Ordinalize(GrammaticalGender.Feminine);
-```
 
-### Grammatical Case
-
-```csharp
 var date = new DateTime(2020, 1, 1);
-
 date.ToOrdinalWords(GrammaticalCase.Nominative);
 date.ToOrdinalWords(GrammaticalCase.Genitive);
 ```
 
-### Word Forms
-
-```csharp
-3.Ordinalize(GrammaticalGender.Masculine, WordForm.Abbreviation);
-3.Ordinalize(GrammaticalGender.Masculine, WordForm.Normal);
-```
-
-## Feature Support by Language
+## Feature Support By Language
 
 Not all features are available in all languages:
 
@@ -89,7 +59,8 @@ Not all features are available in all languages:
 | String Humanization | All languages | - |
 | DateTime Humanization | All languages | - |
 | TimeSpan Humanization | All languages | - |
-| Number to Words | Most languages | Some Asian languages |
+| Number to Words | Most supported locales | Some locales use specialized high-range systems |
+| Words to Number Parsing | Supported locales with authored parser data | Some locales only support writer output |
 | Ordinalization | Most European languages | Limited in Asian languages |
 | Pluralization | English only | - |
 
@@ -108,10 +79,11 @@ Principles:
 5. Child sequences replace parent sequences.
 6. Changing `engine` replaces that mapped surface instead of merging it.
 7. Keep locale-specific words, switches, and mappings in YAML.
-8. Keep shared generator contracts in typed C# under `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`.
-9. Never make authors learn internal generated profile ids just to connect two features inside one locale file.
-10. The current authoring model keeps locale YAML at the top level of `src/Humanizer/Locales`.
-11. Do not split one locale across multiple YAML files unless there is an explicit redesign that updates the compiler contract, docs, and tests together.
+8. Keep `number.words` and `number.parse` aligned for supported number locales.
+9. Keep shared generator contracts in typed C# under `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`.
+10. Never make authors learn internal generated profile ids just to connect two features inside one locale file.
+11. The current authoring model keeps locale YAML at the top level of `src/Humanizer/Locales`.
+12. Do not split one locale across multiple YAML files unless there is an explicit redesign that updates the compiler contract, docs, and tests together.
 
 Example:
 
@@ -129,9 +101,6 @@ surfaces:
       engine: 'conjunctional-scale'
       minusWord: 'minus'
       andWord: 'and'
-      defaultAddAnd: true
-      addAndMode: 'use-caller-flag'
-      andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
       unitsMap:
         - 'zero'
         - 'one'
@@ -159,7 +128,7 @@ The localization codegen flow is:
 3. `EngineContractCatalog`
    Typed generator-side engine contracts that describe how a feature block maps onto a runtime profile object.
 4. `ProfileCatalogInput` generators
-   Build typed profile catalogs for `numberToWords`, `wordsToNumber`, `ordinalizer`, `dateToOrdinalWords`, `formatter`, and `timeOnlyToClockNotation`.
+   Build typed profile catalogs for `numberToWords`, `wordsToNumber`, `ordinalizer`, `date-to-ordinal`, `formatter`, and `timeOnlyToClockNotation`.
 5. `LocaleRegistryInput`
    Emits the culture-to-implementation registrations that wire generated profiles and handwritten residual leaves into the runtime registries.
 6. Shared runtime kernels
@@ -195,9 +164,8 @@ When a locale already fits an existing shared engine:
 2. Add `variantOf` if the locale is a regional variant.
 3. Fill in the `surfaces` blocks that differ from the parent.
 4. Reuse an existing structural engine name.
-5. Add or update resource files under `src/Humanizer/Properties` if the feature still depends on resources.
-6. Add tests under `tests/Humanizer.Tests`.
-7. Run the relevant source-generator tests, localization tests, and benchmarks.
+5. Add tests under `tests/Humanizer.Tests`.
+6. Run the relevant source-generator tests and localization tests.
 
 When a locale does not fit an existing shared engine:
 
@@ -231,7 +199,6 @@ pwsh ./tests/verify-packages.ps1 -PackageVersion <version> -PackagesDirectory ./
 
 ## Related Topics
 
-- [Adding Or Updating A Locale](adding-a-locale.md) - Contributor guide for the locale YAML and generator pipeline
-- [Installation](installation.md) - How to install language packages
-- [Number to Words](number-to-words.md) - Language-specific number formatting
-- [DateTime Humanization](datetime-humanization.md) - Relative time in different languages
+- [Adding Or Updating A Locale](adding-a-locale.md)
+- [Locale YAML How-To](locale-yaml-how-to.md)
+- [Locale YAML Reference](locale-yaml-reference.md)

@@ -43,13 +43,23 @@ public class NumberToWordsTests
     [InlineData(1000000, "một triệu")]
     [InlineData(100001005, "một trăm triệu một nghìn linh năm")]
     [InlineData(1000000000, "một tỉ")]
-    [InlineData(1111111111111111, "một triệu một trăm mười một nghìn một trăm mười một tỉ một trăm mười một triệu một trăm mười một nghìn một trăm mười một")]
-    [InlineData(5101101101101151101, "năm tỉ một trăm linh một triệu một trăm linh một nghìn một trăm linh một tỉ một trăm linh một triệu một trăm năm mươi mốt nghìn một trăm linh một")]
+    [InlineData(1111111111111111, "một triệu tỉ một trăm mười một nghìn tỉ một trăm mười một tỉ một trăm mười một triệu một trăm mười một nghìn một trăm mười một")]
+    [InlineData(5101101101101151101, "năm tỉ tỉ một trăm linh một triệu tỉ một trăm linh một nghìn tỉ một trăm linh một tỉ một trăm linh một triệu một trăm năm mươi mốt nghìn một trăm linh một")]
     [InlineData(-1, "trừ một")]
     [InlineData(-30005, "trừ ba mươi nghìn linh năm")]
-    [InlineData(-1111111111111111, "trừ một triệu một trăm mười một nghìn một trăm mười một tỉ một trăm mười một triệu một trăm mười một nghìn một trăm mười một")]
+    [InlineData(-1111111111111111, "trừ một triệu tỉ một trăm mười một nghìn tỉ một trăm mười một tỉ một trăm mười một triệu một trăm mười một nghìn một trăm mười một")]
     public void ToWords(long number, string expected) =>
         Assert.Equal(expected, number.ToWords());
+
+    [Theory]
+    [InlineData(1111111111111111L)]
+    [InlineData(5101101101101151101L)]
+    public void ToNumberHighRangeRoundTrips(long number)
+    {
+        var words = number.ToWords();
+
+        Assert.Equal(number, words.ToNumber(CultureInfo.CurrentCulture));
+    }
 
     [Theory]
     [InlineData(0, "thứ không")]

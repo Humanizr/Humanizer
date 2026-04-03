@@ -680,6 +680,18 @@ numberToWords:
     singular: 'billion'
     dual: 'two billion'
     plural: 'billions'
+  trillionScale:
+    singular: 'trillion'
+    dual: 'two trillion'
+    plural: 'trillions'
+  quadrillionScale:
+    singular: 'quadrillion'
+    dual: 'two quadrillion'
+    plural: 'quadrillions'
+  quintillionScale:
+    singular: 'quintillion'
+    dual: 'two quintillion'
+    plural: 'quintillions'
 """;
 
         const string contextualLocale = """

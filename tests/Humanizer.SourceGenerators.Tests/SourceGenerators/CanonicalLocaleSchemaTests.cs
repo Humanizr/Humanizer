@@ -128,6 +128,7 @@ surfaces:
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:
         one: 1
+        huge: 2147483648
       ordinalMap:
         first: 1
   ordinal:
@@ -227,6 +228,8 @@ surfaces:
         Assert.Equal("variant-decade", GetRequiredString(childLocale.NumberToWords!, "engine"));
         Assert.Equal("token-map", GetRequiredString(childLocale.WordsToNumber!, "engine"));
         Assert.Equal("north", childLocale.Headings!.Full[0]);
+        Assert.Equal(2147483648L, baseLocale.WordsToNumber!.ProfileRoot.GetProperty("cardinalMap").GetProperty("huge").GetInt64());
+        Assert.Equal(2147483648L, childLocale.WordsToNumber!.ProfileRoot.GetProperty("cardinalMap").GetProperty("huge").GetInt64());
     }
 
     [Fact]

@@ -1,4 +1,4 @@
-# Agent Instructions
+# Copilot Instructions for E:\Dev\Humanizer
 
 ## Scope
 These instructions apply to the entire repository.
@@ -36,8 +36,10 @@ These instructions apply to the entire repository.
 - Do not introduce new compiler warnings or break existing build/test workflows.
 
 ## Localization Guidance
-- When adding a locale, duplicate and translate the relevant resource files under `src/Humanizer/Properties`.
-- Register new formatters/converters in the appropriate registries (see `Configuration/FormatterRegistry.cs` and number converter factories).
+- When adding a locale, duplicate and translate the relevant YAML locale file under `src/Humanizer/Locales`.
+- Use `variantOf` for regional inheritance instead of copying a parent locale wholesale.
+- Keep supported `ToWords` and `ToNumber` behavior aligned for the same locale and test both together.
+- Register new formatters/converters in the appropriate registries only when the locale truly needs a residual runtime leaf.
 - Cover new localization behavior with targeted tests under `tests/Humanizer.Tests/Localisation/{culture}`.
 
 ## Documentation Updates

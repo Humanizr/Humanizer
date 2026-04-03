@@ -98,7 +98,7 @@ public sealed partial class HumanizerSourceGenerator
                 diagnostics,
                 ref hasErrors);
 
-            var exactOrdinalEntries = ReadMap(localeCode, localeElement, "ordinalMap", diagnostics, ref hasErrors, requireInt32: true);
+            var exactOrdinalEntries = ReadMap(localeCode, localeElement, "ordinalMap", diagnostics, ref hasErrors);
             var ordinalScaleEntries = ReadMap(localeCode, localeElement, "ordinalScaleMap", diagnostics, ref hasErrors);
             var gluedOrdinalScaleSuffixEntries = ReadMap(localeCode, localeElement, "gluedOrdinalScaleSuffixes", diagnostics, ref hasErrors);
             var compositeScaleEntries = ReadMap(localeCode, localeElement, "compositeScaleMap", diagnostics, ref hasErrors);
@@ -197,7 +197,7 @@ public sealed partial class HumanizerSourceGenerator
                 builder.AppendLine("        internal static readonly IWordsToNumberConverter Value = new TokenMapWordsToNumberConverter(new()");
                 builder.AppendLine("        {");
                 AppendMap(builder, "            ", "CardinalMap", "long", locale.CardinalEntries);
-                AppendMap(builder, "            ", "ExactOrdinalMap", "int", locale.ExactOrdinalEntries);
+                AppendMap(builder, "            ", "ExactOrdinalMap", "long", locale.ExactOrdinalEntries);
                 AppendMap(builder, "            ", "OrdinalScaleMap", "long", locale.OrdinalScaleEntries);
                 AppendMap(builder, "            ", "GluedOrdinalScaleSuffixes", "long", locale.GluedOrdinalScaleSuffixEntries);
                 AppendMap(builder, "            ", "CompositeScaleMap", "long", locale.CompositeScaleEntries);
@@ -538,8 +538,7 @@ public sealed partial class HumanizerSourceGenerator
             JsonElement element,
             string propertyName,
             ImmutableArray<Diagnostic>.Builder diagnostics,
-            ref bool hasErrors,
-            bool requireInt32 = false)
+            ref bool hasErrors)
         {
             if (!element.TryGetProperty(propertyName, out var mapElement))
             {
@@ -567,13 +566,6 @@ public sealed partial class HumanizerSourceGenerator
                 if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
                 {
                     diagnostics.Add(CreateDiagnostic(localeCode, path, "must be an integer."));
-                    hasErrors = true;
-                    continue;
-                }
-
-                if (requireInt32 && (value > int.MaxValue || value < int.MinValue))
-                {
-                    diagnostics.Add(CreateDiagnostic(localeCode, path, "must fit within the Int32 range."));
                     hasErrors = true;
                     continue;
                 }

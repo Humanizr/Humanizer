@@ -224,7 +224,7 @@ surfaces:
     words:
       engine: 'harmony-ordinal'
       minimumValue: -2147483648
-      maximumValue: 2147483647
+      maximumValue: 9223372036854775807
       minusWord: 'minus'
       hundredWord: 'yuz'
       hundredStrategy: 'allow-explicit-one-in-composite'
@@ -232,6 +232,15 @@ surfaces:
       softenTerminalTBeforeSuffix: false
       dropTerminalVowelBeforeHarmonySuffix: false
       scales:
+        -
+          value: 1000000000000000000
+          name: 'kvintillion'
+        -
+          value: 1000000000000000
+          name: 'kvadrillion'
+        -
+          value: 1000000000000
+          name: 'trillion'
         -
           value: 1000000000
           name: 'milliard'
@@ -298,6 +307,9 @@ surfaces:
         ming: 1000
         million: 1000000
         milliard: 1000000000
+        trillion: 1000000000000
+        kvadrillion: 1000000000000000
+        kvintillion: 1000000000000000000
       useHundredMultiplier: true
       negativePrefixes:
         - 'minus '

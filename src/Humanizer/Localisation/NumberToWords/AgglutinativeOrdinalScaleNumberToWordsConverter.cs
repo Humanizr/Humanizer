@@ -15,22 +15,16 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
     /// <summary>
     /// Converts the given value into a cardinal phrase for the locale.
     /// </summary>
-    /// <param name="input">The value to convert. Values outside the 32-bit range are not supported.</param>
+    /// <param name="input">The value to convert.</param>
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input)
     {
-        if (input is > int.MaxValue or < int.MinValue)
+        if (input < 0)
         {
-            throw new NotImplementedException();
+            return profile.MinusWord + Convert(-input);
         }
 
-        var number = (int)input;
-        if (number < 0)
-        {
-            return profile.MinusWord + Convert(-number);
-        }
-
-        return ConvertCardinal(number);
+        return ConvertCardinal(input);
     }
 
     /// <summary>
@@ -41,7 +35,7 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
     public override string ConvertToOrdinal(int number) =>
         ConvertOrdinal(number, useExceptions: false);
 
-    string ConvertCardinal(int number)
+    string ConvertCardinal(long number)
     {
         if (number == 0)
         {
@@ -55,7 +49,7 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
         // share of the remainder before tens and units are handled.
         foreach (var scale in profile.Scales)
         {
-            var divisor = checked((int)scale.Value);
+            var divisor = scale.Value;
             if (remainder / divisor <= 0)
             {
                 continue;
@@ -81,13 +75,13 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
         else if (remainder is > 10 and < 20)
         {
             // Teen forms use a separate suffix so the unit stem can stay intact.
-            parts.Add(profile.UnitsMap[remainder % 10] + profile.TeenSuffix);
+            parts.Add(profile.UnitsMap[(int)(remainder % 10)] + profile.TeenSuffix);
             remainder = 0;
         }
 
         if (remainder is > 0 and <= 10)
         {
-            parts.Add(profile.UnitsMap[remainder]);
+            parts.Add(profile.UnitsMap[(int)remainder]);
         }
 
         return string.Concat(parts);
@@ -112,14 +106,14 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
         // the recursive count is allowed to opt into ordinal exceptions.
         foreach (var scale in profile.Scales)
         {
-            var divisor = checked((int)scale.Value);
+            var divisor = scale.Value;
             if (remainder / divisor <= 0)
             {
                 continue;
             }
 
-            var count = remainder / divisor;
-            var scaleRemainder = remainder % divisor;
+            var count = (int)(remainder / divisor);
+            var scaleRemainder = (int)(remainder % divisor);
             parts.Add((count == 1 ? string.Empty : ConvertOrdinal(count, useExceptions: true)) + scale.OrdinalWord);
             remainder = scaleRemainder;
         }

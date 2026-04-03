@@ -241,6 +241,7 @@ surfaces:
   number:
     words:
       engine: 'terminal-ordinal-scale'
+      maximumValue: 9223372036854775807
       zeroWord: 'nulle'
       minusWord: 'mīnus'
       unitStems:
@@ -310,6 +311,18 @@ surfaces:
       masculineOrdinalSuffix: 'ais'
       feminineOrdinalSuffix: 'ā'
       scales:
+        -
+          value: 1000000000000000000
+          exactSingularCardinal: 'kvintiljons'
+          singularWithRemainderCardinal: 'viens kvintiljons'
+          pluralCardinal: 'kvintiljoni'
+          ordinalStem: 'kvintiljon'
+        -
+          value: 1000000000000000
+          exactSingularCardinal: 'kvadriljons'
+          singularWithRemainderCardinal: 'viens kvadriljons'
+          pluralCardinal: 'kvadriljoni'
+          ordinalStem: 'kvadriljon'
         -
           value: 1000000000000
           exactSingularCardinal: 'triljons'
@@ -395,6 +408,12 @@ surfaces:
         tukstosi: 1000
         miljons: 1000000
         miljoni: 1000000
+        triljons: 1000000000000
+        triljoni: 1000000000000
+        kvadriljons: 1000000000000000
+        kvadriljoni: 1000000000000000
+        kvintiljons: 1000000000000000000
+        kvintiljoni: 1000000000000000000
       useHundredMultiplier: true
 
   ordinal:

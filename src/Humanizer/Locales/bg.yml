@@ -242,6 +242,7 @@ surfaces:
   number:
     words:
       engine: 'conjoined-gendered-scale'
+      maximumValue: 9223372036854775807
       minusWord: 'минус'
       conjunction: 'и'
       unitsMap:
@@ -322,7 +323,7 @@ surfaces:
           divisor: 1000000000000000000
           gender: 'masculine'
           singular: 'квинтилион'
-          plural: 'квадрилиона'
+          plural: 'квинтилиона'
           ordinalStem: 'квинтилион'
         -
           divisor: 1000000000000000

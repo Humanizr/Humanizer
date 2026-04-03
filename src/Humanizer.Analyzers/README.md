@@ -2,7 +2,7 @@
 
 A Roslyn analyzer and code fix provider to help migrate code from Humanizer v2 to v3.
 
-`Humanizer` ships analyzer assets per Roslyn version so compatible analyzers are selected automatically by modern SDK/IDE hosts.
+`Humanizer` ships analyzer assets per Roslyn version so compatible analyzers are selected automatically by modern SDK/IDE hosts. The same package also carries the generated locale data, so there is no separate locale or analyzer package split to manage.
 
 ## What it does
 

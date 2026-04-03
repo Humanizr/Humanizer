@@ -2,7 +2,7 @@
 
 This document is the contributor guide for Humanizer's localization pipeline.
 
-If you are adding a new locale or changing how an existing locale behaves, start with [Locale YAML How-To](./locale-yaml-how-to.md), then use this document for pipeline details and [Locale YAML Reference](./locale-yaml-reference.md) for the exhaustive field-by-field surface.
+If you are adding a new locale or changing how an existing locale behaves, start with [Locale YAML How-To](./locale-yaml-how-to.md), then use this document for pipeline details and [Locale YAML Reference](./locale-yaml-reference.md) for the exhaustive field and strategy inventory.
 
 ## Design Goals
 
@@ -13,6 +13,7 @@ The localization system is intentionally opinionated.
 3. The source generator turns locale YAML into typed runtime registrations and typed profile objects.
 4. There is no runtime YAML parsing and no runtime JSON parsing on hot paths.
 5. Locale-specific leaf converters are a last resort, not the default implementation strategy.
+6. Supported number locales should plan `number.words` and `number.parse` together so the locale has one consistent high-range contract.
 
 ## Repository Map
 
@@ -27,15 +28,13 @@ These are the files and directories you usually need to understand:
 - `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/*`
   Build the generated profile catalogs for number-to-words, words-to-number, ordinalizers, date-to-ordinal, formatters, and clock notation.
 - `src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs`
-  Emits the generated registry wiring from locale codes to runtime implementations.
+  Emits the locale-to-implementation wiring.
 - `src/Humanizer/Localisation/*`
   Shared runtime kernels and accepted residual locale-specific leaves.
 - `tests/Humanizer.SourceGenerators.Tests`
   Verifies generator behavior and generated source structure.
 - `tests/Humanizer.Tests`
   Verifies runtime behavior for real cultures.
-- `src/Benchmarks`
-  Benchmarks runtime-sensitive surfaces.
 
 ## The High-Level Flow
 
@@ -74,12 +73,13 @@ Supported canonical surfaces are:
 
 Every locale file does not need every surface. If a `surfaces.<surface>` block is missing, the locale inherits that surface unchanged from its parent, if it has one.
 
+Supported number locales should author `number.words` and `number.parse` together.
+
 ## Locale File Example
 
 This is the shape of a typical locale file:
 
 ```yaml
-# Locale-owned generator data for en-US.
 locale: 'en-US'
 variantOf: 'en'
 
@@ -92,36 +92,10 @@ surfaces:
       engine: 'conjunctional-scale'
       minusWord: 'minus'
       andWord: 'and'
-      hundredWord: 'hundred'
-      hundredOrdinalWord: 'hundredth'
-      tensUnitsSeparator: '-'
-      defaultAddAnd: true
-      addAndMode: 'use-caller-flag'
-      andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
-      tupleSuffix: '-tuple'
-      ordinalLeadingOneStrategy: 'omit-leading-one'
-      ordinalMode: 'english'
       unitsMap:
         - 'zero'
         - 'one'
         - 'two'
-      ordinalUnitsMap:
-        - 'zeroth'
-        - 'first'
-        - 'second'
-      tensMap:
-        - 'zero'
-        - 'ten'
-        - 'twenty'
-      ordinalTensMap:
-        - 'zeroth'
-        - 'tenth'
-        - 'twentieth'
-      scales:
-        -
-          value: 1000
-          name: 'thousand'
-          ordinalName: 'thousandth'
     parse:
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
@@ -129,21 +103,13 @@ surfaces:
         one: 1
         two: 2
         hundred: 100
-      ordinalMap:
-        first: 1
-        second: 2
-        hundredth: 100
-      negativePrefixes:
-        - 'minus '
-      ignoredTokens:
-        - 'and'
 ```
 
 Rules for authoring:
 
 1. Put locale words in YAML, not in the generator.
 2. Prefer inheritance over duplication.
-3. Prefer explicit strategy names over generic flags like `style`.
+3. Prefer explicit structural engine names over generic flags.
 4. Keep the block structural. If the values describe reusable rules, that locale likely belongs on a shared kernel.
 5. If you find yourself wanting imperative hooks, stop and decide whether the locale truly needs a residual leaf.
 
@@ -153,8 +119,8 @@ Inheritance is resolved per locale file, not per feature file, because there is 
 
 Rules:
 
-1. `variantOf` points to the parent locale code.
-2. Omitting a `surfaces.<surface>` block inherits it unchanged.
+1. `variantOf` points to the parent locale.
+2. Omitting a `surfaces.<surface>` block inherits it unchanged from the parent locale.
 3. Scalar overrides replace the inherited scalar.
 4. Sequence overrides replace the inherited sequence.
 5. Mapping overrides merge recursively with the inherited mapping.
@@ -176,20 +142,12 @@ Reuse an existing engine contract when:
 2. The differences are lexical, list-based, or strategy-based.
 3. The existing runtime kernel does not need locale-specific hard-coded branches to support the new locale.
 
-Examples of structural kernels already in the repo:
-
-- `ConjunctionalScaleNumberToWordsConverter`
-- `ScaleStrategyNumberToWordsConverter`
-- `VariantDecadeNumberToWordsConverter`
-- `ContractedScaleWordsToNumberConverter`
-- `ProfiledFormatter`
-
 ## When To Add A New Engine Contract
 
 Add a new engine contract only when:
 
 1. The behavior is structural and reusable.
-2. It clearly applies to at least two locales, or to one locale plus an obvious second target already in the repository.
+2. It clearly applies to at least two locales, or to one locale plus an obvious second target already exists.
 3. The runtime kernel can stay generic once the locale-owned words and switches are passed in.
 4. The data shape is still coherent and not an exception bucket.
 
@@ -221,10 +179,9 @@ If a runtime kernel still hard-codes language-specific behavior, do not pretend 
 4. Add `variantOf` if needed.
 5. Add the feature blocks that the locale supports.
 6. Reuse existing structural engines wherever possible.
-7. Add any required resources under `src/Humanizer/Properties` if the feature still depends on resources.
-8. Add runtime tests under `tests/Humanizer.Tests/Localisation/<culture>`.
-9. Add source-generator assertions if the change alters generated profile wiring.
-10. Run the validation commands in this document.
+7. Add runtime tests under `tests/Humanizer.Tests/Localisation/<culture>`.
+8. Add source-generator assertions if the change alters generated profile wiring.
+9. Run the validation commands in this document.
 
 ## Step-By-Step: Add A Regional Variant
 

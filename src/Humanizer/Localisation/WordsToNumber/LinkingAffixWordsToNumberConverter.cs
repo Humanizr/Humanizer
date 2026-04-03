@@ -9,7 +9,7 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     readonly LinkingAffixWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -20,11 +20,11 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -48,8 +48,9 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
             break;
         }
 
-        if (TryParseCardinal(normalized, out parsedValue))
+        if (TryParseCardinal(normalized, out var value))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -68,17 +69,17 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     /// Parses a normalized cardinal phrase with linked suffixes and teen prefixes.
     /// </summary>
     /// <param name="words">A normalized phrase ready for token-by-token parsing.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out int value)
+    bool TryParseCardinal(string words, out long value)
     {
         if (profile.CardinalMap.TryGetValue(words, out value))
         {
             return true;
         }
 
-        var total = 0;
-        var current = 0;
+        long total = 0;
+        long current = 0;
 
         foreach (var tokenSpan in WordsToNumberTokenizer.Enumerate(words))
         {
@@ -94,13 +95,13 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
                 token.Length > profile.TeenPrefix.Length &&
                 TryParseCardinal(token[profile.TeenPrefix.Length..], out var teenUnit))
             {
-                current += profile.TeenBaseValue + teenUnit;
+                current = checked(current + checked(profile.TeenBaseValue + teenUnit));
                 continue;
             }
 
             if (TryParseLinkedToken(token, out var linkedValue))
             {
-                current += linkedValue;
+                current = checked(current + linkedValue);
                 continue;
             }
 
@@ -112,20 +113,20 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
 
             if (tokenValue >= profile.ScaleThreshold)
             {
-                total += (current == 0 ? 1 : current) * tokenValue;
+                total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
                 current = 0;
             }
             else if (tokenValue == profile.HundredValue)
             {
-                current = (current == 0 ? 1 : current) * tokenValue;
+                current = checked((current == 0 ? 1 : current) * tokenValue);
             }
             else
             {
-                current += tokenValue;
+                current = checked(current + tokenValue);
             }
         }
 
-        value = total + current;
+        value = checked(total + current);
         return true;
     }
 
@@ -151,9 +152,9 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
     /// Tries to strip a linked suffix from a token and resolve the base token as a cardinal value.
     /// </summary>
     /// <param name="token">The token to inspect.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <returns><c>true</c> if the token ends with a known linked suffix; otherwise, <c>false</c>.</returns>
-    bool TryParseLinkedToken(string token, out int value)
+    bool TryParseLinkedToken(string token, out long value)
     {
         foreach (var suffix in profile.LinkedSuffixes)
         {
@@ -177,19 +178,19 @@ internal class LinkingAffixWordsToNumberConverter(LinkingAffixWordsToNumberProfi
 /// Immutable locale data used by <see cref="LinkingAffixWordsToNumberConverter"/>.
 /// </summary>
 sealed class LinkingAffixWordsToNumberProfile(
-    FrozenDictionary<string, int> cardinalMap,
+    FrozenDictionary<string, long> cardinalMap,
     string teenPrefix,
-    int teenBaseValue,
+    long teenBaseValue,
     string[] linkedSuffixes,
     string[] ignoredTokens,
     string[] negativePrefixes,
-    int hundredValue = 100,
-    int scaleThreshold = 1000)
+    long hundredValue = 100,
+    long scaleThreshold = 1000)
 {
     /// <summary>
     /// Gets the token-to-value map used by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> CardinalMap { get; } = cardinalMap;
+    public FrozenDictionary<string, long> CardinalMap { get; } = cardinalMap;
     /// <summary>
     /// Gets the prefix that marks a teen stem.
     /// </summary>
@@ -197,7 +198,7 @@ sealed class LinkingAffixWordsToNumberProfile(
     /// <summary>
     /// Gets the base value added when a teen prefix is matched.
     /// </summary>
-    public int TeenBaseValue { get; } = teenBaseValue;
+    public long TeenBaseValue { get; } = teenBaseValue;
     /// <summary>
     /// Gets the suffixes that may be attached to a linked cardinal token.
     /// </summary>
@@ -213,9 +214,9 @@ sealed class LinkingAffixWordsToNumberProfile(
     /// <summary>
     /// Gets the value that represents a hundred token in the locale.
     /// </summary>
-    public int HundredValue { get; } = hundredValue;
+    public long HundredValue { get; } = hundredValue;
     /// <summary>
     /// Gets the value at or above which tokens are treated as large scales.
     /// </summary>
-    public int ScaleThreshold { get; } = scaleThreshold;
+public long ScaleThreshold { get; } = scaleThreshold;
 }

@@ -74,7 +74,7 @@ public class NumberWordPhraseTests
 
     [Theory]
     [MemberData(nameof(LocaleNumberTheoryData.WordsToNumberEnglishCases), MemberType = typeof(LocaleNumberTheoryData))]
-    public void UsesExpectedWordsToNumberEnglishCases(string localeName, string words, int expected)
+    public void UsesExpectedWordsToNumberEnglishCases(string localeName, string words, long expected)
     {
         var culture = GetCulture(localeName);
 
@@ -86,7 +86,7 @@ public class NumberWordPhraseTests
 
     [Theory]
     [MemberData(nameof(LocaleNumberTheoryData.WordsToNumberLocalizedCases), MemberType = typeof(LocaleNumberTheoryData))]
-    public void UsesExpectedWordsToNumberLocalizedCases(string localeName, string words, int expected)
+    public void UsesExpectedWordsToNumberLocalizedCases(string localeName, string words, long expected)
     {
         var culture = GetCulture(localeName);
 
@@ -97,12 +97,15 @@ public class NumberWordPhraseTests
     }
 
     [Theory]
-    [MemberData(nameof(LocaleNumberTheoryData.WordsToNumberFallbackCases), MemberType = typeof(LocaleNumberTheoryData))]
-    public void UsesExpectedWordsToNumberFallbackCases(string localeName, string words, int expected)
+    [MemberData(nameof(LocaleNumberTheoryData.WordsToNumberUnsupportedCases), MemberType = typeof(LocaleNumberTheoryData))]
+    public void UsesExpectedWordsToNumberUnsupportedCases(string localeName, string words, long expected)
     {
         var culture = GetCulture(localeName);
 
         Assert.Equal(expected, words.ToNumber(culture));
+        Assert.True(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
+        Assert.Equal(expected, parsedNumber);
+        Assert.Null(unrecognizedWord);
     }
 
     static CultureInfo GetCulture(string localeName) => CultureInfo.GetCultureInfo(localeName);

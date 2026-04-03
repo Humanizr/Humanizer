@@ -24,6 +24,11 @@ public sealed partial class HumanizerSourceGenerator
 
     internal static class CanonicalLocaleAuthoring
     {
+        /// <summary>
+        /// Parses the canonical locale YAML surface used by checked-in locale files.
+        /// The schema is intentionally limited to <c>locale</c>, optional <c>variantOf</c>, and
+        /// a <c>surfaces</c> mapping containing the supported authoring surfaces.
+        /// </summary>
         static readonly string[] supportedTopLevelNames =
         [
             "locale",
@@ -31,6 +36,11 @@ public sealed partial class HumanizerSourceGenerator
             "surfaces"
         ];
 
+        /// <summary>
+        /// Supported canonical surfaces in locale YAML.
+        /// Number authoring is split into <c>number.words</c> and <c>number.parse</c> so writer
+        /// and parser contracts stay aligned.
+        /// </summary>
         static readonly string[] supportedSurfaceNames =
         [
             "list",

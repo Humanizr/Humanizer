@@ -4,6 +4,8 @@ This guide is for teams upgrading directly from `2.14.1` to `3.0.8`.
 
 This document was added to address [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656) (undocumented v3 breaking changes).
 
+The current `3.0.8` package also ships generated locale data in the main `Humanizer` package, so locale support and analyzer support are both part of the same restore path.
+
 Validated against:
 - Git tag `v2.14.1`
 - v3 breaking-change commits through `v3.0.1`

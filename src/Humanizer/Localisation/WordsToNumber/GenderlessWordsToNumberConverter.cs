@@ -7,11 +7,11 @@ namespace Humanizer;
 internal abstract class GenderlessWordsToNumberConverter : IWordsToNumberConverter
 {
     /// <inheritdoc />
-    public abstract int Convert(string words);
+    public abstract long Convert(string words);
 
     /// <inheritdoc />
-    public abstract bool TryConvert(string words, out int parsedValue);
+    public abstract bool TryConvert(string words, out long parsedValue);
 
     /// <inheritdoc />
-    public abstract bool TryConvert(string words, out int parsedValue, out string? unrecognizedNumber);
+    public abstract bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber);
 }

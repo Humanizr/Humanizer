@@ -23,6 +23,11 @@ public sealed partial class HumanizerSourceGenerator
         ImmutableHashSet<string> dataBackedFormatterProfiles,
         ImmutableHashSet<string> dataBackedOrdinalizerProfiles)
     {
+        /// <summary>
+        /// Emits the registry wiring for the resolved locale set.
+        /// The catalog already resolved inheritance, so each registration reflects the localized
+        /// parent chain and the current canonical locale feature set.
+        /// </summary>
         readonly ImmutableArray<ResolvedLocaleDefinition> locales = locales;
         readonly ImmutableArray<Diagnostic> diagnostics = diagnostics;
         readonly ImmutableHashSet<string> dataBackedFormatterProfiles = dataBackedFormatterProfiles;

@@ -223,6 +223,7 @@ surfaces:
   number:
     words:
       engine: 'contracted-one-scale'
+      maximumValue: 9223372036854775807
       zeroWord: 'nol'
       minusWord: 'minus'
       hundredWord: 'seratus'
@@ -302,6 +303,9 @@ surfaces:
         ribu: 1000
         juta: 1000000
         miliar: 1000000000
+        triliun: 1000000000000
+        kuadriliun: 1000000000000000
+        kuintiliun: 1000000000000000000
 
   compass:
     full:

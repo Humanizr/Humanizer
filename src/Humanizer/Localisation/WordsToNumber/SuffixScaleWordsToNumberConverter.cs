@@ -12,7 +12,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
     readonly SuffixScaleWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -23,18 +23,18 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
             throw new ArgumentException("Input words cannot be empty.");
         }
 
-        if (int.TryParse(words.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue))
+        if (long.TryParse(words.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue))
         {
             unrecognizedWord = null;
             return true;
@@ -66,14 +66,7 @@ internal class SuffixScaleWordsToNumberConverter(SuffixScaleWordsToNumberProfile
             parsedLong = -parsedLong;
         }
 
-        if (parsedLong is > int.MaxValue or < int.MinValue)
-        {
-            parsedValue = default;
-            unrecognizedWord = normalized;
-            return false;
-        }
-
-        parsedValue = (int)parsedLong;
+        parsedValue = parsedLong;
         unrecognizedWord = null;
         return true;
     }

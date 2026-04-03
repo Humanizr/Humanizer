@@ -224,7 +224,7 @@ surfaces:
     words:
       engine: 'harmony-ordinal'
       minimumValue: -2147483648
-      maximumValue: 2147483647
+      maximumValue: 9223372036854775807
       minusWord: 'mənfi'
       hundredWord: 'yüz'
       hundredStrategy: 'omit-one-when-singular'
@@ -254,6 +254,15 @@ surfaces:
       softenTerminalTBeforeSuffix: false
       dropTerminalVowelBeforeHarmonySuffix: true
       scales:
+        -
+          value: 1000000000000000000
+          name: 'kvintilyon'
+        -
+          value: 1000000000000000
+          name: 'kvadrilyon'
+        -
+          value: 1000000000000
+          name: 'trilyon'
         -
           value: 1000000000
           name: 'milyard'
@@ -301,6 +310,10 @@ surfaces:
         'yüz': 100
         min: 1000
         milyon: 1000000
+        milyard: 1000000000
+        trilyon: 1000000000000
+        kvadrilyon: 1000000000000000
+        kvintilyon: 1000000000000000000
       ordinalNumberToWordsKind: 'self'
       ordinalGenderVariant: 'none'
       useHundredMultiplier: true

@@ -271,6 +271,24 @@ surfaces:
       unitTensJoiner: 'og'
       scales:
         -
+          value: 1000000000000000000
+          oneForm: 'en trillion'
+          manyForm: 'trillioner'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000000
+          oneForm: 'en billiard'
+          manyForm: 'billiarder'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000
+          oneForm: 'en billion'
+          manyForm: 'billioner'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
           value: 1000000000
           oneForm: 'en milliard'
           manyForm: 'milliarder'
@@ -328,6 +346,12 @@ surfaces:
         millioner: 1000000
         milliard: 1000000000
         milliarder: 1000000000
+        billion: 1000000000000
+        billioner: 1000000000000
+        billiard: 1000000000000000
+        billiarder: 1000000000000000
+        trillion: 1000000000000000000
+        trillioner: 1000000000000000000
       unitMap:
         en: 1
         et: 1
@@ -354,6 +378,12 @@ surfaces:
         - 'milliard'
         - 'millioner'
         - 'million'
+        - 'billioner'
+        - 'billion'
+        - 'billiarder'
+        - 'billiard'
+        - 'trillioner'
+        - 'trillion'
         - 'tusind'
         - 'hundrede'
       negativePrefixes:

@@ -219,7 +219,7 @@ surfaces:
   number:
     words:
       engine: 'joined-scale'
-      maximumValue: 999999999999999999
+      maximumValue: 9223372036854775807
       zeroWord: 'سفر'
       minusWord: 'نێگەتیڤ'
       negativeJoinWord: ' '
@@ -273,6 +273,9 @@ surfaces:
         - 'نۆ سەد'
       scales:
         -
+          value: 1000000000000000000
+          name: 'کوینتیلیۆن'
+        -
           value: 1000000000000000
           name: 'کوادریلیۆن'
         -
@@ -318,6 +321,9 @@ surfaces:
         'هەزار': 1000
         'میلیۆن': 1000000
         'میلیارد': 1000000000
+        'تریلیۆن': 1000000000000
+        'کوادریلیۆن': 1000000000000000
+        'کوینتیلیۆن': 1000000000000000000
       negativePrefixes:
         - 'نێگەتیڤ '
       ignoredTokens:

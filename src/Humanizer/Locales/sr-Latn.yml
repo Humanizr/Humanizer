@@ -350,6 +350,13 @@ surfaces:
       feminineTwo: 'dve'
       scales:
         -
+          value: 1000000000000000000
+          gender: 'masculine'
+          oneForm: 'trilion'
+          singular: 'trilion'
+          paucal: 'triliona'
+          plural: 'triliona'
+        -
           value: 1000000000000000
           gender: 'feminine'
           oneForm: 'bilijarda'
@@ -443,6 +450,13 @@ surfaces:
         miliona: 1000000
         milijarda: 1000000000
         milijarde: 1000000000
+        bilion: 1000000000000
+        biliona: 1000000000000
+        bilijarda: 1000000000000000
+        bilijarde: 1000000000000000
+        bilijardi: 1000000000000000
+        trilion: 1000000000000000000
+        triliona: 1000000000000000000
       negativePrefixes:
         - 'minus '
 

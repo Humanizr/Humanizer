@@ -60,7 +60,7 @@ public class Example
 
 ## Automated Migration with Roslyn Analyzer
 
-Humanizer v3 includes a Roslyn analyzer that automatically detects and fixes namespace usage. No separate installation is required—the analyzer is bundled with the `Humanizer` package.
+Humanizer v3 includes a Roslyn analyzer that automatically detects and fixes namespace usage. No separate installation is required—the analyzer is bundled with the `Humanizer` package. That same package also includes the generated locale data, so there is no separate locale or analyzer package split to manage during migration.
 
 ### Usage
 

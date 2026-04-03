@@ -221,6 +221,7 @@ surfaces:
   number:
     words:
       engine: 'linking-scale'
+      maximumValue: 9223372036854775807
       zeroWord: 'sero'
       minusWord: 'minus'
       conjunctionWord: 'at'
@@ -350,6 +351,9 @@ surfaces:
         libo: 1000
         milyon: 1000000
         bilyon: 1000000000
+        trilyon: 1000000000000
+        kwadrilyon: 1000000000000000
+        kwintilyon: 1000000000000000000
       teenPrefix: 'labing'
       teenBaseValue: 10
       linkedSuffixes:

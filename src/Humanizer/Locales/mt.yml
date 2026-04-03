@@ -386,6 +386,21 @@ surfaces:
         dual: 'żewġ biljuni'
         plural: 'biljuni'
         usePrefixMapForLowerDigits: false
+      trillionScale:
+        singular: 'triljun'
+        dual: 'żewġ triljuni'
+        plural: 'triljuni'
+        usePrefixMapForLowerDigits: false
+      quadrillionScale:
+        singular: 'kwadriljun'
+        dual: 'żewġ kwadriljuni'
+        plural: 'kwadriljuni'
+        usePrefixMapForLowerDigits: false
+      quintillionScale:
+        singular: 'kwintiljun'
+        dual: 'żewġ kwintiljuni'
+        plural: 'kwintiljuni'
+        usePrefixMapForLowerDigits: false
 
     parse:
       engine: 'token-map'
@@ -447,6 +462,12 @@ surfaces:
         miljuni: 1000000
         biljun: 1000000000
         biljuni: 1000000000
+        triljun: 1000000000000
+        triljuni: 1000000000000
+        kwadriljun: 1000000000000000
+        kwadriljuni: 1000000000000000
+        kwintiljun: 1000000000000000000
+        kwintiljuni: 1000000000000000000
       negativeSuffixes:
         - ' inqas minn żero'
         - ' inqas minn zero'

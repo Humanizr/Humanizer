@@ -372,6 +372,9 @@ surfaces:
         thousand: 1000
         million: 1000000
         billion: 1000000000
+        trillion: 1000000000000
+        quadrillion: 1000000000000000
+        quintillion: 1000000000000000000
       ordinalMap:
         first: 1
         second: 2
@@ -402,6 +405,9 @@ surfaces:
         ninetieth: 90
         hundredth: 100
         thousandth: 1000
+        trillionth: 1000000000000
+        quadrillionth: 1000000000000000
+        quintillionth: 1000000000000000000
       negativePrefixes:
         - 'minus '
         - 'negative '

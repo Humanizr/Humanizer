@@ -8,7 +8,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
     readonly EastAsianPositionalWordsToNumberProfile profile = profile;
 
     /// <inheritdoc />
-    public override int Convert(string words)
+    public override long Convert(string words)
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
@@ -19,11 +19,11 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
     }
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue) =>
+    public override bool TryConvert(string words, out long parsedValue) =>
         TryConvert(words, out parsedValue, out _);
 
     /// <inheritdoc />
-    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    public override bool TryConvert(string words, out long parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
         {
@@ -48,8 +48,9 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
         // Exact ordinals are checked before stripping ordinal affixes because some locales encode
         // the full ordinal spelling as a standalone token that should win over the positional
         // parser.
-        if (profile.OrdinalMap?.TryGetValue(normalized, out parsedValue) == true)
+        if (profile.OrdinalMap?.TryGetValue(normalized, out var ordinalValue) == true)
         {
+            parsedValue = ordinalValue;
             unrecognizedWord = null;
             return true;
         }
@@ -67,8 +68,9 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
             normalized = normalized[..^profile.OrdinalSuffix.Length];
         }
 
-        if (TryParse(normalized.AsSpan(), out parsedValue, out unrecognizedWord))
+        if (TryParse(normalized.AsSpan(), out var value, out unrecognizedWord))
         {
+            parsedValue = value;
             if (negative)
             {
                 parsedValue = -parsedValue;
@@ -86,10 +88,10 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
     /// been stripped.
     /// </summary>
     /// <param name="text">The normalized text to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token or fragment that was not recognized.</param>
     /// <returns><c>true</c> if the text was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParse(ReadOnlySpan<char> text, out int value, out string? unrecognizedWord)
+    bool TryParse(ReadOnlySpan<char> text, out long value, out string? unrecognizedWord)
     {
         // Single-character locales can use a tighter parser, but only when every digit and unit
         // token is one rune wide. That keeps multi-character locales on the more general tokenizer.
@@ -105,14 +107,14 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
     /// Parses a positional number when every token is a single character.
     /// </summary>
     /// <param name="text">The normalized text to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token or fragment that was not recognized.</param>
     /// <returns><c>true</c> if the text was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseSingleCharacter(ReadOnlySpan<char> text, out int value, out string? unrecognizedWord)
+    bool TryParseSingleCharacter(ReadOnlySpan<char> text, out long value, out string? unrecognizedWord)
     {
-        var total = 0;
-        var section = 0;
-        var number = 0;
+        long total = 0;
+        long section = 0;
+        long number = 0;
         var parsedAnyToken = false;
         // Keep the first character around so a later failure can report the leading token the
         // caller likely recognizes, not just the exact character that tripped the parse.
@@ -136,7 +138,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
                     number = 1;
                 }
 
-                section += number * smallUnit;
+                section = checked(section + checked(number * smallUnit));
                 number = 0;
                 parsedAnyToken = true;
                 continue;
@@ -152,7 +154,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
                     section = 1;
                 }
 
-                total += section * largeUnit;
+                total = checked(total + checked(section * largeUnit));
                 section = 0;
                 number = 0;
                 parsedAnyToken = true;
@@ -164,7 +166,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
             return false;
         }
 
-        value = total + section + number;
+        value = checked(total + section + number);
         unrecognizedWord = null;
         return true;
     }
@@ -173,14 +175,14 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
     /// Parses a positional number when tokens can span multiple characters.
     /// </summary>
     /// <param name="text">The normalized text to parse.</param>
-    /// <param name="value">When this method returns, the parsed integer value.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token or fragment that was not recognized.</param>
     /// <returns><c>true</c> if the text was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseMultiCharacter(ReadOnlySpan<char> text, out int value, out string? unrecognizedWord)
+    bool TryParseMultiCharacter(ReadOnlySpan<char> text, out long value, out string? unrecognizedWord)
     {
-        var total = 0;
-        var section = 0;
-        var number = 0;
+        long total = 0;
+        long section = 0;
+        long number = 0;
         var position = 0;
         // Track the first token length for the same reason as the single-character path: useful
         // failure diagnostics should point at the first recognizable token in the phrase.
@@ -216,7 +218,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
                         number = 1;
                     }
 
-                    section += number * tokenValue;
+                    section = checked(section + checked(number * tokenValue));
                     number = 0;
                     break;
                 case EastAsianPositionalTokenKind.LargeUnit:
@@ -228,7 +230,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
                         section = 1;
                     }
 
-                    total += section * tokenValue;
+                    total = checked(total + checked(section * tokenValue));
                     section = 0;
                     number = 0;
                     break;
@@ -237,7 +239,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
             }
         }
 
-        value = total + section + number;
+        value = checked(total + section + number);
         unrecognizedWord = null;
         return true;
     }
@@ -250,7 +252,7 @@ internal class EastAsianPositionalWordsToNumberConverter(EastAsianPositionalWord
     /// <param name="value">When this method returns, the token value.</param>
     /// <param name="length">When this method returns, the matched token length.</param>
     /// <returns><c>true</c> if a token was matched; otherwise, <c>false</c>.</returns>
-    bool TryReadToken(ReadOnlySpan<char> remaining, out EastAsianPositionalTokenKind kind, out int value, out int length)
+    bool TryReadToken(ReadOnlySpan<char> remaining, out EastAsianPositionalTokenKind kind, out long value, out int length)
     {
         // Tokens are pre-sorted longest-first, so the first match is the greedy match the locale
         // expects.
@@ -290,13 +292,13 @@ internal sealed class EastAsianPositionalWordsToNumberProfile
     /// <param name="ordinalSuffix">The suffix that marks ordinal forms, if any.</param>
     /// <param name="ordinalMap">An optional map of exact ordinal spellings.</param>
     public EastAsianPositionalWordsToNumberProfile(
-        FrozenDictionary<string, int> digits,
-        FrozenDictionary<string, int> smallUnits,
-        FrozenDictionary<string, int> largeUnits,
+        FrozenDictionary<string, long> digits,
+        FrozenDictionary<string, long> smallUnits,
+        FrozenDictionary<string, long> largeUnits,
         string[] negativePrefixes,
         string ordinalPrefix,
         string ordinalSuffix,
-        FrozenDictionary<string, int>? ordinalMap = null)
+        FrozenDictionary<string, long>? ordinalMap = null)
     {
         Digits = digits;
         SmallUnits = smallUnits;
@@ -328,15 +330,15 @@ internal sealed class EastAsianPositionalWordsToNumberProfile
     /// <summary>
     /// Gets the digit tokens recognized by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> Digits { get; }
+    public FrozenDictionary<string, long> Digits { get; }
     /// <summary>
     /// Gets the small-unit tokens recognized by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> SmallUnits { get; }
+    public FrozenDictionary<string, long> SmallUnits { get; }
     /// <summary>
     /// Gets the large-unit tokens recognized by the parser.
     /// </summary>
-    public FrozenDictionary<string, int> LargeUnits { get; }
+    public FrozenDictionary<string, long> LargeUnits { get; }
     /// <summary>
     /// Gets the prefixes that mark a negative number phrase.
     /// </summary>
@@ -352,7 +354,7 @@ internal sealed class EastAsianPositionalWordsToNumberProfile
     /// <summary>
     /// Gets the optional exact ordinal map.
     /// </summary>
-    public FrozenDictionary<string, int>? OrdinalMap { get; }
+    public FrozenDictionary<string, long>? OrdinalMap { get; }
     /// <summary>
     /// Gets a value indicating whether the locale uses single-character tokens.
     /// </summary>
@@ -360,15 +362,15 @@ internal sealed class EastAsianPositionalWordsToNumberProfile
     /// <summary>
     /// Gets the single-character digit lookup when the locale supports it.
     /// </summary>
-    public FrozenDictionary<char, int>? SingleCharacterDigits { get; }
+    public FrozenDictionary<char, long>? SingleCharacterDigits { get; }
     /// <summary>
     /// Gets the single-character small-unit lookup when the locale supports it.
     /// </summary>
-    public FrozenDictionary<char, int>? SingleCharacterSmallUnits { get; }
+    public FrozenDictionary<char, long>? SingleCharacterSmallUnits { get; }
     /// <summary>
     /// Gets the single-character large-unit lookup when the locale supports it.
     /// </summary>
-    public FrozenDictionary<char, int>? SingleCharacterLargeUnits { get; }
+    public FrozenDictionary<char, long>? SingleCharacterLargeUnits { get; }
     /// <summary>
     /// Gets the tokens ordered from longest to shortest for token matching.
     /// </summary>
@@ -397,4 +399,4 @@ internal enum EastAsianPositionalTokenKind
 /// <summary>
 /// Represents one positional token, its numeric value, and its parser role.
 /// </summary>
-internal readonly record struct EastAsianPositionalToken(string Text, int Value, EastAsianPositionalTokenKind Kind);
+internal readonly record struct EastAsianPositionalToken(string Text, long Value, EastAsianPositionalTokenKind Kind);

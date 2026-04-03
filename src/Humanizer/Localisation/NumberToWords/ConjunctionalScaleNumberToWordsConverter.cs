@@ -14,7 +14,9 @@ namespace Humanizer;
 ///
 /// The expected output is a natural-language cardinal or ordinal phrase such as
 /// "one hundred and twenty-three", "one thousand first", or "hundredth", depending on the
-/// generated strategy values.
+/// generated strategy values. English-family variants keep their own conjunction policy, so
+/// <c>en-GB</c> and <c>en-IN</c> can diverge from <c>en</c>/<c>en-US</c> without changing the
+/// shared algorithm.
 /// </summary>
 class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
 {
@@ -46,8 +48,9 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
                 : base.ConvertToTuple(number);
 
     // Large-scale traversal is intentionally recursive so every count above one thousand is still
-    // rendered by the same family rules. That keeps the algorithm stable while YAML controls only
-    // the words and strategy switches.
+    // rendered by the same family rules. That keeps the algorithm stable while YAML controls the
+    // words, the conjunction policy, and the English-family differences such as British-style and
+    // Indian-grouping outputs.
     string ConvertCore(long number, bool isOrdinal, bool addAnd)
     {
         if (number == 0)

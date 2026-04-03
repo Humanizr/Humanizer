@@ -229,6 +229,7 @@ surfaces:
         1: '万'
         2: '亿'
         3: '兆'
+        4: '京'
       omitOneBeforeTen: true
       omitOneBeforeTenOnlyWhenLeading: true
       omitOneBeforeHundred: false
@@ -259,6 +260,8 @@ surfaces:
       largeUnits:
         '万': 10000
         '亿': 100000000
+        '兆': 1000000000000
+        '京': 10000000000000000
 
   compass:
     full:
