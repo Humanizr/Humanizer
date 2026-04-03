@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Humanizer.Tests.Localisation;
 
@@ -153,28 +152,7 @@ static class LocaleCoverageData
     static string[] GetRegisteredLocales<TRegistry, TLocaliser>()
         where TRegistry : LocaliserRegistry<TLocaliser>, new()
         where TLocaliser : class
-    {
-        const string localisersBuilderFieldName = "localisersBuilder";
-        var registry = new TRegistry();
-        // Tests need to enumerate registered locales, and LocaliserRegistry does not expose a supported API for that.
-        // Reflect over the internal registrations and fail with a clear message if the implementation shape changes.
-        var field = typeof(LocaliserRegistry<TLocaliser>).GetField(localisersBuilderFieldName, BindingFlags.Instance | BindingFlags.NonPublic)
-            ?? throw new Xunit.Sdk.XunitException(
-                $"Could not find private field '{localisersBuilderFieldName}' on {typeof(LocaliserRegistry<TLocaliser>).Name} while inspecting {typeof(TRegistry).Name} registrations.");
-        var fieldValue = field.GetValue(registry)
-            ?? throw new Xunit.Sdk.XunitException(
-                $"Private field '{localisersBuilderFieldName}' on {typeof(LocaliserRegistry<TLocaliser>).Name} was null while inspecting {typeof(TRegistry).Name} registrations.");
-
-        if (fieldValue is not Dictionary<string, Func<CultureInfo, TLocaliser>> registrations)
-        {
-            throw new Xunit.Sdk.XunitException(
-                $"Private field '{localisersBuilderFieldName}' on {typeof(LocaliserRegistry<TLocaliser>).Name} no longer exposes registrations as {typeof(Dictionary<string, Func<CultureInfo, TLocaliser>>).FullName}. Actual type: {fieldValue.GetType().FullName}.");
-        }
-
-        return registrations.Keys
-            .OrderBy(static locale => locale, StringComparer.Ordinal)
-            .ToArray();
-    }
+        => new TRegistry().GetRegisteredLocaleCodes();
 }
 
 sealed class CultureSwap : IDisposable

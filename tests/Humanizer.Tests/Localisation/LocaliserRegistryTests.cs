@@ -62,6 +62,17 @@ public class LocaliserRegistryTests
         var exception = Assert.Throws<InvalidOperationException>(() => registry.Register("fr", _ => "bonjour"));
         Assert.Equal("Cannot register localisers after the registry has been used.", exception.Message);
     }
+
+    [Fact]
+    public void GetRegisteredLocaleCodesReturnsSortedRegisteredLocales()
+    {
+        var registry = new LocaliserRegistry<string>("default");
+        registry.Register("fr-CH", "fr-CH");
+        registry.Register("en", "en");
+        registry.Register("fr", "fr");
+
+        Assert.Equal(["en", "fr", "fr-CH"], registry.GetRegisteredLocaleCodes());
+    }
 }
 
 sealed class DistinctCultureSwap : IDisposable
