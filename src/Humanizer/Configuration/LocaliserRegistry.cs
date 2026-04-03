@@ -78,6 +78,14 @@ public class LocaliserRegistry<TLocaliser>
         }
     }
 
+    internal string[] GetRegisteredLocaleCodes()
+    {
+        lock (lockObject)
+        {
+            return [.. localisersBuilder.Keys.OrderBy(static locale => locale, StringComparer.Ordinal)];
+        }
+    }
+
     Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
     {
         // Check if already frozen (fast path without lock)
