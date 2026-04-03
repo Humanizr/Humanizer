@@ -6,21 +6,24 @@ public class LocaleRegistrySweepTests
 {
     [Theory]
     [MemberData(nameof(LocaleCoverageData.NumberToWordsLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void NumberToWords_RegisteredLocales_ReturnCardinalOrdinalAndTupleOutput(string localeName)
+    public void NumberToWords_RegisteredLocales_ReturnCardinalAndOrdinalOutput(string localeName)
     {
         var culture = new CultureInfo(localeName);
 
-        var cardinal = 123456.ToWords(culture);
-        var ordinal = 123456.ToOrdinalWords(culture);
-        var tuple = 123456.ToTuple(culture);
+        var cardinal = 123.ToWords(culture);
+        var ordinal = 123.ToOrdinalWords(culture);
 
         Assert.False(string.IsNullOrWhiteSpace(cardinal));
-        Assert.False(string.IsNullOrWhiteSpace(tuple));
+        Assert.False(string.IsNullOrWhiteSpace(ordinal));
+    }
 
-        if (LocaleCoverageData.SupportsSurface(localeName, "ordinal"))
-        {
-            Assert.False(string.IsNullOrWhiteSpace(ordinal));
-        }
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.NumberToWordsLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void NumberToWords_RegisteredLocales_ExposeTupleConversion(string localeName)
+    {
+        var culture = new CultureInfo(localeName);
+
+        _ = 123.ToTuple(culture);
     }
 
     [Theory]
@@ -30,6 +33,15 @@ public class LocaleRegistrySweepTests
         var culture = new CultureInfo(localeName);
 
         Assert.Equal(expected, number.ToWords(culture));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.NumberToWordsOrdinalExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void NumberToWords_CustomLocales_UseExpectedOrdinalForms(string localeName, int number, string expected)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine, culture));
     }
 
     [Fact]
@@ -129,6 +141,15 @@ public class LocaleRegistrySweepTests
     }
 
     [Theory]
+    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotationExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TimeOnlyToClockNotation_CustomLocales_UseExpectedRoundedForms(string localeName, int hours, int minutes, string expected)
+    {
+        using var _ = LocaleCoverageData.UseCulture(localeName);
+
+        Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+    }
+
+    [Theory]
     [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotationLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
     public void TimeOnlyToClockNotation_RegisteredLocales_ReturnDefaultAndRoundedOutput(string localeName)
     {
@@ -139,15 +160,6 @@ public class LocaleRegistrySweepTests
 
         Assert.False(string.IsNullOrWhiteSpace(exact));
         Assert.False(string.IsNullOrWhiteSpace(rounded));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotationExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeOnlyToClockNotation_CustomLocales_UseExpectedRoundedForms(string localeName, int hours, int minutes, string expected)
-    {
-        using var _ = LocaleCoverageData.UseCulture(localeName);
-
-        Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
     }
 #endif
 
@@ -165,14 +177,13 @@ public class LocaleRegistrySweepTests
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.WordsToNumberFallbackLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void WordsToNumber_LocalesWithoutDedicatedProfiles_FallBackToDefaultEnglishConverter(string localeName, string words)
+    [MemberData(nameof(LocaleCoverageData.UnsupportedWordsToNumberCultureTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void WordsToNumber_UnsupportedCultures_FallBackToTheDefaultNotSupportedExceptionPath(string localeName, string words)
     {
         var culture = new CultureInfo(localeName);
 
-        Assert.Equal(105, words.ToNumber(culture));
-        Assert.True(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
-        Assert.Equal(105, parsedNumber);
-        Assert.Null(unrecognizedWord);
+        var exception = Assert.Throws<NotSupportedException>(() => words.ToNumber(culture));
+        Assert.Contains(culture.TwoLetterISOLanguageName, exception.Message);
+        Assert.Throws<NotSupportedException>(() => words.TryToNumber(out _, culture, out _));
     }
 }

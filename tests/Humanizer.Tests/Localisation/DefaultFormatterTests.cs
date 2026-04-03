@@ -1,15 +1,15 @@
-﻿namespace Humanizer.Tests.Localisation;
+namespace Humanizer.Tests.Localisation;
 
 public class DefaultFormatterTests
 {
     [Fact]
     [UseCulture("iv")]
-    public void HandlesNotImplementedCollectionFormattersGracefully()
+    public void FallsBackToDefaultCollectionFormatterForUnsupportedCulture()
     {
-        var a = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };
-        var b = a.Humanize();
+        var dates = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };
+        var humanized = dates.Humanize();
 
-        Assert.Equal(a[0] + " & " + a[1], b);
+        Assert.Equal(dates[0] + " & " + dates[1], humanized);
     }
 
     [Theory]

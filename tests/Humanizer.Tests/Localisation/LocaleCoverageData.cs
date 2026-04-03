@@ -1,86 +1,134 @@
-using System.Globalization;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Humanizer.Tests.Localisation;
 
-public static class LocaleCoverageData
+static class LocaleCoverageData
 {
-    static readonly Lazy<Dictionary<string, string>> localeFiles = new(LoadLocaleFiles);
+    static readonly Lazy<IReadOnlyList<string>> formatterLocales = new(() => GetRegisteredLocales<FormatterRegistry, IFormatter>());
+    static readonly Lazy<IReadOnlyList<string>> collectionFormatterLocales = new(() => GetRegisteredLocales<CollectionFormatterRegistry, ICollectionFormatter>());
+    static readonly Lazy<IReadOnlyList<string>> numberToWordsLocales = new(() => GetRegisteredLocales<NumberToWordsConverterRegistry, INumberToWordsConverter>());
+    static readonly Lazy<IReadOnlyList<string>> ordinalizerLocales = new(() => GetRegisteredLocales<OrdinalizerRegistry, IOrdinalizer>());
+    static readonly Lazy<IReadOnlyList<string>> dateToOrdinalWordsLocales = new(() => GetRegisteredLocales<DateToOrdinalWordsConverterRegistry, IDateToOrdinalWordConverter>());
+    static readonly Lazy<IReadOnlyList<string>> wordsToNumberLocales = new(() => GetRegisteredLocales<WordsToNumberConverterRegistry, IWordsToNumberConverter>());
+#if NET6_0_OR_GREATER
+    static readonly Lazy<IReadOnlyList<string>> dateOnlyToOrdinalWordsLocales = new(() => GetRegisteredLocales<DateOnlyToOrdinalWordsConverterRegistry, IDateOnlyToOrdinalWordConverter>());
+    static readonly Lazy<IReadOnlyList<string>> timeOnlyToClockNotationLocales = new(() => GetRegisteredLocales<TimeOnlyToClockNotationConvertersRegistry, ITimeOnlyToClockNotationConverter>());
+#endif
 
-    public static TheoryData<string> NumberToWordsLocaleTheoryData => CreateNestedSurfaceTheoryData("number", "words");
+    public static IReadOnlyList<string> FormatterLocales => formatterLocales.Value;
 
-    public static TheoryData<string> OrdinalizerLocaleTheoryData => CreateNestedSurfaceTheoryData("ordinal", "numeric");
+    public static IReadOnlyList<string> CollectionFormatterLocales => collectionFormatterLocales.Value;
 
-    public static TheoryData<string> DateToOrdinalWordsLocaleTheoryData => CreateOrdinalDateTheoryData("date");
+    public static IReadOnlyList<string> NumberToWordsLocales => numberToWordsLocales.Value;
 
-    public static TheoryData<string, string> DateToOrdinalWordsExpectationTheoryData => new()
-    {
-        { "ca", "1 de gener de 2015" },
-        { "de", "1. Januar 2015" },
-        { "es", "1 de enero de 2015" },
-        { "fr", "1er janvier 2015" },
-        { "lb", "1. Januar 2015" },
-        { "lv", "1. janvāris 2015" },
-        { "pt-BR", "1º de janeiro de 2015" }
-    };
+    public static IReadOnlyList<string> OrdinalizerLocales => ordinalizerLocales.Value;
 
-    public static TheoryData<string> DateOnlyToOrdinalWordsLocaleTheoryData => CreateOrdinalDateTheoryData("dateOnly");
+    public static IReadOnlyList<string> DateToOrdinalWordsLocales => dateToOrdinalWordsLocales.Value;
 
-    public static TheoryData<string, string> DateOnlyToOrdinalWordsExpectationTheoryData => new()
-    {
-        { "ca", "1 de gener de 2015" },
-        { "de", "1. Januar 2015" },
-        { "es", "1 de enero de 2015" },
-        { "fr", "1er janvier 2015" },
-        { "lb", "1. Januar 2015" },
-        { "lv", "1. janvāris 2015" },
-        { "pt-BR", "1º de janeiro de 2015" }
-    };
+    public static IReadOnlyList<string> WordsToNumberLocales => wordsToNumberLocales.Value;
 
-    public static TheoryData<string> TimeOnlyToClockNotationLocaleTheoryData => CreateSurfaceTheoryData("clock");
+#if NET6_0_OR_GREATER
+    public static IReadOnlyList<string> DateOnlyToOrdinalWordsLocales => dateOnlyToOrdinalWordsLocales.Value;
 
-    public static TheoryData<string, int, int, string> TimeOnlyToClockNotationExpectationTheoryData => new()
-    {
-        { "ca", 13, 23, "la una i vint-i-cinc de la tarda" },
-        { "de", 13, 23, "fünf vor halb zwei" },
-        { "es", 13, 23, "la una y veinticinco de la tarde" },
-        { "fr", 13, 23, "treize heures vingt-cinq" },
-        { "lb", 13, 23, "fënnef vir hallwer zwou" },
-        { "pt", 13, 23, "uma e vinte e cinco" },
-        { "pt-BR", 0, 0, "meia-noite" }
-    };
+    public static IReadOnlyList<string> TimeOnlyToClockNotationLocales => timeOnlyToClockNotationLocales.Value;
+#endif
 
-    public static TheoryData<string> WordsToNumberLocaleTheoryData => new()
-    {
-        "en",
-        "en-US",
-        "en-GB",
-        "en-IN"
-    };
+    public static TheoryData<string> FormatterLocaleTheoryData => CreateLocaleTheoryData(FormatterLocales);
 
-    public static TheoryData<string, string> WordsToNumberFallbackLocaleTheoryData => new()
-    {
-        { "nn", "one hundred and five" },
-        { "ta", "one hundred and five" }
-    };
+    public static TheoryData<string> CollectionFormatterLocaleTheoryData => CreateLocaleTheoryData(CollectionFormatterLocales);
 
-    public static IDisposable UseCulture(string cultureName) => new CultureScope(new CultureInfo(cultureName));
+    public static TheoryData<string> NumberToWordsLocaleTheoryData => CreateLocaleTheoryData(NumberToWordsLocales);
 
-    public static bool SupportsSurface(string localeName, string surfaceName) =>
-        localeFiles.Value.TryGetValue(localeName, out var text) &&
-        (HasSurface(text, surfaceName) || surfaceName switch
+    public static TheoryData<string> OrdinalizerLocaleTheoryData => CreateLocaleTheoryData(OrdinalizerLocales);
+
+    public static TheoryData<string> DateToOrdinalWordsLocaleTheoryData => CreateLocaleTheoryData(DateToOrdinalWordsLocales);
+
+    public static TheoryData<string> WordsToNumberLocaleTheoryData => CreateLocaleTheoryData(WordsToNumberLocales);
+
+#if NET6_0_OR_GREATER
+    public static TheoryData<string> DateOnlyToOrdinalWordsLocaleTheoryData => CreateLocaleTheoryData(DateOnlyToOrdinalWordsLocales);
+
+    public static TheoryData<string> TimeOnlyToClockNotationLocaleTheoryData => CreateLocaleTheoryData(TimeOnlyToClockNotationLocales);
+#endif
+
+    public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
+        new()
         {
-            "number" => HasNestedSurface(text, "number", "words"),
-            "ordinal" => HasNestedSurface(text, "ordinal", "numeric"),
-            _ => false
-        });
+            { "ca", "1 i 2", "1, 2 i 3" },
+            { "de", "1 und 2", "1, 2 und 3" },
+            { "en", "1 and 2", "1, 2, and 3" },
+            { "es", "1 y 2", "1, 2 y 3" },
+            { "is", "1 og 2", "1, 2 og 3" },
+            { "it", "1 e 2", "1, 2 e 3" },
+            { "lb", "1 an 2", "1, 2 an 3" },
+            { "nb", "1 og 2", "1, 2 og 3" },
+            { "nl", "1 en 2", "1, 2 en 3" },
+            { "nn", "1 og 2", "1, 2 og 3" },
+            { "pt", "1 e 2", "1, 2 e 3" },
+            { "ro", "1 și 2", "1, 2 și 3" },
+            { "sv", "1 och 2", "1, 2 och 3" }
+        };
 
-    static TheoryData<string> CreateSurfaceTheoryData(string surfaceName)
+    public static TheoryData<string, string, string> FormatterFallbackExpectationTheoryData =>
+        new()
+        {
+            { "de-CH", "gestern", "2 Tage" },
+            { "de-LI", "gestern", "2 Tage" },
+            { "en-IN", "yesterday", "2 days" },
+            { "fr-CH", "hier", "2 jours" },
+            { "ta", "yesterday", "2 days" },
+            { "zu-ZA", "yesterday", "2 days" }
+        };
+
+    public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
+        new()
+        {
+            { "pt-BR", 1, "primeira" }
+        };
+
+    public static TheoryData<string, string> DateToOrdinalWordsExpectationTheoryData =>
+        new()
+        {
+            { "ca", "1 de gener de 2015" },
+            { "en-US", "January 1st, 2015" },
+            { "es", "1 de enero de 2015" },
+            { "fr", "1er janvier 2015" },
+            { "lt", "2015 m. sausio 1 d." }
+        };
+
+#if NET6_0_OR_GREATER
+    public static TheoryData<string, string> DateOnlyToOrdinalWordsExpectationTheoryData =>
+        new()
+        {
+            { "ca", "1 de gener de 2015" },
+            { "en-US", "January 1st, 2015" },
+            { "es", "1 de enero de 2015" },
+            { "fr", "1er janvier 2015" },
+            { "lt", "2015 m. sausio 1 d." }
+        };
+
+    public static TheoryData<string, int, int, string> TimeOnlyToClockNotationExpectationTheoryData =>
+        new()
+        {
+            { "ca", 15, 40, "les quatre menys vint de la tarda" },
+            { "de", 13, 23, "fünf vor halb zwei" },
+            { "es", 10, 25, "las diez y veinticinco de la mañana" },
+            { "fr", 13, 23, "treize heures vingt-cinq" },
+            { "lb", 13, 23, "fënnef vir hallwer zwou" },
+            { "pt", 13, 23, "uma e vinte e cinco" },
+            { "pt-BR", 13, 23, "uma e vinte e cinco" }
+        };
+#endif
+
+    public static TheoryData<string, string> UnsupportedWordsToNumberCultureTheoryData => CreateUnsupportedWordsToNumberCultureTheoryData();
+
+    public static CultureSwap UseCulture(string cultureName) => new(new(cultureName));
+
+    static TheoryData<string> CreateLocaleTheoryData(IEnumerable<string> locales)
     {
         var data = new TheoryData<string>();
-
-        foreach (var locale in localeFiles.Value.Keys
-                     .Where(locale => HasSurface(localeFiles.Value[locale], surfaceName))
-                     .OrderBy(static locale => locale, StringComparer.Ordinal))
+        foreach (var locale in locales)
         {
             data.Add(locale);
         }
@@ -88,88 +136,39 @@ public static class LocaleCoverageData
         return data;
     }
 
-    static TheoryData<string> CreateNestedSurfaceTheoryData(string surfaceName, string memberName)
+    static TheoryData<string, string> CreateUnsupportedWordsToNumberCultureTheoryData()
     {
-        var data = new TheoryData<string>();
+        var data = new TheoryData<string, string>();
 
-        foreach (var locale in localeFiles.Value.Keys
-                     .Where(locale => HasNestedSurface(localeFiles.Value[locale], surfaceName, memberName))
-                     .OrderBy(static locale => locale, StringComparer.Ordinal))
+        foreach (var locale in NumberToWordsLocales.Where(static locale => CultureInfo.GetCultureInfo(locale).TwoLetterISOLanguageName != "en"))
         {
-            data.Add(locale);
+            data.Add(locale, "one");
         }
 
+        data.Add("zu-ZA", "one");
         return data;
     }
 
-    static TheoryData<string> CreateOrdinalDateTheoryData(string memberName)
+    static string[] GetRegisteredLocales<TRegistry, TLocaliser>()
+        where TRegistry : LocaliserRegistry<TLocaliser>, new()
+        where TLocaliser : class
+        => new TRegistry().GetRegisteredLocaleCodes();
+}
+
+sealed class CultureSwap : IDisposable
+{
+    readonly CultureInfo originalCulture = CultureInfo.CurrentCulture;
+    readonly CultureInfo originalUICulture = CultureInfo.CurrentUICulture;
+
+    public CultureSwap(CultureInfo culture)
     {
-        var data = new TheoryData<string>();
-
-        foreach (var locale in localeFiles.Value.Keys
-                     .Where(locale => HasNestedSurface(localeFiles.Value[locale], "ordinal", memberName))
-                     .OrderBy(static locale => locale, StringComparer.Ordinal))
-        {
-            data.Add(locale);
-        }
-
-        return data;
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
     }
 
-    static bool HasSurface(string text, string surfaceName) =>
-        text.Contains($"\n  {surfaceName}:", StringComparison.Ordinal);
-
-    static bool HasNestedSurface(string text, string surfaceName, string memberName)
+    public void Dispose()
     {
-        var surfaceIndex = text.IndexOf($"\n  {surfaceName}:", StringComparison.Ordinal);
-        if (surfaceIndex < 0)
-        {
-            return false;
-        }
-
-        return text.IndexOf($"\n    {memberName}:", surfaceIndex, StringComparison.Ordinal) >= 0;
-    }
-
-    static Dictionary<string, string> LoadLocaleFiles()
-    {
-        var localesDirectory = FindLocalesDirectory();
-        return Directory.EnumerateFiles(localesDirectory, "*.yml")
-            .OrderBy(static path => path, StringComparer.Ordinal)
-            .ToDictionary(
-                static path => Path.GetFileNameWithoutExtension(path),
-                static path => File.ReadAllText(path).Replace("\r\n", "\n"),
-                StringComparer.Ordinal);
-    }
-
-    static string FindLocalesDirectory()
-    {
-        for (var current = new DirectoryInfo(AppContext.BaseDirectory); current is not null; current = current.Parent)
-        {
-            var localesDirectory = Path.Combine(current.FullName, "src", "Humanizer", "Locales");
-            if (Directory.Exists(localesDirectory))
-            {
-                return localesDirectory;
-            }
-        }
-
-        throw new DirectoryNotFoundException("Could not find src/Humanizer/Locales from the test output directory.");
-    }
-
-    sealed class CultureScope : IDisposable
-    {
-        readonly CultureInfo originalCulture = CultureInfo.CurrentCulture;
-        readonly CultureInfo originalUiCulture = CultureInfo.CurrentUICulture;
-
-        public CultureScope(CultureInfo culture)
-        {
-            CultureInfo.CurrentCulture = culture;
-            CultureInfo.CurrentUICulture = culture;
-        }
-
-        public void Dispose()
-        {
-            CultureInfo.CurrentCulture = originalCulture;
-            CultureInfo.CurrentUICulture = originalUiCulture;
-        }
+        CultureInfo.CurrentCulture = originalCulture;
+        CultureInfo.CurrentUICulture = originalUICulture;
     }
 }
