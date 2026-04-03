@@ -71,17 +71,6 @@ static class LocaleCoverageData
             { "sv", "1 och 2", "1, 2 och 3" }
         };
 
-    public static TheoryData<string, string> FormatterFallbackTheoryData =>
-        new()
-        {
-            { "de-CH", "gestern" },
-            { "de-LI", "gestern" },
-            { "en-IN", "yesterday" },
-            { "fr-CH", "hier" },
-            { "ta", "yesterday" },
-            { "zu-ZA", "yesterday" }
-        };
-
     public static TheoryData<string, string, string> FormatterFallbackExpectationTheoryData =>
         new()
         {
@@ -93,31 +82,10 @@ static class LocaleCoverageData
             { "zu-ZA", "yesterday", "2 days" }
         };
 
-    public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
-        new()
-        {
-            { "de-CH", 30, "dreissig" },
-            { "de-LI", 30, "dreissig" },
-            { "en-IN", 100000, "one lakh" },
-            { "fr-CH", 80, "octante" },
-            { "ta", 100, "நூறு" }
-        };
-
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
         new()
         {
             { "pt-BR", 1, "primeira" }
-        };
-
-    public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData =>
-        new()
-        {
-            { "de", 1, "1." },
-            { "en", 1, "1st" },
-            { "fr", 1, "1er" },
-            { "pt", 1, "1º" },
-            { "ro", 1, "primul" },
-            { "tr", 1, "1." }
         };
 
     public static TheoryData<string, string> DateToOrdinalWordsExpectationTheoryData =>
@@ -186,10 +154,22 @@ static class LocaleCoverageData
         where TRegistry : LocaliserRegistry<TLocaliser>, new()
         where TLocaliser : class
     {
+        const string localisersBuilderFieldName = "localisersBuilder";
         var registry = new TRegistry();
-        var field = typeof(LocaliserRegistry<TLocaliser>).GetField("localisersBuilder", BindingFlags.Instance | BindingFlags.NonPublic)
-            ?? throw new Xunit.Sdk.XunitException($"Could not find localiser registry field for {typeof(TRegistry).Name}.");
-        var registrations = (Dictionary<string, Func<CultureInfo, TLocaliser>>)field.GetValue(registry)!;
+        // Tests need to enumerate registered locales, and LocaliserRegistry does not expose a supported API for that.
+        // Reflect over the internal registrations and fail with a clear message if the implementation shape changes.
+        var field = typeof(LocaliserRegistry<TLocaliser>).GetField(localisersBuilderFieldName, BindingFlags.Instance | BindingFlags.NonPublic)
+            ?? throw new Xunit.Sdk.XunitException(
+                $"Could not find private field '{localisersBuilderFieldName}' on {typeof(LocaliserRegistry<TLocaliser>).Name} while inspecting {typeof(TRegistry).Name} registrations.");
+        var fieldValue = field.GetValue(registry)
+            ?? throw new Xunit.Sdk.XunitException(
+                $"Private field '{localisersBuilderFieldName}' on {typeof(LocaliserRegistry<TLocaliser>).Name} was null while inspecting {typeof(TRegistry).Name} registrations.");
+
+        if (fieldValue is not Dictionary<string, Func<CultureInfo, TLocaliser>> registrations)
+        {
+            throw new Xunit.Sdk.XunitException(
+                $"Private field '{localisersBuilderFieldName}' on {typeof(LocaliserRegistry<TLocaliser>).Name} no longer exposes registrations as {typeof(Dictionary<string, Func<CultureInfo, TLocaliser>>).FullName}. Actual type: {fieldValue.GetType().FullName}.");
+        }
 
         return registrations.Keys
             .OrderBy(static locale => locale, StringComparer.Ordinal)

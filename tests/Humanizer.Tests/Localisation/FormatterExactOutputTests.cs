@@ -31,13 +31,15 @@ public class FormatterExactOutputTests
     {
         var culture = GetCulture(localeName);
 
-        AssertOutputsEqual(
-            expected,
-            [
-                TimeSpan.FromMilliseconds(1299630020).Humanize(3, culture: culture, collectionSeparator: null),
-                new TimeSpan(1, 0, 3, 4).Humanize(3, countEmptyUnits: false, culture: culture, maxUnit: TimeUnit.Day, minUnit: TimeUnit.Second, collectionSeparator: null),
-                new TimeSpan(1, 0, 3, 4).Humanize(3, countEmptyUnits: true, culture: culture, maxUnit: TimeUnit.Day, minUnit: TimeUnit.Second, collectionSeparator: null)
-            ]);
+        string[] actual =
+        [
+            TimeSpan.FromMilliseconds(1299630020).Humanize(3, culture: culture, collectionSeparator: null),
+            new TimeSpan(1, 0, 3, 4).Humanize(3, countEmptyUnits: false, culture: culture, maxUnit: TimeUnit.Day, minUnit: TimeUnit.Second, collectionSeparator: null),
+            new TimeSpan(1, 0, 3, 4).Humanize(3, countEmptyUnits: true, culture: culture, maxUnit: TimeUnit.Day, minUnit: TimeUnit.Second, collectionSeparator: null)
+        ];
+
+        Assert.Equal(expected.Length, actual.Length);
+        Assert.Collection(actual, expected.Select<string, Action<string>>(expectedValue => actualValue => Assert.Equal(expectedValue, actualValue)).ToArray());
     }
 
     [Theory]
@@ -46,18 +48,20 @@ public class FormatterExactOutputTests
     {
         var culture = GetCulture(localeName);
 
-        AssertOutputsEqual(
-            expected,
-            [
-                TimeUnit.Millisecond.ToSymbol(culture),
-                TimeUnit.Second.ToSymbol(culture),
-                TimeUnit.Minute.ToSymbol(culture),
-                TimeUnit.Hour.ToSymbol(culture),
-                TimeUnit.Day.ToSymbol(culture),
-                TimeUnit.Week.ToSymbol(culture),
-                TimeUnit.Month.ToSymbol(culture),
-                TimeUnit.Year.ToSymbol(culture)
-            ]);
+        string[] actual =
+        [
+            TimeUnit.Millisecond.ToSymbol(culture),
+            TimeUnit.Second.ToSymbol(culture),
+            TimeUnit.Minute.ToSymbol(culture),
+            TimeUnit.Hour.ToSymbol(culture),
+            TimeUnit.Day.ToSymbol(culture),
+            TimeUnit.Week.ToSymbol(culture),
+            TimeUnit.Month.ToSymbol(culture),
+            TimeUnit.Year.ToSymbol(culture)
+        ];
+
+        Assert.Equal(expected.Length, actual.Length);
+        Assert.Collection(actual, expected.Select<string, Action<string>>(expectedValue => actualValue => Assert.Equal(expectedValue, actualValue)).ToArray());
     }
 
     [Theory]
@@ -66,14 +70,16 @@ public class FormatterExactOutputTests
     {
         var culture = GetCulture(localeName);
 
-        AssertOutputsEqual(
-            expected,
-            [
-                ByteSize.FromBits(1).Humanize(culture),
-                ByteSize.FromBytes(2).Humanize(culture),
-                ByteSize.FromBytes(2000).Humanize("KB", culture),
-                ByteSize.FromMegabytes(2).Humanize("KB", culture)
-            ]);
+        string[] actual =
+        [
+            ByteSize.FromBits(1).Humanize(culture),
+            ByteSize.FromBytes(2).Humanize(culture),
+            ByteSize.FromBytes(2000).Humanize("KB", culture),
+            ByteSize.FromMegabytes(2).Humanize("KB", culture)
+        ];
+
+        Assert.Equal(expected.Length, actual.Length);
+        Assert.Collection(actual, expected.Select<string, Action<string>>(expectedValue => actualValue => Assert.Equal(expectedValue, actualValue)).ToArray());
     }
 
     [Theory]
@@ -82,15 +88,17 @@ public class FormatterExactOutputTests
     {
         var culture = GetCulture(localeName);
 
-        AssertOutputsEqual(
-            expected,
-            [
-                ByteSize.FromBits(1).ToFullWords(provider: culture),
-                ByteSize.FromBytes(1).ToFullWords(provider: culture),
-                ByteSize.FromBytes(2).ToFullWords(provider: culture),
-                ByteSize.FromKilobytes(2).ToFullWords(provider: culture),
-                ByteSize.FromMegabytes(2).ToFullWords(provider: culture)
-            ]);
+        string[] actual =
+        [
+            ByteSize.FromBits(1).ToFullWords(provider: culture),
+            ByteSize.FromBytes(1).ToFullWords(provider: culture),
+            ByteSize.FromBytes(2).ToFullWords(provider: culture),
+            ByteSize.FromKilobytes(2).ToFullWords(provider: culture),
+            ByteSize.FromMegabytes(2).ToFullWords(provider: culture)
+        ];
+
+        Assert.Equal(expected.Length, actual.Length);
+        Assert.Collection(actual, expected.Select<string, Action<string>>(expectedValue => actualValue => Assert.Equal(expectedValue, actualValue)).ToArray());
     }
 
     [Theory]
@@ -107,7 +115,8 @@ public class FormatterExactOutputTests
                 new[] { 1, 2, 3, 4 }.Humanize()
             ]);
 
-        AssertOutputsEqual(expected, actual);
+        Assert.Equal(expected.Length, actual.Length);
+        Assert.Collection(actual, expected.Select<string, Action<string>>(expectedValue => actualValue => Assert.Equal(expectedValue, actualValue)).ToArray());
     }
 
     [Theory]
@@ -131,16 +140,6 @@ public class FormatterExactOutputTests
     }
 
     static CultureInfo GetCulture(string localeName) => CultureInfo.GetCultureInfo(localeName);
-
-    static void AssertOutputsEqual(string[] expected, string[] actual)
-    {
-        Assert.Equal(expected.Length, actual.Length);
-
-        for (var index = 0; index < expected.Length; index++)
-        {
-            Assert.Equal(expected[index], actual[index]);
-        }
-    }
 
     static T WithCulture<T>(CultureInfo culture, Func<T> action)
     {

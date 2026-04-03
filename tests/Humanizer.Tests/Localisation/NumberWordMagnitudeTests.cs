@@ -18,12 +18,12 @@ public class NumberWordMagnitudeTests
 
     [Theory]
     [MemberData(nameof(LocaleNumberMagnitudeTheoryData.UnsupportedMagnitudeCardinalCases), MemberType = typeof(LocaleNumberMagnitudeTheoryData))]
-    public void UnsupportedMagnitudeCardinalCasesThrowExpectedException(string localeName, long number, string expectedExceptionType)
+    public void UnsupportedMagnitudeCardinalCasesThrowExpectedException(string localeName, long number, Type expectedExceptionType)
     {
         var exception = Record.Exception(() => number.ToWords(GetCulture(localeName)));
 
         Assert.NotNull(exception);
-        Assert.Equal(expectedExceptionType, exception.GetType().Name);
+        Assert.IsType(expectedExceptionType, exception);
     }
 
     static CultureInfo GetCulture(string localeName) => CultureInfo.GetCultureInfo(localeName);
