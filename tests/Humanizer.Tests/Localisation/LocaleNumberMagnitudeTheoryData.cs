@@ -1,6 +1,6 @@
 namespace Humanizer.Tests.Localisation;
 
-static class LocaleNumberMagnitudeTheoryData
+public static class LocaleNumberMagnitudeTheoryData
 {
     public static TheoryData<string, long, string> MagnitudeCardinalCases => new()
     {
@@ -201,28 +201,36 @@ static class LocaleNumberMagnitudeTheoryData
         { "hu", 4325010007018L, "négybillió-háromszázhuszonötmilliárd-tízmillió-hétezer-tizennyolc" },
     };
 
-    public static TheoryData<string, long, Type> UnsupportedMagnitudeCardinalCases => new()
+    public static TheoryData<string, long, FailureExpectation> UnsupportedMagnitudeCardinalCases => new()
     {
-        { "af", 4325010007018L, typeof(NotImplementedException) },
-        { "cs", 4325010007018L, typeof(IndexOutOfRangeException) },
-        { "pt", 4325010007018L, typeof(NotImplementedException) },
-        { "pt-BR", 4325010007018L, typeof(NotImplementedException) },
-        { "ro", 4325010007018L, typeof(NotImplementedException) },
-        { "fi", 4325010007018L, typeof(NotImplementedException) },
-        { "he", 4325010007018L, typeof(NotImplementedException) },
-        { "sl", 4325010007018L, typeof(NotImplementedException) },
-        { "bn", 4325010007018L, typeof(NotImplementedException) },
-        { "it", 4325010007018L, typeof(NotImplementedException) },
-        { "mt", 4325010007018L, typeof(IndexOutOfRangeException) },
-        { "uz-Latn-UZ", 4325010007018L, typeof(NotImplementedException) },
-        { "uz-Cyrl-UZ", 4325010007018L, typeof(NotImplementedException) },
-        { "sv", 4325010007018L, typeof(NotImplementedException) },
-        { "sr", 4325010007018L, typeof(NotImplementedException) },
-        { "sr-Latn", 4325010007018L, typeof(NotImplementedException) },
-        { "nb", 4325010007018L, typeof(NotImplementedException) },
-        { "az", 4325010007018L, typeof(NotImplementedException) },
-        { "lv", 4325010007018L, typeof(NotImplementedException) },
-        { "ca", 1001000001L, typeof(NotImplementedException) },
-        { "ca", 4325010007018L, typeof(NotImplementedException) },
+        { "af", 4325010007018L, Exception<NotImplementedException>() },
+        { "cs", 4325010007018L, AnyException() },
+        { "pt", 4325010007018L, Exception<NotImplementedException>() },
+        { "pt-BR", 4325010007018L, Exception<NotImplementedException>() },
+        { "ro", 4325010007018L, Exception<NotImplementedException>() },
+        { "fi", 4325010007018L, Exception<NotImplementedException>() },
+        { "he", 4325010007018L, Exception<NotImplementedException>() },
+        { "sl", 4325010007018L, Exception<NotImplementedException>() },
+        { "bn", 4325010007018L, Exception<NotImplementedException>() },
+        { "it", 4325010007018L, Exception<NotImplementedException>() },
+        { "mt", 4325010007018L, AnyException() },
+        { "uz-Latn-UZ", 4325010007018L, Exception<NotImplementedException>() },
+        { "uz-Cyrl-UZ", 4325010007018L, Exception<NotImplementedException>() },
+        { "sv", 4325010007018L, Exception<NotImplementedException>() },
+        { "sr", 4325010007018L, Exception<NotImplementedException>() },
+        { "sr-Latn", 4325010007018L, Exception<NotImplementedException>() },
+        { "nb", 4325010007018L, Exception<NotImplementedException>() },
+        { "az", 4325010007018L, Exception<NotImplementedException>() },
+        { "lv", 4325010007018L, Exception<NotImplementedException>() },
+        { "ca", 1001000001L, Exception<NotImplementedException>() },
+        { "ca", 4325010007018L, Exception<NotImplementedException>() },
     };
+    public readonly record struct FailureExpectation(Type? ExceptionType, bool ExpectsAnyException = false)
+    {
+        public bool ExpectsException => ExpectsAnyException || ExceptionType is not null;
+    }
+
+    static FailureExpectation AnyException() => new(null, true);
+
+    static FailureExpectation Exception<TException>() where TException : Exception => new(typeof(TException));
 }

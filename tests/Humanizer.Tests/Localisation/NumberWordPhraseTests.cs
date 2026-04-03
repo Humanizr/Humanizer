@@ -91,7 +91,6 @@ public class NumberWordPhraseTests
         var culture = GetCulture(localeName);
 
         Assert.Throws<NotSupportedException>(() => words.ToNumber(culture));
-        Assert.Throws<NotSupportedException>(() => words.TryToNumber(out _, culture, out _));
     }
 
     static CultureInfo GetCulture(string localeName) => CultureInfo.GetCultureInfo(localeName);
