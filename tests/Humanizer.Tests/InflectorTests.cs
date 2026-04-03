@@ -203,7 +203,7 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["index", "indices"];
 
         yield return ["wife", "wives"];
-        yield return ["safe", "saves"];
+        yield return ["safe", "safes"];
         yield return ["half", "halves"];
 
         yield return ["glove", "gloves"];
