@@ -2,38 +2,50 @@ namespace Humanizer.Tests.Localisation;
 
 public class ResourcePhraseTests_ar
 {
-    public static TheoryData<string, string> Cases => new()
+    public static TheoryData<int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
-        { "DatePastSecond1", "منذ ثانية واحدة" },
-        { "DateFutureSecond2", "في غضون ثانيتين من الآن" },
-        { "DatePastMinute1", "منذ دقيقة واحدة" },
-        { "DateFutureMinute2", "في غضون دقيقتين من الآن" },
-        { "DatePastHour1", "منذ ساعة واحدة" },
-        { "DateFutureHour2", "في غضون ساعتين من الآن" },
-        { "DatePastDay1", "أمس" },
-        { "DateFutureDay1", "في غضون يوم واحد من الآن" },
-        { "DatePastDay2", "منذ يومين" },
-        { "DateFutureDay2", "في غضون يومين من الآن" },
-        { "DatePastMonth1", "منذ شهر واحد" },
-        { "DateFutureMonth2", "في غضون شهرين من الآن" },
-        { "DatePastYear1", "العام السابق" },
-        { "DateFutureYear2", "في غضون سنتين من الآن" },
-        { "DateNow", "الآن" },
-        { "DateNever", "never" },
-        { "SpanSecond1", "ثانية واحدة" },
-        { "SpanSecond2", "ثانيتين" },
-        { "SpanMinute1", "دقيقة واحدة" },
-        { "SpanMinute2", "دقيقتين" },
-        { "SpanHour1", "ساعة واحدة" },
-        { "SpanHour2", "ساعتين" },
-        { "SpanDay1", "يوم واحد" },
-        { "SpanDay2", "يومين" },
-        { "SpanZero", "0 جزء من الثانية" },
-        { "SpanZeroWords", "حالاً" },
+        { 1, TimeUnit.Second, Tense.Past, "منذ ثانية واحدة" },
+        { 2, TimeUnit.Second, Tense.Future, "في غضون ثانيتين من الآن" },
+        { 1, TimeUnit.Minute, Tense.Past, "منذ دقيقة واحدة" },
+        { 2, TimeUnit.Minute, Tense.Future, "في غضون دقيقتين من الآن" },
+        { 1, TimeUnit.Hour, Tense.Past, "منذ ساعة واحدة" },
+        { 2, TimeUnit.Hour, Tense.Future, "في غضون ساعتين من الآن" },
+        { 1, TimeUnit.Day, Tense.Past, "أمس" },
+        { 1, TimeUnit.Day, Tense.Future, "في غضون يوم واحد من الآن" },
+        { 2, TimeUnit.Day, Tense.Past, "منذ يومين" },
+        { 2, TimeUnit.Day, Tense.Future, "في غضون يومين من الآن" },
+        { 1, TimeUnit.Month, Tense.Past, "منذ شهر واحد" },
+        { 2, TimeUnit.Month, Tense.Future, "في غضون شهرين من الآن" },
+        { 1, TimeUnit.Year, Tense.Past, "العام السابق" },
+        { 2, TimeUnit.Year, Tense.Future, "في غضون سنتين من الآن" },
+        { 0, TimeUnit.Second, Tense.Future, "الآن" },
+    };
+
+    public static TheoryData<int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
+    {
+        { 1, TimeUnit.Second, false, "ثانية واحدة" },
+        { 2, TimeUnit.Second, false, "ثانيتين" },
+        { 1, TimeUnit.Minute, false, "دقيقة واحدة" },
+        { 2, TimeUnit.Minute, false, "دقيقتين" },
+        { 1, TimeUnit.Hour, false, "ساعة واحدة" },
+        { 2, TimeUnit.Hour, false, "ساعتين" },
+        { 1, TimeUnit.Day, false, "يوم واحد" },
+        { 2, TimeUnit.Day, false, "يومين" },
+        { 0, TimeUnit.Millisecond, false, "0 جزء من الثانية" },
+        { 0, TimeUnit.Millisecond, true, "حالاً" },
     };
 
     [Theory]
-    [MemberData(nameof(Cases))]
-    public void UsesExpectedResourceBackedPhrases(string caseName, string expected) =>
-        LocaleResourcePhraseAssertions.Verify("ar", caseName, expected);
+    [MemberData(nameof(DateHumanizeCases))]
+    public void UsesExpectedDateHumanizePhrases(int unit, TimeUnit timeUnit, Tense tense, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyDateHumanize("ar", unit, timeUnit, tense, expected);
+
+    [Fact]
+    public void UsesExpectedNullDateHumanizePhrase() =>
+        LocaleResourcePhraseAssertions.VerifyNullDateHumanize("ar", "never");
+
+    [Theory]
+    [MemberData(nameof(TimeSpanHumanizeCases))]
+    public void UsesExpectedTimeSpanHumanizePhrases(int unit, TimeUnit timeUnit, bool toWords, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyTimeSpanHumanize("ar", unit, timeUnit, toWords, expected);
 }

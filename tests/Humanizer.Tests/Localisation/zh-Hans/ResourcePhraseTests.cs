@@ -2,38 +2,50 @@ namespace Humanizer.Tests.Localisation;
 
 public class ResourcePhraseTests_zh_Hans
 {
-    public static TheoryData<string, string> Cases => new()
+    public static TheoryData<int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
-        { "DatePastSecond1", "1 秒钟前" },
-        { "DateFutureSecond2", "2 秒钟后" },
-        { "DatePastMinute1", "1 分钟前" },
-        { "DateFutureMinute2", "2 分钟后" },
-        { "DatePastHour1", "1 小时前" },
-        { "DateFutureHour2", "2 小时后" },
-        { "DatePastDay1", "昨天" },
-        { "DateFutureDay1", "明天" },
-        { "DatePastDay2", "2 天前" },
-        { "DateFutureDay2", "2 天后" },
-        { "DatePastMonth1", "1 个月前" },
-        { "DateFutureMonth2", "2 个月后" },
-        { "DatePastYear1", "去年" },
-        { "DateFutureYear2", "2 年后" },
-        { "DateNow", "现在" },
-        { "DateNever", "never" },
-        { "SpanSecond1", "1 秒" },
-        { "SpanSecond2", "2 秒" },
-        { "SpanMinute1", "1 分" },
-        { "SpanMinute2", "2 分" },
-        { "SpanHour1", "1 小时" },
-        { "SpanHour2", "2 小时" },
-        { "SpanDay1", "1 天" },
-        { "SpanDay2", "2 天" },
-        { "SpanZero", "0 毫秒" },
-        { "SpanZeroWords", "没有时间" },
+        { 1, TimeUnit.Second, Tense.Past, "1 秒钟前" },
+        { 2, TimeUnit.Second, Tense.Future, "2 秒钟后" },
+        { 1, TimeUnit.Minute, Tense.Past, "1 分钟前" },
+        { 2, TimeUnit.Minute, Tense.Future, "2 分钟后" },
+        { 1, TimeUnit.Hour, Tense.Past, "1 小时前" },
+        { 2, TimeUnit.Hour, Tense.Future, "2 小时后" },
+        { 1, TimeUnit.Day, Tense.Past, "昨天" },
+        { 1, TimeUnit.Day, Tense.Future, "明天" },
+        { 2, TimeUnit.Day, Tense.Past, "2 天前" },
+        { 2, TimeUnit.Day, Tense.Future, "2 天后" },
+        { 1, TimeUnit.Month, Tense.Past, "1 个月前" },
+        { 2, TimeUnit.Month, Tense.Future, "2 个月后" },
+        { 1, TimeUnit.Year, Tense.Past, "去年" },
+        { 2, TimeUnit.Year, Tense.Future, "2 年后" },
+        { 0, TimeUnit.Second, Tense.Future, "现在" },
+    };
+
+    public static TheoryData<int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
+    {
+        { 1, TimeUnit.Second, false, "1 秒" },
+        { 2, TimeUnit.Second, false, "2 秒" },
+        { 1, TimeUnit.Minute, false, "1 分" },
+        { 2, TimeUnit.Minute, false, "2 分" },
+        { 1, TimeUnit.Hour, false, "1 小时" },
+        { 2, TimeUnit.Hour, false, "2 小时" },
+        { 1, TimeUnit.Day, false, "1 天" },
+        { 2, TimeUnit.Day, false, "2 天" },
+        { 0, TimeUnit.Millisecond, false, "0 毫秒" },
+        { 0, TimeUnit.Millisecond, true, "没有时间" },
     };
 
     [Theory]
-    [MemberData(nameof(Cases))]
-    public void UsesExpectedResourceBackedPhrases(string caseName, string expected) =>
-        LocaleResourcePhraseAssertions.Verify("zh-Hans", caseName, expected);
+    [MemberData(nameof(DateHumanizeCases))]
+    public void UsesExpectedDateHumanizePhrases(int unit, TimeUnit timeUnit, Tense tense, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyDateHumanize("zh-Hans", unit, timeUnit, tense, expected);
+
+    [Fact]
+    public void UsesExpectedNullDateHumanizePhrase() =>
+        LocaleResourcePhraseAssertions.VerifyNullDateHumanize("zh-Hans", "never");
+
+    [Theory]
+    [MemberData(nameof(TimeSpanHumanizeCases))]
+    public void UsesExpectedTimeSpanHumanizePhrases(int unit, TimeUnit timeUnit, bool toWords, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyTimeSpanHumanize("zh-Hans", unit, timeUnit, toWords, expected);
 }

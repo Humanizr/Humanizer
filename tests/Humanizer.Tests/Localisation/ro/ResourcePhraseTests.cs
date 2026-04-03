@@ -2,38 +2,50 @@ namespace Humanizer.Tests.Localisation;
 
 public class ResourcePhraseTests_ro
 {
-    public static TheoryData<string, string> Cases => new()
+    public static TheoryData<int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
-        { "DatePastSecond1", "acum o secundă" },
-        { "DateFutureSecond2", "peste 2 secunde" },
-        { "DatePastMinute1", "acum un minut" },
-        { "DateFutureMinute2", "peste 2 minute" },
-        { "DatePastHour1", "acum o oră" },
-        { "DateFutureHour2", "peste 2 ore" },
-        { "DatePastDay1", "ieri" },
-        { "DateFutureDay1", "mâine" },
-        { "DatePastDay2", "acum 2 zile" },
-        { "DateFutureDay2", "peste 2 zile" },
-        { "DatePastMonth1", "acum o lună" },
-        { "DateFutureMonth2", "peste 2 luni" },
-        { "DatePastYear1", "acum un an" },
-        { "DateFutureYear2", "peste 2 ani" },
-        { "DateNow", "acum" },
-        { "DateNever", "never" },
-        { "SpanSecond1", "1 secundă" },
-        { "SpanSecond2", "2 secunde" },
-        { "SpanMinute1", "1 minut" },
-        { "SpanMinute2", "2 minute" },
-        { "SpanHour1", "1 oră" },
-        { "SpanHour2", "2 ore" },
-        { "SpanDay1", "1 zi" },
-        { "SpanDay2", "2 zile" },
-        { "SpanZero", "0 de milisecunde" },
-        { "SpanZeroWords", "0 secunde" },
+        { 1, TimeUnit.Second, Tense.Past, "acum o secundă" },
+        { 2, TimeUnit.Second, Tense.Future, "peste 2 secunde" },
+        { 1, TimeUnit.Minute, Tense.Past, "acum un minut" },
+        { 2, TimeUnit.Minute, Tense.Future, "peste 2 minute" },
+        { 1, TimeUnit.Hour, Tense.Past, "acum o oră" },
+        { 2, TimeUnit.Hour, Tense.Future, "peste 2 ore" },
+        { 1, TimeUnit.Day, Tense.Past, "ieri" },
+        { 1, TimeUnit.Day, Tense.Future, "mâine" },
+        { 2, TimeUnit.Day, Tense.Past, "acum 2 zile" },
+        { 2, TimeUnit.Day, Tense.Future, "peste 2 zile" },
+        { 1, TimeUnit.Month, Tense.Past, "acum o lună" },
+        { 2, TimeUnit.Month, Tense.Future, "peste 2 luni" },
+        { 1, TimeUnit.Year, Tense.Past, "acum un an" },
+        { 2, TimeUnit.Year, Tense.Future, "peste 2 ani" },
+        { 0, TimeUnit.Second, Tense.Future, "acum" },
+    };
+
+    public static TheoryData<int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
+    {
+        { 1, TimeUnit.Second, false, "1 secundă" },
+        { 2, TimeUnit.Second, false, "2 secunde" },
+        { 1, TimeUnit.Minute, false, "1 minut" },
+        { 2, TimeUnit.Minute, false, "2 minute" },
+        { 1, TimeUnit.Hour, false, "1 oră" },
+        { 2, TimeUnit.Hour, false, "2 ore" },
+        { 1, TimeUnit.Day, false, "1 zi" },
+        { 2, TimeUnit.Day, false, "2 zile" },
+        { 0, TimeUnit.Millisecond, false, "0 de milisecunde" },
+        { 0, TimeUnit.Millisecond, true, "0 secunde" },
     };
 
     [Theory]
-    [MemberData(nameof(Cases))]
-    public void UsesExpectedResourceBackedPhrases(string caseName, string expected) =>
-        LocaleResourcePhraseAssertions.Verify("ro", caseName, expected);
+    [MemberData(nameof(DateHumanizeCases))]
+    public void UsesExpectedDateHumanizePhrases(int unit, TimeUnit timeUnit, Tense tense, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyDateHumanize("ro", unit, timeUnit, tense, expected);
+
+    [Fact]
+    public void UsesExpectedNullDateHumanizePhrase() =>
+        LocaleResourcePhraseAssertions.VerifyNullDateHumanize("ro", "never");
+
+    [Theory]
+    [MemberData(nameof(TimeSpanHumanizeCases))]
+    public void UsesExpectedTimeSpanHumanizePhrases(int unit, TimeUnit timeUnit, bool toWords, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyTimeSpanHumanize("ro", unit, timeUnit, toWords, expected);
 }

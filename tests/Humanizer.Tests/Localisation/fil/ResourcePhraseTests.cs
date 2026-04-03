@@ -2,38 +2,50 @@ namespace Humanizer.Tests.Localisation;
 
 public class ResourcePhraseTests_fil
 {
-    public static TheoryData<string, string> Cases => new()
+    public static TheoryData<int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
-        { "DatePastSecond1", "isang segundo ang nakalipas" },
-        { "DateFutureSecond2", "2 segundo mula ngayon" },
-        { "DatePastMinute1", "isang minutong nakalipas" },
-        { "DateFutureMinute2", "2 minuto mula ngayon" },
-        { "DatePastHour1", "isang oras ang nakalipas" },
-        { "DateFutureHour2", "2 oras mula ngayon" },
-        { "DatePastDay1", "kahapon" },
-        { "DateFutureDay1", "bukas" },
-        { "DatePastDay2", "2 isang araw ang nakalipas" },
-        { "DateFutureDay2", "2 araw mula ngayon" },
-        { "DatePastMonth1", "isang buwan ang nakalipas" },
-        { "DateFutureMonth2", "2 buwan mula ngayon" },
-        { "DatePastYear1", "isang taong nakalipas" },
-        { "DateFutureYear2", "2 taon mula ngayon" },
-        { "DateNow", "ngayon" },
-        { "DateNever", "hindi kailanman" },
-        { "SpanSecond1", "1 segundo" },
-        { "SpanSecond2", "2 segundo" },
-        { "SpanMinute1", "1 minuto" },
-        { "SpanMinute2", "2 minuto" },
-        { "SpanHour1", "1 oras" },
-        { "SpanHour2", "2 oras" },
-        { "SpanDay1", "1 araw" },
-        { "SpanDay2", "2 araw" },
-        { "SpanZero", "0 milliseconds" },
-        { "SpanZeroWords", "walang oras" },
+        { 1, TimeUnit.Second, Tense.Past, "isang segundo ang nakalipas" },
+        { 2, TimeUnit.Second, Tense.Future, "2 segundo mula ngayon" },
+        { 1, TimeUnit.Minute, Tense.Past, "isang minutong nakalipas" },
+        { 2, TimeUnit.Minute, Tense.Future, "2 minuto mula ngayon" },
+        { 1, TimeUnit.Hour, Tense.Past, "isang oras ang nakalipas" },
+        { 2, TimeUnit.Hour, Tense.Future, "2 oras mula ngayon" },
+        { 1, TimeUnit.Day, Tense.Past, "kahapon" },
+        { 1, TimeUnit.Day, Tense.Future, "bukas" },
+        { 2, TimeUnit.Day, Tense.Past, "2 isang araw ang nakalipas" },
+        { 2, TimeUnit.Day, Tense.Future, "2 araw mula ngayon" },
+        { 1, TimeUnit.Month, Tense.Past, "isang buwan ang nakalipas" },
+        { 2, TimeUnit.Month, Tense.Future, "2 buwan mula ngayon" },
+        { 1, TimeUnit.Year, Tense.Past, "isang taong nakalipas" },
+        { 2, TimeUnit.Year, Tense.Future, "2 taon mula ngayon" },
+        { 0, TimeUnit.Second, Tense.Future, "ngayon" },
+    };
+
+    public static TheoryData<int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
+    {
+        { 1, TimeUnit.Second, false, "1 segundo" },
+        { 2, TimeUnit.Second, false, "2 segundo" },
+        { 1, TimeUnit.Minute, false, "1 minuto" },
+        { 2, TimeUnit.Minute, false, "2 minuto" },
+        { 1, TimeUnit.Hour, false, "1 oras" },
+        { 2, TimeUnit.Hour, false, "2 oras" },
+        { 1, TimeUnit.Day, false, "1 araw" },
+        { 2, TimeUnit.Day, false, "2 araw" },
+        { 0, TimeUnit.Millisecond, false, "0 milliseconds" },
+        { 0, TimeUnit.Millisecond, true, "walang oras" },
     };
 
     [Theory]
-    [MemberData(nameof(Cases))]
-    public void UsesExpectedResourceBackedPhrases(string caseName, string expected) =>
-        LocaleResourcePhraseAssertions.Verify("fil", caseName, expected);
+    [MemberData(nameof(DateHumanizeCases))]
+    public void UsesExpectedDateHumanizePhrases(int unit, TimeUnit timeUnit, Tense tense, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyDateHumanize("fil", unit, timeUnit, tense, expected);
+
+    [Fact]
+    public void UsesExpectedNullDateHumanizePhrase() =>
+        LocaleResourcePhraseAssertions.VerifyNullDateHumanize("fil", "hindi kailanman");
+
+    [Theory]
+    [MemberData(nameof(TimeSpanHumanizeCases))]
+    public void UsesExpectedTimeSpanHumanizePhrases(int unit, TimeUnit timeUnit, bool toWords, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyTimeSpanHumanize("fil", unit, timeUnit, toWords, expected);
 }

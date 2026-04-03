@@ -2,38 +2,50 @@ namespace Humanizer.Tests.Localisation;
 
 public class ResourcePhraseTests_hy
 {
-    public static TheoryData<string, string> Cases => new()
+    public static TheoryData<int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
-        { "DatePastSecond1", "մեկ վայրկյան առաջ" },
-        { "DateFutureSecond2", "2 վայրկյանից" },
-        { "DatePastMinute1", "մեկ րոպե առաջ" },
-        { "DateFutureMinute2", "2 րոպեից" },
-        { "DatePastHour1", "մեկ ժամ առաջ" },
-        { "DateFutureHour2", "2 ժամից" },
-        { "DatePastDay1", "երեկ" },
-        { "DateFutureDay1", "վաղը" },
-        { "DatePastDay2", "2 օր առաջ" },
-        { "DateFutureDay2", "2 օրից" },
-        { "DatePastMonth1", "մեկ ամիս առաջ" },
-        { "DateFutureMonth2", "2 ամսից" },
-        { "DatePastYear1", "մեկ տարի առաջ" },
-        { "DateFutureYear2", "2 տարուց" },
-        { "DateNow", "հիմա" },
-        { "DateNever", "never" },
-        { "SpanSecond1", "մեկ վայրկյան" },
-        { "SpanSecond2", "2 վայրկյան" },
-        { "SpanMinute1", "մեկ րոպե" },
-        { "SpanMinute2", "2 րոպե" },
-        { "SpanHour1", "մեկ ժամ" },
-        { "SpanHour2", "2 ժամ" },
-        { "SpanDay1", "մեկ օր" },
-        { "SpanDay2", "2 օր" },
-        { "SpanZero", "0 միլիվայրկյան" },
-        { "SpanZeroWords", "ժամանակը բացակայում է" },
+        { 1, TimeUnit.Second, Tense.Past, "մեկ վայրկյան առաջ" },
+        { 2, TimeUnit.Second, Tense.Future, "2 վայրկյանից" },
+        { 1, TimeUnit.Minute, Tense.Past, "մեկ րոպե առաջ" },
+        { 2, TimeUnit.Minute, Tense.Future, "2 րոպեից" },
+        { 1, TimeUnit.Hour, Tense.Past, "մեկ ժամ առաջ" },
+        { 2, TimeUnit.Hour, Tense.Future, "2 ժամից" },
+        { 1, TimeUnit.Day, Tense.Past, "երեկ" },
+        { 1, TimeUnit.Day, Tense.Future, "վաղը" },
+        { 2, TimeUnit.Day, Tense.Past, "2 օր առաջ" },
+        { 2, TimeUnit.Day, Tense.Future, "2 օրից" },
+        { 1, TimeUnit.Month, Tense.Past, "մեկ ամիս առաջ" },
+        { 2, TimeUnit.Month, Tense.Future, "2 ամսից" },
+        { 1, TimeUnit.Year, Tense.Past, "մեկ տարի առաջ" },
+        { 2, TimeUnit.Year, Tense.Future, "2 տարուց" },
+        { 0, TimeUnit.Second, Tense.Future, "հիմա" },
+    };
+
+    public static TheoryData<int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
+    {
+        { 1, TimeUnit.Second, false, "մեկ վայրկյան" },
+        { 2, TimeUnit.Second, false, "2 վայրկյան" },
+        { 1, TimeUnit.Minute, false, "մեկ րոպե" },
+        { 2, TimeUnit.Minute, false, "2 րոպե" },
+        { 1, TimeUnit.Hour, false, "մեկ ժամ" },
+        { 2, TimeUnit.Hour, false, "2 ժամ" },
+        { 1, TimeUnit.Day, false, "մեկ օր" },
+        { 2, TimeUnit.Day, false, "2 օր" },
+        { 0, TimeUnit.Millisecond, false, "0 միլիվայրկյան" },
+        { 0, TimeUnit.Millisecond, true, "ժամանակը բացակայում է" },
     };
 
     [Theory]
-    [MemberData(nameof(Cases))]
-    public void UsesExpectedResourceBackedPhrases(string caseName, string expected) =>
-        LocaleResourcePhraseAssertions.Verify("hy", caseName, expected);
+    [MemberData(nameof(DateHumanizeCases))]
+    public void UsesExpectedDateHumanizePhrases(int unit, TimeUnit timeUnit, Tense tense, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyDateHumanize("hy", unit, timeUnit, tense, expected);
+
+    [Fact]
+    public void UsesExpectedNullDateHumanizePhrase() =>
+        LocaleResourcePhraseAssertions.VerifyNullDateHumanize("hy", "never");
+
+    [Theory]
+    [MemberData(nameof(TimeSpanHumanizeCases))]
+    public void UsesExpectedTimeSpanHumanizePhrases(int unit, TimeUnit timeUnit, bool toWords, string expected) =>
+        LocaleResourcePhraseAssertions.VerifyTimeSpanHumanize("hy", unit, timeUnit, toWords, expected);
 }
