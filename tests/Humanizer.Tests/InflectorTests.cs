@@ -61,6 +61,20 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
 
     [Theory]
+    [InlineData("arrives", "arrive")]
+    [InlineData("drives", "drive")]
+    [InlineData("curves", "curve")]
+    [InlineData("behaves", "behave")]
+    [InlineData("survives", "survive")]
+    [InlineData("derives", "derive")]
+    [InlineData("knives", "knife")]
+    [InlineData("wives", "wife")]
+    [InlineData("leaves", "leaf")]
+    [InlineData("lives", "life")]
+    public void Singularize_Ves_EdgeCases(string plural, string expected) =>
+        Assert.Equal(expected, plural.Singularize());
+
+    [Theory]
     [InlineData("a")]
     [InlineData("A")]
     [InlineData("s")]
