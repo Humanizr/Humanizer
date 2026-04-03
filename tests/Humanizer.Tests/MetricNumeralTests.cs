@@ -75,46 +75,176 @@ public class MetricNumeralTests
         Assert.True(isEquals);
     }
 
+    public static TheoryData<long, int?, string> GenerateLongToMetricTestCases()
+    {
+        // Dividing by 1.000...M removes all trailing zeros by changing the scale factor.
+        static decimal RemoveTrailingZeroes(ref decimal value)
+            => value /= 1.000000000000000000000000000000000M;
+
+        var data = new TheoryData<long, int?, string>();
+
+        // 0-999
+        foreach (var value in (long[])[0, 123])
+        {
+            foreach (var decimals in (int?[])[null, 0, 1, 3, 20])
+            {
+                data.Add(value, decimals, value.ToString());
+            }
+        }
+
+        // 1,000-999,999
+        foreach (var value in (long[])[23456, 123456, 123056, 123999])
+        {
+            foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 20])
+            {
+                var scaledValue = value * 0.001M;
+
+                var truncatedValue =
+                    decimals.HasValue
+                    ? Math.Round(scaledValue, decimals.Value)
+                    : scaledValue;
+
+                RemoveTrailingZeroes(ref truncatedValue);
+
+                var expected = truncatedValue + "k";
+
+                data.Add(value, decimals, expected);
+            }
+        }
+
+        // 1,000,000-999,999,999
+        foreach (var value in (long[])[23456789, 123456789, 123050709])
+        {
+            foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 4, 5, 6, 20])
+            {
+                var scaledValue = value * 0.000001M;
+
+                var truncatedValue =
+                    decimals.HasValue
+                    ? Math.Round(scaledValue, decimals.Value)
+                    : scaledValue;
+
+                RemoveTrailingZeroes(ref truncatedValue);
+
+                var expected = truncatedValue + "M";
+
+                data.Add(value, decimals, expected);
+            }
+        }
+
+        // 1,000,000,000-999,999,999,999
+        foreach (var value in (long[])[23456789123, 123456789123, 123050709020])
+        {
+            foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 7, 8, 9, 20])
+            {
+                var scaledValue = value * 0.000000001M;
+
+                var truncatedValue =
+                    decimals.HasValue
+                    ? Math.Round(scaledValue, decimals.Value)
+                    : scaledValue;
+
+                RemoveTrailingZeroes(ref truncatedValue);
+
+                var expected = truncatedValue + "G";
+
+                data.Add(value, decimals, expected);
+            }
+        }
+
+        // 1,000,000,000,000-999,999,999,999,999
+        foreach (var value in (long[])[23456789123456, 123456789123456, 123050709020406])
+        {
+            foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 10, 11, 12, 20])
+            {
+                var scaledValue = value * 0.000000000001M;
+
+                var truncatedValue =
+                    decimals.HasValue
+                    ? Math.Round(scaledValue, decimals.Value)
+                    : scaledValue;
+
+                RemoveTrailingZeroes(ref truncatedValue);
+
+                var expected = truncatedValue + "T";
+
+                data.Add(value, decimals, expected);
+            }
+        }
+
+        // 1,000,000,000,000,000-999,999,999,999,999,999
+        foreach (var value in (long[])[23456789123456789, 123456789123456789, 123050709020406080])
+        {
+            foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 13, 14, 15, 20])
+            {
+                var scaledValue = value * 0.000000000000001M;
+
+                var truncatedValue =
+                    decimals.HasValue
+                    ? Math.Round(scaledValue, decimals.Value)
+                    : scaledValue;
+
+                RemoveTrailingZeroes(ref truncatedValue);
+
+                var expected = truncatedValue + "P";
+
+                data.Add(value, decimals, expected);
+            }
+        }
+        // 1,000,000,000,000,000,000-
+        foreach (var value in (long[])[1_001_002_003_004_005_006, 2_305_079_902_040_799_020, long.MaxValue])
+        {
+            for (var decimalsValue = -1; decimalsValue <= 20; decimalsValue++)
+            {
+                var decimals = decimalsValue < 0 ? null : (int?)decimalsValue;
+
+                var scaledValue = value * 0.000000000000000001M;
+
+                var truncatedValue =
+                    decimals.HasValue
+                    ? Math.Round(scaledValue, decimals.Value)
+                    : scaledValue;
+
+                RemoveTrailingZeroes(ref truncatedValue);
+
+                var expected = truncatedValue + "E";
+
+                data.Add(value, decimals, expected);
+            }
+        }
+
+        // Verify banker's rounding is used
+        data.Add(2400, 0, "2k");
+        data.Add(2500, 0, "2k");
+        data.Add(2600, 0, "3k");
+        data.Add(3400, 0, "3k");
+        data.Add(3500, 0, "4k");
+        data.Add(3600, 0, "4k");
+
+        // Verify scale changes due to rounding are handled.
+        data.Add(999500, 0, "1M");
+        data.Add(999600000, 0, "1G");
+        data.Add(999700000000, 0, "1T");
+        data.Add(999500000000001, 0, "1P");
+        data.Add(999500000000000000, 0, "1E");
+
+        foreach (var positiveTestCase in data.ToList())
+        {
+            var negativeValue = -positiveTestCase.Data.Item1;
+            var decimals = positiveTestCase.Data.Item2;
+            var negativeExpected =
+                negativeValue != 0
+                ? "-" + positiveTestCase.Data.Item3
+                : positiveTestCase.Data.Item3;
+
+            data.Add(negativeValue, decimals, negativeExpected);
+        }
+
+        return data;
+    }
+
     [Theory]
-    [InlineData(0, 0, "0")]
-    [InlineData(0, 1, "0.0")]
-    [InlineData(0, 3, "0.000")]
-    [InlineData(0, 20, "0.00000000000000000000")]
-    [InlineData(123, 0, "123")]
-    [InlineData(123, 1, "123.0")]
-    [InlineData(123, 3, "123.000")]
-    [InlineData(123, 20, "123.00000000000000000000")]
-    [InlineData(123456, null, "123.456k")]
-    [InlineData(123456, 0, "123k")]
-    [InlineData(123456, 1, "123.5k")]
-    [InlineData(123456, 2, "123.46k")]
-    [InlineData(123456, 3, "123.456k")]
-    [InlineData(123456, 20, "123.45600000000000000000k")]
-    [InlineData(123456789, null, "123.456789M")]
-    [InlineData(123456789, 0, "123M")]
-    [InlineData(123456789, 1, "123.5M")]
-    [InlineData(123456789, 2, "123.46M")]
-    [InlineData(123456789, 3, "123.457M")]
-    [InlineData(123456789, 5, "123.45679M")]
-    [InlineData(123456789, 20, "123.45678900000000000000M")]
-    [InlineData(123456789987, 5, "123.45679G")]
-    [InlineData(123456789987, 20, "123.45678998700000000000G")]
-    [InlineData(123456789987654, 5, "123.45679T")]
-    [InlineData(123456789987654, 20, "123.45678998765400000000T")]
-    [InlineData(123456789987654321, 5, "123.45679P")]
-    [InlineData(123456789987654321, 20, "123.45678998765432100000P")]
-    [InlineData(9223372036854775807, null, "9.223372036854775807E")]
-    [InlineData(9223372036854775807, 0, "9E")]
-    [InlineData(9223372036854775807, 3, "9.223E")]
-    [InlineData(9223372036854775807, 20, "9.22337203685477580700E")]
-    [InlineData(-1, null, "-1")]
-    [InlineData(-123, null, "-123")]
-    [InlineData(-123456, null, "-123.456k")]
-    [InlineData(-123456789, null, "-123.456789M")]
-    [InlineData(-9223372036854775808, null, "-9.223372036854775808E")]
-    [InlineData(-9223372036854775808, 0, "-9E")]
-    [InlineData(-9223372036854775808, 3, "-9.223E")]
-    [InlineData(-9223372036854775808, 20, "-9.22337203685477580800E")]
+    [MemberData(nameof(GenerateLongToMetricTestCases))]
     public void TestAllSymbolsAsLong(long subject, int? decimals, string expected) =>
         Assert.Equal(expected, subject.ToMetric(decimals: decimals));
 
