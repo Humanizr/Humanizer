@@ -58,7 +58,6 @@ static class LocaleCoverageData
         {
             { "ca", "1 i 2", "1, 2 i 3" },
             { "de", "1 und 2", "1, 2 und 3" },
-            { "dk", "1 og 2", "1, 2 og 3" },
             { "en", "1 and 2", "1, 2, and 3" },
             { "es", "1 y 2", "1, 2 y 3" },
             { "is", "1 og 2", "1, 2 og 3" },
@@ -155,13 +154,7 @@ static class LocaleCoverageData
         };
 #endif
 
-    public static TheoryData<string, string> UnsupportedWordsToNumberCultureTheoryData =>
-        new()
-        {
-            { "es-ES", "veinte" },
-            { "fr-FR", "vingt" },
-            { "zu-ZA", "one" }
-        };
+    public static TheoryData<string, string> UnsupportedWordsToNumberCultureTheoryData => CreateUnsupportedWordsToNumberCultureTheoryData();
 
     public static CultureSwap UseCulture(string cultureName) => new(new(cultureName));
 
@@ -173,6 +166,19 @@ static class LocaleCoverageData
             data.Add(locale);
         }
 
+        return data;
+    }
+
+    static TheoryData<string, string> CreateUnsupportedWordsToNumberCultureTheoryData()
+    {
+        var data = new TheoryData<string, string>();
+
+        foreach (var locale in NumberToWordsLocales.Where(static locale => CultureInfo.GetCultureInfo(locale).TwoLetterISOLanguageName != "en"))
+        {
+            data.Add(locale, "one");
+        }
+
+        data.Add("zu-ZA", "one");
         return data;
     }
 

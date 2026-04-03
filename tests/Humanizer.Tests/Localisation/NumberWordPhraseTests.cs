@@ -86,13 +86,13 @@ public class NumberWordPhraseTests
 
     [Theory]
     [MemberData(nameof(LocaleNumberTheoryData.WordsToNumberUnsupportedLocaleCases), MemberType = typeof(LocaleNumberTheoryData))]
-    public void UsesExpectedWordsToNumberUnsupportedLocaleCases(string localeName)
+    public void UsesExpectedWordsToNumberUnsupportedLocaleCases(string localeName, string words)
     {
         var culture = GetCulture(localeName);
 
-        Assert.Throws<NotSupportedException>(() => "one".ToNumber(culture));
-        Assert.Throws<NotSupportedException>(() => "one".TryToNumber(out _, culture, out _));
+        Assert.Throws<NotSupportedException>(() => words.ToNumber(culture));
+        Assert.Throws<NotSupportedException>(() => words.TryToNumber(out _, culture, out _));
     }
-    
+
     static CultureInfo GetCulture(string localeName) => CultureInfo.GetCultureInfo(localeName);
 }

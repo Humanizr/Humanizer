@@ -8,7 +8,7 @@ public class LocaliserRegistryTests
         var registry = new LocaliserRegistry<string>(culture => $"default:{culture.Name}");
         registry.Register("fr", culture => $"fr:{culture.Name}");
 
-        using var _ = LocaleCoverageData.UseCulture("fr-CH");
+        using var _ = new DistinctCultureSwap(new("en-US"), new("fr-CH"));
 
         Assert.Equal("fr:fr-CH", registry.ResolveForUiCulture());
     }
@@ -19,7 +19,7 @@ public class LocaliserRegistryTests
         var registry = new LocaliserRegistry<string>(culture => $"default:{culture.Name}");
         registry.Register("fr", culture => $"fr:{culture.Name}");
 
-        using var _ = LocaleCoverageData.UseCulture("fr-CH");
+        using var _ = new DistinctCultureSwap(new("en-US"), new("fr-CH"));
 
         Assert.Equal("fr:fr-CH", registry.ResolveForCulture(null));
     }
@@ -61,5 +61,23 @@ public class LocaliserRegistryTests
 
         var exception = Assert.Throws<InvalidOperationException>(() => registry.Register("fr", _ => "bonjour"));
         Assert.Equal("Cannot register localisers after the registry has been used.", exception.Message);
+    }
+}
+
+sealed class DistinctCultureSwap : IDisposable
+{
+    readonly CultureInfo originalCulture = CultureInfo.CurrentCulture;
+    readonly CultureInfo originalUiCulture = CultureInfo.CurrentUICulture;
+
+    public DistinctCultureSwap(CultureInfo culture, CultureInfo uiCulture)
+    {
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = uiCulture;
+    }
+
+    public void Dispose()
+    {
+        CultureInfo.CurrentCulture = originalCulture;
+        CultureInfo.CurrentUICulture = originalUiCulture;
     }
 }
