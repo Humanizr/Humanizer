@@ -4,6 +4,17 @@ static class LocaleFormatterExactTheoryData
 {
     public static readonly int[] DatePluralDayCounts = [2, 3, 4, 5, 11, 21];
     public static readonly double[] HeadingAngles = [0.0d, 22.5d, 45.0d, 67.5d, 90.0d, 112.5d, 135.0d, 157.5d, 180.0d, 202.5d, 225.0d, 247.5d, 270.0d, 292.5d, 315.0d, 337.5d];
+#if NET48
+    const string arabicKilobytes = "1.95 KB";
+    const string armenianKilobytes = "1.95 KB";
+    const string kurdishKilobytes = "1.95 KB";
+    const string persianKilobytes = "1/95 KB";
+#else
+    const string arabicKilobytes = "1٫95 KB";
+    const string armenianKilobytes = "1,95 KB";
+    const string kurdishKilobytes = "1٫95 KB";
+    const string persianKilobytes = "1٫95 KB";
+#endif
 
     public static TheoryData<string, string[], string[]> DateDayPluralCases => new()
     {
@@ -176,7 +187,7 @@ static class LocaleFormatterExactTheoryData
     public static TheoryData<string, string[]> ByteSizeSymbolCases => new()
     {
         { "af", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
-        { "ar", ["1 b", "2 B", "1٫95 KB", "2048 KB"] },
+        { "ar", ["1 b", "2 B", arabicKilobytes, "2048 KB"] },
         { "az", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "bg", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "bn", ["1 b", "2 B", "1.95 KB", "2048 KB"] },
@@ -187,20 +198,20 @@ static class LocaleFormatterExactTheoryData
         { "el", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "en", ["1 b", "2 B", "1.95 KB", "2048 KB"] },
         { "es", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
-        { "fa", ["1 b", "2 B", "1٫95 KB", "2048 KB"] },
+        { "fa", ["1 b", "2 B", persianKilobytes, "2048 KB"] },
         { "fi", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "fil", ["1 b", "2 B", "1.95 KB", "2048 KB"] },
         { "fr", ["1 b", "2 o", "1,95 Ko", "2048 Ko"] },
         { "he", ["1 b", "2 B", "1.95 KB", "2048 KB"] },
         { "hr", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "hu", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
-        { "hy", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
+        { "hy", ["1 b", "2 B", armenianKilobytes, "2048 KB"] },
         { "id", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "is", ["1 b", "2 B", "1,95 kB", "2048 kB"] },
         { "it", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "ja", ["1 b", "2 B", "1.95 KB", "2048 KB"] },
         { "ko", ["1 b", "2 B", "1.95 KB", "2048 KB"] },
-        { "ku", ["1 b", "2 B", "1٫95 KB", "2048 KB"] },
+        { "ku", ["1 b", "2 B", kurdishKilobytes, "2048 KB"] },
         { "lb", ["1 bit", "2 B", "1,95 KB", "2048 KB"] },
         { "lt", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
         { "lv", ["1 b", "2 B", "1,95 KB", "2048 KB"] },
