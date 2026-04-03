@@ -391,6 +391,16 @@ public static class MetricNumeralExtensions
             return BuildMetricRepresentation(input, exponent, formats, decimals);
         }
 
+        if (decimals.HasValue)
+        {
+            var rounded = Math.Round(input, decimals.Value);
+            if (!rounded.Equals(0d))
+            {
+                var roundedExponent = (int)Math.Floor(Math.Log10(Math.Abs(rounded)) / 3);
+                if (!roundedExponent.Equals(0))
+                    return BuildMetricRepresentation(rounded, roundedExponent, formats, decimals);
+            }
+        }
         var representation = decimals.HasValue
             ? Math
                 .Round(input, decimals.Value)
