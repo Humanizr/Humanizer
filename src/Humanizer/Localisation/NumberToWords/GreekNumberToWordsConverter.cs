@@ -247,7 +247,7 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
             return ConvertIntBTR(number);
         }
 
-        return ConvertIntBQR(number);
+        return "";
     }
 
     static string ConvertIntB13(long number, bool returnPluralized) =>
@@ -358,30 +358,6 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
         if (number % 1000000000 != 0)
         {
             result += $" {ConvertImpl(number % 1000000000, false).ToLower()}";
-        }
-
-        return result;
-    }
-
-    string ConvertIntBQR(long number)
-    {
-        const long oneTrillion = 1000000000000;
-
-        if (number / oneTrillion == 1)
-        {
-            if (number % oneTrillion == 0)
-            {
-                return "ένα τρισεκατομμύριο";
-            }
-
-            return $"ένα τρισεκατομμύριο {ConvertImpl(number % oneTrillion, false).ToLower()}";
-        }
-
-        var result = $"{ConvertImpl(number / oneTrillion, false)} τρισεκατομμύρια";
-
-        if (number % oneTrillion != 0)
-        {
-            result += $" {ConvertImpl(number % oneTrillion, false).ToLower()}";
         }
 
         return result;
