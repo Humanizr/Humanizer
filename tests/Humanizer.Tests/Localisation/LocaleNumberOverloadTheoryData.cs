@@ -6,8 +6,8 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, OverloadExpectation[]> AddAndCases => new()
     {
-        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Exception<NotImplementedException>()] },
-        { "en", [Value("one million and one thousand one"), Value("one billion and one million one"), Value("four trillion three hundred and twenty-five billion and ten million and seven thousand eighteen")] },
+        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Value("vier duisend drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien")] },
+        { "en", [Value("one million one thousand one"), Value("one billion one million one"), Value("four trillion three hundred twenty-five billion ten million seven thousand eighteen")] },
         { "ar", [Value("مليون و   ألف و واحد"), Value("مليار و   مليون و واحد"), Value("أربعة تريليونات و ثلاث مئة و خمسة و عشرون ملياراً و عشرة ملايين و سبعة آلاف و ثمانية عشر")] },
         { "cs", [Value("jeden milion jeden tisíc jeden"), Value("jedna miliarda jeden milion jeden"), AnyException()] },
         { "fa", [Value("یک میلیون و یک هزار و یک"), Value("یک میلیارد و یک میلیون و یک"), Value("چهار بیلیون و سیصد و بیست و پنج میلیارد و ده میلیون و هفت هزار و هجده")] },
@@ -36,8 +36,8 @@ public static class LocaleNumberOverloadTheoryData
         { "uz-Latn-UZ", [Value("bir million bir ming bir"), Value("bir milliard bir million bir"), Exception<NotImplementedException>()] },
         { "uz-Cyrl-UZ", [Value("бир миллион бир минг бир"), Value("бир миллиард бир миллион бир"), Exception<NotImplementedException>()] },
         { "sv", [Value("en miljon ett tusen ett"), Value("en miljard en miljon ett"), Exception<NotImplementedException>()] },
-        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Exception<NotImplementedException>()] },
-        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Exception<NotImplementedException>()] },
+        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Value("четири билиона тристо двадесет пет милијарди десет милиона седам хиљада осамнаест")] },
+        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Value("četiri biliona tristo dvadeset pet milijardi deset miliona sedam hiljada osamnaest")] },
         { "ta", [Value("பத்து இலட்சத்து ஆயிரத்து ஒன்று"), Value("நூறு கோடியே பத்து இலட்சத்து ஒன்று"), Value("ஒரு கோடியே ஏழாயிரத்து பதினெட்டு")] },
         { "hr", [Value("milijun tisuću jedan"), Value("milijarda milijun jedan"), Value("četiri bilijuna tristo dvadeset pet milijardi deset milijuna sedam tisuća osamnaest")] },
         { "nb", [Value("en million tusenogen"), Value("en milliard en million og en"), Exception<NotImplementedException>()] },
@@ -50,9 +50,9 @@ public static class LocaleNumberOverloadTheoryData
         { "az", [Value("bir milyon min bir"), Value("bir milyard bir milyon bir"), Exception<NotImplementedException>()] },
         { "ja", [Value("百万千一"), Value("十億百万一"), Value("四兆三千二百五十億千万七千十八")] },
         { "ku", [Value("یەک میلیۆن و یەک هەزار و یەک"), Value("یەک میلیارد و یەک میلیۆن و یەک"), Value("چوار تریلیۆن و سێ سەد و بیست و پێنج میلیارد و دە میلیۆن و حەوت هەزار و هەژدە")] },
-        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("")] },
-        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบเเปด")] },
-        { "lv", [Value("viens miljoni tūkstoš viens"), Value("tūkstoš viens miljoni viens"), Exception<NotImplementedException>()] },
+        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("τέσσερα τρισεκατομμύρια τριακόσια είκοσι πέντε δισεκατομμύρια δέκα εκατομμύρια επτά χιλιάδες δεκαοκτώ")] },
+        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบแปด")] },
+        { "lv", [Value("viens miljons tūkstoš viens"), Value("viens miljards viens miljons viens"), Value("četri triljoni trīs simti divdesmit pieci miljardi desmit miljoni septiņi tūkstoši astoņpadsmit")] },
         { "ko", [Value("백만천일"), Value("십억백만일"), Value("사조삼천이백오십억천만칠천십팔")] },
         { "en-IN", [Value("ten lakh one thousand one"), Value("one hundred crore ten lakh one"), Value("four lakh thirty two thousand five hundred and one crore seven thousand eighteen")] },
         { "lt", [Value("milijonas tūkstantis vienas"), Value("milijardas milijonas vienas"), Value("keturi trilijonai trys šimtai dvidešimt penki milijardai dešimt milijonų septyni tūkstančiai aštuoniolika")] },
@@ -63,8 +63,9 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, OverloadExpectation[]> WordFormCases => new()
     {
-        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Exception<NotImplementedException>()] },
+        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Value("vier duisend drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien")] },
         { "en", [Value("one million and one thousand and one"), Value("one billion and one million and one"), Value("four trillion three hundred and twenty-five billion and ten million and seven thousand and eighteen")] },
+        { "en-GB", [Value("one million one thousand and one"), Value("one billion one million and one"), Value("four trillion three hundred and twenty-five billion ten million seven thousand and eighteen")] },
         { "ar", [Value("مليون و   ألف و واحد"), Value("مليار و   مليون و واحد"), Value("أربعة تريليونات و ثلاث مئة و خمسة و عشرون ملياراً و عشرة ملايين و سبعة آلاف و ثمانية عشر")] },
         { "cs", [Value("jeden milion jeden tisíc jeden"), Value("jedna miliarda jeden milion jeden"), AnyException()] },
         { "fa", [Value("یک میلیون و یک هزار و یک"), Value("یک میلیارد و یک میلیون و یک"), Value("چهار بیلیون و سیصد و بیست و پنج میلیارد و ده میلیون و هفت هزار و هجده")] },
@@ -93,8 +94,8 @@ public static class LocaleNumberOverloadTheoryData
         { "uz-Latn-UZ", [Value("bir million bir ming bir"), Value("bir milliard bir million bir"), Exception<NotImplementedException>()] },
         { "uz-Cyrl-UZ", [Value("бир миллион бир минг бир"), Value("бир миллиард бир миллион бир"), Exception<NotImplementedException>()] },
         { "sv", [Value("en miljon ett tusen ett"), Value("en miljard en miljon ett"), Exception<NotImplementedException>()] },
-        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Exception<NotImplementedException>()] },
-        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Exception<NotImplementedException>()] },
+        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Value("четири билиона тристо двадесет пет милијарди десет милиона седам хиљада осамнаест")] },
+        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Value("četiri biliona tristo dvadeset pet milijardi deset miliona sedam hiljada osamnaest")] },
         { "ta", [Value("பத்து இலட்சத்து ஆயிரத்து ஒன்று"), Value("நூறு கோடியே பத்து இலட்சத்து ஒன்று"), Value("ஒரு கோடியே ஏழாயிரத்து பதினெட்டு")] },
         { "hr", [Value("milijun tisuću jedan"), Value("milijarda milijun jedan"), Value("četiri bilijuna tristo dvadeset pet milijardi deset milijuna sedam tisuća osamnaest")] },
         { "nb", [Value("en million tusenogen"), Value("en milliard en million og en"), Exception<NotImplementedException>()] },
@@ -107,9 +108,9 @@ public static class LocaleNumberOverloadTheoryData
         { "az", [Value("bir milyon min bir"), Value("bir milyard bir milyon bir"), Exception<NotImplementedException>()] },
         { "ja", [Value("百万千一"), Value("十億百万一"), Value("四兆三千二百五十億千万七千十八")] },
         { "ku", [Value("یەک میلیۆن و یەک هەزار و یەک"), Value("یەک میلیارد و یەک میلیۆن و یەک"), Value("چوار تریلیۆن و سێ سەد و بیست و پێنج میلیارد و دە میلیۆن و حەوت هەزار و هەژدە")] },
-        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("")] },
-        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบเเปด")] },
-        { "lv", [Value("viens miljoni tūkstoš viens"), Value("tūkstoš viens miljoni viens"), Exception<NotImplementedException>()] },
+        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("τέσσερα τρισεκατομμύρια τριακόσια είκοσι πέντε δισεκατομμύρια δέκα εκατομμύρια επτά χιλιάδες δεκαοκτώ")] },
+        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบแปด")] },
+        { "lv", [Value("viens miljons tūkstoš viens"), Value("viens miljards viens miljons viens"), Value("četri triljoni trīs simti divdesmit pieci miljardi desmit miljoni septiņi tūkstoši astoņpadsmit")] },
         { "ko", [Value("백만천일"), Value("십억백만일"), Value("사조삼천이백오십억천만칠천십팔")] },
         { "en-IN", [Value("ten lakh one thousand one"), Value("one hundred crore ten lakh one"), Value("four lakh thirty two thousand five hundred and one crore seven thousand eighteen")] },
         { "lt", [Value("milijonas tūkstantis vienas"), Value("milijardas milijonas vienas"), Value("keturi trilijonai trys šimtai dvidešimt penki milijardai dešimt milijonų septyni tūkstančiai aštuoniolika")] },
@@ -120,8 +121,9 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, OverloadExpectation[]> GenderCases => new()
     {
-        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Exception<NotImplementedException>()] },
+        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Value("vier duisend drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien")] },
         { "en", [Value("one million and one thousand and one"), Value("one billion and one million and one"), Value("four trillion three hundred and twenty-five billion and ten million and seven thousand and eighteen")] },
+        { "en-GB", [Value("one million one thousand and one"), Value("one billion one million and one"), Value("four trillion three hundred and twenty-five billion ten million seven thousand and eighteen")] },
         { "ar", [Value("مليون و   ألف و واحدة"), Value("مليار و   مليون و واحدة"), Value("أربعة تريليونات و ثلاث مئة و خمس و عشرون ملياراً و عشرة ملايين و سبعة آلاف و ثمان عشرة")] },
         { "cs", [Value("jeden milion jeden tisíc jedna"), Value("jedna miliarda jeden milion jedna"), AnyException()] },
         { "fa", [Value("یک میلیون و یک هزار و یک"), Value("یک میلیارد و یک میلیون و یک"), Value("چهار بیلیون و سیصد و بیست و پنج میلیارد و ده میلیون و هفت هزار و هجده")] },
@@ -150,8 +152,8 @@ public static class LocaleNumberOverloadTheoryData
         { "uz-Latn-UZ", [Value("bir million bir ming bir"), Value("bir milliard bir million bir"), Exception<NotImplementedException>()] },
         { "uz-Cyrl-UZ", [Value("бир миллион бир минг бир"), Value("бир миллиард бир миллион бир"), Exception<NotImplementedException>()] },
         { "sv", [Value("en miljon ett tusen ett"), Value("en miljard en miljon ett"), Exception<NotImplementedException>()] },
-        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Exception<NotImplementedException>()] },
-        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Exception<NotImplementedException>()] },
+        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Value("четири билиона тристо двадесет пет милијарди десет милиона седам хиљада осамнаест")] },
+        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Value("četiri biliona tristo dvadeset pet milijardi deset miliona sedam hiljada osamnaest")] },
         { "ta", [Value("பத்து இலட்சத்து ஆயிரத்து ஒன்று"), Value("நூறு கோடியே பத்து இலட்சத்து ஒன்று"), Value("ஒரு கோடியே ஏழாயிரத்து பதினெட்டு")] },
         { "hr", [Value("milijun tisuću jedan"), Value("milijarda milijun jedan"), Value("četiri bilijuna tristo dvadeset pet milijardi deset milijuna sedam tisuća osamnaest")] },
         { "nb", [Value("en million tusenogen"), Value("en milliard en million og en"), Exception<NotImplementedException>()] },
@@ -164,9 +166,9 @@ public static class LocaleNumberOverloadTheoryData
         { "az", [Value("bir milyon min bir"), Value("bir milyard bir milyon bir"), Exception<NotImplementedException>()] },
         { "ja", [Value("百万千一"), Value("十億百万一"), Value("四兆三千二百五十億千万七千十八")] },
         { "ku", [Value("یەک میلیۆن و یەک هەزار و یەک"), Value("یەک میلیارد و یەک میلیۆن و یەک"), Value("چوار تریلیۆن و سێ سەد و بیست و پێنج میلیارد و دە میلیۆن و حەوت هەزار و هەژدە")] },
-        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("")] },
-        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบเเปด")] },
-        { "lv", [Value("viens miljoni tūkstoš viena"), Value("tūkstoš viens miljoni viena"), Exception<NotImplementedException>()] },
+        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("τέσσερα τρισεκατομμύρια τριακόσια είκοσι πέντε δισεκατομμύρια δέκα εκατομμύρια επτά χιλιάδες δεκαοκτώ")] },
+        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบแปด")] },
+        { "lv", [Value("viens miljons tūkstoš viena"), Value("viens miljards viens miljons viena"), Value("četri triljoni trīs simti divdesmit pieci miljardi desmit miljoni septiņi tūkstoši astoņpadsmit")] },
         { "ko", [Value("백만천일"), Value("십억백만일"), Value("사조삼천이백오십억천만칠천십팔")] },
         { "en-IN", [Value("ten lakh one thousand one"), Value("one hundred crore ten lakh one"), Value("four lakh thirty two thousand five hundred and one crore seven thousand eighteen")] },
         { "lt", [Value("milijonas tūkstantis viena"), Value("milijardas milijonas viena"), Value("keturi trilijonai trys šimtai dvidešimt penki milijardai dešimt milijonų septyni tūkstančiai aštuoniolika")] },
@@ -177,8 +179,9 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, OverloadExpectation[]> WordFormGenderCases => new()
     {
-        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Exception<NotImplementedException>()] },
+        { "af", [Value("een miljoen een duisend en een"), Value("een miljard een miljoen en een"), Value("vier duisend drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien")] },
         { "en", [Value("one million and one thousand and one"), Value("one billion and one million and one"), Value("four trillion three hundred and twenty-five billion and ten million and seven thousand and eighteen")] },
+        { "en-GB", [Value("one million one thousand and one"), Value("one billion one million and one"), Value("four trillion three hundred and twenty-five billion ten million seven thousand and eighteen")] },
         { "ar", [Value("مليون و   ألف و واحدة"), Value("مليار و   مليون و واحدة"), Value("أربعة تريليونات و ثلاث مئة و خمس و عشرون ملياراً و عشرة ملايين و سبعة آلاف و ثمان عشرة")] },
         { "cs", [Value("jeden milion jeden tisíc jedna"), Value("jedna miliarda jeden milion jedna"), AnyException()] },
         { "fa", [Value("یک میلیون و یک هزار و یک"), Value("یک میلیارد و یک میلیون و یک"), Value("چهار بیلیون و سیصد و بیست و پنج میلیارد و ده میلیون و هفت هزار و هجده")] },
@@ -207,8 +210,8 @@ public static class LocaleNumberOverloadTheoryData
         { "uz-Latn-UZ", [Value("bir million bir ming bir"), Value("bir milliard bir million bir"), Exception<NotImplementedException>()] },
         { "uz-Cyrl-UZ", [Value("бир миллион бир минг бир"), Value("бир миллиард бир миллион бир"), Exception<NotImplementedException>()] },
         { "sv", [Value("en miljon ett tusen ett"), Value("en miljard en miljon ett"), Exception<NotImplementedException>()] },
-        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Exception<NotImplementedException>()] },
-        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Exception<NotImplementedException>()] },
+        { "sr", [Value("милион хиљаду један"), Value("милијарда милион један"), Value("четири билиона тристо двадесет пет милијарди десет милиона седам хиљада осамнаест")] },
+        { "sr-Latn", [Value("milion hiljadu jedan"), Value("milijarda milion jedan"), Value("četiri biliona tristo dvadeset pet milijardi deset miliona sedam hiljada osamnaest")] },
         { "ta", [Value("பத்து இலட்சத்து ஆயிரத்து ஒன்று"), Value("நூறு கோடியே பத்து இலட்சத்து ஒன்று"), Value("ஒரு கோடியே ஏழாயிரத்து பதினெட்டு")] },
         { "hr", [Value("milijun tisuću jedan"), Value("milijarda milijun jedan"), Value("četiri bilijuna tristo dvadeset pet milijardi deset milijuna sedam tisuća osamnaest")] },
         { "nb", [Value("en million tusenogen"), Value("en milliard en million og en"), Exception<NotImplementedException>()] },
@@ -221,9 +224,9 @@ public static class LocaleNumberOverloadTheoryData
         { "az", [Value("bir milyon min bir"), Value("bir milyard bir milyon bir"), Exception<NotImplementedException>()] },
         { "ja", [Value("百万千一"), Value("十億百万一"), Value("四兆三千二百五十億千万七千十八")] },
         { "ku", [Value("یەک میلیۆن و یەک هەزار و یەک"), Value("یەک میلیارد و یەک میلیۆن و یەک"), Value("چوار تریلیۆن و سێ سەد و بیست و پێنج میلیارد و دە میلیۆن و حەوت هەزار و هەژدە")] },
-        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("")] },
-        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบเเปด")] },
-        { "lv", [Value("viens miljoni tūkstoš viena"), Value("tūkstoš viens miljoni viena"), Exception<NotImplementedException>()] },
+        { "el", [Value("ένα εκατομμύριο χίλια ένα"), Value("ένα δισεκατομμύριο ένα εκατομμύριο ένα"), Value("τέσσερα τρισεκατομμύρια τριακόσια είκοσι πέντε δισεκατομμύρια δέκα εκατομμύρια επτά χιλιάδες δεκαοκτώ")] },
+        { "th", [Value("หนึ่งล้านหนึ่งพันหนึ่ง"), Value("หนึ่งพันหนึ่งล้านหนึ่ง"), Value("สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบแปด")] },
+        { "lv", [Value("viens miljons tūkstoš viena"), Value("viens miljards viens miljons viena"), Value("četri triljoni trīs simti divdesmit pieci miljardi desmit miljoni septiņi tūkstoši astoņpadsmit")] },
         { "ko", [Value("백만천일"), Value("십억백만일"), Value("사조삼천이백오십억천만칠천십팔")] },
         { "en-IN", [Value("ten lakh one thousand one"), Value("one hundred crore ten lakh one"), Value("four lakh thirty two thousand five hundred and one crore seven thousand eighteen")] },
         { "lt", [Value("milijonas tūkstantis viena"), Value("milijardas milijonas viena"), Value("keturi trilijonai trys šimtai dvidešimt penki milijardai dešimt milijonų septyni tūkstančiai aštuoniolika")] },
@@ -242,3 +245,4 @@ public static class LocaleNumberOverloadTheoryData
 
     static OverloadExpectation Exception<TException>() where TException : Exception => new(null, typeof(TException));
 }
+

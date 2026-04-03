@@ -192,7 +192,9 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
             return hundredPart;
         }
 
-        return hundredPart + " " + (remainder < 10 ? GetCompoundUnit(remainder, gender) : GetTens(remainder, gender));
+        // Recurse through the main cardinal path so teen values keep their exact lexical forms,
+        // but preserve the locale's dedicated unit-one compound forms for values like 101.
+        return hundredPart + " " + (remainder < 10 ? GetCompoundUnit(remainder, gender) : Convert(remainder, gender));
     }
 
     /// <summary>

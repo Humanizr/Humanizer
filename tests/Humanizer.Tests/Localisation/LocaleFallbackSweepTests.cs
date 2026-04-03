@@ -38,11 +38,11 @@ public class LocaleFallbackSweepTests
     }
 
     [Fact]
-    public void DanishCultureFallsBackToDefaultCollectionFormatterBecauseRegistryUsesDk()
+    public void DanishCultureUsesLocalizedCollectionFormatter()
     {
         var formatter = Configurator.CollectionFormatters.ResolveForCulture(new CultureInfo("da"));
 
-        Assert.Equal("1 & 2", formatter.Humanize([1, 2]));
+        Assert.Equal("1 og 2", formatter.Humanize([1, 2]));
     }
 
     [Theory]

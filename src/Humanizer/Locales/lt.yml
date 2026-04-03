@@ -262,7 +262,8 @@ surfaces:
         symbol: 'b'
       byte:
         forms:
-          default: 'baitas'
+          default: 'baitai'
+          singular: 'baitas'
           plural: 'baitų'
         symbol: 'B'
       kilobyte:

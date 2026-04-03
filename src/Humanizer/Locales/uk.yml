@@ -260,7 +260,7 @@ surfaces:
           default: 'біт'
           paucal: 'біти'
           plural: 'бітів'
-        symbol: 'б'
+        symbol: 'b'
       byte:
         forms:
           default: 'байт'

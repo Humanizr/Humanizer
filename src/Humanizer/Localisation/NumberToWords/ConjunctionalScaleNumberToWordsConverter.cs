@@ -75,7 +75,7 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             // recursing through another full scale walk when the group count is already small.
             if (count < 1000)
             {
-                AppendUnderThousand(parts, count, isOrdinal: false, addAnd);
+                AppendUnderThousand(parts, count, isOrdinal: false, addAnd, isTerminalScaleRemainder: false);
             }
             else
             {
@@ -85,7 +85,7 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             remainder %= scale.Value;
         }
 
-        AppendUnderThousand(parts, remainder, isOrdinal, addAnd);
+        AppendUnderThousand(parts, remainder, isOrdinal, addAnd, isTerminalScaleRemainder: true);
 
         ApplyOrdinalLeadingOneStrategy(parts, isOrdinal);
 
@@ -99,7 +99,7 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
     //
     // The result is a language phrase that still reads naturally even when the larger number came
     // through the recursive scale walk above.
-    void AppendUnderThousand(List<string> parts, long number, bool isOrdinal, bool addAnd)
+    void AppendUnderThousand(List<string> parts, long number, bool isOrdinal, bool addAnd, bool isTerminalScaleRemainder)
     {
         var hasHundreds = false;
         if (number >= 100)
@@ -115,7 +115,7 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             return;
         }
 
-        if (ShouldAddAnd(addAnd, hasHundreds, parts.Count > 0))
+        if (ShouldAddAnd(addAnd, hasHundreds, parts.Count > 0, isTerminalScaleRemainder))
         {
             parts.Add(profile.AndWord);
         }
@@ -147,12 +147,13 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
     // "and" placement is modeled as a structural rule family rather than as locale branches.
     // The generated profile says which insertion points are legal, and this method translates that
     // choice into the current local context: inside a hundred group, after a higher scale, both, or neither.
-    bool ShouldAddAnd(bool addAnd, bool hasHundreds, bool hasScalePrefix) =>
+    bool ShouldAddAnd(bool addAnd, bool hasHundreds, bool hasScalePrefix, bool isTerminalScaleRemainder) =>
         addAnd && profile.AndStrategy switch
         {
             ConjunctionalScaleAndStrategy.WithinGroupAndAfterScaleSubHundredRemainder => hasHundreds || hasScalePrefix,
             ConjunctionalScaleAndStrategy.WithinGroupOnly => hasHundreds,
             ConjunctionalScaleAndStrategy.AfterScaleSubHundredRemainderOnly => !hasHundreds && hasScalePrefix,
+            ConjunctionalScaleAndStrategy.WithinGroupAndTerminalScaleSubHundredRemainder => hasHundreds || (!hasHundreds && hasScalePrefix && isTerminalScaleRemainder),
             ConjunctionalScaleAndStrategy.Never => false,
             _ => throw new InvalidOperationException("Unsupported conjunctional-scale strategy.")
         };
@@ -321,6 +322,7 @@ enum ConjunctionalScaleAndStrategy
     WithinGroupAndAfterScaleSubHundredRemainder,
     WithinGroupOnly,
     AfterScaleSubHundredRemainderOnly,
+    WithinGroupAndTerminalScaleSubHundredRemainder,
     Never
 }
 

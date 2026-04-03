@@ -39,6 +39,20 @@ public class NumberToWordsFamilyRegressionTests
         Assert.Equal(expected, number.ToWords(addAnd, new CultureInfo(culture)));
 
     [Theory]
+    [InlineData(1001001L, "en-GB", "one million one thousand and one")]
+    [InlineData(1001000001L, "en-GB", "one billion one million and one")]
+    public void BritishEnglishVariantsUseTerminalScaleAnd(long number, string culture, string expected) =>
+        Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
+
+    [Theory]
+    [InlineData(1001000001L, "en", "one billion and one million and one")]
+    [InlineData(1001000001L, "en-US", "one billion and one million and one")]
+    [InlineData(1001000001L, "en-GB", "one billion one million and one")]
+    [InlineData(1001000001L, "en-IN", "one hundred crore ten lakh one")]
+    public void EnglishVariantsUseExpectedLargeNumberBehavior(long number, string culture, string expected) =>
+        Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
+
+    [Theory]
     [InlineData(1000000000, "uz-Latn-UZ", "bir milliardinchi")]
     [InlineData(1000000000, "uz-Cyrl-UZ", "бир миллиардинчи")]
     [InlineData(1000000000, "pt", "milésimo milionésimo")]

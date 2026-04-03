@@ -97,7 +97,7 @@ public static class LocaleNumberMagnitudeTheoryData
         { "th", 1001L, "หนึ่งพันหนึ่ง" },
         { "th", 1000001L, "หนึ่งล้านหนึ่ง" },
         { "lv", 1001L, "tūkstoš viens" },
-        { "lv", 1000001L, "viens miljoni viens" },
+        { "lv", 1000001L, "viens miljons viens" },
         { "ko", 1001L, "천일" },
         { "ko", 1000001L, "백만일" },
         { "en-IN", 1001L, "one thousand one" },
@@ -115,8 +115,11 @@ public static class LocaleNumberMagnitudeTheoryData
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
         { "af", 1001000001L, "een miljard een miljoen en een" },
+        { "af", 4325010007018L, "vier duisend drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
         { "en", 1001000001L, "one billion and one million and one" },
         { "en", 4325010007018L, "four trillion three hundred and twenty-five billion and ten million and seven thousand and eighteen" },
+        { "en-GB", 1001000001L, "one billion one million and one" },
+        { "en-GB", 4325010007018L, "four trillion three hundred and twenty-five billion ten million seven thousand and eighteen" },
         { "ar", 1001000001L, "مليار و   مليون و واحد" },
         { "ar", 4325010007018L, "أربعة تريليونات و ثلاث مئة و خمسة و عشرون ملياراً و عشرة ملايين و سبعة آلاف و ثمانية عشر" },
         { "cs", 1001000001L, "jedna miliarda jeden milion jeden" },
@@ -185,10 +188,11 @@ public static class LocaleNumberMagnitudeTheoryData
         { "ku", 1001000001L, "یەک میلیارد و یەک میلیۆن و یەک" },
         { "ku", 4325010007018L, "چوار تریلیۆن و سێ سەد و بیست و پێنج میلیارد و دە میلیۆن و حەوت هەزار و هەژدە" },
         { "el", 1001000001L, "ένα δισεκατομμύριο ένα εκατομμύριο ένα" },
-        { "el", 4325010007018L, "" },
+        { "el", 4325010007018L, "τέσσερα τρισεκατομμύρια τριακόσια είκοσι πέντε δισεκατομμύρια δέκα εκατομμύρια επτά χιλιάδες δεκαοκτώ" },
         { "th", 1001000001L, "หนึ่งพันหนึ่งล้านหนึ่ง" },
-        { "th", 4325010007018L, "สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบเเปด" },
-        { "lv", 1001000001L, "tūkstoš viens miljoni viens" },
+        { "th", 4325010007018L, "สี่ล้านสามแสนสองหมื่นห้าพันสิบล้านเจ็ดพันสิบแปด" },
+        { "lv", 1001000001L, "viens miljards viens miljons viens" },
+        { "lv", 4325010007018L, "četri triljoni trīs simti divdesmit pieci miljardi desmit miljoni septiņi tūkstoši astoņpadsmit" },
         { "ko", 1001000001L, "십억백만일" },
         { "ko", 4325010007018L, "사조삼천이백오십억천만칠천십팔" },
         { "en-IN", 1001000001L, "one hundred crore ten lakh one" },
@@ -203,7 +207,6 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, FailureExpectation> UnsupportedMagnitudeCardinalCases => new()
     {
-        { "af", 4325010007018L, Exception<NotImplementedException>() },
         { "cs", 4325010007018L, AnyException() },
         { "pt", 4325010007018L, Exception<NotImplementedException>() },
         { "pt-BR", 4325010007018L, Exception<NotImplementedException>() },
@@ -217,11 +220,8 @@ public static class LocaleNumberMagnitudeTheoryData
         { "uz-Latn-UZ", 4325010007018L, Exception<NotImplementedException>() },
         { "uz-Cyrl-UZ", 4325010007018L, Exception<NotImplementedException>() },
         { "sv", 4325010007018L, Exception<NotImplementedException>() },
-        { "sr", 4325010007018L, Exception<NotImplementedException>() },
-        { "sr-Latn", 4325010007018L, Exception<NotImplementedException>() },
         { "nb", 4325010007018L, Exception<NotImplementedException>() },
         { "az", 4325010007018L, Exception<NotImplementedException>() },
-        { "lv", 4325010007018L, Exception<NotImplementedException>() },
         { "ca", 1001000001L, Exception<NotImplementedException>() },
         { "ca", 4325010007018L, Exception<NotImplementedException>() },
     };
@@ -234,3 +234,4 @@ public static class LocaleNumberMagnitudeTheoryData
 
     static FailureExpectation Exception<TException>() where TException : Exception => new(typeof(TException));
 }
+

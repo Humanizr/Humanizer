@@ -256,6 +256,7 @@ surfaces:
       bit:
         forms:
           default: 'ביטים'
+          singular: 'ביט'
         symbol: 'b'
       byte:
         forms:

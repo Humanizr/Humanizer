@@ -28,4 +28,9 @@ public class NumberToWordsTests
     [Theory]
     public void ToWordsInt(int number, string expected) =>
         Assert.Equal(expected, number.ToWords());
+
+    [Theory]
+    [InlineData(4325010007018L, "τέσσερα τρισεκατομμύρια τριακόσια είκοσι πέντε δισεκατομμύρια δέκα εκατομμύρια επτά χιλιάδες δεκαοκτώ")]
+    public void ToWordsLong(long number, string expected) =>
+        Assert.Equal(expected, number.ToWords());
 }

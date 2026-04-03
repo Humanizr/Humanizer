@@ -8,6 +8,10 @@ public class ToFullWordsTests
         Assert.Equal("1 baitas", ByteSize.FromBytes(1).ToFullWords());
 
     [Fact]
+    public void ReturnsTwoBytes() =>
+        Assert.Equal("2 baitai", ByteSize.FromBytes(2).ToFullWords());
+
+    [Fact]
     public void ReturnsPluralBytes() =>
         Assert.Equal("10 baitų", ByteSize.FromBytes(10).ToFullWords());
 

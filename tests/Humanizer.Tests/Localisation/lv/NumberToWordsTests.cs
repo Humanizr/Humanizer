@@ -135,6 +135,13 @@ public class NumberToWordsTests
         Assert.Equal(expected, number.ToWords());
 
     [Theory]
+    [InlineData(1000001L, "viens miljons viens")]
+    [InlineData(1001000001L, "viens miljards viens miljons viens")]
+    [InlineData(4325010007018L, "četri triljoni trīs simti divdesmit pieci miljardi desmit miljoni septiņi tūkstoši astoņpadsmit")]
+    public void ToWordsLong(long number, string expected) =>
+        Assert.Equal(expected, number.ToWords());
+
+    [Theory]
     [InlineData(21, "divdesmit pirmais")]
     [InlineData(22, "divdesmit otrais")]
     [InlineData(26, "divdesmit sestais")]

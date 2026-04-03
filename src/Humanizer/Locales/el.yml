@@ -224,7 +224,7 @@ surfaces:
   number:
     words:
       engine: 'segmented-scale'
-      maximumValue: 999999999999
+      maximumValue: 999999999999999
       maximumOrdinal: 1999
       zeroWord: 'μηδέν'
       minusWord: 'μείον'
@@ -289,6 +289,13 @@ surfaces:
         8: 'οκτακόσιες'
         9: 'εννιακόσιες'
       scales:
+        -
+          value: 1000000000000
+          singular: 'ένα τρισεκατομμύριο'
+          plural: 'τρισεκατομμύρια'
+          countVariant: 'default'
+          singularRemainderVariant: 'pluralized'
+          pluralRemainderVariant: 'default'
         -
           value: 1000000000
           singular: 'ένα δισεκατομμύριο'

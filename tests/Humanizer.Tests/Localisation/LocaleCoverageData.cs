@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Humanizer.Tests.Localisation;
 
@@ -121,7 +120,7 @@ static class LocaleCoverageData
         };
 #endif
 
-    public static TheoryData<string, string> UnsupportedWordsToNumberCultureTheoryData => CreateUnsupportedWordsToNumberCultureTheoryData();
+    public static TheoryData<string, string, int> WordsToNumberFallbackExpectationTheoryData => CreateWordsToNumberFallbackExpectationTheoryData();
 
     public static CultureSwap UseCulture(string cultureName) => new(new(cultureName));
 
@@ -136,18 +135,11 @@ static class LocaleCoverageData
         return data;
     }
 
-    static TheoryData<string, string> CreateUnsupportedWordsToNumberCultureTheoryData()
-    {
-        var data = new TheoryData<string, string>();
-
-        foreach (var locale in NumberToWordsLocales.Where(static locale => CultureInfo.GetCultureInfo(locale).TwoLetterISOLanguageName != "en"))
+    static TheoryData<string, string, int> CreateWordsToNumberFallbackExpectationTheoryData()
+        => new()
         {
-            data.Add(locale, "one");
-        }
-
-        data.Add("zu-ZA", "one");
-        return data;
-    }
+            { "zu-ZA", "one", 1 }
+        };
 
     static string[] GetRegisteredLocales<TRegistry, TLocaliser>()
         where TRegistry : LocaliserRegistry<TLocaliser>, new()

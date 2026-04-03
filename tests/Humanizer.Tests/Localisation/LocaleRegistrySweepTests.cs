@@ -165,25 +165,24 @@ public class LocaleRegistrySweepTests
 
     [Theory]
     [MemberData(nameof(LocaleCoverageData.WordsToNumberLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void WordsToNumber_EnglishLocale_ParsesThroughTheRegistry(string localeName)
+    public void WordsToNumber_RegisteredLocales_RoundTripNativeWords(string localeName)
     {
         var culture = new CultureInfo(localeName);
-        const string words = "one hundred and five";
+        const int expected = 105;
+        var words = expected.ToWords(culture);
 
-        Assert.Equal(105, words.ToNumber(culture));
+        Assert.Equal(expected, words.ToNumber(culture));
         Assert.True(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
-        Assert.Equal(105, parsedNumber);
+        Assert.Equal(expected, parsedNumber);
         Assert.Null(unrecognizedWord);
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.UnsupportedWordsToNumberCultureTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void WordsToNumber_UnsupportedCultures_FallBackToTheDefaultNotSupportedExceptionPath(string localeName, string words)
+    [MemberData(nameof(LocaleCoverageData.WordsToNumberFallbackExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void WordsToNumber_FallbackCultures_UseDefaultLexicon(string localeName, string words, int expected)
     {
         var culture = new CultureInfo(localeName);
 
-        var exception = Assert.Throws<NotSupportedException>(() => words.ToNumber(culture));
-        Assert.Contains(culture.TwoLetterISOLanguageName, exception.Message);
-        Assert.Throws<NotSupportedException>(() => words.TryToNumber(out _, culture, out _));
+        Assert.Equal(expected, words.ToNumber(culture));
     }
 }

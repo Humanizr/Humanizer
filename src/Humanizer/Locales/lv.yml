@@ -311,6 +311,18 @@ surfaces:
       feminineOrdinalSuffix: 'ā'
       scales:
         -
+          value: 1000000000000
+          exactSingularCardinal: 'triljons'
+          singularWithRemainderCardinal: 'viens triljons'
+          pluralCardinal: 'triljoni'
+          ordinalStem: 'triljon'
+        -
+          value: 1000000000
+          exactSingularCardinal: 'miljards'
+          singularWithRemainderCardinal: 'viens miljards'
+          pluralCardinal: 'miljardi'
+          ordinalStem: 'miljard'
+        -
           value: 1000000
           exactSingularCardinal: 'miljons'
           singularWithRemainderCardinal: 'viens miljons'

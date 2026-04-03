@@ -4,6 +4,14 @@ namespace he.Bytes;
 public class ToFullWordsTests
 {
     [Fact]
+    public void ReturnsSingularBit() =>
+        Assert.Equal("1 ביט", ByteSize.FromBits(1).ToFullWords());
+
+    [Fact]
+    public void ReturnsPluralBits() =>
+        Assert.Equal("2 ביטים", ByteSize.FromBits(2).ToFullWords());
+
+    [Fact]
     public void ReturnsSingularByte() =>
         Assert.Equal("1 בייט", ByteSize.FromBytes(1).ToFullWords());
 
