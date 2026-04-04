@@ -220,3 +220,4 @@ sealed class LinkingAffixWordsToNumberProfile(
     /// </summary>
 public long ScaleThreshold { get; } = scaleThreshold;
 }
+

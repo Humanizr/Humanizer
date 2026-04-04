@@ -648,12 +648,18 @@ Convert localized number words back to numbers:
 if ("forty-two".TryToNumber(out var number, new CultureInfo("en")))
     Console.WriteLine(number); // Outputs: 42
 
+// High-range values use the same long-based API
+if ("three billion".TryToNumber(out var largeNumber, new CultureInfo("en")))
+    Console.WriteLine(largeNumber); // Outputs: 3000000000
+
 // Get unrecognized words on failure
 if (!"tenn".TryToNumber(out var invalid, new CultureInfo("en"), out var badWord))
     Console.WriteLine($"Unrecognized word: {badWord}"); // Outputs: Unrecognized word: tenn
 ```
 
 > **Note:** Supported locales use their own authored number data and parent-locale inheritance. Unsupported cultures still fall back to the default English parser behavior.
+>
+> **Breaking change:** `ToNumber` now returns `long`. Code that previously stored the result in `int` must either switch to `long` or add an explicit checked cast.
 
 ### DateTime to ordinal words
 

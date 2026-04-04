@@ -1222,3 +1222,4 @@ static class TokenMapWordsToNumberNormalizer
         return builder.ToString().Normalize(NormalizationForm.FormC);
     }
 }
+

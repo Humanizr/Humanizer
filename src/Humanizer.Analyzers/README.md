@@ -10,7 +10,8 @@ Humanizer v3 consolidates all sub-namespaces into the root `Humanizer` namespace
 
 1. **Detects** old namespace usages (e.g., `Humanizer.Bytes`, `Humanizer.Localisation`)
 2. **Provides** automatic code fixes to update to `Humanizer`
-3. **Supports** batch fixing (Fix All) for entire projects or solutions
+3. **Provides** migration fixes for words-to-number API changes such as `ToNumber` now returning `long`
+4. **Supports** batch fixing (Fix All) for entire projects or solutions
 
 ## Deprecated Namespaces
 
@@ -102,3 +103,5 @@ dotnet test
 ## Diagnostic ID
 
 - **HUMANIZER001**: Old Humanizer namespace usage
+
+The words-to-number migration fixes are offered on the relevant compiler diagnostics (`CS0029` and `CS0266`) when the failing code involves Humanizer's `ToNumber` or `Convert` APIs.

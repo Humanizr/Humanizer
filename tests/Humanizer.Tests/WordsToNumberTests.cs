@@ -1259,10 +1259,12 @@ public class TokenMapWordsToNumberConverterTests
             NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace
         });
 
-        Assert.True(converter.TryConvert("foox", out var gluedOrdinalValue));
+        var gluedOrdinalValue = default(long);
+        Assert.True(converter.TryConvert("foox", out gluedOrdinalValue));
         Assert.Equal(7, gluedOrdinalValue);
 
-        Assert.True(converter.TryConvert("foo", out var scaleOrdinalValue));
+        var scaleOrdinalValue = default(long);
+        Assert.True(converter.TryConvert("foo", out scaleOrdinalValue));
         Assert.Equal(11, scaleOrdinalValue);
     }
 }
@@ -1575,3 +1577,5 @@ public class WordsToNumberTests_UzbekCyrillic
         Assert.Equal(expectedNumber, parsedNumber);
     }
 }
+
+

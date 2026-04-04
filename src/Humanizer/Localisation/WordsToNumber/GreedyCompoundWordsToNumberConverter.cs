@@ -428,3 +428,4 @@ sealed class GreedyCompoundWordsToNumberProfile(
     /// </summary>
 public long ScaleThreshold { get; } = scaleThreshold;
 }
+

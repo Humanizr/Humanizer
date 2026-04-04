@@ -262,3 +262,4 @@ readonly record struct PrefixedScaleWord(string Token, long Value);
 /// Represents a locale-specific prefix that yields a base value when followed by a unit token.
 /// </summary>
 readonly record struct PrefixedTensRule(string Prefix, long BaseValue);
+

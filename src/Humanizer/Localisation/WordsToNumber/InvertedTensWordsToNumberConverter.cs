@@ -454,3 +454,4 @@ internal readonly record struct InvertedTensToken(string Word, long Value);
 /// Represents a literal replacement applied while normalizing compact unit fragments.
 /// </summary>
 internal readonly record struct StringReplacement(string OldValue, string NewValue);
+

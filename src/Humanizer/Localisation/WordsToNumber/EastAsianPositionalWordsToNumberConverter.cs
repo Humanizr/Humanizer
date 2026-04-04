@@ -400,3 +400,4 @@ internal enum EastAsianPositionalTokenKind
 /// Represents one positional token, its numeric value, and its parser role.
 /// </summary>
 internal readonly record struct EastAsianPositionalToken(string Text, long Value, EastAsianPositionalTokenKind Kind);
+

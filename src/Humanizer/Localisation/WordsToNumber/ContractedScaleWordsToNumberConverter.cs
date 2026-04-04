@@ -166,3 +166,4 @@ sealed class ContractedScaleWordsToNumberProfile(string minusWord, FrozenDiction
     /// </summary>
 public FrozenDictionary<string, long> Cardinals { get; } = cardinals;
 }
+

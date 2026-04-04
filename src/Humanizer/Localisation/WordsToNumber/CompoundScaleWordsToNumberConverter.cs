@@ -298,3 +298,4 @@ sealed class CompoundScaleWordsToNumberProfile(
     /// </summary>
 public long? SequenceMultiplierThreshold { get; } = sequenceMultiplierThreshold;
 }
+

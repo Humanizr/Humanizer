@@ -31,3 +31,4 @@ public class WordsToNumberSharedLexiconRegressionTests
         Assert.Equal(expected, parsed);
     }
 }
+

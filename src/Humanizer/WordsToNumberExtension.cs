@@ -25,11 +25,15 @@ public static class WordsToNumberExtension
     /// If <paramref name="words"/> is <c>null</c>.
     /// </exception>
     /// <remarks>
+    /// This method now returns <see cref="long"/> to support locale-authored high-range number
+    /// parsing beyond <see cref="int.MaxValue"/>. Existing code that depended on an <see cref="int"/>
+    /// result should either switch the receiving type to <see cref="long"/> or use an explicit
+    /// checked conversion.
     /// Use <see cref="TryToNumber(string, out long, CultureInfo)"/> when you want a non-throwing
     /// parse path and the first unrecognized token.
     /// </remarks>
-    public static long ToNumber(this string words, CultureInfo culture)
-        => Configurator.GetWordsToNumberConverter(culture).Convert(words);
+    public static long ToNumber(this string words, CultureInfo culture) =>
+        Configurator.GetWordsToNumberConverter(culture).Convert(words);
 
     /// <summary>
     /// Attempts to convert a spelled-out number string to its numeric representation without throwing.

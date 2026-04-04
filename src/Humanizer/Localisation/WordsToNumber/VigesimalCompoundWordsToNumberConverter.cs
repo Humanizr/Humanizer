@@ -242,3 +242,4 @@ sealed class VigesimalCompoundWordsToNumberProfile(
     /// </summary>
 public long ScaleThreshold { get; } = scaleThreshold;
 }
+
