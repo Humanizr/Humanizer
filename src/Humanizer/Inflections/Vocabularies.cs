@@ -46,8 +46,9 @@ public static class Vocabularies
         _default.AddSingular("(.+)ves$", "$1ve");
         _default.AddSingular("(hive)s$", "$1");
         _default.AddSingular("(tive)s$", "$1");
-        _default.AddSingular("(lea|loa|cal|hal|sel|el|shel|wol|thie|dwar|hoo)ves$", "$1f");
+        _default.AddSingular("([lr])ves$", "$1f");
         _default.AddSingular("(li|wi|kni)ves$", "$1fe");
+        _default.AddSingular("(thie|hoo|loa|lea)ves$", "$1f");
         _default.AddSingular("(^zomb)?([^aeiouy]|qu)ies$", "$2y");
         _default.AddSingular("(s)eries$", "$1eries");
         _default.AddSingular("(m)ovies$", "$1ovie");
@@ -93,6 +94,7 @@ public static class Vocabularies
         _default.AddIrregular("tie", "ties", matchEnding: false);
         _default.AddIrregular("lens", "lenses");
         _default.AddIrregular("clove", "cloves");
+        _default.AddIrregular("curve", "curves");
         _default.AddIrregular("valve", "valves");
         _default.AddIrregular("safe", "safes");
         _default.AddIrregular("explosive", "explosives");

@@ -71,6 +71,9 @@ public class InflectorTests
     [InlineData("wives", "wife")]
     [InlineData("leaves", "leaf")]
     [InlineData("lives", "life")]
+    [InlineData("scarves", "scarf")]
+    [InlineData("hooves", "hoof")]
+    [InlineData("thieves", "thief")]
     public void Singularize_Ves_EdgeCases(string plural, string expected) =>
         Assert.Equal(expected, plural.Singularize());
 
