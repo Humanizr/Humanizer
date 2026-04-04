@@ -280,6 +280,17 @@ surfaces:
         '不可思議': 10000000000000000000000000000000000000000000000000000000000000000
         '無量大数': 100000000000000000000000000000000000000000000000000000000000000000000
 
+  ordinal:
+    date:
+      pattern: 'yyyy年M月{day}日'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: 'yyyy年M月{day}日'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'japanese'
+
   compass:
     full:
       - '北'

@@ -5,25 +5,31 @@ public class ExactLocaleDateAndTimeRegistryTests
 {
     [Fact]
     [UseCulture("ja-JP")]
-    public void Default_time_only_clock_notation_is_culture_formatted_for_non_english_locales() =>
-        Assert.Equal(new TimeOnly(15, 45).ToString("t"), new TimeOnly(15, 45).ToClockNotation());
+    public void Ja_Jp_uses_owned_ordinal_date_pattern() =>
+        Assert.Equal("2015年1月1日", new DateTime(2015, 1, 1).ToOrdinalWords());
 
     [Fact]
     [UseCulture("ja-JP")]
-    public void Default_date_to_ordinal_words_is_culture_formatted_for_non_english_locales() =>
-        Assert.Equal(new DateTime(2015, 1, 1).ToString("d"), new DateTime(2015, 1, 1).ToOrdinalWords());
+    public void Ja_Jp_uses_owned_dateonly_ordinal_date_pattern() =>
+        Assert.Equal("2015年1月1日", new DateOnly(2015, 1, 1).ToOrdinalWords());
 
     [Fact]
     [UseCulture("ja-JP")]
-    public void Default_dateonly_to_ordinal_words_is_culture_formatted_for_non_english_locales() =>
-        Assert.Equal(new DateOnly(2015, 1, 1).ToString("d"), new DateOnly(2015, 1, 1).ToOrdinalWords());
+    public void Ja_Jp_uses_owned_clock_notation() =>
+        Assert.Equal("15時45分", new TimeOnly(15, 45).ToClockNotation());
+
+    [Fact]
+    [UseCulture("ja-JP")]
+    public void Ja_Jp_uses_owned_rounded_clock_notation() =>
+        Assert.Equal("13時25分", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
 
     [Fact]
     [UseCulture("ar")]
-    public void Default_date_fallback_strips_directional_mark_artifacts()
+    public void Ar_uses_owned_ordinal_date_pattern_without_bidi_marks()
     {
         var result = new DateTime(2015, 1, 1).ToOrdinalWords();
 
+        Assert.Equal("1 يناير 2015", result);
         Assert.DoesNotContain('\u200e', result);
         Assert.DoesNotContain('\u200f', result);
         Assert.DoesNotContain('\u061c', result);

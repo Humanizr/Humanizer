@@ -18,8 +18,8 @@ public class LocaleFallbackSweepTests
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.FormatterFallbackExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void FormatterFallbackLocalesUseExpectedOutputs(string cultureName, string expectedPast, string expectedTimeSpan)
+    [MemberData(nameof(LocaleCoverageData.FormatterParentInheritanceExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void FormatterParentLocalesUseExpectedInheritedOutputs(string cultureName, string expectedPast, string expectedTimeSpan)
     {
         var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo(cultureName));
 

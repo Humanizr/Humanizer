@@ -3631,7 +3631,7 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberUnsupportedCases => new()
     {
-        { "zu-ZA", "one", 1L },
+        { "eo", "one", 1L },
     };
 }
 

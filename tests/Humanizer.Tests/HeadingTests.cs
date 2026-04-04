@@ -208,7 +208,7 @@ public class HeadingTests
     [Fact]
     public void ToHeadingFallsBackToEnglishForUnknownCultures()
     {
-        var culture = new CultureInfo("zu-ZA");
+        var culture = new CultureInfo("eo");
 
         Assert.Equal("north", 0d.ToHeading(HeadingStyle.Full, culture));
         Assert.Equal("N", 0d.ToHeading(HeadingStyle.Abbreviated, culture));

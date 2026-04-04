@@ -1479,8 +1479,8 @@ public class WordsToNumberTests_Malay
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("zu-ZA")]
-    public void UnsupportedCulturesFallBackToEnglishParser(string cultureName)
+    [InlineData("eo")]
+    public void UnknownCulturesFallBackToEnglishParser(string cultureName)
     {
         var culture = new CultureInfo(cultureName);
         Assert.Equal(1, "one".ToNumber(culture));
@@ -1490,8 +1490,8 @@ public class WordsToNumberTests_NonEnglish
 public class WordsToNumberTests_UnsupportedCultureInput
 {
     [Theory]
-    [InlineData("zu-ZA", "okukodwa", "okukodwa")]
-    public void UnsupportedCultureTryToNumberReturnsFalseForUnrecognizedWords(string cultureName, string words, string unrecognizedWord)
+    [InlineData("eo", "okukodwa", "okukodwa")]
+    public void UnknownCultureTryToNumberReturnsFalseForUnrecognizedWords(string cultureName, string words, string unrecognizedWord)
     {
         var culture = new CultureInfo(cultureName);
 
@@ -1523,6 +1523,21 @@ public class WordsToNumberTests_Tamil
     [InlineData("நூறு கோடியே பத்து இலட்சத்து ஒன்று", 1001000001L, null)]
     [InlineData("ஒரு கோடியே ஏழாயிரத்து பதினெட்டு", 4325010007018L, null)]
     public void TryToNumber_ValidInput_Tamil(string words, long expectedNumber, string? expectedUnrecognizedWord)
+    {
+        Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
+        Assert.Equal(expectedNumber, parsedNumber);
+    }
+}
+
+[UseCulture("zu-ZA")]
+public class WordsToNumberTests_Zulu
+{
+    [Theory]
+    [InlineData("ikhulu na kuhlanu", 105L, null)]
+    [InlineData("ishumi nambili", 12L, null)]
+    [InlineData("minus ishumi nambili", -12L, null)]
+    public void TryToNumber_ValidInput_Zulu(string words, long expectedNumber, string? expectedUnrecognizedWord)
     {
         Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);

@@ -1,0 +1,380 @@
+locale: 'zu-ZA'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'na'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'manje'
+      never: 'akakaze'
+      past:
+        millisecond:
+          single: '1 imilisekhondi eledlule'
+          multiple:
+            forms:
+              default: 'imilisekhondi'
+            template: '{count} imilisekhondi ezedlule'
+        second:
+          single: '1 isekhondi eledlule'
+          multiple:
+            forms:
+              default: 'isekhondi'
+            template: '{count} isekhondi ezedlule'
+        minute:
+          single: '1 iminithi eledlule'
+          multiple:
+            forms:
+              default: 'iminithi'
+            template: '{count} iminithi ezedlule'
+        hour:
+          single: '1 ihora eledlule'
+          multiple:
+            forms:
+              default: 'ihora'
+            template: '{count} ihora ezedlule'
+        day:
+          single: 'izolo'
+          multiple:
+            forms:
+              default: 'izinsuku'
+            template: '{count} izinsuku ezedlule'
+        week:
+          single: '1 iviki eledlule'
+          multiple:
+            forms:
+              default: 'iviki'
+            template: '{count} iviki ezedlule'
+        month:
+          single: '1 inyanga eledlule'
+          multiple:
+            forms:
+              default: 'inyanga'
+            template: '{count} inyanga ezedlule'
+        year:
+          single: '1 unyaka odlule'
+          multiple:
+            forms:
+              default: 'iminyaka'
+            template: '{count} iminyaka ezedlule'
+      future:
+        millisecond:
+          single: '1 imilisekhondi ezayo'
+          multiple:
+            forms:
+              default: 'imilisekhondi'
+            template: '{count} imilisekhondi ezizayo'
+        second:
+          single: '1 isekhondi ezayo'
+          multiple:
+            forms:
+              default: 'isekhondi'
+            template: '{count} isekhondi ezizayo'
+        minute:
+          single: '1 iminithi ezayo'
+          multiple:
+            forms:
+              default: 'iminithi'
+            template: '{count} iminithi ezizayo'
+        hour:
+          single: '1 ihora ezayo'
+          multiple:
+            forms:
+              default: 'ihora'
+            template: '{count} ihora ezizayo'
+        day:
+          single: 'kusasa'
+          multiple:
+            forms:
+              default: 'izinsuku'
+            template: '{count} izinsuku ezizayo'
+        week:
+          single: '1 iviki ezayo'
+          multiple:
+            forms:
+              default: 'iviki'
+            template: '{count} iviki ezizayo'
+        month:
+          single: '1 inyanga ezayo'
+          multiple:
+            forms:
+              default: 'inyanga'
+            template: '{count} inyanga ezizayo'
+        year:
+          single: '1 unyaka ozayo'
+          multiple:
+            forms:
+              default: 'iminyaka'
+            template: '{count} iminyaka ezizayo'
+    duration:
+      zero: 'asikho isikhathi'
+      age:
+        template: '{value} ubudala'
+      millisecond:
+        single:
+          numeric: '1 imilisekhondi'
+          words: '1 imilisekhondi'
+        multiple:
+          forms:
+            default: 'amamilisekhondi'
+            singular: 'imilisekhondi'
+      second:
+        single:
+          numeric: '1 isekhondi'
+          words: '1 isekhondi'
+        multiple:
+          forms:
+            default: 'amasekhondi'
+            singular: 'isekhondi'
+      minute:
+        single:
+          numeric: '1 iminithi'
+          words: '1 iminithi'
+        multiple:
+          forms:
+            default: 'amaminithi'
+            singular: 'iminithi'
+      hour:
+        single:
+          numeric: '1 ihora'
+          words: '1 ihora'
+        multiple:
+          forms:
+            default: 'amahora'
+            singular: 'ihora'
+      day:
+        single:
+          numeric: '1 usuku'
+          words: '1 usuku'
+        multiple:
+          forms:
+            default: 'izinsuku'
+            singular: 'usuku'
+      week:
+        single:
+          numeric: '1 iviki'
+          words: '1 iviki'
+        multiple:
+          forms:
+            default: 'amaviki'
+            singular: 'iviki'
+      month:
+        single:
+          numeric: '1 inyanga'
+          words: '1 inyanga'
+        multiple:
+          forms:
+            default: 'izinyanga'
+            singular: 'inyanga'
+      year:
+        single:
+          numeric: '1 unyaka'
+          words: '1 unyaka'
+        multiple:
+          forms:
+            default: 'iminyaka'
+            singular: 'unyaka'
+    dataUnits:
+      bit:
+        forms:
+          default: 'ama-bits'
+          singular: 'i-bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'ama-bytes'
+          singular: 'i-byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'ama-kilobytes'
+          singular: 'i-kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'ama-megabytes'
+          singular: 'i-megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'ama-gigabytes'
+          singular: 'i-gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ama-terabytes'
+          singular: 'i-terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'imilisekhondi'
+      second:
+        symbol: 'isekhondi'
+      minute:
+        symbol: 'iminithi'
+      hour:
+        symbol: 'ihora'
+      day:
+        symbol: 'usuku'
+      week:
+        symbol: 'iviki'
+      month:
+        symbol: 'inyanga'
+      year:
+        symbol: 'unyaka'
+
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'na'
+      hundredWord: 'ikhulu'
+      hundredOrdinalWord: 'ikhulu'
+      tensUnitsSeparator: ' '
+      defaultAddAnd: true
+      addAndMode: 'always-default'
+      andStrategy: 'within-group-only'
+      tupleSuffix: ''
+      ordinalLeadingOneStrategy: 'keep-leading-one'
+      ordinalMode: 'cardinal'
+      unitsMap:
+        - 'zero'
+        - 'kanye'
+        - 'kubili'
+        - 'kuthathu'
+        - 'kune'
+        - 'kuhlanu'
+        - 'isithupha'
+        - 'isikhombisa'
+        - 'isishiyagalombili'
+        - 'isishiyagalolunye'
+        - 'ishumi'
+        - 'ishumi nanye'
+        - 'ishumi nambili'
+        - 'ishumi nantathu'
+        - 'ishumi nane'
+        - 'ishumi nanhlanu'
+        - 'ishumi nesithupha'
+        - 'ishumi nesikhombisa'
+        - 'ishumi nesishiyagalombili'
+        - 'ishumi nesishiyagalolunye'
+      ordinalUnitsMap:
+        - 'zero'
+        - 'kanye'
+        - 'kubili'
+        - 'kuthathu'
+        - 'kune'
+        - 'kuhlanu'
+        - 'isithupha'
+        - 'isikhombisa'
+        - 'isishiyagalombili'
+        - 'isishiyagalolunye'
+        - 'ishumi'
+        - 'ishumi nanye'
+        - 'ishumi nambili'
+        - 'ishumi nantathu'
+        - 'ishumi nane'
+        - 'ishumi nanhlanu'
+        - 'ishumi nesithupha'
+        - 'ishumi nesikhombisa'
+        - 'ishumi nesishiyagalombili'
+        - 'ishumi nesishiyagalolunye'
+      tensMap:
+        - 'zero'
+        - 'ishumi'
+        - 'amashumi amabili'
+        - 'amashumi amathathu'
+        - 'amashumi amane'
+        - 'amashumi amahlanu'
+        - 'amashumi ayisithupha'
+        - 'amashumi ayisikhombisa'
+        - 'amashumi ayisishiyagalombili'
+        - 'amashumi ayisishiyagalolunye'
+      ordinalTensMap:
+        - 'zero'
+        - 'ishumi'
+        - 'amashumi amabili'
+        - 'amashumi amathathu'
+        - 'amashumi amane'
+        - 'amashumi amahlanu'
+        - 'amashumi ayisithupha'
+        - 'amashumi ayisikhombisa'
+        - 'amashumi ayisishiyagalombili'
+        - 'amashumi ayisishiyagalolunye'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'ikwintilioni'
+          ordinalName: 'ikwintilioni'
+        -
+          value: 1000000000000000
+          name: 'ikwadriliyoni'
+          ordinalName: 'ikwadriliyoni'
+        -
+          value: 1000000000000
+          name: 'itriliyoni'
+          ordinalName: 'itriliyoni'
+        -
+          value: 1000000000
+          name: 'ibhiliyoni'
+          ordinalName: 'ibhiliyoni'
+        -
+          value: 1000000
+          name: 'isigidi'
+          ordinalName: 'isigidi'
+        -
+          value: 1000
+          name: 'inkulungwane'
+          ordinalName: 'inkulungwane'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      useHundredMultiplier: true
+      ignoredTokens:
+        - 'na'
+      cardinalMap:
+        'zero': 0
+        'kanye': 1
+        'kubili': 2
+        'kuthathu': 3
+        'kune': 4
+        'kuhlanu': 5
+        'isithupha': 6
+        'isikhombisa': 7
+        'isishiyagalombili': 8
+        'isishiyagalolunye': 9
+        'ishumi': 10
+        'ishumi nanye': 11
+        'ishumi nambili': 12
+        'ishumi nantathu': 13
+        'ishumi nane': 14
+        'ishumi nanhlanu': 15
+        'ishumi nesithupha': 16
+        'ishumi nesikhombisa': 17
+        'ishumi nesishiyagalombili': 18
+        'ishumi nesishiyagalolunye': 19
+        'amashumi amabili': 20
+        'amashumi amathathu': 30
+        'amashumi amane': 40
+        'amashumi amahlanu': 50
+        'amashumi ayisithupha': 60
+        'amashumi ayisikhombisa': 70
+        'amashumi ayisishiyagalombili': 80
+        'amashumi ayisishiyagalolunye': 90
+        'ikhulu': 100
+        'inkulungwane': 1000
+        'isigidi': 1000000
+        'ibhiliyoni': 1000000000
+        'itriliyoni': 1000000000000
+        'ikwadriliyoni': 1000000000000000
+        'ikwintilioni': 1000000000000000000
+        'ikhulu na kuhlanu': 105
+      negativePrefixes:
+        - 'minus '

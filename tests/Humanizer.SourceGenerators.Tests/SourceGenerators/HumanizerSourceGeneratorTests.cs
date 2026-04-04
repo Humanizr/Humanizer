@@ -437,8 +437,6 @@ wordsToNumber:
     public void UnitLeadingCompoundScalesAcceptNamedOrdinalCases()
     {
         const string locale = """
-inherits: 'en'
-
 numberToWords:
   engine: 'unit-leading-compound'
   zeroWord: 'zero'
@@ -831,8 +829,6 @@ wordsToNumber:
     public void ChildLocaleMappingsMergeWithParentMappingsAtGenerationTime()
     {
         const string baseLocale = """
-inherits: 'en'
-
 numberToWords:
   engine: 'conjunctional-scale'
   minusWord: 'base-minus'

@@ -27,7 +27,8 @@ enum OrdinalDateDayMode
 sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
 {
     const string DayPlaceholder = "{day}";
-    const string DayMarkerFormat = "'<<'d'>>'";
+    const string DayMarker = "<<DAY>>";
+    const string DayMarkerFormat = "'<<DAY>>'";
 
     readonly string template = template;
     readonly OrdinalDateDayMode dayMode = dayMode;
@@ -37,7 +38,7 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
     /// </summary>
     /// <returns>The formatted date string.</returns>
     public string Format(DateTime date) =>
-        ReplaceDayMarker(date.ToString(GetFormatString()), FormatDay(date.Day), date.Day);
+        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day));
 
     #if NET6_0_OR_GREATER
     /// <summary>
@@ -45,15 +46,42 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
     /// </summary>
     /// <returns>The formatted date string.</returns>
     public string Format(DateOnly date) =>
-        ReplaceDayMarker(date.ToString(GetFormatString()), FormatDay(date.Day), date.Day);
+        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day));
     #endif
 
     string GetFormatString() => template.Replace(DayPlaceholder, DayMarkerFormat);
 
     // The day is emitted through a temporary marker so the rest of the culture-specific format
     // string can be preserved exactly as defined by the pattern.
-    static string ReplaceDayMarker(string formattedDate, string renderedDay, int day) =>
-        formattedDate.Replace("<<" + day.ToString(CultureInfo.CurrentCulture) + ">>", renderedDay);
+    static string ReplaceDayMarker(string formattedDate, string renderedDay) =>
+        formattedDate.Replace(DayMarker, renderedDay);
+
+    static CultureInfo GetPatternCulture()
+    {
+        var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+
+        try
+        {
+            culture.DateTimeFormat.Calendar = new GregorianCalendar(GregorianCalendarTypes.Localized);
+            return culture;
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+        }
+
+        foreach (var calendar in culture.OptionalCalendars)
+        {
+            if (calendar is not GregorianCalendar gregorianCalendar)
+            {
+                continue;
+            }
+
+            culture.DateTimeFormat.Calendar = gregorianCalendar;
+            return culture;
+        }
+
+        return culture;
+    }
 
     string FormatDay(int day) =>
         dayMode switch

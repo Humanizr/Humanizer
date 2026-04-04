@@ -69,15 +69,13 @@ static class LocaleCoverageData
             { "sv", "1 och 2", "1, 2 och 3" }
         };
 
-    public static TheoryData<string, string, string> FormatterFallbackExpectationTheoryData =>
+    public static TheoryData<string, string, string> FormatterParentInheritanceExpectationTheoryData =>
         new()
         {
             { "de-CH", "gestern", "2 Tage" },
             { "de-LI", "gestern", "2 Tage" },
             { "en-IN", "yesterday", "2 days" },
-            { "fr-CH", "hier", "2 jours" },
-            { "ta", "yesterday", "2 days" },
-            { "zu-ZA", "yesterday", "2 days" }
+            { "fr-CH", "hier", "2 jours" }
         };
 
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
@@ -90,6 +88,8 @@ static class LocaleCoverageData
         new()
         {
             { "ca", "1 de gener de 2015" },
+            { "ar", "1 يناير 2015" },
+            { "ja", "2015年1月1日" },
             { "en-US", "January 1st, 2015" },
             { "es", "1 de enero de 2015" },
             { "fr", "1er janvier 2015" },
@@ -101,6 +101,8 @@ static class LocaleCoverageData
         new()
         {
             { "ca", "1 de gener de 2015" },
+            { "ar", "1 يناير 2015" },
+            { "ja", "2015年1月1日" },
             { "en-US", "January 1st, 2015" },
             { "es", "1 de enero de 2015" },
             { "fr", "1er janvier 2015" },
@@ -114,13 +116,14 @@ static class LocaleCoverageData
             { "de", 13, 23, "fünf vor halb zwei" },
             { "es", 10, 25, "las diez y veinticinco de la mañana" },
             { "fr", 13, 23, "treize heures vingt-cinq" },
+            { "ja", 13, 23, "13時25分" },
             { "lb", 13, 23, "fënnef vir hallwer zwou" },
             { "pt", 13, 23, "uma e vinte e cinco" },
             { "pt-BR", 13, 23, "uma e vinte e cinco" }
         };
 #endif
 
-    public static TheoryData<string, string, long> WordsToNumberUnsupportedExpectationTheoryData => CreateWordsToNumberUnsupportedExpectationTheoryData();
+    public static TheoryData<string, string, long> UnknownCultureWordsToNumberExpectationTheoryData => CreateUnknownCultureWordsToNumberExpectationTheoryData();
 
     public static CultureSwap UseCulture(string cultureName) => new(new(cultureName));
 
@@ -135,10 +138,10 @@ static class LocaleCoverageData
         return data;
     }
 
-    static TheoryData<string, string, long> CreateWordsToNumberUnsupportedExpectationTheoryData()
+    static TheoryData<string, string, long> CreateUnknownCultureWordsToNumberExpectationTheoryData()
         => new()
         {
-            { "zu-ZA", "one", 1L }
+            { "eo", "one", 1L }
         };
 
     static string[] GetRegisteredLocales<TRegistry, TLocaliser>()

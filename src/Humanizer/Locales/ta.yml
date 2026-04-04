@@ -1,6 +1,226 @@
 locale: 'ta'
 
 surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'மற்றும்'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'இப்போது'
+      never: 'ஒருபோதும் இல்லை'
+      past:
+        millisecond:
+          single: '1 மில்லிவிநாடி முன்'
+          multiple:
+            forms:
+              default: 'மில்லிவிநாடிகள்'
+            afterCount: 'முன்'
+        second:
+          single: '1 வினாடி முன்'
+          multiple:
+            forms:
+              default: 'வினாடிகள்'
+            afterCount: 'முன்'
+        minute:
+          single: '1 நிமிடம் முன்'
+          multiple:
+            forms:
+              default: 'நிமிடங்கள்'
+            afterCount: 'முன்'
+        hour:
+          single: '1 மணி முன்'
+          multiple:
+            forms:
+              default: 'மணிகள்'
+            afterCount: 'முன்'
+        day:
+          single: 'நேற்று'
+          multiple:
+            forms:
+              default: 'நாட்கள்'
+            afterCount: 'முன்'
+        week:
+          single: '1 வாரம் முன்'
+          multiple:
+            forms:
+              default: 'வாரங்கள்'
+            afterCount: 'முன்'
+        month:
+          single: '1 மாதம் முன்'
+          multiple:
+            forms:
+              default: 'மாதங்கள்'
+            afterCount: 'முன்'
+        year:
+          single: '1 ஆண்டு முன்'
+          multiple:
+            forms:
+              default: 'ஆண்டுகள்'
+            afterCount: 'முன்'
+      future:
+        millisecond:
+          single: '1 மில்லிவிநாடி'
+          multiple:
+            forms:
+              default: 'மில்லிவிநாடிகளில்'
+        second:
+          single: '1 வினாடி'
+          multiple:
+            forms:
+              default: 'வினாடிகளில்'
+        minute:
+          single: '1 நிமிடம்'
+          multiple:
+            forms:
+              default: 'நிமிடங்களில்'
+        hour:
+          single: '1 மணி'
+          multiple:
+            forms:
+              default: 'மணிகளில்'
+        day:
+          single: 'நாளை'
+          multiple:
+            forms:
+              default: 'நாட்களில்'
+        week:
+          single: '1 வாரம்'
+          multiple:
+            forms:
+              default: 'வாரங்களில்'
+        month:
+          single: '1 மாதம்'
+          multiple:
+            forms:
+              default: 'மாதங்களில்'
+        year:
+          single: '1 ஆண்டு'
+          multiple:
+            forms:
+              default: 'ஆண்டுகளில்'
+    duration:
+      zero: 'நேரமில்லை'
+      age:
+        template: '{value} வயது'
+      millisecond:
+        single:
+          numeric: '1 மில்லிவிநாடி'
+          words: 'ஒரு மில்லிவிநாடி'
+        multiple:
+          forms:
+            default: 'மில்லிவிநாடிகள்'
+            singular: 'மில்லிவிநாடி'
+      second:
+        single:
+          numeric: '1 வினாடி'
+          words: 'ஒரு வினாடி'
+        multiple:
+          forms:
+            default: 'வினாடிகள்'
+            singular: 'வினாடி'
+      minute:
+        single:
+          numeric: '1 நிமிடம்'
+          words: 'ஒரு நிமிடம்'
+        multiple:
+          forms:
+            default: 'நிமிடங்கள்'
+            singular: 'நிமிடம்'
+      hour:
+        single:
+          numeric: '1 மணி'
+          words: 'ஒரு மணி'
+        multiple:
+          forms:
+            default: 'மணிகள்'
+            singular: 'மணி'
+      day:
+        single:
+          numeric: '1 நாள்'
+          words: 'ஒரு நாள்'
+        multiple:
+          forms:
+            default: 'நாட்கள்'
+            singular: 'நாள்'
+      week:
+        single:
+          numeric: '1 வாரம்'
+          words: 'ஒரு வாரம்'
+        multiple:
+          forms:
+            default: 'வாரங்கள்'
+            singular: 'வாரம்'
+      month:
+        single:
+          numeric: '1 மாதம்'
+          words: 'ஒரு மாதம்'
+        multiple:
+          forms:
+            default: 'மாதங்கள்'
+            singular: 'மாதம்'
+      year:
+        single:
+          numeric: '1 ஆண்டு'
+          words: 'ஒரு ஆண்டு'
+        multiple:
+          forms:
+            default: 'ஆண்டுகள்'
+            singular: 'ஆண்டு'
+    dataUnits:
+      bit:
+        forms:
+          default: 'பிட்கள்'
+          singular: 'பிட்'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'பைட்கள்'
+          singular: 'பைட்'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'கிலோபைட்கள்'
+          singular: 'கிலோபைட்'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'மெகாபைட்கள்'
+          singular: 'மெகாபைட்'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'கிகாபைட்கள்'
+          singular: 'கிகாபைட்'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'டெராபைட்கள்'
+          singular: 'டெராபைட்'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'மில்லிவிநாடி'
+      second:
+        symbol: 'விநாடி'
+      minute:
+        symbol: 'நிமிடம்'
+      hour:
+        symbol: 'மணி'
+      day:
+        symbol: 'நாள்'
+      week:
+        symbol: 'வாரம்'
+      month:
+        symbol: 'மாதம்'
+      year:
+        symbol: 'ஆண்டு'
+
   number:
     words:
       engine: 'indian-grouping'

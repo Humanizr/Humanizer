@@ -295,18 +295,18 @@ namespace Humanizer
         string Convert(System.DateTime date);
         string Convert(System.DateTime date, Humanizer.GrammaticalCase grammaticalCase);
     }
-   public interface IFormatter
-   {
-       string DataUnitHumanize(Humanizer.DataUnit dataUnit, double count, bool toSymbol = true);
-       string DateHumanize(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int unit);
-       string DateHumanize_Never();
-       string DateHumanize_Now();
-       string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords = false);
-       string TimeSpanHumanize_Age();
-       string TimeSpanHumanize_Zero();
-       string TimeUnitHumanize(Humanizer.TimeUnit timeUnit);
-   }
-   public interface INumberToWordsConverter
+    public interface IFormatter
+    {
+        string DataUnitHumanize(Humanizer.DataUnit dataUnit, double count, bool toSymbol = true);
+        string DateHumanize(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int unit);
+        string DateHumanize_Never();
+        string DateHumanize_Now();
+        string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords = false);
+        string TimeSpanHumanize_Age();
+        string TimeSpanHumanize_Zero();
+        string TimeUnitHumanize(Humanizer.TimeUnit timeUnit);
+    }
+    public interface INumberToWordsConverter
     {
         string Convert(long number);
         string Convert(long number, Humanizer.WordForm wordForm);
@@ -336,12 +336,12 @@ namespace Humanizer
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
         string? Truncate(string? value, int length, string? truncationString, Humanizer.TruncateFrom truncateFrom = 1);
     }
-   public interface IWordsToNumberConverter
-   {
-       long Convert(string words);
-       bool TryConvert(string words, out long parsedValue);
-       bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber);
-   }
+    public interface IWordsToNumberConverter
+    {
+        long Convert(string words);
+        bool TryConvert(string words, out long parsedValue);
+        bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber);
+    }
     public class In
     {
         public In() { }
@@ -1286,10 +1286,10 @@ namespace Humanizer
         Abbreviation = 1,
         Eifeler = 2,
     }
-   public static class WordsToNumberExtension
-   {
-       public static long ToNumber(this string words, System.Globalization.CultureInfo culture) { }
-       public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture) { }
-       public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
-   }
+    public static class WordsToNumberExtension
+    {
+        public static long ToNumber(this string words, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
+    }
 }

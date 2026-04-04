@@ -330,6 +330,69 @@ headings:
     }
 
     [Fact]
+    public void VariantInheritanceMustStayWithinTheSameLanguageFamily()
+    {
+        var catalog = CreateCatalog(
+            ("fr-CA", """
+locale: 'fr-CA'
+variantOf: 'en'
+surfaces:
+  number:
+    words:
+      engine: 'variant-decade'
+      minusWord: 'moins'
+      seventyStrategy: 'regular'
+      ninetyStrategy: 'regular'
+      pluralizeExactEighty: false
+      tensUsingEtWhenUnitIsOne:
+        - 2
+      tensMap:
+        - 'zéro'
+        - 'dix'
+        - 'vingt'
+        - 'trente'
+        - 'quarante'
+        - 'cinquante'
+        - 'soixante'
+        - 'septante'
+        - 'octante'
+        - 'nonante'
+"""),
+            ("en", """
+locale: 'en'
+surfaces:
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'and'
+      hundredWord: 'hundred'
+      hundredOrdinalWord: 'hundredth'
+      tensUnitsSeparator: '-'
+      defaultAddAnd: true
+      addAndMode: 'use-caller-flag'
+      andStrategy: 'within-group-only'
+      tupleSuffix: '-tuple'
+      ordinalLeadingOneStrategy: 'omit-leading-one'
+      ordinalMode: 'english'
+      unitsMap:
+        0: 'zero'
+      ordinalUnitsMap:
+        0: 'zeroth'
+      tensMap:
+        0: 'zero'
+      ordinalTensMap:
+        0: 'zeroth'
+      scales: []
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("same language family", StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void SemanticDiffIgnoresEquivalentCanonicalStructureButDetectsBehaviorChanges()
     {
         const string left = """

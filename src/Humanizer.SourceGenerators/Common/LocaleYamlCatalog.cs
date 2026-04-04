@@ -393,7 +393,19 @@ public sealed partial class HumanizerSourceGenerator
                 }
                 else
                 {
+                    if (!SharesLanguageFamily(localeCode, inheritedLocale))
+                    {
+                        diagnostics.Add(Diagnostic.Create(
+                            HumanizerSourceGenerator.Diagnostics.InvalidLocaleDefinition,
+                            Location.None,
+                            localeCode,
+                            $"Inherited locale '{inheritedLocale}' must stay within the same language family as '{localeCode}'."));
+                        inherited = ResolvedLocaleDefinition.Empty(localeCode);
+                    }
+                    else
+                    {
                     inherited = ResolveLocale(inheritedLocale, parsedLocales, resolving, cache, diagnostics);
+                    }
                 }
             }
 
@@ -474,6 +486,17 @@ public sealed partial class HumanizerSourceGenerator
 
             cache.Add(resolved);
             return resolved;
+        }
+
+        static bool SharesLanguageFamily(string localeCode, string inheritedLocaleCode) =>
+            string.Equals(GetLanguageFamily(localeCode), GetLanguageFamily(inheritedLocaleCode), StringComparison.OrdinalIgnoreCase);
+
+        static string GetLanguageFamily(string localeCode)
+        {
+            var separatorIndex = localeCode.IndexOf('-');
+            return separatorIndex >= 0
+                ? localeCode.Substring(0, separatorIndex)
+                : localeCode;
         }
 
         static SimpleYamlValue? ResolveFeatureValue(

@@ -36,6 +36,36 @@ public class GeneratedFormatterRuntimeTests
     }
 
     [Fact]
+    public void GeneratedPhraseTablesUseTamilOwnedLocaleData()
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("ta"));
+
+        Assert.Equal("இப்போது", formatter.DateHumanize_Now());
+        Assert.Equal("ஒருபோதும் இல்லை", formatter.DateHumanize_Never());
+        Assert.Equal("2 நாட்கள் முன்", formatter.DateHumanize(TimeUnit.Day, Tense.Past, 2));
+        Assert.Equal("2 நாட்களில்", formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2));
+        Assert.Equal("2 நாட்கள்", formatter.TimeSpanHumanize(TimeUnit.Day, 2));
+        Assert.Equal("ஒரு நாள்", formatter.TimeSpanHumanize(TimeUnit.Day, 1, toWords: true));
+        Assert.Equal("பைட்கள்", formatter.DataUnitHumanize(DataUnit.Byte, 2, toSymbol: false));
+        Assert.Equal("நாள்", formatter.TimeUnitHumanize(TimeUnit.Day));
+    }
+
+    [Fact]
+    public void GeneratedPhraseTablesUseZuluOwnedLocaleData()
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("zu-ZA"));
+
+        Assert.Equal("manje", formatter.DateHumanize_Now());
+        Assert.Equal("akakaze", formatter.DateHumanize_Never());
+        Assert.Equal("2 izinsuku ezedlule", formatter.DateHumanize(TimeUnit.Day, Tense.Past, 2));
+        Assert.Equal("2 izinsuku ezizayo", formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2));
+        Assert.Equal("2 izinsuku", formatter.TimeSpanHumanize(TimeUnit.Day, 2));
+        Assert.Equal("1 usuku", formatter.TimeSpanHumanize(TimeUnit.Day, 1, toWords: true));
+        Assert.Equal("ama-bytes", formatter.DataUnitHumanize(DataUnit.Byte, 2, toSymbol: false));
+        Assert.Equal("usuku", formatter.TimeUnitHumanize(TimeUnit.Day));
+    }
+
+    [Fact]
     public void ProfiledFormatterUsesGeneratedPhraseTablesForRussianGrammarSensitivePhrases()
     {
         var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("ru"));
@@ -135,7 +165,7 @@ public class GeneratedFormatterRuntimeTests
     [Fact]
     public void GeneratedPhraseTablesFallBackToEnglishForUnknownCultures()
     {
-        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("zu-ZA"));
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("eo"));
 
         Assert.Equal("now", formatter.DateHumanize_Now());
         Assert.Equal("never", formatter.DateHumanize_Never());

@@ -178,8 +178,8 @@ public class LocaleRegistrySweepTests
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.WordsToNumberUnsupportedExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void WordsToNumber_UnsupportedCultures_UseDefaultLexicon(string localeName, string words, long expected)
+    [MemberData(nameof(LocaleCoverageData.UnknownCultureWordsToNumberExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void WordsToNumber_UnknownCultures_UseDefaultLexicon(string localeName, string words, long expected)
     {
         var culture = new CultureInfo(localeName);
 

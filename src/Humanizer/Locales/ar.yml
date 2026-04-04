@@ -525,6 +525,14 @@ surfaces:
         'كوينتليونان': 1000000000000000000
         'كوينتليونات': 1000000000000000000
 
+  ordinal:
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
   compass:
     full:
       - 'شمال'
