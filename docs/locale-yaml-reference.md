@@ -4,6 +4,8 @@ This document is the authoritative authoring reference for `src/Humanizer/Locale
 
 If you are adding or changing locale-owned generated behavior, read this document together with [Locale YAML How-To](./locale-yaml-how-to.md) and [Adding Or Updating A Locale](./adding-a-locale.md).
 
+Taken together, those three documents are intended to fully describe the checked-in locale contract without consulting generator source code.
+
 ## Scope
 
 These YAML files are the single checked-in authoring surface for locale-owned generated behavior.
@@ -31,7 +33,7 @@ They are not parsed at runtime.
 5. Unknown top-level keys are rejected by the generator.
 6. Locale words, switches, tables, and strategy choices belong here.
 7. Generator implementation contracts do not belong here.
-8. Supported number locales should describe both `number.words` and `number.parse` so the locale can round-trip naturally written forms.
+8. Locale parity work must account for both `number.words` and `number.parse`, either locale-owned or same-language inherited with proof.
 
 ## Merge Rules
 
@@ -46,6 +48,7 @@ The rules are:
 5. If a child mapping changes `engine`, that mapping replaces the parent mapping entirely.
 
 That means regional variants can now override only the fields they actually differ on.
+It does not mean inherited surfaces are automatically proved for parity purposes.
 
 Example:
 
@@ -214,6 +217,29 @@ Notes:
 - `dataUnitNonIntegralForm` tells the formatter which grammatical number to use for non-integral values.
 - `secondaryPlaceholderMode` enables special placeholder behavior for locales with secondary article/consonant rules.
 
+### `phrases`
+
+Purpose:
+
+- owns locale phrase tables that are not formatter profile metadata
+- feeds the generated phrase-table catalogs used by relative-date, duration, data-unit, and time-unit humanization
+- should contain direct locale phrases, not runtime strategy enums
+
+Members:
+
+- `relativeDate`
+- `duration`
+- `dataUnits`
+- `timeUnits`
+
+Notes:
+
+- `relativeDate` owns phrases such as "yesterday", "tomorrow", and tense-sensitive relative-date templates.
+- `duration` owns phrase tables used by duration humanization outside formatter profile selection metadata.
+- `dataUnits` owns localized data-unit phrases.
+- `timeUnits` owns localized time-unit phrases.
+- `phrases` is a distinct canonical surface from `formatter`. Do not hide phrase-table ownership under `formatter` just because both influence humanized output.
+
 ### `ordinal`
 
 Purpose:
@@ -253,7 +279,7 @@ Purpose:
 - feeds the generated number-to-words profile catalog
 - should contain words, lexical tables, scale rows, and structural strategy choices used while producing text from numbers
 
-For supported locales, `number.words` is the writer half of the number contract and should be planned together with `number.parse`.
+For locale parity work, `number.words` is the writer half of the number contract and should be planned together with `number.parse`.
 
 Supported engines in current checked-in YAML:
 
@@ -296,7 +322,7 @@ Purpose:
 - feeds the generated words-to-number profile catalog or token-map lexicon generator
 - should contain only input-facing tokens and parser behavior, not render-only vocabulary that users never type or speak
 
-For supported locales, `number.parse` is the parser half of the same number contract and should accept the same natural forms that `number.words` emits.
+For locale parity work, `number.parse` is the parser half of the same number contract and should accept the same natural forms that `number.words` emits.
 
 Supported engines in current checked-in YAML:
 
@@ -311,13 +337,18 @@ Supported engines in current checked-in YAML:
 - `token-map`
 - `vigesimal-compound`
 
-### `timeOnlyToClockNotation`
+### `clock`
 
 Purpose:
 
 - owns clock-phrase templates and phrase-family choices for `TimeOnly` clock notation
 - feeds either generated shared clock engines or the small residual handwritten clock leaves
 - should stay separate from general time humanization and formatter resource behavior
+
+Notes:
+
+- `clock` is the canonical YAML authoring surface.
+- The generator currently emits this surface into the runtime `timeOnlyToClockNotation` feature slot.
 
 Supported shapes:
 
@@ -328,6 +359,25 @@ Supported shapes:
 2. Generated shared engines:
    - `engine: 'phrase-hour'`
    - `engine: 'relative-hour'`
+
+### `compass`
+
+Purpose:
+
+- owns localized 16-point compass heading tables
+- feeds the generated heading-table catalog used by `HeadingExtensions`
+- should contain only the heading strings for each style, not extra navigation logic
+
+Fields:
+
+- `full`
+- `short`
+
+Notes:
+
+- Both `full` and `short` must contain exactly 16 entries.
+- `compass` is the canonical YAML authoring surface.
+- The generator currently emits this surface into the runtime `headings` feature slot.
 
 ## Shared Strategy Values
 
@@ -617,7 +667,7 @@ Authoring notes:
 
 These still route to locale-specific runtime implementations. They are acceptable leftovers until the repository has a clean structural model for those phrase families.
 
-### `timeOnlyToClockNotation: phrase-hour`
+### `clock: phrase-hour`
 
 Fields:
 
@@ -637,7 +687,7 @@ Notes:
 
 - This engine renders clock notation through fixed phrase templates keyed by rounded minute buckets.
 
-### `timeOnlyToClockNotation: relative-hour`
+### `clock: relative-hour`
 
 Fields:
 
@@ -1558,15 +1608,18 @@ These are the main files that turn locale YAML into runtime behavior:
 
 Before creating a new regional variant file:
 
-1. Check whether plain culture fallback already gives the desired result.
+1. Do not use plain culture fallback as parity proof for a shipped locale.
 2. If the variant has no locale-owned generated overrides, do not create a YAML file.
-3. If the variant differs only in a few fields inside a feature block, use `inherits` and override only those fields.
+3. If the variant differs only in a few fields inside a feature block, declare `variantOf` and override only those fields.
 4. If the variant needs a different `engine`, replace the whole mapping intentionally.
+5. For parity work, inherited surfaces still need locale-specific proving assertions and a recorded inheritance chain to the terminal owner.
+
+A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
 
 Examples in the current repo:
 
 - `en-US.yml` exists because U.S. ordinal date formatting differs from `en`.
 - `ru-RU.yml` does not need to exist when `ru` already covers the generated behavior.
-- `en-IN.yml` inherits `en` and overrides only the `number.words` fields that genuinely differ.
+- `en-IN.yml` declares `variantOf: 'en'` and overrides only the `number.words` fields that genuinely differ.
 
 

@@ -52,17 +52,17 @@ date.ToOrdinalWords(GrammaticalCase.Genitive);
 
 ## Feature Support By Language
 
-Not all features are available in all languages:
+This section describes the current repository state for consumers. It does not define an acceptable completion target for locale parity work.
 
-| Feature | Widely Supported | Limited Support |
-|---------|------------------|-----------------|
-| String Humanization | All languages | - |
-| DateTime Humanization | All languages | - |
-| TimeSpan Humanization | All languages | - |
-| Number to Words | Most supported locales | Some locales use specialized high-range systems |
-| Words to Number Parsing | Supported locales with authored parser data | Some locales only support writer output |
-| Ordinalization | Most European languages | Limited in Asian languages |
-| Pluralization | English only | - |
+| Feature | Current repo state | Parity note |
+|---------|--------------------|-------------|
+| String Humanization | Broadly available | Missing locale-specific behavior is parity debt, not an exemption |
+| DateTime Humanization | Broadly available | Missing locale-specific behavior is parity debt, not an exemption |
+| TimeSpan Humanization | Broadly available | Missing locale-specific behavior is parity debt, not an exemption |
+| Number to Words | Many locales already own this surface | Gaps still count as parity debt |
+| Words to Number Parsing | Many locales already have authored parser data | Missing parser coverage still counts as parity debt |
+| Ordinalization | Uneven across shipped locales | Missing ordinal coverage still counts as parity debt |
+| Pluralization | English only | This table is informational, not a parity waiver for localization work |
 
 ## Locale-Owned Data Model
 
@@ -74,16 +74,24 @@ Principles:
 
 1. One locale file owns one locale.
 2. Locale inheritance is declared in that same file with `variantOf`.
-3. Omit a `surfaces.<surface>` block to inherit it unchanged from the parent locale.
-4. Inside a mapped surface, omit unchanged fields to inherit them from the parent mapping.
-5. Child sequences replace parent sequences.
-6. Changing `engine` replaces that mapped surface instead of merging it.
-7. Keep locale-specific words, switches, and mappings in YAML.
-8. Keep `number.words` and `number.parse` aligned for supported number locales.
-9. Keep shared generator contracts in typed C# under `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`.
-10. Never make authors learn internal generated profile ids just to connect two features inside one locale file.
-11. The current authoring model keeps locale YAML at the top level of `src/Humanizer/Locales`.
-12. Do not split one locale across multiple YAML files unless there is an explicit redesign that updates the compiler contract, docs, and tests together.
+3. Top-level properties are exactly `locale`, `variantOf`, and `surfaces`.
+4. Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, and `compass`.
+5. Canonical nested members are `number.words`, `number.parse`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`.
+6. Omit a `surfaces.<surface>` block to inherit it unchanged from the parent locale.
+7. Inside a mapped surface, omit unchanged fields to inherit them from the parent mapping.
+8. Child sequences replace parent sequences.
+9. Changing `engine` replaces that mapped surface instead of merging it.
+10. Keep locale-specific words, switches, and mappings in YAML.
+11. Keep `number.words` and `number.parse` aligned whenever the locale claims parity.
+12. `formatter` and `phrases` are separate canonical surfaces and should not be collapsed into one conceptual bucket.
+13. `clock` is the canonical authoring name even though the emitted runtime feature is still `timeOnlyToClockNotation`.
+14. `compass` is the canonical authoring name even though the emitted runtime feature is still `headings`.
+15. Keep shared generator contracts in typed C# under `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`.
+16. Never make authors learn internal generated profile ids just to connect two features inside one locale file.
+17. The current authoring model keeps locale YAML at the top level of `src/Humanizer/Locales`.
+18. Do not split one locale across multiple YAML files unless there is an explicit redesign that updates the compiler contract, docs, and tests together.
+
+A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
 
 Example:
 
@@ -128,7 +136,7 @@ The localization codegen flow is:
 3. `EngineContractCatalog`
    Typed generator-side engine contracts that describe how a feature block maps onto a runtime profile object.
 4. `ProfileCatalogInput` generators
-   Build typed profile catalogs for `numberToWords`, `wordsToNumber`, `ordinalizer`, `date-to-ordinal`, `formatter`, and `timeOnlyToClockNotation`.
+   Build typed profile catalogs and tables for `numberToWords`, `wordsToNumber`, `ordinalizer`, `date-to-ordinal`, `formatter`, `phrases`, `headings`, and `timeOnlyToClockNotation`.
 5. `LocaleRegistryInput`
    Emits the culture-to-implementation registrations that wire generated profiles and handwritten residual leaves into the runtime registries.
 6. Shared runtime kernels
@@ -154,18 +162,20 @@ Good structural names:
 
 Residual locale names are acceptable only when the behavior is still genuinely locale-specific and forcing it into a shared schema would create imperative hooks or exception-bucket metadata.
 
-Current accepted residual leaves are limited to a small set of `TimeOnlyToClockNotation` converters where the repository still lacks a clean multi-locale abstraction.
+Current accepted residual leaves are limited to a small set of `TimeOnlyToClockNotation` converters where the repository still lacks a clean multi-locale abstraction. In YAML, these are still authored under the canonical `clock` surface.
 
 ## Adding Or Updating A Locale
 
 When a locale already fits an existing shared engine:
 
-1. Create or update `src/Humanizer/Locales/<locale>.yml`.
-2. Add `variantOf` if the locale is a regional variant.
-3. Fill in the `surfaces` blocks that differ from the parent.
-4. Reuse an existing structural engine name.
-5. Add tests under `tests/Humanizer.Tests`.
-6. Run the relevant source-generator tests and localization tests.
+1. Produce a preflight gap report covering every canonical surface.
+2. Create or update `src/Humanizer/Locales/<locale>.yml`.
+3. Add `variantOf` if the locale is a regional variant.
+4. Fill in the `surfaces` blocks that differ from the parent.
+5. Reuse an existing structural engine name.
+6. Add tests under `tests/Humanizer.Tests`.
+7. Maintain a parity artifact until the unresolved set is empty.
+8. Run the relevant source-generator tests and localization tests.
 
 When a locale does not fit an existing shared engine:
 
@@ -194,7 +204,6 @@ dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Te
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
-pwsh ./tests/verify-packages.ps1 -PackageVersion <version> -PackagesDirectory ./artifacts/plan-validation
 ```
 
 ## Related Topics

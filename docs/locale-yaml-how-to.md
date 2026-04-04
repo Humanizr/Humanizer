@@ -2,7 +2,9 @@
 
 This is the practical authoring guide for `src/Humanizer/Locales/*.yml`.
 
-Read this first when you need to add a locale, change a locale, or migrate a locale off a residual runtime leaf. Read [Locale YAML Reference](./locale-yaml-reference.md) beside it when you need the exhaustive field and strategy inventory.
+Read this first when you need to add a locale, change a locale, or migrate a locale off a residual runtime leaf. Together with [Adding Or Updating A Locale](./adding-a-locale.md), this document is intended to fully describe the allowed locale shape and authoring workflow without requiring contributors to inspect generator source code just to discover what belongs in a locale file.
+
+Read [Locale YAML Reference](./locale-yaml-reference.md) beside it when you need the exhaustive field and strategy inventory for a specific engine.
 
 ## Mental Model
 
@@ -25,8 +27,8 @@ If a value is describing generator plumbing, constructor shape, or how to walk t
 
 Work through these questions in order.
 
-1. Does the locale already work through culture fallback?
-   If yes, do not add a file.
+1. Is runtime culture fallback currently masking missing locale behavior?
+   If yes, treat that as parity debt, not success. Fallback never counts as parity proof for a shipped locale.
 2. Is this a regional variant of an existing neutral locale?
    If yes, create a child file with `variantOf` and override only the differences.
 3. Does the locale fit an existing shared engine?
@@ -76,6 +78,65 @@ Supported `surfaces` members are:
 
 Do not invent new top-level keys.
 
+## Canonical Authoring Skeleton
+
+This skeleton shows the complete canonical locale shape. Every locale file must stay within this structure.
+
+```yaml
+locale: '<locale>'
+variantOf: '<parent-locale>'
+
+surfaces:
+  list:
+    engine: '<list-engine>'
+
+  formatter:
+    engine: 'profiled'
+
+  phrases:
+    relativeDate:
+      now: '<text>'
+      never: '<text>'
+      past: {}
+      future: {}
+    duration:
+      zero: '<text>'
+      age:
+        template: '{value}'
+    dataUnits: {}
+    timeUnits: {}
+
+  number:
+    words:
+      engine: '<number-to-words-engine>'
+    parse:
+      engine: '<words-to-number-engine>'
+
+  ordinal:
+    numeric:
+      engine: '<ordinal-engine>'
+    date:
+      pattern: '<pattern-with-{day}>'
+      dayMode: '<day-mode>'
+    dateOnly:
+      pattern: '<pattern-with-{day}>'
+      dayMode: '<day-mode>'
+
+  clock:
+    engine: '<clock-engine>'
+
+  compass:
+    full: []
+    short: []
+```
+
+Notes:
+
+1. `formatter` and `phrases` are separate surfaces.
+2. `clock` is the canonical locale surface name even though the emitted runtime feature name is `timeOnlyToClockNotation`.
+3. `number` and `ordinal` are container surfaces; the actual owned blocks are `number.words`, `number.parse`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`.
+4. A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
+
 ## Inheritance
 
 Use `variantOf` when a locale is a true variant of another locale.
@@ -91,7 +152,8 @@ Rules:
 3. Child sequences replace parent sequences.
 4. Child mappings merge with parent mappings.
 5. If the child changes `engine`, the whole mapped surface is treated as a new block.
-6. For supported number locales, do not rely on English fallback when the locale is supposed to provide its own number words or parser.
+6. Inheritance is not self-proving. A parity claim still needs at least one locale-specific proving assertion for every inherited canonical surface.
+7. For parity work, do not rely on English fallback for any canonical surface.
 
 Use inheritance to express real parent-child relationships. Do not use it to hide unrelated locale behavior.
 
@@ -158,9 +220,28 @@ Put here:
 - grammatical metadata for units
 - data-unit fallback handling
 
+Do not put authored phrase tables here. Those belong under `phrases`.
+
+### `phrases`
+
+Use this block when the locale needs authored human-readable strings for humanization surfaces.
+
+Put here:
+
+- `relativeDate`
+  Relative date phrases such as `now`, `never`, and per-unit `past` and `future` forms
+- `duration`
+  `TimeSpan.Humanize` and `ToAge` phrases, including `zero`, `age.template`, and per-unit `single` and `multiple` forms
+- `dataUnits`
+  Humanized data-unit names and symbols
+- `timeUnits`
+  Humanized time-unit symbols and labels
+
+This is a first-class canonical surface. Do not collapse it into `formatter`.
+
 ### `number.words`
 
-Use this block when the locale supports cardinal or ordinal number rendering through a shared runtime kernel.
+Use this block when the locale owns or inherits cardinal or ordinal number rendering through a shared runtime kernel.
 
 Put here:
 
@@ -226,7 +307,7 @@ Supported parse engines in current checked-in YAML include:
 - `token-map`
 - `vigesimal-compound`
 
-For supported number locales, author `number.parse` alongside `number.words` so the locale can naturally round-trip the same high-range forms in both directions.
+For locale parity work, account for `number.parse` alongside `number.words` so the locale can naturally round-trip the same high-range forms in both directions.
 
 ### `ordinal`
 
@@ -252,6 +333,27 @@ Put here:
 
 - phrase templates for rounded or relative clock output
 - period-of-day words when the engine uses them
+
+Supported engines in current checked-in YAML include:
+
+- generated shared engines
+  - `phrase-hour`
+  - `relative-hour`
+- accepted residual locale leaves
+  - `french`
+  - `german`
+  - `luxembourgish`
+
+### `compass`
+
+Use this block when the locale owns heading or compass labels.
+
+Put here:
+
+- `full`
+  The full 16-point heading labels
+- `short`
+  The abbreviated 16-point heading labels
 
 ## Choosing Between A Shared Engine And A New One
 
@@ -279,11 +381,13 @@ When you are building a locale from scratch, use this order:
 1. Add `variantOf` first if the locale is a regional variant.
 2. Add `list` only if list joining actually differs from the parent.
 3. Add `formatter` only if formatter resource selection or unit grammar differs.
-4. Add `number.words` once you know the render-side engine family.
-5. Add `number.parse` once you know the parse-side engine family.
-6. Add `ordinal.numeric` if numeric ordinalization exists independently from `number.words`.
-7. Add `ordinal.date` or `ordinal.dateOnly` only for date-specific day phrasing.
-8. Add `clock` last, after checking whether the locale really fits an existing clock engine.
+4. Add `phrases` once you know the locale-owned relative-date, duration, data-unit, and time-unit strings.
+5. Add `number.words` once you know the render-side engine family.
+6. Add `number.parse` once you know the parse-side engine family.
+7. Add `ordinal.numeric` if numeric ordinalization exists independently from `number.words`.
+8. Add `ordinal.date` or `ordinal.dateOnly` only for date-specific day phrasing.
+9. Add `clock` after checking whether the locale really fits an existing clock engine.
+10. Add `compass` if the locale needs heading labels and does not inherit acceptable same-language values.
 
 This keeps authoring pressure on the generated/shared surfaces first and makes it easier to spot when a new block is really necessary.
 
@@ -292,10 +396,12 @@ This keeps authoring pressure on the generated/shared surfaces first and makes i
 ### Add A New Neutral Locale
 
 1. Create `src/Humanizer/Locales/<locale>.yml`.
-2. Add only the feature blocks the locale actually supports.
-3. Reuse existing engines wherever possible.
-4. Add runtime tests under `tests/Humanizer.Tests/Localisation/<culture>`.
-5. Add generator assertions if the generated wiring changed.
+2. Produce a preflight gap report covering every canonical surface.
+3. Add or prove every canonical surface through locale ownership or same-language inheritance with proof.
+4. Reuse existing engines wherever possible.
+5. Add runtime tests under `tests/Humanizer.Tests/Localisation/<culture>`.
+6. Add generator assertions if the generated wiring changed.
+7. Maintain a parity map artifact until the unresolved set is empty.
 
 ### Add A Regional Variant
 
@@ -324,3 +430,12 @@ dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validati
 ```
 
 If the change touches a hot runtime path, also run the relevant benchmark suite.
+
+For parity-sensitive locale work, the practical completion test is stronger than “the YAML compiled”:
+
+1. every canonical surface is intentionally locale-owned or intentionally inherited through `variantOf` with proof
+2. the locale does not rely on English fallback or unsupported-locale behavior for any shipped localized surface
+3. exact-output tests exist for grammar-sensitive or locale-specific behavior
+4. the parity artifact ends with an empty unresolved set
+
+If you cannot produce an empty unresolved set for the locale, you must report `parity not complete`.
