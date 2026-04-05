@@ -1,6 +1,6 @@
 # Localization
 
-Humanizer supports many languages and cultures across number, date, time, ordinal, formatter, and collection-humanization surfaces.
+Humanizer supports many languages and cultures across number, date, time, ordinal, formatter, collection-humanization, clock-notation, and heading surfaces.
 
 Most consumers only need to set a culture. Contributors now author locale-specific generated behavior in one YAML file per locale, and shared runtime kernels are used whenever the behavior is structurally reusable.
 
@@ -50,19 +50,11 @@ date.ToOrdinalWords(GrammaticalCase.Nominative);
 date.ToOrdinalWords(GrammaticalCase.Genitive);
 ```
 
-## Feature Support By Language
+## Feature Support
 
-This section describes the current repository state for consumers. It does not define an acceptable completion target for locale parity work.
+Localized Humanizer features are expected to work correctly for shipped locales. Whether a locale inherits behavior from a same-language parent is an implementation detail, not a support distinction.
 
-| Feature | Current repo state | Parity note |
-|---------|--------------------|-------------|
-| String Humanization | Broadly available | Missing locale-specific behavior is parity debt, not an exemption |
-| DateTime Humanization | Broadly available | Missing locale-specific behavior is parity debt, not an exemption |
-| TimeSpan Humanization | Broadly available | Missing locale-specific behavior is parity debt, not an exemption |
-| Number to Words | Many locales already own this surface | Gaps still count as parity debt |
-| Words to Number Parsing | Many locales already have authored parser data | Missing parser coverage still counts as parity debt |
-| Ordinalization | Uneven across shipped locales | Missing ordinal coverage still counts as parity debt |
-| Pluralization | English only | This table is informational, not a parity waiver for localization work |
+Contributor-facing parity audits and gap tracking live in tests and local planning artifacts rather than in the user docs.
 
 ## Locale-Owned Data Model
 
@@ -91,7 +83,7 @@ Principles:
 17. The current authoring model keeps locale YAML at the top level of `src/Humanizer/Locales`.
 18. Do not split one locale across multiple YAML files unless there is an explicit redesign that updates the compiler contract, docs, and tests together.
 
-A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
+A shipped locale is incomplete unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
 
 Example:
 

@@ -33,7 +33,7 @@ They are not parsed at runtime.
 5. Unknown top-level keys are rejected by the generator.
 6. Locale words, switches, tables, and strategy choices belong here.
 7. Generator implementation contracts do not belong here.
-8. Locale parity work must account for both `number.words` and `number.parse`, either locale-owned or same-language inherited with proof.
+8. Shipped locales are expected to resolve both `number.words` and `number.parse`, either locale-owned or same-language inherited with proof.
 
 ## Merge Rules
 
@@ -46,6 +46,7 @@ The rules are:
 3. A sequence child value replaces the parent sequence value.
 4. A mapping child value merges recursively with the parent mapping.
 5. If a child mapping changes `engine`, that mapping replaces the parent mapping entirely.
+6. Do not use empty mappings or `engine: 'default'` to request built-in behavior. If a surface would only say "use the default", omit the block instead.
 
 That means regional variants can now override only the fields they actually differ on.
 It does not mean inherited surfaces are automatically proved for parity purposes.

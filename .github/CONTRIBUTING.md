@@ -37,7 +37,7 @@ Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912
 
 ### <a id="need-your-help-with-localisation">Need your help with localisation</a>
 One area where Humanizer can always use your help is localisation.
-Currently Humanizer supports quite a few localisations for `DateTime.Humanize`, `TimeSpan.Humanize`, `ToWords`, `ToOrdinalWords`, and `ToNumber`.
+Humanizer ships locale coverage for `DateTime.Humanize`, `TimeSpan.Humanize`, `ToWords`, `ToOrdinalWords`, `ToNumber`, numeric ordinalization, date ordinals, clock notation, and compass headings.
 
 Humanizer could definitely do with more translations.
 To add a translation for `DateTime.Humanize` and `TimeSpan.Humanize`,
@@ -50,6 +50,7 @@ e.g. [`RomanianFormatter`](https://github.com/Humanizr/Humanizer/blob/main/src/H
 Then return an instance of your class in the [`Configurator`](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer/Configuration/Configurator.cs) based on the current culture.
 
 Number localization is now authored primarily in YAML under `src/Humanizer/Locales`. Supported locales should plan `ToWords` and `ToNumber` together so the same high-range forms round-trip naturally.
+Locale work is not complete unless every canonical surface resolves intentionally, either locale-owned or same-language inherited with proof.
 Check out the locale YAML files and the shared number kernels under `src/Humanizer/Localisation/NumberToWords` and `src/Humanizer/Localisation/WordsToNumber` for examples of how to express a language in the current pipeline.
 If a locale still needs a residual runtime leaf, keep it intentional and document why the shared YAML schema cannot express it yet.
 

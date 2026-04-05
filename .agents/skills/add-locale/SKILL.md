@@ -11,6 +11,8 @@ Treat locale work as parity work, not translation work. A locale is not done whe
 
 If existing YAML and shared kernels cannot reach parity, expand the work into generator, runtime, registry, documentation, and test changes until parity is real. Do not land a partial locale.
 
+For parity purposes, support is a behavioral question: does the feature work correctly for the locale? Ownership style, profile shape, and inheritance chain are maintainer details, not support categories.
+
 ## Hard Rules
 
 1. Start with the repo docs, not guesswork: read `docs/adding-a-locale.md` and `docs/locale-yaml-how-to.md`, then read `docs/locale-yaml-reference.md` when the surface shape or engine options are unclear.
@@ -22,6 +24,7 @@ If existing YAML and shared kernels cannot reach parity, expand the work into ge
 7. Prefer locale-owned YAML data plus shared structural engines. Keep locale-specific runtime leaves only when the behavior is genuinely procedural.
 8. If a locale cannot be expressed with current shared engines, add or extend the generator contract and shared runtime kernel instead of reducing scope.
 9. Do not mark the work complete until you have verified that full parity exists in code and tests. "Good enough", "most surfaces", or "we can follow up later" are failures.
+10. Generic runtime fallback does not count as support. A locale surface is only supported when it has correct locale-specific behavior, either authored directly or inherited from a same-language parent that genuinely provides the right behavior for that surface.
 
 ## Anti-Rationalization Rules
 
@@ -35,6 +38,10 @@ These are failure modes, not acceptable interpretations:
 - "We can follow up on the remaining surfaces later" is failure.
 - "The output is understandable" is failure if it is unnatural for native speakers.
 - "A locale-specific leaf is easier" is not justification for avoiding a reusable shared engine.
+- "The registry resolved something" is not proof of parity.
+- "The method returned a non-empty string" is not proof of parity.
+- "The output is culture-aware" is not proof of parity if it came from a generic/default fallback path.
+- "The locale works because generic formatting returned something reasonable" is not parity for a canonical surface that is supposed to be linguistically modeled.
 
 If the work needed for parity grows into generator, runtime, registry, docs, or tests, expand the work. Do not shrink the goal.
 
@@ -80,6 +87,8 @@ Build the parity map as a concrete table, not notes. Use at least these columns:
 - `ownership path`
 - `current state`
 - `target state`
+- `support state`
+- `proof kind`
 - `files to change`
 - `tests proving parity`
 - `proof file/assertion`
@@ -119,6 +128,22 @@ Allowed values for `current state` and `target state`:
 - `english-fallback`
 - `unsupported`
 
+Allowed values for `support state`:
+
+- `supported`
+- `not supported`
+
+Allowed values for `proof kind`:
+
+- `locale-owned exact-output`
+- `same-language inherited exact-output`
+- `locale-owned structural assertion`
+- `same-language inherited structural assertion`
+- `generic fallback`
+- `unsupported`
+
+Any row with `proof kind: generic fallback` fails parity and blocks completion.
+
 Do not start implementation until every shipped localized surface for the locale appears in the parity map.
 
 Use `references/parity-checklist.md` for the surface inventory, repo file map, and surface-to-files matrix.
@@ -133,6 +158,8 @@ Use `status` values such as:
 - `proved`
 
 Do not mark a row `proved` until the row has a concrete proving test or assertion, not just intended coverage. "suite passed" is not valid row-level proof.
+
+The actual parity verdict for the locale must be expressed only in `support state` terms. Do not use implementation-shaped verdicts such as "broadly available", "intentionally resolved", or other wording that hides whether the feature truly works.
 
 ### 3. Derive Locale Terms With Independent Review
 
@@ -198,6 +225,26 @@ When adding a regional variant, override only real differences. When adding a ne
 
 Add or update tests that prove the locale's actual output and registry presence. Favor exact-output tests for grammar-sensitive behavior and keep sweep tests strong enough to catch accidental fallback. Treat `formatter` and `phrases` as separate surfaces when auditing and proving parity.
 
+Proof must distinguish real support from fallback:
+
+- registry presence is not enough
+- non-empty output is not enough
+- culture-aware formatting is not enough
+- generic runtime fallback is not enough
+
+For every surface that claims parity, add at least one proof that the locale is not merely riding a generic fallback path when such a fallback exists.
+
+Feature-specific minimum bars:
+
+- `clock`
+  Do not count `TimeOnly.ToClockNotation()` as supported merely because the default converter returned `ToString("t", culture)` or another generic time format. Prove locale-specific clock behavior with exact-output tests or same-language inherited exact-output tests for both exact and rounded cases.
+- `ordinal.date` / `ordinal.dateOnly`
+  Do not count date ordinal support as complete merely because a culture date format happened to place the day naturally. Prove the actual ordinal-day behavior with exact outputs.
+- `number.words` / `number.parse`
+  Round-trip and representative large-number cases must prove the locale's own numbering system rather than an English or generic parser fallback.
+- `formatter` / `phrases`
+  Do not accept generic resources or default English-derived strings as parity. Use exact localized outputs for representative tense and unit cases.
+
 At minimum, review and extend the locale parity checks in:
 
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs`
@@ -216,6 +263,8 @@ Before claiming completion, add a closeout line for every canonical surface and 
 - final ownership path
 - whether it is `locale-owned` or `same-language inherited`
 - full inheritance chain to the terminal owner when inherited
+- final `support state`
+- final `proof kind`
 - the proving test or assertion
 - whether native-speaker review was needed
 
@@ -246,14 +295,17 @@ If you touch a hot shared kernel or registry dispatch path, run the relevant ben
 Do not say the locale is complete until all of these are true:
 
 - every shipped localized surface for the locale is intentionally locale-owned or intentionally inherited from a same-language parent
+- every shipped localized surface for the locale has `support state: supported`
 - no shipped surface for the locale depends on English fallback
 - no shipped surface for the locale throws because the locale is unsupported
+- no shipped surface for the locale is only "working" because a generic/default runtime fallback returned something culture-aware
 - new locale-owned terms were reviewed by both a proposer subagent and a native-speaker reviewer subagent, and any disagreements were resolved before landing
 - representative composed runtime outputs were reviewed for naturalness when new locale-owned wording was introduced
 - the reviewer evidence records confidence and limitations, and the reviewer did not disclaim the ability to judge native naturalness
 - the parity map artifact exists under `artifacts/` and every shipped localized surface for the locale is accounted for there
 - the preflight gap report exists and the final before/after parity delta shows an empty unresolved set
 - every canonical surface and required proof subrow has a concrete closeout entry with proof, not just an implementation note
+- no canonical surface or required proof subrow has `proof kind: generic fallback`
 - exact-output tests cover the locale's custom or grammar-sensitive behavior
 - sweep tests and registry tests include the locale wherever applicable
 - source-generator tests cover schema, inheritance, or generated wiring changes when those changed
@@ -272,6 +324,7 @@ Do not present locale work as complete unless the final response includes all of
 - the before/after parity delta
 - the empty effective-gap summary
 - one line per canonical surface stating final ownership and proof
+- one line per canonical surface stating final `support state`
 - the exact validation commands run
 - an explicit statement that no canonical surface remains `missing`, `english-fallback`, or `unsupported`
 
@@ -287,6 +340,7 @@ Stop and keep working if any of these are true:
 - representative runtime outputs were not reviewed for naturalness after new locale-owned wording was introduced
 - same-language inheritance looks linguistically suspicious or unnatural, even if technically functional
 - tests only prove execution, not natural output for grammar-sensitive or locale-specific behavior
+- tests only prove the generic fallback path executes
 - runtime fallback is still doing work that the locale should own explicitly
 - the implementation compiles but the ownership path is still ambiguous
 - any canonical surface or required proof subrow lacks a concrete proving test or assertion

@@ -136,6 +136,7 @@ Notes:
 2. `clock` is the canonical locale surface name even though the emitted runtime feature name is `timeOnlyToClockNotation`.
 3. `number` and `ordinal` are container surfaces; the actual owned blocks are `number.words`, `number.parse`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`.
 4. A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
+5. Do not add a block just to say "use the default behavior". If a surface or nested block does not carry locale-specific behavior, omit it.
 
 ## Inheritance
 
@@ -154,6 +155,7 @@ Rules:
 5. If the child changes `engine`, the whole mapped surface is treated as a new block.
 6. Inheritance is not self-proving. A parity claim still needs at least one locale-specific proving assertion for every inherited canonical surface.
 7. For parity work, do not rely on English fallback for any canonical surface.
+8. Do not use empty mappings or `engine: 'default'` as inheritance sentinels. Omission is the only default-behavior signal.
 
 Use inheritance to express real parent-child relationships. Do not use it to hide unrelated locale behavior.
 

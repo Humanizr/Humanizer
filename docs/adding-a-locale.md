@@ -15,7 +15,7 @@ The localization system is intentionally opinionated.
 3. The source generator turns locale YAML into typed runtime registrations and typed profile objects.
 4. There is no runtime YAML parsing and no runtime JSON parsing on hot paths.
 5. Locale-specific leaf converters are a last resort, not the default implementation strategy.
-6. Locale parity work must account for every canonical surface; there is no shipped-locale exemption list in this repo.
+6. Shipped locales are expected to resolve every canonical surface intentionally; there is no shipped-locale exemption list in this repo.
 
 ## Repository Map
 
@@ -75,7 +75,9 @@ Supported canonical surfaces are:
 - `clock`
 - `compass`
 
-Every locale file does not need to author every surface directly. If a `surfaces.<surface>` block is missing, that surface must still resolve intentionally through same-language inheritance with proof. If it does not, parity is incomplete.
+Every locale file does not need to author every surface directly. If a `surfaces.<surface>` block is missing, that surface must still resolve intentionally through same-language inheritance with proof. If it does not, the locale is incomplete.
+
+Do not keep a surface block only to indicate default behavior. If a locale does not need locale-specific data for a surface or nested block, omit it entirely.
 
 If a locale claims parity, it must explicitly account for both `number.words` and `number.parse`, either locale-owned or same-language inherited with proof.
 
@@ -114,7 +116,7 @@ The `phrases` surface is also structured, with these canonical members:
 
 If you are authoring or reviewing a locale, treat that as the full allowed locale contract. Do not invent alternate top-level keys, alternate surface names, or alternate nested names.
 
-A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
+A locale is not complete unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
 
 ## Canonical Surface Responsibilities
 
