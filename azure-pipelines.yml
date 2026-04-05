@@ -74,7 +74,7 @@ stages:
         projects: |
           tests/Humanizer.Tests/Humanizer.Tests.csproj
           tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj
-        arguments: -c $(BuildConfiguration) --coverage --xunit-info
+        arguments: -c $(BuildConfiguration) --coverage --coverage-output-format cobertura --results-directory $(Agent.TempDirectory) --xunit-info
       displayName: Run Tests
 
     # Generate code coverage report
@@ -82,7 +82,7 @@ stages:
     - task: reportgenerator@5
       displayName: Generate Code Coverage Report
       inputs:
-        reports: '$(Build.SourcesDirectory)/**/TestResults/**/*.cobertura.xml'
+        reports: '$(Agent.TempDirectory)/**/*.cobertura.xml'
         targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
         reporttypes: HtmlInline_AzurePipelines_Dark;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
