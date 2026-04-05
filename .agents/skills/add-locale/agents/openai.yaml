@@ -1,4 +1,4 @@
 interface:
-  display_name: "Humanizer Locale Parity"
-  short_description: "Add a locale with full Humanizer parity"
+  display_name: "Add Humanizer Locale"
+  short_description: "Add a locale with full parity"
   default_prompt: "Use $add-locale to add a new Humanizer locale or bring an existing one to full parity."
