@@ -56,7 +56,7 @@ public sealed partial class HumanizerSourceGenerator
         // The compiler lowers the canonical locale authoring model into the legacy internal feature
         // buckets that the downstream generators already understand. The checked-in YAML surface is
         // intentionally closed over locale/variantOf/surfaces and a fixed set of canonical surfaces.
-        static readonly string[] supportedFeatureNames =
+        static readonly string[] SupportedFeatureNames =
         [
             "collectionFormatter",
             "dateOnlyToOrdinalWords",
@@ -71,14 +71,14 @@ public sealed partial class HumanizerSourceGenerator
             "wordsToNumber"
         ];
 
-        static readonly string[] supportedTopLevelNames =
+        static readonly string[] SupportedTopLevelNames =
         [
             "locale",
             "variantOf",
             "surfaces"
         ];
 
-        static readonly string[] supportedSurfaceNames =
+        static readonly string[] SupportedSurfaceNames =
         [
             "list",
             "formatter",
@@ -89,7 +89,7 @@ public sealed partial class HumanizerSourceGenerator
             "compass"
         ];
 
-        static readonly string[] formatterGrammarKeys =
+        static readonly string[] FormatterGrammarKeys =
         [
             "pluralRule",
             "dataUnitPluralRule",
@@ -195,11 +195,11 @@ public sealed partial class HumanizerSourceGenerator
         {
             foreach (var surface in surfaces.Values)
             {
-                if (!supportedSurfaceNames.Contains(surface.Key, StringComparer.Ordinal))
+                if (!SupportedSurfaceNames.Contains(surface.Key, StringComparer.Ordinal))
                 {
                     throw new InvalidOperationException(
                         $"Locale '{localeCode}.surfaces' defines unsupported surface '{surface.Key}'. " +
-                        $"Supported surfaces: {string.Join(", ", supportedSurfaceNames)}.");
+                        $"Supported surfaces: {string.Join(", ", SupportedSurfaceNames)}.");
                 }
 
                 if (surface.Value is not SimpleYamlMapping surfaceMapping)
@@ -334,7 +334,7 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var entry in formatterSurface.Values)
             {
-                if (formatterGrammarKeys.Contains(entry.Key, StringComparer.Ordinal))
+                if (FormatterGrammarKeys.Contains(entry.Key, StringComparer.Ordinal))
                 {
                     grammarValues[entry.Key] = entry.Value;
                 }
@@ -404,7 +404,7 @@ public sealed partial class HumanizerSourceGenerator
                     }
                     else
                     {
-                    inherited = ResolveLocale(inheritedLocale, parsedLocales, resolving, cache, diagnostics);
+                        inherited = ResolveLocale(inheritedLocale, parsedLocales, resolving, cache, diagnostics);
                     }
                 }
             }
@@ -412,7 +412,7 @@ public sealed partial class HumanizerSourceGenerator
             resolving.Remove(localeCode);
 
             var resolvedFeatures = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
-            foreach (var featureName in supportedFeatureNames)
+            foreach (var featureName in SupportedFeatureNames)
             {
                 if (ResolveFeatureValue(locale.LocaleCode, featureName, locale.Features, inherited.ResolvedFeatures) is { } resolvedFeatureValue)
                 {

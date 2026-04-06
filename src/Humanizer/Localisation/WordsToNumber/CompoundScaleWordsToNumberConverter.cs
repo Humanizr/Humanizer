@@ -296,6 +296,5 @@ sealed class CompoundScaleWordsToNumberProfile(
     /// <summary>
     /// Gets the threshold above which adjacent values should multiply instead of simply adding.
     /// </summary>
-public long? SequenceMultiplierThreshold { get; } = sequenceMultiplierThreshold;
+    public long? SequenceMultiplierThreshold { get; } = sequenceMultiplierThreshold;
 }
-

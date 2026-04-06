@@ -603,8 +603,8 @@ readonly record struct FormatterTimeSpanFormRule
     public FormatterNumberForm Form { get; }
 
     /// <summary>
-     /// Determines whether the rule applies to the given key and number.
-     /// </summary>
+    /// Determines whether the rule applies to the given key and number.
+    /// </summary>
     /// <param name="unit">The time unit being formatted.</param>
     /// <param name="number">The numeric value being formatted.</param>
     /// <returns><c>true</c> when the rule applies; otherwise, <c>false</c>.</returns>

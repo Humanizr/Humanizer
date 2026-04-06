@@ -118,8 +118,8 @@ internal class PrefixedTensScaleWordsToNumberConverter(PrefixedTensScaleWordsToN
                 continue;
             }
 
-                value = checked(factor * scale.Value + remainder);
-                return true;
+            value = checked(factor * scale.Value + remainder);
+            return true;
         }
 
         // Prefix rules only accept 1..9 as their suffix because the prefix already contributes the
@@ -262,4 +262,3 @@ readonly record struct PrefixedScaleWord(string Token, long Value);
 /// Represents a locale-specific prefix that yields a base value when followed by a unit token.
 /// </summary>
 readonly record struct PrefixedTensRule(string Prefix, long BaseValue);
-

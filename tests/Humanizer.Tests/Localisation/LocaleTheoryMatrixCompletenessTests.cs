@@ -421,7 +421,7 @@ public class LocaleTheoryMatrixCompletenessTests
         {
             foreach (var gender in Enum.GetValues<GrammaticalGender>())
             {
-                data.Add(localeName, gender);
+                data.Add(localeName, (GrammaticalGender)gender);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿[UseCulture("en-US")]
+[UseCulture("en-US")]
 public class HeadingTests
 {
     [InlineData(0, "N")]

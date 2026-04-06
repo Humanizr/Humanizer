@@ -1592,5 +1592,3 @@ public class WordsToNumberTests_UzbekCyrillic
         Assert.Equal(expectedNumber, parsedNumber);
     }
 }
-
-

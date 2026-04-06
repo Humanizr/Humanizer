@@ -104,4 +104,3 @@ public sealed partial class HumanizerSourceGenerator
         public ImmutableArray<EngineContractMember> Members { get; } = members;
     }
 }
-

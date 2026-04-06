@@ -59,8 +59,7 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
 
     static bool IsLongWordsToNumberResult(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken)
     {
-        var symbol = semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol as IMethodSymbol;
-        if (symbol is null)
+        if (semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is not IMethodSymbol symbol)
             return false;
 
         return IsLongWordsToNumberMethod(symbol);

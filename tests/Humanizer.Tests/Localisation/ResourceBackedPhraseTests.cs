@@ -34,6 +34,7 @@ public class ResourceBackedPhraseTests
         Assert.Equal(expected, ((DateTime?)null).Humanize(culture: culture));
     }
 
+#if NET6_0_OR_GREATER
     [Theory]
     [MemberData(nameof(LocalePhraseTheoryData.TimeOnlyDefaultHumanizeCases), MemberType = typeof(LocalePhraseTheoryData))]
     public void UsesExpectedTimeOnlyDefaultHumanizePhrases(string localeName, string inputTime, string comparisonBase, string expected)
@@ -74,6 +75,7 @@ public class ResourceBackedPhraseTests
 
         Assert.Equal(nullableTime.Humanize(culture: culture), ((TimeOnly?)nullableTime).Humanize(culture: culture));
     }
+#endif
 
     [Theory]
     [MemberData(nameof(LocalePhraseTheoryData.TimeSpanHumanizeCases), MemberType = typeof(LocalePhraseTheoryData))]

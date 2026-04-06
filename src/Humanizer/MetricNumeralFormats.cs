@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Flags for formatting the metric representation of numerals.

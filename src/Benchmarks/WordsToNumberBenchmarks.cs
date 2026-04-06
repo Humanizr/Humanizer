@@ -17,27 +17,27 @@ public class WordsToNumberBenchmarks
 
     [Benchmark(Description = "Simple word")]
     public int SimpleWord() =>
-        "five".ToNumber(EnglishCulture);
+        (int)"five".ToNumber(EnglishCulture);
 
     [Benchmark(Description = "Compound word")]
     public int CompoundWord() =>
-        "forty-two".ToNumber(EnglishCulture);
+        (int)"forty-two".ToNumber(EnglishCulture);
 
     [Benchmark(Description = "Complex number")]
     public int ComplexNumber() =>
-        "one thousand two hundred thirty-four".ToNumber(EnglishCulture);
+        (int)"one thousand two hundred thirty-four".ToNumber(EnglishCulture);
 
     [Benchmark(Description = "Steady-state small ordinal parse")]
     public int SmallOrdinalWord() =>
-        "vigésimo primero".ToNumber(SpanishCulture);
+        (int)"vigésimo primero".ToNumber(SpanishCulture);
 
     [Benchmark(Description = "Steady-state scale ordinal parse")]
     public int ScaleOrdinalWord() =>
-        "milésimo".ToNumber(PortugueseCulture);
+        (int)"milésimo".ToNumber(PortugueseCulture);
 
     [Benchmark(Description = "Steady-state glued ordinal parse")]
     public int GluedScaleOrdinalWord() =>
-        "dosmilésimo".ToNumber(SpanishCulture);
+        (int)"dosmilésimo".ToNumber(SpanishCulture);
 
     [Benchmark(Description = "First-touch locale/profile resolution")]
     public string FirstTouchEnglishLocaleProfileResolution() =>

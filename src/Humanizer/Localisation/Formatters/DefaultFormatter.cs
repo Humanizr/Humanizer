@@ -294,11 +294,11 @@ public class DefaultFormatter : IFormatter
         var afterCount = RenderPattern(phrase.AfterCountText, countValue, secondaryPlaceholder);
 
         return phrase.CountPlacement switch
-            {
-                PhraseCountPlacement.BeforeForm => JoinPhraseParts(beforeCount, countValue, renderedUnit, afterCount),
-                PhraseCountPlacement.AfterForm => JoinPhraseParts(beforeCount, renderedUnit, countValue, afterCount),
-                _ => RenderPattern(renderedUnit, countValue, secondaryPlaceholder)
-            };
+        {
+            PhraseCountPlacement.BeforeForm => JoinPhraseParts(beforeCount, countValue, renderedUnit, afterCount),
+            PhraseCountPlacement.AfterForm => JoinPhraseParts(beforeCount, renderedUnit, countValue, afterCount),
+            _ => RenderPattern(renderedUnit, countValue, secondaryPlaceholder)
+        };
     }
 
     static string RenderTemplate(PhraseTemplate template, string countValue, string unitText, string secondaryPlaceholder) =>

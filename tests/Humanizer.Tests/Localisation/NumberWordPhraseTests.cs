@@ -170,5 +170,3 @@ public class NumberWordPhraseTests
             ? CultureInfo.InvariantCulture
             : CultureInfo.GetCultureInfo(localeName);
 }
-
-

@@ -15,7 +15,7 @@ public sealed partial class HumanizerSourceGenerator
 {
     sealed class TokenMapWordsToNumberInput(ImmutableArray<TokenMapLocaleDefinition> locales, ImmutableArray<Diagnostic> diagnostics)
     {
-        static readonly string[] normalizationProfiles =
+        static readonly string[] NormalizationProfiles =
         [
             "CollapseWhitespace",
             "LowercaseRemovePeriods",
@@ -25,7 +25,7 @@ public sealed partial class HumanizerSourceGenerator
             "Persian"
         ];
 
-        static readonly string[] ordinalGenderVariants =
+        static readonly string[] OrdinalGenderVariants =
         [
             "none",
             "masculine-and-feminine",
@@ -85,7 +85,7 @@ public sealed partial class HumanizerSourceGenerator
                 localeCode,
                 localeElement,
                 "normalizationProfile",
-                normalizationProfiles,
+                NormalizationProfiles,
                 diagnostics,
                 ref hasErrors);
 
@@ -94,7 +94,7 @@ public sealed partial class HumanizerSourceGenerator
                 localeCode,
                 localeElement,
                 "ordinalGenderVariant",
-                ordinalGenderVariants,
+                OrdinalGenderVariants,
                 diagnostics,
                 ref hasErrors);
 

@@ -40,14 +40,14 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
     public string Format(DateTime date) =>
         ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day));
 
-    #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
     /// <summary>
     /// Formats the pattern for the specified date.
     /// </summary>
     /// <returns>The formatted date string.</returns>
     public string Format(DateOnly date) =>
         ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day));
-    #endif
+#endif
 
     string GetFormatString() => template.Replace(DayPlaceholder, DayMarkerFormat);
 

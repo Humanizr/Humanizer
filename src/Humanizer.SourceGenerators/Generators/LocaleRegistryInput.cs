@@ -33,7 +33,7 @@ public sealed partial class HumanizerSourceGenerator
         readonly ImmutableHashSet<string> dataBackedFormatterProfiles = dataBackedFormatterProfiles;
         readonly ImmutableHashSet<string> dataBackedOrdinalizerProfiles = dataBackedOrdinalizerProfiles;
 
-        static readonly (string RegistryName, Func<ResolvedLocaleDefinition, LocaleFeature?> FeatureSelector)[] registrySelectors =
+        static readonly (string RegistryName, Func<ResolvedLocaleDefinition, LocaleFeature?> FeatureSelector)[] RegistrySelectors =
         [
             ("CollectionFormatterRegistry", static locale => locale.CollectionFormatter),
             ("DateOnlyToOrdinalWordsConverterRegistry", static locale => locale.DateOnlyToOrdinalWords),
@@ -64,7 +64,7 @@ public sealed partial class HumanizerSourceGenerator
                 return;
             }
 
-            foreach (var (registryName, featureSelector) in registrySelectors)
+            foreach (var (registryName, featureSelector) in RegistrySelectors)
             {
                 var registrations = ImmutableArray.CreateBuilder<RegistryEntry>();
 

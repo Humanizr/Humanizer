@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Converts dates into the localized text used by <c>ToOrdinalWords</c>.

@@ -121,5 +121,5 @@ public sealed class LocaleFormatterTheoryRowSerializer : IXunitSerializer
             .ToArray();
 
     static string Encode(params string[] values) =>
-        string.Join(';', values.Select(static value => Convert.ToBase64String(Encoding.UTF8.GetBytes(value))));
+        string.Join(";", values.Select(static value => Convert.ToBase64String(Encoding.UTF8.GetBytes(value))));
 }

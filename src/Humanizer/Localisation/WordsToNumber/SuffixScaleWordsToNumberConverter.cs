@@ -322,4 +322,3 @@ sealed class SuffixScaleWordsToNumberProfile(
 /// Represents a scale word in both singular and plural forms.
 /// </summary>
 readonly record struct SuffixScaleWord(string Singular, string Plural, long Value);
-

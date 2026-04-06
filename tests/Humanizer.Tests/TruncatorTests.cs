@@ -1,4 +1,4 @@
-﻿public class TruncatorTests
+public class TruncatorTests
 {
     [Theory(DisplayName = "01 - Truncate")]
     [InlineData(null, 10, null)]

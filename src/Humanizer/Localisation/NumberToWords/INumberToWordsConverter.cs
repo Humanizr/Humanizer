@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Converts numbers into locale-specific words, ordinals, and tuple names.

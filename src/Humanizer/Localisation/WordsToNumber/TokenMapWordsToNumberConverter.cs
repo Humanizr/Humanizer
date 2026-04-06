@@ -899,7 +899,7 @@ internal enum TokenMapNormalizationProfile
 /// </summary>
 static class TokenMapWordsToNumberNormalizer
 {
-    const char zeroWidthNonJoiner = (char)0x200C;
+    const char ZeroWidthNonJoiner = (char)0x200C;
 
     /// <summary>
     /// Normalizes a number phrase using the supplied profile.
@@ -1199,7 +1199,7 @@ static class TokenMapWordsToNumberNormalizer
         words.Replace(",", string.Empty)
              .Replace(".", string.Empty)
              .Replace("،", string.Empty)
-             .Replace(zeroWidthNonJoiner.ToString(), " ")
+             .Replace(ZeroWidthNonJoiner.ToString(), " ")
              .Replace('ي', 'ی')
              .Replace('ك', 'ک');
 
@@ -1224,4 +1224,3 @@ static class TokenMapWordsToNumberNormalizer
         return builder.ToString().Normalize(NormalizationForm.FormC);
     }
 }
-

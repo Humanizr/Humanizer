@@ -112,3 +112,6 @@ docs/.sass-cache/
 # Clairvoyance workspace knowledge (machine-specific)
 .clairvoyance/
 .Clairvoyance/
+
+# Ralph autonomous agent logs
+scripts/ralph/logs/

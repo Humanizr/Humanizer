@@ -29,7 +29,7 @@ public sealed partial class HumanizerSourceGenerator
         /// The schema is intentionally limited to <c>locale</c>, optional <c>variantOf</c>, and
         /// a <c>surfaces</c> mapping containing the supported authoring surfaces.
         /// </summary>
-        static readonly string[] supportedTopLevelNames =
+        static readonly string[] SupportedTopLevelNames =
         [
             "locale",
             "variantOf",
@@ -41,7 +41,7 @@ public sealed partial class HumanizerSourceGenerator
         /// Number authoring is split into <c>number.words</c> and <c>number.parse</c> so writer
         /// and parser contracts stay aligned.
         /// </summary>
-        static readonly string[] supportedSurfaceNames =
+        static readonly string[] SupportedSurfaceNames =
         [
             "list",
             "formatter",
@@ -58,11 +58,11 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var property in root.Values.Keys)
             {
-                if (!supportedTopLevelNames.Contains(property, StringComparer.Ordinal))
+                if (!SupportedTopLevelNames.Contains(property, StringComparer.Ordinal))
                 {
                     throw new InvalidOperationException(
                         $"Locale '{localeCode}' defines unsupported top-level property '{property}'. " +
-                        $"Supported properties: {string.Join(", ", supportedTopLevelNames)}.");
+                        $"Supported properties: {string.Join(", ", SupportedTopLevelNames)}.");
                 }
             }
 
@@ -89,11 +89,11 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var surface in surfaces.Values)
             {
-                if (!supportedSurfaceNames.Contains(surface.Key, StringComparer.Ordinal))
+                if (!SupportedSurfaceNames.Contains(surface.Key, StringComparer.Ordinal))
                 {
                     throw new InvalidOperationException(
                         $"Locale '{localeCode}.surfaces' defines unsupported surface '{surface.Key}'. " +
-                        $"Supported surfaces: {string.Join(", ", supportedSurfaceNames)}.");
+                        $"Supported surfaces: {string.Join(", ", SupportedSurfaceNames)}.");
                 }
 
                 if (surface.Value is not SimpleYamlMapping)
@@ -250,7 +250,7 @@ public sealed partial class HumanizerSourceGenerator
             return normalized;
         }
 
-        static readonly HashSet<string> explicitDefaultEnginePaths = new(StringComparer.Ordinal)
+        static readonly HashSet<string> ExplicitDefaultEnginePaths = new(StringComparer.Ordinal)
         {
             "surfaces.ordinal.numeric",
             "surfaces.ordinal.date",
@@ -265,7 +265,7 @@ public sealed partial class HumanizerSourceGenerator
                 case SimpleYamlMapping mapping:
                     if (string.Equals(mapping.GetScalar("engine"), "default", StringComparison.Ordinal))
                     {
-                        if (explicitDefaultEnginePaths.Contains(path))
+                        if (ExplicitDefaultEnginePaths.Contains(path))
                         {
                             return;
                         }
@@ -357,7 +357,7 @@ public sealed partial class HumanizerSourceGenerator
 
     public static class LegacyLocaleMigration
     {
-        static readonly string[] legacyTopLevelNames =
+        static readonly string[] LegacyTopLevelNames =
         [
             "inherits",
             "collectionFormatter",
@@ -378,7 +378,7 @@ public sealed partial class HumanizerSourceGenerator
             var root = SimpleYamlParser.Parse(fileText);
             foreach (var property in root.Values.Keys)
             {
-                if (!legacyTopLevelNames.Contains(property, StringComparer.Ordinal))
+                if (!LegacyTopLevelNames.Contains(property, StringComparer.Ordinal))
                 {
                     throw new InvalidOperationException(
                         $"Legacy locale '{localeCode}' defines unsupported top-level property '{property}'.");
@@ -639,7 +639,7 @@ public sealed partial class HumanizerSourceGenerator
 
     internal static class LocaleSemanticDiff
     {
-        static readonly ImmutableHashSet<string> omittedFalseDefaults = ImmutableHashSet.Create(
+        static readonly ImmutableHashSet<string> OmittedFalseDefaults = ImmutableHashSet.Create(
             StringComparer.Ordinal,
             "allowInvariantIntegerInput");
 
@@ -828,21 +828,21 @@ public sealed partial class HumanizerSourceGenerator
             switch (element.ValueKind)
             {
                 case JsonValueKind.Object:
-                {
-                    var ordered = new SortedDictionary<string, object?>(StringComparer.Ordinal);
-                    foreach (var property in element.EnumerateObject().OrderBy(static property => property.Name, StringComparer.Ordinal))
                     {
-                        if (property.Value.ValueKind == JsonValueKind.False &&
-                            omittedFalseDefaults.Contains(property.Name))
+                        var ordered = new SortedDictionary<string, object?>(StringComparer.Ordinal);
+                        foreach (var property in element.EnumerateObject().OrderBy(static property => property.Name, StringComparer.Ordinal))
                         {
-                            continue;
+                            if (property.Value.ValueKind == JsonValueKind.False &&
+                                OmittedFalseDefaults.Contains(property.Name))
+                            {
+                                continue;
+                            }
+
+                            ordered[property.Name] = NormalizeJson(property.Value);
                         }
 
-                        ordered[property.Name] = NormalizeJson(property.Value);
+                        return ordered;
                     }
-
-                    return ordered;
-                }
 
                 case JsonValueKind.Array:
                     return element.EnumerateArray()

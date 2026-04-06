@@ -1,0 +1,15 @@
+#!/bin/sh
+# Pre-commit hook: verify code formatting matches .editorconfig rules.
+# Enable with: git config core.hooksPath .githooks
+
+echo "Running dotnet format check..."
+dotnet format Humanizer.slnx --verify-no-changes --verbosity minimal 2>&1
+FORMAT_EXIT=$?
+
+if [ $FORMAT_EXIT -ne 0 ]; then
+    echo ""
+    echo "Formatting check failed. Run 'dotnet format Humanizer.slnx' to fix."
+    exit 1
+fi
+
+echo "Format check passed."

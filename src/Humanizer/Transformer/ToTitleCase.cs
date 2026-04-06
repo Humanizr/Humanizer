@@ -10,7 +10,7 @@ partial class ToTitleCase : ICulturedStringTransformer
 #if NET7_0_OR_GREATER
     [GeneratedRegex(WordPattern)]
     private static partial Regex WordRegexGenerated();
-    
+
     private static Regex WordRegex() => WordRegexGenerated();
 #else
     private static readonly Regex WordRegexDefinition = new(WordPattern, RegexOptions.Compiled);

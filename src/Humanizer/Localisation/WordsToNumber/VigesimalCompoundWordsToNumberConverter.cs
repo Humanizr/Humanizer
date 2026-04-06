@@ -240,6 +240,5 @@ sealed class VigesimalCompoundWordsToNumberProfile(
     /// <summary>
     /// Gets the value at or above which tokens are treated as large scales.
     /// </summary>
-public long ScaleThreshold { get; } = scaleThreshold;
+    public long ScaleThreshold { get; } = scaleThreshold;
 }
-

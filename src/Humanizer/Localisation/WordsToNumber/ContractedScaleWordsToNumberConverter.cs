@@ -164,6 +164,5 @@ sealed class ContractedScaleWordsToNumberProfile(string minusWord, FrozenDiction
     /// <summary>
     /// Gets the token-to-value dictionary used by the contracted scale parser.
     /// </summary>
-public FrozenDictionary<string, long> Cardinals { get; } = cardinals;
+    public FrozenDictionary<string, long> Cardinals { get; } = cardinals;
 }
-

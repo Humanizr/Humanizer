@@ -48,4 +48,3 @@ public class WordsToNumberCompatibilityTests
         public long Convert(string words) => 3000000000L;
     }
 }
-

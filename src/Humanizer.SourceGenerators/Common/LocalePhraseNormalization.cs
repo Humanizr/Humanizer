@@ -10,7 +10,7 @@ public sealed partial class HumanizerSourceGenerator
 {
     internal static class LocalePhraseNormalization
     {
-        static readonly Regex placeholderRegex = new(@"\{(?<name>[^}]+)\}", RegexOptions.Compiled);
+        static readonly Regex PlaceholderRegex = new(@"\{(?<name>[^}]+)\}", RegexOptions.Compiled);
 
         internal static LocalePhraseCatalog Create(string localeCode, SimpleYamlMapping phrases)
         {
@@ -378,7 +378,7 @@ public sealed partial class HumanizerSourceGenerator
         {
             var placeholders = ImmutableArray.CreateBuilder<string>();
 
-            foreach (Match match in placeholderRegex.Matches(template))
+            foreach (Match match in PlaceholderRegex.Matches(template))
             {
                 var placeholderName = match.Groups["name"].Value;
                 if (int.TryParse(placeholderName, out _))
@@ -450,7 +450,7 @@ public sealed partial class HumanizerSourceGenerator
 
         static string ValidateLiteralText(string path, string text, params string[] allowedPlaceholders)
         {
-            foreach (Match match in placeholderRegex.Matches(text))
+            foreach (Match match in PlaceholderRegex.Matches(text))
             {
                 var placeholder = match.Groups["name"].Value;
                 if (int.TryParse(placeholder, out _))

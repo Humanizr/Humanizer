@@ -1324,7 +1324,7 @@ public sealed partial class HumanizerSourceGenerator
                                  throw new InvalidOperationException($"Prefixed scale token '{property.Name}' must map to an integer value.");
                              }
 
-                              return (property.Name, Value: value);
+                             return (property.Name, Value: value);
                          })
                          .OrderByDescending(static entry => entry.Value)
                          .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
@@ -1389,7 +1389,7 @@ public sealed partial class HumanizerSourceGenerator
                                  throw new InvalidOperationException($"Prefixed tens prefix '{property.Name}' must map to an integer base value.");
                              }
 
-                              return (property.Name, Value: value);
+                             return (property.Name, Value: value);
                          })
                          .OrderByDescending(static entry => entry.Name.Length)
                          .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
@@ -1541,4 +1541,3 @@ public sealed partial class HumanizerSourceGenerator
         };
 
 }
-

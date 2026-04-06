@@ -13,7 +13,7 @@ public sealed partial class HumanizerSourceGenerator
 {
     sealed class LocalePhraseTableCatalogInput(ImmutableArray<LocalePhraseCatalog> catalogs)
     {
-        static readonly string[] timeUnitOrder =
+        static readonly string[] TimeUnitOrder =
         [
             "millisecond",
             "second",
@@ -25,7 +25,7 @@ public sealed partial class HumanizerSourceGenerator
             "year"
         ];
 
-        static readonly string[] dataUnitOrder =
+        static readonly string[] DataUnitOrder =
         [
             "bit",
             "byte",
@@ -103,15 +103,15 @@ public sealed partial class HumanizerSourceGenerator
             CreateDatePhraseArrayExpression(catalog.DateHumanize.Past) + ", " +
             CreateDatePhraseArrayExpression(catalog.DateHumanize.Future) + ", " +
             CreateTimeSpanPhraseArrayExpression(catalog.TimeSpan.Units) + ", " +
-            CreateUnitPhraseArrayExpression(catalog.DataUnit.Units, dataUnitOrder) + ", " +
-            CreateUnitPhraseArrayExpression(catalog.TimeUnit.Units, timeUnitOrder) +
+            CreateUnitPhraseArrayExpression(catalog.DataUnit.Units, DataUnitOrder) + ", " +
+            CreateUnitPhraseArrayExpression(catalog.TimeUnit.Units, TimeUnitOrder) +
             ")";
 
         static string CreateDatePhraseArrayExpression(ImmutableDictionary<string, DateHumanizePhrase> units)
         {
             var builder = new StringBuilder();
             builder.Append("new LocalizedDatePhrase?[] { ");
-            AppendArrayEntries(builder, timeUnitOrder, units, static phrase => CreateDatePhraseExpression(phrase));
+            AppendArrayEntries(builder, TimeUnitOrder, units, static phrase => CreateDatePhraseExpression(phrase));
             builder.Append(" }");
             return builder.ToString();
         }
@@ -120,7 +120,7 @@ public sealed partial class HumanizerSourceGenerator
         {
             var builder = new StringBuilder();
             builder.Append("new LocalizedTimeSpanPhrase?[] { ");
-            AppendArrayEntries(builder, timeUnitOrder, units, static phrase => CreateTimeSpanPhraseExpression(phrase));
+            AppendArrayEntries(builder, TimeUnitOrder, units, static phrase => CreateTimeSpanPhraseExpression(phrase));
             builder.Append(" }");
             return builder.ToString();
         }
