@@ -1,0 +1,23 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-06T21:55:05.992111Z",
+  "depends_on": [
+    "fn-1-locale-translation-parity-across-all.2",
+    "fn-1-locale-translation-parity-across-all.3",
+    "fn-1-locale-translation-parity-across-all.4",
+    "fn-1-locale-translation-parity-across-all.5",
+    "fn-1-locale-translation-parity-across-all.6",
+    "fn-1-locale-translation-parity-across-all.7",
+    "fn-1-locale-translation-parity-across-all.8",
+    "fn-1-locale-translation-parity-across-all.9"
+  ],
+  "epic": "fn-1-locale-translation-parity-across-all",
+  "id": "fn-1-locale-translation-parity-across-all.10",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.10.md",
+  "status": "todo",
+  "title": "Update documentation for locale parity requirements",
+  "updated_at": "2026-04-06T22:33:00.255976Z"
+}

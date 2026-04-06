@@ -1,0 +1,227 @@
+{
+  "created_at": "2026-04-06T21:58:44.543439Z",
+  "epic": {
+    "data": {
+      "branch_name": "codex/locale-translation-completion",
+      "completion_review_status": "unknown",
+      "completion_reviewed_at": null,
+      "created_at": "2026-04-06T21:54:20.209558Z",
+      "default_impl": null,
+      "default_review": null,
+      "default_sync": null,
+      "depends_on_epics": [],
+      "id": "fn-1-locale-translation-parity-across-all",
+      "next_task": 1,
+      "plan_review_status": "unknown",
+      "plan_reviewed_at": null,
+      "spec_path": ".flow/specs/fn-1-locale-translation-parity-across-all.md",
+      "status": "open",
+      "title": "Locale translation parity across all shipped locales",
+      "updated_at": "2026-04-06T21:54:49.938370Z"
+    },
+    "spec": "# Locale Translation Parity Across All Shipped Locales\n\n## Overview\n\nAchieve full locale parity for all 62 shipped YAML locale files (52 base + 10 variants). Every shipped locale must have explicit, locale-authored definitions for all 7 canonical surfaces \u2014 no fallback to default/English converters. Vocabulary/Vocabularies types are excluded.\n\n**Current state:**\n- Core surfaces (list, formatter, phrases, number.words, number.parse, ordinal.numeric, compass) are **complete** for all 62 locales.\n- `ordinal.date` / `ordinal.dateOnly`: Only 13 locales define this in YAML. 49 locales fall back to `DefaultDateToOrdinalWordConverter` (uses `date.ToString(\"d\")`).\n- `clock`: Only 8 locales define this in YAML. 54 locales fall back to `DefaultTimeOnlyToClockNotationConverter` (uses `time.ToString(\"t\")` for non-English \u2014 digital format, not spoken words).\n- Test expectations (spoken-word forms) already exist in `LocaleCoverageData` TheoryData for all 62 locales across both surfaces.\n- Registry completeness tests in `LocaleTheoryMatrixCompletenessTests` cover only 5 of 8 registries (missing DateToOrdinalWords, DateOnlyToOrdinalWords, TimeOnlyToClockNotation).\n\n## Scope\n\n- Add `ordinal.date` + `ordinal.dateOnly` YAML sections to 49 locales (41 base + variants auto-inherit)\n- Add `clock:` YAML sections to 54 locales (using `phrase-hour`, `relative-hour`, or residual-leaf engines)\n- Add 3 missing registry completeness test assertions\n- Optionally add HSG004 source generator diagnostic for missing canonical surfaces\n- Update 7 documentation files to reflect parity requirements\n- Verify all existing TheoryData sweep tests pass after YAML additions\n\n## Quick commands\n\n```bash\n# Build to verify source generator processes new YAML\ndotnet build src/Humanizer/Humanizer.csproj -c Release\n\n# Run locale sweep tests (primary validation)\ndotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 --filter \"FullyQualifiedName~LocaleRegistrySweepTests\"\n\n# Run completeness tests\ndotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 --filter \"FullyQualifiedName~LocaleTheoryMatrixCompletenessTests\"\n\n# Run all locale tests\ndotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 --filter \"FullyQualifiedName~Localisation\"\n\n# Run source generator tests (if generator changes)\ndotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj\n```\n\n## Acceptance\n\n- [ ] All 62 shipped locales have explicit `ordinal.date` + `ordinal.dateOnly` YAML definitions (either directly or via `variantOf` inheritance)\n- [ ] All 62 shipped locales have explicit `clock:` YAML definitions (either directly or via `variantOf` inheritance)\n- [ ] `LocaleTheoryMatrixCompletenessTests` verifies all 8 registries cover every shipped locale\n- [ ] All `LocaleRegistrySweepTests` pass (DateToOrdinalWords, DateOnlyToOrdinalWords, TimeOnlyToClockNotation sweep tests)\n- [ ] All `LocaleTheoryMatrixCompletenessTests` pass\n- [ ] No shipped locale falls through to `DefaultDateToOrdinalWordConverter` or `DefaultTimeOnlyToClockNotationConverter` at runtime\n- [ ] Source generator tests pass (snapshot updates if generator changes)\n- [ ] Documentation reflects parity requirements and no-English-fallback rule\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passes\n\n## Early proof point\n\nTask fn-1-locale-translation-parity-across-all.2 (Germanic ordinal.date + clock) validates the core approach by adding both surfaces to 6 locales and verifying existing TheoryData sweep tests pass. If the pattern engine or clock engines cannot produce the expected test output, re-evaluate the YAML authoring strategy and engine contracts before continuing with other locale groups.\n\n## Requirement coverage\n\n| Req | Description | Task(s) | Gap justification |\n|-----|-------------|---------|-------------------|\n| R1 | All locales have ordinal.date/dateOnly YAML | .2, .3, .4, .5, .6, .7, .8, .9 | \u2014 |\n| R2 | All locales have clock YAML | .2, .3, .4, .5, .6, .7, .8, .9 | \u2014 |\n| R3 | Registry completeness tests for all 8 registries | .1 | \u2014 |\n| R4 | All sweep tests pass | .2-.9 (each verifies its locales) | \u2014 |\n| R5 | No default/English fallback for shipped locales | .2-.9 (YAML eliminates fallback) | \u2014 |\n| R6 | Source generator handles parity (optional diagnostic) | .1 | \u2014 |\n| R7 | Documentation updated | .10 | \u2014 |\n"
+  },
+  "epic_id": "fn-1-locale-translation-parity-across-all",
+  "schema_version": 2,
+  "tasks": [
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:54:53.507911Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.1",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.1.md",
+        "status": "todo",
+        "title": "Add missing registry completeness tests and optional parity diagnostic",
+        "updated_at": "2026-04-06T21:55:24.066867Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.1",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.1 Add missing registry completeness tests and optional parity diagnostic\n\n## Description\nAdd the 3 missing registry completeness test assertions to `LocaleTheoryMatrixCompletenessTests` so that every shipped locale is verified to be registered in ALL 8 registries. Currently only 5 are checked. Optionally add an HSG004 source generator diagnostic that warns when a locale is missing canonical surfaces after inheritance resolution.\n\n**Size:** M\n**Files:**\n- `tests/Humanizer.Tests/Localisation/LocaleTheoryMatrixCompletenessTests.cs`\n- `src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs` (if adding diagnostic)\n- `src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs` (if adding diagnostic)\n\n## Approach\n\n- Follow the existing pattern at `LocaleTheoryMatrixCompletenessTests.cs:356-377` for the 5 existing registry assertions\n- Add 3 new `[Theory]` test methods for `DateToOrdinalWordsConverterRegistry`, `DateOnlyToOrdinalWordsConverterRegistry`, and `TimeOnlyToClockNotationConvertersRegistry`\n- Use the same `GetRegisteredLocales<TRegistry, TLocaliser>()` helper\n- For HSG004: Follow the diagnostic pattern at `LocaleRegistryInput.cs` (HSG001-HSG003). Add validation after `LocaleCatalogInput.Create()` that checks each resolved locale has all 7 canonical surfaces.\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleTheoryMatrixCompletenessTests.cs:356-377` \u2014 existing registry assertion pattern\n- `src/Humanizer/Configuration/DateToOrdinalWordsConverterRegistry.cs` \u2014 registry class to reference\n- `src/Humanizer/Configuration/TimeOnlyToClockNotationConvertersRegistry.cs` \u2014 registry class to reference\n\n**Optional:**\n- `src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs` \u2014 diagnostic descriptor pattern\n- `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs` \u2014 SupportedSurfaceNames list\n## Acceptance\n- [ ] `DateToOrdinalWordsConverterRegistryCoversYamlLocale` test exists and asserts all shipped locales\n- [ ] `DateOnlyToOrdinalWordsConverterRegistryCoversYamlLocale` test exists and asserts all shipped locales\n- [ ] `TimeOnlyToClockNotationConvertersRegistryCoversYamlLocale` test exists and asserts all shipped locales\n- [ ] Tests compile and the 3 new assertions identify locales that lack registrations (expected to fail until YAML tasks complete)\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.992111Z",
+        "depends_on": [
+          "fn-1-locale-translation-parity-across-all.2",
+          "fn-1-locale-translation-parity-across-all.3",
+          "fn-1-locale-translation-parity-across-all.4",
+          "fn-1-locale-translation-parity-across-all.5",
+          "fn-1-locale-translation-parity-across-all.6",
+          "fn-1-locale-translation-parity-across-all.7",
+          "fn-1-locale-translation-parity-across-all.8",
+          "fn-1-locale-translation-parity-across-all.9"
+        ],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.10",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.10.md",
+        "status": "todo",
+        "title": "Update documentation for locale parity requirements",
+        "updated_at": "2026-04-06T21:58:11.914445Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.10",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.10 Update documentation for locale parity requirements\n\n## Description\nUpdate documentation to reflect the locale parity requirements, no-English-fallback rule, and any changes to the source generator pipeline.\n\n**Size:** M\n**Files:**\n- `CLAUDE.md` \u2014 Update Localization section (line ~76) to mention parity requirements and all doc references\n- `AGENTS.md` \u2014 Update Localization Guidance section to match CLAUDE.md\n- `.github/CONTRIBUTING.md` \u2014 Update \"Need your help with localisation\" section; remove outdated `DefaultFormatter` subclassing guidance\n- `readme.md` \u2014 Update \"Words to Number\" fallback note (line ~662) to clarify scope to unregistered cultures\n- `docs/locale-yaml-reference.md` \u2014 Add Generator Diagnostics section if HSG004 was added\n- `docs/adding-a-locale.md` \u2014 Verify parity workflow references and completeness requirements\n- `docs/localization.md` \u2014 Verify supported languages list is accurate\n\n## Approach\n\nEach doc update should be minimal \u2014 reflect the new reality that all shipped locales have complete translations. Do not rewrite sections; update the specific claims that are now outdated.\n\nFollow existing formatting conventions per file:\n- CLAUDE.md/AGENTS.md: compact bullet-point lists\n- CONTRIBUTING.md: flowing prose with `<a id>` anchors\n- readme.md: Markdown with inline code\n- docs/: numbered step-by-step lists and tables\n\n## Investigation targets\n\n**Required:**\n- `CLAUDE.md:76-77` \u2014 current Localization section\n- `AGENTS.md:42-44` \u2014 current Localization Guidance\n- `.github/CONTRIBUTING.md:48-50` \u2014 current localisation section\n- `readme.md:662` \u2014 fallback note\n\n**Optional:**\n- `docs/adding-a-locale.md` \u2014 full parity workflow\n- `docs/locale-yaml-reference.md` \u2014 field reference\n- `docs/localization.md` \u2014 supported languages list\n## Acceptance\n- [ ] CLAUDE.md Localization section updated with parity requirements and full doc list\n- [ ] AGENTS.md Localization Guidance section updated to match\n- [ ] CONTRIBUTING.md localisation section updated to remove outdated DefaultFormatter guidance\n- [ ] readme.md fallback note clarified for unregistered cultures only\n- [ ] docs/locale-yaml-reference.md updated if source generator diagnostics changed\n- [ ] docs/adding-a-locale.md verified for accuracy\n- [ ] docs/localization.md supported languages list verified\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:54:56.893934Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.2",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.2.md",
+        "status": "todo",
+        "title": "Add ordinal.date + clock YAML \u2014 Germanic locales",
+        "updated_at": "2026-04-06T21:55:51.365920Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.2",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.2 Add ordinal.date + clock YAML \u2014 Germanic locales\n\n## Description\nAdd `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to the Germanic base locales. Variant locales (en-GB, en-IN, en-US, de-CH, de-LI) will auto-inherit via `variantOf`.\n\n**Base locales to modify (need both ordinal.date + clock):** en, nl, af, da, is, sv\n**Locales already complete:** de (has both), lb (has both)\n**Variants that auto-inherit:** en-GB, en-IN from en; de-CH, de-LI from de; en-US already has ordinal.date, will inherit clock from en\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/en.yml`\n- `src/Humanizer/Locales/nl.yml`\n- `src/Humanizer/Locales/af.yml`\n- `src/Humanizer/Locales/da.yml`\n- `src/Humanizer/Locales/is.yml`\n- `src/Humanizer/Locales/sv.yml`\n\n## Approach\n\n**For ordinal.date/dateOnly:** Use the `pattern` engine with appropriate `dayMode`. Derive the pattern and dayMode by matching the expected test output in `LocaleCoverageData`:\n- en: `'{day} MMMM yyyy'` + `dayMode: 'Ordinal'` (produces \"25th January 2022\")\n- nl: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (produces \"25 januari 2022\")\n- af: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (produces \"25 Januarie 2022\")\n- da: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (produces \"25. januar 2022\")\n- is: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (produces \"25. jan\u00faar 2022\")\n- sv: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (produces \"25 januari 2022\")\n\nFollow the existing pattern at `de.yml:495-500` or `fr.yml:367-370`.\n\n**For clock:** Use `phrase-hour` engine for most Germanic locales. The test expectations in `LocaleCoverageData.TimeOnlyToClockNotation*` define the exact spoken-word output each locale must produce. Author YAML phrases to match those expectations.\n\nReference existing clock engines:\n- `de.yml:502-503` (residual `german` engine)\n- `pt.yml:813-830` (`phrase-hour` engine example)\n- `es.yml:980-1000` (`relative-hour` engine example)\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` \u2014 DateToOrdinalWords expected output for all locales\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 Clock notation expected output for all locales\n- `src/Humanizer/Locales/de.yml:495-503` \u2014 existing ordinal.date + clock pattern for de\n- `docs/locale-yaml-reference.md:671-710` \u2014 phrase-hour and relative-hour engine field reference\n\n**Optional:**\n- `src/Humanizer/Localisation/TimeToClockNotation/PhraseHourClockNotationConverter.cs` \u2014 how phrase-hour engine works\n- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs` \u2014 dayMode rendering logic\n- `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:444-487` \u2014 clock sweep test methods\n\n## Key context\n\nThe test expectations are the source of truth for what each locale's output must be. The YAML must be authored to produce output that exactly matches the TheoryData expectations. Build the project and run sweep tests after each locale to verify.\n\nEnglish (`en`) is special: it currently uses `DefaultTimeOnlyToClockNotationConverter` which has English-specific spoken-word phrases hardcoded. Adding a `clock:` YAML section means the generated converter will replace the default. The YAML phrases must produce identical output to the existing default English phrases (\"one twenty-three\", \"twenty-five past one\", etc.).\n## Acceptance\n- [ ] en.yml has `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] nl.yml, af.yml, da.yml, is.yml, sv.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] Variant locales (en-GB, en-IN, en-US, de-CH, de-LI) correctly inherit via `variantOf`\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] `LocaleRegistrySweepTests.TimeOnlyToClockNotation_*` pass for en, en-GB, en-IN, en-US, nl, af, da, is, sv, de-CH, de-LI\n- [ ] `LocaleRegistrySweepTests.DateToOrdinalWords_*` pass for en, en-GB, en-IN, nl, af, da, is, sv\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.250567Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.3",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.3.md",
+        "status": "todo",
+        "title": "Add ordinal.date + clock YAML \u2014 Nordic and Romance locales",
+        "updated_at": "2026-04-06T21:56:05.528637Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.3",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.3 Add ordinal.date + clock YAML \u2014 Nordic and Romance locales\n\n## Description\nAdd `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Nordic and Romance base locales. Variant locales auto-inherit.\n\n**Locales needing both ordinal.date + clock:** nb, it, ro\n**Locales needing ordinal.date only:** pt (already has `clock: phrase-hour`)\n**Variants that auto-inherit:** nn from nb; fr-BE, fr-CH from fr (fr already complete)\n**Already complete:** fr, ca, es, pt-BR (all have both surfaces)\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/nb.yml`\n- `src/Humanizer/Locales/it.yml`\n- `src/Humanizer/Locales/pt.yml`\n- `src/Humanizer/Locales/ro.yml`\n\n## Approach\n\n**For ordinal.date/dateOnly:** Use the `pattern` engine. Expected patterns from test data:\n- nb: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (\"25. januar 2022\")\n- it: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 gennaio 2022\")\n- pt: `'{day} ''de'' MMMM ''de'' yyyy'` + `dayMode: 'Numeric'` (\"25 de janeiro de 2022\")\n- ro: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 ianuarie 2022\")\n\n**For clock:** Use `phrase-hour` or `relative-hour` engine. Reference test expectations:\n- nb: \"tretten tjuetre\" \u2014 simple hour+minutes pattern\n- it: \"una e ventitr\u00e9\" \u2014 hour + connector + minutes\n- ro: \"ora unu \u0219i dou\u0103zeci \u0219i trei\" \u2014 \"ora\" prefix + hour + connector + minutes\n- nn inherits from nb\n\nFollow existing `pt.yml:813-830` for phrase-hour and `es.yml:980-1000` for relative-hour.\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` \u2014 ordinal.date expectations\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 clock expectations\n- `src/Humanizer/Locales/pt.yml:813-830` \u2014 existing phrase-hour clock YAML\n- `src/Humanizer/Locales/fr.yml:367-373` \u2014 existing ordinal.date + clock for Romance\n\n**Optional:**\n- `src/Humanizer/Locales/es.yml:975-1000` \u2014 relative-hour engine example\n- `src/Humanizer/Localisation/TimeToClockNotation/PhraseHourClockNotationConverter.cs` \u2014 phrase-hour engine\n## Acceptance\n- [ ] nb.yml, it.yml, ro.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] pt.yml has `ordinal.date` and `ordinal.dateOnly` sections added\n- [ ] nn correctly inherits both surfaces from nb via `variantOf`\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] Sweep tests pass for nb, nn, it, pt, ro, fr-BE, fr-CH\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.356899Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.4",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.4.md",
+        "status": "todo",
+        "title": "Add ordinal.date + clock YAML \u2014 West Slavic locales",
+        "updated_at": "2026-04-06T21:56:22.013116Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.4",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.4 Add ordinal.date + clock YAML \u2014 West Slavic locales\n\n## Description\nAdd `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to West Slavic locales.\n\n**Locales:** cs, sk, pl, hr, sl (all need both surfaces)\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/cs.yml`\n- `src/Humanizer/Locales/sk.yml`\n- `src/Humanizer/Locales/pl.yml`\n- `src/Humanizer/Locales/hr.yml`\n- `src/Humanizer/Locales/sl.yml`\n\n## Approach\n\n**For ordinal.date/dateOnly:** Expected patterns from test data:\n- cs: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (\"25. ledna 2022\")\n- sk: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (\"25. janu\u00e1ra 2022\")\n- pl: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 stycznia 2022\")\n- hr: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (\"25. sije\u010dnja 2022.\" \u2014 note trailing dot)\n- sl: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (\"25. januar 2022\")\n\nNote: hr and sr use trailing period after year. The pattern template may need `'.'` suffix: `'{day} MMMM yyyy''.'`\n\n**For clock:** Expected output forms:\n- cs: \"t\u0159in\u00e1ct hodin dvacet t\u0159i minut\" \u2014 24h format with \"hodin\" and \"minut\" connectors\n- sk: \"trin\u00e1s\u0165 hod\u00edn dvadsa\u0165tri min\u00fat\" \u2014 similar to Czech\n- pl: \"trzynasta dwadzie\u015bcia trzy\" \u2014 24h format, simpler\n- hr: \"trinaest sati i dvadeset tri minute\" \u2014 \"sati i\" + minutes + \"minute\"\n- sl: \"trinajst triindvajset\" \u2014 simple concatenation\n\nUse `phrase-hour` engine with appropriate phrase templates. Each locale's clock conventions are distinct enough to need separate YAML entries.\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` \u2014 ordinal.date expectations\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 clock expectations (13:23)\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1132-1200` \u2014 clock expectations (13:23 rounded)\n- `docs/locale-yaml-reference.md:671-710` \u2014 phrase-hour and relative-hour engine fields\n\n**Optional:**\n- `src/Humanizer/Localisation/TimeToClockNotation/PhraseHourClockNotationConverter.cs` \u2014 phrase-hour implementation\n- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs` \u2014 dayMode rendering\n## Acceptance\n- [ ] cs.yml, sk.yml, pl.yml, hr.yml, sl.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] Sweep tests pass for cs, sk, pl, hr, sl\n- [ ] hr and sr-style trailing period in dates handled correctly\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.457513Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.5",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.5.md",
+        "status": "todo",
+        "title": "Add ordinal.date + clock YAML \u2014 East and South Slavic locales",
+        "updated_at": "2026-04-06T21:56:37.425620Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.5",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.5 Add ordinal.date + clock YAML \u2014 East and South Slavic locales\n\n## Description\nAdd `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to East and South Slavic locales.\n\n**Locales:** bg, ru, sr, sr-Latn, uk (all need both surfaces)\n\nNote: sr and sr-Latn are standalone locales (no `variantOf`), so each must define surfaces independently.\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/bg.yml`\n- `src/Humanizer/Locales/ru.yml`\n- `src/Humanizer/Locales/sr.yml`\n- `src/Humanizer/Locales/sr-Latn.yml`\n- `src/Humanizer/Locales/uk.yml`\n\n## Approach\n\n**For ordinal.date/dateOnly:** Expected patterns from test data:\n- bg: `'{day} MMMM yyyy ''\u0433.'''` + `dayMode: 'Numeric'` (\"25 \u044f\u043d\u0443\u0430\u0440\u0438 2022 \u0433.\")\n- ru: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u044f\u043d\u0432\u0430\u0440\u044f 2022\")\n- sr: `'{day} MMMM yyyy''.'` + `dayMode: 'DotSuffix'` (\"25. \u0458\u0430\u043d\u0443\u0430\u0440 2022.\")\n- sr-Latn: `'{day} MMMM yyyy''.'` + `dayMode: 'DotSuffix'` (\"25. januar 2022.\")\n- uk: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u0441\u0456\u0447\u043d\u044f 2022\")\n\nNote: bg has trailing \"\u0433.\" (abbreviation for \"\u0433\u043e\u0434\u0430\"), sr/sr-Latn have trailing period. These need embedded literal strings in the pattern.\n\n**For clock:** Expected output forms:\n- bg: \"\u0442\u0440\u0438\u043d\u0430\u0434\u0435\u0441\u0435\u0442 \u0447\u0430\u0441\u0430 \u0438 \u0434\u0432\u0430\u0434\u0435\u0441\u0435\u0442 \u0438 \u0442\u0440\u0438 \u043c\u0438\u043d\u0443\u0442\u0438\" \u2014 structured with \"\u0447\u0430\u0441\u0430 \u0438\" and \"\u043c\u0438\u043d\u0443\u0442\u0438\"\n- ru: \"\u0447\u0430\u0441 \u0434\u0432\u0430\u0434\u0446\u0430\u0442\u044c \u0442\u0440\u0438\" \u2014 12h spoken form, simple\n- sr: \"\u0458\u0435\u0434\u0430\u043d \u0438 \u0434\u0432\u0430\u0434\u0435\u0441\u0435\u0442 \u0442\u0440\u0438\" \u2014 12h + \"\u0438\" + minutes\n- sr-Latn: \"jedan i dvadeset tri\" \u2014 Latin script equivalent of sr\n- uk: \"\u043f\u0435\u0440\u0448\u0430 \u0434\u0432\u0430\u0434\u0446\u044f\u0442\u044c \u0442\u0440\u0438\" \u2014 12h feminine + minutes\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` \u2014 ordinal.date expectations\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 clock expectations\n- `src/Humanizer/Locales/sr.yml` \u2014 verify sr is standalone (no variantOf)\n- `src/Humanizer/Locales/sr-Latn.yml` \u2014 verify standalone\n\n**Optional:**\n- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:52` \u2014 how pattern literal strings work\n- `docs/locale-yaml-how-to.md` \u2014 YAML authoring conventions\n## Acceptance\n- [ ] bg.yml, ru.yml, sr.yml, sr-Latn.yml, uk.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] bg ordinal date includes trailing \"\u0433.\" suffix\n- [ ] sr/sr-Latn ordinal dates include trailing period\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] Sweep tests pass for bg, ru, sr, sr-Latn, uk\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.582166Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.6",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.6.md",
+        "status": "todo",
+        "title": "Add ordinal.date + clock YAML \u2014 Finno-Ugric, Turkic, Greek, Armenian locales",
+        "updated_at": "2026-04-06T21:56:53.966098Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.6",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.6 Add ordinal.date + clock YAML \u2014 Finno-Ugric, Turkic, Greek, Armenian locales\n\n## Description\nAdd `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Finno-Ugric, Turkic, Greek, and Armenian locales.\n\n**Locales:** fi, hu, az, tr, el, hy (all need both surfaces)\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/fi.yml`\n- `src/Humanizer/Locales/hu.yml`\n- `src/Humanizer/Locales/az.yml`\n- `src/Humanizer/Locales/tr.yml`\n- `src/Humanizer/Locales/el.yml`\n- `src/Humanizer/Locales/hy.yml`\n\n## Approach\n\n**For ordinal.date/dateOnly:** Expected patterns:\n- fi: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'` (\"25. tammikuuta 2022\")\n- hu: `'yyyy''. ''MMMM'' ''{day}''.'` + `dayMode: 'Numeric'` (\"2022. janu\u00e1r 25.\") \u2014 year-first with dots\n- az: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 yanvar 2022\")\n- tr: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 Ocak 2022\")\n- el: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u0399\u03b1\u03bd\u03bf\u03c5\u03b1\u03c1\u03af\u03bf\u03c5 2022\")\n- hy: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u0570\u0578\u0582\u0576\u057e\u0561\u0580\u056b 2022\")\n\nNote: Hungarian has a unique date format with year-first and trailing dots. The pattern needs careful construction.\n\n**For clock:** Expected output:\n- fi: \"kolmetoista kaksikymment\u00e4kolme\" \u2014 simple 24h word concatenation\n- hu: \"tizenh\u00e1rom \u00f3ra huszonh\u00e1rom perc\" \u2014 24h + \"\u00f3ra\" + minutes + \"perc\"\n- az: \"on \u00fc\u00e7 saat iyirmi \u00fc\u00e7 d\u0259qiq\u0259\" \u2014 24h + \"saat\" + minutes + \"d\u0259qiq\u0259\"\n- tr: \"on \u00fc\u00e7 yirmi \u00fc\u00e7\" \u2014 simple concatenation\n- el: \"\u03bc\u03af\u03b1 \u03ba\u03b1\u03b9 \u03b5\u03af\u03ba\u03bf\u03c3\u03b9 \u03c4\u03c1\u03af\u03b1 \u03c4\u03bf \u03b1\u03c0\u03cc\u03b3\u03b5\u03c5\u03bc\u03b1\" \u2014 12h + \"\u03ba\u03b1\u03b9\" + minutes + day-period (relative-hour)\n- hy: \"\u0574\u0565\u056f\u0576 \u0561\u0576delays \u0584delays\" \u2014 uses \"\u0561\u0576points\" pattern (\"past\" + minutes)\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` \u2014 ordinal.date expectations\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 clock expectations\n- `docs/locale-yaml-reference.md:671-710` \u2014 clock engine field reference\n\n**Optional:**\n- `src/Humanizer/Locales/ja.yml:290-296` \u2014 Japanese year-first ordinal.date pattern reference\n- `src/Humanizer/Locales/es.yml:980-1000` \u2014 relative-hour clock example for el/hy\n## Acceptance\n- [ ] fi.yml, hu.yml, az.yml, tr.yml, el.yml, hy.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] Hungarian date format correctly produces year-first output (\"2022. janu\u00e1r 25.\")\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] Sweep tests pass for fi, hu, az, tr, el, hy\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.682661Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.7",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.7.md",
+        "status": "todo",
+        "title": "Add clock YAML \u2014 Baltic and Indo-Iranian locales",
+        "updated_at": "2026-04-06T21:57:09.522154Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.7",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.7 Add clock YAML \u2014 Baltic and Indo-Iranian locales\n\n## Description\nAdd `clock:` YAML sections to Baltic and Indo-Iranian locales that already have `ordinal.date` defined.\n\n**Locales (clock only):** lt, lv, ar, fa, ku\nThese 5 locales already have `ordinal.date`/`ordinal.dateOnly` in their YAML. Only the clock surface is missing.\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/lt.yml`\n- `src/Humanizer/Locales/lv.yml`\n- `src/Humanizer/Locales/ar.yml`\n- `src/Humanizer/Locales/fa.yml`\n- `src/Humanizer/Locales/ku.yml`\n\n## Approach\n\n**For clock:** Expected output:\n- lt: \"trylika valand\u0173 dvide\u0161imt trys minut\u0117s\" \u2014 24h + \"valand\u0173\" + minutes + \"minut\u0117s\"\n- lv: \"tr\u012bspadsmit un divdesmit tr\u012bs\" \u2014 24h + \"un\" + minutes\n- ar: \"\u0627\u0644\u0648\u0627\u062d\u062f\u0629 \u0648\u062b\u0644\u0627\u062b \u0648\u0639\u0634\u0631\u0648\u0646 \u062f\u0642\u064a\u0642\u0629 \u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631\" \u2014 12h + minutes + day-period (relative-hour style)\n- fa: \"\u06cc\u06a9 \u0648 \u0628\u06cc\u0633\u062a \u0648 \u0633\u0647 \u0628\u0639\u062f\u0627\u0632\u0638\u0647\u0631\" \u2014 12h + \"\u0648\" + minutes + day-period\n- ku: \"\u06cc\u06d5\u06a9 \u0648 \u0628\u06cc\u0633\u062a \u0648 \u0633\u06ce\u06cc \u0626\u06ce\u0648\u0627\u0631\u06d5\" \u2014 12h + \"\u0648\" + minutes + day-period\n\nArabic (ar), Farsi (fa), and Kurdish (ku) are RTL locales. Ensure clock output does not include invisible directionality control characters (LRM, RLM, ALM) \u2014 follow the existing pattern at `LocaleRegistrySweepTests` that checks Arabic ordinal.date output for these marks.\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 clock expectations\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1132-1200` \u2014 rounded clock expectations\n- `src/Humanizer/Locales/ar.yml` \u2014 existing ar YAML structure\n- `src/Humanizer/Locales/fa.yml` \u2014 existing fa YAML structure\n\n**Optional:**\n- `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` \u2014 Arabic directionality mark assertions\n- `src/Humanizer/Locales/es.yml:980-1000` \u2014 relative-hour engine for RTL adaptation\n## Acceptance\n- [ ] lt.yml, lv.yml, ar.yml, fa.yml, ku.yml each have `clock:` sections added\n- [ ] RTL locales (ar, fa, ku) produce output without invisible directionality marks\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] Sweep tests pass for lt, lv, ar, fa, ku\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.784392Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.8",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.8.md",
+        "status": "todo",
+        "title": "Add ordinal.date + clock YAML \u2014 East Asian locales",
+        "updated_at": "2026-04-06T21:57:33.625359Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.8",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.8 Add ordinal.date + clock YAML \u2014 East Asian locales\n\n## Description\nAdd `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to East Asian locales.\n\n**Locales needing both:** ko, zh-Hans, zh-Hant, bn, ta, th, vi\n**Variant that auto-inherits:** zh-CN from zh-Hans\n**Already complete:** ja (has both surfaces)\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/ko.yml`\n- `src/Humanizer/Locales/zh-Hans.yml`\n- `src/Humanizer/Locales/zh-Hant.yml`\n- `src/Humanizer/Locales/bn.yml`\n- `src/Humanizer/Locales/ta.yml`\n- `src/Humanizer/Locales/th.yml`\n- `src/Humanizer/Locales/vi.yml`\n\n## Approach\n\n**For ordinal.date/dateOnly:** Expected patterns:\n- ko: `'yyyy''\ub144 ''M''\uc6d4 ''{day}''\uc77c'''` + `dayMode: 'Numeric'` (\"2022\ub144 1\uc6d4 25\uc77c\")\n- zh-Hans: `'yyyy''\u5e74''M''\u6708''{day}''\u65e5'''` + `dayMode: 'Numeric'` (\"2022\u5e741\u670825\u65e5\")\n- zh-Hant: same as zh-Hans (\"2022\u5e741\u670825\u65e5\")\n- bn: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u099c\u09be\u09a8\u09c1\u09af\u09bc\u09be\u09b0\u09c0 2022\")\n- ta: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u0b9c\u0ba9\u0bb5\u0bb0\u0bbf 2022\")\n- th: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u0e21\u0e01\u0e23\u0e32\u0e04\u0e21 2565\") \u2014 Thai Buddhist calendar!\n- vi: `'{day} ''th\u00e1ng'' M ''n\u0103m'' yyyy'` + `dayMode: 'Numeric'` (\"25 th\u00e1ng 1 n\u0103m 2022\")\n\n**Thai Buddhist calendar:** The `OrdinalDatePattern.GetPatternCulture()` forces a Gregorian calendar, but Thai test expects 2565 (Buddhist era). Investigate how the existing test expectation was authored \u2014 the pattern engine may need `useNativeCalendar: true` or the Thai output may need special handling.\n\n**For clock:** Expected output:\n- ko: \"\uc624\ud6c4 \ud55c \uc2dc \uc774\uc2ed\uc0bc \ubd84\" \u2014 day-period + 12h + \"\uc2dc\" + minutes + \"\ubd84\"\n- zh-Hans: \"\u4e0b\u5348\u4e00\u70b9\u4e8c\u5341\u4e09\u5206\" \u2014 day-period + 12h + \"\u70b9\" + minutes + \"\u5206\"\n- zh-Hant: \"\u4e0b\u5348\u4e00\u9ede\u4e8c\u5341\u4e09\u5206\" \u2014 Traditional Chinese variant\n- bn: \"\u09a6\u09c1\u09aa\u09c1\u09b0 \u098f\u0995\u099f\u09be \u09a4\u09c7\u0987\u09b6\" \u2014 day-period + 12h + minutes\n- ta: \"\u0baa\u0bbf\u0bb1\u0bcd\u0baa\u0b95\u0bb2\u0bcd \u0b92\u0bb0\u0bc1 \u0bae\u0ba3\u0bbf \u0b87\u0bb0\u0bc1\u0baa\u0ba4\u0bcd\u0ba4\u0bc1 \u0bae\u0bc2\u0ba9\u0bcd\u0bb1\u0bc1 \u0ba8\u0bbf\u0bae\u0bbf\u0b9f\u0bae\u0bcd\" \u2014 day-period + 12h + \"\u0bae\u0ba3\u0bbf\" + minutes + \"\u0ba8\u0bbf\u0bae\u0bbf\u0b9f\u0bae\u0bcd\"\n- th: \"\u0e1a\u0e48\u0e32\u0e22\u0e2b\u0e19\u0e36\u0e48\u0e07\u0e22\u0e35\u0e48\u0e2a\u0e34\u0e1a\u0e2a\u0e32\u0e21\u0e19\u0e32\u0e17\u0e35\" \u2014 day-period + 12h + minutes + \"\u0e19\u0e32\u0e17\u0e35\"\n- vi: \"m\u1ed9t gi\u1edd hai m\u01b0\u01a1i ba ph\u00fat chi\u1ec1u\" \u2014 12h + \"gi\u1edd\" + minutes + \"ph\u00fat\" + day-period\n\n## Key context\n\nThe `zh-Hant` locale has TFM-conditional expectations in `LocaleCoverageData.cs:11-30` \u2014 short time format differs between .NET 8 and .NET 10. YAML-driven clock output should be consistent across TFMs since it uses spoken words, not `ToString(\"t\")`.\n\nThe `zh-CN` \u2192 `zh-Hans` variant should auto-inherit. Verify the CultureInfo.Parent chain works correctly on both Windows and Unix for `zh-CN`.\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` \u2014 ordinal.date expectations\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 clock expectations\n- `src/Humanizer/Locales/ja.yml:290-296` \u2014 Japanese ordinal.date and clock pattern\n- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:59-83` \u2014 GetPatternCulture() Gregorian override\n\n**Optional:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` \u2014 zh-Hant TFM conditionals\n- `src/Humanizer/Locales/zh-CN.yml` \u2014 zh-CN variant file\n## Acceptance\n- [ ] ko.yml, zh-Hans.yml, zh-Hant.yml, bn.yml, ta.yml, th.yml, vi.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] zh-CN correctly inherits both surfaces from zh-Hans\n- [ ] Thai ordinal date correctly produces Buddhist era year (2565 for 2022)\n- [ ] CJK ordinal date patterns produce year-month-day order\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] Sweep tests pass for ko, zh-Hans, zh-Hant, zh-CN, bn, ta, th, vi\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    },
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-06T21:55:05.889374Z",
+        "depends_on": [],
+        "epic": "fn-1-locale-translation-parity-across-all",
+        "id": "fn-1-locale-translation-parity-across-all.9",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.9.md",
+        "status": "todo",
+        "title": "Add ordinal.date + clock YAML \u2014 Austronesian, Semitic, and other locales",
+        "updated_at": "2026-04-06T21:57:56.583591Z"
+      },
+      "id": "fn-1-locale-translation-parity-across-all.9",
+      "runtime": null,
+      "spec": "# fn-1-locale-translation-parity-across-all.9 Add ordinal.date + clock YAML \u2014 Austronesian, Semitic, and other locales\n\n## Description\nAdd `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Austronesian, Semitic, and remaining locales.\n\n**Locales:** he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA (all need both surfaces)\n\n**Size:** M\n**Files:**\n- `src/Humanizer/Locales/he.yml`\n- `src/Humanizer/Locales/id.yml`\n- `src/Humanizer/Locales/ms.yml`\n- `src/Humanizer/Locales/fil.yml`\n- `src/Humanizer/Locales/mt.yml`\n- `src/Humanizer/Locales/uz-Cyrl-UZ.yml`\n- `src/Humanizer/Locales/uz-Latn-UZ.yml`\n- `src/Humanizer/Locales/zu-ZA.yml`\n\n## Approach\n\n**For ordinal.date/dateOnly:** Expected patterns:\n- he: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u05d1\u05d9\u05e0\u05d5\u05d0\u05e8 2022\")\n- id: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 Januari 2022\")\n- ms: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 Januari 2022\")\n- fil: `'MMMM {day}, yyyy'` + `dayMode: 'Numeric'` (\"Enero 25, 2022\") \u2014 month-first like en-US\n- mt: `'{day} ''ta'''' MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 ta' Jannar 2022\")\n- uz-Cyrl-UZ: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 \u044f\u043d\u0432\u0430\u0440 2022\")\n- uz-Latn-UZ: `'{day}''-''MMMM yyyy'` + `dayMode: 'Numeric'` (\"25-yanvar 2022\") \u2014 hyphen separator\n- zu-ZA: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` (\"25 Januwari 2022\")\n\nNote: Maltese (mt) has embedded `ta'` with apostrophe \u2014 needs careful YAML quoting.\nNote: Hebrew (he) is RTL \u2014 verify no directionality marks in output.\n\n**For clock:** Expected output:\n- he: \"\u05d0\u05d7\u05ea \u05e2\u05e9\u05e8\u05d9\u05dd \u05d5\u05e9\u05dc\u05d5\u05e9\" \u2014 12h + minutes\n- id: \"pukul satu lewat dua puluh tiga menit\" \u2014 \"pukul\" + 12h + \"lewat\" + minutes + \"menit\"\n- ms: \"pukul satu dua puluh tiga petang\" \u2014 \"pukul\" + 12h + minutes + day-period\n- fil: \"ala una beinte-tres ng hapon\" \u2014 \"ala\" + 12h + Spanish-influenced minutes + \"ng\" + day-period\n- mt: \"is-sieg\u0127a wa\u0127da u tlieta u g\u0127oxrin\" \u2014 \"is-sieg\u0127a\" + 12h + \"u\" + minutes\n- uz-Cyrl-UZ: \"\u0431\u0438\u0440\u0434\u0430\u043d \u0439\u0438\u0433\u0438\u0440\u043c\u0430 \u0443\u0447 \u045e\u0442\u0434\u0438\" \u2014 12h + minutes + \"\u045e\u0442di\"\n- uz-Latn-UZ: \"birdan yigirma uch o'tdi\" \u2014 Latin script equivalent\n- zu-ZA: \"ihora lokuqala namashumi amabili nantathu ntambama\" \u2014 complex Zulu structure\n\n## Investigation targets\n\n**Required:**\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` \u2014 ordinal.date expectations\n- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` \u2014 clock expectations\n- `src/Humanizer/Locales/fil.yml` \u2014 existing Filipino YAML structure\n- `docs/locale-yaml-reference.md:671-710` \u2014 clock engine field reference\n\n**Optional:**\n- `src/Humanizer/Locales/en-US.yml:5-13` \u2014 month-first ordinal.date pattern (for fil reference)\n- `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` \u2014 RTL directionality checks\n## Acceptance\n- [ ] he.yml, id.yml, ms.yml, fil.yml, mt.yml, uz-Cyrl-UZ.yml, uz-Latn-UZ.yml, zu-ZA.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections\n- [ ] Filipino ordinal date uses month-first format\n- [ ] Maltese `ta'` apostrophe correctly rendered in ordinal date\n- [ ] Hebrew clock output has no directionality marks\n- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds\n- [ ] Sweep tests pass for he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    }
+  ]
+}
