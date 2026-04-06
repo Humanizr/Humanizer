@@ -1172,6 +1172,7 @@ surfaces:
         lastDigitSuffixes:
           3: '-є'
 
+
   compass:
     full:
       - 'північ'

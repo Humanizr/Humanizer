@@ -399,3 +399,13 @@ surfaces:
       - 'WNW'
       - 'NW'
       - 'NNW'
+
+  formatter:
+    engine: 'profiled'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'ika-'
+        defaultSuffix: ''

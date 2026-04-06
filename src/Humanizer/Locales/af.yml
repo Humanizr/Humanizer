@@ -387,6 +387,7 @@ surfaces:
         3: 'de'
         8: 'ste'
 
+
   compass:
     full:
       - 'noord'
@@ -422,3 +423,6 @@ surfaces:
       - 'WNW'
       - 'NW'
       - 'NNW'
+
+  formatter:
+    engine: 'profiled'

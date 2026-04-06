@@ -343,3 +343,10 @@ surfaces:
       - 'ตว-น'
       - 'ตวฉน'
       - 'น-ตว'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'ที่'
+        defaultSuffix: ''

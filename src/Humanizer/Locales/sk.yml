@@ -362,6 +362,10 @@ surfaces:
         singular: 'milión'
         paucal: 'milióny'
         plural: 'miliónov'
+      trillions:
+        singular: 'bilión'
+        paucal: 'bilióny'
+        plural: 'biliónov'
       billions:
         singular: 'miliarda'
         paucal: 'miliardy'
@@ -457,6 +461,7 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: '.'
+
 
   compass:
     full:

@@ -281,6 +281,10 @@ surfaces:
         '無量大数': 100000000000000000000000000000000000000000000000000000000000000000000
 
   ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: '番目'
     date:
       pattern: 'yyyy年M月{day}日'
       dayMode: 'Numeric'

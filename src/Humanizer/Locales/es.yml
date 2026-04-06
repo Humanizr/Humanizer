@@ -1031,3 +1031,6 @@ surfaces:
       - 'O-NO'
       - 'NO'
       - 'N-NO'
+
+  formatter:
+    engine: 'profiled'

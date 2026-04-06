@@ -365,3 +365,18 @@ surfaces:
       - 'WNW'
       - 'NW'
       - 'NNW'
+
+  formatter:
+    engine: 'profiled'
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: 'ەم'
+      zeroAsPlainNumber: true
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'

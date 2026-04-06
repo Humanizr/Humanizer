@@ -1119,6 +1119,7 @@ surfaces:
       feminineSuffix: '-я'
       neuterSuffix: '-е'
 
+
   compass:
     full:
       - 'север'

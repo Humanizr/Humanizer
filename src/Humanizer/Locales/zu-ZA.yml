@@ -342,6 +342,7 @@ surfaces:
       cardinalMap:
         'zero': 0
         'kanye': 1
+        'amashumi amabili kanye': 21
         'kubili': 2
         'kuthathu': 3
         'kune': 4
@@ -378,3 +379,44 @@ surfaces:
         'ikhulu na kuhlanu': 105
       negativePrefixes:
         - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: ''
+
+  compass:
+    full:
+      - 'enyakatho'
+      - 'enyakatho-enyakatho-mpumalanga'
+      - 'enyakatho-mpumalanga'
+      - 'empumalanga-enyakatho-mpumalanga'
+      - 'empumalanga'
+      - 'empumalanga-eningizimu-mpumalanga'
+      - 'eningizimu-mpumalanga'
+      - 'eningizimu-eningizimu-mpumalanga'
+      - 'eningizimu'
+      - 'eningizimu-eningizimu-ntshonalanga'
+      - 'eningizimu-ntshonalanga'
+      - 'entshonalanga-eningizimu-ntshonalanga'
+      - 'entshonalanga'
+      - 'entshonalanga-enyakatho-ntshonalanga'
+      - 'enyakatho-ntshonalanga'
+      - 'enyakatho-enyakatho-ntshonalanga'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSW'
+      - 'SW'
+      - 'WSW'
+      - 'W'
+      - 'WNW'
+      - 'NW'
+      - 'NNW'

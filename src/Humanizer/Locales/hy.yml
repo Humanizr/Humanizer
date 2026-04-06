@@ -296,6 +296,7 @@ surfaces:
         'զրո': 0
         'մեկ': 1
         'երկու': 2
+        'քսանմեկ': 21
         'երեք': 3
         'չորս': 4
         'հինգ': 5
@@ -340,6 +341,7 @@ surfaces:
       useAbsoluteValue: true
       exactSuffixes:
         1: '-ին'
+
 
   compass:
     full:

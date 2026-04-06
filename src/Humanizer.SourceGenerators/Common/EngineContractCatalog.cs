@@ -665,6 +665,7 @@ public sealed partial class HumanizerSourceGenerator
                         Member("string-array", "unitsInvariantForms", null, null, null, null, null, null),
                         Member("builder", "thousands", null, null, "west-slavic-scale-forms", null, null, null),
                         Member("builder", "millions", null, null, "west-slavic-scale-forms", null, null, null),
+                        Member("builder", "trillions", null, null, "west-slavic-scale-forms", null, null, null),
                         Member("builder", "billions", null, null, "west-slavic-scale-forms", null, null, null)
                     ),
             Member("culture", null, null, null, null, null, null, null)

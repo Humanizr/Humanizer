@@ -313,7 +313,7 @@ surfaces:
     words:
       engine: 'south-slavic-cardinal'
       useCulture: true
-      maximumValue: 2147483647
+      maximumValue: 9223372036854775807
       allowLongMin: false
       zeroWord: 'nič'
       minusWord: 'minus'
@@ -391,7 +391,7 @@ surfaces:
           singular: 'bilijon'
           paucal: 'bilijona'
           dual: 'bilijona'
-          trialQuadral: 'bilijone'
+          trialQuadral: 'bilijoni'
           plural: 'bilijonov'
         -
           value: 1000000000

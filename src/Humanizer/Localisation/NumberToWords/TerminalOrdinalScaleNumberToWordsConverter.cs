@@ -184,7 +184,7 @@ class TerminalOrdinalScaleNumberToWordsConverter(TerminalOrdinalScaleNumberToWor
     /// </summary>
     static string GetCardinalUnitEnding(GrammaticalGender gender, int number)
     {
-        return gender switch
+        return NormalizeGender(gender) switch
         {
             GrammaticalGender.Masculine => number switch
             {
@@ -206,12 +206,15 @@ class TerminalOrdinalScaleNumberToWordsConverter(TerminalOrdinalScaleNumberToWor
     /// Returns the ordinal suffix for the requested gender.
     /// </summary>
     string GetOrdinalSuffix(GrammaticalGender gender) =>
-        gender switch
+        NormalizeGender(gender) switch
         {
             GrammaticalGender.Masculine => profile.MasculineOrdinalSuffix,
             GrammaticalGender.Feminine => profile.FeminineOrdinalSuffix,
             _ => throw new ArgumentOutOfRangeException(nameof(gender))
         };
+
+    static GrammaticalGender NormalizeGender(GrammaticalGender gender) =>
+        gender == GrammaticalGender.Neuter ? GrammaticalGender.Masculine : gender;
 }
 
 /// <summary>

@@ -29,6 +29,7 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
             number = -number;
         }
 
+        CollectScale(parts, ref number, 1_000_000_000_000, GrammaticalGender.Masculine, profile.Trillions);
         CollectScale(parts, ref number, 1_000_000_000, GrammaticalGender.Feminine, profile.Billions);
         CollectScale(parts, ref number, 1_000_000, GrammaticalGender.Masculine, profile.Millions);
         CollectScale(parts, ref number, 1_000, GrammaticalGender.Masculine, profile.Thousands);
@@ -59,7 +60,14 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
             return;
         }
 
-        CollectLessThanThousand(parts, scaleNumber, scaleNumber < 19 ? gender : null);
+        if (scaleNumber >= 1000)
+        {
+            parts.Add(Convert(scaleNumber, GrammaticalGender.Masculine));
+        }
+        else
+        {
+            CollectLessThanThousand(parts, scaleNumber, scaleNumber < 19 ? gender : null);
+        }
 
         var units = scaleNumber % 1000;
         parts.Add(units switch
@@ -141,6 +149,7 @@ internal sealed class WestSlavicNumberToWordsProfile(
     string[] unitsInvariantForms,
     WestSlavicScaleForms thousands,
     WestSlavicScaleForms millions,
+    WestSlavicScaleForms trillions,
     WestSlavicScaleForms billions)
 {
     /// <summary>Gets the word used to prefix negative values.</summary>
@@ -163,6 +172,8 @@ internal sealed class WestSlavicNumberToWordsProfile(
     public WestSlavicScaleForms Thousands { get; } = thousands;
     /// <summary>Gets the plural forms for the millions scale.</summary>
     public WestSlavicScaleForms Millions { get; } = millions;
+    /// <summary>Gets the plural forms for the trillions scale.</summary>
+    public WestSlavicScaleForms Trillions { get; } = trillions;
     /// <summary>Gets the plural forms for the billions scale.</summary>
     public WestSlavicScaleForms Billions { get; } = billions;
 }

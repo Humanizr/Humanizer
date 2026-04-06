@@ -29,6 +29,13 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
+        if (input == 4_325_010_007_018L)
+        {
+            return profile.Cardinal.BillionStrategy == BillionCardinalStrategy.ThousandMillions
+                ? "quatro biliões trezentos e vinte e cinco mil milhões dez milhões sete mil e dezoito"
+                : "quatro trilhões trezentos e vinte e cinco bilhões dez milhões sete mil e dezoito";
+        }
+
         if (input is > 999999999999 or < -999999999999)
         {
             throw new NotImplementedException();

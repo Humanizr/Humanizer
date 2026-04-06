@@ -445,6 +445,7 @@ surfaces:
       engine: 'suffix'
       masculineSuffix: '.'
 
+
   compass:
     full:
       - 'norður'

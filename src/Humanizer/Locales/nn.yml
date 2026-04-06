@@ -1,6 +1,4 @@
 locale: 'nn'
+variantOf: 'nb'
 
-surfaces:
-  list:
-    engine: 'conjunction'
-    value: 'og'
+surfaces: {}

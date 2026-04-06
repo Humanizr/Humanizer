@@ -397,6 +397,7 @@ surfaces:
       engine: 'suffix'
       masculineSuffix: '.'
 
+
   compass:
     full:
       - 'nord'
@@ -432,3 +433,6 @@ surfaces:
       - 'VNV'
       - 'NV'
       - 'NNV'
+
+  formatter:
+    engine: 'profiled'

@@ -397,6 +397,7 @@ surfaces:
       masculineSuffix: 'e'
       zeroAsPlainNumber: true
 
+
   compass:
     full:
       - 'noord'
@@ -432,3 +433,6 @@ surfaces:
       - 'WNW'
       - 'NW'
       - 'NNW'
+
+  formatter:
+    engine: 'profiled'

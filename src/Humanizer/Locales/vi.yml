@@ -350,3 +350,10 @@ surfaces:
       - 'TTB'
       - 'TB'
       - 'BTB'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'thứ '
+        defaultSuffix: ''

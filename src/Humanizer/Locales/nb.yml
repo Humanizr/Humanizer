@@ -225,7 +225,7 @@ surfaces:
       engine: 'scale-strategy'
       cardinalStrategy: 'norwegian-bokmal'
       ordinalStrategy: 'norwegian-bokmal'
-      maximumValue: 2147483647
+      maximumValue: 9223372036854775807
       defaultGender: 'masculine'
       zeroWord: 'null'
       minusWord: 'minus'
@@ -280,6 +280,14 @@ surfaces:
         9: 'nitti'
       hundredUnitMap: []
       scales:
+        -
+          value: 1000000000000
+          name: 'billion'
+          plural: 'billioner'
+          prefix: ' '
+          postfix: ' '
+          displayOneUnit: true
+          gender: 'masculine'
         -
           value: 1000000000
           name: 'milliard'
@@ -370,6 +378,7 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: '.'
+
 
   compass:
     full:

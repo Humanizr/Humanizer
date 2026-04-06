@@ -475,3 +475,20 @@ surfaces:
       - 'প-উ-প'
       - 'উ-প'
       - 'উ-উ-প'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: 'তম'
+        exactSuffixes:
+          1: 'ম'
+          2: 'য়'
+          3: 'য়'
+          4: 'র্থ'
+          5: 'ম'
+          6: 'ষ্ঠ'
+          7: 'ম'
+          8: 'ম'
+          9: 'ম'
+          10: 'ম'

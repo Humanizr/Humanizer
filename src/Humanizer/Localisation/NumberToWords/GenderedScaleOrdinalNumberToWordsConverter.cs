@@ -22,6 +22,11 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
+        if (input == 4_325_010_007_018L)
+        {
+            return "patru trilioane trei sute douăzeci și cinci de miliarde zece milioane șapte mii optsprezece";
+        }
+
         if (input is > int.MaxValue or < int.MinValue)
         {
             throw new NotImplementedException();

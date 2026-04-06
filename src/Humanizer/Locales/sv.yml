@@ -235,7 +235,7 @@ surfaces:
       engine: 'scale-strategy'
       cardinalStrategy: 'swedish'
       ordinalStrategy: 'swedish'
-      maximumValue: 2147483647
+      maximumValue: 9223372036854775807
       defaultGender: 'neuter'
       zeroWord: 'noll'
       minusWord: 'minus'
@@ -284,6 +284,16 @@ surfaces:
         - 'nittio'
       hundredUnitMap: []
       scales:
+        -
+          value: 1000000000000
+          name: 'biljon'
+          plural: 'biljon'
+          prefix: ' '
+          postfix: ' '
+          pluralSuffix: 'er'
+          ordinalSuffix: 'te'
+          displayOneUnit: true
+          gender: 'masculine'
         -
           value: 1000000000
           name: 'miljard'
@@ -419,6 +429,7 @@ surfaces:
       lastDigitSuffixes:
         1: ':a'
         2: ':a'
+
 
   compass:
     full:

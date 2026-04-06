@@ -302,6 +302,7 @@ surfaces:
         nolla: 0
         yksi: 1
         kaksi: 2
+        kaksikymmentayksi: 21
         kolme: 3
         'neljä': 4
         viisi: 5
@@ -369,6 +370,7 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: '.'
+
 
   compass:
     full:

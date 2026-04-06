@@ -298,3 +298,10 @@ surfaces:
       - '西北西'
       - '西北'
       - '北西北'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: '第'
+        defaultSuffix: ''

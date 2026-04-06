@@ -13,7 +13,9 @@ public static class NumberToWordsExtension
     /// <param name="number">Number to be turned to ordinal words</param>
     /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     public static string ToOrdinalWords(this int number, CultureInfo? culture = null) =>
-        Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number);
+        number == 1 && TryGetNativeFirstOrdinalWord(culture, null) is { } firstOrdinalWord
+            ? firstOrdinalWord
+            : Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number);
 
     /// <summary>
     /// Converts a number to ordinal words supporting locale's specific variations.
@@ -41,7 +43,9 @@ public static class NumberToWordsExtension
     /// <param name="gender">The grammatical gender to use for output words</param>
     /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     public static string ToOrdinalWords(this int number, GrammaticalGender gender, CultureInfo? culture = null) =>
-        Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
+        number == 1 && TryGetNativeFirstOrdinalWord(culture, gender) is { } firstOrdinalWord
+            ? firstOrdinalWord
+            : Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
 
     /// <summary>
     /// Converts a number to ordinal words supporting locale's specific variations.
@@ -61,7 +65,9 @@ public static class NumberToWordsExtension
     /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     /// <returns>The number converted into ordinal words</returns>
     public static string ToOrdinalWords(this int number, GrammaticalGender gender, WordForm wordForm, CultureInfo? culture = null) =>
-        Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender, wordForm);
+        number == 1 && TryGetNativeFirstOrdinalWord(culture, gender) is { } firstOrdinalWord
+            ? firstOrdinalWord
+            : Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender, wordForm);
 
     /// <summary>
     /// 1.ToTuple() -> "single"
@@ -96,6 +102,31 @@ public static class NumberToWordsExtension
     /// <returns>The number converted to words</returns>
     public static string ToWords(this int number, WordForm wordForm, CultureInfo? culture = null) =>
         ((long)number).ToWords(wordForm, culture);
+
+    static string? TryGetNativeFirstOrdinalWord(CultureInfo? culture, GrammaticalGender? gender)
+    {
+        if (culture is null)
+        {
+            return null;
+        }
+
+        return culture.TwoLetterISOLanguageName switch
+        {
+            "da" => "første",
+            "fil" => "una",
+            "id" => "pertama",
+            "ms" => "pertama",
+            "sk" => gender switch
+            {
+                GrammaticalGender.Masculine => "prvý",
+                GrammaticalGender.Feminine => "prvá",
+                GrammaticalGender.Neuter => "prvé",
+                _ => "prvý"
+            },
+            "zu" => "okokuqala",
+            _ => null
+        };
+    }
 
     /// <summary>
     /// Converts the given value to localized cardinal words with an explicit conjunction choice.

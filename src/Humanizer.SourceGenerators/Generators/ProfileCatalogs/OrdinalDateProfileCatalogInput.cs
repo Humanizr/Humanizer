@@ -45,8 +45,8 @@ public sealed partial class HumanizerSourceGenerator
 
             profiles.Add(new OrdinalDateProfileDefinition(
                 feature.ProfileName!,
-                GetRequiredString(feature.ProfileRoot, "pattern"),
-                GetRequiredString(feature.ProfileRoot, "dayMode")));
+                GetOptionalString(feature.ProfileRoot, "engine") ?? "pattern",
+                feature.ProfileRoot.Clone()));
         }
 
         public void Emit(SourceProductionContext context)
@@ -120,11 +120,7 @@ public sealed partial class HumanizerSourceGenerator
                     "static",
                     interfaceName,
                     GetCatalogPropertyName(profile.ProfileName),
-                    "new " + converterTypeName + "(new OrdinalDatePattern(" +
-                    QuoteLiteral(profile.Pattern) +
-                    ", OrdinalDateDayMode." +
-                    profile.DayMode +
-                    "))");
+                    CreateConverterExpression(profile, converterTypeName));
                 builder.AppendLine();
             }
 
@@ -138,6 +134,23 @@ public sealed partial class HumanizerSourceGenerator
 
             context.AddSource(sourceName, SourceText.From(builder.ToString(), Encoding.UTF8));
         }
+
+        static string CreateConverterExpression(OrdinalDateProfileDefinition profile, string converterTypeName) =>
+            profile.Engine switch
+            {
+                "default" => converterTypeName switch
+                {
+                    "PatternDateToOrdinalWordsConverter" => "new DefaultDateToOrdinalWordConverter()",
+                    "PatternDateOnlyToOrdinalWordsConverter" => "new DefaultDateOnlyToOrdinalWordConverter()",
+                    _ => throw new InvalidOperationException($"Unsupported default ordinal-date converter '{converterTypeName}'.")
+                },
+                "pattern" => "new " + converterTypeName + "(new OrdinalDatePattern(" +
+                             QuoteLiteral(GetRequiredString(profile.Root, "pattern")) +
+                             ", OrdinalDateDayMode." +
+                             GetRequiredString(profile.Root, "dayMode") +
+                             "))",
+                _ => throw new InvalidOperationException($"Unsupported ordinal date engine '{profile.Engine}'.")
+            };
     }
 
 }

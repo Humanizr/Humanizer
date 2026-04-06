@@ -541,6 +541,7 @@ surfaces:
       engine: 'suffix'
       masculineSuffix: '.'
 
+
   compass:
     full:
       - 'kuzey'

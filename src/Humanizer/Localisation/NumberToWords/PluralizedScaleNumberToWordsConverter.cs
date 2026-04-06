@@ -34,7 +34,7 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
     /// <inheritdoc />
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        EnsureGenderSupported(gender);
+        EnsureGenderSupported(gender, profile.SupportsNeuter);
 
         if (input == 0)
         {
@@ -92,11 +92,11 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
 
     string ConvertLithuanianOrdinal(int input, GrammaticalGender gender)
     {
-        EnsureGenderSupported(gender);
+        EnsureGenderSupported(gender, profile.SupportsNeuter);
 
         if (input == 0)
         {
-            return gender switch
+            return NormalizeGender(gender, profile.SupportsNeuter) switch
             {
                 GrammaticalGender.Masculine => profile.ZeroOrdinalStem + "is",
                 GrammaticalGender.Feminine => profile.ZeroOrdinalStem + "ė",
@@ -218,8 +218,8 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
         return profile.UnitVariantStrategy switch
         {
             PluralizedScaleUnitVariantStrategy.None => word,
-            PluralizedScaleUnitVariantStrategy.Polish => GetPolishGenderedUnit(number, gender, hasHigherOrderParts),
-            PluralizedScaleUnitVariantStrategy.Lithuanian => GetLithuanianGenderedUnit(word, gender),
+            PluralizedScaleUnitVariantStrategy.Polish => GetPolishGenderedUnit(number, NormalizeGender(gender, profile.SupportsNeuter), hasHigherOrderParts),
+            PluralizedScaleUnitVariantStrategy.Lithuanian => GetLithuanianGenderedUnit(word, NormalizeGender(gender, profile.SupportsNeuter)),
             _ => throw new InvalidOperationException("Unknown unit variant strategy.")
         };
     }
@@ -295,20 +295,22 @@ class PluralizedScaleNumberToWordsConverter(PluralizedScaleNumberToWordsProfile 
     }
 
     string GetLithuanianOrdinalSuffix(GrammaticalGender gender) =>
-        gender switch
+        NormalizeGender(gender, profile.SupportsNeuter) switch
         {
             GrammaticalGender.Masculine => profile.MasculineOrdinalSuffix,
             GrammaticalGender.Feminine => profile.FeminineOrdinalSuffix,
             _ => throw new NotSupportedException()
         };
 
-    void EnsureGenderSupported(GrammaticalGender gender)
+    static void EnsureGenderSupported(GrammaticalGender gender, bool supportsNeuter)
     {
-        if (!profile.SupportsNeuter && gender == GrammaticalGender.Neuter)
-        {
-            throw new NotSupportedException();
-        }
+        _ = NormalizeGender(gender, supportsNeuter);
     }
+
+    static GrammaticalGender NormalizeGender(GrammaticalGender gender, bool supportsNeuter) =>
+        !supportsNeuter && gender == GrammaticalGender.Neuter
+            ? GrammaticalGender.Masculine
+            : gender;
 
     static ulong GetAbsoluteValue(long value) =>
         value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);

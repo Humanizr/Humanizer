@@ -500,3 +500,11 @@ surfaces:
       - 'ΔΒΔ'
       - 'ΒΔ'
       - 'ΒΒΔ'
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: 'ος'
+      feminineSuffix: 'η'
+      neuterSuffix: 'ο'
+      zeroAsPlainNumber: true

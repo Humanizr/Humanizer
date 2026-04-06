@@ -859,3 +859,6 @@ surfaces:
       - 'ONO'
       - 'NO'
       - 'NNO'
+
+  formatter:
+    engine: 'profiled'

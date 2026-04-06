@@ -389,3 +389,15 @@ surfaces:
       - 'غر‌ش‌غر'
       - 'ش‌غر'
       - 'ش‌ش‌غر'
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: 'م'
+      zeroAsPlainNumber: true
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'

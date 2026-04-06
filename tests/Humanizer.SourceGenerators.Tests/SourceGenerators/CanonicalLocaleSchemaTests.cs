@@ -233,6 +233,68 @@ surfaces:
     }
 
     [Fact]
+    public void CanonicalSchemaAllowsNorwegianFamilyInheritance()
+    {
+        var catalog = CreateCatalog(
+            ("nb", """
+locale: 'nb'
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'og'
+  number:
+    words:
+      engine: 'scale-strategy'
+      cardinalStrategy: 'standard'
+      ordinalStrategy: 'standard'
+      maximumValue: 2147483647
+      defaultGender: 'masculine'
+      zeroWord: 'null'
+      minusWord: 'minus'
+      oneDefault: 'en'
+      oneMasculine: 'en'
+      oneFeminine: 'ei'
+      oneNeuter: 'ett'
+      tensJoiner: ''
+      largeScaleRemainderJoiner: ''
+      exactLargeScaleOrdinalSuffix: ''
+      exactDefaultOrdinalSuffix: ''
+      tensOrdinalTrimEndCharacters: ''
+      tensOrdinalSuffix: 'ende'
+      shortOrdinalUpperBoundExclusive: 20
+      shortOrdinalTrimEndCharacters: ''
+      shortOrdinalTrimmedSuffix: ''
+      shortOrdinalSuffix: '.'
+      hundredWord: 'hundre'
+      hundredCompositeSingularWord: 'hundre'
+      thousandWord: 'tusen'
+      thousandSingularWord: 'tusen'
+      thousandCompositeSingularWord: 'tusen'
+      unitsMap: ['null', 'en']
+      tensMap: ['null', 'ti']
+      hundredUnitMap: ['null', 'ett']
+      scales: []
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        en: 1
+"""),
+            ("nn", """
+locale: 'nn'
+variantOf: 'nb'
+surfaces: {}
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var nynorsk = catalog.Locales.Single(static locale => locale.LocaleCode == "nn");
+        Assert.Equal("conjunction", nynorsk.CollectionFormatter!.Kind);
+        Assert.Equal("scale-strategy", GetRequiredString(nynorsk.NumberToWords!, "engine"));
+        Assert.Equal("token-map", GetRequiredString(nynorsk.WordsToNumber!, "engine"));
+    }
+
+    [Fact]
     public void LegacySchemaMigrationProducesCanonicalRoundTrippableYaml()
     {
         const string legacyLocale = """
@@ -393,6 +455,53 @@ surfaces:
     }
 
     [Fact]
+    public void CanonicalSchemaRejectsExplicitDefaultEngineMarkers()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  list:
+    engine: 'default'
+  number:
+    words:
+      engine: 'default'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("engine: 'default'", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CanonicalSchemaAllowsExplicitDefaultEnginesForSupportedFallbackSurfaces()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  ordinal:
+    numeric:
+      engine: 'default'
+    date:
+      engine: 'default'
+    dateOnly:
+      engine: 'default'
+  clock:
+    engine: 'default'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var locale = catalog.Locales.Single();
+        Assert.Equal("default", locale.Ordinalizer!.Kind);
+        Assert.Equal("default", locale.DateToOrdinalWords!.Kind);
+        Assert.Equal("default", locale.DateOnlyToOrdinalWords!.Kind);
+        Assert.Equal("default", locale.TimeOnlyToClockNotation!.Kind);
+    }
+
+    [Fact]
     public void SemanticDiffIgnoresEquivalentCanonicalStructureButDetectsBehaviorChanges()
     {
         const string left = """
@@ -484,6 +593,17 @@ surfaces:
     static HumanizerSourceGenerator.LocaleCatalogInput CreateCatalog(params (string LocaleCode, string FileText)[] files) =>
         HumanizerSourceGenerator.LocaleCatalogInput.Create(ImmutableArray.CreateRange(
             files.Select(static file => (HumanizerSourceGenerator.LocaleDefinitionFile?)new HumanizerSourceGenerator.LocaleDefinitionFile(file.LocaleCode, file.FileText))));
+
+    static HumanizerSourceGenerator.LocaleCatalogInput CreateCheckedInLocaleCatalog() =>
+        HumanizerSourceGenerator.LocaleCatalogInput.Create(ImmutableArray.CreateRange(
+            FindCheckedInLocaleFiles()
+                .Select(static file =>
+                {
+                    var localeCode = Path.GetFileNameWithoutExtension(file);
+                    return (HumanizerSourceGenerator.LocaleDefinitionFile?)new HumanizerSourceGenerator.LocaleDefinitionFile(
+                        localeCode,
+                        File.ReadAllText(file));
+                })));
 
     static string[] FindCheckedInLocaleFiles()
     {

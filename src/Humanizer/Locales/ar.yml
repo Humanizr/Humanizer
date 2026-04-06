@@ -526,12 +526,16 @@ surfaces:
         'كوينتليونات': 1000000000000000000
 
   ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: ''
     date:
       pattern: '{day} MMMM yyyy'
       dayMode: 'Numeric'
     dateOnly:
       pattern: '{day} MMMM yyyy'
       dayMode: 'Numeric'
+
 
   compass:
     full:

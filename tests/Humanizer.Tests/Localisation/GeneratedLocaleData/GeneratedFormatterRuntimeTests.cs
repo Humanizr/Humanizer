@@ -4,6 +4,21 @@ namespace Humanizer.Tests.Localisation;
 
 public class GeneratedFormatterRuntimeTests
 {
+    [Theory]
+    [MemberData(nameof(LocaleFormatterExactTheoryData.DateDayPluralCases), MemberType = typeof(LocaleFormatterExactTheoryData))]
+    public void GeneratedPhraseTables_PreserveExactRelativeDayPhrases(string localeName, LocaleFormatterExactTheoryData.DateDayPluralExpectationRow expected)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo(localeName));
+
+        for (var index = 0; index < LocaleFormatterExactTheoryData.DatePluralDayCounts.Length; index++)
+        {
+            var count = LocaleFormatterExactTheoryData.DatePluralDayCounts[index];
+
+            Assert.Equal(expected.PastFor(count), formatter.DateHumanize(TimeUnit.Day, Tense.Past, count));
+            Assert.Equal(expected.FutureFor(count), formatter.DateHumanize(TimeUnit.Day, Tense.Future, count));
+        }
+    }
+
     [Fact]
     public void DefaultFormatterUsesGeneratedPhraseTablesForEnglishHotPaths()
     {

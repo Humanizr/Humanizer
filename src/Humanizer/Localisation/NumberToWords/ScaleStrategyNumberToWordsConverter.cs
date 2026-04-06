@@ -44,16 +44,16 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
         };
 
     // Norwegian compounds are mostly concatenative, but large-scale spacing and exact ordinals still vary by generated suffix settings.
-    // The profile also controls how far this branch is allowed to scale; some locales stay int-
-    // bounded even though the public API accepts long.
+    // The profile still owns the lexical ceiling, but the renderer now walks the long range
+    // directly so values above Int32.MaxValue can decompose through the same scale path.
     string ConvertNorwegian(long number, GrammaticalGender gender)
     {
-        if (number is > int.MaxValue or < int.MinValue)
+        if (number == long.MinValue)
         {
             throw new NotImplementedException();
         }
 
-        return ConvertNorwegian((int)number, false, gender);
+        return ConvertNorwegian(number, false, gender);
     }
 
     string ConvertNorwegianOrdinal(int number, GrammaticalGender gender) =>
@@ -62,7 +62,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
     // The Norwegian branch is mostly concatenative. The algorithm decides segment order, while the
     // generated profile decides where spaces survive, how exact ordinals terminate, and which
     // singular forms appear for one hundred or one thousand.
-    string ConvertNorwegian(int number, bool isOrdinal, GrammaticalGender gender)
+    string ConvertNorwegian(long number, bool isOrdinal, GrammaticalGender gender)
     {
         if (number == 0)
         {
@@ -97,12 +97,12 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
         // plurality, prefixes, and exact-ordinal suffixes.
         foreach (var scale in profile.Scales)
         {
-            if (scale.Value is not (>= 1_000_000 and <= int.MaxValue))
+            if (scale.Value is not (>= 1_000_000))
             {
                 continue;
             }
 
-            var count = number / (int)scale.Value;
+            var count = number / scale.Value;
             if (count == 0)
             {
                 continue;
@@ -111,7 +111,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
             hasLargeScale = true;
             var exactOrdinal = isOrdinal && number % scale.Value == 0;
             parts.Add(FormatNorwegianLargeScale(scale, count, exactOrdinal));
-            number %= (int)scale.Value;
+            number %= scale.Value;
         }
 
         var hasThousand = false;
@@ -142,8 +142,8 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
             }
 
             parts.Add(number < 20
-                ? GetNorwegianUnitValue(number, isOrdinal)
-                : ConvertNorwegianTens(number, isOrdinal));
+                ? GetNorwegianUnitValue((int)number, isOrdinal)
+                : ConvertNorwegianTens((int)number, isOrdinal));
         }
         else if (isOrdinal)
         {
@@ -155,7 +155,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
 
     // Large-scale rows already know how their exact ordinal should look, so the algorithm only has
     // to decide whether this scale terminates the full phrase.
-    string FormatNorwegianLargeScale(ScaleStrategyScale scale, int count, bool exactOrdinal)
+    string FormatNorwegianLargeScale(ScaleStrategyScale scale, long count, bool exactOrdinal)
     {
         if (count == 1)
         {
@@ -169,14 +169,14 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
         return $"{ConvertNorwegian(count, false, scale.Gender)} {scaleName}{suffix}";
     }
 
-    string FormatNorwegianThousand(int count, bool useStandaloneSingular) =>
+    string FormatNorwegianThousand(long count, bool useStandaloneSingular) =>
         count == 1
             ? useStandaloneSingular
                 ? profile.ThousandSingularWord
                 : profile.ThousandCompositeSingularWord
             : $"{ConvertNorwegian(count, false, GrammaticalGender.Masculine)}{profile.ThousandWord}";
 
-    string FormatNorwegianHundred(int count, bool useCompositeSingular) =>
+    string FormatNorwegianHundred(long count, bool useCompositeSingular) =>
         count == 1
             ? useCompositeSingular
                 ? profile.HundredCompositeSingularWord
@@ -227,12 +227,12 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
     // The profile's maximum value is still authoritative for the supported range.
     string ConvertSwedish(long number, GrammaticalGender gender)
     {
-        if (number is > int.MaxValue or < int.MinValue)
+        if (number == long.MinValue)
         {
             throw new NotImplementedException();
         }
 
-        return ConvertSwedish((int)number, false, gender);
+        return ConvertSwedish(number, false, gender);
     }
 
     string ConvertSwedishOrdinal(int number, GrammaticalGender gender) =>
@@ -241,7 +241,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
     // Exact scale ordinals, plural suffixes, and spacing all come from the generated scale array.
     // The method's job is to determine which scale row terminates the phrase and whether the final
     // under-hundred segment stays cardinal or becomes ordinal.
-    string ConvertSwedish(int number, bool isOrdinal, GrammaticalGender gender)
+    string ConvertSwedish(long number, bool isOrdinal, GrammaticalGender gender)
     {
         if (number == 0)
         {
@@ -262,7 +262,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
         // exact-ordinal termination.
         foreach (var scale in profile.Scales)
         {
-            var divided = number / (int)scale.Value;
+            var divided = number / scale.Value;
             if (divided <= 0)
             {
                 continue;
@@ -284,7 +284,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
                 word.Append(scale.PluralSuffix);
             }
 
-            number %= (int)scale.Value;
+            number %= scale.Value;
 
             if (number == 0 && isOrdinal)
             {
@@ -303,7 +303,7 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
             return word.ToString();
         }
 
-        if (isOrdinal && profile.OrdinalExceptions.TryGetValue(number, out var exactOrdinal))
+        if (isOrdinal && number <= int.MaxValue && profile.OrdinalExceptions.TryGetValue((int)number, out var exactOrdinal))
         {
             word.Append(exactOrdinal);
             return word.ToString();
@@ -311,17 +311,17 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
 
         if (number < 20)
         {
-            word.Append(GetSwedishUnit(number, gender));
+            word.Append(GetSwedishUnit((int)number, gender));
             return word.ToString();
         }
 
-        var tens = profile.TensMap[number / 10];
-        var unit = number % 10;
+        var tens = profile.TensMap[(int)(number / 10)];
+        var unit = (int)(number % 10);
         if (unit == 0)
         {
             if (isOrdinal)
             {
-                if (profile.OrdinalExceptions.TryGetValue(number, out var exactTensOrdinal))
+                if (profile.OrdinalExceptions.TryGetValue((int)number, out var exactTensOrdinal))
                 {
                     word.Append(exactTensOrdinal);
                 }

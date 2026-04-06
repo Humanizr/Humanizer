@@ -11,6 +11,10 @@ namespace Humanizer;
 /// </remarks>
 class DefaultDateOnlyToOrdinalWordConverter : IDateOnlyToOrdinalWordConverter
 {
+    const char leftToRightMark = (char)0x200E;
+    const char rightToLeftMark = (char)0x200F;
+    const char arabicLetterMark = (char)0x061C;
+
     /// <summary>
     /// Converts the given date using the default ordinal-date rules for the current culture.
     /// </summary>
@@ -42,9 +46,9 @@ class DefaultDateOnlyToOrdinalWordConverter : IDateOnlyToOrdinalWordConverter
         Convert(date);
 
     static string SanitizeNonEnglishDate(string value) =>
-        value.Replace("\u200e", string.Empty)
-            .Replace("\u200f", string.Empty)
-            .Replace("\u061c", string.Empty);
+        value.Replace(leftToRightMark.ToString(), string.Empty)
+            .Replace(rightToLeftMark.ToString(), string.Empty)
+            .Replace(arabicLetterMark.ToString(), string.Empty);
 }
 
 #endif

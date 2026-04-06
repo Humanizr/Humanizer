@@ -434,6 +434,11 @@ surfaces:
         'מיליארד': 1000000000
         'מיליארדים': 1000000000
 
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: ''
+
   compass:
     full:
       - 'צפון'

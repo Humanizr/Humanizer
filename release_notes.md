@@ -50,6 +50,7 @@
 # vNext
 
 - Locale data now comes from checked-in YAML under `src/Humanizer/Locales` and is generated into the main `Humanizer` package.
+- All shipped locales now intentionally resolve the canonical localization surfaces, either locale-owned or through same-language `variantOf` inheritance.
 - High-range number support now includes locale-native `ToWords(long)` and `ToNumber(string)` coverage for supported locales, including English-family differences such as `en-GB` and `en-IN`.
 - The analyzer and namespace migration guidance now matches the bundled single-package layout.
 - `WordsToNumberExtension.ToNumber` and `IWordsToNumberConverter.Convert` now return `long` so high-range parsing can round-trip with the new locale data. This is a source-breaking change for code that stored the result in `int` or implemented the old converter contract directly.

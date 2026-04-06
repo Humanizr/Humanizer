@@ -101,6 +101,8 @@ public sealed partial class HumanizerSourceGenerator
                     throw new InvalidOperationException(
                         $"Locale '{localeCode}.surfaces.{surface.Key}' must be a mapping.");
                 }
+
+                RejectExplicitDefaultEngines(localeCode, $"surfaces.{surface.Key}", surface.Value);
             }
 
             return new CanonicalLocaleDocument(
@@ -246,6 +248,47 @@ public sealed partial class HumanizerSourceGenerator
             var normalized = value.Replace("\r\n", "\n");
             normalized = normalized.TrimEnd('\n') + "\n";
             return normalized;
+        }
+
+        static readonly HashSet<string> explicitDefaultEnginePaths = new(StringComparer.Ordinal)
+        {
+            "surfaces.ordinal.numeric",
+            "surfaces.ordinal.date",
+            "surfaces.ordinal.dateOnly",
+            "surfaces.clock"
+        };
+
+        static void RejectExplicitDefaultEngines(string localeCode, string path, SimpleYamlValue value)
+        {
+            switch (value)
+            {
+                case SimpleYamlMapping mapping:
+                    if (string.Equals(mapping.GetScalar("engine"), "default", StringComparison.Ordinal))
+                    {
+                        if (explicitDefaultEnginePaths.Contains(path))
+                        {
+                            return;
+                        }
+
+                        throw new InvalidOperationException(
+                            $"Locale '{localeCode}.{path}' must omit the block instead of declaring engine: 'default'.");
+                    }
+
+                    foreach (var entry in mapping.Values)
+                    {
+                        RejectExplicitDefaultEngines(localeCode, $"{path}.{entry.Key}", entry.Value);
+                    }
+
+                    break;
+
+                case SimpleYamlSequence sequence:
+                    for (var index = 0; index < sequence.Items.Length; index++)
+                    {
+                        RejectExplicitDefaultEngines(localeCode, $"{path}[{index}]", sequence.Items[index]);
+                    }
+
+                    break;
+            }
         }
 
         static SimpleYamlMapping NormalizeListSurface(string localeCode, SimpleYamlMapping mapping)

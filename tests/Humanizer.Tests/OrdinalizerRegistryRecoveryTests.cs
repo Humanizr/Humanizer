@@ -12,10 +12,19 @@ public class OrdinalizerRegistryRecoveryTests
     public void RecoveredLocalesOrdinalizeUsingTheirLocaleSpecificRules(string cultureName, int number, string expected) =>
         Assert.Equal(expected, number.Ordinalize(new CultureInfo(cultureName)));
 
+    [Fact]
+    public void ExplicitNumericOrdinalLocalesAreRegistered()
+    {
+        var locales = new OrdinalizerRegistry().GetRegisteredLocaleCodes();
+
+        Assert.Contains("ar", locales);
+        Assert.Contains("he", locales);
+        Assert.Contains("mt", locales);
+        Assert.Contains("zu-ZA", locales);
+    }
+
     [Theory]
-    [InlineData("ar", 1, "1")]
-    [InlineData("ja-JP", 2, "2")]
-    [InlineData("zh-Hans", 3, "3")]
+    [InlineData("eo", 1, "1")]
     public void LocalesWithoutOrdinalizerEntriesUseTheRegistryDefault(string cultureName, int number, string expected) =>
         Assert.Equal(expected, number.Ordinalize(new CultureInfo(cultureName)));
 }

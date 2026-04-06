@@ -45,9 +45,13 @@ public partial class HumanizerSourceGeneratorTests
 
         Assert.Contains("registry.Register(\"en\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
         Assert.Contains("registry.Register(\"af\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"ar\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
         Assert.Contains("registry.Register(\"fr\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
         Assert.Contains("registry.Register(\"de\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
         Assert.Contains("registry.Register(\"es\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"he\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"mt\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("registry.Register(\"zu-ZA\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
 
         Assert.Contains("new ModuloSuffixOrdinalizer(", catalogSource);
         Assert.Contains("new TemplateOrdinalizer(", catalogSource);
@@ -64,6 +68,46 @@ public partial class HumanizerSourceGeneratorTests
         Assert.Contains("new GermanTimeOnlyToClockNotationConverter()", source);
         Assert.Contains("new LuxembourgishTimeOnlyToClockNotationConverter()", source);
         Assert.DoesNotContain("TryResolveCustom", source);
+    }
+
+    [Fact]
+    public void ChildDatePatternsOverrideInheritedDefaultDateConverters()
+    {
+        const string baseLocale = """
+locale: 'zz-base'
+surfaces: {}
+""";
+
+        const string childLocale = """
+locale: 'zz-child'
+variantOf: 'zz-base'
+surfaces:
+  ordinal:
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Ordinal'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'OrdinalWhenDayIsOne'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-base.yml", baseLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-child.yml", childLocale));
+
+        var dateRegistry = GetGeneratedSource(runResult, "DateToOrdinalWordsConverterRegistryRegistrations.g.cs");
+        var dateOnlyRegistry = GetGeneratedSource(runResult, "DateOnlyToOrdinalWordsConverterRegistryRegistrations.g.cs");
+        var dateCatalog = GetGeneratedSource(runResult, "OrdinalDateProfileCatalog.DateTo.g.cs");
+        var dateOnlyCatalog = GetGeneratedSource(runResult, "OrdinalDateProfileCatalog.DateOnly.g.cs");
+
+        Assert.DoesNotContain("registry.Register(\"zz-base\"", dateRegistry);
+        Assert.DoesNotContain("registry.Register(\"zz-base\"", dateOnlyRegistry);
+        Assert.Contains("registry.Register(\"zz-child\", culture => DateToOrdinalWordsProfileCatalog.Resolve(", dateRegistry);
+        Assert.Contains("registry.Register(\"zz-child\", culture => DateOnlyToOrdinalWordsProfileCatalog.Resolve(", dateOnlyRegistry);
+        Assert.Contains("{day} MMMM yyyy", dateCatalog);
+        Assert.Contains("OrdinalDateDayMode.Ordinal", dateCatalog);
+        Assert.Contains("{day} MMMM yyyy", dateOnlyCatalog);
+        Assert.Contains("OrdinalDateDayMode.OrdinalWhenDayIsOne", dateOnlyCatalog);
     }
 
     [Fact]
@@ -753,6 +797,10 @@ numberToWords:
     singular: 'million'
     paucal: 'millions'
     plural: 'millions-many'
+  trillions:
+    singular: 'trillion'
+    paucal: 'trillions'
+    plural: 'trillions-many'
   billions:
     singular: 'billion'
     paucal: 'billions'
@@ -1130,7 +1178,8 @@ numberToWords:
     - 'zero'
     - 'ten'
     - 'twenty'
-  hundredUnitMap: []
+  hundredUnitMap:
+    - 'zero'
   scales:
     -
       value: 1000
@@ -1262,6 +1311,13 @@ wordsToNumber:
         generatedSources.Value.TryGetValue(hintName, out var source)
             ? source
             : throw new Xunit.Sdk.XunitException($"Generated source '{hintName}' was not found.");
+
+    static string GetGeneratedSource(GeneratorDriverRunResult runResult, string hintName) =>
+        runResult.Results
+            .SelectMany(static result => result.GeneratedSources)
+            .Single(source => source.HintName == hintName)
+            .SourceText
+            .ToString();
 
     static int CountOccurrences(string source, string value)
     {

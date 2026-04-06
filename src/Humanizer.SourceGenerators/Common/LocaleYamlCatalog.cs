@@ -493,6 +493,11 @@ public sealed partial class HumanizerSourceGenerator
 
         static string GetLanguageFamily(string localeCode)
         {
+            if (localeCode is "nb" or "nn" or "no")
+            {
+                return "no";
+            }
+
             var separatorIndex = localeCode.IndexOf('-');
             return separatorIndex >= 0
                 ? localeCode.Substring(0, separatorIndex)
@@ -733,6 +738,23 @@ public sealed partial class HumanizerSourceGenerator
                 string.Equals(mapping.GetScalar("engine"), "token-map", StringComparison.Ordinal))
             {
                 return new LocaleFeature(localeCode, featureName, "lexicon", localeCode, null, ToJsonElement(NormalizeFeatureReferences(localeCode, featureName, mapping)), false);
+            }
+
+            if (featureName is "dateToOrdinalWords" or "dateOnlyToOrdinalWords" &&
+                string.Equals(mapping.GetScalar("engine"), "default", StringComparison.Ordinal) &&
+                mapping.GetScalar("pattern") is not null)
+            {
+                var values = mapping.Values.SetItem("engine", new SimpleYamlScalar("pattern", isQuoted: true));
+                mapping = new SimpleYamlMapping(values);
+            }
+
+            if (featureName is "formatter" or "ordinalizer" or "dateToOrdinalWords" or "dateOnlyToOrdinalWords" or "timeOnlyToClockNotation")
+            {
+                var engine = mapping.GetScalar("engine");
+                if (string.Equals(engine, "default", StringComparison.Ordinal))
+                {
+                    return new LocaleFeature(localeCode, featureName, "default", null, null, default, false);
+                }
             }
 
             var normalizedMapping = NormalizeFeatureReferences(localeCode, featureName, mapping);

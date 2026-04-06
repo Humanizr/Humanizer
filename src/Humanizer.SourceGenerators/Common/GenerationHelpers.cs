@@ -50,13 +50,19 @@ public sealed partial class HumanizerSourceGenerator
             };
 
         static string? CreateDateOnlyToOrdinalWords(string profile) =>
-            "DateOnlyToOrdinalWordsProfileCatalog.Resolve(" + Quote(profile) + ")";
+            profile == "default"
+                ? "new DefaultDateOnlyToOrdinalWordConverter()"
+                : "DateOnlyToOrdinalWordsProfileCatalog.Resolve(" + Quote(profile) + ")";
 
         static string? CreateDateToOrdinalWords(string profile) =>
-            "DateToOrdinalWordsProfileCatalog.Resolve(" + Quote(profile) + ")";
+            profile == "default"
+                ? "new DefaultDateToOrdinalWordConverter()"
+                : "DateToOrdinalWordsProfileCatalog.Resolve(" + Quote(profile) + ")";
 
         static string? CreateFormatter(string profile, ImmutableHashSet<string> dataBackedFormatterProfiles) =>
-            dataBackedFormatterProfiles.Contains(profile)
+            profile == "default"
+                ? "new DefaultFormatter(culture)"
+                : dataBackedFormatterProfiles.Contains(profile)
                 ? "FormatterProfileCatalog.Resolve(" + Quote(profile) + ", culture)"
                 : "new " + CreateTypeName(profile, "Formatter") + "(culture)";
 
@@ -64,12 +70,16 @@ public sealed partial class HumanizerSourceGenerator
             "NumberToWordsProfileCatalog.Resolve(" + Quote(profile) + ", culture)";
 
         static string? CreateOrdinalizer(string profile, ImmutableHashSet<string> dataBackedOrdinalizerProfiles) =>
-            dataBackedOrdinalizerProfiles.Contains(profile)
+            profile == "default"
+                ? "new DefaultOrdinalizer()"
+                : dataBackedOrdinalizerProfiles.Contains(profile)
                 ? "OrdinalizerProfileCatalog.Resolve(" + Quote(profile) + ", culture)"
                 : "new " + ToEnumMemberName(profile) + "Ordinalizer()";
 
         static string? CreateTimeOnlyToClockNotation(string profile) =>
-            "TimeOnlyToClockNotationProfileCatalog.Resolve(" + Quote(profile) + ")";
+            profile == "default"
+                ? "new DefaultTimeOnlyToClockNotationConverter(culture)"
+                : "TimeOnlyToClockNotationProfileCatalog.Resolve(" + Quote(profile) + ")";
 
         static string? CreateWordsToNumber(string profile, string? argument) =>
             profile switch

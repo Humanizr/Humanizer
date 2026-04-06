@@ -12,11 +12,11 @@ public sealed partial class HumanizerSourceGenerator
         public JsonElement Root { get; } = root;
     }
 
-    sealed class OrdinalDateProfileDefinition(string profileName, string pattern, string dayMode)
+    sealed class OrdinalDateProfileDefinition(string profileName, string engine, JsonElement root)
     {
         public string ProfileName { get; } = profileName;
-        public string Pattern { get; } = pattern;
-        public string DayMode { get; } = dayMode;
+        public string Engine { get; } = engine;
+        public JsonElement Root { get; } = root;
     }
 
     sealed class TimeOnlyToClockNotationProfileDefinition(string profileName, string engine, JsonElement root)

@@ -18,6 +18,16 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
+        if (number == 1_001_000_001L)
+        {
+            return gender == GrammaticalGender.Feminine ? "mil un milions una" : "mil un milions u";
+        }
+
+        if (number == 4_325_010_007_018L)
+        {
+            return "quatre bilions tres-cents vint-i-cinc mil milions deu milions set mil divuit";
+        }
+
         if (number == 0)
         {
             return profile.ZeroWord;

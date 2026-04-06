@@ -372,6 +372,7 @@ surfaces:
         exactReplacements:
           1: 'primul'
 
+
   compass:
     full:
       - 'nord'

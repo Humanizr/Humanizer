@@ -436,6 +436,7 @@ surfaces:
         2: 'nd'
         3: 'rd'
 
+
   compass:
     full:
       - 'north'
@@ -471,3 +472,6 @@ surfaces:
       - 'WNW'
       - 'NW'
       - 'NNW'
+
+  formatter:
+    engine: 'profiled'

@@ -322,6 +322,7 @@ surfaces:
       engine: 'suffix'
       masculineSuffix: '-чи'
 
+
   compass:
     full:
       - 'шимол'

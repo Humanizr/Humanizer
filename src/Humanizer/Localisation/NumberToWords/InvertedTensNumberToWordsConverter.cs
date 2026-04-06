@@ -28,6 +28,9 @@ class InvertedTensNumberToWordsConverter(InvertedTensNumberToWordsProfile profil
 
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number) =>
+        number == 1 && profile.UnitsMap[1] == "en" && profile.TensMap[2] == "tyve"
+            ? "første"
+            :
         profile.OrdinalMode switch
         {
             InvertedTensOrdinalMode.NumericString => number.ToString(CultureInfo.InvariantCulture),

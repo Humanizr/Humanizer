@@ -342,3 +342,10 @@ surfaces:
       - 'BBL'
       - 'BL'
       - 'UBL'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'ke-'
+        defaultSuffix: ''

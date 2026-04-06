@@ -372,3 +372,9 @@ surfaces:
       - '서북서'
       - '북서'
       - '북북서'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: '번째'

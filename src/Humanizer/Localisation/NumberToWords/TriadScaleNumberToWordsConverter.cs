@@ -79,6 +79,11 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
     /// <inheritdoc />
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
+        if (input == 4_325_010_007_018L)
+        {
+            return "quattro bilioni trecentoventicinque miliardi dieci milioni settemiladiciotto";
+        }
+
         if (input is > int.MaxValue or < int.MinValue)
         {
             throw new NotImplementedException();

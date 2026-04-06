@@ -475,6 +475,11 @@ surfaces:
         - 'u'
       useHundredMultiplier: true
 
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: ''
+
   compass:
     full:
       - 'tramuntana'
