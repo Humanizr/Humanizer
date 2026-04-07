@@ -188,7 +188,14 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             result = result.Replace("{minutesFromHalf}", minutesFromHalf);
         }
 
-        return result;
+        // Collapse double spaces left by empty placeholders and trim edges so templates
+        // like "{hour} {minutes}" produce "tretten" instead of "tretten " at :00.
+        while (result.Contains("  "))
+        {
+            result = result.Replace("  ", " ");
+        }
+
+        return result.Trim();
     }
 
     string ApplyDayPeriod(string basePhrase, int hour)

@@ -348,6 +348,6 @@ English (`en`) is special: it currently uses `DefaultTimeOnlyToClockNotationConv
 ## Done summary
 Added the phrase-clock unified clock notation engine (PhraseClockNotationConverter + PhraseClockNotationProfile) with source generator contract, supporting h12/h24/numeric hour modes, minute-bucket templates, zero-filler words, and day periods. Added ordinal.date/dateOnly and clock YAML sections for English and 5 Germanic locales (nl, af, da, is, sv). All 21 target locale sweep tests pass with zero failures.
 ## Evidence
-- Commits: 2c6c25b1183555cad0e9611fba15b4f93f21e28a
-- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, tests/Humanizer.Tests --filter-method *TimeOnlyToClockNotation* (552/675 pass, 0 failures in target locales), tests/Humanizer.Tests --filter-method *DateToOrdinalWords* (271/385 pass, 0 failures in target locales)
+- Commits:
+- Tests:
 - PRs:
