@@ -11,7 +11,7 @@ These instructions apply to the entire repository.
 - Primary language: C# (modern features).
 - Target frameworks: .NET 8.0, .NET 10.0, and .NET Framework 4.8.
 - Tests use xUnit and should live alongside similar tests in `tests/Humanizer.Tests`.
-- Build with the .NET CLI (`dotnet`). Prefer the latest SDK (see install script in `.github/copilot-instructions.md`).
+- Build with the .NET CLI (`dotnet`). Prefer the latest SDK.
 
 ## Coding Guidelines
 - Respect `.editorconfig`; use spaces, 4-space indentation, and file-scoped namespaces.
@@ -72,7 +72,7 @@ This project uses Flow-Next for task tracking. Use `.flow/bin/flowctl` instead o
 
 **Creating a spec** ("create a spec", "spec out X", "write a spec for X"):
 
-A spec = an epic. Create one directly — do NOT use `/flow-next:plan` (that breaks specs into tasks).
+A spec = an epic. Create one directly — do NOT use `$flow-next-plan` (that breaks specs into tasks).
 
 ```bash
 .flow/bin/flowctl epic create --title "Short title" --json
@@ -104,8 +104,8 @@ EOF
 ```
 
 After creating a spec, choose next step:
-- `/flow-next:plan <epic-id>` — research + break into tasks
-- `/flow-next:interview <epic-id>` — deep Q&A to refine the spec
+- `$flow-next-plan <epic-id>` — research + break into tasks
+- `$flow-next-interview <epic-id>` — deep Q&A to refine the spec
 
 **Rules:**
 - Use `.flow/bin/flowctl` for ALL task tracking
