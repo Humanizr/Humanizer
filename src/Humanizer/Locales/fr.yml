@@ -370,7 +370,18 @@ surfaces:
       dayMode: 'OrdinalWhenDayIsOne'
 
   clock:
-    engine: 'french'
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
+    midnight: 'minuit'
+    midday: 'midi'
+    hourZeroWord: 'minuit'
+    hourTwelveWord: 'midi'
+    hourSuffixSingular: 'heure'
+    hourSuffixPlural: 'heures'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes}'
 
   compass:
     full:

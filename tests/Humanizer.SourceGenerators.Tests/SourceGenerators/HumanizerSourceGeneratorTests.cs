@@ -64,9 +64,10 @@ public partial class HumanizerSourceGeneratorTests
     {
         var source = GetGeneratedSource("TimeOnlyToClockNotationProfileCatalog.g.cs");
 
-        Assert.Contains("new FrenchTimeOnlyToClockNotationConverter()", source);
-        Assert.Contains("new GermanTimeOnlyToClockNotationConverter()", source);
-        Assert.Contains("new LuxembourgishTimeOnlyToClockNotationConverter()", source);
+        Assert.Contains("new PhraseClockNotationConverter(", source);
+        Assert.DoesNotContain("new FrenchTimeOnlyToClockNotationConverter()", source);
+        Assert.DoesNotContain("new GermanTimeOnlyToClockNotationConverter()", source);
+        Assert.DoesNotContain("new LuxembourgishTimeOnlyToClockNotationConverter()", source);
         Assert.DoesNotContain("TryResolveCustom", source);
     }
 

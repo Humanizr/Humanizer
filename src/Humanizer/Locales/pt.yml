@@ -810,19 +810,28 @@ surfaces:
       neuterSuffix: 'º'
       zeroAsPlainNumber: true
 
+    date:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'Numeric'
+
   clock:
-    engine: 'phrase-hour'
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
     midnight: 'meia-noite'
     midday: 'meio-dia'
-    oclockFormat: '{0} horas'
-    quarterPastFormat: '{0} e um quarto'
-    halfPastFormat: '{0} e meia'
-    twentyToFormat: '{0} menos vinte'
-    quarterToFormat: '{0} menos um quarto'
-    tenToFormat: '{0} menos dez'
-    fiveToFormat: '{0} menos cinco'
-    roundHourFormat: '{0} horas'
-    genericMinutesFormat: '{0} e {1}'
+    min0: '{hour} horas'
+    min15: '{hour} e um quarto'
+    min30: '{hour} e meia'
+    min40: '{nextHour} menos vinte'
+    min45: '{nextHour} menos um quarto'
+    min50: '{nextHour} menos dez'
+    min55: '{nextHour} menos cinco'
+    defaultTemplate: '{hour} e {minutes}'
 
   compass:
     full:

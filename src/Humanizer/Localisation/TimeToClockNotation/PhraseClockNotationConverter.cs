@@ -4,7 +4,8 @@ namespace Humanizer;
 
 /// <summary>
 /// Provides clock notation using a unified phrase-based profile that covers all locale patterns
-/// through YAML-driven configuration: bucket phrases, hour modes, day periods, and zero-filler words.
+/// through YAML-driven configuration: bucket phrases, hour modes, day periods, range templates,
+/// hour/minute suffixes, article selection, and Eifeler rule post-processing.
 /// </summary>
 class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOnlyToClockNotationConverter
 {
@@ -44,8 +45,8 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return profile.Midday;
         }
 
-        var hourWords = ResolveHourWords(hour);
-        var nextHourWords = ResolveHourWords(hour + 1);
+        var hourWords = ResolveHourExpression(hour);
+        var nextHourWords = ResolveHourExpression(hour + 1);
         var rawMinuteWords = ResolveMinuteWords(normalizedMinutes);
 
         // When a zero-filler is configured and minutes are 1-9, prepend the filler word
@@ -70,24 +71,39 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             halfMinuteWords = "";
         }
 
+        // Resolve the article for locales that have singular/plural articles (ca, es).
+        var article = ResolveArticle(hour);
+        var nextArticle = ResolveArticle(hour + 1);
+
+        // Resolve minute suffix for range templates (Lb "Minutt"/"Minutten").
+        var minuteSuffix = ResolveMinuteSuffix(normalizedMinutes);
+
         // Check minute-bucket template first (exact 5-minute intervals).
         var template = GetBucketTemplate(normalizedMinutes);
         if (template.Length > 0)
         {
-            var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords);
-            return ApplyDayPeriod(result, hour);
+            var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
+            return ApplyDayPeriod(result, hour, normalizedMinutes);
+        }
+
+        // Try range-based templates for non-bucketed minutes.
+        var rangeTemplate = GetRangeTemplate(normalizedMinutes);
+        if (rangeTemplate.Length > 0)
+        {
+            var result = ExpandTemplate(rangeTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
+            return ApplyDayPeriod(result, hour, normalizedMinutes);
         }
 
         // Fall to default template.
         if (profile.DefaultTemplate.Length > 0)
         {
-            var result = ExpandTemplate(profile.DefaultTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords);
-            return ApplyDayPeriod(result, hour);
+            var result = ExpandTemplate(profile.DefaultTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
+            return ApplyDayPeriod(result, hour, normalizedMinutes);
         }
 
         // Absolute fallback: "{hour} {minutes}".
         var fallback = minuteWords.Length > 0 ? hourWords + " " + minuteWords : hourWords;
-        return ApplyDayPeriod(fallback, hour);
+        return ApplyDayPeriod(fallback, hour, normalizedMinutes);
     }
 
     int ResolveHourValue(int hour)
@@ -101,33 +117,60 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         };
     }
 
-    string ResolveHourWords(int rawHour)
+    string ResolveHourExpression(int rawHour)
     {
         var hourValue = ResolveHourValue(rawHour);
 
-        if (profile.HourMode == PhraseClockHourMode.Numeric)
+        // Check for fixed hour-word overrides (e.g., French "minuit" for 0, "midi" for 12).
+        if (hourValue == 0 && profile.HourZeroWord.Length > 0)
         {
-            return hourValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return profile.HourZeroWord;
         }
 
-        return profile.HourGender switch
+        if (hourValue == 12 && profile.HourTwelveWord.Length > 0)
         {
-            GrammaticalGender.Feminine => hourValue.ToWords(GrammaticalGender.Feminine),
-            GrammaticalGender.Neuter => hourValue.ToWords(GrammaticalGender.Neuter),
-            _ => hourValue.ToWords()
-        };
+            return profile.HourTwelveWord;
+        }
+
+        string baseWord;
+        if (profile.HourMode == PhraseClockHourMode.Numeric)
+        {
+            baseWord = hourValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        }
+        else
+        {
+            baseWord = profile.HourGender switch
+            {
+                GrammaticalGender.Feminine => hourValue.ToWords(GrammaticalGender.Feminine),
+                GrammaticalGender.Neuter => hourValue.ToWords(GrammaticalGender.Neuter),
+                _ => hourValue.ToWords()
+            };
+        }
+
+        // Apply hour suffix (singular/plural variants for locales like French).
+        if (profile.HourSuffixSingular.Length > 0 || profile.HourSuffixPlural.Length > 0)
+        {
+            var suffix = hourValue == 1 && profile.HourSuffixSingular.Length > 0
+                ? profile.HourSuffixSingular
+                : profile.HourSuffixPlural;
+            return baseWord + " " + suffix;
+        }
+
+        return baseWord;
     }
 
     string ResolveMinuteWords(int minutes)
     {
-        if (minutes == 0)
-        {
-            return "";
-        }
-
+        // In numeric mode, always produce a digit string -- even for zero -- so templates
+        // like "{hour}時{minutes}分" correctly expand to "0時0分".
         if (profile.HourMode == PhraseClockHourMode.Numeric)
         {
             return minutes.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        if (minutes == 0)
+        {
+            return "";
         }
 
         return profile.MinuteGender switch
@@ -136,6 +179,59 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             GrammaticalGender.Neuter => minutes.ToWords(GrammaticalGender.Neuter),
             _ => minutes.ToWords()
         };
+    }
+
+    string ResolveArticle(int rawHour)
+    {
+        if (profile.SingularArticle.Length == 0 && profile.PluralArticle.Length == 0)
+        {
+            return "";
+        }
+
+        var hourValue = ResolveHourValue(rawHour);
+        return hourValue == 1 ? profile.SingularArticle : profile.PluralArticle;
+    }
+
+    /// <summary>
+    /// Resolves the minute suffix based on the relevant minute count for the current range.
+    /// The count matches the minute value used in the range template: minutes for pastHour,
+    /// minutesFromHalf for beforeHalf/afterHalf, minutesReverse for beforeNext.
+    /// For Lb: "Minutt" (singular) when count == 1, "Minutten" (plural) otherwise.
+    /// </summary>
+    string ResolveMinuteSuffix(int normalizedMinutes)
+    {
+        if (profile.MinuteSuffixSingular.Length == 0 && profile.MinuteSuffixPlural.Length == 0)
+        {
+            return "";
+        }
+
+        // Determine the relevant count based on the minute range, matching GetRangeTemplate.
+        int relevantCount;
+        if (normalizedMinutes is > 0 and < 25)
+        {
+            relevantCount = normalizedMinutes;
+        }
+        else if (normalizedMinutes is > 25 and < 30)
+        {
+            relevantCount = 30 - normalizedMinutes;
+        }
+        else if (normalizedMinutes is > 30 and < 35)
+        {
+            relevantCount = normalizedMinutes - 30;
+        }
+        else if (normalizedMinutes is > 35 and < 60)
+        {
+            relevantCount = 60 - normalizedMinutes;
+        }
+        else
+        {
+            // Bucket positions (0, 5, 10, ..., 55) — suffix not typically used but default to plural.
+            relevantCount = normalizedMinutes;
+        }
+
+        return relevantCount == 1 && profile.MinuteSuffixSingular.Length > 0
+            ? profile.MinuteSuffixSingular
+            : profile.MinuteSuffixPlural;
     }
 
     string GetBucketTemplate(int minutes)
@@ -158,35 +254,50 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         };
     }
 
-    static string ExpandTemplate(
+    string GetRangeTemplate(int minutes)
+    {
+        // Range boundaries are aligned with the 5-minute bucket positions so that
+        // range templates fill the gaps between buckets rather than overlapping them.
+        return minutes switch
+        {
+            > 0 and < 25 when profile.PastHourTemplate.Length > 0 => profile.PastHourTemplate,
+            > 25 and < 30 when profile.BeforeHalfTemplate.Length > 0 => profile.BeforeHalfTemplate,
+            > 30 and < 35 when profile.AfterHalfTemplate.Length > 0 => profile.AfterHalfTemplate,
+            > 35 and < 60 when profile.BeforeNextTemplate.Length > 0 => profile.BeforeNextTemplate,
+            _ => ""
+        };
+    }
+
+    string ExpandTemplate(
         string template, string hour, string nextHour,
-        string minutes, string minutesReverse, string minutesFromHalf)
+        string minutes, string minutesReverse, string minutesFromHalf,
+        string article, string nextArticle, string minuteSuffix)
     {
         var result = template;
-        if (result.Contains("{hour}"))
+
+        // First pass: replace non-number placeholders so the Eifeler rule can see
+        // the resolved suffix and article words when processing number placeholders.
+        if (result.Contains("{article}"))
         {
-            result = result.Replace("{hour}", hour);
+            result = result.Replace("{article}", article);
         }
 
-        if (result.Contains("{nextHour}"))
+        if (result.Contains("{nextArticle}"))
         {
-            result = result.Replace("{nextHour}", nextHour);
+            result = result.Replace("{nextArticle}", nextArticle);
         }
 
-        if (result.Contains("{minutes}"))
+        if (result.Contains("{minuteSuffix}"))
         {
-            result = result.Replace("{minutes}", minutes);
+            result = result.Replace("{minuteSuffix}", minuteSuffix);
         }
 
-        if (result.Contains("{minutesReverse}"))
-        {
-            result = result.Replace("{minutesReverse}", minutesReverse);
-        }
-
-        if (result.Contains("{minutesFromHalf}"))
-        {
-            result = result.Replace("{minutesFromHalf}", minutesFromHalf);
-        }
+        // Second pass: replace number placeholders with Eifeler awareness.
+        result = ReplaceNumberPlaceholder(result, "{hour}", hour);
+        result = ReplaceNumberPlaceholder(result, "{nextHour}", nextHour);
+        result = ReplaceNumberPlaceholder(result, "{minutes}", minutes);
+        result = ReplaceNumberPlaceholder(result, "{minutesReverse}", minutesReverse);
+        result = ReplaceNumberPlaceholder(result, "{minutesFromHalf}", minutesFromHalf);
 
         // Collapse double spaces left by empty placeholders and trim edges so templates
         // like "{hour} {minutes}" produce "tretten" instead of "tretten " at :00.
@@ -198,7 +309,86 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         return result.Trim();
     }
 
-    string ApplyDayPeriod(string basePhrase, int hour)
+    /// <summary>
+    /// Replaces a number-word placeholder, applying the Eifeler rule when enabled.
+    /// The rule trims trailing 'n' from the last word of the resolved number value
+    /// when the first word immediately after it starts with a non-blocking character.
+    /// </summary>
+    string ReplaceNumberPlaceholder(string template, string placeholder, string value)
+    {
+        var index = template.IndexOf(placeholder, StringComparison.Ordinal);
+        if (index < 0)
+        {
+            return template;
+        }
+
+        var resolvedValue = value;
+        if (profile.ApplyEifelerRule && resolvedValue.Length > 0)
+        {
+            // Find the first word after the placeholder in the (partially expanded) template.
+            var afterIndex = index + placeholder.Length;
+            var nextWord = ExtractNextLiteralWord(template, afterIndex);
+            if (nextWord.Length > 0)
+            {
+                // Apply the Eifeler rule to the last word of the resolved number value.
+                var lastSpace = resolvedValue.LastIndexOf(' ');
+                if (lastSpace >= 0)
+                {
+                    var lastWord = resolvedValue[(lastSpace + 1)..];
+                    var eifeled = EifelerRule.ApplyIfNeeded(lastWord, nextWord);
+                    resolvedValue = resolvedValue[..(lastSpace + 1)] + eifeled;
+                }
+                else
+                {
+                    resolvedValue = EifelerRule.ApplyIfNeeded(resolvedValue, nextWord);
+                }
+            }
+        }
+
+        return template.Replace(placeholder, resolvedValue);
+    }
+
+    /// <summary>
+    /// Extracts the first literal word after the given position in the template.
+    /// Skips spaces and any remaining placeholders (curly-brace tokens).
+    /// </summary>
+    static string ExtractNextLiteralWord(string template, int startIndex)
+    {
+        var i = startIndex;
+        // Skip leading spaces.
+        while (i < template.Length && template[i] == ' ')
+        {
+            i++;
+        }
+
+        if (i >= template.Length)
+        {
+            return "";
+        }
+
+        // If we hit a remaining placeholder, skip it and try the next word.
+        if (template[i] == '{')
+        {
+            var closeBrace = template.IndexOf('}', i);
+            if (closeBrace >= 0)
+            {
+                return ExtractNextLiteralWord(template, closeBrace + 1);
+            }
+
+            return "";
+        }
+
+        // Extract the word until space or placeholder.
+        var wordStart = i;
+        while (i < template.Length && template[i] != ' ' && template[i] != '{')
+        {
+            i++;
+        }
+
+        return template[wordStart..i];
+    }
+
+    string ApplyDayPeriod(string basePhrase, int hour, int normalizedMinutes)
     {
         if (profile.EarlyMorning.Length == 0 && profile.Morning.Length == 0 &&
             profile.Afternoon.Length == 0 && profile.Night.Length == 0)
@@ -206,7 +396,10 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return basePhrase;
         }
 
-        var period = GetDayPeriod(hour);
+        // For relative-hour style locales (ca, es), minutes >= 35 reference the NEXT hour,
+        // so the day period should be based on the next hour's time slot.
+        var periodHour = normalizedMinutes >= 35 ? hour + 1 : hour;
+        var period = GetDayPeriod(periodHour);
         if (period.Length == 0)
         {
             return basePhrase;
@@ -291,7 +484,20 @@ sealed class PhraseClockNotationProfile(
     string morning,
     string afternoon,
     string night,
-    PhraseClockDayPeriodPosition dayPeriodPosition)
+    PhraseClockDayPeriodPosition dayPeriodPosition,
+    string hourZeroWord,
+    string hourTwelveWord,
+    string hourSuffixSingular,
+    string hourSuffixPlural,
+    string singularArticle,
+    string pluralArticle,
+    bool applyEifelerRule,
+    string pastHourTemplate,
+    string beforeHalfTemplate,
+    string afterHalfTemplate,
+    string beforeNextTemplate,
+    string minuteSuffixSingular,
+    string minuteSuffixPlural)
 {
     /// <summary>Gets the hour rendering mode.</summary>
     public PhraseClockHourMode HourMode { get; } = hourMode;
@@ -341,6 +547,32 @@ sealed class PhraseClockNotationProfile(
     public string Night { get; } = night;
     /// <summary>Gets the position of day-period words relative to the time phrase.</summary>
     public PhraseClockDayPeriodPosition DayPeriodPosition { get; } = dayPeriodPosition;
+    /// <summary>Gets the fixed hour word for hour value 0 (e.g., French "minuit").</summary>
+    public string HourZeroWord { get; } = hourZeroWord;
+    /// <summary>Gets the fixed hour word for hour value 12 (e.g., French "midi").</summary>
+    public string HourTwelveWord { get; } = hourTwelveWord;
+    /// <summary>Gets the hour suffix for singular hours (e.g., French "heure").</summary>
+    public string HourSuffixSingular { get; } = hourSuffixSingular;
+    /// <summary>Gets the hour suffix for plural hours (e.g., French "heures").</summary>
+    public string HourSuffixPlural { get; } = hourSuffixPlural;
+    /// <summary>Gets the article for singular hours (e.g., Catalan "la").</summary>
+    public string SingularArticle { get; } = singularArticle;
+    /// <summary>Gets the article for plural hours (e.g., Catalan "les").</summary>
+    public string PluralArticle { get; } = pluralArticle;
+    /// <summary>Gets whether the Luxembourgish Eifeler rule should be applied as post-processing.</summary>
+    public bool ApplyEifelerRule { get; } = applyEifelerRule;
+    /// <summary>Gets the range template for minutes 1-14 (past the hour).</summary>
+    public string PastHourTemplate { get; } = pastHourTemplate;
+    /// <summary>Gets the range template for minutes 16-29 (before the half).</summary>
+    public string BeforeHalfTemplate { get; } = beforeHalfTemplate;
+    /// <summary>Gets the range template for minutes 31-44 (after the half).</summary>
+    public string AfterHalfTemplate { get; } = afterHalfTemplate;
+    /// <summary>Gets the range template for minutes 46-59 (before the next hour).</summary>
+    public string BeforeNextTemplate { get; } = beforeNextTemplate;
+    /// <summary>Gets the singular minute suffix (e.g., Lb "Minutt").</summary>
+    public string MinuteSuffixSingular { get; } = minuteSuffixSingular;
+    /// <summary>Gets the plural minute suffix (e.g., Lb "Minutten").</summary>
+    public string MinuteSuffixPlural { get; } = minuteSuffixPlural;
 }
 
 #endif

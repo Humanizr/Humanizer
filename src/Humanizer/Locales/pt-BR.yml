@@ -346,18 +346,20 @@ surfaces:
       dayMode: 'MasculineOrdinalWhenDayIsOne'
 
   clock:
-    engine: 'phrase-hour'
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
     midnight: 'meia-noite'
     midday: 'meio-dia'
-    oclockFormat: '{0} em ponto'
-    quarterPastFormat: '{0} e quinze'
-    halfPastFormat: '{0} e meia'
-    twentyToFormat: 'vinte para as {0}'
-    quarterToFormat: 'quinze para as {0}'
-    tenToFormat: 'dez para as {0}'
-    fiveToFormat: 'cinco para as {0}'
-    roundHourFormat: '{0} em ponto'
-    genericMinutesFormat: '{0} e {1}'
+    min0: '{hour} em ponto'
+    min15: '{hour} e quinze'
+    min30: '{hour} e meia'
+    min40: 'vinte para as {nextHour}'
+    min45: 'quinze para as {nextHour}'
+    min50: 'dez para as {nextHour}'
+    min55: 'cinco para as {nextHour}'
+    defaultTemplate: '{hour} e {minutes}'
 
   compass:
     full:

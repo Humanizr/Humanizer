@@ -293,7 +293,9 @@ surfaces:
       dayMode: 'Numeric'
 
   clock:
-    engine: 'japanese'
+    engine: 'phrase-clock'
+    hourMode: 'numeric'
+    defaultTemplate: '{hour}時{minutes}分'
 
   compass:
     full:

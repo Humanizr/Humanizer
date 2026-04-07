@@ -500,7 +500,23 @@ surfaces:
       dayMode: 'Ordinal'
 
   clock:
-    engine: 'german'
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    midnight: 'zwölf Uhr nachts'
+    midday: 'zwölf Uhr mittags'
+    min0: '{hour} Uhr'
+    min5: 'fünf nach {hour}'
+    min10: 'zehn nach {hour}'
+    min15: 'viertel nach {hour}'
+    min20: 'zwanzig nach {hour}'
+    min25: 'fünf vor halb {nextHour}'
+    min30: 'halb {nextHour}'
+    min35: 'fünf nach halb {nextHour}'
+    min40: 'zwanzig vor {nextHour}'
+    min45: 'viertel vor {nextHour}'
+    min50: 'zehn vor {nextHour}'
+    min55: 'fünf vor {nextHour}'
+    defaultTemplate: '{hour} Uhr {minutes}'
 
   compass:
     full:

@@ -675,41 +675,6 @@ public sealed partial class HumanizerSourceGenerator
         static ImmutableDictionary<string, EngineContract> CreateTimeOnlyToClockNotationSchemas() =>
             new Dictionary<string, EngineContract>(StringComparer.Ordinal)
             {
-                ["phrase-hour"] = Schema("phrase-hour", "PhraseHourClockNotationConverter",
-                Member("profile-object", null, null, null, null, null, null, null,
-                            Member("string", "midnight", null, null, null, null, null, null),
-                            Member("string", "midday", null, null, null, null, null, null),
-                            Member("string", "oclockFormat", null, null, null, null, null, null),
-                            Member("string", "quarterPastFormat", null, null, null, null, null, null),
-                            Member("string", "halfPastFormat", null, null, null, null, null, null),
-                            Member("string", "twentyToFormat", null, null, null, null, null, null),
-                            Member("string", "quarterToFormat", null, null, null, null, null, null),
-                            Member("string", "tenToFormat", null, null, null, null, null, null),
-                            Member("string", "fiveToFormat", null, null, null, null, null, null),
-                            Member("string", "roundHourFormat", null, null, null, null, null, null),
-                            Member("string", "genericMinutesFormat", null, null, null, null, null, null)
-                        )
-            ),
-                ["relative-hour"] = Schema("relative-hour", "RelativeHourClockNotationConverter",
-                Member("profile-object", null, null, null, null, null, null, null,
-                            Member("string", "midnight", null, null, null, null, null, null),
-                            Member("string", "midday", null, null, null, null, null, null),
-                            Member("string", "singularArticle", null, null, null, null, null, null),
-                            Member("string", "pluralArticle", null, null, null, null, null, null),
-                            Member("string", "and", null, null, null, null, null, null),
-                            Member("string", "quarterPast", null, null, null, null, null, null),
-                            Member("string", "halfPast", null, null, null, null, null, null),
-                            Member("string", "twentyFiveTo", null, null, null, null, null, null),
-                            Member("string", "twentyTo", null, null, null, null, null, null),
-                            Member("string", "quarterTo", null, null, null, null, null, null),
-                            Member("string", "tenTo", null, null, null, null, null, null),
-                            Member("string", "fiveTo", null, null, null, null, null, null),
-                            Member("string", "lateNightPeriod", null, null, null, null, null, null),
-                            Member("string", "morningPeriod", null, null, null, null, null, null),
-                            Member("string", "afternoonPeriod", null, null, null, null, null, null),
-                            Member("string", "eveningPeriod", null, null, null, null, null, null)
-                        )
-            ),
                 ["phrase-clock"] = Schema("phrase-clock", "PhraseClockNotationConverter",
                 Member("profile-object", null, null, null, null, null, null, null,
                             Member("enum", "hourMode", null, "PhraseClockHourMode", null, "h12", null, null),
@@ -735,7 +700,20 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "morning", null, null, null, "", null, null),
                             Member("string", "afternoon", null, null, null, "", null, null),
                             Member("string", "night", null, null, null, "", null, null),
-                            Member("enum", "dayPeriodPosition", null, "PhraseClockDayPeriodPosition", null, "suffix", null, null)
+                            Member("enum", "dayPeriodPosition", null, "PhraseClockDayPeriodPosition", null, "suffix", null, null),
+                            Member("string", "hourZeroWord", null, null, null, "", null, null),
+                            Member("string", "hourTwelveWord", null, null, null, "", null, null),
+                            Member("string", "hourSuffixSingular", null, null, null, "", null, null),
+                            Member("string", "hourSuffixPlural", null, null, null, "", null, null),
+                            Member("string", "singularArticle", null, null, null, "", null, null),
+                            Member("string", "pluralArticle", null, null, null, "", null, null),
+                            Member("bool", "applyEifelerRule", null, null, null, "false", null, null),
+                            Member("string", "pastHourTemplate", null, null, null, "", null, null),
+                            Member("string", "beforeHalfTemplate", null, null, null, "", null, null),
+                            Member("string", "afterHalfTemplate", null, null, null, "", null, null),
+                            Member("string", "beforeNextTemplate", null, null, null, "", null, null),
+                            Member("string", "minuteSuffixSingular", null, null, null, "", null, null),
+                            Member("string", "minuteSuffixPlural", null, null, null, "", null, null)
                         )
             ),
             }.ToImmutableDictionary(StringComparer.Ordinal);
