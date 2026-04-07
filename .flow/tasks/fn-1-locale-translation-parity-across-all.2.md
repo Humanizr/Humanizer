@@ -346,8 +346,8 @@ English (`en`) is special: it currently uses `DefaultTimeOnlyToClockNotationConv
 - [ ] Zero per-call allocations in converter
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 ## Done summary
-Added the phrase-clock unified clock notation engine (PhraseClockNotationConverter + PhraseClockNotationProfile) with source generator contract, supporting h12/h24/numeric hour modes, minute-bucket templates, zero-filler words, and day periods. Added ordinal.date/dateOnly and clock YAML sections for English and 5 Germanic locales (nl, af, da, is, sv). All 21 target locale sweep tests pass with zero failures.
+Migrated all 8 locale clock converters (de, fr, ja, lb, pt, pt-BR, ca, es) from residual leaf converters and old engines (phrase-hour, relative-hour) to the unified phrase-clock engine. Extended PhraseClockNotationConverter with hour suffixes, hour-word overrides, article selection, Eifeler rule post-processing, range templates, and minute suffix placeholders. Deleted 7 old converter classes, removed 2 old engine contracts, updated registry default fallback, and added ordinal.date YAML for pt.yml. All target locale sweep tests pass.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: b2e885c0052a2e5a3318e07fed56cfd0cedcf084
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj
 - PRs:
