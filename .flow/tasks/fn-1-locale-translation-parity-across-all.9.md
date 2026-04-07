@@ -3,11 +3,32 @@
 ## Description
 Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Austronesian, Semitic, and remaining locales.
 
-**Locales:** he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA (all need both surfaces)
+**Locales:** he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA
+**Note:** he ordinal.date/dateOnly is added in task .8 (with `calendarMode: 'Native'`). This task adds clock only for he.
 
 **Size:** M
 **Files:** `src/Humanizer/Locales/he.yml`, `id.yml`, `ms.yml`, `fil.yml`, `mt.yml`, `uz-Cyrl-UZ.yml`, `uz-Latn-UZ.yml`, `zu-ZA.yml`
 
+## Approach
+
+**ordinal.date:** Use `pattern` engine. All use default `calendarMode: 'Gregorian'` (he handled in .8).
+- Filipino: month-first format `'MMMM {day}, yyyy'`
+- Maltese: `ta'` apostrophe needs careful YAML quoting — `'{day} ''ta'''' MMMM yyyy'`
+- Hebrew: RTL — no directionality marks in output. Ordinal.date already done in .8.
+- Others: derive from `LocaleCoverageData`
+
+**clock:** Use `phrase-clock` engine.
+- he: RTL — no directional marks
+- id: `hourMode: h12`, `hourPrefix: 'pukul'`
+- ms: similar to id
+- Others: derive from `LocaleCoverageData`
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — RTL validation
 ## Approach
 
 **ordinal.date:** Use `pattern` engine.
@@ -96,7 +117,8 @@ Note: Hebrew (he) is RTL — verify no directionality marks in output.
 - `src/Humanizer/Locales/en-US.yml:5-13` — month-first ordinal.date pattern (for fil reference)
 - `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — RTL directionality checks
 ## Acceptance
-- [ ] he.yml, id.yml, ms.yml, fil.yml, mt.yml, uz-Cyrl-UZ.yml, uz-Latn-UZ.yml, zu-ZA.yml each have ordinal.date, ordinal.dateOnly, and clock sections
+- [ ] id.yml, ms.yml, fil.yml, mt.yml, uz-Cyrl-UZ.yml, uz-Latn-UZ.yml, zu-ZA.yml each have ordinal.date, ordinal.dateOnly, and clock sections
+- [ ] he.yml has clock section (ordinal.date done in .8)
 - [ ] Maltese `ta'` apostrophe quoting correct
 - [ ] Filipino month-first format correct
 - [ ] Hebrew RTL output has no directional marks

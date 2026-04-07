@@ -4,7 +4,8 @@
   "claimed_at": null,
   "created_at": "2026-04-06T21:55:05.889374Z",
   "depends_on": [
-    "fn-1-locale-translation-parity-across-all.2"
+    "fn-1-locale-translation-parity-across-all.2",
+    "fn-1-locale-translation-parity-across-all.8"
   ],
   "epic": "fn-1-locale-translation-parity-across-all",
   "id": "fn-1-locale-translation-parity-across-all.9",
@@ -12,5 +13,5 @@
   "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.9.md",
   "status": "todo",
   "title": "Add ordinal.date + clock YAML \u2014 Austronesian, Semitic, and other locales",
-  "updated_at": "2026-04-07T00:43:58.996468Z"
+  "updated_at": "2026-04-07T01:00:49.715595Z"
 }

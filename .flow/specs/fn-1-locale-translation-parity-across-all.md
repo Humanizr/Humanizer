@@ -70,7 +70,16 @@ After migration, delete: `GermanTimeOnlyToClockNotationConverter.cs`, `FrenchTim
 
 ### Ordinal Date
 
-Existing `pattern` engine with `OrdinalDatePattern` + `OrdinalDateDayMode` handles all needs. No new engine required — just YAML authoring. Exception: Thai Buddhist calendar may need a small runtime change (task .8 to investigate — `OrdinalDatePattern.GetPatternCulture()` currently forces Gregorian).
+Existing `pattern` engine with `OrdinalDatePattern` + `OrdinalDateDayMode` handles all needs. No new engine required — just YAML authoring.
+
+**Calendar mode:** Add an `OrdinalDateCalendarMode` enum (`Gregorian` | `Native`) and a new `calendarMode` YAML field. Default is `Gregorian` (preserving current behavior). The `OrdinalDatePattern` gains an overload/parameter that respects this mode — `Gregorian` forces `GregorianCalendar` as today, `Native` uses the culture's default calendar.
+
+**Shipped locales with non-Gregorian default calendars** (check `LocaleCoverageData` test expectations to confirm which need `Native`):
+- `th` — Thai Buddhist (year + 543) → likely `Native`
+- `he` — Hebrew (different year + months) → likely `Native`
+- `ar` — Um Al Qura / Hijri (Islamic calendar) → likely `Native`
+- `fa` — Persian / Solar Hijri → likely `Native`
+- `ja`, `ko`, `zh-Hant` — have non-Gregorian calendars available but typically default to Gregorian in practice → likely `Gregorian`
 
 ## Scope
 
@@ -80,7 +89,7 @@ Existing `pattern` engine with `OrdinalDatePattern` + `OrdinalDateDayMode` handl
 - Add `clock:` YAML sections to 54 locales
 - Add 3 missing registry completeness tests (`#if NET6_0_OR_GREATER` guarded)
 - Update documentation (4 files: locale-yaml-reference.md, locale-yaml-how-to.md, adding-a-locale.md, ARCHITECTURE.md)
-- Thai ordinal.date may require runtime changes for Buddhist calendar
+- Add `OrdinalDateCalendarMode` enum (`Gregorian` | `Native`) + `calendarMode` YAML field for Thai Buddhist calendar support
 
 ## Quick commands
 

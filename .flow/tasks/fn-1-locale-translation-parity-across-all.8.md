@@ -1,14 +1,119 @@
 # fn-1-locale-translation-parity-across-all.8 Add ordinal.date + clock YAML — East Asian locales
 
 ## Description
-Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to East Asian locales.
+Add `OrdinalDateCalendarMode` enum for non-Gregorian calendar support. Add ordinal.date/dateOnly + clock YAML for East Asian locales. Update existing ar/fa ordinal.date YAML and add he ordinal.date with `calendarMode: 'Native'` where test expectations require it.
 
-**Locales:** ko, zh-Hans, zh-Hant, bn, ta, th, vi (all need both surfaces)
-**Variants:** zh-CN auto-inherits from zh-Hans. Verify `variantOf` inheritance works for new surfaces.
+**Locales (new YAML):** ko, zh-Hans, zh-Hant, bn, ta, th, vi (ordinal.date + clock)
+**Locales (calendarMode update):** ar, fa (update existing ordinal.date YAML), he (add ordinal.date)
+**Variants:** zh-CN auto-inherits from zh-Hans.
 
 **Size:** M
-**Files:** `src/Humanizer/Locales/ko.yml`, `zh-Hans.yml`, `zh-Hant.yml`, `bn.yml`, `ta.yml`, `th.yml`, `vi.yml`
+**Files:**
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDateCalendarMode.cs` — NEW enum (`Gregorian` | `Native`)
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs` — add `calendarMode` parameter
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs` — add `calendarMode` field to ordinal.date engine contract
+- `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalDateProfileCatalogInput.cs` — emit calendarMode
+- `src/Humanizer/Locales/ko.yml`, `zh-Hans.yml`, `zh-Hant.yml`, `bn.yml`, `ta.yml`, `th.yml`, `vi.yml` — add ordinal.date/dateOnly + clock
+- `src/Humanizer/Locales/ar.yml`, `fa.yml` — update existing ordinal.date to add `calendarMode: 'Native'` if test expects native year
+- `src/Humanizer/Locales/he.yml` — add ordinal.date/dateOnly with `calendarMode: 'Native'` if test expects Hebrew year
 
+## Approach
+
+### OrdinalDateCalendarMode enum
+
+```
+enum OrdinalDateCalendarMode { Gregorian, Native }
+```
+
+- `Gregorian` (default): forces `GregorianCalendar` — preserves current behavior for all existing locales
+- `Native`: uses the culture's default calendar (e.g., ThaiBuddhistCalendar for th-TH, HebrewCalendar for he-IL, UmAlQuraCalendar for ar-SA, PersianCalendar for fa-IR)
+
+Update `OrdinalDatePattern` to accept this mode. When `Native`, skip the Gregorian override in `GetPatternCulture()`. Add `calendarMode` as an optional YAML field — defaults to `Gregorian` when omitted.
+
+### Non-Gregorian calendar locales
+
+Check `LocaleCoverageData` test expectations for each. If test expects native calendar year, use `calendarMode: 'Native'`:
+- `th` — Thai Buddhist (2565 for 2022) → likely `Native`
+- `he` — Hebrew (5783, different months) → likely `Native`
+- `ar` — Um Al Qura / Hijri (1444 for 2022) → likely `Native`
+- `fa` — Persian / Solar Hijri (1401 for 2022) → likely `Native`
+- `ja`, `ko`, `zh-Hant` — have optional non-Gregorian calendars but typically use Gregorian → likely `Gregorian` (omit field)
+
+### East Asian ordinal.date + clock
+
+Standard authoring using `pattern` engine + `phrase-clock` engine. All values from `LocaleCoverageData`.
+
+**zh-Hant TFM conditionals:** `LocaleCoverageData.cs:11-30` has TFM-conditional expectations. YAML-driven clock output should be TFM-consistent.
+
+## Investigation targets
+
+**Required:**
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:59-83` — GetPatternCulture() to make conditional
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs` — ordinal.date engine contract
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations (check th, he, ar, fa years)
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `src/Humanizer/Locales/ar.yml` — existing ordinal.date section to update
+- `src/Humanizer/Locales/fa.yml` — existing ordinal.date section to update
+
+**Optional:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` — zh-Hant TFM conditionals
+- `src/Humanizer/Locales/zh-CN.yml` — verify variantOf zh-Hans
+## Approach
+
+### OrdinalDateCalendarMode enum
+
+Add a new enum to control calendar behavior in ordinal date formatting:
+```
+enum OrdinalDateCalendarMode { Gregorian, Native }
+```
+
+- `Gregorian` (default): forces `GregorianCalendar` as today — preserves existing behavior for all current locales
+- `Native`: uses the culture's default calendar (e.g., `ThaiBuddhistCalendar` for `th-TH`, producing year 2565 for 2022)
+
+Update `OrdinalDatePattern` to accept this mode. When `Native`, skip the Gregorian override in `GetPatternCulture()`. Add `calendarMode` as an optional YAML field in the ordinal.date engine contract — defaults to `Gregorian` when omitted.
+
+### Thai YAML
+
+Thai uses: `calendarMode: 'Native'` to get Buddhist Era year in output.
+
+### Other locales
+
+Standard `pattern` engine with `calendarMode: 'Gregorian'` (or omitted, since it's the default).
+
+**ordinal.date patterns from test expectations:**
+- ko: `'yyyy''년 ''M''월 ''{day}''일'''` + `dayMode: 'Numeric'`
+- zh-Hans/zh-Hant: `'yyyy''年''M''月''{day}''日'''` + `dayMode: 'Numeric'`
+- bn: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+- ta: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+- th: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'` + `calendarMode: 'Native'`
+- vi: `'{day} ''tháng'' M ''năm'' yyyy'` + `dayMode: 'Numeric'`
+
+**clock using `phrase-clock`:**
+- ko: dayPeriods + h12 + "시" / "분"
+- zh-Hans: dayPeriods + h12 + "点" / "分"
+- zh-Hant: dayPeriods + h12 + "點" / "分"
+- bn: dayPeriods + h12
+- ta: dayPeriods + h12 + "மணி" / "நிமிடம்"
+- th: dayPeriods + h12 + "นาที"
+- vi: h12 + "giờ" / "phút" + dayPeriod suffix
+
+All values MUST match `LocaleCoverageData` expectations.
+
+**zh-Hant TFM conditionals:** `LocaleCoverageData.cs:11-30` has TFM-conditional expectations for short time format. YAML-driven clock output should be TFM-consistent since it uses spoken words.
+
+## Investigation targets
+
+**Required:**
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:59-83` — GetPatternCulture() Gregorian override to make conditional
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs` — ordinal.date engine contract (add calendarMode)
+- `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalDateProfileCatalogInput.cs` — ordinal.date profile generation
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations (verify Thai year)
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+
+**Optional:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` — zh-Hant TFM conditionals
+- `src/Humanizer/Locales/zh-CN.yml` — verify variantOf zh-Hans
+- `src/Humanizer/Locales/ja.yml:290-296` — Japanese ordinal.date pattern reference
 ## Approach
 
 **ordinal.date:** Use `pattern` engine.
@@ -111,13 +216,18 @@ The `zh-CN` → `zh-Hans` variant should auto-inherit. Verify the CultureInfo.Pa
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` — zh-Hant TFM conditionals
 - `src/Humanizer/Locales/zh-CN.yml` — zh-CN variant file
 ## Acceptance
+- [ ] `OrdinalDateCalendarMode` enum added (`Gregorian` | `Native`)
+- [ ] `OrdinalDatePattern` updated to respect `calendarMode` — `Native` skips Gregorian override
+- [ ] `calendarMode` field added to ordinal.date engine contract in source generator
 - [ ] ko.yml, zh-Hans.yml, zh-Hant.yml, bn.yml, ta.yml, th.yml, vi.yml each have ordinal.date, ordinal.dateOnly, and clock sections
+- [ ] th.yml uses `calendarMode: 'Native'` — produces Buddhist Era year
+- [ ] ar.yml, fa.yml ordinal.date updated with `calendarMode: 'Native'` if test expects native year
+- [ ] he.yml has ordinal.date/dateOnly with `calendarMode: 'Native'` if test expects Hebrew year
 - [ ] zh-CN correctly inherits from zh-Hans
-- [ ] Thai ordinal.date output matches test expectations (Buddhist year if expected, investigate + fix if needed)
 - [ ] zh-Hant clock output is TFM-consistent
-- [ ] No new handwritten C# converter classes
+- [ ] Existing locales without calendarMode unaffected (defaults to Gregorian)
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
-- [ ] Sweep tests pass for ko, zh-Hans, zh-Hant, zh-CN, bn, ta, th, vi
+- [ ] Sweep tests pass for ko, zh-Hans, zh-Hant, zh-CN, bn, ta, th, vi, ar (ordinal.date), fa (ordinal.date), he (ordinal.date)
 ## Done summary
 TBD
 
