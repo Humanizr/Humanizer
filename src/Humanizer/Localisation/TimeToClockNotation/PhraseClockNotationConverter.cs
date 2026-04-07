@@ -4,7 +4,7 @@ namespace Humanizer;
 
 /// <summary>
 /// Provides clock notation using a unified phrase-based profile that covers all locale patterns
-/// through YAML-driven configuration: bucket phrases, hour modes, day periods, and morphology rules.
+/// through YAML-driven configuration: bucket phrases, hour modes, day periods, and zero-filler words.
 /// </summary>
 class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOnlyToClockNotationConverter
 {
@@ -72,14 +72,6 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
 
         // Check minute-bucket template first (exact 5-minute intervals).
         var template = GetBucketTemplate(normalizedMinutes);
-        if (template.Length > 0)
-        {
-            var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords);
-            return ApplyDayPeriod(result, hour);
-        }
-
-        // Fall to range-based defaults for non-bucketed minutes.
-        template = GetRangeTemplate(normalizedMinutes);
         if (template.Length > 0)
         {
             var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords);
@@ -162,18 +154,6 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             45 => profile.Min45,
             50 => profile.Min50,
             55 => profile.Min55,
-            _ => ""
-        };
-    }
-
-    string GetRangeTemplate(int minutes)
-    {
-        return minutes switch
-        {
-            > 0 and < 15 => profile.PastHourTemplate,
-            > 15 and < 30 => profile.BeforeHalfTemplate.Length > 0 ? profile.BeforeHalfTemplate : profile.PastHourTemplate,
-            > 30 and < 45 => profile.AfterHalfTemplate.Length > 0 ? profile.AfterHalfTemplate : profile.BeforeNextTemplate,
-            > 45 and < 60 => profile.BeforeNextTemplate,
             _ => ""
         };
     }
@@ -298,18 +278,13 @@ sealed class PhraseClockNotationProfile(
     string min45,
     string min50,
     string min55,
-    string pastHourTemplate,
-    string beforeHalfTemplate,
-    string afterHalfTemplate,
-    string beforeNextTemplate,
     string defaultTemplate,
     string zeroFiller,
     string earlyMorning,
     string morning,
     string afternoon,
     string night,
-    PhraseClockDayPeriodPosition dayPeriodPosition,
-    bool applyEifelerRule)
+    PhraseClockDayPeriodPosition dayPeriodPosition)
 {
     /// <summary>Gets the hour rendering mode.</summary>
     public PhraseClockHourMode HourMode { get; } = hourMode;
@@ -345,14 +320,6 @@ sealed class PhraseClockNotationProfile(
     public string Min50 { get; } = min50;
     /// <summary>Gets the template for 55 minutes past.</summary>
     public string Min55 { get; } = min55;
-    /// <summary>Gets the range template for minutes 1-14 past the hour.</summary>
-    public string PastHourTemplate { get; } = pastHourTemplate;
-    /// <summary>Gets the range template for minutes 16-29 (before half).</summary>
-    public string BeforeHalfTemplate { get; } = beforeHalfTemplate;
-    /// <summary>Gets the range template for minutes 31-44 (after half).</summary>
-    public string AfterHalfTemplate { get; } = afterHalfTemplate;
-    /// <summary>Gets the range template for minutes 46-59 (before next hour).</summary>
-    public string BeforeNextTemplate { get; } = beforeNextTemplate;
     /// <summary>Gets the fallback template for non-bucketed minutes.</summary>
     public string DefaultTemplate { get; } = defaultTemplate;
     /// <summary>Gets the zero-filler word inserted when minutes are 1-9 (e.g., "noll", "nul").</summary>
@@ -367,8 +334,6 @@ sealed class PhraseClockNotationProfile(
     public string Night { get; } = night;
     /// <summary>Gets the position of day-period words relative to the time phrase.</summary>
     public PhraseClockDayPeriodPosition DayPeriodPosition { get; } = dayPeriodPosition;
-    /// <summary>Gets whether the Eifeler Rule should be applied to number words.</summary>
-    public bool ApplyEifelerRule { get; } = applyEifelerRule;
 }
 
 #endif

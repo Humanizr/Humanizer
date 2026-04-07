@@ -729,18 +729,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "min45", null, null, null, "", null, null),
                             Member("string", "min50", null, null, null, "", null, null),
                             Member("string", "min55", null, null, null, "", null, null),
-                            Member("string", "pastHourTemplate", null, null, null, "", null, null),
-                            Member("string", "beforeHalfTemplate", null, null, null, "", null, null),
-                            Member("string", "afterHalfTemplate", null, null, null, "", null, null),
-                            Member("string", "beforeNextTemplate", null, null, null, "", null, null),
                             Member("string", "defaultTemplate", null, null, null, "", null, null),
                             Member("string", "zeroFiller", null, null, null, "", null, null),
                             Member("string", "earlyMorning", null, null, null, "", null, null),
                             Member("string", "morning", null, null, null, "", null, null),
                             Member("string", "afternoon", null, null, null, "", null, null),
                             Member("string", "night", null, null, null, "", null, null),
-                            Member("enum", "dayPeriodPosition", null, "PhraseClockDayPeriodPosition", null, "suffix", null, null),
-                            Member("bool", "applyEifelerRule", null, null, null, "false", null, null)
+                            Member("enum", "dayPeriodPosition", null, "PhraseClockDayPeriodPosition", null, "suffix", null, null)
                         )
             ),
             }.ToImmutableDictionary(StringComparer.Ordinal);
