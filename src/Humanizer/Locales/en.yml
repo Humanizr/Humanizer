@@ -436,6 +436,32 @@ surfaces:
         2: 'nd'
         3: 'rd'
 
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Ordinal'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Ordinal'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    midnight: 'midnight'
+    midday: 'noon'
+    min0: "{hour} o'clock"
+    min5: 'five past {hour}'
+    min10: 'ten past {hour}'
+    min15: 'a quarter past {hour}'
+    min20: 'twenty past {hour}'
+    min25: 'twenty-five past {hour}'
+    min30: 'half past {hour}'
+    min40: 'twenty to {nextHour}'
+    min45: 'a quarter to {nextHour}'
+    min50: 'ten to {nextHour}'
+    min55: 'five to {nextHour}'
+    defaultTemplate: '{hour} {minutes}'
 
   compass:
     full:

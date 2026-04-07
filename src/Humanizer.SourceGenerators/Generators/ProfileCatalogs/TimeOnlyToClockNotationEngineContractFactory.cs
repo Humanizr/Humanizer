@@ -45,8 +45,31 @@ public sealed partial class HumanizerSourceGenerator
             {
                 "profile-object" => CreateObjectValue(root, member),
                 "string" => QuoteLiteral(GetStringValue(root, member)),
+                "enum" => CreateEnumValue(root, member),
+                "bool" => GetBooleanValue(root, member) ? "true" : "false",
                 _ => throw new InvalidOperationException($"Unsupported clock-notation contract member kind '{member.Kind}'.")
             };
+
+        static string CreateEnumValue(JsonElement root, EngineContractMember member)
+        {
+            if (member.EnumType is null)
+            {
+                throw new InvalidOperationException("Enum members require an enum type.");
+            }
+
+            return member.EnumType + "." + ToEnumMemberName(GetStringValue(root, member));
+        }
+
+        static bool GetBooleanValue(JsonElement root, EngineContractMember member)
+        {
+            if (EngineContractUtilities.TryGetElement(root, member.SourcePath, out var value) &&
+                value.ValueKind is JsonValueKind.True or JsonValueKind.False)
+            {
+                return value.GetBoolean();
+            }
+
+            return bool.TryParse(member.DefaultValue, out var defaultValue) && defaultValue;
+        }
 
         static string CreateObjectValue(JsonElement root, EngineContractMember member)
         {

@@ -387,6 +387,20 @@ surfaces:
         3: 'de'
         8: 'ste'
 
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    defaultTemplate: '{hour} uur {minutes}'
+    min0: '{hour} uur'
 
   compass:
     full:

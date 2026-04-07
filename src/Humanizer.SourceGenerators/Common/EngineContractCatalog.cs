@@ -710,6 +710,39 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "eveningPeriod", null, null, null, null, null, null)
                         )
             ),
+                ["phrase-clock"] = Schema("phrase-clock", "PhraseClockNotationConverter",
+                Member("profile-object", null, null, null, null, null, null, null,
+                            Member("enum", "hourMode", null, "PhraseClockHourMode", null, "h12", null, null),
+                            Member("enum", "hourGender", null, "GrammaticalGender", null, "masculine", null, null),
+                            Member("enum", "minuteGender", null, "GrammaticalGender", null, "masculine", null, null),
+                            Member("string", "midnight", null, null, null, "", null, null),
+                            Member("string", "midday", null, null, null, "", null, null),
+                            Member("string", "min0", null, null, null, "", null, null),
+                            Member("string", "min5", null, null, null, "", null, null),
+                            Member("string", "min10", null, null, null, "", null, null),
+                            Member("string", "min15", null, null, null, "", null, null),
+                            Member("string", "min20", null, null, null, "", null, null),
+                            Member("string", "min25", null, null, null, "", null, null),
+                            Member("string", "min30", null, null, null, "", null, null),
+                            Member("string", "min35", null, null, null, "", null, null),
+                            Member("string", "min40", null, null, null, "", null, null),
+                            Member("string", "min45", null, null, null, "", null, null),
+                            Member("string", "min50", null, null, null, "", null, null),
+                            Member("string", "min55", null, null, null, "", null, null),
+                            Member("string", "pastHourTemplate", null, null, null, "", null, null),
+                            Member("string", "beforeHalfTemplate", null, null, null, "", null, null),
+                            Member("string", "afterHalfTemplate", null, null, null, "", null, null),
+                            Member("string", "beforeNextTemplate", null, null, null, "", null, null),
+                            Member("string", "defaultTemplate", null, null, null, "", null, null),
+                            Member("string", "zeroFiller", null, null, null, "", null, null),
+                            Member("string", "earlyMorning", null, null, null, "", null, null),
+                            Member("string", "morning", null, null, null, "", null, null),
+                            Member("string", "afternoon", null, null, null, "", null, null),
+                            Member("string", "night", null, null, null, "", null, null),
+                            Member("enum", "dayPeriodPosition", null, "PhraseClockDayPeriodPosition", null, "suffix", null, null),
+                            Member("bool", "applyEifelerRule", null, null, null, "false", null, null)
+                        )
+            ),
             }.ToImmutableDictionary(StringComparer.Ordinal);
 
     }

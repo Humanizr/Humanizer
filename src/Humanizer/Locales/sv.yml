@@ -430,6 +430,21 @@ surfaces:
         1: ':a'
         2: ':a'
 
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'neuter'
+    zeroFiller: 'noll'
+    defaultTemplate: '{hour} {minutes}'
 
   compass:
     full:

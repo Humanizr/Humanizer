@@ -1064,7 +1064,7 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
-        { "af", new(13, 23, "een uur drie-en-twintig") },
+        { "af", new(13, 23, "een uur drie en twintig") },
         { "ar", new(13, 23, "الواحدة وثلاث وعشرون دقيقة بعد الظهر") },
         { "az", new(13, 23, "on üç saat iyirmi üç dəqiqə") },
         { "bg", new(13, 23, "тринадесет часа и двадесет и три минути") },
@@ -1103,7 +1103,7 @@ static class LocaleCoverageData
         { "ms", new(13, 23, "pukul satu dua puluh tiga petang") },
         { "mt", new(13, 23, "is-siegħa waħda u tlieta u għoxrin") },
         { "nb", new(13, 23, "tretten tjuetre") },
-        { "nl", new(13, 23, "één uur drieëntwintig") },
+        { "nl", new(13, 23, "een uur drieëntwintig") },
         { "nn", new(13, 23, "tretten tjuetre") },
         { "pl", new(13, 23, "trzynasta dwadzieścia trzy") },
         { "pt", new(13, 23, "uma e vinte e três") },
@@ -1131,7 +1131,7 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
-        { "af", new(13, 23, "een uur vyf-en-twintig") },
+        { "af", new(13, 23, "een uur vyf en twintig") },
         { "ar", new(13, 23, "الواحدة وخمس وعشرون دقيقة بعد الظهر") },
         { "az", new(13, 23, "on üç saat iyirmi beş dəqiqə") },
         { "bg", new(13, 23, "тринадесет часа и двадесет и пет минути") },
@@ -1170,7 +1170,7 @@ static class LocaleCoverageData
         { "ms", new(13, 23, "pukul satu dua puluh lima petang") },
         { "mt", new(13, 23, "is-siegħa waħda u ħamsa u għoxrin") },
         { "nb", new(13, 23, "tretten tjuefem") },
-        { "nl", new(13, 23, "één uur vijfentwintig") },
+        { "nl", new(13, 23, "een uur vijfentwintig") },
         { "nn", new(13, 23, "tretten tjuefem") },
         { "pl", new(13, 23, "trzynasta dwadzieścia pięć") },
         { "pt", new(13, 23, "uma e vinte e cinco") },
@@ -1205,7 +1205,7 @@ static class LocaleCoverageData
         { "bn", new(1, 5, "রাত একটা পাঁচ") },
         { "ca", new(1, 5, "la una i cinc de la matinada") },
         { "cs", new(1, 5, "jedna hodina pět minut") },
-        { "da", new(1, 5, "et nul fem") },
+        { "da", new(1, 5, "en nul fem") },
         { "de", new(1, 5, "fünf nach eins") },
         { "de-CH", new(1, 5, "fünf nach eins") },
         { "de-LI", new(1, 5, "fünf nach eins") },
@@ -1237,7 +1237,7 @@ static class LocaleCoverageData
         { "ms", new(1, 5, "pukul satu lima pagi") },
         { "mt", new(1, 5, "is-siegħa waħda u ħamsa") },
         { "nb", new(1, 5, "ett null fem") },
-        { "nl", new(1, 5, "één uur vijf") },
+        { "nl", new(1, 5, "een uur vijf") },
         { "nn", new(1, 5, "eit null fem") },
         { "pl", new(1, 5, "pierwsza pięć") },
         { "pt", new(1, 5, "uma e cinco") },
