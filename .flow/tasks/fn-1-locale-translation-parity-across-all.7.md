@@ -1,13 +1,24 @@
 # fn-1-locale-translation-parity-across-all.7 Add clock YAML — Baltic and Indo-Iranian locales
 
 ## Description
-Add `clock:` YAML sections to Baltic and Indo-Iranian locales that already have `ordinal.date`. These locales use different structural patterns — assign appropriate engines from task .2.
+Add `clock:` YAML sections to Baltic and Indo-Iranian locales (ordinal.date already done for lt, lv, ar, fa, ku).
 
-**Locales (clock only):** lt, lv, ar, fa, ku
+**Locales:** lt, lv, ar, fa, ku (clock only — ordinal.date already exists)
 
-**Size:** M
+**Size:** S
 **Files:** `src/Humanizer/Locales/lt.yml`, `lv.yml`, `ar.yml`, `fa.yml`, `ku.yml`
 
+## Approach
+
+**clock:** Use `phrase-clock` engine. RTL locales (ar, fa, ku) must NOT produce directionality marks (LRM/RLM/ALM) in output.
+
+All values from `LocaleCoverageData` expectations. RTL validation: sweep tests at `LocaleRegistrySweepTests.cs:425-441` check for directional marks.
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — RTL validation pattern
 ## Approach
 
 **clock engine assignments:**
@@ -50,8 +61,8 @@ Arabic (ar), Farsi (fa), and Kurdish (ku) are RTL locales. Ensure clock output d
 - `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — Arabic directionality mark assertions
 - `src/Humanizer/Locales/es.yml:980-1000` — relative-hour engine for RTL adaptation
 ## Acceptance
-- [ ] lt.yml, lv.yml, ar.yml, fa.yml, ku.yml each have clock sections using consolidated engines
-- [ ] RTL locales produce output without directionality marks
+- [ ] lt.yml, lv.yml, ar.yml, fa.yml, ku.yml each have clock sections
+- [ ] RTL locales (ar, fa, ku) produce no directional marks
 - [ ] No new handwritten C# converter classes
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for lt, lv, ar, fa, ku

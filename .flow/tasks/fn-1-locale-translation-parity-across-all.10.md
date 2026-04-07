@@ -1,19 +1,31 @@
 # fn-1-locale-translation-parity-across-all.10 Update documentation for locale parity requirements
 
 ## Description
-Update documentation to reflect the locale parity requirements, no-English-fallback rule, and any changes to the source generator pipeline.
+Update documentation to reflect the `phrase-clock` engine consolidation, removal of residual leaf converters, and full locale parity.
 
 **Size:** M
 **Files:**
-- `CLAUDE.md` — Update Localization section (line ~76) to mention parity requirements and all doc references
-- `AGENTS.md` — Update Localization Guidance section to match CLAUDE.md
-- `.github/CONTRIBUTING.md` — Update "Need your help with localisation" section; remove outdated `DefaultFormatter` subclassing guidance
-- `readme.md` — Update "Words to Number" fallback note (line ~662) to clarify scope to unregistered cultures
-- `docs/locale-yaml-reference.md` — Add Generator Diagnostics section if needed
-- `docs/adding-a-locale.md` — Verify parity workflow references and completeness requirements
-- `docs/locale-yaml-how-to.md` — Verify parity rules and authoring guidance are current
-- `docs/localization.md` — Verify supported languages list is accurate
+- `docs/locale-yaml-reference.md` — HIGH PRIORITY: Replace `phrase-hour`/`relative-hour` engine sections + residual leaf descriptions with `phrase-clock` engine. Add all new YAML fields (hourMode, dayPeriods, minute buckets, applyEifelerRule, etc.). Update "Shared Strategy Values" with `hourMode` values.
+- `docs/locale-yaml-how-to.md` — HIGH PRIORITY: Replace clock engine list. Update "Choosing Between A Shared Engine And A New One" and "Feature-By-Feature Authoring Order" step 9.
+- `docs/adding-a-locale.md` — MEDIUM: Update "When A Residual Locale Leaf Is Acceptable" (no clock leaves remain). Add registry completeness tests to "Testing Requirements" contributor checklist.
+- `ARCHITECTURE.md` — MEDIUM: Remove references to clock residual leaves. Verify pipeline table still accurate.
 
+## Approach
+
+For each file:
+1. Read current content
+2. Identify sections referencing old engines (`phrase-hour`, `relative-hour`, `french`, `german`, `luxembourgish`, `japanese`)
+3. Replace with `phrase-clock` documentation
+4. Add new field descriptions
+5. Verify cross-references between docs are consistent
+
+## Investigation targets
+
+**Required:**
+- `docs/locale-yaml-reference.md:341+` and `:661-713` — clock surface sections
+- `docs/locale-yaml-how-to.md:339-347` — clock engine list
+- `docs/adding-a-locale.md` — residual leaf sections and testing requirements
+- `ARCHITECTURE.md:48-88` — pipeline table and residual leaf language
 ## Approach
 
 Each doc update should be minimal — reflect the new reality that all shipped locales have complete translations. Do not rewrite sections; update the specific claims that are now outdated.
@@ -60,14 +72,12 @@ Follow existing formatting conventions per file:
 - `docs/locale-yaml-reference.md` — field reference
 - `docs/localization.md` — supported languages list
 ## Acceptance
-- [ ] CLAUDE.md Localization section updated with parity requirements and full doc list
-- [ ] AGENTS.md Localization Guidance section updated to match
-- [ ] CONTRIBUTING.md localisation section updated to remove outdated DefaultFormatter guidance
-- [ ] readme.md fallback note clarified for unregistered cultures only
-- [ ] docs/locale-yaml-reference.md updated if source generator diagnostics changed
-- [ ] docs/adding-a-locale.md verified for accuracy
-- [ ] docs/locale-yaml-how-to.md verified for accuracy (updated if parity rules changed)
-- [ ] docs/localization.md supported languages list verified
+- [ ] `docs/locale-yaml-reference.md` updated: `phrase-clock` engine documented with all fields, old engines removed
+- [ ] `docs/locale-yaml-how-to.md` updated: clock engine list shows only `phrase-clock`
+- [ ] `docs/adding-a-locale.md` updated: no clock residual leaves, registry tests in checklist
+- [ ] `ARCHITECTURE.md` updated: no clock residual leaf references
+- [ ] No broken cross-references between docs
+- [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds (docs don't affect build, but verify)
 ## Done summary
 TBD
 

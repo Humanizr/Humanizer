@@ -1,19 +1,78 @@
 # fn-1-locale-translation-parity-across-all.3 Add ordinal.date + clock YAML — Nordic and Romance locales
 
 ## Description
-Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML to Nordic and Romance locales. Migrate Luxembourgish residual leaf into `phrase-clock` engine.
+Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Nordic and Romance locales using `phrase-clock` engine.
 
 **Locales needing both ordinal.date + clock:** nb, it, ro
 **Locales needing ordinal.date only:** pt (clock already migrated in task .2)
-**Luxembourgish migration:** lb already has clock YAML with `engine: 'luxembourgish'` — migrate to `phrase-clock` with quadrant templates and delete `LuxembourgishTimeOnlyToClockNotationConverter.cs`
-**Variants that auto-inherit:** nn from nb; fr-BE, fr-CH from fr
+**Variants that auto-inherit:** nn from nb
 
 **Size:** M
 **Files:**
-- `src/Humanizer/Locales/nb.yml`, `it.yml`, `pt.yml`, `ro.yml`
-- `src/Humanizer/Locales/lb.yml` — migrate clock from `luxembourgish` to `phrase-clock`
-- `src/Humanizer/Localisation/TimeToClockNotation/LuxembourgishTimeOnlyToClockNotationConverter.cs` — DELETE after migration
+- `src/Humanizer/Locales/nb.yml`, `it.yml`, `ro.yml` — add ordinal.date/dateOnly + clock
+- `src/Humanizer/Locales/pt.yml` — add ordinal.date/dateOnly only
 
+## Approach
+
+**ordinal.date:** Use `pattern` engine. Patterns from `LocaleCoverageData`:
+- nb: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'`
+- it: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+- pt: `'{day} ''de'' MMMM ''de'' yyyy'` + `dayMode: 'Numeric'`
+- ro: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+
+**clock:** Use `phrase-clock` engine. All values from `LocaleCoverageData`:
+- nb: `hourMode: h24`, simple concat ("tretten tjuetre")
+- it: `hourMode: h12`, `connector: 'e'` ("una e ventitré")
+- ro: `hourMode: h12`, `hourPrefix: 'ora'`, `connector: 'și'` ("ora unu și douăzeci și trei")
+- nn auto-inherits from nb
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+## Approach
+
+### Leaf migrations
+
+Migrate each leaf by authoring `phrase-clock` YAML that produces identical output to the handwritten converter. Verify against `LocaleCoverageData` expectations.
+
+**German:** `hourMode: h12`, `hourSuffix: 'Uhr'`, full minute buckets. Templates use `{hour}`, `{nextHour}` placeholders: `min5: 'fünf nach {hour}'`, `min25: 'fünf vor halb {nextHour}'`, `min30: 'halb {nextHour}'`, etc.
+
+**French:** `hourMode: h24`, `hourGender: Feminine`, `hourSuffixSingular: 'heure'`, `hourSuffixPlural: 'heures'`. No buckets — uses `defaultTemplate`.
+
+**Japanese:** `hourMode: numeric`, `hourSuffix: '時'`, `minuteSuffix: '分'`. Simplest migration.
+
+**Luxembourgish:** Most complex. `hourMode: h12`, `hourGender: Feminine`, `applyEifelerRule: true`, `minuteSuffixSingular: 'Minutt'`, `minuteSuffixPlural: 'Minutten'`. Quadrant templates in range defaults + minute bucket overrides for 0, 15, 25, 30, 35, 45. If `applyEifelerRule` cannot fully handle the Eifeler Rule edge cases, document limitations and keep lb as a known exception.
+
+### Engine migrations
+
+**Portuguese (pt, pt-BR):** Migrate from `phrase-hour` fields to `phrase-clock` fields. Most fields map directly (midnight, midday, oclockFormat, etc.). Add any missing `phrase-clock` fields.
+
+**Catalan, Spanish (ca, es):** Migrate from `relative-hour` fields to `phrase-clock`. Map day-period fields and article/connector fields.
+
+### Nordic/Romance ordinal.date + clock
+
+Add ordinal.date, ordinal.dateOnly, and clock for nb, it, ro. Use `pattern` engine for ordinal.date. Use `phrase-clock` for clock.
+
+### Cleanup
+
+After ALL migrations verified green, delete the 7 old converter classes, 2 old profile classes, and remove `phrase-hour`/`relative-hour` from `EngineContractCatalog`. Delete `DefaultTimeOnlyToClockNotationConverter`. Update `GenerationHelpers.cs` to remove the default converter fallback.
+
+## Investigation targets
+
+**Required:**
+- `src/Humanizer/Localisation/TimeToClockNotation/GermanTimeOnlyToClockNotationConverter.cs` — exact German logic
+- `src/Humanizer/Localisation/TimeToClockNotation/FrenchTimeOnlyToClockNotationConverter.cs` — exact French logic
+- `src/Humanizer/Localisation/TimeToClockNotation/LuxembourgishTimeOnlyToClockNotationConverter.cs` — exact lb logic + EifelerRule usage
+- `src/Humanizer/Localisation/TimeToClockNotation/JapaneseTimeOnlyToClockNotationConverter.cs` — exact Japanese logic
+- `src/Humanizer/Localisation/EifelerRule.cs` — Eifeler Rule implementation
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1500` — all clock expectations
+
+**Optional:**
+- `src/Humanizer/Locales/pt.yml:813-830` — current phrase-hour YAML
+- `src/Humanizer/Locales/es.yml:980-1000` — current relative-hour YAML
+- `src/Humanizer.SourceGenerators/Common/GenerationHelpers.cs:79-82` — default converter fallback to remove
 ## Approach
 
 **Luxembourgish migration** — the most complex leaf. Express its patterns in `phrase-clock` YAML:
@@ -84,12 +143,9 @@ Follow existing `pt.yml:813-830` for phrase-hour and `es.yml:980-1000` for relat
 ## Acceptance
 - [ ] nb.yml, it.yml, ro.yml have ordinal.date, ordinal.dateOnly, and clock sections
 - [ ] pt.yml has ordinal.date and ordinal.dateOnly sections
-- [ ] lb.yml clock migrated from `luxembourgish` engine to `phrase-clock` with quadrant templates
-- [ ] `LuxembourgishTimeOnlyToClockNotationConverter.cs` deleted
 - [ ] nn correctly inherits from nb
-- [ ] No handwritten converter classes remain (all 4 leaves + default now deleted)
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
-- [ ] Sweep tests pass for nb, nn, it, pt, ro, lb, fr-BE, fr-CH
+- [ ] Sweep tests pass for nb, nn, it, pt, ro
 ## Done summary
 TBD
 

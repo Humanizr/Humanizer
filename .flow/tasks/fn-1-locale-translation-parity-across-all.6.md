@@ -6,14 +6,34 @@ Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Finno-Ugri
 **Locales:** fi, hu, az, tr, el, hy (all need both surfaces)
 
 **Size:** M
-**Files:**
-- `src/Humanizer/Locales/fi.yml`
-- `src/Humanizer/Locales/hu.yml`
-- `src/Humanizer/Locales/az.yml`
-- `src/Humanizer/Locales/tr.yml`
-- `src/Humanizer/Locales/el.yml`
-- `src/Humanizer/Locales/hy.yml`
+**Files:** `src/Humanizer/Locales/fi.yml`, `hu.yml`, `az.yml`, `tr.yml`, `el.yml`, `hy.yml`
 
+## Approach
+
+**ordinal.date:** Use `pattern` engine. Hungarian is unique (year-first with dots).
+- fi: `'{day} MMMM yyyy'` + `dayMode: 'DotSuffix'`
+- hu: year-first format + `dayMode: 'Numeric'` (e.g., "2022. január 25.")
+- az: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+- tr: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+- el: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+- hy: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+
+**clock:** Use `phrase-clock` engine. el and hy may need dayPeriods (relative-hour style).
+- fi: `hourMode: h24`, simple concat
+- hu: `hourMode: h24`, `hourSuffix: 'óra'`, `minuteSuffix: 'perc'`
+- az: `hourMode: h24`, `hourSuffix: 'saat'`, `minuteSuffix: 'dəqiqə'`
+- tr: `hourMode: h24`, simple concat
+- el: `hourMode: h12`, dayPeriods (το πρωί/το απόγευμα/etc.), `connector: 'και'`
+- hy: `hourMode: h12`, connector + minutes pattern
+
+All values MUST match `LocaleCoverageData` expectations exactly.
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `src/Humanizer/Locales/ja.yml:290-296` — Japanese year-first ordinal.date as reference for Hungarian
 ## Approach
 
 **For ordinal.date/dateOnly:** Expected patterns:
@@ -75,9 +95,10 @@ Note: Hungarian has a unique date format with year-first and trailing dots. The 
 - `src/Humanizer/Locales/ja.yml:290-296` — Japanese year-first ordinal.date pattern reference
 - `src/Humanizer/Locales/es.yml:980-1000` — relative-hour clock example for el/hy
 ## Acceptance
-- [ ] fi.yml, hu.yml, az.yml, tr.yml, el.yml, hy.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections
-- [ ] Hungarian date format correctly produces year-first output ("2022. január 25.")
-- [ ] All clock YAML phrases verified against exact LocaleCoverageData expectations
+- [ ] fi.yml, hu.yml, az.yml, tr.yml, el.yml, hy.yml each have ordinal.date, ordinal.dateOnly, and clock sections
+- [ ] Hungarian year-first ordinal.date format correct
+- [ ] el/hy day-period clock notation correct
+- [ ] No new handwritten C# converter classes
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for fi, hu, az, tr, el, hy
 ## Done summary

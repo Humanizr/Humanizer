@@ -6,16 +6,28 @@ Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Austronesi
 **Locales:** he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA (all need both surfaces)
 
 **Size:** M
-**Files:**
-- `src/Humanizer/Locales/he.yml`
-- `src/Humanizer/Locales/id.yml`
-- `src/Humanizer/Locales/ms.yml`
-- `src/Humanizer/Locales/fil.yml`
-- `src/Humanizer/Locales/mt.yml`
-- `src/Humanizer/Locales/uz-Cyrl-UZ.yml`
-- `src/Humanizer/Locales/uz-Latn-UZ.yml`
-- `src/Humanizer/Locales/zu-ZA.yml`
+**Files:** `src/Humanizer/Locales/he.yml`, `id.yml`, `ms.yml`, `fil.yml`, `mt.yml`, `uz-Cyrl-UZ.yml`, `uz-Latn-UZ.yml`, `zu-ZA.yml`
 
+## Approach
+
+**ordinal.date:** Use `pattern` engine.
+- Filipino: month-first format `'MMMM {day}, yyyy'` (like English US)
+- Maltese: `ta'` apostrophe needs careful YAML quoting — `'{day} ''ta'''' MMMM yyyy'`
+- Hebrew: RTL — no directionality marks in output
+- Others: derive from `LocaleCoverageData`
+
+**clock:** Use `phrase-clock` engine.
+- he: RTL — no directional marks
+- id: `hourMode: h12`, `hourPrefix: 'pukul'`
+- ms: similar to id
+- Others: derive from `LocaleCoverageData`
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — RTL validation
 ## Approach
 
 **For ordinal.date/dateOnly:** Expected patterns:
@@ -84,11 +96,11 @@ Note: Hebrew (he) is RTL — verify no directionality marks in output.
 - `src/Humanizer/Locales/en-US.yml:5-13` — month-first ordinal.date pattern (for fil reference)
 - `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — RTL directionality checks
 ## Acceptance
-- [ ] he.yml, id.yml, ms.yml, fil.yml, mt.yml, uz-Cyrl-UZ.yml, uz-Latn-UZ.yml, zu-ZA.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections
-- [ ] Filipino ordinal date uses month-first format
-- [ ] Maltese `ta'` apostrophe correctly rendered in ordinal date
-- [ ] Hebrew clock output has no directionality marks
-- [ ] Uzbek clock values use consistent script (Cyrillic for uz-Cyrl-UZ, Latin for uz-Latn-UZ)
+- [ ] he.yml, id.yml, ms.yml, fil.yml, mt.yml, uz-Cyrl-UZ.yml, uz-Latn-UZ.yml, zu-ZA.yml each have ordinal.date, ordinal.dateOnly, and clock sections
+- [ ] Maltese `ta'` apostrophe quoting correct
+- [ ] Filipino month-first format correct
+- [ ] Hebrew RTL output has no directional marks
+- [ ] No new handwritten C# converter classes
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA
 ## Done summary

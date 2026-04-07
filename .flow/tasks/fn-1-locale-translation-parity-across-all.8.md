@@ -1,23 +1,42 @@
 # fn-1-locale-translation-parity-across-all.8 Add ordinal.date + clock YAML — East Asian locales
 
 ## Description
-Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to East Asian locales. Includes runtime investigation for Thai Buddhist calendar support.
+Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to East Asian locales.
 
-**Locales needing both:** ko, zh-Hans, zh-Hant, bn, ta, th, vi
-**Variant that auto-inherits:** zh-CN from zh-Hans
-**Already complete:** ja (has both surfaces)
+**Locales:** ko, zh-Hans, zh-Hant, bn, ta, th, vi (all need both surfaces)
+**Variants:** zh-CN auto-inherits from zh-Hans. Verify `variantOf` inheritance works for new surfaces.
 
 **Size:** M
-**Files:**
-- `src/Humanizer/Locales/ko.yml`
-- `src/Humanizer/Locales/zh-Hans.yml`
-- `src/Humanizer/Locales/zh-Hant.yml`
-- `src/Humanizer/Locales/bn.yml`
-- `src/Humanizer/Locales/ta.yml`
-- `src/Humanizer/Locales/th.yml`
-- `src/Humanizer/Locales/vi.yml`
-- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs` (if Thai needs runtime fix)
+**Files:** `src/Humanizer/Locales/ko.yml`, `zh-Hans.yml`, `zh-Hant.yml`, `bn.yml`, `ta.yml`, `th.yml`, `vi.yml`
 
+## Approach
+
+**ordinal.date:** Use `pattern` engine.
+
+**Thai Buddhist calendar blocker:** `OrdinalDatePattern.GetPatternCulture()` at line 59-83 forces Gregorian calendar. If Thai ordinal.date test expects Buddhist year (2565 for 2022), this needs a runtime change — either remove the Gregorian override for `th-TH` or add a `useNativeCalendar` flag to the pattern engine. Investigate actual test expectations in `LocaleCoverageData` before making changes.
+
+**zh-Hant TFM conditionals:** `LocaleCoverageData.cs:11-30` has TFM-conditional expectations for zh-Hant. Clock output (spoken words) should be TFM-consistent. Verify.
+
+**clock:** Use `phrase-clock` engine.
+- ko: `hourMode: h12`, `hourSuffix: '시'`, `minuteSuffix: '분'`
+- zh-Hans/zh-Hant: `hourMode: h12`, numeric-style or word-style depending on test expectations
+- bn, ta: check test expectations for format
+- th: investigate — Thai may use numeric format or spoken words
+- vi: `hourMode: h12`, `hourSuffix: 'giờ'`, `minuteSuffix: 'phút'`
+
+All values MUST match `LocaleCoverageData` expectations.
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations (check Thai year)
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` — TFM-conditional zh-Hant data
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:59-83` — Gregorian calendar forcing
+- `src/Humanizer/Locales/zh-CN.yml` — verify variantOf zh-Hans
+
+**Optional:**
+- `src/Humanizer/Locales/th.yml` — current Thai locale state
 ## Approach
 
 **For ordinal.date/dateOnly:** Expected patterns:
@@ -92,13 +111,13 @@ The `zh-CN` → `zh-Hans` variant should auto-inherit. Verify the CultureInfo.Pa
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` — zh-Hant TFM conditionals
 - `src/Humanizer/Locales/zh-CN.yml` — zh-CN variant file
 ## Acceptance
-- [ ] ko.yml, zh-Hans.yml, zh-Hant.yml, bn.yml, ta.yml, th.yml, vi.yml each have `ordinal.date`, `ordinal.dateOnly`, and `clock:` sections
-- [ ] zh-CN correctly inherits both surfaces from zh-Hans
-- [ ] Thai ordinal date correctly produces Buddhist era year (2565 for 2022) — runtime changes made if needed
-- [ ] CJK ordinal date patterns produce year-month-day order
+- [ ] ko.yml, zh-Hans.yml, zh-Hant.yml, bn.yml, ta.yml, th.yml, vi.yml each have ordinal.date, ordinal.dateOnly, and clock sections
+- [ ] zh-CN correctly inherits from zh-Hans
+- [ ] Thai ordinal.date output matches test expectations (Buddhist year if expected, investigate + fix if needed)
+- [ ] zh-Hant clock output is TFM-consistent
+- [ ] No new handwritten C# converter classes
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for ko, zh-Hans, zh-Hant, zh-CN, bn, ta, th, vi
-- [ ] Source generator tests pass if OrdinalDatePattern was modified
 ## Done summary
 TBD
 

@@ -1,24 +1,154 @@
 # fn-1-locale-translation-parity-across-all.2 Add ordinal.date + clock YAML — Germanic locales
 
 ## Description
-Design and implement the unified `phrase-clock` engine, migrate existing residual leaves (German, French, Japanese) + default English converter into it, then validate with Germanic locales. Also add ordinal.date/dateOnly YAML for Germanic locales.
+Design and implement the unified `phrase-clock` engine, migrate ALL existing clock converters into it, delete old engines and leaf classes, and add ordinal.date/dateOnly + clock YAML for Germanic locales.
 
-This is the foundational task — the single engine must absorb all existing clock patterns before other locales adopt it.
+This is the foundational task. Everything in one atomic step: new engine, all migrations, all deletions. Build stays green because migrations and deletions happen together.
 
-**Size:** M (engine design is the bulk; locale YAML is formulaic once engine works)
+**Size:** L (but atomic — splitting would break the build between commits)
+
+**Migrations:**
+- English: from `DefaultTimeOnlyToClockNotationConverter` → `phrase-clock` with h12 bucket phrases
+- German (`de.yml`): from `engine: 'german'` → `phrase-clock` with full min0-min60 bucket map
+- French (`fr.yml`): from `engine: 'french'` → `phrase-clock` with `hourMode: h24`, singular/plural hour suffixes
+- Japanese (`ja.yml`): from `engine: 'japanese'` → `phrase-clock` with `hourMode: numeric`
+- Luxembourgish (`lb.yml`): from `engine: 'luxembourgish'` → `phrase-clock` with quadrant templates, `applyEifelerRule: true`
+- Portuguese (`pt.yml`, `pt-BR.yml`): from `phrase-hour` → `phrase-clock`
+- Catalan (`ca.yml`): from `relative-hour` → `phrase-clock` with dayPeriods
+- Spanish (`es.yml`): from `relative-hour` → `phrase-clock` with dayPeriods
+
+**New YAML:** en, nl, af, da, is, sv — ordinal.date/dateOnly + clock
+
+**Deletions:**
+- `GermanTimeOnlyToClockNotationConverter.cs`
+- `FrenchTimeOnlyToClockNotationConverter.cs`
+- `JapaneseTimeOnlyToClockNotationConverter.cs`
+- `LuxembourgishTimeOnlyToClockNotationConverter.cs`
+- `DefaultTimeOnlyToClockNotationConverter.cs`
+- `PhraseHourClockNotationConverter.cs` + `PhraseHourClockNotationProfile`
+- `RelativeHourClockNotationConverter.cs` + `RelativeHourClockNotationProfile`
+- `phrase-hour` and `relative-hour` from `EngineContractCatalog`
+
 **Files:**
-- `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/TimeOnlyToClockNotationProfileCatalogInput.cs` — extend for new YAML fields
-- `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/TimeOnlyToClockNotationEngineContractFactory.cs` — engine contract
-- `src/Humanizer.SourceGenerators/Common/ProfileDefinitions.cs` — profile definition
-- `src/Humanizer/Localisation/TimeToClockNotation/PhraseClockNotationConverter.cs` — new unified converter (replaces PhraseHourClockNotationConverter + RelativeHourClockNotationConverter)
-- `src/Humanizer/Localisation/TimeToClockNotation/GermanTimeOnlyToClockNotationConverter.cs` — DELETE after migration
-- `src/Humanizer/Localisation/TimeToClockNotation/FrenchTimeOnlyToClockNotationConverter.cs` — DELETE after migration
-- `src/Humanizer/Localisation/TimeToClockNotation/JapaneseTimeOnlyToClockNotationConverter.cs` — DELETE after migration
-- `src/Humanizer/Localisation/TimeToClockNotation/DefaultTimeOnlyToClockNotationConverter.cs` — DELETE after migration
-- `src/Humanizer/Locales/de.yml`, `fr.yml`, `ja.yml` — migrate clock YAML to `phrase-clock` engine
-- `src/Humanizer/Locales/en.yml`, `nl.yml`, `af.yml`, `da.yml`, `is.yml`, `sv.yml` — add ordinal.date/dateOnly + clock
-- `src/Humanizer/Locales/ca.yml`, `es.yml`, `pt.yml`, `pt-BR.yml` — migrate from `relative-hour`/`phrase-hour` to `phrase-clock`
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs:675-713` — ADD `phrase-clock`, REMOVE `phrase-hour`/`relative-hour`
+- `src/Humanizer.SourceGenerators/Common/ProfileDefinitions.cs` — ADD `PhraseClockNotationProfile`, REMOVE old profiles
+- `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/TimeOnlyToClockNotationProfileCatalogInput.cs` — update for new engine
+- `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/TimeOnlyToClockNotationEngineContractFactory.cs` — bind new contract, remove old
+- `src/Humanizer.SourceGenerators/Common/GenerationHelpers.cs:79-82` — remove default converter fallback
+- `src/Humanizer/Localisation/TimeToClockNotation/PhraseClockNotationConverter.cs` — NEW unified runtime converter
+- `src/Humanizer/Localisation/TimeToClockNotation/*.cs` — DELETE 7 old converter classes
+- `src/Humanizer/Locales/de.yml`, `fr.yml`, `ja.yml`, `lb.yml`, `en.yml`, `ca.yml`, `es.yml`, `pt.yml`, `pt-BR.yml` — migrate clock YAML
+- `src/Humanizer/Locales/nl.yml`, `af.yml`, `da.yml`, `is.yml`, `sv.yml` — add ordinal.date/dateOnly + clock
 
+## Approach
+
+### 1. Add `phrase-clock` engine contract to `EngineContractCatalog`
+
+New entry at `EngineContractCatalog.cs:675+`. Contract defines ALL YAML fields: `hourMode`, `hourGender`, `connector`, `hourPrefix`, `hourSuffix`, `hourSuffixSingular`, `hourSuffixPlural`, `minuteSuffix`, `minuteSuffixSingular`, `minuteSuffixPlural`, `zeroFiller`, `dayPeriods` (earlyMorning/morning/afternoon/night), `dayPeriodPosition`, `dayPeriodArticle`, `midnight`, `midday`, minute buckets `min0`-`min60`, range templates (`pastHourTemplate`, `beforeHalfTemplate`, `afterHalfTemplate`, `beforeNextTemplate`), `defaultTemplate`, `applyEifelerRule`.
+
+### 2. Implement `PhraseClockNotationConverter`
+
+Single runtime class:
+1. Round minutes if needed
+2. Check midnight/midday → return fixed phrase
+3. Resolve hour words (h12/h24/numeric + gender)
+4. Check minute-bucket map → expand template with {hour}/{nextHour}/{minutes}/{minutesReverse}/{minutesFromHalf}
+5. Fall to range defaults or defaultTemplate
+6. If dayPeriods: resolve period, apply at position
+7. If applyEifelerRule: post-process with `EifelerRule.DoesApply()`
+8. All profile data static — zero per-call allocation beyond return string
+
+### 3. Migrate all existing clock YAML
+
+Author `phrase-clock` YAML for each locale to produce identical output. Verify against `LocaleCoverageData` expectations.
+
+### 4. Delete old engines and classes
+
+Remove all 7 old converter classes, 2 profile classes, and old engine contracts. Update `GenerationHelpers.cs` and the registry default factory: instead of `new DefaultTimeOnlyToClockNotationConverter()`, the default must resolve to the English `phrase-clock` profile so unshipped/future locales still get English clock notation.
+
+### 5. Add Germanic ordinal.date + clock
+
+ordinal.date patterns from `LocaleCoverageData`. clock using `phrase-clock`.
+
+## Investigation targets
+
+**Required:**
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs:675-713` — existing contracts to model after
+- `src/Humanizer/Localisation/TimeToClockNotation/GermanTimeOnlyToClockNotationConverter.cs` — German bucket logic
+- `src/Humanizer/Localisation/TimeToClockNotation/FrenchTimeOnlyToClockNotationConverter.cs` — French 24h logic
+- `src/Humanizer/Localisation/TimeToClockNotation/LuxembourgishTimeOnlyToClockNotationConverter.cs` — lb quadrants + Eifeler Rule
+- `src/Humanizer/Localisation/TimeToClockNotation/JapaneseTimeOnlyToClockNotationConverter.cs` — numeric mode
+- `src/Humanizer/Localisation/TimeToClockNotation/DefaultTimeOnlyToClockNotationConverter.cs` — English phrases
+- `src/Humanizer/Localisation/TimeToClockNotation/PhraseHourClockNotationConverter.cs` — phrase-hour to subsume
+- `src/Humanizer/Localisation/TimeToClockNotation/RelativeHourClockNotationConverter.cs` — relative-hour to subsume
+- `src/Humanizer/Localisation/EifelerRule.cs` — Eifeler Rule for lb
+- `src/Humanizer.SourceGenerators/Common/GenerationHelpers.cs:79-82` — default fallback to remove
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1500` — all clock expectations
+
+**Optional:**
+- `src/Humanizer/Locales/pt.yml:813-830` — existing phrase-hour YAML
+- `src/Humanizer/Locales/es.yml:980-1000` — existing relative-hour YAML
+
+## Key context
+
+- This is an L task but atomic — engine + migrations + deletions must happen together.
+- Performance: profile data static, zero per-call allocations.
+- `en-US.yml` already has ordinal.date. Adding ordinal.date to `en.yml` changes English default — verify output matches.
+- Variants auto-inherit: de-CH, de-LI from de; en-GB, en-IN, en-US from en.
+## Approach
+
+### 1. Add `phrase-clock` engine contract to `EngineContractCatalog`
+
+Add a new entry at `EngineContractCatalog.cs:675+` alongside existing `phrase-hour` and `relative-hour`. The contract must define ALL YAML fields listed in the epic spec: `hourMode`, `hourGender`, `connector`, `hourPrefix`, `hourSuffix`, `hourSuffixSingular`, `hourSuffixPlural`, `minuteSuffix`, `minuteSuffixSingular`, `minuteSuffixPlural`, `zeroFiller`, `dayPeriods` (earlyMorning/morning/afternoon/night), `dayPeriodPosition`, `dayPeriodArticle`, `midnight`, `midday`, minute buckets `min0`-`min60`, range templates, `applyEifelerRule`, `defaultTemplate`.
+
+### 2. Add `PhraseClockNotationProfile` definition
+
+In `ProfileDefinitions.cs`, add the profile class with all fields from the contract. Follow the existing `PhraseHourClockNotationProfile` pattern — readonly properties, emitted as static lazy-cached instances.
+
+### 3. Implement `PhraseClockNotationConverter`
+
+Single runtime converter class implementing `ITimeOnlyToClockNotationConverter`:
+1. Round minutes if `ClockNotationRounding.NearestFiveMinutes`
+2. Check midnight (0:00) / midday (12:00) → return fixed phrase
+3. Resolve hour words based on `hourMode` (h12: mod-12 + ToWords(hourGender); h24: raw hour + ToWords; numeric: digit string)
+4. Check minute-bucket map (min0-min60) → if template exists, expand with {hour}/{nextHour}/{minutes}/{minutesReverse}/{minutesFromHalf} placeholders
+5. Fall to range-based default or `defaultTemplate`
+6. If `dayPeriods` configured: resolve period from hour, apply at `dayPeriodPosition`
+7. If `applyEifelerRule`: run `EifelerRule.DoesApply()` post-processing on expanded string
+8. All string data from static profile — zero per-call allocation beyond return string
+
+### 4. English proof-of-concept
+
+Add `clock:` section to `en.yml` with `engine: 'phrase-clock'`, `hourMode: h12`, and bucket phrases matching `DefaultTimeOnlyToClockNotationConverter`'s English output. Verify sweep tests pass for en, en-GB, en-IN, en-US.
+
+### 5. Germanic ordinal.date + clock
+
+Add `ordinal.date` + `ordinal.dateOnly` + `clock:` YAML for: nl, af, da, is, sv.
+- ordinal.date patterns from `LocaleCoverageData` expectations
+- clock using `phrase-clock` with appropriate hourMode/hourSuffix/etc.
+
+Variants auto-inherit: de-CH, de-LI from de; en-GB, en-IN, en-US from en.
+
+## Investigation targets
+
+**Required:**
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs:675-713` — existing engine contracts to model after
+- `src/Humanizer/Localisation/TimeToClockNotation/PhraseHourClockNotationConverter.cs` — existing engine to subsume
+- `src/Humanizer/Localisation/TimeToClockNotation/DefaultTimeOnlyToClockNotationConverter.cs:12-67` — English phrases to reproduce
+- `src/Humanizer/Localisation/TimeToClockNotation/GermanTimeOnlyToClockNotationConverter.cs` — bucket pattern to support
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+
+**Optional:**
+- `src/Humanizer.SourceGenerators/Common/GenerationHelpers.cs:79-82` — how engines resolve to converter expressions
+- `src/Humanizer/Localisation/EifelerRule.cs` — Eifeler Rule implementation (needed for Luxembourgish in task .3)
+
+## Key context
+
+- Old engines coexist in this task. `de.yml` still uses `engine: 'german'`, `fr.yml` still uses `engine: 'french'`, etc. Only `en.yml` and new Germanic locales use `phrase-clock`.
+- Performance: profile data must be static. Source generator emits constants. Runtime converter uses switch on normalized minutes — no dictionary lookups, no per-call allocations.
+- `en-US.yml` already has ordinal.date. Adding ordinal.date to `en.yml` changes default English from `DefaultDateToOrdinalWordConverter` to `PatternDateToOrdinalWordsConverter` — verify output matches.
 ## Approach
 
 ### Unified `phrase-clock` engine design
@@ -200,16 +330,18 @@ The test expectations are the source of truth for what each locale's output must
 
 English (`en`) is special: it currently uses `DefaultTimeOnlyToClockNotationConverter` which has English-specific spoken-word phrases hardcoded. Adding a `clock:` YAML section means the generated converter will replace the default. The YAML phrases must produce identical output to the existing default English phrases ("one twenty-three", "twenty-five past one", etc.).
 ## Acceptance
-- [ ] Single `phrase-clock` engine implemented (source generator + runtime converter)
-- [ ] German leaf migrated to `phrase-clock` YAML — `GermanTimeOnlyToClockNotationConverter.cs` deleted
-- [ ] French leaf migrated to `phrase-clock` YAML — `FrenchTimeOnlyToClockNotationConverter.cs` deleted
-- [ ] Japanese leaf migrated to `phrase-clock` YAML — `JapaneseTimeOnlyToClockNotationConverter.cs` deleted
-- [ ] English default migrated to `phrase-clock` YAML — `DefaultTimeOnlyToClockNotationConverter.cs` deleted
-- [ ] Existing `phrase-hour` locales (pt, pt-BR) migrated to `phrase-clock`
-- [ ] Existing `relative-hour` locales (ca, es) migrated to `phrase-clock`
-- [ ] Old engine classes deleted: `PhraseHourClockNotationConverter.cs`, `RelativeHourClockNotationConverter.cs` + profile classes
-- [ ] en.yml, nl.yml, af.yml, da.yml, is.yml, sv.yml have ordinal.date, ordinal.dateOnly, and clock sections
-- [ ] All sweep tests pass for en, en-GB, en-IN, en-US, nl, af, da, is, sv, de, de-CH, de-LI, fr, fr-BE, fr-CH, ja, ca, es, pt, pt-BR
+- [ ] `phrase-clock` engine contract added to `EngineContractCatalog.cs`
+- [ ] `PhraseClockNotationConverter` runtime class implemented
+- [ ] English migrated from default → `phrase-clock` — `DefaultTimeOnlyToClockNotationConverter.cs` deleted
+- [ ] German migrated → `GermanTimeOnlyToClockNotationConverter.cs` deleted
+- [ ] French migrated → `FrenchTimeOnlyToClockNotationConverter.cs` deleted
+- [ ] Japanese migrated → `JapaneseTimeOnlyToClockNotationConverter.cs` deleted
+- [ ] Luxembourgish migrated → `LuxembourgishTimeOnlyToClockNotationConverter.cs` deleted
+- [ ] pt, pt-BR migrated from `phrase-hour` → `PhraseHourClockNotationConverter.cs` deleted
+- [ ] ca, es migrated from `relative-hour` → `RelativeHourClockNotationConverter.cs` deleted
+- [ ] `phrase-hour` and `relative-hour` removed from `EngineContractCatalog`
+- [ ] nl.yml, af.yml, da.yml, is.yml, sv.yml have ordinal.date, ordinal.dateOnly, and clock sections
+- [ ] All sweep tests pass for en, en-GB, en-IN, en-US, nl, af, da, is, sv, de, de-CH, de-LI, fr, fr-BE, fr-CH, ja, lb, pt, pt-BR, ca, es
 - [ ] Source generator tests pass
 - [ ] Zero per-call allocations in converter
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds

@@ -1,14 +1,31 @@
 # fn-1-locale-translation-parity-across-all.1 Add missing registry completeness tests and optional parity diagnostic
 
 ## Description
-Add the 3 missing registry completeness test assertions to `LocaleTheoryMatrixCompletenessTests` so that every shipped locale is verified to be registered in ALL 8 registries. Currently only 5 are checked.
+Add 3 missing registry completeness tests to `LocaleTheoryMatrixCompletenessTests` so every shipped locale is verified as registered in ALL 8 registries. Currently only 5 are checked.
 
-**Important:** `DateOnlyToOrdinalWordsConverterRegistry` and `TimeOnlyToClockNotationConvertersRegistry` are `#if NET6_0_OR_GREATER` guarded. The new test methods MUST be wrapped in the same conditional compilation guard to avoid build failures on lower TFMs.
+**Important:** `DateOnlyToOrdinalWordsConverterRegistry` and `TimeOnlyToClockNotationConvertersRegistry` are `#if NET6_0_OR_GREATER` guarded. New test methods MUST use the same guard.
 
-**Size:** S (combine with early validation)
+**Size:** S
 **Files:**
 - `tests/Humanizer.Tests/Localisation/LocaleTheoryMatrixCompletenessTests.cs`
 
+## Approach
+
+Follow the existing pattern at `LocaleTheoryMatrixCompletenessTests.cs:356-377` for the 5 existing registry assertions. Add 3 new `[Theory]` methods for `DateToOrdinalWordsConverterRegistry`, `DateOnlyToOrdinalWordsConverterRegistry`, and `TimeOnlyToClockNotationConvertersRegistry`. Wrap DateOnly and TimeOnly tests in `#if NET6_0_OR_GREATER`.
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleTheoryMatrixCompletenessTests.cs:356-377` — existing registry assertion pattern
+- `src/Humanizer/Configuration/DateToOrdinalWordsConverterRegistry.cs`
+- `src/Humanizer/Configuration/TimeOnlyToClockNotationConvertersRegistry.cs:1` — `#if NET6_0_OR_GREATER` guard
+
+**Optional:**
+- `src/Humanizer/Configuration/DateOnlyToOrdinalWordsConverterRegistry.cs`
+
+## Key context
+
+This task runs AFTER all locale batches (.2-.9) so that every shipped locale is registered. The tests will fail if any shipped locale is missing from a registry.
 ## Approach
 
 - Follow the existing pattern at `LocaleTheoryMatrixCompletenessTests.cs:356-377` for the 5 existing registry assertions

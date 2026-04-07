@@ -1,13 +1,35 @@
 # fn-1-locale-translation-parity-across-all.4 Add ordinal.date + clock YAML — West Slavic locales
 
 ## Description
-Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to West Slavic locales using consolidated engines from task .2.
+Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to West Slavic locales using `phrase-clock` engine from task .2.
 
 **Locales:** cs, sk, pl, hr, sl (all need both surfaces)
 
 **Size:** M
 **Files:** `src/Humanizer/Locales/cs.yml`, `sk.yml`, `pl.yml`, `hr.yml`, `sl.yml`
 
+## Approach
+
+**ordinal.date:** Use `pattern` engine. DotSuffix dayMode for cs, sk, hr, sl. Numeric for pl. hr trailing period needs embedded literal `'.'` in template.
+
+**clock:** Use `phrase-clock` engine. Expected patterns from `LocaleCoverageData`:
+- cs: "třináct hodin dvacet tři minut" — `hourMode: h24`, `hourSuffix`, `minuteSuffix` (plural-sensitive)
+- sk: "trinásť hodín dvadsaťtri minút" — similar to Czech
+- pl: "trzynasta dwadzieścia trzy" — `hourMode: h24`, simple concat
+- hr: "trinaest sati i dvadeset tri minute" — `hourMode: h24`, `hourSuffix`, `connector: 'i'`, `minuteSuffix`
+- sl: "trinajst triindvajset" — `hourMode: h24`, simple concat
+
+**Note:** cs, sk, hr have plural-sensitive unit words. Investigate if `phrase-clock` engine handles this via `hourSuffixSingular`/`hourSuffixPlural` + `minuteSuffixSingular`/`minuteSuffixPlural`, or if bucket overrides are needed.
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- Task .2 `phrase-clock` engine — verify plural suffix handling
+
+**Optional:**
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:52` — pattern literal syntax
 ## Approach
 
 **ordinal.date:** Use `pattern` engine. DotSuffix dayMode for cs, sk, hr, sl. Numeric for pl. hr/sr trailing period needs embedded literal.
@@ -62,6 +84,7 @@ Use `phrase-hour` engine with appropriate phrase templates. Each locale's clock 
 ## Acceptance
 - [ ] cs.yml, sk.yml, pl.yml, hr.yml, sl.yml each have ordinal.date, ordinal.dateOnly, and clock sections
 - [ ] Plural-sensitive hour/minute unit words handled correctly (cs, sk, hr)
+- [ ] hr trailing period in ordinal.date output correct
 - [ ] No new handwritten C# converter classes
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for cs, sk, pl, hr, sl

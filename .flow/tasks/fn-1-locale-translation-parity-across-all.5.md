@@ -1,7 +1,7 @@
 # fn-1-locale-translation-parity-across-all.5 Add ordinal.date + clock YAML — East and South Slavic locales
 
 ## Description
-Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to East and South Slavic locales using consolidated engines from task .2.
+Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to East and South Slavic locales using `phrase-clock` engine.
 
 **Locales:** bg, ru, sr, sr-Latn, uk (all need both surfaces)
 Note: sr and sr-Latn are standalone (no `variantOf`).
@@ -9,6 +9,28 @@ Note: sr and sr-Latn are standalone (no `variantOf`).
 **Size:** M
 **Files:** `src/Humanizer/Locales/bg.yml`, `ru.yml`, `sr.yml`, `sr-Latn.yml`, `uk.yml`
 
+## Approach
+
+**ordinal.date:** Use `pattern` engine. bg needs trailing "г." suffix. sr/sr-Latn need trailing period.
+- bg: `'{day} MMMM yyyy ''г.'''` + `dayMode: 'Numeric'`
+- ru: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+- sr: `'{day} MMMM yyyy''.'` + `dayMode: 'DotSuffix'`
+- sr-Latn: `'{day} MMMM yyyy''.'` + `dayMode: 'DotSuffix'`
+- uk: `'{day} MMMM yyyy'` + `dayMode: 'Numeric'`
+
+**clock:** Use `phrase-clock` engine. All values from `LocaleCoverageData`:
+- bg: `hourMode: h24`, `hourSuffix`, `connector: 'и'`, `minuteSuffix`
+- ru: `hourMode: h12`, simple concat
+- sr: `hourMode: h12`, `connector: 'и'`
+- sr-Latn: same as sr but Latin script
+- uk: `hourMode: h12`, simple concat
+
+## Investigation targets
+
+**Required:**
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `src/Humanizer/Locales/sr.yml` — verify sr is standalone
 ## Approach
 
 **ordinal.date:** Use `pattern` engine. bg needs trailing "г." suffix. sr/sr-Latn need trailing period.
@@ -58,7 +80,8 @@ Note: bg has trailing "г." (abbreviation for "года"), sr/sr-Latn have trail
 - `docs/locale-yaml-how-to.md` — YAML authoring conventions
 ## Acceptance
 - [ ] bg.yml, ru.yml, sr.yml, sr-Latn.yml, uk.yml each have ordinal.date, ordinal.dateOnly, and clock sections
-- [ ] bg trailing "г." and sr/sr-Latn trailing period correct
+- [ ] bg trailing "г." correct in output
+- [ ] sr/sr-Latn trailing period correct
 - [ ] No new handwritten C# converter classes
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for bg, ru, sr, sr-Latn, uk
