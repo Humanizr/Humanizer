@@ -73,7 +73,7 @@ Arabic (ar), Farsi (fa), and Kurdish (ku) are RTL locales. Ensure clock output d
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for lt, lv, ar, fa, ku
 ## Done summary
-Added clock YAML sections for 5 Baltic and Indo-Iranian locales (lt, lv, ar, fa, ku) using the phrase-clock engine. Fixed day-period resolution to be template-aware: only shifts to next-hour period when template references {nextHour}, and added {dayPeriod} placeholder support for Kurdish inline day-period placement.
+Added clock YAML sections for 5 Baltic and Indo-Iranian locales (lt, lv, ar, fa, ku) using the phrase-clock engine, with template-aware day-period resolution and {dayPeriod} placeholder support for Kurdish inline day-period placement.
 ## Evidence
 - Commits:
 - Tests:
