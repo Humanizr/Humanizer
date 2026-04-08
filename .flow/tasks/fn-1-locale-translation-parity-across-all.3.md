@@ -149,6 +149,6 @@ Follow existing `pt.yml:813-830` for phrase-hour and `es.yml:980-1000` for relat
 ## Done summary
 Added ordinal.date/dateOnly and clock YAML sections for Nordic (nb, nn) and Romance (it, ro) locales. Extended the phrase-clock engine with an hourOneWord field for Norwegian locales where the number-to-words engine produces an unsuitable form for hour value 1 (nb: "ett", nn: "eit"). All 36 previously-failing sweep tests for nb/nn/it/ro/pt now pass.
 ## Evidence
-- Commits: 021003d2bc0319e7b30b9143015ca26bd3a866e6
-- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj
+- Commits:
+- Tests:
 - PRs:
