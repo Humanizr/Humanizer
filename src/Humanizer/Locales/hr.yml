@@ -480,6 +480,35 @@ surfaces:
       engine: 'suffix'
       masculineSuffix: '.'
 
+    date:
+      engine: 'pattern'
+      pattern: "{day} MMMM yyyy'.'"
+      dayMode: 'DotSuffix'
+    dateOnly:
+      engine: 'pattern'
+      pattern: "{day} MMMM yyyy'.'"
+      dayMode: 'DotSuffix'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourSuffixSingular: 'sat'
+    hourSuffixPlural: 'sati'
+    minuteSuffixSingular: 'minuta'
+    minuteSuffixPlural: 'minute'
+    min0: '{hour}'
+    min5: '{hour} i {minutes} minuta'
+    min10: '{hour} i {minutes} minuta'
+    min15: '{hour} i {minutes} minuta'
+    min20: '{hour} i {minutes} minuta'
+    min25: '{hour} i {minutes} minuta'
+    min30: '{hour} i {minutes} minuta'
+    min35: '{hour} i {minutes} minuta'
+    min40: '{hour} i {minutes} minuta'
+    min45: '{hour} i {minutes} minuta'
+    min50: '{hour} i {minutes} minuta'
+    min55: '{hour} i {minutes} minuta'
+    defaultTemplate: '{hour} i {minutes} {minuteSuffix}'
 
   compass:
     full:

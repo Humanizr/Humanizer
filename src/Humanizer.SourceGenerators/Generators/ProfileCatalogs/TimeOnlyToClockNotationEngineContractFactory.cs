@@ -47,6 +47,9 @@ public sealed partial class HumanizerSourceGenerator
                 "string" => QuoteLiteral(GetStringValue(root, member)),
                 "enum" => CreateEnumValue(root, member),
                 "bool" => GetBooleanValue(root, member) ? "true" : "false",
+                "optional-string-array" => EngineContractUtilities.TryGetElement(root, member.SourcePath, out var optionalArray)
+                    ? CreateStringArrayExpression(optionalArray)
+                    : "Array.Empty<string>()",
                 _ => throw new InvalidOperationException($"Unsupported clock-notation contract member kind '{member.Kind}'.")
             };
 

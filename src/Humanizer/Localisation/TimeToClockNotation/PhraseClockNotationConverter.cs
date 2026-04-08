@@ -121,6 +121,12 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
     {
         var hourValue = ResolveHourValue(rawHour);
 
+        // Check the explicit hour-words map first (e.g., Polish ordinal feminine forms).
+        if (profile.HourWordsMap.Length > hourValue && profile.HourWordsMap[hourValue].Length > 0)
+        {
+            return profile.HourWordsMap[hourValue];
+        }
+
         // Check for fixed hour-word overrides (e.g., French "minuit" for 0, "midi" for 12,
         // Norwegian "ett" for 1 when the number engine produces a different form).
         if (hourValue == 0 && profile.HourZeroWord.Length > 0)
@@ -179,12 +185,21 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return "";
         }
 
-        return profile.MinuteGender switch
+        var words = profile.MinuteGender switch
         {
             GrammaticalGender.Feminine => minutes.ToWords(GrammaticalGender.Feminine),
             GrammaticalGender.Neuter => minutes.ToWords(GrammaticalGender.Neuter),
             _ => minutes.ToWords()
         };
+
+        // Slovak and similar locales write compound tens+units without spaces in clock notation
+        // (e.g., "dvadsaťtri" instead of "dvadsať tri").
+        if (profile.CompactMinuteWords)
+        {
+            words = words.Replace(" ", "");
+        }
+
+        return words;
     }
 
     string ResolveArticle(int rawHour)
@@ -504,7 +519,9 @@ sealed class PhraseClockNotationProfile(
     string afterHalfTemplate,
     string beforeNextTemplate,
     string minuteSuffixSingular,
-    string minuteSuffixPlural)
+    string minuteSuffixPlural,
+    string[] hourWordsMap,
+    bool compactMinuteWords)
 {
     /// <summary>Gets the hour rendering mode.</summary>
     public PhraseClockHourMode HourMode { get; } = hourMode;
@@ -582,6 +599,10 @@ sealed class PhraseClockNotationProfile(
     public string MinuteSuffixSingular { get; } = minuteSuffixSingular;
     /// <summary>Gets the plural minute suffix (e.g., Lb "Minutten").</summary>
     public string MinuteSuffixPlural { get; } = minuteSuffixPlural;
+    /// <summary>Gets an optional map of hour values (0-23) to explicit word strings, bypassing <c>ToWords()</c>.</summary>
+    public string[] HourWordsMap { get; } = hourWordsMap;
+    /// <summary>Gets whether spaces should be removed from minute words (e.g., Slovak "dvadsaťtri" instead of "dvadsať tri").</summary>
+    public bool CompactMinuteWords { get; } = compactMinuteWords;
 }
 
 #endif

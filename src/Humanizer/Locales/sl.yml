@@ -531,6 +531,21 @@ surfaces:
       engine: 'suffix'
       masculineSuffix: '.'
 
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes}'
+
   compass:
     full:
       - 'sever'

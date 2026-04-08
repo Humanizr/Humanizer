@@ -28,7 +28,11 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
 {
     const string DayPlaceholder = "{day}";
     const string DayMarker = "<<DAY>>";
-    const string DayMarkerFormat = "'<<DAY>>'";
+
+    // Include a real 'd' day specifier adjacent to the marker so culture formatting sees
+    // a combined day+month pattern and emits genitive month names in Slavic locales.
+    // The numeric day output is stripped during replacement.
+    const string DayMarkerFormat = "d'<<DAY>>'";
 
     readonly string template = template;
     readonly OrdinalDateDayMode dayMode = dayMode;
@@ -38,7 +42,7 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
     /// </summary>
     /// <returns>The formatted date string.</returns>
     public string Format(DateTime date) =>
-        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day));
+        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day), date.Day);
 
 #if NET6_0_OR_GREATER
     /// <summary>
@@ -46,15 +50,39 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
     /// </summary>
     /// <returns>The formatted date string.</returns>
     public string Format(DateOnly date) =>
-        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day));
+        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day), date.Day);
 #endif
 
     string GetFormatString() => template.Replace(DayPlaceholder, DayMarkerFormat);
 
-    // The day is emitted through a temporary marker so the rest of the culture-specific format
-    // string can be preserved exactly as defined by the pattern.
-    static string ReplaceDayMarker(string formattedDate, string renderedDay) =>
-        formattedDate.Replace(DayMarker, renderedDay);
+    // The format string includes a real 'd' specifier that emits the numeric day before the marker.
+    // Strip both the numeric day and the marker, then insert the rendered day.
+    static string ReplaceDayMarker(string formattedDate, string renderedDay, int day)
+    {
+        var markerIndex = formattedDate.IndexOf(DayMarker, StringComparison.Ordinal);
+        if (markerIndex < 0)
+        {
+            return formattedDate;
+        }
+
+        // The numeric day text appears immediately before the marker (e.g., "25<<DAY>>").
+        var dayText = day.ToString(CultureInfo.CurrentCulture);
+        var dayStart = markerIndex - dayText.Length;
+#if NETSTANDARD2_0 || NET48
+        if (dayStart >= 0 && formattedDate.Substring(dayStart, dayText.Length) == dayText)
+        {
+            return formattedDate.Substring(0, dayStart) + renderedDay + formattedDate.Substring(markerIndex + DayMarker.Length);
+        }
+#else
+        if (dayStart >= 0 && formattedDate.AsSpan(dayStart, dayText.Length).SequenceEqual(dayText.AsSpan()))
+        {
+            return string.Concat(formattedDate.AsSpan(0, dayStart), renderedDay.AsSpan(), formattedDate.AsSpan(markerIndex + DayMarker.Length));
+        }
+#endif
+
+        // Fallback: just replace the marker.
+        return formattedDate.Replace(DayMarker, renderedDay);
+    }
 
     static CultureInfo GetPatternCulture()
     {

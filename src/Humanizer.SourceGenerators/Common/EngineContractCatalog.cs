@@ -714,7 +714,9 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "afterHalfTemplate", null, null, null, "", null, null),
                             Member("string", "beforeNextTemplate", null, null, null, "", null, null),
                             Member("string", "minuteSuffixSingular", null, null, null, "", null, null),
-                            Member("string", "minuteSuffixPlural", null, null, null, "", null, null)
+                            Member("string", "minuteSuffixPlural", null, null, null, "", null, null),
+                            Member("optional-string-array", "hourWordsMap", null, null, null, null, null, null),
+                            Member("bool", "compactMinuteWords", null, null, null, "false", null, null)
                         )
             ),
             }.ToImmutableDictionary(StringComparer.Ordinal);

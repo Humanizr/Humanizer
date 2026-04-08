@@ -467,6 +467,45 @@ surfaces:
       engine: 'suffix'
       masculineSuffix: '.'
 
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourWordsMap:
+      - ''
+      - 'pierwsza'
+      - 'druga'
+      - 'trzecia'
+      - 'czwarta'
+      - 'piąta'
+      - 'szósta'
+      - 'siódma'
+      - 'ósma'
+      - 'dziewiąta'
+      - 'dziesiąta'
+      - 'jedenasta'
+      - 'dwunasta'
+      - 'trzynasta'
+      - 'czternasta'
+      - 'piętnasta'
+      - 'szesnasta'
+      - 'siedemnasta'
+      - 'osiemnasta'
+      - 'dziewiętnasta'
+      - 'dwudziesta'
+      - 'dwudziesta pierwsza'
+      - 'dwudziesta druga'
+      - 'dwudziesta trzecia'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes}'
 
   compass:
     full:
