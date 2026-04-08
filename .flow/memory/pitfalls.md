@@ -12,3 +12,6 @@ Do not add engine contract fields that have no implementation in the runtime con
 
 ## 2026-04-08 manual [pitfall]
 Clock profiles for Slavic locales must set minuteGender (and hourGender) explicitly -- minutes are feminine in most Slavic languages and the engine defaults to masculine
+
+## 2026-04-08 manual [pitfall]
+Resolve grammatical suffix AFTER selecting the template path -- range-relative counts are wrong for default/bucket templates that use absolute minute values

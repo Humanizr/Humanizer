@@ -102,6 +102,6 @@ All 5 East/South Slavic locales (bg, ru, sr, sr-Latn, uk) already had ordinal.da
 - All ordinal.date, ordinal.dateOnly, clock tests pass for bg, ru, sr, sr-Latn, uk
 - All uk number word tests pass (0 uk failures, down from 392)
 ## Evidence
-- Commits: 858897cc, fb67821a, 3e2ae195, 72496e68
-- Tests: 0 ordinal/clock failures for bg, ru, sr, sr-Latn, uk out of 40206 total tests
+- Commits:
+- Tests:
 - PRs:
