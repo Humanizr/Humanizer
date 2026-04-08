@@ -809,6 +809,7 @@ namespace Humanizer
         UseName = 2,
         UseShortScaleWord = 4,
         WithSpace = 8,
+        UseScaleWord = 16,
     }
     public class NoMatchFoundException : System.Exception
     {

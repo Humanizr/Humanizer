@@ -454,6 +454,16 @@ public static class MetricNumeralExtensions
             {
                 return UnitPrefixes[symbol].LongScaleWord;
             }
+            
+            if (formatValue.HasFlag(MetricNumeralFormats.UseScaleWord))
+            {
+                var culture = CultureInfo.CurrentUICulture;
+                var isLongScale = LongScaleCultures.Contains(culture.Name)
+                               || LongScaleCultures.Contains(culture.TwoLetterISOLanguageName);
+                return isLongScale
+                    ? UnitPrefixes[symbol].LongScaleWord
+                    : UnitPrefixes[symbol].ShortScaleWord;
+            }
         }
 
         return symbol.ToString();
@@ -496,4 +506,38 @@ public static class MetricNumeralExtensions
         public string ShortScaleWord { get; } = shortScaleWord;
         public readonly string LongScaleWord => longScaleWord ?? ShortScaleWord;
     }
+
+
+    /// <summary>
+    /// A set of culture codes that use the <a href="https://en.wikipedia.org/wiki/Long_and_short_scales">long scale</a> system.
+    /// In the long scale, <c>1E9</c> is a <c>milliard</c> and <c>1E12</c> is a <c>billion</c>.
+    /// Cultures not in this set are assumed to use the short scale, where <c>1E9</c> is a <c>billion</c>.
+    /// Used by <see cref="MetricNumeralFormats.UseScaleWord"/> to automatically select the correct scale word
+    /// based on <see cref="System.Globalization.CultureInfo.CurrentUICulture"/>.
+    /// </summary>
+    static readonly HashSet<string> LongScaleCultures =
+    [
+        "de", "de-DE", "de-AT", "de-CH",  // German
+        "fr", "fr-FR", "fr-BE", "fr-CH",  // French
+        "it", "it-IT", "it-CH",            // Italian
+        "es", "es-ES",                     // Spanish
+        "pt", "pt-PT",                     // Portuguese (NOT pt-BR - Brazil uses short scale)
+        "nl", "nl-NL", "nl-BE",            // Dutch
+        "ru", "ru-RU",                     // Russian
+        "pl", "pl-PL",                     // Polish
+        "tr", "tr-TR",                     // Turkish
+        "cs", "cs-CZ",                     // Czech (miliarda for 1E9)
+        "sk", "sk-SK",                     // Slovak
+        "hr", "hr-HR",                     // Croatian
+        "ro", "ro-RO",                     // Romanian
+        "sl", "sl-SI",                     // Slovenian
+        "uk", "uk-UA",                     // Ukrainian
+        "he", "he-IL",                     // Hebrew (מיליארד for 1E9)
+        "ar", "ar-SA",                     // Arabic
+        "hu", "hu-HU",                     // Hungarian
+        "fi", "fi-FI",                     // Finnish
+        "nb", "nb-NO",                     // Norwegian
+        "sv", "sv-SE",                     // Swedish
+        "da", "da-DK",                     // Danish
+    ];
 }
