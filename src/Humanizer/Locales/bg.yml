@@ -446,6 +446,7 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h24'
     hourGender: 'masculine'
+    minuteGender: 'feminine'
     hourSuffixSingular: 'час'
     hourSuffixPlural: 'часа'
     minuteSuffixSingular: 'минута'

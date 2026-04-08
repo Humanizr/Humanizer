@@ -483,6 +483,7 @@ surfaces:
   clock:
     engine: 'phrase-clock'
     hourMode: 'h12'
+    min0: '{hour}'
     defaultTemplate: '{hour} и {minutes}'
 
   compass:
