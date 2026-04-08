@@ -373,9 +373,13 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourOneWord: 'یەک'
-    min0: '{hour}'
-    min5: '{hour}ی بەیانی و {minutes} خولەک'
-    defaultTemplate: '{hour} و {minutes}ی ئێوارە'
+    min0: '{hour}ی {dayPeriod}'
+    min5: '{hour}ی {dayPeriod} و {minutes} خولەک'
+    defaultTemplate: '{hour} و {minutes}ی {dayPeriod}'
+    earlyMorning: 'بەیانی'
+    morning: 'بەیانی'
+    afternoon: 'ئێوارە'
+    night: 'شەو'
 
   ordinal:
     numeric:

@@ -75,13 +75,16 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         var article = ResolveArticle(hour);
         var nextArticle = ResolveArticle(hour + 1);
 
+        // Pre-compute the day-period string for possible inline use via {dayPeriod} placeholder.
+        var dayPeriod = GetDayPeriod(hour);
+
         // Check minute-bucket template first (exact 5-minute intervals).
         var template = GetBucketTemplate(normalizedMinutes);
         if (template.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
-            var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
-            return ApplyDayPeriod(result, hour, normalizedMinutes);
+            var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            return ApplyDayPeriodIfNeeded(result, template, hour, normalizedMinutes);
         }
 
         // Try range-based templates for non-bucketed minutes.
@@ -91,21 +94,21 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         if (rangeTemplate.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixForRange(normalizedMinutes);
-            var result = ExpandTemplate(rangeTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
-            return ApplyDayPeriod(result, hour, normalizedMinutes);
+            var result = ExpandTemplate(rangeTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            return ApplyDayPeriodIfNeeded(result, rangeTemplate, hour, normalizedMinutes);
         }
 
         // Fall to default template — use the actual minute count for suffix resolution.
         if (profile.DefaultTemplate.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
-            var result = ExpandTemplate(profile.DefaultTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
-            return ApplyDayPeriod(result, hour, normalizedMinutes);
+            var result = ExpandTemplate(profile.DefaultTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            return ApplyDayPeriodIfNeeded(result, profile.DefaultTemplate, hour, normalizedMinutes);
         }
 
         // Absolute fallback: "{hour} {minutes}".
         var fallback = minuteWords.Length > 0 ? hourWords + " " + minuteWords : hourWords;
-        return ApplyDayPeriod(fallback, hour, normalizedMinutes);
+        return ApplyDayPeriod(fallback, hour, usesNextHour: false);
     }
 
     int ResolveHourValue(int hour)
@@ -360,7 +363,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
     string ExpandTemplate(
         string template, string hour, string nextHour,
         string minutes, string minutesReverse, string minutesFromHalf,
-        string article, string nextArticle, string minuteSuffix)
+        string article, string nextArticle, string minuteSuffix, string dayPeriod)
     {
         var result = template;
 
@@ -379,6 +382,11 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         if (result.Contains("{minuteSuffix}"))
         {
             result = result.Replace("{minuteSuffix}", minuteSuffix);
+        }
+
+        if (result.Contains("{dayPeriod}"))
+        {
+            result = result.Replace("{dayPeriod}", dayPeriod);
         }
 
         // Second pass: replace number placeholders with Eifeler awareness.
@@ -477,7 +485,24 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         return template[wordStart..i];
     }
 
-    string ApplyDayPeriod(string basePhrase, int hour, int normalizedMinutes)
+    /// <summary>
+    /// Decides whether to append/prepend day-period or skip (if template already had {dayPeriod}).
+    /// Templates that reference {nextHour} shift the period to hour+1 for minutes >= 35;
+    /// templates that use {hour} always base the period on the current hour.
+    /// </summary>
+    string ApplyDayPeriodIfNeeded(string expandedPhrase, string rawTemplate, int hour, int normalizedMinutes)
+    {
+        // If the template already placed the day-period inline, don't append/prepend it again.
+        if (rawTemplate.Contains("{dayPeriod}"))
+        {
+            return expandedPhrase;
+        }
+
+        var usesNextHour = rawTemplate.Contains("{nextHour}") || rawTemplate.Contains("{nextArticle}");
+        return ApplyDayPeriod(expandedPhrase, hour, usesNextHour);
+    }
+
+    string ApplyDayPeriod(string basePhrase, int hour, bool usesNextHour)
     {
         if (profile.EarlyMorning.Length == 0 && profile.Morning.Length == 0 &&
             profile.Afternoon.Length == 0 && profile.Night.Length == 0)
@@ -485,9 +510,12 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return basePhrase;
         }
 
-        // For relative-hour style locales (ca, es), minutes >= 35 reference the NEXT hour,
+        // For relative-hour style locales (ca, es), templates that reference {nextHour}
+        // mean the phrasing is relative to the next hour (e.g., "twenty to five"),
         // so the day period should be based on the next hour's time slot.
-        var periodHour = normalizedMinutes >= 35 ? hour + 1 : hour;
+        // For locales that say "current hour + minutes" (ar, fa, ku), the period
+        // must always reflect the current hour.
+        var periodHour = usesNextHour ? hour + 1 : hour;
         var period = GetDayPeriod(periodHour);
         if (period.Length == 0)
         {
