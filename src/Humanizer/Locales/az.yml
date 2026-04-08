@@ -546,6 +546,7 @@ surfaces:
     hourSuffixPlural: 'saat'
     minuteSuffixSingular: 'dəqiqə'
     minuteSuffixPlural: 'dəqiqə'
+    min0: '{hour}'
     defaultTemplate: '{hour} {minutes} {minuteSuffix}'
 
   compass:

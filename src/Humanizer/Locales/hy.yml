@@ -355,6 +355,7 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourOneWord: 'մեկն'
+    min0: '{hour}'
     defaultTemplate: '{hour} անց {minutes}'
 
   compass:

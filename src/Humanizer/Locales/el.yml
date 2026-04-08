@@ -522,6 +522,7 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourOneWord: 'μία'
+    min0: '{hour}'
     defaultTemplate: '{hour} και {minutes}'
     earlyMorning: 'το πρωί'
     morning: 'το πρωί'

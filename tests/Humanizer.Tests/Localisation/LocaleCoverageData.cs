@@ -1264,6 +1264,7 @@ static class LocaleCoverageData
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalExactExpectationTheoryData { get; } = new()
     {
+        { "az", new(13, 0, "on üç saat") },
         { "ca", new(0, 0, "mitjanit") },
         { "ca", new(0, 7, "les dotze i set de la nit") },
         { "ca", new(1, 11, "la una i onze de la matinada") },
@@ -1302,6 +1303,7 @@ static class LocaleCoverageData
         { "de", new(18, 50, "zehn vor sieben") },
         { "de", new(19, 55, "fünf vor acht") },
         { "de", new(20, 59, "acht Uhr neunundfünfzig") },
+        { "el", new(13, 0, "μία το απόγευμα") },
         { "en", new(0, 0, "midnight") },
         { "en", new(4, 0, "four o'clock") },
         { "en", new(6, 5, "five past six") },
@@ -1358,6 +1360,8 @@ static class LocaleCoverageData
         { "fr", new(18, 50, "dix-huit heures cinquante") },
         { "fr", new(19, 55, "dix-neuf heures cinquante-cinq") },
         { "fr", new(20, 59, "vingt heures cinquante-neuf") },
+        { "hu", new(13, 0, "tizenhárom óra") },
+        { "hy", new(13, 0, "մեկն") },
         { "ja", new(0, 0, "0時0分") },
         { "ja", new(15, 45, "15時45分") },
         { "lb", new(0, 0, "Mëtternuecht") },

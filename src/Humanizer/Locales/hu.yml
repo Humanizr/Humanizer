@@ -388,6 +388,7 @@ surfaces:
     hourSuffixPlural: 'óra'
     minuteSuffixSingular: 'perc'
     minuteSuffixPlural: 'perc'
+    min0: '{hour}'
     defaultTemplate: '{hour} {minutes} {minuteSuffix}'
 
   compass:
