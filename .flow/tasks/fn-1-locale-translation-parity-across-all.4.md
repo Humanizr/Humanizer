@@ -89,8 +89,8 @@ Use `phrase-hour` engine with appropriate phrase templates. Each locale's clock 
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for cs, sk, pl, hr, sl
 ## Done summary
-Added ordinal.date, ordinal.dateOnly, and clock YAML sections for all 5 West Slavic locales (cs, sk, pl, hr, sl) with phrase-clock engine extensions. Implemented Slavic paucal suffix support with a paucalLowOnly mode to correctly distinguish West Slavic (cs, sk: paucal only for 2-4) from South Slavic (hr: paucal for units 2-4 excluding teens) grammatical rules.
+Added ordinal.date, ordinal.dateOnly, and clock YAML sections for cs, sk, pl, hr, sl locales. Extended phrase-clock engine with hourWordsMap for Polish ordinal feminine hour forms and compactMinuteWords for Slovak compound number notation. Fixed OrdinalDatePattern to produce genitive month names in Slavic locales by retaining a day specifier in the format string.
 ## Evidence
-- Commits: df406c1d, e8f25eab
-- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj (58 passed), dotnet exec tests/Humanizer.Tests/bin/Debug/net10.0/Humanizer.Tests.dll (cs/sk/pl/hr/sl ordinal+clock all pass)
+- Commits:
+- Tests:
 - PRs:
