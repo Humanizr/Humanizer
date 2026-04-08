@@ -86,7 +86,7 @@ Note: bg has trailing "г." (abbreviation for "года"), sr/sr-Latn have trail
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for bg, ru, sr, sr-Latn, uk
 ## Done summary
-All 5 East/South Slavic locales (bg, ru, sr, sr-Latn, uk) have ordinal.date, ordinal.dateOnly, and clock YAML sections using phrase-clock engine. Build succeeds with 0 errors. All ordinal date and clock notation tests pass for bg, ru, sr, sr-Latn, uk (0 failures in those test categories for target locales). Implementation was completed in a prior iteration; this iteration verified correctness and marked task done.
+All 5 East/South Slavic locales (bg, ru, sr, sr-Latn, uk) have ordinal.date, ordinal.dateOnly, and clock YAML sections using phrase-clock engine. Build succeeds, source gen tests pass (58/58), and all ordinal date and clock notation tests pass for the 5 target locales. Ukrainian apostrophe (U+2019) alignment in test data resolved all uk-specific test failures.
 ## Done
 
 All 5 East/South Slavic locales (bg, ru, sr, sr-Latn, uk) already had ordinal.date, ordinal.dateOnly, and clock YAML sections from a prior iteration. This iteration fixed Ukrainian (uk) number word test failures caused by apostrophe character mismatch: the YAML uses U+2019 (linguistically correct Ukrainian apostrophe) but test expectations used U+0027 (straight ASCII apostrophe). Updated 71 test lines across 3 test data files to use U+2019, resolving all 392 uk-specific test failures.
@@ -102,6 +102,6 @@ All 5 East/South Slavic locales (bg, ru, sr, sr-Latn, uk) already had ordinal.da
 - All ordinal.date, ordinal.dateOnly, clock tests pass for bg, ru, sr, sr-Latn, uk
 - All uk number word tests pass (0 uk failures, down from 392)
 ## Evidence
-- Commits:
-- Tests:
+- Commits: f37b0e5c0b1b44900d0f8624bb038adaa6db3949, 024ae0ce63850b9200241170ed2c3372b1ff69fb, 05200687, df2f1790, 3e2ae195
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 - PRs:
