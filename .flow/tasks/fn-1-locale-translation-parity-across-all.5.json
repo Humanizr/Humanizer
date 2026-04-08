@@ -7,7 +7,7 @@
   "id": "fn-1-locale-translation-parity-across-all.5",
   "priority": null,
   "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.5.md",
-  "status": "done",
+  "status": "todo",
   "title": "Add ordinal.date + clock YAML \u2014 East and South Slavic locales",
-  "updated_at": "2026-04-08T13:33:00.724403Z"
+  "updated_at": "2026-04-08T13:41:54.692822Z"
 }
