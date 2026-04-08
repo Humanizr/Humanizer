@@ -75,28 +75,30 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         var article = ResolveArticle(hour);
         var nextArticle = ResolveArticle(hour + 1);
 
-        // Resolve minute suffix for range templates (Lb "Minutt"/"Minutten").
-        var minuteSuffix = ResolveMinuteSuffix(normalizedMinutes);
-
         // Check minute-bucket template first (exact 5-minute intervals).
         var template = GetBucketTemplate(normalizedMinutes);
         if (template.Length > 0)
         {
+            var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
             var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
             return ApplyDayPeriod(result, hour, normalizedMinutes);
         }
 
         // Try range-based templates for non-bucketed minutes.
+        // Range templates use relative minute counts (e.g., "minutes to half" or "minutes to next hour"),
+        // so the suffix must reflect the range-relative count, not the absolute minute value.
         var rangeTemplate = GetRangeTemplate(normalizedMinutes);
         if (rangeTemplate.Length > 0)
         {
+            var minuteSuffix = ResolveMinuteSuffixForRange(normalizedMinutes);
             var result = ExpandTemplate(rangeTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
             return ApplyDayPeriod(result, hour, normalizedMinutes);
         }
 
-        // Fall to default template.
+        // Fall to default template — use the actual minute count for suffix resolution.
         if (profile.DefaultTemplate.Length > 0)
         {
+            var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
             var result = ExpandTemplate(profile.DefaultTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix);
             return ApplyDayPeriod(result, hour, normalizedMinutes);
         }
@@ -258,12 +260,27 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
     }
 
     /// <summary>
-    /// Resolves the minute suffix based on the relevant minute count for the current range.
+    /// Resolves the minute suffix using the actual (absolute) minute count.
+    /// Used for bucket templates and the default template where the suffix should
+    /// agree with the minute value as spoken (e.g., bg "двадесет и три минути" = plural).
+    /// </summary>
+    string ResolveMinuteSuffixDirect(int normalizedMinutes)
+    {
+        if (profile.MinuteSuffixSingular.Length == 0 && profile.MinuteSuffixPlural.Length == 0)
+        {
+            return "";
+        }
+
+        return ResolveSlavicSuffix(normalizedMinutes, profile.MinuteSuffixSingular, profile.MinuteSuffixPaucal, profile.MinuteSuffixPlural, profile.PaucalLowOnly);
+    }
+
+    /// <summary>
+    /// Resolves the minute suffix based on the range-relative minute count.
     /// The count matches the minute value used in the range template: minutes for pastHour,
     /// minutesFromHalf for beforeHalf/afterHalf, minutesReverse for beforeNext.
     /// For Lb: "Minutt" (singular) when count == 1, "Minutten" (plural) otherwise.
     /// </summary>
-    string ResolveMinuteSuffix(int normalizedMinutes)
+    string ResolveMinuteSuffixForRange(int normalizedMinutes)
     {
         if (profile.MinuteSuffixSingular.Length == 0 && profile.MinuteSuffixPlural.Length == 0)
         {
