@@ -390,6 +390,16 @@ surfaces:
       - 'ش‌غر'
       - 'ش‌ش‌غر'
 
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    min0: '{hour}'
+    defaultTemplate: '{hour} و {minutes}'
+    earlyMorning: 'بامداد'
+    morning: 'صبح'
+    afternoon: 'بعدازظهر'
+    night: 'شب'
+
   ordinal:
     numeric:
       engine: 'suffix'

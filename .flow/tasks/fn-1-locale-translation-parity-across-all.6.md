@@ -103,9 +103,8 @@ Note: Hungarian has a unique date format with year-first and trailing dots. The 
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for fi, hu, az, tr, el, hy
 ## Done summary
-TBD
-
+Added ordinal.date, ordinal.dateOnly, and clock YAML sections for Finnish (fi), Hungarian (hu), Azerbaijani (az), Turkish (tr), Greek (el), and Armenian (hy) locales using the phrase-clock engine with locale-appropriate configurations (h24/h12 modes, dayPeriods, connectors, suffixes, zeroFillers).
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 4ca971d87d39e94a8f2bbe4e6e1f8b08f6ccc344, 52d67860e10a00e2e23e9e3c89e5ddcf2e18cdb2, 613061a5efd1b29af2dda33efc579051658fcadb
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (ordinal/clock tests pass for fi, hu, az, tr, el, hy)
 - PRs:

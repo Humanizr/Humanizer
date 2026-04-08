@@ -23,9 +23,11 @@ All values from `LocaleCoverageData` expectations. RTL validation: sweep tests a
 
 **clock engine assignments:**
 - lt: `phrase-clock` with `hourMode: h24`, `hourSuffixSingular`/`hourSuffixPlural` ("valanda"/"valandų"), `minuteSuffixSingular`/`minuteSuffixPlural` ("minutė"/"minutės")
-- lv: `phrase-clock` with `hourMode: h24`, `connector: 'un'` ("trīspadsmit un divdesmit trīs")
+- lv: `phrase-clock` with `hourMode: h24`, connector 'un' embedded in `defaultTemplate` (e.g., `defaultTemplate: '{hour} un {minutes}'`) ("trīspadsmit un divdesmit trīs")
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.6 — connector is not a valid phrase-clock field; embed in defaultTemplate -->
 - ar: `phrase-clock` with day-periods (`morning`/`afternoon`/`night`/`earlyMorning`), `minuteSuffixSingular: 'دقيقة'`/`minuteSuffixPlural: 'دقائق'` — RTL
-- fa: `phrase-clock` with day-periods (`morning`/`afternoon`/`night`/`earlyMorning`), `connector: 'و'` — RTL
+- fa: `phrase-clock` with day-periods (`morning`/`afternoon`/`night`/`earlyMorning`), connector 'و' embedded in `defaultTemplate` (not a separate field) — RTL
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.6 — connector is not a valid phrase-clock field; embed in defaultTemplate like '{hour} و {minutes}' -->
 - ku: `phrase-clock` with day-periods (`morning`/`afternoon`/`night`/`earlyMorning`) — RTL
 <!-- Updated by plan-sync: fn-1.5 confirmed only phrase-clock engine exists (no relative-clock). Used hourSuffixSingular/hourSuffixPlural and minuteSuffixSingular/minuteSuffixPlural, not hourSuffix/minuteSuffix. Day periods use earlyMorning/morning/afternoon/night fields (see es.yml). -->
 
@@ -49,6 +51,9 @@ All values verified against `LocaleCoverageData`.
 - ku: "یەک و بیست و سێی ئێوارە" — 12h + "و" + minutes + day-period
 
 Arabic (ar), Farsi (fa), and Kurdish (ku) are RTL locales. Ensure clock output does not include invisible directionality control characters (LRM, RLM, ALM) — follow the existing pattern at `LocaleRegistrySweepTests` that checks Arabic ordinal.date output for these marks.
+
+**Key phrase-clock patterns from task .6 implementation:** Every clock profile needs at minimum `defaultTemplate` (the main format string with `{hour}`, `{minutes}`, `{minuteSuffix}` placeholders). Use `min0` for the zero-minutes case. Connectors go inside `defaultTemplate`, not as a separate field. See `EngineContractCatalog.cs:678-722` for the full field list.
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.6 used defaultTemplate/min0 patterns extensively; connector is not a standalone field -->
 
 ## Investigation targets
 

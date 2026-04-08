@@ -536,6 +536,34 @@ surfaces:
       pattern: '{day} MMMM yyyy'
       dayMode: 'Numeric'
 
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
+    compactConjunction: 'و'
+    hourWordsMap:
+      - ''
+      - 'الواحدة'
+      - 'الثانية'
+      - 'الثالثة'
+      - 'الرابعة'
+      - 'الخامسة'
+      - 'السادسة'
+      - 'السابعة'
+      - 'الثامنة'
+      - 'التاسعة'
+      - 'العاشرة'
+      - 'الحادية عشرة'
+      - 'الثانية عشرة'
+    min0: '{hour}'
+    min5: '{hour} و{minutes} دقائق'
+    min10: '{hour} و{minutes} دقائق'
+    defaultTemplate: '{hour} و{minutes} دقيقة'
+    earlyMorning: 'صباحًا'
+    morning: 'صباحًا'
+    afternoon: 'بعد الظهر'
+    night: 'مساءً'
 
   compass:
     full:

@@ -428,6 +428,13 @@ surfaces:
       pattern: '{day} MMMM yyyy'
       dayMode: 'DotSuffix'
 
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    min0: '{hour}'
+    min5: '{hour} un piecas'
+    defaultTemplate: '{hour} un {minutes}'
+
   compass:
     full:
       - 'ziemeļi'

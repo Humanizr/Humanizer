@@ -369,6 +369,18 @@ surfaces:
   formatter:
     engine: 'profiled'
 
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourOneWord: 'یەک'
+    min0: '{hour}'
+    min5: '{hour}ی بەیانی و {minutes} خولەک'
+    defaultTemplate: '{hour} و {minutes}ی'
+    earlyMorning: ''
+    morning: ''
+    afternoon: 'ئێوارە'
+    night: 'شەو'
+
   ordinal:
     numeric:
       engine: 'suffix'

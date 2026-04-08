@@ -19,9 +19,10 @@ Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Austronesi
 
 **clock:** Use `phrase-clock` engine.
 - he: RTL — no directional marks
-- id: `hourMode: h12`, `hourPrefix: 'pukul'`
+- id: `hourMode: h12`, prefix 'pukul' embedded in `defaultTemplate` (e.g., `defaultTemplate: 'pukul {hour} lewat {minutes} menit'`) — `hourPrefix` is not a valid phrase-clock field
 - ms: similar to id
 - Others: derive from `LocaleCoverageData`
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.6 — hourPrefix is not a valid phrase-clock field; embed in defaultTemplate. See EngineContractCatalog.cs:678-722 for valid fields. -->
 
 ## Investigation targets
 
@@ -39,7 +40,7 @@ Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Austronesi
 
 **clock:** Use `phrase-clock` engine.
 - he: RTL — no directional marks
-- id: `hourMode: h12`, `hourPrefix: 'pukul'`
+- id: `hourMode: h12`, prefix 'pukul' embedded in `defaultTemplate` — `hourPrefix` is not a valid phrase-clock field
 - ms: similar to id
 - Others: derive from `LocaleCoverageData`
 
@@ -105,6 +106,9 @@ Note: Hebrew (he) is RTL — verify no directionality marks in output.
 - uz-Latn-UZ: "birdan yigirma uch o'tdi" — Latin script equivalent
 - zu-ZA: "ihora lokuqala namashumi amabili nantathu ntambama" — complex Zulu structure
 
+**Key phrase-clock patterns from task .6 implementation:** Every clock profile needs `defaultTemplate` (format string with `{hour}`, `{minutes}`, `{minuteSuffix}` placeholders). Use `min0` for zero-minutes case. Prefixes (like "pukul"), connectors, and structure words go inside `defaultTemplate`, not as separate fields. See `EngineContractCatalog.cs:678-722` for valid fields.
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.6 — hourPrefix/connector are not valid phrase-clock fields; embed in defaultTemplate -->
+
 ## Investigation targets
 
 **Required:**
@@ -112,6 +116,7 @@ Note: Hebrew (he) is RTL — verify no directionality marks in output.
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` — clock expectations
 - `src/Humanizer/Locales/fil.yml` — existing Filipino YAML structure
 - `docs/locale-yaml-reference.md:671-710` — clock engine field reference
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs:678-722` — phrase-clock engine contract (valid fields)
 
 **Optional:**
 - `src/Humanizer/Locales/en-US.yml:5-13` — month-first ordinal.date pattern (for fil reference)

@@ -540,6 +540,18 @@ surfaces:
       pattern: 'yyyy ''m.'' MMMM {day} ''d.'''
       dayMode: 'Numeric'
 
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
+    hourSuffixSingular: 'valanda'
+    hourSuffixPlural: 'valandų'
+    minuteSuffixSingular: 'minutė'
+    minuteSuffixPlural: 'minutės'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+
   compass:
     full:
       - 'šiaurė'

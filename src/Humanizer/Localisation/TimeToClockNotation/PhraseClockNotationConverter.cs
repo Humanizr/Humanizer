@@ -199,6 +199,15 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             words = words.Replace(" ", "");
         }
 
+        // Arabic-style conjunction compaction: " و " → " و" (attaches conjunction to the
+        // following word so "ثلاث و عشرون" becomes "ثلاث وعشرون").
+        if (profile.CompactConjunction.Length > 0)
+        {
+            words = words.Replace(
+                " " + profile.CompactConjunction + " ",
+                " " + profile.CompactConjunction);
+        }
+
         return words;
     }
 
@@ -583,7 +592,8 @@ sealed class PhraseClockNotationProfile(
     string minuteSuffixPaucal,
     string[] hourWordsMap,
     bool compactMinuteWords,
-    bool paucalLowOnly)
+    bool paucalLowOnly,
+    string compactConjunction)
 {
     /// <summary>Gets the hour rendering mode.</summary>
     public PhraseClockHourMode HourMode { get; } = hourMode;
@@ -671,6 +681,8 @@ sealed class PhraseClockNotationProfile(
     public bool CompactMinuteWords { get; } = compactMinuteWords;
     /// <summary>Gets whether paucal forms apply only to the exact values 2-4 (West Slavic), vs units 2-4 excluding teens (South Slavic default).</summary>
     public bool PaucalLowOnly { get; } = paucalLowOnly;
+    /// <summary>Gets a conjunction word (e.g., Arabic "و") to compact in minute words. When non-empty, " {word} " is replaced with " {word}" (attaching the conjunction to the following word).</summary>
+    public string CompactConjunction { get; } = compactConjunction;
 }
 
 #endif
