@@ -109,6 +109,65 @@ surfaces:
         Assert.Contains("OrdinalDateDayMode.Ordinal", dateCatalog);
         Assert.Contains("{day} MMMM yyyy", dateOnlyCatalog);
         Assert.Contains("OrdinalDateDayMode.OrdinalWhenDayIsOne", dateOnlyCatalog);
+
+        // Verify the zz-child profile specifically uses the correct dayMode in each catalog.
+        // The date catalog must NOT contain OrdinalWhenDayIsOne for the zz_child_cache entry,
+        // since zz-child's ordinal.date uses dayMode 'Ordinal'. The dateOnly catalog must have it.
+        // We extract the block after 'static class zz_child_cache' to the second '}' to get the
+        // full cache class body including the converter expression.
+        var dateBlock = ExtractCacheClassBody(dateCatalog, "zz_child_cache");
+        Assert.Contains("OrdinalDateDayMode.Ordinal", dateBlock);
+        Assert.DoesNotContain("OrdinalWhenDayIsOne", dateBlock);
+
+        var dateOnlyBlock = ExtractCacheClassBody(dateOnlyCatalog, "zz_child_cache");
+        Assert.Contains("OrdinalDateDayMode.OrdinalWhenDayIsOne", dateOnlyBlock);
+    }
+
+    /// <summary>
+    /// Extracts a generated static cache class body (up to its closing brace).
+    /// The generated pattern is:
+    /// <code>
+    /// static class name_cache
+    /// {
+    ///     internal static readonly T Value = expression;
+    /// }
+    /// </code>
+    /// </summary>
+    static string ExtractCacheClassBody(string source, string className)
+    {
+        var marker = "static class " + className;
+        var start = source.IndexOf(marker, StringComparison.Ordinal);
+        if (start < 0)
+        {
+            return string.Empty;
+        }
+
+        // Find the opening brace
+        var openBrace = source.IndexOf('{', start);
+        if (openBrace < 0)
+        {
+            return string.Empty;
+        }
+
+        // Find the closing brace (one nesting level)
+        var depth = 1;
+        for (var idx = openBrace + 1; idx < source.Length; idx++)
+        {
+            if (source[idx] == '{')
+            {
+                depth++;
+            }
+            else if (source[idx] == '}')
+            {
+                depth--;
+                if (depth == 0)
+                {
+                    return source[start..(idx + 1)];
+                }
+            }
+        }
+
+        return string.Empty;
     }
 
     [Fact]

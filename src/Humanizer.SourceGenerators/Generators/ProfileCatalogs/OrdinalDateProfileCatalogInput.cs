@@ -15,21 +15,26 @@ namespace Humanizer.SourceGenerators;
 
 public sealed partial class HumanizerSourceGenerator
 {
-    sealed class OrdinalDateProfileCatalogInput(ImmutableArray<OrdinalDateProfileDefinition> profiles)
+    sealed class OrdinalDateProfileCatalogInput(
+        ImmutableArray<OrdinalDateProfileDefinition> dateProfiles,
+        ImmutableArray<OrdinalDateProfileDefinition> dateOnlyProfiles)
     {
-        readonly ImmutableArray<OrdinalDateProfileDefinition> profiles = profiles;
+        readonly ImmutableArray<OrdinalDateProfileDefinition> dateProfiles = dateProfiles;
+        readonly ImmutableArray<OrdinalDateProfileDefinition> dateOnlyProfiles = dateOnlyProfiles;
 
         public static OrdinalDateProfileCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
-            var profiles = ImmutableArray.CreateBuilder<OrdinalDateProfileDefinition>();
-            var seenProfiles = new HashSet<string>(StringComparer.Ordinal);
+            var dateProfiles = ImmutableArray.CreateBuilder<OrdinalDateProfileDefinition>();
+            var dateOnlyProfiles = ImmutableArray.CreateBuilder<OrdinalDateProfileDefinition>();
+            var seenDate = new HashSet<string>(StringComparer.Ordinal);
+            var seenDateOnly = new HashSet<string>(StringComparer.Ordinal);
             foreach (var locale in localeCatalog.Locales)
             {
-                AddProfile(profiles, locale.DateToOrdinalWords, seenProfiles);
-                AddProfile(profiles, locale.DateOnlyToOrdinalWords, seenProfiles);
+                AddProfile(dateProfiles, locale.DateToOrdinalWords, seenDate);
+                AddProfile(dateOnlyProfiles, locale.DateOnlyToOrdinalWords, seenDateOnly);
             }
 
-            return new OrdinalDateProfileCatalogInput(profiles.ToImmutable());
+            return new OrdinalDateProfileCatalogInput(dateProfiles.ToImmutable(), dateOnlyProfiles.ToImmutable());
         }
 
         static void AddProfile(
@@ -53,6 +58,7 @@ public sealed partial class HumanizerSourceGenerator
         {
             EmitDateCatalog(
                 context,
+                dateProfiles,
                 "DateToOrdinalWordsProfileCatalog",
                 "IDateToOrdinalWordConverter",
                 "PatternDateToOrdinalWordsConverter",
@@ -60,6 +66,7 @@ public sealed partial class HumanizerSourceGenerator
 
             EmitDateCatalog(
                 context,
+                dateOnlyProfiles,
                 "DateOnlyToOrdinalWordsProfileCatalog",
                 "IDateOnlyToOrdinalWordConverter",
                 "PatternDateOnlyToOrdinalWordsConverter",
@@ -69,6 +76,7 @@ public sealed partial class HumanizerSourceGenerator
 
         void EmitDateCatalog(
             SourceProductionContext context,
+            ImmutableArray<OrdinalDateProfileDefinition> profiles,
             string catalogName,
             string interfaceName,
             string converterTypeName,
