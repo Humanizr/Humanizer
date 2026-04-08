@@ -155,7 +155,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             {
                 GrammaticalGender.Feminine => hourValue.ToWords(GrammaticalGender.Feminine),
                 GrammaticalGender.Neuter => hourValue.ToWords(GrammaticalGender.Neuter),
-                _ => hourValue.ToWords()
+                _ => hourValue.ToWords(GrammaticalGender.Masculine)
             };
         }
 
