@@ -375,11 +375,7 @@ surfaces:
     hourOneWord: 'یەک'
     min0: '{hour}'
     min5: '{hour}ی بەیانی و {minutes} خولەک'
-    defaultTemplate: '{hour} و {minutes}ی'
-    earlyMorning: ''
-    morning: ''
-    afternoon: 'ئێوارە'
-    night: 'شەو'
+    defaultTemplate: '{hour} و {minutes}ی ئێوارە'
 
   ordinal:
     numeric:

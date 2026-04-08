@@ -15,3 +15,6 @@ Clock profiles for Slavic locales must set minuteGender (and hourGender) explici
 
 ## 2026-04-08 manual [pitfall]
 Resolve grammatical suffix AFTER selecting the template path -- range-relative counts are wrong for default/bucket templates that use absolute minute values
+
+## 2026-04-08 manual [pitfall]
+Bucket templates (min5, min10, etc.) fire for ALL times at that minute value -- do not embed day-period words in bucket templates because the engine always appends day periods on top, causing contradictory double-period output
