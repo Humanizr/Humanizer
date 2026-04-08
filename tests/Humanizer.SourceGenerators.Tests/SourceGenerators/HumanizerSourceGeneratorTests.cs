@@ -1489,7 +1489,7 @@ wordsToNumber:
 
         static string CanonicalizeLocaleText(string path, string candidateText)
         {
-            var localeCode = System.IO.Path.GetFileNameWithoutExtension(path);
+            var localeCode = System.IO.Path.GetFileNameWithoutExtension(path.Replace('\\', '/'));
             if (candidateText.Contains("locale:", StringComparison.Ordinal) ||
                 candidateText.Contains("surfaces:", StringComparison.Ordinal))
             {

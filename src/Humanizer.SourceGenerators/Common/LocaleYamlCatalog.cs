@@ -37,7 +37,7 @@ public sealed partial class HumanizerSourceGenerator
                 return null;
             }
 
-            return new LocaleDefinitionFile(Path.GetFileNameWithoutExtension(additionalText.Path), fileText!);
+            return new LocaleDefinitionFile(Path.GetFileNameWithoutExtension(path.Replace('\\', '/')), fileText!);
         }
     }
 
