@@ -123,11 +123,12 @@ All values MUST match `LocaleCoverageData` expectations.
 **zh-Hant TFM conditionals:** `LocaleCoverageData.cs:11-30` has TFM-conditional expectations for zh-Hant. Clock output (spoken words) should be TFM-consistent. Verify.
 
 **clock:** Use `phrase-clock` engine.
-- ko: `hourMode: h12`, `hourSuffix: '시'`, `minuteSuffix: '분'`
+- ko: `hourMode: h12`, `hourSuffixSingular: '시'`/`hourSuffixPlural: '시'`, `minuteSuffixSingular: '분'`/`minuteSuffixPlural: '분'`
 - zh-Hans/zh-Hant: `hourMode: h12`, numeric-style or word-style depending on test expectations
 - bn, ta: check test expectations for format
 - th: investigate — Thai may use numeric format or spoken words
-- vi: `hourMode: h12`, `hourSuffix: 'giờ'`, `minuteSuffix: 'phút'`
+- vi: `hourMode: h12`, `hourSuffixSingular: 'giờ'`/`hourSuffixPlural: 'giờ'`, `minuteSuffixSingular: 'phút'`/`minuteSuffixPlural: 'phút'`
+<!-- Updated by plan-sync: fn-1.5 used hourSuffixSingular/hourSuffixPlural and minuteSuffixSingular/minuteSuffixPlural, not hourSuffix/minuteSuffix -->
 
 All values MUST match `LocaleCoverageData` expectations.
 

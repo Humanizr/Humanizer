@@ -20,8 +20,9 @@ Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Finno-Ugri
 
 **clock:** Use `phrase-clock` engine. el and hy may need dayPeriods (relative-hour style).
 - fi: `hourMode: h24`, simple concat
-- hu: `hourMode: h24`, `hourSuffix: 'óra'`, `minuteSuffix: 'perc'`
-- az: `hourMode: h24`, `hourSuffix: 'saat'`, `minuteSuffix: 'dəqiqə'`
+- hu: `hourMode: h24`, `hourSuffixSingular: 'óra'`/`hourSuffixPlural: 'óra'`, `minuteSuffixSingular: 'perc'`/`minuteSuffixPlural: 'perc'`
+- az: `hourMode: h24`, `hourSuffixSingular: 'saat'`/`hourSuffixPlural: 'saat'`, `minuteSuffixSingular: 'dəqiqə'`/`minuteSuffixPlural: 'dəqiqə'`
+<!-- Updated by plan-sync: fn-1.5 used hourSuffixSingular/hourSuffixPlural and minuteSuffixSingular/minuteSuffixPlural, not hourSuffix/minuteSuffix -->
 - tr: `hourMode: h24`, simple concat
 - el: `hourMode: h12`, dayPeriods (το πρωί/το απόγευμα/etc.), `connector: 'και'`
 - hy: `hourMode: h12`, connector + minutes pattern

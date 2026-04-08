@@ -22,11 +22,12 @@ All values from `LocaleCoverageData` expectations. RTL validation: sweep tests a
 ## Approach
 
 **clock engine assignments:**
-- lt: `phrase-clock` with `hourMode: h24`, `hourSuffix` ("valandų"/"valanda"), `minuteSuffix` ("minutės")
+- lt: `phrase-clock` with `hourMode: h24`, `hourSuffixSingular`/`hourSuffixPlural` ("valanda"/"valandų"), `minuteSuffixSingular`/`minuteSuffixPlural` ("minutė"/"minutės")
 - lv: `phrase-clock` with `hourMode: h24`, `connector: 'un'` ("trīspadsmit un divdesmit trīs")
-- ar: `relative-clock` with day-periods, `minuteSuffix: 'دقيقة'`/`'دقائق'` — RTL
-- fa: `relative-clock` with day-periods, `connector: 'و'` — RTL
-- ku: `relative-clock` with day-periods — RTL
+- ar: `phrase-clock` with day-periods (`morning`/`afternoon`/`night`/`earlyMorning`), `minuteSuffixSingular: 'دقيقة'`/`minuteSuffixPlural: 'دقائق'` — RTL
+- fa: `phrase-clock` with day-periods (`morning`/`afternoon`/`night`/`earlyMorning`), `connector: 'و'` — RTL
+- ku: `phrase-clock` with day-periods (`morning`/`afternoon`/`night`/`earlyMorning`) — RTL
+<!-- Updated by plan-sync: fn-1.5 confirmed only phrase-clock engine exists (no relative-clock). Used hourSuffixSingular/hourSuffixPlural and minuteSuffixSingular/minuteSuffixPlural, not hourSuffix/minuteSuffix. Day periods use earlyMorning/morning/afternoon/night fields (see es.yml). -->
 
 RTL locales (ar, fa, ku): verify output has no invisible directionality marks (LRM/RLM/ALM).
 
@@ -37,7 +38,7 @@ All values verified against `LocaleCoverageData`.
 **Required:**
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
 - `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — RTL mark assertions
-- Task .2 `phrase-clock` and `relative-clock` engine schemas
+- Task .2 `phrase-clock` engine schema (only engine that exists; no `relative-clock`)
 ## Approach
 
 **For clock:** Expected output:
@@ -59,7 +60,7 @@ Arabic (ar), Farsi (fa), and Kurdish (ku) are RTL locales. Ensure clock output d
 
 **Optional:**
 - `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — Arabic directionality mark assertions
-- `src/Humanizer/Locales/es.yml:980-1000` — relative-hour engine for RTL adaptation
+- `src/Humanizer/Locales/es.yml:980-1000` — phrase-clock with day-period fields (earlyMorning/morning/afternoon/night) for RTL adaptation
 ## Acceptance
 - [ ] lt.yml, lv.yml, ar.yml, fa.yml, ku.yml each have clock sections
 - [ ] RTL locales (ar, fa, ku) produce no directional marks
