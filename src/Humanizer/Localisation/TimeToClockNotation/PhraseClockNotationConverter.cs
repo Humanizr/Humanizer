@@ -159,12 +159,10 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             };
         }
 
-        // Apply hour suffix (singular/plural variants for locales like French).
+        // Apply hour suffix (singular/paucal/plural variants).
         if (profile.HourSuffixSingular.Length > 0 || profile.HourSuffixPlural.Length > 0)
         {
-            var suffix = hourValue == 1 && profile.HourSuffixSingular.Length > 0
-                ? profile.HourSuffixSingular
-                : profile.HourSuffixPlural;
+            var suffix = ResolveSlavicSuffix(hourValue, profile.HourSuffixSingular, profile.HourSuffixPaucal, profile.HourSuffixPlural, profile.PaucalLowOnly);
             return baseWord + " " + suffix;
         }
 
@@ -200,6 +198,52 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         }
 
         return words;
+    }
+
+    /// <summary>
+    /// Resolves the correct suffix form for Slavic-style grammatical number.
+    /// When <paramref name="paucalLowOnly"/> is false (South Slavic default):
+    ///   singular (1, 21, 31…), paucal (2-4, 22-24…), plural (5-20, 25-30…).
+    /// When <paramref name="paucalLowOnly"/> is true (West Slavic — Czech, Slovak):
+    ///   singular (1), paucal (2-4 only), plural (5+, including 21-24, 31-34…).
+    /// When paucal is empty, falls back to singular/plural only.
+    /// </summary>
+    static string ResolveSlavicSuffix(int count, string singular, string paucal, string plural, bool paucalLowOnly = false)
+    {
+        if (paucal.Length > 0)
+        {
+            if (paucalLowOnly)
+            {
+                // West Slavic: paucal only for the exact values 2, 3, 4.
+                if (count is > 1 and < 5)
+                {
+                    return paucal;
+                }
+
+                return count == 1 && singular.Length > 0 ? singular : plural;
+            }
+
+            // South Slavic: paucal for units 2-4, excluding teens.
+            var tens = count % 100 / 10;
+            if (tens != 1) // teens (11-19) are always plural
+            {
+                var units = count % 10;
+                if (units == 1)
+                {
+                    return singular.Length > 0 ? singular : plural;
+                }
+
+                if (units is > 1 and < 5)
+                {
+                    return paucal;
+                }
+            }
+
+            return plural;
+        }
+
+        // No paucal form — simple singular/plural.
+        return count == 1 && singular.Length > 0 ? singular : plural;
     }
 
     string ResolveArticle(int rawHour)
@@ -250,9 +294,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             relevantCount = normalizedMinutes;
         }
 
-        return relevantCount == 1 && profile.MinuteSuffixSingular.Length > 0
-            ? profile.MinuteSuffixSingular
-            : profile.MinuteSuffixPlural;
+        return ResolveSlavicSuffix(relevantCount, profile.MinuteSuffixSingular, profile.MinuteSuffixPaucal, profile.MinuteSuffixPlural, profile.PaucalLowOnly);
     }
 
     string GetBucketTemplate(int minutes)
@@ -520,8 +562,11 @@ sealed class PhraseClockNotationProfile(
     string beforeNextTemplate,
     string minuteSuffixSingular,
     string minuteSuffixPlural,
+    string hourSuffixPaucal,
+    string minuteSuffixPaucal,
     string[] hourWordsMap,
-    bool compactMinuteWords)
+    bool compactMinuteWords,
+    bool paucalLowOnly)
 {
     /// <summary>Gets the hour rendering mode.</summary>
     public PhraseClockHourMode HourMode { get; } = hourMode;
@@ -599,10 +644,16 @@ sealed class PhraseClockNotationProfile(
     public string MinuteSuffixSingular { get; } = minuteSuffixSingular;
     /// <summary>Gets the plural minute suffix (e.g., Lb "Minutten").</summary>
     public string MinuteSuffixPlural { get; } = minuteSuffixPlural;
+    /// <summary>Gets the paucal hour suffix for Slavic locales (2-4 form, e.g., Czech "hodiny").</summary>
+    public string HourSuffixPaucal { get; } = hourSuffixPaucal;
+    /// <summary>Gets the paucal minute suffix for Slavic locales (2-4 form, e.g., Czech "minuty").</summary>
+    public string MinuteSuffixPaucal { get; } = minuteSuffixPaucal;
     /// <summary>Gets an optional map of hour values (0-23) to explicit word strings, bypassing <c>ToWords()</c>.</summary>
     public string[] HourWordsMap { get; } = hourWordsMap;
     /// <summary>Gets whether spaces should be removed from minute words (e.g., Slovak "dvadsaťtri" instead of "dvadsať tri").</summary>
     public bool CompactMinuteWords { get; } = compactMinuteWords;
+    /// <summary>Gets whether paucal forms apply only to the exact values 2-4 (West Slavic), vs units 2-4 excluding teens (South Slavic default).</summary>
+    public bool PaucalLowOnly { get; } = paucalLowOnly;
 }
 
 #endif

@@ -476,10 +476,15 @@ surfaces:
     hourMode: 'h24'
     hourGender: 'feminine'
     hourSuffixSingular: 'hodina'
+    hourSuffixPaucal: 'hodiny'
     hourSuffixPlural: 'hodín'
+    minuteSuffixSingular: 'minúta'
+    minuteSuffixPaucal: 'minúty'
+    minuteSuffixPlural: 'minút'
+    paucalLowOnly: true
     compactMinuteWords: true
     min0: '{hour}'
-    defaultTemplate: '{hour} {minutes} minút'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
 
   compass:
     full:

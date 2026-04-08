@@ -89,8 +89,7 @@ Use `phrase-hour` engine with appropriate phrase templates. Each locale's clock 
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for cs, sk, pl, hr, sl
 ## Done summary
-TBD
-
+Added ordinal.date, ordinal.dateOnly, and clock YAML sections for cs, sk, pl, hr, sl locales. Extended phrase-clock engine with hourWordsMap for Polish ordinal feminine hour forms and compactMinuteWords for Slovak compound number notation. Fixed OrdinalDatePattern to produce genitive month names in Slavic locales by retaining a day specifier in the format string.
 ## Evidence
 - Commits:
 - Tests:

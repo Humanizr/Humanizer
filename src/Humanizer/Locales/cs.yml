@@ -463,9 +463,14 @@ surfaces:
     hourMode: 'h24'
     hourGender: 'feminine'
     hourSuffixSingular: 'hodina'
+    hourSuffixPaucal: 'hodiny'
     hourSuffixPlural: 'hodin'
+    minuteSuffixSingular: 'minuta'
+    minuteSuffixPaucal: 'minuty'
+    minuteSuffixPlural: 'minut'
+    paucalLowOnly: true
     min0: '{hour}'
-    defaultTemplate: '{hour} {minutes} minut'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
 
   compass:
     full:
