@@ -702,6 +702,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "night", null, null, null, "", null, null),
                             Member("enum", "dayPeriodPosition", null, "PhraseClockDayPeriodPosition", null, "suffix", null, null),
                             Member("string", "hourZeroWord", null, null, null, "", null, null),
+                            Member("string", "hourOneWord", null, null, null, "", null, null),
                             Member("string", "hourTwelveWord", null, null, null, "", null, null),
                             Member("string", "hourSuffixSingular", null, null, null, "", null, null),
                             Member("string", "hourSuffixPlural", null, null, null, "", null, null),

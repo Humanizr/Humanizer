@@ -372,6 +372,19 @@ surfaces:
         exactReplacements:
           1: 'primul'
 
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    defaultTemplate: 'ora {hour} și {minutes}'
 
   compass:
     full:

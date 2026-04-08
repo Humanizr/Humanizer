@@ -121,10 +121,16 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
     {
         var hourValue = ResolveHourValue(rawHour);
 
-        // Check for fixed hour-word overrides (e.g., French "minuit" for 0, "midi" for 12).
+        // Check for fixed hour-word overrides (e.g., French "minuit" for 0, "midi" for 12,
+        // Norwegian "ett" for 1 when the number engine produces a different form).
         if (hourValue == 0 && profile.HourZeroWord.Length > 0)
         {
             return profile.HourZeroWord;
+        }
+
+        if (hourValue == 1 && profile.HourOneWord.Length > 0)
+        {
+            return profile.HourOneWord;
         }
 
         if (hourValue == 12 && profile.HourTwelveWord.Length > 0)
@@ -486,6 +492,7 @@ sealed class PhraseClockNotationProfile(
     string night,
     PhraseClockDayPeriodPosition dayPeriodPosition,
     string hourZeroWord,
+    string hourOneWord,
     string hourTwelveWord,
     string hourSuffixSingular,
     string hourSuffixPlural,
@@ -549,6 +556,8 @@ sealed class PhraseClockNotationProfile(
     public PhraseClockDayPeriodPosition DayPeriodPosition { get; } = dayPeriodPosition;
     /// <summary>Gets the fixed hour word for hour value 0 (e.g., French "minuit").</summary>
     public string HourZeroWord { get; } = hourZeroWord;
+    /// <summary>Gets the fixed hour word for hour value 1 when the number engine produces an unsuitable form (e.g., Norwegian "ett").</summary>
+    public string HourOneWord { get; } = hourOneWord;
     /// <summary>Gets the fixed hour word for hour value 12 (e.g., French "midi").</summary>
     public string HourTwelveWord { get; } = hourTwelveWord;
     /// <summary>Gets the hour suffix for singular hours (e.g., French "heure").</summary>
