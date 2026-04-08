@@ -89,13 +89,17 @@ Standard `pattern` engine with `calendarMode: 'Gregorian'` (or omitted, since it
 - vi: `'{day} ''tháng'' M ''năm'' yyyy'` + `dayMode: 'Numeric'`
 
 **clock using `phrase-clock`:**
-- ko: dayPeriods + h12 + "시" / "분"
-- zh-Hans: dayPeriods + h12 + "点" / "分"
-- zh-Hant: dayPeriods + h12 + "點" / "分"
-- bn: dayPeriods + h12
-- ta: dayPeriods + h12 + "மணி" / "நிமிடம்"
-- th: dayPeriods + h12 + "นาที"
-- vi: h12 + "giờ" / "phút" + dayPeriod suffix
+- ko: dayPeriods + h12 + "시" / "분" — day-period prefix with space, use `dayPeriodPosition: prefix`
+- zh-Hans: dayPeriods + h12 + "点" / "分" — day-period prefix **no space**, use `{dayPeriod}` in template: `'{dayPeriod}{hour}点{minutes}分'`
+- zh-Hant: dayPeriods + h12 + "點" / "分" — day-period prefix **no space**, use `{dayPeriod}` in template: `'{dayPeriod}{hour}點{minutes}分'`
+- bn: dayPeriods + h12 — day-period prefix with space, use `dayPeriodPosition: prefix`
+- ta: dayPeriods + h12 + "மணி" / "நிமிடம்" — day-period prefix with space, use `dayPeriodPosition: prefix`
+- th: dayPeriods + h12 + "นาที" — day-period prefix **no space**, use `{dayPeriod}` in template: `'{dayPeriod}{hour}{minutes}นาที'`
+- vi: h12 + "giờ" / "phút" + dayPeriod suffix — day-period suffix with space, use `dayPeriodPosition: suffix`
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.7 — use {dayPeriod} inline placeholder for zh-Hans, zh-Hant, th where no space between day-period and hour -->
+
+**Inline `{dayPeriod}` placeholder (from task .7):** For locales where the day-period is concatenated directly to adjacent words **without a space** (zh-Hans, zh-Hant, th), use the `{dayPeriod}` placeholder inside templates instead of `dayPeriodPosition`. When a template contains `{dayPeriod}`, the engine expands it inline and skips automatic prefix/suffix append. Example from ku.yml: `defaultTemplate: '{hour} و {minutes}ی {dayPeriod}'`. This is the correct approach for zh-Hans (`'{dayPeriod}{hour}点{minutes}分'`), zh-Hant (`'{dayPeriod}{hour}點{minutes}分'`), and th (`'{dayPeriod}{hour}{minutes}นาที'`).
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.7 — {dayPeriod} placeholder added to phrase-clock engine for inline day-period placement; use instead of dayPeriodPosition when no space between day-period and adjacent words -->
 
 All values MUST match `LocaleCoverageData` expectations.
 
@@ -109,6 +113,7 @@ All values MUST match `LocaleCoverageData` expectations.
 - `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalDateProfileCatalogInput.cs` — ordinal.date profile generation
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:36-99` — ordinal.date expectations (verify Thai year)
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1263` — clock expectations
+- `src/Humanizer/Locales/ku.yml:372-382` — Kurdish clock as reference for `{dayPeriod}` inline pattern
 
 **Optional:**
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` — zh-Hant TFM conditionals
@@ -191,13 +196,14 @@ The `zh-Hant` locale has TFM-conditional expectations in `LocaleCoverageData.cs:
 **Thai Buddhist calendar:** The `OrdinalDatePattern.GetPatternCulture()` forces a Gregorian calendar, but Thai test expects 2565 (Buddhist era). Investigate how the existing test expectation was authored — the pattern engine may need `useNativeCalendar: true` or the Thai output may need special handling.
 
 **For clock:** Expected output:
-- ko: "오후 한 시 이십삼 분" — day-period + 12h + "시" + minutes + "분"
-- zh-Hans: "下午一点二十三分" — day-period + 12h + "点" + minutes + "分"
-- zh-Hant: "下午一點二十三分" — Traditional Chinese variant
-- bn: "দুপুর একটা তেইশ" — day-period + 12h + minutes
-- ta: "பிற்பகல் ஒரு மணி இருபத்து மூன்று நிமிடம்" — day-period + 12h + "மணி" + minutes + "நிமிடம்"
-- th: "บ่ายหนึ่งยี่สิบสามนาที" — day-period + 12h + minutes + "นาที"
-- vi: "một giờ hai mươi ba phút chiều" — 12h + "giờ" + minutes + "phút" + day-period
+- ko: "오후 한 시 이십삼 분" — day-period prefix (space-separated), use `dayPeriodPosition: prefix`
+- zh-Hans: "下午一点二十三分" — day-period prefix (**no space**), use `{dayPeriod}` inline in template
+- zh-Hant: "下午一點二十三分" — day-period prefix (**no space**), use `{dayPeriod}` inline in template
+- bn: "দুপুর একটা তেইশ" — day-period prefix (space-separated), use `dayPeriodPosition: prefix`
+- ta: "பிற்பகல் ஒரு மணி இருபத்து மூன்று நிமிடம்" — day-period prefix (space-separated), use `dayPeriodPosition: prefix`
+- th: "บ่ายหนึ่งยี่สิบสามนาที" — day-period prefix (**no space**), use `{dayPeriod}` inline in template
+- vi: "một giờ hai mươi ba phút chiều" — day-period suffix (space-separated), use `dayPeriodPosition: suffix`
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.7 — clarified which locales need {dayPeriod} inline (no-space concat) vs dayPeriodPosition (space-separated) -->
 
 ## Key context
 
@@ -212,6 +218,8 @@ The `zh-CN` → `zh-Hans` variant should auto-inherit. Verify the CultureInfo.Pa
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` — clock expectations
 - `src/Humanizer/Locales/ja.yml:290-296` — Japanese ordinal.date and clock pattern
 - `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:59-83` — GetPatternCulture() Gregorian override
+- `src/Humanizer/Locales/ku.yml:372-382` — Kurdish clock as reference for `{dayPeriod}` inline pattern (zh-Hans, zh-Hant, th need same approach)
+- `src/Humanizer/Localisation/TimeToClockNotation/PhraseClockNotationConverter.cs:486-502` — `ApplyDayPeriodIfNeeded` logic for `{dayPeriod}` vs auto-append
 
 **Optional:**
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:11-30` — zh-Hant TFM conditionals

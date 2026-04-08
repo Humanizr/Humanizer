@@ -18,3 +18,6 @@ Resolve grammatical suffix AFTER selecting the template path -- range-relative c
 
 ## 2026-04-08 manual [pitfall]
 Bucket templates (min5, min10, etc.) fire for ALL times at that minute value -- do not embed day-period words in bucket templates because the engine always appends day periods on top, causing contradictory double-period output
+
+## 2026-04-08 manual [pitfall]
+Day-period hour resolution must be template-aware: only shift to next-hour period when template references {nextHour} or {nextArticle}, not based on minute threshold alone

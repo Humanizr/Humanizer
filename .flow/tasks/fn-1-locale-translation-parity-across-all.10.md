@@ -5,7 +5,8 @@ Update documentation to reflect the `phrase-clock` engine consolidation, removal
 
 **Size:** M
 **Files:**
-- `docs/locale-yaml-reference.md` — HIGH PRIORITY: Replace `phrase-hour`/`relative-hour` engine sections + residual leaf descriptions with `phrase-clock` engine. Add all new YAML fields (hourMode, dayPeriods, minute buckets, applyEifelerRule, etc.). Update "Shared Strategy Values" with `hourMode` values.
+- `docs/locale-yaml-reference.md` — HIGH PRIORITY: Replace `phrase-hour`/`relative-hour` engine sections + residual leaf descriptions with `phrase-clock` engine. Add all new YAML fields (hourMode, dayPeriods, minute buckets, applyEifelerRule, hourWordsMap, compactConjunction, compactMinuteWords, paucalLowOnly, minuteGender, etc.). Document the `{dayPeriod}` inline template placeholder (allows day-period placement without automatic prefix/suffix spacing). Update "Shared Strategy Values" with `hourMode` values.
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.7 — added hourWordsMap, compactConjunction, {dayPeriod} placeholder to documentation scope -->
 - `docs/locale-yaml-how-to.md` — HIGH PRIORITY: Replace clock engine list. Update "Choosing Between A Shared Engine And A New One" and "Feature-By-Feature Authoring Order" step 9.
 - `docs/adding-a-locale.md` — MEDIUM: Update "When A Residual Locale Leaf Is Acceptable" (no clock leaves remain). Add registry completeness tests to "Testing Requirements" contributor checklist.
 - `ARCHITECTURE.md` — MEDIUM: Remove references to clock residual leaves. Verify pipeline table still accurate.
@@ -26,6 +27,11 @@ For each file:
 - `docs/locale-yaml-how-to.md:339-347` — clock engine list
 - `docs/adding-a-locale.md` — residual leaf sections and testing requirements
 - `ARCHITECTURE.md:48-88` — pipeline table and residual leaf language
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs:678-723` — definitive phrase-clock field list (source of truth for docs)
+- `src/Humanizer/Locales/ku.yml:372-382` — example of `{dayPeriod}` inline placeholder usage
+- `src/Humanizer/Locales/ar.yml:540-566` — example of `hourWordsMap` + `compactConjunction` usage
+- `src/Humanizer/Localisation/TimeToClockNotation/PhraseClockNotationConverter.cs:486-502` — `{dayPeriod}` placeholder semantics (skips auto-append)
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.7 — added source references for new phrase-clock features -->
 ## Approach
 
 Each doc update should be minimal — reflect the new reality that all shipped locales have complete translations. Do not rewrite sections; update the specific claims that are now outdated.

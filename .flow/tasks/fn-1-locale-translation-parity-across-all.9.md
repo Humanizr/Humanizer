@@ -97,17 +97,17 @@ Note: Maltese (mt) has embedded `ta'` with apostrophe — needs careful YAML quo
 Note: Hebrew (he) is RTL — verify no directionality marks in output.
 
 **For clock:** Expected output:
-- he: "אחת עשרים ושלוש" — 12h + minutes
+- he: "אחת עשרים ושלוש" — 12h + minutes (no day-period)
 - id: "pukul satu lewat dua puluh tiga menit" — "pukul" + 12h + "lewat" + minutes + "menit"
-- ms: "pukul satu dua puluh tiga petang" — "pukul" + 12h + minutes + day-period
-- fil: "ala una beinte-tres ng hapon" — "ala" + 12h + Spanish-influenced minutes + "ng" + day-period
+- ms: "pukul satu dua puluh tiga petang" — "pukul" + 12h + minutes + day-period suffix (space-separated, use `dayPeriodPosition: suffix`)
+- fil: "ala una beinte-tres ng hapon" — "ala" + 12h + minutes + "ng" + day-period — use `{dayPeriod}` inline placeholder for "ng {dayPeriod}" pattern: `defaultTemplate: 'ala {hour} {minutes} ng {dayPeriod}'`
 - mt: "is-siegħa waħda u tlieta u għoxrin" — "is-siegħa" + 12h + "u" + minutes
 - uz-Cyrl-UZ: "бирдан йигирма уч ўтди" — 12h + minutes + "ўтdi"
 - uz-Latn-UZ: "birdan yigirma uch o'tdi" — Latin script equivalent
 - zu-ZA: "ihora lokuqala namashumi amabili nantathu ntambama" — complex Zulu structure
 
-**Key phrase-clock patterns from task .6 implementation:** Every clock profile needs `defaultTemplate` (format string with `{hour}`, `{minutes}`, `{minuteSuffix}` placeholders). Use `min0` for zero-minutes case. Prefixes (like "pukul"), connectors, and structure words go inside `defaultTemplate`, not as separate fields. See `EngineContractCatalog.cs:678-722` for valid fields.
-<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.6 — hourPrefix/connector are not valid phrase-clock fields; embed in defaultTemplate -->
+**Key phrase-clock patterns from tasks .6 and .7:** Every clock profile needs `defaultTemplate` (format string with `{hour}`, `{minutes}`, `{minuteSuffix}` placeholders). Use `min0` for zero-minutes case. Prefixes (like "pukul"), connectors, and structure words go inside `defaultTemplate`, not as separate fields. For day-period placement: use `dayPeriodPosition: prefix/suffix` when there is a space between day-period and adjacent words; use `{dayPeriod}` inline placeholder in templates when day-period needs to be concatenated without a space or with a connector word (e.g., fil "ng {dayPeriod}"). When a template contains `{dayPeriod}`, the engine skips automatic prefix/suffix append. See `EngineContractCatalog.cs:678-723` for valid fields. For locales with irregular hour names (like Arabic definite-article forms), use `hourWordsMap` string array instead of relying on `ToWords()`.
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.7 — added {dayPeriod} inline placeholder guidance, hourWordsMap, and compactConjunction from Arabic implementation -->
 
 ## Investigation targets
 
@@ -116,11 +116,14 @@ Note: Hebrew (he) is RTL — verify no directionality marks in output.
 - `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs:1065-1129` — clock expectations
 - `src/Humanizer/Locales/fil.yml` — existing Filipino YAML structure
 - `docs/locale-yaml-reference.md:671-710` — clock engine field reference
-- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs:678-722` — phrase-clock engine contract (valid fields)
+- `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs:678-723` — phrase-clock engine contract (valid fields)
+- `src/Humanizer/Locales/ku.yml:372-382` — Kurdish clock as reference for `{dayPeriod}` inline placeholder pattern
+- `src/Humanizer/Locales/ar.yml:540-566` — Arabic clock as reference for `hourWordsMap` and `compactConjunction`
 
 **Optional:**
 - `src/Humanizer/Locales/en-US.yml:5-13` — month-first ordinal.date pattern (for fil reference)
 - `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs:425-441` — RTL directionality checks
+- `src/Humanizer/Localisation/TimeToClockNotation/PhraseClockNotationConverter.cs:486-502` — `ApplyDayPeriodIfNeeded` logic
 ## Acceptance
 - [ ] id.yml, ms.yml, fil.yml, mt.yml, uz-Cyrl-UZ.yml, uz-Latn-UZ.yml, zu-ZA.yml each have ordinal.date, ordinal.dateOnly, and clock sections
 - [ ] he.yml has clock section (ordinal.date done in .8)

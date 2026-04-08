@@ -1,7 +1,4 @@
 {
-  "assignee": null,
-  "claim_note": "",
-  "claimed_at": null,
   "created_at": "2026-04-06T21:55:05.682661Z",
   "depends_on": [
     "fn-1-locale-translation-parity-across-all.2"
@@ -12,5 +9,5 @@
   "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.7.md",
   "status": "todo",
   "title": "Add clock YAML \u2014 Baltic and Indo-Iranian locales",
-  "updated_at": "2026-04-07T00:43:26.565499Z"
+  "updated_at": "2026-04-08T22:12:21.773868Z"
 }
