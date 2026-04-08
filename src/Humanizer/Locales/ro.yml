@@ -127,7 +127,7 @@ surfaces:
       millisecond:
         single:
           numeric: '1 milisecundă'
-          words: 'one milisecundă'
+          words: 'o milisecundă'
         multiple:
           countPlacement: none
           forms:
@@ -135,7 +135,7 @@ surfaces:
       second:
         single:
           numeric: '1 secundă'
-          words: 'one secundă'
+          words: 'o secundă'
         multiple:
           countPlacement: none
           forms:
@@ -143,7 +143,7 @@ surfaces:
       minute:
         single:
           numeric: '1 minut'
-          words: 'one minut'
+          words: 'un minut'
         multiple:
           countPlacement: none
           forms:
@@ -151,7 +151,7 @@ surfaces:
       hour:
         single:
           numeric: '1 oră'
-          words: 'one oră'
+          words: 'o oră'
         multiple:
           countPlacement: none
           forms:
@@ -159,7 +159,7 @@ surfaces:
       day:
         single:
           numeric: '1 zi'
-          words: 'one zi'
+          words: 'o zi'
         multiple:
           countPlacement: none
           forms:
@@ -167,7 +167,7 @@ surfaces:
       week:
         single:
           numeric: '1 săptămână'
-          words: 'one săptămână'
+          words: 'o săptămână'
         multiple:
           countPlacement: none
           forms:
@@ -175,7 +175,7 @@ surfaces:
       month:
         single:
           numeric: '1 lună'
-          words: 'one lună'
+          words: 'o lună'
         multiple:
           countPlacement: none
           forms:
@@ -183,7 +183,7 @@ surfaces:
       year:
         single:
           numeric: '1 an'
-          words: 'one an'
+          words: 'un an'
         multiple:
           countPlacement: none
           forms:
