@@ -424,6 +424,7 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourGender: 'feminine'
+    min0: '{hour}'
     defaultTemplate: '{hour} e {minutes}'
 
   compass:
