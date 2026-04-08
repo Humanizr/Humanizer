@@ -1,4 +1,9 @@
 ## --------------------------------------------
+##  Python build artifacts
+__pycache__/
+*.pyc
+
+## --------------------------------------------
 ##  xUnit.net specific ignores
 
 Test*.html

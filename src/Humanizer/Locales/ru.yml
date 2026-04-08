@@ -1131,6 +1131,7 @@ surfaces:
   clock:
     engine: 'phrase-clock'
     hourMode: 'h12'
+    minuteGender: 'feminine'
     hourOneWord: 'час'
     defaultTemplate: '{hour} {minutes}'
 
