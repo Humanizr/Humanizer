@@ -9,3 +9,6 @@ Template placeholder expansion must trim results and collapse double spaces when
 
 ## 2026-04-07 manual [pitfall]
 Do not add engine contract fields that have no implementation in the runtime converter - advertises behavior the system cannot deliver
+
+## 2026-04-08 manual [pitfall]
+Clock profiles for Slavic locales must set minuteGender (and hourGender) explicitly -- minutes are feminine in most Slavic languages and the engine defaults to masculine
