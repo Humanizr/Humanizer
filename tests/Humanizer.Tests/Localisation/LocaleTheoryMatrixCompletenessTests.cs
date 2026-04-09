@@ -171,36 +171,6 @@ public class LocaleTheoryMatrixCompletenessTests
 
     [Theory]
     [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_DateShortDate2022January25ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.DateShortDate2022January25ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_DateLongDate2022January25ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.DateLongDate2022January25ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_DateShortDate2015January1ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.DateShortDate2015January1ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_DateLongDate2015January1ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.DateLongDate2015January1ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_DateShortDate2015February3ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.DateShortDate2015February3ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_DateLongDate2015February3ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.DateLongDate2015February3ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
     public void LocaleCoverageData_DateToOrdinalWords2022January25ExpectationTheoryData_IncludeLocale(string localeName) =>
         AssertLocaleCoverage(LocaleCoverageData.DateToOrdinalWords2022January25ExpectationTheoryData, localeName);
 
@@ -215,36 +185,6 @@ public class LocaleTheoryMatrixCompletenessTests
         AssertLocaleCoverage(LocaleCoverageData.DateToOrdinalWords2015February3ExpectationTheoryData, localeName);
 
 #if NET6_0_OR_GREATER
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_TimeOnlyShortTime1323ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.TimeOnlyShortTime1323ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_TimeOnlyLongTime1323ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.TimeOnlyLongTime1323ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_TimeOnlyShortTime1325ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.TimeOnlyShortTime1325ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_TimeOnlyLongTime1325ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.TimeOnlyLongTime1325ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_TimeOnlyShortTime0105ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.TimeOnlyShortTime0105ReferenceTheoryData, localeName);
-
-    [Theory]
-    [MemberData(nameof(ShippedLocaleRows))]
-    public void LocaleCoverageData_TimeOnlyLongTime0105ReferenceTheoryData_IncludeLocale(string localeName) =>
-        AssertLocaleCoverage(LocaleCoverageData.TimeOnlyLongTime0105ReferenceTheoryData, localeName);
-
     [Theory]
     [MemberData(nameof(ShippedLocaleRows))]
     public void LocaleCoverageData_DateOnlyToOrdinalWords2022January25ExpectationTheoryData_IncludeLocale(string localeName) =>

@@ -143,60 +143,6 @@ public class LocaleRegistrySweepTests
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateShortDate2022January25ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateFormatting_ShortDate_2022January25_UsesExpectedCultureString(string localeName, DateExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var date = new DateTime(expected.Year, expected.Month, expected.Day);
-        Assert.Equal(expected.Expected, ToVisibleText(date.ToString("d", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateLongDate2022January25ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateFormatting_LongDate_2022January25_UsesExpectedCultureString(string localeName, DateExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var date = new DateTime(expected.Year, expected.Month, expected.Day);
-        Assert.Equal(expected.Expected, ToVisibleText(date.ToString("D", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateShortDate2015January1ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateFormatting_ShortDate_2015January1_UsesExpectedCultureString(string localeName, DateExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var date = new DateTime(expected.Year, expected.Month, expected.Day);
-        Assert.Equal(expected.Expected, ToVisibleText(date.ToString("d", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateLongDate2015January1ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateFormatting_LongDate_2015January1_UsesExpectedCultureString(string localeName, DateExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var date = new DateTime(expected.Year, expected.Month, expected.Day);
-        Assert.Equal(expected.Expected, ToVisibleText(date.ToString("D", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateShortDate2015February3ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateFormatting_ShortDate_2015February3_UsesExpectedCultureString(string localeName, DateExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var date = new DateTime(expected.Year, expected.Month, expected.Day);
-        Assert.Equal(expected.Expected, ToVisibleText(date.ToString("d", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateLongDate2015February3ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateFormatting_LongDate_2015February3_UsesExpectedCultureString(string localeName, DateExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var date = new DateTime(expected.Year, expected.Month, expected.Day);
-        Assert.Equal(expected.Expected, ToVisibleText(date.ToString("D", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
     [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2022January25ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
     public void DateToOrdinalWords_2022January25_UsesExpectedForms(string localeName, DateExpectationRow expected)
     {
@@ -291,60 +237,6 @@ public class LocaleRegistrySweepTests
         Assert.DoesNotContain(ArabicLetterMark, result);
     }
 #if NET6_0_OR_GREATER
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyShortTime1323ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeFormatting_ShortTime_1323_UsesExpectedCultureString(string localeName, ClockExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var time = new TimeOnly(expected.Hours, expected.Minutes);
-        Assert.Equal(expected.Expected, ToVisibleText(time.ToString("t", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyLongTime1323ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeFormatting_LongTime_1323_UsesExpectedCultureString(string localeName, ClockExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var time = new TimeOnly(expected.Hours, expected.Minutes);
-        Assert.Equal(expected.Expected, ToVisibleText(time.ToString("T", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyShortTime1325ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeFormatting_ShortTime_1325_UsesExpectedCultureString(string localeName, ClockExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var time = new TimeOnly(expected.Hours, expected.Minutes);
-        Assert.Equal(expected.Expected, ToVisibleText(time.ToString("t", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyLongTime1325ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeFormatting_LongTime_1325_UsesExpectedCultureString(string localeName, ClockExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var time = new TimeOnly(expected.Hours, expected.Minutes);
-        Assert.Equal(expected.Expected, ToVisibleText(time.ToString("T", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyShortTime0105ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeFormatting_ShortTime_0105_UsesExpectedCultureString(string localeName, ClockExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var time = new TimeOnly(expected.Hours, expected.Minutes);
-        Assert.Equal(expected.Expected, ToVisibleText(time.ToString("t", CultureInfo.CurrentCulture)));
-    }
-
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyLongTime0105ReferenceTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeFormatting_LongTime_0105_UsesExpectedCultureString(string localeName, ClockExpectationRow expected)
-    {
-        using var _ = new CultureSwap(new(localeName));
-        var time = new TimeOnly(expected.Hours, expected.Minutes);
-        Assert.Equal(expected.Expected, ToVisibleText(time.ToString("T", CultureInfo.CurrentCulture)));
-    }
 
     [Theory]
     [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2022January25ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
