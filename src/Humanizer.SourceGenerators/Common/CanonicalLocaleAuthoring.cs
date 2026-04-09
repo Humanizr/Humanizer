@@ -262,21 +262,46 @@ public sealed partial class HumanizerSourceGenerator
                 }
             }
 
-            if (calendarSurface.TryGetValue("months", out var monthsValue))
+            var hasMonths = calendarSurface.TryGetValue("months", out var monthsValue);
+            if (hasMonths)
             {
                 if (monthsValue is not SimpleYamlSequence monthsSeq || monthsSeq.Items.Length != 12)
                 {
                     throw new InvalidOperationException(
                         $"Locale '{localeCode}.surfaces.calendar.months' must be a sequence of exactly 12 strings.");
                 }
+
+                foreach (var item in monthsSeq.Items)
+                {
+                    if (item is not SimpleYamlScalar)
+                    {
+                        throw new InvalidOperationException(
+                            $"Locale '{localeCode}.surfaces.calendar.months' items must be scalar strings.");
+                    }
+                }
             }
 
             if (calendarSurface.TryGetValue("monthsGenitive", out var monthsGenitiveValue))
             {
+                if (!hasMonths)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.calendar.monthsGenitive' requires 'months' to also be present.");
+                }
+
                 if (monthsGenitiveValue is not SimpleYamlSequence genitiveSeq || genitiveSeq.Items.Length != 12)
                 {
                     throw new InvalidOperationException(
                         $"Locale '{localeCode}.surfaces.calendar.monthsGenitive' must be a sequence of exactly 12 strings.");
+                }
+
+                foreach (var item in genitiveSeq.Items)
+                {
+                    if (item is not SimpleYamlScalar)
+                    {
+                        throw new InvalidOperationException(
+                            $"Locale '{localeCode}.surfaces.calendar.monthsGenitive' items must be scalar strings.");
+                    }
                 }
             }
 

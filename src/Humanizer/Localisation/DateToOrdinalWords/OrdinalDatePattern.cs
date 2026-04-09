@@ -147,54 +147,70 @@ sealed class OrdinalDatePattern(
     }
 
     /// <summary>
-    /// Returns true when a day specifier (d or dd) is adjacent to the MMMM specifier,
-    /// indicating genitive month form should be used.
+    /// Returns true when a day-of-month specifier (d or dd, NOT ddd/dddd day-of-week)
+    /// is adjacent to the MMMM specifier, indicating genitive month form should be used.
     /// </summary>
     static bool IsDayAdjacentToMonth(string formatString, int mmmmStart, int mmmmLength)
     {
-        // Check before MMMM: look for 'd' before the specifier (skipping spaces, punctuation, and quoted literals).
-        for (var i = mmmmStart - 1; i >= 0; i--)
+        // Check before MMMM: look for 'd'/'dd' (day-of-month) before the specifier,
+        // skipping spaces and quoted literals.
+        if (FindAdjacentDayOfMonth(formatString, mmmmStart - 1, backward: true))
+        {
+            return true;
+        }
+
+        // Check after MMMM.
+        return FindAdjacentDayOfMonth(formatString, mmmmStart + mmmmLength, backward: false);
+    }
+
+    /// <summary>
+    /// Scans from a starting position looking for a day-of-month specifier (d or dd).
+    /// Returns false for ddd/dddd (day-of-week). Skips spaces and quoted literals.
+    /// </summary>
+    static bool FindAdjacentDayOfMonth(string formatString, int start, bool backward)
+    {
+        var i = start;
+        while (backward ? i >= 0 : i < formatString.Length)
         {
             var c = formatString[i];
             if (c == ' ')
             {
+                i += backward ? -1 : 1;
                 continue;
             }
 
             if (c == '\'')
             {
-                // Walk back through the quoted literal.
-                i--;
-                while (i >= 0 && formatString[i] != '\'')
+                // Skip through quoted literal.
+                i += backward ? -1 : 1;
+                while (backward ? i >= 0 : i < formatString.Length)
                 {
-                    i--;
+                    if (formatString[i] == '\'')
+                    {
+                        i += backward ? -1 : 1;
+                        break;
+                    }
+
+                    i += backward ? -1 : 1;
                 }
 
-                // After skipping the quoted literal, check what's before it.
                 continue;
             }
 
             if (c == 'd')
             {
-                return true;
-            }
+                // Count consecutive 'd' characters to distinguish d/dd (day-of-month)
+                // from ddd/dddd (day-of-week).
+                var dCount = 1;
+                var probe = i + (backward ? -1 : 1);
+                while ((backward ? probe >= 0 : probe < formatString.Length) && formatString[probe] == 'd')
+                {
+                    dCount++;
+                    probe += backward ? -1 : 1;
+                }
 
-            break;
-        }
-
-        // Check after MMMM.
-        var afterEnd = mmmmStart + mmmmLength;
-        for (var i = afterEnd; i < formatString.Length; i++)
-        {
-            var c = formatString[i];
-            if (c == ' ')
-            {
-                continue;
-            }
-
-            if (c == 'd')
-            {
-                return true;
+                // d or dd = day-of-month (genitive context), ddd+ = day-of-week (not genitive).
+                return dCount <= 2;
             }
 
             break;
