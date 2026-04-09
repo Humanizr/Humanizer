@@ -120,3 +120,4 @@ docs/.sass-cache/
 
 # Ralph autonomous agent logs
 scripts/ralph/logs/
+!.flow/bin/
