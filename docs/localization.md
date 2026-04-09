@@ -8,7 +8,7 @@ Most consumers only need to set a culture. Contributors now author locale-specif
 
 Humanizer includes localization for:
 
-Arabic (ar), Azerbaijani (az), Bulgarian (bg), Bengali (bn-BD), Czech (cs), Danish (da), German (de), Greek (el), Spanish (es), Persian (fa), Finnish (fi), French (fr), Hebrew (he), Croatian (hr), Hungarian (hu), Armenian (hy), Indonesian (id), Icelandic (is), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Malay (ms-MY), Maltese (mt), Norwegian Bokmal (nb, nb-NO), Dutch (nl), Polish (pl), Portuguese (pt, pt-BR), Romanian (ro), Russian (ru), Slovak (sk), Slovenian (sl), Serbian (sr, sr-Latn), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Chinese (zh-CN, zh-Hans, zh-Hant).
+Afrikaans (af), Arabic (ar), Azerbaijani (az), Bengali (bn), Bulgarian (bg), Catalan (ca), Chinese (zh-CN, zh-Hans, zh-Hant), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en, en-GB, en-IN, en-US), Finnish (fi), Filipino (fil), French (fr, fr-BE, fr-CH), German (de, de-CH, de-LI), Greek (el), Hebrew (he), Hungarian (hu), Armenian (hy), Icelandic (is), Indonesian (id), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Lithuanian (lt), Luxembourgish (lb), Malay (ms), Maltese (mt), Norwegian Bokmal (nb), Norwegian Nynorsk (nn), Persian (fa), Polish (pl), Portuguese (pt, pt-BR), Romanian (ro), Russian (ru), Serbian (sr, sr-Latn), Slovak (sk), Slovenian (sl), Spanish (es), Swedish (sv), Tamil (ta), Thai (th), Turkish (tr), Ukrainian (uk), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Zulu (zu-ZA).
 
 ## Installing Humanizer
 
@@ -67,8 +67,8 @@ Principles:
 1. One locale file owns one locale.
 2. Locale inheritance is declared in that same file with `variantOf`.
 3. Top-level properties are exactly `locale`, `variantOf`, and `surfaces`.
-4. Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, and `compass`.
-5. Canonical nested members are `number.words`, `number.parse`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`.
+4. Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`.
+5. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
 6. Omit a `surfaces.<surface>` block to inherit it unchanged from the parent locale.
 7. Inside a mapped surface, omit unchanged fields to inherit them from the parent mapping.
 8. Child sequences replace parent sequences.
@@ -130,7 +130,7 @@ The localization codegen flow is:
 4. `ProfileCatalogInput` generators
    Build typed profile catalogs and tables for `numberToWords`, `wordsToNumber`, `ordinalizer`, `date-to-ordinal`, `formatter`, `phrases`, `headings`, and `timeOnlyToClockNotation`.
 5. `LocaleRegistryInput`
-   Emits the culture-to-implementation registrations that wire generated profiles and handwritten residual leaves into the runtime registries.
+   Emits the culture-to-implementation registrations that wire generated profiles into the runtime registries.
 6. Shared runtime kernels
    Consume the generated profile objects at runtime with no YAML or JSON parsing on the hot path.
 
@@ -138,7 +138,7 @@ This split is deliberate:
 
 - YAML is for locale-owned data.
 - Generator-side structural contracts are typed C#.
-- C# runtime code is for shared algorithms or accepted residual leaves.
+- C# runtime code is for shared algorithms.
 
 ## Structural Naming Rules
 
@@ -152,9 +152,7 @@ Good structural names:
 - `ContractedScaleWordsToNumberConverter`
 - `ProfiledFormatter`
 
-Residual locale names are acceptable only when the behavior is still genuinely locale-specific and forcing it into a shared schema would create imperative hooks or exception-bucket metadata.
-
-Current accepted residual leaves are limited to a small set of `TimeOnlyToClockNotation` converters where the repository still lacks a clean multi-locale abstraction. In YAML, these are still authored under the canonical `clock` surface.
+Residual locale names are acceptable only when the behavior is still genuinely locale-specific and forcing it into a shared schema would create imperative hooks or exception-bucket metadata. As of the locale parity completion, no residual leaves remain for any surface.
 
 ## Adding Or Updating A Locale
 
@@ -197,6 +195,14 @@ dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
 ```
+
+## Override ICU Where Needed
+
+Modern .NET uses ICU for globalization data on all platforms, but ICU data drifts between versions and can produce different output for the same locale across macOS, Linux, and Windows. When Humanizer delegates to `CultureInfo` for month names or decimal separators, this platform variance leaks into humanized output.
+
+The `calendar:` surface and `number.formatting:` sub-block let locale authors hard-code the correct values in YAML so that output is byte-identical regardless of the host's ICU version. When present, these overrides take priority over `CultureInfo.DateTimeFormat` and `NumberFormatInfo` in the specific Humanizer call sites that consume them (`DateToOrdinalWords`, `ByteSize.Humanize`, `MetricNumeralExtensions`). Caller-supplied custom format providers are never overridden.
+
+Use these overrides sparingly. Author them only when a cross-platform probe shows disagreement or when ICU data is demonstrably wrong for your locale. See [Locale YAML Reference](locale-yaml-reference.md) for field details and [Locale YAML How-To](locale-yaml-how-to.md) for a step-by-step recipe.
 
 ## Related Topics
 

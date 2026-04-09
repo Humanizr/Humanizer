@@ -1,6 +1,6 @@
 # Humanizer
 
-.NET library for humanizing numbers, dates, times, enums, quantities, and more across 60+ locales.
+.NET library for humanizing numbers, dates, times, enums, quantities, and more across 62 locales.
 
 ## Quick Commands
 
@@ -74,6 +74,7 @@ docs/                           # Jekyll documentation site
 - Locale data defined in YAML files under `src/Humanizer/Locales/`
 - Source generators transform YAML into C# lookup tables at build time
 - To add a locale: duplicate a YAML file, translate, register in formatter/converter registries
+- When ICU-supplied data (month names, decimal separators) differs across platforms, author explicit overrides in `calendar:` and/or `number.formatting:` YAML surfaces
 - See `docs/adding-a-locale.md` and `docs/locale-yaml-reference.md` for the full guide
 
 ## Key Config Files

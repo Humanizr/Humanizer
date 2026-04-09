@@ -37,6 +37,8 @@ Work through these questions in order.
    Only add one if the behavior is actually reusable.
 5. Is the locale still genuinely procedural?
    Only then keep or add a residual locale leaf.
+6. Does your locale need month names, day names, or decimal separators that differ from what `CultureInfo.DateTimeFormat` / `NumberFormatInfo` returns on the user's platform?
+   If yes, author them in `calendar:` or `number.formatting:` so output is stable across .NET globalization modes and operating systems.
 
 ## File Shape
 
@@ -75,6 +77,7 @@ Supported `surfaces` members are:
 - `ordinal`
 - `clock`
 - `compass`
+- `calendar`
 
 Do not invent new top-level keys.
 
@@ -111,6 +114,8 @@ surfaces:
       engine: '<number-to-words-engine>'
     parse:
       engine: '<words-to-number-engine>'
+    formatting:
+      decimalSeparator: '<separator>'
 
   ordinal:
     numeric:
@@ -128,13 +133,17 @@ surfaces:
   compass:
     full: []
     short: []
+
+  calendar:
+    months: []
+    monthsGenitive: []
 ```
 
 Notes:
 
 1. `formatter` and `phrases` are separate surfaces.
 2. `clock` is the canonical locale surface name even though the emitted runtime feature name is `timeOnlyToClockNotation`.
-3. `number` and `ordinal` are container surfaces; the actual owned blocks are `number.words`, `number.parse`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`.
+3. `number` and `ordinal` are container surfaces; the actual owned blocks are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`. Similarly, `calendar` contains `calendar.months` and `calendar.monthsGenitive`.
 4. A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
 5. Do not add a block just to say "use the default behavior". If a surface or nested block does not carry locale-specific behavior, omit it.
 
@@ -351,6 +360,30 @@ Put here:
 - `short`
   The abbreviated 16-point heading labels
 
+### `calendar`
+
+Use this block when the locale needs month names that differ from what `CultureInfo.DateTimeFormat.MonthNames` returns on the user's platform. This is typically needed when ICU data drifts across macOS, Linux, and Windows, or when the platform-supplied names are incorrect for the locale.
+
+Put here:
+
+- `months`
+  Array of exactly 12 nominative month names, indexed by Gregorian month (0 = January)
+- `monthsGenitive`
+  Optional parallel array of 12 genitive month names for locales that distinguish nominative and genitive forms
+
+Do not author `calendar:` when `CultureInfo` already returns the correct month names on all platforms. The block is an override, not a requirement.
+
+### `number.formatting`
+
+Use this block when the locale needs a decimal separator that differs from what `NumberFormatInfo.NumberDecimalSeparator` returns on the user's platform. This is the "output as digits" complement to `number.words` (output as words) and `number.parse` (input).
+
+Put here:
+
+- `decimalSeparator`
+  The locale-correct decimal separator character
+
+Do not author `number.formatting:` when `NumberFormatInfo` already returns the correct separator on all platforms.
+
 ## Choosing Between A Shared Engine And A New One
 
 Reuse an existing engine when:
@@ -384,6 +417,8 @@ When you are building a locale from scratch, use this order:
 8. Add `ordinal.date` or `ordinal.dateOnly` only for date-specific day phrasing.
 9. Add `clock` using the unified `phrase-clock` engine. All shipped locales use this single engine.
 10. Add `compass` if the locale needs heading labels and does not inherit acceptable same-language values.
+11. Add `calendar` only if ICU-supplied month names disagree across platforms or are incorrect.
+12. Add `number.formatting` only if the decimal separator disagrees across platforms or is incorrect.
 
 This keeps authoring pressure on the generated/shared surfaces first and makes it easier to spot when a new block is really necessary.
 
@@ -413,6 +448,45 @@ This keeps authoring pressure on the generated/shared surfaces first and makes i
 3. Reuse or extend a shared runtime kernel.
 4. Keep the engine name structural if the implementation is truly shared.
 5. Add parity tests and run benchmarks before removing the leaf.
+
+### Override ICU-Supplied Data
+
+Use this recipe when a cross-platform probe shows that `CultureInfo` returns different month names or decimal separators on different platforms for your locale.
+
+**Month-name override** (minimum YAML):
+
+```yaml
+surfaces:
+  calendar:
+    months:
+      - 'January'
+      - 'February'
+      - 'March'
+      - 'April'
+      - 'May'
+      - 'June'
+      - 'July'
+      - 'August'
+      - 'September'
+      - 'October'
+      - 'November'
+      - 'December'
+```
+
+Replace the English names with the correct month names for your locale. Add `monthsGenitive:` only if your locale distinguishes nominative and genitive month forms.
+
+**Decimal-separator override** (minimum YAML):
+
+```yaml
+surfaces:
+  number:
+    formatting:
+      decimalSeparator: '.'
+```
+
+Replace `'.'` with the correct separator for your locale.
+
+These overrides affect only Humanizer's output. They do not modify the global `CultureInfo`.
 
 ## Validation
 

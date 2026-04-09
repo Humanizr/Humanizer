@@ -30,10 +30,12 @@ They are not parsed at runtime.
    - `ordinal`
    - `clock`
    - `compass`
+   - `calendar`
 5. Unknown top-level keys are rejected by the generator.
 6. Locale words, switches, tables, and strategy choices belong here.
 7. Generator implementation contracts do not belong here.
 8. Shipped locales are expected to resolve both `number.words` and `number.parse`, either locale-owned or same-language inherited with proof.
+9. `number.formatting` is a nested member under `number`, alongside `number.words` and `number.parse`.
 
 ## Merge Rules
 
@@ -374,6 +376,82 @@ Notes:
 - Both `full` and `short` must contain exactly 16 entries.
 - `compass` is the canonical YAML authoring surface.
 - The generator currently emits this surface into the runtime `headings` feature slot.
+
+### `calendar`
+
+Purpose:
+
+- owns locale-specific temporal data that overrides `CultureInfo.DateTimeFormat` when ICU-supplied values drift across platforms or are incorrect
+- feeds the generated `OrdinalDatePattern` profiles with month-name arrays
+- should contain only data that differs from the platform-supplied `CultureInfo`; omit the block entirely when `CultureInfo` is correct
+
+Members:
+
+- `months`
+- `monthsGenitive`
+
+Fields:
+
+- `months`: array of exactly 12 strings, indexed by Gregorian month (index 0 = January). Overrides `DateTimeFormatInfo.MonthNames` in `DateToOrdinalWords` and `DateOnlyToOrdinalWords` output.
+- `monthsGenitive`: optional parallel array of 12 strings for locales that distinguish nominative and genitive month forms (e.g., Czech, Polish, Russian). When present, the genitive form is used in date patterns where the month follows a day number. When absent, `months` is used in all positions.
+
+Notes:
+
+- Both arrays must contain exactly 12 entries if present. The generator validates this at build time.
+- Empty or absent = no override; the runtime falls through to `CultureInfo.DateTimeFormat`.
+- Inherits via `variantOf`: a child locale inherits the parent's `calendar.months` unless it authors its own.
+- Only `MMMM` (full month name) substitution is supported. If an ordinal-date pattern uses `MMM` (abbreviated month) while `calendar.months` is active, the generator emits a diagnostic error.
+
+Example:
+
+```yaml
+surfaces:
+  calendar:
+    months:
+      - 'জানুয়ারি'
+      - 'ফেব্রুয়ারি'
+      - 'মার্চ'
+      - 'এপ্রিল'
+      - 'মে'
+      - 'জুন'
+      - 'জুলাই'
+      - 'আগস্ট'
+      - 'সেপ্টেম্বর'
+      - 'অক্টোবর'
+      - 'নভেম্বর'
+      - 'ডিসেম্বর'
+```
+
+Future fields: `monthsAbbreviated`, `days`, `daysAbbreviated`, `dayPeriods`, `amDesignator`, `pmDesignator`, `eraNames`. These are reserved but not yet implemented.
+
+### `number.formatting`
+
+Purpose:
+
+- owns locale-specific number formatting data that overrides `NumberFormatInfo` when ICU-supplied values drift across platforms or are incorrect
+- feeds `ByteSize.Humanize` and `MetricNumeralExtensions` with a stable decimal separator
+- symmetric with `number.words` (output as words) and `number.parse` (input); `number.formatting` is "output as digits"
+
+Fields:
+
+- `decimalSeparator`: single character (or multi-character string for locales like Persian). Overrides `NumberFormatInfo.NumberDecimalSeparator` in the two Humanizer consumer call sites. Caller-supplied custom `NumberFormatInfo` / `IFormatProvider` is never overridden.
+
+Notes:
+
+- Empty or absent = no override; the runtime uses the platform's `NumberFormatInfo.NumberDecimalSeparator`.
+- Inherits via `variantOf`: a child locale inherits the parent's `number.formatting.decimalSeparator` unless it authors its own.
+- The generated `LocaleNumberFormattingOverrides` registry walks `CultureInfo.Parent` at runtime (same fallback semantics as `LocaliserRegistry.FindLocaliser`), so unlisted child cultures fall back to the parent override.
+
+Example:
+
+```yaml
+surfaces:
+  number:
+    formatting:
+      decimalSeparator: '.'
+```
+
+Future fields: `groupSeparator`, `digitSubstitution`, `percentSymbol`, `negativeSign`. These are reserved but not yet implemented.
 
 ## Shared Strategy Values
 
@@ -1647,7 +1725,7 @@ These are the main files that turn locale YAML into runtime behavior:
 4. `src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs`
    - emits the locale-to-implementation registry wiring
 5. `src/Humanizer/Localisation/*`
-   - shared runtime kernels and the small number of accepted residual locale leaves
+   - shared runtime kernels
 
 ## Regional Variant Checklist
 

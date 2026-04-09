@@ -131,9 +131,8 @@ Specifically (using values confirmed in task .2):
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes` passes
 - [ ] No new public types introduced
 ## Done summary
-TBD
-
+Added number.formatting YAML surface with decimalSeparator field under the existing number: canonical surface. Threaded override through ByteSize.ToString/TryParse and MetricNumeralExtensions via source-generated LocaleNumberFormattingOverrides registry with CultureInfo.Parent fallback. Populated ar (.), ku (momayyiz), fr-CH (.) overrides and corrected test expected values.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 6e727fdd42489a66316a11ac0c21f64b40ac09aa
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (38908 passed), dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj (58 passed), dotnet format Humanizer.slnx --verify-no-changes (clean)
 - PRs:

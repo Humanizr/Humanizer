@@ -24,7 +24,7 @@ These are the files and directories you usually need to understand:
 - `src/Humanizer/Locales/<locale>.yml`
   This is the source of truth for locale-owned generated behavior.
 - `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs`
-  Defines the canonical locale YAML surface: allowed top-level keys, canonical surface names, and nested canonical members such as `number.words`, `number.parse`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`.
+  Defines the canonical locale YAML surface: allowed top-level keys, canonical surface names, and nested canonical members such as `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
 - `src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs`
   Parses locale YAML, resolves inheritance, validates feature blocks, and exposes a resolved per-locale view to the rest of the generator.
 - `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`
@@ -34,7 +34,7 @@ These are the files and directories you usually need to understand:
 - `src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs`
   Emits the locale-to-implementation wiring.
 - `src/Humanizer/Localisation/*`
-  Shared runtime kernels and accepted residual locale-specific leaves.
+  Shared runtime kernels.
 - `tests/Humanizer.SourceGenerators.Tests`
   Verifies generator behavior and generated source structure.
 - `tests/Humanizer.Tests`
@@ -49,7 +49,7 @@ The pipeline works like this:
 3. Each feature block selects either:
    - a generated profile path
    - a token-map generation path
-   - or a residual handwritten runtime path when the locale is still a deliberate leaf
+   - or (rarely) a handwritten runtime path when the locale behavior is still genuinely procedural
 4. `EngineContractCatalog` tells the generator how to map structured locale data into constructor arguments for a shared runtime kernel.
 5. The profile catalog generators emit typed cached profile instances.
 6. `LocaleRegistryInput` emits the locale-to-implementation registrations.
@@ -74,6 +74,7 @@ Supported canonical surfaces are:
 - `ordinal`
 - `clock`
 - `compass`
+- `calendar`
 
 Every locale file does not need to author every surface directly. If a `surfaces.<surface>` block is missing, that surface must still resolve intentionally through same-language inheritance with proof. If it does not, the locale is incomplete.
 
@@ -98,14 +99,18 @@ Under `surfaces`, the canonical members are exactly:
 5. `ordinal`
 6. `clock`
 7. `compass`
+8. `calendar`
 
 The nested canonical members are:
 
 1. `number.words`
 2. `number.parse`
-3. `ordinal.numeric`
-4. `ordinal.date`
-5. `ordinal.dateOnly`
+3. `number.formatting`
+4. `ordinal.numeric`
+5. `ordinal.date`
+6. `ordinal.dateOnly`
+7. `calendar.months`
+8. `calendar.monthsGenitive`
 
 The `phrases` surface is also structured, with these canonical members:
 
@@ -134,6 +139,8 @@ This is what each canonical surface owns:
 | `ordinal.dateOnly` | `DateOnly.ToOrdinalWords` day placement/day rendering rules |
 | `clock` | `TimeOnly.ToClockNotation` phrase templates or clock engine selection |
 | `compass` | Full and abbreviated heading/compass labels |
+| `calendar` | Month-name overrides (nominative and genitive) for stable cross-platform date output |
+| `number.formatting` | Decimal separator override for stable cross-platform numeric output |
 
 Two boundaries matter:
 
@@ -211,6 +218,8 @@ surfaces:
       engine: '<number-to-words-engine>'
     parse:
       engine: '<words-to-number-engine>'
+    formatting:
+      decimalSeparator: '<separator>'
 
   ordinal:
     numeric:
@@ -224,6 +233,34 @@ surfaces:
 
   clock:
     engine: '<clock-engine>'
+
+  calendar:
+    months:
+      - '<January>'
+      - '<February>'
+      - '<March>'
+      - '<April>'
+      - '<May>'
+      - '<June>'
+      - '<July>'
+      - '<August>'
+      - '<September>'
+      - '<October>'
+      - '<November>'
+      - '<December>'
+    monthsGenitive:
+      - '<January-genitive>'
+      - '<February-genitive>'
+      - '<March-genitive>'
+      - '<April-genitive>'
+      - '<May-genitive>'
+      - '<June-genitive>'
+      - '<July-genitive>'
+      - '<August-genitive>'
+      - '<September-genitive>'
+      - '<October-genitive>'
+      - '<November-genitive>'
+      - '<December-genitive>'
 
   compass:
     full: []
@@ -382,6 +419,7 @@ Before you call the work done, verify all of these:
 - registry completeness tests pass (`LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests`)
 - `dotnet pack` passes
 - benchmark comparisons show no regression versus the chosen base
+- verify that `date.ToOrdinalWords()` and `ByteSize` output for your locale is byte-identical on macOS, Linux, and Windows; if ICU-supplied data (month names, decimal separators) disagrees across platforms or is incorrect for your locale, author explicit overrides in `calendar:` and/or `number.formatting:` rather than relying on `CultureInfo`
 
 ## Related Documents
 
