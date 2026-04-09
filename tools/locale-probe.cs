@@ -1,4 +1,5 @@
 #!/usr/bin/env dotnet run
+#:property PublishAot=false
 #pragma warning disable IDE0007, CA1869, IL2026, IL2075, IL3050
 // Locale probe: outputs the exact ICU/NLS-dependent values that Humanizer tests assert.
 // Run on each target OS to capture platform-specific expected values.
@@ -12,6 +13,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var jsonMode = args.Contains("--json");
 var onlyFailing = args.Contains("--failing");
