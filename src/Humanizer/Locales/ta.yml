@@ -381,7 +381,7 @@ surfaces:
     earlyMorning: 'அதிகாலை'
     morning: 'காலை'
     afternoon: 'பிற்பகல்'
-    night: 'அதிகாலை'
+    night: 'இரவு'
 
   compass:
     full:

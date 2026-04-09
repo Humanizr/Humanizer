@@ -238,9 +238,8 @@ The `zh-CN` → `zh-Hans` variant should auto-inherit. Verify the CultureInfo.Pa
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for ko, zh-Hans, zh-Hant, zh-CN, bn, ta, th, vi, ar (ordinal.date), fa (ordinal.date), he (ordinal.date)
 ## Done summary
-TBD
-
+Added OrdinalDateCalendarMode enum (Gregorian|Native) with Thai Buddhist calendar support, added ordinal.date/dateOnly + clock YAML for ko, zh-Hans, zh-Hant, bn, ta, th, vi, and he locales, and fixed zero-filler spacing for CJK locales.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 55ad5a5e05d6725e61dd248e614eeae6cbd1949c
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj
 - PRs:
