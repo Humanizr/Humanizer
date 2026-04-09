@@ -1,0 +1,51 @@
+{
+  "created_at": "2026-04-09T07:49:54.642370Z",
+  "epic": {
+    "data": {
+      "branch_name": "fn-2-fix-stale-locale-documentation-after",
+      "completion_review_status": "unknown",
+      "completion_reviewed_at": null,
+      "created_at": "2026-04-09T04:22:03.111709Z",
+      "default_impl": null,
+      "default_review": null,
+      "default_sync": null,
+      "depends_on_epics": [],
+      "id": "fn-2-fix-stale-locale-documentation-after",
+      "next_task": 1,
+      "plan_review_status": "unknown",
+      "plan_reviewed_at": null,
+      "spec_path": ".flow/specs/fn-2-fix-stale-locale-documentation-after.md",
+      "status": "open",
+      "title": "Fix stale locale documentation after parity completion",
+      "updated_at": "2026-04-09T07:36:09.334519Z"
+    },
+    "spec": "# Fix stale locale documentation after parity completion\n\n> **SUPERSEDED by fn-3-hard-code-locale-overrides-where-icu** \u2014 all four documentation fixes listed below are folded into `fn-3-hard-code-locale-overrides-where-icu.5` (Document override pattern and update contributor checklist) alongside new schema documentation for the `calendar:` surface and `number.formatting:` sub-block. This epic is retained for history but should not be worked directly. Task fn-2.1 is blocked; close this epic as done-by-proxy after fn-3.5 completes.\n\n## Overview\n\nWith the completion of fn-1-locale-translation-parity-across-all (all 62 locales now have all 7 canonical surfaces), several documentation files contain stale claims, incomplete locale lists, and wrong locale codes. This epic fixes all documentation inconsistencies.\n\n## Scope\n\nFour files need updates (all folded into fn-3.5):\n1. `docs/localization.md` \u2014 Supported Languages list + stale residual-leaves claims\n2. `docs/locale-yaml-reference.md` \u2014 inconsistent residual-leaves language\n3. `CLAUDE.md` \u2014 locale count\n4. (fn-3.5 also adds: documentation for new `calendar:` and `number.formatting:` schema extensions)\n\n## Quick commands\n```bash\n# Verify docs build / lint after changes\ndotnet format Humanizer.slnx --verify-no-changes\ndotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0\n```\n\n## Acceptance\n- [ ] All four fixes landed as part of fn-3-hard-code-locale-overrides-where-icu.5\n- [ ] This epic closed as done-by-proxy after fn-3.5 completes\n"
+  },
+  "epic_id": "fn-2-fix-stale-locale-documentation-after",
+  "schema_version": 2,
+  "tasks": [
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-09T04:22:28.493120Z",
+        "depends_on": [],
+        "epic": "fn-2-fix-stale-locale-documentation-after",
+        "id": "fn-2-fix-stale-locale-documentation-after.1",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-2-fix-stale-locale-documentation-after.1.md",
+        "status": "todo",
+        "title": "Fix stale locale documentation across all doc files",
+        "updated_at": "2026-04-09T04:22:44.287806Z"
+      },
+      "id": "fn-2-fix-stale-locale-documentation-after.1",
+      "runtime": {
+        "blocked_reason": "Superseded by fn-3-hard-code-locale-overrides-where-icu.5 which folds in all of this task's documentation fixes (Supported Languages list rebuild, stale residual-leaves cleanup, CLAUDE.md locale count) alongside the new `calendar:` and `number.formatting:` schema documentation. Keeping fn-2 open risks double-work; blocking it here instead of closing because flowctl requires closed tasks to be done, which these aren't.\n\nThe fn-3.5 task's acceptance criteria include the 4 fn-2 rollup items explicitly. Once fn-3.5 completes, fn-2 can be closed as done-by-proxy.",
+        "status": "blocked",
+        "updated_at": "2026-04-09T07:35:53.443855Z"
+      },
+      "spec": "# fn-2-fix-stale-locale-documentation-after.1 Fix stale locale documentation across all doc files\n\n## Description\nFix all stale documentation that references residual locale leaves, has incomplete locale lists, or uses wrong locale codes. All changes are documentation-only \u2014 no code changes.\n\n**Size:** M\n**Files:**\n- `docs/localization.md`\n- `docs/locale-yaml-reference.md`\n- `CLAUDE.md`\n\n## Approach\n- Rebuild Supported Languages list from `src/Humanizer/Locales/*.yml` filenames\n- Remove/rewrite all \"residual leaves\" paragraphs to reflect current state (no residual leaves remain)\n- Update locale count in CLAUDE.md\n\n## Investigation targets\n**Required** (read before editing):\n- `docs/localization.md:11` \u2014 Supported Languages list (missing 16 locales, 3 wrong codes)\n- `docs/localization.md:133-157` \u2014 stale residual-leaves claims\n- `docs/locale-yaml-reference.md:1650` \u2014 \"small number of accepted residual locale leaves\"\n- `CLAUDE.md:3` \u2014 \"60+ locales\"\n\n**Optional** (verify consistency):\n- `docs/adding-a-locale.md:292` \u2014 already correct (says no residual leaves), verify unchanged\n- `docs/locale-yaml-how-to.md:341` \u2014 already correct, verify unchanged\n\n## Key context\n- All 62 locales now have all 7 canonical surfaces (verified by test run: 40,274/40,396 pass, 122 failures are OS ICU data version differences only)\n- `bn-BD`, `ms-MY`, `nb-NO` in docs should be `bn`, `ms`, `nb` (matching YAML filenames)\n- 16 locales completely missing from the list: af, ca, de-CH, de-LI, en, en-GB, en-IN, en-US, fil, fr-BE, fr-CH, lb, lt, nn, ta, zu-ZA\n## Acceptance\n- [ ] `docs/localization.md` Supported Languages list enumerates all 62 shipped locales with correct codes matching YAML filenames\n- [ ] All stale \"residual clock leaves\" / \"handwritten residual leaves\" text removed from `docs/localization.md`\n- [ ] Stale \"small number of accepted residual locale leaves\" removed from `docs/locale-yaml-reference.md`\n- [ ] `CLAUDE.md` says \"62 locales\" instead of \"60+ locales\"\n- [ ] Grep confirms no remaining stale residual-leaves claims across all docs\n## Done summary\nBlocked:\nSuperseded by fn-3-hard-code-locale-overrides-where-icu.5 which folds in all of this task's documentation fixes (Supported Languages list rebuild, stale residual-leaves cleanup, CLAUDE.md locale count) alongside the new `calendar:` and `number.formatting:` schema documentation. Keeping fn-2 open risks double-work; blocking it here instead of closing because flowctl requires closed tasks to be done, which these aren't.\n\nThe fn-3.5 task's acceptance criteria include the 4 fn-2 rollup items explicitly. Once fn-3.5 completes, fn-2 can be closed as done-by-proxy.\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    }
+  ]
+}

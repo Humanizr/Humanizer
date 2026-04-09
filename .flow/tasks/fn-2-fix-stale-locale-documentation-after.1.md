@@ -17,7 +17,7 @@ Fix all stale documentation that references residual locale leaves, has incomple
 ## Investigation targets
 **Required** (read before editing):
 - `docs/localization.md:11` — Supported Languages list (missing 16 locales, 3 wrong codes)
-- `docs/localization.md:133-157` — stale residual-leaves claims
+- `docs/localization.md:133,141,155-157` — stale residual-leaves claims (4 specific locations)
 - `docs/locale-yaml-reference.md:1650` — "small number of accepted residual locale leaves"
 - `CLAUDE.md:3` — "60+ locales"
 
@@ -31,13 +31,21 @@ Fix all stale documentation that references residual locale leaves, has incomple
 - 16 locales completely missing from the list: af, ca, de-CH, de-LI, en, en-GB, en-IN, en-US, fil, fr-BE, fr-CH, lb, lt, nn, ta, zu-ZA
 ## Acceptance
 - [ ] `docs/localization.md` Supported Languages list enumerates all 62 shipped locales with correct codes matching YAML filenames
-- [ ] All stale "residual clock leaves" / "handwritten residual leaves" text removed from `docs/localization.md`
-- [ ] Stale "small number of accepted residual locale leaves" removed from `docs/locale-yaml-reference.md`
+- [ ] Stale residual-leaves claims removed from `docs/localization.md` at lines ~133, ~141, ~155-157
+- [ ] Stale "small number of accepted residual locale leaves" removed from `docs/locale-yaml-reference.md` at line ~1650
 - [ ] `CLAUDE.md` says "62 locales" instead of "60+ locales"
-- [ ] Grep confirms no remaining stale residual-leaves claims across all docs
+- [ ] Grep for `residual` across docs confirms only allowlisted conceptual mentions remain (adding-a-locale.md:281-292, locale-yaml-how-to.md:5/39/371, locale-yaml-reference.md:353/678/756)
 ## Done summary
-TBD
+Blocked:
+Superseded by fn-3-hard-code-locale-overrides-where-icu.5 which folds in all of this task's documentation fixes (Supported Languages list rebuild, stale residual-leaves cleanup, CLAUDE.md locale count) alongside the new `calendar:` and `number.formatting:` schema documentation.
 
+### Proxy-close requirements
+This task should be closed as done-by-proxy when fn-3.5 completes. Before closing, verify these fn-3.5 acceptance items have landed (cited by exact text, not ordinal position):
+- fn-3.5 "fn-2 rollup": `docs/localization.md` Supported Languages list enumerates all 62 shipped locales with correct codes
+- fn-3.5 "fn-2 rollup": `docs/localization.md` stale residual-leaves claims removed from lines ~133, ~141, ~155-157
+- fn-3.5 "fn-2 rollup": `docs/locale-yaml-reference.md` stale "residual locale leaves" language removed at line ~1650
+- fn-3.5 "fn-2 rollup": `CLAUDE.md` says "62 locales" instead of "60+ locales"
+- fn-3.5 "Quality": Grep for `residual` confirms only allowlisted conceptual mentions remain
 ## Evidence
 - Commits:
 - Tests:
