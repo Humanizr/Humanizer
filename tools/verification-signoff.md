@@ -15,7 +15,7 @@ Signoff author: Claire Novotny (automated via fn-3.6 task)
 | `tools/probe-linux.json` | Committed (before) | .NET 10.0.3, Ubuntu 24.04.4 LTS, linux-x64 |
 | `tools/probe-windows-net10.json` | Committed (before) | .NET 10.0.5, Windows 10.0.26300, win-x64 |
 | `tools/probe-windows-net48.json` | Committed (before) | .NET Framework 4.8.9032.0, Windows 10.0.26300, NLS |
-| `tools/probe-macos-after.json` | Committed (after) | .NET 10.0.2, macOS 26.4.0, osx-arm64 |
+| `tools/probe-macos-after.json` | Committed (after) | .NET 10.0.2, macOS 26.4.1, osx-arm64 |
 | `tools/probe-linux-after.json` | Committed (after) | .NET 10.0.3, Ubuntu 24.04.4 LTS, linux-x64 |
 | `tools/probe-windows-net10-after.json` | Committed (after) | .NET 10.0.5, Windows 10.0.26300, win-x64 |
 | `tools/probe-windows-net48-after.json` | Committed (after) | .NET Framework 4.8.9032.0, Windows 10.0.26300, NLS |
@@ -212,6 +212,18 @@ The `compare-probes.cs` agreement percentage for non-overridden locales is 75.2%
 | net48 blocker documented | PASS (filed as fn-4-fix-net48-test-suite-blocker) |
 | No regressions | PASS (full suite green) |
 | Non-overridden agreement not decreased | PASS (75.2%, unchanged) |
+
+### Verification completeness
+
+**Locally satisfied**: macOS net10.0 (38,908 tests, 0 failures), all probe artifacts committed, all override YAML validated by source generator build.
+
+**Explicitly deferred to CI** (not satisfied locally, known gaps):
+- macOS net8.0 — .NET 8 SDK not installed; overrides are framework-agnostic (build-time generated), so net8 correctness is expected but unverified locally
+- Linux net10.0 / net8.0 — platform unreachable from macOS dev environment
+- Windows net10.0 / net8.0 — platform unreachable from macOS dev environment
+- Windows net48 — test suite blocked by fn-4 (`Enum.GetValues<T>()` issue)
+
+This sign-off does **not** claim full cross-platform verification. It claims macOS net10.0 verification with deferred CI items explicitly enumerated above.
 
 ### Note on after-probe identity
 
