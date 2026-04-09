@@ -492,3 +492,21 @@ surfaces:
           8: 'ম'
           9: 'ম'
           10: 'ম'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourOneWord: 'একটা'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes}'
+    earlyMorning: 'রাত'
+    morning: 'সকাল'
+    afternoon: 'দুপুর'
+    night: 'রাত'

@@ -152,13 +152,27 @@ public sealed partial class HumanizerSourceGenerator
                     "PatternDateOnlyToOrdinalWordsConverter" => "new DefaultDateOnlyToOrdinalWordConverter()",
                     _ => throw new InvalidOperationException($"Unsupported default ordinal-date converter '{converterTypeName}'.")
                 },
-                "pattern" => "new " + converterTypeName + "(new OrdinalDatePattern(" +
-                             QuoteLiteral(GetRequiredString(profile.Root, "pattern")) +
-                             ", OrdinalDateDayMode." +
-                             GetRequiredString(profile.Root, "dayMode") +
-                             "))",
+                "pattern" => CreatePatternExpression(profile, converterTypeName),
                 _ => throw new InvalidOperationException($"Unsupported ordinal date engine '{profile.Engine}'.")
             };
+
+        static string CreatePatternExpression(OrdinalDateProfileDefinition profile, string converterTypeName)
+        {
+            var calendarMode = GetOptionalString(profile.Root, "calendarMode");
+            var hasCalendarMode = calendarMode is not null && !string.Equals(calendarMode, "Gregorian", StringComparison.OrdinalIgnoreCase);
+
+            var expr = "new " + converterTypeName + "(new OrdinalDatePattern(" +
+                       QuoteLiteral(GetRequiredString(profile.Root, "pattern")) +
+                       ", OrdinalDateDayMode." +
+                       GetRequiredString(profile.Root, "dayMode");
+
+            if (hasCalendarMode)
+            {
+                expr += ", OrdinalDateCalendarMode." + calendarMode;
+            }
+
+            return expr + "))";
+        }
     }
 
 }

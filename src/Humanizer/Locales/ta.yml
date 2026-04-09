@@ -360,8 +360,28 @@ surfaces:
       engine: 'template'
       masculine:
         defaultSuffix: 'வது'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
 
-
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourOneWord: 'ஒரு மணி'
+    hourSuffixSingular: 'மணி'
+    hourSuffixPlural: 'மணி'
+    minuteSuffixSingular: 'நிமிடம்'
+    minuteSuffixPlural: 'நிமிடம்'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+    earlyMorning: 'அதிகாலை'
+    morning: 'காலை'
+    afternoon: 'பிற்பகல்'
+    night: 'அதிகாலை'
 
   compass:
     full:

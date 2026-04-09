@@ -305,3 +305,21 @@ surfaces:
       masculine:
         prefix: '第'
         defaultSuffix: ''
+    date:
+      pattern: 'yyyy''年''M''月''{day}''日'''
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: 'yyyy''年''M''月''{day}''日'''
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    compactMinuteWords: true
+    zeroFiller: '零'
+    min0: '{dayPeriod}{hour}'
+    defaultTemplate: '{dayPeriod}{hour}点{minutes}分'
+    earlyMorning: '凌晨'
+    morning: '上午'
+    afternoon: '下午'
+    night: '凌晨'

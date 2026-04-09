@@ -51,8 +51,9 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
 
         // When a zero-filler is configured and minutes are 1-9, prepend the filler word
         // so templates like "{hour} {minutes}" produce "et nul fem" instead of "et fem".
+        // When compactMinuteWords is active (CJK locales), omit the space between filler and word.
         var minuteWords = normalizedMinutes is > 0 and < 10 && profile.ZeroFiller.Length > 0
-            ? profile.ZeroFiller + " " + rawMinuteWords
+            ? profile.ZeroFiller + (profile.CompactMinuteWords ? "" : " ") + rawMinuteWords
             : rawMinuteWords;
 
         var reverseMinuteWords = normalizedMinutes > 0 ? ResolveMinuteWords(60 - normalizedMinutes) : "";

@@ -24,7 +24,7 @@ enum OrdinalDateDayMode
 /// The template can contain <c>{day}</c>. The day token is replaced after the formatted date string
 /// is produced so the rest of the culture-specific pattern stays intact.
 /// </remarks>
-sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
+sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode, OrdinalDateCalendarMode calendarMode = OrdinalDateCalendarMode.Gregorian)
 {
     const string DayPlaceholder = "{day}";
     const string DayMarker = "<<DAY>>";
@@ -36,6 +36,7 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
 
     readonly string template = template;
     readonly OrdinalDateDayMode dayMode = dayMode;
+    readonly OrdinalDateCalendarMode calendarMode = calendarMode;
 
     /// <summary>
     /// Formats the pattern for the specified date.
@@ -84,9 +85,16 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode)
         return formattedDate.Replace(DayMarker, renderedDay);
     }
 
-    static CultureInfo GetPatternCulture()
+    CultureInfo GetPatternCulture()
     {
         var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+
+        // When the locale requests the native calendar (e.g., Thai Buddhist), return the
+        // culture as-is so DateTime.ToString() produces the native year.
+        if (calendarMode == OrdinalDateCalendarMode.Native)
+        {
+            return culture;
+        }
 
         try
         {

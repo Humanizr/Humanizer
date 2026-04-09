@@ -438,6 +438,20 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourOneWord: 'אחת'
+    min0: '{hour}'
+    min5: '{hour} ו{minutes}'
+    defaultTemplate: '{hour} {minutes}'
 
   compass:
     full:

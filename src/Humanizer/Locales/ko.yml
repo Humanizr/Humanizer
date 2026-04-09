@@ -378,3 +378,36 @@ surfaces:
       engine: 'template'
       masculine:
         defaultSuffix: '번째'
+    date:
+      pattern: 'yyyy''년 ''M''월 ''{day}''일'''
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: 'yyyy''년 ''M''월 ''{day}''일'''
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourWordsMap:
+      - ''
+      - '한 시'
+      - '두 시'
+      - '세 시'
+      - '네 시'
+      - '다섯 시'
+      - '여섯 시'
+      - '일곱 시'
+      - '여덟 시'
+      - '아홉 시'
+      - '열 시'
+      - '열한 시'
+      - '열두 시'
+    minuteSuffixSingular: '분'
+    minuteSuffixPlural: '분'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+    earlyMorning: '오전'
+    morning: '오전'
+    afternoon: '오후'
+    night: '오전'

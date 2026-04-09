@@ -357,3 +357,23 @@ surfaces:
       masculine:
         prefix: 'thứ '
         defaultSuffix: ''
+    date:
+      pattern: '{day} ''tháng'' M ''năm'' yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} ''tháng'' M ''năm'' yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourSuffixSingular: 'giờ'
+    hourSuffixPlural: 'giờ'
+    minuteSuffixSingular: 'phút'
+    minuteSuffixPlural: 'phút'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+    earlyMorning: 'sáng'
+    morning: 'sáng'
+    afternoon: 'chiều'
+    night: 'sáng'

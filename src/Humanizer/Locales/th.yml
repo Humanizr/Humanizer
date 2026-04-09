@@ -350,3 +350,22 @@ surfaces:
       masculine:
         prefix: 'ที่'
         defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    compactMinuteWords: true
+    min0: '{dayPeriod}{hour}'
+    defaultTemplate: '{dayPeriod}{hour}{minutes}นาที'
+    earlyMorning: 'ตี'
+    morning: 'ตอนเช้า'
+    afternoon: 'บ่าย'
+    night: 'ตี'
