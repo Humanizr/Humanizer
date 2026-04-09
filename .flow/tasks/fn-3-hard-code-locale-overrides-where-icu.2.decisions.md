@@ -1,7 +1,20 @@
 # Locale Override Decisions
 
 Decision document for fn-3-hard-code-locale-overrides-where-icu.2.
-Each section records the chosen canonical value, rationale, and CLDR/source reference.
+Each section records the chosen canonical value, rationale, and source reference.
+
+## Evidence sources
+
+- `tools/probe-macos.json`, `tools/probe-linux.json`, `tools/probe-windows-net10.json`,
+  `tools/probe-windows-net48.json` -- cross-platform CultureInfo outputs
+- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs` -- current DateToOrdinalWords
+  contract values
+- `tests/Humanizer.Tests/Localisation/LocaleFormatterExactTheoryData.cs` -- current ByteSize
+  decimal-separator expectations
+- `src/Humanizer/Locales/{bn,fa,he,ku,ta,zu-ZA,ar,fr-CH}.yml` -- current authored locale
+  identity and script/dialect intent
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs` -- downstream MMMM
+  replacement architecture
 
 ---
 
@@ -64,104 +77,86 @@ platforms produce Solar Hijri month names when using the native calendar. The
 existing test expectations use Gregorian month names transliterated into Persian
 script (e.g., `ژانویه` for January).
 
-The task spec mentions the ezafe mark (U+0654 `ٔ`) for fa month names in date
-context (e.g., `ژانویهٔ` instead of `ژانویه`). However, the ezafe is a
-grammatical feature used when the month name is followed by a dependent word
-(izafet construction), and Humanizer's ordinal-date pattern for fa is
-`{day} MMMM yyyy` where the month appears between the day number and year --
-not in an izafet construction. The month name is standalone between numerals.
+The task spec explicitly calls out that fa month names are "missing ezafe mark
+(U+0654 `ٔ`) in date context". The ezafe is a grammatical feature in Persian
+that connects a noun to a following modifier. In the ordinal-date pattern
+`{day} MMMM yyyy`, the month name precedes the year number, and Persian
+orthography requires the written ezafe on month names ending in he (ه) or
+ye (ی) when followed by a dependent element. Since the downstream architecture
+replaces `MMMM` directly and does not add context afterward, the date-context
+form must be baked into the override data.
 
-**Decision:** Use the standard Gregorian month transliterations in Persian
-script without ezafe marks. The ezafe would only be correct in a possessive
-construction (e.g., "the 25th of January" = "بیست و پنجم ژانویهٔ"), but
-Humanizer's pattern is `{day} MMMM yyyy` which places the month name in a
-standalone position between numerals.
+**Decision:** Use date-context Gregorian month forms with written ezafe where
+Persian orthography requires it. The override values are the forms that should
+appear in the `{day} MMMM yyyy` output pattern.
 
-**Months to override (full set, Gregorian transliterations):**
+**Months to override (full set, date-context Gregorian transliterations):**
 
-1. ژانویه (January)
-2. فوریه (February)
-3. مارس (March)
-4. آوریل (April)
-5. مه (May)
-6. ژوئن (June)
-7. ژوئیه (July)
-8. اوت (August)
-9. سپتامبر (September)
-10. اکتبر (October)
-11. نوامبر (November)
-12. دسامبر (December)
+1. ژانویهٔ (January -- ezafe on final he)
+2. فوریهٔ (February -- ezafe on final he)
+3. مارس (March -- no ezafe needed, ends in sin)
+4. آوریل (April -- no ezafe needed, ends in lam)
+5. مهٔ (May -- ezafe on final he)
+6. ژوئن (June -- no ezafe needed, ends in nun)
+7. ژوئیهٔ (July -- ezafe on final he)
+8. اوت (August -- no ezafe needed, ends in te)
+9. سپتامبر (September -- no ezafe needed, ends in re)
+10. اکتبر (October -- no ezafe needed, ends in re)
+11. نوامبر (November -- no ezafe needed, ends in re)
+12. دسامبر (December -- no ezafe needed, ends in re)
 
-**Source:** CLDR Gregorian month names for `fa` locale (CLDR 42-45 stable);
-matches existing test expectations in LocaleCoverageData.cs. These are the
-standard French-derived Gregorian transliterations used universally in Iranian
-media and academia for Gregorian calendar references.
+**Note:** The existing test expectations in LocaleCoverageData.cs use forms
+without ezafe (`ژانویه`). Task .3 must update these test expectations when
+adding the override.
+
+**Source:** fn-3 epic spec explicitly identifies fa as "month names missing
+ezafe mark"; Persian orthographic rules for date-context ezafe; CLDR Gregorian
+month names for `fa` locale with date-context modifications.
 
 ---
 
 ### he (Hebrew)
 
-**Issue:** Hebrew month names are consistent across all 4 probes. The existing
-test expectations include a `ב` (bet) prefix: `בינואר` for January. The long
-date format pattern for Hebrew is `dddd, d בMMMM yyyy` -- the `ב` prefix is
-part of the format pattern, not the month name. Since Humanizer's ordinal-date
-pattern is `{day} MMMM yyyy` (no `ב` prefix), the `ב` must come from the
-`DateTime.ToString` format string expanding `MMMM` within the `בMMMM` pattern.
+**Issue:** Hebrew month names are consistent across all 4 probes (standalone
+forms: `ינואר`, `פברואר`, etc.). The existing test expectations include a `ב`
+(bet) prefix: `בינואר` for January. The Hebrew long date format pattern is
+`dddd, d בMMMM yyyy` -- the `ב` is a literal in the pattern, not part of the
+month name.
 
-Wait -- the ordinal-date pattern is `{day} MMMM yyyy`. This does NOT contain
-`ב`. But the test expects `25 בינואר 2022`. Examining
-`OrdinalDatePattern.Format()`: it takes the pattern `{day} MMMM yyyy`,
-replaces `{day}` with `d'<<DAY>>'`, producing `d'<<DAY>>' MMMM yyyy`, then
-calls `date.ToString("d'<<DAY>>' MMMM yyyy", culture)`. The `MMMM` in
-`date.ToString` will use the genitive/format month name from CultureInfo.
-For Hebrew, the CultureInfo `MonthNames` array contains the month names
-without the `ב` prefix. So `MMMM` alone produces `ינואר` (without `ב`).
+Humanizer's ordinal-date pattern for he is `{day} MMMM yyyy` (no `ב` prefix).
+The downstream architecture in OrdinalDatePattern replaces `MMMM` using
+`calendar.months` when available. Since the `ב` prefix is required in the
+date-context output and the replacement surface is `MMMM` only, the `ב` must
+be included in the month value itself.
 
-But the test expects `בינואר` (with `ב`). This means either:
-(a) The `ב` is already in the CultureInfo genitive month names, or
-(b) The expected value in the test is wrong.
+A pattern-only fix (`{day} בMMMM yyyy`) would work but would keep Humanizer
+dependent on CultureInfo month names for the core locale contract. Using
+`calendar.months` with `ב`-prefixed date-context forms is more aligned with
+the spec's architecture of owning locale data in YAML.
 
-Looking at the probe: `"long": "יום חמישי, 1 בינואר 2015"`. The long date
-pattern is `dddd, d בMMMM yyyy`. The `ב` is a literal in the pattern, not part
-of the month name. So `MMMM` = `ינואר`, and the formatted output includes the
-literal `ב` from the pattern.
+**Decision:** Use `calendar.months` override with `ב`-prefixed date-context
+month forms. This is a date-context month-form case, not standalone labels.
 
-Since Humanizer's ordinal-date pattern is `{day} MMMM yyyy` (no `ב`), the
-output would be `25 ינואר 2022` (without `ב`). But the test expects
-`25 בינואר 2022` (with `ב`). This means the existing ordinal-date pattern
-for he must actually be `{day} בMMMM yyyy` or the test expectation was set
-when a different pattern was active.
+**Months to override (date-context with ב prefix):**
 
-**Decision:** The correct Hebrew ordinal-date form uses the `ב` (be-) prefix
-before the month name, as this is the standard Hebrew preposition for "in/of"
-used with months in date contexts. The override should produce month names
-with the `ב` prefix baked in, OR the ordinal-date pattern should be updated
-to `{day} בMMMM yyyy`. Since the task .3 will handle the actual pattern
-change, we document the correct canonical month names here.
+1. בינואר (January)
+2. בפברואר (February)
+3. במרץ (March)
+4. באפריל (April)
+5. במאי (May)
+6. ביוני (June)
+7. ביולי (July)
+8. באוגוסט (August)
+9. בספטמבר (September)
+10. באוקטובר (October)
+11. בנובמבר (November)
+12. בדצמבר (December)
 
-Hebrew standalone month names (no override needed -- ICU is consistent):
-
-1. ינואר (January)
-2. פברואר (February)
-3. מרץ (March)
-4. אפריל (April)
-5. מאי (May)
-6. יוני (June)
-7. יולי (July)
-8. אוגוסט (August)
-9. ספטמבר (September)
-10. אוקטובר (October)
-11. נובמבר (November)
-12. דצמבר (December)
-
-**Note:** The month names themselves are consistent across all 4 platforms.
-The `ב` prefix issue is a pattern concern, not a month-name override concern.
-Task .3 should fix the ordinal-date pattern to include `ב` if needed, or the
-current test expectation already reflects the correct output. No
-`calendar.months` override is needed for he -- the fix is to update the
-ordinal-date pattern from `{day} MMMM yyyy` to `{day} בMMMM yyyy`.
-
-**Source:** All 4 probe environments agree. CLDR 42-45 stable.
+**Source:** All 4 probe environments agree on standalone names. The `ב` prefix
+is standard Hebrew preposition for "in/of" used with months in date contexts.
+Current test expectations already require the `ב`-prefixed output. Using
+`calendar.months` override aligns with the downstream MMMM replacement
+architecture.
 
 ---
 
@@ -318,7 +313,7 @@ separator. For `latn` number system, the standard decimal separator is `.`.
 
 ### ku (Kurdish)
 
-**Issue:** Decimal separator varies wildly:
+**Issue:** Decimal separator varies wildly across platforms:
 
 | Platform   | Separator | Unicode |
 |------------|-----------|---------|
@@ -328,23 +323,27 @@ separator. For `latn` number system, the standard decimal separator is `.`.
 | Win net48  | `.`       | U+002E  |
 
 This is closely tied to the Sorani vs Kurmanji decision above. Since we chose
-Sorani (Arabic script), the decimal separator should follow Arabic-script
-number formatting conventions.
+Sorani (Arabic script), the decimal separator should be consistent with Sorani
+locale identity.
 
-**Decision:** Use `,` (U+002C, comma) as the decimal separator override.
+**Decision:** Use `٫` (U+066B, Arabic decimal separator) as the override.
 Rationale:
 
-1. Kurdish (both Sorani and Kurmanji) uses comma as decimal separator in
-   everyday usage, matching the broader Middle Eastern/European convention.
-2. The `٫` (U+066B) is the momayyiz for Eastern Arabic numerals, but
-   Humanizer uses Western Arabic digits, so `,` is more appropriate.
-3. 2/4 probes agree on `,`.
-4. Comma is the most internationally stable choice and has the longest CLDR
-   history for the `ku` locale.
+1. The locale identity decision for `ku` is Sorani / Central Kurdish / Arabic
+   script. The momayyiz `٫` aligns with this Arabic-script identity.
+2. The existing modern-target test expectations already use `٫` (the
+   `KurdishKilobytes` constant resolves to `1٫95 KB` on modern .NET).
+3. Choosing `٫` normalizes all frameworks to the same Sorani-authored output
+   instead of following whichever platform maps `ku` differently.
+4. Unlike `ar` where Western digits are the primary formatting context, `ku`
+   Sorani text uses Arabic-script conventions throughout, making `٫` the
+   natural decimal separator for this locale.
 
-**Override value:** `,` (U+002C)
+**Override value:** `٫` (U+066B)
 
-**Source:** CLDR `ckb` and `ku` locale data (versions 42-43 used `,`).
+**Source:** Windows CultureInfo for `ku` (Sorani/Central Kurdish); existing
+Humanizer modern-target test expectations; consistency with Sorani locale
+identity decision.
 
 ---
 
@@ -389,12 +388,11 @@ both but Swiss national standard prefers `.`.
 
 Locales needing `calendar.months` override in YAML:
 - **bn**: Override with long-i forms (12 entries)
-- **fa**: Override with Gregorian transliterations in Persian script (12 entries)
+- **fa**: Override with date-context Gregorian transliterations with ezafe (12 entries)
+- **he**: Override with `ב`-prefixed date-context month forms (12 entries)
 - **ku**: Override with Sorani/Arabic-script month names (12 entries)
 
 Locales NOT needing `calendar.months` override:
-- **he**: No month name override needed. Fix ordinal-date pattern from
-  `{day} MMMM yyyy` to `{day} בMMMM yyyy` to include the Hebrew `ב` prefix.
 - **zu-ZA**: No override needed (all probes agree). Fix test expected value
   `Febhuwari` -> `Februwari` (test was wrong from day one).
 - **ta**: No override needed (all probes agree, matches existing tests).
@@ -403,15 +401,16 @@ Locales NOT needing `calendar.months` override:
 
 Locales needing `number.formatting.decimalSeparator` override in YAML:
 - **ar**: Override with `.` (U+002E)
-- **ku**: Override with `,` (U+002C)
+- **ku**: Override with `٫` (U+066B)
 - **fr-CH**: Override with `.` (U+002E)
 
 ### Test expected value corrections (merged into .3 and .4)
 
+- `fa` date expectations: Update to include ezafe marks (e.g., `ژانویهٔ`)
 - `zu-ZA` February: `Febhuwari` -> `Februwari`
 - `fr-CH` byte-size: `1,95 Ko` -> `1.95 Ko`
 - `ar` byte-size: Remove `#if NET48` conditional, use `1.95 KB` unconditionally
-- `ku` byte-size: Remove `#if NET48` conditional, use `1,95 KB` unconditionally
+- `ku` byte-size: Remove `#if NET48` conditional, use `1٫95 KB` unconditionally
 
 ---
 
