@@ -79,9 +79,8 @@ For any environment not covered by CI:
 - [ ] net48 test-suite blocker filed as separate issue
 - [ ] Task completion report includes before/after agreement matrix
 ## Done summary
-TBD
-
+Cross-platform verification gate completed: generated macOS after-probe, committed all 4 after-probe baselines, updated compare-probes.cs with override-relevant analysis, created verification-signoff.md covering all gate criteria, and filed net48 test-suite blocker as separate epic fn-4-fix-net48-test-suite-blocker. Full test suite passes with 38,908 tests and 0 failures on macOS net10.0.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: a50f11dabf2b3f615bb3f551f2b8da0e291b6a6c, fed49bc7c3e6c946f9fac855f7e932a9d9dda741
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (38908 passed, 0 failed), dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj (58 passed), dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj (18 passed), dotnet format Humanizer.slnx --verify-no-changes (0 formatted)
 - PRs:
