@@ -1,0 +1,13 @@
+{
+  "branch_name": "fn-4-fix-net48-test-suite-blocker",
+  "created_at": "2026-04-09T12:59:13.763649Z",
+  "depends_on_epics": [],
+  "id": "fn-4-fix-net48-test-suite-blocker",
+  "next_task": 1,
+  "plan_review_status": "unknown",
+  "plan_reviewed_at": null,
+  "spec_path": ".flow/specs/fn-4-fix-net48-test-suite-blocker.md",
+  "status": "open",
+  "title": "Fix net48 test suite blocker: Enum.GetValues<T>() not available in .NET Framework 4.8",
+  "updated_at": "2026-04-09T12:59:24.850690Z"
+}
