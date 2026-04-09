@@ -132,10 +132,12 @@ If this task extends `tools/locale-probe.cs` and/or `tools/locale-probe-net48/Pr
 - [ ] If **either** probe implementation (`tools/locale-probe.cs` or `tools/locale-probe-net48/Program.cs`) or any `tools/probe-*-after.json` file had its shape changed, `tools/verification-signoff.md` has been re-scanned for hardcoded totals / diff counts / "before-after identity" narrative and updated to match the post-extension shape; `tools/compare-probes.cs` has been re-verified to still compile and run against the new JSON shape; if no probe-shape change in either probe, this is recorded as N/A in task evidence
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds (catches YAML schema errors if overrides were added)
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passes
-- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passes
+- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passes — **DEFERRED TO CI**: .NET 8 SDK not installed locally (only 10.0.2 available); overrides are framework-agnostic (build-time generated); see `tools/verification-signoff.md` §8 "Verification completeness"
 
 ## Done summary
 Reconciled calendar.months discrepancy for ta and zu-ZA: authored YAML override blocks for both locales following the bn/fa/he/ku pattern, extended both probe implementations (locale-probe.cs and locale-probe-net48/Program.cs) with month_names_raw and month_genitive_names_raw fields in lockstep, re-ran macOS probe, and fixed ku decimal-separator typo in verification-signoff.md. FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA} (all 6 kept; 3 of 4 platform targets unreachable, conservative deterministic rule applied).
+
+**Deferred acceptance item**: `dotnet test --framework net8.0` not run locally (.NET 8 SDK unavailable; only 10.0.2 installed). Deferred to CI pipeline. Overrides are framework-agnostic (source-generated at build time), so net8 correctness is expected but unverified locally. See `tools/verification-signoff.md` §8 "Verification completeness" for the full deferral inventory.
 ## Evidence
 - Commits: 831ae5f4c36db0ec8ffc5e3a6e3b3bc2b25c3dc2, 7197b1dc8ab57e6e5e5e7f2a38459e9c3e8f5e4a, 5a0e74e4197c58d6ea26011c33b8236251c39ce7
 - Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet run tools/compare-probes.cs --after, dotnet run tools/compare-probes.cs --before-vs-after
