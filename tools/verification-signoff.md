@@ -22,9 +22,9 @@ Signoff author: Claire Novotny (automated via fn-3.6 task)
 
 ### Before vs After (all platforms)
 
-The before/after probes are **identical** in locale data on all platforms. Confirmed explicitly for macOS (fresh probe run); for Linux/Windows the after probes are copies of the before baselines. This identity is expected because:
+The after probes capture the same raw `CultureInfo` data as the before probes plus two new fields (`month_names_raw` and `month_genitive_names_raw`) added in fn-5.1 to provide full 12-month raw `DateTimeFormat.MonthNames` coverage for the override decision rule. On macOS, the after probe was re-run with the extended probe implementation; all pre-existing fields are byte-identical to the before baseline. For Linux/Windows net10/net48, the after probes remain copies of the before baselines (without the new fields) because those platforms are not reachable from this environment.
 
-- The probes capture raw `CultureInfo` data (month names, decimal separators, date/time patterns)
+- The probes capture raw `CultureInfo` data (month names, decimal separators, date/time patterns, and now raw MonthNames/MonthGenitiveNames arrays)
 - Humanizer's overrides operate at the **runtime layer** (source-generated lookup tables), not by modifying `CultureInfo`
 - The raw ICU data on any given platform does not change when Humanizer overrides are added
 
@@ -61,7 +61,7 @@ Raw CultureInfo decimal separator differences found: **3 data points**
 |--------|-------|-------|-------|-------|--------------------|
 | ar | `.` | `\u066B` | `\u066B` | `.` | `.` |
 | fr-CH | `.` | `,` | `,` | `,` | `.` |
-| ku | `,` | `,` | `\u066B` | `.` | `,` |
+| ku | `,` | `,` | `\u066B` | `.` | `٫` (U+066B) |
 
 Humanizer now has YAML-authored `number.formatting.decimalSeparator` overrides for all 3 locales.
 
@@ -197,9 +197,9 @@ The `compare-probes.cs` agreement percentage for non-overridden locales is 75.2%
 | Gate Criterion | Status |
 |----------------|--------|
 | probe-macos-after.json committed | PASS |
-| probe-linux-after.json committed | PASS (identical to before; see rationale) |
-| probe-windows-net10-after.json committed | PASS (identical to before; see rationale) |
-| probe-windows-net48-after.json committed | PASS (identical to before; see rationale) |
+| probe-linux-after.json committed | PASS (copy of before; not re-run with extended probe — Linux unreachable) |
+| probe-windows-net10-after.json committed | PASS (copy of before; not re-run with extended probe — Windows unreachable) |
+| probe-windows-net48-after.json committed | PASS (copy of before; not re-run with extended probe — Windows unreachable) |
 | 100% agreement for calendar overrides | PASS (Humanizer runtime, verified via test suite) |
 | 100% agreement for decimal separator overrides | PASS (Humanizer runtime, verified via test suite) |
 | macOS net10.0: 0 failures | PASS (38,908 passed) |
@@ -213,7 +213,7 @@ The `compare-probes.cs` agreement percentage for non-overridden locales is 75.2%
 
 ### Note on after-probe identity
 
-The probe tool captures raw `CultureInfo` data, not Humanizer output. Since Humanizer's overrides operate at the runtime layer via source-generated lookup tables (not by modifying `CultureInfo`), the "after" probes on any platform are identical to the "before" probes. This was confirmed by a fresh macOS probe run, and the Linux/Windows after probes are committed copies of their before counterparts.
+The probe tool captures raw `CultureInfo` data, not Humanizer output. Since Humanizer's overrides operate at the runtime layer via source-generated lookup tables (not by modifying `CultureInfo`), the pre-existing fields in the "after" probes are identical to the "before" probes. The macOS after probe was re-run with the extended probe implementation (fn-5.1) which adds `month_names_raw` and `month_genitive_names_raw` fields; all pre-existing fields are byte-identical to the before baseline. The Linux/Windows after probes remain copies of their before counterparts (without the new fields) because those platforms are not reachable from the current environment.
 
 The test suite is the authoritative verification that Humanizer produces consistent output. The macOS net10.0 test run (38,908 tests, 0 failures) confirms all overrides work correctly. Cross-platform test runs (net8.0, Linux, Windows) are CI verification items.
 

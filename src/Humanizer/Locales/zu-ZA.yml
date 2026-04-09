@@ -509,3 +509,18 @@ surfaces:
       - 'WNW'
       - 'NW'
       - 'NNW'
+
+  calendar:
+    months:
+      - 'Januwari'
+      - 'Februwari'
+      - 'Mashi'
+      - 'Ephreli'
+      - 'Meyi'
+      - 'Juni'
+      - 'Julayi'
+      - 'Agasti'
+      - 'Septhemba'
+      - 'Okthoba'
+      - 'Novemba'
+      - 'Disemba'

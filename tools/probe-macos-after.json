@@ -2,9 +2,9 @@
   "environment": {
     "dotnet_version": "10.0.2",
     "framework": ".NET 10.0.2",
-    "os": "macOS 26.4.0",
+    "os": "macOS 26.4.1",
     "rid": "osx-arm64",
-    "timestamp": "2026-04-09T12:47:19.1954360Z"
+    "timestamp": "2026-04-09T23:13:50.1052360Z"
   },
   "locales": [
     {
@@ -16,6 +16,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "vm.",
       "pm_designator": "nm.",
+      "month_names_raw": [
+        "Januarie",
+        "Februarie",
+        "Maart",
+        "April",
+        "Mei",
+        "Junie",
+        "Julie",
+        "Augustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember"
+      ],
+      "month_genitive_names_raw": [
+        "Januarie",
+        "Februarie",
+        "Maart",
+        "April",
+        "Mei",
+        "Junie",
+        "Julie",
+        "Augustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -99,6 +127,34 @@
       "long_time_pattern": "h:mm:ss\u00A0tt",
       "am_designator": "\u0635",
       "pm_designator": "\u0645",
+      "month_names_raw": [
+        "\u064A\u0646\u0627\u064A\u0631",
+        "\u0641\u0628\u0631\u0627\u064A\u0631",
+        "\u0645\u0627\u0631\u0633",
+        "\u0623\u0628\u0631\u064A\u0644",
+        "\u0645\u0627\u064A\u0648",
+        "\u064A\u0648\u0646\u064A\u0648",
+        "\u064A\u0648\u0644\u064A\u0648",
+        "\u0623\u063A\u0633\u0637\u0633",
+        "\u0633\u0628\u062A\u0645\u0628\u0631",
+        "\u0623\u0643\u062A\u0648\u0628\u0631",
+        "\u0646\u0648\u0641\u0645\u0628\u0631",
+        "\u062F\u064A\u0633\u0645\u0628\u0631"
+      ],
+      "month_genitive_names_raw": [
+        "\u064A\u0646\u0627\u064A\u0631",
+        "\u0641\u0628\u0631\u0627\u064A\u0631",
+        "\u0645\u0627\u0631\u0633",
+        "\u0623\u0628\u0631\u064A\u0644",
+        "\u0645\u0627\u064A\u0648",
+        "\u064A\u0648\u0646\u064A\u0648",
+        "\u064A\u0648\u0644\u064A\u0648",
+        "\u0623\u063A\u0633\u0637\u0633",
+        "\u0633\u0628\u062A\u0645\u0628\u0631",
+        "\u0623\u0643\u062A\u0648\u0628\u0631",
+        "\u0646\u0648\u0641\u0645\u0628\u0631",
+        "\u062F\u064A\u0633\u0645\u0628\u0631"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -182,6 +238,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "yanvar",
+        "fevral",
+        "mart",
+        "aprel",
+        "may",
+        "iyun",
+        "iyul",
+        "avqust",
+        "sentyabr",
+        "oktyabr",
+        "noyabr",
+        "dekabr"
+      ],
+      "month_genitive_names_raw": [
+        "yanvar",
+        "fevral",
+        "mart",
+        "aprel",
+        "may",
+        "iyun",
+        "iyul",
+        "avqust",
+        "sentyabr",
+        "oktyabr",
+        "noyabr",
+        "dekabr"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -265,6 +349,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "\u044F\u043D\u0443\u0430\u0440\u0438",
+        "\u0444\u0435\u0432\u0440\u0443\u0430\u0440\u0438",
+        "\u043C\u0430\u0440\u0442",
+        "\u0430\u043F\u0440\u0438\u043B",
+        "\u043C\u0430\u0439",
+        "\u044E\u043D\u0438",
+        "\u044E\u043B\u0438",
+        "\u0430\u0432\u0433\u0443\u0441\u0442",
+        "\u0441\u0435\u043F\u0442\u0435\u043C\u0432\u0440\u0438",
+        "\u043E\u043A\u0442\u043E\u043C\u0432\u0440\u0438",
+        "\u043D\u043E\u0435\u043C\u0432\u0440\u0438",
+        "\u0434\u0435\u043A\u0435\u043C\u0432\u0440\u0438"
+      ],
+      "month_genitive_names_raw": [
+        "\u044F\u043D\u0443\u0430\u0440\u0438",
+        "\u0444\u0435\u0432\u0440\u0443\u0430\u0440\u0438",
+        "\u043C\u0430\u0440\u0442",
+        "\u0430\u043F\u0440\u0438\u043B",
+        "\u043C\u0430\u0439",
+        "\u044E\u043D\u0438",
+        "\u044E\u043B\u0438",
+        "\u0430\u0432\u0433\u0443\u0441\u0442",
+        "\u0441\u0435\u043F\u0442\u0435\u043C\u0432\u0440\u0438",
+        "\u043E\u043A\u0442\u043E\u043C\u0432\u0440\u0438",
+        "\u043D\u043E\u0435\u043C\u0432\u0440\u0438",
+        "\u0434\u0435\u043A\u0435\u043C\u0432\u0440\u0438"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -348,6 +460,34 @@
       "long_time_pattern": "h:mm:ss tt",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "\u099C\u09BE\u09A8\u09C1\u09AF\u09BC\u09BE\u09B0\u09BF",
+        "\u09AB\u09C7\u09AC\u09CD\u09B0\u09C1\u09AF\u09BC\u09BE\u09B0\u09BF",
+        "\u09AE\u09BE\u09B0\u09CD\u099A",
+        "\u098F\u09AA\u09CD\u09B0\u09BF\u09B2",
+        "\u09AE\u09C7",
+        "\u099C\u09C1\u09A8",
+        "\u099C\u09C1\u09B2\u09BE\u0987",
+        "\u0986\u0997\u09B8\u09CD\u099F",
+        "\u09B8\u09C7\u09AA\u09CD\u099F\u09C7\u09AE\u09CD\u09AC\u09B0",
+        "\u0985\u0995\u09CD\u099F\u09CB\u09AC\u09B0",
+        "\u09A8\u09AD\u09C7\u09AE\u09CD\u09AC\u09B0",
+        "\u09A1\u09BF\u09B8\u09C7\u09AE\u09CD\u09AC\u09B0"
+      ],
+      "month_genitive_names_raw": [
+        "\u099C\u09BE\u09A8\u09C1\u09AF\u09BC\u09BE\u09B0\u09BF",
+        "\u09AB\u09C7\u09AC\u09CD\u09B0\u09C1\u09AF\u09BC\u09BE\u09B0\u09BF",
+        "\u09AE\u09BE\u09B0\u09CD\u099A",
+        "\u098F\u09AA\u09CD\u09B0\u09BF\u09B2",
+        "\u09AE\u09C7",
+        "\u099C\u09C1\u09A8",
+        "\u099C\u09C1\u09B2\u09BE\u0987",
+        "\u0986\u0997\u09B8\u09CD\u099F",
+        "\u09B8\u09C7\u09AA\u09CD\u099F\u09C7\u09AE\u09CD\u09AC\u09B0",
+        "\u0985\u0995\u09CD\u099F\u09CB\u09AC\u09B0",
+        "\u09A8\u09AD\u09C7\u09AE\u09CD\u09AC\u09B0",
+        "\u09A1\u09BF\u09B8\u09C7\u09AE\u09CD\u09AC\u09B0"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -431,6 +571,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "a.\u202Fm.",
       "pm_designator": "p.\u202Fm.",
+      "month_names_raw": [
+        "gener",
+        "febrer",
+        "mar\u00E7",
+        "abril",
+        "maig",
+        "juny",
+        "juliol",
+        "agost",
+        "setembre",
+        "octubre",
+        "novembre",
+        "desembre"
+      ],
+      "month_genitive_names_raw": [
+        "de gener",
+        "de febrer",
+        "de mar\u00E7",
+        "d\u2019abril",
+        "de maig",
+        "de juny",
+        "de juliol",
+        "d\u2019agost",
+        "de setembre",
+        "d\u2019octubre",
+        "de novembre",
+        "de desembre"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -514,6 +682,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "dop.",
       "pm_designator": "odp.",
+      "month_names_raw": [
+        "leden",
+        "\u00FAnor",
+        "b\u0159ezen",
+        "duben",
+        "kv\u011Bten",
+        "\u010Derven",
+        "\u010Dervenec",
+        "srpen",
+        "z\u00E1\u0159\u00ED",
+        "\u0159\u00EDjen",
+        "listopad",
+        "prosinec"
+      ],
+      "month_genitive_names_raw": [
+        "ledna",
+        "\u00FAnora",
+        "b\u0159ezna",
+        "dubna",
+        "kv\u011Btna",
+        "\u010Dervna",
+        "\u010Dervence",
+        "srpna",
+        "z\u00E1\u0159\u00ED",
+        "\u0159\u00EDjna",
+        "listopadu",
+        "prosince"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -597,6 +793,34 @@
       "long_time_pattern": "HH.mm.ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "januar",
+        "februar",
+        "marts",
+        "april",
+        "maj",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
+      "month_genitive_names_raw": [
+        "januar",
+        "februar",
+        "marts",
+        "april",
+        "maj",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -680,6 +904,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4rz",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
+      "month_genitive_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4rz",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -763,6 +1015,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4rz",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
+      "month_genitive_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4rz",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -846,6 +1126,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4rz",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
+      "month_genitive_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4rz",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -929,6 +1237,34 @@
       "long_time_pattern": "h:mm:ss\u202Ftt",
       "am_designator": "\u03C0\u03BC",
       "pm_designator": "\u03BC\u03BC",
+      "month_names_raw": [
+        "\u0399\u03B1\u03BD\u03BF\u03C5\u03AC\u03C1\u03B9\u03BF\u03C2",
+        "\u03A6\u03B5\u03B2\u03C1\u03BF\u03C5\u03AC\u03C1\u03B9\u03BF\u03C2",
+        "\u039C\u03AC\u03C1\u03C4\u03B9\u03BF\u03C2",
+        "\u0391\u03C0\u03C1\u03AF\u03BB\u03B9\u03BF\u03C2",
+        "\u039C\u03AC\u03B9\u03BF\u03C2",
+        "\u0399\u03BF\u03CD\u03BD\u03B9\u03BF\u03C2",
+        "\u0399\u03BF\u03CD\u03BB\u03B9\u03BF\u03C2",
+        "\u0391\u03CD\u03B3\u03BF\u03C5\u03C3\u03C4\u03BF\u03C2",
+        "\u03A3\u03B5\u03C0\u03C4\u03AD\u03BC\u03B2\u03C1\u03B9\u03BF\u03C2",
+        "\u039F\u03BA\u03C4\u03CE\u03B2\u03C1\u03B9\u03BF\u03C2",
+        "\u039D\u03BF\u03AD\u03BC\u03B2\u03C1\u03B9\u03BF\u03C2",
+        "\u0394\u03B5\u03BA\u03AD\u03BC\u03B2\u03C1\u03B9\u03BF\u03C2"
+      ],
+      "month_genitive_names_raw": [
+        "\u0399\u03B1\u03BD\u03BF\u03C5\u03B1\u03C1\u03AF\u03BF\u03C5",
+        "\u03A6\u03B5\u03B2\u03C1\u03BF\u03C5\u03B1\u03C1\u03AF\u03BF\u03C5",
+        "\u039C\u03B1\u03C1\u03C4\u03AF\u03BF\u03C5",
+        "\u0391\u03C0\u03C1\u03B9\u03BB\u03AF\u03BF\u03C5",
+        "\u039C\u03B1\u0390\u03BF\u03C5",
+        "\u0399\u03BF\u03C5\u03BD\u03AF\u03BF\u03C5",
+        "\u0399\u03BF\u03C5\u03BB\u03AF\u03BF\u03C5",
+        "\u0391\u03C5\u03B3\u03BF\u03CD\u03C3\u03C4\u03BF\u03C5",
+        "\u03A3\u03B5\u03C0\u03C4\u03B5\u03BC\u03B2\u03C1\u03AF\u03BF\u03C5",
+        "\u039F\u03BA\u03C4\u03C9\u03B2\u03C1\u03AF\u03BF\u03C5",
+        "\u039D\u03BF\u03B5\u03BC\u03B2\u03C1\u03AF\u03BF\u03C5",
+        "\u0394\u03B5\u03BA\u03B5\u03BC\u03B2\u03C1\u03AF\u03BF\u03C5"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1012,6 +1348,34 @@
       "long_time_pattern": "h:mm:ss\u202Ftt",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "month_genitive_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1095,6 +1459,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "am",
       "pm_designator": "pm",
+      "month_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "month_genitive_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1178,6 +1570,34 @@
       "long_time_pattern": "h:mm:ss\u202Ftt",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "month_genitive_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1261,6 +1681,34 @@
       "long_time_pattern": "h:mm:ss\u202Ftt",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "month_genitive_names_raw": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1344,6 +1792,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "a.\u202Fm.",
       "pm_designator": "p.\u202Fm.",
+      "month_names_raw": [
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre"
+      ],
+      "month_genitive_names_raw": [
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1427,6 +1903,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "\u0642.\u0638.",
       "pm_designator": "\u0628.\u0638.",
+      "month_names_raw": [
+        "\u0641\u0631\u0648\u0631\u062F\u06CC\u0646",
+        "\u0627\u0631\u062F\u06CC\u0628\u0647\u0634\u062A",
+        "\u062E\u0631\u062F\u0627\u062F",
+        "\u062A\u06CC\u0631",
+        "\u0645\u0631\u062F\u0627\u062F",
+        "\u0634\u0647\u0631\u06CC\u0648\u0631",
+        "\u0645\u0647\u0631",
+        "\u0622\u0628\u0627\u0646",
+        "\u0622\u0630\u0631",
+        "\u062F\u06CC",
+        "\u0628\u0647\u0645\u0646",
+        "\u0627\u0633\u0641\u0646\u062F"
+      ],
+      "month_genitive_names_raw": [
+        "\u0641\u0631\u0648\u0631\u062F\u06CC\u0646",
+        "\u0627\u0631\u062F\u06CC\u0628\u0647\u0634\u062A",
+        "\u062E\u0631\u062F\u0627\u062F",
+        "\u062A\u06CC\u0631",
+        "\u0645\u0631\u062F\u0627\u062F",
+        "\u0634\u0647\u0631\u06CC\u0648\u0631",
+        "\u0645\u0647\u0631",
+        "\u0622\u0628\u0627\u0646",
+        "\u0622\u0630\u0631",
+        "\u062F\u06CC",
+        "\u0628\u0647\u0645\u0646",
+        "\u0627\u0633\u0641\u0646\u062F"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1510,6 +2014,34 @@
       "long_time_pattern": "H.mm.ss",
       "am_designator": "ap.",
       "pm_designator": "ip.",
+      "month_names_raw": [
+        "tammikuu",
+        "helmikuu",
+        "maaliskuu",
+        "huhtikuu",
+        "toukokuu",
+        "kes\u00E4kuu",
+        "hein\u00E4kuu",
+        "elokuu",
+        "syyskuu",
+        "lokakuu",
+        "marraskuu",
+        "joulukuu"
+      ],
+      "month_genitive_names_raw": [
+        "tammikuuta",
+        "helmikuuta",
+        "maaliskuuta",
+        "huhtikuuta",
+        "toukokuuta",
+        "kes\u00E4kuuta",
+        "hein\u00E4kuuta",
+        "elokuuta",
+        "syyskuuta",
+        "lokakuuta",
+        "marraskuuta",
+        "joulukuuta"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1593,6 +2125,34 @@
       "long_time_pattern": "h:mm:ss\u202Ftt",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "Enero",
+        "Pebrero",
+        "Marso",
+        "Abril",
+        "Mayo",
+        "Hunyo",
+        "Hulyo",
+        "Agosto",
+        "Setyembre",
+        "Oktubre",
+        "Nobyembre",
+        "Disyembre"
+      ],
+      "month_genitive_names_raw": [
+        "Enero",
+        "Pebrero",
+        "Marso",
+        "Abril",
+        "Mayo",
+        "Hunyo",
+        "Hulyo",
+        "Agosto",
+        "Setyembre",
+        "Oktubre",
+        "Nobyembre",
+        "Disyembre"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1676,6 +2236,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "janvier",
+        "f\u00E9vrier",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "ao\u00FBt",
+        "septembre",
+        "octobre",
+        "novembre",
+        "d\u00E9cembre"
+      ],
+      "month_genitive_names_raw": [
+        "janvier",
+        "f\u00E9vrier",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "ao\u00FBt",
+        "septembre",
+        "octobre",
+        "novembre",
+        "d\u00E9cembre"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1759,6 +2347,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "janvier",
+        "f\u00E9vrier",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "ao\u00FBt",
+        "septembre",
+        "octobre",
+        "novembre",
+        "d\u00E9cembre"
+      ],
+      "month_genitive_names_raw": [
+        "janvier",
+        "f\u00E9vrier",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "ao\u00FBt",
+        "septembre",
+        "octobre",
+        "novembre",
+        "d\u00E9cembre"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1842,6 +2458,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "janvier",
+        "f\u00E9vrier",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "ao\u00FBt",
+        "septembre",
+        "octobre",
+        "novembre",
+        "d\u00E9cembre"
+      ],
+      "month_genitive_names_raw": [
+        "janvier",
+        "f\u00E9vrier",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "ao\u00FBt",
+        "septembre",
+        "octobre",
+        "novembre",
+        "d\u00E9cembre"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -1925,6 +2569,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "\u05DC\u05E4\u05F3",
       "pm_designator": "\u05D0\u05D7\u05F3",
+      "month_names_raw": [
+        "\u05D9\u05E0\u05D5\u05D0\u05E8",
+        "\u05E4\u05D1\u05E8\u05D5\u05D0\u05E8",
+        "\u05DE\u05E8\u05E5",
+        "\u05D0\u05E4\u05E8\u05D9\u05DC",
+        "\u05DE\u05D0\u05D9",
+        "\u05D9\u05D5\u05E0\u05D9",
+        "\u05D9\u05D5\u05DC\u05D9",
+        "\u05D0\u05D5\u05D2\u05D5\u05E1\u05D8",
+        "\u05E1\u05E4\u05D8\u05DE\u05D1\u05E8",
+        "\u05D0\u05D5\u05E7\u05D8\u05D5\u05D1\u05E8",
+        "\u05E0\u05D5\u05D1\u05DE\u05D1\u05E8",
+        "\u05D3\u05E6\u05DE\u05D1\u05E8"
+      ],
+      "month_genitive_names_raw": [
+        "\u05D9\u05E0\u05D5\u05D0\u05E8",
+        "\u05E4\u05D1\u05E8\u05D5\u05D0\u05E8",
+        "\u05DE\u05E8\u05E5",
+        "\u05D0\u05E4\u05E8\u05D9\u05DC",
+        "\u05DE\u05D0\u05D9",
+        "\u05D9\u05D5\u05E0\u05D9",
+        "\u05D9\u05D5\u05DC\u05D9",
+        "\u05D0\u05D5\u05D2\u05D5\u05E1\u05D8",
+        "\u05E1\u05E4\u05D8\u05DE\u05D1\u05E8",
+        "\u05D0\u05D5\u05E7\u05D8\u05D5\u05D1\u05E8",
+        "\u05E0\u05D5\u05D1\u05DE\u05D1\u05E8",
+        "\u05D3\u05E6\u05DE\u05D1\u05E8"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2008,6 +2680,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "sije\u010Danj",
+        "velja\u010Da",
+        "o\u017Eujak",
+        "travanj",
+        "svibanj",
+        "lipanj",
+        "srpanj",
+        "kolovoz",
+        "rujan",
+        "listopad",
+        "studeni",
+        "prosinac"
+      ],
+      "month_genitive_names_raw": [
+        "sije\u010Dnja",
+        "velja\u010De",
+        "o\u017Eujka",
+        "travnja",
+        "svibnja",
+        "lipnja",
+        "srpnja",
+        "kolovoza",
+        "rujna",
+        "listopada",
+        "studenoga",
+        "prosinca"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2091,6 +2791,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "de.",
       "pm_designator": "du.",
+      "month_names_raw": [
+        "janu\u00E1r",
+        "febru\u00E1r",
+        "m\u00E1rcius",
+        "\u00E1prilis",
+        "m\u00E1jus",
+        "j\u00FAnius",
+        "j\u00FAlius",
+        "augusztus",
+        "szeptember",
+        "okt\u00F3ber",
+        "november",
+        "december"
+      ],
+      "month_genitive_names_raw": [
+        "janu\u00E1r",
+        "febru\u00E1r",
+        "m\u00E1rcius",
+        "\u00E1prilis",
+        "m\u00E1jus",
+        "j\u00FAnius",
+        "j\u00FAlius",
+        "augusztus",
+        "szeptember",
+        "okt\u00F3ber",
+        "november",
+        "december"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2174,6 +2902,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "\u0570\u0578\u0582\u0576\u057E\u0561\u0580",
+        "\u0583\u0565\u057F\u0580\u057E\u0561\u0580",
+        "\u0574\u0561\u0580\u057F",
+        "\u0561\u057A\u0580\u056B\u056C",
+        "\u0574\u0561\u0575\u056B\u057D",
+        "\u0570\u0578\u0582\u0576\u056B\u057D",
+        "\u0570\u0578\u0582\u056C\u056B\u057D",
+        "\u0585\u0563\u0578\u057D\u057F\u0578\u057D",
+        "\u057D\u0565\u057A\u057F\u0565\u0574\u0562\u0565\u0580",
+        "\u0570\u0578\u056F\u057F\u0565\u0574\u0562\u0565\u0580",
+        "\u0576\u0578\u0575\u0565\u0574\u0562\u0565\u0580",
+        "\u0564\u0565\u056F\u057F\u0565\u0574\u0562\u0565\u0580"
+      ],
+      "month_genitive_names_raw": [
+        "\u0570\u0578\u0582\u0576\u057E\u0561\u0580\u056B",
+        "\u0583\u0565\u057F\u0580\u057E\u0561\u0580\u056B",
+        "\u0574\u0561\u0580\u057F\u056B",
+        "\u0561\u057A\u0580\u056B\u056C\u056B",
+        "\u0574\u0561\u0575\u056B\u057D\u056B",
+        "\u0570\u0578\u0582\u0576\u056B\u057D\u056B",
+        "\u0570\u0578\u0582\u056C\u056B\u057D\u056B",
+        "\u0585\u0563\u0578\u057D\u057F\u0578\u057D\u056B",
+        "\u057D\u0565\u057A\u057F\u0565\u0574\u0562\u0565\u0580\u056B",
+        "\u0570\u0578\u056F\u057F\u0565\u0574\u0562\u0565\u0580\u056B",
+        "\u0576\u0578\u0575\u0565\u0574\u0562\u0565\u0580\u056B",
+        "\u0564\u0565\u056F\u057F\u0565\u0574\u0562\u0565\u0580\u056B"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2257,6 +3013,34 @@
       "long_time_pattern": "HH.mm.ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember"
+      ],
+      "month_genitive_names_raw": [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2340,6 +3124,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "f.h.",
       "pm_designator": "e.h.",
+      "month_names_raw": [
+        "jan\u00FAar",
+        "febr\u00FAar",
+        "mars",
+        "apr\u00EDl",
+        "ma\u00ED",
+        "j\u00FAn\u00ED",
+        "j\u00FAl\u00ED",
+        "\u00E1g\u00FAst",
+        "september",
+        "okt\u00F3ber",
+        "n\u00F3vember",
+        "desember"
+      ],
+      "month_genitive_names_raw": [
+        "jan\u00FAar",
+        "febr\u00FAar",
+        "mars",
+        "apr\u00EDl",
+        "ma\u00ED",
+        "j\u00FAn\u00ED",
+        "j\u00FAl\u00ED",
+        "\u00E1g\u00FAst",
+        "september",
+        "okt\u00F3ber",
+        "n\u00F3vember",
+        "desember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2423,6 +3235,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "gennaio",
+        "febbraio",
+        "marzo",
+        "aprile",
+        "maggio",
+        "giugno",
+        "luglio",
+        "agosto",
+        "settembre",
+        "ottobre",
+        "novembre",
+        "dicembre"
+      ],
+      "month_genitive_names_raw": [
+        "gennaio",
+        "febbraio",
+        "marzo",
+        "aprile",
+        "maggio",
+        "giugno",
+        "luglio",
+        "agosto",
+        "settembre",
+        "ottobre",
+        "novembre",
+        "dicembre"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2506,6 +3346,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "\u5348\u524D",
       "pm_designator": "\u5348\u5F8C",
+      "month_names_raw": [
+        "1\u6708",
+        "2\u6708",
+        "3\u6708",
+        "4\u6708",
+        "5\u6708",
+        "6\u6708",
+        "7\u6708",
+        "8\u6708",
+        "9\u6708",
+        "10\u6708",
+        "11\u6708",
+        "12\u6708"
+      ],
+      "month_genitive_names_raw": [
+        "1\u6708",
+        "2\u6708",
+        "3\u6708",
+        "4\u6708",
+        "5\u6708",
+        "6\u6708",
+        "7\u6708",
+        "8\u6708",
+        "9\u6708",
+        "10\u6708",
+        "11\u6708",
+        "12\u6708"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2589,6 +3457,34 @@
       "long_time_pattern": "tt h:mm:ss",
       "am_designator": "\uC624\uC804",
       "pm_designator": "\uC624\uD6C4",
+      "month_names_raw": [
+        "1\uC6D4",
+        "2\uC6D4",
+        "3\uC6D4",
+        "4\uC6D4",
+        "5\uC6D4",
+        "6\uC6D4",
+        "7\uC6D4",
+        "8\uC6D4",
+        "9\uC6D4",
+        "10\uC6D4",
+        "11\uC6D4",
+        "12\uC6D4"
+      ],
+      "month_genitive_names_raw": [
+        "1\uC6D4",
+        "2\uC6D4",
+        "3\uC6D4",
+        "4\uC6D4",
+        "5\uC6D4",
+        "6\uC6D4",
+        "7\uC6D4",
+        "8\uC6D4",
+        "9\uC6D4",
+        "10\uC6D4",
+        "11\uC6D4",
+        "12\uC6D4"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2672,6 +3568,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "BN",
       "pm_designator": "PN",
+      "month_names_raw": [
+        "r\u00EAbendan",
+        "sibat",
+        "adar",
+        "n\u00EEsan",
+        "gulan",
+        "hez\u00EEran",
+        "t\u00EErmeh",
+        "tebax",
+        "\u00EElon",
+        "cotmeh",
+        "mijdar",
+        "berfanbar"
+      ],
+      "month_genitive_names_raw": [
+        "r\u00EAbendan",
+        "sibat",
+        "adar",
+        "n\u00EEsan",
+        "gulan",
+        "hez\u00EEran",
+        "t\u00EErmeh",
+        "tebax",
+        "\u00EElon",
+        "cotmeh",
+        "mijdar",
+        "berfanbar"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2755,6 +3679,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "moies",
       "pm_designator": "nom\u00EBttes",
+      "month_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4erz",
+        "Abr\u00EBll",
+        "Mee",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
+      "month_genitive_names_raw": [
+        "Januar",
+        "Februar",
+        "M\u00E4erz",
+        "Abr\u00EBll",
+        "Mee",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2838,6 +3790,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "prie\u0161piet",
       "pm_designator": "popiet",
+      "month_names_raw": [
+        "sausis",
+        "vasaris",
+        "kovas",
+        "balandis",
+        "gegu\u017E\u0117",
+        "bir\u017Eelis",
+        "liepa",
+        "rugpj\u016Btis",
+        "rugs\u0117jis",
+        "spalis",
+        "lapkritis",
+        "gruodis"
+      ],
+      "month_genitive_names_raw": [
+        "sausio",
+        "vasario",
+        "kovo",
+        "baland\u017Eio",
+        "gegu\u017E\u0117s",
+        "bir\u017Eelio",
+        "liepos",
+        "rugpj\u016B\u010Dio",
+        "rugs\u0117jo",
+        "spalio",
+        "lapkri\u010Dio",
+        "gruod\u017Eio"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -2921,6 +3901,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "priek\u0161p.",
       "pm_designator": "p\u0113cp.",
+      "month_names_raw": [
+        "janv\u0101ris",
+        "febru\u0101ris",
+        "marts",
+        "apr\u012Blis",
+        "maijs",
+        "j\u016Bnijs",
+        "j\u016Blijs",
+        "augusts",
+        "septembris",
+        "oktobris",
+        "novembris",
+        "decembris"
+      ],
+      "month_genitive_names_raw": [
+        "janv\u0101ris",
+        "febru\u0101ris",
+        "marts",
+        "apr\u012Blis",
+        "maijs",
+        "j\u016Bnijs",
+        "j\u016Blijs",
+        "augusts",
+        "septembris",
+        "oktobris",
+        "novembris",
+        "decembris"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3004,6 +4012,34 @@
       "long_time_pattern": "h:mm:ss\u202Ftt",
       "am_designator": "PG",
       "pm_designator": "PTG",
+      "month_names_raw": [
+        "Januari",
+        "Februari",
+        "Mac",
+        "April",
+        "Mei",
+        "Jun",
+        "Julai",
+        "Ogos",
+        "September",
+        "Oktober",
+        "November",
+        "Disember"
+      ],
+      "month_genitive_names_raw": [
+        "Januari",
+        "Februari",
+        "Mac",
+        "April",
+        "Mei",
+        "Jun",
+        "Julai",
+        "Ogos",
+        "September",
+        "Oktober",
+        "November",
+        "Disember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3087,6 +4123,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "Jannar",
+        "Frar",
+        "Marzu",
+        "April",
+        "Mejju",
+        "\u0120unju",
+        "Lulju",
+        "Awwissu",
+        "Settembru",
+        "Ottubru",
+        "Novembru",
+        "Di\u010Bembru"
+      ],
+      "month_genitive_names_raw": [
+        "Jannar",
+        "Frar",
+        "Marzu",
+        "April",
+        "Mejju",
+        "\u0120unju",
+        "Lulju",
+        "Awwissu",
+        "Settembru",
+        "Ottubru",
+        "Novembru",
+        "Di\u010Bembru"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3170,6 +4234,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "am",
       "pm_designator": "pm",
+      "month_names_raw": [
+        "januar",
+        "februar",
+        "mars",
+        "april",
+        "mai",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "desember"
+      ],
+      "month_genitive_names_raw": [
+        "januar",
+        "februar",
+        "mars",
+        "april",
+        "mai",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "desember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3253,6 +4345,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "januari",
+        "februari",
+        "maart",
+        "april",
+        "mei",
+        "juni",
+        "juli",
+        "augustus",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
+      "month_genitive_names_raw": [
+        "januari",
+        "februari",
+        "maart",
+        "april",
+        "mei",
+        "juni",
+        "juli",
+        "augustus",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3336,6 +4456,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "f.m.",
       "pm_designator": "e.m.",
+      "month_names_raw": [
+        "januar",
+        "februar",
+        "mars",
+        "april",
+        "mai",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "desember"
+      ],
+      "month_genitive_names_raw": [
+        "januar",
+        "februar",
+        "mars",
+        "april",
+        "mai",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "desember"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3419,6 +4567,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "stycze\u0144",
+        "luty",
+        "marzec",
+        "kwiecie\u0144",
+        "maj",
+        "czerwiec",
+        "lipiec",
+        "sierpie\u0144",
+        "wrzesie\u0144",
+        "pa\u017Adziernik",
+        "listopad",
+        "grudzie\u0144"
+      ],
+      "month_genitive_names_raw": [
+        "stycznia",
+        "lutego",
+        "marca",
+        "kwietnia",
+        "maja",
+        "czerwca",
+        "lipca",
+        "sierpnia",
+        "wrze\u015Bnia",
+        "pa\u017Adziernika",
+        "listopada",
+        "grudnia"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3502,6 +4678,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "janeiro",
+        "fevereiro",
+        "mar\u00E7o",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro"
+      ],
+      "month_genitive_names_raw": [
+        "janeiro",
+        "fevereiro",
+        "mar\u00E7o",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3585,6 +4789,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "janeiro",
+        "fevereiro",
+        "mar\u00E7o",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro"
+      ],
+      "month_genitive_names_raw": [
+        "janeiro",
+        "fevereiro",
+        "mar\u00E7o",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3668,6 +4900,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "a.m.",
       "pm_designator": "p.m.",
+      "month_names_raw": [
+        "ianuarie",
+        "februarie",
+        "martie",
+        "aprilie",
+        "mai",
+        "iunie",
+        "iulie",
+        "august",
+        "septembrie",
+        "octombrie",
+        "noiembrie",
+        "decembrie"
+      ],
+      "month_genitive_names_raw": [
+        "ianuarie",
+        "februarie",
+        "martie",
+        "aprilie",
+        "mai",
+        "iunie",
+        "iulie",
+        "august",
+        "septembrie",
+        "octombrie",
+        "noiembrie",
+        "decembrie"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3751,6 +5011,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "\u044F\u043D\u0432\u0430\u0440\u044C",
+        "\u0444\u0435\u0432\u0440\u0430\u043B\u044C",
+        "\u043C\u0430\u0440\u0442",
+        "\u0430\u043F\u0440\u0435\u043B\u044C",
+        "\u043C\u0430\u0439",
+        "\u0438\u044E\u043D\u044C",
+        "\u0438\u044E\u043B\u044C",
+        "\u0430\u0432\u0433\u0443\u0441\u0442",
+        "\u0441\u0435\u043D\u0442\u044F\u0431\u0440\u044C",
+        "\u043E\u043A\u0442\u044F\u0431\u0440\u044C",
+        "\u043D\u043E\u044F\u0431\u0440\u044C",
+        "\u0434\u0435\u043A\u0430\u0431\u0440\u044C"
+      ],
+      "month_genitive_names_raw": [
+        "\u044F\u043D\u0432\u0430\u0440\u044F",
+        "\u0444\u0435\u0432\u0440\u0430\u043B\u044F",
+        "\u043C\u0430\u0440\u0442\u0430",
+        "\u0430\u043F\u0440\u0435\u043B\u044F",
+        "\u043C\u0430\u044F",
+        "\u0438\u044E\u043D\u044F",
+        "\u0438\u044E\u043B\u044F",
+        "\u0430\u0432\u0433\u0443\u0441\u0442\u0430",
+        "\u0441\u0435\u043D\u0442\u044F\u0431\u0440\u044F",
+        "\u043E\u043A\u0442\u044F\u0431\u0440\u044F",
+        "\u043D\u043E\u044F\u0431\u0440\u044F",
+        "\u0434\u0435\u043A\u0430\u0431\u0440\u044F"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3834,6 +5122,34 @@
       "long_time_pattern": "H:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "janu\u00E1r",
+        "febru\u00E1r",
+        "marec",
+        "apr\u00EDl",
+        "m\u00E1j",
+        "j\u00FAn",
+        "j\u00FAl",
+        "august",
+        "september",
+        "okt\u00F3ber",
+        "november",
+        "december"
+      ],
+      "month_genitive_names_raw": [
+        "janu\u00E1ra",
+        "febru\u00E1ra",
+        "marca",
+        "apr\u00EDla",
+        "m\u00E1ja",
+        "j\u00FAna",
+        "j\u00FAla",
+        "augusta",
+        "septembra",
+        "okt\u00F3bra",
+        "novembra",
+        "decembra"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -3917,6 +5233,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "dop.",
       "pm_designator": "pop.",
+      "month_names_raw": [
+        "januar",
+        "februar",
+        "marec",
+        "april",
+        "maj",
+        "junij",
+        "julij",
+        "avgust",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
+      "month_genitive_names_raw": [
+        "januar",
+        "februar",
+        "marec",
+        "april",
+        "maj",
+        "junij",
+        "julij",
+        "avgust",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4000,6 +5344,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "\u0458\u0430\u043D\u0443\u0430\u0440",
+        "\u0444\u0435\u0431\u0440\u0443\u0430\u0440",
+        "\u043C\u0430\u0440\u0442",
+        "\u0430\u043F\u0440\u0438\u043B",
+        "\u043C\u0430\u0458",
+        "\u0458\u0443\u043D",
+        "\u0458\u0443\u043B",
+        "\u0430\u0432\u0433\u0443\u0441\u0442",
+        "\u0441\u0435\u043F\u0442\u0435\u043C\u0431\u0430\u0440",
+        "\u043E\u043A\u0442\u043E\u0431\u0430\u0440",
+        "\u043D\u043E\u0432\u0435\u043C\u0431\u0430\u0440",
+        "\u0434\u0435\u0446\u0435\u043C\u0431\u0430\u0440"
+      ],
+      "month_genitive_names_raw": [
+        "\u0458\u0430\u043D\u0443\u0430\u0440",
+        "\u0444\u0435\u0431\u0440\u0443\u0430\u0440",
+        "\u043C\u0430\u0440\u0442",
+        "\u0430\u043F\u0440\u0438\u043B",
+        "\u043C\u0430\u0458",
+        "\u0458\u0443\u043D",
+        "\u0458\u0443\u043B",
+        "\u0430\u0432\u0433\u0443\u0441\u0442",
+        "\u0441\u0435\u043F\u0442\u0435\u043C\u0431\u0430\u0440",
+        "\u043E\u043A\u0442\u043E\u0431\u0430\u0440",
+        "\u043D\u043E\u0432\u0435\u043C\u0431\u0430\u0440",
+        "\u0434\u0435\u0446\u0435\u043C\u0431\u0430\u0440"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4083,6 +5455,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "januar",
+        "februar",
+        "mart",
+        "april",
+        "maj",
+        "jun",
+        "jul",
+        "avgust",
+        "septembar",
+        "oktobar",
+        "novembar",
+        "decembar"
+      ],
+      "month_genitive_names_raw": [
+        "januar",
+        "februar",
+        "mart",
+        "april",
+        "maj",
+        "jun",
+        "jul",
+        "avgust",
+        "septembar",
+        "oktobar",
+        "novembar",
+        "decembar"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4166,6 +5566,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "fm",
       "pm_designator": "em",
+      "month_names_raw": [
+        "januari",
+        "februari",
+        "mars",
+        "april",
+        "maj",
+        "juni",
+        "juli",
+        "augusti",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
+      "month_genitive_names_raw": [
+        "januari",
+        "februari",
+        "mars",
+        "april",
+        "maj",
+        "juni",
+        "juli",
+        "augusti",
+        "september",
+        "oktober",
+        "november",
+        "december"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4249,6 +5677,34 @@
       "long_time_pattern": "h:mm:ss tt",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "\u0B9C\u0BA9\u0BB5\u0BB0\u0BBF",
+        "\u0BAA\u0BBF\u0BAA\u0BCD\u0BB0\u0BB5\u0BB0\u0BBF",
+        "\u0BAE\u0BBE\u0BB0\u0BCD\u0B9A\u0BCD",
+        "\u0B8F\u0BAA\u0BCD\u0BB0\u0BB2\u0BCD",
+        "\u0BAE\u0BC7",
+        "\u0B9C\u0BC2\u0BA9\u0BCD",
+        "\u0B9C\u0BC2\u0BB2\u0BC8",
+        "\u0B86\u0B95\u0BB8\u0BCD\u0B9F\u0BCD",
+        "\u0B9A\u0BC6\u0BAA\u0BCD\u0B9F\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD",
+        "\u0B85\u0B95\u0BCD\u0B9F\u0BCB\u0BAA\u0BB0\u0BCD",
+        "\u0BA8\u0BB5\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD",
+        "\u0B9F\u0BBF\u0B9A\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD"
+      ],
+      "month_genitive_names_raw": [
+        "\u0B9C\u0BA9\u0BB5\u0BB0\u0BBF",
+        "\u0BAA\u0BBF\u0BAA\u0BCD\u0BB0\u0BB5\u0BB0\u0BBF",
+        "\u0BAE\u0BBE\u0BB0\u0BCD\u0B9A\u0BCD",
+        "\u0B8F\u0BAA\u0BCD\u0BB0\u0BB2\u0BCD",
+        "\u0BAE\u0BC7",
+        "\u0B9C\u0BC2\u0BA9\u0BCD",
+        "\u0B9C\u0BC2\u0BB2\u0BC8",
+        "\u0B86\u0B95\u0BB8\u0BCD\u0B9F\u0BCD",
+        "\u0B9A\u0BC6\u0BAA\u0BCD\u0B9F\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD",
+        "\u0B85\u0B95\u0BCD\u0B9F\u0BCB\u0BAA\u0BB0\u0BCD",
+        "\u0BA8\u0BB5\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD",
+        "\u0B9F\u0BBF\u0B9A\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4332,6 +5788,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "\u0E21\u0E01\u0E23\u0E32\u0E04\u0E21",
+        "\u0E01\u0E38\u0E21\u0E20\u0E32\u0E1E\u0E31\u0E19\u0E18\u0E4C",
+        "\u0E21\u0E35\u0E19\u0E32\u0E04\u0E21",
+        "\u0E40\u0E21\u0E29\u0E32\u0E22\u0E19",
+        "\u0E1E\u0E24\u0E29\u0E20\u0E32\u0E04\u0E21",
+        "\u0E21\u0E34\u0E16\u0E38\u0E19\u0E32\u0E22\u0E19",
+        "\u0E01\u0E23\u0E01\u0E0E\u0E32\u0E04\u0E21",
+        "\u0E2A\u0E34\u0E07\u0E2B\u0E32\u0E04\u0E21",
+        "\u0E01\u0E31\u0E19\u0E22\u0E32\u0E22\u0E19",
+        "\u0E15\u0E38\u0E25\u0E32\u0E04\u0E21",
+        "\u0E1E\u0E24\u0E28\u0E08\u0E34\u0E01\u0E32\u0E22\u0E19",
+        "\u0E18\u0E31\u0E19\u0E27\u0E32\u0E04\u0E21"
+      ],
+      "month_genitive_names_raw": [
+        "\u0E21\u0E01\u0E23\u0E32\u0E04\u0E21",
+        "\u0E01\u0E38\u0E21\u0E20\u0E32\u0E1E\u0E31\u0E19\u0E18\u0E4C",
+        "\u0E21\u0E35\u0E19\u0E32\u0E04\u0E21",
+        "\u0E40\u0E21\u0E29\u0E32\u0E22\u0E19",
+        "\u0E1E\u0E24\u0E29\u0E20\u0E32\u0E04\u0E21",
+        "\u0E21\u0E34\u0E16\u0E38\u0E19\u0E32\u0E22\u0E19",
+        "\u0E01\u0E23\u0E01\u0E0E\u0E32\u0E04\u0E21",
+        "\u0E2A\u0E34\u0E07\u0E2B\u0E32\u0E04\u0E21",
+        "\u0E01\u0E31\u0E19\u0E22\u0E32\u0E22\u0E19",
+        "\u0E15\u0E38\u0E25\u0E32\u0E04\u0E21",
+        "\u0E1E\u0E24\u0E28\u0E08\u0E34\u0E01\u0E32\u0E22\u0E19",
+        "\u0E18\u0E31\u0E19\u0E27\u0E32\u0E04\u0E21"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4415,6 +5899,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "\u00D6\u00D6",
       "pm_designator": "\u00D6S",
+      "month_names_raw": [
+        "Ocak",
+        "\u015Eubat",
+        "Mart",
+        "Nisan",
+        "May\u0131s",
+        "Haziran",
+        "Temmuz",
+        "A\u011Fustos",
+        "Eyl\u00FCl",
+        "Ekim",
+        "Kas\u0131m",
+        "Aral\u0131k"
+      ],
+      "month_genitive_names_raw": [
+        "Ocak",
+        "\u015Eubat",
+        "Mart",
+        "Nisan",
+        "May\u0131s",
+        "Haziran",
+        "Temmuz",
+        "A\u011Fustos",
+        "Eyl\u00FCl",
+        "Ekim",
+        "Kas\u0131m",
+        "Aral\u0131k"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4498,6 +6010,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "\u0434\u043F",
       "pm_designator": "\u043F\u043F",
+      "month_names_raw": [
+        "\u0441\u0456\u0447\u0435\u043D\u044C",
+        "\u043B\u044E\u0442\u0438\u0439",
+        "\u0431\u0435\u0440\u0435\u0437\u0435\u043D\u044C",
+        "\u043A\u0432\u0456\u0442\u0435\u043D\u044C",
+        "\u0442\u0440\u0430\u0432\u0435\u043D\u044C",
+        "\u0447\u0435\u0440\u0432\u0435\u043D\u044C",
+        "\u043B\u0438\u043F\u0435\u043D\u044C",
+        "\u0441\u0435\u0440\u043F\u0435\u043D\u044C",
+        "\u0432\u0435\u0440\u0435\u0441\u0435\u043D\u044C",
+        "\u0436\u043E\u0432\u0442\u0435\u043D\u044C",
+        "\u043B\u0438\u0441\u0442\u043E\u043F\u0430\u0434",
+        "\u0433\u0440\u0443\u0434\u0435\u043D\u044C"
+      ],
+      "month_genitive_names_raw": [
+        "\u0441\u0456\u0447\u043D\u044F",
+        "\u043B\u044E\u0442\u043E\u0433\u043E",
+        "\u0431\u0435\u0440\u0435\u0437\u043D\u044F",
+        "\u043A\u0432\u0456\u0442\u043D\u044F",
+        "\u0442\u0440\u0430\u0432\u043D\u044F",
+        "\u0447\u0435\u0440\u0432\u043D\u044F",
+        "\u043B\u0438\u043F\u043D\u044F",
+        "\u0441\u0435\u0440\u043F\u043D\u044F",
+        "\u0432\u0435\u0440\u0435\u0441\u043D\u044F",
+        "\u0436\u043E\u0432\u0442\u043D\u044F",
+        "\u043B\u0438\u0441\u0442\u043E\u043F\u0430\u0434\u0430",
+        "\u0433\u0440\u0443\u0434\u043D\u044F"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4581,6 +6121,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "\u0422\u041E",
       "pm_designator": "\u0422\u041A",
+      "month_names_raw": [
+        "\u044F\u043D\u0432\u0430\u0440",
+        "\u0444\u0435\u0432\u0440\u0430\u043B",
+        "\u043C\u0430\u0440\u0442",
+        "\u0430\u043F\u0440\u0435\u043B",
+        "\u043C\u0430\u0439",
+        "\u0438\u044E\u043D",
+        "\u0438\u044E\u043B",
+        "\u0430\u0432\u0433\u0443\u0441\u0442",
+        "\u0441\u0435\u043D\u0442\u044F\u0431\u0440",
+        "\u043E\u043A\u0442\u044F\u0431\u0440",
+        "\u043D\u043E\u044F\u0431\u0440",
+        "\u0434\u0435\u043A\u0430\u0431\u0440"
+      ],
+      "month_genitive_names_raw": [
+        "\u044F\u043D\u0432\u0430\u0440",
+        "\u0444\u0435\u0432\u0440\u0430\u043B",
+        "\u043C\u0430\u0440\u0442",
+        "\u0430\u043F\u0440\u0435\u043B",
+        "\u043C\u0430\u0439",
+        "\u0438\u044E\u043D",
+        "\u0438\u044E\u043B",
+        "\u0430\u0432\u0433\u0443\u0441\u0442",
+        "\u0441\u0435\u043D\u0442\u044F\u0431\u0440",
+        "\u043E\u043A\u0442\u044F\u0431\u0440",
+        "\u043D\u043E\u044F\u0431\u0440",
+        "\u0434\u0435\u043A\u0430\u0431\u0440"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4664,6 +6232,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "TO",
       "pm_designator": "TK",
+      "month_names_raw": [
+        "Yanvar",
+        "Fevral",
+        "Mart",
+        "Aprel",
+        "May",
+        "Iyun",
+        "Iyul",
+        "Avgust",
+        "Sentabr",
+        "Oktabr",
+        "Noyabr",
+        "Dekabr"
+      ],
+      "month_genitive_names_raw": [
+        "yanvar",
+        "fevral",
+        "mart",
+        "aprel",
+        "may",
+        "iyun",
+        "iyul",
+        "avgust",
+        "sentabr",
+        "oktabr",
+        "noyabr",
+        "dekabr"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4747,6 +6343,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "SA",
       "pm_designator": "CH",
+      "month_names_raw": [
+        "Th\u00E1ng 1",
+        "Th\u00E1ng 2",
+        "Th\u00E1ng 3",
+        "Th\u00E1ng 4",
+        "Th\u00E1ng 5",
+        "Th\u00E1ng 6",
+        "Th\u00E1ng 7",
+        "Th\u00E1ng 8",
+        "Th\u00E1ng 9",
+        "Th\u00E1ng 10",
+        "Th\u00E1ng 11",
+        "Th\u00E1ng 12"
+      ],
+      "month_genitive_names_raw": [
+        "th\u00E1ng 1",
+        "th\u00E1ng 2",
+        "th\u00E1ng 3",
+        "th\u00E1ng 4",
+        "th\u00E1ng 5",
+        "th\u00E1ng 6",
+        "th\u00E1ng 7",
+        "th\u00E1ng 8",
+        "th\u00E1ng 9",
+        "th\u00E1ng 10",
+        "th\u00E1ng 11",
+        "th\u00E1ng 12"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4830,6 +6454,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "\u4E0A\u5348",
       "pm_designator": "\u4E0B\u5348",
+      "month_names_raw": [
+        "\u4E00\u6708",
+        "\u4E8C\u6708",
+        "\u4E09\u6708",
+        "\u56DB\u6708",
+        "\u4E94\u6708",
+        "\u516D\u6708",
+        "\u4E03\u6708",
+        "\u516B\u6708",
+        "\u4E5D\u6708",
+        "\u5341\u6708",
+        "\u5341\u4E00\u6708",
+        "\u5341\u4E8C\u6708"
+      ],
+      "month_genitive_names_raw": [
+        "\u4E00\u6708",
+        "\u4E8C\u6708",
+        "\u4E09\u6708",
+        "\u56DB\u6708",
+        "\u4E94\u6708",
+        "\u516D\u6708",
+        "\u4E03\u6708",
+        "\u516B\u6708",
+        "\u4E5D\u6708",
+        "\u5341\u6708",
+        "\u5341\u4E00\u6708",
+        "\u5341\u4E8C\u6708"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4913,6 +6565,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "\u4E0A\u5348",
       "pm_designator": "\u4E0B\u5348",
+      "month_names_raw": [
+        "\u4E00\u6708",
+        "\u4E8C\u6708",
+        "\u4E09\u6708",
+        "\u56DB\u6708",
+        "\u4E94\u6708",
+        "\u516D\u6708",
+        "\u4E03\u6708",
+        "\u516B\u6708",
+        "\u4E5D\u6708",
+        "\u5341\u6708",
+        "\u5341\u4E00\u6708",
+        "\u5341\u4E8C\u6708"
+      ],
+      "month_genitive_names_raw": [
+        "\u4E00\u6708",
+        "\u4E8C\u6708",
+        "\u4E09\u6708",
+        "\u56DB\u6708",
+        "\u4E94\u6708",
+        "\u516D\u6708",
+        "\u4E03\u6708",
+        "\u516B\u6708",
+        "\u4E5D\u6708",
+        "\u5341\u6708",
+        "\u5341\u4E00\u6708",
+        "\u5341\u4E8C\u6708"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -4996,6 +6676,34 @@
       "long_time_pattern": "tth:mm:ss",
       "am_designator": "\u4E0A\u5348",
       "pm_designator": "\u4E0B\u5348",
+      "month_names_raw": [
+        "1\u6708",
+        "2\u6708",
+        "3\u6708",
+        "4\u6708",
+        "5\u6708",
+        "6\u6708",
+        "7\u6708",
+        "8\u6708",
+        "9\u6708",
+        "10\u6708",
+        "11\u6708",
+        "12\u6708"
+      ],
+      "month_genitive_names_raw": [
+        "1\u6708",
+        "2\u6708",
+        "3\u6708",
+        "4\u6708",
+        "5\u6708",
+        "6\u6708",
+        "7\u6708",
+        "8\u6708",
+        "9\u6708",
+        "10\u6708",
+        "11\u6708",
+        "12\u6708"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",
@@ -5079,6 +6787,34 @@
       "long_time_pattern": "HH:mm:ss",
       "am_designator": "AM",
       "pm_designator": "PM",
+      "month_names_raw": [
+        "Januwari",
+        "Februwari",
+        "Mashi",
+        "Ephreli",
+        "Meyi",
+        "Juni",
+        "Julayi",
+        "Agasti",
+        "Septhemba",
+        "Okthoba",
+        "Novemba",
+        "Disemba"
+      ],
+      "month_genitive_names_raw": [
+        "Januwari",
+        "Februwari",
+        "Mashi",
+        "Ephreli",
+        "Meyi",
+        "Juni",
+        "Julayi",
+        "Agasti",
+        "Septhemba",
+        "Okthoba",
+        "Novemba",
+        "Disemba"
+      ],
       "dates": [
         {
           "ref": "2015-01-01",

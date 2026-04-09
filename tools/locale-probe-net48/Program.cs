@@ -107,6 +107,8 @@ internal static class Program
                     ["long_time_pattern"] = dtf.LongTimePattern,
                     ["am_designator"] = ToVisibleText(dtf.AMDesignator),
                     ["pm_designator"] = ToVisibleText(dtf.PMDesignator),
+                    ["month_names_raw"] = dtf.MonthNames.Take(12).ToArray(),
+                    ["month_genitive_names_raw"] = dtf.MonthGenitiveNames.Take(12).ToArray(),
                     ["dates"] = Dates.Select(d =>
                     {
                         var dt = new DateTime(d.Y, d.M, d.D);
