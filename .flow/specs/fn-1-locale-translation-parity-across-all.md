@@ -111,7 +111,7 @@ dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGen
 - [ ] All clock locale data is YAML-authored and source-generated
 - [ ] Registry completeness tests cover all 8 registries (NET6+ guarded)
 - [ ] All sweep tests pass
-- [ ] Runtime: zero per-call allocations beyond return string, profile data is static
+- [ ] Runtime: zero converter-owned allocations in template expansion (stackalloc buffer); ToWords() allocations are delegated to the number-to-words subsystem and accepted. Profile data is static.
 - [ ] Source generator tests pass
 - [ ] Documentation updated (locale-yaml-reference.md, locale-yaml-how-to.md, adding-a-locale.md, ARCHITECTURE.md)
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passes
