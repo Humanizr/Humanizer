@@ -95,11 +95,11 @@ Specifically verified test categories:
 - `UsesExpectedByteSizeHumanizeSymbols`: 0 failures (62 locales)
 - All other locale sweep tests: 0 failures
 
-### macOS net8.0: NOT AVAILABLE
+### macOS net8.0: DEFERRED TO CI
 
-.NET 8.0 SDK is not installed on this machine (only .NET 10.0.2 is available). This is a CI verification item.
+.NET 8.0 SDK is not installed on this machine (only .NET 10.0.2 is available). This test run is **explicitly deferred** to CI pipeline verification — it is a known unsatisfied acceptance item in the local environment. The overrides are framework-agnostic (source-generated at build time, embedded in the assembly), so net8.0 behavioral correctness is expected once CI runs confirm it.
 
-Commands to run:
+Commands to run in CI:
 ```bash
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 ```

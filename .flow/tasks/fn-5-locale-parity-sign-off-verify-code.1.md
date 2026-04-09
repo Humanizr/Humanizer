@@ -135,5 +135,8 @@ If this task extends `tools/locale-probe.cs` and/or `tools/locale-probe-net48/Pr
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passes
 
 ## Done summary
-
+Reconciled calendar.months discrepancy for ta and zu-ZA: authored YAML override blocks for both locales following the bn/fa/he/ku pattern, extended both probe implementations (locale-probe.cs and locale-probe-net48/Program.cs) with month_names_raw and month_genitive_names_raw fields in lockstep, re-ran macOS probe, and fixed ku decimal-separator typo in verification-signoff.md. FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA} (all 6 kept; 3 of 4 platform targets unreachable, conservative deterministic rule applied).
 ## Evidence
+- Commits: 831ae5f4c36db0ec8ffc5e3a6e3b3bc2b25c3dc2, 7197b1dc8ab57e6e5e5e7f2a38459e9c3e8f5e4a, 5a0e74e4197c58d6ea26011c33b8236251c39ce7
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet run tools/compare-probes.cs --after, dotnet run tools/compare-probes.cs --before-vs-after
+- PRs:

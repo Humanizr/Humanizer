@@ -15,8 +15,12 @@
 # keep decision follows directly from the evidence gap -- not from any observed
 # platform variance.
 #
-# Snippet source: inline below (self-contained net10.0 console app)
-# To reproduce: dotnet run --project <dir-containing-this-csproj>
+# Snippet source: inline below (self-contained net10.0 top-level statement file)
+# To reproduce:
+#   1. Copy the C# snippet below into a new file (e.g. /tmp/month-enum/Program.cs)
+#   2. Run: dotnet new console -o /tmp/month-enum --force && cp <snippet> /tmp/month-enum/Program.cs
+#   3. Execute: dotnet run --project /tmp/month-enum
+#   Or use: echo '<snippet>' | dotnet-script eval (if dotnet-script is installed)
 
 ## Snippet source
 

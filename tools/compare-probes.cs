@@ -160,15 +160,92 @@ Console.WriteLine();
 Console.WriteLine("## Override-relevant analysis");
 Console.WriteLine();
 
-// Calendar overrides: check month_standalone for overridden locales
-Console.WriteLine("### Calendar overrides (month_standalone for overridden locales)");
+// Raw month_names_raw coverage check: warn if any after-probe platform is missing the field
+var rawMonthCoverage = new Dictionary<string, bool>();
+foreach (var (label, doc) in data)
+{
+    var firstLocale = doc.RootElement.GetProperty("locales").EnumerateArray().First();
+    rawMonthCoverage[label] = firstLocale.TryGetProperty("month_names_raw", out _);
+}
+var platformsWithRaw = rawMonthCoverage.Where(kv => kv.Value).Select(kv => kv.Key).ToArray();
+var platformsWithoutRaw = rawMonthCoverage.Where(kv => !kv.Value).Select(kv => kv.Key).ToArray();
+
+if (platformsWithoutRaw.Length > 0 && platformsWithRaw.Length > 0)
+{
+    Console.WriteLine("### WARNING: Mixed-schema probe artifacts");
+    Console.WriteLine($"  Platforms WITH month_names_raw: {string.Join(", ", platformsWithRaw)}");
+    Console.WriteLine($"  Platforms WITHOUT month_names_raw: {string.Join(", ", platformsWithoutRaw)}");
+    Console.WriteLine("  Raw month-name analysis below covers only platforms with the extended schema.");
+    Console.WriteLine("  Platforms without the field have pre-extension probe snapshots (not re-run).");
+    Console.WriteLine();
+}
+
+// Calendar overrides: authoritative analysis via month_names_raw (the decision contract)
+Console.WriteLine("### Calendar overrides (month_names_raw for overridden locales — authoritative contract)");
+var rawMonthDiffs = differences
+    .Where(kv => calendarOverrideLocales.Contains(kv.Key.Locale) && kv.Key.Category == "month_names_raw")
+    .ToArray();
+Console.WriteLine($"  Overridden locales: {string.Join(", ", calendarOverrideLocales)}");
+Console.WriteLine($"  Platforms with month_names_raw coverage: {string.Join(", ", platformsWithRaw)}");
+if (platformsWithoutRaw.Length > 0)
+    Console.WriteLine($"  Platforms without coverage (pre-extension snapshots): {string.Join(", ", platformsWithoutRaw)}");
+Console.WriteLine($"  month_names_raw differences across covered platforms: {rawMonthDiffs.Length}");
+if (rawMonthDiffs.Length == 0 && platformsWithRaw.Length > 0)
+    Console.WriteLine("  RESULT: 100% agreement on covered platforms for raw month names");
+else if (rawMonthDiffs.Length > 0)
+{
+    Console.WriteLine("  RESULT: Differences found in raw month names:");
+    foreach (var (key, vals) in rawMonthDiffs)
+    {
+        Console.Write($"    {key.Locale}/month[{key.Key}]:");
+        foreach (var (label, _) in existingFiles)
+        {
+            vals.TryGetValue(label, out var v);
+            Console.Write($"  {label}=\"{v ?? "<no data>"}\"");
+        }
+        Console.WriteLine();
+    }
+}
+if (platformsWithoutRaw.Length > 0)
+    Console.WriteLine($"  NOTE: Full cross-platform parity not proven — {platformsWithoutRaw.Length} platform(s) lack raw month data");
+Console.WriteLine();
+
+// Calendar overrides: month_genitive_names_raw
+var rawGenitiveDiffs = differences
+    .Where(kv => calendarOverrideLocales.Contains(kv.Key.Locale) && kv.Key.Category == "month_genitive_names_raw")
+    .ToArray();
+if (matrix.Any(kv => kv.Key.Category == "month_genitive_names_raw"))
+{
+    Console.WriteLine("### Calendar overrides (month_genitive_names_raw for overridden locales)");
+    Console.WriteLine($"  month_genitive_names_raw differences across covered platforms: {rawGenitiveDiffs.Length}");
+    if (rawGenitiveDiffs.Length == 0)
+        Console.WriteLine("  RESULT: 100% agreement on covered platforms for genitive month names");
+    else
+    {
+        Console.WriteLine("  RESULT: Differences found:");
+        foreach (var (key, vals) in rawGenitiveDiffs)
+        {
+            Console.Write($"    {key.Locale}/genitive[{key.Key}]:");
+            foreach (var (label, _) in existingFiles)
+            {
+                vals.TryGetValue(label, out var v);
+                Console.Write($"  {label}=\"{v ?? "<no data>"}\"");
+            }
+            Console.WriteLine();
+        }
+    }
+    Console.WriteLine();
+}
+
+// Calendar overrides: corroborating month_standalone analysis
+Console.WriteLine("### Calendar overrides (month_standalone — corroborating, not authoritative)");
 var calendarDiffs = differences
     .Where(kv => calendarOverrideLocales.Contains(kv.Key.Locale) && kv.Key.Category == "date_month_standalone")
     .ToArray();
 Console.WriteLine($"  Overridden locales: {string.Join(", ", calendarOverrideLocales)}");
 Console.WriteLine($"  Month-standalone differences across platforms: {calendarDiffs.Length}");
 if (calendarDiffs.Length == 0)
-    Console.WriteLine("  RESULT: 100% platform agreement for overridden calendar locales");
+    Console.WriteLine("  RESULT: 100% platform agreement for month_standalone (corroborates raw month parity)");
 else
 {
     Console.WriteLine("  RESULT: Differences found (expected in raw CultureInfo data; Humanizer overrides at runtime):");
@@ -387,7 +464,26 @@ static void RunBeforeVsAfterComparison()
         else if (schemaExtended)
             Console.WriteLine($"  {platform}: IDENTICAL shared fields (schema extended with new fields — expected)");
         else
-            Console.WriteLine($"  {platform}: IDENTICAL (raw CultureInfo data unchanged)");
+            Console.WriteLine($"  {platform}: IDENTICAL (raw CultureInfo data unchanged, probe not re-run with extended schema)");
+    }
+
+    // Check raw month coverage across after probes
+    Console.WriteLine();
+    Console.WriteLine("### Raw month array coverage in after probes");
+    foreach (var (platform, _, afterPath) in pairs)
+    {
+        if (!File.Exists(afterPath))
+        {
+            Console.WriteLine($"  {platform}: MISSING after probe file");
+            continue;
+        }
+        var afterDoc = JsonDocument.Parse(File.ReadAllText(afterPath));
+        var firstLocale = afterDoc.RootElement.GetProperty("locales").EnumerateArray().First();
+        var hasRaw = firstLocale.TryGetProperty("month_names_raw", out _);
+        if (hasRaw)
+            Console.WriteLine($"  {platform}: month_names_raw PRESENT (extended probe)");
+        else
+            Console.WriteLine($"  {platform}: month_names_raw ABSENT (pre-extension snapshot — not re-run)");
     }
     Console.WriteLine();
 }

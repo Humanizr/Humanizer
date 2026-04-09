@@ -45,3 +45,9 @@ When a verification gate depends on a known external blocker (e.g., net48 test s
 
 ## 2026-04-09 manual [pitfall]
 When a decision document chooses values that contradict downstream task specs, explicitly flag each contradiction with the spec text that must be corrected -- do not leave the contradiction for implementers to discover
+
+## 2026-04-09 manual [pitfall]
+When extending a JSON schema with new fields, update ALL consumers that read or compare the JSON — not just the primary comparison path but also before/after identity checks, matrix builders, and any script that hardcodes field lists or total counts
+
+## 2026-04-09 manual [pitfall]
+When documenting verification status in gate summaries, match claim strength to actual evidence scope — do not state cross-platform agreement as PASS when only one platform was exercised; use DEFERRED for untested platforms
