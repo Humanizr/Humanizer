@@ -53,7 +53,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         // so templates like "{hour} {minutes}" produce "et nul fem" instead of "et fem".
         // When compactMinuteWords is active (CJK locales), omit the space between filler and word.
         var minuteWords = normalizedMinutes is > 0 and < 10 && profile.ZeroFiller.Length > 0
-            ? profile.ZeroFiller + (profile.CompactMinuteWords ? "" : " ") + rawMinuteWords
+            ? string.Concat(profile.ZeroFiller, profile.CompactMinuteWords ? "" : " ", rawMinuteWords)
             : rawMinuteWords;
 
         var reverseMinuteWords = normalizedMinutes > 0 ? ResolveMinuteWords(60 - normalizedMinutes) : "";
@@ -372,124 +372,243 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         string minutes, string minutesReverse, string minutesFromHalf,
         string article, string nextArticle, string minuteSuffix, string dayPeriod)
     {
-        var result = template;
+        // Single-pass expansion: scan the template once, resolve placeholders inline,
+        // skip double spaces, and trim — producing only the final return string.
+        var maxLen = template.Length
+            + hour.Length + nextHour.Length + minutes.Length
+            + minutesReverse.Length + minutesFromHalf.Length
+            + article.Length + nextArticle.Length + minuteSuffix.Length + dayPeriod.Length;
 
-        // First pass: replace non-number placeholders so the Eifeler rule can see
-        // the resolved suffix and article words when processing number placeholders.
-        if (result.Contains("{article}"))
+        Span<char> buf = stackalloc char[maxLen];
+        var pos = 0;
+        var i = 0;
+
+        while (i < template.Length)
         {
-            result = result.Replace("{article}", article);
+            if (template[i] == '{')
+            {
+                var close = template.IndexOf('}', i);
+                if (close < 0)
+                {
+                    AppendChar(buf, ref pos, template[i++]);
+                    continue;
+                }
+
+                var name = template.AsSpan(i + 1, close - i - 1);
+                var replacement = ResolveTemplatePlaceholder(
+                    name, template, close + 1,
+                    hour, nextHour, minutes, minutesReverse, minutesFromHalf,
+                    article, nextArticle, minuteSuffix, dayPeriod);
+
+                replacement.CopyTo(buf[pos..]);
+                pos += replacement.Length;
+                i = close + 1;
+            }
+            else
+            {
+                AppendChar(buf, ref pos, template[i++]);
+            }
         }
 
-        if (result.Contains("{nextArticle}"))
+        // Trim leading/trailing spaces from the result span.
+        var result = buf[..pos];
+        result = result.Trim();
+        return new string(result);
+    }
+
+    static void AppendChar(Span<char> buf, ref int pos, char c)
+    {
+        // Collapse double spaces inline so no post-processing pass is needed.
+        if (c == ' ' && pos > 0 && buf[pos - 1] == ' ')
         {
-            result = result.Replace("{nextArticle}", nextArticle);
+            return;
         }
 
-        if (result.Contains("{minuteSuffix}"))
-        {
-            result = result.Replace("{minuteSuffix}", minuteSuffix);
-        }
-
-        if (result.Contains("{dayPeriod}"))
-        {
-            result = result.Replace("{dayPeriod}", dayPeriod);
-        }
-
-        // Second pass: replace number placeholders with Eifeler awareness.
-        result = ReplaceNumberPlaceholder(result, "{hour}", hour);
-        result = ReplaceNumberPlaceholder(result, "{nextHour}", nextHour);
-        result = ReplaceNumberPlaceholder(result, "{minutes}", minutes);
-        result = ReplaceNumberPlaceholder(result, "{minutesReverse}", minutesReverse);
-        result = ReplaceNumberPlaceholder(result, "{minutesFromHalf}", minutesFromHalf);
-
-        // Collapse double spaces left by empty placeholders and trim edges so templates
-        // like "{hour} {minutes}" produce "tretten" instead of "tretten " at :00.
-        while (result.Contains("  "))
-        {
-            result = result.Replace("  ", " ");
-        }
-
-        return result.Trim();
+        buf[pos++] = c;
     }
 
     /// <summary>
-    /// Replaces a number-word placeholder, applying the Eifeler rule when enabled.
+    /// Resolves a template placeholder by name, applying the Eifeler rule for number placeholders.
+    /// Returns the replacement value as a <see cref="ReadOnlySpan{T}"/> to avoid allocations.
+    /// </summary>
+    ReadOnlySpan<char> ResolveTemplatePlaceholder(
+        ReadOnlySpan<char> name, string template, int afterIndex,
+        string hour, string nextHour, string minutes, string minutesReverse, string minutesFromHalf,
+        string article, string nextArticle, string minuteSuffix, string dayPeriod)
+    {
+        // Non-number placeholders: return directly without Eifeler processing.
+        if (name.SequenceEqual("article"))
+        {
+            return article;
+        }
+
+        if (name.SequenceEqual("nextArticle"))
+        {
+            return nextArticle;
+        }
+
+        if (name.SequenceEqual("minuteSuffix"))
+        {
+            return minuteSuffix;
+        }
+
+        if (name.SequenceEqual("dayPeriod"))
+        {
+            return dayPeriod;
+        }
+
+        // Number placeholders: apply Eifeler rule when enabled.
+        string value;
+        if (name.SequenceEqual("hour"))
+        {
+            value = hour;
+        }
+        else if (name.SequenceEqual("nextHour"))
+        {
+            value = nextHour;
+        }
+        else if (name.SequenceEqual("minutes"))
+        {
+            value = minutes;
+        }
+        else if (name.SequenceEqual("minutesReverse"))
+        {
+            value = minutesReverse;
+        }
+        else if (name.SequenceEqual("minutesFromHalf"))
+        {
+            value = minutesFromHalf;
+        }
+        else
+        {
+            return ReadOnlySpan<char>.Empty;
+        }
+
+        return ApplyEifelerToValue(value, template, afterIndex, article, nextArticle, minuteSuffix, dayPeriod);
+    }
+
+    /// <summary>
+    /// Applies the Eifeler rule to a number-word value when enabled.
     /// The rule trims trailing 'n' from the last word of the resolved number value
     /// when the first word immediately after it starts with a non-blocking character.
+    /// Non-number placeholder values are passed so the lookahead can resolve them inline.
     /// </summary>
-    string ReplaceNumberPlaceholder(string template, string placeholder, string value)
+    ReadOnlySpan<char> ApplyEifelerToValue(
+        string value, string template, int afterIndex,
+        string article, string nextArticle, string minuteSuffix, string dayPeriod)
     {
-        var index = template.IndexOf(placeholder, StringComparison.Ordinal);
-        if (index < 0)
+        if (!profile.ApplyEifelerRule || value.Length == 0)
         {
-            return template;
+            return value;
         }
 
-        var resolvedValue = value;
-        if (profile.ApplyEifelerRule && resolvedValue.Length > 0)
+        var nextWord = ExtractNextWordResolvingPlaceholders(template, afterIndex, article, nextArticle, minuteSuffix, dayPeriod);
+        if (nextWord.Length == 0)
         {
-            // Find the first word after the placeholder in the (partially expanded) template.
-            var afterIndex = index + placeholder.Length;
-            var nextWord = ExtractNextLiteralWord(template, afterIndex);
-            if (nextWord.Length > 0)
+            return value;
+        }
+
+        // Apply the Eifeler rule to the last word of the resolved number value.
+        var lastSpace = value.LastIndexOf(' ');
+        if (lastSpace >= 0)
+        {
+            var lastWord = value[(lastSpace + 1)..];
+            var eifeled = EifelerRule.ApplyIfNeeded(lastWord, nextWord);
+            if (ReferenceEquals(eifeled, lastWord))
             {
-                // Apply the Eifeler rule to the last word of the resolved number value.
-                var lastSpace = resolvedValue.LastIndexOf(' ');
-                if (lastSpace >= 0)
-                {
-                    var lastWord = resolvedValue[(lastSpace + 1)..];
-                    var eifeled = EifelerRule.ApplyIfNeeded(lastWord, nextWord);
-                    resolvedValue = resolvedValue[..(lastSpace + 1)] + eifeled;
-                }
-                else
-                {
-                    resolvedValue = EifelerRule.ApplyIfNeeded(resolvedValue, nextWord);
-                }
+                return value;
             }
+
+            return string.Concat(value.AsSpan(0, lastSpace + 1), eifeled);
         }
 
-        return template.Replace(placeholder, resolvedValue);
+        return EifelerRule.ApplyIfNeeded(value, nextWord);
     }
 
     /// <summary>
-    /// Extracts the first literal word after the given position in the template.
-    /// Skips spaces and any remaining placeholders (curly-brace tokens).
+    /// Extracts the first word after the given position in the template.
+    /// When a non-number placeholder is encountered, resolves it to its value and
+    /// returns its first word, so the Eifeler rule sees the actual following word.
     /// </summary>
-    static string ExtractNextLiteralWord(string template, int startIndex)
+    static string ExtractNextWordResolvingPlaceholders(
+        string template, int startIndex,
+        string article, string nextArticle, string minuteSuffix, string dayPeriod)
     {
         var i = startIndex;
-        // Skip leading spaces.
-        while (i < template.Length && template[i] == ' ')
+        while (i < template.Length)
         {
-            i++;
-        }
-
-        if (i >= template.Length)
-        {
-            return "";
-        }
-
-        // If we hit a remaining placeholder, skip it and try the next word.
-        if (template[i] == '{')
-        {
-            var closeBrace = template.IndexOf('}', i);
-            if (closeBrace >= 0)
+            // Skip spaces.
+            while (i < template.Length && template[i] == ' ')
             {
-                return ExtractNextLiteralWord(template, closeBrace + 1);
+                i++;
             }
 
-            return "";
+            if (i >= template.Length)
+            {
+                return "";
+            }
+
+            if (template[i] == '{')
+            {
+                var closeBrace = template.IndexOf('}', i);
+                if (closeBrace < 0)
+                {
+                    return "";
+                }
+
+                var name = template.AsSpan(i + 1, closeBrace - i - 1);
+
+                // Resolve non-number placeholders to get their first word.
+                var resolved = ResolveNonNumberPlaceholder(name, article, nextArticle, minuteSuffix, dayPeriod);
+                if (resolved.Length > 0)
+                {
+                    // Return the first word of the resolved value.
+                    var spaceIdx = resolved.IndexOf(' ');
+                    return spaceIdx >= 0 ? resolved[..spaceIdx] : resolved;
+                }
+
+                // Skip number placeholders and continue looking.
+                i = closeBrace + 1;
+                continue;
+            }
+
+            // Extract the literal word until space or placeholder.
+            var wordStart = i;
+            while (i < template.Length && template[i] != ' ' && template[i] != '{')
+            {
+                i++;
+            }
+
+            return template[wordStart..i];
         }
 
-        // Extract the word until space or placeholder.
-        var wordStart = i;
-        while (i < template.Length && template[i] != ' ' && template[i] != '{')
+        return "";
+    }
+
+    static string ResolveNonNumberPlaceholder(
+        ReadOnlySpan<char> name, string article, string nextArticle, string minuteSuffix, string dayPeriod)
+    {
+        if (name.SequenceEqual("article"))
         {
-            i++;
+            return article;
         }
 
-        return template[wordStart..i];
+        if (name.SequenceEqual("nextArticle"))
+        {
+            return nextArticle;
+        }
+
+        if (name.SequenceEqual("minuteSuffix"))
+        {
+            return minuteSuffix;
+        }
+
+        if (name.SequenceEqual("dayPeriod"))
+        {
+            return dayPeriod;
+        }
+
+        return "";
     }
 
     /// <summary>

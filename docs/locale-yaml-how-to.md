@@ -155,7 +155,7 @@ Rules:
 5. If the child changes `engine`, the whole mapped surface is treated as a new block.
 6. Inheritance is not self-proving. A parity claim still needs at least one locale-specific proving assertion for every inherited canonical surface.
 7. For parity work, do not rely on English fallback for any canonical surface.
-8. Do not use empty mappings or `engine: 'default'` as inheritance sentinels. Omission is the only default-behavior signal.
+8. Do not use empty mappings as inheritance sentinels. Omission is the only default-behavior signal. Exception: `engine: 'default'` is allowed on `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, and `clock` surfaces to explicitly opt into the built-in engine.
 
 Use inheritance to express real parent-child relationships. Do not use it to hide unrelated locale behavior.
 
