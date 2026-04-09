@@ -692,12 +692,12 @@ Explicit templates for each 5-minute increment. Templates use placeholders `{hou
 - `min0` through `min55`: templates for minutes 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55
 - `defaultTemplate`: catch-all fallback for non-bucketed minutes
 
-**Range-based default templates** (for quadrant-style patterns):
+**Range-based default templates** (fill gaps between 5-minute bucket positions):
 
-- `pastHourTemplate`: minutes 1-14 default
-- `beforeHalfTemplate`: minutes 16-29 default
-- `afterHalfTemplate`: minutes 31-44 default
-- `beforeNextTemplate`: minutes 46-59 default
+- `pastHourTemplate`: minutes 1-24 (excluding any explicit bucket templates at 5, 10, 15, 20)
+- `beforeHalfTemplate`: minutes 26-29
+- `afterHalfTemplate`: minutes 31-34
+- `beforeNextTemplate`: minutes 36-59 (excluding any explicit bucket templates at 40, 45, 50, 55)
 
 **Zero filler:**
 
@@ -755,7 +755,7 @@ Notes:
 
 - All 62 shipped locales use `phrase-clock`. There are no residual handwritten clock leaves.
 - Non-bucketed minutes fall to range-based defaults or `defaultTemplate`.
-- Templates that reference `{nextHour}` shift the day-period to the next hour for minutes >= 35; templates using `{hour}` base the period on the current hour.
+- Day-period hour resolution is template-aware: templates that reference `{nextHour}` or `{nextArticle}` base the day period on hour+1 (since the phrasing is relative to the next hour), while templates using `{hour}` base the period on the current hour.
 
 ## Words-To-Number Engines
 
