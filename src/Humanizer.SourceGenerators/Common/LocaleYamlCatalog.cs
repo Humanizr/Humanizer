@@ -65,6 +65,7 @@ public sealed partial class HumanizerSourceGenerator
             "formatter",
             "grammar",
             "headings",
+            "numberFormatting",
             "numberToWords",
             "ordinalizer",
             "phrases",
@@ -254,10 +255,10 @@ public sealed partial class HumanizerSourceGenerator
         {
             foreach (var property in numberSurface.Values.Keys)
             {
-                if (property is not ("words" or "parse"))
+                if (property is not ("words" or "parse" or "formatting"))
                 {
                     throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.number' defines unsupported property '{property}'. Supported properties: words, parse.");
+                        $"Locale '{localeCode}.surfaces.number' defines unsupported property '{property}'. Supported properties: words, parse, formatting.");
                 }
             }
 
@@ -281,6 +282,17 @@ public sealed partial class HumanizerSourceGenerator
                 }
 
                 features["wordsToNumber"] = parseMapping;
+            }
+
+            if (numberSurface.TryGetValue("formatting", out var fmtValue))
+            {
+                if (fmtValue is not SimpleYamlMapping fmtMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.formatting' must be a mapping.");
+                }
+
+                features["numberFormatting"] = fmtMapping;
             }
         }
 
@@ -447,6 +459,11 @@ public sealed partial class HumanizerSourceGenerator
                 diagnostics,
                 static (resolvedLocaleCode, features) => ResolveCalendar(resolvedLocaleCode, features),
                 resolvedFeatureMap);
+            var numberFormatting = TryResolveLocalePart(
+                locale.LocaleCode,
+                diagnostics,
+                static (resolvedLocaleCode, features) => ResolveNumberFormatting(resolvedLocaleCode, features),
+                resolvedFeatureMap);
 
             var resolved = new ResolvedLocaleDefinition(
                 localeCode,
@@ -455,6 +472,7 @@ public sealed partial class HumanizerSourceGenerator
                 headings,
                 phraseCatalog,
                 calendar,
+                numberFormatting,
                 TryResolveLocalePart(
                     locale.LocaleCode,
                     diagnostics,
@@ -619,6 +637,19 @@ public sealed partial class HumanizerSourceGenerator
 
             return calendarValue as SimpleYamlMapping
                 ?? throw new InvalidOperationException($"Locale '{localeCode}.calendar' must be a mapping.");
+        }
+
+        static SimpleYamlMapping? ResolveNumberFormatting(
+            string localeCode,
+            ImmutableDictionary<string, SimpleYamlValue> features)
+        {
+            if (!features.TryGetValue("numberFormatting", out var formattingValue))
+            {
+                return null;
+            }
+
+            return formattingValue as SimpleYamlMapping
+                ?? throw new InvalidOperationException($"Locale '{localeCode}.numberFormatting' must be a mapping.");
         }
 
         static ImmutableArray<string> ParseHeadingSequence(SimpleYamlMapping mapping, string key, string localeCode)
@@ -922,6 +953,7 @@ public sealed partial class HumanizerSourceGenerator
         HeadingSet? headings,
         LocalePhraseCatalog? phrases,
         SimpleYamlMapping? calendar,
+        SimpleYamlMapping? numberFormatting,
         LocaleFeature? collectionFormatter,
         LocaleFeature? dateOnlyToOrdinalWords,
         LocaleFeature? dateToOrdinalWords,
@@ -937,6 +969,7 @@ public sealed partial class HumanizerSourceGenerator
         public HeadingSet? Headings { get; } = headings;
         public LocalePhraseCatalog? Phrases { get; } = phrases;
         public SimpleYamlMapping? Calendar { get; } = calendar;
+        public SimpleYamlMapping? NumberFormatting { get; } = numberFormatting;
         public LocaleFeature? CollectionFormatter { get; } = collectionFormatter;
         public LocaleFeature? DateOnlyToOrdinalWords { get; } = dateOnlyToOrdinalWords;
         public LocaleFeature? DateToOrdinalWords { get; } = dateToOrdinalWords;
@@ -947,7 +980,7 @@ public sealed partial class HumanizerSourceGenerator
         public LocaleFeature? WordsToNumber { get; } = wordsToNumber;
 
         public static ResolvedLocaleDefinition Empty(string localeCode) =>
-            new(localeCode, ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal), null, null, null, null, null, null, null, null, null, null, null, null);
+            new(localeCode, ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal), null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     internal sealed class LocaleFeature(

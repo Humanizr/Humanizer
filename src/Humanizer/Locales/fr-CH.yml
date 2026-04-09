@@ -29,3 +29,5 @@ surfaces:
         - 'septante'
         - 'octante'
         - 'nonante'
+    formatting:
+      decimalSeparator: '.'

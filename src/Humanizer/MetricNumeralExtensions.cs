@@ -367,7 +367,7 @@ public static class MetricNumeralExtensions
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
 
             return number
-                 + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+                 + LocaleNumberFormattingOverrides.GetDecimalSeparator(CultureInfo.CurrentCulture)
                  + fractionalPart.ToString("d" + decimalPlaces)
                  + (extraZeroes <= 0 ? string.Empty : new string('0', extraZeroes))
                  + space

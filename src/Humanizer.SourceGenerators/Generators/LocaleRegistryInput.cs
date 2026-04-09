@@ -143,6 +143,95 @@ public sealed partial class HumanizerSourceGenerator
 
                 context.AddSource(helperName + ".g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
             }
+
+            EmitNumberFormattingOverrides(context);
+        }
+
+        void EmitNumberFormattingOverrides(SourceProductionContext context)
+        {
+            var overrides = new List<(string Locale, string DecimalSeparator)>();
+
+            foreach (var locale in locales)
+            {
+                if (locale.NumberFormatting is null)
+                {
+                    continue;
+                }
+
+                var decimalSeparator = locale.NumberFormatting.GetScalar("decimalSeparator");
+                if (decimalSeparator is not null)
+                {
+                    overrides.Add((locale.LocaleCode, decimalSeparator));
+                }
+            }
+
+            if (overrides.Count == 0)
+            {
+                return;
+            }
+
+            var builder = new StringBuilder();
+            builder.AppendLine("#nullable enable");
+            builder.AppendLine("using System.Collections.Concurrent;");
+            builder.AppendLine("using System.Collections.Generic;");
+            builder.AppendLine("using System.Globalization;");
+            builder.AppendLine();
+            builder.AppendLine("namespace Humanizer;");
+            builder.AppendLine();
+            builder.AppendLine("internal static class LocaleNumberFormattingOverrides");
+            builder.AppendLine("{");
+            builder.AppendLine("    static readonly Dictionary<string, string> DecimalSeparatorOverrides = new(System.StringComparer.OrdinalIgnoreCase)");
+            builder.AppendLine("    {");
+
+            foreach (var (locale, decimalSeparator) in overrides.OrderBy(static o => o.Locale, StringComparer.Ordinal))
+            {
+                builder.Append("        { \"");
+                builder.Append(locale);
+                builder.Append("\", \"");
+                builder.Append(decimalSeparator.Replace("\\", "\\\\").Replace("\"", "\\\""));
+                builder.AppendLine("\" },");
+            }
+
+            builder.AppendLine("    };");
+            builder.AppendLine();
+            builder.AppendLine("    static readonly ConcurrentDictionary<string, NumberFormatInfo> CachedNumberFormats = new(System.StringComparer.OrdinalIgnoreCase);");
+            builder.AppendLine();
+            builder.AppendLine("    internal static bool TryGetDecimalSeparator(CultureInfo culture, out string? decimalSeparator)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        var current = culture;");
+            builder.AppendLine("        while (current is not null && !string.IsNullOrEmpty(current.Name))");
+            builder.AppendLine("        {");
+            builder.AppendLine("            if (DecimalSeparatorOverrides.TryGetValue(current.Name, out decimalSeparator))");
+            builder.AppendLine("            {");
+            builder.AppendLine("                return true;");
+            builder.AppendLine("            }");
+            builder.AppendLine();
+            builder.AppendLine("            current = current.Parent;");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        decimalSeparator = null;");
+            builder.AppendLine("        return false;");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    internal static NumberFormatInfo GetCachedNumberFormat(CultureInfo culture, string decimalSeparator)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        return CachedNumberFormats.GetOrAdd(culture.Name, _ =>");
+            builder.AppendLine("        {");
+            builder.AppendLine("            var nfi = (NumberFormatInfo)culture.NumberFormat.Clone();");
+            builder.AppendLine("            nfi.NumberDecimalSeparator = decimalSeparator;");
+            builder.AppendLine("            return nfi;");
+            builder.AppendLine("        });");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    internal static string GetDecimalSeparator(CultureInfo culture)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        return TryGetDecimalSeparator(culture, out var sep)");
+            builder.AppendLine("            ? sep!");
+            builder.AppendLine("            : culture.NumberFormat.NumberDecimalSeparator;");
+            builder.AppendLine("    }");
+            builder.AppendLine("}");
+
+            context.AddSource("LocaleNumberFormattingOverrides.g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
         }
     }
 

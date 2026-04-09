@@ -329,6 +329,8 @@ surfaces:
       ignoredTokens:
         - 'و'
       useHundredMultiplier: true
+    formatting:
+      decimalSeparator: '٫'
 
   compass:
     full:

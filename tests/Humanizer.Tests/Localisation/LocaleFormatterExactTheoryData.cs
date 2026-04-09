@@ -5,20 +5,16 @@ public static class LocaleFormatterExactTheoryData
     public static readonly int[] DatePluralDayCounts = [2, 3, 4, 5, 11, 21];
     public static readonly double[] HeadingAngles = [0.0d, 22.5d, 45.0d, 67.5d, 90.0d, 112.5d, 135.0d, 157.5d, 180.0d, 202.5d, 225.0d, 247.5d, 270.0d, 292.5d, 315.0d, 337.5d];
     public static readonly double[] CardinalHeadingAngles = [0.0d, 90.0d, 180.0d, 270.0d];
-    // These byte-size expectations intentionally differ by target framework because Windows .NET Framework
-    // uses NLS culture data while modern .NET on this machine uses ICU culture data. See:
-    // https://learn.microsoft.com/dotnet/core/compatibility/globalization/5.0/icu-globalization-api
-    // https://learn.microsoft.com/dotnet/fundamentals/runtime-libraries/system-globalization-cultureinfo#cultureinfo-and-cultural-data
-    // The concrete values below were also reproduced locally with CultureInfo-based numeric formatting for ar/fa/hy/ku.
-#if NET48
+    // Arabic and Kurdish decimal separators are now overridden by Humanizer's locale YAML,
+    // producing consistent output across NLS and ICU. Armenian and Persian still vary by
+    // target framework because they have no Humanizer-level override yet.
     const string ArabicKilobytes = "1.95 KB";
+    const string KurdishKilobytes = "1٫95 KB";
+#if NET48
     const string ArmenianKilobytes = "1.95 KB";
-    const string KurdishKilobytes = "1.95 KB";
     const string PersianKilobytes = "1/95 KB";
 #else
-    const string ArabicKilobytes = "1٫95 KB";
     const string ArmenianKilobytes = "1,95 KB";
-    const string KurdishKilobytes = "1٫95 KB";
     const string PersianKilobytes = "1٫95 KB";
 #endif
     public readonly record struct DateDayPluralExpectationRow(
@@ -427,7 +423,7 @@ public static class LocaleFormatterExactTheoryData
         { "fil", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "fr", new("1 b", "2 o", "1,95 Ko", "2048 Ko") },
         { "fr-BE", new("1 b", "2 o", "1,95 Ko", "2048 Ko") },
-        { "fr-CH", new("1 b", "2 o", "1,95 Ko", "2048 Ko") },
+        { "fr-CH", new("1 b", "2 o", "1.95 Ko", "2048 Ko") },
         { "he", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "hr", new("1 b", "2 B", "1,95 KB", "2048 KB") },
         { "hu", new("1 b", "2 B", "1,95 KB", "2048 KB") },

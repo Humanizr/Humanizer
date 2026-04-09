@@ -201,7 +201,16 @@ public struct ByteSize(double byteSize) :
     {
         provider ??= CultureInfo.CurrentCulture;
 
-        return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
+        var culture = provider as CultureInfo;
+
+        // Only inject override for culture-backed providers, never for caller-supplied custom NFI
+        if (culture is not null
+            && LocaleNumberFormattingOverrides.TryGetDecimalSeparator(culture, out var sep))
+        {
+            provider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(culture, sep!);
+        }
+
+        return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(culture));
     }
 
     public readonly string ToString(string? format) =>
@@ -229,10 +238,17 @@ public struct ByteSize(double byteSize) :
 
         var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
 
+        // Only inject override for culture-backed providers, never for caller-supplied custom NFI
+        if (provider is CultureInfo overrideCulture
+            && LocaleNumberFormattingOverrides.TryGetDecimalSeparator(overrideCulture, out var sep))
+        {
+            provider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(overrideCulture, sep!);
+        }
+
         bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
         string output(double n) => n.ToString(format, provider);
 
-        var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+        var cultureFormatter = Configurator.GetFormatter(culture);
 
         if (has(TerabyteSymbol))
         {
@@ -277,7 +293,7 @@ public struct ByteSize(double byteSize) :
             ? "0"
             : formattedLargeWholeNumberValue;
 
-        return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
+        return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(culture) : GetLargestWholeNumberFullWord(culture))}";
     }
 
     /// <summary>
@@ -409,7 +425,13 @@ public struct ByteSize(double byteSize) :
             return false;
         }
 
-        // Acquiring culture-specific parsing info
+        // Acquiring culture-specific parsing info — apply decimal separator override for culture-backed providers
+        if (formatProvider is CultureInfo parseCulture
+            && LocaleNumberFormattingOverrides.TryGetDecimalSeparator(parseCulture, out var parseSep))
+        {
+            formatProvider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(parseCulture, parseSep!);
+        }
+
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
 
         // Get or create cached set of special characters from number format strings

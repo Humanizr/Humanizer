@@ -195,10 +195,10 @@ public sealed partial class HumanizerSourceGenerator
         {
             foreach (var property in numberSurface.Values.Keys)
             {
-                if (property is not ("words" or "parse"))
+                if (property is not ("words" or "parse" or "formatting"))
                 {
                     throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.number' defines unsupported property '{property}'. Supported properties: words, parse.");
+                        $"Locale '{localeCode}.surfaces.number' defines unsupported property '{property}'. Supported properties: words, parse, formatting.");
                 }
             }
 
@@ -212,6 +212,32 @@ public sealed partial class HumanizerSourceGenerator
                 parseValue is SimpleYamlMapping parseMapping)
             {
                 features["wordsToNumber"] = parseMapping;
+            }
+
+            if (numberSurface.TryGetValue("formatting", out var fmtValue) &&
+                fmtValue is SimpleYamlMapping fmtMapping)
+            {
+                ValidateNumberFormattingBlock(localeCode, fmtMapping);
+                features["numberFormatting"] = fmtMapping;
+            }
+        }
+
+        static void ValidateNumberFormattingBlock(string localeCode, SimpleYamlMapping formatting)
+        {
+            foreach (var property in formatting.Values.Keys)
+            {
+                if (property is not "decimalSeparator")
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.formatting' defines unsupported property '{property}'. Supported properties: decimalSeparator.");
+                }
+            }
+
+            var decimalSeparator = formatting.GetScalar("decimalSeparator");
+            if (string.IsNullOrEmpty(decimalSeparator))
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.surfaces.number.formatting.decimalSeparator' must be a non-empty string.");
             }
         }
 
@@ -781,7 +807,8 @@ public sealed partial class HumanizerSourceGenerator
                 OrdinalDateOnly = CreateFeatureFingerprint(locale.DateOnlyToOrdinalWords),
                 Clock = CreateFeatureFingerprint(locale.TimeOnlyToClockNotation),
                 Formatter = CreateFeatureFingerprint(locale.Formatter),
-                Calendar = locale.Calendar is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.Calendar))
+                Calendar = locale.Calendar is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.Calendar)),
+                NumberFormatting = locale.NumberFormatting is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.NumberFormatting))
             };
 
         static object? CreateFeatureFingerprint(LocaleFeature? feature)
