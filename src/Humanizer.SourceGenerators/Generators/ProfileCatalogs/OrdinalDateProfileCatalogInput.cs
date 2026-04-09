@@ -30,17 +30,42 @@ public sealed partial class HumanizerSourceGenerator
             var seenDateOnly = new HashSet<string>(StringComparer.Ordinal);
             foreach (var locale in localeCatalog.Locales)
             {
-                AddProfile(dateProfiles, locale.DateToOrdinalWords, seenDate);
-                AddProfile(dateOnlyProfiles, locale.DateOnlyToOrdinalWords, seenDateOnly);
+                var months = ExtractCalendarMonths(locale.Calendar, "months");
+                var monthsGenitive = ExtractCalendarMonths(locale.Calendar, "monthsGenitive");
+                AddProfile(dateProfiles, locale.DateToOrdinalWords, seenDate, months, monthsGenitive);
+                AddProfile(dateOnlyProfiles, locale.DateOnlyToOrdinalWords, seenDateOnly, months, monthsGenitive);
             }
 
             return new OrdinalDateProfileCatalogInput(dateProfiles.ToImmutable(), dateOnlyProfiles.ToImmutable());
         }
 
+        static ImmutableArray<string> ExtractCalendarMonths(SimpleYamlMapping? calendar, string key)
+        {
+            if (calendar is null || !calendar.TryGetValue(key, out var value) || value is not SimpleYamlSequence sequence)
+            {
+                return ImmutableArray<string>.Empty;
+            }
+
+            var builder = ImmutableArray.CreateBuilder<string>(sequence.Items.Length);
+            foreach (var item in sequence.Items)
+            {
+                if (item is not SimpleYamlScalar scalar)
+                {
+                    throw new InvalidOperationException($"calendar.{key} items must be strings.");
+                }
+
+                builder.Add(scalar.Value);
+            }
+
+            return builder.MoveToImmutable();
+        }
+
         static void AddProfile(
             ImmutableArray<OrdinalDateProfileDefinition>.Builder profiles,
             LocaleFeature? feature,
-            HashSet<string> seenProfiles)
+            HashSet<string> seenProfiles,
+            ImmutableArray<string> months,
+            ImmutableArray<string> monthsGenitive)
         {
             if (feature is not { UsesGeneratedProfile: true } ||
                 !seenProfiles.Add(feature.ProfileName!))
@@ -51,7 +76,9 @@ public sealed partial class HumanizerSourceGenerator
             profiles.Add(new OrdinalDateProfileDefinition(
                 feature.ProfileName!,
                 GetOptionalString(feature.ProfileRoot, "engine") ?? "pattern",
-                feature.ProfileRoot.Clone()));
+                feature.ProfileRoot.Clone(),
+                months,
+                monthsGenitive));
         }
 
         public void Emit(SourceProductionContext context)
@@ -158,11 +185,31 @@ public sealed partial class HumanizerSourceGenerator
 
         static string CreatePatternExpression(OrdinalDateProfileDefinition profile, string converterTypeName)
         {
+            var pattern = GetRequiredString(profile.Root, "pattern");
+            var hasMonths = profile.Months.Length > 0;
+
+            // Validate: reject MMM (abbreviated) when calendar.months override is active.
+            if (hasMonths && ContainsAbbreviatedMonth(pattern))
+            {
+                throw new InvalidOperationException(
+                    $"Ordinal date profile '{profile.ProfileName}' uses MMM (abbreviated month) " +
+                    "which is not supported when calendar.months override is active. " +
+                    "Only MMMM (full month name) substitution is supported.");
+            }
+
+            // Validate: MMMM must appear in a supported position (unescaped, outside single-quoted literals).
+            if (hasMonths && !ContainsUnescapedFullMonth(pattern))
+            {
+                throw new InvalidOperationException(
+                    $"Ordinal date profile '{profile.ProfileName}' has calendar.months override " +
+                    "but pattern does not contain an unescaped MMMM specifier.");
+            }
+
             var calendarMode = GetOptionalString(profile.Root, "calendarMode");
             var hasCalendarMode = calendarMode is not null && !string.Equals(calendarMode, "Gregorian", StringComparison.OrdinalIgnoreCase);
 
             var expr = "new " + converterTypeName + "(new OrdinalDatePattern(" +
-                       QuoteLiteral(GetRequiredString(profile.Root, "pattern")) +
+                       QuoteLiteral(pattern) +
                        ", OrdinalDateDayMode." +
                        GetRequiredString(profile.Root, "dayMode");
 
@@ -173,7 +220,94 @@ public sealed partial class HumanizerSourceGenerator
                 expr += ", OrdinalDateCalendarMode." + normalized;
             }
 
+            if (hasMonths)
+            {
+                if (!hasCalendarMode)
+                {
+                    // Must supply calendarMode positionally before months.
+                    expr += ", OrdinalDateCalendarMode.Gregorian";
+                }
+
+                expr += ", new string[] { " + string.Join(", ", profile.Months.Select(QuoteLiteral)) + " }";
+
+                if (profile.MonthsGenitive.Length > 0)
+                {
+                    expr += ", new string[] { " + string.Join(", ", profile.MonthsGenitive.Select(QuoteLiteral)) + " }";
+                }
+            }
+
             return expr + "))";
+        }
+
+        /// <summary>
+        /// Returns true if the pattern contains an unescaped MMM that is NOT part of MMMM.
+        /// </summary>
+        static bool ContainsAbbreviatedMonth(string pattern)
+        {
+            var inQuote = false;
+            for (var i = 0; i < pattern.Length; i++)
+            {
+                if (pattern[i] == '\'')
+                {
+                    inQuote = !inQuote;
+                    continue;
+                }
+
+                if (inQuote)
+                {
+                    continue;
+                }
+
+                if (i + 2 < pattern.Length &&
+                    pattern[i] == 'M' && pattern[i + 1] == 'M' && pattern[i + 2] == 'M')
+                {
+                    // Check if it's exactly MMM (not MMMM).
+                    if (i + 3 < pattern.Length && pattern[i + 3] == 'M')
+                    {
+                        // It's MMMM or longer — skip ahead past all Ms.
+                        while (i < pattern.Length && pattern[i] == 'M')
+                        {
+                            i++;
+                        }
+
+                        i--; // Loop will increment.
+                        continue;
+                    }
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if the pattern contains an unescaped MMMM specifier.
+        /// </summary>
+        static bool ContainsUnescapedFullMonth(string pattern)
+        {
+            var inQuote = false;
+            for (var i = 0; i < pattern.Length; i++)
+            {
+                if (pattern[i] == '\'')
+                {
+                    inQuote = !inQuote;
+                    continue;
+                }
+
+                if (inQuote)
+                {
+                    continue;
+                }
+
+                if (i + 3 < pattern.Length &&
+                    pattern[i] == 'M' && pattern[i + 1] == 'M' && pattern[i + 2] == 'M' && pattern[i + 3] == 'M')
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 

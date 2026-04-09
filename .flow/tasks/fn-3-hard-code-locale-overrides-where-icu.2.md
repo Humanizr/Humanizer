@@ -46,9 +46,8 @@ Cross-reference the `tools/probe-*.json` files and the failure audit to identify
 - [ ] No code changes in this task (decisions only)
 - [ ] Diff from HEAD shows only `.flow/tasks/` additions
 ## Done summary
-TBD
-
+Created decision document recording canonical locale override values for 4 calendar locales (bn long-i, fa with ezafe, he with bet-prefix, ku Sorani) and 3 decimal separators (ar=., ku=momayyiz, fr-CH=.), with CLDR-versioned sources and downstream action summaries. Flagged scope revisions (zu-ZA/ta no override needed) and bn spec contradiction.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: d5cc87b1, 29a942b9, bc0c0327, 721580a8, e086a25a
+- Tests: no code changes -- decision document only
 - PRs:

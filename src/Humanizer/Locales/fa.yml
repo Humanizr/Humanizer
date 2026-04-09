@@ -411,3 +411,18 @@ surfaces:
     dateOnly:
       pattern: '{day} MMMM yyyy'
       dayMode: 'Numeric'
+
+  calendar:
+    months:
+      - 'ژانویهٔ'
+      - 'فوریهٔ'
+      - 'مارس'
+      - 'آوریل'
+      - 'مهٔ'
+      - 'ژوئن'
+      - 'ژوئیهٔ'
+      - 'اوت'
+      - 'سپتامبر'
+      - 'اکتبر'
+      - 'نوامبر'
+      - 'دسامبر'

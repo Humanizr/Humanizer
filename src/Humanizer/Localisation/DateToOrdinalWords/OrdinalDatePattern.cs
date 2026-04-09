@@ -24,7 +24,12 @@ enum OrdinalDateDayMode
 /// The template can contain <c>{day}</c>. The day token is replaced after the formatted date string
 /// is produced so the rest of the culture-specific pattern stays intact.
 /// </remarks>
-sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode, OrdinalDateCalendarMode calendarMode = OrdinalDateCalendarMode.Gregorian)
+sealed class OrdinalDatePattern(
+    string template,
+    OrdinalDateDayMode dayMode,
+    OrdinalDateCalendarMode calendarMode = OrdinalDateCalendarMode.Gregorian,
+    string[]? months = null,
+    string[]? monthsGenitive = null)
 {
     const string DayPlaceholder = "{day}";
     const string DayMarker = "<<DAY>>";
@@ -37,6 +42,8 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode, Ord
     readonly string template = template;
     readonly OrdinalDateDayMode dayMode = dayMode;
     readonly OrdinalDateCalendarMode calendarMode = calendarMode;
+    readonly string[]? months = months;
+    readonly string[]? monthsGenitive = monthsGenitive;
 
     /// <summary>
     /// Formats the pattern for the specified date.
@@ -46,7 +53,8 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode, Ord
     {
         var culture = GetPatternCulture();
         var calendarDay = culture.DateTimeFormat.Calendar.GetDayOfMonth(date);
-        return ReplaceDayMarker(date.ToString(GetFormatString(), culture), FormatDay(calendarDay), calendarDay);
+        var month = culture.DateTimeFormat.Calendar.GetMonth(date);
+        return ReplaceDayMarker(date.ToString(GetFormatString(month, calendarDay), culture), FormatDay(calendarDay), calendarDay);
     }
 
 #if NET6_0_OR_GREATER
@@ -57,12 +65,143 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode, Ord
     public string Format(DateOnly date)
     {
         var culture = GetPatternCulture();
-        var calendarDay = culture.DateTimeFormat.Calendar.GetDayOfMonth(date.ToDateTime(default));
-        return ReplaceDayMarker(date.ToString(GetFormatString(), culture), FormatDay(calendarDay), calendarDay);
+        var dateTime = date.ToDateTime(default);
+        var calendarDay = culture.DateTimeFormat.Calendar.GetDayOfMonth(dateTime);
+        var month = culture.DateTimeFormat.Calendar.GetMonth(dateTime);
+        return ReplaceDayMarker(date.ToString(GetFormatString(month, calendarDay), culture), FormatDay(calendarDay), calendarDay);
     }
 #endif
 
-    string GetFormatString() => template.Replace(DayPlaceholder, DayMarkerFormat);
+    string GetFormatString(int month, int day)
+    {
+        var formatString = template.Replace(DayPlaceholder, DayMarkerFormat);
+        if (months is null)
+        {
+            return formatString;
+        }
+
+        return SubstituteMonth(formatString, month, day);
+    }
+
+    /// <summary>
+    /// Replaces the first unescaped MMMM specifier in the format string with a single-quoted
+    /// literal month name from the override array. Uses genitive forms when the day is adjacent
+    /// to the month specifier (d MMMM or MMMM d patterns).
+    /// </summary>
+    string SubstituteMonth(string formatString, int month, int day)
+    {
+        // Find the unescaped MMMM.
+        var inQuote = false;
+        var mmmmStart = -1;
+        var mmmmLength = 0;
+        for (var i = 0; i < formatString.Length; i++)
+        {
+            if (formatString[i] == '\'')
+            {
+                inQuote = !inQuote;
+                continue;
+            }
+
+            if (inQuote)
+            {
+                continue;
+            }
+
+            if (formatString[i] == 'M')
+            {
+                var start = i;
+                while (i < formatString.Length && formatString[i] == 'M')
+                {
+                    i++;
+                }
+
+                if (i - start >= 4)
+                {
+                    mmmmStart = start;
+                    mmmmLength = i - start;
+                }
+
+                i--; // Loop will increment.
+            }
+        }
+
+        if (mmmmStart < 0)
+        {
+            return formatString;
+        }
+
+        // Determine genitive context: day adjacent to month (e.g., "d'<<DAY>>' MMMM" or "MMMM d").
+        var useGenitive = monthsGenitive is not null && IsDayAdjacentToMonth(formatString, mmmmStart, mmmmLength);
+        var monthNames = useGenitive ? monthsGenitive! : months!;
+        var monthName = monthNames[month - 1];
+
+        // Escape embedded apostrophes per DateTimeFormatInfo literal quoting rules.
+        var escapedMonth = monthName.Replace("'", "''");
+        var literal = "'" + escapedMonth + "'";
+
+#if NETSTANDARD2_0 || NET48
+        return formatString.Substring(0, mmmmStart) + literal + formatString.Substring(mmmmStart + mmmmLength);
+#else
+        return string.Concat(formatString.AsSpan(0, mmmmStart), literal.AsSpan(), formatString.AsSpan(mmmmStart + mmmmLength));
+#endif
+    }
+
+    /// <summary>
+    /// Returns true when a day specifier (d or dd) is adjacent to the MMMM specifier,
+    /// indicating genitive month form should be used.
+    /// </summary>
+    static bool IsDayAdjacentToMonth(string formatString, int mmmmStart, int mmmmLength)
+    {
+        // Check before MMMM: look for 'd' before the specifier (skipping spaces, punctuation, and quoted literals).
+        for (var i = mmmmStart - 1; i >= 0; i--)
+        {
+            var c = formatString[i];
+            if (c == ' ')
+            {
+                continue;
+            }
+
+            if (c == '\'')
+            {
+                // Walk back through the quoted literal.
+                i--;
+                while (i >= 0 && formatString[i] != '\'')
+                {
+                    i--;
+                }
+
+                // After skipping the quoted literal, check what's before it.
+                continue;
+            }
+
+            if (c == 'd')
+            {
+                return true;
+            }
+
+            break;
+        }
+
+        // Check after MMMM.
+        var afterEnd = mmmmStart + mmmmLength;
+        for (var i = afterEnd; i < formatString.Length; i++)
+        {
+            var c = formatString[i];
+            if (c == ' ')
+            {
+                continue;
+            }
+
+            if (c == 'd')
+            {
+                return true;
+            }
+
+            break;
+        }
+
+        return false;
+    }
 
     // The format string includes a real 'd' specifier that emits the numeric day before the marker.
     // Strip both the numeric day and the marker, then insert the rendered day.

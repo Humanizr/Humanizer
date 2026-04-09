@@ -58,6 +58,7 @@ public sealed partial class HumanizerSourceGenerator
         // intentionally closed over locale/variantOf/surfaces and a fixed set of canonical surfaces.
         static readonly string[] SupportedFeatureNames =
         [
+            "calendar",
             "collectionFormatter",
             "dateOnlyToOrdinalWords",
             "dateToOrdinalWords",
@@ -86,7 +87,8 @@ public sealed partial class HumanizerSourceGenerator
             "number",
             "ordinal",
             "clock",
-            "compass"
+            "compass",
+            "calendar"
         ];
 
         static readonly string[] FormatterGrammarKeys =
@@ -236,6 +238,10 @@ public sealed partial class HumanizerSourceGenerator
 
                     case "compass":
                         features["headings"] = surfaceMapping;
+                        break;
+
+                    case "calendar":
+                        features["calendar"] = surfaceMapping;
                         break;
                 }
             }
@@ -436,6 +442,11 @@ public sealed partial class HumanizerSourceGenerator
                 diagnostics,
                 static (resolvedLocaleCode, features) => ResolveHeadings(resolvedLocaleCode, features),
                 resolvedFeatureMap);
+            var calendar = TryResolveLocalePart(
+                locale.LocaleCode,
+                diagnostics,
+                static (resolvedLocaleCode, features) => ResolveCalendar(resolvedLocaleCode, features),
+                resolvedFeatureMap);
 
             var resolved = new ResolvedLocaleDefinition(
                 localeCode,
@@ -443,6 +454,7 @@ public sealed partial class HumanizerSourceGenerator
                 grammar,
                 headings,
                 phraseCatalog,
+                calendar,
                 TryResolveLocalePart(
                     locale.LocaleCode,
                     diagnostics,
@@ -594,6 +606,19 @@ public sealed partial class HumanizerSourceGenerator
             return new HeadingSet(
                 ParseHeadingSequence(mapping, "full", localeCode),
                 ParseHeadingSequence(mapping, "short", localeCode));
+        }
+
+        static SimpleYamlMapping? ResolveCalendar(
+            string localeCode,
+            ImmutableDictionary<string, SimpleYamlValue> features)
+        {
+            if (!features.TryGetValue("calendar", out var calendarValue))
+            {
+                return null;
+            }
+
+            return calendarValue as SimpleYamlMapping
+                ?? throw new InvalidOperationException($"Locale '{localeCode}.calendar' must be a mapping.");
         }
 
         static ImmutableArray<string> ParseHeadingSequence(SimpleYamlMapping mapping, string key, string localeCode)
@@ -896,6 +921,7 @@ public sealed partial class HumanizerSourceGenerator
         SimpleYamlMapping? grammar,
         HeadingSet? headings,
         LocalePhraseCatalog? phrases,
+        SimpleYamlMapping? calendar,
         LocaleFeature? collectionFormatter,
         LocaleFeature? dateOnlyToOrdinalWords,
         LocaleFeature? dateToOrdinalWords,
@@ -910,6 +936,7 @@ public sealed partial class HumanizerSourceGenerator
         public SimpleYamlMapping? Grammar { get; } = grammar;
         public HeadingSet? Headings { get; } = headings;
         public LocalePhraseCatalog? Phrases { get; } = phrases;
+        public SimpleYamlMapping? Calendar { get; } = calendar;
         public LocaleFeature? CollectionFormatter { get; } = collectionFormatter;
         public LocaleFeature? DateOnlyToOrdinalWords { get; } = dateOnlyToOrdinalWords;
         public LocaleFeature? DateToOrdinalWords { get; } = dateToOrdinalWords;
@@ -920,7 +947,7 @@ public sealed partial class HumanizerSourceGenerator
         public LocaleFeature? WordsToNumber { get; } = wordsToNumber;
 
         public static ResolvedLocaleDefinition Empty(string localeCode) =>
-            new(localeCode, ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal), null, null, null, null, null, null, null, null, null, null, null);
+            new(localeCode, ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal), null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     internal sealed class LocaleFeature(

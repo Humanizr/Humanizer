@@ -42,3 +42,6 @@ When introducing a new data surface in YAML, do not create a separate registry i
 
 ## 2026-04-09 manual [pitfall]
 When a verification gate depends on a known external blocker (e.g., net48 test suite blocked by Enum.GetValues<T>), either make it a tracked dependency or explicitly downgrade to documented follow-up — never leave a hard gate that cannot close
+
+## 2026-04-09 manual [pitfall]
+When a decision document chooses values that contradict downstream task specs, explicitly flag each contradiction with the spec text that must be corrected -- do not leave the contradiction for implementers to discover

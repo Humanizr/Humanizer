@@ -49,7 +49,8 @@ public sealed partial class HumanizerSourceGenerator
             "number",
             "ordinal",
             "clock",
-            "compass"
+            "compass",
+            "calendar"
         ];
 
         internal static CanonicalLocaleDocument Parse(string localeCode, string fileText)
@@ -177,6 +178,10 @@ public sealed partial class HumanizerSourceGenerator
                     case "compass":
                         features["headings"] = surfaceMapping;
                         break;
+
+                    case "calendar":
+                        AddCalendarFeatures(document.LocaleCode, surfaceMapping, features);
+                        break;
                 }
             }
 
@@ -241,6 +246,41 @@ public sealed partial class HumanizerSourceGenerator
             {
                 features["dateOnlyToOrdinalWords"] = dateOnlyMapping;
             }
+        }
+
+        static void AddCalendarFeatures(
+            string localeCode,
+            SimpleYamlMapping calendarSurface,
+            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
+        {
+            foreach (var property in calendarSurface.Values.Keys)
+            {
+                if (property is not ("months" or "monthsGenitive"))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.calendar' defines unsupported property '{property}'. Supported properties: months, monthsGenitive.");
+                }
+            }
+
+            if (calendarSurface.TryGetValue("months", out var monthsValue))
+            {
+                if (monthsValue is not SimpleYamlSequence monthsSeq || monthsSeq.Items.Length != 12)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.calendar.months' must be a sequence of exactly 12 strings.");
+                }
+            }
+
+            if (calendarSurface.TryGetValue("monthsGenitive", out var monthsGenitiveValue))
+            {
+                if (monthsGenitiveValue is not SimpleYamlSequence genitiveSeq || genitiveSeq.Items.Length != 12)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.calendar.monthsGenitive' must be a sequence of exactly 12 strings.");
+                }
+            }
+
+            features["calendar"] = calendarSurface;
         }
 
         static string NormalizeCanonicalText(string value)
@@ -715,7 +755,8 @@ public sealed partial class HumanizerSourceGenerator
                 OrdinalDate = CreateFeatureFingerprint(locale.DateToOrdinalWords),
                 OrdinalDateOnly = CreateFeatureFingerprint(locale.DateOnlyToOrdinalWords),
                 Clock = CreateFeatureFingerprint(locale.TimeOnlyToClockNotation),
-                Formatter = CreateFeatureFingerprint(locale.Formatter)
+                Formatter = CreateFeatureFingerprint(locale.Formatter),
+                Calendar = locale.Calendar is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.Calendar))
             };
 
         static object? CreateFeatureFingerprint(LocaleFeature? feature)

@@ -40,7 +40,7 @@ static class LocaleCoverageData
         { "en-IN", new(2022, 1, 25, "25th January 2022") },
         { "en-US", new(2022, 1, 25, "January 25th, 2022") },
         { "es", new(2022, 1, 25, "25 de enero de 2022") },
-        { "fa", new(2022, 1, 25, "25 ژانویه 2022") },
+        { "fa", new(2022, 1, 25, "25 ژانویهٔ 2022") },
         { "fi", new(2022, 1, 25, "25. tammikuuta 2022") },
         { "fil", new(2022, 1, 25, "Enero 25, 2022") },
         { "fr", new(2022, 1, 25, "25 janvier 2022") },
@@ -107,7 +107,7 @@ static class LocaleCoverageData
         { "en-IN", new(2015, 1, 1, "1st January 2015") },
         { "en-US", new(2015, 1, 1, "January 1st, 2015") },
         { "es", new(2015, 1, 1, "1 de enero de 2015") },
-        { "fa", new(2015, 1, 1, "1 ژانویه 2015") },
+        { "fa", new(2015, 1, 1, "1 ژانویهٔ 2015") },
         { "fi", new(2015, 1, 1, "1. tammikuuta 2015") },
         { "fil", new(2015, 1, 1, "Enero 1, 2015") },
         { "fr", new(2015, 1, 1, "1er janvier 2015") },
@@ -174,7 +174,7 @@ static class LocaleCoverageData
         { "en-IN", new(2015, 2, 3, "3rd February 2015") },
         { "en-US", new(2015, 2, 3, "February 3rd, 2015") },
         { "es", new(2015, 2, 3, "3 de febrero de 2015") },
-        { "fa", new(2015, 2, 3, "3 فوریه 2015") },
+        { "fa", new(2015, 2, 3, "3 فوریهٔ 2015") },
         { "fi", new(2015, 2, 3, "3. helmikuuta 2015") },
         { "fil", new(2015, 2, 3, "Pebrero 3, 2015") },
         { "fr", new(2015, 2, 3, "3 février 2015") },
@@ -218,7 +218,7 @@ static class LocaleCoverageData
         { "zh-CN", new(2015, 2, 3, "2015年2月3日") },
         { "zh-Hans", new(2015, 2, 3, "2015年2月3日") },
         { "zh-Hant", new(2015, 2, 3, "2015年2月3日") },
-        { "zu-ZA", new(2015, 2, 3, "3 Febhuwari 2015") }
+        { "zu-ZA", new(2015, 2, 3, "3 Februwari 2015") }
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020February29ExpectationTheoryData { get; } = new()
