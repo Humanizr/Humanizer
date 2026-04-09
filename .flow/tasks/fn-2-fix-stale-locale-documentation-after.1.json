@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-09T04:22:28.493120Z",
+  "depends_on": [],
+  "epic": "fn-2-fix-stale-locale-documentation-after",
+  "id": "fn-2-fix-stale-locale-documentation-after.1",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-2-fix-stale-locale-documentation-after.1.md",
+  "status": "todo",
+  "title": "Fix stale locale documentation across all doc files",
+  "updated_at": "2026-04-09T04:22:44.287806Z"
+}
