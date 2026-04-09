@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-09T18:20:23.438322Z",
+  "depends_on": [],
+  "epic": "fn-5-locale-parity-sign-off-verify-code",
+  "id": "fn-5-locale-parity-sign-off-verify-code.2",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.2.md",
+  "status": "todo",
+  "title": "Fix stale agent-facing doc drift in CLAUDE.md and AGENTS.md",
+  "updated_at": "2026-04-09T20:32:39.298510Z"
+}

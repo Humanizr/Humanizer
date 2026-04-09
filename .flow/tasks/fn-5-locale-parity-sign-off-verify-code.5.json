@@ -1,0 +1,20 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-09T18:20:28.012565Z",
+  "depends_on": [
+    "fn-5-locale-parity-sign-off-verify-code.1",
+    "fn-5-locale-parity-sign-off-verify-code.2",
+    "fn-5-locale-parity-sign-off-verify-code.3",
+    "fn-5-locale-parity-sign-off-verify-code.4",
+    "fn-5-locale-parity-sign-off-verify-code.6"
+  ],
+  "epic": "fn-5-locale-parity-sign-off-verify-code",
+  "id": "fn-5-locale-parity-sign-off-verify-code.5",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md",
+  "status": "todo",
+  "title": "Close fn-2 proxy, run residual scans, and append final sign-off report",
+  "updated_at": "2026-04-09T21:34:12.063293Z"
+}

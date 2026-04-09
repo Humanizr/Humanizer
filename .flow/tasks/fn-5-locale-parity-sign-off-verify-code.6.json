@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-09T21:26:14.367292Z",
+  "depends_on": [
+    "fn-5-locale-parity-sign-off-verify-code.1"
+  ],
+  "epic": "fn-5-locale-parity-sign-off-verify-code",
+  "id": "fn-5-locale-parity-sign-off-verify-code.6",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.6.md",
+  "status": "todo",
+  "title": "Reconcile fn-3 historical spec/task drift against FinalOverrideSet",
+  "updated_at": "2026-04-09T21:34:11.950165Z"
+}
