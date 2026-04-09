@@ -14,7 +14,7 @@ dotnet build Humanizer.slnx -c Release
 # Pack NuGet package
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts
 
-# Run tests (use net10.0 or net8.0; avoid net48 on macOS/Linux)
+# Run tests (net10.0 or net8.0; net48 is blocked on all platforms by Enum.GetValues<T>() — see fn-4)
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 
@@ -73,7 +73,7 @@ docs/                           # Jekyll documentation site
 
 - Locale data defined in YAML files under `src/Humanizer/Locales/`
 - Source generators transform YAML into C# lookup tables at build time
-- To add a locale: duplicate a YAML file, translate, register in formatter/converter registries
+- To add a locale: duplicate a YAML file and translate it; the source generator wires all registries automatically (see `docs/adding-a-locale.md`)
 - When ICU-supplied data (month names, decimal separators) differs across platforms, author explicit overrides in `calendar:` and/or `number.formatting:` YAML surfaces
 - See `docs/adding-a-locale.md` and `docs/locale-yaml-reference.md` for the full guide
 

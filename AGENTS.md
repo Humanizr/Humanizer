@@ -26,7 +26,7 @@ These instructions apply to the entire repository.
 ## Testing Expectations
 - Every functional change must include or update xUnit tests in `tests/Humanizer.Tests`.
 - Use culture-specific folders and `UseCulture` attribute for localization tests when applicable.
-- Run the test suite for the supported .NET targets (`dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). Avoid invoking the net48 target on Linux, and allow a few minutes for each run to complete.
+- Run the test suite for the supported .NET targets (`dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). The net48 target is currently blocked on all platforms by `Enum.GetValues<T>()` usage in `LocaleTheoryMatrixCompletenessTests.cs` (tracked as fn-4); do not invoke it. Allow a few minutes for each run to complete.
 
 ## Build & Validation
 - Build command: `dotnet pack src/Humanizer/Humanizer.csproj -c Release -o <path>` (from the repository root). It must succeed without warnings or errors.
@@ -41,8 +41,8 @@ These instructions apply to the entire repository.
 - Rules are defined in `.editorconfig` and enforced at build time via `EnforceCodeStyleInBuild=true`.
 
 ## Localization Guidance
-- When adding a locale, duplicate and translate the relevant YAML locale file under `src/Humanizer/Locales`.
-- Register new formatters/converters in the appropriate registries (see `Configuration/FormatterRegistry.cs` and number converter factories).
+- When adding a locale, duplicate and translate the relevant YAML locale file under `src/Humanizer/Locales`; the source generator wires all registries automatically (see `docs/adding-a-locale.md`).
+- When ICU-supplied data (month names, decimal separators) differs across platforms, author explicit overrides in `calendar:` and/or `number.formatting:` YAML surfaces rather than changing `CultureInfo` directly.
 - Cover new localization behavior with targeted tests under `tests/Humanizer.Tests/Localisation/{culture}`.
 
 ## Documentation Updates
