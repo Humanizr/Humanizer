@@ -139,9 +139,8 @@ All other `residual` mentions must be removed or rewritten.
 - [ ] All doc changes match existing style (tables, short prose, concrete examples)
 - [ ] Grep for `residual` across docs confirms only the allowlisted conceptual mentions remain (adding-a-locale.md:281-292, locale-yaml-how-to.md:5/39/371, locale-yaml-reference.md:353/678/756)
 ## Done summary
-TBD
-
+Documented the calendar: surface and number.formatting: sub-block across all four docs files. Updated canonical surface inventories in localization.md, locale-yaml-reference.md, adding-a-locale.md, and locale-yaml-how-to.md. Added new reference sections with field tables and YAML examples. Added contributor checklist bullet for cross-platform verification, preflight question, and Override ICU-Supplied Data recipe. Rebuilt Supported Languages list with all 62 locales and correct codes. Removed stale residual-leaves claims. Fixed CLAUDE.md locale count to 62.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: a2e86e41
+- Tests: grep verification of residual mentions
 - PRs:

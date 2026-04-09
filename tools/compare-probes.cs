@@ -2,33 +2,80 @@
 #:property PublishAot=false
 #pragma warning disable IDE0007, CA1869, IL2026, IL2075, IL3050
 // Compare probe JSON files across platforms and identify values that differ.
+// Supports both "before" (pre-override) and "after" (post-override) baselines.
+//
 // Usage:
-//   dotnet run tools/compare-probes.cs
+//   dotnet run tools/compare-probes.cs                    # compare all available probes
+//   dotnet run tools/compare-probes.cs --after             # compare only "after" probes
+//   dotnet run tools/compare-probes.cs --before-vs-after   # compare before vs after per platform
 
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
 
-var files = new (string Label, string Path)[]
-{
-    ("macOS",    "tools/probe-macos.json"),
-    ("Linux",    "tools/probe-linux.json"),
-    ("Win10",    "tools/probe-windows-net10.json"),
-    ("Win48",    "tools/probe-windows-net48.json"),
-};
-
 Console.OutputEncoding = Encoding.UTF8;
 
-var data = new Dictionary<string, JsonDocument>();
-foreach (var (label, path) in files)
+var afterOnly = args.Contains("--after");
+var beforeVsAfter = args.Contains("--before-vs-after");
+
+// Locales with calendar.months overrides (DateToOrdinalWords / DateOnlyToOrdinalWords)
+string[] calendarOverrideLocales = ["bn", "fa", "he", "ku", "ta", "zu-ZA"];
+
+// Locales with number.formatting.decimalSeparator overrides
+string[] decimalOverrideLocales = ["ar", "ku", "fr-CH"];
+
+if (beforeVsAfter)
 {
-    if (!File.Exists(path))
+    RunBeforeVsAfterComparison();
+    return;
+}
+
+var files = afterOnly
+    ? new (string Label, string Path)[]
     {
-        Console.WriteLine($"MISSING: {path}");
-        return;
+        ("macOS-after",  "tools/probe-macos-after.json"),
+        ("Linux-after",  "tools/probe-linux-after.json"),
+        ("Win10-after",  "tools/probe-windows-net10-after.json"),
+        ("Win48-after",  "tools/probe-windows-net48-after.json"),
     }
+    : new (string Label, string Path)[]
+    {
+        ("macOS",    "tools/probe-macos.json"),
+        ("Linux",    "tools/probe-linux.json"),
+        ("Win10",    "tools/probe-windows-net10.json"),
+        ("Win48",    "tools/probe-windows-net48.json"),
+    };
+
+// Filter to only files that exist
+var existingFiles = files.Where(f => File.Exists(f.Path)).ToArray();
+if (existingFiles.Length < 2)
+{
+    Console.WriteLine($"Need at least 2 probe files to compare. Found {existingFiles.Length}:");
+    foreach (var f in existingFiles)
+        Console.WriteLine($"  {f.Label}: {f.Path}");
+    Console.WriteLine("Missing:");
+    foreach (var f in files.Where(f => !File.Exists(f.Path)))
+        Console.WriteLine($"  {f.Label}: {f.Path}");
+    return;
+}
+
+var data = new Dictionary<string, JsonDocument>();
+foreach (var (label, path) in existingFiles)
+{
     data[label] = JsonDocument.Parse(File.ReadAllText(path));
 }
+
+// Print environment info
+Console.WriteLine("## Environments");
+foreach (var (label, doc) in data)
+{
+    var env = doc.RootElement.GetProperty("environment");
+    var framework = env.GetProperty("framework").GetString();
+    var os = env.GetProperty("os").GetString();
+    var rid = env.TryGetProperty("rid", out var ridEl) ? ridEl.GetString() : "n/a";
+    Console.WriteLine($"  {label}: {framework} on {os} ({rid})");
+}
+Console.WriteLine();
 
 // Build a lookup: (field, locale, key) -> platform -> value
 var allLocales = data.First().Value.RootElement.GetProperty("locales")
@@ -90,6 +137,72 @@ var differences = matrix
 
 Console.WriteLine($"Total data points: {matrix.Count}");
 Console.WriteLine($"Differing data points: {differences.Length}");
+Console.WriteLine($"Agreement rate: {100.0 * (matrix.Count - differences.Length) / matrix.Count:F1}%");
+Console.WriteLine();
+
+// Override-relevant analysis
+Console.WriteLine("## Override-relevant analysis");
+Console.WriteLine();
+
+// Calendar overrides: check month_standalone for overridden locales
+Console.WriteLine("### Calendar overrides (month_standalone for overridden locales)");
+var calendarDiffs = differences
+    .Where(kv => calendarOverrideLocales.Contains(kv.Key.Locale) && kv.Key.Category == "date_month_standalone")
+    .ToArray();
+Console.WriteLine($"  Overridden locales: {string.Join(", ", calendarOverrideLocales)}");
+Console.WriteLine($"  Month-standalone differences across platforms: {calendarDiffs.Length}");
+if (calendarDiffs.Length == 0)
+    Console.WriteLine("  RESULT: 100% platform agreement for overridden calendar locales");
+else
+{
+    Console.WriteLine("  RESULT: Differences found (expected in raw CultureInfo data; Humanizer overrides at runtime):");
+    foreach (var (key, vals) in calendarDiffs)
+    {
+        Console.Write($"    {key.Locale}/{key.Key}:");
+        foreach (var (label, _) in existingFiles)
+        {
+            vals.TryGetValue(label, out var v);
+            Console.Write($"  {label}=\"{v ?? "<missing>"}\"");
+        }
+        Console.WriteLine();
+    }
+}
+Console.WriteLine();
+
+// Decimal separator overrides
+Console.WriteLine("### Number formatting overrides (decimal_separator for overridden locales)");
+var decimalDiffs = differences
+    .Where(kv => decimalOverrideLocales.Contains(kv.Key.Locale) && kv.Key.Category == "meta" && kv.Key.Key == "number_decimal_separator")
+    .ToArray();
+Console.WriteLine($"  Overridden locales: {string.Join(", ", decimalOverrideLocales)}");
+Console.WriteLine($"  Decimal separator differences across platforms: {decimalDiffs.Length}");
+if (decimalDiffs.Length == 0)
+    Console.WriteLine("  RESULT: 100% platform agreement for overridden decimal separator locales");
+else
+{
+    Console.WriteLine("  RESULT: Differences found (expected in raw CultureInfo data; Humanizer overrides at runtime):");
+    foreach (var (key, vals) in decimalDiffs)
+    {
+        Console.Write($"    {key.Locale}:");
+        foreach (var (label, _) in existingFiles)
+        {
+            vals.TryGetValue(label, out var v);
+            Console.Write($"  {label}=\"{v ?? "<missing>"}\"");
+        }
+        Console.WriteLine();
+    }
+}
+Console.WriteLine();
+
+// Non-overridden locales analysis
+var nonOverriddenLocales = allLocales.Except(calendarOverrideLocales.Union(decimalOverrideLocales)).ToArray();
+var nonOverriddenDiffs = differences.Where(kv => nonOverriddenLocales.Contains(kv.Key.Locale)).Count();
+var nonOverriddenTotal = matrix.Where(kv => nonOverriddenLocales.Contains(kv.Key.Locale)).Count();
+Console.WriteLine("### Non-overridden locales");
+Console.WriteLine($"  Locale count: {nonOverriddenLocales.Length}");
+Console.WriteLine($"  Data points: {nonOverriddenTotal}");
+Console.WriteLine($"  Differences: {nonOverriddenDiffs}");
+Console.WriteLine($"  Agreement rate: {100.0 * (nonOverriddenTotal - nonOverriddenDiffs) / nonOverriddenTotal:F1}%");
 Console.WriteLine();
 
 // Group by (category, locale) to show which locales have differences
@@ -120,7 +233,7 @@ foreach (var (key, vals) in differences)
         lastCategory = key.Category;
     }
     Console.Write($"  {key.Locale}/{key.Key}:");
-    foreach (var (label, _) in files)
+    foreach (var (label, _) in existingFiles)
     {
         vals.TryGetValue(label, out var v);
         Console.Write($"  {label}=\"{v ?? "<missing>"}\"");
@@ -133,13 +246,13 @@ Console.WriteLine("## Platform similarity matrix");
 Console.WriteLine("How often each pair of platforms produces the same value:");
 Console.WriteLine();
 
-var platforms = files.Select(f => f.Label).ToArray();
+var platforms = existingFiles.Select(f => f.Label).ToArray();
 Console.Write("         ");
-foreach (var p in platforms) Console.Write($"{p,8}");
+foreach (var p in platforms) Console.Write($"{p,14}");
 Console.WriteLine();
 foreach (var p1 in platforms)
 {
-    Console.Write($"{p1,8} ");
+    Console.Write($"{p1,13} ");
     foreach (var p2 in platforms)
     {
         var agree = 0;
@@ -153,7 +266,48 @@ foreach (var p1 in platforms)
             }
         }
         var pct = total == 0 ? 0.0 : 100.0 * agree / total;
-        Console.Write($" {pct,6:F1}%");
+        Console.Write($" {pct,12:F1}%");
+    }
+    Console.WriteLine();
+}
+
+static void RunBeforeVsAfterComparison()
+{
+    var pairs = new (string Platform, string Before, string After)[]
+    {
+        ("macOS",  "tools/probe-macos.json",  "tools/probe-macos-after.json"),
+        ("Linux",  "tools/probe-linux.json",  "tools/probe-linux-after.json"),
+        ("Win10",  "tools/probe-windows-net10.json",  "tools/probe-windows-net10-after.json"),
+        ("Win48",  "tools/probe-windows-net48.json",  "tools/probe-windows-net48-after.json"),
+    };
+
+    Console.WriteLine("## Before vs After comparison (per platform)");
+    Console.WriteLine();
+    Console.WriteLine("NOTE: Probes capture raw CultureInfo data, not Humanizer output.");
+    Console.WriteLine("Before/after probes on the same platform should be identical because");
+    Console.WriteLine("Humanizer overrides operate at the runtime layer, not CultureInfo.");
+    Console.WriteLine();
+
+    foreach (var (platform, beforePath, afterPath) in pairs)
+    {
+        if (!File.Exists(beforePath) || !File.Exists(afterPath))
+        {
+            var missing = !File.Exists(beforePath) ? beforePath : afterPath;
+            Console.WriteLine($"  {platform}: SKIPPED (missing {missing})");
+            continue;
+        }
+
+        var beforeDoc = JsonDocument.Parse(File.ReadAllText(beforePath));
+        var afterDoc = JsonDocument.Parse(File.ReadAllText(afterPath));
+
+        // Compare locale data (ignoring environment which has timestamps)
+        var beforeLocales = beforeDoc.RootElement.GetProperty("locales").ToString();
+        var afterLocales = afterDoc.RootElement.GetProperty("locales").ToString();
+
+        if (beforeLocales == afterLocales)
+            Console.WriteLine($"  {platform}: IDENTICAL (raw CultureInfo data unchanged)");
+        else
+            Console.WriteLine($"  {platform}: CHANGED (unexpected! raw CultureInfo data should not have changed)");
     }
     Console.WriteLine();
 }
