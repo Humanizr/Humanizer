@@ -21,3 +21,6 @@ Bucket templates (min5, min10, etc.) fire for ALL times at that minute value -- 
 
 ## 2026-04-08 manual [pitfall]
 Day-period hour resolution must be template-aware: only shift to next-hour period when template references {nextHour} or {nextArticle}, not based on minute threshold alone
+
+## 2026-04-09 manual [pitfall]
+Day-period labels (earlyMorning/night) must be linguistically distinct -- do not reuse the same word for both early morning and late evening even when tests only cover one range

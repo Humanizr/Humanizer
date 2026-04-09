@@ -42,16 +42,24 @@ sealed class OrdinalDatePattern(string template, OrdinalDateDayMode dayMode, Ord
     /// Formats the pattern for the specified date.
     /// </summary>
     /// <returns>The formatted date string.</returns>
-    public string Format(DateTime date) =>
-        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day), date.Day);
+    public string Format(DateTime date)
+    {
+        var culture = GetPatternCulture();
+        var calendarDay = culture.DateTimeFormat.Calendar.GetDayOfMonth(date);
+        return ReplaceDayMarker(date.ToString(GetFormatString(), culture), FormatDay(calendarDay), calendarDay);
+    }
 
 #if NET6_0_OR_GREATER
     /// <summary>
     /// Formats the pattern for the specified date.
     /// </summary>
     /// <returns>The formatted date string.</returns>
-    public string Format(DateOnly date) =>
-        ReplaceDayMarker(date.ToString(GetFormatString(), GetPatternCulture()), FormatDay(date.Day), date.Day);
+    public string Format(DateOnly date)
+    {
+        var culture = GetPatternCulture();
+        var calendarDay = culture.DateTimeFormat.Calendar.GetDayOfMonth(date.ToDateTime(default));
+        return ReplaceDayMarker(date.ToString(GetFormatString(), culture), FormatDay(calendarDay), calendarDay);
+    }
 #endif
 
     string GetFormatString() => template.Replace(DayPlaceholder, DayMarkerFormat);

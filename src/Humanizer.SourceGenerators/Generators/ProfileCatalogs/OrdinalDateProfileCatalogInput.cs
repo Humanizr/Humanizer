@@ -168,7 +168,9 @@ public sealed partial class HumanizerSourceGenerator
 
             if (hasCalendarMode)
             {
-                expr += ", OrdinalDateCalendarMode." + calendarMode;
+                // Normalize to PascalCase so YAML authors can write 'native' or 'Native'.
+                var normalized = char.ToUpperInvariant(calendarMode![0]) + calendarMode.Substring(1).ToLowerInvariant();
+                expr += ", OrdinalDateCalendarMode." + normalized;
             }
 
             return expr + "))";
