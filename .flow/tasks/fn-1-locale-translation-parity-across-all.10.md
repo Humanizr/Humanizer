@@ -90,9 +90,8 @@ Follow existing formatting conventions per file:
 - [ ] No broken cross-references between docs
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds (docs don't affect build, but verify)
 ## Done summary
-TBD
-
+Updated documentation for locale parity: replaced old clock engine sections (phrase-hour, relative-hour, residual leaves) with unified phrase-clock engine documentation in locale-yaml-reference.md, added all 34 YAML fields, calendarMode for ordinal.date, and new Shared Strategy Values sections. Updated locale-yaml-how-to.md clock engine list, adding-a-locale.md contributor checklist, and verified ARCHITECTURE.md was already clean.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 36c17d362a57ced7f07e2bddf2a9e22f4ae17b66, 8f87a4cfbb6aba6b34dde5a4f94e8ddcec6d0a50, 679679a2772e0731539c32313e6a5add4f39023a
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release
 - PRs:

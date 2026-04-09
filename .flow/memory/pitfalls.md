@@ -27,3 +27,6 @@ Day-period labels (earlyMorning/night) must be linguistically distinct -- do not
 
 ## 2026-04-09 manual [pitfall]
 When adding a Native calendar mode that skips Gregorian override, all date component extraction (day, month) must also use the native calendar -- do not mix Gregorian date.Day with native-formatted output
+
+## 2026-04-09 manual [pitfall]
+When documenting runtime behavior (ranges, thresholds, array sizes), verify against the actual implementation code -- do not transcribe from the spec/design doc which may be outdated
