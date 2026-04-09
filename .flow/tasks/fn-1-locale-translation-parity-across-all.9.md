@@ -135,9 +135,8 @@ Note: Hebrew (he) is RTL — verify no directionality marks in output.
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 - [ ] Sweep tests pass for he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA
 ## Done summary
-TBD
-
+Added ordinal.date/dateOnly and clock YAML sections for 7 locales (id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA). Added minuteWordsMap engine field to support Filipino Spanish-derived clock numbers and Zulu associative minute forms. All clock and ordinal date sweep tests pass for target locales.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 725c86c08e394742a8e1705825b799399c310aaf
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj
 - PRs:
