@@ -68,4 +68,4 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 
 ## Contributing
 
-- [Contributing Guide](../CONTRIBUTING.md) - How to contribute to Humanizer
+- [Contributing Guide](../.github/CONTRIBUTING.md) - How to contribute to Humanizer
