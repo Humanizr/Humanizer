@@ -718,7 +718,7 @@ The `{dayPeriod}` placeholder allows inline day-period placement within bucket t
 - `hourZeroWord`: override word for hour zero
 - `hourOneWord`: override word for hour one
 - `hourTwelveWord`: override word for hour twelve
-- `hourWordsMap`: optional dense sequence of 13 locale-specific hour words (indices 0-12), used instead of `ToWords()` when the locale needs pre-declined or article-attached forms (e.g., Arabic)
+- `hourWordsMap`: optional dense sequence of locale-specific hour words indexed by the resolved hour value, used instead of `ToWords()` when the locale needs pre-declined or article-attached forms (e.g., Arabic). The required length depends on `hourMode`: 13 entries (indices 0-12) for `h12`, or 24 entries (indices 0-23) for `h24`/`numeric`.
 - `minuteWordsMap`: optional dense sequence of locale-specific minute words
 
 **Hour suffixes:**
