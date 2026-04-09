@@ -343,23 +343,18 @@ Supported engines in current checked-in YAML:
 Purpose:
 
 - owns clock-phrase templates and phrase-family choices for `TimeOnly` clock notation
-- feeds either generated shared clock engines or the small residual handwritten clock leaves
+- feeds the single generated `phrase-clock` engine
 - should stay separate from general time humanization and formatter resource behavior
 
 Notes:
 
 - `clock` is the canonical YAML authoring surface.
-- The generator currently emits this surface into the runtime `timeOnlyToClockNotation` feature slot.
+- The generator emits this surface into the runtime `timeOnlyToClockNotation` feature slot.
+- All 62 shipped locales use the unified `phrase-clock` engine. There are no residual handwritten clock leaves.
 
-Supported shapes:
+Supported engine:
 
-1. Residual locale leaves:
-   - `engine: 'french'`
-   - `engine: 'german'`
-   - `engine: 'luxembourgish'`
-2. Generated shared engines:
-   - `engine: 'phrase-hour'`
-   - `engine: 'relative-hour'`
+- `engine: 'phrase-clock'`
 
 ### `compass`
 
@@ -383,6 +378,22 @@ Notes:
 ## Shared Strategy Values
 
 These are the non-lexical option values that currently appear in checked-in locale YAML.
+
+### Clock Hour Modes
+
+- `h12` — 12-hour clock with words via `ToWords()` (default)
+- `h24` — 24-hour clock with words via `ToWords()`
+- `numeric` — digits instead of words (e.g., Japanese "3時")
+
+### Clock Day Period Positions
+
+- `prefix` — day period appears before the clock phrase
+- `suffix` — day period appears after the clock phrase (default)
+
+### Ordinal Date Calendar Modes
+
+- `Gregorian` — forces the Gregorian calendar regardless of the culture's default calendar (default)
+- `Native` — uses the culture's default calendar (e.g., Thai Buddhist year + 543, Hebrew calendar)
 
 ### Date Day Modes
 
@@ -558,11 +569,13 @@ Fields:
 
 - `pattern`
 - `dayMode`
+- `calendarMode`
 
 Notes:
 
 - `pattern` is a normal output template that must include `{day}` where the formatted day should appear.
 - `dayMode` controls whether the day is numeric, ordinal, or conditionally ordinal.
+- `calendarMode` controls how the calendar is resolved when formatting ordinal dates. Values are `Gregorian` (default, forces the Gregorian calendar regardless of culture) and `Native` (uses the culture's default calendar, e.g., Thai Buddhist, Hebrew, Persian). When omitted, `Gregorian` is used.
 - `pattern` is the owning block's complete output template; the generator does not infer extra punctuation or month placement for you.
 - if a locale has both `ordinal.date` and `ordinal.dateOnly`, document the reason in the locale file comments because most locales either share the same pattern family or omit one of the two blocks.
 
@@ -660,58 +673,89 @@ Authoring notes:
 
 ## Time-Only Clock Notation
 
-### Residual leaf engines
+### `clock: phrase-clock`
 
-- `french`
-- `german`
-- `luxembourgish`
+The unified `phrase-clock` engine handles all clock notation patterns through YAML configuration. It replaces the former `phrase-hour`, `relative-hour`, and residual leaf engines (French, German, Luxembourgish, Japanese).
 
-These still route to locale-specific runtime implementations. They are acceptable leftovers until the repository has a clean structural model for those phrase families.
+**Core fields:**
 
-### `clock: phrase-hour`
+- `hourMode`: hour display strategy (see Shared Strategy Values below)
+- `hourGender`: grammatical gender for `ToWords()` hour rendering (`masculine`, `feminine`, `neuter`; default `masculine`)
+- `minuteGender`: grammatical gender for `ToWords()` minute rendering (`masculine`, `feminine`, `neuter`; default `masculine`)
+- `midnight`: display string for 00:00
+- `midday`: display string for 12:00
 
-Fields:
+**Minute-bucket templates:**
 
-- `midnight`
-- `midday`
-- `oclockFormat`
-- `quarterPastFormat`
-- `halfPastFormat`
-- `twentyToFormat`
-- `quarterToFormat`
-- `tenToFormat`
-- `fiveToFormat`
-- `roundHourFormat`
-- `genericMinutesFormat`
+Explicit templates for each 5-minute increment. Templates use placeholders `{hour}`, `{nextHour}`, `{minutes}`, `{minutesReverse}` (60 minus minutes), `{minutesFromHalf}` (minutes minus 30), `{nextArticle}`, and `{dayPeriod}` (inline day-period placement).
+
+- `min0` through `min55`: templates for minutes 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55
+- `defaultTemplate`: catch-all fallback for non-bucketed minutes
+
+**Range-based default templates** (for quadrant-style patterns):
+
+- `pastHourTemplate`: minutes 1-14 default
+- `beforeHalfTemplate`: minutes 16-29 default
+- `afterHalfTemplate`: minutes 31-44 default
+- `beforeNextTemplate`: minutes 46-59 default
+
+**Zero filler:**
+
+- `zeroFiller`: zero-pad word for minutes less than 10 (e.g., "noll", "零")
+
+**Day-period support:**
+
+- `earlyMorning`: display string for the early morning period
+- `morning`: display string for the morning period
+- `afternoon`: display string for the afternoon period
+- `night`: display string for the night period
+- `dayPeriodPosition`: `prefix` or `suffix` (default `suffix`)
+
+The `{dayPeriod}` placeholder allows inline day-period placement within bucket templates. When a template contains `{dayPeriod}`, the engine expands it inline and does not append or prepend the day period again. This is useful for languages like Kurdish where the day period appears mid-phrase.
+
+**Hour and minute word overrides:**
+
+- `hourZeroWord`: override word for hour zero
+- `hourOneWord`: override word for hour one
+- `hourTwelveWord`: override word for hour twelve
+- `hourWordsMap`: optional dense sequence of 13 locale-specific hour words (indices 0-12), used instead of `ToWords()` when the locale needs pre-declined or article-attached forms (e.g., Arabic)
+- `minuteWordsMap`: optional dense sequence of locale-specific minute words
+
+**Hour suffixes:**
+
+- `hourSuffixSingular`: singular hour suffix (e.g., French "heure")
+- `hourSuffixPlural`: plural hour suffix (e.g., French "heures")
+- `hourSuffixPaucal`: paucal hour suffix (for Slavic-family locales)
+
+**Minute suffixes:**
+
+- `minuteSuffixSingular`: singular minute suffix (e.g., Luxembourgish "Minutt")
+- `minuteSuffixPlural`: plural minute suffix (e.g., Luxembourgish "Minutten")
+- `minuteSuffixPaucal`: paucal minute suffix (for Slavic-family locales)
+
+**Articles:**
+
+- `singularArticle`: article for singular hours
+- `pluralArticle`: article for plural hours
+
+**Compact mode:**
+
+- `compactMinuteWords`: boolean (default `false`) — when true, minute words use a compact conjunction form
+- `compactConjunction`: conjunction word used in compact mode (e.g., Arabic "و")
+
+**Paucal control:**
+
+- `paucalLowOnly`: boolean (default `false`) — restricts paucal suffixes to low values only
+
+**Eifeler Rule support** (Luxembourgish morphology):
+
+- `applyEifelerRule`: boolean (default `false`) — applies `EifelerRule.DoesApply()` post-processing to trim trailing 'n' from number words when the following word blocks it
 
 Notes:
 
-- This engine renders clock notation through fixed phrase templates keyed by rounded minute buckets.
-
-### `clock: relative-hour`
-
-Fields:
-
-- `midnight`
-- `midday`
-- `singularArticle`
-- `pluralArticle`
-- `and`
-- `quarterPast`
-- `halfPast`
-- `twentyFiveTo`
-- `twentyTo`
-- `quarterTo`
-- `tenTo`
-- `fiveTo`
-- `lateNightPeriod`
-- `morningPeriod`
-- `afternoonPeriod`
-- `eveningPeriod`
-
-Notes:
-
-- This engine expresses time as a relation to the upcoming or current hour and appends period-of-day words.
+- All 62 shipped locales use `phrase-clock`. There are no residual handwritten clock leaves.
+- Non-bucketed minutes fall to range-based defaults or `defaultTemplate`.
+- Templates that reference `{nextHour}` shift the day-period to the next hour for minutes >= 35; templates using `{hour}` base the period on the current hour.
 
 ## Words-To-Number Engines
 

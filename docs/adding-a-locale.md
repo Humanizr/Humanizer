@@ -289,6 +289,8 @@ A residual locale-specific converter is acceptable only when at least one of the
 
 If a runtime kernel still hard-codes language-specific behavior, do not pretend it is generic. Either make it structurally generic for real or keep the locale name.
 
+Note: as of the locale parity completion, no clock residual leaves remain. All 62 shipped locales use the unified `phrase-clock` engine for clock notation.
+
 ## Step-By-Step: Add A Brand New Locale
 
 1. Decide whether the locale is neutral or regional.
@@ -377,6 +379,7 @@ Before you call the work done, verify all of these:
 - any remaining locale leaf is explicitly justified
 - source-generator tests pass
 - runtime tests pass on `net10.0` and `net8.0`
+- registry completeness tests pass (`LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests`)
 - `dotnet pack` passes
 - benchmark comparisons show no regression versus the chosen base
 

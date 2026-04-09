@@ -336,15 +336,9 @@ Put here:
 - phrase templates for rounded or relative clock output
 - period-of-day words when the engine uses them
 
-Supported engines in current checked-in YAML include:
+Supported engine:
 
-- generated shared engines
-  - `phrase-hour`
-  - `relative-hour`
-- accepted residual locale leaves
-  - `french`
-  - `german`
-  - `luxembourgish`
+- `phrase-clock` — the unified clock engine used by all 62 shipped locales
 
 ### `compass`
 
@@ -388,7 +382,7 @@ When you are building a locale from scratch, use this order:
 6. Add `number.parse` once you know the parse-side engine family.
 7. Add `ordinal.numeric` if numeric ordinalization exists independently from `number.words`.
 8. Add `ordinal.date` or `ordinal.dateOnly` only for date-specific day phrasing.
-9. Add `clock` after checking whether the locale really fits an existing clock engine.
+9. Add `clock` using the unified `phrase-clock` engine. All shipped locales use this single engine.
 10. Add `compass` if the locale needs heading labels and does not inherit acceptable same-language values.
 
 This keeps authoring pressure on the generated/shared surfaces first and makes it easier to spot when a new block is really necessary.

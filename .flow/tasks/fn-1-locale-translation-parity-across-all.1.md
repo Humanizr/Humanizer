@@ -66,9 +66,8 @@ This task runs AFTER all locale batches (.2-.9) so that every shipped locale is 
 - [ ] Tests compile on all target frameworks (net10.0, net8.0)
 - [ ] `dotnet build src/Humanizer/Humanizer.csproj -c Release` succeeds
 ## Done summary
-TBD
-
+Added 3 missing registry completeness tests to LocaleTheoryMatrixCompletenessTests: DateToOrdinalWordsConverterRegistryCoversYamlLocale, DateOnlyToOrdinalWordsConverterRegistryCoversYamlLocale (#if NET6_0_OR_GREATER), and TimeOnlyToClockNotationConvertersRegistryCoversYamlLocale (#if NET6_0_OR_GREATER). All 8 registries are now covered by completeness tests ensuring every shipped locale is registered.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: dbac93b34ac719aef036fe6197748dfe5abbd546
+- Tests: dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (40274 passed, 122 pre-existing failures), dotnet build src/Humanizer/Humanizer.csproj -c Release
 - PRs:
