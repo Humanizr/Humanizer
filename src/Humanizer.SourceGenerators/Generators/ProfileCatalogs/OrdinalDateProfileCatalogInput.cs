@@ -197,12 +197,23 @@ public sealed partial class HumanizerSourceGenerator
                     "Only MMMM (full month name) substitution is supported.");
             }
 
-            // Validate: MMMM must appear in a supported position (unescaped, outside single-quoted literals).
-            if (hasMonths && !ContainsUnescapedFullMonth(pattern))
+            // Validate: exactly one unescaped MMMM in a supported position.
+            if (hasMonths)
             {
-                throw new InvalidOperationException(
-                    $"Ordinal date profile '{profile.ProfileName}' has calendar.months override " +
-                    "but pattern does not contain an unescaped MMMM specifier.");
+                var mmmmCount = CountUnescapedFullMonth(pattern);
+                if (mmmmCount == 0)
+                {
+                    throw new InvalidOperationException(
+                        $"Ordinal date profile '{profile.ProfileName}' has calendar.months override " +
+                        "but pattern does not contain an unescaped MMMM specifier.");
+                }
+
+                if (mmmmCount > 1)
+                {
+                    throw new InvalidOperationException(
+                        $"Ordinal date profile '{profile.ProfileName}' has calendar.months override " +
+                        "but pattern contains multiple unescaped MMMM specifiers. Only one is supported.");
+                }
             }
 
             var calendarMode = GetOptionalString(profile.Root, "calendarMode");
@@ -282,10 +293,11 @@ public sealed partial class HumanizerSourceGenerator
         }
 
         /// <summary>
-        /// Returns true if the pattern contains an unescaped MMMM specifier.
+        /// Counts the number of unescaped MMMM (4+ M) specifiers in the pattern.
         /// </summary>
-        static bool ContainsUnescapedFullMonth(string pattern)
+        static int CountUnescapedFullMonth(string pattern)
         {
+            var count = 0;
             var inQuote = false;
             for (var i = 0; i < pattern.Length; i++)
             {
@@ -300,14 +312,24 @@ public sealed partial class HumanizerSourceGenerator
                     continue;
                 }
 
-                if (i + 3 < pattern.Length &&
-                    pattern[i] == 'M' && pattern[i + 1] == 'M' && pattern[i + 2] == 'M' && pattern[i + 3] == 'M')
+                if (pattern[i] == 'M')
                 {
-                    return true;
+                    var start = i;
+                    while (i < pattern.Length && pattern[i] == 'M')
+                    {
+                        i++;
+                    }
+
+                    if (i - start >= 4)
+                    {
+                        count++;
+                    }
+
+                    i--; // Loop will increment.
                 }
             }
 
-            return false;
+            return count;
         }
     }
 
