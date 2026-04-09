@@ -321,7 +321,19 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: '-chi'
+    date:
+      pattern: '{day}-MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day}-MMMM yyyy'
+      dayMode: 'Numeric'
 
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourOneWord: 'bir'
+    min0: '{hour}'
+    defaultTemplate: "{hour}dan {minutes} o‘tdi"
 
   compass:
     full:

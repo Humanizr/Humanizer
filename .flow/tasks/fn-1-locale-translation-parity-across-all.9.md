@@ -4,7 +4,8 @@
 Add `ordinal.date`, `ordinal.dateOnly`, and `clock:` YAML sections to Austronesian, Semitic, and remaining locales.
 
 **Locales:** he, id, ms, fil, mt, uz-Cyrl-UZ, uz-Latn-UZ, zu-ZA
-**Note:** he ordinal.date/dateOnly is added in task .8 (with `calendarMode: 'Native'`). This task adds clock only for he.
+**Note:** he ordinal.date/dateOnly is added in task .8 (using Gregorian default — tests expect Gregorian year, not Hebrew year). This task adds clock only for he.
+<!-- Updated by plan-sync: fn-1-locale-translation-parity-across-all.8 — he ordinal.date uses Gregorian (default), not calendarMode: 'Native'; tests expect Gregorian year -->
 
 **Size:** M
 **Files:** `src/Humanizer/Locales/he.yml`, `id.yml`, `ms.yml`, `fil.yml`, `mt.yml`, `uz-Cyrl-UZ.yml`, `uz-Latn-UZ.yml`, `zu-ZA.yml`

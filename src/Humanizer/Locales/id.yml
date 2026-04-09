@@ -349,3 +349,16 @@ surfaces:
       masculine:
         prefix: 'ke-'
         defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourOneWord: 'satu'
+    min0: 'pukul {hour}'
+    defaultTemplate: 'pukul {hour} lewat {minutes} menit'

@@ -189,6 +189,12 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return "";
         }
 
+        // Check the explicit minute-words map first (e.g., Filipino Spanish-derived clock numbers).
+        if (profile.MinuteWordsMap.Length > minutes && profile.MinuteWordsMap[minutes].Length > 0)
+        {
+            return profile.MinuteWordsMap[minutes];
+        }
+
         var words = profile.MinuteGender switch
         {
             GrammaticalGender.Feminine => minutes.ToWords(GrammaticalGender.Feminine),
@@ -620,6 +626,7 @@ sealed class PhraseClockNotationProfile(
     string hourSuffixPaucal,
     string minuteSuffixPaucal,
     string[] hourWordsMap,
+    string[] minuteWordsMap,
     bool compactMinuteWords,
     bool paucalLowOnly,
     string compactConjunction)
@@ -706,6 +713,8 @@ sealed class PhraseClockNotationProfile(
     public string MinuteSuffixPaucal { get; } = minuteSuffixPaucal;
     /// <summary>Gets an optional map of hour values (0-23) to explicit word strings, bypassing <c>ToWords()</c>.</summary>
     public string[] HourWordsMap { get; } = hourWordsMap;
+    /// <summary>Gets an optional map of minute values (0-59) to explicit word strings, bypassing <c>ToWords()</c>.</summary>
+    public string[] MinuteWordsMap { get; } = minuteWordsMap;
     /// <summary>Gets whether spaces should be removed from minute words (e.g., Slovak "dvadsaťtri" instead of "dvadsať tri").</summary>
     public bool CompactMinuteWords { get; } = compactMinuteWords;
     /// <summary>Gets whether paucal forms apply only to the exact values 2-4 (West Slavic), vs units 2-4 excluding teens (South Slavic default).</summary>

@@ -718,6 +718,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "hourSuffixPaucal", null, null, null, "", null, null),
                             Member("string", "minuteSuffixPaucal", null, null, null, "", null, null),
                             Member("optional-string-array", "hourWordsMap", null, null, null, null, null, null),
+                            Member("optional-string-array", "minuteWordsMap", null, null, null, null, null, null),
                             Member("bool", "compactMinuteWords", null, null, null, "false", null, null),
                             Member("bool", "paucalLowOnly", null, null, null, "false", null, null),
                             Member("string", "compactConjunction", null, null, null, "", null, null)

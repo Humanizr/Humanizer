@@ -479,6 +479,19 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: ''
+    date:
+      pattern: "{day} 'ta’ 'MMMM yyyy"
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: "{day} 'ta’ 'MMMM yyyy"
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    min0: 'is-siegħa {hour}'
+    defaultTemplate: 'is-siegħa {hour} u {minutes}'
 
   compass:
     full:

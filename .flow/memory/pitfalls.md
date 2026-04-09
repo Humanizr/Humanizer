@@ -24,3 +24,6 @@ Day-period hour resolution must be template-aware: only shift to next-hour perio
 
 ## 2026-04-09 manual [pitfall]
 Day-period labels (earlyMorning/night) must be linguistically distinct -- do not reuse the same word for both early morning and late evening even when tests only cover one range
+
+## 2026-04-09 manual [pitfall]
+When adding a Native calendar mode that skips Gregorian override, all date component extraction (day, month) must also use the native calendar -- do not mix Gregorian date.Day with native-formatted output
