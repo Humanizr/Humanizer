@@ -2,16 +2,20 @@
 #
 # FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA}
 #
-# Evidence source: preferred path (extended probes) for macOS net10;
-# fallback path for Linux net10, Windows net10, Windows net48 (unreachable
-# from this macOS development environment).
+# Evidence collected:
+#   - macOS net10: preferred path (extended probe with month_names_raw field).
+#     Raw MonthNames output also captured below via standalone enumeration snippet.
+#   - Linux net10: UNREACHABLE from this macOS dev environment. No evidence collected.
+#   - Windows net10: UNREACHABLE from this macOS dev environment. No evidence collected.
+#   - Windows net48: UNREACHABLE from this macOS dev environment. No evidence collected.
 #
-# Per the deterministic decision rule: since not all 4 shipping platform targets
-# (macOS net10, Linux net10, Windows net10, Windows net48) are reachable, both
-# ta and zu-ZA are conservatively KEPT in FinalOverrideSet. No subjective
-# "representative enough" judgement was applied.
+# Per the deterministic decision rule: since 3 of 4 shipping platform targets
+# are unreachable, both ta and zu-ZA are conservatively KEPT in FinalOverrideSet.
+# No subjective "representative enough" judgement was applied. The conservative
+# keep decision follows directly from the evidence gap -- not from any observed
+# platform variance.
 #
-# Snippet source: /tmp/month-enum-extended/Program.cs (inline below)
+# Snippet source: inline below (self-contained net10.0 console app)
 # To reproduce: dotnet run --project <dir-containing-this-csproj>
 
 ## Snippet source

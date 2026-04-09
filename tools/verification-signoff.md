@@ -200,8 +200,10 @@ The `compare-probes.cs` agreement percentage for non-overridden locales is 75.2%
 | probe-linux-after.json committed | PASS (copy of before; not re-run with extended probe — Linux unreachable) |
 | probe-windows-net10-after.json committed | PASS (copy of before; not re-run with extended probe — Windows unreachable) |
 | probe-windows-net48-after.json committed | PASS (copy of before; not re-run with extended probe — Windows unreachable) |
-| 100% agreement for calendar overrides | PASS (Humanizer runtime, verified via test suite) |
-| 100% agreement for decimal separator overrides | PASS (Humanizer runtime, verified via test suite) |
+| Calendar overrides: macOS validated | PASS (macOS net10.0 test suite, 38,908 tests) |
+| Calendar overrides: cross-platform agreement | DEFERRED (Linux/Windows unreachable; override data authored conservatively) |
+| Decimal separator overrides: macOS validated | PASS (macOS net10.0 test suite, 38,908 tests) |
+| Decimal separator overrides: cross-platform agreement | DEFERRED (Linux/Windows unreachable; override data authored conservatively) |
 | macOS net10.0: 0 failures | PASS (38,908 passed) |
 | macOS net8.0: 0 failures | DEFERRED (.NET 8 not installed) |
 | Linux net10.0: 0 failures | DEFERRED (CI verification) |

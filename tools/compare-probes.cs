@@ -284,9 +284,18 @@ static void RunBeforeVsAfterComparison()
     Console.WriteLine("## Before vs After comparison (per platform)");
     Console.WriteLine();
     Console.WriteLine("NOTE: Probes capture raw CultureInfo data, not Humanizer output.");
-    Console.WriteLine("Before/after probes on the same platform should be identical because");
-    Console.WriteLine("Humanizer overrides operate at the runtime layer, not CultureInfo.");
+    Console.WriteLine("Before/after probes on the same platform should have identical shared fields");
+    Console.WriteLine("because Humanizer overrides operate at the runtime layer, not CultureInfo.");
+    Console.WriteLine("Schema extensions (e.g. month_names_raw added in fn-5.1) are expected");
+    Console.WriteLine("differences and do not indicate data regression.");
     Console.WriteLine();
+
+    // Shared fields used for before/after comparison (the original probe contract).
+    // New fields like month_names_raw / month_genitive_names_raw are schema extensions
+    // and should not trigger a false "CHANGED" result.
+    string[] sharedScalarFields = ["number_decimal_separator", "short_date_pattern", "long_date_pattern", "short_time_pattern", "long_time_pattern", "am_designator", "pm_designator"];
+    string[] sharedDateFields = ["ref", "short", "long", "month_standalone"];
+    string[] sharedTimeFields = ["ref", "short", "long"];
 
     foreach (var (platform, beforePath, afterPath) in pairs)
     {
@@ -300,14 +309,69 @@ static void RunBeforeVsAfterComparison()
         var beforeDoc = JsonDocument.Parse(File.ReadAllText(beforePath));
         var afterDoc = JsonDocument.Parse(File.ReadAllText(afterPath));
 
-        // Compare locale data (ignoring environment which has timestamps)
-        var beforeLocales = beforeDoc.RootElement.GetProperty("locales").ToString();
-        var afterLocales = afterDoc.RootElement.GetProperty("locales").ToString();
+        // Compare only shared fields per locale (ignoring schema extensions)
+        var beforeLocales = beforeDoc.RootElement.GetProperty("locales").EnumerateArray().ToArray();
+        var afterLocales = afterDoc.RootElement.GetProperty("locales").EnumerateArray().ToArray();
 
-        if (beforeLocales == afterLocales)
-            Console.WriteLine($"  {platform}: IDENTICAL (raw CultureInfo data unchanged)");
+        var dataChanged = false;
+        var schemaExtended = false;
+
+        if (beforeLocales.Length != afterLocales.Length)
+        {
+            dataChanged = true;
+        }
         else
-            Console.WriteLine($"  {platform}: CHANGED (unexpected! raw CultureInfo data should not have changed)");
+        {
+            for (int i = 0; i < beforeLocales.Length; i++)
+            {
+                var bl = beforeLocales[i];
+                var al = afterLocales[i];
+
+                // Check shared scalar fields
+                foreach (var f in sharedScalarFields)
+                {
+                    if (bl.GetProperty(f).GetString() != al.GetProperty(f).GetString())
+                        dataChanged = true;
+                }
+
+                // Check shared date fields
+                var bDates = bl.GetProperty("dates").EnumerateArray().ToArray();
+                var aDates = al.GetProperty("dates").EnumerateArray().ToArray();
+                if (bDates.Length != aDates.Length) dataChanged = true;
+                else
+                {
+                    for (int j = 0; j < bDates.Length; j++)
+                        foreach (var f in sharedDateFields)
+                            if (bDates[j].GetProperty(f).GetString() != aDates[j].GetProperty(f).GetString())
+                                dataChanged = true;
+                }
+
+                // Check shared time fields
+                var bTimes = bl.GetProperty("times").EnumerateArray().ToArray();
+                var aTimes = al.GetProperty("times").EnumerateArray().ToArray();
+                if (bTimes.Length != aTimes.Length) dataChanged = true;
+                else
+                {
+                    for (int j = 0; j < bTimes.Length; j++)
+                        foreach (var f in sharedTimeFields)
+                            if (bTimes[j].GetProperty(f).GetString() != aTimes[j].GetProperty(f).GetString())
+                                dataChanged = true;
+                }
+
+                // Detect schema extensions (after has fields before doesn't)
+                var bProps = bl.EnumerateObject().Select(p => p.Name).ToHashSet();
+                var aProps = al.EnumerateObject().Select(p => p.Name).ToHashSet();
+                if (!aProps.SetEquals(bProps))
+                    schemaExtended = true;
+            }
+        }
+
+        if (dataChanged)
+            Console.WriteLine($"  {platform}: CHANGED (shared field data differs — investigate)");
+        else if (schemaExtended)
+            Console.WriteLine($"  {platform}: IDENTICAL shared fields (schema extended with new fields — expected)");
+        else
+            Console.WriteLine($"  {platform}: IDENTICAL (raw CultureInfo data unchanged)");
     }
     Console.WriteLine();
 }
