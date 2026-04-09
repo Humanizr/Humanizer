@@ -376,6 +376,23 @@ public class LocaleTheoryMatrixCompletenessTests
     public void WordsToNumberConverterRegistryCoversYamlLocale(string localeName) =>
         Assert.Contains(localeName, GetRegisteredLocales<WordsToNumberConverterRegistry, IWordsToNumberConverter>(), StringComparer.OrdinalIgnoreCase);
 
+    [Theory]
+    [MemberData(nameof(ShippedLocaleRows))]
+    public void DateToOrdinalWordsConverterRegistryCoversYamlLocale(string localeName) =>
+        Assert.Contains(localeName, GetRegisteredLocales<DateToOrdinalWordsConverterRegistry, IDateToOrdinalWordConverter>(), StringComparer.OrdinalIgnoreCase);
+
+#if NET6_0_OR_GREATER
+    [Theory]
+    [MemberData(nameof(ShippedLocaleRows))]
+    public void DateOnlyToOrdinalWordsConverterRegistryCoversYamlLocale(string localeName) =>
+        Assert.Contains(localeName, GetRegisteredLocales<DateOnlyToOrdinalWordsConverterRegistry, IDateOnlyToOrdinalWordConverter>(), StringComparer.OrdinalIgnoreCase);
+
+    [Theory]
+    [MemberData(nameof(ShippedLocaleRows))]
+    public void TimeOnlyToClockNotationConvertersRegistryCoversYamlLocale(string localeName) =>
+        Assert.Contains(localeName, GetRegisteredLocales<TimeOnlyToClockNotationConvertersRegistry, ITimeOnlyToClockNotationConverter>(), StringComparer.OrdinalIgnoreCase);
+#endif
+
     public static TheoryData<string, GrammaticalGender> AllLocaleGenderTheoryData => CreateAllLocaleGenderTheoryData();
 
     static void AssertLocaleCoverage(IEnumerable dataSet, string localeName) =>
