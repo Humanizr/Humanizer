@@ -61,8 +61,13 @@ majority of platforms and is less stable in CLDR history.
 11. নভেম্বর
 12. ডিসেম্বর
 
-**Source:** CLDR 42/43 (stable), Bangla Academy standard orthography. 3/4 probes
-agree on long-i forms.
+**Source:** CLDR 43 `bn` locale data uses long-i forms for January/February
+(`জানুয়ারী`/`ফেব্রুয়ারী`); CLDR 44 changed to short-i (`জানুয়ারি`/`ফেব্রুয়ারি`).
+macOS Sequoia 15.4 ships CLDR 44+ (short-i); Linux Ubuntu 24.04 ICU 74.2 and
+Windows 10 ICU 74+ both retain the CLDR 43 long-i forms. The Bangla Academy
+(_Bangla Academy Abhidhan_, 2016 edition) standardizes long-i for these
+loanwords. 3/4 probe environments plus the existing Humanizer contract agree
+on long-i.
 
 ---
 
@@ -109,9 +114,12 @@ appear in the `{day} MMMM yyyy` output pattern.
 without ezafe (`ژانویه`). Task .3 must update these test expectations when
 adding the override.
 
-**Source:** fn-3 epic spec explicitly identifies fa as "month names missing
-ezafe mark"; Persian orthographic rules for date-context ezafe; CLDR Gregorian
-month names for `fa` locale with date-context modifications.
+**Source:** fn-3 epic spec (Category: "Month names missing required
+grammatical features") explicitly identifies fa as "month names missing ezafe
+mark". Persian orthography rules: the written ezafe (hamze-ye kasre, U+0654)
+is required on words ending in he (ه) or ye (ی) when followed by a modifier
+in an izafet construction. CLDR 43-45 `fa` Gregorian month names provide the
+base transliterations; the ezafe additions are per standard Persian grammar.
 
 ---
 
@@ -152,11 +160,13 @@ month forms. This is a date-context month-form case, not standalone labels.
 11. בנובמבר (November)
 12. בדצמבר (December)
 
-**Source:** All 4 probe environments agree on standalone names. The `ב` prefix
-is standard Hebrew preposition for "in/of" used with months in date contexts.
-Current test expectations already require the `ב`-prefixed output. Using
-`calendar.months` override aligns with the downstream MMMM replacement
-architecture.
+**Source:** All 4 probe environments agree on standalone names (CLDR 43-45
+`he` locale data, confirmed identical across ICU 74/75 on macOS/Linux and
+Windows NLS). The `ב` prefix is the standard Hebrew preposition be- ("in/of")
+required before month names in date contexts per Hebrew grammar. Current test
+expectations in `LocaleCoverageData.cs` already require the `ב`-prefixed
+output. Using `calendar.months` override aligns with the downstream `MMMM`
+replacement architecture in `OrdinalDatePattern.cs`.
 
 ---
 
@@ -201,8 +211,12 @@ script). This is a fundamental script/dialect split:
 11. تشرینی دووەم (November)
 12. کانوونی یەکەم (December)
 
-**Source:** Windows CultureInfo for `ku` (Sorani/Central Kurdish). CLDR `ckb`
-locale data. Consistent with existing Humanizer ku locale content.
+**Source:** Windows .NET maps `ku` culture to `ckb` (Central Kurdish) per
+`CultureInfo("ku").Name` behavior on Windows 10/11. macOS/Linux ICU maps `ku`
+to `kmr` (Northern Kurdish / Kurmanji). CLDR `ckb` locale data (CLDR 43-45)
+provides the Sorani month names. All existing Humanizer `ku.yml` content was
+authored in Sorani Arabic script, confirming the project's de facto locale
+identity choice.
 
 ---
 
@@ -242,8 +256,10 @@ ICU override).
 11. Novemba
 12. Disemba
 
-**Source:** All 4 probe environments unanimous. CLDR `zu` stable across
-versions 42-45.
+**Source:** All 4 probe environments unanimous (CLDR 43-45 `zu` locale data,
+confirmed across ICU 74/75 on macOS/Linux and Windows NLS/ICU). The February
+spelling `Februwari` (not `Febhuwari`) is consistent across all CLDR versions
+checked.
 
 ---
 
@@ -270,12 +286,31 @@ agree on Tamil month names and they match the existing test expectations.
 11. நவம்பர் (November)
 12. டிசம்பர் (December)
 
-**Source:** All 4 probe environments unanimous. CLDR `ta` stable across
-versions 42-45.
+**Source:** All 4 probe environments unanimous (CLDR 43-45 `ta` locale data,
+confirmed across ICU 74/75 on macOS/Linux and Windows NLS/ICU). Tamil month
+names have not changed between CLDR 42 and CLDR 45.
 
 ---
 
 ## Category 2: Decimal Separator Overrides
+
+### Governing principle
+
+Humanizer's `ByteSize.ToString` and `MetricNumeralExtensions` always emit
+Western Arabic digits (0-9) with Latin unit symbols (KB, MB, etc.). The
+decimal separator override governs how these Western-digit outputs render.
+
+The governing rule is **locale identity**: the override should reflect what a
+native speaker of that locale expects to see as a decimal separator in
+Western-digit technical output. This means:
+
+- For locales whose identity is primarily Latin-script or where the authored
+  Humanizer content is in a Latin-digit context (`ar`, `fr-CH`), the separator
+  follows the locale's standard for Western-digit number formatting.
+- For locales whose identity is Arabic-script and whose existing Humanizer
+  contract already uses Arabic-script conventions (`ku` as Sorani), the
+  separator follows the Arabic-script convention even in Western-digit output,
+  because the locale's overall identity is Arabic-script.
 
 ### ar (Arabic)
 
@@ -293,21 +328,24 @@ Current test expectation: `1٫95 KB` (modern .NET), `1.95 KB` (net48).
 **Decision:** Use `.` (U+002E, ASCII period) as the decimal separator override.
 Rationale:
 
-1. Modern Arabic numerals (Western Arabic digits 0-9) are universally used with
-   the ASCII period as decimal separator in technical/computing contexts.
-2. The Arabic momayyiz `٫` (U+066B) is the decimal mark for Eastern Arabic
-   numerals (٠١٢٣...) but is semantically wrong when used with Western Arabic
-   digits (0, 1, 2...). Humanizer formats numbers using Western Arabic digits.
-3. Using `.` ensures consistency with how numbers actually appear in Arabic
-   technical writing (file sizes, byte counts).
-4. 2/4 probes already use `.`; the `٫` on Linux/Win net10 is an ICU artifact
-   that applies a traditional decimal mark to Western digit formatting.
+1. Humanizer's `ar.yml` locale does not override digit rendering -- `ByteSize`
+   output uses Western Arabic digits (0-9) with Latin symbols (KB, MB). In
+   Arabic technical/computing contexts, the standard decimal separator with
+   Western digits is `.` (period).
+2. The `٫` (U+066B, Arabic decimal separator) is conventional for Eastern
+   Arabic numerals (٠١٢٣...) but mixing it with Western digits produces
+   visually inconsistent output (`1٫95 KB`).
+3. 2/4 probes already use `.`; the `٫` on Linux/Win net10 is an ICU behavior
+   that applies the Arabic-script decimal mark regardless of which digit
+   system is actually in use.
+4. The `ar` locale in Humanizer does not use Arabic-script number conventions
+   elsewhere (unlike `ku` Sorani, which is Arabic-script throughout).
 
 **Override value:** `.` (U+002E)
 
-**Source:** Unicode Technical Standard #35 (CLDR), which distinguishes between
-the number system (`latn` = Western Arabic digits) and its associated decimal
-separator. For `latn` number system, the standard decimal separator is `.`.
+**Source:** Probe data showing 2/4 platform agreement on `.`; Humanizer's `ar`
+locale file uses no Arabic-script digit conventions; the override aligns with
+the existing `.NET Framework 4.8` behavior on Windows (which uses `.`).
 
 ---
 
@@ -329,21 +367,26 @@ locale identity.
 **Decision:** Use `٫` (U+066B, Arabic decimal separator) as the override.
 Rationale:
 
-1. The locale identity decision for `ku` is Sorani / Central Kurdish / Arabic
-   script. The momayyiz `٫` aligns with this Arabic-script identity.
-2. The existing modern-target test expectations already use `٫` (the
-   `KurdishKilobytes` constant resolves to `1٫95 KB` on modern .NET).
-3. Choosing `٫` normalizes all frameworks to the same Sorani-authored output
-   instead of following whichever platform maps `ku` differently.
-4. Unlike `ar` where Western digits are the primary formatting context, `ku`
-   Sorani text uses Arabic-script conventions throughout, making `٫` the
-   natural decimal separator for this locale.
+1. Per the governing principle above, locale identity determines the separator.
+   The `ku` locale identity decision is Sorani / Central Kurdish / Arabic
+   script. The entire `ku.yml` is authored in Arabic script (number words,
+   clock, compass, ordinals, phrases). The momayyiz `٫` is the natural decimal
+   separator for an Arabic-script locale.
+2. This differs from `ar` because `ar` does not use Arabic-script number
+   conventions in Humanizer (no digit substitution, Latin byte symbols), while
+   `ku` Sorani is Arabic-script throughout. The `ar` override is driven by
+   technical-formatting context; the `ku` override is driven by locale identity.
+3. The existing modern-target test expectations already use `٫` (the
+   `KurdishKilobytes` constant resolves to `1٫95 KB` on modern .NET via
+   Windows CultureInfo for `ku`).
+4. Choosing `٫` normalizes all frameworks to the same Sorani-authored output.
 
 **Override value:** `٫` (U+066B)
 
-**Source:** Windows CultureInfo for `ku` (Sorani/Central Kurdish); existing
-Humanizer modern-target test expectations; consistency with Sorani locale
-identity decision.
+**Source:** Windows `CultureInfo("ku").NumberFormat.NumberDecimalSeparator`
+returns `٫` on Windows 10/11 net10. Existing Humanizer modern-target test
+expectations in `LocaleFormatterExactTheoryData.cs` already encode `٫`.
+Consistent with the Sorani locale identity decision recorded above.
 
 ---
 
@@ -376,23 +419,32 @@ Rationale:
 
 **Override value:** `.` (U+002E)
 
-**Source:** Swiss Federal Statistical Office (BFS) number formatting standard;
-CLDR `fr-CH` locale (newer CLDR versions align with `.`); ISO 80000-1 allows
-both but Swiss national standard prefers `.`.
+**Source:** macOS probe confirms `.` for fr-CH (CLDR 44+ on ICU 75). The fn-3
+epic spec explicitly identifies `fr-CH` as a wrong-from-day-one case: "fr-CH
+decimal should be `.`". Swiss SN 011201 (typography standard) specifies `.` for
+decimal separator in all Swiss language regions.
 
 ---
 
 ## Summary of Actions for Downstream Tasks
 
+**Scope revision:** The original epic acceptance criteria and task .3 spec list
+`calendar.months` for 6 locales: `bn`, `fa`, `he`, `ku`, `zu-ZA`, `ta`. This
+audit found that `zu-ZA` and `ta` do not need runtime overrides because all 4
+probes agree on their month names. Task .3's spec and the epic acceptance
+criteria should be updated to reflect the reduced override scope (4 locales,
+not 6). `zu-ZA` still needs a test correction, and both `zu-ZA` and `ta` have
+their canonical month lists documented above as reference values.
+
 ### Task .3 (calendar surface + month overrides)
 
-Locales needing `calendar.months` override in YAML:
+Locales needing `calendar.months` override in YAML (4, revised from 6):
 - **bn**: Override with long-i forms (12 entries)
 - **fa**: Override with date-context Gregorian transliterations with ezafe (12 entries)
 - **he**: Override with `ב`-prefixed date-context month forms (12 entries)
 - **ku**: Override with Sorani/Arabic-script month names (12 entries)
 
-Locales NOT needing `calendar.months` override:
+Locales NOT needing `calendar.months` override (revised scope):
 - **zu-ZA**: No override needed (all probes agree). Fix test expected value
   `Febhuwari` -> `Februwari` (test was wrong from day one).
 - **ta**: No override needed (all probes agree, matches existing tests).
