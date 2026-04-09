@@ -90,7 +90,7 @@ sealed class OrdinalDatePattern(
     /// </summary>
     string SubstituteMonth(string formatString, int month, int day)
     {
-        // Find the unescaped MMMM.
+        // Find the first unescaped MMMM.
         var inQuote = false;
         var mmmmStart = -1;
         var mmmmLength = 0;
@@ -119,6 +119,7 @@ sealed class OrdinalDatePattern(
                 {
                     mmmmStart = start;
                     mmmmLength = i - start;
+                    break; // Use the first unescaped MMMM.
                 }
 
                 i--; // Loop will increment.
@@ -173,7 +174,9 @@ sealed class OrdinalDatePattern(
         while (backward ? i >= 0 : i < formatString.Length)
         {
             var c = formatString[i];
-            if (c == ' ')
+
+            // Skip whitespace and common date-pattern punctuation (e.g., "25. MMMM", "25, MMMM").
+            if (c is ' ' or '.' or ',' or '-' or '/')
             {
                 i += backward ? -1 : 1;
                 continue;
