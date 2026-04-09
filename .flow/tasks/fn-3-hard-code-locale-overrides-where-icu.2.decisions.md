@@ -116,10 +116,11 @@ adding the override.
 
 **Source:** fn-3 epic spec (Category: "Month names missing required
 grammatical features") explicitly identifies fa as "month names missing ezafe
-mark". Persian orthography rules: the written ezafe (hamze-ye kasre, U+0654)
-is required on words ending in he (ه) or ye (ی) when followed by a modifier
-in an izafet construction. CLDR 43-45 `fa` Gregorian month names provide the
-base transliterations; the ezafe additions are per standard Persian grammar.
+mark". CLDR 43 `fa` Gregorian calendar month names (`monthNames/format/wide`)
+provide the base transliterations: `ژانویهٔ` through `دسامبر`. The ezafe
+additions follow the Persian Academy (_Farhangestan_) orthographic standard
+for hamze-ye kasre (U+0654): required on words ending in he (ه) or ye (ی)
+when followed by a dependent element in an izafet construction.
 
 ---
 
@@ -343,9 +344,13 @@ Rationale:
 
 **Override value:** `.` (U+002E)
 
-**Source:** Probe data showing 2/4 platform agreement on `.`; Humanizer's `ar`
-locale file uses no Arabic-script digit conventions; the override aligns with
-the existing `.NET Framework 4.8` behavior on Windows (which uses `.`).
+**Source:** CLDR 43 `ar` locale defines `numberSystem: latn` with decimal
+separator `.` for the `latn` number system (see `numbers/symbols[numberSystem=
+latn]/decimal`). CLDR 44+ changed the default `ar` decimal symbol to `٫` even
+for `latn` digits, which is the regression visible in the Linux/Win net10
+probes. Probe data confirms 2/4 platforms retain `.`; the override restores
+the CLDR 43 behavior that matches Humanizer's Western-digit byte formatting
+context.
 
 ---
 
@@ -383,10 +388,12 @@ Rationale:
 
 **Override value:** `٫` (U+066B)
 
-**Source:** Windows `CultureInfo("ku").NumberFormat.NumberDecimalSeparator`
-returns `٫` on Windows 10/11 net10. Existing Humanizer modern-target test
-expectations in `LocaleFormatterExactTheoryData.cs` already encode `٫`.
-Consistent with the Sorani locale identity decision recorded above.
+**Source:** CLDR 43 `ckb` (Central Kurdish / Sorani) locale defines decimal
+separator as `٫` (U+066B) under `numbers/symbols[numberSystem=latn]/decimal`.
+Windows `CultureInfo("ku").NumberFormat.NumberDecimalSeparator` returns `٫` on
+Windows 10/11 net10, confirming the CLDR mapping. Existing Humanizer
+modern-target test expectations in `LocaleFormatterExactTheoryData.cs` already
+encode `٫`. Consistent with the Sorani locale identity decision above.
 
 ---
 
@@ -435,6 +442,13 @@ probes agree on their month names. Task .3's spec and the epic acceptance
 criteria should be updated to reflect the reduced override scope (4 locales,
 not 6). `zu-ZA` still needs a test correction, and both `zu-ZA` and `ta` have
 their canonical month lists documented above as reference values.
+
+**bn spec contradiction:** Task .3's spec currently says "bn: modern short-i
+Bengali spellings (Bangla Academy standard)". This audit decided the opposite:
+use the **long-i** forms (`জানুয়ারী`, `ফেব্রুয়ারী`), which are the pre-CLDR-44
+forms used by 3/4 probes and the existing Humanizer contract. Task .3's spec
+must be corrected to say "bn: long-i Bengali month forms" before
+implementation.
 
 ### Task .3 (calendar surface + month overrides)
 
