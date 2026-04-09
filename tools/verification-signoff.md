@@ -49,7 +49,7 @@ Raw CultureInfo month-name differences found: **13 data points**
 | bn | January/February spelling variant | macOS differs from Linux/Win10/Win48 |
 | ku | Kurmanji-Latin vs Sorani-Arabic script | macOS/Linux differ from Win10/Win48 |
 
-Humanizer now has YAML-authored `calendar.months` overrides for all 6 locales, producing consistent output regardless of platform CultureInfo variation.
+Humanizer now has YAML-authored `calendar.months` overrides for all 6 locales. These overrides produce consistent output on macOS net10.0 (verified via test suite). Cross-platform consistency (Linux, Windows net10, Windows net48) is deferred to CI verification, but the overrides are designed to supersede platform CultureInfo variation once verified.
 
 ### Decimal separator override locales
 

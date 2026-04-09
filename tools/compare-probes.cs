@@ -124,6 +124,22 @@ foreach (var (label, doc) in data)
                 matrix[key][label] = val;
             }
         }
+
+        // Raw month name arrays (added in fn-5.1; not present in all probe files)
+        foreach (var arrayField in new[] { "month_names_raw", "month_genitive_names_raw" })
+        {
+            if (localeEl.TryGetProperty(arrayField, out var arrayEl) && arrayEl.ValueKind == System.Text.Json.JsonValueKind.Array)
+            {
+                var items = arrayEl.EnumerateArray().ToArray();
+                for (int i = 0; i < items.Length; i++)
+                {
+                    var val = items[i].GetString() ?? "";
+                    var key = (locale, arrayField, i.ToString("D2"));
+                    if (!matrix.ContainsKey(key)) matrix[key] = new();
+                    matrix[key][label] = val;
+                }
+            }
+        }
     }
 }
 
