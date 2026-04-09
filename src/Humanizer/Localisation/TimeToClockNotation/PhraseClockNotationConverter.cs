@@ -169,7 +169,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         if (profile.HourSuffixSingular.Length > 0 || profile.HourSuffixPlural.Length > 0)
         {
             var suffix = ResolveSlavicSuffix(hourValue, profile.HourSuffixSingular, profile.HourSuffixPaucal, profile.HourSuffixPlural, profile.PaucalLowOnly);
-            return baseWord + " " + suffix;
+            return string.Concat(baseWord, " ", suffix);
         }
 
         return baseWord;
@@ -206,19 +206,62 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         // (e.g., "dvadsaťtri" instead of "dvadsať tri").
         if (profile.CompactMinuteWords)
         {
-            words = words.Replace(" ", "");
+            return RemoveSpaces(words);
         }
 
         // Arabic-style conjunction compaction: " و " → " و" (attaches conjunction to the
         // following word so "ثلاث و عشرون" becomes "ثلاث وعشرون").
         if (profile.CompactConjunction.Length > 0)
         {
-            words = words.Replace(
-                " " + profile.CompactConjunction + " ",
-                " " + profile.CompactConjunction);
+            return CompactConjunctionInline(words, profile.CompactConjunction);
         }
 
         return words;
+    }
+
+    /// <summary>
+    /// Removes all spaces from <paramref name="input"/> using a stack buffer.
+    /// </summary>
+    static string RemoveSpaces(string input)
+    {
+        Span<char> buf = stackalloc char[input.Length];
+        var pos = 0;
+        foreach (var c in input)
+        {
+            if (c != ' ')
+            {
+                buf[pos++] = c;
+            }
+        }
+
+        return new string(buf[..pos]);
+    }
+
+    /// <summary>
+    /// Replaces " {conj} " with " {conj}" (removes trailing space after conjunction)
+    /// using a stack buffer to avoid intermediate string allocations.
+    /// </summary>
+    static string CompactConjunctionInline(string input, string conjunction)
+    {
+        // Pattern: " {conj} " → " {conj}" (remove one trailing space).
+        var patternLen = conjunction.Length + 2; // " " + conj + " "
+        var idx = 0;
+        while (idx <= input.Length - patternLen)
+        {
+            if (input[idx] == ' '
+                && input.AsSpan(idx + 1, conjunction.Length).SequenceEqual(conjunction)
+                && input[idx + 1 + conjunction.Length] == ' ')
+            {
+                // Found the pattern — build result removing the trailing space.
+                return string.Concat(
+                    input.AsSpan(0, idx + 1 + conjunction.Length),
+                    input.AsSpan(idx + patternLen));
+            }
+
+            idx++;
+        }
+
+        return input;
     }
 
     /// <summary>
