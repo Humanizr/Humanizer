@@ -71,17 +71,9 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: tests/Humanizer.Tests/Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
-      displayName: Run Humanizer Tests
-      continueOnError: true
-
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: test
-        projects: tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj
-        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
-      displayName: Run Analyzer Tests
+        projects: tests/**/*.Tests.csproj
+        arguments: -c $(BuildConfiguration) -- --coverage --xunit-info
+      displayName: Run Tests
       continueOnError: true
 
     # Generate code coverage report
