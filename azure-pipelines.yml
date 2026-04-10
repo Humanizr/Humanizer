@@ -58,7 +58,7 @@ stages:
         command: pack
         packagesToPack: ./src/Humanizer/Humanizer.csproj
         packDirectory: $(Build.ArtifactStagingDirectory)/Packages
-        arguments: -c $(BuildConfiguration)
+        arguments: -c $(BuildConfiguration) /p:EmitCompilerGeneratedFiles=true
       displayName: Restore, Build, and Pack
 
     - pwsh: |
@@ -72,7 +72,8 @@ stages:
       inputs:
         command: test
         projects: tests/**/*.Tests.csproj
-        arguments: -c $(BuildConfiguration) -- --coverage --xunit-info
+        # ReportGenerator needs generated sources on disk to render source-generator output.
+        arguments: -c $(BuildConfiguration) /p:EmitCompilerGeneratedFiles=true -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Tests
       continueOnError: true
 
@@ -83,9 +84,11 @@ stages:
       condition: succeededOrFailed()
       inputs:
         reports: '$(Agent.TempDirectory)/**/*.cobertura.xml'
+        sourcedirs: $(Build.SourcesDirectory)
         targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/
         reporttypes: HtmlInline_AzurePipelines_Dark;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
+        customSettings: 'settings:rawMode=false'
         publishCodeCoverageResults: true
 
     - publish: $(Build.ArtifactStagingDirectory)/Packages
