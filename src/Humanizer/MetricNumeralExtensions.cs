@@ -394,11 +394,12 @@ public static class MetricNumeralExtensions
             return BuildMetricRepresentation(input, exponent, formats, decimals);
         }
 
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var representation = decimals.HasValue
             ? Math
                 .Round(input, decimals.Value)
-                .ToString()
-            : input.ToString();
+                .ToString(nfi)
+            : input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
@@ -428,8 +429,9 @@ public static class MetricNumeralExtensions
         var symbol = Math.Sign(exponent) == 1
             ? Symbols[0][exponent - 1]
             : Symbols[1][-exponent - 1];
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
-        return number.ToString("G15") + space + GetUnitText(symbol, formats);
+        return number.ToString("G15", nfi) + space + GetUnitText(symbol, formats);
     }
 
     /// <summary>
