@@ -31,3 +31,17 @@ Each item below cites the exact fn-3.5 acceptance text it maps to:
 - [ ] `docs/locale-yaml-reference.md` stale "residual locale leaves" language removed at line ~1650 — maps to fn-3.5 "fn-2 rollup" acceptance: "`docs/locale-yaml-reference.md` stale 'residual locale leaves' language removed at line ~1650"
 - [ ] `CLAUDE.md` says "62 locales" instead of "60+ locales" — maps to fn-3.5 "fn-2 rollup" acceptance: "`CLAUDE.md` says '62 locales' instead of '60+ locales'"
 - [ ] Grep for `residual` across docs confirms only allowlisted conceptual mentions remain — maps to fn-3.5 "Quality" acceptance: "Grep for `residual` across docs confirms only the allowlisted conceptual mentions remain"
+
+## Proxy-close mapping (completed by fn-5)
+
+Each fn-2 acceptance item below is mapped to the satisfying artifact and task.
+
+| # | fn-2 Acceptance Item | Satisfying Task | Artifact Citation |
+|---|---------------------|-----------------|-------------------|
+| 1 | `docs/localization.md` Supported Languages list enumerates all 62 shipped locales with correct codes | fn-3.5 (fn-3-hard-code-locale-overrides-where-icu.5) | `docs/localization.md` lines 11-72 (§ Supported Languages); commit a2e86e41 |
+| 2 | `docs/localization.md` stale residual-leaves claims removed from lines ~133, ~141, ~155-157 | fn-3.5 (fn-3-hard-code-locale-overrides-where-icu.5) | `docs/localization.md:155` now states "no residual leaves remain for any surface"; commit a2e86e41 |
+| 3 | `docs/locale-yaml-reference.md` stale "residual locale leaves" language removed at line ~1650 | fn-3.5 (fn-3-hard-code-locale-overrides-where-icu.5) | `docs/locale-yaml-reference.md:355,756,834` all state "no residual handwritten clock leaves"; original stale "small number of accepted residual locale leaves" line removed; commit a2e86e41 |
+| 4 | `CLAUDE.md` says "62 locales" instead of "60+ locales" | fn-3.5 (fn-3-hard-code-locale-overrides-where-icu.5) | `CLAUDE.md:3` reads "across 62 locales"; commit a2e86e41 |
+| 5 | Grep for `residual` across docs confirms only allowlisted conceptual mentions remain | fn-3.5 (fn-3-hard-code-locale-overrides-where-icu.5) + fn-5.5 scan 2b | All `residual` matches in `docs/` are conceptual descriptions of what residual leaves are or explicit "none remain" statements; verified by fn-5.5 scan 2b |
+
+All five acceptance items are satisfied. fn-2 is eligible for proxy-close after fn-5.5 scans pass.

@@ -36,17 +36,8 @@ Fix all stale documentation that references residual locale leaves, has incomple
 - [ ] `CLAUDE.md` says "62 locales" instead of "60+ locales"
 - [ ] Grep for `residual` across docs confirms only allowlisted conceptual mentions remain (adding-a-locale.md:281-292, locale-yaml-how-to.md:5/39/371, locale-yaml-reference.md:353/678/756)
 ## Done summary
-Blocked:
-Superseded by fn-3-hard-code-locale-overrides-where-icu.5 which folds in all of this task's documentation fixes (Supported Languages list rebuild, stale residual-leaves cleanup, CLAUDE.md locale count) alongside the new `calendar:` and `number.formatting:` schema documentation.
-
-### Proxy-close requirements
-This task should be closed as done-by-proxy when fn-3.5 completes. Before closing, verify these fn-3.5 acceptance items have landed (cited by exact text, not ordinal position):
-- fn-3.5 "fn-2 rollup": `docs/localization.md` Supported Languages list enumerates all 62 shipped locales with correct codes
-- fn-3.5 "fn-2 rollup": `docs/localization.md` stale residual-leaves claims removed from lines ~133, ~141, ~155-157
-- fn-3.5 "fn-2 rollup": `docs/locale-yaml-reference.md` stale "residual locale leaves" language removed at line ~1650
-- fn-3.5 "fn-2 rollup": `CLAUDE.md` says "62 locales" instead of "60+ locales"
-- fn-3.5 "Quality": Grep for `residual` confirms only allowlisted conceptual mentions remain
+Closed as done-by-proxy. All 5 fn-2 acceptance items satisfied by fn-3.5 (commit a2e86e41) and verified by fn-5.5 scan battery. See proxy-close mapping in .flow/specs/fn-2-fix-stale-locale-documentation-after.md for per-item artifact citations.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: a2e86e41
+- Tests: grep verification of residual mentions, fn-5.5 scan 2b (residual conceptual-language scan)
 - PRs:

@@ -12,7 +12,7 @@
   "plan_review_status": "ship",
   "plan_reviewed_at": "2026-04-09T08:28:49.106735Z",
   "spec_path": ".flow/specs/fn-2-fix-stale-locale-documentation-after.md",
-  "status": "open",
+  "status": "done",
   "title": "Fix stale locale documentation after parity completion",
-  "updated_at": "2026-04-09T08:28:49.106842Z"
+  "updated_at": "2026-04-10T01:07:53.517018Z"
 }

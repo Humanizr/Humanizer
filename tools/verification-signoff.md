@@ -242,3 +242,76 @@ The test suite is the authoritative verification that Humanizer produces consist
 | Linux net8.0 | CI pipeline | Same command with `--framework net8.0` | 0 failures | Next CI run |
 | Windows net10.0 | CI pipeline | Same command with `--framework net10.0` | 0 failures | Next CI run |
 | Windows net8.0 | CI pipeline | Same command with `--framework net8.0` | 0 failures | Next CI run |
+
+---
+
+## Final sign-off
+
+**Date:** 2026-04-10
+**Epic:** fn-5-locale-parity-sign-off-verify-code (Locale parity sign-off: verify code matches claims and docs match current state)
+**Branch:** codex/locale-translation-completion
+**Sign-off commit:** c1bd879a (pre-sign-off baseline; sign-off commit recorded in fn-5.5 task evidence)
+
+### FinalOverrideSet
+
+`{bn, fa, he, ku, ta, zu-ZA}` -- all 6 locales retained. 3 of 4 platform targets (Linux net10, Windows net10, Windows net48) were unreachable from the macOS dev environment; the conservative deterministic rule was applied (locale stays in set when any platform is unreachable).
+
+### Verified checklist
+
+Each acceptance criterion from the fn-5 epic spec, with the satisfying task and artifact.
+
+| # | Criterion | Task | Verified |
+|---|-----------|------|----------|
+| 1 | `FinalOverrideSet` determined per-locale for ta and zu-ZA, producing concrete 6-member set | fn-5.1 | PASS -- done-summary states `FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA}` |
+| 2 | Decision grounded in full 12-month raw `MonthNames` evidence | fn-5.1 | PASS -- both probes extended with `month_names_raw`; macOS probe re-run |
+| 3 | Preferred-path two-probe lockstep: both probe implementations extended | fn-5.1 | PASS -- `tools/locale-probe.cs` and `tools/locale-probe-net48/Program.cs` both emit `month_names_raw` and `month_genitive_names_raw` |
+| 4 | Path chosen, rationale, unreachable platforms documented | fn-5.1 | PASS -- preferred path; Linux/Windows net10/net48 unreachable |
+| 5 | Each locale in FinalOverrideSet has `calendar:` block in YAML | fn-5.1 | PASS -- `grep -l "^  calendar:" src/Humanizer/Locales/*.yml` returns bn, fa, he, ku, ta, zu-ZA |
+| 6 | `tools/compare-probes.cs:22` matches FinalOverrideSet | fn-5.1 | PASS -- `["bn", "fa", "he", "ku", "ta", "zu-ZA"]` |
+| 7 | `tools/verification-signoff.md` stale claims corrected | fn-5.1 | PASS -- lines 43, 52 match FinalOverrideSet |
+| 8 | Probe-shape reconciliation in verification-signoff.md | fn-5.1 | PASS -- narrative updated for `month_names_raw` / `month_genitive_names_raw` fields |
+| 9 | fn-3 spec full-file audit | fn-5.6 | PASS -- all six-locale references consistent with FinalOverrideSet |
+| 10 | fn-3.3 task full-file audit | fn-5.6 | PASS -- all references consistent; fn-5.6 audit annotation added |
+| 11 | `CLAUDE.md` no longer says "register in formatter/converter registries" | fn-5.2 | PASS -- replaced with source-generator explanation |
+| 12 | `AGENTS.md` same stale instruction removed | fn-5.2 | PASS |
+| 13 | `CLAUDE.md` net48 reframed to `Enum.GetValues<T>()` blocker | fn-5.2 | PASS |
+| 14 | `AGENTS.md` net48 reframed identically | fn-5.2 | PASS |
+| 15 | `grep -rn "avoid net48 on" CLAUDE.md AGENTS.md` returns zero | fn-5.5 scan 2c | PASS -- zero matches |
+| 16 | Both files mention `calendar:` / `number.formatting:` escape hatch | fn-5.2 | PASS |
+| 17 | `release_notes.md` vNext entries for phrase-clock, calendar, number.formatting, deleted converter | fn-5.3 | PASS -- lines 58-61 |
+| 18 | `readme.md` enumerates 8 canonical surfaces | fn-5.3 | PASS |
+| 19 | `ARCHITECTURE.md` generator table mentions `LocaleNumberFormattingOverrides.g.cs` | fn-5.3 | PASS |
+| 20 | `ARCHITECTURE.md` prose lists all 8 canonical surfaces | fn-5.3 | PASS |
+| 21 | `.agents/skills/add-locale/SKILL.md` surface inventory updated | fn-5.4 | PASS |
+| 22 | `.agents/skills/add-locale/SKILL.md` required-proof-subrows updated | fn-5.4 | PASS |
+| 23 | `.agents/skills/add-locale/references/parity-checklist.md` updated with corrected paths | fn-5.4 | PASS |
+| 24 | `tools/verification-signoff.md:64` ku decimal-separator shows U+066B | fn-5.1 | PASS |
+| 25 | fn-2 proxy-close executed with artifact mapping | fn-5.5 | PASS -- mapping in `.flow/specs/fn-2-fix-stale-locale-documentation-after.md`; fn-2 closed via flowctl |
+| 26 | Scan battery 2a-2i all pass | fn-5.5 | PASS -- see scan evidence below |
+| 27 | Deleted-converter residual scan scope-based | fn-5.5 scan 2a | PASS -- matches at HumanizerSourceGeneratorTests.cs:68-70 (allowlisted) + release_notes.md:58 (removal documentation) |
+| 28 | `dotnet format --verify-no-changes` | fn-5.5 scan 2i | PASS -- 0 of 1596 files formatted |
+| 29 | `dotnet test` net10.0 | fn-5.5 scan 2i | PASS -- 38,908 tests, 0 failures |
+| 30 | `dotnet test` net8.0 | fn-5.5 scan 2i | DEFERRED -- .NET 8 SDK not installed locally; see section 3 above |
+| 31 | net48 deferred to fn-4 | documented | PASS -- not run; tracked as fn-4-fix-net48-test-suite-blocker |
+
+### Sub-tasks (fn-5.1 through fn-5.6)
+
+| Task | Title | Status |
+|------|-------|--------|
+| fn-5.1 | Reconcile calendar.months discrepancy for ta and zu-ZA; fix ku decimal-separator typo | done |
+| fn-5.2 | Fix stale agent-facing doc drift in CLAUDE.md and AGENTS.md | done |
+| fn-5.3 | Update release notes vNext, readme.md, and ARCHITECTURE.md | done |
+| fn-5.4 | Refresh repo-local skill .agents/skills/add-locale for 8 canonical surfaces | done |
+| fn-5.5 | Close fn-2 proxy, run residual scans, and append final sign-off report | done |
+| fn-5.6 | Reconcile fn-3 historical spec/task drift against FinalOverrideSet | done |
+
+### Out of scope
+
+- **fn-4 net48 `Enum.GetValues<T>()` blocker**: The net48 test suite cannot run on any platform due to use of `Enum.GetValues<GrammaticalGender>()` (a .NET 5+ API) in `LocaleTheoryMatrixCompletenessTests.cs:439`. Tracked as epic `fn-4-fix-net48-test-suite-blocker`. The net48 probe output is committed and overrides are framework-agnostic (build-time generated).
+
+### Outstanding deferrals (follow-up candidates, not gates)
+
+- **R15 -- Source-generator diagnostic for claim-parity**: A build-time diagnostic that enforces "claimed overrides in docs/tools match YAML reality" would catch future drift automatically. Deferred as a new build-time feature with its own test matrix.
+- **R16 -- CI-lint for CLAUDE.md command blocks**: A lint that verifies executable command blocks in CLAUDE.md still work. Deferred as docs-hygiene follow-up.
+- **R18 -- Drift-detection test for compare-probes.cs**: A test that catches future divergence between `tools/compare-probes.cs` claim arrays and YAML reality. Deferred; fold into R15 follow-up epic.
+- **net8.0 test run**: .NET 8 SDK not installed locally (only 10.0.2 available). Overrides are framework-agnostic. Deferred to CI pipeline.
