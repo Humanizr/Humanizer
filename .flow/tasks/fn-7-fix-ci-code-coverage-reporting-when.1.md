@@ -251,9 +251,8 @@ The existing `origin/codex/fix-coverage-config` branch addressed only the output
 - [ ] `.github/workflows/.devskim` has `".flow/**"` in the `Globs` exclusion array
 - [ ] Pipeline YAML is syntactically valid
 ## Done summary
-TBD
-
+Fixed azure-pipelines.yml to always generate and publish code coverage reports by adding the -- separator for MTP args, --results-directory for coverage output path, continueOnError/condition for test-failure resilience, and a fail-gate step. Copied testconfig.json to Analyzers.Tests and SourceGenerators.Tests. Renamed and cleaned .devskim config to .devskim.json with valid JSON and .flow/** exclusion.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 18e94244, 9146366b, 3da2a38d
+- Tests: python3 -c 'import json; json.load(open(".github/workflows/.devskim.json"))' (valid JSON verified)
 - PRs:

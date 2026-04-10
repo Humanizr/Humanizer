@@ -72,3 +72,6 @@ When wiring culture-aware formatting overrides to int overloads, also audit stri
 
 ## 2026-04-10 manual [pitfall]
 When documenting parse vs format path boundaries, verify each consumer individually -- a blanket 'overrides are never applied to parse paths' is wrong if any consumer uses overrides in both directions (e.g., string Ordinalize uses GetFormattingNumberFormat for parsing too)
+
+## 2026-04-10 manual [pitfall]
+When editing JSON config files, never add or preserve // comments -- standard JSON does not support comments and parsers will reject the file silently
