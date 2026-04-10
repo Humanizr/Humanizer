@@ -195,7 +195,7 @@ public struct ByteSize(double byteSize) :
     ///  than or equal to one.
     /// </summary>
     public readonly override string ToString() =>
-        ToString(NumberFormatInfo.CurrentInfo);
+        ToString(CultureInfo.CurrentCulture);
 
     public readonly string ToString(IFormatProvider? provider)
     {
@@ -213,7 +213,7 @@ public struct ByteSize(double byteSize) :
     }
 
     public readonly string ToString(string? format) =>
-        ToString(format, NumberFormatInfo.CurrentInfo);
+        ToString(format, CultureInfo.CurrentCulture);
 
     public readonly string ToString(string? format, IFormatProvider? provider) =>
         ToString(format, provider, toSymbol: true);

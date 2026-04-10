@@ -60,3 +60,6 @@ When flowctl updates task status via start/block/complete, it writes to .git/flo
 
 ## 2026-04-10 manual [pitfall]
 When a sign-off or gate criterion cannot be met as written, fix the underlying work or block the gate -- do not weaken the criterion, do not edit the spec to add escape clauses ("OR deferred", "if SDK unavailable", "if reachable"), and do not soften the summary language to obscure the gap. Specs may only be tightened by sign-off work, never loosened.
+
+## 2026-04-10 manual [pitfall]
+When extending a formatting override to new call sites, audit ALL overloads (int, long, double, etc.) of the same method family -- type-specific overloads often bypass changes made only to one variant

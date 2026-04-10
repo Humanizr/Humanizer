@@ -70,9 +70,8 @@ The resolved model (`ResolvedLocaleDefinition` in `LocaleYamlCatalog.cs:949`) ma
 - [ ] Source generator snapshot tests updated for new dictionary/method shapes
 - [ ] Build produces zero warnings
 ## Done summary
-TBD
-
+Extended the source generator to emit NegativeSignOverrides and GroupSeparatorOverrides dictionaries alongside DecimalSeparatorOverrides, added GetFormattingNumberFormat(CultureInfo) method with fast path for formatting, updated ByteSize.ToString and all MetricNumeralExtensions formatting paths to use it, while preserving existing parse-path API unchanged.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: ba28e05b, bddba389, 375e51a0
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj, dotnet build src/Humanizer/Humanizer.csproj -c Release
 - PRs:
