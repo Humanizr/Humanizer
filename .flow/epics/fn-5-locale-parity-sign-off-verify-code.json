@@ -1,7 +1,7 @@
 {
   "branch_name": "fn-5-locale-parity-sign-off-verify-code",
-  "completion_review_status": "unknown",
-  "completion_reviewed_at": null,
+  "completion_review_status": "ship",
+  "completion_reviewed_at": "2026-04-10T05:34:14.937218Z",
   "created_at": "2026-04-09T18:18:33.201666Z",
   "default_impl": null,
   "default_review": null,
@@ -15,7 +15,7 @@
   "plan_review_status": "ship",
   "plan_reviewed_at": "2026-04-09T21:58:24.954871Z",
   "spec_path": ".flow/specs/fn-5-locale-parity-sign-off-verify-code.md",
-  "status": "open",
+  "status": "done",
   "title": "Locale parity sign-off: verify code matches claims and docs match current state",
-  "updated_at": "2026-04-09T21:58:24.955286Z"
+  "updated_at": "2026-04-10T05:37:49.854171Z"
 }
