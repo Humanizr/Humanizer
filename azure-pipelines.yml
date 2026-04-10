@@ -72,7 +72,7 @@ stages:
       inputs:
         command: test
         projects: tests/Humanizer.Tests/Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) --results-directory $(Agent.TempDirectory) -- --coverage --coverage-output-format cobertura --xunit-info
+        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Humanizer Tests
       continueOnError: true
 
@@ -80,7 +80,7 @@ stages:
       inputs:
         command: test
         projects: tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj
-        arguments: -c $(BuildConfiguration) --results-directory $(Agent.TempDirectory) -- --coverage --coverage-output-format cobertura --xunit-info
+        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Analyzer Tests
       continueOnError: true
 
