@@ -55,9 +55,8 @@ Update project documentation to reflect the newly implemented `negativeSign` and
 - [ ] adding-a-locale.md checklist and surface table updated
 - [ ] No broken markdown links or formatting issues
 ## Done summary
-TBD
-
+Documented negativeSign and groupSeparator as implemented number.formatting fields across locale-yaml-reference.md, locale-yaml-how-to.md, adding-a-locale.md, localization.md, and ARCHITECTURE.md. Removed both from "future fields" list, added complete field documentation matching decimalSeparator style, added override recipes, and updated contributor checklist and surface responsibilities table.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: cc750b6f, 17c72d22, edae073e, 2c7b3f69
+- Tests: documentation-only: no test commands required
 - PRs:
