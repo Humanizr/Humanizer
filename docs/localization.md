@@ -198,9 +198,9 @@ dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validati
 
 ## Override ICU Where Needed
 
-Modern .NET uses ICU for globalization data on all platforms, but ICU data drifts between versions and can produce different output for the same locale across macOS, Linux, and Windows. When Humanizer delegates to `CultureInfo` for month names or decimal separators, this platform variance leaks into humanized output.
+Modern .NET uses ICU for globalization data on all platforms, but ICU data drifts between versions and can produce different output for the same locale across macOS, Linux, and Windows. When Humanizer delegates to `CultureInfo` for month names, decimal separators, negative signs, or group separators, this platform variance leaks into humanized output.
 
-The `calendar:` surface and `number.formatting:` sub-block let locale authors hard-code the correct values in YAML so that output is byte-identical regardless of the host's ICU version. When present, these overrides take priority over `CultureInfo.DateTimeFormat` and `NumberFormatInfo` in the specific Humanizer call sites that consume them (`DateToOrdinalWords`, `ByteSize.Humanize`, `MetricNumeralExtensions`). Caller-supplied custom format providers are never overridden.
+The `calendar:` surface and `number.formatting:` sub-block let locale authors hard-code the correct values in YAML so that output is byte-identical regardless of the host's ICU version. When present, these overrides take priority over `CultureInfo.DateTimeFormat` and `NumberFormatInfo` in the specific Humanizer call sites that consume them (`DateToOrdinalWords`, `OrdinalizeExtensions`, `ByteSize.ToString`, `MetricNumeralExtensions`). The `ByteSize.TryParse` path intentionally uses only the decimal separator override and is not affected by `negativeSign` or `groupSeparator` overrides. Caller-supplied custom format providers are never overridden.
 
 Use these overrides sparingly. Author them only when a cross-platform probe shows disagreement or when ICU data is demonstrably wrong for your locale. See [Locale YAML Reference](locale-yaml-reference.md) for field details and [Locale YAML How-To](locale-yaml-how-to.md) for a step-by-step recipe.
 
