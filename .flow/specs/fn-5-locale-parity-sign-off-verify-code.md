@@ -30,12 +30,12 @@ A thorough pre-plan audit (context-scout + docs-gap-scout + flow-gap-analyst) an
 - Refresh repo-local skill (`.agents/skills/add-locale/SKILL.md` + `references/parity-checklist.md`) to match the 8-canonical + nested-members model, with corrected generator-input paths under `Generators/`. **Executed in fn-5.4.**
 - Verify fn-2's proxy-close checklist (every fn-2 acceptance item maps to a satisfying artifact in fn-3.5 or this epic), gate on residual/regression scans passing, then close fn-2. **Executed in fn-5.5.**
 - Append final sign-off section to `tools/verification-signoff.md` recording what was verified, outstanding items (fn-4 net48 blocker), and date. **Executed in fn-5.5; reconciled in fn-5.9 to remove all "DEFERRED TO CI" framing for net8.0 and to drop the fn-4 "blocker" prose after fn-5.7 fixed it.**
-- Fix the net48 test build break (`Enum.GetValues<T>()` not resolved in test project) by adding `Polyfill` PackageReference to `tests/Humanizer.Tests/Humanizer.Tests.csproj`; subsumes `fn-4-fix-net48-test-suite-blocker`. **Executed in fn-5.7.**
+- Fix the net48 test build break (`Enum.GetValues<T>()` not resolved in test project) by adding `#if NET5_0_OR_GREATER` guard at the call site (Polyfill PackageReference was attempted first but caused type conflicts); subsumes `fn-4-fix-net48-test-suite-blocker`. **Executed in fn-5.7.**
 - Re-run the net8.0 test suite locally (the .NET 8 SDK 8.0.419 is installed; the original fn-5.5 close falsely deferred this); revert the spec deferral language introduced by `commit d40bbbe6`; re-record fn-5.5 task evidence with the actual run output. **Executed in fn-5.8.**
 - Reconcile `tools/verification-signoff.md` and `.flow/memory/pitfalls.md` to remove all "DEFERRED TO CI" / "deferred to follow-up" / "external blocker" framing that the prior sign-off pass embedded into the project's memory; close `fn-4-fix-net48-test-suite-blocker` as superseded. **Executed in fn-5.9.**
 
 **Out of scope:**
-- ~~Fixing the fn-4 net48 `Enum.GetValues<T>()` blocker — tracked separately, this epic only documents it as a known open item~~ **(Updated 2026-04-09: brought into scope as fn-5.7. The "blocker" was misclassified — it was a one-line PackageReference fix, not an external constraint. fn-4 is closed superseded in fn-5.9.)**
+- ~~Fixing the fn-4 net48 `Enum.GetValues<T>()` blocker — tracked separately, this epic only documents it as a known open item~~ **(Updated 2026-04-09: brought into scope as fn-5.7. The "blocker" was misclassified — fixed with `#if NET5_0_OR_GREATER` guard at the call site. fn-4 is closed superseded in fn-5.9.)**
 - Source-generator diagnostic that enforces "claimed overrides match YAML" — valuable follow-up, but a new build-time feature with its own test matrix; file as a follow-up epic after sign-off
 - CI-lint for executable CLAUDE.md command blocks — docs-hygiene follow-up, not sign-off work
 - Any changes to the four primary user docs (already accurate)

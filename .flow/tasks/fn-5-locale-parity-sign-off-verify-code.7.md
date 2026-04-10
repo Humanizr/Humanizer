@@ -1,4 +1,4 @@
-# fn-5-locale-parity-sign-off-verify-code.7 Fix net48 test build break (Polyfill ref) and remove stale fn-4 framing
+# fn-5-locale-parity-sign-off-verify-code.7 Fix net48 test build break (#if guard) and remove stale fn-4 framing
 
 ## Description
 Fix the net48 build break in `tests/Humanizer.Tests/Humanizer.Tests.csproj` so the test project compiles for all three target frameworks (`net10.0`, `net8.0`, `net48`). The library project (`src/Humanizer/Humanizer.csproj`) already references `Polyfill` (9.18.0) with `PrivateAssets="all"`, which provides `Enum.GetValues<TEnum>()` as a true `extension(Enum)` static method on .NET Framework / netstandard2.0. The test project does not currently reference Polyfill, so the one usage at `tests/Humanizer.Tests/Localisation/LocaleTheoryMatrixCompletenessTests.cs:379` (`Enum.GetValues<GrammaticalGender>()`) fails to compile under `TargetFramework=net48` with `error CS0308: The non-generic method 'Enum.GetValues(Type)' cannot be used with type arguments`.
@@ -8,10 +8,10 @@ This task subsumes the work of `fn-4-fix-net48-test-suite-blocker`. fn-4 will be
 **Size:** S→M (verification spans 3 TFMs).
 
 **Files:**
-- `tests/Humanizer.Tests/Humanizer.Tests.csproj` (add Polyfill PackageReference)
+- `tests/Humanizer.Tests/Localisation/LocaleTheoryMatrixCompletenessTests.cs:379` (add `#if NET5_0_OR_GREATER` guard around `Enum.GetValues<GrammaticalGender>()`)
 - `CLAUDE.md` line 17 (drop "blocked on all platforms by Enum.GetValues<T>() — see fn-4" framing)
 - `AGENTS.md` line 29 (same)
-- `Directory.Packages.props` (no change expected — Polyfill 9.18.0 is already a centrally-managed version)
+- ~~`tests/Humanizer.Tests/Humanizer.Tests.csproj`~~ (Polyfill PackageReference was attempted but caused type conflicts; no csproj change needed)
 
 ## Approach
 
@@ -63,14 +63,14 @@ The fallback is the same shape as the existing `#if NET5_0_OR_GREATER` guard alr
 
 ## Acceptance
 
-- [ ] `tests/Humanizer.Tests/Humanizer.Tests.csproj` contains `<PackageReference Include="Polyfill" PrivateAssets="all" />` (Polyfill ref added with no Condition; central version 9.18.0 picked up from `Directory.Packages.props`)
+- [ ] `LocaleTheoryMatrixCompletenessTests.cs:379` uses `#if NET5_0_OR_GREATER` guard around `Enum.GetValues<GrammaticalGender>()` with non-generic fallback for net48 (Polyfill PackageReference was attempted first but caused CS0436/CS0121 type conflicts)
 - [ ] `dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48` exits 0 with 0 errors and 0 warnings
 - [ ] `dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net8.0` exits 0 with 0 errors and 0 warnings (net8.0 regression check)
 - [ ] `dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net10.0` exits 0 with 0 errors and 0 warnings (net10.0 regression check)
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passes (full suite, no regressions)
 - [ ] `dotnet build Humanizer.slnx -c Release` exits 0 with 0 errors and 0 warnings (whole-solution sanity)
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic` passes
-- [ ] `LocaleTheoryMatrixCompletenessTests.cs:379` is unchanged from current source (preferred path verified — Polyfill resolves the symbol; the source compiles as-is for all 3 TFMs). If the fallback `#if` path was taken instead, document the reason in task evidence.
+- [ ] `LocaleTheoryMatrixCompletenessTests.cs:379` uses `#if NET5_0_OR_GREATER` guard (fallback path taken — Polyfill PackageReference caused type conflicts documented in task evidence).
 - [ ] `CLAUDE.md` has no remaining occurrences of `blocked on all platforms by Enum.GetValues<T>()` or `see fn-4`. The replacement line accurately states all 3 TFMs build everywhere; net48 test execution requires a Windows host.
 - [ ] `AGENTS.md` has no remaining occurrences of `currently blocked on all platforms by` or `tracked as fn-4` or `do not invoke it`. The replacement prose accurately states the same.
 - [ ] `grep -rn "see fn-4\|tracked as fn-4\|blocked.*Enum\.GetValues" CLAUDE.md AGENTS.md` returns zero matches
