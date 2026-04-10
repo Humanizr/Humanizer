@@ -457,7 +457,7 @@ This keeps authoring pressure on the generated/shared surfaces first and makes i
 
 ### Override Platform-Supplied Globalization Data
 
-Use this recipe when a cross-platform probe shows that `CultureInfo` returns different month names, decimal separators, negative signs, or group separators on different platforms for your locale.
+Use this recipe when a cross-platform or cross-target-framework probe shows that `CultureInfo` returns different month names, decimal separators, negative signs, or group separators on different platforms or target frameworks (e.g., net48/NLS vs net8+/ICU on Windows) for your locale.
 
 **Month-name override** (minimum YAML):
 
