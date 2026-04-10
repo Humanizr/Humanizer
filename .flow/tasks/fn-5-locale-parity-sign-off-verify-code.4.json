@@ -8,7 +8,7 @@
   "id": "fn-5-locale-parity-sign-off-verify-code.4",
   "priority": null,
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.4.md",
-  "status": "todo",
+  "status": "done",
   "title": "Refresh repo-local skill .agents/skills/add-locale for 8 canonical surfaces",
   "updated_at": "2026-04-09T20:32:41.291935Z"
 }

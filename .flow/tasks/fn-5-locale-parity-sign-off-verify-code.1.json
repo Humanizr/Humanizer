@@ -8,7 +8,7 @@
   "id": "fn-5-locale-parity-sign-off-verify-code.1",
   "priority": null,
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.1.md",
-  "status": "todo",
+  "status": "done",
   "title": "Reconcile calendar.months discrepancy for ta and zu-ZA; fix ku decimal-separator typo in signoff tracker",
   "updated_at": "2026-04-09T21:34:11.832494Z"
 }

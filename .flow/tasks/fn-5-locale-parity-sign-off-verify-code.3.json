@@ -10,7 +10,7 @@
   "id": "fn-5-locale-parity-sign-off-verify-code.3",
   "priority": null,
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.3.md",
-  "status": "todo",
+  "status": "done",
   "title": "Update release notes vNext, readme.md Locale Data section, and ARCHITECTURE.md generator table",
   "updated_at": "2026-04-09T21:26:18.797406Z"
 }

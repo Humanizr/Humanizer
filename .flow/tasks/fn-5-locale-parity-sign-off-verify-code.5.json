@@ -14,7 +14,7 @@
   "id": "fn-5-locale-parity-sign-off-verify-code.5",
   "priority": null,
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md",
-  "status": "todo",
+  "status": "done",
   "title": "Close fn-2 proxy, run residual scans, and append final sign-off report",
   "updated_at": "2026-04-09T21:34:12.063293Z"
 }

@@ -8,7 +8,7 @@
   "id": "fn-5-locale-parity-sign-off-verify-code.2",
   "priority": null,
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.2.md",
-  "status": "todo",
+  "status": "done",
   "title": "Fix stale agent-facing doc drift in CLAUDE.md and AGENTS.md",
   "updated_at": "2026-04-09T20:32:39.298510Z"
 }
