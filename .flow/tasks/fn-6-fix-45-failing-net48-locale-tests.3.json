@@ -12,5 +12,5 @@
   "spec_path": ".flow/tasks/fn-6-fix-45-failing-net48-locale-tests.3.md",
   "status": "todo",
   "title": "Add YAML overrides + wire ordinalizer to use override NFI (42 tests)",
-  "updated_at": "2026-04-10T07:06:00.978603Z"
+  "updated_at": "2026-04-10T08:18:36.398655Z"
 }

@@ -480,6 +480,21 @@ surfaces:
       pattern: "{day} MMMM yyyy'.'"
       dayMode: 'DotSuffix'
 
+  calendar:
+    months:
+      - 'јануар'
+      - 'фебруар'
+      - 'март'
+      - 'април'
+      - 'мај'
+      - 'јун'
+      - 'јул'
+      - 'август'
+      - 'септембар'
+      - 'октобар'
+      - 'новембар'
+      - 'децембар'
+
   clock:
     engine: 'phrase-clock'
     hourMode: 'h12'

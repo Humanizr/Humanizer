@@ -1,26 +1,26 @@
 # fn-6-fix-45-failing-net48-locale-tests.3 Add YAML overrides + wire ordinalizer to use override NFI (42 tests)
 
 ## Description
-Add YAML `number.formatting` overrides to 9 locale files and wire the ordinalizer to use the override `NumberFormatInfo` so that all 42 previously-failing tests pass on net48.
+Add YAML `number.formatting` overrides to 9 locale files and wire the ordinalizer to use the formatting-specific `NumberFormatInfo` API so that all 42 previously-failing tests pass on net48.
 
 **Size:** M
 **Files:**
 - `src/Humanizer/Locales/fi.yml` — negativeSign
 - `src/Humanizer/Locales/hr.yml` — negativeSign
-- `src/Humanizer/Locales/nb.yml` — negativeSign
-- `src/Humanizer/Locales/nn.yml` — negativeSign (only if inheritance from nb doesn't propagate; check first)
+- `src/Humanizer/Locales/nb.yml` — negativeSign (nn inherits from nb via variantOf)
 - `src/Humanizer/Locales/sv.yml` — negativeSign
 - `src/Humanizer/Locales/sl.yml` — negativeSign
 - `src/Humanizer/Locales/lt.yml` — negativeSign
 - `src/Humanizer/Locales/fa.yml` — negativeSign
 - `src/Humanizer/Locales/lb.yml` — groupSeparator
-- `src/Humanizer/OrdinalizeExtensions.cs` — wire to use override NFI
+- `src/Humanizer/OrdinalizeExtensions.cs` — wire to use `GetFormattingNumberFormat`
+- `src/Humanizer/Localisation/Ordinalizers/WordFormTemplateOrdinalizer.cs` — verify or wire override NFI
 
 ## Approach
 
 ### YAML overrides
 
-Add `negativeSign: '−'` (literal U+2212 character) to the `number.formatting` section of 8 locale files (fi, hr, nb, sv, sl, lt, fa, and potentially nn):
+Add `negativeSign: '−'` (literal U+2212 character) to the `number.formatting` section of 7 locale files (fi, hr, nb, sv, sl, lt, fa):
 
 ```yaml
 surfaces:
@@ -38,22 +38,31 @@ surfaces:
       groupSeparator: '.'
 ```
 
-**nn inheritance check**: `nn.yml` uses `variantOf: 'nb'`. Before adding negativeSign to nn.yml, verify whether the source generator's YAML inheritance mechanism propagates `number.formatting` fields from parent (nb) to child (nn). If it does, skip nn.yml. If not, add the override to nn.yml too.
+**nn inheritance**: `nn.yml` uses `variantOf: 'nb'` and defines no `number` surface. The documented merge rules state that omitted surfaces inherit unchanged from the parent. Therefore `nb.yml` is the single source of truth — adding negativeSign to `nb.yml` propagates to `nn` automatically. A verification test must confirm this. Only modify `nn.yml` if inheritance is verified as broken.
 
 ### Ordinalizer wiring
 
-`OrdinalizeExtensions.cs` has 4 call sites where `number.ToString(culture)` is called (lines 147, 164, 206, 226). Change these to use the override `NumberFormatInfo` from `LocaleNumberFormattingOverrides.GetCachedNumberFormat(culture)`.
+`OrdinalizeExtensions.cs` has 4 call sites where `number.ToString(culture)` is called (lines 147, 164, 206, 226). Change these to use `LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture)` (the new formatting-only API from fn-6.2).
 
-Pattern: replace `number.ToString(culture)` with `number.ToString(LocaleNumberFormattingOverrides.GetCachedNumberFormat(culture))` (or equivalent based on the Task 2 API shape).
+Pattern: replace `number.ToString(culture)` with `number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture))`.
 
-Also check `WordFormTemplateOrdinalizer.cs` lines 43-44 for similar `ToString(culture)` calls that may need the same treatment.
+### WordFormTemplateOrdinalizer verification (REQUIRED)
+
+`WordFormTemplateOrdinalizer.cs` (lines 43-44) may format negative numbers via culture-aware `ToString(...)`. This MUST be investigated:
+- If it formats via `ToString(culture)` independently of `OrdinalizeExtensions`, it needs the same override wiring using `GetFormattingNumberFormat`
+- If all runtime paths go through `OrdinalizeExtensions` (which already has the fix), then document why no change is needed
+- The acceptance criteria require one of these outcomes to be recorded
+
+### Source generator snapshots
+
+Adding real YAML data to locale files populates the `NegativeSignOverrides` and `GroupSeparatorOverrides` dictionaries in generated code. This changes the generated output, so source generator snapshot tests may need updating in this task (in addition to fn-6.2 which handles the shape changes).
 
 ## Investigation targets
 
 **Required** (read before coding):
 - `src/Humanizer/OrdinalizeExtensions.cs:146-147,163-164,205-206,225-226` — all ToString(culture) call sites
-- `src/Humanizer/Localisation/Ordinalizers/WordFormTemplateOrdinalizer.cs:40-47` — NegativeNumberMode handling
-- `src/Humanizer/Locales/nn.yml` — check variantOf and whether it has a number: surface
+- `src/Humanizer/Localisation/Ordinalizers/WordFormTemplateOrdinalizer.cs:40-47` — NegativeNumberMode handling, verify whether it formats independently or delegates to OrdinalizeExtensions
+- `src/Humanizer/Locales/nn.yml` — confirm variantOf and absence of number: surface
 - `src/Humanizer/Locales/nb.yml` — parent locale for nn
 
 **Optional** (reference as needed):
@@ -64,18 +73,23 @@ Also check `WordFormTemplateOrdinalizer.cs` lines 43-44 for similar `ToString(cu
 ## Key context
 
 - The negativeSign YAML value must be the literal U+2212 character (MINUS SIGN), not the ASCII U+002D (HYPHEN-MINUS). In YAML single quotes, this is the UTF-8 encoded character directly in the file (3 bytes: 0xE2 0x88 0x92).
-- CLDR specifies U+2212 for all 8 affected locales: this is the typographically correct minus sign for Finnish, Swedish, Norwegian (Bokmål + Nynorsk), Croatian, Slovenian, Lithuanian, and Persian
+- CLDR specifies U+2212 for all 8 affected locales
 - CLDR specifies period (.) as the group separator for lb-LU (standard Continental European pattern)
 - fa.yml already has a `calendar:` section — the negativeSign goes in a separate `number.formatting:` section
+- Use `GetFormattingNumberFormat` (formatting-only API from fn-6.2), NOT the existing `GetCachedNumberFormat` which is for parse paths
 
 ## Acceptance
 
 - [ ] All 40 ordinalizer negative number tests pass on net48 (fi, hr, nn, sv, sl, nb, lt, fa × 5 values each)
 - [ ] Both lb-LU byte formatting tests pass on net48
 - [ ] Zero regressions on net10.0 and net8.0
-- [ ] nn locale inherits or explicitly has negativeSign override
+- [ ] nn locale verified to inherit negativeSign from nb (or explicitly overridden if inheritance broken)
 - [ ] All affected YAML files contain correct overrides
-- [ ] OrdinalizeExtensions uses override NFI for all negative number formatting
+- [ ] OrdinalizeExtensions uses `GetFormattingNumberFormat` for all negative number formatting
+- [ ] WordFormTemplateOrdinalizer verified: either updated to use `GetFormattingNumberFormat`, or documented as not needing changes (with explanation)
+- [ ] Source generator snapshot tests updated if adding YAML data changed generated output
+- [ ] Existing parse tests pass without modification (confirms no parse behavior changes)
+- [ ] Build produces zero warnings
 ## Done summary
 TBD
 

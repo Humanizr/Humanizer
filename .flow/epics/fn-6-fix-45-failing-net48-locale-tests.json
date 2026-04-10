@@ -9,10 +9,10 @@
   "depends_on_epics": [],
   "id": "fn-6-fix-45-failing-net48-locale-tests",
   "next_task": 1,
-  "plan_review_status": "unknown",
-  "plan_reviewed_at": null,
+  "plan_review_status": "ship",
+  "plan_reviewed_at": "2026-04-10T08:22:02.227529Z",
   "spec_path": ".flow/specs/fn-6-fix-45-failing-net48-locale-tests.md",
   "status": "open",
   "title": "Fix 45 failing net48 locale tests (negativeSign, groupSeparator, Serbian calendar)",
-  "updated_at": "2026-04-10T07:04:34.814518Z"
+  "updated_at": "2026-04-10T08:22:02.227739Z"
 }
