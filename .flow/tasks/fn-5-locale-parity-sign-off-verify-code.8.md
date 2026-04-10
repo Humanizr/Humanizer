@@ -6,10 +6,11 @@ The previous fn-5.5 sign-off pass deferred the net8.0 test run to CI on the fals
 
 The mistake was then compounded by editing the governing spec (`commit d40bbbe6 fix(signoff): update epic spec to allow net8.0 CI deferral`) to soften the R14 acceptance criterion from `"net10.0 AND net8.0 pass"` to `"net10.0 passes locally; net8.0 passes locally OR is deferred to CI when SDK unavailable"`. **That spec edit must be reverted.** Specs are tightened by sign-off work, never loosened.
 
-This task does three things:
+This task does four things:
 1. **Actually run** `dotnet test --framework net8.0` locally and capture the output as committed evidence.
 2. **Revert the deferral language** in `.flow/specs/fn-5-locale-parity-sign-off-verify-code.md` so the R14 acceptance bullet and the R14 requirement-coverage row both state `net10.0 AND net8.0 must pass` with no escape clause.
 3. **Re-record fn-5.5 task evidence** (`.flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.json` + `.md`) so the closed task evidence reflects an actual net8.0 pass instead of a "deferred" stub.
+4. **Reconcile fn-5.7 task metadata** (`.flow/tasks/fn-5-locale-parity-sign-off-verify-code.7.md`) so the title, Files list, and Acceptance match the shipped `#if NET5_0_OR_GREATER` guard implementation rather than the abandoned Polyfill path.
 
 This task does **not** edit `tools/verification-signoff.md` (handed off to fn-5.9, which reconciles the whole sign-off doc together with the pitfalls cleanup).
 

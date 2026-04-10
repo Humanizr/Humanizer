@@ -86,6 +86,11 @@ dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0  -c Release
 dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48
+
+# Epic/task state verification
+flowctl show fn-4-fix-net48-test-suite-blocker --json
+flowctl show fn-5-locale-parity-sign-off-verify-code --json
+flowctl validate --epic fn-5-locale-parity-sign-off-verify-code
 ```
 
 Capture verbatim output for each in task evidence.

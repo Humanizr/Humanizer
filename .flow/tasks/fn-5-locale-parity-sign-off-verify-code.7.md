@@ -70,7 +70,6 @@ The fallback is the same shape as the existing `#if NET5_0_OR_GREATER` guard alr
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passes (full suite, no regressions)
 - [ ] `dotnet build Humanizer.slnx -c Release` exits 0 with 0 errors and 0 warnings (whole-solution sanity)
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic` passes
-- [ ] `LocaleTheoryMatrixCompletenessTests.cs:379` uses `#if NET5_0_OR_GREATER` guard (fallback path taken — Polyfill PackageReference caused type conflicts documented in task evidence).
 - [ ] `CLAUDE.md` has no remaining occurrences of `blocked on all platforms by Enum.GetValues<T>()` or `see fn-4`. The replacement line accurately states all 3 TFMs build everywhere; net48 test execution requires a Windows host.
 - [ ] `AGENTS.md` has no remaining occurrences of `currently blocked on all platforms by` or `tracked as fn-4` or `do not invoke it`. The replacement prose accurately states the same.
 - [ ] `grep -rn "see fn-4\|tracked as fn-4\|blocked.*Enum\.GetValues" CLAUDE.md AGENTS.md` returns zero matches
