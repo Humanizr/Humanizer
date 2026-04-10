@@ -91,8 +91,8 @@ Adding real YAML data to locale files populates the `NegativeSignOverrides` and 
 - [ ] Existing parse tests pass without modification (confirms no parse behavior changes)
 - [ ] Build produces zero warnings
 ## Done summary
-Added negativeSign (U+2212) YAML overrides to fi, hr, nb, sv, sl, lt, fa locales and groupSeparator ('.') override to lb locale. Wired all 4 culture-aware OrdinalizeExtensions call sites to use GetFormattingNumberFormat for cross-platform formatting consistency. WordFormTemplateOrdinalizer verified as not needing changes since it receives pre-formatted strings from OrdinalizeExtensions.
+Added negativeSign (U+2212) YAML overrides to fi, hr, nb, sv, sl, lt, fa locales and groupSeparator ('.') override to lb locale. Wired all 4 culture-aware OrdinalizeExtensions int overloads to use GetFormattingNumberFormat for cross-platform formatting consistency. Added null CultureInfo guard to preserve documented API contract. WordFormTemplateOrdinalizer verified as not needing changes since it receives pre-formatted strings from OrdinalizeExtensions.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 4ade7afb5b1740d0ee2681cdf0a97a2d9bc6027d, f27f1b40cd3f969f46d45efcfd15dcfc4b704ca7
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj, dotnet build src/Humanizer/Humanizer.csproj -c Release
 - PRs:
