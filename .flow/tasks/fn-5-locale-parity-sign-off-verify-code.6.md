@@ -82,7 +82,7 @@ No reference updates are required — the original claim is correct. This task s
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes` still passes (markdown-only edits should not trigger formatter, but confirm)
 
 ## Done summary
-Full-file audit of fn-3 historical planning artifacts (.flow/specs/fn-3-hard-code-locale-overrides-where-icu.md and .flow/tasks/fn-3-hard-code-locale-overrides-where-icu.3.md) confirmed all six-locale calendar.months references are consistent with FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA} (all 6 locales kept by fn-5.1). One annotation added to fn-3.3 done summary to clarify that fn-3.3 originally delivered 4 of the 6 overrides and fn-5.1 authored the remaining 2 (ta, zu-ZA).
+Full-file audit of fn-3 historical planning artifacts (.flow/specs/fn-3-hard-code-locale-overrides-where-icu.md and .flow/tasks/fn-3-hard-code-locale-overrides-where-icu.3.md) against FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA} (all 6 locales kept by fn-5.1). All six-locale claim sites in both files are consistent with FinalOverrideSet; no claim-correction edits were required. One historical-clarification annotation was added to the fn-3.3 done summary for traceability: fn-3.3 delivered 4 of the 6 overrides (bn, fa, he, ku) at implementation time, and fn-5.1 authored the remaining 2 (ta, zu-ZA).
 
 ## Evidence
 
