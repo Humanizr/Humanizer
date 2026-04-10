@@ -58,5 +58,8 @@ Fix blocking doc drift in the two agent-targeted files at the repo root: `CLAUDE
 - [ ] `grep -rn "avoid net48 on" CLAUDE.md AGENTS.md` returns zero matches (both stale platform-conditional framings are gone)
 
 ## Done summary
-
+Fixed four stale doc drift issues in CLAUDE.md and AGENTS.md: reframed net48 test guidance from platform-conditional ("avoid on macOS/Linux") to the real blocker (Enum.GetValues<T>() on all platforms, tracked as fn-4); replaced manual "register in formatter/converter registries" locale-authoring instruction with source-generator auto-wiring description; added ICU override escape hatch (calendar:/number.formatting: YAML surfaces) to AGENTS.md Localization Guidance section.
 ## Evidence
+- Commits: b31ed4e39304233843a4f7f16cf3885fc206747b
+- Tests: dotnet format Humanizer.slnx --verify-no-changes, grep -n register.*formatter CLAUDE.md AGENTS.md (zero matches), grep -rn avoid net48 on CLAUDE.md AGENTS.md (zero matches), grep -n calendar: CLAUDE.md AGENTS.md (both files match), grep -n number.formatting: CLAUDE.md AGENTS.md (both files match)
+- PRs:

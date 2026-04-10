@@ -44,10 +44,10 @@ Roslyn incremental source generators used **only during the Humanizer library bu
 | `FormatterProfileCatalogInput` | Formatter configuration per locale |
 | `NumberToWordsProfileCatalogInput` | Number-to-words engine selection per locale |
 | `OrdinalizerProfileCatalogInput` | Ordinalizer rules per locale |
-| `OrdinalDateProfileCatalogInput` | Ordinal date formatting per locale |
+| `OrdinalDateProfileCatalogInput` | Ordinal date formatting per locale; consumes `calendar.months` and `calendar.monthsGenitive` arrays and embeds them into generated `OrdinalDatePattern` instances for month-name substitution |
 | `TimeOnlyToClockNotationProfileCatalogInput` | Clock notation rules per locale |
 | `WordsToNumberProfileCatalogInput` | Words-to-number parsing per locale |
-| `LocaleRegistryInput` | Master locale registry (maps culture names to profiles) |
+| `LocaleRegistryInput` | Master locale registry (maps culture names to profiles) and `LocaleNumberFormattingOverrides.g.cs` (per-locale decimal-separator overrides consumed by `ByteSize.ToString` and `MetricNumeralExtensions`) |
 | `TokenMapWordsToNumberInput` | Token maps for words-to-number parsing |
 
 Additionally, engine contract factories generate the wiring between locale profiles and their implementations:
@@ -85,7 +85,7 @@ FormatterRegistry / Converters         # Runtime dispatch by CultureInfo
 Extension methods                      # Public API (e.g., "3.ToWords()" → "three")
 ```
 
-Each YAML file defines a locale's capabilities: phrase tables for date/time humanization, number-to-words rules, ordinalizer patterns, heading labels, and clock notation preferences. See `docs/locale-yaml-reference.md` for the complete schema.
+Each YAML file defines a locale's capabilities across 8 canonical surfaces: list formatting, formatter configuration, phrase tables, number words/parsing/formatting, numeric ordinals, date ordinals, clock notation, compass headings, and calendar month-name overrides. See [`docs/locale-yaml-reference.md`](docs/locale-yaml-reference.md) for the complete schema and [`docs/localization.md`](docs/localization.md) for the canonical surface inventory.
 
 ## Multi-Targeting Strategy
 
