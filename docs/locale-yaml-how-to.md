@@ -364,7 +364,7 @@ Put here:
 
 ### `calendar`
 
-Use this block when the locale needs month names that differ from what `CultureInfo.DateTimeFormat.MonthNames` returns on the user's platform. This is typically needed when platform globalization data (ICU or NLS) drifts across macOS, Linux, and Windows, or when the platform-supplied names are incorrect for the locale.
+Use this block when the locale needs month names that differ from what `CultureInfo.DateTimeFormat.MonthNames` returns on the user's platform. This is typically needed when platform globalization data differs across platforms, target frameworks, or globalization sources (ICU vs NLS), or when the platform-supplied names are incorrect for the locale.
 
 Put here:
 
@@ -423,8 +423,8 @@ When you are building a locale from scratch, use this order:
 8. Add `ordinal.date` or `ordinal.dateOnly` only for date-specific day phrasing.
 9. Add `clock` using the unified `phrase-clock` engine. All shipped locales use this single engine.
 10. Add `compass` if the locale needs heading labels and does not inherit acceptable same-language values.
-11. Add `calendar` only if platform-supplied month names disagree across platforms or are incorrect.
-12. Add `number.formatting` only if the decimal separator, negative sign, or group separator disagrees across platforms or is incorrect.
+11. Add `calendar` only if platform-supplied month names disagree across platforms or target frameworks, or are incorrect.
+12. Add `number.formatting` only if the decimal separator, negative sign, or group separator disagrees across platforms or target frameworks, or is incorrect.
 
 This keeps authoring pressure on the generated/shared surfaces first and makes it easier to spot when a new block is really necessary.
 

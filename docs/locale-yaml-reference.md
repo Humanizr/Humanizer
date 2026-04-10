@@ -381,7 +381,7 @@ Notes:
 
 Purpose:
 
-- owns locale-specific temporal data that overrides `CultureInfo.DateTimeFormat` when platform globalization data (ICU or NLS) drifts across platforms or is incorrect
+- owns locale-specific temporal data that overrides `CultureInfo.DateTimeFormat` when platform globalization data (ICU or NLS) differs across platforms, target frameworks, or globalization sources, or is incorrect
 - feeds the generated `OrdinalDatePattern` profiles with month-name arrays
 - should contain only data that differs from the platform-supplied `CultureInfo`; omit the block entirely when `CultureInfo` is correct
 
@@ -428,7 +428,7 @@ Future fields: `monthsAbbreviated`, `days`, `daysAbbreviated`, `dayPeriods`, `am
 
 Purpose:
 
-- owns locale-specific number formatting data that overrides `NumberFormatInfo` when platform globalization data (ICU or NLS) drifts across platforms or is incorrect
+- owns locale-specific number formatting data that overrides `NumberFormatInfo` when platform globalization data (ICU or NLS) differs across platforms, target frameworks, or globalization sources, or is incorrect
 - feeds culture-aware `Ordinalize` overloads, byte-size string formatting (`ByteSize.ToString` / `ToFullWords`), and `MetricNumeralExtensions` with stable decimal separator, negative sign, and group separator values
 - symmetric with `number.words` (output as words) and `number.parse` (input); `number.formatting` is "output as digits"
 
