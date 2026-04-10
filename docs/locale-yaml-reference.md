@@ -429,7 +429,7 @@ Future fields: `monthsAbbreviated`, `days`, `daysAbbreviated`, `dayPeriods`, `am
 Purpose:
 
 - owns locale-specific number formatting data that overrides `NumberFormatInfo` when ICU-supplied values drift across platforms or are incorrect
-- feeds `OrdinalizeExtensions`, `ByteSize.ToString`, and `MetricNumeralExtensions` with stable decimal separator, negative sign, and group separator values
+- feeds culture-aware `Ordinalize` overloads, byte-size string formatting (`ByteSize.ToString` / `ToFullWords`), and `MetricNumeralExtensions` with stable decimal separator, negative sign, and group separator values
 - symmetric with `number.words` (output as words) and `number.parse` (input); `number.formatting` is "output as digits"
 
 Fields:
@@ -443,7 +443,7 @@ Notes:
 - Empty or absent = no override; the runtime uses the platform's `NumberFormatInfo` value for each respective property.
 - Inherits via `variantOf`: a child locale inherits the parent's `number.formatting` fields unless it authors its own. For example, `nn.yml` uses `variantOf: 'nb'` and inherits `nb`'s `negativeSign` override automatically.
 - The generated `LocaleNumberFormattingOverrides` registry walks `CultureInfo.Parent` at runtime (same fallback semantics as `LocaliserRegistry.FindLocaliser`), so unlisted child cultures fall back to the parent override.
-- Override fields are consumed by `OrdinalizeExtensions` (both int and string overloads), `ByteSize.ToString`, and `MetricNumeralExtensions`. The `ByteSize.TryParse` path intentionally uses only the explicitly-passed decimal separator and is not affected by `negativeSign` or `groupSeparator` overrides.
+- Override fields are consumed by culture-aware `Ordinalize` overloads (int overloads use override-aware formatting; string overloads use override-aware parsing), byte-size string formatting (`ByteSize.ToString` and `ByteSize.ToFullWords`), and `MetricNumeralExtensions`. The `ByteSize.TryParse` path intentionally uses only the explicitly-passed decimal separator and is not affected by `negativeSign` or `groupSeparator` overrides.
 
 Example (decimal separator):
 
