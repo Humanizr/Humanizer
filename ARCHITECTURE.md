@@ -85,7 +85,7 @@ FormatterRegistry / Converters         # Runtime dispatch by CultureInfo
 Extension methods                      # Public API (e.g., "3.ToWords()" → "three")
 ```
 
-Each YAML file defines a locale's capabilities across 8 canonical surfaces: list formatting, formatter configuration, phrase tables, number words/parsing/formatting, numeric ordinals, date ordinals, clock notation, compass headings, and calendar month-name overrides. See [`docs/locale-yaml-reference.md`](docs/locale-yaml-reference.md) for the complete schema and [`docs/localization.md`](docs/localization.md) for the canonical surface inventory.
+Each YAML file defines a locale's capabilities across the 8 canonical surfaces (`list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, `calendar`), each with optional nested members (e.g. `number.formatting`, `calendar.months`). See [`docs/locale-yaml-reference.md`](docs/locale-yaml-reference.md) for the complete schema and [`docs/localization.md`](docs/localization.md) for the canonical surface inventory.
 
 ## Multi-Targeting Strategy
 

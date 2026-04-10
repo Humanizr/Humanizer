@@ -33,7 +33,7 @@ Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet
 
 The `Humanizer` package includes all supported generated locale data. Locale authors now check in YAML under `src/Humanizer/Locales`, and the source generator turns that into the runtime tables shipped in the main package. There is no separate English-only core package or locale satellite package split anymore.
 
-All shipped locales now intentionally resolve the canonical localization surfaces used by the generator: list formatting, formatter configuration, phrase tables, number words, number parsing, numeric ordinals, date ordinals, clock notation, compass headings, calendar month-name overrides, and number-formatting overrides. See [`docs/localization.md`](docs/localization.md) for the full surface inventory. Locale variants can satisfy coverage through same-language `variantOf` inheritance; cross-language fallback is not treated as full support.
+All shipped locales now intentionally resolve the 8 canonical localization surfaces used by the generator: `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Each surface may contain nested members (e.g. `number.formatting`, `calendar.months`); see [`docs/localization.md`](docs/localization.md) for the full surface and nested-member inventory. Locale variants can satisfy coverage through same-language `variantOf` inheritance; cross-language fallback is not treated as full support.
 
 
 ## Features
