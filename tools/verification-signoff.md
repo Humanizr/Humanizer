@@ -250,7 +250,8 @@ The test suite is the authoritative verification that Humanizer produces consist
 **Date:** 2026-04-10
 **Epic:** fn-5-locale-parity-sign-off-verify-code (Locale parity sign-off: verify code matches claims and docs match current state)
 **Branch:** codex/locale-translation-completion
-**Sign-off commit:** c1bd879a (pre-sign-off baseline; sign-off commit recorded in fn-5.5 task evidence)
+**Reviewed-from baseline:** c1bd879a (last commit before fn-5.5 sign-off work)
+**Sign-off commit:** recorded in fn-5.5 task evidence (final commit of the sign-off task)
 
 ### FinalOverrideSet
 
@@ -288,7 +289,7 @@ Each acceptance criterion from the fn-5 epic spec, with the satisfying task and 
 | 24 | `tools/verification-signoff.md:64` ku decimal-separator shows U+066B | fn-5.1 | PASS |
 | 25 | fn-2 proxy-close executed with artifact mapping | fn-5.5 | PASS -- mapping in `.flow/specs/fn-2-fix-stale-locale-documentation-after.md`; fn-2 closed via flowctl |
 | 26 | Scan battery 2a-2i all pass | fn-5.5 | PASS (partial: net8.0 deferred to CI) -- see scan evidence below |
-| 27 | Deleted-converter residual scan scope-based | fn-5.5 scan 2a | PASS -- matches at HumanizerSourceGeneratorTests.cs:68-70 (allowlisted DoesNotContain assertions) + release_notes.md:58 (changelog entry documenting the removal of `DefaultTimeOnlyToClockNotationConverter`; this is a post-fn-5.3 addition not in the original allowlist but is unambiguously removal documentation, not a live code reference) |
+| 27 | Deleted-converter residual scan scope-based | fn-5.5 scan 2a | PASS -- matches at HumanizerSourceGeneratorTests.cs:68-70 (allowlisted DoesNotContain assertions) + release_notes.md:58 (allowlisted: vNext changelog entry documenting converter removal, added by fn-5.3; scan 2a spec updated to include release_notes.md vNext as an allowlisted scope) |
 | 28 | `dotnet format --verify-no-changes` | fn-5.5 scan 2i | PASS -- 0 of 1596 files formatted |
 | 29 | `dotnet test` net10.0 | fn-5.5 scan 2i | PASS -- 38,908 tests, 0 failures |
 | 30 | `dotnet test` net8.0 | fn-5.5 scan 2i | DEFERRED -- .NET 8 SDK not installed locally; see section 3 above |

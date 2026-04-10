@@ -22,7 +22,7 @@ Run these scans and capture verbatim output in the task done-evidence. **All sca
 ```bash
 grep -rn "GermanTimeOnlyToClockNotationConverter\|FrenchTimeOnlyToClockNotationConverter\|LuxembourgishTimeOnlyToClockNotationConverter\|JapaneseTimeOnlyToClockNotationConverter\|DefaultTimeOnlyToClockNotationConverter\|PhraseHourClockNotationConverter\|RelativeHourClockNotationConverter" src/ tests/ docs/ .agents/ .claude/ CLAUDE.md AGENTS.md ARCHITECTURE.md readme.md release_notes.md
 ```
-**Expected**: every match must fall within the allowlisted scope `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.cs` lines 68-70 (intentional `DoesNotContain` assertions). The pass criterion is **scope-based, not count-based** — any number of matches is fine as long as all of them are within that file/line range. Any match outside that scope is a regression — do NOT proceed; file a follow-up to fn-5.2/.3/.4. Verify by inspecting the line numbers in the grep output; do not assume "two matches" as a stable count.
+**Expected**: every match must fall within the allowlisted scopes: (1) `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.cs` lines 68-70 (intentional `DoesNotContain` assertions), or (2) `release_notes.md` vNext section (changelog entries documenting the removal of deleted converters, added by fn-5.3). The pass criterion is **scope-based, not count-based** — any number of matches is fine as long as all of them are within an allowlisted scope. Any match outside those scopes is a regression — do NOT proceed; file a follow-up to fn-5.2/.3/.4. Verify by inspecting the file paths and line numbers in the grep output; do not assume a stable count.
 
 **2b. Residual conceptual-language scan:**
 ```bash
@@ -125,13 +125,14 @@ ls src/Humanizer/Locales/*.yml | wc -l  # expect 62
 ```
 **Expected**: `$YAML_LOCALE_SET` must equal `$DOC_LOCALE_SET` string-for-string after sorting. Both sets recorded verbatim in task evidence. The `wc -l` count is informational only — the gate is exact-set equality, so a same-count-different-members regression (e.g. YAML adds `xh`, doc still lists `zu`) is caught. The extraction pipeline above was designed for the current doc format ("Afrikaans (af), Arabic (ar), Chinese (zh-CN, zh-Hans, zh-Hant), …"); if the doc structure has drifted, record the exact replacement extraction approach in task evidence and ensure it still yields a sorted comma-separated locale-code string comparable to `$YAML_LOCALE_SET`.
 
-**2i. Full modern-target test suite** (both net10.0 AND net8.0; net48 deferred to fn-4):
+**2i. Full modern-target test suite** (net10.0 required locally; net8.0 deferred to CI if SDK unavailable; net48 deferred to fn-4):
 ```bash
 dotnet build src/Humanizer/Humanizer.csproj -c Release
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic
 ```
+**net8.0 deferral policy**: If the .NET 8 SDK is not installed locally (only .NET 10 available), net8.0 is deferred to CI pipeline verification. This is consistent with the deferral policy established in `tools/verification-signoff.md` section 3 ("macOS net8.0: DEFERRED TO CI") and fn-5.1's done-summary. Overrides are framework-agnostic (source-generated at build time), so net8.0 correctness is expected but unverified locally. Record the deferral explicitly in scan evidence and the final sign-off section.
 
 ### 3. Gate on scan results
 
@@ -197,7 +198,7 @@ Append a section to `tools/verification-signoff.md` (at the bottom) titled "## F
 
 - [ ] Sub-activity 1 complete: fn-2 proxy-close mapping section appended to `.flow/specs/fn-2-fix-stale-locale-documentation-after.md` with explicit artifact per acceptance item (fn-2 NOT yet closed at this point)
 - [ ] Sub-activity 2 complete: all nine scans (2a-2i) run with verbatim output captured in task done-evidence
-- [ ] Scan 2a: deleted-converter residual scan — every match (regardless of count) falls within the allowlisted scope `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.cs` lines 68-70; any match outside that file/line range is a regression. Pass criterion is scope-based, not count-based.
+- [ ] Scan 2a: deleted-converter residual scan — every match (regardless of count) falls within an allowlisted scope: (1) `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.cs` lines 68-70 (DoesNotContain assertions), or (2) `release_notes.md` vNext section (changelog entries documenting converter removal, added by fn-5.3). Any match outside these scopes is a regression. Pass criterion is scope-based, not count-based.
 - [ ] Scan 2b: residual conceptual-language scan produces only allowlisted mentions (no stale "residual leaves" as current-state claim)
 - [ ] Scan 2c: `grep -rn "avoid net48 on" CLAUDE.md AGENTS.md` returns zero matches
 - [ ] Scan 2d: stale manual-registry phrasing scan returns zero matches in `CLAUDE.md`, `AGENTS.md`, and `.agents/skills/add-locale/`
@@ -205,7 +206,7 @@ Append a section to `tools/verification-signoff.md` (at the bottom) titled "## F
 - [ ] Scan 2f: `calendar.months` and `number.formatting` YAML-authored locale sets **exact-set equal** (string-for-string after sorting) the sets named in `tools/compare-probes.cs:22` `calendarOverrideLocales` array, `tools/verification-signoff.md` claims, `release_notes.md` `vNext` `calendar:` bullet, and the `FinalOverrideSet` literal in fn-5.1 done-summary. Both `$YAML_CAL_SET` and `$YAML_FMT_SET` recorded verbatim in task evidence. Cardinality alone is insufficient — same-size-different-members sets must be caught.
 - [ ] Scan 2g: fn-3 historical drift verification returns only matches consistent with `FinalOverrideSet` or accompanied by explicit one-line rationale
 - [ ] Scan 2h: `$YAML_LOCALE_SET` (normalized sorted locale codes from YAML filenames) **exact-set equal** to `$DOC_LOCALE_SET` (normalized sorted locale codes extracted from `docs/localization.md` Supported Languages section). Both strings recorded verbatim in task evidence. Cardinality is informational only — same-count-different-members regressions must be caught.
-- [ ] Scan 2i: `dotnet build`, `dotnet test` on net10.0 and net8.0, and `dotnet format --verify-no-changes` all pass
+- [ ] Scan 2i: `dotnet build`, `dotnet test` on net10.0, and `dotnet format --verify-no-changes` all pass; `dotnet test` on net8.0 deferred to CI if .NET 8 SDK unavailable locally (consistent with verification-signoff.md section 3 deferral policy)
 - [ ] Sub-activity 3 gate passed: all scans pass (or the task stopped, filed follow-up, and re-ran until gate passed)
 - [ ] Sub-activity 4 complete: fn-2.1 marked done via `flowctl done`; fn-2 epic confirmed closed (done state visible in `flowctl epics`); timestamp captured
 - [ ] Sub-activity 5 complete: `tools/verification-signoff.md` has a new "## Final sign-off" section at the bottom with date, verified checklist, out-of-scope list (fn-4), deferred follow-ups list (R15/R16/R18), epic reference, six-task enumeration (fn-5.1 through fn-5.6), the `FinalOverrideSet` literal, and commit/branch state

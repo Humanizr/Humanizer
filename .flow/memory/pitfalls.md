@@ -54,3 +54,6 @@ When documenting verification status in gate summaries, match claim strength to 
 
 ## 2026-04-10 manual [pitfall]
 When documenting a closed-set surface model (e.g. canonical locale surfaces), enumerate by canonical name rather than expanding nested members -- expanding nested members inflates the apparent surface count and misrepresents the closed-set contract
+
+## 2026-04-10 manual [pitfall]
+When flowctl updates task status via start/block/complete, it writes to .git/flow-state/ (runtime) but may not update .flow/tasks/*.json (checked-in definition file) -- always sync the definition JSON when the status change must be committed and visible to reviewers
