@@ -6,26 +6,32 @@ Use this file after reading `SKILL.md`. It is the detailed repo map for proving 
 
 Treat these as the localized surfaces that must be intentionally accounted for when a shipped locale is added or brought to parity:
 
+Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
+
 - `list`
   Collection formatting and conjunction behavior.
 - `formatter`
   Formatter grammar/resources and formatter-side grammatical metadata.
 - `phrases`
   Relative date phrases, duration phrases, data-unit phrases, and time-unit phrases.
-- `number.words`
-  Cardinal words, ordinal words, tuple conversion, and any grammar-sensitive number rendering.
-- `number.parse`
-  Native words-to-number parsing for the locale's natural written forms.
-- `ordinal.numeric`
-  Numeric ordinalization for `Ordinalize`.
-- `ordinal.date`
-  `DateTime.ToOrdinalWords`.
-- `ordinal.dateOnly`
-  `DateOnly.ToOrdinalWords` on supported targets.
+- `number`
+  Parent surface for `number.words`, `number.parse`, and `number.formatting`.
+  - `number.words` — Cardinal words, ordinal words, tuple conversion, and any grammar-sensitive number rendering.
+  - `number.parse` — Native words-to-number parsing for the locale's natural written forms.
+  - `number.formatting` — Decimal separator override for stable cross-platform numeric output. Only authored when the locale's ICU-supplied decimal separator differs across platforms.
+- `ordinal`
+  Parent surface for `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`.
+  - `ordinal.numeric` — Numeric ordinalization for `Ordinalize`.
+  - `ordinal.date` — `DateTime.ToOrdinalWords`.
+  - `ordinal.dateOnly` — `DateOnly.ToOrdinalWords` on supported targets.
 - `clock`
   `TimeOnly.ToClockNotation` on supported targets.
 - `compass`
   Locale-owned compass directions if the locale surface exists or is being introduced.
+- `calendar`
+  Month-name overrides (nominative and genitive) for stable cross-platform date output. Only authored when the locale's ICU-supplied month names differ across platforms.
+  - `calendar.months` — Exactly 12 nominative month-name entries when present.
+  - `calendar.monthsGenitive` — Exactly 12 genitive month-name entries when present.
 
 There is no shipped-locale exemption list in this repo. If any canonical surface is unresolved, parity is incomplete.
 
@@ -105,6 +111,9 @@ Required proof subrows:
 - `number.words.ordinal`
 - `number.parse.cardinal`
 - `number.parse.ordinal`
+- `number.formatting.decimalSeparator` (only when the locale authors a `number.formatting` override; mark "inherited from parent" or "not applicable" otherwise)
+- `calendar.months` (only when the locale authors a `calendar` override; mark "inherited from parent" or "not applicable" otherwise)
+- `calendar.monthsGenitive` (only when the locale authors a `calendar` override with a genitive array; mark "inherited from parent" or "not applicable" otherwise)
 
 Add more `number.words.*` and `number.parse.*` proof subrows whenever the selected engine owns additional meaningful branches such as tuple handling, gendered variants, abbreviation parsing, or special composition paths.
 
@@ -153,6 +162,8 @@ Use this as the default starting point for where each surface usually needs work
 | `ordinal.dateOnly` | `src/Humanizer/Locales/<locale>.yml` | date-only ordinal registries, shared ordinal date runtime paths | `LocaleRegistrySweepTests`, `ExactLocaleDateAndTimeRegistryTests`, locale-specific date-only tests |
 | `clock` | `src/Humanizer/Locales/<locale>.yml` | clock notation registries, `src/Humanizer/Localisation/TimeToClockNotation/*` | `LocaleRegistrySweepTests`, `ExactLocaleDateAndTimeRegistryTests`, locale-specific clock tests |
 | `compass` | `src/Humanizer/Locales/<locale>.yml` | generated compass/profile wiring and any compass-specific runtime support | locale-specific compass tests and any sweep coverage that exercises registry presence |
+| `calendar` | `src/Humanizer/Locales/<locale>.yml` | `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalDateProfileCatalogInput.cs`, calendar month-name override generation | `LocaleRegistrySweepTests`, locale-specific date-ordinal tests |
+| `number.formatting` | `src/Humanizer/Locales/<locale>.yml` | `src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs`, decimal-separator override generation | `LocaleRegistrySweepTests`, locale-specific number-formatting tests |
 
 ## Implementation Decisions
 

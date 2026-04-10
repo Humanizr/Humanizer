@@ -60,18 +60,7 @@ Before making any implementation changes, write a preflight gap report that list
 - `unsupported`
 - `unknown`
 
-Use the canonical surfaces:
-
-- `list`
-- `formatter`
-- `phrases`
-- `number.words`
-- `number.parse`
-- `ordinal.numeric`
-- `ordinal.date`
-- `ordinal.dateOnly`
-- `clock`
-- `compass`
+Use the canonical surfaces. Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
 
 The preflight report must identify the full current ownership path for each surface, including the inheritance chain to the terminal owner when inheritance is involved. `unknown` is allowed only during initial inspection and must be eliminated before implementation starts.
 
@@ -112,11 +101,14 @@ The parity map must cover the canonical surfaces explicitly. Use top-level rows 
 - `number.parse`
 - `number.parse.cardinal`
 - `number.parse.ordinal`
+- `number.formatting.decimalSeparator` (only when the locale authors a `number.formatting` override; mark "inherited from parent" or "not applicable" otherwise)
 - `ordinal.numeric`
 - `ordinal.date`
 - `ordinal.dateOnly`
 - `clock`
 - `compass`
+- `calendar.months` (only when the locale authors a `calendar` override; mark "inherited from parent" or "not applicable" otherwise)
+- `calendar.monthsGenitive` (only when the locale authors a `calendar` override with a genitive array; mark "inherited from parent" or "not applicable" otherwise)
 
 Add more `number.words.*` or `number.parse.*` proof rows whenever the selected engine owns additional meaningful branches such as tuple handling, gendered variants, abbreviation parsing, or special composition paths. Do not collapse multiple behavior families into one green bucket.
 
