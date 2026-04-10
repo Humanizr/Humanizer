@@ -1,7 +1,7 @@
 {
   "branch_name": "fn-6-fix-45-failing-net48-locale-tests",
-  "completion_review_status": "unknown",
-  "completion_reviewed_at": null,
+  "completion_review_status": "needs_work",
+  "completion_reviewed_at": "2026-04-10T14:00:02.753600Z",
   "created_at": "2026-04-10T07:03:46.909091Z",
   "default_impl": null,
   "default_review": null,
@@ -14,5 +14,5 @@
   "spec_path": ".flow/specs/fn-6-fix-45-failing-net48-locale-tests.md",
   "status": "open",
   "title": "Fix 45 failing net48 locale tests (negativeSign, groupSeparator, Serbian calendar)",
-  "updated_at": "2026-04-10T08:22:02.227739Z"
+  "updated_at": "2026-04-10T14:00:02.753741Z"
 }
