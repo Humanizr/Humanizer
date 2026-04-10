@@ -226,18 +226,31 @@ public sealed partial class HumanizerSourceGenerator
         {
             foreach (var property in formatting.Values.Keys)
             {
-                if (property is not "decimalSeparator")
+                if (property is not ("decimalSeparator" or "negativeSign" or "groupSeparator"))
                 {
                     throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.number.formatting' defines unsupported property '{property}'. Supported properties: decimalSeparator.");
+                        $"Locale '{localeCode}.surfaces.number.formatting' defines unsupported property '{property}'. Supported properties: decimalSeparator, negativeSign, groupSeparator.");
                 }
             }
 
-            var decimalSeparator = formatting.GetScalar("decimalSeparator");
-            if (string.IsNullOrEmpty(decimalSeparator))
+            ValidateOptionalFormattingProperty(localeCode, formatting, "decimalSeparator");
+            ValidateOptionalFormattingProperty(localeCode, formatting, "negativeSign");
+            ValidateOptionalFormattingProperty(localeCode, formatting, "groupSeparator");
+
+            if (formatting.Values.Count == 0)
             {
                 throw new InvalidOperationException(
-                    $"Locale '{localeCode}.surfaces.number.formatting.decimalSeparator' must be a non-empty string.");
+                    $"Locale '{localeCode}.surfaces.number.formatting' must define at least one property.");
+            }
+        }
+
+        static void ValidateOptionalFormattingProperty(string localeCode, SimpleYamlMapping formatting, string propertyName)
+        {
+            var value = formatting.GetScalar(propertyName);
+            if (value is not null && string.IsNullOrEmpty(value))
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.surfaces.number.formatting.{propertyName}' must be a non-empty string.");
             }
         }
 

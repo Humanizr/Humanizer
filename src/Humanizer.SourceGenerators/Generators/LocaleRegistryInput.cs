@@ -149,7 +149,9 @@ public sealed partial class HumanizerSourceGenerator
 
         void EmitNumberFormattingOverrides(SourceProductionContext context)
         {
-            var overrides = new List<(string Locale, string DecimalSeparator)>();
+            var decimalOverrides = new List<(string Locale, string Value)>();
+            var negativeSignOverrides = new List<(string Locale, string Value)>();
+            var groupSeparatorOverrides = new List<(string Locale, string Value)>();
 
             foreach (var locale in locales)
             {
@@ -161,11 +163,23 @@ public sealed partial class HumanizerSourceGenerator
                 var decimalSeparator = locale.NumberFormatting.GetScalar("decimalSeparator");
                 if (decimalSeparator is not null)
                 {
-                    overrides.Add((locale.LocaleCode, decimalSeparator));
+                    decimalOverrides.Add((locale.LocaleCode, decimalSeparator));
+                }
+
+                var negativeSign = locale.NumberFormatting.GetScalar("negativeSign");
+                if (negativeSign is not null)
+                {
+                    negativeSignOverrides.Add((locale.LocaleCode, negativeSign));
+                }
+
+                var groupSeparator = locale.NumberFormatting.GetScalar("groupSeparator");
+                if (groupSeparator is not null)
+                {
+                    groupSeparatorOverrides.Add((locale.LocaleCode, groupSeparator));
                 }
             }
 
-            if (overrides.Count == 0)
+            if (decimalOverrides.Count == 0 && negativeSignOverrides.Count == 0 && groupSeparatorOverrides.Count == 0)
             {
                 return;
             }
@@ -180,39 +194,19 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine();
             builder.AppendLine("internal static class LocaleNumberFormattingOverrides");
             builder.AppendLine("{");
-            builder.AppendLine("    static readonly Dictionary<string, string> DecimalSeparatorOverrides = new(System.StringComparer.OrdinalIgnoreCase)");
-            builder.AppendLine("    {");
 
-            foreach (var (locale, decimalSeparator) in overrides.OrderBy(static o => o.Locale, StringComparer.Ordinal))
-            {
-                builder.Append("        { \"");
-                builder.Append(locale);
-                builder.Append("\", \"");
-                builder.Append(decimalSeparator.Replace("\\", "\\\\").Replace("\"", "\\\""));
-                builder.AppendLine("\" },");
-            }
+            EmitOverrideDictionary(builder, "DecimalSeparatorOverrides", decimalOverrides);
+            EmitOverrideDictionary(builder, "NegativeSignOverrides", negativeSignOverrides);
+            EmitOverrideDictionary(builder, "GroupSeparatorOverrides", groupSeparatorOverrides);
 
-            builder.AppendLine("    };");
-            builder.AppendLine();
             builder.AppendLine("    static readonly ConcurrentDictionary<string, NumberFormatInfo> CachedNumberFormats = new(System.StringComparer.OrdinalIgnoreCase);");
             builder.AppendLine();
-            builder.AppendLine("    internal static bool TryGetDecimalSeparator(CultureInfo culture, out string? decimalSeparator)");
-            builder.AppendLine("    {");
-            builder.AppendLine("        var current = culture;");
-            builder.AppendLine("        while (current is not null && !string.IsNullOrEmpty(current.Name))");
-            builder.AppendLine("        {");
-            builder.AppendLine("            if (DecimalSeparatorOverrides.TryGetValue(current.Name, out decimalSeparator))");
-            builder.AppendLine("            {");
-            builder.AppendLine("                return true;");
-            builder.AppendLine("            }");
-            builder.AppendLine();
-            builder.AppendLine("            current = current.Parent;");
-            builder.AppendLine("        }");
-            builder.AppendLine();
-            builder.AppendLine("        decimalSeparator = null;");
-            builder.AppendLine("        return false;");
-            builder.AppendLine("    }");
-            builder.AppendLine();
+
+            EmitTryGetOverride(builder, "TryGetDecimalSeparator", "DecimalSeparatorOverrides");
+            EmitTryGetOverride(builder, "TryGetNegativeSign", "NegativeSignOverrides");
+            EmitTryGetOverride(builder, "TryGetGroupSeparator", "GroupSeparatorOverrides");
+
+            // Existing parse-path method: applies only decimal separator override
             builder.AppendLine("    internal static NumberFormatInfo GetCachedNumberFormat(CultureInfo culture, string decimalSeparator)");
             builder.AppendLine("    {");
             builder.AppendLine("        return CachedNumberFormats.GetOrAdd(culture.Name, _ =>");
@@ -223,6 +217,42 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("        });");
             builder.AppendLine("    }");
             builder.AppendLine();
+
+            // New formatting-path method: applies all overrides (decimal, negative sign, group separator)
+            builder.AppendLine("    internal static NumberFormatInfo GetFormattingNumberFormat(CultureInfo culture)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        var hasDecimal = TryGetDecimalSeparator(culture, out var decSep);");
+            builder.AppendLine("        var hasNegative = TryGetNegativeSign(culture, out var negSign);");
+            builder.AppendLine("        var hasGroup = TryGetGroupSeparator(culture, out var grpSep);");
+            builder.AppendLine();
+            builder.AppendLine("        if (!hasDecimal && !hasNegative && !hasGroup)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            return culture.NumberFormat;");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        return CachedNumberFormats.GetOrAdd(\"fmt:\" + culture.Name, _ =>");
+            builder.AppendLine("        {");
+            builder.AppendLine("            var nfi = (NumberFormatInfo)culture.NumberFormat.Clone();");
+            builder.AppendLine("            if (hasDecimal)");
+            builder.AppendLine("            {");
+            builder.AppendLine("                nfi.NumberDecimalSeparator = decSep!;");
+            builder.AppendLine("            }");
+            builder.AppendLine();
+            builder.AppendLine("            if (hasNegative)");
+            builder.AppendLine("            {");
+            builder.AppendLine("                nfi.NegativeSign = negSign!;");
+            builder.AppendLine("            }");
+            builder.AppendLine();
+            builder.AppendLine("            if (hasGroup)");
+            builder.AppendLine("            {");
+            builder.AppendLine("                nfi.NumberGroupSeparator = grpSep!;");
+            builder.AppendLine("            }");
+            builder.AppendLine();
+            builder.AppendLine("            return nfi;");
+            builder.AppendLine("        });");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+
             builder.AppendLine("    internal static string GetDecimalSeparator(CultureInfo culture)");
             builder.AppendLine("    {");
             builder.AppendLine("        return TryGetDecimalSeparator(culture, out var sep)");
@@ -232,6 +262,60 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("}");
 
             context.AddSource("LocaleNumberFormattingOverrides.g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
+        }
+
+        static void EmitOverrideDictionary(StringBuilder builder, string fieldName, List<(string Locale, string Value)> overrides)
+        {
+            builder.Append("    static readonly Dictionary<string, string> ");
+            builder.Append(fieldName);
+
+            if (overrides.Count == 0)
+            {
+                builder.AppendLine(" = new(System.StringComparer.OrdinalIgnoreCase);");
+            }
+            else
+            {
+                builder.AppendLine(" = new(System.StringComparer.OrdinalIgnoreCase)");
+                builder.AppendLine("    {");
+
+                foreach (var (locale, value) in overrides.OrderBy(static o => o.Locale, StringComparer.Ordinal))
+                {
+                    builder.Append("        { \"");
+                    builder.Append(locale);
+                    builder.Append("\", \"");
+                    builder.Append(value.Replace("\\", "\\\\").Replace("\"", "\\\""));
+                    builder.AppendLine("\" },");
+                }
+
+                builder.AppendLine("    };");
+            }
+
+            builder.AppendLine();
+        }
+
+        static void EmitTryGetOverride(StringBuilder builder, string methodName, string dictionaryName)
+        {
+            builder.Append("    internal static bool ");
+            builder.Append(methodName);
+            builder.AppendLine("(CultureInfo culture, out string? value)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        var current = culture;");
+            builder.AppendLine("        while (current is not null && !string.IsNullOrEmpty(current.Name))");
+            builder.AppendLine("        {");
+            builder.Append("            if (");
+            builder.Append(dictionaryName);
+            builder.AppendLine(".TryGetValue(current.Name, out value))");
+            builder.AppendLine("            {");
+            builder.AppendLine("                return true;");
+            builder.AppendLine("            }");
+            builder.AppendLine();
+            builder.AppendLine("            current = current.Parent;");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        value = null;");
+            builder.AppendLine("        return false;");
+            builder.AppendLine("    }");
+            builder.AppendLine();
         }
     }
 

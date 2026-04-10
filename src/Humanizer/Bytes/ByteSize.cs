@@ -204,10 +204,9 @@ public struct ByteSize(double byteSize) :
         var culture = provider as CultureInfo;
 
         // Only inject override for culture-backed providers, never for caller-supplied custom NFI
-        if (culture is not null
-            && LocaleNumberFormattingOverrides.TryGetDecimalSeparator(culture, out var sep))
+        if (culture is not null)
         {
-            provider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(culture, sep!);
+            provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
         }
 
         return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(culture));
@@ -239,10 +238,9 @@ public struct ByteSize(double byteSize) :
         var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
 
         // Only inject override for culture-backed providers, never for caller-supplied custom NFI
-        if (provider is CultureInfo overrideCulture
-            && LocaleNumberFormattingOverrides.TryGetDecimalSeparator(overrideCulture, out var sep))
+        if (provider is CultureInfo overrideCulture)
         {
-            provider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(overrideCulture, sep!);
+            provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(overrideCulture);
         }
 
         bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
