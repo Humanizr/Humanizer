@@ -251,7 +251,7 @@ The test suite is the authoritative verification that Humanizer produces consist
 **Epic:** fn-5-locale-parity-sign-off-verify-code (Locale parity sign-off: verify code matches claims and docs match current state)
 **Branch:** codex/locale-translation-completion
 **Reviewed-from baseline:** c1bd879a (last commit before fn-5.5 sign-off work)
-**Sign-off commit:** recorded in fn-5.5 task evidence (final commit of the sign-off task)
+**Sign-off commit:** d40bbbe6 (final commit of the sign-off task after review)
 
 ### FinalOverrideSet
 

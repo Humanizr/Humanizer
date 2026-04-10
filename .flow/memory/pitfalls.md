@@ -57,3 +57,6 @@ When documenting a closed-set surface model (e.g. canonical locale surfaces), en
 
 ## 2026-04-10 manual [pitfall]
 When flowctl updates task status via start/block/complete, it writes to .git/flow-state/ (runtime) but may not update .flow/tasks/*.json (checked-in definition file) -- always sync the definition JSON when the status change must be committed and visible to reviewers
+
+## 2026-04-10 manual [pitfall]
+When a sign-off or gate summary claims all acceptance criteria are met but one criterion is deferred, update the governing spec to explicitly allow the deferral -- do not only soften the summary language while leaving the spec as a hard requirement
