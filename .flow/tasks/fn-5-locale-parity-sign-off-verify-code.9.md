@@ -143,9 +143,8 @@ Capture verbatim output for each in task evidence.
 <!-- Updated by plan-sync: fn-5.7 used #if NET5_0_OR_GREATER guard (fallback path) not Polyfill PackageReference (preferred path) due to type conflicts -->
 
 ## Done summary
-TBD
-
+Reconciled verification-signoff.md to remove all DEFERRED/blocker/fn-4 framing (macOS net8.0 now PASS, non-macOS runs framed as host requirements), fixed three pitfall entries in .flow/memory/pitfalls.md to align with no-deferrals rule, and closed fn-4-fix-net48-test-suite-blocker as superseded by fn-5.7.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 269460eb11a9a0adf67d1b4e1c595255c6fa6fa1
+- Tests: dotnet format Humanizer.slnx --verify-no-changes (0 of 1596 formatted), dotnet test net10.0 -c Release (38908 passed, 0 failed), dotnet test net8.0 -c Release (38908 passed, 0 failed), dotnet build net48 -c Release (0 errors, 0 warnings), grep DEFERRED/blocker/fn-4 audits all zero matches
 - PRs:
