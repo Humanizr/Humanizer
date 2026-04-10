@@ -47,7 +47,7 @@ Roslyn incremental source generators used **only during the Humanizer library bu
 | `OrdinalDateProfileCatalogInput` | Ordinal date formatting per locale; consumes `calendar.months` and `calendar.monthsGenitive` arrays and embeds them into generated `OrdinalDatePattern` instances for month-name substitution |
 | `TimeOnlyToClockNotationProfileCatalogInput` | Clock notation rules per locale |
 | `WordsToNumberProfileCatalogInput` | Words-to-number parsing per locale |
-| `LocaleRegistryInput` | Master locale registry (maps culture names to profiles) and `LocaleNumberFormattingOverrides.g.cs` (per-locale decimal separator, negative sign, and group separator overrides consumed by culture-aware `Ordinalize` overloads, byte-size formatting, and `MetricNumeralExtensions`) |
+| `LocaleRegistryInput` | Master locale registry (maps culture names to profiles) and `LocaleNumberFormattingOverrides.g.cs` (per-locale decimal separator, negative sign, and group separator overrides consumed by culture-aware `Ordinalize` int overloads, byte-size formatting, and `MetricNumeralExtensions`) |
 | `TokenMapWordsToNumberInput` | Token maps for words-to-number parsing |
 
 Additionally, engine contract factories generate the wiring between locale profiles and their implementations:
