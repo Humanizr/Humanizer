@@ -250,7 +250,7 @@ public static class OrdinalizeExtensions
     }
 
     static int ParseOrdinalNumber(string numberString, CultureInfo culture) =>
-        int.Parse(numberString, NumberStyles.Integer | NumberStyles.AllowThousands, LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture));
+        int.Parse(numberString, culture);
 
     static string NormalizeOrdinalNumberString(string numberString)
     {
