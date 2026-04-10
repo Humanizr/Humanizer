@@ -37,7 +37,7 @@ Work through these questions in order.
    Only add one if the behavior is actually reusable.
 5. Is the locale still genuinely procedural?
    Only then keep or add a residual locale leaf.
-6. Does your locale need month names, day names, decimal separators, negative signs, or group separators that differ from what `CultureInfo.DateTimeFormat` / `NumberFormatInfo` returns on the user's platform?
+6. Does your locale need month names, decimal separators, negative signs, or group separators that differ from what `CultureInfo.DateTimeFormat` / `NumberFormatInfo` returns on the user's platform?
    If yes, author them in `calendar:` or `number.formatting:` so output is stable across .NET globalization modes and operating systems.
 
 ## File Shape
@@ -364,7 +364,7 @@ Put here:
 
 ### `calendar`
 
-Use this block when the locale needs month names that differ from what `CultureInfo.DateTimeFormat.MonthNames` returns on the user's platform. This is typically needed when ICU data drifts across macOS, Linux, and Windows, or when the platform-supplied names are incorrect for the locale.
+Use this block when the locale needs month names that differ from what `CultureInfo.DateTimeFormat.MonthNames` returns on the user's platform. This is typically needed when platform globalization data (ICU or NLS) drifts across macOS, Linux, and Windows, or when the platform-supplied names are incorrect for the locale.
 
 Put here:
 
@@ -423,7 +423,7 @@ When you are building a locale from scratch, use this order:
 8. Add `ordinal.date` or `ordinal.dateOnly` only for date-specific day phrasing.
 9. Add `clock` using the unified `phrase-clock` engine. All shipped locales use this single engine.
 10. Add `compass` if the locale needs heading labels and does not inherit acceptable same-language values.
-11. Add `calendar` only if ICU-supplied month names disagree across platforms or are incorrect.
+11. Add `calendar` only if platform-supplied month names disagree across platforms or are incorrect.
 12. Add `number.formatting` only if the decimal separator, negative sign, or group separator disagrees across platforms or is incorrect.
 
 This keeps authoring pressure on the generated/shared surfaces first and makes it easier to spot when a new block is really necessary.
@@ -455,7 +455,7 @@ This keeps authoring pressure on the generated/shared surfaces first and makes i
 4. Keep the engine name structural if the implementation is truly shared.
 5. Add parity tests and run benchmarks before removing the leaf.
 
-### Override ICU-Supplied Data
+### Override Platform-Supplied Globalization Data
 
 Use this recipe when a cross-platform probe shows that `CultureInfo` returns different month names, decimal separators, negative signs, or group separators on different platforms for your locale.
 

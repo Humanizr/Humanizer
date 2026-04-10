@@ -381,7 +381,7 @@ Notes:
 
 Purpose:
 
-- owns locale-specific temporal data that overrides `CultureInfo.DateTimeFormat` when ICU-supplied values drift across platforms or are incorrect
+- owns locale-specific temporal data that overrides `CultureInfo.DateTimeFormat` when platform globalization data (ICU or NLS) drifts across platforms or is incorrect
 - feeds the generated `OrdinalDatePattern` profiles with month-name arrays
 - should contain only data that differs from the platform-supplied `CultureInfo`; omit the block entirely when `CultureInfo` is correct
 

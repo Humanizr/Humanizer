@@ -196,7 +196,7 @@ dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
 ```
 
-## Override ICU Where Needed
+## Override Platform-Supplied Globalization Data
 
 Modern .NET uses ICU for globalization data while .NET Framework uses Windows NLS. These sources can diverge across platforms and target frameworks, producing different output for the same locale. When Humanizer delegates to `CultureInfo` for month names, decimal separators, negative signs, or group separators, this platform variance leaks into humanized output.
 
