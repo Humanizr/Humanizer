@@ -1,3 +1,5 @@
+> **Status: Superseded by fn-5-locale-parity-sign-off-verify-code.7 (closed in fn-5.9).** The net48 build break was caused by `Enum.GetValues<GrammaticalGender>()` not resolving in the test project under net48. fn-5.7 fixed it with an `#if NET5_0_OR_GREATER` guard at `LocaleTheoryMatrixCompletenessTests.cs:379` (the Polyfill PackageReference approach caused type conflicts). See commits 424ed0d2, 3f17c906.
+
 # Fix net48 test suite blocker: Enum.GetValues<T>() not available in .NET Framework 4.8
 
 ## Goal & Context

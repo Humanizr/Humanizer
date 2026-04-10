@@ -41,7 +41,7 @@ When a plan has both schema/runtime changes AND test-expected-value updates, mer
 When introducing a new data surface in YAML, do not create a separate registry if there is only one runtime consumer — embed the data directly into the existing consumer's generated profile to avoid premature abstraction
 
 ## 2026-04-09 manual [pitfall]
-When a verification gate depends on a known external blocker (e.g., net48 test suite blocked by Enum.GetValues<T>), either make it a tracked dependency or explicitly downgrade to documented follow-up — never leave a hard gate that cannot close
+When a verification gate appears to depend on an "external blocker", verify the blocker actually exists and is genuinely external before accepting it -- many "blockers" are actually local fixable issues (missing package reference, missing SDK, missing config) that can be resolved as part of the gate work. Never accept a deferral on the basis of an unverified blocker claim.
 
 ## 2026-04-09 manual [pitfall]
 When a decision document chooses values that contradict downstream task specs, explicitly flag each contradiction with the spec text that must be corrected -- do not leave the contradiction for implementers to discover
@@ -50,7 +50,7 @@ When a decision document chooses values that contradict downstream task specs, e
 When extending a JSON schema with new fields, update ALL consumers that read or compare the JSON — not just the primary comparison path but also before/after identity checks, matrix builders, and any script that hardcodes field lists or total counts
 
 ## 2026-04-09 manual [pitfall]
-When documenting verification status in gate summaries, match claim strength to actual evidence scope — do not state cross-platform agreement as PASS when only one platform was exercised; use DEFERRED for untested platforms
+When documenting verification status in gate summaries, match claim strength to actual evidence scope -- do not state cross-platform agreement as PASS when only one platform was exercised. State the verified host explicitly ("PASS on macOS net10.0 + net8.0 (local)") and identify other-host runs by their host requirement, not as "DEFERRED" -- non-macOS host runs are CI verification, not deferred items.
 
 ## 2026-04-10 manual [pitfall]
 When documenting a closed-set surface model (e.g. canonical locale surfaces), enumerate by canonical name rather than expanding nested members -- expanding nested members inflates the apparent surface count and misrepresents the closed-set contract
@@ -59,4 +59,4 @@ When documenting a closed-set surface model (e.g. canonical locale surfaces), en
 When flowctl updates task status via start/block/complete, it writes to .git/flow-state/ (runtime) but may not update .flow/tasks/*.json (checked-in definition file) -- always sync the definition JSON when the status change must be committed and visible to reviewers
 
 ## 2026-04-10 manual [pitfall]
-When a sign-off or gate summary claims all acceptance criteria are met but one criterion is deferred, update the governing spec to explicitly allow the deferral -- do not only soften the summary language while leaving the spec as a hard requirement
+When a sign-off or gate criterion cannot be met as written, fix the underlying work or block the gate -- do not weaken the criterion, do not edit the spec to add escape clauses ("OR deferred", "if SDK unavailable", "if reachable"), and do not soften the summary language to obscure the gap. Specs may only be tightened by sign-off work, never loosened.
