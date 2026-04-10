@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-10T07:04:51.595246Z",
+  "depends_on": [
+    "fn-6-fix-45-failing-net48-locale-tests.3"
+  ],
+  "epic": "fn-6-fix-45-failing-net48-locale-tests",
+  "id": "fn-6-fix-45-failing-net48-locale-tests.4",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-6-fix-45-failing-net48-locale-tests.4.md",
+  "status": "todo",
+  "title": "Update documentation for new number.formatting fields",
+  "updated_at": "2026-04-10T07:06:16.088418Z"
+}
