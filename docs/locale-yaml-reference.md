@@ -443,7 +443,7 @@ Notes:
 - Empty or absent = no override; the runtime uses the platform's `NumberFormatInfo` value for each respective property.
 - Inherits via `variantOf`: a child locale inherits the parent's `number.formatting` fields unless it authors its own. For example, `nn.yml` uses `variantOf: 'nb'` and inherits `nb`'s `negativeSign` override automatically.
 - The generated `LocaleNumberFormattingOverrides` registry walks `CultureInfo.Parent` at runtime (same fallback semantics as `LocaliserRegistry.FindLocaliser`), so unlisted child cultures fall back to the parent override.
-- Override fields are consumed by culture-aware `Ordinalize` overloads (int overloads use override-aware formatting; string overloads use override-aware parsing), byte-size string formatting (`ByteSize.ToString` and `ByteSize.ToFullWords`), and `MetricNumeralExtensions`. `ByteSize.TryParse` applies only the decimal separator override, and only when an explicit `CultureInfo` is passed as the format provider; `negativeSign` and `groupSeparator` overrides are never applied to parse paths.
+- Override fields are consumed by culture-aware `Ordinalize` overloads (int overloads use override-aware formatting; string overloads use override-aware parsing with all three overrides), byte-size string formatting (`ByteSize.ToString` and `ByteSize.ToFullWords`), and `MetricNumeralExtensions`. `ByteSize.TryParse` applies only the decimal separator override, and only when an explicit `CultureInfo` is passed as the format provider; it does not use `negativeSign` or `groupSeparator` overrides.
 
 Example (decimal separator):
 

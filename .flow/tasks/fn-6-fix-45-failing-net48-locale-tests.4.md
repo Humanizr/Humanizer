@@ -55,8 +55,8 @@ Update project documentation to reflect the newly implemented `negativeSign` and
 - [ ] adding-a-locale.md checklist and surface table updated
 - [ ] No broken markdown links or formatting issues
 ## Done summary
-Documented negativeSign and groupSeparator as implemented number.formatting fields across locale-yaml-reference.md, locale-yaml-how-to.md, adding-a-locale.md, localization.md, and ARCHITECTURE.md. Removed both from "future fields" list, added complete field documentation matching decimalSeparator style, added override recipes, and updated contributor checklist and surface responsibilities table.
+Documentation for negativeSign and groupSeparator number.formatting fields was already completed across commits cc750b6f through c594a780. All acceptance criteria verified: both fields fully documented in locale-yaml-reference.md (field entries + YAML examples), sub-recipes added to locale-yaml-how-to.md, adding-a-locale.md checklist and surface table updated, ARCHITECTURE.md and localization.md updated, future fields list corrected, and no broken markdown links.
 ## Evidence
-- Commits: cc750b6f, 17c72d22, edae073e, 2c7b3f69
-- Tests: documentation-only: no test commands required
+- Commits: cc750b6f, 17c72d22, edae073e, 2c7b3f69, 8e6b5353, 1b25f2fa, f733634d, 994cc835, c594a780
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release
 - PRs:
