@@ -514,7 +514,7 @@ surfaces:
 
 Use this when NLS and ICU disagree on the thousands separator for your locale. For example, lb-LU where NLS returns a space but CLDR specifies a period as the group separator. The override ensures that `ByteSize.ToString` uses the locale-correct thousands separator on all platforms.
 
-All formatting overrides are consumed by culture-aware `Ordinalize` overloads (int overloads use override-aware formatting; string overloads use override-aware parsing with all three overrides), byte-size string formatting (`ByteSize.ToString` and `ByteSize.ToFullWords`), and `MetricNumeralExtensions`. They do not modify the global `CultureInfo`. `ByteSize.TryParse` applies only the decimal separator override, and only when an explicit `CultureInfo` is passed as the format provider; it does not use `negativeSign` or `groupSeparator` overrides.
+All formatting overrides are consumed by culture-aware `Ordinalize` overloads (int overloads use all three overrides for formatting; string overloads use the override-aware `NumberFormatInfo` for integer parsing, which honors `negativeSign` and `groupSeparator` but not `decimalSeparator`), byte-size string formatting (`ByteSize.ToString` and `ByteSize.ToFullWords`), and `MetricNumeralExtensions`. They do not modify the global `CultureInfo`. `ByteSize.TryParse` applies only the decimal separator override, and only when an explicit `CultureInfo` is passed as the format provider; it does not use `negativeSign` or `groupSeparator` overrides.
 
 ## Validation
 
