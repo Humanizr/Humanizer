@@ -421,7 +421,7 @@ Before you call the work done, verify all of these:
 - registry completeness tests pass (`LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests`)
 - `dotnet pack` passes
 - benchmark comparisons show no regression versus the chosen base
-- verify that `date.ToOrdinalWords()` and `ByteSize` output for your locale is byte-identical on macOS, Linux, and Windows; if ICU-supplied data (month names, decimal separators, negative signs, group separators) disagrees across platforms or is incorrect for your locale, author explicit overrides in `calendar:` and/or `number.formatting:` rather than relying on `CultureInfo`
+- verify that `DateTime.ToOrdinalWords()`, `DateOnly.ToOrdinalWords()`, and `ByteSize` output for your locale is byte-identical on macOS, Linux, and Windows; if ICU-supplied data (month names, decimal separators, negative signs, group separators) disagrees across platforms or is incorrect for your locale, author explicit overrides in `calendar:` and/or `number.formatting:` rather than relying on `CultureInfo`
 
 ## Related Documents
 
