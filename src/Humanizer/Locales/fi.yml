@@ -296,6 +296,9 @@ surfaces:
           pluralCardinal: 'sataa'
           ordinalWord: 'sadas'
 
+    formatting:
+      negativeSign: '−'
+
     parse:
       engine: 'suffix-scale'
       cardinalMap:

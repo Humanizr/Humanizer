@@ -443,6 +443,9 @@ surfaces:
           plural: 'tūkstančių'
           ordinalStem: 'tūkstant'
 
+    formatting:
+      negativeSign: '−'
+
     parse:
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'

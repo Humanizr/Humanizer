@@ -302,6 +302,9 @@ surfaces:
       compoundOrdinalExcludedValues:
         - 13
 
+    formatting:
+      negativeSign: '−'
+
     parse:
       engine: 'token-map'
       normalizationProfile: 'Persian'

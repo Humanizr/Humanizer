@@ -63,3 +63,6 @@ When a sign-off or gate criterion cannot be met as written, fix the underlying w
 
 ## 2026-04-10 manual [pitfall]
 When extending a formatting override to new call sites, audit ALL overloads (int, long, double, etc.) of the same method family -- type-specific overloads often bypass changes made only to one variant
+
+## 2026-04-10 manual [pitfall]
+When adding culture-aware formatting overrides, check convenience overloads that delegate with NumberFormatInfo.CurrentInfo instead of CultureInfo.CurrentCulture -- the downstream code sees NFI not CultureInfo and skips culture-based override logic

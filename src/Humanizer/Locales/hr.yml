@@ -402,6 +402,9 @@ surfaces:
           paucal: 'tisuće'
           plural: 'tisuća'
 
+    formatting:
+      negativeSign: '−'
+
     parse:
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'

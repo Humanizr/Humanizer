@@ -412,6 +412,9 @@ surfaces:
           ordinalPlural: '{0}honnert'
           countWordFormNextWord: 'honnert'
 
+    formatting:
+      groupSeparator: '.'
+
     parse:
       engine: 'inverted-tens'
       cardinalMap:

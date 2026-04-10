@@ -315,6 +315,9 @@ surfaces:
         11: 'ellevte'
         12: 'tolvte'
 
+    formatting:
+      negativeSign: '−'
+
     parse:
       engine: 'compound-scale'
       cardinalMap:

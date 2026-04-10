@@ -421,6 +421,9 @@ surfaces:
           trialQuadral: 'tisoč'
           plural: 'tisoč'
 
+    formatting:
+      negativeSign: '−'
+
     parse:
       engine: 'inverted-tens'
       cardinalMap:

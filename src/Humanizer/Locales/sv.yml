@@ -360,6 +360,9 @@ surfaces:
         80: 'åttionde'
         90: 'nittionde'
 
+    formatting:
+      negativeSign: '−'
+
     parse:
       engine: 'compound-scale'
       cardinalMap:
