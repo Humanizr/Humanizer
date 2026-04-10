@@ -26,7 +26,7 @@ These instructions apply to the entire repository.
 ## Testing Expectations
 - Every functional change must include or update xUnit tests in `tests/Humanizer.Tests`.
 - Use culture-specific folders and `UseCulture` attribute for localization tests when applicable.
-- Run the test suite for the supported .NET targets (`dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). The net48 target is currently blocked on all platforms by `Enum.GetValues<T>()` usage in `LocaleTheoryMatrixCompletenessTests.cs` (tracked as fn-4); do not invoke it. Allow a few minutes for each run to complete.
+- Run the test suite for the supported .NET targets (`dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0`, `--framework net8.0`, and `--framework net48`). All three TFMs build successfully on every platform. net48 test execution requires a Windows host (the .NET Framework 4.8 runtime is Windows-only). Allow a few minutes for each run to complete.
 
 ## Build & Validation
 - Build command: `dotnet pack src/Humanizer/Humanizer.csproj -c Release -o <path>` (from the repository root). It must succeed without warnings or errors.

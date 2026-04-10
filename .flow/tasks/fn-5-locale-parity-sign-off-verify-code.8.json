@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-10T01:44:29.171528Z",
+  "depends_on": [
+    "fn-5-locale-parity-sign-off-verify-code.5"
+  ],
+  "epic": "fn-5-locale-parity-sign-off-verify-code",
+  "id": "fn-5-locale-parity-sign-off-verify-code.8",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.8.md",
+  "status": "todo",
+  "title": "Run net8.0 tests locally; restore strict net8.0 acceptance; re-record fn-5.5 evidence",
+  "updated_at": "2026-04-10T01:44:29.171638Z"
+}

@@ -376,7 +376,11 @@ public class LocaleTheoryMatrixCompletenessTests
         var data = new TheoryData<string, GrammaticalGender>();
         foreach (var localeName in LocaleCoverageData.ShippedLocales)
         {
+#if NET5_0_OR_GREATER
             foreach (var gender in Enum.GetValues<GrammaticalGender>())
+#else
+            foreach (var gender in (GrammaticalGender[])Enum.GetValues(typeof(GrammaticalGender)))
+#endif
             {
                 data.Add(localeName, (GrammaticalGender)gender);
             }

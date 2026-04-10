@@ -14,9 +14,10 @@ dotnet build Humanizer.slnx -c Release
 # Pack NuGet package
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts
 
-# Run tests (net10.0 or net8.0; net48 is blocked on all platforms by Enum.GetValues<T>() — see fn-4)
+# Run tests (all three TFMs build on every platform; net48 test execution requires a Windows host)
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
+dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net48  # Windows only
 
 # Run analyzer tests
 dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj

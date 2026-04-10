@@ -29,10 +29,13 @@ A thorough pre-plan audit (context-scout + docs-gap-scout + flow-gap-analyst) an
 - Update `readme.md` and `ARCHITECTURE.md` surface lists + generator table. **Executed in fn-5.3.**
 - Refresh repo-local skill (`.agents/skills/add-locale/SKILL.md` + `references/parity-checklist.md`) to match the 8-canonical + nested-members model, with corrected generator-input paths under `Generators/`. **Executed in fn-5.4.**
 - Verify fn-2's proxy-close checklist (every fn-2 acceptance item maps to a satisfying artifact in fn-3.5 or this epic), gate on residual/regression scans passing, then close fn-2. **Executed in fn-5.5.**
-- Append final sign-off section to `tools/verification-signoff.md` recording what was verified, outstanding items (fn-4 net48 blocker), and date. **Executed in fn-5.5.**
+- Append final sign-off section to `tools/verification-signoff.md` recording what was verified, outstanding items (fn-4 net48 blocker), and date. **Executed in fn-5.5; reconciled in fn-5.9 to remove all "DEFERRED TO CI" framing for net8.0 and to drop the fn-4 "blocker" prose after fn-5.7 fixed it.**
+- Fix the net48 test build break (`Enum.GetValues<T>()` not resolved in test project) by adding `Polyfill` PackageReference to `tests/Humanizer.Tests/Humanizer.Tests.csproj`; subsumes `fn-4-fix-net48-test-suite-blocker`. **Executed in fn-5.7.**
+- Re-run the net8.0 test suite locally (the .NET 8 SDK 8.0.419 is installed; the original fn-5.5 close falsely deferred this); revert the spec deferral language introduced by `commit d40bbbe6`; re-record fn-5.5 task evidence with the actual run output. **Executed in fn-5.8.**
+- Reconcile `tools/verification-signoff.md` and `.flow/memory/pitfalls.md` to remove all "DEFERRED TO CI" / "deferred to follow-up" / "external blocker" framing that the prior sign-off pass embedded into the project's memory; close `fn-4-fix-net48-test-suite-blocker` as superseded. **Executed in fn-5.9.**
 
 **Out of scope:**
-- Fixing the fn-4 net48 `Enum.GetValues<T>()` blocker — tracked separately, this epic only documents it as a known open item
+- ~~Fixing the fn-4 net48 `Enum.GetValues<T>()` blocker — tracked separately, this epic only documents it as a known open item~~ **(Updated 2026-04-09: brought into scope as fn-5.7. The "blocker" was misclassified — it was a one-line PackageReference fix, not an external constraint. fn-4 is closed superseded in fn-5.9.)**
 - Source-generator diagnostic that enforces "claimed overrides match YAML" — valuable follow-up, but a new build-time feature with its own test matrix; file as a follow-up epic after sign-off
 - CI-lint for executable CLAUDE.md command blocks — docs-hygiene follow-up, not sign-off work
 - Any changes to the four primary user docs (already accurate)
@@ -62,6 +65,16 @@ This split was introduced after the third plan-review pass flagged fn-5.1 as an 
 
 **Proxy-close discipline (fn-5.5)**: before marking fn-2 done, each of its 5 acceptance items must be explicitly mapped to a satisfying artifact with a file:line or task reference — no hand-waving. The close is **gated on all residual/parity/regression scans passing**: fn-5.5 prepares the mapping first, runs all scans second, gates on pass/fail third, then executes `flowctl done fn-2.1` fourth, and appends the final sign-off report fifth. The ordering is a correctness constraint, not a suggestion — if a scan fails, fn-2 must not be closed until the root cause is fixed. The scan battery includes regression checks for stale manual-registry phrasing (fn-5.2 + fn-5.4 regression) and stale `Common/` generator-input paths (fn-5.4 regression).
 
+**Sign-off correction (fn-5.7 / fn-5.8 / fn-5.9, added 2026-04-09)**: the original fn-5.5 close shipped with two defects that violate the project's no-deferrals rule and must be remediated:
+
+1. **net8.0 was falsely deferred to CI.** `tools/verification-signoff.md:98-104` claims `.NET 8.0 SDK is not installed on this machine (only .NET 10.0.2 is available)` and explicitly defers the net8.0 test run. The premise is false: `dotnet --list-sdks` reports `8.0.419` and `10.0.102`, with the .NET 8 runtime also installed. The deferral was then propagated into the spec by commit `d40bbbe6 fix(signoff): update epic spec to allow net8.0 CI deferral`, which softened the R14 acceptance criterion to add an `OR is deferred` escape clause. **Specs may only be tightened by sign-off work, never loosened.** fn-5.8 reverts the spec edit, runs the net8.0 test suite locally, and re-records fn-5.5's task evidence with the actual run output.
+
+2. **The fn-4 net48 build break was treated as an out-of-scope external blocker.** `tests/Humanizer.Tests/Localisation/LocaleTheoryMatrixCompletenessTests.cs:379` uses `Enum.GetValues<GrammaticalGender>()`, which fails to compile under `TargetFramework=net48` because the test project does not reference `Polyfill`. The library project DOES reference Polyfill (`PrivateAssets="all"`), and Polyfill 9.18.0 exposes `Enum.GetValues<TEnum>()` via C# 14 `extension(Enum)` syntax — verified by the library's clean net48 build. The fix is a one-line PackageReference addition to the test project. No "external blocker" existed; the fn-4 epic carried no tasks because the work was misclassified. fn-5.7 makes the fix; fn-5.9 closes fn-4 as superseded.
+
+3. **`.flow/memory/pitfalls.md` was actively contaminated.** Lines 61-62 (added during the original sign-off pass) endorsed "update the governing spec to explicitly allow the deferral" as a best practice. That entry is the inverse of the project's actual rule and must be deleted and replaced with the no-loosening rule. Adjacent entries (43-44 "downgrade to documented follow-up", 52-53 "use DEFERRED for untested platforms") encode the same wrong pattern and must be reframed. fn-5.9 owns this cleanup.
+
+The correction tasks must not introduce any new escape clauses, soften any other acceptance criteria, or weaken the sign-off in any way. Spec edits in this correction go in one direction only: **tighter**.
+
 ## Task DAG
 
 ```
@@ -74,6 +87,14 @@ fn-5.4 (add-locale skill refresh)              [parallel]
 
 fn-5.5 (sign-off + scans + fn-2 close)
   depends on: fn-5.1, fn-5.2, fn-5.3, fn-5.4, fn-5.6
+
+# Sign-off correction tasks (added after fn-5.5 close was found to have falsely deferred net8.0)
+fn-5.7 (net48 build break fix; subsumes fn-4)  [parallel — no deps on prior tasks]
+fn-5.8 (run net8.0 locally + restore strict acceptance + re-record fn-5.5 evidence)
+  depends on: fn-5.5
+
+fn-5.9 (reconcile sign-off doc + remove improper pitfall entries + close fn-4 superseded)
+  depends on: fn-5.7, fn-5.8
 ```
 
 ## Quick commands
@@ -82,9 +103,12 @@ fn-5.5 (sign-off + scans + fn-2 close)
 # Verify docs build / lint after changes
 dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic
 
-# Full test suite on modern targets (net48 gated by fn-4)
-dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
-dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
+# Full test suite on modern targets (run BOTH; no deferral)
+dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release
+dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0  -c Release
+
+# net48 build sanity (after fn-5.7 lands; test execution still requires Windows host)
+dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48
 
 # Parity-claim verification: enumerate the authoritative override set from YAML
 grep -l "^  calendar:" src/Humanizer/Locales/*.yml   # Should match FinalOverrideSet exactly
@@ -147,8 +171,13 @@ grep -n "\bta\b\|zu-ZA\|6 locale\|six locale" .flow/specs/fn-3-hard-code-locale-
 - [ ] `tools/verification-signoff.md` has a final sign-off section with date, verified items, the `FinalOverrideSet` literal, explicit out-of-scope list (fn-4 net48 blocker), six-task enumeration (fn-5.1 through fn-5.6), and reference to this epic (fn-5.5)
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes` passes
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passes
-- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passes locally, OR is deferred to CI when the .NET 8 SDK is not installed locally (overrides are framework-agnostic, generated at build time; deferral must be explicitly documented in the sign-off section)
-- [ ] net48 tests explicitly deferred to fn-4 (not run by this epic)
+- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passes (run locally; no deferral) — re-run and re-recorded in fn-5.8 after the original fn-5.5 close was found to have falsely deferred this on the premise that the .NET 8 SDK was unavailable when in fact `dotnet --list-sdks` reports `8.0.419` installed
+- [ ] `tests/Humanizer.Tests/Humanizer.Tests.csproj` builds cleanly for net48 (`dotnet build -f net48` exits 0; net48 test execution requires a Windows host but the project compiles on every platform) — verified in fn-5.7, which subsumes the work originally tracked in fn-4
+- [ ] `.flow/specs/fn-5-locale-parity-sign-off-verify-code.md` contains no `OR is deferred`, `deferred to CI when SDK unavailable`, `if SDK unavailable`, or equivalent escape-clause language anywhere in the Acceptance section or the requirement-coverage table — strict acceptance, no deferral path (fn-5.8)
+- [ ] `tools/verification-signoff.md` contains no `DEFERRED TO CI`, `DEFERRED (.NET 8 not installed)`, `Next CI run`, or `Explicitly deferred to CI` framing in the post-execution / verdict / outstanding-items sections; cross-platform runs that occur on a non-macOS host are framed as "REQUIRES <host>" CI verification, not as "deferred" items (fn-5.9)
+- [ ] `.flow/memory/pitfalls.md` does not contain the line `update the governing spec to explicitly allow the deferral` or any equivalent endorsement of weakening acceptance criteria; replaced with the inverse rule (fix the work, never weaken the criterion) (fn-5.9)
+- [ ] `fn-4-fix-net48-test-suite-blocker` epic is closed (`status: done`) with completion review note containing `Superseded by fn-5-locale-parity-sign-off-verify-code.7` and a reference to the fn-5.7 commit (fn-5.9)
+- [ ] `CLAUDE.md` and `AGENTS.md` no longer frame net48 as "blocked on all platforms by Enum.GetValues<T>()" or "tracked as fn-4" or "do not invoke it"; replaced with honest framing (build green on every platform; test execution requires Windows host) (fn-5.7)
 
 ## Early proof point
 
@@ -176,8 +205,13 @@ Task `fn-5-locale-parity-sign-off-verify-code.1` (derive `FinalOverrideSet` + cu
 | R11 | Execute fn-2 proxy-close (mapping table + gated `flowctl done`) — mapping prepared before scans, close executed only after scans pass | .5 | — |
 | R12 | Residual / regression scan battery: no stale "residual leaves" prose, no live deleted-converter references outside allowlisted file/line scope, no stale "avoid net48 on Linux" phrasing, no stale manual-registry phrasing, no stale `Common/` generator-input paths, calendar.months / number.formatting YAML **exact-set equality** (string-for-string, not cardinality) with every claim site, fn-3 historical drift reconciled | .5 | — |
 | R13 | Append final sign-off section to `tools/verification-signoff.md` | .5 | — |
-| R14 | `dotnet format --verify-no-changes` passes AND `net10.0` test suite passes locally; `net8.0` passes locally or deferred to CI when SDK unavailable (net48 deferred to fn-4) | .5 | — |
+| R14 | `dotnet format --verify-no-changes` passes AND full modern-target test suite passes on **both** `net10.0` and `net8.0` (run locally; no deferral). The original fn-5.5 close falsely deferred net8.0 on the premise that the .NET 8 SDK was unavailable; fn-5.8 reverts that deferral, runs the test suite locally with `dotnet 8.0.419` (already installed), and re-records fn-5.5's evidence. | .5, .8 | — |
 | R15 | Source-generator diagnostic enforcing claim/YAML parity | — | Deferred — new build-time feature with own test matrix; file as follow-up epic after sign-off |
 | R16 | CI-lint for executable CLAUDE.md command blocks | — | Deferred — docs-hygiene follow-up, not sign-off work |
-| R17 | Fix fn-4 net48 test-suite blocker | — | Out of scope — tracked as fn-4; sign-off only documents it as known open item |
+| R17 | Fix fn-4 net48 test-suite blocker | .7, .9 | Subsumed by fn-5.7 (Polyfill PackageReference fix); fn-4 closed superseded in fn-5.9 |
 | R18 | Drift-detection test that would catch future `compare-probes.cs` / claim-site divergence automatically | — | Deferred — build-time feature; fold into R15 follow-up epic |
+| R19 | Restore strict net8.0 acceptance: revert deferral language in spec (R14 acceptance bullet + requirement-coverage row), run net8.0 test suite locally, re-record fn-5.5 task evidence with the actual test run output | .8 | — |
+| R20 | Reconcile `tools/verification-signoff.md` to remove all "DEFERRED TO CI" framing for net8.0 (now passing locally) and reframe non-macOS host runs as CI verification (not deferrals); remove all stale fn-4 / "Enum.GetValues blocker" prose; update `### Verification status grid`, `### Final Verdict`, and `### Outstanding Cross-Platform Items` sections | .9 | — |
+| R21 | Reconcile `.flow/memory/pitfalls.md`: delete the line-61-62 entry endorsing "update the governing spec to explicitly allow the deferral"; replace with the inverse no-loosening rule; reframe lines 43-44 and 52-53 to align with the no-deferrals rule | .9 | — |
+| R22 | Close `fn-4-fix-net48-test-suite-blocker` as superseded with completion review note + add `> **Status: Superseded by fn-5.7**` blockquote at top of fn-4 spec | .9 | — |
+| R23 | Fix net48 test build break (`Enum.GetValues<T>()` not resolved): add `<PackageReference Include="Polyfill" PrivateAssets="all" />` to `tests/Humanizer.Tests/Humanizer.Tests.csproj`; verify all 3 TFMs build green; verify no test regressions on net8.0 / net10.0; update `CLAUDE.md` and `AGENTS.md` to drop the "blocked / see fn-4" framing | .7 | — |
