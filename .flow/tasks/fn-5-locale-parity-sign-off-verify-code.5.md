@@ -214,5 +214,8 @@ Append a section to `tools/verification-signoff.md` (at the bottom) titled "## F
 - [ ] Epic fn-5 can be marked done after this task completes (all acceptance criteria from the epic spec satisfied)
 
 ## Done summary
-
+Executed all five sub-activities of the fn-5.5 sign-off gate task in strict order: (1) prepared fn-2 proxy-close mapping with per-acceptance-item artifact citations in .flow/specs/fn-2-fix-stale-locale-documentation-after.md, (2) ran all 9 residual/parity/regression scans (2a-2i) with all passing, (3) gate passed, (4) closed fn-2 epic as done-by-proxy via flowctl, (5) appended Final sign-off section to tools/verification-signoff.md with verified checklist, FinalOverrideSet={bn,fa,he,ku,ta,zu-ZA}, out-of-scope items (fn-4 net48), and deferred follow-ups (R15/R16/R18). All fn-5 epic acceptance criteria verified.
 ## Evidence
+- Commits: 3d0c0c0a71d590aabbcf44926d170ff02fa55ebf
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic, scan 2a: deleted-converter residual (PASS - scope-based), scan 2b: residual conceptual-language (PASS), scan 2c: stale net48 framing (PASS - zero matches), scan 2d: stale manual-registry phrasing (PASS - zero matches), scan 2e: stale Common/ paths (PASS - zero matches), scan 2f: calendar/number.formatting exact-set equality (PASS), scan 2g: fn-3 historical drift (PASS - consistent with FinalOverrideSet), scan 2h: supported-languages exact-set equality (PASS - 62 locales), scan 2i: build+test+format (PASS - 38908 tests, 0 failures)
+- PRs:

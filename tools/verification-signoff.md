@@ -287,12 +287,16 @@ Each acceptance criterion from the fn-5 epic spec, with the satisfying task and 
 | 23 | `.agents/skills/add-locale/references/parity-checklist.md` updated with corrected paths | fn-5.4 | PASS |
 | 24 | `tools/verification-signoff.md:64` ku decimal-separator shows U+066B | fn-5.1 | PASS |
 | 25 | fn-2 proxy-close executed with artifact mapping | fn-5.5 | PASS -- mapping in `.flow/specs/fn-2-fix-stale-locale-documentation-after.md`; fn-2 closed via flowctl |
-| 26 | Scan battery 2a-2i all pass | fn-5.5 | PASS -- see scan evidence below |
-| 27 | Deleted-converter residual scan scope-based | fn-5.5 scan 2a | PASS -- matches at HumanizerSourceGeneratorTests.cs:68-70 (allowlisted) + release_notes.md:58 (removal documentation) |
+| 26 | Scan battery 2a-2i all pass | fn-5.5 | PASS (partial: net8.0 deferred to CI) -- see scan evidence below |
+| 27 | Deleted-converter residual scan scope-based | fn-5.5 scan 2a | PASS -- matches at HumanizerSourceGeneratorTests.cs:68-70 (allowlisted DoesNotContain assertions) + release_notes.md:58 (changelog entry documenting the removal of `DefaultTimeOnlyToClockNotationConverter`; this is a post-fn-5.3 addition not in the original allowlist but is unambiguously removal documentation, not a live code reference) |
 | 28 | `dotnet format --verify-no-changes` | fn-5.5 scan 2i | PASS -- 0 of 1596 files formatted |
 | 29 | `dotnet test` net10.0 | fn-5.5 scan 2i | PASS -- 38,908 tests, 0 failures |
 | 30 | `dotnet test` net8.0 | fn-5.5 scan 2i | DEFERRED -- .NET 8 SDK not installed locally; see section 3 above |
 | 31 | net48 deferred to fn-4 | documented | PASS -- not run; tracked as fn-4-fix-net48-test-suite-blocker |
+
+### Gate completeness
+
+This sign-off is **partial**: all scans pass on macOS net10.0, but `dotnet test --framework net8.0` was not run (.NET 8 SDK not installed locally; only 10.0.2 available). The net8.0 deferral is consistent with the existing verification-completeness inventory in section 8 above. Overrides are framework-agnostic (source-generated at build time), so net8.0 correctness is expected but unverified locally. The fn-2 proxy-close and fn-5 sign-off proceed because net8.0 is a CI-verification item, not a local gate -- the same policy applied throughout fn-3 and fn-5.1.
 
 ### Sub-tasks (fn-5.1 through fn-5.6)
 
