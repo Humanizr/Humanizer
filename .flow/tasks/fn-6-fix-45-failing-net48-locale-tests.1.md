@@ -38,9 +38,8 @@ Add a `calendar: months:` section to `sr.yml` with the 12 Cyrillic nominative mo
 - [ ] Zero regressions on net10.0 and net8.0 for all sr and sr-Latn tests
 - [ ] sr.yml has exactly 12 months in calendar block, all Cyrillic nominative forms
 ## Done summary
-TBD
-
+Added Cyrillic calendar month overrides to sr.yml with 12 nominative month names, enabling DateToOrdinalWords to produce Cyrillic output on all platforms including net48/NLS. All 38,908 tests pass on both net10.0 and net8.0 with zero regressions.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 86096be5e52d0166563d7c7f4c9cff318a7b32f6
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (38908 passed), dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 (38908 passed), dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj (58 passed), dotnet build src/Humanizer/Humanizer.csproj -c Release (0 warnings)
 - PRs:

@@ -297,9 +297,10 @@ public static class MetricNumeralExtensions
             return BuildMetricRepresentation(input, scale, formats, decimals);
         }
 
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var representation = decimals > 0
-            ? $"{input}.{new string('0', decimals.Value)}"
-            : input.ToString();
+            ? $"{input.ToString(nfi)}{nfi.NumberDecimalSeparator}{new string('0', decimals.Value)}"
+            : input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
@@ -355,10 +356,12 @@ public static class MetricNumeralExtensions
             ? Symbols[0][scale - 1]
             : Symbols[1][-scale - 1];
 
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
+
         if (decimals == 0)
         {
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
-            return number + space + GetUnitText(symbol, formats);
+            return number.ToString(nfi) + space + GetUnitText(symbol, formats);
         }
         else
         {
@@ -366,8 +369,8 @@ public static class MetricNumeralExtensions
             var extraZeroes = (decimals.Value - decimalPlaces);
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
 
-            return number
-                 + LocaleNumberFormattingOverrides.GetDecimalSeparator(CultureInfo.CurrentCulture)
+            return number.ToString(nfi)
+                 + nfi.NumberDecimalSeparator
                  + fractionalPart.ToString("d" + decimalPlaces)
                  + (extraZeroes <= 0 ? string.Empty : new string('0', extraZeroes))
                  + space

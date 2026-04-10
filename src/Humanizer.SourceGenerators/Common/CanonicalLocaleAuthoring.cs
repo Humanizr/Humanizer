@@ -246,8 +246,18 @@ public sealed partial class HumanizerSourceGenerator
 
         static void ValidateOptionalFormattingProperty(string localeCode, SimpleYamlMapping formatting, string propertyName)
         {
-            var value = formatting.GetScalar(propertyName);
-            if (value is not null && string.IsNullOrEmpty(value))
+            if (!formatting.TryGetValue(propertyName, out var value))
+            {
+                return;
+            }
+
+            if (value is not SimpleYamlScalar scalar)
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}.surfaces.number.formatting.{propertyName}' must be a scalar string, not a mapping or sequence.");
+            }
+
+            if (string.IsNullOrEmpty(scalar.Value))
             {
                 throw new InvalidOperationException(
                     $"Locale '{localeCode}.surfaces.number.formatting.{propertyName}' must be a non-empty string.");
