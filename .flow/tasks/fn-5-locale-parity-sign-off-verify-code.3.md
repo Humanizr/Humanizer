@@ -67,5 +67,8 @@ Update three user-facing files that describe the current post-fn-3 state at vari
 - [ ] No other content in `release_notes.md`, `readme.md`, or `ARCHITECTURE.md` modified
 
 ## Done summary
-
+Updated release_notes.md vNext with 4 new bullets for fn-3 deliverables (unified phrase-clock engine, calendar surface with months/monthsGenitive for bn/fa/he/ku/ta/zu-ZA, number.formatting.decimalSeparator for ar/fr-CH/ku, cross-platform byte-identical output). Updated readme.md Locale Data section to enumerate the 8 canonical surfaces by name with link to docs/localization.md. Updated ARCHITECTURE.md generator table rows for LocaleRegistryInput (LocaleNumberFormattingOverrides.g.cs output) and OrdinalDateProfileCatalogInput (calendar.months/monthsGenitive consumption), and updated prose summary to name all 8 canonical surfaces with links to reference docs.
 ## Evidence
+- Commits: a972cd73, abb45588
+- Tests: dotnet format Humanizer.slnx --verify-no-changes
+- PRs:

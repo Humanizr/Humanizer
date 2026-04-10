@@ -71,5 +71,8 @@ Refresh the repo-local skill that guides agents through adding a new locale to H
 - [ ] No files outside `.agents/skills/add-locale/` modified
 
 ## Done summary
-
+Refreshed the repo-local add-locale skill to enumerate all 8 canonical surfaces (list, formatter, phrases, number, ordinal, clock, compass, calendar) plus nested members (including number.formatting, calendar.months, calendar.monthsGenitive). Added missing proof subrows for calendar and number.formatting overrides, and added calendar/number.formatting rows to the surface-to-files matrix with correct generator-input paths under Generators/ (not stale Common/ paths).
 ## Evidence
+- Commits: f1d523814699060007779886cd86dfafa59201ba
+- Tests: grep -rn residual|phrase-hour|relative-hour .agents/skills/add-locale/, grep -rn Common/LocaleRegistryInput|Common/OrdinalDateProfileCatalogInput .agents/skills/add-locale/, diff verification: skill surface inventory matches CanonicalLocaleAuthoring.cs:44-54
+- PRs:

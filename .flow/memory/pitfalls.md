@@ -51,3 +51,6 @@ When extending a JSON schema with new fields, update ALL consumers that read or 
 
 ## 2026-04-09 manual [pitfall]
 When documenting verification status in gate summaries, match claim strength to actual evidence scope — do not state cross-platform agreement as PASS when only one platform was exercised; use DEFERRED for untested platforms
+
+## 2026-04-10 manual [pitfall]
+When documenting a closed-set surface model (e.g. canonical locale surfaces), enumerate by canonical name rather than expanding nested members -- expanding nested members inflates the apparent surface count and misrepresents the closed-set contract

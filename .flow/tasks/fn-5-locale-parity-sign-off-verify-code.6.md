@@ -82,5 +82,33 @@ No reference updates are required — the original claim is correct. This task s
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes` still passes (markdown-only edits should not trigger formatter, but confirm)
 
 ## Done summary
+Full-file audit of fn-3 historical planning artifacts (.flow/specs/fn-3-hard-code-locale-overrides-where-icu.md and .flow/tasks/fn-3-hard-code-locale-overrides-where-icu.3.md) confirmed all six-locale calendar.months references are consistent with FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA} (all 6 locales kept by fn-5.1). One annotation added to fn-3.3 done summary to clarify that fn-3.3 originally delivered 4 of the 6 overrides and fn-5.1 authored the remaining 2 (ta, zu-ZA).
 
 ## Evidence
+
+**FinalOverrideSet source:** fn-5-locale-parity-sign-off-verify-code.1 done-evidence: `["bn", "fa", "he", "ku", "ta", "zu-ZA"]`
+
+**YAML cross-check:** `grep -l "^  calendar:" src/Humanizer/Locales/*.yml` returned: bn.yml, fa.yml, he.yml, ku.yml, ta.yml, zu-ZA.yml (exact match with FinalOverrideSet)
+
+**Spec file grep** (`grep -n "\bta\b\|zu-ZA\|6 locale\|six locale\|bn.*fa.*he.*ku" .flow/specs/fn-3-hard-code-locale-overrides-where-icu.md`):
+- Line 9: `ta` in failure-category narrative — consistent (historical context, not override-set claim)
+- Line 10: `zu-ZA` in stylistic-variation narrative — consistent (historical context)
+- Line 25: `bn, fa, he, ku, zu-ZA, ta` in Scope — matches FinalOverrideSet exactly
+- Line 99: `bn, fa, he, ku, zu-ZA, ta` in Acceptance — matches FinalOverrideSet exactly
+- Line 118: `zu-ZA` proof-point + "other 5 locales" = 6 total — matches FinalOverrideSet
+
+**Task .3 file grep** (`grep -n "\bta\b\|zu-ZA\|6 locale\|six locale\|bn.*fa.*he.*ku" .flow/tasks/fn-3-hard-code-locale-overrides-where-icu.3.md`):
+- Line 4: `bn, fa, he, ku, zu-ZA, ta` in Description — matches FinalOverrideSet
+- Line 13: `bn.yml, fa.yml, he.yml, ku.yml, zu-ZA.yml, ta.yml` in Files list — matches FinalOverrideSet
+- Lines 102-103: `zu-ZA` and `ta` per-locale entries — consistent
+- Line 123: "the 6 locales" in Key context — matches FinalOverrideSet count
+- Lines 124, 129: `zu-ZA` proof-point + "other 5" = 6 — matches FinalOverrideSet
+- Line 140: 6 YAML files in Acceptance — matches FinalOverrideSet
+- Line 143: `bn, fa, he, ku, zu-ZA, ta` in test Acceptance — matches FinalOverrideSet
+- Line 148: Done summary lists 4 locales (bn, fa, he, ku) — historically accurate for what fn-3.3 delivered; fn-5.6 audit annotation added clarifying ta and zu-ZA were authored by fn-5.1
+
+**Annotation added:** One-line audit note appended to fn-3.3 done summary (line 148) explaining that the 4-locale done summary is historically accurate and the remaining 2 locales (ta, zu-ZA) were authored by fn-5.1.
+
+- Commits: (pending)
+- Tests: dotnet format Humanizer.slnx --verify-no-changes
+- PRs:

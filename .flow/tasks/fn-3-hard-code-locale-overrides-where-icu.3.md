@@ -146,6 +146,8 @@ Start with a single locale (e.g., `zu-ZA`, which has the simplest change — jus
 - [ ] No allocation regression in `DateTimeHumanizeExtensions` benchmarks (BenchmarkDotNet run)
 ## Done summary
 Added calendar canonical surface (8th surface) with months/monthsGenitive sub-keys, threaded through the full generator pipeline (CanonicalLocaleAuthoring -> LocaleYamlCatalog -> ResolvedLocaleDefinition -> OrdinalDateProfileCatalogInput -> OrdinalDatePattern), and populated calendar.months for bn (long-i Bengali), fa (Persian with ezafe), he (Hebrew with bet-prefix), ku (Sorani Arabic-script). OrdinalDatePattern substitutes MMMM with literal month names at format time when override is present, with zero behavior change for unaffected locales. Fixed test expected values for fa (ezafe marks) and zu-ZA (February spelling).
+
+> **fn-5.6 audit note (2026-04-10):** This done summary accurately records what fn-3.3 delivered at implementation time (4 locales: bn, fa, he, ku). The remaining 2 locales (ta, zu-ZA) were authored by fn-5.1 after cross-platform evidence was gathered; all 6 locales are now in FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA}. See fn-5-locale-parity-sign-off-verify-code.1 done-evidence for the full reconciliation.
 ## Evidence
 - Commits: 745d5bae, a39b274d, 81d7ba0e, 6231780e
 - Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj, dotnet format Humanizer.slnx --verify-no-changes
