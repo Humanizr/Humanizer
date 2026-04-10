@@ -85,55 +85,8 @@ The fn-5.5 task `status` remains `done`. We are correcting the evidence captured
 - [ ] Task evidence records: full `dotnet --list-sdks` and `dotnet --list-runtimes` output as the proof that the deferral premise was false; the two test-run capture commands and their full output
 
 ## Done summary
-Ran net8.0 and net10.0 test suites locally (both 38908 passed, 0 failed), restored strict net8.0 acceptance in the fn-5 epic spec (reverted deferral escape clause from commit d40bbbe6), re-recorded fn-5.5 task evidence with actual test run output and SDK proof, reconciled fn-5.7 task metadata to match the shipped #if guard implementation, and narrowed fn-5.5 done summary scope claim.
-
+Ran net8.0 and net10.0 test suites locally (both 38908 passed, 0 failed), restored strict net8.0 acceptance in the fn-5 epic spec (reverted deferral escape clause from commit d40bbbe6), re-recorded fn-5.5 task evidence with actual test run output and SDK proof, and reconciled fn-5.7 task metadata to match the shipped #if guard implementation.
 ## Evidence
-- Commits: dd476b9a, 03688f88, 63b29123
-
-### Verbatim: dotnet --list-sdks
-```
-8.0.419 [/usr/local/share/dotnet/sdk]
-10.0.102 [/usr/local/share/dotnet/sdk]
-```
-
-### Verbatim: dotnet --list-runtimes
-```
-Microsoft.AspNetCore.App 8.0.25 [/usr/local/share/dotnet/shared/Microsoft.AspNetCore.App]
-Microsoft.AspNetCore.App 10.0.2 [/usr/local/share/dotnet/shared/Microsoft.AspNetCore.App]
-Microsoft.NETCore.App 8.0.25 [/usr/local/share/dotnet/shared/Microsoft.NETCore.App]
-Microsoft.NETCore.App 10.0.2 [/usr/local/share/dotnet/shared/Microsoft.NETCore.App]
-```
-
-### Verbatim: dotnet test --framework net10.0 -c Release
-```
-Test run summary: Passed!
-  total: 38908
-  failed: 0
-  succeeded: 38908
-  skipped: 0
-  duration: 6s 828ms
-```
-
-### Verbatim: dotnet test --framework net8.0 -c Release
-```
-Test run summary: Passed!
-  total: 38908
-  failed: 0
-  succeeded: 38908
-  skipped: 0
-  duration: 10s 667ms
-```
-
-### Verbatim: dotnet format Humanizer.slnx --verify-no-changes
-```
-Formatted 0 of 1596 files.
-```
-
-### Verbatim: flowctl validate --epic fn-5-locale-parity-sign-off-verify-code
-```
-Validation for fn-5-locale-parity-sign-off-verify-code:
-  Tasks: 9
-  Valid: True
-```
-
+- Commits:
+- Tests:
 - PRs:
