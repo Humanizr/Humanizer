@@ -3,6 +3,7 @@
     "**/.git/**",
     "**/bin/**",
     "**/obj/**",
-    "**/nuget.config"        // exact file at repo root
+    "**/nuget.config",       // exact file at repo root
+    ".flow/**"               // task metadata (commit SHAs are not credentials)
   ]
 }
