@@ -1,0 +1,49 @@
+{
+  "created_at": "2026-04-10T18:33:25.042706Z",
+  "epic": {
+    "data": {
+      "branch_name": "fn-7-fix-ci-code-coverage-reporting-when",
+      "completion_review_status": "unknown",
+      "completion_reviewed_at": null,
+      "created_at": "2026-04-10T18:31:51.669481Z",
+      "default_impl": null,
+      "default_review": null,
+      "default_sync": null,
+      "depends_on_epics": [
+        "fn-6-fix-45-failing-net48-locale-tests"
+      ],
+      "id": "fn-7-fix-ci-code-coverage-reporting-when",
+      "next_task": 1,
+      "plan_review_status": "unknown",
+      "plan_reviewed_at": null,
+      "spec_path": ".flow/specs/fn-7-fix-ci-code-coverage-reporting-when.md",
+      "status": "open",
+      "title": "Fix CI code coverage reporting when tests fail",
+      "updated_at": "2026-04-10T18:32:21.824078Z"
+    },
+    "spec": "# Fix CI code coverage reporting when tests fail\n\n## Overview\n\nAzure DevOps CI pipeline (`azure-pipelines.yml`) silently skips code coverage report generation whenever any test step fails. The last CI run had 45 net48 test failures (fn-6 work) and produced zero coverage output. The pipeline should always generate and publish coverage reports regardless of test outcomes.\n\n## Scope\n\nThree defects in the pipeline prevent coverage reporting on test failure:\n\n1. **No `continueOnError` on test steps** \u2014 Azure DevOps defaults to `condition: succeeded()` on all subsequent steps, so when a test task returns exit code 2 (test failures), the reportgenerator task and artifact publish step are both skipped.\n2. **Coverage output path mismatch** \u2014 `--coverage` with Microsoft Testing Platform writes `.cobertura.xml` to a `TestResults/` subfolder under the working directory, but `reportgenerator@5` searches `$(Agent.TempDirectory)/**/*.cobertura.xml`. The glob finds nothing even when tests pass.\n3. **No explicit cobertura format flag** \u2014 While `testconfig.json` configures cobertura format, adding `--coverage-output-format cobertura` on the CLI is the belt-and-suspenders fix that ensures the correct format regardless of config loading.\n\nAdditionally, a fail-gate step is needed to preserve the red build status (the `continueOnError` pattern turns failed tests into yellow \"SucceededWithIssues\", which `succeeded('Build')` treats as success \u2014 meaning the CodeSign stage would incorrectly run).\n\n## Quick commands\n\n```bash\n# Verify coverage output locally (check for .cobertura.xml files)\ndotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release --framework net10.0 -- --coverage --coverage-output-format cobertura\nfind . -name \"*.cobertura.xml\" -type f\n\n# Validate pipeline YAML syntax\n# (push to a branch and check Azure DevOps for syntax errors)\n```\n\n## Acceptance\n\n- [ ] `reportgenerator@5` step executes and publishes coverage even when test steps have failures (exit code 2)\n- [ ] Coverage `.cobertura.xml` files land in a path that matches the reportgenerator glob pattern\n- [ ] Build status is red (Failed) when tests fail \u2014 not yellow (SucceededWithIssues)\n- [ ] CodeSign stage does NOT execute when tests fail (gated correctly on build failure)\n- [ ] Build packages artifact is still published even when tests fail (for diagnostic purposes)\n- [ ] Pipeline still works correctly on the green path (all tests pass)\n\n## Early proof point\n\nTask fn-7-fix-ci-code-coverage-reporting-when.1 is the sole task \u2014 push the pipeline fix and verify coverage appears in the Azure DevOps build results page for a run with both passing and failing tests. If the reportgenerator glob still finds zero files after fixing the path, re-investigate the exact file output structure of Microsoft.Testing.Extensions.CodeCoverage 18.5.2.\n\n## Requirement coverage\n\n| Req | Description | Task(s) | Gap justification |\n|-----|-------------|---------|-------------------|\n| R1  | reportgenerator runs on test failure | fn-7-fix-ci-code-coverage-reporting-when.1 | \u2014 |\n| R2  | Coverage files land in correct path | fn-7-fix-ci-code-coverage-reporting-when.1 | \u2014 |\n| R3  | Build stays red on test failure | fn-7-fix-ci-code-coverage-reporting-when.1 | \u2014 |\n| R4  | CodeSign gated correctly | fn-7-fix-ci-code-coverage-reporting-when.1 | \u2014 |\n| R5  | Packages still published | fn-7-fix-ci-code-coverage-reporting-when.1 | \u2014 |\n| R6  | Green path still works | fn-7-fix-ci-code-coverage-reporting-when.1 | \u2014 |\n"
+  },
+  "epic_id": "fn-7-fix-ci-code-coverage-reporting-when",
+  "schema_version": 2,
+  "tasks": [
+    {
+      "data": {
+        "assignee": null,
+        "claim_note": "",
+        "claimed_at": null,
+        "created_at": "2026-04-10T18:32:25.618396Z",
+        "depends_on": [],
+        "epic": "fn-7-fix-ci-code-coverage-reporting-when",
+        "id": "fn-7-fix-ci-code-coverage-reporting-when.1",
+        "priority": null,
+        "spec_path": ".flow/tasks/fn-7-fix-ci-code-coverage-reporting-when.1.md",
+        "status": "todo",
+        "title": "Fix azure-pipelines.yml to always generate coverage reports",
+        "updated_at": "2026-04-10T18:32:53.249338Z"
+      },
+      "id": "fn-7-fix-ci-code-coverage-reporting-when.1",
+      "runtime": null,
+      "spec": "# fn-7-fix-ci-code-coverage-reporting-when.1 Fix azure-pipelines.yml to always generate coverage reports\n\n## Description\nFix `azure-pipelines.yml` so that code coverage is always generated and published, even when test steps fail. Currently, any test failure (exit code 2) causes Azure DevOps to skip the `reportgenerator@5` step and all downstream steps.\n\n**Size:** M\n**Files:** `azure-pipelines.yml`\n\n## Approach\n\nFour targeted changes to the Build job in `azure-pipelines.yml`:\n\n1. **Add `continueOnError: true`** to both `DotNetCoreCLI@2` test tasks (lines 71-76 and 78-83). This allows the job to continue when tests fail, so downstream steps can execute.\n\n2. **Add `--coverage-output-format cobertura --results-directory $(Agent.TempDirectory)`** to both test task `arguments`. This ensures:\n   - Coverage output is in cobertura XML format (belt-and-suspenders alongside `testconfig.json`)\n   - Coverage files land in `$(Agent.TempDirectory)` where the `reportgenerator@5` glob (`$(Agent.TempDirectory)/**/*.cobertura.xml`) will find them\n\n3. **Add `condition: succeededOrFailed()`** to the `reportgenerator@5` task (line 87) and the `publish` task (line 96). This ensures they run when tests fail but NOT when the job is cancelled.\n\n4. **Add a fail-gate step** at the end of the Build job. This step checks `Agent.JobStatus` and exits non-zero when tests failed (converting yellow \"SucceededWithIssues\" back to red \"Failed\"). This preserves the correct build signal and keeps the CodeSign stage gated \u2014 `succeeded('Build')` evaluates false for `Failed`, so code signing correctly does not run when tests fail.\n\nThe existing `origin/codex/fix-coverage-config` branch addressed only the output path (change #2) but NOT the `continueOnError`/`condition` issues (changes #1, #3, #4). Do not merge that branch \u2014 implement all four changes fresh on the current branch.\n\n## Investigation targets\n\n**Required** (read before coding):\n- `azure-pipelines.yml` \u2014 the full pipeline definition, especially lines 71-98 (test + reportgenerator + publish steps) and lines 101-103 (CodeSign stage condition)\n- `tests/Humanizer.Tests/testconfig.json` \u2014 existing coverage config confirming cobertura format\n- `tests/Humanizer.Tests/Humanizer.Tests.csproj` \u2014 verify `Microsoft.Testing.Extensions.CodeCoverage` package reference\n\n**Optional** (reference as needed):\n- `Directory.Packages.props` \u2014 verify CodeCoverage version is 18.5.2\n- `tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj` \u2014 verify it also has CodeCoverage package\n\n## Key context\n\n- The project uses **Microsoft.Testing.Extensions.CodeCoverage** (v18.5.2), NOT coverlet. The `--coverage` flag is MTP-native.\n- MTP exit code 2 means \"at least one test failure\" \u2014 coverage data IS flushed to disk on exit code 2, so the data exists but the pipeline just doesn't process it.\n- In Azure DevOps, `continueOnError: true` sets the job status to `SucceededWithIssues` (yellow). The `succeeded()` condition function returns `true` for `SucceededWithIssues`. This is why the fail-gate step is essential \u2014 without it, CodeSign would run even with test failures.\n- The `condition: succeededOrFailed()` pattern is preferred over `condition: always()` because `always()` also runs on cancellation, while `succeededOrFailed()` does not.\n- xunit/xunit#3339 notes a Mono.Cecil version conflict for net48 coverage \u2014 this is a pre-existing issue unrelated to this fix and should not block this work.\n## Acceptance\n- [ ] Both test tasks (`Run Humanizer Tests`, `Run Analyzer Tests`) have `continueOnError: true`\n- [ ] Both test tasks include `--coverage-output-format cobertura --results-directory $(Agent.TempDirectory)` in arguments\n- [ ] `reportgenerator@5` task has `condition: succeededOrFailed()`\n- [ ] `publish` (build packages) task has `condition: succeededOrFailed()`\n- [ ] A fail-gate step exists at the end of the Build job that exits non-zero when `Agent.JobStatus` is not `Succeeded`\n- [ ] CodeSign stage condition unchanged (`succeeded('Build')`) \u2014 it correctly skips when fail-gate makes the build `Failed`\n- [ ] Pipeline YAML is syntactically valid\n- [ ] No changes to test projects, testconfig.json, or any non-pipeline files\n## Done summary\nTBD\n\n## Evidence\n- Commits:\n- Tests:\n- PRs:\n"
+    }
+  ]
+}
