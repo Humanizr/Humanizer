@@ -8,7 +8,7 @@
   "id": "fn-5-locale-parity-sign-off-verify-code.7",
   "priority": null,
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.7.md",
-  "status": "todo",
-  "title": "Fix net48 test build break (Polyfill ref) and remove stale fn-4 framing",
-  "updated_at": "2026-04-10T01:45:36.836332Z"
+  "status": "done",
+  "title": "Fix net48 test build break (#if guard) and remove stale fn-4 framing",
+  "updated_at": "2026-04-10T04:19:00.000000Z"
 }

@@ -40,7 +40,8 @@
       "sdk_proof": {
         "sdks": ["8.0.419", "10.0.102"],
         "runtimes": ["Microsoft.NETCore.App 8.0.25", "Microsoft.NETCore.App 10.0.2"]
-      }
+      },
+      "scans_2a_2i": "Full scan evidence (2a deleted-converter, 2b residual-language, 2c net48-framing, 2d manual-registry, 2e stale-paths, 2f calendar-set-equality, 2g fn3-drift, 2h locale-set-equality, 2i build+test+format) captured in fn-5.5.md Evidence section; all passed"
     },
     "corrected_by": "fn-5-locale-parity-sign-off-verify-code.8",
     "correction_commits": ["dd476b9a", "03688f88", "63b29123"]

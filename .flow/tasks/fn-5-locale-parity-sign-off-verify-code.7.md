@@ -15,15 +15,9 @@ This task subsumes the work of `fn-4-fix-net48-test-suite-blocker`. fn-4 will be
 
 ## Approach
 
-**Preferred path — add Polyfill reference to the test project:**
+**Shipped fix — `#if NET5_0_OR_GREATER` guard at the call site:**
 
-`src/Humanizer/Humanizer.csproj:11` already declares `<PackageReference Include="Polyfill" PrivateAssets="all" />`. Add the same line to `tests/Humanizer.Tests/Humanizer.Tests.csproj` (no Condition — Polyfill is no-op on net8.0/net10.0). The package is already pinned in `Directory.Packages.props:42` (`<PackageVersion Include="Polyfill" Version="9.18.0" />`), so no version specification is needed.
-
-Polyfill 9.18.0 implements `Enum.GetValues<TEnum>()` via the C# 14 `extension(Enum)` syntax (verified at `~/.nuget/packages/polyfill/9.18.0/contentFiles/cs/net471/EnumPolyfill.cs:8-20`), so the existing call site at `LocaleTheoryMatrixCompletenessTests.cs:379` continues to compile unchanged.
-
-**Fallback path — `#if` guard at the call site (only if Polyfill ref turns out to break something):**
-
-If for any reason adding the Polyfill PackageReference cannot be made to work for the test project (e.g., conflict with `Verify.XunitV3` or `xunit.v3.mtp-v2` typegen, surprising trim warning under `TreatWarningsAsErrors=true`), fall back to ifdef'ing the single call site:
+The Polyfill PackageReference approach was attempted first but caused 169 CS0436/CS0121 type conflicts with `Verify.XunitV3` and `xunit.v3.mtp-v2`. The shipped fix uses an ifdef guard at the single call site:
 
 ```csharp
 #if NET5_0_OR_GREATER

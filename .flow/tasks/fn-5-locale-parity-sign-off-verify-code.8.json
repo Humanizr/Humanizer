@@ -10,7 +10,35 @@
   "id": "fn-5-locale-parity-sign-off-verify-code.8",
   "priority": null,
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.8.md",
-  "status": "todo",
+  "status": "done",
   "title": "Run net8.0 tests locally; restore strict net8.0 acceptance; re-record fn-5.5 evidence",
-  "updated_at": "2026-04-10T01:44:29.171638Z"
+  "updated_at": "2026-04-10T04:04:57.186334Z",
+  "evidence": {
+    "net10_0_test": {
+      "command": "dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release",
+      "total": 38908,
+      "failed": 0,
+      "duration": "7s 726ms"
+    },
+    "net8_0_test": {
+      "command": "dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release",
+      "total": 38908,
+      "failed": 0,
+      "duration": "10s 734ms"
+    },
+    "format_check": {
+      "command": "dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic",
+      "result": "0 of 1596 files formatted"
+    },
+    "sdk_proof": {
+      "sdks": ["8.0.419", "10.0.102"],
+      "runtimes": ["Microsoft.NETCore.App 8.0.25", "Microsoft.NETCore.App 10.0.2"]
+    },
+    "spec_corrections": [
+      "R14 acceptance bullet strict (no deferral)",
+      "R14 coverage row strict with .5,.8",
+      "R17 row updated with .7,.9"
+    ],
+    "correction_commits": ["dd476b9a", "03688f88", "63b29123", "94cbc237", "b1877b7f", "0534b2a4"]
+  }
 }
