@@ -109,6 +109,6 @@ Full-file audit of fn-3 historical planning artifacts (.flow/specs/fn-3-hard-cod
 
 **Annotation added:** One-line audit note appended to fn-3.3 done summary (line 148) explaining that the 4-locale done summary is historically accurate and the remaining 2 locales (ta, zu-ZA) were authored by fn-5.1.
 
-- Commits: (pending)
+- Commits: 40ce7ffb
 - Tests: dotnet format Humanizer.slnx --verify-no-changes
 - PRs:
