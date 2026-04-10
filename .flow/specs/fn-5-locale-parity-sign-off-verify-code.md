@@ -143,11 +143,11 @@ grep -n "\bta\b\|zu-ZA\|6 locale\|six locale" .flow/specs/fn-3-hard-code-locale-
 - [ ] `tools/verification-signoff.md:64` `ku` decimal-separator override column shows `٫` (U+066B) to match `src/Humanizer/Locales/ku.yml:333` (fn-5.1)
 - [ ] fn-2 proxy-close executed: every fn-2 acceptance item mapped to a satisfying artifact (fn-3.5 task section or this epic's tasks), **mapping prepared before scans, fn-2 closed only after scans pass**, then fn-2 marked done via `flowctl` (fn-5.5)
 - [ ] fn-5.5 scan battery (2a-2i) passes: deleted-converter residual (scope-based allowlist, not count-based), conceptual-language, stale net48 framing, stale manual-registry phrasing, stale `Common/` paths, calendar.months / number.formatting YAML **exact-set equality** against every claim site (not just cardinality), fn-3 historical drift, supported-languages list, full modern-target test suite — all capturing verbatim output in task evidence
-- [ ] Deleted-converter residual scan: every match (regardless of count) falls within the allowlisted scope `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.cs` lines 68-70; any match outside that file/line range is a regression
+- [ ] Deleted-converter residual scan: every match (regardless of count) falls within an allowlisted scope: (1) `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.cs` lines 68-70, or (2) `release_notes.md` vNext section (changelog entries documenting converter removal); any match outside these scopes is a regression
 - [ ] `tools/verification-signoff.md` has a final sign-off section with date, verified items, the `FinalOverrideSet` literal, explicit out-of-scope list (fn-4 net48 blocker), six-task enumeration (fn-5.1 through fn-5.6), and reference to this epic (fn-5.5)
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes` passes
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passes
-- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passes
+- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passes locally, OR is deferred to CI when the .NET 8 SDK is not installed locally (overrides are framework-agnostic, generated at build time; deferral must be explicitly documented in the sign-off section)
 - [ ] net48 tests explicitly deferred to fn-4 (not run by this epic)
 
 ## Early proof point
@@ -176,7 +176,7 @@ Task `fn-5-locale-parity-sign-off-verify-code.1` (derive `FinalOverrideSet` + cu
 | R11 | Execute fn-2 proxy-close (mapping table + gated `flowctl done`) — mapping prepared before scans, close executed only after scans pass | .5 | — |
 | R12 | Residual / regression scan battery: no stale "residual leaves" prose, no live deleted-converter references outside allowlisted file/line scope, no stale "avoid net48 on Linux" phrasing, no stale manual-registry phrasing, no stale `Common/` generator-input paths, calendar.months / number.formatting YAML **exact-set equality** (string-for-string, not cardinality) with every claim site, fn-3 historical drift reconciled | .5 | — |
 | R13 | Append final sign-off section to `tools/verification-signoff.md` | .5 | — |
-| R14 | `dotnet format --verify-no-changes` passes AND full modern-target test suite passes on **both** `net10.0` and `net8.0` (net48 deferred to fn-4) | .5 | — |
+| R14 | `dotnet format --verify-no-changes` passes AND `net10.0` test suite passes locally; `net8.0` passes locally or deferred to CI when SDK unavailable (net48 deferred to fn-4) | .5 | — |
 | R15 | Source-generator diagnostic enforcing claim/YAML parity | — | Deferred — new build-time feature with own test matrix; file as follow-up epic after sign-off |
 | R16 | CI-lint for executable CLAUDE.md command blocks | — | Deferred — docs-hygiene follow-up, not sign-off work |
 | R17 | Fix fn-4 net48 test-suite blocker | — | Out of scope — tracked as fn-4; sign-off only documents it as known open item |
