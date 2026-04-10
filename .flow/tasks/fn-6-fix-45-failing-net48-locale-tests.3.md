@@ -91,8 +91,7 @@ Adding real YAML data to locale files populates the `NegativeSignOverrides` and 
 - [ ] Existing parse tests pass without modification (confirms no parse behavior changes)
 - [ ] Build produces zero warnings
 ## Done summary
-TBD
-
+Added negativeSign (U+2212) YAML overrides to fi, hr, nb, sv, sl, lt, fa locales and groupSeparator ('.') override to lb locale. Wired all 4 culture-aware OrdinalizeExtensions call sites to use GetFormattingNumberFormat for cross-platform formatting consistency. WordFormTemplateOrdinalizer verified as not needing changes since it receives pre-formatted strings from OrdinalizeExtensions.
 ## Evidence
 - Commits:
 - Tests:
