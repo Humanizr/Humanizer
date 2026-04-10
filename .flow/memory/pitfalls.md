@@ -66,3 +66,6 @@ When extending a formatting override to new call sites, audit ALL overloads (int
 
 ## 2026-04-10 manual [pitfall]
 When adding culture-aware formatting overrides, check convenience overloads that delegate with NumberFormatInfo.CurrentInfo instead of CultureInfo.CurrentCulture -- the downstream code sees NFI not CultureInfo and skips culture-based override logic
+
+## 2026-04-10 manual [pitfall]
+When wiring culture-aware formatting overrides to int overloads, also audit string overloads that parse with the same culture -- int.Parse(s, culture) uses NumberStyles.Integer which excludes AllowThousands, so groupSeparator overrides are silently ignored unless the style is explicitly expanded

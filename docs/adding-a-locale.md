@@ -140,7 +140,7 @@ This is what each canonical surface owns:
 | `clock` | `TimeOnly.ToClockNotation` phrase templates or clock engine selection |
 | `compass` | Full and abbreviated heading/compass labels |
 | `calendar` | Month-name overrides (nominative and genitive) for stable cross-platform date output |
-| `number.formatting` | Decimal separator override for stable cross-platform numeric output |
+| `number.formatting` | Decimal separator, negative sign, and group separator overrides for stable cross-platform numeric output |
 
 Two boundaries matter:
 
@@ -220,6 +220,8 @@ surfaces:
       engine: '<words-to-number-engine>'
     formatting:
       decimalSeparator: '<separator>'
+      negativeSign: '<sign>'
+      groupSeparator: '<separator>'
 
   ordinal:
     numeric:
@@ -419,7 +421,7 @@ Before you call the work done, verify all of these:
 - registry completeness tests pass (`LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests`)
 - `dotnet pack` passes
 - benchmark comparisons show no regression versus the chosen base
-- verify that `date.ToOrdinalWords()` and `ByteSize` output for your locale is byte-identical on macOS, Linux, and Windows; if ICU-supplied data (month names, decimal separators) disagrees across platforms or is incorrect for your locale, author explicit overrides in `calendar:` and/or `number.formatting:` rather than relying on `CultureInfo`
+- verify that `date.ToOrdinalWords()` and `ByteSize` output for your locale is byte-identical on macOS, Linux, and Windows; if ICU-supplied data (month names, decimal separators, negative signs, group separators) disagrees across platforms or is incorrect for your locale, author explicit overrides in `calendar:` and/or `number.formatting:` rather than relying on `CultureInfo`
 
 ## Related Documents
 

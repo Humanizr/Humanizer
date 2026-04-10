@@ -37,7 +37,7 @@ Work through these questions in order.
    Only add one if the behavior is actually reusable.
 5. Is the locale still genuinely procedural?
    Only then keep or add a residual locale leaf.
-6. Does your locale need month names, day names, or decimal separators that differ from what `CultureInfo.DateTimeFormat` / `NumberFormatInfo` returns on the user's platform?
+6. Does your locale need month names, day names, decimal separators, negative signs, or group separators that differ from what `CultureInfo.DateTimeFormat` / `NumberFormatInfo` returns on the user's platform?
    If yes, author them in `calendar:` or `number.formatting:` so output is stable across .NET globalization modes and operating systems.
 
 ## File Shape
@@ -116,6 +116,8 @@ surfaces:
       engine: '<words-to-number-engine>'
     formatting:
       decimalSeparator: '<separator>'
+      negativeSign: '<sign>'
+      groupSeparator: '<separator>'
 
   ordinal:
     numeric:
@@ -375,14 +377,18 @@ Do not author `calendar:` when `CultureInfo` already returns the correct month n
 
 ### `number.formatting`
 
-Use this block when the locale needs a decimal separator that differs from what `NumberFormatInfo.NumberDecimalSeparator` returns on the user's platform. This is the "output as digits" complement to `number.words` (output as words) and `number.parse` (input).
+Use this block when the locale needs a decimal separator, negative sign, or group separator that differs from what `NumberFormatInfo` returns on the user's platform. This is the "output as digits" complement to `number.words` (output as words) and `number.parse` (input).
 
 Put here:
 
 - `decimalSeparator`
   The locale-correct decimal separator character
+- `negativeSign`
+  The locale-correct negative sign character (e.g., U+2212 minus sign for Nordic/European locales where NLS returns U+002D hyphen-minus)
+- `groupSeparator`
+  The locale-correct thousands group separator character (e.g., period for lb-LU where NLS returns a space)
 
-Do not author `number.formatting:` when `NumberFormatInfo` already returns the correct separator on all platforms.
+Do not author `number.formatting:` when `NumberFormatInfo` already returns the correct values on all platforms.
 
 ## Choosing Between A Shared Engine And A New One
 
@@ -418,7 +424,7 @@ When you are building a locale from scratch, use this order:
 9. Add `clock` using the unified `phrase-clock` engine. All shipped locales use this single engine.
 10. Add `compass` if the locale needs heading labels and does not inherit acceptable same-language values.
 11. Add `calendar` only if ICU-supplied month names disagree across platforms or are incorrect.
-12. Add `number.formatting` only if the decimal separator disagrees across platforms or is incorrect.
+12. Add `number.formatting` only if the decimal separator, negative sign, or group separator disagrees across platforms or is incorrect.
 
 This keeps authoring pressure on the generated/shared surfaces first and makes it easier to spot when a new block is really necessary.
 
@@ -451,7 +457,7 @@ This keeps authoring pressure on the generated/shared surfaces first and makes i
 
 ### Override ICU-Supplied Data
 
-Use this recipe when a cross-platform probe shows that `CultureInfo` returns different month names or decimal separators on different platforms for your locale.
+Use this recipe when a cross-platform probe shows that `CultureInfo` returns different month names, decimal separators, negative signs, or group separators on different platforms for your locale.
 
 **Month-name override** (minimum YAML):
 
@@ -486,7 +492,29 @@ surfaces:
 
 Replace `'.'` with the correct separator for your locale.
 
-These overrides affect only Humanizer's output. They do not modify the global `CultureInfo`.
+**Negative-sign override** (minimum YAML):
+
+```yaml
+surfaces:
+  number:
+    formatting:
+      negativeSign: '−'   # U+2212 minus sign
+```
+
+Use this when ICU/CLDR specifies U+2212 (minus sign) but Windows NLS returns U+002D (hyphen-minus) for your locale. This is common for Nordic and European locales (fi, sv, nb, nn, hr, sl, lt). The override ensures that negative numbers rendered by `OrdinalizeExtensions` and `ByteSize.ToString` use the typographically correct minus sign on all platforms.
+
+**Group-separator override** (minimum YAML):
+
+```yaml
+surfaces:
+  number:
+    formatting:
+      groupSeparator: '.'
+```
+
+Use this when NLS and ICU disagree on the thousands separator for your locale. For example, lb-LU where NLS returns a space but CLDR specifies a period as the group separator. The override ensures that `ByteSize.ToString` uses the locale-correct thousands separator on all platforms.
+
+All formatting overrides affect only Humanizer's output paths. They do not modify the global `CultureInfo` and do not affect parse paths (`ByteSize.TryParse`).
 
 ## Validation
 
