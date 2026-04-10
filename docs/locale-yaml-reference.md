@@ -428,7 +428,7 @@ Future fields: `monthsAbbreviated`, `days`, `daysAbbreviated`, `dayPeriods`, `am
 
 Purpose:
 
-- owns locale-specific number formatting data that overrides `NumberFormatInfo` when ICU-supplied values drift across platforms or are incorrect
+- owns locale-specific number formatting data that overrides `NumberFormatInfo` when platform globalization data (ICU or NLS) drifts across platforms or is incorrect
 - feeds culture-aware `Ordinalize` overloads, byte-size string formatting (`ByteSize.ToString` / `ToFullWords`), and `MetricNumeralExtensions` with stable decimal separator, negative sign, and group separator values
 - symmetric with `number.words` (output as words) and `number.parse` (input); `number.formatting` is "output as digits"
 
