@@ -77,9 +77,8 @@ The fallback is the same shape as the existing `#if NET5_0_OR_GREATER` guard alr
 - [ ] Task evidence records: chosen path (preferred / fallback), exact build commands run, exit codes, and a one-line note that fn-4 is superseded (final close happens in fn-5.9)
 
 ## Done summary
-TBD
-
+Fixed net48 test build break by adding #if NET5_0_OR_GREATER guard around Enum.GetValues<GrammaticalGender>() in LocaleTheoryMatrixCompletenessTests.cs (Polyfill PackageReference approach caused type conflicts), and updated CLAUDE.md/AGENTS.md to remove stale fn-4 blocked framing, accurately documenting that all 3 TFMs build everywhere and net48 test execution requires a Windows host.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 424ed0d2, 3f17c906
+- Tests: dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48 (0 errors, 0 warnings), dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net8.0 (0 errors, 0 warnings), dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net10.0 (0 errors, 0 warnings), dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (38908 passed, 0 failed), dotnet build Humanizer.slnx -c Release (0 errors, 0 warnings), dotnet format Humanizer.slnx --verify-no-changes (0 of 1596 formatted), grep -rn fn-4/blocked CLAUDE.md AGENTS.md (zero matches)
 - PRs:

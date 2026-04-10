@@ -59,13 +59,13 @@ The pitfall file's existing line ordering and date headers should be preserved; 
 Use `flowctl epic complete fn-4-fix-net48-test-suite-blocker` (or the equivalent JSON status update if `complete` is not supported for zero-task epics) with a completion review note that reads:
 
 ```
-Superseded by fn-5-locale-parity-sign-off-verify-code.7. The net48 build break was caused by the test project missing a Polyfill PackageReference; fn-5.7 added it and verified `dotnet build -f net48` succeeds on all platforms. fn-4 carried no tasks and required no separate work; closing as superseded with no executed tasks. See fn-5.7 commit <hash>.
+Superseded by fn-5-locale-parity-sign-off-verify-code.7. The net48 build break was caused by `Enum.GetValues<GrammaticalGender>()` in `LocaleTheoryMatrixCompletenessTests.cs:379` not resolving under net48; fn-5.7 fixed it with an `#if NET5_0_OR_GREATER` guard (the Polyfill PackageReference approach was tried first but caused type conflicts) and verified `dotnet build -f net48` succeeds on all platforms. fn-4 carried no tasks and required no separate work; closing as superseded with no executed tasks. See fn-5.7 commits 424ed0d2, 3f17c906.
 ```
 
 Also add a one-line note at the top of `.flow/specs/fn-4-fix-net48-test-suite-blocker.md` (above the existing `# Title`):
 
 ```
-> **Status: Superseded by fn-5-locale-parity-sign-off-verify-code.7 (closed in fn-5.9).** The Polyfill 9.18.0 package — already a library dependency — exposes `Enum.GetValues<TEnum>()` via C# 14 `extension(Enum)` syntax. The fix was a one-line PackageReference addition to the test project; no source change was required.
+> **Status: Superseded by fn-5-locale-parity-sign-off-verify-code.7 (closed in fn-5.9).** The net48 build break was caused by `Enum.GetValues<GrammaticalGender>()` not resolving in the test project under net48. fn-5.7 fixed it with an `#if NET5_0_OR_GREATER` guard at `LocaleTheoryMatrixCompletenessTests.cs:379` (the Polyfill PackageReference approach caused type conflicts). See commits 424ed0d2, 3f17c906.
 ```
 
 Verify with `flowctl show fn-4-fix-net48-test-suite-blocker --json` that the status is `done` and the completion note is recorded.
@@ -134,6 +134,8 @@ Capture verbatim output for each in task evidence.
 - [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release` passes (re-verification, no regression)
 - [ ] `dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48` exits 0 with 0 errors and 0 warnings (re-verification of fn-5.7 fix)
 - [ ] Task evidence captures verbatim output from all three test/build commands above and the four grep commands listed in Step 4
+
+<!-- Updated by plan-sync: fn-5.7 used #if NET5_0_OR_GREATER guard (fallback path) not Polyfill PackageReference (preferred path) due to type conflicts -->
 
 ## Done summary
 TBD
