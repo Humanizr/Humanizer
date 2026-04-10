@@ -16,9 +16,10 @@ This task does **not** edit `tools/verification-signoff.md` (handed off to fn-5.
 **Size:** M (3 files + 1 test run + 1 task-evidence update; tightly coupled because they all describe the same change).
 
 **Files:**
-- `.flow/specs/fn-5-locale-parity-sign-off-verify-code.md` (revert deferral language in two locations: R14 acceptance bullet near line ~150 and R14 requirement-coverage row near line ~178)
+- `.flow/specs/fn-5-locale-parity-sign-off-verify-code.md` (revert deferral language in two locations: R14 acceptance bullet near line ~150 and R14 requirement-coverage row near line ~178; reconcile Scope/out-of-scope fn-5.7 references to match shipped #if guard fix)
 - `.flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.json` (re-record evidence with net8.0 pass output; status stays `done`)
 - `.flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md` (sync `## Done summary` and `## Evidence` sections to match the JSON update)
+- `.flow/tasks/fn-5-locale-parity-sign-off-verify-code.7.md` (reconcile title, Files, and Acceptance to match the shipped #if guard implementation, not the abandoned Polyfill path)
 - (no changes to `tools/verification-signoff.md` — that is fn-5.9's scope)
 
 ## Approach
@@ -86,7 +87,52 @@ The fn-5.5 task `status` remains `done`. We are correcting the evidence captured
 Ran net8.0 and net10.0 test suites locally (both 38908 passed, 0 failed), restored strict net8.0 acceptance in the fn-5 epic spec (reverted deferral escape clause from commit d40bbbe6), re-recorded fn-5.5 task evidence with actual test run output and SDK proof, reconciled fn-5.7 task metadata to match the shipped #if guard implementation, and narrowed fn-5.5 done summary scope claim.
 
 ## Evidence
-- Commits: dd476b9a (initial implementation), 03688f88 (review feedback fixes)
-- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release (38908 passed, 0 failed, 6.8s), dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release (38908 passed, 0 failed, 10.7s), dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic (0 of 1596 formatted)
-- SDK proof: dotnet --list-sdks: 8.0.419, 10.0.102; dotnet --list-runtimes: Microsoft.NETCore.App 8.0.25, Microsoft.NETCore.App 10.0.2, Microsoft.AspNetCore.App 8.0.25, Microsoft.AspNetCore.App 10.0.2
+- Commits: dd476b9a, 03688f88, 63b29123
+
+### Verbatim: dotnet --list-sdks
+```
+8.0.419 [/usr/local/share/dotnet/sdk]
+10.0.102 [/usr/local/share/dotnet/sdk]
+```
+
+### Verbatim: dotnet --list-runtimes
+```
+Microsoft.AspNetCore.App 8.0.25 [/usr/local/share/dotnet/shared/Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 10.0.2 [/usr/local/share/dotnet/shared/Microsoft.AspNetCore.App]
+Microsoft.NETCore.App 8.0.25 [/usr/local/share/dotnet/shared/Microsoft.NETCore.App]
+Microsoft.NETCore.App 10.0.2 [/usr/local/share/dotnet/shared/Microsoft.NETCore.App]
+```
+
+### Verbatim: dotnet test --framework net10.0 -c Release
+```
+Test run summary: Passed!
+  total: 38908
+  failed: 0
+  succeeded: 38908
+  skipped: 0
+  duration: 6s 828ms
+```
+
+### Verbatim: dotnet test --framework net8.0 -c Release
+```
+Test run summary: Passed!
+  total: 38908
+  failed: 0
+  succeeded: 38908
+  skipped: 0
+  duration: 10s 667ms
+```
+
+### Verbatim: dotnet format Humanizer.slnx --verify-no-changes
+```
+Formatted 0 of 1596 files.
+```
+
+### Verbatim: flowctl validate --epic fn-5-locale-parity-sign-off-verify-code
+```
+Validation for fn-5-locale-parity-sign-off-verify-code:
+  Tasks: 9
+  Valid: True
+```
+
 - PRs:

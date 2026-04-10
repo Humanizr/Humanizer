@@ -42,6 +42,7 @@
         "runtimes": ["Microsoft.NETCore.App 8.0.25", "Microsoft.NETCore.App 10.0.2"]
       }
     },
-    "corrected_by": "fn-5-locale-parity-sign-off-verify-code.8"
+    "corrected_by": "fn-5-locale-parity-sign-off-verify-code.8",
+    "correction_commits": ["dd476b9a", "03688f88", "63b29123"]
   }
 }
