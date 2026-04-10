@@ -16,5 +16,32 @@
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md",
   "status": "done",
   "title": "Close fn-2 proxy, run residual scans, and append final sign-off report",
-  "updated_at": "2026-04-09T21:34:12.063293Z"
+  "updated_at": "2026-04-09T21:34:12.063293Z",
+  "evidence": {
+    "scan_details": {
+      "net10_0": {
+        "command": "dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release",
+        "result": "38908 passed, 0 failed",
+        "duration": "6.8s",
+        "exit_code": 0
+      },
+      "net8_0": {
+        "command": "dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release",
+        "result": "38908 passed, 0 failed",
+        "duration": "10.7s",
+        "exit_code": 0,
+        "note": "Evidence corrected by fn-5.8: originally falsely claimed SDK unavailable"
+      },
+      "format_check": {
+        "command": "dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic",
+        "result": "0 of 1596 files formatted",
+        "exit_code": 0
+      },
+      "sdk_proof": {
+        "sdks": ["8.0.419", "10.0.102"],
+        "runtimes": ["Microsoft.NETCore.App 8.0.25", "Microsoft.NETCore.App 10.0.2"]
+      }
+    },
+    "corrected_by": "fn-5-locale-parity-sign-off-verify-code.8"
+  }
 }

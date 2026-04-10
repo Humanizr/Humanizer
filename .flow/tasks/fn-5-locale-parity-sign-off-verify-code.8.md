@@ -83,9 +83,10 @@ The fn-5.5 task `status` remains `done`. We are correcting the evidence captured
 - [ ] Task evidence records: full `dotnet --list-sdks` and `dotnet --list-runtimes` output as the proof that the deferral premise was false; the two test-run capture commands and their full output
 
 ## Done summary
-TBD
+Ran net8.0 and net10.0 test suites locally (both 38908 passed, 0 failed), restored strict net8.0 acceptance in the fn-5 epic spec (reverted deferral escape clause from commit d40bbbe6), re-recorded fn-5.5 task evidence with actual test run output and SDK proof, reconciled fn-5.7 task metadata to match the shipped #if guard implementation, and narrowed fn-5.5 done summary scope claim.
 
 ## Evidence
-- Commits:
-- Tests:
+- Commits: dd476b9a (initial implementation), 03688f88 (review feedback fixes)
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release (38908 passed, 0 failed, 6.8s), dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release (38908 passed, 0 failed, 10.7s), dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic (0 of 1596 formatted)
+- SDK proof: dotnet --list-sdks: 8.0.419, 10.0.102; dotnet --list-runtimes: Microsoft.NETCore.App 8.0.25, Microsoft.NETCore.App 10.0.2, Microsoft.AspNetCore.App 8.0.25, Microsoft.AspNetCore.App 10.0.2
 - PRs:
