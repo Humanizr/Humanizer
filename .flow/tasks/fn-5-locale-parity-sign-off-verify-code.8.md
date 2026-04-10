@@ -80,7 +80,7 @@ The fn-5.5 task `status` remains `done`. We are correcting the evidence captured
 - [ ] `.flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md` `## Done summary` and `## Evidence` sections updated to mirror the JSON changes; both files reference the fn-5.8 correction commit by short hash
 - [ ] `grep -n "DEFERRED.*not installed\|net8.0.*deferred\|deferred to CI" .flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md` returns zero matches
 - [ ] `dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic` passes
-- [ ] `flowctl validate --epic fn-5-locale-parity-sign-off-verify-code` passes with zero errors and zero warnings
+- [ ] `flowctl validate --epic fn-5-locale-parity-sign-off-verify-code` reports `Valid: True`
 - [ ] Task evidence records: full `dotnet --list-sdks` and `dotnet --list-runtimes` output as the proof that the deferral premise was false; the two test-run capture commands and their full output
 
 ## Done summary

@@ -16,7 +16,7 @@
   "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md",
   "status": "done",
   "title": "Close fn-2 proxy, run residual scans, and append final sign-off report",
-  "updated_at": "2026-04-09T21:34:12.063293Z",
+  "updated_at": "2026-04-10T03:49:37.000000Z",
   "evidence": {
     "scan_details": {
       "net10_0": {
