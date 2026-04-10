@@ -146,5 +146,13 @@ Capture verbatim output for each in task evidence.
 Reconciled verification-signoff.md to remove all DEFERRED/blocker/fn-4 framing (macOS net8.0 now PASS, non-macOS runs framed as host requirements), fixed three pitfall entries in .flow/memory/pitfalls.md to align with no-deferrals rule, and closed fn-4-fix-net48-test-suite-blocker as superseded by fn-5.7.
 ## Evidence
 - Commits: 269460eb11a9a0adf67d1b4e1c595255c6fa6fa1
-- Tests: dotnet format Humanizer.slnx --verify-no-changes (0 of 1596 formatted), dotnet test net10.0 -c Release (38908 passed, 0 failed), dotnet test net8.0 -c Release (38908 passed, 0 failed), dotnet build net48 -c Release (0 errors, 0 warnings), grep DEFERRED/blocker/fn-4 audits all zero matches
+- Tests:
+  - `dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic` -- Formatted 0 of 1596 files
+  - `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release` -- total: 38908, failed: 0, succeeded: 38908, skipped: 0, duration: 6s 485ms
+  - `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release` -- total: 38908, failed: 0, succeeded: 38908, skipped: 0, duration: 9s 779ms
+  - `dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48` -- Build succeeded. 0 Warning(s) 0 Error(s)
+  - `grep -n "DEFERRED TO CI\|DEFERRED (.NET 8 not installed)\|Next CI run\|Explicitly deferred to CI" tools/verification-signoff.md` -- zero matches
+  - `grep -n "see fn-4\|tracked as fn-4\|blocked.*Enum\.GetValues" tools/verification-signoff.md` -- zero matches
+  - `grep -n "use DEFERRED\|downgrade to documented follow-up\|update the governing spec to explicitly allow the deferral" .flow/memory/pitfalls.md` -- zero matches
+  - `grep -rn "see fn-4\|tracked as fn-4\|blocked.*Enum\.GetValues" CLAUDE.md AGENTS.md tools/verification-signoff.md .flow/memory/` -- zero matches
 - PRs:

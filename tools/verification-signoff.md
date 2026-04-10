@@ -49,7 +49,7 @@ Raw CultureInfo month-name differences found: **13 data points**
 | bn | January/February spelling variant | macOS differs from Linux/Win10/Win48 |
 | ku | Kurmanji-Latin vs Sorani-Arabic script | macOS/Linux differ from Win10/Win48 |
 
-Humanizer now has YAML-authored `calendar.months` overrides for all 6 locales. These overrides produce consistent output on macOS net10.0 and net8.0 (verified via test suite, 38,908 tests each). Cross-platform consistency (Linux, Windows) is verified in CI as part of the standard build matrix. The overrides supersede platform CultureInfo variation.
+Humanizer now has YAML-authored `calendar.months` overrides for all 6 locales. These overrides produce consistent output on macOS net10.0 and net8.0 (verified locally via test suite, 38,908 tests each). Cross-platform consistency (Linux, Windows) requires CI-host verification on the respective platforms. The overrides supersede platform CultureInfo variation.
 
 ### Decimal separator override locales
 
@@ -112,7 +112,7 @@ Verified locally in fn-5.8 (commit 04d20eee). The .NET 8 SDK (8.0.419) and runti
 
 ### Linux net10.0 / net8.0: REQUIRES LINUX HOST
 
-Running these tests requires a Linux host; this is a host-OS requirement, not a deferral or gap. The existing CI workflow runs `dotnet test` for both `net10.0` and `net8.0` on Linux as part of the standard build matrix.
+Running these tests requires a Linux host; this is a host-OS requirement, not a deferral or gap. The CI workflow includes `dotnet test` for both `net10.0` and `net8.0` on Linux in the build matrix.
 
 ```bash
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
@@ -121,7 +121,7 @@ dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework n
 
 ### Windows net10.0 / net8.0: REQUIRES WINDOWS HOST
 
-Running these tests requires a Windows host; this is a host-OS requirement, not a deferral or gap. The existing CI workflow runs `dotnet test` for both `net10.0` and `net8.0` on Windows as part of the standard build matrix.
+Running these tests requires a Windows host; this is a host-OS requirement, not a deferral or gap. The CI workflow includes `dotnet test` for both `net10.0` and `net8.0` on Windows in the build matrix.
 
 ```bash
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
@@ -222,24 +222,24 @@ The `compare-probes.cs` agreement percentage for non-overridden locales is 75.2%
 
 **Locally verified on macOS**: net10.0 (38,908 tests, 0 failures) and net8.0 (38,908 tests, 0 failures). All probe artifacts committed. All override YAML validated by source generator build. net48 build verified green on macOS (fn-5.7).
 
-**Requires non-macOS host (verified in CI):**
-- Linux net10.0 / net8.0 — requires a Linux host; CI workflow runs these as part of the standard build matrix
-- Windows net10.0 / net8.0 — requires a Windows host; CI workflow runs these as part of the standard build matrix
-- Windows net48 — requires a Windows host (the .NET Framework 4.8 runtime is Windows-only); the test project compiles on all platforms (fn-5.7); CI runs net48 tests on Windows
+**Requires non-macOS host (CI-host verification):**
+- Linux net10.0 / net8.0 — requires a Linux host to execute; the CI workflow includes these in the standard build matrix
+- Windows net10.0 / net8.0 — requires a Windows host to execute; the CI workflow includes these in the standard build matrix
+- Windows net48 — requires a Windows host to execute (the .NET Framework 4.8 runtime is Windows-only); the test project compiles on all platforms (fn-5.7); the CI workflow includes net48 in the Windows build matrix
 
-This sign-off does **not** claim full cross-platform verification. It claims macOS verification on both net10.0 and net8.0. Non-macOS host runs happen in CI as a normal part of the workflow.
+This sign-off does **not** claim full cross-platform verification. It claims macOS verification on both net10.0 and net8.0. Non-macOS host runs require CI-host verification on the respective platforms.
 
 ### Note on after-probe identity
 
 The probe tool captures raw `CultureInfo` data, not Humanizer output. Since Humanizer's overrides operate at the runtime layer via source-generated lookup tables (not by modifying `CultureInfo`), the pre-existing fields in the "after" probes are identical to the "before" probes. The macOS after probe was re-run with the extended probe implementation (fn-5.1) which adds `month_names_raw` and `month_genitive_names_raw` fields; all pre-existing fields are byte-identical to the before baseline. The Linux/Windows after probes remain copies of their before counterparts (without the new fields) because those platforms are not reachable from the current environment.
 
-The test suite is the authoritative verification that Humanizer produces consistent output. The macOS test runs (net10.0: 38,908 tests, 0 failures; net8.0: 38,908 tests, 0 failures) confirm all overrides work correctly. Non-macOS host test runs (Linux, Windows) happen in CI as part of the standard build matrix.
+The test suite is the authoritative verification that Humanizer produces consistent output. The macOS test runs (net10.0: 38,908 tests, 0 failures; net8.0: 38,908 tests, 0 failures) confirm all overrides work correctly on macOS. Non-macOS host test runs (Linux, Windows) require CI-host verification on those platforms.
 
 ---
 
 ## 9. Non-macOS Host Verification (CI build matrix)
 
-These test runs require their respective host OS and are verified in CI as part of the standard build matrix.
+These test runs require their respective host OS. The CI workflow includes them in the build matrix.
 
 | Environment | Host requirement | Commands | Expected Output |
 |-------------|-----------------|----------|-----------------|
@@ -257,7 +257,7 @@ These test runs require their respective host OS and are verified in CI as part 
 **Epic:** fn-5-locale-parity-sign-off-verify-code (Locale parity sign-off: verify code matches claims and docs match current state)
 **Branch:** codex/locale-translation-completion
 **Reviewed-from baseline:** c1bd879a (last commit before fn-5.5 sign-off work)
-**Sign-off commit:** d40bbbe6 (fn-5.5 sign-off), updated by fn-5.7 (424ed0d2), fn-5.8 (04d20eee), fn-5.9 (this reconciliation)
+**Sign-off commit:** d40bbbe6 (fn-5.5 sign-off), updated by fn-5.7 (424ed0d2), fn-5.8 (04d20eee), fn-5.9 (269460eb)
 
 ### FinalOverrideSet
 
@@ -303,7 +303,7 @@ Each acceptance criterion from the fn-5 epic spec, with the satisfying task and 
 
 ### Gate completeness
 
-All local verification gates pass on macOS for both net10.0 (38,908 tests, 0 failures) and net8.0 (38,908 tests, 0 failures). The net48 test project builds on all platforms (fn-5.7). Non-macOS host test runs (Linux, Windows) happen in CI as part of the standard build matrix. There are no outstanding deferrals -- every item that can be verified on the developer's host has been verified.
+All local verification gates pass on macOS for both net10.0 (38,908 tests, 0 failures) and net8.0 (38,908 tests, 0 failures). The net48 test project builds on all platforms (fn-5.7). Non-macOS host test runs (Linux, Windows) require CI-host verification on those platforms. There are no outstanding deferrals -- every item that can be verified on the developer's host has been verified.
 
 ### Sub-tasks (fn-5.1 through fn-5.9)
 
