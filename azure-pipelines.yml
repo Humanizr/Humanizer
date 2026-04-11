@@ -58,7 +58,8 @@ stages:
         command: pack
         packagesToPack: ./src/Humanizer/Humanizer.csproj
         packDirectory: $(Build.ArtifactStagingDirectory)/Packages
-        arguments: -c $(BuildConfiguration) /p:EmitCompilerGeneratedFiles=true
+        configuration: $(BuildConfiguration)
+        buildProperties: EmitCompilerGeneratedFiles=true
       displayName: Restore, Build, and Pack
 
     - pwsh: |
