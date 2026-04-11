@@ -1,5 +1,5 @@
-<Project>  
-  
+<Project>
+
   <PropertyGroup>
     <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
@@ -14,10 +14,10 @@
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Humanizer.snk</AssemblyOriginatorKeyFile>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>    
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <AnalysisMode>Minimum</AnalysisMode>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <PolyStringInterpolation>true</PolyStringInterpolation>
     <PolyNullability>true</PolyNullability>
@@ -30,7 +30,7 @@
     <PackageProjectUrl>https://humanizr.net</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
     <Copyright>Copyright © 2012 - $([System.DateTime]::UtcNow.Year) .NET Foundation and Contributors</Copyright>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>   
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
@@ -42,7 +42,7 @@
     <Using Include="System.ReadOnlySpan&lt;System.Char&gt;" Alias="CharSpan" />
     <Using Remove="System.Net.Http" />
   </ItemGroup>
-  
+
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>

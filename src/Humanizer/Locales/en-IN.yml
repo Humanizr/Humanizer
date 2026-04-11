@@ -1,0 +1,62 @@
+locale: 'en-IN'
+variantOf: 'en'
+
+surfaces:
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: '(Negative)'
+      hundredOrdinalWord: 'hundred'
+      tensUnitsSeparator: ' '
+      addAndMode: 'always-default'
+      andStrategy: 'within-group-only'
+      ordinalLeadingOneStrategy: 'keep-leading-one'
+      ordinalMode: 'cardinal'
+      unitsMap:
+        0: ''
+      ordinalUnitsMap:
+        0: ''
+      scales:
+        -
+          value: 100000000000000000
+          name: 'shankh'
+          ordinalName: 'shankh'
+        -
+          value: 1000000000000000
+          name: 'padma'
+          ordinalName: 'padma'
+        -
+          value: 10000000000000
+          name: 'neel'
+          ordinalName: 'neel'
+        -
+          value: 100000000000
+          name: 'kharab'
+          ordinalName: 'kharab'
+        -
+          value: 1000000000
+          name: 'arab'
+          ordinalName: 'arab'
+        -
+          value: 10000000
+          name: 'crore'
+          ordinalName: 'crore'
+        -
+          value: 100000
+          name: 'lakh'
+          ordinalName: 'lakh'
+        -
+          value: 1000
+          name: 'thousand'
+          ordinalName: 'thousand'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        lakh: 100000
+        crore: 10000000
+        arab: 1000000000
+        kharab: 100000000000
+        neel: 10000000000000
+        padma: 1000000000000000
+        shankh: 100000000000000000

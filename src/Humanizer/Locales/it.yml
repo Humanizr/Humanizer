@@ -1,0 +1,464 @@
+locale: 'it'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'e'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitDetector: 'singular-plural'
+    dataUnitSuffixes:
+      singular: '_Singular'
+
+  phrases:
+    relativeDate:
+      now: 'adesso'
+      never: 'mai'
+      past:
+        millisecond:
+          single: 'un millisecondo fa'
+          multiple:
+            forms:
+              default: 'millisecondi'
+            afterCount: 'fa'
+        second:
+          single: 'un secondo fa'
+          multiple:
+            forms:
+              default: 'secondi'
+            afterCount: 'fa'
+        minute:
+          single: 'un minuto fa'
+          multiple:
+            forms:
+              default: 'minuti'
+            afterCount: 'fa'
+        hour:
+          single: 'un''ora fa'
+          multiple:
+            forms:
+              default: 'ore'
+            afterCount: 'fa'
+        day:
+          single: 'ieri'
+          multiple:
+            forms:
+              default: 'giorni'
+            afterCount: 'fa'
+          template:
+            name: 'two'
+            value: 'l''altro ieri'
+        week:
+          single: 'una settimana fa'
+          multiple:
+            forms:
+              default: 'settimane'
+            afterCount: 'fa'
+        month:
+          single: 'un mese fa'
+          multiple:
+            forms:
+              default: 'mesi'
+            afterCount: 'fa'
+        year:
+          single: 'un anno fa'
+          multiple:
+            forms:
+              default: 'anni'
+            afterCount: 'fa'
+      future:
+        millisecond:
+          single: 'tra un millisecondo'
+          multiple:
+            forms:
+              default: 'millisecondi'
+            beforeCount: 'tra'
+        second:
+          single: 'tra un secondo'
+          multiple:
+            forms:
+              default: 'secondi'
+            beforeCount: 'tra'
+        minute:
+          single: 'tra un minuto'
+          multiple:
+            forms:
+              default: 'minuti'
+            beforeCount: 'tra'
+        hour:
+          single: 'tra un''ora'
+          multiple:
+            forms:
+              default: 'ore'
+            beforeCount: 'tra'
+        day:
+          single: 'domani'
+          multiple:
+            forms:
+              default: 'giorni'
+            beforeCount: 'tra'
+          template:
+            name: 'two'
+            value: 'dopodomani'
+        week:
+          single: 'tra una settimana'
+          multiple:
+            forms:
+              default: 'settimane'
+            beforeCount: 'tra'
+        month:
+          single: 'tra un mese'
+          multiple:
+            forms:
+              default: 'mesi'
+            beforeCount: 'tra'
+        year:
+          single: 'tra un anno'
+          multiple:
+            forms:
+              default: 'anni'
+            beforeCount: 'tra'
+    duration:
+      zero: '0 secondi'
+      age:
+        template: '{value} anni'
+      millisecond:
+        single:
+          numeric: '1 millisecondo'
+          words: 'un millisecondo'
+        multiple:
+          forms:
+            default: 'millisecondi'
+      second:
+        single:
+          numeric: '1 secondo'
+          words: 'un secondo'
+        multiple:
+          forms:
+            default: 'secondi'
+      minute:
+        single:
+          numeric: '1 minuto'
+          words: 'un minuto'
+        multiple:
+          forms:
+            default: 'minuti'
+      hour:
+        single:
+          numeric: '1 ora'
+          words: 'un''ora'
+        multiple:
+          forms:
+            default: 'ore'
+      day:
+        single:
+          numeric: '1 giorno'
+          words: 'un giorno'
+        multiple:
+          forms:
+            default: 'giorni'
+      week:
+        single:
+          numeric: '1 settimana'
+          words: 'una settimana'
+        multiple:
+          forms:
+            default: 'settimane'
+      month:
+        single:
+          numeric: '1 mese'
+          words: 'un mese'
+        multiple:
+          forms:
+            default: 'mesi'
+      year:
+        single:
+          numeric: '1 anno'
+          words: 'un anno'
+        multiple:
+          forms:
+            default: 'anni'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'sec.'
+      minute:
+        symbol: 'min.'
+      hour:
+        symbol: 'ora'
+      day:
+        symbol: 'giorno'
+      week:
+        symbol: 'settimana'
+      month:
+        symbol: 'mese'
+      year:
+        symbol: 'anno'
+
+  number:
+    words:
+      engine: 'triad-scale'
+      zeroWord: 'zero'
+      minusWord: 'meno'
+      feminineOneWord: 'una'
+      leadingOneWord: 'un'
+      tenWord: 'dieci'
+      tenOrdinalStem: 'decim'
+      commonOrdinalStem: 'esim'
+      masculineOrdinalSuffix: 'o'
+      feminineOrdinalSuffix: 'a'
+      ordinalUnit3RestoredVowel: 'e'
+      ordinalUnit6RestoredVowel: 'i'
+      unitsMap:
+        1: 'uno'
+        2: 'due'
+        3: 'tre'
+        4: 'quattro'
+        5: 'cinque'
+        6: 'sei'
+        7: 'sette'
+        8: 'otto'
+        9: 'nove'
+      unitsFinalAccent:
+        1: 'uno'
+        2: 'due'
+        3: 'tré'
+        4: 'quattro'
+        5: 'cinque'
+        6: 'sei'
+        7: 'sette'
+        8: 'otto'
+        9: 'nove'
+      tensMap:
+        2: 'venti'
+        3: 'trenta'
+        4: 'quaranta'
+        5: 'cinquanta'
+        6: 'sessanta'
+        7: 'settanta'
+        8: 'ottanta'
+        9: 'novanta'
+      teensMap:
+        - 'dieci'
+        - 'undici'
+        - 'dodici'
+        - 'tredici'
+        - 'quattordici'
+        - 'quindici'
+        - 'sedici'
+        - 'diciassette'
+        - 'diciotto'
+        - 'diciannove'
+      hundredsMap:
+        1: 'cento'
+        2: 'duecento'
+        3: 'trecento'
+        4: 'quattrocento'
+        5: 'cinquecento'
+        6: 'seicento'
+        7: 'settecento'
+        8: 'ottocento'
+        9: 'novecento'
+      ordinalUnderTen:
+        1: 'prim'
+        2: 'second'
+        3: 'terz'
+        4: 'quart'
+        5: 'quint'
+        6: 'sest'
+        7: 'settim'
+        8: 'ottav'
+        9: 'non'
+      scales:
+        -
+          value: 1000
+          singular: 'mille'
+          plural: 'mila'
+          countUsesFinalAccent: false
+          appendTrailingSpace: false
+          removeLeadingOneOnExactOrdinal: false
+          exactOrdinalSuffix: 'l'
+        -
+          value: 1000000
+          singular: 'un milione '
+          plural: 'milioni'
+          countToScaleJoiner: ' '
+          countUsesFinalAccent: true
+          appendTrailingSpace: true
+          ordinalCompactionMatch: ' milion'
+          ordinalCompactionReplacement: 'milion'
+          removeLeadingOneOnExactOrdinal: true
+        -
+          value: 1000000000
+          singular: 'un miliardo '
+          plural: 'miliardi'
+          countToScaleJoiner: ' '
+          countUsesFinalAccent: false
+          appendTrailingSpace: true
+          ordinalCompactionMatch: ' miliard'
+          ordinalCompactionReplacement: 'miliard'
+          removeLeadingOneOnExactOrdinal: true
+
+    parse:
+      engine: 'greedy-compound'
+      ordinalNumberToWordsKind: 'self'
+      negativePrefixes:
+        - 'meno '
+      ordinalAbbreviationSuffixes:
+        - 'º'
+        - '°'
+        - 'ª'
+        - 'o'
+        - 'a'
+      charactersToRemove: ',.''’'
+      charactersToReplaceWithSpace: '-'
+      textReplacements:
+        -
+          old: ' ed '
+          new: ' '
+        -
+          old: ' e '
+          new: ' '
+      lowercase: true
+      removeDiacritics: true
+      cardinalMap:
+        zero: 0
+        uno: 1
+        una: 1
+        un: 1
+        due: 2
+        tre: 3
+        quattro: 4
+        cinque: 5
+        sei: 6
+        sette: 7
+        otto: 8
+        nove: 9
+        dieci: 10
+        undici: 11
+        dodici: 12
+        tredici: 13
+        quattordici: 14
+        quindici: 15
+        sedici: 16
+        diciassette: 17
+        diciotto: 18
+        diciannove: 19
+        venti: 20
+        ventuno: 21
+        ventotto: 28
+        trenta: 30
+        trentuno: 31
+        trentotto: 38
+        quaranta: 40
+        quarantuno: 41
+        quarantotto: 48
+        cinquanta: 50
+        cinquantuno: 51
+        cinquantotto: 58
+        sessanta: 60
+        sessantuno: 61
+        sessantotto: 68
+        settanta: 70
+        settantuno: 71
+        settantotto: 78
+        ottanta: 80
+        ottantuno: 81
+        ottantotto: 88
+        novanta: 90
+        novantuno: 91
+        novantotto: 98
+        cento: 100
+        mille: 1000
+        mila: 1000
+        milione: 1000000
+        milioni: 1000000
+        miliardo: 1000000000
+        miliardi: 1000000000
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '°'
+      feminineSuffix: 'ª'
+      neuterSuffix: '°'
+      zeroAsPlainNumber: true
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    min0: '{hour}'
+    defaultTemplate: '{hour} e {minutes}'
+
+  compass:
+    full:
+      - 'nord'
+      - 'nord-nord-est'
+      - 'nord-est'
+      - 'est-nord-est'
+      - 'est'
+      - 'est-sud-est'
+      - 'sud-est'
+      - 'sud-sud-est'
+      - 'sud'
+      - 'sud-sud-ovest'
+      - 'sud-ovest'
+      - 'ovest-sud-ovest'
+      - 'ovest'
+      - 'ovest-nord-ovest'
+      - 'nord-ovest'
+      - 'nord-nord-ovest'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSO'
+      - 'SO'
+      - 'OSO'
+      - 'O'
+      - 'ONO'
+      - 'NO'
+      - 'NNO'

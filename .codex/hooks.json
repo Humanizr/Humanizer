@@ -1,0 +1,40 @@
+{
+  "description": "Ralph workflow guards for Codex - only active when FLOW_RALPH=1 and ralph-init has been run",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Execute",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ ! -f scripts/ralph/hooks/ralph-guard.py ] || python3 scripts/ralph/hooks/ralph-guard.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Execute",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ ! -f scripts/ralph/hooks/ralph-guard.py ] || python3 scripts/ralph/hooks/ralph-guard.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ ! -f scripts/ralph/hooks/ralph-guard.py ] || python3 scripts/ralph/hooks/ralph-guard.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

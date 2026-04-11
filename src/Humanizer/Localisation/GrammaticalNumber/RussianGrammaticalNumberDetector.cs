@@ -1,7 +1,14 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
+/// <summary>
+/// Detects the Russian grammatical number form for a numeric value.
+/// </summary>
 static class RussianGrammaticalNumberDetector
 {
+    /// <summary>
+    /// Returns the grammatical number form required for the given <paramref name="number"/>.
+    /// </summary>
+    /// <returns>The Russian grammatical number form.</returns>
     public static RussianGrammaticalNumber Detect(long number)
     {
         var tens = number % 100 / 10;
@@ -9,12 +16,14 @@ static class RussianGrammaticalNumberDetector
         {
             var unity = number % 10;
 
-            if (unity == 1) // 1, 21, 31, 41 ... 91, 101, 121 ...
+            // Teens are always plural in Russian, so the last digit only matters when the tens
+            // place is not 1.
+            if (unity == 1)
             {
                 return RussianGrammaticalNumber.Singular;
             }
 
-            if (unity is > 1 and < 5) // 2, 3, 4, 22, 23, 24 ...
+            if (unity is > 1 and < 5)
             {
                 return RussianGrammaticalNumber.Paucal;
             }

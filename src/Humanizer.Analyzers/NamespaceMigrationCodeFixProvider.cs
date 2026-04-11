@@ -71,7 +71,7 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
 
     private static async Task<Document> ReplaceUsingDirectiveAsync(
         Document document,
-        UsingDirectiveSyntax usingDirective, 
+        UsingDirectiveSyntax usingDirective,
         CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);

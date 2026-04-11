@@ -1,0 +1,368 @@
+locale: 'ms'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'dan'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'sekarang'
+      never: 'tidak pernah'
+      past:
+        millisecond:
+          single: 'satu milisaat yang lalu'
+          multiple:
+            forms:
+              default: 'milisaat'
+            afterCount: 'yang lalu'
+        second:
+          single: 'sesaat yang lalu'
+          multiple:
+            forms:
+              default: 'saat'
+            afterCount: 'yang lalu'
+        minute:
+          single: 'seminit yang lalu'
+          multiple:
+            forms:
+              default: 'minit'
+            afterCount: 'yang lalu'
+        hour:
+          single: 'sejam yang lalu'
+          multiple:
+            forms:
+              default: 'jam'
+            afterCount: 'yang lalu'
+        day:
+          single: 'semalam'
+          multiple:
+            forms:
+              default: 'hari'
+            afterCount: 'yang lalu'
+          template:
+            name: 'two'
+            value: 'kelmarin'
+        week:
+          single: 'satu minggu yang lalu'
+          multiple:
+            forms:
+              default: 'minggu'
+            afterCount: 'yang lalu'
+        month:
+          single: 'sebulan yang lalu'
+          multiple:
+            forms:
+              default: 'bulan'
+            afterCount: 'yang lalu'
+        year:
+          single: 'setahun yang lalu'
+          multiple:
+            forms:
+              default: 'tahun'
+            afterCount: 'yang lalu'
+      future:
+        millisecond:
+          single: 'satu milisaat dari sekarang'
+          multiple:
+            forms:
+              default: 'milisaat'
+            afterCount: 'dari sekarang'
+        second:
+          single: 'sesaat dari sekarang'
+          multiple:
+            forms:
+              default: 'saat'
+            afterCount: 'dari sekarang'
+        minute:
+          single: 'seminit dari sekarang'
+          multiple:
+            forms:
+              default: 'minit'
+            afterCount: 'dari sekarang'
+        hour:
+          single: 'sejam dari sekarang'
+          multiple:
+            forms:
+              default: 'jam'
+            afterCount: 'dari sekarang'
+        day:
+          single: 'esok'
+          multiple:
+            forms:
+              default: 'hari'
+            afterCount: 'dari sekarang'
+          template:
+            name: 'two'
+            value: 'lusa'
+        week:
+          single: 'satu minggu dari sekarang'
+          multiple:
+            forms:
+              default: 'minggu'
+            afterCount: 'dari sekarang'
+        month:
+          single: 'sebulan dari sekarang'
+          multiple:
+            forms:
+              default: 'bulan'
+            afterCount: 'dari sekarang'
+        year:
+          single: 'setahun dari sekarang'
+          multiple:
+            forms:
+              default: 'tahun'
+            afterCount: 'dari sekarang'
+    duration:
+      zero: 'tiada masa'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisaat'
+          words: 'one milisaat'
+        multiple:
+          forms:
+            default: 'milisaat'
+      second:
+        single:
+          numeric: '1 saat'
+          words: 'one saat'
+        multiple:
+          forms:
+            default: 'saat'
+      minute:
+        single:
+          numeric: '1 minit'
+          words: 'one minit'
+        multiple:
+          forms:
+            default: 'minit'
+      hour:
+        single:
+          numeric: '1 jam'
+          words: 'one jam'
+        multiple:
+          forms:
+            default: 'jam'
+      day:
+        single:
+          numeric: '1 hari'
+          words: 'one hari'
+        multiple:
+          forms:
+            default: 'hari'
+      week:
+        single:
+          numeric: '1 minggu'
+          words: 'one minggu'
+        multiple:
+          forms:
+            default: 'minggu'
+      month:
+        single:
+          numeric: '1 bulan'
+          words: 'one bulan'
+        multiple:
+          forms:
+            default: 'bulan'
+      year:
+        single:
+          numeric: '1 tahun'
+          words: 'one tahun'
+        multiple:
+          forms:
+            default: 'tahun'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bait'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobait'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabait'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabait'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabait'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'milisaat'
+      second:
+        symbol: 'saat'
+      minute:
+        symbol: 'minit'
+      hour:
+        symbol: 'jam'
+      day:
+        symbol: 'hari'
+      week:
+        symbol: 'minggu'
+      month:
+        symbol: 'bulan'
+      year:
+        symbol: 'tahun'
+
+  number:
+    words:
+      engine: 'contracted-one-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'kosong'
+      minusWord: 'minus'
+      hundredWord: 'seratus'
+      hundredUnitWord: 'ratus'
+      units:
+        - 'kosong'
+        - 'satu'
+        - 'dua'
+        - 'tiga'
+        - 'empat'
+        - 'lima'
+        - 'enam'
+        - 'tujuh'
+        - 'lapan'
+        - 'sembilan'
+        - 'sepuluh'
+        - 'sebelas'
+        - 'dua belas'
+        - 'tiga belas'
+        - 'empat belas'
+        - 'lima belas'
+        - 'enam belas'
+        - 'tujuh belas'
+        - 'lapan belas'
+        - 'sembilan belas'
+      tens:
+        2: 'dua puluh'
+        3: 'tiga puluh'
+        4: 'empat puluh'
+        5: 'lima puluh'
+        6: 'enam puluh'
+        7: 'tujuh puluh'
+        8: 'lapan puluh'
+        9: 'sembilan puluh'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kuintilion'
+        -
+          value: 1000000000000000
+          name: 'kuadrilion'
+        -
+          value: 1000000000000
+          name: 'trilion'
+        -
+          value: 1000000000
+          name: 'bilion'
+        -
+          value: 1000000
+          name: 'juta'
+        -
+          value: 1000
+          name: 'ribu'
+          oneWord: 'seribu'
+
+    parse:
+      engine: 'contracted-scale'
+      minusWord: 'minus'
+      cardinalMap:
+        kosong: 0
+        satu: 1
+        dua: 2
+        tiga: 3
+        empat: 4
+        lima: 5
+        enam: 6
+        tujuh: 7
+        lapan: 8
+        sembilan: 9
+        sepuluh: 10
+        sebelas: 11
+        belas: 10
+        puluh: 10
+        seratus: 100
+        ratus: 100
+        seribu: 1000
+        ribu: 1000
+        juta: 1000000
+        bilion: 1000000000
+        trilion: 1000000000000
+        kuadrilion: 1000000000000000
+        kuintilion: 1000000000000000000
+
+  compass:
+    full:
+      - 'utara'
+      - 'utara-timur laut'
+      - 'timur laut'
+      - 'timur-timur laut'
+      - 'timur'
+      - 'timur-tenggara'
+      - 'tenggara'
+      - 'selatan-tenggara'
+      - 'selatan'
+      - 'selatan-barat daya'
+      - 'barat daya'
+      - 'barat-barat daya'
+      - 'barat'
+      - 'barat-barat laut'
+      - 'barat laut'
+      - 'utara-barat laut'
+    short:
+      - 'U'
+      - 'UTL'
+      - 'TL'
+      - 'TTL'
+      - 'T'
+      - 'TTG'
+      - 'TG'
+      - 'STG'
+      - 'S'
+      - 'SBD'
+      - 'BD'
+      - 'BBD'
+      - 'B'
+      - 'BBL'
+      - 'BL'
+      - 'UBL'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'ke-'
+        defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourOneWord: 'satu'
+    min0: 'pukul {hour}'
+    defaultTemplate: 'pukul {hour} {minutes}'
+    earlyMorning: 'pagi'
+    morning: 'pagi'
+    afternoon: 'petang'
+    night: 'malam'

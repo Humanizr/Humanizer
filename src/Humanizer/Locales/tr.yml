@@ -1,0 +1,593 @@
+locale: 'tr'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 've'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'şimdi'
+      never: 'asla'
+      past:
+        millisecond:
+          single: 'bir milisaniye önce'
+          multiple:
+            forms:
+              default: 'milisaniye'
+            afterCount: 'önce'
+        second:
+          single: 'bir saniye önce'
+          multiple:
+            forms:
+              default: 'saniye'
+            afterCount: 'önce'
+        minute:
+          single: 'bir dakika önce'
+          multiple:
+            forms:
+              default: 'dakika'
+            afterCount: 'önce'
+        hour:
+          single: 'bir saat önce'
+          multiple:
+            forms:
+              default: 'saat'
+            afterCount: 'önce'
+        day:
+          single: 'dün'
+          multiple:
+            forms:
+              default: 'gün'
+            afterCount: 'önce'
+          template:
+            name: 'two'
+            value: 'evvelsi gün'
+        week:
+          single: 'bir hafta önce'
+          multiple:
+            forms:
+              default: 'hafta'
+            afterCount: 'önce'
+        month:
+          single: 'bir ay önce'
+          multiple:
+            forms:
+              default: 'ay'
+            afterCount: 'önce'
+        year:
+          single: 'bir yıl önce'
+          multiple:
+            forms:
+              default: 'yıl'
+            afterCount: 'önce'
+      future:
+        millisecond:
+          single: 'bir milisaniye sonra'
+          multiple:
+            forms:
+              default: 'milisaniye'
+            afterCount: 'sonra'
+        second:
+          single: 'bir saniye sonra'
+          multiple:
+            forms:
+              default: 'saniye'
+            afterCount: 'sonra'
+        minute:
+          single: 'bir dakika sonra'
+          multiple:
+            forms:
+              default: 'dakika'
+            afterCount: 'sonra'
+        hour:
+          single: 'bir saat sonra'
+          multiple:
+            forms:
+              default: 'saat'
+            afterCount: 'sonra'
+        day:
+          single: 'yarın'
+          multiple:
+            forms:
+              default: 'gün'
+            afterCount: 'sonra'
+          template:
+            name: 'two'
+            value: 'yarından sonra'
+        week:
+          single: 'bir hafta sonra'
+          multiple:
+            forms:
+              default: 'hafta'
+            afterCount: 'sonra'
+        month:
+          single: 'bir ay sonra'
+          multiple:
+            forms:
+              default: 'ay'
+            afterCount: 'sonra'
+        year:
+          single: 'bir yıl sonra'
+          multiple:
+            forms:
+              default: 'yıl'
+            afterCount: 'sonra'
+    duration:
+      zero: 'zaman farkı yok'
+      age:
+        template: '{value} yaşında'
+      millisecond:
+        single:
+          numeric: '1 milisaniye'
+          words: 'bir milisaniye'
+        multiple:
+          forms:
+            default: 'milisaniye'
+      second:
+        single:
+          numeric: '1 saniye'
+          words: 'bir saniye'
+        multiple:
+          forms:
+            default: 'saniye'
+      minute:
+        single:
+          numeric: '1 dakika'
+          words: 'bir dakika'
+        multiple:
+          forms:
+            default: 'dakika'
+      hour:
+        single:
+          numeric: '1 saat'
+          words: 'bir saat'
+        multiple:
+          forms:
+            default: 'saat'
+      day:
+        single:
+          numeric: '1 gün'
+          words: 'bir gün'
+        multiple:
+          forms:
+            default: 'gün'
+      week:
+        single:
+          numeric: '1 hafta'
+          words: 'bir hafta'
+        multiple:
+          forms:
+            default: 'hafta'
+      month:
+        single:
+          numeric: '1 ay'
+          words: 'bir ay'
+        multiple:
+          forms:
+            default: 'ay'
+      year:
+        single:
+          numeric: '1 yıl'
+          words: 'bir yıl'
+        multiple:
+          forms:
+            default: 'yıl'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bayt'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobayt'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabayt'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabayt'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabayt'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'saniye'
+      minute:
+        symbol: 'dakika'
+      hour:
+        symbol: 'saat'
+      day:
+        symbol: 'gün'
+      week:
+        symbol: 'hafta'
+      month:
+        symbol: 'ay'
+      year:
+        symbol: 'yıl'
+
+  number:
+    words:
+      engine: 'harmony-ordinal'
+      minimumValue: -9223372036854775807
+      maximumValue: 9223372036854775807
+      minusWord: 'eksi'
+      hundredWord: 'yüz'
+      hundredStrategy: 'omit-one-when-singular'
+      unitsMap:
+        - 'sıfır'
+        - 'bir'
+        - 'iki'
+        - 'üç'
+        - 'dört'
+        - 'beş'
+        - 'altı'
+        - 'yedi'
+        - 'sekiz'
+        - 'dokuz'
+      tensMap:
+        - 'sıfır'
+        - 'on'
+        - 'yirmi'
+        - 'otuz'
+        - 'kırk'
+        - 'elli'
+        - 'altmış'
+        - 'yetmiş'
+        - 'seksen'
+        - 'doksan'
+      ordinalSuffixStrategy: 'last-vowel-map'
+      softenTerminalTBeforeSuffix: true
+      dropTerminalVowelBeforeHarmonySuffix: true
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kentilyon'
+        -
+          value: 1000000000000000
+          name: 'katrilyon'
+        -
+          value: 1000000000000
+          name: 'trilyon'
+        -
+          value: 1000000000
+          name: 'milyar'
+        -
+          value: 1000000
+          name: 'milyon'
+        -
+          value: 1000
+          name: 'bin'
+          omitOneWhenSingular: true
+      ordinalSuffixes:
+        'ı': 'ıncı'
+        i: 'inci'
+        u: 'uncu'
+        'ü': 'üncü'
+        o: 'uncu'
+        'ö': 'üncü'
+        e: 'inci'
+        a: 'ıncı'
+      tupleSuffixes:
+        'ı': 'lı'
+        i: 'li'
+        u: 'lu'
+        'ü': 'lü'
+        o: 'lu'
+        'ö': 'lü'
+        e: 'li'
+        a: 'lı'
+      namedTuples:
+        1: 'tek'
+        2: 'çift'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      cardinalMap:
+        'sıfır': 0
+        bir: 1
+        iki: 2
+        'üç': 3
+        'dört': 4
+        'beş': 5
+        'altı': 6
+        yedi: 7
+        sekiz: 8
+        dokuz: 9
+        on: 10
+        yirmi: 20
+        otuz: 30
+        'kırk': 40
+        elli: 50
+        'altmış': 60
+        'yetmiş': 70
+        seksen: 80
+        doksan: 90
+        'yüz': 100
+        bin: 1000
+        milyon: 1000000
+        milyar: 1000000000
+        trilyon: 1000000000000
+        katrilyon: 1000000000000000
+        kentilyon: 1000000000000000000
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'none'
+      useHundredMultiplier: true
+      negativePrefixes:
+        - 'eksi '
+      ordinalMap:
+        'altmış altıncı': 66
+        'altmış beşinci': 65
+        'altmış birinci': 61
+        'altmış dokuzuncu': 69
+        'altmış dördüncü': 64
+        'altmış ikinci': 62
+        'altmış sekizinci': 68
+        'altmış yedinci': 67
+        'altmış üçüncü': 63
+        'altmışıncı': 60
+        'altıncı': 6
+        'beşinci': 5
+        birinci: 1
+        'doksan altıncı': 96
+        'doksan beşinci': 95
+        'doksan birinci': 91
+        'doksan dokuzuncu': 99
+        'doksan dördüncü': 94
+        'doksan ikinci': 92
+        'doksan sekizinci': 98
+        'doksan yedinci': 97
+        'doksan üçüncü': 93
+        'doksanıncı': 90
+        dokuzuncu: 9
+        'dördüncü': 4
+        'elli altıncı': 56
+        'elli beşinci': 55
+        'elli birinci': 51
+        'elli dokuzuncu': 59
+        'elli dördüncü': 54
+        'elli ikinci': 52
+        'elli sekizinci': 58
+        'elli yedinci': 57
+        'elli üçüncü': 53
+        ellinci: 50
+        'iki yüzüncü': 200
+        ikinci: 2
+        'kırk altıncı': 46
+        'kırk beşinci': 45
+        'kırk birinci': 41
+        'kırk dokuzuncu': 49
+        'kırk dördüncü': 44
+        'kırk ikinci': 42
+        'kırk sekizinci': 48
+        'kırk yedinci': 47
+        'kırk üçüncü': 43
+        'kırkıncı': 40
+        'on altıncı': 16
+        'on beşinci': 15
+        'on birinci': 11
+        'on dokuzuncu': 19
+        'on dördüncü': 14
+        'on ikinci': 12
+        'on sekizinci': 18
+        'on yedinci': 17
+        'on üçüncü': 13
+        onuncu: 10
+        'otuz altıncı': 36
+        'otuz beşinci': 35
+        'otuz birinci': 31
+        'otuz dokuzuncu': 39
+        'otuz dördüncü': 34
+        'otuz ikinci': 32
+        'otuz sekizinci': 38
+        'otuz yedinci': 37
+        'otuz üçüncü': 33
+        otuzuncu: 30
+        sekizinci: 8
+        'seksen altıncı': 86
+        'seksen beşinci': 85
+        'seksen birinci': 81
+        'seksen dokuzuncu': 89
+        'seksen dördüncü': 84
+        'seksen ikinci': 82
+        'seksen sekizinci': 88
+        'seksen yedinci': 87
+        'seksen üçüncü': 83
+        sekseninci: 80
+        yedinci: 7
+        'yetmiş altıncı': 76
+        'yetmiş beşinci': 75
+        'yetmiş birinci': 71
+        'yetmiş dokuzuncu': 79
+        'yetmiş dördüncü': 74
+        'yetmiş ikinci': 72
+        'yetmiş sekizinci': 78
+        'yetmiş yedinci': 77
+        'yetmiş üçüncü': 73
+        'yetmişinci': 70
+        'yirmi altıncı': 26
+        'yirmi beşinci': 25
+        'yirmi birinci': 21
+        'yirmi dokuzuncu': 29
+        'yirmi dördüncü': 24
+        'yirmi ikinci': 22
+        'yirmi sekizinci': 28
+        'yirmi yedinci': 27
+        'yirmi üçüncü': 23
+        yirminci: 20
+        'yüz altmış altıncı': 166
+        'yüz altmış beşinci': 165
+        'yüz altmış birinci': 161
+        'yüz altmış dokuzuncu': 169
+        'yüz altmış dördüncü': 164
+        'yüz altmış ikinci': 162
+        'yüz altmış sekizinci': 168
+        'yüz altmış yedinci': 167
+        'yüz altmış üçüncü': 163
+        'yüz altmışıncı': 160
+        'yüz altıncı': 106
+        'yüz beşinci': 105
+        'yüz birinci': 101
+        'yüz doksan altıncı': 196
+        'yüz doksan beşinci': 195
+        'yüz doksan birinci': 191
+        'yüz doksan dokuzuncu': 199
+        'yüz doksan dördüncü': 194
+        'yüz doksan ikinci': 192
+        'yüz doksan sekizinci': 198
+        'yüz doksan yedinci': 197
+        'yüz doksan üçüncü': 193
+        'yüz doksanıncı': 190
+        'yüz dokuzuncu': 109
+        'yüz dördüncü': 104
+        'yüz elli altıncı': 156
+        'yüz elli beşinci': 155
+        'yüz elli birinci': 151
+        'yüz elli dokuzuncu': 159
+        'yüz elli dördüncü': 154
+        'yüz elli ikinci': 152
+        'yüz elli sekizinci': 158
+        'yüz elli yedinci': 157
+        'yüz elli üçüncü': 153
+        'yüz ellinci': 150
+        'yüz ikinci': 102
+        'yüz kırk altıncı': 146
+        'yüz kırk beşinci': 145
+        'yüz kırk birinci': 141
+        'yüz kırk dokuzuncu': 149
+        'yüz kırk dördüncü': 144
+        'yüz kırk ikinci': 142
+        'yüz kırk sekizinci': 148
+        'yüz kırk yedinci': 147
+        'yüz kırk üçüncü': 143
+        'yüz kırkıncı': 140
+        'yüz on altıncı': 116
+        'yüz on beşinci': 115
+        'yüz on birinci': 111
+        'yüz on dokuzuncu': 119
+        'yüz on dördüncü': 114
+        'yüz on ikinci': 112
+        'yüz on sekizinci': 118
+        'yüz on yedinci': 117
+        'yüz on üçüncü': 113
+        'yüz onuncu': 110
+        'yüz otuz altıncı': 136
+        'yüz otuz beşinci': 135
+        'yüz otuz birinci': 131
+        'yüz otuz dokuzuncu': 139
+        'yüz otuz dördüncü': 134
+        'yüz otuz ikinci': 132
+        'yüz otuz sekizinci': 138
+        'yüz otuz yedinci': 137
+        'yüz otuz üçüncü': 133
+        'yüz otuzuncu': 130
+        'yüz sekizinci': 108
+        'yüz seksen altıncı': 186
+        'yüz seksen beşinci': 185
+        'yüz seksen birinci': 181
+        'yüz seksen dokuzuncu': 189
+        'yüz seksen dördüncü': 184
+        'yüz seksen ikinci': 182
+        'yüz seksen sekizinci': 188
+        'yüz seksen yedinci': 187
+        'yüz seksen üçüncü': 183
+        'yüz sekseninci': 180
+        'yüz yedinci': 107
+        'yüz yetmiş altıncı': 176
+        'yüz yetmiş beşinci': 175
+        'yüz yetmiş birinci': 171
+        'yüz yetmiş dokuzuncu': 179
+        'yüz yetmiş dördüncü': 174
+        'yüz yetmiş ikinci': 172
+        'yüz yetmiş sekizinci': 178
+        'yüz yetmiş yedinci': 177
+        'yüz yetmiş üçüncü': 173
+        'yüz yetmişinci': 170
+        'yüz yirmi altıncı': 126
+        'yüz yirmi beşinci': 125
+        'yüz yirmi birinci': 121
+        'yüz yirmi dokuzuncu': 129
+        'yüz yirmi dördüncü': 124
+        'yüz yirmi ikinci': 122
+        'yüz yirmi sekizinci': 128
+        'yüz yirmi yedinci': 127
+        'yüz yirmi üçüncü': 123
+        'yüz yirminci': 120
+        'yüz üçüncü': 103
+        'yüzüncü': 100
+        'üçüncü': 3
+      ordinalScaleMap:
+        bininci: 1000
+      gluedOrdinalScaleSuffixes:
+        bininci: 1000
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    zeroFiller: 'sıfır'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'kuzey'
+      - 'kuzey-kuzeydoğu'
+      - 'kuzeydoğu'
+      - 'doğu-kuzeydoğu'
+      - 'doğu'
+      - 'doğu-güneydoğu'
+      - 'güneydoğu'
+      - 'güney-güneydoğu'
+      - 'güney'
+      - 'güney-güneybatı'
+      - 'güneybatı'
+      - 'batı-güneybatı'
+      - 'batı'
+      - 'batı-kuzeybatı'
+      - 'kuzeybatı'
+      - 'kuzey-kuzeybatı'
+    short:
+      - 'K'
+      - 'KKD'
+      - 'KD'
+      - 'DKD'
+      - 'D'
+      - 'DGD'
+      - 'GD'
+      - 'GGD'
+      - 'G'
+      - 'GGB'
+      - 'GB'
+      - 'BGB'
+      - 'B'
+      - 'BKB'
+      - 'KB'
+      - 'KKB'

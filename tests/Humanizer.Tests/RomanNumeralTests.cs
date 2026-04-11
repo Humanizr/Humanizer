@@ -1,4 +1,4 @@
-﻿public class RomanNumeralTests
+public class RomanNumeralTests
 {
     [Theory]
     [InlineData(1, "I")]

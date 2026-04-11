@@ -1,6 +1,6 @@
+using System.Globalization;
 using BenchmarkDotNet.Attributes;
 using Humanizer;
-using System.Globalization;
 
 namespace Benchmarks;
 

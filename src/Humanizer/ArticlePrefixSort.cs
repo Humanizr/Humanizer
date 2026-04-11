@@ -10,7 +10,7 @@ public static partial class EnglishArticle
 #if NET7_0_OR_GREATER
     [GeneratedRegex(ArticlePattern)]
     private static partial Regex ArticleRegexGenerated();
-    
+
     private static Regex ArticleRegex() => ArticleRegexGenerated();
 #else
     private static readonly Regex ArticleRegexField = new(ArticlePattern, RegexOptions.Compiled);
@@ -70,7 +70,7 @@ public static partial class EnglishArticle
         {
             var item = appended[i];
             var append = item.AsSpan();
-            
+
             // Check for " the" (4 chars total including space)
             if (append.Length > 4 && append[^4] == ' ')
             {
@@ -81,7 +81,7 @@ public static partial class EnglishArticle
                     continue;
                 }
             }
-            
+
             // Check for " an" (3 chars total including space)
             if (append.Length > 3 && append[^3] == ' ')
             {
@@ -92,7 +92,7 @@ public static partial class EnglishArticle
                     continue;
                 }
             }
-            
+
             // Check for " a" (2 chars total including space)
             if (append.Length > 2 && append[^2] == ' ')
             {
@@ -103,7 +103,7 @@ public static partial class EnglishArticle
                     continue;
                 }
             }
-            
+
             inserted[i] = item;
         }
 
