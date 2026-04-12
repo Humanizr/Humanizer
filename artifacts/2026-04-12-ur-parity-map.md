@@ -78,7 +78,7 @@ foreach (var c in cultures) {
 
 ### net48 Results
 
-net48 requires a Windows host. Not available locally on macOS arm64. Provisional expectation: HijriCalendar assignment should succeed (Windows NLS data historically includes it for Urdu cultures). Final verification will be via CI -- cross-platform gate is task .7.
+net48 requires a Windows host. Not available locally on macOS arm64. The branch has not been pushed to origin, so no CI URL is available yet. **Decision 3 is provisionally feasible** based on net10 + net8 evidence. The net48 verification is deferred to task .7 (cross-platform verification gate), which runs after all content is stable and the branch is pushed. If net48 rejects HijriCalendar assignment for any Urdu culture, Decision 3 must be re-evaluated at that point. This is the only runtime not yet probed; the two ICU-based runtimes (net10, net8) both confirm feasibility.
 
 ### Additional probe data (net10.0)
 
@@ -162,7 +162,56 @@ This means `5.ToOrdinalWords(GrammaticalGender.Feminine, urCulture)` would retur
 
 **Alternative**: Extend `IndianGroupingNumberToWordsConverter` to override `ConvertToOrdinal(int, GrammaticalGender)` directly, bypassing the base class delegation. This is simpler but creates a GenderlessNumberToWordsConverter that actually handles gender, which is confusing.
 
-**Selected**: New gendered variant. Task .9 owns the implementation, task .3 owns the cardinal data.
+**Selected**: New gendered converter class `IndianGroupingGenderedNumberToWordsConverter`.
+
+**Engine binding**: The generator selects the converter via a new engine name `indian-grouping-gendered` in the `number.words` YAML. This avoids overloading the existing `indian-grouping` engine which is used by Tamil and other genderless locales.
+
+**Locked `number.words` YAML shape for Urdu**:
+```yaml
+number:
+  words:
+    engine: 'indian-grouping-gendered'
+    denseUnitsMap:
+      - 'صفر'
+      - 'ایک'
+      # ... 100 entries (0-99), all lexically distinct
+    tensMap:
+      - ''      # placeholder for 0
+      - ''      # placeholder for 1
+      - 'بیس'   # 20 (only used for hundreds/thousands scale counts)
+      # ... 10 entries
+    hundredsMap:
+      - 'ایک سو'
+      # ... 9 entries (100-900)
+    thousandsMap:
+      - 'ایک ہزار'
+      # ... 19 entries (1000-19000)
+    lakhWord: 'لاکھ'
+    singleLakhWord: 'ایک'
+    croreWord: 'کروڑ'
+    negativeWord: 'منفی'
+    zeroWord: 'صفر'
+    ordinal:
+      masculine:
+        defaultSuffix: 'واں'
+        exactReplacements:
+          1: 'پہلا'
+          2: 'دوسرا'
+          3: 'تیسرا'
+      feminine:
+        defaultSuffix: 'ویں'
+        exactReplacements:
+          1: 'پہلی'
+          2: 'دوسری'
+          3: 'تیسری'
+      neuterFallback: 'masculine'
+```
+
+**Generator binding**: `EngineContractCatalog.cs` adds `indian-grouping-gendered` schema with all `indian-grouping` fields plus `ordinal.masculine`, `ordinal.feminine`, `neuterFallback`. `NumberToWordsEngineContractFactory` maps this engine to `IndianGroupingGenderedNumberToWordsConverter`.
+
+**Ordinal data duplication**: The low-ordinal `exactReplacements` in `number.words.ordinal` serve `ToOrdinalWords(gender)`, while the `exactReplacements` in `ordinal.numeric` (Decision 1a) serve `Ordinalize(gender)`. Both paths need the same data. To avoid duplication, the `number-word-suffix` ordinalizer engine (Decision 1a) can share the generated profile data by referencing the same source. Task .9 decides the sharing mechanism.
+
+Task .9 owns the engine + converter implementation; task .3 owns the cardinal data (`denseUnitsMap`, scale words, etc.).
 
 **API path coverage after implementation**:
 - `5.ToOrdinalWords(GrammaticalGender.Masculine, urCulture)` -> `ConvertToOrdinal(5, Masculine)` -> `پانچواں`
@@ -183,12 +232,11 @@ This means `5.ToOrdinalWords(GrammaticalGender.Feminine, urCulture)` would retur
 
 2. **Thousands rendering**: When `denseUnitsMap` is present, `GetThousandsValue()` must use the dense map for the count (1-99) instead of the compositional path that appends fragments.
 
-3. **Gendered ordinal output**: Per Decision 1b, the Urdu converter must extend `GenderedNumberToWordsConverter`. This requires either a new converter class or a mode flag on the existing engine.
+3. **Gendered ordinal output**: Per Decision 1b, the Urdu converter uses the new `indian-grouping-gendered` engine which extends `GenderedNumberToWordsConverter`.
 
 **Engine contract changes**:
-- `EngineContractCatalog.cs`: Add optional `denseUnitsMap` (string-array, 100 entries) to `indian-grouping` schema
-- `IndianGroupingNumberToWordsConverter.cs`: Check for dense map presence and bypass compositional path
-- New `IndianGroupingGenderedNumberToWordsConverter` for Urdu (or mode flag)
+- `EngineContractCatalog.cs`: Add `indian-grouping-gendered` schema with `denseUnitsMap` (string-array, 100 entries) and `ordinal` gendered block
+- New `IndianGroupingGenderedNumberToWordsConverter.cs` extending `GenderedNumberToWordsConverter`, sharing cardinal logic with `IndianGroupingNumberToWordsConverter` via composition
 
 **Verification targets** (to be proven by .3 and .6):
 - `0` -> `صفر`
