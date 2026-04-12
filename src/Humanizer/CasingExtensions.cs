@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// ApplyCase method to allow changing the case of a sentence easily

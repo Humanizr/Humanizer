@@ -11,7 +11,7 @@ These instructions apply to the entire repository.
 - Primary language: C# (modern features).
 - Target frameworks: .NET 8.0, .NET 10.0, and .NET Framework 4.8.
 - Tests use xUnit and should live alongside similar tests in `tests/Humanizer.Tests`.
-- Build with the .NET CLI (`dotnet`). Prefer the latest SDK (see install script in `.github/copilot-instructions.md`).
+- Build with the .NET CLI (`dotnet`). Prefer the latest SDK.
 
 ## Coding Guidelines
 - Respect `.editorconfig`; use spaces, 4-space indentation, and file-scoped namespaces.
@@ -26,18 +26,23 @@ These instructions apply to the entire repository.
 ## Testing Expectations
 - Every functional change must include or update xUnit tests in `tests/Humanizer.Tests`.
 - Use culture-specific folders and `UseCulture` attribute for localization tests when applicable.
-- Run the test suite for the supported .NET targets (`dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). Avoid invoking the net48 target on Linux, and allow a few minutes for each run to complete.
+- Run the test suite for the supported .NET targets: `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0` on all platforms. All three TFMs (net10.0, net8.0, net48) build successfully everywhere. Run `--framework net48` tests only on Windows (the .NET Framework 4.8 runtime is Windows-only); on non-Windows hosts, verify `net48` builds but do not attempt test execution. Allow a few minutes for each run to complete.
 
 ## Build & Validation
-- Build command: `dotnet build src/Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<path>` (from the repository root). It must succeed without warnings or errors.
+- Build command: `dotnet pack src/Humanizer/Humanizer.csproj -c Release -o <path>` (from the repository root). It must succeed without warnings or errors.
 - If you need to reference those newly build packages, create or update `NuGet.config` to use that package output path as a package source--but never commit changes to that file.
 - When verifying restore, build first, then pass the output path into `tests/verify-packages.ps1`.
-- When running `tests/verify-packages.ps1`, you can override the default `-MinimumPassingSdkVersion` (`9.0.200`) to mark older SDK/MSBuild restores as expected failures.
+- `tests/verify-packages.ps1` validates analyzer packaging and analyzer load behavior for the packed `Humanizer` package.
 - Do not introduce new compiler warnings or break existing build/test workflows.
 
+## Lint & Format
+- Verify formatting: `dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic`
+- Auto-fix formatting: `dotnet format Humanizer.slnx`
+- Rules are defined in `.editorconfig` and enforced at build time via `EnforceCodeStyleInBuild=true`.
+
 ## Localization Guidance
-- When adding a locale, duplicate and translate the relevant resource files under `src/Humanizer/Properties`.
-- Register new formatters/converters in the appropriate registries (see `Configuration/FormatterRegistry.cs` and number converter factories).
+- When adding a locale, duplicate and translate the relevant YAML locale file under `src/Humanizer/Locales`; the source generator wires all registries automatically (see `docs/adding-a-locale.md`).
+- When ICU-supplied data (month names, decimal separators) differs across platforms, author explicit overrides in `calendar:` and/or `number.formatting:` YAML surfaces rather than changing `CultureInfo` directly.
 - Cover new localization behavior with targeted tests under `tests/Humanizer.Tests/Localisation/{culture}`.
 
 ## Documentation Updates
@@ -48,3 +53,64 @@ These instructions apply to the entire repository.
 - Keep changes focused with clear commit messages.
 - Follow repository PR template expectations: summarize changes, list tests run, and reference related issues (e.g., `fixes #123`) when applicable.
 - Ensure the codebase remains backward-compatible unless intentionally introducing a documented breaking change.
+
+<!-- BEGIN FLOW-NEXT -->
+## Flow-Next
+
+This project uses Flow-Next for task tracking. Use `.flow/bin/flowctl` instead of markdown TODOs or TodoWrite.
+
+**Quick commands:**
+```bash
+.flow/bin/flowctl list                # List all epics + tasks
+.flow/bin/flowctl epics               # List all epics
+.flow/bin/flowctl tasks --epic fn-N   # List tasks for epic
+.flow/bin/flowctl ready --epic fn-N   # What's ready
+.flow/bin/flowctl show fn-N.M         # View task
+.flow/bin/flowctl start fn-N.M        # Claim task
+.flow/bin/flowctl done fn-N.M --summary-file s.md --evidence-json e.json
+```
+
+**Creating a spec** ("create a spec", "spec out X", "write a spec for X"):
+
+A spec = an epic. Create one directly — do NOT use `$flow-next-plan` (that breaks specs into tasks).
+
+```bash
+.flow/bin/flowctl epic create --title "Short title" --json
+.flow/bin/flowctl epic set-plan <epic-id> --file - --json <<'EOF'
+# Title
+
+## Goal & Context
+Why this exists, what problem it solves.
+
+## Architecture & Data Models
+System design, data flow, key components.
+
+## API Contracts
+Endpoints, interfaces, input/output shapes.
+
+## Edge Cases & Constraints
+Failure modes, limits, performance requirements.
+
+## Acceptance Criteria
+- [ ] Testable criterion 1
+- [ ] Testable criterion 2
+
+## Boundaries
+What's explicitly out of scope.
+
+## Decision Context
+Why this approach over alternatives.
+EOF
+```
+
+After creating a spec, choose next step:
+- `$flow-next-plan <epic-id>` — research + break into tasks
+- `$flow-next-interview <epic-id>` — deep Q&A to refine the spec
+
+**Rules:**
+- Use `.flow/bin/flowctl` for ALL task tracking
+- Do NOT create markdown TODOs or use TodoWrite
+- Re-anchor (re-read spec + status) before every task
+
+**More info:** `.flow/bin/flowctl --help` or read `.flow/usage.md`
+<!-- END FLOW-NEXT -->

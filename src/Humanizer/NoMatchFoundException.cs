@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// This is thrown on String.DehumanizeTo enum when the provided string cannot be mapped to the target enum

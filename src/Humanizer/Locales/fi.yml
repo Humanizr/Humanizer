@@ -1,0 +1,426 @@
+locale: 'fi'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'ja'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitDetector: 'singular-plural'
+    dataUnitSuffixes:
+      singular: '_Singular'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'nyt'
+      never: 'ei koskaan'
+      past:
+        millisecond:
+          single: '1 millisekunti sitten'
+          multiple:
+            forms:
+              default: 'millisekuntia'
+            afterCount: 'sitten'
+        second:
+          single: 'sekuntti sitten'
+          multiple:
+            forms:
+              default: 'sekuntia'
+            afterCount: 'sitten'
+        minute:
+          single: 'minuutti sitten'
+          multiple:
+            forms:
+              default: 'minuuttia'
+            afterCount: 'sitten'
+        hour:
+          single: 'tunti sitten'
+          multiple:
+            forms:
+              default: 'tuntia'
+            afterCount: 'sitten'
+        day:
+          single: 'eilen'
+          multiple:
+            forms:
+              default: 'päivää'
+            afterCount: 'sitten'
+          template:
+            name: 'two'
+            value: 'toissapäivänä'
+        week:
+          single: '1 viikko sitten'
+          multiple:
+            forms:
+              default: 'viikkoa'
+            afterCount: 'sitten'
+        month:
+          single: 'kuukausi sitten'
+          multiple:
+            forms:
+              default: 'kuukautta'
+            afterCount: 'sitten'
+        year:
+          single: 'vuosi sitten'
+          multiple:
+            forms:
+              default: 'vuotta'
+            afterCount: 'sitten'
+      future:
+        millisecond:
+          single: '1 millisekunnin päästä'
+          multiple:
+            forms:
+              default: 'millisekunnin'
+            afterCount: 'päästä'
+        second:
+          single: 'sekunnin päästä'
+          multiple:
+            forms:
+              default: 'sekunnin'
+            afterCount: 'päästä'
+        minute:
+          single: 'minuutin päästä'
+          multiple:
+            forms:
+              default: 'minuutin'
+            afterCount: 'päästä'
+        hour:
+          single: 'tunnin päästä'
+          multiple:
+            forms:
+              default: 'tunnin'
+            afterCount: 'päästä'
+        day:
+          single: 'huomenna'
+          multiple:
+            forms:
+              default: 'päivän'
+            afterCount: 'päästä'
+          template:
+            name: 'two'
+            value: 'ylihuomenna'
+        week:
+          single: '1 viikon päästä'
+          multiple:
+            forms:
+              default: 'viikon'
+            afterCount: 'päästä'
+        month:
+          single: 'kuukauden päästä'
+          multiple:
+            forms:
+              default: 'kuukauden'
+            afterCount: 'päästä'
+        year:
+          single: 'vuoden päästä'
+          multiple:
+            forms:
+              default: 'vuoden'
+            afterCount: 'päästä'
+    duration:
+      zero: 'nyt'
+      age:
+        template: '{value} vanha'
+      millisecond:
+        single:
+          numeric: 'millisekunti'
+          words: 'millisekunti'
+        multiple:
+          forms:
+            default: 'millisekuntia'
+      second:
+        single:
+          numeric: 'sekunti'
+          words: 'sekunti'
+        multiple:
+          forms:
+            default: 'sekuntia'
+      minute:
+        single:
+          numeric: 'minuutti'
+          words: 'minuutti'
+        multiple:
+          forms:
+            default: 'minuuttia'
+      hour:
+        single:
+          numeric: 'tunti'
+          words: 'tunti'
+        multiple:
+          forms:
+            default: 'tuntia'
+      day:
+        single:
+          numeric: 'päivä'
+          words: 'päivä'
+        multiple:
+          forms:
+            default: 'päivää'
+      week:
+        single:
+          numeric: 'viikko'
+          words: 'viikko'
+        multiple:
+          forms:
+            default: 'viikkoa'
+      month:
+        single:
+          numeric: 'kuukausi'
+          words: 'kuukausi'
+        multiple:
+          forms:
+            default: 'kuukautta'
+      year:
+        single:
+          numeric: 'vuosi'
+          words: 'vuosi'
+        multiple:
+          forms:
+            default: 'vuotta'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bittiä'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'tavua'
+          singular: 'tavu'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilotavua'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megatavua'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigatavua'
+          singular: 'gigatavu'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'teratavua'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'tunti'
+      day:
+        symbol: 'päivä'
+      week:
+        symbol: 'viikko'
+      month:
+        symbol: 'kuukausi'
+      year:
+        symbol: 'vuosi'
+
+  number:
+    words:
+      engine: 'agglutinative-ordinal-scale'
+      minusWord: 'miinus '
+      tensSuffix: 'kymmentä'
+      teenSuffix: 'toista'
+      ordinalTensSuffix: 'kymmenes'
+      unitsMap:
+        - 'nolla'
+        - 'yksi'
+        - 'kaksi'
+        - 'kolme'
+        - 'neljä'
+        - 'viisi'
+        - 'kuusi'
+        - 'seitsemän'
+        - 'kahdeksan'
+        - 'yhdeksän'
+        - 'kymmenen'
+      ordinalUnitsMap:
+        - 'nollas'
+        - 'ensimmäinen'
+        - 'toinen'
+        - 'kolmas'
+        - 'neljäs'
+        - 'viides'
+        - 'kuudes'
+        - 'seitsemäs'
+        - 'kahdeksas'
+        - 'yhdeksäs'
+        - 'kymmenes'
+      ordinalExceptions:
+        1: 'yhdes'
+        2: 'kahdes'
+      scales:
+        -
+          value: 1000000000000000000
+          singularCardinal: 'triljoona'
+          pluralCardinal: 'triljoonaa'
+          ordinalWord: 'triljoonas'
+        -
+          value: 1000000000000000
+          singularCardinal: 'biljardi'
+          pluralCardinal: 'biljardia'
+          ordinalWord: 'biljardis'
+        -
+          value: 1000000000000
+          singularCardinal: 'biljoona'
+          pluralCardinal: 'biljoonaa'
+          ordinalWord: 'biljoonas'
+        -
+          value: 1000000000
+          singularCardinal: 'miljardi'
+          pluralCardinal: 'miljardia'
+          ordinalWord: 'miljardis'
+        -
+          value: 1000000
+          singularCardinal: 'miljoona'
+          pluralCardinal: 'miljoonaa'
+          ordinalWord: 'miljoonas'
+        -
+          value: 1000
+          singularCardinal: 'tuhat'
+          pluralCardinal: 'tuhatta'
+          ordinalWord: 'tuhannes'
+        -
+          value: 100
+          singularCardinal: 'sata'
+          pluralCardinal: 'sataa'
+          ordinalWord: 'sadas'
+
+    formatting:
+      negativeSign: '−'
+
+    parse:
+      engine: 'suffix-scale'
+      cardinalMap:
+        nolla: 0
+        yksi: 1
+        kaksi: 2
+        kaksikymmentayksi: 21
+        kolme: 3
+        'neljä': 4
+        viisi: 5
+        kuusi: 6
+        'seitsemän': 7
+        kahdeksan: 8
+        'yhdeksän': 9
+        kymmenen: 10
+        yksitoista: 11
+        kaksitoista: 12
+        kolmetoista: 13
+        'neljätoista': 14
+        viisitoista: 15
+        kuusitoista: 16
+        'seitsemäntoista': 17
+        kahdeksantoista: 18
+        'yhdeksäntoista': 19
+      bareScaleMap:
+        sata: 100
+        tuhat: 1000
+        tuhatta: 1000
+        miljoona: 1000000
+        miljoonaa: 1000000
+        miljardi: 1000000000
+        miljardia: 1000000000
+        biljoona: 1000000000000
+        biljoonaa: 1000000000000
+        biljardi: 1000000000000000
+        biljardia: 1000000000000000
+        triljoona: 1000000000000000000
+        triljoonaa: 1000000000000000000
+      scales:
+        -
+          singular: 'triljoona'
+          plural: 'triljoonaa'
+          value: 1000000000000000000
+        -
+          singular: 'biljardi'
+          plural: 'biljardia'
+          value: 1000000000000000
+        -
+          singular: 'biljoona'
+          plural: 'biljoonaa'
+          value: 1000000000000
+        -
+          singular: 'miljardi'
+          plural: 'miljardia'
+          value: 1000000000
+        -
+          singular: 'miljoona'
+          plural: 'miljoonaa'
+          value: 1000000
+        -
+          singular: 'tuhat'
+          plural: 'tuhatta'
+          value: 1000
+      hundredSingularToken: 'sata'
+      hundredPluralToken: 'sataa'
+      tensSuffixToken: 'kymmentä'
+      teenSuffixToken: 'toista'
+      negativePrefixes:
+        - 'miinus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    zeroFiller: 'nolla'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'pohjoinen'
+      - 'pohjoiskoillinen'
+      - 'koillinen'
+      - 'itäkoillinen'
+      - 'itä'
+      - 'itäkaakko'
+      - 'kaakko'
+      - 'eteläkaakko'
+      - 'etelä'
+      - 'etelälounas'
+      - 'lounas'
+      - 'länsilounas'
+      - 'länsi'
+      - 'länsiluode'
+      - 'luode'
+      - 'pohjoisluode'
+    short:
+      - 'P'
+      - 'PKO'
+      - 'KO'
+      - 'IKO'
+      - 'I'
+      - 'IKA'
+      - 'KA'
+      - 'EKA'
+      - 'E'
+      - 'ELO'
+      - 'LO'
+      - 'LLO'
+      - 'L'
+      - 'LLU'
+      - 'LU'
+      - 'PLU'

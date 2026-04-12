@@ -1,4 +1,4 @@
-﻿public class StringHumanizeTests
+public class StringHumanizeTests
 {
     [Theory]
     [InlineData("PascalCaseInputStringIsTurnedIntoSentence", "Pascal case input string is turned into sentence")]

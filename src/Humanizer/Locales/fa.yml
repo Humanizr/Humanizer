@@ -1,0 +1,431 @@
+locale: 'fa'
+
+surfaces:
+  list:
+    engine: 'clitic'
+    value: 'و'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'الآن'
+      never: 'هرگز'
+      past:
+        millisecond:
+          single: 'یک میلی‌ثانیه پیش'
+          multiple:
+            forms:
+              default: 'میلی‌ثانیه'
+            afterCount: 'پیش'
+        second:
+          single: 'یک ثانیه پیش'
+          multiple:
+            forms:
+              default: 'ثانیه'
+            afterCount: 'پیش'
+        minute:
+          single: 'یک دقیقه پیش'
+          multiple:
+            forms:
+              default: 'دقیقه'
+            afterCount: 'پیش'
+        hour:
+          single: 'یک ساعت پیش'
+          multiple:
+            forms:
+              default: 'ساعت'
+            afterCount: 'پیش'
+        day:
+          single: 'دیروز'
+          multiple:
+            forms:
+              default: 'روز'
+            afterCount: 'پیش'
+          template:
+            name: 'two'
+            value: 'پریروز'
+        week:
+          single: 'یک هفته پیش'
+          multiple:
+            forms:
+              default: 'هفته'
+            afterCount: 'پیش'
+        month:
+          single: 'یک ماه پیش'
+          multiple:
+            forms:
+              default: 'ماه'
+            afterCount: 'پیش'
+        year:
+          single: 'یک سال پیش'
+          multiple:
+            forms:
+              default: 'سال'
+            afterCount: 'پیش'
+      future:
+        millisecond:
+          single: 'یک میلی‌ثانیه بعد'
+          multiple:
+            forms:
+              default: 'میلی‌ثانیه'
+            afterCount: 'بعد'
+        second:
+          single: 'یک ثانیه بعد'
+          multiple:
+            forms:
+              default: 'ثانیه'
+            afterCount: 'بعد'
+        minute:
+          single: 'یک دقیقه بعد'
+          multiple:
+            forms:
+              default: 'دقیقه'
+            afterCount: 'بعد'
+        hour:
+          single: 'یک ساعت بعد'
+          multiple:
+            forms:
+              default: 'ساعت'
+            afterCount: 'بعد'
+        day:
+          single: 'فردا'
+          multiple:
+            forms:
+              default: 'روز'
+            afterCount: 'بعد'
+          template:
+            name: 'two'
+            value: 'پس‌فردا'
+        week:
+          single: 'یک هفته بعد'
+          multiple:
+            forms:
+              default: 'هفته'
+            afterCount: 'بعد'
+        month:
+          single: 'یک ماه بعد'
+          multiple:
+            forms:
+              default: 'ماه'
+            afterCount: 'بعد'
+        year:
+          single: 'یک سال بعد'
+          multiple:
+            forms:
+              default: 'سال'
+            afterCount: 'بعد'
+    duration:
+      zero: 'الآن'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: 'یک میلی‌ثانیه'
+          words: 'یک میلی‌ثانیه'
+        multiple:
+          forms:
+            default: 'میلی‌ثانیه'
+      second:
+        single:
+          numeric: 'یک ثانیه'
+          words: 'یک ثانیه'
+        multiple:
+          forms:
+            default: 'ثانیه'
+      minute:
+        single:
+          numeric: 'یک دقیقه'
+          words: 'یک دقیقه'
+        multiple:
+          forms:
+            default: 'دقیقه'
+      hour:
+        single:
+          numeric: 'یک ساعت'
+          words: 'یک ساعت'
+        multiple:
+          forms:
+            default: 'ساعت'
+      day:
+        single:
+          numeric: 'یک روز'
+          words: 'یک روز'
+        multiple:
+          forms:
+            default: 'روز'
+      week:
+        single:
+          numeric: 'یک هفته'
+          words: 'یک هفته'
+        multiple:
+          forms:
+            default: 'هفته'
+      month:
+        single:
+          numeric: 'یک ماه'
+          words: 'یک ماه'
+        multiple:
+          forms:
+            default: 'ماه'
+      year:
+        single:
+          numeric: 'یک سال'
+          words: 'یک سال'
+        multiple:
+          forms:
+            default: 'سال'
+    dataUnits:
+      bit:
+        forms:
+          default: 'بیت'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'بایت'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'کیلوبایت'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'مگابایت'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'گیگابایت'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ترابایت'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'میلی‌ثانیه'
+      second:
+        symbol: 'ثانیه'
+      minute:
+        symbol: 'دقیقه'
+      hour:
+        symbol: 'ساعت'
+      day:
+        symbol: 'روز'
+      week:
+        symbol: 'هفته'
+      month:
+        symbol: 'ماه'
+      year:
+        symbol: 'سال'
+
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'صفر'
+      minusWord: 'منفی'
+      negativeJoinWord: ' '
+      joinWord: ' و '
+      scaleCountJoinWord: ' '
+      defaultOrdinalSuffix: 'م'
+      matchingOrdinalSuffix: ' ام'
+      ordinalSuffixMatchCharacters: 'ی'
+      unitsMap:
+        - 'صفر'
+        - 'یک'
+        - 'دو'
+        - 'سه'
+        - 'چهار'
+        - 'پنج'
+        - 'شش'
+        - 'هفت'
+        - 'هشت'
+        - 'نه'
+        - 'ده'
+        - 'یازده'
+        - 'دوازده'
+        - 'سیزده'
+        - 'چهارده'
+        - 'پانزده'
+        - 'شانزده'
+        - 'هفده'
+        - 'هجده'
+        - 'نوزده'
+      tensMap:
+        - 'صفر'
+        - 'ده'
+        - 'بیست'
+        - 'سی'
+        - 'چهل'
+        - 'پنجاه'
+        - 'شصت'
+        - 'هفتاد'
+        - 'هشتاد'
+        - 'نود'
+      hundredsMap:
+        - 'صفر'
+        - 'صد'
+        - 'دویست'
+        - 'سیصد'
+        - 'چهارصد'
+        - 'پانصد'
+        - 'ششصد'
+        - 'هفتصد'
+        - 'هشتصد'
+        - 'نهصد'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'تریلیون'
+        -
+          value: 1000000000000000
+          name: 'بیلیارد'
+        -
+          value: 1000000000000
+          name: 'بیلیون'
+        -
+          value: 1000000000
+          name: 'میلیارد'
+        -
+          value: 1000000
+          name: 'میلیون'
+        -
+          value: 1000
+          name: 'هزار'
+      ordinalExceptions:
+        1: 'اول'
+        3: 'سوم'
+      compoundOrdinalRemainder: 3
+      compoundOrdinalWord: 'سوم'
+      compoundOrdinalExcludedValues:
+        - 13
+
+    formatting:
+      negativeSign: '−'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'Persian'
+      cardinalMap:
+        'صفر': 0
+        'یک': 1
+        'دو': 2
+        'سه': 3
+        'چهار': 4
+        'پنج': 5
+        'شش': 6
+        'هفت': 7
+        'هشت': 8
+        'نه': 9
+        'ده': 10
+        'یازده': 11
+        'دوازده': 12
+        'سیزده': 13
+        'چهارده': 14
+        'پانزده': 15
+        'شانزده': 16
+        'هفده': 17
+        'هجده': 18
+        'نوزده': 19
+        'بیست': 20
+        'سی': 30
+        'چهل': 40
+        'پنجاه': 50
+        'شصت': 60
+        'هفتاد': 70
+        'هشتاد': 80
+        'نود': 90
+        'صد': 100
+        'دویست': 200
+        'سیصد': 300
+        'چهارصد': 400
+        'پانصد': 500
+        'ششصد': 600
+        'هفتصد': 700
+        'هشتصد': 800
+        'نهصد': 900
+        'هزار': 1000
+        'میلیون': 1000000
+        'میلیارد': 1000000000
+        'بیلیون': 1000000000000
+        'بیلیارد': 1000000000000000
+        'تریلیون': 1000000000000000000
+      negativePrefixes:
+        - 'منفی '
+      ignoredTokens:
+        - 'و'
+
+  compass:
+    full:
+      - 'شمال'
+      - 'شمال‌شمال‌شرق'
+      - 'شمال‌شرق'
+      - 'شرق‌شمال‌شرق'
+      - 'شرق'
+      - 'شرق‌جنوب‌شرق'
+      - 'جنوب‌شرق'
+      - 'جنوب‌جنوب‌شرق'
+      - 'جنوب'
+      - 'جنوب‌جنوب‌غرب'
+      - 'جنوب‌غرب'
+      - 'غرب‌جنوب‌غرب'
+      - 'غرب'
+      - 'غرب‌شمال‌غرب'
+      - 'شمال‌غرب'
+      - 'شمال‌شمال‌غرب'
+    short:
+      - 'ش'
+      - 'ش‌ش‌شر'
+      - 'ش‌شر'
+      - 'شر‌ش‌شر'
+      - 'شر'
+      - 'شر‌ج‌شر'
+      - 'ج‌شر'
+      - 'ج‌ج‌شر'
+      - 'ج'
+      - 'ج‌ج‌غر'
+      - 'ج‌غر'
+      - 'غر‌ج‌غر'
+      - 'غر'
+      - 'غر‌ش‌غر'
+      - 'ش‌غر'
+      - 'ش‌ش‌غر'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    min0: '{hour}'
+    defaultTemplate: '{hour} و {minutes}'
+    earlyMorning: 'بامداد'
+    morning: 'صبح'
+    afternoon: 'بعدازظهر'
+    night: 'شب'
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: 'م'
+      zeroAsPlainNumber: true
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  calendar:
+    months:
+      - 'ژانویهٔ'
+      - 'فوریهٔ'
+      - 'مارس'
+      - 'آوریل'
+      - 'مهٔ'
+      - 'ژوئن'
+      - 'ژوئیهٔ'
+      - 'اوت'
+      - 'سپتامبر'
+      - 'اکتبر'
+      - 'نوامبر'
+      - 'دسامبر'

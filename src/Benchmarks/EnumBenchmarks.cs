@@ -1,4 +1,4 @@
-﻿[MemoryDiagnoser(false)]
+[MemoryDiagnoser(false)]
 public class EnumBenchmarks
 {
     public enum EnumUnderTest

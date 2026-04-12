@@ -46,7 +46,7 @@ public static partial class RomanNumeralExtensions
 #if NET7_0_OR_GREATER
     [GeneratedRegex(ValidRomanNumeralPattern, RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex ValidRomanNumeralGenerated();
-    
+
     private static Regex ValidRomanNumeral() => ValidRomanNumeralGenerated();
 #else
     private static readonly Regex ValidRomanNumeralRegex = new(

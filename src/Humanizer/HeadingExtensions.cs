@@ -39,12 +39,9 @@ public static class HeadingExtensions
     public static string ToHeading(this double heading, HeadingStyle style = HeadingStyle.Abbreviated, CultureInfo? culture = null)
     {
         var val = (int)(heading / 22.5 + .5);
-
         var headingsIndex = val % 16;
-
-        return Resources.GetResource(
-            style == HeadingStyle.Abbreviated ? HeadingsShort[headingsIndex] : Headings[headingsIndex],
-            culture);
+        return HeadingTableCatalog.Resolve(culture ?? CultureInfo.CurrentUICulture)
+            .GetHeading(style, headingsIndex);
     }
 
     /// <summary>
@@ -79,18 +76,9 @@ public static class HeadingExtensions
         ArgumentNullException.ThrowIfNull(heading);
 
         culture ??= CultureInfo.CurrentCulture;
-
-        var upperCaseHeading = culture.TextInfo.ToUpper(heading);
-        for (var index = 0; index < HeadingsShort.Length; ++index)
-        {
-            var localizedShortHeading = Resources.GetResource(HeadingsShort[index], culture);
-            if (culture.CompareInfo.Compare(upperCaseHeading, localizedShortHeading) == 0)
-            {
-                return index * 22.5;
-            }
-        }
-
-        return -1;
+        return HeadingTableCatalog.Resolve(culture).TryParseAbbreviated(heading, culture, out var result)
+            ? result
+            : -1;
     }
 
     /// <summary>

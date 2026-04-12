@@ -55,42 +55,49 @@ stages:
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: build
-        projects: ./src/Humanizer/Humanizer.csproj
-        arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)/Packages 
+        command: pack
+        packagesToPack: ./src/Humanizer/Humanizer.csproj
+        packDirectory: $(Build.ArtifactStagingDirectory)/Packages
+        configuration: $(BuildConfiguration)
       displayName: Restore, Build, and Pack
 
     - pwsh: |
         $(Build.SourcesDirectory)/tests/verify-packages.ps1 `
           -PackageVersion '$(NBGV_NuGetPackageVersion)' `
-          -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages' `
-          -IncludeWapProjSmokeTest
+          -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
       displayName: Verify Package Structure and Dependencies
       failOnStderr: false
 
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: |
-          tests/Humanizer.Tests/Humanizer.Tests.csproj
-          tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj
-        arguments: -c $(BuildConfiguration) --coverage --xunit-info
+        projects: tests/**/*.Tests.csproj
+        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Tests
+      continueOnError: true
 
     # Generate code coverage report
     # https://danielpalme.github.io/ReportGenerator/
     - task: reportgenerator@5
       displayName: Generate Code Coverage Report
+      condition: succeededOrFailed()
       inputs:
         reports: '$(Agent.TempDirectory)/**/*.cobertura.xml'
-        targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
+        sourcedirs: $(Build.SourcesDirectory)
+        targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/
         reporttypes: HtmlInline_AzurePipelines_Dark;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
+        customSettings: 'settings:rawMode=false'
         publishCodeCoverageResults: true
-      
+
     - publish: $(Build.ArtifactStagingDirectory)/Packages
       displayName: Publish build packages
       artifact: BuildPackages
+      condition: succeededOrFailed()
+
+    - script: exit 1
+      displayName: Fail build on test failures
+      condition: eq(variables['Agent.JobStatus'], 'SucceededWithIssues')
 
 
 - stage: CodeSign

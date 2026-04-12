@@ -38,7 +38,7 @@ public class LocaliserRegistry<TLocaliser>
     {
         var cultureInfo = culture ?? CultureInfo.CurrentUICulture;
         var cultureName = cultureInfo.Name;
-        
+
         // Use ConcurrentDictionary with culture name (string) as key to avoid CultureInfo equality checks
         // and reduce allocations when the same culture is requested multiple times
         return cultureSpecificCache.GetOrAdd(cultureName, _ =>
@@ -75,6 +75,14 @@ public class LocaliserRegistry<TLocaliser>
                 throw new InvalidOperationException("Cannot register localisers after the registry has been used.");
             }
             localisersBuilder[localeCode] = localiser;
+        }
+    }
+
+    internal string[] GetRegisteredLocaleCodes()
+    {
+        lock (lockObject)
+        {
+            return [.. localisersBuilder.Keys.OrderBy(static locale => locale, StringComparer.Ordinal)];
         }
     }
 

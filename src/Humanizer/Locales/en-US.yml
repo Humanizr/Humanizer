@@ -1,0 +1,13 @@
+locale: 'en-US'
+variantOf: 'en'
+
+surfaces:
+  ordinal:
+    date:
+      engine: 'pattern'
+      pattern: 'MMMM {day}, yyyy'
+      dayMode: 'Ordinal'
+    dateOnly:
+      engine: 'pattern'
+      pattern: 'MMMM {day}, yyyy'
+      dayMode: 'Ordinal'
