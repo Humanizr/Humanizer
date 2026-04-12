@@ -48,9 +48,20 @@ foreach (var c in cultures) {
     Console.WriteLine($"  DecimalSeparator: [{nfi.NumberDecimalSeparator}] (U+{(int)nfi.NumberDecimalSeparator[0]:X4})");
     Console.WriteLine($"  GroupSeparator: [{nfi.NumberGroupSeparator}] (U+{(int)nfi.NumberGroupSeparator[0]:X4})");
     Console.WriteLine($"  NegativeSign: [{nfi.NegativeSign}] ({string.Join(" ", nfi.NegativeSign.Select(ch => $"U+{(int)ch:X4}"))})");
+    Console.WriteLine($"  ShortDatePattern: {dtf.ShortDatePattern}");
+    Console.WriteLine($"  LongDatePattern: {dtf.LongDatePattern}");
+    Console.WriteLine($"  ShortTimePattern: {dtf.ShortTimePattern}");
+    Console.WriteLine($"  AM: {dtf.AMDesignator}");
+    Console.WriteLine($"  PM: {dtf.PMDesignator}");
     Console.WriteLine($"  Calendar: {dtf.Calendar.GetType().Name}");
     Console.Write("  OptionalCalendars:");
     foreach (var cal in ci.OptionalCalendars) Console.Write($" {cal.GetType().Name}");
+    Console.WriteLine();
+    Console.Write("  Months:");
+    for (int m = 1; m <= 12; m++) Console.Write($" {dtf.MonthNames[m-1]}");
+    Console.WriteLine();
+    Console.Write("  MonthsGenitive:");
+    for (int m = 1; m <= 12; m++) Console.Write($" {dtf.MonthGenitiveNames[m-1]}");
     Console.WriteLine();
     // Test calendar assignments
     try { var clone = (CultureInfo)ci.Clone(); clone.DateTimeFormat.Calendar = new HijriCalendar(); Console.WriteLine("  HijriCalendar assignment: SUCCESS"); }
