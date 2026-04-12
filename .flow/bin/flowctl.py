@@ -20,7 +20,7 @@ import tempfile
 import unicodedata
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, ContextManager, Optional
 
@@ -382,7 +382,7 @@ def error_exit(message: str, code: int = 1, use_json: bool = True) -> None:
 
 def now_iso() -> str:
     """Current timestamp in ISO format."""
-    return datetime.utcnow().isoformat() + "Z"
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def require_rp_cli() -> str:
@@ -417,6 +417,24 @@ def run_rp_cli(
         error_exit(f"rp-cli failed: {msg}", use_json=False, code=2)
 
 
+def run_rp_cli_unchecked(
+    args: list[str], timeout: Optional[int] = None
+) -> subprocess.CompletedProcess:
+    """Run rp-cli without collapsing command failures.
+
+    Used when a caller needs to inspect stderr/stdout before deciding whether a
+    failure is a capability mismatch or a real RepoPrompt error.
+    """
+    if timeout is None:
+        timeout = int(os.environ.get("FLOW_RP_TIMEOUT", "1200"))
+    rp = require_rp_cli()
+    cmd = [rp] + args
+    try:
+        return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        error_exit(f"rp-cli timed out after {timeout}s", use_json=False, code=3)
+
+
 def try_run_rp_cli(
     args: list[str], timeout: Optional[int] = None
 ) -> Optional[subprocess.CompletedProcess]:
@@ -435,6 +453,17 @@ def try_run_rp_cli(
         )
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
         return None
+
+
+def is_rp_tool_missing_error(output: str, tool_name: str) -> bool:
+    """Return true only for clear RepoPrompt missing-tool capability errors."""
+    patterns = [
+        rf"\bTool not found:\s*{re.escape(tool_name)}\b",
+        rf"\bUnknown tool:\s*{re.escape(tool_name)}\b",
+        rf"\bUnknown function:\s*{re.escape(tool_name)}\b",
+        rf"\bNo such tool:\s*{re.escape(tool_name)}\b",
+    ]
+    return any(re.search(pattern, output, re.I) for pattern in patterns)
 
 
 def normalize_repo_root(path: str) -> list[str]:
@@ -735,6 +764,7 @@ def build_chat_payload(
     chat_name: Optional[str] = None,
     chat_id: Optional[str] = None,
     selected_paths: Optional[list[str]] = None,
+    include_legacy_fields: bool = True,
 ) -> str:
     payload: dict[str, Any] = {
         "message": message,
@@ -742,12 +772,13 @@ def build_chat_payload(
     }
     if new_chat:
         payload["new_chat"] = True
-    if chat_name:
-        payload["chat_name"] = chat_name
     if chat_id:
         payload["chat_id"] = chat_id
-    if selected_paths:
-        payload["selected_paths"] = selected_paths
+    if include_legacy_fields:
+        if chat_name:
+            payload["chat_name"] = chat_name
+        if selected_paths:
+            payload["selected_paths"] = selected_paths
     return json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -2813,7 +2844,7 @@ def cmd_memory_add(args: argparse.Namespace) -> None:
     # Format entry
     from datetime import datetime
 
-    today = datetime.utcnow().strftime("%Y-%m-%d")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     # Normalize type name
     type_name = args.type.lower().rstrip("s")  # pitfalls -> pitfall
@@ -5525,11 +5556,10 @@ def cmd_rp_builder(args: argparse.Namespace) -> None:
     cmd = [
         "-w",
         str(window),
-        "--raw-json" if response_type else "",
+        "--raw-json",
         "-e",
         builder_expr,
     ]
-    cmd = [c for c in cmd if c]
     res = run_rp_cli(cmd)
     output = (res.stdout or "") + ("\n" + res.stderr if res.stderr else "")
 
@@ -5563,7 +5593,15 @@ def cmd_rp_builder(args: argparse.Namespace) -> None:
             else:
                 print(tab)
     else:
-        tab = parse_builder_tab(output)
+        # Try JSON first (RP 2.1.4+), fall back to regex for older versions
+        tab = ""
+        try:
+            data = json.loads(res.stdout or "{}")
+            tab = extract_builder_tab_from_payload(data) or ""
+        except json.JSONDecodeError:
+            pass
+        if not tab:
+            tab = parse_builder_tab(output)
         if args.json:
             print(json.dumps({"window": window, "tab": tab}))
         else:
@@ -5610,7 +5648,14 @@ def cmd_rp_chat_send(args: argparse.Namespace) -> None:
     message = read_text_or_exit(Path(args.message_file), "Message file", use_json=False)
     chat_id_arg = getattr(args, "chat_id", None)
     mode = getattr(args, "mode", "chat") or "chat"
-    payload = build_chat_payload(
+    oracle_payload = build_chat_payload(
+        message=message,
+        mode=mode,
+        new_chat=args.new_chat,
+        chat_id=chat_id_arg,
+        include_legacy_fields=False,
+    )
+    legacy_payload = build_chat_payload(
         message=message,
         mode=mode,
         new_chat=args.new_chat,
@@ -5618,15 +5663,28 @@ def cmd_rp_chat_send(args: argparse.Namespace) -> None:
         chat_id=chat_id_arg,
         selected_paths=args.selected_paths,
     )
-    cmd = [
+    oracle_cmd = [
         "-w",
         str(args.window),
         "-t",
         args.tab,
         "-e",
-        f"call chat_send {payload}",
+        f"call oracle_send {oracle_payload}",
     ]
-    res = run_rp_cli(cmd)
+    legacy_cmd = [
+        "-w",
+        str(args.window),
+        "-t",
+        args.tab,
+        "-e",
+        f"call chat_send {legacy_payload}",
+    ]
+    res = run_rp_cli_unchecked(oracle_cmd)
+    if res.returncode != 0:
+        oracle_error = (res.stderr or res.stdout or "").strip()
+        if not is_rp_tool_missing_error(oracle_error, "oracle_send"):
+            error_exit(f"rp-cli failed: {oracle_error}", use_json=False, code=2)
+        res = run_rp_cli(legacy_cmd)
     output = (res.stdout or "") + ("\n" + res.stderr if res.stderr else "")
     chat_id = parse_chat_id(output)
     if args.json:
@@ -5768,11 +5826,10 @@ def cmd_rp_setup_review(args: argparse.Namespace) -> None:
     builder_cmd = [
         "-w",
         str(win_id),
-        "--raw-json" if response_type else "",
+        "--raw-json",
         "-e",
         builder_expr,
     ]
-    builder_cmd = [c for c in builder_cmd if c]  # Remove empty strings
     builder_res = run_rp_cli(builder_cmd)
     output = (builder_res.stdout or "") + (
         "\n" + builder_res.stderr if builder_res.stderr else ""
@@ -5810,7 +5867,15 @@ def cmd_rp_setup_review(args: argparse.Namespace) -> None:
         except json.JSONDecodeError:
             error_exit("Failed to parse builder review response", use_json=False, code=2)
     else:
-        tab = parse_builder_tab(output)
+        # Try JSON first (RP 2.1.4+), fall back to regex for older versions
+        tab = ""
+        try:
+            data = json.loads(builder_res.stdout or "{}")
+            tab = extract_builder_tab_from_payload(data) or ""
+        except json.JSONDecodeError:
+            pass
+        if not tab:
+            tab = parse_builder_tab(output)
         if not tab:
             error_exit("Builder did not return a tab/context id", use_json=False, code=2)
 
