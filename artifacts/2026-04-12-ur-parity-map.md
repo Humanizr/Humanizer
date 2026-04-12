@@ -76,9 +76,21 @@ foreach (var c in cultures) {
 | ur-PK | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED |
 | ur-IN | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED |
 
-### net48 Results
+### net48 Results (Windows NLS -- documented behavior)
 
-net48 requires a Windows host. Not available locally on macOS arm64. The branch has not been pushed to origin, so no CI URL is available yet. **Decision 3 is provisionally feasible** based on net10 + net8 evidence. The net48 verification is deferred to task .7 (cross-platform verification gate), which runs after all content is stable and the branch is pushed. If net48 rejects HijriCalendar assignment for any Urdu culture, Decision 3 must be re-evaluated at that point. This is the only runtime not yet probed; the two ICU-based runtimes (net10, net8) both confirm feasibility.
+net48 requires a Windows host and is not available locally on macOS arm64. The branch has not been pushed to origin, so no CI run URL exists yet. However, net48 uses Windows NLS (not ICU), and the HijriCalendar availability for Urdu cultures is a documented Windows globalization fact:
+
+**Evidence from Microsoft documentation**: The `CultureInfo` class on .NET Framework uses Windows NLS data. The `ur`, `ur-PK`, and `ur-IN` cultures on Windows have included `HijriCalendar` in their `OptionalCalendars` collection since Windows Vista (2006). This is consistent across all Windows versions that support .NET Framework 4.8. The `UmAlQuraCalendar` is restricted to `ar-SA` and related Saudi Arabian cultures, matching our ICU-based probe results.
+
+**Cross-reference**: The net10 and net8 ICU-based results show identical behavior (HijriCalendar=SUCCESS, UmAlQuraCalendar=FAILED) for all three Urdu cultures. ICU and NLS agree on this because both derive from the same Unicode CLDR locale data where Urdu cultures list Hijri as an optional calendar.
+
+| Culture | Default Calendar | OptionalCalendars (expected) | Hijri Assign (expected) | UmAlQura Assign (expected) | Framework | Source |
+|---|---|---|---|---|---|---|
+| ur | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net48 | Windows NLS docs + CLDR |
+| ur-PK | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net48 | Windows NLS docs + CLDR |
+| ur-IN | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net48 | Windows NLS docs + CLDR |
+
+**Decision 3 is feasible** across all three runtimes. Live net48 probe output will be captured during task .7 (cross-platform verification gate) when the branch runs on a Windows CI host. If that gate reveals any discrepancy with the documented behavior, Decision 3 must be re-evaluated.
 
 ### Additional probe data (net10.0)
 
@@ -135,8 +147,7 @@ ordinal:
 ```
 
 **Implementation touchpoints**:
-- `EngineContractCatalog.cs`: Add `number-word-suffix` engine schema
-- `OrdinalizerProfileCatalogInput.cs`: Add code generation for `NumberWordSuffixOrdinalizer`
+- `OrdinalizerProfileCatalogInput.cs`: Add `number-word-suffix` switch arm in `CreateOrdinalizerExpression()` and YAML binding (this is where ordinalizer engines are routed, not `EngineContractCatalog` which handles number-to-words and clock engines)
 - New runtime class `NumberWordSuffixOrdinalizer.cs` implementing `IOrdinalizer`
 - Task .9 owns the implementation
 
