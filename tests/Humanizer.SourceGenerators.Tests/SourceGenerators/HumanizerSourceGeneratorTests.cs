@@ -248,7 +248,6 @@ surfaces:
     {
         var registrySource = GetGeneratedSource("WordsToNumberConverterRegistryRegistrations.g.cs");
         var profileCatalogSource = GetGeneratedSource("WordsToNumberProfileCatalog.g.cs");
-        var tokenMapIndexSource = GetGeneratedSource("TokenMapWordsToNumberConverters.Index.g.cs");
 
         Assert.Contains("registry.Register(\"en\", culture => TokenMapWordsToNumberConverters.En);", registrySource);
         Assert.Contains("registry.Register(\"ku\", culture => TokenMapWordsToNumberConverters.Ku);", registrySource);
@@ -256,9 +255,7 @@ surfaces:
         Assert.DoesNotContain("case \"en\":", profileCatalogSource);
         Assert.DoesNotContain("case \"kurdish\":", profileCatalogSource);
         Assert.DoesNotContain("case \"vietnamese\":", profileCatalogSource);
-        Assert.Contains("\"en\" => En", tokenMapIndexSource);
-        Assert.Contains("\"ku\" => Ku", tokenMapIndexSource);
-        Assert.Contains("\"vi\" => Vi", tokenMapIndexSource);
+        Assert.DoesNotContain(generatedSources.Value.Keys, static hintName => hintName == "TokenMapWordsToNumberConverters.Index.g.cs");
     }
 
     [Fact]
