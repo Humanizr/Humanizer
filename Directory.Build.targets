@@ -11,19 +11,6 @@
     <EnableNETAnalyzers Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'">true</EnableNETAnalyzers>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(EmitCompilerGeneratedFiles)' == 'true'">
-    <CompilerGeneratedFilesOutputPath>$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', '.'))</CompilerGeneratedFilesOutputPath>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(EmitCompilerGeneratedFiles)' == 'true' and '$(UseMicrosoftTestingPlatformRunner)' == 'true'">
-    <!-- Microsoft.Testing.Extensions.CodeCoverage reads SourceRoot from the test project when mapping referenced assemblies. -->
-    <_ProjectReferenceFullPathForSourceRoot Include="@(ProjectReference->'%(FullPath)')">
-      <SourceRootPath>$([MSBuild]::EnsureTrailingSlash($([MSBuild]::NormalizePath('%(RootDir)%(Directory)', '$(BaseIntermediateOutputPath)', '.'))))</SourceRootPath>
-    </_ProjectReferenceFullPathForSourceRoot>
-    <SourceRoot Include="@(_ProjectReferenceFullPathForSourceRoot->'%(SourceRootPath)')" />
-    <_ProjectReferenceFullPathForSourceRoot Remove="@(_ProjectReferenceFullPathForSourceRoot)" />
-  </ItemGroup>
-
   <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">
     <ItemGroup>
       <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition=" '$(SourceRevisionId)' != '' ">
