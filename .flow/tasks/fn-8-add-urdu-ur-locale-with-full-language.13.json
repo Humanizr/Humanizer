@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-12T20:07:48.832728Z",
+  "depends_on": [
+    "fn-8-add-urdu-ur-locale-with-full-language.12"
+  ],
+  "epic": "fn-8-add-urdu-ur-locale-with-full-language",
+  "id": "fn-8-add-urdu-ur-locale-with-full-language.13",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-8-add-urdu-ur-locale-with-full-language.13.md",
+  "status": "todo",
+  "title": "Grammatical-gender fills: Slavic locales (cs/pl/ru/sk/sl/sr/uk/bg/hr)",
+  "updated_at": "2026-04-12T20:07:48.833048Z"
+}
