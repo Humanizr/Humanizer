@@ -249,37 +249,6 @@ public sealed partial class HumanizerSourceGenerator
                 context.AddSource("TokenMapWordsToNumberConverters." + propertyName + ".g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
             }
 
-            var indexBuilder = new StringBuilder();
-            indexBuilder.AppendLine("namespace Humanizer;");
-            indexBuilder.AppendLine();
-            indexBuilder.AppendLine("static partial class TokenMapWordsToNumberConverters");
-            indexBuilder.AppendLine("{");
-            indexBuilder.AppendLine("    public static IWordsToNumberConverter Resolve(string localeCode) =>");
-            indexBuilder.AppendLine("        localeCode switch");
-            indexBuilder.AppendLine("        {");
-
-            foreach (var locale in locales.OrderBy(static locale => locale.LocaleCode, StringComparer.Ordinal))
-            {
-                indexBuilder.Append("            ");
-                indexBuilder.Append(QuoteLiteral(locale.LocaleCode));
-                indexBuilder.Append(" => ");
-                indexBuilder.Append(GetTokenMapPropertyName(locale.LocaleCode));
-                indexBuilder.AppendLine(",");
-
-                foreach (var alias in locale.Aliases.OrderBy(static alias => alias, StringComparer.Ordinal))
-                {
-                    indexBuilder.Append("            ");
-                    indexBuilder.Append(QuoteLiteral(alias));
-                    indexBuilder.Append(" => ");
-                    indexBuilder.Append(GetTokenMapPropertyName(locale.LocaleCode));
-                    indexBuilder.AppendLine(",");
-                }
-            }
-
-            indexBuilder.AppendLine("            _ => throw new ArgumentOutOfRangeException(nameof(localeCode), localeCode, \"Unknown token-map locale.\")");
-            indexBuilder.AppendLine("        };");
-            indexBuilder.AppendLine("}");
-            context.AddSource("TokenMapWordsToNumberConverters.Index.g.cs", SourceText.From(indexBuilder.ToString(), Encoding.UTF8));
         }
 
         static void AppendStringArray(StringBuilder builder, string indent, string propertyName, ImmutableArray<string> values)
