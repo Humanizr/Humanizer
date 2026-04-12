@@ -59,7 +59,6 @@ stages:
         packagesToPack: ./src/Humanizer/Humanizer.csproj
         packDirectory: $(Build.ArtifactStagingDirectory)/Packages
         configuration: $(BuildConfiguration)
-        buildProperties: EmitCompilerGeneratedFiles=true
       displayName: Restore, Build, and Pack
 
     - pwsh: |
@@ -73,8 +72,7 @@ stages:
       inputs:
         command: test
         projects: tests/**/*.Tests.csproj
-        # ReportGenerator needs generated sources on disk to render source-generator output.
-        arguments: -c $(BuildConfiguration) /p:EmitCompilerGeneratedFiles=true -- --coverage --coverage-output-format cobertura --xunit-info
+        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Tests
       continueOnError: true
 
