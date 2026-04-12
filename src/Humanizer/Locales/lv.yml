@@ -1,0 +1,472 @@
+locale: 'lv'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'un'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'latvian'
+
+  phrases:
+    relativeDate:
+      now: 'tagad'
+      never: 'nekad'
+      past:
+        millisecond:
+          single: 'pirms milisekundes'
+          multiple:
+            forms:
+              default: 'milisekundēm'
+            beforeCount: 'pirms'
+        second:
+          single: 'pirms sekundes'
+          multiple:
+            forms:
+              default: 'sekundēm'
+              singular: 'sekundes'
+            beforeCount: 'pirms'
+        minute:
+          single: 'pirms minūtes'
+          multiple:
+            forms:
+              default: 'minūtēm'
+              singular: 'minūtes'
+            beforeCount: 'pirms'
+        hour:
+          single: 'pirms stundas'
+          multiple:
+            forms:
+              default: 'stundām'
+              singular: 'stundas'
+            beforeCount: 'pirms'
+        day:
+          single: 'vakardien'
+          multiple:
+            forms:
+              default: 'dienām'
+              singular: 'dienas'
+            beforeCount: 'pirms'
+          template:
+            name: 'two'
+            value: 'pirms 2 dienām'
+        week:
+          single: 'pirms nedēļas'
+          multiple:
+            forms:
+              default: 'nedēļām'
+            beforeCount: 'pirms'
+        month:
+          single: 'pirms mēneša'
+          multiple:
+            forms:
+              default: 'mēnešiem'
+              singular: 'mēneša'
+            beforeCount: 'pirms'
+        year:
+          single: 'pirms gada'
+          multiple:
+            forms:
+              default: 'gadiem'
+              singular: 'gada'
+            beforeCount: 'pirms'
+      future:
+        millisecond:
+          single: 'pēc milisekundes'
+          multiple:
+            forms:
+              default: 'milisekundēm'
+            beforeCount: 'pēc'
+        second:
+          single: 'pēc sekundes'
+          multiple:
+            forms:
+              default: 'sekundēm'
+              singular: 'sekundes'
+            beforeCount: 'pēc'
+        minute:
+          single: 'pēc minūtes'
+          multiple:
+            forms:
+              default: 'minūtēm'
+              singular: 'minūtes'
+            beforeCount: 'pēc'
+        hour:
+          single: 'pēc stundas'
+          multiple:
+            forms:
+              default: 'stundām'
+              singular: 'stundas'
+            beforeCount: 'pēc'
+        day:
+          single: 'rītdien'
+          multiple:
+            forms:
+              default: 'dienām'
+              singular: 'dienas'
+            beforeCount: 'pēc'
+          template:
+            name: 'two'
+            value: 'pēc 2 dienām'
+        week:
+          single: 'pēc nedēļas'
+          multiple:
+            forms:
+              default: 'nedēļām'
+            beforeCount: 'pēc'
+        month:
+          single: 'pēc mēneša'
+          multiple:
+            forms:
+              default: 'mēnešiem'
+              singular: 'mēneša'
+            beforeCount: 'pēc'
+        year:
+          single: 'pēc gada'
+          multiple:
+            forms:
+              default: 'gadiem'
+              singular: 'gada'
+            beforeCount: 'pēc'
+    duration:
+      zero: 'bez laika'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisekunde'
+          words: 'one milisekunde'
+        multiple:
+          forms:
+            default: 'milisekundes'
+            singular: 'milisekunde'
+      second:
+        single:
+          numeric: '1 sekunde'
+          words: 'one sekunde'
+        multiple:
+          forms:
+            default: 'sekundes'
+            singular: 'sekunde'
+      minute:
+        single:
+          numeric: '1 minūte'
+          words: 'one minūte'
+        multiple:
+          forms:
+            default: 'minūtes'
+            singular: 'minūte'
+      hour:
+        single:
+          numeric: '1 stunda'
+          words: 'one stunda'
+        multiple:
+          forms:
+            default: 'stundas'
+            singular: 'stunda'
+      day:
+        single:
+          numeric: '1 diena'
+          words: 'one diena'
+        multiple:
+          forms:
+            default: 'dienas'
+            singular: 'diena'
+      week:
+        single:
+          numeric: '1 nedēļa'
+          words: 'one nedēļa'
+        multiple:
+          forms:
+            default: 'nedēļas'
+            singular: 'nedēļa'
+      month:
+        single:
+          numeric: '1 mēnesis'
+          words: 'one mēnesis'
+        multiple:
+          forms:
+            default: 'mēneši'
+      year:
+        single:
+          numeric: '1 gads'
+          words: 'one gads'
+        multiple:
+          forms:
+            default: 'gadi'
+    dataUnits:
+      bit:
+        forms:
+          default: 'biti'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'baiti'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobaiti'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabaiti'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabaiti'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabaiti'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'milisekunde'
+      second:
+        symbol: 'sekunde'
+      minute:
+        symbol: 'minūte'
+      hour:
+        symbol: 'stunda'
+      day:
+        symbol: 'diena'
+      week:
+        symbol: 'nedēļa'
+      month:
+        symbol: 'mēnesis'
+      year:
+        symbol: 'gads'
+
+  number:
+    words:
+      engine: 'terminal-ordinal-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'nulle'
+      minusWord: 'mīnus'
+      unitStems:
+        1: 'vien'
+        2: 'div'
+        3: 'trīs'
+        4: 'četr'
+        5: 'piec'
+        6: 'seš'
+        7: 'septiņ'
+        8: 'astoņ'
+        9: 'deviņ'
+        10: 'desmit'
+        11: 'vienpadsmit'
+        12: 'divpadsmit'
+        13: 'trīspadsmit'
+        14: 'četrpadsmit'
+        15: 'piecpadsmit'
+        16: 'sešpadsmit'
+        17: 'septiņpadsmit'
+        18: 'astoņpadsmit'
+        19: 'deviņpadsmit'
+      ordinalUnitStems:
+        1: 'pirm'
+        2: 'otr'
+        3: 'treš'
+        4: 'ceturt'
+        5: 'piekt'
+        6: 'sest'
+        7: 'septīt'
+        8: 'astot'
+        9: 'devīt'
+        10: 'desmit'
+        11: 'vienpadsmit'
+        12: 'divpadsmit'
+        13: 'trīspadsmit'
+        14: 'četrpadsmit'
+        15: 'piecpadsmit'
+        16: 'sešpadsmit'
+        17: 'septiņpadsmit'
+        18: 'astoņpadsmit'
+        19: 'deviņpadsmit'
+      tensMap:
+        1: 'desmit'
+        2: 'divdesmit'
+        3: 'trīsdesmit'
+        4: 'četrdesmit'
+        5: 'piecdesmit'
+        6: 'sešdesmit'
+        7: 'septiņdesmit'
+        8: 'astoņdesmit'
+        9: 'deviņdesmit'
+      hundredsExactStems:
+        1: 'simt'
+        2: 'divsimt'
+        3: 'trīssimt'
+        4: 'četrsimt'
+        5: 'piecsimt'
+        6: 'sešsimt'
+        7: 'septiņsimt'
+        8: 'astoņsimt'
+        9: 'deviņsimt'
+      exactOneHundredCardinal: 'simts'
+      exactOneHundredAfterHigherScale: 'viens simts'
+      oneHundredWithRemainder: 'simtu'
+      hundredsPluralWord: 'simti'
+      masculineOrdinalSuffix: 'ais'
+      feminineOrdinalSuffix: 'ā'
+      scales:
+        -
+          value: 1000000000000000000
+          exactSingularCardinal: 'kvintiljons'
+          singularWithRemainderCardinal: 'viens kvintiljons'
+          pluralCardinal: 'kvintiljoni'
+          ordinalStem: 'kvintiljon'
+        -
+          value: 1000000000000000
+          exactSingularCardinal: 'kvadriljons'
+          singularWithRemainderCardinal: 'viens kvadriljons'
+          pluralCardinal: 'kvadriljoni'
+          ordinalStem: 'kvadriljon'
+        -
+          value: 1000000000000
+          exactSingularCardinal: 'triljons'
+          singularWithRemainderCardinal: 'viens triljons'
+          pluralCardinal: 'triljoni'
+          ordinalStem: 'triljon'
+        -
+          value: 1000000000
+          exactSingularCardinal: 'miljards'
+          singularWithRemainderCardinal: 'viens miljards'
+          pluralCardinal: 'miljardi'
+          ordinalStem: 'miljard'
+        -
+          value: 1000000
+          exactSingularCardinal: 'miljons'
+          singularWithRemainderCardinal: 'viens miljons'
+          pluralCardinal: 'miljoni'
+          ordinalStem: 'miljon'
+        -
+          value: 1000
+          exactSingularCardinal: 'tūkstotis'
+          singularWithRemainderCardinal: 'tūkstoš'
+          pluralCardinal: 'tūkstoši'
+          ordinalStem: 'tūkstoš'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        viens: 1
+        divi: 2
+        'trīs': 3
+        tris: 3
+        'četri': 4
+        cetri: 4
+        pieci: 5
+        'seši': 6
+        sesi: 6
+        'septiņi': 7
+        septini: 7
+        'astoņi': 8
+        astoni: 8
+        'deviņi': 9
+        devini: 9
+        desmit: 10
+        vienpadsmit: 11
+        divpadsmit: 12
+        'trīspadsmit': 13
+        trispadsmit: 13
+        'četrpadsmit': 14
+        cetrpadsmit: 14
+        piecpadsmit: 15
+        'sešpadsmit': 16
+        sespadsmit: 16
+        'septiņpadsmit': 17
+        septinpadsmit: 17
+        'astoņpadsmit': 18
+        astonpadsmit: 18
+        'deviņpadsmit': 19
+        devinpadsmit: 19
+        divdesmit: 20
+        'trīsdesmit': 30
+        trisdesmit: 30
+        'četrdesmit': 40
+        cetrdesmit: 40
+        piecdesmit: 50
+        'sešdesmit': 60
+        sesdesmit: 60
+        'septiņdesmit': 70
+        septindesmit: 70
+        'astoņdesmit': 80
+        astondesmit: 80
+        'deviņdesmit': 90
+        devindesmit: 90
+        simts: 100
+        simtu: 100
+        simti: 100
+        'tūkstotis': 1000
+        tukstotis: 1000
+        'tūkstoš': 1000
+        tukstos: 1000
+        'tūkstoši': 1000
+        tukstosi: 1000
+        miljons: 1000000
+        miljoni: 1000000
+        triljons: 1000000000000
+        triljoni: 1000000000000
+        kvadriljons: 1000000000000000
+        kvadriljoni: 1000000000000000
+        kvintiljons: 1000000000000000000
+        kvintiljoni: 1000000000000000000
+      useHundredMultiplier: true
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    min0: '{hour}'
+    min5: '{hour} un piecas'
+    defaultTemplate: '{hour} un {minutes}'
+
+  compass:
+    full:
+      - 'ziemeļi'
+      - 'ziemeļziemeļaustrumi'
+      - 'ziemeļaustrumi'
+      - 'austrumziemeļaustrumi'
+      - 'austrumi'
+      - 'austrumdienvidaustrumi'
+      - 'dienvidaustrumi'
+      - 'dienviddienvidaustrumi'
+      - 'dienvidi'
+      - 'dienviddienvidrietumi'
+      - 'dienvidrietumi'
+      - 'rietumdienvidrietumi'
+      - 'rietumi'
+      - 'rietumziemeļrietumi'
+      - 'ziemeļrietumi'
+      - 'ziemeļziemeļrietumi'
+    short:
+      - 'Z'
+      - 'ZZA'
+      - 'ZA'
+      - 'AZA'
+      - 'A'
+      - 'ADA'
+      - 'DA'
+      - 'DDA'
+      - 'D'
+      - 'DDR'
+      - 'DR'
+      - 'RDR'
+      - 'R'
+      - 'RZR'
+      - 'ZR'
+      - 'ZZR'

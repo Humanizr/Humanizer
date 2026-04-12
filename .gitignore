@@ -1,4 +1,9 @@
 ## --------------------------------------------
+##  Python build artifacts
+__pycache__/
+*.pyc
+
+## --------------------------------------------
 ##  xUnit.net specific ignores
 
 Test*.html
@@ -108,3 +113,15 @@ docs/.sass-cache/
 
 # BenchmarkDotNet artifacts
 **/BenchmarkDotNet.Artifacts/
+
+# Clairvoyance workspace knowledge (machine-specific)
+.clairvoyance/
+.Clairvoyance/
+
+# Ralph autonomous agent logs
+scripts/ralph/logs/
+!.flow/bin/
+
+# Local agent workspace artifacts
+/.worktrees/
+/prompt-exports/

@@ -4,31 +4,44 @@ namespace Humanizer.Tests.Localisation;
 
 public class LocaleRegistrySweepTests
 {
+    const char LeftToRightMark = (char)0x200E;
+    const char RightToLeftMark = (char)0x200F;
+    const char ArabicLetterMark = (char)0x061C;
+
+    public static IEnumerable<object?[]> ShippedLocaleRows =>
+        LocaleCoverageData.ShippedLocales.Select(static localeName => new object?[] { localeName });
+
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.NumberToWordsLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void NumberToWords_RegisteredLocales_ReturnCardinalAndOrdinalOutput(string localeName)
+    [MemberData(nameof(LocaleCoverageData.FormatterExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Formatter_NativeLocales_UseExpectedRelativeDateAndDurationStrings(string localeName, string expectedYesterday, string expectedTwoDays)
     {
-        var culture = new CultureInfo(localeName);
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo(localeName));
 
-        var cardinal = 123.ToWords(culture);
-        var ordinal = 123.ToOrdinalWords(culture);
+        Assert.Equal(expectedYesterday, formatter.DateHumanize(TimeUnit.Day, Tense.Past, 1));
+        Assert.Equal(expectedTwoDays, formatter.TimeSpanHumanize(TimeUnit.Day, 2));
+    }
 
-        Assert.False(string.IsNullOrWhiteSpace(cardinal));
-        Assert.False(string.IsNullOrWhiteSpace(ordinal));
+    [Fact]
+    [UseCulture("iv")]
+    public void CollectionFormatter_UnsupportedCulture_UsesDefaultFormatter()
+    {
+        var dates = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };
+        Assert.Equal(dates[0] + " & " + dates[1], dates.Humanize());
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.NumberToWordsLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void NumberToWords_RegisteredLocales_ExposeTupleConversion(string localeName)
+    [MemberData(nameof(LocaleCoverageData.CollectionFormatterExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void CollectionFormatter_NativeLocales_UseExpectedConjunction(string localeName, string expectedTwo, string expectedThree)
     {
-        var culture = new CultureInfo(localeName);
+        var formatter = Configurator.CollectionFormatters.ResolveForCulture(new CultureInfo(localeName));
 
-        _ = 123.ToTuple(culture);
+        Assert.Equal(expectedTwo, formatter.Humanize([1, 2]));
+        Assert.Equal(expectedThree, formatter.Humanize([1, 2, 3]));
     }
 
     [Theory]
-    [MemberData(nameof(NumberToWordsRegressionTheoryData))]
-    public void NumberToWords_CustomLocales_UseExpectedCardinalForms(string localeName, long number, string expected)
+    [MemberData(nameof(LocaleCoverageData.NumberToWordsCardinalExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void NumberToWords_NativeLocales_UseExpectedCardinalForms(string localeName, long number, string expected)
     {
         var culture = new CultureInfo(localeName);
 
@@ -37,145 +50,376 @@ public class LocaleRegistrySweepTests
 
     [Theory]
     [MemberData(nameof(LocaleCoverageData.NumberToWordsOrdinalExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void NumberToWords_CustomLocales_UseExpectedOrdinalForms(string localeName, int number, string expected)
+    public void NumberToWords_NativeLocales_UseExpectedOrdinalForms(string localeName, int number, string expected)
     {
         var culture = new CultureInfo(localeName);
 
         Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine, culture));
     }
 
-    public static TheoryData<string, long, string> NumberToWordsRegressionTheoryData => new()
+    [Fact]
+    public void NumberToWords_BrazilianPortuguese_UsesGenderedForms()
     {
-        { "de-CH", 30, "dreissig" },
-        { "de-LI", 30, "dreissig" },
-        { "en-IN", 100000, "one lakh" },
-        { "fr-CH", 80, "octante" },
-        { "ta", 100, "நூறு" }
-    };
+        var culture = new CultureInfo("pt-BR");
 
-    [Theory]
-    [MemberData(nameof(LocaleCoverageData.OrdinalizerLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void Ordinalizer_RegisteredLocales_ReturnIntAndStringOverloadOutput(string localeName)
-    {
-        var culture = new CultureInfo(localeName);
-
-        var ordinalFromInt = 123.Ordinalize(culture);
-        var ordinalFromString = "123".Ordinalize(culture);
-
-        Assert.Equal(ordinalFromInt, ordinalFromString);
-        Assert.False(string.IsNullOrWhiteSpace(ordinalFromInt));
+        Assert.Equal("uma", 1.ToWords(GrammaticalGender.Feminine, culture));
     }
 
     [Theory]
-    [MemberData(nameof(OrdinalizerRegressionTheoryData))]
-    public void Ordinalizer_CustomLocales_UseExpectedForms(string localeName, int number, string expected)
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_NativeLocales_UseExpectedForms(string localeName, int number, string expected)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expected, number.Ordinalize(culture));
+        Assert.Equal(expected, number.ToString(culture).Ordinalize(culture));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerGenderExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_NativeLocales_UseExpectedGenderedForms(string localeName, int number, GrammaticalGender gender, string expected)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expected, number.Ordinalize(gender, culture));
+        Assert.Equal(expected, number.ToString(culture).Ordinalize(gender, culture));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerDefaultExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_ExactLocales_UseExpectedDefaultForms(string localeName, string number, string expected)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expected, int.Parse(number, NumberStyles.Integer, CultureInfo.InvariantCulture).Ordinalize(culture));
+        Assert.Equal(expected, number.Ordinalize(culture));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerNegativeExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_ExactLocales_UseExpectedNegativeFallbackForms(string localeName, int number, string expected)
     {
         var culture = new CultureInfo(localeName);
 
         Assert.Equal(expected, number.Ordinalize(culture));
     }
 
-    public static TheoryData<string, int, string> OrdinalizerRegressionTheoryData => new()
-    {
-        { "ca", 1, "1r" },
-        { "de", 1, "1." },
-        { "en", 1, "1st" },
-        { "es", 1, "1.º" },
-        { "fr", 1, "1er" },
-        { "lb", 1, "1." },
-        { "pt", 1, "1º" },
-        { "ro", 1, "primul" }
-    };
-
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWordsLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateToOrdinalWords_RegisteredLocales_ReturnOutput(string localeName)
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerWordFormExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_ExactLocales_UseExpectedWordFormOutputs(string localeName, int number, WordForm wordForm, string expected)
     {
-        using var _ = LocaleCoverageData.UseCulture(localeName);
+        var culture = new CultureInfo(localeName);
 
-        var defaultOrdinalWords = new DateTime(2015, 1, 1).ToOrdinalWords();
-        var nominativeOrdinalWords = new DateTime(2015, 1, 1).ToOrdinalWords(GrammaticalCase.Nominative);
-
-        Assert.False(string.IsNullOrWhiteSpace(defaultOrdinalWords));
-        Assert.False(string.IsNullOrWhiteSpace(nominativeOrdinalWords));
+        Assert.Equal(expected, number.Ordinalize(culture, wordForm));
+        Assert.Equal(expected, number.ToString(culture).Ordinalize(culture, wordForm));
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWordsExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateToOrdinalWords_CustomLocales_UseExpectedForms(string localeName, string expected)
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerWordFormGenderExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_ExactLocales_UseExpectedGenderedWordFormOutputs(string localeName, int number, GrammaticalGender gender, WordForm wordForm, string expected)
     {
-        using var _ = LocaleCoverageData.UseCulture(localeName);
+        var culture = new CultureInfo(localeName);
 
-        Assert.Equal(expected, new DateTime(2015, 1, 1).ToOrdinalWords());
+        Assert.Equal(expected, number.Ordinalize(gender, culture, wordForm));
+        Assert.Equal(expected, number.ToString(culture).Ordinalize(gender, culture, wordForm));
     }
 
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerStringExactExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_ExactLocales_UseExpectedStringOutputs(string localeName, string number, GrammaticalGender gender, string expected)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expected, number.Ordinalize(gender, culture));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.OrdinalizerNumberExactExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Ordinalizer_ExactLocales_UseExpectedNumericOutputs(string localeName, int number, GrammaticalGender gender, string expected)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expected, number.Ordinalize(gender, culture));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2022January25ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2022January25_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2015January1ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2015January1_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2015February3ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2015February3_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2020February29ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2020February29_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2015September4ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2015September4_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords1979November7ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_1979November7_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2020March2ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2020March2_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2021October31ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2021October31_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateToOrdinalWords2024December31ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateToOrdinalWords_2024December31_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateTime(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [InlineData(2015, 1, 1, "1 يناير 2015")]
+    [InlineData(2024, 12, 31, "31 ديسمبر 2024")]
+    public void DateToOrdinalWords_ArabicOutput_DoesNotIncludeDirectionalityControls(int year, int month, int day, string expected)
+    {
+        using var _ = new CultureSwap(new("ar"));
+        var result = new DateTime(year, month, day).ToOrdinalWords();
+
+        Assert.Equal(expected, result);
+        Assert.DoesNotContain(LeftToRightMark, result);
+        Assert.DoesNotContain(RightToLeftMark, result);
+        Assert.DoesNotContain(ArabicLetterMark, result);
+    }
 #if NET6_0_OR_GREATER
+
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWordsLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateOnlyToOrdinalWords_RegisteredLocales_ReturnOutput(string localeName)
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2022January25ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2022January25_UsesExpectedForms(string localeName, DateExpectationRow expected)
     {
-        using var _ = LocaleCoverageData.UseCulture(localeName);
-
-        var defaultOrdinalWords = new DateOnly(2015, 1, 1).ToOrdinalWords();
-        var nominativeOrdinalWords = new DateOnly(2015, 1, 1).ToOrdinalWords(GrammaticalCase.Nominative);
-
-        Assert.False(string.IsNullOrWhiteSpace(defaultOrdinalWords));
-        Assert.False(string.IsNullOrWhiteSpace(nominativeOrdinalWords));
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWordsExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void DateOnlyToOrdinalWords_CustomLocales_UseExpectedForms(string localeName, string expected)
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2015January1ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2015January1_UsesExpectedForms(string localeName, DateExpectationRow expected)
     {
-        using var _ = LocaleCoverageData.UseCulture(localeName);
-
-        Assert.Equal(expected, new DateOnly(2015, 1, 1).ToOrdinalWords());
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotationExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeOnlyToClockNotation_CustomLocales_UseExpectedRoundedForms(string localeName, int hours, int minutes, string expected)
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2015February3ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2015February3_UsesExpectedForms(string localeName, DateExpectationRow expected)
     {
-        using var _ = LocaleCoverageData.UseCulture(localeName);
-
-        Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotationLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void TimeOnlyToClockNotation_RegisteredLocales_ReturnDefaultAndRoundedOutput(string localeName)
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2020February29ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2020February29_UsesExpectedForms(string localeName, DateExpectationRow expected)
     {
-        using var _ = LocaleCoverageData.UseCulture(localeName);
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
 
-        var exact = new TimeOnly(13, 23).ToClockNotation();
-        var rounded = new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes);
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2015September4ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2015September4_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
 
-        Assert.False(string.IsNullOrWhiteSpace(exact));
-        Assert.False(string.IsNullOrWhiteSpace(rounded));
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords1979November7ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_1979November7_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2020March2ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2020March2_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2021October31ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2021October31_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.DateOnlyToOrdinalWords2024December31ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void DateOnlyToOrdinalWords_2024December31_UsesExpectedForms(string localeName, DateExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var date = new DateOnly(expected.Year, expected.Month, expected.Day);
+        Assert.Equal(expected.Expected, date.ToOrdinalWords());
+    }
+
+    [Theory]
+    [InlineData(2015, 1, 1, "1 يناير 2015")]
+    [InlineData(2024, 12, 31, "31 ديسمبر 2024")]
+    public void DateOnlyToOrdinalWords_ArabicOutput_DoesNotIncludeDirectionalityControls(int year, int month, int day, string expected)
+    {
+        using var _ = new CultureSwap(new("ar"));
+        var result = new DateOnly(year, month, day).ToOrdinalWords();
+
+        Assert.Equal(expected, result);
+        Assert.DoesNotContain(LeftToRightMark, result);
+        Assert.DoesNotContain(RightToLeftMark, result);
+        Assert.DoesNotContain(ArabicLetterMark, result);
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotation1323ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TimeOnlyToClockNotation_1323_UsesExpectedForms(string localeName, ClockExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var time = new TimeOnly(expected.Hours, expected.Minutes);
+        Assert.Equal(expected.Expected, time.ToClockNotation());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotation1323RoundedExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TimeOnlyToClockNotation_1323RoundedToNearestFiveMinutes_UsesExpectedForms(string localeName, ClockExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var time = new TimeOnly(expected.Hours, expected.Minutes);
+        Assert.Equal(expected.Expected, time.ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotation0105ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TimeOnlyToClockNotation_0105_UsesExpectedForms(string localeName, ClockExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var time = new TimeOnly(expected.Hours, expected.Minutes);
+        Assert.Equal(expected.Expected, time.ToClockNotation());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotationAdditionalExactExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TimeOnlyToClockNotation_AdditionalExactLocales_UseExpectedForms(string localeName, ClockExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var time = new TimeOnly(expected.Hours, expected.Minutes);
+        Assert.Equal(expected.Expected, time.ToClockNotation());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotationAdditionalRoundedExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TimeOnlyToClockNotation_AdditionalRoundedLocales_UseExpectedForms(string localeName, ClockExpectationRow expected)
+    {
+        using var _ = new CultureSwap(new(localeName));
+        var time = new TimeOnly(expected.Hours, expected.Minutes);
+        Assert.Equal(expected.Expected, time.ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
     }
 #endif
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.WordsToNumberLocaleTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void WordsToNumber_EnglishLocale_ParsesThroughTheRegistry(string localeName)
+    [MemberData(nameof(LocaleCoverageData.WordsToNumberExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void WordsToNumber_NativeLocales_ParseNativeWords(string localeName, long expected, string words)
     {
         var culture = new CultureInfo(localeName);
-        const string words = "one hundred and five";
 
-        Assert.Equal(105, words.ToNumber(culture));
+        Assert.Equal(expected, words.ToNumber(culture));
         Assert.True(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
-        Assert.Equal(105, parsedNumber);
+        Assert.Equal(expected, parsedNumber);
         Assert.Null(unrecognizedWord);
     }
 
     [Theory]
-    [MemberData(nameof(LocaleCoverageData.UnsupportedWordsToNumberCultureTheoryData), MemberType = typeof(LocaleCoverageData))]
-    public void WordsToNumber_UnsupportedCultures_FallBackToTheDefaultNotSupportedExceptionPath(string localeName, string words)
+    [MemberData(nameof(ShippedLocaleRows))]
+    public void WordsToNumber_RegisteredLocales_RoundTripNativeWords(string localeName)
     {
         var culture = new CultureInfo(localeName);
 
-        var exception = Assert.Throws<NotSupportedException>(() => words.ToNumber(culture));
-        Assert.Contains(culture.TwoLetterISOLanguageName, exception.Message);
-        Assert.Throws<NotSupportedException>(() => words.TryToNumber(out _, culture, out _));
+        foreach (var number in new[] { 1L, 21L, 105L, 1_001L })
+        {
+            var words = number.ToWords(culture);
+
+            Assert.Equal(number, words.ToNumber(culture));
+            Assert.True(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
+            Assert.Equal(number, parsedNumber);
+            Assert.Null(unrecognizedWord);
+        }
     }
+
+    [Theory]
+    [InlineData("eo", "one", 1L)]
+    public void WordsToNumber_UnknownCultures_UseDefaultLexicon(string localeName, string words, long expected)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expected, words.ToNumber(culture));
+        Assert.True(words.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
+        Assert.Equal(expected, parsedNumber);
+        Assert.Null(unrecognizedWord);
+    }
+
+    static string ToVisibleText(string value) =>
+        new(value.Where(static ch => CharUnicodeInfo.GetUnicodeCategory(ch) != UnicodeCategory.Format).ToArray());
 }

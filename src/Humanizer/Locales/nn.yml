@@ -1,0 +1,6 @@
+locale: 'nn'
+variantOf: 'nb'
+
+surfaces:
+  clock:
+    hourOneWord: 'eit'

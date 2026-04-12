@@ -10,12 +10,6 @@ Install the Humanizer NuGet package:
 dotnet add package Humanizer
 ```
 
-For English-only:
-
-```bash
-dotnet add package Humanizer.Core
-```
-
 See [Installation](installation.md) for more options.
 
 ## Basic Examples
@@ -79,6 +73,8 @@ PaymentStatus.PendingApproval.Humanize();
 ### Number Conversions
 
 ```csharp
+using System.Globalization;
+
 1234.ToWords(); 
 // => "one thousand two hundred and thirty-four"
 
@@ -87,6 +83,13 @@ PaymentStatus.PendingApproval.Humanize();
 
 21.Ordinalize(); 
 // => "21st"
+
+"twelve crore thirty-four lakh fifty-six thousand seven hundred and eighty-nine"
+    .ToNumber(new CultureInfo("en-IN"));
+// => 123456789
+
+123456789.ToWords(new CultureInfo("en-GB"));
+// => "one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine"
 ```
 
 ### Fluent Dates

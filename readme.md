@@ -2,8 +2,8 @@
 
 [![Build Status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 [![NuGet version](https://img.shields.io/nuget/v/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer)
-[![NuGet version prerelease](https://img.shields.io/nuget/vpre/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://img.shields.io/nuget/vpre/Humanizer.Core)
-[![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.Core.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer.Core)
+[![NuGet version prerelease](https://img.shields.io/nuget/vpre/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer)
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
@@ -14,9 +14,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 
 You can install Humanizer as [a NuGet package](https://www.nuget.org/packages/Humanizer):
 
-**English only**: `Humanizer.Core`
-
-All languages: `Humanizer`
+`dotnet add package Humanizer`
 
 
 ### Supported frameworks
@@ -29,26 +27,13 @@ All languages: `Humanizer`
 
 Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet/sourcelink) and included in the package, which means you can step through Humanizer's source code while debugging your own application.
 
-> [!IMPORTANT]
-> **Humanizer 3.0 restore requirements**: The `Humanizer` metapackage now requires the NuGet locale parsing fix shipped in [.NET SDK 9.0.200 and corresponding Visual Studio/MSBuild updates](https://github.com/NuGet/NuGet.Client/pull/6124#issuecomment-3391090183). Restore operations must run on .NET SDK 9.0.200 or newer, or on Visual Studio 2022/MSBuild versions that include that patch. Older SDKs/MSBuild builds will fail to restore the metapackage because they do not recognize three-letter locale identifiers. As a workaround, reference `Humanizer.Core` directly and add the desired `Humanizer.Core.<locale>` satellite packages individually when targeting older tooling.
-
 > Upgrading from `2.14.1` to `3.0.8`? See [docs/migration-v3.md](docs/migration-v3.md) for the complete breaking-change checklist, patch-line fix notes, and known regression status.
 
-### Specify Languages (Optional)
+### Locale Data
 
-You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` package installs all supported languages. If you're not sure, then just use the main `Humanizer` package.
+The `Humanizer` package includes all supported generated locale data. Locale authors now check in YAML under `src/Humanizer/Locales`, and the source generator turns that into the runtime tables shipped in the main package. There is no separate English-only core package or locale satellite package split anymore.
 
-Here are the options:
-
-| Option | Package Name | Install Command | Included Languages |
-|--------|--------------|-----------------|-------------------|
-| **All languages** | `Humanizer` | `dotnet add package Humanizer` | All supported languages (pulls in `Humanizer.Core` and all language packages) |
-| **English only** | `Humanizer.Core` | `dotnet add package Humanizer.Core` | English only |
-| **Specific languages** | `Humanizer.Core.<locale>` | `dotnet add package Humanizer.Core.fr` (French example) | Install as many language-specific packages as needed |
-
-For example, for French use `Humanizer.Core.fr`, for Spanish use `Humanizer.Core.es`, etc. You can include multiple languages by installing however many language packages you want.
-
-The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
+All shipped locales now intentionally resolve the 8 canonical localization surfaces used by the generator: `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Each surface may contain nested members (e.g. `number.formatting`, `calendar.months`); see [`docs/localization.md`](docs/localization.md) for the full surface and nested-member inventory. Locale variants can satisfy coverage through same-language `variantOf` inheritance; cross-language fallback is not treated as full support.
 
 
 ## Features
@@ -625,6 +610,10 @@ Convert numbers to their word representation:
 
 // Control "and" usage
 3501.ToWords(addAnd: false) => "three thousand five hundred one"
+
+// Culture-specific large-number behavior
+123456789.ToWords(new CultureInfo("en-GB")) => "one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine"
+123456789.ToWords(new CultureInfo("en-IN")) => "twelve crore thirty-four lakh fifty-six thousand seven hundred and eighty-nine"
 ```
 
 
@@ -647,23 +636,32 @@ Convert numbers to ordinal word form (first, second, third, etc.):
 
 ### Words to Number Conversion
 
-Convert English words to numbers (currently English-only):
+Convert localized number words back to numbers:
 
 ```csharp
 "twenty".ToNumber(new CultureInfo("en")) => 20
 "one hundred and five".ToNumber(new CultureInfo("en")) => 105
 "three thousand two hundred".ToNumber(new CultureInfo("en")) => 3200
 
+"twelve crore thirty-four lakh fifty-six thousand seven hundred and eighty-nine".ToNumber(new CultureInfo("en-IN")) => 123456789
+"ஒன்று சங்கம்".ToNumber(new CultureInfo("ta")) => 1000000000000000
+
 // Try pattern for safe conversion
 if ("forty-two".TryToNumber(out var number, new CultureInfo("en")))
     Console.WriteLine(number); // Outputs: 42
+
+// High-range values use the same long-based API
+if ("three billion".TryToNumber(out var largeNumber, new CultureInfo("en")))
+    Console.WriteLine(largeNumber); // Outputs: 3000000000
 
 // Get unrecognized words on failure
 if (!"tenn".TryToNumber(out var invalid, new CultureInfo("en"), out var badWord))
     Console.WriteLine($"Unrecognized word: {badWord}"); // Outputs: Unrecognized word: tenn
 ```
 
-> **Note:** Only English (`en`) is currently supported. Other languages throw `NotSupportedException`.
+> **Note:** Supported locales use their own authored number data and parent-locale inheritance. Unsupported cultures still fall back to the default English parser behavior.
+>
+> **Breaking change:** `ToNumber` now returns `long`. Code that previously stored the result in `int` must either switch to `long` or add an explicit checked cast.
 
 ### DateTime to ordinal words
 

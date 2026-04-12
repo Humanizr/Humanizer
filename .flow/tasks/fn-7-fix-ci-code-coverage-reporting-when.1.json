@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-10T18:32:25.618396Z",
+  "depends_on": [],
+  "epic": "fn-7-fix-ci-code-coverage-reporting-when",
+  "id": "fn-7-fix-ci-code-coverage-reporting-when.1",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-7-fix-ci-code-coverage-reporting-when.1.md",
+  "status": "todo",
+  "title": "Fix azure-pipelines.yml to always generate coverage reports",
+  "updated_at": "2026-04-10T19:25:27.654843Z"
+}

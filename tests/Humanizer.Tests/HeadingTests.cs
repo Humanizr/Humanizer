@@ -1,4 +1,4 @@
-﻿[UseCulture("en-US")]
+[UseCulture("en-US")]
 public class HeadingTests
 {
     [InlineData(0, "N")]
@@ -184,4 +184,34 @@ public class HeadingTests
     [Theory]
     public void FromShortHeading_CanSpecifyCultureExplicitly(string heading, string culture, double expected) =>
         Assert.Equal(expected, heading.FromAbbreviatedHeading(new(culture)));
+
+    [Fact]
+    public void ToHeadingUsesCurrentUiCultureWhenCultureIsOmitted()
+    {
+        var originalCulture = CultureInfo.CurrentCulture;
+        var originalUiCulture = CultureInfo.CurrentUICulture;
+
+        try
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            CultureInfo.CurrentUICulture = new CultureInfo("de-DE");
+
+            Assert.Equal("Nord", 0d.ToHeading(HeadingStyle.Full));
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = originalCulture;
+            CultureInfo.CurrentUICulture = originalUiCulture;
+        }
+    }
+
+    [Fact]
+    public void ToHeadingFallsBackToEnglishForUnknownCultures()
+    {
+        var culture = new CultureInfo("eo");
+
+        Assert.Equal("north", 0d.ToHeading(HeadingStyle.Full, culture));
+        Assert.Equal("N", 0d.ToHeading(HeadingStyle.Abbreviated, culture));
+        Assert.Equal(337.5, "NNW".FromAbbreviatedHeading(culture));
+    }
 }

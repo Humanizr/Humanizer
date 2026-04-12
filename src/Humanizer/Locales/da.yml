@@ -1,0 +1,453 @@
+locale: 'da'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'og'
+
+  phrases:
+    relativeDate:
+      now: 'nu'
+      never: 'aldrig'
+      past:
+        millisecond:
+          single: 'et millisekund siden'
+          multiple:
+            forms:
+              default: 'millisekunder'
+            afterCount: 'siden'
+        second:
+          single: 'et sekund siden'
+          multiple:
+            forms:
+              default: 'sekunder'
+            afterCount: 'siden'
+        minute:
+          single: 'et minut siden'
+          multiple:
+            forms:
+              default: 'minutter'
+            afterCount: 'siden'
+        hour:
+          single: 'en time siden'
+          multiple:
+            forms:
+              default: 'timer'
+            afterCount: 'siden'
+        day:
+          single: 'i går'
+          multiple:
+            forms:
+              default: 'dage'
+            afterCount: 'siden'
+          template:
+            name: 'two'
+            value: 'forgårs'
+        week:
+          single: 'en uge siden'
+          multiple:
+            forms:
+              default: 'uger'
+            afterCount: 'siden'
+        month:
+          single: 'en måned siden'
+          multiple:
+            forms:
+              default: 'måneder'
+            afterCount: 'siden'
+        year:
+          single: 'et år siden'
+          multiple:
+            forms:
+              default: 'år'
+            afterCount: 'siden'
+      future:
+        millisecond:
+          single: 'et millisekund fra nu'
+          multiple:
+            forms:
+              default: 'millisekunder'
+            afterCount: 'fra nu'
+        second:
+          single: 'et sekund fra nu'
+          multiple:
+            forms:
+              default: 'sekunder'
+            afterCount: 'fra nu'
+        minute:
+          single: 'et minut fra nu'
+          multiple:
+            forms:
+              default: 'minutter'
+            afterCount: 'fra nu'
+        hour:
+          single: 'en time fra nu'
+          multiple:
+            forms:
+              default: 'timer'
+            afterCount: 'fra nu'
+        day:
+          single: 'i morgen'
+          multiple:
+            forms:
+              default: 'dage'
+            afterCount: 'fra nu'
+          template:
+            name: 'two'
+            value: 'i overmorgen'
+        week:
+          single: 'en uge fra nu'
+          multiple:
+            forms:
+              default: 'uger'
+            afterCount: 'fra nu'
+        month:
+          single: 'en måned fra nu'
+          multiple:
+            forms:
+              default: 'måneder'
+            afterCount: 'fra nu'
+        year:
+          single: 'et år fra nu'
+          multiple:
+            forms:
+              default: 'år'
+            afterCount: 'fra nu'
+    duration:
+      zero: 'ingen tid'
+      age:
+        template: '{value} gammel'
+      millisecond:
+        single:
+          numeric: 'et millisekund'
+          words: 'et millisekund'
+        multiple:
+          forms:
+            default: 'millisekunder'
+      second:
+        single:
+          numeric: 'et sekund'
+          words: 'et sekund'
+        multiple:
+          forms:
+            default: 'sekunder'
+      minute:
+        single:
+          numeric: 'et minut'
+          words: 'et minut'
+        multiple:
+          forms:
+            default: 'minutter'
+      hour:
+        single:
+          numeric: 'en time'
+          words: 'en time'
+        multiple:
+          forms:
+            default: 'timer'
+      day:
+        single:
+          numeric: 'en dag'
+          words: 'en dag'
+        multiple:
+          forms:
+            default: 'dage'
+      week:
+        single:
+          numeric: 'en uge'
+          words: 'en uge'
+        multiple:
+          forms:
+            default: 'uger'
+      month:
+        single:
+          numeric: 'en måned'
+          words: 'en måned'
+        multiple:
+          forms:
+            default: 'måneder'
+      year:
+        single:
+          numeric: 'et år'
+          words: 'et år'
+        multiple:
+          forms:
+            default: 'år'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'sek.'
+      minute:
+        symbol: 'min.'
+      hour:
+        symbol: 'time'
+      day:
+        symbol: 'dag'
+      week:
+        symbol: 'uge'
+      month:
+        symbol: 'måned'
+      year:
+        symbol: 'år'
+
+  number:
+    words:
+      engine: 'inverted-tens'
+      minusWord: 'minus'
+      unitsMap:
+        - 'nul'
+        - 'en'
+        - 'to'
+        - 'tre'
+        - 'fire'
+        - 'fem'
+        - 'seks'
+        - 'syv'
+        - 'otte'
+        - 'ni'
+        - 'ti'
+        - 'elleve'
+        - 'tolv'
+        - 'tretten'
+        - 'fjorten'
+        - 'femten'
+        - 'seksten'
+        - 'sytten'
+        - 'atten'
+        - 'nitten'
+      tensMap:
+        1: 'ti'
+        2: 'tyve'
+        3: 'tredive'
+        4: 'fyrre'
+        5: 'halvtreds'
+        6: 'tres'
+        7: 'halvfjerds'
+        8: 'firs'
+        9: 'halvfems'
+      hundredsPrefixMap:
+        1: 'et'
+        2: 'to'
+        3: 'tre'
+        4: 'fire'
+        5: 'fem'
+        6: 'seks'
+        7: 'syv'
+        8: 'otte'
+        9: 'ni'
+      oneHundredWord: 'et hundrede'
+      hundredWord: 'hundrede'
+      hundredJoiner: ' '
+      hundredRemainderSeparator: ' og '
+      scaleTailPrefix: 'og '
+      scaleTailPrefixMode: 'sub-hundred'
+      hundredTailPrefixMode: 'none'
+      unitTensJoiner: 'og'
+      scales:
+        -
+          value: 1000000000000000000
+          oneForm: 'en trillion'
+          manyForm: 'trillioner'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000000
+          oneForm: 'en billiard'
+          manyForm: 'billiarder'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000
+          oneForm: 'en billion'
+          manyForm: 'billioner'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000
+          oneForm: 'en milliard'
+          manyForm: 'milliarder'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000
+          oneForm: 'en million'
+          manyForm: 'millioner'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000
+          oneForm: 'et tusind'
+          manyForm: 'tusind'
+          countJoiner: ' '
+          remainderSeparator: ' '
+      ordinalMode: 'numeric-string'
+
+    parse:
+      engine: 'inverted-tens'
+      cardinalMap:
+        nul: 0
+        en: 1
+        et: 1
+        to: 2
+        tre: 3
+        fire: 4
+        fem: 5
+        seks: 6
+        syv: 7
+        otte: 8
+        ni: 9
+        ti: 10
+        elleve: 11
+        tolv: 12
+        tretten: 13
+        fjorten: 14
+        femten: 15
+        seksten: 16
+        sytten: 17
+        atten: 18
+        nitten: 19
+        tyve: 20
+        tredive: 30
+        fyrre: 40
+        halvtreds: 50
+        tres: 60
+        halvfjerds: 70
+        firs: 80
+        halvfems: 90
+        hundrede: 100
+        tusind: 1000
+        million: 1000000
+        millioner: 1000000
+        milliard: 1000000000
+        milliarder: 1000000000
+        billion: 1000000000000
+        billioner: 1000000000000
+        billiard: 1000000000000000
+        billiarder: 1000000000000000
+        trillion: 1000000000000000000
+        trillioner: 1000000000000000000
+      unitMap:
+        en: 1
+        et: 1
+        to: 2
+        tre: 3
+        fire: 4
+        fem: 5
+        seks: 6
+        syv: 7
+        otte: 8
+        ni: 9
+      tensTokens:
+        halvfems: 90
+        firs: 80
+        halvfjerds: 70
+        tres: 60
+        halvtreds: 50
+        fyrre: 40
+        tredive: 30
+        tyve: 20
+      tensLinker: 'og'
+      scaleTokens:
+        - 'milliarder'
+        - 'milliard'
+        - 'millioner'
+        - 'million'
+        - 'billioner'
+        - 'billion'
+        - 'billiarder'
+        - 'billiard'
+        - 'trillioner'
+        - 'trillion'
+        - 'tusind'
+        - 'hundrede'
+      negativePrefixes:
+        - 'minus '
+      ignoredTokens:
+        - 'og'
+      allowInvariantIntegerInput: true
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'neuter'
+    zeroFiller: 'nul'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'nord'
+      - 'nordnordøst'
+      - 'nordøst'
+      - 'østnordøst'
+      - 'øst'
+      - 'østsydøst'
+      - 'sydøst'
+      - 'sydsydøst'
+      - 'syd'
+      - 'sydsydvest'
+      - 'sydvest'
+      - 'vestsydvest'
+      - 'vest'
+      - 'vestnordvest'
+      - 'nordvest'
+      - 'nordnordvest'
+    short:
+      - 'N'
+      - 'NNØ'
+      - 'NØ'
+      - 'ØNØ'
+      - 'Ø'
+      - 'ØSØ'
+      - 'SØ'
+      - 'SSØ'
+      - 'S'
+      - 'SSV'
+      - 'SV'
+      - 'VSV'
+      - 'V'
+      - 'VNV'
+      - 'NV'
+      - 'NNV'
+
+  formatter:
+    engine: 'profiled'

@@ -1,148 +1,211 @@
 # Localization
 
-Humanizer supports over 40 languages and cultures, with localized implementations for most features.
+Humanizer supports many languages and cultures across number, date, time, ordinal, formatter, collection-humanization, clock-notation, and heading surfaces.
+
+Most consumers only need to set a culture. Contributors now author locale-specific generated behavior in one YAML file per locale, and shared runtime kernels are used whenever the behavior is structurally reusable.
 
 ## Supported Languages
 
 Humanizer includes localization for:
 
-Arabic (ar), Azerbaijani (az), Bulgarian (bg), Bengali (bn-BD), Czech (cs), Danish (da), German (de), Greek (el), Spanish (es), Persian (fa), Finnish (fi), French (fr), Hebrew (he), Croatian (hr), Hungarian (hu), Armenian (hy), Indonesian (id), Icelandic (is), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Malay (ms-MY), Maltese (mt), Norwegian Bokmål (nb, nb-NO), Dutch (nl), Polish (pl), Portuguese (pt, pt-BR), Romanian (ro), Russian (ru), Slovak (sk), Slovenian (sl), Serbian (sr, sr-Latn), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Chinese (zh-CN, zh-Hans, zh-Hant).
+Afrikaans (af), Arabic (ar), Azerbaijani (az), Bengali (bn), Bulgarian (bg), Catalan (ca), Chinese (zh-CN, zh-Hans, zh-Hant), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en, en-GB, en-IN, en-US), Finnish (fi), Filipino (fil), French (fr, fr-BE, fr-CH), German (de, de-CH, de-LI), Greek (el), Hebrew (he), Hungarian (hu), Armenian (hy), Icelandic (is), Indonesian (id), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Lithuanian (lt), Luxembourgish (lb), Malay (ms), Maltese (mt), Norwegian Bokmal (nb), Norwegian Nynorsk (nn), Persian (fa), Polish (pl), Portuguese (pt, pt-BR), Romanian (ro), Russian (ru), Serbian (sr, sr-Latn), Slovak (sk), Slovenian (sl), Spanish (es), Swedish (sv), Tamil (ta), Thai (th), Turkish (tr), Ukrainian (uk), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Zulu (zu-ZA).
 
-## Installing Language Packages
-
-### All Languages
+## Installing Humanizer
 
 ```bash
 dotnet add package Humanizer
 ```
 
-### Specific Languages
-
-```bash
-dotnet add package Humanizer.Core
-dotnet add package Humanizer.Core.fr  # French
-dotnet add package Humanizer.Core.es  # Spanish
-dotnet add package Humanizer.Core.de  # German
-```
+The `Humanizer` package already includes all generated locale data.
 
 ## Using Cultures
 
 Most Humanizer methods respect the current thread's `CurrentCulture` or `CurrentUICulture`. You can also explicitly specify a culture:
 
-### DateTime Humanization
-
 ```csharp
 var date = DateTime.UtcNow.AddHours(-2);
 
-// Uses current culture
-date.Humanize(); 
+date.Humanize();
+date.Humanize(culture: new CultureInfo("fr-FR"));
+date.Humanize(culture: new CultureInfo("es"));
 
-// Explicit culture
-date.Humanize(culture: new CultureInfo("fr-FR")); 
-// => "il y a 2 heures"
-
-date.Humanize(culture: new CultureInfo("es")); 
-// => "hace 2 horas"
-```
-
-### Number to Words
-
-```csharp
-1234.ToWords(); // Uses current culture
-
-1234.ToWords(new CultureInfo("es")); 
-// => "mil doscientos treinta y cuatro"
-
-1234.ToWords(new CultureInfo("fr")); 
-// => "mille deux cent trente-quatre"
-```
-
-### TimeSpan Humanization
-
-```csharp
-TimeSpan.FromDays(1).Humanize(); // Uses current culture
-
-TimeSpan.FromDays(1).Humanize(culture: new CultureInfo("de")); 
-// => "1 Tag"
-
-TimeSpan.FromDays(3).Humanize(culture: new CultureInfo("ru")); 
-// => "3 дня"
+1234.ToWords();
+1234.ToWords(new CultureInfo("es"));
+1234.ToNumber(new CultureInfo("es"));
 ```
 
 ## Grammatical Features
 
 Some languages require additional grammatical information:
 
-### Grammatical Gender
-
 ```csharp
-// Russian
-1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru")); 
-// => "один"
+1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru"));
+1.ToWords(GrammaticalGender.Feminine, new CultureInfo("ru"));
 
-1.ToWords(GrammaticalGender.Feminine, new CultureInfo("ru")); 
-// => "одна"
+1.Ordinalize(GrammaticalGender.Masculine);
+1.Ordinalize(GrammaticalGender.Feminine);
 
-// Portuguese ordinals
-1.Ordinalize(GrammaticalGender.Masculine); 
-// => "1º"
-
-1.Ordinalize(GrammaticalGender.Feminine); 
-// => "1ª"
-```
-
-### Grammatical Case
-
-```csharp
-// Russian - date to ordinal words
 var date = new DateTime(2020, 1, 1);
-
-date.ToOrdinalWords(GrammaticalCase.Nominative); 
-// Different form
-
-date.ToOrdinalWords(GrammaticalCase.Genitive); 
-// Different form
+date.ToOrdinalWords(GrammaticalCase.Nominative);
+date.ToOrdinalWords(GrammaticalCase.Genitive);
 ```
 
-### Word Forms
+## Feature Support
 
-```csharp
-// Spanish - ordinal variations
-3.Ordinalize(GrammaticalGender.Masculine, WordForm.Abbreviation); 
-// => "3.er"
+Localized Humanizer features are expected to work correctly for shipped locales. Whether a locale inherits behavior from a same-language parent is an implementation detail, not a support distinction.
 
-3.Ordinalize(GrammaticalGender.Masculine, WordForm.Normal); 
-// => "3.º"
+Contributor-facing parity audits and gap tracking live in tests and local planning artifacts rather than in the user docs.
+
+## Locale-Owned Data Model
+
+The source of truth for generated localization behavior is `src/Humanizer/Locales/<locale>.yml`.
+
+For the practical authoring workflow, see [Locale YAML How-To](locale-yaml-how-to.md). For the exhaustive block, engine, field, and strategy reference, see [Locale YAML Reference](locale-yaml-reference.md).
+
+Principles:
+
+1. One locale file owns one locale.
+2. Locale inheritance is declared in that same file with `variantOf`.
+3. Top-level properties are exactly `locale`, `variantOf`, and `surfaces`.
+4. Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`.
+5. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
+6. Omit a `surfaces.<surface>` block to inherit it unchanged from the parent locale.
+7. Inside a mapped surface, omit unchanged fields to inherit them from the parent mapping.
+8. Child sequences replace parent sequences.
+9. Changing `engine` replaces that mapped surface instead of merging it.
+10. Keep locale-specific words, switches, and mappings in YAML.
+11. Keep `number.words` and `number.parse` aligned whenever the locale claims parity.
+12. `formatter` and `phrases` are separate canonical surfaces and should not be collapsed into one conceptual bucket.
+13. `clock` is the canonical authoring name even though the emitted runtime feature is still `timeOnlyToClockNotation`.
+14. `compass` is the canonical authoring name even though the emitted runtime feature is still `headings`.
+15. Keep shared generator contracts in typed C# under `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`.
+16. Never make authors learn internal generated profile ids just to connect two features inside one locale file.
+17. The current authoring model keeps locale YAML at the top level of `src/Humanizer/Locales`.
+18. Do not split one locale across multiple YAML files unless there is an explicit redesign that updates the compiler contract, docs, and tests together.
+
+A shipped locale is incomplete unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
+
+Example:
+
+```yaml
+# Locale-owned generator data for en-US.
+locale: 'en-US'
+variantOf: 'en'
+
+surfaces:
+  list:
+    engine: 'oxford'
+
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'and'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        one: 1
+        two: 2
+        hundred: 100
+      ordinalNumberToWordsKind: 'self'
 ```
 
-## Feature Support by Language
+`surfaces.number.parse.ordinalNumberToWordsKind: 'self'` is intentional. Locale YAML is authored in locale terms, not in generator-internal profile-key terms. The generator resolves `self` to the owning locale profile during code generation.
 
-Not all features are available in all languages:
+## How The Generator Pipeline Fits Together
 
-| Feature | Widely Supported | Limited Support |
-|---------|------------------|-----------------|
-| String Humanization | All languages | - |
-| DateTime Humanization | All languages | - |
-| TimeSpan Humanization | All languages | - |
-| Number to Words | Most languages | Some Asian languages |
-| Ordinalization | Most European languages | Limited in Asian languages |
-| Pluralization | English only | - |
+The localization codegen flow is:
 
-Check the specific feature documentation to see which languages are supported.
+1. `Locales/*.yml`
+   Locale-owned authoring surface for all generated features.
+2. `LocaleYamlCatalog`
+   Parses canonical YAML, resolves `variantOf` inheritance, and exposes per-locale feature roots.
+3. `EngineContractCatalog`
+   Typed generator-side engine contracts that describe how a feature block maps onto a runtime profile object.
+4. `ProfileCatalogInput` generators
+   Build typed profile catalogs and tables for `numberToWords`, `wordsToNumber`, `ordinalizer`, `date-to-ordinal`, `formatter`, `phrases`, `headings`, and `timeOnlyToClockNotation`.
+5. `LocaleRegistryInput`
+   Emits the culture-to-implementation registrations that wire generated profiles into the runtime registries.
+6. Shared runtime kernels
+   Consume the generated profile objects at runtime with no YAML or JSON parsing on the hot path.
 
-## Contributing Localizations
+This split is deliberate:
 
-To contribute a new language or improve existing localizations:
+- YAML is for locale-owned data.
+- Generator-side structural contracts are typed C#.
+- C# runtime code is for shared algorithms.
 
-1. Implement the required interfaces (e.g., `IFormatter`, `IDateToOrdinalWordConverter`)
-2. Add resource files with translated strings
-3. Register the formatter in `Configurator`
-4. Add tests for the new language
+## Structural Naming Rules
 
-See the [Contributing Guide](../CONTRIBUTING.md) for details.
+Shared kernels must be named after the reusable rule family, not after the first language that used them.
+
+Good structural names:
+
+- `ConjunctionalScaleNumberToWordsConverter`
+- `VariantDecadeNumberToWordsConverter`
+- `UnitLeadingCompoundNumberToWordsConverter`
+- `ContractedScaleWordsToNumberConverter`
+- `ProfiledFormatter`
+
+Residual locale names are acceptable only when the behavior is still genuinely locale-specific and forcing it into a shared schema would create imperative hooks or exception-bucket metadata. As of the locale parity completion, no residual leaves remain for any surface.
+
+## Adding Or Updating A Locale
+
+When a locale already fits an existing shared engine:
+
+1. Produce a preflight gap report covering every canonical surface.
+2. Create or update `src/Humanizer/Locales/<locale>.yml`.
+3. Add `variantOf` if the locale is a regional variant.
+4. Fill in the `surfaces` blocks that differ from the parent.
+5. Reuse an existing structural engine name.
+6. Add tests under `tests/Humanizer.Tests`.
+7. Maintain a parity artifact until the unresolved set is empty.
+8. Run the relevant source-generator tests and localization tests.
+
+When a locale does not fit an existing shared engine:
+
+1. Prove the behavior is shared by at least two locales, or by one locale plus an obvious second target already present in the repo.
+2. Add or update the typed generator contract in `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`.
+3. Add a shared runtime kernel with a structural name.
+4. Keep the runtime parse-free. YAML is build input only; the generator contract is normal checked-in code.
+5. Document the decision in the adjacent locale docs and code comments so the rationale stays with the implementation rather than in a stale execution plan.
+
+Do not add a locale-specific converter just to avoid extending a clearly reusable shared family. Do not add a generic-sounding name if the implementation still hardcodes one language's rules.
+Do not split locale-owned YAML into extra files just to make the top-level locale file look smaller. If nested locale YAML documents ever become necessary, treat that as an intentional redesign instead of an incremental cleanup.
+
+## Validation Expectations
+
+Every functional localization change should include:
+
+1. Source-generator coverage in `tests/Humanizer.SourceGenerators.Tests`.
+2. Locale behavior coverage in `tests/Humanizer.Tests`.
+3. Full `net10.0` and `net8.0` test runs for touched functionality.
+4. Benchmark coverage for shared-engine surfaces when the change affects runtime dispatch or hot-path composition.
+
+Recommended verification commands:
+
+```bash
+dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
+dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
+dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
+dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
+```
+
+## Override Platform-Supplied Globalization Data
+
+Modern .NET uses ICU for globalization data while .NET Framework uses Windows NLS. These sources can diverge across platforms and target frameworks, producing different output for the same locale. When Humanizer delegates to `CultureInfo` for month names, decimal separators, negative signs, or group separators, this platform variance leaks into humanized output.
+
+The `calendar:` surface and `number.formatting:` sub-block let locale authors hard-code the correct values in YAML so that output is byte-identical regardless of the host's globalization source or version. When present, calendar overrides take priority over `CultureInfo.DateTimeFormat` in ordinal date rendering (`DateTime.ToOrdinalWords` and `DateOnly.ToOrdinalWords`). Number formatting overrides take priority over `NumberFormatInfo` in culture-aware `Ordinalize` int overloads (formatting only), byte-size string formatting (`ByteSize.ToString` and `ByteSize.ToFullWords`), and `MetricNumeralExtensions`. `ByteSize.TryParse` applies only the decimal separator override, and only when an explicit `CultureInfo` is passed as the format provider; it does not use `negativeSign` or `groupSeparator` overrides. Caller-supplied custom format providers are never overridden.
+
+Use these overrides sparingly. Author them only when a cross-platform or cross-target-framework probe shows disagreement (e.g., net48/NLS vs net8+/ICU on Windows), or when platform globalization data is demonstrably wrong for your locale. See [Locale YAML Reference](locale-yaml-reference.md) for field details and [Locale YAML How-To](locale-yaml-how-to.md) for a step-by-step recipe.
 
 ## Related Topics
 
-- [Installation](installation.md) - How to install language packages
-- [Number to Words](number-to-words.md) - Language-specific number formatting
-- [DateTime Humanization](datetime-humanization.md) - Relative time in different languages
+- [Adding Or Updating A Locale](adding-a-locale.md)
+- [Locale YAML How-To](locale-yaml-how-to.md)
+- [Locale YAML Reference](locale-yaml-reference.md)

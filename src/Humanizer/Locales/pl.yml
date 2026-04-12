@@ -1,0 +1,544 @@
+locale: 'pl'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'i'
+
+  formatter:
+    engine: 'profiled'
+    resourceKeyDetector: 'between2-and4-paucal'
+    resourceKeySuffixes:
+      paucal: '_Paucal'
+    dataUnitDetector: 'between2-and4-paucal'
+    dataUnitSuffixes:
+      singular: '_Singular'
+      paucal: '_Paucal'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'teraz'
+      never: 'nigdy'
+      past:
+        millisecond:
+          single: 'przed milisekundą'
+          multiple:
+            forms:
+              default: 'milisekundami'
+            beforeCount: 'przed'
+        second:
+          single: 'przed sekundą'
+          multiple:
+            forms:
+              default: 'sekundami'
+            beforeCount: 'przed'
+        minute:
+          single: 'przed minutą'
+          multiple:
+            forms:
+              default: 'minutami'
+            beforeCount: 'przed'
+        hour:
+          single: 'przed godziną'
+          multiple:
+            forms:
+              default: 'godzinami'
+            beforeCount: 'przed'
+        day:
+          single: 'wczoraj'
+          multiple:
+            forms:
+              default: 'dniami'
+            beforeCount: 'przed'
+          template:
+            name: 'two'
+            value: 'przed 2 dniami'
+        week:
+          single: 'przed tygodniem'
+          multiple:
+            forms:
+              default: 'tygodniami'
+            beforeCount: 'przed'
+        month:
+          single: 'przed miesiącem'
+          multiple:
+            forms:
+              default: 'miesiącami'
+            beforeCount: 'przed'
+        year:
+          single: 'przed rokiem'
+          multiple:
+            forms:
+              default: 'laty'
+            beforeCount: 'przed'
+      future:
+        millisecond:
+          single: 'za milisekundę'
+          multiple:
+            forms:
+              default: 'milisekund'
+            beforeCount: 'za'
+        second:
+          single: 'za sekundę'
+          multiple:
+            forms:
+              default: 'sekund'
+              singular: 'sekundy'
+              dual: 'sekundy'
+              paucal: 'sekundy'
+              plural: 'sekundy'
+            beforeCount: 'za'
+        minute:
+          single: 'za minutę'
+          multiple:
+            forms:
+              default: 'minut'
+              singular: 'minuty'
+              dual: 'minuty'
+              paucal: 'minuty'
+              plural: 'minuty'
+            beforeCount: 'za'
+        hour:
+          single: 'za godzinę'
+          multiple:
+            forms:
+              default: 'godzin'
+              singular: 'godziny'
+              dual: 'godziny'
+              paucal: 'godziny'
+              plural: 'godziny'
+            beforeCount: 'za'
+        day:
+          single: 'jutro'
+          multiple:
+            forms:
+              default: 'dni'
+            beforeCount: 'za'
+          template:
+            name: 'two'
+            value: 'za 2 dni'
+        week:
+          single: 'za tydzień'
+          multiple:
+            forms:
+              default: 'tygodni'
+            beforeCount: 'za'
+        month:
+          single: 'za miesiąc'
+          multiple:
+            forms:
+              default: 'miesięcy'
+              singular: 'miesiące'
+              dual: 'miesiące'
+              paucal: 'miesiące'
+              plural: 'miesiące'
+            beforeCount: 'za'
+        year:
+          single: 'za rok'
+          multiple:
+            forms:
+              default: 'lat'
+              singular: 'lata'
+              dual: 'lata'
+              paucal: 'lata'
+              plural: 'lata'
+            beforeCount: 'za'
+    duration:
+      zero: 'brak czasu'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisekunda'
+          words: 'one milisekunda'
+        multiple:
+          forms:
+            default: 'milisekund'
+            singular: 'milisekundy'
+            dual: 'milisekundy'
+            paucal: 'milisekundy'
+            plural: 'milisekundy'
+      second:
+        single:
+          numeric: '1 sekunda'
+          words: 'one sekunda'
+        multiple:
+          forms:
+            default: 'sekund'
+            singular: 'sekundy'
+            dual: 'sekundy'
+            paucal: 'sekundy'
+            plural: 'sekundy'
+      minute:
+        single:
+          numeric: '1 minuta'
+          words: 'one minuta'
+        multiple:
+          forms:
+            default: 'minut'
+            singular: 'minuty'
+            dual: 'minuty'
+            paucal: 'minuty'
+            plural: 'minuty'
+      hour:
+        single:
+          numeric: '1 godzina'
+          words: 'one godzina'
+        multiple:
+          forms:
+            default: 'godzin'
+            singular: 'godziny'
+            dual: 'godziny'
+            paucal: 'godziny'
+            plural: 'godziny'
+      day:
+        single:
+          numeric: '1 dzień'
+          words: 'one dzień'
+        multiple:
+          forms:
+            default: 'dni'
+      week:
+        single:
+          numeric: '1 tydzień'
+          words: 'one tydzień'
+        multiple:
+          forms:
+            default: 'tygodni'
+            singular: 'tygodnie'
+            dual: 'tygodnie'
+            paucal: 'tygodnie'
+            plural: 'tygodnie'
+      month:
+        single:
+          numeric: '1 miesiąc'
+          words: 'one miesiąc'
+        multiple:
+          forms:
+            default: 'miesięcy'
+            singular: 'miesiące'
+            dual: 'miesiące'
+            paucal: 'miesiące'
+            plural: 'miesiące'
+      year:
+        single:
+          numeric: '1 rok'
+          words: 'one rok'
+        multiple:
+          forms:
+            default: 'lat'
+            singular: 'lata'
+            dual: 'lata'
+            paucal: 'lata'
+            plural: 'lata'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bitów'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bajtów'
+          singular: 'bajt'
+          paucal: 'bajty'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobajtów'
+          singular: 'kilobajt'
+          paucal: 'kilobajty'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabajtów'
+          singular: 'megabajt'
+          paucal: 'megabajty'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabajtów'
+          singular: 'gigabajt'
+          paucal: 'gigabajty'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabajtów'
+          singular: 'terabajt'
+          paucal: 'terabajty'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'dzień'
+      week:
+        symbol: 'tydzień'
+      month:
+        symbol: 'miesiąc'
+      year:
+        symbol: 'rok'
+
+  number:
+    words:
+      engine: 'pluralized-scale'
+      useCulture: true
+      zeroWord: 'zero'
+      minusWord: 'minus'
+      formDetector: 'polish'
+      unitVariantStrategy: 'polish'
+      ordinalMode: 'numeric-culture'
+      supportsNeuter: true
+      unitsMap:
+        - 'zero'
+        - 'jeden'
+        - 'dwa'
+        - 'trzy'
+        - 'cztery'
+        - 'pięć'
+        - 'sześć'
+        - 'siedem'
+        - 'osiem'
+        - 'dziewięć'
+        - 'dziesięć'
+        - 'jedenaście'
+        - 'dwanaście'
+        - 'trzynaście'
+        - 'czternaście'
+        - 'piętnaście'
+        - 'szesnaście'
+        - 'siedemnaście'
+        - 'osiemnaście'
+        - 'dziewiętnaście'
+      tensMap:
+        - 'zero'
+        - 'dziesięć'
+        - 'dwadzieścia'
+        - 'trzydzieści'
+        - 'czterdzieści'
+        - 'pięćdziesiąt'
+        - 'sześćdziesiąt'
+        - 'siedemdziesiąt'
+        - 'osiemdziesiąt'
+        - 'dziewięćdziesiąt'
+      hundredsMap:
+        - 'zero'
+        - 'sto'
+        - 'dwieście'
+        - 'trzysta'
+        - 'czterysta'
+        - 'pięćset'
+        - 'sześćset'
+        - 'siedemset'
+        - 'osiemset'
+        - 'dziewięćset'
+      scales:
+        -
+          value: 1000000000000000000
+          countGender: 'masculine'
+          singular: 'trylion'
+          paucal: 'tryliony'
+          plural: 'trylionów'
+        -
+          value: 1000000000000000
+          countGender: 'masculine'
+          singular: 'biliard'
+          paucal: 'biliardy'
+          plural: 'biliardów'
+        -
+          value: 1000000000000
+          countGender: 'masculine'
+          singular: 'bilion'
+          paucal: 'biliony'
+          plural: 'bilionów'
+        -
+          value: 1000000000
+          countGender: 'masculine'
+          singular: 'miliard'
+          paucal: 'miliardy'
+          plural: 'miliardów'
+        -
+          value: 1000000
+          countGender: 'masculine'
+          singular: 'milion'
+          paucal: 'miliony'
+          plural: 'milionów'
+        -
+          value: 1000
+          countGender: 'masculine'
+          singular: 'tysiąc'
+          paucal: 'tysiące'
+          plural: 'tysięcy'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        zero: 0
+        jeden: 1
+        jedna: 1
+        jedno: 1
+        dwa: 2
+        dwie: 2
+        trzy: 3
+        cztery: 4
+        'pięć': 5
+        piec: 5
+        'sześć': 6
+        szesc: 6
+        siedem: 7
+        osiem: 8
+        'dziewięć': 9
+        dziewiec: 9
+        'dziesięć': 10
+        dziesiec: 10
+        'jedenaście': 11
+        jedenascie: 11
+        'dwanaście': 12
+        dwanascie: 12
+        'trzynaście': 13
+        trzynascie: 13
+        'czternaście': 14
+        czternascie: 14
+        'piętnaście': 15
+        pietnascie: 15
+        'szesnaście': 16
+        szesnascie: 16
+        'siedemnaście': 17
+        siedemnascie: 17
+        'osiemnaście': 18
+        osiemnascie: 18
+        'dziewiętnaście': 19
+        dziewietnascie: 19
+        'dwadzieścia': 20
+        dwadziescia: 20
+        'trzydzieści': 30
+        trzydziesci: 30
+        'czterdzieści': 40
+        czterdziesci: 40
+        'pięćdziesiąt': 50
+        piecdziesiat: 50
+        'sześćdziesiąt': 60
+        szescdziesiat: 60
+        'siedemdziesiąt': 70
+        siedemdziesiat: 70
+        'osiemdziesiąt': 80
+        osiemdziesiat: 80
+        'dziewięćdziesiąt': 90
+        dziewiecdziesiat: 90
+        sto: 100
+        'dwieście': 200
+        dwiescie: 200
+        trzysta: 300
+        czterysta: 400
+        'pięćset': 500
+        piecset: 500
+        'sześćset': 600
+        szescset: 600
+        siedemset: 700
+        osiemset: 800
+        'dziewięćset': 900
+        dziewiecset: 900
+        'tysiąc': 1000
+        tysiac: 1000
+        'tysiące': 1000
+        tysiace: 1000
+        'tysięcy': 1000
+        tysiecy: 1000
+        milion: 1000000
+        miliony: 1000000
+        'milionów': 1000000
+        milionow: 1000000
+        miliard: 1000000000
+        miliardy: 1000000000
+        'miliardów': 1000000000
+        miliardow: 1000000000
+      negativePrefixes:
+        - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourWordsMap:
+      - ''
+      - 'pierwsza'
+      - 'druga'
+      - 'trzecia'
+      - 'czwarta'
+      - 'piąta'
+      - 'szósta'
+      - 'siódma'
+      - 'ósma'
+      - 'dziewiąta'
+      - 'dziesiąta'
+      - 'jedenasta'
+      - 'dwunasta'
+      - 'trzynasta'
+      - 'czternasta'
+      - 'piętnasta'
+      - 'szesnasta'
+      - 'siedemnasta'
+      - 'osiemnasta'
+      - 'dziewiętnasta'
+      - 'dwudziesta'
+      - 'dwudziesta pierwsza'
+      - 'dwudziesta druga'
+      - 'dwudziesta trzecia'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'północ'
+      - 'północno-północny wschód'
+      - 'północny wschód'
+      - 'wschodnio-północny wschód'
+      - 'wschód'
+      - 'wschodnio-południowy wschód'
+      - 'południowy wschód'
+      - 'południowo-południowy wschód'
+      - 'południe'
+      - 'południowo-południowy zachód'
+      - 'południowy zachód'
+      - 'zachodnio-południowy zachód'
+      - 'zachód'
+      - 'zachodnio-północny zachód'
+      - 'północny zachód'
+      - 'północno-północny zachód'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSW'
+      - 'SW'
+      - 'WSW'
+      - 'W'
+      - 'WNW'
+      - 'NW'
+      - 'NNW'

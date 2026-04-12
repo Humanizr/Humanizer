@@ -33,22 +33,22 @@ public static partial class InflectorExtensions
 #if NET7_0_OR_GREATER
     [GeneratedRegex(PascalizePattern)]
     private static partial Regex PascalizeRegexGenerated();
-    
+
     private static Regex PascalizeRegex() => PascalizeRegexGenerated();
 
     [GeneratedRegex(UnderscorePattern1)]
     private static partial Regex UnderscoreRegex1Generated();
-    
+
     private static Regex UnderscoreRegex1() => UnderscoreRegex1Generated();
 
     [GeneratedRegex(UnderscorePattern2)]
     private static partial Regex UnderscoreRegex2Generated();
-    
+
     private static Regex UnderscoreRegex2() => UnderscoreRegex2Generated();
 
     [GeneratedRegex(UnderscorePattern3)]
     private static partial Regex UnderscoreRegex3Generated();
-    
+
     private static Regex UnderscoreRegex3() => UnderscoreRegex3Generated();
 #else
     private static readonly Regex PascalizeRegexField = new(PascalizePattern, RegexOptions.Compiled);

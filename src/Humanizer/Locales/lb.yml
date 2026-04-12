@@ -1,0 +1,594 @@
+locale: 'lb'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'an'
+
+  formatter:
+    engine: 'profiled'
+    exactDateForms:
+      -
+        number: 2
+        form: 'dual'
+        units:
+          - 'day'
+        tenses:
+          - 'past'
+          - 'future'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+    secondaryPlaceholderMode: 'luxembourgish-eifeler-n'
+    timeUnitGenders:
+      millisecond: 'feminine'
+      second: 'feminine'
+      minute: 'feminine'
+      hour: 'feminine'
+      day: 'masculine'
+      week: 'feminine'
+      month: 'masculine'
+      year: 'masculine'
+
+  phrases:
+    relativeDate:
+      now: 'elo'
+      never: 'ni'
+      past:
+        millisecond:
+          single: 'virun enger Millisekonn'
+          multiple:
+            forms:
+              default: 'Millisekonnen'
+            beforeCount: 'viru{prep}'
+        second:
+          single: 'virun enger Sekonn'
+          multiple:
+            forms:
+              default: 'Sekonnen'
+            beforeCount: 'viru{prep}'
+        minute:
+          single: 'virun enger Minutt'
+          multiple:
+            forms:
+              default: 'Minutten'
+            beforeCount: 'viru{prep}'
+        hour:
+          single: 'virun enger Stonn'
+          multiple:
+            forms:
+              default: 'Stonnen'
+            beforeCount: 'viru{prep}'
+        day:
+          single: 'gëschter'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'viru{prep} {count} Deeg'
+              singular: 'virun engem Dag'
+              dual: 'virgëschter'
+              plural: 'virgëschter'
+          template:
+            name: 'two'
+            value: 'virgëschter'
+        week:
+          single: 'virun enger Woch'
+          multiple:
+            forms:
+              default: 'Wochen'
+            beforeCount: 'viru{prep}'
+        month:
+          single: 'virun engem Mount'
+          multiple:
+            forms:
+              default: 'Méint'
+            beforeCount: 'viru{prep}'
+        year:
+          single: 'virun engem Joer'
+          multiple:
+            forms:
+              default: 'Joer'
+            beforeCount: 'viru{prep}'
+      future:
+        millisecond:
+          single: 'an enger Millisekonn'
+          multiple:
+            forms:
+              default: 'Millisekonnen'
+            beforeCount: 'a{prep}'
+        second:
+          single: 'an enger Sekonn'
+          multiple:
+            forms:
+              default: 'Sekonnen'
+            beforeCount: 'a{prep}'
+        minute:
+          single: 'an enger Minutt'
+          multiple:
+            forms:
+              default: 'Minutten'
+            beforeCount: 'a{prep}'
+        hour:
+          single: 'an enger Stonn'
+          multiple:
+            forms:
+              default: 'Stonnen'
+            beforeCount: 'a{prep}'
+        day:
+          single: 'muer'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'a{prep} {count} Deeg'
+              singular: 'iwwermuer'
+              dual: 'iwwermuer'
+              plural: 'iwwermuer'
+          template:
+            name: 'two'
+            value: 'iwwermuer'
+        week:
+          single: 'an enger Woch'
+          multiple:
+            forms:
+              default: 'Wochen'
+            beforeCount: 'a{prep}'
+        month:
+          single: 'an engem Mount'
+          multiple:
+            forms:
+              default: 'Méint'
+            beforeCount: 'a{prep}'
+        year:
+          single: 'an engem Joer'
+          multiple:
+            forms:
+              default: 'Joer'
+            beforeCount: 'a{prep}'
+    duration:
+      zero: 'Keng Zäit'
+      age:
+        template: '{value} al'
+      millisecond:
+        single:
+          numeric: '1 Millisekonn'
+          words: 'eng Millisekonn'
+        multiple:
+          forms:
+            default: 'Millisekonnen'
+      second:
+        single:
+          numeric: '1 Sekonn'
+          words: 'eng Sekonn'
+        multiple:
+          forms:
+            default: 'Sekonnen'
+      minute:
+        single:
+          numeric: '1 Minutt'
+          words: 'eng Minutt'
+        multiple:
+          forms:
+            default: 'Minutten'
+      hour:
+        single:
+          numeric: '1 Stonn'
+          words: 'eng Stonn'
+        multiple:
+          forms:
+            default: 'Stonnen'
+      day:
+        single:
+          numeric: '1 Dag'
+          words: 'een Dag'
+        multiple:
+          forms:
+            default: 'Deeg'
+      week:
+        single:
+          numeric: '1 Woch'
+          words: 'eng Woch'
+        multiple:
+          forms:
+            default: 'Wochen'
+      month:
+        single:
+          numeric: '1 Mount'
+          words: 'ee Mount'
+        multiple:
+          forms:
+            default: 'Méint'
+      year:
+        single:
+          numeric: '1 Joer'
+          words: 'ee Joer'
+        multiple:
+          forms:
+            default: 'Joer'
+    dataUnits:
+      bit:
+        forms:
+          default: 'Bit'
+        symbol: 'bit'
+      byte:
+        forms:
+          default: 'Byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'Kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'Megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'Gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'Terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'd'
+      week:
+        symbol: 'week'
+      month:
+        symbol: 'mo'
+      year:
+        symbol: 'y'
+
+  number:
+    words:
+      engine: 'unit-leading-compound'
+      zeroWord: 'null'
+      minusWord: 'minus '
+      masculineOne: 'een'
+      feminineOne: 'eng'
+      neuterOne: 'een'
+      feminineTwo: 'zwou'
+      tensJoiner: 'an'
+      tensJoinerTransform: 'eifeler'
+      ordinalStemSuffix: 's'
+      masculineOrdinalEnding: 'ten'
+      feminineOrdinalEnding: 't'
+      neuterOrdinalEnding: 't'
+      supportsEifelerRule: true
+      unitsMap:
+        1: 'een'
+        2: 'zwee'
+        3: 'dräi'
+        4: 'véier'
+        5: 'fënnef'
+        6: 'sechs'
+        7: 'siwen'
+        8: 'aacht'
+        9: 'néng'
+        10: 'zéng'
+        11: 'eelef'
+        12: 'zwielef'
+        13: 'dräizéng'
+        14: 'véierzéng'
+        15: 'fofzéng'
+        16: 'siechzéng'
+        17: 'siwwenzéng'
+        18: 'uechtzéng'
+        19: 'nonzéng'
+      compoundUnitsMap:
+        1: 'een'
+        2: 'zwee'
+        3: 'dräi'
+        4: 'véier'
+        5: 'fënnef'
+        6: 'sechs'
+        7: 'siwen'
+        8: 'aacht'
+        9: 'néng'
+        10: 'zéng'
+        11: 'eelef'
+        12: 'zwielef'
+        13: 'dräizéng'
+        14: 'véierzéng'
+        15: 'fofzéng'
+        16: 'siechzéng'
+        17: 'siwwenzéng'
+        18: 'uechtzéng'
+        19: 'nonzéng'
+      tensMap:
+        1: 'zéng'
+        2: 'zwanzeg'
+        3: 'drësseg'
+        4: 'véierzeg'
+        5: 'fofzeg'
+        6: 'sechzeg'
+        7: 'siwwenzeg'
+        8: 'achtzeg'
+        9: 'nonzeg'
+      unitsOrdinal:
+        1: 'éisch'
+        2: 'zwee'
+        3: 'drët'
+        4: 'véier'
+        5: 'fënnef'
+        6: 'sechs'
+        7: 'siwen'
+        8: 'aach'
+        9: 'néng'
+        10: 'zéng'
+        11: 'eelef'
+        12: 'zwielef'
+        13: 'dräizéng'
+        14: 'véierzéng'
+        15: 'fofzéng'
+        16: 'siechzéng'
+        17: 'siwwenzéng'
+        18: 'uechtzéng'
+        19: 'nonzéng'
+      scales:
+        -
+          value: 1000000000000000000
+          addSpaceBeforeNextPart: true
+          countGender: 'masculine'
+          singularCardinal: 'eng Trillioun'
+          pluralCardinalFormat: '{0} Trilliounen'
+          ordinalSingular: 'engtrillioun'
+          ordinalPlural:
+            terminal: '{0}trillioun'
+            continuing: '{0}trilliounen'
+          countWordFormNextWord: 'Trilliounen'
+        -
+          value: 1000000000000000
+          addSpaceBeforeNextPart: true
+          countGender: 'feminine'
+          singularCardinal: 'eng Billiard'
+          pluralCardinalFormat: '{0} Billiarden'
+          ordinalSingular:
+            terminal: 'eebilliard'
+            continuing: 'engbilliard'
+          ordinalPlural:
+            terminal: '{0}billiard'
+            continuing: '{0}billiarden'
+          countWordFormNextWord: 'Billiarden'
+        -
+          value: 1000000000000
+          addSpaceBeforeNextPart: true
+          countGender: 'masculine'
+          singularCardinal: 'eng Billioun'
+          pluralCardinalFormat: '{0} Billiounen'
+          ordinalSingular: 'engbillioun'
+          ordinalPlural:
+            terminal: '{0}billioun'
+            continuing: '{0}billiounen'
+          countWordFormNextWord: 'Billiounen'
+        -
+          value: 1000000000
+          addSpaceBeforeNextPart: true
+          countGender: 'feminine'
+          singularCardinal: 'eng Milliard'
+          pluralCardinalFormat: '{0} Milliarden'
+          ordinalSingular:
+            terminal: 'eemilliard'
+            continuing: 'engmilliard'
+          ordinalPlural:
+            terminal: '{0}milliard'
+            continuing: '{0}milliarden'
+          countWordFormNextWord: 'Milliarden'
+        -
+          value: 1000000
+          addSpaceBeforeNextPart: true
+          countGender: 'feminine'
+          singularCardinal: 'eng Millioun'
+          pluralCardinalFormat: '{0} Milliounen'
+          ordinalSingular:
+            terminal: 'eemillioun'
+            continuing: 'engmillioun'
+          ordinalPlural:
+            terminal: '{0}millioun'
+            continuing: '{0}milliounen'
+          countWordFormNextWord: 'Milliounen'
+        -
+          value: 1000
+          addSpaceBeforeNextPart: false
+          countGender: 'masculine'
+          singularCardinal: 'eendausend'
+          pluralCardinalFormat: '{0}dausend'
+          ordinalSingular: 'eendausend'
+          ordinalPlural: '{0}dausend'
+          countWordFormNextWord: 'dausend'
+        -
+          value: 100
+          addSpaceBeforeNextPart: false
+          countGender: 'masculine'
+          singularCardinal: 'eenhonnert'
+          pluralCardinalFormat: '{0}honnert'
+          ordinalSingular: 'eenhonnert'
+          ordinalPlural: '{0}honnert'
+          countWordFormNextWord: 'honnert'
+
+    formatting:
+      groupSeparator: '.'
+
+    parse:
+      engine: 'inverted-tens'
+      cardinalMap:
+        'null': 0
+        een: 1
+        eng: 1
+        zwee: 2
+        zwou: 2
+        'dräi': 3
+        drai: 3
+        'véier': 4
+        veier: 4
+        'fënnef': 5
+        fennef: 5
+        sechs: 6
+        siwen: 7
+        aacht: 8
+        'néng': 9
+        neng: 9
+        'zéng': 10
+        zeng: 10
+        eelef: 11
+        zwielef: 12
+        'dräizéng': 13
+        draizeng: 13
+        'véierzéng': 14
+        veierzeng: 14
+        'fofzéng': 15
+        fofzeng: 15
+        'sechzéng': 16
+        sechzeng: 16
+        'siwwenzéng': 17
+        siwwenzeng: 17
+        'uechtzéng': 18
+        uechtzeng: 18
+        'nonzéng': 19
+        nonzeng: 19
+        zwanzeg: 20
+        'drësseg': 30
+        dresseg: 30
+        'véierzeg': 40
+        veierzeg: 40
+        fofzeg: 50
+        sechzeg: 60
+        siwwenzeg: 70
+        achtzeg: 80
+        nonzeg: 90
+        honnert: 100
+        dausend: 1000
+        millioun: 1000000
+        milliounen: 1000000
+        milliard: 1000000000
+        milliarden: 1000000000
+        billioun: 1000000000000
+        billiounen: 1000000000000
+        billiard: 1000000000000000
+        billiarden: 1000000000000000
+        trillioun: 1000000000000000000
+        trilliounen: 1000000000000000000
+      unitMap:
+        een: 1
+        eng: 1
+        zwee: 2
+        zwou: 2
+        'dräi': 3
+        drai: 3
+        'véier': 4
+        veier: 4
+        'fënnef': 5
+        fennef: 5
+        sechs: 6
+        siwen: 7
+        aacht: 8
+        'néng': 9
+        neng: 9
+      tensTokens:
+        nonzeg: 90
+        achtzeg: 80
+        siwwenzeg: 70
+        sechzeg: 60
+        fofzeg: 50
+        'véierzeg': 40
+        veierzeg: 40
+        'drësseg': 30
+        dresseg: 30
+        zwanzeg: 20
+      tensLinker: 'an'
+      scaleTokens:
+        - 'milliarden'
+        - 'milliard'
+        - 'milliounen'
+        - 'millioun'
+        - 'billiounen'
+        - 'billioun'
+        - 'billiarden'
+        - 'billiard'
+        - 'trilliounen'
+        - 'trillioun'
+        - 'dausend'
+        - 'honnert'
+      negativePrefixes:
+        - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Ordinal'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Ordinal'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
+    midnight: 'Mëtternuecht'
+    midday: 'Mëtteg'
+    applyEifelerRule: true
+    minuteSuffixSingular: 'Minutt'
+    minuteSuffixPlural: 'Minutten'
+    min0: '{hour} Auer'
+    min5: '{minutes} op {hour}'
+    min10: '{minutes} op {hour}'
+    min15: 'Véirel op {hour}'
+    min20: '{minutes} op {hour}'
+    min25: '{minutesFromHalf} vir hallwer {nextHour}'
+    min30: 'hallwer {nextHour}'
+    min35: '{minutesFromHalf} op hallwer {nextHour}'
+    min40: '{minutesReverse} vir {nextHour}'
+    min45: 'Véirel vir {nextHour}'
+    min50: '{minutesReverse} vir {nextHour}'
+    min55: '{minutesReverse} vir {nextHour}'
+    pastHourTemplate: '{minutes} {minuteSuffix} op {hour}'
+    beforeHalfTemplate: '{minutesFromHalf} {minuteSuffix} vir hallwer {nextHour}'
+    afterHalfTemplate: '{minutesFromHalf} {minuteSuffix} op hallwer {nextHour}'
+    beforeNextTemplate: '{minutesReverse} {minuteSuffix} vir {nextHour}'
+
+  compass:
+    full:
+      - 'nord'
+      - 'nord-nordost'
+      - 'nordost'
+      - 'ost-nordost'
+      - 'ost'
+      - 'ost-südost'
+      - 'südost'
+      - 'süd-südost'
+      - 'süd'
+      - 'süd-südwest'
+      - 'südwest'
+      - 'west-südwest'
+      - 'west'
+      - 'west-nordwest'
+      - 'nordwest'
+      - 'nord-nordwest'
+    short:
+      - 'N'
+      - 'NNO'
+      - 'NO'
+      - 'ONO'
+      - 'O'
+      - 'OSO'
+      - 'SO'
+      - 'SSO'
+      - 'S'
+      - 'SSW'
+      - 'SW'
+      - 'WSW'
+      - 'W'
+      - 'WNW'
+      - 'NW'
+      - 'NNW'

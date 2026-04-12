@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Dictating what should be done when a match is not found - currently used only for DehumanizeTo

@@ -20,7 +20,7 @@ public partial class Vocabulary
 #if NET7_0_OR_GREATER
     [GeneratedRegex(LetterSPattern)]
     private static partial Regex LetterSRegexGenerated();
-    
+
     private static Regex LetterSRegex() => LetterSRegexGenerated();
 #else
     private static readonly Regex LetterSRegexField = new(LetterSPattern, RegexOptions.Compiled);

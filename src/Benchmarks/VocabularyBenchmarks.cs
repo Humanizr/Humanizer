@@ -9,7 +9,7 @@ namespace Benchmarks;
 [MemoryDiagnoser]
 public class VocabularyBenchmarks
 {
-    readonly string[] testWords = 
+    readonly string[] testWords =
     [
         "person", "man", "woman", "child", "tooth", "foot",
         "mouse", "goose", "sheep", "deer", "fish", "species",

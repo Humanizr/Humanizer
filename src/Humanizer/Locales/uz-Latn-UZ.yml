@@ -1,0 +1,372 @@
+locale: 'uz-Latn-UZ'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'va'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'hozir'
+      never: 'hech qachon'
+      past:
+        millisecond:
+          single: 'bir millisekund avval'
+          multiple:
+            forms:
+              default: 'millisekund'
+            afterCount: 'avval'
+        second:
+          single: 'bir soniya avval'
+          multiple:
+            forms:
+              default: 'sekund'
+            afterCount: 'avval'
+        minute:
+          single: 'bir daqiqa avval'
+          multiple:
+            forms:
+              default: 'minut'
+            afterCount: 'avval'
+        hour:
+          single: 'bir soat avval'
+          multiple:
+            forms:
+              default: 'soat'
+            afterCount: 'avval'
+        day:
+          single: 'kecha'
+          multiple:
+            forms:
+              default: 'kun'
+            afterCount: 'avval'
+          template:
+            name: 'two'
+            value: '2 kun avval'
+        week:
+          single: 'bir hafta avval'
+          multiple:
+            forms:
+              default: 'hafta'
+            afterCount: 'avval'
+        month:
+          single: 'bir oy avval'
+          multiple:
+            forms:
+              default: 'oy'
+            afterCount: 'avval'
+        year:
+          single: 'bir yil avval'
+          multiple:
+            forms:
+              default: 'yil'
+            afterCount: 'avval'
+      future:
+        millisecond:
+          single: 'bir millisekunddan so''ng'
+          multiple:
+            forms:
+              default: 'millisekunddan'
+            afterCount: 'so''ng'
+        second:
+          single: 'bir soniyadan so''ng'
+          multiple:
+            forms:
+              default: 'sekunddan'
+            afterCount: 'so''ng'
+        minute:
+          single: 'bir daqiqadan so''ng'
+          multiple:
+            forms:
+              default: 'minutdan'
+            afterCount: 'so''ng'
+        hour:
+          single: 'bir soatdan so''ng'
+          multiple:
+            forms:
+              default: 'soatdan'
+            afterCount: 'so''ng'
+        day:
+          single: 'ertaga'
+          multiple:
+            forms:
+              default: 'kundan'
+            afterCount: 'so''ng'
+          template:
+            name: 'two'
+            value: 'indinga'
+        week:
+          single: 'bir haftadan so''ng'
+          multiple:
+            forms:
+              default: 'haftadan'
+            afterCount: 'so''ng'
+        month:
+          single: 'bir oydan so''ng'
+          multiple:
+            forms:
+              default: 'oydan'
+            afterCount: 'so''ng'
+        year:
+          single: 'bir yildan so''ng'
+          multiple:
+            forms:
+              default: 'yildan'
+            afterCount: 'so''ng'
+    duration:
+      zero: 'vaqt yo''q'
+      age:
+        template: '{value} yosh'
+      millisecond:
+        single:
+          numeric: '1 millisekund'
+          words: 'one millisekund'
+        multiple:
+          forms:
+            default: 'millisekund'
+      second:
+        single:
+          numeric: '1 sekund'
+          words: 'one sekund'
+        multiple:
+          forms:
+            default: 'sekund'
+      minute:
+        single:
+          numeric: '1 minut'
+          words: 'one minut'
+        multiple:
+          forms:
+            default: 'minut'
+      hour:
+        single:
+          numeric: '1 soat'
+          words: 'one soat'
+        multiple:
+          forms:
+            default: 'soat'
+      day:
+        single:
+          numeric: '1 kun'
+          words: 'one kun'
+        multiple:
+          forms:
+            default: 'kun'
+      week:
+        single:
+          numeric: '1 hafta'
+          words: 'one hafta'
+        multiple:
+          forms:
+            default: 'hafta'
+      month:
+        single:
+          numeric: '1 oy'
+          words: 'one oy'
+        multiple:
+          forms:
+            default: 'oy'
+      year:
+        single:
+          numeric: '1 yil'
+          words: 'one yil'
+        multiple:
+          forms:
+            default: 'yil'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bayt'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobayt'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabayt'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabayt'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabayt'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'millisekund'
+      second:
+        symbol: 'sekund'
+      minute:
+        symbol: 'minut'
+      hour:
+        symbol: 'soat'
+      day:
+        symbol: 'kun'
+      week:
+        symbol: 'hafta'
+      month:
+        symbol: 'oy'
+      year:
+        symbol: 'yil'
+
+  number:
+    words:
+      engine: 'harmony-ordinal'
+      minimumValue: -2147483648
+      maximumValue: 9223372036854775807
+      minusWord: 'minus'
+      hundredWord: 'yuz'
+      hundredStrategy: 'allow-explicit-one-in-composite'
+      ordinalSuffixStrategy: 'final-character-membership'
+      softenTerminalTBeforeSuffix: false
+      dropTerminalVowelBeforeHarmonySuffix: false
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kvintillion'
+        -
+          value: 1000000000000000
+          name: 'kvadrillion'
+        -
+          value: 1000000000000
+          name: 'trillion'
+        -
+          value: 1000000000
+          name: 'milliard'
+        -
+          value: 1000000
+          name: 'million'
+          allowBareHundredInCount: true
+        -
+          value: 1000
+          name: 'ming'
+          allowBareHundredInCount: true
+      secondOrdinalSuffixCharacters: 'ia'
+      unitsMap:
+        - 'nol'
+        - 'bir'
+        - 'ikki'
+        - 'uch'
+        - 'to`rt'
+        - 'besh'
+        - 'olti'
+        - 'yetti'
+        - 'sakkiz'
+        - 'to`qqiz'
+      tensMap:
+        - 'nol'
+        - 'o`n'
+        - 'yigirma'
+        - 'o`ttiz'
+        - 'qirq'
+        - 'ellik'
+        - 'oltmish'
+        - 'yetmish'
+        - 'sakson'
+        - 'to`qson'
+      ordinalSuffixPair:
+        - 'inchi'
+        - 'nchi'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      cardinalMap:
+        nol: 0
+        bir: 1
+        ikkinchi: 2
+        ikki: 2
+        uch: 3
+        'to`rt': 4
+        besh: 5
+        olti: 6
+        yetti: 7
+        sakkiz: 8
+        'to`qqiz': 9
+        'o`n': 10
+        yigirma: 20
+        'o`ttiz': 30
+        qirq: 40
+        ellik: 50
+        oltmish: 60
+        yetmish: 70
+        sakson: 80
+        'to`qson': 90
+        yuz: 100
+        ming: 1000
+        million: 1000000
+        milliard: 1000000000
+        trillion: 1000000000000
+        kvadrillion: 1000000000000000
+        kvintillion: 1000000000000000000
+      useHundredMultiplier: true
+      negativePrefixes:
+        - 'minus '
+      tokenSuffixesToStrip:
+        - 'inchi'
+        - 'nchi'
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '-chi'
+    date:
+      pattern: '{day}-MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day}-MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourOneWord: 'bir'
+    min0: '{hour}'
+    defaultTemplate: "{hour}dan {minutes} o‘tdi"
+
+  compass:
+    full:
+      - 'shimol'
+      - 'shimol-shimoli-sharq'
+      - 'shimoli-sharq'
+      - 'sharq-shimoli-sharq'
+      - 'sharq'
+      - 'sharq-janubi-sharq'
+      - 'janubi-sharq'
+      - 'janub-janubi-sharq'
+      - 'janub'
+      - 'janub-janubi-g''arb'
+      - 'janubi-g''arb'
+      - 'g''arb-janubi-g''arb'
+      - 'g''arb'
+      - 'g''arb-shimoli-g''arb'
+      - 'shimoli-g''arb'
+      - 'shimol-shimoli-g''arb'
+    short:
+      - 'Sh'
+      - 'Sh-ShSh'
+      - 'ShSh'
+      - 'Sharq-ShSh'
+      - 'Sharq'
+      - 'Sharq-JSh'
+      - 'JSh'
+      - 'J-JSh'
+      - 'J'
+      - 'J-JG'
+      - 'JG'
+      - 'G-JG'
+      - 'G'
+      - 'G-ShG'
+      - 'ShG'
+      - 'Sh-ShG'
