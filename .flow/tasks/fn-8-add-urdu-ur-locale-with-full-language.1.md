@@ -102,7 +102,7 @@ Record the chosen option + feasibility evidence + schema extension shape (`calen
 - [ ] Branch `feat/urdu-locale` created from `main` and checked out.
 - [ ] `artifacts/2026-04-12-ur-parity-map.md` committed. Contains:
   - Preflight gap report (all 8 surfaces unresolved).
-  - Probe output for `ur`, `ur-PK`, `ur-IN` on net10 + net48 (or CI URL if net48 local host unavailable).
+  - Probe output for `ur`, `ur-PK`, `ur-IN` on net10 + net48 (or CI URL if net48 local host unavailable; or authoritative documentation evidence with CLDR cross-reference when neither local host nor CI URL is available, with live net48 probe deferred to .7 cross-platform gate).
   - **Decision 1a** filled: `IOrdinalizer` engine strategy + rationale.
   - **Decision 1b** filled: `INumberToWordsConverter` gendered ordinal strategy + the task that owns the extension (.3 or .9).
   - **Decision 2** filled: number-to-words engine choice + inspection notes for dense 0–99 + gendered-ordinal emission.
