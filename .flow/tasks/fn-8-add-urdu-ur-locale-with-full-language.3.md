@@ -27,8 +27,8 @@ Record the concrete split in the parity map so `.9`'s acceptance is unambiguous.
 
 1. Re-anchor on parity-map `.1` Decision 2 (number engine) and Decision 1b (ordinal-owner split). If recorded choice turns out wrong in practice, update parity map and post a re-plan note — do not silently switch engines.
 2. **`number.words`** per chosen engine:
-   - If `conjunctional-scale` proved sufficient: `unitsMap` 0–99 (all distinct) + `scales` (1000 ہزار, 100000 لاکھ, 10000000 کروڑ, 1000000000 ارب, 100000000000 کھرب).
-   - Otherwise follow the chosen engine's shape.
+   - Engine is `indian-grouping-gendered` (locked in `.1` Decision 2). YAML shape uses `denseUnitsMap` (100-entry string array, 0–99), `hundredsMap`, `thousandsMap`, `lakhWord`, `singleLakhWord`, `croreWord`, `negativeWord`, `zeroWord` per the locked parity-map schema. See `artifacts/2026-04-12-ur-parity-map.md` Decision 2 for the full shape.
+   <!-- Updated by plan-sync: fn-8-add-urdu-ur-locale-with-full-language.1 chose indian-grouping-gendered engine with denseUnitsMap, not conjunctional-scale with unitsMap/scales -->
    - Cross-check 0–99 vocabulary against PR #1683 resx and `forzagreen/n2words` `ur-PK.js` `BELOW_HUNDRED`. Discrepancies via proposer+reviewer.
 3. **`number.parse`** — `engine: 'token-map'`, `cardinalMap` covering 0-99 + scales; `negativePrefixes: ['منفی']`; `ignoredTokens: ['اعشاریہ']`; `useHundredMultiplier: true`.
 4. **`number.formatting`** — `decimalSeparator: '.'`, `groupSeparator: ','`, `negativeSign: '-'`. No LRM on signs.
@@ -61,7 +61,8 @@ Record the concrete split in the parity map so `.9`'s acceptance is unambiguous.
 
 ## Acceptance
 
-- [ ] `surfaces.number.words` authored per `.1` Decision 2; 0–99 `unitsMap` distinct + South Asian scales.
+- [ ] `surfaces.number.words` authored per `.1` Decision 2; 0–99 `denseUnitsMap` distinct + South Asian scale fields (`lakhWord`, `croreWord`, `hundredsMap`, `thousandsMap`, etc.).
+<!-- Updated by plan-sync: fn-8-add-urdu-ur-locale-with-full-language.1 locked denseUnitsMap not unitsMap, and individual scale fields not a scales tuple array -->
 - [ ] Strings match parity map verbatim. Passing: `NumberToWords(0, "ur") == "صفر"`, `(21) == "اکیس"`, `(99) == "ننانوے"`, `(100) == "ایک سو"`, `(100000) == "ایک لاکھ"`, `(10000000) == "ایک کروڑ"`, `(1234567)` matches parity-map string.
 - [ ] `surfaces.number.parse` round-trip: `NumberToWords(n, "ur") |> WordsToNumber(_, "ur") == n` for 21, 101, 1001, 100000, 1234567.
 - [ ] `surfaces.number.formatting` authored with `.` / `,` / `-`.

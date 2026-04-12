@@ -1,2 +1,227 @@
 locale: 'ur'
-surfaces: {}
+
+surfaces:
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'ابھی'
+      never: 'کبھی نہیں'
+      past:
+        millisecond:
+          single: 'ایک ملی سیکنڈ پہلے'
+          multiple:
+            forms:
+              default: 'ملی سیکنڈ'
+            afterCount: 'پہلے'
+        second:
+          single: 'ایک سیکنڈ پہلے'
+          multiple:
+            forms:
+              default: 'سیکنڈ'
+            afterCount: 'پہلے'
+        minute:
+          single: 'ایک منٹ پہلے'
+          multiple:
+            forms:
+              default: 'منٹ'
+            afterCount: 'پہلے'
+        hour:
+          single: 'ایک گھنٹہ پہلے'
+          multiple:
+            forms:
+              default: 'گھنٹے'
+            afterCount: 'پہلے'
+        day:
+          single: 'گزشتہ کل'
+          multiple:
+            forms:
+              default: 'دن'
+            afterCount: 'پہلے'
+        week:
+          single: 'ایک ہفتہ پہلے'
+          multiple:
+            forms:
+              default: 'ہفتے'
+            afterCount: 'پہلے'
+        month:
+          single: 'ایک مہینہ پہلے'
+          multiple:
+            forms:
+              default: 'مہینے'
+            afterCount: 'پہلے'
+        year:
+          single: 'ایک سال پہلے'
+          multiple:
+            forms:
+              default: 'سال'
+            afterCount: 'پہلے'
+      future:
+        millisecond:
+          single: 'ایک ملی سیکنڈ میں'
+          multiple:
+            forms:
+              default: 'ملی سیکنڈ'
+            afterCount: 'میں'
+        second:
+          single: 'ایک سیکنڈ میں'
+          multiple:
+            forms:
+              default: 'سیکنڈ'
+            afterCount: 'میں'
+        minute:
+          single: 'ایک منٹ میں'
+          multiple:
+            forms:
+              default: 'منٹ'
+            afterCount: 'میں'
+        hour:
+          single: 'ایک گھنٹے میں'
+          multiple:
+            forms:
+              default: 'گھنٹے'
+            afterCount: 'میں'
+        day:
+          single: 'آئندہ کل'
+          multiple:
+            forms:
+              default: 'دنوں'
+            afterCount: 'میں'
+        week:
+          single: 'ایک ہفتے میں'
+          multiple:
+            forms:
+              default: 'ہفتے'
+            afterCount: 'میں'
+        month:
+          single: 'ایک مہینے میں'
+          multiple:
+            forms:
+              default: 'مہینے'
+            afterCount: 'میں'
+        year:
+          single: 'ایک سال میں'
+          multiple:
+            forms:
+              default: 'سال'
+            afterCount: 'میں'
+    duration:
+      zero: 'ابھی'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 ملی سیکنڈ'
+          words: 'ایک ملی سیکنڈ'
+        multiple:
+          forms:
+            default: 'ملی سیکنڈ'
+            singular: 'ملی سیکنڈ'
+      second:
+        single:
+          numeric: '1 سیکنڈ'
+          words: 'ایک سیکنڈ'
+        multiple:
+          forms:
+            default: 'سیکنڈ'
+            singular: 'سیکنڈ'
+      minute:
+        single:
+          numeric: '1 منٹ'
+          words: 'ایک منٹ'
+        multiple:
+          forms:
+            default: 'منٹ'
+            singular: 'منٹ'
+      hour:
+        single:
+          numeric: '1 گھنٹہ'
+          words: 'ایک گھنٹہ'
+        multiple:
+          forms:
+            default: 'گھنٹے'
+            singular: 'گھنٹہ'
+      day:
+        single:
+          numeric: '1 دن'
+          words: 'ایک دن'
+        multiple:
+          forms:
+            default: 'دن'
+            singular: 'دن'
+      week:
+        single:
+          numeric: '1 ہفتہ'
+          words: 'ایک ہفتہ'
+        multiple:
+          forms:
+            default: 'ہفتے'
+            singular: 'ہفتہ'
+      month:
+        single:
+          numeric: '1 مہینہ'
+          words: 'ایک مہینہ'
+        multiple:
+          forms:
+            default: 'مہینے'
+            singular: 'مہینہ'
+      year:
+        single:
+          numeric: '1 سال'
+          words: 'ایک سال'
+        multiple:
+          forms:
+            default: 'سال'
+            singular: 'سال'
+    dataUnits:
+      bit:
+        forms:
+          default: 'بٹ'
+          singular: 'بٹ'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'بائٹ'
+          singular: 'بائٹ'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'کلوبائٹ'
+          singular: 'کلوبائٹ'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'میگابائٹ'
+          singular: 'میگابائٹ'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'گیگابائٹ'
+          singular: 'گیگابائٹ'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ٹیرابائٹ'
+          singular: 'ٹیرابائٹ'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ملی سیکنڈ'
+      second:
+        symbol: 'سیکنڈ'
+      minute:
+        symbol: 'منٹ'
+      hour:
+        symbol: 'گھنٹہ'
+      day:
+        symbol: 'دن'
+      week:
+        symbol: 'ہفتہ'
+      month:
+        symbol: 'مہینہ'
+      year:
+        symbol: 'سال'

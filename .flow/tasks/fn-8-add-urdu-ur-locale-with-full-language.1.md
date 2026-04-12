@@ -116,9 +116,8 @@ Record the chosen option + feasibility evidence + schema extension shape (`calen
 - [ ] Re-plan trigger: any contract decision with >~5-file blast radius posts a re-plan note on the epic BEFORE `.2` begins.
 
 ## Done summary
-TBD
-
+Scaffolded minimal Urdu (ur) locale YAML, created preflight parity map with probe output and three locked contract decisions (number-word-suffix ordinalizer, indian-grouping-gendered number engine, culture-calendar Hijri contract), and updated add-locale skill to reflect committed parity artifacts.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: c8dc90f75edad058e262768192344a3bc3b47611
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
 - PRs:
