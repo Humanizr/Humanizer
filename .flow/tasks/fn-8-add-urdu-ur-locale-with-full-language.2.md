@@ -59,9 +59,8 @@ Author the `formatter` surface and all four `phrases` tables (`relativeDate`, `d
 - [ ] Build passes: `dotnet build src/Humanizer/Humanizer.csproj -c Release`.
 - [ ] Phrase-level runtime tests pass on net10.0 (`GeneratedFormatterRuntimeTests` + `ResourceBackedPhraseTests`).
 ## Done summary
-TBD
-
+Authored formatter configuration and all four phrase surfaces (relativeDate, duration, timeUnits, dataUnits) in ur.yml. Formatter uses engine: profiled with singular-plural plural rules matching CLDR `ur` two-form distinction. RelativeDate covers all 8 TimeUnitOrder slots × past/future with CLDR-sourced stems (گھنٹہ/گھنٹے, مہینہ/مہینے, ہفتہ/ہفتے, دن/دنوں). Duration provides singular+plural forms for all 8 units. DataUnits covers bit through terabyte. TimeUnits provides symbol for all 8 units. Parity map updated with proposer+reviewer log for all terms. Build passes on all four TFMs. All 38,910 non-ur tests pass; 83 ur-specific completeness failures are expected (owned by task .6).
 ## Evidence
 - Commits:
-- Tests:
+- Tests: net10.0, net8.0, source_generators
 - PRs:

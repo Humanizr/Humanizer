@@ -366,11 +366,11 @@ Passed! total: 58, failed: 0, succeeded: 58
 | Surface | Ownership path | Current state | Target state | Support state | Status |
 |---|---|---|---|---|---|
 | list | -- | missing | locale-owned | not supported | not-started |
-| formatter | -- | missing | locale-owned | not supported | not-started |
-| phrases.relativeDate | -- | missing | locale-owned | not supported | not-started |
-| phrases.duration | -- | missing | locale-owned | not supported | not-started |
-| phrases.dataUnits | -- | missing | locale-owned | not supported | not-started |
-| phrases.timeUnits | -- | missing | locale-owned | not supported | not-started |
+| formatter | .2 | authored | locale-owned | engine: profiled, pluralRule: singular-plural, dataUnitPluralRule: singular-plural | resolved |
+| phrases.relativeDate | .2 | authored | locale-owned | 8 units × past/future, now=ابھی, never=کبھی نہیں, yesterday=گزشتہ کل, tomorrow=آئندہ کل | resolved |
+| phrases.duration | .2 | authored | locale-owned | 8 units with singular/plural, zero=ابھی | resolved |
+| phrases.dataUnits | .2 | authored | locale-owned | بٹ/بائٹ/کلوبائٹ/میگابائٹ/گیگابائٹ/ٹیرابائٹ | resolved |
+| phrases.timeUnits | .2 | authored | locale-owned | 8 unit symbols | resolved |
 | number.words.cardinal | -- | missing | locale-owned | not supported | not-started |
 | number.words.ordinal | -- | missing | locale-owned | not supported | not-started |
 | number.parse.cardinal | -- | missing | locale-owned | not supported | not-started |
@@ -387,16 +387,109 @@ Passed! total: 58, failed: 0, succeeded: 58
 
 ### Effective Gap Summary
 
-All 8 canonical surfaces remain unresolved. Implementation begins with task .2.
+5 of 8 canonical surfaces resolved (formatter + phrases). Remaining unresolved: list, number, ordinal, clock, compass, calendar.
 
 ---
 
 ## Before/After Parity Delta
 
-**Before (this task)**: 8 canonical surfaces unresolved (all missing)
-**After (this task)**: 8 canonical surfaces still unresolved (scaffolded, not implemented)
+**Before (task .2)**: formatter + 4 phrase surfaces unresolved
+**After (task .2)**: formatter + 4 phrase surfaces resolved; remaining gaps owned by tasks .3–.5
 
 The parity delta will reach empty at .7 completion.
+
+---
+
+## Proposer+Reviewer Term Log (Task .2)
+
+### Formatter configuration
+
+| Field | Proposed | Reviewed | Status |
+|---|---|---|---|
+| engine | profiled | CLDR `ur` is two-form (one/other) — profiled engine correct | accepted |
+| pluralRule | singular-plural | CLDR plural category `i = 1 and v = 0` → one, else other — two-form, not arabic-like | accepted |
+| dataUnitPluralRule | singular-plural | matches pluralRule — data units use same two-form distinction | accepted |
+| dataUnitFallbackTransform | trim-trailing-s | safety net for English-derived fallback strings; harmless for Urdu | accepted |
+
+### phrases.relativeDate — past
+
+| Unit | Single (count=1) | Plural stem (count>1) | Suffix | Source | Status |
+|---|---|---|---|---|---|
+| millisecond | ایک ملی سیکنڈ پہلے | ملی سیکنڈ | پہلے | CLDR extrapolation (no CLDR millisecond for ur; derived from second pattern) | accepted |
+| second | ایک سیکنڈ پہلے | سیکنڈ | پہلے | CLDR `ur` relativeTime second past-one/other | accepted |
+| minute | ایک منٹ پہلے | منٹ | پہلے | CLDR `ur` relativeTime minute past-one/other | accepted |
+| hour | ایک گھنٹہ پہلے | گھنٹے | پہلے | CLDR `ur` hour past-one=گھنٹہ, past-other=گھنٹے | accepted |
+| day | گزشتہ کل | دن | پہلے | CLDR `ur` relative-day -1=گزشتہ کل; day past-other=دن | accepted |
+| week | ایک ہفتہ پہلے | ہفتے | پہلے | CLDR `ur` week past-one=ہفتہ, past-other=ہفتے | accepted |
+| month | ایک مہینہ پہلے | مہینے | پہلے | CLDR `ur` month past-one=مہینہ, past-other=مہینے | accepted |
+| year | ایک سال پہلے | سال | پہلے | CLDR `ur` year past-one/other=سال (invariant) | accepted |
+
+### phrases.relativeDate — future
+
+| Unit | Single (count=1) | Plural stem (count>1) | Suffix | Source | Status |
+|---|---|---|---|---|---|
+| millisecond | ایک ملی سیکنڈ میں | ملی سیکنڈ | میں | Derived from second pattern | accepted |
+| second | ایک سیکنڈ میں | سیکنڈ | میں | CLDR `ur` second future-one/other | accepted |
+| minute | ایک منٹ میں | منٹ | میں | CLDR `ur` minute future-one/other | accepted |
+| hour | ایک گھنٹے میں | گھنٹے | میں | CLDR `ur` hour future-one/other (oblique before میں) | accepted |
+| day | آئندہ کل | دنوں | میں | CLDR `ur` relative-day +1=آئندہ کل; day future-other=دنوں | accepted |
+| week | ایک ہفتے میں | ہفتے | میں | CLDR `ur` week future-one/other (oblique before میں) | accepted |
+| month | ایک مہینے میں | مہینے | میں | CLDR `ur` month future-one/other (oblique before میں) | accepted |
+| year | ایک سال میں | سال | میں | CLDR `ur` year future-one/other | accepted |
+
+### phrases.relativeDate — special forms
+
+| Form | Value | Source | Status |
+|---|---|---|---|
+| now | ابھی | CLDR `ur` relative-second-0 + spec requirement | accepted |
+| never | کبھی نہیں | Standard Urdu; matches pattern of fa/ta/ja locales | accepted |
+| yesterday | گزشتہ کل | CLDR `ur` relative-day -1 (disambiguated, not ambiguous کل) | accepted |
+| tomorrow | آئندہ کل | CLDR `ur` relative-day +1 (disambiguated, not ambiguous کل) | accepted |
+
+### phrases.duration
+
+| Unit | Numeric (1) | Words (1) | Singular form | Plural form | Source | Status |
+|---|---|---|---|---|---|---|
+| millisecond | 1 ملی سیکنڈ | ایک ملی سیکنڈ | ملی سیکنڈ | ملی سیکنڈ | Invariant (loanword) | accepted |
+| second | 1 سیکنڈ | ایک سیکنڈ | سیکنڈ | سیکنڈ | Invariant (loanword) | accepted |
+| minute | 1 منٹ | ایک منٹ | منٹ | منٹ | Invariant (loanword) | accepted |
+| hour | 1 گھنٹہ | ایک گھنٹہ | گھنٹہ | گھنٹے | CLDR `ur` unit-length-long hour | accepted |
+| day | 1 دن | ایک دن | دن | دن | CLDR `ur` unit-length-long day (invariant in direct case) | accepted |
+| week | 1 ہفتہ | ایک ہفتہ | ہفتہ | ہفتے | CLDR `ur` unit-length-long week | accepted |
+| month | 1 مہینہ | ایک مہینہ | مہینہ | مہینے | CLDR `ur` unit-length-long month | accepted |
+| year | 1 سال | ایک سال | سال | سال | CLDR `ur` unit-length-long year (invariant) | accepted |
+
+### phrases.dataUnits
+
+| Unit | Singular | Plural | Symbol | Source | Status |
+|---|---|---|---|---|---|
+| bit | بٹ | بٹ | b | Urdu transliteration of "bit" | accepted |
+| byte | بائٹ | بائٹ | B | Urdu transliteration of "byte" | accepted |
+| kilobyte | کلوبائٹ | کلوبائٹ | KB | Urdu transliteration of "kilobyte" | accepted |
+| megabyte | میگابائٹ | میگابائٹ | MB | Urdu transliteration of "megabyte" | accepted |
+| gigabyte | گیگابائٹ | گیگابائٹ | GB | Urdu transliteration of "gigabyte" | accepted |
+| terabyte | ٹیرابائٹ | ٹیرابائٹ | TB | Urdu transliteration of "terabyte" | accepted |
+
+### phrases.timeUnits
+
+| Unit | Symbol | Source | Status |
+|---|---|---|---|
+| millisecond | ملی سیکنڈ | Urdu transliteration | accepted |
+| second | سیکنڈ | CLDR `ur` | accepted |
+| minute | منٹ | CLDR `ur` | accepted |
+| hour | گھنٹہ | CLDR `ur` | accepted |
+| day | دن | CLDR `ur` | accepted |
+| week | ہفتہ | CLDR `ur` | accepted |
+| month | مہینہ | CLDR `ur` | accepted |
+| year | سال | CLDR `ur` | accepted |
+
+### Script character verification
+
+All authored terms verified free of Arabic-script mis-use:
+- ه (U+0647) absent — ہ (U+06C1) used throughout ✓
+- ي (U+064A) absent — ی (U+06CC) used throughout ✓
+- ك (U+0643) absent — ک (U+06A9) used throughout ✓
+- No U+200E (LRM), U+200F (RLM), U+061C (ALM) ✓
 
 ---
 
