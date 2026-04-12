@@ -73,8 +73,22 @@ Record the concrete split in the parity map so `.9`'s acceptance is unambiguous.
 - [ ] `NumberWordPhraseTests` pass on net10.0.
 
 ## Done summary
-TBD
+## Task .3 Summary: Author number surfaces (words, parse, formatting overrides)
 
+### Delivered
+1. **New `indian-grouping-gendered` engine**: Created `IndianGroupingGenderedNumberToWordsConverter` extending `GenderedNumberToWordsConverter` with dense 0-99 lookup and South Asian scale decomposition (lakh/crore/arab/kharab).
+2. **Engine contract**: Added `indian-grouping-gendered` schema to `EngineContractCatalog.cs` with `denseUnitsMap`, scalar scale words, and nested ordinal gendered block.
+3. **`number.words` surface**: 100 lexically distinct Urdu number words (0-99) authored in `denseUnitsMap`, plus scale words, ordinal gender suffixes with exactReplacements for 1-3.
+4. **`number.parse` surface**: Token-map engine with all 100 cardinal words + 5 scale tokens, `useHundredMultiplier: true`, negative prefix `منفی`.
+5. **`number.formatting` surface**: Overrides for `.` / `,` / `-` (stripping ICU's U+200E LRM from native negative sign).
+6. **Test data**: Added 28 cardinal, 6 ordinal, and 5 words-to-number round-trip test cases to `LocaleNumberTheoryData`.
+
+### Verification
+- Build succeeds on all 4 TFMs (net10.0, net8.0, net48, netstandard2.0)
+- 10,515 NumberWordPhraseTests pass on net10.0 and net8.0
+- 58 source generator tests pass
+- No bidi control characters (U+200E/200F/061C) in ur.yml
+- No Arabic-only letters (ي ه ك) in ur.yml
 ## Evidence
 - Commits:
 - Tests:
