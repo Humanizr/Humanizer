@@ -371,13 +371,13 @@ Passed! total: 58, failed: 0, succeeded: 58
 | phrases.duration | .2 | authored | locale-owned | 8 units with singular/plural, zero=ابھی | resolved |
 | phrases.dataUnits | .2 | authored | locale-owned | بٹ/بائٹ/کلوبائٹ/میگابائٹ/گیگابائٹ/ٹیرابائٹ | resolved |
 | phrases.timeUnits | .2 | authored | locale-owned | 8 unit symbols | resolved |
-| number.words.cardinal | -- | missing | locale-owned | not supported | not-started |
-| number.words.ordinal | -- | missing | locale-owned | not supported | not-started |
-| number.parse.cardinal | -- | missing | locale-owned | not supported | not-started |
+| number.words.cardinal | .3 | authored | locale-owned | engine: indian-grouping-gendered, denseUnitsMap 0-99, lakh/crore/arab/kharab scales | resolved |
+| number.words.ordinal | .3 | authored | locale-owned | gendered ordinal suffixes: واں/ویں, exactReplacements 1-3 | resolved |
+| number.parse.cardinal | .3 | authored | locale-owned | engine: token-map, 0-99 + scales, useHundredMultiplier | resolved |
 | number.parse.ordinal | -- | missing | locale-owned | not supported | not-started |
-| number.formatting.decimalSeparator | -- | missing | locale-owned (`.`) | not supported | not-started |
-| number.formatting.groupSeparator | -- | missing | locale-owned (`,`) | not supported | not-started |
-| number.formatting.negativeSign | -- | missing | locale-owned (`-`, strip U+200E LRM) | not supported | not-started |
+| number.formatting.decimalSeparator | .3 | authored | locale-owned (`.`) | override | resolved |
+| number.formatting.groupSeparator | .3 | authored | locale-owned (`,`) | override | resolved |
+| number.formatting.negativeSign | .3 | authored | locale-owned (`-`, strip U+200E LRM) | override | resolved |
 | ordinal.numeric | -- | missing | locale-owned | not supported | not-started |
 | ordinal.date | -- | missing | locale-owned | not supported | not-started |
 | ordinal.dateOnly | -- | missing | locale-owned | not supported | not-started |
@@ -387,14 +387,14 @@ Passed! total: 58, failed: 0, succeeded: 58
 
 ### Effective Gap Summary
 
-5 of 8 canonical surfaces resolved (formatter + phrases). Remaining unresolved: list, number, ordinal, clock, compass, calendar.
+8 of 8 canonical surface groups partially resolved. Remaining unresolved: list, ordinal.numeric (.9), ordinal.date, ordinal.dateOnly, clock, compass, calendar.
 
 ---
 
 ## Before/After Parity Delta
 
-**Before (task .2)**: formatter + 4 phrase surfaces unresolved
-**After (task .2)**: formatter + 4 phrase surfaces resolved; remaining gaps owned by tasks .3–.5
+**Before (task .3)**: formatter + 4 phrase surfaces resolved; number surfaces missing
+**After (task .3)**: formatter + 4 phrase surfaces + number (words/parse/formatting) resolved; remaining gaps owned by tasks .4–.5, .9
 
 The parity delta will reach empty at .7 completion.
 
@@ -493,11 +493,65 @@ All authored terms verified free of Arabic-script mis-use:
 
 ---
 
+## Proposer+Reviewer Term Log (Task .3)
+
+### Engine design change: simplified indian-grouping-gendered
+
+The parity map Decision 2 locked `hundredsMap` and `thousandsMap` arrays. Task .3 simplified the engine to use scalar scale words (`hundredWord`, `thousandWord`, `lakhWord`, `croreWord`, `arabWord`, `kharabWord`) because Urdu number composition is fully regular (no morphological irregularities in hundreds or thousands). The converter composes: `denseUnitsMap[count] + " " + scaleWord`. This eliminates redundant map data and simplifies the engine contract.
+
+### Cardinal verification points
+
+| Input | Expected | Source | Status |
+|---|---|---|---|
+| 0 | صفر | Standard Urdu | accepted |
+| 1 | ایک | Standard Urdu | accepted |
+| 21 | اکیس | Standard Urdu, dense lookup | accepted |
+| 99 | ننانوے | Standard Urdu, dense lookup | accepted |
+| 100 | ایک سو | ایک + سو | accepted |
+| 101 | ایک سو ایک | composition | accepted |
+| 1000 | ایک ہزار | ایک + ہزار | accepted |
+| 1234 | ایک ہزار دو سو چونتیس | composition | accepted |
+| 100000 | ایک لاکھ | ایک + لاکھ | accepted |
+| 1234567 | بارہ لاکھ چونتیس ہزار پانچ سو سڑسٹھ | composition | accepted |
+| 10000000 | ایک کروڑ | ایک + کروڑ | accepted |
+| 1000000000 | ایک ارب | ایک + ارب | accepted |
+| -21 | منفی اکیس | negative prefix | accepted |
+
+### Ordinal verification points
+
+| Input | Gender | Expected | Source | Status |
+|---|---|---|---|---|
+| 1 | masculine | پہلا | exactReplacement | accepted |
+| 2 | masculine | دوسرا | exactReplacement | accepted |
+| 3 | masculine | تیسرا | exactReplacement | accepted |
+| 5 | masculine | پانچواں | cardinal + واں | accepted |
+| 1 | feminine | پہلی | exactReplacement | accepted |
+| 5 | feminine | پانچویں | cardinal + ویں | accepted |
+
+### Parse verification points
+
+| Input | Expected | Round-trip | Status |
+|---|---|---|---|
+| اکیس | 21 | ✓ | accepted |
+| ایک سو ایک | 101 | ✓ | accepted |
+| ایک ہزار ایک | 1001 | ✓ | accepted |
+| ایک لاکھ | 100000 | ✓ | accepted |
+| بارہ لاکھ چونتیس ہزار پانچ سو سڑسٹھ | 1234567 | ✓ | accepted |
+
+### Script character verification (task .3 authored content)
+
+- ه (U+0647) absent — ہ (U+06C1) used throughout ✓
+- ي (U+064A) absent — ی (U+06CC) used throughout ✓
+- ك (U+0643) absent — ک (U+06A9) used throughout ✓
+- No U+200E (LRM), U+200F (RLM), U+061C (ALM) ✓
+
+---
+
 ## Downstream Implementation Tasks
 
 Architecture decisions are locked. The following tasks own execution:
 
-1. **Dense 0-99 cardinal data + engine threshold adaptation** for `indian-grouping` -- task .3
+1. ~~**Dense 0-99 cardinal data + engine threshold adaptation** for `indian-grouping` -- task .3~~ DONE
 2. **Hijri month schema extension** (`hijriMonths` key) + runtime calendar selection -- task .10
 3. **`number-word-suffix` ordinalizer engine** + gendered `IndianGroupingGenderedNumberToWordsConverter` -- task .9
 4. **Regional variant differences** between ur-PK and ur-IN -- task .11

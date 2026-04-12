@@ -346,6 +346,31 @@ public sealed partial class HumanizerSourceGenerator
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
                         )
             ),
+                ["indian-grouping-gendered"] = Schema("indian-grouping-gendered", null,
+                Member("profile-object", null, null, null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "negativeWord", null, null, null, null, null, null),
+                            Member("string", "hundredWord", null, null, null, null, null, null),
+                            Member("string", "thousandWord", null, null, null, null, null, null),
+                            Member("string", "lakhWord", null, null, null, null, null, null),
+                            Member("string", "singleLakhWord", null, null, null, null, null, null),
+                            Member("string", "croreWord", null, null, null, null, null, null),
+                            Member("string", "arabWord", null, null, null, null, null, null),
+                            Member("string", "kharabWord", null, null, null, null, null, null),
+                            Member("string-array", "denseUnitsMap", null, null, null, null, null, null),
+                            Member("profile-object", "ordinal", null, null, null, null, null, null,
+                                        Member("profile-object", "masculine", null, null, null, null, null, null,
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("profile-object", "feminine", null, null, null, null, null, null,
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("string", "neuterFallback", null, null, null, null, null, null)
+                            )
+                        )
+            ),
                 ["inverted-tens"] = Schema("inverted-tens", null,
                 Member("profile-object", null, null, null, null, null, null, null,
                             Member("string", "minusWord", null, null, null, null, null, null),
