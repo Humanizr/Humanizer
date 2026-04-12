@@ -66,9 +66,11 @@ The preflight report must identify the full current ownership path for each surf
 
 ### 2. Build The Parity Map
 
-Create a non-source-controlled parity map artifact at:
+Create a parity map artifact at:
 
 `artifacts/YYYY-MM-DD-<locale>-parity-map.md`
+
+Parity map artifacts and audit artifacts under `artifacts/` are committed to source control so they are available to downstream tasks and reviewers throughout the epic.
 
 Build the parity map as a concrete table, not notes. Use at least these columns:
 
