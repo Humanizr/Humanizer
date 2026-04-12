@@ -46,8 +46,8 @@ Storage.dat
 # DNX
 project.lock.json
 *.lock.json
-artifacts/
-!artifacts/*.md
+/artifacts/*
+!/artifacts/*.md
 
 # Visual Studio profiler
 *.psess
