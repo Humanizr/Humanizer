@@ -75,3 +75,6 @@ When documenting parse vs format path boundaries, verify each consumer individua
 
 ## 2026-04-10 manual [pitfall]
 When editing JSON config files, never add or preserve // comments -- standard JSON does not support comments and parsers will reject the file silently
+
+## 2026-04-12 manual [pitfall]
+When committing artifacts under a gitignored directory (e.g. artifacts/), RepoPrompt cannot resolve the file path even if git add -f was used -- the workspace resolver reads .gitignore. Either move the file outside the gitignored path or add a negation rule to .gitignore.

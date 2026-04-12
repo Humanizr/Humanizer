@@ -47,6 +47,7 @@ Storage.dat
 project.lock.json
 *.lock.json
 artifacts/
+!artifacts/*.md
 
 # Visual Studio profiler
 *.psess
