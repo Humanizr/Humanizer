@@ -13,12 +13,12 @@ public static partial class StringHumanizeExtensions
 #if NET7_0_OR_GREATER
     [GeneratedRegex(PascalCaseWordPartsPattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture)]
     private static partial Regex PascalCaseWordPartsRegexGenerated();
-    
+
     private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexGenerated();
 
     [GeneratedRegex(FreestandingSpacingCharPattern)]
     private static partial Regex FreestandingSpacingCharRegexGenerated();
-    
+
     private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexGenerated();
 #else
     private static readonly Regex PascalCaseWordPartsRegexField = new(

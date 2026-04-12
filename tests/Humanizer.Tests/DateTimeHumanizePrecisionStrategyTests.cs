@@ -1,4 +1,4 @@
-﻿[UseCulture("en-US")]
+[UseCulture("en-US")]
 public class DateTimeHumanizePrecisionStrategyTests
 {
     const double DefaultPrecision = .75;

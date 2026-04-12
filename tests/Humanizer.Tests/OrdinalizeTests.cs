@@ -1,4 +1,4 @@
-﻿[UseCulture("en-US")]
+[UseCulture("en-US")]
 public class OrdinalizeTests
 {
     [Theory]
@@ -90,7 +90,7 @@ public class OrdinalizeTests
     [Theory]
     [InlineData("en-US", "1", "1st")]
     [InlineData("nl-NL", "1", "1e")]
-    public void OrdinalizeStringWithCultureOverridesCurrentCulture(string cultureName, string number, string ordinalized)
+    public void OrdinalizeStringWithSpecifiedCultureInsteadOfCurrentCulture(string cultureName, string number, string ordinalized)
     {
         var culture = new CultureInfo(cultureName);
         Assert.Equal(number.Ordinalize(culture), ordinalized);
@@ -99,7 +99,7 @@ public class OrdinalizeTests
     [Theory]
     [InlineData("en-US", 1, "1st")]
     [InlineData("nl-NL", 1, "1e")]
-    public void OrdinalizeNumberWithCultureOverridesCurrentCulture(string cultureName, int number, string ordinalized)
+    public void OrdinalizeNumberWithSpecifiedCultureInsteadOfCurrentCulture(string cultureName, int number, string ordinalized)
     {
         var culture = new CultureInfo(cultureName);
         Assert.Equal(number.Ordinalize(culture), ordinalized);
@@ -109,7 +109,7 @@ public class OrdinalizeTests
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(8)]
-    public void OrdinalizeNumberWithOverridenCultureGenderIsImmaterial(int number)
+    public void OrdinalizeNumberWithSpecifiedCultureGenderIsImmaterial(int number)
     {
         var culture = new CultureInfo("nl-NL");
         var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine, culture);
@@ -121,7 +121,7 @@ public class OrdinalizeTests
     [InlineData("0")]
     [InlineData("1")]
     [InlineData("8")]
-    public void OrdinalizeStringWithOverridenGenderIsImmaterial(string number)
+    public void OrdinalizeStringWithSpecifiedGenderIsImmaterial(string number)
     {
         var culture = new CultureInfo("nl-NL");
         var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine, culture);
@@ -134,7 +134,7 @@ public class OrdinalizeTests
     [InlineData(1, WordForm.Abbreviation, "es-ES", "1.er")]
     [InlineData(1, WordForm.Normal, "en-US", "1st")]
     [InlineData(1, WordForm.Abbreviation, "en-US", "1st")]
-    public void OrdinalizeNumberWithOverridenCultureAndSpecificForm(int number, WordForm wordForm, string cultureName, string expected)
+    public void OrdinalizeNumberWithSpecifiedCultureAndSpecificForm(int number, WordForm wordForm, string cultureName, string expected)
     {
         var culture = new CultureInfo(cultureName);
         Assert.Equal(expected, number.Ordinalize(culture, wordForm));
@@ -150,7 +150,7 @@ public class OrdinalizeTests
     [InlineData(1, WordForm.Abbreviation, GrammaticalGender.Feminine, "es-ES", "1.ª")]
     [InlineData(1, WordForm.Normal, GrammaticalGender.Masculine, "en-US", "1st")]
     [InlineData(1, WordForm.Normal, GrammaticalGender.Feminine, "en-US", "1st")]
-    public void OrdinalizeNumberWithOverridenCultureAndGenderAndForm(
+    public void OrdinalizeNumberWithSpecifiedCultureAndGenderAndForm(
         int number,
         WordForm wordForm,
         GrammaticalGender gender,

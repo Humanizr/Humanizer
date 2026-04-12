@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-04-09T13:21:04.414220Z",
+  "epic": {
+    "data": {
+      "branch_name": "fn-4-fix-net48-test-suite-blocker",
+      "created_at": "2026-04-09T12:59:13.763649Z",
+      "depends_on_epics": [],
+      "id": "fn-4-fix-net48-test-suite-blocker",
+      "next_task": 1,
+      "plan_review_status": "unknown",
+      "plan_reviewed_at": null,
+      "spec_path": ".flow/specs/fn-4-fix-net48-test-suite-blocker.md",
+      "status": "open",
+      "title": "Fix net48 test suite blocker: Enum.GetValues<T>() not available in .NET Framework 4.8",
+      "updated_at": "2026-04-09T12:59:24.850690Z"
+    },
+    "spec": "# Fix net48 test suite blocker: Enum.GetValues<T>() not available in .NET Framework 4.8\n\n## Goal & Context\n`LocaleTheoryMatrixCompletenessTests.cs:439` uses `Enum.GetValues<GrammaticalGender>()` which is a .NET 5+ API not available in .NET Framework 4.8. This prevents running the full Humanizer test suite on net48.\n\n## Problem\nThe generic overload `Enum.GetValues<T>()` was introduced in .NET 5. When targeting net48, this causes a compilation or runtime error, blocking the entire test suite from running on that framework.\n\n## Fix\nReplace `Enum.GetValues<GrammaticalGender>()` with `(GrammaticalGender[])Enum.GetValues(typeof(GrammaticalGender))` or add a `#if` guard for the net48 target.\n\n## Acceptance Criteria\n- [ ] `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net48` compiles and runs on Windows\n- [ ] No regressions on net10.0 or net8.0\n\n## Boundaries\n- Only fix the `Enum.GetValues<T>()` usage; do not change test logic\n- This is a pre-existing issue, not introduced by epic fn-3\n"
+  },
+  "epic_id": "fn-4-fix-net48-test-suite-blocker",
+  "schema_version": 2,
+  "tasks": []
+}

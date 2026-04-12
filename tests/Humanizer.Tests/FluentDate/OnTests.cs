@@ -1,4 +1,4 @@
-﻿public class OnTests
+public class OnTests
 {
     [Fact]
     public void OnJanuaryThe23rd() =>

@@ -1,4 +1,4 @@
-﻿[UseCulture("en-US")]
+[UseCulture("en-US")]
 public class TimeUnitToSymbolTests
 {
     [Theory]

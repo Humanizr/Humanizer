@@ -1,0 +1,586 @@
+locale: 'sl'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'in'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+    pluralRule: 'slovenian'
+    dataUnitPluralRule: 'slovenian'
+
+  phrases:
+    relativeDate:
+      now: 'sedaj'
+      never: 'nikoli'
+      past:
+        millisecond:
+          single: 'pred eno milisekundo'
+          multiple:
+            forms:
+              default: 'milisekundami'
+            beforeCount: 'pred'
+        second:
+          single: 'pred eno sekundo'
+          multiple:
+            forms:
+              default: 'sekundami'
+              singular: 'sekundama'
+              dual: 'sekundama'
+              plural: 'sekundama'
+            beforeCount: 'pred'
+        minute:
+          single: 'pred eno minuto'
+          multiple:
+            forms:
+              default: 'minutami'
+              singular: 'minutama'
+              dual: 'minutama'
+              plural: 'minutama'
+            beforeCount: 'pred'
+        hour:
+          single: 'pred eno uro'
+          multiple:
+            forms:
+              default: 'urami'
+              singular: 'urama'
+              dual: 'urama'
+              plural: 'urama'
+            beforeCount: 'pred'
+        day:
+          single: 'včeraj'
+          multiple:
+            forms:
+              default: 'dnevi'
+              singular: 'dnevoma'
+              dual: 'dnevoma'
+              plural: 'dnevoma'
+            beforeCount: 'pred'
+          template:
+            name: 'two'
+            value: 'pred 2 dnevoma'
+        week:
+          single: 'pred enim tednom'
+          multiple:
+            forms:
+              default: 'tedni'
+            beforeCount: 'pred'
+        month:
+          single: 'pred enim mesecem'
+          multiple:
+            forms:
+              default: 'meseci'
+              singular: 'mesecema'
+              dual: 'mesecema'
+              plural: 'mesecema'
+            beforeCount: 'pred'
+        year:
+          single: 'pred enim letom'
+          multiple:
+            forms:
+              default: 'leti'
+              singular: 'letoma'
+              dual: 'letoma'
+              plural: 'letoma'
+            beforeCount: 'pred'
+      future:
+        millisecond:
+          single: 'čez eno milisekundo'
+          multiple:
+            forms:
+              default: 'milisekund'
+            beforeCount: 'čez'
+        second:
+          single: 'čez eno sekundo'
+          multiple:
+            forms:
+              default: 'sekund'
+              singular: 'sekundi'
+              dual: 'sekundi'
+              paucal: 'sekunde'
+              plural: 'sekundi'
+            beforeCount: 'čez'
+        minute:
+          single: 'čez eno minuto'
+          multiple:
+            forms:
+              default: 'minut'
+              singular: 'minuti'
+              dual: 'minuti'
+              paucal: 'minute'
+              plural: 'minuti'
+            beforeCount: 'čez'
+        hour:
+          single: 'čez eno uro'
+          multiple:
+            forms:
+              default: 'ur'
+              singular: 'uri'
+              dual: 'uri'
+              paucal: 'ure'
+              plural: 'uri'
+            beforeCount: 'čez'
+        day:
+          single: 'jutri'
+          multiple:
+            forms:
+              default: 'dni'
+            beforeCount: 'čez'
+          template:
+            name: 'two'
+            value: 'čez 2 dni'
+        week:
+          single: 'čez en teden'
+          multiple:
+            forms:
+              default: 'tednov'
+            beforeCount: 'čez'
+        month:
+          single: 'čez en mesec'
+          multiple:
+            forms:
+              default: 'mesecev'
+              singular: 'meseca'
+              dual: 'meseca'
+              paucal: 'mesece'
+              plural: 'meseca'
+            beforeCount: 'čez'
+        year:
+          single: 'čez eno leto'
+          multiple:
+            forms:
+              default: 'let'
+              singular: 'leti'
+              dual: 'leti'
+              paucal: 'leta'
+              plural: 'leti'
+            beforeCount: 'čez'
+    duration:
+      zero: 'nič časa'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisekunda'
+          words: 'one milisekunda'
+        multiple:
+          forms:
+            default: 'milisekund'
+            singular: 'milisekundi'
+            dual: 'milisekundi'
+            paucal: 'milisekunde'
+            plural: 'milisekundi'
+      second:
+        single:
+          numeric: '1 sekunda'
+          words: 'one sekunda'
+        multiple:
+          forms:
+            default: 'sekund'
+            singular: 'sekundi'
+            dual: 'sekundi'
+            paucal: 'sekunde'
+            plural: 'sekundi'
+      minute:
+        single:
+          numeric: '1 minuta'
+          words: 'one minuta'
+        multiple:
+          forms:
+            default: 'minut'
+            singular: 'minuti'
+            dual: 'minuti'
+            paucal: 'minute'
+            plural: 'minuti'
+      hour:
+        single:
+          numeric: '1 ura'
+          words: 'one ura'
+        multiple:
+          forms:
+            default: 'ur'
+            singular: 'uri'
+            dual: 'uri'
+            paucal: 'ure'
+            plural: 'uri'
+      day:
+        single:
+          numeric: '1 dan'
+          words: 'one dan'
+        multiple:
+          forms:
+            default: 'dni'
+            singular: 'dneva'
+            dual: 'dneva'
+            plural: 'dneva'
+      week:
+        single:
+          numeric: '1 teden'
+          words: 'one teden'
+        multiple:
+          forms:
+            default: 'tednov'
+            singular: 'tedna'
+            dual: 'tedna'
+            paucal: 'tedne'
+            plural: 'tedna'
+      month:
+        single:
+          numeric: '1 mesec'
+          words: 'one mesec'
+        multiple:
+          forms:
+            default: 'mesecev'
+            singular: 'meseca'
+            dual: 'meseca'
+            paucal: 'mesece'
+            plural: 'meseca'
+      year:
+        single:
+          numeric: '1 leto'
+          words: 'one leto'
+        multiple:
+          forms:
+            default: 'let'
+            singular: 'leti'
+            dual: 'leti'
+            paucal: 'leta'
+            plural: 'leti'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bitov'
+          singular: 'bit'
+          dual: 'bita'
+          paucal: 'biti'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bajtov'
+          singular: 'bajt'
+          dual: 'bajta'
+          paucal: 'bajti'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobajtov'
+          singular: 'kilobajt'
+          dual: 'kilobajta'
+          paucal: 'kilobajti'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabajtov'
+          singular: 'megabajt'
+          dual: 'megabajta'
+          paucal: 'megabajti'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabajtov'
+          singular: 'gigabajt'
+          dual: 'gigabajta'
+          paucal: 'gigabajti'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabajtov'
+          singular: 'terabajt'
+          dual: 'terabajta'
+          paucal: 'terabajti'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'd.'
+      week:
+        symbol: 'ted.'
+      month:
+        symbol: 'mes.'
+      year:
+        symbol: 'l.'
+
+  number:
+    words:
+      engine: 'south-slavic-cardinal'
+      useCulture: true
+      maximumValue: 9223372036854775807
+      allowLongMin: false
+      zeroWord: 'nič'
+      minusWord: 'minus'
+      scaleFormDetector: 'slovenian'
+      numberComposition: 'inverted-tens-with-linker'
+      invertedTensLinker: 'in'
+      unitsMap:
+        - 'nič'
+        - 'ena'
+        - 'dva'
+        - 'tri'
+        - 'štiri'
+        - 'pet'
+        - 'šest'
+        - 'sedem'
+        - 'osem'
+        - 'devet'
+        - 'deset'
+        - 'enajst'
+        - 'dvanajst'
+        - 'trinajst'
+        - 'štirinajst'
+        - 'petnajst'
+        - 'šestnajst'
+        - 'sedemnajst'
+        - 'osemnajst'
+        - 'devetnajst'
+      tensMap:
+        - 'nič'
+        - 'deset'
+        - 'dvajset'
+        - 'trideset'
+        - 'štirideset'
+        - 'petdeset'
+        - 'šestdeset'
+        - 'sedemdeset'
+        - 'osemdeset'
+        - 'devetdeset'
+      hundredsMap:
+        - 'nič'
+        - 'sto'
+        - 'dvesto'
+        - 'tristo'
+        - 'štiristo'
+        - 'petsto'
+        - 'šeststo'
+        - 'sedemsto'
+        - 'osemsto'
+        - 'devetsto'
+      feminineOne: 'ena'
+      feminineTwo: 'dve'
+      scales:
+        -
+          value: 1000000000000000000
+          gender: 'masculine'
+          oneForm: 'trilijon'
+          singular: 'trilijon'
+          paucal: 'trilijona'
+          dual: 'trilijona'
+          trialQuadral: 'trilijone'
+          plural: 'trilijonov'
+        -
+          value: 1000000000000000
+          gender: 'feminine'
+          oneForm: 'bilijarda'
+          singular: 'bilijarda'
+          paucal: 'bilijarde'
+          dual: 'bilijarde'
+          trialQuadral: 'bilijarde'
+          plural: 'bilijard'
+        -
+          value: 1000000000000
+          gender: 'masculine'
+          oneForm: 'bilijon'
+          singular: 'bilijon'
+          paucal: 'bilijona'
+          dual: 'bilijona'
+          trialQuadral: 'bilijoni'
+          plural: 'bilijonov'
+        -
+          value: 1000000000
+          gender: 'feminine'
+          oneForm: 'milijarda'
+          singular: 'milijarda'
+          paucal: 'milijardi'
+          dual: 'milijardi'
+          trialQuadral: 'milijarde'
+          plural: 'milijard'
+        -
+          value: 1000000
+          gender: 'masculine'
+          oneForm: 'milijon'
+          singular: 'milijon'
+          paucal: 'milijona'
+          dual: 'milijona'
+          trialQuadral: 'milijone'
+          plural: 'milijonov'
+        -
+          value: 1000
+          gender: 'masculine'
+          oneForm: 'tisoč'
+          singular: 'tisoč'
+          paucal: 'tisoč'
+          dual: 'tisoč'
+          trialQuadral: 'tisoč'
+          plural: 'tisoč'
+
+    formatting:
+      negativeSign: '−'
+
+    parse:
+      engine: 'inverted-tens'
+      cardinalMap:
+        'nič': 0
+        nic: 0
+        en: 1
+        ena: 1
+        eno: 1
+        dva: 2
+        dve: 2
+        tri: 3
+        'štiri': 4
+        stiri: 4
+        pet: 5
+        'šest': 6
+        sest: 6
+        sedem: 7
+        osem: 8
+        devet: 9
+        deset: 10
+        enajst: 11
+        dvanajst: 12
+        trinajst: 13
+        'štirinajst': 14
+        stirinajst: 14
+        petnajst: 15
+        'šestnajst': 16
+        sestnajst: 16
+        sedemnajst: 17
+        osemnajst: 18
+        devetnajst: 19
+        dvajset: 20
+        trideset: 30
+        'štirideset': 40
+        stirideset: 40
+        petdeset: 50
+        'šestdeset': 60
+        sestdeset: 60
+        sedemdeset: 70
+        osemdeset: 80
+        devetdeset: 90
+        sto: 100
+        dvesto: 200
+        tristo: 300
+        'štiristo': 400
+        stiristo: 400
+        petsto: 500
+        'šeststo': 600
+        seststo: 600
+        sedemsto: 700
+        osemsto: 800
+        devetsto: 900
+        'tisoč': 1000
+        tisoc: 1000
+        milijon: 1000000
+        milijona: 1000000
+        milijonov: 1000000
+        milijarda: 1000000000
+        milijardi: 1000000000
+        bilijon: 1000000000000
+        bilijona: 1000000000000
+        bilijonov: 1000000000000
+        bilijarda: 1000000000000000
+        bilijarde: 1000000000000000
+        bilijard: 1000000000000000
+        trilijon: 1000000000000000000
+        trilijona: 1000000000000000000
+        trilijonov: 1000000000000000000
+      unitMap:
+        en: 1
+        ena: 1
+        eno: 1
+        dva: 2
+        dve: 2
+        tri: 3
+        'štiri': 4
+        stiri: 4
+        pet: 5
+        'šest': 6
+        sest: 6
+        sedem: 7
+        osem: 8
+        devet: 9
+      tensTokens:
+        devetdeset: 90
+        osemdeset: 80
+        sedemdeset: 70
+        'šestdeset': 60
+        sestdeset: 60
+        petdeset: 50
+        'štirideset': 40
+        stirideset: 40
+        trideset: 30
+        dvajset: 20
+      tensLinker: 'in'
+      scaleTokens:
+        - 'milijardi'
+        - 'milijonov'
+        - 'milijona'
+        - 'milijon'
+        - 'tisoč'
+        - 'tisoc'
+      negativePrefixes:
+        - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'DotSuffix'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'sever'
+      - 'sever-severovzhod'
+      - 'severovzhod'
+      - 'vzhod-severovzhod'
+      - 'vzhod'
+      - 'vzhod-jugovzhod'
+      - 'jugovzhod'
+      - 'jug-jugovzhod'
+      - 'jug'
+      - 'jug-jugozahod'
+      - 'jugozahod'
+      - 'zahod-jugozahod'
+      - 'zahod'
+      - 'zahod-severozahod'
+      - 'severozahod'
+      - 'sever-severozahod'
+    short:
+      - 'S'
+      - 'SSV'
+      - 'SV'
+      - 'VSV'
+      - 'V'
+      - 'VJV'
+      - 'JV'
+      - 'JJV'
+      - 'J'
+      - 'JJZ'
+      - 'JZ'
+      - 'ZJZ'
+      - 'Z'
+      - 'ZSZ'
+      - 'SZ'
+      - 'SSZ'

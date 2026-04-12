@@ -1,0 +1,19 @@
+{
+  "branch_name": "fn-4-fix-net48-test-suite-blocker",
+  "completion_review_status": "ship",
+  "completion_reviewed_at": "2026-04-10T04:30:00.000000Z",
+  "completion_review_note": "Superseded by fn-5-locale-parity-sign-off-verify-code.7. The net48 build break was caused by Enum.GetValues<GrammaticalGender>() in LocaleTheoryMatrixCompletenessTests.cs:379 not resolving under net48; fn-5.7 fixed it with an #if NET5_0_OR_GREATER guard (the Polyfill PackageReference approach was tried first but caused type conflicts) and verified dotnet build -f net48 succeeds on all platforms. fn-4 carried no tasks and required no separate work; closing as superseded with no executed tasks. See fn-5.7 commits 424ed0d2, 3f17c906.",
+  "created_at": "2026-04-09T12:59:13.763649Z",
+  "default_impl": null,
+  "default_review": null,
+  "default_sync": null,
+  "depends_on_epics": [],
+  "id": "fn-4-fix-net48-test-suite-blocker",
+  "next_task": 1,
+  "plan_review_status": "ship",
+  "plan_reviewed_at": "2026-04-09T13:28:38.536454Z",
+  "spec_path": ".flow/specs/fn-4-fix-net48-test-suite-blocker.md",
+  "status": "done",
+  "title": "Fix net48 test suite blocker: Enum.GetValues<T>() not available in .NET Framework 4.8",
+  "updated_at": "2026-04-10T04:29:39.314905Z"
+}

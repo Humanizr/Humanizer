@@ -49,6 +49,17 @@
 
 # vNext
 
+- Locale data now comes from checked-in YAML under `src/Humanizer/Locales` and is generated into the main `Humanizer` package.
+- All shipped locales now intentionally resolve the canonical localization surfaces, either locale-owned or through same-language `variantOf` inheritance.
+- High-range number support now includes locale-native `ToWords(long)` and `ToNumber(string)` coverage for supported locales, including English-family differences such as `en-GB` and `en-IN`.
+- The analyzer and namespace migration guidance now matches the bundled single-package layout.
+- `WordsToNumberExtension.ToNumber` and `IWordsToNumberConverter.Convert` now return `long` so high-range parsing can round-trip with the new locale data. This is a source-breaking change for code that stored the result in `int` or implemented the old converter contract directly.
+- `TryToNumber` and `IWordsToNumberConverter.TryConvert` now use the same long-based parser surface, so `out var` remains unambiguous for callers.
+- Clock notation now uses a unified `phrase-clock` engine for all 62 shipped locales, replacing the former `phrase-hour` and `relative-hour` engines and four handwritten residual leaf converters. `DefaultTimeOnlyToClockNotationConverter` is removed; all clock notation is now YAML-authored.
+- New `calendar:` surface with `months` and `monthsGenitive` arrays allows locale-authored month-name overrides threaded through `DateToOrdinalWords` and `DateOnlyToOrdinalWords`. Currently authored by bn, fa, he, ku, ta, and zu-ZA.
+- New `number.formatting.decimalSeparator` sub-block allows locale-authored decimal-separator overrides threaded through `ByteSize.ToString` and `MetricNumeralExtensions`. Currently authored by ar, fr-CH, and ku. Caller-supplied custom `NumberFormatInfo`/`IFormatProvider` is preserved as-is.
+- Date/time month names and decimal separators for overridden locales are now byte-identical across macOS, Linux, and Windows (both .NET 10 and .NET Framework 4.8 NLS).
+
 ### v2.1 - 2016-07-04
 
 [Fixed issues](https://github.com/Humanizr/Humanizer/issues?q=is%3Aclosed+milestone%3Av2.1)

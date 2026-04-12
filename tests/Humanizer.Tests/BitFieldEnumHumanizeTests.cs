@@ -1,4 +1,4 @@
-﻿[UseCulture("en")]
+[UseCulture("en")]
 public class BitFieldEnumHumanizeTests
 {
     [Fact]

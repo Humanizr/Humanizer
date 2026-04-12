@@ -1,0 +1,424 @@
+locale: 'ro'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'și'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitDetector: 'singular-plural'
+    dataUnitSuffixes:
+      singular: '_Singular'
+    prepositionMode: 'romanian-de'
+
+  phrases:
+    relativeDate:
+      now: 'acum'
+      never: 'niciodată'
+      past:
+        millisecond:
+          single: 'acum o milisecundă'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} milisecunde'
+        second:
+          single: 'acum o secundă'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} secunde'
+        minute:
+          single: 'acum un minut'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} minute'
+        hour:
+          single: 'acum o oră'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} ore'
+        day:
+          single: 'ieri'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} zile'
+          template:
+            name: 'two'
+            value: 'acum 2 zile'
+        week:
+          single: 'acum o săptămână'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} săptămâni'
+        month:
+          single: 'acum o lună'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} luni'
+        year:
+          single: 'acum un an'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'acum {count}{prep} ani'
+      future:
+        millisecond:
+          single: 'peste o milisecundă'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} milisecunde'
+        second:
+          single: 'peste o secundă'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} secunde'
+        minute:
+          single: 'peste un minut'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} minute'
+        hour:
+          single: 'peste o oră'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} ore'
+        day:
+          single: 'mâine'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} zile'
+          template:
+            name: 'two'
+            value: 'peste 2 zile'
+        week:
+          single: 'peste o săptămână'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} săptămâni'
+        month:
+          single: 'peste o lună'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} luni'
+        year:
+          single: 'peste un an'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'peste {count}{prep} ani'
+    duration:
+      zero: '0 secunde'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisecundă'
+          words: 'o milisecundă'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} milisecunde'
+      second:
+        single:
+          numeric: '1 secundă'
+          words: 'o secundă'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} secunde'
+      minute:
+        single:
+          numeric: '1 minut'
+          words: 'un minut'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} minute'
+      hour:
+        single:
+          numeric: '1 oră'
+          words: 'o oră'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} ore'
+      day:
+        single:
+          numeric: '1 zi'
+          words: 'o zi'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} zile'
+      week:
+        single:
+          numeric: '1 săptămână'
+          words: 'o săptămână'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} săptămâni'
+      month:
+        single:
+          numeric: '1 lună'
+          words: 'o lună'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} luni'
+      year:
+        single:
+          numeric: '1 an'
+          words: 'un an'
+        multiple:
+          countPlacement: none
+          forms:
+            default: '{count}{prep} ani'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bytes'
+          singular: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobytes'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabytes'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabytes'
+          singular: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabytes'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'sec.'
+      minute:
+        symbol: 'min.'
+      hour:
+        symbol: 'oră'
+      day:
+        symbol: 'zi'
+      week:
+        symbol: 'săptămână'
+      month:
+        symbol: 'lună'
+      year:
+        symbol: 'an'
+
+  number:
+    words:
+      engine: 'gendered-scale-ordinal'
+      zeroWord: 'zero'
+      minusWord: 'minus'
+      feminineSingular: 'o'
+      masculineOrdinalPrefix: 'al'
+      feminineOrdinalPrefix: 'a'
+      masculineOrdinalSuffix: 'lea'
+      feminineOrdinalSuffix: 'a'
+      joinGroups: 'și'
+      joinAboveTwenty: 'de'
+      unitsVariants:
+        1: 'unu|una|unu'
+        2: 'doi|două|două'
+        3: 'trei'
+        4: 'patru'
+        5: 'cinci'
+        6: 'șase'
+        7: 'șapte'
+        8: 'opt'
+        9: 'nouă'
+      teensVariants:
+        - 'zece'
+        - 'unsprezece'
+        - 'doisprezece|douăsprezece|douăsprezece'
+        - 'treisprezece'
+        - 'paisprezece'
+        - 'cincisprezece'
+        - 'șaisprezece'
+        - 'șaptesprezece'
+        - 'optsprezece'
+        - 'nouăsprezece'
+      tensMap:
+        2: 'douăzeci'
+        3: 'treizeci'
+        4: 'patruzeci'
+        5: 'cincizeci'
+        6: 'șaizeci'
+        7: 'șaptezeci'
+        8: 'optzeci'
+        9: 'nouăzeci'
+      ordinalUnderTenVariants:
+        1: 'primul|prima'
+        2: 'doilea|doua'
+        3: 'treilea|treia'
+        4: 'patrulea|patra'
+        5: 'cincilea|cincea'
+        6: 'șaselea|șasea'
+        7: 'șaptelea|șaptea'
+        8: 'optulea|opta'
+        9: 'nouălea|noua'
+      scales:
+        -
+          singular: 'o mie'
+          plural: 'mii'
+          countGender: 'feminine'
+        -
+          singular: 'un milion'
+          plural: 'milioane'
+          countGender: 'feminine'
+        -
+          singular: 'un miliard'
+          plural: 'miliarde'
+          countGender: 'feminine'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriodsAndDiacritics'
+      cardinalMap:
+        zero: 0
+        un: 1
+        unu: 1
+        o: 1
+        una: 1
+        doi: 2
+        doua: 2
+        trei: 3
+        patru: 4
+        cinci: 5
+        sase: 6
+        sapte: 7
+        opt: 8
+        noua: 9
+        zece: 10
+        unsprezece: 11
+        doisprezece: 12
+        douasprezece: 12
+        treisprezece: 13
+        paisprezece: 14
+        cincisprezece: 15
+        saisprezece: 16
+        saptesprezece: 17
+        optsprezece: 18
+        nouasprezece: 19
+        douazeci: 20
+        treizeci: 30
+        patruzeci: 40
+        cincizeci: 50
+        saizeci: 60
+        saptezeci: 70
+        optzeci: 80
+        nouazeci: 90
+        suta: 100
+        sute: 100
+        mie: 1000
+        mii: 1000
+        milion: 1000000
+        milioane: 1000000
+        miliard: 1000000000
+        miliarde: 1000000000
+      negativePrefixes:
+        - 'minus '
+      ignoredTokens:
+        - 'si'
+        - 'de'
+      useHundredMultiplier: true
+      allowInvariantIntegerInput: true
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      zeroAsPlainNumber: true
+      masculine:
+        prefix: 'al '
+        defaultSuffix: '-lea'
+        exactReplacements:
+          1: 'primul'
+      feminine:
+        prefix: 'a '
+        defaultSuffix: '-a'
+        exactReplacements:
+          1: 'prima'
+      neuter:
+        prefix: 'al '
+        defaultSuffix: '-lea'
+        exactReplacements:
+          1: 'primul'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    min0: 'ora {hour}'
+    defaultTemplate: 'ora {hour} și {minutes}'
+
+  compass:
+    full:
+      - 'nord'
+      - 'nord-nord-est'
+      - 'nord-est'
+      - 'est-nord-est'
+      - 'est'
+      - 'est-sud-est'
+      - 'sud-est'
+      - 'sud-sud-est'
+      - 'sud'
+      - 'sud-sud-vest'
+      - 'sud-vest'
+      - 'vest-sud-vest'
+      - 'vest'
+      - 'vest-nord-vest'
+      - 'nord-vest'
+      - 'nord-nord-vest'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSV'
+      - 'SV'
+      - 'VSV'
+      - 'V'
+      - 'VNV'
+      - 'NV'
+      - 'NNV'

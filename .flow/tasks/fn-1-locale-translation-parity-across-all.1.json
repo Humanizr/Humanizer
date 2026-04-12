@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-06T21:54:53.507911Z",
+  "depends_on": [
+    "fn-1-locale-translation-parity-across-all.9"
+  ],
+  "epic": "fn-1-locale-translation-parity-across-all",
+  "id": "fn-1-locale-translation-parity-across-all.1",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.1.md",
+  "status": "todo",
+  "title": "Add missing registry completeness tests and optional parity diagnostic",
+  "updated_at": "2026-04-07T00:41:09.218002Z"
+}
