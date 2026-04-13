@@ -12,17 +12,16 @@ public class OrdinalDatePatternTests
     {
         // pt-BR uses MasculineOrdinalWhenDayIsOne; day=1 should produce the masculine ordinal.
         var result = new DateTime(2015, 1, 1).ToOrdinalWords();
-        Assert.Contains("1", result); // The ordinal form includes the day
-        Assert.NotEqual("1 ", result[..2]); // Day 1 is ordinalized, not plain numeric "1 "
+        Assert.Equal("1\u00BA de janeiro de 2015", result);
     }
 
     [Fact]
     [UseCulture("pt-BR")]
     public void FormatDay_MasculineOrdinalWhenDayIsOne_NumericForNonFirstDay()
     {
-        // pt-BR day>1 should be plain numeric.
+        // pt-BR day>1 should be plain numeric, not ordinalized.
         var result = new DateTime(2015, 2, 15).ToOrdinalWords();
-        Assert.Contains("15", result);
+        Assert.Equal("15 de fevereiro de 2015", result);
     }
 
     [Fact]
@@ -63,7 +62,7 @@ public class OrdinalDatePatternTests
     public void Format_DateOnly_DotSuffix()
     {
         var result = new DateOnly(2022, 3, 15).ToOrdinalWords();
-        Assert.Contains("15.", result);
+        Assert.Equal("15. b\u0159ezna 2022", result);
     }
 
     [Fact]
@@ -71,7 +70,7 @@ public class OrdinalDatePatternTests
     public void Format_DateOnly_MasculineOrdinalWhenDayIsOne()
     {
         var result = new DateOnly(2015, 1, 1).ToOrdinalWords();
-        Assert.Contains("1", result);
+        Assert.Equal("1\u00BA de janeiro de 2015", result);
     }
 
     [Fact]
@@ -155,17 +154,18 @@ public class OrdinalDatePatternTests
     }
 
     [Fact]
-    public void Format_NoMmmmInTemplate_ReturnsUnchanged()
+    public void Format_NoMmmmInTemplate_DoesNotSubstituteMonths()
     {
         // Template without MMMM specifier — SubstituteMonth should return as-is.
-        var months = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        // Use distinctive names that would be visibly wrong if substituted.
+        var months = new[] { "CustomJan", "CustomFeb", "CustomMar", "CustomApr", "CustomMay", "CustomJun", "CustomJul", "CustomAug", "CustomSep", "CustomOct", "CustomNov", "CustomDec" };
         var pattern = new OrdinalDatePattern("{day} MMM yyyy", OrdinalDateDayMode.Numeric, months: months);
 
         using var _ = new CultureSwap(new CultureInfo("en"));
         var result = pattern.Format(new DateTime(2022, 1, 15));
-        // Should not contain "Jan" substitution since only MMMM (4+ Ms) triggers it.
-        // The platform's short month name is used instead.
-        Assert.NotNull(result);
+        // Only MMMM (4+ Ms) triggers substitution; MMM should use the platform's short name.
+        Assert.DoesNotContain("CustomJan", result);
+        Assert.Contains("Jan", result);
     }
 
     // -----------------------------------------------------------------------
@@ -223,11 +223,41 @@ public class OrdinalDatePatternTests
     // ReplaceDayMarker — fallback when numeric day text not found before marker
     // -----------------------------------------------------------------------
 
-    // This is tested indirectly through the various day modes above.
+    [Fact]
+    public void Format_WhenMarkerHasNoPrecedingNumericDay_ReplacesMarkerFallback()
+    {
+        // Use a template with a literal <<DAY>> marker but no {day} placeholder.
+        // This forces markerIndex >= 0 but dayStart < 0, triggering the Replace fallback.
+        var pattern = new OrdinalDatePattern("'<<DAY>>' MMMM yyyy", OrdinalDateDayMode.Ordinal);
+
+        using var _ = new CultureSwap(new CultureInfo("en"));
+        var result = pattern.Format(new DateTime(2022, 1, 1));
+
+        Assert.DoesNotContain("<<DAY>>", result);
+        Assert.Contains("1st", result);
+        Assert.Contains("January", result);
+    }
 
     // -----------------------------------------------------------------------
     // StripDirectionalityControls
     // -----------------------------------------------------------------------
+
+    [Fact]
+    public void Format_StripsLiteralDirectionalityControls()
+    {
+        // Embed literal bidi controls in the template to deterministically exercise
+        // StripDirectionalityControls regardless of platform culture data.
+        var pattern = new OrdinalDatePattern("\u200E{day} MMMM yyyy\u061C", OrdinalDateDayMode.Numeric);
+
+        using var _ = new CultureSwap(new CultureInfo("en"));
+        var result = pattern.Format(new DateTime(2022, 1, 25));
+
+        Assert.DoesNotContain('\u200E', result);
+        Assert.DoesNotContain('\u200F', result);
+        Assert.DoesNotContain('\u061C', result);
+        Assert.Contains("25", result);
+        Assert.Contains("January", result);
+    }
 
     [Fact]
     [UseCulture("ar")]
@@ -266,16 +296,44 @@ public class OrdinalDatePatternTests
     // -----------------------------------------------------------------------
 
     [Fact]
-    public void Format_WithHijriMonths_UsesHijriNamesForHijriCalendar()
+    public void Format_WithHijriMonths_UsesHijriNamesWhenCalendarIsHijri()
+    {
+        var hijriMonths = new[] { "Muh", "Saf", "Rab1", "Rab2", "Jum1", "Jum2", "Raj", "Sha", "Ram", "Shaw", "DhQ", "DhH" };
+        var months = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+        // Use Native calendar mode with ar-SA, whose default calendar is UmAlQura/Hijri.
+        var culture = new CultureInfo("ar-SA");
+        var calendar = culture.DateTimeFormat.Calendar;
+        var date = new DateTime(2022, 4, 2);
+        var expectedHijriMonth = hijriMonths[calendar.GetMonth(date) - 1];
+
+        var pattern = new OrdinalDatePattern(
+            "{day} MMMM yyyy",
+            OrdinalDateDayMode.Numeric,
+            OrdinalDateCalendarMode.Native,
+            months: months,
+            hijriMonths: hijriMonths);
+
+        using var _ = new CultureSwap(culture);
+        var result = pattern.Format(date);
+
+        Assert.Contains(expectedHijriMonth, result);
+        // Gregorian month names must NOT appear.
+        Assert.DoesNotContain(months[date.Month - 1], result);
+    }
+
+    [Fact]
+    public void Format_WithHijriMonths_UsesGregorianMonthsForNonHijriCalendar()
     {
         var hijriMonths = new[] { "Muh", "Saf", "Rab1", "Rab2", "Jum1", "Jum2", "Raj", "Sha", "Ram", "Shaw", "DhQ", "DhH" };
         var months = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
         var pattern = new OrdinalDatePattern("{day} MMMM yyyy", OrdinalDateDayMode.Numeric, months: months, hijriMonths: hijriMonths);
 
-        // Use a culture that defaults to Gregorian -- hijri months are NOT used.
+        // Under a Gregorian culture, hijri months are NOT used.
         using var _ = new CultureSwap(new CultureInfo("en"));
         var result = pattern.Format(new DateTime(2022, 1, 15));
         Assert.Contains("Jan", result);
+        Assert.DoesNotContain("Muh", result);
     }
 
     // -----------------------------------------------------------------------
@@ -329,9 +387,13 @@ public class OrdinalDatePatternTests
     [UseCulture("nl")]
     public void FormatDay_Numeric_PlainNumber()
     {
-        // Dutch uses Numeric day mode.
+        // Dutch uses Numeric day mode -- plain number, no suffix.
         var result = new DateTime(2022, 1, 25).ToOrdinalWords();
         Assert.Contains("25", result);
+        // Must NOT have ordinal suffix or dot suffix.
+        Assert.DoesNotContain("25th", result);
+        Assert.DoesNotContain("25.", result);
+        Assert.DoesNotContain("25e", result);
     }
 
     // -----------------------------------------------------------------------

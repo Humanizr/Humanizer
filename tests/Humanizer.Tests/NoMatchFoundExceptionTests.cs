@@ -7,7 +7,8 @@ public class NoMatchFoundExceptionTests
     {
         var ex = new NoMatchFoundException();
 
-        Assert.NotNull(ex.Message);
+        Assert.NotEmpty(ex.Message);
+        Assert.Contains(nameof(NoMatchFoundException), ex.Message);
         Assert.Null(ex.InnerException);
     }
 
