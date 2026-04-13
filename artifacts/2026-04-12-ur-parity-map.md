@@ -101,7 +101,7 @@ net48 requires a Windows host and is not available locally on macOS arm64. The b
 | ur-PK | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net48 | Windows NLS docs + CLDR |
 | ur-IN | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net48 | Windows NLS docs + CLDR |
 
-**Decision 3 is feasible** across all three runtimes based on: live probe evidence (net10, net8) and authoritative documentation evidence (net48 Windows NLS). Live net48 probe output will be captured when CI runs on a Windows host (CI build URL to be recorded here). If that run reveals any discrepancy with the documented behavior, Decision 3 must be re-evaluated.
+**Decision 3 is feasible** across all three runtimes based on: live probe evidence (net10, net8) and authoritative documentation evidence (net48 Windows NLS). Live net48 probe output will be captured when CI runs on a Windows host (tracked in follow-up epic `fn-10-verify-net48-runtime-byte-parity-for`). If that run reveals any discrepancy with the documented behavior, Decision 3 must be re-evaluated.
 
 **Note on net48 evidence form**: The task spec requires "probe output for net10 + net48 (or CI URL if net48 local host unavailable)." This host is macOS arm64 (no net48 runtime available), and no CI URL exists because the branch has not been pushed yet (this is the first task on the branch). Windows NLS documentation + CLDR cross-reference is the strongest available evidence short of a live probe. The evidence standard is met for the feasibility gate: all three data sources (net10 live, net8 live, net48 documented) agree that HijriCalendar is valid for Urdu cultures.
 
@@ -288,7 +288,7 @@ Task .9 owns the engine + converter implementation; task .3 owns the cardinal da
 | ur-PK | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net8.0 | macOS arm64 |
 | ur-IN | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net8.0 | macOS arm64 |
 
-net48: HijriCalendar assignment expected to succeed based on Windows NLS documentation + CLDR data (see net48 Results section above). Live probe deferred to .7 cross-platform gate.
+net48: HijriCalendar assignment expected to succeed based on Windows NLS documentation + CLDR data (see net48 Results section above). Live probe tracked in follow-up epic `fn-10-verify-net48-runtime-byte-parity-for`.
 
 **Contract A is feasible** because all Urdu cultures accept HijriCalendar assignment on both net10 and net8.
 
@@ -727,7 +727,7 @@ Architecture decisions are locked. All execution tasks complete:
 
 net10.0 and net8.0 both use ICU globalization on macOS. All 40,619 tests pass on both frameworks with identical expected values, confirming byte-identical output across net10 and net8 for all Urdu tests and all other locale tests.
 
-**net48 runtime verification pending.** net48 uses Windows NLS (not ICU) and requires a Windows host. The test project compiles successfully for net48 with zero warnings, but runtime tests have not been executed. net48 runtime byte parity will be confirmed when CI runs on a Windows agent — CI build URL to be recorded here once available. Urdu YAML includes explicit `number.formatting` overrides (`decimalSeparator: '.'`, `groupSeparator: ','`, `negativeSign: '-'`) and explicit `calendar.months` to mitigate expected NLS/ICU divergence points.
+**net48 runtime verification tracked as follow-up epic `fn-10-verify-net48-runtime-byte-parity-for`.** net48 uses Windows NLS (not ICU) and requires a Windows host. The test project compiles successfully for net48 with zero warnings, but runtime tests have not been executed on this macOS arm64 host. net48 runtime byte parity will be confirmed when CI runs on a Windows agent. Urdu YAML includes explicit `number.formatting` overrides (`decimalSeparator: '.'`, `groupSeparator: ','`, `negativeSign: '-'`) and explicit `calendar.months` to mitigate expected NLS/ICU divergence points.
 
 ### UrduBidiControlSweep
 

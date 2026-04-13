@@ -1,0 +1,13 @@
+{
+  "branch_name": "fn-10-verify-net48-runtime-byte-parity-for",
+  "created_at": "2026-04-13T07:20:16.568935Z",
+  "depends_on_epics": [],
+  "id": "fn-10-verify-net48-runtime-byte-parity-for",
+  "next_task": 1,
+  "plan_review_status": "unknown",
+  "plan_reviewed_at": null,
+  "spec_path": ".flow/specs/fn-10-verify-net48-runtime-byte-parity-for.md",
+  "status": "open",
+  "title": "Verify net48 runtime byte parity for Urdu locale on Windows CI",
+  "updated_at": "2026-04-13T07:20:16.569136Z"
+}
