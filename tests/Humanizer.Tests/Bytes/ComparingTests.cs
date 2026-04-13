@@ -36,4 +36,112 @@ public class ComparingTests
 
         Assert.Equal(expected.Select(ByteSize.Parse), list);
     }
+
+    [Fact]
+    public void EqualsWithNull()
+    {
+        var size = ByteSize.FromBytes(1);
+        Assert.False(size.Equals((object?)null));
+    }
+
+    [Fact]
+    public void EqualsWithNonByteSizeObject()
+    {
+        var size = ByteSize.FromBytes(1);
+        Assert.False(size.Equals("not a ByteSize"));
+    }
+
+    [Fact]
+    public void EqualsWithSameByteSize()
+    {
+        var size1 = ByteSize.FromBytes(1);
+        object size2 = ByteSize.FromBytes(1);
+        Assert.True(size1.Equals(size2));
+    }
+
+    [Fact]
+    public void EqualsWithDifferentByteSize()
+    {
+        var size1 = ByteSize.FromBytes(1);
+        object size2 = ByteSize.FromBytes(2);
+        Assert.False(size1.Equals(size2));
+    }
+
+    [Fact]
+    public void GetHashCodeReturnsConsistentValue()
+    {
+        var size1 = ByteSize.FromBytes(1);
+        var size2 = ByteSize.FromBytes(1);
+        Assert.Equal(size1.GetHashCode(), size2.GetHashCode());
+    }
+
+    [Fact]
+    public void CompareToNullReturnsPositive()
+    {
+        var size = ByteSize.FromBytes(1);
+        Assert.Equal(1, size.CompareTo(null));
+    }
+
+    [Fact]
+    public void CompareToNonByteSizeThrows()
+    {
+        var size = ByteSize.FromBytes(1);
+        Assert.Throws<ArgumentException>(() => size.CompareTo("not a ByteSize"));
+    }
+
+    [Fact]
+    public void EqualityOperator()
+    {
+        var size1 = ByteSize.FromBytes(1);
+        var size2 = ByteSize.FromBytes(1);
+        Assert.True(size1 == size2);
+    }
+
+    [Fact]
+    public void InequalityOperator()
+    {
+        var size1 = ByteSize.FromBytes(1);
+        var size2 = ByteSize.FromBytes(2);
+        Assert.True(size1 != size2);
+    }
+
+    [Fact]
+    public void LessThanOperator()
+    {
+        var size1 = ByteSize.FromBytes(1);
+        var size2 = ByteSize.FromBytes(2);
+        Assert.True(size1 < size2);
+        Assert.False(size2 < size1);
+    }
+
+    [Fact]
+    public void LessThanOrEqualOperator()
+    {
+        var size1 = ByteSize.FromBytes(1);
+        var size2 = ByteSize.FromBytes(2);
+        var size3 = ByteSize.FromBytes(1);
+        Assert.True(size1 <= size2);
+        Assert.True(size1 <= size3);
+        Assert.False(size2 <= size1);
+    }
+
+    [Fact]
+    public void GreaterThanOperator()
+    {
+        var size1 = ByteSize.FromBytes(2);
+        var size2 = ByteSize.FromBytes(1);
+        Assert.True(size1 > size2);
+        Assert.False(size2 > size1);
+    }
+
+    [Fact]
+    public void GreaterThanOrEqualOperator()
+    {
+        var size1 = ByteSize.FromBytes(2);
+        var size2 = ByteSize.FromBytes(1);
+        var size3 = ByteSize.FromBytes(2);
+        Assert.True(size1 >= size2);
+        Assert.True(size1 >= size3);
+        Assert.False(size2 >= size1);
+    }
 }

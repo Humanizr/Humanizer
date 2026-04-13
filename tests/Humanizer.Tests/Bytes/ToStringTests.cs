@@ -77,4 +77,138 @@ public class ToStringTests
     [Fact]
     public void ReturnsBytesViaGeneralFormat() =>
         Assert.Equal("10 B", $"{ByteSize.FromBytes(10)}");
+
+    [Fact]
+    public void LargestWholeNumberSymbolReturnsTerabytes() =>
+        Assert.Equal("TB", ByteSize.FromTerabytes(2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolReturnsGigabytes() =>
+        Assert.Equal("GB", ByteSize.FromGigabytes(2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolReturnsMegabytes() =>
+        Assert.Equal("MB", ByteSize.FromMegabytes(2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolReturnsKilobytes() =>
+        Assert.Equal("KB", ByteSize.FromKilobytes(2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolReturnsBytes() =>
+        Assert.Equal("B", ByteSize.FromBytes(2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolReturnsBits() =>
+        Assert.Equal("b", ByteSize.FromBits(2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberFullWordReturnsTerabytes() =>
+        Assert.Equal("terabytes", ByteSize.FromTerabytes(2).LargestWholeNumberFullWord);
+
+    [Fact]
+    public void LargestWholeNumberFullWordReturnsGigabytes() =>
+        Assert.Equal("gigabytes", ByteSize.FromGigabytes(2).LargestWholeNumberFullWord);
+
+    [Fact]
+    public void LargestWholeNumberFullWordReturnsMegabytes() =>
+        Assert.Equal("megabytes", ByteSize.FromMegabytes(2).LargestWholeNumberFullWord);
+
+    [Fact]
+    public void LargestWholeNumberFullWordReturnsKilobytes() =>
+        Assert.Equal("kilobytes", ByteSize.FromKilobytes(2).LargestWholeNumberFullWord);
+
+    [Fact]
+    public void LargestWholeNumberFullWordReturnsBytes() =>
+        Assert.Equal("bytes", ByteSize.FromBytes(2).LargestWholeNumberFullWord);
+
+    [Fact]
+    public void LargestWholeNumberFullWordReturnsBits() =>
+        Assert.Equal("bits", ByteSize.FromBits(2).LargestWholeNumberFullWord);
+
+    [Theory]
+    [InlineData(2d * 1024 * 1024 * 1024 * 1024, 2d)]
+    [InlineData(2d * 1024 * 1024 * 1024, 2d)]
+    [InlineData(2d * 1024 * 1024, 2d)]
+    [InlineData(2d * 1024, 2d)]
+    [InlineData(2, 2d)]
+    public void LargestWholeNumberValueReturnsTwoForEachTier(double bytes, double expected) =>
+        Assert.Equal(expected, ByteSize.FromBytes(bytes).LargestWholeNumberValue);
+
+    [Fact]
+    public void LargestWholeNumberValueReturnsBitsWhenLessThanOneByte()
+    {
+        var result = ByteSize.FromBits(4);
+        Assert.Equal(4, result.LargestWholeNumberValue);
+    }
+
+    [Fact]
+    public void LargestWholeNumberSymbolNegativeTerabytes() =>
+        Assert.Equal("TB", ByteSize.FromTerabytes(-2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolNegativeGigabytes() =>
+        Assert.Equal("GB", ByteSize.FromGigabytes(-2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolNegativeMegabytes() =>
+        Assert.Equal("MB", ByteSize.FromMegabytes(-2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolNegativeKilobytes() =>
+        Assert.Equal("KB", ByteSize.FromKilobytes(-2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolNegativeBytes() =>
+        Assert.Equal("B", ByteSize.FromBytes(-2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void LargestWholeNumberSymbolNegativeBits() =>
+        Assert.Equal("b", ByteSize.FromBits(-2).LargestWholeNumberSymbol);
+
+    [Fact]
+    public void ToStringWithNullFormatUsesGeneral() =>
+        Assert.Equal("10 KB", ByteSize.FromKilobytes(10).ToString((string?)null));
+
+    [Fact]
+    public void ToStringWithUnitOnlyFormat() =>
+        Assert.Equal("10 KB", ByteSize.FromKilobytes(10).ToString("KB"));
+
+    [Fact]
+    public void ToStringWithHashFormat() =>
+        Assert.Equal("10 KB", ByteSize.FromKilobytes(10).ToString("#.## KB"));
+
+    [Fact]
+    public void ToStringDefaultFallbackFormatsLargestWholeNumber()
+    {
+        // Format with no unit symbol or # or 0 triggers fallback formatting
+        var result = ByteSize.FromKilobytes(10).ToString("N2");
+        Assert.Contains("KB", result);
+    }
+
+    [Fact]
+    public void ToFullWordsWithFormat()
+    {
+        var result = ByteSize.FromKilobytes(10).ToFullWords("KB");
+        Assert.Contains("kilobytes", result);
+    }
+
+    [Fact]
+    public void ToFullWordsWithNullFormat() =>
+        Assert.Equal("10 kilobytes", ByteSize.FromKilobytes(10).ToFullWords());
+
+    [Fact]
+    public void ToStringWithNullProvider()
+    {
+        var result = ByteSize.FromKilobytes(10).ToString((IFormatProvider?)null);
+        Assert.Contains("KB", result);
+    }
+
+    [Fact]
+    public void ToStringIFormattableWithNullFormatAndProvider()
+    {
+        var size = ByteSize.FromKilobytes(10);
+        var result = ((IFormattable)size).ToString(null, null);
+        Assert.Contains("KB", result);
+    }
 }

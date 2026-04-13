@@ -317,4 +317,106 @@ public class TruncatorTests
     [InlineData("Null truncation string truncates to truncate length without truncation string", 7, null, "string")]
     public void TruncateWithTruncationStringAndDynamicNumberOfCharactersAndPreserveWordsTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
+
+    // -- Additional tail-branch coverage tests --
+
+    [Theory(DisplayName = "22 - FixedLengthTruncator null truncation string branches")]
+    [InlineData("Text longer than length", 5, null, "Text ", TruncateFrom.Right)]
+    [InlineData("Text longer than length", 5, null, "ength", TruncateFrom.Left)]
+    public void FixedLengthTruncatorNullTruncationString(string input, int length, string? truncationString, string expectedOutput, TruncateFrom from) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedLength, from));
+
+    [Theory(DisplayName = "23 - FixedLengthTruncator truncation string longer than length")]
+    [InlineData("Text longer than truncate length", 3, "very long truncation string", "Tex", TruncateFrom.Right)]
+    [InlineData("Text longer than truncate length", 3, "very long truncation string", "gth", TruncateFrom.Left)]
+    public void FixedLengthTruncatorTruncationStringLongerThanLength(string input, int length, string truncationString, string expectedOutput, TruncateFrom from) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedLength, from));
+
+    [Theory(DisplayName = "24 - FixedNumberOfWordsTruncator word at end of string without trailing whitespace")]
+    [InlineData("SingleWord", 0, "...", "...SingleWord", TruncateFrom.Left)]
+    [InlineData("one two three", 1, "...", "...three", TruncateFrom.Left)]
+    public void FixedNumberOfWordsTruncatorFromLeftSingleWordFallthrough(string input, int length, string? truncationString, string expectedOutput, TruncateFrom from) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords, from));
+
+    [Theory(DisplayName = "25 - FixedNumberOfWordsTruncator single word fallthrough from right")]
+    [InlineData("word", 0, "...", "word...")]
+    public void FixedNumberOfWordsTruncatorSingleWordFallthroughFromRight(string input, int length, string? truncationString, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords));
+
+    [Theory(DisplayName = "26 - FixedNumberOfCharactersTruncator additional branches")]
+    [InlineData("a-b-c-d-e-f", 4, ".", "a-b-c.", TruncateFrom.Right)]
+    [InlineData("a-b-c-d-e-f", 4, ".", ".d-e-f", TruncateFrom.Left)]
+    [InlineData("a--b--c", 2, "", "a--b", TruncateFrom.Right)]
+    [InlineData("a--b--c", 2, "", "b--c", TruncateFrom.Left)]
+    public void FixedNumberOfCharactersTruncatorAdditionalBranches(string input, int length, string truncationString, string expectedOutput, TruncateFrom from) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfCharacters, from));
+
+    [Theory(DisplayName = "27 - DynamicLengthAndPreserveWordsTruncator effective length zero from right")]
+    [InlineData("Hello World", 3, "...", "...")]
+    [InlineData("Hello World", 2, "..", "..")]
+    [InlineData("Hello World", 1, ".", ".")]
+    public void DynamicLengthAndPreserveWordsTruncatorEffectiveLengthZeroFromRight(string input, int length, string truncationString, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicLengthAndPreserveWords));
+
+    [Theory(DisplayName = "28 - DynamicLengthAndPreserveWordsTruncator allowed content zero from left")]
+    [InlineData("Hello World", 3, "...", "...")]
+    [InlineData("Hello World", 2, "..", "..")]
+    [InlineData("Hello World", 1, ".", ".")]
+    public void DynamicLengthAndPreserveWordsTruncatorAllowedContentZeroFromLeft(string input, int length, string truncationString, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "29 - DynamicLengthAndPreserveWordsTruncator no space found backtrack from right")]
+    [InlineData("Verylongword end", 7, "...", "...")]
+    public void DynamicLengthAndPreserveWordsTruncatorNoSpaceBacktrackFromRight(string input, int length, string truncationString, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicLengthAndPreserveWords));
+
+    [Theory(DisplayName = "30 - DynamicLengthAndPreserveWordsTruncator whitespace-only prefix from right")]
+    [InlineData("  longword other", 5, "...", "...")]
+    public void DynamicLengthAndPreserveWordsTruncatorWhitespaceOnlyPrefixFromRight(string input, int length, string truncationString, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicLengthAndPreserveWords));
+
+    [Theory(DisplayName = "31 - DynamicLengthAndPreserveWordsTruncator candidate too long from left")]
+    [InlineData("Verylongword end", 7, "...", "...end")]
+    public void DynamicLengthAndPreserveWordsTruncatorCandidateTooLongFromLeft(string input, int length, string truncationString, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "32 - DynamicNumberOfCharactersAndPreserveWordsTruncator delimiter longer than totalLength right")]
+    [InlineData("abc def ghi", 2, "....", "")]
+    public void DynCharPreserveWordsDelimiterLongerThanTotalRight(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords));
+
+    [Theory(DisplayName = "33 - DynamicNumberOfCharactersAndPreserveWordsTruncator delimiter longer than totalLength left")]
+    [InlineData("abc def ghi", 2, "....", "")]
+    public void DynCharPreserveWordsDelimiterLongerThanTotalLeft(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "34 - DynamicNumberOfCharactersAndPreserveWordsTruncator no complete word fits right")]
+    [InlineData("Verylongword other", 5, "...", "...")]
+    public void DynCharPreserveWordsNoCompleteWordFitsRight(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords));
+
+    [Theory(DisplayName = "35 - DynamicNumberOfCharactersAndPreserveWordsTruncator no complete word fits left")]
+    [InlineData("other Verylongword", 5, "...", "...")]
+    public void DynCharPreserveWordsNoCompleteWordFitsLeft(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "36 - DynamicNumberOfCharactersAndPreserveWordsTruncator whitespace input")]
+    [InlineData("   ", 1, "...", "   ")]
+    public void DynCharPreserveWordsWhitespaceOnlyInput(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords));
+
+    [Theory(DisplayName = "37 - DynamicNumberOfCharactersAndPreserveWordsTruncator delimiter >= totalLength with value fitting")]
+    [InlineData("ab", 2, "....", "ab")]
+    public void DynCharPreserveWordsDelimiterLongerThanTotalButValueFits(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords));
+
+    [Theory(DisplayName = "38 - DynamicNumberOfCharactersAndPreserveWordsTruncator prefix alphaLength zero right")]
+    [InlineData("---  ---  word", 3, "...", "...")]
+    public void DynCharPreserveWordsPrefixAlphaZeroRight(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords));
+
+    [Theory(DisplayName = "39 - DynamicNumberOfCharactersAndPreserveWordsTruncator suffix alphaLength zero left")]
+    [InlineData("word  ---  ---", 3, "...", "...")]
+    public void DynCharPreserveWordsSuffixAlphaZeroLeft(string input, int length, string delimiter, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, delimiter, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
 }

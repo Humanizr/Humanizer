@@ -173,4 +173,46 @@ public class ParsingTests
     [Fact]
     public void ParseTerabytes() =>
         Assert.Equal(ByteSize.FromTerabytes(100), ByteSize.Parse("100TB"));
+
+    [Theory]
+    [InlineData("Infinityb")]
+    [InlineData("-Infinityb")]
+    [InlineData("NaNb")]
+    public void TryParseReturnsFalseOnNonFiniteBits(string input)
+    {
+        Assert.False(ByteSize.TryParse(input, out var result));
+        Assert.Equal(default, result);
+    }
+
+    [Fact]
+    public void TryParseReturnsFalseOnFractionalBits()
+    {
+        Assert.False(ByteSize.TryParse("1.5b", out var result));
+        Assert.Equal(default, result);
+    }
+
+    [Theory]
+    [InlineData("99999999999999999999b")]
+    [InlineData("-99999999999999999999b")]
+    public void TryParseReturnsFalseOnBitsOutOfRange(string input)
+    {
+        Assert.False(ByteSize.TryParse(input, out var result));
+        Assert.Equal(default, result);
+    }
+
+    [Fact]
+    public void ParseNegativeBytes() =>
+        Assert.Equal(ByteSize.FromBytes(-100), ByteSize.Parse("-100B"));
+
+    [Fact]
+    public void ParseNegativeKilobytes() =>
+        Assert.Equal(ByteSize.FromKilobytes(-50), ByteSize.Parse("-50KB"));
+
+    [Fact]
+    public void ParseGigabytesDecimal() =>
+        Assert.Equal(ByteSize.FromGigabytes(1.5), ByteSize.Parse("1.5GB"));
+
+    [Fact]
+    public void ParseTerabytesDecimal() =>
+        Assert.Equal(ByteSize.FromTerabytes(2.5), ByteSize.Parse("2.5TB"));
 }

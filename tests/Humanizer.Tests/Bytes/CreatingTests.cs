@@ -88,4 +88,50 @@ public class CreatingTests
         Assert.Equal(1649267441664, result.Bytes);
         Assert.Equal(1.5, result.Terabytes);
     }
+
+    [Fact]
+    public void FromBitsLongMinValue()
+    {
+        var result = ByteSize.FromBits(long.MinValue);
+
+        Assert.Equal(long.MinValue, result.Bits);
+        Assert.Equal(long.MinValue / 8d, result.Bytes);
+    }
+
+    [Fact]
+    public void FromBitsLongMaxValue()
+    {
+        var result = ByteSize.FromBits(long.MaxValue);
+
+        Assert.Equal(long.MaxValue, result.Bits);
+        Assert.Equal(long.MaxValue / 8d, result.Bytes);
+    }
+
+    [Fact]
+    public void FromBitsZero()
+    {
+        var result = ByteSize.FromBits(0);
+
+        Assert.Equal(0, result.Bits);
+        Assert.Equal(0, result.Bytes);
+    }
+
+    [Fact]
+    public void FromBytesNegative()
+    {
+        var result = ByteSize.FromBytes(-1024);
+
+        Assert.Equal(-1024, result.Bytes);
+        Assert.Equal(-1, result.Kilobytes);
+    }
+
+    [Fact]
+    public void FromBytesZero()
+    {
+        var result = ByteSize.FromBytes(0);
+
+        Assert.Equal(0, result.Bits);
+        Assert.Equal(0, result.Bytes);
+        Assert.Equal(0, result.Kilobytes);
+    }
 }
