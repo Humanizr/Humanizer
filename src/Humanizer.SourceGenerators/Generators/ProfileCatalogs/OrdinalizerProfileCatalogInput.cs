@@ -117,6 +117,7 @@ public sealed partial class HumanizerSourceGenerator
                 "modulo-suffix" => CreateModuloSuffixOrdinalizerExpression(profile.Root),
                 "template" => CreateTemplateOrdinalizerExpression(profile.Root),
                 "word-form-template" => CreateWordFormTemplateOrdinalizerExpression(profile.Root, useCultureParameter),
+                "number-word-suffix" => CreateNumberWordSuffixOrdinalizerExpression(profile.Root, useCultureParameter),
                 _ => CreateConventionalOrdinalizerExpression(profile.Engine, useCultureParameter)
             };
         }
@@ -216,6 +217,32 @@ public sealed partial class HumanizerSourceGenerator
 
             return "new(" + normalPattern + ", " + abbreviationPattern + ")";
         }
+
+        static string CreateNumberWordSuffixOrdinalizerExpression(JsonElement root, bool useCultureParameter)
+        {
+            var masculineBlock = CreateNumberWordSuffixGenderBlockExpression(GetRequiredProperty(root, "masculine"));
+            var feminineBlock = root.TryGetProperty("feminine", out var feminine) && feminine.ValueKind == JsonValueKind.Object
+                ? CreateNumberWordSuffixGenderBlockExpression(feminine)
+                : masculineBlock;
+
+            var neuterFallback = GetOptionalString(root, "neuterFallback") ?? "masculine";
+            var neuterGender = neuterFallback.Equals("feminine", StringComparison.OrdinalIgnoreCase)
+                ? "GrammaticalGender.Feminine"
+                : "GrammaticalGender.Masculine";
+
+            return "new NumberWordSuffixOrdinalizer(" +
+                   (useCultureParameter ? "culture" : "CultureInfo.InvariantCulture") + ", new(" +
+                   masculineBlock + ", " +
+                   feminineBlock + ", " +
+                   neuterGender +
+                   "))";
+        }
+
+        static string CreateNumberWordSuffixGenderBlockExpression(JsonElement root) =>
+            "new(" +
+            QuoteLiteral(GetRequiredString(root, "defaultSuffix")) + ", " +
+            CreateNullableIntStringFrozenDictionaryExpression(root, "exactReplacements").Replace("null", "FrozenDictionary<int, string>.Empty") +
+            ")";
 
         static string CreateConventionalOrdinalizerExpression(string engine, bool useCultureParameter)
         {
