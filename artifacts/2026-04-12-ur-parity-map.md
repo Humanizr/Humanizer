@@ -10,18 +10,18 @@
 
 | Surface | Status |
 |---|---|
-| list | missing |
-| formatter | missing |
-| phrases | missing |
-| number.words | missing |
-| number.parse | missing |
-| number.formatting | missing (override needed) |
-| ordinal.numeric | missing |
-| ordinal.date | missing |
-| ordinal.dateOnly | missing |
-| clock | missing |
-| compass | missing |
-| calendar | missing (Hijri extension needed) |
+| list | authored (.5) |
+| formatter | authored (.2) |
+| phrases | authored (.2) |
+| number.words | authored (.3) |
+| number.parse | authored (.3) |
+| number.formatting | authored (.3) |
+| ordinal.numeric | authored (.3) |
+| ordinal.date | authored (.4) |
+| ordinal.dateOnly | authored (.4) |
+| clock | authored (.4) |
+| compass | authored (.5) |
+| calendar | authored (.5, Gregorian months only; Hijri extension in .10) |
 
 All 8 canonical surfaces (+ nested members) are unresolved.
 
@@ -605,6 +605,63 @@ No label is reused across day-period ranges. No day-period words appear in bucke
 - ه (U+0647) absent — ہ (U+06C1) used throughout
 - ي (U+064A) absent — ی (U+06CC) used throughout
 - ك (U+0643) absent — ک (U+06A9) used throughout
+- No U+200E (LRM), U+200F (RLM), U+061C (ALM)
+
+### List surface (task .5)
+
+- Engine: `conjunction` (NOT `clitic`)
+- Conjunction word: `اور` (separate word, space-delimited)
+- Two-item: `1 اور 2`
+- Three-item: `1, 2 اور 3`
+- Four-item: `1, 2, 3 اور 4`
+
+### Compass surface (task .5)
+
+Full and short labels are identical (Urdu has no single-letter compass abbreviations):
+
+| Index | Direction | Urdu Label |
+|---|---|---|
+| 0 | N | شمال |
+| 1 | NNE | شمال شمال مشرق |
+| 2 | NE | شمال مشرق |
+| 3 | ENE | مشرق شمال مشرق |
+| 4 | E | مشرق |
+| 5 | ESE | مشرق جنوب مشرق |
+| 6 | SE | جنوب مشرق |
+| 7 | SSE | جنوب جنوب مشرق |
+| 8 | S | جنوب |
+| 9 | SSW | جنوب جنوب مغرب |
+| 10 | SW | جنوب مغرب |
+| 11 | WSW | مغرب جنوب مغرب |
+| 12 | W | مغرب |
+| 13 | WNW | مغرب شمال مغرب |
+| 14 | NW | شمال مغرب |
+| 15 | NNW | شمال شمال مغرب |
+
+### Calendar.months surface (task .5)
+
+Explicit Gregorian month override (pins cross-platform output):
+
+| Index | Month | Urdu |
+|---|---|---|
+| 0 | January | جنوری |
+| 1 | February | فروری |
+| 2 | March | مارچ |
+| 3 | April | اپریل |
+| 4 | May | مئی |
+| 5 | June | جون |
+| 6 | July | جولائی |
+| 7 | August | اگست |
+| 8 | September | ستمبر |
+| 9 | October | اکتوبر |
+| 10 | November | نومبر |
+| 11 | December | دسمبر |
+
+### Script character verification (task .5 authored content)
+
+- ه (U+0647) absent -- ہ (U+06C1) used throughout
+- ي (U+064A) absent -- ی (U+06CC) used throughout
+- ك (U+0643) absent -- ک (U+06A9) used throughout
 - No U+200E (LRM), U+200F (RLM), U+061C (ALM)
 
 ---
