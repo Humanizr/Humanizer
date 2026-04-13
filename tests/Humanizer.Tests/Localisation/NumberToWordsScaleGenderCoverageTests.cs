@@ -1,7 +1,22 @@
-// Coverage tests targeting uncovered branches in the 8 NumberToWords scale/gender converter classes.
-// Exercises reachable branches identified in artifacts/fn-9-local-coverage/uncovered.json.
-// Defensive-only branches (exhaustive switch throws, unused enum arms) are not targeted here;
-// they are absorbed in the aggregate coverage thresholds per the epic spec.
+// Coverage tests for NumberToWords scale/gender converter tail branches identified in
+// artifacts/fn-9-local-coverage/uncovered.json.
+//
+// Targets:
+// - GenderedNumberToWordsConverter: Convert(long, WordForm) overload (line 28).
+// - ScaleStrategyNumberToWordsConverter: long.MinValue guards (lines 52-53, 231-232),
+//   negative cardinal paths (lines 79, 255), Norwegian ordinal zero (lines 70-71),
+//   Norwegian gendered one-cardinal, Swedish ordinal tens (lines 323-332).
+// - ConjoinedGenderedScaleNumberToWordsConverter: negative path (lines 43, 46-48),
+//   gendered ordinal zero/units/tens/hundreds/scale (all three genders).
+// - SegmentedScaleNumberToWordsConverter: maximum-value guard (lines 15-16),
+//   negative path (lines 27-29), ordinal map decomposition failures (lines 65-66, 76-77).
+// - WestSlavicGenderedNumberToWordsConverter: long.MinValue guard (lines 21-22),
+//   trillion-scale recursive conversion (lines 64-66).
+// - AppendedGroupNumberToWordsConverter: AppendedTwos/Twos branches (lines 61-67),
+//   feminine ones group, gendered ordinals.
+// - PluralizedScaleNumberToWordsConverter: Lithuanian form detector and feminine gendered
+//   unit paths, Lithuanian ordinal rendering, Polish gendered unit overrides.
+// - ConjunctionalScaleNumberToWordsConverter: OmitLeadingOne strategy (lines 171-174).
 
 namespace Humanizer.Tests.Localisation;
 
@@ -344,14 +359,14 @@ public class NumberToWordsScaleGenderCoverageTests
     // ---------------------------------------------------------------------------
 
     [Theory]
-    [InlineData(1000, "thousandth")]
-    [InlineData(100000, "hundred thousandth")]
-    [InlineData(1000000, "millionth")]
     [InlineData(1000001, "million and first")]
     [InlineData(1000100, "million one hundredth")]
     [InlineData(1100, "thousand one hundredth")]
     public void English_OrdinalLeadingOneRemoval(int number, string expected)
     {
+        // Exercises the OmitLeadingOne strategy at lines 171-174 where parts[0] == UnitsMap[1]
+        // and there are remaining parts after scale decomposition.
+        // Exact-scale ordinals (1000, 100000, 1000000) are already covered by NumberToWordsTests.
         Assert.Equal(expected, number.ToOrdinalWords(En));
     }
 }
