@@ -16,7 +16,7 @@
 | number.words | authored (.3) |
 | number.parse | authored (.3) |
 | number.formatting | authored (.3) |
-| ordinal.numeric | pending (.9); number.words.ordinal data authored (.3) |
+| ordinal.numeric | authored (.9); number.words.ordinal data authored (.3) |
 | ordinal.date | authored (.4) |
 | ordinal.dateOnly | authored (.4) |
 | clock | authored (.4) |
@@ -378,7 +378,7 @@ Passed! total: 58, failed: 0, succeeded: 58
 | number.formatting.decimalSeparator | .3 | authored | locale-owned (`.`) | override | resolved |
 | number.formatting.groupSeparator | .3 | authored | locale-owned (`,`) | override | resolved |
 | number.formatting.negativeSign | .3 | authored | locale-owned (`-`, strip U+200E LRM) | override | resolved |
-| ordinal.numeric | -- | missing | locale-owned | not supported | not-started |
+| ordinal.numeric | .9 | authored | locale-owned | engine: number-word-suffix, useCulture: true, masc exactReplacements 1-4/6/9, fem exactReplacements 1-4/6/9, neuterFallback: masculine | resolved |
 | ordinal.date | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
 | ordinal.dateOnly | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
 | clock | .4 | authored | locale-owned | engine: phrase-clock, hourMode: h12, hourGender: masculine, minuteGender: masculine, hourWordsMap 0-12 | resolved |
@@ -387,7 +387,7 @@ Passed! total: 58, failed: 0, succeeded: 58
 
 ### Effective Gap Summary
 
-8 of 8 canonical surface groups authored. Remaining unresolved: ordinal.numeric engine wiring + ordinalizer test matrix rows (task .9), Hijri calendar extension (task .10).
+8 of 8 canonical surface groups authored and resolved. Remaining unresolved: Hijri calendar extension (task .10).
 
 ---
 
