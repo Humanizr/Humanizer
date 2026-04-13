@@ -105,3 +105,6 @@ MTP --coverage-settings conflicts with testconfig.json codeCoverage section -- c
 
 ## 2026-04-13 manual [pitfall]
 When an overload wraps a delegate parameter in a lambda before forwarding to a method with a null guard, the null guard never fires -- add an explicit ThrowIfNull before the lambda wrap, or tests will lock in NullReferenceException instead of the intended ArgumentNullException contract
+
+## 2026-04-13 manual [pitfall]
+When building the same MSBuild project with different PackageReference versions via AdditionalProperties on ProjectReference, NuGet restore assets (project.assets.json) must also be isolated per variant -- pass MSBuildProjectExtensionsPath in AdditionalProperties to prevent last-restore-wins cross-talk

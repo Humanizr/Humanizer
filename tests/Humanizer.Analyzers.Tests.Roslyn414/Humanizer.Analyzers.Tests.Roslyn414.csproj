@@ -13,7 +13,8 @@
          Suppress RS1036/RS1038/RS1041 triggered by the NoopAnalyzer test helper in
          WordsToNumberMigrationCodeFixTests (shared source from the main test project). -->
     <NoWarn>$(NoWarn);NU1701;RS1036;RS1038;RS1041</NoWarn>
-    <!-- Path to the analyzer DLL built with RoslynVersion=4.14 -->
+    <!-- Paths for the analyzer built with RoslynVersion=4.14 -->
+    <AnalyzerProjectPath>$(MSBuildThisFileDirectory)..\..\src\Humanizer.Analyzers\Humanizer.Analyzers.csproj</AnalyzerProjectPath>
     <AnalyzerRoslyn414OutputDir>$(MSBuildThisFileDirectory)..\..\src\Humanizer.Analyzers\bin\$(Configuration)\roslyn4.14\netstandard2.0\</AnalyzerRoslyn414OutputDir>
   </PropertyGroup>
 
@@ -44,14 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Build dependency: ensure analyzer builds with RoslynVersion=4.14 before this project.
-         ReferenceOutputAssembly=false prevents MSBuild from using the default (roslyn3.8) output.
-         The analyzer project uses variant-specific IntermediateOutputPath to isolate compiler
-         intermediates. NuGet restore uses the shared obj/ assets since the analyzer's
-         PackageReference versions resolve at build time via $(RoslynCSharpVersion). -->
-    <ProjectReference Include="..\..\src\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
-                      AdditionalProperties="RoslynVersion=4.14"
-                      ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\src\Humanizer\Humanizer.csproj" />
   </ItemGroup>
 
@@ -61,5 +54,18 @@
       <HintPath>$(AnalyzerRoslyn414OutputDir)Humanizer.Analyzers.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <!-- Build the analyzer with RoslynVersion=4.14 before compiling this test project.
+       Uses dotnet build (via Exec) instead of ProjectReference to get a fully isolated
+       restore + build cycle. The implicit restore in dotnet build evaluates PackageReference
+       versions with RoslynVersion=4.14, so project.assets.json correctly references Roslyn
+       4.14 packages. The analyzer's IntermediateOutputPath isolates compiler intermediates.
+       Note: when building the full solution, the default (3.8) variant's restore runs last
+       and overwrites project.assets.json — this is safe because each variant only needs its
+       own assets during its own build, and the Exec target runs atomically. -->
+  <Target Name="BuildAnalyzerRoslyn414" BeforeTargets="ResolveAssemblyReferences"
+          Inputs="$(AnalyzerProjectPath)" Outputs="$(AnalyzerRoslyn414OutputDir)Humanizer.Analyzers.dll">
+    <Exec Command="dotnet build &quot;$(AnalyzerProjectPath)&quot; -c $(Configuration) /p:RoslynVersion=4.14 -v q" />
+  </Target>
 
 </Project>

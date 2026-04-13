@@ -40,4 +40,19 @@ public class DualRoslynSmokeTests
         var firstParam = method.GetParameters()[0];
         Assert.Equal(typeof(ReadOnlySpan<char>), firstParam.ParameterType);
     }
+
+    [Fact]
+    public void AnalyzerAssembly_ReferencesRoslyn414Packages()
+    {
+        // Verify the analyzer assembly was compiled against Roslyn 4.14 packages,
+        // not the default 3.8. The Microsoft.CodeAnalysis.CSharp reference should
+        // have a version >= 4.14.0.
+        var assembly = typeof(NamespaceMigrationAnalyzer).Assembly;
+        var codeAnalysisRef = assembly.GetReferencedAssemblies()
+            .SingleOrDefault(r => r.Name == "Microsoft.CodeAnalysis.CSharp");
+
+        Assert.NotNull(codeAnalysisRef);
+        Assert.True(codeAnalysisRef.Version >= new Version(4, 14, 0),
+            $"Expected Microsoft.CodeAnalysis.CSharp >= 4.14.0 but found {codeAnalysisRef.Version}");
+    }
 }
