@@ -68,9 +68,8 @@ Author the **date-side ordinal patterns** (`ordinal.date`, `ordinal.dateOnly`) a
 - [ ] `ordinal.numeric` is NOT authored here (`.9` owns it).
 
 ## Done summary
-TBD
-
+Authored ordinal.date, ordinal.dateOnly (pattern '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native per Decision 3 Contract A), and clock (phrase-clock engine, h12, masculine genders, hourWordsMap 0-12, day-period labels) surfaces in ur.yml. Added Urdu parity rows to LocaleCoverageData for date-ordinal and clock coverage tests.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 4e7a4ffe6e1e9e1afcda1a54a9dc48a3cdc7b0f6, 9aa534dc039b6def8618d1f3153179d26c52a31f
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, rg -P '\x{200E}|\x{200F}|\x{061C}' src/Humanizer/Locales/ur.yml
 - PRs:
