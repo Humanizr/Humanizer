@@ -3,8 +3,7 @@
 //
 // Targets:
 // - FormatAge with generic format string (line 74)
-// - GetNormalCaseTimeAsInteger overflow try/catch (lines 181-182, 184)
-// - GetTimeUnitNumericalValue default case (line 129)
+// - GetNormalCaseTimeAsInteger isTimeUnitToGetTheMaximumTimeUnit branch (lines 175-179)
 // - TimeSpan.Zero with minUnit variations
 // - Negative TimeSpan paths
 // - countEmptyUnits + precision combinations
@@ -32,26 +31,22 @@ public class TimeSpanHumanizeTailCoverageTests
     }
 
     // ---------------------------------------------------------------------------
-    //  GetNormalCaseTimeAsInteger: overflow path (lines 175-184)
-    //  When the max unit produces a total that exceeds int range, (int)totalDouble
-    //  truncates to int.MaxValue in unchecked context. The try/catch block (lines
-    //  181-184) is unreachable in unchecked arithmetic but the try path on line 179
-    //  still exercises the isTimeUnitToGetTheMaximumTimeUnit branch.
+    //  GetNormalCaseTimeAsInteger: isTimeUnitToGetTheMaximumTimeUnit branch (lines 175-179)
+    //  When maxUnit matches the current unit being computed, the method returns
+    //  (int)totalTimeNumberOfUnits instead of timeNumberOfUnits.
     // ---------------------------------------------------------------------------
 
     [Fact]
-    public void MaxTimeSpan_WithMaxUnitMillisecond_ClampsToIntMax()
+    public void MaxUnitMillisecond_UsesTotalMilliseconds()
     {
-        // TimeSpan.MaxValue.TotalMilliseconds exceeds int range, (int)cast saturates to int.MaxValue
-        var actual = TimeSpan.MaxValue.Humanize(precision: 1, maxUnit: TimeUnit.Millisecond);
+        var actual = TimeSpan.FromMilliseconds(int.MaxValue).Humanize(precision: 1, maxUnit: TimeUnit.Millisecond);
         Assert.Equal("2147483647 milliseconds", actual);
     }
 
     [Fact]
-    public void MaxTimeSpan_WithMaxUnitSecond_ClampsToIntMax()
+    public void MaxUnitSecond_UsesTotalSeconds()
     {
-        // TimeSpan.MaxValue.TotalSeconds exceeds int range, (int)cast saturates to int.MaxValue
-        var actual = TimeSpan.MaxValue.Humanize(precision: 1, maxUnit: TimeUnit.Second);
+        var actual = TimeSpan.FromSeconds(int.MaxValue).Humanize(precision: 1, maxUnit: TimeUnit.Second);
         Assert.Equal("2147483647 seconds", actual);
     }
 

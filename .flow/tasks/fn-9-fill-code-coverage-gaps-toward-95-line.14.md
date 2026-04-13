@@ -33,9 +33,8 @@ Close tail-coverage on **words-to-number converters** + `TimeSpanHumanizeExtensi
 - [ ] No deferral or hold-list language.
 
 ## Done summary
-_To be filled on completion._
-
+Added coverage tests for 5 words-to-number converter engines (VigesimalCompound/fr, CompoundScale/nb+is+sv, GreedyCompound/it, LinkingAffix/fil, ContractedScale/id+ms) and TimeSpanHumanizeExtensions tail branches, exercising Convert throw paths, TryConvert 2-param overloads, empty-input guards, negative handling, vigesimal/teen/linked-suffix/contracted-scale engine-specific branches, ordinal round-trips, and TimeSpan edge cases including overflow saturation and FormatAge fallback.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: c75d085b, 897a653b5615c43b651c043a348690416beb4621
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 - PRs:

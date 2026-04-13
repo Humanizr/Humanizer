@@ -39,7 +39,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void French_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "vingt xyzfoo".ToNumber(Fr));
+        var ex = Assert.Throws<ArgumentException>(() => "vingt xyzfoo".ToNumber(Fr));
+        Assert.Equal("Unrecognized number word: xyzfoo", ex.Message);
     }
 
     [Fact]
@@ -52,8 +53,9 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void French_TryConvert_TwoParamOverload_InvalidInput()
     {
-        Assert.False("vingt xyzfoo".TryToNumber(out var value, Fr));
+        Assert.False("vingt xyzfoo".TryToNumber(out var value, Fr, out var unrecognized));
         Assert.Equal(0, value);
+        Assert.Equal("xyzfoo", unrecognized);
     }
 
     [Fact]
@@ -119,20 +121,32 @@ public class WordsToNumberConverterTailCoverageTests
         Assert.Equal(expected, words.ToNumber(Fr));
     }
 
+    // Teen leader "dix" followed by a non-unit token (>= 10): the teen lookahead fails,
+    // pendingToken is set, and "dix" falls through as cardinal 10 with "mille" as the
+    // next token. This exercises lines 113-114 of VigesimalCompoundWordsToNumberConverter.
+    [Theory]
+    [InlineData("soixante-dix mille", 70000)]
+    [InlineData("quatre-vingt-dix mille", 90000)]
+    public void French_TeenLeader_FollowedByNonUnit_PushesBackToken(string words, long expected)
+    {
+        Assert.Equal(expected, words.ToNumber(Fr));
+    }
+
     // ---------------------------------------------------------------------------
     //  CompoundScaleWordsToNumberConverter (nb, is, sv)
     //  Covers: Convert throw (lines 23-24), TryConvert 2-param (line 32),
-    //          empty input (lines 38-39), tens fallback with empty remainder
-    //          (lines 172-174), tens fallback with unit (line 182), TryParseOptional
-    //          empty (lines 197-199), ignored token prefix (lines 206-208),
+    //          empty input (lines 38-39), tens fallback with unit remainder
+    //          (lines 177-180), TryParseOptional empty (lines 196-199),
+    //          ignored token prefix (lines 205-208),
     //          sequenceMultiplierThreshold (is, line 121-124), large-scale compound
-    //          split (lines 140-158)
+    //          split (lines 140-158) including empty right remainder
     // ---------------------------------------------------------------------------
 
     [Fact]
     public void Norwegian_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "tjue xyzbar".ToNumber(Nb));
+        var ex = Assert.Throws<ArgumentException>(() => "tjue xyzbar".ToNumber(Nb));
+        Assert.Equal("Unrecognized number word: xyzbar", ex.Message);
     }
 
     [Fact]
@@ -145,8 +159,9 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Norwegian_TryConvert_TwoParamOverload_InvalidInput()
     {
-        Assert.False("tjue xyzbar".TryToNumber(out var value, Nb));
+        Assert.False("tjue xyzbar".TryToNumber(out var value, Nb, out var unrecognized));
         Assert.Equal(0, value);
+        Assert.Equal("xyzbar", unrecognized);
     }
 
     [Fact]
@@ -167,22 +182,32 @@ public class WordsToNumberConverterTailCoverageTests
         Assert.Equal(expected, words.ToNumber(Nb));
     }
 
-    // Tens stem alone (remainder is empty after the stem match)
+    // Direct cardinal map lookup for standalone tens tokens
     [Theory]
     [InlineData("tjue", 20)]
     [InlineData("tretti", 30)]
     [InlineData("nitti", 90)]
-    public void Norwegian_TensAlone(string words, long expected)
+    public void Norwegian_TensCardinal(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Nb));
     }
 
-    // Large-scale compound split: "ettusenethundreogtolv" = 1112
+    // Large-scale compound split with non-empty remainder
     [Theory]
     [InlineData("ettusenethundreogtolv", 1112)]
     [InlineData("tusenogen", 1001)]
     [InlineData("hundreogelleve", 111)]
     public void Norwegian_LargeScaleCompoundSplit(string words, long expected)
+    {
+        Assert.Equal(expected, words.ToNumber(Nb));
+    }
+
+    // Large-scale compound split with empty right remainder: exercises
+    // TryParseOptional's string.IsNullOrEmpty branch (lines 196-199).
+    [Theory]
+    [InlineData("ettusen", 1000)]
+    [InlineData("ethundre", 100)]
+    public void Norwegian_LargeScaleCompoundSplit_EmptyRemainder(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Nb));
     }
@@ -238,7 +263,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Icelandic_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "tuttugu xyzfoo".ToNumber(Is));
+        var ex = Assert.Throws<ArgumentException>(() => "tuttugu xyzfoo".ToNumber(Is));
+        Assert.Equal("Unrecognized number word: xyzfoo", ex.Message);
     }
 
     // Swedish compound-scale coverage
@@ -255,7 +281,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Swedish_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "tjugo xyzbar".ToNumber(Sv));
+        var ex = Assert.Throws<ArgumentException>(() => "tjugo xyzbar".ToNumber(Sv));
+        Assert.Equal("Unrecognized number word: xyzbar", ex.Message);
     }
 
     [Fact]
@@ -288,17 +315,18 @@ public class WordsToNumberConverterTailCoverageTests
     // ---------------------------------------------------------------------------
     //  GreedyCompoundWordsToNumberConverter (it)
     //  Covers: Convert throw (lines 19-20), TryConvert 2-param (line 28),
-    //          empty input (lines 34-35), chars to remove (lines 164-165),
-    //          chars to replace with space (lines 176-177), previousWasSpace
-    //          collapse (lines 190-192), ShouldIgnore (lines 354-357),
-    //          unknown token (lines 252-254), empty string (lines 219-221),
-    //          ordinal abbreviation no-suffix (lines 285-287)
+    //          empty input (lines 34-35), chars to remove (lines 163-165),
+    //          chars to replace with space (lines 168-170), previousWasSpace
+    //          collapse (lines 174-178), normalized-empty input (lines 218-222),
+    //          unknown token (lines 252-254), ordinal abbreviation digits-only
+    //          (line 298), ordinal abbreviation invalid suffix (lines 304-315)
     // ---------------------------------------------------------------------------
 
     [Fact]
     public void Italian_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "venti xyzbar".ToNumber(It));
+        var ex = Assert.Throws<ArgumentException>(() => "venti xyzbar".ToNumber(It));
+        Assert.Equal("Unrecognized number word: xyzbar", ex.Message);
     }
 
     [Fact]
@@ -311,14 +339,33 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Italian_TryConvert_TwoParamOverload_InvalidInput()
     {
-        Assert.False("venti xyzbar".TryToNumber(out var value, It));
+        Assert.False("venti xyzbar".TryToNumber(out var value, It, out var unrecognized));
         Assert.Equal(0, value);
+        Assert.Equal("xyzbar", unrecognized);
     }
 
     [Fact]
     public void Italian_EmptyInput_Throws()
     {
         Assert.Throws<ArgumentException>(() => "  ".ToNumber(It));
+    }
+
+    // Normalization strips all removable chars; if nothing is left TryParseCardinal
+    // hits the string.IsNullOrEmpty branch (lines 218-222).
+    [Fact]
+    public void Italian_NormalizationCanProduceEmptyInput()
+    {
+        Assert.False(".,''".TryToNumber(out var parsedNumber, It, out var unrecognized));
+        Assert.Equal(0, parsedNumber);
+        Assert.Equal(string.Empty, unrecognized);
+    }
+
+    // Repeated whitespace after normalization is collapsed by the previousWasSpace
+    // branch (lines 174-178).
+    [Fact]
+    public void Italian_NormalizationCollapsesRepeatedWhitespace()
+    {
+        Assert.Equal(21, "venti    uno".ToNumber(It));
     }
 
     // Characters removed during normalization: comma, period, apostrophes
@@ -379,14 +426,23 @@ public class WordsToNumberConverterTailCoverageTests
         Assert.Equal(expected, words.ToNumber(It));
     }
 
-    // Invalid ordinal abbreviation suffix
+    // Digits-only input: digitLength == span.Length, exits early (line 298).
+    [Fact]
+    public void Italian_DigitsOnlyOrdinalAbbreviation_ReturnsFalse()
+    {
+        Assert.False("3".TryToNumber(out var parsedNumber, It, out var unrecognized));
+        Assert.Equal(0, parsedNumber);
+        Assert.Equal("3", unrecognized);
+    }
+
+    // Invalid ordinal abbreviation suffix: suffix doesn't match any known suffix
     [Theory]
     [InlineData("3z")]
     public void Italian_InvalidOrdinalAbbreviation_ReturnsFalse(string words)
     {
-        Assert.False(words.TryToNumber(out var parsedNumber, It, out var unrecognizedWord));
+        Assert.False(words.TryToNumber(out var parsedNumber, It, out var unrecognized));
         Assert.Equal(0, parsedNumber);
-        Assert.Equal(words, unrecognizedWord);
+        Assert.Equal(words, unrecognized);
     }
 
     // Negative Italian
@@ -433,7 +489,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Filipino_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "dalawampu xyzbar".ToNumber(Fil));
+        var ex = Assert.Throws<ArgumentException>(() => "dalawampu xyzbar".ToNumber(Fil));
+        Assert.Equal("Unrecognized number word: xyzbar", ex.Message);
     }
 
     [Fact]
@@ -446,8 +503,9 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Filipino_TryConvert_TwoParamOverload_InvalidInput()
     {
-        Assert.False("dalawampu xyzbar".TryToNumber(out var value, Fil));
+        Assert.False("dalawampu xyzbar".TryToNumber(out var value, Fil, out var unrecognized));
         Assert.Equal(0, value);
+        Assert.Equal("xyzbar", unrecognized);
     }
 
     [Fact]
@@ -540,7 +598,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Indonesian_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "dua puluh xyzbar".ToNumber(Id));
+        var ex = Assert.Throws<ArgumentException>(() => "dua puluh xyzbar".ToNumber(Id));
+        Assert.Equal("Unrecognized number word: xyzbar", ex.Message);
     }
 
     [Fact]
@@ -553,8 +612,9 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Indonesian_TryConvert_TwoParamOverload_InvalidInput()
     {
-        Assert.False("dua puluh xyzbar".TryToNumber(out var value, Id));
+        Assert.False("dua puluh xyzbar".TryToNumber(out var value, Id, out var unrecognized));
         Assert.Equal(0, value);
+        Assert.Equal("xyzbar", unrecognized);
     }
 
     [Fact]
@@ -631,7 +691,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Malay_Convert_ThrowsOnUnrecognizedWord()
     {
-        Assert.Throws<ArgumentException>(() => "dua puluh xyzbar".ToNumber(Ms));
+        var ex = Assert.Throws<ArgumentException>(() => "dua puluh xyzbar".ToNumber(Ms));
+        Assert.Equal("Unrecognized number word: xyzbar", ex.Message);
     }
 
     [Fact]

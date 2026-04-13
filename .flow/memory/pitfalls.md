@@ -114,3 +114,6 @@ When asserting generated source content, always scope assertions to the specific
 
 ## 2026-04-13 manual [pitfall]
 When coverage tests target defensive error branches in classes with virtual hooks, use test-only subclasses that override the virtual guards to force the error paths -- do not claim branches are unreachable without first checking for override seams
+
+## 2026-04-13 manual [pitfall]
+When testing parser branch coverage, verify that input normalization (hyphen-to-space, case folding, diacritic removal) does not transform the test input before it reaches the target branch -- a hyphenated form may parse correctly via a different code path than the glued form

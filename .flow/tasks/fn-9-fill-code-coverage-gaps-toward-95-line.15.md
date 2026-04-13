@@ -3,7 +3,8 @@ Close tail-coverage on **ordinal NumberToWords engines + `PhraseClockNotationCon
 
 **Size:** M
 **Files:**
-- `tests/Humanizer.Tests/ConverterTail/OrdinalAndClockCoverageTests.cs` (new) — OR extend the relevant `tests/Humanizer.Tests/Localisation/<culture>/` file where the uncovered branch is culture-specific
+- `tests/Humanizer.Tests/Localisation/OrdinalAndClockCoverageTests.cs` (new) — OR extend the relevant `tests/Humanizer.Tests/Localisation/<culture>/` file where the uncovered branch is culture-specific
+<!-- Updated by plan-sync: fn-9...14 placed tail-coverage tests in Localisation/ not ConverterTail/ -->
 
 ## Target classes
 - `Humanizer.TerminalOrdinalScaleNumberToWordsConverter` (92.7%)
