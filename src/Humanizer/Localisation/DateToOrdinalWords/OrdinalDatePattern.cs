@@ -92,7 +92,7 @@ sealed class OrdinalDatePattern(
 
     string[]? ResolveMonthArray(Calendar calendar)
     {
-        if (hijriMonths is not null && calendar is HijriCalendar)
+        if (hijriMonths is not null && calendar is HijriCalendar or UmAlQuraCalendar)
         {
             return hijriMonths;
         }
