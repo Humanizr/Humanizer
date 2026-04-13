@@ -8,13 +8,16 @@
 // - CompoundScaleWordsToNumberConverter (nb, is, sv): Convert throw path, TryConvert two-param
 //   overload, empty input, tens fallback (empty and unit remainder), TryParseOptional (empty,
 //   ignored-token prefix), sequenceMultiplierThreshold (is), large-scale compound split.
-// - GreedyCompoundWordsToNumberConverter (it): Convert throw path, TryConvert two-param overload,
-//   empty input, characters removed/replaced in normalization, previousWasSpace collapse,
-//   ShouldIgnore, ordinal abbreviation no-suffix path, unknown token path.
+// - GreedyCompoundWordsToNumberConverter (it + synthetic): Convert throw path, TryConvert two-param
+//   overload, empty input, characters removed/replaced in normalization, previousWasSpace collapse,
+//   ShouldIgnore (via synthetic profile), ordinal abbreviation digits-only/invalid-suffix, unknown
+//   token path, normalized-empty input.
 // - LinkingAffixWordsToNumberConverter (fil): Convert throw path, TryConvert two-param overload,
 //   empty input, teen prefix with recursive parse, linked suffix parse.
 // - ContractedScaleWordsToNumberConverter (id, ms): Convert throw path, TryConvert two-param
 //   overload, empty input, "dan" skip token, "belas" teen contraction.
+
+using System.Collections.Frozen;
 
 namespace Humanizer.Tests.Localisation;
 
@@ -61,7 +64,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void French_EmptyInput_Throws()
     {
-        Assert.Throws<ArgumentException>(() => "   ".ToNumber(Fr));
+        var ex = Assert.Throws<ArgumentException>(() => "   ".ToNumber(Fr));
+        Assert.Equal("Input words cannot be empty.", ex.Message);
     }
 
     [Theory]
@@ -167,7 +171,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Norwegian_EmptyInput_Throws()
     {
-        Assert.Throws<ArgumentException>(() => "".ToNumber(Nb));
+        var ex = Assert.Throws<ArgumentException>(() => "".ToNumber(Nb));
+        Assert.Equal("Input words cannot be empty.", ex.Message);
     }
 
     // Glued compound: tens stem + unit ("tjueen" = twenty-one)
@@ -288,7 +293,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Swedish_EmptyInput_Throws()
     {
-        Assert.Throws<ArgumentException>(() => " ".ToNumber(Sv));
+        var ex = Assert.Throws<ArgumentException>(() => " ".ToNumber(Sv));
+        Assert.Equal("Input words cannot be empty.", ex.Message);
     }
 
     [Fact]
@@ -347,7 +353,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Italian_EmptyInput_Throws()
     {
-        Assert.Throws<ArgumentException>(() => "  ".ToNumber(It));
+        var ex = Assert.Throws<ArgumentException>(() => "  ".ToNumber(It));
+        Assert.Equal("Input words cannot be empty.", ex.Message);
     }
 
     // Normalization strips all removable chars; if nothing is left TryParseCardinal
@@ -479,6 +486,34 @@ public class WordsToNumberConverterTailCoverageTests
         Assert.Equal(expected, words.ToNumber(It));
     }
 
+    // ShouldIgnore branch: no production Greedy profile has ignored tokens, so
+    // exercise the branch with a minimal synthetic profile where "and" is both a
+    // cardinal token (so TryReadToken finds it) and an ignored token.
+    [Fact]
+    public void GreedyCompound_ShouldIgnore_SkipsIgnoredToken()
+    {
+        var cardinals = new Dictionary<string, long>(StringComparer.Ordinal)
+        {
+            ["one"] = 1,
+            ["and"] = 0
+        }.ToFrozenDictionary(StringComparer.Ordinal);
+
+        var converter = new GreedyCompoundWordsToNumberConverter(new GreedyCompoundWordsToNumberProfile(
+            cardinalMap: cardinals,
+            ordinalMap: FrozenDictionary<string, long>.Empty,
+            negativePrefixes: [],
+            ignoredTokens: ["and"],
+            ordinalAbbreviationSuffixes: [],
+            charactersToRemove: string.Empty,
+            charactersToReplaceWithSpace: string.Empty,
+            textReplacements: [],
+            lowercase: true));
+
+        Assert.True(converter.TryConvert("one and one", out var parsedValue, out var unrecognizedWord));
+        Assert.Null(unrecognizedWord);
+        Assert.Equal(2, parsedValue);
+    }
+
     // ---------------------------------------------------------------------------
     //  LinkingAffixWordsToNumberConverter (fil)
     //  Covers: Convert throw (lines 15-16), TryConvert 2-param (line 24),
@@ -511,7 +546,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Filipino_EmptyInput_Throws()
     {
-        Assert.Throws<ArgumentException>(() => "   ".ToNumber(Fil));
+        var ex = Assert.Throws<ArgumentException>(() => "   ".ToNumber(Fil));
+        Assert.Equal("Input words cannot be empty.", ex.Message);
     }
 
     // Hyphenated teen forms: "labing-isa" normalizes to "labing isa" (two tokens),
@@ -620,7 +656,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Indonesian_EmptyInput_Throws()
     {
-        Assert.Throws<ArgumentException>(() => " ".ToNumber(Id));
+        var ex = Assert.Throws<ArgumentException>(() => " ".ToNumber(Id));
+        Assert.Equal("Input words cannot be empty.", ex.Message);
     }
 
     // "belas" teen contraction: "dua belas" = 2 + 10 = 12
@@ -698,7 +735,8 @@ public class WordsToNumberConverterTailCoverageTests
     [Fact]
     public void Malay_EmptyInput_Throws()
     {
-        Assert.Throws<ArgumentException>(() => "  ".ToNumber(Ms));
+        var ex = Assert.Throws<ArgumentException>(() => "  ".ToNumber(Ms));
+        Assert.Equal("Input words cannot be empty.", ex.Message);
     }
 
     [Fact]
