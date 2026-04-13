@@ -6,7 +6,7 @@ Use this file after reading `SKILL.md`. It is the detailed repo map for proving 
 
 Treat these as the localized surfaces that must be intentionally accounted for when a shipped locale is added or brought to parity:
 
-Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
+Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, `calendar.monthsGenitive`, and `calendar.hijriMonths`.
 
 - `list`
   Collection formatting and conjunction behavior.

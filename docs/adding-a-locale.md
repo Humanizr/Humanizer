@@ -24,7 +24,7 @@ These are the files and directories you usually need to understand:
 - `src/Humanizer/Locales/<locale>.yml`
   This is the source of truth for locale-owned generated behavior.
 - `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs`
-  Defines the canonical locale YAML surface: allowed top-level keys, canonical surface names, and nested canonical members such as `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
+  Defines the canonical locale YAML surface: allowed top-level keys, canonical surface names, and nested canonical members such as `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, `calendar.monthsGenitive`, and `calendar.hijriMonths`.
 - `src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs`
   Parses locale YAML, resolves inheritance, validates feature blocks, and exposes a resolved per-locale view to the rest of the generator.
 - `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`
