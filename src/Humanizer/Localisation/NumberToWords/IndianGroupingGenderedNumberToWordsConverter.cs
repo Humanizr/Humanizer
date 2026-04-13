@@ -32,12 +32,19 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
         var effectiveGender = gender == GrammaticalGender.Neuter
-            ? GrammaticalGender.Masculine
+            ? profile.Ordinal.NeuterFallback.Equals("feminine", StringComparison.OrdinalIgnoreCase)
+                ? GrammaticalGender.Feminine
+                : GrammaticalGender.Masculine
             : gender;
 
         var genderBlock = effectiveGender == GrammaticalGender.Feminine
             ? profile.Ordinal.Feminine
             : profile.Ordinal.Masculine;
+
+        if (number < 0)
+        {
+            return profile.NegativeWord + " " + ConvertToOrdinal(number == int.MinValue ? int.MaxValue : -number, gender);
+        }
 
         if (genderBlock.ExactReplacements.TryGetValue(number, out var exact))
         {
@@ -56,7 +63,7 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
 
         if (number < 0)
         {
-            return profile.NegativeWord + " " + ConvertCardinal(-number);
+            return profile.NegativeWord + " " + ConvertCardinal(number == long.MinValue ? long.MaxValue : -number);
         }
 
         var parts = new List<string>();
