@@ -379,15 +379,15 @@ Passed! total: 58, failed: 0, succeeded: 58
 | number.formatting.groupSeparator | .3 | authored | locale-owned (`,`) | override | resolved |
 | number.formatting.negativeSign | .3 | authored | locale-owned (`-`, strip U+200E LRM) | override | resolved |
 | ordinal.numeric | -- | missing | locale-owned | not supported | not-started |
-| ordinal.date | -- | missing | locale-owned | not supported | not-started |
-| ordinal.dateOnly | -- | missing | locale-owned | not supported | not-started |
-| clock | -- | missing | locale-owned | not supported | not-started |
+| ordinal.date | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
+| ordinal.dateOnly | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
+| clock | .4 | authored | locale-owned | engine: phrase-clock, hourMode: h12, hourGender: masculine, minuteGender: masculine, hourWordsMap 0-12 | resolved |
 | compass | -- | missing | locale-owned | not supported | not-started |
 | calendar.months | -- | missing | locale-owned | not supported | not-started |
 
 ### Effective Gap Summary
 
-8 of 8 canonical surface groups partially resolved. Remaining unresolved: list, ordinal.numeric (.9), ordinal.date, ordinal.dateOnly, clock, compass, calendar.
+8 of 8 canonical surface groups partially resolved. Remaining unresolved: list, ordinal.numeric (.9), compass, calendar.
 
 ---
 
@@ -544,6 +544,68 @@ The parity map Decision 2 locked `hundredsMap` and `thousandsMap` arrays. Task .
 - ي (U+064A) absent — ی (U+06CC) used throughout ✓
 - ك (U+0643) absent — ک (U+06A9) used throughout ✓
 - No U+200E (LRM), U+200F (RLM), U+061C (ALM) ✓
+
+---
+
+## Proposer+Reviewer Term Log (Task .4)
+
+### ordinal.date and ordinal.dateOnly
+
+| Field | Value | Source | Status |
+|---|---|---|---|
+| pattern | '{day} MMMM، yyyy' | Derived from ICU LongDatePattern `dddd، d MMMM، yyyy` — dropped day-of-week, kept U+060C Arabic comma after MMMM, used `{day}` placeholder | accepted |
+| dayMode | 'Numeric' | Urdu uses numeric day (no ordinal suffix on day numbers in dates) | accepted |
+| calendarMode | 'Native' | Decision 3 Contract A — uses culture's default calendar, enabling Hijri when caller sets HijriCalendar on CurrentCulture | accepted |
+
+### clock
+
+| Field | Value | Source | Status |
+|---|---|---|---|
+| engine | 'phrase-clock' | Standard clock engine for phrase-based clock notation | accepted |
+| hourMode | 'h12' | Urdu uses 12-hour clock with day-period labels | accepted |
+| hourGender | 'masculine' | Urdu hours are masculine (گھنٹہ is masculine) | accepted |
+| minuteGender | 'masculine' | Urdu minutes are masculine (منٹ is masculine loanword) | accepted |
+| min0 | '{hour} بجے' | "X o'clock" — بجے is the standard Urdu clock postposition | accepted |
+| defaultTemplate | '{hour} بج کر {minutes} منٹ' | "X baj kar Y minutes" — standard spoken Urdu clock phrase | accepted |
+| earlyMorning | 'صبح سویرے' | Pre-dawn / early morning — distinct from صبح | accepted |
+| morning | 'صبح' | Standard morning (CLDR) | accepted |
+| afternoon | 'دوپہر' | Standard afternoon (CLDR) | accepted |
+| night | 'رات' | Standard night (CLDR) | accepted |
+
+### hourWordsMap verification
+
+| Index | hourWordsMap | denseUnitsMap | Match | Status |
+|---|---|---|---|---|
+| 0 | '' (unused) | 'صفر' | n/a (h12 index 0 unused per convention) | accepted |
+| 1 | 'ایک' | 'ایک' | identical | accepted |
+| 2 | 'دو' | 'دو' | identical | accepted |
+| 3 | 'تین' | 'تین' | identical | accepted |
+| 4 | 'چار' | 'چار' | identical | accepted |
+| 5 | 'پانچ' | 'پانچ' | identical | accepted |
+| 6 | 'چھ' | 'چھ' | identical | accepted |
+| 7 | 'سات' | 'سات' | identical | accepted |
+| 8 | 'آٹھ' | 'آٹھ' | identical | accepted |
+| 9 | 'نو' | 'نو' | identical | accepted |
+| 10 | 'دس' | 'دس' | identical | accepted |
+| 11 | 'گیارہ' | 'گیارہ' | identical | accepted |
+| 12 | 'بارہ' | 'بارہ' | identical | accepted |
+
+### Day-period distinctness verification
+
+All four day-period labels are linguistically distinct:
+- earlyMorning: 'صبح سویرے' (pre-dawn / early morning)
+- morning: 'صبح' (morning)
+- afternoon: 'دوپہر' (afternoon)
+- night: 'رات' (night)
+
+No label is reused across day-period ranges. No day-period words appear in bucket templates (min0 and defaultTemplate contain only بجے/بج کر/منٹ).
+
+### Script character verification (task .4 authored content)
+
+- ه (U+0647) absent — ہ (U+06C1) used throughout
+- ي (U+064A) absent — ی (U+06CC) used throughout
+- ك (U+0643) absent — ک (U+06A9) used throughout
+- No U+200E (LRM), U+200F (RLM), U+061C (ALM)
 
 ---
 

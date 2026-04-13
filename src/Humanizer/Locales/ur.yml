@@ -480,3 +480,39 @@ surfaces:
         - 'منفی'
       ignoredTokens:
         - 'اعشاریہ'
+
+  ordinal:
+    date:
+      pattern: '{day} MMMM، yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM، yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'masculine'
+    minuteGender: 'masculine'
+    hourWordsMap:
+      - ''
+      - 'ایک'
+      - 'دو'
+      - 'تین'
+      - 'چار'
+      - 'پانچ'
+      - 'چھ'
+      - 'سات'
+      - 'آٹھ'
+      - 'نو'
+      - 'دس'
+      - 'گیارہ'
+      - 'بارہ'
+    min0: '{hour} بجے'
+    defaultTemplate: '{hour} بج کر {minutes} منٹ'
+    earlyMorning: 'صبح سویرے'
+    morning: 'صبح'
+    afternoon: 'دوپہر'
+    night: 'رات'
