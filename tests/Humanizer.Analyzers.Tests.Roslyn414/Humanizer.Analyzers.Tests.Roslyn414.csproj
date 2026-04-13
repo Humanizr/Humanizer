@@ -56,18 +56,16 @@
   </ItemGroup>
 
   <!-- Build the analyzer with RoslynVersion=4.14 before compiling this test project.
-       Uses dotnet build (via Exec) to get a full restore + build cycle where PackageReference
-       versions evaluate with RoslynVersion=4.14, producing a correctly linked DLL. The Exec
-       approach runs restore+build atomically in the same process, so the analyzer DLL is
-       always compiled against Roslyn 4.14 packages, verified by the
-       AnalyzerAssembly_ReferencesRoslyn414Packages smoke test.
+       Follows the same Restore;Build + RemoveProperties pattern used by
+       src/Humanizer/Humanizer.csproj:BuildAnalyzerVariants for pack builds.
        The target always runs (no Inputs/Outputs) so analyzer source changes are never stale.
-       Note: MSBuildProjectExtensionsPath isolation is not used because netstandard2.0 projects
-       require framework reference pack resolution from the default obj/ path. The 4.14 restore
-       temporarily writes to obj/project.assets.json; the Exec target runs first and the 4.14
-       build completes before any default variant build touches the same assets. -->
+       AnalyzerAssembly_ReferencesRoslyn414Packages verifies the output DLL references
+       Roslyn 4.14 packages. -->
   <Target Name="BuildAnalyzerRoslyn414" BeforeTargets="ResolveAssemblyReferences">
-    <Exec Command="dotnet build &quot;$(AnalyzerProjectPath)&quot; -c $(Configuration) /p:RoslynVersion=4.14 -v q" />
+    <MSBuild Projects="$(AnalyzerProjectPath)"
+             Targets="Restore;Build"
+             RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
+             Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks=;RoslynVersion=4.14;AnalyzerVariant=roslyn4.14" />
   </Target>
 
 </Project>
