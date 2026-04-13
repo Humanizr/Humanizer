@@ -81,9 +81,8 @@ Schema documentation delta is recorded for `.8` — this task does NOT commit do
 - [ ] Parity map updated with per-Hijri-month audit entries.
 
 ## Done summary
-TBD
-
+Implemented Islamic (Hijri) calendar native mode for Urdu dates using Contract A (culture-calendar) from Decision 3. Extended the calendar YAML surface with `hijriMonths` key, updated CanonicalLocaleAuthoring validation, OrdinalDateProfileDefinition, OrdinalDateProfileCatalogInput (extract + emit), and OrdinalDatePattern (runtime calendar-aware month selection via HijriCalendar detection). Added StripDirectionalityControls to OrdinalDatePattern.Format to remove U+200E/200F/061C from formatted output. Authored 12 Urdu Hijri month names in ur.yml with plain-alif spelling. All 22 Hijri date tests pass on net10.0 and net8.0; 63 source generator tests pass; 12491/12492 sweep tests pass (1 pre-existing uz-Latn-UZ failure unrelated).
 ## Evidence
 - Commits:
-- Tests:
+- Tests: 22/22 UrduHijriDateTests pass on net10.0, 22/22 UrduHijriDateTests pass on net8.0, 63/63 SourceGenerators.Tests pass, 12491/12492 LocaleRegistrySweepTests pass (1 pre-existing uz-Latn-UZ failure)
 - PRs:

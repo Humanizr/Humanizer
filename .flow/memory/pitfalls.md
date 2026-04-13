@@ -81,3 +81,6 @@ When committing artifacts under a gitignored directory (e.g. artifacts/), RepoPr
 
 ## 2026-04-13 manual [pitfall]
 Locales with dense number maps still need exactReplacements for irregular ordinals (e.g. Urdu 4th/6th/9th have different stems than their cardinals) — suffix-only ordinals produce wrong forms for these
+
+## 2026-04-13 manual [pitfall]
+When adding a new ordinalizer/converter engine that internally calls another resolver (e.g. NumberToWords), make culture binding intrinsic in RequiresCulture based on engine name -- do not rely solely on an author-supplied useCulture YAML flag

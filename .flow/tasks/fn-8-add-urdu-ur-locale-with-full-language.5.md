@@ -53,9 +53,8 @@ Close out the remaining three canonical surfaces: `list` (sentence conjunction),
 - [ ] Parity map artifact shows all 8 canonical surfaces now have at least one reviewed term; unresolved-surfaces set reduced to zero (moving to content-polish phase).
 - [ ] `dotnet build` + `LocaleRegistrySweepTests` still pass.
 ## Done summary
-TBD
-
+Authored three remaining Urdu YAML surfaces: list (conjunction engine with 'اور'), compass (16 full + 16 short headings, identical since Urdu has no abbreviations), and calendar.months (12 explicit Gregorian month overrides). Added missing Urdu test matrix rows across 8 theory data files for locale completeness coverage.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 499ea0cfba37e4cfb1a74ddddacf68b8318e3ee2, f798e7339f88e23f18e57f10fdd9e2df80ef7bd4, 32551f2e9fdf961fb80fdcbb234ff2bc97fe3f88
+- Tests: dotnet build src/Humanizer/Humanizer.csproj -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 - PRs:

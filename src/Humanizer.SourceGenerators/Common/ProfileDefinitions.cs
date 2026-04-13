@@ -17,13 +17,15 @@ public sealed partial class HumanizerSourceGenerator
         string engine,
         JsonElement root,
         ImmutableArray<string> months = default,
-        ImmutableArray<string> monthsGenitive = default)
+        ImmutableArray<string> monthsGenitive = default,
+        ImmutableArray<string> hijriMonths = default)
     {
         public string ProfileName { get; } = profileName;
         public string Engine { get; } = engine;
         public JsonElement Root { get; } = root;
         public ImmutableArray<string> Months { get; } = months.IsDefault ? ImmutableArray<string>.Empty : months;
         public ImmutableArray<string> MonthsGenitive { get; } = monthsGenitive.IsDefault ? ImmutableArray<string>.Empty : monthsGenitive;
+        public ImmutableArray<string> HijriMonths { get; } = hijriMonths.IsDefault ? ImmutableArray<string>.Empty : hijriMonths;
     }
 
     sealed class TimeOnlyToClockNotationProfileDefinition(string profileName, string engine, JsonElement root)

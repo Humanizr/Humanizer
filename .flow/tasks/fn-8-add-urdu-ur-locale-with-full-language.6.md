@@ -22,7 +22,8 @@ Wire all three cultures (`ur`, `ur-PK`, `ur-IN`) into every theory dataset cover
 ## Approach
 
 1. **Drive-list from the gate**: after `.5`, `.9`, `.10`, `.11` land, run `LocaleTheoryMatrixCompletenessTests`. Its failure output enumerates every dataset missing rows for `ur`, `ur-PK`, `ur-IN`. `ShippedLocaleRows` is computed from every shipped YAML file — all three cultures need rows in every dataset.
-2. **Add three rows per dataset** (`ur`, `ur-PK`, `ur-IN`), alphabetically placed. Shared content uses identical strings across all three rows; variant-level overrides differ.
+<!-- Updated by plan-sync: fn-8.5 already added `ur` rows to LocaleCoverageData.cs (11 rows across date-ordinal, clock, relative-date, list, ordinalizer, and number-to-words datasets). Only `ur-PK` and `ur-IN` rows still need adding there. The separate theory-data files (LocaleDateHumanizeTheoryData, LocaleFormatterExactTheoryData, LocaleNumberTheoryData, LocaleNumberMagnitudeTheoryData, LocaleNumberOverloadTheoryData, LocalePhraseTheoryData, LocaleAdditionalNumberTheoryData, LocaleAdditionalByteTheoryData, LocaleOrdinalizerMatrixData) still need all three rows (`ur`, `ur-PK`, `ur-IN`). -->
+2. **Add rows per dataset**: `ur-PK` and `ur-IN` rows in `LocaleCoverageData.cs` (the `ur` rows already exist from `.5`); all three rows (`ur`, `ur-PK`, `ur-IN`) in every other theory-data file, alphabetically placed. Shared content uses identical strings across all three rows; variant-level overrides differ.
 3. **Locale-specific proofs** under `tests/Humanizer.Tests/Localisation/ur/`, one file per canonical surface:
    - `UrduNumberToWordsTests.cs` — 0, 21, 99, 100, 1234, 100000, 1234567, 10000000, 1_000_000_000; round-trip parse back to int.
    - `UrduOrdinalizeTests.cs` — all three API paths × masculine / feminine / (neuter → masculine fallback):
