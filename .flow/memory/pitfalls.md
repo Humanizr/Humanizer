@@ -111,3 +111,6 @@ When building the same MSBuild project with different PackageReference versions 
 
 ## 2026-04-13 manual [pitfall]
 When asserting generated source content, always scope assertions to the specific generated block (cache class, switch case) — global Assert.Contains on the full generated source can be satisfied by unrelated locale output
+
+## 2026-04-13 manual [pitfall]
+When coverage tests target defensive error branches in classes with virtual hooks, use test-only subclasses that override the virtual guards to force the error paths -- do not claim branches are unreachable without first checking for override seams

@@ -259,7 +259,6 @@ public class OrdinalizeTests
     [Fact]
     public void NormalizeOrdinalNumberStringPreservesPlainNumbers()
     {
-        // No format characters: NormalizeOrdinalNumberString returns original string
         var result = "42".Ordinalize();
         Assert.Equal("42nd", result);
     }
@@ -267,10 +266,26 @@ public class OrdinalizeTests
     [Fact]
     public void OrdinalizeNumberWithCultureExercisesNormalizePath()
     {
-        // This exercises the culture-aware int.Ordinalize path which calls
-        // NormalizeOrdinalNumberString(number.ToString(NumberFormatInfo))
         var culture = new CultureInfo("en-US");
         var result = 42.Ordinalize(culture);
         Assert.Equal("42nd", result);
+    }
+
+    [Fact]
+    public void OrdinalizeIntWithCultureStripsFormatCharsFromFormattedNumber()
+    {
+        var culture = (CultureInfo)new CultureInfo("en-US").Clone();
+        culture.NumberFormat.NegativeSign = "\u200F-";
+
+        Assert.Equal("-1st", (-1).Ordinalize(culture));
+    }
+
+    [Fact]
+    public void OrdinalizeStringWithCultureStripsFormatCharsFromNumberString()
+    {
+        var culture = (CultureInfo)new CultureInfo("en-US").Clone();
+        culture.NumberFormat.NegativeSign = "\u200F-";
+
+        Assert.Equal("-1st", "\u200F-1".Ordinalize(culture));
     }
 }

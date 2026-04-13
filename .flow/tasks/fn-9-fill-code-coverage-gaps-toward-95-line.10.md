@@ -34,9 +34,8 @@ Close tail-coverage on **core extensions** subset of the 88-95% classes.
 - [ ] Every new test asserts on specific expected output.
 
 ## Done summary
-_To be filled on completion._
-
+Added tail-branch coverage tests for 4 core extension classes: CasingExtensions (invalid enum branch), OrdinalizeExtensions (WordForm overloads, null culture fallback with nl-NL verification, NormalizeOrdinalNumberString paths), ToQuantityExtensions (long overloads, double NaN/Infinity with InvariantCulture, formatProvider branches), and DefaultFormatter (string constructor, all TimeUnit/DataUnit symbols and words, date/timespan formatting branches, exact-two template via Maltese/Arabic, PhraseCountPlacement.None via Romanian, error throw paths via RejectingFormatter subclass).
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 2295c1a3, c6adf8e2, 32d4a379, 937c6bae
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 - PRs:
