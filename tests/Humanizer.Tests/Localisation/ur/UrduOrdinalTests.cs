@@ -33,20 +33,32 @@ public class UrduOrdinalTests
     [InlineData(50, GrammaticalGender.Feminine, "پچاسویں")]
     [InlineData(100, GrammaticalGender.Feminine, "ایک سوویں")]
     [InlineData(100000, GrammaticalGender.Feminine, "ایک لاکھویں")]
-    public void ToOrdinalWords_GenderedOutput(int number, GrammaticalGender gender, string expected) =>
-        Assert.Equal(expected, number.ToOrdinalWords(gender, Ur));
+    public void ToOrdinalWords_GenderedOutput(int number, GrammaticalGender gender, string expected)
+    {
+        var result = number.ToOrdinalWords(gender, Ur);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     [Theory]
     [InlineData(5, "پانچواں")]
     [InlineData(50, "پچاسواں")]
-    public void ToOrdinalWords_GenderlessDefaultsToMasculine(int number, string expected) =>
-        Assert.Equal(expected, number.ToOrdinalWords(Ur));
+    public void ToOrdinalWords_GenderlessDefaultsToMasculine(int number, string expected)
+    {
+        var result = number.ToOrdinalWords(Ur);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     [Theory]
     [InlineData(1, GrammaticalGender.Neuter, "پہلا")]
     [InlineData(5, GrammaticalGender.Neuter, "پانچواں")]
-    public void ToOrdinalWords_NeuterFallsBackToMasculine(int number, GrammaticalGender gender, string expected) =>
-        Assert.Equal(expected, number.ToOrdinalWords(gender, Ur));
+    public void ToOrdinalWords_NeuterFallsBackToMasculine(int number, GrammaticalGender gender, string expected)
+    {
+        var result = number.ToOrdinalWords(gender, Ur);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     // --- Ordinalize (IOrdinalizer path) ---
 
@@ -59,24 +71,40 @@ public class UrduOrdinalTests
     [InlineData(100, GrammaticalGender.Feminine, "ایک سوویں")]
     [InlineData(100000, GrammaticalGender.Masculine, "ایک لاکھواں")]
     [InlineData(100000, GrammaticalGender.Feminine, "ایک لاکھویں")]
-    public void Ordinalize_Int_GenderedOutput(int number, GrammaticalGender gender, string expected) =>
-        Assert.Equal(expected, number.Ordinalize(gender, Ur));
+    public void Ordinalize_Int_GenderedOutput(int number, GrammaticalGender gender, string expected)
+    {
+        var result = number.Ordinalize(gender, Ur);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     [Theory]
     [InlineData("5", GrammaticalGender.Masculine, "پانچواں")]
     [InlineData("5", GrammaticalGender.Feminine, "پانچویں")]
-    public void Ordinalize_String_GenderedOutput(string numberString, GrammaticalGender gender, string expected) =>
-        Assert.Equal(expected, numberString.Ordinalize(gender, Ur));
+    public void Ordinalize_String_GenderedOutput(string numberString, GrammaticalGender gender, string expected)
+    {
+        var result = numberString.Ordinalize(gender, Ur);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     [Theory]
     [InlineData(5, GrammaticalGender.Neuter, "پانچواں")]
     [InlineData(1, GrammaticalGender.Neuter, "پہلا")]
-    public void Ordinalize_NeuterFallsBackToMasculine(int number, GrammaticalGender gender, string expected) =>
-        Assert.Equal(expected, number.Ordinalize(gender, Ur));
+    public void Ordinalize_NeuterFallsBackToMasculine(int number, GrammaticalGender gender, string expected)
+    {
+        var result = number.Ordinalize(gender, Ur);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     [Fact]
-    public void Ordinalize_GenderlessDefaultsToMasculine() =>
-        Assert.Equal("پانچواں", 5.Ordinalize(Ur));
+    public void Ordinalize_GenderlessDefaultsToMasculine()
+    {
+        var result = 5.Ordinalize(Ur);
+        Assert.Equal("پانچواں", result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     // --- Both API paths produce consistent output ---
 
