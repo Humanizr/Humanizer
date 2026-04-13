@@ -27,9 +27,8 @@ Close formatter branch gaps: `LocalePhraseTable` (70%), `DelimitedCollectionForm
 - [ ] `ArgumentNullException` assertions check `ParamName`.
 
 ## Done summary
-_To be filled on completion._
-
+Added coverage tests for LocalePhraseTable (all four TryGet* pairs in both directions, Get* convenience methods, LocalizedPhraseForms.Resolve with all form arms, catalog culture walking/fallback), DelimitedCollectionFormatter (all six Humanize<T> overloads including null guards), and CliticCollectionFormatter (all three switch arms, all overloads). Fixed production code to add ArgumentNullException.ThrowIfNull guards for Func<T, object?> overloads before lambda wrapping in both DelimitedCollectionFormatter and CliticCollectionFormatter.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 2bb077d5, 0bdee79b, c83911e2
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release
 - PRs:
