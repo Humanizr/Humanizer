@@ -1,4 +1,4 @@
-namespace Humanizer.Tests;
+namespace Humanizer.Tests.Localisation;
 
 /// <summary>
 /// Covers <see cref="TokenMapWordsToNumberOrdinalMapBuilder"/>, exercising both <c>Build</c>

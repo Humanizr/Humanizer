@@ -300,8 +300,9 @@ public class SuffixScaleWordsToNumberConverterDirectProfileTests
     {
         var converter = CreateMinimalConverter();
         // "twotythree" = 2*10 + 3 = 23
-        Assert.True(converter.TryConvert("twotythree", out var parsedValue, out _));
+        Assert.True(converter.TryConvert("twotythree", out var parsedValue, out var unrecognizedWord));
         Assert.Equal(23, parsedValue);
+        Assert.Null(unrecognizedWord);
     }
 
     // --- Scale singular compound with remainder ---
@@ -311,8 +312,9 @@ public class SuffixScaleWordsToNumberConverterDirectProfileTests
     {
         var converter = CreateMinimalConverter();
         // "thousandone" = 1000 + 1 = 1001
-        Assert.True(converter.TryConvert("thousandone", out var parsedValue, out _));
+        Assert.True(converter.TryConvert("thousandone", out var parsedValue, out var unrecognizedWord));
         Assert.Equal(1001, parsedValue);
+        Assert.Null(unrecognizedWord);
     }
 
     // --- Scale plural compound ---
@@ -322,8 +324,9 @@ public class SuffixScaleWordsToNumberConverterDirectProfileTests
     {
         var converter = CreateMinimalConverter();
         // "twothousands" = 2 * 1000 = 2000
-        Assert.True(converter.TryConvert("twothousands", out var parsedValue, out _));
+        Assert.True(converter.TryConvert("twothousands", out var parsedValue, out var unrecognizedWord));
         Assert.Equal(2000, parsedValue);
+        Assert.Null(unrecognizedWord);
     }
 
     // --- Hundred plural compound ---
@@ -333,8 +336,9 @@ public class SuffixScaleWordsToNumberConverterDirectProfileTests
     {
         var converter = CreateMinimalConverter();
         // "twohundreds" = 2 * 100 = 200
-        Assert.True(converter.TryConvert("twohundreds", out var parsedValue, out _));
+        Assert.True(converter.TryConvert("twohundreds", out var parsedValue, out var unrecognizedWord));
         Assert.Equal(200, parsedValue);
+        Assert.Null(unrecognizedWord);
     }
 
     // --- Compound that fails all branches returns false ---
