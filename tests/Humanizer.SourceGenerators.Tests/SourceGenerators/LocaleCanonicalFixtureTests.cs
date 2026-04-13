@@ -892,12 +892,11 @@ surfaces:
     }
 
     [Fact]
-    public void SemanticDiff_NormalizeJson_HandlesIntegerArrayAndBoolValueKinds()
+    public void SemanticDiff_NormalizeJson_HandlesIntegerArrayBoolAndNullValueKinds()
     {
-        // Exercises NormalizeJson branches for arrays, integer numbers, booleans, and string values.
-        // The double (non-integer) and null branches in NormalizeJson are not reachable through
-        // the YAML parser because unquoted scalars only emit integers and the parser has no
-        // null-valued JSON element path.
+        // Exercises NormalizeJson branches for arrays, integer numbers, booleans, null, and
+        // string values. The non-integer double branch is not reachable through the current
+        // YAML parser because unquoted scalars only emit integers via long.TryParse.
         var yaml = """
 locale: 'zz-json-kinds'
 surfaces:
@@ -912,6 +911,7 @@ surfaces:
         first: 1
       scaleThreshold: 1000
       allowInvariantIntegerInput: true
+      nullableProbe: null
       negativePrefixes:
         - 'minus '
 """;
