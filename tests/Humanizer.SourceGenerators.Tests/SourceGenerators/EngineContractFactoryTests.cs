@@ -743,6 +743,10 @@ public class EngineContractFactoryTests
         var result = (bool)method.Invoke(null, parameters)!;
 
         Assert.True(result);
+        // Also verify the out element IS the root (has property "x")
+        var outElement = (JsonElement)parameters[2]!;
+        Assert.True(outElement.TryGetProperty("x", out var xProp));
+        Assert.Equal(1, xProp.GetInt32());
     }
 
     [Fact]
@@ -873,6 +877,126 @@ public class EngineContractFactoryTests
         var result = InvokeClockCreateMemberValue(root, profileMember);
         Assert.StartsWith("new(", result);
         Assert.Contains("\"test\"", result);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  Multi-member + null-RuntimeType + TypeName branches — via reflection
+    //  These cover branches that require synthetic contract shapes not
+    //  present in the real EngineContractCatalog.
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void TimeOnlyToClockNotation_MultiMemberContract_EmitsTupleConstructor()
+    {
+        // Exercises CreateConstructorValues multi-member branch (line 41):
+        // members.Length != 1 || members[0].Kind != "profile-object"
+        // => "new(" + string.Join(...) + ")"
+        var member1 = CreateEngineContractMember(kind: "string", sourcePath: "a");
+        var member2 = CreateEngineContractMember(kind: "string", sourcePath: "b");
+
+        var factoryType = GeneratorType.GetNestedType("TimeOnlyToClockNotationEngineContractFactory", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find TimeOnlyToClockNotationEngineContractFactory type.");
+
+        var method = factoryType.GetMethod("CreateConstructorValues", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find CreateConstructorValues method.");
+
+        var memberType = GeneratorType.GetNestedType("EngineContractMember", BindingFlags.NonPublic)!;
+        var createBuilderMethod = typeof(ImmutableArray).GetMethods()
+            .First(m => m.Name == "CreateBuilder" && m.GetParameters().Length == 0)
+            .MakeGenericMethod(memberType);
+        var builder = createBuilderMethod.Invoke(null, null)!;
+        var addMethod = builder.GetType().GetMethod("Add")!;
+        addMethod.Invoke(builder, [member1]);
+        addMethod.Invoke(builder, [member2]);
+        var toImmutableMethod = builder.GetType().GetMethod("ToImmutable")!;
+        var members = toImmutableMethod.Invoke(builder, null)!;
+
+        var root = ParseJson("""{ "a": "val-a", "b": "val-b" }""");
+        var result = (string)method.Invoke(null, [root, members])!;
+
+        Assert.StartsWith("new(", result);
+        Assert.Contains("\"val-a\"", result);
+        Assert.Contains("\"val-b\"", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_NullRuntimeType_UsesConventionalTypeName()
+    {
+        // Exercises the RuntimeType ?? GetClockNotationEngineTypeName branch (line 29)
+        // where a known contract has RuntimeType == null.
+        var contractType = GeneratorType.GetNestedType("EngineContract", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContract type.");
+        var memberType = GeneratorType.GetNestedType("EngineContractMember", BindingFlags.NonPublic)!;
+        var profileDefType = GeneratorType.GetNestedType("TimeOnlyToClockNotationProfileDefinition", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find TimeOnlyToClockNotationProfileDefinition type.");
+        var factoryType = GeneratorType.GetNestedType("TimeOnlyToClockNotationEngineContractFactory", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find factory type.");
+
+        // Create a contract with RuntimeType = null and a single string member
+        var emptyMembers = typeof(ImmutableArray).GetMethod("Create", Type.EmptyTypes)!
+            .MakeGenericMethod(memberType).Invoke(null, null)!;
+        var stringMember = CreateEngineContractMember(kind: "string", sourcePath: "val", defaultValue: "x");
+        var createBuilderMethod = typeof(ImmutableArray).GetMethods()
+            .First(m => m.Name == "CreateBuilder" && m.GetParameters().Length == 0)
+            .MakeGenericMethod(memberType);
+        var builder = createBuilderMethod.Invoke(null, null)!;
+        builder.GetType().GetMethod("Add")!.Invoke(builder, [stringMember]);
+        var members = builder.GetType().GetMethod("ToImmutable")!.Invoke(builder, null)!;
+
+        var contractCtor = contractType.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).First();
+        var contract = contractCtor.Invoke(["test-engine", null, members]);
+
+        // Create contracts dictionary
+        var contractsDict = typeof(ImmutableDictionary).GetMethods()
+            .First(m => m.Name == "Create" && m.GetParameters().Length == 0 && m.GetGenericArguments().Length == 2)
+            .MakeGenericMethod(typeof(string), contractType)
+            .Invoke(null, null)!;
+        var addMethodDict = contractsDict.GetType().GetMethod("Add", [typeof(string), contractType])!;
+        contractsDict = addMethodDict.Invoke(contractsDict, ["test-engine", contract])!;
+
+        // Create profile definition
+        var profileCtor = profileDefType.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).First();
+        var root = ParseJson("""{ "val": "hello" }""");
+        var profile = profileCtor.Invoke(["test-profile", "test-engine", root]);
+
+        // Invoke Create
+        var createMethod = factoryType.GetMethod("Create", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)!;
+        var result = (string)createMethod.Invoke(null, [profile, contractsDict])!;
+
+        // Should use conventional type name: TestEngineClockNotationConverter
+        Assert.Contains("new TestEngineClockNotationConverter(", result);
+    }
+
+    [Fact]
+    public void NumberToWords_ProfileObjectWithTypeName_EmitsNamedConstructor()
+    {
+        // Exercises NumberToWordsEngineContractFactory.CreateObjectValue with TypeName != null (line 102):
+        // "new " + member.TypeName + "(" + ...
+        var innerMember = CreateEngineContractMember(kind: "string", sourcePath: "name");
+        var profileMember = CreateEngineContractMemberWithMembers(
+            kind: "profile-object", sourcePath: "nested", typeName: "CustomProfileType",
+            innerMembers: [innerMember]);
+        var root = ParseJson("""{ "nested": { "name": "test-val" } }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, profileMember);
+        Assert.StartsWith("new CustomProfileType(", result);
+        Assert.Contains("\"test-val\"", result);
+    }
+
+    [Fact]
+    public void NumberToWords_ProfileObjectWithoutTypeName_EmitsAnonymousTuple()
+    {
+        // Exercises NumberToWordsEngineContractFactory.CreateObjectValue with TypeName == null (line 101):
+        // "new(" + ...
+        var innerMember = CreateEngineContractMember(kind: "string", sourcePath: "name");
+        var profileMember = CreateEngineContractMemberWithMembers(
+            kind: "profile-object", sourcePath: "nested", typeName: null,
+            innerMembers: [innerMember]);
+        var root = ParseJson("""{ "nested": { "name": "anon-val" } }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, profileMember);
+        Assert.StartsWith("new(", result);
+        Assert.Contains("\"anon-val\"", result);
     }
 
     // ──────────────────────────────────────────────────────────────────────
