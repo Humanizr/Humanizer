@@ -2,7 +2,7 @@ locale: 'zz-calendar-hijri-directionality-control'
 surfaces:
   calendar:
     hijriMonths:
-      - "Muharram\u200E"
+      - 'Muharram‎'
       - 'Safar'
       - 'Rabi1'
       - 'Rabi2'

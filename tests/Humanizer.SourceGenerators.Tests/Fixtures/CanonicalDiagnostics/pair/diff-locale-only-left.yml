@@ -1,5 +1,0 @@
-locale: 'zz-left-only'
-surfaces:
-  list:
-    engine: 'conjunction'
-    value: 'and'

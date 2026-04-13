@@ -50,15 +50,38 @@ internal static class FixtureLoader
 
     /// <summary>
     /// Reads a YAML fixture file and wraps it as an <see cref="AdditionalText"/> using the
-    /// conventional locale path that the source generator expects.
+    /// conventional locale path that the source generator expects. By default, parses the
+    /// declared <c>locale:</c> value from the YAML content so fixtures are self-describing.
+    /// Falls back to the file stem when no <c>locale:</c> line is found.
     /// </summary>
     internal static AdditionalText LoadAsAdditionalText(string filePath, string? localeCodeOverride = null)
     {
-        var localeCode = localeCodeOverride ?? Path.GetFileNameWithoutExtension(filePath);
         var text = File.ReadAllText(filePath);
+        var localeCode = localeCodeOverride ?? ParseDeclaredLocale(text) ?? Path.GetFileNameWithoutExtension(filePath);
         return new InMemoryAdditionalText(
             $@"E:\Dev\Humanizer\src\Humanizer\Locales\{localeCode}.yml",
             text);
+    }
+
+    /// <summary>
+    /// Extracts the <c>locale: 'code'</c> value from YAML text.
+    /// Returns <c>null</c> if no locale declaration is found.
+    /// </summary>
+    static string? ParseDeclaredLocale(string yamlText)
+    {
+        foreach (var line in yamlText.Split('\n'))
+        {
+            var trimmed = line.TrimStart();
+            if (!trimmed.StartsWith("locale:", StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var value = trimmed.Substring("locale:".Length).Trim().Trim('\'', '"');
+            return string.IsNullOrEmpty(value) ? null : value;
+        }
+
+        return null;
     }
 
     /// <summary>

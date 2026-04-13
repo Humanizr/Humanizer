@@ -222,24 +222,17 @@ public class LocaleCanonicalFixtureTests
     [Fact]
     public void Parse_CalendarHijriDirectionalityControl_ReportsError()
     {
-        // The fixture embeds a double-quoted string with a literal \u200E escape, which
-        // SimpleYamlParser does not process as a Unicode control. We need to inject the
-        // actual control character directly via the catalog API.
-        var yaml = "locale: 'zz-hijri-ctrl'\nsurfaces:\n  calendar:\n    hijriMonths:\n"
-                   + "      - 'Muharram\u200E'\n"
-                   + "      - 'Safar'\n"
-                   + "      - 'Rabi1'\n"
-                   + "      - 'Rabi2'\n"
-                   + "      - 'Jumada1'\n"
-                   + "      - 'Jumada2'\n"
-                   + "      - 'Rajab'\n"
-                   + "      - 'Shaban'\n"
-                   + "      - 'Ramadan'\n"
-                   + "      - 'Shawwal'\n"
-                   + "      - 'DhulQadah'\n"
-                   + "      - 'DhulHijjah'\n";
+        // The fixture file contains an actual U+200E (LRM) character embedded in the
+        // first hijriMonths entry. Verify the character is present for auditability.
+        var fixturePath = Path.Combine(
+            FixtureLoader.GetFixtureDirectory("CanonicalDiagnostics"),
+            "calendar-hijri-directionality-control.yml");
+        var fileText = File.ReadAllText(fixturePath);
+        Assert.Contains('\u200E', fileText);
 
-        var catalog = CreateCatalog(("zz-hijri-ctrl", yaml));
+        var catalog = CreateCatalogFromFixture(
+            "calendar-hijri-directionality-control",
+            "zz-calendar-hijri-directionality-control");
 
         AssertDiagnosticContains(catalog, "HSG003", "must not contain directionality controls");
     }
@@ -384,12 +377,14 @@ public class LocaleCanonicalFixtureTests
     // ──────────────────────────────────────────────────────────────────────
 
     [Fact]
-    public void Catalog_HeadingsNotMapping_ReportsError()
+    public void Catalog_CompassSurfaceScalar_ReportsNotMapping()
     {
+        // compass: 'scalar' hits the CanonicalLocaleAuthoring "surface value not a mapping" branch
+        // for the compass surface specifically. The ResolveHeadings branch in LocaleCatalogInput
+        // is unreachable because CanonicalLocaleAuthoring.Parse rejects non-mapping surfaces first.
         var catalog = CreateCatalog(
             ("zz-head", "locale: 'zz-head'\nsurfaces:\n  compass: 'scalar'\n"));
 
-        // compass: 'scalar' hits the "surface value not a mapping" branch
         AssertDiagnosticContains(catalog, "HSG003", "must be a mapping");
     }
 
@@ -449,34 +444,14 @@ public class LocaleCanonicalFixtureTests
     }
 
     [Fact]
-    public void Catalog_GrammarNotMapping_ReportsError()
+    public void Catalog_HeadingsFullNotSequence_CaughtByTryResolveLocalePart()
     {
-        // Grammar is extracted from the formatter surface, so we need to trigger the
-        // grammar resolution path via a non-mapping grammar value. The simplest way is
-        // to have the formatter surface produce a grammar entry that isn't a mapping.
-        // However, CanonicalLocaleAuthoring always produces mappings for grammar.
-        // The grammar resolution path in LocaleCatalogInput.ResolveGrammar checks
-        // "grammarValue as SimpleYamlMapping" which throws on non-mapping. This gets
-        // exercised when inherited grammar merges produce a non-mapping (unlikely in
-        // practice). Let's test via a locale that passes a scalar feature named "grammar"
-        // through direct manipulation.
-
-        // Actually, the grammar resolution is protected by TryResolveLocalePart which
-        // catches exceptions and adds diagnostics. The error path is:
-        // ResolveGrammar throws -> TryResolveLocalePart catches -> adds diagnostic.
-        // This is already covered implicitly by the formatter surface tests.
-        // Instead, focus on calendar/numberFormatting not-mapping paths.
-
-        // Test ResolveCalendar with non-mapping calendar value
-        // The calendar surface value is always validated as a mapping by CanonicalLocaleAuthoring,
-        // so the ResolveCalendar path in LocaleCatalogInput only fires if something bypasses
-        // the canonical authoring (not possible in normal flow). Skip this specific path.
-
-        // Instead, verify that TryResolveLocalePart catches errors from sub-resolvers
+        // Exercises the TryResolveLocalePart catch-and-diagnostic path: ResolveHeadings
+        // throws when full is not a sequence, TryResolveLocalePart catches the exception
+        // and emits a diagnostic instead of crashing the generator.
         var catalog = CreateCatalog(
             ("zz-head-err", "locale: 'zz-head-err'\nsurfaces:\n  compass:\n    full: 'not-a-seq'\n    short: 'not-a-seq'\n"));
 
-        // The headings resolver will throw because full is not a sequence
         AssertDiagnosticContains(catalog, "HSG003", "must be a sequence");
     }
 
@@ -606,6 +581,45 @@ surfaces:
 
         Assert.NotNull(result);
         Assert.Equal("fr", result!.LocaleCode);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  FixtureLoader — self-describing locale parsing
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void FixtureLoader_LoadAsAdditionalText_ParsesDeclaredLocaleFromYaml()
+    {
+        // Verify that LoadAsAdditionalText auto-detects the locale: from fixture YAML
+        // so callers do not need to pass an explicit locale code override.
+        var fixturePath = Path.Combine(
+            FixtureLoader.GetFixtureDirectory("CanonicalDiagnostics"),
+            "surfaces-not-mapping.yml");
+
+        var additionalText = FixtureLoader.LoadAsAdditionalText(fixturePath);
+
+        Assert.Contains("zz-surfaces-not-mapping", additionalText.Path);
+    }
+
+    [Fact]
+    public void FixtureLoader_LoadAsAdditionalText_AllowsLocaleCodeOverride()
+    {
+        var fixturePath = Path.Combine(
+            FixtureLoader.GetFixtureDirectory("CanonicalDiagnostics"),
+            "surfaces-not-mapping.yml");
+
+        var additionalText = FixtureLoader.LoadAsAdditionalText(fixturePath, "custom-override");
+
+        Assert.Contains("custom-override", additionalText.Path);
+    }
+
+    [Fact]
+    public void FixtureLoader_FromString_WrapsCorrectly()
+    {
+        var additionalText = FixtureLoader.FromString("zz-test", "locale: 'zz-test'\nsurfaces: {}");
+
+        Assert.Contains("zz-test", additionalText.Path);
+        Assert.NotNull(additionalText.GetText(TestContext.Current.CancellationToken));
     }
 
     // ──────────────────────────────────────────────────────────────────────
@@ -878,10 +892,12 @@ surfaces:
     }
 
     [Fact]
-    public void SemanticDiff_NormalizeJson_HandlesAllValueKinds()
+    public void SemanticDiff_NormalizeJson_HandlesIntegerArrayAndBoolValueKinds()
     {
-        // This test exercises the NormalizeJson branches for arrays, numbers, bools, and nulls
-        // by creating locales with profiles that contain these value kinds.
+        // Exercises NormalizeJson branches for arrays, integer numbers, booleans, and string values.
+        // The double (non-integer) and null branches in NormalizeJson are not reachable through
+        // the YAML parser because unquoted scalars only emit integers and the parser has no
+        // null-valued JSON element path.
         var yaml = """
 locale: 'zz-json-kinds'
 surfaces:
@@ -952,19 +968,23 @@ surfaces:
     // ──────────────────────────────────────────────────────────────────────
 
     [Fact]
-    public void Catalog_FeatureScalar_ResolvesAsKindOnly()
+    public void Catalog_OxfordListWithoutTemplates_ResolvesAsMappedFeature()
     {
+        // The oxford engine without templates passes through NormalizeListSurface as-is,
+        // then CreateMappedFeature handles it via the collectionFormatter mapping branch.
+        // The ResolveFeature scalar branch (SimpleYamlScalar -> LocaleFeature) is unreachable
+        // through canonical authoring because all surfaces are validated as mappings.
         var yaml = """
-locale: 'zz-scalar-cf'
+locale: 'zz-oxford-cf'
 surfaces:
   list:
     engine: 'oxford'
 """;
 
-        var catalog = CreateCatalog(("zz-scalar-cf", yaml));
+        var catalog = CreateCatalog(("zz-oxford-cf", yaml));
 
         Assert.Empty(catalog.Diagnostics);
-        var locale = catalog.Locales.Single(static l => l.LocaleCode == "zz-scalar-cf");
+        var locale = catalog.Locales.Single(static l => l.LocaleCode == "zz-oxford-cf");
         Assert.Equal("oxford", locale.CollectionFormatter!.Kind);
     }
 
@@ -982,7 +1002,7 @@ surfaces:
         var catalog = CreateCatalog(("zz-fmt-prof", yaml));
 
         Assert.Empty(catalog.Diagnostics);
-        Assert.True(catalog.DataBackedFormatterProfiles.Count > 0 || catalog.Locales.Any(static l => l.Formatter?.UsesGeneratedProfile == true));
+        Assert.Contains("zz-fmt-prof", catalog.DataBackedFormatterProfiles);
     }
 
     [Fact]
@@ -1001,7 +1021,7 @@ surfaces:
         var catalog = CreateCatalog(("zz-ord-prof", yaml));
 
         Assert.Empty(catalog.Diagnostics);
-        Assert.True(catalog.DataBackedOrdinalizerProfiles.Count > 0 || catalog.Locales.Any(static l => l.Ordinalizer?.UsesGeneratedProfile == true));
+        Assert.Contains("zz-ord-prof", catalog.DataBackedOrdinalizerProfiles);
     }
 
     // ──────────────────────────────────────────────────────────────────────
