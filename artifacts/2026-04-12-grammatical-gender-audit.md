@@ -39,15 +39,15 @@ Enumerated all `src/Humanizer/Locales/*.yml` files (65 shipped locales). Cross-r
 | | en-GB | none | (inherits en) | ✅ | — | |
 | | en-IN | none | (inherits en) | ✅ | — | |
 | | en-US | none | (overrides en) | ✅ | — | Uses en ordinal pattern |
-| **Slavic** | bg | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
-| | cs | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
-| | hr | masc/fem | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
-| | pl | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
+| **Slavic** | bg | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
+| | cs | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
+| | hr | masc/fem | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
+| | pl | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
 | | ru | masc/fem/neuter | suffix | ✅ Full (M/F/N) | — | -й/-я/-е |
-| | sk | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
-| | sl | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
-| | sr | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
-| | sr-Latn | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .13 | "." for all genders |
+| | sk | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
+| | sl | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
+| | sr | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
+| | sr-Latn | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
 | | uk | masc/fem/neuter | template | ✅ Full (M/F/N) | — | Per-gender template sections |
 | **Semitic** | ar | masc/fem | suffix | ⚠️ masculineSuffix only | .14 | No suffix (empty string) |
 | | he | masc/fem | suffix | ⚠️ masculineSuffix only | .14 | No suffix (empty string) |
@@ -63,8 +63,8 @@ Enumerated all `src/Humanizer/Locales/*.yml` files (65 shipped locales). Cross-r
 | | uz-Latn-UZ | none (ordinals) | suffix | ✅ | — | "-chi" for all |
 | **Uralic** | fi | none | suffix | ✅ | — | "." for all |
 | | hu | none | suffix | ✅ | — | "." for all |
-| **Baltic** | lt | masc/fem | suffix | ⚠️ masculineSuffix only | .13 | "." for all |
-| | lv | masc/fem | suffix | ⚠️ masculineSuffix only | .13 | "." for all |
+| **Baltic** | lt | masc/fem | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
+| | lv | masc/fem | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
 | **Hellenic** | el | masc/fem/neuter | suffix | ✅ Full (M/F/N) | — | ος/η/ο |
 | **Armenian** | hy | none (ordinals) | modulo-suffix | ✅ | — | |
 | **Iranian** | fa | none (ordinals) | suffix | ✅ | — | "م" for all |
@@ -98,9 +98,20 @@ All gaps below are locales where the suffix engine has only `masculineSuffix` de
 
 de-CH and de-LI inherit from de — no direct YAML changes needed.
 
-### .13 — Slavic (separate task)
+### .13 — Slavic + Baltic
 
-bg, cs, hr, pl, sk, sl, sr, sr-Latn, lt, lv — all use "." suffix for all genders.
+| Locale | masculineSuffix | feminineSuffix (added) | neuterSuffix (added) | Reference |
+|--------|----------------|---------------------|-------------------|-----------|
+| bg | '.' | '.' | '.' | Bulgarian Academy grammar; numeric ordinals "1.", "2." are gender-invariant |
+| cs | '.' | '.' | '.' | Pravidla českého pravopisu; "1.", "2." for all genders |
+| hr | '.' | '.' | '.' | Hrvatski pravopis; "1.", "2." for all genders |
+| pl | '.' | '.' | '.' | Słownik ortograficzny PWN; "1.", "2." for all genders |
+| sk | '.' | '.' | '.' | Pravidlá slovenského pravopisu; "1.", "2." for all genders |
+| sl | '.' | '.' | '.' | Slovenski pravopis; "1.", "2." for all genders |
+| sr | '.' | '.' | '.' | Pravopis srpskoga jezika; "1.", "2." for all genders |
+| sr-Latn | '.' | '.' | '.' | Same as sr (Latin script variant) |
+| lt | '.' | '.' | '.' | Lietuvių kalbos rašyba ir skyryba; "1.", "2." for all genders |
+| lv | '.' | '.' | '.' | Latviešu valodas pareizrakstības vārdnīca; "1.", "2." for all genders |
 
 ### .14 — Semitic/Indic/Other (separate task)
 
@@ -120,7 +131,17 @@ None identified. All shipped locales' numeric ordinals are well-documented in CL
 | nb | feminineSuffix: '.' / neuterSuffix: '.' | Nynorskordlista / Bokmålsordlista — "1., 2." standard notation | CLDR: Norwegian Bokmål `other` rule only |
 | is | feminineSuffix: '.' / neuterSuffix: '.' | Íslensk málfræði — "1., 2." dot notation is gender-invariant | CLDR: Icelandic `other` rule only |
 | lb | feminineSuffix: '.' / neuterSuffix: '.' | LOD (Lëtzebuerger Online Dictionnaire) — "1., 2." notation | CLDR: Luxembourgish `other` rule only |
+| bg | feminineSuffix: '.' / neuterSuffix: '.' | Bulgarian Academy grammar — numeric ordinals "1., 2." are gender-invariant | CLDR: Bulgarian `other` rule only |
+| cs | feminineSuffix: '.' / neuterSuffix: '.' | Pravidla českého pravopisu — "1., 2." for all genders | CLDR: Czech `other` rule only |
+| hr | feminineSuffix: '.' / neuterSuffix: '.' | Hrvatski pravopis — "1., 2." for masculine/feminine | CLDR: Croatian `other` rule only |
+| pl | feminineSuffix: '.' / neuterSuffix: '.' | Słownik ortograficzny PWN — "1., 2." for all genders | CLDR: Polish `other` rule only |
+| sk | feminineSuffix: '.' / neuterSuffix: '.' | Pravidlá slovenského pravopisu — "1., 2." for all genders | CLDR: Slovak `other` rule only |
+| sl | feminineSuffix: '.' / neuterSuffix: '.' | Slovenski pravopis — "1., 2." for all genders | CLDR: Slovenian `other` rule only |
+| sr | feminineSuffix: '.' / neuterSuffix: '.' | Pravopis srpskoga jezika — "1., 2." for all genders | CLDR: Serbian `other` rule only |
+| sr-Latn | feminineSuffix: '.' / neuterSuffix: '.' | Same as sr (Latin script variant of Serbian) | CLDR: Serbian `other` rule only |
+| lt | feminineSuffix: '.' / neuterSuffix: '.' | Lietuvių kalbos rašyba ir skyryba — "1., 2." for masculine/feminine | CLDR: Lithuanian `other` rule only |
+| lv | feminineSuffix: '.' / neuterSuffix: '.' | Latviešu valodas pareizrakstības vārdnīca — "1., 2." for masculine/feminine | CLDR: Latvian `other` rule only |
 
 ## Backward Compatibility
 
-All non-gendered locales (en, tr, ja, zh, ko, fi, hu, et, lv, id, ms, fil, th, vi, af, az, uz, fa, ku, hy, zu-ZA, bn, ta) continue to emit identical output. Adding explicit feminine/neuter suffixes with the same value as masculine changes no runtime behavior — it only makes the YAML self-documenting instead of relying on engine fallback.
+All non-gendered locales (en, tr, ja, zh, ko, fi, hu, id, ms, fil, th, vi, af, az, uz, fa, ku, hy, zu-ZA, bn, ta) continue to emit identical output. Adding explicit feminine/neuter suffixes with the same value as masculine changes no runtime behavior — it only makes the YAML self-documenting instead of relying on engine fallback.

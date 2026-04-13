@@ -432,6 +432,8 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: '.'
+      feminineSuffix: '.'
+      neuterSuffix: '.'
 
     date:
       engine: 'pattern'

@@ -1,11 +1,11 @@
-# fn-8-add-urdu-ur-locale-with-full-language.13 Grammatical-gender fills: Slavic locales
+# fn-8-add-urdu-ur-locale-with-full-language.13 Grammatical-gender fills: Slavic + Baltic locales
 
 ## Description
 
 Fill grammatical-gender ordinal gaps in Slavic locales identified by the `.12` audit artifact. Slavic languages typically have three genders (masculine / feminine / neuter) and require real per-gender ordinal tables — no silent neuter→masculine fallback in languages that genuinely distinguish three forms. Uses the engine plumbing introduced by `.9`. Only Category A gaps (CLDR Ordinal Rules + one authoritative published grammar resolves) are in scope here; Category B research-bound gaps escape to follow-up tasks outside the epic with IDs recorded in the audit.
 
 **Size:** M
-**Files:** per-locale YAML edits under `src/Humanizer/Locales/` for `cs`, `pl`, `ru`, `sk`, `sl`, `sr`, `uk`, `bg`, `hr` (and any other Slavic locales shipped); per-locale test edits under `tests/Humanizer.Tests/Localisation/{locale}/`; `artifacts/2026-04-12-grammatical-gender-audit.md` (update).
+**Files:** per-locale YAML edits under `src/Humanizer/Locales/` for `bg`, `cs`, `hr`, `pl`, `sk`, `sl`, `sr`, `sr-Latn`, `lt`, `lv` (ru/uk already filled); per-locale test files under `tests/Humanizer.Tests/Localisation/{locale}/`; `artifacts/2026-04-12-grammatical-gender-audit.md` (update).
 
 ## Approach
 
