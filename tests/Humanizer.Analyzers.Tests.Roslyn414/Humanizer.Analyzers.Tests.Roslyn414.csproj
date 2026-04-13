@@ -56,15 +56,17 @@
   </ItemGroup>
 
   <!-- Build the analyzer with RoslynVersion=4.14 before compiling this test project.
-       Uses dotnet build (via Exec) instead of ProjectReference to get a fully isolated
-       restore + build cycle. The implicit restore in dotnet build evaluates PackageReference
-       versions with RoslynVersion=4.14, so project.assets.json correctly references Roslyn
-       4.14 packages. The analyzer's IntermediateOutputPath isolates compiler intermediates.
-       Note: when building the full solution, the default (3.8) variant's restore runs last
-       and overwrites project.assets.json — this is safe because each variant only needs its
-       own assets during its own build, and the Exec target runs atomically. -->
-  <Target Name="BuildAnalyzerRoslyn414" BeforeTargets="ResolveAssemblyReferences"
-          Inputs="$(AnalyzerProjectPath)" Outputs="$(AnalyzerRoslyn414OutputDir)Humanizer.Analyzers.dll">
+       Uses dotnet build (via Exec) to get a full restore + build cycle where PackageReference
+       versions evaluate with RoslynVersion=4.14, producing a correctly linked DLL. The Exec
+       approach runs restore+build atomically in the same process, so the analyzer DLL is
+       always compiled against Roslyn 4.14 packages, verified by the
+       AnalyzerAssembly_ReferencesRoslyn414Packages smoke test.
+       The target always runs (no Inputs/Outputs) so analyzer source changes are never stale.
+       Note: MSBuildProjectExtensionsPath isolation is not used because netstandard2.0 projects
+       require framework reference pack resolution from the default obj/ path. The 4.14 restore
+       temporarily writes to obj/project.assets.json; the Exec target runs first and the 4.14
+       build completes before any default variant build touches the same assets. -->
+  <Target Name="BuildAnalyzerRoslyn414" BeforeTargets="ResolveAssemblyReferences">
     <Exec Command="dotnet build &quot;$(AnalyzerProjectPath)&quot; -c $(Configuration) /p:RoslynVersion=4.14 -v q" />
   </Target>
 
