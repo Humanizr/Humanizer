@@ -402,7 +402,7 @@ Notes:
 
 - All month arrays must contain exactly 12 entries if present. The generator validates this at build time.
 - Empty or absent = no override; the runtime falls through to `CultureInfo.DateTimeFormat`.
-- Inherits via `variantOf`: a child locale inherits the parent's `calendar.months` unless it authors its own.
+- Inherits via `variantOf`: a child locale inherits the parent's calendar arrays (`months`, `monthsGenitive`, and `hijriMonths`) unless it authors its own overrides.
 - Only `MMMM` (full month name) substitution is supported. If an ordinal-date pattern uses `MMM` (abbreviated month) while `calendar.months` is active, the generator emits a diagnostic error.
 - `hijriMonths` items must not contain Unicode directionality controls (U+200E, U+200F, U+061C). The generator validates this at build time.
 
@@ -779,7 +779,7 @@ Notes:
 
 Fields:
 
-- `useCulture`: boolean (required, must be `true`) — tells the generator to bind the locale's `CultureInfo` at construction time so the engine can resolve the correct number-to-words converter.
+- `useCulture`: must be `true` when present. The `number-word-suffix` engine is intrinsically culture-bound because it resolves the locale's `INumberToWordsConverter`; the generator passes the resolving `CultureInfo` to the runtime ordinalizer. The field is required in YAML but the binding is structural to the engine, not an arbitrary author choice.
 - `masculine`: gender block for masculine ordinals.
   - `defaultSuffix`: suffix appended to the cardinal word form for productive ordinals.
   - `exactReplacements`: mapping of number to irregular ordinal word (bypasses the cardinal-plus-suffix path).
