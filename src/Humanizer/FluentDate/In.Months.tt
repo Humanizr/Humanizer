@@ -14,12 +14,14 @@ for (var i = 0; i < 12; i++){
     /// <summary>
     /// Returns 1st of <#= monthName #> of the current year
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static DateTime <#= monthName #>
         => new(DateTime.UtcNow.Year, <#= i + 1 #>, 1);
 
     /// <summary>
     /// Returns 1st of <#= monthName #> of the year passed in
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static DateTime <#= monthName#>Of(int year)
         => new(year, <#= i + 1 #>, 1);
 

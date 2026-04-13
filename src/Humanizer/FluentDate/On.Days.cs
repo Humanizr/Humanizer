@@ -5,6 +5,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for January
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class January
     {
         /// <summary>
@@ -203,6 +204,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for February
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class February
     {
         /// <summary>
@@ -389,6 +391,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for March
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class March
     {
         /// <summary>
@@ -587,6 +590,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for April
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class April
     {
         /// <summary>
@@ -779,6 +783,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for May
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class May
     {
         /// <summary>
@@ -977,6 +982,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for June
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class June
     {
         /// <summary>
@@ -1169,6 +1175,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for July
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class July
     {
         /// <summary>
@@ -1367,6 +1374,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for August
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class August
     {
         /// <summary>
@@ -1565,6 +1573,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for September
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class September
     {
         /// <summary>
@@ -1757,6 +1766,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for October
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class October
     {
         /// <summary>
@@ -1955,6 +1965,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for November
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class November
     {
         /// <summary>
@@ -2147,6 +2158,7 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for December
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class December
     {
         /// <summary>

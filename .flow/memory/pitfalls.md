@@ -93,3 +93,6 @@ Arabic-script locales (Urdu, Persian, Pashto, etc.) use visually similar but dis
 
 ## 2026-04-13 manual [pitfall]
 Indo-Aryan languages (Urdu, Hindi) use singular-plural (one/other) plural rules, not arabic-like — using the wrong plural detector produces incorrect resource keys for phrases
+
+## 2026-04-13 manual [pitfall]
+Completion reviewers treat net48 runtime verification as blocking even when spec qualifies it with '(Windows host)' and allows follow-up IDs — push branch to CI before requesting completion review so net48 evidence exists

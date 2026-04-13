@@ -6,6 +6,7 @@ public partial class In
 {
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class One
     {
         /// <summary>
@@ -95,6 +96,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Two
     {
         /// <summary>
@@ -184,6 +186,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Three
     {
         /// <summary>
@@ -273,6 +276,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Four
     {
         /// <summary>
@@ -362,6 +366,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Five
     {
         /// <summary>
@@ -451,6 +456,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Six
     {
         /// <summary>
@@ -540,6 +546,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Seven
     {
         /// <summary>
@@ -629,6 +636,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Eight
     {
         /// <summary>
@@ -718,6 +726,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Nine
     {
         /// <summary>
@@ -807,6 +816,7 @@ public partial class In
 
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class Ten
     {
         /// <summary>

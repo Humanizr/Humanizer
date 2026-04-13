@@ -345,31 +345,56 @@ namespace Humanizer
     public class In
     {
         public In() { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime April { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime August { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime December { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime February { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime January { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime July { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime June { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime March { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime May { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime November { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime October { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime September { get; }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime AprilOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime AugustOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime DecemberOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime FebruaryOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime JanuaryOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime JulyOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime JuneOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime MarchOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime MayOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime NovemberOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime OctoberOf(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static System.DateTime SeptemberOf(int year) { }
         public static System.DateTime TheYear(int year) { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Eight
         {
             public static System.DateTime Days { get; }
@@ -387,6 +412,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Five
         {
             public static System.DateTime Days { get; }
@@ -404,6 +430,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Four
         {
             public static System.DateTime Days { get; }
@@ -421,6 +448,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Nine
         {
             public static System.DateTime Days { get; }
@@ -438,6 +466,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class One
         {
             public static System.DateTime Day { get; }
@@ -455,6 +484,7 @@ namespace Humanizer
             public static System.DateTime WeekFrom(System.DateTime date) { }
             public static System.DateTime YearFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Seven
         {
             public static System.DateTime Days { get; }
@@ -472,6 +502,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Six
         {
             public static System.DateTime Days { get; }
@@ -489,6 +520,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Ten
         {
             public static System.DateTime Days { get; }
@@ -506,6 +538,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Three
         {
             public static System.DateTime Days { get; }
@@ -523,6 +556,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static class Two
         {
             public static System.DateTime Days { get; }
@@ -698,6 +732,7 @@ namespace Humanizer
     public class On
     {
         public On() { }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class April
         {
             public April() { }
@@ -733,6 +768,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class August
         {
             public August() { }
@@ -769,6 +805,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class December
         {
             public December() { }
@@ -805,6 +842,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class February
         {
             public February() { }
@@ -839,6 +877,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class January
         {
             public January() { }
@@ -875,6 +914,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class July
         {
             public July() { }
@@ -911,6 +951,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class June
         {
             public June() { }
@@ -946,6 +987,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class March
         {
             public March() { }
@@ -982,6 +1024,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class May
         {
             public May() { }
@@ -1018,6 +1061,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class November
         {
             public November() { }
@@ -1053,6 +1097,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class October
         {
             public October() { }
@@ -1089,6 +1134,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public class September
         {
             public September() { }

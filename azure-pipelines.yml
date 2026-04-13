@@ -73,7 +73,7 @@ stages:
         command: test
         projects: tests/**/*.Tests.csproj
         # ReportGenerator needs generated sources on disk to render source-generator output.
-        arguments: -c $(BuildConfiguration) /p:EmitCompilerGeneratedFiles=true -- --coverage --coverage-output-format cobertura --xunit-info
+        arguments: -c $(BuildConfiguration) /p:EmitCompilerGeneratedFiles=true -- --coverage --coverage-output-format cobertura --coverage-settings $(Build.SourcesDirectory)/coverage.runsettings --xunit-info
       displayName: Run Tests
       continueOnError: true
 
@@ -86,7 +86,7 @@ stages:
         reports: '$(Agent.TempDirectory)/**/*.cobertura.xml'
         sourcedirs: $(Build.SourcesDirectory)
         targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/
-        reporttypes: HtmlInline_AzurePipelines_Dark;Cobertura;Badges
+        reporttypes: HtmlInline_AzurePipelines_Dark;Cobertura;Badges;TextSummary;XmlSummary
         license: '$(ReportGeneratorLicenseKey)'
         customSettings: 'settings:rawMode=false'
         publishCodeCoverageResults: true

@@ -25,6 +25,10 @@ dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.
 # Run source generator tests
 dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj
 
+# Run tests with coverage instrumentation (uses Microsoft Code Coverage via coverage.runsettings)
+dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -- --coverage --coverage-output-format cobertura --coverage-settings coverage.runsettings
+dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -- --coverage --coverage-output-format cobertura --coverage-settings coverage.runsettings
+
 # Lint (verify formatting without changes)
 dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic
 

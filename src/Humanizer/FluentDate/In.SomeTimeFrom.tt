@@ -23,6 +23,7 @@ public partial class In
 #>
     /// <summary>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class <#= i.ToWords().Dehumanize() #>
     {
         /// <summary>

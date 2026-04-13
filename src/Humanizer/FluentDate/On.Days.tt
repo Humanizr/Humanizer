@@ -18,6 +18,7 @@ for (var month = 1; month <= 12; month++)
     /// <summary>
     /// Provides fluent date accessors for <#= monthName #>
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class <#= monthName #>
     {
         /// <summary>

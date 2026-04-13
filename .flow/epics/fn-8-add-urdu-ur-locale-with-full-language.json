@@ -1,7 +1,7 @@
 {
   "branch_name": "feat/urdu-locale",
-  "completion_review_status": "unknown",
-  "completion_reviewed_at": null,
+  "completion_review_status": "ship",
+  "completion_reviewed_at": "2026-04-13T07:33:20.177356Z",
   "created_at": "2026-04-12T19:16:26.990083Z",
   "default_impl": null,
   "default_review": null,
@@ -12,7 +12,7 @@
   "plan_review_status": "ship",
   "plan_reviewed_at": "2026-04-12T20:23:48.157621Z",
   "spec_path": ".flow/specs/fn-8-add-urdu-ur-locale-with-full-language.md",
-  "status": "open",
+  "status": "done",
   "title": "Add Urdu (ur) locale with full language support",
-  "updated_at": "2026-04-12T20:23:48.157866Z"
+  "updated_at": "2026-04-13T07:33:34.605344Z"
 }

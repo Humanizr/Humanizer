@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "generated": "Pending Windows CI run",
+    "os": "Windows (authoritative, net10.0 + net8.0 + net48)",
+    "priorBaseline": {
+      "date": "2026-04-10",
+      "lineCoverage": "91.3%",
+      "branchCoverage": "80.4%",
+      "methodCoverage": "71.3%"
+    }
+  },
+  "suspectBranches": [
+    {
+      "class": "Humanizer.HeadingTableCatalog",
+      "member": "Invariant / invariantCache",
+      "file": "src/Humanizer/HeadingTable.cs",
+      "lines": "48-59",
+      "notes": "unreachable — ResolveCore(\"en\") always returns a non-null HeadingTable because the English locale is always registered by the source generator. The ?? Invariant fallback and the invariantCache lazy initializer are defensive code that cannot be reached via any public API call. The Invariant property and invariantCache.Value field are dead code under the current locale registration model.",
+      "reachability": "unreachable"
+    },
+    {
+      "class": "Humanizer.OrdinalDatePattern",
+      "member": "GetPatternCulture",
+      "file": "src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs",
+      "lines": "288-290",
+      "notes": "unreachable — The ArgumentOutOfRangeException catch block at line 288 handles the case where GregorianCalendar(GregorianCalendarTypes.Localized) is rejected by a culture's DateTimeFormat.Calendar setter. In practice, every CultureInfo in .NET accepts at least one GregorianCalendar variant, so the exception is never thrown. The subsequent foreach loop over OptionalCalendars also acts as a secondary fallback. No public API call path can trigger this catch block on any supported .NET runtime.",
+      "reachability": "unreachable"
+    },
+    {
+      "class": "Humanizer.Analyzers.WordsToNumberMigrationCodeFixProvider",
+      "member": "RegisterCodeFixesAsync / FixNarrowingConversionAsync",
+      "file": "src/Humanizer.Analyzers/WordsToNumberMigrationCodeFixProvider.cs",
+      "lines": "24-25, 28-29, 83",
+      "notes": "unreachable — The 'root is null' and 'semanticModel is null' guards at lines 24-25 and 28-29 are defensive null checks against Roslyn API contracts. GetSyntaxRootAsync and GetSemanticModelAsync never return null for a document that triggered a diagnostic (the diagnostic location requires a valid syntax tree and semantic model). The guard at line 83 in FixNarrowingConversionAsync is similarly defensive. These branches cannot be reached via the CodeFixVerifier test harness or any real VS scenario where the code fix is triggered.",
+      "reachability": "unreachable"
+    }
+  ]
+}

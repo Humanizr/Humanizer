@@ -1,0 +1,19 @@
+Summary — fn-9 Coverage Baseline (Placeholder)
+  Generated on: Pending Windows CI run
+  OS: Windows (authoritative, net10.0 + net8.0 + net48)
+  Parser: MultiReport (Cobertura)
+  Assemblies: 3 (Humanizer, Humanizer.Analyzers, Humanizer.SourceGenerators)
+
+  NOTE: This file is a placeholder. The authoritative baseline is produced by the
+  Windows CI pipeline which executes all three test projects across all supported
+  TFMs (net10.0, net8.0, net48). The placeholder will be replaced by the CI-produced
+  Summary.txt once the pipeline runs with coverage.runsettings and XmlSummary enabled.
+
+  Prior baseline (2026-04-10):
+    Line coverage: 91.3%
+    Branch coverage: 80.4% (9366 of 11647)
+    Method coverage: 71.3% (3508 of 4919)
+
+  Expected improvement from FluentDate attribute exclusion:
+    Removes ~1600 trivial generated lines from the coverable set,
+    increasing line coverage percentage without adding tests.

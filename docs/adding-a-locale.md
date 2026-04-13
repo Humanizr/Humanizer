@@ -407,6 +407,9 @@ dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Te
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/plan-validation
+
+# Coverage-instrumented run (uses Microsoft Code Coverage via coverage.runsettings)
+dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -- --coverage --coverage-output-format cobertura --coverage-settings coverage.runsettings
 ```
 
 When you change hot-path shared kernels, also run the relevant benchmark filters in `src/Benchmarks`.

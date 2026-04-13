@@ -76,9 +76,8 @@ Update documentation for the three new shipped locale files (`ur`, `ur-PK`, `ur-
 - [ ] Final gate: `LocaleRegistrySweepTests` + `LocaleTheoryMatrixCompletenessTests` still pass on net10.0.
 
 ## Done summary
-TBD
-
+Updated locale file count from 62 to 65 across all 5 target doc files, documented the number-word-suffix ordinalizer engine and calendar.hijriMonths schema extensions in locale-yaml-reference.md with worked examples, added Regional Variant Checklist exception for no-delta variant files, added release notes entries for Urdu/Hijri/gendered-ordinals/gender-audit, and captured durable learnings in skill references and memory files.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 1e6d068b, 32efd8d7, d810fa6a
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (40619 passed)
 - PRs:
