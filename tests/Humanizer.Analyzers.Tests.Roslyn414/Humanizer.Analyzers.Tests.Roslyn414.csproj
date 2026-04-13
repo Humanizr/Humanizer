@@ -27,7 +27,8 @@
     <Compile Include="..\Humanizer.Analyzers.Tests\NamespaceMigrationAnalyzerTests.cs" Link="NamespaceMigrationAnalyzerTests.cs" />
     <Compile Include="..\Humanizer.Analyzers.Tests\NamespaceMigrationCodeFixTests.cs" Link="NamespaceMigrationCodeFixTests.cs" />
     <Compile Include="..\Humanizer.Analyzers.Tests\WordsToNumberMigrationCodeFixTests.cs" Link="WordsToNumberMigrationCodeFixTests.cs" />
-    <Compile Include="..\Humanizer.Analyzers.Tests\AnalyzerAssemblyCompatibilityTests.cs" Link="AnalyzerAssemblyCompatibilityTests.cs" />
+    <!-- AnalyzerAssemblyCompatibilityTests.cs is intentionally excluded: its version ceiling
+         assertions are specific to the baseline Roslyn 3.8 assembly and do not apply to 4.14. -->
   </ItemGroup>
 
   <ItemGroup>

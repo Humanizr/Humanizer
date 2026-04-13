@@ -21,11 +21,10 @@ public class DualRoslynSmokeTests
         var analyzerType = typeof(NamespaceMigrationAnalyzer);
         var methods = analyzerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Static);
 
-        var isNamespaceMatch = methods.Where(m => m.Name == "IsNamespaceMatch").ToArray();
-        Assert.NotEmpty(isNamespaceMatch);
+        var method = Assert.Single(methods, m => m.Name == "IsNamespaceMatch");
 
         // With ROSLYN_4_14_OR_GREATER, the first parameter should be ReadOnlySpan<char>
-        var firstParam = isNamespaceMatch[0].GetParameters()[0];
+        var firstParam = method.GetParameters()[0];
         Assert.Equal(typeof(ReadOnlySpan<char>), firstParam.ParameterType);
     }
 
@@ -36,10 +35,9 @@ public class DualRoslynSmokeTests
         var codeFixType = typeof(NamespaceMigrationCodeFixProvider);
         var methods = codeFixType.GetMethods(BindingFlags.NonPublic | BindingFlags.Static);
 
-        var isNamespaceMatch = methods.Where(m => m.Name == "IsNamespaceMatch").ToArray();
-        Assert.NotEmpty(isNamespaceMatch);
+        var method = Assert.Single(methods, m => m.Name == "IsNamespaceMatch");
 
-        var firstParam = isNamespaceMatch[0].GetParameters()[0];
+        var firstParam = method.GetParameters()[0];
         Assert.Equal(typeof(ReadOnlySpan<char>), firstParam.ParameterType);
     }
 }
