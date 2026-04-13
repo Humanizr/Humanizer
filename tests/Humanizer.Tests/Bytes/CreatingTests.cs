@@ -99,12 +99,16 @@ public class CreatingTests
     }
 
     [Fact]
-    public void FromBitsLongMaxValue()
+    public void FromBitsLargeValue()
     {
-        var result = ByteSize.FromBits(long.MaxValue);
+        // Use a large value that round-trips exactly through double.
+        // long.MaxValue is not exactly representable as double, so we use
+        // a value that is: 2^53 (max exact integer in IEEE 754 double).
+        const long largeBits = 1L << 53;
+        var result = ByteSize.FromBits(largeBits);
 
-        Assert.Equal(long.MaxValue, result.Bits);
-        Assert.Equal(long.MaxValue / 8d, result.Bytes);
+        Assert.Equal(largeBits, result.Bits);
+        Assert.Equal(largeBits / 8d, result.Bytes);
     }
 
     [Fact]

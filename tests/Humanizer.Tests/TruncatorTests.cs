@@ -318,7 +318,27 @@ public class TruncatorTests
     public void TruncateWithTruncationStringAndDynamicNumberOfCharactersAndPreserveWordsTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
 
-    // -- Additional tail-branch coverage tests --
+    // -- Additional tail-branch coverage tests (fn-9.12) --
+    // Target uncovered lines/branches from artifacts/fn-9-local-coverage/uncovered.json:
+    //
+    // FixedLengthTruncator: lines 12-13 (null return), branches on 11,16,21,23,28
+    //   - null truncationString with both Left/Right directions (line 21,23,28)
+    //   - truncationString longer than length with both directions (line 21,23)
+    //
+    // FixedNumberOfCharactersTruncator: lines 12-13 (null), branches on 11,16,21,23,25,30,32,35,42,48,50,52,57,64,66,71
+    //   - Non-alpha separators between alpha chars with both directions
+    //   - Lines 62,77 (loop fallthrough) are structurally unreachable
+    //
+    // FixedNumberOfWordsTruncator: lines 12-13 (null), 72 (right fallthrough), 100 (left fallthrough)
+    //   - Single-word input with length=0 triggers loop fallthrough (lines 72, 100)
+    //
+    // DynamicLengthAndPreserveWordsTruncator: lines 16-17 (null), 105-106 (prefix empty from right)
+    //   - Effective length zero (delimiter fills length), no-space backtrack, whitespace prefix
+    //   - Candidate too long from left, allowed content zero from left
+    //
+    // DynamicNumberOfCharactersAndPreserveWordsTruncator: lines 17-18 (null), 79-81, 113-114, 118-119, 123-124, 128-129
+    //   - Delimiter longer than totalLength, no complete word fits, whitespace-only input
+    //   - Prefix/suffix alpha count zero, delimiter >= totalLength but value fits
 
     [Theory(DisplayName = "22 - FixedLengthTruncator null truncation string branches")]
     [InlineData("Text longer than length", 5, null, "Text ", TruncateFrom.Right)]

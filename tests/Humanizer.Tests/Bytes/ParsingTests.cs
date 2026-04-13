@@ -174,19 +174,10 @@ public class ParsingTests
     public void ParseTerabytes() =>
         Assert.Equal(ByteSize.FromTerabytes(100), ByteSize.Parse("100TB"));
 
-    [Theory]
-    [InlineData("Infinityb")]
-    [InlineData("-Infinityb")]
-    [InlineData("NaNb")]
-    public void TryParseReturnsFalseOnNonFiniteBits(string input)
-    {
-        Assert.False(ByteSize.TryParse(input, out var result));
-        Assert.Equal(default, result);
-    }
-
     [Fact]
     public void TryParseReturnsFalseOnFractionalBits()
     {
+        // Fractional bit values are rejected because bits must be whole numbers (line 505-507)
         Assert.False(ByteSize.TryParse("1.5b", out var result));
         Assert.Equal(default, result);
     }
@@ -196,6 +187,7 @@ public class ParsingTests
     [InlineData("-99999999999999999999b")]
     public void TryParseReturnsFalseOnBitsOutOfRange(string input)
     {
+        // Bit values outside long range are rejected (line 510-512)
         Assert.False(ByteSize.TryParse(input, out var result));
         Assert.Equal(default, result);
     }

@@ -179,36 +179,22 @@ public class ToStringTests
         Assert.Equal("10 KB", ByteSize.FromKilobytes(10).ToString("#.## KB"));
 
     [Fact]
-    public void ToStringDefaultFallbackFormatsLargestWholeNumber()
-    {
-        // Format with no unit symbol or # or 0 triggers fallback formatting
-        var result = ByteSize.FromKilobytes(10).ToString("N2");
-        Assert.Contains("KB", result);
-    }
+    public void ToStringDefaultFallbackFormatsLargestWholeNumber() =>
+        Assert.Equal("10 N2 KB", ByteSize.FromKilobytes(10).ToString("N2"));
 
     [Fact]
-    public void ToFullWordsWithFormat()
-    {
-        var result = ByteSize.FromKilobytes(10).ToFullWords("KB");
-        Assert.Contains("kilobytes", result);
-    }
+    public void ToFullWordsWithFormat() =>
+        Assert.Equal("10 kilobytes", ByteSize.FromKilobytes(10).ToFullWords("KB"));
 
     [Fact]
     public void ToFullWordsWithNullFormat() =>
         Assert.Equal("10 kilobytes", ByteSize.FromKilobytes(10).ToFullWords());
 
     [Fact]
-    public void ToStringWithNullProvider()
-    {
-        var result = ByteSize.FromKilobytes(10).ToString((IFormatProvider?)null);
-        Assert.Contains("KB", result);
-    }
+    public void ToStringWithNullProvider() =>
+        Assert.Equal("10 KB", ByteSize.FromKilobytes(10).ToString((IFormatProvider?)null));
 
     [Fact]
-    public void ToStringIFormattableWithNullFormatAndProvider()
-    {
-        var size = ByteSize.FromKilobytes(10);
-        var result = ((IFormattable)size).ToString(null, null);
-        Assert.Contains("KB", result);
-    }
+    public void ToStringIFormattableWithNullFormatAndProvider() =>
+        Assert.Equal("10 KB", ((IFormattable)ByteSize.FromKilobytes(10)).ToString(null, null));
 }
