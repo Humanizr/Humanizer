@@ -78,3 +78,6 @@ When editing JSON config files, never add or preserve // comments -- standard JS
 
 ## 2026-04-12 manual [pitfall]
 When committing artifacts under a gitignored directory (e.g. artifacts/), RepoPrompt cannot resolve the file path even if git add -f was used -- the workspace resolver reads .gitignore. Either move the file outside the gitignored path or add a negation rule to .gitignore.
+
+## 2026-04-13 manual [pitfall]
+Locales with dense number maps still need exactReplacements for irregular ordinals (e.g. Urdu 4th/6th/9th have different stems than their cardinals) — suffix-only ordinals produce wrong forms for these
