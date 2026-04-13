@@ -77,7 +77,7 @@ public class DefaultNumberToWordsConverterTests
     }
 
     [Fact]
-    public void Convert_WithNullCulture_UsesInvariantFormatting()
+    public void Convert_WithNullCulture_ReturnsFormattedNumber()
     {
         var converter = new DefaultNumberToWordsConverter(null);
         var result = converter.Convert(42L);
@@ -86,7 +86,7 @@ public class DefaultNumberToWordsConverterTests
     }
 
     [Fact]
-    public void ConvertToOrdinal_WithNullCulture_UsesInvariantFormatting()
+    public void ConvertToOrdinal_WithNullCulture_ReturnsFormattedNumber()
     {
         var converter = new DefaultNumberToWordsConverter(null);
         var result = converter.ConvertToOrdinal(42);
