@@ -7,13 +7,17 @@ Cover `OrdinalDatePattern` reachable branches and `NoMatchFoundException` public
 - `tests/Humanizer.Tests/NoMatchFoundExceptionTests.cs` (new, tiny)
 
 ## Approach
-- **OrdinalDatePattern day-mode arms** (`src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:288-299`):
-  - `MasculineOrdinalWhenDayIsOne` (`:296`) — reach via a culture whose phrase-table declares this mode
-  - `DotSuffix` (`:297`) — same
-  - `InvalidOperationException` default throw (`:298`) — reach via direct-instantiation test passing an invalid enum value (internals visible to Humanizer.Tests; the throw is behaviorally part of the contract)
-- **TFM-conditional branches** (`:143-147`, `:238-242`) — net48 job exercises these; merged report captures them.
-- **DateOnly overload** (`:65-72`) under `NET6_0_OR_GREATER`.
-- **GetPatternCulture AOORE fallback** (`:270-285`) — listed in epic's declared-unreachable appendix. If `.1/uncovered.json` proves a deterministic reachable trigger, cover it here; otherwise leave it as appendix-absorbed and exclude it from this task's per-class percentage calculation is NOT an option — the epic's tolerance already accounts for these ~15 lines.
+- **OrdinalDatePattern day-mode arms** (`src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:306-317`, the `FormatDay` method):
+  <!-- Updated by plan-sync: fn-9.1 actual line numbers differ from original plan -->
+  - `MasculineOrdinalWhenDayIsOne` (`:314`) — reach via a culture whose phrase-table declares this mode
+  - `DotSuffix` (`:315`) — same
+  - `InvalidOperationException` default throw (`:316`) — reach via direct-instantiation test passing an invalid enum value (internals visible to Humanizer.Tests; the throw is behaviorally part of the contract)
+- **TFM-conditional branches** (`:64`, `:161`, `:256`, `:326`) — net48 job exercises these; merged report captures them.
+  <!-- Updated by plan-sync: fn-9.1 actual #if locations differ from original plan -->
+- **DateOnly overload** (`:64-79`) under `NET6_0_OR_GREATER`.
+  <!-- Updated by plan-sync: fn-9.1 actual line range is :64-79 not :65-72 -->
+- **GetPatternCulture AOORE fallback** (`:288-290`) — listed in epic's declared-unreachable appendix. If `.1/uncovered.json` proves a deterministic reachable trigger, cover it here; otherwise leave it as appendix-absorbed and exclude it from this task's per-class percentage calculation is NOT an option — the epic's tolerance already accounts for these ~3 lines.
+  <!-- Updated by plan-sync: fn-9.1 actual lines :288-290 not :270-285; ~3 lines not ~15 -->
 - **NoMatchFoundException.** Three public ctors (verified from source — no serialization ctor):
   - `new NoMatchFoundException()`
   - `new NoMatchFoundException(string message)`
@@ -22,7 +26,8 @@ Cover `OrdinalDatePattern` reachable branches and `NoMatchFoundException` public
 
 ## Investigation targets
 **Required:**
-- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:1-310`
+- `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:1-334`
+  <!-- Updated by plan-sync: fn-9.1 file is 334 lines not 310 -->
 - `src/Humanizer/NoMatchFoundException.cs`
 - `artifacts/fn-9-baseline/uncovered.json`
 - Cultures with non-default day-mode: scan `src/Humanizer/Locales/*.yml` for day-mode declarations (`ar.yml`, `uk.yml`, locales emitting `MasculineOrdinalWhenDayIsOne` or `DotSuffix`)

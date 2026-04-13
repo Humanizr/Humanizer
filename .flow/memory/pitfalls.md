@@ -96,3 +96,9 @@ Indo-Aryan languages (Urdu, Hindi) use singular-plural (one/other) plural rules,
 
 ## 2026-04-13 manual [pitfall]
 Completion reviewers treat net48 runtime verification as blocking even when spec qualifies it with '(Windows host)' and allows follow-up IDs — push branch to CI before requesting completion review so net48 evidence exists
+
+## 2026-04-13 manual [pitfall]
+ExcludeFromCodeCoverageAttribute.Justification property is only available on .NET 5+ -- use conditional compilation (#if NET5_0_OR_GREATER) when targeting netstandard2.0 or net48
+
+## 2026-04-13 manual [pitfall]
+MTP --coverage-settings conflicts with testconfig.json codeCoverage section -- cannot have both; centralize coverage config in one place

@@ -60,9 +60,8 @@ Establish the honest coverage baseline. Emit `[ExcludeFromCodeCoverage]` from Fl
 - [ ] No behavior change outside T4 attribute emission and the runsettings file.
 
 ## Done summary
-_To be filled on completion._
-
+Added [ExcludeFromCodeCoverage] to six FluentDate T4 templates (on generated nested types and outer-class members only), created centralized coverage.runsettings (MTP schema), updated azure-pipelines.yml with --coverage-settings and XmlSummary, updated docs, and produced real baseline artifacts with per-class uncovered line/branch data from merged coverage runs. Humanizer assembly line coverage rose from 92% to 96.5% from attribute exclusion alone.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 133427cc, 639bac5d, 52591fed, f13b82c4, 3419c5da85be051f1b11f530512932f9d7ca7316
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0, dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj, dotnet test -- --coverage --coverage-settings coverage.runsettings (all 4 projects)
 - PRs:

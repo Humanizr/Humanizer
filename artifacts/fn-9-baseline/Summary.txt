@@ -1,6 +1,9 @@
-fn-9 Coverage Baseline
-  OS: macOS (arm64) -- net10.0, net8.0 (net48 requires Windows host)
+fn-9 Coverage Baseline (INFORMATIONAL — pre-CI)
+  Status: informational; authoritative baseline requires Windows CI run
+  OS: macOS (arm64) — net10.0, net8.0 only (net48 requires Windows host)
+  Missing TFMs: net48 (Windows-only; will be included in authoritative CI baseline)
   Test projects: Humanizer.Tests, Humanizer.Analyzers.Tests, Humanizer.SourceGenerators.Tests
+  Note: This file will be overwritten by the first Windows CI pipeline run after merge.
 
 Summary
   Generated on: 4/13/2026 - 4:05:09 AM

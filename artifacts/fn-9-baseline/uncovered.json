@@ -1,7 +1,11 @@
 {
   "metadata": {
     "generated": "2026-04-13",
-    "host": "macOS, net10.0 + net8.0",
+    "status": "informational-pre-ci",
+    "authoritative": false,
+    "host": "macOS (arm64), net10.0 + net8.0",
+    "note": "Informational baseline from macOS. Authoritative baseline requires Windows CI run covering net10.0 + net8.0 + net48 across all three test projects. This file will be overwritten by the first Windows CI pipeline run after merge. Downstream tasks should treat line numbers and coverage percentages as approximate until the authoritative baseline lands.",
+    "missingTFMs": ["net48"],
     "testProjects": [
       "Humanizer.Tests (net10.0, net8.0)",
       "Humanizer.Analyzers.Tests (net10.0)",
