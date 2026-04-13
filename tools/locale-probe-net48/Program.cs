@@ -62,8 +62,9 @@ internal static class Program
     {
         var jsonMode = args.Contains("--json");
         var onlyFailing = args.Contains("--failing");
+        var positionalLocales = args.Where(a => !a.StartsWith("--")).ToArray();
 
-        var locales = onlyFailing ? FailingLocales : AllLocales;
+        var locales = positionalLocales.Length > 0 ? positionalLocales : onlyFailing ? FailingLocales : AllLocales;
 
         Console.OutputEncoding = Encoding.UTF8;
 

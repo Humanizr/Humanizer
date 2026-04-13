@@ -31,7 +31,7 @@ All 8 canonical surface groups have reviewed terms authored and proved. Ordinali
 
 ### Probe method
 
-The standard `tools/locale-probe.cs` uses a hard-coded 62-locale set and does not accept positional locale arguments. The same applies to `tools/locale-probe-net48/`. The data below was collected via a separate ad hoc C# file-based app that directly queries `CultureInfo.GetCultureInfo()` for `ur`, `ur-PK`, and `ur-IN`. The ad hoc probe script is reproduced below for reproducibility:
+Both `tools/locale-probe.cs` and `tools/locale-probe-net48/` now include all 65 shipped locales (ur, ur-IN, ur-PK added). The initial Urdu probe data below was collected via a separate ad hoc C# file-based app during task .1 (before the probe tools were updated). The ad hoc probe script is reproduced for reproducibility:
 
 ```csharp
 // Ad hoc Urdu culture probe -- run via: dotnet run /tmp/urdu-probe.cs
