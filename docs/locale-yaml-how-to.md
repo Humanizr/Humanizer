@@ -139,6 +139,7 @@ surfaces:
   calendar:
     months: []
     monthsGenitive: []
+    hijriMonths: []
 ```
 
 Notes:
