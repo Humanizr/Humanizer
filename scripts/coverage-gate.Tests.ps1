@@ -142,7 +142,7 @@ Run-GateTest `
     -Name "Malformed XML input" `
     -FixturePath (Join-Path $fixturesDir "malformed.xml") `
     -ExpectedExitCode 1 `
-    -ExpectedOutputContains @() `
+    -ExpectedOutputContains @("Failed to parse Summary.xml as valid XML") `
     -ExpectedOutputNotContains @("GATE PASSED")
 
 # Test 9: Missing file
@@ -150,7 +150,7 @@ Run-GateTest `
     -Name "Summary.xml file does not exist" `
     -FixturePath (Join-Path $fixturesDir "nonexistent.xml") `
     -ExpectedExitCode 1 `
-    -ExpectedOutputContains @() `
+    -ExpectedOutputContains @("Summary.xml not found at path:") `
     -ExpectedOutputNotContains @("GATE PASSED")
 
 # Test 10: SourceGenerators is report-only (never fails even with low coverage)
