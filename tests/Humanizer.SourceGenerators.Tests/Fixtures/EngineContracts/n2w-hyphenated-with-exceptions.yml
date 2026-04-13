@@ -1,0 +1,70 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-int-string-dictionary PRESENT branch
+# hyphenated-scale with ordinalUnitsExceptions and tupleMap containing data.
+# Exercises:
+# - nullable-int-string-dictionary present with MissingValue="empty" -> CreateNullableIntStringFrozenDictionaryExpression
+# - char-string-dictionary member (via scale builder)
+locale: 'zz-n2w-hyphenated-with-exceptions'
+surfaces:
+  number:
+    words:
+      engine: 'hyphenated-scale'
+      zeroWord: 'zero'
+      zeroOrdinalWord: 'zeroth'
+      minusWord: 'minus'
+      twoPrefixWord: 'two'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+        - 'three'
+        - 'four'
+        - 'five'
+        - 'six'
+        - 'seven'
+        - 'eight'
+        - 'nine'
+      ordinalUnitsMap:
+        - 'zeroth'
+        - 'first'
+        - 'second'
+        - 'third'
+        - 'fourth'
+        - 'fifth'
+        - 'sixth'
+        - 'seventh'
+        - 'eighth'
+        - 'ninth'
+      tensMap:
+        - ''
+        - 'ten'
+        - 'twenty'
+        - 'thirty'
+      ordinalTensMap:
+        - ''
+        - 'tenth'
+        - 'twentieth'
+        - 'thirtieth'
+      hundredsMap:
+        - ''
+        - 'one hundred'
+        - 'two hundred'
+      ordinalUnitsExceptions:
+        1: 'first'
+        2: 'second'
+        3: 'third'
+      wholeTensExceptions:
+        20: 'twentieth'
+        30: 'thirtieth'
+      scales:
+        -
+          divisor: 1000000
+          cardinal: 'million'
+          ordinal: 'millionth'
+      thousandScale:
+        divisor: 1000
+        cardinal: 'thousand'
+        ordinal: 'thousandth'
+      tupleMap:
+        1: 'single'
+        2: 'double'
+        3: 'triple'

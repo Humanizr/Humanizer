@@ -1,0 +1,77 @@
+# Fixture: exercises TimeOnlyToClockNotationEngineContractFactory full phrase-clock contract
+# This fixture exercises:
+# - CreateConstructorValues multi-member branch (line 41)
+# - CreateMemberValue for profile-object, enum, string, bool, optional-string-array kinds
+# - GetBooleanValue with actual true value and with default
+# - GetStringValue primary path (not fallback)
+# - CreateObjectValue with explicit TypeName (PhraseClockNotationConverter ctor)
+# - CreateEnumValue happy path (hourMode, hourGender, dayPeriodPosition)
+# - optional-string-array present branch (hourWordsMap, minuteWordsMap)
+locale: 'zz-clock-phrase-full'
+surfaces:
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'feminine'
+    minuteGender: 'masculine'
+    midnight: 'midnight'
+    midday: 'noon'
+    min0: '{hour} oclock'
+    min5: 'five past {hour}'
+    min10: 'ten past {hour}'
+    min15: 'quarter past {hour}'
+    min20: 'twenty past {hour}'
+    min25: 'twenty-five past {hour}'
+    min30: 'half past {hour}'
+    min35: 'twenty-five to {nextHour}'
+    min40: 'twenty to {nextHour}'
+    min45: 'quarter to {nextHour}'
+    min50: 'ten to {nextHour}'
+    min55: 'five to {nextHour}'
+    defaultTemplate: '{hour}:{minute}'
+    zeroFiller: '0'
+    earlyMorning: 'early morning'
+    morning: 'morning'
+    afternoon: 'afternoon'
+    night: 'night'
+    dayPeriodPosition: 'prefix'
+    hourZeroWord: 'zero'
+    hourOneWord: 'one'
+    hourTwelveWord: 'twelve'
+    hourSuffixSingular: 'hour'
+    hourSuffixPlural: 'hours'
+    singularArticle: 'the'
+    pluralArticle: 'the'
+    applyEifelerRule: true
+    pastHourTemplate: 'past {hour}'
+    beforeHalfTemplate: 'before half {nextHour}'
+    afterHalfTemplate: 'after half {hour}'
+    beforeNextTemplate: 'before {nextHour}'
+    minuteSuffixSingular: 'minute'
+    minuteSuffixPlural: 'minutes'
+    hourSuffixPaucal: 'hoursp'
+    minuteSuffixPaucal: 'minutesp'
+    hourWordsMap:
+      - 'zero'
+      - 'one'
+      - 'two'
+      - 'three'
+      - 'four'
+      - 'five'
+      - 'six'
+      - 'seven'
+      - 'eight'
+      - 'nine'
+      - 'ten'
+      - 'eleven'
+      - 'twelve'
+    minuteWordsMap:
+      - 'zero'
+      - 'one'
+      - 'two'
+      - 'three'
+      - 'four'
+      - 'five'
+    compactMinuteWords: true
+    paucalLowOnly: true
+    compactConjunction: 'and'

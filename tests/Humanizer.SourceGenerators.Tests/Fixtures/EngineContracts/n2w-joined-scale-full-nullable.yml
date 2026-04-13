@@ -1,0 +1,51 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-member PRESENT branches
+# joined-scale with ordinalExceptions (nullable-int-string-dictionary present, no MissingValue="empty"),
+# compoundOrdinalRemainder (nullable-int64 present), compoundOrdinalWord (nullable-string present),
+# compoundOrdinalExcludedValues (nullable-int-set present), and matchingOrdinalSuffix (nullable-string present).
+# Exercises:
+# - nullable-int-string-dictionary with data present -> emits CreateNullableIntStringFrozenDictionaryExpression
+# - nullable-int64 with data present -> emits number literal
+# - nullable-string with data present -> emits QuoteLiteral
+# - nullable-int-set with data present -> emits CreateNullableIntFrozenSetExpression
+locale: 'zz-n2w-joined-full-nullable'
+surfaces:
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 999999999
+      zeroWord: 'zero'
+      minusWord: 'minus'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+        - 'three'
+        - 'four'
+        - 'five'
+        - 'six'
+        - 'seven'
+        - 'eight'
+        - 'nine'
+      tensMap:
+        - 'zero'
+        - 'ten'
+        - 'twenty'
+      hundredsMap:
+        - ''
+        - 'one hundred'
+        - 'two hundred'
+      scales:
+        -
+          value: 1000
+          name: 'thousand'
+      ordinalExceptions:
+        1: 'first'
+        2: 'second'
+        3: 'third'
+      compoundOrdinalRemainder: 100
+      compoundOrdinalWord: 'th'
+      compoundOrdinalExcludedValues:
+        - 11
+        - 12
+        - 13
+      matchingOrdinalSuffix: 'th'

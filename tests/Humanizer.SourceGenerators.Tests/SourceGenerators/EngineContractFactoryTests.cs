@@ -452,6 +452,430 @@ public class EngineContractFactoryTests
     }
 
     // ──────────────────────────────────────────────────────────────────────
+    //  TimeOnlyToClockNotation — full phrase-clock contract via fixture
+    //  Exercises CreateConstructorValues multi-member branch, all member
+    //  kinds (profile-object, enum, string, bool, optional-string-array),
+    //  GetBooleanValue with data, CreateObjectValue with TypeName,
+    //  CreateEnumValue happy path.
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void ClockNotation_PhraseClockFullContract_EmitsAllMembers()
+    {
+        var runResult = RunGeneratorWithFixture("clock-phrase-full-contract");
+
+        var catalogSource = GetGeneratedSource(runResult, "TimeOnlyToClockNotationProfileCatalog.g.cs");
+        var block = ExtractCacheClassBody(catalogSource, "zz_clock_phrase_full_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new PhraseClockNotationConverter(new(", block);
+        // enum values
+        Assert.Contains("PhraseClockHourMode.H24", block);
+        Assert.Contains("GrammaticalGender.Feminine", block);
+        Assert.Contains("PhraseClockDayPeriodPosition.Prefix", block);
+        // string values
+        Assert.Contains("\"midnight\"", block);
+        Assert.Contains("\"noon\"", block);
+        // bool values
+        Assert.Contains("true", block);
+        // optional-string-array present
+        Assert.Contains("new string[]", block);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  NumberToWordsEngineContractFactory — nullable member PRESENT branches
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void NumberToWords_JoinedScale_NullableMembersPresent_EmitValues()
+    {
+        var runResult = RunGeneratorWithFixture("n2w-joined-scale-full-nullable");
+
+        var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_joined_full_nullable_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new JoinedScaleNumberToWordsConverter(new(", block);
+        // nullable-int-string-dictionary present: ordinalExceptions with data
+        Assert.Contains("[1] = \"first\"", block);
+        Assert.Contains("[2] = \"second\"", block);
+        // nullable-int64 present: compoundOrdinalRemainder = 100
+        Assert.Contains("100", block);
+        // nullable-string present: compoundOrdinalWord = "th", matchingOrdinalSuffix = "th"
+        Assert.Contains("\"th\"", block);
+        // nullable-int-set present: compoundOrdinalExcludedValues
+        Assert.Contains("FrozenSet", block);
+        Assert.DoesNotContain("null, null, null, null)", block);
+    }
+
+    [Fact]
+    public void NumberToWords_InvertedTens_NullableStringStringDictionaryPresent_EmitsData()
+    {
+        var runResult = RunGeneratorWithFixture("n2w-inverted-tens-with-ordinal-exceptions");
+
+        var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_inverted_ordinal_present_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new InvertedTensNumberToWordsConverter(new(", block);
+        // nullable-string-string-dictionary with data present
+        Assert.Contains("[\"eins\"] = \"erste\"", block);
+        Assert.Contains("[\"drei\"] = \"dritte\"", block);
+    }
+
+    [Fact]
+    public void NumberToWords_HyphenatedScale_NullableIntStringDictionaryPresent_EmitsData()
+    {
+        var runResult = RunGeneratorWithFixture("n2w-hyphenated-with-exceptions");
+
+        var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_hyphenated_with_exceptions_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new HyphenatedScaleNumberToWordsConverter(new(", block);
+        // nullable-int-string-dictionary present: ordinalUnitsExceptions
+        Assert.Contains("[1] = \"first\"", block);
+        // nullable-int-string-dictionary present: tupleMap
+        Assert.Contains("[2] = \"double\"", block);
+    }
+
+    [Fact]
+    public void NumberToWords_ContextualDecimal_NullableIntStringDictionaryPresent_EmitsData()
+    {
+        var runResult = RunGeneratorWithFixture("n2w-contextual-decimal-with-exceptions");
+
+        var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_contextual_decimal_exc_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new ContextualDecimalNumberToWordsConverter(new(", block);
+        // nullable-int-string-dictionary present with MissingValue="empty": teenUnitExceptions
+        Assert.Contains("[1] = \"on bir\"", block);
+        // exactOrdinals present
+        Assert.Contains("[0] = \"sifirinci\"", block);
+    }
+
+    [Fact]
+    public void NumberToWords_VariantDecade_NullableIntSetPresent_EmitsData()
+    {
+        var runResult = RunGeneratorWithFixture("n2w-variant-decade-with-et");
+
+        var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_variant_decade_with_et_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new VariantDecadeNumberToWordsConverter(new(", block);
+        // nullable-int-set present: tensUsingEtWhenUnitIsOne with data
+        Assert.Contains("FrozenSet", block);
+        // nullable-string present: specialSeventyOneWord
+        Assert.Contains("\"soixante et onze\"", block);
+        Assert.DoesNotContain("FrozenSet<int>.Empty", block);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  Additional reflection-based member-kind tests
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void NumberToWords_Int32Member_EmitsCheckedCast()
+    {
+        // Exercises the "int32" arm in CreateMemberValue (line 68).
+        var member = CreateEngineContractMember(kind: "int32", sourcePath: "value");
+        var root = ParseJson("""{ "value": 70 }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("70", result);
+    }
+
+    [Fact]
+    public void NumberToWords_NullableInt64Member_Present_EmitsValue()
+    {
+        // Exercises the "nullable-int64" arm with data present (line 67).
+        var member = CreateEngineContractMember(kind: "nullable-int64", sourcePath: "value");
+        var root = ParseJson("""{ "value": 999 }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("999", result);
+    }
+
+    [Fact]
+    public void NumberToWords_NullableInt64Member_Missing_EmitsNull()
+    {
+        // Exercises the "nullable-int64" arm with missing data (line 67 null path).
+        var member = CreateEngineContractMember(kind: "nullable-int64", sourcePath: "missing");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("null", result);
+    }
+
+    [Fact]
+    public void NumberToWords_NullableInt64Member_WithDefault_EmitsDefault()
+    {
+        // Exercises GetOptionalInt64Value default branch (line 263-264).
+        var member = CreateEngineContractMember(kind: "nullable-int64", sourcePath: "missing", defaultValue: "50");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("50", result);
+    }
+
+    [Fact]
+    public void NumberToWords_NullableStringMember_Present_EmitsQuotedValue()
+    {
+        // Exercises the "nullable-string" arm with data present (line 64).
+        var member = CreateEngineContractMember(kind: "nullable-string", sourcePath: "value");
+        var root = ParseJson("""{ "value": "hello" }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("\"hello\"", result);
+    }
+
+    [Fact]
+    public void NumberToWords_NullableStringMember_WithFallback_UsesFallback()
+    {
+        // Exercises GetOptionalStringValue fallback branch (lines 218-220).
+        var member = CreateEngineContractMember(kind: "nullable-string", sourcePath: "missing", fallbackSourcePath: "alt");
+        var root = ParseJson("""{ "alt": "fallback-val" }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("\"fallback-val\"", result);
+    }
+
+    [Fact]
+    public void NumberToWords_NullableStringMember_WithDefault_EmitsDefault()
+    {
+        // Exercises GetOptionalStringValue default branch (line 223).
+        var member = CreateEngineContractMember(kind: "nullable-string", sourcePath: "missing", defaultValue: "def");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("\"def\"", result);
+    }
+
+    [Fact]
+    public void NumberToWords_NullableStringMember_AllMissing_EmitsNull()
+    {
+        // Exercises the "nullable-string" arm when value is null (line 64 null path).
+        var member = CreateEngineContractMember(kind: "nullable-string", sourcePath: "missing");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("null", result);
+    }
+
+    [Fact]
+    public void NumberToWords_BoolMember_DefaultTrue_EmitsTrue()
+    {
+        // Exercises GetBooleanValue default-value branch with "true" parsing (line 234).
+        var member = CreateEngineContractMember(kind: "bool", sourcePath: "missing", defaultValue: "true");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("true", result);
+    }
+
+    [Fact]
+    public void NumberToWords_BoolMember_Present_EmitsActualValue()
+    {
+        // Exercises GetBooleanValue with data present (lines 228-231).
+        var member = CreateEngineContractMember(kind: "bool", sourcePath: "flag");
+        var root = ParseJson("""{ "flag": true }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("true", result);
+    }
+
+    [Fact]
+    public void NumberToWords_CultureMember_WithCulture_EmitsCulture()
+    {
+        // Exercises the "culture" arm with useCultureParameter=true (line 62 true path).
+        var member = CreateEngineContractMember(kind: "culture");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValueWithCulture(root, member, useCultureParameter: true);
+        Assert.Equal("culture", result);
+    }
+
+    [Fact]
+    public void NumberToWords_CultureMember_WithoutCulture_EmitsInvariant()
+    {
+        // Exercises the "culture" arm with useCultureParameter=false (line 62 false path).
+        var member = CreateEngineContractMember(kind: "culture");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValueWithCulture(root, member, useCultureParameter: false);
+        Assert.Equal("CultureInfo.InvariantCulture", result);
+    }
+
+    [Fact]
+    public void NumberToWords_StringMemberWithFallback_UsesFallback()
+    {
+        // Exercises NumberToWordsEngineContractFactory.GetStringValue fallback-source-path branch (lines 198-199).
+        var member = CreateEngineContractMember(kind: "string", sourcePath: "primary", fallbackSourcePath: "fallback");
+        var root = ParseJson("""{ "fallback": "fallback-value" }""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("\"fallback-value\"", result);
+    }
+
+    [Fact]
+    public void NumberToWords_StringMemberWithDefault_UsesDefault()
+    {
+        // Exercises NumberToWordsEngineContractFactory.GetStringValue default-value branch (lines 204-205).
+        var member = CreateEngineContractMember(kind: "string", sourcePath: "missing", defaultValue: "default-val");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("\"default-val\"", result);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  EngineContractUtilities — remaining branches
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void EngineContractUtilities_TryGetElement_NullPath_ReturnsRootElement()
+    {
+        // Exercises TryGetElement with null/whitespace path returning true and root (lines 18-20).
+        var utilitiesType = GeneratorType.GetNestedType("EngineContractUtilities", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContractUtilities type.");
+
+        var method = utilitiesType.GetMethod("TryGetElement", BindingFlags.Public | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find TryGetElement method.");
+
+        var root = ParseJson("""{ "x": 1 }""");
+        var parameters = new object?[] { root, null, null };
+        var result = (bool)method.Invoke(null, parameters)!;
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void EngineContractUtilities_GetRequiredElement_MissingProperty_Throws()
+    {
+        // Exercises GetRequiredElement throw path (line 13).
+        var utilitiesType = GeneratorType.GetNestedType("EngineContractUtilities", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContractUtilities type.");
+
+        var method = utilitiesType.GetMethod("GetRequiredElement", BindingFlags.Public | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find GetRequiredElement method.");
+
+        var root = ParseJson("""{}""");
+        var tie = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, [root, "nonexistent"]));
+        var exception = Assert.IsType<InvalidOperationException>(tie.InnerException);
+        Assert.Contains("Missing required property 'nonexistent'", exception.Message);
+    }
+
+    [Fact]
+    public void EngineContractUtilities_GetLeafPropertyName_DottedPath_ReturnsLastSegment()
+    {
+        // Exercises GetLeafPropertyName with dotted path (line 55 lastSeparator >= 0 branch).
+        var utilitiesType = GeneratorType.GetNestedType("EngineContractUtilities", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContractUtilities type.");
+
+        var method = utilitiesType.GetMethod("GetLeafPropertyName", BindingFlags.Public | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find GetLeafPropertyName method.");
+
+        var result = (string)method.Invoke(null, ["parent.child.leaf"])!;
+        Assert.Equal("leaf", result);
+    }
+
+    [Fact]
+    public void EngineContractUtilities_GetLeafPropertyName_SimplePath_ReturnsWholePath()
+    {
+        // Exercises GetLeafPropertyName with non-dotted path (line 55 lastSeparator < 0 branch).
+        var utilitiesType = GeneratorType.GetNestedType("EngineContractUtilities", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContractUtilities type.");
+
+        var method = utilitiesType.GetMethod("GetLeafPropertyName", BindingFlags.Public | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find GetLeafPropertyName method.");
+
+        var result = (string)method.Invoke(null, ["simple"])!;
+        Assert.Equal("simple", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_StringMemberWithDefault_UsesDefault()
+    {
+        // Exercises TimeOnlyToClockNotationEngineContractFactory.GetStringValue default-value branch (lines 103-105).
+        var member = CreateEngineContractMember(kind: "string", sourcePath: "missing", defaultValue: "default-val");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeClockCreateMemberValue(root, member);
+        Assert.Equal("\"default-val\"", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_BoolMemberWithDefault_UsesDefault()
+    {
+        // Exercises TimeOnlyToClockNotationEngineContractFactory.GetBooleanValue default branch (line 74).
+        var member = CreateEngineContractMember(kind: "bool", sourcePath: "missing", defaultValue: "true");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeClockCreateMemberValue(root, member);
+        Assert.Equal("true", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_BoolMemberPresent_EmitsActualValue()
+    {
+        // Exercises TimeOnlyToClockNotationEngineContractFactory.GetBooleanValue present data branch (lines 68-71).
+        var member = CreateEngineContractMember(kind: "bool", sourcePath: "flag");
+        var root = ParseJson("""{ "flag": false }""");
+
+        var result = InvokeClockCreateMemberValue(root, member);
+        Assert.Equal("false", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_OptionalStringArrayPresent_EmitsArray()
+    {
+        // Exercises TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue optional-string-array present branch.
+        var member = CreateEngineContractMember(kind: "optional-string-array", sourcePath: "items");
+        var root = ParseJson("""{ "items": ["a", "b"] }""");
+
+        var result = InvokeClockCreateMemberValue(root, member);
+        Assert.Contains("new string[]", result);
+        Assert.Contains("\"a\"", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_OptionalStringArrayMissing_EmitsEmpty()
+    {
+        // Exercises TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue optional-string-array missing branch.
+        var member = CreateEngineContractMember(kind: "optional-string-array", sourcePath: "missing");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeClockCreateMemberValue(root, member);
+        Assert.Equal("Array.Empty<string>()", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_ProfileObjectWithTypeName_EmitsNamedConstructor()
+    {
+        // Exercises CreateObjectValue with non-null TypeName (line 87).
+        var innerMember = CreateEngineContractMember(kind: "string", sourcePath: "name");
+        var profileMember = CreateEngineContractMemberWithMembers(
+            kind: "profile-object", sourcePath: "nested", typeName: "MyType",
+            innerMembers: [innerMember]);
+        var root = ParseJson("""{ "nested": { "name": "test" } }""");
+
+        var result = InvokeClockCreateMemberValue(root, profileMember);
+        Assert.StartsWith("new MyType(", result);
+        Assert.Contains("\"test\"", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_ProfileObjectWithoutTypeName_EmitsAnonymousTuple()
+    {
+        // Exercises CreateObjectValue with null TypeName (line 86).
+        var innerMember = CreateEngineContractMember(kind: "string", sourcePath: "name");
+        var profileMember = CreateEngineContractMemberWithMembers(
+            kind: "profile-object", sourcePath: "nested", typeName: null,
+            innerMembers: [innerMember]);
+        var root = ParseJson("""{ "nested": { "name": "test" } }""");
+
+        var result = InvokeClockCreateMemberValue(root, profileMember);
+        Assert.StartsWith("new(", result);
+        Assert.Contains("\"test\"", result);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
     //  Full generation — consolidated builder coverage
     // ──────────────────────────────────────────────────────────────────────
 
@@ -565,6 +989,40 @@ public class EngineContractFactoryTests
     }
 
     /// <summary>
+    /// Creates an <c>EngineContractMember</c> via reflection with nested members.
+    /// Used for testing profile-object members that contain sub-members.
+    /// </summary>
+    static object CreateEngineContractMemberWithMembers(
+        string kind,
+        string? sourcePath = null,
+        string? typeName = null,
+        params object[] innerMembers)
+    {
+        var memberType = GeneratorType.GetNestedType("EngineContractMember", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContractMember type.");
+
+        var constructor = memberType.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException("Could not find EngineContractMember constructor.");
+
+        // Build ImmutableArray<EngineContractMember> from the inner members
+        var createBuilderMethod = typeof(ImmutableArray).GetMethods()
+            .First(m => m.Name == "CreateBuilder" && m.GetParameters().Length == 0)
+            .MakeGenericMethod(memberType);
+        var builder = createBuilderMethod.Invoke(null, null)!;
+        var addMethod = builder.GetType().GetMethod("Add")!;
+        foreach (var inner in innerMembers)
+        {
+            addMethod.Invoke(builder, [inner]);
+        }
+
+        var toImmutableMethod = builder.GetType().GetMethod("ToImmutable")!;
+        var members = toImmutableMethod.Invoke(builder, null)!;
+
+        return constructor.Invoke([kind, sourcePath, typeName, null, null, null, null, null, members]);
+    }
+
+    /// <summary>
     /// Invokes <c>NumberToWordsEngineContractFactory.CreateMemberValue</c> via reflection
     /// and returns the expected <see cref="InvalidOperationException"/> from the inner
     /// <see cref="TargetInvocationException"/>.
@@ -628,6 +1086,22 @@ public class EngineContractFactoryTests
             ?? throw new InvalidOperationException("Could not find CreateMemberValue method.");
 
         return (string)method.Invoke(null, [root, member, false])!;
+    }
+
+    /// <summary>
+    /// Invokes <c>NumberToWordsEngineContractFactory.CreateMemberValue</c> with explicit
+    /// <paramref name="useCultureParameter"/> control.
+    /// </summary>
+    static string InvokeNumberToWordsCreateMemberValueWithCulture(
+        JsonElement root, object member, bool useCultureParameter)
+    {
+        var factoryType = GeneratorType.GetNestedType("NumberToWordsEngineContractFactory", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find NumberToWordsEngineContractFactory type.");
+
+        var method = factoryType.GetMethod("CreateMemberValue", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find CreateMemberValue method.");
+
+        return (string)method.Invoke(null, [root, member, useCultureParameter])!;
     }
 
     static JsonElement ParseJson(string json)

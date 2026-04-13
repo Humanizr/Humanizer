@@ -1,0 +1,31 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-int-set PRESENT branch
+# with MissingValue="empty". variant-decade has tensUsingEtWhenUnitIsOne.
+# When data IS present, CreateNullableIntSetValue calls CreateNullableIntFrozenSetExpression.
+locale: 'zz-n2w-variant-decade-with-et'
+surfaces:
+  number:
+    words:
+      engine: 'variant-decade'
+      minusWord: 'moins'
+      seventyStrategy: 'sixty-ten'
+      ninetyStrategy: 'four-twenty-ten'
+      specialSeventyOneEnabled: true
+      specialSeventyOneWord: 'soixante et onze'
+      pluralizeExactEighty: true
+      tensUsingEtWhenUnitIsOne:
+        - 20
+        - 30
+        - 40
+        - 50
+        - 60
+      tensMap:
+        - 'zero'
+        - 'dix'
+        - 'vingt'
+        - 'trente'
+        - 'quarante'
+        - 'cinquante'
+        - 'soixante'
+        - 'soixante'
+        - 'quatre-vingt'
+        - 'quatre-vingt'

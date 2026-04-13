@@ -1,0 +1,41 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-int-string-dictionary PRESENT
+# with MissingValue="empty". contextual-decimal has teenUnitExceptions, postTensUnitExceptions,
+# and exactOrdinals. When data IS present, CreateNullableIntStringDictionaryValue calls
+# CreateNullableIntStringFrozenDictionaryExpression (line 119).
+locale: 'zz-n2w-contextual-decimal-exc'
+surfaces:
+  number:
+    words:
+      engine: 'contextual-decimal'
+      zeroWord: 'sifir'
+      minusWord: 'eksi'
+      ordinalPrefix: ''
+      tenWord: 'on'
+      tensWord: 'on'
+      zeroTensWord: ''
+      digitWords:
+        - 'sifir'
+        - 'bir'
+        - 'iki'
+        - 'uc'
+        - 'dort'
+        - 'bes'
+        - 'alti'
+        - 'yedi'
+        - 'sekiz'
+        - 'dokuz'
+      scales:
+        -
+          value: 100
+          name: 'yuz'
+        -
+          value: 1000
+          name: 'bin'
+      teenUnitExceptions:
+        1: 'on bir'
+        2: 'on iki'
+      postTensUnitExceptions:
+        1: 'bir'
+      exactOrdinals:
+        0: 'sifirinci'
+        1: 'birinci'

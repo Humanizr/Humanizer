@@ -1,0 +1,53 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-string-string-dictionary PRESENT branch
+# inverted-tens with ordinalExceptions containing data.
+# Exercises the PRESENT branch of nullable-string-string-dictionary in CreateMemberValue (line 77-78),
+# which calls CreateOptionalStringStringFrozenDictionaryExpression.
+locale: 'zz-n2w-inverted-ordinal-present'
+surfaces:
+  number:
+    words:
+      engine: 'inverted-tens'
+      minusWord: 'minus'
+      unitsMap:
+        - 'null'
+        - 'eins'
+        - 'zwei'
+        - 'drei'
+        - 'vier'
+        - 'fuenf'
+        - 'sechs'
+        - 'sieben'
+        - 'acht'
+        - 'neun'
+        - 'zehn'
+        - 'elf'
+        - 'zwoelf'
+        - 'dreizehn'
+        - 'vierzehn'
+        - 'fuenfzehn'
+        - 'sechzehn'
+        - 'siebzehn'
+        - 'achtzehn'
+        - 'neunzehn'
+      tensMap:
+        1: 'zehn'
+        2: 'zwanzig'
+        3: 'dreissig'
+      hundredsPrefixMap:
+        1: 'ein'
+        2: 'zwei'
+      oneHundredWord: 'einhundert'
+      hundredWord: 'hundert'
+      unitTensJoiner: 'und'
+      scales:
+        -
+          value: 1000
+          oneForm: 'eintausend'
+          manyForm: 'tausend'
+          countJoiner: ''
+          remainderSeparator: ''
+      ordinalExceptions:
+        'eins': 'erste'
+        'drei': 'dritte'
+        'sieben': 'siebte'
+        'acht': 'achte'
