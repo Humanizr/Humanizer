@@ -730,6 +730,88 @@ surfaces:
         Assert.Equal(12, hijriSeq.Items.Length);
     }
 
+    [Theory]
+    [InlineData("words", "number.words")]
+    [InlineData("parse", "number.parse")]
+    [InlineData("formatting", "number.formatting")]
+    public void CanonicalSchemaRejectsScalarValueForNumberChildBlock(string childProperty, string expectedPath)
+    {
+        var yaml = $"""
+locale: 'zz'
+surfaces:
+  number:
+    {childProperty}: 'oops'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedPath, StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
+    [Theory]
+    [InlineData("numeric", "ordinal.numeric")]
+    [InlineData("date", "ordinal.date")]
+    [InlineData("dateOnly", "ordinal.dateOnly")]
+    public void CanonicalSchemaRejectsScalarValueForOrdinalChildBlock(string childProperty, string expectedPath)
+    {
+        var yaml = $"""
+locale: 'zz'
+surfaces:
+  ordinal:
+    {childProperty}: 'oops'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedPath, StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CanonicalSchemaRejectsSequenceValueForNumberWordsBlock()
+    {
+        var yaml = """
+locale: 'zz'
+surfaces:
+  number:
+    words:
+      - 'one'
+      - 'two'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("number.words", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CanonicalSchemaRejectsSequenceValueForOrdinalNumericBlock()
+    {
+        var yaml = """
+locale: 'zz'
+surfaces:
+  ordinal:
+    numeric:
+      - 'first'
+      - 'second'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("ordinal.numeric", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
     static string GetRequiredString(HumanizerSourceGenerator.LocaleFeature feature, string propertyName) =>
         feature.ProfileRoot.GetProperty(propertyName).GetString()!;
 

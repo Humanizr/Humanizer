@@ -202,21 +202,36 @@ public sealed partial class HumanizerSourceGenerator
                 }
             }
 
-            if (numberSurface.TryGetValue("words", out var wordsValue) &&
-                wordsValue is SimpleYamlMapping wordsMapping)
+            if (numberSurface.TryGetValue("words", out var wordsValue))
             {
+                if (wordsValue is not SimpleYamlMapping wordsMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.words' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["numberToWords"] = wordsMapping;
             }
 
-            if (numberSurface.TryGetValue("parse", out var parseValue) &&
-                parseValue is SimpleYamlMapping parseMapping)
+            if (numberSurface.TryGetValue("parse", out var parseValue))
             {
+                if (parseValue is not SimpleYamlMapping parseMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.parse' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["wordsToNumber"] = parseMapping;
             }
 
-            if (numberSurface.TryGetValue("formatting", out var fmtValue) &&
-                fmtValue is SimpleYamlMapping fmtMapping)
+            if (numberSurface.TryGetValue("formatting", out var fmtValue))
             {
+                if (fmtValue is not SimpleYamlMapping fmtMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.formatting' must be a mapping, not a scalar or sequence.");
+                }
+
                 ValidateNumberFormattingBlock(localeCode, fmtMapping);
                 features["numberFormatting"] = fmtMapping;
             }
@@ -278,21 +293,36 @@ public sealed partial class HumanizerSourceGenerator
                 }
             }
 
-            if (ordinalSurface.TryGetValue("numeric", out var numericValue) &&
-                numericValue is SimpleYamlMapping numericMapping)
+            if (ordinalSurface.TryGetValue("numeric", out var numericValue))
             {
+                if (numericValue is not SimpleYamlMapping numericMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.numeric' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["ordinalizer"] = numericMapping;
             }
 
-            if (ordinalSurface.TryGetValue("date", out var dateValue) &&
-                dateValue is SimpleYamlMapping dateMapping)
+            if (ordinalSurface.TryGetValue("date", out var dateValue))
             {
+                if (dateValue is not SimpleYamlMapping dateMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.date' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["dateToOrdinalWords"] = dateMapping;
             }
 
-            if (ordinalSurface.TryGetValue("dateOnly", out var dateOnlyValue) &&
-                dateOnlyValue is SimpleYamlMapping dateOnlyMapping)
+            if (ordinalSurface.TryGetValue("dateOnly", out var dateOnlyValue))
             {
+                if (dateOnlyValue is not SimpleYamlMapping dateOnlyMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.dateOnly' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["dateOnlyToOrdinalWords"] = dateOnlyMapping;
             }
         }
