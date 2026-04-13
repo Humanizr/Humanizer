@@ -1,0 +1,10 @@
+# Fixture: exercises WordsToNumberEngineContractFactory _ default arm (conventional fallthrough)
+# The unknown engine 'exotic-parser' is not in the factory switch, so it falls through to
+# CreateConventionalWordsToNumberExpression, emitting "new ExoticParserWordsToNumberConverter()".
+locale: 'zz-w2n-unknown-engine'
+surfaces:
+  number:
+    parse:
+      engine: 'exotic-parser'
+      cardinalMap:
+        one: 1

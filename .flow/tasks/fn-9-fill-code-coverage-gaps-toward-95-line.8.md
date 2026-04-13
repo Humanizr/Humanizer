@@ -43,9 +43,8 @@ Also owns the **shared fixture helper + csproj resource inclusion** that task .9
 - [ ] SG coverage thresholds are task-level acceptance only — **not gated by CI** (the gate script in .11 excludes `Humanizer.SourceGenerators`).
 
 ## Done summary
-_To be filled on completion._
-
+Added 72 tests covering error paths in CanonicalLocaleAuthoring, LocaleCatalogInput, LocaleDefinitionFile, and LocaleSemanticDiff, plus shared FixtureLoader helper and 29 YAML fixture files. Removed dead canonical surface mapper code from LocaleCatalogInput that was superseded by CanonicalLocaleAuthoring.ToLocaleDefinition.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: b708718a, bc4736b8, 65522925, 64f2d745, 034c55ef
+- Tests: dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 - PRs:

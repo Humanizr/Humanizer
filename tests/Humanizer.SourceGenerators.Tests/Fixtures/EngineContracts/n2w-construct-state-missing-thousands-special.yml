@@ -1,0 +1,39 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-int-string-dictionary MissingValue="empty"
+# construct-state-scale has thousandsSpecialCases with MissingValue="empty". When omitted from
+# YAML, CreateNullableIntStringDictionaryValue returns "FrozenDictionary<int, string>.Empty".
+locale: 'zz-n2w-construct-no-thousands'
+surfaces:
+  number:
+    words:
+      engine: 'construct-state-scale'
+      defaultGender: 'masculine'
+      zeroWord: 'zero'
+      minusWord: 'minus'
+      andPrefix: 'and'
+      teenMasculineWord: 'teen-m'
+      teenFeminineWord: 'teen-f'
+      teenNormalizationOld: 'old'
+      teenNormalizationNew: 'new'
+      unitsFeminine:
+        - 'zero-f'
+        - 'one-f'
+        - 'two-f'
+      unitsMasculine:
+        - 'zero-m'
+        - 'one-m'
+        - 'two-m'
+      tensMap:
+        - 'zero-t'
+        - 'ten'
+        - 'twenty'
+      oneHundredWord: 'hundred'
+      twoHundredsWord: 'two-hundreds'
+      hundredsPluralSuffix: '-hundreds'
+      thousandsPluralSuffix: '-thousands'
+      thousandsSingularSuffix: '-thousand'
+      scales:
+        -
+          value: 1000000
+          singular: 'million'
+          dualPrefix: 'two'
+          countGender: 'masculine'

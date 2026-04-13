@@ -1,0 +1,47 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-string-string-dictionary MissingValue="empty"
+# inverted-tens has ordinalExceptions with MissingValue="empty". When omitted from YAML,
+# the factory emits "FrozenDictionary<string, string>.Empty".
+locale: 'zz-n2w-inverted-tens-no-ordinal'
+surfaces:
+  number:
+    words:
+      engine: 'inverted-tens'
+      minusWord: 'minus'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+        - 'three'
+        - 'four'
+        - 'five'
+        - 'six'
+        - 'seven'
+        - 'eight'
+        - 'nine'
+        - 'ten'
+        - 'eleven'
+        - 'twelve'
+        - 'thirteen'
+        - 'fourteen'
+        - 'fifteen'
+        - 'sixteen'
+        - 'seventeen'
+        - 'eighteen'
+        - 'nineteen'
+      tensMap:
+        1: 'ten'
+        2: 'twenty'
+        3: 'thirty'
+      hundredsPrefixMap:
+        1: 'one'
+        2: 'two'
+      oneHundredWord: 'one hundred'
+      hundredWord: 'hundred'
+      unitTensJoiner: 'and'
+      scales:
+        -
+          value: 1000
+          oneForm: 'one thousand'
+          manyForm: 'thousand'
+          countJoiner: ' '
+          remainderSeparator: ' '

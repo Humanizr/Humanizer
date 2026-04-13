@@ -1,0 +1,35 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-string and nullable-int64 members
+# joined-scale has matchingOrdinalSuffix (nullable-string), compoundOrdinalRemainder (nullable-int64),
+# compoundOrdinalWord (nullable-string), and compoundOrdinalExcludedValues (nullable-int-set).
+# When all are omitted, the factory emits null for each.
+locale: 'zz-n2w-joined-minimal'
+surfaces:
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 999999999
+      zeroWord: 'zero'
+      minusWord: 'minus'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+        - 'three'
+        - 'four'
+        - 'five'
+        - 'six'
+        - 'seven'
+        - 'eight'
+        - 'nine'
+      tensMap:
+        - 'zero'
+        - 'ten'
+        - 'twenty'
+      hundredsMap:
+        - ''
+        - 'one hundred'
+        - 'two hundred'
+      scales:
+        -
+          value: 1000
+          name: 'thousand'

@@ -1,0 +1,14 @@
+# Fixture: exercises WordsToNumberEngineContractFactory greedy-compound empty ordinal map fallback
+# This greedy-compound locale has NEITHER ordinalMap NOR ordinalNumberToWordsKind,
+# so CreateGreedyCompoundOrdinalMapExpression returns the empty dictionary expression.
+locale: 'zz-w2n-greedy-no-ordinal'
+surfaces:
+  number:
+    parse:
+      engine: 'greedy-compound'
+      cardinalMap:
+        one: 1
+        two: 2
+        ten: 10
+        hundred: 100
+        thousand: 1000

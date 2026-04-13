@@ -1,0 +1,24 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-int-set MissingValue="empty"
+# variant-decade has tensUsingEtWhenUnitIsOne with MissingValue="empty". When omitted from
+# YAML, CreateNullableIntSetValue returns "FrozenSet<int>.Empty".
+locale: 'zz-n2w-variant-decade-no-et'
+surfaces:
+  number:
+    words:
+      engine: 'variant-decade'
+      minusWord: 'minus'
+      seventyStrategy: 'sixty-ten'
+      ninetyStrategy: 'four-twenty-ten'
+      specialSeventyOneEnabled: false
+      pluralizeExactEighty: false
+      tensMap:
+        - 'zero'
+        - 'ten'
+        - 'twenty'
+        - 'thirty'
+        - 'forty'
+        - 'fifty'
+        - 'sixty'
+        - 'seventy'
+        - 'eighty'
+        - 'ninety'

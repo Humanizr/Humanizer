@@ -1,0 +1,9 @@
+# Fixture: exercises NumberToWordsEngineContractFactory conventional fallthrough
+# The unknown engine 'exotic-writer' is not in the contracts dictionary, so it falls through to
+# CreateConventionalNumberToWordsExpression, emitting "new ExoticWriterNumberToWordsConverter()".
+locale: 'zz-n2w-unknown-engine'
+surfaces:
+  number:
+    words:
+      engine: 'exotic-writer'
+      minusWord: 'minus'

@@ -1,0 +1,7 @@
+# Fixture: exercises TimeOnlyToClockNotationEngineContractFactory conventional fallthrough
+# The unknown engine 'exotic-clock' is not in the contracts dictionary, so it falls through to
+# CreateConventionalTimeOnlyToClockNotationExpression, emitting "new ExoticClockTimeOnlyToClockNotationConverter()".
+locale: 'zz-clock-unknown-engine'
+surfaces:
+  clock:
+    engine: 'exotic-clock'
