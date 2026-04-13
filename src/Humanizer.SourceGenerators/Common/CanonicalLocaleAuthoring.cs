@@ -304,10 +304,10 @@ public sealed partial class HumanizerSourceGenerator
         {
             foreach (var property in calendarSurface.Values.Keys)
             {
-                if (property is not ("months" or "monthsGenitive"))
+                if (property is not ("months" or "monthsGenitive" or "hijriMonths"))
                 {
                     throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.calendar' defines unsupported property '{property}'. Supported properties: months, monthsGenitive.");
+                        $"Locale '{localeCode}.surfaces.calendar' defines unsupported property '{property}'. Supported properties: months, monthsGenitive, hijriMonths.");
                 }
             }
 
@@ -350,6 +350,24 @@ public sealed partial class HumanizerSourceGenerator
                     {
                         throw new InvalidOperationException(
                             $"Locale '{localeCode}.surfaces.calendar.monthsGenitive' items must be scalar strings.");
+                    }
+                }
+            }
+
+            if (calendarSurface.TryGetValue("hijriMonths", out var hijriMonthsValue))
+            {
+                if (hijriMonthsValue is not SimpleYamlSequence hijriSeq || hijriSeq.Items.Length != 12)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.calendar.hijriMonths' must be a sequence of exactly 12 strings.");
+                }
+
+                foreach (var item in hijriSeq.Items)
+                {
+                    if (item is not SimpleYamlScalar)
+                    {
+                        throw new InvalidOperationException(
+                            $"Locale '{localeCode}.surfaces.calendar.hijriMonths' items must be scalar strings.");
                     }
                 }
             }

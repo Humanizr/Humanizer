@@ -102,9 +102,8 @@ Read parity map `.1` Decisions 1a, 1b to confirm which sub-paths are in scope he
 - [ ] Parity map updated with per-gender Urdu ordinal entries (all compound tests documented).
 
 ## Done summary
-TBD
-
+Implemented the number-word-suffix ordinalizer engine end-to-end for Urdu gendered word ordinals. The engine resolves the culture's NumberToWordsConverter at runtime, computes cardinal word stems, and applies gendered suffixes with exact replacements for irregular ordinals (1-4, 6, 9). Added ordinal.numeric YAML surface to ur.yml, wired the engine in the source generator with intrinsic culture binding, created the NumberWordSuffixOrdinalizer runtime class, added comprehensive test data across all ordinalizer matrix datasets, and added dedicated UrduOrdinalTests verifying both API paths (Ordinalize + ToOrdinalWords), neuter fallback, and regional variant resolution (ur-PK, ur-IN).
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 682fdd56292b980b5a2462ba008a5da35a4a064c, 852a2f0a43169fff18e9683f7fd137bd21656808
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0, dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
 - PRs:

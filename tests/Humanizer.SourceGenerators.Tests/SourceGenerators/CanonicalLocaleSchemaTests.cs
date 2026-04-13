@@ -615,6 +615,121 @@ surfaces:
         }
     }
 
+    [Fact]
+    public void CalendarSurface_AcceptsHijriMonths()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+      - 'Jan'
+      - 'Feb'
+      - 'Mar'
+      - 'Apr'
+      - 'May'
+      - 'Jun'
+      - 'Jul'
+      - 'Aug'
+      - 'Sep'
+      - 'Oct'
+      - 'Nov'
+      - 'Dec'
+    hijriMonths:
+      - 'Muharram'
+      - 'Safar'
+      - 'Rabi1'
+      - 'Rabi2'
+      - 'Jumada1'
+      - 'Jumada2'
+      - 'Rajab'
+      - 'Shaban'
+      - 'Ramadan'
+      - 'Shawwal'
+      - 'DhulQadah'
+      - 'DhulHijjah'
+  ordinal:
+    date:
+      pattern: '{day} MMMM، yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM، yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var locale = catalog.Locales.Single();
+        Assert.NotNull(locale.Calendar);
+    }
+
+    [Fact]
+    public void CalendarSurface_RejectsHijriMonthsWithWrongLength()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+      - 'Jan'
+      - 'Feb'
+      - 'Mar'
+      - 'Apr'
+      - 'May'
+      - 'Jun'
+      - 'Jul'
+      - 'Aug'
+      - 'Sep'
+      - 'Oct'
+      - 'Nov'
+      - 'Dec'
+    hijriMonths:
+      - 'Muharram'
+      - 'Safar'
+      - 'Rabi1'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("hijriMonths", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("exactly 12", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CalendarSurface_ExistingLocalesUnaffectedByHijriMonthsAddition()
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+        Assert.Empty(catalog.Diagnostics);
+
+        foreach (var locale in catalog.Locales)
+        {
+            if (locale.Calendar is null)
+            {
+                continue;
+            }
+
+            Assert.NotNull(locale.Calendar);
+        }
+    }
+
+    [Fact]
+    public void CalendarSurface_UrduHijriMonthsResolvedCorrectly()
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+        Assert.Empty(catalog.Diagnostics);
+
+        var ur = catalog.Locales.Single(static l => l.LocaleCode == "ur");
+        Assert.NotNull(ur.Calendar);
+        Assert.True(ur.Calendar!.TryGetValue("hijriMonths", out var hijriValue));
+        var hijriSeq = Assert.IsType<HumanizerSourceGenerator.SimpleYamlSequence>(hijriValue);
+        Assert.Equal(12, hijriSeq.Items.Length);
+    }
+
     static string GetRequiredString(HumanizerSourceGenerator.LocaleFeature feature, string propertyName) =>
         feature.ProfileRoot.GetProperty(propertyName).GetString()!;
 

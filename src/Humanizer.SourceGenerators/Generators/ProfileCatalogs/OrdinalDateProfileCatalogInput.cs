@@ -32,8 +32,9 @@ public sealed partial class HumanizerSourceGenerator
             {
                 var months = ExtractCalendarMonths(locale.Calendar, "months");
                 var monthsGenitive = ExtractCalendarMonths(locale.Calendar, "monthsGenitive");
-                AddProfile(dateProfiles, locale.DateToOrdinalWords, seenDate, months, monthsGenitive);
-                AddProfile(dateOnlyProfiles, locale.DateOnlyToOrdinalWords, seenDateOnly, months, monthsGenitive);
+                var hijriMonths = ExtractCalendarMonths(locale.Calendar, "hijriMonths");
+                AddProfile(dateProfiles, locale.DateToOrdinalWords, seenDate, months, monthsGenitive, hijriMonths);
+                AddProfile(dateOnlyProfiles, locale.DateOnlyToOrdinalWords, seenDateOnly, months, monthsGenitive, hijriMonths);
             }
 
             return new OrdinalDateProfileCatalogInput(dateProfiles.ToImmutable(), dateOnlyProfiles.ToImmutable());
@@ -65,7 +66,8 @@ public sealed partial class HumanizerSourceGenerator
             LocaleFeature? feature,
             HashSet<string> seenProfiles,
             ImmutableArray<string> months,
-            ImmutableArray<string> monthsGenitive)
+            ImmutableArray<string> monthsGenitive,
+            ImmutableArray<string> hijriMonths)
         {
             if (feature is not { UsesGeneratedProfile: true } ||
                 !seenProfiles.Add(feature.ProfileName!))
@@ -78,7 +80,8 @@ public sealed partial class HumanizerSourceGenerator
                 GetOptionalString(feature.ProfileRoot, "engine") ?? "pattern",
                 feature.ProfileRoot.Clone(),
                 months,
-                monthsGenitive));
+                monthsGenitive,
+                hijriMonths));
         }
 
         public void Emit(SourceProductionContext context)
@@ -244,6 +247,15 @@ public sealed partial class HumanizerSourceGenerator
                 if (profile.MonthsGenitive.Length > 0)
                 {
                     expr += ", new string[] { " + string.Join(", ", profile.MonthsGenitive.Select(QuoteLiteral)) + " }";
+                }
+                else if (profile.HijriMonths.Length > 0)
+                {
+                    expr += ", null";
+                }
+
+                if (profile.HijriMonths.Length > 0)
+                {
+                    expr += ", new string[] { " + string.Join(", ", profile.HijriMonths.Select(QuoteLiteral)) + " }";
                 }
             }
 
