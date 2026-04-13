@@ -75,7 +75,7 @@ Completed cross-locale grammatical-gender audit and Romance/Germanic fills:
 
 5. Slavic fills (.13) and Semitic/Indic fills (.14) documented in audit with owning task IDs.
 
-All 40,309 tests pass (1 pre-existing uz-Latn-UZ clock notation failure unrelated).
+Full suite result: 40,309/40,310 passing; one pre-existing unrelated uz-Latn-UZ clock notation failure.
 
 ## Evidence
 - Commits: (pending)
