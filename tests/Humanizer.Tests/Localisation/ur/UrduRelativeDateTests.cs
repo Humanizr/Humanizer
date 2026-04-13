@@ -40,17 +40,23 @@ public class UrduRelativeDateTests
         var hourPlural = formatter.DateHumanize(TimeUnit.Hour, Tense.Future, 2);
         Assert.Contains("گھنٹہ", hourSingular);
         Assert.Contains("گھنٹے", hourPlural);
+        UrduBidiControlSweep.AssertNoBidiControls(hourSingular);
+        UrduBidiControlSweep.AssertNoBidiControls(hourPlural);
 
-        // دن (singular stays same) vs دنوں (plural oblique)
-        var daySingularPast = formatter.DateHumanize(TimeUnit.Day, Tense.Past, 2);
-        var dayPluralFuture = formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2);
-        Assert.Contains("دن", daySingularPast);
-        Assert.Contains("دنوں", dayPluralFuture);
+        // دن (direct case, past) vs دنوں (oblique case, future)
+        var dayPastDirect = formatter.DateHumanize(TimeUnit.Day, Tense.Past, 2);
+        var dayFutureOblique = formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2);
+        Assert.Contains("دن", dayPastDirect);
+        Assert.Contains("دنوں", dayFutureOblique);
+        UrduBidiControlSweep.AssertNoBidiControls(dayPastDirect);
+        UrduBidiControlSweep.AssertNoBidiControls(dayFutureOblique);
 
         // مہینہ (singular) vs مہینے (plural)
         var monthSingular = formatter.DateHumanize(TimeUnit.Month, Tense.Past, 1);
         var monthPlural = formatter.DateHumanize(TimeUnit.Month, Tense.Future, 2);
         Assert.Contains("مہینہ", monthSingular);
         Assert.Contains("مہینے", monthPlural);
+        UrduBidiControlSweep.AssertNoBidiControls(monthSingular);
+        UrduBidiControlSweep.AssertNoBidiControls(monthPlural);
     }
 }

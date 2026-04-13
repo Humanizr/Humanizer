@@ -70,7 +70,9 @@ public class UrduHijriDateTests
         var date = DateOnly.FromDateTime(dateTime);
 
         using var _ = new CultureSwap(CreateUrduHijriCulture());
-        Assert.Equal(expected, date.ToOrdinalWords());
+        var result = date.ToOrdinalWords();
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 #endif
 
@@ -85,7 +87,8 @@ public class UrduHijriDateTests
 
         using var _ = new CultureSwap(urPkHijri);
         var result = date.ToOrdinalWords();
-        Assert.Contains("رمضان", result);
+        Assert.Equal("1 رمضان، 1446", result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 
     [Fact]
@@ -99,6 +102,7 @@ public class UrduHijriDateTests
 
         using var _ = new CultureSwap(urInHijri);
         var result = date.ToOrdinalWords();
-        Assert.Contains("محرم", result);
+        Assert.Equal("1 محرم، 1446", result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 }
