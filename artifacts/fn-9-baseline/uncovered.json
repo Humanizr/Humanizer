@@ -1,9 +1,19 @@
 {
   "metadata": {
-    "generated": "Awaiting Windows CI run",
-    "authoritativeOs": "Windows",
-    "authoritativeTfms": ["net10.0", "net8.0", "net48"],
-    "status": "Schema committed; per-class data populated after first CI run",
+    "generated": "2026-04-13",
+    "host": "macOS (informational, net10.0 + net8.0)",
+    "authoritativeHost": "Windows CI (net10.0 + net8.0 + net48)",
+    "note": "This baseline was produced locally on macOS with net10.0 and net8.0 TFMs. The authoritative Windows CI baseline will include net48 and may differ slightly. Replace this file with the CI-produced version when available.",
+    "testProjects": [
+      "Humanizer.Tests (net10.0, net8.0)",
+      "Humanizer.Analyzers.Tests (net10.0)",
+      "Humanizer.SourceGenerators.Tests (net10.0)"
+    ],
+    "summary": {
+      "lineCoverage": "93.7%",
+      "branchCoverage": "79.1% (9751 of 12323)",
+      "methodCoverage": "96.5% (3571 of 3697)"
+    },
     "priorBaseline": {
       "date": "2026-04-10",
       "lineCoverage": "91.3%",
@@ -14,21 +24,513 @@
   "assemblies": [
     {
       "name": "Humanizer",
-      "lineCoverage": null,
-      "branchCoverage": null,
-      "classes": []
+      "lineCoverage": "96.5%",
+      "classes": [
+        {
+          "name": "Humanizer.AgglutinativeOrdinalScaleNumberToWordsConverter",
+          "lineCoverage": "97.6%"
+        },
+        {
+          "name": "Humanizer.AppendedGroupNumberToWordsConverter",
+          "lineCoverage": "95.5%"
+        },
+        {
+          "name": "Humanizer.BillionStrategyNumberToWordsConverter",
+          "lineCoverage": "97.6%"
+        },
+        {
+          "name": "Humanizer.ByteSize",
+          "lineCoverage": "89.2%"
+        },
+        {
+          "name": "Humanizer.CasingExtensions",
+          "lineCoverage": "87.5%"
+        },
+        {
+          "name": "Humanizer.CliticCollectionFormatter",
+          "lineCoverage": "79.4%"
+        },
+        {
+          "name": "Humanizer.CliticCollectionFormatter<T>",
+          "lineCoverage": "79.4%"
+        },
+        {
+          "name": "Humanizer.CompoundScaleWordsToNumberConverter",
+          "lineCoverage": "88.4%"
+        },
+        {
+          "name": "Humanizer.Configurator",
+          "lineCoverage": "95.4%"
+        },
+        {
+          "name": "Humanizer.ConjoinedGenderedScaleNumberToWordsConverter",
+          "lineCoverage": "93.6%"
+        },
+        {
+          "name": "Humanizer.ConjunctionalScaleNumberToWordsConverter",
+          "lineCoverage": "90.8%"
+        },
+        {
+          "name": "Humanizer.ContractedOneScaleNumberToWordsConverter",
+          "lineCoverage": "97%"
+        },
+        {
+          "name": "Humanizer.ContractedScaleWordsToNumberConverter",
+          "lineCoverage": "87.5%"
+        },
+        {
+          "name": "Humanizer.DateOnlyToOrdinalWordsConverterRegistry",
+          "lineCoverage": "50%"
+        },
+        {
+          "name": "Humanizer.DateOnlyToOrdinalWordsProfileCatalog",
+          "lineCoverage": "99.4%"
+        },
+        {
+          "name": "Humanizer.DateTimeHumanizeAlgorithms",
+          "lineCoverage": "94.2%"
+        },
+        {
+          "name": "Humanizer.DateToOrdinalWordsConverterRegistry",
+          "lineCoverage": "50%"
+        },
+        {
+          "name": "Humanizer.DateToOrdinalWordsExtensions",
+          "lineCoverage": "50%"
+        },
+        {
+          "name": "Humanizer.DateToOrdinalWordsProfileCatalog",
+          "lineCoverage": "99.4%"
+        },
+        {
+          "name": "Humanizer.DefaultDateOnlyToOrdinalWordConverter",
+          "lineCoverage": "0%"
+        },
+        {
+          "name": "Humanizer.DefaultDateToOrdinalWordConverter",
+          "lineCoverage": "0%"
+        },
+        {
+          "name": "Humanizer.DefaultFormatter",
+          "lineCoverage": "84.8%"
+        },
+        {
+          "name": "Humanizer.DefaultNumberToWordsConverter",
+          "lineCoverage": "0%"
+        },
+        {
+          "name": "Humanizer.DelimitedCollectionFormatter",
+          "lineCoverage": "78.5%"
+        },
+        {
+          "name": "Humanizer.DelimitedCollectionFormatter<T>",
+          "lineCoverage": "78.5%"
+        },
+        {
+          "name": "Humanizer.DualFormScaleNumberToWordsConverter",
+          "lineCoverage": "99.1%"
+        },
+        {
+          "name": "Humanizer.DynamicLengthAndPreserveWordsTruncator",
+          "lineCoverage": "93.7%"
+        },
+        {
+          "name": "Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator",
+          "lineCoverage": "86.2%"
+        },
+        {
+          "name": "Humanizer.EastAsianGroupedNumberToWordsConverter",
+          "lineCoverage": "99%"
+        },
+        {
+          "name": "Humanizer.EastAsianPositionalWordsToNumberConverter",
+          "lineCoverage": "86%"
+        },
+        {
+          "name": "Humanizer.EastSlavicNumberToWordsConverter",
+          "lineCoverage": "99.3%"
+        },
+        {
+          "name": "Humanizer.EifelerRule",
+          "lineCoverage": "90%"
+        },
+        {
+          "name": "Humanizer.EnglishArticle",
+          "lineCoverage": "95.8%"
+        },
+        {
+          "name": "Humanizer.FixedLengthTruncator",
+          "lineCoverage": "85.7%"
+        },
+        {
+          "name": "Humanizer.FixedNumberOfCharactersTruncator",
+          "lineCoverage": "92.1%"
+        },
+        {
+          "name": "Humanizer.FixedNumberOfWordsTruncator",
+          "lineCoverage": "94.4%"
+        },
+        {
+          "name": "Humanizer.FormatterDateFormRule",
+          "lineCoverage": "95.8%"
+        },
+        {
+          "name": "Humanizer.FormatterProfileCatalog",
+          "lineCoverage": "99.5%"
+        },
+        {
+          "name": "Humanizer.GenderedNumberToWordsConverter",
+          "lineCoverage": "90.9%"
+        },
+        {
+          "name": "Humanizer.GenderedScaleOrdinalNumberToWordsConverter",
+          "lineCoverage": "97.3%"
+        },
+        {
+          "name": "Humanizer.GenderedScaleOrdinalNumberToWordsConverter.GenderedWord",
+          "lineCoverage": "93.3%"
+        },
+        {
+          "name": "Humanizer.GreedyCompoundWordsToNumberConverter",
+          "lineCoverage": "86.7%"
+        },
+        {
+          "name": "Humanizer.HarmonyOrdinalNumberToWordsConverter",
+          "lineCoverage": "93.8%"
+        },
+        {
+          "name": "Humanizer.HeadingTable",
+          "lineCoverage": "88.2%"
+        },
+        {
+          "name": "Humanizer.HeadingTableCatalog",
+          "lineCoverage": "97.2%"
+        },
+        {
+          "name": "Humanizer.HeadingTableCatalog.invariantCache",
+          "lineCoverage": "0%"
+        },
+        {
+          "name": "Humanizer.HyphenatedOrdinalNumberToWordsConverter",
+          "lineCoverage": "96.1%"
+        },
+        {
+          "name": "Humanizer.InvertedTensNumberToWordsConverter",
+          "lineCoverage": "99.2%"
+        },
+        {
+          "name": "Humanizer.InvertedTensWordsToNumberConverter",
+          "lineCoverage": "78%"
+        },
+        {
+          "name": "Humanizer.JoinedScaleNumberToWordsConverter",
+          "lineCoverage": "95.2%"
+        },
+        {
+          "name": "Humanizer.LinkingAffixWordsToNumberConverter",
+          "lineCoverage": "92.1%"
+        },
+        {
+          "name": "Humanizer.LocaleNumberFormattingOverrides",
+          "lineCoverage": "95.3%"
+        },
+        {
+          "name": "Humanizer.LocalePhraseTable",
+          "lineCoverage": "75.8%"
+        },
+        {
+          "name": "Humanizer.LocalePhraseTableCatalog",
+          "lineCoverage": "99%"
+        },
+        {
+          "name": "Humanizer.LocaliserRegistry<TLocaliser>",
+          "lineCoverage": "85.7%"
+        },
+        {
+          "name": "Humanizer.LocalizedPhraseForms",
+          "lineCoverage": "87.5%"
+        },
+        {
+          "name": "Humanizer.MetricNumeralExtensions",
+          "lineCoverage": "96.9%"
+        },
+        {
+          "name": "Humanizer.NoMatchFoundException",
+          "lineCoverage": "33.3%"
+        },
+        {
+          "name": "Humanizer.NumberToWordsProfileCatalog",
+          "lineCoverage": "99.4%"
+        },
+        {
+          "name": "Humanizer.OrdinalDatePattern",
+          "lineCoverage": "64.1%"
+        },
+        {
+          "name": "Humanizer.OrdinalizeExtensions",
+          "lineCoverage": "92.7%"
+        },
+        {
+          "name": "Humanizer.OrdinalizerProfileCatalog",
+          "lineCoverage": "99.4%"
+        },
+        {
+          "name": "Humanizer.OrdinalPrefixScaleNumberToWordsConverter",
+          "lineCoverage": "98.2%"
+        },
+        {
+          "name": "Humanizer.PhraseClockNotationConverter",
+          "lineCoverage": "90.4%"
+        },
+        {
+          "name": "Humanizer.PluralizedScaleNumberToWordsConverter",
+          "lineCoverage": "92%"
+        },
+        {
+          "name": "Humanizer.PrefixedTensScaleWordsToNumberConverter",
+          "lineCoverage": "80.6%"
+        },
+        {
+          "name": "Humanizer.ProfiledFormatter",
+          "lineCoverage": "95%"
+        },
+        {
+          "name": "Humanizer.RomanNumeralExtensions",
+          "lineCoverage": "94.7%"
+        },
+        {
+          "name": "Humanizer.ScaleStrategyNumberToWordsConverter",
+          "lineCoverage": "89.7%"
+        },
+        {
+          "name": "Humanizer.SegmentedScaleNumberToWordsConverter",
+          "lineCoverage": "91.1%"
+        },
+        {
+          "name": "Humanizer.SouthSlavicCardinalNumberToWordsConverter",
+          "lineCoverage": "96.7%"
+        },
+        {
+          "name": "Humanizer.SuffixOrdinalizer",
+          "lineCoverage": "81.2%"
+        },
+        {
+          "name": "Humanizer.SuffixScaleWordsToNumberConverter",
+          "lineCoverage": "52.1%"
+        },
+        {
+          "name": "Humanizer.TerminalOrdinalScaleNumberToWordsConverter",
+          "lineCoverage": "91.7%"
+        },
+        {
+          "name": "Humanizer.TimeOnlyToClockNotationConvertersRegistry",
+          "lineCoverage": "50%"
+        },
+        {
+          "name": "Humanizer.TimeOnlyToClockNotationProfileCatalog",
+          "lineCoverage": "99.4%"
+        },
+        {
+          "name": "Humanizer.TimeSpanHumanizeExtensions",
+          "lineCoverage": "96%"
+        },
+        {
+          "name": "Humanizer.To",
+          "lineCoverage": "83.3%"
+        },
+        {
+          "name": "Humanizer.TokenMapWordsToNumberConverter",
+          "lineCoverage": "82.1%"
+        },
+        {
+          "name": "Humanizer.TokenMapWordsToNumberConverters",
+          "lineCoverage": "99.3%"
+        },
+        {
+          "name": "Humanizer.TokenMapWordsToNumberNormalizer",
+          "lineCoverage": "79.7%"
+        },
+        {
+          "name": "Humanizer.TokenMapWordsToNumberOrdinalMapBuilder",
+          "lineCoverage": "0%"
+        },
+        {
+          "name": "Humanizer.ToQuantityExtensions",
+          "lineCoverage": "94.8%"
+        },
+        {
+          "name": "Humanizer.TriadScaleNumberToWordsConverter",
+          "lineCoverage": "97.4%"
+        },
+        {
+          "name": "Humanizer.UnitLeadingCompoundNumberToWordsConverter",
+          "lineCoverage": "98.5%"
+        },
+        {
+          "name": "Humanizer.VariantDecadeNumberToWordsConverter",
+          "lineCoverage": "97.3%"
+        },
+        {
+          "name": "Humanizer.VigesimalCompoundWordsToNumberConverter",
+          "lineCoverage": "89.5%"
+        },
+        {
+          "name": "Humanizer.Vocabulary",
+          "lineCoverage": "94.4%"
+        },
+        {
+          "name": "Humanizer.WestSlavicGenderedNumberToWordsConverter",
+          "lineCoverage": "92%"
+        },
+        {
+          "name": "Humanizer.WordFormTemplateOrdinalizer",
+          "lineCoverage": "88.5%"
+        },
+        {
+          "name": "Humanizer.WordsToNumberExtension",
+          "lineCoverage": "66.6%"
+        },
+        {
+          "name": "Humanizer.WordsToNumberProfileCatalog",
+          "lineCoverage": "98.7%"
+        },
+        {
+          "name": "Humanizer.WordsToNumberTokenizer",
+          "lineCoverage": "93.1%"
+        },
+        {
+          "name": "Humanizer.WordsToNumberTokenizer.Enumerator",
+          "lineCoverage": "85%"
+        }
+      ]
     },
     {
       "name": "Humanizer.Analyzers",
-      "lineCoverage": null,
-      "branchCoverage": null,
-      "classes": []
+      "lineCoverage": "90.1%",
+      "classes": [
+        {
+          "name": "Humanizer.Analyzers.NamespaceMigrationAnalyzer",
+          "lineCoverage": "93.1%"
+        },
+        {
+          "name": "Humanizer.Analyzers.NamespaceMigrationCodeFixProvider",
+          "lineCoverage": "90.1%"
+        },
+        {
+          "name": "Humanizer.Analyzers.WordsToNumberMigrationCodeFixProvider",
+          "lineCoverage": "85.7%"
+        }
+      ]
     },
     {
       "name": "Humanizer.SourceGenerators",
-      "lineCoverage": null,
-      "branchCoverage": null,
-      "classes": []
+      "lineCoverage": "87.4%",
+      "classes": [
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator",
+          "lineCoverage": "86.6%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.CanonicalLocaleAuthoring",
+          "lineCoverage": "80.4%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.EngineContractUtilities",
+          "lineCoverage": "87.5%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.FormatterProfileCatalogInput",
+          "lineCoverage": "89.6%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.HeadingTableCatalogInput",
+          "lineCoverage": "95.7%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LegacyLocaleMigration",
+          "lineCoverage": "90%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocaleCatalogInput",
+          "lineCoverage": "75.4%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocaleDefinitionFile",
+          "lineCoverage": "73.3%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocalePhraseCatalog",
+          "lineCoverage": "91.6%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocalePhraseNormalization",
+          "lineCoverage": "85%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocalePhraseProfileDefinition",
+          "lineCoverage": "0%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocalePhraseTableCatalogInput",
+          "lineCoverage": "98.1%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocaleRegistryInput",
+          "lineCoverage": "93%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.LocaleSemanticDiff",
+          "lineCoverage": "72.6%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.NamedTemplatePhrase",
+          "lineCoverage": "50%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.NumberToWordsEngineContractFactory",
+          "lineCoverage": "87.7%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.NumberToWordsProfileCatalogInput",
+          "lineCoverage": "91.4%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.OrdinalDateProfileCatalogInput",
+          "lineCoverage": "90.2%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.OrdinalizerProfileCatalogInput",
+          "lineCoverage": "95.3%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.RegistryExpressionFactory",
+          "lineCoverage": "95.8%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.SimpleYamlParser",
+          "lineCoverage": "84.7%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.TimeOnlyToClockNotationEngineContractFactory",
+          "lineCoverage": "81.8%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.TimeOnlyToClockNotationProfileCatalogInput",
+          "lineCoverage": "97.1%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.TokenMapWordsToNumberInput",
+          "lineCoverage": "87.5%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.WordsToNumberEngineContractFactory",
+          "lineCoverage": "77.8%"
+        },
+        {
+          "name": "Humanizer.SourceGenerators.HumanizerSourceGenerator.WordsToNumberProfileCatalogInput",
+          "lineCoverage": "96.7%"
+        }
+      ]
     }
   ],
   "suspectBranches": [
@@ -48,7 +550,7 @@
       "file": "src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs",
       "lines": "288-290",
       "reachability": "unreachable",
-      "notes": "The ArgumentOutOfRangeException catch block handles the case where GregorianCalendar(GregorianCalendarTypes.Localized) is rejected by a culture's DateTimeFormat.Calendar setter. Every CultureInfo in .NET accepts at least one GregorianCalendar variant, so the exception is never thrown. The subsequent foreach loop over OptionalCalendars also acts as a secondary fallback."
+      "notes": "The ArgumentOutOfRangeException catch block handles the case where GregorianCalendar(GregorianCalendarTypes.Localized) is rejected by a culture's DateTimeFormat.Calendar setter. Every CultureInfo in .NET accepts at least one GregorianCalendar variant, so the exception is never thrown."
     },
     {
       "assembly": "Humanizer.Analyzers",
@@ -57,7 +559,7 @@
       "file": "src/Humanizer.Analyzers/WordsToNumberMigrationCodeFixProvider.cs",
       "lines": "24-25, 28-29, 83",
       "reachability": "unreachable",
-      "notes": "The 'root is null' and 'semanticModel is null' guards are defensive null checks against Roslyn API contracts. GetSyntaxRootAsync and GetSemanticModelAsync never return null for a document that triggered a diagnostic. These branches cannot be reached via the CodeFixVerifier test harness or any real VS scenario."
+      "notes": "The 'root is null' and 'semanticModel is null' guards are defensive null checks against Roslyn API contracts. GetSyntaxRootAsync and GetSemanticModelAsync never return null for a document that triggered a diagnostic."
     }
   ]
 }

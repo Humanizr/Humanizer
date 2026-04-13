@@ -5,27 +5,5 @@
     "parallelizeAssembly": true,
     "parallelizeTestCollections": false,
     "showLiveOutput": true
-  },
-  "codeCoverage": {
-    "Configuration": {
-      "DeterministicReport": true,
-      "ExcludeAssembliesWithoutSources": "None",
-      "Format": "cobertura",
-      "CodeCoverage": {
-        "ModulePaths": {
-          "Include": [
-            ".*Humanizer(\\.(Analyzers|SourceGenerators))?\\.dll$"
-          ]
-        },
-        "Attributes": {
-          "Exclude": [
-            "^System\\.Diagnostics\\.DebuggerHiddenAttribute$",
-            "^System\\.Diagnostics\\.DebuggerNonUserCodeAttribute$",
-            "^System\\.CodeDom\\.Compiler\\.GeneratedCodeAttribute$",
-            "^System\\.Diagnostics\\.CodeAnalysis\\.ExcludeFromCodeCoverageAttribute$"
-          ]
-        }
-      }
-    }
   }
 }
