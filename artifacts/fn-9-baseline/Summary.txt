@@ -1,3 +1,7 @@
+fn-9 Coverage Baseline
+  OS: macOS (arm64) -- net10.0, net8.0 (net48 requires Windows host)
+  Test projects: Humanizer.Tests, Humanizer.Analyzers.Tests, Humanizer.SourceGenerators.Tests
+
 Summary
   Generated on: 4/13/2026 - 4:05:09 AM
   Parser: MultiReport (4x Cobertura)
