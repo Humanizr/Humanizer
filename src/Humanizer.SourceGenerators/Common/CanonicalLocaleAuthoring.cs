@@ -364,10 +364,16 @@ public sealed partial class HumanizerSourceGenerator
 
                 foreach (var item in hijriSeq.Items)
                 {
-                    if (item is not SimpleYamlScalar)
+                    if (item is not SimpleYamlScalar scalar)
                     {
                         throw new InvalidOperationException(
                             $"Locale '{localeCode}.surfaces.calendar.hijriMonths' items must be scalar strings.");
+                    }
+
+                    if (scalar.Value.IndexOfAny(new[] { '\u200E', '\u200F', '\u061C' }) >= 0)
+                    {
+                        throw new InvalidOperationException(
+                            $"Locale '{localeCode}.surfaces.calendar.hijriMonths' must not contain directionality controls (U+200E, U+200F, U+061C).");
                     }
                 }
             }

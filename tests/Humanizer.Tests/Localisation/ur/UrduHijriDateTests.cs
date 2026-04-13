@@ -10,34 +10,31 @@ public class UrduHijriDateTests
     }
 
     [Theory]
-    [InlineData(2025, 1, 1, "محرم")]
-    [InlineData(2025, 2, 1, "صفر")]
-    [InlineData(2025, 3, 1, "ربیع الاول")]
-    [InlineData(2025, 4, 1, "ربیع الثانی")]
-    [InlineData(2025, 5, 1, "جمادی الاول")]
-    [InlineData(2025, 6, 1, "جمادی الثانی")]
-    [InlineData(2025, 7, 1, "رجب")]
-    [InlineData(2025, 8, 1, "شعبان")]
-    [InlineData(2025, 9, 1, "رمضان")]
-    [InlineData(2025, 10, 1, "شوال")]
-    [InlineData(2025, 11, 1, "ذوالقعدہ")]
-    [InlineData(2025, 12, 1, "ذوالحجہ")]
-    public void HijriCalendar_UsesHijriMonthNames(int hijriYear, int hijriMonth, int hijriDay, string expectedMonthName)
+    [InlineData(1446, 1, 1, "1 محرم، 1446")]
+    [InlineData(1446, 2, 1, "1 صفر، 1446")]
+    [InlineData(1446, 3, 1, "1 ربیع الاول، 1446")]
+    [InlineData(1446, 4, 1, "1 ربیع الثانی، 1446")]
+    [InlineData(1446, 5, 1, "1 جمادی الاول، 1446")]
+    [InlineData(1446, 6, 1, "1 جمادی الثانی، 1446")]
+    [InlineData(1446, 7, 1, "1 رجب، 1446")]
+    [InlineData(1446, 8, 1, "1 شعبان، 1446")]
+    [InlineData(1446, 9, 1, "1 رمضان، 1446")]
+    [InlineData(1446, 10, 1, "1 شوال، 1446")]
+    [InlineData(1446, 11, 1, "1 ذوالقعدہ، 1446")]
+    [InlineData(1446, 12, 1, "1 ذوالحجہ، 1446")]
+    public void HijriCalendar_ExactOutputPerMonth(int hijriYear, int hijriMonth, int hijriDay, string expected)
     {
         var hijri = new HijriCalendar();
         var date = new DateTime(hijriYear, hijriMonth, hijriDay, hijri);
 
         using var _ = new CultureSwap(CreateUrduHijriCulture());
-        var result = date.ToOrdinalWords();
-        Assert.Contains(expectedMonthName, result);
+        Assert.Equal(expected, date.ToOrdinalWords());
     }
 
     [Theory]
     [InlineData(1446, 7, 15, "15 رجب، 1446")]
-    [InlineData(1446, 1, 1, "1 محرم، 1446")]
-    [InlineData(1446, 9, 1, "1 رمضان، 1446")]
     [InlineData(1446, 12, 10, "10 ذوالحجہ، 1446")]
-    public void HijriCalendar_ExactOutput(int hijriYear, int hijriMonth, int hijriDay, string expected)
+    public void HijriCalendar_ExactOutputNonFirstDay(int hijriYear, int hijriMonth, int hijriDay, string expected)
     {
         var hijri = new HijriCalendar();
         var date = new DateTime(hijriYear, hijriMonth, hijriDay, hijri);

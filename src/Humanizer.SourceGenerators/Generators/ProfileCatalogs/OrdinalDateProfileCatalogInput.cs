@@ -189,32 +189,32 @@ public sealed partial class HumanizerSourceGenerator
         static string CreatePatternExpression(OrdinalDateProfileDefinition profile, string converterTypeName)
         {
             var pattern = GetRequiredString(profile.Root, "pattern");
-            var hasMonths = profile.Months.Length > 0;
+            var hasGregorianMonths = profile.Months.Length > 0;
+            var hasHijriMonths = profile.HijriMonths.Length > 0;
+            var hasAnyMonthOverride = hasGregorianMonths || hasHijriMonths;
 
-            // Validate: reject MMM (abbreviated) when calendar.months override is active.
-            if (hasMonths && ContainsAbbreviatedMonth(pattern))
+            if (hasAnyMonthOverride && ContainsAbbreviatedMonth(pattern))
             {
                 throw new InvalidOperationException(
                     $"Ordinal date profile '{profile.ProfileName}' uses MMM (abbreviated month) " +
-                    "which is not supported when calendar.months override is active. " +
+                    "which is not supported when calendar month overrides are active. " +
                     "Only MMMM (full month name) substitution is supported.");
             }
 
-            // Validate: exactly one unescaped MMMM in a supported position.
-            if (hasMonths)
+            if (hasAnyMonthOverride)
             {
                 var mmmmCount = CountUnescapedFullMonth(pattern);
                 if (mmmmCount == 0)
                 {
                     throw new InvalidOperationException(
-                        $"Ordinal date profile '{profile.ProfileName}' has calendar.months override " +
+                        $"Ordinal date profile '{profile.ProfileName}' has calendar month overrides " +
                         "but pattern does not contain an unescaped MMMM specifier.");
                 }
 
                 if (mmmmCount > 1)
                 {
                     throw new InvalidOperationException(
-                        $"Ordinal date profile '{profile.ProfileName}' has calendar.months override " +
+                        $"Ordinal date profile '{profile.ProfileName}' has calendar month overrides " +
                         "but pattern contains multiple unescaped MMMM specifiers. Only one is supported.");
                 }
             }
@@ -229,31 +229,26 @@ public sealed partial class HumanizerSourceGenerator
 
             if (hasCalendarMode)
             {
-                // Normalize to PascalCase so YAML authors can write 'native' or 'Native'.
                 var normalized = char.ToUpperInvariant(calendarMode![0]) + calendarMode.Substring(1).ToLowerInvariant();
                 expr += ", OrdinalDateCalendarMode." + normalized;
             }
 
-            if (hasMonths)
+            if (hasAnyMonthOverride)
             {
                 if (!hasCalendarMode)
                 {
-                    // Must supply calendarMode positionally before months.
                     expr += ", OrdinalDateCalendarMode.Gregorian";
                 }
 
-                expr += ", new string[] { " + string.Join(", ", profile.Months.Select(QuoteLiteral)) + " }";
+                expr += hasGregorianMonths
+                    ? ", new string[] { " + string.Join(", ", profile.Months.Select(QuoteLiteral)) + " }"
+                    : ", null";
 
-                if (profile.MonthsGenitive.Length > 0)
-                {
-                    expr += ", new string[] { " + string.Join(", ", profile.MonthsGenitive.Select(QuoteLiteral)) + " }";
-                }
-                else if (profile.HijriMonths.Length > 0)
-                {
-                    expr += ", null";
-                }
+                expr += profile.MonthsGenitive.Length > 0
+                    ? ", new string[] { " + string.Join(", ", profile.MonthsGenitive.Select(QuoteLiteral)) + " }"
+                    : ", null";
 
-                if (profile.HijriMonths.Length > 0)
+                if (hasHijriMonths)
                 {
                     expr += ", new string[] { " + string.Join(", ", profile.HijriMonths.Select(QuoteLiteral)) + " }";
                 }
