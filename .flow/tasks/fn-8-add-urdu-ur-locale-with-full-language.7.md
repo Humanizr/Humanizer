@@ -61,9 +61,8 @@ Run the full Humanizer test suite on every target framework and verify byte-iden
 - [ ] All commits on branch `feat/urdu-locale`.
 
 ## Done summary
-TBD
-
+Cross-platform verification: net10.0 and net8.0 fully verified (40,619 tests each, byte-identical output); net48 compile-verified only (runtime requires Windows CI — URL to be recorded in parity map when available). Source generator tests pass (71), dotnet pack succeeds. Fixed pre-existing uz-Latn-UZ apostrophe mismatch (U+2019 to U+2018). Parity map finalized with all canonical surfaces proved on net10/net8, unresolved-questions section empty, gender audit confirmed complete. Updated probe tools to include ur/ur-IN/ur-PK in the 65-locale list.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 449554124dc9e97f2bfc48aad79b553950dcc3cd
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (40619 passed), dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 (40619 passed), dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0 (71 passed), dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net48 -c Release (build pass), dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/urdu-validation (pack pass)
 - PRs:

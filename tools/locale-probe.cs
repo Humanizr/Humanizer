@@ -27,13 +27,14 @@ var framework = RuntimeInformation.FrameworkDescription;
 static string ToVisibleText(string value) =>
     new(value.Where(ch => CharUnicodeInfo.GetUnicodeCategory(ch) != UnicodeCategory.Format).ToArray());
 
-// All 62 shipped locales
+// All 65 shipped locales
 string[] allLocales = [
     "af", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "de-CH", "de-LI",
     "el", "en", "en-GB", "en-IN", "en-US", "es", "fa", "fi", "fil", "fr",
     "fr-BE", "fr-CH", "he", "hr", "hu", "hy", "id", "is", "it", "ja", "ko",
     "ku", "lb", "lt", "lv", "ms", "mt", "nb", "nl", "nn", "pl", "pt", "pt-BR",
     "ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "ta", "th", "tr", "uk",
+    "ur", "ur-IN", "ur-PK",
     "uz-Cyrl-UZ", "uz-Latn-UZ", "vi", "zh-CN", "zh-Hans", "zh-Hant", "zu-ZA"
 ];
 
