@@ -41,14 +41,10 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
             ? profile.Ordinal.Feminine
             : profile.Ordinal.Masculine;
 
-        if (number == int.MinValue)
-        {
-            throw new NotImplementedException();
-        }
-
         if (number < 0)
         {
-            return profile.NegativeWord + " " + ConvertToOrdinal(-number, gender);
+            var magnitude = GetAbsoluteValue(number);
+            return profile.NegativeWord + " " + ConvertMagnitude(magnitude) + genderBlock.DefaultSuffix;
         }
 
         if (genderBlock.ExactReplacements.TryGetValue(number, out var exact))
@@ -56,7 +52,7 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
             return exact;
         }
 
-        return ConvertCardinal(number) + genderBlock.DefaultSuffix;
+        return ConvertMagnitude((ulong)number) + genderBlock.DefaultSuffix;
     }
 
     string ConvertCardinal(long number)
@@ -66,14 +62,19 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
             return profile.ZeroWord;
         }
 
-        if (number == long.MinValue)
-        {
-            throw new NotImplementedException();
-        }
-
         if (number < 0)
         {
-            return profile.NegativeWord + " " + ConvertCardinal(-number);
+            return profile.NegativeWord + " " + ConvertMagnitude(GetAbsoluteValue(number));
+        }
+
+        return ConvertMagnitude((ulong)number);
+    }
+
+    string ConvertMagnitude(ulong number)
+    {
+        if (number == 0)
+        {
+            return profile.ZeroWord;
         }
 
         var parts = new List<string>();
@@ -88,7 +89,7 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
             var count = number / 1000;
             parts.Add(count == 1
                 ? profile.SingleLakhWord + " " + profile.ThousandWord
-                : ConvertCardinal(count) + " " + profile.ThousandWord);
+                : ConvertMagnitude(count) + " " + profile.ThousandWord);
             number %= 1000;
         }
 
@@ -106,7 +107,7 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
         return string.Join(" ", parts);
     }
 
-    void AppendScale(List<string> parts, ref long number, long scaleValue, string scaleWord)
+    void AppendScale(List<string> parts, ref ulong number, ulong scaleValue, string scaleWord)
     {
         if (number < scaleValue)
         {
@@ -116,7 +117,10 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
         var count = number / scaleValue;
         parts.Add(count == 1
             ? profile.SingleLakhWord + " " + scaleWord
-            : ConvertCardinal(count) + " " + scaleWord);
+            : ConvertMagnitude(count) + " " + scaleWord);
         number %= scaleValue;
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }

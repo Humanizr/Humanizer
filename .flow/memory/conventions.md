@@ -12,3 +12,6 @@ Humanizer runtime locale resolution uses CultureInfo.Parent walking in Localiser
 
 ## 2026-04-09 manual [convention]
 When multiple locale overrides use different selection criteria (e.g., technical-formatting vs locale-identity), state the governing principle explicitly before the individual decisions so the reasoning framework is clear
+
+## 2026-04-13 manual [convention]
+For long.MinValue/int.MinValue overflow in number-to-words converters, use throw NotImplementedException() matching existing codebase convention (WestSlavic, ScaleStrategy)
