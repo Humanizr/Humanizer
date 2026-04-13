@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  fn-9 Coverage Baseline (Placeholder)
-  OS: Windows (authoritative, net10.0 + net8.0 + net48)
+  fn-9 Coverage Baseline - Summary.xml
+  Authoritative source: Windows CI (net10.0, net8.0, net48)
+  Status: Awaiting first CI run with XmlSummary in ReportGenerator reporttypes.
 
-  This file is a placeholder. The authoritative Summary.xml is produced by
-  ReportGenerator's XmlSummary report type on the Windows CI pipeline.
-  It will be replaced by the CI-produced artifact once the pipeline runs
-  with coverage.runsettings and XmlSummary enabled in reporttypes.
+  This file will be replaced by the ReportGenerator XmlSummary output.
+  The gate script in task .11 parses this file for per-assembly thresholds.
 -->
 <CoverageReport>
   <Summary>
-    <Generatedon>Pending Windows CI run</Generatedon>
-    <Linecoverage>Pending</Linecoverage>
-    <Branchcoverage>Pending</Branchcoverage>
+    <Generatedon>Awaiting Windows CI run</Generatedon>
+    <Assemblies>3</Assemblies>
+    <Classes>0</Classes>
+    <Linecoverage>0</Linecoverage>
+    <Branchcoverage>0</Branchcoverage>
+    <Methodcoverage>0</Methodcoverage>
   </Summary>
 </CoverageReport>

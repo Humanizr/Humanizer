@@ -19,7 +19,7 @@ for (var month = 1; month <= 12; month++)
     /// <summary>
     /// Provides fluent date accessors for <#= monthName #>
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
     public class <#= monthName #>
     {
         /// <summary>

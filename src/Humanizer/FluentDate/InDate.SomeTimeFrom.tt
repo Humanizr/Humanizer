@@ -22,7 +22,7 @@ public partial class InDate
 #>
     /// <summary>
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
     public static class <#= i.ToWords().Dehumanize() #>
     {
         /// <summary>

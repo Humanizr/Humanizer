@@ -5,7 +5,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for January
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class January
     {
         /// <summary>
@@ -204,7 +208,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for February
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class February
     {
         /// <summary>
@@ -391,7 +399,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for March
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class March
     {
         /// <summary>
@@ -590,7 +602,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for April
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class April
     {
         /// <summary>
@@ -783,7 +799,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for May
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class May
     {
         /// <summary>
@@ -982,7 +1002,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for June
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class June
     {
         /// <summary>
@@ -1175,7 +1199,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for July
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class July
     {
         /// <summary>
@@ -1374,7 +1402,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for August
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class August
     {
         /// <summary>
@@ -1573,7 +1605,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for September
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class September
     {
         /// <summary>
@@ -1766,7 +1802,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for October
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class October
     {
         /// <summary>
@@ -1965,7 +2005,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for November
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class November
     {
         /// <summary>
@@ -2158,7 +2202,11 @@ public class On
     /// <summary>
     /// Provides fluent date accessors for December
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class December
     {
         /// <summary>

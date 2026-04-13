@@ -6,7 +6,11 @@ public partial class In
 {
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class One
     {
         /// <summary>
@@ -96,7 +100,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Two
     {
         /// <summary>
@@ -186,7 +194,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Three
     {
         /// <summary>
@@ -276,7 +288,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Four
     {
         /// <summary>
@@ -366,7 +382,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Five
     {
         /// <summary>
@@ -456,7 +476,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Six
     {
         /// <summary>
@@ -546,7 +570,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Seven
     {
         /// <summary>
@@ -636,7 +664,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Eight
     {
         /// <summary>
@@ -726,7 +758,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Nine
     {
         /// <summary>
@@ -816,7 +852,11 @@ public partial class In
 
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class Ten
     {
         /// <summary>

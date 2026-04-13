@@ -23,7 +23,11 @@ public partial class In
 #>
     /// <summary>
     /// </summary>
+#if NET5_0_OR_GREATER
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]
+#else
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public static class <#= i.ToWords().Dehumanize() #>
     {
         /// <summary>

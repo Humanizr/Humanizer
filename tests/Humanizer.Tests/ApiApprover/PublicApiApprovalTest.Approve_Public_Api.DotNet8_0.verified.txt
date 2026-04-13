@@ -386,56 +386,56 @@ namespace Humanizer
     public class In
     {
         public In() { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime April { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime August { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime December { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime February { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime January { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime July { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime June { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime March { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime May { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime November { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime October { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime September { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime AprilOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime AugustOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime DecemberOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime FebruaryOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime JanuaryOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime JulyOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime JuneOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime MarchOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime MayOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime NovemberOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime OctoberOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateTime SeptemberOf(int year) { }
         public static System.DateTime TheYear(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Eight
         {
             public static System.DateTime Days { get; }
@@ -453,7 +453,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Five
         {
             public static System.DateTime Days { get; }
@@ -471,7 +471,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Four
         {
             public static System.DateTime Days { get; }
@@ -489,7 +489,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Nine
         {
             public static System.DateTime Days { get; }
@@ -507,7 +507,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class One
         {
             public static System.DateTime Day { get; }
@@ -525,7 +525,7 @@ namespace Humanizer
             public static System.DateTime WeekFrom(System.DateTime date) { }
             public static System.DateTime YearFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Seven
         {
             public static System.DateTime Days { get; }
@@ -543,7 +543,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Six
         {
             public static System.DateTime Days { get; }
@@ -561,7 +561,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Ten
         {
             public static System.DateTime Days { get; }
@@ -579,7 +579,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Three
         {
             public static System.DateTime Days { get; }
@@ -597,7 +597,7 @@ namespace Humanizer
             public static System.DateTime WeeksFrom(System.DateTime date) { }
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Two
         {
             public static System.DateTime Days { get; }
@@ -619,56 +619,56 @@ namespace Humanizer
     public class InDate
     {
         public InDate() { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly April { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly August { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly December { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly February { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly January { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly July { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly June { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly March { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly May { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly November { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly October { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly September { get; }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly AprilOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly AugustOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly DecemberOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly FebruaryOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly JanuaryOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly JulyOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly JuneOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly MarchOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly MayOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly NovemberOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly OctoberOf(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static System.DateOnly SeptemberOf(int year) { }
         public static System.DateOnly TheYear(int year) { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Eight
         {
             public static System.DateOnly Days { get; }
@@ -684,7 +684,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Five
         {
             public static System.DateOnly Days { get; }
@@ -700,7 +700,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Four
         {
             public static System.DateOnly Days { get; }
@@ -716,7 +716,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Nine
         {
             public static System.DateOnly Days { get; }
@@ -732,7 +732,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class One
         {
             public static System.DateOnly Day { get; }
@@ -748,7 +748,7 @@ namespace Humanizer
             public static System.DateOnly YearFrom(System.DateOnly date) { }
             public static System.DateOnly YearFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Seven
         {
             public static System.DateOnly Days { get; }
@@ -764,7 +764,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Six
         {
             public static System.DateOnly Days { get; }
@@ -780,7 +780,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Ten
         {
             public static System.DateOnly Days { get; }
@@ -796,7 +796,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Three
         {
             public static System.DateOnly Days { get; }
@@ -812,7 +812,7 @@ namespace Humanizer
             public static System.DateOnly YearsFrom(System.DateOnly date) { }
             public static System.DateOnly YearsFrom(System.DateTime date) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public static class Two
         {
             public static System.DateOnly Days { get; }
@@ -986,7 +986,7 @@ namespace Humanizer
     public class On
     {
         public On() { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class April
         {
             public April() { }
@@ -1022,7 +1022,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class August
         {
             public August() { }
@@ -1059,7 +1059,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class December
         {
             public December() { }
@@ -1096,7 +1096,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class February
         {
             public February() { }
@@ -1131,7 +1131,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class January
         {
             public January() { }
@@ -1168,7 +1168,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class July
         {
             public July() { }
@@ -1205,7 +1205,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class June
         {
             public June() { }
@@ -1241,7 +1241,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class March
         {
             public March() { }
@@ -1278,7 +1278,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class May
         {
             public May() { }
@@ -1315,7 +1315,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class November
         {
             public November() { }
@@ -1351,7 +1351,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class October
         {
             public October() { }
@@ -1388,7 +1388,7 @@ namespace Humanizer
             public static System.DateTime The9th { get; }
             public static System.DateTime The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class September
         {
             public September() { }
@@ -1428,7 +1428,7 @@ namespace Humanizer
     public class OnDate
     {
         public OnDate() { }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class April
         {
             public April() { }
@@ -1464,7 +1464,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class August
         {
             public August() { }
@@ -1501,7 +1501,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class December
         {
             public December() { }
@@ -1538,7 +1538,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class February
         {
             public February() { }
@@ -1573,7 +1573,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class January
         {
             public January() { }
@@ -1610,7 +1610,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class July
         {
             public July() { }
@@ -1647,7 +1647,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class June
         {
             public June() { }
@@ -1683,7 +1683,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class March
         {
             public March() { }
@@ -1720,7 +1720,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class May
         {
             public May() { }
@@ -1757,7 +1757,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class November
         {
             public November() { }
@@ -1793,7 +1793,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class October
         {
             public October() { }
@@ -1830,7 +1830,7 @@ namespace Humanizer
             public static System.DateOnly The9th { get; }
             public static System.DateOnly The(int dayNumber) { }
         }
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification="Generated trivial DateTime factories")]
         public class September
         {
             public September() { }
