@@ -84,3 +84,6 @@ Locales with dense number maps still need exactReplacements for irregular ordina
 
 ## 2026-04-13 manual [pitfall]
 When adding a new ordinalizer/converter engine that internally calls another resolver (e.g. NumberToWords), make culture binding intrinsic in RequiresCulture based on engine name -- do not rely solely on an author-supplied useCulture YAML flag
+
+## 2026-04-13 manual [pitfall]
+When extending a code-generation pipeline with a new optional data field, ensure the emitter handles the new field independently of existing fields — do not nest emission under an existing field's guard (e.g. hijriMonths silently dropped when months absent)
