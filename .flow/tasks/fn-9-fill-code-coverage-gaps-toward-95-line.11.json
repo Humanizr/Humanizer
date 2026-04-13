@@ -24,7 +24,7 @@
   "id": "fn-9-fill-code-coverage-gaps-toward-95-line.11",
   "priority": null,
   "spec_path": ".flow/tasks/fn-9-fill-code-coverage-gaps-toward-95-line.11.md",
-  "status": "todo",
+  "status": "done",
   "title": "Enforce coverage gate in azure-pipelines.yml + docs",
   "updated_at": "2026-04-13T02:11:12.487095Z"
 }

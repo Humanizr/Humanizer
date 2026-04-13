@@ -37,7 +37,7 @@ Baseline infrastructure already in place: xUnit v3 + Microsoft Testing Platform,
 
 **Out of scope**
 - Stryker.NET mutation testing.
-- Any behavior change outside tests + T4 attribute emission + runsettings + gate script. No code deletions, no dead-code removal, no refactors.
+- Any behavior change outside tests + T4 attribute emission + runsettings + gate script. No code deletions, no dead-code removal, no refactors. **Scope amendment (task .6):** `ArgumentNullException.ThrowIfNull` null-argument guards were added to `DelimitedCollectionFormatter` and `CliticCollectionFormatter` public `Func<T, object?>` overloads. These convert undefined behavior (NullReferenceException at call site) to defined behavior (ArgumentNullException at entry) — defensive hardening, not a functional change.
 - Gate-level line-range subtraction or per-class carve-outs. Unreachable-branch lines are absorbed in threshold headroom (total size <0.1% of coverable lines).
 - `Benchmarks/` project coverage.
 
