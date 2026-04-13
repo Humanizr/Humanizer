@@ -35,9 +35,8 @@ Close tail-coverage on **ordinal NumberToWords engines + `PhraseClockNotationCon
 - [ ] No deferral or hold-list language.
 
 ## Done summary
-_To be filled on completion._
-
+Added 96 coverage tests targeting tail branches of TerminalOrdinalScaleNumberToWordsConverter (lv: negative cardinals, ordinal zero, negative ordinals, feminine unit endings), HarmonyOrdinalNumberToWordsConverter (tr/az: out-of-range throw, negative cardinals, ordinals), PhraseClockNotationConverter (lb: beforeHalf/afterHalf/beforeNext/pastHour range templates with minute suffix resolution), and WordFormTemplateOrdinalizer (es: negative ordinals with AbsoluteCulture mode, zero/MinValue guards, gender/wordForm combinations).
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 01a6d02773277c01f197d1e856dc840adc758aee
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 - PRs:

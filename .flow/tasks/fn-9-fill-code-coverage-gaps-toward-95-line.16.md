@@ -38,8 +38,20 @@ Close analyzer branch gaps in `Humanizer.Analyzers` across both Roslyn arms now 
 - [ ] No `[ExcludeFromCodeCoverage]` attributes added.
 
 ## Done summary
-_To be filled on completion._
+Added 5 analyzer coverage tests across both Roslyn arms:
 
+**WordsToNumberMigrationCodeFixProvider:**
+- `FixesConvertViaInterfaceAssignedToInt`: exercises `Convert` path + `containingType.Name == interfaceName` (line 72, 77)
+- `FixesConvertViaImplementorAssignedToInt`: exercises `Convert` path + `AllInterfaces.Any` (line 72-73, 78)
+
+**NamespaceMigrationCodeFixProvider:**
+- `FixQualifiedNameExactNamespaceMatch`: exercises `GetReplacementName` exact-match edge at line 137-138 and `IsNamespaceMatch` exact-match at line 126-127
+
+**NamespaceMigrationAnalyzer:**
+- `NestedQualifiedName_ReportsOutermostOnly`: exercises parent-skip at lines 88-93
+- `QualifiedNameNotOldNamespace_NoDiagnostic`: negative case for qualified names
+
+All 26 tests pass in baseline (Roslyn 3.8), all 24 in Roslyn 4.14 arm.
 ## Evidence
 - Commits:
 - Tests:

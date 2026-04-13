@@ -125,7 +125,7 @@ class TestClass { }
         var test = @"
 namespace TestNamespace
 {
-    class TestClass 
+    class TestClass
     {
         void Method()
         {
@@ -138,7 +138,7 @@ namespace TestNamespace
         var fixedCode = @"
 namespace TestNamespace
 {
-    class TestClass 
+    class TestClass
     {
         void Method()
         {
@@ -150,6 +150,42 @@ namespace TestNamespace
 
         var expected = VerifyCS.Diagnostic(NamespaceMigrationAnalyzer.DiagnosticId)
             .WithSpan(8, 35, 8, 61)
+            .WithArguments("Humanizer.Bytes");
+
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixedCode);
+    }
+
+    [Fact]
+    public async Task FixQualifiedNameExactNamespaceMatch()
+    {
+        var test = @"
+namespace TestNamespace
+{
+    class TestClass
+    {
+        void Method()
+        {
+            var t = typeof({|#0:Humanizer.Bytes|});
+        }
+    }
+}
+";
+
+        var fixedCode = @"
+namespace TestNamespace
+{
+    class TestClass
+    {
+        void Method()
+        {
+            var t = typeof(Humanizer);
+        }
+    }
+}
+";
+
+        var expected = VerifyCS.Diagnostic(NamespaceMigrationAnalyzer.DiagnosticId)
+            .WithLocation(0)
             .WithArguments("Humanizer.Bytes");
 
         await VerifyCS.VerifyCodeFixAsync(test, expected, fixedCode);

@@ -57,6 +57,82 @@ class TestClass
         await test.RunAsync();
     }
 
+    [Fact]
+    public async Task FixesConvertViaInterfaceAssignedToInt()
+    {
+        var test = @"
+using Humanizer;
+
+class TestClass
+{
+    void Method(IWordsToNumberConverter converter)
+    {
+        int result = {|CS0266:converter.Convert(""five"")|};
+    }
+}
+";
+
+        var fixedCode = @"
+using Humanizer;
+
+class TestClass
+{
+    void Method(IWordsToNumberConverter converter)
+    {
+        int result = checked(((int)converter.Convert(""five"")));
+    }
+}
+";
+
+        await VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
+    public async Task FixesConvertViaImplementorAssignedToInt()
+    {
+        var test = @"
+using Humanizer;
+
+class MyConverter : IWordsToNumberConverter
+{
+    public bool TryConvert(string words, out long parsedValue) { parsedValue = 0; return false; }
+    public bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber) { parsedValue = 0; unrecognizedNumber = null; return false; }
+    public long Convert(string words) => 0;
+}
+
+class TestClass
+{
+    void Method()
+    {
+        var converter = new MyConverter();
+        int result = {|CS0266:converter.Convert(""five"")|};
+    }
+}
+";
+
+        var fixedCode = @"
+using Humanizer;
+
+class MyConverter : IWordsToNumberConverter
+{
+    public bool TryConvert(string words, out long parsedValue) { parsedValue = 0; return false; }
+    public bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber) { parsedValue = 0; unrecognizedNumber = null; return false; }
+    public long Convert(string words) => 0;
+}
+
+class TestClass
+{
+    void Method()
+    {
+        var converter = new MyConverter();
+        int result = checked(((int)converter.Convert(""five"")));
+    }
+}
+";
+
+        await VerifyCodeFixAsync(test, fixedCode);
+    }
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     sealed class NoopAnalyzer : DiagnosticAnalyzer
     {
