@@ -1,0 +1,5 @@
+locale: 'zz-number-formatting-property-empty-string'
+surfaces:
+  number:
+    formatting:
+      decimalSeparator: ''

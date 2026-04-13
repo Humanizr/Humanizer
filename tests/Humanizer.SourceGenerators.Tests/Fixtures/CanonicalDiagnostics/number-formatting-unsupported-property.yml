@@ -1,0 +1,6 @@
+locale: 'zz-number-formatting-unsupported-property'
+surfaces:
+  number:
+    formatting:
+      decimalSeparator: ','
+      bogusKey: 'oops'

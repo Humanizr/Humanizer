@@ -1,0 +1,4 @@
+locale: 'zz-number-unsupported-property'
+surfaces:
+  number:
+    bogus: 'oops'

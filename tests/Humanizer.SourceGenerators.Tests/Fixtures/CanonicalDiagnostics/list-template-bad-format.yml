@@ -1,0 +1,6 @@
+locale: 'zz-list-template-bad-format'
+surfaces:
+  list:
+    engine: 'conjunction'
+    pairTemplate: 'broken template'
+    finalTemplate: 'broken template'

@@ -1,0 +1,4 @@
+locale: 'zz-number-words-not-mapping'
+surfaces:
+  number:
+    words: 'oops'

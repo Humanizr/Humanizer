@@ -1,0 +1,17 @@
+locale: 'zz-calendar-hijri-item-not-scalar'
+surfaces:
+  calendar:
+    hijriMonths:
+      -
+        nested: 'value'
+      - 'Safar'
+      - 'Rabi1'
+      - 'Rabi2'
+      - 'Jumada1'
+      - 'Jumada2'
+      - 'Rajab'
+      - 'Shaban'
+      - 'Ramadan'
+      - 'Shawwal'
+      - 'DhulQadah'
+      - 'DhulHijjah'

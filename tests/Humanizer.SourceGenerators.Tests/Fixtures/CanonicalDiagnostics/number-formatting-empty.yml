@@ -1,0 +1,4 @@
+locale: 'zz-number-formatting-empty'
+surfaces:
+  number:
+    formatting: {}

@@ -1,0 +1,4 @@
+locale: 'zz-ordinal-dateonly-not-mapping'
+surfaces:
+  ordinal:
+    dateOnly: 'oops'

@@ -1,0 +1,6 @@
+locale: 'zz-number-formatting-property-not-scalar'
+surfaces:
+  number:
+    formatting:
+      decimalSeparator:
+        nested: 'value'

@@ -1,0 +1,4 @@
+locale: 'zz-calendar-unsupported-property'
+surfaces:
+  calendar:
+    bogus: 'oops'

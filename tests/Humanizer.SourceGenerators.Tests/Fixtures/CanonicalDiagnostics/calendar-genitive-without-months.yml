@@ -1,0 +1,16 @@
+locale: 'zz-calendar-genitive-without-months'
+surfaces:
+  calendar:
+    monthsGenitive:
+      - 'January'
+      - 'February'
+      - 'March'
+      - 'April'
+      - 'May'
+      - 'June'
+      - 'July'
+      - 'August'
+      - 'September'
+      - 'October'
+      - 'November'
+      - 'December'

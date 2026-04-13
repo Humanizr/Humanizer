@@ -1,0 +1,4 @@
+locale: 'zz-ordinal-unsupported-property'
+surfaces:
+  ordinal:
+    bogus: 'oops'

@@ -1,0 +1,5 @@
+locale: 'zz-explicit-default-engine-in-number'
+surfaces:
+  number:
+    words:
+      engine: 'default'

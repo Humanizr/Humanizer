@@ -1,0 +1,17 @@
+locale: 'zz-calendar-month-item-not-scalar'
+surfaces:
+  calendar:
+    months:
+      -
+        nested: 'value'
+      - 'Feb'
+      - 'Mar'
+      - 'Apr'
+      - 'May'
+      - 'Jun'
+      - 'Jul'
+      - 'Aug'
+      - 'Sep'
+      - 'Oct'
+      - 'Nov'
+      - 'Dec'

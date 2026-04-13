@@ -26,9 +26,8 @@ Establish dual-Roslyn instrumentation for `Humanizer.Analyzers.Tests` so both `#
 - [ ] If dual instrumentation is infeasible, no code is merged; a note is added to the epic describing the constraint and requesting scope amendment.
 
 ## Done summary
-_To be filled on completion._
-
+Created companion test project Humanizer.Analyzers.Tests.Roslyn414 that builds the analyzer with RoslynVersion=4.14 using an MSBuild Restore;Build target (matching the existing BuildAnalyzerVariants pattern in Humanizer.csproj), exercises all ROSLYN_4_14_OR_GREATER Span-based code paths, and includes smoke tests verifying both the ReadOnlySpan<char> method signatures and Roslyn 4.14 assembly references. Added symmetric baseline smoke tests to the original test project for the #else (string) arm.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 590ea19ed4e35fcb86cb20452fe14d5b767b4972, 8fd4568e, 25a43971, fc020c04, b83661c8, e20424cf
+- Tests: dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Analyzers.Tests.Roslyn414/Humanizer.Analyzers.Tests.Roslyn414.csproj --framework net10.0
 - PRs:

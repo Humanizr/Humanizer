@@ -1,0 +1,4 @@
+locale: 'zz-ordinal-numeric-not-mapping'
+surfaces:
+  ordinal:
+    numeric: 'oops'

@@ -1,0 +1,7 @@
+locale: 'zz-calendar-months-wrong-length'
+surfaces:
+  calendar:
+    months:
+      - 'Jan'
+      - 'Feb'
+      - 'Mar'

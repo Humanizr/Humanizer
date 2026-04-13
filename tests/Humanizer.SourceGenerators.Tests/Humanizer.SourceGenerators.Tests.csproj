@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\src\Humanizer\Humanizer.csproj" />
     <ProjectReference Include="..\..\src\Humanizer.SourceGenerators\Humanizer.SourceGenerators.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fixtures\**\*.yml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

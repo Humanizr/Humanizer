@@ -1,0 +1,20 @@
+locale: 'zz-calendar-genitive-wrong-length'
+surfaces:
+  calendar:
+    months:
+      - 'Jan'
+      - 'Feb'
+      - 'Mar'
+      - 'Apr'
+      - 'May'
+      - 'Jun'
+      - 'Jul'
+      - 'Aug'
+      - 'Sep'
+      - 'Oct'
+      - 'Nov'
+      - 'Dec'
+    monthsGenitive:
+      - 'January'
+      - 'February'
+      - 'March'

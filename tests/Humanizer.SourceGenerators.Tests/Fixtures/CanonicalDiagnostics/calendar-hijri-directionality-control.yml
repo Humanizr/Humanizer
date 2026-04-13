@@ -1,0 +1,16 @@
+locale: 'zz-calendar-hijri-directionality-control'
+surfaces:
+  calendar:
+    hijriMonths:
+      - "Muharram\u200E"
+      - 'Safar'
+      - 'Rabi1'
+      - 'Rabi2'
+      - 'Jumada1'
+      - 'Jumada2'
+      - 'Rajab'
+      - 'Shaban'
+      - 'Ramadan'
+      - 'Shawwal'
+      - 'DhulQadah'
+      - 'DhulHijjah'

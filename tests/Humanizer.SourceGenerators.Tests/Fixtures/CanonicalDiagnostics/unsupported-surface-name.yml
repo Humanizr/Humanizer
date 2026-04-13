@@ -1,0 +1,4 @@
+locale: 'zz-unsupported-surface-name'
+surfaces:
+  bogus:
+    engine: 'default'
