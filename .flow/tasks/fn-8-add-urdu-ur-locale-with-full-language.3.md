@@ -76,6 +76,22 @@ Record the concrete split in the parity map so `.9`'s acceptance is unambiguous.
 ## Task .3 Summary: Author number surfaces (words, parse, formatting overrides)
 
 ### Delivered
+1. **`indian-grouping-gendered` engine**: `IndianGroupingGenderedNumberToWordsConverter` with dense 0-99 lookup, South Asian scale decomposition (lakh/crore/arab/kharab), and `ulong` magnitude handling for MinValue safety.
+2. **Engine contract**: `indian-grouping-gendered` schema in `EngineContractCatalog.cs` with `denseUnitsMap`, scalar scale words, nested ordinal gendered block.
+3. **`number.words` surface**: 100 distinct Urdu cardinal words (0-99) in `denseUnitsMap`, plus scale words and ordinal gender suffixes with `exactReplacements` for 1-3.
+4. **`number.parse` surface**: Token-map engine with 100 cardinal words + 5 scale tokens, `useHundredMultiplier: true`, negative prefix `منفی`.
+5. **`number.formatting` surface**: Overrides for `.` / `,` / `-` (stripping ICU's U+200E LRM from native negative sign).
+6. **MinValue fix**: Refactored to `ConvertMagnitude(ulong)` with safe `GetAbsoluteValue` helper, eliminating `NotImplementedException` on `long.MinValue`/`int.MinValue`.
+
+### Verification
+- Build succeeds on all 4 TFMs (net10.0, net8.0, net48, netstandard2.0)
+- 39,046 tests pass on net10.0; 53 failures are all locale-coverage tests for unimplemented surfaces (tasks .4-.9)
+- 58 source generator tests pass
+- No bidi control characters (U+200E/200F/061C) in ur.yml
+- No Arabic-only letters (ي ه ك) in ur.yml
+## Task .3 Summary: Author number surfaces (words, parse, formatting overrides)
+
+### Delivered
 1. **New `indian-grouping-gendered` engine**: Created `IndianGroupingGenderedNumberToWordsConverter` extending `GenderedNumberToWordsConverter` with dense 0-99 lookup and South Asian scale decomposition (lakh/crore/arab/kharab).
 2. **Engine contract**: Added `indian-grouping-gendered` schema to `EngineContractCatalog.cs` with `denseUnitsMap`, scalar scale words, and nested ordinal gendered block.
 3. **`number.words` surface**: 100 lexically distinct Urdu number words (0-99) authored in `denseUnitsMap`, plus scale words, ordinal gender suffixes with exactReplacements for 1-3.
@@ -90,6 +106,6 @@ Record the concrete split in the parity map so `.9`'s acceptance is unambiguous.
 - No bidi control characters (U+200E/200F/061C) in ur.yml
 - No Arabic-only letters (ي ه ك) in ur.yml
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 209e25ee
+- Tests: net10.0, sourcegen
 - PRs:
