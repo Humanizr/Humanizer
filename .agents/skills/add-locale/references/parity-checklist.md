@@ -32,6 +32,7 @@ Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `
   Month-name overrides (nominative and genitive) for stable cross-platform date output. Only authored when the locale's ICU-supplied month names differ across platforms.
   - `calendar.months` — Exactly 12 nominative month-name entries when present.
   - `calendar.monthsGenitive` — Exactly 12 genitive month-name entries when present.
+  - `calendar.hijriMonths` — Exactly 12 Islamic (Hijri) month-name entries when present. Used when the culture's calendar is Hijri/UmAlQura and `calendarMode` is `Native`.
 
 There is no shipped-locale exemption list in this repo. If any canonical surface is unresolved, parity is incomplete.
 
@@ -114,6 +115,7 @@ Required proof subrows:
 - `number.formatting.decimalSeparator` (only when the locale authors a `number.formatting` override; mark "inherited from parent" or "not applicable" otherwise)
 - `calendar.months` (only when the locale authors a `calendar` override; mark "inherited from parent" or "not applicable" otherwise)
 - `calendar.monthsGenitive` (only when the locale authors a `calendar` override with a genitive array; mark "inherited from parent" or "not applicable" otherwise)
+- `calendar.hijriMonths` (only when the locale authors a `calendar.hijriMonths` override; mark "inherited from parent" or "not applicable" otherwise)
 
 Add more `number.words.*` and `number.parse.*` proof subrows whenever the selected engine owns additional meaningful branches such as tuple handling, gendered variants, abbreviation parsing, or special composition paths.
 

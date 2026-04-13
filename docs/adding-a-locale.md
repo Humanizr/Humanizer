@@ -111,6 +111,7 @@ The nested canonical members are:
 6. `ordinal.dateOnly`
 7. `calendar.months`
 8. `calendar.monthsGenitive`
+9. `calendar.hijriMonths`
 
 The `phrases` surface is also structured, with these canonical members:
 
@@ -139,7 +140,7 @@ This is what each canonical surface owns:
 | `ordinal.dateOnly` | `DateOnly.ToOrdinalWords` day placement/day rendering rules |
 | `clock` | `TimeOnly.ToClockNotation` phrase templates or clock engine selection |
 | `compass` | Full and abbreviated heading/compass labels |
-| `calendar` | Month-name overrides (nominative and genitive) for stable cross-platform date output |
+| `calendar` | Month-name overrides (nominative, genitive, and Hijri) for stable cross-platform date output |
 | `number.formatting` | Decimal separator, negative sign, and group separator overrides for stable cross-platform numeric output |
 
 Two boundaries matter:
@@ -263,6 +264,19 @@ surfaces:
       - '<October-genitive>'
       - '<November-genitive>'
       - '<December-genitive>'
+    hijriMonths:
+      - '<Muharram>'
+      - '<Safar>'
+      - '<Rabi-ul-Awwal>'
+      - '<Rabi-ul-Thani>'
+      - '<Jumada-ul-Awwal>'
+      - '<Jumada-ul-Thani>'
+      - '<Rajab>'
+      - '<Shaban>'
+      - '<Ramadan>'
+      - '<Shawwal>'
+      - '<Dhul-Qadah>'
+      - '<Dhul-Hijjah>'
 
   compass:
     full: []
@@ -328,7 +342,7 @@ A residual locale-specific converter is acceptable only when at least one of the
 
 If a runtime kernel still hard-codes language-specific behavior, do not pretend it is generic. Either make it structurally generic for real or keep the locale name.
 
-Note: as of the locale parity completion, no clock residual leaves remain. All 62 shipped locales use the unified `phrase-clock` engine for clock notation.
+Note: as of the locale parity completion, no clock residual leaves remain. All 65 shipped locale files use the unified `phrase-clock` engine for clock notation.
 
 ## Step-By-Step: Add A Brand New Locale
 

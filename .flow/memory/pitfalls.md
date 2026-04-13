@@ -87,3 +87,9 @@ When adding a new ordinalizer/converter engine that internally calls another res
 
 ## 2026-04-13 manual [pitfall]
 When extending a code-generation pipeline with a new optional data field, ensure the emitter handles the new field independently of existing fields — do not nest emission under an existing field's guard (e.g. hijriMonths silently dropped when months absent)
+
+## 2026-04-13 manual [pitfall]
+Arabic-script locales (Urdu, Persian, Pashto, etc.) use visually similar but distinct Unicode code points from Arabic — do not copy-paste Arabic locale data without substituting code points like U+06C1/U+0647, U+06CC/U+064A, U+06A9/U+0643
+
+## 2026-04-13 manual [pitfall]
+Indo-Aryan languages (Urdu, Hindi) use singular-plural (one/other) plural rules, not arabic-like — using the wrong plural detector produces incorrect resource keys for phrases

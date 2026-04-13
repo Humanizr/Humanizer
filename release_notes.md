@@ -55,10 +55,14 @@
 - The analyzer and namespace migration guidance now matches the bundled single-package layout.
 - `WordsToNumberExtension.ToNumber` and `IWordsToNumberConverter.Convert` now return `long` so high-range parsing can round-trip with the new locale data. This is a source-breaking change for code that stored the result in `int` or implemented the old converter contract directly.
 - `TryToNumber` and `IWordsToNumberConverter.TryConvert` now use the same long-based parser surface, so `out var` remains unambiguous for callers.
-- Clock notation now uses a unified `phrase-clock` engine for all 62 shipped locales, replacing the former `phrase-hour` and `relative-hour` engines and four handwritten residual leaf converters. `DefaultTimeOnlyToClockNotationConverter` is removed; all clock notation is now YAML-authored.
-- New `calendar:` surface with `months` and `monthsGenitive` arrays allows locale-authored month-name overrides threaded through `DateToOrdinalWords` and `DateOnlyToOrdinalWords`. Currently authored by bn, fa, he, ku, ta, and zu-ZA.
-- New `number.formatting.decimalSeparator` sub-block allows locale-authored decimal-separator overrides threaded through `ByteSize.ToString` and `MetricNumeralExtensions`. Currently authored by ar, fr-CH, and ku. Caller-supplied custom `NumberFormatInfo`/`IFormatProvider` is preserved as-is.
+- Clock notation now uses a unified `phrase-clock` engine for all 65 shipped locale files, replacing the former `phrase-hour` and `relative-hour` engines and four handwritten residual leaf converters. `DefaultTimeOnlyToClockNotationConverter` is removed; all clock notation is now YAML-authored.
+- New `calendar:` surface with `months`, `monthsGenitive`, and `hijriMonths` arrays allows locale-authored month-name overrides threaded through `DateToOrdinalWords` and `DateOnlyToOrdinalWords`. Currently authored by bn, fa, he, ku, ta, ur, and zu-ZA.
+- New `number.formatting` sub-block allows locale-authored decimal-separator, negative-sign, and group-separator overrides threaded through `ByteSize.ToString` and `MetricNumeralExtensions`. Currently authored by ar, fr-CH, ku, and ur. Caller-supplied custom `NumberFormatInfo`/`IFormatProvider` is preserved as-is.
 - Date/time month names and decimal separators for overridden locales are now byte-identical across macOS, Linux, and Windows (both .NET 10 and .NET Framework 4.8 NLS).
+- New Urdu (`ur`) locale with full coverage across all eight canonical surfaces, plus regional variants `ur-PK` and `ur-IN`. Includes South Asian lakh/crore number scales, dense 0-99 cardinal table, and singular/plural stem distinctions.
+- Islamic (Hijri) calendar support via new `calendar.hijriMonths` YAML surface. When the culture's calendar is Hijri or UmAlQura and `ordinal.date.calendarMode` is `Native`, Urdu date ordinals use native Hijri month names (e.g., محرم, رمضان).
+- New `number-word-suffix` ordinalizer engine that produces full word ordinals (e.g., `پانچواں` instead of `5واں`) by composing the locale's cardinal-to-words converter with gendered suffixes and exact replacements for irregular ordinals.
+- Cross-locale grammatical-gender audit and fills: all gender-bearing locales (Romance, Germanic, Slavic, Baltic, Semitic, Indic, Greek) now have complete masculine, feminine, and neuter ordinal coverage where applicable. Neuter falls back to masculine for languages with only two grammatical genders.
 
 ### v2.1 - 2016-07-04
 

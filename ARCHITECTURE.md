@@ -70,7 +70,7 @@ BenchmarkDotNet project for performance regression testing. A GitHub Actions wor
 ## Locale Data Flow
 
 ```
-src/Humanizer/Locales/*.yml           # 62 YAML locale definitions
+src/Humanizer/Locales/*.yml           # 65 YAML locale definitions
         │
         ▼
 Source Generator (build time)          # Parses YAML, generates C# tables
