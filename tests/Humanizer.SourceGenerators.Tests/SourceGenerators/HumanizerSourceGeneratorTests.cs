@@ -57,6 +57,10 @@ public partial class HumanizerSourceGeneratorTests
         Assert.Contains("new TemplateOrdinalizer(", catalogSource);
         Assert.Contains("new WordFormTemplateOrdinalizer(", catalogSource);
         Assert.DoesNotContain("new SpanishOrdinalizer", catalogSource);
+
+        // number-word-suffix engine emits culture-bound constructor for Urdu
+        Assert.Contains("registry.Register(\"ur\", culture => OrdinalizerProfileCatalog.Resolve(", registrySource);
+        Assert.Contains("case \"ur\": return new NumberWordSuffixOrdinalizer(culture, new(", catalogSource);
     }
 
     [Fact]

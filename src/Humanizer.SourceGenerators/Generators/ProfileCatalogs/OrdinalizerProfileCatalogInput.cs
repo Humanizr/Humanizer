@@ -107,6 +107,7 @@ public sealed partial class HumanizerSourceGenerator
         }
 
         static bool RequiresCulture(OrdinalizerProfileDefinition profile) =>
+            profile.Engine == "number-word-suffix" ||
             GetBoolean(profile.Root, "useCulture");
 
         static string CreateOrdinalizerExpression(OrdinalizerProfileDefinition profile, bool useCultureParameter)

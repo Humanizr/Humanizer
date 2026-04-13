@@ -502,6 +502,34 @@ surfaces:
     }
 
     [Fact]
+    public void NumberWordSuffixOrdinalizerEngineResolvesAsGeneratedProfile()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      masculine:
+        defaultSuffix: 'x'
+        exactReplacements:
+          1: 'first'
+      feminine:
+        defaultSuffix: 'y'
+        exactReplacements:
+          1: 'primera'
+      neuterFallback: 'masculine'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var locale = catalog.Locales.Single();
+        Assert.NotNull(locale.Ordinalizer);
+        Assert.True(locale.Ordinalizer!.UsesGeneratedProfile);
+    }
+
+    [Fact]
     public void SemanticDiffIgnoresEquivalentCanonicalStructureButDetectsBehaviorChanges()
     {
         const string left = """
