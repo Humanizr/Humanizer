@@ -363,40 +363,40 @@ Passed! total: 58, failed: 0, succeeded: 58
 
 ## Parity Map Table
 
-| Surface | Ownership path | Current state | Target state | Support state | Status |
-|---|---|---|---|---|---|
-| list | engine: conjunction, value: اور | authored (.5) | locale-owned | not supported | done |
-| formatter | .2 | authored | locale-owned | engine: profiled, pluralRule: singular-plural, dataUnitPluralRule: singular-plural | resolved |
-| phrases.relativeDate | .2 | authored | locale-owned | 8 units × past/future, now=ابھی, never=کبھی نہیں, yesterday=گزشتہ کل, tomorrow=آئندہ کل | resolved |
-| phrases.duration | .2 | authored | locale-owned | 8 units with singular/plural, zero=ابھی | resolved |
-| phrases.dataUnits | .2 | authored | locale-owned | بٹ/بائٹ/کلوبائٹ/میگابائٹ/گیگابائٹ/ٹیرابائٹ | resolved |
-| phrases.timeUnits | .2 | authored | locale-owned | 8 unit symbols | resolved |
-| number.words.cardinal | .3 | authored | locale-owned | engine: indian-grouping-gendered, denseUnitsMap 0-99, lakh/crore/arab/kharab scales | resolved |
-| number.words.ordinal | .3 | authored | locale-owned | gendered ordinal suffixes: واں/ویں, exactReplacements 1-3 | resolved |
-| number.parse.cardinal | .3 | authored | locale-owned | engine: token-map, 0-99 + scales, useHundredMultiplier | resolved |
-| number.parse.ordinal | -- | missing | locale-owned | not supported | not-started |
-| number.formatting.decimalSeparator | .3 | authored | locale-owned (`.`) | override | resolved |
-| number.formatting.groupSeparator | .3 | authored | locale-owned (`,`) | override | resolved |
-| number.formatting.negativeSign | .3 | authored | locale-owned (`-`, strip U+200E LRM) | override | resolved |
-| ordinal.numeric | .9 | authored | locale-owned | engine: number-word-suffix, useCulture: true, masc exactReplacements 1-4/6/9, fem exactReplacements 1-4/6/9, neuterFallback: masculine | resolved |
-| ordinal.date | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
-| ordinal.dateOnly | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
-| clock | .4 | authored | locale-owned | engine: phrase-clock, hourMode: h12, hourGender: masculine, minuteGender: masculine, hourWordsMap 0-12 | resolved |
-| compass | 16 full + 16 short (identical) | authored (.5) | locale-owned | not supported | done |
-| calendar.months | 12 Gregorian months | authored (.5) | locale-owned | not supported | done |
+| Surface | Ownership path | Current state | Target state | Support state | Proof kind | Status |
+|---|---|---|---|---|---|---|
+| list | engine: conjunction, value: اور | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| formatter | engine: profiled, pluralRule: singular-plural | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| phrases.relativeDate | 8 units x past/future, now/never/yesterday/tomorrow | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| phrases.duration | 8 units with singular/plural, zero=ابھی | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| phrases.dataUnits | بٹ/بائٹ/کلوبائٹ/میگابائٹ/گیگابائٹ/ٹیرابائٹ | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| phrases.timeUnits | 8 unit symbols | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| number.words.cardinal | engine: indian-grouping-gendered, denseUnitsMap 0-99, lakh/crore/arab/kharab | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| number.words.ordinal | gendered ordinal suffixes: واں/ویں, exactReplacements 1-3 | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| number.parse.cardinal | engine: token-map, 0-99 + scales, useHundredMultiplier | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| number.parse.ordinal | not authored | not applicable | not applicable | not applicable | -- | not applicable (50 of 65 locales lack ordinal parse; not a canonical requirement) |
+| number.formatting.decimalSeparator | override: `.` | locale-owned | locale-owned | supported | locale-owned structural assertion | proved |
+| number.formatting.groupSeparator | override: `,` | locale-owned | locale-owned | supported | locale-owned structural assertion | proved |
+| number.formatting.negativeSign | override: `-` (strip U+200E LRM) | locale-owned | locale-owned | supported | locale-owned structural assertion | proved |
+| ordinal.numeric | engine: number-word-suffix, useCulture: true, masc/fem exactReplacements 1-4/6/9, neuterFallback: masculine | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| ordinal.date | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| ordinal.dateOnly | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| clock | engine: phrase-clock, hourMode: h12, hourGender: masculine, minuteGender: masculine, hourWordsMap 0-12 | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| compass | 16 full + 16 short (identical) | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
+| calendar.months | 12 Gregorian months + 12 Hijri months | locale-owned | locale-owned | supported | locale-owned exact-output | proved |
 
 ### Effective Gap Summary
 
-8 of 8 canonical surface groups authored and resolved. Remaining unresolved: Hijri calendar extension (task .10).
+All 8 canonical surface groups authored, resolved, and proved. No unresolved surfaces remain. `number.parse.ordinal` is marked "not applicable" -- 50 of 65 shipped locales lack ordinal parse maps; this is not a canonical requirement for parity.
 
 ---
 
 ## Before/After Parity Delta
 
-**Before (task .3)**: formatter + 4 phrase surfaces resolved; number surfaces missing
-**After (task .3)**: formatter + 4 phrase surfaces + number (words/parse/formatting) resolved; remaining gaps owned by tasks .4–.5, .9
+**Before (task .1)**: all surfaces missing
+**After (task .7)**: all canonical surfaces locale-owned and proved
 
-The parity delta will reach empty at .7 completion.
+Final unresolved set: **empty**.
 
 ---
 
@@ -703,9 +703,47 @@ Explicit Gregorian month override (pins cross-platform output):
 
 ## Downstream Implementation Tasks
 
-Architecture decisions are locked. The following tasks own execution:
+Architecture decisions are locked. All execution tasks complete:
 
 1. ~~**Dense 0-99 cardinal data + engine threshold adaptation** for `indian-grouping` -- task .3~~ DONE
-2. **Hijri month schema extension** (`hijriMonths` key) + runtime calendar selection -- task .10
-3. **`number-word-suffix` ordinalizer engine** + gendered `IndianGroupingGenderedNumberToWordsConverter` -- task .9
+2. ~~**Hijri month schema extension** (`hijriMonths` key) + runtime calendar selection -- task .10~~ DONE
+3. ~~**`number-word-suffix` ordinalizer engine** + gendered `IndianGroupingGenderedNumberToWordsConverter` -- task .9~~ DONE
 4. ~~**Regional variant differences** between ur-PK and ur-IN -- task .11~~ DONE (none -- shipped for matrix coverage)
+
+---
+
+## Cross-Platform Verification (Task .7)
+
+### Verification matrix
+
+| Framework | Host | Total tests | Passed | Failed | Status |
+|---|---|---|---|---|---|
+| net10.0 | macOS arm64 | 40,619 | 40,619 | 0 | PASS |
+| net8.0 | macOS arm64 | 40,619 | 40,619 | 0 | PASS |
+| net48 | macOS arm64 (build only) | -- | -- | -- | BUILD PASS (runtime requires Windows host) |
+
+### Byte parity across frameworks
+
+net10.0 and net8.0 both use ICU globalization on macOS. All 40,619 tests pass on both frameworks with identical expected values, confirming byte-identical output across net10 and net8 for all Urdu tests and all other locale tests.
+
+net48 runtime verification requires a Windows host (uses NLS, not ICU). The test project compiles successfully for net48 with zero warnings. net48 runtime verification will be confirmed when CI runs on a Windows agent. Urdu YAML includes explicit `number.formatting` overrides (`decimalSeparator: '.'`, `groupSeparator: ','`, `negativeSign: '-'`) and explicit `calendar.months` to prevent NLS/ICU divergence.
+
+### UrduBidiControlSweep
+
+The `UrduBidiControlSweep` helper asserts absence of U+200F (RLM), U+200E (LRM), and U+061C (ALM) in all authored Urdu output. All Urdu test classes invoke this sweep. Tests pass on net10.0 and net8.0.
+
+### SourceGenerators.Tests
+
+71 tests passed on net10.0. No diagnostics.
+
+### dotnet pack
+
+`dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/urdu-validation` succeeded. Package: `Humanizer.3.5.0-dev.44.g97527d116e.nupkg`. `pwsh verify-packages.ps1` NOT run per add-locale skill.
+
+### Gender audit status
+
+`artifacts/2026-04-12-grammatical-gender-audit.md`: All Category A gaps filled across tasks .12 (Romance/Germanic), .13 (Slavic/Baltic), .14 (Semitic). No Category B (research-bound) gaps identified. No follow-up tasks outside epic needed.
+
+### Unresolved questions
+
+None.
