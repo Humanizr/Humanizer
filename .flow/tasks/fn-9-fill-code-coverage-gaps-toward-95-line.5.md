@@ -43,9 +43,8 @@ Cover `OrdinalDatePattern` reachable branches and `NoMatchFoundException` public
 - [ ] The only `OrdinalDatePattern` branch that may remain uncovered is the `GetPatternCulture` AOORE fallback (epic-appendix item); it is absorbed in the aggregate threshold, not excluded at the class level.
 
 ## Done summary
-_To be filled on completion._
-
+Added coverage tests for all OrdinalDatePattern reachable branches (every day-mode switch arm, SubstituteMonth with overrides/genitive/apostrophe escaping, FindAdjacentDayOfMonth scanning, ReplaceDayMarker fallback, StripDirectionalityControls with literal bidi marks, ResolveMonthArray Hijri/Gregorian paths, DateOnly overload, GetPatternCulture Native/Gregorian modes) and NoMatchFoundException three public constructors with Message/InnerException assertions.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 924beb5e, 4ece058d
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 (40785 passed)
 - PRs:
