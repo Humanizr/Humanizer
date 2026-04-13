@@ -1,0 +1,4 @@
+locale: 'zz-list-value-no-engine'
+surfaces:
+  list:
+    value: 'and'

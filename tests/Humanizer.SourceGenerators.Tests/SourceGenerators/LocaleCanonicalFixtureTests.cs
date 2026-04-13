@@ -271,8 +271,7 @@ public class LocaleCanonicalFixtureTests
         // Exercises CreateMappedFeature's collectionFormatter missing-engine branch.
         // NormalizeListSurface returns the mapping as-is when 'value' is present,
         // then CreateMappedFeature expects 'engine' on the collectionFormatter mapping.
-        var catalog = CreateCatalog(
-            ("zz-list-value-no-engine", "locale: 'zz-list-value-no-engine'\nsurfaces:\n  list:\n    value: 'and'\n"));
+        var catalog = CreateCatalogFromFixture("list-value-without-engine", "zz-list-value-no-engine");
 
         AssertDiagnosticContains(catalog, "HSG003", "collectionFormatter' must declare an 'engine'");
     }
