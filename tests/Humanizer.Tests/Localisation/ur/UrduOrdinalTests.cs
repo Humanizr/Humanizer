@@ -31,6 +31,7 @@ public class UrduOrdinalTests
     [InlineData(3, GrammaticalGender.Feminine, "تیسری")]
     [InlineData(5, GrammaticalGender.Feminine, "پانچویں")]
     [InlineData(50, GrammaticalGender.Feminine, "پچاسویں")]
+    [InlineData(101, GrammaticalGender.Feminine, "ایک سو ایکویں")]
     [InlineData(100, GrammaticalGender.Feminine, "ایک سوویں")]
     [InlineData(100000, GrammaticalGender.Feminine, "ایک لاکھویں")]
     public void ToOrdinalWords_GenderedOutput(int number, GrammaticalGender gender, string expected)
@@ -69,6 +70,8 @@ public class UrduOrdinalTests
     [InlineData(50, GrammaticalGender.Feminine, "پچاسویں")]
     [InlineData(100, GrammaticalGender.Masculine, "ایک سوواں")]
     [InlineData(100, GrammaticalGender.Feminine, "ایک سوویں")]
+    [InlineData(101, GrammaticalGender.Masculine, "ایک سو ایکواں")]
+    [InlineData(101, GrammaticalGender.Feminine, "ایک سو ایکویں")]
     [InlineData(100000, GrammaticalGender.Masculine, "ایک لاکھواں")]
     [InlineData(100000, GrammaticalGender.Feminine, "ایک لاکھویں")]
     public void Ordinalize_Int_GenderedOutput(int number, GrammaticalGender gender, string expected)
@@ -81,6 +84,7 @@ public class UrduOrdinalTests
     [Theory]
     [InlineData("5", GrammaticalGender.Masculine, "پانچواں")]
     [InlineData("5", GrammaticalGender.Feminine, "پانچویں")]
+    [InlineData("5", GrammaticalGender.Neuter, "پانچواں")]
     public void Ordinalize_String_GenderedOutput(string numberString, GrammaticalGender gender, string expected)
     {
         var result = numberString.Ordinalize(gender, Ur);
@@ -115,8 +119,12 @@ public class UrduOrdinalTests
     [InlineData(100, GrammaticalGender.Masculine, "ایک سوواں")]
     public void ToOrdinalWords_And_Ordinalize_ProduceConsistentOutput(int number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToOrdinalWords(gender, Ur));
-        Assert.Equal(expected, number.Ordinalize(gender, Ur));
+        var toOrdinalWords = number.ToOrdinalWords(gender, Ur);
+        var ordinalized = number.Ordinalize(gender, Ur);
+        Assert.Equal(expected, toOrdinalWords);
+        Assert.Equal(expected, ordinalized);
+        UrduBidiControlSweep.AssertNoBidiControls(toOrdinalWords);
+        UrduBidiControlSweep.AssertNoBidiControls(ordinalized);
     }
 
     // --- Regional variant resolution via parent culture walk ---
@@ -124,12 +132,20 @@ public class UrduOrdinalTests
     [Theory]
     [InlineData(5, GrammaticalGender.Masculine, "پانچواں")]
     [InlineData(5, GrammaticalGender.Feminine, "پانچویں")]
-    public void Ordinalize_UrPk_ResolvesViaParentWalk(int number, GrammaticalGender gender, string expected) =>
-        Assert.Equal(expected, number.Ordinalize(gender, UrPk));
+    public void Ordinalize_UrPk_ResolvesViaParentWalk(int number, GrammaticalGender gender, string expected)
+    {
+        var result = number.Ordinalize(gender, UrPk);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 
     [Theory]
     [InlineData(5, GrammaticalGender.Masculine, "پانچواں")]
     [InlineData(5, GrammaticalGender.Feminine, "پانچویں")]
-    public void Ordinalize_UrIn_ResolvesViaParentWalk(int number, GrammaticalGender gender, string expected) =>
-        Assert.Equal(expected, number.Ordinalize(gender, UrIn));
+    public void Ordinalize_UrIn_ResolvesViaParentWalk(int number, GrammaticalGender gender, string expected)
+    {
+        var result = number.Ordinalize(gender, UrIn);
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
+    }
 }
