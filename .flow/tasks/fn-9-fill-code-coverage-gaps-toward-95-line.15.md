@@ -12,14 +12,14 @@ Close tail-coverage on **ordinal NumberToWords engines + `PhraseClockNotationCon
 - `Humanizer.WordFormTemplateOrdinalizer` (89.7%)
 
 ## Approach
-- Read `artifacts/fn-9-baseline/uncovered.json` (from .1); list uncovered lines per class.
+- Read `artifacts/fn-9-local-coverage/uncovered.json` (from .1); list uncovered lines per class.
 - Ordinal engines (`TerminalOrdinalScale`, `HarmonyOrdinal`): likely missing gendered-ordinal + negative-input + scale-boundary branches. Locales involved: ja, ko, ru, pl, he, ar, fr, es, it, pt, de.
 - `PhraseClockNotationConverter`: likely missing edge branches for specific phrase-table lookups (null / fallback) and corner hours (midnight / noon / quarter-past / half-past wrap). Locales: th, vi, ja, km.
 - `WordFormTemplateOrdinalizer`: likely missing template-substitution edge branches (null template, unknown placeholder, grammatical-case variants).
 
 ## Investigation targets
 **Required:**
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - `src/Humanizer/Localisation/NumberToWords/TerminalOrdinalScaleNumberToWordsConverter.cs`
 - `src/Humanizer/Localisation/NumberToWords/HarmonyOrdinalNumberToWordsConverter.cs`
 - `src/Humanizer/Localisation/TimeOnlyToClockNotation/PhraseClockNotationConverter.cs`

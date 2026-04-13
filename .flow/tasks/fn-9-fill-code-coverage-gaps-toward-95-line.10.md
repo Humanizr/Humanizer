@@ -17,13 +17,13 @@ Close tail-coverage on **core extensions** subset of the 88-95% classes.
 - `Humanizer.ToQuantityExtensions` (93.5%)
 
 ## Approach
-- For each target, read the corresponding entry in `artifacts/fn-9-baseline/uncovered.json` (from .1). List uncovered lines + branches as a header comment in the test file. Author the smallest `[Fact]` / `[Theory]` input per branch.
+- For each target, read the corresponding entry in `artifacts/fn-9-local-coverage/uncovered.json` (from .1). List uncovered lines + branches as a header comment in the test file. Author the smallest `[Fact]` / `[Theory]` input per branch.
 - Because fn-9 depends on fn-8, there is no locale hold list. If an uncovered branch is reachable only through cs/pl/ru/ar/he/hi, write the test against that locale.
 - No new test plumbing needed.
 
 ## Investigation targets
 **Required:**
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - Each target `.cs` under `src/Humanizer/`
 - `tests/Humanizer.Tests/CasingTests.cs`, `OrdinalizeTests.cs`, `ToQuantityTests.cs` — existing test shapes
 

@@ -27,7 +27,7 @@ Close analyzer branch gaps in `Humanizer.Analyzers` across both Roslyn arms now 
 - `src/Humanizer.Analyzers/NamespaceMigrationCodeFixProvider.cs:37-178`
 - `src/Humanizer.Analyzers/NamespaceMigrationAnalyzer.cs:75-168`
 - `tests/Humanizer.Analyzers.Tests/Verifiers.cs`
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - `https://github.com/dotnet/roslyn-sdk/tree/main/src/Microsoft.CodeAnalysis.Testing`
 
 ## Acceptance

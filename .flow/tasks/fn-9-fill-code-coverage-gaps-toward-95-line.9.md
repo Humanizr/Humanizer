@@ -10,7 +10,7 @@ Depends on .8 for shared `FixtureLoader` + `Fixtures/` conventions.
 
 ## Approach
 - Reuse `FixtureLoader` from .8.
-- Consume `artifacts/fn-9-baseline/uncovered.json` as the authoritative list. For each uncovered branch in the three factories and their `EngineContractCatalog` + `EngineContractMember` neighbours, author a synthetic YAML fixture that selects that branch.
+- Consume `artifacts/fn-9-local-coverage/uncovered.json` as the authoritative list. For each uncovered branch in the three factories and their `EngineContractCatalog` + `EngineContractMember` neighbours, author a synthetic YAML fixture that selects that branch.
 - Target surfaces:
   - Factory `Kind` dispatch arms (e.g. `WordsToNumberEngineContractFactory.Create` `else if (kind == "X")`)
   - Builder arms in `NumberToWordsEngineContractFactory` (`harmony-ordinal-scale-array`, `triad-scale-array`, `hyphenated-scale`, etc.)
@@ -27,7 +27,7 @@ Depends on .8 for shared `FixtureLoader` + `Fixtures/` conventions.
 - `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/NumberToWordsEngineContractFactory.cs` (full)
 - `src/Humanizer.SourceGenerators/Common/EngineContractModels.cs` — `EngineContractMember.Kind`
 - `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/FixtureLoader.cs` (from .8)
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - `src/Humanizer/Locales/*.yml` — reference shapes for each engine kind
 
 ## Acceptance

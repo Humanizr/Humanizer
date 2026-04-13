@@ -16,13 +16,13 @@ Close tail-coverage on the **scale + gender NumberToWords converter family** (8 
 - `Humanizer.AppendedGroupNumberToWordsConverter` (94.9%)
 
 ## Approach
-- Read `artifacts/fn-9-baseline/uncovered.json` (from .1) for each target; list uncovered lines + branches in a test-file header comment.
+- Read `artifacts/fn-9-local-coverage/uncovered.json` (from .1) for each target; list uncovered lines + branches in a test-file header comment.
 - Per-locale-idiomatic branches: write tests under the relevant `tests/Humanizer.Tests/Localisation/<culture>/` folder. Because fn-9 depends on fn-8's completion, every locale is safe to touch. Cultures involved across these engines: ru, pl, cs, uk, ar, fr, de, es, he, ja.
 - Common uncovered shapes: `long.MinValue` overflow guard (test the existing throw; do NOT change source), negative-input branches, scale-word boundaries (999 → 1 000, 999 999 → 1 000 000, etc.), gender-specific overloads.
 
 ## Investigation targets
 **Required:**
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - Each target `.cs` under `src/Humanizer/Localisation/NumberToWords/`
 - Existing locale test folders for ru / pl / cs / uk / ar / fr / de / es / he
 

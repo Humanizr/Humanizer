@@ -29,7 +29,7 @@ Baseline infrastructure already in place: xUnit v3 + Microsoft Testing Platform,
 **In scope**
 - Emit `[ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]` from the FluentDate `.tt` templates at (a) each fully-generated nested static class and (b) each generated member of the outer `public partial class` declarations, preserving hand-authored `In.TheYear` / `InDate.TheYear` coverage and leaving `PrepositionsExtensions.cs` untouched.
 - Add `coverage.runsettings` (Microsoft Code Coverage / MTP schema — NOT coverlet) preserving the effective current `testconfig.json` configuration (DeterministicReport, ExcludeAssembliesWithoutSources=None, Format=cobertura, ModulePaths.Include for `Humanizer`/`Humanizer.Analyzers`/`Humanizer.SourceGenerators`, four attribute exclusions).
-- Produce a baseline artifact in task .1 at `artifacts/fn-9-baseline/` listing uncovered lines per class per assembly.
+- Produce a baseline artifact in task .1 at `artifacts/fn-9-local-coverage/` listing uncovered lines per class per assembly.
 - Author real tests for every gap bucket.
 - Write a dedicated **gate script** parsing ReportGenerator's `Summary.xml` (XmlSummary) and applying per-assembly thresholds.
 - Wire the gate into `azure-pipelines.yml`; add `XmlSummary` to `reporttypes`.
@@ -44,7 +44,7 @@ Baseline infrastructure already in place: xUnit v3 + Microsoft Testing Platform,
 ## Approach
 
 - **Trivial DSL exclusion.** Edit the six FluentDate `.tt` templates (`In.Months.tt`, `In.SomeTimeFrom.tt`, `InDate.Months.tt`, `InDate.SomeTimeFrom.tt`, `On.Days.tt`, `OnDate.Days.tt`) so each regenerated `.cs` output emits `[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]` on every generated nested type AND on every generated member of the outer partial class. Hand-authored `In.cs`, `InDate.cs`, `PrepositionsExtensions.cs` are untouched. Attribute emission is the sole FluentDate exclusion mechanism.
-- **Baseline artifact.** Task .1 runs the full merged coverage on the authoritative OS target — Windows, where `net48` can run. Commits `artifacts/fn-9-baseline/Summary.txt`, `Summary.xml`, `uncovered.json` with per-class uncovered lines/branches + reachability notes for the three declared-unreachable branches.
+- **Baseline artifact.** Task .1 runs the full merged coverage on the authoritative OS target — Windows, where `net48` can run. Commits `artifacts/fn-9-local-coverage/Summary.txt`, `Summary.xml`, `uncovered.json` with per-class uncovered lines/branches + reachability notes for the three declared-unreachable branches.
 - **Default fallback converters.** Instantiate directly; clone `CultureInfo` with `ShortDatePattern` embedding literal bidi marks for OS-independent mark-stripping tests.
 - **Registry default-factory path.** Use `eo` (Esperanto) — the known-unregistered culture used by `HeadingTests.ToHeadingFallsBackToEnglishForUnknownCultures:208`.
 - **Branch-level gaps.** Consume `uncovered.json`; author targeted `[Theory]` / `[Fact]` inputs.
@@ -77,7 +77,7 @@ pwsh scripts/coverage-gate.ps1 -SummaryXmlPath artifacts/local-coverage/Summary.
 - [ ] `coverage.runsettings` exists at repo root using Microsoft Code Coverage schema, replicating `testconfig.json` effective config (DeterministicReport, ExcludeAssembliesWithoutSources=None, Format=cobertura, ModulePaths.Include, four attribute exclusions).
 - [ ] `azure-pipelines.yml` passes `--coverage-settings coverage.runsettings` to `dotnet test` AND includes `XmlSummary` in ReportGenerator's `reporttypes`.
 - [ ] `CLAUDE.md`, `AGENTS.md`, `docs/adding-a-locale.md` reference `--coverage-settings coverage.runsettings` in `dotnet test` examples (from .1). For threshold numbers, these docs reference the gate-script header as canonical source — no numeric duplication (from .11).
-- [ ] `artifacts/fn-9-baseline/` (`Summary.txt`, `Summary.xml`, `uncovered.json`) is produced by .1, authoritative on Windows CI with all three test projects × all supported TFMs.
+- [ ] `artifacts/fn-9-local-coverage/` (`Summary.txt`, `Summary.xml`, `uncovered.json`) is produced by .1, authoritative on Windows CI with all three test projects × all supported TFMs.
 - [ ] All three `Default*` fallback converters reach ≥95% line / ≥90% branch.
 - [ ] `TokenMapWordsToNumberOrdinalMapBuilder` exercises all three `TokenMapOrdinalGenderVariant` cases across both `Build` overloads.
 - [ ] `WordsToNumberExtension.TryToNumber` overloads reach ≥95% line; tests match actual signatures and behaviors (no fabricated null/empty contract).

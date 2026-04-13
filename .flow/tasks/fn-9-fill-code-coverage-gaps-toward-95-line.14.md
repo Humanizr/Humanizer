@@ -15,13 +15,13 @@ Close tail-coverage on **words-to-number converters** + `TimeSpanHumanizeExtensi
 - `Humanizer.TimeSpanHumanizeExtensions` (95.0%)
 
 ## Approach
-- Read `artifacts/fn-9-baseline/uncovered.json` (from .1).
+- Read `artifacts/fn-9-local-coverage/uncovered.json` (from .1).
 - Words-to-number converters are culture-specific — write tests under the relevant per-locale folder. Vigesimal: fr etc.; greedy compound: en, de; linking-affix: ja, zh; contracted scale: eu.
 - `TimeSpanHumanizeExtensions`: likely missing branches for `TimeSpan.Zero`, negative spans, `MaxValue`, very-long-duration × precision combinations.
 
 ## Investigation targets
 **Required:**
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - Each target `.cs` under `src/Humanizer/Localisation/WordsToNumber/` + `src/Humanizer/TimeSpanHumanizeExtensions.cs`
 - Existing per-locale `WordsToNumber` tests and `TimeSpanHumanizeTests.cs`
 

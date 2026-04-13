@@ -18,7 +18,7 @@ Close formatter branch gaps: `LocalePhraseTable` (70%), `DelimitedCollectionForm
 - `src/Humanizer/Localisation/CollectionFormatters/DelimitedCollectionFormatter.cs:1-80`
 - `src/Humanizer/Localisation/CollectionFormatters/CliticCollectionFormatter.cs:1-80`
 - `tests/Humanizer.Tests/CollectionHumanizeTests.cs` — existing shapes
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 
 ## Acceptance
 - [ ] `LocalePhraseTable` reaches ≥93% line / ≥88% branch; both directions of all four `TryGet*` pairs covered.

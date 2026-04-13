@@ -25,7 +25,7 @@ Test the three `Default*` fallback converters (currently 0% line). They run when
 - `src/Humanizer/Localisation/NumberToWords/DefaultNumberToWordsConverter.cs:11-30`
 - `tests/Humanizer.Tests/UseCultureAttribute.cs:22-54` — culture scoping
 - `tests/Humanizer.Tests/OrdinalizerRegistryRecoveryTests.cs` — precedent for direct-instantiation tests
-- `artifacts/fn-9-baseline/uncovered.json` (from `.1`) — confirms exact uncovered lines per class
+- `artifacts/fn-9-local-coverage/uncovered.json` (from `.1`) — confirms exact uncovered lines per class
 
 ## Acceptance
 - [ ] `DefaultDateToOrdinalWordConverter` reaches ≥95% line and ≥90% branch; every branch of `SanitizeNonEnglishDate` (LTR, RTL, ALM) hit via a cloned-culture `ShortDatePattern` containing the three code points.

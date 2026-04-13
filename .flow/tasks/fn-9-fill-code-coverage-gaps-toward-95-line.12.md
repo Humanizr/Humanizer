@@ -15,13 +15,13 @@ Close tail-coverage on **ByteSize + Truncator** classes.
 - `Humanizer.FixedNumberOfCharactersTruncator` (92.5%)
 
 ## Approach
-- Read `artifacts/fn-9-baseline/uncovered.json` (from .1) for each target; list uncovered lines + branches in the test-file header comment.
+- Read `artifacts/fn-9-local-coverage/uncovered.json` (from .1) for each target; list uncovered lines + branches in the test-file header comment.
 - `ByteSize`: add Theory rows for edge values (negative, zero, `long.MinValue`, `long.MaxValue`, unit-boundary crossings). Extend the three existing `Bytes/*.cs` test files in place — `ParsingTests.cs` for parse errors, `ToStringTests.cs` for format precision, `CreatingTests.cs` for factory-method edges.
 - Truncators: branches for `truncationString` longer than input, empty input, whitespace-only input, exact-fit, just-over-fit. Extend `TruncatorTests.cs` (existing file at `tests/Humanizer.Tests/TruncatorTests.cs`).
 
 ## Investigation targets
 **Required:**
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - `src/Humanizer/Bytes/ByteSize.cs`
 - `src/Humanizer/Truncation/*.cs` (per-truncator sources)
 - `tests/Humanizer.Tests/Bytes/{CreatingTests,ParsingTests,ToStringTests}.cs`

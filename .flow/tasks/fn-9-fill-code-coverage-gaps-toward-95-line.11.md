@@ -24,7 +24,7 @@ Enforce the hard coverage gate in CI via a dedicated gate script that parses Rep
 ## Investigation targets
 **Required:**
 - `azure-pipelines.yml:71-102` — current test / ReportGenerator / fail-on-issue wiring
-- `artifacts/fn-9-baseline/Summary.xml` (produced by .1) — canonical format of ReportGenerator `XmlSummary`
+- `artifacts/fn-9-local-coverage/Summary.xml` (produced by .1) — canonical format of ReportGenerator `XmlSummary`
 - `https://reportgenerator.io/usage` — `XmlSummary` report type reference
 - Final fresh `Summary.xml` produced after .2–.10 + .12–.15 — source of truth for achievable thresholds
 - `CLAUDE.md:Quick Commands` — existing format conventions

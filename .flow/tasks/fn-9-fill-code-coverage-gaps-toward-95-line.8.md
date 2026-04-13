@@ -29,7 +29,7 @@ Also owns the **shared fixture helper + csproj resource inclusion** that task .9
 - `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/HumanizerSourceGeneratorTests.cs:1-400` — driver pattern, in-memory `AdditionalText` setup
 - `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/CanonicalLocaleSchemaTests.cs` — existing schema-test shape
 - `tests/Humanizer.SourceGenerators.Tests/SourceGenerators/LocalePhraseNormalizationTests.cs` — normalization-test shape
-- `artifacts/fn-9-baseline/uncovered.json` (from .1)
+- `artifacts/fn-9-local-coverage/uncovered.json` (from .1)
 
 ## Acceptance
 - [ ] `LocaleSemanticDiff` reaches ≥90% line and ≥80% branch.

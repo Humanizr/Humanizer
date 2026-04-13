@@ -29,7 +29,7 @@ Cover `OrdinalDatePattern` reachable branches and `NoMatchFoundException` public
 - `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:1-334`
   <!-- Updated by plan-sync: fn-9.1 file is 334 lines not 310 -->
 - `src/Humanizer/NoMatchFoundException.cs`
-- `artifacts/fn-9-baseline/uncovered.json`
+- `artifacts/fn-9-local-coverage/uncovered.json`
 - Cultures with non-default day-mode: scan `src/Humanizer/Locales/*.yml` for day-mode declarations (`ar.yml`, `uk.yml`, locales emitting `MasculineOrdinalWhenDayIsOne` or `DotSuffix`)
 
 **Optional:**

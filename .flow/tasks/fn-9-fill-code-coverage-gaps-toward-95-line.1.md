@@ -8,7 +8,7 @@ Establish the honest coverage baseline. Emit `[ExcludeFromCodeCoverage]` from Fl
 - Regenerated `.cs` outputs (`In.Months.cs`, `In.SomeTimeFrom.cs`, `InDate.Months.cs`, `InDate.SomeTimeFrom.cs`, `On.Days.cs`, `OnDate.Days.cs`) — committed
 - `azure-pipelines.yml:71-92` — pass `--coverage-settings coverage.runsettings` to `dotnet test`; add `XmlSummary` to the ReportGenerator `reporttypes` list (task .11 consumes it for the gate, but `.1` makes the output available)
 - `CLAUDE.md`, `AGENTS.md`, `docs/adding-a-locale.md` — `dotnet test` command examples (command only; threshold numbers live in .11)
-- `artifacts/fn-9-baseline/Summary.txt`, `Summary.xml`, `uncovered.json` (new, committed)
+- `artifacts/fn-9-local-coverage/Summary.txt`, `Summary.xml`, `uncovered.json` (new, committed)
 
 ## Approach
 - **Attribute emission (primary exclusion).** The six FluentDate `.tt` files produce generated code that either (a) adds members to the outer `public partial class In` / `InDate` / `On` / `OnDate` or (b) declares nested static classes (e.g. `In.January`, `On.April`, `InDate.Five`). Update each `.tt` to emit `[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage(Justification = "Generated trivial DateTime factories")]`:
@@ -28,7 +28,7 @@ Establish the honest coverage baseline. Emit `[ExcludeFromCodeCoverage]` from Fl
 - **Baseline collection.**
   - Authoritative: Windows CI run (the only OS that executes `net48`). Commit the Windows-CI-produced artifact as the baseline for downstream tasks.
   - Informational: local macOS/Linux runs at net10.0 + net8.0 are useful for iteration but are NOT the source of truth. The baseline artifact header includes the OS + TFM list it covers.
-  - Produce: `artifacts/fn-9-baseline/Summary.txt` (ReportGenerator TextSummary), `Summary.xml` (XmlSummary), `uncovered.json` (per-class uncovered lines/branches with optional `reachability` annotations for the three suspect branches).
+  - Produce: `artifacts/fn-9-local-coverage/Summary.txt` (ReportGenerator TextSummary), `Summary.xml` (XmlSummary), `uncovered.json` (per-class uncovered lines/branches with optional `reachability` annotations for the three suspect branches).
 - **Suspect-unreachable investigation.** Record in `uncovered.json` under a `notes` field for each of:
   - `HeadingTableCatalog.Invariant` / `invariantCache`
   - `OrdinalDatePattern.GetPatternCulture` AOORE fallback at `src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs:270-285`
@@ -53,7 +53,7 @@ Establish the honest coverage baseline. Emit `[ExcludeFromCodeCoverage]` from Fl
 - [ ] `coverage.runsettings` exists at repo root using Microsoft Code Coverage schema and replicates the current `testconfig.json` effective coverage configuration (DeterministicReport, ExcludeAssembliesWithoutSources, Format=cobertura, ModulePaths.Include filter, and the four attribute exclusions — DebuggerHidden, DebuggerNonUserCode, GeneratedCode, ExcludeFromCodeCoverage).
 - [ ] `azure-pipelines.yml` passes `--coverage-settings coverage.runsettings` to `dotnet test` AND includes `XmlSummary` in ReportGenerator's `reporttypes`.
 - [ ] `CLAUDE.md`, `AGENTS.md`, `docs/adding-a-locale.md` reference `--coverage-settings coverage.runsettings` in their `dotnet test` examples (threshold numbers added by .11).
-- [ ] Authoritative Windows-CI run produces `artifacts/fn-9-baseline/Summary.txt`, `Summary.xml`, `uncovered.json` covering all three test projects and all supported TFMs (`net10.0`, `net8.0`, `net48`); the artifact header names the OS + TFM set.
+- [ ] Authoritative Windows-CI run produces `artifacts/fn-9-local-coverage/Summary.txt`, `Summary.xml`, `uncovered.json` covering all three test projects and all supported TFMs (`net10.0`, `net8.0`, `net48`); the artifact header names the OS + TFM set.
 - [ ] `uncovered.json` includes `notes` entries for the three suspect branches documenting reachability.
 - [ ] Merged report contains zero `Humanizer.In.*`, `Humanizer.InDate.*`, `Humanizer.On.*`, `Humanizer.OnDate.*` nested-type classes; the outer `Humanizer.In` / `Humanizer.InDate` / `Humanizer.On` / `Humanizer.OnDate` appear with only their hand-authored members counted.
 - [ ] `Humanizer` assembly line coverage in the new baseline is measurably higher than the prior 91.3% (instrumentation change alone).

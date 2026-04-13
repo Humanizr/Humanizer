@@ -48,7 +48,7 @@ project.lock.json
 *.lock.json
 /artifacts/*
 !/artifacts/*.md
-!/artifacts/fn-9-baseline/
+!/artifacts/fn-9-local-coverage/
 
 # Visual Studio profiler
 *.psess
