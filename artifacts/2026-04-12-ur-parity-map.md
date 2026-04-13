@@ -666,6 +666,41 @@ Explicit Gregorian month override (pins cross-platform output):
 
 ---
 
+## Regional Variants (task .11)
+
+### ur-PK
+
+- **Genuine CLDR deltas vs ur (neutral)**: none
+  - DecimalSeparator: identical (`.`)
+  - GroupSeparator: identical (`,`)
+  - NegativeSign: identical (U+200E U+002D -- overridden to `-` in ur.yml `number.formatting`)
+  - Calendar: identical (GregorianCalendar default, HijriCalendar optional)
+  - Month names: identical
+  - Date patterns: identical
+  - Currency symbol differs (`Rs` vs none on neutral) but Humanizer has no currency surface
+  - First-day-of-week differs in CLDR but Humanizer has no first-day-of-week surface
+- **YAML shape**: `locale: 'ur-PK'` + `variantOf: 'ur'` + `surfaces: {}`
+- **Rationale**: shipped for matrix coverage so `ur-PK` is first-class in `LocaleRegistrySweepTests` and `ShippedLocaleRows`
+
+### ur-IN
+
+- **Genuine CLDR deltas vs ur (neutral)**: none (for Humanizer-visible surfaces)
+  - DecimalSeparator: identical (`.`)
+  - GroupSeparator: identical (`,`)
+  - NegativeSign: identical
+  - Calendar: identical
+  - Month names: identical
+  - Currency symbol differs (`₹` vs none) but Humanizer has no currency surface
+  - Week-of-year rule may differ but Humanizer has no week-of-year surface
+- **YAML shape**: `locale: 'ur-IN'` + `variantOf: 'ur'` + `surfaces: {}`
+- **Rationale**: shipped for matrix coverage so `ur-IN` is first-class in `LocaleRegistrySweepTests` and `ShippedLocaleRows`
+
+### Bidi control verification
+
+- `rg -P '\x{200E}|\x{200F}|\x{061C}' ur-PK.yml ur-IN.yml` returns no matches
+
+---
+
 ## Downstream Implementation Tasks
 
 Architecture decisions are locked. The following tasks own execution:
@@ -673,4 +708,4 @@ Architecture decisions are locked. The following tasks own execution:
 1. ~~**Dense 0-99 cardinal data + engine threshold adaptation** for `indian-grouping` -- task .3~~ DONE
 2. **Hijri month schema extension** (`hijriMonths` key) + runtime calendar selection -- task .10
 3. **`number-word-suffix` ordinalizer engine** + gendered `IndianGroupingGenderedNumberToWordsConverter` -- task .9
-4. **Regional variant differences** between ur-PK and ur-IN -- task .11
+4. ~~**Regional variant differences** between ur-PK and ur-IN -- task .11~~ DONE (none -- shipped for matrix coverage)
