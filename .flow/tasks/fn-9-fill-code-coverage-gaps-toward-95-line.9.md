@@ -40,9 +40,8 @@ Depends on .8 for shared `FixtureLoader` + `Fixtures/` conventions.
 - [ ] SG thresholds are task-level; NOT gated by CI.
 
 ## Done summary
-_To be filled on completion._
-
+Added 6 YAML engine-contract fixtures and 35 test methods (171 -> 206) covering uncovered branches in WordsToNumberEngineContractFactory, TimeOnlyToClockNotationEngineContractFactory, NumberToWordsEngineContractFactory, and EngineContractUtilities. Covers nullable-member present/absent paths, multi-member constructor dispatch, null-RuntimeType fallback, CreateObjectValue with/without TypeName, value-resolution fallback/default branches, and all defensive exception paths.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: fc82ea591d27e45b2e7abe36bac3f8b14f24c303, a9bc447b8a4394be4597410c347edbc1015075e8
+- Tests: dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0 (206 passed)
 - PRs:
