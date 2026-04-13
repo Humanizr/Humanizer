@@ -28,7 +28,9 @@ public class UrduHijriDateTests
         var date = new DateTime(hijriYear, hijriMonth, hijriDay, hijri);
 
         using var _ = new CultureSwap(CreateUrduHijriCulture());
-        Assert.Equal(expected, date.ToOrdinalWords());
+        var result = date.ToOrdinalWords();
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 
     [Theory]
@@ -40,7 +42,9 @@ public class UrduHijriDateTests
         var date = new DateTime(hijriYear, hijriMonth, hijriDay, hijri);
 
         using var _ = new CultureSwap(CreateUrduHijriCulture());
-        Assert.Equal(expected, date.ToOrdinalWords());
+        var result = date.ToOrdinalWords();
+        Assert.Equal(expected, result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 
     [Fact]
@@ -51,6 +55,7 @@ public class UrduHijriDateTests
         var result = date.ToOrdinalWords();
         Assert.Contains("جنوری", result);
         Assert.Equal("15 جنوری، 2025", result);
+        UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 
 #if NET6_0_OR_GREATER
@@ -97,4 +102,3 @@ public class UrduHijriDateTests
         Assert.Contains("محرم", result);
     }
 }
-

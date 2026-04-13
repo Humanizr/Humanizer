@@ -61,9 +61,8 @@ The `docs/locale-yaml-reference.md` Regional Variant Checklist exception is reco
 - [ ] Parity map updated noting genuine deltas (or "none — shipped for matrix coverage").
 
 ## Done summary
-TBD
-
+Added ur-PK and ur-IN regional variant YAML files with minimum-valid variantOf shape (surfaces: {}). Probe data confirmed no runtime-visible deltas between variants and neutral ur for any Humanizer surface. Updated parity map with comprehensive delta analysis documenting that variants are shipped for matrix coverage.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 86662019275aaaa2a80f396a2ff27c39b85f066d
+- Tests: dotnet test --project tests/Humanizer.SourceGenerators.Tests (63/63 passed), dotnet build src/Humanizer/Humanizer.csproj -c Release (0 warnings, 0 errors), dotnet test --project tests/Humanizer.Tests --filter-class LocaleRegistrySweepTests (12493/12494 passed, 1 pre-existing Uzbek failure), rg bidi control check (no matches)
 - PRs:
