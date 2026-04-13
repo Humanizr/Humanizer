@@ -8,6 +8,7 @@
 //   dotnet run tools/locale-probe.cs > locale-probe-macos.tsv
 //   dotnet run tools/locale-probe.cs --json > locale-probe-macos.json
 //   dotnet run tools/locale-probe.cs --failing   (only show known-failing locales)
+//   dotnet run tools/locale-probe.cs -- ur ur-PK ur-IN   (probe specific locales)
 
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -45,7 +46,8 @@ string[] failingLocales = [
     "zh-CN", "zh-Hans", "zu-ZA"
 ];
 
-var locales = onlyFailing ? failingLocales : allLocales;
+var positionalLocales = args.Where(a => !a.StartsWith("--")).ToArray();
+var locales = positionalLocales.Length > 0 ? positionalLocales : onlyFailing ? failingLocales : allLocales;
 
 // Reference dates (matching test data in LocaleCoverageData.cs)
 var dates = new (string Label, int Y, int M, int D)[]
