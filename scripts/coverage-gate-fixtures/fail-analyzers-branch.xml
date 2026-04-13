@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>4/13/2026 - 12:00:00 AM</Generatedon>
+    <Assemblies>3</Assemblies>
+  </Summary>
+  <Coverage>
+    <Assembly name="Humanizer" classes="800" coverage="96.5" coveredlines="25603" coverablelines="26527" totallines="226201" branchcoverage="89.0" coveredbranches="6203" totalbranches="7435" coveredmethods="2862" fullcoveredmethods="2664" totalmethods="2942" methodcoverage="97.2" fullmethodcoverage="90.5" />
+    <Assembly name="Humanizer.Analyzers" classes="3" coverage="96.0" coveredlines="211" coverablelines="234" totallines="449" branchcoverage="84.0" coveredbranches="50" totalbranches="88" coveredmethods="24" fullcoveredmethods="10" totalmethods="25" methodcoverage="96" fullmethodcoverage="40" />
+    <Assembly name="Humanizer.SourceGenerators" classes="58" coverage="87.4" coveredlines="9995" coverablelines="11425" totallines="37371" branchcoverage="72.7" coveredbranches="3493" totalbranches="4800" coveredmethods="685" fullcoveredmethods="453" totalmethods="730" methodcoverage="93.8" fullmethodcoverage="62" />
+  </Coverage>
+</CoverageReport>

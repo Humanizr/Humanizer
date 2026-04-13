@@ -39,6 +39,17 @@ dotnet format Humanizer.slnx
 pwsh tests/verify-packages.ps1 -PackagePath artifacts
 ```
 
+## Coverage Gate
+
+A CI gate enforces per-assembly code coverage thresholds after every test run.
+Canonical threshold values are defined in the header comment of `scripts/coverage-gate.ps1` --
+that file is the single source of truth for all threshold numbers; do not duplicate them elsewhere.
+
+```bash
+# Run the gate locally against a ReportGenerator XmlSummary output
+pwsh scripts/coverage-gate.ps1 -SummaryXmlPath artifacts/local-coverage/Summary.xml
+```
+
 ## Project Structure
 
 ```

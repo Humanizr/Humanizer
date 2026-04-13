@@ -439,6 +439,7 @@ Before you call the work done, verify all of these:
 - `dotnet pack` passes
 - benchmark comparisons show no regression versus the chosen base
 - verify that `DateTime.ToOrdinalWords()`, `DateOnly.ToOrdinalWords()`, `ByteSize`, `Ordinalize`, and `MetricNumeralExtensions` output for your locale is byte-identical across platforms and target frameworks (including net48/NLS vs net8+/ICU on Windows); if platform globalization data (month names, decimal separators, negative signs, group separators) disagrees, author explicit overrides in `calendar:` and/or `number.formatting:` rather than relying on `CultureInfo`
+- the CI coverage gate still passes after your changes -- thresholds are defined in `scripts/coverage-gate.ps1` (see the header comment for canonical values); run locally with `pwsh scripts/coverage-gate.ps1 -SummaryXmlPath <path-to-Summary.xml>`
 
 ## Related Documents
 

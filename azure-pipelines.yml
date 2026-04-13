@@ -91,6 +91,15 @@ stages:
         customSettings: 'settings:rawMode=false'
         publishCodeCoverageResults: true
 
+    - task: PowerShell@2
+      displayName: Enforce Coverage Gate
+      condition: succeededOrFailed()
+      inputs:
+        filePath: $(Build.SourcesDirectory)/scripts/coverage-gate.ps1
+        arguments: -SummaryXmlPath $(Build.ArtifactStagingDirectory)/coverageReports/Summary.xml
+        pwsh: true
+        failOnStderr: true
+
     - publish: $(Build.ArtifactStagingDirectory)/Packages
       displayName: Publish build packages
       artifact: BuildPackages

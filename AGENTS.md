@@ -29,6 +29,12 @@ These instructions apply to the entire repository.
 - Run the test suite for the supported .NET targets: `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0` on all platforms. All three TFMs (net10.0, net8.0, net48) build successfully everywhere. Run `--framework net48` tests only on Windows (the .NET Framework 4.8 runtime is Windows-only); on non-Windows hosts, verify `net48` builds but do not attempt test execution. Allow a few minutes for each run to complete.
 - For coverage-instrumented runs, append `-- --coverage --coverage-output-format cobertura --coverage-settings coverage.runsettings` to the `dotnet test` command.
 
+## Coverage Gate
+- CI enforces per-assembly code coverage thresholds via `scripts/coverage-gate.ps1`.
+- Canonical threshold values live in that script's header comment -- do not duplicate numbers elsewhere.
+- Run locally: `pwsh scripts/coverage-gate.ps1 -SummaryXmlPath artifacts/local-coverage/Summary.xml`
+- `Humanizer.SourceGenerators` is report-only (not gated).
+
 ## Build & Validation
 - Build command: `dotnet pack src/Humanizer/Humanizer.csproj -c Release -o <path>` (from the repository root). It must succeed without warnings or errors.
 - If you need to reference those newly build packages, create or update `NuGet.config` to use that package output path as a package source--but never commit changes to that file.
