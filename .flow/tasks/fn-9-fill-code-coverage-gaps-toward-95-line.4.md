@@ -31,9 +31,8 @@ Close gaps in `WordsToNumberExtension` Try overloads, `TokenMapWordsToNumberOrdi
 - [ ] No fabricated null/empty contract expectations.
 
 ## Done summary
-_To be filled on completion._
-
+Added coverage tests for WordsToNumberExtension TryToNumber two-param overload, TokenMapWordsToNumberOrdinalMapBuilder (all 3 gender variants x 2 Build overloads with concrete Russian ordinal assertions), and SuffixScaleWordsToNumberConverter (Finnish locale tests for empty-input, numeric parse, negative prefix, hundred/scale compounds, bare-scale lookahead; plus direct-profile tests for tens suffix and teen suffix branches).
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 7f032e2c, 6ce6063e8e9eeac3424537066c34c944f2540ee1
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 - PRs:

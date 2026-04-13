@@ -1,5 +1,3 @@
-using System.Collections.Frozen;
-
 namespace Humanizer.Tests;
 
 /// <summary>
