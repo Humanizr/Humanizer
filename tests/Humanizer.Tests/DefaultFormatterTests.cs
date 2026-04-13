@@ -3,16 +3,18 @@ using System.Globalization;
 namespace Humanizer.Tests;
 
 /// <summary>
-/// Tests for DefaultFormatter covering reachable branches via the string locale
-/// constructor and the generated phrase table pipeline:
+/// Tests for DefaultFormatter covering branches via the string locale constructor,
+/// generated phrase table pipeline, and error/fallback paths:
 /// - string localeCode constructor (line 32-34)
 /// - DateHumanize count==0 DateNow branch (line 184-187)
 /// - DateHumanize single form for count==1 (line 200-204)
 /// - DateHumanize exact-two template branch via Arabic/Maltese (line 206-212)
 /// - DateHumanize multiple form with various counts (line 219-225)
+/// - DateHumanize error throw when ShouldUseDatePhraseTable returns false (lines 46-48, 195-197)
 /// - TimeSpanHumanize zero+toWords fallback (line 231-234)
 /// - TimeSpanHumanize SingleWordsVariant path (line 249)
 /// - TimeSpanHumanize multiple form rendering (line 263-269)
+/// - TimeSpanHumanize error throw when ShouldUseTimeSpanPhraseTable returns false (lines 55-58, 242-244)
 /// - DataUnitHumanize symbol and word paths (lines 149-178)
 /// - TimeUnitHumanize symbol path for all TimeUnit values (line 80-84)
 /// - RenderCountedPhrase with PhraseCountPlacement.None via Romanian (line 282-284)
@@ -203,6 +205,26 @@ public class DefaultFormatterTests
     }
 
     [Fact]
+    public void DateHumanizeThrowsWhenPhraseTableRejected()
+    {
+        var formatter = new RejectingFormatter("en");
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => formatter.DateHumanize(TimeUnit.Day, Tense.Past, 5));
+        Assert.Contains("Missing generated relative-date phrase", ex.Message);
+        Assert.Contains("Day", ex.Message);
+    }
+
+    [Fact]
+    public void TimeSpanHumanizeThrowsWhenPhraseTableRejected()
+    {
+        var formatter = new RejectingFormatter("en");
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => formatter.TimeSpanHumanize(TimeUnit.Hour, 3));
+        Assert.Contains("Missing generated time-span phrase", ex.Message);
+        Assert.Contains("Hour", ex.Message);
+    }
+
+    [Fact]
     public void DateHumanizeWithAllTimeUnits()
     {
         var formatter = new DefaultFormatter("en");
@@ -228,5 +250,19 @@ public class DefaultFormatterTests
         Assert.Equal("2 weeks", formatter.TimeSpanHumanize(TimeUnit.Week, 2));
         Assert.Equal("2 months", formatter.TimeSpanHumanize(TimeUnit.Month, 2));
         Assert.Equal("2 years", formatter.TimeSpanHumanize(TimeUnit.Year, 2));
+    }
+
+    /// <summary>
+    /// Test-only subclass that overrides ShouldUseDatePhraseTable and ShouldUseTimeSpanPhraseTable
+    /// to return false, forcing TryFormat* to fail and triggering the error throw branches
+    /// in DateHumanize (line 46-48) and TimeSpanHumanize (line 55-58).
+    /// </summary>
+    sealed class RejectingFormatter(string localeCode) : DefaultFormatter(localeCode)
+    {
+        internal override bool ShouldUseDatePhraseTable(TimeUnit unit, Tense tense, int count, LocalizedDatePhrase phrase) =>
+            false;
+
+        internal override bool ShouldUseTimeSpanPhraseTable(TimeUnit unit, int count, bool toWords, LocalizedTimeSpanPhrase phrase) =>
+            false;
     }
 }
