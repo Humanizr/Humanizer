@@ -63,9 +63,21 @@ Audit every shipped locale for grammatical-gender coverage (ordinals primarily, 
 - [ ] No locale marked "deferred" without Category B evidence + external follow-up Flow task ID.
 
 ## Done summary
-TBD
+Completed cross-locale grammatical-gender audit and Romance/Germanic fills:
+
+1. Created `artifacts/2026-04-12-grammatical-gender-audit.md` documenting all 65 shipped locales' gender systems, ordinalizer engine types, current YAML coverage, and identified gaps classified by owning task (.12/.13/.14) or external follow-up.
+
+2. Filled Category A gaps for 6 Germanic locales (de, nl, da, nb, is, lb) by adding explicit `feminineSuffix` and `neuterSuffix` YAML entries. All have gender-invariant numeric ordinals — suffixes are identical to masculine but now self-documenting rather than relying on engine fallback.
+
+3. All Romance locales (es, fr, it, pt, ro, ca) and their variants (fr-BE, fr-CH, pt-BR) already had complete gender coverage — no fills needed. Regional Germanic variants (de-CH, de-LI, nn) inherit from their parent locales.
+
+4. No Category B (research-bound) gaps found — all shipped locales' ordinals are well-documented in CLDR and standard grammars.
+
+5. Slavic fills (.13) and Semitic/Indic fills (.14) documented in audit with owning task IDs.
+
+All 40,309 tests pass (1 pre-existing uz-Latn-UZ clock notation failure unrelated).
 
 ## Evidence
-- Commits:
-- Tests:
+- Commits: (pending)
+- Tests: full_suite (40309/40310 pass), source_generator_tests (71/71 pass)
 - PRs:
