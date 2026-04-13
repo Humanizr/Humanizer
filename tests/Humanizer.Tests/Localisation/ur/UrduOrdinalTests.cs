@@ -110,6 +110,31 @@ public class UrduOrdinalTests
         UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 
+    // --- Negative irregulars: both API paths produce parity ---
+
+    [Theory]
+    [InlineData(-1, GrammaticalGender.Masculine, "منفی پہلا")]
+    [InlineData(-2, GrammaticalGender.Masculine, "منفی دوسرا")]
+    [InlineData(-3, GrammaticalGender.Masculine, "منفی تیسرا")]
+    [InlineData(-4, GrammaticalGender.Masculine, "منفی چوتھا")]
+    [InlineData(-6, GrammaticalGender.Masculine, "منفی چھٹا")]
+    [InlineData(-9, GrammaticalGender.Masculine, "منفی نواں")]
+    [InlineData(-1, GrammaticalGender.Feminine, "منفی پہلی")]
+    [InlineData(-2, GrammaticalGender.Feminine, "منفی دوسری")]
+    [InlineData(-3, GrammaticalGender.Feminine, "منفی تیسری")]
+    [InlineData(-5, GrammaticalGender.Masculine, "منفی پانچواں")]
+    [InlineData(-5, GrammaticalGender.Feminine, "منفی پانچویں")]
+    [InlineData(-50, GrammaticalGender.Masculine, "منفی پچاسواں")]
+    public void NegativeOrdinals_BothPaths_ProduceConsistentOutput(int number, GrammaticalGender gender, string expected)
+    {
+        var toOrdinalWords = number.ToOrdinalWords(gender, Ur);
+        var ordinalized = number.Ordinalize(gender, Ur);
+        Assert.Equal(expected, toOrdinalWords);
+        Assert.Equal(expected, ordinalized);
+        UrduBidiControlSweep.AssertNoBidiControls(toOrdinalWords);
+        UrduBidiControlSweep.AssertNoBidiControls(ordinalized);
+    }
+
     // --- Both API paths produce consistent output ---
 
     [Theory]
