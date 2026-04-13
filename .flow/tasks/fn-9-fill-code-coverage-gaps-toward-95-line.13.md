@@ -34,9 +34,8 @@ Close tail-coverage on the **scale + gender NumberToWords converter family** (8 
 - [ ] No deferral or hold-list language.
 
 ## Done summary
-_To be filled on completion._
-
+Added 115 tests covering uncovered branches in 8 NumberToWords scale/gender converter classes: GenderedNumberToWordsConverter (WordForm overload), ScaleStrategy (nb/sv long.MinValue, negatives, ordinal zero/tens), ConjoinedGendered (bg negatives, gendered ordinals), Segmented (el overflow guard, negatives, ordinal map failures), WestSlavic (cs/sk long.MinValue, trillion recursion), AppendedGroup (ar twos branches, gendered ordinals), Pluralized (lt/pl feminine cardinals, form detectors, ordinals), and Conjunctional (en OmitLeadingOne).
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 63fe9fab, 02184e52, 5ab9e089
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 - PRs:
