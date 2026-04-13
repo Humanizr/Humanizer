@@ -23,7 +23,7 @@
 | compass | authored (.5) |
 | calendar | authored (.5, Gregorian months only; Hijri extension in .10) |
 
-All 8 canonical surface groups now have at least one reviewed term authored. Remaining ordinalizer plumbing (ordinal.numeric engine + test matrix rows) is owned by task .9.
+All 8 canonical surface groups have reviewed terms authored and proved. Ordinalizer plumbing (ordinal.numeric `number-word-suffix` engine + test matrix rows) completed in task .9.
 
 ---
 
@@ -101,7 +101,7 @@ net48 requires a Windows host and is not available locally on macOS arm64. The b
 | ur-PK | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net48 | Windows NLS docs + CLDR |
 | ur-IN | GregorianCalendar | GregorianCalendar, HijriCalendar | SUCCESS | FAILED | net48 | Windows NLS docs + CLDR |
 
-**Decision 3 is feasible** across all three runtimes based on: live probe evidence (net10, net8) and authoritative documentation evidence (net48 Windows NLS). Live net48 probe output will be captured during task .7 (cross-platform verification gate) when the branch runs on a Windows CI host. If that gate reveals any discrepancy with the documented behavior, Decision 3 must be re-evaluated.
+**Decision 3 is feasible** across all three runtimes based on: live probe evidence (net10, net8) and authoritative documentation evidence (net48 Windows NLS). Live net48 probe output will be captured when CI runs on a Windows host (CI build URL to be recorded here). If that run reveals any discrepancy with the documented behavior, Decision 3 must be re-evaluated.
 
 **Note on net48 evidence form**: The task spec requires "probe output for net10 + net48 (or CI URL if net48 local host unavailable)." This host is macOS arm64 (no net48 runtime available), and no CI URL exists because the branch has not been pushed yet (this is the first task on the branch). Windows NLS documentation + CLDR cross-reference is the strongest available evidence short of a live probe. The evidence standard is met for the feasibility gate: all three data sources (net10 live, net8 live, net48 documented) agree that HijriCalendar is valid for Urdu cultures.
 
@@ -337,6 +337,7 @@ All four TFMs: net10.0, net8.0, net48, netstandard2.0
 ```
 $ dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
 Passed! total: 58, failed: 0, succeeded: 58
+(Task .1 snapshot; final .7 count is 71 after tasks .9/.10/.11 added generator tests)
 ```
 
 ---
@@ -726,7 +727,7 @@ Architecture decisions are locked. All execution tasks complete:
 
 net10.0 and net8.0 both use ICU globalization on macOS. All 40,619 tests pass on both frameworks with identical expected values, confirming byte-identical output across net10 and net8 for all Urdu tests and all other locale tests.
 
-net48 runtime verification requires a Windows host (uses NLS, not ICU). The test project compiles successfully for net48 with zero warnings. net48 runtime verification will be confirmed when CI runs on a Windows agent. Urdu YAML includes explicit `number.formatting` overrides (`decimalSeparator: '.'`, `groupSeparator: ','`, `negativeSign: '-'`) and explicit `calendar.months` to prevent NLS/ICU divergence.
+**net48 runtime verification pending.** net48 uses Windows NLS (not ICU) and requires a Windows host. The test project compiles successfully for net48 with zero warnings, but runtime tests have not been executed. net48 runtime byte parity will be confirmed when CI runs on a Windows agent — CI build URL to be recorded here once available. Urdu YAML includes explicit `number.formatting` overrides (`decimalSeparator: '.'`, `groupSeparator: ','`, `negativeSign: '-'`) and explicit `calendar.months` to mitigate expected NLS/ICU divergence points.
 
 ### UrduBidiControlSweep
 
