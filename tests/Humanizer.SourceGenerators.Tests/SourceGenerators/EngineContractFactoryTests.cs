@@ -24,8 +24,9 @@ namespace Humanizer.SourceGenerators.Tests;
 /// <c>TimeOnlyToClockNotationEngineContractFactory</c>, and
 /// <c>NumberToWordsEngineContractFactory</c>.
 /// Fixture-driven tests scope assertions to the fixture's generated cache class.
-/// Reflection-based tests exercise private factory methods for branches unreachable
-/// through the YAML pipeline (token-map diversion, defensive exception paths).
+/// Reflection-based tests exercise private factory methods for the token-map arm
+/// (diverted by the YAML pipeline) and defensive exception paths (unsupported member
+/// kinds, missing enum types, missing builder names).
 /// </summary>
 public class EngineContractFactoryTests
 {
@@ -86,7 +87,7 @@ public class EngineContractFactoryTests
         {
             "engine": "token-map",
             "cardinalMap": { "one": 1, "two": 2 },
-            "normalizationProfile": "LowercaseRemovePeriods"
+            "normalizationProfile": "lowercase-remove-periods"
         }
         """);
 
@@ -94,7 +95,7 @@ public class EngineContractFactoryTests
 
         Assert.StartsWith("new TokenMapWordsToNumberConverter(", result);
         Assert.Contains("CardinalMap =", result);
-        Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.Lowercaseremoveperiods", result);
+        Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.LowercaseRemovePeriods", result);
         Assert.Contains("AllowTerminalOrdinalToken = false", result);
         Assert.Contains("UseHundredMultiplier = false", result);
         Assert.Contains("AllowInvariantIntegerInput = false", result);
@@ -114,7 +115,7 @@ public class EngineContractFactoryTests
             "ordinalScaleMap": { "thousandth": 1000 },
             "gluedOrdinalScaleSuffixes": { "th": 1 },
             "compositeScaleMap": { "hundred": 100 },
-            "normalizationProfile": "LowercaseRemovePeriods",
+            "normalizationProfile": "lowercase-remove-periods",
             "negativePrefixes": ["minus"],
             "negativeSuffixes": ["negative"],
             "ordinalPrefixes": ["the"],
@@ -140,18 +141,23 @@ public class EngineContractFactoryTests
 
         var result = InvokeWordsToNumberFactoryCreate("token-map", json);
 
-        Assert.Contains("OrdinalScaleMap =", result);
+        // Assert actual emitted values, not just property labels
+        Assert.Contains("[\"thousandth\"] = 1000", result);
         Assert.Contains("GluedOrdinalScaleSuffixes =", result);
-        Assert.Contains("CompositeScaleMap =", result);
-        Assert.Contains("NegativePrefixes =", result);
-        Assert.Contains("NegativeSuffixes =", result);
-        Assert.Contains("OrdinalPrefixes =", result);
+        Assert.Contains("[\"hundred\"] = 100", result);
+        Assert.Contains("NegativePrefixes = new string[] { \"minus\" }", result);
+        Assert.Contains("NegativeSuffixes = new string[] { \"negative\" }", result);
+        Assert.Contains("OrdinalPrefixes = new string[] { \"the\" }", result);
+        Assert.Contains("IgnoredTokens = new string[] { \"and\" }", result);
+        Assert.Contains("MultiplierTokens = new string[] { \"times\" }", result);
         Assert.Contains("AllowTerminalOrdinalToken = true", result);
         Assert.Contains("UseHundredMultiplier = true", result);
         Assert.Contains("AllowInvariantIntegerInput = true", result);
         Assert.Contains("TeenBaseValue = 10", result);
         Assert.Contains("HundredSuffixMinValue = 200", result);
         Assert.Contains("HundredSuffixMaxValue = 900", result);
+        Assert.Contains("ExactOrdinalMap =", result);
+        Assert.Contains("[\"first\"] = 1", result);
     }
 
     // ──────────────────────────────────────────────────────────────────────
@@ -278,6 +284,57 @@ public class EngineContractFactoryTests
     }
 
     // ──────────────────────────────────────────────────────────────────────
+    //  Defensive exception paths — via reflection
+    //  These branches are unreachable through normal YAML because the
+    //  contract catalog is hard-coded with valid member kinds/builders.
+    //  Reflection constructs invalid EngineContractMember instances directly.
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void NumberToWords_UnsupportedMemberKind_Throws()
+    {
+        // Exercises the _ default throw in NumberToWordsEngineContractFactory.CreateMemberValue.
+        var member = CreateEngineContractMember(kind: "bogus-kind", sourcePath: "x");
+        var root = ParseJson("""{ "x": "value" }""");
+
+        var exception = InvokeCreateMemberValueExpectingException("NumberToWordsEngineContractFactory", root, member);
+        Assert.Contains("Unsupported number-to-words contract member kind 'bogus-kind'", exception.Message);
+    }
+
+    [Fact]
+    public void NumberToWords_EnumMemberWithoutEnumType_Throws()
+    {
+        // Exercises the enum null-check throw in NumberToWordsEngineContractFactory.CreateEnumValue.
+        var member = CreateEngineContractMember(kind: "enum", sourcePath: "x", enumType: null);
+        var root = ParseJson("""{ "x": "value" }""");
+
+        var exception = InvokeCreateMemberValueExpectingException("NumberToWordsEngineContractFactory", root, member);
+        Assert.Contains("Enum members require an enum type", exception.Message);
+    }
+
+    [Fact]
+    public void NumberToWords_UnsupportedBuilderName_Throws()
+    {
+        // Exercises the _ default throw in NumberToWordsEngineContractFactory.CreateBuilderValue.
+        var member = CreateEngineContractMember(kind: "builder", sourcePath: null, builder: "nonexistent-builder");
+        var root = ParseJson("""{}""");
+
+        var exception = InvokeCreateMemberValueExpectingException("NumberToWordsEngineContractFactory", root, member);
+        Assert.Contains("Unsupported number-to-words builder 'nonexistent-builder'", exception.Message);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_UnsupportedMemberKind_Throws()
+    {
+        // Exercises the _ default throw in TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue.
+        var member = CreateEngineContractMember(kind: "bogus-kind", sourcePath: "x");
+        var root = ParseJson("""{ "x": "value" }""");
+
+        var exception = InvokeClockCreateMemberValueExpectingException(root, member);
+        Assert.Contains("Unsupported clock-notation contract member kind 'bogus-kind'", exception.Message);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
     //  Full generation — consolidated builder coverage
     // ──────────────────────────────────────────────────────────────────────
 
@@ -358,6 +415,72 @@ public class EngineContractFactoryTests
             ?? throw new InvalidOperationException("Could not find Create method.");
 
         return (string)createMethod.Invoke(null, [profile])!;
+    }
+
+    /// <summary>
+    /// Creates an <c>EngineContractMember</c> via reflection with the specified parameters.
+    /// Unspecified parameters default to null/empty.
+    /// </summary>
+    static object CreateEngineContractMember(
+        string kind,
+        string? sourcePath = null,
+        string? typeName = null,
+        string? enumType = null,
+        string? builder = null,
+        string? defaultValue = null,
+        string? fallbackSourcePath = null,
+        string? missingValue = null)
+    {
+        var memberType = GeneratorType.GetNestedType("EngineContractMember", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContractMember type.");
+
+        var constructor = memberType.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException("Could not find EngineContractMember constructor.");
+
+        // Primary constructor: kind, sourcePath, typeName, enumType, builder, defaultValue,
+        // fallbackSourcePath, missingValue, ImmutableArray<EngineContractMember> members
+        var emptyMembers = typeof(ImmutableArray).GetMethod("Create", Type.EmptyTypes)!
+            .MakeGenericMethod(memberType).Invoke(null, null);
+
+        return constructor.Invoke([kind, sourcePath, typeName, enumType, builder, defaultValue,
+            fallbackSourcePath, missingValue, emptyMembers!]);
+    }
+
+    /// <summary>
+    /// Invokes <c>NumberToWordsEngineContractFactory.CreateMemberValue</c> via reflection
+    /// and returns the expected <see cref="InvalidOperationException"/> from the inner
+    /// <see cref="TargetInvocationException"/>.
+    /// </summary>
+    static InvalidOperationException InvokeCreateMemberValueExpectingException(
+        string factoryTypeName, JsonElement root, object member)
+    {
+        var factoryType = GeneratorType.GetNestedType(factoryTypeName, BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException($"Could not find {factoryTypeName} type.");
+
+        var method = factoryType.GetMethod("CreateMemberValue", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find CreateMemberValue method.");
+
+        // NumberToWordsEngineContractFactory.CreateMemberValue(root, member, useCultureParameter)
+        var tie = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, [root, member, false]));
+        return Assert.IsType<InvalidOperationException>(tie.InnerException);
+    }
+
+    /// <summary>
+    /// Invokes <c>TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue</c> via reflection.
+    /// </summary>
+    static InvalidOperationException InvokeClockCreateMemberValueExpectingException(
+        JsonElement root, object member)
+    {
+        var factoryType = GeneratorType.GetNestedType("TimeOnlyToClockNotationEngineContractFactory", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find TimeOnlyToClockNotationEngineContractFactory type.");
+
+        var method = factoryType.GetMethod("CreateMemberValue", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find CreateMemberValue method.");
+
+        // TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue(root, member)
+        var tie = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, [root, member]));
+        return Assert.IsType<InvalidOperationException>(tie.InnerException);
     }
 
     static JsonElement ParseJson(string json)
