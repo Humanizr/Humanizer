@@ -391,6 +391,67 @@ public class EngineContractFactoryTests
     }
 
     // ──────────────────────────────────────────────────────────────────────
+    //  Value-resolution branches — via reflection
+    //  These exercise fallback, default, and missing-value branches within
+    //  the factory value-resolution methods (GetStringValue, GetInt64Value, etc.)
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void TimeOnlyToClockNotation_StringMemberWithFallback_UsesFallback()
+    {
+        // Exercises GetStringValue fallback-source-path success branch.
+        var member = CreateEngineContractMember(kind: "string", sourcePath: "primary", fallbackSourcePath: "fallback");
+        var root = ParseJson("""{ "fallback": "fallback-value" }""");
+
+        var result = InvokeClockCreateMemberValue(root, member);
+        Assert.Equal("\"fallback-value\"", result);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_MissingRequiredString_Throws()
+    {
+        // Exercises GetStringValue missing-required-string throw.
+        var member = CreateEngineContractMember(kind: "string", sourcePath: "missing");
+        var root = ParseJson("""{}""");
+
+        var exception = InvokeClockCreateMemberValueExpectingException(root, member);
+        Assert.Contains("Missing required string property 'missing'", exception.Message);
+    }
+
+    [Fact]
+    public void NumberToWords_MissingRequiredString_Throws()
+    {
+        // Exercises NumberToWordsEngineContractFactory.GetStringValue missing-required-string throw.
+        var member = CreateEngineContractMember(kind: "string", sourcePath: "missing");
+        var root = ParseJson("""{}""");
+
+        var exception = InvokeCreateMemberValueExpectingException("NumberToWordsEngineContractFactory", root, member);
+        Assert.Contains("Missing required string property 'missing'", exception.Message);
+    }
+
+    [Fact]
+    public void NumberToWords_Int64MemberWithDefault_UsesDefault()
+    {
+        // Exercises GetInt64Value default-value branch.
+        var member = CreateEngineContractMember(kind: "int64", sourcePath: "missing", defaultValue: "42");
+        var root = ParseJson("""{}""");
+
+        var result = InvokeNumberToWordsCreateMemberValue(root, member);
+        Assert.Equal("42", result);
+    }
+
+    [Fact]
+    public void NumberToWords_MissingRequiredInteger_Throws()
+    {
+        // Exercises GetInt64Value missing-required-integer throw.
+        var member = CreateEngineContractMember(kind: "int64", sourcePath: "missing");
+        var root = ParseJson("""{}""");
+
+        var exception = InvokeCreateMemberValueExpectingException("NumberToWordsEngineContractFactory", root, member);
+        Assert.Contains("Missing required integer property 'missing'", exception.Message);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
     //  Full generation — consolidated builder coverage
     // ──────────────────────────────────────────────────────────────────────
 
@@ -537,6 +598,36 @@ public class EngineContractFactoryTests
         // TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue(root, member)
         var tie = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, [root, member]));
         return Assert.IsType<InvalidOperationException>(tie.InnerException);
+    }
+
+    /// <summary>
+    /// Invokes <c>TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue</c> and returns
+    /// the string result (non-throwing path).
+    /// </summary>
+    static string InvokeClockCreateMemberValue(JsonElement root, object member)
+    {
+        var factoryType = GeneratorType.GetNestedType("TimeOnlyToClockNotationEngineContractFactory", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find TimeOnlyToClockNotationEngineContractFactory type.");
+
+        var method = factoryType.GetMethod("CreateMemberValue", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find CreateMemberValue method.");
+
+        return (string)method.Invoke(null, [root, member])!;
+    }
+
+    /// <summary>
+    /// Invokes <c>NumberToWordsEngineContractFactory.CreateMemberValue</c> and returns
+    /// the string result (non-throwing path).
+    /// </summary>
+    static string InvokeNumberToWordsCreateMemberValue(JsonElement root, object member)
+    {
+        var factoryType = GeneratorType.GetNestedType("NumberToWordsEngineContractFactory", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find NumberToWordsEngineContractFactory type.");
+
+        var method = factoryType.GetMethod("CreateMemberValue", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find CreateMemberValue method.");
+
+        return (string)method.Invoke(null, [root, member, false])!;
     }
 
     static JsonElement ParseJson(string json)
