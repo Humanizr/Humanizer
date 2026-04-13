@@ -55,8 +55,18 @@ public class TokenMapWordsToNumberOrdinalMapBuilderTests
             TokenMapOrdinalGenderVariant.All);
 
         Assert.NotEmpty(map);
-        // The map should contain entries for numbers 1..200; verify count is substantial
+        // With three gender forms per number, there should be many entries
         Assert.True(map.Count >= 200, $"Expected at least 200 entries but got {map.Count}");
+
+        // Verify all three gender forms for Russian 1st: default, feminine, neuter
+        Assert.Equal(1, map["\u043f\u0435\u0440\u0432\u044b\u0439"]);   // первый (default/masculine)
+        Assert.Equal(1, map["\u043f\u0435\u0440\u0432\u0430\u044f"]);   // первая (feminine)
+        Assert.Equal(1, map["\u043f\u0435\u0440\u0432\u043e\u0435"]);   // первое (neuter)
+
+        // Verify all three gender forms for Russian 3rd
+        Assert.Equal(3, map["\u0442\u0440\u0435\u0442\u0438\u0439"]);   // третий (default/masculine)
+        Assert.Equal(3, map["\u0442\u0440\u0435\u0442\u044c\u044f"]);   // третья (feminine)
+        Assert.Equal(3, map["\u0442\u0440\u0435\u0442\u044c\u0435"]);   // третье (neuter)
     }
 
     // --- Build(INumberToWordsConverter, profile, variant) overload: by converter ---
@@ -103,7 +113,12 @@ public class TokenMapWordsToNumberOrdinalMapBuilderTests
             TokenMapOrdinalGenderVariant.All);
 
         Assert.NotEmpty(map);
-        // With all three gender forms for 200 numbers, there should be many entries
+        // With three gender forms per number, there should be many entries
         Assert.True(map.Count >= 200, $"Expected at least 200 entries but got {map.Count}");
+
+        // Verify all three gender forms for Russian 10th
+        Assert.Equal(10, map["\u0434\u0435\u0441\u044f\u0442\u044b\u0439"]);   // десятый (default/masculine)
+        Assert.Equal(10, map["\u0434\u0435\u0441\u044f\u0442\u0430\u044f"]);   // десятая (feminine)
+        Assert.Equal(10, map["\u0434\u0435\u0441\u044f\u0442\u043e\u0435"]);   // десятое (neuter)
     }
 }

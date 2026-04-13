@@ -1,3 +1,5 @@
+using System.Collections.Frozen;
+
 namespace Humanizer.Tests;
 
 /// <summary>
@@ -203,5 +205,146 @@ public class SuffixScaleWordsToNumberConverterTests
         Assert.False("xyz abc".TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal(0, parsedNumber);
         Assert.Equal("xyz", unrecognizedWord);
+    }
+}
+
+/// <summary>
+/// Tests for <see cref="SuffixScaleWordsToNumberConverter"/> compound-suffix branches
+/// (tens suffix, teen suffix) that are unreachable through the Finnish locale because
+/// Finnish cardinal map entries shadow the compound forms, and Finnish suffix tokens
+/// contain diacritics that are stripped during normalization. These tests use a minimal
+/// synthetic profile with ASCII-only suffix tokens to directly exercise those code paths.
+/// </summary>
+public class SuffixScaleWordsToNumberConverterDirectProfileTests
+{
+    /// <summary>
+    /// Builds a minimal SuffixScaleWordsToNumberProfile with ASCII-only tokens so that
+    /// the normalizer's diacritic stripping does not prevent suffix token matching.
+    /// </summary>
+    static SuffixScaleWordsToNumberConverter CreateMinimalConverter()
+    {
+        var cardinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
+        {
+            ["zero"] = 0,
+            ["one"] = 1,
+            ["two"] = 2,
+            ["three"] = 3,
+            ["four"] = 4,
+            ["five"] = 5,
+            ["six"] = 6,
+            ["seven"] = 7,
+            ["eight"] = 8,
+            ["nine"] = 9,
+            ["ten"] = 10,
+        }.ToFrozenDictionary(StringComparer.Ordinal);
+
+        var bareScaleMap = new Dictionary<string, long>(StringComparer.Ordinal)
+        {
+            ["hundred"] = 100,
+            ["thousand"] = 1000,
+        }.ToFrozenDictionary(StringComparer.Ordinal);
+
+        var scales = new SuffixScaleWord[]
+        {
+            new("thousand", "thousands", 1000),
+        };
+
+        var profile = new SuffixScaleWordsToNumberProfile(
+            cardinalMap,
+            bareScaleMap,
+            scales,
+            hundredSingularToken: "hundred",
+            hundredPluralToken: "hundreds",
+            tensSuffixToken: "ty",
+            teenSuffixToken: "teen",
+            negativePrefixes: ["minus "]);
+
+        return new SuffixScaleWordsToNumberConverter(profile);
+    }
+
+    // --- Tens suffix branch (lines 191-206) ---
+
+    [Theory]
+    [InlineData("twoty", 20)]
+    [InlineData("threety", 30)]
+    [InlineData("fivety", 50)]
+    [InlineData("ninetyeight", 98)]
+    [InlineData("twotyfive", 25)]
+    public void TryConvert_TensSuffix_ParsesCorrectly(string words, long expected)
+    {
+        var converter = CreateMinimalConverter();
+        Assert.True(converter.TryConvert(words, out var parsedValue, out var unrecognizedWord));
+        Assert.Equal(expected, parsedValue);
+        Assert.Null(unrecognizedWord);
+    }
+
+    // --- Teen suffix branch (lines 208-219) ---
+
+    [Theory]
+    [InlineData("oneteen", 11)]
+    [InlineData("twoteen", 12)]
+    [InlineData("threeteen", 13)]
+    [InlineData("nineteen", 19)]
+    public void TryConvert_TeenSuffix_ParsesCorrectly(string words, long expected)
+    {
+        var converter = CreateMinimalConverter();
+        Assert.True(converter.TryConvert(words, out var parsedValue, out var unrecognizedWord));
+        Assert.Equal(expected, parsedValue);
+        Assert.Null(unrecognizedWord);
+    }
+
+    // --- Tens suffix with remainder exercises TryParseOptional non-empty path (lines 231-239) ---
+
+    [Fact]
+    public void TryConvert_TensSuffixWithRemainder_ExercisesParseOptional()
+    {
+        var converter = CreateMinimalConverter();
+        // "twotythree" = 2*10 + 3 = 23
+        Assert.True(converter.TryConvert("twotythree", out var parsedValue, out _));
+        Assert.Equal(23, parsedValue);
+    }
+
+    // --- Scale singular compound with remainder ---
+
+    [Fact]
+    public void TryConvert_ScaleSingularWithRemainder()
+    {
+        var converter = CreateMinimalConverter();
+        // "thousandone" = 1000 + 1 = 1001
+        Assert.True(converter.TryConvert("thousandone", out var parsedValue, out _));
+        Assert.Equal(1001, parsedValue);
+    }
+
+    // --- Scale plural compound ---
+
+    [Fact]
+    public void TryConvert_ScalePluralCompound()
+    {
+        var converter = CreateMinimalConverter();
+        // "twothousands" = 2 * 1000 = 2000
+        Assert.True(converter.TryConvert("twothousands", out var parsedValue, out _));
+        Assert.Equal(2000, parsedValue);
+    }
+
+    // --- Hundred plural compound ---
+
+    [Fact]
+    public void TryConvert_HundredPluralCompound()
+    {
+        var converter = CreateMinimalConverter();
+        // "twohundreds" = 2 * 100 = 200
+        Assert.True(converter.TryConvert("twohundreds", out var parsedValue, out _));
+        Assert.Equal(200, parsedValue);
+    }
+
+    // --- Compound that fails all branches returns false ---
+
+    [Fact]
+    public void TryConvert_UnrecognizedCompound_ReturnsFalse()
+    {
+        var converter = CreateMinimalConverter();
+        Assert.False(converter.TryConvert("xyzabc", out var parsedValue, out var unrecognizedWord));
+        Assert.Equal(0, parsedValue);
+        Assert.Equal("xyzabc", unrecognizedWord);
     }
 }
