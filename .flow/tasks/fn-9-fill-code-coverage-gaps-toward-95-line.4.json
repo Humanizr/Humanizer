@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-13T01:28:17.500744Z",
+  "depends_on": [
+    "fn-9-fill-code-coverage-gaps-toward-95-line.1"
+  ],
+  "epic": "fn-9-fill-code-coverage-gaps-toward-95-line",
+  "id": "fn-9-fill-code-coverage-gaps-toward-95-line.4",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-9-fill-code-coverage-gaps-toward-95-line.4.md",
+  "status": "todo",
+  "title": "WordsToNumber surface + ordinal-map builder + SuffixScale branches",
+  "updated_at": "2026-04-13T02:05:10.282083Z"
+}
