@@ -45,7 +45,10 @@
 
   <ItemGroup>
     <!-- Build dependency: ensure analyzer builds with RoslynVersion=4.14 before this project.
-         ReferenceOutputAssembly=false prevents MSBuild from using the default (roslyn3.8) output. -->
+         ReferenceOutputAssembly=false prevents MSBuild from using the default (roslyn3.8) output.
+         The analyzer project uses variant-specific IntermediateOutputPath to isolate compiler
+         intermediates. NuGet restore uses the shared obj/ assets since the analyzer's
+         PackageReference versions resolve at build time via $(RoslynCSharpVersion). -->
     <ProjectReference Include="..\..\src\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
                       AdditionalProperties="RoslynVersion=4.14"
                       ReferenceOutputAssembly="false" />

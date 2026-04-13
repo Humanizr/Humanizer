@@ -15,9 +15,9 @@
     <OutputPath Condition="'$(AnalyzerVariant)' != ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\$(AnalyzerVariant)\</OutputPath>
     <!-- Isolate intermediate output per Roslyn variant to prevent obj directory cross-talk
          when building multiple variants (e.g. roslyn3.8 and roslyn4.14) in the same session.
-         Uses IntermediateOutputPath (not BaseIntermediateOutputPath) to preserve NuGet restore
-         assets in the default obj/ location. -->
-    <IntermediateOutputPath Condition="'$(AnalyzerVariant)' != ''">obj\$(Configuration)\$(AnalyzerVariant)\</IntermediateOutputPath>
+         Derives from MSBuildProjectExtensionsPath so restore assets and compiler intermediates
+         share the same variant-specific directory when callers isolate the extensions path. -->
+    <IntermediateOutputPath Condition="'$(AnalyzerVariant)' != ''">$(MSBuildProjectExtensionsPath)$(Configuration)\$(AnalyzerVariant)\</IntermediateOutputPath>
     <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '3.8'">3.8.0</RoslynCSharpVersion>
     <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '3.8'">3.0.0</RoslynAnalyzerVersion>
     <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.8'">4.8.0</RoslynCSharpVersion>
