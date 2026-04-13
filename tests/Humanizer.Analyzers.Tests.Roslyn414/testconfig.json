@@ -1,0 +1,9 @@
+{
+  "xUnit": {
+    "diagnosticMessages": true,
+    "methodDisplay": "method",
+    "parallelizeAssembly": true,
+    "parallelizeTestCollections": false,
+    "showLiveOutput": true
+  }
+}

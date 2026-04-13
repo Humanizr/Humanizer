@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <RootNamespace>Humanizer.Analyzers.Tests</RootNamespace>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+    <!-- Suppress NU1701 for transitive packages from Microsoft.CodeAnalysis.Testing that
+         pull in older NETStandard packages not perfectly compatible with net10.0.
+         Suppress RS1036/RS1038/RS1041 triggered by the NoopAnalyzer test helper in
+         WordsToNumberMigrationCodeFixTests (shared source from the main test project). -->
+    <NoWarn>$(NoWarn);NU1701;RS1036;RS1038;RS1041</NoWarn>
+    <!-- Path to the analyzer DLL built with RoslynVersion=4.14 -->
+    <AnalyzerRoslyn414OutputDir>$(MSBuildThisFileDirectory)..\..\src\Humanizer.Analyzers\bin\$(Configuration)\roslyn4.14\netstandard2.0\</AnalyzerRoslyn414OutputDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit.v3" />
+  </ItemGroup>
+
+  <!-- Share test source files from the main analyzer test project -->
+  <ItemGroup>
+    <Compile Include="..\Humanizer.Analyzers.Tests\Verifiers.cs" Link="Verifiers.cs" />
+    <Compile Include="..\Humanizer.Analyzers.Tests\NamespaceMigrationAnalyzerTests.cs" Link="NamespaceMigrationAnalyzerTests.cs" />
+    <Compile Include="..\Humanizer.Analyzers.Tests\NamespaceMigrationCodeFixTests.cs" Link="NamespaceMigrationCodeFixTests.cs" />
+    <Compile Include="..\Humanizer.Analyzers.Tests\WordsToNumberMigrationCodeFixTests.cs" Link="WordsToNumberMigrationCodeFixTests.cs" />
+    <Compile Include="..\Humanizer.Analyzers.Tests\AnalyzerAssemblyCompatibilityTests.cs" Link="AnalyzerAssemblyCompatibilityTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" Version="1.1.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" Version="1.1.3" />
+    <!-- Pin Roslyn packages to 4.14.0 to match the analyzer's ROSLYN_4_14_OR_GREATER build -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.5.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.1.0" PrivateAssets="all" />
+    <PackageReference Include="xunit.v3.mtp-v2" Version="3.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Build dependency: ensure analyzer builds with RoslynVersion=4.14 before this project.
+         ReferenceOutputAssembly=false prevents MSBuild from using the default (roslyn3.8) output. -->
+    <ProjectReference Include="..\..\src\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
+                      AdditionalProperties="RoslynVersion=4.14"
+                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\src\Humanizer\Humanizer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Direct reference to the analyzer DLL built with RoslynVersion=4.14 -->
+    <Reference Include="Humanizer.Analyzers">
+      <HintPath>$(AnalyzerRoslyn414OutputDir)Humanizer.Analyzers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

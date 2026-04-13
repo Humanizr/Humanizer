@@ -83,6 +83,7 @@
   </Folder>
   <Project Path="src/Benchmarks/Benchmarks.csproj" />
   <Project Path="tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj" />
+  <Project Path="tests/Humanizer.Analyzers.Tests.Roslyn414/Humanizer.Analyzers.Tests.Roslyn414.csproj" />
   <Project Path="src/Humanizer.Analyzers/Humanizer.Analyzers.csproj" />
   <Project Path="tests/Humanizer.Tests/Humanizer.Tests.csproj" />
   <Project Path="src/Humanizer/Humanizer.csproj" />
