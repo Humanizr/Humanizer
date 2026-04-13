@@ -1,38 +1,25 @@
 // Coverage tests targeting uncovered branches in the 8 NumberToWords scale/gender converter classes.
-//
-// Target classes and their uncovered lines (from artifacts/fn-9-local-coverage/uncovered.json):
-//
-//   PluralizedScaleNumberToWordsConverter (pl, lt)  — lines 90,103,214-215,220,223,250,259,267-272,280,302
-//     All unreachable: defensive throws, unused form detectors, unused unit variant strategies.
-//
-//   GenderedNumberToWordsConverter (base class)     — line 28
-//     Convert(long, WordForm) overload: reachable via direct INumberToWordsConverter call.
-//
-//   ScaleStrategyNumberToWordsConverter (nb, sv)    — lines 34,43,52-53,70-71,101-102,231-232,254-255,323-332
-//     Reachable: long.MinValue throws, negative numbers, ordinal zero, ordinal tens.
-//
-//   ConjunctionalScaleNumberToWordsConverter (en)   — lines 84-86,158,160-161,178-180
-//     Line 178-180 reachable (ordinal leading-one compound stripping).
-//     Lines 84-86,158,160-161 unreachable (no locale has sufficient scale depth or uses those and-strategies).
-//
-//   ConjoinedGenderedScaleNumberToWordsConverter (bg) — lines 43,46-48,170,179,188
-//     Lines 43,46-48 reachable (negative numbers). Lines 170,179,188 unreachable (exhaustive gender throws).
-//
-//   SegmentedScaleNumberToWordsConverter (el)       — lines 15-16,27-29,65-66,76-77,138
-//     Reachable: overflow guard, negatives, ordinal decomposition edge cases.
-//
-//   WestSlavicGenderedNumberToWordsConverter (cs, sk) — lines 21-22,64-66,122
-//     Lines 21-22,64-66 reachable (long.MinValue throw, trillion-scale recursion). Line 122 unreachable.
-//
-//   AppendedGroupNumberToWordsConverter (ar)        — lines 61-67,225
-//     Lines 61-67 partially reachable (AppendedTwos/Twos branches). Line 225 reachable (ordinal no-match fallthrough).
+// Exercises reachable branches identified in artifacts/fn-9-local-coverage/uncovered.json.
+// Defensive-only branches (exhaustive switch throws, unused enum arms) are not targeted here;
+// they are absorbed in the aggregate coverage thresholds per the epic spec.
 
 namespace Humanizer.Tests.Localisation;
 
 public class NumberToWordsScaleGenderCoverageTests
 {
+    static readonly CultureInfo Nb = CultureInfo.GetCultureInfo("nb");
+    static readonly CultureInfo Sv = CultureInfo.GetCultureInfo("sv");
+    static readonly CultureInfo Bg = CultureInfo.GetCultureInfo("bg");
+    static readonly CultureInfo El = CultureInfo.GetCultureInfo("el");
+    static readonly CultureInfo Cs = CultureInfo.GetCultureInfo("cs");
+    static readonly CultureInfo Sk = CultureInfo.GetCultureInfo("sk");
+    static readonly CultureInfo Ar = CultureInfo.GetCultureInfo("ar");
+    static readonly CultureInfo Lt = CultureInfo.GetCultureInfo("lt");
+    static readonly CultureInfo Pl = CultureInfo.GetCultureInfo("pl");
+    static readonly CultureInfo En = CultureInfo.GetCultureInfo("en");
+
     // ---------------------------------------------------------------------------
-    //  GenderedNumberToWordsConverter — line 28: Convert(long, WordForm)
+    //  GenderedNumberToWordsConverter -- Convert(long, WordForm) overload (line 28)
     // ---------------------------------------------------------------------------
 
     [Theory]
@@ -42,68 +29,65 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData("bg", 5, "пет")]
     public void GenderedConverter_ConvertWithWordForm_DelegatesToDefaultGender(string culture, long number, string expected)
     {
-        var converter = Configurator.GetNumberToWordsConverter(new CultureInfo(culture));
-        // Exercises the Convert(long, WordForm) overload that routes through the default gender
+        var converter = Configurator.GetNumberToWordsConverter(CultureInfo.GetCultureInfo(culture));
         Assert.Equal(expected, converter.Convert(number, WordForm.Normal));
         Assert.Equal(expected, converter.Convert(number, WordForm.Abbreviation));
     }
 
     // ---------------------------------------------------------------------------
-    //  ScaleStrategyNumberToWordsConverter (nb) — Norwegian branches
+    //  ScaleStrategyNumberToWordsConverter (nb) -- Norwegian branches
+    //  Covers: long.MinValue throw (lines 52-53), negative cardinals, ordinal zero
+    //          (lines 70-71), gendered one-cardinal
     // ---------------------------------------------------------------------------
 
     [Fact]
-    [UseCulture("nb")]
     public void NorwegianBokmal_LongMinValue_ThrowsNotImplementedException()
     {
-        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(new CultureInfo("nb")));
+        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(Nb));
     }
 
     [Theory]
     [InlineData(-5, "minus fem")]
     [InlineData(-1, "minus en")]
     [InlineData(-100, "minus hundre")]
-    [UseCulture("nb")]
     public void NorwegianBokmal_NegativeCardinals(long number, string expected)
     {
-        Assert.Equal(expected, number.ToWords(new CultureInfo("nb")));
+        Assert.Equal(expected, number.ToWords(Nb));
     }
 
     [Fact]
-    [UseCulture("nb")]
     public void NorwegianBokmal_OrdinalZero()
     {
-        Assert.Equal("nullte", 0.ToOrdinalWords(new CultureInfo("nb")));
+        Assert.Equal("nullte", 0.ToOrdinalWords(Nb));
     }
 
     [Theory]
     [InlineData(1, GrammaticalGender.Feminine, "ei")]
     [InlineData(1, GrammaticalGender.Neuter, "et")]
-    [UseCulture("nb")]
     public void NorwegianBokmal_GenderedOneCardinal(long number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToWords(gender, new CultureInfo("nb")));
+        Assert.Equal(expected, number.ToWords(gender, Nb));
     }
 
     // ---------------------------------------------------------------------------
-    //  ScaleStrategyNumberToWordsConverter (sv) — Swedish branches
+    //  ScaleStrategyNumberToWordsConverter (sv) -- Swedish branches
+    //  Covers: long.MinValue throw (lines 231-232), negative cardinals (lines 254-255),
+    //          ordinal zero + ordinal tens (lines 323-332)
     // ---------------------------------------------------------------------------
 
     [Fact]
-    [UseCulture("sv")]
     public void Swedish_LongMinValue_ThrowsNotImplementedException()
     {
-        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(new CultureInfo("sv")));
+        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(Sv));
     }
 
     [Theory]
     [InlineData(-5, "minus fem")]
     [InlineData(-1, "minus ett")]
     [InlineData(-100, "minus hundra")]
-    [UseCulture("sv")]
     public void Swedish_NegativeCardinals(long number, string expected)
     {
-        Assert.Equal(expected, number.ToWords(new CultureInfo("sv")));
+        Assert.Equal(expected, number.ToWords(Sv));
     }
 
     [Theory]
@@ -119,24 +103,23 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(21, "tjugoförsta")]
     [InlineData(1000, "ett tusende")]
     [InlineData(1000000, "en miljonte")]
-    [UseCulture("sv")]
     public void Swedish_OrdinalWords(int number, string expected)
     {
-        Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo("sv")));
+        Assert.Equal(expected, number.ToOrdinalWords(Sv));
     }
 
     // ---------------------------------------------------------------------------
-    //  ConjoinedGenderedScaleNumberToWordsConverter (bg) — negative + ordinal
+    //  ConjoinedGenderedScaleNumberToWordsConverter (bg) -- negative + ordinal
+    //  Covers: negative sign branch (lines 43, 46-48), gendered ordinals
     // ---------------------------------------------------------------------------
 
     [Theory]
     [InlineData(-5, GrammaticalGender.Masculine, "минус и пет")]
     [InlineData(-1, GrammaticalGender.Feminine, "минус и една")]
     [InlineData(-100, GrammaticalGender.Neuter, "минус и сто")]
-    [UseCulture("bg")]
     public void Bulgarian_NegativeCardinals(long number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToWords(gender, new CultureInfo("bg")));
+        Assert.Equal(expected, number.ToWords(gender, Bg));
     }
 
     [Theory]
@@ -151,35 +134,30 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(1000, GrammaticalGender.Masculine, "една хиляден")]
     [InlineData(1000, GrammaticalGender.Feminine, "една хилядна")]
     [InlineData(1000000, GrammaticalGender.Masculine, "един милионен")]
-    [UseCulture("bg")]
     public void Bulgarian_GenderedOrdinals(int number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToOrdinalWords(gender, new CultureInfo("bg")));
+        Assert.Equal(expected, number.ToOrdinalWords(gender, Bg));
     }
 
     // ---------------------------------------------------------------------------
-    //  SegmentedScaleNumberToWordsConverter (el) — edge branches
+    //  SegmentedScaleNumberToWordsConverter (el) -- edge branches
+    //  Covers: overflow guard returning empty (lines 15-16), negative sign (lines 27-29),
+    //          ordinal decomposition failures (lines 65-66, 76-77)
     // ---------------------------------------------------------------------------
 
     [Fact]
-    [UseCulture("el")]
-    public void Greek_OverMaximumValue_ReturnsEmptyString()
+    public void Greek_LongMinValue_ReturnsEmptyString()
     {
-        // The Greek profile has a maximum value; numbers beyond it return empty string
-        var el = new CultureInfo("el");
-        // Find a number beyond the Greek maximum: Greek supports up to 10^15-1 range
-        var result = 1_000_000_000_000_000L.ToWords(el);
-        // Verify it's handled (either returns a valid word or empty)
-        Assert.NotNull(result);
+        // long.MinValue has absolute value > maximumValue (long.MaxValue), triggering the overflow guard
+        Assert.Equal(string.Empty, long.MinValue.ToWords(El));
     }
 
     [Theory]
     [InlineData(-5, "μείον πέντε")]
     [InlineData(-1000, "μείον χίλια")]
-    [UseCulture("el")]
     public void Greek_NegativeCardinals(long number, string expected)
     {
-        Assert.Equal(expected, number.ToWords(new CultureInfo("el")));
+        Assert.Equal(expected, number.ToWords(El));
     }
 
     [Theory]
@@ -188,13 +166,9 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(10000, "")]
     [InlineData(2000, "")]
     [InlineData(5000, "")]
-    [UseCulture("el")]
-    public void Greek_OrdinalBoundary_ReturnsExpected(int number, string expected)
+    public void Greek_OrdinalBeyondMap_ReturnsEmptyString(int number, string expected)
     {
-        // These ordinals are at or beyond the edge of the Greek ordinal map.
-        // 0, 9999, 10000, 2000, 5000 return empty string because they are beyond
-        // the ordinal map or fail decomposition.
-        Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo("el")));
+        Assert.Equal(expected, number.ToOrdinalWords(El));
     }
 
     [Theory]
@@ -203,60 +177,58 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(111, "εκατοστός ενδέκατος")]
     [InlineData(1111, "χιλιοστός εκατοστός ενδέκατος")]
     [InlineData(1234, "χιλιοστός διακοσιοστός τριακοστός τέταρτος")]
-    [UseCulture("el")]
+    [InlineData(1001, "χιλιοστός πρώτος")]
+    [InlineData(1999, "χιλιοστός εννιακοσιοστός ενενηκοστός ένατος")]
     public void Greek_ValidOrdinals(int number, string expected)
     {
-        Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo("el")));
+        Assert.Equal(expected, number.ToOrdinalWords(El));
     }
 
     // ---------------------------------------------------------------------------
-    //  WestSlavicGenderedNumberToWordsConverter (cs, sk) — long.MinValue + trillion scale
+    //  WestSlavicGenderedNumberToWordsConverter (cs, sk) -- long.MinValue + trillion scale
+    //  Covers: long.MinValue throw (lines 21-22), scaleNumber >= 1000 recursive branch (lines 64-66)
     // ---------------------------------------------------------------------------
 
     [Fact]
-    [UseCulture("cs")]
     public void Czech_LongMinValue_ThrowsNotImplementedException()
     {
-        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(new CultureInfo("cs")));
+        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(Cs));
     }
 
     [Fact]
-    [UseCulture("sk")]
     public void Slovak_LongMinValue_ThrowsNotImplementedException()
     {
-        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(new CultureInfo("sk")));
+        Assert.Throws<NotImplementedException>(() => long.MinValue.ToWords(Sk));
     }
 
     [Theory]
     [InlineData(1_000_000_000_000L, "jeden bilion")]
     [InlineData(2_000_000_000_000L, "dva biliony")]
     [InlineData(5_000_000_000_000L, "pět bilionů")]
-    [UseCulture("cs")]
     public void Czech_TrillionScale_Cardinals(long number, string expected)
     {
-        Assert.Equal(expected, number.ToWords(new CultureInfo("cs")));
+        Assert.Equal(expected, number.ToWords(Cs));
     }
 
     [Theory]
     [InlineData(1_234_000_000_000_000L, "jeden tisíc dvě stě třicet čtyři bilionů")]
-    [UseCulture("cs")]
     public void Czech_TrillionScale_WithThousandMultiplier(long number, string expected)
     {
-        // This exercises the scaleNumber >= 1000 recursive branch in CollectScale
-        Assert.Equal(expected, number.ToWords(new CultureInfo("cs")));
+        // Exercises the scaleNumber >= 1000 recursive branch in CollectScale (lines 64-66)
+        Assert.Equal(expected, number.ToWords(Cs));
     }
 
     [Theory]
     [InlineData(1_000_000_000_000L, "jeden bilión")]
     [InlineData(2_345_000_000_000_000L, "dva tisíce tristo štyridsať päť biliónov")]
-    [UseCulture("sk")]
     public void Slovak_TrillionScale_Cardinals(long number, string expected)
     {
-        Assert.Equal(expected, number.ToWords(new CultureInfo("sk")));
+        Assert.Equal(expected, number.ToWords(Sk));
     }
 
     // ---------------------------------------------------------------------------
-    //  AppendedGroupNumberToWordsConverter (ar) — twos branches + ordinal fallthrough
+    //  AppendedGroupNumberToWordsConverter (ar) -- twos branches + ordinal fallthrough
+    //  Covers: AppendedTwos/Twos branch (lines 61-67), ordinal no-match fallthrough (line 225)
     // ---------------------------------------------------------------------------
 
     [Theory]
@@ -265,19 +237,17 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(2002L, "ألفان و اثنان")]
     [InlineData(2_000_002_000L, "ملياران و ألفان")]
     [InlineData(2_002_000L, "مليونان و ألفان")]
-    [UseCulture("ar")]
     public void Arabic_TwosAndAppendedTwos_Cardinals(long number, string expected)
     {
-        Assert.Equal(expected, number.ToWords(new CultureInfo("ar")));
+        Assert.Equal(expected, number.ToWords(Ar));
     }
 
     [Theory]
     [InlineData(22, GrammaticalGender.Feminine, "اثنتان و عشرون")]
     [InlineData(21, GrammaticalGender.Feminine, "واحدة و عشرون")]
-    [UseCulture("ar")]
     public void Arabic_FeminineOnesGroup(long number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToWords(gender, new CultureInfo("ar")));
+        Assert.Equal(expected, number.ToWords(gender, Ar));
     }
 
     [Theory]
@@ -292,24 +262,24 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(21, GrammaticalGender.Masculine, "الحادي و العشرون")]
     [InlineData(100, GrammaticalGender.Masculine, "المئة")]
     [InlineData(200, GrammaticalGender.Masculine, "المئتان")]
-    [UseCulture("ar")]
     public void Arabic_GenderedOrdinals(int number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToOrdinalWords(gender, new CultureInfo("ar")));
+        Assert.Equal(expected, number.ToOrdinalWords(gender, Ar));
     }
 
     // ---------------------------------------------------------------------------
-    //  PluralizedScaleNumberToWordsConverter (lt) — Lithuanian-specific branches
+    //  PluralizedScaleNumberToWordsConverter (lt) -- Lithuanian-specific branches
+    //  Covers: Lithuanian form detector (lines 274-278), feminine gendered units,
+    //          Lithuanian ordinal rendering
     // ---------------------------------------------------------------------------
 
     [Theory]
     [InlineData(1, GrammaticalGender.Feminine, "viena")]
     [InlineData(2, GrammaticalGender.Feminine, "dvi")]
     [InlineData(5, GrammaticalGender.Feminine, "penkios")]
-    [UseCulture("lt")]
     public void Lithuanian_FeminineCardinals(long number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToWords(gender, new CultureInfo("lt")));
+        Assert.Equal(expected, number.ToWords(gender, Lt));
     }
 
     [Theory]
@@ -328,18 +298,16 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(2000, GrammaticalGender.Masculine, "du tūkstantas")]
     [InlineData(1000000, GrammaticalGender.Masculine, "milijonas")]
     [InlineData(1000000, GrammaticalGender.Feminine, "milijona")]
-    [UseCulture("lt")]
     public void Lithuanian_GenderedOrdinals(int number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToOrdinalWords(gender, new CultureInfo("lt")));
+        Assert.Equal(expected, number.ToOrdinalWords(gender, Lt));
     }
 
     [Theory]
     [InlineData(-7, "minus septyni")]
-    [UseCulture("lt")]
     public void Lithuanian_NegativeCardinals(long number, string expected)
     {
-        Assert.Equal(expected, number.ToWords(new CultureInfo("lt")));
+        Assert.Equal(expected, number.ToWords(Lt));
     }
 
     [Theory]
@@ -350,15 +318,14 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(21000L, "dvidešimt vienas tūkstantis")]
     [InlineData(1000000L, "milijonas")]
     [InlineData(2000000L, "du milijonai")]
-    [UseCulture("lt")]
     public void Lithuanian_ScaleFormDetector_Cardinals(long number, string expected)
     {
-        // These values exercise the Lithuanian form detector path (singular/paucal/plural)
-        Assert.Equal(expected, number.ToWords(new CultureInfo("lt")));
+        Assert.Equal(expected, number.ToWords(Lt));
     }
 
     // ---------------------------------------------------------------------------
-    //  PluralizedScaleNumberToWordsConverter (pl) — Polish-specific branches
+    //  PluralizedScaleNumberToWordsConverter (pl) -- Polish-specific branches
+    //  Covers: Polish gendered unit overrides, scale-form detector (Polish path)
     // ---------------------------------------------------------------------------
 
     [Theory]
@@ -366,14 +333,14 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(2, GrammaticalGender.Feminine, "dwie")]
     [InlineData(1, GrammaticalGender.Neuter, "jedno")]
     [InlineData(1001, GrammaticalGender.Masculine, "tysiąc jeden")]
-    [UseCulture("pl")]
     public void Polish_GenderedCardinals(long number, GrammaticalGender gender, string expected)
     {
-        Assert.Equal(expected, number.ToWords(gender, new CultureInfo("pl")));
+        Assert.Equal(expected, number.ToWords(gender, Pl));
     }
 
     // ---------------------------------------------------------------------------
-    //  ConjunctionalScaleNumberToWordsConverter (en) — ordinal leading-one stripping
+    //  ConjunctionalScaleNumberToWordsConverter (en) -- ordinal leading-one removal
+    //  Covers: OmitLeadingOne strategy at line 171-174 (parts[0] == UnitsMap[1])
     // ---------------------------------------------------------------------------
 
     [Theory]
@@ -383,9 +350,8 @@ public class NumberToWordsScaleGenderCoverageTests
     [InlineData(1000001, "million and first")]
     [InlineData(1000100, "million one hundredth")]
     [InlineData(1100, "thousand one hundredth")]
-    [UseCulture("en")]
-    public void English_OrdinalLeadingOneStripping(int number, string expected)
+    public void English_OrdinalLeadingOneRemoval(int number, string expected)
     {
-        Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo("en")));
+        Assert.Equal(expected, number.ToOrdinalWords(En));
     }
 }
