@@ -1,0 +1,42 @@
+# Fixture: exercises NumberToWordsEngineContractFactory nullable-char-string-dictionary null emission
+# harmony-ordinal has ordinalSuffixes and tupleSuffixes as nullable-char-string-dictionary.
+# When omitted from YAML, both emit null. Also namedTuples (nullable-int-string-dictionary) emits null.
+locale: 'zz-n2w-harmony-no-char'
+surfaces:
+  number:
+    words:
+      engine: 'harmony-ordinal'
+      minimumValue: 0
+      maximumValue: 999999999
+      minusWord: 'minus'
+      hundredWord: 'hundred'
+      hundredStrategy: 'compact'
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+        - 'three'
+        - 'four'
+        - 'five'
+        - 'six'
+        - 'seven'
+        - 'eight'
+        - 'nine'
+      tensMap:
+        - ''
+        - 'ten'
+        - 'twenty'
+        - 'thirty'
+        - 'forty'
+        - 'fifty'
+        - 'sixty'
+        - 'seventy'
+        - 'eighty'
+        - 'ninety'
+      scales:
+        -
+          value: 1000
+          name: 'thousand'
+      ordinalSuffixStrategy: 'final-character'
+      softenTerminalTBeforeSuffix: false
+      dropTerminalVowelBeforeHarmonySuffix: false

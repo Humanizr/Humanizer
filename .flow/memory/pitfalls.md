@@ -108,3 +108,6 @@ When an overload wraps a delegate parameter in a lambda before forwarding to a m
 
 ## 2026-04-13 manual [pitfall]
 When building the same MSBuild project with different PackageReference versions via AdditionalProperties on ProjectReference, NuGet restore assets (project.assets.json) must also be isolated per variant -- pass MSBuildProjectExtensionsPath in AdditionalProperties to prevent last-restore-wins cross-talk
+
+## 2026-04-13 manual [pitfall]
+When asserting generated source content, always scope assertions to the specific generated block (cache class, switch case) — global Assert.Contains on the full generated source can be satisfied by unrelated locale output
