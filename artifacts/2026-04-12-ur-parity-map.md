@@ -16,7 +16,7 @@
 | number.words | authored (.3) |
 | number.parse | authored (.3) |
 | number.formatting | authored (.3) |
-| ordinal.numeric | authored (.3) |
+| ordinal.numeric | pending (.9); number.words.ordinal data authored (.3) |
 | ordinal.date | authored (.4) |
 | ordinal.dateOnly | authored (.4) |
 | clock | authored (.4) |
