@@ -77,13 +77,11 @@ public class DelimitedCollectionFormatterCoverageTests
     }
 
     [Fact]
-    public void Humanize_ObjectFormatter_NullFormatter_ThrowsNullReferenceException()
+    public void Humanize_ObjectFormatter_NullFormatter_ThrowsArgumentNullException()
     {
-        // The Func<T, object?> overload wraps the delegate in a lambda before passing to Join,
-        // so Join's ArgumentNullException.ThrowIfNull sees the non-null wrapper lambda.
-        // A null objectFormatter causes NullReferenceException when the lambda invokes it.
-        Assert.Throws<NullReferenceException>(
+        var ex = Assert.Throws<ArgumentNullException>(
             () => formatter.Humanize(new[] { "a" }, (Func<string, object?>)null!));
+        Assert.Equal("objectFormatter", ex.ParamName);
     }
 
     // ── Overload 4: Humanize<T>(IEnumerable<T>, string) ──
@@ -124,10 +122,11 @@ public class DelimitedCollectionFormatterCoverageTests
     }
 
     [Fact]
-    public void Humanize_ObjectFormatterAndSeparator_NullFormatter_ThrowsNullReferenceException()
+    public void Humanize_ObjectFormatterAndSeparator_NullFormatter_ThrowsArgumentNullException()
     {
-        Assert.Throws<NullReferenceException>(
+        var ex = Assert.Throws<ArgumentNullException>(
             () => formatter.Humanize(new[] { "a" }, (Func<string, object?>)null!, " | "));
+        Assert.Equal("objectFormatter", ex.ParamName);
     }
 
     // ── Whitespace skipping ──

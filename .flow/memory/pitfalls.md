@@ -102,3 +102,6 @@ ExcludeFromCodeCoverageAttribute.Justification property is only available on .NE
 
 ## 2026-04-13 manual [pitfall]
 MTP --coverage-settings conflicts with testconfig.json codeCoverage section -- cannot have both; centralize coverage config in one place
+
+## 2026-04-13 manual [pitfall]
+When an overload wraps a delegate parameter in a lambda before forwarding to a method with a null guard, the null guard never fires -- add an explicit ThrowIfNull before the lambda wrap, or tests will lock in NullReferenceException instead of the intended ArgumentNullException contract
