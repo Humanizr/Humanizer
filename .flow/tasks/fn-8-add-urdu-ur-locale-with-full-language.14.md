@@ -50,9 +50,16 @@ Scope is data-driven — audit `src/Humanizer/Locales/*.yml` actually shipped af
 - [ ] No locale marked "deferred" without Category B evidence + external follow-up Flow task ID.
 
 ## Done summary
-TBD
+
+Filled grammatical-gender ordinal gaps for all 3 Semitic locales (ar, he, mt) by adding explicit `feminineSuffix: ''` and `neuterSuffix: ''` YAML keys to each locale's `ordinal.numeric` section. All use empty string as a gender-invariant numeric ordinal suffix (bare digits, no suffix marker).
+
+Created 3 per-locale gendered ordinal test classes (ArabicGenderedOrdinalTests, HebrewGenderedOrdinalTests, MalteseGenderedOrdinalTests) with coverage for values 1, 2, 23, 100, 101 across all three `GrammaticalGender` enum values, plus gender-invariance assertions.
+
+Updated the audit artifact with filled status for all 3 Semitic locales, proposer+reviewer evidence trail entries with named authoritative grammar references (Wright for Arabic, Glinert for Hebrew, Borg & Azzopardi-Alexander for Maltese).
+
+No other gender-bearing locales had Category A gaps remaining: Greek (el) already had full M/F/N coverage, Bengali (bn) and Tamil (ta) have gender-invariant ordinals, Hindi (hi) is not shipped. No re-plan needed: the existing suffix engine and source generator fully support the added YAML keys without any runtime changes.
 
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 00bc600b, e5612077
+- Tests: ArabicGenderedOrdinalTests, HebrewGenderedOrdinalTests, MalteseGenderedOrdinalTests, LocaleTheoryMatrixCompletenessTests, LocaleRegistrySweepTests (40618 pass, 1 pre-existing uz-Latn-UZ failure)
 - PRs:
