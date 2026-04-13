@@ -327,7 +327,7 @@ static class LocaleCoverageData
         { "ur-IN", new(13, 23, "ایک بج کر تئیس منٹ دوپہر") },
         { "ur-PK", new(13, 23, "ایک بج کر تئیس منٹ دوپہر") },
         { "uz-Cyrl-UZ", new(13, 23, "бирдан йигирма уч ўтди") },
-        { "uz-Latn-UZ", new(13, 23, "birdan yigirma uch o’tdi") },
+        { "uz-Latn-UZ", new(13, 23, "birdan yigirma uch o‘tdi") },
         { "vi", new(13, 23, "một giờ hai mươi ba phút chiều") },
         { "zh-CN", new(13, 23, "下午一点二十三分") },
         { "zh-Hans", new(13, 23, "下午一点二十三分") },
