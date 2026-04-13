@@ -3,7 +3,8 @@ using System.Globalization;
 namespace Humanizer.Tests;
 
 /// <summary>
-/// Tests for uncovered branches in DefaultFormatter targeting reachable paths:
+/// Tests for DefaultFormatter covering reachable branches via the string locale
+/// constructor and the generated phrase table pipeline:
 /// - string localeCode constructor (line 32-34)
 /// - DateHumanize count==0 DateNow branch (line 184-187)
 /// - DateHumanize single form for count==1 (line 200-204)
@@ -15,14 +16,6 @@ namespace Humanizer.Tests;
 /// - DataUnitHumanize symbol and word paths (lines 149-178)
 /// - TimeUnitHumanize symbol path for all TimeUnit values (line 80-84)
 /// - RenderCountedPhrase with PhraseCountPlacement.None via Romanian (line 282-284)
-///
-/// Defensive branches NOT covered (unreachable with current generated phrase data):
-/// - DataUnitHumanize/TimeUnitHumanize throw paths (lines 74, 86)
-/// - TryFormatDataUnitFromPhraseTable false returns for missing phrases (lines 145-146, 152-153, 161-162)
-/// - TryFormatDateFromPhraseTable false returns for missing phrases (lines 190-192, 214-216)
-/// - TryFormatTimeSpanFromPhraseTable false returns for missing phrases (lines 237-239, 258-260)
-/// - ShouldUseDatePhraseTable/ShouldUseTimeSpanPhraseTable returning false on DefaultFormatter (lines 195-197, 242-244)
-/// - RenderCountedPhrase AfterForm + default branches (lines 299-300)
 /// </summary>
 [UseCulture("en-US")]
 public class DefaultFormatterTests
