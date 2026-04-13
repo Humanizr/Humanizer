@@ -193,59 +193,67 @@ public class OrdinalizeTests
         Assert.Equal(expected, number.Ordinalize(gender, wordForm));
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeStringWithNullCultureUsesCurrentUICulture()
     {
         var result = "1".Ordinalize((CultureInfo)null!);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeStringWithNullCultureAndWordFormUsesCurrentUICulture()
     {
         var result = "1".Ordinalize((CultureInfo)null!, WordForm.Normal);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeStringWithNullCultureAndGenderUsesCurrentUICulture()
     {
         var result = "1".Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeStringWithNullCultureAndGenderAndWordFormUsesCurrentUICulture()
     {
         var result = "1".Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!, WordForm.Normal);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeNumberWithNullCultureUsesCurrentUICulture()
     {
         var result = 1.Ordinalize((CultureInfo)null!);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeNumberWithNullCultureAndWordFormUsesCurrentUICulture()
     {
         var result = 1.Ordinalize((CultureInfo)null!, WordForm.Normal);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeNumberWithNullCultureAndGenderUsesCurrentUICulture()
     {
         var result = 1.Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]
+    [UseCulture("nl-NL")]
     public void OrdinalizeNumberWithNullCultureAndGenderAndWordFormUsesCurrentUICulture()
     {
         var result = 1.Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!, WordForm.Normal);
-        Assert.Equal("1st", result);
+        Assert.Equal("1e", result);
     }
 
     [Fact]

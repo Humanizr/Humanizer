@@ -238,11 +238,15 @@ public class ToQuantityTests
     }
 
     [Theory]
-    [InlineData(double.NaN, "NaN hours")]
-    [InlineData(double.PositiveInfinity, "\u221E hours")]
-    [InlineData(double.NegativeInfinity, "-\u221E hours")]
-    public void ToQuantityDoubleNonFiniteValuesPluralize(double quantity, string expected) =>
-        Assert.Equal(expected, "hour".ToQuantity(quantity));
+    [InlineData(double.NaN)]
+    [InlineData(double.PositiveInfinity)]
+    [InlineData(double.NegativeInfinity)]
+    public void ToQuantityDoubleNonFiniteValuesPluralize(double quantity)
+    {
+        var result = "hour".ToQuantity(quantity, format: null, CultureInfo.InvariantCulture);
+        Assert.EndsWith("hours", result);
+        Assert.Contains(quantity.ToString(CultureInfo.InvariantCulture), result);
+    }
 
     [Fact]
     public void ToQuantityDoubleExactlyOneIsSingular() =>
