@@ -84,6 +84,16 @@ public class CliticCollectionFormatterCoverageTests
         Assert.Equal("A وB", result);
     }
 
+    [Fact]
+    public void Humanize_ObjectFormatter_NullFormatter_ThrowsNullReferenceException()
+    {
+        // The Func<T, object?> overload wraps the delegate in a lambda before passing
+        // to the string-formatter overload, so the inner null guard sees the non-null wrapper.
+        // A null objectFormatter causes NullReferenceException when the lambda invokes it.
+        Assert.Throws<NullReferenceException>(
+            () => formatter.Humanize(new[] { "a" }, (Func<string, object?>)null!));
+    }
+
     // ── Overload 4: Humanize<T>(IEnumerable<T>, string) — delegates to fallback ──
 
     [Fact]
@@ -128,6 +138,13 @@ public class CliticCollectionFormatterCoverageTests
             " & ");
         // Clitic join: string.Concat(head, " ", separator, lastItem) → "X" + " " + " & " + "Y"
         Assert.Equal("X  & Y", result);
+    }
+
+    [Fact]
+    public void Humanize_ObjectFormatterAndSeparator_NullFormatter_ThrowsNullReferenceException()
+    {
+        Assert.Throws<NullReferenceException>(
+            () => formatter.Humanize(new[] { "a" }, (Func<string, object?>)null!, " & "));
     }
 
     // ── Whitespace skipping ──
