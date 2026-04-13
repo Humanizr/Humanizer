@@ -10,7 +10,7 @@ Close analyzer branch gaps in `Humanizer.Analyzers` across both Roslyn arms now 
 ## Approach
 - **WordsToNumberMigrationCodeFixProvider.**
   - CS0266 int-local assignment (existing — keep)
-  - CS0029 method-argument-requiring-int
+  - CS0029 is registered defensively but cannot fire for long-to-int (always CS0266); method-argument-requiring-int produces CS1503 not CS0029. Fall-through `case "CS0029": case "CS0266":` is a single branch — no separate coverage needed.
   - Input hitting `AllInterfaces.Any(i => i.Name == "IWordsToNumberConverter")` vs direct `ContainingType.Name == "IWordsToNumberConverter"` (`:77-78`)
   - `CheckedExpression` wrapping (`:83`)
   - `root is null` / `semanticModel is null` guards are in the epic's declared-unreachable appendix — NOT covered here.

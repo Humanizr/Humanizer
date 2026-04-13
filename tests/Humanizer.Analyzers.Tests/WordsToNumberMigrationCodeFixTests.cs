@@ -10,6 +10,11 @@ namespace Humanizer.Analyzers.Tests;
 
 public class WordsToNumberMigrationCodeFixTests
 {
+    // Note: The code fix provider registers both CS0029 and CS0266 via fall-through,
+    // but long-to-int narrowing always produces CS0266 (explicit conversion exists),
+    // never CS0029 (no conversion exists). CS0029 cannot fire for ToNumber()/Convert()
+    // return values, so only CS0266 scenarios are testable here.
+
     [Fact]
     public async Task FixesToNumberAssignedToInt()
     {
