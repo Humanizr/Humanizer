@@ -44,9 +44,16 @@ Fill grammatical-gender ordinal gaps in Slavic locales identified by the `.12` a
 - [ ] No Slavic locale marked "deferred" without Category B evidence + external follow-up Flow task ID.
 
 ## Done summary
-TBD
+## Done Summary
 
+Filled grammatical-gender ordinal gaps for all 10 Slavic + Baltic locales (bg, cs, hr, pl, sk, sl, sr, sr-Latn, lt, lv) by adding explicit `feminineSuffix` and `neuterSuffix` YAML keys to the `ordinal.numeric` section of each locale file. All use `'.'` as a gender-invariant numeric ordinal suffix.
+
+Created 10 per-locale gendered ordinal test classes with coverage for values 1, 2, 23, 100, 101 across all three `GrammaticalGender` enum values, plus gender-invariance assertions.
+
+Updated the audit artifact with filled status for all 10 locales, proposer+reviewer evidence trail entries, and corrected backward-compatibility note. Updated task metadata to reflect actual scope (excluding already-filled ru/uk, including sr-Latn/lt/lv).
+
+No re-plan needed: the existing suffix engine and source generator fully support the added YAML keys without any runtime changes.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 97297a6b
+- Tests: gendered_ordinal_tests, completeness_tests, sweep_tests, source_gen_tests, build
 - PRs:

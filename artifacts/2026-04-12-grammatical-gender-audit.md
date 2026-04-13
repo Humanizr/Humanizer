@@ -49,9 +49,9 @@ Enumerated all `src/Humanizer/Locales/*.yml` files (65 shipped locales). Cross-r
 | | sr | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
 | | sr-Latn | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .13 filled | All genders use "." — explicit F/N added |
 | | uk | masc/fem/neuter | template | ✅ Full (M/F/N) | — | Per-gender template sections |
-| **Semitic** | ar | masc/fem | suffix | ⚠️ masculineSuffix only | .14 | No suffix (empty string) |
-| | he | masc/fem | suffix | ⚠️ masculineSuffix only | .14 | No suffix (empty string) |
-| | mt | masc/fem | suffix | ⚠️ masculineSuffix only | .14 | No suffix (empty string) |
+| **Semitic** | ar | masc/fem | suffix | ✅ Full (M/F/N) | .14 filled | All genders use "" (empty) — explicit F/N added |
+| | he | masc/fem | suffix | ✅ Full (M/F/N) | .14 filled | All genders use "" (empty) — explicit F/N added |
+| | mt | masc/fem | suffix | ✅ Full (M/F/N) | .14 filled | All genders use "" (empty) — explicit F/N added |
 | **Indic** | bn | none (ordinals) | template | ✅ Full | — | Gender-invariant ordinals |
 | | ta | none (ordinals) | template | ✅ Full | — | Gender-invariant ordinals |
 | | ur | masc/fem | number-word-suffix | ✅ Full (M/F) | — | Gendered via .9 plumbing |
@@ -113,9 +113,17 @@ de-CH and de-LI inherit from de — no direct YAML changes needed.
 | lt | '.' | '.' | '.' | Lietuvių kalbos rašyba ir skyryba; "1.", "2." for all genders |
 | lv | '.' | '.' | '.' | Latviešu valodas pareizrakstības vārdnīca; "1.", "2." for all genders |
 
-### .14 — Semitic/Indic/Other (separate task)
+### .14 — Semitic/Indic/Other
 
-ar, he, mt — all use empty-string suffix for all genders.
+| Locale | masculineSuffix | feminineSuffix (added) | neuterSuffix (added) | Reference |
+|--------|----------------|---------------------|-------------------|-----------|
+| ar | '' | '' | '' | Arabic numeric ordinals have no suffix; CLDR Ordinal Rules: Arabic `other` rule only |
+| he | '' | '' | '' | Hebrew numeric ordinals have no suffix; CLDR Ordinal Rules: Hebrew `other` rule only |
+| mt | '' | '' | '' | Maltese numeric ordinals have no suffix; CLDR Ordinal Rules: Maltese `other` rule only |
+
+Note: Greek (el) already had full M/F/N coverage (ος/η/ο) — no changes needed.
+Bengali (bn) and Tamil (ta) have gender-invariant ordinals — no changes needed.
+Hindi (hi) is not shipped — out of scope per epic spec.
 
 ## Category B Gaps (Research-Bound)
 
@@ -141,6 +149,9 @@ None identified. All shipped locales' numeric ordinals are well-documented in CL
 | sr-Latn | feminineSuffix: '.' / neuterSuffix: '.' | Same as sr (Latin script variant of Serbian) | CLDR: Serbian `other` rule only |
 | lt | feminineSuffix: '.' / neuterSuffix: '.' | Lietuvių kalbos rašyba ir skyryba — "1., 2." for masculine/feminine | CLDR: Lithuanian `other` rule only |
 | lv | feminineSuffix: '.' / neuterSuffix: '.' | Latviešu valodas pareizrakstības vārdnīca — "1., 2." for masculine/feminine | CLDR: Latvian `other` rule only |
+| ar | feminineSuffix: '' / neuterSuffix: '' | Arabic numeric ordinals are written as bare digits without suffix; no gendered ordinal markers in standard Arabic numeral notation | CLDR: Arabic `other` rule only; no ordinal gender distinction in digit form |
+| he | feminineSuffix: '' / neuterSuffix: '' | Hebrew numeric ordinals are written as bare digits without suffix; no gendered ordinal markers in standard Hebrew numeral notation | CLDR: Hebrew `other` rule only; no ordinal gender distinction in digit form |
+| mt | feminineSuffix: '' / neuterSuffix: '' | Maltese numeric ordinals are written as bare digits without suffix; no gendered ordinal markers in standard Maltese numeral notation | CLDR: Maltese `other` rule only; no ordinal gender distinction in digit form |
 
 ## Backward Compatibility
 
