@@ -44,6 +44,12 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
         if (number < 0)
         {
             var magnitude = GetAbsoluteValue(number);
+            if (magnitude <= int.MaxValue
+                && genderBlock.ExactReplacements.TryGetValue((int)magnitude, out var negExact))
+            {
+                return profile.NegativeWord + " " + negExact;
+            }
+
             return profile.NegativeWord + " " + ConvertMagnitude(magnitude) + genderBlock.DefaultSuffix;
         }
 
