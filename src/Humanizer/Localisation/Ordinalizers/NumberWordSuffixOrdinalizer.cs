@@ -36,24 +36,49 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
 
     string ConvertCore(int number, GrammaticalGender gender)
     {
-        var block = ResolveGenderBlock(gender);
+        var effectiveGender = ResolveEffectiveGender(gender);
+        var block = ResolveGenderBlock(effectiveGender);
+
+        // Negative numbers: check the absolute magnitude against exact replacements.
+        // When found, delegate to the number-to-words converter's ConvertToOrdinal which
+        // already composes the locale's negative prefix with the irregular ordinal form.
+        // For non-exact negatives, the cardinal-plus-suffix path naturally includes the
+        // negative prefix from the converter.
+        if (number < 0)
+        {
+            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+            if (magnitude <= int.MaxValue
+                && block.ExactReplacements.TryGetValue((int)magnitude, out _))
+            {
+                return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, effectiveGender);
+            }
+
+            var cardinal = Configurator.GetNumberToWordsConverter(culture).Convert(number, effectiveGender);
+            return cardinal + block.DefaultSuffix;
+        }
 
         if (block.ExactReplacements.TryGetValue(number, out var exact))
         {
             return exact;
         }
 
-        var cardinal = Configurator.GetNumberToWordsConverter(culture).Convert(number);
-        return cardinal + block.DefaultSuffix;
+        var positiveCardinal = Configurator.GetNumberToWordsConverter(culture).Convert(number, effectiveGender);
+        return positiveCardinal + block.DefaultSuffix;
     }
 
-    GenderBlock ResolveGenderBlock(GrammaticalGender gender) =>
+    GrammaticalGender ResolveEffectiveGender(GrammaticalGender gender) =>
         gender switch
         {
-            GrammaticalGender.Feminine => options.Feminine,
             GrammaticalGender.Neuter => options.NeuterFallbackGender == GrammaticalGender.Feminine
-                ? options.Feminine
-                : options.Masculine,
+                ? GrammaticalGender.Feminine
+                : GrammaticalGender.Masculine,
+            _ => gender
+        };
+
+    GenderBlock ResolveGenderBlock(GrammaticalGender effectiveGender) =>
+        effectiveGender switch
+        {
+            GrammaticalGender.Feminine => options.Feminine,
             _ => options.Masculine
         };
 
