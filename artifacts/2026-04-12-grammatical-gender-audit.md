@@ -63,7 +63,6 @@ Enumerated all `src/Humanizer/Locales/*.yml` files (65 shipped locales). Cross-r
 | | uz-Latn-UZ | none (ordinals) | suffix | ✅ | — | "-chi" for all |
 | **Uralic** | fi | none | suffix | ✅ | — | "." for all |
 | | hu | none | suffix | ✅ | — | "." for all |
-| | et | — | — | — | — | Not shipped |
 | **Baltic** | lt | masc/fem | suffix | ⚠️ masculineSuffix only | .13 | "." for all |
 | | lv | masc/fem | suffix | ⚠️ masculineSuffix only | .13 | "." for all |
 | **Hellenic** | el | masc/fem/neuter | suffix | ✅ Full (M/F/N) | — | ος/η/ο |
