@@ -1,5 +1,6 @@
 namespace Humanizer.Tests.Localisation.ur;
 
+[UseCulture("ur")]
 public class UrduHijriDateTests
 {
     static CultureInfo CreateUrduHijriCulture()

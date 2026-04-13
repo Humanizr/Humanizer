@@ -81,9 +81,8 @@ Wire all three cultures (`ur`, `ur-PK`, `ur-IN`) into every theory dataset cover
 - [ ] All new tests pass on net10.0 and net8.0 (net48 runtime verified in `.7`).
 
 ## Done summary
-TBD
-
+Added ur-PK and ur-IN rows to all theory matrix datasets checked by LocaleTheoryMatrixCompletenessTests (7 theory data files, 658 new rows total). Created 8 new locale-specific exact-output test files under tests/Humanizer.Tests/Localisation/ur/ covering number-to-words, date-to-ordinal-words, relative dates, clock notation, list humanize, data units, and compass. Created UrduBidiControlSweep helper and applied it in all test files. Updated existing UrduOrdinalTests and UrduHijriDateTests to use the sweep. All 5460 matrix completeness tests and 129 Urdu locale tests pass on both net10.0 and net8.0.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: b2ec87248e3fd9e6fca498f2e9e1e8f2b2e6e8d2, 9c01dcfa739055e96420dc3cce41737fbbe1826a
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 --filter-class Humanizer.Tests.Localisation.LocaleTheoryMatrixCompletenessTests, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 --filter-namespace Humanizer.Tests.Localisation.ur, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 --filter-namespace Humanizer.Tests.Localisation.ur
 - PRs:
