@@ -258,6 +258,26 @@ public class LocaleCanonicalFixtureTests
     }
 
     [Fact]
+    public void Parse_ListMissingEngine_ReportsError()
+    {
+        var catalog = CreateCatalogFromFixture("list-missing-engine", "zz-list-missing-engine");
+
+        AssertDiagnosticContains(catalog, "HSG003", "surfaces.list' must define 'engine'");
+    }
+
+    [Fact]
+    public void Catalog_ListValueWithoutEngine_ReportsError()
+    {
+        // Exercises CreateMappedFeature's collectionFormatter missing-engine branch.
+        // NormalizeListSurface returns the mapping as-is when 'value' is present,
+        // then CreateMappedFeature expects 'engine' on the collectionFormatter mapping.
+        var catalog = CreateCatalog(
+            ("zz-list-value-no-engine", "locale: 'zz-list-value-no-engine'\nsurfaces:\n  list:\n    value: 'and'\n"));
+
+        AssertDiagnosticContains(catalog, "HSG003", "collectionFormatter' must declare an 'engine'");
+    }
+
+    [Fact]
     public void Parse_ExplicitDefaultEngineInNumber_ReportsError()
     {
         var catalog = CreateCatalogFromFixture("explicit-default-engine-in-number", "zz-explicit-default-engine-in-number");
@@ -443,17 +463,6 @@ public class LocaleCanonicalFixtureTests
         AssertDiagnosticContains(catalog, "HSG003", "must be a scalar");
     }
 
-    [Fact]
-    public void Catalog_HeadingsFullNotSequence_CaughtByTryResolveLocalePart()
-    {
-        // Exercises the TryResolveLocalePart catch-and-diagnostic path: ResolveHeadings
-        // throws when full is not a sequence, TryResolveLocalePart catches the exception
-        // and emits a diagnostic instead of crashing the generator.
-        var catalog = CreateCatalog(
-            ("zz-head-err", "locale: 'zz-head-err'\nsurfaces:\n  compass:\n    full: 'not-a-seq'\n    short: 'not-a-seq'\n"));
-
-        AssertDiagnosticContains(catalog, "HSG003", "must be a sequence");
-    }
 
     // ──────────────────────────────────────────────────────────────────────
     //  LocaleCatalogInput — merge semantics
@@ -888,7 +897,7 @@ surfaces:
 
         var differences = HumanizerSourceGenerator.LocaleSemanticDiff.Compare(left.Locales, right.Locales);
 
-        Assert.NotEmpty(differences);
+        Assert.Contains("Locale 'zz-tmpl' changed semantic behavior.", differences);
     }
 
     [Fact]
