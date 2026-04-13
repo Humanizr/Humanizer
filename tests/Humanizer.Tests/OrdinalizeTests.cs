@@ -163,4 +163,106 @@ public class OrdinalizeTests
             .ToString(culture)
             .Ordinalize(gender, culture, wordForm));
     }
+
+    [Theory]
+    [InlineData("1", WordForm.Normal, "1st")]
+    [InlineData("2", WordForm.Normal, "2nd")]
+    [InlineData("3", WordForm.Abbreviation, "3rd")]
+    public void OrdinalizeStringWithWordForm(string number, WordForm wordForm, string expected) =>
+        Assert.Equal(expected, number.Ordinalize(wordForm));
+
+    [Theory]
+    [InlineData(1, WordForm.Normal, "1st")]
+    [InlineData(2, WordForm.Normal, "2nd")]
+    [InlineData(3, WordForm.Abbreviation, "3rd")]
+    public void OrdinalizeNumberWithWordForm(int number, WordForm wordForm, string expected) =>
+        Assert.Equal(expected, number.Ordinalize(wordForm));
+
+    [Theory]
+    [InlineData("1", GrammaticalGender.Masculine, WordForm.Normal, "1st")]
+    [InlineData("1", GrammaticalGender.Feminine, WordForm.Normal, "1st")]
+    [InlineData("2", GrammaticalGender.Masculine, WordForm.Abbreviation, "2nd")]
+    public void OrdinalizeStringWithGenderAndWordForm(string number, GrammaticalGender gender, WordForm wordForm, string expected) =>
+        Assert.Equal(expected, number.Ordinalize(gender, wordForm));
+
+    [Theory]
+    [InlineData(1, GrammaticalGender.Masculine, WordForm.Normal, "1st")]
+    [InlineData(1, GrammaticalGender.Feminine, WordForm.Normal, "1st")]
+    [InlineData(2, GrammaticalGender.Masculine, WordForm.Abbreviation, "2nd")]
+    public void OrdinalizeNumberWithGenderAndWordForm(int number, GrammaticalGender gender, WordForm wordForm, string expected) =>
+        Assert.Equal(expected, number.Ordinalize(gender, wordForm));
+
+    [Fact]
+    public void OrdinalizeStringWithNullCultureUsesCurrentUICulture()
+    {
+        var result = "1".Ordinalize((CultureInfo)null!);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void OrdinalizeStringWithNullCultureAndWordFormUsesCurrentUICulture()
+    {
+        var result = "1".Ordinalize((CultureInfo)null!, WordForm.Normal);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void OrdinalizeStringWithNullCultureAndGenderUsesCurrentUICulture()
+    {
+        var result = "1".Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void OrdinalizeStringWithNullCultureAndGenderAndWordFormUsesCurrentUICulture()
+    {
+        var result = "1".Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!, WordForm.Normal);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void OrdinalizeNumberWithNullCultureUsesCurrentUICulture()
+    {
+        var result = 1.Ordinalize((CultureInfo)null!);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void OrdinalizeNumberWithNullCultureAndWordFormUsesCurrentUICulture()
+    {
+        var result = 1.Ordinalize((CultureInfo)null!, WordForm.Normal);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void OrdinalizeNumberWithNullCultureAndGenderUsesCurrentUICulture()
+    {
+        var result = 1.Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void OrdinalizeNumberWithNullCultureAndGenderAndWordFormUsesCurrentUICulture()
+    {
+        var result = 1.Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!, WordForm.Normal);
+        Assert.Equal("1st", result);
+    }
+
+    [Fact]
+    public void NormalizeOrdinalNumberStringPreservesPlainNumbers()
+    {
+        // No format characters: NormalizeOrdinalNumberString returns original string
+        var result = "42".Ordinalize();
+        Assert.Equal("42nd", result);
+    }
+
+    [Fact]
+    public void OrdinalizeNumberWithCultureExercisesNormalizePath()
+    {
+        // This exercises the culture-aware int.Ordinalize path which calls
+        // NormalizeOrdinalNumberString(number.ToString(NumberFormatInfo))
+        var culture = new CultureInfo("en-US");
+        var result = 42.Ordinalize(culture);
+        Assert.Equal("42nd", result);
+    }
 }

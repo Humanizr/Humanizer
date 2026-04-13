@@ -200,6 +200,72 @@ public class ToQuantityTests
         Assert.Equal(expected, word.ToQuantity(quantity, format, culture), GetStringComparer(culture));
     }
 
+    [Theory]
+    [InlineData("case", 0L, "0 cases")]
+    [InlineData("case", 1L, "1 case")]
+    [InlineData("case", -1L, "-1 case")]
+    [InlineData("case", 5L, "5 cases")]
+    public void ToQuantityLong(string word, long quantity, string expected) =>
+        Assert.Equal(expected, word.ToQuantity(quantity));
+
+    [Theory]
+    [InlineData("case", 0L, "cases")]
+    [InlineData("case", 1L, "case")]
+    [InlineData("case", -1L, "case")]
+    [InlineData("case", 5L, "cases")]
+    public void ToQuantityLongWithNoQuantity(string word, long quantity, string expected) =>
+        Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.None));
+
+    [Theory]
+    [InlineData("case", 0L, "zero cases")]
+    [InlineData("case", 1L, "one case")]
+    [InlineData("case", 5L, "five cases")]
+    public void ToQuantityLongWords(string word, long quantity, string expected) =>
+        Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Words));
+
+    [Theory]
+    [InlineData("case", 1234L, "N0", "1,234 cases")]
+    [InlineData("case", 1L, null, "1 case")]
+    public void ToQuantityLongWithFormat(string word, long quantity, string? format, string expected) =>
+        Assert.Equal(expected, word.ToQuantity(quantity, format));
+
+    [Theory]
+    [InlineData("case", 1234L, "N0", "it-IT", "1.234 cases")]
+    public void ToQuantityLongWithFormatAndCulture(string word, long quantity, string format, string cultureCode, string expected)
+    {
+        var culture = new CultureInfo(cultureCode);
+        Assert.Equal(expected, word.ToQuantity(quantity, format, culture), GetStringComparer(culture));
+    }
+
+    [Theory]
+    [InlineData(double.NaN, "NaN hours")]
+    [InlineData(double.PositiveInfinity, "\u221E hours")]
+    [InlineData(double.NegativeInfinity, "-\u221E hours")]
+    public void ToQuantityDoubleNonFiniteValuesPluralize(double quantity, string expected) =>
+        Assert.Equal(expected, "hour".ToQuantity(quantity));
+
+    [Fact]
+    public void ToQuantityDoubleExactlyOneIsSingular() =>
+        Assert.Equal("1 hour", "hour".ToQuantity(1.0));
+
+    [Fact]
+    public void ToQuantityDoubleExactlyMinusOneIsSingular() =>
+        Assert.Equal("-1 hour", "hour".ToQuantity(-1.0));
+
+    [Fact]
+    public void ToQuantityDoubleWithFormatProvider()
+    {
+        var culture = new CultureInfo("de-DE");
+        Assert.Equal("1,50 hours", "hour".ToQuantity(1.5, "F2", culture), GetStringComparer(culture));
+    }
+
+    [Fact]
+    public void ToQuantityIntWithFormatProvider()
+    {
+        var culture = new CultureInfo("de-DE");
+        Assert.Equal("1.234 cases", "case".ToQuantity(1234, "N0", culture), GetStringComparer(culture));
+    }
+
     internal static StringComparer GetStringComparer(CultureInfo culture) =>
         StringComparer.Create(culture, false);
 }

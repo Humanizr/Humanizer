@@ -30,4 +30,11 @@ public class CasingTests
     [InlineData("Title Case", "TITLE CASE")]
     public void ApplyCaseAllCaps(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.ApplyCase(LetterCasing.AllCaps));
+
+    [Fact]
+    public void ApplyCaseInvalidEnumThrowsArgumentOutOfRange()
+    {
+        var invalidCasing = (LetterCasing)999;
+        Assert.Throws<ArgumentOutOfRangeException>(() => "test".ApplyCase(invalidCasing));
+    }
 }
