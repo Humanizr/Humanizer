@@ -33,8 +33,18 @@ Cover the three 50%-line converter registries plus the `DateToOrdinalWordsExtens
 - [ ] No registry mutation (`Register`/`Unregister`) inside any test.
 
 ## Done summary
-_To be filled on completion._
+Added `RegistryFallbackTests.cs` with 5 tests exercising the default-factory lambda path
+for the three converter registries and the grammatical-case extension, all under `eo` (Esperanto)
+— a culture with no registered converters.
 
+### Tests added
+1. `DateTimeToOrdinalWords_UnregisteredCulture_UsesDefaultConverter` — exercises `DateToOrdinalWordsConverterRegistry` default factory via `date.ToOrdinalWords()`
+2. `DateTimeToOrdinalWords_GrammaticalCase_UnregisteredCulture_UsesDefaultConverter` — exercises `DateToOrdinalWordsExtensions` grammatical-case path via `date.ToOrdinalWords(GrammaticalCase.Genitive)`
+3. `DateOnlyToOrdinalWords_UnregisteredCulture_UsesDefaultConverter` — exercises `DateOnlyToOrdinalWordsConverterRegistry` default factory via `dateOnly.ToOrdinalWords()`
+4. `DateOnlyToOrdinalWords_GrammaticalCase_UnregisteredCulture_UsesDefaultConverter` — exercises `DateOnly` grammatical-case overload
+5. `TimeOnlyToClockNotation_UnregisteredCulture_UsesEnglishProfile` — exercises `TimeOnlyToClockNotationConvertersRegistry` default factory (English profile fallback)
+
+All tests pass on net10.0 and net8.0. No registry mutation.
 ## Evidence
 - Commits:
 - Tests:
