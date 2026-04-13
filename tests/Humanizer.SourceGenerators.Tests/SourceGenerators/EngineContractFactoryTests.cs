@@ -143,21 +143,29 @@ public class EngineContractFactoryTests
 
         // Assert actual emitted values, not just property labels
         Assert.Contains("[\"thousandth\"] = 1000", result);
-        Assert.Contains("GluedOrdinalScaleSuffixes =", result);
+        Assert.Contains("[\"th\"] = 1", result);
         Assert.Contains("[\"hundred\"] = 100", result);
+        Assert.Contains("[\"first\"] = 1", result);
         Assert.Contains("NegativePrefixes = new string[] { \"minus\" }", result);
         Assert.Contains("NegativeSuffixes = new string[] { \"negative\" }", result);
         Assert.Contains("OrdinalPrefixes = new string[] { \"the\" }", result);
         Assert.Contains("IgnoredTokens = new string[] { \"and\" }", result);
+        Assert.Contains("LeadingTokenPrefixesToTrim = new string[] { \"a-\" }", result);
         Assert.Contains("MultiplierTokens = new string[] { \"times\" }", result);
+        Assert.Contains("TokenSuffixesToStrip = new string[] { \"-ish\" }", result);
+        Assert.Contains("OrdinalAbbreviationSuffixes = new string[] { \"st\", \"nd\" }", result);
+        Assert.Contains("TeenSuffixTokens = new string[] { \"teen\" }", result);
+        Assert.Contains("HundredSuffixTokens = new string[] { \"hundred\" }", result);
         Assert.Contains("AllowTerminalOrdinalToken = true", result);
         Assert.Contains("UseHundredMultiplier = true", result);
         Assert.Contains("AllowInvariantIntegerInput = true", result);
         Assert.Contains("TeenBaseValue = 10", result);
+        Assert.Contains("HundredSuffixValue = 100", result);
+        Assert.Contains("UnitTokenMinValue = 1", result);
+        Assert.Contains("UnitTokenMaxValue = 9", result);
         Assert.Contains("HundredSuffixMinValue = 200", result);
         Assert.Contains("HundredSuffixMaxValue = 900", result);
-        Assert.Contains("ExactOrdinalMap =", result);
-        Assert.Contains("[\"first\"] = 1", result);
+        Assert.Contains("ScaleThreshold = 1000", result);
     }
 
     // ──────────────────────────────────────────────────────────────────────
@@ -324,6 +332,28 @@ public class EngineContractFactoryTests
     }
 
     [Fact]
+    public void NumberToWords_BuilderMemberWithoutBuilderName_Throws()
+    {
+        // Exercises the builder null-check throw in NumberToWordsEngineContractFactory.CreateBuilderValue.
+        var member = CreateEngineContractMember(kind: "builder", sourcePath: null, builder: null);
+        var root = ParseJson("""{}""");
+
+        var exception = InvokeCreateMemberValueExpectingException("NumberToWordsEngineContractFactory", root, member);
+        Assert.Contains("Builder members require a builder name", exception.Message);
+    }
+
+    [Fact]
+    public void NumberToWords_EastAsianScaleBuilder_Throws()
+    {
+        // Exercises the "east-asian-scale-array" throw in NumberToWordsEngineContractFactory.CreateBuilderValue.
+        var member = CreateEngineContractMember(kind: "builder", sourcePath: null, builder: "east-asian-scale-array");
+        var root = ParseJson("""{}""");
+
+        var exception = InvokeCreateMemberValueExpectingException("NumberToWordsEngineContractFactory", root, member);
+        Assert.Contains("Unexpected east-asian scale builder", exception.Message);
+    }
+
+    [Fact]
     public void TimeOnlyToClockNotation_UnsupportedMemberKind_Throws()
     {
         // Exercises the _ default throw in TimeOnlyToClockNotationEngineContractFactory.CreateMemberValue.
@@ -332,6 +362,32 @@ public class EngineContractFactoryTests
 
         var exception = InvokeClockCreateMemberValueExpectingException(root, member);
         Assert.Contains("Unsupported clock-notation contract member kind 'bogus-kind'", exception.Message);
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_EnumMemberWithoutEnumType_Throws()
+    {
+        // Exercises the enum null-check throw in TimeOnlyToClockNotationEngineContractFactory.CreateEnumValue.
+        var member = CreateEngineContractMember(kind: "enum", sourcePath: "x", enumType: null);
+        var root = ParseJson("""{ "x": "value" }""");
+
+        var exception = InvokeClockCreateMemberValueExpectingException(root, member);
+        Assert.Contains("Enum members require an enum type", exception.Message);
+    }
+
+    [Fact]
+    public void EngineContractUtilities_GetLeafPropertyName_NullPath_Throws()
+    {
+        // Exercises EngineContractUtilities.GetLeafPropertyName with null/empty path.
+        var utilitiesType = GeneratorType.GetNestedType("EngineContractUtilities", BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Could not find EngineContractUtilities type.");
+
+        var method = utilitiesType.GetMethod("GetLeafPropertyName", BindingFlags.Public | BindingFlags.Static)
+            ?? throw new InvalidOperationException("Could not find GetLeafPropertyName method.");
+
+        var tie = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, [null]));
+        var exception = Assert.IsType<InvalidOperationException>(tie.InnerException);
+        Assert.Contains("A property path is required", exception.Message);
     }
 
     // ──────────────────────────────────────────────────────────────────────
