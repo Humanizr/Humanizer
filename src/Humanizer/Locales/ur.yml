@@ -346,12 +346,18 @@ surfaces:
             1: 'پہلا'
             2: 'دوسرا'
             3: 'تیسرا'
+            4: 'چوتھا'
+            6: 'چھٹا'
+            9: 'نواں'
         feminine:
           defaultSuffix: 'ویں'
           exactReplacements:
             1: 'پہلی'
             2: 'دوسری'
             3: 'تیسری'
+            4: 'چوتھی'
+            6: 'چھٹی'
+            9: 'نویں'
         neuterFallback: 'masculine'
 
     formatting:

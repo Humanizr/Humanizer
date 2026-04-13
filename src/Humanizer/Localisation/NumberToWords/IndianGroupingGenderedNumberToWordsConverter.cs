@@ -41,9 +41,14 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
             ? profile.Ordinal.Feminine
             : profile.Ordinal.Masculine;
 
+        if (number == int.MinValue)
+        {
+            throw new NotImplementedException();
+        }
+
         if (number < 0)
         {
-            return profile.NegativeWord + " " + ConvertToOrdinal(number == int.MinValue ? int.MaxValue : -number, gender);
+            return profile.NegativeWord + " " + ConvertToOrdinal(-number, gender);
         }
 
         if (genderBlock.ExactReplacements.TryGetValue(number, out var exact))
@@ -61,9 +66,14 @@ class IndianGroupingGenderedNumberToWordsConverter(IndianGroupingGenderedNumberT
             return profile.ZeroWord;
         }
 
+        if (number == long.MinValue)
+        {
+            throw new NotImplementedException();
+        }
+
         if (number < 0)
         {
-            return profile.NegativeWord + " " + ConvertCardinal(number == long.MinValue ? long.MaxValue : -number);
+            return profile.NegativeWord + " " + ConvertCardinal(-number);
         }
 
         var parts = new List<string>();
