@@ -36,9 +36,8 @@ Close tail-coverage on **ByteSize + Truncator** classes.
 - [ ] No deferral or hold-list language.
 
 ## Done summary
-_To be filled on completion._
-
+Added tail-branch coverage tests for ByteSize (Equals, GetHashCode, CompareTo, comparison operators, LargestWholeNumber tiers for all unit sizes including negatives, parse edge cases for fractional/out-of-range bits, ToString format variations) and 5 Truncator classes (FixedLength null/long truncation string, FixedNumberOfWords single-word fallthrough, FixedNumberOfCharacters non-alpha separators, DynamicLengthAndPreserveWords effective-length-zero/no-space/whitespace-prefix, DynamicNumberOfCharactersAndPreserveWords delimiter-longer-than-total/no-complete-word/whitespace-only/alpha-zero branches).
 ## Evidence
-- Commits:
-- Tests:
+- Commits: f8ea835a, 65002f8f, 38422db6
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 - PRs:
