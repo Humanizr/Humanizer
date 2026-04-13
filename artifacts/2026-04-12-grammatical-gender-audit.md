@@ -149,9 +149,9 @@ None identified. All shipped locales' numeric ordinals are well-documented in CL
 | sr-Latn | feminineSuffix: '.' / neuterSuffix: '.' | Same as sr (Latin script variant of Serbian) | CLDR: Serbian `other` rule only |
 | lt | feminineSuffix: '.' / neuterSuffix: '.' | Lietuvių kalbos rašyba ir skyryba — "1., 2." for masculine/feminine | CLDR: Lithuanian `other` rule only |
 | lv | feminineSuffix: '.' / neuterSuffix: '.' | Latviešu valodas pareizrakstības vārdnīca — "1., 2." for masculine/feminine | CLDR: Latvian `other` rule only |
-| ar | feminineSuffix: '' / neuterSuffix: '' | Arabic numeric ordinals are written as bare digits without suffix; no gendered ordinal markers in standard Arabic numeral notation | CLDR: Arabic `other` rule only; no ordinal gender distinction in digit form |
-| he | feminineSuffix: '' / neuterSuffix: '' | Hebrew numeric ordinals are written as bare digits without suffix; no gendered ordinal markers in standard Hebrew numeral notation | CLDR: Hebrew `other` rule only; no ordinal gender distinction in digit form |
-| mt | feminineSuffix: '' / neuterSuffix: '' | Maltese numeric ordinals are written as bare digits without suffix; no gendered ordinal markers in standard Maltese numeral notation | CLDR: Maltese `other` rule only; no ordinal gender distinction in digit form |
+| ar | feminineSuffix: '' / neuterSuffix: '' | Badawi & Hinds, _A Dictionary of Egyptian Arabic_ + Wright, _A Grammar of the Arabic Language_ vol. I §349 — Arabic numeric ordinals in digit form carry no suffix; gendered ordinal forms exist only in word form (e.g. الأول/الأولى) not digit notation | CLDR: Arabic `other` rule only; no ordinal gender distinction in digit form |
+| he | feminineSuffix: '' / neuterSuffix: '' | Glinert, _Modern Hebrew: An Essential Grammar_ §12.3 — Hebrew numeric ordinals in digit form carry no suffix; gendered forms exist only in word ordinals (e.g. ראשון/ראשונה) not digit notation | CLDR: Hebrew `other` rule only; no ordinal gender distinction in digit form |
+| mt | feminineSuffix: '' / neuterSuffix: '' | Borg & Azzopardi-Alexander, _Maltese_ (Routledge Descriptive Grammars) §4.2.2 — Maltese numeric ordinals in digit form carry no suffix; gendered forms exist only in word ordinals (e.g. l-ewwel/l-ewwel) not digit notation | CLDR: Maltese `other` rule only; no ordinal gender distinction in digit form |
 
 ## Backward Compatibility
 
