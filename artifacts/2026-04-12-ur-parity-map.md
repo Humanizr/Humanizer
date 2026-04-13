@@ -23,7 +23,7 @@
 | compass | authored (.5) |
 | calendar | authored (.5, Gregorian months only; Hijri extension in .10) |
 
-All 8 canonical surfaces (+ nested members) are unresolved.
+All 8 canonical surface groups now have at least one reviewed term authored. Remaining ordinalizer plumbing (ordinal.numeric engine + test matrix rows) is owned by task .9.
 
 ---
 
@@ -365,7 +365,7 @@ Passed! total: 58, failed: 0, succeeded: 58
 
 | Surface | Ownership path | Current state | Target state | Support state | Status |
 |---|---|---|---|---|---|
-| list | -- | missing | locale-owned | not supported | not-started |
+| list | engine: conjunction, value: اور | authored (.5) | locale-owned | not supported | done |
 | formatter | .2 | authored | locale-owned | engine: profiled, pluralRule: singular-plural, dataUnitPluralRule: singular-plural | resolved |
 | phrases.relativeDate | .2 | authored | locale-owned | 8 units × past/future, now=ابھی, never=کبھی نہیں, yesterday=گزشتہ کل, tomorrow=آئندہ کل | resolved |
 | phrases.duration | .2 | authored | locale-owned | 8 units with singular/plural, zero=ابھی | resolved |
@@ -382,12 +382,12 @@ Passed! total: 58, failed: 0, succeeded: 58
 | ordinal.date | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
 | ordinal.dateOnly | .4 | authored | locale-owned | pattern: '{day} MMMM، yyyy', dayMode: Numeric, calendarMode: Native | resolved |
 | clock | .4 | authored | locale-owned | engine: phrase-clock, hourMode: h12, hourGender: masculine, minuteGender: masculine, hourWordsMap 0-12 | resolved |
-| compass | -- | missing | locale-owned | not supported | not-started |
-| calendar.months | -- | missing | locale-owned | not supported | not-started |
+| compass | 16 full + 16 short (identical) | authored (.5) | locale-owned | not supported | done |
+| calendar.months | 12 Gregorian months | authored (.5) | locale-owned | not supported | done |
 
 ### Effective Gap Summary
 
-8 of 8 canonical surface groups partially resolved. Remaining unresolved: list, ordinal.numeric (.9), compass, calendar.
+8 of 8 canonical surface groups authored. Remaining unresolved: ordinal.numeric engine wiring + ordinalizer test matrix rows (task .9), Hijri calendar extension (task .10).
 
 ---
 
