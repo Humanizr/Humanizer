@@ -36,9 +36,8 @@ Test the three `Default*` fallback converters (currently 0% line). They run when
 - [ ] No new `[ExcludeFromCodeCoverage]` attributes introduced.
 
 ## Done summary
-_To be filled on completion._
-
+Added tests for all three Default fallback converters (DefaultDateToOrdinalWordConverter, DefaultDateOnlyToOrdinalWordConverter, DefaultNumberToWordsConverter) covering English ordinal path, non-English short-date path, GrammaticalCase delegation, and deterministic bidi mark sanitization (LTR U+200E, RTL U+200F, ALM U+061C) via cloned-culture ShortDatePatterns with StringComparison.Ordinal assertions.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 8dea36aab39e41e8aa2f29fbb25ba2df13bfe35a, 204133427d77adecc7591bbab37df4897576cb1a
+- Tests: dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0, dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 - PRs:
