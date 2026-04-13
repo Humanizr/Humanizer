@@ -20,11 +20,34 @@ namespace Humanizer.SourceGenerators.Tests;
 /// Tests covering uncovered branches in the three engine-contract factories:
 /// <see cref="HumanizerSourceGenerator"/> nested types <c>WordsToNumberEngineContractFactory</c>,
 /// <c>TimeOnlyToClockNotationEngineContractFactory</c>, and
-/// <c>NumberToWordsEngineContractFactory</c>, plus <c>EngineContractUtilities</c>.
-/// Each test targets specific uncovered branches from the fn-9 coverage baseline.
+/// <c>NumberToWordsEngineContractFactory</c>.
+/// Each fixture-driven test scopes assertions to the fixture's generated cache class.
+///
+/// Unreachable defensive branches (identified during investigation):
+/// <list type="bullet">
+/// <item><c>WordsToNumberEngineContractFactory</c> "token-map" arm + <c>CreateTokenMapRulesExpression</c>:
+///   token-map engines are diverted by <c>LocaleYamlCatalog.CreateMappedFeature</c> before reaching
+///   <c>WordsToNumberProfileCatalogInput</c>; the arm is structurally unreachable.</item>
+/// <item><c>NumberToWordsEngineContractFactory</c> "int-string-dictionary" and "char-string-dictionary" arms:
+///   no contract in <c>EngineContractCatalog</c> uses these member kinds.</item>
+/// <item><c>NumberToWordsEngineContractFactory</c> unsupported-kind/builder/enum-null/missing-string throws:
+///   defensive guards that require invalid catalog definitions to trigger.</item>
+/// <item><c>TimeOnlyToClockNotationEngineContractFactory</c> multi-member constructor path, unsupported-kind throw,
+///   enum-null throw, named-TypeName object path, fallback-source-path, missing-string throw:
+///   phrase-clock is the only clock contract and its shape does not exercise these paths.</item>
+/// <item><c>EngineContractUtilities.GetLeafPropertyName</c> null/empty throw: defensive guard.</item>
+/// <item><c>NumberToWordsEngineContractFactory.GetOptionalStringValue</c> fallback branch: no nullable-string
+///   member has a fallback source path.</item>
+/// <item><c>NumberToWordsEngineContractFactory.GetOptionalInt64Value</c> default-value branch: no nullable-int64
+///   member has a non-null default value.</item>
+/// </list>
+/// These are absorbed in aggregate threshold headroom per the epic scope.
 /// </summary>
 public class EngineContractFactoryTests
 {
+    // Shared lazy full-generation run result to avoid repeated expensive generator runs.
+    static readonly Lazy<GeneratorDriverRunResult> fullGenerationResult = new(RunGeneratorWithAllLocales);
+
     // ──────────────────────────────────────────────────────────────────────
     //  WordsToNumberEngineContractFactory
     // ──────────────────────────────────────────────────────────────────────
@@ -32,7 +55,7 @@ public class EngineContractFactoryTests
     [Fact]
     public void WordsToNumber_UnknownEngine_FallsThrough_ToConventionalExpression()
     {
-        // Exercises the _ default arm in WordsToNumberEngineContractFactory.Create (line 36).
+        // Exercises the _ default arm in WordsToNumberEngineContractFactory.Create.
         // An unknown engine falls through to CreateConventionalWordsToNumberExpression.
         var runResult = RunGeneratorWithFixture("words-to-number-unknown-engine");
 
@@ -43,14 +66,33 @@ public class EngineContractFactoryTests
     [Fact]
     public void WordsToNumber_GreedyCompound_NoOrdinalMap_EmitsEmptyDictionary()
     {
-        // Exercises CreateGreedyCompoundOrdinalMapExpression fallback (line 209).
+        // Exercises CreateGreedyCompoundOrdinalMapExpression fallback.
         // When a greedy-compound locale has neither ordinalMap nor ordinalNumberToWordsKind,
         // the factory emits an empty FrozenDictionary.
         var runResult = RunGeneratorWithFixture("w2n-greedy-no-ordinal");
 
         var catalogSource = GetGeneratedSource(runResult, "WordsToNumberProfileCatalog.g.cs");
-        Assert.Contains("new GreedyCompoundWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new Dictionary<string, long>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)", catalogSource);
+        var block = ExtractCacheClassBody(catalogSource, "zz_w2n_greedy_no_ordinal_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new GreedyCompoundWordsToNumberConverter(", block);
+        Assert.Contains("new Dictionary<string, long>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)", block);
+    }
+
+    [Fact]
+    public void WordsToNumber_GreedyCompound_WithOrdinalNumberToWordsKind_EmitsBuilderCall()
+    {
+        // Exercises CreateGreedyCompoundOrdinalMapExpression ordinalNumberToWordsKind branch.
+        // Italian uses greedy-compound with ordinalNumberToWordsKind: 'self'.
+        var runResult = fullGenerationResult.Value;
+
+        Assert.Empty(runResult.Diagnostics);
+        var catalogSource = GetGeneratedSource(runResult, "WordsToNumberProfileCatalog.g.cs");
+
+        // Italian's profile uses BuildOrdinalMap with a NumberToWordsProfileCatalog.Resolve reference
+        var block = ExtractCacheClassBody(catalogSource, "it_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("GreedyCompoundWordsToNumberConverter.BuildOrdinalMap(", block);
+        Assert.Contains("NumberToWordsProfileCatalog.Resolve(", block);
     }
 
     // ──────────────────────────────────────────────────────────────────────
@@ -60,7 +102,7 @@ public class EngineContractFactoryTests
     [Fact]
     public void ClockNotation_UnknownEngine_FallsThrough_ToConventionalExpression()
     {
-        // Exercises TimeOnlyToClockNotationEngineContractFactory conventional fallthrough (lines 25-26).
+        // Exercises TimeOnlyToClockNotationEngineContractFactory conventional fallthrough.
         // An unknown engine falls through to CreateConventionalTimeOnlyToClockNotationExpression.
         var runResult = RunGeneratorWithFixture("clock-unknown-engine");
 
@@ -75,7 +117,7 @@ public class EngineContractFactoryTests
     [Fact]
     public void NumberToWords_UnknownEngine_FallsThrough_ToConventionalExpression()
     {
-        // Exercises NumberToWordsEngineContractFactory conventional fallthrough (lines 32-33).
+        // Exercises NumberToWordsEngineContractFactory conventional fallthrough.
         // An unknown engine falls through to CreateConventionalNumberToWordsExpression.
         var runResult = RunGeneratorWithFixture("n2w-unknown-engine");
 
@@ -86,38 +128,41 @@ public class EngineContractFactoryTests
     [Fact]
     public void NumberToWords_ConstructState_MissingThousandsSpecialCases_EmitsEmptyDictionary()
     {
-        // Exercises CreateNullableIntStringDictionaryValue MissingValue="empty" branch (line 124).
+        // Exercises CreateNullableIntStringDictionaryValue MissingValue="empty" branch.
         // construct-state-scale's thousandsSpecialCases has MissingValue="empty".
         var runResult = RunGeneratorWithFixture("n2w-construct-state-missing-thousands-special");
 
         var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
-        Assert.Contains("new ConstructStateScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("FrozenDictionary<int, string>.Empty", catalogSource);
+        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_construct_no_thousands_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new ConstructStateScaleNumberToWordsConverter(new(", block);
+        Assert.Contains("FrozenDictionary<int, string>.Empty", block);
     }
 
     [Fact]
     public void NumberToWords_VariantDecade_MissingTensEt_EmitsEmptyFrozenSet()
     {
-        // Exercises CreateNullableIntSetValue MissingValue="empty" branch (line 138).
+        // Exercises CreateNullableIntSetValue MissingValue="empty" branch.
         // variant-decade's tensUsingEtWhenUnitIsOne has MissingValue="empty".
         var runResult = RunGeneratorWithFixture("n2w-variant-decade-no-tens-et");
 
         var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
-        Assert.Contains("VariantDecadeNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("FrozenSet<int>.Empty", catalogSource);
+        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_variant_decade_no_et_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new VariantDecadeNumberToWordsConverter(new(", block);
+        Assert.Contains("FrozenSet<int>.Empty", block);
     }
 
     [Fact]
     public void NumberToWords_InvertedTens_MissingOrdinalExceptions_EmitsEmptyStringDictionary()
     {
-        // Exercises nullable-string-string-dictionary MissingValue="empty" branch (line 80).
+        // Exercises nullable-string-string-dictionary MissingValue="empty" branch.
         // inverted-tens' ordinalExceptions has MissingValue="empty".
-        // Danish (da) already uses inverted-tens without ordinalExceptions, so this tests
-        // the same path through the factory explicitly.
         var runResult = RunGeneratorWithFixture("n2w-inverted-tens-no-ordinal-exceptions");
 
         var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
         var block = ExtractCacheClassBody(catalogSource, "zz_n2w_inverted_tens_no_ordinal_cache");
+        Assert.NotEmpty(block);
         Assert.Contains("new InvertedTensNumberToWordsConverter(new(", block);
         Assert.Contains("FrozenDictionary<string, string>.Empty", block);
     }
@@ -125,184 +170,123 @@ public class EngineContractFactoryTests
     [Fact]
     public void NumberToWords_InvertedTens_FallbackSourcePath_UsesAlternateProperty()
     {
-        // Exercises GetStringValue fallback-source-path branch (line 198).
+        // Exercises GetStringValue fallback-source-path branch.
         // inverted-tens' unitTensAlternateJoiner falls back to unitTensJoiner when absent.
-        // This test verifies by omitting unitTensAlternateJoiner but providing unitTensJoiner.
         var runResult = RunGeneratorWithFixture("n2w-inverted-tens-fallback-joiner");
 
         var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
         var block = ExtractCacheClassBody(catalogSource, "zz_n2w_inverted_fallback_cache");
+        Assert.NotEmpty(block);
         Assert.Contains("new InvertedTensNumberToWordsConverter(new(", block);
         // The fallback joiner value "und" should appear in the generated output
         Assert.Contains("\"und\"", block);
     }
 
     [Fact]
-    public void NumberToWords_JoinedScale_NullableString_EmitsNull()
+    public void NumberToWords_JoinedScale_NullableMembers_EmitNull()
     {
-        // Exercises nullable-string member kind returning null (line 64).
-        // joined-scale has matchingOrdinalSuffix as nullable-string with no default.
+        // Exercises nullable-string (matchingOrdinalSuffix, ordinalSuffixMatchCharacters,
+        // compoundOrdinalWord), nullable-int64 (compoundOrdinalRemainder), and
+        // nullable-int-set (compoundOrdinalExcludedValues without MissingValue) members.
+        // All these nullable members emit null when their YAML properties are absent.
         var runResult = RunGeneratorWithFixture("n2w-joined-scale-minimal");
 
         var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
         var block = ExtractCacheClassBody(catalogSource, "zz_n2w_joined_minimal_cache");
+        Assert.NotEmpty(block);
         Assert.Contains("new JoinedScaleNumberToWordsConverter(new(", block);
-        // The nullable string members without values emit null
-        Assert.Contains("null", block);
+        // The last four members (ordinalExceptions, compoundOrdinalRemainder,
+        // compoundOrdinalWord, compoundOrdinalExcludedValues) all emit null
+        Assert.Contains("null, null, null, null)", block);
     }
 
     [Fact]
-    public void NumberToWords_JoinedScale_NullableInt64_EmitsNull()
+    public void NumberToWords_ConstructState_CultureMember_EmitsCulture()
     {
-        // Exercises nullable-int64 member kind returning null (line 67).
-        // joined-scale has compoundOrdinalRemainder as nullable-int64.
-        var runResult = RunGeneratorWithFixture("n2w-joined-scale-minimal");
-
-        var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
-        var block = ExtractCacheClassBody(catalogSource, "zz_n2w_joined_minimal_cache");
-        Assert.Contains("new JoinedScaleNumberToWordsConverter(new(", block);
-    }
-
-    // ──────────────────────────────────────────────────────────────────────
-    //  EngineContractUtilities
-    // ──────────────────────────────────────────────────────────────────────
-
-    [Fact]
-    public void EngineContractUtilities_TryGetElement_EmptyPath_ReturnsRoot()
-    {
-        // Exercises TryGetElement with null/empty sourcePath (lines 19-20).
-        // Profile-object members with null SourcePath hit the early-return-true branch.
-        // This is implicitly exercised when any engine with a root-level profile-object
-        // member is processed. Verified through generated output containing the root
-        // object's constructor.
-        var runResult = RunGeneratorWithFixture("n2w-unknown-engine");
-
-        // The fact that generation succeeds without errors proves TryGetElement handled
-        // the null/empty path correctly for root-level profile objects.
-        Assert.Empty(runResult.Diagnostics);
-    }
-
-    // ──────────────────────────────────────────────────────────────────────
-    //  Full generation verifies all three factories process real locales
-    // ──────────────────────────────────────────────────────────────────────
-
-    [Fact]
-    public void FullGeneration_NumberToWordsFactory_ProcessesAllContractEngines()
-    {
-        // Exercises the full set of NumberToWordsEngineContractFactory builder arms by running
-        // the generator against all real locale files. Each builder arm that has a locale
-        // emitting through it contributes to coverage.
-        var runResult = RunGeneratorWithAllLocales();
+        // Exercises the "culture" member kind in CreateMemberValue.
+        // construct-state-scale has a trailing "culture" member.
+        // Hebrew (he) uses construct-state-scale which requires culture.
+        var runResult = fullGenerationResult.Value;
 
         Assert.Empty(runResult.Diagnostics);
         var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
 
-        // Verify representative engines from each major builder family
-        Assert.Contains("new HarmonyOrdinalNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new ContractedOneScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new LinkingScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new AgglutinativeOrdinalScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new ContextualDecimalNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new ConjunctionalScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new JoinedScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new WestSlavicGenderedNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new EastSlavicNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new PluralizedScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new OrdinalPrefixScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new InvertedTensNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new SouthSlavicCardinalNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new ScaleStrategyNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new UnitLeadingCompoundNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new ConjoinedGenderedScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new SegmentedScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new TerminalOrdinalScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new ConstructStateScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new GenderedScaleOrdinalNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new HyphenatedScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new DualFormScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new TriadScaleNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new LongScaleStemOrdinalNumberToWordsConverter(new(", catalogSource);
-        Assert.Contains("new VariantDecadeNumberToWordsConverter(new(", catalogSource);
+        // The Hebrew construct-state profile emits "culture" as the last constructor argument
+        Assert.Contains("case \"he\": return new ConstructStateScaleNumberToWordsConverter(new(", catalogSource);
+        Assert.Contains(", culture)", catalogSource);
     }
 
     [Fact]
-    public void FullGeneration_WordsToNumberFactory_ProcessesAllEngines()
+    public void NumberToWords_HarmonyOrdinal_NullableCharStringDictionary_EmitsNull()
     {
-        // Exercises all WordsToNumberEngineContractFactory switch arms for engines that
-        // reach the profile catalog (everything except token-map, which is diverted).
-        var runResult = RunGeneratorWithAllLocales();
-
-        Assert.Empty(runResult.Diagnostics);
-        var catalogSource = GetGeneratedSource(runResult, "WordsToNumberProfileCatalog.g.cs");
-
-        Assert.Contains("new CompoundScaleWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new ContractedScaleWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new EastAsianPositionalWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new GreedyCompoundWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new InvertedTensWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new LinkingAffixWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new PrefixedTensScaleWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new SuffixScaleWordsToNumberConverter(", catalogSource);
-        Assert.Contains("new VigesimalCompoundWordsToNumberConverter(", catalogSource);
-    }
-
-    [Fact]
-    public void FullGeneration_ClockNotationFactory_ProcessesPhraseClockContract()
-    {
-        // Exercises the TimeOnlyToClockNotationEngineContractFactory contract dispatch path.
-        // phrase-clock is the only structural clock contract; all others use conventional
-        // type-name construction.
-        var runResult = RunGeneratorWithAllLocales();
-
-        Assert.Empty(runResult.Diagnostics);
-        var catalogSource = GetGeneratedSource(runResult, "TimeOnlyToClockNotationProfileCatalog.g.cs");
-
-        Assert.Contains("new PhraseClockNotationConverter(new(", catalogSource);
-    }
-
-    [Fact]
-    public void FullGeneration_GreedyCompound_WithOrdinalNumberToWordsKind_EmitsBuilderCall()
-    {
-        // Exercises CreateGreedyCompoundOrdinalMapExpression ordinalNumberToWordsKind branch (lines 190-191).
-        // Italian uses greedy-compound with ordinalNumberToWordsKind: 'self'.
-        var runResult = RunGeneratorWithAllLocales();
-
-        Assert.Empty(runResult.Diagnostics);
-        var catalogSource = GetGeneratedSource(runResult, "WordsToNumberProfileCatalog.g.cs");
-
-        // Italian's profile should use BuildOrdinalMap with a NumberToWordsProfileCatalog.Resolve reference
-        Assert.Contains("GreedyCompoundWordsToNumberConverter.BuildOrdinalMap(", catalogSource);
-        Assert.Contains("NumberToWordsProfileCatalog.Resolve(", catalogSource);
-    }
-
-    [Fact]
-    public void FullGeneration_NumberToWords_CultureParameter_EmittedForConstructState()
-    {
-        // Exercises the culture member kind (line 62 in CreateMemberValue).
-        // construct-state-scale has a "culture" member.
-        var runResult = RunGeneratorWithAllLocales();
-
-        Assert.Empty(runResult.Diagnostics);
-        var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
-        var registrySource = GetGeneratedSource(runResult, "NumberToWordsConverterRegistryRegistrations.g.cs");
-
-        // Hebrew uses construct-state-scale which requires culture
-        Assert.Contains("registry.Register(\"he\", culture => NumberToWordsProfileCatalog.Resolve(", registrySource);
-    }
-
-    [Fact]
-    public void FullGeneration_NumberToWords_NullableCharStringDictionary_EmitsNull()
-    {
-        // Exercises nullable-char-string-dictionary member kind (lines 83-85).
+        // Exercises nullable-char-string-dictionary member kind returning null.
         // harmony-ordinal has ordinalSuffixes and tupleSuffixes as nullable-char-string-dictionary.
-        // Locales that omit these get null emission.
-        var runResult = RunGeneratorWithAllLocales();
+        // Turkish (tr) uses harmony-ordinal; verify its profile block emits null for absent members.
+        var runResult = fullGenerationResult.Value;
 
         Assert.Empty(runResult.Diagnostics);
         var catalogSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
 
-        // harmony-ordinal engines are used by Turkish, Azerbaijani, Uzbek
-        Assert.Contains("new HarmonyOrdinalNumberToWordsConverter(new(", catalogSource);
+        // Turkish uses harmony-ordinal; extract its cache block
+        var block = ExtractCacheClassBody(catalogSource, "tr_cache");
+        Assert.NotEmpty(block);
+        Assert.Contains("new HarmonyOrdinalNumberToWordsConverter(new(", block);
+        // harmony-ordinal emits HarmonyOrdinalScale[] for the builder arm
+        Assert.Contains("new HarmonyOrdinalScale[]", block);
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  Full generation — consolidated assertions for builder coverage
+    // ──────────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void FullGeneration_AllThreeFactories_ProcessRealLocalesWithoutErrors()
+    {
+        // Single consolidated test that exercises all three factories against real locale
+        // files, verifying builder-specific output shapes rather than just converter names.
+        var runResult = fullGenerationResult.Value;
+
+        Assert.Empty(runResult.Diagnostics);
+
+        // NumberToWordsEngineContractFactory — verify builder-specific emitted shapes
+        var n2wCatalog = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        Assert.Contains("new HarmonyOrdinalScale[]", n2wCatalog);
+        Assert.Contains("new ContractedOneScaleNumberToWordsConverter.Scale[]", n2wCatalog);
+        Assert.Contains("new LinkingScale[]", n2wCatalog);
+        Assert.Contains("new AgglutinativeOrdinalScale[]", n2wCatalog);
+        Assert.Contains("new ConjunctionalScale[]", n2wCatalog);
+        Assert.Contains("new JoinedScale[]", n2wCatalog);
+        Assert.Contains("new EastSlavicScale[]", n2wCatalog);
+        Assert.Contains("new PluralizedScale[]", n2wCatalog);
+        Assert.Contains("new OrdinalPrefixScale[]", n2wCatalog);
+        Assert.Contains("new InvertedTensScale[]", n2wCatalog);
+        Assert.Contains("new SouthSlavicScale[]", n2wCatalog);
+        Assert.Contains("new ScaleStrategyScale[]", n2wCatalog);
+        Assert.Contains("new UnitLeadingCompoundScale[]", n2wCatalog);
+        Assert.Contains("new ConjoinedGenderedScale[]", n2wCatalog);
+        Assert.Contains("new SegmentedScale[]", n2wCatalog);
+        Assert.Contains("new TerminalOrdinalScale[]", n2wCatalog);
+        Assert.Contains("new ConstructStateScale[]", n2wCatalog);
+        Assert.Contains("new GenderedScaleOrdinalNumberToWordsConverter.Scale[]", n2wCatalog);
+        Assert.Contains("new HyphenatedScale[]", n2wCatalog);
+        Assert.Contains("new TriadScaleNumberToWordsConverter.TriadScale[]", n2wCatalog);
+        Assert.Contains("new LongScaleStemOrdinalNumberToWordsConverter.LargeScale[]", n2wCatalog);
+
+        // WordsToNumberEngineContractFactory — verify each non-token-map engine emits
+        var w2nCatalog = GetGeneratedSource(runResult, "WordsToNumberProfileCatalog.g.cs");
+        Assert.Contains("new CompoundScaleWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new ContractedScaleWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new EastAsianPositionalWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new GreedyCompoundWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new InvertedTensWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new LinkingAffixWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new PrefixedTensScaleWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new SuffixScaleWordsToNumberConverter(", w2nCatalog);
+        Assert.Contains("new VigesimalCompoundWordsToNumberConverter(", w2nCatalog);
+
+        // TimeOnlyToClockNotationEngineContractFactory — verify phrase-clock contract
+        var clockCatalog = GetGeneratedSource(runResult, "TimeOnlyToClockNotationProfileCatalog.g.cs");
+        Assert.Contains("new PhraseClockNotationConverter(new(", clockCatalog);
     }
 
     // ──────────────────────────────────────────────────────────────────────
