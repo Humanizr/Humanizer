@@ -42,19 +42,17 @@ public class TimeSpanHumanizeTailCoverageTests
     [Fact]
     public void MaxTimeSpan_WithMaxUnitMillisecond_ClampsToIntMax()
     {
-        // TimeSpan.MaxValue.TotalMilliseconds exceeds int range, (int)cast gives int.MaxValue
+        // TimeSpan.MaxValue.TotalMilliseconds exceeds int range, (int)cast saturates to int.MaxValue
         var actual = TimeSpan.MaxValue.Humanize(precision: 1, maxUnit: TimeUnit.Millisecond);
-        Assert.Contains("milliseconds", actual);
-        Assert.DoesNotContain("0 milliseconds", actual);
+        Assert.Equal("2147483647 milliseconds", actual);
     }
 
     [Fact]
     public void MaxTimeSpan_WithMaxUnitSecond_ClampsToIntMax()
     {
-        // TimeSpan.MaxValue.TotalSeconds exceeds int range, (int)cast gives int.MaxValue
+        // TimeSpan.MaxValue.TotalSeconds exceeds int range, (int)cast saturates to int.MaxValue
         var actual = TimeSpan.MaxValue.Humanize(precision: 1, maxUnit: TimeUnit.Second);
-        Assert.Contains("seconds", actual);
-        Assert.DoesNotContain("0 seconds", actual);
+        Assert.Equal("2147483647 seconds", actual);
     }
 
     // ---------------------------------------------------------------------------

@@ -384,7 +384,9 @@ public class WordsToNumberConverterTailCoverageTests
     [InlineData("3z")]
     public void Italian_InvalidOrdinalAbbreviation_ReturnsFalse(string words)
     {
-        Assert.False(words.TryToNumber(out _, It, out _));
+        Assert.False(words.TryToNumber(out var parsedNumber, It, out var unrecognizedWord));
+        Assert.Equal(0, parsedNumber);
+        Assert.Equal(words, unrecognizedWord);
     }
 
     // Negative Italian
@@ -454,13 +456,27 @@ public class WordsToNumberConverterTailCoverageTests
         Assert.Throws<ArgumentException>(() => "   ".ToNumber(Fil));
     }
 
-    // Teen prefix: "labing-isa" = 10 + 1 = 11 (teenPrefix = "labing", recursive parse "isa" = 1)
+    // Hyphenated teen forms: "labing-isa" normalizes to "labing isa" (two tokens),
+    // which parses via regular token accumulation (10+1=11), NOT the teen-prefix branch.
     [Theory]
     [InlineData("labing-isa", 11)]
     [InlineData("labing-dalawa", 12)]
     [InlineData("labing-tatlo", 13)]
     [InlineData("labing-siyam", 19)]
-    public void Filipino_TeenPrefix_Parsing(string words, long expected)
+    public void Filipino_TeenPrefix_HyphenatedForm(string words, long expected)
+    {
+        Assert.Equal(expected, words.ToNumber(Fil));
+    }
+
+    // Glued teen forms: "labingisa" stays as one token after normalization.
+    // token.StartsWith("labing") && token.Length > 6 enters the recursive teen-prefix branch
+    // at LinkingAffixWordsToNumberConverter line 94-99.
+    [Theory]
+    [InlineData("labingisa", 11)]
+    [InlineData("labingdalawa", 12)]
+    [InlineData("labingtatlo", 13)]
+    [InlineData("labingsiyam", 19)]
+    public void Filipino_TeenPrefix_GluedToken_ParsesRecursively(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Fil));
     }
