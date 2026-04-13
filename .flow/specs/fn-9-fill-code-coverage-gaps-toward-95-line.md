@@ -6,22 +6,7 @@ The merged multi-TFM coverage report at `artifacts/ci-coverage-report/Summary.tx
 
 Dependency on `fn-8-add-urdu-ur-locale-with-full-language`: fn-8.12–14 audit gender-bearing locale tests (cs, pl, ru, ar, he, hi). Because fn-9 contains no deferrals, fn-9 starts only after fn-8 closes — there is then no hold list; every shipping locale is fair game.
 
-**Branching model (stacked PR).** fn-9 ships as a separate pull request stacked on fn-8. Branch creation:
-
-```bash
-git fetch origin
-git checkout feat/urdu-locale              # fn-8's branch
-git checkout -b feat/coverage-gaps         # fn-9's branch
-```
-
-The fn-9 PR targets `feat/urdu-locale` as its base (not `main`). If fn-8 merges into `main` before fn-9 is ready, rebase onto main:
-
-```bash
-git fetch origin
-git rebase origin/main                     # after fn-8 merges
-```
-
-Until then, the PR diff shows only fn-9 changes on top of fn-8.
+**Branch:** `feat/urdu-locale` (shared with fn-8). fn-9 plan and implementation commits land on the same branch as fn-8.
 
 Baseline infrastructure already in place: xUnit v3 + Microsoft Testing Platform, `UseCultureAttribute`, Verify snapshots, `CSharpAnalyzerTest<,>` / `CSharpCodeFixTest<,,>` verifiers, `CSharpGeneratorDriver` pattern in source-generator tests, per-project `testconfig.json` listing four attribute exclusions (`DebuggerHiddenAttribute`, `DebuggerNonUserCodeAttribute`, `GeneratedCodeAttribute`, `ExcludeFromCodeCoverageAttribute`) and a cobertura module-path include filter. PR #1715 deliberately kept generated YAML tables in coverage — preserve that direction.
 
