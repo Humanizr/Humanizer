@@ -24,16 +24,16 @@ Enumerated all `src/Humanizer/Locales/*.yml` files (65 shipped locales). Cross-r
 | | pt-BR | masc/fem | (inherits pt) | ✅ Full | — | No numeric ordinal override |
 | | ro | masc/fem/neuter | template | ✅ Full (M/F/N) | — | al X-lea / a X-a / primul/prima |
 | | ca | masc/fem | template | ✅ Full (M/F/N) | — | -r/-n/-è (masc) / -a (fem) |
-| **Germanic** | de | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .12 (A) | All genders use "." — add explicit F/N |
-| | de-CH | masc/fem/neuter | (inherits de) | ⚠️ via inheritance | .12 (A) | Inherits de gap |
-| | de-LI | masc/fem/neuter | (inherits de) | ⚠️ via inheritance | .12 (A) | Inherits de gap |
-| | nl | common/neuter | suffix | ⚠️ masculineSuffix only | .12 (A) | All genders use "e" — add explicit F/N |
+| **Germanic** | de | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .12 filled | All genders use "." — explicit F/N added |
+| | de-CH | masc/fem/neuter | (inherits de) | ✅ Full via inheritance | — | Inherits de complete coverage |
+| | de-LI | masc/fem/neuter | (inherits de) | ✅ Full via inheritance | — | Inherits de complete coverage |
+| | nl | common/neuter | suffix | ✅ Full (M/F/N) | .12 filled | All genders use "e" — explicit F/N added |
 | | sv | common/neuter | modulo-suffix | ✅ No gender keys | — | ":e"/":a" by digit, not gender |
-| | da | common/neuter | suffix | ⚠️ masculineSuffix only | .12 (A) | All genders use "." — add explicit F/N |
-| | nb | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .12 (A) | All genders use "." — add explicit F/N |
+| | da | common/neuter | suffix | ✅ Full (M/F/N) | .12 filled | All genders use "." — explicit F/N added |
+| | nb | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .12 filled | All genders use "." — explicit F/N added |
 | | nn | masc/fem/neuter | (no ordinal section) | ✅ via inheritance | — | Inherits nb/default |
-| | is | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .12 (A) | All genders use "." — add explicit F/N |
-| | lb | masc/fem/neuter | suffix | ⚠️ masculineSuffix only | .12 (A) | All genders use "." — add explicit F/N |
+| | is | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .12 filled | All genders use "." — explicit F/N added |
+| | lb | masc/fem/neuter | suffix | ✅ Full (M/F/N) | .12 filled | All genders use "." — explicit F/N added |
 | | af | none (modern) | modulo-suffix | ✅ No gender keys | — | Afrikaans lost grammatical gender |
 | | en | none | modulo-suffix | ✅ No gender keys | — | th/st/nd/rd by digit |
 | | en-GB | none | (inherits en) | ✅ | — | |
