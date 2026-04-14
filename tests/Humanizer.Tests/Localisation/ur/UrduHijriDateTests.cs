@@ -96,6 +96,12 @@ public class UrduHijriDateTests
     public void HijriCalendar_UrIn_InheritsHijriMonths()
     {
         var urInHijri = (CultureInfo)new CultureInfo("ur-IN").Clone();
+
+        if (!urInHijri.OptionalCalendars.Any(static calendar => calendar is HijriCalendar))
+        {
+            Assert.Skip("HijriCalendar is not valid for ur-IN on this runtime (ICU); inheritance is only reachable on runtimes that allow HijriCalendar for ur-IN.");
+        }
+
         urInHijri.DateTimeFormat.Calendar = new HijriCalendar();
 
         var hijri = new HijriCalendar();
