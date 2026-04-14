@@ -575,9 +575,17 @@ public sealed partial class HumanizerSourceGenerator
                 builder.AppendLine(QuoteScalar(new SimpleYamlScalar(variantOf, true)));
             }
 
+            var hasInherits = root.GetScalar("inherits") is not null;
             var hasSurfaces = root.Values.Keys.Any(static key => key != "inherits");
             if (!hasSurfaces)
             {
+                if (hasInherits)
+                {
+                    return builder.ToString();
+                }
+
+                builder.AppendLine();
+                builder.AppendLine("surfaces: {}");
                 return builder.ToString();
             }
 

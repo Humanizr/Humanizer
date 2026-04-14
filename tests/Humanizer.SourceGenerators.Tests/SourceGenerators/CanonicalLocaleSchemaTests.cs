@@ -144,6 +144,22 @@ variantOf: 'nb'
     }
 
     [Fact]
+    public void CanonicalSchemaRejectsNullSurfacesValue()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces: null
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("surfaces", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void CanonicalSurfacesMaterializeIntoResolvedLocaleFeatures()
     {
         var catalog = CreateCatalog(
