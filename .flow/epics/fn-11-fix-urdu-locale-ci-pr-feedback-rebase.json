@@ -1,7 +1,7 @@
 {
   "branch_name": "feat/urdu-locale",
-  "completion_review_status": "unknown",
-  "completion_reviewed_at": null,
+  "completion_review_status": "ship",
+  "completion_reviewed_at": "2026-04-14T06:48:28.726206Z",
   "created_at": "2026-04-14T03:24:13.971690Z",
   "default_impl": null,
   "default_review": null,
@@ -12,7 +12,7 @@
   "plan_review_status": "ship",
   "plan_reviewed_at": "2026-04-14T05:07:27.383671Z",
   "spec_path": ".flow/specs/fn-11-fix-urdu-locale-ci-pr-feedback-rebase.md",
-  "status": "open",
+  "status": "done",
   "title": "Fix urdu-locale CI + PR feedback + rebase",
-  "updated_at": "2026-04-14T05:07:27.384001Z"
+  "updated_at": "2026-04-14T06:48:40.818480Z"
 }
