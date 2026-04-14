@@ -1,4 +1,4 @@
-namespace Humanizer.Tests.Localisation.Icelandic;
+namespace Humanizer.Tests.Localisation.@is;
 
 [UseCulture("is")]
 public class IcelandicGenderedOrdinalTests

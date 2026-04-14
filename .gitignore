@@ -126,3 +126,6 @@ scripts/ralph/logs/
 # Local agent workspace artifacts
 /.worktrees/
 /prompt-exports/
+
+# Claude session lock files (machine-specific)
+/.claude/*.lock
