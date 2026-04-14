@@ -40,17 +40,26 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
         var block = ResolveGenderBlock(effectiveGender);
 
         // Negative numbers: check the absolute magnitude against exact replacements.
-        // When found, delegate to the number-to-words converter's ConvertToOrdinal which
-        // already composes the locale's negative prefix with the irregular ordinal form.
-        // For non-exact negatives, the cardinal-plus-suffix path naturally includes the
-        // negative prefix from the converter.
+        // When found, compose the negative ordinal using the locale's negative prefix
+        // (extracted from the converter) plus the ordinalizer's own exact replacement.
+        // This ensures negative and positive irregulars both come from ExactReplacements.
         if (number < 0)
         {
             var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
             if (magnitude <= int.MaxValue
-                && block.ExactReplacements.TryGetValue((int)magnitude, out _))
+                && block.ExactReplacements.TryGetValue((int)magnitude, out var negExact))
             {
-                return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, effectiveGender);
+                var converter = Configurator.GetNumberToWordsConverter(culture);
+                var magnitudeCardinal = converter.Convert((int)magnitude, effectiveGender);
+                var negativeCardinal = converter.Convert(number, effectiveGender);
+
+                if (!negativeCardinal.EndsWith(magnitudeCardinal, StringComparison.Ordinal))
+                {
+                    throw new InvalidOperationException(
+                        $"Cannot extract negative prefix for culture '{culture.Name}' from number-word-suffix ordinalizer.");
+                }
+
+                return negativeCardinal[..^magnitudeCardinal.Length] + negExact;
             }
 
             var cardinal = Configurator.GetNumberToWordsConverter(culture).Convert(number, effectiveGender);

@@ -1,3 +1,5 @@
+using System.Collections.Frozen;
+
 namespace Humanizer.Tests.Localisation.ur;
 
 /// <summary>
@@ -150,6 +152,35 @@ public class UrduOrdinalTests
         Assert.Equal(expected, ordinalized);
         UrduBidiControlSweep.AssertNoBidiControls(toOrdinalWords);
         UrduBidiControlSweep.AssertNoBidiControls(ordinalized);
+    }
+
+    // --- Regression: negative irregulars must come from ordinalizer ExactReplacements, not converter ---
+
+    /// <summary>
+    /// Verifies the negative-irregular branch uses the ordinalizer's own ExactReplacements
+    /// (not the converter's ConvertToOrdinal). A sentinel value that differs from the converter's
+    /// output proves the ordinalizer path is taken. Before the fix, this test would return
+    /// "منفی پہلا" (converter-derived) instead of "منفی آزمائشی" (ordinalizer sentinel).
+    /// </summary>
+    [Fact]
+    public void NegativeExactReplacement_UsesOrdinalizerNotConverter()
+    {
+        var sentinel = "آزمائشی"; // "test" in Urdu — deliberately differs from converter's "پہلا"
+        var ordinalizer = new NumberWordSuffixOrdinalizer(
+            Ur,
+            new NumberWordSuffixOrdinalizer.Options(
+                Masculine: new NumberWordSuffixOrdinalizer.GenderBlock(
+                    "واں",
+                    new Dictionary<int, string> { [1] = sentinel }.ToFrozenDictionary()),
+                Feminine: new NumberWordSuffixOrdinalizer.GenderBlock(
+                    "ویں",
+                    FrozenDictionary<int, string>.Empty),
+                NeuterFallbackGender: GrammaticalGender.Masculine));
+
+        var result = ordinalizer.Convert(-1, "-1", GrammaticalGender.Masculine);
+
+        // Exact equality: locale's negative prefix "منفی " + ordinalizer's sentinel, not converter's ordinal
+        Assert.Equal("منفی " + sentinel, result);
     }
 
     // --- Regional variant resolution via parent culture walk ---
