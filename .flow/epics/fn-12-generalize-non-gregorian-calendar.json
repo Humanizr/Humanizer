@@ -1,0 +1,15 @@
+{
+  "branch_name": "fn-12-generalize-non-gregorian-calendar",
+  "created_at": "2026-04-14T04:02:21.327794Z",
+  "depends_on_epics": [
+    "fn-11-fix-urdu-locale-ci-pr-feedback-rebase"
+  ],
+  "id": "fn-12-generalize-non-gregorian-calendar",
+  "next_task": 1,
+  "plan_review_status": "unknown",
+  "plan_reviewed_at": null,
+  "spec_path": ".flow/specs/fn-12-generalize-non-gregorian-calendar.md",
+  "status": "open",
+  "title": "Generalize non-Gregorian calendar schema (hijri/hebrew/persian/etc.)",
+  "updated_at": "2026-04-14T04:03:02.872644Z"
+}

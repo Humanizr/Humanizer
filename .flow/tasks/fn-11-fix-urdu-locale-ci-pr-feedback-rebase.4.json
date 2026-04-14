@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-14T04:01:10.725668Z",
+  "depends_on": [
+    "fn-11-fix-urdu-locale-ci-pr-feedback-rebase.1"
+  ],
+  "epic": "fn-11-fix-urdu-locale-ci-pr-feedback-rebase",
+  "id": "fn-11-fix-urdu-locale-ci-pr-feedback-rebase.4",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-11-fix-urdu-locale-ci-pr-feedback-rebase.4.md",
+  "status": "todo",
+  "title": "Make 'surfaces:' optional when empty; strip from ur-PK/ur-IN/zh-CN",
+  "updated_at": "2026-04-14T04:01:34.313035Z"
+}
