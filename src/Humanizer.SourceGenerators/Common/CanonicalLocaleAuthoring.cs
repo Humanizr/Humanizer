@@ -77,13 +77,25 @@ public sealed partial class HumanizerSourceGenerator
                     $"Locale '{declaredLocale}' must match file locale '{localeCode}'.");
             }
 
+            var variantOf = root.GetScalar("variantOf");
+
+            SimpleYamlMapping surfaces;
             if (!root.TryGetValue("surfaces", out var surfacesValue))
             {
-                throw new InvalidOperationException(
-                    $"Locale '{localeCode}' must define required top-level property 'surfaces'.");
-            }
+                if (string.IsNullOrWhiteSpace(variantOf))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}' must define required top-level property 'surfaces'.");
+                }
 
-            if (surfacesValue is not SimpleYamlMapping surfaces)
+                surfaces = new SimpleYamlMapping(
+                    ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal));
+            }
+            else if (surfacesValue is SimpleYamlMapping surfacesMapping)
+            {
+                surfaces = surfacesMapping;
+            }
+            else
             {
                 throw new InvalidOperationException($"Locale '{localeCode}.surfaces' must be a mapping.");
             }
@@ -108,7 +120,7 @@ public sealed partial class HumanizerSourceGenerator
 
             return new CanonicalLocaleDocument(
                 localeCode,
-                root.GetScalar("variantOf"),
+                variantOf,
                 surfaces,
                 NormalizeCanonicalText(fileText));
         }
@@ -563,15 +575,13 @@ public sealed partial class HumanizerSourceGenerator
                 builder.AppendLine(QuoteScalar(new SimpleYamlScalar(variantOf, true)));
             }
 
-            builder.AppendLine();
-
             var hasSurfaces = root.Values.Keys.Any(static key => key != "inherits");
             if (!hasSurfaces)
             {
-                builder.AppendLine("surfaces: {}");
                 return builder.ToString();
             }
 
+            builder.AppendLine();
             builder.AppendLine("surfaces:");
             AppendMigratedSurface(builder, "list", root, "collectionFormatter", isCollectionFormatter: true);
             AppendMigratedFormatterSurface(builder, root);

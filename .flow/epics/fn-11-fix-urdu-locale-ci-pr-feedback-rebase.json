@@ -9,10 +9,10 @@
   "depends_on_epics": [],
   "id": "fn-11-fix-urdu-locale-ci-pr-feedback-rebase",
   "next_task": 1,
-  "plan_review_status": "unknown",
-  "plan_reviewed_at": null,
+  "plan_review_status": "ship",
+  "plan_reviewed_at": "2026-04-14T05:07:27.383671Z",
   "spec_path": ".flow/specs/fn-11-fix-urdu-locale-ci-pr-feedback-rebase.md",
   "status": "open",
   "title": "Fix urdu-locale CI + PR feedback + rebase",
-  "updated_at": "2026-04-14T04:02:19.432169Z"
+  "updated_at": "2026-04-14T05:07:27.384001Z"
 }

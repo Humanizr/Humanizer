@@ -21,3 +21,6 @@ When adding a new optional calendar surface (like hijriMonths), the emitter in O
 
 ## 2026-04-13 manual [convention]
 For ordinalizer engines that call other resolvers internally (e.g. number-word-suffix calls NumberToWords), RequiresCulture must be intrinsic to the engine name — culture binding is a structural requirement of the engine, not just an author-configured flag
+
+## 2026-04-14 manual [convention]
+When parallel tasks feed into a final integration/verification step, create a separate closeout task with explicit deps on all parallel tasks — do not dual-purpose an implementation task as both parallel work and sequential closeout

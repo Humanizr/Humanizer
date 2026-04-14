@@ -43,7 +43,7 @@ surfaces:
       scales: []
 """));
 
-        var missingSurfaces = CreateCatalog(
+        var missingSurfacesNonVariant = CreateCatalog(
             ("zz", "locale: 'zz'"));
 
         var legacyTopLevel = CreateCatalog(
@@ -60,7 +60,7 @@ numberToWords:
                 diagnostic.GetMessage().Contains("required top-level property 'locale'", StringComparison.Ordinal));
 
         Assert.Contains(
-            missingSurfaces.Diagnostics,
+            missingSurfacesNonVariant.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
                 diagnostic.GetMessage().Contains("required top-level property 'surfaces'", StringComparison.Ordinal));
 
@@ -68,6 +68,79 @@ numberToWords:
             legacyTopLevel.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
                 diagnostic.GetMessage().Contains("unsupported top-level property 'numberToWords'", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void VariantWithoutSurfacesKeySucceedsAndInheritsParentFeatures()
+    {
+        var catalog = CreateCatalog(
+            ("nb", """
+locale: 'nb'
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'og'
+  number:
+    words:
+      engine: 'scale-strategy'
+      cardinalStrategy: 'standard'
+      ordinalStrategy: 'standard'
+      maximumValue: 2147483647
+      defaultGender: 'masculine'
+      zeroWord: 'null'
+      minusWord: 'minus'
+      oneDefault: 'en'
+      oneMasculine: 'en'
+      oneFeminine: 'ei'
+      oneNeuter: 'ett'
+      tensJoiner: ''
+      largeScaleRemainderJoiner: ''
+      exactLargeScaleOrdinalSuffix: ''
+      exactDefaultOrdinalSuffix: ''
+      tensOrdinalTrimEndCharacters: ''
+      tensOrdinalSuffix: 'ende'
+      shortOrdinalUpperBoundExclusive: 20
+      shortOrdinalTrimEndCharacters: ''
+      shortOrdinalTrimmedSuffix: ''
+      shortOrdinalSuffix: '.'
+      hundredWord: 'hundre'
+      hundredCompositeSingularWord: 'hundre'
+      thousandWord: 'tusen'
+      thousandSingularWord: 'tusen'
+      thousandCompositeSingularWord: 'tusen'
+      unitsMap: ['null', 'en']
+      tensMap: ['null', 'ti']
+      hundredUnitMap: ['null', 'ett']
+      scales: []
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        en: 1
+"""),
+            ("nn", """
+locale: 'nn'
+variantOf: 'nb'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var nynorsk = catalog.Locales.Single(static locale => locale.LocaleCode == "nn");
+        Assert.Equal("conjunction", nynorsk.CollectionFormatter!.Kind);
+        Assert.Equal("scale-strategy", GetRequiredString(nynorsk.NumberToWords!, "engine"));
+        Assert.Equal("token-map", GetRequiredString(nynorsk.WordsToNumber!, "engine"));
+    }
+
+    [Fact]
+    public void NonVariantWithoutSurfacesKeyFails()
+    {
+        var catalog = CreateCatalog(
+            ("zz", "locale: 'zz'"));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("required top-level property 'surfaces'", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -388,6 +461,23 @@ headings:
         Assert.Contains("number:", canonicalYaml, StringComparison.Ordinal);
         Assert.Contains("words:", canonicalYaml, StringComparison.Ordinal);
         Assert.Contains("ordinal:", canonicalYaml, StringComparison.Ordinal);
+        Assert.Equal(NormalizeNewlines(canonicalYaml), NormalizeNewlines(roundTrippedYaml));
+    }
+
+    [Fact]
+    public void LegacyMigrationOmitsSurfacesForNoDeltaVariants()
+    {
+        const string legacyLocale = """
+inherits: 'fr'
+""";
+
+        var canonicalYaml = HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml("fr-BE", legacyLocale);
+        var canonicalDocument = HumanizerSourceGenerator.CanonicalLocaleAuthoring.Parse("fr-BE", canonicalYaml);
+        var roundTrippedYaml = HumanizerSourceGenerator.CanonicalLocaleAuthoring.Emit(canonicalDocument);
+
+        Assert.Contains("locale: 'fr-BE'", canonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("variantOf: 'fr'", canonicalYaml, StringComparison.Ordinal);
+        Assert.DoesNotContain("surfaces", canonicalYaml, StringComparison.Ordinal);
         Assert.Equal(NormalizeNewlines(canonicalYaml), NormalizeNewlines(roundTrippedYaml));
     }
 

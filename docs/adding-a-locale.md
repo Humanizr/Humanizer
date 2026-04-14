@@ -88,7 +88,7 @@ The canonical locale shape is exact. A locale file contains:
 
 1. `locale`
 2. optional `variantOf`
-3. `surfaces`
+3. `surfaces` (required for non-variant locales; optional for variant locales with no overrides)
 
 Under `surfaces`, the canonical members are exactly:
 
@@ -188,7 +188,7 @@ Rules for authoring:
 
 ## Canonical Locale Skeleton
 
-Use this as the complete structural skeleton for a locale file. Every block is optional except `locale` and `surfaces`, but no other top-level or surface names are valid.
+Use this as the complete structural skeleton for a locale file. Every block is optional except `locale`, and `surfaces` is required for non-variant locales. Variant locales (those with `variantOf`) may omit `surfaces` entirely when they have no overrides. No other top-level or surface names are valid.
 
 ```yaml
 locale: '<locale>'
@@ -281,6 +281,13 @@ surfaces:
   compass:
     full: []
     short: []
+```
+
+A no-delta variant locale (one that inherits everything from its parent with no overrides) is just two lines:
+
+```yaml
+locale: '<locale>'
+variantOf: '<parent-locale>'
 ```
 
 ## Inheritance Rules

@@ -21,7 +21,7 @@ They are not parsed at runtime.
 3. Top-level properties are limited to:
    - `locale`
    - `variantOf`
-   - `surfaces`
+   - `surfaces` (required for non-variant locales; optional for variant locales with no overrides)
 4. Canonical surface names under `surfaces` are limited to:
    - `list`
    - `formatter`
@@ -1835,7 +1835,7 @@ Before creating a new regional variant file:
 
 A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
 
-**Exception for no-delta regional variants:** A parity epic may ship minimum-valid no-delta variant files (`locale:` + `variantOf:` + `surfaces: {}`) when first-class matrix/sweep coverage is required. This makes the regional culture explicit in `LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests` rather than relying on implicit culture fallback. The no-delta file inherits all surfaces from the parent and produces identical output; its purpose is registry presence and test matrix coverage, not linguistic differentiation. Examples: `ur-PK.yml` and `ur-IN.yml` ship as no-delta variants of `ur.yml`.
+**Exception for no-delta regional variants:** A parity epic may ship minimum-valid no-delta variant files (`locale:` + `variantOf:`) when first-class matrix/sweep coverage is required. This makes the regional culture explicit in `LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests` rather than relying on implicit culture fallback. The no-delta file inherits all surfaces from the parent and produces identical output; its purpose is registry presence and test matrix coverage, not linguistic differentiation. The `surfaces` key may be omitted entirely for these files. Examples: `ur-PK.yml` and `ur-IN.yml` ship as no-delta variants of `ur.yml`.
 
 Examples in the current repo:
 
