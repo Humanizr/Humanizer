@@ -93,3 +93,6 @@ Arabic-script locales (Urdu, Persian, Pashto, etc.) use visually similar but dis
 
 ## 2026-04-13 manual [pitfall]
 Indo-Aryan languages (Urdu, Hindi) use singular-plural (one/other) plural rules, not arabic-like — using the wrong plural detector produces incorrect resource keys for phrases
+
+## 2026-04-14 manual [pitfall]
+When relaxing a schema constraint for a specific condition (e.g. variants), audit ALL code paths that produce output under the old constraint — migration/emitter paths may also need the same condition guard, not just the parser.
