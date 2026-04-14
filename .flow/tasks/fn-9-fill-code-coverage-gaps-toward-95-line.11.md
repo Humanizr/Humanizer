@@ -43,9 +43,8 @@ Enforce the hard coverage gate in CI via a dedicated gate script that parses Rep
 - [ ] No gate-level line-range subtraction, no per-class carve-out list; the gate is exactly the numbers `Summary.xml` publishes.
 
 ## Done summary
-_To be filled on completion._
-
+Added coverage gate script (scripts/coverage-gate.ps1) that enforces per-assembly thresholds by parsing ReportGenerator's Summary.xml, with unit tests covering all failure axes via synthesized XML fixtures, wired into azure-pipelines.yml after ReportGenerator, and updated CLAUDE.md/AGENTS.md/docs/adding-a-locale.md to reference the gate-script header as the canonical source of threshold numbers.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 5b6b3b9dd02ffd0a21e54f2f1a5de5120f6dabc7, 3294e97a114011f45db47255a4fcdd16a8d4f666
+- Tests: pwsh scripts/coverage-gate.Tests.ps1
 - PRs:
