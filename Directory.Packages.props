@@ -20,6 +20,6 @@
     <PackageVersion Include="System.Text.Json" Version="$(SystemDependencyVersion)" />
     <PackageVersion Include="Verify.DiffPlex" Version="3.1.2" />
     <PackageVersion Include="Verify.XunitV3" Version="31.15.0" />
-    <PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2" />
+    <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.0-pre.81" />
   </ItemGroup>
 </Project>
