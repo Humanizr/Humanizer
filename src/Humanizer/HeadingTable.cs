@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Humanizer;
 
 sealed class HeadingTable(string[] full, string[] shortForms)

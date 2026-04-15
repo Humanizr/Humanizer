@@ -6,12 +6,11 @@ root = true
 [*]
 indent_style = space
 
-
 [*.cs]
 indent_size = 4
 charset = utf-8
 tab_width = 4
-end_of_line = crlf
+end_of_line = lf
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 dotnet_style_coalesce_expression = true:suggestion
 dotnet_style_null_propagation = true:suggestion
