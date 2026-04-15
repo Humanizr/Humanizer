@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.Linq;
 using System.Text.Json;
 
 namespace Humanizer.SourceGenerators;

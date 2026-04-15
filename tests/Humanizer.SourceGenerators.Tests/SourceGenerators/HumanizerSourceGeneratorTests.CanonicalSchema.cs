@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 using Xunit;
 
 namespace Humanizer.SourceGenerators.Tests;
