@@ -77,15 +77,21 @@
     <ItemGroup>
       <AnalyzerRoslynVersion Include="3.8;4.8;4.14" />
       <AnalyzerVariantProject Include="@(AnalyzerRoslynVersion -> '$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\Humanizer.Analyzers.csproj')">
-        <AdditionalProperties>RoslynVersion=%(AnalyzerRoslynVersion.Identity);AnalyzerVariant=roslyn%(AnalyzerRoslynVersion.Identity)</AdditionalProperties>
+        <AdditionalProperties>RoslynVersion=%(AnalyzerRoslynVersion.Identity);AnalyzerVariant=roslyn%(AnalyzerRoslynVersion.Identity);MSBuildProjectExtensionsPath=$(ArtifactsPath)\obj\Humanizer.Analyzers\$(Configuration.ToLowerInvariant())_roslyn%(AnalyzerRoslynVersion.Identity)\</AdditionalProperties>
       </AnalyzerVariantProject>
     </ItemGroup>
 
     <MSBuild
       Projects="@(AnalyzerVariantProject)"
-      Targets="Build"
+      Targets="Restore"
       RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
       Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks="
+      BuildInParallel="true" />
+    <MSBuild
+      Projects="@(AnalyzerVariantProject)"
+      Targets="Build"
+      RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
+      Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks=;BuildAnalyzerVariantsRestored=true"
       BuildInParallel="true" />
   </Target>
 </Project>
