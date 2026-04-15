@@ -18,6 +18,7 @@
     <AnalysisMode>Minimum</AnalysisMode>
     <AnalysisLevel>latest</AnalysisLevel>
     <UseArtifactsOutput>true</UseArtifactsOutput>
+    <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
   </PropertyGroup>
 
   <PropertyGroup>
