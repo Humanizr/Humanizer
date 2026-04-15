@@ -17,16 +17,19 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
     <File Path="Directory.Packages.props" />
-    <File Path="Directory.Solution.targets" />
     <File Path="ResXManager.config.xml" />
     <File Path="nuget.config" />
     <File Path="src/scripts/split-benchmark-results.ps1" />
   </Folder>
   <Project Path="src/Benchmarks/Benchmarks.csproj" />  
-  <Project Path="src/Humanizer.Analyzers/Humanizer.Analyzers.csproj" />  
+  <Project Path="src/Humanizer.Analyzers/Humanizer.Analyzers.Roslyn38.csproj" />
+  <Project Path="src/Humanizer.Analyzers/Humanizer.Analyzers.Roslyn48.csproj" />
+  <Project Path="src/Humanizer.Analyzers/Humanizer.Analyzers.Roslyn414.csproj" />
   <Project Path="src/Humanizer.SourceGenerators/Humanizer.SourceGenerators.csproj" />
   <Project Path="src/Humanizer/Humanizer.csproj" />
-  <Project Path="tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj" />
+  <Project Path="tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn38.csproj" />
+  <Project Path="tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn48.csproj" />
+  <Project Path="tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn414.csproj" />
   <Project Path="tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj" />
   <Project Path="tests/Humanizer.Tests/Humanizer.Tests.csproj" />
 </Solution>

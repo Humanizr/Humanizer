@@ -21,7 +21,9 @@ dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework n
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net48  # Windows only
 
 # Run analyzer tests
-dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj
+dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn38.csproj
+dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn48.csproj
+dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn414.csproj
 
 # Run source generator tests
 dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj
