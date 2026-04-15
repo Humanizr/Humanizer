@@ -400,7 +400,7 @@ If the task is locale parity work, the workflow is stricter than "edit YAML and 
 You must:
 
 1. produce a preflight gap report for every canonical surface
-2. maintain a parity map artifact under `artifacts/`
+2. maintain a parity map artifact under `artifacts/` (local-only; the directory is gitignored — do not commit it)
 3. keep an effective-gap summary and drive it to empty
 4. record a before/after parity delta and drive the final unresolved set to empty
 5. add a closeout line for every canonical surface with ownership path and proof

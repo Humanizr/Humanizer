@@ -70,7 +70,7 @@ Create a parity map artifact at:
 
 `artifacts/YYYY-MM-DD-<locale>-parity-map.md`
 
-Parity map artifacts and audit artifacts under `artifacts/` are committed to source control so they are available to downstream tasks and reviewers throughout the epic.
+The `artifacts/` directory is local-only and gitignored. Parity map and audit artifacts live there as working scratch files for the duration of the epic. Do not commit them. Anything that needs to outlive the epic belongs in `docs/`, the spec, or the test suite as proof.
 
 Build the parity map as a concrete table, not notes. Use at least these columns:
 
@@ -297,7 +297,7 @@ Do not say the locale is complete until all of these are true:
 - new locale-owned terms were reviewed by both a proposer subagent and a native-speaker reviewer subagent, and any disagreements were resolved before landing
 - representative composed runtime outputs were reviewed for naturalness when new locale-owned wording was introduced
 - the reviewer evidence records confidence and limitations, and the reviewer did not disclaim the ability to judge native naturalness
-- the parity map artifact exists under `artifacts/` and every shipped localized surface for the locale is accounted for there
+- the parity map artifact exists locally under `artifacts/` (gitignored, not committed) and every shipped localized surface for the locale is accounted for there
 - the preflight gap report exists and the final before/after parity delta shows an empty unresolved set
 - every canonical surface and required proof subrow has a concrete closeout entry with proof, not just an implementation note
 - no canonical surface or required proof subrow has `proof kind: generic fallback`

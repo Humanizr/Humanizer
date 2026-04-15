@@ -54,7 +54,7 @@ Create and maintain a working artifact at:
 
 `artifacts/YYYY-MM-DD-<locale>-parity-map.md`
 
-This file is committed to source control so downstream tasks and reviewers can reference it throughout the epic. It is the working proof that the locale has been audited across all shipped localized surfaces.
+The `artifacts/` directory is local-only and gitignored — do not commit this file. It is the working proof that the locale has been audited across all shipped localized surfaces; the audit's lasting evidence belongs in the spec and tests.
 
 Use this table shape:
 
