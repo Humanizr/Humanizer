@@ -43,7 +43,7 @@ surfaces:
       scales: []
 """));
 
-        var missingSurfaces = CreateCatalog(
+        var missingSurfacesNonVariant = CreateCatalog(
             ("zz", "locale: 'zz'"));
 
         var legacyTopLevel = CreateCatalog(
@@ -60,7 +60,7 @@ numberToWords:
                 diagnostic.GetMessage().Contains("required top-level property 'locale'", StringComparison.Ordinal));
 
         Assert.Contains(
-            missingSurfaces.Diagnostics,
+            missingSurfacesNonVariant.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
                 diagnostic.GetMessage().Contains("required top-level property 'surfaces'", StringComparison.Ordinal));
 
@@ -68,6 +68,95 @@ numberToWords:
             legacyTopLevel.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
                 diagnostic.GetMessage().Contains("unsupported top-level property 'numberToWords'", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void VariantWithoutSurfacesKeySucceedsAndInheritsParentFeatures()
+    {
+        var catalog = CreateCatalog(
+            ("nb", """
+locale: 'nb'
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'og'
+  number:
+    words:
+      engine: 'scale-strategy'
+      cardinalStrategy: 'standard'
+      ordinalStrategy: 'standard'
+      maximumValue: 2147483647
+      defaultGender: 'masculine'
+      zeroWord: 'null'
+      minusWord: 'minus'
+      oneDefault: 'en'
+      oneMasculine: 'en'
+      oneFeminine: 'ei'
+      oneNeuter: 'ett'
+      tensJoiner: ''
+      largeScaleRemainderJoiner: ''
+      exactLargeScaleOrdinalSuffix: ''
+      exactDefaultOrdinalSuffix: ''
+      tensOrdinalTrimEndCharacters: ''
+      tensOrdinalSuffix: 'ende'
+      shortOrdinalUpperBoundExclusive: 20
+      shortOrdinalTrimEndCharacters: ''
+      shortOrdinalTrimmedSuffix: ''
+      shortOrdinalSuffix: '.'
+      hundredWord: 'hundre'
+      hundredCompositeSingularWord: 'hundre'
+      thousandWord: 'tusen'
+      thousandSingularWord: 'tusen'
+      thousandCompositeSingularWord: 'tusen'
+      unitsMap: ['null', 'en']
+      tensMap: ['null', 'ti']
+      hundredUnitMap: ['null', 'ett']
+      scales: []
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        en: 1
+"""),
+            ("nn", """
+locale: 'nn'
+variantOf: 'nb'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var nynorsk = catalog.Locales.Single(static locale => locale.LocaleCode == "nn");
+        Assert.Equal("conjunction", nynorsk.CollectionFormatter!.Kind);
+        Assert.Equal("scale-strategy", GetRequiredString(nynorsk.NumberToWords!, "engine"));
+        Assert.Equal("token-map", GetRequiredString(nynorsk.WordsToNumber!, "engine"));
+    }
+
+    [Fact]
+    public void NonVariantWithoutSurfacesKeyFails()
+    {
+        var catalog = CreateCatalog(
+            ("zz", "locale: 'zz'"));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("required top-level property 'surfaces'", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CanonicalSchemaRejectsNullSurfacesValue()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces: null
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("surfaces", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -392,6 +481,23 @@ headings:
     }
 
     [Fact]
+    public void LegacyMigrationOmitsSurfacesForNoDeltaVariants()
+    {
+        const string legacyLocale = """
+inherits: 'fr'
+""";
+
+        var canonicalYaml = HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml("fr-BE", legacyLocale);
+        var canonicalDocument = HumanizerSourceGenerator.CanonicalLocaleAuthoring.Parse("fr-BE", canonicalYaml);
+        var roundTrippedYaml = HumanizerSourceGenerator.CanonicalLocaleAuthoring.Emit(canonicalDocument);
+
+        Assert.Contains("locale: 'fr-BE'", canonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("variantOf: 'fr'", canonicalYaml, StringComparison.Ordinal);
+        Assert.DoesNotContain("surfaces", canonicalYaml, StringComparison.Ordinal);
+        Assert.Equal(NormalizeNewlines(canonicalYaml), NormalizeNewlines(roundTrippedYaml));
+    }
+
+    [Fact]
     public void VariantInheritanceMustStayWithinTheSameLanguageFamily()
     {
         var catalog = CreateCatalog(
@@ -502,6 +608,34 @@ surfaces:
     }
 
     [Fact]
+    public void NumberWordSuffixOrdinalizerEngineResolvesAsGeneratedProfile()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      masculine:
+        defaultSuffix: 'x'
+        exactReplacements:
+          1: 'first'
+      feminine:
+        defaultSuffix: 'y'
+        exactReplacements:
+          1: 'primera'
+      neuterFallback: 'masculine'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var locale = catalog.Locales.Single();
+        Assert.NotNull(locale.Ordinalizer);
+        Assert.True(locale.Ordinalizer!.UsesGeneratedProfile);
+    }
+
+    [Fact]
     public void SemanticDiffIgnoresEquivalentCanonicalStructureButDetectsBehaviorChanges()
     {
         const string left = """
@@ -585,6 +719,203 @@ surfaces:
 
             Assert.Equal(NormalizeNewlines(fileText), NormalizeNewlines(emitted));
         }
+    }
+
+    [Fact]
+    public void CalendarSurface_AcceptsHijriMonths()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+      - 'Jan'
+      - 'Feb'
+      - 'Mar'
+      - 'Apr'
+      - 'May'
+      - 'Jun'
+      - 'Jul'
+      - 'Aug'
+      - 'Sep'
+      - 'Oct'
+      - 'Nov'
+      - 'Dec'
+    hijriMonths:
+      - 'Muharram'
+      - 'Safar'
+      - 'Rabi1'
+      - 'Rabi2'
+      - 'Jumada1'
+      - 'Jumada2'
+      - 'Rajab'
+      - 'Shaban'
+      - 'Ramadan'
+      - 'Shawwal'
+      - 'DhulQadah'
+      - 'DhulHijjah'
+  ordinal:
+    date:
+      pattern: '{day} MMMM، yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM، yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var locale = catalog.Locales.Single();
+        Assert.NotNull(locale.Calendar);
+    }
+
+    [Fact]
+    public void CalendarSurface_RejectsHijriMonthsWithWrongLength()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+      - 'Jan'
+      - 'Feb'
+      - 'Mar'
+      - 'Apr'
+      - 'May'
+      - 'Jun'
+      - 'Jul'
+      - 'Aug'
+      - 'Sep'
+      - 'Oct'
+      - 'Nov'
+      - 'Dec'
+    hijriMonths:
+      - 'Muharram'
+      - 'Safar'
+      - 'Rabi1'
+"""));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("hijriMonths", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("exactly 12", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CalendarSurface_ExistingLocalesUnaffectedByHijriMonthsAddition()
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+        Assert.Empty(catalog.Diagnostics);
+
+        foreach (var locale in catalog.Locales)
+        {
+            if (locale.Calendar is null)
+            {
+                continue;
+            }
+
+            Assert.NotNull(locale.Calendar);
+        }
+    }
+
+    [Fact]
+    public void CalendarSurface_UrduHijriMonthsResolvedCorrectly()
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+        Assert.Empty(catalog.Diagnostics);
+
+        var ur = catalog.Locales.Single(static l => l.LocaleCode == "ur");
+        Assert.NotNull(ur.Calendar);
+        Assert.True(ur.Calendar!.TryGetValue("hijriMonths", out var hijriValue));
+        var hijriSeq = Assert.IsType<HumanizerSourceGenerator.SimpleYamlSequence>(hijriValue);
+        Assert.Equal(12, hijriSeq.Items.Length);
+    }
+
+    [Theory]
+    [InlineData("words", "number.words")]
+    [InlineData("parse", "number.parse")]
+    [InlineData("formatting", "number.formatting")]
+    public void CanonicalSchemaRejectsScalarValueForNumberChildBlock(string childProperty, string expectedPath)
+    {
+        var yaml = $"""
+locale: 'zz'
+surfaces:
+  number:
+    {childProperty}: 'oops'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedPath, StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
+    [Theory]
+    [InlineData("numeric", "ordinal.numeric")]
+    [InlineData("date", "ordinal.date")]
+    [InlineData("dateOnly", "ordinal.dateOnly")]
+    public void CanonicalSchemaRejectsScalarValueForOrdinalChildBlock(string childProperty, string expectedPath)
+    {
+        var yaml = $"""
+locale: 'zz'
+surfaces:
+  ordinal:
+    {childProperty}: 'oops'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedPath, StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CanonicalSchemaRejectsSequenceValueForNumberWordsBlock()
+    {
+        var yaml = """
+locale: 'zz'
+surfaces:
+  number:
+    words:
+      - 'one'
+      - 'two'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("number.words", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CanonicalSchemaRejectsSequenceValueForOrdinalNumericBlock()
+    {
+        var yaml = """
+locale: 'zz'
+surfaces:
+  ordinal:
+    numeric:
+      - 'first'
+      - 'second'
+""";
+
+        var catalog = CreateCatalog(("zz", yaml));
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("ordinal.numeric", StringComparison.Ordinal) &&
+                diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
     }
 
     static string GetRequiredString(HumanizerSourceGenerator.LocaleFeature feature, string propertyName) =>

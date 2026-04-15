@@ -8,6 +8,7 @@
 //   dotnet run tools/locale-probe.cs > locale-probe-macos.tsv
 //   dotnet run tools/locale-probe.cs --json > locale-probe-macos.json
 //   dotnet run tools/locale-probe.cs --failing   (only show known-failing locales)
+//   dotnet run tools/locale-probe.cs -- ur ur-PK ur-IN   (probe specific locales)
 
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -27,13 +28,14 @@ var framework = RuntimeInformation.FrameworkDescription;
 static string ToVisibleText(string value) =>
     new(value.Where(ch => CharUnicodeInfo.GetUnicodeCategory(ch) != UnicodeCategory.Format).ToArray());
 
-// All 62 shipped locales
+// All 65 shipped locales
 string[] allLocales = [
     "af", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "de-CH", "de-LI",
     "el", "en", "en-GB", "en-IN", "en-US", "es", "fa", "fi", "fil", "fr",
     "fr-BE", "fr-CH", "he", "hr", "hu", "hy", "id", "is", "it", "ja", "ko",
     "ku", "lb", "lt", "lv", "ms", "mt", "nb", "nl", "nn", "pl", "pt", "pt-BR",
     "ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "ta", "th", "tr", "uk",
+    "ur", "ur-IN", "ur-PK",
     "uz-Cyrl-UZ", "uz-Latn-UZ", "vi", "zh-CN", "zh-Hans", "zh-Hant", "zu-ZA"
 ];
 
@@ -44,7 +46,8 @@ string[] failingLocales = [
     "zh-CN", "zh-Hans", "zu-ZA"
 ];
 
-var locales = onlyFailing ? failingLocales : allLocales;
+var positionalLocales = args.Where(a => !a.StartsWith("--")).ToArray();
+var locales = positionalLocales.Length > 0 ? positionalLocales : onlyFailing ? failingLocales : allLocales;
 
 // Reference dates (matching test data in LocaleCoverageData.cs)
 var dates = new (string Label, int Y, int M, int D)[]

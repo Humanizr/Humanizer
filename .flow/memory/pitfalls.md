@@ -75,3 +75,24 @@ When documenting parse vs format path boundaries, verify each consumer individua
 
 ## 2026-04-10 manual [pitfall]
 When editing JSON config files, never add or preserve // comments -- standard JSON does not support comments and parsers will reject the file silently
+
+## 2026-04-12 manual [pitfall]
+When committing artifacts under a gitignored directory (e.g. artifacts/), RepoPrompt cannot resolve the file path even if git add -f was used -- the workspace resolver reads .gitignore. Either move the file outside the gitignored path or add a negation rule to .gitignore.
+
+## 2026-04-13 manual [pitfall]
+Locales with dense number maps still need exactReplacements for irregular ordinals (e.g. Urdu 4th/6th/9th have different stems than their cardinals) — suffix-only ordinals produce wrong forms for these
+
+## 2026-04-13 manual [pitfall]
+When adding a new ordinalizer/converter engine that internally calls another resolver (e.g. NumberToWords), make culture binding intrinsic in RequiresCulture based on engine name -- do not rely solely on an author-supplied useCulture YAML flag
+
+## 2026-04-13 manual [pitfall]
+When extending a code-generation pipeline with a new optional data field, ensure the emitter handles the new field independently of existing fields — do not nest emission under an existing field's guard (e.g. hijriMonths silently dropped when months absent)
+
+## 2026-04-13 manual [pitfall]
+Arabic-script locales (Urdu, Persian, Pashto, etc.) use visually similar but distinct Unicode code points from Arabic — do not copy-paste Arabic locale data without substituting code points like U+06C1/U+0647, U+06CC/U+064A, U+06A9/U+0643
+
+## 2026-04-13 manual [pitfall]
+Indo-Aryan languages (Urdu, Hindi) use singular-plural (one/other) plural rules, not arabic-like — using the wrong plural detector produces incorrect resource keys for phrases
+
+## 2026-04-14 manual [pitfall]
+When relaxing a schema constraint for a specific condition (e.g. variants), audit ALL code paths that produce output under the old constraint — migration/emitter paths may also need the same condition guard, not just the parser.

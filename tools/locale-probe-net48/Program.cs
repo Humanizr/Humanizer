@@ -24,6 +24,7 @@ internal static class Program
         "fr-BE", "fr-CH", "he", "hr", "hu", "hy", "id", "is", "it", "ja", "ko",
         "ku", "lb", "lt", "lv", "ms", "mt", "nb", "nl", "nn", "pl", "pt", "pt-BR",
         "ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "ta", "th", "tr", "uk",
+        "ur", "ur-IN", "ur-PK",
         "uz-Cyrl-UZ", "uz-Latn-UZ", "vi", "zh-CN", "zh-Hans", "zh-Hant", "zu-ZA"
     };
 
@@ -61,8 +62,9 @@ internal static class Program
     {
         var jsonMode = args.Contains("--json");
         var onlyFailing = args.Contains("--failing");
+        var positionalLocales = args.Where(a => !a.StartsWith("--")).ToArray();
 
-        var locales = onlyFailing ? FailingLocales : AllLocales;
+        var locales = positionalLocales.Length > 0 ? positionalLocales : onlyFailing ? FailingLocales : AllLocales;
 
         Console.OutputEncoding = Encoding.UTF8;
 

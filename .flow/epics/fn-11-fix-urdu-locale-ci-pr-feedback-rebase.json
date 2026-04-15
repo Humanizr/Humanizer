@@ -1,0 +1,18 @@
+{
+  "branch_name": "feat/urdu-locale",
+  "completion_review_status": "ship",
+  "completion_reviewed_at": "2026-04-14T06:48:28.726206Z",
+  "created_at": "2026-04-14T03:24:13.971690Z",
+  "default_impl": null,
+  "default_review": null,
+  "default_sync": null,
+  "depends_on_epics": [],
+  "id": "fn-11-fix-urdu-locale-ci-pr-feedback-rebase",
+  "next_task": 1,
+  "plan_review_status": "ship",
+  "plan_reviewed_at": "2026-04-14T05:07:27.383671Z",
+  "spec_path": ".flow/specs/fn-11-fix-urdu-locale-ci-pr-feedback-rebase.md",
+  "status": "done",
+  "title": "Fix urdu-locale CI + PR feedback + rebase",
+  "updated_at": "2026-04-14T06:48:40.818480Z"
+}

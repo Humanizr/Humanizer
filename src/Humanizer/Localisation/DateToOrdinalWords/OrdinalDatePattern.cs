@@ -29,7 +29,8 @@ sealed class OrdinalDatePattern(
     OrdinalDateDayMode dayMode,
     OrdinalDateCalendarMode calendarMode = OrdinalDateCalendarMode.Gregorian,
     string[]? months = null,
-    string[]? monthsGenitive = null)
+    string[]? monthsGenitive = null,
+    string[]? hijriMonths = null)
 {
     const string DayPlaceholder = "{day}";
     const string DayMarker = "<<DAY>>";
@@ -44,6 +45,7 @@ sealed class OrdinalDatePattern(
     readonly OrdinalDateCalendarMode calendarMode = calendarMode;
     readonly string[]? months = months;
     readonly string[]? monthsGenitive = monthsGenitive;
+    readonly string[]? hijriMonths = hijriMonths;
 
     /// <summary>
     /// Formats the pattern for the specified date.
@@ -52,9 +54,11 @@ sealed class OrdinalDatePattern(
     public string Format(DateTime date)
     {
         var culture = GetPatternCulture();
-        var calendarDay = culture.DateTimeFormat.Calendar.GetDayOfMonth(date);
-        var month = culture.DateTimeFormat.Calendar.GetMonth(date);
-        return ReplaceDayMarker(date.ToString(GetFormatString(month, calendarDay), culture), FormatDay(calendarDay), calendarDay);
+        var calendar = culture.DateTimeFormat.Calendar;
+        var calendarDay = calendar.GetDayOfMonth(date);
+        var month = calendar.GetMonth(date);
+        return StripDirectionalityControls(
+            ReplaceDayMarker(date.ToString(GetFormatString(month, calendarDay, calendar), culture), FormatDay(calendarDay), calendarDay));
     }
 
 #if NET6_0_OR_GREATER
@@ -65,22 +69,35 @@ sealed class OrdinalDatePattern(
     public string Format(DateOnly date)
     {
         var culture = GetPatternCulture();
+        var calendar = culture.DateTimeFormat.Calendar;
         var dateTime = date.ToDateTime(default);
-        var calendarDay = culture.DateTimeFormat.Calendar.GetDayOfMonth(dateTime);
-        var month = culture.DateTimeFormat.Calendar.GetMonth(dateTime);
-        return ReplaceDayMarker(date.ToString(GetFormatString(month, calendarDay), culture), FormatDay(calendarDay), calendarDay);
+        var calendarDay = calendar.GetDayOfMonth(dateTime);
+        var month = calendar.GetMonth(dateTime);
+        return StripDirectionalityControls(
+            ReplaceDayMarker(date.ToString(GetFormatString(month, calendarDay, calendar), culture), FormatDay(calendarDay), calendarDay));
     }
 #endif
 
-    string GetFormatString(int month, int day)
+    string GetFormatString(int month, int day, Calendar calendar)
     {
         var formatString = template.Replace(DayPlaceholder, DayMarkerFormat);
-        if (months is null)
+        var activeMonths = ResolveMonthArray(calendar);
+        if (activeMonths is null)
         {
             return formatString;
         }
 
-        return SubstituteMonth(formatString, month, day);
+        return SubstituteMonth(formatString, month, day, activeMonths);
+    }
+
+    string[]? ResolveMonthArray(Calendar calendar)
+    {
+        if (hijriMonths is not null && calendar is HijriCalendar or UmAlQuraCalendar)
+        {
+            return hijriMonths;
+        }
+
+        return months;
     }
 
     /// <summary>
@@ -88,7 +105,7 @@ sealed class OrdinalDatePattern(
     /// literal month name from the override array. Uses genitive forms when the day is adjacent
     /// to the month specifier (d MMMM or MMMM d patterns).
     /// </summary>
-    string SubstituteMonth(string formatString, int month, int day)
+    string SubstituteMonth(string formatString, int month, int day, string[] activeMonths)
     {
         // Find the first unescaped MMMM.
         var inQuote = false;
@@ -132,8 +149,9 @@ sealed class OrdinalDatePattern(
         }
 
         // Determine genitive context: day adjacent to month (e.g., "d'<<DAY>>' MMMM" or "MMMM d").
-        var useGenitive = monthsGenitive is not null && IsDayAdjacentToMonth(formatString, mmmmStart, mmmmLength);
-        var monthNames = useGenitive ? monthsGenitive! : months!;
+        // Genitive forms only apply to the Gregorian months array, not Hijri.
+        var useGenitive = monthsGenitive is not null && activeMonths == months && IsDayAdjacentToMonth(formatString, mmmmStart, mmmmLength);
+        var monthNames = useGenitive ? monthsGenitive! : activeMonths;
         var monthName = monthNames[month - 1];
 
         // Escape embedded apostrophes per DateTimeFormatInfo literal quoting rules.
@@ -297,4 +315,20 @@ sealed class OrdinalDatePattern(
             OrdinalDateDayMode.DotSuffix => day.ToString(CultureInfo.CurrentCulture) + ".",
             _ => throw new InvalidOperationException("Unsupported ordinal date day mode.")
         };
+
+    static string StripDirectionalityControls(string value)
+    {
+        if (value.IndexOfAny(['\u200E', '\u200F', '\u061C']) < 0)
+        {
+            return value;
+        }
+
+#if NETSTANDARD2_0 || NET48
+        return value.Replace("\u200E", "").Replace("\u200F", "").Replace("\u061C", "");
+#else
+        return value.Replace("\u200E", "", StringComparison.Ordinal)
+                    .Replace("\u200F", "", StringComparison.Ordinal)
+                    .Replace("\u061C", "", StringComparison.Ordinal);
+#endif
+    }
 }

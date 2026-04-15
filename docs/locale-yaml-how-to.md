@@ -139,13 +139,14 @@ surfaces:
   calendar:
     months: []
     monthsGenitive: []
+    hijriMonths: []
 ```
 
 Notes:
 
 1. `formatter` and `phrases` are separate surfaces.
 2. `clock` is the canonical locale surface name even though the emitted runtime feature name is `timeOnlyToClockNotation`.
-3. `number` and `ordinal` are container surfaces; the actual owned blocks are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`. Similarly, `calendar` contains `calendar.months` and `calendar.monthsGenitive`.
+3. `number` and `ordinal` are container surfaces; the actual owned blocks are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`. Similarly, `calendar` contains `calendar.months`, `calendar.monthsGenitive`, and `calendar.hijriMonths`.
 4. A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
 5. Do not add a block just to say "use the default behavior". If a surface or nested block does not carry locale-specific behavior, omit it.
 
@@ -349,7 +350,7 @@ Put here:
 
 Supported engine:
 
-- `phrase-clock` — the unified clock engine used by all 62 shipped locales
+- `phrase-clock` — the unified clock engine used by all 65 shipped locale files
 
 ### `compass`
 
@@ -372,8 +373,10 @@ Put here:
   Array of exactly 12 nominative month names, indexed by Gregorian month (0 = January)
 - `monthsGenitive`
   Optional parallel array of 12 genitive month names for locales that distinguish nominative and genitive forms
+- `hijriMonths`
+  Optional array of exactly 12 Islamic (Hijri) month names (0 = Muharram). Used when the culture's calendar is Hijri/UmAlQura and `ordinal.date.calendarMode` is `Native`
 
-Do not author `calendar:` when `CultureInfo` already returns the correct month names on all platforms. The block is an override, not a requirement.
+Do not author `calendar:` when `CultureInfo` already returns the correct month names on all platforms. The block is an override, not a requirement. Author `hijriMonths` when the locale uses the Islamic calendar and needs locale-specific Hijri month name rendering in date ordinals.
 
 ### `number.formatting`
 

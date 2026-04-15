@@ -522,6 +522,8 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: '.'
+      feminineSuffix: '.'
+      neuterSuffix: '.'
 
     date:
       pattern: '{day} MMMM yyyy'

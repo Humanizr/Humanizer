@@ -1,6 +1,6 @@
 # Humanizer
 
-.NET library for humanizing numbers, dates, times, enums, quantities, and more across 62 locales.
+.NET library for humanizing numbers, dates, times, enums, quantities, and more across 65 locale files.
 
 ## Quick Commands
 
@@ -40,7 +40,7 @@ pwsh tests/verify-packages.ps1 -PackagePath artifacts
 ```
 src/
   Humanizer/                    # Main library (net10.0, net8.0, net48, netstandard2.0)
-    Locales/                    # 62 YAML locale definition files
+    Locales/                    # 65 YAML locale definition files
     Configuration/              # Formatter/converter registries
   Humanizer.SourceGenerators/   # Roslyn source generators (YAML -> C# tables, library build-time only, not shipped)
   Humanizer.Analyzers/          # Roslyn analyzers shipped in NuGet package (namespace migration, API guidance)

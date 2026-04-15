@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-13T01:28:17.656161Z",
+  "depends_on": [
+    "fn-9-fill-code-coverage-gaps-toward-95-line.1"
+  ],
+  "epic": "fn-9-fill-code-coverage-gaps-toward-95-line",
+  "id": "fn-9-fill-code-coverage-gaps-toward-95-line.5",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-9-fill-code-coverage-gaps-toward-95-line.5.md",
+  "status": "todo",
+  "title": "OrdinalDatePattern branches + NoMatchFoundException ctors",
+  "updated_at": "2026-04-13T02:13:10.610912Z"
+}

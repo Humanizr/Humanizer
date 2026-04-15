@@ -21,7 +21,7 @@ They are not parsed at runtime.
 3. Top-level properties are limited to:
    - `locale`
    - `variantOf`
-   - `surfaces`
+   - `surfaces` (required for non-variant locales; optional for variant locales with no overrides)
 4. Canonical surface names under `surfaces` are limited to:
    - `list`
    - `formatter`
@@ -263,6 +263,7 @@ Members:
 Supported engines:
 
 - `modulo-suffix`
+- `number-word-suffix`
 - `suffix`
 - `template`
 - `word-form-template`
@@ -352,7 +353,7 @@ Notes:
 
 - `clock` is the canonical YAML authoring surface.
 - The generator emits this surface into the runtime `timeOnlyToClockNotation` feature slot.
-- All 62 shipped locales use the unified `phrase-clock` engine. There are no residual handwritten clock leaves.
+- All 65 shipped locale files use the unified `phrase-clock` engine. There are no residual handwritten clock leaves.
 
 Supported engine:
 
@@ -389,18 +390,21 @@ Members:
 
 - `months`
 - `monthsGenitive`
+- `hijriMonths`
 
 Fields:
 
 - `months`: array of exactly 12 strings, indexed by Gregorian month (index 0 = January). Overrides `DateTimeFormatInfo.MonthNames` in `DateToOrdinalWords` and `DateOnlyToOrdinalWords` output.
 - `monthsGenitive`: optional parallel array of 12 strings for locales that distinguish nominative and genitive month forms (e.g., Czech, Polish, Russian). When present, the genitive form is used in date patterns where the month follows a day number. When absent, `months` is used in all positions.
+- `hijriMonths`: optional array of exactly 12 strings, indexed by Islamic (Hijri) calendar month (index 0 = Muharram). When present and the culture's active calendar is `HijriCalendar` or `UmAlQuraCalendar`, the runtime uses these month names instead of the Gregorian `months` array. Requires `ordinal.date.calendarMode: 'Native'` (or `ordinal.dateOnly.calendarMode: 'Native'`) to activate.
 
 Notes:
 
-- Both arrays must contain exactly 12 entries if present. The generator validates this at build time.
+- All month arrays must contain exactly 12 entries if present. The generator validates this at build time.
 - Empty or absent = no override; the runtime falls through to `CultureInfo.DateTimeFormat`.
-- Inherits via `variantOf`: a child locale inherits the parent's `calendar.months` unless it authors its own.
+- Inherits via `variantOf`: a child locale inherits the parent's calendar arrays (`months`, `monthsGenitive`, and `hijriMonths`) unless it authors its own overrides.
 - Only `MMMM` (full month name) substitution is supported. If an ordinal-date pattern uses `MMM` (abbreviated month) while `calendar.months` is active, the generator emits a diagnostic error.
+- `hijriMonths` items must not contain Unicode directionality controls (U+200E, U+200F, U+061C). The generator validates this at build time.
 
 Example:
 
@@ -421,6 +425,32 @@ surfaces:
       - 'নভেম্বর'
       - 'ডিসেম্বর'
 ```
+
+Example (Hijri month names):
+
+```yaml
+surfaces:
+  calendar:
+    months:
+      - 'جنوری'
+      - 'فروری'
+      # ... (12 Gregorian month names)
+    hijriMonths:
+      - 'محرم'
+      - 'صفر'
+      - 'ربیع الاول'
+      - 'ربیع الثانی'
+      - 'جمادی الاول'
+      - 'جمادی الثانی'
+      - 'رجب'
+      - 'شعبان'
+      - 'رمضان'
+      - 'شوال'
+      - 'ذوالقعدہ'
+      - 'ذوالحجہ'
+```
+
+When the runtime encounters a `HijriCalendar` or `UmAlQuraCalendar` and `calendarMode` is `Native`, the `OrdinalDatePattern` indexes into `hijriMonths` instead of `months` for month name substitution. Existing locales without `hijriMonths` are unaffected.
 
 Future fields: `monthsAbbreviated`, `days`, `daysAbbreviated`, `dayPeriods`, `amDesignator`, `pmDesignator`, `eraNames`. These are reserved but not yet implemented.
 
@@ -745,6 +775,51 @@ Notes:
 
 - This is the same general family as `template`, but the runtime kernel also receives the current culture.
 
+### `ordinalizer: number-word-suffix`
+
+Fields:
+
+- `useCulture`: must be `true` when present. The `number-word-suffix` engine is intrinsically culture-bound because it resolves the locale's `INumberToWordsConverter`; the generator passes the resolving `CultureInfo` to the runtime ordinalizer. The field is required in YAML but the binding is structural to the engine, not an arbitrary author choice.
+- `masculine`: gender block for masculine ordinals.
+  - `defaultSuffix`: suffix appended to the cardinal word form for productive ordinals.
+  - `exactReplacements`: mapping of number to irregular ordinal word (bypasses the cardinal-plus-suffix path).
+- `feminine`: gender block for feminine ordinals, same shape as `masculine`.
+  - `defaultSuffix`
+  - `exactReplacements`
+- `neuterFallback`: the gender to fall back to when `GrammaticalGender.Neuter` is requested. Must be `'masculine'` or `'feminine'`.
+
+Notes:
+
+- This engine produces full word ordinals (e.g., `پانچواں` for 5th masculine) rather than numeric-suffix ordinals (e.g., `5واں`). It does this by calling the locale's `INumberToWordsConverter.Convert` to get the cardinal word form, then appending the gendered suffix.
+- Exact replacements handle irregular low ordinals where the ordinal stem differs from the cardinal (e.g., Urdu 4th `چوتھا` vs cardinal `چار`).
+- Neuter gender falls back to the gender specified by `neuterFallback` (typically masculine for two-gender languages).
+- The engine requires `useCulture: true` because it internally resolves the number-to-words converter for the locale.
+
+Example:
+
+```yaml
+surfaces:
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      useCulture: true
+      masculine:
+        defaultSuffix: 'واں'
+        exactReplacements:
+          1: 'پہلا'
+          2: 'دوسرا'
+          3: 'تیسرا'
+          4: 'چوتھا'
+      feminine:
+        defaultSuffix: 'ویں'
+        exactReplacements:
+          1: 'پہلی'
+          2: 'دوسری'
+          3: 'تیسری'
+          4: 'چوتھی'
+      neuterFallback: 'masculine'
+```
+
 ## Formatter Block
 
 ### `formatter: profiled`
@@ -852,7 +927,7 @@ The `{dayPeriod}` placeholder allows inline day-period placement within bucket t
 
 Notes:
 
-- All 62 shipped locales use `phrase-clock`. There are no residual handwritten clock leaves.
+- All 65 shipped locale files use `phrase-clock`. There are no residual handwritten clock leaves.
 - Non-bucketed minutes fall to range-based defaults or `defaultTemplate`.
 - Day-period hour resolution is template-aware: templates that reference `{nextHour}` or `{nextArticle}` base the day period on hour+1 (since the phrasing is relative to the next hour), while templates using `{hour}` base the period on the current hour.
 
@@ -1759,6 +1834,8 @@ Before creating a new regional variant file:
 5. For parity work, inherited surfaces still need locale-specific proving assertions and a recorded inheritance chain to the terminal owner.
 
 A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
+
+**Exception for no-delta regional variants:** A parity epic may ship minimum-valid no-delta variant files (`locale:` + `variantOf:`) when first-class matrix/sweep coverage is required. This makes the regional culture explicit in `LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests` rather than relying on implicit culture fallback. The no-delta file inherits all surfaces from the parent and produces identical output; its purpose is registry presence and test matrix coverage, not linguistic differentiation. The `surfaces` key may be omitted entirely for these files. Examples: `ur-PK.yml` and `ur-IN.yml` ship as no-delta variants of `ur.yml`.
 
 Examples in the current repo:
 

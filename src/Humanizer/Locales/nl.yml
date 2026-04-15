@@ -395,6 +395,8 @@ surfaces:
     numeric:
       engine: 'suffix'
       masculineSuffix: 'e'
+      feminineSuffix: 'e'
+      neuterSuffix: 'e'
       zeroAsPlainNumber: true
 
     date:

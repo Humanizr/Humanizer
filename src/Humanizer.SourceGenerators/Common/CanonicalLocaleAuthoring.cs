@@ -77,13 +77,25 @@ public sealed partial class HumanizerSourceGenerator
                     $"Locale '{declaredLocale}' must match file locale '{localeCode}'.");
             }
 
+            var variantOf = root.GetScalar("variantOf");
+
+            SimpleYamlMapping surfaces;
             if (!root.TryGetValue("surfaces", out var surfacesValue))
             {
-                throw new InvalidOperationException(
-                    $"Locale '{localeCode}' must define required top-level property 'surfaces'.");
-            }
+                if (string.IsNullOrWhiteSpace(variantOf))
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}' must define required top-level property 'surfaces'.");
+                }
 
-            if (surfacesValue is not SimpleYamlMapping surfaces)
+                surfaces = new SimpleYamlMapping(
+                    ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal));
+            }
+            else if (surfacesValue is SimpleYamlMapping surfacesMapping)
+            {
+                surfaces = surfacesMapping;
+            }
+            else
             {
                 throw new InvalidOperationException($"Locale '{localeCode}.surfaces' must be a mapping.");
             }
@@ -108,7 +120,7 @@ public sealed partial class HumanizerSourceGenerator
 
             return new CanonicalLocaleDocument(
                 localeCode,
-                root.GetScalar("variantOf"),
+                variantOf,
                 surfaces,
                 NormalizeCanonicalText(fileText));
         }
@@ -202,21 +214,36 @@ public sealed partial class HumanizerSourceGenerator
                 }
             }
 
-            if (numberSurface.TryGetValue("words", out var wordsValue) &&
-                wordsValue is SimpleYamlMapping wordsMapping)
+            if (numberSurface.TryGetValue("words", out var wordsValue))
             {
+                if (wordsValue is not SimpleYamlMapping wordsMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.words' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["numberToWords"] = wordsMapping;
             }
 
-            if (numberSurface.TryGetValue("parse", out var parseValue) &&
-                parseValue is SimpleYamlMapping parseMapping)
+            if (numberSurface.TryGetValue("parse", out var parseValue))
             {
+                if (parseValue is not SimpleYamlMapping parseMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.parse' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["wordsToNumber"] = parseMapping;
             }
 
-            if (numberSurface.TryGetValue("formatting", out var fmtValue) &&
-                fmtValue is SimpleYamlMapping fmtMapping)
+            if (numberSurface.TryGetValue("formatting", out var fmtValue))
             {
+                if (fmtValue is not SimpleYamlMapping fmtMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.number.formatting' must be a mapping, not a scalar or sequence.");
+                }
+
                 ValidateNumberFormattingBlock(localeCode, fmtMapping);
                 features["numberFormatting"] = fmtMapping;
             }
@@ -278,21 +305,36 @@ public sealed partial class HumanizerSourceGenerator
                 }
             }
 
-            if (ordinalSurface.TryGetValue("numeric", out var numericValue) &&
-                numericValue is SimpleYamlMapping numericMapping)
+            if (ordinalSurface.TryGetValue("numeric", out var numericValue))
             {
+                if (numericValue is not SimpleYamlMapping numericMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.numeric' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["ordinalizer"] = numericMapping;
             }
 
-            if (ordinalSurface.TryGetValue("date", out var dateValue) &&
-                dateValue is SimpleYamlMapping dateMapping)
+            if (ordinalSurface.TryGetValue("date", out var dateValue))
             {
+                if (dateValue is not SimpleYamlMapping dateMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.date' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["dateToOrdinalWords"] = dateMapping;
             }
 
-            if (ordinalSurface.TryGetValue("dateOnly", out var dateOnlyValue) &&
-                dateOnlyValue is SimpleYamlMapping dateOnlyMapping)
+            if (ordinalSurface.TryGetValue("dateOnly", out var dateOnlyValue))
             {
+                if (dateOnlyValue is not SimpleYamlMapping dateOnlyMapping)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.ordinal.dateOnly' must be a mapping, not a scalar or sequence.");
+                }
+
                 features["dateOnlyToOrdinalWords"] = dateOnlyMapping;
             }
         }
@@ -304,10 +346,10 @@ public sealed partial class HumanizerSourceGenerator
         {
             foreach (var property in calendarSurface.Values.Keys)
             {
-                if (property is not ("months" or "monthsGenitive"))
+                if (property is not ("months" or "monthsGenitive" or "hijriMonths"))
                 {
                     throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.calendar' defines unsupported property '{property}'. Supported properties: months, monthsGenitive.");
+                        $"Locale '{localeCode}.surfaces.calendar' defines unsupported property '{property}'. Supported properties: months, monthsGenitive, hijriMonths.");
                 }
             }
 
@@ -350,6 +392,30 @@ public sealed partial class HumanizerSourceGenerator
                     {
                         throw new InvalidOperationException(
                             $"Locale '{localeCode}.surfaces.calendar.monthsGenitive' items must be scalar strings.");
+                    }
+                }
+            }
+
+            if (calendarSurface.TryGetValue("hijriMonths", out var hijriMonthsValue))
+            {
+                if (hijriMonthsValue is not SimpleYamlSequence hijriSeq || hijriSeq.Items.Length != 12)
+                {
+                    throw new InvalidOperationException(
+                        $"Locale '{localeCode}.surfaces.calendar.hijriMonths' must be a sequence of exactly 12 strings.");
+                }
+
+                foreach (var item in hijriSeq.Items)
+                {
+                    if (item is not SimpleYamlScalar scalar)
+                    {
+                        throw new InvalidOperationException(
+                            $"Locale '{localeCode}.surfaces.calendar.hijriMonths' items must be scalar strings.");
+                    }
+
+                    if (scalar.Value.IndexOfAny(new[] { '\u200E', '\u200F', '\u061C' }) >= 0)
+                    {
+                        throw new InvalidOperationException(
+                            $"Locale '{localeCode}.surfaces.calendar.hijriMonths' must not contain directionality controls (U+200E, U+200F, U+061C).");
                     }
                 }
             }
@@ -509,15 +575,21 @@ public sealed partial class HumanizerSourceGenerator
                 builder.AppendLine(QuoteScalar(new SimpleYamlScalar(variantOf, true)));
             }
 
-            builder.AppendLine();
-
+            var hasInherits = root.GetScalar("inherits") is not null;
             var hasSurfaces = root.Values.Keys.Any(static key => key != "inherits");
             if (!hasSurfaces)
             {
+                if (hasInherits)
+                {
+                    return builder.ToString();
+                }
+
+                builder.AppendLine();
                 builder.AppendLine("surfaces: {}");
                 return builder.ToString();
             }
 
+            builder.AppendLine();
             builder.AppendLine("surfaces:");
             AppendMigratedSurface(builder, "list", root, "collectionFormatter", isCollectionFormatter: true);
             AppendMigratedFormatterSurface(builder, root);

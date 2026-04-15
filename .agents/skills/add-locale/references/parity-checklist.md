@@ -6,7 +6,7 @@ Use this file after reading `SKILL.md`. It is the detailed repo map for proving 
 
 Treat these as the localized surfaces that must be intentionally accounted for when a shipped locale is added or brought to parity:
 
-Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
+Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, `calendar.monthsGenitive`, and `calendar.hijriMonths`.
 
 - `list`
   Collection formatting and conjunction behavior.
@@ -32,6 +32,7 @@ Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `
   Month-name overrides (nominative and genitive) for stable cross-platform date output. Only authored when the locale's ICU-supplied month names differ across platforms.
   - `calendar.months` — Exactly 12 nominative month-name entries when present.
   - `calendar.monthsGenitive` — Exactly 12 genitive month-name entries when present.
+  - `calendar.hijriMonths` — Exactly 12 Islamic (Hijri) month-name entries when present. Used when the culture's calendar is Hijri/UmAlQura and `calendarMode` is `Native`.
 
 There is no shipped-locale exemption list in this repo. If any canonical surface is unresolved, parity is incomplete.
 
@@ -53,7 +54,7 @@ Create and maintain a working artifact at:
 
 `artifacts/YYYY-MM-DD-<locale>-parity-map.md`
 
-This file is intentionally not source controlled. It is the working proof that the locale has been audited across all shipped localized surfaces.
+The `artifacts/` directory is local-only and gitignored — do not commit this file. It is the working proof that the locale has been audited across all shipped localized surfaces; the audit's lasting evidence belongs in the spec and tests.
 
 Use this table shape:
 
@@ -114,6 +115,7 @@ Required proof subrows:
 - `number.formatting.decimalSeparator` (only when the locale authors a `number.formatting` override; mark "inherited from parent" or "not applicable" otherwise)
 - `calendar.months` (only when the locale authors a `calendar` override; mark "inherited from parent" or "not applicable" otherwise)
 - `calendar.monthsGenitive` (only when the locale authors a `calendar` override with a genitive array; mark "inherited from parent" or "not applicable" otherwise)
+- `calendar.hijriMonths` (only when the locale authors a `calendar.hijriMonths` override; mark "inherited from parent" or "not applicable" otherwise)
 
 Add more `number.words.*` and `number.parse.*` proof subrows whenever the selected engine owns additional meaningful branches such as tuple handling, gendered variants, abbreviation parsing, or special composition paths.
 

@@ -24,7 +24,7 @@ These are the files and directories you usually need to understand:
 - `src/Humanizer/Locales/<locale>.yml`
   This is the source of truth for locale-owned generated behavior.
 - `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs`
-  Defines the canonical locale YAML surface: allowed top-level keys, canonical surface names, and nested canonical members such as `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
+  Defines the canonical locale YAML surface: allowed top-level keys, canonical surface names, and nested canonical members such as `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, `calendar.monthsGenitive`, and `calendar.hijriMonths`.
 - `src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs`
   Parses locale YAML, resolves inheritance, validates feature blocks, and exposes a resolved per-locale view to the rest of the generator.
 - `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`
@@ -88,7 +88,7 @@ The canonical locale shape is exact. A locale file contains:
 
 1. `locale`
 2. optional `variantOf`
-3. `surfaces`
+3. `surfaces` (required for non-variant locales; optional for variant locales with no overrides)
 
 Under `surfaces`, the canonical members are exactly:
 
@@ -111,6 +111,7 @@ The nested canonical members are:
 6. `ordinal.dateOnly`
 7. `calendar.months`
 8. `calendar.monthsGenitive`
+9. `calendar.hijriMonths`
 
 The `phrases` surface is also structured, with these canonical members:
 
@@ -139,7 +140,7 @@ This is what each canonical surface owns:
 | `ordinal.dateOnly` | `DateOnly.ToOrdinalWords` day placement/day rendering rules |
 | `clock` | `TimeOnly.ToClockNotation` phrase templates or clock engine selection |
 | `compass` | Full and abbreviated heading/compass labels |
-| `calendar` | Month-name overrides (nominative and genitive) for stable cross-platform date output |
+| `calendar` | Month-name overrides (nominative, genitive, and Hijri) for stable cross-platform date output |
 | `number.formatting` | Decimal separator, negative sign, and group separator overrides for stable cross-platform numeric output |
 
 Two boundaries matter:
@@ -187,7 +188,7 @@ Rules for authoring:
 
 ## Canonical Locale Skeleton
 
-Use this as the complete structural skeleton for a locale file. Every block is optional except `locale` and `surfaces`, but no other top-level or surface names are valid.
+Use this as the complete structural skeleton for a locale file. Every block is optional except `locale`, and `surfaces` is required for non-variant locales. Variant locales (those with `variantOf`) may omit `surfaces` entirely when they have no overrides. No other top-level or surface names are valid.
 
 ```yaml
 locale: '<locale>'
@@ -263,10 +264,30 @@ surfaces:
       - '<October-genitive>'
       - '<November-genitive>'
       - '<December-genitive>'
+    hijriMonths:
+      - '<Muharram>'
+      - '<Safar>'
+      - '<Rabi-ul-Awwal>'
+      - '<Rabi-ul-Thani>'
+      - '<Jumada-ul-Awwal>'
+      - '<Jumada-ul-Thani>'
+      - '<Rajab>'
+      - '<Shaban>'
+      - '<Ramadan>'
+      - '<Shawwal>'
+      - '<Dhul-Qadah>'
+      - '<Dhul-Hijjah>'
 
   compass:
     full: []
     short: []
+```
+
+A no-delta variant locale (one that inherits everything from its parent with no overrides) is just two lines:
+
+```yaml
+locale: '<locale>'
+variantOf: '<parent-locale>'
 ```
 
 ## Inheritance Rules
@@ -328,7 +349,7 @@ A residual locale-specific converter is acceptable only when at least one of the
 
 If a runtime kernel still hard-codes language-specific behavior, do not pretend it is generic. Either make it structurally generic for real or keep the locale name.
 
-Note: as of the locale parity completion, no clock residual leaves remain. All 62 shipped locales use the unified `phrase-clock` engine for clock notation.
+Note: as of the locale parity completion, no clock residual leaves remain. All 65 shipped locale files use the unified `phrase-clock` engine for clock notation.
 
 ## Step-By-Step: Add A Brand New Locale
 
@@ -379,7 +400,7 @@ If the task is locale parity work, the workflow is stricter than "edit YAML and 
 You must:
 
 1. produce a preflight gap report for every canonical surface
-2. maintain a parity map artifact under `artifacts/`
+2. maintain a parity map artifact under `artifacts/` (local-only; the directory is gitignored — do not commit it)
 3. keep an effective-gap summary and drive it to empty
 4. record a before/after parity delta and drive the final unresolved set to empty
 5. add a closeout line for every canonical surface with ownership path and proof
