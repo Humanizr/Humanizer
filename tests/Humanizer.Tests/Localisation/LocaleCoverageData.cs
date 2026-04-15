@@ -1,20 +1,12 @@
+#if NET7_0_OR_GREATER
 using System.Text;
+#endif
 
 namespace Humanizer.Tests.Localisation;
 
 static class LocaleCoverageData
 {
     static readonly string[] ShippedLocaleNames = FindShippedLocales();
-
-#if NET8_0
-    const string ZhHantShortTime = "1:23";
-    const string ZhHantRoundedTime = "1:25";
-    const string ZhHantMorningShortTime = "1:05";
-#else
-    const string ZhHantShortTime = "下午1:23";
-    const string ZhHantRoundedTime = "下午1:25";
-    const string ZhHantMorningShortTime = "上午1:05";
-#endif
 
     public static IReadOnlyList<string> ShippedLocales => ShippedLocaleNames;
 

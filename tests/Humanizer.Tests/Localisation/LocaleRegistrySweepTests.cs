@@ -417,7 +417,4 @@ public class LocaleRegistrySweepTests
         Assert.Equal(expected, parsedNumber);
         Assert.Null(unrecognizedWord);
     }
-
-    static string ToVisibleText(string value) =>
-        new(value.Where(static ch => CharUnicodeInfo.GetUnicodeCategory(ch) != UnicodeCategory.Format).ToArray());
 }
