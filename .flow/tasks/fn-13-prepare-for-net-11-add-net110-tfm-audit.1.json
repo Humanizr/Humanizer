@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-15T01:40:56.850744Z",
+  "depends_on": [],
+  "epic": "fn-13-prepare-for-net-11-add-net110-tfm-audit",
+  "id": "fn-13-prepare-for-net-11-add-net110-tfm-audit.1",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-13-prepare-for-net-11-add-net110-tfm-audit.1.md",
+  "status": "todo",
+  "title": "Add net11.0 TFM + preview SDK pin + CI preview slot",
+  "updated_at": "2026-04-15T01:41:31.677441Z"
+}

@@ -92,16 +92,15 @@ public class UrduHijriDateTests
         UrduBidiControlSweep.AssertNoBidiControls(result);
     }
 
+#if NET48
+    // ur-IN's OptionalCalendars only lists HijriCalendar under the classic Windows NLS
+    // globalization backend; ICU-backed runtimes (net8.0/net10.0 across our CI matrix)
+    // throw from DateTimeFormat.Calendar's setter, so no user on those runtimes can
+    // reach this scenario. Revisit if/when we add a Windows NLS slot for net8+.
     [Fact]
     public void HijriCalendar_UrIn_InheritsHijriMonths()
     {
         var urInHijri = (CultureInfo)new CultureInfo("ur-IN").Clone();
-
-        if (!urInHijri.OptionalCalendars.Any(static calendar => calendar is HijriCalendar))
-        {
-            Assert.Skip("HijriCalendar is not valid for ur-IN on this runtime (ICU); inheritance is only reachable on runtimes that allow HijriCalendar for ur-IN.");
-        }
-
         urInHijri.DateTimeFormat.Calendar = new HijriCalendar();
 
         var hijri = new HijriCalendar();
@@ -112,4 +111,5 @@ public class UrduHijriDateTests
         Assert.Equal("1 محرم، 1446", result);
         UrduBidiControlSweep.AssertNoBidiControls(result);
     }
+#endif
 }
