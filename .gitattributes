@@ -3,8 +3,9 @@
 ##
 ## Get latest from `dotnet new gitattributes`
 
-# Auto detect text files and perform LF normalization
-* text=auto
+# Default: auto-detect text files and force LF on checkout everywhere.
+# Overrides below set CRLF for files that must be CRLF on disk.
+* text=auto eol=lf
 
 #
 # The above will handle all files NOT found below

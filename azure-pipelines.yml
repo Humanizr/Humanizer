@@ -70,7 +70,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: tests/**/*.Tests.csproj
+        projects: Humanizer.slnx
         arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Tests
 
