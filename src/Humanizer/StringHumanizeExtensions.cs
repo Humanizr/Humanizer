@@ -1,4 +1,6 @@
+#if NET
 using System.Runtime.InteropServices;
+#endif
 
 namespace Humanizer;
 

@@ -28,12 +28,9 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var fileText = additionalText.GetText(cancellationToken)?.ToString();
-            if (string.IsNullOrWhiteSpace(fileText))
-            {
-                return null;
-            }
-
-            return new LocaleDefinitionFile(Path.GetFileNameWithoutExtension(path.Replace('\\', '/')), fileText!);
+            return string.IsNullOrWhiteSpace(fileText)
+                ? null
+                : new LocaleDefinitionFile(Path.GetFileNameWithoutExtension(path.Replace('\\', '/')), fileText!);
         }
     }
 
@@ -69,44 +66,10 @@ public sealed partial class HumanizerSourceGenerator
             "wordsToNumber"
         ];
 
-        static readonly string[] SupportedTopLevelNames =
-        [
-            "locale",
-            "variantOf",
-            "surfaces"
-        ];
-
-        static readonly string[] SupportedSurfaceNames =
-        [
-            "list",
-            "formatter",
-            "phrases",
-            "number",
-            "ordinal",
-            "clock",
-            "compass",
-            "calendar"
-        ];
-
-        static readonly string[] FormatterGrammarKeys =
-        [
-            "pluralRule",
-            "dataUnitPluralRule",
-            "dataUnitNonIntegralForm",
-            "prepositionMode",
-            "secondaryPlaceholderMode",
-            "timeUnitGenders"
-        ];
-
-        readonly ImmutableArray<ResolvedLocaleDefinition> locales = locales;
-        readonly ImmutableArray<Diagnostic> diagnostics = diagnostics;
-        readonly ImmutableHashSet<string> dataBackedFormatterProfiles = dataBackedFormatterProfiles;
-        readonly ImmutableHashSet<string> dataBackedOrdinalizerProfiles = dataBackedOrdinalizerProfiles;
-
-        public ImmutableArray<ResolvedLocaleDefinition> Locales => locales;
-        public ImmutableArray<Diagnostic> Diagnostics => diagnostics;
-        public ImmutableHashSet<string> DataBackedFormatterProfiles => dataBackedFormatterProfiles;
-        public ImmutableHashSet<string> DataBackedOrdinalizerProfiles => dataBackedOrdinalizerProfiles;
+        public ImmutableArray<ResolvedLocaleDefinition> Locales { get; } = locales;
+        public ImmutableArray<Diagnostic> Diagnostics { get; } = diagnostics;
+        public ImmutableHashSet<string> DataBackedFormatterProfiles { get; } = dataBackedFormatterProfiles;
+        public ImmutableHashSet<string> DataBackedOrdinalizerProfiles { get; } = dataBackedOrdinalizerProfiles;
 
         public static LocaleCatalogInput Create(ImmutableArray<LocaleDefinitionFile?> files)
         {
@@ -150,7 +113,7 @@ public sealed partial class HumanizerSourceGenerator
             {
                 try
                 {
-                    ResolveLocale(localeCode, parsedLocales, resolving, resolvedLocales, diagnostics);
+                    _ = ResolveLocale(localeCode, parsedLocales, resolving, resolvedLocales, diagnostics);
                 }
                 catch (Exception exception)
                 {
@@ -186,182 +149,6 @@ public sealed partial class HumanizerSourceGenerator
             var document = CanonicalLocaleAuthoring.Parse(localeCode, fileText);
             return CanonicalLocaleAuthoring.ToLocaleDefinition(document);
         }
-
-        static void MapCanonicalSurfacesToFeatures(
-            string localeCode,
-            SimpleYamlMapping surfaces,
-            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
-        {
-            foreach (var surface in surfaces.Values)
-            {
-                if (!SupportedSurfaceNames.Contains(surface.Key, StringComparer.Ordinal))
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces' defines unsupported surface '{surface.Key}'. " +
-                        $"Supported surfaces: {string.Join(", ", SupportedSurfaceNames)}.");
-                }
-
-                if (surface.Value is not SimpleYamlMapping surfaceMapping)
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.{surface.Key}' must be a mapping.");
-                }
-
-                switch (surface.Key)
-                {
-                    case "list":
-                        features["collectionFormatter"] = surfaceMapping;
-                        break;
-
-                    case "formatter":
-                        AddFormatterFeatures(surfaceMapping, features);
-                        break;
-
-                    case "phrases":
-                        features["phrases"] = surfaceMapping;
-                        break;
-
-                    case "number":
-                        AddNumberFeatures(localeCode, surfaceMapping, features);
-                        break;
-
-                    case "ordinal":
-                        AddOrdinalFeatures(localeCode, surfaceMapping, features);
-                        break;
-
-                    case "clock":
-                        features["timeOnlyToClockNotation"] = surfaceMapping;
-                        break;
-
-                    case "compass":
-                        features["headings"] = surfaceMapping;
-                        break;
-
-                    case "calendar":
-                        features["calendar"] = surfaceMapping;
-                        break;
-                }
-            }
-        }
-
-        static void AddNumberFeatures(
-            string localeCode,
-            SimpleYamlMapping numberSurface,
-            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
-        {
-            foreach (var property in numberSurface.Values.Keys)
-            {
-                if (property is not ("words" or "parse" or "formatting"))
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.number' defines unsupported property '{property}'. Supported properties: words, parse, formatting.");
-                }
-            }
-
-            if (numberSurface.TryGetValue("words", out var wordsValue))
-            {
-                if (wordsValue is not SimpleYamlMapping wordsMapping)
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.number.words' must be a mapping.");
-                }
-
-                features["numberToWords"] = wordsMapping;
-            }
-
-            if (numberSurface.TryGetValue("parse", out var parseValue))
-            {
-                if (parseValue is not SimpleYamlMapping parseMapping)
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.number.parse' must be a mapping.");
-                }
-
-                features["wordsToNumber"] = parseMapping;
-            }
-
-            if (numberSurface.TryGetValue("formatting", out var fmtValue))
-            {
-                if (fmtValue is not SimpleYamlMapping fmtMapping)
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.number.formatting' must be a mapping.");
-                }
-
-                features["numberFormatting"] = fmtMapping;
-            }
-        }
-
-        static void AddOrdinalFeatures(
-            string localeCode,
-            SimpleYamlMapping ordinalSurface,
-            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
-        {
-            foreach (var property in ordinalSurface.Values.Keys)
-            {
-                if (property is not ("numeric" or "date" or "dateOnly"))
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.ordinal' defines unsupported property '{property}'. Supported properties: numeric, date, dateOnly.");
-                }
-            }
-
-            if (ordinalSurface.TryGetValue("numeric", out var numericValue))
-            {
-                if (numericValue is not SimpleYamlMapping numericMapping)
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.ordinal.numeric' must be a mapping.");
-                }
-
-                features["ordinalizer"] = numericMapping;
-            }
-
-            if (ordinalSurface.TryGetValue("date", out var dateValue))
-            {
-                if (dateValue is not SimpleYamlMapping dateMapping)
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.ordinal.date' must be a mapping.");
-                }
-
-                features["dateToOrdinalWords"] = dateMapping;
-            }
-
-            if (ordinalSurface.TryGetValue("dateOnly", out var dateOnlyValue))
-            {
-                if (dateOnlyValue is not SimpleYamlMapping dateOnlyMapping)
-                {
-                    throw new InvalidOperationException(
-                        $"Locale '{localeCode}.surfaces.ordinal.dateOnly' must be a mapping.");
-                }
-
-                features["dateOnlyToOrdinalWords"] = dateOnlyMapping;
-            }
-        }
-
-        static void AddFormatterFeatures(
-            SimpleYamlMapping formatterSurface,
-            ImmutableDictionary<string, SimpleYamlValue>.Builder features)
-        {
-            var grammarValues = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
-
-            foreach (var entry in formatterSurface.Values)
-            {
-                if (FormatterGrammarKeys.Contains(entry.Key, StringComparer.Ordinal))
-                {
-                    grammarValues[entry.Key] = entry.Value;
-                }
-            }
-
-            features["formatter"] = formatterSurface;
-
-            if (grammarValues.Count > 0)
-            {
-                features["grammar"] = new SimpleYamlMapping(grammarValues.ToImmutable());
-            }
-        }
-
 
         static ResolvedLocaleDefinition ResolveLocale(
             string localeCode,
@@ -423,7 +210,7 @@ public sealed partial class HumanizerSourceGenerator
                 }
             }
 
-            resolving.Remove(localeCode);
+            _ = resolving.Remove(localeCode);
 
             var resolvedFeatures = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
             foreach (var featureName in SupportedFeatureNames)
@@ -536,8 +323,8 @@ public sealed partial class HumanizerSourceGenerator
             ImmutableDictionary<string, SimpleYamlValue> features,
             ImmutableDictionary<string, SimpleYamlValue> inheritedFeatures)
         {
-            features.TryGetValue(featureName, out var localValue);
-            inheritedFeatures.TryGetValue(featureName, out var inheritedValue);
+            _ = features.TryGetValue(featureName, out var localValue);
+            _ = inheritedFeatures.TryGetValue(featureName, out var inheritedValue);
             return MergeFeatureValue(localeCode, featureName, inheritedValue, localValue);
         }
 
@@ -546,37 +333,31 @@ public sealed partial class HumanizerSourceGenerator
             string featureName,
             ImmutableDictionary<string, SimpleYamlValue> features)
         {
-            if (!features.TryGetValue(featureName, out var featureValue))
-            {
-                return null;
-            }
-
-            return featureValue switch
-            {
-                SimpleYamlScalar scalar => new LocaleFeature(
-                    ownerLocaleCode: localeCode,
-                    featureName: featureName,
-                    kind: scalar.Value,
-                    argument: null,
-                    profileName: null,
-                    profileRoot: default,
-                    usesGeneratedProfile: false),
-                SimpleYamlMapping mapping => CreateMappedFeature(localeCode, featureName, mapping),
-                _ => throw new InvalidOperationException(
-                    $"Feature '{featureName}' in locale '{localeCode}' must be a scalar or mapping.")
-            };
+            return !features.TryGetValue(featureName, out var featureValue)
+                ? null
+                : featureValue switch
+                {
+                    SimpleYamlScalar scalar => new LocaleFeature(
+                        ownerLocaleCode: localeCode,
+                        featureName: featureName,
+                        kind: scalar.Value,
+                        argument: null,
+                        profileName: null,
+                        profileRoot: default,
+                        usesGeneratedProfile: false),
+                    SimpleYamlMapping mapping => CreateMappedFeature(localeCode, featureName, mapping),
+                    _ => throw new InvalidOperationException(
+                        $"Feature '{featureName}' in locale '{localeCode}' must be a scalar or mapping.")
+                };
         }
 
         static SimpleYamlMapping? ResolveGrammar(
             string localeCode,
             ImmutableDictionary<string, SimpleYamlValue> features)
         {
-            if (!features.TryGetValue("grammar", out var grammarValue))
-            {
-                return null;
-            }
-
-            return grammarValue as SimpleYamlMapping
+            return !features.TryGetValue("grammar", out var grammarValue)
+                ? null
+                : grammarValue as SimpleYamlMapping
                 ?? throw new InvalidOperationException($"Locale '{localeCode}.grammar' must be a mapping.");
         }
 
@@ -584,12 +365,9 @@ public sealed partial class HumanizerSourceGenerator
             string localeCode,
             ImmutableDictionary<string, SimpleYamlValue> features)
         {
-            if (!features.TryGetValue("phrases", out var phraseValue))
-            {
-                return null;
-            }
-
-            return phraseValue is SimpleYamlMapping mapping
+            return !features.TryGetValue("phrases", out var phraseValue)
+                ? null
+                : phraseValue is SimpleYamlMapping mapping
                 ? LocalePhraseNormalization.Create(localeCode, mapping)
                 : throw new InvalidOperationException($"Locale '{localeCode}.phrases' must be a mapping.");
         }
@@ -626,12 +404,9 @@ public sealed partial class HumanizerSourceGenerator
             string localeCode,
             ImmutableDictionary<string, SimpleYamlValue> features)
         {
-            if (!features.TryGetValue("calendar", out var calendarValue))
-            {
-                return null;
-            }
-
-            return calendarValue as SimpleYamlMapping
+            return !features.TryGetValue("calendar", out var calendarValue)
+                ? null
+                : calendarValue as SimpleYamlMapping
                 ?? throw new InvalidOperationException($"Locale '{localeCode}.calendar' must be a mapping.");
         }
 
@@ -639,12 +414,9 @@ public sealed partial class HumanizerSourceGenerator
             string localeCode,
             ImmutableDictionary<string, SimpleYamlValue> features)
         {
-            if (!features.TryGetValue("numberFormatting", out var formattingValue))
-            {
-                return null;
-            }
-
-            return formattingValue as SimpleYamlMapping
+            return !features.TryGetValue("numberFormatting", out var formattingValue)
+                ? null
+                : formattingValue as SimpleYamlMapping
                 ?? throw new InvalidOperationException($"Locale '{localeCode}.numberFormatting' must be a mapping.");
         }
 
@@ -728,14 +500,11 @@ public sealed partial class HumanizerSourceGenerator
             {
                 var inheritedEngine = inheritedMapping.GetScalar("engine");
                 var localEngine = localMapping.GetScalar("engine");
-                if (inheritedEngine is not null &&
+                return inheritedEngine is not null &&
                     localEngine is not null &&
-                    !string.Equals(inheritedEngine, localEngine, StringComparison.Ordinal))
-                {
-                    return localMapping;
-                }
-
-                return MergeMappings($"{localeCode}.{featureName}", inheritedMapping, localMapping);
+                    !string.Equals(inheritedEngine, localEngine, StringComparison.Ordinal)
+                    ? localMapping
+                    : MergeMappings($"{localeCode}.{featureName}", inheritedMapping, localMapping);
             }
 
             return localValue;
@@ -762,14 +531,11 @@ public sealed partial class HumanizerSourceGenerator
             {
                 var inheritedEngine = inheritedMapping.GetScalar("engine");
                 var localEngine = localMapping.GetScalar("engine");
-                if (inheritedEngine is not null &&
+                return inheritedEngine is not null &&
                     localEngine is not null &&
-                    !string.Equals(inheritedEngine, localEngine, StringComparison.Ordinal))
-                {
-                    return localMapping;
-                }
-
-                return MergeMappings(path, inheritedMapping, localMapping);
+                    !string.Equals(inheritedEngine, localEngine, StringComparison.Ordinal)
+                    ? localMapping
+                    : MergeMappings(path, inheritedMapping, localMapping);
             }
 
             // Ordered lexical data such as scale lists and token tables stay explicit.
@@ -1010,16 +776,12 @@ public sealed partial class HumanizerSourceGenerator
         public ImmutableArray<SimpleYamlValue> Items { get; } = items;
     }
 
-    internal sealed class SimpleYamlMapping : SimpleYamlValue
+    internal sealed class SimpleYamlMapping(ImmutableDictionary<string, HumanizerSourceGenerator.SimpleYamlValue> values) : SimpleYamlValue
     {
-        readonly ImmutableDictionary<string, SimpleYamlValue> values;
-
-        public SimpleYamlMapping(ImmutableDictionary<string, SimpleYamlValue> values) => this.values = values;
-
-        public ImmutableDictionary<string, SimpleYamlValue> Values => values;
+        public ImmutableDictionary<string, SimpleYamlValue> Values { get; } = values;
 
         public bool TryGetValue(string key, out SimpleYamlValue value) =>
-            values.TryGetValue(key, out value!);
+            Values.TryGetValue(key, out value!);
 
         public string? GetScalar(string key) =>
             TryGetValue(key, out var value) && value is SimpleYamlScalar scalar ? scalar.Value : null;
@@ -1049,12 +811,7 @@ public sealed partial class HumanizerSourceGenerator
 
             var index = 0;
             var value = ParseBlock(lines, ref index, 0);
-            if (value is not SimpleYamlMapping mapping)
-            {
-                throw new InvalidOperationException("Locale YAML root must be a mapping.");
-            }
-
-            return mapping;
+            return value is not SimpleYamlMapping mapping ? throw new InvalidOperationException("Locale YAML root must be a mapping.") : mapping;
         }
 
         static List<LineInfo> NormalizeLines(string text)
@@ -1130,12 +887,9 @@ public sealed partial class HumanizerSourceGenerator
 
         static SimpleYamlValue ParseBlock(IReadOnlyList<LineInfo> lines, ref int index, int indent)
         {
-            if (index >= lines.Count)
-            {
-                throw new InvalidOperationException("Unexpected end of YAML document.");
-            }
-
-            return IsSequenceItem(lines[index].Content)
+            return index >= lines.Count
+                ? throw new InvalidOperationException("Unexpected end of YAML document.")
+                : IsSequenceItem(lines[index].Content)
                 ? ParseSequence(lines, ref index, indent)
                 : ParseMapping(lines, ref index, indent);
         }
@@ -1309,7 +1063,7 @@ public sealed partial class HumanizerSourceGenerator
         {
             if (value == "[]")
             {
-                return new SimpleYamlSequence(ImmutableArray<SimpleYamlValue>.Empty);
+                return new SimpleYamlSequence([]);
             }
 
             if (value == "{}")
@@ -1317,14 +1071,11 @@ public sealed partial class HumanizerSourceGenerator
                 return new SimpleYamlMapping(ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal));
             }
 
-            if (value.Length >= 2 &&
+            return value.Length >= 2 &&
                 ((value[0] == '\'' && value[value.Length - 1] == '\'') ||
-                 (value[0] == '"' && value[value.Length - 1] == '"')))
-            {
-                return new SimpleYamlScalar(Unquote(value), true);
-            }
-
-            return new SimpleYamlScalar(value, false);
+                 (value[0] == '"' && value[value.Length - 1] == '"'))
+                ? new SimpleYamlScalar(Unquote(value), true)
+                : new SimpleYamlScalar(value, false);
         }
 
         static string Unquote(string value)
@@ -1339,14 +1090,11 @@ public sealed partial class HumanizerSourceGenerator
                 return value.Substring(1, value.Length - 2).Replace("''", "'");
             }
 
-            if (value[0] == '"' && value[value.Length - 1] == '"')
-            {
-                return value.Substring(1, value.Length - 2)
+            return value[0] == '"' && value[value.Length - 1] == '"'
+                ? value.Substring(1, value.Length - 2)
                     .Replace("\\\"", "\"")
-                    .Replace("\\\\", "\\");
-            }
-
-            return value;
+                    .Replace("\\\\", "\\")
+                : value;
         }
     }
 }

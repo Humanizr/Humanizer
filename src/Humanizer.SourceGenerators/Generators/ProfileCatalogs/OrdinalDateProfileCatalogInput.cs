@@ -97,7 +97,7 @@ public sealed partial class HumanizerSourceGenerator
                 condition: "NET6_0_OR_GREATER");
         }
 
-        void EmitDateCatalog(
+        static void EmitDateCatalog(
             SourceProductionContext context,
             ImmutableArray<OrdinalDateProfileDefinition> profiles,
             string catalogName,

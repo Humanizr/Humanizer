@@ -36,11 +36,10 @@ public sealed partial class HumanizerSourceGenerator
 
         public static LocalePhraseTableCatalogInput Create(LocaleCatalogInput localeCatalog) =>
             new(
-                localeCatalog.Locales
+                [.. localeCatalog.Locales
                     .Where(static locale => locale.Phrases is not null)
                     .Select(static locale => locale.Phrases!)
-                    .OrderBy(static catalog => catalog.LocaleCode, StringComparer.Ordinal)
-                    .ToImmutableArray());
+                    .OrderBy(static catalog => catalog.LocaleCode, StringComparer.Ordinal)]);
 
         public void Emit(SourceProductionContext context)
         {
@@ -219,6 +218,7 @@ public sealed partial class HumanizerSourceGenerator
         static string MapCountPlacement(CountPlacement countPlacement) =>
             countPlacement switch
             {
+                CountPlacement.None => "None",
                 CountPlacement.BeforeForm => "BeforeForm",
                 CountPlacement.AfterForm => "AfterForm",
                 _ => "None"
