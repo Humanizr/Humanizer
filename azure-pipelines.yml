@@ -113,9 +113,10 @@ stages:
       displayName: Download build artifacts
 
     - task: UseDotNet@2
-      displayName: 'Use .NET 10 SDK'
+      displayName: 'Use .NET 11 SDK'
       inputs:
-        version: 10.x
+        includePreviewVersions: true
+        version: 11.x
 
     # Install the code signing tool
     - task: DotNetCoreCLI@2
