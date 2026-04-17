@@ -4,6 +4,9 @@ public class FormatterExactOutputTests
 {
     static readonly DateTime LocalBase = new(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
     static readonly DateTime UtcBase = new(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
+    static readonly int[] Pair = [1, 2];
+    static readonly int[] Triple = [1, 2, 3];
+    static readonly int[] Quadruple = [1, 2, 3, 4];
 
     [Theory]
     [MemberData(nameof(LocaleFormatterExactTheoryData.DateDayPluralCases), MemberType = typeof(LocaleFormatterExactTheoryData))]
@@ -84,9 +87,9 @@ public class FormatterExactOutputTests
             culture,
             () =>
             {
-                Assert.Equal(expected.Pair, ToVisibleText(new[] { 1, 2 }.Humanize()));
-                Assert.Equal(expected.Triple, ToVisibleText(new[] { 1, 2, 3 }.Humanize()));
-                Assert.Equal(expected.Quadruple, ToVisibleText(new[] { 1, 2, 3, 4 }.Humanize()));
+                Assert.Equal(expected.Pair, ToVisibleText(Pair.Humanize()));
+                Assert.Equal(expected.Triple, ToVisibleText(Triple.Humanize()));
+                Assert.Equal(expected.Quadruple, ToVisibleText(Quadruple.Humanize()));
             });
     }
 

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RoslynVersion>4.14</RoslynVersion>
+  </PropertyGroup>
+
+  <Import Project="Humanizer.Analyzers.props" />
+
+</Project>

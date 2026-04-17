@@ -46,7 +46,6 @@ Storage.dat
 # DNX
 project.lock.json
 *.lock.json
-/artifacts/
 
 # Visual Studio profiler
 *.psess
@@ -128,3 +127,5 @@ scripts/ralph/logs/
 
 # Claude session lock files (machine-specific)
 /.claude/*.lock
+
+artifacts/

@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Humanizer.Tests.Localisation;
 
 public class LocaleRegistrySweepTests
@@ -419,7 +417,4 @@ public class LocaleRegistrySweepTests
         Assert.Equal(expected, parsedNumber);
         Assert.Null(unrecognizedWord);
     }
-
-    static string ToVisibleText(string value) =>
-        new(value.Where(static ch => CharUnicodeInfo.GetUnicodeCategory(ch) != UnicodeCategory.Format).ToArray());
 }

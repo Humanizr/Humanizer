@@ -9,6 +9,12 @@ public class SomeClass
 [UseCulture("en")]
 public class CollectionHumanizeTests
 {
+    static readonly object?[] NullObjects = [null, null];
+    static readonly string[] ThreeStrings = ["A", "B", "C"];
+    static readonly int?[] NullableInts = [1, null, 3];
+    static readonly string[] StringsWithEmptyItem = ["A", " ", "C"];
+    static readonly string[] StringsWithWhitespace = ["A", "  B  ", "C"];
+
     [Fact]
     public void HumanizeReturnsOnlyNameWhenCollectionContainsOneItem()
     {
@@ -95,31 +101,31 @@ public class CollectionHumanizeTests
 
     [Fact]
     public void HumanizeHandlesNullItemsWithoutAnException() =>
-        Assert.Null(Record.Exception(() => new object?[] { null, null }.Humanize()));
+        Assert.Null(Record.Exception(() => NullObjects.Humanize()));
 
     [Fact]
     public void HumanizeHandlesNullStringDisplayFormatterReturnsWithoutAnException() =>
-        Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => null!)));
+        Assert.Null(Record.Exception(() => ThreeStrings.Humanize(_ => null!)));
 
     [Fact]
     public void HumanizeHandlesNullObjectDisplayFormatterReturnsWithoutAnException() =>
-        Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => (object)null!)));
+        Assert.Null(Record.Exception(() => ThreeStrings.Humanize(_ => (object)null!)));
 
     [Fact]
     public void HumanizeRunsStringDisplayFormatterOnNulls() =>
-        Assert.Equal("1, (null), and 3", new int?[] { 1, null, 3 }.Humanize(_ => _?.ToString() ?? "(null)"));
+        Assert.Equal("1, (null), and 3", NullableInts.Humanize(_ => _?.ToString() ?? "(null)"));
 
     [Fact]
     public void HumanizeRunsObjectDisplayFormatterOnNulls() =>
-        Assert.Equal("1, 2, and 3", new int?[] { 1, null, 3 }.Humanize(_ => _ ?? 2));
+        Assert.Equal("1, 2, and 3", NullableInts.Humanize(_ => _ ?? 2));
 
     [Fact]
     public void HumanizeRemovesEmptyItemsByDefault() =>
-        Assert.Equal("A and C", new[] { "A", " ", "C" }.Humanize(DummyFormatter));
+        Assert.Equal("A and C", StringsWithEmptyItem.Humanize(DummyFormatter));
 
     [Fact]
     public void HumanizeTrimsItemsByDefault() =>
-        Assert.Equal("A, B, and C", new[] { "A", "  B  ", "C" }.Humanize(DummyFormatter));
+        Assert.Equal("A, B, and C", StringsWithWhitespace.Humanize(DummyFormatter));
 
     /// <summary>
     /// Use the dummy formatter to ensure tests are testing formatter output rather than input

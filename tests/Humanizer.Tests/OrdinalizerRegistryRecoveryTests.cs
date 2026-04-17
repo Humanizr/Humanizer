@@ -1,4 +1,3 @@
-using System.Globalization;
 public class OrdinalizerRegistryRecoveryTests
 {
     [Theory]

@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Xml.Linq;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -104,7 +97,7 @@ public sealed partial class HumanizerSourceGenerator
                 condition: "NET6_0_OR_GREATER");
         }
 
-        void EmitDateCatalog(
+        static void EmitDateCatalog(
             SourceProductionContext context,
             ImmutableArray<OrdinalDateProfileDefinition> profiles,
             string catalogName,

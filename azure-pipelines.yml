@@ -34,7 +34,6 @@ stages:
     - task: UseDotNet@2
       displayName: 'Use .NET 10 SDK'
       inputs:
-        includePreviewVersions: true
         version: 10.x
 
     - task: UseDotNet@2
@@ -71,10 +70,9 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: tests/**/*.Tests.csproj
+        projects: Humanizer.slnx
         arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Tests
-      continueOnError: true
 
     # Generate code coverage report
     # https://danielpalme.github.io/ReportGenerator/
@@ -94,10 +92,6 @@ stages:
       displayName: Publish build packages
       artifact: BuildPackages
       condition: succeededOrFailed()
-
-    - script: exit 1
-      displayName: Fail build on test failures
-      condition: eq(variables['Agent.JobStatus'], 'SucceededWithIssues')
 
 
 - stage: CodeSign
@@ -121,7 +115,6 @@ stages:
     - task: UseDotNet@2
       displayName: 'Use .NET 10 SDK'
       inputs:
-        includePreviewVersions: true
         version: 10.x
 
     # Install the code signing tool

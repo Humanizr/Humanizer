@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net10.0;net8.0;net48</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">net11.0;net10.0;net8.0;net48</TargetFrameworks>
+    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">net11.0;net10.0;net8.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>

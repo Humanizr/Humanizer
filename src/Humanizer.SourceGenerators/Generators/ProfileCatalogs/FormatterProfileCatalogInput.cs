@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -222,7 +219,7 @@ public sealed partial class HumanizerSourceGenerator
             return CreateRuleArrayExpression("FormatterTimeSpanFormRule", expressions);
         }
 
-        static string CreateRuleArrayExpression(string elementType, IReadOnlyList<string> expressions) =>
+        static string CreateRuleArrayExpression(string elementType, List<string> expressions) =>
             expressions.Count == 0
                 ? "Array.Empty<" + elementType + ">()"
                 : "new " + elementType + "[] { " + string.Join(", ", expressions) + " }";

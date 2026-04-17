@@ -22,11 +22,15 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
     {
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
         if (root is null)
+        {
             return;
+        }
 
         var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
         if (semanticModel is null)
+        {
             return;
+        }
 
         foreach (var diagnostic in context.Diagnostics)
         {
@@ -47,6 +51,8 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
                     }
 
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -57,13 +63,9 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
         return invocation is not null;
     }
 
-    static bool IsLongWordsToNumberResult(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken)
-    {
-        if (semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is not IMethodSymbol symbol)
-            return false;
-
-        return IsLongWordsToNumberMethod(symbol);
-    }
+    static bool IsLongWordsToNumberResult(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken) =>
+        semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is IMethodSymbol symbol
+            && IsLongWordsToNumberMethod(symbol);
 
     static bool IsLongWordsToNumberMethod(IMethodSymbol method) =>
         method.Name switch
@@ -81,7 +83,9 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
         if (root is null)
+        {
             return document;
+        }
 
         var castExpression = SyntaxFactory.CheckedExpression(
             SyntaxKind.CheckedExpression,

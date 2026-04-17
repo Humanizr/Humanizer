@@ -1,5 +1,3 @@
-using System.Globalization;
-
 [MemoryDiagnoser(false)]
 public class ItalianNumberBenchmarks
 {

@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net10.0;net8.0;net48;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net11.0;net10.0;net8.0;net48;netstandard2.0</TargetFrameworks>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields, etc, into a human friendly format</Description>
     <Product>Humanizer</Product>
     <PackageIcon>logo.png</PackageIcon>
@@ -21,9 +21,9 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\logo.png" Pack="true" PackagePath="" Visible="false" />
     <None Include="$(MSBuildThisFileDirectory)..\..\readme.md" Pack="true" PackagePath="" Visible="false" />
-    <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\bin\$(Configuration)\roslyn3.8\netstandard2.0\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn3.8/cs" Visible="false" />
-    <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\bin\$(Configuration)\roslyn4.8\netstandard2.0\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.8/cs" Visible="false" />
-    <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\bin\$(Configuration)\roslyn4.14\netstandard2.0\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.14/cs" Visible="false" />
+    <None Include="$(ArtifactsPath)\bin\Humanizer.Analyzers\$(Configuration.ToLowerInvariant())_roslyn3.8\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn3.8/cs" Visible="false" />
+    <None Include="$(ArtifactsPath)\bin\Humanizer.Analyzers\$(Configuration.ToLowerInvariant())_roslyn4.8\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.8/cs" Visible="false" />
+    <None Include="$(ArtifactsPath)\bin\Humanizer.Analyzers\$(Configuration.ToLowerInvariant())_roslyn4.14\Humanizer.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.14/cs" Visible="false" />
     <None Include="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\build\Humanizer.Core.targets" Pack="true" PackagePath="buildTransitive/Humanizer.targets" Visible="false" />
   </ItemGroup>
   
@@ -68,21 +68,10 @@
   </ItemGroup>
   
   <ItemGroup>
-    <!-- Reference the analyzer project to ensure it builds first and its outputs are available for packing -->
-    <ProjectReference Include="..\Humanizer.Analyzers\Humanizer.Analyzers.csproj" ReferenceOutputAssembly="false" />
+    <!-- Reference analyzer variants so restore/build includes the packaged Roslyn versions in the normal graph. -->
+    <ProjectReference Include="..\Humanizer.Analyzers\Humanizer.Analyzers.Roslyn38.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Humanizer.Analyzers\Humanizer.Analyzers.Roslyn48.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Humanizer.Analyzers\Humanizer.Analyzers.Roslyn414.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Humanizer.SourceGenerators\Humanizer.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
-  
-  <Target Name="BuildAnalyzerVariants" BeforeTargets="GenerateNuspec">
-    <MSBuild
-      Projects="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
-      Targets="Restore;Rebuild"
-      RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
-      Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks=;RoslynVersion=4.8;AnalyzerVariant=roslyn4.8" />
-    <MSBuild
-      Projects="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
-      Targets="Restore;Rebuild"
-      RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
-      Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks=;RoslynVersion=4.14;AnalyzerVariant=roslyn4.14" />
-  </Target>
 </Project>

@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading;
-
-using Humanizer;
-using Humanizer.SourceGenerators;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;

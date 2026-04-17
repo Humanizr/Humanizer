@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Humanizer.Analyzers.Tests.Roslyn38</AssemblyName>
+    <ArtifactsProjectName>Humanizer.Analyzers.Tests.Roslyn38</ArtifactsProjectName>
+    <DefineConstants>$(DefineConstants);SYSTEM_COLLECTIONS_IMMUTABLE_MAJOR_VERSION_LE_7</DefineConstants>
+  </PropertyGroup>
+
+  <Import Project="Humanizer.Analyzers.Tests.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Humanizer.Analyzers\Humanizer.Analyzers.Roslyn38.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,18 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project>
 
   <PropertyGroup>
+    <AssemblyName>Humanizer.Analyzers</AssemblyName>
+    <RootNamespace>Humanizer.Analyzers</RootNamespace>
+    <ArtifactsProjectName>Humanizer.Analyzers</ArtifactsProjectName>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynComponent>true</IsRoslynComponent>
     <NoWarn>$(NoWarn);RS2001;RS1038;RS1041;RS2003</NoWarn>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <RoslynVersion Condition="'$(RoslynVersion)' == ''">3.8</RoslynVersion>
-    <AnalyzerVariant Condition="'$(AnalyzerVariant)' == ''">roslyn$(RoslynVersion)</AnalyzerVariant>
-    <OutputPath Condition="'$(AnalyzerVariant)' != ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\$(AnalyzerVariant)\</OutputPath>
     <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '3.8'">3.8.0</RoslynCSharpVersion>
     <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '3.8'">3.0.0</RoslynAnalyzerVersion>
     <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.8'">4.8.0</RoslynCSharpVersion>
@@ -21,6 +19,8 @@
     <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '4.14'">3.11.0</RoslynAnalyzerVersion>
     <RoslynCSharpVersion Condition="'$(RoslynCSharpVersion)' == ''">3.8.0</RoslynCSharpVersion>
     <RoslynAnalyzerVersion Condition="'$(RoslynAnalyzerVersion)' == ''">3.0.0</RoslynAnalyzerVersion>
+
+    <ArtifactsPivots>$(Configuration.ToLowerInvariant())_roslyn$(RoslynVersion.ToLowerInvariant())</ArtifactsPivots>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(RoslynVersion)' == '4.14'">

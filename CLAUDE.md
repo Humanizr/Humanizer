@@ -15,12 +15,15 @@ dotnet build Humanizer.slnx -c Release
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts
 
 # Run tests (all three TFMs build on every platform; net48 test execution requires a Windows host)
+dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net11.0
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net48  # Windows only
 
 # Run analyzer tests
-dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj
+dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn38.csproj
+dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn48.csproj
+dotnet test --project tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn414.csproj
 
 # Run source generator tests
 dotnet test --project tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj
@@ -80,7 +83,7 @@ docs/                           # Jekyll documentation site
 
 ## Key Config Files
 
-- `global.json` - .NET SDK version (10.0.100)
+- `global.json` - .NET SDK version (11.0.100-preview.3)
 - `Directory.Build.props` - Shared MSBuild properties (nullable, warnings-as-errors, analyzers)
 - `Directory.Packages.props` - Central package management (all NuGet versions)
 - `version.json` - Nerdbank.GitVersioning semver config

@@ -360,9 +360,6 @@ public class LocaleTheoryMatrixCompletenessTests
         }
     }
 
-    static bool ContainsLocale(IEnumerable dataSet, string localeName) =>
-        EnumerateLocales(dataSet).Contains(localeName, StringComparer.OrdinalIgnoreCase);
-
     static IEnumerable<object?[]> EnumerateRows(IEnumerable dataSet)
     {
         foreach (var row in dataSet)

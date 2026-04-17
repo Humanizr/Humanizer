@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Xml.Linq;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
 
 namespace Humanizer.SourceGenerators;
 
@@ -177,12 +171,9 @@ public sealed partial class HumanizerSourceGenerator
 
     static string CreateParameterizedExpression(string typeName, string constructorValueExpression, string? trailingValue = null)
     {
-        if (string.IsNullOrEmpty(trailingValue))
-        {
-            return "new " + typeName + "(" + constructorValueExpression + ")";
-        }
-
-        return "new " + typeName + "(" + constructorValueExpression + ", " + trailingValue + ")";
+        return string.IsNullOrEmpty(trailingValue)
+            ? "new " + typeName + "(" + constructorValueExpression + ")"
+            : "new " + typeName + "(" + constructorValueExpression + ", " + trailingValue + ")";
     }
 
     static string GetConventionalNumberToWordsTypeName(string engine) => CreateTypeName(engine, "NumberToWordsConverter");
@@ -238,12 +229,9 @@ public sealed partial class HumanizerSourceGenerator
 
     static long? GetOptionalInt64(JsonElement element, string propertyName)
     {
-        if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Number)
-        {
-            return null;
-        }
-
-        return property.TryGetInt64(out var value) ? value : null;
+        return !element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Number
+            ? null
+            : property.TryGetInt64(out var value) ? value : null;
     }
 
     /// <summary>
@@ -352,44 +340,26 @@ public sealed partial class HumanizerSourceGenerator
             ? CreateStringArrayExpression(property)
             : "Array.Empty<string>()";
 
-    static string CreateFormatterNumberDetectorExpression(JsonElement element, string propertyName) =>
-        CreateFormatterNumberDetectorExpression(GetOptionalString(element, propertyName));
-
     static string CreateFormatterNumberDetectorExpression(string? value) =>
         "FormatterNumberDetectorKind." + ToEnumMemberName(value ?? "none");
-
-    static string CreateFormatterNumberFormExpression(JsonElement element, string propertyName, string defaultValue = "default") =>
-        CreateFormatterNumberFormExpression(GetOptionalString(element, propertyName), defaultValue);
 
     static string CreateFormatterNumberFormExpression(string? value, string defaultValue = "default") =>
         "FormatterNumberForm." + ToEnumMemberName(value ?? defaultValue);
 
-    static string CreateFormatterFallbackTransformExpression(JsonElement element, string propertyName) =>
-        CreateFormatterFallbackTransformExpression(GetOptionalString(element, propertyName));
-
     static string CreateFormatterFallbackTransformExpression(string? value) =>
         "FormatterDataUnitFallbackTransform." + ToEnumMemberName(value ?? "none");
 
-    static string CreateFormatterPrepositionModeExpression(JsonElement element, string propertyName) =>
-        CreateFormatterPrepositionModeExpression(GetOptionalString(element, propertyName));
-
     static string CreateFormatterPrepositionModeExpression(string? value) =>
         "FormatterPrepositionMode." + ToEnumMemberName(value ?? "none");
-
-    static string CreateFormatterSecondaryPlaceholderModeExpression(JsonElement element, string propertyName) =>
-        CreateFormatterSecondaryPlaceholderModeExpression(GetOptionalString(element, propertyName));
 
     static string CreateFormatterSecondaryPlaceholderModeExpression(string? value) =>
         "FormatterSecondaryPlaceholderMode." + ToEnumMemberName(value ?? "none");
 
     static string CreateTimeUnitGenderMapExpression(JsonElement element, string propertyName)
     {
-        if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Object)
-        {
-            return "FrozenDictionary<TimeUnit, GrammaticalGender>.Empty";
-        }
-
-        return CreateTimeUnitGenderMapExpression(property);
+        return !element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Object
+            ? "FrozenDictionary<TimeUnit, GrammaticalGender>.Empty"
+            : CreateTimeUnitGenderMapExpression(property);
     }
 
     static string CreateTimeUnitGenderMapExpression(JsonElement property)
@@ -524,11 +494,6 @@ public sealed partial class HumanizerSourceGenerator
             ? (property.GetBoolean() ? "true" : "false")
             : null;
 
-    static string CreateOptionalStringIntFrozenDictionaryExpression(JsonElement element, string propertyName) =>
-        element.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.Object
-            ? CreateStringIntFrozenDictionaryExpression(property)
-            : "null";
-
     static string CreateOptionalStringLongFrozenDictionaryExpression(JsonElement element, string propertyName) =>
         element.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.Object
             ? CreateStringLongFrozenDictionaryExpression(property)
@@ -609,85 +574,11 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
-    static string CreateCharIntFrozenDictionaryExpression(JsonElement objectElement)
-    {
-        if (objectElement.ValueKind != JsonValueKind.Object)
-        {
-            throw new InvalidOperationException("Expected JSON object.");
-        }
-
-        var builder = new StringBuilder("new Dictionary<char, int> { ");
-        var first = true;
-
-        foreach (var property in objectElement.EnumerateObject())
-        {
-            if (property.Name.Length != 1 ||
-                property.Value.ValueKind != JsonValueKind.Number ||
-                !property.Value.TryGetInt32(out var value))
-            {
-                continue;
-            }
-
-            if (!first)
-            {
-                builder.Append(", ");
-            }
-
-            builder.Append("['");
-            builder.Append(EscapeCharLiteral(property.Name[0]));
-            builder.Append("'] = ");
-            builder.Append(value.ToString(CultureInfo.InvariantCulture));
-            first = false;
-        }
-
-        builder.Append(" }.ToFrozenDictionary()");
-        return builder.ToString();
-    }
-
-    static string CreateNullableCharStringFrozenDictionaryExpression(JsonElement element, string propertyName) =>
-        element.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.Object
-            ? CreateCharStringFrozenDictionaryExpression(property)
-            : "null";
-
     static string CreateNullableIntStringFrozenDictionaryExpression(JsonElement element, string propertyName)
     {
         if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Object)
         {
             return "null";
-        }
-
-        var builder = new StringBuilder("new Dictionary<int, string> { ");
-        var first = true;
-
-        foreach (var entry in property.EnumerateObject())
-        {
-            if (!int.TryParse(entry.Name, NumberStyles.Integer, CultureInfo.InvariantCulture, out var key) ||
-                entry.Value.ValueKind != JsonValueKind.String)
-            {
-                continue;
-            }
-
-            if (!first)
-            {
-                builder.Append(", ");
-            }
-
-            builder.Append('[');
-            builder.Append(key.ToString(CultureInfo.InvariantCulture));
-            builder.Append("] = ");
-            builder.Append(QuoteLiteral(entry.Value.GetString()!));
-            first = false;
-        }
-
-        builder.Append(" }.ToFrozenDictionary()");
-        return builder.ToString();
-    }
-
-    static string CreateOptionalIntStringFrozenDictionaryOrEmptyExpression(JsonElement element, string propertyName)
-    {
-        if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind != JsonValueKind.Object)
-        {
-            return "FrozenDictionary<int, string>.Empty";
         }
 
         var builder = new StringBuilder("new Dictionary<int, string> { ");
@@ -958,14 +849,6 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
-    static string CreateOptionalIntFrozenSetOrEmptyExpression(JsonElement element, string propertyName)
-    {
-        var expression = CreateNullableIntFrozenSetExpression(element, propertyName);
-        return expression == "null"
-            ? "FrozenSet<int>.Empty"
-            : expression;
-    }
-
     static string CreateEastSlavicScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "EastSlavicScale",
@@ -988,12 +871,9 @@ public sealed partial class HumanizerSourceGenerator
             RequiredStringValue("plural"),
             element =>
             {
-                if (GetOptionalString(element, "ordinalStem") is { } ordinalStem)
-                {
-                    return QuoteLiteral(ordinalStem);
-                }
-
-                return element.TryGetProperty("omitLeadingOne", out var property) && property.ValueKind is JsonValueKind.True or JsonValueKind.False
+                return GetOptionalString(element, "ordinalStem") is { } ordinalStem
+                    ? QuoteLiteral(ordinalStem)
+                    : element.TryGetProperty("omitLeadingOne", out var property) && property.ValueKind is JsonValueKind.True or JsonValueKind.False
                     ? "null"
                     : null;
             },
@@ -1057,28 +937,22 @@ public sealed partial class HumanizerSourceGenerator
 
     static string CreateUnitLeadingCompoundOrdinalPairExpression(JsonElement element, string propertyName)
     {
-        if (!element.TryGetProperty(propertyName, out var property))
-        {
-            throw new InvalidOperationException($"Missing required property '{propertyName}'.");
-        }
-
-        return property.ValueKind switch
-        {
-            JsonValueKind.String => "new string[] { " + QuoteLiteral(property.GetString()!) + ", " + QuoteLiteral(property.GetString()!) + " }",
-            JsonValueKind.Array => CreateStringArrayExpression(property),
-            JsonValueKind.Object => CreateTerminalContinuingStringArrayExpression(property, propertyName),
-            _ => throw new InvalidOperationException($"Property '{propertyName}' must be a string, array, or mapping.")
-        };
+        return !element.TryGetProperty(propertyName, out var property)
+            ? throw new InvalidOperationException($"Missing required property '{propertyName}'.")
+            : property.ValueKind switch
+            {
+                JsonValueKind.String => "new string[] { " + QuoteLiteral(property.GetString()!) + ", " + QuoteLiteral(property.GetString()!) + " }",
+                JsonValueKind.Array => CreateStringArrayExpression(property),
+                JsonValueKind.Object => CreateTerminalContinuingStringArrayExpression(property, propertyName),
+                _ => throw new InvalidOperationException($"Property '{propertyName}' must be a string, array, or mapping (got {property.ValueKind}).")
+            };
     }
 
     static string CreateTerminalContinuingStringArrayExpression(JsonElement objectElement, string propertyName)
     {
-        if (objectElement.ValueKind != JsonValueKind.Object)
-        {
-            throw new InvalidOperationException($"Property '{propertyName}' must be a mapping.");
-        }
-
-        return "new string[] { " +
+        return objectElement.ValueKind != JsonValueKind.Object
+            ? throw new InvalidOperationException($"Property '{propertyName}' must be a mapping.")
+            : "new string[] { " +
                QuoteLiteral(GetRequiredString(objectElement, "terminal")) + ", " +
                QuoteLiteral(GetRequiredString(objectElement, "continuing")) +
                " }";
@@ -1209,15 +1083,12 @@ public sealed partial class HumanizerSourceGenerator
 
         if (arrayElement.ValueKind == JsonValueKind.Object)
         {
-            foreach (var property in arrayElement.EnumerateObject()
+            foreach (var (Name, Value) in arrayElement.EnumerateObject()
                          .Select(static property =>
                          {
-                             if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
-                             {
-                                 throw new InvalidOperationException($"Inverted tens token '{property.Name}' must map to an integer value.");
-                             }
-
-                             return (property.Name, Value: value);
+                             return property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value)
+                                 ? throw new InvalidOperationException($"Inverted tens token '{property.Name}' must map to an integer value.")
+                                 : (property.Name, Value: value);
                          })
                          .OrderByDescending(static entry => entry.Value)
                          .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
@@ -1228,9 +1099,9 @@ public sealed partial class HumanizerSourceGenerator
                 }
 
                 builder.Append("new(");
-                builder.Append(QuoteLiteral(property.Name));
+                builder.Append(QuoteLiteral(Name));
                 builder.Append(", ");
-                builder.Append(property.Value.ToString(CultureInfo.InvariantCulture));
+                builder.Append(Value.ToString(CultureInfo.InvariantCulture));
                 builder.Append(')');
                 first = false;
             }
@@ -1316,15 +1187,12 @@ public sealed partial class HumanizerSourceGenerator
 
         if (arrayElement.ValueKind == JsonValueKind.Object)
         {
-            foreach (var property in arrayElement.EnumerateObject()
+            foreach (var (Name, Value) in arrayElement.EnumerateObject()
                          .Select(static property =>
                          {
-                             if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
-                             {
-                                 throw new InvalidOperationException($"Prefixed scale token '{property.Name}' must map to an integer value.");
-                             }
-
-                             return (property.Name, Value: value);
+                             return property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value)
+                                 ? throw new InvalidOperationException($"Prefixed scale token '{property.Name}' must map to an integer value.")
+                                 : (property.Name, Value: value);
                          })
                          .OrderByDescending(static entry => entry.Value)
                          .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
@@ -1335,9 +1203,9 @@ public sealed partial class HumanizerSourceGenerator
                 }
 
                 builder.Append("new(");
-                builder.Append(QuoteLiteral(property.Name));
+                builder.Append(QuoteLiteral(Name));
                 builder.Append(", ");
-                builder.Append(property.Value.ToString(CultureInfo.InvariantCulture));
+                builder.Append(Value.ToString(CultureInfo.InvariantCulture));
                 builder.Append(')');
                 first = false;
             }
@@ -1381,15 +1249,12 @@ public sealed partial class HumanizerSourceGenerator
 
         if (arrayElement.ValueKind == JsonValueKind.Object)
         {
-            foreach (var property in arrayElement.EnumerateObject()
+            foreach (var (Name, Value) in arrayElement.EnumerateObject()
                          .Select(static property =>
                          {
-                             if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value))
-                             {
-                                 throw new InvalidOperationException($"Prefixed tens prefix '{property.Name}' must map to an integer base value.");
-                             }
-
-                             return (property.Name, Value: value);
+                             return property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt64(out var value)
+                                 ? throw new InvalidOperationException($"Prefixed tens prefix '{property.Name}' must map to an integer base value.")
+                                 : (property.Name, Value: value);
                          })
                          .OrderByDescending(static entry => entry.Name.Length)
                          .ThenBy(static entry => entry.Name, StringComparer.Ordinal))
@@ -1400,9 +1265,9 @@ public sealed partial class HumanizerSourceGenerator
                 }
 
                 builder.Append("new(");
-                builder.Append(QuoteLiteral(property.Name));
+                builder.Append(QuoteLiteral(Name));
                 builder.Append(", ");
-                builder.Append(property.Value.ToString(CultureInfo.InvariantCulture));
+                builder.Append(Value.ToString(CultureInfo.InvariantCulture));
                 builder.Append(')');
                 first = false;
             }
@@ -1431,36 +1296,6 @@ public sealed partial class HumanizerSourceGenerator
         }
 
         builder.Append(" }");
-        return builder.ToString();
-    }
-
-    static string CreateIntFrozenSetExpression(JsonElement arrayElement)
-    {
-        if (arrayElement.ValueKind != JsonValueKind.Array)
-        {
-            throw new InvalidOperationException("Expected JSON array.");
-        }
-
-        var builder = new StringBuilder("new[] { ");
-        var first = true;
-
-        foreach (var item in arrayElement.EnumerateArray())
-        {
-            if (item.ValueKind != JsonValueKind.Number || !item.TryGetInt64(out var value))
-            {
-                continue;
-            }
-
-            if (!first)
-            {
-                builder.Append(", ");
-            }
-
-            builder.Append(checked((int)value).ToString(CultureInfo.InvariantCulture));
-            first = false;
-        }
-
-        builder.Append(" }.ToFrozenSet()");
         return builder.ToString();
     }
 
@@ -1496,24 +1331,13 @@ public sealed partial class HumanizerSourceGenerator
 
     static string CreateWordsOrdinalMapExpression(JsonElement root, string builderMethodName)
     {
-        if (root.TryGetProperty("ordinalNumberToWordsKind", out var ordinalProfile) && ordinalProfile.ValueKind == JsonValueKind.String)
-        {
-            return builderMethodName + "(NumberToWordsProfileCatalog.Resolve(" +
+        return root.TryGetProperty("ordinalNumberToWordsKind", out var ordinalProfile) && ordinalProfile.ValueKind == JsonValueKind.String
+            ? builderMethodName + "(NumberToWordsProfileCatalog.Resolve(" +
                 QuoteLiteral(ordinalProfile.GetString()!) +
-                ", CultureInfo.InvariantCulture))";
-        }
-
-        return root.TryGetProperty("ordinalMap", out var ordinalMap) && ordinalMap.ValueKind == JsonValueKind.Object
+                ", CultureInfo.InvariantCulture))"
+            : root.TryGetProperty("ordinalMap", out var ordinalMap) && ordinalMap.ValueKind == JsonValueKind.Object
             ? CreateStringLongFrozenDictionaryExpression(ordinalMap)
             : "new Dictionary<string, long>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)";
-    }
-
-    static string CreateOptionalSequenceMultiplierThreshold(JsonElement root)
-    {
-        var value = GetOptionalInt64(root, "sequenceMultiplierThreshold");
-        return value.HasValue
-            ? ", " + value.Value.ToString(CultureInfo.InvariantCulture)
-            : string.Empty;
     }
 
     static string CreateConventionalNumberToWordsExpression(string engine, bool useCultureParameter)

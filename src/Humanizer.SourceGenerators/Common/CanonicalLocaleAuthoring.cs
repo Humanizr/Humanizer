@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -91,13 +87,11 @@ public sealed partial class HumanizerSourceGenerator
                 surfaces = new SimpleYamlMapping(
                     ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal));
             }
-            else if (surfacesValue is SimpleYamlMapping surfacesMapping)
-            {
-                surfaces = surfacesMapping;
-            }
             else
             {
-                throw new InvalidOperationException($"Locale '{localeCode}.surfaces' must be a mapping.");
+                surfaces = surfacesValue is SimpleYamlMapping surfacesMapping
+                    ? surfacesMapping
+                    : throw new InvalidOperationException($"Locale '{localeCode}.surfaces' must be a mapping.");
             }
 
             foreach (var surface in surfaces.Values)
@@ -193,6 +187,8 @@ public sealed partial class HumanizerSourceGenerator
 
                     case "calendar":
                         AddCalendarFeatures(document.LocaleCode, surfaceMapping, features);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -412,7 +408,7 @@ public sealed partial class HumanizerSourceGenerator
                             $"Locale '{localeCode}.surfaces.calendar.hijriMonths' items must be scalar strings.");
                     }
 
-                    if (scalar.Value.IndexOfAny(new[] { '\u200E', '\u200F', '\u061C' }) >= 0)
+                    if (scalar.Value.IndexOfAny(['\u200E', '\u200F', '\u061C']) >= 0)
                     {
                         throw new InvalidOperationException(
                             $"Locale '{localeCode}.surfaces.calendar.hijriMonths' must not contain directionality controls (U+200E, U+200F, U+061C).");
@@ -430,13 +426,13 @@ public sealed partial class HumanizerSourceGenerator
             return normalized;
         }
 
-        static readonly HashSet<string> ExplicitDefaultEnginePaths = new(StringComparer.Ordinal)
-        {
+        static readonly HashSet<string> ExplicitDefaultEnginePaths =
+        [
             "surfaces.ordinal.numeric",
             "surfaces.ordinal.date",
             "surfaces.ordinal.dateOnly",
             "surfaces.clock"
-        };
+        ];
 
         static void RejectExplicitDefaultEngines(string localeCode, string path, SimpleYamlValue value)
         {
@@ -467,6 +463,8 @@ public sealed partial class HumanizerSourceGenerator
                         RejectExplicitDefaultEngines(localeCode, $"{path}[{index}]", sequence.Items[index]);
                     }
 
+                    break;
+                default:
                     break;
             }
         }
@@ -525,13 +523,10 @@ public sealed partial class HumanizerSourceGenerator
         {
             const string start = "{0}";
             const string end = "{1}";
-            if (!template.StartsWith(start, StringComparison.Ordinal) ||
-                !template.EndsWith(end, StringComparison.Ordinal))
-            {
-                throw new InvalidOperationException("Canonical list templates must use '{0}' and '{1}' as an infix template.");
-            }
-
-            return template.Substring(start.Length, template.Length - start.Length - end.Length).Trim();
+            return !template.StartsWith(start, StringComparison.Ordinal) ||
+                !template.EndsWith(end, StringComparison.Ordinal)
+                ? throw new InvalidOperationException("Canonical list templates must use '{0}' and '{1}' as an infix template.")
+                : template.Substring(start.Length, template.Length - start.Length - end.Length).Trim();
         }
     }
 
@@ -702,13 +697,13 @@ public sealed partial class HumanizerSourceGenerator
             if (hasWords)
             {
                 builder.AppendLine("    words:");
-                AppendYamlValue(builder, wordsValue!, 6);
+                AppendYamlValue(builder, wordsValue, 6);
             }
 
             if (hasParse)
             {
                 builder.AppendLine("    parse:");
-                AppendYamlValue(builder, parseValue!, 6);
+                AppendYamlValue(builder, parseValue, 6);
             }
 
             builder.AppendLine();
@@ -814,12 +809,7 @@ public sealed partial class HumanizerSourceGenerator
 
         static string QuoteScalar(SimpleYamlScalar scalar)
         {
-            if (!scalar.IsQuoted)
-            {
-                return scalar.Value;
-            }
-
-            return "'" + scalar.Value.Replace("'", "''") + "'";
+            return !scalar.IsQuoted ? scalar.Value : "'" + scalar.Value.Replace("'", "''") + "'";
         }
     }
 
@@ -908,22 +898,19 @@ public sealed partial class HumanizerSourceGenerator
 
         static object? CreateFeatureFingerprint(LocaleFeature? feature)
         {
-            if (feature is null)
-            {
-                return null;
-            }
-
-            return new
-            {
-                feature.Kind,
-                feature.Argument,
-                ProfileRoot = feature.ProfileRoot.ValueKind == JsonValueKind.Undefined
-                    ? null
-                    : NormalizeJson(feature.ProfileRoot)
-            };
+            return feature is null
+                ? null
+                : new
+                {
+                    feature.Kind,
+                    feature.Argument,
+                    ProfileRoot = feature.ProfileRoot.ValueKind == JsonValueKind.Undefined
+                        ? null
+                        : NormalizeJson(feature.ProfileRoot)
+                };
         }
 
-        static IReadOnlyDictionary<string, object> CreateDatePhraseMap(ImmutableDictionary<string, DateHumanizePhrase> phrases) =>
+        static Dictionary<string, object> CreateDatePhraseMap(ImmutableDictionary<string, DateHumanizePhrase> phrases) =>
             phrases
                 .OrderBy(static entry => entry.Key, StringComparer.Ordinal)
                 .ToDictionary(
@@ -936,7 +923,7 @@ public sealed partial class HumanizerSourceGenerator
                     },
                     StringComparer.Ordinal);
 
-        static IReadOnlyDictionary<string, object> CreateTimeSpanPhraseMap(ImmutableDictionary<string, TimeSpanPhrase> phrases) =>
+        static Dictionary<string, object> CreateTimeSpanPhraseMap(ImmutableDictionary<string, TimeSpanPhrase> phrases) =>
             phrases
                 .OrderBy(static entry => entry.Key, StringComparer.Ordinal)
                 .ToDictionary(
@@ -951,7 +938,7 @@ public sealed partial class HumanizerSourceGenerator
                     },
                     StringComparer.Ordinal);
 
-        static IReadOnlyDictionary<string, object> CreateDataUnitPhraseMap(ImmutableDictionary<string, DataUnitPhrase> phrases) =>
+        static Dictionary<string, object> CreateDataUnitPhraseMap(ImmutableDictionary<string, DataUnitPhrase> phrases) =>
             phrases
                 .OrderBy(static entry => entry.Key, StringComparer.Ordinal)
                 .ToDictionary(
@@ -964,7 +951,7 @@ public sealed partial class HumanizerSourceGenerator
                     },
                     StringComparer.Ordinal);
 
-        static IReadOnlyDictionary<string, object> CreateTimeUnitPhraseMap(ImmutableDictionary<string, TimeUnitPhrase> phrases) =>
+        static Dictionary<string, object> CreateTimeUnitPhraseMap(ImmutableDictionary<string, TimeUnitPhrase> phrases) =>
             phrases
                 .OrderBy(static entry => entry.Key, StringComparer.Ordinal)
                 .ToDictionary(

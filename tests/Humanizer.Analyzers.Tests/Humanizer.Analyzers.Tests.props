@@ -1,10 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project>
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <RootNamespace>Humanizer.Analyzers.Tests</RootNamespace>
+    <NoWarn>$(NoWarn);RS1036;RS1038;RS1041</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,8 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Humanizer.Analyzers\Humanizer.Analyzers.csproj" />
-    <ProjectReference Include="..\..\src\Humanizer\Humanizer.csproj" />
+    <ProjectReference Include="..\..\src\Humanizer\Humanizer.csproj" SetTargetFramework="TargetFramework=net10.0" />
   </ItemGroup>
 
 </Project>

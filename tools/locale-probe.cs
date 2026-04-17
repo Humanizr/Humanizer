@@ -14,7 +14,6 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 var jsonMode = args.Contains("--json");
 var onlyFailing = args.Contains("--failing");

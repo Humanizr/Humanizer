@@ -1,7 +1,3 @@
-using System.Globalization;
-using BenchmarkDotNet.Attributes;
-using Humanizer;
-
 namespace Benchmarks;
 
 /// <summary>

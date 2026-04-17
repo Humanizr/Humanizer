@@ -16,6 +16,10 @@
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <AnalysisMode>Minimum</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
+    <GitVersionBaseDirectory>$(MSBuildThisFileDirectory)</GitVersionBaseDirectory>
   </PropertyGroup>
 
   <PropertyGroup>
