@@ -212,20 +212,9 @@ public sealed partial class HumanizerSourceGenerator
                 AppendStringArray(builder, "            ", "TeenSuffixTokens", locale.TeenSuffixTokens);
                 AppendStringArray(builder, "            ", "HundredSuffixTokens", locale.HundredSuffixTokens);
 
-                if (locale.AllowTerminalOrdinalToken)
-                {
-                    builder.AppendLine("            AllowTerminalOrdinalToken = true,");
-                }
-
-                if (locale.UseHundredMultiplier)
-                {
-                    builder.AppendLine("            UseHundredMultiplier = true,");
-                }
-
-                if (locale.AllowInvariantIntegerInput)
-                {
-                    builder.AppendLine("            AllowInvariantIntegerInput = true,");
-                }
+                AppendTrueBooleanValue(builder, "            ", "AllowTerminalOrdinalToken", locale.AllowTerminalOrdinalToken);
+                AppendTrueBooleanValue(builder, "            ", "UseHundredMultiplier", locale.UseHundredMultiplier);
+                AppendTrueBooleanValue(builder, "            ", "AllowInvariantIntegerInput", locale.AllowInvariantIntegerInput);
 
                 AppendLongValue(builder, "            ", "TeenBaseValue", locale.TeenBaseValue, defaultValue: 10);
                 AppendLongValue(builder, "            ", "HundredSuffixValue", locale.HundredSuffixValue, defaultValue: 100);
@@ -233,12 +222,7 @@ public sealed partial class HumanizerSourceGenerator
                 AppendLongValue(builder, "            ", "UnitTokenMaxValue", locale.UnitTokenMaxValue, defaultValue: 9);
                 AppendLongValue(builder, "            ", "HundredSuffixMinValue", locale.HundredSuffixMinValue, defaultValue: long.MaxValue);
                 AppendLongValue(builder, "            ", "HundredSuffixMaxValue", locale.HundredSuffixMaxValue, defaultValue: long.MinValue);
-                if (locale.ScaleThreshold.HasValue)
-                {
-                    builder.Append("            ScaleThreshold = ");
-                    builder.Append(locale.ScaleThreshold.Value.ToString(CultureInfo.InvariantCulture));
-                    builder.AppendLine(",");
-                }
+                AppendLongValue(builder, "            ", "ScaleThreshold", locale.ScaleThreshold, defaultValue: 1000);
 
                 builder.AppendLine("        });");
                 builder.AppendLine("    }");
@@ -315,6 +299,18 @@ public sealed partial class HumanizerSourceGenerator
             builder.Append(" = ");
             builder.Append(explicitValue.ToString(CultureInfo.InvariantCulture));
             builder.AppendLine(",");
+        }
+
+        static void AppendTrueBooleanValue(StringBuilder builder, string indent, string propertyName, bool value)
+        {
+            if (!value)
+            {
+                return;
+            }
+
+            builder.Append(indent);
+            builder.Append(propertyName);
+            builder.AppendLine(" = true,");
         }
 
         static string? ReadRequiredEnumString(

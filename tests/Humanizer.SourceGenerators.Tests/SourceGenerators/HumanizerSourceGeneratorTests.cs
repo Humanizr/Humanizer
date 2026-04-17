@@ -12,7 +12,7 @@ namespace Humanizer.SourceGenerators.Tests;
 
 public partial class HumanizerSourceGeneratorTests
 {
-    static readonly Lazy<ImmutableDictionary<string, string>> generatedSources = new(GenerateSources);
+    static readonly Lazy<ImmutableDictionary<string, string>> GeneratedSources = new(GenerateSources);
 
     [Fact]
     public void FormatterRegistryRegistrationsUseGeneratedProfilesForSharedFormatters()
@@ -251,7 +251,7 @@ surfaces:
         Assert.DoesNotContain("case \"en\":", profileCatalogSource);
         Assert.DoesNotContain("case \"kurdish\":", profileCatalogSource);
         Assert.DoesNotContain("case \"vietnamese\":", profileCatalogSource);
-        Assert.DoesNotContain(generatedSources.Value.Keys, static hintName => hintName == "TokenMapWordsToNumberConverters.Index.g.cs");
+        Assert.DoesNotContain(GeneratedSources.Value.Keys, static hintName => hintName == "TokenMapWordsToNumberConverters.Index.g.cs");
     }
 
     [Fact]
@@ -1361,7 +1361,7 @@ wordsToNumber:
     }
 
     static string GetGeneratedSource(string hintName) =>
-        generatedSources.Value.TryGetValue(hintName, out var source)
+        GeneratedSources.Value.TryGetValue(hintName, out var source)
             ? source
             : throw new Xunit.Sdk.XunitException($"Generated source '{hintName}' was not found.");
 
