@@ -9,7 +9,7 @@ These instructions apply to the entire repository.
 
 ## Toolchain
 - Primary language: C# (modern features).
-- Target frameworks: .NET 8.0, .NET 10.0, NET 11.0, and .NET Framework 4.8.
+- Target frameworks: .NET 8.0, .NET 10.0, .NET 11.0, and .NET Framework 4.8.
 - Tests use xUnit and should live alongside similar tests in `tests/Humanizer.Tests`.
 - Build with the .NET CLI (`dotnet`). Prefer the latest SDK.
 
