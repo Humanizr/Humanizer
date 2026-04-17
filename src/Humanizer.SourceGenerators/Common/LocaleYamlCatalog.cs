@@ -1071,11 +1071,17 @@ public sealed partial class HumanizerSourceGenerator
                 return new SimpleYamlMapping(ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal));
             }
 
-            return value.Length >= 2 &&
-                ((value[0] == '\'' && value[value.Length - 1] == '\'') ||
-                 (value[0] == '"' && value[value.Length - 1] == '"'))
+            var isQuoted = value.Length >= 2 && IsWrappedInMatchingQuotes(value);
+            return isQuoted
                 ? new SimpleYamlScalar(Unquote(value), true)
                 : new SimpleYamlScalar(value, false);
+        }
+
+        static bool IsWrappedInMatchingQuotes(string value)
+        {
+            var first = value[0];
+            var last = value[value.Length - 1];
+            return (first == '\'' && last == '\'') || (first == '"' && last == '"');
         }
 
         static string Unquote(string value)

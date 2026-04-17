@@ -63,12 +63,9 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
         return invocation is not null;
     }
 
-    static bool IsLongWordsToNumberResult(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken)
-    {
-        return semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is not IMethodSymbol symbol
-            ? false
-            : IsLongWordsToNumberMethod(symbol);
-    }
+    static bool IsLongWordsToNumberResult(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken) =>
+        semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is IMethodSymbol symbol
+            && IsLongWordsToNumberMethod(symbol);
 
     static bool IsLongWordsToNumberMethod(IMethodSymbol method) =>
         method.Name switch
