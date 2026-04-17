@@ -8,16 +8,12 @@
     <File Path="azure-pipelines.yml" />
     <File Path="global.json" />
     <File Path="license.txt" />
-    <File Path="NuSpecs/Humanizer.Core.nuspec" />
-    <File Path="NuSpecs/Humanizer.nuspec" />
     <File Path="readme.md" />
-    <File Path="release_notes.md" />
     <File Path="version.json" />
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
     <File Path="Directory.Packages.props" />
-    <File Path="ResXManager.config.xml" />
     <File Path="nuget.config" />
     <File Path="src/scripts/split-benchmark-results.ps1" />
   </Folder>
