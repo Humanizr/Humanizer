@@ -944,12 +944,7 @@ public sealed partial class HumanizerSourceGenerator
                 JsonValueKind.String => "new string[] { " + QuoteLiteral(property.GetString()!) + ", " + QuoteLiteral(property.GetString()!) + " }",
                 JsonValueKind.Array => CreateStringArrayExpression(property),
                 JsonValueKind.Object => CreateTerminalContinuingStringArrayExpression(property, propertyName),
-                JsonValueKind.Undefined => throw new NotImplementedException(),
-                JsonValueKind.Number => throw new NotImplementedException(),
-                JsonValueKind.True => throw new NotImplementedException(),
-                JsonValueKind.False => throw new NotImplementedException(),
-                JsonValueKind.Null => throw new NotImplementedException(),
-                _ => throw new InvalidOperationException($"Property '{propertyName}' must be a string, array, or mapping.")
+                _ => throw new InvalidOperationException($"Property '{propertyName}' must be a string, array, or mapping (got {property.ValueKind}).")
             };
     }
 
