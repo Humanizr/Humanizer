@@ -45,46 +45,12 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return profile.Midday;
         }
 
-        var hourWords = ResolveHourExpression(hour);
-        var nextHourWords = ResolveHourExpression(hour + 1);
-        var rawMinuteWords = ResolveMinuteWords(normalizedMinutes);
-
-        // When a zero-filler is configured and minutes are 1-9, prepend the filler word
-        // so templates like "{hour} {minutes}" produce "et nul fem" instead of "et fem".
-        // When compactMinuteWords is active (CJK locales), omit the space between filler and word.
-        var minuteWords = normalizedMinutes is > 0 and < 10 && profile.ZeroFiller.Length > 0
-            ? string.Concat(profile.ZeroFiller, profile.CompactMinuteWords ? "" : " ", rawMinuteWords)
-            : rawMinuteWords;
-
-        var reverseMinuteWords = normalizedMinutes > 0 ? ResolveMinuteWords(60 - normalizedMinutes) : "";
-
-        string halfMinuteWords;
-        if (normalizedMinutes < 30)
-        {
-            halfMinuteWords = ResolveMinuteWords(30 - normalizedMinutes);
-        }
-        else if (normalizedMinutes > 30)
-        {
-            halfMinuteWords = ResolveMinuteWords(normalizedMinutes - 30);
-        }
-        else
-        {
-            halfMinuteWords = "";
-        }
-
-        // Resolve the article for locales that have singular/plural articles (ca, es).
-        var article = ResolveArticle(hour);
-        var nextArticle = ResolveArticle(hour + 1);
-
-        // Pre-compute the day-period string for possible inline use via {dayPeriod} placeholder.
-        var dayPeriod = GetDayPeriod(hour);
-
         // Check minute-bucket template first (exact 5-minute intervals).
         var template = GetBucketTemplate(normalizedMinutes);
         if (template.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
-            var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            var result = ExpandTemplate(template, hour, normalizedMinutes, minuteSuffix);
             return ApplyDayPeriodIfNeeded(result, template, hour, normalizedMinutes);
         }
 
@@ -95,7 +61,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         if (rangeTemplate.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixForRange(normalizedMinutes);
-            var result = ExpandTemplate(rangeTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            var result = ExpandTemplate(rangeTemplate, hour, normalizedMinutes, minuteSuffix);
             return ApplyDayPeriodIfNeeded(result, rangeTemplate, hour, normalizedMinutes);
         }
 
@@ -103,11 +69,13 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         if (profile.DefaultTemplate.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
-            var result = ExpandTemplate(profile.DefaultTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            var result = ExpandTemplate(profile.DefaultTemplate, hour, normalizedMinutes, minuteSuffix);
             return ApplyDayPeriodIfNeeded(result, profile.DefaultTemplate, hour, normalizedMinutes);
         }
 
         // Absolute fallback: "{hour} {minutes}".
+        var hourWords = ResolveHourExpression(hour);
+        var minuteWords = ResolveMinuteExpression(normalizedMinutes);
         var fallback = minuteWords.Length > 0 ? hourWords + " " + minuteWords : hourWords;
         return ApplyDayPeriod(fallback, hour, usesNextHour: false);
     }
@@ -217,6 +185,18 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         }
 
         return words;
+    }
+
+    string ResolveMinuteExpression(int normalizedMinutes)
+    {
+        var rawMinuteWords = ResolveMinuteWords(normalizedMinutes);
+
+        // When a zero-filler is configured and minutes are 1-9, prepend the filler word
+        // so templates like "{hour} {minutes}" produce "et nul fem" instead of "et fem".
+        // When compactMinuteWords is active (CJK locales), omit the space between filler and word.
+        return normalizedMinutes is > 0 and < 10 && profile.ZeroFiller.Length > 0
+            ? string.Concat(profile.ZeroFiller, profile.CompactMinuteWords ? "" : " ", rawMinuteWords)
+            : rawMinuteWords;
     }
 
     /// <summary>
@@ -410,16 +390,22 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         };
     }
 
-    string ExpandTemplate(
-        string template, string hour, string nextHour,
-        string minutes, string minutesReverse, string minutesFromHalf,
-        string article, string nextArticle, string minuteSuffix, string dayPeriod)
+    string ExpandTemplate(string template, int hour, int normalizedMinutes, string minuteSuffix)
     {
+        var hourWords = template.Contains("{hour}") ? ResolveHourExpression(hour) : "";
+        var nextHourWords = template.Contains("{nextHour}") ? ResolveHourExpression(hour + 1) : "";
+        var minuteWords = template.Contains("{minutes}") ? ResolveMinuteExpression(normalizedMinutes) : "";
+        var reverseMinuteWords = template.Contains("{minutesReverse}") && normalizedMinutes > 0 ? ResolveMinuteWords(60 - normalizedMinutes) : "";
+        var halfMinuteWords = template.Contains("{minutesFromHalf}") ? ResolveHalfMinuteWords(normalizedMinutes) : "";
+        var article = template.Contains("{article}") ? ResolveArticle(hour) : "";
+        var nextArticle = template.Contains("{nextArticle}") ? ResolveArticle(hour + 1) : "";
+        var dayPeriod = template.Contains("{dayPeriod}") ? GetDayPeriod(hour) : "";
+
         // Single-pass expansion: scan the template once, resolve placeholders inline,
         // skip double spaces, and trim — producing only the final return string.
         var maxLen = template.Length
-            + hour.Length + nextHour.Length + minutes.Length
-            + minutesReverse.Length + minutesFromHalf.Length
+            + hourWords.Length + nextHourWords.Length + minuteWords.Length
+            + reverseMinuteWords.Length + halfMinuteWords.Length
             + article.Length + nextArticle.Length + minuteSuffix.Length + dayPeriod.Length;
 
         Span<char> buf = stackalloc char[maxLen];
@@ -440,7 +426,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
                 var name = template.AsSpan(i + 1, close - i - 1);
                 var replacement = ResolveTemplatePlaceholder(
                     name, template, close + 1,
-                    hour, nextHour, minutes, minutesReverse, minutesFromHalf,
+                    hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords,
                     article, nextArticle, minuteSuffix, dayPeriod);
 
                 replacement.CopyTo(buf[pos..]);
@@ -457,6 +443,21 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         var result = buf[..pos];
         result = result.Trim();
         return new string(result);
+    }
+
+    string ResolveHalfMinuteWords(int normalizedMinutes)
+    {
+        if (normalizedMinutes < 30)
+        {
+            return ResolveMinuteWords(30 - normalizedMinutes);
+        }
+
+        if (normalizedMinutes > 30)
+        {
+            return ResolveMinuteWords(normalizedMinutes - 30);
+        }
+
+        return "";
     }
 
     static void AppendChar(Span<char> buf, ref int pos, char c)

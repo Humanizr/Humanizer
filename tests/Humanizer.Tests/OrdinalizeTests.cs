@@ -105,6 +105,15 @@ public class OrdinalizeTests
         Assert.Equal(number.Ordinalize(culture), ordinalized);
     }
 
+    [Fact]
+    public void OrdinalizeNegativeNumberWithCustomCultureNegativeSign()
+    {
+        var culture = (CultureInfo)CultureInfo.GetCultureInfo("en-US").Clone();
+        culture.NumberFormat.NegativeSign = "!";
+
+        Assert.Equal("!1st", (-1).Ordinalize(culture));
+    }
+
     [Theory]
     [InlineData(0)]
     [InlineData(1)]

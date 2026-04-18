@@ -158,7 +158,7 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, CultureInfo culture)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))));
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)));
     }
 
     /// <summary>
@@ -178,7 +178,7 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, CultureInfo culture, WordForm wordForm)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))), wordForm);
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), wordForm);
     }
 
     /// <summary>
@@ -223,7 +223,7 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))), gender);
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), gender);
     }
 
     /// <summary>
@@ -246,7 +246,36 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture, WordForm wordForm)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))), gender, wordForm);
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), gender, wordForm);
+    }
+
+    static string FormatOrdinalNumberString(int number, CultureInfo culture)
+    {
+        if (number >= 0)
+        {
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+
+        if (LocaleNumberFormattingOverrides.TryGetNegativeSign(culture, out var negativeSign))
+        {
+            return FormatNegativeOrdinalNumberString(number, negativeSign!);
+        }
+
+        var cultureNegativeSign = culture.NumberFormat.NegativeSign;
+        return cultureNegativeSign == NumberFormatInfo.InvariantInfo.NegativeSign
+            ? number.ToString(CultureInfo.InvariantCulture)
+            : FormatNegativeOrdinalNumberString(number, cultureNegativeSign);
+    }
+
+    static string FormatNegativeOrdinalNumberString(int number, string negativeSign)
+    {
+        if (negativeSign == NumberFormatInfo.InvariantInfo.NegativeSign)
+        {
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+
+        var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+        return negativeSign + magnitude.ToString(CultureInfo.InvariantCulture);
     }
 
     static int ParseOrdinalNumber(string numberString, CultureInfo culture) =>
