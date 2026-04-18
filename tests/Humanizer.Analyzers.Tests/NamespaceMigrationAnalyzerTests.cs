@@ -123,7 +123,7 @@ class TestClass { }
         var test = @"
 namespace TestNamespace
 {
-    class TestClass 
+    class TestClass
     {
         void Method()
         {
@@ -138,4 +138,50 @@ namespace TestNamespace
                 .WithArguments("Humanizer.Bytes"));
     }
 
+    [Fact]
+    public async Task NestedQualifiedNameReportsOnlyOutermostDiagnostic()
+    {
+        var test = @"
+class Humanizer
+{
+    public class Bytes
+    {
+        public class Formatter { }
+    }
+}
+
+namespace TestNamespace
+{
+    class TestClass
+    {
+        void Method()
+        {
+            var typeName = typeof({|#0:Humanizer.Bytes.Formatter|}).Name;
+        }
+    }
+}
+";
+        await VerifyCS.VerifyAnalyzerAsync(test,
+            VerifyCS.Diagnostic(NamespaceMigrationAnalyzer.DiagnosticId)
+                .WithLocation(0)
+                .WithArguments("Humanizer.Bytes"));
+    }
+
+    [Fact]
+    public async Task QualifiedNameWithoutOldNamespace_NoDiagnostic()
+    {
+        var test = @"
+namespace TestNamespace
+{
+    class TestClass
+    {
+        void Method()
+        {
+            var typeName = typeof(System.Text.StringBuilder).Name;
+        }
+    }
+}
+";
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
 }
