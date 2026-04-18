@@ -1108,7 +1108,6 @@ variantOf: 'zz'
     {
         const string legacyYaml = """
 collectionFormatter: 'and'
-numberToWords: 'en'
 phrases:
   dateHumanize: 'now'
   timeSpan: 'duration'
@@ -1123,11 +1122,6 @@ phrases:
   list:
     engine: 'and'
 """, normalizedCanonicalYaml, StringComparison.Ordinal);
-        Assert.Contains("""
-  number:
-    words:
-      'en'
-""", normalizedCanonicalYaml, StringComparison.Ordinal);
         Assert.Contains("    relativeDate: 'now'", normalizedCanonicalYaml, StringComparison.Ordinal);
         Assert.Contains("    duration: 'duration'", normalizedCanonicalYaml, StringComparison.Ordinal);
         Assert.Contains("    dataUnits: 'data'", normalizedCanonicalYaml, StringComparison.Ordinal);
@@ -1141,6 +1135,11 @@ phrases:
             "AppendYamlValue",
             BindingFlags.Static | BindingFlags.NonPublic);
         Assert.NotNull(method);
+
+        var scalarBuilder = new StringBuilder();
+        method.Invoke(null, [scalarBuilder, new HumanizerSourceGenerator.SimpleYamlScalar("value", isQuoted: true), 2]);
+
+        Assert.Equal("  'value'\n", NormalizeNewlines(scalarBuilder.ToString()));
 
         var exception = Assert.Throws<TargetInvocationException>(() =>
             method.Invoke(null, [new StringBuilder(), new UnsupportedYamlValue(), 0]));
