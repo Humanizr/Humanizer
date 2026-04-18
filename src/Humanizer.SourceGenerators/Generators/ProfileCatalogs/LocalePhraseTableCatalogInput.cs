@@ -52,26 +52,34 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("#nullable enable");
             builder.AppendLine();
             builder.AppendLine("using System;");
+            builder.AppendLine("using System.Collections.Frozen;");
+            builder.AppendLine("using System.Collections.Generic;");
             builder.AppendLine();
             builder.AppendLine("namespace Humanizer;");
             builder.AppendLine();
             builder.AppendLine("static partial class LocalePhraseTableCatalog");
             builder.AppendLine("{");
-            builder.AppendLine("    internal static partial LocalePhraseTable? ResolveCore(string localeCode) =>");
-            builder.AppendLine("        localeCode switch");
-            builder.AppendLine("        {");
+            builder.AppendLine("    internal static partial LocalePhraseTable? ResolveCore(string localeCode)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        return Factories.TryGetValue(localeCode, out var factory)");
+            builder.AppendLine("            ? factory()");
+            builder.AppendLine("            : null;");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    static readonly FrozenDictionary<string, Func<LocalePhraseTable>> Factories = new Dictionary<string, Func<LocalePhraseTable>>(StringComparer.Ordinal)");
+            builder.AppendLine("    {");
 
             foreach (var catalog in catalogs)
             {
                 builder.Append("            ");
+                builder.Append('[');
                 builder.Append(QuoteLiteral(catalog.LocaleCode));
-                builder.Append(" => ");
+                builder.Append("] = static () => ");
                 builder.Append(GetCatalogPropertyName(catalog.LocaleCode));
                 builder.AppendLine(",");
             }
 
-            builder.AppendLine("            _ => null");
-            builder.AppendLine("        };");
+            builder.AppendLine("    }.ToFrozenDictionary(StringComparer.Ordinal);");
             builder.AppendLine();
 
             foreach (var catalog in catalogs)

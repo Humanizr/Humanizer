@@ -294,10 +294,31 @@ surfaces:
 
         Assert.Contains("static partial class LocalePhraseTableCatalog", source);
         Assert.Contains("static partial LocalePhraseTable? ResolveCore(string localeCode)", source);
-        Assert.Contains("\"en\" => en,", source);
+        Assert.Contains("static readonly FrozenDictionary<string, Func<LocalePhraseTable>> Factories", source);
+        Assert.Contains("[\"en\"] = static () => en,", source);
         Assert.Contains("new LocalizedDatePhrase?[]", source);
         Assert.Contains("new LocalizedTimeSpanPhrase?[]", source);
         Assert.Contains("new LocalizedUnitPhrase?[]", source);
+    }
+
+    [Fact]
+    public void GeneratedHighCardinalityCatalogsUseLookupTablesInsteadOfLargeSwitches()
+    {
+        var formatterCatalog = GetGeneratedSource("FormatterProfileCatalog.g.cs");
+        var headingCatalog = GetGeneratedSource("HeadingTableCatalog.g.cs");
+        var phraseCatalog = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");
+
+        Assert.Contains("static readonly FrozenDictionary<string, Func<CultureInfo, IFormatter>> Factories", formatterCatalog);
+        Assert.Contains("[\"bg\"] = static culture => new ProfiledFormatter(culture, ", formatterCatalog);
+        Assert.DoesNotContain("return kind switch", formatterCatalog);
+
+        Assert.Contains("static readonly FrozenDictionary<string, Func<HeadingTable>> Factories", headingCatalog);
+        Assert.Contains("[\"en\"] = static () => en,", headingCatalog);
+        Assert.DoesNotContain("localeCode switch", headingCatalog);
+
+        Assert.Contains("static readonly FrozenDictionary<string, Func<LocalePhraseTable>> Factories", phraseCatalog);
+        Assert.Contains("[\"en\"] = static () => en,", phraseCatalog);
+        Assert.DoesNotContain("localeCode switch", phraseCatalog);
     }
 
     [Fact]
