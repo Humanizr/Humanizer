@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
+using System.Text.Json;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -285,6 +287,160 @@ surfaces:
         Assert.DoesNotContain("new FrenchWordsToNumberConverter()", source);
         Assert.DoesNotContain("new FilipinoWordsToNumberConverter()", source);
         Assert.DoesNotContain("new HungarianWordsToNumberConverter()", source);
+    }
+
+    [Fact]
+    public void WordsToNumberEngineContractsEmitTokenMapRulesWithDefaultsAndOverrides()
+    {
+        const string fullProfile = """
+{
+  "engine": "token-map",
+  "cardinalMap": {
+    "one": 1,
+    "hundred": 100
+  },
+  "ordinalMap": {
+    "first": 1
+  },
+  "ordinalScaleMap": {
+    "thousandth": 1000
+  },
+  "gluedOrdinalScaleSuffixes": {
+    "th": 1
+  },
+  "compositeScaleMap": {
+    "million billion": 1000000000000000
+  },
+  "normalizationProfile": "lowercase-remove-periods",
+  "negativePrefixes": [ "minus" ],
+  "negativeSuffixes": [ "negative" ],
+  "ordinalPrefixes": [ "ordinal" ],
+  "ignoredTokens": [ "and" ],
+  "leadingTokenPrefixesToTrim": [ "a-" ],
+  "multiplierTokens": [ "of" ],
+  "tokenSuffixesToStrip": [ "." ],
+  "ordinalAbbreviationSuffixes": [ "st" ],
+  "teenSuffixTokens": [ "teen" ],
+  "hundredSuffixTokens": [ "hundred" ],
+  "allowTerminalOrdinalToken": true,
+  "useHundredMultiplier": true,
+  "allowInvariantIntegerInput": true,
+  "teenBaseValue": 11,
+  "hundredSuffixValue": 101,
+  "unitTokenMinValue": 2,
+  "unitTokenMaxValue": 8,
+  "hundredSuffixMinValue": 3,
+  "hundredSuffixMaxValue": 9,
+  "scaleThreshold": 10000
+}
+""";
+
+        var fullExpression = CreateWordsToNumberContractExpression("token-map", fullProfile);
+
+        Assert.Contains("new TokenMapWordsToNumberConverter(new() {", fullExpression);
+        Assert.Contains("CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"one\"] = 1, [\"hundred\"] = 100 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
+        Assert.Contains("ExactOrdinalMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"first\"] = 1 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
+        Assert.Contains("OrdinalScaleMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"thousandth\"] = 1000 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
+        Assert.Contains("GluedOrdinalScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal) { [\"th\"] = 1 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
+        Assert.Contains("CompositeScaleMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"million billion\"] = 1000000000000000 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
+        Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.LowercaseRemovePeriods", fullExpression);
+        Assert.Contains("NegativePrefixes = new string[] { \"minus\" }", fullExpression);
+        Assert.Contains("HundredSuffixTokens = new string[] { \"hundred\" }", fullExpression);
+        Assert.Contains("AllowTerminalOrdinalToken = true", fullExpression);
+        Assert.Contains("UseHundredMultiplier = true", fullExpression);
+        Assert.Contains("AllowInvariantIntegerInput = true", fullExpression);
+        Assert.Contains("TeenBaseValue = 11", fullExpression);
+        Assert.Contains("HundredSuffixValue = 101", fullExpression);
+        Assert.Contains("UnitTokenMinValue = 2", fullExpression);
+        Assert.Contains("UnitTokenMaxValue = 8", fullExpression);
+        Assert.Contains("HundredSuffixMinValue = 3", fullExpression);
+        Assert.Contains("HundredSuffixMaxValue = 9", fullExpression);
+        Assert.Contains("ScaleThreshold = 10000", fullExpression);
+
+        const string minimalProfile = """
+{
+  "engine": "token-map",
+  "cardinalMap": {
+    "one": 1
+  },
+  "normalizationProfile": "collapse-whitespace"
+}
+""";
+
+        var minimalExpression = CreateWordsToNumberContractExpression("token-map", minimalProfile);
+
+        Assert.Contains("ExactOrdinalMap = null", minimalExpression);
+        Assert.Contains("OrdinalScaleMap = null", minimalExpression);
+        Assert.Contains("GluedOrdinalScaleSuffixes = null", minimalExpression);
+        Assert.Contains("CompositeScaleMap = null", minimalExpression);
+        Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace", minimalExpression);
+        Assert.Contains("NegativePrefixes = Array.Empty<string>()", minimalExpression);
+        Assert.Contains("AllowTerminalOrdinalToken = false", minimalExpression);
+        Assert.Contains("UseHundredMultiplier = false", minimalExpression);
+        Assert.Contains("AllowInvariantIntegerInput = false", minimalExpression);
+        Assert.Contains("TeenBaseValue = 10", minimalExpression);
+        Assert.Contains("HundredSuffixValue = 100", minimalExpression);
+        Assert.Contains("UnitTokenMinValue = 1", minimalExpression);
+        Assert.Contains("UnitTokenMaxValue = 9", minimalExpression);
+        Assert.Contains("HundredSuffixMinValue = long.MaxValue", minimalExpression);
+        Assert.Contains("HundredSuffixMaxValue = long.MinValue", minimalExpression);
+        Assert.Contains("ScaleThreshold = 1000", minimalExpression);
+    }
+
+    [Fact]
+    public void WordsToNumberEngineContractsEmitGreedyOrdinalMapVariantsAndConventionalFallback()
+    {
+        const string explicitOrdinalProfile = """
+{
+  "engine": "greedy-compound",
+  "cardinalMap": {
+    "one": 1
+  },
+  "ordinalMap": {
+    "first": 1
+  },
+  "hundredValue": 101,
+  "scaleThreshold": 10001
+}
+""";
+
+        var explicitOrdinalExpression = CreateWordsToNumberContractExpression("greedy-compound", explicitOrdinalProfile);
+        Assert.Contains("new GreedyCompoundWordsToNumberConverter(new GreedyCompoundWordsToNumberProfile(", explicitOrdinalExpression);
+        Assert.Contains("new Dictionary<string, long>(StringComparer.Ordinal) { [\"first\"] = 1 }.ToFrozenDictionary(StringComparer.Ordinal)", explicitOrdinalExpression);
+        Assert.Contains(", 101, 10001))", explicitOrdinalExpression);
+        Assert.DoesNotContain("GreedyCompoundWordsToNumberConverter.BuildOrdinalMap(", explicitOrdinalExpression);
+
+        const string derivedOrdinalProfile = """
+{
+  "engine": "greedy-compound",
+  "cardinalMap": {
+    "one": 1
+  },
+  "ordinalNumberToWordsKind": "zz-ordinal"
+}
+""";
+
+        var derivedOrdinalExpression = CreateWordsToNumberContractExpression("greedy-compound", derivedOrdinalProfile);
+        Assert.Contains("GreedyCompoundWordsToNumberConverter.BuildOrdinalMap(NumberToWordsProfileCatalog.Resolve(\"zz-ordinal\", CultureInfo.InvariantCulture)", derivedOrdinalExpression);
+        Assert.DoesNotContain("lowercase: true", derivedOrdinalExpression);
+        Assert.DoesNotContain("removeDiacritics: true", derivedOrdinalExpression);
+
+        const string fallbackOrdinalProfile = """
+{
+  "engine": "greedy-compound",
+  "cardinalMap": {
+    "one": 1
+  },
+  "ordinalMap": "not-a-map",
+  "ordinalNumberToWordsKind": 42
+}
+""";
+
+        var fallbackOrdinalExpression = CreateWordsToNumberContractExpression("greedy-compound", fallbackOrdinalProfile);
+        Assert.Contains("new Dictionary<string, long>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal)", fallbackOrdinalExpression);
+
+        var conventionalExpression = CreateWordsToNumberContractExpression("thai", "{}");
+        Assert.Equal("new ThaiWordsToNumberConverter()", conventionalExpression);
     }
 
     [Fact]
@@ -1426,6 +1582,29 @@ wordsToNumber:
             .Single(source => source.HintName == hintName)
             .SourceText
             .ToString();
+
+    static string CreateWordsToNumberContractExpression(string engine, string profileJson)
+    {
+        using var document = JsonDocument.Parse(profileJson);
+
+        var profileDefinitionType = typeof(HumanizerSourceGenerator).GetNestedType("WordsToNumberProfileDefinition", BindingFlags.NonPublic);
+        Assert.NotNull(profileDefinitionType);
+
+        var profile = Activator.CreateInstance(
+            profileDefinitionType,
+            "zz-contract",
+            engine,
+            document.RootElement.Clone());
+        Assert.NotNull(profile);
+
+        var factoryType = typeof(HumanizerSourceGenerator).GetNestedType("WordsToNumberEngineContractFactory", BindingFlags.NonPublic);
+        Assert.NotNull(factoryType);
+
+        var createMethod = factoryType.GetMethod("Create", BindingFlags.Public | BindingFlags.Static);
+        Assert.NotNull(createMethod);
+
+        return Assert.IsType<string>(createMethod.Invoke(null, [profile]));
+    }
 
     static int CountOccurrences(string source, string value)
     {

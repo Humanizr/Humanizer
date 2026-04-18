@@ -34,4 +34,8 @@ public class BitFieldEnumHumanizeTests
     [Fact]
     public void CanHumanizeBitFieldEnumWithZeroValue() =>
         Assert.Equal(BitFlagEnumTestsResources.None, BitFieldEnumUnderTest.NONE.Humanize());
+
+    [Fact]
+    public void UnknownBitFieldValueHumanizesToEmptyString() =>
+        Assert.Equal(string.Empty, ((BitFieldEnumUnderTest)4).Humanize());
 }
