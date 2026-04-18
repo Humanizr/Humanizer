@@ -224,6 +224,36 @@ public class CoverageGapTests
         Assert.Equal(expected, converter.Convert(words));
     }
 
+    [Theory]
+    [InlineData("million billion", 1_000_000_000_000_000)]
+    [InlineData("thousandth", 1_000)]
+    public void TokenMapConverterCoversImplicitCompositeAndOrdinalScaleBranches(string words, long expected)
+    {
+        var converter = new TokenMapWordsToNumberConverter(TokenMapRules);
+
+        Assert.True(converter.TryConvert(words, out var parsed, out var unrecognizedWord));
+        Assert.Equal(expected, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Fact]
+    public void TokenMapConverterCoversMissingExactOrdinalMapBranch()
+    {
+        var converter = new TokenMapWordsToNumberConverter(new TokenMapWordsToNumberRules
+        {
+            CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["one"] = 1
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            NormalizationProfile = TokenMapNormalizationProfile.LowercaseRemovePeriods,
+            AllowTerminalOrdinalToken = true
+        });
+
+        Assert.True(converter.TryConvert("one", out var parsed, out var unrecognizedWord));
+        Assert.Equal(1, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
     [Fact]
     public void TokenMapConverterReportsInvalidEmptyAndOverflowInputs()
     {
@@ -467,8 +497,13 @@ public class CoverageGapTests
         Assert.Equal("hello", "HELLO".Transform(CultureInfo.InvariantCulture, To.LowerCase));
         Assert.Throws<ArgumentOutOfRangeException>(() => "hello".ApplyCase((LetterCasing)42));
         Assert.Equal("gudde", EifelerRule.Apply("gudden"));
+        Assert.Equal("gudde", EifelerRule.ApplyIfNeeded("gudden", "bei"));
+        Assert.Equal("gudden", EifelerRule.ApplyIfNeeded("gudden", "dann"));
+        Assert.False(EifelerRule.DoesApply("   ".AsSpan()));
 
         var headingTable = new HeadingTable(["North"], ["N"]);
+        Assert.True(headingTable.TryParseAbbreviated("n", CultureInfo.InvariantCulture, out var parsedHeading));
+        Assert.Equal(0, parsedHeading);
         Assert.False(headingTable.TryParseAbbreviated("missing", CultureInfo.InvariantCulture, out var heading));
         Assert.Equal(-1, heading);
 
@@ -718,15 +753,18 @@ public class CoverageGapTests
     public void TokenMapWordsToNumberNormalizerCoversFastAndBuilderEdges()
     {
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize("   ", TokenMapNormalizationProfile.CollapseWhitespace));
+        Assert.Equal("one", TokenMapWordsToNumberNormalizer.Normalize(" one ", TokenMapNormalizationProfile.CollapseWhitespace));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize(" one\t \n two ", TokenMapNormalizationProfile.CollapseWhitespace));
 
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize(" ", TokenMapNormalizationProfile.LowercaseRemovePeriods));
+        Assert.Equal("one", TokenMapWordsToNumberNormalizer.Normalize(" one ", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("One,\tTwo.", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("onetwo", TokenMapWordsToNumberNormalizer.Normalize("one,two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one  two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one\ttwo", TokenMapNormalizationProfile.LowercaseRemovePeriods));
 
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize("", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
+        Assert.Equal("one", TokenMapWordsToNumberNormalizer.Normalize(" one ", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("One,.\tTwo-", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("onetwo", TokenMapWordsToNumberNormalizer.Normalize("one,two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one  two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
@@ -736,6 +774,33 @@ public class CoverageGapTests
         Assert.Equal("A B", TokenMapWordsToNumberNormalizer.Normalize(" Á;B/ ", TokenMapNormalizationProfile.PunctuationToSpacesRemoveDiacritics));
         Assert.Equal("کی", TokenMapWordsToNumberNormalizer.Normalize("ك،ي\u200c", TokenMapNormalizationProfile.Persian));
         Assert.Equal("ک ی", TokenMapWordsToNumberNormalizer.Normalize("ك\u200cي", TokenMapNormalizationProfile.Persian));
+    }
+
+    [Fact]
+    public void WordsToNumberTokenizerCoversPendingEmptyAndRepeatedWhitespaceBranches()
+    {
+        var tokens = new List<string>();
+        foreach (var currentToken in WordsToNumberTokenizer.Enumerate("  one  two "))
+        {
+            tokens.Add(currentToken.ToString());
+        }
+
+        Assert.Equal(["one", "two"], tokens);
+        Assert.Equal("two", WordsToNumberTokenizer.GetLastTokenOrSelf("one two"));
+        Assert.Equal("   ", WordsToNumberTokenizer.GetLastTokenOrSelf("   "));
+
+        var enumerator = WordsToNumberTokenizer.Enumerate("one").GetEnumerator();
+        var pendingToken = "pending";
+
+        Assert.True(WordsToNumberTokenizer.TryReadNext(ref enumerator, ref pendingToken, out var token));
+        Assert.Equal("pending", token);
+        Assert.Null(pendingToken);
+
+        Assert.True(WordsToNumberTokenizer.TryReadNext(ref enumerator, ref pendingToken, out token));
+        Assert.Equal("one", token);
+
+        Assert.False(WordsToNumberTokenizer.TryReadNext(ref enumerator, ref pendingToken, out token));
+        Assert.Null(token);
     }
 
     [Theory]
@@ -830,6 +895,28 @@ public class CoverageGapTests
         Assert.Equal(0, parsed);
         Assert.Equal("mystery", unrecognizedWord);
         Assert.Equal("Unrecognized number word: mystery", Assert.Throws<ArgumentException>(() => converter.Convert("mystery")).Message);
+    }
+
+    [Fact]
+    public void VigesimalCompoundConverterCoversRejectedLookaheadBranches()
+    {
+        var converter = new VigesimalCompoundWordsToNumberConverter(VigesimalProfile);
+
+        Assert.False(converter.TryConvert("score mystery", out var parsed, out var unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal("mystery", unrecognizedWord);
+
+        Assert.False(converter.TryConvert("one teen three", out parsed, out unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal("teen", unrecognizedWord);
+
+        Assert.False(converter.TryConvert("twenty teen mystery", out parsed, out unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal("teen", unrecognizedWord);
+
+        Assert.False(converter.TryConvert("twenty teen score", out parsed, out unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal("teen", unrecognizedWord);
     }
 
     [Theory]
@@ -1597,8 +1684,10 @@ public class CoverageGapTests
         var contracted = new ContractedScaleWordsToNumberConverter(ContractedScaleProfile);
         Assert.True(contracted.TryConvert("minus satu", out parsed));
         Assert.Equal(-1, parsed);
+        Assert.Equal(10, contracted.Convert("belas"));
         Assert.Equal(15, contracted.Convert("puluh lima"));
         Assert.Equal(11, contracted.Convert("satu belas"));
+        Assert.Equal(100, contracted.Convert("ratus"));
         Assert.Equal(15, contracted.Convert("lima belas"));
         Assert.Equal(25, contracted.Convert("dua puluh lima"));
         Assert.Equal(2005, contracted.Convert("dua ribu dan lima"));
@@ -1807,7 +1896,111 @@ public class CoverageGapTests
             Tense.Future,
             2,
             twoTemplatePhrase));
+        Assert.False(InvokePrivate<bool>(
+            typeof(ProfiledFormatter),
+            exactTwoFormatter,
+            "ShouldUseDatePhraseTemplate",
+            [typeof(TimeUnit), typeof(Tense), typeof(int), typeof(LocalizedDatePhrase)],
+            TimeUnit.Day,
+            Tense.Future,
+            3,
+            twoTemplatePhrase));
+        Assert.False(InvokePrivate<bool>(
+            typeof(ProfiledFormatter),
+            exactTwoFormatter,
+            "ShouldUseDatePhraseTemplate",
+            [typeof(TimeUnit), typeof(Tense), typeof(int), typeof(LocalizedDatePhrase)],
+            TimeUnit.Day,
+            Tense.Future,
+            2,
+            new LocalizedDatePhrase(Template: new("other", "{0} other days"))));
+        Assert.False(InvokePrivate<bool>(
+            typeof(ProfiledFormatter),
+            exactTwoFormatter,
+            "ShouldUseDatePhraseTemplate",
+            [typeof(TimeUnit), typeof(Tense), typeof(int), typeof(LocalizedDatePhrase)],
+            TimeUnit.Month,
+            Tense.Future,
+            2,
+            twoTemplatePhrase));
+        Assert.Equal(string.Empty, InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            CreateProfiledFormatter(FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.None),
+            "GetSecondaryPlaceholder",
+            [typeof(TimeUnit), typeof(int)],
+            TimeUnit.Day,
+            2));
     }
+
+    [Fact]
+    public void NumberWordSuffixOrdinalizerCoversPositiveNegativeAndNeuterFallbackBranches()
+    {
+        var ordinalizer = new NumberWordSuffixOrdinalizer(
+            CultureInfo.InvariantCulture,
+            new NumberWordSuffixOrdinalizer.Options(
+                Masculine: new NumberWordSuffixOrdinalizer.GenderBlock(
+                    "-m",
+                    new Dictionary<int, string> { [1] = "first-m" }.ToFrozenDictionary()),
+                Feminine: new NumberWordSuffixOrdinalizer.GenderBlock(
+                    "-f",
+                    new Dictionary<int, string> { [2] = "second-f" }.ToFrozenDictionary()),
+                NeuterFallbackGender: GrammaticalGender.Feminine));
+
+        Assert.Equal("first-m", ordinalizer.Convert(1, "1"));
+        Assert.Equal("three-m", ordinalizer.Convert(3, "3", GrammaticalGender.Masculine));
+        Assert.Equal("second-f", ordinalizer.Convert(2, "2", GrammaticalGender.Neuter));
+        Assert.Equal("minus three-m", ordinalizer.Convert(-3, "-3", GrammaticalGender.Masculine));
+    }
+
+    [Fact]
+    public void SouthSlavicCardinalConverterCoversScaleDetectorAndLongMinBranches()
+    {
+        var russian = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Russian),
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal("scale-one", russian.Convert(1000));
+        Assert.Equal("two scale-paucal", russian.Convert(2000));
+        Assert.Equal("five scale-plural", russian.Convert(5000));
+        Assert.Throws<NotImplementedException>(() => russian.Convert(20_001));
+
+        var slovenian = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Slovenian),
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal("two scale-dual", slovenian.Convert(2000));
+        Assert.Equal("three scale-trial", slovenian.Convert(3000));
+        Assert.Equal("five scale-plural", slovenian.Convert(5000));
+
+        var slovenianFallback = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile(
+                SouthSlavicScaleFormDetector.Slovenian,
+                scales: [new(1000, GrammaticalGender.Masculine, "scale-one", "scale-singular", "scale-paucal", "scale-plural")]),
+            CultureInfo.InvariantCulture);
+        Assert.Equal("two scale-paucal", slovenianFallback.Convert(2000));
+        Assert.Equal("three scale-paucal", slovenianFallback.Convert(3000));
+
+        var invalidDetector = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile((SouthSlavicScaleFormDetector)42),
+            CultureInfo.InvariantCulture);
+        Assert.Throws<InvalidOperationException>(() => invalidDetector.Convert(2000));
+
+        var longMin = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile(
+                SouthSlavicScaleFormDetector.Russian,
+                maximumValue: 0,
+                allowLongMin: true,
+                scales: [new(9_223_372_036_854_775_808UL, GrammaticalGender.Masculine, "min-scale", "min-singular", "min-paucal", "min-plural")]),
+            CultureInfo.InvariantCulture);
+        Assert.Equal("minus min-scale", longMin.Convert(long.MinValue));
+    }
+
+    [Theory]
+    [InlineData(4, GrammaticalGender.Masculine, "4è")]
+    [InlineData(7, GrammaticalGender.Masculine, "7n")]
+    [InlineData(4, GrammaticalGender.Feminine, "4a")]
+    public void CatalanHyphenatedOrdinalCoversFallbackAbbreviationSuffixes(int number, GrammaticalGender gender, string expected) =>
+        Assert.Equal(expected, number.ToOrdinalWords(gender, WordForm.Abbreviation, new CultureInfo("ca")));
 
     [Fact]
     public void PublicUtilityOverloadsCoverRemainingGuardBranches()
@@ -1839,6 +2032,8 @@ public class CoverageGapTests
 
         Assert.Equal("2 requests", "request".ToQuantity(2L));
         Assert.Equal("1.00 request", "request".ToQuantity(1L, "N2", CultureInfo.InvariantCulture));
+        Assert.Equal("NaN requests", "request".ToQuantity(double.NaN, formatProvider: CultureInfo.InvariantCulture));
+        Assert.Equal("Infinity requests", "request".ToQuantity(double.PositiveInfinity, formatProvider: CultureInfo.InvariantCulture));
         Assert.False(ByteSize.TryParse($"{new string('9', 400)} b", out _));
 
         Configurator.ResetUseEnumDescriptionPropertyLocator();
@@ -2784,6 +2979,50 @@ public class CoverageGapTests
             CreatePluralizedOrdinalUnits(),
             CreatePluralizedOrdinalTens(),
             CreatePluralizedOrdinalHundreds());
+
+    static SouthSlavicCardinalNumberToWordsProfile CreateSouthSlavicProfile(
+        SouthSlavicScaleFormDetector formDetector,
+        ulong maximumValue = 20_000,
+        bool allowLongMin = false,
+        SouthSlavicScale[]? scales = null) =>
+        new(
+            maximumValue,
+            allowLongMin,
+            "zero",
+            "minus",
+            formDetector,
+            SouthSlavicNumberComposition.Direct,
+            string.Empty,
+            CreateSouthSlavicUnits(),
+            CreateSouthSlavicTens(),
+            CreateSouthSlavicHundreds(),
+            "one-f",
+            "two-f",
+            scales ?? [new(1000, GrammaticalGender.Masculine, "scale-one", "scale-singular", "scale-paucal", "scale-plural", "scale-dual", "scale-trial")]);
+
+    static string[] CreateSouthSlavicUnits()
+    {
+        var units = Enumerable.Repeat(string.Empty, 20).ToArray();
+        units[1] = "one";
+        units[2] = "two";
+        units[3] = "three";
+        units[5] = "five";
+        return units;
+    }
+
+    static string[] CreateSouthSlavicTens()
+    {
+        var tens = Enumerable.Repeat(string.Empty, 10).ToArray();
+        tens[2] = "twenty";
+        return tens;
+    }
+
+    static string[] CreateSouthSlavicHundreds()
+    {
+        var hundreds = Enumerable.Repeat(string.Empty, 10).ToArray();
+        hundreds[1] = "hundred";
+        return hundreds;
+    }
 
     static string[] CreatePluralizedUnits()
     {
