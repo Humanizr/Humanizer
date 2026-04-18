@@ -1225,7 +1225,9 @@ namespace Humanizer
         public static Humanizer.ICulturedStringTransformer SentenceCase { get; }
         public static Humanizer.ICulturedStringTransformer TitleCase { get; }
         public static Humanizer.ICulturedStringTransformer UpperCase { get; }
+        public static string Transform(this string input, Humanizer.IStringTransformer transformer) { }
         public static string Transform(this string input, params Humanizer.IStringTransformer[] transformers) { }
+        public static string Transform(this string input, System.Globalization.CultureInfo culture, Humanizer.ICulturedStringTransformer transformer) { }
         public static string Transform(this string input, System.Globalization.CultureInfo culture, params Humanizer.ICulturedStringTransformer[] transformers) { }
     }
     public static class ToQuantityExtensions
