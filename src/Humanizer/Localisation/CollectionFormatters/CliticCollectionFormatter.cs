@@ -14,7 +14,7 @@ class CliticCollectionFormatter(string conjunction) : ICollectionFormatter
         Humanize(collection, objectFormatter, conjunction);
 
     public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter) =>
-        Humanize(collection, item => objectFormatter(item)?.ToString(), conjunction);
+        Humanize(collection, objectFormatter, conjunction);
 
     public string Humanize<T>(IEnumerable<T> collection, string separator) =>
         fallbackFormatter.Humanize(collection, separator);
@@ -69,6 +69,10 @@ class CliticCollectionFormatter(string conjunction) : ICollectionFormatter
         };
     }
 
-    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator) =>
-        Humanize(collection, item => objectFormatter(item)?.ToString(), separator);
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator)
+    {
+        ArgumentNullException.ThrowIfNull(objectFormatter);
+
+        return Humanize(collection, item => objectFormatter(item)?.ToString(), separator);
+    }
 }

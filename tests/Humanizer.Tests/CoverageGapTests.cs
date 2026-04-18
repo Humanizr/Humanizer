@@ -570,6 +570,33 @@ public class CoverageGapTests
     }
 
     [Fact]
+    public void DefaultFormatterCoversFallbackScalarAndVariantBranches()
+    {
+        var scalarFallbacks = new FormatterHarness(CreateLocalePhraseTable(
+            timeSpan: new(
+                Single: "1 hour",
+                Multiple: new(new("hours"), PhraseCountPlacement.BeforeForm)),
+            dataUnit: new(
+                Forms: new("byte"),
+                Template: new(null, "{count} {unit} total")),
+            timeUnit: new(Forms: new("hour"))));
+
+        Assert.Equal("now", scalarFallbacks.DateHumanize_Now());
+        Assert.Equal("never", scalarFallbacks.DateHumanize_Never());
+        Assert.Equal("no time", scalarFallbacks.TimeSpanHumanize_Zero());
+        Assert.Equal("{0}", scalarFallbacks.TimeSpanHumanize_Age());
+        Assert.Equal("1 hour", scalarFallbacks.TimeSpanHumanize(TimeUnit.Hour, 1, toWords: true));
+        Assert.Equal("words-2 hours", scalarFallbacks.TimeSpanHumanize(TimeUnit.Hour, 2, toWords: true));
+        Assert.Equal("2 hours", scalarFallbacks.TimeSpanHumanize(TimeUnit.Hour, 2));
+        Assert.Equal("2 byte total", scalarFallbacks.DataUnitHumanize(DataUnit.Byte, 2, toSymbol: false));
+        Assert.Throws<InvalidOperationException>(() => scalarFallbacks.TimeUnitHumanize(TimeUnit.Hour));
+
+        var singleWithoutValue = new FormatterHarness(CreateLocalePhraseTable(timeSpan: new(
+            Multiple: new(new("hours"), PhraseCountPlacement.None))));
+        Assert.Equal("hours", singleWithoutValue.TimeSpanHumanize(TimeUnit.Hour, 1));
+    }
+
+    [Fact]
     public void DynamicCharacterPreservingTruncatorCoversNullEmptyAndDelimiterEdges()
     {
         var truncator = new DynamicNumberOfCharactersAndPreserveWordsTruncator();
@@ -1512,6 +1539,121 @@ public class CoverageGapTests
     }
 
     [Fact]
+    public void ProfiledFormatterCoversRemainingPhraseResolutionBranches()
+    {
+        var forms = new LocalizedPhraseForms("default", Singular: "singular", Dual: "dual", Paucal: "paucal", Plural: "plural");
+
+        Assert.Equal("paucal", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            forms,
+            FormatterNumberForm.Paucal,
+            FormatterNumberDetectorKind.Between2And4Paucal));
+        Assert.Equal("dual", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            forms,
+            FormatterNumberForm.Dual,
+            FormatterNumberDetectorKind.Slovenian));
+        Assert.Equal("singular", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            new LocalizedPhraseForms("default", Singular: "singular"),
+            FormatterNumberForm.Dual,
+            FormatterNumberDetectorKind.Between2And4Paucal));
+        Assert.Equal("paucal", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            new LocalizedPhraseForms("default", Paucal: "paucal"),
+            FormatterNumberForm.Dual,
+            FormatterNumberDetectorKind.Between2And4Paucal));
+        Assert.Equal("default", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            new LocalizedPhraseForms("default"),
+            FormatterNumberForm.Dual,
+            FormatterNumberDetectorKind.Between2And4Paucal));
+        Assert.Equal("paucal", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            forms,
+            FormatterNumberForm.Paucal,
+            FormatterNumberDetectorKind.Slovenian));
+        Assert.Equal("paucal", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            forms,
+            FormatterNumberForm.Paucal,
+            FormatterNumberDetectorKind.Russian));
+        Assert.Equal("default", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            new LocalizedPhraseForms("default"),
+            FormatterNumberForm.Paucal,
+            FormatterNumberDetectorKind.Russian));
+
+        Assert.Equal(" de", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            CreateProfiledFormatter(FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None),
+            "GetSecondaryPlaceholder",
+            [typeof(TimeUnit), typeof(int)],
+            TimeUnit.Day,
+            20));
+        Assert.Equal(string.Empty, InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            CreateProfiledFormatter(FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None),
+            "GetSecondaryPlaceholder",
+            [typeof(TimeUnit), typeof(int)],
+            TimeUnit.Day,
+            19));
+        Assert.Equal("n", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            CreateProfiledFormatter(FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN),
+            "GetSecondaryPlaceholder",
+            [typeof(TimeUnit), typeof(int)],
+            TimeUnit.Day,
+            3));
+        Assert.Equal(string.Empty, InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            CreateProfiledFormatter(FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN),
+            "GetSecondaryPlaceholder",
+            [typeof(TimeUnit), typeof(int)],
+            TimeUnit.Day,
+            4));
+
+        var exactTwoFormatter = CreateProfiledFormatter(
+            FormatterPrepositionMode.None,
+            FormatterSecondaryPlaceholderMode.None,
+            exactDateForms: [new(2, FormatterTimeUnitMask.Day, FormatterTenseMask.Future, FormatterNumberForm.Dual)]);
+        var twoTemplatePhrase = new LocalizedDatePhrase(Template: new("two", "{0} dual days"));
+        Assert.True(InvokePrivate<bool>(
+            typeof(ProfiledFormatter),
+            exactTwoFormatter,
+            "ShouldUseDatePhraseTemplate",
+            [typeof(TimeUnit), typeof(Tense), typeof(int), typeof(LocalizedDatePhrase)],
+            TimeUnit.Day,
+            Tense.Future,
+            2,
+            twoTemplatePhrase));
+    }
+
+    [Fact]
     public void PublicUtilityOverloadsCoverRemainingGuardBranches()
     {
         Assert.Null(Vocabularies.Default.Pluralize(null));
@@ -1672,10 +1814,15 @@ public class CoverageGapTests
         Assert.Equal("never", table.DateHumanizeNever);
         Assert.Equal("zero", table.TimeSpanZero);
         Assert.Equal("age", table.TimeSpanAge);
+        Assert.Equal("yesterday", table.GetDateHumanize(TimeUnit.Day, Tense.Past)?.Single);
+        Assert.Equal("minute", table.GetTimeSpan(TimeUnit.Minute)?.Single);
+        Assert.Equal("B", table.GetDataUnit(DataUnit.Byte)?.Symbol);
+        Assert.Equal("s", table.GetTimeUnit(TimeUnit.Second)?.Symbol);
         Assert.Null(table.GetDateHumanize(TimeUnit.Hour, Tense.Past));
         Assert.Null(table.GetTimeSpan(TimeUnit.Hour));
         Assert.Null(table.GetDataUnit(DataUnit.Kilobyte));
         Assert.Equal("s", table.GetTimeUnitSymbol(TimeUnit.Second));
+        Assert.Null(table.GetTimeUnitSymbol(TimeUnit.Millisecond));
     }
 
     [Fact]
@@ -1691,14 +1838,14 @@ public class CoverageGapTests
     public void DelimitedCollectionFormatterCoversAllOverloadsAndNullGuards()
     {
         var formatter = new DelimitedCollectionFormatter("; ");
-        var values = new[] { " alpha ", " ", "beta" };
+        var values = new string?[] { null, " alpha ", " ", "beta" };
 
         Assert.Equal("alpha; beta", formatter.Humanize(values));
-        Assert.Equal("ALPHA; BETA", formatter.Humanize(values, static value => value.Trim().ToUpperInvariant()));
+        Assert.Equal("ALPHA; BETA", formatter.Humanize(values, static value => value?.Trim().ToUpperInvariant()));
         Assert.Equal("5; 6", formatter.Humanize([5, 6], static value => (object?)value));
         Assert.Equal("alpha | beta", formatter.Humanize(values, " | "));
-        Assert.Equal("ALPHA | BETA", formatter.Humanize(values, static value => value.Trim().ToUpperInvariant(), " | "));
-        Assert.Equal("5 | 6", formatter.Humanize([5, 6], static value => (object?)value, " | "));
+        Assert.Equal("ALPHA | BETA", formatter.Humanize(values, static value => value?.Trim().ToUpperInvariant(), " | "));
+        Assert.Equal("5 | 6", formatter.Humanize([5, 6, -1], static value => value < 0 ? null : (object?)value, " | "));
         Assert.Equal(string.Empty, formatter.Humanize(Array.Empty<string>()));
         Assert.Equal("solo", formatter.Humanize(["solo"]));
 
@@ -1707,29 +1854,63 @@ public class CoverageGapTests
 
         var formatterException = Assert.Throws<ArgumentNullException>(() => formatter.Humanize(["value"], (Func<string, string?>)null!));
         Assert.Equal("objectFormatter", formatterException.ParamName);
+
+        var defaultObjectFormatterException = Assert.Throws<ArgumentNullException>(() => formatter.Humanize(["value"], (Func<string, object?>)null!));
+        Assert.Equal("objectFormatter", defaultObjectFormatterException.ParamName);
+
+        var objectFormatterException = Assert.Throws<ArgumentNullException>(() => formatter.Humanize(["value"], (Func<string, object?>)null!, " | "));
+        Assert.Equal("objectFormatter", objectFormatterException.ParamName);
     }
 
     [Fact]
     public void CliticCollectionFormatterCoversSwitchArmsAndOverloads()
     {
         var formatter = new CliticCollectionFormatter("and ");
-        var values = new[] { " alpha ", "", "beta", "gamma" };
+        var values = new string?[] { null, " alpha ", "", "beta", "gamma" };
 
         Assert.Equal(string.Empty, formatter.Humanize(Array.Empty<string>()));
         Assert.Equal("alpha", formatter.Humanize([" alpha "]));
         Assert.Equal("alpha and beta", formatter.Humanize(["alpha", "beta"]));
         Assert.Equal("alpha, beta and gamma", formatter.Humanize(values));
-        Assert.Equal("ALPHA, BETA and GAMMA", formatter.Humanize(values, static value => value.Trim().ToUpperInvariant()));
+        Assert.Equal("ALPHA, BETA and GAMMA", formatter.Humanize(values, static value => value?.Trim().ToUpperInvariant()));
         Assert.Equal("5 and 6", formatter.Humanize([5, 6], static value => (object?)value));
         Assert.Equal("alpha or beta", formatter.Humanize(["alpha", "beta"], "or"));
         Assert.Equal("ALPHA or BETA", formatter.Humanize(["alpha", "beta"], static value => value.ToUpperInvariant(), "or "));
-        Assert.Equal("5 or 6", formatter.Humanize([5, 6], static value => (object?)value, "or "));
+        Assert.Equal("5 or 6", formatter.Humanize([5, 6, -1], static value => value < 0 ? null : (object?)value, "or "));
 
         var collectionException = Assert.Throws<ArgumentNullException>(() => formatter.Humanize<string>(null!, static value => value));
         Assert.Equal("collection", collectionException.ParamName);
 
         var formatterException = Assert.Throws<ArgumentNullException>(() => formatter.Humanize(["value"], (Func<string, string?>)null!, "and "));
         Assert.Equal("objectFormatter", formatterException.ParamName);
+
+        var defaultObjectFormatterException = Assert.Throws<ArgumentNullException>(() => formatter.Humanize(["value"], (Func<string, object?>)null!));
+        Assert.Equal("objectFormatter", defaultObjectFormatterException.ParamName);
+
+        var objectFormatterException = Assert.Throws<ArgumentNullException>(() => formatter.Humanize(["value"], (Func<string, object?>)null!, "and "));
+        Assert.Equal("objectFormatter", objectFormatterException.ParamName);
+    }
+
+    [UseCulture("en")]
+    [Fact]
+    public void OrdinalizeOverloadsCoverNullCultureAndFormatCharacterBranches()
+    {
+        Assert.Equal("21st", "21".Ordinalize((CultureInfo)null!));
+        Assert.Equal("21st", "21".Ordinalize((CultureInfo)null!, WordForm.Normal));
+        Assert.Equal("21st", "21".Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!));
+        Assert.Equal("21st", "21".Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!, WordForm.Normal));
+
+        Assert.Equal("21st", 21.Ordinalize((CultureInfo)null!));
+        Assert.Equal("21st", 21.Ordinalize((CultureInfo)null!, WordForm.Normal));
+        Assert.Equal("21st", 21.Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!));
+        Assert.Equal("21st", 21.Ordinalize(GrammaticalGender.Masculine, (CultureInfo)null!, WordForm.Normal));
+
+        Assert.Equal("21", InvokePrivate<string>(
+            typeof(OrdinalizeExtensions),
+            null,
+            "NormalizeOrdinalNumberString",
+            [typeof(string)],
+            "2\u200e1"));
     }
 
     static LocalePhraseTable CreatePhraseTable()
@@ -2447,6 +2628,21 @@ public class CoverageGapTests
 
         return new(null, null, null, null, datePast, dateFuturePhrases, timeSpanUnits, dataUnits, timeUnits);
     }
+
+    static ProfiledFormatter CreateProfiledFormatter(
+        FormatterPrepositionMode prepositionMode,
+        FormatterSecondaryPlaceholderMode secondaryPlaceholderMode,
+        FormatterDateFormRule[]? exactDateForms = null,
+        FormatterTimeSpanFormRule[]? exactTimeSpanForms = null) =>
+        new(CultureInfo.InvariantCulture, new FormatterProfile(
+            FormatterNumberDetectorKind.None,
+            exactDateForms ?? [],
+            exactTimeSpanForms ?? [],
+            FormatterNumberDetectorKind.None,
+            FormatterNumberForm.Default,
+            FormatterDataUnitFallbackTransform.None,
+            prepositionMode,
+            secondaryPlaceholderMode));
 
     sealed class FormatterHarness : DefaultFormatter
     {

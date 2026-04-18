@@ -12,7 +12,7 @@ class DelimitedCollectionFormatter(string delimiter) : ICollectionFormatter
         Join(collection, objectFormatter, delimiter);
 
     public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter) =>
-        Join(collection, item => objectFormatter(item)?.ToString(), delimiter);
+        Humanize(collection, objectFormatter, delimiter);
 
     public string Humanize<T>(IEnumerable<T> collection, string separator) =>
         Join(collection, item => item?.ToString(), separator);
@@ -20,8 +20,12 @@ class DelimitedCollectionFormatter(string delimiter) : ICollectionFormatter
     public string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator) =>
         Join(collection, objectFormatter, separator);
 
-    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator) =>
-        Join(collection, item => objectFormatter(item)?.ToString(), separator);
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator)
+    {
+        ArgumentNullException.ThrowIfNull(objectFormatter);
+
+        return Join(collection, item => objectFormatter(item)?.ToString(), separator);
+    }
 
     /// <summary>
     /// Joins the formatted values with <paramref name="separator"/> while skipping blank items.
