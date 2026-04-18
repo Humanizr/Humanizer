@@ -23,10 +23,10 @@ A manual GitHub Actions workflow is available to compare performance between a b
 
 1. Go to **Actions** → **Benchmark Baseline vs Current**
 2. Click **Run workflow**
-3. Enter the baseline version (default: 2.14.1)
+3. Enter the baseline version (default: 3.0.10)
 4. The workflow will:
-   - Run benchmarks against the baseline package in parallel
-   - Run benchmarks against the current source code in parallel
+   - Run benchmarks against the baseline package for .NET 10 and .NET 11 in parallel
+   - Run benchmarks against the current source code for .NET 10 and .NET 11 in parallel
    - Compare results using ResultsComparer
    - Publish detailed reports as artifacts
    - Display results and comparison in the job summary
@@ -34,14 +34,14 @@ A manual GitHub Actions workflow is available to compare performance between a b
 **How it works:**
 - **Baseline run**: Builds benchmarks with `UseBaselinePackage=true` to reference the NuGet package
 - **Current run**: Builds benchmarks with `UseBaselinePackage=false` to reference the local source code
-- **Comparison**: Downloads both JSON results and uses `dotnet/performance` ResultsComparer tool to generate a diff table
+- **Comparison**: Downloads the .NET 10 and .NET 11 JSON results and uses `dotnet/performance` ResultsComparer tool to generate diff tables
 
 **Artifacts available after each run:**
-- `humanizer-bdn-baseline-json` - Full JSON results from baseline
-- `humanizer-bdn-current-json` - Full JSON results from current code
-- `humanizer-bdn-baseline-all` - Complete BenchmarkDotNet artifacts (baseline)
-- `humanizer-bdn-current-all` - Complete BenchmarkDotNet artifacts (current)
-- `humanizer-bdn-comparison` - ResultsComparer diff report
+- `humanizer-bdn-baseline-<tfm>-json` - Full JSON results from baseline
+- `humanizer-bdn-current-<tfm>-json` - Full JSON results from current code
+- `humanizer-bdn-baseline-<tfm>-all` - Complete BenchmarkDotNet artifacts (baseline)
+- `humanizer-bdn-current-<tfm>-all` - Complete BenchmarkDotNet artifacts (current)
+- `humanizer-bdn-comparison-<tfm>` - ResultsComparer diff report
 
 ## Benchmark Suites
 
@@ -175,7 +175,7 @@ All benchmarks include `[MemoryDiagnoser]` to track allocations. The optimizatio
 
 ## Notes
 
-- Benchmarks run on .NET 10.0 to demonstrate maximum performance
+- Benchmarks run on .NET 10.0 and .NET 11.0 to demonstrate performance on supported modern frameworks
 - Performance improvements are most significant on modern frameworks
 - Older frameworks (.NET 4.8, netstandard2.0) still benefit from FrozenDictionary via polyfills
 - Results may vary based on hardware and workload characteristics
