@@ -34,9 +34,8 @@ Close tail-coverage on **ordinal NumberToWords engines + `PhraseClockNotationCon
 - [ ] No deferral or hold-list language.
 
 ## Done summary
-_To be filled on completion._
-
+Added targeted Spanish long-scale ordinal coverage tests for abbreviation/gender output and round-number boundary shapes. The current net10.0 coverage report raises branch coverage from 97.7379% to 97.9042% and moves LongScaleStemOrdinalNumberToWordsConverter from 89.29% to 98.21% branch coverage; the original .15 target classes are all above their line/branch thresholds.
 ## Evidence
 - Commits:
-- Tests:
+- Tests: dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release -- --filter-class Humanizer.Tests.CoverageGapTests, dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release -- --coverage --coverage-output-format cobertura, dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net11.0 -c Release, DOTNET_ROLL_FORWARD=Major dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release, dotnet format Humanizer.slnx --verify-no-changes --verbosity minimal, dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/local-pack
 - PRs:

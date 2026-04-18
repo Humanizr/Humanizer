@@ -152,35 +152,54 @@ public sealed partial class HumanizerSourceGenerator
         /// token stripping, multiplier behavior, and ordinal handling, and the generated output
         /// becomes a single immutable rules object consumed by <c>TokenMapWordsToNumberConverter</c>.
         /// </summary>
-        static string CreateTokenMapRulesExpression(JsonElement root) =>
-            "new() { " +
-            "CardinalMap = " + CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
-            "ExactOrdinalMap = " + CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") + ", " +
-            "OrdinalScaleMap = " + (root.TryGetProperty("ordinalScaleMap", out var ordinalScaleMap) ? CreateStringLongFrozenDictionaryExpression(ordinalScaleMap) : "null") + ", " +
-            "GluedOrdinalScaleSuffixes = " + (root.TryGetProperty("gluedOrdinalScaleSuffixes", out var gluedOrdinalScaleSuffixes) ? CreateStringLongFrozenDictionaryExpression(gluedOrdinalScaleSuffixes) : "null") + ", " +
-            "CompositeScaleMap = " + (root.TryGetProperty("compositeScaleMap", out var compositeScaleMap) ? CreateStringLongFrozenDictionaryExpression(compositeScaleMap) : "null") + ", " +
-            "NormalizationProfile = TokenMapNormalizationProfile." + ToEnumMemberName(GetRequiredString(root, "normalizationProfile")) + ", " +
-            "NegativePrefixes = " + CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
-            "NegativeSuffixes = " + CreateOptionalStringArrayExpression(root, "negativeSuffixes") + ", " +
-            "OrdinalPrefixes = " + CreateOptionalStringArrayExpression(root, "ordinalPrefixes") + ", " +
-            "IgnoredTokens = " + CreateOptionalStringArrayExpression(root, "ignoredTokens") + ", " +
-            "LeadingTokenPrefixesToTrim = " + CreateOptionalStringArrayExpression(root, "leadingTokenPrefixesToTrim") + ", " +
-            "MultiplierTokens = " + CreateOptionalStringArrayExpression(root, "multiplierTokens") + ", " +
-            "TokenSuffixesToStrip = " + CreateOptionalStringArrayExpression(root, "tokenSuffixesToStrip") + ", " +
-            "OrdinalAbbreviationSuffixes = " + CreateOptionalStringArrayExpression(root, "ordinalAbbreviationSuffixes") + ", " +
-            "TeenSuffixTokens = " + CreateOptionalStringArrayExpression(root, "teenSuffixTokens") + ", " +
-            "HundredSuffixTokens = " + CreateOptionalStringArrayExpression(root, "hundredSuffixTokens") + ", " +
-            "AllowTerminalOrdinalToken = " + (GetBoolean(root, "allowTerminalOrdinalToken") ? "true" : "false") + ", " +
-            "UseHundredMultiplier = " + (GetBoolean(root, "useHundredMultiplier") ? "true" : "false") + ", " +
-            "AllowInvariantIntegerInput = " + (GetBoolean(root, "allowInvariantIntegerInput") ? "true" : "false") + ", " +
-            "TeenBaseValue = " + (GetOptionalInt64(root, "teenBaseValue")?.ToString(CultureInfo.InvariantCulture) ?? "10") + ", " +
-            "HundredSuffixValue = " + (GetOptionalInt64(root, "hundredSuffixValue")?.ToString(CultureInfo.InvariantCulture) ?? "100") + ", " +
-            "UnitTokenMinValue = " + (GetOptionalInt64(root, "unitTokenMinValue")?.ToString(CultureInfo.InvariantCulture) ?? "1") + ", " +
-            "UnitTokenMaxValue = " + (GetOptionalInt64(root, "unitTokenMaxValue")?.ToString(CultureInfo.InvariantCulture) ?? "9") + ", " +
-            "HundredSuffixMinValue = " + (GetOptionalInt64(root, "hundredSuffixMinValue")?.ToString(CultureInfo.InvariantCulture) ?? "long.MaxValue") + ", " +
-            "HundredSuffixMaxValue = " + (GetOptionalInt64(root, "hundredSuffixMaxValue")?.ToString(CultureInfo.InvariantCulture) ?? "long.MinValue") + ", " +
-            "ScaleThreshold = " + (GetOptionalInt64(root, "scaleThreshold")?.ToString(CultureInfo.InvariantCulture) ?? "1000") +
-            " }";
+        static string CreateTokenMapRulesExpression(JsonElement root)
+        {
+            var assignments = new[]
+            {
+                RuleAssignment("CardinalMap", CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap"))),
+                RuleAssignment("ExactOrdinalMap", CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap")),
+                RuleAssignment("OrdinalScaleMap", CreateOptionalStringLongMapOrNull(root, "ordinalScaleMap")),
+                RuleAssignment("GluedOrdinalScaleSuffixes", CreateOptionalStringLongMapOrNull(root, "gluedOrdinalScaleSuffixes")),
+                RuleAssignment("CompositeScaleMap", CreateOptionalStringLongMapOrNull(root, "compositeScaleMap")),
+                RuleAssignment("NormalizationProfile", "TokenMapNormalizationProfile." + ToEnumMemberName(GetRequiredString(root, "normalizationProfile"))),
+                RuleAssignment("NegativePrefixes", CreateOptionalStringArrayExpression(root, "negativePrefixes")),
+                RuleAssignment("NegativeSuffixes", CreateOptionalStringArrayExpression(root, "negativeSuffixes")),
+                RuleAssignment("OrdinalPrefixes", CreateOptionalStringArrayExpression(root, "ordinalPrefixes")),
+                RuleAssignment("IgnoredTokens", CreateOptionalStringArrayExpression(root, "ignoredTokens")),
+                RuleAssignment("LeadingTokenPrefixesToTrim", CreateOptionalStringArrayExpression(root, "leadingTokenPrefixesToTrim")),
+                RuleAssignment("MultiplierTokens", CreateOptionalStringArrayExpression(root, "multiplierTokens")),
+                RuleAssignment("TokenSuffixesToStrip", CreateOptionalStringArrayExpression(root, "tokenSuffixesToStrip")),
+                RuleAssignment("OrdinalAbbreviationSuffixes", CreateOptionalStringArrayExpression(root, "ordinalAbbreviationSuffixes")),
+                RuleAssignment("TeenSuffixTokens", CreateOptionalStringArrayExpression(root, "teenSuffixTokens")),
+                RuleAssignment("HundredSuffixTokens", CreateOptionalStringArrayExpression(root, "hundredSuffixTokens")),
+                RuleAssignment("AllowTerminalOrdinalToken", CreateBooleanLiteral(GetBoolean(root, "allowTerminalOrdinalToken"))),
+                RuleAssignment("UseHundredMultiplier", CreateBooleanLiteral(GetBoolean(root, "useHundredMultiplier"))),
+                RuleAssignment("AllowInvariantIntegerInput", CreateBooleanLiteral(GetBoolean(root, "allowInvariantIntegerInput"))),
+                RuleAssignment("TeenBaseValue", CreateOptionalInt64Literal(root, "teenBaseValue", "10")),
+                RuleAssignment("HundredSuffixValue", CreateOptionalInt64Literal(root, "hundredSuffixValue", "100")),
+                RuleAssignment("UnitTokenMinValue", CreateOptionalInt64Literal(root, "unitTokenMinValue", "1")),
+                RuleAssignment("UnitTokenMaxValue", CreateOptionalInt64Literal(root, "unitTokenMaxValue", "9")),
+                RuleAssignment("HundredSuffixMinValue", CreateOptionalInt64Literal(root, "hundredSuffixMinValue", "long.MaxValue")),
+                RuleAssignment("HundredSuffixMaxValue", CreateOptionalInt64Literal(root, "hundredSuffixMaxValue", "long.MinValue")),
+                RuleAssignment("ScaleThreshold", CreateOptionalInt64Literal(root, "scaleThreshold", "1000"))
+            };
+
+            return "new() { " + string.Join(", ", assignments) + " }";
+        }
+
+        static string RuleAssignment(string propertyName, string expression) =>
+            propertyName + " = " + expression;
+
+        static string CreateOptionalStringLongMapOrNull(JsonElement root, string propertyName) =>
+            root.TryGetProperty(propertyName, out var property)
+                ? CreateStringLongFrozenDictionaryExpression(property)
+                : "null";
+
+        static string CreateBooleanLiteral(bool value) =>
+            value ? "true" : "false";
+
+        static string CreateOptionalInt64Literal(JsonElement root, string propertyName, string defaultExpression) =>
+            GetOptionalInt64(root, propertyName)?.ToString(CultureInfo.InvariantCulture) ?? defaultExpression;
 
         static string CreateGreedyCompoundOrdinalMapExpression(WordsToNumberProfileDefinition profile)
         {

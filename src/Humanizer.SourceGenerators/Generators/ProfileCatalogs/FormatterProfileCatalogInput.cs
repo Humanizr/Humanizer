@@ -88,21 +88,33 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("{");
             builder.AppendLine("    public static IFormatter Resolve(string kind, CultureInfo culture)");
             builder.AppendLine("    {");
-            builder.AppendLine("        return kind switch");
+            builder.AppendLine("        if (kind is null)");
             builder.AppendLine("        {");
+            builder.AppendLine("            throw new ArgumentOutOfRangeException(nameof(kind), kind, \"Unknown formatter profile.\");");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        if (Factories.TryGetValue(kind, out var factory))");
+            builder.AppendLine("        {");
+            builder.AppendLine("            return factory(culture);");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        throw new ArgumentOutOfRangeException(nameof(kind), kind, \"Unknown formatter profile.\");");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    static readonly FrozenDictionary<string, Func<CultureInfo, IFormatter>> Factories = new Dictionary<string, Func<CultureInfo, IFormatter>>(StringComparer.Ordinal)");
+            builder.AppendLine("    {");
 
             foreach (var profile in generatedProfiles)
             {
                 builder.Append("            ");
+                builder.Append('[');
                 builder.Append(QuoteLiteral(profile.ProfileName));
-                builder.Append(" => new ProfiledFormatter(culture, ");
+                builder.Append("] = static culture => new ProfiledFormatter(culture, ");
                 builder.Append(GetCatalogPropertyName(profile.ProfileName));
                 builder.AppendLine("),");
             }
 
-            builder.AppendLine("            _ => throw new ArgumentOutOfRangeException(nameof(kind), kind, \"Unknown formatter profile.\")");
-            builder.AppendLine("        };");
-            builder.AppendLine("    }");
+            builder.AppendLine("    }.ToFrozenDictionary(StringComparer.Ordinal);");
             builder.AppendLine();
 
             foreach (var profile in generatedProfiles)

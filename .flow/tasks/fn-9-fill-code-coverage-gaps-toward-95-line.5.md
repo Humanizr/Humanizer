@@ -38,9 +38,8 @@ Cover `OrdinalDatePattern` reachable branches and `NoMatchFoundException` public
 - [ ] The only `OrdinalDatePattern` branch that may remain uncovered is the `GetPatternCulture` AOORE fallback (epic-appendix item); it is absorbed in the aggregate threshold, not excluded at the class level.
 
 ## Done summary
-_To be filled on completion._
-
+Covered deterministic OrdinalDatePattern branch gaps for day-of-week adjacency, quoted-literal scanning, and marker replacement fallback. Existing NoMatchFoundException constructor assertions remain in CoverageGapTests. GetPatternCulture AOORE fallback remains platform-dependent/appendix-absorbed; on macOS .NET 10 no installed culture rejects GregorianCalendar assignment.
 ## Evidence
 - Commits:
-- Tests:
+- Tests: dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release --framework net10.0 -- --filter-class Humanizer.Tests.CoverageGapTests, dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release --framework net10.0 -- --coverage --coverage-output-format cobertura, dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release --framework net11.0, dotnet format Humanizer.slnx --verify-no-changes --verbosity minimal, git diff --check
 - PRs:

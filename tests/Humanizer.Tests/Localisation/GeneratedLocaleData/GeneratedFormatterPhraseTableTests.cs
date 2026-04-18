@@ -2,6 +2,51 @@ namespace Humanizer.Tests.Localisation;
 
 public class GeneratedFormatterPhraseTableTests
 {
+    public static TheoryData<string> PhraseTableLocaleCodes { get; } = FindLocaleCodesWithSurface("phrases");
+    public static TheoryData<string> HeadingTableLocaleCodes { get; } = FindLocaleCodesWithSurface("compass");
+    public static TheoryData<string> FormatterProfileLocaleCodes { get; } = FindLocaleCodesWithSurface("formatter");
+
+    [Theory]
+    [MemberData(nameof(PhraseTableLocaleCodes))]
+    public void LocalePhraseTableCatalogResolvesEveryYamlAuthoredPhraseTable(string localeCode)
+    {
+        var directTable = LocalePhraseTableCatalog.ResolveCore(localeCode);
+
+        Assert.NotNull(directTable);
+        Assert.Same(directTable, LocalePhraseTableCatalog.Resolve(new CultureInfo(localeCode)));
+    }
+
+    [Theory]
+    [MemberData(nameof(HeadingTableLocaleCodes))]
+    public void HeadingTableCatalogResolvesEveryYamlAuthoredHeadingTable(string localeCode)
+    {
+        var directTable = HeadingTableCatalog.ResolveCore(localeCode);
+
+        Assert.NotNull(directTable);
+        Assert.Same(directTable, HeadingTableCatalog.Resolve(new CultureInfo(localeCode)));
+        Assert.NotEmpty(directTable!.GetHeading(HeadingStyle.Full, 0));
+        Assert.NotEmpty(directTable.GetHeading(HeadingStyle.Abbreviated, 0));
+    }
+
+    [Theory]
+    [MemberData(nameof(FormatterProfileLocaleCodes))]
+    public void FormatterRegistryResolvesEveryYamlAuthoredFormatterProfile(string localeCode)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo(localeCode));
+
+        Assert.IsAssignableFrom<DefaultFormatter>(formatter);
+    }
+
+    [Fact]
+    public void FormatterProfileCatalogRejectsUnknownProfiles()
+    {
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(
+            () => FormatterProfileCatalog.Resolve("missing-profile", CultureInfo.InvariantCulture));
+
+        Assert.Equal("kind", exception.ParamName);
+        Assert.Equal("missing-profile", exception.ActualValue);
+    }
+
     [Fact]
     public void EnglishPhraseTableExposesCanonicalFormatterPhrases()
     {
@@ -162,5 +207,40 @@ public class GeneratedFormatterPhraseTableTests
 
         Assert.NotNull(table);
         Assert.Equal("now", table!.DateNow);
+    }
+
+    static TheoryData<string> FindLocaleCodesWithSurface(string surfaceName)
+    {
+        var data = new TheoryData<string>();
+        var surfaceHeader = "  " + surfaceName + ":";
+        foreach (var file in Directory.GetFiles(FindLocaleRoot(), "*.yml", SearchOption.TopDirectoryOnly).OrderBy(Path.GetFileName, StringComparer.Ordinal))
+        {
+            if (File.ReadLines(file).Any(line => string.Equals(line, surfaceHeader, StringComparison.Ordinal)))
+            {
+                data.Add(Path.GetFileNameWithoutExtension(file));
+            }
+        }
+
+        return data;
+    }
+
+    static string FindLocaleRoot()
+    {
+        foreach (var root in new[] { AppContext.BaseDirectory, Environment.CurrentDirectory })
+        {
+            var directory = new DirectoryInfo(root);
+            while (directory is not null)
+            {
+                var localeRoot = Path.Combine(directory.FullName, "src", "Humanizer", "Locales");
+                if (Directory.Exists(localeRoot))
+                {
+                    return localeRoot;
+                }
+
+                directory = directory.Parent;
+            }
+        }
+
+        throw new Xunit.Sdk.XunitException("Could not locate src/Humanizer/Locales.");
     }
 }

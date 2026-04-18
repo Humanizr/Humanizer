@@ -94,7 +94,7 @@ surfaces:
             .ToString();
 
         Assert.Contains("registry.Register(\"zz-parent\"", registrySource, StringComparison.Ordinal);
-        Assert.Contains("\"zz-parent\" => zz_parent", phraseTableSource, StringComparison.Ordinal);
+        Assert.Contains("[\"zz-parent\"] = static () => zz_parent", phraseTableSource, StringComparison.Ordinal);
         Assert.Contains("case \"zz-child\": return", numberToWordsSource, StringComparison.Ordinal);
         Assert.Contains("new Dictionary<string, long>(StringComparer.Ordinal)", wordsToNumberSource, StringComparison.Ordinal);
         Assert.Contains("[\"huge\"] = 2147483648", parentTokenMapSource, StringComparison.Ordinal);

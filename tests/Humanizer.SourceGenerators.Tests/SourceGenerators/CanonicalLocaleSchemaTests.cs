@@ -912,8 +912,292 @@ surfaces:
                 diagnostic.GetMessage().Contains("must be a mapping", StringComparison.Ordinal));
     }
 
+    [Theory]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  widgets: {}
+""", "unsupported surface 'widgets'")]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  number:
+    currency: {}
+""", "unsupported property 'currency'")]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  ordinal:
+    words: {}
+""", "unsupported property 'words'")]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  calendar:
+    eraNames: {}
+""", "unsupported property 'eraNames'")]
+    public void CanonicalSchemaRejectsUnsupportedCanonicalProperties(string yaml, string expectedMessage)
+    {
+        var catalog = CreateCatalog(("zz", yaml));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedMessage, StringComparison.Ordinal));
+    }
+
+    [Theory]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  number:
+    formatting: {}
+""", "must define at least one property")]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  number:
+    formatting:
+      currencySeparator: '.'
+""", "unsupported property 'currencySeparator'")]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  number:
+    formatting:
+      decimalSeparator:
+        value: '.'
+""", "decimalSeparator' must be a scalar string")]
+    [InlineData("""
+locale: 'zz'
+surfaces:
+  number:
+    formatting:
+      decimalSeparator: ''
+""", "decimalSeparator' must be a non-empty string")]
+    public void CanonicalSchemaRejectsInvalidNumberFormattingBlocks(string yaml, string expectedMessage)
+    {
+        var catalog = CreateCatalog(("zz", yaml));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedMessage, StringComparison.Ordinal));
+    }
+
+    [Theory]
+    [MemberData(nameof(InvalidCalendarSurfaceYaml))]
+    public void CalendarSurfaceRejectsInvalidOverrideShapes(string yaml, string expectedMessage)
+    {
+        var catalog = CreateCatalog(("zz", yaml));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedMessage, StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void ListSurfaceRejectsMissingOrMalformedCanonicalTemplates()
+    {
+        var missingTemplatesCatalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  list:
+    engine: 'conjunction'
+"""));
+
+        var malformedTemplatesCatalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  list:
+    engine: 'conjunction'
+    pairTemplate: 'prefix {0}'
+    finalTemplate: 'prefix {0}'
+"""));
+
+        Assert.Contains(
+            missingTemplatesCatalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("must define canonical list templates", StringComparison.Ordinal));
+        Assert.Contains(
+            malformedTemplatesCatalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("must use '{0}' and '{1}'", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void LegacyMigrationRejectsUnsupportedTopLevelProperties()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            static () => HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(
+                "zz",
+                "unknown: true"));
+
+        Assert.Contains("unsupported top-level property 'unknown'", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void LegacyMigrationPreservesEmptyAndInheritedLocaleShapes()
+    {
+        var emptyCanonicalYaml = HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml("zz", string.Empty);
+        var inheritedCanonicalYaml = HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(
+            "zz-Variant",
+            "inherits: 'zz'");
+
+        Assert.Equal("""
+locale: 'zz'
+
+surfaces: {}
+""", NormalizeNewlines(emptyCanonicalYaml).TrimEnd('\n'));
+        Assert.Equal("""
+locale: 'zz-Variant'
+variantOf: 'zz'
+""", NormalizeNewlines(inheritedCanonicalYaml).TrimEnd('\n'));
+    }
+
+    [Fact]
+    public void LegacyMigrationConvertsScalarListAndPhraseSurfaces()
+    {
+        const string legacyYaml = """
+collectionFormatter: 'and'
+phrases:
+  dateHumanize: 'now'
+  timeSpan: 'duration'
+  dataUnit: 'data'
+  timeUnit: 'time'
+""";
+
+        var canonicalYaml = HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml("zz", legacyYaml);
+        var normalizedCanonicalYaml = NormalizeNewlines(canonicalYaml);
+
+        Assert.Contains("""
+  list:
+    engine: 'and'
+""", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    relativeDate: 'now'", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    duration: 'duration'", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    dataUnits: 'data'", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    timeUnits: 'time'", normalizedCanonicalYaml, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void SemanticDiffReportsLocalesMissingOnEitherSide()
+    {
+        const string baseLocale = """
+locale: 'aa'
+surfaces: {}
+""";
+        const string rightOnlyLocale = """
+locale: 'bb'
+surfaces: {}
+""";
+
+        var leftCatalog = CreateCatalog(("aa", baseLocale));
+        var rightCatalog = CreateCatalog(("aa", baseLocale), ("bb", rightOnlyLocale));
+
+        Assert.Empty(leftCatalog.Diagnostics);
+        Assert.Empty(rightCatalog.Diagnostics);
+
+        var rightOnlyDifferences = HumanizerSourceGenerator.LocaleSemanticDiff.Compare(leftCatalog.Locales, rightCatalog.Locales);
+        var leftOnlyDifferences = HumanizerSourceGenerator.LocaleSemanticDiff.Compare(rightCatalog.Locales, leftCatalog.Locales);
+
+        Assert.Contains("Locale 'bb' exists only on the right.", rightOnlyDifferences);
+        Assert.Contains("Locale 'bb' exists only on the left.", leftOnlyDifferences);
+    }
+
     static string GetRequiredString(HumanizerSourceGenerator.LocaleFeature feature, string propertyName) =>
         feature.ProfileRoot.GetProperty(propertyName).GetString()!;
+
+    public static TheoryData<string, string> InvalidCalendarSurfaceYaml()
+    {
+        var invalidMonthsItem = $"""
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+      -
+        value: 'Jan'
+{MonthItems(TwelveMonthValues("Month").Skip(1))}
+""";
+        var invalidMonthsGenitiveItem = $"""
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+{MonthItems(TwelveMonthValues("Month"))}
+    monthsGenitive:
+      -
+        value: 'Jan'
+{MonthItems(TwelveMonthValues("Genitive").Skip(1))}
+""";
+        var invalidHijriMonthsItem = $"""
+locale: 'zz'
+surfaces:
+  calendar:
+    hijriMonths:
+      -
+        value: 'Muharram'
+{MonthItems(TwelveMonthValues("Hijri").Skip(1))}
+""";
+        var directionalityControlledHijriMonths = $"""
+locale: 'zz'
+surfaces:
+  calendar:
+    hijriMonths:
+{MonthItems(Enumerable.Repeat("\u200Ebad", 1).Concat(TwelveMonthValues("Hijri").Skip(1)))}
+""";
+
+        return new TheoryData<string, string>
+        {
+            {
+                """
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+      - 'Jan'
+""",
+                "months' must be a sequence of exactly 12 strings"
+            },
+            { invalidMonthsItem, "months' items must be scalar strings" },
+            {
+                """
+locale: 'zz'
+surfaces:
+  calendar:
+    monthsGenitive:
+      - 'Jan'
+""",
+                "monthsGenitive' requires 'months' to also be present"
+            },
+            {
+                $"""
+locale: 'zz'
+surfaces:
+  calendar:
+    months:
+{MonthItems(TwelveMonthValues("Month"))}
+    monthsGenitive:
+      - 'Jan'
+""",
+                "monthsGenitive' must be a sequence of exactly 12 strings"
+            },
+            { invalidMonthsGenitiveItem, "monthsGenitive' items must be scalar strings" },
+            { invalidHijriMonthsItem, "hijriMonths' items must be scalar strings" },
+            { directionalityControlledHijriMonths, "must not contain directionality controls" }
+        };
+    }
+
+    static string[] TwelveMonthValues(string prefix) =>
+        Enumerable.Range(1, 12)
+            .Select(index => $"{prefix}{index}")
+            .ToArray();
+
+    static string MonthItems(IEnumerable<string> values) =>
+        string.Join('\n', values.Select(static value => $"      - '{value}'"));
 
     static HumanizerSourceGenerator.LocaleCatalogInput CreateCatalog(params (string LocaleCode, string FileText)[] files) =>
         HumanizerSourceGenerator.LocaleCatalogInput.Create(ImmutableArray.CreateRange(

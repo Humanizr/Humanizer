@@ -174,15 +174,7 @@ public static class TimeSpanHumanizeExtensions
     {
         if (isTimeUnitToGetTheMaximumTimeUnit)
         {
-            try
-            {
-                return (int)totalTimeNumberOfUnits;
-            }
-            catch
-            {
-                //To be implemented so that TimeSpanHumanize method accepts double type as unit
-                return 0;
-            }
+            return (int)totalTimeNumberOfUnits;
         }
 
         return timeNumberOfUnits;

@@ -27,9 +27,8 @@ Close formatter branch gaps: `LocalePhraseTable` (70%), `DelimitedCollectionForm
 - [ ] `ArgumentNullException` assertions check `ParamName`.
 
 ## Done summary
-_To be filled on completion._
-
+Extended formatter coverage for LocalePhraseTable, DelimitedCollectionFormatter, and CliticCollectionFormatter; added object-formatter null guards so Func<T, object?> overloads match string formatter null behavior; added a Cobertura branch-hotspot helper for future branch targeting.
 ## Evidence
 - Commits:
-- Tests:
+- Tests: dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release -- --filter-class Humanizer.Tests.CoverageGapTests, dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release -- --coverage --coverage-output-format cobertura, dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net11.0 -c Release, DOTNET_ROLL_FORWARD=Major dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release, dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj -c Release, dotnet format Humanizer.slnx --verify-no-changes --verbosity minimal, git diff --check, dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/package-validation
 - PRs:

@@ -6,6 +6,13 @@ partial class ToTitleCase : ICulturedStringTransformer
         Transform(input, CultureInfo.CurrentCulture);
 
     private const string WordPattern = @"(\w|[^\u0000-\u007F])+'?\w*";
+    static readonly FrozenSet<string> MinorWords =
+        new[]
+        {
+            "a", "an", "the",
+            "and", "as", "but", "if", "nor", "or", "so", "yet",
+            "at", "by", "for", "in", "of", "off", "on", "to", "up", "via"
+        }.ToFrozenSet(StringComparer.Ordinal);
 
 #if NET7_0_OR_GREATER
     [GeneratedRegex(WordPattern)]
@@ -62,14 +69,5 @@ partial class ToTitleCase : ICulturedStringTransformer
     }
 
     private static bool IsArticleOrConjunctionOrPreposition(string word) =>
-        word is
-
-            // articles
-            "a" or "an" or "the" or
-
-            // conjunctions
-            "and" or "as" or "but" or "if" or "nor" or "or" or "so" or "yet" or
-
-            // prepositions
-            "as" or "at" or "by" or "for" or "in" or "of" or "off" or "on" or "to" or "up" or "via";
+        MinorWords.Contains(word);
 }

@@ -34,9 +34,8 @@ Close tail-coverage on the **scale + gender NumberToWords converter family** (8 
 - [ ] No deferral or hold-list language.
 
 ## Done summary
-_To be filled on completion._
-
+Existing coverage report already satisfies the number-to-words scale/gender converter thresholds after the prior coverage pass; no source or test edits were needed for this scoped Flow task.
 ## Evidence
 - Commits:
-- Tests:
+- Tests: Coverage report from prior full net10.0 run; no new code changes for this task
 - PRs:

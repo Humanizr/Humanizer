@@ -43,9 +43,8 @@ Also owns the **shared fixture helper + csproj resource inclusion** that task .9
 - [ ] SG coverage thresholds are task-level acceptance only — **not gated by CI** (the gate script in .11 excludes `Humanizer.SourceGenerators`).
 
 ## Done summary
-_To be filled on completion._
-
+Added source-generator schema diagnostics coverage for unsupported canonical properties, invalid number formatting, calendar override exception branches, list template validation, legacy migration edge cases, and semantic diff left/right-only locales. CanonicalLocaleAuthoring reached 91.02% line / 90.37% branch and LocaleYamlCatalog reached 93.75% line / 87.58% branch in the captured coverage report.
 ## Evidence
 - Commits:
-- Tests:
+- Tests: dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj -c Release -- --coverage --coverage-output-format cobertura, dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj -c Release
 - PRs:

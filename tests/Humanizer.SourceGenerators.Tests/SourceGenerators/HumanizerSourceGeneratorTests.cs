@@ -12,7 +12,7 @@ namespace Humanizer.SourceGenerators.Tests;
 
 public partial class HumanizerSourceGeneratorTests
 {
-    static readonly Lazy<ImmutableDictionary<string, string>> generatedSources = new(GenerateSources);
+    static readonly Lazy<ImmutableDictionary<string, string>> GeneratedSources = new(GenerateSources);
 
     [Fact]
     public void FormatterRegistryRegistrationsUseGeneratedProfilesForSharedFormatters()
@@ -251,7 +251,7 @@ surfaces:
         Assert.DoesNotContain("case \"en\":", profileCatalogSource);
         Assert.DoesNotContain("case \"kurdish\":", profileCatalogSource);
         Assert.DoesNotContain("case \"vietnamese\":", profileCatalogSource);
-        Assert.DoesNotContain(generatedSources.Value.Keys, static hintName => hintName == "TokenMapWordsToNumberConverters.Index.g.cs");
+        Assert.DoesNotContain(GeneratedSources.Value.Keys, static hintName => hintName == "TokenMapWordsToNumberConverters.Index.g.cs");
     }
 
     [Fact]
@@ -294,10 +294,46 @@ surfaces:
 
         Assert.Contains("static partial class LocalePhraseTableCatalog", source);
         Assert.Contains("static partial LocalePhraseTable? ResolveCore(string localeCode)", source);
-        Assert.Contains("\"en\" => en,", source);
+        Assert.Contains("static readonly FrozenDictionary<string, Func<LocalePhraseTable>> Factories", source);
+        Assert.Contains("[\"en\"] = static () => en,", source);
         Assert.Contains("new LocalizedDatePhrase?[]", source);
         Assert.Contains("new LocalizedTimeSpanPhrase?[]", source);
         Assert.Contains("new LocalizedUnitPhrase?[]", source);
+    }
+
+    [Fact]
+    public void GeneratedHighCardinalityCatalogsUseLookupTablesInsteadOfLargeSwitches()
+    {
+        var formatterCatalog = GetGeneratedSource("FormatterProfileCatalog.g.cs");
+        var headingCatalog = GetGeneratedSource("HeadingTableCatalog.g.cs");
+        var phraseCatalog = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");
+
+        Assert.Contains("static readonly FrozenDictionary<string, Func<CultureInfo, IFormatter>> Factories", formatterCatalog);
+        Assert.Contains("[\"bg\"] = static culture => new ProfiledFormatter(culture, ", formatterCatalog);
+        Assert.DoesNotContain("return kind switch", formatterCatalog);
+
+        Assert.Contains("static readonly FrozenDictionary<string, Func<HeadingTable>> Factories", headingCatalog);
+        Assert.Contains("[\"en\"] = static () => en,", headingCatalog);
+        Assert.DoesNotContain("localeCode switch", headingCatalog);
+
+        Assert.Contains("static readonly FrozenDictionary<string, Func<LocalePhraseTable>> Factories", phraseCatalog);
+        Assert.Contains("[\"en\"] = static () => en,", phraseCatalog);
+        Assert.DoesNotContain("localeCode switch", phraseCatalog);
+    }
+
+    [Fact]
+    public void GeneratedHighCardinalityCatalogsGuardNullLookupKeys()
+    {
+        var formatterCatalog = GetGeneratedSource("FormatterProfileCatalog.g.cs");
+        var headingCatalog = GetGeneratedSource("HeadingTableCatalog.g.cs");
+        var phraseCatalog = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");
+
+        Assert.Contains("if (kind is null)", formatterCatalog);
+        Assert.Contains("throw new ArgumentOutOfRangeException(nameof(kind), kind, \"Unknown formatter profile.\");", formatterCatalog);
+
+        Assert.Contains("if (localeCode is null)", headingCatalog);
+        Assert.Contains("if (localeCode is null)", phraseCatalog);
+        Assert.Equal(2, CountOccurrences(headingCatalog + phraseCatalog, "return null;"));
     }
 
     [Fact]
@@ -589,6 +625,25 @@ numberToWords:
 
         Assert.Contains("new string[] { \"one-thousandth\", \"one-thousand\" }", source);
         Assert.Contains("new string[] { \"{0}-thousandth\", \"{0}-thousand\" }", source);
+    }
+
+    [Fact]
+    public void NumberToWordsUnknownEngineFallsBackToConventionalConverterName()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'semantic-custom'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-conventional-number.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+
+        Assert.Contains("new SemanticCustomNumberToWordsConverter()", source);
     }
 
     [Fact]
@@ -1361,7 +1416,7 @@ wordsToNumber:
     }
 
     static string GetGeneratedSource(string hintName) =>
-        generatedSources.Value.TryGetValue(hintName, out var source)
+        GeneratedSources.Value.TryGetValue(hintName, out var source)
             ? source
             : throw new Xunit.Sdk.XunitException($"Generated source '{hintName}' was not found.");
 

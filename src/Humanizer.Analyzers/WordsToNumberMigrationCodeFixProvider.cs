@@ -21,16 +21,10 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-        if (root is null)
-        {
-            return;
-        }
+        if (root is null) return;
 
         var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
-        if (semanticModel is null)
-        {
-            return;
-        }
+        if (semanticModel is null) return;
 
         foreach (var diagnostic in context.Diagnostics)
         {
@@ -82,10 +76,7 @@ public class WordsToNumberMigrationCodeFixProvider : CodeFixProvider
     static async Task<Document> WrapInvocationWithCheckedCastAsync(Document document, InvocationExpressionSyntax invocation, CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        if (root is null)
-        {
-            return document;
-        }
+        if (root is null) return document;
 
         var castExpression = SyntaxFactory.CheckedExpression(
             SyntaxKind.CheckedExpression,

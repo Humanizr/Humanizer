@@ -38,9 +38,8 @@ Close analyzer branch gaps in `Humanizer.Analyzers` across both Roslyn arms now 
 - [ ] No `[ExcludeFromCodeCoverage]` attributes added.
 
 ## Done summary
-_To be filled on completion._
-
+Added analyzer/code-fix coverage across the Roslyn 3.8, 4.8, and 4.14 test projects for WordsToNumber converter casts, non-actionable long invocations, namespace qualified-name parent skipping, exact qualified-name replacement, and helper edge cases. Analyzer coverage now exceeds task thresholds on all three Roslyn arms.
 ## Evidence
 - Commits:
-- Tests:
+- Tests: dotnet test tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn414.csproj -c Release -- --coverage --coverage-output-format cobertura, dotnet test tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn48.csproj -c Release -- --coverage --coverage-output-format cobertura, dotnet test tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn38.csproj -c Release -- --coverage --coverage-output-format cobertura, dotnet test tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn414.csproj -c Release, dotnet test tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn48.csproj -c Release, dotnet test tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.Roslyn38.csproj -c Release
 - PRs:

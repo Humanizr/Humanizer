@@ -28,25 +28,40 @@ public sealed partial class HumanizerSourceGenerator
             var builder = new StringBuilder();
             builder.AppendLine("#nullable enable");
             builder.AppendLine();
+            builder.AppendLine("using System;");
+            builder.AppendLine("using System.Collections.Frozen;");
+            builder.AppendLine("using System.Collections.Generic;");
+            builder.AppendLine();
             builder.AppendLine("namespace Humanizer;");
             builder.AppendLine();
             builder.AppendLine("static partial class HeadingTableCatalog");
             builder.AppendLine("{");
-            builder.AppendLine("    internal static partial HeadingTable? ResolveCore(string localeCode) =>");
-            builder.AppendLine("        localeCode switch");
+            builder.AppendLine("    internal static partial HeadingTable? ResolveCore(string localeCode)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        if (localeCode is null)");
             builder.AppendLine("        {");
+            builder.AppendLine("            return null;");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        return Factories.TryGetValue(localeCode, out var factory)");
+            builder.AppendLine("            ? factory()");
+            builder.AppendLine("            : null;");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    static readonly FrozenDictionary<string, Func<HeadingTable>> Factories = new Dictionary<string, Func<HeadingTable>>(StringComparer.Ordinal)");
+            builder.AppendLine("    {");
 
             foreach (var locale in locales)
             {
                 builder.Append("            ");
+                builder.Append('[');
                 builder.Append(QuoteLiteral(locale.LocaleCode));
-                builder.Append(" => ");
+                builder.Append("] = static () => ");
                 builder.Append(GetCatalogPropertyName(locale.LocaleCode));
                 builder.AppendLine(",");
             }
 
-            builder.AppendLine("            _ => null");
-            builder.AppendLine("        };");
+            builder.AppendLine("    }.ToFrozenDictionary(StringComparer.Ordinal);");
             builder.AppendLine();
 
             foreach (var locale in locales)
