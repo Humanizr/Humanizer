@@ -944,6 +944,60 @@ public class CoverageGapTests
         Assert.False(string.IsNullOrWhiteSpace(2.ToWords(GrammaticalGender.Feminine, new CultureInfo("lv"))));
     }
 
+    [Theory]
+    [InlineData((int)GrammaticalGender.Masculine, 1, "primer")]
+    [InlineData((int)GrammaticalGender.Neuter, 1, "primer")]
+    [InlineData((int)GrammaticalGender.Masculine, 2, "segundo")]
+    [InlineData((int)GrammaticalGender.Neuter, 2, "segundo")]
+    [InlineData((int)GrammaticalGender.Masculine, 3, "tercer")]
+    [InlineData((int)GrammaticalGender.Neuter, 3, "tercer")]
+    public void SpanishLongScaleStemOrdinalCoversAbbreviatedOrdinalUnits(int genderValue, int number, string expected)
+    {
+        var spanish = new CultureInfo("es");
+        var gender = (GrammaticalGender)genderValue;
+
+        Assert.Equal(expected, number.ToOrdinalWords(gender, WordForm.Abbreviation, spanish));
+    }
+
+    [Fact]
+    public void SpanishLongScaleStemOrdinalCoversFeminineOrdinalUnits()
+    {
+        var spanish = new CultureInfo("es");
+
+        Assert.Equal("primera", 1.ToOrdinalWords(GrammaticalGender.Feminine, spanish));
+    }
+
+    [Fact]
+    public void SpanishLongScaleStemOrdinalCoversGenderedCardinalUnits()
+    {
+        var spanish = new CultureInfo("es");
+
+        Assert.Equal("un", 1.ToWords(WordForm.Abbreviation, GrammaticalGender.Masculine, spanish));
+        Assert.Equal("un", 1.ToWords(WordForm.Abbreviation, GrammaticalGender.Neuter, spanish));
+        Assert.Equal("uno", 1.ToWords(WordForm.Normal, GrammaticalGender.Masculine, spanish));
+        Assert.Equal("uno", 1.ToWords(WordForm.Normal, GrammaticalGender.Neuter, spanish));
+        Assert.Equal("una", 1.ToWords(GrammaticalGender.Feminine, spanish));
+    }
+
+    [Theory]
+    [InlineData(31_000, false)]
+    [InlineData(40_000, true)]
+    [InlineData(100_000, true)]
+    [InlineData(1_000_000, true)]
+    [InlineData(10_000_000, true)]
+    [InlineData(100_000_000, true)]
+    [InlineData(1_000_000_000, true)]
+    [InlineData(2_000_000_000, true)]
+    [InlineData(int.MaxValue, false)]
+    public void SpanishLongScaleStemOrdinalCoversRoundNumberBoundaries(int number, bool expected)
+    {
+        Assert.Equal(expected, InvokePrivate<bool>(
+            typeof(LongScaleStemOrdinalNumberToWordsConverter),
+            null,
+            "IsRoundNumber",
+            number));
+    }
+
     [Fact]
     public void PluralizedScaleConverterCoversCardinalScaleFormsAndUnitStrategies()
     {
