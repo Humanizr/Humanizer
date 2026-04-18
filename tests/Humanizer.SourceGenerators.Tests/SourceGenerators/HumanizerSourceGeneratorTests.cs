@@ -613,6 +613,84 @@ numberToWords:
     }
 
     [Fact]
+    public void BillionStrategyContractUsesOptionalNullsAndDefaultJoinMode()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'billion-strategy'
+  minusWord: 'minus'
+  andWord: 'and'
+  cardinal:
+    hundredExactWord: 'hundred'
+    thousandWord: 'thousand'
+    millionSingularWord: 'million'
+    millionPluralWord: 'millions'
+    billionStrategy: 'thousand-millions'
+    unitsMap:
+      - 'zero'
+      - 'one'
+      - 'two'
+    tensMap:
+      - 'zero'
+      - 'ten'
+      - 'twenty'
+    hundredsMap:
+      - 'zero'
+      - 'hundred'
+      - 'two hundred'
+  ordinal:
+    billionStrategy: 'thousandth-millionth'
+    thousandWord: 'thousandth'
+    millionWord: 'millionth'
+    unitsMap:
+      - 'zeroth'
+      - 'first'
+      - 'second'
+    tensMap:
+      - 'zeroth'
+      - 'tenth'
+      - 'twentieth'
+    hundredsMap:
+      - 'zeroth'
+      - 'hundredth'
+      - 'two hundredth'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-billion-defaults.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+
+        Assert.Contains("BillionCardinalStrategy.ThousandMillions", source);
+        Assert.Contains("BillionOrdinalStrategy.ThousandthMillionth", source);
+        Assert.Contains("BillionOrdinalMillionJoinMode.Spaced", source);
+        Assert.Contains("null, null, new string[] { \"zero\", \"one\", \"two\" }", source);
+        Assert.Contains("\"millionth\", null, BillionOrdinalMillionJoinMode.Spaced", source);
+    }
+
+    [Fact]
+    public void NumberToWordsUnknownEngineFallsBackToConventionalConverterName()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'semantic-custom'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-conventional-number.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+
+        Assert.Contains("new SemanticCustomNumberToWordsConverter()", source);
+    }
+
+    [Fact]
     public void FormatterProfilesAcceptGrammarAliasesAndPreferThemOverLegacyFields()
     {
         const string locale = """

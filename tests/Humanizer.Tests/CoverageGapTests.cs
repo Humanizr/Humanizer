@@ -1206,6 +1206,77 @@ public class CoverageGapTests
         Assert.Throws<InvalidOperationException>(() => invalidOrdinal.ConvertToOrdinal(1));
     }
 
+    [Fact]
+    public void BillionStrategyConverterCoversCardinalAndOrdinalBillionStrategies()
+    {
+        var thousandMillions = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.ThousandMillions,
+            BillionOrdinalStrategy.ThousandthMillionth));
+
+        Assert.Equal("mil milhões", thousandMillions.Convert(1_000_000_000));
+        Assert.Equal("dois mil milhões", thousandMillions.Convert(2_000_000_000));
+        Assert.Equal("milésimo milionésimo", thousandMillions.ConvertToOrdinal(1_000_000_000));
+        Assert.Equal("dois milésimo milionésimo", thousandMillions.ConvertToOrdinal(2_000_000_000));
+
+        var billionWords = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.BillionWord,
+            BillionOrdinalStrategy.BillionWord));
+
+        Assert.Equal("um bilhão", billionWords.Convert(1_000_000_000));
+        Assert.Equal("dois bilhões", billionWords.Convert(2_000_000_000));
+        Assert.Equal("bilionésimo", billionWords.ConvertToOrdinal(1_000_000_000));
+        Assert.Equal("segundo bilionésimo", billionWords.ConvertToOrdinal(2_000_000_000));
+        Assert.Equal("bilionésima", billionWords.ConvertToOrdinal(1_000_000_000, GrammaticalGender.Feminine));
+        Assert.Equal("segunda bilionésima", billionWords.ConvertToOrdinal(2_000_000_000, GrammaticalGender.Feminine));
+
+        Assert.Equal("duzentas e duas", billionWords.Convert(202, GrammaticalGender.Feminine));
+    }
+
+    [Fact]
+    public void BillionStrategyConverterReportsIncompleteOrUnsupportedBillionProfiles()
+    {
+        var missingSingular = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.BillionWord,
+            BillionOrdinalStrategy.BillionWord,
+            billionSingularWord: null));
+        Assert.Equal(
+            "Billion-word cardinal strategy requires a singular billion word.",
+            Assert.Throws<InvalidOperationException>(() => missingSingular.Convert(1_000_000_000)).Message);
+
+        var missingPlural = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.BillionWord,
+            BillionOrdinalStrategy.BillionWord,
+            billionPluralWord: null));
+        Assert.Equal(
+            "Billion-word cardinal strategy requires a plural billion word.",
+            Assert.Throws<InvalidOperationException>(() => missingPlural.Convert(2_000_000_000)).Message);
+
+        var missingOrdinal = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.BillionWord,
+            BillionOrdinalStrategy.BillionWord,
+            ordinalBillionWord: null));
+        Assert.Equal(
+            "Billion-word ordinal strategy requires a billion ordinal word.",
+            Assert.Throws<InvalidOperationException>(() => missingOrdinal.ConvertToOrdinal(1_000_000_000)).Message);
+        Assert.Equal(
+            "Billion-word ordinal strategy requires a billion ordinal word.",
+            Assert.Throws<InvalidOperationException>(() => missingOrdinal.ConvertToOrdinal(2_000_000_000)).Message);
+
+        var invalidCardinal = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            (BillionCardinalStrategy)42,
+            BillionOrdinalStrategy.BillionWord));
+        Assert.Equal(
+            "Unsupported billion-strategy cardinal mode.",
+            Assert.Throws<InvalidOperationException>(() => invalidCardinal.Convert(1_000_000_000)).Message);
+
+        var invalidOrdinal = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.BillionWord,
+            (BillionOrdinalStrategy)42));
+        Assert.Equal(
+            "Unsupported billion-strategy ordinal mode.",
+            Assert.Throws<InvalidOperationException>(() => invalidOrdinal.ConvertToOrdinal(1_000_000_000)).Message);
+    }
+
     [UseCulture("en-US")]
     [Fact]
     public void OrdinalDatePatternCoversMonthSubstitutionNonAdjacentAndNoMonthCases()
@@ -1223,6 +1294,9 @@ public class CoverageGapTests
 
         var dayOfWeekAdjacent = new OrdinalDatePattern("MMMM dddd {day}", OrdinalDateDayMode.Numeric, months: months, monthsGenitive: genitiveMonths);
         Assert.Equal("Nom Tuesday 2", dayOfWeekAdjacent.Format(new DateTime(2024, 1, 2)));
+
+        var dayOfWeekBeforeMonth = new OrdinalDatePattern("dddd MMMM", OrdinalDateDayMode.Numeric, months: months, monthsGenitive: genitiveMonths);
+        Assert.Equal("Tuesday Nom", dayOfWeekBeforeMonth.Format(new DateTime(2024, 1, 2)));
     }
 
     [UseCulture("en-US")]
@@ -1249,6 +1323,7 @@ public class CoverageGapTests
 
         var pattern = new OrdinalDatePattern("{day}", OrdinalDateDayMode.Numeric);
         Assert.Equal("prefix second", InvokePrivate<string>(typeof(OrdinalDatePattern), null, "ReplaceDayMarker", "prefix <<DAY>>", "second", 2));
+        Assert.Equal("second", InvokePrivate<string>(typeof(OrdinalDatePattern), null, "ReplaceDayMarker", "<<DAY>>", "second", 2));
         Assert.False(InvokePrivate<bool>(
             typeof(OrdinalDatePattern),
             null,
@@ -1257,6 +1332,14 @@ public class CoverageGapTests
             "'literal'",
             0,
             false));
+        Assert.False(InvokePrivate<bool>(
+            typeof(OrdinalDatePattern),
+            null,
+            "FindAdjacentDayOfMonth",
+            [typeof(string), typeof(int), typeof(bool)],
+            "literal'",
+            7,
+            true));
     }
 
     [UseCulture("ar-SA")]
@@ -1432,6 +1515,25 @@ public class CoverageGapTests
         Assert.False(string.IsNullOrWhiteSpace(999_999_999_999_999_999L.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseShortScaleWord, 3)));
         Assert.False(string.IsNullOrWhiteSpace(999_999_999_999_999_999d.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseLongScaleWord, 4)));
         Assert.False(string.IsNullOrWhiteSpace(long.MaxValue.ToMetric()));
+        Assert.Equal("123.0 ", 123L.ToMetric(MetricNumeralFormats.WithSpace, 1));
+        Assert.Equal("1m", InvokePrivate<string>(
+            typeof(MetricNumeralExtensions),
+            null,
+            "BuildMetricRepresentation",
+            [typeof(long), typeof(int), typeof(MetricNumeralFormats?), typeof(int?)],
+            1L,
+            -1,
+            null,
+            0));
+        Assert.Equal("1 m", InvokePrivate<string>(
+            typeof(MetricNumeralExtensions),
+            null,
+            "BuildMetricRepresentation",
+            [typeof(long), typeof(int), typeof(MetricNumeralFormats?), typeof(int?)],
+            1L,
+            -1,
+            MetricNumeralFormats.WithSpace,
+            0));
         Assert.False(string.IsNullOrWhiteSpace(InvokePrivate<string>(
             typeof(MetricNumeralExtensions),
             null,
@@ -1712,6 +1814,25 @@ public class CoverageGapTests
     {
         Assert.Null(Vocabularies.Default.Pluralize(null));
         Assert.Null(Vocabularies.Default.Singularize(null));
+        Assert.Equal("ss", Vocabularies.Default.Pluralize("s"));
+        Assert.Equal("S", Vocabularies.Default.Singularize("SS"));
+        Assert.Equal("people", Vocabularies.Default.Pluralize("people", inputIsKnownToBeSingular: false));
+        Assert.Equal("person", Vocabularies.Default.Singularize("person", inputIsKnownToBePlural: false));
+
+        var vocabulary = new Vocabulary();
+        Assert.Equal("cat", vocabulary.Pluralize("cat"));
+        vocabulary.AddPlural("^cat$", "kittens");
+        Assert.Equal("cat", vocabulary.Singularize("cat", inputIsKnownToBePlural: false));
+
+        vocabulary.AddPlural("^(cat)$", "dogs");
+        vocabulary.AddSingular("^(dogs)$", "cat");
+        Assert.Equal("dogs", vocabulary.Pluralize("cat"));
+        Assert.Equal("Dogs", vocabulary.Pluralize("Cat"));
+
+        var selfSingular = new Vocabulary();
+        selfSingular.AddPlural("^cat$", "kittens");
+        selfSingular.AddSingular("^(cat|kittens)$", "cat");
+        Assert.Equal("cat", selfSingular.Singularize("cat", inputIsKnownToBePlural: false));
 
         Assert.Throws<ArgumentException>(() => RomanNumeralExtensions.FromRoman(ReadOnlySpan<char>.Empty));
         Assert.Throws<ArgumentOutOfRangeException>(() => 0.ToRoman());
@@ -2139,6 +2260,59 @@ public class CoverageGapTests
         new(1_000, "thousand", "thousands", " ", " ", "s", "th-scale", true, GrammaticalGender.Masculine),
         new(100, "hundred", "hundreds", string.Empty, string.Empty, "s", "th-hundred", false, GrammaticalGender.Masculine)
     ];
+
+    static BillionStrategyNumberToWordsProfile CreateBillionStrategyProfile(
+        BillionCardinalStrategy cardinalStrategy,
+        BillionOrdinalStrategy ordinalStrategy,
+        string? billionSingularWord = "bilhão",
+        string? billionPluralWord = "bilhões",
+        string? ordinalBillionWord = "bilionésimo")
+    {
+        var units = Enumerable.Repeat(string.Empty, 20).ToArray();
+        units[0] = "zero";
+        units[1] = "um";
+        units[2] = "dois";
+
+        var tens = Enumerable.Repeat(string.Empty, 10).ToArray();
+        tens[2] = "vinte";
+
+        var hundreds = Enumerable.Repeat(string.Empty, 10).ToArray();
+        hundreds[2] = "duzentos";
+
+        var ordinalUnits = Enumerable.Repeat(string.Empty, 20).ToArray();
+        ordinalUnits[1] = "primeiro";
+        ordinalUnits[2] = "segundo";
+
+        var ordinalTens = Enumerable.Repeat(string.Empty, 10).ToArray();
+        ordinalTens[2] = "vigésimo";
+
+        var ordinalHundreds = Enumerable.Repeat(string.Empty, 10).ToArray();
+        ordinalHundreds[2] = "ducentésimo";
+
+        return new(
+            "menos",
+            "e",
+            new(
+                "cem",
+                "mil",
+                "milhão",
+                "milhões",
+                cardinalStrategy,
+                billionSingularWord,
+                billionPluralWord,
+                units,
+                tens,
+                hundreds),
+            new(
+                ordinalStrategy,
+                "milésimo",
+                "milionésimo",
+                ordinalBillionWord,
+                BillionOrdinalMillionJoinMode.Spaced,
+                ordinalUnits,
+                ordinalTens,
+                ordinalHundreds));
+    }
 
     static TerminalOrdinalScaleNumberToWordsProfile CreateTerminalOrdinalScaleProfile()
     {
