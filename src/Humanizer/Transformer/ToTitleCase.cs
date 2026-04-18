@@ -6,13 +6,6 @@ partial class ToTitleCase : ICulturedStringTransformer
         Transform(input, CultureInfo.CurrentCulture);
 
     private const string WordPattern = @"(\w|[^\u0000-\u007F])+'?\w*";
-    static readonly FrozenSet<string> MinorWords =
-        new[]
-        {
-            "a", "an", "the",
-            "and", "as", "but", "if", "nor", "or", "so", "yet",
-            "at", "by", "for", "in", "of", "off", "on", "to", "up", "via"
-        }.ToFrozenSet(StringComparer.Ordinal);
 
 #if NET7_0_OR_GREATER
     [GeneratedRegex(WordPattern)]
@@ -33,33 +26,34 @@ partial class ToTitleCase : ICulturedStringTransformer
         for (var i = 0; i < matches.Count; i++)
         {
             var word = matches[i];
-            var value = word.Value;
-            if (AllCapitals(value) || (i > 0 && IsArticleOrConjunctionOrPreposition(value)))
+            if (AllCapitals(input, word.Index, word.Length) ||
+                (i > 0 && IsArticleOrConjunctionOrPreposition(input.AsSpan(word.Index, word.Length))))
             {
                 continue;
             }
 
-            builder[word.Index] = textInfo.ToUpper(value[0]);
-            Overwrite(builder, word.Index + 1, textInfo.ToLower(value[1..]));
+            builder[word.Index] = textInfo.ToUpper(input[word.Index]);
+            OverwriteLowercase(builder, input, word.Index + 1, word.Length - 1, textInfo);
         }
 
         return builder.ToString();
     }
 
-    static void Overwrite(StringBuilder builder, int index, string replacement)
+    static void OverwriteLowercase(StringBuilder builder, string input, int index, int length, TextInfo textInfo)
     {
-        // Directly overwrite characters instead of Remove + Insert
-        for (var i = 0; i < replacement.Length; i++)
+        var end = index + length;
+        for (var i = index; i < end; i++)
         {
-            builder[index + i] = replacement[i];
+            builder[i] = textInfo.ToLower(input[i]);
         }
     }
 
-    static bool AllCapitals(string input)
+    static bool AllCapitals(string input, int index, int length)
     {
-        foreach (var ch in input)
+        var end = index + length;
+        for (var i = index; i < end; i++)
         {
-            if (!char.IsUpper(ch))
+            if (!char.IsUpper(input[i]))
             {
                 return false;
             }
@@ -68,6 +62,11 @@ partial class ToTitleCase : ICulturedStringTransformer
         return true;
     }
 
-    private static bool IsArticleOrConjunctionOrPreposition(string word) =>
-        MinorWords.Contains(word);
+    private static bool IsArticleOrConjunctionOrPreposition(ReadOnlySpan<char> word) =>
+        word switch
+        {
+            "a" or "an" or "as" or "at" or "by" or "if" or "in" or "of" or "on" or "or" or "so" or "to" or "up" => true,
+            "and" or "but" or "for" or "nor" or "off" or "the" or "via" or "yet" => true,
+            _ => false
+        };
 }
