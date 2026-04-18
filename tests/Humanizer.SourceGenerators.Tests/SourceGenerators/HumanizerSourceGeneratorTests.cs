@@ -322,6 +322,21 @@ surfaces:
     }
 
     [Fact]
+    public void GeneratedHighCardinalityCatalogsGuardNullLookupKeys()
+    {
+        var formatterCatalog = GetGeneratedSource("FormatterProfileCatalog.g.cs");
+        var headingCatalog = GetGeneratedSource("HeadingTableCatalog.g.cs");
+        var phraseCatalog = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");
+
+        Assert.Contains("if (kind is null)", formatterCatalog);
+        Assert.Contains("throw new ArgumentOutOfRangeException(nameof(kind), kind, \"Unknown formatter profile.\");", formatterCatalog);
+
+        Assert.Contains("if (localeCode is null)", headingCatalog);
+        Assert.Contains("if (localeCode is null)", phraseCatalog);
+        Assert.Equal(2, CountOccurrences(headingCatalog + phraseCatalog, "return null;"));
+    }
+
+    [Fact]
     public void LocalePhraseTablesInlineRepresentativePhrasesAndExactForms()
     {
         var source = GetGeneratedSource("LocalePhraseTableCatalog.g.cs");

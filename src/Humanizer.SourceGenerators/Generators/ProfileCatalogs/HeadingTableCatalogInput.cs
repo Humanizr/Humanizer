@@ -38,6 +38,11 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("{");
             builder.AppendLine("    internal static partial HeadingTable? ResolveCore(string localeCode)");
             builder.AppendLine("    {");
+            builder.AppendLine("        if (localeCode is null)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            return null;");
+            builder.AppendLine("        }");
+            builder.AppendLine();
             builder.AppendLine("        return Factories.TryGetValue(localeCode, out var factory)");
             builder.AppendLine("            ? factory()");
             builder.AppendLine("            : null;");

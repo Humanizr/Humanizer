@@ -88,6 +88,11 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("{");
             builder.AppendLine("    public static IFormatter Resolve(string kind, CultureInfo culture)");
             builder.AppendLine("    {");
+            builder.AppendLine("        if (kind is null)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            throw new ArgumentOutOfRangeException(nameof(kind), kind, \"Unknown formatter profile.\");");
+            builder.AppendLine("        }");
+            builder.AppendLine();
             builder.AppendLine("        if (Factories.TryGetValue(kind, out var factory))");
             builder.AppendLine("        {");
             builder.AppendLine("            return factory(culture);");
