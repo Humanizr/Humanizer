@@ -1,4 +1,6 @@
 using System.Collections.Immutable;
+using System.Reflection;
+using System.Text;
 
 using Xunit;
 
@@ -702,6 +704,49 @@ surfaces:
     }
 
     [Fact]
+    public void CanonicalSurfacesMustBeMappings()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            HumanizerSourceGenerator.CanonicalLocaleAuthoring.Parse(
+                "zz",
+                """
+locale: 'zz'
+surfaces:
+  list: 'and'
+"""));
+
+        Assert.Contains("surfaces.list' must be a mapping", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void ToLocaleDefinitionRejectsMalformedInMemorySurfaceDocuments()
+    {
+        var surfaces = new HumanizerSourceGenerator.SimpleYamlMapping(
+            ImmutableDictionary<string, HumanizerSourceGenerator.SimpleYamlValue>.Empty
+                .WithComparers(StringComparer.Ordinal)
+                .Add("list", new HumanizerSourceGenerator.SimpleYamlScalar("and", isQuoted: true)));
+        var document = new HumanizerSourceGenerator.CanonicalLocaleDocument(
+            "zz",
+            variantOf: null,
+            surfaces,
+            canonicalText: string.Empty);
+
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            HumanizerSourceGenerator.CanonicalLocaleAuthoring.ToLocaleDefinition(document));
+
+        Assert.Contains("surfaces.list' must be a mapping", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void SemanticDiffFingerprintsCheckedInLocalePhraseData()
+    {
+        var catalog = CreateCheckedInLocaleCatalog();
+
+        Assert.Empty(catalog.Diagnostics);
+        Assert.Empty(HumanizerSourceGenerator.LocaleSemanticDiff.Compare(catalog.Locales, catalog.Locales));
+    }
+
+    [Fact]
     public void CheckedInCanonicalLocaleFilesRoundTripWithoutStructuralDrift()
     {
         foreach (var file in FindCheckedInLocaleFiles())
@@ -1084,6 +1129,26 @@ phrases:
     }
 
     [Fact]
+    public void LegacyMigrationYamlEmitterRejectsUnsupportedYamlNodes()
+    {
+        var method = typeof(HumanizerSourceGenerator.LegacyLocaleMigration).GetMethod(
+            "AppendYamlValue",
+            BindingFlags.Static | BindingFlags.NonPublic);
+        Assert.NotNull(method);
+
+        var scalarBuilder = new StringBuilder();
+        method.Invoke(null, [scalarBuilder, new HumanizerSourceGenerator.SimpleYamlScalar("value", isQuoted: true), 2]);
+
+        Assert.Equal("  'value'\n", NormalizeNewlines(scalarBuilder.ToString()));
+
+        var exception = Assert.Throws<TargetInvocationException>(() =>
+            method.Invoke(null, [new StringBuilder(), new UnsupportedYamlValue(), 0]));
+
+        Assert.IsType<InvalidOperationException>(exception.InnerException);
+        Assert.Contains("Unsupported YAML node", exception.InnerException.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void SemanticDiffReportsLocalesMissingOnEitherSide()
     {
         const string baseLocale = """
@@ -1236,4 +1301,6 @@ surfaces:
 
     static string NormalizeNewlines(string value) =>
         value.Replace("\r\n", "\n", StringComparison.Ordinal);
+
+    sealed class UnsupportedYamlValue : HumanizerSourceGenerator.SimpleYamlValue;
 }
