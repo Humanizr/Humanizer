@@ -325,6 +325,23 @@ public class DefaultFormatter : IFormatter
             .Trim();
     }
 
-    static string JoinPhraseParts(params string?[] parts) =>
-        string.Join(" ", parts.Where(static part => !string.IsNullOrWhiteSpace(part)));
+    static string JoinPhraseParts(string? first, string? second, string? third, string? fourth)
+    {
+        var result = AppendPhrasePart(null, first);
+        result = AppendPhrasePart(result, second);
+        result = AppendPhrasePart(result, third);
+        return AppendPhrasePart(result, fourth) ?? string.Empty;
+    }
+
+    static string? AppendPhrasePart(string? result, string? part)
+    {
+        if (string.IsNullOrWhiteSpace(part))
+        {
+            return result;
+        }
+
+        return result is null
+            ? part
+            : string.Concat(result, " ", part);
+    }
 }
