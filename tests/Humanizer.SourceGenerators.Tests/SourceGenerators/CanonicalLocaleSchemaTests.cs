@@ -1071,15 +1071,16 @@ phrases:
 """;
 
         var canonicalYaml = HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml("zz", legacyYaml);
+        var normalizedCanonicalYaml = NormalizeNewlines(canonicalYaml);
 
         Assert.Contains("""
   list:
     engine: 'and'
-""", canonicalYaml, StringComparison.Ordinal);
-        Assert.Contains("    relativeDate: 'now'", canonicalYaml, StringComparison.Ordinal);
-        Assert.Contains("    duration: 'duration'", canonicalYaml, StringComparison.Ordinal);
-        Assert.Contains("    dataUnits: 'data'", canonicalYaml, StringComparison.Ordinal);
-        Assert.Contains("    timeUnits: 'time'", canonicalYaml, StringComparison.Ordinal);
+""", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    relativeDate: 'now'", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    duration: 'duration'", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    dataUnits: 'data'", normalizedCanonicalYaml, StringComparison.Ordinal);
+        Assert.Contains("    timeUnits: 'time'", normalizedCanonicalYaml, StringComparison.Ordinal);
     }
 
     [Fact]
