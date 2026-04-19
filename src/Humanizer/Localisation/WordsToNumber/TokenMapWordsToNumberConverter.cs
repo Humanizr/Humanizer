@@ -1041,6 +1041,8 @@ static class TokenMapWordsToNumberNormalizer
 
             if (i == 0 ||
                 i == source.Length - 1 ||
+                source[i - 1] == '-' ||
+                source[i + 1] == '-' ||
                 source[i - 1] == ' ' ||
                 source[i + 1] == ' ')
             {

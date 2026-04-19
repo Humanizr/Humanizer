@@ -41,11 +41,39 @@ partial class ToTitleCase : ICulturedStringTransformer
 
     static void OverwriteLowercase(StringBuilder builder, string input, int index, int length, TextInfo textInfo)
     {
+        if (ContainsNonAscii(input, index, length))
+        {
+            Overwrite(builder, index, textInfo.ToLower(input.Substring(index, length)));
+            return;
+        }
+
         var end = index + length;
         for (var i = index; i < end; i++)
         {
             builder[i] = textInfo.ToLower(input[i]);
         }
+    }
+
+    static void Overwrite(StringBuilder builder, int index, string replacement)
+    {
+        for (var i = 0; i < replacement.Length; i++)
+        {
+            builder[index + i] = replacement[i];
+        }
+    }
+
+    static bool ContainsNonAscii(string input, int index, int length)
+    {
+        var end = index + length;
+        for (var i = index; i < end; i++)
+        {
+            if (input[i] > '\u007F')
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static bool AllCapitals(string input, int index, int length)

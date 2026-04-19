@@ -251,31 +251,45 @@ public static class OrdinalizeExtensions
 
     static string FormatOrdinalNumberString(int number, CultureInfo culture)
     {
+        var formattingNumberFormat = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
+        var usesInvariantDigits = UsesInvariantDigits(formattingNumberFormat);
+
         if (number >= 0)
         {
+            return usesInvariantDigits
+                ? number.ToString(CultureInfo.InvariantCulture)
+                : number.ToString(formattingNumberFormat);
+        }
+
+        if (formattingNumberFormat.NegativeSign == NumberFormatInfo.InvariantInfo.NegativeSign &&
+            usesInvariantDigits)
+        {
             return number.ToString(CultureInfo.InvariantCulture);
         }
 
-        if (LocaleNumberFormattingOverrides.TryGetNegativeSign(culture, out var negativeSign))
-        {
-            return FormatNegativeOrdinalNumberString(number, negativeSign!);
-        }
-
-        var cultureNegativeSign = culture.NumberFormat.NegativeSign;
-        return cultureNegativeSign == NumberFormatInfo.InvariantInfo.NegativeSign
-            ? number.ToString(CultureInfo.InvariantCulture)
-            : FormatNegativeOrdinalNumberString(number, cultureNegativeSign);
+        return FormatNegativeOrdinalNumberString(number, formattingNumberFormat.NegativeSign, formattingNumberFormat);
     }
 
-    static string FormatNegativeOrdinalNumberString(int number, string negativeSign)
+    static string FormatNegativeOrdinalNumberString(int number, string negativeSign, NumberFormatInfo formattingNumberFormat)
     {
-        if (negativeSign == NumberFormatInfo.InvariantInfo.NegativeSign)
-        {
-            return number.ToString(CultureInfo.InvariantCulture);
-        }
-
         var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
-        return negativeSign + magnitude.ToString(CultureInfo.InvariantCulture);
+        return negativeSign + magnitude.ToString(formattingNumberFormat);
+    }
+
+    static bool UsesInvariantDigits(NumberFormatInfo formattingNumberFormat)
+    {
+        var nativeDigits = formattingNumberFormat.NativeDigits;
+        return nativeDigits.Length == 10 &&
+               nativeDigits[0] == "0" &&
+               nativeDigits[1] == "1" &&
+               nativeDigits[2] == "2" &&
+               nativeDigits[3] == "3" &&
+               nativeDigits[4] == "4" &&
+               nativeDigits[5] == "5" &&
+               nativeDigits[6] == "6" &&
+               nativeDigits[7] == "7" &&
+               nativeDigits[8] == "8" &&
+               nativeDigits[9] == "9";
     }
 
     static int ParseOrdinalNumber(string numberString, CultureInfo culture) =>

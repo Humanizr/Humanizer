@@ -18,6 +18,16 @@ public class TransformersTests
     public void TransformToTitleCase(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
 
+    [Fact]
+    public void TransformToTitleCaseUsesCultureSensitiveLowercase()
+    {
+        var culture = new CultureInfo("el-GR");
+        const string input = "οΣΟΣ";
+        var expected = culture.TextInfo.ToUpper(input[0]) + culture.TextInfo.ToLower(input[1..]);
+
+        Assert.Equal(expected, input.Transform(culture, To.TitleCase));
+    }
+
     [Theory]
     [InlineData("lower case statement", "lower case statement")]
     [InlineData("Sentence casing", "sentence casing")]

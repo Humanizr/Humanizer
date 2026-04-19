@@ -115,6 +115,16 @@ public class OrdinalizeTests
     }
 
     [Theory]
+    [InlineData("ar-SA", 42)]
+    [InlineData("ar-SA", -42)]
+    public void OrdinalizeNumberWithSpecifiedCultureMatchesStringOverload(string cultureName, int number)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.Equal(number.ToString(culture).Ordinalize(culture), number.Ordinalize(culture));
+    }
+
+    [Theory]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(8)]
