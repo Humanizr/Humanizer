@@ -18,6 +18,12 @@ public class TransformersTests
     public void TransformToTitleCase(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
 
+    [Theory, UseCulture("tr-TR")]
+    [InlineData("istanbul is in turkey", "İstanbul İs in Turkey")]
+    [InlineData("TITLE WITH I", "TITLE WITH I")]
+    public void TransformToTitleCaseUsesTurkishCasing(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
+
     [Fact]
     public void TransformToTitleCaseUsesCultureSensitiveLowercase()
     {

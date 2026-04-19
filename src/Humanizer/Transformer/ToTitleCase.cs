@@ -20,6 +20,89 @@ partial class ToTitleCase : ICulturedStringTransformer
 
     public string Transform(string input, CultureInfo culture)
     {
+        if (TryTransformAscii(input, culture, out var transformed))
+        {
+            return transformed;
+        }
+
+        return TransformWithRegex(input, culture);
+    }
+
+    static bool TryTransformAscii(string input, CultureInfo culture, [NotNullWhen(true)] out string? result)
+    {
+        result = null;
+        if (ContainsNonAscii(input, 0, input.Length))
+        {
+            return false;
+        }
+
+        char[]? buffer = null;
+        var textInfo = culture.TextInfo;
+        var wordIndex = 0;
+        for (var i = 0; i < input.Length;)
+        {
+            if (!IsAsciiWord(input[i]))
+            {
+                i++;
+                continue;
+            }
+
+            var wordStart = i;
+            i++;
+            while (i < input.Length && IsAsciiWord(input[i]))
+            {
+                i++;
+            }
+
+            if (i < input.Length && input[i] == '\'')
+            {
+                i++;
+                while (i < input.Length && IsAsciiWord(input[i]))
+                {
+                    i++;
+                }
+            }
+
+            var wordLength = i - wordStart;
+            if (AllCapitals(input, wordStart, wordLength) ||
+                (wordIndex > 0 && IsArticleOrConjunctionOrPreposition(input.AsSpan(wordStart, wordLength))))
+            {
+                wordIndex++;
+                continue;
+            }
+
+            SetCharIfChanged(input, ref buffer, wordStart, textInfo.ToUpper(input[wordStart]));
+            for (var j = wordStart + 1; j < wordStart + wordLength; j++)
+            {
+                SetCharIfChanged(input, ref buffer, j, textInfo.ToLower(input[j]));
+            }
+
+            wordIndex++;
+        }
+
+        result = buffer is null ? input : new(buffer);
+        return true;
+    }
+
+    static void SetCharIfChanged(string input, ref char[]? buffer, int index, char value)
+    {
+        if (input[index] == value)
+        {
+            return;
+        }
+
+        buffer ??= input.ToCharArray();
+        buffer[index] = value;
+    }
+
+    static bool IsAsciiWord(char c) =>
+        c is >= 'a' and <= 'z' ||
+        c is >= 'A' and <= 'Z' ||
+        c is >= '0' and <= '9' ||
+        c == '_';
+
+    static string TransformWithRegex(string input, CultureInfo culture)
+    {
         var matches = WordRegex().Matches(input);
         var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;

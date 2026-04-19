@@ -22,6 +22,8 @@ public class TransformersBenchmarks
 
     readonly Random random = new(RAND_SEED);
     string input = null!;
+    string asciiTitleInput = null!;
+    string unicodeTitleInput = null!;
 
     [Params(10, 100, 1000)]
     public int StringLen;
@@ -36,6 +38,8 @@ public class TransformersBenchmarks
         }
 
         input = new(chars);
+        asciiTitleInput = string.Join(' ', Enumerable.Repeat("the quick BROWN fox jumps over NASA by night", Math.Max(1, StringLen / 48)));
+        unicodeTitleInput = string.Join(' ', Enumerable.Repeat("élève οΣΟΣ Straße", Math.Max(1, StringLen / 18)));
     }
 
     [Benchmark]
@@ -57,4 +61,12 @@ public class TransformersBenchmarks
     [Benchmark]
     public string TitleCase() =>
         input.Transform(To.TitleCase);
+
+    [Benchmark]
+    public string TitleCaseAsciiWords() =>
+        asciiTitleInput.Transform(To.TitleCase);
+
+    [Benchmark]
+    public string TitleCaseUnicodeFallback() =>
+        unicodeTitleInput.Transform(To.TitleCase);
 }

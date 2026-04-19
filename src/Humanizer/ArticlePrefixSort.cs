@@ -3,21 +3,8 @@ namespace Humanizer;
 /// <summary>
 /// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
 /// </summary>
-public static partial class EnglishArticle
+public static class EnglishArticle
 {
-    private const string ArticlePattern = @"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+";
-
-#if NET7_0_OR_GREATER
-    [GeneratedRegex(ArticlePattern)]
-    private static partial Regex ArticleRegexGenerated();
-
-    private static Regex ArticleRegex() => ArticleRegexGenerated();
-#else
-    private static readonly Regex ArticleRegexField = new(ArticlePattern, RegexOptions.Compiled);
-
-    private static Regex ArticleRegex() => ArticleRegexField;
-#endif
-
     /// <summary>
     /// Removes the prefixed article and appends it to the same string.
     /// </summary>
@@ -36,13 +23,11 @@ public static partial class EnglishArticle
         {
             var item = items[i]
                 .AsSpan();
-            if (ArticleRegex().IsMatch(item))
+            if (TryGetArticlePrefixLength(item, out var articleLength))
             {
-                var indexOf = item.IndexOf(' ');
-                var removed = item[indexOf..]
+                var removed = item[articleLength..]
                     .TrimStart();
-                var article = item[..indexOf]
-                    .TrimEnd();
+                var article = item[..articleLength];
                 transformed[i] = $"{removed} {article}";
             }
             else
@@ -56,6 +41,63 @@ public static partial class EnglishArticle
         Array.Sort(transformed);
         return transformed;
     }
+
+    static bool TryGetArticlePrefixLength(ReadOnlySpan<char> item, out int articleLength)
+    {
+        articleLength = 0;
+        if (IsArticle(item, "The"))
+        {
+            articleLength = 3;
+            return true;
+        }
+
+        if (IsArticle(item, "the"))
+        {
+            articleLength = 3;
+            return true;
+        }
+
+        if (IsArticle(item, "a"))
+        {
+            articleLength = 1;
+            return true;
+        }
+
+        if (IsArticle(item, "A"))
+        {
+            articleLength = 1;
+            return true;
+        }
+
+        if (IsArticle(item, "An"))
+        {
+            articleLength = 2;
+            return true;
+        }
+
+        if (IsArticle(item, "an"))
+        {
+            articleLength = 2;
+            return true;
+        }
+
+        return false;
+    }
+
+    static bool IsArticle(ReadOnlySpan<char> item, string article)
+    {
+        var articleLength = article.Length;
+        return item.Length > articleLength + 1 &&
+            item[..articleLength].SequenceEqual(article) &&
+            item[articleLength] == ' ' &&
+            IsRegexWordCharacter(item[articleLength + 1]);
+    }
+
+    static bool IsRegexWordCharacter(char c) =>
+        c == '_' ||
+        char.IsLetterOrDigit(c) ||
+        CharUnicodeInfo.GetUnicodeCategory(c) is UnicodeCategory.ConnectorPunctuation
+            or UnicodeCategory.NonSpacingMark;
 
     /// <summary>
     /// Removes the previously appended article and prepends it to the same string.
