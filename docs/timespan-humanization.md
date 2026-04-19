@@ -94,8 +94,8 @@ TimeSpan.FromMilliseconds(122500).Humanize(minUnit: TimeUnit.Second)
     // (instead of "2 minutes, 2 seconds, 500 milliseconds")
 
 TimeSpan.FromHours(25).Humanize(minUnit: TimeUnit.Day)
-    // => "1 Day"
-    // (instead of "1 Day, 1 Hour")
+    // => "1 day"
+    // (instead of "1 day, 1 hour")
 ```
 
 ## Collection Separator
