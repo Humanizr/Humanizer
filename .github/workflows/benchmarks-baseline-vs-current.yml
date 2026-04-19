@@ -143,20 +143,22 @@ jobs:
       
       - name: Clone and Build ResultsComparer
         run: |
-          git clone --depth 1 https://github.com/dotnet/performance
+          git clone --depth 1 https://github.com/dotnet/performance "$RUNNER_TEMP/performance"
 
-          cat > "$RUNNER_TEMP/performance-nuget.config" <<'EOF'
-          <?xml version="1.0" encoding="utf-8"?>
-          <configuration>
-            <packageSources>
-              <clear />
-              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
-              <add key="dotnet-eng" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json" />
-            </packageSources>
-          </configuration>
-          EOF
+          {
+            echo '<configuration>'
+            echo '  <config>'
+            echo '    <add key="signatureValidationMode" value="accept" />'
+            echo '  </config>'
+            echo '  <packageSources>'
+            echo '    <clear />'
+            echo '    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />'
+            echo '    <add key="dotnet-eng" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json" />'
+            echo '  </packageSources>'
+            echo '</configuration>'
+          } > "$RUNNER_TEMP/performance-nuget.config"
 
-          dotnet restore performance/src/tools/ResultsComparer/ResultsComparer.csproj \
+          dotnet restore "$RUNNER_TEMP/performance/src/tools/ResultsComparer/ResultsComparer.csproj" \
             -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 \
             --configfile "$RUNNER_TEMP/performance-nuget.config"
       
@@ -190,7 +192,7 @@ jobs:
 
           echo "Comparing results for $tfm..."
           compare_exit=0
-          dotnet run --no-restore --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -f net10.0 --base "${{ steps.results.outputs.baseline_results }}" --diff "${{ steps.results.outputs.current_results }}" --threshold "5%" > "comparisons/diff-$tfm.md" || compare_exit=$?
+          dotnet run --no-restore --project "$RUNNER_TEMP/performance/src/tools/ResultsComparer/ResultsComparer.csproj" -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -f net10.0 --base "${{ steps.results.outputs.baseline_results }}" --diff "${{ steps.results.outputs.current_results }}" --threshold "5%" > "comparisons/diff-$tfm.md" || compare_exit=$?
 
           if [ ! -s "comparisons/diff-$tfm.md" ] || grep -q "The build failed" "comparisons/diff-$tfm.md"; then
             cat "comparisons/diff-$tfm.md" >&2 || true
