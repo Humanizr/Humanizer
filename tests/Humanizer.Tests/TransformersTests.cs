@@ -15,6 +15,7 @@ public class TransformersTests
     [InlineData("NASA and the fbi", "NASA and the Fbi")]
     [InlineData("the lord of the rings", "The Lord of the Rings")]
     [InlineData("rock-and-roll by night", "Rock-and-Roll by Night")]
+    [InlineData("hello – world", "Hello – World")]
     public void TransformToTitleCase(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
 

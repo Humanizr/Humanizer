@@ -31,17 +31,19 @@ partial class ToTitleCase : ICulturedStringTransformer
     static bool TryTransformAscii(string input, CultureInfo culture, [NotNullWhen(true)] out string? result)
     {
         result = null;
-        if (ContainsNonAscii(input, 0, input.Length))
-        {
-            return false;
-        }
-
         char[]? buffer = null;
         var textInfo = culture.TextInfo;
+        var useCultureSensitiveCasing = UsesCultureSensitiveAsciiCasing(culture);
         var wordIndex = 0;
         for (var i = 0; i < input.Length;)
         {
-            if (!IsAsciiWord(input[i]))
+            var current = input[i];
+            if (current > '\u007F')
+            {
+                return false;
+            }
+
+            if (!IsAsciiWord(current))
             {
                 i++;
                 continue;
@@ -49,32 +51,54 @@ partial class ToTitleCase : ICulturedStringTransformer
 
             var wordStart = i;
             i++;
-            while (i < input.Length && IsAsciiWord(input[i]))
+            while (i < input.Length)
             {
+                current = input[i];
+                if (current > '\u007F')
+                {
+                    return false;
+                }
+
+                if (!IsAsciiWord(current))
+                {
+                    break;
+                }
+
                 i++;
             }
 
             if (i < input.Length && input[i] == '\'')
             {
                 i++;
-                while (i < input.Length && IsAsciiWord(input[i]))
+                while (i < input.Length)
                 {
+                    current = input[i];
+                    if (current > '\u007F')
+                    {
+                        return false;
+                    }
+
+                    if (!IsAsciiWord(current))
+                    {
+                        break;
+                    }
+
                     i++;
                 }
             }
 
             var wordLength = i - wordStart;
-            if (AllCapitals(input, wordStart, wordLength) ||
+            if (AllAsciiCapitals(input, wordStart, wordLength) ||
                 (wordIndex > 0 && IsArticleOrConjunctionOrPreposition(input.AsSpan(wordStart, wordLength))))
             {
                 wordIndex++;
                 continue;
             }
 
-            SetCharIfChanged(input, ref buffer, wordStart, textInfo.ToUpper(input[wordStart]));
+            SetCharIfChanged(input, ref buffer, wordStart, ToUpperAscii(input[wordStart], textInfo, useCultureSensitiveCasing));
             for (var j = wordStart + 1; j < wordStart + wordLength; j++)
             {
-                SetCharIfChanged(input, ref buffer, j, textInfo.ToLower(input[j]));
+                SetCharIfChanged(input, ref buffer, j, ToLowerAscii(input[j], textInfo, useCultureSensitiveCasing));
             }
 
             wordIndex++;
@@ -100,6 +124,24 @@ partial class ToTitleCase : ICulturedStringTransformer
         c is >= 'A' and <= 'Z' ||
         c is >= '0' and <= '9' ||
         c == '_';
+
+    static char ToUpperAscii(char c, TextInfo textInfo, bool useCultureSensitiveCasing) =>
+        useCultureSensitiveCasing
+            ? textInfo.ToUpper(c)
+            : c is >= 'a' and <= 'z'
+                ? (char)(c - ('a' - 'A'))
+                : c;
+
+    static char ToLowerAscii(char c, TextInfo textInfo, bool useCultureSensitiveCasing) =>
+        useCultureSensitiveCasing
+            ? textInfo.ToLower(c)
+            : c is >= 'A' and <= 'Z'
+                ? (char)(c + ('a' - 'A'))
+                : c;
+
+    static bool UsesCultureSensitiveAsciiCasing(CultureInfo culture) =>
+        culture.Name.StartsWith("tr", StringComparison.OrdinalIgnoreCase) ||
+        culture.Name.StartsWith("az", StringComparison.OrdinalIgnoreCase);
 
     static string TransformWithRegex(string input, CultureInfo culture)
     {
@@ -165,6 +207,20 @@ partial class ToTitleCase : ICulturedStringTransformer
         for (var i = index; i < end; i++)
         {
             if (!char.IsUpper(input[i]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    static bool AllAsciiCapitals(string input, int index, int length)
+    {
+        var end = index + length;
+        for (var i = index; i < end; i++)
+        {
+            if (input[i] is not (>= 'A' and <= 'Z'))
             {
                 return false;
             }
