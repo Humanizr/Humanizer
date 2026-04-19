@@ -116,7 +116,7 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null)
 
 // in de-DE culture
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null)
-    // => "2 Wochen, Ein Tag und Eine Stunde"
+    // => "2 Wochen, 1 Tag und 1 Stunde"
 ```
 
 ## Words Instead of Numbers
