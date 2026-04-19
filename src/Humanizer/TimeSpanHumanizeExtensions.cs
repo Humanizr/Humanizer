@@ -35,6 +35,11 @@ public static class TimeSpanHumanizeExtensions
     /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
     public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo? culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string? collectionSeparator = ", ", bool toWords = false)
     {
+        if (precision == 1 && !countEmptyUnits)
+        {
+            return HumanizeSinglePart(timeSpan, culture, maxUnit, minUnit, toWords);
+        }
+
         var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit, toWords);
         timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
 
@@ -185,6 +190,23 @@ public static class TimeSpanHumanizeExtensions
         amountOfTimeUnits != 0
             ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
             : null;
+
+    static string HumanizeSinglePart(TimeSpan timeSpan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords)
+    {
+        var cultureFormatter = Configurator.GetFormatter(culture);
+        foreach (var timeUnit in TimeUnits)
+        {
+            var timePart = GetTimeUnitPart(timeUnit, timeSpan, maxUnit, minUnit, cultureFormatter, toWords);
+            if (timePart is not null)
+            {
+                return timePart;
+            }
+        }
+
+        return toWords
+            ? cultureFormatter.TimeSpanHumanize_Zero()
+            : cultureFormatter.TimeSpanHumanize(minUnit, 0);
+    }
 
     static List<string?> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
         [noTimeValue];
