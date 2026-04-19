@@ -166,10 +166,10 @@ You can specify a culture explicitly. If omitted, the current thread's UI cultur
 
 ```csharp
 TimeSpan.FromDays(1).Humanize(culture: new CultureInfo("ru-RU"))
-    // => "один день"
+    // => "1 день"
 
 TimeSpan.FromDays(1).Humanize(culture: new CultureInfo("de-DE"))
-    // => "Ein Tag"
+    // => "1 Tag"
 
 TimeSpan.FromMilliseconds(1).Humanize(culture: new CultureInfo("sk-SK"))
     // => "1 milisekunda"
