@@ -61,18 +61,19 @@ if (!"tenn".TryToNumber(out var result, new CultureInfo("en"), out var badWord))
 
 ## Error Handling
 
-`ToNumber` throws a `FormatException` when the input contains unrecognized words:
+`ToNumber` throws an `ArgumentException` when the input contains unrecognized words:
 
 ```csharp
-// Throws FormatException
+// Throws ArgumentException
 "twenty nine hello".ToNumber(new CultureInfo("en"));
 ```
 
-It throws an `ArgumentNullException` when the input is null:
+It also throws an `ArgumentException` when the input is null, empty, or whitespace:
 
 ```csharp
-// Throws ArgumentNullException
+// Throws ArgumentException
 ((string)null!).ToNumber(new CultureInfo("en"));
+"".ToNumber(new CultureInfo("en"));
 ```
 
 ## Language Support
