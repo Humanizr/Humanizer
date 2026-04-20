@@ -30,13 +30,18 @@ jobs:
       fail-fast: false
       matrix:
         kind: [baseline, current]
-        targetFramework: [net10.0, net11.0]
+        targetFramework: [net8.0, net10.0, net11.0]
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
 
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v5
@@ -110,7 +115,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        targetFramework: [net10.0, net11.0]
+        targetFramework: [net8.0, net10.0, net11.0]
     
     steps:
       - name: Checkout repository
@@ -130,6 +135,11 @@ jobs:
           name: humanizer-bdn-current-${{ matrix.targetFramework }}-json
           path: current
       
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v5
         with:
