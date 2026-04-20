@@ -14,6 +14,7 @@ public class ArticlePrefixSortTests
     [InlineData("An Æon", "Æon An")]
     [InlineData("The _underscore", "_underscore The")]
     [InlineData("The 7th Seal", "7th Seal The")]
+    [InlineData("The Ⅻ Monkeys", "The Ⅻ Monkeys")]
     [InlineData("The Theater!", "Theater! The")]
     [InlineData("A  Theater", "A  Theater")]
     [InlineData("The\tTheater", "The\tTheater")]

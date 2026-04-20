@@ -263,12 +263,13 @@ public static class OrdinalizeExtensions
 
         var formatting = GetOrdinalNumberFormatting(culture);
         if (formatting.NumberFormat.NegativeSign == NumberFormatInfo.InvariantInfo.NegativeSign &&
-            formatting.UsesInvariantDigits)
+            formatting.UsesInvariantDigits &&
+            formatting.NumberFormat.NumberNegativePattern == NumberFormatInfo.InvariantInfo.NumberNegativePattern)
         {
             return number.ToString(CultureInfo.InvariantCulture);
         }
 
-        return FormatNegativeOrdinalNumberString(number, formatting.NumberFormat.NegativeSign, formatting.NumberFormat);
+        return number.ToString(formatting.NumberFormat);
     }
 
     static OrdinalNumberFormatting GetDefaultOrdinalNumberFormatting(CultureInfo culture)
@@ -280,12 +281,6 @@ public static class OrdinalizeExtensions
 
         return OrdinalNumberFormattingCache.GetOrAdd(culture.Name, static cultureName =>
             CreateOrdinalNumberFormatting(CultureInfo.GetCultureInfo(cultureName)));
-    }
-
-    static string FormatNegativeOrdinalNumberString(int number, string negativeSign, NumberFormatInfo formattingNumberFormat)
-    {
-        var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
-        return negativeSign + magnitude.ToString(formattingNumberFormat);
     }
 
     static OrdinalNumberFormatting GetOrdinalNumberFormatting(CultureInfo culture)

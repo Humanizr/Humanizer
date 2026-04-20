@@ -94,9 +94,13 @@ public static class EnglishArticle
     }
 
     static bool IsRegexWordCharacter(char c) =>
-        c == '_' ||
-        char.IsLetterOrDigit(c) ||
-        CharUnicodeInfo.GetUnicodeCategory(c) is UnicodeCategory.ConnectorPunctuation
+        CharUnicodeInfo.GetUnicodeCategory(c) is UnicodeCategory.UppercaseLetter
+            or UnicodeCategory.LowercaseLetter
+            or UnicodeCategory.TitlecaseLetter
+            or UnicodeCategory.ModifierLetter
+            or UnicodeCategory.OtherLetter
+            or UnicodeCategory.DecimalDigitNumber
+            or UnicodeCategory.ConnectorPunctuation
             or UnicodeCategory.NonSpacingMark;
 
     /// <summary>

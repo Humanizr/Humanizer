@@ -385,9 +385,9 @@ public static partial class InflectorExtensions
 
     static bool IsAscii(string input)
     {
-        foreach (var c in input)
+        for (var i = 0; i < input.Length; i++)
         {
-            if (c > '\u007F')
+            if (input[i] > '\u007F')
             {
                 return false;
             }

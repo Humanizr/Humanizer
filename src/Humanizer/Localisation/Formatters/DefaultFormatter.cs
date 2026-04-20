@@ -327,21 +327,69 @@ public class DefaultFormatter : IFormatter
 
     static string JoinPhraseParts(string? first, string? second, string? third, string? fourth)
     {
-        var result = AppendPhrasePart(null, first);
-        result = AppendPhrasePart(result, second);
-        result = AppendPhrasePart(result, third);
-        return AppendPhrasePart(result, fourth) ?? string.Empty;
+        var partCount = 0;
+        var totalLength = 0;
+        MeasurePhrasePart(first, ref partCount, ref totalLength);
+        MeasurePhrasePart(second, ref partCount, ref totalLength);
+        MeasurePhrasePart(third, ref partCount, ref totalLength);
+        MeasurePhrasePart(fourth, ref partCount, ref totalLength);
+
+        if (partCount == 0)
+        {
+            return string.Empty;
+        }
+
+        if (partCount == 1)
+        {
+            return FirstPhrasePart(first, second, third, fourth);
+        }
+
+        var builder = new StringBuilder(totalLength + partCount - 1);
+        AppendPhrasePart(builder, first);
+        AppendPhrasePart(builder, second);
+        AppendPhrasePart(builder, third);
+        AppendPhrasePart(builder, fourth);
+        return builder.ToString();
     }
 
-    static string? AppendPhrasePart(string? result, string? part)
+    static void MeasurePhrasePart(string? part, ref int partCount, ref int totalLength)
     {
         if (string.IsNullOrWhiteSpace(part))
         {
-            return result;
+            return;
         }
 
-        return result is null
-            ? part
-            : string.Concat(result, " ", part);
+        partCount++;
+        totalLength += part!.Length;
+    }
+
+    static string FirstPhrasePart(string? first, string? second, string? third, string? fourth)
+    {
+        if (!string.IsNullOrWhiteSpace(first))
+        {
+            return first!;
+        }
+
+        if (!string.IsNullOrWhiteSpace(second))
+        {
+            return second!;
+        }
+
+        return !string.IsNullOrWhiteSpace(third) ? third! : fourth!;
+    }
+
+    static void AppendPhrasePart(StringBuilder builder, string? part)
+    {
+        if (string.IsNullOrWhiteSpace(part))
+        {
+            return;
+        }
+
+        if (builder.Length > 0)
+        {
+            builder.Append(' ');
+        }
+
+        builder.Append(part);
     }
 }

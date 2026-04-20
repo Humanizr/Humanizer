@@ -157,9 +157,6 @@ jobs:
 
           {
             echo '<configuration>'
-            echo '  <config>'
-            echo '    <add key="signatureValidationMode" value="accept" />'
-            echo '  </config>'
             echo '  <packageSources>'
             echo '    <clear />'
             echo '    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />'

@@ -114,6 +114,15 @@ public class OrdinalizeTests
         Assert.Equal("!1st", (-1).Ordinalize(culture));
     }
 
+    [Fact]
+    public void OrdinalizeNegativeNumberWithCustomCultureNegativePatternMatchesStringOverload()
+    {
+        var culture = (CultureInfo)CultureInfo.GetCultureInfo("en-US").Clone();
+        culture.NumberFormat.NumberNegativePattern = 3;
+
+        Assert.Equal((-1).ToString(culture).Ordinalize(culture), (-1).Ordinalize(culture));
+    }
+
     [Theory]
     [InlineData("ar-SA", 42)]
     [InlineData("ar-SA", -42)]

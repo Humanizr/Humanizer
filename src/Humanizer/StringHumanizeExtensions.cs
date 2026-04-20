@@ -265,9 +265,7 @@ public static partial class StringHumanizeExtensions
     {
         for (var i = 0; i < input.Length; i++)
         {
-            if ((input[i] == '-' || input[i] == '_') &&
-                ((i > 0 && char.IsWhiteSpace(input[i - 1])) ||
-                 (i + 1 < input.Length && char.IsWhiteSpace(input[i + 1]))))
+            if (IsSpacingSeparator(input[i]) && HasAdjacentWhitespace(input, i))
             {
                 return true;
             }
@@ -275,6 +273,13 @@ public static partial class StringHumanizeExtensions
 
         return false;
     }
+
+    static bool IsSpacingSeparator(char c) =>
+        c is '-' or '_';
+
+    static bool HasAdjacentWhitespace(string input, int index) =>
+        (index > 0 && char.IsWhiteSpace(input[index - 1])) ||
+        (index + 1 < input.Length && char.IsWhiteSpace(input[index + 1]));
 
     static bool IsAllUpper(string input, int index, int length)
     {

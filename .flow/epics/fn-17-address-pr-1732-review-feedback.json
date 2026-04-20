@@ -1,0 +1,13 @@
+{
+  "branch_name": "codex/performance-hotspots-net11",
+  "created_at": "2026-04-20T22:05:49.220890Z",
+  "depends_on_epics": [],
+  "id": "fn-17-address-pr-1732-review-feedback",
+  "next_task": 1,
+  "plan_review_status": "unknown",
+  "plan_reviewed_at": null,
+  "spec_path": ".flow/specs/fn-17-address-pr-1732-review-feedback.md",
+  "status": "done",
+  "title": "Address PR 1732 review feedback",
+  "updated_at": "2026-04-20T22:17:44.004606Z"
+}
