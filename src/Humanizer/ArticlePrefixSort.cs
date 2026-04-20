@@ -94,6 +94,7 @@ public static class EnglishArticle
     }
 
     static bool IsRegexWordCharacter(char c) =>
+        c is '\u200C' or '\u200D' ||
         CharUnicodeInfo.GetUnicodeCategory(c) is UnicodeCategory.UppercaseLetter
             or UnicodeCategory.LowercaseLetter
             or UnicodeCategory.TitlecaseLetter
