@@ -10,6 +10,10 @@ public class StringHumanizeBenchmarks
     public string HumanizePascalCase() =>
         "PascalCaseInputStringToBeHumanized".Humanize();
 
+    [Benchmark(Description = "Humanize acronym PascalCase")]
+    public string HumanizeAcronymPascalCase() =>
+        "HTMLToJSONConverter".Humanize();
+
     [Benchmark(Description = "Humanize with underscore")]
     public string HumanizeUnderscore() =>
         "Underscored_input_string_is_turned_INTO_sentence".Humanize();
@@ -25,4 +29,8 @@ public class StringHumanizeBenchmarks
     [Benchmark(Description = "Humanize mixed format")]
     public string HumanizeMixed() =>
         "HTML_to_JSON_Converter".Humanize();
+
+    [Benchmark(Description = "Humanize Unicode fallback")]
+    public string HumanizeUnicodeFallback() =>
+        "JeNeParlePasFrançais".Humanize();
 }

@@ -325,6 +325,71 @@ public class DefaultFormatter : IFormatter
             .Trim();
     }
 
-    static string JoinPhraseParts(params string?[] parts) =>
-        string.Join(" ", parts.Where(static part => !string.IsNullOrWhiteSpace(part)));
+    static string JoinPhraseParts(string? first, string? second, string? third, string? fourth)
+    {
+        var partCount = 0;
+        var totalLength = 0;
+        MeasurePhrasePart(first, ref partCount, ref totalLength);
+        MeasurePhrasePart(second, ref partCount, ref totalLength);
+        MeasurePhrasePart(third, ref partCount, ref totalLength);
+        MeasurePhrasePart(fourth, ref partCount, ref totalLength);
+
+        if (partCount == 0)
+        {
+            return string.Empty;
+        }
+
+        if (partCount == 1)
+        {
+            return FirstPhrasePart(first, second, third, fourth);
+        }
+
+        var builder = new StringBuilder(totalLength + partCount - 1);
+        AppendPhrasePart(builder, first);
+        AppendPhrasePart(builder, second);
+        AppendPhrasePart(builder, third);
+        AppendPhrasePart(builder, fourth);
+        return builder.ToString();
+    }
+
+    static void MeasurePhrasePart(string? part, ref int partCount, ref int totalLength)
+    {
+        if (string.IsNullOrWhiteSpace(part))
+        {
+            return;
+        }
+
+        partCount++;
+        totalLength += part!.Length;
+    }
+
+    static string FirstPhrasePart(string? first, string? second, string? third, string? fourth)
+    {
+        if (!string.IsNullOrWhiteSpace(first))
+        {
+            return first!;
+        }
+
+        if (!string.IsNullOrWhiteSpace(second))
+        {
+            return second!;
+        }
+
+        return !string.IsNullOrWhiteSpace(third) ? third! : fourth!;
+    }
+
+    static void AppendPhrasePart(StringBuilder builder, string? part)
+    {
+        if (string.IsNullOrWhiteSpace(part))
+        {
+            return;
+        }
+
+        if (builder.Length > 0)
+        {
+            builder.Append(' ');
+        }
+
+        builder.Append(part);
+    }
 }

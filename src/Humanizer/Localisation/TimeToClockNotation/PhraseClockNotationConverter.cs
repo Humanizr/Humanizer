@@ -10,6 +10,7 @@ namespace Humanizer;
 class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOnlyToClockNotationConverter
 {
     readonly PhraseClockNotationProfile profile = profile;
+    readonly Dictionary<string, TemplatePlan> templatePlans = BuildTemplatePlans(profile);
 
     /// <summary>
     /// Converts the given time using the phrase-clock profile.
@@ -45,46 +46,12 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return profile.Midday;
         }
 
-        var hourWords = ResolveHourExpression(hour);
-        var nextHourWords = ResolveHourExpression(hour + 1);
-        var rawMinuteWords = ResolveMinuteWords(normalizedMinutes);
-
-        // When a zero-filler is configured and minutes are 1-9, prepend the filler word
-        // so templates like "{hour} {minutes}" produce "et nul fem" instead of "et fem".
-        // When compactMinuteWords is active (CJK locales), omit the space between filler and word.
-        var minuteWords = normalizedMinutes is > 0 and < 10 && profile.ZeroFiller.Length > 0
-            ? string.Concat(profile.ZeroFiller, profile.CompactMinuteWords ? "" : " ", rawMinuteWords)
-            : rawMinuteWords;
-
-        var reverseMinuteWords = normalizedMinutes > 0 ? ResolveMinuteWords(60 - normalizedMinutes) : "";
-
-        string halfMinuteWords;
-        if (normalizedMinutes < 30)
-        {
-            halfMinuteWords = ResolveMinuteWords(30 - normalizedMinutes);
-        }
-        else if (normalizedMinutes > 30)
-        {
-            halfMinuteWords = ResolveMinuteWords(normalizedMinutes - 30);
-        }
-        else
-        {
-            halfMinuteWords = "";
-        }
-
-        // Resolve the article for locales that have singular/plural articles (ca, es).
-        var article = ResolveArticle(hour);
-        var nextArticle = ResolveArticle(hour + 1);
-
-        // Pre-compute the day-period string for possible inline use via {dayPeriod} placeholder.
-        var dayPeriod = GetDayPeriod(hour);
-
         // Check minute-bucket template first (exact 5-minute intervals).
         var template = GetBucketTemplate(normalizedMinutes);
         if (template.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
-            var result = ExpandTemplate(template, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            var result = ExpandTemplate(template, hour, normalizedMinutes, minuteSuffix);
             return ApplyDayPeriodIfNeeded(result, template, hour, normalizedMinutes);
         }
 
@@ -95,7 +62,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         if (rangeTemplate.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixForRange(normalizedMinutes);
-            var result = ExpandTemplate(rangeTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            var result = ExpandTemplate(rangeTemplate, hour, normalizedMinutes, minuteSuffix);
             return ApplyDayPeriodIfNeeded(result, rangeTemplate, hour, normalizedMinutes);
         }
 
@@ -103,11 +70,13 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         if (profile.DefaultTemplate.Length > 0)
         {
             var minuteSuffix = ResolveMinuteSuffixDirect(normalizedMinutes);
-            var result = ExpandTemplate(profile.DefaultTemplate, hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords, article, nextArticle, minuteSuffix, dayPeriod);
+            var result = ExpandTemplate(profile.DefaultTemplate, hour, normalizedMinutes, minuteSuffix);
             return ApplyDayPeriodIfNeeded(result, profile.DefaultTemplate, hour, normalizedMinutes);
         }
 
         // Absolute fallback: "{hour} {minutes}".
+        var hourWords = ResolveHourExpression(hour);
+        var minuteWords = ResolveMinuteExpression(normalizedMinutes);
         var fallback = minuteWords.Length > 0 ? hourWords + " " + minuteWords : hourWords;
         return ApplyDayPeriod(fallback, hour, usesNextHour: false);
     }
@@ -217,6 +186,18 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         }
 
         return words;
+    }
+
+    string ResolveMinuteExpression(int normalizedMinutes)
+    {
+        var rawMinuteWords = ResolveMinuteWords(normalizedMinutes);
+
+        // When a zero-filler is configured and minutes are 1-9, prepend the filler word
+        // so templates like "{hour} {minutes}" produce "et nul fem" instead of "et fem".
+        // When compactMinuteWords is active (CJK locales), omit the space between filler and word.
+        return normalizedMinutes is > 0 and < 10 && profile.ZeroFiller.Length > 0
+            ? string.Concat(profile.ZeroFiller, profile.CompactMinuteWords ? "" : " ", rawMinuteWords)
+            : rawMinuteWords;
     }
 
     /// <summary>
@@ -410,46 +391,42 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         };
     }
 
-    string ExpandTemplate(
-        string template, string hour, string nextHour,
-        string minutes, string minutesReverse, string minutesFromHalf,
-        string article, string nextArticle, string minuteSuffix, string dayPeriod)
+    string ExpandTemplate(string template, int hour, int normalizedMinutes, string minuteSuffix)
     {
+        var plan = GetTemplatePlan(template);
+        var hourWords = plan.UsesHour ? ResolveHourExpression(hour) : "";
+        var nextHourWords = plan.UsesNextHour ? ResolveHourExpression(hour + 1) : "";
+        var minuteWords = plan.UsesMinutes ? ResolveMinuteExpression(normalizedMinutes) : "";
+        var reverseMinuteWords = plan.UsesMinutesReverse && normalizedMinutes > 0 ? ResolveMinuteWords(60 - normalizedMinutes) : "";
+        var halfMinuteWords = plan.UsesMinutesFromHalf ? ResolveHalfMinuteWords(normalizedMinutes) : "";
+        var article = plan.UsesArticle ? ResolveArticle(hour) : "";
+        var nextArticle = plan.UsesNextArticle ? ResolveArticle(hour + 1) : "";
+        var dayPeriod = plan.UsesDayPeriod ? GetDayPeriod(hour) : "";
+
         // Single-pass expansion: scan the template once, resolve placeholders inline,
         // skip double spaces, and trim — producing only the final return string.
-        var maxLen = template.Length
-            + hour.Length + nextHour.Length + minutes.Length
-            + minutesReverse.Length + minutesFromHalf.Length
+        var maxLen = plan.LiteralLength
+            + hourWords.Length + nextHourWords.Length + minuteWords.Length
+            + reverseMinuteWords.Length + halfMinuteWords.Length
             + article.Length + nextArticle.Length + minuteSuffix.Length + dayPeriod.Length;
 
         Span<char> buf = stackalloc char[maxLen];
         var pos = 0;
-        var i = 0;
-
-        while (i < template.Length)
+        foreach (var segment in plan.Segments)
         {
-            if (template[i] == '{')
+            if (segment.Literal is not null)
             {
-                var close = template.IndexOf('}', i);
-                if (close < 0)
-                {
-                    AppendChar(buf, ref pos, template[i++]);
-                    continue;
-                }
-
-                var name = template.AsSpan(i + 1, close - i - 1);
+                AppendString(buf, ref pos, segment.Literal);
+            }
+            else
+            {
                 var replacement = ResolveTemplatePlaceholder(
-                    name, template, close + 1,
-                    hour, nextHour, minutes, minutesReverse, minutesFromHalf,
+                    segment.Placeholder, template, segment.AfterIndex,
+                    hourWords, nextHourWords, minuteWords, reverseMinuteWords, halfMinuteWords,
                     article, nextArticle, minuteSuffix, dayPeriod);
 
                 replacement.CopyTo(buf[pos..]);
                 pos += replacement.Length;
-                i = close + 1;
-            }
-            else
-            {
-                AppendChar(buf, ref pos, template[i++]);
             }
         }
 
@@ -457,6 +434,21 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         var result = buf[..pos];
         result = result.Trim();
         return new string(result);
+    }
+
+    string ResolveHalfMinuteWords(int normalizedMinutes)
+    {
+        if (normalizedMinutes < 30)
+        {
+            return ResolveMinuteWords(30 - normalizedMinutes);
+        }
+
+        if (normalizedMinutes > 30)
+        {
+            return ResolveMinuteWords(normalizedMinutes - 30);
+        }
+
+        return "";
     }
 
     static void AppendChar(Span<char> buf, ref int pos, char c)
@@ -470,55 +462,63 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         buf[pos++] = c;
     }
 
+    static void AppendString(Span<char> buf, ref int pos, string value)
+    {
+        foreach (var c in value)
+        {
+            AppendChar(buf, ref pos, c);
+        }
+    }
+
     /// <summary>
     /// Resolves a template placeholder by name, applying the Eifeler rule for number placeholders.
     /// Returns the replacement value as a <see cref="ReadOnlySpan{T}"/> to avoid allocations.
     /// </summary>
     ReadOnlySpan<char> ResolveTemplatePlaceholder(
-        ReadOnlySpan<char> name, string template, int afterIndex,
+        TemplatePlaceholder placeholder, string template, int afterIndex,
         string hour, string nextHour, string minutes, string minutesReverse, string minutesFromHalf,
         string article, string nextArticle, string minuteSuffix, string dayPeriod)
     {
         // Non-number placeholders: return directly without Eifeler processing.
-        if (name.SequenceEqual("article"))
+        if (placeholder == TemplatePlaceholder.Article)
         {
             return article;
         }
 
-        if (name.SequenceEqual("nextArticle"))
+        if (placeholder == TemplatePlaceholder.NextArticle)
         {
             return nextArticle;
         }
 
-        if (name.SequenceEqual("minuteSuffix"))
+        if (placeholder == TemplatePlaceholder.MinuteSuffix)
         {
             return minuteSuffix;
         }
 
-        if (name.SequenceEqual("dayPeriod"))
+        if (placeholder == TemplatePlaceholder.DayPeriod)
         {
             return dayPeriod;
         }
 
         // Number placeholders: apply Eifeler rule when enabled.
         string value;
-        if (name.SequenceEqual("hour"))
+        if (placeholder == TemplatePlaceholder.Hour)
         {
             value = hour;
         }
-        else if (name.SequenceEqual("nextHour"))
+        else if (placeholder == TemplatePlaceholder.NextHour)
         {
             value = nextHour;
         }
-        else if (name.SequenceEqual("minutes"))
+        else if (placeholder == TemplatePlaceholder.Minutes)
         {
             value = minutes;
         }
-        else if (name.SequenceEqual("minutesReverse"))
+        else if (placeholder == TemplatePlaceholder.MinutesReverse)
         {
             value = minutesReverse;
         }
-        else if (name.SequenceEqual("minutesFromHalf"))
+        else if (placeholder == TemplatePlaceholder.MinutesFromHalf)
         {
             value = minutesFromHalf;
         }
@@ -661,13 +661,15 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
     /// </summary>
     string ApplyDayPeriodIfNeeded(string expandedPhrase, string rawTemplate, int hour, int normalizedMinutes)
     {
+        var plan = GetTemplatePlan(rawTemplate);
+
         // If the template already placed the day-period inline, don't append/prepend it again.
-        if (rawTemplate.Contains("{dayPeriod}"))
+        if (plan.UsesDayPeriod)
         {
             return expandedPhrase;
         }
 
-        var usesNextHour = rawTemplate.Contains("{nextHour}") || rawTemplate.Contains("{nextArticle}");
+        var usesNextHour = plan.UsesNextHour || plan.UsesNextArticle;
         return ApplyDayPeriod(expandedPhrase, hour, usesNextHour);
     }
 
@@ -715,6 +717,224 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         }
 
         return profile.Night;
+    }
+
+    TemplatePlan GetTemplatePlan(string template) =>
+        templatePlans.TryGetValue(template, out var plan) ? plan : TemplatePlan.Create(template);
+
+    static Dictionary<string, TemplatePlan> BuildTemplatePlans(PhraseClockNotationProfile profile)
+    {
+        var plans = new Dictionary<string, TemplatePlan>(StringComparer.Ordinal);
+
+        AddTemplatePlan(plans, profile.Min0);
+        AddTemplatePlan(plans, profile.Min5);
+        AddTemplatePlan(plans, profile.Min10);
+        AddTemplatePlan(plans, profile.Min15);
+        AddTemplatePlan(plans, profile.Min20);
+        AddTemplatePlan(plans, profile.Min25);
+        AddTemplatePlan(plans, profile.Min30);
+        AddTemplatePlan(plans, profile.Min35);
+        AddTemplatePlan(plans, profile.Min40);
+        AddTemplatePlan(plans, profile.Min45);
+        AddTemplatePlan(plans, profile.Min50);
+        AddTemplatePlan(plans, profile.Min55);
+        AddTemplatePlan(plans, profile.PastHourTemplate);
+        AddTemplatePlan(plans, profile.BeforeHalfTemplate);
+        AddTemplatePlan(plans, profile.AfterHalfTemplate);
+        AddTemplatePlan(plans, profile.BeforeNextTemplate);
+        AddTemplatePlan(plans, profile.DefaultTemplate);
+
+        return plans;
+    }
+
+    static void AddTemplatePlan(Dictionary<string, TemplatePlan> plans, string template)
+    {
+        if (template.Length > 0 && !plans.ContainsKey(template))
+        {
+            plans.Add(template, TemplatePlan.Create(template));
+        }
+    }
+
+    enum TemplatePlaceholder
+    {
+        Empty,
+        Hour,
+        NextHour,
+        Minutes,
+        MinutesReverse,
+        MinutesFromHalf,
+        Article,
+        NextArticle,
+        MinuteSuffix,
+        DayPeriod
+    }
+
+    readonly struct TemplateSegment(string? literal, TemplatePlaceholder placeholder, int afterIndex)
+    {
+        public string? Literal { get; } = literal;
+        public TemplatePlaceholder Placeholder { get; } = placeholder;
+        public int AfterIndex { get; } = afterIndex;
+
+        public static TemplateSegment ForLiteral(string literal) =>
+            new(literal, TemplatePlaceholder.Empty, 0);
+
+        public static TemplateSegment ForPlaceholder(TemplatePlaceholder placeholder, int afterIndex) =>
+            new(null, placeholder, afterIndex);
+    }
+
+    readonly struct TemplatePlan
+    {
+        public bool UsesHour { get; init; }
+        public bool UsesNextHour { get; init; }
+        public bool UsesMinutes { get; init; }
+        public bool UsesMinutesReverse { get; init; }
+        public bool UsesMinutesFromHalf { get; init; }
+        public bool UsesArticle { get; init; }
+        public bool UsesNextArticle { get; init; }
+        public bool UsesDayPeriod { get; init; }
+        public int LiteralLength { get; init; }
+        public TemplateSegment[] Segments { get; init; }
+
+        public static TemplatePlan Create(string template)
+        {
+            var plan = new TemplatePlan { Segments = [] };
+            var segments = new List<TemplateSegment>();
+            var i = 0;
+            var literalStart = 0;
+            while (i < template.Length)
+            {
+                if (template[i] != '{')
+                {
+                    i++;
+                    continue;
+                }
+
+                var close = template.IndexOf('}', i);
+                if (close < 0)
+                {
+                    break;
+                }
+
+                if (i > literalStart)
+                {
+                    plan = plan.AddLiteral(segments, template[literalStart..i]);
+                }
+
+                var placeholder = ParsePlaceholder(template.AsSpan(i + 1, close - i - 1));
+                segments.Add(TemplateSegment.ForPlaceholder(placeholder, close + 1));
+                plan = plan.WithPlaceholder(placeholder);
+                i = close + 1;
+                literalStart = i;
+            }
+
+            if (literalStart < template.Length)
+            {
+                plan = plan.AddLiteral(segments, template[literalStart..]);
+            }
+
+            return plan with { Segments = [.. segments] };
+        }
+
+        TemplatePlan AddLiteral(List<TemplateSegment> segments, string literal)
+        {
+            segments.Add(TemplateSegment.ForLiteral(literal));
+            return this with { LiteralLength = LiteralLength + literal.Length };
+        }
+
+        TemplatePlan WithPlaceholder(TemplatePlaceholder placeholder)
+        {
+            if (placeholder == TemplatePlaceholder.Hour)
+            {
+                return this with { UsesHour = true };
+            }
+
+            if (placeholder == TemplatePlaceholder.NextHour)
+            {
+                return this with { UsesNextHour = true };
+            }
+
+            if (placeholder == TemplatePlaceholder.Minutes)
+            {
+                return this with { UsesMinutes = true };
+            }
+
+            if (placeholder == TemplatePlaceholder.MinutesReverse)
+            {
+                return this with { UsesMinutesReverse = true };
+            }
+
+            if (placeholder == TemplatePlaceholder.MinutesFromHalf)
+            {
+                return this with { UsesMinutesFromHalf = true };
+            }
+
+            if (placeholder == TemplatePlaceholder.Article)
+            {
+                return this with { UsesArticle = true };
+            }
+
+            if (placeholder == TemplatePlaceholder.NextArticle)
+            {
+                return this with { UsesNextArticle = true };
+            }
+
+            if (placeholder == TemplatePlaceholder.DayPeriod)
+            {
+                return this with { UsesDayPeriod = true };
+            }
+
+            return this;
+        }
+
+        static TemplatePlaceholder ParsePlaceholder(ReadOnlySpan<char> name)
+        {
+            if (name.SequenceEqual("hour"))
+            {
+                return TemplatePlaceholder.Hour;
+            }
+
+            if (name.SequenceEqual("nextHour"))
+            {
+                return TemplatePlaceholder.NextHour;
+            }
+
+            if (name.SequenceEqual("minutes"))
+            {
+                return TemplatePlaceholder.Minutes;
+            }
+
+            if (name.SequenceEqual("minutesReverse"))
+            {
+                return TemplatePlaceholder.MinutesReverse;
+            }
+
+            if (name.SequenceEqual("minutesFromHalf"))
+            {
+                return TemplatePlaceholder.MinutesFromHalf;
+            }
+
+            if (name.SequenceEqual("article"))
+            {
+                return TemplatePlaceholder.Article;
+            }
+
+            if (name.SequenceEqual("nextArticle"))
+            {
+                return TemplatePlaceholder.NextArticle;
+            }
+
+            if (name.SequenceEqual("minuteSuffix"))
+            {
+                return TemplatePlaceholder.MinuteSuffix;
+            }
+
+            if (name.SequenceEqual("dayPeriod"))
+            {
+                return TemplatePlaceholder.DayPeriod;
+            }
+
+            return TemplatePlaceholder.Empty;
+        }
     }
 }
 

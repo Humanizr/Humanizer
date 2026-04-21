@@ -30,13 +30,18 @@ jobs:
       fail-fast: false
       matrix:
         kind: [baseline, current]
-        targetFramework: [net10.0, net11.0]
+        targetFramework: [net8.0, net10.0, net11.0]
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
 
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v5
@@ -110,7 +115,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        targetFramework: [net10.0, net11.0]
+        targetFramework: [net8.0, net10.0, net11.0]
     
     steps:
       - name: Checkout repository
@@ -130,6 +135,11 @@ jobs:
           name: humanizer-bdn-current-${{ matrix.targetFramework }}-json
           path: current
       
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v5
         with:
@@ -143,7 +153,21 @@ jobs:
       
       - name: Clone and Build ResultsComparer
         run: |
-          git clone --depth 1 https://github.com/dotnet/performance          
+          git clone --depth 1 https://github.com/dotnet/performance "$RUNNER_TEMP/performance"
+
+          {
+            echo '<configuration>'
+            echo '  <packageSources>'
+            echo '    <clear />'
+            echo '    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />'
+            echo '    <add key="dotnet-eng" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json" />'
+            echo '  </packageSources>'
+            echo '</configuration>'
+          } > "$RUNNER_TEMP/performance-nuget.config"
+
+          dotnet restore "$RUNNER_TEMP/performance/src/tools/ResultsComparer/ResultsComparer.csproj" \
+            -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 \
+            --configfile "$RUNNER_TEMP/performance-nuget.config"
       
       - name: Locate Benchmark Results
         id: results
@@ -174,7 +198,20 @@ jobs:
           tfm="${{ matrix.targetFramework }}"
 
           echo "Comparing results for $tfm..."
-          dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -f net10.0 --base "${{ steps.results.outputs.baseline_results }}" --diff "${{ steps.results.outputs.current_results }}" --threshold "5%" > "comparisons/diff-$tfm.md" || true
+          compare_exit=0
+          dotnet run --no-restore --project "$RUNNER_TEMP/performance/src/tools/ResultsComparer/ResultsComparer.csproj" -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -f net10.0 --base "${{ steps.results.outputs.baseline_results }}" --diff "${{ steps.results.outputs.current_results }}" --threshold "5%" > "comparisons/diff-$tfm.md" || compare_exit=$?
+
+          if [ ! -s "comparisons/diff-$tfm.md" ] || grep -q "The build failed" "comparisons/diff-$tfm.md"; then
+            cat "comparisons/diff-$tfm.md" >&2 || true
+            if [ "$compare_exit" -ne 0 ]; then
+              exit "$compare_exit"
+            fi
+            exit 1
+          fi
+
+          if [ "$compare_exit" -ne 0 ]; then
+            echo "ResultsComparer exited with code $compare_exit; uploaded comparison report for inspection."
+          fi
       
       - name: Append Comparison to Summary
         run: |

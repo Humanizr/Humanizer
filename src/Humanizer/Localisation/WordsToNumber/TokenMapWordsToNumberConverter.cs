@@ -971,6 +971,8 @@ static class TokenMapWordsToNumberNormalizer
         // This profile stays allocation-free when the input is already lowercase and only trimmed
         // whitespace needs to be preserved.
         var needsNormalization = false;
+        var sawHyphen = false;
+        var needsBuilderNormalization = false;
         var previousWasSpace = false;
 
         foreach (var current in source)
@@ -978,13 +980,16 @@ static class TokenMapWordsToNumberNormalizer
             if (current is ',' or '.')
             {
                 needsNormalization = true;
+                needsBuilderNormalization = true;
                 break;
             }
 
             if (current == '-')
             {
                 needsNormalization = true;
-                break;
+                sawHyphen = true;
+                previousWasSpace = false;
+                continue;
             }
 
             if (char.IsWhiteSpace(current))
@@ -992,6 +997,7 @@ static class TokenMapWordsToNumberNormalizer
                 if (current != ' ' || previousWasSpace)
                 {
                     needsNormalization = true;
+                    needsBuilderNormalization = true;
                     break;
                 }
 
@@ -1002,6 +1008,7 @@ static class TokenMapWordsToNumberNormalizer
             if (char.IsUpper(current))
             {
                 needsNormalization = true;
+                needsBuilderNormalization = true;
                 break;
             }
 
@@ -1013,7 +1020,37 @@ static class TokenMapWordsToNumberNormalizer
             return source.Length == words.Length ? words : source.ToString();
         }
 
+        if (sawHyphen && !needsBuilderNormalization && CanReplaceHyphensWithSpaces(source))
+        {
+            return source.Length == words.Length
+                ? words.Replace('-', ' ')
+                : source.ToString().Replace('-', ' ');
+        }
+
         return NormalizeWithBuilder(words, TokenMapNormalizationProfile.LowercaseRemovePeriods);
+    }
+
+    static bool CanReplaceHyphensWithSpaces(ReadOnlySpan<char> source)
+    {
+        for (var i = 0; i < source.Length; i++)
+        {
+            if (source[i] != '-')
+            {
+                continue;
+            }
+
+            if (i == 0 ||
+                i == source.Length - 1 ||
+                source[i - 1] == '-' ||
+                source[i + 1] == '-' ||
+                source[i - 1] == ' ' ||
+                source[i + 1] == ' ')
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>

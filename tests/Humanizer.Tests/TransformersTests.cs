@@ -15,8 +15,25 @@ public class TransformersTests
     [InlineData("NASA and the fbi", "NASA and the Fbi")]
     [InlineData("the lord of the rings", "The Lord of the Rings")]
     [InlineData("rock-and-roll by night", "Rock-and-Roll by Night")]
+    [InlineData("hello – world", "Hello – World")]
     public void TransformToTitleCase(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
+
+    [Theory, UseCulture("tr-TR")]
+    [InlineData("istanbul is in turkey", "İstanbul İs in Turkey")]
+    [InlineData("TITLE WITH I", "TITLE WITH I")]
+    public void TransformToTitleCaseUsesTurkishCasing(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
+
+    [Fact]
+    public void TransformToTitleCaseUsesCultureSensitiveLowercase()
+    {
+        var culture = new CultureInfo("el-GR");
+        const string input = "οΣΟΣ";
+        var expected = culture.TextInfo.ToUpper(input[0]) + culture.TextInfo.ToLower(input[1..]);
+
+        Assert.Equal(expected, input.Transform(culture, To.TitleCase));
+    }
 
     [Theory]
     [InlineData("lower case statement", "lower case statement")]

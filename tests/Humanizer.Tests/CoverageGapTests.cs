@@ -759,6 +759,9 @@ public class CoverageGapTests
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize(" ", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one", TokenMapWordsToNumberNormalizer.Normalize(" one ", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("One,\tTwo.", TokenMapNormalizationProfile.LowercaseRemovePeriods));
+        Assert.Equal("thirty four", TokenMapWordsToNumberNormalizer.Normalize("thirty-four", TokenMapNormalizationProfile.LowercaseRemovePeriods));
+        Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one--two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
+        Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one- two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("onetwo", TokenMapWordsToNumberNormalizer.Normalize("one,two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one  two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one\ttwo", TokenMapNormalizationProfile.LowercaseRemovePeriods));
@@ -766,6 +769,7 @@ public class CoverageGapTests
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize("", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one", TokenMapWordsToNumberNormalizer.Normalize(" one ", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("One,.\tTwo-", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
+        Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one--two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("onetwo", TokenMapWordsToNumberNormalizer.Normalize("one,two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one  two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one\ttwo", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));

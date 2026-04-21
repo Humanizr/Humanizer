@@ -18,6 +18,18 @@ public class MetricNumeralBenchmarks
     public string ToMetricMega() =>
         1000000.ToMetric();
 
+    [Benchmark(Description = "ToMetric boundary")]
+    public string ToMetricBoundary() =>
+        999500.ToMetric();
+
+    [Benchmark(Description = "ToMetric giga")]
+    public string ToMetricGiga() =>
+        int.MaxValue.ToMetric();
+
+    [Benchmark(Description = "ToMetric formatted")]
+    public string ToMetricFormatted() =>
+        1230.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseName, 2);
+
     [Benchmark(Description = "ToMetric milli")]
     public string ToMetricMilli() =>
         0.001.ToMetric();

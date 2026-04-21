@@ -146,8 +146,43 @@ public static class MetricNumeralExtensions
     /// </code>
     /// </example>
     /// <returns>A valid Metric representation</returns>
-    public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null) =>
-        ((double)input).ToMetric(formats, decimals);
+    public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null)
+    {
+        if (!formats.HasValue && !decimals.HasValue)
+        {
+            return BuildDefaultRepresentation(input);
+        }
+
+        return ((double)input).ToMetric(formats, decimals);
+    }
+
+    static string BuildDefaultRepresentation(int input)
+    {
+        if (input == 0)
+        {
+            return input.ToString();
+        }
+
+        var absolute = Math.Abs((long)input);
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
+
+        if (absolute < 1_000)
+        {
+            return input.ToString(nfi);
+        }
+
+        if (absolute < 1_000_000)
+        {
+            return (input / 1_000d).ToString("G15", nfi) + "k";
+        }
+
+        if (absolute < 1_000_000_000)
+        {
+            return (input / 1_000_000d).ToString("G15", nfi) + "M";
+        }
+
+        return (input / 1_000_000_000d).ToString("G15", nfi) + "G";
+    }
 
     /// <summary>
     /// Converts a number into a valid and Human-readable Metric representation.

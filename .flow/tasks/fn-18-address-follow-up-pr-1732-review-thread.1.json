@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-20T22:19:09.711353Z",
+  "depends_on": [],
+  "epic": "fn-18-address-follow-up-pr-1732-review-thread",
+  "id": "fn-18-address-follow-up-pr-1732-review-thread.1",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-18-address-follow-up-pr-1732-review-thread.1.md",
+  "status": "todo",
+  "title": "Patch Regex word join-control parity",
+  "updated_at": "2026-04-20T22:19:09.711772Z"
+}
