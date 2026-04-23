@@ -43,7 +43,7 @@ public static class Vocabularies
         _default.AddSingular("(n)ews$", "$1ews");
         _default.AddSingular("([dti])a$", "$1um");
         _default.AddSingular("(analy|ba|diagno|parenthe|progno|synop|the|ellip|empha|neuro|oa|paraly)ses$", "$1sis");
-        _default.AddSingular("([^f])ves$", "$1fe");
+        _default.AddSingular("(kni|wi|li)ves$", "$1fe");
         _default.AddSingular("(hive)s$", "$1");
         _default.AddSingular("(tive)s$", "$1");
         _default.AddSingular("([lr]|hoo|lea|loa|thie)ves$", "$1f");
@@ -94,6 +94,18 @@ public static class Vocabularies
         _default.AddIrregular("clove", "cloves");
         _default.AddIrregular("valve", "valves");
         _default.AddIrregular("explosive", "explosives");
+        _default.AddIrregular("safe", "saves");
+        _default.AddIrregular("curve", "curves");
+        _default.AddIrregular("carve", "carves");
+        _default.AddIrregular("starve", "starves");
+        _default.AddIrregular("serve", "serves");
+        _default.AddIrregular("swerve", "swerves");
+        _default.AddIrregular("revolve", "revolves");
+        _default.AddIrregular("involve", "involves");
+        _default.AddIrregular("evolve", "evolves");
+        _default.AddIrregular("dissolve", "dissolves");
+        _default.AddIrregular("resolve", "resolves");
+        _default.AddIrregular("absolve", "absolves");
 
         _default.AddUncountable("staff");
         _default.AddUncountable("training");
