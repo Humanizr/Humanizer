@@ -46,19 +46,36 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return true;
         }
 
-        var normalized = TokenMapWordsToNumberNormalizer.Normalize(words, rules.NormalizationProfile);
+        var normalizedSource = words.Trim();
         var negative = false;
 
         foreach (var negativePrefix in rules.NegativePrefixes)
         {
-            if (!normalized.StartsWith(negativePrefix, StringComparison.Ordinal))
+            if (!normalizedSource.StartsWith(negativePrefix, StringComparison.Ordinal))
             {
                 continue;
             }
 
             negative = true;
-            normalized = normalized[negativePrefix.Length..].Trim();
+            normalizedSource = normalizedSource[negativePrefix.Length..].Trim();
             break;
+        }
+
+        var normalized = TokenMapWordsToNumberNormalizer.Normalize(normalizedSource, rules.NormalizationProfile);
+
+        if (!negative)
+        {
+            foreach (var negativePrefix in rules.NegativePrefixes)
+            {
+                if (!normalized.StartsWith(negativePrefix, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                negative = true;
+                normalized = normalized[negativePrefix.Length..].Trim();
+                break;
+            }
         }
 
         foreach (var ordinalPrefix in rules.OrdinalPrefixes)
