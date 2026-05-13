@@ -59,6 +59,15 @@ public class HindiNumberToWordsTests
     }
 
     [Theory]
+    [InlineData("एक दशमलव दो")]
+    [InlineData("ऋणात्मक एक दशमलव पाँच")]
+    public void WordsToNumber_RejectsUnsupportedHindiDecimalPhrases(string words)
+    {
+        Assert.False(words.TryToNumber(out _, Hi));
+        Assert.Throws<ArgumentException>(() => words.ToNumber(Hi));
+    }
+
+    [Theory]
     [InlineData(5, "पाँच")]
     [InlineData(21, "इक्कीस")]
     public void ToTuple_UsesHindiNumberWords(int number, string expected)

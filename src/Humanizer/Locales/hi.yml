@@ -532,8 +532,6 @@ surfaces:
         - 'ऋणात्मक'
         - 'नकारात्मक'
         - 'माइनस'
-      ignoredTokens:
-        - 'दशमलव'
 
   ordinal:
     numeric:
