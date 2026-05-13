@@ -92,11 +92,11 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         next = start;
         var consumed = false;
 
-        for (var scaleIndex = 0; scaleIndex < profile.Scales.Length; scaleIndex++)
+        for (var scaleIndex = 0; scaleIndex < profile.TokenizedScales.Length; scaleIndex++)
         {
-            var scale = profile.Scales[scaleIndex];
+            var scale = profile.TokenizedScales[scaleIndex];
             var scaleValue = (ulong)scale.Value;
-            if (scaleValue > maxValue || next >= end || !TryMatchScale(tokens, next, end, scale.Name, out var afterScale))
+            if (scaleValue > maxValue || next >= end || !TryMatchTokenPhrase(tokens, next, end, scale.Tokens, out var afterScale))
             {
                 continue;
             }
@@ -121,7 +121,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         if (next < end)
         {
             var remainderStart = next;
-            if (allowTerminalRemainderConjunction && consumed && TryMatchTokenPhrase(tokens, remainderStart, end, profile.TerminalRemainderConjunctionWord, out var afterTerminalConjunction))
+            if (allowTerminalRemainderConjunction && consumed && TryMatchTokenPhrase(tokens, remainderStart, end, profile.TerminalRemainderConjunctionTokens, out var afterTerminalConjunction))
             {
                 remainderStart = afterTerminalConjunction;
             }
@@ -148,14 +148,11 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return consumed;
     }
 
-    static bool TryMatchScale(string[] tokens, int start, int end, string scaleName, out int next) =>
-        TryMatchTokenPhrase(tokens, start, end, scaleName, out next);
-
-    static bool TryMatchTokenPhrase(string[] tokens, int start, int end, string phrase, out int next)
+    static bool TryMatchTokenPhrase(string[] tokens, int start, int end, string[] phraseTokens, out int next)
     {
-        if (!phrase.Contains(' ', StringComparison.Ordinal))
+        if (phraseTokens.Length == 1)
         {
-            if (start < end && tokens[start] == phrase)
+            if (start < end && tokens[start] == phraseTokens[0])
             {
                 next = start + 1;
                 return true;
@@ -165,23 +162,22 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             return false;
         }
 
-        var scaleTokens = phrase.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        if (start + scaleTokens.Length > end)
+        if (start + phraseTokens.Length > end)
         {
             next = start;
             return false;
         }
 
-        for (var i = 0; i < scaleTokens.Length; i++)
+        for (var i = 0; i < phraseTokens.Length; i++)
         {
-            if (tokens[start + i] != scaleTokens[i])
+            if (tokens[start + i] != phraseTokens[i])
             {
                 next = start;
                 return false;
             }
         }
 
-        next = start + scaleTokens.Length;
+        next = start + phraseTokens.Length;
         return true;
     }
 
@@ -231,15 +227,18 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
     bool TryParseUnit(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
         var lastCandidateEnd = Math.Min(end, start + profile.MaximumUnitTokenCount);
-        for (var candidateEnd = lastCandidateEnd; candidateEnd > start + 1; candidateEnd--)
+        foreach (var unit in profile.MultiTokenUnits)
         {
-            var candidate = string.Join(" ", tokens, start, candidateEnd - start);
-            if (profile.Units.TryGetValue(candidate, out var rawValue) &&
-                rawValue >= 0 &&
-                (ulong)rawValue <= maxValue)
+            if (start + unit.Tokens.Length > lastCandidateEnd)
             {
-                value = (ulong)rawValue;
-                next = candidateEnd;
+                continue;
+            }
+
+            if (unit.Value >= 0 &&
+                (ulong)unit.Value <= maxValue &&
+                TryMatchTokenPhrase(tokens, start, end, unit.Tokens, out next))
+            {
+                value = (ulong)unit.Value;
                 return true;
             }
         }
@@ -352,6 +351,17 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         string.Join(" ", value.Trim().ToLowerInvariant().Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
 }
 
+
+/// <summary>Pre-tokenized number word phrase for allocation-conscious matching.</summary>
+/// <param name="Tokens">The normalized tokens in the phrase.</param>
+/// <param name="Value">The numeric value represented by the phrase.</param>
+readonly record struct TokenizedNumberWord(string[] Tokens, long Value);
+
+/// <summary>Pre-tokenized scale phrase for allocation-conscious matching.</summary>
+/// <param name="Value">The numeric scale value.</param>
+/// <param name="Tokens">The normalized tokens in the scale name.</param>
+readonly record struct TokenizedScaleLeadingCompoundScale(long Value, string[] Tokens);
+
 /// <summary>
 /// Immutable generated profile for <see cref="ScaleLeadingCompoundWordsToNumberConverter"/>.
 /// </summary>
@@ -368,16 +378,22 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
 {
     /// <summary>Gets unit and teen tokens.</summary>
     public FrozenDictionary<string, long> Units { get; } = units;
+    /// <summary>Gets multi-token unit and teen entries, longest phrases first.</summary>
+    public TokenizedNumberWord[] MultiTokenUnits { get; } = TokenizeNumberWords(units);
     /// <summary>Gets the maximum normalized token count in any unit phrase.</summary>
     public int MaximumUnitTokenCount { get; } = GetMaximumTokenCount(units.Keys);
     /// <summary>Gets decade tokens.</summary>
     public FrozenDictionary<string, long> Tens { get; } = tens;
     /// <summary>Gets descending scale rows.</summary>
     public ScaleLeadingCompoundScale[] Scales { get; } = ValidateScales(scales);
+    /// <summary>Gets descending scale rows with pre-tokenized scale names.</summary>
+    public TokenizedScaleLeadingCompoundScale[] TokenizedScales { get; } = TokenizeScales(ValidateScales(scales));
     /// <summary>Gets the conjunction token.</summary>
     public string ConjunctionWord { get; } = conjunctionWord;
     /// <summary>Gets the conjunction token used before potentially ambiguous terminal remainders.</summary>
     public string TerminalRemainderConjunctionWord { get; } = string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord!;
+    /// <summary>Gets the pre-tokenized terminal remainder conjunction phrase.</summary>
+    public string[] TerminalRemainderConjunctionTokens { get; } = Tokenize(string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord!);
     /// <summary>Gets the negative prefix token.</summary>
     public string MinusWord { get; } = minusWord;
     /// <summary>Gets the ordinal prefix token.</summary>
@@ -387,16 +403,29 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
     /// <summary>Gets exact ordinal tokens.</summary>
     public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap ?? FrozenDictionary<string, long>.Empty;
 
+    static TokenizedNumberWord[] TokenizeNumberWords(FrozenDictionary<string, long> values) =>
+        values
+            .Select(pair => new TokenizedNumberWord(Tokenize(pair.Key), pair.Value))
+            .Where(word => word.Tokens.Length > 1)
+            .OrderByDescending(word => word.Tokens.Length)
+            .ToArray();
+
+    static TokenizedScaleLeadingCompoundScale[] TokenizeScales(ScaleLeadingCompoundScale[] value) =>
+        value.Select(scale => new TokenizedScaleLeadingCompoundScale(scale.Value, Tokenize(scale.Name))).ToArray();
+
     static int GetMaximumTokenCount(IEnumerable<string> values)
     {
         var maximum = 1;
         foreach (var value in values)
         {
-            maximum = Math.Max(maximum, value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length);
+            maximum = Math.Max(maximum, Tokenize(value).Length);
         }
 
         return maximum;
     }
+
+    static string[] Tokenize(string value) =>
+        value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
     static ScaleLeadingCompoundScale[] ValidateScales(ScaleLeadingCompoundScale[] value)
     {
