@@ -1,0 +1,393 @@
+locale: 'te'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'మరియు'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'ఇప్పుడే'
+      never: 'ఎప్పుడూ లేదు'
+      past:
+        millisecond:
+          single: 'ఒక మిల్లీసెకను క్రితం'
+          multiple:
+            forms:
+              default: 'మిల్లీసెకన్లు'
+            afterCount: 'క్రితం'
+        second:
+          single: 'ఒక సెకను క్రితం'
+          multiple:
+            forms:
+              default: 'సెకన్లు'
+            afterCount: 'క్రితం'
+        minute:
+          single: 'ఒక నిమిషం క్రితం'
+          multiple:
+            forms:
+              default: 'నిమిషాలు'
+            afterCount: 'క్రితం'
+        hour:
+          single: 'ఒక గంట క్రితం'
+          multiple:
+            forms:
+              default: 'గంటలు'
+            afterCount: 'క్రితం'
+        day:
+          single: 'నిన్న'
+          multiple:
+            forms:
+              default: 'రోజులు'
+            afterCount: 'క్రితం'
+        week:
+          single: 'ఒక వారం క్రితం'
+          multiple:
+            forms:
+              default: 'వారాలు'
+            afterCount: 'క్రితం'
+        month:
+          single: 'ఒక నెల క్రితం'
+          multiple:
+            forms:
+              default: 'నెలలు'
+            afterCount: 'క్రితం'
+        year:
+          single: 'ఒక సంవత్సరం క్రితం'
+          multiple:
+            forms:
+              default: 'సంవత్సరాలు'
+            afterCount: 'క్రితం'
+      future:
+        millisecond:
+          single: 'ఒక మిల్లీసెకను తర్వాత'
+          multiple:
+            forms:
+              default: 'మిల్లీసెకన్లు'
+            afterCount: 'తర్వాత'
+        second:
+          single: 'ఒక సెకను తర్వాత'
+          multiple:
+            forms:
+              default: 'సెకన్లు'
+            afterCount: 'తర్వాత'
+        minute:
+          single: 'ఒక నిమిషం తర్వాత'
+          multiple:
+            forms:
+              default: 'నిమిషాలు'
+            afterCount: 'తర్వాత'
+        hour:
+          single: 'ఒక గంట తర్వాత'
+          multiple:
+            forms:
+              default: 'గంటలు'
+            afterCount: 'తర్వాత'
+        day:
+          single: 'రేపు'
+          multiple:
+            forms:
+              default: 'రోజులు'
+            afterCount: 'తర్వాత'
+        week:
+          single: 'ఒక వారం తర్వాత'
+          multiple:
+            forms:
+              default: 'వారాలు'
+            afterCount: 'తర్వాత'
+        month:
+          single: 'ఒక నెల తర్వాత'
+          multiple:
+            forms:
+              default: 'నెలలు'
+            afterCount: 'తర్వాత'
+        year:
+          single: 'ఒక సంవత్సరం తర్వాత'
+          multiple:
+            forms:
+              default: 'సంవత్సరాలు'
+            afterCount: 'తర్వాత'
+    duration:
+      zero: 'సమయం లేదు'
+      age:
+        template: '{value} వయస్సు'
+      millisecond:
+        single:
+          numeric: '1 మిల్లీసెకను'
+          words: 'ఒక మిల్లీసెకను'
+        multiple:
+          forms:
+            default: 'మిల్లీసెకన్లు'
+            singular: 'మిల్లీసెకను'
+      second:
+        single:
+          numeric: '1 సెకను'
+          words: 'ఒక సెకను'
+        multiple:
+          forms:
+            default: 'సెకన్లు'
+            singular: 'సెకను'
+      minute:
+        single:
+          numeric: '1 నిమిషం'
+          words: 'ఒక నిమిషం'
+        multiple:
+          forms:
+            default: 'నిమిషాలు'
+            singular: 'నిమిషం'
+      hour:
+        single:
+          numeric: '1 గంట'
+          words: 'ఒక గంట'
+        multiple:
+          forms:
+            default: 'గంటలు'
+            singular: 'గంట'
+      day:
+        single:
+          numeric: '1 రోజు'
+          words: 'ఒక రోజు'
+        multiple:
+          forms:
+            default: 'రోజులు'
+            singular: 'రోజు'
+      week:
+        single:
+          numeric: '1 వారం'
+          words: 'ఒక వారం'
+        multiple:
+          forms:
+            default: 'వారాలు'
+            singular: 'వారం'
+      month:
+        single:
+          numeric: '1 నెల'
+          words: 'ఒక నెల'
+        multiple:
+          forms:
+            default: 'నెలలు'
+            singular: 'నెల'
+      year:
+        single:
+          numeric: '1 సంవత్సరం'
+          words: 'ఒక సంవత్సరం'
+        multiple:
+          forms:
+            default: 'సంవత్సరాలు'
+            singular: 'సంవత్సరం'
+    dataUnits:
+      bit:
+        forms:
+          default: 'బిట్‌లు'
+          singular: 'బిట్'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'బైట్లు'
+          singular: 'బైట్'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'కిలోబైట్లు'
+          singular: 'కిలోబైట్'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'మెగాబైట్లు'
+          singular: 'మెగాబైట్'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'గిగాబైట్లు'
+          singular: 'గిగాబైట్'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'టెరాబైట్లు'
+          singular: 'టెరాబైట్'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'మిల్లీసెకను'
+      second:
+        symbol: 'సెకను'
+      minute:
+        symbol: 'నిమిషం'
+      hour:
+        symbol: 'గంట'
+      day:
+        symbol: 'రోజు'
+      week:
+        symbol: 'వారం'
+      month:
+        symbol: 'నెల'
+      year:
+        symbol: 'సంవత్సరం'
+
+  number:
+    # number.words and number.parse remain blocked pending a separately assigned
+    # Telugu-capable shared number strategy.
+    formatting:
+      decimalSeparator: '.'
+      groupSeparator: ','
+      negativeSign: '-'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: 'వ'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourWordsMap:
+      - ''
+      - 'ఒంటి గంట'
+      - 'రెండు గంటలు'
+      - 'మూడు గంటలు'
+      - 'నాలుగు గంటలు'
+      - 'ఐదు గంటలు'
+      - 'ఆరు గంటలు'
+      - 'ఏడు గంటలు'
+      - 'ఎనిమిది గంటలు'
+      - 'తొమ్మిది గంటలు'
+      - 'పది గంటలు'
+      - 'పదకొండు గంటలు'
+      - 'పన్నెండు గంటలు'
+    minuteWordsMap:
+      - ''
+      - 'ఒక'
+      - 'రెండు'
+      - 'మూడు'
+      - 'నాలుగు'
+      - 'ఐదు'
+      - 'ఆరు'
+      - 'ఏడు'
+      - 'ఎనిమిది'
+      - 'తొమ్మిది'
+      - 'పది'
+      - 'పదకొండు'
+      - 'పన్నెండు'
+      - 'పదమూడు'
+      - 'పద్నాలుగు'
+      - 'పదిహేను'
+      - 'పదహారు'
+      - 'పదిహేడు'
+      - 'పద్దెనిమిది'
+      - 'పంతొమ్మిది'
+      - 'ఇరవై'
+      - 'ఇరవై ఒకటి'
+      - 'ఇరవై రెండు'
+      - 'ఇరవై మూడు'
+      - 'ఇరవై నాలుగు'
+      - 'ఇరవై ఐదు'
+      - 'ఇరవై ఆరు'
+      - 'ఇరవై ఏడు'
+      - 'ఇరవై ఎనిమిది'
+      - 'ఇరవై తొమ్మిది'
+      - 'ముప్పై'
+      - 'ముప్పై ఒకటి'
+      - 'ముప్పై రెండు'
+      - 'ముప్పై మూడు'
+      - 'ముప్పై నాలుగు'
+      - 'ముప్పై ఐదు'
+      - 'ముప్పై ఆరు'
+      - 'ముప్పై ఏడు'
+      - 'ముప్పై ఎనిమిది'
+      - 'ముప్పై తొమ్మిది'
+      - 'నలభై'
+      - 'నలభై ఒకటి'
+      - 'నలభై రెండు'
+      - 'నలభై మూడు'
+      - 'నలభై నాలుగు'
+      - 'నలభై ఐదు'
+      - 'నలభై ఆరు'
+      - 'నలభై ఏడు'
+      - 'నలభై ఎనిమిది'
+      - 'నలభై తొమ్మిది'
+      - 'యాభై'
+      - 'యాభై ఒకటి'
+      - 'యాభై రెండు'
+      - 'యాభై మూడు'
+      - 'యాభై నాలుగు'
+      - 'యాభై ఐదు'
+      - 'యాభై ఆరు'
+      - 'యాభై ఏడు'
+      - 'యాభై ఎనిమిది'
+      - 'యాభై తొమ్మిది'
+    minuteSuffixSingular: 'నిమిషం'
+    minuteSuffixPlural: 'నిమిషాలు'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+    earlyMorning: 'ఉదయం'
+    morning: 'ఉదయం'
+    afternoon: 'మధ్యాహ్నం'
+    evening: 'సాయంత్రం'
+    night: 'రాత్రి'
+    eveningStartHour: 17
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'ఉత్తరం'
+      - 'ఉత్తర-ఈశాన్యం'
+      - 'ఈశాన్యం'
+      - 'తూర్పు-ఈశాన్యం'
+      - 'తూర్పు'
+      - 'తూర్పు-ఆగ్నేయం'
+      - 'ఆగ్నేయం'
+      - 'దక్షిణ-ఆగ్నేయం'
+      - 'దక్షిణం'
+      - 'దక్షిణ-నైరుతి'
+      - 'నైరుతి'
+      - 'పడమర-నైరుతి'
+      - 'పడమర'
+      - 'పడమర-వాయవ్యం'
+      - 'వాయవ్యం'
+      - 'ఉత్తర-వాయవ్యం'
+    short:
+      - 'ఉత్తరం'
+      - 'ఉత్తర-ఈశాన్యం'
+      - 'ఈశాన్యం'
+      - 'తూర్పు-ఈశాన్యం'
+      - 'తూర్పు'
+      - 'తూర్పు-ఆగ్నేయం'
+      - 'ఆగ్నేయం'
+      - 'దక్షిణ-ఆగ్నేయం'
+      - 'దక్షిణం'
+      - 'దక్షిణ-నైరుతి'
+      - 'నైరుతి'
+      - 'పడమర-నైరుతి'
+      - 'పడమర'
+      - 'పడమర-వాయవ్యం'
+      - 'వాయవ్యం'
+      - 'ఉత్తర-వాయవ్యం'
+
+  calendar:
+    months:
+      - 'జనవరి'
+      - 'ఫిబ్రవరి'
+      - 'మార్చి'
+      - 'ఏప్రిల్'
+      - 'మే'
+      - 'జూన్'
+      - 'జూలై'
+      - 'ఆగస్టు'
+      - 'సెప్టెంబర్'
+      - 'అక్టోబర్'
+      - 'నవంబర్'
+      - 'డిసెంబర్'
