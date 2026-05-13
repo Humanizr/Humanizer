@@ -552,6 +552,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "zeroWord", null, null, null, null, null, null),
                             Member("string", "minusWord", null, null, null, null, null, null),
                             Member("string", "conjunctionWord", null, null, null, null, null, null),
+                            Member("nullable-string", "terminalRemainderConjunctionWord", null, null, null, null, null, null),
                             Member("string", "ordinalPrefix", null, null, null, "", null, null),
                             Member("string", "ordinalSuffix", null, null, null, "", null, null),
                             Member("string-array", "unitsMap", null, null, null, null, null, null),

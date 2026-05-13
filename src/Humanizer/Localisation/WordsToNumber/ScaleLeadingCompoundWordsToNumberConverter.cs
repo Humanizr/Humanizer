@@ -121,7 +121,11 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         if (next < end)
         {
             var remainderStart = next;
-            if (consumed && tokens[remainderStart] == profile.ConjunctionWord)
+            if (consumed && TryMatchTokenPhrase(tokens, remainderStart, end, profile.TerminalRemainderConjunctionWord, out var afterTerminalConjunction))
+            {
+                remainderStart = afterTerminalConjunction;
+            }
+            else if (consumed && tokens[remainderStart] == profile.ConjunctionWord)
             {
                 remainderStart++;
             }
@@ -144,11 +148,14 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return consumed;
     }
 
-    static bool TryMatchScale(string[] tokens, int start, int end, string scaleName, out int next)
+    static bool TryMatchScale(string[] tokens, int start, int end, string scaleName, out int next) =>
+        TryMatchTokenPhrase(tokens, start, end, scaleName, out next);
+
+    static bool TryMatchTokenPhrase(string[] tokens, int start, int end, string phrase, out int next)
     {
-        if (!scaleName.Contains(' ', StringComparison.Ordinal))
+        if (!phrase.Contains(' ', StringComparison.Ordinal))
         {
-            if (start < end && tokens[start] == scaleName)
+            if (start < end && tokens[start] == phrase)
             {
                 next = start + 1;
                 return true;
@@ -158,7 +165,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             return false;
         }
 
-        var scaleTokens = scaleName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var scaleTokens = phrase.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (start + scaleTokens.Length > end)
         {
             next = start;
@@ -350,6 +357,7 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
     FrozenDictionary<string, long> tens,
     ScaleLeadingCompoundScale[] scales,
     string conjunctionWord,
+    string? terminalRemainderConjunctionWord,
     string minusWord,
     string ordinalPrefix,
     string ordinalSuffix,
@@ -365,6 +373,8 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
     public ScaleLeadingCompoundScale[] Scales { get; } = ValidateScales(scales);
     /// <summary>Gets the conjunction token.</summary>
     public string ConjunctionWord { get; } = conjunctionWord;
+    /// <summary>Gets the conjunction token used before potentially ambiguous terminal remainders.</summary>
+    public string TerminalRemainderConjunctionWord { get; } = string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord;
     /// <summary>Gets the negative prefix token.</summary>
     public string MinusWord { get; } = minusWord;
     /// <summary>Gets the ordinal prefix token.</summary>

@@ -229,6 +229,7 @@ surfaces:
       zeroWord: 'sifili'
       minusWord: 'debe'
       conjunctionWord: 'da'
+      terminalRemainderConjunctionWord: 'da kuma'
       ordinalPrefix: 'na '
       unitsMap:
         - 'sifili'
@@ -303,6 +304,7 @@ surfaces:
     parse:
       engine: 'scale-leading-compound'
       conjunctionWord: 'da'
+      terminalRemainderConjunctionWord: 'da kuma'
       minusWord: 'debe'
       ordinalPrefix: 'na '
       unitsMap:
