@@ -413,8 +413,8 @@ surfaces:
     earlyMorning: 'na safe'
     morning: 'na safe'
     afternoon: 'na rana'
-    evening: 'da yamma'
-    night: 'da dare'
+    evening: 'na yamma'
+    night: 'na dare'
     eveningStartHour: 18
     nightStartHour: 21
 
