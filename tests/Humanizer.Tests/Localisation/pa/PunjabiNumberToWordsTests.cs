@@ -42,7 +42,7 @@ public class PunjabiNumberToWordsTests
     [InlineData(100000, "ਇੱਕ ਲੱਖ")]
     [InlineData(10000000, "ਇੱਕ ਕਰੋੜ")]
     [InlineData(12345678, "ਇੱਕ ਕਰੋੜ ਤੇਈ ਲੱਖ ਪੰਤਾਲੀ ਹਜ਼ਾਰ ਛੇ ਸੌ ਅਠੱਤਰ")]
-    [InlineData(4325010007018, "ਤਰਤਾਲੀ ਖਰਬ ਪੱਚੀ ਅਰਬ ਇੱਕ ਕਰੋੜ ਸੱਤ ਹਜ਼ਾਰ ਅਠਾਰਾਂ")]
+    [InlineData(4_325_010_007_018, "ਤਰਤਾਲੀ ਖਰਬ ਪੱਚੀ ਅਰਬ ਇੱਕ ਕਰੋੜ ਸੱਤ ਹਜ਼ਾਰ ਅਠਾਰਾਂ")]
     public void WordsToNumber_RoundTripsPunjabiCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Pa));
