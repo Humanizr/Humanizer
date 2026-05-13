@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-12T20:07:48.952590Z",
+  "depends_on": [
+    "fn-8-add-urdu-ur-locale-with-full-language.12"
+  ],
+  "epic": "fn-8-add-urdu-ur-locale-with-full-language",
+  "id": "fn-8-add-urdu-ur-locale-with-full-language.14",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-8-add-urdu-ur-locale-with-full-language.14.md",
+  "status": "todo",
+  "title": "Grammatical-gender fills: Semitic / Indic / other gender-bearing locales (ar/he/hi/el + any remaining)",
+  "updated_at": "2026-04-12T20:07:48.952959Z"
+}

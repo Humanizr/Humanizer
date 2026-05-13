@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-20T21:39:16.729234Z",
+  "depends_on": [],
+  "epic": "fn-16-performance-follow-up-hot-paths",
+  "id": "fn-16-performance-follow-up-hot-paths.1",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-16-performance-follow-up-hot-paths.1.md",
+  "status": "todo",
+  "title": "Broaden benchmark coverage and optimize remaining formatting hot paths",
+  "updated_at": "2026-04-20T21:39:16.729661Z"
+}

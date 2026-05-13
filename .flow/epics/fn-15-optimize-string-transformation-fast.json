@@ -1,0 +1,18 @@
+{
+  "branch_name": "codex/performance-hotspots-net11",
+  "completion_review_status": "unknown",
+  "completion_reviewed_at": null,
+  "created_at": "2026-04-19T16:35:20.604656Z",
+  "default_impl": null,
+  "default_review": null,
+  "default_sync": null,
+  "depends_on_epics": [],
+  "id": "fn-15-optimize-string-transformation-fast",
+  "next_task": 1,
+  "plan_review_status": "ship",
+  "plan_reviewed_at": "2026-04-19T16:45:22.328400Z",
+  "spec_path": ".flow/specs/fn-15-optimize-string-transformation-fast.md",
+  "status": "open",
+  "title": "Optimize string transformation fast paths",
+  "updated_at": "2026-04-19T16:45:22.328610Z"
+}

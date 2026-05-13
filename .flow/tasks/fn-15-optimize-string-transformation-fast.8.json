@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-19T22:01:47.178835Z",
+  "depends_on": [],
+  "epic": "fn-15-optimize-string-transformation-fast",
+  "id": "fn-15-optimize-string-transformation-fast.8",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-15-optimize-string-transformation-fast.8.md",
+  "status": "todo",
+  "title": "Follow-up TitleCase ASCII loop micro-optimization",
+  "updated_at": "2026-04-19T22:15:59.602479Z"
+}

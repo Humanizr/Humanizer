@@ -1,0 +1,21 @@
+{
+  "branch_name": "fn-13-prepare-for-net-11-add-net110-tfm-audit",
+  "completion_review_status": "unknown",
+  "completion_reviewed_at": null,
+  "created_at": "2026-04-15T01:39:53.696660Z",
+  "default_impl": null,
+  "default_review": null,
+  "default_sync": null,
+  "depends_on_epics": [
+    "fn-8-add-urdu-ur-locale-with-full-language",
+    "fn-12-generalize-non-gregorian-calendar"
+  ],
+  "id": "fn-13-prepare-for-net-11-add-net110-tfm-audit",
+  "next_task": 1,
+  "plan_review_status": "unknown",
+  "plan_reviewed_at": null,
+  "spec_path": ".flow/specs/fn-13-prepare-for-net-11-add-net110-tfm-audit.md",
+  "status": "open",
+  "title": "Prepare for .NET 11 (add net11.0 TFM, audit ICU 78 breakage)",
+  "updated_at": "2026-04-15T01:40:45.379225Z"
+}

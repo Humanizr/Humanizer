@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-13T01:50:38.461170Z",
+  "depends_on": [
+    "fn-9-fill-code-coverage-gaps-toward-95-line.1"
+  ],
+  "epic": "fn-9-fill-code-coverage-gaps-toward-95-line",
+  "id": "fn-9-fill-code-coverage-gaps-toward-95-line.13",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-9-fill-code-coverage-gaps-toward-95-line.13.md",
+  "status": "todo",
+  "title": "Converter tail: number-to-words converters",
+  "updated_at": "2026-04-13T02:07:38.714100Z"
+}

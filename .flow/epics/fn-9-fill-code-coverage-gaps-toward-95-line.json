@@ -1,0 +1,20 @@
+{
+  "branch_name": "feat/coverage-gaps",
+  "completion_review_status": "unknown",
+  "completion_reviewed_at": null,
+  "created_at": "2026-04-13T01:26:44.445186Z",
+  "default_impl": null,
+  "default_review": null,
+  "default_sync": null,
+  "depends_on_epics": [
+    "fn-8-add-urdu-ur-locale-with-full-language"
+  ],
+  "id": "fn-9-fill-code-coverage-gaps-toward-95-line",
+  "next_task": 1,
+  "plan_review_status": "ship",
+  "plan_reviewed_at": "2026-04-13T02:17:41.306610Z",
+  "spec_path": ".flow/specs/fn-9-fill-code-coverage-gaps-toward-95-line.md",
+  "status": "open",
+  "title": "Fill code coverage gaps toward 95% line / 88% branch",
+  "updated_at": "2026-04-13T02:32:46.455123Z"
+}

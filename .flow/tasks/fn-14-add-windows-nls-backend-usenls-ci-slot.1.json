@@ -1,0 +1,14 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-15T01:43:10.774864Z",
+  "depends_on": [],
+  "epic": "fn-14-add-windows-nls-backend-usenls-ci-slot",
+  "id": "fn-14-add-windows-nls-backend-usenls-ci-slot.1",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-14-add-windows-nls-backend-usenls-ci-slot.1.md",
+  "status": "todo",
+  "title": "Add Windows UseNls CI slot for net8.0 + net10.0",
+  "updated_at": "2026-04-15T01:43:50.764827Z"
+}

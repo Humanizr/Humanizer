@@ -1,0 +1,30 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-13T01:28:18.500268Z",
+  "depends_on": [
+    "fn-9-fill-code-coverage-gaps-toward-95-line.1",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.2",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.3",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.4",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.5",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.6",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.7",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.8",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.9",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.10",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.12",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.13",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.14",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.15",
+    "fn-9-fill-code-coverage-gaps-toward-95-line.16"
+  ],
+  "epic": "fn-9-fill-code-coverage-gaps-toward-95-line",
+  "id": "fn-9-fill-code-coverage-gaps-toward-95-line.11",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-9-fill-code-coverage-gaps-toward-95-line.11.md",
+  "status": "todo",
+  "title": "Enforce coverage gate in azure-pipelines.yml + docs",
+  "updated_at": "2026-04-13T02:11:12.487095Z"
+}

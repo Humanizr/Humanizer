@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-12T19:17:57.261253Z",
+  "depends_on": [
+    "fn-8-add-urdu-ur-locale-with-full-language.7"
+  ],
+  "epic": "fn-8-add-urdu-ur-locale-with-full-language",
+  "id": "fn-8-add-urdu-ur-locale-with-full-language.8",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-8-add-urdu-ur-locale-with-full-language.8.md",
+  "status": "todo",
+  "title": "Docs, release notes, and skill/memory updates",
+  "updated_at": "2026-04-12T19:53:29.190660Z"
+}

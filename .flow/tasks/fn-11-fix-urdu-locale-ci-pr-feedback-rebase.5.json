@@ -1,0 +1,18 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-14T05:04:00.314886Z",
+  "depends_on": [
+    "fn-11-fix-urdu-locale-ci-pr-feedback-rebase.2",
+    "fn-11-fix-urdu-locale-ci-pr-feedback-rebase.3",
+    "fn-11-fix-urdu-locale-ci-pr-feedback-rebase.4"
+  ],
+  "epic": "fn-11-fix-urdu-locale-ci-pr-feedback-rebase",
+  "id": "fn-11-fix-urdu-locale-ci-pr-feedback-rebase.5",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-11-fix-urdu-locale-ci-pr-feedback-rebase.5.md",
+  "status": "todo",
+  "title": "Final integration verification + force-with-lease push",
+  "updated_at": "2026-04-14T05:04:19.730013Z"
+}

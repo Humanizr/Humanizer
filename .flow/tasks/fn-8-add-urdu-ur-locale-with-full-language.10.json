@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-12T19:28:00.477221Z",
+  "depends_on": [
+    "fn-8-add-urdu-ur-locale-with-full-language.5"
+  ],
+  "epic": "fn-8-add-urdu-ur-locale-with-full-language",
+  "id": "fn-8-add-urdu-ur-locale-with-full-language.10",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-8-add-urdu-ur-locale-with-full-language.10.md",
+  "status": "todo",
+  "title": "Islamic (Hijri) calendar native mode for Urdu dates",
+  "updated_at": "2026-04-12T19:53:29.473135Z"
+}

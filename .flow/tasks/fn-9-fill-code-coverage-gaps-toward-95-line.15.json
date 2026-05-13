@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-13T02:03:20.792720Z",
+  "depends_on": [
+    "fn-9-fill-code-coverage-gaps-toward-95-line.1"
+  ],
+  "epic": "fn-9-fill-code-coverage-gaps-toward-95-line",
+  "id": "fn-9-fill-code-coverage-gaps-toward-95-line.15",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-9-fill-code-coverage-gaps-toward-95-line.15.md",
+  "status": "todo",
+  "title": "Converter tail: ordinal NumberToWords + PhraseClockNotation + WordFormTemplateOrdinalizer",
+  "updated_at": "2026-04-13T02:07:38.921985Z"
+}

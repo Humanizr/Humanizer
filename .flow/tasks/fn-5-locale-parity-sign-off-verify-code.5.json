@@ -1,0 +1,49 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-09T18:20:28.012565Z",
+  "depends_on": [
+    "fn-5-locale-parity-sign-off-verify-code.1",
+    "fn-5-locale-parity-sign-off-verify-code.2",
+    "fn-5-locale-parity-sign-off-verify-code.3",
+    "fn-5-locale-parity-sign-off-verify-code.4",
+    "fn-5-locale-parity-sign-off-verify-code.6"
+  ],
+  "epic": "fn-5-locale-parity-sign-off-verify-code",
+  "id": "fn-5-locale-parity-sign-off-verify-code.5",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.5.md",
+  "status": "done",
+  "title": "Close fn-2 proxy, run residual scans, and append final sign-off report",
+  "updated_at": "2026-04-10T03:49:37.000000Z",
+  "evidence": {
+    "scan_details": {
+      "net10_0": {
+        "command": "dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0 -c Release",
+        "result": "38908 passed, 0 failed",
+        "duration": "6.8s",
+        "exit_code": 0
+      },
+      "net8_0": {
+        "command": "dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0 -c Release",
+        "result": "38908 passed, 0 failed",
+        "duration": "10.7s",
+        "exit_code": 0,
+        "note": "Evidence corrected by fn-5.8: originally falsely claimed SDK unavailable"
+      },
+      "format_check": {
+        "command": "dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic",
+        "result": "0 of 1596 files formatted",
+        "exit_code": 0
+      },
+      "sdk_proof": {
+        "sdks": ["8.0.419", "10.0.102"],
+        "runtimes": ["Microsoft.NETCore.App 8.0.25", "Microsoft.NETCore.App 10.0.2"]
+      },
+      "scans_2a_2i": "Full scan evidence (2a deleted-converter, 2b residual-language, 2c net48-framing, 2d manual-registry, 2e stale-paths, 2f calendar-set-equality, 2g fn3-drift, 2h locale-set-equality, 2i build+test+format) captured in fn-5.5.md Evidence section; all passed"
+    },
+    "corrected_by": "fn-5-locale-parity-sign-off-verify-code.8",
+    "correction_commits": ["dd476b9a", "03688f88", "63b29123"]
+  }
+}

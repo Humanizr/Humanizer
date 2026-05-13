@@ -1,0 +1,13 @@
+{
+  "branch_name": "codex/performance-hotspots-net11",
+  "created_at": "2026-04-20T21:38:47.374121Z",
+  "depends_on_epics": [],
+  "id": "fn-16-performance-follow-up-hot-paths",
+  "next_task": 1,
+  "plan_review_status": "unknown",
+  "plan_reviewed_at": null,
+  "spec_path": ".flow/specs/fn-16-performance-follow-up-hot-paths.md",
+  "status": "done",
+  "title": "Performance follow-up hot paths",
+  "updated_at": "2026-04-20T21:54:03.818776Z"
+}

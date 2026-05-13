@@ -1,0 +1,33 @@
+{
+  "assignee": "claire@novotny.org",
+  "claim_note": "",
+  "claimed_at": "2026-04-10T00:43:35.346252Z",
+  "created_at": "2026-04-09T21:26:14.367292Z",
+  "depends_on": [
+    "fn-5-locale-parity-sign-off-verify-code.1"
+  ],
+  "epic": "fn-5-locale-parity-sign-off-verify-code",
+  "id": "fn-5-locale-parity-sign-off-verify-code.6",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.6.md",
+  "status": "done",
+  "title": "Reconcile fn-3 historical spec/task drift against FinalOverrideSet",
+  "updated_at": "2026-04-10T00:46:14.397623Z",
+  "evidence": {
+    "FinalOverrideSet": ["bn", "fa", "he", "ku", "ta", "zu-ZA"],
+    "FinalOverrideSet_source": "fn-5-locale-parity-sign-off-verify-code.1 done-evidence",
+    "audit_result": "all six-locale references consistent with FinalOverrideSet; one historical-clarification annotation added to fn-3.3 done summary",
+    "yaml_cross_check": "grep -l '^  calendar:' src/Humanizer/Locales/*.yml returned: bn.yml, fa.yml, he.yml, ku.yml, ta.yml, zu-ZA.yml — exact match",
+    "files_audited": [
+      ".flow/specs/fn-3-hard-code-locale-overrides-where-icu.md",
+      ".flow/tasks/fn-3-hard-code-locale-overrides-where-icu.3.md"
+    ],
+    "files_changed": [
+      ".flow/tasks/fn-3-hard-code-locale-overrides-where-icu.3.md",
+      ".flow/tasks/fn-5-locale-parity-sign-off-verify-code.6.md"
+    ],
+    "commits": ["40ce7ffb12ab20a855d68d1875a7cd1f66a06c6c"],
+    "tests": ["dotnet format Humanizer.slnx --verify-no-changes"],
+    "prs": []
+  }
+}

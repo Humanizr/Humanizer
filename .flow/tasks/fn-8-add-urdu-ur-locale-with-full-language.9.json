@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-12T19:28:00.363459Z",
+  "depends_on": [
+    "fn-8-add-urdu-ur-locale-with-full-language.4"
+  ],
+  "epic": "fn-8-add-urdu-ur-locale-with-full-language",
+  "id": "fn-8-add-urdu-ur-locale-with-full-language.9",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-8-add-urdu-ur-locale-with-full-language.9.md",
+  "status": "todo",
+  "title": "Wire gendered ordinals end-to-end (YAML schema + source generator + runtime) + Urdu masc/fem data",
+  "updated_at": "2026-04-12T19:53:29.333503Z"
+}

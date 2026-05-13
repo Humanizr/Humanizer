@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-13T01:28:17.163744Z",
+  "depends_on": [
+    "fn-9-fill-code-coverage-gaps-toward-95-line.1"
+  ],
+  "epic": "fn-9-fill-code-coverage-gaps-toward-95-line",
+  "id": "fn-9-fill-code-coverage-gaps-toward-95-line.2",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-9-fill-code-coverage-gaps-toward-95-line.2.md",
+  "status": "todo",
+  "title": "Default fallback converter tests",
+  "updated_at": "2026-04-13T01:51:55.224396Z"
+}

@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-06T21:55:05.582166Z",
+  "depends_on": [
+    "fn-1-locale-translation-parity-across-all.2"
+  ],
+  "epic": "fn-1-locale-translation-parity-across-all",
+  "id": "fn-1-locale-translation-parity-across-all.6",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-1-locale-translation-parity-across-all.6.md",
+  "status": "todo",
+  "title": "Add ordinal.date + clock YAML \u2014 Finno-Ugric, Turkic, Greek, Armenian locales",
+  "updated_at": "2026-04-07T00:43:26.431282Z"
+}

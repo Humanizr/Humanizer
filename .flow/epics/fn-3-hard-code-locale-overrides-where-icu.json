@@ -1,0 +1,18 @@
+{
+  "branch_name": "fn-3-hard-code-locale-overrides-where-icu",
+  "completion_review_status": "ship",
+  "completion_reviewed_at": "2026-04-09T13:20:23.688076Z",
+  "created_at": "2026-04-09T07:19:06.061583Z",
+  "default_impl": null,
+  "default_review": null,
+  "default_sync": null,
+  "depends_on_epics": [],
+  "id": "fn-3-hard-code-locale-overrides-where-icu",
+  "next_task": 1,
+  "plan_review_status": "ship",
+  "plan_reviewed_at": "2026-04-09T09:09:22.330713Z",
+  "spec_path": ".flow/specs/fn-3-hard-code-locale-overrides-where-icu.md",
+  "status": "done",
+  "title": "Hard-code locale overrides where ICU data is wrong or drifts",
+  "updated_at": "2026-04-09T13:20:42.326890Z"
+}

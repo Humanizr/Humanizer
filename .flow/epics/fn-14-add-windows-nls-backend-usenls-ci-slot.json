@@ -1,0 +1,21 @@
+{
+  "branch_name": "fn-14-add-windows-nls-backend-usenls-ci-slot",
+  "completion_review_status": "unknown",
+  "completion_reviewed_at": null,
+  "created_at": "2026-04-15T01:42:29.286822Z",
+  "default_impl": null,
+  "default_review": null,
+  "default_sync": null,
+  "depends_on_epics": [
+    "fn-8-add-urdu-ur-locale-with-full-language",
+    "fn-10-verify-net48-runtime-byte-parity-for"
+  ],
+  "id": "fn-14-add-windows-nls-backend-usenls-ci-slot",
+  "next_task": 1,
+  "plan_review_status": "unknown",
+  "plan_reviewed_at": null,
+  "spec_path": ".flow/specs/fn-14-add-windows-nls-backend-usenls-ci-slot.md",
+  "status": "open",
+  "title": "Add Windows NLS backend (UseNls) CI slot + restore NLS-only test coverage",
+  "updated_at": "2026-04-15T01:43:02.266252Z"
+}

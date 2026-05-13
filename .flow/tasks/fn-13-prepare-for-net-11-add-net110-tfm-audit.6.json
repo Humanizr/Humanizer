@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-15T01:40:57.434152Z",
+  "depends_on": [
+    "fn-13-prepare-for-net-11-add-net110-tfm-audit.1"
+  ],
+  "epic": "fn-13-prepare-for-net-11-add-net110-tfm-audit",
+  "id": "fn-13-prepare-for-net-11-add-net110-tfm-audit.6",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-13-prepare-for-net-11-add-net110-tfm-audit.6.md",
+  "status": "todo",
+  "title": "Update CLAUDE.md + docs/ with net11.0 quick commands and matrix notes",
+  "updated_at": "2026-04-15T01:42:24.280137Z"
+}
