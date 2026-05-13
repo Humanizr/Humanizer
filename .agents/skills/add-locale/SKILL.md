@@ -1,341 +1,174 @@
 ---
 name: add-locale
-description: Use when adding a new Humanizer locale or bringing an existing shipped locale to full parity. Trigger when work touches src/Humanizer/Locales, localization registries, shared locale engines, or culture-specific localization tests, and the locale must end with intentional coverage for every shipped localized surface with no English fallback, unsupported-locale gaps, or partial completion.
+description: Use when adding a new Humanizer locale or bringing an existing shipped locale to full parity. Trigger when work touches src/Humanizer/Locales, localization registries, shared locale engines, generator locale profiles, or culture-specific localization tests, and the locale must end with intentional coverage for every shipped localized surface with no English fallback, unsupported-locale gaps, generic fallback dependency, or partial completion.
 ---
 
 # Adding Humanizer Locale Parity
 
-## Overview
-
-Treat locale work as parity work, not translation work. A locale is not done when a YAML file exists; it is done only when every shipped localized surface has intentional behavior for that locale and the repo verifies that behavior.
-
-If existing YAML and shared kernels cannot reach parity, expand the work into generator, runtime, registry, documentation, and test changes until parity is real. Do not land a partial locale.
-
-For parity purposes, support is a behavioral question: does the feature work correctly for the locale? Ownership style, profile shape, and inheritance chain are maintainer details, not support categories.
-
-## Hard Rules
-
-1. Start with the repo docs, not guesswork: read `docs/adding-a-locale.md` and `docs/locale-yaml-how-to.md`, then read `docs/locale-yaml-reference.md` when the surface shape or engine options are unclear.
-2. Treat `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs` as the source of truth for canonical locale surfaces.
-3. Treat both new locales and existing shipped locales the same way: the end state is full parity across shipped localized features.
-4. Do not rely on English fallback or unsupported-locale behavior for any shipped locale.
-5. There is no shipped-locale exemption list in this repo. If any canonical surface is unresolved, parity is incomplete.
-6. Use `variantOf` only for genuine same-language inheritance that still produces natural output.
-7. Prefer locale-owned YAML data plus shared structural engines. Keep locale-specific runtime leaves only when the behavior is genuinely procedural.
-8. If a locale cannot be expressed with current shared engines, add or extend the generator contract and shared runtime kernel instead of reducing scope.
-9. Do not mark the work complete until you have verified that full parity exists in code and tests. "Good enough", "most surfaces", or "we can follow up later" are failures.
-10. Generic runtime fallback does not count as support. A locale surface is only supported when it has correct locale-specific behavior, either authored directly or inherited from a same-language parent that genuinely provides the right behavior for that surface.
-
-## Anti-Rationalization Rules
-
-These are failure modes, not acceptable interpretations:
-
-- "This locale never had that feature before" is not parity.
-- "Inherited from the parent, probably fine" is not verification.
-- "The YAML compiles" is not completion.
-- "The tests I happened to touch pass" is not parity if sweep coverage still leaves gaps.
-- "Most surfaces are done" is failure.
-- "We can follow up on the remaining surfaces later" is failure.
-- "The output is understandable" is failure if it is unnatural for native speakers.
-- "A locale-specific leaf is easier" is not justification for avoiding a reusable shared engine.
-- "The registry resolved something" is not proof of parity.
-- "The method returned a non-empty string" is not proof of parity.
-- "The output is culture-aware" is not proof of parity if it came from a generic/default fallback path.
-- "The locale works because generic formatting returned something reasonable" is not parity for a canonical surface that is supposed to be linguistically modeled.
-
-If the work needed for parity grows into generator, runtime, registry, docs, or tests, expand the work. Do not shrink the goal.
+## Purpose
 
-## Workflow
+Treat locale work as parity work, not translation work. A locale is complete only when every shipped localized surface has intentional behavior for that locale and the repo verifies that behavior.
 
-### 1. Produce The Preflight Gap Report
+Never shrink the goal to match the existing YAML shape. If parity requires generator, runtime, registry, documentation, or test changes, do that work instead of accepting a partial locale.
 
-Inspect the target locale YAML, related parent locales, current registries, and existing tests before editing anything.
+A shipped locale surface is supported only when it is locale-owned or inherited from a same-language parent that genuinely produces natural output. English fallback, unsupported-locale behavior, and generic/default runtime fallback are not parity.
 
-Before making any implementation changes, write a preflight gap report that lists every canonical surface for the locale with one of these statuses:
+## Load Order And Token Discipline
 
-- `locale-owned`
-- `same-language inherited`
-- `missing`
-- `english-fallback`
-- `unsupported`
-- `unknown`
+Load only what the phase needs:
 
-Use the canonical surfaces. Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, `calendar.monthsGenitive`, and `calendar.hijriMonths`.
+1. Always read this file and `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs` before planning.
+2. For new locales, read `docs/adding-a-locale.md` and `docs/locale-yaml-how-to.md`. Read `docs/locale-yaml-reference.md` when schema, engine, inheritance, or generator behavior is unclear.
+3. Read the target locale YAML and every parent in the `variantOf` chain before classifying support.
+4. Read `references/parity-checklist.md` when building the parity map, choosing files/tests, or closing out. It is the detailed source for surfaces, proof rows, file maps, and validation commands.
+5. Read `references/urdu-epic-learnings.md` only when a red flag applies: Arabic-script locale, Indic/South Asian numbers, plural-rule uncertainty, ordinals, Hijri/non-Gregorian calendars, no-delta variants, optional YAML fields, schema/generator changes, shared-engine changes, or PR hygiene issues.
+6. Use `references/goal-prompt-template.md` when drafting a reusable `/goal` prompt for locale implementation.
 
-The preflight report must identify the full current ownership path for each surface, including the inheritance chain to the terminal owner when inheritance is involved. `unknown` is allowed only during initial inspection and must be eliminated before implementation starts.
+Do not copy large checklist tables into your working context unless you are filling them. Use searches and targeted reads first.
 
-### 2. Build The Parity Map
+## Non-Negotiables
 
-Create a parity map artifact at:
+- Account for every canonical surface from `CanonicalLocaleAuthoring.cs`.
+- Eliminate `unknown` before implementation starts.
+- Do not rely on English fallback, unsupported-locale exceptions, or generic culture-aware runtime output.
+- Use `variantOf` only for genuine same-language inheritance with natural output.
+- Prefer locale-owned YAML data plus shared structural engines. Add or extend shared generator/runtime contracts when the rule family is reusable.
+- Keep locale-specific runtime leaves only when the behavior is genuinely procedural.
+- Add or update xUnit proof for every functional change.
+- Add XML documentation for new or modified public APIs.
 
-`artifacts/YYYY-MM-DD-<locale>-parity-map.md`
+## Fast-Fail Checks Before Editing
 
-The `artifacts/` directory is local-only and gitignored. Parity map and audit artifacts live there as working scratch files for the duration of the epic. Do not commit them. Anything that needs to outlive the epic belongs in `docs/`, the spec, or the test suite as proof.
+Run these checks during preflight. Before editing, identify applicable risks and add the required proof obligations to the plan. The proof itself must exist before closeout. If any applicable risk has no proof plan, stop implementation and resolve the plan first.
 
-Build the parity map as a concrete table, not notes. Use at least these columns:
+| Risk | Fast-fail probe | Required proof |
+| --- | --- | --- |
+| Artifact evidence | Is the parity map under `artifacts/` being treated as PR evidence? | Keep it local scratch; durable proof must be committed tests/docs plus final/PR summary copied from the map. |
+| Ordinal collapse | Does the plan merge `number.words.ordinal`, `ordinal.numeric`, `ordinal.date`, or `ordinal.dateOnly`? | Separate ownership, implementation, and tests for each surface. |
+| Word ordinal engine | Would a digit suffix engine produce unnatural output such as digit+suffix when words are required? | Use or build a word-ordinal engine; prove irregular stems separately from cardinals. |
+| Culture binding | Does a shared ordinal/number engine call `NumberToWords` or parse through another culture-aware service? | Prove target culture is passed intrinsically, including a test where current culture differs from target culture. |
+| Hijri/calendar | Does behavior depend on a `DateTime`/`DateOnly` construction calendar or optional calendars? | Prove culture/default-calendar runtime behavior per supported TFM/platform; do not assume ICU and NLS accept the same calendars. |
+| Optional YAML field | Is a new optional field or omitted section being added? | Cover parser, resolver/inheritance merge, generated profile/emitter, runtime consumer, migration/default behavior, and source-generator tests. |
+| Script/codepoints | Does the locale share a script with visually similar neighboring languages? | Check code points for lookalikes; Arabic-script locales should compare against the Urdu lessons. |
+| Plural rules and scales | Are plural rules or number scales copied from a nearby language? | Check CLDR-style plural family and natural scale system, such as lakh/crore for South Asian locales. |
+| No-delta variant | Is a regional file present only for matrix coverage? | It must have an explicit same-language parent and omit `surfaces` unless real overrides exist. |
+| Shared engine masking | Did a shared engine change only get tested with real locale data? | Add synthetic or sentinel tests that force divergent branches and edge cases. |
+| Repo hygiene | Are there local lock files, build outputs, unrelated edits, or namespace mismatches? | Clean status before closeout; test namespaces must match culture folders. |
 
-- `surface`
-- `ownership path`
-- `current state`
-- `target state`
-- `support state`
-- `proof kind`
-- `files to change`
-- `tests proving parity`
-- `proof file/assertion`
-- `verification command`
-- `verification exit status`
-- `verified at`
-- `status`
-- `term review status`
+## Phase 0: Preflight Gap Report
 
-The parity map must cover the canonical surfaces explicitly. Use top-level rows plus required proof subrows for:
+Before editing implementation files:
 
-- `list`
-- `formatter`
-- `phrases.relativeDate`
-- `phrases.duration`
-- `phrases.dataUnits`
-- `phrases.timeUnits`
-- `number.words`
-- `number.words.cardinal`
-- `number.words.ordinal`
-- `number.parse`
-- `number.parse.cardinal`
-- `number.parse.ordinal`
-- `number.formatting.decimalSeparator` (only when the locale authors a `number.formatting` override; mark "inherited from parent" or "not applicable" otherwise)
-- `ordinal.numeric`
-- `ordinal.date`
-- `ordinal.dateOnly`
-- `clock`
-- `compass`
-- `calendar.months` (only when the locale authors a `calendar` override; mark "inherited from parent" or "not applicable" otherwise)
-- `calendar.monthsGenitive` (only when the locale authors a `calendar` override with a genitive array; mark "inherited from parent" or "not applicable" otherwise)
-- `calendar.hijriMonths` (only when the locale authors or inherits a `calendar.hijriMonths` override; mark "inherited from parent" or "not applicable" otherwise)
+1. Identify target culture, regional variants, parent chain, and whether each file is locale-owned or inherited.
+2. Build `artifacts/YYYY-MM-DD-<locale>-parity-map.md` using `references/parity-checklist.md`.
+3. For every canonical surface and required proof subrow, record current state as one of `locale-owned`, `same-language inherited`, `missing`, `english-fallback`, `unsupported`, or `unknown`.
+4. Record the full ownership path, including the terminal owner for inherited surfaces.
+5. Remove every `unknown` before implementation starts.
 
-Add more `number.words.*` or `number.parse.*` proof rows whenever the selected engine owns additional meaningful branches such as tuple handling, gendered variants, abbreviation parsing, or special composition paths. Do not collapse multiple behavior families into one green bucket.
+The parity map is gitignored scratch. Do not commit it. If reviewers need durable evidence, copy the closeout summary into the PR/final response and rely on committed tests/docs for proof.
 
-Allowed values for `current state` and `target state`:
+## Phase 1: Choose The Smallest Honest Implementation
 
-- `locale-owned`
-- `same-language inherited`
-- `missing`
-- `english-fallback`
-- `unsupported`
+For each unresolved surface, choose in this order:
 
-Allowed values for `support state`:
+1. Same-language inheritance, when output is genuinely natural.
+2. Existing shared engine with locale-owned data.
+3. Shared engine or generator contract extension for reusable structure.
+4. Locale-specific runtime implementation only for genuinely procedural behavior.
 
-- `supported`
-- `not supported`
+Do not add locale-specific leaves just to avoid reusable generator/runtime work. When adding no-delta regional variants for first-class matrix coverage, omit `surfaces` entirely unless the variant owns real overrides; `surfaces: null` remains invalid.
 
-Allowed values for `proof kind`:
+## Phase 2: Derive And Review Locale Terms
 
-- `locale-owned exact-output`
-- `same-language inherited exact-output`
-- `locale-owned structural assertion`
-- `same-language inherited structural assertion`
-- `generic fallback`
-- `unsupported`
+When introducing locale-owned words, phrases, parser tokens, grammatical forms, or composed outputs:
 
-Any row with `proof kind: generic fallback` fails parity and blocks completion.
+1. Use a proposer subagent to suggest natural terms for the exact Humanizer surface and runtime context.
+2. Use an independent native-speaker reviewer subagent to reject literal, awkward, wrong-register, or grammatically incorrect terms.
+3. Re-review representative composed runtime outputs, not just isolated words.
+4. Record reviewer confidence, limitations, rejected alternatives, and final rationale in the parity map.
 
-Do not start implementation until every shipped localized surface for the locale appears in the parity map.
+If the reviewer cannot credibly judge native or near-native naturalness, or proposer/reviewer disagreement remains unresolved, completion is blocked.
 
-Use `references/parity-checklist.md` for the surface inventory, repo file map, and surface-to-files matrix.
+## Phase 3: Implement End-To-End
 
-Also include a short effective-gap summary below the table listing any surfaces that still resolve as `missing`, `english-fallback`, or `unsupported`. The implementation is not ready to claim parity until that summary is empty.
+Update the real ownership path:
 
-Use `status` values such as:
+- locale YAML under `src/Humanizer/Locales`
+- source generator inputs/contracts when profile generation, inheritance, schema, or registry wiring changes
+- shared runtime kernels or residual locale-specific implementations under `src/Humanizer/Localisation`
+- registry, fallback, exact-output, and culture-specific tests
+- docs when authoring behavior or public behavior changes
 
-- `not-started`
-- `blocked`
-- `in-progress`
-- `proved`
+Keep `formatter` and `phrases` as separate surfaces. Keep `number.words`, `number.parse`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, and `clock` separate during implementation and proof.
 
-Do not mark a row `proved` until the row has a concrete proving test or assertion, not just intended coverage. "suite passed" is not valid row-level proof.
+## Phase 4: Prove Parity
 
-The actual parity verdict for the locale must be expressed only in `support state` terms. Do not use implementation-shaped verdicts such as "broadly available", "intentionally resolved", or other wording that hides whether the feature truly works.
+Use exact-output tests for grammar-sensitive behavior and sweep/registry tests to prove the locale is not riding fallback.
 
-### 3. Derive Locale Terms With Independent Review
-
-When you need new locale-owned words, phrases, grammatical forms, parser tokens, or other translated terms, do not invent them in a single pass.
-
-Use two subagents:
-
-- a proposer subagent to suggest the most language-appropriate terms for the target surface and usage context
-- a reviewer subagent acting as a native speaker to review those suggestions for naturalness, correctness, register, and edge-case awkwardness
-
-Use prompts shaped like this:
-
-Proposer:
-
-```text
-You are deriving locale-owned Humanizer terms for <locale>.
-Target surface: <surface>.
-Behavior and usage context: <examples and expected runtime behavior>.
-Suggest the most natural locale terms, including any grammar/inflection notes and parser-token implications.
-Call out alternatives you rejected and why.
-```
-
-Reviewer:
-
-```text
-You are a native-speaker reviewer for <locale>.
-Target surface: <surface>.
-Expected behavior: <examples and expected runtime behavior>.
-Proposed terms: <candidate terms from proposer>.
-Review for naturalness, correctness, register, grammar, inflection, and whether native speakers would actually say this in this context.
-Reject anything that is literal, awkward, or only technically understandable.
-```
-
-Keep the reviewer independent. Do not ask it to rubber-stamp the first proposal. Give it the target behavior and the proposed terms, and require it to call out unnatural phrasing, literal translations, grammar mistakes, or terms that sound technically correct but are not what native speakers would actually say.
-
-Do not accept terms unless both subagents support the final choice and the parity map records the resolution. If they disagree, keep iterating until you have a justified set of locale terms that both semantic correctness and native-speaker naturalness support. Do not land locale-owned wording that only one pass has seen.
-
-After term selection, run the reviewer again against representative runtime outputs, not just isolated terms. A term that looks acceptable in isolation is still wrong if the composed Humanizer output is unnatural. Record reviewer confidence, reviewer limitations, rejected alternatives, and the reviewed runtime outputs in the parity map. If the reviewer cannot credibly claim native-level or near-native confidence for judging naturalness, completion is blocked.
-
-### 4. Choose The Smallest Honest Implementation
-
-For each missing or unacceptable surface:
-
-- reuse an existing engine if the behavior is the same algorithm with locale-owned words or tables
-- extend a shared kernel and generator contract if the behavior is structurally reusable
-- keep or add a locale-specific runtime implementation only when forcing it into YAML/shared kernels would create imperative hooks or an exception bucket
-
-Do not hide algorithm gaps behind translation-only changes.
-
-### 5. Implement The Locale End-To-End
-
-Update the locale through the real ownership path:
-
-- locale YAML in `src/Humanizer/Locales`
-- source generator wiring when profile generation or registry input changes
-- runtime kernels or residual locale-specific implementations under `src/Humanizer/Localisation`
-- registry coverage and exact-output tests
-- contributor docs when the supported surface set or authoring guidance changes
-
-When adding a regional variant, override only real differences. When adding a neutral locale, own the full behavior directly or through explicit shared abstractions.
-
-### 6. Prove Parity, Not Just Compilation
-
-Add or update tests that prove the locale's actual output and registry presence. Favor exact-output tests for grammar-sensitive behavior and keep sweep tests strong enough to catch accidental fallback. Treat `formatter` and `phrases` as separate surfaces when auditing and proving parity.
-
-Proof must distinguish real support from fallback:
-
-- registry presence is not enough
-- non-empty output is not enough
-- culture-aware formatting is not enough
-- generic runtime fallback is not enough
-
-For every surface that claims parity, add at least one proof that the locale is not merely riding a generic fallback path when such a fallback exists.
-
-Feature-specific minimum bars:
-
-- `clock`
-  Do not count `TimeOnly.ToClockNotation()` as supported merely because the default converter returned `ToString("t", culture)` or another generic time format. Prove locale-specific clock behavior with exact-output tests or same-language inherited exact-output tests for both exact and rounded cases.
-- `ordinal.date` / `ordinal.dateOnly`
-  Do not count date ordinal support as complete merely because a culture date format happened to place the day naturally. Prove the actual ordinal-day behavior with exact outputs.
-- `number.words` / `number.parse`
-  Round-trip and representative large-number cases must prove the locale's own numbering system rather than an English or generic parser fallback.
-- `formatter` / `phrases`
-  Do not accept generic resources or default English-derived strings as parity. Use exact localized outputs for representative tense and unit cases.
-
-At minimum, review and extend the locale parity checks in:
-
-- `tests/Humanizer.Tests/Localisation/LocaleCoverageData.cs`
-- `tests/Humanizer.Tests/Localisation/LocaleFallbackSweepTests.cs`
-- `tests/Humanizer.Tests/Localisation/LocaleRegistrySweepTests.cs`
-- `tests/Humanizer.Tests/Localisation/GeneratedLocaleData/GeneratedFormatterRuntimeTests.cs`
-- `tests/Humanizer.Tests/Localisation/ExactLocaleDateAndTimeRegistryTests.cs`
-- the target culture folder under `tests/Humanizer.Tests/Localisation/<culture>`
-
-When generator contracts, inheritance rules, or locale schema behavior change, also update `tests/Humanizer.SourceGenerators.Tests`.
-
-Update the parity map artifact as you go. The final artifact should show no remaining `missing`, `english-fallback`, or `unsupported` rows for shipped localized surfaces.
-
-Before claiming completion, add a closeout line for every canonical surface and required proof subrow showing:
-
-- final ownership path
-- whether it is `locale-owned` or `same-language inherited`
-- full inheritance chain to the terminal owner when inherited
-- final `support state`
-- final `proof kind`
-- the proving test or assertion
-- whether native-speaker review was needed
-
-Also record a before/after parity delta:
-
-- initial unresolved surfaces from the preflight gap report
-- final unresolved surfaces after implementation
-
-The final unresolved set must be empty.
+Minimum proof expectations:
+
+- `clock`: prove locale-specific exact and rounded cases; generic time formatting is not support.
+- `ordinal.date` and `ordinal.dateOnly`: prove actual ordinal-day behavior with exact outputs.
+- `number.words` and `number.parse`: prove the locale numbering system, including representative large values and parse/word branches.
+- `formatter` and `phrases`: prove localized representative outputs, not generic English-derived resources.
+- shared engines: include synthetic/sentinel coverage for branch behavior that real locale data might mask.
+- generator/schema changes: update `tests/Humanizer.SourceGenerators.Tests`.
+
+Use `references/parity-checklist.md` for the complete proof-row list and file/test map. Do not mark a parity-map row `proved` until it names a concrete proving file/assertion and verification command.
 
 ## Validation
 
-Run the real repo validation for locale work:
+Run focused tests while iterating. Before claiming parity, run the real repo validation:
 
-```
+```bash
 dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
 dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
 dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/locale-parity-validation
 ```
 
-Do not add the old package verification step. The completion gate is full parity verification in code and tests, not satellite-package validation.
+Run `net48` tests only on Windows hosts when the test project includes that TFM. Do not add the old package verification step for locale parity closeout.
 
-If you touch a hot shared kernel or registry dispatch path, run the relevant benchmark coverage before claiming parity.
+If you change a hot shared kernel or registry dispatch path, run the relevant focused benchmark or performance coverage before closeout.
 
 ## Completion Gate
 
-Do not say the locale is complete until all of these are true:
+Do not say the locale is complete until all are true:
 
-- every shipped localized surface for the locale is intentionally locale-owned or intentionally inherited from a same-language parent
-- every shipped localized surface for the locale has `support state: supported`
-- no shipped surface for the locale depends on English fallback
-- no shipped surface for the locale throws because the locale is unsupported
-- no shipped surface for the locale is only "working" because a generic/default runtime fallback returned something culture-aware
-- new locale-owned terms were reviewed by both a proposer subagent and a native-speaker reviewer subagent, and any disagreements were resolved before landing
-- representative composed runtime outputs were reviewed for naturalness when new locale-owned wording was introduced
-- the reviewer evidence records confidence and limitations, and the reviewer did not disclaim the ability to judge native naturalness
-- the parity map artifact exists locally under `artifacts/` (gitignored, not committed) and every shipped localized surface for the locale is accounted for there
-- the preflight gap report exists and the final before/after parity delta shows an empty unresolved set
-- every canonical surface and required proof subrow has a concrete closeout entry with proof, not just an implementation note
-- no canonical surface or required proof subrow has `proof kind: generic fallback`
-- exact-output tests cover the locale's custom or grammar-sensitive behavior
-- sweep tests and registry tests include the locale wherever applicable
-- source-generator tests cover schema, inheritance, or generated wiring changes when those changed
-- `dotnet test` passes for `tests/Humanizer.SourceGenerators.Tests` on `net10.0`
-- `dotnet test` passes for `tests/Humanizer.Tests` on `net10.0` and `net8.0`
-- `dotnet pack` succeeds without warnings or errors
-
-If any item above is false, the locale is not at parity yet.
+- every canonical surface and required proof subrow is accounted for in the parity map
+- no row remains `missing`, `english-fallback`, `unsupported`, `unknown`, or `proof kind: generic fallback`
+- conditional proof subrows marked `not applicable` are justified
+- every shipped localized surface has `support state: supported`
+- every surface is intentionally locale-owned or same-language inherited with the full ownership chain recorded
+- exact-output and sweep/registry tests cover the locale's custom, inherited, or grammar-sensitive behavior
+- term review is complete for all new locale-owned wording and composed outputs
+- source-generator tests cover schema, inheritance, profile generation, or registry changes when those changed
+- validation commands pass without new warnings or errors
+- git status contains no accidental local state, build residue, unrelated edits, or committed scratch artifacts
 
 ## Final Response Contract
 
-Do not present locale work as complete unless the final response includes all of these:
+If claiming completion, include:
 
-- the parity map artifact path
-- the preflight gap report summary
-- the before/after parity delta
-- the empty effective-gap summary
-- one line per canonical surface stating final ownership and proof
-- one line per canonical surface stating final `support state`
-- the exact validation commands run
-- an explicit statement that no canonical surface remains `missing`, `english-fallback`, or `unsupported`
+- parity map artifact path
+- preflight gap summary
+- before/after parity delta with an empty final unresolved set
+- effective-gap summary stating no canonical surface remains `missing`, `english-fallback`, or `unsupported`
+- one closeout line per canonical surface and required proof subrow with final ownership, support state, proof kind, and proving test/assertion
+- exact validation commands run
 
-If the final response cannot include that evidence, report the remaining gaps instead of claiming completion.
+If that evidence is unavailable, report remaining gaps instead of claiming completion.
 
 ## Stop Conditions
 
-Stop and keep working if any of these are true:
+Stop and keep working when any of these remain true:
 
-- the parity map still contains any `missing`, `english-fallback`, or `unsupported` row for a shipped localized surface
-- the preflight gap report still contains any `unknown` surface
-- locale-owned terms were written without both subagent passes
-- representative runtime outputs were not reviewed for naturalness after new locale-owned wording was introduced
-- same-language inheritance looks linguistically suspicious or unnatural, even if technically functional
-- tests only prove execution, not natural output for grammar-sensitive or locale-specific behavior
-- tests only prove the generic fallback path executes
-- runtime fallback is still doing work that the locale should own explicitly
-- the implementation compiles but the ownership path is still ambiguous
-- any canonical surface or required proof subrow lacks a concrete proving test or assertion
+- a surface still depends on fallback, unsupported behavior, or ambiguous ownership
+- preflight still contains `unknown`
+- locale-owned terms lack proposer plus independent reviewer evidence
+- representative runtime outputs were not reviewed after new wording was introduced
+- same-language inheritance looks linguistically suspicious
+- tests only prove execution or generic fallback
+- a shared engine lacks synthetic coverage for edge branches
+- any parity-map row lacks concrete proof
+- the final validation commands have not passed
