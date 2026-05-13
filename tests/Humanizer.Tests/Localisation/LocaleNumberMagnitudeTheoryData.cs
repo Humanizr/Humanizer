@@ -153,8 +153,8 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
-        { "te", 1001000001L, "వంద కోట్ల పది లక్షల ఒకటి" },
-        { "te", 4325010007018L, "నాలుగు లక్షల ముప్పై రెండు వేల ఐదు వందల ఒకటి కోట్ల ఏడు వేల పద్దెనిమిది" },
+        { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },
+        { "te", 4325010007018L, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది" },
 
         { "sw", 1001000001L, "bilioni moja milioni moja na moja" },
         { "sw", 4325010007018L, "trilioni nne bilioni mia tatu na ishirini na tano milioni kumi elfu saba na kumi na nane" },

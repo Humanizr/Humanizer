@@ -25,6 +25,8 @@ public class TeluguNumberToWordsTests
     [InlineData(20000000, "రెండు కోట్లు")]
     [InlineData(20000001, "రెండు కోట్ల ఒకటి")]
     [InlineData(12345678, "కోటి ఇరవై మూడు లక్షల నలభై ఐదు వేల ఆరు వందల డెబ్బై ఎనిమిది")]
+    [InlineData(1001000001, "అరబ్ పది లక్షల ఒకటి")]
+    [InlineData(4325010007018, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది")]
     public void NumberToWords_ProducesExpectedTeluguOutput(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Te));
@@ -56,6 +58,8 @@ public class TeluguNumberToWordsTests
     [InlineData(200001, "రెండు లక్షల ఒకటి")]
     [InlineData(20000001, "రెండు కోట్ల ఒకటి")]
     [InlineData(12345678, "కోటి ఇరవై మూడు లక్షల నలభై ఐదు వేల ఆరు వందల డెబ్బై ఎనిమిది")]
+    [InlineData(1001000001, "అరబ్ పది లక్షల ఒకటి")]
+    [InlineData(4325010007018, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది")]
     public void WordsToNumber_RoundTripsTeluguCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Te));

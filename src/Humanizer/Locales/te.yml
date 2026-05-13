@@ -339,6 +339,41 @@ surfaces:
         - 'తొంభై తొమ్మిది'
       scales:
         -
+          value: 100000000000000000
+          singular: 'శంఖ'
+          singularWithRemainder: 'శంఖ'
+          plural: 'శంఖ'
+          pluralWithRemainder: 'శంఖ'
+          omitOne: true
+        -
+          value: 1000000000000000
+          singular: 'పద్మ'
+          singularWithRemainder: 'పద్మ'
+          plural: 'పద్మ'
+          pluralWithRemainder: 'పద్మ'
+          omitOne: true
+        -
+          value: 10000000000000
+          singular: 'నీలం'
+          singularWithRemainder: 'నీలం'
+          plural: 'నీలం'
+          pluralWithRemainder: 'నీలం'
+          omitOne: true
+        -
+          value: 100000000000
+          singular: 'ఖరబ్'
+          singularWithRemainder: 'ఖరబ్'
+          plural: 'ఖరబ్'
+          pluralWithRemainder: 'ఖరబ్'
+          omitOne: true
+        -
+          value: 1000000000
+          singular: 'అరబ్'
+          singularWithRemainder: 'అరబ్'
+          plural: 'అరబ్'
+          pluralWithRemainder: 'అరబ్'
+          omitOne: true
+        -
           value: 10000000
           singular: 'కోటి'
           singularWithRemainder: 'కోటి'
@@ -431,6 +466,11 @@ surfaces:
         'వేలు': 'వేలవ'
         'లక్ష': 'లక్షవ'
         'లక్షలు': 'లక్షలవ'
+        'అరబ్': 'అరబ్‌వ'
+        'ఖరబ్': 'ఖరబ్‌వ'
+        'నీలం': 'నీలంవ'
+        'పద్మ': 'పద్మవ'
+        'శంఖ': 'శంఖవ'
         'కోటి': 'కోటవ'
         'కోట్లు': 'కోట్లవ'
     formatting:
@@ -558,6 +598,13 @@ surfaces:
         'లక్ష': 100000
         'లక్షలు': 100000
         'లక్షల': 100000
+        'అరబ్': 1000000000
+        'ఖరబ్': 100000000000
+        'నీలం': 10000000000000
+        'నీల్': 10000000000000
+        'నిల్': 10000000000000
+        'పద్మ': 1000000000000000
+        'శంఖ': 100000000000000000
         'కోటి': 10000000
         'కోట్లు': 10000000
         'కోట్ల': 10000000
@@ -606,6 +653,11 @@ surfaces:
         'నూటవ': 100
         'వెయ్యవ': 1000
         'లక్షవ': 100000
+        'అరబ్‌వ': 1000000000
+        'ఖరబ్‌వ': 100000000000
+        'నీలంవ': 10000000000000
+        'పద్మవ': 1000000000000000
+        'శంఖవ': 100000000000000000
         'కోటవ': 10000000
 
   ordinal:
