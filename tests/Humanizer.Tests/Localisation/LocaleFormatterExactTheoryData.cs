@@ -247,7 +247,9 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hans", new("2 天前", "3 天前", "4 天前", "5 天前", "11 天前", "21 天前", "2 天后", "3 天后", "4 天后", "5 天后", "11 天后", "21 天后") },
         { "zh-Hant", new("2 天前", "3 天前", "4 天前", "5 天前", "11 天前", "21 天前", "2 天後", "3 天後", "4 天後", "5 天後", "11 天後", "21 天後") },
         { "zu-ZA", new("2 izinsuku ezedlule", "3 izinsuku ezedlule", "4 izinsuku ezedlule", "5 izinsuku ezedlule", "11 izinsuku ezedlule", "21 izinsuku ezedlule", "2 izinsuku ezizayo", "3 izinsuku ezizayo", "4 izinsuku ezizayo", "5 izinsuku ezizayo", "11 izinsuku ezizayo", "21 izinsuku ezizayo") },
-    };
+
+            { "hi", new("2 दिन पहले", "3 दिन पहले", "4 दिन पहले", "5 दिन पहले", "11 दिन पहले", "21 दिन पहले", "2 दिन में", "3 दिन में", "4 दिन में", "5 दिन में", "11 दिन में", "21 दिन में") },
+};
 
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
     {
@@ -316,7 +318,9 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hans", new("2 周、1 天、1 小时", "1 天、3 分、4 秒", "1 天、3 分") },
         { "zh-Hant", new("2 週、1 天、1 小時", "1 天、3 分、4 秒", "1 天、3 分") },
         { "zu-ZA", new("2 amaviki, 1 usuku na 1 ihora", "1 usuku, 3 amaminithi na 4 amasekhondi", "1 usuku na 3 amaminithi") },
-    };
+
+            { "hi", new("2 सप्ताह, 1 दिन और 1 घंटा", "1 दिन, 3 मिनट और 4 सेकंड", "1 दिन और 3 मिनट") },
+};
 
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
     {
@@ -406,7 +410,9 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hant", new("毫秒", "秒", "分", "小時", "天", "週", "月", "年") },
         { "zh-HK", new("毫秒", "秒", "分", "小時", "天", "週", "月", "年") },
         { "zu-ZA", new("imilisekhondi", "isekhondi", "iminithi", "ihora", "usuku", "iviki", "inyanga", "unyaka") },
-    };
+
+            { "hi", new("मिलीसेकंड", "सेकंड", "मिनट", "घंटा", "दिन", "सप्ताह", "महीना", "साल") },
+};
 
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
     {
@@ -475,7 +481,9 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hans", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "zh-Hant", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "zu-ZA", new("1 b", "2 B", "1.95 KB", "2048 KB") },
-    };
+
+            { "hi", new("1 b", "2 B", "1.95 KB", "2048 KB") },
+};
 
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
     {
@@ -544,7 +552,9 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hans", new("1 比特", "1 字节", "2 字节", "2 千字节", "2 兆字节") },
         { "zh-Hant", new("1 位元", "1 位元組", "2 位元組", "2 千位元組", "2 百萬位元組") },
         { "zu-ZA", new("1 i-bit", "1 i-byte", "2 ama-bytes", "2 ama-kilobytes", "2 ama-megabytes") },
-    };
+
+            { "hi", new("1 बिट", "1 बाइट", "2 बाइट", "2 किलोबाइट", "2 मेगाबाइट") },
+};
 
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
     {
@@ -613,7 +623,9 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hans", new("1、2", "1、2、3", "1、2、3、4") },
         { "zh-Hant", new("1、2", "1、2、3", "1、2、3、4") },
         { "zu-ZA", new("1 na 2", "1, 2 na 3", "1, 2, 3 na 4") },
-    };
+
+            { "hi", new("1 और 2", "1, 2 और 3", "1, 2, 3 और 4") },
+};
 
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
     {
@@ -682,7 +694,9 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hans", new("北", "北东北", "东北", "东北东", "东", "东南东", "东南", "南东南", "南", "南西南", "西南", "西南西", "西", "西北西", "西北", "北西北", "北", "北东北", "东北", "东北东", "东", "东南东", "东南", "南东南", "南", "南西南", "西南", "西南西", "西", "西北西", "西北", "北西北") },
         { "zh-Hant", new("北", "北東北", "東北", "東北東", "東", "東南東", "東南", "南東南", "南", "南西南", "西南", "西南西", "西", "西北西", "西北", "北西北", "北", "北東北", "東北", "東北東", "東", "東南東", "東南", "南東南", "南", "南西南", "西南", "西南西", "西", "西北西", "西北", "北西北") },
         { "zu-ZA", new("N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "enyakatho", "enyakatho-enyakatho-mpumalanga", "enyakatho-mpumalanga", "empumalanga-enyakatho-mpumalanga", "empumalanga", "empumalanga-eningizimu-mpumalanga", "eningizimu-mpumalanga", "eningizimu-eningizimu-mpumalanga", "eningizimu", "eningizimu-eningizimu-ntshonalanga", "eningizimu-ntshonalanga", "entshonalanga-eningizimu-ntshonalanga", "entshonalanga", "entshonalanga-enyakatho-ntshonalanga", "enyakatho-ntshonalanga", "enyakatho-enyakatho-ntshonalanga") },
-    };
+
+            { "hi", new("उ", "उ-उ-पू", "उ-पू", "पू-उ-पू", "पू", "पू-द-पू", "द-पू", "द-द-पू", "द", "द-द-प", "द-प", "प-द-प", "प", "प-उ-प", "उ-प", "उ-उ-प", "उत्तर", "उत्तर-उत्तर-पूर्व", "उत्तर-पूर्व", "पूर्व-उत्तर-पूर्व", "पूर्व", "पूर्व-दक्षिण-पूर्व", "दक्षिण-पूर्व", "दक्षिण-दक्षिण-पूर्व", "दक्षिण", "दक्षिण-दक्षिण-पश्चिम", "दक्षिण-पश्चिम", "पश्चिम-दक्षिण-पश्चिम", "पश्चिम", "पश्चिम-उत्तर-पश्चिम", "उत्तर-पश्चिम", "उत्तर-उत्तर-पश्चिम") },
+};
 
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
     {
@@ -751,6 +765,8 @@ public static class LocaleFormatterExactTheoryData
         { "zh-Hans", new("北", "东", "南", "西") },
         { "zh-Hant", new("北", "東", "南", "西") },
         { "zu-ZA", new("N", "E", "S", "W") },
-    };
+
+            { "hi", new("उ", "पू", "द", "प") },
+};
 
 }

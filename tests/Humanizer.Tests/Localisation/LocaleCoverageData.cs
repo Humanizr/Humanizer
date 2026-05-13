@@ -13,6 +13,8 @@ static class LocaleCoverageData
     // Representative non-first-of-month date sample.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2022, 1, 25, "25 जनवरी 2022") },
+
         { "af", new(2022, 1, 25, "25 Januarie 2022") },
         { "ar", new(2022, 1, 25, "25 يناير 2022") },
         { "az", new(2022, 1, 25, "25 yanvar 2022") },
@@ -83,6 +85,8 @@ static class LocaleCoverageData
     // First-of-month sample where many locales change the day form.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2015, 1, 1, "1 जनवरी 2015") },
+
         { "af", new(2015, 1, 1, "1 Januarie 2015") },
         { "ar", new(2015, 1, 1, "1 يناير 2015") },
         { "az", new(2015, 1, 1, "1 yanvar 2015") },
@@ -153,6 +157,8 @@ static class LocaleCoverageData
     // Early-month sample used to catch plain numeric-day formatting.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2015, 2, 3, "3 फ़रवरी 2015") },
+
         { "af", new(2015, 2, 3, "3 Februarie 2015") },
         { "ar", new(2015, 2, 3, "3 فبراير 2015") },
         { "az", new(2015, 2, 3, "3 fevral 2015") },
@@ -222,34 +228,46 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020February29ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2020, 2, 29, "29 फ़रवरी 2020") },
+
         { "ca", new(2020, 2, 29, "29 de febrer de 2020") },
         { "es", new(2020, 2, 29, "29 de febrero de 2020") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015September4ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2015, 9, 4, "4 सितंबर 2015") },
+
         { "ca", new(2015, 9, 4, "4 de setembre de 2015") },
         { "es", new(2015, 9, 4, "4 de septiembre de 2015") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords1979November7ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(1979, 11, 7, "7 नवंबर 1979") },
+
         { "ca", new(1979, 11, 7, "7 de novembre de 1979") },
         { "es", new(1979, 11, 7, "7 de noviembre de 1979") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020March2ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2020, 3, 2, "2 मार्च 2020") },
+
         { "fr", new(2020, 3, 2, "2 mars 2020") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2021October31ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2021, 10, 31, "31 अक्टूबर 2021") },
+
         { "fr", new(2021, 10, 31, "31 octobre 2021") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2024December31ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(2024, 12, 31, "31 दिसंबर 2024") },
+
         { "ar", new(2024, 12, 31, "31 ديسمبر 2024") },
         { "fa", new(2024, 12, 31, "31 دسامبر 2024") },
         { "ja", new(2024, 12, 31, "2024年12月31日") },
@@ -260,6 +278,8 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(13, 23, "दोपहर एक बजकर तेईस मिनट") },
+
         { "af", new(13, 23, "een uur drie en twintig") },
         { "ar", new(13, 23, "الواحدة وثلاث وعشرون دقيقة بعد الظهر") },
         { "az", new(13, 23, "on üç saat iyirmi üç dəqiqə") },
@@ -330,6 +350,8 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
+        { "hi", new(13, 23, "दोपहर एक बजकर पच्चीस मिनट") },
+
         { "af", new(13, 23, "een uur vyf en twintig") },
         { "ar", new(13, 23, "الواحدة وخمس وعشرون دقيقة بعد الظهر") },
         { "az", new(13, 23, "on üç saat iyirmi beş dəqiqə") },
@@ -400,6 +422,8 @@ static class LocaleCoverageData
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
+        { "hi", new(1, 5, "सुबह एक बजकर पाँच मिनट") },
+
         { "af", new(1, 5, "een uur vyf") },
         { "ar", new(1, 5, "الواحدة وخمس دقائق صباحًا") },
         { "az", new(1, 5, "bir saat beş dəqiqə") },
@@ -850,7 +874,8 @@ static class LocaleCoverageData
             { "zh-CN", "昨天", "2 天" },
             { "zh-Hans", "昨天", "2 天" },
             { "zh-Hant", "昨天", "2 天" },
-            { "zu-ZA", "izolo", "2 izinsuku" }
+            { "zu-ZA", "izolo", "2 izinsuku" },
+                    { "hi", "कल", "2 दिन" },
         };
 
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
@@ -920,7 +945,8 @@ static class LocaleCoverageData
             { "zh-CN", "1、2", "1、2、3" },
             { "zh-Hans", "1、2", "1、2、3" },
             { "zh-Hant", "1、2", "1、2、3" },
-            { "zu-ZA", "1 na 2", "1, 2 na 3" }
+            { "zu-ZA", "1 na 2", "1, 2 na 3" },
+                    { "hi", "1 और 2", "1, 2 और 3" },
         };
 
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
@@ -990,7 +1016,8 @@ static class LocaleCoverageData
             { "zh-CN", 1, "第 一" },
             { "zh-Hans", 1, "第 一" },
             { "zh-Hant", 1, "第 一" },
-            { "zu-ZA", 1, "okokuqala" }
+            { "zu-ZA", 1, "okokuqala" },
+                    { "hi", 1, "पहली" },
         };
 
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
@@ -1060,7 +1087,8 @@ static class LocaleCoverageData
             { "zh-CN", 1, "一" },
             { "zh-Hans", 1, "一" },
             { "zh-Hant", 1, "一" },
-            { "zu-ZA", 1, "kanye" }
+            { "zu-ZA", 1, "kanye" },
+                    { "hi", 1, "एक" },
         };
 
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData => LocaleOrdinalizerMatrixData.OrdinalizerExpectationTheoryData;
@@ -1166,7 +1194,8 @@ static class LocaleCoverageData
             { "zh-CN", 21, "二十一" },
             { "zh-Hans", 21, "二十一" },
             { "zh-Hant", 21, "二十一" },
-            { "zu-ZA", 21, "amashumi amabili kanye" }
+            { "zu-ZA", 21, "amashumi amabili kanye" },
+                    { "hi", 21, "इक्कीस" },
         };
 
     static string[] FindShippedLocales()
