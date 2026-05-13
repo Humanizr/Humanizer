@@ -4,6 +4,57 @@ static class LocaleNumberTheoryData
 {
     public static TheoryData<string, int, string> CardinalCases => new()
     {
+        { "am", 0, "ዜሮ" },
+        { "am", 1, "አንድ" },
+        { "am", 2, "ሁለት" },
+        { "am", 3, "ሶስት" },
+        { "am", 4, "አራት" },
+        { "am", 5, "አምስት" },
+        { "am", 10, "አስር" },
+        { "am", 11, "አስራ አንድ" },
+        { "am", 12, "አስራ ሁለት" },
+        { "am", 19, "አስራ ዘጠኝ" },
+        { "am", 20, "ሃያ" },
+        { "am", 21, "ሃያ አንድ" },
+        { "am", 22, "ሃያ ሁለት" },
+        { "am", 30, "ሰላሳ" },
+        { "am", 40, "አርባ" },
+        { "am", 50, "ሃምሳ" },
+        { "am", 60, "ስልሳ" },
+        { "am", 70, "ሰባ" },
+        { "am", 80, "ሰማንያ" },
+        { "am", 90, "ዘጠና" },
+        { "am", 99, "ዘጠና ዘጠኝ" },
+        { "am", 100, "አንድ መቶ" },
+        { "am", 101, "አንድ መቶ አንድ" },
+        { "am", 110, "አንድ መቶ አስር" },
+        { "am", 111, "አንድ መቶ አስራ አንድ" },
+        { "am", 115, "አንድ መቶ አስራ አምስት" },
+        { "am", 121, "አንድ መቶ ሃያ አንድ" },
+        { "am", 122, "አንድ መቶ ሃያ ሁለት" },
+        { "am", 123, "አንድ መቶ ሃያ ሶስት" },
+        { "am", 200, "ሁለት መቶ" },
+        { "am", 999, "ዘጠኝ መቶ ዘጠና ዘጠኝ" },
+        { "am", 1000, "አንድ ሺህ" },
+        { "am", 1001, "አንድ ሺህ አንድ" },
+        { "am", 1111, "አንድ ሺህ አንድ መቶ አስራ አንድ" },
+        { "am", 1234, "አንድ ሺህ ሁለት መቶ ሰላሳ አራት" },
+        { "am", 3501, "ሶስት ሺህ አምስት መቶ አንድ" },
+        { "am", 12345, "አስራ ሁለት ሺህ ሶስት መቶ አርባ አምስት" },
+        { "am", 100000, "አንድ መቶ ሺህ" },
+        { "am", 111111, "አንድ መቶ አስራ አንድ ሺህ አንድ መቶ አስራ አንድ" },
+        { "am", 123456, "አንድ መቶ ሃያ ሶስት ሺህ አራት መቶ ሃምሳ ስድስት" },
+        { "am", 1000000, "አንድ ሚሊዮን" },
+        { "am", 1000001, "አንድ ሚሊዮን አንድ" },
+        { "am", 1111111, "አንድ ሚሊዮን አንድ መቶ አስራ አንድ ሺህ አንድ መቶ አስራ አንድ" },
+        { "am", 1234567, "አንድ ሚሊዮን ሁለት መቶ ሰላሳ አራት ሺህ አምስት መቶ ስልሳ ሰባት" },
+        { "am", 10000000, "አስር ሚሊዮን" },
+        { "am", 11111111, "አስራ አንድ ሚሊዮን አንድ መቶ አስራ አንድ ሺህ አንድ መቶ አስራ አንድ" },
+        { "am", 12345678, "አስራ ሁለት ሚሊዮን ሶስት መቶ አርባ አምስት ሺህ ስድስት መቶ ሰባ ስምንት" },
+        { "am", 100000000, "አንድ መቶ ሚሊዮን" },
+        { "am", 111111111, "አንድ መቶ አስራ አንድ ሚሊዮን አንድ መቶ አስራ አንድ ሺህ አንድ መቶ አስራ አንድ" },
+        { "am", 123456789, "አንድ መቶ ሃያ ሶስት ሚሊዮን አራት መቶ ሃምሳ ስድስት ሺህ ሰባት መቶ ሰማንያ ዘጠኝ" },
+        { "am", 1000000000, "አንድ ቢሊዮን" },
         { "af", 0, "nul" },
         { "af", 1, "een" },
         { "af", 2, "twee" },
@@ -2676,6 +2727,12 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
+        { "am", 101, true, "አንድ መቶ አንድ" },
+        { "am", 101, false, "አንድ መቶ አንድ" },
+        { "am", 105, true, "አንድ መቶ አምስት" },
+        { "am", 105, false, "አንድ መቶ አምስት" },
+        { "am", 1001, true, "አንድ ሺህ አንድ" },
+        { "am", 1001, false, "አንድ ሺህ አንድ" },
         { "af", 101, true, "een honderd en een" },
         { "af", 101, false, "een honderd en een" },
         { "af", 105, true, "een honderd en vyf" },
@@ -3441,6 +3498,7 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
+        { "am", 21, WordForm.Normal, "ሃያ አንድ" },
         { "af", 1, WordForm.Abbreviation, "een" },
         { "af", 21, WordForm.Abbreviation, "een en twintig" },
         { "af", 31, WordForm.Abbreviation, "een en dertig" },
@@ -3831,6 +3889,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
+        { "am", 21, GrammaticalGender.Masculine, "ሃያ አንድ" },
+        { "am", 21, GrammaticalGender.Feminine, "ሃያ አንድ" },
+        { "am", 21, GrammaticalGender.Neuter, "ሃያ አንድ" },
         { "af", 1, GrammaticalGender.Feminine, "een" },
         { "af", 1, GrammaticalGender.Masculine, "een" },
         { "af", 1, GrammaticalGender.Neuter, "een" },
@@ -4239,6 +4300,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
+        { "am", 21, WordForm.Normal, GrammaticalGender.Masculine, "ሃያ አንድ" },
+        { "am", 21, WordForm.Normal, GrammaticalGender.Feminine, "ሃያ አንድ" },
+        { "am", 21, WordForm.Normal, GrammaticalGender.Neuter, "ሃያ አንድ" },
         { "af", 21, WordForm.Abbreviation, GrammaticalGender.Feminine, "een en twintig" },
         { "af", 21, WordForm.Abbreviation, GrammaticalGender.Masculine, "een en twintig" },
         { "af", 21, WordForm.Abbreviation, GrammaticalGender.Neuter, "een en twintig" },
@@ -4442,6 +4506,19 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
+        { "am", 0, "ዜሮኛ" },
+        { "am", 1, "አንደኛ" },
+        { "am", 2, "ሁለተኛ" },
+        { "am", 3, "ሶስተኛ" },
+        { "am", 4, "አራተኛ" },
+        { "am", 5, "አምስተኛ" },
+        { "am", 10, "አስረኛ" },
+        { "am", 11, "አስራ አንደኛ" },
+        { "am", 20, "ሃያኛ" },
+        { "am", 21, "ሃያ አንደኛ" },
+        { "am", 100, "አንድ መቶኛ" },
+        { "am", 101, "አንድ መቶ አንደኛ" },
+        { "am", 1000, "አንድ ሺኛ" },
         { "af", 0, "nulste" },
         { "af", 1, "eerste" },
         { "af", 2, "tweede" },
@@ -5775,6 +5852,7 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+        { "am", 21, WordForm.Normal, "ሃያ አንደኛ" },
         { "af", 1, WordForm.Abbreviation, "eerste" },
         { "af", 2, WordForm.Abbreviation, "tweede" },
         { "af", 3, WordForm.Abbreviation, "derde" },
@@ -6115,6 +6193,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+        { "am", 21, GrammaticalGender.Masculine, "ሃያ አንደኛ" },
+        { "am", 21, GrammaticalGender.Feminine, "ሃያ አንደኛ" },
+        { "am", 21, GrammaticalGender.Neuter, "ሃያ አንደኛ" },
         { "af", 1, GrammaticalGender.Feminine, "eerste" },
         { "af", 1, GrammaticalGender.Masculine, "eerste" },
         { "af", 1, GrammaticalGender.Neuter, "eerste" },
@@ -6942,6 +7023,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+        { "am", 21, GrammaticalGender.Masculine, WordForm.Normal, "ሃያ አንደኛ" },
+        { "am", 21, GrammaticalGender.Feminine, WordForm.Normal, "ሃያ አንደኛ" },
+        { "am", 21, GrammaticalGender.Neuter, WordForm.Normal, "ሃያ አንደኛ" },
         { "af", 3, GrammaticalGender.Feminine, WordForm.Abbreviation, "derde" },
         { "af", 3, GrammaticalGender.Masculine, WordForm.Abbreviation, "derde" },
         { "af", 3, GrammaticalGender.Neuter, WordForm.Abbreviation, "derde" },
@@ -7144,6 +7228,10 @@ static class LocaleNumberTheoryData
 };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "am", 1, "ነጠላ" },
+        { "am", 2, "ጥንድ" },
+        { "am", 3, "ሶስትዮሽ" },
+        { "am", 4, "4-ቱፕል" },
         { "af", 2, "twee" },
         { "ar", 2, "اثنان" },
         { "az", 2, "iki" },
@@ -7216,6 +7304,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "am", "ሃያ አንድ", 21 },
+        { "am", "አንድ መቶ አምስት", 105 },
+        { "am", "አንድ ሺህ አንድ", 1001 },
+        { "am", "ሃያ አንደኛ", 21 },
         { "af", "een en twintig", 21L },
         { "ar", "واحد و عشرون", 21L },
         { "az", "iyirmi bir", 21L },

@@ -4,6 +4,21 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+        { "am", 1, TimeUnit.Second, Tense.Past, "ከ1 ሰከንድ በፊት" },
+        { "am", 2, TimeUnit.Second, Tense.Future, "ከ 2 ሰከንዶች በኋላ" },
+        { "am", 1, TimeUnit.Minute, Tense.Past, "ከ1 ደቂቃ በፊት" },
+        { "am", 2, TimeUnit.Minute, Tense.Future, "ከ 2 ደቂቃዎች በኋላ" },
+        { "am", 1, TimeUnit.Hour, Tense.Past, "ከ1 ሰዓት በፊት" },
+        { "am", 2, TimeUnit.Hour, Tense.Future, "ከ 2 ሰዓታት በኋላ" },
+        { "am", 1, TimeUnit.Day, Tense.Past, "ትናንት" },
+        { "am", 1, TimeUnit.Day, Tense.Future, "ነገ" },
+        { "am", 2, TimeUnit.Day, Tense.Past, "ከ 2 ቀናት በፊት" },
+        { "am", 2, TimeUnit.Day, Tense.Future, "ከ 2 ቀናት በኋላ" },
+        { "am", 1, TimeUnit.Month, Tense.Past, "ከ1 ወር በፊት" },
+        { "am", 2, TimeUnit.Month, Tense.Future, "ከ 2 ወራት በኋላ" },
+        { "am", 1, TimeUnit.Year, Tense.Past, "ከ1 ዓመት በፊት" },
+        { "am", 2, TimeUnit.Year, Tense.Future, "ከ 2 ዓመታት በኋላ" },
+        { "am", 0, TimeUnit.Second, Tense.Future, "አሁን" },
         { "af", 1, TimeUnit.Second, Tense.Past, "1 sekonde terug" },
         { "af", 2, TimeUnit.Second, Tense.Future, "oor 2 sekondes" },
         { "af", 1, TimeUnit.Minute, Tense.Past, "1 minuut terug" },
@@ -1441,6 +1456,7 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "am", "በጭራሽ" },
         { "af", "nooit" },
         { "ar", "أبدًا" },
         { "az", "heç vaxt" },
@@ -1548,6 +1564,16 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+        { "am", 1, TimeUnit.Second, false, "1 ሰከንድ" },
+        { "am", 2, TimeUnit.Second, false, "2 ሰከንዶች" },
+        { "am", 1, TimeUnit.Minute, false, "1 ደቂቃ" },
+        { "am", 2, TimeUnit.Minute, false, "2 ደቂቃዎች" },
+        { "am", 1, TimeUnit.Hour, false, "1 ሰዓት" },
+        { "am", 2, TimeUnit.Hour, false, "2 ሰዓታት" },
+        { "am", 1, TimeUnit.Day, false, "1 ቀን" },
+        { "am", 2, TimeUnit.Day, false, "2 ቀናት" },
+        { "am", 0, TimeUnit.Millisecond, false, "0 ሚሊሰከንዶች" },
+        { "am", 0, TimeUnit.Millisecond, true, "ጊዜ የለም" },
         { "af", 1, TimeUnit.Second, false, "1 sekonde" },
         { "af", 2, TimeUnit.Second, false, "2 sekondes" },
         { "af", 1, TimeUnit.Minute, false, "1 minuut" },
