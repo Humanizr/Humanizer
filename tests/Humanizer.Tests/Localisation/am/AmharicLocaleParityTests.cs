@@ -19,7 +19,7 @@ public class AmharicLocaleParityTests
     [InlineData(1, TimeUnit.Day, Tense.Future, "ነገ")]
     [InlineData(2, TimeUnit.Day, Tense.Past, "ከ 2 ቀናት በፊት")]
     [InlineData(2, TimeUnit.Day, Tense.Future, "ከ 2 ቀናት በኋላ")]
-    [InlineData(1, TimeUnit.Hour, Tense.Past, "ከ1 ሰዓት በፊት")]
+    [InlineData(1, TimeUnit.Hour, Tense.Past, "ከ 1 ሰዓት በፊት")]
     [InlineData(2, TimeUnit.Hour, Tense.Future, "ከ 2 ሰዓታት በኋላ")]
     [InlineData(0, TimeUnit.Second, Tense.Future, "አሁን")]
     public void DateHumanize_UsesAmharicPhrases(int count, TimeUnit unit, Tense tense, string expected)
@@ -32,7 +32,7 @@ public class AmharicLocaleParityTests
     public void NullableDateHumanize_NullDateUsesAmharicNeverPhrase()
     {
         DateTime? date = null;
-        Assert.Equal("በጭራሽ", date.Humanize(culture: Am));
+        Assert.Equal("ፈጽሞ", date.Humanize(culture: Am));
     }
 
     [Theory]
@@ -100,6 +100,8 @@ public class AmharicLocaleParityTests
     [InlineData("አንድ መቶ አምስት", 105)]
     [InlineData("አንድ ሺህ አንድ", 1001)]
     [InlineData("ሃያ አንደኛ", 21)]
+    [InlineData("1ኛ", 1)]
+    [InlineData("23ኛ", 23)]
     [InlineData("አንድ መቶኛ", 100)]
     [InlineData("ሁለት መቶኛ", 200)]
     [InlineData("አንድ ኳድሪሊዮንኛ", 1_000_000_000_000_000)]
@@ -137,10 +139,11 @@ public class AmharicLocaleParityTests
     }
 
     [Theory]
-    [InlineData(1, 5, "ከሌሊቱ አንድ ሰዓት አምስት ደቂቃ")]
-    [InlineData(13, 0, "ከሰዓት በኋላ አንድ ሰዓት")]
-    [InlineData(13, 23, "ከሰዓት በኋላ አንድ ሰዓት ሃያ ሶስት ደቂቃ")]
-    [InlineData(18, 0, "ማታ ስድስት ሰዓት")]
+    [InlineData(1, 5, "ከሌሊቱ ሰባት ሰዓት አምስት ደቂቃ")]
+    [InlineData(7, 0, "ከጠዋቱ አንድ ሰዓት")]
+    [InlineData(13, 0, "ከቀኑ ሰባት ሰዓት")]
+    [InlineData(13, 23, "ከቀኑ ሰባት ሰዓት ሃያ ሶስት ደቂቃ")]
+    [InlineData(18, 0, "ከምሽቱ አስራ ሁለት ሰዓት")]
     public void ToClockNotation_ExactOutput(int hours, int minutes, string expected)
     {
         Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation());
@@ -149,7 +152,7 @@ public class AmharicLocaleParityTests
     [Fact]
     public void ToClockNotation_Rounded_ExactOutput()
     {
-        Assert.Equal("ከሰዓት በኋላ አንድ ሰዓት ሃያ አምስት ደቂቃ", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+        Assert.Equal("ከቀኑ ሰባት ሰዓት ሃያ አምስት ደቂቃ", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
     }
 #endif
 

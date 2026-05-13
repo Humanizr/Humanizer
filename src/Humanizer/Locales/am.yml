@@ -13,31 +13,31 @@ surfaces:
   phrases:
     relativeDate:
       now: 'አሁን'
-      never: 'በጭራሽ'
+      never: 'ፈጽሞ'
       past:
         millisecond:
-          single: 'ከ1 ሚሊሰከንድ በፊት'
+          single: 'ከ 1 ሚሊሰከንድ በፊት'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በፊት'
             forms:
               default: 'ሚሊሰከንዶች'
         second:
-          single: 'ከ1 ሰከንድ በፊት'
+          single: 'ከ 1 ሰከንድ በፊት'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በፊት'
             forms:
               default: 'ሰከንዶች'
         minute:
-          single: 'ከ1 ደቂቃ በፊት'
+          single: 'ከ 1 ደቂቃ በፊት'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በፊት'
             forms:
               default: 'ደቂቃዎች'
         hour:
-          single: 'ከ1 ሰዓት በፊት'
+          single: 'ከ 1 ሰዓት በፊት'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በፊት'
@@ -51,21 +51,21 @@ surfaces:
             forms:
               default: 'ቀናት'
         week:
-          single: 'ከ1 ሳምንት በፊት'
+          single: 'ከ 1 ሳምንት በፊት'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በፊት'
             forms:
               default: 'ሳምንታት'
         month:
-          single: 'ከ1 ወር በፊት'
+          single: 'ከ 1 ወር በፊት'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በፊት'
             forms:
               default: 'ወራት'
         year:
-          single: 'ከ1 ዓመት በፊት'
+          single: 'ከ 1 ዓመት በፊት'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በፊት'
@@ -73,28 +73,28 @@ surfaces:
               default: 'ዓመታት'
       future:
         millisecond:
-          single: 'ከ1 ሚሊሰከንድ በኋላ'
+          single: 'ከ 1 ሚሊሰከንድ በኋላ'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በኋላ'
             forms:
               default: 'ሚሊሰከንዶች'
         second:
-          single: 'ከ1 ሰከንድ በኋላ'
+          single: 'ከ 1 ሰከንድ በኋላ'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በኋላ'
             forms:
               default: 'ሰከንዶች'
         minute:
-          single: 'ከ1 ደቂቃ በኋላ'
+          single: 'ከ 1 ደቂቃ በኋላ'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በኋላ'
             forms:
               default: 'ደቂቃዎች'
         hour:
-          single: 'ከ1 ሰዓት በኋላ'
+          single: 'ከ 1 ሰዓት በኋላ'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በኋላ'
@@ -108,21 +108,21 @@ surfaces:
             forms:
               default: 'ቀናት'
         week:
-          single: 'ከ1 ሳምንት በኋላ'
+          single: 'ከ 1 ሳምንት በኋላ'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በኋላ'
             forms:
               default: 'ሳምንታት'
         month:
-          single: 'ከ1 ወር በኋላ'
+          single: 'ከ 1 ወር በኋላ'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በኋላ'
             forms:
               default: 'ወራት'
         year:
-          single: 'ከ1 ዓመት በኋላ'
+          single: 'ከ 1 ዓመት በኋላ'
           multiple:
             beforeCount: 'ከ'
             afterCount: 'በኋላ'
@@ -416,6 +416,8 @@ surfaces:
         'ኩዊንቲሊዮንኛ': 1000000000000000000
       negativePrefixes:
         - 'አሉታዊ'
+      ordinalAbbreviationSuffixes:
+        - 'ኛ'
       allowTerminalOrdinalToken: true
       useHundredMultiplier: true
       allowInvariantIntegerInput: true
@@ -435,19 +437,32 @@ surfaces:
 
   clock:
     engine: 'phrase-clock'
+    # Ethiopian/Amharic time counts hours from the 6:00/18:00 boundary.
     hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'ሰባት'
+      - 'ስምንት'
+      - 'ዘጠኝ'
+      - 'አስር'
+      - 'አስራ አንድ'
+      - 'አስራ ሁለት'
+      - 'አንድ'
+      - 'ሁለት'
+      - 'ሶስት'
+      - 'አራት'
+      - 'አምስት'
+      - 'ስድስት'
     dayPeriodPosition: 'prefix'
-    hourSuffixSingular: 'ሰዓት'
-    hourSuffixPlural: 'ሰዓት'
     minuteSuffixSingular: 'ደቂቃ'
     minuteSuffixPlural: 'ደቂቃ'
-    min0: '{hour}'
-    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+    min0: '{hour} ሰዓት'
+    defaultTemplate: '{hour} ሰዓት {minutes} {minuteSuffix}'
     earlyMorning: 'ከሌሊቱ'
-    morning: 'ጠዋት'
-    afternoon: 'ከሰዓት በኋላ'
-    evening: 'ማታ'
-    night: 'ማታ'
+    morning: 'ከጠዋቱ'
+    afternoon: 'ከቀኑ'
+    evening: 'ከምሽቱ'
+    night: 'ከሌሊቱ'
     eveningStartHour: 18
     nightStartHour: 21
 

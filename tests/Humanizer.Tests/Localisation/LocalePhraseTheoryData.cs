@@ -4,19 +4,19 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
-        { "am", 1, TimeUnit.Second, Tense.Past, "ከ1 ሰከንድ በፊት" },
+        { "am", 1, TimeUnit.Second, Tense.Past, "ከ 1 ሰከንድ በፊት" },
         { "am", 2, TimeUnit.Second, Tense.Future, "ከ 2 ሰከንዶች በኋላ" },
-        { "am", 1, TimeUnit.Minute, Tense.Past, "ከ1 ደቂቃ በፊት" },
+        { "am", 1, TimeUnit.Minute, Tense.Past, "ከ 1 ደቂቃ በፊት" },
         { "am", 2, TimeUnit.Minute, Tense.Future, "ከ 2 ደቂቃዎች በኋላ" },
-        { "am", 1, TimeUnit.Hour, Tense.Past, "ከ1 ሰዓት በፊት" },
+        { "am", 1, TimeUnit.Hour, Tense.Past, "ከ 1 ሰዓት በፊት" },
         { "am", 2, TimeUnit.Hour, Tense.Future, "ከ 2 ሰዓታት በኋላ" },
         { "am", 1, TimeUnit.Day, Tense.Past, "ትናንት" },
         { "am", 1, TimeUnit.Day, Tense.Future, "ነገ" },
         { "am", 2, TimeUnit.Day, Tense.Past, "ከ 2 ቀናት በፊት" },
         { "am", 2, TimeUnit.Day, Tense.Future, "ከ 2 ቀናት በኋላ" },
-        { "am", 1, TimeUnit.Month, Tense.Past, "ከ1 ወር በፊት" },
+        { "am", 1, TimeUnit.Month, Tense.Past, "ከ 1 ወር በፊት" },
         { "am", 2, TimeUnit.Month, Tense.Future, "ከ 2 ወራት በኋላ" },
-        { "am", 1, TimeUnit.Year, Tense.Past, "ከ1 ዓመት በፊት" },
+        { "am", 1, TimeUnit.Year, Tense.Past, "ከ 1 ዓመት በፊት" },
         { "am", 2, TimeUnit.Year, Tense.Future, "ከ 2 ዓመታት በኋላ" },
         { "am", 0, TimeUnit.Second, Tense.Future, "አሁን" },
         { "sw", 1, TimeUnit.Day, Tense.Past, "jana" },
@@ -1491,7 +1491,7 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
-        { "am", "በጭራሽ" },
+        { "am", "ፈጽሞ" },
         { "sw", "kamwe" },
         { "af", "nooit" },
         { "ar", "أبدًا" },
