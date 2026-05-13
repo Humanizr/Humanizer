@@ -293,7 +293,7 @@ Each acceptance criterion from the fn-5 epic spec, with the satisfying task and 
 | 22 | `.agents/skills/add-locale/SKILL.md` required-proof-subrows updated | fn-5.4 | PASS |
 | 23 | `.agents/skills/add-locale/references/parity-checklist.md` updated with corrected paths | fn-5.4 | PASS |
 | 24 | `tools/verification-signoff.md:64` ku decimal-separator shows U+066B | fn-5.1 | PASS |
-| 25 | fn-2 proxy-close executed with artifact mapping | fn-5.5 | PASS -- archived mapping recorded; fn-2 closed by proxy |
+| 25 | fn-2 proxy-close executed with artifact mapping | fn-5.5 | PASS -- mapping in `.flow/specs/fn-2-fix-stale-locale-documentation-after.md`; fn-2 closed via flowctl |
 | 26 | Scan battery 2a-2i all pass | fn-5.5, fn-5.8 | PASS -- all scans pass including net8.0 (verified locally in fn-5.8) |
 | 27 | Deleted-converter residual scan scope-based | fn-5.5 scan 2a | PASS -- matches at HumanizerSourceGeneratorTests.cs:68-70 (allowlisted DoesNotContain assertions) + release_notes.md:58 (allowlisted: vNext changelog entry documenting converter removal, added by fn-5.3; scan 2a spec updated to include release_notes.md vNext as an allowlisted scope) |
 | 28 | `dotnet format --verify-no-changes` | fn-5.5 scan 2i | PASS -- 0 of 1596 files formatted |
