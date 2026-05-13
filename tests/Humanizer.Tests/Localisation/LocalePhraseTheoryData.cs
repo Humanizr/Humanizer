@@ -4,12 +4,26 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+        { "am", 1, TimeUnit.Second, Tense.Past, "ከ 1 ሰከንድ በፊት" },
+        { "am", 2, TimeUnit.Second, Tense.Future, "ከ 2 ሰከንዶች በኋላ" },
+        { "am", 1, TimeUnit.Minute, Tense.Past, "ከ 1 ደቂቃ በፊት" },
+        { "am", 2, TimeUnit.Minute, Tense.Future, "ከ 2 ደቂቃዎች በኋላ" },
+        { "am", 1, TimeUnit.Hour, Tense.Past, "ከ 1 ሰዓት በፊት" },
+        { "am", 2, TimeUnit.Hour, Tense.Future, "ከ 2 ሰዓታት በኋላ" },
+        { "am", 1, TimeUnit.Day, Tense.Past, "ትናንት" },
+        { "am", 1, TimeUnit.Day, Tense.Future, "ነገ" },
+        { "am", 2, TimeUnit.Day, Tense.Past, "ከ 2 ቀናት በፊት" },
+        { "am", 2, TimeUnit.Day, Tense.Future, "ከ 2 ቀናት በኋላ" },
+        { "am", 1, TimeUnit.Month, Tense.Past, "ከ 1 ወር በፊት" },
+        { "am", 2, TimeUnit.Month, Tense.Future, "ከ 2 ወራት በኋላ" },
+        { "am", 1, TimeUnit.Year, Tense.Past, "ከ 1 ዓመት በፊት" },
+        { "am", 2, TimeUnit.Year, Tense.Future, "ከ 2 ዓመታት በኋላ" },
+        { "am", 0, TimeUnit.Second, Tense.Future, "አሁን" },
         { "te", 1, TimeUnit.Day, Tense.Past, "నిన్న" },
         { "te", 1, TimeUnit.Day, Tense.Future, "రేపు" },
         { "te", 2, TimeUnit.Day, Tense.Past, "2 రోజులు క్రితం" },
         { "te", 2, TimeUnit.Day, Tense.Future, "2 రోజులు తర్వాత" },
         { "te", 0, TimeUnit.Second, Tense.Future, "ఇప్పుడే" },
-
         { "sw", 1, TimeUnit.Day, Tense.Past, "jana" },
         { "sw", 1, TimeUnit.Day, Tense.Future, "kesho" },
         { "sw", 2, TimeUnit.Day, Tense.Past, "2 siku zilizopita" },
@@ -1482,8 +1496,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "am", "ፈጽሞ" },
         { "te", "ఎప్పుడూ లేదు" },
-
         { "sw", "kamwe" },
         { "af", "nooit" },
         { "ar", "أبدًا" },
@@ -1594,11 +1608,20 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+        { "am", 1, TimeUnit.Second, false, "1 ሰከንድ" },
+        { "am", 2, TimeUnit.Second, false, "2 ሰከንዶች" },
+        { "am", 1, TimeUnit.Minute, false, "1 ደቂቃ" },
+        { "am", 2, TimeUnit.Minute, false, "2 ደቂቃዎች" },
+        { "am", 1, TimeUnit.Hour, false, "1 ሰዓት" },
+        { "am", 2, TimeUnit.Hour, false, "2 ሰዓታት" },
+        { "am", 1, TimeUnit.Day, false, "1 ቀን" },
+        { "am", 2, TimeUnit.Day, false, "2 ቀናት" },
+        { "am", 0, TimeUnit.Millisecond, false, "0 ሚሊሰከንዶች" },
+        { "am", 0, TimeUnit.Millisecond, true, "ጊዜ የለም" },
         { "te", 1, TimeUnit.Second, false, "1 సెకను" },
         { "te", 2, TimeUnit.Second, false, "2 సెకన్లు" },
         { "te", 1, TimeUnit.Minute, true, "ఒక నిమిషం" },
         { "te", 0, TimeUnit.Millisecond, true, "సమయం లేదు" },
-
         { "sw", 1, TimeUnit.Second, false, "sekunde 1" },
         { "sw", 2, TimeUnit.Second, false, "sekunde 2" },
         { "sw", 1, TimeUnit.Minute, true, "dakika moja" },
