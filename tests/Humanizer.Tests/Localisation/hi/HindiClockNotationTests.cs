@@ -12,6 +12,9 @@ public class HindiClockNotationTests
     [InlineData(12, 30, "दोपहर बारह बजकर तीस मिनट")]
     [InlineData(13, 0, "दोपहर एक बजे")]
     [InlineData(13, 23, "दोपहर एक बजकर तेईस मिनट")]
+    [InlineData(18, 0, "शाम छह बजे")]
+    [InlineData(20, 0, "शाम आठ बजे")]
+    [InlineData(21, 0, "रात नौ बजे")]
     [InlineData(23, 40, "रात ग्यारह बजकर चालीस मिनट")]
     public void ToClockNotation_ExactOutput(int hours, int minutes, string expected)
     {

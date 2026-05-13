@@ -533,6 +533,8 @@ static class LocaleCoverageData
         { "de", new(19, 55, "fünf vor acht") },
         { "de", new(20, 59, "acht Uhr neunundfünfzig") },
         { "el", new(13, 0, "μία το απόγευμα") },
+        { "hi", new(18, 0, "शाम छह बजे") },
+        { "hi", new(21, 0, "रात नौ बजे") },
         { "en", new(0, 0, "midnight") },
         { "en", new(4, 0, "four o'clock") },
         { "en", new(6, 5, "five past six") },

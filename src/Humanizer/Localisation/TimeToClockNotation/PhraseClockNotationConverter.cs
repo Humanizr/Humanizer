@@ -676,7 +676,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
     string ApplyDayPeriod(string basePhrase, int hour, bool usesNextHour)
     {
         if (profile.EarlyMorning.Length == 0 && profile.Morning.Length == 0 &&
-            profile.Afternoon.Length == 0 && profile.Night.Length == 0)
+            profile.Afternoon.Length == 0 && profile.Evening.Length == 0 && profile.Night.Length == 0)
         {
             return basePhrase;
         }
@@ -711,9 +711,21 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
             return profile.Morning;
         }
 
-        if (normalized is >= 12 and < 21)
+        if (profile.Evening.Length == 0)
+        {
+            return normalized is >= 12 and < 21
+                ? profile.Afternoon
+                : profile.Night;
+        }
+
+        if (normalized >= 12 && normalized < profile.EveningStartHour)
         {
             return profile.Afternoon;
+        }
+
+        if (normalized >= profile.EveningStartHour && normalized < profile.NightStartHour)
+        {
+            return profile.Evening;
         }
 
         return profile.Night;
@@ -990,6 +1002,9 @@ sealed class PhraseClockNotationProfile(
     string morning,
     string afternoon,
     string night,
+    string evening,
+    int eveningStartHour,
+    int nightStartHour,
     PhraseClockDayPeriodPosition dayPeriodPosition,
     string hourZeroWord,
     string hourOneWord,
@@ -1055,10 +1070,16 @@ sealed class PhraseClockNotationProfile(
     public string EarlyMorning { get; } = earlyMorning;
     /// <summary>Gets the day-period word for morning (6:00-11:59).</summary>
     public string Morning { get; } = morning;
-    /// <summary>Gets the day-period word for afternoon (12:00-20:59).</summary>
+    /// <summary>Gets the day-period word for afternoon.</summary>
     public string Afternoon { get; } = afternoon;
-    /// <summary>Gets the day-period word for night (21:00-0:59).</summary>
+    /// <summary>Gets the day-period word for night.</summary>
     public string Night { get; } = night;
+    /// <summary>Gets the optional day-period word for evening.</summary>
+    public string Evening { get; } = evening;
+    /// <summary>Gets the first hour that uses <see cref="Evening"/> when configured.</summary>
+    public int EveningStartHour { get; } = eveningStartHour;
+    /// <summary>Gets the first hour that uses <see cref="Night"/> after an evening period.</summary>
+    public int NightStartHour { get; } = nightStartHour;
     /// <summary>Gets the position of day-period words relative to the time phrase.</summary>
     public PhraseClockDayPeriodPosition DayPeriodPosition { get; } = dayPeriodPosition;
     /// <summary>Gets the fixed hour word for hour value 0 (e.g., French "minuit").</summary>

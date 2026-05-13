@@ -82,6 +82,10 @@ public class HindiOrdinalTests
     [InlineData("पाँचवाँ", 5)]
     [InlineData("पांचवां", 5)]
     [InlineData("इक्कीसवीं", 21)]
+    [InlineData("एक सौवाँ", 100)]
+    [InlineData("एक सौवीं", 100)]
+    [InlineData("एक सौ एकवाँ", 101)]
+    [InlineData("एक लाखवाँ", 100000)]
     public void WordsToNumber_ParsesHindiOrdinalWords(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Hi));

@@ -383,6 +383,10 @@ surfaces:
       ordinalNumberToWordsKind: 'self'
       ordinalGenderVariant: 'masculine-and-feminine'
       useHundredMultiplier: true
+      tokenSuffixesToStrip:
+        - 'वाँ'
+        - 'वां'
+        - 'वीं'
       cardinalMap:
         'शून्य': 0
         'एक': 1
@@ -597,6 +601,9 @@ surfaces:
     morning: 'सुबह'
     afternoon: 'दोपहर'
     night: 'रात'
+    evening: 'शाम'
+    eveningStartHour: 17
+    nightStartHour: 21
 
   compass:
     full:

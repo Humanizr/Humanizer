@@ -1463,7 +1463,10 @@ public class CoverageGapTests
             earlyMorning: "early",
             morning: "morning",
             afternoon: "afternoon",
-            night: "night");
+            night: "night",
+            evening: "evening",
+            eveningStartHour: 17,
+            nightStartHour: 21);
         var converter = new PhraseClockNotationConverter(profile);
 
         Assert.Equal("midnight", converter.Convert(new TimeOnly(0, 0), ClockNotationRounding.None));
@@ -1474,6 +1477,8 @@ public class CoverageGapTests
         Assert.Equal("2 after half 7 minutes-paucal morning", converter.Convert(new TimeOnly(7, 32), ClockNotationRounding.None));
         Assert.Equal("2 before les 8 minutes-paucal morning", converter.Convert(new TimeOnly(7, 58), ClockNotationRounding.None));
         Assert.Equal("23 past 13 minutes-paucal afternoon", converter.Convert(new TimeOnly(13, 23), ClockNotationRounding.None));
+        Assert.Equal("18:0 evening", converter.Convert(new TimeOnly(18, 0), ClockNotationRounding.None));
+        Assert.Equal("21:0 night", converter.Convert(new TimeOnly(21, 0), ClockNotationRounding.None));
         Assert.Equal("2:0 early", converter.Convert(new TimeOnly(1, 58), ClockNotationRounding.NearestFiveMinutes));
 
         var fallback = new PhraseClockNotationConverter(CreateClockProfile());
@@ -3170,6 +3175,9 @@ public class CoverageGapTests
         string morning = "",
         string afternoon = "",
         string night = "",
+        string evening = "",
+        int eveningStartHour = 21,
+        int nightStartHour = 21,
         PhraseClockDayPeriodPosition dayPeriodPosition = PhraseClockDayPeriodPosition.Suffix,
         string hourZeroWord = "",
         string hourOneWord = "",
@@ -3216,6 +3224,9 @@ public class CoverageGapTests
             morning,
             afternoon,
             night,
+            evening,
+            eveningStartHour,
+            nightStartHour,
             dayPeriodPosition,
             hourZeroWord,
             hourOneWord,
