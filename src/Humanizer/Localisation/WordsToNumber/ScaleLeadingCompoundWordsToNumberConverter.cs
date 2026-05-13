@@ -146,6 +146,18 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
 
     static bool TryMatchScale(string[] tokens, int start, int end, string scaleName, out int next)
     {
+        if (!scaleName.Contains(' ', StringComparison.Ordinal))
+        {
+            if (start < end && tokens[start] == scaleName)
+            {
+                next = start + 1;
+                return true;
+            }
+
+            next = start;
+            return false;
+        }
+
         var scaleTokens = scaleName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (start + scaleTokens.Length > end)
         {
@@ -209,7 +221,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
     bool TryParseUnit(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
         var lastCandidateEnd = Math.Min(end, start + profile.MaximumUnitTokenCount);
-        for (var candidateEnd = lastCandidateEnd; candidateEnd > start; candidateEnd--)
+        for (var candidateEnd = lastCandidateEnd; candidateEnd > start + 1; candidateEnd--)
         {
             var candidate = string.Join(" ", tokens, start, candidateEnd - start);
             if (profile.Units.TryGetValue(candidate, out var rawValue) &&
@@ -220,6 +232,16 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
                 next = candidateEnd;
                 return true;
             }
+        }
+
+        if (start < end &&
+            profile.Units.TryGetValue(tokens[start], out var singleTokenRawValue) &&
+            singleTokenRawValue >= 0 &&
+            (ulong)singleTokenRawValue <= maxValue)
+        {
+            value = (ulong)singleTokenRawValue;
+            next = start + 1;
+            return true;
         }
 
         value = default;
