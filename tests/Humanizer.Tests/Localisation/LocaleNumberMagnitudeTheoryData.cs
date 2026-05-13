@@ -4,6 +4,8 @@ public static class LocaleNumberMagnitudeTheoryData
 {
     public static TheoryData<string, long, string> MagnitudeCardinalCases => new()
     {
+        { "sw", 1001L, "elfu moja na moja" },
+        { "sw", 1000001L, "milioni moja na moja" },
         { "af", 1001L, "een duisend en een" },
         { "af", 1000001L, "een miljoen en een" },
         { "ar", 1001L, "ألف و واحد" },
@@ -146,6 +148,8 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
+        { "sw", 1001000001L, "bilioni moja milioni moja na moja" },
+        { "sw", 4325010007018L, "trilioni nne bilioni mia tatu na ishirini na tano milioni kumi elfu saba na kumi na nane" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
         { "ar", 1001000001L, "مليار و   مليون و واحد" },
@@ -367,6 +371,8 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, string> HighRangeRoundTripCases => new()
     {
+        { "sw", 1000000000000000000L, "kwintilioni moja" },
+        { "sw", 1000000000000000001L, "kwintilioni moja na moja" },
         { "ar", 1000000000000000000L, "كوينتليون" },
         { "ar", 1000000000000000001L, "كوينتليون و واحد" },
         { "az", 1000000000000000000L, "bir kvintilyon" },
@@ -437,6 +443,7 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long> HighRangeRoundTripOnlyCases => new()
     {
+        { "sw", 1234567890123456L },
         { "ja", 10000000000000000L },
         { "zh-CN", 1234567890123456L },
         { "zh-CN", 10000000000000000L },

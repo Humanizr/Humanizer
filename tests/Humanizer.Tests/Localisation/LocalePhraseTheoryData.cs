@@ -4,6 +4,11 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+        { "sw", 1, TimeUnit.Day, Tense.Past, "jana" },
+        { "sw", 1, TimeUnit.Day, Tense.Future, "kesho" },
+        { "sw", 2, TimeUnit.Day, Tense.Past, "2 siku zilizopita" },
+        { "sw", 2, TimeUnit.Day, Tense.Future, "baada ya siku 2" },
+        { "sw", 0, TimeUnit.Second, Tense.Future, "sasa" },
         { "af", 1, TimeUnit.Second, Tense.Past, "1 sekonde terug" },
         { "af", 2, TimeUnit.Second, Tense.Future, "oor 2 sekondes" },
         { "af", 1, TimeUnit.Minute, Tense.Past, "1 minuut terug" },
@@ -1441,6 +1446,7 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "sw", "kamwe" },
         { "af", "nooit" },
         { "ar", "أبدًا" },
         { "az", "heç vaxt" },
@@ -1548,6 +1554,10 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+        { "sw", 1, TimeUnit.Second, false, "sekunde 1" },
+        { "sw", 2, TimeUnit.Second, false, "sekunde 2" },
+        { "sw", 1, TimeUnit.Minute, true, "dakika moja" },
+        { "sw", 0, TimeUnit.Millisecond, true, "hakuna muda" },
         { "af", 1, TimeUnit.Second, false, "1 sekonde" },
         { "af", 2, TimeUnit.Second, false, "2 sekondes" },
         { "af", 1, TimeUnit.Minute, false, "1 minuut" },

@@ -13,6 +13,7 @@ static class LocaleCoverageData
     // Representative non-first-of-month date sample.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
+        { "sw", new(2022, 1, 25, "25 Januari 2022") },
         { "hi", new(2022, 1, 25, "25 जनवरी 2022") },
 
         { "af", new(2022, 1, 25, "25 Januarie 2022") },
@@ -85,6 +86,7 @@ static class LocaleCoverageData
     // First-of-month sample where many locales change the day form.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
+        { "sw", new(2015, 1, 1, "1 Januari 2015") },
         { "hi", new(2015, 1, 1, "1 जनवरी 2015") },
 
         { "af", new(2015, 1, 1, "1 Januarie 2015") },
@@ -157,6 +159,7 @@ static class LocaleCoverageData
     // Early-month sample used to catch plain numeric-day formatting.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
+        { "sw", new(2015, 2, 3, "3 Februari 2015") },
         { "hi", new(2015, 2, 3, "3 फ़रवरी 2015") },
 
         { "af", new(2015, 2, 3, "3 Februarie 2015") },
@@ -278,6 +281,7 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
+        { "sw", new(13, 23, "saa moja na dakika ishirini na tatu mchana") },
         { "hi", new(13, 23, "दोपहर एक बजकर तेईस मिनट") },
 
         { "af", new(13, 23, "een uur drie en twintig") },
@@ -350,6 +354,7 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
+        { "sw", new(13, 23, "saa moja na dakika ishirini na tano mchana") },
         { "hi", new(13, 23, "दोपहर एक बजकर पच्चीस मिनट") },
 
         { "af", new(13, 23, "een uur vyf en twintig") },
@@ -422,6 +427,7 @@ static class LocaleCoverageData
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
+        { "sw", new(1, 5, "saa moja na dakika tano asubuhi") },
         { "hi", new(1, 5, "सुबह एक बजकर पाँच मिनट") },
 
         { "af", new(1, 5, "een uur vyf") },
@@ -877,6 +883,7 @@ static class LocaleCoverageData
             { "zh-Hans", "昨天", "2 天" },
             { "zh-Hant", "昨天", "2 天" },
             { "zu-ZA", "izolo", "2 izinsuku" },
+            { "sw", "jana", "siku 2" },
                     { "hi", "कल", "2 दिन" },
         };
 
@@ -948,6 +955,7 @@ static class LocaleCoverageData
             { "zh-Hans", "1、2", "1、2、3" },
             { "zh-Hant", "1、2", "1、2、3" },
             { "zu-ZA", "1 na 2", "1, 2 na 3" },
+            { "sw", "1 na 2", "1, 2 na 3" },
                     { "hi", "1 और 2", "1, 2 और 3" },
         };
 
@@ -1019,6 +1027,7 @@ static class LocaleCoverageData
             { "zh-Hans", 1, "第 一" },
             { "zh-Hant", 1, "第 一" },
             { "zu-ZA", 1, "okokuqala" },
+            { "sw", 1, "kwanza" },
                     { "hi", 1, "पहली" },
         };
 
@@ -1090,6 +1099,7 @@ static class LocaleCoverageData
             { "zh-Hans", 1, "一" },
             { "zh-Hant", 1, "一" },
             { "zu-ZA", 1, "kanye" },
+            { "sw", 1, "moja" },
                     { "hi", 1, "एक" },
         };
 
@@ -1197,6 +1207,7 @@ static class LocaleCoverageData
             { "zh-Hans", 21, "二十一" },
             { "zh-Hant", 21, "二十一" },
             { "zu-ZA", 21, "amashumi amabili kanye" },
+            { "sw", 21, "ishirini na moja" },
                     { "hi", 21, "इक्कीस" },
         };
 
