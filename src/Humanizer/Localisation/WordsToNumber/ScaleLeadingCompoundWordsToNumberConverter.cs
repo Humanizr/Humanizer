@@ -61,7 +61,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         }
 
         var maxValue = negative ? (ulong)long.MaxValue + 1UL : long.MaxValue;
-        if (TryParseValue(tokens, 0, tokens.Length, maxValue, out var value, out var next) &&
+        if (TryParseValue(tokens, 0, tokens.Length, maxValue, allowTerminalRemainderConjunction: true, out var value, out var next) &&
             next == tokens.Length)
         {
             if (TryCoerceParsedValue(value, negative, out parsedValue))
@@ -86,7 +86,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return false;
     }
 
-    bool TryParseValue(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
+    bool TryParseValue(string[] tokens, int start, int end, ulong maxValue, bool allowTerminalRemainderConjunction, out ulong value, out int next)
     {
         value = 0;
         next = start;
@@ -102,7 +102,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             }
 
             var maxCount = Math.Min(GetMaximumCountForScale(scaleIndex), maxValue / scaleValue);
-            if (maxCount <= 0 || !TryParseCount(tokens, afterScale, end, maxCount, out var count, out var afterCount) || count <= 0)
+            if (maxCount <= 0 || !TryParseCount(tokens, afterScale, end, maxCount, allowTerminalRemainderConjunction: false, out var count, out var afterCount) || count <= 0)
             {
                 return false;
             }
@@ -121,7 +121,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         if (next < end)
         {
             var remainderStart = next;
-            if (consumed && TryMatchTokenPhrase(tokens, remainderStart, end, profile.TerminalRemainderConjunctionWord, out var afterTerminalConjunction))
+            if (allowTerminalRemainderConjunction && consumed && TryMatchTokenPhrase(tokens, remainderStart, end, profile.TerminalRemainderConjunctionWord, out var afterTerminalConjunction))
             {
                 remainderStart = afterTerminalConjunction;
             }
@@ -185,7 +185,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return true;
     }
 
-    bool TryParseCount(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
+    bool TryParseCount(string[] tokens, int start, int end, ulong maxValue, bool allowTerminalRemainderConjunction, out ulong value, out int next)
     {
         if (maxValue <= 9)
         {
@@ -197,7 +197,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             return TryParseUnderOneHundred(tokens, start, end, maxValue, out value, out next);
         }
 
-        return TryParseValue(tokens, start, end, maxValue, out value, out next);
+        return TryParseValue(tokens, start, end, maxValue, allowTerminalRemainderConjunction, out value, out next);
     }
 
     bool TryParseUnderOneHundred(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)

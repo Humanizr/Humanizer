@@ -30,6 +30,10 @@ public class HausaNumberToWordsTests
     [InlineData(1234, "dubu ɗaya ɗari biyu da talatin da huɗu")]
     [InlineData(1000000, "miliyan ɗaya")]
     [InlineData(2000000, "miliyan biyu")]
+    [InlineData(100000001, "miliyan ɗari ɗaya da kuma ɗaya")]
+    [InlineData(101000000, "miliyan ɗari ɗaya da ɗaya")]
+    [InlineData(120000001, "miliyan ɗari ɗaya da ashirin da kuma ɗaya")]
+    [InlineData(121000000, "miliyan ɗari ɗaya da ashirin da ɗaya")]
     public void NumberToWords_ProducesExpectedHausaOutput(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Ha));
@@ -83,6 +87,10 @@ public class HausaNumberToWordsTests
     [InlineData(121000, "dubu ɗari ɗaya dubu ashirin da ɗaya")]
     [InlineData(123000, "dubu ɗari ɗaya dubu ashirin da uku")]
     [InlineData(2000000, "miliyan biyu")]
+    [InlineData(100000001, "miliyan ɗari ɗaya da kuma ɗaya")]
+    [InlineData(101000000, "miliyan ɗari ɗaya da ɗaya")]
+    [InlineData(120000001, "miliyan ɗari ɗaya da ashirin da kuma ɗaya")]
+    [InlineData(121000000, "miliyan ɗari ɗaya da ashirin da ɗaya")]
     public void WordsToNumber_RoundTripsSupportedHausaCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Ha));
