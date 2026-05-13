@@ -1,9 +1,12 @@
 namespace Humanizer;
 
 /// <summary>
-/// Renders decimal numbering systems where scale nouns lead their counts, for example
-/// "hundred two" or "thousand one", while sub-hundred compounds keep a tens-plus-unit
-/// conjunction.
+/// Renders decimal numbering systems where scale nouns lead their count words, for example
+/// "hundred one and two" or "thousand two", while sub-hundred compounds keep a
+/// tens-plus-unit conjunction.
+///
+/// The conjunction supplied by the profile is inserted between tens and units and before
+/// terminal sub-hundred remainders only. Higher-scale remainders are space-joined.
 /// </summary>
 class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
 {
@@ -31,12 +34,25 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
     /// <inheritdoc />
     public override string ConvertToOrdinal(int number)
     {
-        if (profile.OrdinalMap.TryGetValue(number, out var ordinal))
+        if (number < 0)
+        {
+            var magnitude = number == int.MinValue
+                ? (ulong)int.MaxValue + 1UL
+                : (ulong)-number;
+            return profile.MinusWord + " " + ConvertPositiveToOrdinal(magnitude);
+        }
+
+        return ConvertPositiveToOrdinal((ulong)number);
+    }
+
+    string ConvertPositiveToOrdinal(ulong number)
+    {
+        if (number <= int.MaxValue && profile.OrdinalMap.TryGetValue((int)number, out var ordinal))
         {
             return ordinal;
         }
 
-        return profile.OrdinalPrefix + Convert(number) + profile.OrdinalSuffix;
+        return profile.OrdinalPrefix + ConvertPositive(number) + profile.OrdinalSuffix;
     }
 
     string ConvertPositive(ulong number)
@@ -108,20 +124,62 @@ sealed class ScaleLeadingCompoundNumberToWordsProfile(
     public string ZeroWord { get; } = zeroWord;
     /// <summary>Gets the word used to prefix negative numbers.</summary>
     public string MinusWord { get; } = minusWord;
-    /// <summary>Gets the conjunction inserted before sub-hundred remainders and between tens and units.</summary>
+    /// <summary>
+    /// Gets the conjunction inserted between tens and units and before terminal sub-hundred
+    /// remainders. The scale-leading engine does not insert this conjunction before
+    /// remainders of one hundred or greater.
+    /// </summary>
     public string ConjunctionWord { get; } = conjunctionWord;
     /// <summary>Gets the ordinal prefix used when no exact ordinal exists.</summary>
     public string OrdinalPrefix { get; } = ordinalPrefix;
     /// <summary>Gets the ordinal suffix used when no exact ordinal exists.</summary>
     public string OrdinalSuffix { get; } = ordinalSuffix;
     /// <summary>Gets cardinal words for zero through nineteen.</summary>
-    public string[] UnitsMap { get; } = unitsMap;
+    public string[] UnitsMap { get; } = ValidateUnitsMap(unitsMap);
     /// <summary>Gets decade words keyed by their tens digit.</summary>
-    public string[] TensMap { get; } = tensMap;
+    public string[] TensMap { get; } = ValidateTensMap(tensMap);
     /// <summary>Gets descending scale rows.</summary>
-    public ScaleLeadingCompoundScale[] Scales { get; } = scales;
+    public ScaleLeadingCompoundScale[] Scales { get; } = ValidateScales(scales);
     /// <summary>Gets exact ordinal words keyed by numeric value.</summary>
     public FrozenDictionary<int, string> OrdinalMap { get; } = ordinalMap ?? FrozenDictionary<int, string>.Empty;
+
+    static string[] ValidateUnitsMap(string[] value)
+    {
+        if (value.Length < 20)
+        {
+            throw new InvalidOperationException("Scale-leading compound number profiles require unit words for 0 through 19.");
+        }
+
+        return value;
+    }
+
+    static string[] ValidateTensMap(string[] value)
+    {
+        if (value.Length < 10)
+        {
+            throw new InvalidOperationException("Scale-leading compound number profiles require decade words keyed through index 9.");
+        }
+
+        return value;
+    }
+
+    static ScaleLeadingCompoundScale[] ValidateScales(ScaleLeadingCompoundScale[] value)
+    {
+        for (var i = 0; i < value.Length; i++)
+        {
+            if (value[i].Value <= 0)
+            {
+                throw new InvalidOperationException("Scale-leading compound number profiles require positive scale values.");
+            }
+
+            if (i > 0 && value[i - 1].Value <= value[i].Value)
+            {
+                throw new InvalidOperationException("Scale-leading compound number profiles require scales in descending order.");
+            }
+        }
+
+        return value;
+    }
 }
 
 /// <summary>

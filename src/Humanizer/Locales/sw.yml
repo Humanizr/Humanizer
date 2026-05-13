@@ -209,25 +209,25 @@ surfaces:
       millisecond:
         symbol: 'ms'
       second:
-        symbol: 'sekunde'
+        symbol: 'sek'
       minute:
-        symbol: 'dakika'
+        symbol: 'dak'
       hour:
         symbol: 'saa'
       day:
-        symbol: 'siku'
+        symbol: 'sk'
       week:
-        symbol: 'wiki'
+        symbol: 'wk'
       month:
-        symbol: 'mwezi'
+        symbol: 'mwez'
       year:
-        symbol: 'mwaka'
+        symbol: 'mwk'
 
   number:
     words:
       engine: 'scale-leading-compound'
       zeroWord: 'sifuri'
-      minusWord: 'minus'
+      minusWord: 'hasi'
       conjunctionWord: 'na'
       ordinalPrefix: 'ya '
       unitsMap:
@@ -299,7 +299,7 @@ surfaces:
     parse:
       engine: 'scale-leading-compound'
       conjunctionWord: 'na'
-      minusWord: 'minus'
+      minusWord: 'hasi'
       ordinalPrefix: 'ya '
       unitsMap:
         sifuri: 0
@@ -373,21 +373,22 @@ surfaces:
 
   clock:
     engine: 'phrase-clock'
+    # Traditional Swahili time names hours from the 6:00/18:00 boundary: 1 PM is saa saba.
     hourMode: 'h12'
     hourWordsMap:
       - ''
-      - 'moja'
-      - 'mbili'
-      - 'tatu'
-      - 'nne'
-      - 'tano'
-      - 'sita'
       - 'saba'
       - 'nane'
       - 'tisa'
       - 'kumi'
       - 'kumi na moja'
       - 'kumi na mbili'
+      - 'moja'
+      - 'mbili'
+      - 'tatu'
+      - 'nne'
+      - 'tano'
+      - 'sita'
     min0: 'saa {hour} {dayPeriod}'
     defaultTemplate: 'saa {hour} na dakika {minutes} {dayPeriod}'
     earlyMorning: 'asubuhi'

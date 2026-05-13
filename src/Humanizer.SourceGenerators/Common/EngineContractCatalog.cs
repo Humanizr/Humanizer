@@ -531,9 +531,10 @@ public sealed partial class HumanizerSourceGenerator
                         ),
                 Member("culture", null, null, null, null, null, null, null)
             ),
-                // Shared scale-leading compound engine for languages that say scale nouns before their count token,
-                // e.g. "hundred two" or "thousand two", with data-driven tens conjunction and parser
-                // support for the same scale-token order.
+                // Shared scale-leading compound engine for languages that say scale nouns before their
+                // count token, e.g. "hundred one and two" or "thousand two". The conjunction is
+                // data-driven for tens+units and terminal sub-hundred remainders; higher-scale
+                // remainders are space-joined. The parser supports the same scale-token order.
                 ["scale-leading-compound"] = Schema("scale-leading-compound", null,
                 Member("profile-object", null, null, null, null, null, null, null,
                             Member("string", "zeroWord", null, null, null, null, null, null),

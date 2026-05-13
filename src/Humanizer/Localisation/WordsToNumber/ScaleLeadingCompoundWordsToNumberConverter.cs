@@ -27,7 +27,9 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
     {
         if (string.IsNullOrWhiteSpace(words))
         {
-            throw new ArgumentException("Input words cannot be empty.");
+            parsedValue = default;
+            unrecognizedWord = words ?? string.Empty;
+            return false;
         }
 
         var normalized = Normalize(words);
@@ -38,12 +40,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             normalized = normalized[(profile.MinusWord.Length + 1)..];
         }
 
-        if (profile.OrdinalMap.TryGetValue(normalized, out var ordinalValue))
-        {
-            parsedValue = negative ? -ordinalValue : ordinalValue;
-            unrecognizedWord = null;
-            return true;
-        }
+        var ordinalCandidate = normalized;
 
         if (profile.OrdinalPrefix.Length > 0 && normalized.StartsWith(profile.OrdinalPrefix, StringComparison.Ordinal))
         {
@@ -63,23 +60,29 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             return false;
         }
 
-        try
+        var maxValue = negative ? (ulong)long.MaxValue + 1UL : long.MaxValue;
+        if (TryParseValue(tokens, 0, tokens.Length, maxValue, out var value, out var next) &&
+            next == tokens.Length)
         {
-            var maxValue = negative ? (ulong)long.MaxValue + 1UL : long.MaxValue;
-            if (TryParseValue(tokens, 0, tokens.Length, maxValue, out var value, out var next) &&
-                next == tokens.Length &&
-                TryCoerceParsedValue(value, negative, out parsedValue))
+            if (TryCoerceParsedValue(value, negative, out parsedValue))
             {
                 unrecognizedWord = null;
                 return true;
             }
+
+            parsedValue = default;
+            unrecognizedWord = words;
+            return false;
         }
-        catch (OverflowException)
+
+        if (TryParseOrdinalCandidate(ordinalCandidate, normalized, negative, out parsedValue))
         {
+            unrecognizedWord = null;
+            return true;
         }
 
         parsedValue = default;
-        unrecognizedWord = tokens[0];
+        unrecognizedWord = GetUnrecognizedWord(tokens, next, words);
         return false;
     }
 
@@ -104,7 +107,13 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
                 return false;
             }
 
-            value = checked(value + checked(count * scaleValue));
+            if (count > (maxValue - value) / scaleValue)
+            {
+                next = afterCount;
+                return false;
+            }
+
+            value += count * scaleValue;
             next = afterCount;
             consumed = true;
         }
@@ -120,7 +129,13 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             var remainingMax = maxValue == ulong.MaxValue ? ulong.MaxValue : maxValue - value;
             if (TryParseUnderOneHundred(tokens, remainderStart, end, Math.Min(remainingMax, 99), out var remainder, out var afterRemainder))
             {
-                value = checked(value + remainder);
+                if (remainder > maxValue - value)
+                {
+                    next = afterRemainder;
+                    return false;
+                }
+
+                value += remainder;
                 next = afterRemainder;
                 consumed = true;
             }
@@ -219,7 +234,60 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
             return ulong.MaxValue / (ulong)profile.Scales[scaleIndex].Value;
         }
 
-        return (ulong)(profile.Scales[scaleIndex - 1].Value / profile.Scales[scaleIndex].Value - 1);
+        var previous = (ulong)profile.Scales[scaleIndex - 1].Value;
+        var current = (ulong)profile.Scales[scaleIndex].Value;
+        if (previous <= current || previous % current != 0)
+        {
+            throw new InvalidOperationException("Scale-leading compound parser profiles require descending scales where each larger scale is divisible by the next smaller scale.");
+        }
+
+        return previous / current - 1UL;
+    }
+
+    bool TryParseOrdinalCandidate(string originalCandidate, string strippedCandidate, bool negative, out long parsedValue)
+    {
+        if (TryParseOrdinalCandidate(originalCandidate, negative, out parsedValue))
+        {
+            return true;
+        }
+
+        return !string.Equals(originalCandidate, strippedCandidate, StringComparison.Ordinal) &&
+            TryParseOrdinalCandidate(strippedCandidate, negative, out parsedValue);
+    }
+
+    bool TryParseOrdinalCandidate(string candidate, bool negative, out long parsedValue)
+    {
+        if (profile.OrdinalMap.TryGetValue(candidate, out var ordinalValue))
+        {
+            parsedValue = negative ? -ordinalValue : ordinalValue;
+            return true;
+        }
+
+        parsedValue = default;
+        return false;
+    }
+
+    string GetUnrecognizedWord(string[] tokens, int next, string words)
+    {
+        if (next > 0 && next < tokens.Length)
+        {
+            return tokens[next];
+        }
+
+        foreach (var token in tokens)
+        {
+            if (token != profile.ConjunctionWord &&
+                token != profile.MinusWord &&
+                !profile.Units.ContainsKey(token) &&
+                !profile.Tens.ContainsKey(token) &&
+                !profile.OrdinalMap.ContainsKey(token) &&
+                !profile.Scales.Any(scale => scale.Name == token))
+            {
+                return token;
+            }
+        }
+
+        return words;
     }
 
     static string Normalize(string value) =>
@@ -244,7 +312,7 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
     /// <summary>Gets decade tokens.</summary>
     public FrozenDictionary<string, long> Tens { get; } = tens;
     /// <summary>Gets descending scale rows.</summary>
-    public ScaleLeadingCompoundScale[] Scales { get; } = scales;
+    public ScaleLeadingCompoundScale[] Scales { get; } = ValidateScales(scales);
     /// <summary>Gets the conjunction token.</summary>
     public string ConjunctionWord { get; } = conjunctionWord;
     /// <summary>Gets the negative prefix token.</summary>
@@ -255,4 +323,27 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
     public string OrdinalSuffix { get; } = ordinalSuffix;
     /// <summary>Gets exact ordinal tokens.</summary>
     public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap ?? FrozenDictionary<string, long>.Empty;
+
+    static ScaleLeadingCompoundScale[] ValidateScales(ScaleLeadingCompoundScale[] value)
+    {
+        for (var i = 0; i < value.Length; i++)
+        {
+            if (value[i].Value <= 0)
+            {
+                throw new InvalidOperationException("Scale-leading compound parser profiles require positive scale values.");
+            }
+
+            if (i > 0)
+            {
+                var previous = (ulong)value[i - 1].Value;
+                var current = (ulong)value[i].Value;
+                if (previous <= current || previous % current != 0)
+                {
+                    throw new InvalidOperationException("Scale-leading compound parser profiles require descending scales where each larger scale is divisible by the next smaller scale.");
+                }
+            }
+        }
+
+        return value;
+    }
 }

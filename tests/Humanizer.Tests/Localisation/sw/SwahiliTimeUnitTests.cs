@@ -4,10 +4,10 @@ namespace Humanizer.Tests.Localisation.sw;
 public class SwahiliTimeUnitTests
 {
     [Theory]
-    [InlineData(TimeUnit.Second, "sekunde")]
-    [InlineData(TimeUnit.Minute, "dakika")]
+    [InlineData(TimeUnit.Second, "sek")]
+    [InlineData(TimeUnit.Minute, "dak")]
     [InlineData(TimeUnit.Hour, "saa")]
-    [InlineData(TimeUnit.Day, "siku")]
+    [InlineData(TimeUnit.Day, "sk")]
     public void TimeUnitHumanize_UsesSwahiliLabels(TimeUnit unit, string expected)
     {
         var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("sw"));

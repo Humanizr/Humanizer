@@ -326,7 +326,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
     {
-        { "sw", new("ms", "sekunde", "dakika", "saa", "siku", "wiki", "mwezi", "mwaka") },
+        { "sw", new("ms", "sek", "dak", "saa", "sk", "wk", "mwez", "mwk") },
         { "af", new("ms", "sek.", "min.", "uur", "dag", "week", "maand", "jaar") },
         { "ar", new("مللي ثانية", "ثانية", "دقيقة", "ساعة", "يوم", "أسبوع", "شهر", "سنة") },
         { "az", new("ms", "saniyə", "dəqiqə", "saat", "gün", "həftə", "ay", "il") },

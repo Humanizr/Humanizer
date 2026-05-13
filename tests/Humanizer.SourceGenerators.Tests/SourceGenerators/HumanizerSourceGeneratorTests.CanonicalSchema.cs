@@ -195,6 +195,7 @@ surfaces:
 
         Assert.Contains("ScaleLeadingCompoundNumberToWordsConverter", numberToWordsSource, StringComparison.Ordinal);
         Assert.Contains("ScaleLeadingCompoundScale", numberToWordsSource, StringComparison.Ordinal);
+        Assert.Contains("new string[] { \"\", \"\", \"twenty\", \"thirty\"", numberToWordsSource, StringComparison.Ordinal);
         Assert.Contains("ScaleLeadingCompoundWordsToNumberConverter", wordsToNumberSource, StringComparison.Ordinal);
         Assert.Contains("[\"twenty\"] = 20", wordsToNumberSource, StringComparison.Ordinal);
     }

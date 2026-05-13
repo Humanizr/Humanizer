@@ -26,8 +26,8 @@ public class SwahiliNumberToWordsTests
     }
 
     [Theory]
-    [InlineData(-5, "minus tano")]
-    [InlineData(-1000, "minus elfu moja")]
+    [InlineData(-5, "hasi tano")]
+    [InlineData(-1000, "hasi elfu moja")]
     public void NumberToWords_UsesSwahiliNegativePrefix(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Sw));
@@ -37,7 +37,7 @@ public class SwahiliNumberToWordsTests
     public void ToWords_HandlesLongMinValueWithoutOverflow()
     {
         var words = long.MinValue.ToWords(Sw);
-        Assert.StartsWith("minus kwintilioni tisa", words, StringComparison.Ordinal);
+        Assert.StartsWith("hasi kwintilioni tisa", words, StringComparison.Ordinal);
         Assert.Contains("na nane", words, StringComparison.Ordinal);
         Assert.Equal(long.MinValue, words.ToNumber(Sw));
     }
@@ -47,6 +47,8 @@ public class SwahiliNumberToWordsTests
     [InlineData(2, "pili")]
     [InlineData(21, "ya ishirini na moja")]
     [InlineData(100, "ya mia moja")]
+    [InlineData(-1, "hasi kwanza")]
+    [InlineData(-21, "hasi ya ishirini na moja")]
     public void NumberToOrdinalWords_ProducesExpectedSwahiliOutput(int number, string expected)
     {
         Assert.Equal(expected, number.ToOrdinalWords(Sw));
@@ -72,8 +74,40 @@ public class SwahiliNumberToWordsTests
     [Theory]
     [InlineData("kwanza", 1)]
     [InlineData("ya ishirini na moja", 21)]
+    [InlineData("hasi kwanza", -1)]
+    [InlineData("hasi ya ishirini na moja", -21)]
     public void WordsToNumber_ParsesSwahiliOrdinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Sw));
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void TryToNumber_ReturnsFalseForBlankInput(string words)
+    {
+        Assert.False(words.TryToNumber(out var parsed, Sw, out var unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal(words, unrecognizedWord);
+    }
+
+    [Fact]
+    public void TryToNumber_ReturnsFalseForNullInput()
+    {
+        string words = null!;
+
+        Assert.False(words.TryToNumber(out var parsed, Sw, out var unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal(string.Empty, unrecognizedWord);
+    }
+
+    [Theory]
+    [InlineData("mia moja blerg", "blerg")]
+    [InlineData("kwintilioni kumi", "kwintilioni kumi")]
+    public void TryToNumber_ReturnsUsefulUnrecognizedWord(string words, string expectedUnrecognizedWord)
+    {
+        Assert.False(words.TryToNumber(out var parsed, Sw, out var unrecognizedWord));
+        Assert.Equal(0, parsed);
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
     }
 }
