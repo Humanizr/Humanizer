@@ -148,7 +148,7 @@ sealed class ScaleLeadingCompoundNumberToWordsProfile(
     /// </summary>
     public string ConjunctionWord { get; } = conjunctionWord;
     /// <summary>Gets the conjunction inserted before potentially ambiguous terminal remainders.</summary>
-    public string TerminalRemainderConjunctionWord { get; } = string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord;
+    public string TerminalRemainderConjunctionWord { get; } = string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord!;
     /// <summary>Gets the ordinal prefix used when no exact ordinal exists.</summary>
     public string OrdinalPrefix { get; } = ordinalPrefix;
     /// <summary>Gets the ordinal suffix used when no exact ordinal exists.</summary>

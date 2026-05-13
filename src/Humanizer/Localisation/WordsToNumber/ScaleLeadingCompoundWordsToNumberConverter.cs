@@ -374,7 +374,7 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
     /// <summary>Gets the conjunction token.</summary>
     public string ConjunctionWord { get; } = conjunctionWord;
     /// <summary>Gets the conjunction token used before potentially ambiguous terminal remainders.</summary>
-    public string TerminalRemainderConjunctionWord { get; } = string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord;
+    public string TerminalRemainderConjunctionWord { get; } = string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord!;
     /// <summary>Gets the negative prefix token.</summary>
     public string MinusWord { get; } = minusWord;
     /// <summary>Gets the ordinal prefix token.</summary>
