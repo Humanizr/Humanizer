@@ -1033,20 +1033,35 @@ static class LocalePhraseTheoryData
         { "zu-ZA", 0, TimeUnit.Second, Tense.Future, "manje" },
 
         { "hi", 1, TimeUnit.Second, Tense.Past, "एक सेकंड पहले" },
+        { "pa", 1, TimeUnit.Second, Tense.Past, "ਇੱਕ ਸਕਿੰਟ ਪਹਿਲਾਂ" },
         { "hi", 2, TimeUnit.Second, Tense.Future, "2 सेकंड में" },
+        { "pa", 2, TimeUnit.Second, Tense.Future, "2 ਸਕਿੰਟ ਵਿੱਚ" },
         { "hi", 1, TimeUnit.Minute, Tense.Past, "एक मिनट पहले" },
+        { "pa", 1, TimeUnit.Minute, Tense.Past, "ਇੱਕ ਮਿੰਟ ਪਹਿਲਾਂ" },
         { "hi", 2, TimeUnit.Minute, Tense.Future, "2 मिनट में" },
+        { "pa", 2, TimeUnit.Minute, Tense.Future, "2 ਮਿੰਟ ਵਿੱਚ" },
         { "hi", 1, TimeUnit.Hour, Tense.Past, "एक घंटा पहले" },
+        { "pa", 1, TimeUnit.Hour, Tense.Past, "ਇੱਕ ਘੰਟਾ ਪਹਿਲਾਂ" },
         { "hi", 2, TimeUnit.Hour, Tense.Future, "2 घंटे में" },
+        { "pa", 2, TimeUnit.Hour, Tense.Future, "2 ਘੰਟੇ ਵਿੱਚ" },
         { "hi", 1, TimeUnit.Day, Tense.Past, "कल" },
+        { "pa", 1, TimeUnit.Day, Tense.Past, "ਕੱਲ੍ਹ" },
         { "hi", 1, TimeUnit.Day, Tense.Future, "कल" },
+        { "pa", 1, TimeUnit.Day, Tense.Future, "ਕੱਲ੍ਹ" },
         { "hi", 2, TimeUnit.Day, Tense.Past, "2 दिन पहले" },
+        { "pa", 2, TimeUnit.Day, Tense.Past, "2 ਦਿਨ ਪਹਿਲਾਂ" },
         { "hi", 2, TimeUnit.Day, Tense.Future, "2 दिन में" },
+        { "pa", 2, TimeUnit.Day, Tense.Future, "2 ਦਿਨ ਵਿੱਚ" },
         { "hi", 1, TimeUnit.Month, Tense.Past, "एक महीना पहले" },
+        { "pa", 1, TimeUnit.Month, Tense.Past, "ਇੱਕ ਮਹੀਨਾ ਪਹਿਲਾਂ" },
         { "hi", 2, TimeUnit.Month, Tense.Future, "2 महीने में" },
+        { "pa", 2, TimeUnit.Month, Tense.Future, "2 ਮਹੀਨਿਆਂ ਵਿੱਚ" },
         { "hi", 1, TimeUnit.Year, Tense.Past, "एक साल पहले" },
+        { "pa", 1, TimeUnit.Year, Tense.Past, "ਇੱਕ ਸਾਲ ਪਹਿਲਾਂ" },
         { "hi", 2, TimeUnit.Year, Tense.Future, "2 साल में" },
+        { "pa", 2, TimeUnit.Year, Tense.Future, "2 ਸਾਲਾਂ ਵਿੱਚ" },
         { "hi", 0, TimeUnit.Second, Tense.Future, "अभी" },
+        { "pa", 0, TimeUnit.Second, Tense.Future, "ਹੁਣੇ" },
 };
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
@@ -1508,6 +1523,7 @@ static class LocalePhraseTheoryData
         { "zu-ZA", "akakaze" },
 
         { "hi", "कभी नहीं" },
+        { "pa", "ਕਦੇ ਨਹੀਂ" },
 };
 
     public static TheoryData<string, string, string, string> TimeOnlyDefaultHumanizeCases => new()
@@ -2328,14 +2344,23 @@ static class LocalePhraseTheoryData
         { "zu-ZA", 0, TimeUnit.Millisecond, true, "asikho isikhathi" },
 
         { "hi", 1, TimeUnit.Second, false, "1 सेकंड" },
+        { "pa", 1, TimeUnit.Second, false, "1 ਸਕਿੰਟ" },
         { "hi", 2, TimeUnit.Second, false, "2 सेकंड" },
+        { "pa", 2, TimeUnit.Second, false, "2 ਸਕਿੰਟ" },
         { "hi", 1, TimeUnit.Minute, false, "1 मिनट" },
+        { "pa", 1, TimeUnit.Minute, false, "1 ਮਿੰਟ" },
         { "hi", 2, TimeUnit.Minute, false, "2 मिनट" },
+        { "pa", 2, TimeUnit.Minute, false, "2 ਮਿੰਟ" },
         { "hi", 1, TimeUnit.Hour, false, "1 घंटा" },
+        { "pa", 1, TimeUnit.Hour, false, "1 ਘੰਟਾ" },
         { "hi", 2, TimeUnit.Hour, false, "2 घंटे" },
+        { "pa", 2, TimeUnit.Hour, false, "2 ਘੰਟੇ" },
         { "hi", 1, TimeUnit.Day, false, "1 दिन" },
+        { "pa", 1, TimeUnit.Day, false, "1 ਦਿਨ" },
         { "hi", 2, TimeUnit.Day, false, "2 दिन" },
+        { "pa", 2, TimeUnit.Day, false, "2 ਦਿਨ" },
         { "hi", 1, TimeUnit.Hour, true, "एक घंटा" },
+        { "pa", 1, TimeUnit.Hour, true, "ਇੱਕ ਘੰਟਾ" },
 };
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()
