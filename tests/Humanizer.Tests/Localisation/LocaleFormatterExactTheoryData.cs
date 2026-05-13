@@ -183,6 +183,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, DateDayPluralExpectationRow> DateDayPluralCases => new()
     {
         { "am", new("ከ 2 ቀናት በፊት", "ከ 3 ቀናት በፊት", "ከ 4 ቀናት በፊት", "ከ 5 ቀናት በፊት", "ከ 11 ቀናት በፊት", "ከ 21 ቀናት በፊት", "ከ 2 ቀናት በኋላ", "ከ 3 ቀናት በኋላ", "ከ 4 ቀናት በኋላ", "ከ 5 ቀናት በኋላ", "ከ 11 ቀናት በኋላ", "ከ 21 ቀናት በኋላ") },
+        { "sw", new("2 siku zilizopita", "3 siku zilizopita", "4 siku zilizopita", "5 siku zilizopita", "11 siku zilizopita", "21 siku zilizopita", "baada ya siku 2", "baada ya siku 3", "baada ya siku 4", "baada ya siku 5", "baada ya siku 11", "baada ya siku 21") },
         { "af", new("2 dae gelede", "3 dae gelede", "4 dae gelede", "5 dae gelede", "11 dae gelede", "21 dae gelede", "oor 2 dae", "oor 3 dae", "oor 4 dae", "oor 5 dae", "oor 11 dae", "oor 21 dae") },
         { "ar", new("منذ يومين", "منذ 3 أيام", "منذ 4 أيام", "منذ 5 أيام", "منذ 11 يوم", "منذ 21 يوم", "في غضون يومين من الآن", "في غضون 3 أيام من الآن", "في غضون 4 أيام من الآن", "في غضون 5 أيام من الآن", "في غضون 11 يوم من الآن", "في غضون 21 يوم من الآن") },
         { "az", new("2 gün əvvəl", "3 gün əvvəl", "4 gün əvvəl", "5 gün əvvəl", "11 gün əvvəl", "21 gün əvvəl", "2 gün sonra", "3 gün sonra", "4 gün sonra", "5 gün sonra", "11 gün sonra", "21 gün sonra") },
@@ -255,6 +256,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
     {
         { "am", new("2 ሳምንታት, 1 ቀን እና 1 ሰዓት", "1 ቀን, 3 ደቂቃዎች እና 4 ሰከንዶች", "1 ቀን እና 3 ደቂቃዎች") },
+        { "sw", new("wiki 2, siku 1 na saa 1", "siku 1, dakika 3 na sekunde 4", "siku 1 na dakika 3") },
         { "af", new("2 weke, 1 dag en 1 uur", "1 dag, 3 minute en 4 sekondes", "1 dag en 3 minute") },
         { "ar", new("أسبوعين, يوم واحد وساعة واحدة", "يوم واحد, 3 دقائق و4 ثوان", "يوم واحد و3 دقائق") },
         { "az", new("2 həftə, 1 gün və 1 saat", "1 gün, 3 dəqiqə və 4 saniyə", "1 gün və 3 dəqiqə") },
@@ -327,6 +329,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
     {
         { "am", new("ሚሊሰከንድ", "ሰከንድ", "ደቂቃ", "ሰዓት", "ቀን", "ሳምንት", "ወር", "ዓመት") },
+        { "sw", new("ms", "sek", "dak", "saa", "sk", "wk", "mwez", "mwk") },
         { "af", new("ms", "sek.", "min.", "uur", "dag", "week", "maand", "jaar") },
         { "ar", new("مللي ثانية", "ثانية", "دقيقة", "ساعة", "يوم", "أسبوع", "شهر", "سنة") },
         { "az", new("ms", "saniyə", "dəqiqə", "saat", "gün", "həftə", "ay", "il") },
@@ -420,6 +423,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
     {
         { "am", new("1 b", "2 B", "1.95 KB", "2048 KB") },
+        { "sw", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "af", new("1 b", "2 B", "1,95 KB", "2048 KB") },
         { "ar", new("1 b", "2 B", ArabicKilobytes, "2048 KB") },
         { "az", new("1 b", "2 B", "1,95 KB", "2048 KB") },
@@ -492,6 +496,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
     {
         { "am", new("1 ቢት", "1 ባይት", "2 ባይቶች", "2 ኪሎባይቶች", "2 ሜጋባይቶች") },
+        { "sw", new("1 biti", "1 baiti", "2 baiti", "2 kilobaiti", "2 megabaiti") },
         { "af", new("1 bit", "1 byte", "2 bytes", "2 kilobytes", "2 megabytes") },
         { "ar", new("1 بت", "1 بايت", "2 بايت", "2 كيلوبايت", "2 ميجابايت") },
         { "az", new("1 bit", "1 bayt", "2 bayt", "2 kilobayt", "2 meqabayt") },
@@ -564,6 +569,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
     {
         { "am", new("1 እና 2", "1, 2 እና 3", "1, 2, 3 እና 4") },
+        { "sw", new("1 na 2", "1, 2 na 3", "1, 2, 3 na 4") },
         { "af", new("1 en 2", "1, 2 en 3", "1, 2, 3 en 4") },
         { "ar", new("1 و2", "1, 2 و3", "1, 2, 3 و4") },
         { "az", new("1 və 2", "1, 2 və 3", "1, 2, 3 və 4") },
@@ -636,6 +642,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
     {
         { "am", new("ሰ", "ሰሰም", "ሰም", "ምሰም", "ም", "ምደም", "ደም", "ደደም", "ደ", "ደደምዕ", "ደምዕ", "ምዕደምዕ", "ምዕ", "ምዕሰምዕ", "ሰምዕ", "ሰሰምዕ", "ሰሜን", "ሰሜን-ሰሜን ምስራቅ", "ሰሜን ምስራቅ", "ምስራቅ-ሰሜን ምስራቅ", "ምስራቅ", "ምስራቅ-ደቡብ ምስራቅ", "ደቡብ ምስራቅ", "ደቡብ-ደቡብ ምስራቅ", "ደቡብ", "ደቡብ-ደቡብ ምዕራብ", "ደቡብ ምዕራብ", "ምዕራብ-ደቡብ ምዕራብ", "ምዕራብ", "ምዕራብ-ሰሜን ምዕራብ", "ሰሜን ምዕራብ", "ሰሜን-ሰሜን ምዕራብ") },
+        { "sw", new("K", "KKM", "KM", "MKM", "M", "MKS", "KS", "KKS", "S", "KKG", "KG", "MKG", "G", "MKGz", "KGz", "KKGz", "kaskazini", "kaskazini-kaskazini mashariki", "kaskazini mashariki", "mashariki-kaskazini mashariki", "mashariki", "mashariki-kusini mashariki", "kusini mashariki", "kusini-kusini mashariki", "kusini", "kusini-kusini magharibi", "kusini magharibi", "magharibi-kusini magharibi", "magharibi", "magharibi-kaskazini magharibi", "kaskazini magharibi", "kaskazini-kaskazini magharibi") },
         { "af", new("N", "NNO", "NO", "ONO", "O", "OSO", "SO", "SSO", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "noord", "noordnoordoos", "noordoos", "oosnoordoos", "oos", "oossuidoos", "suidoos", "suidsuidoos", "suid", "suidsuidwes", "suidwes", "wessuidwes", "wes", "wesnoordwes", "noordwes", "noordnoordwes") },
         { "ar", new("ش", "ش.ش.ق", "ش.ق", "ق.ش.ق", "ق", "ق.ج.ق", "ج.ق", "ج.ج.ق", "ج", "ج.ج.غ", "ج.غ", "غ.ج.غ", "غ", "غ.ش.غ", "ش.غ", "ش.ش.غ", "شمال", "شمال-شمال-شرق", "شمال-شرق", "شرق-شمال-شرق", "شرق", "شرق-جنوب-شرق", "جنوب-شرق", "جنوب-جنوب-شرق", "جنوب", "جنوب-جنوب-غرب", "جنوب-غرب", "غرب-جنوب-غرب", "غرب", "غرب-شمال-غرب", "شمال-غرب", "شمال-شمال-غرب") },
         { "az", new("Ş", "ŞŞŞ", "ŞŞ", "Ş-ŞŞ", "Şər", "Ş-CŞ", "CŞ", "CCŞ", "C", "CCQ", "CQ", "Q-CQ", "Q", "Q-ŞQ", "ŞQ", "ŞŞQ", "şimal", "şimal-şimal-şərq", "şimal-şərq", "şərq-şimal-şərq", "şərq", "şərq-cənub-şərq", "cənub-şərq", "cənub-cənub-şərq", "cənub", "cənub-cənub-qərb", "cənub-qərb", "qərb-cənub-qərb", "qərb", "qərb-şimal-qərb", "şimal-qərb", "şimal-şimal-qərb") },
@@ -708,6 +715,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
     {
         { "am", new("ሰ", "ም", "ደ", "ምዕ") },
+        { "sw", new("K", "M", "S", "G") },
         { "af", new("N", "O", "S", "W") },
         { "ar", new("ش", "ق", "ج", "غ") },
         { "az", new("Ş", "Şər", "C", "Q") },

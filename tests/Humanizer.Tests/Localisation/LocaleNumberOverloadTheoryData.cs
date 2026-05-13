@@ -6,6 +6,7 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
@@ -209,6 +210,7 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
@@ -412,6 +414,7 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
@@ -615,6 +618,7 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
