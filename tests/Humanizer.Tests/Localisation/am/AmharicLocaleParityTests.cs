@@ -100,6 +100,8 @@ public class AmharicLocaleParityTests
     [InlineData("አንድ መቶ አምስት", 105)]
     [InlineData("አንድ ሺህ አንድ", 1001)]
     [InlineData("ሃያ አንደኛ", 21)]
+    [InlineData("አንድ መቶኛ", 100)]
+    [InlineData("ሁለት መቶኛ", 200)]
     [InlineData("አንድ ኳድሪሊዮንኛ", 1_000_000_000_000_000)]
     [InlineData("አንድ ኩዊንቲሊዮንኛ", 1_000_000_000_000_000_000)]
     public void WordsToNumber_ParsesAmharicCardinalsAndOrdinals(string words, long expected)
