@@ -65,9 +65,11 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
 
         try
         {
-            if (TryParseValue(tokens, 0, tokens.Length, long.MaxValue, out var value, out var next) && next == tokens.Length)
+            var maxValue = negative ? (ulong)long.MaxValue + 1UL : long.MaxValue;
+            if (TryParseValue(tokens, 0, tokens.Length, maxValue, out var value, out var next) &&
+                next == tokens.Length &&
+                TryCoerceParsedValue(value, negative, out parsedValue))
             {
-                parsedValue = negative ? -value : value;
                 unrecognizedWord = null;
                 return true;
             }
@@ -81,7 +83,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return false;
     }
 
-    bool TryParseValue(string[] tokens, int start, int end, long maxValue, out long value, out int next)
+    bool TryParseValue(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
         value = 0;
         next = start;
@@ -90,18 +92,19 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         for (var scaleIndex = 0; scaleIndex < profile.Scales.Length; scaleIndex++)
         {
             var scale = profile.Scales[scaleIndex];
-            if (scale.Value > maxValue || next >= end || tokens[next] != scale.Name)
+            var scaleValue = (ulong)scale.Value;
+            if (scaleValue > maxValue || next >= end || tokens[next] != scale.Name)
             {
                 continue;
             }
 
-            var maxCount = Math.Min(GetMaximumCountForScale(scaleIndex), maxValue / scale.Value);
+            var maxCount = Math.Min(GetMaximumCountForScale(scaleIndex), maxValue / scaleValue);
             if (maxCount <= 0 || !TryParseCount(tokens, next + 1, end, maxCount, out var count, out var afterCount) || count <= 0)
             {
                 return false;
             }
 
-            value = checked(value + checked(count * scale.Value));
+            value = checked(value + checked(count * scaleValue));
             next = afterCount;
             consumed = true;
         }
@@ -114,7 +117,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
                 remainderStart++;
             }
 
-            var remainingMax = maxValue == long.MaxValue ? long.MaxValue : maxValue - value;
+            var remainingMax = maxValue == ulong.MaxValue ? ulong.MaxValue : maxValue - value;
             if (TryParseUnderOneHundred(tokens, remainderStart, end, Math.Min(remainingMax, 99), out var remainder, out var afterRemainder))
             {
                 value = checked(value + remainder);
@@ -126,7 +129,7 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return consumed;
     }
 
-    bool TryParseCount(string[] tokens, int start, int end, long maxValue, out long value, out int next)
+    bool TryParseCount(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
         if (maxValue <= 9)
         {
@@ -141,35 +144,39 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return TryParseValue(tokens, start, end, maxValue, out value, out next);
     }
 
-    bool TryParseUnderOneHundred(string[] tokens, int start, int end, long maxValue, out long value, out int next)
+    bool TryParseUnderOneHundred(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
         if (TryParseUnit(tokens, start, end, maxValue, out value, out next))
         {
             return true;
         }
 
-        if (start >= end || !profile.Tens.TryGetValue(tokens[start], out var tensValue) || tensValue > maxValue)
+        if (start >= end || !profile.Tens.TryGetValue(tokens[start], out var rawTensValue) || rawTensValue < 0 || (ulong)rawTensValue > maxValue)
         {
             value = default;
             next = start;
             return false;
         }
 
-        value = tensValue;
+        value = (ulong)rawTensValue;
         next = start + 1;
-        if (next + 1 < end && tokens[next] == profile.ConjunctionWord && profile.Units.TryGetValue(tokens[next + 1], out var unitValue) && unitValue is >= 1 and <= 9 && value + unitValue <= maxValue)
+        if (next + 1 < end && tokens[next] == profile.ConjunctionWord && profile.Units.TryGetValue(tokens[next + 1], out var rawUnitValue) && rawUnitValue is >= 1 and <= 9 && value + (ulong)rawUnitValue <= maxValue)
         {
-            value += unitValue;
+            value += (ulong)rawUnitValue;
             next += 2;
         }
 
         return true;
     }
 
-    bool TryParseUnit(string[] tokens, int start, int end, long maxValue, out long value, out int next)
+    bool TryParseUnit(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
-        if (start < end && profile.Units.TryGetValue(tokens[start], out value) && value <= maxValue)
+        if (start < end &&
+            profile.Units.TryGetValue(tokens[start], out var rawValue) &&
+            rawValue >= 0 &&
+            (ulong)rawValue <= maxValue)
         {
+            value = (ulong)rawValue;
             next = start + 1;
             return true;
         }
@@ -179,14 +186,40 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         return false;
     }
 
-    long GetMaximumCountForScale(int scaleIndex)
+    static bool TryCoerceParsedValue(ulong value, bool negative, out long parsedValue)
+    {
+        if (negative)
+        {
+            if (value == (ulong)long.MaxValue + 1UL)
+            {
+                parsedValue = long.MinValue;
+                return true;
+            }
+
+            if (value <= long.MaxValue)
+            {
+                parsedValue = -(long)value;
+                return true;
+            }
+        }
+        else if (value <= long.MaxValue)
+        {
+            parsedValue = (long)value;
+            return true;
+        }
+
+        parsedValue = default;
+        return false;
+    }
+
+    ulong GetMaximumCountForScale(int scaleIndex)
     {
         if (scaleIndex == 0)
         {
-            return long.MaxValue / profile.Scales[scaleIndex].Value;
+            return ulong.MaxValue / (ulong)profile.Scales[scaleIndex].Value;
         }
 
-        return profile.Scales[scaleIndex - 1].Value / profile.Scales[scaleIndex].Value - 1;
+        return (ulong)(profile.Scales[scaleIndex - 1].Value / profile.Scales[scaleIndex].Value - 1);
     }
 
     static string Normalize(string value) =>

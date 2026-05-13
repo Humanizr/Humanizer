@@ -39,6 +39,7 @@ public class SwahiliNumberToWordsTests
         var words = long.MinValue.ToWords(Sw);
         Assert.StartsWith("minus kwintilioni tisa", words, StringComparison.Ordinal);
         Assert.Contains("na nane", words, StringComparison.Ordinal);
+        Assert.Equal(long.MinValue, words.ToNumber(Sw));
     }
 
     [Theory]
