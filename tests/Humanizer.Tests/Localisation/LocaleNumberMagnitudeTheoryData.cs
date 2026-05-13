@@ -140,7 +140,9 @@ public static class LocaleNumberMagnitudeTheoryData
         { "zh-Hant", 1000001L, "一百万零一" },
         { "zu-ZA", 1001L, "kanye inkulungwane kanye" },
         { "zu-ZA", 1000001L, "kanye isigidi kanye" },
-    };
+
+        { "hi", 1234567L, "बारह लाख चौंतीस हज़ार पाँच सौ सड़सठ" },
+};
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
@@ -359,7 +361,9 @@ public static class LocaleNumberMagnitudeTheoryData
         { "zh-Hant", 4325010007018L, "四兆三千二百五十亿一千万七千零一十八" },
         { "zu-ZA", 1001000001L, "kanye ibhiliyoni kanye isigidi kanye" },
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
-    };
+
+        { "hi", 123456789L, "बारह करोड़ चौंतीस लाख छप्पन हज़ार सात सौ नवासी" },
+};
 
     public static TheoryData<string, long, string> HighRangeRoundTripCases => new()
     {

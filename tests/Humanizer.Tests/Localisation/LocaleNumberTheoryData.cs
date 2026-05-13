@@ -2662,7 +2662,17 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 999, "isishiyagalolunye ikhulu na amashumi ayisishiyagalolunye isishiyagalolunye" },
         { "zu-ZA", 1000, "kanye inkulungwane" },
         { "zu-ZA", 1001, "kanye inkulungwane kanye" },
-    };
+
+        { "hi", 0, "शून्य" },
+        { "hi", 1, "एक" },
+        { "hi", 2, "दो" },
+        { "hi", 21, "इक्कीस" },
+        { "hi", 100, "एक सौ" },
+        { "hi", 101, "एक सौ एक" },
+        { "hi", 1000, "एक हज़ार" },
+        { "hi", 100000, "एक लाख" },
+        { "hi", 12345678, "एक करोड़ तेईस लाख पैंतालीस हज़ार छह सौ अठहत्तर" },
+};
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
@@ -3424,7 +3434,10 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 121, false, "kanye ikhulu na amashumi amabili kanye" },
         { "zu-ZA", 1001, true, "kanye inkulungwane kanye" },
         { "zu-ZA", 1001, false, "kanye inkulungwane kanye" },
-    };
+
+        { "hi", 101, true, "एक सौ एक" },
+        { "hi", 101, false, "एक सौ एक" },
+};
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
@@ -3812,7 +3825,9 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 101, WordForm.Abbreviation, "kanye ikhulu na kanye" },
         { "zu-ZA", 121, WordForm.Abbreviation, "kanye ikhulu na amashumi amabili kanye" },
         { "zu-ZA", 1001, WordForm.Abbreviation, "kanye inkulungwane kanye" },
-    };
+
+        { "hi", 21, WordForm.Abbreviation, "इक्कीस" },
+};
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
@@ -4216,7 +4231,11 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 1, GrammaticalGender.Masculine, "kanye" },
         { "zu-ZA", 1, GrammaticalGender.Feminine, "kanye" },
         { "zu-ZA", 1, GrammaticalGender.Neuter, "kanye" },
-    };
+
+        { "hi", 2, GrammaticalGender.Masculine, "दो" },
+        { "hi", 2, GrammaticalGender.Feminine, "दो" },
+        { "hi", 2, GrammaticalGender.Neuter, "दो" },
+};
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
@@ -4415,7 +4434,11 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 21, WordForm.Abbreviation, GrammaticalGender.Masculine, "amashumi amabili kanye" },
         { "zu-ZA", 21, WordForm.Abbreviation, GrammaticalGender.Feminine, "amashumi amabili kanye" },
         { "zu-ZA", 21, WordForm.Abbreviation, GrammaticalGender.Neuter, "amashumi amabili kanye" },
-    };
+
+        { "hi", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "दो" },
+        { "hi", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "दो" },
+        { "hi", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "दो" },
+};
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
@@ -5745,7 +5768,10 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 21, "amashumi amabili kanye" },
         { "zu-ZA", 100, "kanye ikhulu" },
         { "zu-ZA", 101, "kanye ikhulu na kanye" },
-    };
+
+        { "hi", 1, "पहला" },
+        { "hi", 21, "इक्कीसवाँ" },
+};
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
@@ -6083,7 +6109,9 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 3, WordForm.Abbreviation, "kuthathu" },
         { "zu-ZA", 4, WordForm.Abbreviation, "kune" },
         { "zu-ZA", 21, WordForm.Abbreviation, "amashumi amabili kanye" },
-    };
+
+        { "hi", 21, WordForm.Abbreviation, "इक्कीसवाँ" },
+};
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
@@ -6906,7 +6934,11 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 1, GrammaticalGender.Masculine, "okokuqala" },
         { "zu-ZA", 1, GrammaticalGender.Feminine, "okokuqala" },
         { "zu-ZA", 1, GrammaticalGender.Neuter, "okokuqala" },
-    };
+
+        { "hi", 1, GrammaticalGender.Masculine, "पहला" },
+        { "hi", 1, GrammaticalGender.Feminine, "पहली" },
+        { "hi", 1, GrammaticalGender.Neuter, "पहला" },
+};
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
@@ -7105,7 +7137,11 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 3, GrammaticalGender.Masculine, WordForm.Abbreviation, "kuthathu" },
         { "zu-ZA", 3, GrammaticalGender.Feminine, WordForm.Abbreviation, "kuthathu" },
         { "zu-ZA", 3, GrammaticalGender.Neuter, WordForm.Abbreviation, "kuthathu" },
-    };
+
+        { "hi", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "इक्कीसवाँ" },
+        { "hi", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "इक्कीसवीं" },
+        { "hi", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "इक्कीसवाँ" },
+};
     public static TheoryData<string, int, string> TupleCases => new()
     {
         { "af", 2, "twee" },
@@ -7174,7 +7210,9 @@ static class LocaleNumberTheoryData
         { "zh-Hans", 2, "二" },
         { "zh-Hant", 2, "二" },
         { "zu-ZA", 2, "kubili" },
-    };
+
+        { "hi", 2, "दो" },
+};
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
@@ -7273,5 +7311,9 @@ static class LocaleNumberTheoryData
         { "zh-Hans", "二十一", 21L },
         { "zh-Hant", "二十一", 21L },
         { "zu-ZA", "amashumi amabili kanye", 21L },
+        { "hi", "इक्कीस", 21L },
+        { "hi", "एक करोड़ तेईस लाख पैंतालीस हज़ार छह सौ अठहत्तर", 12345678L },
+        { "hi", "माइनस पांच", -5L },
+        { "hi", "इक्कीसवीं", 21L },
     };
 }

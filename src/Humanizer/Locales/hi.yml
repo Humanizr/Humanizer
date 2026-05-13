@@ -1,0 +1,655 @@
+locale: 'hi'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'और'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'अभी'
+      never: 'कभी नहीं'
+      past:
+        millisecond:
+          single: 'एक मिलीसेकंड पहले'
+          multiple:
+            forms:
+              default: 'मिलीसेकंड'
+            afterCount: 'पहले'
+        second:
+          single: 'एक सेकंड पहले'
+          multiple:
+            forms:
+              default: 'सेकंड'
+            afterCount: 'पहले'
+        minute:
+          single: 'एक मिनट पहले'
+          multiple:
+            forms:
+              default: 'मिनट'
+            afterCount: 'पहले'
+        hour:
+          single: 'एक घंटा पहले'
+          multiple:
+            forms:
+              default: 'घंटे'
+            afterCount: 'पहले'
+        day:
+          single: 'कल'
+          multiple:
+            forms:
+              default: 'दिन'
+            afterCount: 'पहले'
+        week:
+          single: 'एक सप्ताह पहले'
+          multiple:
+            forms:
+              default: 'सप्ताह'
+            afterCount: 'पहले'
+        month:
+          single: 'एक महीना पहले'
+          multiple:
+            forms:
+              default: 'महीने'
+            afterCount: 'पहले'
+        year:
+          single: 'एक साल पहले'
+          multiple:
+            forms:
+              default: 'साल'
+            afterCount: 'पहले'
+      future:
+        millisecond:
+          single: 'एक मिलीसेकंड में'
+          multiple:
+            forms:
+              default: 'मिलीसेकंड'
+            afterCount: 'में'
+        second:
+          single: 'एक सेकंड में'
+          multiple:
+            forms:
+              default: 'सेकंड'
+            afterCount: 'में'
+        minute:
+          single: 'एक मिनट में'
+          multiple:
+            forms:
+              default: 'मिनट'
+            afterCount: 'में'
+        hour:
+          single: 'एक घंटे में'
+          multiple:
+            forms:
+              default: 'घंटे'
+            afterCount: 'में'
+        day:
+          single: 'कल'
+          multiple:
+            forms:
+              default: 'दिन'
+            afterCount: 'में'
+        week:
+          single: 'एक सप्ताह में'
+          multiple:
+            forms:
+              default: 'सप्ताह'
+            afterCount: 'में'
+        month:
+          single: 'एक महीने में'
+          multiple:
+            forms:
+              default: 'महीने'
+            afterCount: 'में'
+        year:
+          single: 'एक साल में'
+          multiple:
+            forms:
+              default: 'साल'
+            afterCount: 'में'
+    duration:
+      zero: 'अभी'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 मिलीसेकंड'
+          words: 'एक मिलीसेकंड'
+        multiple:
+          forms:
+            default: 'मिलीसेकंड'
+            singular: 'मिलीसेकंड'
+      second:
+        single:
+          numeric: '1 सेकंड'
+          words: 'एक सेकंड'
+        multiple:
+          forms:
+            default: 'सेकंड'
+            singular: 'सेकंड'
+      minute:
+        single:
+          numeric: '1 मिनट'
+          words: 'एक मिनट'
+        multiple:
+          forms:
+            default: 'मिनट'
+            singular: 'मिनट'
+      hour:
+        single:
+          numeric: '1 घंटा'
+          words: 'एक घंटा'
+        multiple:
+          forms:
+            default: 'घंटे'
+            singular: 'घंटा'
+      day:
+        single:
+          numeric: '1 दिन'
+          words: 'एक दिन'
+        multiple:
+          forms:
+            default: 'दिन'
+            singular: 'दिन'
+      week:
+        single:
+          numeric: '1 सप्ताह'
+          words: 'एक सप्ताह'
+        multiple:
+          forms:
+            default: 'सप्ताह'
+            singular: 'सप्ताह'
+      month:
+        single:
+          numeric: '1 महीना'
+          words: 'एक महीना'
+        multiple:
+          forms:
+            default: 'महीने'
+            singular: 'महीना'
+      year:
+        single:
+          numeric: '1 साल'
+          words: 'एक साल'
+        multiple:
+          forms:
+            default: 'साल'
+            singular: 'साल'
+    dataUnits:
+      bit:
+        forms:
+          default: 'बिट'
+          singular: 'बिट'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'बाइट'
+          singular: 'बाइट'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'किलोबाइट'
+          singular: 'किलोबाइट'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'मेगाबाइट'
+          singular: 'मेगाबाइट'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'गीगाबाइट'
+          singular: 'गीगाबाइट'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'टेराबाइट'
+          singular: 'टेराबाइट'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'मिलीसेकंड'
+      second:
+        symbol: 'सेकंड'
+      minute:
+        symbol: 'मिनट'
+      hour:
+        symbol: 'घंटा'
+      day:
+        symbol: 'दिन'
+      week:
+        symbol: 'सप्ताह'
+      month:
+        symbol: 'महीना'
+      year:
+        symbol: 'साल'
+
+  number:
+    words:
+      engine: 'indian-grouping-gendered'
+      zeroWord: 'शून्य'
+      negativeWord: 'ऋणात्मक'
+      hundredWord: 'सौ'
+      thousandWord: 'हज़ार'
+      lakhWord: 'लाख'
+      singleLakhWord: 'एक'
+      croreWord: 'करोड़'
+      arabWord: 'अरब'
+      kharabWord: 'खरब'
+      denseUnitsMap:
+        - 'शून्य'
+        - 'एक'
+        - 'दो'
+        - 'तीन'
+        - 'चार'
+        - 'पाँच'
+        - 'छह'
+        - 'सात'
+        - 'आठ'
+        - 'नौ'
+        - 'दस'
+        - 'ग्यारह'
+        - 'बारह'
+        - 'तेरह'
+        - 'चौदह'
+        - 'पंद्रह'
+        - 'सोलह'
+        - 'सत्रह'
+        - 'अठारह'
+        - 'उन्नीस'
+        - 'बीस'
+        - 'इक्कीस'
+        - 'बाईस'
+        - 'तेईस'
+        - 'चौबीस'
+        - 'पच्चीस'
+        - 'छब्बीस'
+        - 'सत्ताईस'
+        - 'अट्ठाईस'
+        - 'उनतीस'
+        - 'तीस'
+        - 'इकतीस'
+        - 'बत्तीस'
+        - 'तैंतीस'
+        - 'चौंतीस'
+        - 'पैंतीस'
+        - 'छत्तीस'
+        - 'सैंतीस'
+        - 'अड़तीस'
+        - 'उनतालीस'
+        - 'चालीस'
+        - 'इकतालीस'
+        - 'बयालीस'
+        - 'तैंतालीस'
+        - 'चवालीस'
+        - 'पैंतालीस'
+        - 'छियालीस'
+        - 'सैंतालीस'
+        - 'अड़तालीस'
+        - 'उनचास'
+        - 'पचास'
+        - 'इक्यावन'
+        - 'बावन'
+        - 'तिरेपन'
+        - 'चौवन'
+        - 'पचपन'
+        - 'छप्पन'
+        - 'सत्तावन'
+        - 'अट्ठावन'
+        - 'उनसठ'
+        - 'साठ'
+        - 'इकसठ'
+        - 'बासठ'
+        - 'तिरेसठ'
+        - 'चौंसठ'
+        - 'पैंसठ'
+        - 'छियासठ'
+        - 'सड़सठ'
+        - 'अड़सठ'
+        - 'उनहत्तर'
+        - 'सत्तर'
+        - 'इकहत्तर'
+        - 'बहत्तर'
+        - 'तिहत्तर'
+        - 'चौहत्तर'
+        - 'पचहत्तर'
+        - 'छिहत्तर'
+        - 'सतहत्तर'
+        - 'अठहत्तर'
+        - 'उन्यासी'
+        - 'अस्सी'
+        - 'इक्यासी'
+        - 'बयासी'
+        - 'तिरासी'
+        - 'चौरासी'
+        - 'पचासी'
+        - 'छियासी'
+        - 'सत्तासी'
+        - 'अट्ठासी'
+        - 'नवासी'
+        - 'नब्बे'
+        - 'इक्यानवे'
+        - 'बानवे'
+        - 'तिरानवे'
+        - 'चौरानवे'
+        - 'पचानवे'
+        - 'छियानवे'
+        - 'सत्तानवे'
+        - 'अट्ठानवे'
+        - 'निन्यानवे'
+      ordinal:
+        masculine:
+          defaultSuffix: 'वाँ'
+          exactReplacements:
+            1: 'पहला'
+            2: 'दूसरा'
+            3: 'तीसरा'
+            4: 'चौथा'
+            5: 'पाँचवाँ'
+            6: 'छठा'
+            7: 'सातवाँ'
+            8: 'आठवाँ'
+            9: 'नौवाँ'
+            10: 'दसवाँ'
+        feminine:
+          defaultSuffix: 'वीं'
+          exactReplacements:
+            1: 'पहली'
+            2: 'दूसरी'
+            3: 'तीसरी'
+            4: 'चौथी'
+            5: 'पाँचवीं'
+            6: 'छठी'
+            7: 'सातवीं'
+            8: 'आठवीं'
+            9: 'नौवीं'
+            10: 'दसवीं'
+        neuterFallback: 'masculine'
+
+    formatting:
+      decimalSeparator: '.'
+      groupSeparator: ','
+      negativeSign: '-'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'masculine-and-feminine'
+      useHundredMultiplier: true
+      tokenSuffixesToStrip:
+        - 'वाँ'
+        - 'वां'
+        - 'वीं'
+      cardinalMap:
+        'शून्य': 0
+        'एक': 1
+        'दो': 2
+        'तीन': 3
+        'चार': 4
+        'पाँच': 5
+        'पांच': 5
+        'छह': 6
+        'सात': 7
+        'आठ': 8
+        'नौ': 9
+        'दस': 10
+        'ग्यारह': 11
+        'बारह': 12
+        'तेरह': 13
+        'चौदह': 14
+        'पंद्रह': 15
+        'सोलह': 16
+        'सत्रह': 17
+        'अठारह': 18
+        'उन्नीस': 19
+        'बीस': 20
+        'इक्कीस': 21
+        'बाईस': 22
+        'तेईस': 23
+        'चौबीस': 24
+        'पच्चीस': 25
+        'छब्बीस': 26
+        'सत्ताईस': 27
+        'अट्ठाईस': 28
+        'उनतीस': 29
+        'तीस': 30
+        'इकतीस': 31
+        'बत्तीस': 32
+        'तैंतीस': 33
+        'चौंतीस': 34
+        'पैंतीस': 35
+        'छत्तीस': 36
+        'सैंतीस': 37
+        'अड़तीस': 38
+        'उनतालीस': 39
+        'चालीस': 40
+        'इकतालीस': 41
+        'बयालीस': 42
+        'तैंतालीस': 43
+        'चवालीस': 44
+        'पैंतालीस': 45
+        'छियालीस': 46
+        'सैंतालीस': 47
+        'अड़तालीस': 48
+        'उनचास': 49
+        'पचास': 50
+        'इक्यावन': 51
+        'बावन': 52
+        'तिरेपन': 53
+        'चौवन': 54
+        'पचपन': 55
+        'छप्पन': 56
+        'सत्तावन': 57
+        'अट्ठावन': 58
+        'उनसठ': 59
+        'साठ': 60
+        'इकसठ': 61
+        'बासठ': 62
+        'तिरेसठ': 63
+        'चौंसठ': 64
+        'पैंसठ': 65
+        'छियासठ': 66
+        'सड़सठ': 67
+        'अड़सठ': 68
+        'उनहत्तर': 69
+        'सत्तर': 70
+        'इकहत्तर': 71
+        'बहत्तर': 72
+        'तिहत्तर': 73
+        'चौहत्तर': 74
+        'पचहत्तर': 75
+        'छिहत्तर': 76
+        'सतहत्तर': 77
+        'अठहत्तर': 78
+        'उन्यासी': 79
+        'उनासी': 79
+        'अस्सी': 80
+        'इक्यासी': 81
+        'बयासी': 82
+        'तिरासी': 83
+        'चौरासी': 84
+        'पचासी': 85
+        'छियासी': 86
+        'सत्तासी': 87
+        'अट्ठासी': 88
+        'नवासी': 89
+        'नब्बे': 90
+        'इक्यानवे': 91
+        'बानवे': 92
+        'तिरानवे': 93
+        'चौरानवे': 94
+        'पचानवे': 95
+        'छियानवे': 96
+        'सत्तानवे': 97
+        'अट्ठानवे': 98
+        'निन्यानवे': 99
+        'सौ': 100
+        'हज़ार': 1000
+        'हजार': 1000
+        'लाख': 100000
+        'करोड़': 10000000
+        'करोड': 10000000
+        'अरब': 1000000000
+        'खरब': 100000000000
+      ordinalMap:
+        'पहला': 1
+        'पहली': 1
+        'दूसरा': 2
+        'दूसरी': 2
+        'तीसरा': 3
+        'तीसरी': 3
+        'चौथा': 4
+        'चौथी': 4
+        'पाँचवाँ': 5
+        'पांचवां': 5
+        'पाँचवीं': 5
+        'पांचवीं': 5
+        'छठा': 6
+        'छठी': 6
+        'सातवाँ': 7
+        'सातवां': 7
+        'सातवीं': 7
+        'आठवाँ': 8
+        'आठवां': 8
+        'आठवीं': 8
+        'नौवाँ': 9
+        'नौवां': 9
+        'नौवीं': 9
+        'दसवाँ': 10
+        'दसवां': 10
+        'दसवीं': 10
+        'इक्कीसवाँ': 21
+        'इक्कीसवां': 21
+        'इक्कीसवीं': 21
+      negativePrefixes:
+        - 'ऋणात्मक'
+        - 'नकारात्मक'
+        - 'माइनस'
+
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      useCulture: true
+      masculine:
+        defaultSuffix: 'वाँ'
+        exactReplacements:
+          1: 'पहला'
+          2: 'दूसरा'
+          3: 'तीसरा'
+          4: 'चौथा'
+          5: 'पाँचवाँ'
+          6: 'छठा'
+          7: 'सातवाँ'
+          8: 'आठवाँ'
+          9: 'नौवाँ'
+          10: 'दसवाँ'
+      feminine:
+        defaultSuffix: 'वीं'
+        exactReplacements:
+          1: 'पहली'
+          2: 'दूसरी'
+          3: 'तीसरी'
+          4: 'चौथी'
+          5: 'पाँचवीं'
+          6: 'छठी'
+          7: 'सातवीं'
+          8: 'आठवीं'
+          9: 'नौवीं'
+          10: 'दसवीं'
+      neuterFallback: 'masculine'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourGender: 'masculine'
+    minuteGender: 'masculine'
+    hourWordsMap:
+      - ''
+      - 'एक'
+      - 'दो'
+      - 'तीन'
+      - 'चार'
+      - 'पाँच'
+      - 'छह'
+      - 'सात'
+      - 'आठ'
+      - 'नौ'
+      - 'दस'
+      - 'ग्यारह'
+      - 'बारह'
+    min0: '{hour} बजे'
+    defaultTemplate: '{hour} बजकर {minutes} मिनट'
+    earlyMorning: 'सुबह'
+    morning: 'सुबह'
+    afternoon: 'दोपहर'
+    night: 'रात'
+    evening: 'शाम'
+    eveningStartHour: 17
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'उत्तर'
+      - 'उत्तर-उत्तर-पूर्व'
+      - 'उत्तर-पूर्व'
+      - 'पूर्व-उत्तर-पूर्व'
+      - 'पूर्व'
+      - 'पूर्व-दक्षिण-पूर्व'
+      - 'दक्षिण-पूर्व'
+      - 'दक्षिण-दक्षिण-पूर्व'
+      - 'दक्षिण'
+      - 'दक्षिण-दक्षिण-पश्चिम'
+      - 'दक्षिण-पश्चिम'
+      - 'पश्चिम-दक्षिण-पश्चिम'
+      - 'पश्चिम'
+      - 'पश्चिम-उत्तर-पश्चिम'
+      - 'उत्तर-पश्चिम'
+      - 'उत्तर-उत्तर-पश्चिम'
+    short:
+      - 'उ'
+      - 'उ-उ-पू'
+      - 'उ-पू'
+      - 'पू-उ-पू'
+      - 'पू'
+      - 'पू-द-पू'
+      - 'द-पू'
+      - 'द-द-पू'
+      - 'द'
+      - 'द-द-प'
+      - 'द-प'
+      - 'प-द-प'
+      - 'प'
+      - 'प-उ-प'
+      - 'उ-प'
+      - 'उ-उ-प'
+
+  calendar:
+    months:
+      - 'जनवरी'
+      - 'फ़रवरी'
+      - 'मार्च'
+      - 'अप्रैल'
+      - 'मई'
+      - 'जून'
+      - 'जुलाई'
+      - 'अगस्त'
+      - 'सितंबर'
+      - 'अक्टूबर'
+      - 'नवंबर'
+      - 'दिसंबर'

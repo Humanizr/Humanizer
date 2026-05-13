@@ -1031,7 +1031,23 @@ static class LocalePhraseTheoryData
         { "zu-ZA", 1, TimeUnit.Year, Tense.Past, "1 unyaka odlule" },
         { "zu-ZA", 2, TimeUnit.Year, Tense.Future, "2 iminyaka ezizayo" },
         { "zu-ZA", 0, TimeUnit.Second, Tense.Future, "manje" },
-    };
+
+        { "hi", 1, TimeUnit.Second, Tense.Past, "एक सेकंड पहले" },
+        { "hi", 2, TimeUnit.Second, Tense.Future, "2 सेकंड में" },
+        { "hi", 1, TimeUnit.Minute, Tense.Past, "एक मिनट पहले" },
+        { "hi", 2, TimeUnit.Minute, Tense.Future, "2 मिनट में" },
+        { "hi", 1, TimeUnit.Hour, Tense.Past, "एक घंटा पहले" },
+        { "hi", 2, TimeUnit.Hour, Tense.Future, "2 घंटे में" },
+        { "hi", 1, TimeUnit.Day, Tense.Past, "कल" },
+        { "hi", 1, TimeUnit.Day, Tense.Future, "कल" },
+        { "hi", 2, TimeUnit.Day, Tense.Past, "2 दिन पहले" },
+        { "hi", 2, TimeUnit.Day, Tense.Future, "2 दिन में" },
+        { "hi", 1, TimeUnit.Month, Tense.Past, "एक महीना पहले" },
+        { "hi", 2, TimeUnit.Month, Tense.Future, "2 महीने में" },
+        { "hi", 1, TimeUnit.Year, Tense.Past, "एक साल पहले" },
+        { "hi", 2, TimeUnit.Year, Tense.Future, "2 साल में" },
+        { "hi", 0, TimeUnit.Second, Tense.Future, "अभी" },
+};
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
     {
@@ -1490,7 +1506,9 @@ static class LocalePhraseTheoryData
         { "zh-Hans", "从不" },
         { "zh-Hant", "從不" },
         { "zu-ZA", "akakaze" },
-    };
+
+        { "hi", "कभी नहीं" },
+};
 
     public static TheoryData<string, string, string, string> TimeOnlyDefaultHumanizeCases => new()
     {
@@ -2308,7 +2326,17 @@ static class LocalePhraseTheoryData
         { "zu-ZA", 2, TimeUnit.Day, false, "2 izinsuku" },
         { "zu-ZA", 0, TimeUnit.Millisecond, false, "0 amamilisekhondi" },
         { "zu-ZA", 0, TimeUnit.Millisecond, true, "asikho isikhathi" },
-    };
+
+        { "hi", 1, TimeUnit.Second, false, "1 सेकंड" },
+        { "hi", 2, TimeUnit.Second, false, "2 सेकंड" },
+        { "hi", 1, TimeUnit.Minute, false, "1 मिनट" },
+        { "hi", 2, TimeUnit.Minute, false, "2 मिनट" },
+        { "hi", 1, TimeUnit.Hour, false, "1 घंटा" },
+        { "hi", 2, TimeUnit.Hour, false, "2 घंटे" },
+        { "hi", 1, TimeUnit.Day, false, "1 दिन" },
+        { "hi", 2, TimeUnit.Day, false, "2 दिन" },
+        { "hi", 1, TimeUnit.Hour, true, "एक घंटा" },
+};
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()
     {

@@ -199,7 +199,9 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 1001001L, "kanye isigidi kanye inkulungwane kanye" },
         { "zu-ZA", 1001000001L, "kanye ibhiliyoni kanye isigidi kanye" },
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
-    };
+
+        { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+};
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
@@ -398,7 +400,9 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 1001001L, "kanye isigidi kanye inkulungwane kanye" },
         { "zu-ZA", 1001000001L, "kanye ibhiliyoni kanye isigidi kanye" },
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
-    };
+
+        { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+};
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
@@ -597,7 +601,9 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 1001001L, "kanye isigidi kanye inkulungwane kanye" },
         { "zu-ZA", 1001000001L, "kanye ibhiliyoni kanye isigidi kanye" },
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
-    };
+
+        { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+};
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
@@ -796,6 +802,8 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 1001001L, "kanye isigidi kanye inkulungwane kanye" },
         { "zu-ZA", 1001000001L, "kanye ibhiliyoni kanye isigidi kanye" },
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
-    };
+
+        { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+};
 
 }
