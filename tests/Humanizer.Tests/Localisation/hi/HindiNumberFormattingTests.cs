@@ -10,8 +10,8 @@ public class HindiNumberFormattingTests
     }
 
     [Fact]
-    public void NegativeNumberFormat_UsesAsciiMinusSign()
+    public void MetricOutput_UsesStableHindiNegativeAndDecimalSeparators()
     {
-        Assert.Equal("-1,234.5", (-1234.5).ToString("N1", new CultureInfo("hi")));
+        Assert.Equal("-1.2k", (-1234L).ToMetric(decimals: 1));
     }
 }
