@@ -202,6 +202,8 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
+        { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
 };
 
     public static TheoryData<string, long, string> WordFormCases => new()
@@ -404,6 +406,8 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
+        { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
 };
 
     public static TheoryData<string, long, string> GenderCases => new()
@@ -606,6 +610,8 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
+        { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
 };
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
@@ -808,6 +814,8 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
+        { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
 };
 
 }

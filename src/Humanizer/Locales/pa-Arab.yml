@@ -1,0 +1,648 @@
+locale: 'pa-Arab'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'اتے'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'ہن'
+      never: 'کدے نہیں'
+      past:
+        millisecond:
+          single: 'اک ملی سیکنڈ پہلاں'
+          multiple:
+            forms:
+              default: 'ملی سیکنڈ'
+            afterCount: 'پہلاں'
+        second:
+          single: 'اک سیکنڈ پہلاں'
+          multiple:
+            forms:
+              default: 'سیکنڈ'
+            afterCount: 'پہلاں'
+        minute:
+          single: 'اک منٹ پہلاں'
+          multiple:
+            forms:
+              default: 'منٹ'
+            afterCount: 'پہلاں'
+        hour:
+          single: 'اک گھنٹہ پہلاں'
+          multiple:
+            forms:
+              default: 'گھنٹے'
+            afterCount: 'پہلاں'
+        day:
+          single: 'کل'
+          multiple:
+            forms:
+              default: 'دن'
+            afterCount: 'پہلاں'
+        week:
+          single: 'اک ہفتہ پہلاں'
+          multiple:
+            forms:
+              default: 'ہفتے'
+            afterCount: 'پہلاں'
+        month:
+          single: 'اک مہینہ پہلاں'
+          multiple:
+            forms:
+              default: 'مہینے'
+            afterCount: 'پہلاں'
+        year:
+          single: 'اک سال پہلاں'
+          multiple:
+            forms:
+              default: 'سال'
+            afterCount: 'پہلاں'
+      future:
+        millisecond:
+          single: 'اک ملی سیکنڈ وچ'
+          multiple:
+            forms:
+              default: 'ملی سیکنڈ'
+            afterCount: 'وچ'
+        second:
+          single: 'اک سیکنڈ وچ'
+          multiple:
+            forms:
+              default: 'سیکنڈ'
+            afterCount: 'وچ'
+        minute:
+          single: 'اک منٹ وچ'
+          multiple:
+            forms:
+              default: 'منٹ'
+            afterCount: 'وچ'
+        hour:
+          single: 'اک گھنٹے وچ'
+          multiple:
+            forms:
+              default: 'گھنٹے'
+            afterCount: 'وچ'
+        day:
+          single: 'کل'
+          multiple:
+            forms:
+              default: 'دن'
+            afterCount: 'وچ'
+        week:
+          single: 'اک ہفتے وچ'
+          multiple:
+            forms:
+              default: 'ہفتیاں'
+            afterCount: 'وچ'
+        month:
+          single: 'اک مہینے وچ'
+          multiple:
+            forms:
+              default: 'مہینیاں'
+            afterCount: 'وچ'
+        year:
+          single: 'اک سال وچ'
+          multiple:
+            forms:
+              default: 'سالاں'
+            afterCount: 'وچ'
+    duration:
+      zero: 'ہن'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 ملی سیکنڈ'
+          words: 'اک ملی سیکنڈ'
+        multiple:
+          forms:
+            default: 'ملی سیکنڈ'
+            singular: 'ملی سیکنڈ'
+      second:
+        single:
+          numeric: '1 سیکنڈ'
+          words: 'اک سیکنڈ'
+        multiple:
+          forms:
+            default: 'سیکنڈ'
+            singular: 'سیکنڈ'
+      minute:
+        single:
+          numeric: '1 منٹ'
+          words: 'اک منٹ'
+        multiple:
+          forms:
+            default: 'منٹ'
+            singular: 'منٹ'
+      hour:
+        single:
+          numeric: '1 گھنٹہ'
+          words: 'اک گھنٹہ'
+        multiple:
+          forms:
+            default: 'گھنٹے'
+            singular: 'گھنٹہ'
+      day:
+        single:
+          numeric: '1 دن'
+          words: 'اک دن'
+        multiple:
+          forms:
+            default: 'دن'
+            singular: 'دن'
+      week:
+        single:
+          numeric: '1 ہفتہ'
+          words: 'اک ہفتہ'
+        multiple:
+          forms:
+            default: 'ہفتے'
+            singular: 'ہفتہ'
+      month:
+        single:
+          numeric: '1 مہینہ'
+          words: 'اک مہینہ'
+        multiple:
+          forms:
+            default: 'مہینے'
+            singular: 'مہینہ'
+      year:
+        single:
+          numeric: '1 سال'
+          words: 'اک سال'
+        multiple:
+          forms:
+            default: 'سال'
+            singular: 'سال'
+    dataUnits:
+      bit:
+        forms:
+          default: 'بٹ'
+          singular: 'بٹ'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'بائٹ'
+          singular: 'بائٹ'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'کلو بائٹ'
+          singular: 'کلو بائٹ'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'میگا بائٹ'
+          singular: 'میگا بائٹ'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'گیگا بائٹ'
+          singular: 'گیگا بائٹ'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ٹیرا بائٹ'
+          singular: 'ٹیرا بائٹ'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ملی سیکنڈ'
+      second:
+        symbol: 'سیکنڈ'
+      minute:
+        symbol: 'منٹ'
+      hour:
+        symbol: 'گھنٹہ'
+      day:
+        symbol: 'دن'
+      week:
+        symbol: 'ہفتہ'
+      month:
+        symbol: 'مہینہ'
+      year:
+        symbol: 'سال'
+
+  number:
+    words:
+      engine: 'indian-grouping-gendered'
+      zeroWord: 'صفر'
+      negativeWord: 'منفی'
+      hundredWord: 'سو'
+      thousandWord: 'ہزار'
+      lakhWord: 'لکھ'
+      singleLakhWord: 'اک'
+      croreWord: 'کروڑ'
+      arabWord: 'ارب'
+      kharabWord: 'کھرب'
+      denseUnitsMap:
+        - 'صفر'
+        - 'اک'
+        - 'دو'
+        - 'تن'
+        - 'چار'
+        - 'پنج'
+        - 'چھے'
+        - 'ست'
+        - 'اٹھ'
+        - 'نوں'
+        - 'دس'
+        - 'گیاراں'
+        - 'باراں'
+        - 'تیراں'
+        - 'چوداں'
+        - 'پندراں'
+        - 'سولاں'
+        - 'ستاراں'
+        - 'اٹھاراں'
+        - 'انی'
+        - 'ویہ'
+        - 'اکی'
+        - 'بائی'
+        - 'تےئی'
+        - 'چووی'
+        - 'پچی'
+        - 'چھبی'
+        - 'ستائی'
+        - 'اٹھائی'
+        - 'انتی'
+        - 'تیہ'
+        - 'اکتی'
+        - 'بتی'
+        - 'تیتی'
+        - 'چونتی'
+        - 'پینتی'
+        - 'چھتی'
+        - 'سینتی'
+        - 'اٹھتی'
+        - 'انتالی'
+        - 'چالی'
+        - 'اکتالی'
+        - 'بیالی'
+        - 'ترتالی'
+        - 'چتالی'
+        - 'پنتالی'
+        - 'چھیالی'
+        - 'سنتالی'
+        - 'اٹھتالی'
+        - 'اننجا'
+        - 'پنجاہ'
+        - 'اکونجا'
+        - 'بونجا'
+        - 'ترونجا'
+        - 'چرونجا'
+        - 'پچونجا'
+        - 'چھپنجا'
+        - 'ستونجا'
+        - 'اٹھونجا'
+        - 'اناہٹھ'
+        - 'سٹھ'
+        - 'اکاہٹھ'
+        - 'باہٹھ'
+        - 'تریہٹھ'
+        - 'چونہٹھ'
+        - 'پینہٹھ'
+        - 'چھیاہٹھ'
+        - 'ستاہٹھ'
+        - 'اٹھاہٹھ'
+        - 'انتر'
+        - 'ستر'
+        - 'اکہتر'
+        - 'بہتر'
+        - 'تہتر'
+        - 'چہتر'
+        - 'پچتر'
+        - 'چھیاتر'
+        - 'ستتر'
+        - 'اٹھتر'
+        - 'اناسی'
+        - 'اسی'
+        - 'اکیاسی'
+        - 'بیاسی'
+        - 'تراسی'
+        - 'چوراسی'
+        - 'پچاسی'
+        - 'چھیاسی'
+        - 'ستاسی'
+        - 'اٹھاسی'
+        - 'انانویں'
+        - 'نبے'
+        - 'اکنویں'
+        - 'بنویں'
+        - 'ترنویں'
+        - 'چرنویں'
+        - 'پچنویں'
+        - 'چھیانویں'
+        - 'ستنویں'
+        - 'اٹھنویں'
+        - 'نڑنویں'
+      ordinal:
+        masculine:
+          defaultSuffix: 'واں'
+          exactReplacements:
+            1: 'پہلا'
+            2: 'دوجا'
+            3: 'تیجا'
+            4: 'چوتھا'
+            5: 'پنجواں'
+            6: 'چھیواں'
+            7: 'ستواں'
+            8: 'اٹھواں'
+            9: 'نوواں'
+            10: 'دسواں'
+        feminine:
+          defaultSuffix: 'ویں'
+          exactReplacements:
+            1: 'پہلی'
+            2: 'دوجی'
+            3: 'تیجی'
+            4: 'چوتھی'
+            5: 'پنجویں'
+            6: 'چھیویں'
+            7: 'ستویں'
+            8: 'اٹھویں'
+            9: 'نوویں'
+            10: 'دسویں'
+        neuterFallback: 'masculine'
+
+    formatting:
+      decimalSeparator: '٫'
+      groupSeparator: '٬'
+      negativeSign: '-'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'masculine-and-feminine'
+      useHundredMultiplier: true
+      tokenSuffixesToStrip:
+        - 'واں'
+        - 'ویں'
+      cardinalMap:
+        'صفر': 0
+        'اک': 1
+        'دو': 2
+        'تن': 3
+        'چار': 4
+        'پنج': 5
+        'چھے': 6
+        'ست': 7
+        'اٹھ': 8
+        'نوں': 9
+        'نو': 9
+        'دس': 10
+        'گیاراں': 11
+        'باراں': 12
+        'تیراں': 13
+        'چوداں': 14
+        'پندراں': 15
+        'سولاں': 16
+        'ستاراں': 17
+        'اٹھاراں': 18
+        'انی': 19
+        'ویہ': 20
+        'اکی': 21
+        'بائی': 22
+        'تےئی': 23
+        'چووی': 24
+        'پچی': 25
+        'چھبی': 26
+        'ستائی': 27
+        'اٹھائی': 28
+        'انتی': 29
+        'تیہ': 30
+        'اکتی': 31
+        'بتی': 32
+        'تیتی': 33
+        'چونتی': 34
+        'پینتی': 35
+        'چھتی': 36
+        'سینتی': 37
+        'اٹھتی': 38
+        'انتالی': 39
+        'چالی': 40
+        'اکتالی': 41
+        'بیالی': 42
+        'ترتالی': 43
+        'چتالی': 44
+        'پنتالی': 45
+        'پینتالی': 45
+        'چھیالی': 46
+        'سنتالی': 47
+        'اٹھتالی': 48
+        'اننجا': 49
+        'پنجاہ': 50
+        'اکونجا': 51
+        'بونجا': 52
+        'ترونجا': 53
+        'چرونجا': 54
+        'چرنجا': 54
+        'پچونجا': 55
+        'چھپنجا': 56
+        'ستونجا': 57
+        'اٹھونجا': 58
+        'اناہٹھ': 59
+        'سٹھ': 60
+        'اکاہٹھ': 61
+        'باہٹھ': 62
+        'بہاٹھ': 62
+        'تریہٹھ': 63
+        'چونہٹھ': 64
+        'پینہٹھ': 65
+        'چھیاہٹھ': 66
+        'ستاہٹھ': 67
+        'اٹھاہٹھ': 68
+        'انتر': 69
+        'ستر': 70
+        'اکہتر': 71
+        'بہتر': 72
+        'تہتر': 73
+        'چہتر': 74
+        'پچتر': 75
+        'چھیاتر': 76
+        'ستتر': 77
+        'اٹھتر': 78
+        'اناسی': 79
+        'اسی': 80
+        'اکیاسی': 81
+        'بیاسی': 82
+        'تراسی': 83
+        'چوراسی': 84
+        'پچاسی': 85
+        'چھیاسی': 86
+        'ستاسی': 87
+        'اٹھاسی': 88
+        'انانویں': 89
+        'نبے': 90
+        'اکنویں': 91
+        'بنویں': 92
+        'ترنویں': 93
+        'چرنویں': 94
+        'پچنویں': 95
+        'چھیانویں': 96
+        'ستنویں': 97
+        'اٹھنویں': 98
+        'نڑنویں': 99
+        'نڑھنویں': 99
+        'سو': 100
+        'ہزار': 1000
+        'ہزاراں': 1000
+        'لکھ': 100000
+        'کروڑ': 10000000
+        'ارب': 1000000000
+        'کھرب': 100000000000
+      ordinalMap:
+        'پہلا': 1
+        'پہلی': 1
+        'دوجا': 2
+        'دوجی': 2
+        'تیجا': 3
+        'تیجی': 3
+        'چوتھا': 4
+        'چوتھی': 4
+        'پنجواں': 5
+        'پنجویں': 5
+        'چھیواں': 6
+        'چھیویں': 6
+        'ستواں': 7
+        'ستویں': 7
+        'اٹھواں': 8
+        'اٹھویں': 8
+        'نوواں': 9
+        'نوویں': 9
+        'دسواں': 10
+        'دسویں': 10
+        'اکیواں': 21
+        'اکیویں': 21
+      negativePrefixes:
+        - 'منفی'
+        - 'مائنس'
+
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      useCulture: true
+      masculine:
+        defaultSuffix: 'واں'
+        exactReplacements:
+          1: 'پہلا'
+          2: 'دوجا'
+          3: 'تیجا'
+          4: 'چوتھا'
+          5: 'پنجواں'
+          6: 'چھیواں'
+          7: 'ستواں'
+          8: 'اٹھواں'
+          9: 'نوواں'
+          10: 'دسواں'
+      feminine:
+        defaultSuffix: 'ویں'
+        exactReplacements:
+          1: 'پہلی'
+          2: 'دوجی'
+          3: 'تیجی'
+          4: 'چوتھی'
+          5: 'پنجویں'
+          6: 'چھیویں'
+          7: 'ستویں'
+          8: 'اٹھویں'
+          9: 'نوویں'
+          10: 'دسویں'
+      neuterFallback: 'masculine'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourGender: 'masculine'
+    minuteGender: 'masculine'
+    hourWordsMap:
+      - ''
+      - 'اک'
+      - 'دو'
+      - 'تن'
+      - 'چار'
+      - 'پنج'
+      - 'چھے'
+      - 'ست'
+      - 'اٹھ'
+      - 'نوں'
+      - 'دس'
+      - 'گیاراں'
+      - 'باراں'
+    min0: '{hour} وجے'
+    defaultTemplate: '{hour} وج کے {minutes} منٹ'
+    earlyMorning: 'سویرے'
+    morning: 'سویرے'
+    afternoon: 'دپہر'
+    evening: 'شام'
+    night: 'رات'
+    eveningStartHour: 17
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'اتر'
+      - 'اتر-اتر-پورب'
+      - 'اتر-پورب'
+      - 'پورب-اتر-پورب'
+      - 'پورب'
+      - 'پورب-دکھن-پورب'
+      - 'دکھن-پورب'
+      - 'دکھن-دکھن-پورب'
+      - 'دکھن'
+      - 'دکھن-دکھن-پچھم'
+      - 'دکھن-پچھم'
+      - 'پچھم-دکھن-پچھم'
+      - 'پچھم'
+      - 'پچھم-اتر-پچھم'
+      - 'اتر-پچھم'
+      - 'اتر-اتر-پچھم'
+    short:
+      - 'ا'
+      - 'ا-ا-پو'
+      - 'ا-پو'
+      - 'پو-ا-پو'
+      - 'پو'
+      - 'پو-دکھ-پو'
+      - 'دکھ-پو'
+      - 'دکھ-دکھ-پو'
+      - 'دکھ'
+      - 'دکھ-دکھ-پچھ'
+      - 'دکھ-پچھ'
+      - 'پچھ-دکھ-پچھ'
+      - 'پچھ'
+      - 'پچھ-ا-پچھ'
+      - 'ا-پچھ'
+      - 'ا-ا-پچھ'
+
+  calendar:
+    months:
+      - 'جنوری'
+      - 'فروری'
+      - 'مارچ'
+      - 'اپریل'
+      - 'مئی'
+      - 'جون'
+      - 'جولائی'
+      - 'اگست'
+      - 'ستمبر'
+      - 'اکتوبر'
+      - 'نومبر'
+      - 'دسمبر'

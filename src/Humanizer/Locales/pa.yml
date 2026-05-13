@@ -1,0 +1,656 @@
+locale: 'pa'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'ਅਤੇ'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'ਹੁਣੇ'
+      never: 'ਕਦੇ ਨਹੀਂ'
+      past:
+        millisecond:
+          single: 'ਇੱਕ ਮਿਲੀਸਕਿੰਟ ਪਹਿਲਾਂ'
+          multiple:
+            forms:
+              default: 'ਮਿਲੀਸਕਿੰਟ'
+            afterCount: 'ਪਹਿਲਾਂ'
+        second:
+          single: 'ਇੱਕ ਸਕਿੰਟ ਪਹਿਲਾਂ'
+          multiple:
+            forms:
+              default: 'ਸਕਿੰਟ'
+            afterCount: 'ਪਹਿਲਾਂ'
+        minute:
+          single: 'ਇੱਕ ਮਿੰਟ ਪਹਿਲਾਂ'
+          multiple:
+            forms:
+              default: 'ਮਿੰਟ'
+            afterCount: 'ਪਹਿਲਾਂ'
+        hour:
+          single: 'ਇੱਕ ਘੰਟਾ ਪਹਿਲਾਂ'
+          multiple:
+            forms:
+              default: 'ਘੰਟੇ'
+            afterCount: 'ਪਹਿਲਾਂ'
+        day:
+          single: 'ਕੱਲ੍ਹ'
+          multiple:
+            forms:
+              default: 'ਦਿਨ'
+            afterCount: 'ਪਹਿਲਾਂ'
+        week:
+          single: 'ਇੱਕ ਹਫ਼ਤਾ ਪਹਿਲਾਂ'
+          multiple:
+            forms:
+              default: 'ਹਫ਼ਤੇ'
+            afterCount: 'ਪਹਿਲਾਂ'
+        month:
+          single: 'ਇੱਕ ਮਹੀਨਾ ਪਹਿਲਾਂ'
+          multiple:
+            forms:
+              default: 'ਮਹੀਨੇ'
+            afterCount: 'ਪਹਿਲਾਂ'
+        year:
+          single: 'ਇੱਕ ਸਾਲ ਪਹਿਲਾਂ'
+          multiple:
+            forms:
+              default: 'ਸਾਲ'
+            afterCount: 'ਪਹਿਲਾਂ'
+      future:
+        millisecond:
+          single: 'ਇੱਕ ਮਿਲੀਸਕਿੰਟ ਵਿੱਚ'
+          multiple:
+            forms:
+              default: 'ਮਿਲੀਸਕਿੰਟ'
+            afterCount: 'ਵਿੱਚ'
+        second:
+          single: 'ਇੱਕ ਸਕਿੰਟ ਵਿੱਚ'
+          multiple:
+            forms:
+              default: 'ਸਕਿੰਟ'
+            afterCount: 'ਵਿੱਚ'
+        minute:
+          single: 'ਇੱਕ ਮਿੰਟ ਵਿੱਚ'
+          multiple:
+            forms:
+              default: 'ਮਿੰਟ'
+            afterCount: 'ਵਿੱਚ'
+        hour:
+          single: 'ਇੱਕ ਘੰਟੇ ਵਿੱਚ'
+          multiple:
+            forms:
+              default: 'ਘੰਟੇ'
+            afterCount: 'ਵਿੱਚ'
+        day:
+          single: 'ਕੱਲ੍ਹ'
+          multiple:
+            forms:
+              default: 'ਦਿਨ'
+            afterCount: 'ਵਿੱਚ'
+        week:
+          single: 'ਇੱਕ ਹਫ਼ਤੇ ਵਿੱਚ'
+          multiple:
+            forms:
+              default: 'ਹਫ਼ਤਿਆਂ'
+            afterCount: 'ਵਿੱਚ'
+        month:
+          single: 'ਇੱਕ ਮਹੀਨੇ ਵਿੱਚ'
+          multiple:
+            forms:
+              default: 'ਮਹੀਨਿਆਂ'
+            afterCount: 'ਵਿੱਚ'
+        year:
+          single: 'ਇੱਕ ਸਾਲ ਵਿੱਚ'
+          multiple:
+            forms:
+              default: 'ਸਾਲਾਂ'
+            afterCount: 'ਵਿੱਚ'
+    duration:
+      zero: 'ਹੁਣੇ'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 ਮਿਲੀਸਕਿੰਟ'
+          words: 'ਇੱਕ ਮਿਲੀਸਕਿੰਟ'
+        multiple:
+          forms:
+            default: 'ਮਿਲੀਸਕਿੰਟ'
+            singular: 'ਮਿਲੀਸਕਿੰਟ'
+      second:
+        single:
+          numeric: '1 ਸਕਿੰਟ'
+          words: 'ਇੱਕ ਸਕਿੰਟ'
+        multiple:
+          forms:
+            default: 'ਸਕਿੰਟ'
+            singular: 'ਸਕਿੰਟ'
+      minute:
+        single:
+          numeric: '1 ਮਿੰਟ'
+          words: 'ਇੱਕ ਮਿੰਟ'
+        multiple:
+          forms:
+            default: 'ਮਿੰਟ'
+            singular: 'ਮਿੰਟ'
+      hour:
+        single:
+          numeric: '1 ਘੰਟਾ'
+          words: 'ਇੱਕ ਘੰਟਾ'
+        multiple:
+          forms:
+            default: 'ਘੰਟੇ'
+            singular: 'ਘੰਟਾ'
+      day:
+        single:
+          numeric: '1 ਦਿਨ'
+          words: 'ਇੱਕ ਦਿਨ'
+        multiple:
+          forms:
+            default: 'ਦਿਨ'
+            singular: 'ਦਿਨ'
+      week:
+        single:
+          numeric: '1 ਹਫ਼ਤਾ'
+          words: 'ਇੱਕ ਹਫ਼ਤਾ'
+        multiple:
+          forms:
+            default: 'ਹਫ਼ਤੇ'
+            singular: 'ਹਫ਼ਤਾ'
+      month:
+        single:
+          numeric: '1 ਮਹੀਨਾ'
+          words: 'ਇੱਕ ਮਹੀਨਾ'
+        multiple:
+          forms:
+            default: 'ਮਹੀਨੇ'
+            singular: 'ਮਹੀਨਾ'
+      year:
+        single:
+          numeric: '1 ਸਾਲ'
+          words: 'ਇੱਕ ਸਾਲ'
+        multiple:
+          forms:
+            default: 'ਸਾਲ'
+            singular: 'ਸਾਲ'
+    dataUnits:
+      bit:
+        forms:
+          default: 'ਬਿਟ'
+          singular: 'ਬਿਟ'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'ਬਾਈਟ'
+          singular: 'ਬਾਈਟ'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'ਕਿਲੋਬਾਈਟ'
+          singular: 'ਕਿਲੋਬਾਈਟ'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'ਮੇਗਾਬਾਈਟ'
+          singular: 'ਮੇਗਾਬਾਈਟ'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'ਗੀਗਾਬਾਈਟ'
+          singular: 'ਗੀਗਾਬਾਈਟ'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ਟੈਰਾਬਾਈਟ'
+          singular: 'ਟੈਰਾਬਾਈਟ'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ਮਿਲੀਸਕਿੰਟ'
+      second:
+        symbol: 'ਸਕਿੰਟ'
+      minute:
+        symbol: 'ਮਿੰਟ'
+      hour:
+        symbol: 'ਘੰਟਾ'
+      day:
+        symbol: 'ਦਿਨ'
+      week:
+        symbol: 'ਹਫ਼ਤਾ'
+      month:
+        symbol: 'ਮਹੀਨਾ'
+      year:
+        symbol: 'ਸਾਲ'
+
+  number:
+    words:
+      engine: 'indian-grouping-gendered'
+      zeroWord: 'ਸਿਫ਼ਰ'
+      negativeWord: 'ਰਿਣਾਤਮਕ'
+      hundredWord: 'ਸੌ'
+      thousandWord: 'ਹਜ਼ਾਰ'
+      lakhWord: 'ਲੱਖ'
+      singleLakhWord: 'ਇੱਕ'
+      croreWord: 'ਕਰੋੜ'
+      arabWord: 'ਅਰਬ'
+      kharabWord: 'ਖਰਬ'
+      denseUnitsMap:
+        - 'ਸਿਫ਼ਰ'
+        - 'ਇੱਕ'
+        - 'ਦੋ'
+        - 'ਤਿੰਨ'
+        - 'ਚਾਰ'
+        - 'ਪੰਜ'
+        - 'ਛੇ'
+        - 'ਸੱਤ'
+        - 'ਅੱਠ'
+        - 'ਨੌਂ'
+        - 'ਦਸ'
+        - 'ਗਿਆਰਾਂ'
+        - 'ਬਾਰਾਂ'
+        - 'ਤੇਰਾਂ'
+        - 'ਚੌਦਾਂ'
+        - 'ਪੰਦਰਾਂ'
+        - 'ਸੋਲਾਂ'
+        - 'ਸਤਾਰਾਂ'
+        - 'ਅਠਾਰਾਂ'
+        - 'ਉੱਨੀ'
+        - 'ਵੀਹ'
+        - 'ਇੱਕੀ'
+        - 'ਬਾਈ'
+        - 'ਤੇਈ'
+        - 'ਚੌਵੀ'
+        - 'ਪੱਚੀ'
+        - 'ਛੱਬੀ'
+        - 'ਸਤਾਈ'
+        - 'ਅਠਾਈ'
+        - 'ਉਨੱਤੀ'
+        - 'ਤੀਹ'
+        - 'ਇਕੱਤੀ'
+        - 'ਬੱਤੀ'
+        - 'ਤੇਤੀ'
+        - 'ਚੌਂਤੀ'
+        - 'ਪੈਂਤੀ'
+        - 'ਛੱਤੀ'
+        - 'ਸੈਂਤੀ'
+        - 'ਅਠੱਤੀ'
+        - 'ਉਨਤਾਲੀ'
+        - 'ਚਾਲੀ'
+        - 'ਇਕਤਾਲੀ'
+        - 'ਬਿਆਲੀ'
+        - 'ਤਰਤਾਲੀ'
+        - 'ਚੁਤਾਲੀ'
+        - 'ਪੰਤਾਲੀ'
+        - 'ਛਿਆਲੀ'
+        - 'ਸਨਤਾਲੀ'
+        - 'ਅਠਤਾਲੀ'
+        - 'ਉਨੰਜਾ'
+        - 'ਪੰਜਾਹ'
+        - 'ਇਕਵੰਜਾ'
+        - 'ਬਵੰਜਾ'
+        - 'ਤਰਵੰਜਾ'
+        - 'ਚਰਵੰਜਾ'
+        - 'ਪਚਵੰਜਾ'
+        - 'ਛਪੰਜਾ'
+        - 'ਸਤਵੰਜਾ'
+        - 'ਅਠਵੰਜਾ'
+        - 'ਉਨਾਹਠ'
+        - 'ਸੱਠ'
+        - 'ਇਕਾਹਠ'
+        - 'ਬਾਹਠ'
+        - 'ਤਰੇਹਠ'
+        - 'ਚੌਂਹਠ'
+        - 'ਪੈਂਹਠ'
+        - 'ਛਿਆਹਠ'
+        - 'ਸਤਾਹਠ'
+        - 'ਅਠਾਹਠ'
+        - 'ਉਨੱਤਰ'
+        - 'ਸੱਤਰ'
+        - 'ਇਕਹੱਤਰ'
+        - 'ਬਹੱਤਰ'
+        - 'ਤਿਹੱਤਰ'
+        - 'ਚਹੱਤਰ'
+        - 'ਪਚੱਤਰ'
+        - 'ਛਿਆੱਤਰ'
+        - 'ਸਤੱਤਰ'
+        - 'ਅਠੱਤਰ'
+        - 'ਉਨਾਸੀ'
+        - 'ਅੱਸੀ'
+        - 'ਇਕਆਸੀ'
+        - 'ਬਿਆਸੀ'
+        - 'ਤਿਰਾਸੀ'
+        - 'ਚੌਰਾਸੀ'
+        - 'ਪਚਾਸੀ'
+        - 'ਛਿਆਸੀ'
+        - 'ਸਤਾਸੀ'
+        - 'ਅਠਾਸੀ'
+        - 'ਉਨਾਨਵੇਂ'
+        - 'ਨੱਬੇ'
+        - 'ਇਕੱਨਵੇਂ'
+        - 'ਬੰਨਵੇਂ'
+        - 'ਤਿਰਨਵੇਂ'
+        - 'ਚੁਰਨਵੇਂ'
+        - 'ਪਚਨਵੇਂ'
+        - 'ਛਿਆਨਵੇਂ'
+        - 'ਸਤਨਵੇਂ'
+        - 'ਅਠਨਵੇਂ'
+        - 'ਨੜਿਨਵੇਂ'
+      ordinal:
+        masculine:
+          defaultSuffix: 'ਵਾਂ'
+          exactReplacements:
+            1: 'ਪਹਿਲਾ'
+            2: 'ਦੂਜਾ'
+            3: 'ਤੀਜਾ'
+            4: 'ਚੌਥਾ'
+            5: 'ਪੰਜਵਾਂ'
+            6: 'ਛੇਵਾਂ'
+            7: 'ਸੱਤਵਾਂ'
+            8: 'ਅੱਠਵਾਂ'
+            9: 'ਨੌਵਾਂ'
+            10: 'ਦਸਵਾਂ'
+        feminine:
+          defaultSuffix: 'ਵੀਂ'
+          exactReplacements:
+            1: 'ਪਹਿਲੀ'
+            2: 'ਦੂਜੀ'
+            3: 'ਤੀਜੀ'
+            4: 'ਚੌਥੀ'
+            5: 'ਪੰਜਵੀਂ'
+            6: 'ਛੇਵੀਂ'
+            7: 'ਸੱਤਵੀਂ'
+            8: 'ਅੱਠਵੀਂ'
+            9: 'ਨੌਵੀਂ'
+            10: 'ਦਸਵੀਂ'
+        neuterFallback: 'masculine'
+
+    formatting:
+      decimalSeparator: '.'
+      groupSeparator: ','
+      negativeSign: '-'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'masculine-and-feminine'
+      useHundredMultiplier: true
+      tokenSuffixesToStrip:
+        - 'ਵਾਂ'
+        - 'ਵੀਂ'
+      cardinalMap:
+        'ਸਿਫ਼ਰ': 0
+        'ਸਿਫਰ': 0
+        'ਇੱਕ': 1
+        'ਇਕ': 1
+        'ਦੋ': 2
+        'ਤਿੰਨ': 3
+        'ਚਾਰ': 4
+        'ਪੰਜ': 5
+        'ਛੇ': 6
+        'ਸੱਤ': 7
+        'ਅੱਠ': 8
+        'ਨੌਂ': 9
+        'ਨੌ': 9
+        'ਦਸ': 10
+        'ਦੱਸ': 10
+        'ਗਿਆਰਾਂ': 11
+        'ਬਾਰਾਂ': 12
+        'ਤੇਰਾਂ': 13
+        'ਚੌਦਾਂ': 14
+        'ਪੰਦਰਾਂ': 15
+        'ਸੋਲਾਂ': 16
+        'ਸਤਾਰਾਂ': 17
+        'ਅਠਾਰਾਂ': 18
+        'ਉੱਨੀ': 19
+        'ਉਨੀ': 19
+        'ਵੀਹ': 20
+        'ਇੱਕੀ': 21
+        'ਇਕੀ': 21
+        'ਬਾਈ': 22
+        'ਤੇਈ': 23
+        'ਚੌਵੀ': 24
+        'ਪੱਚੀ': 25
+        'ਛੱਬੀ': 26
+        'ਸਤਾਈ': 27
+        'ਅਠਾਈ': 28
+        'ਉਨੱਤੀ': 29
+        'ਤੀਹ': 30
+        'ਇਕੱਤੀ': 31
+        'ਬੱਤੀ': 32
+        'ਤੇਤੀ': 33
+        'ਚੌਂਤੀ': 34
+        'ਪੈਂਤੀ': 35
+        'ਛੱਤੀ': 36
+        'ਸੈਂਤੀ': 37
+        'ਅਠੱਤੀ': 38
+        'ਉਨਤਾਲੀ': 39
+        'ਚਾਲੀ': 40
+        'ਇਕਤਾਲੀ': 41
+        'ਬਿਆਲੀ': 42
+        'ਤਰਤਾਲੀ': 43
+        'ਚੁਤਾਲੀ': 44
+        'ਪੰਤਾਲੀ': 45
+        'ਪੈਂਤਾਲੀ': 45
+        'ਛਿਆਲੀ': 46
+        'ਸਨਤਾਲੀ': 47
+        'ਅਠਤਾਲੀ': 48
+        'ਉਨੰਜਾ': 49
+        'ਪੰਜਾਹ': 50
+        'ਇਕਵੰਜਾ': 51
+        'ਬਵੰਜਾ': 52
+        'ਤਰਵੰਜਾ': 53
+        'ਚਰਵੰਜਾ': 54
+        'ਚੁਰੰਜਾ': 54
+        'ਪਚਵੰਜਾ': 55
+        'ਛਪੰਜਾ': 56
+        'ਸਤਵੰਜਾ': 57
+        'ਅਠਵੰਜਾ': 58
+        'ਉਨਾਹਠ': 59
+        'ਸੱਠ': 60
+        'ਇਕਾਹਠ': 61
+        'ਬਾਹਠ': 62
+        'ਬਹਾਠ': 62
+        'ਤਰੇਹਠ': 63
+        'ਚੌਂਹਠ': 64
+        'ਪੈਂਹਠ': 65
+        'ਛਿਆਹਠ': 66
+        'ਸਤਾਹਠ': 67
+        'ਅਠਾਹਠ': 68
+        'ਉਨੱਤਰ': 69
+        'ਸੱਤਰ': 70
+        'ਇਕਹੱਤਰ': 71
+        'ਬਹੱਤਰ': 72
+        'ਤਿਹੱਤਰ': 73
+        'ਚਹੱਤਰ': 74
+        'ਪਚੱਤਰ': 75
+        'ਛਿਆੱਤਰ': 76
+        'ਛਿਅੱਤਰ': 76
+        'ਸਤੱਤਰ': 77
+        'ਅਠੱਤਰ': 78
+        'ਉਨਾਸੀ': 79
+        'ਅੱਸੀ': 80
+        'ਇਕਆਸੀ': 81
+        'ਬਿਆਸੀ': 82
+        'ਤਿਰਾਸੀ': 83
+        'ਚੌਰਾਸੀ': 84
+        'ਪਚਾਸੀ': 85
+        'ਛਿਆਸੀ': 86
+        'ਸਤਾਸੀ': 87
+        'ਅਠਾਸੀ': 88
+        'ਉਨਾਨਵੇਂ': 89
+        'ਉਣਾਂਨਵੇਂ': 89
+        'ਨੱਬੇ': 90
+        'ਇਕੱਨਵੇਂ': 91
+        'ਬੰਨਵੇਂ': 92
+        'ਤਿਰਨਵੇਂ': 93
+        'ਚੁਰਨਵੇਂ': 94
+        'ਪਚਨਵੇਂ': 95
+        'ਛਿਆਨਵੇਂ': 96
+        'ਸਤਨਵੇਂ': 97
+        'ਅਠਨਵੇਂ': 98
+        'ਨੜਿਨਵੇਂ': 99
+        'ਨੜ੍ਹਿਨਵੇਂ': 99
+        'ਸੌ': 100
+        'ਹਜ਼ਾਰ': 1000
+        'ਹਜ਼ਾਰਾਂ': 1000
+        'ਲੱਖ': 100000
+        'ਕਰੋੜ': 10000000
+        'ਅਰਬ': 1000000000
+        'ਖਰਬ': 100000000000
+      ordinalMap:
+        'ਪਹਿਲਾ': 1
+        'ਪਹਿਲੀ': 1
+        'ਦੂਜਾ': 2
+        'ਦੂਜੀ': 2
+        'ਤੀਜਾ': 3
+        'ਤੀਜੀ': 3
+        'ਚੌਥਾ': 4
+        'ਚੌਥੀ': 4
+        'ਪੰਜਵਾਂ': 5
+        'ਪੰਜਵੀਂ': 5
+        'ਛੇਵਾਂ': 6
+        'ਛੇਵੀਂ': 6
+        'ਸੱਤਵਾਂ': 7
+        'ਸੱਤਵੀਂ': 7
+        'ਅੱਠਵਾਂ': 8
+        'ਅੱਠਵੀਂ': 8
+        'ਨੌਵਾਂ': 9
+        'ਨੌਵੀਂ': 9
+        'ਦਸਵਾਂ': 10
+        'ਦਸਵੀਂ': 10
+        'ਇੱਕੀਵਾਂ': 21
+        'ਇੱਕੀਵੀਂ': 21
+      negativePrefixes:
+        - 'ਰਿਣਾਤਮਕ'
+        - 'ਨਕਾਰਾਤਮਕ'
+        - 'ਮਾਇਨਸ'
+
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      useCulture: true
+      masculine:
+        defaultSuffix: 'ਵਾਂ'
+        exactReplacements:
+          1: 'ਪਹਿਲਾ'
+          2: 'ਦੂਜਾ'
+          3: 'ਤੀਜਾ'
+          4: 'ਚੌਥਾ'
+          5: 'ਪੰਜਵਾਂ'
+          6: 'ਛੇਵਾਂ'
+          7: 'ਸੱਤਵਾਂ'
+          8: 'ਅੱਠਵਾਂ'
+          9: 'ਨੌਵਾਂ'
+          10: 'ਦਸਵਾਂ'
+      feminine:
+        defaultSuffix: 'ਵੀਂ'
+        exactReplacements:
+          1: 'ਪਹਿਲੀ'
+          2: 'ਦੂਜੀ'
+          3: 'ਤੀਜੀ'
+          4: 'ਚੌਥੀ'
+          5: 'ਪੰਜਵੀਂ'
+          6: 'ਛੇਵੀਂ'
+          7: 'ਸੱਤਵੀਂ'
+          8: 'ਅੱਠਵੀਂ'
+          9: 'ਨੌਵੀਂ'
+          10: 'ਦਸਵੀਂ'
+      neuterFallback: 'masculine'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourGender: 'masculine'
+    minuteGender: 'masculine'
+    hourWordsMap:
+      - ''
+      - 'ਇੱਕ'
+      - 'ਦੋ'
+      - 'ਤਿੰਨ'
+      - 'ਚਾਰ'
+      - 'ਪੰਜ'
+      - 'ਛੇ'
+      - 'ਸੱਤ'
+      - 'ਅੱਠ'
+      - 'ਨੌਂ'
+      - 'ਦਸ'
+      - 'ਗਿਆਰਾਂ'
+      - 'ਬਾਰਾਂ'
+    min0: '{hour} ਵਜੇ'
+    defaultTemplate: '{hour} ਵੱਜ ਕੇ {minutes} ਮਿੰਟ'
+    earlyMorning: 'ਸਵੇਰੇ'
+    morning: 'ਸਵੇਰੇ'
+    afternoon: 'ਦੁਪਹਿਰ'
+    evening: 'ਸ਼ਾਮ'
+    night: 'ਰਾਤ'
+    eveningStartHour: 17
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'ਉੱਤਰ'
+      - 'ਉੱਤਰ-ਉੱਤਰ-ਪੂਰਬ'
+      - 'ਉੱਤਰ-ਪੂਰਬ'
+      - 'ਪੂਰਬ-ਉੱਤਰ-ਪੂਰਬ'
+      - 'ਪੂਰਬ'
+      - 'ਪੂਰਬ-ਦੱਖਣ-ਪੂਰਬ'
+      - 'ਦੱਖਣ-ਪੂਰਬ'
+      - 'ਦੱਖਣ-ਦੱਖਣ-ਪੂਰਬ'
+      - 'ਦੱਖਣ'
+      - 'ਦੱਖਣ-ਦੱਖਣ-ਪੱਛਮ'
+      - 'ਦੱਖਣ-ਪੱਛਮ'
+      - 'ਪੱਛਮ-ਦੱਖਣ-ਪੱਛਮ'
+      - 'ਪੱਛਮ'
+      - 'ਪੱਛਮ-ਉੱਤਰ-ਪੱਛਮ'
+      - 'ਉੱਤਰ-ਪੱਛਮ'
+      - 'ਉੱਤਰ-ਉੱਤਰ-ਪੱਛਮ'
+    short:
+      - 'ਉੱ'
+      - 'ਉੱ-ਉੱ-ਪੂ'
+      - 'ਉੱ-ਪੂ'
+      - 'ਪੂ-ਉੱ-ਪੂ'
+      - 'ਪੂ'
+      - 'ਪੂ-ਦੱਖ-ਪੂ'
+      - 'ਦੱਖ-ਪੂ'
+      - 'ਦੱਖ-ਦੱਖ-ਪੂ'
+      - 'ਦੱਖ'
+      - 'ਦੱਖ-ਦੱਖ-ਪੱਛ'
+      - 'ਦੱਖ-ਪੱਛ'
+      - 'ਪੱਛ-ਦੱਖ-ਪੱਛ'
+      - 'ਪੱਛ'
+      - 'ਪੱਛ-ਉੱ-ਪੱਛ'
+      - 'ਉੱ-ਪੱਛ'
+      - 'ਉੱ-ਉੱ-ਪੱਛ'
+
+  calendar:
+    months:
+      - 'ਜਨਵਰੀ'
+      - 'ਫ਼ਰਵਰੀ'
+      - 'ਮਾਰਚ'
+      - 'ਅਪ੍ਰੈਲ'
+      - 'ਮਈ'
+      - 'ਜੂਨ'
+      - 'ਜੁਲਾਈ'
+      - 'ਅਗਸਤ'
+      - 'ਸਤੰਬਰ'
+      - 'ਅਕਤੂਬਰ'
+      - 'ਨਵੰਬਰ'
+      - 'ਦਸੰਬਰ'
