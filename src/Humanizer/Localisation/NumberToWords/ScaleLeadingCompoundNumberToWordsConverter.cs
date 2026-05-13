@@ -69,6 +69,7 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
 
         var parts = new List<string>();
         var remainder = number;
+        var consumedScale = false;
         foreach (var scale in profile.Scales)
         {
             var scaleValue = (ulong)scale.Value;
@@ -80,6 +81,12 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
 
             parts.Add(scale.Name + " " + ConvertPositive(count));
             remainder %= scaleValue;
+            consumedScale = true;
+        }
+
+        if (!consumedScale)
+        {
+            throw new InvalidOperationException("Scale-leading compound number profiles require a scale value no greater than 100.");
         }
 
         if (remainder > 0)
@@ -165,6 +172,11 @@ sealed class ScaleLeadingCompoundNumberToWordsProfile(
 
     static ScaleLeadingCompoundScale[] ValidateScales(ScaleLeadingCompoundScale[] value)
     {
+        if (value.Length == 0 || value[^1].Value > 100)
+        {
+            throw new InvalidOperationException("Scale-leading compound number profiles require a scale value no greater than 100.");
+        }
+
         for (var i = 0; i < value.Length; i++)
         {
             if (value[i].Value <= 0)
