@@ -250,6 +250,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("2 दिन पहले", "3 दिन पहले", "4 दिन पहले", "5 दिन पहले", "11 दिन पहले", "21 दिन पहले", "2 दिन में", "3 दिन में", "4 दिन में", "5 दिन में", "11 दिन में", "21 दिन में") },
             { "pa", new("2 ਦਿਨ ਪਹਿਲਾਂ", "3 ਦਿਨ ਪਹਿਲਾਂ", "4 ਦਿਨ ਪਹਿਲਾਂ", "5 ਦਿਨ ਪਹਿਲਾਂ", "11 ਦਿਨ ਪਹਿਲਾਂ", "21 ਦਿਨ ਪਹਿਲਾਂ", "2 ਦਿਨ ਵਿੱਚ", "3 ਦਿਨ ਵਿੱਚ", "4 ਦਿਨ ਵਿੱਚ", "5 ਦਿਨ ਵਿੱਚ", "11 ਦਿਨ ਵਿੱਚ", "21 ਦਿਨ ਵਿੱਚ") },
+            { "pa-Arab", new("2 دن پہلاں", "3 دن پہلاں", "4 دن پہلاں", "5 دن پہلاں", "11 دن پہلاں", "21 دن پہلاں", "2 دن وچ", "3 دن وچ", "4 دن وچ", "5 دن وچ", "11 دن وچ", "21 دن وچ") },
 };
 
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
@@ -322,6 +323,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("2 सप्ताह, 1 दिन और 1 घंटा", "1 दिन, 3 मिनट और 4 सेकंड", "1 दिन और 3 मिनट") },
             { "pa", new("2 ਹਫ਼ਤੇ, 1 ਦਿਨ ਅਤੇ 1 ਘੰਟਾ", "1 ਦਿਨ, 3 ਮਿੰਟ ਅਤੇ 4 ਸਕਿੰਟ", "1 ਦਿਨ ਅਤੇ 3 ਮਿੰਟ") },
+            { "pa-Arab", new("2 ہفتے, 1 دن اتے 1 گھنٹہ", "1 دن, 3 منٹ اتے 4 سیکنڈ", "1 دن اتے 3 منٹ") },
 };
 
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
@@ -415,6 +417,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("मिलीसेकंड", "सेकंड", "मिनट", "घंटा", "दिन", "सप्ताह", "महीना", "साल") },
             { "pa", new("ਮਿਲੀਸਕਿੰਟ", "ਸਕਿੰਟ", "ਮਿੰਟ", "ਘੰਟਾ", "ਦਿਨ", "ਹਫ਼ਤਾ", "ਮਹੀਨਾ", "ਸਾਲ") },
+            { "pa-Arab", new("ملی سیکنڈ", "سیکنڈ", "منٹ", "گھنٹہ", "دن", "ہفتہ", "مہینہ", "سال") },
 };
 
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
@@ -487,6 +490,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("1 b", "2 B", "1.95 KB", "2048 KB") },
             { "pa", new("1 b", "2 B", "1.95 KB", "2048 KB") },
+            { "pa-Arab", new("1 b", "2 B", "1٫95 KB", "2048 KB") },
 };
 
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
@@ -559,6 +563,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("1 बिट", "1 बाइट", "2 बाइट", "2 किलोबाइट", "2 मेगाबाइट") },
             { "pa", new("1 ਬਿਟ", "1 ਬਾਈਟ", "2 ਬਾਈਟ", "2 ਕਿਲੋਬਾਈਟ", "2 ਮੇਗਾਬਾਈਟ") },
+            { "pa-Arab", new("1 بٹ", "1 بائٹ", "2 بائٹ", "2 کلو بائٹ", "2 میگا بائٹ") },
 };
 
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
@@ -631,6 +636,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("1 और 2", "1, 2 और 3", "1, 2, 3 और 4") },
             { "pa", new("1 ਅਤੇ 2", "1, 2 ਅਤੇ 3", "1, 2, 3 ਅਤੇ 4") },
+            { "pa-Arab", new("1 اتے 2", "1, 2 اتے 3", "1, 2, 3 اتے 4") },
 };
 
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
@@ -703,6 +709,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("उ", "उ-उ-पू", "उ-पू", "पू-उ-पू", "पू", "पू-द-पू", "द-पू", "द-द-पू", "द", "द-द-प", "द-प", "प-द-प", "प", "प-उ-प", "उ-प", "उ-उ-प", "उत्तर", "उत्तर-उत्तर-पूर्व", "उत्तर-पूर्व", "पूर्व-उत्तर-पूर्व", "पूर्व", "पूर्व-दक्षिण-पूर्व", "दक्षिण-पूर्व", "दक्षिण-दक्षिण-पूर्व", "दक्षिण", "दक्षिण-दक्षिण-पश्चिम", "दक्षिण-पश्चिम", "पश्चिम-दक्षिण-पश्चिम", "पश्चिम", "पश्चिम-उत्तर-पश्चिम", "उत्तर-पश्चिम", "उत्तर-उत्तर-पश्चिम") },
             { "pa", new("ਉੱ", "ਉੱ-ਉੱ-ਪੂ", "ਉੱ-ਪੂ", "ਪੂ-ਉੱ-ਪੂ", "ਪੂ", "ਪੂ-ਦੱਖ-ਪੂ", "ਦੱਖ-ਪੂ", "ਦੱਖ-ਦੱਖ-ਪੂ", "ਦੱਖ", "ਦੱਖ-ਦੱਖ-ਪੱਛ", "ਦੱਖ-ਪੱਛ", "ਪੱਛ-ਦੱਖ-ਪੱਛ", "ਪੱਛ", "ਪੱਛ-ਉੱ-ਪੱਛ", "ਉੱ-ਪੱਛ", "ਉੱ-ਉੱ-ਪੱਛ", "ਉੱਤਰ", "ਉੱਤਰ-ਉੱਤਰ-ਪੂਰਬ", "ਉੱਤਰ-ਪੂਰਬ", "ਪੂਰਬ-ਉੱਤਰ-ਪੂਰਬ", "ਪੂਰਬ", "ਪੂਰਬ-ਦੱਖਣ-ਪੂਰਬ", "ਦੱਖਣ-ਪੂਰਬ", "ਦੱਖਣ-ਦੱਖਣ-ਪੂਰਬ", "ਦੱਖਣ", "ਦੱਖਣ-ਦੱਖਣ-ਪੱਛਮ", "ਦੱਖਣ-ਪੱਛਮ", "ਪੱਛਮ-ਦੱਖਣ-ਪੱਛਮ", "ਪੱਛਮ", "ਪੱਛਮ-ਉੱਤਰ-ਪੱਛਮ", "ਉੱਤਰ-ਪੱਛਮ", "ਉੱਤਰ-ਉੱਤਰ-ਪੱਛਮ") },
+            { "pa-Arab", new("ا", "ا-ا-پو", "ا-پو", "پو-ا-پو", "پو", "پو-دکھ-پو", "دکھ-پو", "دکھ-دکھ-پو", "دکھ", "دکھ-دکھ-پچھ", "دکھ-پچھ", "پچھ-دکھ-پچھ", "پچھ", "پچھ-ا-پچھ", "ا-پچھ", "ا-ا-پچھ", "اتر", "اتر-اتر-پورب", "اتر-پورب", "پورب-اتر-پورب", "پورب", "پورب-دکھن-پورب", "دکھن-پورب", "دکھن-دکھن-پورب", "دکھن", "دکھن-دکھن-پچھم", "دکھن-پچھم", "پچھم-دکھن-پچھم", "پچھم", "پچھم-اتر-پچھم", "اتر-پچھم", "اتر-اتر-پچھم") },
 };
 
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
@@ -775,6 +782,7 @@ public static class LocaleFormatterExactTheoryData
 
             { "hi", new("उ", "पू", "द", "प") },
             { "pa", new("ਉੱ", "ਪੂ", "ਦੱਖ", "ਪੱਛ") },
+            { "pa-Arab", new("ا", "پو", "دکھ", "پچھ") },
 };
 
 }
