@@ -169,6 +169,7 @@ public sealed partial class HumanizerSourceGenerator
                 "pluralized-scale-array" => CreatePluralizedScaleArrayExpression(builderRoot),
                 "ordinal-prefix-scale-array" => CreateOrdinalPrefixScaleArrayExpression(builderRoot),
                 "inverted-tens-scale-array" => CreateInvertedTensScaleArrayExpression(builderRoot),
+                "indian-scale-form-array" => CreateIndianScaleFormArrayExpression(builderRoot),
                 "south-slavic-scale-array" => CreateSouthSlavicScaleArrayExpression(builderRoot),
                 "scale-leading-compound-scale-array" => CreateScaleLeadingCompoundScaleArrayExpression(builderRoot),
                 "scandinavian-scale-array" => CreateScaleStrategyScaleArrayExpression(builderRoot),

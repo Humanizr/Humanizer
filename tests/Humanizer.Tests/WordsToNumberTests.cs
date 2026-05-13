@@ -1233,6 +1233,22 @@ public class WordsToNumberTests_Azerbaijani
 public class TokenMapWordsToNumberConverterTests
 {
     [Fact]
+    public void SignedOrdinalAbbreviationParsesAfterNegativePrefixNormalization()
+    {
+        var converter = new TokenMapWordsToNumberConverter(new()
+        {
+            CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal).ToFrozenDictionary(StringComparer.Ordinal),
+            NegativePrefixes = ["-"],
+            OrdinalAbbreviationSuffixes = ["ኛ"],
+            NormalizationProfile = TokenMapNormalizationProfile.LowercaseRemovePeriods
+        });
+
+        Assert.True(converter.TryConvert("-1ኛ", out var parsed, out var unrecognizedWord));
+        Assert.Equal(-1, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Fact]
     public void ExactOrdinalEntriesBeatDerivedOrdinalParsing()
     {
         var converter = new TokenMapWordsToNumberConverter(new()

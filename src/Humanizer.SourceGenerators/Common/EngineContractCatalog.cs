@@ -312,6 +312,18 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-string-dictionary", "ordinalAbbreviations", null, null, null, null, null, null)
                         )
             ),
+
+                ["indian-scale-forms"] = Schema("indian-scale-forms", "IndianScaleFormNumberToWordsConverter",
+                Member("profile-object", null, null, null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "negativeWord", null, null, null, null, null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "denseUnitsMap", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "indian-scale-form-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty"),
+                            Member("nullable-string-string-dictionary", "ordinalTerminalReplacements", null, null, null, null, null, "empty")
+                        )
+            ),
                 ["indian-grouping"] = Schema("indian-grouping", null,
                 Member("profile-object", null, null, null, null, null, null, null,
                             Member("string", "zeroWord", null, null, null, null, null, null),

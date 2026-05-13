@@ -5,6 +5,16 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData =>
         new()
         {
+        { "te", 0, "0వ" },
+        { "te", 1, "1వ" },
+        { "te", 2, "2వ" },
+        { "te", 3, "3వ" },
+        { "te", 10, "10వ" },
+        { "te", 23, "23వ" },
+        { "te", 100, "100వ" },
+        { "te", 101, "101వ" },
+        { "te", 1001, "1001వ" },
+
             { "sw", 0, "0" },
             { "sw", 1, "1" },
             { "sw", 2, "2" },
@@ -611,6 +621,10 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
         new()
         {
+        { "te", 1, GrammaticalGender.Feminine, "1వ" },
+        { "te", 1, GrammaticalGender.Masculine, "1వ" },
+        { "te", 1, GrammaticalGender.Neuter, "1వ" },
+
             { "sw", 1, GrammaticalGender.Feminine, "1" },
             { "sw", 1, GrammaticalGender.Masculine, "1" },
             { "sw", 1, GrammaticalGender.Neuter, "1" },
@@ -3359,6 +3373,16 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
         new()
         {
+        { "te", "0", "0వ" },
+        { "te", "1", "1వ" },
+        { "te", "2", "2వ" },
+        { "te", "3", "3వ" },
+        { "te", "10", "10వ" },
+        { "te", "23", "23వ" },
+        { "te", "100", "100వ" },
+        { "te", "101", "101వ" },
+        { "te", "1001", "1001వ" },
+
             { "sw", "0", "0" },
             { "sw", "1", "1" },
             { "sw", "2", "2" },
@@ -3962,6 +3986,12 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
         new()
         {
+        { "te", -1, "-1వ" },
+        { "te", -2, "-2వ" },
+        { "te", -10, "-10వ" },
+        { "te", -23, "-23వ" },
+        { "te", -2147483648, "-2147483648వ" },
+
             { "sw", -1, "-1" },
             { "sw", -2, "-2" },
             { "sw", -10, "-10" },
@@ -4301,6 +4331,13 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
         new()
         {
+        { "te", 1, WordForm.Abbreviation, "1వ" },
+        { "te", 1, WordForm.Normal, "1వ" },
+        { "te", 2, WordForm.Abbreviation, "2వ" },
+        { "te", 2, WordForm.Normal, "2వ" },
+        { "te", 21, WordForm.Abbreviation, "21వ" },
+        { "te", 21, WordForm.Normal, "21వ" },
+
             { "sw", 1, WordForm.Abbreviation, "1" },
             { "sw", 1, WordForm.Normal, "1" },
             { "sw", 2, WordForm.Abbreviation, "2" },
@@ -4836,6 +4873,13 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
         new()
         {
+        { "te", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1వ" },
+        { "te", 1, GrammaticalGender.Feminine, WordForm.Normal, "1వ" },
+        { "te", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1వ" },
+        { "te", 1, GrammaticalGender.Masculine, WordForm.Normal, "1వ" },
+        { "te", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1వ" },
+        { "te", 1, GrammaticalGender.Neuter, WordForm.Normal, "1వ" },
+
             { "sw", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1" },
             { "sw", 1, GrammaticalGender.Feminine, WordForm.Normal, "1" },
             { "sw", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1" },
@@ -6399,6 +6443,10 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
         new()
         {
+        { "te", "1", GrammaticalGender.Feminine, "1వ" },
+        { "te", "1", GrammaticalGender.Masculine, "1వ" },
+        { "te", "1", GrammaticalGender.Neuter, "1వ" },
+
             { "sw", "1", GrammaticalGender.Feminine, "1" },
             { "sw", "1", GrammaticalGender.Masculine, "1" },
             { "sw", "1", GrammaticalGender.Neuter, "1" },
@@ -8961,6 +9009,10 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
         new()
         {
+        { "te", 1, GrammaticalGender.Feminine, "1వ" },
+        { "te", 1, GrammaticalGender.Masculine, "1వ" },
+        { "te", 1, GrammaticalGender.Neuter, "1వ" },
+
             { "sw", 1, GrammaticalGender.Feminine, "1" },
             { "sw", 1, GrammaticalGender.Masculine, "1" },
             { "sw", 1, GrammaticalGender.Neuter, "1" },
