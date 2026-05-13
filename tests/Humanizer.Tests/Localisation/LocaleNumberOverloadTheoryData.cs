@@ -4,6 +4,7 @@ public static class LocaleNumberOverloadTheoryData
 {
     public static TheoryData<string, long, string> AddAndCases => new()
     {
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
@@ -205,6 +206,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
@@ -406,6 +408,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
@@ -607,6 +610,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
+        { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },

@@ -531,7 +531,23 @@ public sealed partial class HumanizerSourceGenerator
                         ),
                 Member("culture", null, null, null, null, null, null, null)
             ),
-                // Shared Scandinavian-style engine where the runtime decomposition is stable but the cardinal and ordinal scale strategies diverge by profile data. Strategy enums name the structural choice, not the locale.
+                // Shared scale-leading compound engine for languages that say scale nouns before their
+                // count token, e.g. "hundred one and two" or "thousand two". The conjunction is
+                // data-driven for tens+units and terminal sub-hundred remainders; higher-scale
+                // remainders are space-joined. The parser supports the same scale-token order.
+                ["scale-leading-compound"] = Schema("scale-leading-compound", null,
+                Member("profile-object", null, null, null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "minusWord", null, null, null, null, null, null),
+                            Member("string", "conjunctionWord", null, null, null, null, null, null),
+                            Member("string", "ordinalPrefix", null, null, null, "", null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "unitsMap", null, null, null, null, null, null),
+                            Member("string-array", "tensMap", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "scale-leading-compound-scale-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty")
+                        )
+            ),
                 ["scale-strategy"] = Schema("scale-strategy", null,
                 Member("profile-object", null, null, null, null, null, null, null,
                             Member("enum", "cardinalStrategy", null, "ScaleStrategyCardinalMode", null, null, null, null),

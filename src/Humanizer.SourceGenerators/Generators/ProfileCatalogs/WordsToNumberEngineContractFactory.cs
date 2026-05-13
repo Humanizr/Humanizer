@@ -27,6 +27,7 @@ public sealed partial class HumanizerSourceGenerator
                 "greedy-compound" => CreateGreedyCompoundExpression(profile),
                 "inverted-tens" => CreateInvertedTensExpression(profile.Root),
                 "linking-affix" => CreateLinkingAffixExpression(profile.Root),
+                "scale-leading-compound" => CreateScaleLeadingCompoundExpression(profile.Root),
                 "prefixed-tens-scale" => CreatePrefixedTensScaleExpression(profile.Root),
                 "suffix-scale" => CreateSuffixScaleExpression(profile.Root),
                 "token-map" => "new TokenMapWordsToNumberConverter(" + CreateTokenMapRulesExpression(profile.Root) + ")",
@@ -111,6 +112,18 @@ public sealed partial class HumanizerSourceGenerator
             CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "linkedSuffixes")) + ", " +
             CreateOptionalStringArrayExpression(root, "ignoredTokens") + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
+            "))";
+
+        static string CreateScaleLeadingCompoundExpression(JsonElement root) =>
+            "new ScaleLeadingCompoundWordsToNumberConverter(new ScaleLeadingCompoundWordsToNumberProfile(" +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "unitsMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "tensMap")) + ", " +
+            CreateScaleLeadingCompoundScaleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
+            QuoteLiteral(GetRequiredString(root, "conjunctionWord")) + ", " +
+            QuoteLiteral(GetRequiredString(root, "minusWord")) + ", " +
+            QuoteLiteral(GetOptionalString(root, "ordinalPrefix") ?? string.Empty) + ", " +
+            QuoteLiteral(GetOptionalString(root, "ordinalSuffix") ?? string.Empty) + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") +
             "))";
 
         static string CreatePrefixedTensScaleExpression(JsonElement root) =>

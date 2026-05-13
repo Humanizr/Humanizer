@@ -4,6 +4,11 @@ static class LocaleNumberTheoryData
 {
     public static TheoryData<string, int, string> CardinalCases => new()
     {
+        { "sw", 0, "sifuri" },
+        { "sw", 1, "moja" },
+        { "sw", 21, "ishirini na moja" },
+        { "sw", 105, "mia moja na tano" },
+        { "sw", 1234, "elfu moja mia mbili na thelathini na nne" },
         { "af", 0, "nul" },
         { "af", 1, "een" },
         { "af", 2, "twee" },
@@ -2676,6 +2681,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
+        { "sw", 101, true, "mia moja na moja" },
+        { "sw", 101, false, "mia moja na moja" },
+        { "sw", 121, true, "mia moja na ishirini na moja" },
+        { "sw", 121, false, "mia moja na ishirini na moja" },
         { "af", 101, true, "een honderd en een" },
         { "af", 101, false, "een honderd en een" },
         { "af", 105, true, "een honderd en vyf" },
@@ -3441,6 +3450,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
+        { "sw", 1, WordForm.Abbreviation, "moja" },
+        { "sw", 21, WordForm.Abbreviation, "ishirini na moja" },
         { "af", 1, WordForm.Abbreviation, "een" },
         { "af", 21, WordForm.Abbreviation, "een en twintig" },
         { "af", 31, WordForm.Abbreviation, "een en dertig" },
@@ -3831,6 +3842,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
+        { "sw", 1, GrammaticalGender.Feminine, "moja" },
+        { "sw", 1, GrammaticalGender.Masculine, "moja" },
+        { "sw", 1, GrammaticalGender.Neuter, "moja" },
         { "af", 1, GrammaticalGender.Feminine, "een" },
         { "af", 1, GrammaticalGender.Masculine, "een" },
         { "af", 1, GrammaticalGender.Neuter, "een" },
@@ -4239,6 +4253,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
+        { "sw", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "moja" },
+        { "sw", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "moja" },
+        { "sw", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "moja" },
         { "af", 21, WordForm.Abbreviation, GrammaticalGender.Feminine, "een en twintig" },
         { "af", 21, WordForm.Abbreviation, GrammaticalGender.Masculine, "een en twintig" },
         { "af", 21, WordForm.Abbreviation, GrammaticalGender.Neuter, "een en twintig" },
@@ -4442,6 +4459,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
+        { "sw", 1, "kwanza" },
+        { "sw", 2, "pili" },
+        { "sw", 21, "ya ishirini na moja" },
         { "af", 0, "nulste" },
         { "af", 1, "eerste" },
         { "af", 2, "tweede" },
@@ -5775,6 +5795,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+        { "sw", 1, WordForm.Abbreviation, "kwanza" },
+        { "sw", 1, WordForm.Normal, "kwanza" },
+        { "sw", 21, WordForm.Abbreviation, "ya ishirini na moja" },
+        { "sw", 21, WordForm.Normal, "ya ishirini na moja" },
         { "af", 1, WordForm.Abbreviation, "eerste" },
         { "af", 2, WordForm.Abbreviation, "tweede" },
         { "af", 3, WordForm.Abbreviation, "derde" },
@@ -6115,6 +6139,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+        { "sw", 1, GrammaticalGender.Feminine, "kwanza" },
+        { "sw", 1, GrammaticalGender.Masculine, "kwanza" },
+        { "sw", 1, GrammaticalGender.Neuter, "kwanza" },
         { "af", 1, GrammaticalGender.Feminine, "eerste" },
         { "af", 1, GrammaticalGender.Masculine, "eerste" },
         { "af", 1, GrammaticalGender.Neuter, "eerste" },
@@ -6942,6 +6969,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+        { "sw", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "kwanza" },
+        { "sw", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "kwanza" },
+        { "sw", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "kwanza" },
         { "af", 3, GrammaticalGender.Feminine, WordForm.Abbreviation, "derde" },
         { "af", 3, GrammaticalGender.Masculine, WordForm.Abbreviation, "derde" },
         { "af", 3, GrammaticalGender.Neuter, WordForm.Abbreviation, "derde" },
@@ -7144,6 +7174,7 @@ static class LocaleNumberTheoryData
 };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "sw", 2, "mbili" },
         { "af", 2, "twee" },
         { "ar", 2, "اثنان" },
         { "az", 2, "iki" },
@@ -7216,6 +7247,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "sw", "ishirini na moja", 21L },
+        { "sw", "mia moja na tano", 105L },
         { "af", "een en twintig", 21L },
         { "ar", "واحد و عشرون", 21L },
         { "az", "iyirmi bir", 21L },

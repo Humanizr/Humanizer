@@ -922,6 +922,14 @@ public sealed partial class HumanizerSourceGenerator
             BooleanValue("displayOneUnit"),
             OptionalEnumValue("gender", "GrammaticalGender", "masculine"));
 
+
+    static string CreateScaleLeadingCompoundScaleArrayExpression(JsonElement arrayElement)
+        => CreateTypedConstructorArrayExpression(
+            "ScaleLeadingCompoundScale",
+            arrayElement,
+            RequiredInt64Value("value"),
+            RequiredStringValue("name"));
+
     static string CreateUnitLeadingCompoundScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "UnitLeadingCompoundScale",
