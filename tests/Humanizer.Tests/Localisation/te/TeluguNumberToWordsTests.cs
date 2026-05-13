@@ -45,7 +45,12 @@ public class TeluguNumberToWordsTests
     [InlineData(2, "రెండవ")]
     [InlineData(21, "ఇరవై ఒకటవ")]
     [InlineData(101, "నూట ఒకటవ")]
+    [InlineData(200, "రెండు వందలవ")]
     [InlineData(1000, "వెయ్యవ")]
+    [InlineData(2000, "రెండు వేలవ")]
+    [InlineData(200000, "రెండు లక్షలవ")]
+    [InlineData(20000000, "రెండు కోట్లవ")]
+    [InlineData(2000000000, "రెండు అరబ్‌వ")]
     public void NumberToOrdinalWords_ProducesExpectedTeluguOutput(int number, string expected)
     {
         Assert.Equal(expected, number.ToOrdinalWords(Te));
@@ -71,6 +76,11 @@ public class TeluguNumberToWordsTests
     [Theory]
     [InlineData("ఇరవై ఒకటవ", 21)]
     [InlineData("నూట ఒకటవ", 101)]
+    [InlineData("రెండు వందలవ", 200)]
+    [InlineData("రెండు వేలవ", 2000)]
+    [InlineData("రెండు లక్షలవ", 200000)]
+    [InlineData("రెండు కోట్లవ", 20000000)]
+    [InlineData("రెండు అరబ్‌వ", 2000000000)]
     [InlineData("మైనస్ ఐదవ", -5)]
     public void WordsToNumber_ParsesTeluguOrdinals(string words, long expected)
     {
