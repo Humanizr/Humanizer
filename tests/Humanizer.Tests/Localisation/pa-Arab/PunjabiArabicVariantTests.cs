@@ -52,17 +52,16 @@ public class PunjabiArabicVariantTests
 
     [Theory]
     [MemberData(nameof(PunjabiArabicCultures))]
+    [UseCulture("pa-Arab")]
     public void DateCompassAndNumberFormatting_UseVariantSpecificData(string cultureName)
     {
         var culture = new CultureInfo(cultureName);
 
-        using (UseCulture(culture))
-        {
-            Assert.Equal("25 جنوری 2022", new DateTime(2022, 1, 25).ToOrdinalWords());
+        Assert.Equal("25 جنوری 2022", new DateTime(2022, 1, 25).ToOrdinalWords());
+        Assert.Equal("5 مئی 2022", new DateTime(2022, 5, 5).ToOrdinalWords());
 #if NET6_0_OR_GREATER
-            Assert.Equal("سویرے اک وجے", new TimeOnly(1, 0).ToClockNotation());
+        Assert.Equal("سویرے اک وجے", new TimeOnly(1, 0).ToClockNotation());
 #endif
-        }
 
         Assert.Equal("پورب", 90.0.ToHeading(HeadingStyle.Full, culture));
         Assert.Equal("1٫95 KB", 2000.Bytes().Humanize(culture));
@@ -81,26 +80,9 @@ public class PunjabiArabicVariantTests
         Assert.Equal("اک کروڑ تےئی لکھ پنتالی ہزار چھے سو اٹھتر", 12345678.ToWords(PaArab));
     }
 
-    static RestoreCulture UseCulture(CultureInfo culture)
-    {
-        var originalCulture = CultureInfo.CurrentCulture;
-        var originalUiCulture = CultureInfo.CurrentUICulture;
-        CultureInfo.CurrentCulture = culture;
-        CultureInfo.CurrentUICulture = culture;
-        return new RestoreCulture(originalCulture, originalUiCulture);
-    }
-
     static void AssertNoGurmukhi(string value)
     {
         Assert.DoesNotContain(value, static c => c is >= '\u0A00' and <= '\u0A7F');
     }
 
-    sealed class RestoreCulture(CultureInfo culture, CultureInfo uiCulture) : IDisposable
-    {
-        public void Dispose()
-        {
-            CultureInfo.CurrentCulture = culture;
-            CultureInfo.CurrentUICulture = uiCulture;
-        }
-    }
 }
