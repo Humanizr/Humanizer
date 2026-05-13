@@ -216,10 +216,13 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
 
         value = (ulong)rawTensValue;
         next = start + 1;
-        if (next + 1 < end && tokens[next] == profile.ConjunctionWord && profile.Units.TryGetValue(tokens[next + 1], out var rawUnitValue) && rawUnitValue is >= 1 and <= 9 && value + (ulong)rawUnitValue <= maxValue)
+        if (next < end &&
+            tokens[next] == profile.ConjunctionWord &&
+            TryParseUnit(tokens, next + 1, end, Math.Min(9UL, maxValue - value), out var unitValue, out var afterUnit) &&
+            unitValue is >= 1UL and <= 9UL)
         {
-            value += (ulong)rawUnitValue;
-            next += 2;
+            value += unitValue;
+            next = afterUnit;
         }
 
         return true;
