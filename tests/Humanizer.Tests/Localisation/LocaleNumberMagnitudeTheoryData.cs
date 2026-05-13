@@ -9,7 +9,9 @@ public static class LocaleNumberMagnitudeTheoryData
         { "te", 1001L, "వెయ్యి ఒకటి" },
         { "te", 1000001L, "పది లక్షల ఒకటి" },
         { "sw", 1001L, "elfu moja na moja" },
+        { "ha", 1001L, "dubu ɗaya da ɗaya" },
         { "sw", 1000001L, "milioni moja na moja" },
+        { "ha", 1000001L, "miliyan ɗaya da ɗaya" },
         { "af", 1001L, "een duisend en een" },
         { "af", 1000001L, "een miljoen en een" },
         { "ar", 1001L, "ألف و واحد" },
@@ -159,7 +161,9 @@ public static class LocaleNumberMagnitudeTheoryData
         { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },
         { "te", 4325010007018L, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది" },
         { "sw", 1001000001L, "bilioni moja milioni moja na moja" },
+        { "ha", 1001000001L, "biliyan ɗaya miliyan ɗaya da ɗaya" },
         { "sw", 4325010007018L, "trilioni nne bilioni mia tatu na ishirini na tano milioni kumi elfu saba na kumi na nane" },
+        { "ha", 4325010007018L, "tiriliyan huɗu biliyan ɗari uku da ashirin da biyar miliyan goma dubu bakwai da goma sha takwas" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },
         { "ar", 1001000001L, "مليار و   مليون و واحد" },
@@ -384,7 +388,9 @@ public static class LocaleNumberMagnitudeTheoryData
     public static TheoryData<string, long, string> HighRangeRoundTripCases => new()
     {
         { "sw", 1000000000000000000L, "kwintilioni moja" },
+        { "ha", 1000000000000000000L, "kwintiliyan ɗaya" },
         { "sw", 1000000000000000001L, "kwintilioni moja na moja" },
+        { "ha", 1000000000000000001L, "kwintiliyan ɗaya da ɗaya" },
         { "ar", 1000000000000000000L, "كوينتليون" },
         { "ar", 1000000000000000001L, "كوينتليون و واحد" },
         { "az", 1000000000000000000L, "bir kvintilyon" },
@@ -456,6 +462,7 @@ public static class LocaleNumberMagnitudeTheoryData
     public static TheoryData<string, long> HighRangeRoundTripOnlyCases => new()
     {
         { "sw", 1234567890123456L },
+        { "ha", 1234567890123456L },
         { "ja", 10000000000000000L },
         { "zh-CN", 1234567890123456L },
         { "zh-CN", 10000000000000000L },
