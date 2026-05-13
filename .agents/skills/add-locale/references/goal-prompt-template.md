@@ -2,12 +2,15 @@
 
 Use this template when starting a long-running `/goal` to add a new Humanizer locale or bring an existing locale to parity.
 
+The prompt block is intentionally under 4000 characters. It references the skill files instead of inlining the full workflow.
+
+Replace placeholders before running it:
+
 - `<culture-code>` — target culture code, such as `ur`, `ur-PK`, `hi`, or `fr-CA`
+- `<language/region name>` — human-readable locale name
 
 ```text
-culture-code = 
-
-Implement full Humanizer locale parity for <culture-code>.
+Implement full Humanizer locale parity for <culture-code> (<language/region name>) in /Users/claire/dev/Humanizer.
 
 Use $add-locale.
 
