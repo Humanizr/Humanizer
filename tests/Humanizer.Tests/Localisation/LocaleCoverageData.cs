@@ -13,6 +13,8 @@ static class LocaleCoverageData
     // Representative non-first-of-month date sample.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
+        { "te", new(2022, 1, 25, "25 జనవరి 2022") },
+
         { "sw", new(2022, 1, 25, "25 Januari 2022") },
         { "hi", new(2022, 1, 25, "25 जनवरी 2022") },
         { "pa", new(2022, 1, 25, "25 ਜਨਵਰੀ 2022") },
@@ -88,6 +90,8 @@ static class LocaleCoverageData
     // First-of-month sample where many locales change the day form.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
+        { "te", new(2015, 1, 1, "1 జనవరి 2015") },
+
         { "sw", new(2015, 1, 1, "1 Januari 2015") },
         { "hi", new(2015, 1, 1, "1 जनवरी 2015") },
         { "pa", new(2015, 1, 1, "1 ਜਨਵਰੀ 2015") },
@@ -163,6 +167,8 @@ static class LocaleCoverageData
     // Early-month sample used to catch plain numeric-day formatting.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
+        { "te", new(2015, 2, 3, "3 ఫిబ్రవరి 2015") },
+
         { "sw", new(2015, 2, 3, "3 Februari 2015") },
         { "hi", new(2015, 2, 3, "3 फ़रवरी 2015") },
         { "pa", new(2015, 2, 3, "3 ਫ਼ਰਵਰੀ 2015") },
@@ -299,6 +305,8 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
+        { "te", new(13, 23, "మధ్యాహ్నం ఒంటి గంట ఇరవై మూడు నిమిషాలు") },
+
         { "sw", new(13, 23, "saa saba na dakika ishirini na tatu mchana") },
         { "hi", new(13, 23, "दोपहर एक बजकर तेईस मिनट") },
         { "pa", new(13, 23, "ਦੁਪਹਿਰ ਇੱਕ ਵੱਜ ਕੇ ਤੇਈ ਮਿੰਟ") },
@@ -374,6 +382,8 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
+        { "te", new(13, 23, "మధ్యాహ్నం ఒంటి గంట ఇరవై ఐదు నిమిషాలు") },
+
         { "sw", new(13, 23, "saa saba na dakika ishirini na tano mchana") },
         { "hi", new(13, 23, "दोपहर एक बजकर पच्चीस मिनट") },
         { "pa", new(13, 23, "ਦੁਪਹਿਰ ਇੱਕ ਵੱਜ ਕੇ ਪੱਚੀ ਮਿੰਟ") },
@@ -449,6 +459,8 @@ static class LocaleCoverageData
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
+        { "te", new(1, 5, "ఉదయం ఒంటి గంట ఐదు నిమిషాలు") },
+
         { "sw", new(1, 5, "saa saba na dakika tano asubuhi") },
         { "hi", new(1, 5, "सुबह एक बजकर पाँच मिनट") },
         { "pa", new(1, 5, "ਸਵੇਰੇ ਇੱਕ ਵੱਜ ਕੇ ਪੰਜ ਮਿੰਟ") },
@@ -846,6 +858,8 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> FormatterExpectationTheoryData =>
         new()
         {
+        { "te", "నిన్న", "2 రోజులు" },
+
             { "af", "gister", "2 dae" },
             { "ar", "أمس", "يومين" },
             { "az", "dünən", "2 gün" },
@@ -920,6 +934,8 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
         new()
         {
+        { "te", "1 మరియు 2", "1, 2 మరియు 3" },
+
             { "af", "1 en 2", "1, 2 en 3" },
             { "ar", "1 و2", "1, 2 و3" },
             { "az", "1 və 2", "1, 2 və 3" },
@@ -994,6 +1010,8 @@ static class LocaleCoverageData
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
         new()
         {
+        { "te", 1, "మొదటి" },
+
             { "af", 1, "eerste" },
             { "ar", 1, "الأولى" },
             { "az", 1, "birinci" },
@@ -1068,6 +1086,8 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
         new()
         {
+        { "te", 1, "ఒకటి" },
+
             { "af", 1, "een" },
             { "ar", 1, "واحد" },
             { "az", 1, "bir" },
@@ -1178,6 +1198,8 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> WordsToNumberExpectationTheoryData =>
         new()
         {
+        { "te", 21, "ఇరవై ఒకటి" },
+
             { "af", 21, "een en twintig" },
             { "ar", 21, "واحد و عشرون" },
             { "az", 21, "iyirmi bir" },

@@ -4,6 +4,12 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+        { "te", 1, TimeUnit.Day, Tense.Past, "నిన్న" },
+        { "te", 1, TimeUnit.Day, Tense.Future, "రేపు" },
+        { "te", 2, TimeUnit.Day, Tense.Past, "2 రోజులు క్రితం" },
+        { "te", 2, TimeUnit.Day, Tense.Future, "2 రోజులు తర్వాత" },
+        { "te", 0, TimeUnit.Second, Tense.Future, "ఇప్పుడే" },
+
         { "sw", 1, TimeUnit.Day, Tense.Past, "jana" },
         { "sw", 1, TimeUnit.Day, Tense.Future, "kesho" },
         { "sw", 2, TimeUnit.Day, Tense.Past, "2 siku zilizopita" },
@@ -1476,6 +1482,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "te", "ఎప్పుడూ లేదు" },
+
         { "sw", "kamwe" },
         { "af", "nooit" },
         { "ar", "أبدًا" },
@@ -1586,6 +1594,11 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+        { "te", 1, TimeUnit.Second, false, "1 సెకను" },
+        { "te", 2, TimeUnit.Second, false, "2 సెకన్లు" },
+        { "te", 1, TimeUnit.Minute, true, "ఒక నిమిషం" },
+        { "te", 0, TimeUnit.Millisecond, true, "సమయం లేదు" },
+
         { "sw", 1, TimeUnit.Second, false, "sekunde 1" },
         { "sw", 2, TimeUnit.Second, false, "sekunde 2" },
         { "sw", 1, TimeUnit.Minute, true, "dakika moja" },
