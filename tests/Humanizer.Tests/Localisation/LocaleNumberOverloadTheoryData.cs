@@ -4,8 +4,8 @@ public static class LocaleNumberOverloadTheoryData
 {
     public static TheoryData<string, long, string> AddAndCases => new()
     {
-        { "am", 1001001, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
-        { "am", 1234567890, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
+        { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
         { "af", 4325010007018L, "vier biljoene drie honderd vyf en twintig miljard tien miljoen sewe duisend en agtien" },

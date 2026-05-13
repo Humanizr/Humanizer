@@ -5,15 +5,15 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData =>
         new()
         {
-        { "am", 0, "0ኛ" },
-        { "am", 1, "1ኛ" },
-        { "am", 2, "2ኛ" },
-        { "am", 3, "3ኛ" },
-        { "am", 10, "10ኛ" },
-        { "am", 23, "23ኛ" },
-        { "am", 100, "100ኛ" },
-        { "am", 101, "101ኛ" },
-        { "am", 1001, "1001ኛ" },
+            { "am", 0, "0ኛ" },
+            { "am", 1, "1ኛ" },
+            { "am", 2, "2ኛ" },
+            { "am", 3, "3ኛ" },
+            { "am", 10, "10ኛ" },
+            { "am", 23, "23ኛ" },
+            { "am", 100, "100ኛ" },
+            { "am", 101, "101ኛ" },
+            { "am", 1001, "1001ኛ" },
             { "af", 0, "0de" },
             { "af", 1, "1ste" },
             { "af", 2, "2de" },
@@ -607,9 +607,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
         new()
         {
-        { "am", 1, GrammaticalGender.Masculine, "1ኛ" },
-        { "am", 1, GrammaticalGender.Feminine, "1ኛ" },
-        { "am", 1, GrammaticalGender.Neuter, "1ኛ" },
+            { "am", 1, GrammaticalGender.Masculine, "1ኛ" },
+            { "am", 1, GrammaticalGender.Feminine, "1ኛ" },
+            { "am", 1, GrammaticalGender.Neuter, "1ኛ" },
             { "af", 0, GrammaticalGender.Masculine, "0de" },
             { "af", 1, GrammaticalGender.Masculine, "1ste" },
             { "af", 2, GrammaticalGender.Masculine, "2de" },
@@ -3349,8 +3349,8 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
         new()
         {
-        { "am", "1", "1ኛ" },
-        { "am", "21", "21ኛ" },
+            { "am", "1", "1ኛ" },
+            { "am", "21", "21ኛ" },
             { "af", "0", "0de" },
             { "af", "1", "1ste" },
             { "af", "2", "2de" },
@@ -3943,7 +3943,7 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
         new()
         {
-        { "am", -1, "-1ኛ" },
+            { "am", -1, "-1ኛ" },
             { "af", -1, "-1ste" },
             { "af", -2, "-2de" },
             { "af", -10, "-10de" },
@@ -4276,7 +4276,7 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
         new()
         {
-        { "am", 1, WordForm.Normal, "1ኛ" },
+            { "am", 1, WordForm.Normal, "1ኛ" },
             { "af", 1, WordForm.Abbreviation, "1ste" },
             { "af", 1, WordForm.Normal, "1ste" },
             { "af", 2, WordForm.Abbreviation, "2de" },
@@ -4804,9 +4804,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
         new()
         {
-        { "am", 1, GrammaticalGender.Masculine, WordForm.Normal, "1ኛ" },
-        { "am", 1, GrammaticalGender.Feminine, WordForm.Normal, "1ኛ" },
-        { "am", 1, GrammaticalGender.Neuter, WordForm.Normal, "1ኛ" },
+            { "am", 1, GrammaticalGender.Masculine, WordForm.Normal, "1ኛ" },
+            { "am", 1, GrammaticalGender.Feminine, WordForm.Normal, "1ኛ" },
+            { "am", 1, GrammaticalGender.Neuter, WordForm.Normal, "1ኛ" },
             { "af", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1ste" },
             { "af", 1, GrammaticalGender.Masculine, WordForm.Normal, "1ste" },
             { "af", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1ste" },
@@ -6358,9 +6358,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
         new()
         {
-        { "am", "1", GrammaticalGender.Masculine, "1ኛ" },
-        { "am", "1", GrammaticalGender.Feminine, "1ኛ" },
-        { "am", "1", GrammaticalGender.Neuter, "1ኛ" },
+            { "am", "1", GrammaticalGender.Masculine, "1ኛ" },
+            { "am", "1", GrammaticalGender.Feminine, "1ኛ" },
+            { "am", "1", GrammaticalGender.Neuter, "1ኛ" },
             { "af", "0", GrammaticalGender.Masculine, "0de" },
             { "af", "1", GrammaticalGender.Masculine, "1ste" },
             { "af", "2", GrammaticalGender.Masculine, "2de" },
