@@ -19,6 +19,10 @@ public class HausaNumberToWordsTests
     [InlineData(234, "ɗari biyu da talatin da huɗu")]
     [InlineData(1000, "dubu ɗaya")]
     [InlineData(2021, "dubu biyu da ashirin da ɗaya")]
+    [InlineData(100000, "dubu ɗari ɗaya")]
+    [InlineData(100001, "dubu ɗari ɗaya da ɗaya")]
+    [InlineData(101000, "dubu ɗari ɗaya dubu ɗaya")]
+    [InlineData(123000, "dubu ɗari ɗaya dubu ashirin da uku")]
     [InlineData(1234, "dubu ɗaya ɗari biyu da talatin da huɗu")]
     [InlineData(1000000, "miliyan ɗaya")]
     [InlineData(2000000, "miliyan biyu")]
@@ -65,6 +69,11 @@ public class HausaNumberToWordsTests
     [InlineData(120, "ɗari ɗaya da ashirin")]
     [InlineData(1234, "dubu ɗaya ɗari biyu da talatin da huɗu")]
     [InlineData(2021, "dubu biyu da ashirin da ɗaya")]
+    [InlineData(100000, "dubu ɗari ɗaya")]
+    [InlineData(100001, "dubu ɗari ɗaya da ɗaya")]
+    [InlineData(100023, "dubu ɗari ɗaya da ashirin da uku")]
+    [InlineData(101000, "dubu ɗari ɗaya dubu ɗaya")]
+    [InlineData(123000, "dubu ɗari ɗaya dubu ashirin da uku")]
     [InlineData(2000000, "miliyan biyu")]
     public void WordsToNumber_RoundTripsSupportedHausaCardinals(long number, string words)
     {

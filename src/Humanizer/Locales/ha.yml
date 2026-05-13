@@ -277,6 +277,9 @@ surfaces:
           value: 1000000
           name: 'miliyan'
         -
+          value: 100000
+          name: 'dubu ɗari'
+        -
           value: 1000
           name: 'dubu'
         -
@@ -350,6 +353,9 @@ surfaces:
         -
           value: 1000000
           name: 'miliyan'
+        -
+          value: 100000
+          name: 'dubu ɗari'
         -
           value: 1000
           name: 'dubu'

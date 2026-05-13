@@ -96,13 +96,13 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         {
             var scale = profile.Scales[scaleIndex];
             var scaleValue = (ulong)scale.Value;
-            if (scaleValue > maxValue || next >= end || tokens[next] != scale.Name)
+            if (scaleValue > maxValue || next >= end || !TryMatchScale(tokens, next, end, scale.Name, out var afterScale))
             {
                 continue;
             }
 
             var maxCount = Math.Min(GetMaximumCountForScale(scaleIndex), maxValue / scaleValue);
-            if (maxCount <= 0 || !TryParseCount(tokens, next + 1, end, maxCount, out var count, out var afterCount) || count <= 0)
+            if (maxCount <= 0 || !TryParseCount(tokens, afterScale, end, maxCount, out var count, out var afterCount) || count <= 0)
             {
                 return false;
             }
@@ -142,6 +142,28 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
         }
 
         return consumed;
+    }
+
+    static bool TryMatchScale(string[] tokens, int start, int end, string scaleName, out int next)
+    {
+        var scaleTokens = scaleName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (start + scaleTokens.Length > end)
+        {
+            next = start;
+            return false;
+        }
+
+        for (var i = 0; i < scaleTokens.Length; i++)
+        {
+            if (tokens[start + i] != scaleTokens[i])
+            {
+                next = start;
+                return false;
+            }
+        }
+
+        next = start + scaleTokens.Length;
+        return true;
     }
 
     bool TryParseCount(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
