@@ -86,4 +86,15 @@ public class TeluguNumberToWordsTests
     {
         Assert.Equal(expected, words.ToNumber(Te));
     }
+
+    [Fact]
+    public void WordsToNumber_RoundTripsTeluguLongMinValue()
+    {
+        var words = long.MinValue.ToWords(Te);
+
+        Assert.Equal(long.MinValue, words.ToNumber(Te));
+        Assert.True(words.TryToNumber(out var parsed, Te, out var unrecognizedWord));
+        Assert.Equal(long.MinValue, parsed);
+        Assert.Null(unrecognizedWord);
+    }
 }

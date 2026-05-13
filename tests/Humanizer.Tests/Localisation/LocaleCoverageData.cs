@@ -305,7 +305,7 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
-        { "te", new(13, 23, "మధ్యాహ్నం ఒంటి గంట ఇరవై మూడు నిమిషాలు") },
+        { "te", new(13, 23, "ఒంటి గంట ఇరవై మూడు నిమిషాలు మధ్యాహ్నం") },
 
         { "sw", new(13, 23, "saa saba na dakika ishirini na tatu mchana") },
         { "hi", new(13, 23, "दोपहर एक बजकर तेईस मिनट") },
@@ -382,7 +382,7 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
-        { "te", new(13, 23, "మధ్యాహ్నం ఒంటి గంట ఇరవై ఐదు నిమిషాలు") },
+        { "te", new(13, 23, "ఒంటి గంట ఇరవై ఐదు నిమిషాలు మధ్యాహ్నం") },
 
         { "sw", new(13, 23, "saa saba na dakika ishirini na tano mchana") },
         { "hi", new(13, 23, "दोपहर एक बजकर पच्चीस मिनट") },
@@ -459,7 +459,7 @@ static class LocaleCoverageData
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
-        { "te", new(1, 5, "ఉదయం ఒంటి గంట ఐదు నిమిషాలు") },
+        { "te", new(1, 5, "ఒంటి గంట ఐదు నిమిషాలు ఉదయం") },
 
         { "sw", new(1, 5, "saa saba na dakika tano asubuhi") },
         { "hi", new(1, 5, "सुबह एक बजकर पाँच मिनट") },

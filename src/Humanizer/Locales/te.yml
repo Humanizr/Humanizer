@@ -690,7 +690,7 @@ surfaces:
   clock:
     engine: 'phrase-clock'
     hourMode: 'h12'
-    dayPeriodPosition: 'prefix'
+    dayPeriodPosition: 'suffix'
     hourWordsMap:
       - ''
       - 'ఒంటి గంట'
@@ -775,7 +775,7 @@ surfaces:
     afternoon: 'మధ్యాహ్నం'
     evening: 'సాయంత్రం'
     night: 'రాత్రి'
-    eveningStartHour: 17
+    eveningStartHour: 18
     nightStartHour: 21
 
   compass:

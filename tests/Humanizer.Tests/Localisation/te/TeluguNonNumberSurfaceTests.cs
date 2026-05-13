@@ -94,11 +94,13 @@ public class TeluguNonNumberSurfaceTests
     }
 
     [Theory]
-    [InlineData(1, 5, "ఉదయం ఒంటి గంట ఐదు నిమిషాలు")]
-    [InlineData(12, 0, "మధ్యాహ్నం పన్నెండు గంటలు")]
-    [InlineData(13, 23, "మధ్యాహ్నం ఒంటి గంట ఇరవై మూడు నిమిషాలు")]
-    [InlineData(18, 0, "సాయంత్రం ఆరు గంటలు")]
-    [InlineData(21, 0, "రాత్రి తొమ్మిది గంటలు")]
+    [InlineData(1, 5, "ఒంటి గంట ఐదు నిమిషాలు ఉదయం")]
+    [InlineData(9, 0, "తొమ్మిది గంటలు ఉదయం")]
+    [InlineData(12, 0, "పన్నెండు గంటలు మధ్యాహ్నం")]
+    [InlineData(13, 23, "ఒంటి గంట ఇరవై మూడు నిమిషాలు మధ్యాహ్నం")]
+    [InlineData(17, 0, "ఐదు గంటలు మధ్యాహ్నం")]
+    [InlineData(18, 0, "ఆరు గంటలు సాయంత్రం")]
+    [InlineData(21, 0, "తొమ్మిది గంటలు రాత్రి")]
     public void ClockNotation_UsesTeluguPhrases(int hours, int minutes, string expected)
     {
         Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation());
@@ -107,7 +109,7 @@ public class TeluguNonNumberSurfaceTests
     [Fact]
     public void ClockNotation_Rounded_UsesTeluguMinuteWords()
     {
-        Assert.Equal("మధ్యాహ్నం ఒంటి గంట ఇరవై ఐదు నిమిషాలు", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+        Assert.Equal("ఒంటి గంట ఇరవై ఐదు నిమిషాలు మధ్యాహ్నం", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
     }
 #endif
 

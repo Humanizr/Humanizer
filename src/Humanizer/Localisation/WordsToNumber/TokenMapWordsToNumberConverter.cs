@@ -88,10 +88,10 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         }
 
         if (TryParseOrdinal(normalized, out var value) ||
-            TryParseCardinal(normalized, out value, out unrecognizedWord))
+            TryParseCardinal(normalized, negative, out value, out unrecognizedWord))
         {
             parsedValue = value;
-            if (negative)
+            if (negative && parsedValue != long.MinValue)
             {
                 parsedValue = -parsedValue;
             }
@@ -212,8 +212,12 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token that was not recognized.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out long value, out string? unrecognizedWord)
+    bool TryParseCardinal(string words, bool allowLongMinMagnitude, out long value, out string? unrecognizedWord)
     {
+        var maxMagnitude = allowLongMinMagnitude
+            ? (ulong)long.MaxValue + 1UL
+            : (ulong)long.MaxValue;
+
         try
         {
             // Exact phrase matches win before tokenization so locale data can preserve irregular or
@@ -225,8 +229,8 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 return true;
             }
 
-            long total = 0;
-            long current = 0;
+            ulong total = 0;
+            ulong current = 0;
             unrecognizedWord = null;
             var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
             string? pendingToken = null;
@@ -241,19 +245,26 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             // This order keeps ambiguous inputs from being consumed by the wrong grammar branch.
             while (TryReadNextToken(ref tokenizer, ref pendingToken, out var token))
             {
-                if (TryParseTerminalOrdinal(token, ref tokenizer, ref pendingToken, total, current, out value, out unrecognizedWord))
+                if (total <= long.MaxValue && current <= long.MaxValue &&
+                    TryParseTerminalOrdinal(token, ref tokenizer, ref pendingToken, (long)total, (long)current, out value, out unrecognizedWord))
                 {
                     return true;
                 }
 
                 if (TryGetCompositeScaleValue(token, ref tokenizer, ref pendingToken, out var compositeScaleValue))
                 {
-                    total = checked(total + checked((current == 0 ? 1 : current) * compositeScaleValue));
+                    if (compositeScaleValue < 0 || !TryAddScaledGroup(total, current, (ulong)compositeScaleValue, maxMagnitude, out total))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
                     current = 0;
                     continue;
                 }
 
-                if (!TryGetTokenValue(token, out var tokenValue))
+                if (!TryGetTokenValue(token, out var tokenValue) || tokenValue < 0)
                 {
                     value = default;
                     unrecognizedWord = token;
@@ -262,7 +273,13 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
                 if (TryApplyLookaheadCompound(tokenValue, ref tokenizer, ref pendingToken, out var compoundValue))
                 {
-                    current = checked(current + compoundValue);
+                    if (compoundValue < 0 || !TryAddMagnitude(current, (ulong)compoundValue, maxMagnitude, out current))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
                     continue;
                 }
 
@@ -270,7 +287,13 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 {
                     // Large scales close the current group so "two hundred thousand" becomes
                     // (2 * 100) * 1000 rather than 2 * (100 * 1000) or any other accidental nesting.
-                    total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
+                    if (!TryAddScaledGroup(total, current, (ulong)tokenValue, maxMagnitude, out total))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
                     current = 0;
                     continue;
                 }
@@ -279,16 +302,43 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 {
                     // Some locales encode multiplication with an explicit token rather than a scale
                     // word, so the current group is rewritten in place instead of flushed.
-                    current = ApplyMultiplierToken(current, tokenValue);
+                    if (current > long.MaxValue)
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
+                    var multiplied = ApplyMultiplierToken((long)current, tokenValue);
+                    if (multiplied < 0 || (ulong)multiplied > maxMagnitude)
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
+                    current = (ulong)multiplied;
                     continue;
                 }
 
                 // Anything left is additive by default. This is the final fallback so that odd token
                 // shapes do not silently bypass the scale and multiplier rules above.
-                current = checked(current + tokenValue);
+                if (!TryAddMagnitude(current, (ulong)tokenValue, maxMagnitude, out current))
+                {
+                    value = default;
+                    unrecognizedWord = words;
+                    return false;
+                }
             }
 
-            value = checked(total + current);
+            if (!TryAddMagnitude(total, current, maxMagnitude, out var magnitude) ||
+                !TryCoerceMagnitude(magnitude, allowLongMinMagnitude, out value))
+            {
+                value = default;
+                unrecognizedWord = words;
+                return false;
+            }
+
             return true;
         }
         catch (OverflowException)
@@ -297,6 +347,53 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             unrecognizedWord = words;
             return false;
         }
+    }
+
+    static bool TryAddScaledGroup(ulong total, ulong current, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
+        var count = current == 0 ? 1UL : current;
+        try
+        {
+            var scaled = checked(count * scaleValue);
+            return TryAddMagnitude(total, scaled, maxMagnitude, out value);
+        }
+        catch (OverflowException)
+        {
+            value = default;
+            return false;
+        }
+    }
+
+    static bool TryAddMagnitude(ulong left, ulong right, ulong maxMagnitude, out ulong value)
+    {
+        try
+        {
+            value = checked(left + right);
+            return value <= maxMagnitude;
+        }
+        catch (OverflowException)
+        {
+            value = default;
+            return false;
+        }
+    }
+
+    static bool TryCoerceMagnitude(ulong magnitude, bool allowLongMinMagnitude, out long value)
+    {
+        if (magnitude <= long.MaxValue)
+        {
+            value = (long)magnitude;
+            return true;
+        }
+
+        if (allowLongMinMagnitude && magnitude == (ulong)long.MaxValue + 1UL)
+        {
+            value = long.MinValue;
+            return true;
+        }
+
+        value = default;
+        return false;
     }
 
     /// <summary>
@@ -469,7 +566,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 continue;
             }
 
-            if (!TryParseCardinal(words[..^suffix.Key.Length], out value, out _))
+            if (!TryParseCardinal(words[..^suffix.Key.Length], false, out value, out _))
             {
                 continue;
             }
