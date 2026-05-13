@@ -930,6 +930,17 @@ public sealed partial class HumanizerSourceGenerator
             RequiredInt64Value("value"),
             RequiredStringValue("name"));
 
+    static string CreateIndianScaleFormArrayExpression(JsonElement arrayElement)
+        => CreateTypedConstructorArrayExpression(
+            "IndianScaleForm",
+            arrayElement,
+            RequiredInt64Value("value"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("singularWithRemainder"),
+            RequiredStringValue("plural"),
+            RequiredStringValue("pluralWithRemainder"),
+            BooleanValue("omitOne"));
+
     static string CreateUnitLeadingCompoundScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "UnitLeadingCompoundScale",

@@ -102,6 +102,7 @@ public class AmharicLocaleParityTests
     [InlineData("ሃያ አንደኛ", 21)]
     [InlineData("1ኛ", 1)]
     [InlineData("23ኛ", 23)]
+    [InlineData("-1ኛ", -1)]
     [InlineData("አንድ መቶኛ", 100)]
     [InlineData("ሁለት መቶኛ", 200)]
     [InlineData("አንድ ኳድሪሊዮንኛ", 1_000_000_000_000_000)]

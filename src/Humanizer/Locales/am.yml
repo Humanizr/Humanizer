@@ -416,6 +416,7 @@ surfaces:
         'ኩዊንቲሊዮንኛ': 1000000000000000000
       negativePrefixes:
         - 'አሉታዊ'
+        - '-'
       ordinalAbbreviationSuffixes:
         - 'ኛ'
       allowTerminalOrdinalToken: true

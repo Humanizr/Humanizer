@@ -6,6 +6,8 @@ public static class LocaleNumberMagnitudeTheoryData
     {
         { "am", 1001L, "አንድ ሺህ አንድ" },
         { "am", 1000001L, "አንድ ሚሊዮን አንድ" },
+        { "te", 1001L, "వెయ్యి ఒకటి" },
+        { "te", 1000001L, "పది లక్షల ఒకటి" },
         { "sw", 1001L, "elfu moja na moja" },
         { "sw", 1000001L, "milioni moja na moja" },
         { "af", 1001L, "een duisend en een" },
@@ -154,6 +156,8 @@ public static class LocaleNumberMagnitudeTheoryData
     {
         { "am", 1001000001L, "አንድ ቢሊዮን አንድ ሚሊዮን አንድ" },
         { "am", 4325010007018L, "አራት ትሪሊዮን ሶስት መቶ ሃያ አምስት ቢሊዮን አስር ሚሊዮን ሰባት ሺህ አስራ ስምንት" },
+        { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },
+        { "te", 4325010007018L, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది" },
         { "sw", 1001000001L, "bilioni moja milioni moja na moja" },
         { "sw", 4325010007018L, "trilioni nne bilioni mia tatu na ishirini na tano milioni kumi elfu saba na kumi na nane" },
         { "af", 1001000001L, "een miljard een miljoen en een" },

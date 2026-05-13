@@ -6,6 +6,9 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
+        { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },
+        { "te", 4325010007018L, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది" },
         { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
@@ -212,6 +215,9 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
+        { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },
+        { "te", 4325010007018L, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది" },
         { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
@@ -418,6 +424,9 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
+        { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },
+        { "te", 4325010007018L, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది" },
         { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
@@ -624,6 +633,9 @@ public static class LocaleNumberOverloadTheoryData
     {
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
+        { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
+        { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },
+        { "te", 4325010007018L, "నలభై మూడు ఖరబ్ ఇరవై ఐదు అరబ్ కోటి ఏడు వేల పద్దెనిమిది" },
         { "sw", 21, "ishirini na moja" },
         { "af", 1001001L, "een miljoen een duisend en een" },
         { "af", 1001000001L, "een miljard een miljoen en een" },
