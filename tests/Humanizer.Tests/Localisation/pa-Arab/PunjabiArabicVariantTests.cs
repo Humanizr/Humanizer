@@ -69,6 +69,13 @@ public class PunjabiArabicVariantTests
     }
 
     [Fact]
+    public void WordsToNumber_RejectsGurmukhiTokensUnderPunjabiArabicCulture()
+    {
+        Assert.False("ਪੰਜ".TryToNumber(out _, PaArab));
+        Assert.Throws<ArgumentException>(() => "ਪੰਜ".ToNumber(PaArab));
+    }
+
+    [Fact]
     public void PunjabiArabic_IsTheOnlyAuthoredArabicScriptPunjabiVariant()
     {
         Assert.Equal("اک کروڑ تےئی لکھ پنتالی ہزار چھے سو اٹھتر", 12345678.ToWords(PaArab));
