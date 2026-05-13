@@ -33,6 +33,14 @@ public class SwahiliNumberToWordsTests
         Assert.Equal(expected, number.ToWords(Sw));
     }
 
+    [Fact]
+    public void ToWords_HandlesLongMinValueWithoutOverflow()
+    {
+        var words = long.MinValue.ToWords(Sw);
+        Assert.StartsWith("minus kwintilioni tisa", words, StringComparison.Ordinal);
+        Assert.Contains("na nane", words, StringComparison.Ordinal);
+    }
+
     [Theory]
     [InlineData(1, "kwanza")]
     [InlineData(2, "pili")]

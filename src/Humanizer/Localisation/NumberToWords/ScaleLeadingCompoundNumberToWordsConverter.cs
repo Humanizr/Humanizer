@@ -19,10 +19,13 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
 
         if (number < 0)
         {
-            return profile.MinusWord + " " + Convert(-number);
+            var magnitude = number == long.MinValue
+                ? (ulong)long.MaxValue + 1UL
+                : (ulong)-number;
+            return profile.MinusWord + " " + ConvertPositive(magnitude);
         }
 
-        return ConvertPositive(number);
+        return ConvertPositive((ulong)number);
     }
 
     /// <inheritdoc />
@@ -36,11 +39,11 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
         return profile.OrdinalPrefix + Convert(number) + profile.OrdinalSuffix;
     }
 
-    string ConvertPositive(long number)
+    string ConvertPositive(ulong number)
     {
-        if (number < profile.UnitsMap.Length)
+        if (number < (ulong)profile.UnitsMap.Length)
         {
-            return profile.UnitsMap[number];
+            return profile.UnitsMap[(int)number];
         }
 
         if (number < 100)
@@ -52,14 +55,15 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
         var remainder = number;
         foreach (var scale in profile.Scales)
         {
-            var count = remainder / scale.Value;
+            var scaleValue = (ulong)scale.Value;
+            var count = remainder / scaleValue;
             if (count == 0)
             {
                 continue;
             }
 
             parts.Add(scale.Name + " " + ConvertPositive(count));
-            remainder %= scale.Value;
+            remainder %= scaleValue;
         }
 
         if (remainder > 0)
@@ -75,14 +79,14 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
         return string.Join(" ", parts);
     }
 
-    string ConvertUnderOneHundred(long number)
+    string ConvertUnderOneHundred(ulong number)
     {
         var tens = number / 10;
         var units = number % 10;
-        var tensWord = profile.TensMap[tens];
+        var tensWord = profile.TensMap[(int)tens];
         return units == 0
             ? tensWord
-            : tensWord + " " + profile.ConjunctionWord + " " + profile.UnitsMap[units];
+            : tensWord + " " + profile.ConjunctionWord + " " + profile.UnitsMap[(int)units];
     }
 }
 
