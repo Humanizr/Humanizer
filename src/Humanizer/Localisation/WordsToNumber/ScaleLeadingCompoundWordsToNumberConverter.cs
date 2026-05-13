@@ -186,14 +186,18 @@ internal class ScaleLeadingCompoundWordsToNumberConverter(ScaleLeadingCompoundWo
 
     bool TryParseUnit(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
-        if (start < end &&
-            profile.Units.TryGetValue(tokens[start], out var rawValue) &&
-            rawValue >= 0 &&
-            (ulong)rawValue <= maxValue)
+        var lastCandidateEnd = Math.Min(end, start + profile.MaximumUnitTokenCount);
+        for (var candidateEnd = lastCandidateEnd; candidateEnd > start; candidateEnd--)
         {
-            value = (ulong)rawValue;
-            next = start + 1;
-            return true;
+            var candidate = string.Join(" ", tokens, start, candidateEnd - start);
+            if (profile.Units.TryGetValue(candidate, out var rawValue) &&
+                rawValue >= 0 &&
+                (ulong)rawValue <= maxValue)
+            {
+                value = (ulong)rawValue;
+                next = candidateEnd;
+                return true;
+            }
         }
 
         value = default;
@@ -309,6 +313,8 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
 {
     /// <summary>Gets unit and teen tokens.</summary>
     public FrozenDictionary<string, long> Units { get; } = units;
+    /// <summary>Gets the maximum normalized token count in any unit phrase.</summary>
+    public int MaximumUnitTokenCount { get; } = GetMaximumTokenCount(units.Keys);
     /// <summary>Gets decade tokens.</summary>
     public FrozenDictionary<string, long> Tens { get; } = tens;
     /// <summary>Gets descending scale rows.</summary>
@@ -323,6 +329,17 @@ internal sealed class ScaleLeadingCompoundWordsToNumberProfile(
     public string OrdinalSuffix { get; } = ordinalSuffix;
     /// <summary>Gets exact ordinal tokens.</summary>
     public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap ?? FrozenDictionary<string, long>.Empty;
+
+    static int GetMaximumTokenCount(IEnumerable<string> values)
+    {
+        var maximum = 1;
+        foreach (var value in values)
+        {
+            maximum = Math.Max(maximum, value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length);
+        }
+
+        return maximum;
+    }
 
     static ScaleLeadingCompoundScale[] ValidateScales(ScaleLeadingCompoundScale[] value)
     {
