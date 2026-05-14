@@ -4,6 +4,7 @@ public static class LocaleNumberMagnitudeTheoryData
 {
     public static TheoryData<string, long, string> MagnitudeCardinalCases => new()
     {
+        { "my", 1001L, "တစ်ထောင် တစ်" },
         { "am", 1001L, "አንድ ሺህ አንድ" },
         { "am", 1000001L, "አንድ ሚሊዮን አንድ" },
         { "te", 1001L, "వెయ్యి ఒకటి" },
@@ -156,6 +157,7 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
+        { "my", 12345678L, "တစ်ကုဋေ နှစ်သန်း သုံးသိန်း လေးသောင်း ငါးထောင် ခြောက်ရာ ခုနစ်ဆယ့်ရှစ်" },
         { "am", 1001000001L, "አንድ ቢሊዮን አንድ ሚሊዮን አንድ" },
         { "am", 4325010007018L, "አራት ትሪሊዮን ሶስት መቶ ሃያ አምስት ቢሊዮን አስር ሚሊዮን ሰባት ሺህ አስራ ስምንት" },
         { "te", 1001000001L, "అరబ్ పది లక్షల ఒకటి" },

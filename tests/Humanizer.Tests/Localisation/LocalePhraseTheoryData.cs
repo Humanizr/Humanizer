@@ -4,6 +4,11 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+        { "my", 1, TimeUnit.Day, Tense.Past, "မနေ့က" },
+        { "my", 1, TimeUnit.Day, Tense.Future, "မနက်ဖြန်" },
+        { "my", 2, TimeUnit.Day, Tense.Past, "ပြီးခဲ့သည့် 2 ရက်" },
+        { "my", 2, TimeUnit.Day, Tense.Future, "2 ရက်အတွင်း" },
+        { "my", 0, TimeUnit.Second, Tense.Future, "ယခု" },
         { "am", 1, TimeUnit.Second, Tense.Past, "ከ 1 ሰከንድ በፊት" },
         { "am", 2, TimeUnit.Second, Tense.Future, "ከ 2 ሰከንዶች በኋላ" },
         { "am", 1, TimeUnit.Minute, Tense.Past, "ከ 1 ደቂቃ በፊት" },
@@ -1501,6 +1506,7 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "my", "ဘယ်တော့မှ" },
         { "am", "ፈጽሞ" },
         { "te", "ఎప్పుడూ లేదు" },
         { "sw", "kamwe" },
@@ -1614,6 +1620,10 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+        { "my", 1, TimeUnit.Second, false, "1 စက္ကန့်" },
+        { "my", 2, TimeUnit.Second, false, "2 စက္ကန့်" },
+        { "my", 1, TimeUnit.Minute, true, "တစ် မိနစ်" },
+        { "my", 0, TimeUnit.Millisecond, true, "အချိန်မရှိ" },
         { "am", 1, TimeUnit.Second, false, "1 ሰከንድ" },
         { "am", 2, TimeUnit.Second, false, "2 ሰከንዶች" },
         { "am", 1, TimeUnit.Minute, false, "1 ደቂቃ" },
