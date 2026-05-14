@@ -147,7 +147,6 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
         parts.Add(GetUnitValue(number, isOrdinal));
     }
 
-
     string ConvertWholePhraseOrdinal(long number, bool addAnd)
     {
         if (number < 0)
