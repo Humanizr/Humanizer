@@ -118,8 +118,8 @@ public class BurmeseLocaleParityTests
     [Theory]
     [InlineData(1, "ပထမ")]
     [InlineData(2, "ဒုတိယ")]
-    [InlineData(21, "နှစ်ဆယ့်တစ်ခုမြောက်")]
-    [InlineData(101, "တစ်ရာ တစ်ခုမြောက်")]
+    [InlineData(21, "နှစ်ဆယ့်တစ်မြောက်")]
+    [InlineData(101, "တစ်ရာ တစ်မြောက်")]
     public void NumberToOrdinalWords_ProducesBurmeseOrdinals(int number, string expected)
     {
         Assert.Equal(expected, number.ToOrdinalWords(My));
@@ -128,8 +128,8 @@ public class BurmeseLocaleParityTests
 
 
     [Theory]
-    [InlineData(201, "နှစ်ရာ တစ်ခုမြောက်")]
-    [InlineData(1001, "တစ်ထောင် တစ်ခုမြောက်")]
+    [InlineData(201, "နှစ်ရာ တစ်မြောက်")]
+    [InlineData(1001, "တစ်ထောင် တစ်မြောက်")]
     public void WordsToNumber_ParsesGeneratedCompoundOrdinals(int number, string words)
     {
         Assert.Equal(words, number.ToOrdinalWords(My));
@@ -138,9 +138,9 @@ public class BurmeseLocaleParityTests
 
 
     [Theory]
-    [InlineData(300, "သုံးရာခုမြောက်")]
-    [InlineData(1000, "တစ်ထောင်ခုမြောက်")]
-    [InlineData(999999999, "ကိုးဆယ့်ကိုးကုဋေ ကိုးသန်း ကိုးသိန်း ကိုးသောင်း ကိုးထောင် ကိုးရာ ကိုးဆယ့်ကိုးခုမြောက်")]
+    [InlineData(300, "သုံးရာမြောက်")]
+    [InlineData(1000, "တစ်ထောင်မြောက်")]
+    [InlineData(999999999, "ကိုးဆယ့်ကိုးကုဋေ ကိုးသန်း ကိုးသိန်း ကိုးသောင်း ကိုးထောင် ကိုးရာ ကိုးဆယ့်ကိုးမြောက်")]
     public void WordsToNumber_ParsesGeneratedExactScaleOrdinals(int number, string words)
     {
         Assert.Equal(words, number.ToOrdinalWords(My));
@@ -153,8 +153,17 @@ public class BurmeseLocaleParityTests
     [InlineData("တစ်ထောင် နှစ်ရာ သုံးဆယ့်လေး", 1234)]
     [InlineData("တစ်ကုဋေ နှစ်သန်း သုံးသိန်း လေးသောင်း ငါးထောင် ခြောက်ရာ ခုနစ်ဆယ့်ရှစ်", 12345678)]
     [InlineData("အနုတ် နှစ်ဆယ့်တစ်", -21)]
+    [InlineData("နှစ်ဆယ့်တစ်မြောက်", 21)]
     [InlineData("နှစ်ဆယ့်တစ်ခုမြောက်", 21)]
+    [InlineData("တစ်ရာ တစ်ခုမြောက်", 101)]
+    [InlineData("တစ်ထောင်ခုမြောက်", 1000)]
+    [InlineData("21မြောက်", 21)]
+    [InlineData("21 မြောက်", 21)]
+    [InlineData("21\tမြောက်", 21)]
     [InlineData("21ခုမြောက်", 21)]
+    [InlineData("21 ခုမြောက်", 21)]
+    [InlineData("-1မြောက်", -1)]
+    [InlineData("-1 မြောက်", -1)]
     [InlineData("-1ခုမြောက်", -1)]
     public void WordsToNumber_ParsesBurmeseCardinalsAndOrdinals(string words, long expected)
     {
@@ -165,9 +174,9 @@ public class BurmeseLocaleParityTests
     }
 
     [Theory]
-    [InlineData(1, "1ခုမြောက်")]
-    [InlineData(21, "21ခုမြောက်")]
-    [InlineData(-1, "-1ခုမြောက်")]
+    [InlineData(1, "1 မြောက်")]
+    [InlineData(21, "21 မြောက်")]
+    [InlineData(-1, "-1 မြောက်")]
     public void Ordinalize_UsesBurmeseNumericSuffix(int number, string expected)
     {
         Assert.Equal(expected, number.Ordinalize(My));
