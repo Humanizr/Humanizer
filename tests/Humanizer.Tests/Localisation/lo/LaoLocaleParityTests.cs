@@ -135,6 +135,19 @@ public class LaoLocaleParityTests
     }
 
     [Theory]
+    [InlineData(1_001_000_000_000_000_000L)]
+    [InlineData(1_234_567_890_123_456_789L)]
+    public void WordsToNumber_RoundTripsHighLaoMagnitudes(long number)
+    {
+        var words = number.ToWords(Lo);
+
+        Assert.Equal(number, words.ToNumber(Lo));
+        Assert.True(words.TryToNumber(out var parsed, Lo, out var unrecognizedWord));
+        Assert.Equal(number, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Theory]
     [InlineData("ທີໜຶ່ງ", 1)]
     [InlineData("ທີຫົກ", 6)]
     [InlineData("ທີຊາວເອັດ", 21)]
