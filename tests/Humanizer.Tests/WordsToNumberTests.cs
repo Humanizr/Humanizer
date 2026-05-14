@@ -1230,6 +1230,33 @@ public class WordsToNumberTests_Azerbaijani
     }
 }
 
+public class ScaleLeadingCompoundWordsToNumberConverterTests
+{
+    [Fact]
+    public void TensConjunctionParsesMultiTokenUnit()
+    {
+        var converter = new ScaleLeadingCompoundWordsToNumberConverter(new(
+            new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["zero"] = 0,
+                ["one"] = 1,
+                ["fold one"] = 1
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["twenty"] = 20
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            [new(100, "hundred")],
+            "and",
+            null,
+            "minus",
+            string.Empty,
+            string.Empty));
+
+        Assert.Equal(21, converter.Convert("twenty and fold one"));
+    }
+}
+
 public class TokenMapWordsToNumberConverterTests
 {
     [Fact]

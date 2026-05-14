@@ -8,6 +8,9 @@ public class SwahiliNumberToWordsTests
     [Theory]
     [InlineData(0, "sifuri")]
     [InlineData(5, "tano")]
+    [InlineData(10, "kumi")]
+    [InlineData(11, "kumi na moja")]
+    [InlineData(19, "kumi na tisa")]
     [InlineData(21, "ishirini na moja")]
     [InlineData(99, "tisini na tisa")]
     [InlineData(100, "mia moja")]
@@ -55,6 +58,9 @@ public class SwahiliNumberToWordsTests
     }
 
     [Theory]
+    [InlineData(10, "kumi")]
+    [InlineData(11, "kumi na moja")]
+    [InlineData(19, "kumi na tisa")]
     [InlineData(21, "ishirini na moja")]
     [InlineData(99, "tisini na tisa")]
     [InlineData(105, "mia moja na tano")]

@@ -70,6 +70,8 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
         var parts = new List<string>();
         var remainder = number;
         var consumedScale = false;
+        ulong lastScaleCount = 0;
+        long lastScaleValue = 0;
         foreach (var scale in profile.Scales)
         {
             var scaleValue = (ulong)scale.Value;
@@ -82,6 +84,8 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
             parts.Add(scale.Name + " " + ConvertPositive(count));
             remainder %= scaleValue;
             consumedScale = true;
+            lastScaleCount = count;
+            lastScaleValue = scale.Value;
         }
 
         if (!consumedScale)
@@ -93,7 +97,7 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
         {
             if (remainder < 100)
             {
-                parts.Add(profile.ConjunctionWord);
+                parts.Add(GetTerminalRemainderConjunction(lastScaleValue, lastScaleCount));
             }
 
             parts.Add(ConvertPositive(remainder));
@@ -101,6 +105,11 @@ class ScaleLeadingCompoundNumberToWordsConverter(ScaleLeadingCompoundNumberToWor
 
         return string.Join(" ", parts);
     }
+
+    string GetTerminalRemainderConjunction(long scaleValue, ulong scaleCount) =>
+        scaleValue >= 1000 && scaleCount >= 10
+            ? profile.TerminalRemainderConjunctionWord
+            : profile.ConjunctionWord;
 
     string ConvertUnderOneHundred(ulong number)
     {
@@ -120,6 +129,7 @@ sealed class ScaleLeadingCompoundNumberToWordsProfile(
     string zeroWord,
     string minusWord,
     string conjunctionWord,
+    string? terminalRemainderConjunctionWord,
     string ordinalPrefix,
     string ordinalSuffix,
     string[] unitsMap,
@@ -137,6 +147,8 @@ sealed class ScaleLeadingCompoundNumberToWordsProfile(
     /// remainders of one hundred or greater.
     /// </summary>
     public string ConjunctionWord { get; } = conjunctionWord;
+    /// <summary>Gets the conjunction inserted before potentially ambiguous terminal remainders.</summary>
+    public string TerminalRemainderConjunctionWord { get; } = string.IsNullOrWhiteSpace(terminalRemainderConjunctionWord) ? conjunctionWord : terminalRemainderConjunctionWord!;
     /// <summary>Gets the ordinal prefix used when no exact ordinal exists.</summary>
     public string OrdinalPrefix { get; } = ordinalPrefix;
     /// <summary>Gets the ordinal suffix used when no exact ordinal exists.</summary>

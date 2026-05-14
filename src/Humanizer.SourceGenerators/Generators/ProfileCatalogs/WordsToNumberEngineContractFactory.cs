@@ -120,6 +120,7 @@ public sealed partial class HumanizerSourceGenerator
             CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "tensMap")) + ", " +
             CreateScaleLeadingCompoundScaleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
             QuoteLiteral(GetRequiredString(root, "conjunctionWord")) + ", " +
+            (GetOptionalString(root, "terminalRemainderConjunctionWord") is { } terminalRemainderConjunctionWord ? QuoteLiteral(terminalRemainderConjunctionWord) : "null") + ", " +
             QuoteLiteral(GetRequiredString(root, "minusWord")) + ", " +
             QuoteLiteral(GetOptionalString(root, "ordinalPrefix") ?? string.Empty) + ", " +
             QuoteLiteral(GetOptionalString(root, "ordinalSuffix") ?? string.Empty) + ", " +
