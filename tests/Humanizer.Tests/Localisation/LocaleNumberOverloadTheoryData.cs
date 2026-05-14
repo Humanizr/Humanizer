@@ -4,6 +4,7 @@ public static class LocaleNumberOverloadTheoryData
 {
     public static TheoryData<string, long, string> AddAndCases => new()
     {
+        { "ps", 1001001L, "یو میلیون او یو زره او یو" },
         { "kn", 1_001_001L, "ಹತ್ತು ಲಕ್ಷದ ಸಾವಿರದ ಒಂದು" },
         { "kn", 1_001_000_001L, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು" },
         { "kn", 4_325_010_007_018L, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು" },
@@ -227,6 +228,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
+        { "ps", 1001001L, "یو میلیون او یو زره او یو" },
         { "kn", 1_001_001L, "ಹತ್ತು ಲಕ್ಷದ ಸಾವಿರದ ಒಂದು" },
         { "kn", 1_001_000_001L, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು" },
         { "kn", 4_325_010_007_018L, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು" },
@@ -449,6 +451,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
+        { "ps", 1001001L, "یو میلیون او یو زره او یو" },
         { "kn", 1_001_001L, "ಹತ್ತು ಲಕ್ಷದ ಸಾವಿರದ ಒಂದು" },
         { "kn", 1_001_000_001L, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು" },
         { "kn", 4_325_010_007_018L, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು" },
@@ -671,6 +674,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
+        { "ps", 1001001L, "یو میلیون او یو زره او یو" },
         { "kn", 1_001_001L, "ಹತ್ತು ಲಕ್ಷದ ಸಾವಿರದ ಒಂದು" },
         { "kn", 1_001_000_001L, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು" },
         { "kn", 4_325_010_007_018L, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು" },
