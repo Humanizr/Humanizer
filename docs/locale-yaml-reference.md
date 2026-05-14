@@ -1253,7 +1253,15 @@ Fields:
 - `hundredsMap`
 - `hundredsOrdinalMap`
 - `unitsOrdinal`
+- `unitForms` with optional `masculine`, `feminine`, and `neuter` unit override maps
+- `ordinalZero` with `masculine`, `feminine`, and `neuter` forms
+- `ordinalOverHundredSuffixes` with `masculine`, `feminine`, and `neuter` suffixes for hundreds and scale stems
+- `ordinalUnitsAndTensSuffixes` with `masculine`, `feminine`, and `neuter` suffixes for unit and tens stems
 - `scales`
+
+Notes:
+
+- Omitted `unitForms` gender maps, or missing entries inside a gender map, fall back to `unitsMap`. The ordinal form blocks are required because there is no safe runtime fallback for locale-specific ordinal wording.
 
 ### `conjunctional-scale`
 
