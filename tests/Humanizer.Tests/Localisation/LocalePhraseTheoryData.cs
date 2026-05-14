@@ -1220,6 +1220,13 @@ static class LocalePhraseTheoryData
         { "ky", 1, TimeUnit.Year, Tense.Past, "бир жыл мурун" },
         { "ky", 2, TimeUnit.Year, Tense.Future, "2 жылдан кийин" },
         { "ky", 0, TimeUnit.Second, Tense.Future, "азыр" },
+        { "gl", 1, TimeUnit.Second, Tense.Past, "hai un segundo" },
+        { "gl", 2, TimeUnit.Second, Tense.Future, "dentro de 2 segundos" },
+        { "gl", 1, TimeUnit.Day, Tense.Past, "onte" },
+        { "gl", 1, TimeUnit.Day, Tense.Future, "mañá" },
+        { "gl", 2, TimeUnit.Day, Tense.Past, "hai 2 días" },
+        { "gl", 2, TimeUnit.Day, Tense.Future, "dentro de 2 días" },
+        { "gl", 0, TimeUnit.Second, Tense.Future, "agora" },
 };
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
@@ -1710,6 +1717,7 @@ static class LocalePhraseTheoryData
         { "lo", "ບໍ່ເຄີຍ" },
         { "mn", "хэзээ ч үгүй" },
         { "ky", "эч качан" },
+        { "gl", "nunca" },
 };
 
     public static TheoryData<string, string, string, string> TimeOnlyDefaultHumanizeCases => new()
@@ -2660,6 +2668,11 @@ static class LocalePhraseTheoryData
         { "ky", 2, TimeUnit.Day, false, "2 күн" },
         { "ky", 0, TimeUnit.Millisecond, false, "0 миллисекунд" },
         { "ky", 0, TimeUnit.Millisecond, true, "убакыт айырмасы жок" },
+        { "gl", 1, TimeUnit.Second, false, "1 segundo" },
+        { "gl", 2, TimeUnit.Second, false, "2 segundos" },
+        { "gl", 1, TimeUnit.Hour, true, "unha hora" },
+        { "gl", 2, TimeUnit.Day, false, "2 días" },
+        { "gl", 0, TimeUnit.Millisecond, true, "nada" },
 };
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()

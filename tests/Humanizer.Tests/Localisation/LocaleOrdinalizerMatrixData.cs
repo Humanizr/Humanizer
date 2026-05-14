@@ -723,6 +723,15 @@ static class LocaleOrdinalizerMatrixData
             { "ky", 100, "100-чү" },
             { "ky", 101, "101-чи" },
             { "ky", 1001, "1001-чи" },
+            { "gl", 0, "0" },
+            { "gl", 1, "1.º" },
+            { "gl", 2, "2.º" },
+            { "gl", 3, "3.º" },
+            { "gl", 10, "10.º" },
+            { "gl", 23, "23.º" },
+            { "gl", 100, "100.º" },
+            { "gl", 101, "101.º" },
+            { "gl", 1001, "1001.º" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
@@ -3623,6 +3632,48 @@ static class LocaleOrdinalizerMatrixData
             { "ky", 102, GrammaticalGender.Neuter, "102-чи" },
             { "ky", 103, GrammaticalGender.Neuter, "103-чү" },
             { "ky", 1001, GrammaticalGender.Neuter, "1001-чи" },
+            { "gl", 0, GrammaticalGender.Masculine, "0" },
+            { "gl", 1, GrammaticalGender.Masculine, "1.º" },
+            { "gl", 2, GrammaticalGender.Masculine, "2.º" },
+            { "gl", 3, GrammaticalGender.Masculine, "3.º" },
+            { "gl", 4, GrammaticalGender.Masculine, "4.º" },
+            { "gl", 5, GrammaticalGender.Masculine, "5.º" },
+            { "gl", 6, GrammaticalGender.Masculine, "6.º" },
+            { "gl", 10, GrammaticalGender.Masculine, "10.º" },
+            { "gl", 23, GrammaticalGender.Masculine, "23.º" },
+            { "gl", 100, GrammaticalGender.Masculine, "100.º" },
+            { "gl", 101, GrammaticalGender.Masculine, "101.º" },
+            { "gl", 102, GrammaticalGender.Masculine, "102.º" },
+            { "gl", 103, GrammaticalGender.Masculine, "103.º" },
+            { "gl", 1001, GrammaticalGender.Masculine, "1001.º" },
+            { "gl", 0, GrammaticalGender.Feminine, "0" },
+            { "gl", 1, GrammaticalGender.Feminine, "1.ª" },
+            { "gl", 2, GrammaticalGender.Feminine, "2.ª" },
+            { "gl", 3, GrammaticalGender.Feminine, "3.ª" },
+            { "gl", 4, GrammaticalGender.Feminine, "4.ª" },
+            { "gl", 5, GrammaticalGender.Feminine, "5.ª" },
+            { "gl", 6, GrammaticalGender.Feminine, "6.ª" },
+            { "gl", 10, GrammaticalGender.Feminine, "10.ª" },
+            { "gl", 23, GrammaticalGender.Feminine, "23.ª" },
+            { "gl", 100, GrammaticalGender.Feminine, "100.ª" },
+            { "gl", 101, GrammaticalGender.Feminine, "101.ª" },
+            { "gl", 102, GrammaticalGender.Feminine, "102.ª" },
+            { "gl", 103, GrammaticalGender.Feminine, "103.ª" },
+            { "gl", 1001, GrammaticalGender.Feminine, "1001.ª" },
+            { "gl", 0, GrammaticalGender.Neuter, "0" },
+            { "gl", 1, GrammaticalGender.Neuter, "1.º" },
+            { "gl", 2, GrammaticalGender.Neuter, "2.º" },
+            { "gl", 3, GrammaticalGender.Neuter, "3.º" },
+            { "gl", 4, GrammaticalGender.Neuter, "4.º" },
+            { "gl", 5, GrammaticalGender.Neuter, "5.º" },
+            { "gl", 6, GrammaticalGender.Neuter, "6.º" },
+            { "gl", 10, GrammaticalGender.Neuter, "10.º" },
+            { "gl", 23, GrammaticalGender.Neuter, "23.º" },
+            { "gl", 100, GrammaticalGender.Neuter, "100.º" },
+            { "gl", 101, GrammaticalGender.Neuter, "101.º" },
+            { "gl", 102, GrammaticalGender.Neuter, "102.º" },
+            { "gl", 103, GrammaticalGender.Neuter, "103.º" },
+            { "gl", 1001, GrammaticalGender.Neuter, "1001.º" },
 };
 
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
@@ -4302,6 +4353,15 @@ static class LocaleOrdinalizerMatrixData
             { "ky", "100", "100-чү" },
             { "ky", "101", "101-чи" },
             { "ky", "1001", "1001-чи" },
+            { "gl", "0", "0" },
+            { "gl", "1", "1.º" },
+            { "gl", "2", "2.º" },
+            { "gl", "3", "3.º" },
+            { "gl", "10", "10.º" },
+            { "gl", "23", "23.º" },
+            { "gl", "100", "100.º" },
+            { "gl", "101", "101.º" },
+            { "gl", "1001", "1001.º" },
 };
 
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
@@ -4691,6 +4751,11 @@ static class LocaleOrdinalizerMatrixData
             { "ky", -10, "-10-чу" },
             { "ky", -23, "-23-чү" },
             { "ky", -2147483648, "-2147483648-чи" },
+            { "gl", -1, "-1.º" },
+            { "gl", -2, "-2.º" },
+            { "gl", -10, "-10.º" },
+            { "gl", -23, "-23.º" },
+            { "gl", -2147483648, "-2147483648.º" },
 };
 
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
@@ -5289,6 +5354,10 @@ static class LocaleOrdinalizerMatrixData
             { "ky", 3, WordForm.Normal, "3-чү" },
             { "ky", 21, WordForm.Abbreviation, "21-чи" },
             { "ky", 21, WordForm.Normal, "21-чи" },
+            { "gl", 1, WordForm.Abbreviation, "1.º" },
+            { "gl", 1, WordForm.Normal, "1.º" },
+            { "gl", 21, WordForm.Abbreviation, "21.º" },
+            { "gl", 21, WordForm.Normal, "21.º" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
@@ -6976,6 +7045,9 @@ static class LocaleOrdinalizerMatrixData
             { "ky", 21, GrammaticalGender.Feminine, WordForm.Normal, "21-чи" },
             { "ky", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "21-чи" },
             { "ky", 21, GrammaticalGender.Neuter, WordForm.Normal, "21-чи" },
+            { "gl", 1, GrammaticalGender.Masculine, WordForm.Normal, "1.º" },
+            { "gl", 1, GrammaticalGender.Feminine, WordForm.Normal, "1.ª" },
+            { "gl", 1, GrammaticalGender.Neuter, WordForm.Normal, "1.º" },
 };
 
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
@@ -9680,6 +9752,9 @@ static class LocaleOrdinalizerMatrixData
             { "ky", "102", GrammaticalGender.Neuter, "102-чи" },
             { "ky", "103", GrammaticalGender.Neuter, "103-чү" },
             { "ky", "1001", GrammaticalGender.Neuter, "1001-чи" },
+            { "gl", "1", GrammaticalGender.Masculine, "1.º" },
+            { "gl", "1", GrammaticalGender.Feminine, "1.ª" },
+            { "gl", "1", GrammaticalGender.Neuter, "1.º" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
@@ -12576,6 +12651,9 @@ static class LocaleOrdinalizerMatrixData
             { "ky", 102, GrammaticalGender.Neuter, "102-чи" },
             { "ky", 103, GrammaticalGender.Neuter, "103-чү" },
             { "ky", 1001, GrammaticalGender.Neuter, "1001-чи" },
+            { "gl", 1, GrammaticalGender.Masculine, "1.º" },
+            { "gl", 1, GrammaticalGender.Feminine, "1.ª" },
+            { "gl", 1, GrammaticalGender.Neuter, "1.º" },
 };
 
 }
