@@ -32,6 +32,7 @@ public class EstonianLocaleParityTests
     [InlineData(101, "saja esimene")]
     [InlineData(200, "kahesajas")]
     [InlineData(2021, "kahe tuhande kahekümne esimene")]
+    [InlineData(10002, "kümne tuhande teine")]
     public void ToOrdinalWords_UsesEstonianOrdinalForms(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(Estonian));
 
@@ -44,6 +45,20 @@ public class EstonianLocaleParityTests
     [InlineData("miinus kakskümmend üks", -21)]
     public void ToNumber_ParsesEstonianCardinalOrdinalAndNumericOrdinalForms(string words, long expected) =>
         Assert.Equal(expected, words.ToNumber(Estonian));
+
+
+    [Fact]
+    public void ToNumber_DoesNotTreatMinusWordAsZeroToken() =>
+        Assert.Throws<ArgumentException>(() => "miinus".ToNumber(Estonian));
+
+    [Fact]
+    public void ToOrdinalWords_DoesNotUseMalformedDefaultSuffixFallback()
+    {
+        var ordinal = 10002.ToOrdinalWords(Estonian);
+
+        Assert.Equal("kümne tuhande teine", ordinal);
+        Assert.DoesNotContain("kakss", ordinal);
+    }
 
     [Theory]
     [InlineData(0, "0.")]
@@ -94,6 +109,8 @@ public class EstonianLocaleParityTests
     [Theory]
     [InlineData(13, 23, "13:23")]
     [InlineData(4, 0, "4:00")]
+    [InlineData(1, 5, "1:05")]
+    [InlineData(1, 7, "1:07")]
     public void ToClockNotation_UsesEstonianNumericClockPhrases(int hour, int minute, string expected) =>
         Assert.Equal(expected, new TimeOnly(hour, minute).ToClockNotation());
 
