@@ -133,17 +133,23 @@ public class MarathiLocaleTests
     [Theory]
     [InlineData(1, GrammaticalGender.Masculine, "पहिला")]
     [InlineData(5, GrammaticalGender.Masculine, "पाचवा")]
+    [InlineData(20, GrammaticalGender.Masculine, "विसावा")]
     [InlineData(21, GrammaticalGender.Masculine, "एकविसावा")]
+    [InlineData(32, GrammaticalGender.Masculine, "बत्तीसावा")]
     [InlineData(100, GrammaticalGender.Masculine, "शंभरावा")]
     [InlineData(101, GrammaticalGender.Masculine, "एकशे एकवा")]
     [InlineData(1, GrammaticalGender.Feminine, "पहिली")]
     [InlineData(5, GrammaticalGender.Feminine, "पाचवी")]
+    [InlineData(20, GrammaticalGender.Feminine, "विसावी")]
     [InlineData(21, GrammaticalGender.Feminine, "एकविसावी")]
+    [InlineData(32, GrammaticalGender.Feminine, "बत्तीसावी")]
     [InlineData(100, GrammaticalGender.Feminine, "शंभरावी")]
     [InlineData(101, GrammaticalGender.Feminine, "एकशे एकवी")]
     [InlineData(1, GrammaticalGender.Neuter, "पहिले")]
     [InlineData(5, GrammaticalGender.Neuter, "पाचवे")]
+    [InlineData(20, GrammaticalGender.Neuter, "विसावे")]
     [InlineData(21, GrammaticalGender.Neuter, "एकविसावे")]
+    [InlineData(32, GrammaticalGender.Neuter, "बत्तीसावे")]
     [InlineData(100, GrammaticalGender.Neuter, "शंभरावे")]
     [InlineData(101, GrammaticalGender.Neuter, "एकशे एकवे")]
     public void ToOrdinalWords_UsesRealMarathiGenderedOutput(int number, GrammaticalGender gender, string expected)
@@ -152,9 +158,15 @@ public class MarathiLocaleTests
     }
 
     [Theory]
+    [InlineData(20, GrammaticalGender.Masculine, "विसावा")]
+    [InlineData(20, GrammaticalGender.Feminine, "विसावी")]
+    [InlineData(20, GrammaticalGender.Neuter, "विसावे")]
     [InlineData(21, GrammaticalGender.Masculine, "एकविसावा")]
     [InlineData(21, GrammaticalGender.Feminine, "एकविसावी")]
     [InlineData(21, GrammaticalGender.Neuter, "एकविसावे")]
+    [InlineData(32, GrammaticalGender.Masculine, "बत्तीसावा")]
+    [InlineData(32, GrammaticalGender.Feminine, "बत्तीसावी")]
+    [InlineData(32, GrammaticalGender.Neuter, "बत्तीसावे")]
     public void Ordinalize_Int_UsesRealMarathiGenderedOutput(int number, GrammaticalGender gender, string expected)
     {
         Assert.Equal(expected, number.Ordinalize(gender, Mr));
@@ -164,6 +176,12 @@ public class MarathiLocaleTests
     [InlineData("एकवीस", 21)]
     [InlineData("एक कोटी तेवीस लाख पंचेचाळीस हजार सहाशे अठ्ठ्याहत्तर", 12345678)]
     [InlineData("मायनस पाच", -5)]
+    [InlineData("विसावा", 20)]
+    [InlineData("विसावी", 20)]
+    [InlineData("विसावे", 20)]
+    [InlineData("बत्तीसावा", 32)]
+    [InlineData("बत्तीसावी", 32)]
+    [InlineData("बत्तीसावे", 32)]
     [InlineData("एकविसावी", 21)]
     [InlineData("एकविसावे", 21)]
     public void WordsToNumber_ParsesMarathiWords(string words, long expected)
