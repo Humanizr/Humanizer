@@ -8,7 +8,8 @@ namespace Humanizer;
 /// <remarks>
 /// This engine requires a <see cref="CultureInfo"/> at construction time (<c>useCulture: true</c>
 /// in the YAML profile) so it can resolve the correct number-to-words converter for the locale.
-/// Neuter gender uses a locale-authored block when present, otherwise it falls back to masculine.
+/// Neuter gender uses a locale-authored block when present; otherwise the fallback gender is
+/// determined by <see cref="Options.NeuterFallbackGender"/>.
 /// </remarks>
 class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinalizer.Options options) : DefaultOrdinalizer
 {
@@ -22,7 +23,7 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
         Convert(number, numberString, GrammaticalGender.Masculine);
 
     /// <summary>
-    /// Ordinalizes using the requested gender (neuter falls back to masculine).
+    /// Ordinalizes using the requested gender.
     /// </summary>
     public override string Convert(int number, string numberString, GrammaticalGender gender) =>
         ConvertCore(number, gender);

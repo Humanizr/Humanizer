@@ -1531,6 +1531,7 @@ Fields:
   - `feminine`: optional gender block with the same shape as `masculine`.
   - `neuter`: optional gender block with the same shape as `masculine`.
   - `neuterFallback`: gender to use when `GrammaticalGender.Neuter` is requested and no `neuter` block exists. Must be `'masculine'` or `'feminine'`.
+  - `joined-scale` intentionally allows omitted `feminine` and `neuter` blocks because some locales only need masculine word ordinals or use masculine as a shared fallback. This differs from `ordinalizer: number-word-suffix`, which requires both `masculine` and `feminine` because that ordinalizer surface models explicitly gendered numeric ordinalization.
 
 Separator modes:
 
