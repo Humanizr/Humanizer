@@ -13,6 +13,8 @@ static class LocaleCoverageData
     // Representative non-first-of-month date sample.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2022, 1, 25, "25 janar 2022") },
+
         { "kk", new(2022, 1, 25, "25 қаңтар 2022") },
         { "ka", new(2022, 1, 25, "25 იანვარი 2022") },
 
@@ -110,6 +112,8 @@ static class LocaleCoverageData
     // First-of-month sample where many locales change the day form.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2015, 1, 1, "1 janar 2015") },
+
         { "kk", new(2015, 1, 1, "1 қаңтар 2015") },
         { "ka", new(2015, 1, 1, "1 იანვარი 2015") },
 
@@ -207,6 +211,8 @@ static class LocaleCoverageData
     // Early-month sample used to catch plain numeric-day formatting.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2015, 2, 3, "3 shkurt 2015") },
+
         { "kk", new(2015, 2, 3, "3 ақпан 2015") },
         { "ka", new(2015, 2, 3, "3 თებერვალი 2015") },
 
@@ -303,6 +309,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020February29ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2020, 2, 29, "29 shkurt 2020") },
+
         { "ka", new(2020, 2, 29, "29 თებერვალი 2020") },
 
         { "am", new(2020, 2, 29, "29 ፌብሩዋሪ 2020") },
@@ -322,6 +330,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015September4ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2015, 9, 4, "4 shtator 2015") },
+
         { "ka", new(2015, 9, 4, "4 სექტემბერი 2015") },
 
         { "am", new(2015, 9, 4, "4 ሴፕቴምበር 2015") },
@@ -340,6 +350,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords1979November7ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(1979, 11, 7, "7 nëntor 1979") },
+
         { "ka", new(1979, 11, 7, "7 ნოემბერი 1979") },
 
         { "am", new(1979, 11, 7, "7 ኖቬምበር 1979") },
@@ -358,6 +370,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020March2ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2020, 3, 2, "2 mars 2020") },
+
         { "ka", new(2020, 3, 2, "2 მარტი 2020") },
 
         { "am", new(2020, 3, 2, "2 ማርች 2020") },
@@ -375,6 +389,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2021October31ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2021, 10, 31, "31 tetor 2021") },
+
         { "ka", new(2021, 10, 31, "31 ოქტომბერი 2021") },
 
         { "am", new(2021, 10, 31, "31 ኦክቶበር 2021") },
@@ -393,6 +409,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2024December31ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(2024, 12, 31, "31 dhjetor 2024") },
+
         { "ka", new(2024, 12, 31, "31 დეკემბერი 2024") },
 
         { "am", new(2024, 12, 31, "31 ዲሴምበር 2024") },
@@ -416,6 +434,8 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(13, 23, "ora një e njëzet e tre pasdite") },
+
         { "kk", new(13, 23, "он үш сағат жиырма үш минут") },
         { "ka", new(13, 23, "13 საათი 23 წუთი") },
 
@@ -513,6 +533,8 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
+        { "sq", new(13, 23, "ora një e njëzet e pesë pasdite") },
+
         { "kk", new(13, 23, "он үш сағат жиырма бес минут") },
         { "ka", new(13, 23, "13 საათი 25 წუთი") },
 
@@ -610,6 +632,8 @@ static class LocaleCoverageData
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
+        { "sq", new(1, 5, "ora një e pesë herët në mëngjes") },
+
         { "kk", new(1, 5, "бір сағат бес минут") },
         { "ka", new(1, 5, "1 საათი 5 წუთი") },
 
@@ -706,6 +730,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalExactExpectationTheoryData { get; } = new()
     {
+        { "sq", new(20, 0, "ora tetë në mbrëmje") },
+
         { "ka", new(4, 0, "4 საათი") },
         { "ka", new(20, 59, "20 საათი 59 წუთი") },
 
@@ -881,6 +907,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalRoundedExpectationTheoryData { get; } = new()
     {
+        { "sq", new(20, 59, "ora nëntë natën") },
+
         { "ka", new(20, 59, "21 საათი") },
 
         { "ca", new(0, 0, "mitjanit") },
@@ -1044,6 +1072,8 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> FormatterExpectationTheoryData =>
         new()
         {
+            { "sq", "dje", "2 ditë" },
+
             { "kk", "кеше", "2 күн" },
 
         { "ka", "გუშინ", "2 დღე" },
@@ -1141,6 +1171,8 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
         new()
         {
+            { "sq", "1 dhe 2", "1, 2 dhe 3" },
+
             { "kk", "1 және 2", "1, 2 және 3" },
 
         { "ka", "1 და 2", "1, 2 და 3" },
@@ -1238,6 +1270,8 @@ static class LocaleCoverageData
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
         new()
         {
+            { "sq", 1, "e parë" },
+
             { "kk", 1, "бірінші" },
 
         { "ka", 21, "ოცდამეერთე" },
@@ -1335,6 +1369,8 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
         new()
         {
+            { "sq", 1, "një" },
+
             { "kk", 1, "бір" },
 
         { "ka", 2021L, "ორი ათას ოცდაერთი" },
@@ -1468,6 +1504,8 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> WordsToNumberExpectationTheoryData =>
         new()
         {
+            { "sq", 21, "njëzet e një" },
+
             { "kk", 21, "жиырма бір" },
 
         { "ka", 2021L, "ორი ათას ოცდაერთი" },

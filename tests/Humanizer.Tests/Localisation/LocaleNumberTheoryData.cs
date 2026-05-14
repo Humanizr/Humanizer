@@ -4,6 +4,16 @@ static class LocaleNumberTheoryData
 {
     public static TheoryData<string, int, string> CardinalCases => new()
     {
+        { "sq", 0, "zero" },
+        { "sq", 1, "një" },
+        { "sq", 2, "dy" },
+        { "sq", 21, "njëzet e një" },
+        { "sq", 99, "nëntëdhjetë e nëntë" },
+        { "sq", 100, "njëqind" },
+        { "sq", 101, "njëqind e një" },
+        { "sq", 105, "njëqind e pesë" },
+        { "sq", 1234, "një mijë e dyqind e tridhjetë e katër" },
+
         { "kk", 0, "нөл" },
         { "kk", 1, "бір" },
         { "kk", 21, "жиырма бір" },
@@ -2980,6 +2990,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
+        { "sq", 105, false, "njëqind e pesë" },
+
         { "kk", 21, true, "жиырма бір" },
 
         { "ka", 2021, false, "ორი ათას ოცდაერთი" },
@@ -3830,6 +3842,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
+        { "sq", 21, WordForm.Abbreviation, "njëzet e një" },
+
         { "kk", 2, WordForm.Normal, "екі" },
 
         { "ka", 2021, WordForm.Abbreviation, "ორი ათას ოცდაერთი" },
@@ -4265,6 +4279,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
+        { "sq", 1, GrammaticalGender.Masculine, "një" },
+        { "sq", 1, GrammaticalGender.Feminine, "një" },
+        { "sq", 1, GrammaticalGender.Neuter, "një" },
+
         { "kk", 2, GrammaticalGender.Masculine, "екі" },
         { "kk", 2, GrammaticalGender.Feminine, "екі" },
         { "kk", 2, GrammaticalGender.Neuter, "екі" },
@@ -4745,6 +4763,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
+        { "sq", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "një" },
+        { "sq", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "një" },
+        { "sq", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "një" },
+
         { "kk", 2, WordForm.Normal, GrammaticalGender.Masculine, "екі" },
         { "kk", 2, WordForm.Normal, GrammaticalGender.Feminine, "екі" },
         { "kk", 2, WordForm.Normal, GrammaticalGender.Neuter, "екі" },
@@ -5020,6 +5042,11 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
+        { "sq", 1, "i parë" },
+        { "sq", 2, "i dytë" },
+        { "sq", 20, "i njëzetë" },
+        { "sq", 21, "i njëzet e një" },
+
         { "kk", 1, "бірінші" },
         { "kk", 2, "екінші" },
         { "kk", 6, "алтыншы" },
@@ -6493,6 +6520,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+        { "sq", 1, WordForm.Abbreviation, "i parë" },
+
         { "kk", 2, WordForm.Normal, "екінші" },
 
         { "ka", 21, WordForm.Abbreviation, "ოცდამეერთე" },
@@ -6891,6 +6920,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+        { "sq", 1, GrammaticalGender.Masculine, "i parë" },
+        { "sq", 1, GrammaticalGender.Feminine, "e parë" },
+        { "sq", 1, GrammaticalGender.Neuter, "i parë" },
+
         { "kk", 2, GrammaticalGender.Masculine, "екінші" },
         { "kk", 2, GrammaticalGender.Feminine, "екінші" },
         { "kk", 2, GrammaticalGender.Neuter, "екінші" },
@@ -7789,6 +7822,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+        { "sq", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "i parë" },
+        { "sq", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "e parë" },
+        { "sq", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "i parë" },
+
         { "kk", 2, GrammaticalGender.Masculine, WordForm.Normal, "екінші" },
         { "kk", 2, GrammaticalGender.Feminine, WordForm.Normal, "екінші" },
         { "kk", 2, GrammaticalGender.Neuter, WordForm.Normal, "екінші" },
@@ -8062,6 +8099,8 @@ static class LocaleNumberTheoryData
     };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "sq", 1, "një" },
+
         { "kk", 2, "екі" },
 
         { "ka", 1, "ერთი" },
@@ -8164,6 +8203,13 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "sq", "njëzet e një", 21L },
+        { "sq", "njëqind e një", 101L },
+        { "sq", "një mijë e dyqind e tridhjetë e katër", 1234L },
+        { "sq", "minus njëzet e një", -21L },
+        { "sq", "i parë", 1L },
+        { "sq", "i njëzet e një", 21L },
+
         { "kk", "жиырма бір", 21L },
         { "kk", "жиырма бірінші", 21L },
         { "kk", "минус бес", -5L },
