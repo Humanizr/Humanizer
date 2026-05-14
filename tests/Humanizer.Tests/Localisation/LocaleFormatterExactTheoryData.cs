@@ -610,7 +610,7 @@ public static class LocaleFormatterExactTheoryData
         { "fr-CH", new("1 bit", "1 octet", "2 octets", "2 kilooctets", "2 mégaoctets") },
         { "he", new("1 ביט", "1 בייט", "2 בייטים", "2 קילובייטים", "2 מגהבייטים") },
         { "hr", new("1 bitova", "1 bajt", "2 bajta", "2 kilobajta", "2 megabajta") },
-        { "bs", new("1 bitova", "1 bajt", "2 bajta", "2 kilobajta", "2 megabajta") },
+        { "bs", new("1 bit", "1 bajt", "2 bajta", "2 kilobajta", "2 megabajta") },
         { "hu", new("1 bit", "1 bájt", "2 bájt", "2 kilobájt", "2 megabájt") },
         { "hy", new("1 բիթ", "1 բայթ", "2 բայթ", "2 կիլոբայթ", "2 մեգաբայթ") },
         { "id", new("1 bit", "1 byte", "2 byte", "2 kilobyte", "2 megabyte") },

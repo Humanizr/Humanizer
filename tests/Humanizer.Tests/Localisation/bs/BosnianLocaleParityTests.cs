@@ -52,6 +52,8 @@ public class BosnianLocaleParityTests
     {
         var formatter = Configurator.Formatters.ResolveForCulture(Bs);
 
+        Assert.Equal("bit", formatter.DataUnitHumanize(DataUnit.Bit, 1, toSymbol: false));
+        Assert.Equal("bita", formatter.DataUnitHumanize(DataUnit.Bit, 2, toSymbol: false));
         Assert.Equal("bajta", formatter.DataUnitHumanize(DataUnit.Byte, 2, toSymbol: false));
         Assert.Equal("sedmica", formatter.TimeUnitHumanize(TimeUnit.Week));
         Assert.Equal("1,95 KB", ByteSize.FromBytes(2000).Humanize("KB", Bs));
