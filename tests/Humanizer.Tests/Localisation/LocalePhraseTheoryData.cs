@@ -1610,7 +1610,7 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
-        { "sq", "tani" },
+        { "sq", "kurrë" },
 
         { "kk", "ешқашан" },
 
