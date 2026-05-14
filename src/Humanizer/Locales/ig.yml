@@ -1,0 +1,472 @@
+locale: 'ig'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'na'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'ugbu a'
+      never: 'ọ dịghị mgbe'
+      past:
+        millisecond:
+          single: 'otu milisekọnd gara aga'
+          multiple:
+            forms:
+              default: 'milisekọnd'
+            template: '{count} milisekọnd gara aga'
+        second:
+          single: 'otu sekọnd gara aga'
+          multiple:
+            forms:
+              default: 'sekọnd'
+            template: '{count} sekọnd gara aga'
+        minute:
+          single: 'otu nkeji gara aga'
+          multiple:
+            forms:
+              default: 'nkeji'
+            template: '{count} nkeji gara aga'
+        hour:
+          single: 'otu awa gara aga'
+          multiple:
+            forms:
+              default: 'awa'
+            template: '{count} awa gara aga'
+        day:
+          single: 'ụnyaahụ'
+          multiple:
+            forms:
+              default: 'ụbọchị'
+            template: '{count} ụbọchị gara aga'
+        week:
+          single: 'otu izu gara aga'
+          multiple:
+            forms:
+              default: 'izu'
+            template: '{count} izu gara aga'
+        month:
+          single: 'otu ọnwa gara aga'
+          multiple:
+            forms:
+              default: 'ọnwa'
+            template: '{count} ọnwa gara aga'
+        year:
+          single: 'otu afọ gara aga'
+          multiple:
+            forms:
+              default: 'afọ'
+            template: '{count} afọ gara aga'
+      future:
+        millisecond:
+          single: 'n''ime otu milisekọnd'
+          multiple:
+            forms:
+              default: 'milisekọnd'
+            template: 'n''ime {count} milisekọnd'
+        second:
+          single: 'n''ime otu sekọnd'
+          multiple:
+            forms:
+              default: 'sekọnd'
+            template: 'n''ime {count} sekọnd'
+        minute:
+          single: 'n''ime otu nkeji'
+          multiple:
+            forms:
+              default: 'nkeji'
+            template: 'n''ime {count} nkeji'
+        hour:
+          single: 'n''ime otu awa'
+          multiple:
+            forms:
+              default: 'awa'
+            template: 'n''ime {count} awa'
+        day:
+          single: 'echi'
+          multiple:
+            forms:
+              default: 'ụbọchị'
+            template: 'n''ime {count} ụbọchị'
+        week:
+          single: 'n''ime otu izu'
+          multiple:
+            forms:
+              default: 'izu'
+            template: 'n''ime {count} izu'
+        month:
+          single: 'n''ime otu ọnwa'
+          multiple:
+            forms:
+              default: 'ọnwa'
+            template: 'n''ime {count} ọnwa'
+        year:
+          single: 'n''ime otu afọ'
+          multiple:
+            forms:
+              default: 'afọ'
+            template: 'n''ime {count} afọ'
+    duration:
+      zero: 'enweghị oge'
+      age:
+        template: 'dị {value}'
+      millisecond:
+        single:
+          numeric: 'milisekọnd 1'
+          words: 'otu milisekọnd'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'milisekọnd'
+      second:
+        single:
+          numeric: 'sekọnd 1'
+          words: 'otu sekọnd'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'sekọnd'
+      minute:
+        single:
+          numeric: 'nkeji 1'
+          words: 'otu nkeji'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'nkeji'
+      hour:
+        single:
+          numeric: 'awa 1'
+          words: 'otu awa'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'awa'
+      day:
+        single:
+          numeric: 'ụbọchị 1'
+          words: 'otu ụbọchị'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ụbọchị'
+      week:
+        single:
+          numeric: 'izu 1'
+          words: 'otu izu'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'izu'
+      month:
+        single:
+          numeric: 'ọnwa 1'
+          words: 'otu ọnwa'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ọnwa'
+      year:
+        single:
+          numeric: 'afọ 1'
+          words: 'otu afọ'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'afọ'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'baita'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobaita'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabaita'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabaita'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabaita'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'awa'
+      day:
+        symbol: 'ụb'
+      week:
+        symbol: 'izu'
+      month:
+        symbol: 'ọnw'
+      year:
+        symbol: 'afọ'
+
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'mwepu'
+      andWord: 'na'
+      hundredWord: 'narị'
+      hundredOrdinalWord: 'narị'
+      tensUnitsSeparator: ' na '
+      defaultAddAnd: true
+      addAndMode: 'always-default'
+      andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
+      tupleSuffix: ''
+      ordinalLeadingOneStrategy: 'keep-leading-one'
+      ordinalMode: 'whole-phrase-prefix'
+      ordinalWholePhrasePrefix: 'nke '
+      unitsMap:
+        0: 'efu'
+        1: 'otu'
+        2: 'abụọ'
+        3: 'atọ'
+        4: 'anọ'
+        5: 'ise'
+        6: 'isii'
+        7: 'asaa'
+        8: 'asatọ'
+        9: 'itoolu'
+        10: 'iri'
+        11: 'iri na otu'
+        12: 'iri na abụọ'
+        13: 'iri na atọ'
+        14: 'iri na anọ'
+        15: 'iri na ise'
+        16: 'iri na isii'
+        17: 'iri na asaa'
+        18: 'iri na asatọ'
+        19: 'iri na itoolu'
+      ordinalUnitsMap:
+        0: 'nke efu'
+        1: 'nke mbụ'
+        2: 'nke abụọ'
+        3: 'nke atọ'
+        4: 'nke anọ'
+        5: 'nke ise'
+        6: 'nke isii'
+        7: 'nke asaa'
+        8: 'nke asatọ'
+        9: 'nke itoolu'
+        10: 'nke iri'
+        11: 'nke iri na otu'
+        12: 'nke iri na abụọ'
+        13: 'nke iri na atọ'
+        14: 'nke iri na anọ'
+        15: 'nke iri na ise'
+        16: 'nke iri na isii'
+        17: 'nke iri na asaa'
+        18: 'nke iri na asatọ'
+        19: 'nke iri na itoolu'
+      tensMap:
+        2: 'iri abụọ'
+        3: 'iri atọ'
+        4: 'iri anọ'
+        5: 'iri ise'
+        6: 'iri isii'
+        7: 'iri asaa'
+        8: 'iri asatọ'
+        9: 'iri itoolu'
+      ordinalTensMap:
+        2: 'nke iri abụọ'
+        3: 'nke iri atọ'
+        4: 'nke iri anọ'
+        5: 'nke iri ise'
+        6: 'nke iri isii'
+        7: 'nke iri asaa'
+        8: 'nke iri asatọ'
+        9: 'nke iri itoolu'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kwintiliọn'
+          ordinalName: 'kwintiliọn'
+        -
+          value: 1000000000000000
+          name: 'kwadriliọn'
+          ordinalName: 'kwadriliọn'
+        -
+          value: 1000000000000
+          name: 'tiriliọn'
+          ordinalName: 'tiriliọn'
+        -
+          value: 1000000000
+          name: 'ijeri'
+          ordinalName: 'ijeri'
+        -
+          value: 1000000
+          name: 'nde'
+          ordinalName: 'nde'
+        -
+          value: 1000
+          name: 'puku'
+          ordinalName: 'puku'
+    formatting:
+      decimalSeparator: '.'
+      groupSeparator: ','
+      negativeSign: '-'
+    parse:
+      engine: 'greedy-compound'
+      ordinalNumberToWordsKind: 'self'
+      negativePrefixes:
+        - 'mwepu '
+      ordinalAbbreviationSuffixes: []
+      charactersToRemove: ',.''’'
+      charactersToReplaceWithSpace: '-'
+      textReplacements: []
+      lowercase: true
+      removeDiacritics: false
+      ignoredTokens:
+        - 'na'
+        - 'nke'
+      cardinalMap:
+        efu: 0
+        otu: 1
+        abụọ: 2
+        atọ: 3
+        anọ: 4
+        ise: 5
+        isii: 6
+        asaa: 7
+        asatọ: 8
+        itoolu: 9
+        iri: 10
+        'iri na otu': 11
+        'iri na abụọ': 12
+        'iri na atọ': 13
+        'iri na anọ': 14
+        'iri na ise': 15
+        'iri na isii': 16
+        'iri na asaa': 17
+        'iri na asatọ': 18
+        'iri na itoolu': 19
+        'iri abụọ': 20
+        'iri atọ': 30
+        'iri anọ': 40
+        'iri ise': 50
+        'iri isii': 60
+        'iri asaa': 70
+        'iri asatọ': 80
+        'iri itoolu': 90
+        'narị': 100
+        'puku': 1000
+        nde: 1000000
+        ijeri: 1000000000
+        'tiriliọn': 1000000000000
+        'kwadriliọn': 1000000000000000
+        'kwintiliọn': 1000000000000000000
+      ordinalMap:
+        'nke mbụ': 1
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'nke '
+        defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'otu'
+      - 'abụọ'
+      - 'atọ'
+      - 'anọ'
+      - 'ise'
+      - 'isii'
+      - 'asaa'
+      - 'asatọ'
+      - 'itoolu'
+      - 'iri'
+      - 'iri na otu'
+      - 'iri na abụọ'
+    min0: 'elekere {hour} {dayPeriod}'
+    defaultTemplate: 'elekere {hour} na nkeji {minutes} {dayPeriod}'
+    earlyMorning: 'n''ụtụtụ'
+    morning: 'n''ụtụtụ'
+    afternoon: 'n''ehihie'
+    evening: 'n''anyasị'
+    night: 'n''abalị'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'ugwu'
+      - 'ugwu-ugwu ọwụwa anyanwụ'
+      - 'ugwu ọwụwa anyanwụ'
+      - 'ọwụwa anyanwụ-ugwu ọwụwa anyanwụ'
+      - 'ọwụwa anyanwụ'
+      - 'ọwụwa anyanwụ-ndịda ọwụwa anyanwụ'
+      - 'ndịda ọwụwa anyanwụ'
+      - 'ndịda-ndịda ọwụwa anyanwụ'
+      - 'ndịda'
+      - 'ndịda-ndịda ọdịda anyanwụ'
+      - 'ndịda ọdịda anyanwụ'
+      - 'ọdịda anyanwụ-ndịda ọdịda anyanwụ'
+      - 'ọdịda anyanwụ'
+      - 'ọdịda anyanwụ-ugwu ọdịda anyanwụ'
+      - 'ugwu ọdịda anyanwụ'
+      - 'ugwu-ugwu ọdịda anyanwụ'
+    short:
+      - 'U'
+      - 'UUỌ'
+      - 'UỌ'
+      - 'ỌUỌ'
+      - 'Ọ'
+      - 'ỌNỌ'
+      - 'NỌ'
+      - 'NNỌ'
+      - 'N'
+      - 'NNỌd'
+      - 'NỌd'
+      - 'ỌdNỌd'
+      - 'Ọd'
+      - 'ỌdUỌd'
+      - 'UỌd'
+      - 'UUỌd'
+
+  calendar:
+    months:
+      - 'Jenụwarị'
+      - 'Febrụwarị'
+      - 'Maachị'
+      - 'Epreel'
+      - 'Mee'
+      - 'Jun'
+      - 'Julaị'
+      - 'Ọgọọst'
+      - 'Septemba'
+      - 'Ọktoba'
+      - 'Novemba'
+      - 'Disemba'

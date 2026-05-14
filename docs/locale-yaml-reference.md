@@ -1259,6 +1259,7 @@ Fields:
 - `tupleSuffix`
 - `ordinalLeadingOneStrategy`
 - `ordinalMode`
+- `ordinalWholePhrasePrefix`
 - `unitsMap`
 - `ordinalUnitsMap`
 - `tensMap`
@@ -1269,7 +1270,8 @@ Fields:
 Notes:
 
 - `defaultAddAnd`, `addAndMode`, and `andStrategy` together define when conjunctions appear. Do not try to encode that behavior with ad hoc words or duplicated tables.
-- `ordinalMode` decides whether ordinals come from dedicated lexical tables, numeric suffixes, or other structural strategies within the shared kernel.
+- `ordinalMode` decides whether ordinals come from dedicated lexical tables, whole-phrase prefixing, numeric suffixes, or other structural strategies within the shared kernel.
+- `ordinalWholePhrasePrefix` supplies the prefix for locales that form compound ordinals by prefixing the whole cardinal phrase.
 - `namedTuples` is for irregular compact tuple-style forms; keep it sparse and comment unusual values in the locale file.
 
 ### `construct-state-scale`
@@ -2024,4 +2026,3 @@ Examples in the current repo:
 - `en-US.yml` exists because U.S. ordinal date formatting differs from `en`.
 - `ru-RU.yml` does not need to exist when `ru` already covers the generated behavior.
 - `en-IN.yml` declares `variantOf: 'en'` and overrides only the `number.words` fields that genuinely differ.
-

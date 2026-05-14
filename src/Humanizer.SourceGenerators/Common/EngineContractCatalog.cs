@@ -122,6 +122,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "tupleSuffix", null, null, null, null, null, null),
                             Member("enum", "ordinalLeadingOneStrategy", null, "ConjunctionalScaleOrdinalLeadingOneStrategy", null, null, null, null),
                             Member("enum", "ordinalMode", null, "ConjunctionalScaleOrdinalMode", null, null, null, null),
+                            Member("string", "ordinalWholePhrasePrefix", null, null, null, "", null, null),
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
