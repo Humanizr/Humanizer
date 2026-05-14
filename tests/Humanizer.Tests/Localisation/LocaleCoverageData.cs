@@ -15,6 +15,7 @@ static class LocaleCoverageData
     {
         { "am", new(2022, 1, 25, "25 ጃንዋሪ 2022") },
         { "te", new(2022, 1, 25, "25 జనవరి 2022") },
+        { "ml", new(2022, 1, 25, "25 ജനുവരി 2022") },
         { "sw", new(2022, 1, 25, "25 Januari 2022") },
         { "ha", new(2022, 1, 25, "25 Janairu 2022") },
         { "hi", new(2022, 1, 25, "25 जनवरी 2022") },
@@ -93,6 +94,7 @@ static class LocaleCoverageData
     {
         { "am", new(2015, 1, 1, "1 ጃንዋሪ 2015") },
         { "te", new(2015, 1, 1, "1 జనవరి 2015") },
+        { "ml", new(2015, 1, 1, "1 ജനുവരി 2015") },
         { "sw", new(2015, 1, 1, "1 Januari 2015") },
         { "ha", new(2015, 1, 1, "1 Janairu 2015") },
         { "hi", new(2015, 1, 1, "1 जनवरी 2015") },
@@ -171,6 +173,7 @@ static class LocaleCoverageData
     {
         { "am", new(2015, 2, 3, "3 ፌብሩዋሪ 2015") },
         { "te", new(2015, 2, 3, "3 ఫిబ్రవరి 2015") },
+        { "ml", new(2015, 2, 3, "3 ഫെബ്രുവരി 2015") },
         { "sw", new(2015, 2, 3, "3 Februari 2015") },
         { "ha", new(2015, 2, 3, "3 Fabrairu 2015") },
         { "hi", new(2015, 2, 3, "3 फ़रवरी 2015") },
@@ -316,6 +319,7 @@ static class LocaleCoverageData
     {
         { "am", new(13, 23, "ከቀኑ ሰባት ሰዓት ሃያ ሶስት ደቂቃ") },
         { "te", new(13, 23, "ఒంటి గంట ఇరవై మూడు నిమిషాలు మధ్యాహ్నం") },
+        { "ml", new(13, 23, "ഉച്ചയ്ക്ക് ഒരു മണി ഇരുപത്തിമൂന്ന് മിനിറ്റ്") },
         { "sw", new(13, 23, "saa saba na dakika ishirini na tatu mchana") },
         { "ha", new(13, 23, "ƙarfe ɗaya da minti ashirin da uku na rana") },
         { "hi", new(13, 23, "दोपहर एक बजकर तेईस मिनट") },
@@ -394,6 +398,7 @@ static class LocaleCoverageData
     {
         { "am", new(13, 23, "ከቀኑ ሰባት ሰዓት ሃያ አምስት ደቂቃ") },
         { "te", new(13, 23, "ఒంటి గంట ఇరవై ఐదు నిమిషాలు మధ్యాహ్నం") },
+        { "ml", new(13, 23, "ഉച്ചയ്ക്ക് ഒരു മണി ഇരുപത്തിയഞ്ച് മിനിറ്റ്") },
         { "sw", new(13, 23, "saa saba na dakika ishirini na tano mchana") },
         { "ha", new(13, 23, "ƙarfe ɗaya da minti ashirin da biyar na rana") },
         { "hi", new(13, 23, "दोपहर एक बजकर पच्चीस मिनट") },
@@ -472,6 +477,7 @@ static class LocaleCoverageData
     {
         { "am", new(1, 5, "ከሌሊቱ ሰባት ሰዓት አምስት ደቂቃ") },
         { "te", new(1, 5, "ఒంటి గంట ఐదు నిమిషాలు ఉదయం") },
+        { "ml", new(1, 5, "പുലർച്ചെ ഒരു മണി അഞ്ച് മിനിറ്റ്") },
         { "sw", new(1, 5, "saa saba na dakika tano asubuhi") },
         { "ha", new(1, 5, "ƙarfe ɗaya da minti biyar na safe") },
         { "hi", new(1, 5, "सुबह एक बजकर पाँच मिनट") },
@@ -872,6 +878,7 @@ static class LocaleCoverageData
         {
             { "am", "ትናንት", "2 ቀናት" },
         { "te", "నిన్న", "2 రోజులు" },
+        { "ml", "ഇന്നലെ", "2 ദിവസം" },
             { "af", "gister", "2 dae" },
             { "ar", "أمس", "يومين" },
             { "az", "dünən", "2 gün" },
@@ -949,6 +956,7 @@ static class LocaleCoverageData
         {
             { "am", "1 እና 2", "1, 2 እና 3" },
         { "te", "1 మరియు 2", "1, 2 మరియు 3" },
+        { "ml", "1, 2", "1, 2, 3" },
             { "af", "1 en 2", "1, 2 en 3" },
             { "ar", "1 و2", "1, 2 و3" },
             { "az", "1 və 2", "1, 2 və 3" },
@@ -1026,6 +1034,7 @@ static class LocaleCoverageData
         {
             { "am", 1, "አንደኛ" },
         { "te", 1, "మొదటి" },
+        { "ml", 1, "ഒന്നാം" },
             { "af", 1, "eerste" },
             { "ar", 1, "الأولى" },
             { "az", 1, "birinci" },
@@ -1103,6 +1112,7 @@ static class LocaleCoverageData
         {
             { "am", 1, "አንድ" },
         { "te", 1, "ఒకటి" },
+        { "ml", 1, "ഒന്ന്" },
             { "af", 1, "een" },
             { "ar", 1, "واحد" },
             { "az", 1, "bir" },
@@ -1216,6 +1226,7 @@ static class LocaleCoverageData
         {
             { "am", 21, "ሃያ አንድ" },
         { "te", 21, "ఇరవై ఒకటి" },
+        { "ml", 21, "ഇരുപത്തിയൊന്ന്" },
             { "af", 21, "een en twintig" },
             { "ar", 21, "واحد و عشرون" },
             { "az", 21, "iyirmi bir" },
