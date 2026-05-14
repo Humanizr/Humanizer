@@ -188,6 +188,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("ከ 2 ቀናት በፊት", "ከ 3 ቀናት በፊት", "ከ 4 ቀናት በፊት", "ከ 5 ቀናት በፊት", "ከ 11 ቀናት በፊት", "ከ 21 ቀናት በፊት", "ከ 2 ቀናት በኋላ", "ከ 3 ቀናት በኋላ", "ከ 4 ቀናት በኋላ", "ከ 5 ቀናት በኋላ", "ከ 11 ቀናት በኋላ", "ከ 21 ቀናት በኋላ") },
         { "te", new("2 రోజులు క్రితం", "3 రోజులు క్రితం", "4 రోజులు క్రితం", "5 రోజులు క్రితం", "11 రోజులు క్రితం", "21 రోజులు క్రితం", "2 రోజులు తర్వాత", "3 రోజులు తర్వాత", "4 రోజులు తర్వాత", "5 రోజులు తర్వాత", "11 రోజులు తర్వాత", "21 రోజులు తర్వాత") },
+        { "ml", new("2 ദിവസം മുമ്പ്", "3 ദിവസം മുമ്പ്", "4 ദിവസം മുമ്പ്", "5 ദിവസം മുമ്പ്", "11 ദിവസം മുമ്പ്", "21 ദിവസം മുമ്പ്", "2 ദിവസത്തിന് ശേഷം", "3 ദിവസത്തിന് ശേഷം", "4 ദിവസത്തിന് ശേഷം", "5 ദിവസത്തിന് ശേഷം", "11 ദിവസത്തിന് ശേഷം", "21 ദിവസത്തിന് ശേഷം") },
         { "sw", new("2 siku zilizopita", "3 siku zilizopita", "4 siku zilizopita", "5 siku zilizopita", "11 siku zilizopita", "21 siku zilizopita", "baada ya siku 2", "baada ya siku 3", "baada ya siku 4", "baada ya siku 5", "baada ya siku 11", "baada ya siku 21") },
         { "ha", new("2 kwanaki da suka wuce", "3 kwanaki da suka wuce", "4 kwanaki da suka wuce", "5 kwanaki da suka wuce", "11 kwanaki da suka wuce", "21 kwanaki da suka wuce", "nan da kwanaki 2", "nan da kwanaki 3", "nan da kwanaki 4", "nan da kwanaki 5", "nan da kwanaki 11", "nan da kwanaki 21") },
         { "af", new("2 dae gelede", "3 dae gelede", "4 dae gelede", "5 dae gelede", "11 dae gelede", "21 dae gelede", "oor 2 dae", "oor 3 dae", "oor 4 dae", "oor 5 dae", "oor 11 dae", "oor 21 dae") },
@@ -270,6 +271,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("2 ሳምንታት, 1 ቀን እና 1 ሰዓት", "1 ቀን, 3 ደቂቃዎች እና 4 ሰከንዶች", "1 ቀን እና 3 ደቂቃዎች") },
         { "te", new("2 వారాలు, 1 రోజు మరియు 1 గంట", "1 రోజు, 3 నిమిషాలు మరియు 4 సెకన్లు", "1 రోజు మరియు 3 నిమిషాలు") },
+        { "ml", new("2 ആഴ്ച, 1 ദിവസം, 1 മണിക്കൂർ", "1 ദിവസം, 3 മിനിറ്റ്, 4 സെക്കൻഡ്", "1 ദിവസം, 3 മിനിറ്റ്") },
         { "sw", new("wiki 2, siku 1 na saa 1", "siku 1, dakika 3 na sekunde 4", "siku 1 na dakika 3") },
         { "ha", new("makonni 2, kwana 1 da sa'a 1", "kwana 1, mintuna 3 da sakan 4", "kwana 1 da mintuna 3") },
         { "af", new("2 weke, 1 dag en 1 uur", "1 dag, 3 minute en 4 sekondes", "1 dag en 3 minute") },
@@ -352,6 +354,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("ሚሊሰከንድ", "ሰከንድ", "ደቂቃ", "ሰዓት", "ቀን", "ሳምንት", "ወር", "ዓመት") },
         { "te", new("మిల్లీసెకను", "సెకను", "నిమిషం", "గంట", "రోజు", "వారం", "నెల", "సంవత్సరం") },
+        { "ml", new("മില്ലിസെക്കൻഡ്", "സെക്കൻഡ്", "മിനിറ്റ്", "മണിക്കൂർ", "ദിവസം", "ആഴ്ച", "മാസം", "വർഷം") },
         { "sw", new("ms", "sek", "dak", "saa", "sk", "wk", "mwez", "mwk") },
         { "ha", new("ms", "s", "min", "sa'a", "kw", "mk", "wt", "sh") },
         { "af", new("ms", "sek.", "min.", "uur", "dag", "week", "maand", "jaar") },
@@ -455,6 +458,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "te", new("1 b", "2 B", "1.95 KB", "2048 KB") },
+        { "ml", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "sw", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "ha", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "af", new("1 b", "2 B", "1,95 KB", "2048 KB") },
@@ -537,6 +541,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("1 ቢት", "1 ባይት", "2 ባይቶች", "2 ኪሎባይቶች", "2 ሜጋባይቶች") },
         { "te", new("1 బిట్", "1 బైట్", "2 బైట్లు", "2 కిలోబైట్లు", "2 మెగాబైట్లు") },
+        { "ml", new("1 ബിറ്റ്", "1 ബൈറ്റ്", "2 ബൈറ്റ്", "2 കിലോബൈറ്റ്", "2 മെഗാബൈറ്റ്") },
         { "sw", new("1 biti", "1 baiti", "2 baiti", "2 kilobaiti", "2 megabaiti") },
         { "ha", new("1 biti", "1 baiti", "2 baiti", "2 kilobaiti", "2 megabaiti") },
         { "af", new("1 bit", "1 byte", "2 bytes", "2 kilobytes", "2 megabytes") },
@@ -619,6 +624,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("1 እና 2", "1, 2 እና 3", "1, 2, 3 እና 4") },
         { "te", new("1 మరియు 2", "1, 2 మరియు 3", "1, 2, 3 మరియు 4") },
+        { "ml", new("1, 2", "1, 2, 3", "1, 2, 3, 4") },
         { "sw", new("1 na 2", "1, 2 na 3", "1, 2, 3 na 4") },
         { "ha", new("1 da 2", "1, 2 da 3", "1, 2, 3 da 4") },
         { "af", new("1 en 2", "1, 2 en 3", "1, 2, 3 en 4") },
@@ -701,6 +707,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("ሰ", "ሰሰም", "ሰም", "ምሰም", "ም", "ምደም", "ደም", "ደደም", "ደ", "ደደምዕ", "ደምዕ", "ምዕደምዕ", "ምዕ", "ምዕሰምዕ", "ሰምዕ", "ሰሰምዕ", "ሰሜን", "ሰሜን-ሰሜን ምስራቅ", "ሰሜን ምስራቅ", "ምስራቅ-ሰሜን ምስራቅ", "ምስራቅ", "ምስራቅ-ደቡብ ምስራቅ", "ደቡብ ምስራቅ", "ደቡብ-ደቡብ ምስራቅ", "ደቡብ", "ደቡብ-ደቡብ ምዕራብ", "ደቡብ ምዕራብ", "ምዕራብ-ደቡብ ምዕራብ", "ምዕራብ", "ምዕራብ-ሰሜን ምዕራብ", "ሰሜን ምዕራብ", "ሰሜን-ሰሜን ምዕራብ") },
         { "te", new("ఉత్తరం", "ఉత్తర-ఈశాన్యం", "ఈశాన్యం", "తూర్పు-ఈశాన్యం", "తూర్పు", "తూర్పు-ఆగ్నేయం", "ఆగ్నేయం", "దక్షిణ-ఆగ్నేయం", "దక్షిణం", "దక్షిణ-నైరుతి", "నైరుతి", "పడమర-నైరుతి", "పడమర", "పడమర-వాయవ్యం", "వాయవ్యం", "ఉత్తర-వాయవ్యం", "ఉత్తరం", "ఉత్తర-ఈశాన్యం", "ఈశాన్యం", "తూర్పు-ఈశాన్యం", "తూర్పు", "తూర్పు-ఆగ్నేయం", "ఆగ్నేయం", "దక్షిణ-ఆగ్నేయం", "దక్షిణం", "దక్షిణ-నైరుతి", "నైరుతి", "పడమర-నైరుతి", "పడమర", "పడమర-వాయవ్యం", "వాయవ్యం", "ఉత్తర-వాయవ్యం") },
+        { "ml", new("വടക്ക്", "വടക്ക്-വടക്കുകിഴക്ക്", "വടക്കുകിഴക്ക്", "കിഴക്ക്-വടക്കുകിഴക്ക്", "കിഴക്ക്", "കിഴക്ക്-തെക്കുകിഴക്ക്", "തെക്കുകിഴക്ക്", "തെക്ക്-തെക്കുകിഴക്ക്", "തെക്ക്", "തെക്ക്-തെക്കുപടിഞ്ഞാറ്", "തെക്കുപടിഞ്ഞാറ്", "പടിഞ്ഞാറ്-തെക്കുപടിഞ്ഞാറ്", "പടിഞ്ഞാറ്", "പടിഞ്ഞാറ്-വടക്കുപടിഞ്ഞാറ്", "വടക്കുപടിഞ്ഞാറ്", "വടക്ക്-വടക്കുപടിഞ്ഞാറ്", "വടക്ക്", "വടക്ക്-വടക്കുകിഴക്ക്", "വടക്കുകിഴക്ക്", "കിഴക്ക്-വടക്കുകിഴക്ക്", "കിഴക്ക്", "കിഴക്ക്-തെക്കുകിഴക്ക്", "തെക്കുകിഴക്ക്", "തെക്ക്-തെക്കുകിഴക്ക്", "തെക്ക്", "തെക്ക്-തെക്കുപടിഞ്ഞാറ്", "തെക്കുപടിഞ്ഞാറ്", "പടിഞ്ഞാറ്-തെക്കുപടിഞ്ഞാറ്", "പടിഞ്ഞാറ്", "പടിഞ്ഞാറ്-വടക്കുപടിഞ്ഞാറ്", "വടക്കുപടിഞ്ഞാറ്", "വടക്ക്-വടക്കുപടിഞ്ഞാറ്") },
         { "sw", new("K", "KKM", "KM", "MKM", "M", "MKS", "KS", "KKS", "S", "KKG", "KG", "MKG", "G", "MKGz", "KGz", "KKGz", "kaskazini", "kaskazini-kaskazini mashariki", "kaskazini mashariki", "mashariki-kaskazini mashariki", "mashariki", "mashariki-kusini mashariki", "kusini mashariki", "kusini-kusini mashariki", "kusini", "kusini-kusini magharibi", "kusini magharibi", "magharibi-kusini magharibi", "magharibi", "magharibi-kaskazini magharibi", "kaskazini magharibi", "kaskazini-kaskazini magharibi") },
         { "ha", new("A", "AAG", "AG", "GAG", "G", "GKG", "KG", "KKG", "K", "KKY", "KY", "YKY", "Y", "YAY", "AY", "AAY", "arewa", "arewa-arewa maso gabas", "arewa maso gabas", "gabas-arewa maso gabas", "gabas", "gabas-kudu maso gabas", "kudu maso gabas", "kudu-kudu maso gabas", "kudu", "kudu-kudu maso yamma", "kudu maso yamma", "yamma-kudu maso yamma", "yamma", "yamma-arewa maso yamma", "arewa maso yamma", "arewa-arewa maso yamma") },
         { "af", new("N", "NNO", "NO", "ONO", "O", "OSO", "SO", "SSO", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "noord", "noordnoordoos", "noordoos", "oosnoordoos", "oos", "oossuidoos", "suidoos", "suidsuidoos", "suid", "suidsuidwes", "suidwes", "wessuidwes", "wes", "wesnoordwes", "noordwes", "noordnoordwes") },
@@ -783,6 +790,7 @@ public static class LocaleFormatterExactTheoryData
 
         { "am", new("ሰ", "ም", "ደ", "ምዕ") },
         { "te", new("ఉత్తరం", "తూర్పు", "దక్షిణం", "పడమర") },
+        { "ml", new("വടക്ക്", "കിഴക്ക്", "തെക്ക്", "പടിഞ്ഞാറ്") },
         { "sw", new("K", "M", "S", "G") },
         { "ha", new("A", "G", "K", "Y") },
         { "af", new("N", "O", "S", "W") },

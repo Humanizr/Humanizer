@@ -270,7 +270,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
                 if (TryGetCompositeScaleValue(token, ref tokenizer, ref pendingToken, out var compositeScaleValue))
                 {
-                    if (compositeScaleValue < 0 || !TryAddScaledGroup(total, current, (ulong)compositeScaleValue, maxMagnitude, out total))
+                    if (compositeScaleValue < 0 || !TryApplyCompositeScaledGroup(total, current, (ulong)compositeScaleValue, maxMagnitude, out total))
                     {
                         value = default;
                         unrecognizedWord = words;
@@ -366,9 +366,31 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         }
     }
 
+    static bool TryApplyCompositeScaledGroup(ulong total, ulong current, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
+        if (total > 0 && total < scaleValue)
+        {
+            // A lower accumulated group before a larger composite scale is the scale count, not a final additive prefix.
+            if (!TryAddMagnitude(total, current, maxMagnitude, out var compositeCount))
+            {
+                value = default;
+                return false;
+            }
+
+            return TryAddScaledMagnitude(0, compositeCount, scaleValue, maxMagnitude, out value);
+        }
+
+        return TryAddScaledGroup(total, current, scaleValue, maxMagnitude, out value);
+    }
+
     static bool TryAddScaledGroup(ulong total, ulong current, ulong scaleValue, ulong maxMagnitude, out ulong value)
     {
         var count = current == 0 ? 1UL : current;
+        return TryAddScaledMagnitude(total, count, scaleValue, maxMagnitude, out value);
+    }
+
+    static bool TryAddScaledMagnitude(ulong total, ulong count, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
         try
         {
             var scaled = checked(count * scaleValue);
