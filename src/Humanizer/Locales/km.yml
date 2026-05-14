@@ -448,6 +448,9 @@ surfaces:
         'ទីមួយពាន់': 1000
         'ទីមួយពាន់ ពីររយ សាមសិបបួន': 1234
 
+    formatting:
+      decimalSeparator: '.'
+
   ordinal:
     numeric:
       engine: 'template'
