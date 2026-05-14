@@ -2805,7 +2805,7 @@ static class LocaleNumberTheoryData
         { "lo", 1, "ໜຶ່ງ" },
         { "lo", 21, "ຊາວເອັດ" },
         { "lo", 1234, "ໜຶ່ງ ພັນ ສອງ ຮ້ອຍ ສາມສິບສີ່" },
-};
+    };
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
@@ -3614,7 +3614,7 @@ static class LocaleNumberTheoryData
         { "mr", 121, false, "एकशे एकवीस" },
         { "lo", 101, true, "ໜຶ່ງ ຮ້ອຍ ໜຶ່ງ" },
         { "lo", 121, false, "ໜຶ່ງ ຮ້ອຍ ຊາວເອັດ" },
-};
+    };
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
@@ -4027,7 +4027,7 @@ static class LocaleNumberTheoryData
         { "mr", 21, WordForm.Abbreviation, "एकवीस" },
         { "mr", 101, WordForm.Abbreviation, "एकशे एक" },
         { "lo", 21, WordForm.Abbreviation, "ຊາວເອັດ" },
-};
+    };
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
@@ -4479,7 +4479,7 @@ static class LocaleNumberTheoryData
         { "lo", 1, GrammaticalGender.Masculine, "ໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Feminine, "ໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Neuter, "ໜຶ່ງ" },
-};
+    };
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
@@ -4726,7 +4726,7 @@ static class LocaleNumberTheoryData
         { "lo", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "ໜຶ່ງ" },
         { "lo", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "ໜຶ່ງ" },
         { "lo", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "ໜຶ່ງ" },
-};
+    };
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
@@ -6113,7 +6113,7 @@ static class LocaleNumberTheoryData
         { "lo", 21, "ທີຊາວເອັດ" },
         { "lo", 22, "ທີຊາວສອງ" },
         { "lo", 101, "ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ" },
-};
+    };
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
@@ -6486,7 +6486,7 @@ static class LocaleNumberTheoryData
         { "mr", 21, WordForm.Abbreviation, "एकविसावा" },
         { "mr", 21, WordForm.Normal, "एकविसावा" },
         { "lo", 21, WordForm.Abbreviation, "ທີຊາວເອັດ" },
-};
+    };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
@@ -7356,7 +7356,7 @@ static class LocaleNumberTheoryData
         { "lo", 1, GrammaticalGender.Masculine, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Feminine, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Neuter, "ທີໜຶ່ງ" },
-};
+    };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
@@ -7602,7 +7602,7 @@ static class LocaleNumberTheoryData
         { "lo", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "ທີໜຶ່ງ" },
-};
+    };
     public static TheoryData<string, int, string> TupleCases => new()
     {
         { "si", 2, "දෙක" },
@@ -7692,7 +7692,7 @@ static class LocaleNumberTheoryData
         { "pa-Arab", 2, "دو" },
         { "mr", 2, "दोन" },
         { "lo", 2, "ສອງ" },
-};
+    };
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
@@ -7839,11 +7839,11 @@ static class LocaleNumberTheoryData
         { "mr", "मायनस पाच", -5L },
         { "mr", "एकविसावी", 21L },
         { "mr", "एकविसावे", 21L },
-            { "lo", "ຊາວເອັດ", 21L },
+        { "lo", "ຊາວເອັດ", 21L },
         { "lo", "ໜຶ່ງ ຮ້ອຍ ຫ້າ", 105L },
         { "lo", "ທີຫົກ", 6L },
         { "lo", "ທີຊາວເອັດ", 21L },
         { "lo", "ທີຊາວສອງ", 22L },
         { "lo", "ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ", 101L },
-};
+    };
 }

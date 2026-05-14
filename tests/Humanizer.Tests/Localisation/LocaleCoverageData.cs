@@ -94,8 +94,8 @@ static class LocaleCoverageData
         { "zh-Hans", new(2022, 1, 25, "2022年1月25日") },
         { "zh-Hant", new(2022, 1, 25, "2022年1月25日") },
         { "zu-ZA", new(2022, 1, 25, "25 Januwari 2022") },
-            { "lo", new(2022, 1, 25, "25 ມັງກອນ 2022") },
-};
+        { "lo", new(2022, 1, 25, "25 ມັງກອນ 2022") },
+    };
 
     // First-of-month sample where many locales change the day form.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
@@ -181,8 +181,8 @@ static class LocaleCoverageData
         { "zh-Hans", new(2015, 1, 1, "2015年1月1日") },
         { "zh-Hant", new(2015, 1, 1, "2015年1月1日") },
         { "zu-ZA", new(2015, 1, 1, "1 Januwari 2015") },
-            { "lo", new(2015, 1, 1, "1 ມັງກອນ 2015") },
-};
+        { "lo", new(2015, 1, 1, "1 ມັງກອນ 2015") },
+    };
 
     // Early-month sample used to catch plain numeric-day formatting.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
@@ -268,8 +268,8 @@ static class LocaleCoverageData
         { "zh-Hans", new(2015, 2, 3, "2015年2月3日") },
         { "zh-Hant", new(2015, 2, 3, "2015年2月3日") },
         { "zu-ZA", new(2015, 2, 3, "3 Februwari 2015") },
-            { "lo", new(2015, 2, 3, "3 ກຸມພາ 2015") },
-};
+        { "lo", new(2015, 2, 3, "3 ກຸມພາ 2015") },
+    };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020February29ExpectationTheoryData { get; } = new()
     {
@@ -437,8 +437,8 @@ static class LocaleCoverageData
         { "zh-Hans", new(13, 23, "下午一点二十三分") },
         { "zh-Hant", new(13, 23, "下午一點二十三分") },
         { "zu-ZA", new(13, 23, "ihora lokuqala namashumi amabili nantathu ntambama") },
-            { "lo", new(13, 23, "13 ໂມງ 23 ນາທີ") },
-};
+        { "lo", new(13, 23, "13 ໂມງ 23 ນາທີ") },
+    };
 
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
@@ -524,8 +524,8 @@ static class LocaleCoverageData
         { "zh-Hans", new(13, 23, "下午一点二十五分") },
         { "zh-Hant", new(13, 23, "下午一點二十五分") },
         { "zu-ZA", new(13, 23, "ihora lokuqala namashumi amabili nanhlanu ntambama") },
-            { "lo", new(13, 23, "13 ໂມງ 25 ນາທີ") },
-};
+        { "lo", new(13, 23, "13 ໂມງ 25 ນາທີ") },
+    };
 
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
@@ -611,8 +611,8 @@ static class LocaleCoverageData
         { "zh-Hans", new(1, 5, "凌晨一点零五分") },
         { "zh-Hant", new(1, 5, "凌晨一點零五分") },
         { "zu-ZA", new(1, 5, "ihora lokuqala nemizuzu emihlanu") },
-            { "lo", new(1, 5, "1 ໂມງ 5 ນາທີ") },
-};
+        { "lo", new(1, 5, "1 ໂມງ 5 ນາທີ") },
+    };
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalExactExpectationTheoryData { get; } = new()
     {
@@ -1030,8 +1030,8 @@ static class LocaleCoverageData
                     { "gu", "ગઈકાલે", "2 દિવસ" },
                     { "pa", "ਕੱਲ੍ਹ", "2 ਦਿਨ" },
                     { "pa-Arab", "کل", "2 دن" },
-                { "lo", "ມື້ວານ", "2 ມື້" },
-};
+        { "lo", "ມື້ວານ", "2 ມື້" },
+    };
 
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
         new()
@@ -1117,8 +1117,8 @@ static class LocaleCoverageData
                     { "gu", "1 અને 2", "1, 2 અને 3" },
                     { "pa", "1 ਅਤੇ 2", "1, 2 ਅਤੇ 3" },
                     { "pa-Arab", "1 اتے 2", "1, 2 اتے 3" },
-                { "lo", "1 ແລະ 2", "1, 2 ແລະ 3" },
-};
+        { "lo", "1 ແລະ 2", "1, 2 ແລະ 3" },
+    };
 
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
         new()
@@ -1204,8 +1204,8 @@ static class LocaleCoverageData
                     { "gu", 1, "પહેલી" },
                     { "pa", 1, "ਪਹਿਲੀ" },
                     { "pa-Arab", 1, "پہلی" },
-                { "lo", 1, "ທີໜຶ່ງ" },
-};
+        { "lo", 1, "ທີໜຶ່ງ" },
+    };
 
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
         new()
@@ -1291,8 +1291,8 @@ static class LocaleCoverageData
                     { "gu", 1, "એક" },
                     { "pa", 1, "ਇੱਕ" },
                     { "pa-Arab", 1, "اک" },
-                { "lo", 1, "ໜຶ່ງ" },
-};
+        { "lo", 1, "ໜຶ່ງ" },
+    };
 
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData => LocaleOrdinalizerMatrixData.OrdinalizerExpectationTheoryData;
 
@@ -1414,8 +1414,8 @@ static class LocaleCoverageData
                     { "gu", 21, "એકવીસ" },
                     { "pa", 21, "ਇੱਕੀ" },
                     { "pa-Arab", 21, "اکی" },
-                { "lo", 21, "ຊາວເອັດ" },
-};
+        { "lo", 21, "ຊາວເອັດ" },
+    };
 
     static string[] FindShippedLocales()
     {
