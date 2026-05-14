@@ -159,9 +159,11 @@ public class BurmeseLocaleParityTests
     [InlineData("တစ်ထောင်ခုမြောက်", 1000)]
     [InlineData("21မြောက်", 21)]
     [InlineData("21 မြောက်", 21)]
-    [InlineData("21	မြောက်", 21)]
+    [InlineData("21\tမြောက်", 21)]
+    [InlineData("21ခုမြောက်", 21)]
     [InlineData("-1မြောက်", -1)]
     [InlineData("-1 မြောက်", -1)]
+    [InlineData("-1ခုမြောက်", -1)]
     public void WordsToNumber_ParsesBurmeseCardinalsAndOrdinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(My));
