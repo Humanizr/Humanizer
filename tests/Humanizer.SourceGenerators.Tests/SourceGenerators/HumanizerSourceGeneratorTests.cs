@@ -702,6 +702,7 @@ wordsToNumber:
         Assert.Contains("Schema(\"harmony-ordinal\"", schemaCatalog);
         Assert.Contains("Member(\"bool\", \"softenTerminalTBeforeSuffix\"", schemaCatalog);
         Assert.Contains("Member(\"bool\", \"dropTerminalVowelBeforeHarmonySuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-char-string-dictionary\", \"terminalVowelOrdinalSuffixes\"", schemaCatalog);
 
         Assert.Contains("Schema(\"conjoined-gendered-scale\"", schemaCatalog);
         Assert.DoesNotContain("Schema(\"bulgarian\"", schemaCatalog);
@@ -728,6 +729,18 @@ wordsToNumber:
         Assert.Contains("engine: 'harmony-ordinal'", uzbekCyrillicProfile);
         Assert.Contains("new HarmonyOrdinalNumberToWordsConverter(", source);
         Assert.DoesNotContain("new UzbekFamilyNumberToWordsConverter(", source);
+    }
+
+    [Fact]
+    public void KazakhProfileEmitsTerminalVowelOrdinalSuffixes()
+    {
+        var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
+        var kazakhProfile = GetLocaleFile("kk.yml");
+
+        Assert.Contains("terminalVowelOrdinalSuffixes", kazakhProfile);
+        Assert.Contains("\"сыншы\"", source);
+        Assert.Contains("\"ншы\"", source);
+        Assert.Contains("\"нші\"", source);
     }
 
     [Fact]

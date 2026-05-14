@@ -1,0 +1,424 @@
+locale: 'kk'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'және'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'қазір'
+      never: 'ешқашан'
+      past:
+        millisecond:
+          single: 'бір миллисекунд бұрын'
+          multiple:
+            forms:
+              default: 'миллисекунд'
+            afterCount: 'бұрын'
+        second:
+          single: 'бір секунд бұрын'
+          multiple:
+            forms:
+              default: 'секунд'
+            afterCount: 'бұрын'
+        minute:
+          single: 'бір минут бұрын'
+          multiple:
+            forms:
+              default: 'минут'
+            afterCount: 'бұрын'
+        hour:
+          single: 'бір сағат бұрын'
+          multiple:
+            forms:
+              default: 'сағат'
+            afterCount: 'бұрын'
+        day:
+          single: 'кеше'
+          multiple:
+            forms:
+              default: 'күн'
+            afterCount: 'бұрын'
+          template:
+            name: 'two'
+            value: 'екі күн бұрын'
+        week:
+          single: 'бір апта бұрын'
+          multiple:
+            forms:
+              default: 'апта'
+            afterCount: 'бұрын'
+        month:
+          single: 'бір ай бұрын'
+          multiple:
+            forms:
+              default: 'ай'
+            afterCount: 'бұрын'
+        year:
+          single: 'бір жыл бұрын'
+          multiple:
+            forms:
+              default: 'жыл'
+            afterCount: 'бұрын'
+      future:
+        millisecond:
+          single: 'бір миллисекундтан кейін'
+          multiple:
+            forms:
+              default: 'миллисекундтан'
+            afterCount: 'кейін'
+        second:
+          single: 'бір секундтан кейін'
+          multiple:
+            forms:
+              default: 'секундтан'
+            afterCount: 'кейін'
+        minute:
+          single: 'бір минуттан кейін'
+          multiple:
+            forms:
+              default: 'минуттан'
+            afterCount: 'кейін'
+        hour:
+          single: 'бір сағаттан кейін'
+          multiple:
+            forms:
+              default: 'сағаттан'
+            afterCount: 'кейін'
+        day:
+          single: 'ертең'
+          multiple:
+            forms:
+              default: 'күннен'
+            afterCount: 'кейін'
+          template:
+            name: 'two'
+            value: 'бүрсігүні'
+        week:
+          single: 'бір аптадан кейін'
+          multiple:
+            forms:
+              default: 'аптадан'
+            afterCount: 'кейін'
+        month:
+          single: 'бір айдан кейін'
+          multiple:
+            forms:
+              default: 'айдан'
+            afterCount: 'кейін'
+        year:
+          single: 'бір жылдан кейін'
+          multiple:
+            forms:
+              default: 'жылдан'
+            afterCount: 'кейін'
+    duration:
+      zero: 'уақыт жоқ'
+      age:
+        template: 'жасы {value}'
+      millisecond:
+        single:
+          numeric: '1 миллисекунд'
+          words: 'бір миллисекунд'
+        multiple:
+          forms:
+            default: 'миллисекунд'
+      second:
+        single:
+          numeric: '1 секунд'
+          words: 'бір секунд'
+        multiple:
+          forms:
+            default: 'секунд'
+      minute:
+        single:
+          numeric: '1 минут'
+          words: 'бір минут'
+        multiple:
+          forms:
+            default: 'минут'
+      hour:
+        single:
+          numeric: '1 сағат'
+          words: 'бір сағат'
+        multiple:
+          forms:
+            default: 'сағат'
+      day:
+        single:
+          numeric: '1 күн'
+          words: 'бір күн'
+        multiple:
+          forms:
+            default: 'күн'
+      week:
+        single:
+          numeric: '1 апта'
+          words: 'бір апта'
+        multiple:
+          forms:
+            default: 'апта'
+      month:
+        single:
+          numeric: '1 ай'
+          words: 'бір ай'
+        multiple:
+          forms:
+            default: 'ай'
+      year:
+        single:
+          numeric: '1 жыл'
+          words: 'бір жыл'
+        multiple:
+          forms:
+            default: 'жыл'
+    dataUnits:
+      bit:
+        forms:
+          default: 'бит'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'байт'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'килобайт'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'мегабайт'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'гигабайт'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'терабайт'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'мс'
+      second:
+        symbol: 'секунд'
+      minute:
+        symbol: 'минут'
+      hour:
+        symbol: 'сағат'
+      day:
+        symbol: 'күн'
+      week:
+        symbol: 'апта'
+      month:
+        symbol: 'ай'
+      year:
+        symbol: 'жыл'
+
+  number:
+    words:
+      engine: 'harmony-ordinal'
+      minimumValue: -9223372036854775807
+      maximumValue: 9223372036854775807
+      minusWord: 'минус'
+      hundredWord: 'жүз'
+      hundredStrategy: 'omit-one-when-singular'
+      unitsMap:
+        - 'нөл'
+        - 'бір'
+        - 'екі'
+        - 'үш'
+        - 'төрт'
+        - 'бес'
+        - 'алты'
+        - 'жеті'
+        - 'сегіз'
+        - 'тоғыз'
+      tensMap:
+        - 'нөл'
+        - 'он'
+        - 'жиырма'
+        - 'отыз'
+        - 'қырық'
+        - 'елу'
+        - 'алпыс'
+        - 'жетпіс'
+        - 'сексен'
+        - 'тоқсан'
+      ordinalSuffixStrategy: 'last-vowel-map'
+      softenTerminalTBeforeSuffix: false
+      dropTerminalVowelBeforeHarmonySuffix: false
+      ordinalSuffixes:
+        а: 'ыншы'
+        ә: 'інші'
+        е: 'інші'
+        і: 'інші'
+        о: 'ыншы'
+        ө: 'інші'
+        ұ: 'ыншы'
+        ү: 'інші'
+        ы: 'ыншы'
+      terminalVowelOrdinalSuffixes:
+        а: 'сыншы'
+        і: 'нші'
+        ы: 'ншы'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'квинтиллион'
+        -
+          value: 1000000000000000
+          name: 'квадриллион'
+        -
+          value: 1000000000000
+          name: 'триллион'
+        -
+          value: 1000000000
+          name: 'миллиард'
+        -
+          value: 1000000
+          name: 'миллион'
+        -
+          value: 1000
+          name: 'мың'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      cardinalMap:
+        'нөл': 0
+        'бір': 1
+        'екі': 2
+        'үш': 3
+        'төрт': 4
+        'бес': 5
+        'алты': 6
+        'жеті': 7
+        'сегіз': 8
+        'тоғыз': 9
+        'он': 10
+        'жиырма': 20
+        'отыз': 30
+        'қырық': 40
+        'елу': 50
+        'алпыс': 60
+        'жетпіс': 70
+        'сексен': 80
+        'тоқсан': 90
+        'жүз': 100
+        'мың': 1000
+        'миллион': 1000000
+        'миллиард': 1000000000
+        'триллион': 1000000000000
+        'квадриллион': 1000000000000000
+        'квинтиллион': 1000000000000000000
+      useHundredMultiplier: true
+      negativePrefixes:
+        - 'минус '
+      tokenSuffixesToStrip:
+        - 'сыншы'
+        - 'сінші'
+        - 'ыншы'
+        - 'інші'
+        - 'ншы'
+        - 'нші'
+    formatting:
+      decimalSeparator: ','
+      groupSeparator: ' '
+      negativeSign: '-'
+
+  ordinal:
+    numeric:
+      engine: 'modulo-suffix'
+      defaultSuffix: '-шы'
+      useAbsoluteValue: true
+      lastDigitSuffixes:
+        1: '-ші'
+        2: '-ші'
+        3: '-ші'
+        4: '-ші'
+        5: '-ші'
+        7: '-ші'
+        8: '-ші'
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    min0: '{hour} сағат'
+    defaultTemplate: '{hour} сағат {minutes} минут'
+
+  compass:
+    full:
+      - 'солтүстік'
+      - 'солтүстік-солтүстік-шығыс'
+      - 'солтүстік-шығыс'
+      - 'шығыс-солтүстік-шығыс'
+      - 'шығыс'
+      - 'шығыс-оңтүстік-шығыс'
+      - 'оңтүстік-шығыс'
+      - 'оңтүстік-оңтүстік-шығыс'
+      - 'оңтүстік'
+      - 'оңтүстік-оңтүстік-батыс'
+      - 'оңтүстік-батыс'
+      - 'батыс-оңтүстік-батыс'
+      - 'батыс'
+      - 'батыс-солтүстік-батыс'
+      - 'солтүстік-батыс'
+      - 'солтүстік-солтүстік-батыс'
+    short:
+      - 'С'
+      - 'ССШ'
+      - 'СШ'
+      - 'ШСШ'
+      - 'Ш'
+      - 'ШОШ'
+      - 'ОШ'
+      - 'ООШ'
+      - 'О'
+      - 'ООБ'
+      - 'ОБ'
+      - 'БОБ'
+      - 'Б'
+      - 'БСБ'
+      - 'СБ'
+      - 'ССБ'
+
+  calendar:
+    months:
+      - 'қаңтар'
+      - 'ақпан'
+      - 'наурыз'
+      - 'сәуір'
+      - 'мамыр'
+      - 'маусым'
+      - 'шілде'
+      - 'тамыз'
+      - 'қыркүйек'
+      - 'қазан'
+      - 'қараша'
+      - 'желтоқсан'
+    monthsGenitive:
+      - 'қаңтар'
+      - 'ақпан'
+      - 'наурыз'
+      - 'сәуір'
+      - 'мамыр'
+      - 'маусым'
+      - 'шілде'
+      - 'тамыз'
+      - 'қыркүйек'
+      - 'қазан'
+      - 'қараша'
+      - 'желтоқсан'

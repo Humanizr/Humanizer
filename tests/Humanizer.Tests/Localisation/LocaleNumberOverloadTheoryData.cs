@@ -4,6 +4,8 @@ public static class LocaleNumberOverloadTheoryData
 {
     public static TheoryData<string, long, string> AddAndCases => new()
     {
+        { "kk", 1001001L, "бір миллион бір мың бір" },
+
         { "ps", 1001001L, "یو میلیون او یو زره او یو" },
         { "si", 1001001L, "දසලක්ෂ එක්දහස් එක" },
 
@@ -237,6 +239,8 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
+        { "kk", 1001001L, "бір миллион бір мың бір" },
+
         { "ps", 1001001L, "یو میلیون او یو زره او یو" },
         { "si", 1234567L, "දොළොස්ලක්ෂ තිස්හතරදහස් පන්සිය හැට හත" },
 
@@ -469,6 +473,8 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
+        { "kk", 1001001L, "бір миллион бір мың бір" },
+
         { "ps", 1001001L, "یو میلیون او یو زره او یوه" },
         { "si", 21L, "විසි එක" },
 
@@ -701,6 +707,8 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
+        { "kk", 1001001L, "бір миллион бір мың бір" },
+
         { "ps", 1001001L, "یو میلیون او یو زره او یوه" },
         { "si", 21L, "විසි එක" },
 

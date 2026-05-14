@@ -138,7 +138,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
         var word = Convert(number);
         return profile.OrdinalSuffixStrategy switch
         {
-            HarmonyOrdinalSuffixStrategy.LastVowelMap => AppendHarmonySuffix(word, profile.OrdinalSuffixes),
+            HarmonyOrdinalSuffixStrategy.LastVowelMap => AppendHarmonySuffix(word, profile.OrdinalSuffixes, useTerminalVowelOrdinalSuffixes: true),
             HarmonyOrdinalSuffixStrategy.FinalCharacterMembership => AppendMembershipOrdinalSuffix(
                 word,
                 profile.SecondOrdinalSuffixCharacters,
@@ -165,19 +165,28 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             return base.ConvertToTuple(number);
         }
 
-        return AppendHarmonySuffix(Convert(number), profile.TupleSuffixes);
+        return AppendHarmonySuffix(Convert(number), profile.TupleSuffixes, useTerminalVowelOrdinalSuffixes: false);
     }
 
     // Vowel-harmony ordinals are the common family rule. The runtime searches backward for the
-    // last vowel with a configured suffix, then applies any configured stem adjustments first.
+    // last vowel with a configured suffix, optionally swapping to terminal-vowel suffixes only when
+    // the rendered ordinal stem already ends in a vowel. This keeps ordinary ordinalSuffixes as the
+    // default/consonant-final map for stems such as Kyrgyz "миллиард" while still allowing
+    // vowel-final stems such as "жыйырма" or Kazakh "екі" to use a different suffix.
     /// <summary>
     /// Appends the harmony suffix selected by the last vowel in the word.
     /// </summary>
-    string AppendHarmonySuffix(string word, FrozenDictionary<char, string>? suffixes)
+    string AppendHarmonySuffix(string word, FrozenDictionary<char, string>? suffixes, bool useTerminalVowelOrdinalSuffixes)
     {
         if (suffixes is null)
         {
             throw new InvalidOperationException("Harmony-ordinal suffix data is missing.");
+        }
+
+        var terminalVowelSuffixes = profile.TerminalVowelOrdinalSuffixes;
+        if (useTerminalVowelOrdinalSuffixes && terminalVowelSuffixes is not null && terminalVowelSuffixes.ContainsKey(word[^1]))
+        {
+            suffixes = terminalVowelSuffixes;
         }
 
         // Walk backward so the suffix is chosen from the last vowel rather than from the first
@@ -256,6 +265,7 @@ sealed class HarmonyOrdinalNumberToWordsProfile(
     bool softenTerminalTBeforeSuffix,
     bool dropTerminalVowelBeforeHarmonySuffix,
     FrozenDictionary<char, string>? ordinalSuffixes = null,
+    FrozenDictionary<char, string>? terminalVowelOrdinalSuffixes = null,
     string? secondOrdinalSuffixCharacters = null,
     string[]? ordinalSuffixPair = null,
     FrozenDictionary<char, string>? tupleSuffixes = null,
@@ -283,8 +293,10 @@ sealed class HarmonyOrdinalNumberToWordsProfile(
     public bool SoftenTerminalTBeforeSuffix { get; } = softenTerminalTBeforeSuffix;
     /// <summary>Gets a value indicating whether a terminal vowel should drop before the harmony suffix.</summary>
     public bool DropTerminalVowelBeforeHarmonySuffix { get; } = dropTerminalVowelBeforeHarmonySuffix;
-    /// <summary>Gets the last-vowel suffix map used by harmony-driven ordinals.</summary>
+    /// <summary>Gets the default last-vowel suffix map used by harmony-driven ordinals.</summary>
     public FrozenDictionary<char, string>? OrdinalSuffixes { get; } = ordinalSuffixes;
+    /// <summary>Gets the override suffix map used only when the rendered ordinal stem already ends in a vowel.</summary>
+    public FrozenDictionary<char, string>? TerminalVowelOrdinalSuffixes { get; } = terminalVowelOrdinalSuffixes;
     /// <summary>Gets the character set that selects the second ordinal suffix in membership mode.</summary>
     public string? SecondOrdinalSuffixCharacters { get; } = secondOrdinalSuffixCharacters;
     /// <summary>Gets the pair of ordinal suffixes used by membership-based suffix selection.</summary>

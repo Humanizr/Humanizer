@@ -1415,6 +1415,7 @@ Fields:
 - `hundredWord`
 - `hundredStrategy`
 - `ordinalSuffixes`
+- `terminalVowelOrdinalSuffixes`
 - `ordinalSuffixPair`
 - `ordinalSuffixStrategy`
 - `secondOrdinalSuffixCharacters`
@@ -1424,7 +1425,10 @@ Fields:
 Notes:
 
 - Use this engine only for suffix systems driven by vowel harmony or final-character membership. If the locale needs wholly different tens/hundreds composition, start by checking another render-side engine first.
-- `ordinalSuffixes`, `ordinalSuffixPair`, and `secondOrdinalSuffixCharacters` work together; document unusual combinations with a YAML comment in the locale file.
+- `ordinalSuffixes`, `terminalVowelOrdinalSuffixes`, `ordinalSuffixPair`, and `secondOrdinalSuffixCharacters` work together; document unusual combinations with a YAML comment in the locale file.
+- In `last-vowel-map` mode, `ordinalSuffixes` is the default map selected from the rendered word's last matching vowel. It should model the ordinary/consonant-final stem case, for example a Kyrgyz consonant-final stem with last `а` can use `а: 'ынчы'` to produce `миллиардынчы`.
+- `terminalVowelOrdinalSuffixes` is an optional override map used only when the rendered ordinal stem already ends in a configured vowel. Use it for harmony systems where a vowel-final cardinal stem takes a different ordinal suffix from a consonant-final stem with the same last vowel, for example Kyrgyz `жыйырма` + `нчы` -> `жыйырманчы`, or Kazakh vowel-final stems that use `ншы`/`нші`/`сыншы` instead of the default consonant-final suffixes.
+- `terminalVowelOrdinalSuffixes` does not affect `tupleSuffixes`; tuple rendering always uses the tuple suffix map directly.
 
 ### `hyphenated-scale`
 

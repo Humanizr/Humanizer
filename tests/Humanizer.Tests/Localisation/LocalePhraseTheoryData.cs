@@ -4,6 +4,11 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+        { "kk", 1, TimeUnit.Second, Tense.Past, "бір секунд бұрын" },
+        { "kk", 2, TimeUnit.Day, Tense.Past, "2 күн бұрын" },
+        { "kk", 2, TimeUnit.Day, Tense.Future, "2 күннен кейін" },
+        { "kk", 0, TimeUnit.Second, Tense.Future, "қазір" },
+
         { "ps", 1, TimeUnit.Second, Tense.Past, "یوه ثانیه مخکې" },
         { "ps", 2, TimeUnit.Day, Tense.Future, "په 2 ورځو کې" },
         { "si", 1, TimeUnit.Day, Tense.Past, "ඊයේ" },
@@ -1582,6 +1587,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "kk", "ешқашан" },
+
         { "ps", "هېڅکله" },
         { "si", "කවදාවත් නැහැ" },
 
@@ -1710,6 +1717,9 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+        { "kk", 2, TimeUnit.Day, false, "2 күн" },
+        { "kk", 1, TimeUnit.Hour, true, "бір сағат" },
+
         { "ps", 1, TimeUnit.Second, false, "1 ثانیه" },
         { "ps", 2, TimeUnit.Day, false, "2 ورځې" },
         { "ps", 1, TimeUnit.Hour, true, "یو ساعت" },
