@@ -138,7 +138,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
         var word = Convert(number);
         return profile.OrdinalSuffixStrategy switch
         {
-            HarmonyOrdinalSuffixStrategy.LastVowelMap => AppendHarmonySuffix(word, profile.OrdinalSuffixes),
+            HarmonyOrdinalSuffixStrategy.LastVowelMap => AppendHarmonySuffix(word, profile.OrdinalSuffixes, useTerminalVowelOrdinalSuffixes: true),
             HarmonyOrdinalSuffixStrategy.FinalCharacterMembership => AppendMembershipOrdinalSuffix(
                 word,
                 profile.SecondOrdinalSuffixCharacters,
@@ -165,7 +165,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             return base.ConvertToTuple(number);
         }
 
-        return AppendHarmonySuffix(Convert(number), profile.TupleSuffixes);
+        return AppendHarmonySuffix(Convert(number), profile.TupleSuffixes, useTerminalVowelOrdinalSuffixes: false);
     }
 
     // Vowel-harmony ordinals are the common family rule. The runtime searches backward for the
@@ -173,7 +173,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     /// <summary>
     /// Appends the harmony suffix selected by the last vowel in the word.
     /// </summary>
-    string AppendHarmonySuffix(string word, FrozenDictionary<char, string>? suffixes)
+    string AppendHarmonySuffix(string word, FrozenDictionary<char, string>? suffixes, bool useTerminalVowelOrdinalSuffixes)
     {
         if (suffixes is null)
         {
@@ -181,7 +181,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
         }
 
         var terminalVowelSuffixes = profile.TerminalVowelOrdinalSuffixes;
-        if (terminalVowelSuffixes is not null && terminalVowelSuffixes.ContainsKey(word[^1]))
+        if (useTerminalVowelOrdinalSuffixes && terminalVowelSuffixes is not null && terminalVowelSuffixes.ContainsKey(word[^1]))
         {
             suffixes = terminalVowelSuffixes;
         }

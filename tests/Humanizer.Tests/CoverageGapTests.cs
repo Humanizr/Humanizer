@@ -2114,6 +2114,7 @@ public class CoverageGapTests
             terminalVowelOrdinalSuffixes: new Dictionary<char, string> { ['e'] = "zz" }.ToFrozenDictionary()));
         Assert.Equal("onzz", terminalVowelSuffixes.ConvertToOrdinal(1));
         Assert.Equal("twenty onzz", terminalVowelSuffixes.ConvertToOrdinal(21));
+        Assert.Equal("ontuple", terminalVowelSuffixes.ConvertToTuple(1));
 
         var incompleteMembership = new HarmonyOrdinalNumberToWordsConverter(CreateHarmonyOrdinalProfile(
             ordinalSuffixStrategy: HarmonyOrdinalSuffixStrategy.FinalCharacterMembership,
