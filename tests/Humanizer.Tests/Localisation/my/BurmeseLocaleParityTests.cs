@@ -104,6 +104,17 @@ public class BurmeseLocaleParityTests
         Assert.Equal(expected, number.ToWords(My));
     }
 
+    [Fact]
+    public void NumberToWords_MaximumValueRoundTripsThroughBurmeseParser()
+    {
+        const long number = 9_900_000_000_000_000;
+
+        var words = number.ToWords(My);
+
+        Assert.StartsWith("ကိုးဆယ့်ကိုးကောဋိ", words, StringComparison.Ordinal);
+        Assert.Equal(number, words.ToNumber(My));
+    }
+
     [Theory]
     [InlineData(1, "ပထမ")]
     [InlineData(2, "ဒုတိယ")]
