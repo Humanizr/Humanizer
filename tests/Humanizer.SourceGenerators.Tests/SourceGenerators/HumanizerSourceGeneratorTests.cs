@@ -806,6 +806,7 @@ numberToWords:
       name: 'thousand'
   ordinal:
     masculine:
+      defaultPrefix: 'pre-m'
       defaultSuffix: 'm'
       exactReplacements:
         1: 'first-m'
@@ -829,9 +830,9 @@ numberToWords:
         var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
 
         Assert.Contains("new JoinedScaleOrdinalProfile(", source);
-        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"m\"", source);
-        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"f\"", source);
-        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"n\"", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"pre-m\", \"m\"", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"\", \"f\"", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"\", \"n\"", source);
         Assert.Contains("GrammaticalGender.Feminine", source);
     }
 

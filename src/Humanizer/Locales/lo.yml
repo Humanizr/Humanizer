@@ -44,9 +44,6 @@ surfaces:
             forms:
               default: 'ມື້'
             afterCount: 'ກ່ອນ'
-          template:
-            name: 'two'
-            value: 'ສອງມື້ກ່ອນ'
         week:
           single: 'ໜຶ່ງອາທິດກ່ອນ'
           multiple:
@@ -96,9 +93,6 @@ surfaces:
             forms:
               default: 'ມື້'
             beforeCount: 'ໃນອີກ'
-          template:
-            name: 'two'
-            value: 'ມື້ຮື'
         week:
           single: 'ໃນອີກໜຶ່ງອາທິດ'
           multiple:
@@ -364,18 +358,8 @@ surfaces:
           name: 'ຮ້ອຍ'
       ordinal:
         masculine:
+          defaultPrefix: 'ທີ'
           defaultSuffix: ''
-          exactReplacements:
-            0: 'ທີສູນ'
-            1: 'ທີໜຶ່ງ'
-            2: 'ທີສອງ'
-            3: 'ທີສາມ'
-            4: 'ທີສີ່'
-            5: 'ທີຫ້າ'
-            10: 'ທີສິບ'
-            11: 'ທີສິບເອັດ'
-            21: 'ທີຊາວເອັດ'
-            100: 'ທີໜຶ່ງ ຮ້ອຍ'
     parse:
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'

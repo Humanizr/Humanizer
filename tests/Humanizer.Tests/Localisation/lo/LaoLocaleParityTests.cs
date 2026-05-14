@@ -98,9 +98,13 @@ public class LaoLocaleParityTests
     [Theory]
     [InlineData(1, "ທີໜຶ່ງ")]
     [InlineData(2, "ທີສອງ")]
+    [InlineData(6, "ທີຫົກ")]
     [InlineData(21, "ທີຊາວເອັດ")]
+    [InlineData(22, "ທີຊາວສອງ")]
     [InlineData(100, "ທີໜຶ່ງ ຮ້ອຍ")]
+    [InlineData(101, "ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ")]
     [InlineData(-1, "ລົບ ທີໜຶ່ງ")]
+    [InlineData(-22, "ລົບ ທີຊາວສອງ")]
     public void NumberToOrdinalWords_ProducesExpectedLaoOrdinals(int number, string expected)
     {
         Assert.Equal(expected, number.ToOrdinalWords(Lo));
@@ -122,8 +126,12 @@ public class LaoLocaleParityTests
 
     [Theory]
     [InlineData("ທີໜຶ່ງ", 1)]
+    [InlineData("ທີຫົກ", 6)]
     [InlineData("ທີຊາວເອັດ", 21)]
+    [InlineData("ທີຊາວສອງ", 22)]
+    [InlineData("ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ", 101)]
     [InlineData("ລົບ ທີຊາວເອັດ", -21)]
+    [InlineData("ລົບ ທີຊາວສອງ", -22)]
     public void WordsToNumber_ParsesLaoOrdinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Lo));

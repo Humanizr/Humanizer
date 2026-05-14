@@ -432,14 +432,17 @@ public sealed partial class HumanizerSourceGenerator
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, null),
                             Member("optional-profile-object", "ordinal", "JoinedScaleOrdinalProfile", null, null, null, null, null,
                                         Member("profile-object", "masculine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultPrefix", null, null, null, "", null, null),
                                                     Member("string", "defaultSuffix", null, null, null, null, null, null),
                                                     Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
                                         ),
                                         Member("optional-profile-object", "feminine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultPrefix", null, null, null, "", null, null),
                                                     Member("string", "defaultSuffix", null, null, null, null, null, null),
                                                     Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
                                         ),
                                         Member("optional-profile-object", "neuter", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultPrefix", null, null, null, "", null, null),
                                                     Member("string", "defaultSuffix", null, null, null, null, null, null),
                                                     Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
                                         ),

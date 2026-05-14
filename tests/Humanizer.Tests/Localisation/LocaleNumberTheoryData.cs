@@ -6088,7 +6088,10 @@ static class LocaleNumberTheoryData
         { "mr", 100, "शंभरावा" },
         { "mr", 101, "एकशे एकवा" },
         { "lo", 1, "ທີໜຶ່ງ" },
+        { "lo", 6, "ທີຫົກ" },
         { "lo", 21, "ທີຊາວເອັດ" },
+        { "lo", 22, "ທີຊາວສອງ" },
+        { "lo", 101, "ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ" },
 };
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
@@ -7800,6 +7803,9 @@ static class LocaleNumberTheoryData
         { "mr", "एकविसावे", 21L },
             { "lo", "ຊາວເອັດ", 21L },
         { "lo", "ໜຶ່ງ ຮ້ອຍ ຫ້າ", 105L },
+        { "lo", "ທີຫົກ", 6L },
         { "lo", "ທີຊາວເອັດ", 21L },
+        { "lo", "ທີຊາວສອງ", 22L },
+        { "lo", "ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ", 101L },
 };
 }

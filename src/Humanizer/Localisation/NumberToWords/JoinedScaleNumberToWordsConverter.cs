@@ -143,6 +143,8 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             {
                 return profile.MinusWord + profile.NegativeJoinWord + negativeExact;
             }
+
+            return profile.MinusWord + profile.NegativeJoinWord + FormatGenderedOrdinalBody((int)magnitude, block);
         }
 
         if (block.ExactReplacements.TryGetValue(number, out var exactOrdinal))
@@ -150,8 +152,13 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             return exactOrdinal;
         }
 
+        return FormatGenderedOrdinalBody(number, block);
+    }
+
+    string FormatGenderedOrdinalBody(int number, JoinedScaleGenderOrdinalBlock block)
+    {
         var words = Convert(number);
-        return words.Length == 0 ? words : words + block.DefaultSuffix;
+        return words.Length == 0 ? words : block.DefaultPrefix + words + block.DefaultSuffix;
     }
 
     /// <summary>
@@ -278,10 +285,11 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public bool AllowLongMinValue { get; } = maximumValue == long.MaxValue;
 }
 
-/// <summary>Gender-specific ordinal suffix and exact replacement data.</summary>
+/// <summary>Gender-specific ordinal affix and exact replacement data.</summary>
+/// <param name="DefaultPrefix">The prefix prepended to the cardinal word form for productive ordinals.</param>
 /// <param name="DefaultSuffix">The suffix appended to the cardinal word form for productive ordinals.</param>
 /// <param name="ExactReplacements">Exact ordinal forms keyed by value.</param>
-internal sealed record JoinedScaleGenderOrdinalBlock(string DefaultSuffix, FrozenDictionary<int, string> ExactReplacements);
+internal sealed record JoinedScaleGenderOrdinalBlock(string DefaultPrefix, string DefaultSuffix, FrozenDictionary<int, string> ExactReplacements);
 
 /// <summary>Optional gender-aware ordinal data for joined-scale number profiles.</summary>
 /// <param name="Masculine">The masculine ordinal block.</param>
