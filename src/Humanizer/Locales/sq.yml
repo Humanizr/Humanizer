@@ -322,7 +322,7 @@ surfaces:
             9: 'e nëntë'
             10: 'e dhjetë'
             20: 'e njëzetë'
-          neuterFallback: 'masculine'
+        neuterFallback: 'masculine'
     parse:
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
