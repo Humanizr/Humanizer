@@ -126,6 +126,16 @@ public class BurmeseLocaleParityTests
     }
 
 
+
+    [Theory]
+    [InlineData(201, "နှစ်ရာ တစ်ခုမြောက်")]
+    [InlineData(1001, "တစ်ထောင် တစ်ခုမြောက်")]
+    public void WordsToNumber_ParsesGeneratedCompoundOrdinals(int number, string words)
+    {
+        Assert.Equal(words, number.ToOrdinalWords(My));
+        Assert.Equal(number, words.ToNumber(My));
+    }
+
     [Theory]
     [InlineData("နှစ်ဆယ့်တစ်", 21)]
     [InlineData("တစ်ရာ ငါး", 105)]
