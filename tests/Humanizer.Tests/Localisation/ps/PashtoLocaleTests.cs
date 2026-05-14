@@ -95,6 +95,8 @@ public class PashtoLocaleTests
     [InlineData("دوه زره او درې ویشت", 2023)]
     [InlineData("سل او یو", 101)]
     [InlineData("یوویشتمه", 21)]
+    [InlineData("دوه ویشتم", 22)]
+    [InlineData("دوه ویشتمه", 22)]
     [InlineData("منفي پنځه", -5)]
     public void WordsToNumber_ParsesPashtoCardinalAndOrdinalTokens(string words, long expected)
     {
