@@ -1,0 +1,204 @@
+namespace Humanizer.Tests.Localisation.km;
+
+[UseCulture("km")]
+public class KhmerLocaleParityTests
+{
+    static readonly CultureInfo Km = new("km");
+    static readonly int[] Pair = [1, 2];
+    static readonly int[] Triple = [1, 2, 3];
+
+    [Fact]
+    public void ListHumanize_UsesKhmerConjunction()
+    {
+        Assert.Equal("1 និង 2", Pair.Humanize());
+        Assert.Equal("1, 2 និង 3", Triple.Humanize());
+    }
+
+    [Theory]
+    [InlineData(0, TimeUnit.Second, Tense.Future, "ឥឡូវនេះ")]
+    [InlineData(1, TimeUnit.Day, Tense.Past, "ម្សិលមិញ")]
+    [InlineData(2, TimeUnit.Day, Tense.Past, "2 ថ្ងៃមុន")]
+    [InlineData(1, TimeUnit.Day, Tense.Future, "ថ្ងៃស្អែក")]
+    [InlineData(2, TimeUnit.Day, Tense.Future, "ក្នុង 2 ថ្ងៃ")]
+    public void DateHumanize_UsesKhmerRelativeDatePhrases(int count, TimeUnit unit, Tense tense, string expected)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(Km);
+        Assert.Equal(expected, formatter.DateHumanize(unit, tense, count));
+    }
+
+    [Fact]
+    public void NullableDateHumanize_NullDateUsesKhmerNeverPhrase()
+    {
+        DateTime? date = null;
+        Assert.Equal("មិនដែល", date.Humanize(culture: Km));
+    }
+
+    [Theory]
+    [InlineData(TimeUnit.Minute, 1, "1 នាទី")]
+    [InlineData(TimeUnit.Day, 2, "2 ថ្ងៃ")]
+    public void TimeSpanHumanize_UsesKhmerDurationPhrases(TimeUnit unit, int count, string expected)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(Km);
+        Assert.Equal(expected, formatter.TimeSpanHumanize(unit, count));
+    }
+
+    [Fact]
+    public void TimeSpanHumanize_ZeroUsesKhmerPhrases()
+    {
+        Assert.Equal("0 មិល្លីវិនាទី", TimeSpan.Zero.Humanize(culture: Km));
+        Assert.Equal("គ្មានពេលវេលា", TimeSpan.Zero.Humanize(culture: Km, toWords: true));
+    }
+
+    [Fact]
+    public void TimeSpanHumanize_ToWordsUsesKhmerNumberWords()
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(Km);
+        Assert.Equal("មួយ ថ្ងៃ", formatter.TimeSpanHumanize(TimeUnit.Day, 1, toWords: true));
+    }
+
+    [Theory]
+    [InlineData(DataUnit.Bit, "ប៊ីត")]
+    [InlineData(DataUnit.Byte, "បៃ")]
+    [InlineData(DataUnit.Kilobyte, "គីឡូបៃ")]
+    [InlineData(DataUnit.Megabyte, "មេហ្គាបៃ")]
+    public void DataUnitHumanize_UsesKhmerNames(DataUnit unit, string expected)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(Km);
+        Assert.Equal(expected, formatter.DataUnitHumanize(unit, 2, toSymbol: false));
+    }
+
+    [Theory]
+    [InlineData(TimeUnit.Millisecond, "មិល្លីវិនាទី")]
+    [InlineData(TimeUnit.Second, "វិនាទី")]
+    [InlineData(TimeUnit.Minute, "នាទី")]
+    [InlineData(TimeUnit.Hour, "ម៉ោង")]
+    [InlineData(TimeUnit.Day, "ថ្ងៃ")]
+    [InlineData(TimeUnit.Week, "សប្តាហ៍")]
+    [InlineData(TimeUnit.Month, "ខែ")]
+    [InlineData(TimeUnit.Year, "ឆ្នាំ")]
+    public void TimeUnitHumanize_UsesKhmerUnitNames(TimeUnit unit, string expected)
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(Km);
+        Assert.Equal(expected, formatter.TimeUnitHumanize(unit));
+    }
+
+    [Theory]
+    [InlineData(0, "សូន្យ")]
+    [InlineData(21, "ម្ភៃមួយ")]
+    [InlineData(105, "មួយរយ ប្រាំ")]
+    [InlineData(1234, "មួយពាន់ ពីររយ សាមសិបបួន")]
+    [InlineData(12345678, "ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី")]
+    [InlineData(-21, "ដក ម្ភៃមួយ")]
+    public void NumberToWords_ProducesKhmerCardinals(long number, string expected)
+    {
+        Assert.Equal(expected, number.ToWords(Km));
+    }
+
+    [Fact]
+    public void NumberToWords_MaximumValueRoundTripsThroughKhmerParser()
+    {
+        const long number = 999_999_999;
+
+        var words = number.ToWords(Km);
+
+        Assert.StartsWith("ប្រាំបួនរយ កៅសិបប្រាំបួនលាន", words, StringComparison.Ordinal);
+        Assert.Equal(number, words.ToNumber(Km));
+    }
+
+    [Theory]
+    [InlineData(1, "ទីមួយ")]
+    [InlineData(2, "ទីពីរ")]
+    [InlineData(21, "ទីម្ភៃមួយ")]
+    [InlineData(101, "ទីមួយរយ មួយ")]
+    public void NumberToOrdinalWords_ProducesKhmerOrdinals(int number, string expected)
+    {
+        Assert.Equal(expected, number.ToOrdinalWords(Km));
+    }
+
+    [Theory]
+    [InlineData("ម្ភៃមួយ", 21)]
+    [InlineData("មួយរយ ប្រាំ", 105)]
+    [InlineData("មួយពាន់ ពីររយ សាមសិបបួន", 1234)]
+    [InlineData("ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី", 12345678)]
+    [InlineData("ដក ម្ភៃមួយ", -21)]
+    [InlineData("ទីម្ភៃមួយ", 21)]
+    [InlineData("21ទី", 21)]
+    [InlineData("21 ទី", 21)]
+    public void WordsToNumber_ParsesKhmerCardinalsAndOrdinals(string words, long expected)
+    {
+        Assert.Equal(expected, words.ToNumber(Km));
+        Assert.True(words.TryToNumber(out var parsed, Km, out var unrecognizedWord));
+        Assert.Equal(expected, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Theory]
+    [InlineData(1, "ទី1")]
+    [InlineData(21, "ទី21")]
+    [InlineData(-1, "ទី-1")]
+    public void Ordinalize_UsesKhmerNumericPrefix(int number, string expected)
+    {
+        Assert.Equal(expected, number.Ordinalize(Km));
+        Assert.Equal(expected, number.ToString(CultureInfo.InvariantCulture).Ordinalize(Km));
+    }
+
+    [Theory]
+    [InlineData(2022, 1, 25, "25 មករា 2022")]
+    [InlineData(2015, 1, 1, "1 មករា 2015")]
+    [InlineData(2015, 2, 3, "3 កុម្ភៈ 2015")]
+    public void DateTime_ToOrdinalWords_ExactOutput(int year, int month, int day, string expected)
+    {
+        Assert.Equal(expected, new DateTime(year, month, day).ToOrdinalWords());
+    }
+
+#if NET6_0_OR_GREATER
+    [Theory]
+    [InlineData(2022, 1, 25, "25 មករា 2022")]
+    [InlineData(2015, 2, 3, "3 កុម្ភៈ 2015")]
+    public void DateOnly_ToOrdinalWords_ExactOutput(int year, int month, int day, string expected)
+    {
+        Assert.Equal(expected, new DateOnly(year, month, day).ToOrdinalWords());
+    }
+
+    [Theory]
+    [InlineData(1, 5, "ព្រឹក មួយ ម៉ោង ប្រាំ នាទី")]
+    [InlineData(13, 0, "រសៀល មួយ ម៉ោង")]
+    [InlineData(13, 23, "រសៀល មួយ ម៉ោង ម្ភៃបី នាទី")]
+    [InlineData(18, 0, "ល្ងាច ប្រាំមួយ ម៉ោង")]
+    [InlineData(21, 0, "យប់ ប្រាំបួន ម៉ោង")]
+    public void ToClockNotation_ExactOutput(int hours, int minutes, string expected)
+    {
+        Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation());
+    }
+
+    [Fact]
+    public void ToClockNotation_Rounded_ExactOutput()
+    {
+        Assert.Equal("រសៀល មួយ ម៉ោង ម្ភៃប្រាំ នាទី", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+    }
+#endif
+
+    [Theory]
+    [InlineData(0.0, "ជើង")]
+    [InlineData(45.0, "ឦសាន")]
+    [InlineData(90.0, "កើត")]
+    [InlineData(135.0, "អាគ្នេយ៍")]
+    [InlineData(180.0, "ត្បូង")]
+    [InlineData(225.0, "និរតី")]
+    [InlineData(270.0, "លិច")]
+    [InlineData(315.0, "ពាយព្យ")]
+    public void Compass_FullDirections(double angle, string expected)
+    {
+        Assert.Equal(expected, angle.ToHeading(HeadingStyle.Full));
+    }
+
+    [Theory]
+    [InlineData(0.0, "ជ")]
+    [InlineData(90.0, "ក")]
+    [InlineData(180.0, "ត")]
+    [InlineData(270.0, "ល")]
+    public void Compass_AbbreviatedDirectionsUseKhmerLabels(double angle, string expected)
+    {
+        Assert.Equal(expected, angle.ToHeading(HeadingStyle.Abbreviated));
+    }
+}
