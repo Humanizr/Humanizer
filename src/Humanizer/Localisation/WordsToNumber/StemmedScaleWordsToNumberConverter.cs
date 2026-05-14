@@ -3,11 +3,20 @@ namespace Humanizer;
 /// <summary>
 /// Parses number words produced by stemmed scale profiles.
 /// </summary>
-internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfile profile) : GenderlessWordsToNumberConverter
+internal class StemmedScaleWordsToNumberConverter : GenderlessWordsToNumberConverter
 {
-    readonly StemmedScaleWordsToNumberProfile profile = profile;
-    readonly FrozenDictionary<string, long> tokenValues = BuildTokenValues(profile);
-    readonly TokenizedStemmedScaleWord[] tokenizedValues = Tokenize(BuildTokenValues(profile));
+    readonly StemmedScaleWordsToNumberProfile profile;
+    readonly FrozenDictionary<string, long> tokenValues;
+    readonly TokenizedStemmedScaleWord[] tokenizedValues;
+    readonly TokenizedStemmedScaleWord[] fallbackScales;
+
+    public StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfile profile)
+    {
+        this.profile = profile;
+        tokenValues = BuildTokenValues(profile);
+        tokenizedValues = Tokenize(tokenValues);
+        fallbackScales = Tokenize(BuildFallbackScaleValues(profile));
+    }
 
     /// <inheritdoc />
     public override long Convert(string words)
@@ -60,34 +69,14 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
             return true;
         }
 
-        long total = 0;
         var sourceTokens = SplitWords(source);
-        for (var index = 0; index < sourceTokens.Length;)
+        if (!TryParseTokenSequence(sourceTokens, out var magnitude, out unrecognizedWord))
         {
-            if (!TryMatchToken(sourceTokens, index, out var value, out var consumed))
-            {
-                parsedValue = default;
-                unrecognizedWord = sourceTokens[index];
-                return false;
-            }
-
-            try
-            {
-                total = checked(total + value);
-            }
-            catch (OverflowException)
-            {
-                parsedValue = default;
-                unrecognizedWord = source;
-                return false;
-            }
-
-            index += consumed;
+            parsedValue = default;
+            return false;
         }
 
-        parsedValue = negative ? -total : total;
-        unrecognizedWord = null;
-        return true;
+        return TryConvertMagnitude(magnitude, negative, source, out parsedValue, out unrecognizedWord);
     }
 
     bool TryParseOrdinal(string source, out long value)
@@ -150,20 +139,169 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
         return values.ToFrozenDictionary(StringComparer.Ordinal);
     }
 
+    static FrozenDictionary<string, long> BuildFallbackScaleValues(StemmedScaleWordsToNumberProfile profile)
+    {
+        var values = new Dictionary<string, long>(StringComparer.Ordinal);
+
+        foreach (var scale in profile.Scales)
+        {
+            Add(values, scale.FallbackName, scale.Value);
+            Add(values, scale.FallbackNameWithRemainder, scale.Value);
+        }
+
+        return values.ToFrozenDictionary(StringComparer.Ordinal);
+    }
+
     static TokenizedStemmedScaleWord[] Tokenize(FrozenDictionary<string, long> values) =>
         values
             .Select(static pair => new TokenizedStemmedScaleWord(
                 SplitWords(pair.Key),
-                pair.Value))
+                checked((ulong)pair.Value)))
             .OrderByDescending(static pair => pair.Tokens.Length)
             .ThenByDescending(static pair => pair.Tokens.Sum(static token => token.Length))
             .ToArray();
 
-    bool TryMatchToken(string[] sourceTokens, int index, out long value, out int consumed)
+    static bool TryConvertMagnitude(
+        ulong magnitude,
+        bool negative,
+        string source,
+        out long parsedValue,
+        out string? unrecognizedWord)
     {
-        foreach (var candidate in tokenizedValues)
+        if (negative)
         {
-            if (index + candidate.Tokens.Length > sourceTokens.Length)
+            var longMinMagnitude = (ulong)long.MaxValue + 1UL;
+            if (magnitude == longMinMagnitude)
+            {
+                parsedValue = long.MinValue;
+                unrecognizedWord = null;
+                return true;
+            }
+
+            if (magnitude <= (ulong)long.MaxValue)
+            {
+                parsedValue = -(long)magnitude;
+                unrecognizedWord = null;
+                return true;
+            }
+        }
+        else if (magnitude <= (ulong)long.MaxValue)
+        {
+            parsedValue = (long)magnitude;
+            unrecognizedWord = null;
+            return true;
+        }
+
+        parsedValue = default;
+        unrecognizedWord = source;
+        return false;
+    }
+
+    bool TryParseTokenSequence(string[] sourceTokens, out ulong value, out string? unrecognizedWord) =>
+        TryParseTokenSequence(sourceTokens, 0, sourceTokens.Length, out value, out unrecognizedWord);
+
+    bool TryParseTokenSequence(
+        string[] sourceTokens,
+        int startIndex,
+        int endIndex,
+        out ulong value,
+        out string? unrecognizedWord)
+    {
+        for (var index = endIndex - 1; index >= startIndex; index--)
+        {
+            if (!TryMatchFallbackScale(sourceTokens, index, endIndex, out var scaleValue, out var scaleTokens))
+            {
+                continue;
+            }
+
+            var count = 1UL;
+            if (index != startIndex &&
+                !TryParseTokenSequence(sourceTokens, startIndex, index, out count, out _))
+            {
+                continue;
+            }
+
+            var remainder = 0UL;
+            var remainderStart = index + scaleTokens;
+            if (remainderStart < endIndex &&
+                (!TryParseTokenSequence(sourceTokens, remainderStart, endIndex, out remainder, out _) ||
+                 remainder >= scaleValue))
+            {
+                continue;
+            }
+
+            try
+            {
+                value = checked(checked(count * scaleValue) + remainder);
+            }
+            catch (OverflowException)
+            {
+                value = default;
+                unrecognizedWord = string.Join(" ", sourceTokens.Skip(startIndex).Take(endIndex - startIndex));
+                return false;
+            }
+
+            unrecognizedWord = null;
+            return true;
+        }
+
+        return TryParseAdditiveRange(sourceTokens, startIndex, endIndex, out value, out unrecognizedWord);
+    }
+
+    bool TryParseAdditiveRange(
+        string[] sourceTokens,
+        int startIndex,
+        int endIndex,
+        out ulong value,
+        out string? unrecognizedWord)
+    {
+        var total = 0UL;
+
+        for (var index = startIndex; index < endIndex;)
+        {
+            if (!TryMatchToken(sourceTokens, index, endIndex, out var tokenValue, out var consumed))
+            {
+                value = default;
+                unrecognizedWord = sourceTokens[index];
+                return false;
+            }
+
+            try
+            {
+                total = checked(total + tokenValue);
+            }
+            catch (OverflowException)
+            {
+                value = default;
+                unrecognizedWord = string.Join(" ", sourceTokens);
+                return false;
+            }
+
+            index += consumed;
+        }
+
+        value = total;
+        unrecognizedWord = null;
+        return true;
+    }
+
+    bool TryMatchFallbackScale(string[] sourceTokens, int index, int endIndex, out ulong value, out int consumed) =>
+        TryMatchToken(fallbackScales, sourceTokens, index, endIndex, out value, out consumed);
+
+    bool TryMatchToken(string[] sourceTokens, int index, int endIndex, out ulong value, out int consumed) =>
+        TryMatchToken(tokenizedValues, sourceTokens, index, endIndex, out value, out consumed);
+
+    static bool TryMatchToken(
+        TokenizedStemmedScaleWord[] candidates,
+        string[] sourceTokens,
+        int index,
+        int endIndex,
+        out ulong value,
+        out int consumed)
+    {
+        foreach (var candidate in candidates)
+        {
+            if (index + candidate.Tokens.Length > endIndex)
             {
                 continue;
             }
@@ -209,7 +347,7 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
             .ToArray();
 }
 
-readonly record struct TokenizedStemmedScaleWord(string[] Tokens, long Value);
+readonly record struct TokenizedStemmedScaleWord(string[] Tokens, ulong Value);
 
 /// <summary>
 /// Generated data for <see cref="StemmedScaleWordsToNumberConverter"/>.

@@ -82,6 +82,17 @@ public class SinhalaLocaleParityTests
     }
 
     [Theory]
+    [InlineData(1000000000, "සියය කෝටි")]
+    [InlineData(1010000000, "එකසිය එක කෝටි")]
+    [InlineData(1000100000, "සියය කෝටි ලක්ෂය")]
+    [InlineData(10000000000, "දාහ කෝටි")]
+    [InlineData(10000000000000000, "සියය කෝටි කෝටි")]
+    public void NumberToWords_ProducesFallbackScalePhrases(long number, string expected)
+    {
+        Assert.Equal(expected, number.ToWords(Si));
+    }
+
+    [Theory]
     [InlineData(1, "පළමු")]
     [InlineData(2, "දෙවන")]
     [InlineData(3, "තෙවන")]
@@ -95,11 +106,31 @@ public class SinhalaLocaleParityTests
     [InlineData("විසි එක", 21)]
     [InlineData("එකසිය එක", 101)]
     [InlineData("දොළොස්ලක්ෂ තිස්හතරදහස් පන්සිය හැට හත", 1234567)]
+    [InlineData("සියය කෝටි", 1000000000)]
+    [InlineData("එකසිය එක කෝටි", 1010000000)]
+    [InlineData("සියය කෝටි ලක්ෂය", 1000100000)]
+    [InlineData("දාහ කෝටි", 10000000000)]
+    [InlineData("සියය කෝටි කෝටි", 10000000000000000)]
+    [InlineData("එකසිය එක කෝටි විසි එක", 1010000021)]
     [InlineData("විසි එකවැනි", 21)]
     [InlineData("ඍණ විසි එක", -21)]
     public void WordsToNumber_ParsesSinhalaCardinalsAndOrdinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Si));
+    }
+
+    [Theory]
+    [InlineData(1000000000)]
+    [InlineData(1010000000)]
+    [InlineData(1000100001)]
+    [InlineData(10000000000)]
+    [InlineData(10000000000000000)]
+    [InlineData(long.MaxValue)]
+    [InlineData(long.MinValue)]
+    public void StemmedScaleFallbackPhrases_RoundTrip(long number)
+    {
+        var words = number.ToWords(Si);
+        Assert.Equal(number, words.ToNumber(Si));
     }
 
     [Theory]
