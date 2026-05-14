@@ -205,6 +205,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 /// <param name="subHundredMap">The shared under-hundred lexicon.</param>
 /// <param name="scales">The descending scale rows used during decomposition.</param>
 /// <param name="ordinalExceptions">Exact ordinal overrides keyed by value.</param>
+/// <param name="ordinal">The optional gendered word-ordinal profile used by ordinal word conversion.</param>
 /// <param name="compoundOrdinalRemainder">The trailing digit used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalWord">The word used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalExcludedValues">Values that must not use the compound ordinal shortcut.</param>
