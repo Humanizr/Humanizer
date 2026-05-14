@@ -4,6 +4,11 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+            { "et", 1, TimeUnit.Day, Tense.Past, "eile" },
+            { "et", 2, TimeUnit.Day, Tense.Past, "2 päeva tagasi" },
+            { "et", 1, TimeUnit.Day, Tense.Future, "homme" },
+            { "et", 2, TimeUnit.Day, Tense.Future, "2 päeva pärast" },
+            { "et", 0, TimeUnit.Second, Tense.Future, "nüüd" },
         { "sq", 2, TimeUnit.Day, Tense.Past, "2 ditë më parë" },
         { "sq", 3, TimeUnit.Month, Tense.Future, "pas 3 muajsh" },
         { "mk", 1, TimeUnit.Second, Tense.Past, "пред секунда" },
@@ -1638,6 +1643,7 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+            { "et", "mitte kunagi" },
         { "sq", "kurrë" },
         { "mk", "никогаш" },
 
@@ -1777,6 +1783,9 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+            { "et", 1, TimeUnit.Hour, false, "tund" },
+            { "et", 2, TimeUnit.Day, false, "2 päeva" },
+            { "et", 0, TimeUnit.Millisecond, true, "nüüd" },
         { "sq", 5, TimeUnit.Minute, false, "5 minuta" },
         { "sq", 1, TimeUnit.Hour, false, "1 orë" },
         { "sq", 2, TimeUnit.Day, false, "2 ditë" },

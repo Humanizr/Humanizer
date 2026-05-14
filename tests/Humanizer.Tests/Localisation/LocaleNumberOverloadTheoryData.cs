@@ -4,6 +4,7 @@ public static class LocaleNumberOverloadTheoryData
 {
     public static TheoryData<string, long, string> AddAndCases => new()
     {
+            { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и еден" },
         { "mk", 1001000001L, "една милијарда еден милион и еден" },
@@ -254,6 +255,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
+            { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и еден" },
         { "mk", 1001000001L, "една милијарда еден милион и еден" },
@@ -503,6 +505,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
+            { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и една" },
         { "mk", 1001000001L, "една милијарда еден милион и една" },
@@ -752,6 +755,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
+            { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и една" },
         { "mk", 1001000001L, "една милијарда еден милион и една" },

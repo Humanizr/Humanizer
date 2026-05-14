@@ -4,6 +4,9 @@ public static class LocaleNumberMagnitudeTheoryData
 {
     public static TheoryData<string, long, string> MagnitudeCardinalCases => new()
     {
+            { "et", 1001L, "tuhat üks" },
+            { "et", 1000001L, "miljon üks" },
+            { "et", 1234567L, "miljon kakssada kolmkümmend neli tuhat viissada kuuskümmend seitse" },
         { "sq", 1000000L, "një milion" },
         { "sq", 12345678L, "dymbëdhjetë milion e treqind e dyzet e pesë mijë e gjashtëqind e shtatëdhjetë e tetë" },
         { "sq", 1000000000L, "një miliard" },
@@ -205,6 +208,7 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
+            { "et", 1001000001L, "miljard miljon üks" },
         { "sq", 1000000000000L, "një trilion" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001000001L, "една милијарда еден милион и еден" },
