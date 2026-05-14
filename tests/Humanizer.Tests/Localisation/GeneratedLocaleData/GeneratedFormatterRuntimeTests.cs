@@ -79,6 +79,21 @@ public class GeneratedFormatterRuntimeTests
     }
 
     [Fact]
+    public void GeneratedPhraseTablesUseIgboOwnedLocaleData()
+    {
+        var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("ig"));
+
+        Assert.Equal("ugbu a", formatter.DateHumanize_Now());
+        Assert.Equal("ọ dịghị mgbe", formatter.DateHumanize_Never());
+        Assert.Equal("2 ụbọchị gara aga", formatter.DateHumanize(TimeUnit.Day, Tense.Past, 2));
+        Assert.Equal("n'ime 2 ụbọchị", formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2));
+        Assert.Equal("ụbọchị 2", formatter.TimeSpanHumanize(TimeUnit.Day, 2));
+        Assert.Equal("otu ụbọchị", formatter.TimeSpanHumanize(TimeUnit.Day, 1, toWords: true));
+        Assert.Equal("baita", formatter.DataUnitHumanize(DataUnit.Byte, 2, toSymbol: false));
+        Assert.Equal("ụb", formatter.TimeUnitHumanize(TimeUnit.Day));
+    }
+
+    [Fact]
     public void ProfiledFormatterUsesGeneratedPhraseTablesForRussianGrammarSensitivePhrases()
     {
         var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("ru"));
