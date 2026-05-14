@@ -1415,6 +1415,7 @@ Fields:
 - `hundredWord`
 - `hundredStrategy`
 - `ordinalSuffixes`
+- `terminalVowelOrdinalSuffixes`
 - `ordinalSuffixPair`
 - `ordinalSuffixStrategy`
 - `secondOrdinalSuffixCharacters`
@@ -1424,7 +1425,7 @@ Fields:
 Notes:
 
 - Use this engine only for suffix systems driven by vowel harmony or final-character membership. If the locale needs wholly different tens/hundreds composition, start by checking another render-side engine first.
-- `ordinalSuffixes`, `ordinalSuffixPair`, and `secondOrdinalSuffixCharacters` work together; document unusual combinations with a YAML comment in the locale file.
+- `ordinalSuffixes`, `terminalVowelOrdinalSuffixes`, `ordinalSuffixPair`, and `secondOrdinalSuffixCharacters` work together; document unusual combinations with a YAML comment in the locale file. Use `terminalVowelOrdinalSuffixes` only for harmony systems where an already-vowel-final cardinal stem takes a different ordinal suffix from a consonant-final stem with the same last vowel.
 
 ### `hyphenated-scale`
 

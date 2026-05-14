@@ -4,6 +4,12 @@ static class LocaleNumberTheoryData
 {
     public static TheoryData<string, int, string> CardinalCases => new()
     {
+        { "kk", 0, "нөл" },
+        { "kk", 1, "бір" },
+        { "kk", 21, "жиырма бір" },
+        { "kk", 105, "жүз бес" },
+        { "kk", 1234, "бір мың екі жүз отыз төрт" },
+
         { "ps", 0, "صفر" },
         { "ps", 1, "یو" },
         { "ps", 2, "دوه" },
@@ -2925,6 +2931,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
+        { "kk", 21, true, "жиырма бір" },
+
         { "ps", 101, true, "سل او یو" },
         { "ps", 101, false, "سل او یو" },
         { "si", 21, true, "විසි එක" },
@@ -3757,6 +3765,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
+        { "kk", 2, WordForm.Normal, "екі" },
+
         { "ps", 21, WordForm.Abbreviation, "یوویشت" },
         { "si", 21, WordForm.Normal, "විසි එක" },
 
@@ -4182,6 +4192,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
+        { "kk", 2, GrammaticalGender.Masculine, "екі" },
+        { "kk", 2, GrammaticalGender.Feminine, "екі" },
+        { "kk", 2, GrammaticalGender.Neuter, "екі" },
+
         { "ps", 2, GrammaticalGender.Masculine, "دوه" },
         { "ps", 2, GrammaticalGender.Feminine, "دوه" },
         { "ps", 2, GrammaticalGender.Neuter, "دوه" },
@@ -4649,6 +4663,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
+        { "kk", 2, WordForm.Normal, GrammaticalGender.Masculine, "екі" },
+        { "kk", 2, WordForm.Normal, GrammaticalGender.Feminine, "екі" },
+        { "kk", 2, WordForm.Normal, GrammaticalGender.Neuter, "екі" },
+
         { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "دوه" },
         { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "دوه" },
         { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "دوه" },
@@ -4911,6 +4929,12 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
+        { "kk", 1, "бірінші" },
+        { "kk", 2, "екінші" },
+        { "kk", 6, "алтыншы" },
+        { "kk", 20, "жиырмасыншы" },
+        { "kk", 21, "жиырма бірінші" },
+
         { "ps", 1, "لومړی" },
         { "ps", 21, "یوویشتم" },
         { "si", 1, "පළමු" },
@@ -6321,6 +6345,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+        { "kk", 2, WordForm.Normal, "екінші" },
+
         { "ps", 21, WordForm.Abbreviation, "یوویشتم" },
         { "si", 21, WordForm.Normal, "විසි එකවැනි" },
 
@@ -6710,6 +6736,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+        { "kk", 2, GrammaticalGender.Masculine, "екінші" },
+        { "kk", 2, GrammaticalGender.Feminine, "екінші" },
+        { "kk", 2, GrammaticalGender.Neuter, "екінші" },
+
         { "ps", 1, GrammaticalGender.Masculine, "لومړی" },
         { "ps", 1, GrammaticalGender.Feminine, "لومړۍ" },
         { "ps", 1, GrammaticalGender.Neuter, "لومړی" },
@@ -7595,6 +7625,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+        { "kk", 2, GrammaticalGender.Masculine, WordForm.Normal, "екінші" },
+        { "kk", 2, GrammaticalGender.Feminine, WordForm.Normal, "екінші" },
+        { "kk", 2, GrammaticalGender.Neuter, WordForm.Normal, "екінші" },
+
         { "ps", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "یوویشتم" },
         { "ps", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "یوویشتمه" },
         { "ps", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "یوویشتم" },
@@ -7855,6 +7889,8 @@ static class LocaleNumberTheoryData
     };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "kk", 2, "екі" },
+
         { "ps", 2, "دوه" },
         { "si", 2, "දෙක" },
 
@@ -7951,6 +7987,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "kk", "жиырма бір", 21L },
+        { "kk", "жиырма бірінші", 21L },
+        { "kk", "минус бес", -5L },
+
         { "ps", "یوویشت", 21L },
         { "ps", "دولس میلیون او درې سوه او پنځه څلوېښت زره او شپږ سوه او اته اویا", 12345678L },
         { "ps", "مائنس پنځه", -5L },

@@ -254,6 +254,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("bool", "softenTerminalTBeforeSuffix", null, null, null, null, null, null),
                             Member("bool", "dropTerminalVowelBeforeHarmonySuffix", null, null, null, null, null, null),
                             Member("nullable-char-string-dictionary", "ordinalSuffixes", null, null, null, null, null, null),
+                            Member("nullable-char-string-dictionary", "terminalVowelOrdinalSuffixes", null, null, null, null, null, null),
                             Member("nullable-string", "secondOrdinalSuffixCharacters", null, null, null, null, null, null),
                             Member("optional-string-array", "ordinalSuffixPair", null, null, null, null, null, null),
                             Member("nullable-char-string-dictionary", "tupleSuffixes", null, null, null, null, null, null),

@@ -180,6 +180,12 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             throw new InvalidOperationException("Harmony-ordinal suffix data is missing.");
         }
 
+        var terminalVowelSuffixes = profile.TerminalVowelOrdinalSuffixes;
+        if (terminalVowelSuffixes is not null && terminalVowelSuffixes.ContainsKey(word[^1]))
+        {
+            suffixes = terminalVowelSuffixes;
+        }
+
         // Walk backward so the suffix is chosen from the last vowel rather than from the first
         // vowel or from a locale-specific hardcoded branch.
         var suffix = string.Empty;
@@ -256,6 +262,7 @@ sealed class HarmonyOrdinalNumberToWordsProfile(
     bool softenTerminalTBeforeSuffix,
     bool dropTerminalVowelBeforeHarmonySuffix,
     FrozenDictionary<char, string>? ordinalSuffixes = null,
+    FrozenDictionary<char, string>? terminalVowelOrdinalSuffixes = null,
     string? secondOrdinalSuffixCharacters = null,
     string[]? ordinalSuffixPair = null,
     FrozenDictionary<char, string>? tupleSuffixes = null,
@@ -285,6 +292,8 @@ sealed class HarmonyOrdinalNumberToWordsProfile(
     public bool DropTerminalVowelBeforeHarmonySuffix { get; } = dropTerminalVowelBeforeHarmonySuffix;
     /// <summary>Gets the last-vowel suffix map used by harmony-driven ordinals.</summary>
     public FrozenDictionary<char, string>? OrdinalSuffixes { get; } = ordinalSuffixes;
+    /// <summary>Gets the last-vowel suffix map used when the rendered cardinal already ends in a vowel.</summary>
+    public FrozenDictionary<char, string>? TerminalVowelOrdinalSuffixes { get; } = terminalVowelOrdinalSuffixes;
     /// <summary>Gets the character set that selects the second ordinal suffix in membership mode.</summary>
     public string? SecondOrdinalSuffixCharacters { get; } = secondOrdinalSuffixCharacters;
     /// <summary>Gets the pair of ordinal suffixes used by membership-based suffix selection.</summary>

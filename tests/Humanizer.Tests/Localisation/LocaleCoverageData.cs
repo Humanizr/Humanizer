@@ -13,6 +13,8 @@ static class LocaleCoverageData
     // Representative non-first-of-month date sample.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
+        { "kk", new(2022, 1, 25, "25 қаңтар 2022") },
+
         { "si", new(2022, 1, 25, "25 දුරුතු 2022") },
 
         { "kn", new(2022, 1, 25, "25 ಜನವರಿ 2022") },
@@ -105,6 +107,8 @@ static class LocaleCoverageData
     // First-of-month sample where many locales change the day form.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
+        { "kk", new(2015, 1, 1, "1 қаңтар 2015") },
+
         { "si", new(2015, 1, 1, "1 දුරුතු 2015") },
 
         { "kn", new(2015, 1, 1, "1 ಜನವರಿ 2015") },
@@ -197,6 +201,8 @@ static class LocaleCoverageData
     // Early-month sample used to catch plain numeric-day formatting.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
+        { "kk", new(2015, 2, 3, "3 ақпан 2015") },
+
         { "si", new(2015, 2, 3, "3 නවම් 2015") },
 
         { "kn", new(2015, 2, 3, "3 ಫೆಬ್ರವರಿ 2015") },
@@ -377,6 +383,8 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
+        { "kk", new(13, 23, "он үш сағат жиырма үш минут") },
+
         { "si", new(13, 23, "දවල් එකයි විසි තුන") },
 
         { "kn", new(13, 23, "ಮಧ್ಯಾಹ್ನ ಒಂದು ಗಂಟೆ ಇಪ್ಪತ್ತಮೂರು ನಿಮಿಷಗಳು") },
@@ -469,6 +477,8 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
+        { "kk", new(13, 23, "он үш сағат жиырма бес минут") },
+
         { "si", new(13, 23, "දවල් එකයි විසි පහ") },
 
         { "kn", new(13, 23, "ಮಧ್ಯಾಹ್ನ ಒಂದು ಗಂಟೆ ಇಪ್ಪತ್ತೈದು ನಿಮಿಷಗಳು") },
@@ -561,6 +571,8 @@ static class LocaleCoverageData
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
+        { "kk", new(1, 5, "бір сағат бес минут") },
+
         { "si", new(1, 5, "රාත්‍රී එකයි පහ") },
 
         { "kn", new(1, 5, "ಬೆಳಿಗ್ಗೆ ಒಂದು ಗಂಟೆ ಐದು ನಿಮಿಷಗಳು") },
@@ -985,6 +997,8 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> FormatterExpectationTheoryData =>
         new()
         {
+            { "kk", "кеше", "2 күн" },
+
             { "si", "ඊයේ", "2 දින" },
 
             { "kn", "ನಿನ್ನೆ", "2 ದಿನಗಳು" },
@@ -1077,6 +1091,8 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
         new()
         {
+            { "kk", "1 және 2", "1, 2 және 3" },
+
             { "si", "1 සහ 2", "1, 2 සහ 3" },
 
             { "kn", "1 ಮತ್ತು 2", "1, 2 ಮತ್ತು 3" },
@@ -1169,6 +1185,8 @@ static class LocaleCoverageData
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
         new()
         {
+            { "kk", 1, "бірінші" },
+
             { "si", 1, "පළමු" },
 
             { "kn", 1, "ಒಂದನೇ" },
@@ -1261,6 +1279,8 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
         new()
         {
+            { "kk", 1, "бір" },
+
             { "si", 1, "එක" },
 
             { "kn", 1, "ಒಂದು" },
@@ -1389,6 +1409,8 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> WordsToNumberExpectationTheoryData =>
         new()
         {
+            { "kk", 21, "жиырма бір" },
+
             { "si", 21, "විසි එක" },
 
             { "kn", 21, "ಇಪ್ಪತ್ತೊಂದು" },

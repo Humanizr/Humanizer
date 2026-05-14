@@ -2657,6 +2657,7 @@ public class CoverageGapTests
             softenTerminalTBeforeSuffix: true,
             dropTerminalVowelBeforeHarmonySuffix: true,
             includeOrdinalSuffixes ? ordinalSuffixes ?? new Dictionary<char, string> { ['e'] = "th" }.ToFrozenDictionary() : null,
+            terminalVowelOrdinalSuffixes: null,
             secondOrdinalSuffixCharacters,
             ordinalSuffixPair ?? ["a", "b"],
             new Dictionary<char, string> { ['e'] = "tuple" }.ToFrozenDictionary());
