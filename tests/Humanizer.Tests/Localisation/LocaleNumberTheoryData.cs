@@ -8474,5 +8474,6 @@ static class LocaleNumberTheoryData
         { "ky", "бир миллионунчу", 1000000L },
         { "gl", "vinte e un", 21 },
         { "gl", "vixésimo primeiro", 21 },
+        { "gl", "un trillón", 1000000000000000000L },
     };
 }

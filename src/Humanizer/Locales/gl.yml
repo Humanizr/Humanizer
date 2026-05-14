@@ -530,6 +530,10 @@ surfaces:
         billon: 1000000000000
         billóns: 1000000000000
         billons: 1000000000000
+        trillón: 1000000000000000000
+        trillon: 1000000000000000000
+        trillóns: 1000000000000000000
+        trillons: 1000000000000000000
       ordinalNumberToWordsKind: 'self'
       ordinalGenderVariant: 'masculine-and-feminine'
       negativePrefixes:

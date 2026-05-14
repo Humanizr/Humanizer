@@ -36,6 +36,7 @@ public class GalicianLocaleParityTests
     [InlineData("menos cento vinte e tres", -123)]
     [InlineData("primeiro", 1)]
     [InlineData("vixésimo primeiro", 21)]
+    [InlineData("un trillón", 1_000_000_000_000_000_000L)]
     public void WordsToNumber_ParsesGalicianCardinalsAndOrdinals(string words, long expected) =>
         Assert.Equal(expected, words.ToNumber(new CultureInfo("gl")));
 
