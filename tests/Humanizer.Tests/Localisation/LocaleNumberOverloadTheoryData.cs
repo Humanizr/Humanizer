@@ -5,6 +5,9 @@ public static class LocaleNumberOverloadTheoryData
     public static TheoryData<string, long, string> AddAndCases => new()
     {
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "mk", 1001001L, "еден милион илјада и еден" },
+        { "mk", 1001000001L, "една милијарда еден милион и еден" },
+        { "mk", 4325010007018L, "четири трилиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
 
         { "kk", 1001001L, "бір миллион бір мың бір" },
 
@@ -247,6 +250,9 @@ public static class LocaleNumberOverloadTheoryData
     public static TheoryData<string, long, string> WordFormCases => new()
     {
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "mk", 1001001L, "еден милион илјада и еден" },
+        { "mk", 1001000001L, "една милијарда еден милион и еден" },
+        { "mk", 4325010007018L, "четири трилиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
 
         { "kk", 1001001L, "бір миллион бір мың бір" },
 
@@ -488,6 +494,9 @@ public static class LocaleNumberOverloadTheoryData
     public static TheoryData<string, long, string> GenderCases => new()
     {
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "mk", 1001001L, "еден милион илјада и една" },
+        { "mk", 1001000001L, "една милијарда еден милион и една" },
+        { "mk", 4325010007018L, "четири трилиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
 
         { "kk", 1001001L, "бір миллион бір мың бір" },
 
@@ -729,6 +738,9 @@ public static class LocaleNumberOverloadTheoryData
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "mk", 1001001L, "еден милион илјада и една" },
+        { "mk", 1001000001L, "една милијарда еден милион и една" },
+        { "mk", 4325010007018L, "четири трилиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
 
         { "kk", 1001001L, "бір миллион бір мың бір" },
 

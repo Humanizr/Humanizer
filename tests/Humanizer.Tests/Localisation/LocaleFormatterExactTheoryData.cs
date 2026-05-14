@@ -183,6 +183,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, DateDayPluralExpectationRow> DateDayPluralCases => new()
     {
             { "sq", new("2 ditë më parë", "3 ditë më parë", "4 ditë më parë", "5 ditë më parë", "11 ditë më parë", "21 ditë më parë", "pas 2 ditësh", "pas 3 ditësh", "pas 4 ditësh", "pas 5 ditësh", "pas 11 ditësh", "pas 21 ditësh") },
+        { "mk", new("пред 2 дена", "пред 3 дена", "пред 4 дена", "пред 5 дена", "пред 11 дена", "пред 21 дена", "за 2 дена", "за 3 дена", "за 4 дена", "за 5 дена", "за 11 дена", "за 21 дена") },
 
         { "kk", new("2 күн бұрын", "3 күн бұрын", "4 күн бұрын", "5 күн бұрын", "11 күн бұрын", "21 күн бұрын", "2 күннен кейін", "3 күннен кейін", "4 күннен кейін", "5 күннен кейін", "11 күннен кейін", "21 күннен кейін") },
 
@@ -282,6 +283,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
     {
             { "sq", new("2 javë, 1 ditë dhe 1 orë", "1 ditë, 3 minuta dhe 4 sekonda", "1 ditë dhe 3 minuta") },
+        { "mk", new("2 недели, 1 ден и 1 час", "1 ден, 3 минути и 4 секунди", "1 ден и 3 минути") },
 
         { "kk", new("2 апта, 1 күн және 1 сағат", "1 күн, 3 минут және 4 секунд", "1 күн және 3 минут") },
 
@@ -381,6 +383,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
     {
             { "sq", new("ms", "s", "min", "orë", "ditë", "javë", "muaj", "vit") },
+        { "mk", new("мс", "сек.", "мин.", "ч.", "д.", "нед.", "мес.", "г.") },
 
         { "kk", new("мс", "секунд", "минут", "сағат", "күн", "апта", "ай", "жыл") },
 
@@ -501,6 +504,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
     {
             { "sq", new("1 bit", "2 B", "1,95 KB", "2048 KB") },
+        { "mk", new("1 b", "2 B", "1,95 KB", "2048 KB") },
 
         { "kk", new("1 b", "2 B", "1,95 KB", "2048 KB") },
 
@@ -600,6 +604,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
     {
             { "sq", new("1 bit", "1 bajt", "2 bajt", "2 kilobajt", "2 megabajt") },
+        { "mk", new("1 бит", "1 бајт", "2 бајти", "2 килобајти", "2 мегабајти") },
 
         { "kk", new("1 бит", "1 байт", "2 байт", "2 килобайт", "2 мегабайт") },
 
@@ -699,6 +704,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
     {
             { "sq", new("1 dhe 2", "1, 2 dhe 3", "1, 2, 3 dhe 4") },
+        { "mk", new("1 и 2", "1, 2 и 3", "1, 2, 3 и 4") },
 
         { "kk", new("1 және 2", "1, 2 және 3", "1, 2, 3 және 4") },
 
@@ -798,6 +804,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
     {
             { "sq", new("V", "VVL", "VL", "LVL", "L", "LJL", "JL", "JJL", "J", "JJP", "JP", "PJP", "P", "PVP", "VP", "VVP", "veri", "veri-verilindje", "verilindje", "lindje-verilindje", "lindje", "lindje-juglindje", "juglindje", "jug-juglindje", "jug", "jug-jugperëndim", "jugperëndim", "perëndim-jugperëndim", "perëndim", "perëndim-veriperëndim", "veriperëndim", "veri-veriperëndim") },
+        { "mk", new("С", "ССИ", "СИ", "ИСИ", "И", "ИЈИ", "ЈИ", "ЈЈИ", "Ј", "ЈЈЗ", "ЈЗ", "ЗЈЗ", "З", "ЗСЗ", "СЗ", "ССЗ", "север", "север-североисток", "североисток", "исток-североисток", "исток", "исток-југоисток", "југоисток", "југ-југоисток", "југ", "југ-југозапад", "југозапад", "запад-југозапад", "запад", "запад-северозапад", "северозапад", "север-северозапад") },
 
         { "kk", new(
             "С", "ССШ", "СШ", "ШСШ", "Ш", "ШОШ", "ОШ", "ООШ", "О", "ООБ", "ОБ", "БОБ", "Б", "БСБ", "СБ", "ССБ",
@@ -899,6 +906,7 @@ public static class LocaleFormatterExactTheoryData
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
     {
             { "sq", new("V", "L", "J", "P") },
+        { "mk", new("С", "И", "Ј", "З") },
 
         { "kk", new("С", "Ш", "О", "Б") },
 

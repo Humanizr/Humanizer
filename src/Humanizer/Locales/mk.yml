@@ -1,0 +1,491 @@
+locale: 'mk'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'и'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitDetector: 'singular-plural'
+    dataUnitSuffixes:
+      singular: '_Singular'
+      plural: '_Plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+    timeUnitGenders:
+      millisecond: 'feminine'
+      second: 'feminine'
+      minute: 'feminine'
+      hour: 'masculine'
+      day: 'masculine'
+      week: 'feminine'
+      month: 'masculine'
+      year: 'feminine'
+
+  phrases:
+    relativeDate:
+      now: 'сега'
+      never: 'никогаш'
+      past:
+        millisecond:
+          single: 'пред милисекунда'
+          multiple:
+            forms:
+              default: 'милисекунди'
+            beforeCount: 'пред'
+        second:
+          single: 'пред секунда'
+          multiple:
+            forms:
+              default: 'секунди'
+            beforeCount: 'пред'
+        minute:
+          single: 'пред минута'
+          multiple:
+            forms:
+              default: 'минути'
+            beforeCount: 'пред'
+        hour:
+          single: 'пред еден час'
+          multiple:
+            forms:
+              default: 'часа'
+            beforeCount: 'пред'
+        day:
+          single: 'вчера'
+          multiple:
+            forms:
+              default: 'дена'
+            beforeCount: 'пред'
+          template:
+            name: 'two'
+            value: 'пред 2 дена'
+        week:
+          single: 'пред една недела'
+          multiple:
+            forms:
+              default: 'недели'
+            beforeCount: 'пред'
+        month:
+          single: 'пред еден месец'
+          multiple:
+            forms:
+              default: 'месеци'
+              plural: 'месеца'
+            beforeCount: 'пред'
+        year:
+          single: 'пред една година'
+          multiple:
+            forms:
+              default: 'години'
+            beforeCount: 'пред'
+      future:
+        millisecond:
+          single: 'за милисекунда'
+          multiple:
+            forms:
+              default: 'милисекунди'
+            beforeCount: 'за'
+        second:
+          single: 'за секунда'
+          multiple:
+            forms:
+              default: 'секунди'
+            beforeCount: 'за'
+        minute:
+          single: 'за минута'
+          multiple:
+            forms:
+              default: 'минути'
+            beforeCount: 'за'
+        hour:
+          single: 'за еден час'
+          multiple:
+            forms:
+              default: 'часа'
+            beforeCount: 'за'
+        day:
+          single: 'утре'
+          multiple:
+            forms:
+              default: 'дена'
+            beforeCount: 'за'
+          template:
+            name: 'two'
+            value: 'за 2 дена'
+        week:
+          single: 'за една недела'
+          multiple:
+            forms:
+              default: 'недели'
+            beforeCount: 'за'
+        month:
+          single: 'за еден месец'
+          multiple:
+            forms:
+              default: 'месеци'
+              plural: 'месеца'
+            beforeCount: 'за'
+        year:
+          single: 'за една година'
+          multiple:
+            forms:
+              default: 'години'
+            beforeCount: 'за'
+    duration:
+      zero: 'нема време'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 милисекунда'
+          words: 'една милисекунда'
+        multiple:
+          forms:
+            default: 'милисекунди'
+      second:
+        single:
+          numeric: '1 секунда'
+          words: 'една секунда'
+        multiple:
+          forms:
+            default: 'секунди'
+      minute:
+        single:
+          numeric: '1 минута'
+          words: 'една минута'
+        multiple:
+          forms:
+            default: 'минути'
+      hour:
+        single:
+          numeric: '1 час'
+          words: 'еден час'
+        multiple:
+          forms:
+            default: 'часа'
+      day:
+        single:
+          numeric: '1 ден'
+          words: 'еден ден'
+        multiple:
+          forms:
+            default: 'дена'
+      week:
+        single:
+          numeric: '1 недела'
+          words: 'една недела'
+        multiple:
+          forms:
+            default: 'недели'
+      month:
+        single:
+          numeric: '1 месец'
+          words: 'еден месец'
+        multiple:
+          forms:
+            default: 'месеци'
+            plural: 'месеца'
+      year:
+        single:
+          numeric: '1 година'
+          words: 'една година'
+        multiple:
+          forms:
+            default: 'години'
+    dataUnits:
+      bit:
+        forms:
+          default: 'битови'
+          singular: 'бит'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'бајти'
+          singular: 'бајт'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'килобајти'
+          singular: 'килобајт'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'мегабајти'
+          singular: 'мегабајт'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'гигабајти'
+          singular: 'гигабајт'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'терабајти'
+          singular: 'терабајт'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'мс'
+      second:
+        symbol: 'сек.'
+      minute:
+        symbol: 'мин.'
+      hour:
+        symbol: 'ч.'
+      day:
+        symbol: 'д.'
+      week:
+        symbol: 'нед.'
+      month:
+        symbol: 'мес.'
+      year:
+        symbol: 'г.'
+
+  number:
+    words:
+      engine: 'macedonian'
+      useCulture: true
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseReplacePeriodsWithSpaces'
+      cardinalMap:
+        'нула': 0
+        'еден': 1
+        'една': 1
+        'едно': 1
+        'два': 2
+        'две': 2
+        'три': 3
+        'четири': 4
+        'пет': 5
+        'шест': 6
+        'седум': 7
+        'осум': 8
+        'девет': 9
+        'десет': 10
+        'единаесет': 11
+        'дванаесет': 12
+        'тринаесет': 13
+        'четиринаесет': 14
+        'петнаесет': 15
+        'шеснаесет': 16
+        'седумнаесет': 17
+        'осумнаесет': 18
+        'деветнаесет': 19
+        'дваесет': 20
+        'триесет': 30
+        'четириесет': 40
+        'педесет': 50
+        'шеесет': 60
+        'седумдесет': 70
+        'осумдесет': 80
+        'деведесет': 90
+        'сто': 100
+        'двесте': 200
+        'триста': 300
+        'четиристотини': 400
+        'петстотини': 500
+        'шестотини': 600
+        'седумстотини': 700
+        'осумстотини': 800
+        'деветстотини': 900
+        'илјада': 1000
+        'илјади': 1000
+        'милион': 1000000
+        'милиони': 1000000
+        'милијарда': 1000000000
+        'милијарди': 1000000000
+        'трилион': 1000000000000
+        'трилиони': 1000000000000
+        'квадрилион': 1000000000000000
+        'квадрилиони': 1000000000000000
+        'квинтилион': 1000000000000000000
+        'квинтилиони': 1000000000000000000
+      ordinalMap:
+        'нулти': 0
+        'нулта': 0
+        'нулто': 0
+        'прв': 1
+        'прва': 1
+        'прво': 1
+        'втор': 2
+        'втора': 2
+        'второ': 2
+        'трет': 3
+        'трета': 3
+        'трето': 3
+        'четврти': 4
+        'четврта': 4
+        'четврто': 4
+        'петти': 5
+        'петта': 5
+        'петто': 5
+        'шести': 6
+        'шеста': 6
+        'шесто': 6
+        'седми': 7
+        'седма': 7
+        'седмо': 7
+        'осми': 8
+        'осма': 8
+        'осмо': 8
+        'деветти': 9
+        'деветта': 9
+        'деветто': 9
+        'десетти': 10
+        'десетта': 10
+        'десетто': 10
+        'единаесетти': 11
+        'единаесетта': 11
+        'единаесетто': 11
+        'дванаесетти': 12
+        'дванаесетта': 12
+        'дванаесетто': 12
+        'тринаесетти': 13
+        'тринаесетта': 13
+        'тринаесетто': 13
+        'четиринаесетти': 14
+        'четиринаесетта': 14
+        'четиринаесетто': 14
+        'петнаесетти': 15
+        'петнаесетта': 15
+        'петнаесетто': 15
+        'шеснаесетти': 16
+        'шеснаесетта': 16
+        'шеснаесетто': 16
+        'седумнаесетти': 17
+        'седумнаесетта': 17
+        'седумнаесетто': 17
+        'осумнаесетти': 18
+        'осумнаесетта': 18
+        'осумнаесетто': 18
+        'деветнаесетти': 19
+        'деветнаесетта': 19
+        'деветнаесетто': 19
+        'дваесетти': 20
+        'дваесетта': 20
+        'дваесетто': 20
+        'триесетти': 30
+        'триесетта': 30
+        'триесетто': 30
+        'четириесетти': 40
+        'четириесетта': 40
+        'четириесетто': 40
+        'педесетти': 50
+        'педесетта': 50
+        'педесетто': 50
+        'шеесетти': 60
+        'шеесетта': 60
+        'шеесетто': 60
+        'седумдесетти': 70
+        'седумдесетта': 70
+        'седумдесетто': 70
+        'осумдесетти': 80
+        'осумдесетта': 80
+        'осумдесетто': 80
+        'деведесетти': 90
+        'деведесетта': 90
+        'деведесетто': 90
+      ordinalScaleMap:
+        'стоти': 100
+        'стота': 100
+        'стото': 100
+        'илјадити': 1000
+        'илјадита': 1000
+        'илјадито': 1000
+        'милионити': 1000000
+        'милионита': 1000000
+        'милионито': 1000000
+        'милијардити': 1000000000
+        'милијардита': 1000000000
+        'милијардито': 1000000000
+        'трилионити': 1000000000000
+        'трилионита': 1000000000000
+        'трилионито': 1000000000000
+      allowTerminalOrdinalToken: true
+      allowInvariantIntegerInput: true
+      negativePrefixes:
+        - 'минус '
+      ignoredTokens:
+        - 'и'
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+      feminineSuffix: '.'
+      neuterSuffix: '.'
+    date:
+      engine: 'pattern'
+      pattern: "{day} MMMM yyyy 'г.'"
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: "{day} MMMM yyyy 'г.'"
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'masculine'
+    minuteGender: 'feminine'
+    midnight: 'полноќ'
+    midday: 'пладне'
+    hourSuffixSingular: 'часот'
+    hourSuffixPlural: 'часот'
+    minuteSuffixSingular: 'минута'
+    minuteSuffixPlural: 'минути'
+    min0: '{hour}'
+    defaultTemplate: '{hour} и {minutes} {minuteSuffix}'
+
+  compass:
+    full:
+      - 'север'
+      - 'север-североисток'
+      - 'североисток'
+      - 'исток-североисток'
+      - 'исток'
+      - 'исток-југоисток'
+      - 'југоисток'
+      - 'југ-југоисток'
+      - 'југ'
+      - 'југ-југозапад'
+      - 'југозапад'
+      - 'запад-југозапад'
+      - 'запад'
+      - 'запад-северозапад'
+      - 'северозапад'
+      - 'север-северозапад'
+    short:
+      - 'С'
+      - 'ССИ'
+      - 'СИ'
+      - 'ИСИ'
+      - 'И'
+      - 'ИЈИ'
+      - 'ЈИ'
+      - 'ЈЈИ'
+      - 'Ј'
+      - 'ЈЈЗ'
+      - 'ЈЗ'
+      - 'ЗЈЗ'
+      - 'З'
+      - 'ЗСЗ'
+      - 'СЗ'
+      - 'ССЗ'
+
+  calendar:
+    months:
+      - 'јануари'
+      - 'февруари'
+      - 'март'
+      - 'април'
+      - 'мај'
+      - 'јуни'
+      - 'јули'
+      - 'август'
+      - 'септември'
+      - 'октомври'
+      - 'ноември'
+      - 'декември'

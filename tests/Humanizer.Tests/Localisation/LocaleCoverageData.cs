@@ -14,6 +14,7 @@ static class LocaleCoverageData
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
         { "sq", new(2022, 1, 25, "25 janar 2022") },
+        { "mk", new(2022, 1, 25, "25 јануари 2022 г.") },
 
         { "kk", new(2022, 1, 25, "25 қаңтар 2022") },
         { "ka", new(2022, 1, 25, "25 იანვარი 2022") },
@@ -113,6 +114,7 @@ static class LocaleCoverageData
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
         { "sq", new(2015, 1, 1, "1 janar 2015") },
+        { "mk", new(2015, 1, 1, "1 јануари 2015 г.") },
 
         { "kk", new(2015, 1, 1, "1 қаңтар 2015") },
         { "ka", new(2015, 1, 1, "1 იანვარი 2015") },
@@ -212,6 +214,7 @@ static class LocaleCoverageData
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
         { "sq", new(2015, 2, 3, "3 shkurt 2015") },
+        { "mk", new(2015, 2, 3, "3 февруари 2015 г.") },
 
         { "kk", new(2015, 2, 3, "3 ақпан 2015") },
         { "ka", new(2015, 2, 3, "3 თებერვალი 2015") },
@@ -435,6 +438,7 @@ static class LocaleCoverageData
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
         { "sq", new(13, 23, "ora një e njëzet e tre pasdite") },
+        { "mk", new(13, 23, "тринаесет часот и дваесет и три минути") },
 
         { "kk", new(13, 23, "он үш сағат жиырма үш минут") },
         { "ka", new(13, 23, "13 საათი 23 წუთი") },
@@ -534,6 +538,7 @@ static class LocaleCoverageData
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
         { "sq", new(13, 23, "ora një e njëzet e pesë pasdite") },
+        { "mk", new(13, 23, "тринаесет часот и дваесет и пет минути") },
 
         { "kk", new(13, 23, "он үш сағат жиырма бес минут") },
         { "ka", new(13, 23, "13 საათი 25 წუთი") },
@@ -633,6 +638,7 @@ static class LocaleCoverageData
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
         { "sq", new(1, 5, "ora një e pesë herët në mëngjes") },
+        { "mk", new(1, 5, "еден часот и пет минути") },
 
         { "kk", new(1, 5, "бір сағат бес минут") },
         { "ka", new(1, 5, "1 საათი 5 წუთი") },
@@ -1073,6 +1079,7 @@ static class LocaleCoverageData
         new()
         {
             { "sq", "dje", "2 ditë" },
+        { "mk", "вчера", "2 дена" },
 
             { "kk", "кеше", "2 күн" },
 
@@ -1172,6 +1179,7 @@ static class LocaleCoverageData
         new()
         {
             { "sq", "1 dhe 2", "1, 2 dhe 3" },
+        { "mk", "1 и 2", "1, 2 и 3" },
 
             { "kk", "1 және 2", "1, 2 және 3" },
 
@@ -1271,6 +1279,7 @@ static class LocaleCoverageData
         new()
         {
             { "sq", 1, "e parë" },
+        { "mk", 21, "дваесет и прва" },
 
             { "kk", 1, "бірінші" },
 
@@ -1370,6 +1379,7 @@ static class LocaleCoverageData
         new()
         {
             { "sq", 1, "një" },
+        { "mk", 21L, "дваесет и еден" },
 
             { "kk", 1, "бір" },
 
@@ -1505,6 +1515,7 @@ static class LocaleCoverageData
         new()
         {
             { "sq", 21, "njëzet e një" },
+        { "mk", 21, "дваесет и еден" },
 
             { "kk", 21, "жиырма бір" },
 
