@@ -227,6 +227,7 @@ public static class LocaleNumberOverloadTheoryData
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
         { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
         { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
+        { "lo", 4325010007018L, "ສີ່ ລ້ານລ້ານ ສາມ ຮ້ອຍ ຊາວຫ້າ ຕື້ ສິບ ລ້ານ ເຈັດ ພັນ ສິບແປດ" },
 };
 
     public static TheoryData<string, long, string> WordFormCases => new()
@@ -453,6 +454,7 @@ public static class LocaleNumberOverloadTheoryData
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
         { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
         { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
+        { "lo", 4325010007018L, "ສີ່ ລ້ານລ້ານ ສາມ ຮ້ອຍ ຊາວຫ້າ ຕື້ ສິບ ລ້ານ ເຈັດ ພັນ ສິບແປດ" },
 };
 
     public static TheoryData<string, long, string> GenderCases => new()
@@ -679,6 +681,7 @@ public static class LocaleNumberOverloadTheoryData
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
         { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
         { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
+        { "lo", 4325010007018L, "ສີ່ ລ້ານລ້ານ ສາມ ຮ້ອຍ ຊາວຫ້າ ຕື້ ສິບ ລ້ານ ເຈັດ ພັນ ສິບແປດ" },
 };
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
@@ -905,6 +908,7 @@ public static class LocaleNumberOverloadTheoryData
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
         { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
         { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
+        { "lo", 4325010007018L, "ສີ່ ລ້ານລ້ານ ສາມ ຮ້ອຍ ຊາວຫ້າ ຕື້ ສິບ ລ້ານ ເຈັດ ພັນ ສິບແປດ" },
 };
 
 }
