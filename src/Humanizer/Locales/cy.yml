@@ -223,6 +223,8 @@ surfaces:
       negativeJoiner: ' '
       partJoiner: ' '
       terminalRemainderJoiner: 'a'
+      terminalRemainderAlternateJoiner: 'ac'
+      terminalRemainderAlternateJoinerInitials: 'aeiouwyh'
       terminalRemainderThreshold: 100
       ordinalSuffix: 'fed'
       words:
@@ -1073,6 +1075,7 @@ surfaces:
     parse:
       engine: 'linked-vigesimal'
       terminalRemainderJoiner: 'a'
+      terminalRemainderAlternateJoiner: 'ac'
       words:
         - 'sero'
         - 'un'
