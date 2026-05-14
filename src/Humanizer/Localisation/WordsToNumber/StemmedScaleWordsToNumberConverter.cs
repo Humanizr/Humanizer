@@ -7,6 +7,7 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
 {
     readonly StemmedScaleWordsToNumberProfile profile = profile;
     readonly FrozenDictionary<string, long> tokenValues = BuildTokenValues(profile);
+    readonly TokenizedStemmedScaleWord[] tokenizedValues = Tokenize(BuildTokenValues(profile));
 
     /// <inheritdoc />
     public override long Convert(string words)
@@ -52,13 +53,21 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
             return true;
         }
 
-        long total = 0;
-        foreach (var token in source.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        if (tokenValues.TryGetValue(source, out var exactValue))
         {
-            if (!tokenValues.TryGetValue(token, out var value))
+            parsedValue = negative ? -exactValue : exactValue;
+            unrecognizedWord = null;
+            return true;
+        }
+
+        long total = 0;
+        var sourceTokens = SplitWords(source);
+        for (var index = 0; index < sourceTokens.Length;)
+        {
+            if (!TryMatchToken(sourceTokens, index, out var value, out var consumed))
             {
                 parsedValue = default;
-                unrecognizedWord = token;
+                unrecognizedWord = sourceTokens[index];
                 return false;
             }
 
@@ -72,6 +81,8 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
                 unrecognizedWord = source;
                 return false;
             }
+
+            index += consumed;
         }
 
         parsedValue = negative ? -total : total;
@@ -139,6 +150,49 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
         return values.ToFrozenDictionary(StringComparer.Ordinal);
     }
 
+    static TokenizedStemmedScaleWord[] Tokenize(FrozenDictionary<string, long> values) =>
+        values
+            .Select(static pair => new TokenizedStemmedScaleWord(
+                SplitWords(pair.Key),
+                pair.Value))
+            .OrderByDescending(static pair => pair.Tokens.Length)
+            .ThenByDescending(static pair => pair.Tokens.Sum(static token => token.Length))
+            .ToArray();
+
+    bool TryMatchToken(string[] sourceTokens, int index, out long value, out int consumed)
+    {
+        foreach (var candidate in tokenizedValues)
+        {
+            if (index + candidate.Tokens.Length > sourceTokens.Length)
+            {
+                continue;
+            }
+
+            var matched = true;
+            for (var offset = 0; offset < candidate.Tokens.Length; offset++)
+            {
+                if (!string.Equals(sourceTokens[index + offset], candidate.Tokens[offset], StringComparison.Ordinal))
+                {
+                    matched = false;
+                    break;
+                }
+            }
+
+            if (!matched)
+            {
+                continue;
+            }
+
+            value = candidate.Value;
+            consumed = candidate.Tokens.Length;
+            return true;
+        }
+
+        value = default;
+        consumed = default;
+        return false;
+    }
+
     static void Add(Dictionary<string, long> values, string key, long value)
     {
         if (!string.IsNullOrWhiteSpace(key))
@@ -146,7 +200,16 @@ internal class StemmedScaleWordsToNumberConverter(StemmedScaleWordsToNumberProfi
             values[key] = value;
         }
     }
+
+    static string[] SplitWords(string value) =>
+        value
+            .Split([' '], StringSplitOptions.RemoveEmptyEntries)
+            .Select(static token => token.Trim())
+            .Where(static token => token.Length != 0)
+            .ToArray();
 }
+
+readonly record struct TokenizedStemmedScaleWord(string[] Tokens, long Value);
 
 /// <summary>
 /// Generated data for <see cref="StemmedScaleWordsToNumberConverter"/>.
