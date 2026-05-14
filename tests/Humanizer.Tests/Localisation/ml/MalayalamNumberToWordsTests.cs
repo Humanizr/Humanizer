@@ -80,6 +80,8 @@ public class MalayalamNumberToWordsTests
     [InlineData("ആയിരത്താം", 1000)]
     [InlineData("ഒരു ലക്ഷത്താം", 100000)]
     [InlineData("ഒരു കോടിയാം", 10000000)]
+    [InlineData("രണ്ട് ആയിരം കോടിയാം", 20_000_000_000)]
+    [InlineData("രണ്ട് ലക്ഷം കോടിയാം", 2_000_000_000_000)]
     [InlineData("മൈനസ് അഞ്ചാം", -5)]
     public void WordsToNumber_ParsesMalayalamOrdinals(string words, long expected)
     {
