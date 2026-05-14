@@ -4,11 +4,13 @@ Humanizer supports many languages and cultures across number, date, time, ordina
 
 Most consumers only need to set a culture. Contributors now author locale-specific generated behavior in one YAML file per locale, and shared runtime kernels are used whenever the behavior is structurally reusable.
 
-## Supported Languages
+## Supported Locales
 
-Humanizer includes localization for:
+Humanizer includes generated locale data for 73 checked-in locale files:
 
-Afrikaans (af), Arabic (ar), Azerbaijani (az), Bengali (bn), Bulgarian (bg), Catalan (ca), Chinese (zh-CN, zh-Hans, zh-Hant), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en, en-GB, en-IN, en-US), Finnish (fi), Filipino (fil), French (fr, fr-BE, fr-CH), German (de, de-CH, de-LI), Greek (el), Hebrew (he), Hungarian (hu), Armenian (hy), Icelandic (is), Indonesian (id), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Lithuanian (lt), Luxembourgish (lb), Malay (ms), Marathi (mr), Maltese (mt), Norwegian Bokmal (nb), Norwegian Nynorsk (nn), Persian (fa), Polish (pl), Portuguese (pt, pt-BR), Romanian (ro), Russian (ru), Serbian (sr, sr-Latn), Slovak (sk), Slovenian (sl), Spanish (es), Swedish (sv), Tamil (ta), Thai (th), Turkish (tr), Ukrainian (uk), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Zulu (zu-ZA).
+Afrikaans (af), Amharic (am), Arabic (ar), Azerbaijani (az), Bengali (bn), Bulgarian (bg), Catalan (ca), Chinese (zh-CN, zh-Hans, zh-Hant), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en, en-GB, en-IN, en-US), Finnish (fi), Filipino (fil), French (fr, fr-BE, fr-CH), German (de, de-CH, de-LI), Greek (el), Hausa (ha), Hebrew (he), Hindi (hi), Hungarian (hu), Armenian (hy), Icelandic (is), Indonesian (id), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Lithuanian (lt), Luxembourgish (lb), Malay (ms), Marathi (mr), Maltese (mt), Norwegian Bokmål (nb), Norwegian Nynorsk (nn), Persian (fa), Polish (pl), Portuguese (pt, pt-BR), Punjabi (pa, pa-Arab), Romanian (ro), Russian (ru), Serbian (sr, sr-Latn), Slovak (sk), Slovenian (sl), Spanish (es), Swahili (sw), Swedish (sv), Tamil (ta), Telugu (te), Thai (th), Turkish (tr), Ukrainian (uk), Urdu (ur, ur-IN, ur-PK), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Zulu (zu-ZA).
+
+The supported set above reflects checked-in locale files. Locale files under active, unmerged batch work are not listed as supported until they merge.
 
 ## Installing Humanizer
 
@@ -68,7 +70,7 @@ Principles:
 2. Locale inheritance is declared in that same file with `variantOf`.
 3. Top-level properties are exactly `locale`, `variantOf`, and `surfaces`.
 4. Canonical authoring surfaces under `surfaces` are exactly `list`, `formatter`, `phrases`, `number`, `ordinal`, `clock`, `compass`, and `calendar`.
-5. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, and `calendar.monthsGenitive`.
+5. Canonical nested members are `number.words`, `number.parse`, `number.formatting`, `ordinal.numeric`, `ordinal.date`, `ordinal.dateOnly`, `calendar.months`, `calendar.monthsGenitive`, and `calendar.hijriMonths`.
 6. Omit a `surfaces.<surface>` block to inherit it unchanged from the parent locale.
 7. Inside a mapped surface, omit unchanged fields to inherit them from the parent mapping.
 8. Child sequences replace parent sequences.
@@ -149,10 +151,13 @@ Good structural names:
 - `ConjunctionalScaleNumberToWordsConverter`
 - `VariantDecadeNumberToWordsConverter`
 - `UnitLeadingCompoundNumberToWordsConverter`
+- `ScaleLeadingCompoundNumberToWordsConverter`
+- `IndianScaleFormNumberToWordsConverter`
+- `IndianGroupingGenderedNumberToWordsConverter`
 - `ContractedScaleWordsToNumberConverter`
 - `ProfiledFormatter`
 
-Residual locale names are acceptable only when the behavior is still genuinely locale-specific and forcing it into a shared schema would create imperative hooks or exception-bucket metadata. As of the locale parity completion, no residual leaves remain for any surface.
+Residual locale names are acceptable only when the behavior is still genuinely locale-specific and forcing it into a shared schema would create imperative hooks or exception-bucket metadata. In the current checked-in locale set, no residual leaves remain for any surface.
 
 ## Adding Or Updating A Locale
 
