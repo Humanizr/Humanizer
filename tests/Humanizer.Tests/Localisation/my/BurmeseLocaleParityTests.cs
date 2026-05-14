@@ -156,6 +156,7 @@ public class BurmeseLocaleParityTests
     [InlineData("နှစ်ဆယ့်တစ်မြောက်", 21)]
     [InlineData("21မြောက်", 21)]
     [InlineData("21 မြောက်", 21)]
+    [InlineData("21	မြောက်", 21)]
     [InlineData("-1မြောက်", -1)]
     [InlineData("-1 မြောက်", -1)]
     public void WordsToNumber_ParsesBurmeseCardinalsAndOrdinals(string words, long expected)

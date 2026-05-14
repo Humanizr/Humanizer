@@ -368,7 +368,7 @@ surfaces:
         10: 'ဒသမ'
     parse:
       engine: 'token-map'
-      normalizationProfile: 'CollapseWhitespace'
+      normalizationProfile: 'LowercaseRemovePeriods'
       ordinalAbbreviationSuffixes:
         - 'မြောက်'
         - ' မြောက်'
