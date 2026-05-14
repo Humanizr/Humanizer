@@ -400,6 +400,17 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return TryAddScaledMagnitude(total, combinedCount, scaleValue, maxMagnitude, out value);
         }
 
+        if (current == 0 && total > 0 && total < scaleValue)
+        {
+            if (!TryAddMagnitude(total, count, maxMagnitude, out var combinedCount))
+            {
+                value = default;
+                return false;
+            }
+
+            return TryAddScaledMagnitude(0, combinedCount, scaleValue, maxMagnitude, out value);
+        }
+
         if (current != 0)
         {
             if (TryAddMagnitude(total, current, maxMagnitude, out var withCurrent) &&
