@@ -302,6 +302,8 @@ Supported engines in current checked-in YAML:
 - `hyphenated-scale`
 - `hyphenated-ordinal`
 - `indian-grouping`
+- `indian-grouping-gendered`
+- `indian-scale-forms`
 - `inverted-tens`
 - `joined-scale`
 - `linking-scale`
@@ -309,6 +311,7 @@ Supported engines in current checked-in YAML:
 - `dual-form-scale`
 - `ordinal-prefix-scale`
 - `pluralized-scale`
+- `scale-leading-compound`
 - `scale-strategy`
 - `segmented-scale`
 - `south-slavic-cardinal`
@@ -336,6 +339,7 @@ Supported engines in current checked-in YAML:
 - `greedy-compound`
 - `inverted-tens`
 - `linking-affix`
+- `scale-leading-compound`
 - `prefixed-tens-scale`
 - `suffix-scale`
 - `token-map`
