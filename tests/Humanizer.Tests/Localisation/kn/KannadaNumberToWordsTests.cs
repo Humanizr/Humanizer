@@ -24,9 +24,9 @@ public class KannadaNumberToWordsTests
     [InlineData(10000000, "ಒಂದು ಕೋಟಿ")]
     [InlineData(20000000, "ಎರಡು ಕೋಟಿ")]
     [InlineData(20000001, "ಎರಡು ಕೋಟಿಯ ಒಂದು")]
-    [InlineData(12345678, "ಒಂದು ಕೋಟಿಯ ಇಪ್ಪತ್ತಮೂರು ಲಕ್ಷದ ನಲವತ್ತೈದು ಸಾವಿರದ ಆರುನೂರ ಎಪ್ಪತ್ತೆಂಟು")]
-    [InlineData(1001000001, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು")]
-    [InlineData(4325010007018, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು")]
+    [InlineData(12_345_678, "ಒಂದು ಕೋಟಿಯ ಇಪ್ಪತ್ತಮೂರು ಲಕ್ಷದ ನಲವತ್ತೈದು ಸಾವಿರದ ಆರುನೂರ ಎಪ್ಪತ್ತೆಂಟು")]
+    [InlineData(1_001_000_001, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು")]
+    [InlineData(4_325_010_007_018, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು")]
     public void NumberToWords_ProducesExpectedKannadaOutput(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Kn));
@@ -61,9 +61,9 @@ public class KannadaNumberToWordsTests
     [InlineData(2001, "ಎರಡು ಸಾವಿರದ ಒಂದು")]
     [InlineData(200001, "ಎರಡು ಲಕ್ಷದ ಒಂದು")]
     [InlineData(20000001, "ಎರಡು ಕೋಟಿಯ ಒಂದು")]
-    [InlineData(12345678, "ಒಂದು ಕೋಟಿಯ ಇಪ್ಪತ್ತಮೂರು ಲಕ್ಷದ ನಲವತ್ತೈದು ಸಾವಿರದ ಆರುನೂರ ಎಪ್ಪತ್ತೆಂಟು")]
-    [InlineData(1001000001, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು")]
-    [InlineData(4325010007018, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು")]
+    [InlineData(12_345_678, "ಒಂದು ಕೋಟಿಯ ಇಪ್ಪತ್ತಮೂರು ಲಕ್ಷದ ನಲವತ್ತೈದು ಸಾವಿರದ ಆರುನೂರ ಎಪ್ಪತ್ತೆಂಟು")]
+    [InlineData(1_001_000_001, "ಒಂದು ಅರಬ್ ಹತ್ತು ಲಕ್ಷದ ಒಂದು")]
+    [InlineData(4_325_010_007_018, "ನಲವತ್ತಮೂರು ಖರಬ್ ಇಪ್ಪತ್ತೈದು ಅರಬ್ ಒಂದು ಕೋಟಿಯ ಏಳು ಸಾವಿರದ ಹದಿನೆಂಟು")]
     public void WordsToNumber_RoundTripsKannadaCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Kn));
