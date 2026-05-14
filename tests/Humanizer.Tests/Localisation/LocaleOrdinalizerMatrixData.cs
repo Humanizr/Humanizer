@@ -7,6 +7,10 @@ static class LocaleOrdinalizerMatrixData
         {
             { "ne", 1, "पहिलो" },
             { "ne", 21, "एक्काइसौँ" },
+            { "my", 0, "0ခုမြောက်" },
+            { "my", 1, "1ခုမြောက်" },
+            { "my", 2, "2ခုမြောက်" },
+            { "my", 23, "23ခုမြောက်" },
 
             { "am", 0, "0ኛ" },
             { "am", 1, "1ኛ" },
@@ -644,6 +648,9 @@ static class LocaleOrdinalizerMatrixData
             { "ne", 1, GrammaticalGender.Masculine, "पहिलो" },
             { "ne", 1, GrammaticalGender.Feminine, "पहिली" },
             { "ne", 1, GrammaticalGender.Neuter, "पहिलो" },
+            { "my", 1, GrammaticalGender.Feminine, "1ခုမြောက်" },
+            { "my", 1, GrammaticalGender.Masculine, "1ခုမြောက်" },
+            { "my", 1, GrammaticalGender.Neuter, "1ခုမြောက်" },
 
             { "am", 1, GrammaticalGender.Masculine, "1ኛ" },
             { "am", 1, GrammaticalGender.Feminine, "1ኛ" },
@@ -3403,6 +3410,8 @@ static class LocaleOrdinalizerMatrixData
         new()
         {
             { "ne", "1", "पहिलो" },
+            { "my", "1", "1ခုမြောက်" },
+            { "my", "21", "21ခုမြောက်" },
 
             { "am", "1", "1ኛ" },
             { "am", "21", "21ኛ" },
@@ -4028,6 +4037,7 @@ static class LocaleOrdinalizerMatrixData
         new()
         {
             { "ne", -1, "माइनस पहिलो" },
+            { "my", -1, "-1ခုမြောက်" },
 
             { "am", -1, "-1ኛ" },
         { "te", -1, "-1వ" },
@@ -4380,6 +4390,8 @@ static class LocaleOrdinalizerMatrixData
         new()
         {
             { "ne", 21, WordForm.Abbreviation, "एक्काइसौँ" },
+            { "my", 1, WordForm.Abbreviation, "1ခုမြောက်" },
+            { "my", 1, WordForm.Normal, "1ခုမြောက်" },
 
             { "am", 1, WordForm.Normal, "1ኛ" },
         { "te", 1, WordForm.Abbreviation, "1వ" },
@@ -4932,6 +4944,9 @@ static class LocaleOrdinalizerMatrixData
             { "ne", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "एक्काइसौँ" },
             { "ne", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "एक्काइसौँ" },
             { "ne", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "एक्काइसौँ" },
+            { "my", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1ခုမြောက်" },
+            { "my", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1ခုမြောက်" },
+            { "my", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1ခုမြောက်" },
 
             { "am", 1, GrammaticalGender.Masculine, WordForm.Normal, "1ኛ" },
             { "am", 1, GrammaticalGender.Feminine, WordForm.Normal, "1ኛ" },
@@ -6514,6 +6529,9 @@ static class LocaleOrdinalizerMatrixData
             { "ne", "21", GrammaticalGender.Masculine, "एक्काइसौँ" },
             { "ne", "21", GrammaticalGender.Feminine, "एक्काइसौँ" },
             { "ne", "21", GrammaticalGender.Neuter, "एक्काइसौँ" },
+            { "my", "1", GrammaticalGender.Feminine, "1ခုမြောက်" },
+            { "my", "1", GrammaticalGender.Masculine, "1ခုမြောက်" },
+            { "my", "1", GrammaticalGender.Neuter, "1ခုမြောက်" },
 
             { "am", "1", GrammaticalGender.Masculine, "1ኛ" },
             { "am", "1", GrammaticalGender.Feminine, "1ኛ" },
@@ -9089,6 +9107,9 @@ static class LocaleOrdinalizerMatrixData
             { "ne", 21, GrammaticalGender.Masculine, "एक्काइसौँ" },
             { "ne", 21, GrammaticalGender.Feminine, "एक्काइसौँ" },
             { "ne", 21, GrammaticalGender.Neuter, "एक्काइसौँ" },
+            { "my", 1, GrammaticalGender.Feminine, "1ခုမြောက်" },
+            { "my", 1, GrammaticalGender.Masculine, "1ခုမြောက်" },
+            { "my", 1, GrammaticalGender.Neuter, "1ခုမြောက်" },
 
             { "am", 1, GrammaticalGender.Masculine, "1ኛ" },
             { "am", 1, GrammaticalGender.Feminine, "1ኛ" },
