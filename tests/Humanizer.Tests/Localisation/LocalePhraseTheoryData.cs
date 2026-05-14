@@ -1198,6 +1198,21 @@ static class LocalePhraseTheoryData
         { "lo", 2, TimeUnit.Day, Tense.Future, "ໃນອີກ 2 ມື້" },
         { "mn", 1, TimeUnit.Day, Tense.Past, "өчигдөр" },
         { "mn", 2, TimeUnit.Day, Tense.Future, "2 хоногийн дараа" },
+        { "ky", 1, TimeUnit.Second, Tense.Past, "бир секунд мурун" },
+        { "ky", 2, TimeUnit.Second, Tense.Future, "2 секунддан кийин" },
+        { "ky", 1, TimeUnit.Minute, Tense.Past, "бир мүнөт мурун" },
+        { "ky", 2, TimeUnit.Minute, Tense.Future, "2 мүнөттөн кийин" },
+        { "ky", 1, TimeUnit.Hour, Tense.Past, "бир саат мурун" },
+        { "ky", 2, TimeUnit.Hour, Tense.Future, "2 сааттан кийин" },
+        { "ky", 1, TimeUnit.Day, Tense.Past, "кечээ" },
+        { "ky", 1, TimeUnit.Day, Tense.Future, "эртең" },
+        { "ky", 2, TimeUnit.Day, Tense.Past, "2 күн мурун" },
+        { "ky", 2, TimeUnit.Day, Tense.Future, "2 күндөн кийин" },
+        { "ky", 1, TimeUnit.Month, Tense.Past, "бир ай мурун" },
+        { "ky", 2, TimeUnit.Month, Tense.Future, "2 айдан кийин" },
+        { "ky", 1, TimeUnit.Year, Tense.Past, "бир жыл мурун" },
+        { "ky", 2, TimeUnit.Year, Tense.Future, "2 жылдан кийин" },
+        { "ky", 0, TimeUnit.Second, Tense.Future, "азыр" },
 };
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
@@ -1684,6 +1699,7 @@ static class LocalePhraseTheoryData
         { "mr", "कधीच नाही" },
         { "lo", "ບໍ່ເຄີຍ" },
         { "mn", "хэзээ ч үгүй" },
+        { "ky", "эч качан" },
 };
 
     public static TheoryData<string, string, string, string> TimeOnlyDefaultHumanizeCases => new()
@@ -2616,6 +2632,16 @@ static class LocalePhraseTheoryData
         { "lo", 1, TimeUnit.Hour, true, "ໜຶ່ງ ຊົ່ວໂມງ" },
         { "mn", 2, TimeUnit.Day, false, "2 өдөр" },
         { "mn", 1, TimeUnit.Hour, true, "нэг цаг" },
+        { "ky", 1, TimeUnit.Second, false, "1 секунд" },
+        { "ky", 2, TimeUnit.Second, false, "2 секунд" },
+        { "ky", 1, TimeUnit.Minute, false, "1 мүнөт" },
+        { "ky", 2, TimeUnit.Minute, false, "2 мүнөт" },
+        { "ky", 1, TimeUnit.Hour, false, "1 саат" },
+        { "ky", 2, TimeUnit.Hour, false, "2 саат" },
+        { "ky", 1, TimeUnit.Day, false, "1 күн" },
+        { "ky", 2, TimeUnit.Day, false, "2 күн" },
+        { "ky", 0, TimeUnit.Millisecond, false, "0 миллисекунд" },
+        { "ky", 0, TimeUnit.Millisecond, true, "убакыт айырмасы жок" },
 };
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()
