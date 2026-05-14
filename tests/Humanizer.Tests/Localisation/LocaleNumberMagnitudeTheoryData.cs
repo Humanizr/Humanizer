@@ -157,6 +157,7 @@ public static class LocaleNumberMagnitudeTheoryData
         { "zu-ZA", 1000001L, "kanye isigidi kanye" },
 
         { "hi", 1234567L, "बारह लाख चौंतीस हज़ार पाँच सौ सड़सठ" },
+        { "gu", 1234567L, "બાર લાખ ચોત્રીસ હજાર પાંચસો સડસઠ" },
         { "pa", 1234567L, "ਬਾਰਾਂ ਲੱਖ ਚੌਂਤੀ ਹਜ਼ਾਰ ਪੰਜ ਸੌ ਸਤਾਹਠ" },
         { "pa-Arab", 1234567L, "باراں لکھ چونتی ہزار پنج سو ستاہٹھ" },
         { "mr", 1001L, "एक हजार एक" },
@@ -399,6 +400,7 @@ public static class LocaleNumberMagnitudeTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 123456789L, "बारह करोड़ चौंतीस लाख छप्पन हज़ार सात सौ नवासी" },
+        { "gu", 123456789L, "બાર કરોડ ચોત્રીસ લાખ છપ્પન હજાર સાતસો નેવ્યાસી" },
         { "pa", 123456789L, "ਬਾਰਾਂ ਕਰੋੜ ਚੌਂਤੀ ਲੱਖ ਛਪੰਜਾ ਹਜ਼ਾਰ ਸੱਤ ਸੌ ਉਨਾਨਵੇਂ" },
         { "pa-Arab", 123456789L, "باراں کروڑ چونتی لکھ چھپنجا ہزار ست سو انانویں" },
         { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
