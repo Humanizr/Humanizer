@@ -63,6 +63,11 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
 
         if (number < 0)
         {
+            if (number == long.MinValue)
+            {
+                throw new OverflowException("Cannot safely negate long.MinValue.");
+            }
+
             return $"{profile.MinusWord} {ConvertCore(-number, isOrdinal, addAnd)}";
         }
 
