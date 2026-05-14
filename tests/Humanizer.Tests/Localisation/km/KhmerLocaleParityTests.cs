@@ -13,9 +13,7 @@ public class KhmerLocaleParityTests
     {
         get
         {
-            var counts = Enumerable.Range(1, 99)
-                .Concat(Enumerable.Range(1, 9).Select(static value => value * 100))
-                .ToArray();
+            var counts = Enumerable.Range(1, 999).ToArray();
             (long Scale, string Suffix)[] scales =
             [
                 (100, "រយ"),
@@ -176,6 +174,7 @@ public class KhmerLocaleParityTests
     [InlineData("ដប់ពីរលាន", 12000000)]
     [InlineData("កៅសិបប្រាំបួនលាន", 99000000)]
     [InlineData("ប្រាំបួនរយលាន", 900000000)]
+    [InlineData("មួយរយប្រាំលាន", 105000000)]
     [InlineData("ប្រាំបួនរយ កៅសិបប្រាំបួនលាន", 999000000)]
     [InlineData("បីពាន់ បួនរយ ម្ភៃពីរ", 3422)]
     [InlineData("ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី", 12345678)]

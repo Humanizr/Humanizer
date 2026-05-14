@@ -134,7 +134,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         var block = profile.Ordinal!.Resolve(gender);
         if (number < 0)
         {
-            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs((long)number);
+            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
             if (magnitude <= int.MaxValue && block.ExactReplacements.TryGetValue((int)magnitude, out var negativeExact))
             {
                 return profile.MinusWord + profile.NegativeJoinWord + negativeExact;

@@ -747,7 +747,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 continue;
             }
 
-            if (!TryParseCardinal(words[..^suffix.Key.Length], false, out count, out _) ||
+            if (!TryParseGluedScaleCount(words[..^suffix.Key.Length], out count) ||
                 count <= 0 ||
                 count >= suffix.Value)
             {
@@ -760,6 +760,80 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
         count = default;
         scaleValue = default;
+        return false;
+    }
+
+    bool TryParseGluedScaleCount(string words, out long count)
+    {
+        if (TryParseCardinal(words, false, out count, out _))
+        {
+            return true;
+        }
+
+        return TryParseCompactGluedScaleCount(words, new Dictionary<string, long>(StringComparer.Ordinal), out count);
+    }
+
+    bool TryParseCompactGluedScaleCount(string words, Dictionary<string, long> memo, out long value)
+    {
+        if (memo.TryGetValue(words, out value))
+        {
+            return true;
+        }
+
+        if (rules.CardinalMap.TryGetValue(words, out value))
+        {
+            memo[words] = value;
+            return true;
+        }
+
+        if (gluedScaleSuffixes is not null)
+        {
+            foreach (var suffix in gluedScaleSuffixes)
+            {
+                if (!words.EndsWith(suffix.Key, StringComparison.Ordinal) || words.Length == suffix.Key.Length)
+                {
+                    continue;
+                }
+
+                if (TryParseCompactGluedScaleCount(words[..^suffix.Key.Length], memo, out var scaleCount) &&
+                    scaleCount > 0 &&
+                    scaleCount < suffix.Value)
+                {
+                    try
+                    {
+                        value = checked(scaleCount * suffix.Value);
+                        memo[words] = value;
+                        return true;
+                    }
+                    catch (OverflowException)
+                    {
+                        value = default;
+                        return false;
+                    }
+                }
+            }
+        }
+
+        for (var index = words.Length - 1; index > 0; index--)
+        {
+            if (TryParseCompactGluedScaleCount(words[..index], memo, out var left) &&
+                TryParseCompactGluedScaleCount(words[index..], memo, out var right))
+            {
+                try
+                {
+                    value = checked(left + right);
+                    memo[words] = value;
+                    return true;
+                }
+                catch (OverflowException)
+                {
+                    value = default;
+                    return false;
+                }
+            }
+        }
+
+        value = default;
         return false;
     }
 
