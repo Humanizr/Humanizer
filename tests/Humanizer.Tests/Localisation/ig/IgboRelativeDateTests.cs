@@ -17,6 +17,7 @@ public class IgboRelativeDateTests
         Assert.Equal(expected, formatter.DateHumanize(unit, tense, count));
     }
 
+    // Dictionary references for "never" include "ọ dịghị mgbe"; see https://www.learnentry.com/english-igbo/meaning/never/.
     [Fact]
     public void NullableDateHumanize_NullDateUsesIgboNeverPhrase()
     {

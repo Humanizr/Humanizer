@@ -237,6 +237,12 @@ surfaces:
       tupleSuffix: ''
       ordinalLeadingOneStrategy: 'keep-leading-one'
       ordinalMode: 'english'
+      ordinalExceptions:
+        21: 'nke iri abụọ na otu'
+        22: 'nke iri abụọ na abụọ'
+        99: 'nke iri itoolu na itoolu'
+        100: 'nke otu narị'
+        1001: 'nke otu puku na otu'
       unitsMap:
         0: 'efu'
         1: 'otu'
@@ -327,8 +333,18 @@ surfaces:
       groupSeparator: ','
       negativeSign: '-'
     parse:
-      engine: 'token-map'
-      normalizationProfile: 'CollapseWhitespace'
+      engine: 'greedy-compound'
+      ordinalNumberToWordsKind: 'self'
+      negativePrefixes:
+        - 'mwepu '
+      ordinalAbbreviationSuffixes: []
+      charactersToRemove: ',.''’'
+      charactersToReplaceWithSpace: '-'
+      textReplacements: []
+      lowercase: true
+      removeDiacritics: false
+      ignoredTokens:
+        - 'na'
       cardinalMap:
         efu: 0
         otu: 1
@@ -340,6 +356,7 @@ surfaces:
         asaa: 7
         asatọ: 8
         itoolu: 9
+        na: 0
         iri: 10
         'iri na otu': 11
         'iri na abụọ': 12
@@ -351,34 +368,31 @@ surfaces:
         'iri na asatọ': 18
         'iri na itoolu': 19
         'iri abụọ': 20
-        'iri abụọ na otu': 21
         'iri atọ': 30
-        'iri atọ na anọ': 34
-        'iri itoolu na itoolu': 99
-        'otu narị': 100
-        'otu narị na ise': 105
-        'otu narị na iri abụọ': 120
-        'abụọ narị na iri atọ na anọ': 234
-        'otu puku': 1000
-        'otu puku na otu': 1001
-        'abụọ puku na iri abụọ na otu': 2021
-        'otu puku abụọ narị na iri atọ na anọ': 1234
-        'otu nde': 1000000
-        'abụọ nde': 2000000
-        'otu ijeri na otu nde na otu': 1001000001
-        'anọ tiriliọn atọ narị na iri abụọ na ise ijeri na iri nde na asaa puku na iri na asatọ': 4325010007018
-        'otu kwintiliọn': 1000000000000000000
-        'otu kwintiliọn na otu': 1000000000000000001
-        'otu kwadriliọn abụọ narị na iri atọ na anọ tiriliọn ise narị na iri isii na asaa ijeri asatọ narị na iri itoolu nde otu narị na iri abụọ na atọ puku anọ narị na iri ise na isii': 1234567890123456
+        'iri anọ': 40
+        'iri ise': 50
+        'iri isii': 60
+        'iri asaa': 70
+        'iri asatọ': 80
+        'iri itoolu': 90
+        'narị': 100
+        'puku': 1000
+        nde: 1000000
+        ijeri: 1000000000
+        'tiriliọn': 1000000000000
+        'kwadriliọn': 1000000000000000
+        'kwintiliọn': 1000000000000000000
       ordinalMap:
         'nke efu': 0
         'nke mbụ': 1
         'nke abụọ': 2
         'nke atọ': 3
         'nke iri abụọ': 20
-        'iri abụọ na nke mbụ': 21
-      negativePrefixes:
-        - 'mwepu '
+        'nke iri abụọ na otu': 21
+        'nke iri abụọ na abụọ': 22
+        'nke iri itoolu na itoolu': 99
+        'nke otu narị': 100
+        'nke otu puku na otu': 1001
 
 
   ordinal:

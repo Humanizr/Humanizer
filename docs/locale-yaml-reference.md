@@ -1257,6 +1257,7 @@ Fields:
 - `tupleSuffix`
 - `ordinalLeadingOneStrategy`
 - `ordinalMode`
+- `ordinalExceptions`
 - `unitsMap`
 - `ordinalUnitsMap`
 - `tensMap`
@@ -1268,6 +1269,7 @@ Notes:
 
 - `defaultAddAnd`, `addAndMode`, and `andStrategy` together define when conjunctions appear. Do not try to encode that behavior with ad hoc words or duplicated tables.
 - `ordinalMode` decides whether ordinals come from dedicated lexical tables, numeric suffixes, or other structural strategies within the shared kernel.
+- `ordinalExceptions` maps exact ordinal values when terminal-unit mutation is not natural for a locale.
 - `namedTuples` is for irregular compact tuple-style forms; keep it sparse and comment unusual values in the locale file.
 
 ### `construct-state-scale`
@@ -1979,4 +1981,3 @@ Examples in the current repo:
 - `en-US.yml` exists because U.S. ordinal date formatting differs from `en`.
 - `ru-RU.yml` does not need to exist when `ru` already covers the generated behavior.
 - `en-IN.yml` declares `variantOf: 'en'` and overrides only the `number.words` fields that genuinely differ.
-

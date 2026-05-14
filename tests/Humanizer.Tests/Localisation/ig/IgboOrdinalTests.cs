@@ -16,8 +16,9 @@ public class IgboOrdinalTests
     [Theory]
     [InlineData(1, "nke mbụ")]
     [InlineData(2, "nke abụọ")]
-    [InlineData(21, "iri abụọ na nke mbụ")]
-    [InlineData(-1, "mwepu otu")]
+    [InlineData(21, "nke iri abụọ na otu")]
+    [InlineData(22, "nke iri abụọ na abụọ")]
+    [InlineData(-1, "mwepu nke mbụ")]
     public void NumberToOrdinalWords_UsesIgboOrdinalWords(int number, string expected)
     {
         Assert.Equal(expected, number.ToOrdinalWords());

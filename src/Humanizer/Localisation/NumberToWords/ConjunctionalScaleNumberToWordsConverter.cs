@@ -60,7 +60,12 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
 
         if (number < 0)
         {
-            return $"{profile.MinusWord} {Convert(-number, addAnd)}";
+            return $"{profile.MinusWord} {ConvertCore(-number, isOrdinal, addAnd)}";
+        }
+
+        if (isOrdinal && number <= int.MaxValue && profile.OrdinalExceptions.TryGetValue((int)number, out var ordinalException))
+        {
+            return ordinalException;
         }
 
         var parts = new List<string>(20);
@@ -215,6 +220,7 @@ sealed class ConjunctionalScaleNumberToWordsProfile(
     string tupleSuffix,
     ConjunctionalScaleOrdinalLeadingOneStrategy ordinalLeadingOneStrategy,
     ConjunctionalScaleOrdinalMode ordinalMode,
+    FrozenDictionary<int, string>? ordinalExceptions,
     string[] unitsMap,
     string[] ordinalUnitsMap,
     string[] tensMap,
@@ -276,6 +282,11 @@ sealed class ConjunctionalScaleNumberToWordsProfile(
     /// Gets the ordinal rendering mode used by the shared engine.
     /// </summary>
     public ConjunctionalScaleOrdinalMode OrdinalMode { get; } = ordinalMode;
+
+    /// <summary>
+    /// Gets exact ordinal phrases keyed by number.
+    /// </summary>
+    public FrozenDictionary<int, string> OrdinalExceptions { get; } = ordinalExceptions ?? FrozenDictionary<int, string>.Empty;
 
     /// <summary>
     /// Gets the cardinal unit lexicon.

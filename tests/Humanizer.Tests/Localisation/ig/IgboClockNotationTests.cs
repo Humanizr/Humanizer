@@ -4,6 +4,8 @@ namespace Humanizer.Tests.Localisation.ig;
 [UseCulture("ig")]
 public class IgboClockNotationTests
 {
+    // Igbo day-period vocabulary sources: https://www.teachyourselfigbo.com/igbo-times-of-day.php and
+    // https://ezinaulo.com/igbo-lessons/vocabulary/time-date-seasons/.
     [Theory]
     [InlineData(1, 0, "elekere otu n'ụtụtụ")]
     [InlineData(1, 5, "elekere otu na nkeji ise n'ụtụtụ")]
