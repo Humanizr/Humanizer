@@ -790,13 +790,16 @@ Fields:
 - `feminine`: gender block for feminine ordinals, same shape as `masculine`.
   - `defaultSuffix`
   - `exactReplacements`
-- `neuterFallback`: the gender to fall back to when `GrammaticalGender.Neuter` is requested. Must be `'masculine'` or `'feminine'`.
+- `neuter`: optional gender block for real neuter ordinals, same shape as `masculine`.
+  - `defaultSuffix`
+  - `exactReplacements`
+- `neuterFallback`: the gender to fall back to when `GrammaticalGender.Neuter` is requested and no `neuter` block is authored. Must be `'masculine'` or `'feminine'`.
 
 Notes:
 
 - This engine produces full word ordinals (e.g., `پانچواں` for 5th masculine) rather than numeric-suffix ordinals (e.g., `5واں`). It does this by calling the locale's `INumberToWordsConverter.Convert` to get the cardinal word form, then appending the gendered suffix.
 - Exact replacements handle irregular low ordinals where the ordinal stem differs from the cardinal (e.g., Urdu 4th `چوتھا` vs cardinal `چار`).
-- Neuter gender falls back to the gender specified by `neuterFallback` (typically masculine for two-gender languages).
+- Neuter gender uses an authored `neuter` block when present. Otherwise it falls back to the gender specified by `neuterFallback` (typically masculine for two-gender languages).
 - The engine requires `useCulture: true` because it internally resolves the number-to-words converter for the locale.
 
 Example:
@@ -822,6 +825,16 @@ surfaces:
           3: 'تیسری'
           4: 'چوتھی'
       neuterFallback: 'masculine'
+```
+
+Locales with real neuter ordinal forms may author `neuter` alongside `masculine` and `feminine`:
+
+```yaml
+      neuter:
+        defaultSuffix: 'वे'
+        exactReplacements:
+          1: 'पहिले'
+          2: 'दुसरे'
 ```
 
 ## Formatter Block
@@ -1603,6 +1616,12 @@ Fields:
 - `scales`
 - `ordinalExceptions`
 - `compoundOrdinalExcludedValues`
+- `ordinal`: optional gendered word-ordinal profile. When present, it overrides the legacy `defaultOrdinalSuffix`/`ordinalExceptions` path for `ToOrdinalWords(number, gender, culture)`.
+  - `masculine`: gender block with `defaultSuffix` and optional `exactReplacements`.
+  - `feminine`: optional gender block with the same shape as `masculine`.
+  - `neuter`: optional gender block with the same shape as `masculine`.
+  - `neuterFallback`: gender to use when `GrammaticalGender.Neuter` is requested and no `neuter` block exists. Must be `'masculine'` or `'feminine'`.
+  - `joined-scale` intentionally allows omitted `feminine` and `neuter` blocks because some locales only need masculine word ordinals or use masculine as a shared fallback. This differs from `ordinalizer: number-word-suffix`, which requires both `masculine` and `feminine` because that ordinalizer surface models explicitly gendered numeric ordinalization.
 
 Separator modes:
 
@@ -1960,5 +1979,4 @@ Examples in the current repo:
 - `en-US.yml` exists because U.S. ordinal date formatting differs from `en`.
 - `ru-RU.yml` does not need to exist when `ru` already covers the generated behavior.
 - `en-IN.yml` declares `variantOf: 'en'` and overrides only the `number.words` fields that genuinely differ.
-
 

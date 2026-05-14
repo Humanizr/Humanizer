@@ -1117,6 +1117,12 @@ static class LocalePhraseTheoryData
         { "hi", 0, TimeUnit.Second, Tense.Future, "अभी" },
         { "pa", 0, TimeUnit.Second, Tense.Future, "ਹੁਣੇ" },
         { "pa-Arab", 0, TimeUnit.Second, Tense.Future, "ہن" },
+        { "mr", 1, TimeUnit.Second, Tense.Past, "एक सेकंद पूर्वी" },
+        { "mr", 2, TimeUnit.Second, Tense.Future, "2 सेकंद नंतर" },
+        { "mr", 1, TimeUnit.Day, Tense.Past, "काल" },
+        { "mr", 1, TimeUnit.Day, Tense.Future, "उद्या" },
+        { "mr", 3, TimeUnit.Day, Tense.Past, "3 दिवस पूर्वी" },
+        { "mr", 3, TimeUnit.Day, Tense.Future, "3 दिवस नंतर" },
 };
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
@@ -1586,6 +1592,7 @@ static class LocalePhraseTheoryData
         { "hi", "कभी नहीं" },
         { "pa", "ਕਦੇ ਨਹੀਂ" },
         { "pa-Arab", "کدے نہیں" },
+        { "mr", "कधीच नाही" },
 };
 
     public static TheoryData<string, string, string, string> TimeOnlyDefaultHumanizeCases => new()
@@ -2462,6 +2469,9 @@ static class LocalePhraseTheoryData
         { "hi", 1, TimeUnit.Hour, true, "एक घंटा" },
         { "pa", 1, TimeUnit.Hour, true, "ਇੱਕ ਘੰਟਾ" },
         { "pa-Arab", 1, TimeUnit.Hour, true, "اک گھنٹہ" },
+        { "mr", 2, TimeUnit.Second, false, "2 सेकंद" },
+        { "mr", 2, TimeUnit.Day, false, "2 दिवस" },
+        { "mr", 1, TimeUnit.Hour, true, "एक तास" },
 };
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()

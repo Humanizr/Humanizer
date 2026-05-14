@@ -20,6 +20,7 @@ static class LocaleCoverageData
         { "sw", new(2022, 1, 25, "25 Januari 2022") },
         { "ha", new(2022, 1, 25, "25 Janairu 2022") },
         { "hi", new(2022, 1, 25, "25 जनवरी 2022") },
+        { "mr", new(2022, 1, 25, "25 जानेवारी 2022") },
         { "pa", new(2022, 1, 25, "25 ਜਨਵਰੀ 2022") },
         { "pa-Arab", new(2022, 1, 25, "25 جنوری 2022") },
 
@@ -100,6 +101,7 @@ static class LocaleCoverageData
         { "sw", new(2015, 1, 1, "1 Januari 2015") },
         { "ha", new(2015, 1, 1, "1 Janairu 2015") },
         { "hi", new(2015, 1, 1, "1 जनवरी 2015") },
+        { "mr", new(2015, 1, 1, "1 जानेवारी 2015") },
         { "pa", new(2015, 1, 1, "1 ਜਨਵਰੀ 2015") },
         { "pa-Arab", new(2015, 1, 1, "1 جنوری 2015") },
 
@@ -180,6 +182,7 @@ static class LocaleCoverageData
         { "sw", new(2015, 2, 3, "3 Februari 2015") },
         { "ha", new(2015, 2, 3, "3 Fabrairu 2015") },
         { "hi", new(2015, 2, 3, "3 फ़रवरी 2015") },
+        { "mr", new(2015, 2, 3, "3 फेब्रुवारी 2015") },
         { "pa", new(2015, 2, 3, "3 ਫ਼ਰਵਰੀ 2015") },
         { "pa-Arab", new(2015, 2, 3, "3 فروری 2015") },
 
@@ -254,6 +257,7 @@ static class LocaleCoverageData
     {
         { "am", new(2020, 2, 29, "29 ፌብሩዋሪ 2020") },
         { "hi", new(2020, 2, 29, "29 फ़रवरी 2020") },
+        { "mr", new(2020, 2, 29, "29 फेब्रुवारी 2020") },
         { "pa", new(2020, 2, 29, "29 ਫ਼ਰਵਰੀ 2020") },
         { "pa-Arab", new(2020, 2, 29, "29 فروری 2020") },
 
@@ -297,6 +301,7 @@ static class LocaleCoverageData
     {
         { "am", new(2021, 10, 31, "31 ኦክቶበር 2021") },
         { "hi", new(2021, 10, 31, "31 अक्टूबर 2021") },
+        { "mr", new(2021, 10, 31, "31 ऑक्टोबर 2021") },
         { "pa", new(2021, 10, 31, "31 ਅਕਤੂਬਰ 2021") },
         { "pa-Arab", new(2021, 10, 31, "31 اکتوبر 2021") },
 
@@ -307,6 +312,7 @@ static class LocaleCoverageData
     {
         { "am", new(2024, 12, 31, "31 ዲሴምበር 2024") },
         { "hi", new(2024, 12, 31, "31 दिसंबर 2024") },
+        { "mr", new(2024, 12, 31, "31 डिसेंबर 2024") },
         { "pa", new(2024, 12, 31, "31 ਦਸੰਬਰ 2024") },
         { "pa-Arab", new(2024, 12, 31, "31 دسمبر 2024") },
 
@@ -327,6 +333,7 @@ static class LocaleCoverageData
         { "sw", new(13, 23, "saa saba na dakika ishirini na tatu mchana") },
         { "ha", new(13, 23, "ƙarfe ɗaya da minti ashirin da uku na rana") },
         { "hi", new(13, 23, "दोपहर एक बजकर तेईस मिनट") },
+        { "mr", new(13, 23, "दुपारी एक वाजून तेवीस मिनिटे") },
         { "pa", new(13, 23, "ਦੁਪਹਿਰ ਇੱਕ ਵੱਜ ਕੇ ਤੇਈ ਮਿੰਟ") },
         { "pa-Arab", new(13, 23, "دپہر اک وج کے تےئی منٹ") },
 
@@ -407,6 +414,7 @@ static class LocaleCoverageData
         { "sw", new(13, 23, "saa saba na dakika ishirini na tano mchana") },
         { "ha", new(13, 23, "ƙarfe ɗaya da minti ashirin da biyar na rana") },
         { "hi", new(13, 23, "दोपहर एक बजकर पच्चीस मिनट") },
+        { "mr", new(13, 23, "दुपारी एक वाजून पंचवीस मिनिटे") },
         { "pa", new(13, 23, "ਦੁਪਹਿਰ ਇੱਕ ਵੱਜ ਕੇ ਪੱਚੀ ਮਿੰਟ") },
         { "pa-Arab", new(13, 23, "دپہر اک وج کے پچی منٹ") },
 
@@ -487,6 +495,7 @@ static class LocaleCoverageData
         { "sw", new(1, 5, "saa saba na dakika tano asubuhi") },
         { "ha", new(1, 5, "ƙarfe ɗaya da minti biyar na safe") },
         { "hi", new(1, 5, "सुबह एक बजकर पाँच मिनट") },
+        { "mr", new(1, 5, "पहाटे एक वाजून पाच मिनिटे") },
         { "pa", new(1, 5, "ਸਵੇਰੇ ਇੱਕ ਵੱਜ ਕੇ ਪੰਜ ਮਿੰਟ") },
         { "pa-Arab", new(1, 5, "سویرے اک وج کے پنج منٹ") },
 
@@ -600,9 +609,11 @@ static class LocaleCoverageData
         { "de", new(20, 59, "acht Uhr neunundfünfzig") },
         { "el", new(13, 0, "μία το απόγευμα") },
         { "hi", new(18, 0, "शाम छह बजे") },
+        { "mr", new(18, 0, "संध्याकाळी सहा वाजले") },
         { "pa", new(18, 0, "ਸ਼ਾਮ ਛੇ ਵਜੇ") },
         { "pa-Arab", new(18, 0, "شام چھے وجے") },
         { "hi", new(21, 0, "रात नौ बजे") },
+        { "mr", new(21, 0, "रात्री नऊ वाजले") },
         { "pa", new(21, 0, "ਰਾਤ ਨੌਂ ਵਜੇ") },
         { "pa-Arab", new(21, 0, "رات نوں وجے") },
         { "en", new(0, 0, "midnight") },
@@ -954,6 +965,7 @@ static class LocaleCoverageData
             { "sw", "jana", "siku 2" },
             { "ha", "jiya", "kwanaki 2" },
                     { "hi", "कल", "2 दिन" },
+                    { "mr", "काल", "2 दिवस" },
                     { "pa", "ਕੱਲ੍ਹ", "2 ਦਿਨ" },
                     { "pa-Arab", "کل", "2 دن" },
         };
@@ -1033,6 +1045,7 @@ static class LocaleCoverageData
             { "sw", "1 na 2", "1, 2 na 3" },
             { "ha", "1 da 2", "1, 2 da 3" },
                     { "hi", "1 और 2", "1, 2 और 3" },
+                    { "mr", "1 आणि 2", "1, 2 आणि 3" },
                     { "pa", "1 ਅਤੇ 2", "1, 2 ਅਤੇ 3" },
                     { "pa-Arab", "1 اتے 2", "1, 2 اتے 3" },
         };
@@ -1112,6 +1125,7 @@ static class LocaleCoverageData
             { "sw", 1, "kwanza" },
             { "ha", 1, "na farko" },
                     { "hi", 1, "पहली" },
+                    { "mr", 1, "पहिली" },
                     { "pa", 1, "ਪਹਿਲੀ" },
                     { "pa-Arab", 1, "پہلی" },
         };
@@ -1191,6 +1205,7 @@ static class LocaleCoverageData
             { "sw", 1, "moja" },
             { "ha", 1, "ɗaya" },
                     { "hi", 1, "एक" },
+                    { "mr", 1, "एक" },
                     { "pa", 1, "ਇੱਕ" },
                     { "pa-Arab", 1, "اک" },
         };
@@ -1306,6 +1321,7 @@ static class LocaleCoverageData
             { "sw", 21, "ishirini na moja" },
             { "ha", 21, "ashirin da ɗaya" },
                     { "hi", 21, "इक्कीस" },
+                    { "mr", 21, "एकवीस" },
                     { "pa", 21, "ਇੱਕੀ" },
                     { "pa-Arab", 21, "اکی" },
         };

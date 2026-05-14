@@ -54,6 +54,15 @@ static class LocaleOrdinalizerMatrixData
             { "ha", 101, "na 101" },
             { "sw", 1001, "1001" },
             { "ha", 1001, "na 1001" },
+            { "mr", 0, "शून्यवा" },
+            { "mr", 1, "पहिला" },
+            { "mr", 2, "दुसरा" },
+            { "mr", 3, "तिसरा" },
+            { "mr", 10, "दहावा" },
+            { "mr", 23, "तेवीसवा" },
+            { "mr", 100, "शंभरावा" },
+            { "mr", 101, "एकशे एकवा" },
+            { "mr", 1001, "एक हजार एकवा" },
             { "af", 0, "0de" },
             { "af", 1, "1ste" },
             { "af", 2, "2de" },
@@ -3407,6 +3416,12 @@ static class LocaleOrdinalizerMatrixData
             { "pa", 1, GrammaticalGender.Feminine, "ਪਹਿਲੀ" },
             { "pa-Arab", 1, GrammaticalGender.Feminine, "پہلی" },
             { "hi", 1, GrammaticalGender.Neuter, "पहला" },
+            { "mr", 1, GrammaticalGender.Masculine, "पहिला" },
+            { "mr", 1, GrammaticalGender.Feminine, "पहिली" },
+            { "mr", 1, GrammaticalGender.Neuter, "पहिले" },
+            { "mr", 21, GrammaticalGender.Masculine, "एकविसावा" },
+            { "mr", 21, GrammaticalGender.Feminine, "एकविसावी" },
+            { "mr", 21, GrammaticalGender.Neuter, "एकविसावे" },
             { "pa", 1, GrammaticalGender.Neuter, "ਪਹਿਲਾ" },
             { "pa-Arab", 1, GrammaticalGender.Neuter, "پہلا" },
 };
@@ -4043,6 +4058,7 @@ static class LocaleOrdinalizerMatrixData
             { "hi", "1", "पहला" },
             { "pa", "1", "ਪਹਿਲਾ" },
             { "pa-Arab", "1", "پہلا" },
+            { "mr", "21", "एकविसावा" },
 };
 
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
@@ -4399,6 +4415,7 @@ static class LocaleOrdinalizerMatrixData
             { "hi", -1, "ऋणात्मक पहला" },
             { "pa", -1, "ਰਿਣਾਤਮਕ ਪਹਿਲਾ" },
             { "pa-Arab", -1, "منفی پہلا" },
+            { "mr", -5, "ऋणात्मक पाचवा" },
 };
 
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
@@ -4955,6 +4972,7 @@ static class LocaleOrdinalizerMatrixData
             { "hi", 21, WordForm.Abbreviation, "इक्कीसवाँ" },
             { "pa", 21, WordForm.Abbreviation, "ਇੱਕੀਵਾਂ" },
             { "pa-Arab", 21, WordForm.Abbreviation, "اکیواں" },
+            { "mr", 21, WordForm.Abbreviation, "एकविसावा" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
@@ -6542,6 +6560,9 @@ static class LocaleOrdinalizerMatrixData
             { "hi", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "इक्कीसवाँ" },
             { "pa", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "ਇੱਕੀਵਾਂ" },
             { "pa-Arab", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "اکیواں" },
+            { "mr", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "एकविसावा" },
+            { "mr", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "एकविसावी" },
+            { "mr", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "एकविसावे" },
 };
 
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
@@ -9119,6 +9140,9 @@ static class LocaleOrdinalizerMatrixData
             { "hi", "21", GrammaticalGender.Neuter, "इक्कीसवाँ" },
             { "pa", "21", GrammaticalGender.Neuter, "ਇੱਕੀਵਾਂ" },
             { "pa-Arab", "21", GrammaticalGender.Neuter, "اکیواں" },
+            { "mr", "21", GrammaticalGender.Masculine, "एकविसावा" },
+            { "mr", "21", GrammaticalGender.Feminine, "एकविसावी" },
+            { "mr", "21", GrammaticalGender.Neuter, "एकविसावे" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
@@ -11882,6 +11906,9 @@ static class LocaleOrdinalizerMatrixData
             { "hi", 21, GrammaticalGender.Neuter, "इक्कीसवाँ" },
             { "pa", 21, GrammaticalGender.Neuter, "ਇੱਕੀਵਾਂ" },
             { "pa-Arab", 21, GrammaticalGender.Neuter, "اکیواں" },
+            { "mr", 21, GrammaticalGender.Masculine, "एकविसावा" },
+            { "mr", 21, GrammaticalGender.Feminine, "एकविसावी" },
+            { "mr", 21, GrammaticalGender.Neuter, "एकविसावे" },
 };
 
 }
