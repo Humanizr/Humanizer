@@ -125,6 +125,17 @@ public class BurmeseLocaleParityTests
         Assert.Equal(expected, number.ToOrdinalWords(My));
     }
 
+
+    [Theory]
+    [InlineData(100_000_000_000_000, "တစ်ကောဋိ")]
+    [InlineData(900_000_000_000_000, "ကိုးကောဋိ")]
+    [InlineData(100_000_000_000_001, "တစ်ကောဋိ တစ်")]
+    public void WordsToNumber_ParsesSingularKawDiScaleValues(long number, string words)
+    {
+        Assert.Equal(words, number.ToWords(My));
+        Assert.Equal(number, words.ToNumber(My));
+    }
+
     [Theory]
     [InlineData("နှစ်ဆယ့်တစ်", 21)]
     [InlineData("တစ်ရာ ငါး", 105)]
