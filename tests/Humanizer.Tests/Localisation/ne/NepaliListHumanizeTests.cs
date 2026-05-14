@@ -3,18 +3,19 @@ namespace Humanizer.Tests.Localisation.ne;
 [UseCulture("ne")]
 public class NepaliListHumanizeTests
 {
-    static readonly int[] Pair = [1, 2];
-    static readonly int[] Triple = [1, 2, 3];
-
     [Fact]
     public void TwoElements_UsesRa()
     {
-        Assert.Equal("1 र 2", Pair.Humanize());
+        int[] pair = [1, 2];
+
+        Assert.Equal("1 र 2", pair.Humanize());
     }
 
     [Fact]
     public void ThreeElements_UsesCommaAndRa()
     {
-        Assert.Equal("1, 2 र 3", Triple.Humanize());
+        int[] triple = [1, 2, 3];
+
+        Assert.Equal("1, 2 र 3", triple.Humanize());
     }
 }

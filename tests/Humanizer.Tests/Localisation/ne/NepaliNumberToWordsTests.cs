@@ -42,7 +42,7 @@ public class NepaliNumberToWordsTests
     [InlineData(100000, "एक लाख")]
     [InlineData(10000000, "एक करोड")]
     [InlineData(12345678, "एक करोड तेइस लाख पैँतालीस हजार छ सय अठहत्तर")]
-    [InlineData(4325010007018, "त्रिचालिस खर्ब पच्चिस अर्ब एक करोड सात हजार अठार")]
+    [InlineData(4325010007010, "त्रिचालिस खर्ब पच्चिस अर्ब एक करोड सात हजार दस")]
     public void WordsToNumber_RoundTripsNepaliCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Ne));
