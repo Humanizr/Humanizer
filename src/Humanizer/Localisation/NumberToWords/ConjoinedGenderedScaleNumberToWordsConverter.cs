@@ -35,7 +35,7 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
     {
         if (input == 0)
         {
-            return isOrdinal ? OrdinalZero(gender) : profile.UnitsMap[0];
+            return isOrdinal ? profile.OrdinalZero.Get(gender) : profile.UnitsMap[0];
         }
 
         var parts = new List<string>();
@@ -153,40 +153,15 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
     }
 
     string GetUnit(long number, GrammaticalGender gender) =>
-        (number, gender) switch
-        {
-            (1, GrammaticalGender.Masculine) => "един",
-            (1, GrammaticalGender.Feminine) => "една",
-            (2, GrammaticalGender.Masculine) => "два",
-            _ => profile.UnitsMap[number],
-        };
+        profile.UnitForms.Get(gender).TryGetValue((int)number, out var genderedUnit)
+            ? genderedUnit
+            : profile.UnitsMap[number];
 
-    static string OrdinalZero(GrammaticalGender gender) =>
-        gender switch
-        {
-            GrammaticalGender.Masculine => "нулев",
-            GrammaticalGender.Feminine => "нулева",
-            GrammaticalGender.Neuter => "нулево",
-            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
-        };
+    string ToOrdinalOverAHundred(string word, GrammaticalGender gender) =>
+        word + profile.OrdinalOverHundredSuffixes.Get(gender);
 
-    static string ToOrdinalOverAHundred(string word, GrammaticalGender gender) =>
-        gender switch
-        {
-            GrammaticalGender.Masculine => $"{word}ен",
-            GrammaticalGender.Feminine => $"{word}на",
-            GrammaticalGender.Neuter => $"{word}но",
-            _ => throw new ArgumentOutOfRangeException(nameof(gender))
-        };
-
-    static string ToOrdinalUnitsAndTens(string word, GrammaticalGender gender) =>
-        gender switch
-        {
-            GrammaticalGender.Masculine => $"{word}и",
-            GrammaticalGender.Feminine => $"{word}а",
-            GrammaticalGender.Neuter => $"{word}о",
-            _ => throw new ArgumentOutOfRangeException(nameof(gender))
-        };
+    string ToOrdinalUnitsAndTens(string word, GrammaticalGender gender) =>
+        word + profile.OrdinalUnitsAndTensSuffixes.Get(gender);
 }
 
 /// <summary>
@@ -200,6 +175,10 @@ sealed class ConjoinedGenderedScaleNumberToWordsProfile(
     string[] hundredsMap,
     string[] hundredsOrdinalMap,
     string[] unitsOrdinal,
+    ConjoinedGenderedUnitForms unitForms,
+    ConjoinedGenderedOrdinalForms ordinalZero,
+    ConjoinedGenderedOrdinalForms ordinalOverHundredSuffixes,
+    ConjoinedGenderedOrdinalForms ordinalUnitsAndTensSuffixes,
     ConjoinedGenderedScale[] scales)
 {
     /// <summary>
@@ -231,9 +210,64 @@ sealed class ConjoinedGenderedScaleNumberToWordsProfile(
     /// </summary>
     public string[] UnitsOrdinal { get; } = unitsOrdinal;
     /// <summary>
+    /// Gets gender-specific cardinal unit overrides.
+    /// </summary>
+    public ConjoinedGenderedUnitForms UnitForms { get; } = unitForms;
+    /// <summary>
+    /// Gets the gender-specific words for zero ordinals.
+    /// </summary>
+    public ConjoinedGenderedOrdinalForms OrdinalZero { get; } = ordinalZero;
+    /// <summary>
+    /// Gets the gender-specific suffixes appended to hundreds and scale ordinal stems.
+    /// </summary>
+    public ConjoinedGenderedOrdinalForms OrdinalOverHundredSuffixes { get; } = ordinalOverHundredSuffixes;
+    /// <summary>
+    /// Gets the gender-specific suffixes appended to unit and tens ordinal stems.
+    /// </summary>
+    public ConjoinedGenderedOrdinalForms OrdinalUnitsAndTensSuffixes { get; } = ordinalUnitsAndTensSuffixes;
+    /// <summary>
     /// Gets the descending scale rows used during decomposition.
     /// </summary>
     public ConjoinedGenderedScale[] Scales { get; } = scales;
+}
+
+/// <summary>
+/// Cardinal unit overrides keyed by grammatical gender.
+/// </summary>
+sealed class ConjoinedGenderedUnitForms(
+    FrozenDictionary<int, string> masculine,
+    FrozenDictionary<int, string> feminine,
+    FrozenDictionary<int, string> neuter)
+{
+    /// <summary>
+    /// Gets the unit override map for the requested gender.
+    /// </summary>
+    public FrozenDictionary<int, string> Get(GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Masculine => masculine,
+            GrammaticalGender.Feminine => feminine,
+            GrammaticalGender.Neuter => neuter,
+            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
+        };
+}
+
+/// <summary>
+/// Gender-specific ordinal words or suffixes.
+/// </summary>
+sealed class ConjoinedGenderedOrdinalForms(string masculine, string feminine, string neuter)
+{
+    /// <summary>
+    /// Gets the ordinal form for the requested gender.
+    /// </summary>
+    public string Get(GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Masculine => masculine,
+            GrammaticalGender.Feminine => feminine,
+            GrammaticalGender.Neuter => neuter,
+            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
+        };
 }
 
 /// <summary>

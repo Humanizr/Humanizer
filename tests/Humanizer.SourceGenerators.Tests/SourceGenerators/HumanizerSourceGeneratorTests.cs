@@ -852,6 +852,79 @@ numberToWords:
     }
 
     [Fact]
+    public void ConjoinedGenderedScaleProfilesEmitGenderedFormsFromLocaleData()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'conjoined-gendered-scale'
+  maximumValue: 1000
+  minusWord: 'minus'
+  conjunction: 'and'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  hundredsMap:
+    - 'zero'
+    - 'hundred'
+  hundredsOrdinalMap:
+    1: 'hundred'
+  unitsOrdinal:
+    1: 'first'
+    2: 'second'
+  unitForms:
+    masculine:
+      1: 'one-m'
+      2: 'two-m'
+    feminine:
+      1: 'one-f'
+  ordinalZero:
+    masculine: 'zero-m'
+    feminine: 'zero-f'
+    neuter: 'zero-n'
+  ordinalOverHundredSuffixes:
+    masculine: '-over-m'
+    feminine: '-over-f'
+    neuter: '-over-n'
+  ordinalUnitsAndTensSuffixes:
+    masculine: '-unit-m'
+    feminine: '-unit-f'
+    neuter: '-unit-n'
+  scales:
+    -
+      divisor: 1000
+      gender: 'feminine'
+      singular: 'thousand'
+      plural: 'thousands'
+      ordinalStem: 'thousandth'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-conjoined-gendered-scale.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var profileBlock = ExtractCacheClassBody(source, "zz_conjoined_gendered_scale_cache");
+
+        Assert.Contains("new ConjoinedGenderedUnitForms(", profileBlock);
+        Assert.Contains("[1] = \"one-m\"", profileBlock);
+        Assert.Contains("[2] = \"two-m\"", profileBlock);
+        Assert.Contains("[1] = \"one-f\"", profileBlock);
+        Assert.Contains("FrozenDictionary<int, string>.Empty", profileBlock);
+        Assert.Contains("new ConjoinedGenderedOrdinalForms(\"zero-m\", \"zero-f\", \"zero-n\")", profileBlock);
+        Assert.Contains("new ConjoinedGenderedOrdinalForms(\"-over-m\", \"-over-f\", \"-over-n\")", profileBlock);
+        Assert.Contains("new ConjoinedGenderedOrdinalForms(\"-unit-m\", \"-unit-f\", \"-unit-n\")", profileBlock);
+        Assert.Contains("new(1000, GrammaticalGender.Feminine, \"thousand\", \"thousands\", \"thousandth\")", profileBlock);
+        Assert.DoesNotContain("нулев", profileBlock);
+    }
+
+    [Fact]
     public void JoinedScaleProfilesEmitOptionalGenderedOrdinalBlocks()
     {
         const string locale = """

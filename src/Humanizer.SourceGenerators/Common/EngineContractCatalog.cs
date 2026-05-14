@@ -105,6 +105,26 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsOrdinalMap", null, null, null, null, null, null),
                             Member("string-array", "unitsOrdinal", null, null, null, null, null, null),
+                            Member("profile-object", "unitForms", "ConjoinedGenderedUnitForms", null, null, null, null, null,
+                                        Member("nullable-int-string-dictionary", "masculine", null, null, null, null, null, "empty"),
+                                        Member("nullable-int-string-dictionary", "feminine", null, null, null, null, null, "empty"),
+                                        Member("nullable-int-string-dictionary", "neuter", null, null, null, null, null, "empty")
+                                    ),
+                            Member("profile-object", "ordinalZero", "ConjoinedGenderedOrdinalForms", null, null, null, null, null,
+                                        Member("string", "masculine", null, null, null, null, null, null),
+                                        Member("string", "feminine", null, null, null, null, null, null),
+                                        Member("string", "neuter", null, null, null, null, null, null)
+                                    ),
+                            Member("profile-object", "ordinalOverHundredSuffixes", "ConjoinedGenderedOrdinalForms", null, null, null, null, null,
+                                        Member("string", "masculine", null, null, null, null, null, null),
+                                        Member("string", "feminine", null, null, null, null, null, null),
+                                        Member("string", "neuter", null, null, null, null, null, null)
+                                    ),
+                            Member("profile-object", "ordinalUnitsAndTensSuffixes", "ConjoinedGenderedOrdinalForms", null, null, null, null, null,
+                                        Member("string", "masculine", null, null, null, null, null, null),
+                                        Member("string", "feminine", null, null, null, null, null, null),
+                                        Member("string", "neuter", null, null, null, null, null, null)
+                                    ),
                             Member("builder", "scales", null, null, "conjoined-gendered-scale-array", null, null, null)
                         )
             ),
