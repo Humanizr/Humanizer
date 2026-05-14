@@ -1,3 +1,9 @@
+# Khmer phrase review record (2026-05-14): the parity pass explicitly reviewed
+# `phrases.relativeDate.never` and clock day-period/hour/minute keys
+# (`clock.earlyMorning`, `clock.morning`, `clock.afternoon`, `clock.evening`,
+# `clock.night`, `clock.hourSuffixSingular`, `clock.hourSuffixPlural`,
+# `clock.minuteSuffixSingular`, `clock.minuteSuffixPlural`) and covers them with
+# exact-output tests in KhmerLocaleParityTests.
 locale: 'km'
 
 surfaces:
@@ -416,6 +422,13 @@ surfaces:
         'មួយសែន': 100000
         'មួយលាន': 1000000
         'មួយលាន មួយ': 1000001
+        # Exact glued scale-count forms emitted by `number.words.scaleCountJoinWord: ''`.
+        'ពីររយ': 200
+        'ពីរពាន់': 2000
+        'ពីរម៉ឺន': 20000
+        'ពីរសែន': 200000
+        'ពីរលាន': 2000000
+        'ដប់ពីរលាន': 12000000
         'ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី': 12345678
         'ប្រាំបួនរយ កៅសិបប្រាំបួនលាន ប្រាំបួនសែន ប្រាំបួនម៉ឺន ប្រាំបួនពាន់ ប្រាំបួនរយ កៅសិបប្រាំបួន': 999999999
         'រយ': 100
@@ -439,8 +452,8 @@ surfaces:
     numeric:
       engine: 'template'
       masculine:
-        prefix: 'ទី'
-        defaultSuffix: ''
+        prefix: ''
+        defaultSuffix: 'ទី'
     date:
       pattern: 'd MMMM yyyy'
       dayMode: 'Numeric'
