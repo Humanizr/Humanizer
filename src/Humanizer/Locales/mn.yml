@@ -20,13 +20,13 @@ surfaces:
           multiple:
             forms:
               default: 'миллисекунд'
-            template: '{count} миллисекундийн өмнө'
+            template: '{count} миллисекундын өмнө'
         second:
           single: '1 секундын өмнө'
           multiple:
             forms:
               default: 'секунд'
-            template: '{count} секундийн өмнө'
+            template: '{count} секундын өмнө'
         minute:
           single: '1 минутын өмнө'
           multiple:
@@ -69,13 +69,13 @@ surfaces:
           multiple:
             forms:
               default: 'миллисекунд'
-            template: '{count} миллисекундийн дараа'
+            template: '{count} миллисекундын дараа'
         second:
           single: '1 секундын дараа'
           multiple:
             forms:
               default: 'секунд'
-            template: '{count} секундийн дараа'
+            template: '{count} секундын дараа'
         minute:
           single: '1 минутын дараа'
           multiple:
