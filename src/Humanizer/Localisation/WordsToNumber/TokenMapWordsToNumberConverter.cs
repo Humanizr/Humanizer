@@ -20,6 +20,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     readonly FrozenDictionary<string, long>? ordinalScaleMap = rules.OrdinalScaleMap;
     readonly FrozenDictionary<string, long>? gluedOrdinalScaleSuffixes = rules.GluedOrdinalScaleSuffixes;
     readonly FrozenDictionary<string, long>? gluedScaleSuffixes = rules.GluedScaleSuffixes;
+    Dictionary<char, List<CompactGluedScaleToken>>? compactGluedScaleTokensByFirstCharacter;
 
     /// <inheritdoc />
     public override long Convert(string words)
@@ -785,7 +786,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return false;
         }
 
-        var tokensByFirstCharacter = BuildCompactGluedScaleTokenMap();
+        var tokensByFirstCharacter = compactGluedScaleTokensByFirstCharacter ??= BuildCompactGluedScaleTokenMap();
         var statesByPosition = new HashSet<CompactGluedScaleState>?[words.Length + 1];
         statesByPosition[0] = [new(0, 0, 0)];
 
