@@ -899,6 +899,12 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         {
             if (token.Value >= rules.ScaleThreshold)
             {
+                if (state.Total > 0 && state.Total < token.Value)
+                {
+                    nextState = new(checked(checked(state.Total + state.Current) * token.Value), 0, state.TokenCount + 1);
+                    return true;
+                }
+
                 nextState = new(checked(state.Total + checked((state.Current == 0 ? 1 : state.Current) * token.Value)), 0, state.TokenCount + 1);
                 return true;
             }

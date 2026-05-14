@@ -176,6 +176,7 @@ public class KhmerLocaleParityTests
     [InlineData("ប្រាំបួនរយលាន", 900000000)]
     [InlineData("មួយរយប្រាំលាន", 105000000)]
     [InlineData("ប្រាំបួនរយ កៅសិបប្រាំបួនលាន", 999000000)]
+    [InlineData("ប្រាំបួនរយកៅសិបប្រាំបួនពាន់លាន", 999000000000)]
     [InlineData("បីពាន់ បួនរយ ម្ភៃពីរ", 3422)]
     [InlineData("ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី", 12345678)]
     public void WordsToNumber_ParsesCommonGluedScaleTokens(string words, long expected)

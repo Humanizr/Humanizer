@@ -1280,6 +1280,7 @@ public class TokenMapWordsToNumberConverterTests
     [InlineData("onehundredfivethousand", 105000)]
     [InlineData("twothousand threehundred", 2300)]
     [InlineData("ninehundred ninetythousand", 990000)]
+    [InlineData("ninehundredninetyninethousand", 999000)]
     [InlineData("ninehundred thousand five", 900005)]
     [InlineData("ninetythousand", 90000)]
     public void GluedScaleSuffixesParseCardinalScaleCounts(string words, long expected)
