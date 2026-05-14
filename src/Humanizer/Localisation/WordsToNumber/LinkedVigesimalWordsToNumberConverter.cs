@@ -226,13 +226,8 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
     bool TryParseExact(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
         var lastCandidateEnd = Math.Min(end, start + profile.MaximumExactTokenCount);
-        foreach (var candidate in profile.MultiTokenExactWords)
+        foreach (var candidate in profile.MultiTokenExactWords.Where(candidate => start + candidate.Tokens.Length <= lastCandidateEnd))
         {
-            if (start + candidate.Tokens.Length > lastCandidateEnd)
-            {
-                continue;
-            }
-
             if (candidate.Value >= 0 &&
                 (ulong)candidate.Value <= maxValue &&
                 TryMatchTokenPhrase(tokens, start, end, candidate.Tokens, out next))
