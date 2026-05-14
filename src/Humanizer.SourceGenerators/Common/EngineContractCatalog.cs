@@ -430,6 +430,21 @@ public sealed partial class HumanizerSourceGenerator
                             Member("optional-string-array", "subHundredMap", null, null, null, null, null, null),
                             Member("builder", "scales", null, null, "joined-scale-array", null, null, null),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, null),
+                            Member("optional-profile-object", "ordinal", "JoinedScaleOrdinalProfile", null, null, null, null, null,
+                                        Member("profile-object", "masculine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("optional-profile-object", "feminine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("optional-profile-object", "neuter", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("enum", "neuterFallback", null, "GrammaticalGender", null, "masculine", null, null)
+                            ),
                             Member("nullable-int64", "compoundOrdinalRemainder", null, null, null, null, null, null),
                             Member("nullable-string", "compoundOrdinalWord", null, null, null, null, null, null),
                             Member("nullable-int-set", "compoundOrdinalExcludedValues", null, null, null, null, null, null)
