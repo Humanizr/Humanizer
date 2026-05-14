@@ -20,6 +20,7 @@ public class MongolianNumberToWordsTests
     [InlineData(1000, "нэг мянга")]
     [InlineData(2026, "хоёр мянга хорин зургаа")]
     [InlineData(1000000, "нэг сая")]
+    [InlineData(1000000000000, "нэг их наяд")]
     public void NumberToWords_ProducesExpectedMongolianOutput(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Mn));
@@ -51,6 +52,8 @@ public class MongolianNumberToWordsTests
     [InlineData("хоёр зуун гучин дөрөв", 234)]
     [InlineData("хоёр мянга хорин зургаа", 2026)]
     [InlineData("хасах тав", -5)]
+    [InlineData("нэг их наяд", 1000000000000)]
+    [InlineData("дөрвөн их наяд гурван зуун хорин тав тэрбум арван сая долоон мянга арван найм", 4325010007018)]
     public void WordsToNumber_ParsesMongolianCardinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Mn));
