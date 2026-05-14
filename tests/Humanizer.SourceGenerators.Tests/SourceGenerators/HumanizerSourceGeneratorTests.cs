@@ -830,7 +830,11 @@ numberToWords:
         var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
 
         Assert.Contains("new JoinedScaleOrdinalProfile(", source);
+<<<<<<< HEAD
         Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"pre-m\", \"m\"", source);
+=======
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"pre-\", \"m\"", source);
+>>>>>>> 7f9bceb7 (fix(locale): prefix joined-scale ordinal fallbacks)
         Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"\", \"f\"", source);
         Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"\", \"n\"", source);
         Assert.Contains("GrammaticalGender.Feminine", source);

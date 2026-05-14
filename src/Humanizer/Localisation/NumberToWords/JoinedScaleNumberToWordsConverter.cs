@@ -309,7 +309,7 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     }
 }
 
-/// <summary>Gender-specific ordinal affix and exact replacement data.</summary>
+/// <summary>Gender-specific ordinal affixes and exact replacement data.</summary>
 /// <param name="DefaultPrefix">The prefix prepended to the cardinal word form for productive ordinals.</param>
 /// <param name="DefaultSuffix">The suffix appended to the cardinal word form for productive ordinals.</param>
 /// <param name="ExactReplacements">Exact ordinal forms keyed by value.</param>

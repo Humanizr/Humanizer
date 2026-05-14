@@ -110,7 +110,9 @@ public class KhmerLocaleParityTests
     [Theory]
     [InlineData(1, "ទីមួយ")]
     [InlineData(2, "ទីពីរ")]
+    [InlineData(4, "ទីបួន")]
     [InlineData(21, "ទីម្ភៃមួយ")]
+    [InlineData(22, "ទីម្ភៃពីរ")]
     [InlineData(101, "ទីមួយរយ មួយ")]
     public void NumberToOrdinalWords_ProducesKhmerOrdinals(int number, string expected)
     {
@@ -123,7 +125,9 @@ public class KhmerLocaleParityTests
     [InlineData("មួយពាន់ ពីររយ សាមសិបបួន", 1234)]
     [InlineData("ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី", 12345678)]
     [InlineData("ដក ម្ភៃមួយ", -21)]
+    [InlineData("ទីបួន", 4)]
     [InlineData("ទីម្ភៃមួយ", 21)]
+    [InlineData("ទីម្ភៃពីរ", 22)]
     [InlineData("21ទី", 21)]
     [InlineData("21 ទី", 21)]
     public void WordsToNumber_ParsesKhmerCardinalsAndOrdinals(string words, long expected)

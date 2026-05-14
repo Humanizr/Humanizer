@@ -285,6 +285,7 @@ surfaces:
           name: 'រយ'
       ordinal:
         masculine:
+          defaultPrefix: 'ទី'
           defaultSuffix: ''
           exactReplacements:
             0: 'ទីសូន្យ'
