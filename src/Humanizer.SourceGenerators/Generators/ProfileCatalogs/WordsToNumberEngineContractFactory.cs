@@ -29,6 +29,7 @@ public sealed partial class HumanizerSourceGenerator
                 "linking-affix" => CreateLinkingAffixExpression(profile.Root),
                 "scale-leading-compound" => CreateScaleLeadingCompoundExpression(profile.Root),
                 "prefixed-tens-scale" => CreatePrefixedTensScaleExpression(profile.Root),
+                "stemmed-scale" => CreateStemmedScaleExpression(profile.Root),
                 "suffix-scale" => CreateSuffixScaleExpression(profile.Root),
                 "token-map" => "new TokenMapWordsToNumberConverter(" + CreateTokenMapRulesExpression(profile.Root) + ")",
                 "vigesimal-compound" => CreateVigesimalCompoundExpression(profile.Root),
@@ -134,6 +135,17 @@ public sealed partial class HumanizerSourceGenerator
             CreatePrefixedScaleWordArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
             CreatePrefixedTensRuleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "prefixedTens")) + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
+            "))";
+
+        static string CreateStemmedScaleExpression(JsonElement root) =>
+            "new StemmedScaleWordsToNumberConverter(new StemmedScaleWordsToNumberProfile(" +
+            CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "words")) + ", " +
+            CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "countStems")) + ", " +
+            CreateStemmedScaleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
+            CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
+            CreateOptionalStringArrayExpression(root, "ordinalSuffixes") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "additionalCardinals") +
             "))";
 
         static string CreateSuffixScaleExpression(JsonElement root) =>

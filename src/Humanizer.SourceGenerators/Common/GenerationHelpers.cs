@@ -998,6 +998,20 @@ public sealed partial class HumanizerSourceGenerator
             RequiredEnumValue("singularRemainderVariant", "SegmentedScaleVariant"),
             RequiredEnumValue("pluralRemainderVariant", "SegmentedScaleVariant"));
 
+    static string CreateStemmedScaleArrayExpression(JsonElement arrayElement)
+        => CreateTypedConstructorArrayExpression(
+            "StemmedScale",
+            arrayElement,
+            RequiredInt64Value("value"),
+            RequiredStringValue("one"),
+            RequiredStringValue("oneWithRemainder"),
+            RequiredStringValue("suffix"),
+            RequiredStringValue("suffixWithRemainder"),
+            OptionalStringValue("stemJoiner"),
+            OptionalStringValueOrFallback("fallbackName", "suffix"),
+            OptionalStringValueOrFallback("fallbackNameWithRemainder", "suffixWithRemainder"),
+            OptionalStringValue("fallbackJoiner", " "));
+
     static string CreateTerminalOrdinalScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "TerminalOrdinalScale",
