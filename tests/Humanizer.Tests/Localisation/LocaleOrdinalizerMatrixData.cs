@@ -9,6 +9,9 @@ static class LocaleOrdinalizerMatrixData
             { "kk", 6, "6-шы" },
             { "kk", 20, "20-шы" },
 
+        { "ka", 1, "1-ლი" },
+        { "ka", 2, "2-ე" },
+        { "ka", 21, "21-ე" },
             { "ps", 1, "لومړی" },
             { "ps", 21, "یوویشتم" },
             { "si", 1, "1වැනි" },
@@ -712,6 +715,9 @@ static class LocaleOrdinalizerMatrixData
             { "kk", 2, GrammaticalGender.Feminine, "2-ші" },
             { "kk", 2, GrammaticalGender.Neuter, "2-ші" },
 
+        { "ka", 1, GrammaticalGender.Masculine, "1-ლი" },
+        { "ka", 1, GrammaticalGender.Feminine, "1-ლი" },
+        { "ka", 1, GrammaticalGender.Neuter, "1-ლი" },
             { "ps", 1, GrammaticalGender.Masculine, "لومړی" },
             { "ps", 1, GrammaticalGender.Feminine, "لومړۍ" },
             { "ps", 1, GrammaticalGender.Neuter, "لومړی" },
@@ -3555,6 +3561,8 @@ static class LocaleOrdinalizerMatrixData
         {
             { "kk", "2", "2-ші" },
 
+        { "ka", "1", "1-ლი" },
+        { "ka", "2", "2-ე" },
             { "ps", "1", "لومړی" },
             { "si", "1", "1වැනි" },
 
@@ -4218,6 +4226,7 @@ static class LocaleOrdinalizerMatrixData
         {
             { "kk", -2, "-2-ші" },
 
+        { "ka", -1, "-1-ე" },
             { "ps", -1, "منفي لومړی" },
             { "si", -1, "-1වැනි" },
 
@@ -4597,6 +4606,7 @@ static class LocaleOrdinalizerMatrixData
         {
             { "kk", 2, WordForm.Normal, "2-ші" },
 
+        { "ka", 1, WordForm.Abbreviation, "1-ლი" },
             { "ps", 21, WordForm.Abbreviation, "یوویشتم" },
             { "si", 1, WordForm.Normal, "1වැනි" },
 
@@ -5184,6 +5194,9 @@ static class LocaleOrdinalizerMatrixData
             { "kk", 2, GrammaticalGender.Feminine, WordForm.Normal, "2-ші" },
             { "kk", 2, GrammaticalGender.Neuter, WordForm.Normal, "2-ші" },
 
+        { "ka", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1-ლი" },
+        { "ka", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1-ლი" },
+        { "ka", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1-ლი" },
             { "ps", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "یوویشتم" },
             { "ps", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "یوویشتمه" },
             { "ps", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "یوویشتم" },
@@ -6834,6 +6847,9 @@ static class LocaleOrdinalizerMatrixData
             { "kk", "2", GrammaticalGender.Feminine, "2-ші" },
             { "kk", "2", GrammaticalGender.Neuter, "2-ші" },
 
+        { "ka", "1", GrammaticalGender.Masculine, "1-ლი" },
+        { "ka", "1", GrammaticalGender.Feminine, "1-ლი" },
+        { "ka", "1", GrammaticalGender.Neuter, "1-ლი" },
             { "ps", "21", GrammaticalGender.Masculine, "یوویشتم" },
             { "ps", "21", GrammaticalGender.Feminine, "یوویشتمه" },
             { "ps", "21", GrammaticalGender.Neuter, "یوویشتم" },
@@ -9486,6 +9502,9 @@ static class LocaleOrdinalizerMatrixData
             { "kk", 2, GrammaticalGender.Feminine, "2-ші" },
             { "kk", 2, GrammaticalGender.Neuter, "2-ші" },
 
+        { "ka", 1, GrammaticalGender.Masculine, "1-ლი" },
+        { "ka", 1, GrammaticalGender.Feminine, "1-ლი" },
+        { "ka", 1, GrammaticalGender.Neuter, "1-ლი" },
             { "ps", 21, GrammaticalGender.Masculine, "یوویشتم" },
             { "ps", 21, GrammaticalGender.Feminine, "یوویشتمه" },
             { "ps", 21, GrammaticalGender.Neuter, "یوویشتم" },

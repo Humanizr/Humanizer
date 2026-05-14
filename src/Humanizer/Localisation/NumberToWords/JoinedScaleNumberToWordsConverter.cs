@@ -60,18 +60,26 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             // Singular scale names may omit the leading one, but only when the locale says that
             // is grammatical. The "first visible scale" check preserves languages where the
             // omission changes once the value is already inside a larger compound.
+            var remaining = remainder % scaleValue;
+            var scaleName = scale.ResolveName(count, remaining > 0);
+
             parts.Add(scale.OmitOneWhenSingular && count == 1 && (profile.OmitOneWhenSingularAlways || parts.Count == 0)
-                ? scale.Name
-                : $"{Convert((long)count, GrammaticalGender.Masculine)}{profile.ScaleCountJoinWord}{scale.Name}");
-            remainder %= scaleValue;
+                ? scaleName
+                : $"{Convert((long)count, GrammaticalGender.Masculine)}{profile.ScaleCountJoinWord}{scaleName}");
+            remainder = remaining;
         }
 
         // The profile can supply a dedicated hundreds lexicon or a direct sub-hundred lexicon.
         // Keeping both paths avoids forcing all locales into the same tens/units stitching rule.
         if (remainder >= 100)
         {
-            parts.Add(profile.HundredsMap[remainder / 100]);
+            var hundreds = (int)(remainder / 100);
             remainder %= 100;
+            parts.Add(remainder > 0 &&
+                      profile.HundredsMapWithRemainder.Length > hundreds &&
+                      profile.HundredsMapWithRemainder[hundreds].Length > 0
+                ? profile.HundredsMapWithRemainder[hundreds]
+                : profile.HundredsMap[hundreds]);
         }
 
         if (remainder > 0)
@@ -210,6 +218,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 /// <param name="unitsMap">The unit lexicon.</param>
 /// <param name="tensMap">The tens lexicon.</param>
 /// <param name="hundredsMap">The hundreds lexicon.</param>
+/// <param name="hundredsMapWithRemainder">The hundreds lexicon used when a lower-order remainder follows.</param>
 /// <param name="subHundredMap">The shared under-hundred lexicon.</param>
 /// <param name="feminineSubHundredReplacements">Feminine overrides for authored under-hundred cardinals.</param>
 /// <param name="neuterSubHundredReplacements">Neuter overrides for authored under-hundred cardinals.</param>
@@ -234,6 +243,7 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap,
+    string[] hundredsMapWithRemainder,
     string[] subHundredMap,
     FrozenDictionary<int, string> feminineSubHundredReplacements,
     FrozenDictionary<int, string> neuterSubHundredReplacements,
@@ -272,6 +282,8 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public string[] TensMap { get; } = tensMap;
     /// <summary>Gets the hundreds lexicon.</summary>
     public string[] HundredsMap { get; } = hundredsMap;
+    /// <summary>Gets the hundreds lexicon used when a lower-order remainder follows.</summary>
+    public string[] HundredsMapWithRemainder { get; } = hundredsMapWithRemainder;
     /// <summary>Gets the direct under-hundred lexicon used when the locale does not stitch tens and units at runtime.</summary>
     public string[] SubHundredMap { get; } = subHundredMap;
     /// <summary>Gets feminine overrides for authored under-hundred cardinals.</summary>
@@ -340,6 +352,40 @@ internal sealed record JoinedScaleOrdinalProfile(
 /// One descending scale row for <see cref="JoinedScaleNumberToWordsConverter"/>.
 /// </summary>
 /// <param name="Value">The divisor for the scale row.</param>
-/// <param name="Name">The localized scale name.</param>
+/// <param name="Name">The localized singular scale name.</param>
+/// <param name="NameWithRemainder">The localized singular scale name used when a lower-order remainder follows.</param>
+/// <param name="PluralName">The localized plural scale name used for counts other than one.</param>
+/// <param name="PluralNameWithRemainder">The localized plural scale name used for counts other than one when a lower-order remainder follows.</param>
 /// <param name="OmitOneWhenSingular">Whether singular counts may omit the explicit one.</param>
-internal readonly record struct JoinedScale(long Value, string Name, bool OmitOneWhenSingular = false);
+internal readonly record struct JoinedScale(
+    long Value,
+    string Name,
+    string NameWithRemainder = "",
+    string PluralName = "",
+    string PluralNameWithRemainder = "",
+    bool OmitOneWhenSingular = false)
+{
+    /// <summary>Resolves the scale name for the rendered scale count and lower-order remainder state.</summary>
+    public string ResolveName(ulong count, bool hasRemainder)
+    {
+        if (count != 1)
+        {
+            if (hasRemainder && PluralNameWithRemainder.Length > 0)
+            {
+                return PluralNameWithRemainder;
+            }
+
+            if (PluralName.Length > 0)
+            {
+                return PluralName;
+            }
+        }
+
+        if (hasRemainder && NameWithRemainder.Length > 0)
+        {
+            return NameWithRemainder;
+        }
+
+        return Name;
+    }
+}

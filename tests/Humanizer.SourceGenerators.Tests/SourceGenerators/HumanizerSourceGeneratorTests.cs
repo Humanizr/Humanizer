@@ -806,6 +806,52 @@ numberToWords:
 
 
     [Fact]
+    public void JoinedScaleProfilesEmitOptionalRemainderAndPluralScaleForms()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'joined-scale'
+  maximumValue: 2000001
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  hundredsMap:
+    - 'zero'
+    - 'one hundred'
+  hundredsMapWithRemainder:
+    - 'zero'
+    - 'one hundred remainder'
+  scales:
+    -
+      value: 1000000
+      name: 'million'
+      nameWithRemainder: 'million remainder'
+      pluralName: 'millions'
+      pluralNameWithRemainder: 'millions remainder'
+    -
+      value: 1000
+      name: 'thousand'
+      nameWithRemainder: 'thousand remainder'
+      omitOneWhenSingular: true
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-joined-scale-forms.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+
+        Assert.Contains("new string[] { \"zero\", \"one hundred remainder\" }", source);
+        Assert.Contains("new(1000000, \"million\", \"million remainder\", \"millions\", \"millions remainder\")", source);
+        Assert.Contains("new(1000, \"thousand\", \"thousand remainder\", \"\", \"\", true)", source);
+    }
+
+    [Fact]
     public void JoinedScaleProfilesEmitOptionalGenderedOrdinalBlocks()
     {
         const string locale = """

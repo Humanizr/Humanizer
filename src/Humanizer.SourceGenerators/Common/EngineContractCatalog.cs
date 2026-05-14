@@ -429,6 +429,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("optional-string-array", "unitsMap", null, null, null, null, null, null),
                             Member("optional-string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
+                            Member("optional-string-array", "hundredsMapWithRemainder", null, null, null, null, null, null),
                             Member("optional-string-array", "subHundredMap", null, null, null, null, null, null),
                             Member("nullable-int-string-dictionary", "feminineSubHundredReplacements", null, null, null, null, null, "empty"),
                             Member("nullable-int-string-dictionary", "neuterSubHundredReplacements", null, null, null, null, null, "empty"),

@@ -10,6 +10,18 @@ static class LocaleNumberTheoryData
         { "kk", 105, "жүз бес" },
         { "kk", 1234, "бір мың екі жүз отыз төрт" },
 
+        { "ka", 0, "ნული" },
+        { "ka", 1, "ერთი" },
+        { "ka", 2, "ორი" },
+        { "ka", 21, "ოცდაერთი" },
+        { "ka", 99, "ოთხმოცდაცხრამეტი" },
+        { "ka", 100, "ასი" },
+        { "ka", 101, "ას ერთი" },
+        { "ka", 121, "ას ოცდაერთი" },
+        { "ka", 1000, "ათასი" },
+        { "ka", 1001, "ათას ერთი" },
+        { "ka", 2021, "ორი ათას ოცდაერთი" },
+        { "ka", 1234, "ათას ორას ოცდათოთხმეტი" },
         { "ps", 0, "صفر" },
         { "ps", 1, "یو" },
         { "ps", 2, "دوه" },
@@ -2933,6 +2945,8 @@ static class LocaleNumberTheoryData
     {
         { "kk", 21, true, "жиырма бір" },
 
+        { "ka", 2021, false, "ორი ათას ოცდაერთი" },
+        { "ka", 2021, true, "ორი ათას ოცდაერთი" },
         { "ps", 101, true, "سل او یو" },
         { "ps", 101, false, "سل او یو" },
         { "si", 21, true, "විසි එක" },
@@ -3767,6 +3781,7 @@ static class LocaleNumberTheoryData
     {
         { "kk", 2, WordForm.Normal, "екі" },
 
+        { "ka", 2021, WordForm.Abbreviation, "ორი ათას ოცდაერთი" },
         { "ps", 21, WordForm.Abbreviation, "یوویشت" },
         { "si", 21, WordForm.Normal, "විසි එක" },
 
@@ -4196,6 +4211,9 @@ static class LocaleNumberTheoryData
         { "kk", 2, GrammaticalGender.Feminine, "екі" },
         { "kk", 2, GrammaticalGender.Neuter, "екі" },
 
+        { "ka", 21, GrammaticalGender.Masculine, "ოცდაერთი" },
+        { "ka", 21, GrammaticalGender.Feminine, "ოცდაერთი" },
+        { "ka", 21, GrammaticalGender.Neuter, "ოცდაერთი" },
         { "ps", 2, GrammaticalGender.Masculine, "دوه" },
         { "ps", 2, GrammaticalGender.Feminine, "دوه" },
         { "ps", 2, GrammaticalGender.Neuter, "دوه" },
@@ -4667,6 +4685,9 @@ static class LocaleNumberTheoryData
         { "kk", 2, WordForm.Normal, GrammaticalGender.Feminine, "екі" },
         { "kk", 2, WordForm.Normal, GrammaticalGender.Neuter, "екі" },
 
+        { "ka", 21, WordForm.Abbreviation, GrammaticalGender.Masculine, "ოცდაერთი" },
+        { "ka", 21, WordForm.Abbreviation, GrammaticalGender.Feminine, "ოცდაერთი" },
+        { "ka", 21, WordForm.Abbreviation, GrammaticalGender.Neuter, "ოცდაერთი" },
         { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "دوه" },
         { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "دوه" },
         { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "دوه" },
@@ -4935,6 +4956,15 @@ static class LocaleNumberTheoryData
         { "kk", 20, "жиырмасыншы" },
         { "kk", 21, "жиырма бірінші" },
 
+        { "ka", 1, "პირველი" },
+        { "ka", 2, "მეორე" },
+        { "ka", 6, "მეექვსე" },
+        { "ka", 20, "მეოცე" },
+        { "ka", 21, "ოცდამეერთე" },
+        { "ka", 22, "ოცდამეორე" },
+        { "ka", 100, "მეასე" },
+        { "ka", 101, "ას პირველი" },
+        { "ka", 121, "ას ოცდამეერთე" },
         { "ps", 1, "لومړی" },
         { "ps", 21, "یوویشتم" },
         { "si", 1, "පළමු" },
@@ -6347,6 +6377,7 @@ static class LocaleNumberTheoryData
     {
         { "kk", 2, WordForm.Normal, "екінші" },
 
+        { "ka", 21, WordForm.Abbreviation, "ოცდამეერთე" },
         { "ps", 21, WordForm.Abbreviation, "یوویشتم" },
         { "si", 21, WordForm.Normal, "විසි එකවැනි" },
 
@@ -6740,6 +6771,9 @@ static class LocaleNumberTheoryData
         { "kk", 2, GrammaticalGender.Feminine, "екінші" },
         { "kk", 2, GrammaticalGender.Neuter, "екінші" },
 
+        { "ka", 21, GrammaticalGender.Masculine, "ოცდამეერთე" },
+        { "ka", 21, GrammaticalGender.Feminine, "ოცდამეერთე" },
+        { "ka", 21, GrammaticalGender.Neuter, "ოცდამეერთე" },
         { "ps", 1, GrammaticalGender.Masculine, "لومړی" },
         { "ps", 1, GrammaticalGender.Feminine, "لومړۍ" },
         { "ps", 1, GrammaticalGender.Neuter, "لومړی" },
@@ -7629,6 +7663,9 @@ static class LocaleNumberTheoryData
         { "kk", 2, GrammaticalGender.Feminine, WordForm.Normal, "екінші" },
         { "kk", 2, GrammaticalGender.Neuter, WordForm.Normal, "екінші" },
 
+        { "ka", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "ოცდამეერთე" },
+        { "ka", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "ოცდამეერთე" },
+        { "ka", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "ოცდამეერთე" },
         { "ps", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "یوویشتم" },
         { "ps", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "یوویشتمه" },
         { "ps", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "یوویشتم" },
@@ -7891,6 +7928,8 @@ static class LocaleNumberTheoryData
     {
         { "kk", 2, "екі" },
 
+        { "ka", 1, "ერთი" },
+        { "ka", 2, "ორი" },
         { "ps", 2, "دوه" },
         { "si", 2, "දෙක" },
 
@@ -7991,6 +8030,12 @@ static class LocaleNumberTheoryData
         { "kk", "жиырма бірінші", 21L },
         { "kk", "минус бес", -5L },
 
+        { "ka", "ოცდაერთი", 21L },
+        { "ka", "ას ხუთი", 105L },
+        { "ka", "ოცდამეერთე", 21L },
+        { "ka", "101-ე", 101L },
+        { "ka", "1-ლი", 1L },
+        { "ka", "ორი ათას ოცდაერთი", 2021L },
         { "ps", "یوویشت", 21L },
         { "ps", "دولس میلیون او درې سوه او پنځه څلوېښت زره او شپږ سوه او اته اویا", 12345678L },
         { "ps", "مائنس پنځه", -5L },
