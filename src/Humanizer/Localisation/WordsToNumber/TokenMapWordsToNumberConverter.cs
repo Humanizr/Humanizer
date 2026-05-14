@@ -291,6 +291,18 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
                 if (TryParseGluedScaleParts(token, out var gluedScaleCount, out var gluedScaleTokenValue))
                 {
+                    if (gluedScaleTokenValue < rules.ScaleThreshold)
+                    {
+                        if (!TryAddScaledMagnitude(current, (ulong)gluedScaleCount, (ulong)gluedScaleTokenValue, maxMagnitude, out current))
+                        {
+                            value = default;
+                            unrecognizedWord = words;
+                            return false;
+                        }
+
+                        continue;
+                    }
+
                     if (!TryAddGluedScaledGroup(total, current, (ulong)gluedScaleCount, (ulong)gluedScaleTokenValue, maxMagnitude, out total))
                     {
                         value = default;
