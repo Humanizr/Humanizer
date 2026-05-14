@@ -154,7 +154,9 @@ public class BurmeseLocaleParityTests
     [InlineData("တစ်ကုဋေ နှစ်သန်း သုံးသိန်း လေးသောင်း ငါးထောင် ခြောက်ရာ ခုနစ်ဆယ့်ရှစ်", 12345678)]
     [InlineData("အနုတ် နှစ်ဆယ့်တစ်", -21)]
     [InlineData("နှစ်ဆယ့်တစ်မြောက်", 21)]
+    [InlineData("21မြောက်", 21)]
     [InlineData("21 မြောက်", 21)]
+    [InlineData("-1မြောက်", -1)]
     [InlineData("-1 မြောက်", -1)]
     public void WordsToNumber_ParsesBurmeseCardinalsAndOrdinals(string words, long expected)
     {
