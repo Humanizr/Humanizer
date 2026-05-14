@@ -4,6 +4,7 @@ public static class LocaleNumberOverloadTheoryData
 {
     public static TheoryData<string, long, string> AddAndCases => new()
     {
+        { "my", 1001L, "တစ်ထောင် တစ်" },
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
@@ -214,6 +215,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
+        { "my", 1001L, "တစ်ထောင် တစ်" },
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
@@ -424,6 +426,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
+        { "my", 1001L, "တစ်ထောင် တစ်" },
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
@@ -634,6 +637,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
+        { "my", 1001L, "တစ်ထောင် တစ်" },
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
