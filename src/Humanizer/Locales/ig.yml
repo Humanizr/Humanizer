@@ -115,7 +115,7 @@ surfaces:
     duration:
       zero: 'enweghị oge'
       age:
-        template: '{value}'
+        template: 'dị {value}'
       millisecond:
         single:
           numeric: 'milisekọnd 1'

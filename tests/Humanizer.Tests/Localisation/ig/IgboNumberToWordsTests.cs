@@ -78,17 +78,20 @@ public class IgboNumberToWordsTests
     }
 
     [Theory]
-    [InlineData("na")]
-    [InlineData("nke")]
-    [InlineData("na nke")]
-    public void WordsToNumber_RejectsIgnoredOnlyIgboPhrases(string words)
+    [InlineData("na", "na")]
+    [InlineData("nke", "nke")]
+    [InlineData("na nke", "na")]
+    [InlineData("na otu", "na")]
+    [InlineData("otu na", "na")]
+    [InlineData("otu nke abụọ", "nke")]
+    public void WordsToNumber_RejectsDanglingIgnoredIgboPhrases(string words, string expectedUnrecognizedWord)
     {
         Assert.False(words.TryToNumber(out var parsed, CreateIgboCulture(), out var unrecognizedWord));
         Assert.Equal(0, parsed);
-        Assert.Equal(words, unrecognizedWord);
+        Assert.Equal(expectedUnrecognizedWord, unrecognizedWord);
 
         var exception = Assert.Throws<ArgumentException>(() => words.ToNumber(CreateIgboCulture()));
-        Assert.Equal($"Unrecognized number word: {words}", exception.Message);
+        Assert.Equal($"Unrecognized number word: {expectedUnrecognizedWord}", exception.Message);
     }
 
     [Theory]
