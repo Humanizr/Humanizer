@@ -228,7 +228,7 @@ surfaces:
       minusWord: 'ដក'
       negativeJoinWord: ' '
       joinWord: ' '
-      scaleCountJoinWord: ''
+      scaleCountJoinWord: ' '
       underHundredJoinWord: ''
       defaultOrdinalSuffix: ''
       matchingOrdinalSuffix: null
@@ -310,6 +310,7 @@ surfaces:
       negativePrefixes:
         - 'ដក '
         - '-'
+      useHundredMultiplier: true
       cardinalMap:
         'សូន្យ': 0
         'មួយ': 1

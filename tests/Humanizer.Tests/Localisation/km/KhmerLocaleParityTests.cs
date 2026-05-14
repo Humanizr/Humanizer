@@ -87,9 +87,9 @@ public class KhmerLocaleParityTests
     [Theory]
     [InlineData(0, "សូន្យ")]
     [InlineData(21, "ម្ភៃមួយ")]
-    [InlineData(105, "មួយរយ ប្រាំ")]
-    [InlineData(1234, "មួយពាន់ ពីររយ សាមសិបបួន")]
-    [InlineData(12345678, "ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី")]
+    [InlineData(105, "មួយ រយ ប្រាំ")]
+    [InlineData(1234, "មួយ ពាន់ ពីរ រយ សាមសិបបួន")]
+    [InlineData(12345678, "ដប់ពីរ លាន បី សែន បួន ម៉ឺន ប្រាំ ពាន់ ប្រាំមួយ រយ ចិតសិបប្រាំបី")]
     [InlineData(-21, "ដក ម្ភៃមួយ")]
     public void NumberToWords_ProducesKhmerCardinals(long number, string expected)
     {
@@ -103,7 +103,7 @@ public class KhmerLocaleParityTests
 
         var words = number.ToWords(km);
 
-        Assert.StartsWith("ប្រាំបួនរយ កៅសិបប្រាំបួនលាន", words, StringComparison.Ordinal);
+        Assert.StartsWith("ប្រាំបួន រយ កៅសិបប្រាំបួន លាន", words, StringComparison.Ordinal);
         Assert.Equal(number, words.ToNumber(km));
     }
 
@@ -135,6 +135,21 @@ public class KhmerLocaleParityTests
     }
 
     [Theory]
+    [InlineData("ពីររយ", 200)]
+    [InlineData("ពីរពាន់", 2000)]
+    [InlineData("ពីរម៉ឺន", 20000)]
+    [InlineData("ពីរសែន", 200000)]
+    [InlineData("ពីរលាន", 2000000)]
+    [InlineData("ដប់ពីរលាន", 12000000)]
+    public void WordsToNumber_ParsesCommonGluedScaleTokens(string words, long expected)
+    {
+        Assert.Equal(expected, words.ToNumber(km));
+        Assert.True(words.TryToNumber(out var parsed, km, out var unrecognizedWord));
+        Assert.Equal(expected, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Theory]
     [InlineData(1, "1ទី")]
     [InlineData(21, "21ទី")]
     [InlineData(-1, "-1ទី")]
@@ -146,13 +161,13 @@ public class KhmerLocaleParityTests
     }
 
     [Theory]
-    [InlineData(200, "ពីររយ")]
-    [InlineData(2000, "ពីរពាន់")]
-    [InlineData(20000, "ពីរម៉ឺន")]
-    [InlineData(200000, "ពីរសែន")]
-    [InlineData(2000000, "ពីរលាន")]
-    [InlineData(12000000, "ដប់ពីរលាន")]
-    public void NumberToWords_TypicalGluedScaleOutputsRoundTrip(long number, string expected)
+    [InlineData(200, "ពីរ រយ")]
+    [InlineData(2000, "ពីរ ពាន់")]
+    [InlineData(20000, "ពីរ ម៉ឺន")]
+    [InlineData(200000, "ពីរ សែន")]
+    [InlineData(2000000, "ពីរ លាន")]
+    [InlineData(12000000, "ដប់ពីរ លាន")]
+    public void NumberToWords_TypicalScaleSeparatedOutputsRoundTrip(long number, string expected)
     {
         var words = number.ToWords(km);
 
