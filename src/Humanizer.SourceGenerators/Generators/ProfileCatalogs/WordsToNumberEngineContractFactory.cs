@@ -27,6 +27,7 @@ public sealed partial class HumanizerSourceGenerator
                 "greedy-compound" => CreateGreedyCompoundExpression(profile),
                 "inverted-tens" => CreateInvertedTensExpression(profile.Root),
                 "linking-affix" => CreateLinkingAffixExpression(profile.Root),
+                "linked-vigesimal" => CreateLinkedVigesimalExpression(profile.Root),
                 "scale-leading-compound" => CreateScaleLeadingCompoundExpression(profile.Root),
                 "prefixed-tens-scale" => CreatePrefixedTensScaleExpression(profile.Root),
                 "stemmed-scale" => CreateStemmedScaleExpression(profile.Root),
@@ -113,6 +114,17 @@ public sealed partial class HumanizerSourceGenerator
             CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "linkedSuffixes")) + ", " +
             CreateOptionalStringArrayExpression(root, "ignoredTokens") + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
+            "))";
+
+        static string CreateLinkedVigesimalExpression(JsonElement root) =>
+            "new LinkedVigesimalWordsToNumberConverter(new LinkedVigesimalWordsToNumberProfile(" +
+            CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "words")) + ", " +
+            CreateLinkedVigesimalScaleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
+            QuoteLiteral(GetOptionalString(root, "terminalRemainderJoiner") ?? string.Empty) + ", " +
+            CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
+            CreateOptionalStringArrayExpression(root, "ordinalSuffixes") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "additionalCardinals") +
             "))";
 
         static string CreateScaleLeadingCompoundExpression(JsonElement root) =>

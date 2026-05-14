@@ -998,6 +998,19 @@ public sealed partial class HumanizerSourceGenerator
             RequiredEnumValue("singularRemainderVariant", "SegmentedScaleVariant"),
             RequiredEnumValue("pluralRemainderVariant", "SegmentedScaleVariant"));
 
+    static string CreateLinkedVigesimalScaleArrayExpression(JsonElement arrayElement)
+        => CreateTypedConstructorArrayExpression(
+            "LinkedVigesimalScale",
+            arrayElement,
+            RequiredInt64Value("value"),
+            RequiredStringValue("one"),
+            OptionalStringValueOrFallback("oneWithRemainder", "one"),
+            RequiredStringValue("name"),
+            OptionalStringValueOrFallback("nameWithRemainder", "name"),
+            OptionalStringValue("countJoiner", " "),
+            static element => CreateNullableIntStringFrozenDictionaryExpression(element, "countOverrides").Replace("null", "FrozenDictionary<int, string>.Empty"),
+            static element => CreateNullableIntStringFrozenDictionaryExpression(element, "countOverridesWithRemainder").Replace("null", "FrozenDictionary<int, string>.Empty"));
+
     static string CreateStemmedScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "StemmedScale",

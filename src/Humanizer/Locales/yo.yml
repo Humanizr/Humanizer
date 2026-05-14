@@ -225,12 +225,15 @@ surfaces:
 
   number:
     words:
-      engine: 'scale-leading-compound'
+      engine: 'linked-vigesimal'
       zeroWord: 'odo'
-      minusWord: 'àìyọkúrò'
-      conjunctionWord: 'àti'
-      ordinalPrefix: 'ìkẹ-'
-      unitsMap:
+      negativeWord: 'àìyọkúrò'
+      negativeJoiner: ' '
+      partJoiner: ' '
+      terminalRemainderJoiner: 'lé'
+      terminalRemainderThreshold: 100
+      ordinalSuffix: ''
+      words:
         - 'odo'
         - 'ọ̀kan'
         - 'méjì'
@@ -251,38 +254,125 @@ surfaces:
         - 'mẹ́tàdínlógún'
         - 'méjìdínlógún'
         - 'mọ́kàndínlógún'
-      tensMap:
-        2: 'ogún'
-        3: 'ọgbọ̀n'
-        4: 'ogójì'
-        5: 'àádọ́ta'
-        6: 'ọgọ́ta'
-        7: 'àádọ́rin'
-        8: 'ọgọ́rin'
-        9: 'àádọ́rùn-ún'
+        - 'ogún'
+        - 'ọ̀kanlélógún'
+        - 'méjìlélógún'
+        - 'mẹ́tàlélógún'
+        - 'mẹ́rìnlélógún'
+        - 'márùndínlọ́gbọ̀n'
+        - 'mẹ́rìndínlọ́gbọ̀n'
+        - 'mẹ́tàdínlọ́gbọ̀n'
+        - 'méjìdínlọ́gbọ̀n'
+        - 'ọ̀kàndínlọ́gbọ̀n'
+        - 'ọgbọ̀n'
+        - 'ọ̀kanlélọ́gbọ̀n'
+        - 'méjìlélọ́gbọ̀n'
+        - 'mẹ́tàlélọ́gbọ̀n'
+        - 'mẹ́rìnlélọ́gbọ̀n'
+        - 'márùndínlógójì'
+        - 'mẹ́rìndínlógójì'
+        - 'mẹ́tàdínlógójì'
+        - 'méjìdínlógójì'
+        - 'ọ̀kàndínlógójì'
+        - 'ogójì'
+        - 'ọ̀kanlélógójì'
+        - 'méjìlélógójì'
+        - 'mẹ́tàlélógójì'
+        - 'mẹ́rìnlélógójì'
+        - 'márùndíládọ́ta'
+        - 'mẹ́rìndíládọ́ta'
+        - 'mẹ́tàdíládọ́ta'
+        - 'méjìdíládọ́ta'
+        - 'ọ̀kàndíládọ́ta'
+        - 'àádọ́ta'
+        - 'ọ̀kanléládọ́ta'
+        - 'méjìléládọ́ta'
+        - 'mẹ́tàléládọ́ta'
+        - 'mẹ́rìnléládọ́ta'
+        - 'márùndílọ́gọ́ta'
+        - 'mẹ́rìndílọ́gọ́ta'
+        - 'mẹ́tàdílọ́gọ́ta'
+        - 'méjìdílọ́gọ́ta'
+        - 'ọ̀kàndílọ́gọ́ta'
+        - 'ọgọ́ta'
+        - 'ọ̀kanlélọ́gọ́ta'
+        - 'méjìlélọ́gọ́ta'
+        - 'mẹ́tàlélọ́gọ́ta'
+        - 'mẹ́rìnlélọ́gọ́ta'
+        - 'márùndíládọ́rin'
+        - 'mẹ́rìndíládọ́rin'
+        - 'mẹ́tàdíládọ́rin'
+        - 'méjìdíládọ́rin'
+        - 'ọ̀kàndíládọ́rin'
+        - 'àádọ́rin'
+        - 'ọ̀kanléládọ́rin'
+        - 'méjìléládọ́rin'
+        - 'mẹ́tàléládọ́rin'
+        - 'mẹ́rìnléládọ́rin'
+        - 'márùndílọ́gọ́rin'
+        - 'mẹ́rìndílọ́gọ́rin'
+        - 'mẹ́tàdílọ́gọ́rin'
+        - 'méjìdílọ́gọ́rin'
+        - 'ọ̀kàndílọ́gọ́rin'
+        - 'ọgọ́rin'
+        - 'ọ̀kanlélọ́gọ́rin'
+        - 'méjìlélọ́gọ́rin'
+        - 'mẹ́tàlélọ́gọ́rin'
+        - 'mẹ́rìnlélọ́gọ́rin'
+        - 'márùndíládọ́rùn-ún'
+        - 'mẹ́rìndíládọ́rùn-ún'
+        - 'mẹ́tàdíládọ́rùn-ún'
+        - 'méjìdíládọ́rùn-ún'
+        - 'ọ̀kàndíládọ́rùn-ún'
+        - 'àádọ́rùn-ún'
+        - 'ọ̀kanléládọ́rùn-ún'
+        - 'méjìléládọ́rùn-ún'
+        - 'mẹ́tàléládọ́rùn-ún'
+        - 'mẹ́rìnléládọ́rùn-ún'
+        - 'márùndílọ́gọ́rùn-ún'
+        - 'mẹ́rìndílọ́gọ́rùn-ún'
+        - 'mẹ́tàdílọ́gọ́rùn-ún'
+        - 'méjìdílọ́gọ́rùn-ún'
+        - 'ọ̀kàndílọ́gọ́rùn-ún'
       scales:
         -
           value: 1000000000000000000
+          one: 'kuíńtílíọ̀nù kan'
           name: 'kuíńtílíọ̀nù'
         -
           value: 1000000000000000
+          one: 'kuádírílíọ̀nù kan'
           name: 'kuádírílíọ̀nù'
         -
           value: 1000000000000
+          one: 'tírílíọ̀nù kan'
           name: 'tírílíọ̀nù'
         -
           value: 1000000000
+          one: 'bílíọ̀nù kan'
           name: 'bílíọ̀nù'
         -
           value: 1000000
+          one: 'mílíọ̀nù kan'
           name: 'mílíọ̀nù'
         -
           value: 1000
+          one: 'ẹgbẹ̀rún kan'
           name: 'ẹgbẹ̀rún'
         -
           value: 100
+          one: 'ọgọ́rùn-ún'
           name: 'ọgọ́rùn-ún'
-      ordinalMap:
+          countOverrides:
+            2: 'igba'
+            3: 'ọ̀ọ́dúnrún'
+            4: 'irinwó'
+            5: 'ẹ̀ẹ́dẹ́gbẹ̀ta'
+            6: 'ẹgbẹ̀ta'
+            7: 'ẹ̀ẹ́dẹ́gbẹ̀rin'
+            8: 'ẹgbẹ̀rin'
+            9: 'ẹ̀ẹ́dẹ́gbẹ̀rún'
+      ordinalExceptions:
         1: 'àkọ́kọ́'
         2: 'kejì'
         3: 'kẹta'
@@ -294,63 +384,149 @@ surfaces:
         9: 'kẹsàn-án'
         10: 'kẹwàá'
     parse:
-      engine: 'scale-leading-compound'
-      conjunctionWord: 'àti'
-      minusWord: 'àìyọkúrò'
-      ordinalPrefix: 'ìkẹ-'
-      unitsMap:
-        odo: 0
-        'ọ̀kan': 1
-        kan: 1
-        méjì: 2
-        mẹ́ta: 3
-        mẹ́rin: 4
-        'márùn-ún': 5
-        mẹ́fà: 6
-        méje: 7
-        mẹ́jọ: 8
-        'mẹ́sàn-án': 9
-        mẹ́wàá: 10
-        mọ́kànlá: 11
-        méjìlá: 12
-        mẹ́tàlá: 13
-        mẹ́rìnlá: 14
-        mẹ́ẹ̀dógún: 15
-        mẹ́rìndínlógún: 16
-        mẹ́tàdínlógún: 17
-        méjìdínlógún: 18
-        mọ́kàndínlógún: 19
-      tensMap:
-        ogún: 20
-        ọgbọ̀n: 30
-        ogójì: 40
-        àádọ́ta: 50
-        ọgọ́ta: 60
-        àádọ́rin: 70
-        ọgọ́rin: 80
-        'àádọ́rùn-ún': 90
+      engine: 'linked-vigesimal'
+      terminalRemainderJoiner: 'lé'
+      words:
+        - 'odo'
+        - 'ọ̀kan'
+        - 'méjì'
+        - 'mẹ́ta'
+        - 'mẹ́rin'
+        - 'márùn-ún'
+        - 'mẹ́fà'
+        - 'méje'
+        - 'mẹ́jọ'
+        - 'mẹ́sàn-án'
+        - 'mẹ́wàá'
+        - 'mọ́kànlá'
+        - 'méjìlá'
+        - 'mẹ́tàlá'
+        - 'mẹ́rìnlá'
+        - 'mẹ́ẹ̀dógún'
+        - 'mẹ́rìndínlógún'
+        - 'mẹ́tàdínlógún'
+        - 'méjìdínlógún'
+        - 'mọ́kàndínlógún'
+        - 'ogún'
+        - 'ọ̀kanlélógún'
+        - 'méjìlélógún'
+        - 'mẹ́tàlélógún'
+        - 'mẹ́rìnlélógún'
+        - 'márùndínlọ́gbọ̀n'
+        - 'mẹ́rìndínlọ́gbọ̀n'
+        - 'mẹ́tàdínlọ́gbọ̀n'
+        - 'méjìdínlọ́gbọ̀n'
+        - 'ọ̀kàndínlọ́gbọ̀n'
+        - 'ọgbọ̀n'
+        - 'ọ̀kanlélọ́gbọ̀n'
+        - 'méjìlélọ́gbọ̀n'
+        - 'mẹ́tàlélọ́gbọ̀n'
+        - 'mẹ́rìnlélọ́gbọ̀n'
+        - 'márùndínlógójì'
+        - 'mẹ́rìndínlógójì'
+        - 'mẹ́tàdínlógójì'
+        - 'méjìdínlógójì'
+        - 'ọ̀kàndínlógójì'
+        - 'ogójì'
+        - 'ọ̀kanlélógójì'
+        - 'méjìlélógójì'
+        - 'mẹ́tàlélógójì'
+        - 'mẹ́rìnlélógójì'
+        - 'márùndíládọ́ta'
+        - 'mẹ́rìndíládọ́ta'
+        - 'mẹ́tàdíládọ́ta'
+        - 'méjìdíládọ́ta'
+        - 'ọ̀kàndíládọ́ta'
+        - 'àádọ́ta'
+        - 'ọ̀kanléládọ́ta'
+        - 'méjìléládọ́ta'
+        - 'mẹ́tàléládọ́ta'
+        - 'mẹ́rìnléládọ́ta'
+        - 'márùndílọ́gọ́ta'
+        - 'mẹ́rìndílọ́gọ́ta'
+        - 'mẹ́tàdílọ́gọ́ta'
+        - 'méjìdílọ́gọ́ta'
+        - 'ọ̀kàndílọ́gọ́ta'
+        - 'ọgọ́ta'
+        - 'ọ̀kanlélọ́gọ́ta'
+        - 'méjìlélọ́gọ́ta'
+        - 'mẹ́tàlélọ́gọ́ta'
+        - 'mẹ́rìnlélọ́gọ́ta'
+        - 'márùndíládọ́rin'
+        - 'mẹ́rìndíládọ́rin'
+        - 'mẹ́tàdíládọ́rin'
+        - 'méjìdíládọ́rin'
+        - 'ọ̀kàndíládọ́rin'
+        - 'àádọ́rin'
+        - 'ọ̀kanléládọ́rin'
+        - 'méjìléládọ́rin'
+        - 'mẹ́tàléládọ́rin'
+        - 'mẹ́rìnléládọ́rin'
+        - 'márùndílọ́gọ́rin'
+        - 'mẹ́rìndílọ́gọ́rin'
+        - 'mẹ́tàdílọ́gọ́rin'
+        - 'méjìdílọ́gọ́rin'
+        - 'ọ̀kàndílọ́gọ́rin'
+        - 'ọgọ́rin'
+        - 'ọ̀kanlélọ́gọ́rin'
+        - 'méjìlélọ́gọ́rin'
+        - 'mẹ́tàlélọ́gọ́rin'
+        - 'mẹ́rìnlélọ́gọ́rin'
+        - 'márùndíládọ́rùn-ún'
+        - 'mẹ́rìndíládọ́rùn-ún'
+        - 'mẹ́tàdíládọ́rùn-ún'
+        - 'méjìdíládọ́rùn-ún'
+        - 'ọ̀kàndíládọ́rùn-ún'
+        - 'àádọ́rùn-ún'
+        - 'ọ̀kanléládọ́rùn-ún'
+        - 'méjìléládọ́rùn-ún'
+        - 'mẹ́tàléládọ́rùn-ún'
+        - 'mẹ́rìnléládọ́rùn-ún'
+        - 'márùndílọ́gọ́rùn-ún'
+        - 'mẹ́rìndílọ́gọ́rùn-ún'
+        - 'mẹ́tàdílọ́gọ́rùn-ún'
+        - 'méjìdílọ́gọ́rùn-ún'
+        - 'ọ̀kàndílọ́gọ́rùn-ún'
       scales:
         -
           value: 1000000000000000000
+          one: 'kuíńtílíọ̀nù kan'
           name: 'kuíńtílíọ̀nù'
         -
           value: 1000000000000000
+          one: 'kuádírílíọ̀nù kan'
           name: 'kuádírílíọ̀nù'
         -
           value: 1000000000000
+          one: 'tírílíọ̀nù kan'
           name: 'tírílíọ̀nù'
         -
           value: 1000000000
+          one: 'bílíọ̀nù kan'
           name: 'bílíọ̀nù'
         -
           value: 1000000
+          one: 'mílíọ̀nù kan'
           name: 'mílíọ̀nù'
         -
           value: 1000
+          one: 'ẹgbẹ̀rún kan'
           name: 'ẹgbẹ̀rún'
         -
           value: 100
+          one: 'ọgọ́rùn-ún'
           name: 'ọgọ́rùn-ún'
+          countOverrides:
+            2: 'igba'
+            3: 'ọ̀ọ́dúnrún'
+            4: 'irinwó'
+            5: 'ẹ̀ẹ́dẹ́gbẹ̀ta'
+            6: 'ẹgbẹ̀ta'
+            7: 'ẹ̀ẹ́dẹ́gbẹ̀rin'
+            8: 'ẹgbẹ̀rin'
+            9: 'ẹ̀ẹ́dẹ́gbẹ̀rún'
+      negativePrefixes:
+        - 'àìyọkúrò'
       ordinalMap:
         àkọ́kọ́: 1
         kejì: 2
@@ -362,12 +538,13 @@ surfaces:
         kẹjọ: 8
         'kẹsàn-án': 9
         kẹwàá: 10
+      additionalCardinals:
+        kan: 1
 
   ordinal:
     numeric:
       engine: 'template'
       masculine:
-        prefix: 'ìkẹ-'
         defaultSuffix: ''
     date:
       pattern: '{day} MMMM yyyy'
@@ -381,7 +558,7 @@ surfaces:
     hourMode: 'h12'
     hourWordsMap:
       - ''
-      - 'ọ̀kan'
+      - 'kan'
       - 'méjì'
       - 'mẹ́ta'
       - 'mẹ́rin'
@@ -394,7 +571,7 @@ surfaces:
       - 'mọ́kànlá'
       - 'méjìlá'
     min0: 'aago {hour} {dayPeriod}'
-    defaultTemplate: 'aago {hour} àti ìṣẹ́jú {minutes} {dayPeriod}'
+    defaultTemplate: 'aago {hour} kọjá ìṣẹ́jú {minutes} {dayPeriod}'
     earlyMorning: 'àárọ̀'
     morning: 'àárọ̀'
     afternoon: 'ọ̀sán'

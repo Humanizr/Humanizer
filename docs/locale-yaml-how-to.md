@@ -286,6 +286,7 @@ Supported render engines in current checked-in YAML include:
 - `inverted-tens`
 - `joined-scale`
 - `linking-scale`
+- `linked-vigesimal`
 - `long-scale-stem-ordinal`
 - `dual-form-scale`
 - `ordinal-prefix-scale`
@@ -320,6 +321,7 @@ Supported parse engines in current checked-in YAML include:
 - `greedy-compound`
 - `inverted-tens`
 - `linking-affix`
+- `linked-vigesimal`
 - `scale-leading-compound`
 - `prefixed-tens-scale`
 - `stemmed-scale`
@@ -330,6 +332,9 @@ Supported parse engines in current checked-in YAML include:
 For locale parity work, account for `number.parse` alongside `number.words` so the locale can naturally round-trip the same high-range forms in both directions.
 
 `stemmed-scale` is available as a narrow render/parse pair for additive count+scale morphology where bound count stems attach to scale suffixes. Use it only when the locale's structure is still additive scale decomposition; do not stretch it to vigesimal, subtractive, or clock-like number systems.
+
+`linked-vigesimal` is available for locales with lexicalized linked/vigesimal low numbers plus scale-leading higher values. Use it when a dense low-number table and scale count overrides are the smallest accurate model; do not use it for bound count stems that belong in `stemmed-scale`.
+
 
 
 ### `ordinal`

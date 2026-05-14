@@ -633,6 +633,23 @@ public sealed partial class HumanizerSourceGenerator
                             Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty")
                         )
             ),
+                // Shared engine for linked-vigesimal locales with lexicalized lower numbers and
+                // scale nouns that lead their count words. Count overrides cover exact scale
+                // morphology such as irregular hundreds without using the stemmed-scale engine.
+                ["linked-vigesimal"] = Schema("linked-vigesimal", "LinkedVigesimalNumberToWordsConverter",
+                Member("profile-object", null, "LinkedVigesimalNumberToWordsProfile", null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "negativeWord", null, null, null, null, null, null),
+                            Member("string", "negativeJoiner", null, null, null, " ", null, null),
+                            Member("string", "partJoiner", null, null, null, " ", null, null),
+                            Member("string", "terminalRemainderJoiner", null, null, null, " ", null, null),
+                            Member("int32", "terminalRemainderThreshold", null, null, null, "100", null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "words", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "linked-vigesimal-scale-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
+                        )
+            ),
                 // Shared engine for locales whose scale count is a bound stem and whose scale suffix
                 // changes when the scale is followed by a lower-order remainder.
                 ["stemmed-scale"] = Schema("stemmed-scale", "StemmedScaleNumberToWordsConverter",

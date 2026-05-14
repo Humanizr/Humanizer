@@ -307,6 +307,7 @@ Supported engines in current checked-in YAML:
 - `inverted-tens`
 - `joined-scale`
 - `linking-scale`
+- `linked-vigesimal`
 - `long-scale-stem-ordinal`
 - `dual-form-scale`
 - `ordinal-prefix-scale`
@@ -340,6 +341,7 @@ Supported engines in current checked-in YAML:
 - `greedy-compound`
 - `inverted-tens`
 - `linking-affix`
+- `linked-vigesimal`
 - `scale-leading-compound`
 - `prefixed-tens-scale`
 - `stemmed-scale`
@@ -1475,6 +1477,36 @@ Fields:
 - `specialJoinerTensValue`
 - `tupleMap`
 - `tupleFallbackWord`
+
+### `linked-vigesimal`
+
+Use this render and parse engine pair for locales whose natural lower numbers are lexicalized or linked/vigesimal, while larger values are built with scale nouns before their counts. Yoruba (`yo`) uses it for directly authored sub-100 forms such as `mẹ́tàlélógún`, with scale rows for `ẹgbẹ̀rún kan`, `igba`, and other hundred-scale overrides. Do not use this engine for bound-stem scale morphology; use `stemmed-scale` for that case.
+
+Render fields:
+
+- `zeroWord`
+- `negativeWord`
+- `negativeJoiner`
+- `partJoiner`
+- `terminalRemainderJoiner`
+- `terminalRemainderThreshold`
+- `ordinalSuffix`
+- `words` — dense cardinal words from zero through the highest lexicalized low number
+- `scales`
+- `ordinalExceptions`
+
+Nested `scales` fields:
+
+- `value`
+- `one`
+- `oneWithRemainder` (optional; defaults to `one`)
+- `name`
+- `nameWithRemainder` (optional; defaults to `name`)
+- `countJoiner` (optional; defaults to a space)
+- `countOverrides` (optional exact phrases keyed by scale count)
+- `countOverridesWithRemainder` (optional exact phrases keyed by scale count)
+
+Parse fields mirror render-side `words`, `scales`, and `terminalRemainderJoiner`, plus optional `negativePrefixes`, `ordinalSuffixes`, `ordinalMap`, and `additionalCardinals`.
 
 ### `stemmed-scale`
 

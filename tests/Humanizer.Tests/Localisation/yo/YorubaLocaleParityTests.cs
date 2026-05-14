@@ -76,10 +76,10 @@ public class YorubaLocaleParityTests
     [InlineData(1, "ọ̀kan")]
     [InlineData(5, "márùn-ún")]
     [InlineData(11, "mọ́kànlá")]
-    [InlineData(21, "ogún àti ọ̀kan")]
-    [InlineData(99, "àádọ́rùn-ún àti mẹ́sàn-án")]
-    [InlineData(105, "ọgọ́rùn-ún ọ̀kan àti márùn-ún")]
-    [InlineData(1234, "ẹgbẹ̀rún ọ̀kan ọgọ́rùn-ún méjì àti ọgbọ̀n àti mẹ́rin")]
+    [InlineData(21, "ọ̀kanlélógún")]
+    [InlineData(99, "ọ̀kàndílọ́gọ́rùn-ún")]
+    [InlineData(105, "ọgọ́rùn-ún lé márùn-ún")]
+    [InlineData(1234, "ẹgbẹ̀rún kan igba lé mẹ́rìnlélọ́gbọ̀n")]
     public void NumberToWords_ProducesExpectedYorubaOutput(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Yo));
@@ -87,7 +87,7 @@ public class YorubaLocaleParityTests
 
     [Theory]
     [InlineData(-5, "àìyọkúrò márùn-ún")]
-    [InlineData(-1000, "àìyọkúrò ẹgbẹ̀rún ọ̀kan")]
+    [InlineData(-1000, "àìyọkúrò ẹgbẹ̀rún kan")]
     public void NumberToWords_UsesYorubaNegativePrefix(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Yo));
@@ -96,7 +96,7 @@ public class YorubaLocaleParityTests
     [Theory]
     [InlineData(1, "àkọ́kọ́")]
     [InlineData(2, "kejì")]
-    [InlineData(21, "ìkẹ-ogún àti ọ̀kan")]
+    [InlineData(21, "ọ̀kanlélógún")]
     [InlineData(-1, "àìyọkúrò àkọ́kọ́")]
     public void NumberToOrdinalWords_ProducesExpectedYorubaOutput(int number, string expected)
     {
@@ -104,10 +104,10 @@ public class YorubaLocaleParityTests
     }
 
     [Theory]
-    [InlineData(21, "ogún àti ọ̀kan")]
-    [InlineData(99, "àádọ́rùn-ún àti mẹ́sàn-án")]
-    [InlineData(105, "ọgọ́rùn-ún ọ̀kan àti márùn-ún")]
-    [InlineData(1234, "ẹgbẹ̀rún ọ̀kan ọgọ́rùn-ún méjì àti ọgbọ̀n àti mẹ́rin")]
+    [InlineData(21, "ọ̀kanlélógún")]
+    [InlineData(99, "ọ̀kàndílọ́gọ́rùn-ún")]
+    [InlineData(105, "ọgọ́rùn-ún lé márùn-ún")]
+    [InlineData(1234, "ẹgbẹ̀rún kan igba lé mẹ́rìnlélọ́gbọ̀n")]
     public void WordsToNumber_RoundTripsYorubaCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Yo));
@@ -118,7 +118,7 @@ public class YorubaLocaleParityTests
 
     [Theory]
     [InlineData("àkọ́kọ́", 1)]
-    [InlineData("ìkẹ-ogún àti ọ̀kan", 21)]
+    [InlineData("ọ̀kanlélógún", 21)]
     [InlineData("àìyọkúrò àkọ́kọ́", -1)]
     public void WordsToNumber_ParsesYorubaOrdinals(string words, long expected)
     {
@@ -126,8 +126,8 @@ public class YorubaLocaleParityTests
     }
 
     [Theory]
-    [InlineData(1, "ìkẹ-1")]
-    [InlineData(21, "ìkẹ-21")]
+    [InlineData(1, "1")]
+    [InlineData(21, "21")]
     public void Ordinalize_UsesYorubaNumericTemplate(int number, string expected)
     {
         Assert.Equal(expected, number.Ordinalize());
@@ -152,11 +152,11 @@ public class YorubaLocaleParityTests
     }
 
     [Theory]
-    [InlineData(1, 0, "aago ọ̀kan àárọ̀")]
-    [InlineData(1, 5, "aago ọ̀kan àti ìṣẹ́jú márùn-ún àárọ̀")]
-    [InlineData(13, 23, "aago ọ̀kan àti ìṣẹ́jú ogún àti mẹ́ta ọ̀sán")]
+    [InlineData(1, 0, "aago kan àárọ̀")]
+    [InlineData(1, 5, "aago kan kọjá ìṣẹ́jú márùn-ún àárọ̀")]
+    [InlineData(13, 23, "aago kan kọjá ìṣẹ́jú mẹ́tàlélógún ọ̀sán")]
     [InlineData(20, 0, "aago mẹ́jọ ìrọ̀lẹ́")]
-    [InlineData(23, 40, "aago mọ́kànlá àti ìṣẹ́jú ogójì alẹ́")]
+    [InlineData(23, 40, "aago mọ́kànlá kọjá ìṣẹ́jú ogójì alẹ́")]
     public void ToClockNotation_ExactOutput(int hours, int minutes, string expected)
     {
         Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation());
@@ -165,7 +165,7 @@ public class YorubaLocaleParityTests
     [Fact]
     public void ToClockNotation_Rounded_ExactOutput()
     {
-        Assert.Equal("aago ọ̀kan àti ìṣẹ́jú ogún àti márùn-ún ọ̀sán", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+        Assert.Equal("aago kan kọjá ìṣẹ́jú márùndínlọ́gbọ̀n ọ̀sán", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
     }
 #endif
 
