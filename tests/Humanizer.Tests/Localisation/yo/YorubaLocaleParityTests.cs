@@ -96,7 +96,8 @@ public class YorubaLocaleParityTests
     [Theory]
     [InlineData(1, "àkọ́kọ́")]
     [InlineData(2, "kejì")]
-    [InlineData(21, "ọ̀kanlélógún")]
+    [InlineData(11, "kọ́kànlá")]
+    [InlineData(21, "kọ̀kanlélógún")]
     [InlineData(-1, "àìyọkúrò àkọ́kọ́")]
     public void NumberToOrdinalWords_ProducesExpectedYorubaOutput(int number, string expected)
     {
@@ -121,7 +122,8 @@ public class YorubaLocaleParityTests
 
     [Theory]
     [InlineData("àkọ́kọ́", 1)]
-    [InlineData("ọ̀kanlélógún", 21)]
+    [InlineData("kọ́kànlá", 11)]
+    [InlineData("kọ̀kanlélógún", 21)]
     [InlineData("àìyọkúrò àkọ́kọ́", -1)]
     public void WordsToNumber_ParsesYorubaOrdinals(string words, long expected)
     {
