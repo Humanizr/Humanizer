@@ -80,6 +80,8 @@ public class PashtoLocaleTests
 
     [Theory]
     [InlineData("یوویشت", 21)]
+    [InlineData("سل او دوه ویشت", 122)]
+    [InlineData("دوه زره او درې ویشت", 2023)]
     [InlineData("سل او یو", 101)]
     [InlineData("یوویشتمه", 21)]
     [InlineData("منفي پنځه", -5)]

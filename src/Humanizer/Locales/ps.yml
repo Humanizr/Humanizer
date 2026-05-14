@@ -408,6 +408,9 @@ surfaces:
       tokenSuffixesToStrip:
         - 'م'
         - 'مه'
+      teenSuffixTokens:
+        - 'ویشت'
+      teenBaseValue: 20
       cardinalMap:
         'صفر': 0
         'یو': 1
