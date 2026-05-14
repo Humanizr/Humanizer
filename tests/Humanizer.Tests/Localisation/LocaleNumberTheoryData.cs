@@ -2939,6 +2939,9 @@ static class LocaleNumberTheoryData
         { "lo", 1, "ໜຶ່ງ" },
         { "lo", 21, "ຊາວເອັດ" },
         { "lo", 1234, "ໜຶ່ງ ພັນ ສອງ ຮ້ອຍ ສາມສິບສີ່" },
+        { "mn", 1, "нэг" },
+        { "mn", 21, "хорин нэг" },
+        { "mn", 1234, "нэг мянга хоёр зуун гучин дөрөв" },
     };
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
@@ -3775,6 +3778,8 @@ static class LocaleNumberTheoryData
         { "mr", 121, false, "एकशे एकवीस" },
         { "lo", 101, true, "ໜຶ່ງ ຮ້ອຍ ໜຶ່ງ" },
         { "lo", 121, false, "ໜຶ່ງ ຮ້ອຍ ຊາວເອັດ" },
+        { "mn", 101, true, "нэг зуун нэг" },
+        { "mn", 121, false, "нэг зуун хорин нэг" },
     };
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
@@ -4203,6 +4208,7 @@ static class LocaleNumberTheoryData
         { "mr", 21, WordForm.Abbreviation, "एकवीस" },
         { "mr", 101, WordForm.Abbreviation, "एकशे एक" },
         { "lo", 21, WordForm.Abbreviation, "ຊາວເອັດ" },
+        { "mn", 21, WordForm.Abbreviation, "хорин нэг" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
@@ -4677,6 +4683,9 @@ static class LocaleNumberTheoryData
         { "lo", 1, GrammaticalGender.Masculine, "ໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Feminine, "ໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Neuter, "ໜຶ່ງ" },
+        { "mn", 1, GrammaticalGender.Masculine, "нэг" },
+        { "mn", 1, GrammaticalGender.Feminine, "нэг" },
+        { "mn", 1, GrammaticalGender.Neuter, "нэг" },
     };
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
@@ -4946,6 +4955,9 @@ static class LocaleNumberTheoryData
         { "lo", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "ໜຶ່ງ" },
         { "lo", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "ໜຶ່ງ" },
         { "lo", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "ໜຶ່ງ" },
+        { "mn", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "нэг" },
+        { "mn", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "нэг" },
+        { "mn", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "нэг" },
     };
 
     public static TheoryData<string, int, string> OrdinalCases => new()
@@ -6371,6 +6383,11 @@ static class LocaleNumberTheoryData
         { "lo", 21, "ທີຊາວເອັດ" },
         { "lo", 22, "ທີຊາວສອງ" },
         { "lo", 101, "ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ" },
+        { "mn", 1, "нэгдүгээр" },
+        { "mn", 6, "зургаадугаар" },
+        { "mn", 21, "хорин нэгдүгээр" },
+        { "mn", 22, "хорин хоёрдугаар" },
+        { "mn", 101, "нэг зуун нэг дахь" },
     };
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
@@ -6763,6 +6780,7 @@ static class LocaleNumberTheoryData
         { "mr", 21, WordForm.Abbreviation, "एकविसावा" },
         { "mr", 21, WordForm.Normal, "एकविसावा" },
         { "lo", 21, WordForm.Abbreviation, "ທີຊາວເອັດ" },
+        { "mn", 21, WordForm.Abbreviation, "хорин нэгдүгээр" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
@@ -7655,6 +7673,9 @@ static class LocaleNumberTheoryData
         { "lo", 1, GrammaticalGender.Masculine, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Feminine, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Neuter, "ທີໜຶ່ງ" },
+        { "mn", 1, GrammaticalGender.Masculine, "нэгдүгээр" },
+        { "mn", 1, GrammaticalGender.Feminine, "нэгдүгээр" },
+        { "mn", 1, GrammaticalGender.Neuter, "нэгдүгээр" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
@@ -7923,6 +7944,9 @@ static class LocaleNumberTheoryData
         { "lo", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "ທີໜຶ່ງ" },
         { "lo", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "ທີໜຶ່ງ" },
+        { "mn", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "нэгдүгээр" },
+        { "mn", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "нэгдүгээр" },
+        { "mn", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "нэгдүгээр" },
     };
     public static TheoryData<string, int, string> TupleCases => new()
     {
@@ -8022,6 +8046,7 @@ static class LocaleNumberTheoryData
         { "pa-Arab", 2, "دو" },
         { "mr", 2, "दोन" },
         { "lo", 2, "ສອງ" },
+        { "mn", 2, "хоёр" },
     };
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
@@ -8198,5 +8223,11 @@ static class LocaleNumberTheoryData
         { "lo", "ທີຊາວເອັດ", 21L },
         { "lo", "ທີຊາວສອງ", 22L },
         { "lo", "ທີໜຶ່ງ ຮ້ອຍ ໜຶ່ງ", 101L },
+        { "mn", "хорин нэг", 21L },
+        { "mn", "нэг зуун тав", 105L },
+        { "mn", "зургаадугаар", 6L },
+        { "mn", "хорин нэгдүгээр", 21L },
+        { "mn", "хорин хоёрдугаар", 22L },
+        { "mn", "нэг зуун нэг дахь", 101L },
     };
 }

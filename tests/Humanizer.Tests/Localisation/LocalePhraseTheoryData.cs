@@ -1196,6 +1196,8 @@ static class LocalePhraseTheoryData
         { "mr", 3, TimeUnit.Day, Tense.Future, "3 दिवस नंतर" },
         { "lo", 1, TimeUnit.Day, Tense.Past, "ມື້ວານ" },
         { "lo", 2, TimeUnit.Day, Tense.Future, "ໃນອີກ 2 ມື້" },
+        { "mn", 1, TimeUnit.Day, Tense.Past, "өчигдөр" },
+        { "mn", 2, TimeUnit.Day, Tense.Future, "2 хоногийн дараа" },
 };
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
@@ -1681,6 +1683,7 @@ static class LocalePhraseTheoryData
         { "pa-Arab", "کدے نہیں" },
         { "mr", "कधीच नाही" },
         { "lo", "ບໍ່ເຄີຍ" },
+        { "mn", "хэзээ ч үгүй" },
 };
 
     public static TheoryData<string, string, string, string> TimeOnlyDefaultHumanizeCases => new()
@@ -2611,6 +2614,8 @@ static class LocalePhraseTheoryData
         { "mr", 1, TimeUnit.Hour, true, "एक तास" },
         { "lo", 2, TimeUnit.Day, false, "2 ມື້" },
         { "lo", 1, TimeUnit.Hour, true, "ໜຶ່ງ ຊົ່ວໂມງ" },
+        { "mn", 2, TimeUnit.Day, false, "2 өдөр" },
+        { "mn", 1, TimeUnit.Hour, true, "нэг цаг" },
 };
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()
