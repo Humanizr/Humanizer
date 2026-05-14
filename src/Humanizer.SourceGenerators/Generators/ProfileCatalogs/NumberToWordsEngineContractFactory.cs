@@ -180,6 +180,7 @@ public sealed partial class HumanizerSourceGenerator
                 "conjoined-gendered-scale-array" => CreateConjoinedGenderedScaleArrayExpression(builderRoot),
                 "segmented-scale-array" => CreateSegmentedScaleArrayExpression(builderRoot),
                 "stemmed-scale-array" => CreateStemmedScaleArrayExpression(builderRoot),
+                "linked-vigesimal-scale-array" => CreateLinkedVigesimalScaleArrayExpression(builderRoot),
                 "terminal-ordinal-scale-array" => CreateTerminalOrdinalScaleArrayExpression(builderRoot),
                 "construct-state-scale-array" => CreateConstructStateScaleArrayExpression(builderRoot),
                 "hyphenated-scale" => CreateHyphenatedScaleExpression(builderRoot),
