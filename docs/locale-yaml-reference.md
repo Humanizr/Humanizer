@@ -1257,7 +1257,7 @@ Fields:
 - `tupleSuffix`
 - `ordinalLeadingOneStrategy`
 - `ordinalMode`
-- `ordinalExceptions`
+- `ordinalWholePhrasePrefix`
 - `unitsMap`
 - `ordinalUnitsMap`
 - `tensMap`
@@ -1268,8 +1268,8 @@ Fields:
 Notes:
 
 - `defaultAddAnd`, `addAndMode`, and `andStrategy` together define when conjunctions appear. Do not try to encode that behavior with ad hoc words or duplicated tables.
-- `ordinalMode` decides whether ordinals come from dedicated lexical tables, numeric suffixes, or other structural strategies within the shared kernel.
-- `ordinalExceptions` maps exact ordinal values when terminal-unit mutation is not natural for a locale.
+- `ordinalMode` decides whether ordinals come from dedicated lexical tables, whole-phrase prefixing, numeric suffixes, or other structural strategies within the shared kernel.
+- `ordinalWholePhrasePrefix` supplies the prefix for locales that form compound ordinals by prefixing the whole cardinal phrase.
 - `namedTuples` is for irregular compact tuple-style forms; keep it sparse and comment unusual values in the locale file.
 
 ### `construct-state-scale`

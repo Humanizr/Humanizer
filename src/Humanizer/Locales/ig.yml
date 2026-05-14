@@ -236,13 +236,8 @@ surfaces:
       andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
       tupleSuffix: ''
       ordinalLeadingOneStrategy: 'keep-leading-one'
-      ordinalMode: 'english'
-      ordinalExceptions:
-        21: 'nke iri abụọ na otu'
-        22: 'nke iri abụọ na abụọ'
-        99: 'nke iri itoolu na itoolu'
-        100: 'nke otu narị'
-        1001: 'nke otu puku na otu'
+      ordinalMode: 'whole-phrase-prefix'
+      ordinalWholePhrasePrefix: 'nke '
       unitsMap:
         0: 'efu'
         1: 'otu'
@@ -345,6 +340,7 @@ surfaces:
       removeDiacritics: false
       ignoredTokens:
         - 'na'
+        - 'nke'
       cardinalMap:
         efu: 0
         otu: 1
@@ -357,6 +353,7 @@ surfaces:
         asatọ: 8
         itoolu: 9
         na: 0
+        nke: 0
         iri: 10
         'iri na otu': 11
         'iri na abụọ': 12
@@ -387,12 +384,6 @@ surfaces:
         'nke mbụ': 1
         'nke abụọ': 2
         'nke atọ': 3
-        'nke iri abụọ': 20
-        'nke iri abụọ na otu': 21
-        'nke iri abụọ na abụọ': 22
-        'nke iri itoolu na itoolu': 99
-        'nke otu narị': 100
-        'nke otu puku na otu': 1001
 
 
   ordinal:

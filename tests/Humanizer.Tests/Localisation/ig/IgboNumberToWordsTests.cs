@@ -46,8 +46,10 @@ public class IgboNumberToWordsTests
     [InlineData(20, "nke iri abụọ")]
     [InlineData(21, "nke iri abụọ na otu")]
     [InlineData(22, "nke iri abụọ na abụọ")]
+    [InlineData(23, "nke iri abụọ na atọ")]
     [InlineData(99, "nke iri itoolu na itoolu")]
     [InlineData(100, "nke otu narị")]
+    [InlineData(105, "nke otu narị na ise")]
     [InlineData(1001, "nke otu puku na otu")]
     [InlineData(-1, "mwepu nke mbụ")]
     public void NumberToOrdinalWords_ProducesExpectedIgboOutput(int number, string expected)
@@ -80,8 +82,10 @@ public class IgboNumberToWordsTests
     [InlineData("nke iri abụọ", 20)]
     [InlineData("nke iri abụọ na otu", 21)]
     [InlineData("nke iri abụọ na abụọ", 22)]
+    [InlineData("nke iri abụọ na atọ", 23)]
     [InlineData("nke iri itoolu na itoolu", 99)]
     [InlineData("nke otu narị", 100)]
+    [InlineData("nke otu narị na ise", 105)]
     [InlineData("nke otu puku na otu", 1001)]
     [InlineData("mwepu nke mbụ", -1)]
     public void WordsToNumber_ParsesIgboOrdinals(string words, long expected)

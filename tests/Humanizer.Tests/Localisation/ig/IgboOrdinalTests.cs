@@ -18,6 +18,8 @@ public class IgboOrdinalTests
     [InlineData(2, "nke abụọ")]
     [InlineData(21, "nke iri abụọ na otu")]
     [InlineData(22, "nke iri abụọ na abụọ")]
+    [InlineData(23, "nke iri abụọ na atọ")]
+    [InlineData(105, "nke otu narị na ise")]
     [InlineData(-1, "mwepu nke mbụ")]
     public void NumberToOrdinalWords_UsesIgboOrdinalWords(int number, string expected)
     {
