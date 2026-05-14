@@ -5,8 +5,8 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData =>
         new()
         {
-        { "ne", 1, "पहिलो" },
-        { "ne", 21, "एक्काइसौँ" },
+            { "ne", 1, "पहिलो" },
+            { "ne", 21, "एक्काइसौँ" },
 
             { "am", 0, "0ኛ" },
             { "am", 1, "1ኛ" },
@@ -641,9 +641,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
         new()
         {
-        { "ne", 1, GrammaticalGender.Masculine, "पहिलो" },
-        { "ne", 1, GrammaticalGender.Feminine, "पहिली" },
-        { "ne", 1, GrammaticalGender.Neuter, "पहिलो" },
+            { "ne", 1, GrammaticalGender.Masculine, "पहिलो" },
+            { "ne", 1, GrammaticalGender.Feminine, "पहिली" },
+            { "ne", 1, GrammaticalGender.Neuter, "पहिलो" },
 
             { "am", 1, GrammaticalGender.Masculine, "1ኛ" },
             { "am", 1, GrammaticalGender.Feminine, "1ኛ" },
@@ -3402,7 +3402,7 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
         new()
         {
-        { "ne", "1", "पहिलो" },
+            { "ne", "1", "पहिलो" },
 
             { "am", "1", "1ኛ" },
             { "am", "21", "21ኛ" },
@@ -4027,7 +4027,7 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
         new()
         {
-        { "ne", -1, "माइनस पहिलो" },
+            { "ne", -1, "माइनस पहिलो" },
 
             { "am", -1, "-1ኛ" },
         { "te", -1, "-1వ" },
@@ -4379,7 +4379,7 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
         new()
         {
-        { "ne", 21, WordForm.Abbreviation, "एक्काइसौँ" },
+            { "ne", 21, WordForm.Abbreviation, "एक्काइसौँ" },
 
             { "am", 1, WordForm.Normal, "1ኛ" },
         { "te", 1, WordForm.Abbreviation, "1వ" },
@@ -4929,9 +4929,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
         new()
         {
-        { "ne", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "एक्काइसौँ" },
-        { "ne", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "एक्काइसौँ" },
-        { "ne", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "एक्काइसौँ" },
+            { "ne", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "एक्काइसौँ" },
+            { "ne", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "एक्काइसौँ" },
+            { "ne", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "एक्काइसौँ" },
 
             { "am", 1, GrammaticalGender.Masculine, WordForm.Normal, "1ኛ" },
             { "am", 1, GrammaticalGender.Feminine, WordForm.Normal, "1ኛ" },
@@ -6511,9 +6511,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
         new()
         {
-        { "ne", "21", GrammaticalGender.Masculine, "एक्काइसौँ" },
-        { "ne", "21", GrammaticalGender.Feminine, "एक्काइसौँ" },
-        { "ne", "21", GrammaticalGender.Neuter, "एक्काइसौँ" },
+            { "ne", "21", GrammaticalGender.Masculine, "एक्काइसौँ" },
+            { "ne", "21", GrammaticalGender.Feminine, "एक्काइसौँ" },
+            { "ne", "21", GrammaticalGender.Neuter, "एक्काइसौँ" },
 
             { "am", "1", GrammaticalGender.Masculine, "1ኛ" },
             { "am", "1", GrammaticalGender.Feminine, "1ኛ" },
@@ -9086,9 +9086,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
         new()
         {
-        { "ne", 21, GrammaticalGender.Masculine, "एक्काइसौँ" },
-        { "ne", 21, GrammaticalGender.Feminine, "एक्काइसौँ" },
-        { "ne", 21, GrammaticalGender.Neuter, "एक्काइसौँ" },
+            { "ne", 21, GrammaticalGender.Masculine, "एक्काइसौँ" },
+            { "ne", 21, GrammaticalGender.Feminine, "एक्काइसौँ" },
+            { "ne", 21, GrammaticalGender.Neuter, "एक्काइसौँ" },
 
             { "am", 1, GrammaticalGender.Masculine, "1ኛ" },
             { "am", 1, GrammaticalGender.Feminine, "1ኛ" },
