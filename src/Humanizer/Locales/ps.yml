@@ -349,6 +349,8 @@ surfaces:
         - 'اووه نوي'
         - 'اته نوي'
         - 'نهه نوي'
+      feminineSubHundredReplacements:
+        1: 'یوه'
       hundredsMap:
         - 'صفر'
         - 'سل'
@@ -564,7 +566,7 @@ surfaces:
     engine: 'phrase-clock'
     hourMode: 'h12'
     hourGender: 'masculine'
-    minuteGender: 'masculine'
+    minuteGender: 'feminine'
     hourWordsMap:
       - ''
       - 'یوه بجه'
@@ -579,8 +581,13 @@ surfaces:
       - 'لس بجې'
       - 'یوولس بجې'
       - 'دولس بجې'
+    minuteWordsMap:
+      - ''
+      - 'یوه'
     min0: '{dayPeriod} {hour}'
-    defaultTemplate: '{dayPeriod} {hour} او {minutes} دقیقې'
+    defaultTemplate: '{dayPeriod} {hour} او {minutes} {minuteSuffix}'
+    minuteSuffixSingular: 'دقیقه'
+    minuteSuffixPlural: 'دقیقې'
     earlyMorning: 'سهار'
     morning: 'سهار'
     afternoon: 'د غرمې'

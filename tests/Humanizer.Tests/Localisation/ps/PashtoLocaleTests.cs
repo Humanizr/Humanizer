@@ -68,6 +68,17 @@ public class PashtoLocaleTests
     }
 
     [Theory]
+    [InlineData(1, GrammaticalGender.Masculine, "یو")]
+    [InlineData(1, GrammaticalGender.Feminine, "یوه")]
+    [InlineData(101, GrammaticalGender.Feminine, "سل او یوه")]
+    public void NumberToWords_HonorsPashtoCardinalGender(long number, GrammaticalGender gender, string expected)
+    {
+        var result = number.ToWords(gender, Ps);
+        Assert.Equal(expected, result);
+        PashtoBidiControlSweep.AssertNoBidiControls(result);
+    }
+
+    [Theory]
     [InlineData(1, GrammaticalGender.Masculine, "لومړی")]
     [InlineData(1, GrammaticalGender.Feminine, "لومړۍ")]
     [InlineData(21, GrammaticalGender.Masculine, "یوویشتم")]
@@ -114,6 +125,7 @@ public class PashtoLocaleTests
 
     [Theory]
     [InlineData(1, 5, "سهار یوه بجه او پنځه دقیقې")]
+    [InlineData(1, 1, "سهار یوه بجه او یوه دقیقه")]
     [InlineData(13, 23, "د غرمې یوه بجه او درې ویشت دقیقې")]
     [InlineData(13, 23, "د غرمې یوه بجه او پنځه ویشت دقیقې", true)]
     [InlineData(18, 0, "ماښام شپږ بجې")]
@@ -140,7 +152,12 @@ public class PashtoLocaleTests
     [Fact]
     public void NumberFormatting_UsesStablePashtoSeparatorsWithoutBidiControls()
     {
-        Assert.Equal("1٫95 KB", 2000.Bytes().Humanize(Ps));
-        Assert.Equal("-1٫2k", (-1234L).ToMetric(decimals: 1));
+        var byteResult = 2000.Bytes().Humanize(Ps);
+        var metricResult = (-1234L).ToMetric(decimals: 1);
+
+        Assert.Equal("1٫95 KB", byteResult);
+        Assert.Equal("-1٫2k", metricResult);
+        PashtoBidiControlSweep.AssertNoBidiControls(byteResult);
+        PashtoBidiControlSweep.AssertNoBidiControls(metricResult);
     }
 }
