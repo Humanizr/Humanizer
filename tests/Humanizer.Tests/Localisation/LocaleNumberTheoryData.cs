@@ -4,6 +4,11 @@ static class LocaleNumberTheoryData
 {
     public static TheoryData<string, int, string> CardinalCases => new()
     {
+        { "kn", 0, "ಸೊನ್ನೆ" },
+        { "kn", 1, "ಒಂದು" },
+        { "kn", 21, "ಇಪ್ಪತ್ತೊಂದು" },
+        { "kn", 105, "ನೂರ ಐದು" },
+        { "kn", 1234, "ಸಾವಿರದ ಇನ್ನೂರ ಮೂವತ್ತನಾಲ್ಕು" },
         { "ne", 0, "शून्य" },
         { "ne", 1, "एक" },
         { "ne", 2, "दुई" },
@@ -2786,6 +2791,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
+        { "kn", 101, true, "ನೂರ ಒಂದು" },
+        { "kn", 101, false, "ನೂರ ಒಂದು" },
+        { "kn", 121, true, "ನೂರ ಇಪ್ಪತ್ತೊಂದು" },
+        { "kn", 121, false, "ನೂರ ಇಪ್ಪತ್ತೊಂದು" },
         { "ne", 101, false, "एक सय एक" },
         { "my", 101, true, "တစ်ရာ တစ်" },
         { "my", 121, false, "တစ်ရာ နှစ်ဆယ့်တစ်" },
@@ -3585,6 +3594,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
+        { "kn", 1, WordForm.Abbreviation, "ಒಂದು" },
+        { "kn", 21, WordForm.Abbreviation, "ಇಪ್ಪತ್ತೊಂದು" },
         { "ne", 21, WordForm.Abbreviation, "एक्काइस" },
         { "my", 1, WordForm.Abbreviation, "တစ်" },
         { "my", 21, WordForm.Abbreviation, "နှစ်ဆယ့်တစ်" },
@@ -3992,6 +4003,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
+        { "kn", 1, GrammaticalGender.Feminine, "ಒಂದು" },
+        { "kn", 1, GrammaticalGender.Masculine, "ಒಂದು" },
+        { "kn", 1, GrammaticalGender.Neuter, "ಒಂದು" },
         { "ne", 1, GrammaticalGender.Masculine, "एक" },
         { "ne", 1, GrammaticalGender.Feminine, "एक" },
         { "ne", 1, GrammaticalGender.Neuter, "एक" },
@@ -4431,6 +4445,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
+        { "kn", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "ಒಂದು" },
+        { "kn", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "ಒಂದು" },
+        { "kn", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "ಒಂದು" },
         { "ne", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "एक" },
         { "ne", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "एक" },
         { "ne", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "एक" },
@@ -4665,6 +4682,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
+        { "kn", 1, "ಒಂದನೇ" },
+        { "kn", 2, "ಎರಡನೇ" },
+        { "kn", 21, "ಇಪ್ಪತ್ತೊಂದನೇ" },
         { "ne", 1, "पहिलो" },
         { "ne", 21, "एक्काइसौँ" },
         { "my", 1, "ပထမ" },
@@ -6040,6 +6060,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+        { "kn", 1, WordForm.Abbreviation, "ಒಂದನೇ" },
+        { "kn", 21, WordForm.Abbreviation, "ಇಪ್ಪತ್ತೊಂದನೇ" },
         { "ne", 21, WordForm.Abbreviation, "एक्काइसौँ" },
         { "my", 1, WordForm.Abbreviation, "ပထမ" },
         { "my", 1, WordForm.Normal, "ပထမ" },
@@ -6407,6 +6429,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+        { "kn", 1, GrammaticalGender.Feminine, "ಒಂದನೇ" },
+        { "kn", 1, GrammaticalGender.Masculine, "ಒಂದನೇ" },
+        { "kn", 1, GrammaticalGender.Neuter, "ಒಂದನೇ" },
         { "ne", 21, GrammaticalGender.Masculine, "एक्काइसौँ" },
         { "ne", 21, GrammaticalGender.Feminine, "एक्काइसौँ" },
         { "ne", 21, GrammaticalGender.Neuter, "एक्काइसौँ" },
@@ -7265,6 +7290,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+        { "kn", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "ಒಂದನೇ" },
+        { "kn", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "ಒಂದನೇ" },
+        { "kn", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "ಒಂದನೇ" },
         { "ne", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "एक्काइसौँ" },
         { "ne", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "एक्काइसौँ" },
         { "ne", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "एक्काइसौँ" },
@@ -7498,6 +7526,7 @@ static class LocaleNumberTheoryData
 };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "kn", 2, "ಎರಡು" },
         { "ne", 21, "एक्काइस" },
         { "my", 2, "နှစ်" },
 
@@ -7584,6 +7613,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "kn", "ಇಪ್ಪತ್ತೊಂದು", 21L },
+        { "kn", "ನೂರ ಐದು", 105L },
+        { "kn", "ಒಂದು ಕೋಟಿಯ ಇಪ್ಪತ್ತಮೂರು ಲಕ್ಷದ ನಲವತ್ತೈದು ಸಾವಿರದ ಆರುನೂರ ಎಪ್ಪತ್ತೆಂಟು", 12345678L },
         { "ne", "एक्काइस", 21 },
         { "ne", "एक करोड तेइस लाख पैँतालीस हजार छ सय अठहत्तर", 12345678 },
         { "my", "နှစ်ဆယ့်တစ်", 21L },
