@@ -82,6 +82,17 @@ public class WelshLocaleParityTests
     [InlineData(1000, "mil")]
     [InlineData(1001, "mil a un")]
     [InlineData(2021, "dwy fil a dau ddeg un")]
+    [InlineData(2000000L, "dwy filiwn")]
+    [InlineData(2000000000L, "dau filiwn")]
+    [InlineData(2000000000000L, "dau driliwn")]
+    [InlineData(3000000000000L, "tri thriliwn")]
+    [InlineData(6000000000000L, "chwe thriliwn")]
+    [InlineData(2000000000000000L, "dau gwadriliwn")]
+    [InlineData(3000000000000000L, "tri chwadriliwn")]
+    [InlineData(6000000000000000L, "chwe chwadriliwn")]
+    [InlineData(2000000000000000000L, "dau gwintiliwn")]
+    [InlineData(3000000000000000000L, "tri chwintiliwn")]
+    [InlineData(6000000000000000000L, "chwe chwintiliwn")]
     public void NumberToWords_ProducesExpectedWelshOutput(long number, string expected)
     {
         Assert.Equal(expected, number.ToWords(Cy));
@@ -110,6 +121,17 @@ public class WelshLocaleParityTests
     [InlineData(105, "cant a pump")]
     [InlineData(1001, "mil a un")]
     [InlineData(2021, "dwy fil a dau ddeg un")]
+    [InlineData(2000000L, "dwy filiwn")]
+    [InlineData(2000000000L, "dau filiwn")]
+    [InlineData(2000000000000L, "dau driliwn")]
+    [InlineData(3000000000000L, "tri thriliwn")]
+    [InlineData(6000000000000L, "chwe thriliwn")]
+    [InlineData(2000000000000000L, "dau gwadriliwn")]
+    [InlineData(3000000000000000L, "tri chwadriliwn")]
+    [InlineData(6000000000000000L, "chwe chwadriliwn")]
+    [InlineData(2000000000000000000L, "dau gwintiliwn")]
+    [InlineData(3000000000000000000L, "tri chwintiliwn")]
+    [InlineData(6000000000000000000L, "chwe chwintiliwn")]
     public void WordsToNumber_RoundTripsWelshCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Cy));
@@ -192,6 +214,9 @@ public class WelshLocaleParityTests
     [InlineData(0.0, "G")]
     [InlineData(45.0, "GDd")]
     [InlineData(90.0, "D")]
+    [InlineData(112.5, "DDeDd")]
+    [InlineData(135.0, "DeDd")]
+    [InlineData(157.5, "DeDeDd")]
     [InlineData(180.0, "De")]
     [InlineData(270.0, "Go")]
     public void AbbreviatedDirections_UseWelshLabels(double angle, string expected)
