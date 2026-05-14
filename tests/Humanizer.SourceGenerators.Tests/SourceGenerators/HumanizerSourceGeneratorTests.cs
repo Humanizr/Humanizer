@@ -732,6 +732,18 @@ wordsToNumber:
     }
 
     [Fact]
+    public void KazakhProfileEmitsTerminalVowelOrdinalSuffixes()
+    {
+        var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
+        var kazakhProfile = GetLocaleFile("kk.yml");
+
+        Assert.Contains("terminalVowelOrdinalSuffixes", kazakhProfile);
+        Assert.Contains("\"сыншы\"", source);
+        Assert.Contains("\"ншы\"", source);
+        Assert.Contains("\"нші\"", source);
+    }
+
+    [Fact]
     public void UnitLeadingCompoundScalesAcceptNamedOrdinalCases()
     {
         const string locale = """

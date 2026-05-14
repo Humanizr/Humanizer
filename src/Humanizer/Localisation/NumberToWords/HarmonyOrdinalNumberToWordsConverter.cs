@@ -169,7 +169,10 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     }
 
     // Vowel-harmony ordinals are the common family rule. The runtime searches backward for the
-    // last vowel with a configured suffix, then applies any configured stem adjustments first.
+    // last vowel with a configured suffix, optionally swapping to terminal-vowel suffixes only when
+    // the rendered ordinal stem already ends in a vowel. This keeps ordinary ordinalSuffixes as the
+    // default/consonant-final map for stems such as Kyrgyz "миллиард" while still allowing
+    // vowel-final stems such as "жыйырма" or Kazakh "екі" to use a different suffix.
     /// <summary>
     /// Appends the harmony suffix selected by the last vowel in the word.
     /// </summary>
@@ -290,9 +293,9 @@ sealed class HarmonyOrdinalNumberToWordsProfile(
     public bool SoftenTerminalTBeforeSuffix { get; } = softenTerminalTBeforeSuffix;
     /// <summary>Gets a value indicating whether a terminal vowel should drop before the harmony suffix.</summary>
     public bool DropTerminalVowelBeforeHarmonySuffix { get; } = dropTerminalVowelBeforeHarmonySuffix;
-    /// <summary>Gets the last-vowel suffix map used by harmony-driven ordinals.</summary>
+    /// <summary>Gets the default last-vowel suffix map used by harmony-driven ordinals.</summary>
     public FrozenDictionary<char, string>? OrdinalSuffixes { get; } = ordinalSuffixes;
-    /// <summary>Gets the last-vowel suffix map used when the rendered cardinal already ends in a vowel.</summary>
+    /// <summary>Gets the override suffix map used only when the rendered ordinal stem already ends in a vowel.</summary>
     public FrozenDictionary<char, string>? TerminalVowelOrdinalSuffixes { get; } = terminalVowelOrdinalSuffixes;
     /// <summary>Gets the character set that selects the second ordinal suffix in membership mode.</summary>
     public string? SecondOrdinalSuffixCharacters { get; } = secondOrdinalSuffixCharacters;

@@ -2116,6 +2116,11 @@ public class CoverageGapTests
         Assert.Equal("twenty onzz", terminalVowelSuffixes.ConvertToOrdinal(21));
         Assert.Equal("ontuple", terminalVowelSuffixes.ConvertToTuple(1));
 
+        var kyrgyzLikeTerminalVowelSuffixes = new HarmonyOrdinalNumberToWordsConverter(CreateKyrgyzLikeHarmonyOrdinalProfile());
+        Assert.Equal("жыйырманчы", kyrgyzLikeTerminalVowelSuffixes.ConvertToOrdinal(20));
+        Assert.Equal("бир миллиардынчы", kyrgyzLikeTerminalVowelSuffixes.ConvertToOrdinal(1000));
+        Assert.Equal("жыйырмалап", kyrgyzLikeTerminalVowelSuffixes.ConvertToTuple(20));
+
         var incompleteMembership = new HarmonyOrdinalNumberToWordsConverter(CreateHarmonyOrdinalProfile(
             ordinalSuffixStrategy: HarmonyOrdinalSuffixStrategy.FinalCharacterMembership,
             secondOrdinalSuffixCharacters: string.Empty,
@@ -2668,6 +2673,31 @@ public class CoverageGapTests
             secondOrdinalSuffixCharacters,
             ordinalSuffixPair ?? ["a", "b"],
             new Dictionary<char, string> { ['e'] = "tuple" }.ToFrozenDictionary());
+    }
+
+    static HarmonyOrdinalNumberToWordsProfile CreateKyrgyzLikeHarmonyOrdinalProfile()
+    {
+        var units = Enumerable.Repeat(string.Empty, 10).ToArray();
+        units[0] = "нөл";
+        units[1] = "бир";
+        var tens = Enumerable.Repeat(string.Empty, 10).ToArray();
+        tens[2] = "жыйырма";
+
+        return new(
+            0,
+            2000,
+            "минус",
+            "жүз",
+            HarmonyOrdinalHundredStrategy.AllowExplicitOneInComposite,
+            units,
+            tens,
+            [new(1000, "миллиард")],
+            HarmonyOrdinalSuffixStrategy.LastVowelMap,
+            softenTerminalTBeforeSuffix: false,
+            dropTerminalVowelBeforeHarmonySuffix: false,
+            new Dictionary<char, string> { ['а'] = "ынчы" }.ToFrozenDictionary(),
+            new Dictionary<char, string> { ['а'] = "нчы" }.ToFrozenDictionary(),
+            tupleSuffixes: new Dictionary<char, string> { ['а'] = "лап" }.ToFrozenDictionary());
     }
 
     static readonly SuffixScaleWordsToNumberProfile SuffixScaleProfile = new(
