@@ -28,6 +28,7 @@ static class LocaleCoverageData
         { "gu", new(2022, 1, 25, "25 જાન્યુઆરી, 2022") },
         { "pa", new(2022, 1, 25, "25 ਜਨਵਰੀ 2022") },
         { "pa-Arab", new(2022, 1, 25, "25 جنوری 2022") },
+        { "ps", new(2022, 1, 25, "25 جنوري 2022") },
 
         { "af", new(2022, 1, 25, "25 Januarie 2022") },
         { "ar", new(2022, 1, 25, "25 يناير 2022") },
@@ -115,6 +116,7 @@ static class LocaleCoverageData
         { "gu", new(2015, 1, 1, "1 જાન્યુઆરી, 2015") },
         { "pa", new(2015, 1, 1, "1 ਜਨਵਰੀ 2015") },
         { "pa-Arab", new(2015, 1, 1, "1 جنوری 2015") },
+        { "ps", new(2015, 1, 1, "1 جنوري 2015") },
 
         { "af", new(2015, 1, 1, "1 Januarie 2015") },
         { "ar", new(2015, 1, 1, "1 يناير 2015") },
@@ -202,6 +204,7 @@ static class LocaleCoverageData
         { "gu", new(2015, 2, 3, "3 ફેબ્રુઆરી, 2015") },
         { "pa", new(2015, 2, 3, "3 ਫ਼ਰਵਰੀ 2015") },
         { "pa-Arab", new(2015, 2, 3, "3 فروری 2015") },
+        { "ps", new(2015, 2, 3, "3 فبروري 2015") },
 
         { "af", new(2015, 2, 3, "3 Februarie 2015") },
         { "ar", new(2015, 2, 3, "3 فبراير 2015") },
@@ -280,6 +283,7 @@ static class LocaleCoverageData
         { "gu", new(2020, 2, 29, "29 ફેબ્રુઆરી, 2020") },
         { "pa", new(2020, 2, 29, "29 ਫ਼ਰਵਰੀ 2020") },
         { "pa-Arab", new(2020, 2, 29, "29 فروری 2020") },
+        { "ps", new(2020, 2, 29, "29 فبروري 2020") },
 
         { "ca", new(2020, 2, 29, "29 de febrer de 2020") },
         { "es", new(2020, 2, 29, "29 de febrero de 2020") },
@@ -293,6 +297,7 @@ static class LocaleCoverageData
         { "gu", new(2015, 9, 4, "4 સપ્ટેમ્બર, 2015") },
         { "pa", new(2015, 9, 4, "4 ਸਤੰਬਰ 2015") },
         { "pa-Arab", new(2015, 9, 4, "4 ستمبر 2015") },
+        { "ps", new(2015, 9, 4, "4 سپتمبر 2015") },
 
         { "ca", new(2015, 9, 4, "4 de setembre de 2015") },
         { "es", new(2015, 9, 4, "4 de septiembre de 2015") },
@@ -306,6 +311,7 @@ static class LocaleCoverageData
         { "gu", new(1979, 11, 7, "7 નવેમ્બર, 1979") },
         { "pa", new(1979, 11, 7, "7 ਨਵੰਬਰ 1979") },
         { "pa-Arab", new(1979, 11, 7, "7 نومبر 1979") },
+        { "ps", new(1979, 11, 7, "7 نومبر 1979") },
 
         { "ca", new(1979, 11, 7, "7 de novembre de 1979") },
         { "es", new(1979, 11, 7, "7 de noviembre de 1979") },
@@ -319,6 +325,7 @@ static class LocaleCoverageData
         { "gu", new(2020, 3, 2, "2 માર્ચ, 2020") },
         { "pa", new(2020, 3, 2, "2 ਮਾਰਚ 2020") },
         { "pa-Arab", new(2020, 3, 2, "2 مارچ 2020") },
+        { "ps", new(2020, 3, 2, "2 مارچ 2020") },
 
         { "fr", new(2020, 3, 2, "2 mars 2020") },
     };
@@ -332,6 +339,7 @@ static class LocaleCoverageData
         { "gu", new(2021, 10, 31, "31 ઑક્ટોબર, 2021") },
         { "pa", new(2021, 10, 31, "31 ਅਕਤੂਬਰ 2021") },
         { "pa-Arab", new(2021, 10, 31, "31 اکتوبر 2021") },
+        { "ps", new(2021, 10, 31, "31 اکتوبر 2021") },
 
         { "fr", new(2021, 10, 31, "31 octobre 2021") },
     };
@@ -345,6 +353,7 @@ static class LocaleCoverageData
         { "gu", new(2024, 12, 31, "31 ડિસેમ્બર, 2024") },
         { "pa", new(2024, 12, 31, "31 ਦਸੰਬਰ 2024") },
         { "pa-Arab", new(2024, 12, 31, "31 دسمبر 2024") },
+        { "ps", new(2024, 12, 31, "31 دسمبر 2024") },
 
         { "ar", new(2024, 12, 31, "31 ديسمبر 2024") },
         { "fa", new(2024, 12, 31, "31 دسامبر 2024") },
@@ -371,6 +380,7 @@ static class LocaleCoverageData
         { "gu", new(13, 23, "બપોરે એક વાગીને તેવીસ મિનિટ") },
         { "pa", new(13, 23, "ਦੁਪਹਿਰ ਇੱਕ ਵੱਜ ਕੇ ਤੇਈ ਮਿੰਟ") },
         { "pa-Arab", new(13, 23, "دپہر اک وج کے تےئی منٹ") },
+        { "ps", new(13, 23, "د غرمې یوه بجه او درې ویشت دقیقې") },
 
         { "af", new(13, 23, "een uur drie en twintig") },
         { "ar", new(13, 23, "الواحدة وثلاث وعشرون دقيقة بعد الظهر") },
@@ -458,6 +468,7 @@ static class LocaleCoverageData
         { "gu", new(13, 23, "બપોરે એક વાગીને પચ્ચીસ મિનિટ") },
         { "pa", new(13, 23, "ਦੁਪਹਿਰ ਇੱਕ ਵੱਜ ਕੇ ਪੱਚੀ ਮਿੰਟ") },
         { "pa-Arab", new(13, 23, "دپہر اک وج کے پچی منٹ") },
+        { "ps", new(13, 23, "د غرمې یوه بجه او پنځه ویشت دقیقې") },
 
         { "af", new(13, 23, "een uur vyf en twintig") },
         { "ar", new(13, 23, "الواحدة وخمس وعشرون دقيقة بعد الظهر") },
@@ -545,6 +556,7 @@ static class LocaleCoverageData
         { "gu", new(1, 5, "સવારે એક વાગીને પાંચ મિનિટ") },
         { "pa", new(1, 5, "ਸਵੇਰੇ ਇੱਕ ਵੱਜ ਕੇ ਪੰਜ ਮਿੰਟ") },
         { "pa-Arab", new(1, 5, "سویرے اک وج کے پنج منٹ") },
+        { "ps", new(1, 5, "د شپې یوه بجه او پنځه دقیقې") },
 
         { "af", new(1, 5, "een uur vyf") },
         { "ar", new(1, 5, "الواحدة وخمس دقائق صباحًا") },
@@ -1030,8 +1042,9 @@ static class LocaleCoverageData
                     { "gu", "ગઈકાલે", "2 દિવસ" },
                     { "pa", "ਕੱਲ੍ਹ", "2 ਦਿਨ" },
                     { "pa-Arab", "کل", "2 دن" },
-        { "lo", "ມື້ວານ", "2 ມື້" },
-    };
+                    { "ps", "پرون", "2 ورځې" },
+                    { "lo", "ມື້ວານ", "2 ມື້" },
+        };
 
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
         new()
@@ -1117,8 +1130,9 @@ static class LocaleCoverageData
                     { "gu", "1 અને 2", "1, 2 અને 3" },
                     { "pa", "1 ਅਤੇ 2", "1, 2 ਅਤੇ 3" },
                     { "pa-Arab", "1 اتے 2", "1, 2 اتے 3" },
-        { "lo", "1 ແລະ 2", "1, 2 ແລະ 3" },
-    };
+                    { "ps", "1 او 2", "1, 2 او 3" },
+                    { "lo", "1 ແລະ 2", "1, 2 ແລະ 3" },
+        };
 
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
         new()
@@ -1204,8 +1218,9 @@ static class LocaleCoverageData
                     { "gu", 1, "પહેલી" },
                     { "pa", 1, "ਪਹਿਲੀ" },
                     { "pa-Arab", 1, "پہلی" },
-        { "lo", 1, "ທີໜຶ່ງ" },
-    };
+                    { "ps", 1, "لومړۍ" },
+                    { "lo", 1, "ທີໜຶ່ງ" },
+        };
 
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
         new()
@@ -1291,8 +1306,9 @@ static class LocaleCoverageData
                     { "gu", 1, "એક" },
                     { "pa", 1, "ਇੱਕ" },
                     { "pa-Arab", 1, "اک" },
-        { "lo", 1, "ໜຶ່ງ" },
-    };
+                    { "ps", 1, "یو" },
+                    { "lo", 1, "ໜຶ່ງ" },
+        };
 
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData => LocaleOrdinalizerMatrixData.OrdinalizerExpectationTheoryData;
 
@@ -1414,8 +1430,9 @@ static class LocaleCoverageData
                     { "gu", 21, "એકવીસ" },
                     { "pa", 21, "ਇੱਕੀ" },
                     { "pa-Arab", 21, "اکی" },
-        { "lo", 21, "ຊາວເອັດ" },
-    };
+                    { "ps", 21, "یوویشت" },
+                    { "lo", 21, "ຊາວເອັດ" },
+        };
 
     static string[] FindShippedLocales()
     {

@@ -182,6 +182,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, DateDayPluralExpectationRow> DateDayPluralCases => new()
     {
+        { "ps", new("2 ورځې مخکې", "3 ورځې مخکې", "4 ورځې مخکې", "5 ورځې مخکې", "11 ورځې مخکې", "21 ورځې مخکې", "په 2 ورځو کې", "په 3 ورځو کې", "په 4 ورځو کې", "په 5 ورځو کې", "په 11 ورځو کې", "په 21 ورځو کې") },
         { "si", new("2 දිනකට පෙර", "3 දිනකට පෙර", "4 දිනකට පෙර", "5 දිනකට පෙර", "11 දිනකට පෙර", "21 දිනකට පෙර", "2 දිනකින්", "3 දිනකින්", "4 දිනකින්", "5 දිනකින්", "11 දිනකින්", "21 දිනකින්") },
 
         { "kn", new("2 ದಿನಗಳ ಹಿಂದೆ", "3 ದಿನಗಳ ಹಿಂದೆ", "4 ದಿನಗಳ ಹಿಂದೆ", "5 ದಿನಗಳ ಹಿಂದೆ", "11 ದಿನಗಳ ಹಿಂದೆ", "21 ದಿನಗಳ ಹಿಂದೆ", "2 ದಿನಗಳಲ್ಲಿ", "3 ದಿನಗಳಲ್ಲಿ", "4 ದಿನಗಳಲ್ಲಿ", "5 ದಿನಗಳಲ್ಲಿ", "11 ದಿನಗಳಲ್ಲಿ", "21 ದಿನಗಳಲ್ಲಿ") },
@@ -269,6 +270,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
     {
+        { "ps", new("2 اونۍ, 1 ورځ او 1 ساعت", "1 ورځ, 3 دقیقې او 4 ثانیې", "1 ورځ او 3 دقیقې") },
         { "si", new("2 සති, 1 දිනයක් සහ 1 පැයක්", "1 දිනයක්, 3 මිනිත්තු සහ 4 තත්පර", "1 දිනයක් සහ 3 මිනිත්තු") },
 
         { "kn", new("2 ವಾರಗಳು, 1 ದಿನ ಮತ್ತು 1 ಗಂಟೆ", "1 ದಿನ, 3 ನಿಮಿಷಗಳು ಮತ್ತು 4 ಸೆಕೆಂಡುಗಳು", "1 ದಿನ ಮತ್ತು 3 ನಿಮಿಷಗಳು") },
@@ -356,6 +358,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
     {
+        { "ps", new("ملي ثانیه", "ثانیه", "دقیقه", "ساعت", "ورځ", "اونۍ", "میاشت", "کال") },
         { "si", new("මිලි තත්පරය", "තත්පරය", "මිනිත්තුව", "පැය", "දින", "සතිය", "මාසය", "අවුරුද්ද") },
 
         { "kn", new("ಮಿಲಿಸೆಕೆಂಡ್", "ಸೆಕೆಂಡ್", "ನಿಮಿಷ", "ಗಂಟೆ", "ದಿನ", "ವಾರ", "ತಿಂಗಳು", "ವರ್ಷ") },
@@ -464,6 +467,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
     {
+        { "ps", new("1 b", "2 B", "1٫95 KB", "2048 KB") },
         { "si", new("1 b", "2 B", "1.95 KB", "2048 KB") },
 
         { "kn", new("1 b", "2 B", "1.95 KB", "2048 KB") },
@@ -551,6 +555,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
     {
+        { "ps", new("1 بیټ", "1 بایټ", "2 بایټ", "2 کیلوبایټ", "2 مېګابایټ") },
         { "si", new("1 බිට්", "1 බයිට්", "2 බයිට්", "2 කිලෝබයිට්", "2 මෙගාබයිට්") },
 
         { "kn", new("1 ಬಿಟ್", "1 ಬೈಟ್", "2 ಬೈಟ್ಗಳು", "2 ಕಿಲೋಬೈಟ್ಗಳು", "2 ಮೆಗಾಬೈಟ್ಗಳು") },
@@ -638,6 +643,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
     {
+        { "ps", new("1 او 2", "1, 2 او 3", "1, 2, 3 او 4") },
         { "si", new("1 සහ 2", "1, 2 සහ 3", "1, 2, 3 සහ 4") },
 
         { "kn", new("1 ಮತ್ತು 2", "1, 2 ಮತ್ತು 3", "1, 2, 3 ಮತ್ತು 4") },
@@ -725,6 +731,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
     {
+        { "ps", new("ش", "ش-ش-خ", "ش-خ", "خ-ش-خ", "خ", "خ-ج-خ", "ج-خ", "ج-ج-خ", "ج", "ج-ج-ل", "ج-ل", "ل-ج-ل", "ل", "ل-ش-ل", "ش-ل", "ش-ش-ل", "شمال", "شمال-شمال ختیځ", "شمال ختیځ", "ختیځ-شمال ختیځ", "ختیځ", "ختیځ-جنوب ختیځ", "جنوب ختیځ", "جنوب-جنوب ختیځ", "جنوب", "جنوب-جنوب لوېدیځ", "جنوب لوېدیځ", "لوېدیځ-جنوب لوېدیځ", "لوېدیځ", "لوېدیځ-شمال لوېدیځ", "شمال لوېدیځ", "شمال-شمال لوېدیځ") },
         { "si", new("උ", "උ-ඊ", "ඊ", "නැ-ඊ", "නැ", "නැ-ගි", "ගි", "ද-ගි", "ද", "ද-නි", "නි", "බ-නි", "බ", "බ-ව", "ව", "උ-ව", "උතුර", "උතුරු-ඊසාන", "ඊසාන", "නැගෙනහිර-ඊසාන", "නැගෙනහිර", "නැගෙනහිර-ගිනිකොන", "ගිනිකොන", "දකුණු-ගිනිකොන", "දකුණ", "දකුණු-නිරිත", "නිරිත", "බස්නාහිර-නිරිත", "බස්නාහිර", "බස්නාහිර-වයඹ", "වයඹ", "උතුරු-වයඹ") },
 
         { "kn", new("ಉತ್ತರ", "ಉತ್ತರ-ಈಶಾನ್ಯ", "ಈಶಾನ್ಯ", "ಪೂರ್ವ-ಈಶಾನ್ಯ", "ಪೂರ್ವ", "ಪೂರ್ವ-ಆಗ್ನೇಯ", "ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ-ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ", "ದಕ್ಷಿಣ-ನೈರುತ್ಯ", "ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ-ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ", "ಪಶ್ಚಿಮ-ವಾಯುವ್ಯ", "ವಾಯುವ್ಯ", "ಉತ್ತರ-ವಾಯುವ್ಯ", "ಉತ್ತರ", "ಉತ್ತರ-ಈಶಾನ್ಯ", "ಈಶಾನ್ಯ", "ಪೂರ್ವ-ಈಶಾನ್ಯ", "ಪೂರ್ವ", "ಪೂರ್ವ-ಆಗ್ನೇಯ", "ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ-ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ", "ದಕ್ಷಿಣ-ನೈರುತ್ಯ", "ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ-ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ", "ಪಶ್ಚಿಮ-ವಾಯುವ್ಯ", "ವಾಯುವ್ಯ", "ಉತ್ತರ-ವಾಯುವ್ಯ") },
@@ -812,6 +819,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
     {
+        { "ps", new("ش", "خ", "ج", "ل") },
         { "si", new("උ", "නැ", "ද", "බ") },
 
         { "kn", new("ಉತ್ತರ", "ಪೂರ್ವ", "ದಕ್ಷಿಣ", "ಪಶ್ಚಿಮ") },
