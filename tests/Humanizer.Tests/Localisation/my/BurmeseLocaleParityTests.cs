@@ -136,6 +136,17 @@ public class BurmeseLocaleParityTests
         Assert.Equal(number, words.ToNumber(My));
     }
 
+
+    [Theory]
+    [InlineData(300, "သုံးရာခုမြောက်")]
+    [InlineData(1000, "တစ်ထောင်ခုမြောက်")]
+    [InlineData(999999999, "ကိုးဆယ့်ကိုးကုဋေ ကိုးသန်း ကိုးသိန်း ကိုးသောင်း ကိုးထောင် ကိုးရာ ကိုးဆယ့်ကိုးခုမြောက်")]
+    public void WordsToNumber_ParsesGeneratedExactScaleOrdinals(int number, string words)
+    {
+        Assert.Equal(words, number.ToOrdinalWords(My));
+        Assert.Equal(number, words.ToNumber(My));
+    }
+
     [Theory]
     [InlineData("နှစ်ဆယ့်တစ်", 21)]
     [InlineData("တစ်ရာ ငါး", 105)]
