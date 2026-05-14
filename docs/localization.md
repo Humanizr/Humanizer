@@ -6,9 +6,9 @@ Most consumers only need to set a culture. Contributors now author locale-specif
 
 ## Supported Locales
 
-Humanizer includes generated locale data for 73 checked-in locale files:
+Humanizer includes generated locale data for 74 checked-in locale files:
 
-Afrikaans (af), Amharic (am), Arabic (ar), Azerbaijani (az), Bengali (bn), Bulgarian (bg), Catalan (ca), Chinese (zh-CN, zh-Hans, zh-Hant), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en, en-GB, en-IN, en-US), Finnish (fi), Filipino (fil), French (fr, fr-BE, fr-CH), German (de, de-CH, de-LI), Greek (el), Hausa (ha), Hebrew (he), Hindi (hi), Hungarian (hu), Armenian (hy), Icelandic (is), Indonesian (id), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Lithuanian (lt), Luxembourgish (lb), Malay (ms), Malayalam (ml), Maltese (mt), Norwegian Bokmål (nb), Norwegian Nynorsk (nn), Persian (fa), Polish (pl), Portuguese (pt, pt-BR), Punjabi (pa, pa-Arab), Romanian (ro), Russian (ru), Serbian (sr, sr-Latn), Slovak (sk), Slovenian (sl), Spanish (es), Swahili (sw), Swedish (sv), Tamil (ta), Telugu (te), Thai (th), Turkish (tr), Ukrainian (uk), Urdu (ur, ur-IN, ur-PK), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Zulu (zu-ZA).
+Afrikaans (af), Amharic (am), Arabic (ar), Azerbaijani (az), Bengali (bn), Bulgarian (bg), Burmese (my), Catalan (ca), Chinese (zh-CN, zh-Hans, zh-Hant), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en, en-GB, en-IN, en-US), Finnish (fi), Filipino (fil), French (fr, fr-BE, fr-CH), German (de, de-CH, de-LI), Greek (el), Hausa (ha), Hebrew (he), Hindi (hi), Hungarian (hu), Armenian (hy), Icelandic (is), Indonesian (id), Italian (it), Japanese (ja), Korean (ko), Kurdish (ku), Latvian (lv), Lithuanian (lt), Luxembourgish (lb), Malay (ms), Malayalam (ml), Maltese (mt), Norwegian Bokmål (nb), Norwegian Nynorsk (nn), Persian (fa), Polish (pl), Portuguese (pt, pt-BR), Punjabi (pa, pa-Arab), Romanian (ro), Russian (ru), Serbian (sr, sr-Latn), Slovak (sk), Slovenian (sl), Spanish (es), Swahili (sw), Swedish (sv), Tamil (ta), Telugu (te), Thai (th), Turkish (tr), Ukrainian (uk), Urdu (ur, ur-IN, ur-PK), Uzbek (uz-Cyrl-UZ, uz-Latn-UZ), Vietnamese (vi), Zulu (zu-ZA).
 
 The supported set above reflects checked-in locale files. Locale files under active, unmerged batch work are not listed as supported until they merge.
 
