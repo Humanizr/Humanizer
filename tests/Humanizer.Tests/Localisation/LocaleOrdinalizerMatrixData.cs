@@ -662,6 +662,7 @@ static class LocaleOrdinalizerMatrixData
             { "gu", 21, "એકવીસમો" },
             { "pa", 21, "ਇੱਕੀਵਾਂ" },
             { "pa-Arab", 21, "اکیواں" },
+        { "lo", 1, "ທີ 1" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
@@ -3442,6 +3443,9 @@ static class LocaleOrdinalizerMatrixData
             { "mr", 21, GrammaticalGender.Neuter, "एकविसावे" },
             { "pa", 1, GrammaticalGender.Neuter, "ਪਹਿਲਾ" },
             { "pa-Arab", 1, GrammaticalGender.Neuter, "پہلا" },
+        { "lo", 1, GrammaticalGender.Masculine, "ທີ 1" },
+        { "lo", 1, GrammaticalGender.Feminine, "ທີ 1" },
+        { "lo", 1, GrammaticalGender.Neuter, "ທີ 1" },
 };
 
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
@@ -4082,6 +4086,7 @@ static class LocaleOrdinalizerMatrixData
             { "pa", "1", "ਪਹਿਲਾ" },
             { "pa-Arab", "1", "پہلا" },
             { "mr", "21", "एकविसावा" },
+        { "lo", "1", "ທີ 1" },
 };
 
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
@@ -4443,6 +4448,7 @@ static class LocaleOrdinalizerMatrixData
             { "pa", -1, "ਰਿਣਾਤਮਕ ਪਹਿਲਾ" },
             { "pa-Arab", -1, "منفی پہلا" },
             { "mr", -5, "ऋणात्मक पाचवा" },
+        { "lo", -1, "ທີ -1" },
 };
 
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
@@ -5005,6 +5011,7 @@ static class LocaleOrdinalizerMatrixData
             { "pa", 21, WordForm.Abbreviation, "ਇੱਕੀਵਾਂ" },
             { "pa-Arab", 21, WordForm.Abbreviation, "اکیواں" },
             { "mr", 21, WordForm.Abbreviation, "एकविसावा" },
+        { "lo", 1, WordForm.Abbreviation, "ທີ 1" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
@@ -6605,6 +6612,9 @@ static class LocaleOrdinalizerMatrixData
             { "mr", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "एकविसावा" },
             { "mr", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "एकविसावी" },
             { "mr", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "एकविसावे" },
+        { "lo", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "ທີ 1" },
+        { "lo", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "ທີ 1" },
+        { "lo", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "ທີ 1" },
 };
 
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
@@ -9195,6 +9205,9 @@ static class LocaleOrdinalizerMatrixData
             { "mr", "21", GrammaticalGender.Masculine, "एकविसावा" },
             { "mr", "21", GrammaticalGender.Feminine, "एकविसावी" },
             { "mr", "21", GrammaticalGender.Neuter, "एकविसावे" },
+        { "lo", "1", GrammaticalGender.Masculine, "ທີ 1" },
+        { "lo", "1", GrammaticalGender.Feminine, "ທີ 1" },
+        { "lo", "1", GrammaticalGender.Neuter, "ທີ 1" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
@@ -11971,6 +11984,9 @@ static class LocaleOrdinalizerMatrixData
             { "mr", 21, GrammaticalGender.Masculine, "एकविसावा" },
             { "mr", 21, GrammaticalGender.Feminine, "एकविसावी" },
             { "mr", 21, GrammaticalGender.Neuter, "एकविसावे" },
+        { "lo", 1, GrammaticalGender.Masculine, "ທີ 1" },
+        { "lo", 1, GrammaticalGender.Feminine, "ທີ 1" },
+        { "lo", 1, GrammaticalGender.Neuter, "ທີ 1" },
 };
 
 }
