@@ -15,6 +15,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     readonly FrozenDictionary<string, long>? exactOrdinalMap = rules.ExactOrdinalMap;
     readonly FrozenDictionary<string, long>? ordinalScaleMap = rules.OrdinalScaleMap;
     readonly FrozenDictionary<string, long>? gluedOrdinalScaleSuffixes = rules.GluedOrdinalScaleSuffixes;
+    readonly FrozenDictionary<string, long>? gluedScaleSuffixes = rules.GluedScaleSuffixes;
 
     /// <inheritdoc />
     public override long Convert(string words)
@@ -246,6 +247,13 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 return true;
             }
 
+            if (TryParseGluedScale(words, out var gluedScaleValue))
+            {
+                value = gluedScaleValue;
+                unrecognizedWord = null;
+                return true;
+            }
+
             ulong total = 0;
             ulong current = 0;
             unrecognizedWord = null;
@@ -271,6 +279,19 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 if (TryGetCompositeScaleValue(token, ref tokenizer, ref pendingToken, out var compositeScaleValue))
                 {
                     if (compositeScaleValue < 0 || !TryApplyCompositeScaledGroup(total, current, (ulong)compositeScaleValue, maxMagnitude, out total))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
+                    current = 0;
+                    continue;
+                }
+
+                if (TryParseGluedScaleParts(token, out var gluedScaleCount, out var gluedScaleTokenValue))
+                {
+                    if (!TryAddGluedScaledGroup(total, current, (ulong)gluedScaleCount, (ulong)gluedScaleTokenValue, maxMagnitude, out total))
                     {
                         value = default;
                         unrecognizedWord = words;
@@ -364,6 +385,34 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             unrecognizedWord = words;
             return false;
         }
+    }
+
+    static bool TryAddGluedScaledGroup(ulong total, ulong current, ulong count, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
+        if (current > 0 && current < scaleValue)
+        {
+            if (!TryAddMagnitude(current, count, maxMagnitude, out var combinedCount))
+            {
+                value = default;
+                return false;
+            }
+
+            return TryAddScaledMagnitude(total, combinedCount, scaleValue, maxMagnitude, out value);
+        }
+
+        if (current != 0)
+        {
+            if (TryAddMagnitude(total, current, maxMagnitude, out var withCurrent) &&
+                TryAddScaledMagnitude(withCurrent, count, scaleValue, maxMagnitude, out value))
+            {
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+
+        return TryAddScaledMagnitude(total, count, scaleValue, maxMagnitude, out value);
     }
 
     static bool TryApplyCompositeScaledGroup(ulong total, ulong current, ulong scaleValue, ulong maxMagnitude, out ulong value)
@@ -623,6 +672,71 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         }
 
         value = default;
+        return false;
+    }
+
+    /// <summary>
+    /// Parses a glued cardinal scale such as a cardinal count followed by a scale suffix.
+    /// </summary>
+    /// <param name="words">The normalized cardinal phrase or token.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
+    /// <returns><c>true</c> if the phrase matched a glued cardinal scale; otherwise, <c>false</c>.</returns>
+    bool TryParseGluedScale(string words, out long value)
+    {
+        if (!TryParseGluedScaleParts(words, out var count, out var scaleValue))
+        {
+            value = default;
+            return false;
+        }
+
+        try
+        {
+            value = checked(count * scaleValue);
+            return true;
+        }
+        catch (OverflowException)
+        {
+            value = default;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Splits a glued cardinal scale into the parsed count and scale value.
+    /// </summary>
+    /// <param name="words">The normalized cardinal phrase or token.</param>
+    /// <param name="count">When this method returns, the parsed scale count.</param>
+    /// <param name="scaleValue">When this method returns, the parsed scale value.</param>
+    /// <returns><c>true</c> if the phrase matched a glued cardinal scale; otherwise, <c>false</c>.</returns>
+    bool TryParseGluedScaleParts(string words, out long count, out long scaleValue)
+    {
+        if (gluedScaleSuffixes is null || gluedScaleSuffixes.Count == 0)
+        {
+            count = default;
+            scaleValue = default;
+            return false;
+        }
+
+        foreach (var suffix in gluedScaleSuffixes)
+        {
+            if (!words.EndsWith(suffix.Key, StringComparison.Ordinal) || words.Length == suffix.Key.Length)
+            {
+                continue;
+            }
+
+            if (!TryParseCardinal(words[..^suffix.Key.Length], false, out count, out _) ||
+                count <= 0 ||
+                count >= suffix.Value)
+            {
+                continue;
+            }
+
+            scaleValue = suffix.Value;
+            return true;
+        }
+
+        count = default;
+        scaleValue = default;
         return false;
     }
 
@@ -905,6 +1019,10 @@ internal sealed class TokenMapWordsToNumberRules
     /// Gets the suffixes that may be glued onto a cardinal stem to form an ordinal scale.
     /// </summary>
     public FrozenDictionary<string, long>? GluedOrdinalScaleSuffixes { get; init; }
+    /// <summary>
+    /// Gets the suffixes that may be glued onto a cardinal count to form a cardinal scale.
+    /// </summary>
+    public FrozenDictionary<string, long>? GluedScaleSuffixes { get; init; }
     /// <summary>
     /// Gets composite scale tokens that are formed from adjacent words.
     /// </summary>

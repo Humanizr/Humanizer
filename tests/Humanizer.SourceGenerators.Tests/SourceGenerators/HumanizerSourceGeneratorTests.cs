@@ -308,6 +308,9 @@ surfaces:
   "gluedOrdinalScaleSuffixes": {
     "th": 1
   },
+  "gluedScaleSuffixes": {
+    "hundred": 100
+  },
   "compositeScaleMap": {
     "million billion": 1000000000000000
   },
@@ -342,6 +345,7 @@ surfaces:
         Assert.Contains("ExactOrdinalMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"first\"] = 1 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("OrdinalScaleMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"thousandth\"] = 1000 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("GluedOrdinalScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal) { [\"th\"] = 1 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
+        Assert.Contains("GluedScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal) { [\"hundred\"] = 100 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("CompositeScaleMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"million billion\"] = 1000000000000000 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.LowercaseRemovePeriods", fullExpression);
         Assert.Contains("NegativePrefixes = new string[] { \"minus\" }", fullExpression);
@@ -372,6 +376,7 @@ surfaces:
         Assert.Contains("ExactOrdinalMap = null", minimalExpression);
         Assert.Contains("OrdinalScaleMap = null", minimalExpression);
         Assert.Contains("GluedOrdinalScaleSuffixes = null", minimalExpression);
+        Assert.Contains("GluedScaleSuffixes = null", minimalExpression);
         Assert.Contains("CompositeScaleMap = null", minimalExpression);
         Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace", minimalExpression);
         Assert.Contains("NegativePrefixes = Array.Empty<string>()", minimalExpression);
@@ -509,6 +514,7 @@ surfaces:
     public void TokenMapOrdinalMapsAreGeneratedFromLocaleData()
     {
         var azerbaijani = GetGeneratedSource("TokenMapWordsToNumberConverters.Az.g.cs");
+        var khmer = GetGeneratedSource("TokenMapWordsToNumberConverters.Km.g.cs");
         var spanish = GetGeneratedSource("TokenMapWordsToNumberConverters.Es.g.cs");
         var ukrainian = GetGeneratedSource("TokenMapWordsToNumberConverters.Uk.g.cs");
 
@@ -522,6 +528,8 @@ surfaces:
         Assert.Contains("OrdinalScaleMap = ", spanish);
         Assert.Contains("OrdinalScaleMap = ", ukrainian);
         Assert.Contains("GluedOrdinalScaleSuffixes = ", spanish);
+        Assert.Contains("GluedScaleSuffixes = ", khmer);
+        Assert.Contains("[\"រយ\"] = 100", khmer);
     }
 
     [Fact]

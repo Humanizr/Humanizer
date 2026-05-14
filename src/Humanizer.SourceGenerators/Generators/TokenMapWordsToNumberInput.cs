@@ -98,6 +98,7 @@ public sealed partial class HumanizerSourceGenerator
             var exactOrdinalEntries = ReadMap(localeCode, localeElement, "ordinalMap", diagnostics, ref hasErrors);
             var ordinalScaleEntries = ReadMap(localeCode, localeElement, "ordinalScaleMap", diagnostics, ref hasErrors);
             var gluedOrdinalScaleSuffixEntries = ReadMap(localeCode, localeElement, "gluedOrdinalScaleSuffixes", diagnostics, ref hasErrors);
+            var gluedScaleSuffixEntries = ReadMap(localeCode, localeElement, "gluedScaleSuffixes", diagnostics, ref hasErrors);
             var compositeScaleEntries = ReadMap(localeCode, localeElement, "compositeScaleMap", diagnostics, ref hasErrors);
             var negativePrefixes = ReadStringArray(localeCode, localeElement, "negativePrefixes", diagnostics, ref hasErrors);
             var negativeSuffixes = ReadStringArray(localeCode, localeElement, "negativeSuffixes", diagnostics, ref hasErrors);
@@ -135,6 +136,7 @@ public sealed partial class HumanizerSourceGenerator
                 exactOrdinalEntries,
                 ordinalScaleEntries,
                 gluedOrdinalScaleSuffixEntries,
+                gluedScaleSuffixEntries,
                 compositeScaleEntries,
                 negativePrefixes,
                 negativeSuffixes,
@@ -197,6 +199,7 @@ public sealed partial class HumanizerSourceGenerator
                 AppendMap(builder, "            ", "ExactOrdinalMap", "long", locale.ExactOrdinalEntries);
                 AppendMap(builder, "            ", "OrdinalScaleMap", "long", locale.OrdinalScaleEntries);
                 AppendMap(builder, "            ", "GluedOrdinalScaleSuffixes", "long", locale.GluedOrdinalScaleSuffixEntries);
+                AppendMap(builder, "            ", "GluedScaleSuffixes", "long", locale.GluedScaleSuffixEntries);
                 AppendMap(builder, "            ", "CompositeScaleMap", "long", locale.CompositeScaleEntries);
                 builder.Append("            NormalizationProfile = TokenMapNormalizationProfile.");
                 builder.Append(locale.NormalizationProfile);

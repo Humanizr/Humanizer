@@ -9,6 +9,32 @@ public class KhmerLocaleParityTests
     static readonly int[] triple = [1, 2, 3];
 #pragma warning restore IDE1006
 
+    public static IEnumerable<object[]> GluedScaleCountData
+    {
+        get
+        {
+            var counts = Enumerable.Range(1, 99)
+                .Concat(Enumerable.Range(1, 9).Select(static value => value * 100))
+                .ToArray();
+            (long Scale, string Suffix)[] scales =
+            [
+                (100, "រយ"),
+                (1000, "ពាន់"),
+                (10000, "ម៉ឺន"),
+                (100000, "សែន"),
+                (1000000, "លាន")
+            ];
+
+            foreach (var (scale, suffix) in scales)
+            {
+                foreach (var count in counts.Where(count => count < scale))
+                {
+                    yield return [count.ToWords(km).Replace(" ", string.Empty) + suffix, count * scale];
+                }
+            }
+        }
+    }
+
     [Fact]
     public void ListHumanize_UsesKhmerConjunction()
     {
@@ -140,12 +166,30 @@ public class KhmerLocaleParityTests
 
     [Theory]
     [InlineData("ពីររយ", 200)]
+    [InlineData("បីរយ", 300)]
+    [InlineData("ប្រាំបួនរយ", 900)]
     [InlineData("ពីរពាន់", 2000)]
+    [InlineData("បីពាន់", 3000)]
     [InlineData("ពីរម៉ឺន", 20000)]
     [InlineData("ពីរសែន", 200000)]
     [InlineData("ពីរលាន", 2000000)]
     [InlineData("ដប់ពីរលាន", 12000000)]
+    [InlineData("កៅសិបប្រាំបួនលាន", 99000000)]
+    [InlineData("ប្រាំបួនរយលាន", 900000000)]
+    [InlineData("ប្រាំបួនរយ កៅសិបប្រាំបួនលាន", 999000000)]
+    [InlineData("បីពាន់ បួនរយ ម្ភៃពីរ", 3422)]
+    [InlineData("ដប់ពីរលាន បីសែន បួនម៉ឺន ប្រាំពាន់ ប្រាំមួយរយ ចិតសិបប្រាំបី", 12345678)]
     public void WordsToNumber_ParsesCommonGluedScaleTokens(string words, long expected)
+    {
+        Assert.Equal(expected, words.ToNumber(km));
+        Assert.True(words.TryToNumber(out var parsed, km, out var unrecognizedWord));
+        Assert.Equal(expected, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Theory]
+    [MemberData(nameof(GluedScaleCountData))]
+    public void WordsToNumber_ParsesAllProductiveGluedScaleCounts(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(km));
         Assert.True(words.TryToNumber(out var parsed, km, out var unrecognizedWord));
