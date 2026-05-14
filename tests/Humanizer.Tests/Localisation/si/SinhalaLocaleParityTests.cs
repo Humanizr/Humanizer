@@ -85,6 +85,7 @@ public class SinhalaLocaleParityTests
     [InlineData(1000000000, "සියය කෝටි")]
     [InlineData(1010000000, "එකසිය එක කෝටි")]
     [InlineData(1000100000, "සියය කෝටි ලක්ෂය")]
+    [InlineData(10000000000, "දාහ කෝටි")]
     [InlineData(10000000000000000, "සියය කෝටි කෝටි")]
     public void NumberToWords_ProducesFallbackScalePhrases(long number, string expected)
     {
@@ -108,6 +109,7 @@ public class SinhalaLocaleParityTests
     [InlineData("සියය කෝටි", 1000000000)]
     [InlineData("එකසිය එක කෝටි", 1010000000)]
     [InlineData("සියය කෝටි ලක්ෂය", 1000100000)]
+    [InlineData("දාහ කෝටි", 10000000000)]
     [InlineData("සියය කෝටි කෝටි", 10000000000000000)]
     [InlineData("එකසිය එක කෝටි විසි එක", 1010000021)]
     [InlineData("විසි එකවැනි", 21)]
@@ -121,6 +123,7 @@ public class SinhalaLocaleParityTests
     [InlineData(1000000000)]
     [InlineData(1010000000)]
     [InlineData(1000100001)]
+    [InlineData(10000000000)]
     [InlineData(10000000000000000)]
     [InlineData(long.MaxValue)]
     [InlineData(long.MinValue)]
