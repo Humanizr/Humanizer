@@ -217,6 +217,7 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
         long total = 0;
         long current = 0;
         var position = 0;
+        var matchedNumericToken = false;
 
         if (string.IsNullOrEmpty(words))
         {
@@ -257,6 +258,8 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
                 return false;
             }
 
+            matchedNumericToken = true;
+
             if (numeric == profile.HundredValue)
             {
                 current = checked((current == 0 ? 1 : current) * numeric);
@@ -270,6 +273,12 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
             {
                 current = checked(current + numeric);
             }
+        }
+
+        if (!matchedNumericToken)
+        {
+            unrecognizedWord = words.Trim();
+            return false;
         }
 
         value = checked(total + current);
