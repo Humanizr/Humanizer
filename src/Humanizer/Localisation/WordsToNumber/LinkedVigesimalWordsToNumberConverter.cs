@@ -127,13 +127,16 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
 
     bool TryParseScale(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
     {
-        foreach (var scale in profile.TokenizedScales)
+        for (var scaleIndex = 0; scaleIndex < profile.TokenizedScales.Length; scaleIndex++)
         {
+            var scale = profile.TokenizedScales[scaleIndex];
             var scaleValue = (ulong)scale.Value;
             if (scaleValue > maxValue)
             {
                 continue;
             }
+
+            var maxCount = Math.Min(GetMaximumCountForScale(scaleIndex), maxValue / scaleValue);
 
             if (TryMatchTokenPhrase(tokens, start, end, scale.OneTokens, out next) ||
                 TryMatchTokenPhrase(tokens, start, end, scale.OneWithRemainderTokens, out next))
@@ -145,7 +148,7 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
             if (TryMatchTokenPhrase(tokens, start, end, scale.NameTokens, out var afterName) ||
                 TryMatchTokenPhrase(tokens, start, end, scale.NameWithRemainderTokens, out afterName))
             {
-                if (TryParseScaleCount(tokens, afterName, end, maxValue / scaleValue, scaleValue, out var count, out next) && count > 0)
+                if (TryParseScaleCount(tokens, afterName, end, maxCount, scaleValue, out var count, out next) && count > 0)
                 {
                     value = count * scaleValue;
                     return true;
@@ -168,19 +171,40 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
         }
 
         var countEnd = FindScaleCountEnd(tokens, afterFirst, end, scaleValue);
-        if (firstValue >= (ulong)profile.ScaleCountCompositeThreshold &&
-            countEnd > afterFirst &&
-            TryParseValue(tokens, start, countEnd, maxValue, out var compositeValue, out var afterComposite) &&
-            afterComposite == countEnd)
+        if (firstValue >= (ulong)profile.ScaleCountCompositeThreshold && countEnd > afterFirst)
         {
-            value = compositeValue;
-            next = afterComposite;
-            return true;
+            for (var candidateEnd = countEnd; candidateEnd > afterFirst; candidateEnd--)
+            {
+                if (TryParseValue(tokens, start, candidateEnd, maxValue, out var compositeValue, out var afterComposite) &&
+                    afterComposite == candidateEnd)
+                {
+                    value = compositeValue;
+                    next = afterComposite;
+                    return true;
+                }
+            }
         }
 
         value = firstValue;
         next = afterFirst;
         return true;
+    }
+
+    ulong GetMaximumCountForScale(int scaleIndex)
+    {
+        if (scaleIndex == 0)
+        {
+            return ulong.MaxValue / (ulong)profile.TokenizedScales[scaleIndex].Value;
+        }
+
+        var previous = (ulong)profile.TokenizedScales[scaleIndex - 1].Value;
+        var current = (ulong)profile.TokenizedScales[scaleIndex].Value;
+        if (previous <= current || previous % current != 0)
+        {
+            throw new InvalidOperationException("Linked-vigesimal parser profiles require descending scales where each larger scale is divisible by the next smaller scale.");
+        }
+
+        return previous / current - 1UL;
     }
 
     int FindScaleCountEnd(string[] tokens, int start, int end, ulong parentScaleValue)
