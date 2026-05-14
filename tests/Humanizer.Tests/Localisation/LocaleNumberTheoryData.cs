@@ -4,6 +4,14 @@ static class LocaleNumberTheoryData
 {
     public static TheoryData<string, int, string> CardinalCases => new()
     {
+        { "ps", 0, "صفر" },
+        { "ps", 1, "یو" },
+        { "ps", 2, "دوه" },
+        { "ps", 21, "یوویشت" },
+        { "ps", 100, "سل" },
+        { "ps", 101, "سل او یو" },
+        { "ps", 1000, "یو زره" },
+        { "ps", 12345678, "دولس میلیون او درې سوه او پنځه څلوېښت زره او شپږ سوه او اته اویا" },
         { "si", 0, "බිංදුව" },
         { "si", 1, "එක" },
         { "si", 21, "විසි එක" },
@@ -2806,6 +2814,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
+        { "ps", 101, true, "سل او یو" },
+        { "ps", 101, false, "سل او یو" },
         { "si", 21, true, "විසි එක" },
 
         { "kn", 101, true, "ನೂರ ಒಂದು" },
@@ -3613,6 +3623,7 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
+        { "ps", 21, WordForm.Abbreviation, "یوویشت" },
         { "si", 21, WordForm.Normal, "විසි එක" },
 
         { "kn", 1, WordForm.Abbreviation, "ಒಂದು" },
@@ -4025,6 +4036,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
+        { "ps", 2, GrammaticalGender.Masculine, "دوه" },
+        { "ps", 2, GrammaticalGender.Feminine, "دوه" },
+        { "ps", 2, GrammaticalGender.Neuter, "دوه" },
         { "si", 1, GrammaticalGender.Feminine, "එක" },
         { "si", 1, GrammaticalGender.Masculine, "එක" },
         { "si", 1, GrammaticalGender.Neuter, "එක" },
@@ -4474,6 +4488,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
+        { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "دوه" },
+        { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "دوه" },
+        { "ps", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "دوه" },
         { "si", 21, WordForm.Normal, GrammaticalGender.Feminine, "විසි එක" },
         { "si", 21, WordForm.Normal, GrammaticalGender.Masculine, "විසි එක" },
         { "si", 21, WordForm.Normal, GrammaticalGender.Neuter, "විසි එක" },
@@ -4718,6 +4735,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
+        { "ps", 1, "لومړی" },
+        { "ps", 21, "یوویشتم" },
         { "si", 1, "පළමු" },
         { "si", 21, "විසි එකවැනි" },
 
@@ -6100,6 +6119,7 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+        { "ps", 21, WordForm.Abbreviation, "یوویشتم" },
         { "si", 21, WordForm.Normal, "විසි එකවැනි" },
 
         { "kn", 1, WordForm.Abbreviation, "ಒಂದನೇ" },
@@ -6472,6 +6492,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+        { "ps", 1, GrammaticalGender.Masculine, "لومړی" },
+        { "ps", 1, GrammaticalGender.Feminine, "لومړۍ" },
+        { "ps", 1, GrammaticalGender.Neuter, "لومړی" },
         { "si", 21, GrammaticalGender.Feminine, "විසි එකවැනි" },
         { "si", 21, GrammaticalGender.Masculine, "විසි එකවැනි" },
         { "si", 21, GrammaticalGender.Neuter, "විසි එකවැනි" },
@@ -7339,6 +7362,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+        { "ps", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "یوویشتم" },
+        { "ps", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "یوویشتمه" },
+        { "ps", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "یوویشتم" },
         { "si", 21, GrammaticalGender.Feminine, WordForm.Normal, "විසි එකවැනි" },
         { "si", 21, GrammaticalGender.Masculine, WordForm.Normal, "විසි එකවැනි" },
         { "si", 21, GrammaticalGender.Neuter, WordForm.Normal, "විසි එකවැනි" },
@@ -7581,6 +7607,7 @@ static class LocaleNumberTheoryData
 };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "ps", 2, "دوه" },
         { "si", 2, "දෙක" },
 
         { "kn", 2, "ಎರಡು" },
@@ -7671,6 +7698,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "ps", "یوویشت", 21L },
+        { "ps", "دولس میلیون او درې سوه او پنځه څلوېښت زره او شپږ سوه او اته اویا", 12345678L },
+        { "ps", "مائنس پنځه", -5L },
+        { "ps", "یوویشتمه", 21L },
         { "si", "විසි එක", 21L },
         { "si", "එකසිය එක", 101L },
         { "si", "දොළොස්ලක්ෂ තිස්හතරදහස් පන්සිය හැට හත", 1234567L },
