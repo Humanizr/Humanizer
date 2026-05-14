@@ -629,6 +629,21 @@ public sealed partial class HumanizerSourceGenerator
                             Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty")
                         )
             ),
+                // Shared engine for locales whose scale count is a bound stem and whose scale suffix
+                // changes when the scale is followed by a lower-order remainder.
+                ["stemmed-scale"] = Schema("stemmed-scale", "StemmedScaleNumberToWordsConverter",
+                Member("profile-object", null, "StemmedScaleNumberToWordsProfile", null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "negativeWord", null, null, null, null, null, null),
+                            Member("string", "negativeJoiner", null, null, null, " ", null, null),
+                            Member("string", "joiner", null, null, null, " ", null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "words", null, null, null, null, null, null),
+                            Member("string-array", "countStems", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "stemmed-scale-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
+                        )
+            ),
                 ["south-slavic-cardinal"] = Schema("south-slavic-cardinal", null,
                 Member("profile-object", null, null, null, null, null, null, null,
                             Member("int64", "maximumValue", null, null, null, null, null, null),
