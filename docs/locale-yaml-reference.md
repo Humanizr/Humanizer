@@ -1022,6 +1022,33 @@ Fields:
 - `ignoredTokens`
 - `negativePrefixes`
 
+### `scale-leading-compound` (parser)
+
+Fields:
+
+- `unitsMap`
+- `tensMap`
+- `scales`
+- `conjunctionWord`
+- `terminalRemainderConjunctionWord`
+- `minusWord`
+- `ordinalPrefix`
+- `ordinalSuffix`
+- `ordinalMap`
+
+Nested `scales` fields:
+
+- `value`
+- `name`
+
+Notes:
+
+- This parser is the `number.parse` counterpart to the scale-leading renderer used by Hausa (`ha`) and Swahili (`sw`). It accepts scale names before their count tokens and tokenizes multi-word unit and scale phrases.
+- Unlike the render-side `unitsMap` and `tensMap` arrays, parser maps are token-to-number dictionaries. Include every spelling variant that should parse.
+- `scales` must be ordered from larger to smaller values, and each larger value must be divisible by the next smaller value.
+- `conjunctionWord` joins tens-plus-units and terminal remainders. `terminalRemainderConjunctionWord` can override the terminal-remainder phrase and falls back to `conjunctionWord` when omitted.
+- Exact ordinal phrases belong in `ordinalMap`; otherwise the parser can strip `ordinalPrefix`/`ordinalSuffix` and parse the remaining cardinal phrase.
+
 ### `prefixed-tens-scale`
 
 Fields:
@@ -1085,10 +1112,10 @@ Notes:
 - `ordinalScaleMap` holds ordinal scale words such as "millionth".
 - `gluedOrdinalScaleSuffixes` supports glued forms where the scale is expressed as a suffix.
 - `compositeScaleMap` supports composite multi-token scales.
-- `ordinalGenderVariant` tells the token-map generator which gender variants should be synthesized from the referenced number-to-words converter when `ordinalNumberToWordsKind` is present. Use `none` for the converter's default ordinal form, `masculine-and-feminine` for two-gender ordinal systems, and `all` when default, feminine, and neuter forms are distinct and should parse.
-- `ordinalNumberToWordsKind: 'self'` is an authoring alias for the current locale's generated number-to-words profile. The generator rewrites it to the concrete locale profile key before emitting the parser catalog, so locale YAML does not need to know internal generated profile names.
-- `normalizationProfile` is the first field to pick for a new locale because it determines how aggressively the generated parser cleans incoming text before tokenization. The same normalization is applied to explicit ordinal tokens and to any generated ordinal forms from `ordinalNumberToWordsKind`.
-- `cardinalMap` is the authoritative literal-token dictionary for this engine. If a token should parse, it must appear here or in one of the explicit ordinal/scale maps, or be generated from `ordinalNumberToWordsKind` according to `ordinalGenderVariant`.
+- `ordinalGenderVariant` is validated as token-map metadata when present. Do not rely on it by itself to create parseable ordinal tokens; token-map parsing recognizes explicit ordinal maps and the prefix/suffix rules emitted into `TokenMapWordsToNumberRules`.
+- `ordinalNumberToWordsKind: 'self'` is an authoring alias for the current locale's generated number-to-words profile. The generator normalizes that alias to the concrete locale profile key, but token-map locales should still author the ordinal lexemes they need to parse in `ordinalMap`, `ordinalScaleMap`, `gluedOrdinalScaleSuffixes`, or `compositeScaleMap` unless the token-map emitter is extended to synthesize additional ordinal maps.
+- `normalizationProfile` is the first field to pick for a new locale because it determines how aggressively the generated parser cleans incoming text before tokenization. The same normalization is applied to explicit ordinal tokens.
+- `cardinalMap` is the authoritative literal-token dictionary for this engine. If a cardinal token should parse, it must appear here; ordinal tokens must appear in one of the explicit ordinal/scale maps or be covered by the documented prefix/suffix rules.
 
 ### `vigesimal-compound`
 

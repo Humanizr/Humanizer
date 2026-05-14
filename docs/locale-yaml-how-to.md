@@ -319,6 +319,7 @@ Supported parse engines in current checked-in YAML include:
 - `greedy-compound`
 - `inverted-tens`
 - `linking-affix`
+- `scale-leading-compound`
 - `prefixed-tens-scale`
 - `suffix-scale`
 - `token-map`
