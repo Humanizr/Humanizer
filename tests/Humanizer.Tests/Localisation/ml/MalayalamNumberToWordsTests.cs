@@ -23,6 +23,7 @@ public class MalayalamNumberToWordsTests
     [InlineData(1001, "ആയിരത്തി ഒന്ന്")]
     [InlineData(100000, "ഒരു ലക്ഷം")]
     [InlineData(10000000, "ഒരു കോടി")]
+    [InlineData(100_000_000_000_000_000L, "ഒരു ലക്ഷം ലക്ഷം കോടി")]
     [InlineData(12345678, "ഒരു കോടി ഇരുപത്തിമൂന്ന് ലക്ഷത്തി നാൽപ്പത്തിയഞ്ച് ആയിരത്തി അറുന്നൂറ്റിഎഴുപത്തിയെട്ട്")]
     public void NumberToWords_ProducesExpectedMalayalamOutput(long number, string expected)
     {
@@ -62,6 +63,7 @@ public class MalayalamNumberToWordsTests
     [InlineData(10000000, "ഒരു കോടി")]
     [InlineData(1_001_000_001, "നൂറ് കോടി പത്ത് ലക്ഷത്തി ഒന്ന്")]
     [InlineData(4_325_010_007_018, "നാല് ലക്ഷം കോടി മുപ്പത്തിരണ്ട് ആയിരം കോടി അഞ്ഞൂറ്റിയൊന്ന് കോടി ഏഴ് ആയിരത്തി പതിനെട്ട്")]
+    [InlineData(100_000_000_000_000_000L, "ഒരു ലക്ഷം ലക്ഷം കോടി")]
     [InlineData(12345678, "ഒരു കോടി ഇരുപത്തിമൂന്ന് ലക്ഷത്തി നാൽപ്പത്തിയഞ്ച് ആയിരത്തി അറുന്നൂറ്റിഎഴുപത്തിയെട്ട്")]
     public void WordsToNumber_RoundTripsMalayalamCardinals(long number, string words)
     {
@@ -86,6 +88,17 @@ public class MalayalamNumberToWordsTests
     public void WordsToNumber_ParsesMalayalamOrdinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Ml));
+    }
+
+    [Fact]
+    public void WordsToNumber_RoundTripsMalayalamLongMinValue()
+    {
+        var words = long.MinValue.ToWords(Ml);
+
+        Assert.Equal(long.MinValue, words.ToNumber(Ml));
+        Assert.True(words.TryToNumber(out var parsed, Ml, out var unrecognizedWord));
+        Assert.Equal(long.MinValue, parsed);
+        Assert.Null(unrecognizedWord);
     }
 
     [Fact]
