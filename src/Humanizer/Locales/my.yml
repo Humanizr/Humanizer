@@ -375,6 +375,7 @@ surfaces:
       allowInvariantIntegerInput: true
       negativePrefixes:
         - 'အနုတ် '
+        - '-'
       cardinalMap:
         'သုည': 0
         'တစ်': 1
