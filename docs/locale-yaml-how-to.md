@@ -291,6 +291,7 @@ Supported render engines in current checked-in YAML include:
 - `ordinal-prefix-scale`
 - `pluralized-scale`
 - `scale-leading-compound`
+- `stemmed-scale`
 - `scale-strategy`
 - `segmented-scale`
 - `south-slavic-cardinal`
@@ -321,11 +322,15 @@ Supported parse engines in current checked-in YAML include:
 - `linking-affix`
 - `scale-leading-compound`
 - `prefixed-tens-scale`
+- `stemmed-scale`
 - `suffix-scale`
 - `token-map`
 - `vigesimal-compound`
 
 For locale parity work, account for `number.parse` alongside `number.words` so the locale can naturally round-trip the same high-range forms in both directions.
+
+`stemmed-scale` is available as a narrow render/parse pair for additive count+scale morphology where bound count stems attach to scale suffixes. Use it only when the locale's structure is still additive scale decomposition; do not stretch it to vigesimal, subtractive, or clock-like number systems.
+
 
 ### `ordinal`
 

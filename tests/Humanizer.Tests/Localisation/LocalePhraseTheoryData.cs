@@ -4,6 +4,11 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+        { "si", 1, TimeUnit.Day, Tense.Past, "ඊයේ" },
+        { "si", 2, TimeUnit.Day, Tense.Past, "2 දිනකට පෙර" },
+        { "si", 1, TimeUnit.Day, Tense.Future, "හෙට" },
+        { "si", 2, TimeUnit.Day, Tense.Future, "2 දිනකින්" },
+
         { "kn", 1, TimeUnit.Day, Tense.Past, "ನಿನ್ನೆ" },
         { "kn", 2, TimeUnit.Day, Tense.Past, "2 ದಿನಗಳ ಹಿಂದೆ" },
         { "kn", 2, TimeUnit.Day, Tense.Future, "2 ದಿನಗಳಲ್ಲಿ" },
@@ -1548,6 +1553,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "si", "කවදාවත් නැහැ" },
+
         { "kn", "ಎಂದಿಗೂ ಇಲ್ಲ" },
         { "ne", "कहिल्यै होइन" },
         { "my", "ဘယ်တော့မှ" },
@@ -1669,6 +1676,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+        { "si", 2, TimeUnit.Day, false, "2 දින" },
+
         { "kn", 1, TimeUnit.Day, false, "1 ದಿನ" },
         { "kn", 2, TimeUnit.Day, false, "2 ದಿನಗಳು" },
         { "kn", 1, TimeUnit.Day, true, "ಒಂದು ದಿನ" },

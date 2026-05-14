@@ -312,6 +312,7 @@ Supported engines in current checked-in YAML:
 - `ordinal-prefix-scale`
 - `pluralized-scale`
 - `scale-leading-compound`
+- `stemmed-scale`
 - `scale-strategy`
 - `segmented-scale`
 - `south-slavic-cardinal`
@@ -341,6 +342,7 @@ Supported engines in current checked-in YAML:
 - `linking-affix`
 - `scale-leading-compound`
 - `prefixed-tens-scale`
+- `stemmed-scale`
 - `suffix-scale`
 - `token-map`
 - `vigesimal-compound`
@@ -1473,6 +1475,49 @@ Fields:
 - `specialJoinerTensValue`
 - `tupleMap`
 - `tupleFallbackWord`
+
+### `stemmed-scale`
+
+Use this render and parse engine pair for additive count+scale systems where a count has an independent cardinal word, but scale composition uses a bound count stem before the scale suffix. Sinhala (`si`) uses it for forms such as `දෙ` + `දහස්` -> `දෙදහස්` while still emitting independent low-number words such as `දෙක`.
+
+Render fields:
+
+- `zeroWord`
+- `negativeWord`
+- `negativeJoiner`
+- `joiner`
+- `ordinalSuffix`
+- `words` — dense cardinal words for 0 through the highest directly authored low number
+- `countStems` — dense bound stems indexed by count; empty entries are allowed for counts that should fall back to `words`
+- `scales`
+- `ordinalExceptions`
+
+Nested `scales` fields:
+
+- `value`
+- `one`
+- `oneWithRemainder`
+- `suffix`
+- `suffixWithRemainder`
+- `stemJoiner` (optional; defaults to empty)
+- `fallbackName` / `fallbackNameWithRemainder` (optional; used when no bound stem exists for a scale count)
+- `fallbackJoiner` (optional; defaults to a space)
+
+Parse fields:
+
+- `words`
+- `countStems`
+- `scales`
+- `negativePrefixes`
+- `ordinalSuffixes`
+- `ordinalMap`
+- `additionalCardinals` (optional)
+
+Notes:
+
+- Keep this engine narrow. It is additive count+scale stem morphology, not a general natural-number grammar engine. Do not use it for vigesimal, subtractive, or clock-like composition.
+- The parser greedily tokenizes generated scale/count forms and low-number phrases so multi-word low cardinals can round-trip.
+- Author `number.words` and `number.parse` with matching `words`, `countStems`, and `scales` unless the parser has a documented reason to accept additional input-only forms.
 
 ### `indian-scale-forms`
 
