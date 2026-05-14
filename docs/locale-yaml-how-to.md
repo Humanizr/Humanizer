@@ -281,6 +281,8 @@ Supported render engines in current checked-in YAML include:
 - `hyphenated-scale`
 - `hyphenated-ordinal`
 - `indian-grouping`
+- `indian-grouping-gendered`
+- `indian-scale-forms`
 - `inverted-tens`
 - `joined-scale`
 - `linking-scale`
@@ -288,6 +290,7 @@ Supported render engines in current checked-in YAML include:
 - `dual-form-scale`
 - `ordinal-prefix-scale`
 - `pluralized-scale`
+- `scale-leading-compound`
 - `scale-strategy`
 - `segmented-scale`
 - `south-slavic-cardinal`
@@ -350,7 +353,7 @@ Put here:
 
 Supported engine:
 
-- `phrase-clock` — the unified clock engine used by all 65 shipped locale files
+- `phrase-clock` — the unified clock engine all shipped locales resolve to directly or through locale inheritance
 
 ### `compass`
 

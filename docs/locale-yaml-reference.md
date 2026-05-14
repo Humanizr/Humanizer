@@ -353,7 +353,7 @@ Notes:
 
 - `clock` is the canonical YAML authoring surface.
 - The generator emits this surface into the runtime `timeOnlyToClockNotation` feature slot.
-- All 65 shipped locale files use the unified `phrase-clock` engine. There are no residual handwritten clock leaves.
+- All shipped locales resolve clock notation through the unified `phrase-clock` engine, either directly or through locale inheritance. There are no residual handwritten clock leaves.
 
 Supported engine:
 
@@ -927,7 +927,7 @@ The `{dayPeriod}` placeholder allows inline day-period placement within bucket t
 
 Notes:
 
-- All 65 shipped locale files use `phrase-clock`. There are no residual handwritten clock leaves.
+- All shipped locales resolve clock notation through `phrase-clock`, either directly or through locale inheritance. There are no residual handwritten clock leaves.
 - Non-bucketed minutes fall to range-based defaults or `defaultTemplate`.
 - Day-period hour resolution is template-aware: templates that reference `{nextHour}` or `{nextArticle}` base the day period on hour+1 (since the phrasing is relative to the next hour), while templates using `{hour}` base the period on the current hour.
 
@@ -1085,9 +1085,10 @@ Notes:
 - `ordinalScaleMap` holds ordinal scale words such as "millionth".
 - `gluedOrdinalScaleSuffixes` supports glued forms where the scale is expressed as a suffix.
 - `compositeScaleMap` supports composite multi-token scales.
-- `ordinalGenderVariant` tells the token-map generator which gender variants are already present in the YAML data.
-- `normalizationProfile` is the first field to pick for a new locale because it determines how aggressively the generated parser cleans incoming text before tokenization.
-- `cardinalMap` is the authoritative literal-token dictionary for this engine. If a token should parse, it must appear here or in one of the explicit ordinal/scale maps.
+- `ordinalGenderVariant` tells the token-map generator which gender variants should be synthesized from the referenced number-to-words converter when `ordinalNumberToWordsKind` is present. Use `none` for the converter's default ordinal form, `masculine-and-feminine` for two-gender ordinal systems, and `all` when default, feminine, and neuter forms are distinct and should parse.
+- `ordinalNumberToWordsKind: 'self'` is an authoring alias for the current locale's generated number-to-words profile. The generator rewrites it to the concrete locale profile key before emitting the parser catalog, so locale YAML does not need to know internal generated profile names.
+- `normalizationProfile` is the first field to pick for a new locale because it determines how aggressively the generated parser cleans incoming text before tokenization. The same normalization is applied to explicit ordinal tokens and to any generated ordinal forms from `ordinalNumberToWordsKind`.
+- `cardinalMap` is the authoritative literal-token dictionary for this engine. If a token should parse, it must appear here or in one of the explicit ordinal/scale maps, or be generated from `ordinalNumberToWordsKind` according to `ordinalGenderVariant`.
 
 ### `vigesimal-compound`
 
@@ -1427,6 +1428,34 @@ Fields:
 - `tupleMap`
 - `tupleFallbackWord`
 
+### `indian-scale-forms`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `ordinalSuffix`
+- `denseUnitsMap`
+- `scales`
+- `ordinalMap`
+- `ordinalTerminalReplacements`
+
+Nested `scales` fields:
+
+- `value`
+- `singular`
+- `singularWithRemainder`
+- `plural`
+- `pluralWithRemainder`
+- `omitOne`
+
+Notes:
+
+- Use this engine for Indian-grouped decimal systems whose scale nouns have singular, plural, and continuing forms. Telugu (`te`) uses it for forms such as lakh/crore scale phrases that change when a lower remainder follows.
+- `denseUnitsMap` must provide words for 0 through 99; the lowest scale value must be covered by that dense range.
+- `scales` are ordered from larger to smaller scale values. Each row can omit the explicit one-count word with `omitOne`.
+- `ordinalTerminalReplacements` rewrites terminal cardinal tokens before appending `ordinalSuffix`, while `ordinalMap` handles exact irregular ordinals.
+
 ### `indian-grouping`
 
 Fields:
@@ -1459,6 +1488,36 @@ Fields:
 - `croreContinuingSuffix`
 - `ordinalSuffix`
 - `ordinalExceptions`
+
+### `indian-grouping-gendered`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `hundredWord`
+- `thousandWord`
+- `lakhWord`
+- `singleLakhWord`
+- `croreWord`
+- `arabWord`
+- `kharabWord`
+- `denseUnitsMap`
+- `ordinal`
+
+Nested `ordinal` fields:
+
+- `masculine.defaultSuffix`
+- `masculine.exactReplacements`
+- `feminine.defaultSuffix`
+- `feminine.exactReplacements`
+- `neuterFallback`
+
+Notes:
+
+- This engine is used by Indian-subcontinent locales with lakh/crore/arab/kharab grouping and gendered word ordinals, such as Hindi, Punjabi, and Urdu.
+- `denseUnitsMap` supplies the cardinal word forms used below one hundred and for recursive scale counts.
+- `ordinal.masculine` and `ordinal.feminine` model productive suffixes plus exact low-number replacements. `neuterFallback` must be `masculine` or `feminine` and is used when callers request `GrammaticalGender.Neuter` for a two-gender locale.
 
 ### `inverted-tens`
 
@@ -1634,6 +1693,34 @@ Fields:
 - `ordinalTensMap`
 - `ordinalHundredsMap`
 - `useCulture`
+
+### `scale-leading-compound`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `conjunctionWord`
+- `terminalRemainderConjunctionWord`
+- `ordinalPrefix`
+- `ordinalSuffix`
+- `unitsMap`
+- `tensMap`
+- `scales`
+- `ordinalMap`
+
+Nested `scales` fields:
+
+- `value`
+- `name`
+
+Notes:
+
+- Use this engine for languages whose scale noun precedes the count token, for example a structure like "hundred one and two". Hausa (`ha`) and Swahili (`sw`) use this shared family.
+- `unitsMap` must cover 0 through 19 and `tensMap` must be keyed through index 9.
+- `scales` are ordered from larger to smaller scale values and must include a scale no greater than 100 so the recursive renderer can decompose all larger numbers.
+- `conjunctionWord` joins tens-plus-units and terminal sub-hundred remainders. `terminalRemainderConjunctionWord` can override that conjunction for potentially ambiguous terminal remainders after larger scales; when omitted, it falls back to `conjunctionWord`.
+- Ordinals use `ordinalMap` for exact values. Otherwise the engine wraps the cardinal phrase with `ordinalPrefix` and `ordinalSuffix`.
 
 ### `scale-strategy`
 
