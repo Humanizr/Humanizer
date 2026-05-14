@@ -373,6 +373,7 @@ surfaces:
         - 'မြောက်'
         - ' မြောက်'
         - 'ခုမြောက်'
+        - ' ခုမြောက်'
       allowTerminalOrdinalToken: true
       allowInvariantIntegerInput: true
       negativePrefixes:
