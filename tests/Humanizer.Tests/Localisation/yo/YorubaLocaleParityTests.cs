@@ -108,6 +108,8 @@ public class YorubaLocaleParityTests
     [InlineData(99, "ọ̀kàndílọ́gọ́rùn-ún")]
     [InlineData(105, "ọgọ́rùn-ún lé márùn-ún")]
     [InlineData(1234, "ẹgbẹ̀rún kan igba lé mẹ́rìnlélọ́gbọ̀n")]
+    [InlineData(123000000, "mílíọ̀nù ọgọ́rùn-ún lé mẹ́tàlélógún")]
+    [InlineData(4325010007018, "tírílíọ̀nù mẹ́rin bílíọ̀nù ọ̀ọ́dúnrún lé márùndínlọ́gbọ̀n mílíọ̀nù mẹ́wàá ẹgbẹ̀rún méje lé méjìdínlógún")]
     public void WordsToNumber_RoundTripsYorubaCardinals(long number, string words)
     {
         Assert.Equal(number, words.ToNumber(Yo));

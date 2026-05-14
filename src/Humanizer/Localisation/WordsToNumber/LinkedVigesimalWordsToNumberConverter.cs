@@ -145,7 +145,7 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
             if (TryMatchTokenPhrase(tokens, start, end, scale.NameTokens, out var afterName) ||
                 TryMatchTokenPhrase(tokens, start, end, scale.NameWithRemainderTokens, out afterName))
             {
-                if (TryParseExact(tokens, afterName, end, maxValue / scaleValue, out var count, out next) && count > 0)
+                if (TryParseScaleCount(tokens, afterName, end, maxValue / scaleValue, scaleValue, out var count, out next) && count > 0)
                 {
                     value = count * scaleValue;
                     return true;
@@ -156,6 +156,53 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
         value = default;
         next = start;
         return false;
+    }
+
+    bool TryParseScaleCount(string[] tokens, int start, int end, ulong maxValue, ulong scaleValue, out ulong value, out int next)
+    {
+        if (!TryParseExact(tokens, start, end, maxValue, out var firstValue, out var afterFirst) || firstValue == 0)
+        {
+            value = default;
+            next = start;
+            return false;
+        }
+
+        var countEnd = FindScaleCountEnd(tokens, afterFirst, end, scaleValue);
+        if (firstValue >= (ulong)profile.ScaleCountCompositeThreshold &&
+            countEnd > afterFirst &&
+            TryParseValue(tokens, start, countEnd, maxValue, out var compositeValue, out var afterComposite) &&
+            afterComposite == countEnd)
+        {
+            value = compositeValue;
+            next = afterComposite;
+            return true;
+        }
+
+        value = firstValue;
+        next = afterFirst;
+        return true;
+    }
+
+    int FindScaleCountEnd(string[] tokens, int start, int end, ulong parentScaleValue)
+    {
+        for (var index = start; index < end; index++)
+        {
+            foreach (var scale in profile.TokenizedScales)
+            {
+                if ((ulong)scale.Value >= parentScaleValue)
+                {
+                    continue;
+                }
+
+                if (TryMatchTokenPhrase(tokens, index, end, scale.NameTokens, out _) ||
+                    TryMatchTokenPhrase(tokens, index, end, scale.NameWithRemainderTokens, out _))
+                {
+                    return index;
+                }
+            }
+        }
+
+        return end;
     }
 
     bool TryParseExact(string[] tokens, int start, int end, ulong maxValue, out ulong value, out int next)
@@ -291,7 +338,8 @@ internal sealed class LinkedVigesimalWordsToNumberProfile(
     string[]? negativePrefixes = null,
     string[]? ordinalSuffixes = null,
     FrozenDictionary<string, long>? ordinalMap = null,
-    FrozenDictionary<string, long>? additionalCardinals = null)
+    FrozenDictionary<string, long>? additionalCardinals = null,
+    long scaleCountCompositeThreshold = 100)
 {
     /// <summary>Gets exact cardinal words.</summary>
     public FrozenDictionary<string, long> ExactWords { get; } = BuildExactWords(words, scales, additionalCardinals);
@@ -311,6 +359,8 @@ internal sealed class LinkedVigesimalWordsToNumberProfile(
     public string[] OrdinalSuffixes { get; } = ordinalSuffixes ?? [];
     /// <summary>Gets exact ordinal tokens.</summary>
     public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap ?? FrozenDictionary<string, long>.Empty;
+    /// <summary>Gets the minimum exact count value that may be followed by a linked low remainder inside a scale count.</summary>
+    public long ScaleCountCompositeThreshold { get; } = scaleCountCompositeThreshold;
 
     static FrozenDictionary<string, long> BuildExactWords(string[] words, LinkedVigesimalScale[] scales, FrozenDictionary<string, long>? additionalCardinals)
     {
