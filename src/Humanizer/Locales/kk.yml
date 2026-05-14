@@ -120,7 +120,7 @@ surfaces:
     duration:
       zero: 'уақыт жоқ'
       age:
-        template: '{value} жаста'
+        template: 'жасы {value}'
       millisecond:
         single:
           numeric: '1 миллисекунд'

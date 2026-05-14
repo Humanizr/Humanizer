@@ -702,6 +702,7 @@ wordsToNumber:
         Assert.Contains("Schema(\"harmony-ordinal\"", schemaCatalog);
         Assert.Contains("Member(\"bool\", \"softenTerminalTBeforeSuffix\"", schemaCatalog);
         Assert.Contains("Member(\"bool\", \"dropTerminalVowelBeforeHarmonySuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-char-string-dictionary\", \"terminalVowelOrdinalSuffixes\"", schemaCatalog);
 
         Assert.Contains("Schema(\"conjoined-gendered-scale\"", schemaCatalog);
         Assert.DoesNotContain("Schema(\"bulgarian\"", schemaCatalog);
