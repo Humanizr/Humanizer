@@ -1,0 +1,440 @@
+locale: 'yo'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'àti'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'ní báyìí'
+      never: 'rárá'
+      past:
+        millisecond:
+          single: 'milisẹ́kọ́ńdì 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'milisẹ́kọ́ńdì'
+            template: '{count} milisẹ́kọ́ńdì sẹ́yìn'
+        second:
+          single: 'ìṣẹ́jú-àáyá 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú-àáyá'
+            template: '{count} ìṣẹ́jú-àáyá sẹ́yìn'
+        minute:
+          single: 'ìṣẹ́jú 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú'
+            template: '{count} ìṣẹ́jú sẹ́yìn'
+        hour:
+          single: 'wákàtí 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'wákàtí'
+            template: '{count} wákàtí sẹ́yìn'
+        day:
+          single: 'àná'
+          multiple:
+            forms:
+              default: 'ọjọ́'
+            template: '{count} ọjọ́ sẹ́yìn'
+        week:
+          single: 'ọ̀sẹ̀ 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ọ̀sẹ̀'
+            template: '{count} ọ̀sẹ̀ sẹ́yìn'
+        month:
+          single: 'oṣù 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'oṣù'
+            template: '{count} oṣù sẹ́yìn'
+        year:
+          single: 'ọdún 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ọdún'
+            template: '{count} ọdún sẹ́yìn'
+      future:
+        millisecond:
+          single: 'ní milisẹ́kọ́ńdì 1'
+          multiple:
+            forms:
+              default: 'milisẹ́kọ́ńdì'
+            template: 'ní milisẹ́kọ́ńdì {count}'
+        second:
+          single: 'ní ìṣẹ́jú-àáyá 1'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú-àáyá'
+            template: 'ní ìṣẹ́jú-àáyá {count}'
+        minute:
+          single: 'ní ìṣẹ́jú 1'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú'
+            template: 'ní ìṣẹ́jú {count}'
+        hour:
+          single: 'ní wákàtí 1'
+          multiple:
+            forms:
+              default: 'wákàtí'
+            template: 'ní wákàtí {count}'
+        day:
+          single: 'ọ̀la'
+          multiple:
+            forms:
+              default: 'ọjọ́'
+            template: 'ní ọjọ́ {count}'
+        week:
+          single: 'ní ọ̀sẹ̀ 1'
+          multiple:
+            forms:
+              default: 'ọ̀sẹ̀'
+            template: 'ní ọ̀sẹ̀ {count}'
+        month:
+          single: 'ní oṣù 1'
+          multiple:
+            forms:
+              default: 'oṣù'
+            template: 'ní oṣù {count}'
+        year:
+          single: 'ní ọdún 1'
+          multiple:
+            forms:
+              default: 'ọdún'
+            template: 'ní ọdún {count}'
+    duration:
+      zero: 'kò sí àkókò'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: 'milisẹ́kọ́ńdì 1'
+          words: 'milisẹ́kọ́ńdì kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'milisẹ́kọ́ńdì'
+      second:
+        single:
+          numeric: 'ìṣẹ́jú-àáyá 1'
+          words: 'ìṣẹ́jú-àáyá kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ìṣẹ́jú-àáyá'
+      minute:
+        single:
+          numeric: 'ìṣẹ́jú 1'
+          words: 'ìṣẹ́jú kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ìṣẹ́jú'
+      hour:
+        single:
+          numeric: 'wákàtí 1'
+          words: 'wákàtí kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'wákàtí'
+      day:
+        single:
+          numeric: 'ọjọ́ 1'
+          words: 'ọjọ́ kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ọjọ́'
+      week:
+        single:
+          numeric: 'ọ̀sẹ̀ 1'
+          words: 'ọ̀sẹ̀ kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ọ̀sẹ̀'
+      month:
+        single:
+          numeric: 'oṣù 1'
+          words: 'oṣù kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'oṣù'
+      year:
+        single:
+          numeric: 'ọdún 1'
+          words: 'ọdún kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ọdún'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bítì'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'báìtì'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kílóbáìtì'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'mẹ́gábáìtì'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gígábáìtì'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'tẹ́rábáìtì'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'ọj'
+      week:
+        symbol: 'ọ̀s'
+      month:
+        symbol: 'oṣ'
+      year:
+        symbol: 'ọd'
+
+  number:
+    words:
+      engine: 'scale-leading-compound'
+      zeroWord: 'odo'
+      minusWord: 'àìyọkúrò'
+      conjunctionWord: 'àti'
+      ordinalPrefix: 'ìkẹ-'
+      unitsMap:
+        - 'odo'
+        - 'ọ̀kan'
+        - 'méjì'
+        - 'mẹ́ta'
+        - 'mẹ́rin'
+        - 'márùn-ún'
+        - 'mẹ́fà'
+        - 'méje'
+        - 'mẹ́jọ'
+        - 'mẹ́sàn-án'
+        - 'mẹ́wàá'
+        - 'mọ́kànlá'
+        - 'méjìlá'
+        - 'mẹ́tàlá'
+        - 'mẹ́rìnlá'
+        - 'mẹ́ẹ̀dógún'
+        - 'mẹ́rìndínlógún'
+        - 'mẹ́tàdínlógún'
+        - 'méjìdínlógún'
+        - 'mọ́kàndínlógún'
+      tensMap:
+        2: 'ogún'
+        3: 'ọgbọ̀n'
+        4: 'ogójì'
+        5: 'àádọ́ta'
+        6: 'ọgọ́ta'
+        7: 'àádọ́rin'
+        8: 'ọgọ́rin'
+        9: 'àádọ́rùn-ún'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kuíńtílíọ̀nù'
+        -
+          value: 1000000000000000
+          name: 'kuádírílíọ̀nù'
+        -
+          value: 1000000000000
+          name: 'tírílíọ̀nù'
+        -
+          value: 1000000000
+          name: 'bílíọ̀nù'
+        -
+          value: 1000000
+          name: 'mílíọ̀nù'
+        -
+          value: 1000
+          name: 'ẹgbẹ̀rún'
+        -
+          value: 100
+          name: 'ọgọ́rùn-ún'
+      ordinalMap:
+        1: 'àkọ́kọ́'
+        2: 'kejì'
+        3: 'kẹta'
+        4: 'kẹrin'
+        5: 'karùn-ún'
+        6: 'kẹfa'
+        7: 'keje'
+        8: 'kẹjọ'
+        9: 'kẹsàn-án'
+        10: 'kẹwàá'
+    parse:
+      engine: 'scale-leading-compound'
+      conjunctionWord: 'àti'
+      minusWord: 'àìyọkúrò'
+      ordinalPrefix: 'ìkẹ-'
+      unitsMap:
+        odo: 0
+        'ọ̀kan': 1
+        kan: 1
+        méjì: 2
+        mẹ́ta: 3
+        mẹ́rin: 4
+        'márùn-ún': 5
+        mẹ́fà: 6
+        méje: 7
+        mẹ́jọ: 8
+        'mẹ́sàn-án': 9
+        mẹ́wàá: 10
+        mọ́kànlá: 11
+        méjìlá: 12
+        mẹ́tàlá: 13
+        mẹ́rìnlá: 14
+        mẹ́ẹ̀dógún: 15
+        mẹ́rìndínlógún: 16
+        mẹ́tàdínlógún: 17
+        méjìdínlógún: 18
+        mọ́kàndínlógún: 19
+      tensMap:
+        ogún: 20
+        ọgbọ̀n: 30
+        ogójì: 40
+        àádọ́ta: 50
+        ọgọ́ta: 60
+        àádọ́rin: 70
+        ọgọ́rin: 80
+        'àádọ́rùn-ún': 90
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kuíńtílíọ̀nù'
+        -
+          value: 1000000000000000
+          name: 'kuádírílíọ̀nù'
+        -
+          value: 1000000000000
+          name: 'tírílíọ̀nù'
+        -
+          value: 1000000000
+          name: 'bílíọ̀nù'
+        -
+          value: 1000000
+          name: 'mílíọ̀nù'
+        -
+          value: 1000
+          name: 'ẹgbẹ̀rún'
+        -
+          value: 100
+          name: 'ọgọ́rùn-ún'
+      ordinalMap:
+        àkọ́kọ́: 1
+        kejì: 2
+        kẹta: 3
+        kẹrin: 4
+        'karùn-ún': 5
+        kẹfa: 6
+        keje: 7
+        kẹjọ: 8
+        'kẹsàn-án': 9
+        kẹwàá: 10
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'ìkẹ-'
+        defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'ọ̀kan'
+      - 'méjì'
+      - 'mẹ́ta'
+      - 'mẹ́rin'
+      - 'márùn-ún'
+      - 'mẹ́fà'
+      - 'méje'
+      - 'mẹ́jọ'
+      - 'mẹ́sàn-án'
+      - 'mẹ́wàá'
+      - 'mọ́kànlá'
+      - 'méjìlá'
+    min0: 'aago {hour} {dayPeriod}'
+    defaultTemplate: 'aago {hour} àti ìṣẹ́jú {minutes} {dayPeriod}'
+    earlyMorning: 'àárọ̀'
+    morning: 'àárọ̀'
+    afternoon: 'ọ̀sán'
+    evening: 'ìrọ̀lẹ́'
+    night: 'alẹ́'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'àríwá'
+      - 'àríwá-àríwá-ìlà-oòrùn'
+      - 'àríwá-ìlà-oòrùn'
+      - 'ìlà-oòrùn-àríwá-ìlà-oòrùn'
+      - 'ìlà-oòrùn'
+      - 'ìlà-oòrùn-gúúsù-ìlà-oòrùn'
+      - 'gúúsù-ìlà-oòrùn'
+      - 'gúúsù-gúúsù-ìlà-oòrùn'
+      - 'gúúsù'
+      - 'gúúsù-gúúsù-ìwọ̀-oòrùn'
+      - 'gúúsù-ìwọ̀-oòrùn'
+      - 'ìwọ̀-oòrùn-gúúsù-ìwọ̀-oòrùn'
+      - 'ìwọ̀-oòrùn'
+      - 'ìwọ̀-oòrùn-àríwá-ìwọ̀-oòrùn'
+      - 'àríwá-ìwọ̀-oòrùn'
+      - 'àríwá-àríwá-ìwọ̀-oòrùn'
+    short:
+      - 'A'
+      - 'AAÌ'
+      - 'AÌ'
+      - 'ÌAÌ'
+      - 'Ì'
+      - 'ÌGÌ'
+      - 'GÌ'
+      - 'GGÌ'
+      - 'G'
+      - 'GGÌw'
+      - 'GÌw'
+      - 'ÌwGÌw'
+      - 'Ìw'
+      - 'ÌwAÌw'
+      - 'AÌw'
+      - 'AAÌw'
