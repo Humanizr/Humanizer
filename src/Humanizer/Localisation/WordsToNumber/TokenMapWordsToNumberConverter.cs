@@ -11,6 +11,10 @@ namespace Humanizer;
 /// </remarks>
 internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) : GenderlessWordsToNumberConverter
 {
+    const int MaxCompactGluedScaleCountLength = 96;
+    const int MaxCompactGluedScaleTokenCount = 16;
+    const int MaxCompactGluedScaleStatesPerPosition = 128;
+
     readonly TokenMapWordsToNumberRules rules = rules;
     readonly FrozenDictionary<string, long>? exactOrdinalMap = rules.ExactOrdinalMap;
     readonly FrozenDictionary<string, long>? ordinalScaleMap = rules.OrdinalScaleMap;
@@ -770,71 +774,145 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return true;
         }
 
-        return TryParseCompactGluedScaleCount(words, new Dictionary<string, long>(StringComparer.Ordinal), out count);
+        return TryParseCompactGluedScaleCount(words, out count);
     }
 
-    bool TryParseCompactGluedScaleCount(string words, Dictionary<string, long> memo, out long value)
+    bool TryParseCompactGluedScaleCount(string words, out long value)
     {
-        if (memo.TryGetValue(words, out value))
+        if (words.Length == 0 || words.Length > MaxCompactGluedScaleCountLength)
         {
-            return true;
+            value = default;
+            return false;
         }
 
-        if (rules.CardinalMap.TryGetValue(words, out value))
+        var tokensByFirstCharacter = BuildCompactGluedScaleTokenMap();
+        var statesByPosition = new HashSet<CompactGluedScaleState>?[words.Length + 1];
+        statesByPosition[0] = [new(0, 0, 0)];
+
+        for (var position = 0; position < words.Length; position++)
         {
-            memo[words] = value;
-            return true;
+            var states = statesByPosition[position];
+            if (states is null || !tokensByFirstCharacter.TryGetValue(words[position], out var tokens))
+            {
+                continue;
+            }
+
+            foreach (var state in states)
+            {
+                if (state.TokenCount >= MaxCompactGluedScaleTokenCount)
+                {
+                    continue;
+                }
+
+                foreach (var token in tokens)
+                {
+                    var nextPosition = position + token.Text.Length;
+                    if (nextPosition > words.Length ||
+                        string.CompareOrdinal(words, position, token.Text, 0, token.Text.Length) != 0 ||
+                        !TryApplyCompactGluedScaleToken(state, token, out var nextState))
+                    {
+                        continue;
+                    }
+
+                    var nextStates = statesByPosition[nextPosition] ??= [];
+                    if (nextStates.Count >= MaxCompactGluedScaleStatesPerPosition && !nextStates.Contains(nextState))
+                    {
+                        value = default;
+                        return false;
+                    }
+
+                    nextStates.Add(nextState);
+                }
+            }
+        }
+
+        var finalStates = statesByPosition[words.Length];
+        if (finalStates is null)
+        {
+            value = default;
+            return false;
+        }
+
+        var foundValue = false;
+        var bestValue = default(long);
+        foreach (var state in finalStates)
+        {
+            try
+            {
+                var candidate = checked(state.Total + state.Current);
+                if (!foundValue || candidate > bestValue)
+                {
+                    bestValue = candidate;
+                    foundValue = true;
+                }
+            }
+            catch (OverflowException)
+            {
+                value = default;
+                return false;
+            }
+        }
+
+        value = bestValue;
+        return foundValue;
+    }
+
+    Dictionary<char, List<CompactGluedScaleToken>> BuildCompactGluedScaleTokenMap()
+    {
+        var tokensByFirstCharacter = new Dictionary<char, List<CompactGluedScaleToken>>();
+
+        foreach (var token in rules.CardinalMap)
+        {
+            AddCompactGluedScaleToken(tokensByFirstCharacter, token.Key, token.Value);
         }
 
         if (gluedScaleSuffixes is not null)
         {
             foreach (var suffix in gluedScaleSuffixes)
             {
-                if (!words.EndsWith(suffix.Key, StringComparison.Ordinal) || words.Length == suffix.Key.Length)
-                {
-                    continue;
-                }
-
-                if (TryParseCompactGluedScaleCount(words[..^suffix.Key.Length], memo, out var scaleCount) &&
-                    scaleCount > 0 &&
-                    scaleCount < suffix.Value)
-                {
-                    try
-                    {
-                        value = checked(scaleCount * suffix.Value);
-                        memo[words] = value;
-                        return true;
-                    }
-                    catch (OverflowException)
-                    {
-                        value = default;
-                        return false;
-                    }
-                }
+                AddCompactGluedScaleToken(tokensByFirstCharacter, suffix.Key, suffix.Value);
             }
         }
 
-        for (var index = words.Length - 1; index > 0; index--)
+        return tokensByFirstCharacter;
+    }
+
+    static void AddCompactGluedScaleToken(Dictionary<char, List<CompactGluedScaleToken>> tokensByFirstCharacter, string token, long value)
+    {
+        if (token.Length == 0)
         {
-            if (TryParseCompactGluedScaleCount(words[..index], memo, out var left) &&
-                TryParseCompactGluedScaleCount(words[index..], memo, out var right))
-            {
-                try
-                {
-                    value = checked(left + right);
-                    memo[words] = value;
-                    return true;
-                }
-                catch (OverflowException)
-                {
-                    value = default;
-                    return false;
-                }
-            }
+            return;
         }
 
-        value = default;
-        return false;
+        if (!tokensByFirstCharacter.TryGetValue(token[0], out var tokens))
+        {
+            tokens = [];
+            tokensByFirstCharacter.Add(token[0], tokens);
+        }
+
+        tokens.Add(new(token, value));
+    }
+
+    bool TryApplyCompactGluedScaleToken(CompactGluedScaleState state, CompactGluedScaleToken token, out CompactGluedScaleState nextState)
+    {
+        try
+        {
+            if (token.Value >= rules.ScaleThreshold)
+            {
+                nextState = new(checked(state.Total + checked((state.Current == 0 ? 1 : state.Current) * token.Value)), 0, state.TokenCount + 1);
+                return true;
+            }
+
+            nextState = ShouldMultiplyToken(token.Text, token.Value)
+                ? new(state.Total, ApplyMultiplierToken(state.Current, token.Value), state.TokenCount + 1)
+                : new(state.Total, checked(state.Current + token.Value), state.TokenCount + 1);
+            return true;
+        }
+        catch (OverflowException)
+        {
+            nextState = default;
+            return false;
+        }
     }
 
     /// <summary>
@@ -1056,6 +1134,10 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
         return false;
     }
+
+    readonly record struct CompactGluedScaleToken(string Text, long Value);
+
+    readonly record struct CompactGluedScaleState(long Total, long Current, int TokenCount);
 
     /// <summary>
     /// Tries to resolve a token from the cardinal map, including suffix-stripped variants.

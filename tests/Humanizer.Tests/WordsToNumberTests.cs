@@ -1277,6 +1277,7 @@ public class TokenMapWordsToNumberConverterTests
 
     [Theory]
     [InlineData("twohundred", 200)]
+    [InlineData("onehundredfivethousand", 105000)]
     [InlineData("twothousand threehundred", 2300)]
     [InlineData("ninehundred ninetythousand", 990000)]
     [InlineData("ninehundred thousand five", 900005)]
@@ -1301,12 +1302,36 @@ public class TokenMapWordsToNumberConverterTests
                 ["hundred"] = 100,
                 ["thousand"] = 1000
             }.ToFrozenDictionary(StringComparer.Ordinal),
+            UseHundredMultiplier = true,
             NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace
         });
 
         Assert.True(converter.TryConvert(words, out var parsed, out var unrecognizedWord));
         Assert.Equal(expected, parsed);
         Assert.Null(unrecognizedWord);
+    }
+
+    [Fact]
+    public void GluedScaleSuffixesRejectOverlongCompactCounts()
+    {
+        var converter = new TokenMapWordsToNumberConverter(new()
+        {
+            CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["one"] = 1,
+                ["thousand"] = 1000
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            GluedScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["thousand"] = 1000
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace
+        });
+
+        var words = string.Concat(Enumerable.Repeat("one", 40)) + "thousand";
+
+        Assert.False(converter.TryConvert(words, out _, out var unrecognizedWord));
+        Assert.Equal(words, unrecognizedWord);
     }
 
     [Fact]
