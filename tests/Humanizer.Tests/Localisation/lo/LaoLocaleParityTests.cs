@@ -110,6 +110,16 @@ public class LaoLocaleParityTests
         Assert.Equal(expected, number.ToOrdinalWords(Lo));
     }
 
+    [Fact]
+    public void NumberToOrdinalWords_HandlesMinimumIntegerMagnitude()
+    {
+        var words = int.MinValue.ToOrdinalWords(Lo);
+
+        Assert.StartsWith("ລົບ ທີສອງ ຕື້", words);
+        Assert.DoesNotContain("ລົບ ທີລົບ", words);
+        Assert.Equal(int.MinValue, words.ToNumber(Lo));
+    }
+
     [Theory]
     [InlineData("ສິບເອັດ", 11)]
     [InlineData("ຊາວເອັດ", 21)]

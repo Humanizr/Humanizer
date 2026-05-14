@@ -144,7 +144,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
                 return profile.MinusWord + profile.NegativeJoinWord + negativeExact;
             }
 
-            return profile.MinusWord + profile.NegativeJoinWord + FormatGenderedOrdinalBody((int)magnitude, block);
+            return profile.MinusWord + profile.NegativeJoinWord + FormatGenderedOrdinalBody(magnitude, block);
         }
 
         if (block.ExactReplacements.TryGetValue(number, out var exactOrdinal))
@@ -155,7 +155,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         return FormatGenderedOrdinalBody(number, block);
     }
 
-    string FormatGenderedOrdinalBody(int number, JoinedScaleGenderOrdinalBlock block)
+    string FormatGenderedOrdinalBody(long number, JoinedScaleGenderOrdinalBlock block)
     {
         var words = Convert(number);
         return words.Length == 0 ? words : block.DefaultPrefix + words + block.DefaultSuffix;

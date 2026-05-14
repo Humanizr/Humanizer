@@ -5,6 +5,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData =>
         new()
         {
+            { "si", 1, "1වැනි" },
+            { "si", 21, "21වැනි" },
+
             { "kn", 1, "1ನೇ" },
             { "kn", 21, "21ನೇ" },
             { "ne", 1, "पहिलो" },
@@ -668,6 +671,10 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
         new()
         {
+            { "si", 1, GrammaticalGender.Feminine, "1වැනි" },
+            { "si", 1, GrammaticalGender.Masculine, "1වැනි" },
+            { "si", 1, GrammaticalGender.Neuter, "1වැනි" },
+
             { "kn", 1, GrammaticalGender.Feminine, "1ನೇ" },
             { "kn", 1, GrammaticalGender.Masculine, "1ನೇ" },
             { "kn", 1, GrammaticalGender.Neuter, "1ನೇ" },
@@ -3451,6 +3458,8 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
         new()
         {
+            { "si", "1", "1වැනි" },
+
             { "kn", "1", "1ನೇ" },
             { "kn", "21", "21ನೇ" },
             { "ne", "1", "पहिलो" },
@@ -4092,6 +4101,8 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
         new()
         {
+            { "si", -1, "-1වැනි" },
+
             { "kn", -1, "-1ನೇ" },
             { "ne", -1, "माइनस पहिलो" },
             { "my", -1, "-1 မြောက်" },
@@ -4454,6 +4465,8 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
         new()
         {
+            { "si", 1, WordForm.Normal, "1වැනි" },
+
             { "kn", 1, WordForm.Abbreviation, "1ನೇ" },
             { "ne", 21, WordForm.Abbreviation, "एक्काइसौँ" },
             { "my", 1, WordForm.Abbreviation, "1 မြောက်" },
@@ -5017,6 +5030,10 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
         new()
         {
+            { "si", 1, GrammaticalGender.Feminine, WordForm.Normal, "1වැනි" },
+            { "si", 1, GrammaticalGender.Masculine, WordForm.Normal, "1වැනි" },
+            { "si", 1, GrammaticalGender.Neuter, WordForm.Normal, "1වැනි" },
+
             { "kn", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1ನೇ" },
             { "kn", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1ನೇ" },
             { "kn", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1ನೇ" },
@@ -6620,6 +6637,10 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
         new()
         {
+            { "si", "1", GrammaticalGender.Feminine, "1වැනි" },
+            { "si", "1", GrammaticalGender.Masculine, "1වැනි" },
+            { "si", "1", GrammaticalGender.Neuter, "1වැනි" },
+
             { "kn", "1", GrammaticalGender.Feminine, "1ನೇ" },
             { "kn", "1", GrammaticalGender.Masculine, "1ನೇ" },
             { "kn", "1", GrammaticalGender.Neuter, "1ನೇ" },
@@ -9213,6 +9234,10 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
         new()
         {
+            { "si", 1, GrammaticalGender.Feminine, "1වැනි" },
+            { "si", 1, GrammaticalGender.Masculine, "1වැනි" },
+            { "si", 1, GrammaticalGender.Neuter, "1වැනි" },
+
             { "kn", 1, GrammaticalGender.Feminine, "1ನೇ" },
             { "kn", 1, GrammaticalGender.Masculine, "1ನೇ" },
             { "kn", 1, GrammaticalGender.Neuter, "1ನೇ" },
