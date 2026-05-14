@@ -12,6 +12,15 @@ static class LocaleOrdinalizerMatrixData
         { "mk", 1, "1." },
         { "mk", 21, "21." },
 
+            { "be", 0, "0-ы" },
+            { "be", 1, "1-ы" },
+            { "be", 2, "2-і" },
+            { "be", 3, "3-і" },
+            { "be", 10, "10-ы" },
+            { "be", 23, "23-і" },
+            { "be", 100, "100-ы" },
+            { "be", 101, "101-ы" },
+            { "be", 1001, "1001-ы" },
             { "kk", 1, "1-ші" },
             { "kk", 6, "6-шы" },
             { "kk", 20, "20-шы" },
@@ -744,6 +753,9 @@ static class LocaleOrdinalizerMatrixData
         { "mk", 1, GrammaticalGender.Feminine, "1." },
         { "mk", 1, GrammaticalGender.Neuter, "1." },
 
+            { "be", 1, GrammaticalGender.Masculine, "1-ы" },
+            { "be", 1, GrammaticalGender.Feminine, "1-я" },
+            { "be", 1, GrammaticalGender.Neuter, "1-е" },
             { "kk", 2, GrammaticalGender.Masculine, "2-ші" },
             { "kk", 2, GrammaticalGender.Feminine, "2-ші" },
             { "kk", 2, GrammaticalGender.Neuter, "2-ші" },
@@ -3683,6 +3695,9 @@ static class LocaleOrdinalizerMatrixData
         { "mk", "1", "1." },
         { "mk", "21", "21." },
 
+            { "be", "1", "1-ы" },
+            { "be", "2", "2-і" },
+            { "be", "23", "23-і" },
             { "kk", "2", "2-ші" },
 
         { "ka", "1", "1-ლი" },
@@ -4370,6 +4385,9 @@ static class LocaleOrdinalizerMatrixData
             { "sq", -1, "-1-rë" },
         { "mk", -1, "-1." },
 
+            { "be", -1, "-1-ы" },
+            { "be", -2, "-2-і" },
+            { "be", -23, "-23-і" },
             { "kk", -2, "-2-ші" },
 
         { "ka", -1, "-1-ე" },
@@ -4764,6 +4782,8 @@ static class LocaleOrdinalizerMatrixData
             { "sq", 1, WordForm.Abbreviation, "1-rë" },
         { "mk", 1, WordForm.Abbreviation, "1." },
 
+            { "be", 1, WordForm.Normal, "1-ы" },
+            { "be", 1, WordForm.Abbreviation, "1-ы" },
             { "kk", 2, WordForm.Normal, "2-ші" },
 
         { "ka", 1, WordForm.Abbreviation, "1-ლი" },
@@ -5370,6 +5390,9 @@ static class LocaleOrdinalizerMatrixData
         { "mk", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1." },
         { "mk", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1." },
 
+            { "be", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1-ы" },
+            { "be", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1-я" },
+            { "be", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1-е" },
             { "kk", 2, GrammaticalGender.Masculine, WordForm.Normal, "2-ші" },
             { "kk", 2, GrammaticalGender.Feminine, WordForm.Normal, "2-ші" },
             { "kk", 2, GrammaticalGender.Neuter, WordForm.Normal, "2-ші" },
@@ -7060,6 +7083,9 @@ static class LocaleOrdinalizerMatrixData
         { "mk", "1", GrammaticalGender.Feminine, "1." },
         { "mk", "1", GrammaticalGender.Neuter, "1." },
 
+            { "be", "1", GrammaticalGender.Masculine, "1-ы" },
+            { "be", "1", GrammaticalGender.Feminine, "1-я" },
+            { "be", "1", GrammaticalGender.Neuter, "1-е" },
             { "kk", "2", GrammaticalGender.Masculine, "2-ші" },
             { "kk", "2", GrammaticalGender.Feminine, "2-ші" },
             { "kk", "2", GrammaticalGender.Neuter, "2-ші" },
@@ -9767,6 +9793,9 @@ static class LocaleOrdinalizerMatrixData
         { "mk", 1, GrammaticalGender.Feminine, "1." },
         { "mk", 1, GrammaticalGender.Neuter, "1." },
 
+            { "be", 1, GrammaticalGender.Masculine, "1-ы" },
+            { "be", 1, GrammaticalGender.Feminine, "1-я" },
+            { "be", 1, GrammaticalGender.Neuter, "1-е" },
             { "kk", 2, GrammaticalGender.Masculine, "2-ші" },
             { "kk", 2, GrammaticalGender.Feminine, "2-ші" },
             { "kk", 2, GrammaticalGender.Neuter, "2-ші" },
