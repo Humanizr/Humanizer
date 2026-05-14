@@ -2942,6 +2942,40 @@ static class LocaleNumberTheoryData
         { "mn", 1, "нэг" },
         { "mn", 21, "хорин нэг" },
         { "mn", 1234, "нэг мянга хоёр зуун гучин дөрөв" },
+        { "ky", 0, "нөл" },
+        { "ky", 1, "бир" },
+        { "ky", 2, "эки" },
+        { "ky", 3, "үч" },
+        { "ky", 4, "төрт" },
+        { "ky", 5, "беш" },
+        { "ky", 10, "он" },
+        { "ky", 11, "он бир" },
+        { "ky", 12, "он эки" },
+        { "ky", 19, "он тогуз" },
+        { "ky", 20, "жыйырма" },
+        { "ky", 21, "жыйырма бир" },
+        { "ky", 22, "жыйырма эки" },
+        { "ky", 30, "отуз" },
+        { "ky", 40, "кырк" },
+        { "ky", 50, "элүү" },
+        { "ky", 60, "алтымыш" },
+        { "ky", 70, "жетимиш" },
+        { "ky", 80, "сексен" },
+        { "ky", 90, "токсон" },
+        { "ky", 99, "токсон тогуз" },
+        { "ky", 100, "жүз" },
+        { "ky", 101, "жүз бир" },
+        { "ky", 110, "жүз он" },
+        { "ky", 111, "жүз он бир" },
+        { "ky", 115, "жүз он беш" },
+        { "ky", 121, "жүз жыйырма бир" },
+        { "ky", 200, "эки жүз" },
+        { "ky", 999, "тогуз жүз токсон тогуз" },
+        { "ky", 1000, "миң" },
+        { "ky", 1001, "миң бир" },
+        { "ky", 1440, "миң төрт жүз кырк" },
+        { "ky", 3501, "үч миң беш жүз бир" },
+        { "ky", -1346711, "минус бир миллион үч жүз кырк алты миң жети жүз он бир" },
     };
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
@@ -3780,6 +3814,18 @@ static class LocaleNumberTheoryData
         { "lo", 121, false, "ໜຶ່ງ ຮ້ອຍ ຊາວເອັດ" },
         { "mn", 101, true, "нэг зуун нэг" },
         { "mn", 121, false, "нэг зуун хорин нэг" },
+        { "ky", 101, true, "жүз бир" },
+        { "ky", 101, false, "жүз бир" },
+        { "ky", 105, true, "жүз беш" },
+        { "ky", 105, false, "жүз беш" },
+        { "ky", 110, true, "жүз он" },
+        { "ky", 110, false, "жүз он" },
+        { "ky", 115, true, "жүз он беш" },
+        { "ky", 115, false, "жүз он беш" },
+        { "ky", 121, true, "жүз жыйырма бир" },
+        { "ky", 121, false, "жүз жыйырма бир" },
+        { "ky", 1001, true, "миң бир" },
+        { "ky", 1001, false, "миң бир" },
     };
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
@@ -4209,6 +4255,12 @@ static class LocaleNumberTheoryData
         { "mr", 101, WordForm.Abbreviation, "एकशे एक" },
         { "lo", 21, WordForm.Abbreviation, "ຊາວເອັດ" },
         { "mn", 21, WordForm.Abbreviation, "хорин нэг" },
+        { "ky", 1, WordForm.Abbreviation, "бир" },
+        { "ky", 21, WordForm.Abbreviation, "жыйырма бир" },
+        { "ky", 31, WordForm.Abbreviation, "отуз бир" },
+        { "ky", 101, WordForm.Abbreviation, "жүз бир" },
+        { "ky", 121, WordForm.Abbreviation, "жүз жыйырма бир" },
+        { "ky", 1001, WordForm.Abbreviation, "миң бир" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
@@ -4686,6 +4738,9 @@ static class LocaleNumberTheoryData
         { "mn", 1, GrammaticalGender.Masculine, "нэг" },
         { "mn", 1, GrammaticalGender.Feminine, "нэг" },
         { "mn", 1, GrammaticalGender.Neuter, "нэг" },
+        { "ky", 1, GrammaticalGender.Feminine, "бир" },
+        { "ky", 1, GrammaticalGender.Masculine, "бир" },
+        { "ky", 1, GrammaticalGender.Neuter, "бир" },
     };
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
@@ -4958,6 +5013,9 @@ static class LocaleNumberTheoryData
         { "mn", 1, WordForm.Abbreviation, GrammaticalGender.Masculine, "нэг" },
         { "mn", 1, WordForm.Abbreviation, GrammaticalGender.Feminine, "нэг" },
         { "mn", 1, WordForm.Abbreviation, GrammaticalGender.Neuter, "нэг" },
+        { "ky", 21, WordForm.Abbreviation, GrammaticalGender.Feminine, "жыйырма бир" },
+        { "ky", 21, WordForm.Abbreviation, GrammaticalGender.Masculine, "жыйырма бир" },
+        { "ky", 21, WordForm.Abbreviation, GrammaticalGender.Neuter, "жыйырма бир" },
     };
 
     public static TheoryData<string, int, string> OrdinalCases => new()
@@ -6388,6 +6446,49 @@ static class LocaleNumberTheoryData
         { "mn", 21, "хорин нэгдүгээр" },
         { "mn", 22, "хорин хоёрдугаар" },
         { "mn", 101, "нэг зуун нэг дахь" },
+        { "ky", 1, "биринчи" },
+        { "ky", 2, "экинчи" },
+        { "ky", 3, "үчүнчү" },
+        { "ky", 4, "төртүнчү" },
+        { "ky", 5, "бешинчи" },
+        { "ky", 6, "алтынчы" },
+        { "ky", 7, "жетинчи" },
+        { "ky", 8, "сегизинчи" },
+        { "ky", 9, "тогузунчу" },
+        { "ky", 10, "онунчу" },
+        { "ky", 11, "он биринчи" },
+        { "ky", 12, "он экинчи" },
+        { "ky", 13, "он үчүнчү" },
+        { "ky", 14, "он төртүнчү" },
+        { "ky", 15, "он бешинчи" },
+        { "ky", 16, "он алтынчы" },
+        { "ky", 17, "он жетинчи" },
+        { "ky", 18, "он сегизинчи" },
+        { "ky", 19, "он тогузунчу" },
+        { "ky", 20, "жыйырманчы" },
+        { "ky", 21, "жыйырма биринчи" },
+        { "ky", 30, "отузунчу" },
+        { "ky", 40, "кыркынчы" },
+        { "ky", 50, "элүүнчү" },
+        { "ky", 60, "алтымышынчы" },
+        { "ky", 70, "жетимишинчи" },
+        { "ky", 80, "сексенинчи" },
+        { "ky", 90, "токсонунчу" },
+        { "ky", 100, "жүзүнчү" },
+        { "ky", 101, "жүз биринчи" },
+        { "ky", 120, "жүз жыйырманчы" },
+        { "ky", 121, "жүз жыйырма биринчи" },
+        { "ky", 200, "эки жүзүнчү" },
+        { "ky", 221, "эки жүз жыйырма биринчи" },
+        { "ky", 300, "үч жүзүнчү" },
+        { "ky", 321, "үч жүз жыйырма биринчи" },
+        { "ky", 1000, "миңинчи" },
+        { "ky", 1001, "миң биринчи" },
+        { "ky", 10000, "он миңинчи" },
+        { "ky", 100000, "жүз миңинчи" },
+        { "ky", 1000000, "бир миллионунчу" },
+        { "ky", 1000000000, "бир миллиардынчы" },
+        { "ky", 1022135, "бир миллион жыйырма эки миң жүз отуз бешинчи" },
     };
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
@@ -6781,6 +6882,11 @@ static class LocaleNumberTheoryData
         { "mr", 21, WordForm.Normal, "एकविसावा" },
         { "lo", 21, WordForm.Abbreviation, "ທີຊາວເອັດ" },
         { "mn", 21, WordForm.Abbreviation, "хорин нэгдүгээр" },
+        { "ky", 1, WordForm.Abbreviation, "биринчи" },
+        { "ky", 2, WordForm.Abbreviation, "экинчи" },
+        { "ky", 3, WordForm.Abbreviation, "үчүнчү" },
+        { "ky", 4, WordForm.Abbreviation, "төртүнчү" },
+        { "ky", 21, WordForm.Abbreviation, "жыйырма биринчи" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
@@ -7676,6 +7782,9 @@ static class LocaleNumberTheoryData
         { "mn", 1, GrammaticalGender.Masculine, "нэгдүгээр" },
         { "mn", 1, GrammaticalGender.Feminine, "нэгдүгээр" },
         { "mn", 1, GrammaticalGender.Neuter, "нэгдүгээр" },
+        { "ky", 1, GrammaticalGender.Feminine, "биринчи" },
+        { "ky", 1, GrammaticalGender.Masculine, "биринчи" },
+        { "ky", 1, GrammaticalGender.Neuter, "биринчи" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
@@ -7947,6 +8056,9 @@ static class LocaleNumberTheoryData
         { "mn", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "нэгдүгээр" },
         { "mn", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "нэгдүгээр" },
         { "mn", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "нэгдүгээр" },
+        { "ky", 3, GrammaticalGender.Feminine, WordForm.Abbreviation, "үчүнчү" },
+        { "ky", 3, GrammaticalGender.Masculine, WordForm.Abbreviation, "үчүнчү" },
+        { "ky", 3, GrammaticalGender.Neuter, WordForm.Abbreviation, "үчүнчү" },
     };
     public static TheoryData<string, int, string> TupleCases => new()
     {
@@ -8047,6 +8159,7 @@ static class LocaleNumberTheoryData
         { "mr", 2, "दोन" },
         { "lo", 2, "ສອງ" },
         { "mn", 2, "хоёр" },
+        { "ky", 2, "эки" },
     };
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
@@ -8229,5 +8342,11 @@ static class LocaleNumberTheoryData
         { "mn", "хорин нэгдүгээр", 21L },
         { "mn", "хорин хоёрдугаар", 22L },
         { "mn", "нэг зуун нэг дахь", 101L },
+        { "ky", "жыйырма бир", 21L },
+        { "ky", "жыйырма биринчи", 21L },
+        { "ky", "үч жүзүнчү", 300L },
+        { "ky", "үч жүз жыйырма биринчи", 321L },
+        { "ky", "миңинчи", 1000L },
+        { "ky", "бир миллионунчу", 1000000L },
     };
 }
