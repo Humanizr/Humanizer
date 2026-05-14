@@ -145,14 +145,13 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
                 return true;
             }
 
-            if (TryMatchTokenPhrase(tokens, start, end, scale.NameTokens, out var afterName) ||
-                TryMatchTokenPhrase(tokens, start, end, scale.NameWithRemainderTokens, out afterName))
+            if ((TryMatchTokenPhrase(tokens, start, end, scale.NameTokens, out var afterName) ||
+                    TryMatchTokenPhrase(tokens, start, end, scale.NameWithRemainderTokens, out afterName)) &&
+                TryParseScaleCount(tokens, afterName, end, maxCount, scaleValue, out var count, out next) &&
+                count > 0)
             {
-                if (TryParseScaleCount(tokens, afterName, end, maxCount, scaleValue, out var count, out next) && count > 0)
-                {
-                    value = count * scaleValue;
-                    return true;
-                }
+                value = count * scaleValue;
+                return true;
             }
         }
 
@@ -211,13 +210,8 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
     {
         for (var index = start; index < end; index++)
         {
-            foreach (var scale in profile.TokenizedScales)
+            foreach (var scale in profile.TokenizedScales.Where(scale => (ulong)scale.Value < parentScaleValue))
             {
-                if ((ulong)scale.Value >= parentScaleValue)
-                {
-                    continue;
-                }
-
                 if (TryMatchTokenPhrase(tokens, index, end, scale.NameTokens, out _) ||
                     TryMatchTokenPhrase(tokens, index, end, scale.NameWithRemainderTokens, out _))
                 {
@@ -413,12 +407,7 @@ internal sealed class LinkedVigesimalWordsToNumberProfile
         {
             values[Normalize(scale.One)] = scale.Value;
             values[Normalize(scale.OneWithRemainder)] = scale.Value;
-            foreach (var pair in scale.CountOverrides)
-            {
-                values[Normalize(pair.Value)] = pair.Key * scale.Value;
-            }
-
-            foreach (var pair in scale.CountOverridesWithRemainder)
+            foreach (var pair in scale.CountOverrides.Concat(scale.CountOverridesWithRemainder))
             {
                 values[Normalize(pair.Value)] = pair.Key * scale.Value;
             }
