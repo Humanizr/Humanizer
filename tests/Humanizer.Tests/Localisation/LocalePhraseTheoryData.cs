@@ -9,6 +9,9 @@ static class LocalePhraseTheoryData
         { "kk", 2, TimeUnit.Day, Tense.Future, "2 күннен кейін" },
         { "kk", 0, TimeUnit.Second, Tense.Future, "қазір" },
 
+        { "ka", 1, TimeUnit.Day, Tense.Past, "გუშინ" },
+        { "ka", 2, TimeUnit.Day, Tense.Past, "2 დღის წინ" },
+        { "ka", 2, TimeUnit.Day, Tense.Future, "2 დღეში" },
         { "ps", 1, TimeUnit.Second, Tense.Past, "یوه ثانیه مخکې" },
         { "ps", 2, TimeUnit.Day, Tense.Future, "په 2 ورځو کې" },
         { "si", 1, TimeUnit.Day, Tense.Past, "ඊයේ" },
@@ -1589,6 +1592,7 @@ static class LocalePhraseTheoryData
     {
         { "kk", "ешқашан" },
 
+        { "ka", "არასოდეს" },
         { "ps", "هېڅکله" },
         { "si", "කවදාවත් නැහැ" },
 
@@ -1720,6 +1724,8 @@ static class LocalePhraseTheoryData
         { "kk", 2, TimeUnit.Day, false, "2 күн" },
         { "kk", 1, TimeUnit.Hour, true, "бір сағат" },
 
+        { "ka", 2, TimeUnit.Day, false, "2 დღე" },
+        { "ka", 1, TimeUnit.Hour, true, "ერთი საათი" },
         { "ps", 1, TimeUnit.Second, false, "1 ثانیه" },
         { "ps", 2, TimeUnit.Day, false, "2 ورځې" },
         { "ps", 1, TimeUnit.Hour, true, "یو ساعت" },
@@ -4283,6 +4289,7 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, bool, string> TimeSpanAgeCases => new()
     {
+        { "ka", 14, false, "2 კვირა" },
         { "af", 14, false, "2 weke oud" },
         { "af", 366, false, "1 jaar oud" },
         { "ar", 4, false, "4 أيام من العمر" },

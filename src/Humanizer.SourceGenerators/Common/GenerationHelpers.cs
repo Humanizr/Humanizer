@@ -808,6 +808,8 @@ public sealed partial class HumanizerSourceGenerator
             RequiredInt64Value("value"),
             RequiredStringValue("name"),
             OptionalStringValue("nameWithRemainder"),
+            OptionalStringValue("pluralName"),
+            OptionalStringValue("pluralNameWithRemainder"),
             OptionalTrueValue("omitOneWhenSingular"));
 
     static string CreateOrdinalPrefixScaleArrayExpression(JsonElement arrayElement)

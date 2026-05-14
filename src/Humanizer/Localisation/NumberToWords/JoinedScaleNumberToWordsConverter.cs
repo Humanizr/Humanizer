@@ -61,9 +61,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             // is grammatical. The "first visible scale" check preserves languages where the
             // omission changes once the value is already inside a larger compound.
             var remaining = remainder % scaleValue;
-            var scaleName = remaining > 0 && scale.NameWithRemainder.Length > 0
-                ? scale.NameWithRemainder
-                : scale.Name;
+            var scaleName = scale.ResolveName(count, remaining > 0);
 
             parts.Add(scale.OmitOneWhenSingular && count == 1 && (profile.OmitOneWhenSingularAlways || parts.Count == 0)
                 ? scaleName
@@ -354,7 +352,40 @@ internal sealed record JoinedScaleOrdinalProfile(
 /// One descending scale row for <see cref="JoinedScaleNumberToWordsConverter"/>.
 /// </summary>
 /// <param name="Value">The divisor for the scale row.</param>
-/// <param name="Name">The localized scale name.</param>
-/// <param name="NameWithRemainder">The localized scale name used when a lower-order remainder follows.</param>
+/// <param name="Name">The localized singular scale name.</param>
+/// <param name="NameWithRemainder">The localized singular scale name used when a lower-order remainder follows.</param>
+/// <param name="PluralName">The localized plural scale name used for counts other than one.</param>
+/// <param name="PluralNameWithRemainder">The localized plural scale name used for counts other than one when a lower-order remainder follows.</param>
 /// <param name="OmitOneWhenSingular">Whether singular counts may omit the explicit one.</param>
-internal readonly record struct JoinedScale(long Value, string Name, string NameWithRemainder = "", bool OmitOneWhenSingular = false);
+internal readonly record struct JoinedScale(
+    long Value,
+    string Name,
+    string NameWithRemainder = "",
+    string PluralName = "",
+    string PluralNameWithRemainder = "",
+    bool OmitOneWhenSingular = false)
+{
+    /// <summary>Resolves the scale name for the rendered scale count and lower-order remainder state.</summary>
+    public string ResolveName(ulong count, bool hasRemainder)
+    {
+        if (count != 1)
+        {
+            if (hasRemainder && PluralNameWithRemainder.Length > 0)
+            {
+                return PluralNameWithRemainder;
+            }
+
+            if (PluralName.Length > 0)
+            {
+                return PluralName;
+            }
+        }
+
+        if (hasRemainder && NameWithRemainder.Length > 0)
+        {
+            return NameWithRemainder;
+        }
+
+        return Name;
+    }
+}

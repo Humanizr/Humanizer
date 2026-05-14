@@ -14,6 +14,7 @@ static class LocaleCoverageData
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
         { "kk", new(2022, 1, 25, "25 қаңтар 2022") },
+        { "ka", new(2022, 1, 25, "25 იანვარი 2022") },
 
         { "si", new(2022, 1, 25, "25 දුරුතු 2022") },
 
@@ -108,6 +109,7 @@ static class LocaleCoverageData
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
         { "kk", new(2015, 1, 1, "1 қаңтар 2015") },
+        { "ka", new(2015, 1, 1, "1 იანვარი 2015") },
 
         { "si", new(2015, 1, 1, "1 දුරුතු 2015") },
 
@@ -202,6 +204,7 @@ static class LocaleCoverageData
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
         { "kk", new(2015, 2, 3, "3 ақпан 2015") },
+        { "ka", new(2015, 2, 3, "3 თებერვალი 2015") },
 
         { "si", new(2015, 2, 3, "3 නවම් 2015") },
 
@@ -294,6 +297,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020February29ExpectationTheoryData { get; } = new()
     {
+        { "ka", new(2020, 2, 29, "29 თებერვალი 2020") },
+
         { "am", new(2020, 2, 29, "29 ፌብሩዋሪ 2020") },
         { "hi", new(2020, 2, 29, "29 फ़रवरी 2020") },
         { "ne", new(2020, 2, 29, "29 फेब्रुअरी 2020") },
@@ -309,6 +314,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015September4ExpectationTheoryData { get; } = new()
     {
+        { "ka", new(2015, 9, 4, "4 სექტემბერი 2015") },
+
         { "am", new(2015, 9, 4, "4 ሴፕቴምበር 2015") },
         { "hi", new(2015, 9, 4, "4 सितंबर 2015") },
         { "ne", new(2015, 9, 4, "4 सेप्टेम्बर 2015") },
@@ -323,6 +330,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords1979November7ExpectationTheoryData { get; } = new()
     {
+        { "ka", new(1979, 11, 7, "7 ნოემბერი 1979") },
+
         { "am", new(1979, 11, 7, "7 ኖቬምበር 1979") },
         { "hi", new(1979, 11, 7, "7 नवंबर 1979") },
         { "ne", new(1979, 11, 7, "7 नोभेम्बर 1979") },
@@ -337,6 +346,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020March2ExpectationTheoryData { get; } = new()
     {
+        { "ka", new(2020, 3, 2, "2 მარტი 2020") },
+
         { "am", new(2020, 3, 2, "2 ማርች 2020") },
         { "hi", new(2020, 3, 2, "2 मार्च 2020") },
         { "ne", new(2020, 3, 2, "2 मार्च 2020") },
@@ -350,6 +361,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2021October31ExpectationTheoryData { get; } = new()
     {
+        { "ka", new(2021, 10, 31, "31 ოქტომბერი 2021") },
+
         { "am", new(2021, 10, 31, "31 ኦክቶበር 2021") },
         { "hi", new(2021, 10, 31, "31 अक्टूबर 2021") },
         { "ne", new(2021, 10, 31, "31 अक्टोबर 2021") },
@@ -364,6 +377,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2024December31ExpectationTheoryData { get; } = new()
     {
+        { "ka", new(2024, 12, 31, "31 დეკემბერი 2024") },
+
         { "am", new(2024, 12, 31, "31 ዲሴምበር 2024") },
         { "hi", new(2024, 12, 31, "31 दिसंबर 2024") },
         { "ne", new(2024, 12, 31, "31 डिसेम्बर 2024") },
@@ -384,6 +399,7 @@ static class LocaleCoverageData
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
         { "kk", new(13, 23, "он үш сағат жиырма үш минут") },
+        { "ka", new(13, 23, "13 საათი 23 წუთი") },
 
         { "si", new(13, 23, "දවල් එකයි විසි තුන") },
 
@@ -478,6 +494,7 @@ static class LocaleCoverageData
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
         { "kk", new(13, 23, "он үш сағат жиырма бес минут") },
+        { "ka", new(13, 23, "13 საათი 25 წუთი") },
 
         { "si", new(13, 23, "දවල් එකයි විසි පහ") },
 
@@ -572,6 +589,7 @@ static class LocaleCoverageData
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
         { "kk", new(1, 5, "бір сағат бес минут") },
+        { "ka", new(1, 5, "1 საათი 5 წუთი") },
 
         { "si", new(1, 5, "රාත්‍රී එකයි පහ") },
 
@@ -664,6 +682,9 @@ static class LocaleCoverageData
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalExactExpectationTheoryData { get; } = new()
     {
+        { "ka", new(4, 0, "4 საათი") },
+        { "ka", new(20, 59, "20 საათი 59 წუთი") },
+
         { "az", new(13, 0, "on üç saat") },
         { "ca", new(0, 0, "mitjanit") },
         { "ca", new(0, 7, "les dotze i set de la nit") },
@@ -836,6 +857,8 @@ static class LocaleCoverageData
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalRoundedExpectationTheoryData { get; } = new()
     {
+        { "ka", new(20, 59, "21 საათი") },
+
         { "ca", new(0, 0, "mitjanit") },
         { "ca", new(0, 7, "les dotze i cinc de la nit") },
         { "ca", new(1, 11, "la una i deu de la matinada") },
@@ -999,6 +1022,7 @@ static class LocaleCoverageData
         {
             { "kk", "кеше", "2 күн" },
 
+        { "ka", "გუშინ", "2 დღე" },
             { "si", "ඊයේ", "2 දින" },
 
             { "kn", "ನಿನ್ನೆ", "2 ದಿನಗಳು" },
@@ -1093,6 +1117,7 @@ static class LocaleCoverageData
         {
             { "kk", "1 және 2", "1, 2 және 3" },
 
+        { "ka", "1 და 2", "1, 2 და 3" },
             { "si", "1 සහ 2", "1, 2 සහ 3" },
 
             { "kn", "1 ಮತ್ತು 2", "1, 2 ಮತ್ತು 3" },
@@ -1187,6 +1212,7 @@ static class LocaleCoverageData
         {
             { "kk", 1, "бірінші" },
 
+        { "ka", 21, "ოცდამეერთე" },
             { "si", 1, "පළමු" },
 
             { "kn", 1, "ಒಂದನೇ" },
@@ -1281,6 +1307,7 @@ static class LocaleCoverageData
         {
             { "kk", 1, "бір" },
 
+        { "ka", 2021L, "ორი ათას ოცდაერთი" },
             { "si", 1, "එක" },
 
             { "kn", 1, "ಒಂದು" },
@@ -1411,6 +1438,7 @@ static class LocaleCoverageData
         {
             { "kk", 21, "жиырма бір" },
 
+        { "ka", 2021L, "ორი ათას ოცდაერთი" },
             { "si", 21, "විසි එක" },
 
             { "kn", 21, "ಇಪ್ಪತ್ತೊಂದು" },

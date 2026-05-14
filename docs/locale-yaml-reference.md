@@ -323,9 +323,12 @@ Supported engines in current checked-in YAML:
 - `variant-decade`
 - `west-slavic-gendered`
 
-For `joined-scale` profiles, scale rows may include `nameWithRemainder` when the scale noun changes
-before a following lower-order remainder. Profiles that use an authored `hundredsMap` may also include
-`hundredsMapWithRemainder`, a parallel table used for the same purpose in the hundreds segment.
+For `joined-scale` profiles, scale rows may include `nameWithRemainder` when the singular scale noun changes
+before a following lower-order remainder. Scale rows may also include `pluralName` and `pluralNameWithRemainder`
+for languages whose scale nouns change when the scale count is not one. Runtime selection precedence is:
+plural remainder form, plural exact form, singular remainder form, then singular exact `name`. Profiles that use
+an authored `hundredsMap` may also include `hundredsMapWithRemainder`, a parallel table used for exact-vs-remainder
+hundreds forms.
 
 ### `number.parse`
 
@@ -1702,7 +1705,14 @@ Fields:
 - `unitsMap`
 - `tensMap`
 - `hundredsMap`
+- `hundredsMapWithRemainder`
 - `scales`
+  - `value`
+  - `name`
+  - `nameWithRemainder` (optional)
+  - `pluralName` (optional)
+  - `pluralNameWithRemainder` (optional)
+  - `omitOneWhenSingular` (optional)
 - `ordinalExceptions`
 - `compoundOrdinalExcludedValues`
 - `ordinal`: optional gendered word-ordinal profile. When present, it overrides the legacy `defaultOrdinalSuffix`/`ordinalExceptions` path for `ToOrdinalWords(number, gender, culture)`.
