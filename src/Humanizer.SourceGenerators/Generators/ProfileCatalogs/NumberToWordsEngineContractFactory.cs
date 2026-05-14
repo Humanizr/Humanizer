@@ -57,6 +57,9 @@ public sealed partial class HumanizerSourceGenerator
             member.Kind switch
             {
                 "profile-object" => CreateObjectValue(root, member, useCultureParameter),
+                "optional-profile-object" => EngineContractUtilities.TryGetElement(root, member.SourcePath, out _)
+                    ? CreateObjectValue(root, member, useCultureParameter)
+                    : "null",
                 "culture" => useCultureParameter ? "culture" : "CultureInfo.InvariantCulture",
                 "string" => QuoteLiteral(GetStringValue(root, member)),
                 "nullable-string" => GetOptionalStringValue(root, member) is { } stringValue ? QuoteLiteral(stringValue) : "null",

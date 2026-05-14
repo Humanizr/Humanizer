@@ -2761,6 +2761,14 @@ static class LocaleNumberTheoryData
         { "hi", 12345678, "एक करोड़ तेईस लाख पैंतालीस हज़ार छह सौ अठहत्तर" },
         { "pa", 12345678, "ਇੱਕ ਕਰੋੜ ਤੇਈ ਲੱਖ ਪੰਤਾਲੀ ਹਜ਼ਾਰ ਛੇ ਸੌ ਅਠੱਤਰ" },
         { "pa-Arab", 12345678, "اک کروڑ تےئی لکھ پنتالی ہزار چھے سو اٹھتر" },
+        { "mr", 0, "शून्य" },
+        { "mr", 1, "एक" },
+        { "mr", 21, "एकवीस" },
+        { "mr", 79, "एकोणऐंशी" },
+        { "mr", 101, "एकशे एक" },
+        { "mr", 999, "नऊशे नव्याण्णव" },
+        { "mr", 1000, "एक हजार" },
+        { "mr", 1234567, "बारा लाख चौतीस हजार पाचशे सदुसष्ट" },
 };
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
@@ -3550,6 +3558,10 @@ static class LocaleNumberTheoryData
         { "hi", 101, false, "एक सौ एक" },
         { "pa", 101, false, "ਇੱਕ ਸੌ ਇੱਕ" },
         { "pa-Arab", 101, false, "اک سو اک" },
+        { "mr", 101, true, "एकशे एक" },
+        { "mr", 101, false, "एकशे एक" },
+        { "mr", 121, true, "एकशे एकवीस" },
+        { "mr", 121, false, "एकशे एकवीस" },
 };
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
@@ -3951,6 +3963,8 @@ static class LocaleNumberTheoryData
         { "hi", 21, WordForm.Abbreviation, "इक्कीस" },
         { "pa", 21, WordForm.Abbreviation, "ਇੱਕੀ" },
         { "pa-Arab", 21, WordForm.Abbreviation, "اکی" },
+        { "mr", 21, WordForm.Abbreviation, "एकवीस" },
+        { "mr", 101, WordForm.Abbreviation, "एकशे एक" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
@@ -4380,6 +4394,9 @@ static class LocaleNumberTheoryData
         { "hi", 2, GrammaticalGender.Neuter, "दो" },
         { "pa", 2, GrammaticalGender.Neuter, "ਦੋ" },
         { "pa-Arab", 2, GrammaticalGender.Neuter, "دو" },
+        { "mr", 2, GrammaticalGender.Masculine, "दोन" },
+        { "mr", 2, GrammaticalGender.Feminine, "दोन" },
+        { "mr", 2, GrammaticalGender.Neuter, "दोन" },
 };
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
@@ -4604,6 +4621,9 @@ static class LocaleNumberTheoryData
         { "hi", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "दो" },
         { "pa", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "ਦੋ" },
         { "pa-Arab", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "دو" },
+        { "mr", 21, WordForm.Abbreviation, GrammaticalGender.Masculine, "एकवीस" },
+        { "mr", 21, WordForm.Abbreviation, GrammaticalGender.Feminine, "एकवीस" },
+        { "mr", 21, WordForm.Abbreviation, GrammaticalGender.Neuter, "एकवीस" },
 };
 
     public static TheoryData<string, int, string> OrdinalCases => new()
@@ -5966,6 +5986,13 @@ static class LocaleNumberTheoryData
         { "hi", 21, "इक्कीसवाँ" },
         { "pa", 21, "ਇੱਕੀਵਾਂ" },
         { "pa-Arab", 21, "اکیواں" },
+        { "mr", 0, "शून्यवा" },
+        { "mr", 1, "पहिला" },
+        { "mr", 2, "दुसरा" },
+        { "mr", 5, "पाचवा" },
+        { "mr", 21, "एकविसावा" },
+        { "mr", 100, "शंभरावा" },
+        { "mr", 101, "एकशे एकवा" },
 };
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
@@ -6325,6 +6352,8 @@ static class LocaleNumberTheoryData
         { "hi", 21, WordForm.Abbreviation, "इक्कीसवाँ" },
         { "pa", 21, WordForm.Abbreviation, "ਇੱਕੀਵਾਂ" },
         { "pa-Arab", 21, WordForm.Abbreviation, "اکیواں" },
+        { "mr", 21, WordForm.Abbreviation, "एकविसावा" },
+        { "mr", 21, WordForm.Normal, "एकविसावा" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
@@ -7173,6 +7202,9 @@ static class LocaleNumberTheoryData
         { "hi", 1, GrammaticalGender.Neuter, "पहला" },
         { "pa", 1, GrammaticalGender.Neuter, "ਪਹਿਲਾ" },
         { "pa-Arab", 1, GrammaticalGender.Neuter, "پہلا" },
+        { "mr", 21, GrammaticalGender.Masculine, "एकविसावा" },
+        { "mr", 21, GrammaticalGender.Feminine, "एकविसावी" },
+        { "mr", 21, GrammaticalGender.Neuter, "एकविसावे" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
@@ -7397,6 +7429,9 @@ static class LocaleNumberTheoryData
         { "hi", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "इक्कीसवाँ" },
         { "pa", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "ਇੱਕੀਵਾਂ" },
         { "pa-Arab", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "اکیواں" },
+        { "mr", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "एकविसावा" },
+        { "mr", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "एकविसावी" },
+        { "mr", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "एकविसावे" },
 };
     public static TheoryData<string, int, string> TupleCases => new()
     {
@@ -7478,6 +7513,7 @@ static class LocaleNumberTheoryData
         { "hi", 2, "दो" },
         { "pa", 2, "ਦੋ" },
         { "pa-Arab", 2, "دو" },
+        { "mr", 2, "दोन" },
 };
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
@@ -7604,5 +7640,10 @@ static class LocaleNumberTheoryData
         { "hi", "इक्कीसवीं", 21L },
         { "pa", "ਇੱਕੀਵੀਂ", 21L },
         { "pa-Arab", "اکیویں", 21L },
+        { "mr", "एकवीस", 21L },
+        { "mr", "एक कोटी तेवीस लाख पंचेचाळीस हजार सहाशे अठ्ठ्याहत्तर", 12345678L },
+        { "mr", "मायनस पाच", -5L },
+        { "mr", "एकविसावी", 21L },
+        { "mr", "एकविसावे", 21L },
     };
 }
