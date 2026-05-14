@@ -208,6 +208,7 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "gu", 1001001L, "દસ લાખ એક હજાર એક" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
@@ -217,6 +218,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
+        { "gu", 1001001L, "દસ લાખ એક હજાર એક" },
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
@@ -430,6 +432,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
+        { "gu", 1001001L, "દસ લાખ એક હજાર એક" },
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },
@@ -643,6 +646,7 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
+        { "gu", 1001001L, "દસ લાખ એક હજાર એક" },
         { "am", 1001001L, "አንድ ሚሊዮን አንድ ሺህ አንድ" },
         { "am", 1234567890L, "አንድ ቢሊዮን ሁለት መቶ ሰላሳ አራት ሚሊዮን አምስት መቶ ስልሳ ሰባት ሺህ ስምንት መቶ ዘጠና" },
         { "te", 1001001L, "పది లక్షల వెయ్యి ఒకటి" },

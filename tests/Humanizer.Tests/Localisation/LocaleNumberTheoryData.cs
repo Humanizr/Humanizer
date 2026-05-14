@@ -2730,30 +2730,39 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 1001, "kanye inkulungwane kanye" },
 
         { "hi", 0, "शून्य" },
+        { "gu", 0, "શૂન્ય" },
         { "pa", 0, "ਸਿਫ਼ਰ" },
         { "pa-Arab", 0, "صفر" },
         { "hi", 1, "एक" },
+        { "gu", 1, "એક" },
         { "pa", 1, "ਇੱਕ" },
         { "pa-Arab", 1, "اک" },
         { "hi", 2, "दो" },
+        { "gu", 2, "બે" },
         { "pa", 2, "ਦੋ" },
         { "pa-Arab", 2, "دو" },
         { "hi", 21, "इक्कीस" },
+        { "gu", 21, "એકવીસ" },
         { "pa", 21, "ਇੱਕੀ" },
         { "pa-Arab", 21, "اکی" },
         { "hi", 100, "एक सौ" },
+        { "gu", 100, "એક સો" },
         { "pa", 100, "ਇੱਕ ਸੌ" },
         { "pa-Arab", 100, "اک سو" },
         { "hi", 101, "एक सौ एक" },
+        { "gu", 101, "એક સો એક" },
         { "pa", 101, "ਇੱਕ ਸੌ ਇੱਕ" },
         { "pa-Arab", 101, "اک سو اک" },
         { "hi", 1000, "एक हज़ार" },
+        { "gu", 1000, "એક હજાર" },
         { "pa", 1000, "ਇੱਕ ਹਜ਼ਾਰ" },
         { "pa-Arab", 1000, "اک ہزار" },
         { "hi", 100000, "एक लाख" },
+        { "gu", 100000, "એક લાખ" },
         { "pa", 100000, "ਇੱਕ ਲੱਖ" },
         { "pa-Arab", 100000, "اک لکھ" },
         { "hi", 12345678, "एक करोड़ तेईस लाख पैंतालीस हज़ार छह सौ अठहत्तर" },
+        { "gu", 12345678, "એક કરોડ તેવીસ લાખ પિસ્તાલીસ હજાર છ સો અઠ્યોતેર" },
         { "pa", 12345678, "ਇੱਕ ਕਰੋੜ ਤੇਈ ਲੱਖ ਪੰਤਾਲੀ ਹਜ਼ਾਰ ਛੇ ਸੌ ਅਠੱਤਰ" },
         { "pa-Arab", 12345678, "اک کروڑ تےئی لکھ پنتالی ہزار چھے سو اٹھتر" },
         { "mr", 0, "शून्य" },
@@ -3546,9 +3555,11 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 1001, false, "kanye inkulungwane kanye" },
 
         { "hi", 101, true, "एक सौ एक" },
+        { "gu", 101, true, "એક સો એક" },
         { "pa", 101, true, "ਇੱਕ ਸੌ ਇੱਕ" },
         { "pa-Arab", 101, true, "اک سو اک" },
         { "hi", 101, false, "एक सौ एक" },
+        { "gu", 101, false, "એક સો એક" },
         { "pa", 101, false, "ਇੱਕ ਸੌ ਇੱਕ" },
         { "pa-Arab", 101, false, "اک سو اک" },
         { "mr", 101, true, "एकशे एक" },
@@ -3952,6 +3963,7 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 1001, WordForm.Abbreviation, "kanye inkulungwane kanye" },
 
         { "hi", 21, WordForm.Abbreviation, "इक्कीस" },
+        { "gu", 21, WordForm.Abbreviation, "એકવીસ" },
         { "pa", 21, WordForm.Abbreviation, "ਇੱਕੀ" },
         { "pa-Arab", 21, WordForm.Abbreviation, "اکی" },
         { "mr", 21, WordForm.Abbreviation, "एकवीस" },
@@ -4374,12 +4386,15 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 1, GrammaticalGender.Neuter, "kanye" },
 
         { "hi", 2, GrammaticalGender.Masculine, "दो" },
+        { "gu", 2, GrammaticalGender.Masculine, "બે" },
         { "pa", 2, GrammaticalGender.Masculine, "ਦੋ" },
         { "pa-Arab", 2, GrammaticalGender.Masculine, "دو" },
         { "hi", 2, GrammaticalGender.Feminine, "दो" },
+        { "gu", 2, GrammaticalGender.Feminine, "બે" },
         { "pa", 2, GrammaticalGender.Feminine, "ਦੋ" },
         { "pa-Arab", 2, GrammaticalGender.Feminine, "دو" },
         { "hi", 2, GrammaticalGender.Neuter, "दो" },
+        { "gu", 2, GrammaticalGender.Neuter, "બે" },
         { "pa", 2, GrammaticalGender.Neuter, "ਦੋ" },
         { "pa-Arab", 2, GrammaticalGender.Neuter, "دو" },
         { "mr", 2, GrammaticalGender.Masculine, "दोन" },
@@ -4598,12 +4613,15 @@ static class LocaleNumberTheoryData
         { "zu-ZA", 21, WordForm.Abbreviation, GrammaticalGender.Neuter, "amashumi amabili kanye" },
 
         { "hi", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "दो" },
+        { "gu", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "બે" },
         { "pa", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "ਦੋ" },
         { "pa-Arab", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "دو" },
         { "hi", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "दो" },
+        { "gu", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "બે" },
         { "pa", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "ਦੋ" },
         { "pa-Arab", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "دو" },
         { "hi", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "दो" },
+        { "gu", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "બે" },
         { "pa", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "ਦੋ" },
         { "pa-Arab", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "دو" },
         { "mr", 21, WordForm.Abbreviation, GrammaticalGender.Masculine, "एकवीस" },
@@ -5966,6 +5984,7 @@ static class LocaleNumberTheoryData
         { "pa", 1, "ਪਹਿਲਾ" },
         { "pa-Arab", 1, "پہلا" },
         { "hi", 21, "इक्कीसवाँ" },
+        { "gu", 21, "એકવીસમો" },
         { "pa", 21, "ਇੱਕੀਵਾਂ" },
         { "pa-Arab", 21, "اکیواں" },
         { "mr", 0, "शून्यवा" },
@@ -5979,6 +5998,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+        { "gu", 21, WordForm.Abbreviation, "એકવીસમો" },
+        { "gu", 21, WordForm.Normal, "એકવીસમો" },
         { "am", 21, WordForm.Normal, "ሃያ አንደኛ" },
         { "te", 1, WordForm.Abbreviation, "మొదటి" },
         { "te", 1, WordForm.Normal, "మొదటి" },
@@ -6336,6 +6357,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+        { "gu", 21, GrammaticalGender.Masculine, "એકવીસમો" },
+        { "gu", 21, GrammaticalGender.Feminine, "એકવીસમી" },
+        { "gu", 21, GrammaticalGender.Neuter, "એકવીસમું" },
         { "am", 21, GrammaticalGender.Masculine, "ሃያ አንደኛ" },
         { "am", 21, GrammaticalGender.Feminine, "ሃያ አንደኛ" },
         { "am", 21, GrammaticalGender.Neuter, "ሃያ አንደኛ" },
@@ -7184,6 +7208,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+        { "gu", 21, GrammaticalGender.Masculine, WordForm.Abbreviation, "એકવીસમો" },
+        { "gu", 21, GrammaticalGender.Feminine, WordForm.Abbreviation, "એકવીસમી" },
+        { "gu", 21, GrammaticalGender.Neuter, WordForm.Abbreviation, "એકવીસમું" },
         { "am", 21, GrammaticalGender.Masculine, WordForm.Normal, "ሃያ አንደኛ" },
         { "am", 21, GrammaticalGender.Feminine, WordForm.Normal, "ሃያ አንደኛ" },
         { "am", 21, GrammaticalGender.Neuter, WordForm.Normal, "ሃያ አንደኛ" },
@@ -7407,6 +7434,8 @@ static class LocaleNumberTheoryData
 };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "gu", 5, "પાંચ" },
+        { "gu", 21, "એકવીસ" },
         { "am", 1, "ነጠላ" },
         { "am", 2, "ጥንድ" },
         { "am", 3, "ሶስትዮሽ" },
@@ -7489,6 +7518,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "gu", "એકવીસ", 21 },
+        { "gu", "એક સો એક", 101 },
+        { "gu", "એકવીસમી", 21 },
         { "am", "ሃያ አንድ", 21 },
         { "am", "አንድ መቶ አምስት", 105 },
         { "am", "አንድ ሺህ አንድ", 1001 },
