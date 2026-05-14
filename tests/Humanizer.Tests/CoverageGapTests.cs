@@ -1953,6 +1953,7 @@ public class CoverageGapTests
                 Feminine: new NumberWordSuffixOrdinalizer.GenderBlock(
                     "-f",
                     new Dictionary<int, string> { [2] = "second-f" }.ToFrozenDictionary()),
+                Neuter: null,
                 NeuterFallbackGender: GrammaticalGender.Feminine));
 
         Assert.Equal("first-m", ordinalizer.Convert(1, "1"));

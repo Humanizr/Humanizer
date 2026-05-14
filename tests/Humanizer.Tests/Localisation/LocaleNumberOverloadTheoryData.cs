@@ -213,6 +213,9 @@ public static class LocaleNumberOverloadTheoryData
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
+        { "mr", 1001001L, "दहा लाख एक हजार एक" },
+        { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
+        { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
 };
 
     public static TheoryData<string, long, string> WordFormCases => new()
@@ -426,6 +429,9 @@ public static class LocaleNumberOverloadTheoryData
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
+        { "mr", 1001001L, "दहा लाख एक हजार एक" },
+        { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
+        { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
 };
 
     public static TheoryData<string, long, string> GenderCases => new()
@@ -639,6 +645,9 @@ public static class LocaleNumberOverloadTheoryData
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
+        { "mr", 1001001L, "दहा लाख एक हजार एक" },
+        { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
+        { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
 };
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
@@ -852,6 +861,9 @@ public static class LocaleNumberOverloadTheoryData
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
+        { "mr", 1001001L, "दहा लाख एक हजार एक" },
+        { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
+        { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
 };
 
 }

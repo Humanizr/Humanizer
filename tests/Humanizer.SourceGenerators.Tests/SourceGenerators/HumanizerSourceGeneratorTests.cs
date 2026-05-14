@@ -783,6 +783,92 @@ numberToWords:
         Assert.Contains("new string[] { \"{0}-thousandth\", \"{0}-thousand\" }", source);
     }
 
+
+    [Fact]
+    public void JoinedScaleProfilesEmitOptionalGenderedOrdinalBlocks()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'joined-scale'
+  maximumValue: 1000
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  hundredsMap:
+    - 'zero'
+    - 'one hundred'
+  scales:
+    -
+      value: 1000
+      name: 'thousand'
+  ordinal:
+    masculine:
+      defaultSuffix: 'm'
+      exactReplacements:
+        1: 'first-m'
+    feminine:
+      defaultSuffix: 'f'
+      exactReplacements:
+        1: 'first-f'
+    neuter:
+      defaultSuffix: 'n'
+      exactReplacements:
+        1: 'first-n'
+    neuterFallback: 'feminine'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-joined-gendered-ordinal.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+
+        Assert.Contains("new JoinedScaleOrdinalProfile(", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"m\"", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"f\"", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"n\"", source);
+        Assert.Contains("GrammaticalGender.Feminine", source);
+    }
+
+    [Fact]
+    public void NumberWordSuffixOrdinalizerProfilesEmitOptionalNeuterBlock()
+    {
+        const string locale = """
+ordinalizer:
+  engine: 'number-word-suffix'
+  masculine:
+    defaultSuffix: 'm'
+    exactReplacements:
+      1: 'first-m'
+  feminine:
+    defaultSuffix: 'f'
+    exactReplacements:
+      1: 'first-f'
+  neuter:
+    defaultSuffix: 'n'
+    exactReplacements:
+      1: 'first-n'
+  neuterFallback: 'feminine'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-number-word-suffix-neuter.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "OrdinalizerProfileCatalog.g.cs");
+
+        Assert.Contains("new NumberWordSuffixOrdinalizer(culture, new(", source);
+        Assert.Contains("new(\"n\"", source);
+        Assert.Contains("GrammaticalGender.Feminine", source);
+    }
+
     [Fact]
     public void NumberToWordsUnknownEngineFallsBackToConventionalConverterName()
     {

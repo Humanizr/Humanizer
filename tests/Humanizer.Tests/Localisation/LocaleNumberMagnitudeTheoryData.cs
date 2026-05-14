@@ -155,6 +155,9 @@ public static class LocaleNumberMagnitudeTheoryData
         { "hi", 1234567L, "बारह लाख चौंतीस हज़ार पाँच सौ सड़सठ" },
         { "pa", 1234567L, "ਬਾਰਾਂ ਲੱਖ ਚੌਂਤੀ ਹਜ਼ਾਰ ਪੰਜ ਸੌ ਸਤਾਹਠ" },
         { "pa-Arab", 1234567L, "باراں لکھ چونتی ہزار پنج سو ستاہٹھ" },
+        { "mr", 1001L, "एक हजार एक" },
+        { "mr", 1000001L, "दहा लाख एक" },
+        { "mr", 1234567L, "बारा लाख चौतीस हजार पाचशे सदुसष्ट" },
 };
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
@@ -390,6 +393,8 @@ public static class LocaleNumberMagnitudeTheoryData
         { "hi", 123456789L, "बारह करोड़ चौंतीस लाख छप्पन हज़ार सात सौ नवासी" },
         { "pa", 123456789L, "ਬਾਰਾਂ ਕਰੋੜ ਚੌਂਤੀ ਲੱਖ ਛਪੰਜਾ ਹਜ਼ਾਰ ਸੱਤ ਸੌ ਉਨਾਨਵੇਂ" },
         { "pa-Arab", 123456789L, "باراں کروڑ چونتی لکھ چھپنجا ہزار ست سو انانویں" },
+        { "mr", 1001000001L, "एक अब्ज दहा लाख एक" },
+        { "mr", 4325010007018L, "त्रेचाळीस खर्व पंचवीस अब्ज एक कोटी सात हजार अठरा" },
 };
 
     public static TheoryData<string, long, string> HighRangeRoundTripCases => new()

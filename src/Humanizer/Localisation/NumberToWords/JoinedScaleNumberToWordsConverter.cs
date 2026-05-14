@@ -83,8 +83,17 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
     }
 
     /// <inheritdoc/>
-    public override string ConvertToOrdinal(int number)
+    public override string ConvertToOrdinal(int number) =>
+        ConvertToOrdinal(number, GrammaticalGender.Masculine);
+
+    /// <inheritdoc/>
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
+        if (profile.Ordinal is not null)
+        {
+            return ConvertToGenderedOrdinal(number, gender);
+        }
+
         // Exact overrides must win before any fallback logic; otherwise compound ordinal shortcut
         // rules would rewrite locale-specific exceptions into a different surface form.
         if (profile.OrdinalExceptions is not null &&
@@ -118,6 +127,31 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         }
 
         return words + profile.DefaultOrdinalSuffix;
+    }
+
+    /// <inheritdoc/>
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm) =>
+        ConvertToOrdinal(number, gender);
+
+    string ConvertToGenderedOrdinal(int number, GrammaticalGender gender)
+    {
+        var block = profile.Ordinal!.Resolve(gender);
+        if (number < 0)
+        {
+            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs((long)number);
+            if (magnitude <= int.MaxValue && block.ExactReplacements.TryGetValue((int)magnitude, out var negativeExact))
+            {
+                return profile.MinusWord + profile.NegativeJoinWord + negativeExact;
+            }
+        }
+
+        if (block.ExactReplacements.TryGetValue(number, out var exactOrdinal))
+        {
+            return exactOrdinal;
+        }
+
+        var words = Convert(number);
+        return words.Length == 0 ? words : words + block.DefaultSuffix;
     }
 
     /// <summary>
@@ -171,6 +205,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 /// <param name="subHundredMap">The shared under-hundred lexicon.</param>
 /// <param name="scales">The descending scale rows used during decomposition.</param>
 /// <param name="ordinalExceptions">Exact ordinal overrides keyed by value.</param>
+/// <param name="ordinal">The optional gendered word-ordinal profile used by ordinal word conversion.</param>
 /// <param name="compoundOrdinalRemainder">The trailing digit used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalWord">The word used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalExcludedValues">Values that must not use the compound ordinal shortcut.</param>
@@ -192,6 +227,7 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     string[] subHundredMap,
     JoinedScale[] scales,
     FrozenDictionary<int, string>? ordinalExceptions = null,
+    JoinedScaleOrdinalProfile? ordinal = null,
     int? compoundOrdinalRemainder = null,
     string? compoundOrdinalWord = null,
     FrozenSet<int>? compoundOrdinalExcludedValues = null)
@@ -230,6 +266,8 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public JoinedScale[] Scales { get; } = scales;
     /// <summary>Gets exact ordinal overrides keyed by value.</summary>
     public FrozenDictionary<int, string>? OrdinalExceptions { get; } = ordinalExceptions;
+    /// <summary>Gets the optional gender-aware ordinal profile.</summary>
+    public JoinedScaleOrdinalProfile? Ordinal { get; } = ordinal;
     /// <summary>Gets the trailing digit that triggers the compound ordinal shortcut.</summary>
     public int? CompoundOrdinalRemainder { get; } = compoundOrdinalRemainder;
     /// <summary>Gets the compound ordinal word appended when the shortcut applies.</summary>
@@ -238,6 +276,32 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public FrozenSet<int> CompoundOrdinalExcludedValues { get; } = compoundOrdinalExcludedValues ?? FrozenSet<int>.Empty;
     /// <summary>Gets a value indicating whether the profile can represent <see cref="long.MinValue"/>.</summary>
     public bool AllowLongMinValue { get; } = maximumValue == long.MaxValue;
+}
+
+/// <summary>Gender-specific ordinal suffix and exact replacement data.</summary>
+/// <param name="DefaultSuffix">The suffix appended to the cardinal word form for productive ordinals.</param>
+/// <param name="ExactReplacements">Exact ordinal forms keyed by value.</param>
+internal sealed record JoinedScaleGenderOrdinalBlock(string DefaultSuffix, FrozenDictionary<int, string> ExactReplacements);
+
+/// <summary>Optional gender-aware ordinal data for joined-scale number profiles.</summary>
+/// <param name="Masculine">The masculine ordinal block.</param>
+/// <param name="Feminine">The optional feminine ordinal block.</param>
+/// <param name="Neuter">The optional neuter ordinal block.</param>
+/// <param name="NeuterFallbackGender">The gender used when no neuter block is authored.</param>
+internal sealed record JoinedScaleOrdinalProfile(
+    JoinedScaleGenderOrdinalBlock Masculine,
+    JoinedScaleGenderOrdinalBlock? Feminine,
+    JoinedScaleGenderOrdinalBlock? Neuter,
+    GrammaticalGender NeuterFallbackGender)
+{
+    /// <summary>Resolves the block for a requested grammatical gender.</summary>
+    public JoinedScaleGenderOrdinalBlock Resolve(GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Feminine => Feminine ?? Masculine,
+            GrammaticalGender.Neuter => Neuter ?? (NeuterFallbackGender == GrammaticalGender.Feminine ? Feminine ?? Masculine : Masculine),
+            _ => Masculine
+        };
 }
 
 /// <summary>
