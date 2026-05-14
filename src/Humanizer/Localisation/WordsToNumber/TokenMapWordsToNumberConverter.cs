@@ -891,7 +891,11 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             tokensByFirstCharacter.Add(token[0], tokens);
         }
 
-        tokens.Add(new(token, value));
+        var compactToken = new CompactGluedScaleToken(token, value);
+        if (!tokens.Contains(compactToken))
+        {
+            tokens.Add(compactToken);
+        }
     }
 
     bool TryApplyCompactGluedScaleToken(CompactGluedScaleState state, CompactGluedScaleToken token, out CompactGluedScaleState nextState)
