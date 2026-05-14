@@ -323,6 +323,10 @@ Supported engines in current checked-in YAML:
 - `variant-decade`
 - `west-slavic-gendered`
 
+For `joined-scale` profiles, scale rows may include `nameWithRemainder` when the scale noun changes
+before a following lower-order remainder. Profiles that use an authored `hundredsMap` may also include
+`hundredsMapWithRemainder`, a parallel table used for the same purpose in the hundreds segment.
+
 ### `number.parse`
 
 Purpose:
