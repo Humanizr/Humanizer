@@ -3053,6 +3053,7 @@ static class LocaleNumberTheoryData
         { "gl", 200121, "douscentos mil cento vinte e un" },
         { "gl", 1000001, "un millón un" },
         { "gl", 200000121, "douscentos millóns cento vinte e un" },
+        { "ga", 42, "daichead agus a dó" },
     };
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
@@ -3913,6 +3914,7 @@ static class LocaleNumberTheoryData
         { "ky", 1001, false, "миң бир" },
         { "gl", 101, true, "cento un" },
         { "gl", 101, false, "cento un" },
+        { "ga", 105, false, "a haon céad agus a cúig" },
     };
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
@@ -4354,6 +4356,7 @@ static class LocaleNumberTheoryData
         { "ky", 121, WordForm.Abbreviation, "жүз жыйырма бир" },
         { "ky", 1001, WordForm.Abbreviation, "миң бир" },
         { "gl", 2, WordForm.Normal, "dous" },
+        { "ga", 42, WordForm.Abbreviation, "daichead agus a dó" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
@@ -4847,6 +4850,9 @@ static class LocaleNumberTheoryData
         { "gl", 2, GrammaticalGender.Masculine, "dous" },
         { "gl", 2, GrammaticalGender.Feminine, "dúas" },
         { "gl", 2, GrammaticalGender.Neuter, "dous" },
+        { "ga", 2, GrammaticalGender.Masculine, "a dó" },
+        { "ga", 2, GrammaticalGender.Feminine, "a dó" },
+        { "ga", 2, GrammaticalGender.Neuter, "a dó" },
     };
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
@@ -5135,6 +5141,9 @@ static class LocaleNumberTheoryData
         { "gl", 2, WordForm.Normal, GrammaticalGender.Masculine, "dous" },
         { "gl", 2, WordForm.Normal, GrammaticalGender.Feminine, "dúas" },
         { "gl", 2, WordForm.Normal, GrammaticalGender.Neuter, "dous" },
+        { "ga", 2, WordForm.Abbreviation, GrammaticalGender.Masculine, "a dó" },
+        { "ga", 2, WordForm.Abbreviation, GrammaticalGender.Feminine, "a dó" },
+        { "ga", 2, WordForm.Abbreviation, GrammaticalGender.Neuter, "a dó" },
     };
 
     public static TheoryData<string, int, string> OrdinalCases => new()
@@ -6626,6 +6635,7 @@ static class LocaleNumberTheoryData
         { "ky", 1000000000, "бир миллиардынчы" },
         { "ky", 1022135, "бир миллион жыйырма эки миң жүз отуз бешинчи" },
         { "gl", 1, "primeiro" },
+        { "ga", 3, "tríú" },
     };
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
@@ -7030,6 +7040,7 @@ static class LocaleNumberTheoryData
         { "ky", 4, WordForm.Abbreviation, "төртүнчү" },
         { "ky", 21, WordForm.Abbreviation, "жыйырма биринчи" },
         { "gl", 1, WordForm.Normal, "primeiro" },
+        { "ga", 3, WordForm.Abbreviation, "tríú" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
@@ -7941,6 +7952,9 @@ static class LocaleNumberTheoryData
         { "gl", 1, GrammaticalGender.Masculine, "primeiro" },
         { "gl", 1, GrammaticalGender.Feminine, "primeira" },
         { "gl", 1, GrammaticalGender.Neuter, "primeiro" },
+        { "ga", 3, GrammaticalGender.Masculine, "tríú" },
+        { "ga", 3, GrammaticalGender.Feminine, "tríú" },
+        { "ga", 3, GrammaticalGender.Neuter, "tríú" },
     };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
@@ -8228,6 +8242,9 @@ static class LocaleNumberTheoryData
         { "gl", 1, GrammaticalGender.Masculine, WordForm.Normal, "primeiro" },
         { "gl", 1, GrammaticalGender.Feminine, WordForm.Normal, "primeira" },
         { "gl", 1, GrammaticalGender.Neuter, WordForm.Normal, "primeiro" },
+        { "ga", 3, GrammaticalGender.Masculine, WordForm.Abbreviation, "tríú" },
+        { "ga", 3, GrammaticalGender.Feminine, WordForm.Abbreviation, "tríú" },
+        { "ga", 3, GrammaticalGender.Neuter, WordForm.Abbreviation, "tríú" },
     };
     public static TheoryData<string, int, string> TupleCases => new()
     {
@@ -8334,6 +8351,7 @@ static class LocaleNumberTheoryData
         { "mn", 2, "хоёр" },
         { "ky", 2, "эки" },
         { "gl", 2, "dobre" },
+        { "ga", 2, "a dó" },
     };
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
@@ -8540,5 +8558,6 @@ static class LocaleNumberTheoryData
         { "gl", "vinte e un", 21 },
         { "gl", "vixésimo primeiro", 21 },
         { "gl", "un trillón", 1000000000000000000L },
+        { "ga", "daichead agus a dó", 42 },
     };
 }

@@ -1242,6 +1242,8 @@ static class LocalePhraseTheoryData
         { "gl", 2, TimeUnit.Day, Tense.Past, "hai 2 días" },
         { "gl", 2, TimeUnit.Day, Tense.Future, "dentro de 2 días" },
         { "gl", 0, TimeUnit.Second, Tense.Future, "agora" },
+        { "ga", 2, TimeUnit.Day, Tense.Past, "2 lá ó shin" },
+        { "ga", 2, TimeUnit.Day, Tense.Future, "i gceann 2 lá" },
 };
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
@@ -1734,6 +1736,7 @@ static class LocalePhraseTheoryData
         { "mn", "хэзээ ч үгүй" },
         { "ky", "эч качан" },
         { "gl", "nunca" },
+        { "ga", "riamh" },
 };
 
     public static TheoryData<string, string, string, string> TimeOnlyDefaultHumanizeCases => new()
@@ -2700,6 +2703,8 @@ static class LocalePhraseTheoryData
         { "gl", 1, TimeUnit.Hour, true, "unha hora" },
         { "gl", 2, TimeUnit.Day, false, "2 días" },
         { "gl", 0, TimeUnit.Millisecond, true, "nada" },
+        { "ga", 2, TimeUnit.Hour, false, "2 uair an chloig" },
+        { "ga", 2, TimeUnit.Hour, true, "a dó uair an chloig" },
 };
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()
