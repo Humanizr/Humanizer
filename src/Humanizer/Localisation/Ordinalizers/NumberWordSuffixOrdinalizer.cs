@@ -8,7 +8,7 @@ namespace Humanizer;
 /// <remarks>
 /// This engine requires a <see cref="CultureInfo"/> at construction time (<c>useCulture: true</c>
 /// in the YAML profile) so it can resolve the correct number-to-words converter for the locale.
-/// Neuter gender falls back to masculine.
+/// Neuter gender uses a locale-authored block when present, otherwise it falls back to masculine.
 /// </remarks>
 class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinalizer.Options options) : DefaultOrdinalizer
 {
@@ -78,6 +78,7 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
     GrammaticalGender ResolveEffectiveGender(GrammaticalGender gender) =>
         gender switch
         {
+            GrammaticalGender.Neuter when options.Neuter is not null => GrammaticalGender.Neuter,
             GrammaticalGender.Neuter => options.NeuterFallbackGender == GrammaticalGender.Feminine
                 ? GrammaticalGender.Feminine
                 : GrammaticalGender.Masculine,
@@ -88,6 +89,7 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
         effectiveGender switch
         {
             GrammaticalGender.Feminine => options.Feminine,
+            GrammaticalGender.Neuter => options.Neuter ?? options.Masculine,
             _ => options.Masculine
         };
 
@@ -112,10 +114,12 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
     /// </summary>
     /// <param name="Masculine">The masculine gender block.</param>
     /// <param name="Feminine">The feminine gender block.</param>
-    /// <param name="NeuterFallbackGender">The gender that neuter resolves to.</param>
+    /// <param name="Neuter">The optional neuter gender block.</param>
+    /// <param name="NeuterFallbackGender">The gender that neuter resolves to when no neuter block is authored.</param>
     public readonly record struct Options(
         GenderBlock Masculine,
         GenderBlock Feminine,
+        GenderBlock? Neuter,
         GrammaticalGender NeuterFallbackGender)
     {
         /// <summary>The masculine gender block.</summary>
@@ -124,7 +128,10 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
         /// <summary>The feminine gender block.</summary>
         public GenderBlock Feminine { get; } = Feminine;
 
-        /// <summary>The gender that neuter resolves to (typically <see cref="GrammaticalGender.Masculine"/>).</summary>
+        /// <summary>The optional neuter gender block.</summary>
+        public GenderBlock? Neuter { get; } = Neuter;
+
+        /// <summary>The gender that neuter resolves to when no neuter block is authored.</summary>
         public GrammaticalGender NeuterFallbackGender { get; } = NeuterFallbackGender;
     }
 }
