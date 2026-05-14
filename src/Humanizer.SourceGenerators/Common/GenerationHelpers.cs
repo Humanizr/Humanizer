@@ -1008,8 +1008,14 @@ public sealed partial class HumanizerSourceGenerator
             RequiredStringValue("name"),
             OptionalStringValueOrFallback("nameWithRemainder", "name"),
             OptionalStringValue("countJoiner", " "),
-            static element => CreateNullableIntStringFrozenDictionaryExpression(element, "countOverrides").Replace("null", "FrozenDictionary<int, string>.Empty"),
-            static element => CreateNullableIntStringFrozenDictionaryExpression(element, "countOverridesWithRemainder").Replace("null", "FrozenDictionary<int, string>.Empty"));
+            static element => CreateFrozenDictionaryOrEmpty(element, "countOverrides"),
+            static element => CreateFrozenDictionaryOrEmpty(element, "countOverridesWithRemainder"));
+
+    static string CreateFrozenDictionaryOrEmpty(JsonElement element, string propertyName)
+    {
+        var expression = CreateNullableIntStringFrozenDictionaryExpression(element, propertyName);
+        return expression == "null" ? "FrozenDictionary<int, string>.Empty" : expression;
+    }
 
     static string CreateStemmedScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(

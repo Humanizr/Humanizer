@@ -355,36 +355,51 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
 /// <summary>
 /// Immutable generated profile for <see cref="LinkedVigesimalWordsToNumberConverter"/>.
 /// </summary>
-internal sealed class LinkedVigesimalWordsToNumberProfile(
-    string[] words,
-    LinkedVigesimalScale[] scales,
-    string terminalRemainderJoiner,
-    string[]? negativePrefixes = null,
-    string[]? ordinalSuffixes = null,
-    FrozenDictionary<string, long>? ordinalMap = null,
-    FrozenDictionary<string, long>? additionalCardinals = null,
-    long scaleCountCompositeThreshold = 100)
+internal sealed class LinkedVigesimalWordsToNumberProfile
 {
+    /// <summary>Initializes a new generated linked-vigesimal parser profile.</summary>
+    public LinkedVigesimalWordsToNumberProfile(
+        string[] words,
+        LinkedVigesimalScale[] scales,
+        string terminalRemainderJoiner,
+        string[]? negativePrefixes = null,
+        string[]? ordinalSuffixes = null,
+        FrozenDictionary<string, long>? ordinalMap = null,
+        FrozenDictionary<string, long>? additionalCardinals = null,
+        long scaleCountCompositeThreshold = 100)
+    {
+        ExactWords = BuildExactWords(words, scales, additionalCardinals);
+        MultiTokenExactWords = TokenizeNumberWords(ExactWords);
+        MaximumExactTokenCount = GetMaximumTokenCount(ExactWords.Keys);
+        Scales = ValidateScales(scales);
+        TokenizedScales = TokenizeScales(Scales);
+        TerminalRemainderJoinerTokens = Tokenize(terminalRemainderJoiner);
+        NegativePrefixes = negativePrefixes ?? [];
+        OrdinalSuffixes = ordinalSuffixes ?? [];
+        OrdinalMap = ordinalMap ?? FrozenDictionary<string, long>.Empty;
+        ScaleCountCompositeThreshold = scaleCountCompositeThreshold;
+    }
+
     /// <summary>Gets exact cardinal words.</summary>
-    public FrozenDictionary<string, long> ExactWords { get; } = BuildExactWords(words, scales, additionalCardinals);
+    public FrozenDictionary<string, long> ExactWords { get; }
     /// <summary>Gets multi-token exact cardinal words, longest phrases first.</summary>
-    public TokenizedNumberWord[] MultiTokenExactWords { get; } = TokenizeNumberWords(BuildExactWords(words, scales, additionalCardinals));
+    public TokenizedNumberWord[] MultiTokenExactWords { get; }
     /// <summary>Gets maximum token count for exact words.</summary>
-    public int MaximumExactTokenCount { get; } = GetMaximumTokenCount(BuildExactWords(words, scales, additionalCardinals).Keys);
+    public int MaximumExactTokenCount { get; }
     /// <summary>Gets descending scale rows.</summary>
-    public LinkedVigesimalScale[] Scales { get; } = ValidateScales(scales);
+    public LinkedVigesimalScale[] Scales { get; }
     /// <summary>Gets tokenized descending scale rows.</summary>
-    public TokenizedLinkedVigesimalScale[] TokenizedScales { get; } = TokenizeScales(ValidateScales(scales));
+    public TokenizedLinkedVigesimalScale[] TokenizedScales { get; }
     /// <summary>Gets pre-tokenized terminal remainder linker.</summary>
-    public string[] TerminalRemainderJoinerTokens { get; } = Tokenize(terminalRemainderJoiner);
+    public string[] TerminalRemainderJoinerTokens { get; }
     /// <summary>Gets negative prefixes.</summary>
-    public string[] NegativePrefixes { get; } = negativePrefixes ?? [];
+    public string[] NegativePrefixes { get; }
     /// <summary>Gets ordinal suffixes.</summary>
-    public string[] OrdinalSuffixes { get; } = ordinalSuffixes ?? [];
+    public string[] OrdinalSuffixes { get; }
     /// <summary>Gets exact ordinal tokens.</summary>
-    public FrozenDictionary<string, long> OrdinalMap { get; } = ordinalMap ?? FrozenDictionary<string, long>.Empty;
+    public FrozenDictionary<string, long> OrdinalMap { get; }
     /// <summary>Gets the minimum exact count value that may be followed by a linked low remainder inside a scale count.</summary>
-    public long ScaleCountCompositeThreshold { get; } = scaleCountCompositeThreshold;
+    public long ScaleCountCompositeThreshold { get; }
 
     static FrozenDictionary<string, long> BuildExactWords(string[] words, LinkedVigesimalScale[] scales, FrozenDictionary<string, long>? additionalCardinals)
     {
