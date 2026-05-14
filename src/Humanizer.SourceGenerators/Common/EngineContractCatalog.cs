@@ -669,7 +669,9 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "ordinalSuffix", null, null, null, "", null, null),
                             Member("string-array", "words", null, null, null, null, null, null),
                             Member("builder", "scales", null, null, "linked-vigesimal-scale-array", null, null, null),
-                            Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
+                            Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty"),
+                            Member("string", "terminalRemainderAlternateJoiner", null, null, null, "", null, null),
+                            Member("string", "terminalRemainderAlternateJoinerInitials", null, null, null, "", null, null)
                         )
             ),
                 // Shared engine for locales whose scale count is a bound stem and whose scale suffix

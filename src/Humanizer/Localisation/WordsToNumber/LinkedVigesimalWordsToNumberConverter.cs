@@ -97,7 +97,7 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
 
         while (next < end)
         {
-            if (TryMatchTokenPhrase(tokens, next, end, profile.TerminalRemainderJoinerTokens, out var afterJoiner))
+            if (TryMatchAnyTokenPhrase(tokens, next, end, profile.TerminalRemainderJoinerTokenPhrases, out var afterJoiner))
             {
                 next = afterJoiner;
                 continue;
@@ -252,6 +252,20 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
         return false;
     }
 
+    static bool TryMatchAnyTokenPhrase(string[] tokens, int start, int end, string[][] phraseTokenSets, out int next)
+    {
+        foreach (var phraseTokens in phraseTokenSets)
+        {
+            if (TryMatchTokenPhrase(tokens, start, end, phraseTokens, out next))
+            {
+                return true;
+            }
+        }
+
+        next = start;
+        return false;
+    }
+
     static bool TryMatchTokenPhrase(string[] tokens, int start, int end, string[] phraseTokens, out int next)
     {
         if (phraseTokens.Length == 0)
@@ -355,14 +369,21 @@ internal sealed class LinkedVigesimalWordsToNumberProfile
         string[]? ordinalSuffixes = null,
         FrozenDictionary<string, long>? ordinalMap = null,
         FrozenDictionary<string, long>? additionalCardinals = null,
+        string terminalRemainderAlternateJoiner = "",
+        string terminalRemainderAlternateJoinerInitials = "",
         long scaleCountCompositeThreshold = 100)
     {
+        _ = terminalRemainderAlternateJoinerInitials;
         ExactWords = BuildExactWords(words, scales, additionalCardinals);
         MultiTokenExactWords = TokenizeNumberWords(ExactWords);
         MaximumExactTokenCount = GetMaximumTokenCount(ExactWords.Keys);
         Scales = ValidateScales(scales);
         TokenizedScales = TokenizeScales(Scales);
-        TerminalRemainderJoinerTokens = Tokenize(terminalRemainderJoiner);
+        TerminalRemainderJoinerTokenPhrases = TokenizeTerminalRemainderJoiners(terminalRemainderJoiner, terminalRemainderAlternateJoiner);
+        TerminalRemainderJoinerTokens = TerminalRemainderJoinerTokenPhrases
+            .SelectMany(static tokens => tokens)
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
         NegativePrefixes = negativePrefixes ?? [];
         OrdinalSuffixes = ordinalSuffixes ?? [];
         OrdinalMap = ordinalMap ?? FrozenDictionary<string, long>.Empty;
@@ -379,7 +400,9 @@ internal sealed class LinkedVigesimalWordsToNumberProfile
     public LinkedVigesimalScale[] Scales { get; }
     /// <summary>Gets tokenized descending scale rows.</summary>
     public TokenizedLinkedVigesimalScale[] TokenizedScales { get; }
-    /// <summary>Gets pre-tokenized terminal remainder linker.</summary>
+    /// <summary>Gets pre-tokenized terminal remainder linker phrases.</summary>
+    public string[][] TerminalRemainderJoinerTokenPhrases { get; }
+    /// <summary>Gets distinct tokens from terminal remainder linkers.</summary>
     public string[] TerminalRemainderJoinerTokens { get; }
     /// <summary>Gets negative prefixes.</summary>
     public string[] NegativePrefixes { get; }
@@ -444,6 +467,12 @@ internal sealed class LinkedVigesimalWordsToNumberProfile
 
         return maximum;
     }
+
+    static string[][] TokenizeTerminalRemainderJoiners(string terminalRemainderJoiner, string terminalRemainderAlternateJoiner) =>
+        new[] { terminalRemainderJoiner, terminalRemainderAlternateJoiner }
+            .Select(Tokenize)
+            .Where(static tokens => tokens.Length > 0)
+            .ToArray();
 
     static string[] Tokenize(string value) =>
         value.Split(' ', StringSplitOptions.RemoveEmptyEntries);

@@ -1510,6 +1510,8 @@ Render fields:
 - `negativeJoiner`
 - `partJoiner`
 - `terminalRemainderJoiner`
+- `terminalRemainderAlternateJoiner` (optional; used when the rendered terminal remainder starts with a configured initial)
+- `terminalRemainderAlternateJoinerInitials` (optional initial-character set for the alternate joiner)
 - `terminalRemainderThreshold`
 - `ordinalSuffix`
 - `words` — dense cardinal words from zero through the highest lexicalized low number
@@ -1527,7 +1529,7 @@ Nested `scales` fields:
 - `countOverrides` (optional exact phrases keyed by scale count)
 - `countOverridesWithRemainder` (optional exact phrases keyed by scale count)
 
-Parse fields mirror render-side `words`, `scales`, and `terminalRemainderJoiner`, plus optional `negativePrefixes`, `ordinalSuffixes`, `ordinalMap`, and `additionalCardinals`.
+Parse fields mirror render-side `words`, `scales`, `terminalRemainderJoiner`, `terminalRemainderAlternateJoiner`, and `terminalRemainderAlternateJoinerInitials`, plus optional `negativePrefixes`, `ordinalSuffixes`, `ordinalMap`, and `additionalCardinals`. Parsers accept both the base and alternate terminal joiner tokens.
 
 ### `stemmed-scale`
 

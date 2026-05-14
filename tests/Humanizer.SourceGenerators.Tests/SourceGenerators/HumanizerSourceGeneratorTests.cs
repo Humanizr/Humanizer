@@ -1765,6 +1765,63 @@ numberToWords:
     }
 
     [Fact]
+    public void LinkedVigesimalProfilesEmitAlternateTerminalRemainderJoinerFields()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'linked-vigesimal'
+  zeroWord: 'zero'
+  negativeWord: 'minus'
+  terminalRemainderJoiner: 'a'
+  terminalRemainderAlternateJoiner: 'ac'
+  terminalRemainderAlternateJoinerInitials: 'ae'
+  words:
+    - 'zero'
+    - 'apple'
+    - 'bee'
+  scales:
+    -
+      value: 20
+      one: 'twenty'
+      oneWithRemainder: 'twenty-r'
+      name: 'score'
+      nameWithRemainder: 'score-r'
+wordsToNumber:
+  engine: 'linked-vigesimal'
+  terminalRemainderJoiner: 'a'
+  terminalRemainderAlternateJoiner: 'ac'
+  terminalRemainderAlternateJoinerInitials: 'ae'
+  words:
+    - 'zero'
+    - 'apple'
+    - 'bee'
+  scales:
+    -
+      value: 20
+      one: 'twenty'
+      oneWithRemainder: 'twenty-r'
+      name: 'score'
+      nameWithRemainder: 'score-r'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-linked-vigesimal-joiner.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var numberSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var wordsSource = GetGeneratedSource(runResult, "WordsToNumberProfileCatalog.g.cs");
+        var numberBlock = ExtractCacheClassBody(numberSource, "zz_linked_vigesimal_joiner_cache");
+        var wordsBlock = ExtractCacheClassBody(wordsSource, "zz_linked_vigesimal_joiner_cache");
+
+        Assert.Contains("new LinkedVigesimalNumberToWordsProfile(", numberBlock);
+        Assert.Contains("FrozenDictionary<int, string>.Empty, \"ac\", \"ae\")", numberBlock);
+        Assert.Contains("new LinkedVigesimalWordsToNumberProfile(", wordsBlock);
+        Assert.Contains("null, null, \"ac\", \"ae\")", wordsBlock);
+    }
+
+    [Fact]
     public void WordsToNumberProfilesAcceptOmittedEmptyIgnoredToken()
     {
         const string locale = """
