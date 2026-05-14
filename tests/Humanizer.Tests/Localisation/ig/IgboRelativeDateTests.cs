@@ -8,8 +8,9 @@ public class IgboRelativeDateTests
     [InlineData(1, TimeUnit.Day, Tense.Future, "echi")]
     [InlineData(2, TimeUnit.Day, Tense.Past, "2 ụbọchị gara aga")]
     [InlineData(2, TimeUnit.Day, Tense.Future, "n'ime 2 ụbọchị")]
-    [InlineData(1, TimeUnit.Month, Tense.Past, "ọnwa 1 gara aga")]
+    [InlineData(1, TimeUnit.Month, Tense.Past, "otu ọnwa gara aga")]
     [InlineData(2, TimeUnit.Month, Tense.Past, "2 ọnwa gara aga")]
+    [InlineData(1, TimeUnit.Month, Tense.Future, "n'ime otu ọnwa")]
     [InlineData(0, TimeUnit.Second, Tense.Future, "ugbu a")]
     public void DateHumanize_UsesIgboPhrases(int count, TimeUnit unit, Tense tense, string expected)
     {

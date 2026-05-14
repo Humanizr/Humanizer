@@ -68,7 +68,7 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
                 throw new OverflowException("Cannot safely negate long.MinValue.");
             }
 
-            return $"{profile.MinusWord} {ConvertCore(-number, isOrdinal, addAnd)}";
+            return $"{profile.MinusWord} {Convert(-number, addAnd)}";
         }
 
         var parts = new List<string>(20);

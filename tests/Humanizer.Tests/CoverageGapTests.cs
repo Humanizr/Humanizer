@@ -1228,6 +1228,7 @@ public class CoverageGapTests
         var converter = new ConjunctionalScaleNumberToWordsConverter(CreateConjunctionalScaleProfile());
 
         Assert.Equal("minus one", converter.Convert(-1));
+        Assert.Equal("minus one", converter.ConvertToOrdinal(-1));
         Assert.Throws<OverflowException>(() => converter.Convert(long.MinValue));
         Assert.Equal("one hundred", converter.Convert(100, addAnd: false));
         Assert.Equal("one hundred and one", converter.Convert(101));

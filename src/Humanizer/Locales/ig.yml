@@ -16,25 +16,25 @@ surfaces:
       never: 'ọ dịghị mgbe'
       past:
         millisecond:
-          single: 'milisekọnd 1 gara aga'
+          single: 'otu milisekọnd gara aga'
           multiple:
             forms:
               default: 'milisekọnd'
             template: '{count} milisekọnd gara aga'
         second:
-          single: 'sekọnd 1 gara aga'
+          single: 'otu sekọnd gara aga'
           multiple:
             forms:
               default: 'sekọnd'
             template: '{count} sekọnd gara aga'
         minute:
-          single: 'nkeji 1 gara aga'
+          single: 'otu nkeji gara aga'
           multiple:
             forms:
               default: 'nkeji'
             template: '{count} nkeji gara aga'
         hour:
-          single: 'awa 1 gara aga'
+          single: 'otu awa gara aga'
           multiple:
             forms:
               default: 'awa'
@@ -46,44 +46,44 @@ surfaces:
               default: 'ụbọchị'
             template: '{count} ụbọchị gara aga'
         week:
-          single: 'izu 1 gara aga'
+          single: 'otu izu gara aga'
           multiple:
             forms:
               default: 'izu'
             template: '{count} izu gara aga'
         month:
-          single: 'ọnwa 1 gara aga'
+          single: 'otu ọnwa gara aga'
           multiple:
             forms:
               default: 'ọnwa'
             template: '{count} ọnwa gara aga'
         year:
-          single: 'afọ 1 gara aga'
+          single: 'otu afọ gara aga'
           multiple:
             forms:
               default: 'afọ'
             template: '{count} afọ gara aga'
       future:
         millisecond:
-          single: 'n''ime milisekọnd 1'
+          single: 'n''ime otu milisekọnd'
           multiple:
             forms:
               default: 'milisekọnd'
             template: 'n''ime {count} milisekọnd'
         second:
-          single: 'n''ime sekọnd 1'
+          single: 'n''ime otu sekọnd'
           multiple:
             forms:
               default: 'sekọnd'
             template: 'n''ime {count} sekọnd'
         minute:
-          single: 'n''ime nkeji 1'
+          single: 'n''ime otu nkeji'
           multiple:
             forms:
               default: 'nkeji'
             template: 'n''ime {count} nkeji'
         hour:
-          single: 'n''ime awa 1'
+          single: 'n''ime otu awa'
           multiple:
             forms:
               default: 'awa'
@@ -95,19 +95,19 @@ surfaces:
               default: 'ụbọchị'
             template: 'n''ime {count} ụbọchị'
         week:
-          single: 'n''ime izu 1'
+          single: 'n''ime otu izu'
           multiple:
             forms:
               default: 'izu'
             template: 'n''ime {count} izu'
         month:
-          single: 'n''ime ọnwa 1'
+          single: 'n''ime otu ọnwa'
           multiple:
             forms:
               default: 'ọnwa'
             template: 'n''ime {count} ọnwa'
         year:
-          single: 'n''ime afọ 1'
+          single: 'n''ime otu afọ'
           multiple:
             forms:
               default: 'afọ'
@@ -352,8 +352,6 @@ surfaces:
         asaa: 7
         asatọ: 8
         itoolu: 9
-        na: 0
-        nke: 0
         iri: 10
         'iri na otu': 11
         'iri na abụọ': 12
@@ -384,7 +382,6 @@ surfaces:
         'nke mbụ': 1
         'nke abụọ': 2
         'nke atọ': 3
-
 
   ordinal:
     numeric:

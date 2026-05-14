@@ -9,6 +9,8 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     // Match the longest candidate first so shorter tokens do not steal the prefix of a glued
     // compound before the parser has a chance to recognize the full token.
     readonly string[] cardinalTokenOrder = profile.CardinalMap.Keys
+        .Concat(profile.IgnoredTokens)
+        .Distinct(StringComparer.Ordinal)
         .OrderByDescending(static key => key.Length)
         .ToArray();
 
