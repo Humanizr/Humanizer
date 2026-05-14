@@ -100,7 +100,7 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
     {
         if (number < 0)
         {
-            return "минус " + ConvertToOrdinal(-number, gender);
+            return "минус " + ConvertOrdinalPositive(-(long)number, gender);
         }
 
         return ConvertOrdinalPositive(number, gender);
@@ -182,11 +182,11 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
             _ => MasculineUnits[number]
         };
 
-    string ConvertOrdinalPositive(int number, GrammaticalGender gender)
+    string ConvertOrdinalPositive(long number, GrammaticalGender gender)
     {
         if (number < 20)
         {
-            return GetOrdinalUnit(number, gender);
+            return GetOrdinalUnit((int)number, gender);
         }
 
         foreach (var scale in Scales)
@@ -196,8 +196,9 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
                 continue;
             }
 
-            var count = number / (int)scale.Value;
-            var remainder = number % (int)scale.Value;
+            var scaleValue = (long)scale.Value;
+            var count = number / scaleValue;
+            var remainder = number % scaleValue;
             var prefix = scale.OmitOne && count == 1
                 ? scale.Singular
                 : Convert(count, scale.Gender) + " " + (count == 1 ? scale.Singular : scale.Plural);
@@ -214,7 +215,7 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
 
         if (number >= 100)
         {
-            var hundreds = number / 100;
+            var hundreds = (int)(number / 100);
             var remainder = number % 100;
             if (remainder == 0)
             {
@@ -226,7 +227,7 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
 
         if (number >= 20)
         {
-            var tens = number / 10;
+            var tens = (int)(number / 10);
             var remainder = number % 10;
             return remainder == 0
                 ? ApplyOrdinalEnding(OrdinalTensStems[tens], gender)

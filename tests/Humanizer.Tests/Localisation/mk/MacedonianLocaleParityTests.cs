@@ -46,9 +46,22 @@ public class MacedonianLocaleParityTests
     [InlineData("сто и еден", 101)]
     [InlineData("илјада и дванаесет", 1012)]
     [InlineData("два милиони", 2000000)]
+    [InlineData("единаесетта", 11)]
+    [InlineData("единаесетто", 11)]
     [InlineData("дваесет и прв", 21)]
+    [InlineData("дваесет и прва", 21)]
+    [InlineData("дваесет и прво", 21)]
+    [InlineData("стота", 100)]
+    [InlineData("илјадито", 1000)]
     public void ToNumber_ParsesMacedonianCardinalAndOrdinalForms(string words, long expected) =>
         Assert.Equal(expected, words.ToNumber(Macedonian));
+
+
+    [Fact]
+    public void ToOrdinalWords_HandlesMinimumInteger() =>
+        Assert.Equal(
+            "минус две милијарди сто четириесет и седум милиони четиристотини осумдесет и три илјади шестотини четириесет и осми",
+            int.MinValue.ToOrdinalWords(Macedonian));
 
     [Theory]
     [InlineData(1, "1.")]
