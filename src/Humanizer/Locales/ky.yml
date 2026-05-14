@@ -534,8 +534,25 @@ surfaces:
 
   ordinal:
     numeric:
-      engine: 'suffix'
-      masculineSuffix: '-чи'
+      engine: 'modulo-suffix'
+      defaultSuffix: '-чи'
+      useAbsoluteValue: true
+      exactSuffixes:
+        10: '-чу'
+        20: '-чы'
+        30: '-чу'
+        40: '-чы'
+        50: '-чү'
+        60: '-чы'
+        70: '-чи'
+        80: '-чи'
+        90: '-чу'
+        100: '-чү'
+      lastDigitSuffixes:
+        3: '-чү'
+        4: '-чү'
+        6: '-чы'
+        9: '-чу'
     date:
       pattern: '{day} MMMM yyyy'
       dayMode: 'Numeric'
