@@ -57,9 +57,9 @@ public class MongolianListCompassDateClockTests
     }
 
     [Theory]
-    [InlineData(1, 5, "нэг цаг тав минут")]
-    [InlineData(13, 23, "арван гурав цаг хорин гурав минут")]
-    [InlineData(20, 0, "хорь цаг")]
+    [InlineData(1, 5, "нэг цаг таван минут")]
+    [InlineData(13, 23, "арван гурван цаг хорин гурван минут")]
+    [InlineData(20, 0, "хорин цаг")]
     public void ToClockNotation_ExactOutput(int hours, int minutes, string expected)
     {
         Assert.Equal(expected, new TimeOnly(hours, minutes).ToClockNotation());
@@ -68,7 +68,7 @@ public class MongolianListCompassDateClockTests
     [Fact]
     public void ToClockNotation_Rounded_ExactOutput()
     {
-        Assert.Equal("арван гурав цаг хорин тав минут", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
+        Assert.Equal("арван гурван цаг хорин таван минут", new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes));
     }
 #endif
 }

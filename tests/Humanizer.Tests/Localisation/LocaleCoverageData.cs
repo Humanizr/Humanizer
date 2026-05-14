@@ -497,7 +497,7 @@ static class LocaleCoverageData
         { "zh-Hant", new(13, 23, "下午一點二十三分") },
         { "zu-ZA", new(13, 23, "ihora lokuqala namashumi amabili nantathu ntambama") },
         { "lo", new(13, 23, "13 ໂມງ 23 ນາທີ") },
-        { "mn", new(13, 23, "арван гурав цаг хорин гурав минут") },
+        { "mn", new(13, 23, "арван гурван цаг хорин гурван минут") },
     };
 
     // Same afternoon clock sample rounded to the nearest five minutes.
@@ -593,7 +593,7 @@ static class LocaleCoverageData
         { "zh-Hant", new(13, 23, "下午一點二十五分") },
         { "zu-ZA", new(13, 23, "ihora lokuqala namashumi amabili nanhlanu ntambama") },
         { "lo", new(13, 23, "13 ໂມງ 25 ນາທີ") },
-        { "mn", new(13, 23, "арван гурав цаг хорин тав минут") },
+        { "mn", new(13, 23, "арван гурван цаг хорин таван минут") },
     };
 
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
@@ -689,7 +689,7 @@ static class LocaleCoverageData
         { "zh-Hant", new(1, 5, "凌晨一點零五分") },
         { "zu-ZA", new(1, 5, "ihora lokuqala nemizuzu emihlanu") },
         { "lo", new(1, 5, "1 ໂມງ 5 ນາທີ") },
-        { "mn", new(1, 5, "нэг цаг тав минут") },
+        { "mn", new(1, 5, "нэг цаг таван минут") },
     };
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalExactExpectationTheoryData { get; } = new()

@@ -53,7 +53,7 @@ public class MongolianNumberToWordsTests
     [InlineData("хоёр мянга хорин зургаа", 2026)]
     [InlineData("хасах тав", -5)]
     [InlineData("нэг их наяд", 1000000000000)]
-    [InlineData("дөрвөн их наяд гурван зуун хорин тав тэрбум арван сая долоон мянга арван найм", 4325010007018)]
+    [InlineData("дөрвөн их наяд гурван зуун хорин тав тэрбум арван сая долоон мянга арван найм", 4_325_010_007_018)]
     public void WordsToNumber_ParsesMongolianCardinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Mn));
