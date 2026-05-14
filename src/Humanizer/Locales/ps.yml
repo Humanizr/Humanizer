@@ -589,7 +589,7 @@ surfaces:
     defaultTemplate: '{dayPeriod} {hour} او {minutes} {minuteSuffix}'
     minuteSuffixSingular: 'دقیقه'
     minuteSuffixPlural: 'دقیقې'
-    earlyMorning: 'سهار'
+    earlyMorning: 'د شپې'
     morning: 'سهار'
     afternoon: 'د غرمې'
     evening: 'ماښام'

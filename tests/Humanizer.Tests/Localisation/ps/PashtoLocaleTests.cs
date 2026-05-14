@@ -126,8 +126,8 @@ public class PashtoLocaleTests
     }
 
     [Theory]
-    [InlineData(1, 5, "سهار یوه بجه او پنځه دقیقې")]
-    [InlineData(1, 1, "سهار یوه بجه او یوه دقیقه")]
+    [InlineData(1, 5, "د شپې یوه بجه او پنځه دقیقې")]
+    [InlineData(1, 1, "د شپې یوه بجه او یوه دقیقه")]
     [InlineData(13, 23, "د غرمې یوه بجه او درې ویشت دقیقې")]
     [InlineData(13, 23, "د غرمې یوه بجه او پنځه ویشت دقیقې", true)]
     [InlineData(18, 0, "ماښام شپږ بجې")]
