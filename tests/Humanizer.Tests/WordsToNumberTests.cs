@@ -1275,6 +1275,66 @@ public class TokenMapWordsToNumberConverterTests
         Assert.Null(unrecognizedWord);
     }
 
+    [Theory]
+    [InlineData("twohundred", 200)]
+    [InlineData("onehundredfivethousand", 105000)]
+    [InlineData("twothousand threehundred", 2300)]
+    [InlineData("ninehundred ninetythousand", 990000)]
+    [InlineData("ninehundredninetyninethousand", 999000)]
+    [InlineData("ninehundred thousand five", 900005)]
+    [InlineData("ninetythousand", 90000)]
+    public void GluedScaleSuffixesParseCardinalScaleCounts(string words, long expected)
+    {
+        var converter = new TokenMapWordsToNumberConverter(new()
+        {
+            CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["one"] = 1,
+                ["two"] = 2,
+                ["three"] = 3,
+                ["five"] = 5,
+                ["nine"] = 9,
+                ["ninety"] = 90,
+                ["hundred"] = 100,
+                ["thousand"] = 1000
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            GluedScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["hundred"] = 100,
+                ["thousand"] = 1000
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            UseHundredMultiplier = true,
+            NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace
+        });
+
+        Assert.True(converter.TryConvert(words, out var parsed, out var unrecognizedWord));
+        Assert.Equal(expected, parsed);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Fact]
+    public void GluedScaleSuffixesRejectOverlongCompactCounts()
+    {
+        var converter = new TokenMapWordsToNumberConverter(new()
+        {
+            CardinalMap = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["one"] = 1,
+                ["thousand"] = 1000
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            GluedScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal)
+            {
+                ["thousand"] = 1000
+            }.ToFrozenDictionary(StringComparer.Ordinal),
+            NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace
+        });
+
+        var words = string.Concat(Enumerable.Repeat("one", 40)) + "thousand";
+
+        Assert.False(converter.TryConvert(words, out _, out var unrecognizedWord));
+        Assert.Equal(words, unrecognizedWord);
+    }
+
     [Fact]
     public void ExactOrdinalEntriesBeatDerivedOrdinalParsing()
     {

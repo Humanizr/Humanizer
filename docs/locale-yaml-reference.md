@@ -1102,6 +1102,7 @@ Fields:
 - `ordinalMap`
 - `ordinalScaleMap`
 - `gluedOrdinalScaleSuffixes`
+- `gluedScaleSuffixes`
 - `compositeScaleMap`
 - `negativePrefixes`
 - `negativeSuffixes`
@@ -1131,7 +1132,8 @@ Notes:
 - This is the most declarative parsing engine.
 - `ordinalMap` holds exact ordinal tokens.
 - `ordinalScaleMap` holds ordinal scale words such as "millionth".
-- `gluedOrdinalScaleSuffixes` supports glued forms where the scale is expressed as a suffix.
+- `gluedOrdinalScaleSuffixes` supports glued ordinal forms where the scale is expressed as a suffix.
+- `gluedScaleSuffixes` supports glued cardinal forms where a cardinal count is immediately followed by a scale suffix.
 - `compositeScaleMap` supports composite multi-token scales.
 - `ordinalGenderVariant` is validated as token-map metadata when present. Do not rely on it by itself to create parseable ordinal tokens; token-map parsing recognizes explicit ordinal maps and the prefix/suffix rules emitted into `TokenMapWordsToNumberRules`.
 - `ordinalNumberToWordsKind: 'self'` is an authoring alias for the current locale's generated number-to-words profile. The generator normalizes that alias to the concrete locale profile key, but token-map locales should still author the ordinal lexemes they need to parse in `ordinalMap`, `ordinalScaleMap`, `gluedOrdinalScaleSuffixes`, or `compositeScaleMap` unless the token-map emitter is extended to synthesize additional ordinal maps.

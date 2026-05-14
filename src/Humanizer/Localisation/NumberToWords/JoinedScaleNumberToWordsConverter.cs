@@ -134,7 +134,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         var block = profile.Ordinal!.Resolve(gender);
         if (number < 0)
         {
-            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs((long)number);
+            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
             if (magnitude <= int.MaxValue && block.ExactReplacements.TryGetValue((int)magnitude, out var negativeExact))
             {
                 return profile.MinusWord + profile.NegativeJoinWord + negativeExact;
@@ -309,7 +309,7 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     }
 }
 
-/// <summary>Gender-specific ordinal affix and exact replacement data.</summary>
+/// <summary>Gender-specific ordinal affixes and exact replacement data.</summary>
 /// <param name="DefaultPrefix">The prefix prepended to the cardinal word form for productive ordinals.</param>
 /// <param name="DefaultSuffix">The suffix appended to the cardinal word form for productive ordinals.</param>
 /// <param name="ExactReplacements">Exact ordinal forms keyed by value.</param>

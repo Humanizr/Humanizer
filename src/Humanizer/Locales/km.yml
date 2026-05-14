@@ -1,0 +1,535 @@
+# Khmer phrase review record (2026-05-14): the parity pass explicitly reviewed
+# `phrases.relativeDate.never` and clock day-period/hour/minute keys
+# (`clock.earlyMorning`, `clock.morning`, `clock.afternoon`, `clock.evening`,
+# `clock.night`, `clock.hourSuffixSingular`, `clock.hourSuffixPlural`,
+# `clock.minuteSuffixSingular`, `clock.minuteSuffixPlural`) and covers them with
+# exact-output tests in KhmerLocaleParityTests.
+locale: 'km'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'និង'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'ឥឡូវនេះ'
+      never: 'មិនដែល'
+      past:
+        millisecond:
+          single: '1 មិល្លីវិនាទីមុន'
+          multiple:
+            forms:
+              default: 'មិល្លីវិនាទី'
+            template: '{count} {unit}មុន'
+        second:
+          single: '1 វិនាទីមុន'
+          multiple:
+            forms:
+              default: 'វិនាទី'
+            template: '{count} {unit}មុន'
+        minute:
+          single: '1 នាទីមុន'
+          multiple:
+            forms:
+              default: 'នាទី'
+            template: '{count} {unit}មុន'
+        hour:
+          single: '1 ម៉ោងមុន'
+          multiple:
+            forms:
+              default: 'ម៉ោង'
+            template: '{count} {unit}មុន'
+        day:
+          single: 'ម្សិលមិញ'
+          multiple:
+            forms:
+              default: 'ថ្ងៃ'
+            template: '{count} {unit}មុន'
+        week:
+          single: '1 សប្តាហ៍មុន'
+          multiple:
+            forms:
+              default: 'សប្តាហ៍'
+            template: '{count} {unit}មុន'
+        month:
+          single: '1 ខែមុន'
+          multiple:
+            forms:
+              default: 'ខែ'
+            template: '{count} {unit}មុន'
+        year:
+          single: '1 ឆ្នាំមុន'
+          multiple:
+            forms:
+              default: 'ឆ្នាំ'
+            template: '{count} {unit}មុន'
+      future:
+        millisecond:
+          single: 'ក្នុង 1 មិល្លីវិនាទី'
+          multiple:
+            forms:
+              default: 'មិល្លីវិនាទី'
+            template: 'ក្នុង {count} {unit}'
+        second:
+          single: 'ក្នុង 1 វិនាទី'
+          multiple:
+            forms:
+              default: 'វិនាទី'
+            template: 'ក្នុង {count} {unit}'
+        minute:
+          single: 'ក្នុង 1 នាទី'
+          multiple:
+            forms:
+              default: 'នាទី'
+            template: 'ក្នុង {count} {unit}'
+        hour:
+          single: 'ក្នុង 1 ម៉ោង'
+          multiple:
+            forms:
+              default: 'ម៉ោង'
+            template: 'ក្នុង {count} {unit}'
+        day:
+          single: 'ថ្ងៃស្អែក'
+          multiple:
+            forms:
+              default: 'ថ្ងៃ'
+            template: 'ក្នុង {count} {unit}'
+        week:
+          single: 'ក្នុង 1 សប្តាហ៍'
+          multiple:
+            forms:
+              default: 'សប្តាហ៍'
+            template: 'ក្នុង {count} {unit}'
+        month:
+          single: 'ក្នុង 1 ខែ'
+          multiple:
+            forms:
+              default: 'ខែ'
+            template: 'ក្នុង {count} {unit}'
+        year:
+          single: 'ក្នុង 1 ឆ្នាំ'
+          multiple:
+            forms:
+              default: 'ឆ្នាំ'
+            template: 'ក្នុង {count} {unit}'
+    duration:
+      zero: 'គ្មានពេលវេលា'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 មិល្លីវិនាទី'
+          words: 'មួយ មិល្លីវិនាទី'
+        multiple:
+          forms:
+            default: 'មិល្លីវិនាទី'
+      second:
+        single:
+          numeric: '1 វិនាទី'
+          words: 'មួយ វិនាទី'
+        multiple:
+          forms:
+            default: 'វិនាទី'
+      minute:
+        single:
+          numeric: '1 នាទី'
+          words: 'មួយ នាទី'
+        multiple:
+          forms:
+            default: 'នាទី'
+      hour:
+        single:
+          numeric: '1 ម៉ោង'
+          words: 'មួយ ម៉ោង'
+        multiple:
+          forms:
+            default: 'ម៉ោង'
+      day:
+        single:
+          numeric: '1 ថ្ងៃ'
+          words: 'មួយ ថ្ងៃ'
+        multiple:
+          forms:
+            default: 'ថ្ងៃ'
+      week:
+        single:
+          numeric: '1 សប្តាហ៍'
+          words: 'មួយ សប្តាហ៍'
+        multiple:
+          forms:
+            default: 'សប្តាហ៍'
+      month:
+        single:
+          numeric: '1 ខែ'
+          words: 'មួយ ខែ'
+        multiple:
+          forms:
+            default: 'ខែ'
+      year:
+        single:
+          numeric: '1 ឆ្នាំ'
+          words: 'មួយ ឆ្នាំ'
+        multiple:
+          forms:
+            default: 'ឆ្នាំ'
+    dataUnits:
+      bit:
+        forms:
+          default: 'ប៊ីត'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'បៃ'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'គីឡូបៃ'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'មេហ្គាបៃ'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'ជីហ្គាបៃ'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'តេរ៉ាបៃ'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'មិល្លីវិនាទី'
+      second:
+        symbol: 'វិនាទី'
+      minute:
+        symbol: 'នាទី'
+      hour:
+        symbol: 'ម៉ោង'
+      day:
+        symbol: 'ថ្ងៃ'
+      week:
+        symbol: 'សប្តាហ៍'
+      month:
+        symbol: 'ខែ'
+      year:
+        symbol: 'ឆ្នាំ'
+
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 999999999
+      zeroWord: 'សូន្យ'
+      minusWord: 'ដក'
+      negativeJoinWord: ' '
+      joinWord: ' '
+      scaleCountJoinWord: ' '
+      underHundredJoinWord: ''
+      defaultOrdinalSuffix: ''
+      matchingOrdinalSuffix: null
+      ordinalSuffixMatchCharacters: null
+      unitsMap:
+        - 'សូន្យ'
+        - 'មួយ'
+        - 'ពីរ'
+        - 'បី'
+        - 'បួន'
+        - 'ប្រាំ'
+        - 'ប្រាំមួយ'
+        - 'ប្រាំពីរ'
+        - 'ប្រាំបី'
+        - 'ប្រាំបួន'
+        - 'ដប់'
+        - 'ដប់មួយ'
+        - 'ដប់ពីរ'
+        - 'ដប់បី'
+        - 'ដប់បួន'
+        - 'ដប់ប្រាំ'
+        - 'ដប់ប្រាំមួយ'
+        - 'ដប់ប្រាំពីរ'
+        - 'ដប់ប្រាំបី'
+        - 'ដប់ប្រាំបួន'
+      tensMap:
+        - 'សូន្យ'
+        - 'ដប់'
+        - 'ម្ភៃ'
+        - 'សាមសិប'
+        - 'សែសិប'
+        - 'ហាសិប'
+        - 'ហុកសិប'
+        - 'ចិតសិប'
+        - 'ប៉ែតសិប'
+        - 'កៅសិប'
+      hundredsMap: []
+      subHundredMap: []
+      scales:
+        -
+          value: 1000000
+          name: 'លាន'
+        -
+          value: 100000
+          name: 'សែន'
+        -
+          value: 10000
+          name: 'ម៉ឺន'
+        -
+          value: 1000
+          name: 'ពាន់'
+        -
+          value: 100
+          name: 'រយ'
+      ordinal:
+        masculine:
+          defaultPrefix: 'ទី'
+          defaultSuffix: ''
+          exactReplacements:
+            0: 'ទីសូន្យ'
+            1: 'ទីមួយ'
+            2: 'ទីពីរ'
+            3: 'ទីបី'
+            10: 'ទីដប់'
+            21: 'ទីម្ភៃមួយ'
+            100: 'ទីមួយរយ'
+            101: 'ទីមួយរយ មួយ'
+            1000: 'ទីមួយពាន់'
+            1234: 'ទីមួយពាន់ ពីររយ សាមសិបបួន'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      allowTerminalOrdinalToken: true
+      allowInvariantIntegerInput: true
+      ordinalPrefixes:
+        - 'ទី'
+      ordinalAbbreviationSuffixes:
+        - 'ទី'
+        - ' ទី'
+      negativePrefixes:
+        - 'ដក '
+        - '-'
+      useHundredMultiplier: true
+      # Accept unseparated user input such as "បីរយ" and "បីពាន់"; generated output
+      # remains token-separated via scaleCountJoinWord.
+      gluedScaleSuffixes:
+        'រយ': 100
+        'ពាន់': 1000
+        'ម៉ឺន': 10000
+        'សែន': 100000
+        'លាន': 1000000
+      cardinalMap:
+        'សូន្យ': 0
+        'មួយ': 1
+        'ពីរ': 2
+        'បី': 3
+        'បួន': 4
+        'ប្រាំ': 5
+        'ប្រាំមួយ': 6
+        'ប្រាំពីរ': 7
+        'ប្រាំបី': 8
+        'ប្រាំបួន': 9
+        'ដប់': 10
+        'ដប់មួយ': 11
+        'ដប់ពីរ': 12
+        'ដប់បី': 13
+        'ដប់បួន': 14
+        'ដប់ប្រាំ': 15
+        'ដប់ប្រាំមួយ': 16
+        'ដប់ប្រាំពីរ': 17
+        'ដប់ប្រាំបី': 18
+        'ដប់ប្រាំបួន': 19
+        'ម្ភៃ': 20
+        'ម្ភៃមួយ': 21
+        'ម្ភៃពីរ': 22
+        'ម្ភៃបី': 23
+        'ម្ភៃបួន': 24
+        'ម្ភៃប្រាំ': 25
+        'ម្ភៃប្រាំមួយ': 26
+        'ម្ភៃប្រាំពីរ': 27
+        'ម្ភៃប្រាំបី': 28
+        'ម្ភៃប្រាំបួន': 29
+        'សាមសិប': 30
+        'សាមសិបមួយ': 31
+        'សាមសិបពីរ': 32
+        'សាមសិបបី': 33
+        'សាមសិបបួន': 34
+        'សាមសិបប្រាំ': 35
+        'សាមសិបប្រាំមួយ': 36
+        'សាមសិបប្រាំពីរ': 37
+        'សាមសិបប្រាំបី': 38
+        'សាមសិបប្រាំបួន': 39
+        'សែសិប': 40
+        'សែសិបមួយ': 41
+        'សែសិបពីរ': 42
+        'សែសិបបី': 43
+        'សែសិបបួន': 44
+        'សែសិបប្រាំ': 45
+        'សែសិបប្រាំមួយ': 46
+        'សែសិបប្រាំពីរ': 47
+        'សែសិបប្រាំបី': 48
+        'សែសិបប្រាំបួន': 49
+        'ហាសិប': 50
+        'ហាសិបមួយ': 51
+        'ហាសិបពីរ': 52
+        'ហាសិបបី': 53
+        'ហាសិបបួន': 54
+        'ហាសិបប្រាំ': 55
+        'ហាសិបប្រាំមួយ': 56
+        'ហាសិបប្រាំពីរ': 57
+        'ហាសិបប្រាំបី': 58
+        'ហាសិបប្រាំបួន': 59
+        'ហុកសិប': 60
+        'ហុកសិបមួយ': 61
+        'ហុកសិបពីរ': 62
+        'ហុកសិបបី': 63
+        'ហុកសិបបួន': 64
+        'ហុកសិបប្រាំ': 65
+        'ហុកសិបប្រាំមួយ': 66
+        'ហុកសិបប្រាំពីរ': 67
+        'ហុកសិបប្រាំបី': 68
+        'ហុកសិបប្រាំបួន': 69
+        'ចិតសិប': 70
+        'ចិតសិបមួយ': 71
+        'ចិតសិបពីរ': 72
+        'ចិតសិបបី': 73
+        'ចិតសិបបួន': 74
+        'ចិតសិបប្រាំ': 75
+        'ចិតសិបប្រាំមួយ': 76
+        'ចិតសិបប្រាំពីរ': 77
+        'ចិតសិបប្រាំបី': 78
+        'ចិតសិបប្រាំបួន': 79
+        'ប៉ែតសិប': 80
+        'ប៉ែតសិបមួយ': 81
+        'ប៉ែតសិបពីរ': 82
+        'ប៉ែតសិបបី': 83
+        'ប៉ែតសិបបួន': 84
+        'ប៉ែតសិបប្រាំ': 85
+        'ប៉ែតសិបប្រាំមួយ': 86
+        'ប៉ែតសិបប្រាំពីរ': 87
+        'ប៉ែតសិបប្រាំបី': 88
+        'ប៉ែតសិបប្រាំបួន': 89
+        'កៅសិប': 90
+        'កៅសិបមួយ': 91
+        'កៅសិបពីរ': 92
+        'កៅសិបបី': 93
+        'កៅសិបបួន': 94
+        'កៅសិបប្រាំ': 95
+        'កៅសិបប្រាំមួយ': 96
+        'កៅសិបប្រាំពីរ': 97
+        'កៅសិបប្រាំបី': 98
+        'កៅសិបប្រាំបួន': 99
+        'មួយរយ': 100
+        'មួយរយ មួយ': 101
+        'មួយរយ ប្រាំ': 105
+        'មួយរយ ម្ភៃមួយ': 121
+        'មួយពាន់': 1000
+        'មួយពាន់ មួយ': 1001
+        'មួយពាន់ ពីររយ សាមសិបបួន': 1234
+        'មួយម៉ឺន': 10000
+        'មួយសែន': 100000
+        'មួយលាន': 1000000
+        'មួយលាន មួយ': 1000001
+        'រយ': 100
+        'ពាន់': 1000
+        'ម៉ឺន': 10000
+        'សែន': 100000
+        'លាន': 1000000
+      ordinalMap:
+        'ទីសូន្យ': 0
+        'ទីមួយ': 1
+        'ទីពីរ': 2
+        'ទីបី': 3
+        'ទីដប់': 10
+        'ទីម្ភៃមួយ': 21
+        'ទីមួយរយ': 100
+        'ទីមួយរយ មួយ': 101
+        'ទីមួយពាន់': 1000
+        'ទីមួយពាន់ ពីររយ សាមសិបបួន': 1234
+
+    formatting:
+      decimalSeparator: '.'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: ''
+        defaultSuffix: 'ទី'
+    date:
+      pattern: 'd MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: 'd MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourSuffixSingular: 'ម៉ោង'
+    hourSuffixPlural: 'ម៉ោង'
+    minuteSuffixSingular: 'នាទី'
+    minuteSuffixPlural: 'នាទី'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+    earlyMorning: 'ព្រឹក'
+    morning: 'ព្រឹក'
+    afternoon: 'រសៀល'
+    evening: 'ល្ងាច'
+    night: 'យប់'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'ជើង'
+      - 'ជើងឦសាន'
+      - 'ឦសាន'
+      - 'កើតឦសាន'
+      - 'កើត'
+      - 'កើតអាគ្នេយ៍'
+      - 'អាគ្នេយ៍'
+      - 'ត្បូងអាគ្នេយ៍'
+      - 'ត្បូង'
+      - 'ត្បូងនិរតី'
+      - 'និរតី'
+      - 'លិចនិរតី'
+      - 'លិច'
+      - 'លិចពាយព្យ'
+      - 'ពាយព្យ'
+      - 'ជើងពាយព្យ'
+    short:
+      - 'ជ'
+      - 'ជឦ'
+      - 'ឦ'
+      - 'កឦ'
+      - 'ក'
+      - 'កអ'
+      - 'អ'
+      - 'តអ'
+      - 'ត'
+      - 'តន'
+      - 'ន'
+      - 'លន'
+      - 'ល'
+      - 'លព'
+      - 'ព'
+      - 'ជព'
+
+  calendar:
+    months:
+      - 'មករា'
+      - 'កុម្ភៈ'
+      - 'មីនា'
+      - 'មេសា'
+      - 'ឧសភា'
+      - 'មិថុនា'
+      - 'កក្កដា'
+      - 'សីហា'
+      - 'កញ្ញា'
+      - 'តុលា'
+      - 'វិច្ឆិកា'
+      - 'ធ្នូ'

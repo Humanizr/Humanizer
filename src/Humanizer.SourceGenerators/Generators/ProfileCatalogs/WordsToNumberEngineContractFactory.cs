@@ -198,6 +198,7 @@ public sealed partial class HumanizerSourceGenerator
                 RuleAssignment("ExactOrdinalMap", CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap")),
                 RuleAssignment("OrdinalScaleMap", CreateOptionalStringLongMapOrNull(root, "ordinalScaleMap")),
                 RuleAssignment("GluedOrdinalScaleSuffixes", CreateOptionalStringLongMapOrNull(root, "gluedOrdinalScaleSuffixes")),
+                RuleAssignment("GluedScaleSuffixes", CreateOptionalStringLongMapOrNull(root, "gluedScaleSuffixes")),
                 RuleAssignment("CompositeScaleMap", CreateOptionalStringLongMapOrNull(root, "compositeScaleMap")),
                 RuleAssignment("NormalizationProfile", "TokenMapNormalizationProfile." + ToEnumMemberName(GetRequiredString(root, "normalizationProfile"))),
                 RuleAssignment("NegativePrefixes", CreateOptionalStringArrayExpression(root, "negativePrefixes")),
