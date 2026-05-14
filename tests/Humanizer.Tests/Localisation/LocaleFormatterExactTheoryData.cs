@@ -182,6 +182,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, DateDayPluralExpectationRow> DateDayPluralCases => new()
     {
+        { "kn", new("2 ದಿನಗಳ ಹಿಂದೆ", "3 ದಿನಗಳ ಹಿಂದೆ", "4 ದಿನಗಳ ಹಿಂದೆ", "5 ದಿನಗಳ ಹಿಂದೆ", "11 ದಿನಗಳ ಹಿಂದೆ", "21 ದಿನಗಳ ಹಿಂದೆ", "2 ದಿನಗಳಲ್ಲಿ", "3 ದಿನಗಳಲ್ಲಿ", "4 ದಿನಗಳಲ್ಲಿ", "5 ದಿನಗಳಲ್ಲಿ", "11 ದಿನಗಳಲ್ಲಿ", "21 ದಿನಗಳಲ್ಲಿ") },
         { "am", new("ከ 2 ቀናት በፊት", "ከ 3 ቀናት በፊት", "ከ 4 ቀናት በፊት", "ከ 5 ቀናት በፊት", "ከ 11 ቀናት በፊት", "ከ 21 ቀናት በፊት", "ከ 2 ቀናት በኋላ", "ከ 3 ቀናት በኋላ", "ከ 4 ቀናት በኋላ", "ከ 5 ቀናት በኋላ", "ከ 11 ቀናት በኋላ", "ከ 21 ቀናት በኋላ") },
         { "te", new("2 రోజులు క్రితం", "3 రోజులు క్రితం", "4 రోజులు క్రితం", "5 రోజులు క్రితం", "11 రోజులు క్రితం", "21 రోజులు క్రితం", "2 రోజులు తర్వాత", "3 రోజులు తర్వాత", "4 రోజులు తర్వాత", "5 రోజులు తర్వాత", "11 రోజులు తర్వాత", "21 రోజులు తర్వాత") },
         { "sw", new("2 siku zilizopita", "3 siku zilizopita", "4 siku zilizopita", "5 siku zilizopita", "11 siku zilizopita", "21 siku zilizopita", "baada ya siku 2", "baada ya siku 3", "baada ya siku 4", "baada ya siku 5", "baada ya siku 11", "baada ya siku 21") },
@@ -259,6 +260,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
     {
+        { "kn", new("2 ವಾರಗಳು, 1 ದಿನ ಮತ್ತು 1 ಗಂಟೆ", "1 ದಿನ, 3 ನಿಮಿಷಗಳು ಮತ್ತು 4 ಸೆಕೆಂಡುಗಳು", "1 ದಿನ ಮತ್ತು 3 ನಿಮಿಷಗಳು") },
         { "am", new("2 ሳምንታት, 1 ቀን እና 1 ሰዓት", "1 ቀን, 3 ደቂቃዎች እና 4 ሰከንዶች", "1 ቀን እና 3 ደቂቃዎች") },
         { "te", new("2 వారాలు, 1 రోజు మరియు 1 గంట", "1 రోజు, 3 నిమిషాలు మరియు 4 సెకన్లు", "1 రోజు మరియు 3 నిమిషాలు") },
         { "sw", new("wiki 2, siku 1 na saa 1", "siku 1, dakika 3 na sekunde 4", "siku 1 na dakika 3") },
@@ -336,6 +338,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
     {
+        { "kn", new("ಮಿಲಿಸೆಕೆಂಡ್", "ಸೆಕೆಂಡ್", "ನಿಮಿಷ", "ಗಂಟೆ", "ದಿನ", "ವಾರ", "ತಿಂಗಳು", "ವರ್ಷ") },
         { "am", new("ሚሊሰከንድ", "ሰከንድ", "ደቂቃ", "ሰዓት", "ቀን", "ሳምንት", "ወር", "ዓመት") },
         { "te", new("మిల్లీసెకను", "సెకను", "నిమిషం", "గంట", "రోజు", "వారం", "నెల", "సంవత్సరం") },
         { "sw", new("ms", "sek", "dak", "saa", "sk", "wk", "mwez", "mwk") },
@@ -434,6 +437,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
     {
+        { "kn", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "am", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "te", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "sw", new("1 b", "2 B", "1.95 KB", "2048 KB") },
@@ -511,6 +515,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
     {
+        { "kn", new("1 ಬಿಟ್", "1 ಬೈಟ್", "2 ಬೈಟ್ಗಳು", "2 ಕಿಲೋಬೈಟ್ಗಳು", "2 ಮೆಗಾಬೈಟ್ಗಳು") },
         { "am", new("1 ቢት", "1 ባይት", "2 ባይቶች", "2 ኪሎባይቶች", "2 ሜጋባይቶች") },
         { "te", new("1 బిట్", "1 బైట్", "2 బైట్లు", "2 కిలోబైట్లు", "2 మెగాబైట్లు") },
         { "sw", new("1 biti", "1 baiti", "2 baiti", "2 kilobaiti", "2 megabaiti") },
@@ -588,6 +593,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
     {
+        { "kn", new("1 ಮತ್ತು 2", "1, 2 ಮತ್ತು 3", "1, 2, 3 ಮತ್ತು 4") },
         { "am", new("1 እና 2", "1, 2 እና 3", "1, 2, 3 እና 4") },
         { "te", new("1 మరియు 2", "1, 2 మరియు 3", "1, 2, 3 మరియు 4") },
         { "sw", new("1 na 2", "1, 2 na 3", "1, 2, 3 na 4") },
@@ -665,6 +671,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
     {
+        { "kn", new("ಉತ್ತರ", "ಉತ್ತರ-ಈಶಾನ್ಯ", "ಈಶಾನ್ಯ", "ಪೂರ್ವ-ಈಶಾನ್ಯ", "ಪೂರ್ವ", "ಪೂರ್ವ-ಆಗ್ನೇಯ", "ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ-ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ", "ದಕ್ಷಿಣ-ನೈರುತ್ಯ", "ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ-ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ", "ಪಶ್ಚಿಮ-ವಾಯುವ್ಯ", "ವಾಯುವ್ಯ", "ಉತ್ತರ-ವಾಯುವ್ಯ", "ಉತ್ತರ", "ಉತ್ತರ-ಈಶಾನ್ಯ", "ಈಶಾನ್ಯ", "ಪೂರ್ವ-ಈಶಾನ್ಯ", "ಪೂರ್ವ", "ಪೂರ್ವ-ಆಗ್ನೇಯ", "ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ-ಆಗ್ನೇಯ", "ದಕ್ಷಿಣ", "ದಕ್ಷಿಣ-ನೈರುತ್ಯ", "ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ-ನೈರುತ್ಯ", "ಪಶ್ಚಿಮ", "ಪಶ್ಚಿಮ-ವಾಯುವ್ಯ", "ವಾಯುವ್ಯ", "ಉತ್ತರ-ವಾಯುವ್ಯ") },
         { "am", new("ሰ", "ሰሰም", "ሰም", "ምሰም", "ም", "ምደም", "ደም", "ደደም", "ደ", "ደደምዕ", "ደምዕ", "ምዕደምዕ", "ምዕ", "ምዕሰምዕ", "ሰምዕ", "ሰሰምዕ", "ሰሜን", "ሰሜን-ሰሜን ምስራቅ", "ሰሜን ምስራቅ", "ምስራቅ-ሰሜን ምስራቅ", "ምስራቅ", "ምስራቅ-ደቡብ ምስራቅ", "ደቡብ ምስራቅ", "ደቡብ-ደቡብ ምስራቅ", "ደቡብ", "ደቡብ-ደቡብ ምዕራብ", "ደቡብ ምዕራብ", "ምዕራብ-ደቡብ ምዕራብ", "ምዕራብ", "ምዕራብ-ሰሜን ምዕራብ", "ሰሜን ምዕራብ", "ሰሜን-ሰሜን ምዕራብ") },
         { "te", new("ఉత్తరం", "ఉత్తర-ఈశాన్యం", "ఈశాన్యం", "తూర్పు-ఈశాన్యం", "తూర్పు", "తూర్పు-ఆగ్నేయం", "ఆగ్నేయం", "దక్షిణ-ఆగ్నేయం", "దక్షిణం", "దక్షిణ-నైరుతి", "నైరుతి", "పడమర-నైరుతి", "పడమర", "పడమర-వాయవ్యం", "వాయవ్యం", "ఉత్తర-వాయవ్యం", "ఉత్తరం", "ఉత్తర-ఈశాన్యం", "ఈశాన్యం", "తూర్పు-ఈశాన్యం", "తూర్పు", "తూర్పు-ఆగ్నేయం", "ఆగ్నేయం", "దక్షిణ-ఆగ్నేయం", "దక్షిణం", "దక్షిణ-నైరుతి", "నైరుతి", "పడమర-నైరుతి", "పడమర", "పడమర-వాయవ్యం", "వాయవ్యం", "ఉత్తర-వాయవ్యం") },
         { "sw", new("K", "KKM", "KM", "MKM", "M", "MKS", "KS", "KKS", "S", "KKG", "KG", "MKG", "G", "MKGz", "KGz", "KKGz", "kaskazini", "kaskazini-kaskazini mashariki", "kaskazini mashariki", "mashariki-kaskazini mashariki", "mashariki", "mashariki-kusini mashariki", "kusini mashariki", "kusini-kusini mashariki", "kusini", "kusini-kusini magharibi", "kusini magharibi", "magharibi-kusini magharibi", "magharibi", "magharibi-kaskazini magharibi", "kaskazini magharibi", "kaskazini-kaskazini magharibi") },
@@ -742,6 +749,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
     {
+        { "kn", new("ಉತ್ತರ", "ಪೂರ್ವ", "ದಕ್ಷಿಣ", "ಪಶ್ಚಿಮ") },
         { "am", new("ሰ", "ም", "ደ", "ምዕ") },
         { "te", new("ఉత్తరం", "తూర్పు", "దక్షిణం", "పడమర") },
         { "sw", new("K", "M", "S", "G") },
