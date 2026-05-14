@@ -9,8 +9,9 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     // Match the longest candidate first so shorter tokens do not steal the prefix of a glued
     // compound before the parser has a chance to recognize the full token.
     readonly string[] cardinalTokenOrder = profile.CardinalMap.Keys
-        .Concat(profile.IgnoredTokens)
-        .Distinct(StringComparer.Ordinal)
+        .OrderByDescending(static key => key.Length)
+        .ToArray();
+    readonly string[] ignoredTokenOrder = profile.IgnoredTokens
         .OrderByDescending(static key => key.Length)
         .ToArray();
 
@@ -233,6 +234,11 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
 
             if (!TryReadToken(words, ref position, out var token))
             {
+                if (TryReadIgnoredToken(words, ref position))
+                {
+                    continue;
+                }
+
                 // Preserve the raw fragment so the caller sees the actual unparsed word instead of
                 // a synthetic token boundary.
                 var start = position;
@@ -243,11 +249,6 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
 
                 unrecognizedWord = words[start..position];
                 return false;
-            }
-
-            if (ShouldIgnore(token))
-            {
-                continue;
             }
 
             if (!profile.CardinalMap.TryGetValue(token, out var numeric))
@@ -346,16 +347,23 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     }
 
     /// <summary>
-    /// Returns <c>true</c> when a token is configured to be ignored during parsing.
+    /// Reads and skips the next ignored token without treating it as a cardinal value token.
     /// </summary>
-    /// <param name="token">The token to inspect.</param>
-    /// <returns><c>true</c> if the token should be skipped; otherwise, <c>false</c>.</returns>
-    bool ShouldIgnore(string token)
+    /// <param name="words">The normalized phrase.</param>
+    /// <param name="position">The current read position within <paramref name="words"/>.</param>
+    /// <returns><c>true</c> if an ignored token was matched; otherwise, <c>false</c>.</returns>
+    bool TryReadIgnoredToken(string words, ref int position)
     {
-        foreach (var ignoredToken in profile.IgnoredTokens)
+        foreach (var candidate in ignoredTokenOrder)
         {
-            if (token == ignoredToken)
+            if (position + candidate.Length > words.Length)
             {
+                continue;
+            }
+
+            if (words.AsSpan(position, candidate.Length).SequenceEqual(candidate.AsSpan()))
+            {
+                position += candidate.Length;
                 return true;
             }
         }
