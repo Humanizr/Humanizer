@@ -13,6 +13,7 @@ static class LocaleCoverageData
     // Representative non-first-of-month date sample.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2022, 1, 25, "25. jaanuar 2022") },
         { "sq", new(2022, 1, 25, "25 janar 2022") },
         { "mk", new(2022, 1, 25, "25 јануари 2022 г.") },
 
@@ -116,6 +117,7 @@ static class LocaleCoverageData
     // First-of-month sample where many locales change the day form.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015January1ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2015, 1, 1, "1. jaanuar 2015") },
         { "sq", new(2015, 1, 1, "1 janar 2015") },
         { "mk", new(2015, 1, 1, "1 јануари 2015 г.") },
 
@@ -219,6 +221,7 @@ static class LocaleCoverageData
     // Early-month sample used to catch plain numeric-day formatting.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015February3ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2015, 2, 3, "3. veebruar 2015") },
         { "sq", new(2015, 2, 3, "3 shkurt 2015") },
         { "mk", new(2015, 2, 3, "3 февруари 2015 г.") },
 
@@ -321,6 +324,7 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020February29ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2020, 2, 29, "29. veebruar 2020") },
         { "sq", new(2020, 2, 29, "29 shkurt 2020") },
 
         { "be", new(2020, 2, 29, "29 лютага 2020") },
@@ -345,6 +349,7 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015September4ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2015, 9, 4, "4. september 2015") },
         { "sq", new(2015, 9, 4, "4 shtator 2015") },
 
         { "be", new(2015, 9, 4, "4 верасня 2015") },
@@ -368,6 +373,7 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords1979November7ExpectationTheoryData { get; } = new()
     {
+            { "et", new(1979, 11, 7, "7. november 1979") },
         { "sq", new(1979, 11, 7, "7 nëntor 1979") },
 
         { "be", new(1979, 11, 7, "7 лістапада 1979") },
@@ -391,6 +397,7 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020March2ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2020, 3, 2, "2. märts 2020") },
         { "sq", new(2020, 3, 2, "2 mars 2020") },
 
         { "be", new(2020, 3, 2, "2 сакавіка 2020") },
@@ -413,6 +420,7 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2021October31ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2021, 10, 31, "31. oktoober 2021") },
         { "sq", new(2021, 10, 31, "31 tetor 2021") },
 
         { "be", new(2021, 10, 31, "31 кастрычніка 2021") },
@@ -436,6 +444,7 @@ static class LocaleCoverageData
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2024December31ExpectationTheoryData { get; } = new()
     {
+            { "et", new(2024, 12, 31, "31. detsember 2024") },
         { "sq", new(2024, 12, 31, "31 dhjetor 2024") },
 
         { "be", new(2024, 12, 31, "31 снежня 2024") },
@@ -464,6 +473,7 @@ static class LocaleCoverageData
     // Unrounded afternoon clock sample.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323ExpectationTheoryData { get; } = new()
     {
+            { "et", new(13, 23, "13:23") },
         { "sq", new(13, 23, "ora një e njëzet e tre pasdite") },
         { "mk", new(13, 23, "тринаесет часот и дваесет и три минути") },
 
@@ -567,6 +577,7 @@ static class LocaleCoverageData
     // Same afternoon clock sample rounded to the nearest five minutes.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation1323RoundedExpectationTheoryData { get; } = new()
     {
+            { "et", new(13, 23, "13:25") },
         { "sq", new(13, 23, "ora një e njëzet e pesë pasdite") },
         { "mk", new(13, 23, "тринаесет часот и дваесет и пет минути") },
 
@@ -670,6 +681,7 @@ static class LocaleCoverageData
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotation0105ExpectationTheoryData { get; } = new()
     {
+            { "et", new(1, 5, "1:05") },
         { "sq", new(1, 5, "ora një e pesë herët në mëngjes") },
         { "mk", new(1, 5, "еден часот и пет минути") },
 
@@ -1116,6 +1128,7 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> FormatterExpectationTheoryData =>
         new()
         {
+            { "et", "eile", "2 päeva" },
             { "sq", "dje", "2 ditë" },
         { "mk", "вчера", "2 дена" },
 
@@ -1219,6 +1232,7 @@ static class LocaleCoverageData
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
         new()
         {
+            { "et", "1 ja 2", "1, 2 ja 3" },
             { "sq", "1 dhe 2", "1, 2 dhe 3" },
         { "mk", "1 и 2", "1, 2 и 3" },
 
@@ -1322,6 +1336,7 @@ static class LocaleCoverageData
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
         new()
         {
+            { "et", 21, "kahekümne esimene" },
             { "sq", 1, "e parë" },
         { "mk", 21, "дваесет и прва" },
 
@@ -1425,6 +1440,7 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
         new()
         {
+            { "et", 21L, "kakskümmend üks" },
             { "sq", 1, "një" },
         { "mk", 21L, "дваесет и еден" },
 
@@ -1564,6 +1580,7 @@ static class LocaleCoverageData
     public static TheoryData<string, long, string> WordsToNumberExpectationTheoryData =>
         new()
         {
+            { "et", 21L, "kakskümmend üks" },
             { "sq", 21, "njëzet e një" },
         { "mk", 21, "дваесет и еден" },
 

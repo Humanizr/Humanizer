@@ -182,6 +182,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, DateDayPluralExpectationRow> DateDayPluralCases => new()
     {
+            { "et", new("2 päeva tagasi", "3 päeva tagasi", "4 päeva tagasi", "5 päeva tagasi", "11 päeva tagasi", "21 päeva tagasi", "2 päeva pärast", "3 päeva pärast", "4 päeva pärast", "5 päeva pärast", "11 päeva pärast", "21 päeva pärast") },
             { "sq", new("2 ditë më parë", "3 ditë më parë", "4 ditë më parë", "5 ditë më parë", "11 ditë më parë", "21 ditë më parë", "pas 2 ditësh", "pas 3 ditësh", "pas 4 ditësh", "pas 5 ditësh", "pas 11 ditësh", "pas 21 ditësh") },
         { "mk", new("пред 2 дена", "пред 3 дена", "пред 4 дена", "пред 5 дена", "пред 11 дена", "пред 21 дена", "за 2 дена", "за 3 дена", "за 4 дена", "за 5 дена", "за 11 дена", "за 21 дена") },
 
@@ -285,6 +286,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
     {
+            { "et", new("2 nädalat, päev ja tund", "päev, 3 minutit ja 4 sekundit", "päev ja 3 minutit") },
             { "sq", new("2 javë, 1 ditë dhe 1 orë", "1 ditë, 3 minuta dhe 4 sekonda", "1 ditë dhe 3 minuta") },
         { "mk", new("2 недели, 1 ден и 1 час", "1 ден, 3 минути и 4 секунди", "1 ден и 3 минути") },
 
@@ -388,6 +390,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
     {
+            { "et", new("ms", "s", "min", "h", "p", "nädal", "kuu", "a") },
             { "sq", new("ms", "s", "min", "orë", "ditë", "javë", "muaj", "vit") },
         { "mk", new("мс", "сек.", "мин.", "ч.", "д.", "нед.", "мес.", "г.") },
 
@@ -512,6 +515,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
     {
+            { "et", new("1 b", "2 B", "1,95 KB", "2048 KB") },
             { "sq", new("1 bit", "2 B", "1,95 KB", "2048 KB") },
         { "mk", new("1 b", "2 B", "1,95 KB", "2048 KB") },
 
@@ -615,6 +619,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
     {
+            { "et", new("1 bitt", "1 bait", "2 baiti", "2 kilobaiti", "2 megabaiti") },
             { "sq", new("1 bit", "1 bajt", "2 bajt", "2 kilobajt", "2 megabajt") },
         { "mk", new("1 бит", "1 бајт", "2 бајти", "2 килобајти", "2 мегабајти") },
 
@@ -718,6 +723,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
     {
+            { "et", new("1 ja 2", "1, 2 ja 3", "1, 2, 3 ja 4") },
             { "sq", new("1 dhe 2", "1, 2 dhe 3", "1, 2, 3 dhe 4") },
         { "mk", new("1 и 2", "1, 2 и 3", "1, 2, 3 и 4") },
 
@@ -821,6 +827,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
     {
+            { "et", new("N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "põhi", "põhjakirre", "kirre", "idakirre", "ida", "idakagu", "kagu", "lõunakagu", "lõuna", "lõunaedel", "edel", "lääneedel", "lääs", "läänelood", "loode", "põhjalood") },
             { "sq", new("V", "VVL", "VL", "LVL", "L", "LJL", "JL", "JJL", "J", "JJP", "JP", "PJP", "P", "PVP", "VP", "VVP", "veri", "veri-verilindje", "verilindje", "lindje-verilindje", "lindje", "lindje-juglindje", "juglindje", "jug-juglindje", "jug", "jug-jugperëndim", "jugperëndim", "perëndim-jugperëndim", "perëndim", "perëndim-veriperëndim", "veriperëndim", "veri-veriperëndim") },
         { "mk", new("С", "ССИ", "СИ", "ИСИ", "И", "ИЈИ", "ЈИ", "ЈЈИ", "Ј", "ЈЈЗ", "ЈЗ", "ЗЈЗ", "З", "ЗСЗ", "СЗ", "ССЗ", "север", "север-североисток", "североисток", "исток-североисток", "исток", "исток-југоисток", "југоисток", "југ-југоисток", "југ", "југ-југозапад", "југозапад", "запад-југозапад", "запад", "запад-северозапад", "северозапад", "север-северозапад") },
 
@@ -926,6 +933,7 @@ public static class LocaleFormatterExactTheoryData
 
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
     {
+            { "et", new("N", "E", "S", "W") },
             { "sq", new("V", "L", "J", "P") },
         { "mk", new("С", "И", "Ј", "З") },
 

@@ -5,6 +5,8 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData =>
         new()
         {
+            { "et", 1, "1." },
+            { "et", 21, "21." },
             { "sq", 0, "0-të" },
             { "sq", 1, "1-rë" },
             { "sq", 2, "2-të" },
@@ -747,6 +749,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
         new()
         {
+            { "et", 21, GrammaticalGender.Masculine, "21." },
+            { "et", 21, GrammaticalGender.Feminine, "21." },
+            { "et", 21, GrammaticalGender.Neuter, "21." },
             { "sq", 1, GrammaticalGender.Masculine, "1-rë" },
             { "sq", 1, GrammaticalGender.Feminine, "1-rë" },
             { "sq", 1, GrammaticalGender.Neuter, "1-rë" },
@@ -3695,6 +3700,7 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
         new()
         {
+            { "et", "21", "21." },
             { "sq", "1", "1-rë" },
         { "mk", "1", "1." },
         { "mk", "21", "21." },
@@ -4387,6 +4393,11 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
         new()
         {
+#if NET48
+            { "et", -21, "-21." },
+#else
+            { "et", -21, "−21." },
+#endif
             { "sq", -1, "-1-rë" },
         { "mk", -1, "-1." },
 
@@ -4785,6 +4796,7 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
         new()
         {
+            { "et", 21, WordForm.Normal, "21." },
             { "sq", 1, WordForm.Abbreviation, "1-rë" },
         { "mk", 1, WordForm.Abbreviation, "1." },
 
@@ -5390,6 +5402,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
         new()
         {
+            { "et", 21, GrammaticalGender.Masculine, WordForm.Normal, "21." },
+            { "et", 21, GrammaticalGender.Feminine, WordForm.Normal, "21." },
+            { "et", 21, GrammaticalGender.Neuter, WordForm.Normal, "21." },
             { "sq", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1-rë" },
             { "sq", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1-rë" },
             { "sq", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1-rë" },
@@ -7086,6 +7101,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
         new()
         {
+            { "et", "21", GrammaticalGender.Masculine, "21." },
+            { "et", "21", GrammaticalGender.Feminine, "21." },
+            { "et", "21", GrammaticalGender.Neuter, "21." },
             { "sq", "1", GrammaticalGender.Masculine, "1-rë" },
             { "sq", "1", GrammaticalGender.Feminine, "1-rë" },
             { "sq", "1", GrammaticalGender.Neuter, "1-rë" },
@@ -9799,6 +9817,9 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
         new()
         {
+            { "et", 21, GrammaticalGender.Masculine, "21." },
+            { "et", 21, GrammaticalGender.Feminine, "21." },
+            { "et", 21, GrammaticalGender.Neuter, "21." },
             { "sq", 1, GrammaticalGender.Masculine, "1-rë" },
             { "sq", 1, GrammaticalGender.Feminine, "1-rë" },
             { "sq", 1, GrammaticalGender.Neuter, "1-rë" },
