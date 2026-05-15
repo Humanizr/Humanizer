@@ -35,7 +35,46 @@ public class JoinedScaleNumberToWordsConverterTests
         Assert.Equal(expected, converter.Convert(number));
     }
 
-    static JoinedScaleNumberToWordsProfile CreateProfile(JoinedScale[] scales, string[] hundredsMap, string[] hundredsMapWithRemainder) =>
+    [Fact]
+    public void RequireOrdinalExceptionDisablesCompoundOrdinalFallback()
+    {
+        var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
+            [],
+            ["", "hundred"],
+            [],
+            requireOrdinalException: true,
+            compoundOrdinalRemainder: 1,
+            compoundOrdinalWord: "first"));
+
+        Assert.Throws<NotImplementedException>(() => converter.ConvertToOrdinal(21));
+    }
+
+    [Fact]
+    public void RequireOrdinalExceptionDisablesGenderedOrdinalFallbackButKeepsExactReplacements()
+    {
+        var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
+            [],
+            ["", "hundred"],
+            [],
+            requireOrdinalException: true,
+            ordinal: new JoinedScaleOrdinalProfile(
+                new("", "th", new Dictionary<int, string> { [1] = "first" }.ToFrozenDictionary()),
+                null,
+                null,
+                GrammaticalGender.Masculine)));
+
+        Assert.Equal("first", converter.ConvertToOrdinal(1));
+        Assert.Throws<NotImplementedException>(() => converter.ConvertToOrdinal(2));
+    }
+
+    static JoinedScaleNumberToWordsProfile CreateProfile(
+        JoinedScale[] scales,
+        string[] hundredsMap,
+        string[] hundredsMapWithRemainder,
+        bool requireOrdinalException = false,
+        JoinedScaleOrdinalProfile? ordinal = null,
+        int? compoundOrdinalRemainder = null,
+        string? compoundOrdinalWord = null) =>
         new(
             2_000_001,
             "zero",
@@ -55,7 +94,11 @@ public class JoinedScaleNumberToWordsConverterTests
             CreateSubHundredMap(),
             FrozenDictionary<int, string>.Empty,
             FrozenDictionary<int, string>.Empty,
-            scales);
+            scales,
+            requireOrdinalException: requireOrdinalException,
+            ordinal: ordinal,
+            compoundOrdinalRemainder: compoundOrdinalRemainder,
+            compoundOrdinalWord: compoundOrdinalWord);
 
     static string[] CreateSubHundredMap()
     {

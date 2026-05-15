@@ -95,6 +95,16 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
     {
         if (profile.Ordinal is not null)
         {
+            if (TryConvertToGenderedExactOrdinal(number, gender, out var exactGenderedOrdinal))
+            {
+                return exactGenderedOrdinal;
+            }
+
+            if (profile.RequireOrdinalException)
+            {
+                throw new NotImplementedException();
+            }
+
             return ConvertToGenderedOrdinal(number, gender);
         }
 
@@ -106,6 +116,11 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             return exactOrdinal;
         }
 
+        if (profile.RequireOrdinalException)
+        {
+            throw new NotImplementedException();
+        }
+
         // Some locales only use a compound ordinal for a specific trailing digit. The exclusion
         // set protects hand-authored exceptions from being dragged into that shortcut.
         if (profile.CompoundOrdinalRemainder is not null &&
@@ -115,11 +130,6 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             !profile.CompoundOrdinalExcludedValues.Contains(number))
         {
             return $"{Convert(number / 10 * 10, gender)}{profile.JoinWord}{profile.CompoundOrdinalWord}";
-        }
-
-        if (profile.RequireOrdinalException)
-        {
-            throw new NotImplementedException();
         }
 
         var words = Convert(number, gender);
@@ -144,24 +154,40 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 
     string ConvertToGenderedOrdinal(int number, GrammaticalGender gender)
     {
+        if (TryConvertToGenderedExactOrdinal(number, gender, out var exactOrdinal))
+        {
+            return exactOrdinal;
+        }
+
+        var block = profile.Ordinal!.Resolve(gender);
+        if (number < 0)
+        {
+            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+            return profile.MinusWord + profile.NegativeJoinWord + FormatGenderedOrdinalBody(magnitude, gender, block);
+        }
+
+        return FormatGenderedOrdinalBody(number, gender, block);
+    }
+
+    bool TryConvertToGenderedExactOrdinal(int number, GrammaticalGender gender, [NotNullWhen(true)] out string? exactOrdinal)
+    {
         var block = profile.Ordinal!.Resolve(gender);
         if (number < 0)
         {
             var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
             if (magnitude <= int.MaxValue && block.ExactReplacements.TryGetValue((int)magnitude, out var negativeExact))
             {
-                return profile.MinusWord + profile.NegativeJoinWord + negativeExact;
+                exactOrdinal = profile.MinusWord + profile.NegativeJoinWord + negativeExact;
+                return true;
             }
-
-            return profile.MinusWord + profile.NegativeJoinWord + FormatGenderedOrdinalBody(magnitude, gender, block);
         }
-
-        if (block.ExactReplacements.TryGetValue(number, out var exactOrdinal))
+        else if (block.ExactReplacements.TryGetValue(number, out exactOrdinal))
         {
-            return exactOrdinal;
+            return true;
         }
 
-        return FormatGenderedOrdinalBody(number, gender, block);
+        exactOrdinal = null;
+        return false;
     }
 
     string FormatGenderedOrdinalBody(long number, GrammaticalGender gender, JoinedScaleGenderOrdinalBlock block)

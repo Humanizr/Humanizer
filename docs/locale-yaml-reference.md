@@ -1724,8 +1724,9 @@ Fields:
   - `pluralNameWithRemainder` (optional)
   - `omitOneWhenSingular` (optional)
 - `ordinalExceptions`
+- `requireOrdinalException`: optional boolean. When `true`, `ToOrdinalWords` only accepts exact ordinal replacements and throws `NotImplementedException` for non-exact inputs instead of synthesizing an ordinal through compound, default-suffix, or gendered fallback rules. Use this for locales whose authored ordinal coverage is intentionally finite and should not silently return cardinal-derived words.
 - `compoundOrdinalExcludedValues`
-- `ordinal`: optional gendered word-ordinal profile. When present, it overrides the legacy `defaultOrdinalSuffix`/`ordinalExceptions` path for `ToOrdinalWords(number, gender, culture)`.
+- `ordinal`: optional gendered word-ordinal profile. When present, it overrides the legacy `defaultOrdinalSuffix`/`ordinalExceptions` path for `ToOrdinalWords(number, gender, culture)`. `requireOrdinalException` still permits authored `exactReplacements` but disables the profile's default prefix/suffix fallback.
   - `masculine`: gender block with `defaultSuffix` and optional `exactReplacements`.
   - `feminine`: optional gender block with the same shape as `masculine`.
   - `neuter`: optional gender block with the same shape as `masculine`.
