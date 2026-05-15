@@ -41,6 +41,18 @@ public class LinkedVigesimalNumberToWordsConverterTests
         Assert.Equal(expected, converter.Convert(words));
     }
 
+    [Fact]
+    public void WordsToNumberMatchesLongerTerminalRemainderJoinerBeforePrefix()
+    {
+        var converter = new LinkedVigesimalWordsToNumberConverter(new(
+            CreateWords(),
+            CreateScales(),
+            "a",
+            terminalRemainderAlternateJoiner: "a plus"));
+
+        Assert.Equal(21, converter.Convert("twenty-r a plus apple"));
+    }
+
     static LinkedVigesimalNumberToWordsProfile CreateNumberProfile(
         string terminalRemainderAlternateJoiner = "",
         string terminalRemainderAlternateJoinerInitials = "") =>

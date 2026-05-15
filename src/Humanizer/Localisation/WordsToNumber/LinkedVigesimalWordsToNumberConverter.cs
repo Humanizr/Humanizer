@@ -472,6 +472,7 @@ internal sealed class LinkedVigesimalWordsToNumberProfile
         new[] { terminalRemainderJoiner, terminalRemainderAlternateJoiner }
             .Select(Tokenize)
             .Where(static tokens => tokens.Length > 0)
+            .OrderByDescending(static tokens => tokens.Length)
             .ToArray();
 
     static string[] Tokenize(string value) =>
