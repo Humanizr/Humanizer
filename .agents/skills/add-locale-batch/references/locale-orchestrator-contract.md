@@ -1,75 +1,41 @@
 # Locale Orchestrator Contract
 
-A locale orchestrator owns exactly one locale worktree and branch. It implements or finishes locale parity using `$add-locale` and reports compact status to the parent.
+A locale orchestrator owns one locale worktree, branch, and PR. It implements or finishes locale parity with `$add-locale` and reports compact status to the parent.
 
-## Required Startup
+## Startup
 
-1. Confirm current directory is the assigned worktree.
-2. Confirm current branch is the assigned branch.
-3. Read repo instructions and `$add-locale`.
-4. Read `.agents/skills/add-locale/references/goal-template.md`.
-5. Set a locale-specific goal from the template using the assigned culture code/name and worktree/PR context.
+1. Confirm CWD is the assigned worktree and HEAD is the assigned branch.
+2. Read repo instructions and `$add-locale`.
+3. Read `.agents/skills/add-locale/references/goal-template.md`.
+4. Set a locale-specific goal using the assigned culture code/name and worktree/PR context.
 
-## Scope Boundary
+## Scope
 
 Allowed:
 
 - Assigned locale YAML/tests/docs/matrix entries.
-- Shared generator/runtime/schema changes only when explicitly assigned by the parent or when the agent stops and gets approval for a shared strategy.
-- PR description updates, review-thread resolution, CI diagnosis, and branch pushes for its assigned PR.
+- Assigned PR description, pushes, review-thread resolution, CI diagnosis, merge cleanup.
+- Shared generator/runtime/schema edits only after parent approval or explicit assignment.
 
 Forbidden:
 
-- Editing the main checkout.
-- Editing sibling worktrees.
-- Creating draft PRs unless policy changes.
-- Committing artifacts with full local filesystem paths.
-- Declaring review comments or routine CI failures as blockers without an attempted diagnosis/fix.
+- Editing main or sibling worktrees.
+- Draft PRs unless policy changes.
+- Committed full local paths.
+- Treating routine review comments or code-related CI failures as blockers without diagnosis/fix.
 
-## Required JSON Status
+## Reporting
 
-Report this shape on progress and final output:
+Report one `LocaleStatus` entry as defined in `batch-state.md`. Keep output JSON-first; include failed logs only, not passing test output.
 
-```json
-{
-  "locale": "cy",
-  "name": "Welsh",
-  "worktree": "../Humanizer-locale-cy",
-  "branch": "feat-cy",
-  "pr": 1770,
-  "head": "4bca9264",
-  "phase": "babysit",
-  "validation": {
-    "sourceGeneratorsNet10": "pass",
-    "humanizerNet8": "pass",
-    "humanizerNet10": "pass",
-    "humanizerNet11": "pass",
-    "pack": "pass",
-    "format": "pass"
-  },
-  "review": {
-    "decision": "APPROVED",
-    "unresolvedThreads": 0
-  },
-  "checks": "pending",
-  "mergeable": "UNKNOWN",
-  "merged": false,
-  "mergeCommit": null,
-  "worktreeCleaned": false,
-  "blocker": null
-}
-```
+## Stop and report
 
-Use `"not-run"`, `"pass"`, `"fail"`, or `"not-applicable"` for validation entries. Include detailed logs only for failures.
+Stop for parent coordination when:
 
-## Stop Conditions
+- Work needs a shared generator/runtime/schema strategy also needed by another active locale.
+- Rebase/conflict resolution risks discarding another locale/shared change.
+- GitHub permissions block push, PR creation, thread resolution, or merge.
+- CI is repeatedly infrastructure-failing after diagnosis/retry.
+- User policy changes.
 
-Stop and report to the parent when:
-
-- The work needs a shared generator/runtime/schema strategy also needed by another active locale.
-- A rebase or merge conflict risks discarding another locale/shared change.
-- GitHub permissions prevent push, review-thread resolution, PR creation, or merge.
-- CI fails repeatedly for infrastructure reasons after reasonable retry/diagnosis.
-- The user policy changes.
-
-Do not stop merely because there are review comments or code-related CI failures; address them.
+Do not stop merely because review comments or branch-caused CI failures exist; address them.

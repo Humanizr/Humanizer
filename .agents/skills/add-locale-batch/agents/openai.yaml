@@ -1,4 +1,4 @@
 interface:
   display_name: "Add Locale Batch"
   short_description: "Coordinate multi-locale Humanizer PR batches"
-  default_prompt: "Use $add-locale-batch to orchestrate a batch of Humanizer locale parity work across isolated worktrees, PRs, CI, review, merges, and cleanup."
+  default_prompt: "Use $add-locale-batch to coordinate Humanizer locale parity PRs across isolated worktrees."

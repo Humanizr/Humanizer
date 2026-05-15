@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh compact GitHub PR state for a Humanizer locale batch status file.
-
-Input status shape is a JSON object keyed by locale code. Entries with a `pr`
-number are updated with PR metadata, unresolved review-thread count, and compact
-check state. The script prints the updated JSON and optionally writes it back.
-"""
+"""Refresh compact GitHub PR state in a locale batch status JSON file."""
 
 from __future__ import annotations
 
@@ -99,9 +94,9 @@ def refresh_entry(repo: str, entry: dict[str, Any]) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--status", required=True, help="Path to locale-batch-status.json")
-    parser.add_argument("--repo", default="Humanizr/Humanizer", help="GitHub repo, owner/name")
-    parser.add_argument("--write", action="store_true", help="Write refreshed JSON back to --status")
+    parser.add_argument("--status", required=True)
+    parser.add_argument("--repo", default="Humanizr/Humanizer")
+    parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
     path = Path(args.status)
