@@ -245,6 +245,7 @@ public static class LocaleNumberOverloadTheoryData
         { "ky", 1001001L, "бир миллион миң бир" },
         { "ky", 1001000001L, "бир миллиард бир миллион бир" },
         { "ky", 4325010007018L, "төрт триллион үч жүз жыйырма беш миллиард он миллион жети миң он сегиз" },
+        { "gl", 1000001L, "un millón un" },
 };
 
     public static TheoryData<string, long, string> WordFormCases => new()
@@ -489,6 +490,7 @@ public static class LocaleNumberOverloadTheoryData
         { "ky", 1001001L, "бир миллион миң бир" },
         { "ky", 1001000001L, "бир миллиард бир миллион бир" },
         { "ky", 4325010007018L, "төрт триллион үч жүз жыйырма беш миллиард он миллион жети миң он сегиз" },
+        { "gl", 1000001L, "un millón un" },
 };
 
     public static TheoryData<string, long, string> GenderCases => new()
@@ -733,6 +735,7 @@ public static class LocaleNumberOverloadTheoryData
         { "ky", 1001001L, "бир миллион миң бир" },
         { "ky", 1001000001L, "бир миллиард бир миллион бир" },
         { "ky", 4325010007018L, "төрт триллион үч жүз жыйырма беш миллиард он миллион жети миң он сегиз" },
+        { "gl", 221L, "dúascentas vinte e unha" },
 };
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
@@ -977,6 +980,7 @@ public static class LocaleNumberOverloadTheoryData
         { "ky", 1001001L, "бир миллион миң бир" },
         { "ky", 1001000001L, "бир миллиард бир миллион бир" },
         { "ky", 4325010007018L, "төрт триллион үч жүз жыйырма беш миллиард он миллион жети миң он сегиз" },
+        { "gl", 221L, "dúascentas vinte e unha" },
 };
 
 }
