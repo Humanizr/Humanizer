@@ -11,18 +11,34 @@ from pathlib import Path
 from typing import Any
 
 
-def run_json(args: list[str]) -> Any:
-    completed = subprocess.run(args, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+GH_TIMEOUT_SECONDS = 30
+
+
+def run_gh(args: list[str]) -> subprocess.CompletedProcess[str]:
+    try:
+        completed = subprocess.run(
+            args,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=GH_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise RuntimeError(f"command timed out after {GH_TIMEOUT_SECONDS}s: {' '.join(args)}") from exc
+
     if completed.returncode != 0:
-        raise RuntimeError(f"command failed: {' '.join(args)}\n{completed.stderr.strip()}")
-    return json.loads(completed.stdout or "null")
+        output = (completed.stdout + completed.stderr).strip()
+        raise RuntimeError(f"command failed: {' '.join(args)}\n{output}")
+
+    return completed
+
+
+def run_json(args: list[str]) -> Any:
+    return json.loads(run_gh(args).stdout or "null")
 
 
 def run_text(args: list[str]) -> str:
-    completed = subprocess.run(args, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if completed.returncode != 0:
-        return completed.stdout + completed.stderr
-    return completed.stdout
+    return run_gh(args).stdout
 
 
 def unresolved_threads(repo: str, pr: int) -> int:
