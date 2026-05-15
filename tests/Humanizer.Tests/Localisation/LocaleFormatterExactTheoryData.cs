@@ -280,6 +280,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("2 хоногийн өмнө", "3 хоногийн өмнө", "4 хоногийн өмнө", "5 хоногийн өмнө", "11 хоногийн өмнө", "21 хоногийн өмнө", "2 хоногийн дараа", "3 хоногийн дараа", "4 хоногийн дараа", "5 хоногийн дараа", "11 хоногийн дараа", "21 хоногийн дараа") },
         { "ky", new("2 күн мурун", "3 күн мурун", "4 күн мурун", "5 күн мурун", "11 күн мурун", "21 күн мурун", "2 күндөн кийин", "3 күндөн кийин", "4 күндөн кийин", "5 күндөн кийин", "11 күндөн кийин", "21 күндөн кийин") },
         { "gl", new("hai 2 días", "hai 3 días", "hai 4 días", "hai 5 días", "hai 11 días", "hai 21 días", "dentro de 2 días", "dentro de 3 días", "dentro de 4 días", "dentro de 5 días", "dentro de 11 días", "dentro de 21 días") },
+        { "ga", new("2 lá ó shin", "3 lá ó shin", "4 lá ó shin", "5 lá ó shin", "11 lá ó shin", "21 lá ó shin", "i gceann 2 lá", "i gceann 3 lá", "i gceann 4 lá", "i gceann 5 lá", "i gceann 11 lá", "i gceann 21 lá") },
 };
 
     public static TheoryData<string, MultiPartTimeSpanExpectationRow> MultiPartTimeSpanCases => new()
@@ -382,6 +383,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("2 долоо хоног, 1 өдөр болон 1 цаг", "1 өдөр, 3 минут болон 4 секунд", "1 өдөр болон 3 минут") },
         { "ky", new("2 апта, 1 күн жана 1 саат", "1 күн, 3 мүнөт жана 4 секунд", "1 күн жана 3 мүнөт") },
         { "gl", new("2 semanas, 1 día e 1 hora", "1 día, 3 minutos e 4 segundos", "1 día e 3 minutos") },
+        { "ga", new("2 sheachtain, 1 lá agus 1 uair an chloig", "1 lá, 3 nóiméad agus 4 soicind", "1 lá agus 3 nóiméad") },
 };
 
     public static TheoryData<string, TimeUnitSymbolExpectationRow> TimeUnitSymbolCases => new()
@@ -505,6 +507,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("мс", "сек", "мин", "цаг", "өдөр", "долоо хоног", "сар", "жил") },
         { "ky", new("мс", "секунд", "мүнөт", "саат", "күн", "апта", "ай", "жыл") },
         { "gl", new("ms", "s", "min", "h", "d", "semana", "mes", "ano") },
+        { "ga", new("ms", "s", "nóim", "u", "lá", "seacht.", "mí", "bl.") },
 };
 
     public static TheoryData<string, ByteSizeSymbolExpectationRow> ByteSizeSymbolCases => new()
@@ -607,6 +610,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "ky", new("1 b", "2 B", "1,95 KB", "2048 KB") },
         { "gl", new("1 b", "2 B", "1,95 KB", "2048 KB") },
+        { "ga", new("1 b", "2 B", "1.95 KB", "2048 KB") },
 };
 
     public static TheoryData<string, ByteSizeFullWordExpectationRow> ByteSizeFullWordCases => new()
@@ -709,6 +713,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("1 бит", "1 байт", "2 байт", "2 килобайт", "2 мегабайт") },
         { "ky", new("1 бит", "1 байт", "2 байт", "2 килобайт", "2 мегабайт") },
         { "gl", new("1 bit", "1 byte", "2 bytes", "2 kilobytes", "2 megabytes") },
+        { "ga", new("1 giotán", "1 beart", "2 beart", "2 cilibheart", "2 meigibheart") },
 };
 
     public static TheoryData<string, CollectionHumanizeExpectationRow> CollectionHumanizeCases => new()
@@ -811,6 +816,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("1 болон 2", "1, 2 болон 3", "1, 2, 3 болон 4") },
         { "ky", new("1 жана 2", "1, 2 жана 3", "1, 2, 3 жана 4") },
         { "gl", new("1 e 2", "1, 2 e 3", "1, 2, 3 e 4") },
+        { "ga", new("1 agus 2", "1, 2 agus 3", "1, 2, 3 agus 4") },
 };
 
     public static TheoryData<string, HeadingExpectationRow> HeadingCases => new()
@@ -915,6 +921,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("Х", "ХЗХ", "ЗХ", "ЗЗХ", "З", "ЗЗӨ", "ЗӨ", "ӨЗӨ", "Ө", "ӨБӨ", "БӨ", "ББӨ", "Б", "ББХ", "БХ", "ХБХ", "хойд", "хойд-хойд зүүн", "зүүн хойд", "зүүн-зүүн хойд", "зүүн", "зүүн-зүүн өмнөд", "зүүн өмнөд", "өмнөд-зүүн өмнөд", "өмнөд", "өмнөд-баруун өмнөд", "баруун өмнөд", "баруун-баруун өмнөд", "баруун", "баруун-баруун хойд", "баруун хойд", "хойд-баруун хойд") },
         { "ky", new("Тн", "ТнТнЧг", "ТнЧг", "ЧгТнЧг", "Чг", "ЧгТшЧг", "ТшЧг", "ТшТшЧг", "Тш", "ТшТшБт", "ТшБт", "БтТшБт", "Бт", "БтТнБт", "ТнБт", "ТнТнБт", "түндүк", "түндүк-түндүк-чыгыш", "түндүк-чыгыш", "чыгыш-түндүк-чыгыш", "чыгыш", "чыгыш-түштүк-чыгыш", "түштүк-чыгыш", "түштүк-түштүк-чыгыш", "түштүк", "түштүк-түштүк-батыш", "түштүк-батыш", "батыш-түштүк-батыш", "батыш", "батыш-түндүк-батыш", "түндүк-батыш", "түндүк-түндүк-батыш") },
         { "gl", new("N", "NNE", "NE", "LNE", "L", "LSE", "SE", "SSE", "S", "SSO", "SO", "OSO", "O", "ONO", "NO", "NNO", "norte", "norte-nordés", "nordés", "leste-nordés", "leste", "leste-sueste", "sueste", "sur-sueste", "sur", "sur-sudoeste", "sudoeste", "oeste-sudoeste", "oeste", "oeste-noroeste", "noroeste", "norte-noroeste") },
+        { "ga", new("T", "TOT", "OT", "OOT", "O", "OOD", "OD", "DOD", "D", "DID", "ID", "IID", "I", "IIT", "IT", "TIT", "tuaisceart", "tuaisceart-oirthuaisceart", "oirthuaisceart", "oirthear-oirthuaisceart", "oirthear", "oirthear-oirdheisceart", "oirdheisceart", "deisceart-oirdheisceart", "deisceart", "deisceart-iardheisceart", "iardheisceart", "iarthar-iardheisceart", "iarthar", "iarthar-iarthuaisceart", "iarthuaisceart", "tuaisceart-iarthuaisceart") },
 };
 
     public static TheoryData<string, CardinalHeadingExpectationRow> HeadingAbbreviatedCardinalCases => new()
@@ -1017,6 +1024,7 @@ public static class LocaleFormatterExactTheoryData
         { "mn", new("Х", "З", "Ө", "Б") },
         { "ky", new("Тн", "Чг", "Тш", "Бт") },
         { "gl", new("N", "L", "S", "O") },
+        { "ga", new("T", "O", "D", "I") },
 };
 
 }

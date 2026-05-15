@@ -741,6 +741,7 @@ static class LocaleOrdinalizerMatrixData
             { "gl", 100, "100.º" },
             { "gl", 101, "101.º" },
             { "gl", 1001, "1001.º" },
+            { "ga", 1, "1ú" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerGenderExpectationTheoryData =>
@@ -3686,6 +3687,9 @@ static class LocaleOrdinalizerMatrixData
             { "gl", 102, GrammaticalGender.Neuter, "102.º" },
             { "gl", 103, GrammaticalGender.Neuter, "103.º" },
             { "gl", 1001, GrammaticalGender.Neuter, "1001.º" },
+            { "ga", 1, GrammaticalGender.Masculine, "1ú" },
+            { "ga", 1, GrammaticalGender.Feminine, "1ú" },
+            { "ga", 1, GrammaticalGender.Neuter, "1ú" },
 };
 
     public static TheoryData<string, string, string> OrdinalizerDefaultExpectationTheoryData =>
@@ -4377,6 +4381,7 @@ static class LocaleOrdinalizerMatrixData
             { "gl", "100", "100.º" },
             { "gl", "101", "101.º" },
             { "gl", "1001", "1001.º" },
+            { "ga", "1", "1ú" },
 };
 
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
@@ -4774,6 +4779,7 @@ static class LocaleOrdinalizerMatrixData
             { "gl", -10, "-10.º" },
             { "gl", -23, "-23.º" },
             { "gl", -2147483648, "-2147483648.º" },
+            { "ga", -1, "-1ú" },
 };
 
     public static TheoryData<string, int, WordForm, string> OrdinalizerWordFormExpectationTheoryData =>
@@ -5378,6 +5384,7 @@ static class LocaleOrdinalizerMatrixData
             { "gl", 1, WordForm.Normal, "1.º" },
             { "gl", 21, WordForm.Abbreviation, "21.º" },
             { "gl", 21, WordForm.Normal, "21.º" },
+            { "ga", 1, WordForm.Abbreviation, "1ú" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalizerWordFormGenderExpectationTheoryData =>
@@ -7071,6 +7078,9 @@ static class LocaleOrdinalizerMatrixData
             { "gl", 1, GrammaticalGender.Masculine, WordForm.Normal, "1.º" },
             { "gl", 1, GrammaticalGender.Feminine, WordForm.Normal, "1.ª" },
             { "gl", 1, GrammaticalGender.Neuter, WordForm.Normal, "1.º" },
+            { "ga", 1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1ú" },
+            { "ga", 1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1ú" },
+            { "ga", 1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1ú" },
 };
 
     public static TheoryData<string, string, GrammaticalGender, string> OrdinalizerStringExactExpectationTheoryData =>
@@ -9781,6 +9791,9 @@ static class LocaleOrdinalizerMatrixData
             { "gl", "1", GrammaticalGender.Masculine, "1.º" },
             { "gl", "1", GrammaticalGender.Feminine, "1.ª" },
             { "gl", "1", GrammaticalGender.Neuter, "1.º" },
+            { "ga", "1", GrammaticalGender.Masculine, "1ú" },
+            { "ga", "1", GrammaticalGender.Feminine, "1ú" },
+            { "ga", "1", GrammaticalGender.Neuter, "1ú" },
 };
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalizerNumberExactExpectationTheoryData =>
@@ -12683,6 +12696,9 @@ static class LocaleOrdinalizerMatrixData
             { "gl", 1, GrammaticalGender.Masculine, "1.º" },
             { "gl", 1, GrammaticalGender.Feminine, "1.ª" },
             { "gl", 1, GrammaticalGender.Neuter, "1.º" },
+            { "ga", 1, GrammaticalGender.Masculine, "1ú" },
+            { "ga", 1, GrammaticalGender.Feminine, "1ú" },
+            { "ga", 1, GrammaticalGender.Neuter, "1ú" },
 };
 
 }

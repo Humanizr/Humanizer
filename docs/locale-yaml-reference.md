@@ -1279,6 +1279,7 @@ Fields:
 - `ordinalLeadingOneStrategy`
 - `ordinalMode`
 - `ordinalWholePhrasePrefix`
+- `exactOrdinals`
 - `unitsMap`
 - `ordinalUnitsMap`
 - `tensMap`
@@ -1291,6 +1292,7 @@ Notes:
 - `defaultAddAnd`, `addAndMode`, and `andStrategy` together define when conjunctions appear. Do not try to encode that behavior with ad hoc words or duplicated tables.
 - `ordinalMode` decides whether ordinals come from dedicated lexical tables, whole-phrase prefixing, numeric suffixes, or other structural strategies within the shared kernel.
 - `ordinalWholePhrasePrefix` supplies the prefix for locales that form compound ordinals by prefixing the whole cardinal phrase.
+- `exactOrdinals` is a sparse value-to-word map for standalone ordinal exceptions that should bypass the compositional ordinal path. Use it when an exact value has a natural form that is not valid inside compounds; keep compound unit/tens wording in `ordinalUnitsMap` and `ordinalTensMap`.
 - `namedTuples` is for irregular compact tuple-style forms; keep it sparse and comment unusual values in the locale file.
 
 ### `construct-state-scale`

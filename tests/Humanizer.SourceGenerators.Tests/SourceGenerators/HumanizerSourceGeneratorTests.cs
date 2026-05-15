@@ -1381,6 +1381,8 @@ numberToWords:
   tupleSuffix: '-base-tuple'
   ordinalLeadingOneStrategy: 'omit-leading-one'
   ordinalMode: 'english'
+  exactOrdinals:
+    1: 'base-first'
   unitsMap:
     - 'zero'
     - 'one'
@@ -1431,12 +1433,14 @@ numberToWords:
         var baseAndCount = CountOccurrences(source, "base-and");
         var baseHundredCount = CountOccurrences(source, "base-hundred");
         var baseScaleCount = CountOccurrences(source, "base-kilo");
+        var baseFirstCount = CountOccurrences(source, "base-first");
         var childMinusCount = CountOccurrences(source, "child-minus");
         var childScaleCount = CountOccurrences(source, "child-kilo");
 
         Assert.Contains("case \"zz-child\": return", source);
         Assert.True(baseAndCount > baseScaleCount, "Inherited scalar fields should appear in both the parent and child generated profiles.");
         Assert.True(baseHundredCount > baseScaleCount, "Inherited scalar fields should appear in both the parent and child generated profiles.");
+        Assert.True(baseFirstCount > baseScaleCount, "Inherited exact ordinal overrides should appear in both the parent and child generated profiles.");
         Assert.True(childMinusCount > 0);
         Assert.True(childScaleCount > 0);
     }
@@ -1458,6 +1462,8 @@ numberToWords:
   tupleSuffix: '-tuple'
   ordinalLeadingOneStrategy: 'omit-leading-one'
   ordinalMode: 'english'
+  exactOrdinals:
+    1: 'first-exact'
   unitsMap:
     1: 'one'
     2: 'two'
@@ -1493,6 +1499,7 @@ numberToWords:
         Assert.Contains("new string[] { \"\", \"\", \"twenty\", \"thirty\" }", source);
         Assert.Contains("new string[] { \"\", \"first\", \"second\" }", source);
         Assert.Contains("new string[] { \"\", \"\", \"twentieth\", \"thirtieth\" }", source);
+        Assert.Contains("first-exact", source);
     }
 
     [Fact]

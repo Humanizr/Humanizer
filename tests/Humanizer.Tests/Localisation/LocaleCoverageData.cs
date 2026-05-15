@@ -110,6 +110,7 @@ static class LocaleCoverageData
         { "mn", new(2022, 1, 25, "2022 оны нэгдүгээр сарын 25") },
         { "ky", new(2022, 1, 25, "25 январь 2022") },
         { "gl", new(2022, 1, 25, "25 de xaneiro de 2022") },
+        { "ga", new(2022, 1, 25, "25 Eanáir 2022") },
     };
 
     // First-of-month sample where many locales change the day form.
@@ -212,6 +213,7 @@ static class LocaleCoverageData
         { "mn", new(2015, 1, 1, "2015 оны нэгдүгээр сарын 1") },
         { "ky", new(2015, 1, 1, "1 январь 2015") },
         { "gl", new(2015, 1, 1, "1 de xaneiro de 2015") },
+        { "ga", new(2015, 1, 1, "1 Eanáir 2015") },
     };
 
     // Early-month sample used to catch plain numeric-day formatting.
@@ -314,6 +316,7 @@ static class LocaleCoverageData
         { "mn", new(2015, 2, 3, "2015 оны хоёрдугаар сарын 3") },
         { "ky", new(2015, 2, 3, "3 февраль 2015") },
         { "gl", new(2015, 2, 3, "3 de febreiro de 2015") },
+        { "ga", new(2015, 2, 3, "3 Feabhra 2015") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020February29ExpectationTheoryData { get; } = new()
@@ -337,6 +340,7 @@ static class LocaleCoverageData
         { "mn", new(2020, 2, 29, "2020 оны хоёрдугаар сарын 29") },
         { "ky", new(2020, 2, 29, "29 февраль 2020") },
         { "gl", new(2020, 2, 29, "29 de febreiro de 2020") },
+        { "ga", new(2020, 2, 29, "29 Feabhra 2020") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2015September4ExpectationTheoryData { get; } = new()
@@ -359,6 +363,7 @@ static class LocaleCoverageData
         { "mn", new(2015, 9, 4, "2015 оны есдүгээр сарын 4") },
         { "ky", new(2015, 9, 4, "4 сентябрь 2015") },
         { "gl", new(2015, 9, 4, "4 de setembro de 2015") },
+        { "ga", new(2015, 9, 4, "4 Meán Fómhair 2015") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords1979November7ExpectationTheoryData { get; } = new()
@@ -381,6 +386,7 @@ static class LocaleCoverageData
         { "mn", new(1979, 11, 7, "1979 оны арван нэгдүгээр сарын 7") },
         { "ky", new(1979, 11, 7, "7 ноябрь 1979") },
         { "gl", new(1979, 11, 7, "7 de novembro de 1979") },
+        { "ga", new(1979, 11, 7, "7 Samhain 1979") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2020March2ExpectationTheoryData { get; } = new()
@@ -402,6 +408,7 @@ static class LocaleCoverageData
         { "mn", new(2020, 3, 2, "2020 оны гуравдугаар сарын 2") },
         { "ky", new(2020, 3, 2, "2 март 2020") },
         { "gl", new(2020, 3, 2, "2 de marzo de 2020") },
+        { "ga", new(2020, 3, 2, "2 Márta 2020") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2021October31ExpectationTheoryData { get; } = new()
@@ -424,6 +431,7 @@ static class LocaleCoverageData
         { "mn", new(2021, 10, 31, "2021 оны аравдугаар сарын 31") },
         { "ky", new(2021, 10, 31, "31 октябрь 2021") },
         { "gl", new(2021, 10, 31, "31 de outubro de 2021") },
+        { "ga", new(2021, 10, 31, "31 Deireadh Fómhair 2021") },
     };
 
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2024December31ExpectationTheoryData { get; } = new()
@@ -448,6 +456,7 @@ static class LocaleCoverageData
         { "mn", new(2024, 12, 31, "2024 оны арван хоёрдугаар сарын 31") },
         { "ky", new(2024, 12, 31, "31 декабрь 2024") },
         { "gl", new(2024, 12, 31, "31 de decembro de 2024") },
+        { "ga", new(2024, 12, 31, "31 Nollaig 2024") },
     };
 
 #if NET6_0_OR_GREATER
@@ -552,6 +561,7 @@ static class LocaleCoverageData
         { "mn", new(13, 23, "арван гурван цаг хорин гурван минут") },
         { "ky", new(13, 23, "он үч жыйырма үч") },
         { "gl", new(13, 23, "a unha e vinte e tres da tarde") },
+        { "ga", new(13, 23, "fiche agus a trí tar éis a haon") },
     };
 
     // Same afternoon clock sample rounded to the nearest five minutes.
@@ -654,6 +664,7 @@ static class LocaleCoverageData
         { "mn", new(13, 23, "арван гурван цаг хорин таван минут") },
         { "ky", new(13, 23, "он үч жыйырма беш") },
         { "gl", new(13, 23, "a unha e vinte e cinco da tarde") },
+        { "ga", new(13, 23, "fiche a cúig tar éis a haon") },
     };
 
     // Early-morning sample that catches one-o'clock phrasing and culture short-time output.
@@ -756,6 +767,7 @@ static class LocaleCoverageData
         { "mn", new(1, 5, "нэг цаг таван минут") },
         { "ky", new(1, 5, "бир нөл беш") },
         { "gl", new(1, 5, "a unha e cinco da madrugada") },
+        { "ga", new(1, 5, "cúig tar éis a haon") },
     };
 
     public static TheoryData<string, ClockExpectationRow> TimeOnlyToClockNotationAdditionalExactExpectationTheoryData { get; } = new()
@@ -1201,6 +1213,7 @@ static class LocaleCoverageData
                     { "mn", "өчигдөр", "2 өдөр" },
             { "ky", "кечээ", "2 күн" },
             { "gl", "onte", "2 días" },
+            { "ga", "inné", "2 lá" },
         };
 
     public static TheoryData<string, string, string> CollectionFormatterExpectationTheoryData =>
@@ -1303,6 +1316,7 @@ static class LocaleCoverageData
                     { "mn", "1 болон 2", "1, 2 болон 3" },
             { "ky", "1 жана 2", "1, 2 жана 3" },
             { "gl", "1 e 2", "1, 2 e 3" },
+            { "ga", "1 agus 2", "1, 2 agus 3" },
         };
 
     public static TheoryData<string, int, string> NumberToWordsOrdinalExpectationTheoryData =>
@@ -1405,6 +1419,7 @@ static class LocaleCoverageData
                     { "mn", 1, "нэгдүгээр" },
             { "ky", 1, "биринчи" },
             { "gl", 1, "primeira" },
+            { "ga", 1, "céad" },
         };
 
     public static TheoryData<string, long, string> NumberToWordsCardinalExpectationTheoryData =>
@@ -1507,6 +1522,7 @@ static class LocaleCoverageData
                     { "mn", 1, "нэг" },
             { "ky", 1, "бир" },
             { "gl", 1, "un" },
+            { "ga", 1, "a haon" },
         };
 
     public static TheoryData<string, int, string> OrdinalizerExpectationTheoryData => LocaleOrdinalizerMatrixData.OrdinalizerExpectationTheoryData;
@@ -1647,6 +1663,7 @@ static class LocaleCoverageData
                     { "mn", 21, "хорин нэг" },
             { "ky", 21, "жыйырма бир" },
             { "gl", 21, "vinte e un" },
+            { "ga", 42, "daichead agus a dó" },
         };
 
     static string[] FindShippedLocales()

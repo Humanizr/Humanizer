@@ -200,6 +200,7 @@ public static class LocaleNumberMagnitudeTheoryData
         { "ky", 1001L, "миң бир" },
         { "ky", 1000001L, "бир миллион бир" },
         { "gl", 1001L, "mil un" },
+        { "ga", 1000000, "a haon milliún" },
 };
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
@@ -506,6 +507,7 @@ public static class LocaleNumberMagnitudeTheoryData
         { "ky", 1001000001L, "бир миллиард бир миллион бир" },
         { "ky", 4325010007018L, "төрт триллион үч жүз жыйырма беш миллиард он миллион жети миң он сегиз" },
         { "gl", 1000001L, "un millón un" },
+        { "ga", 1000000000, "a haon billiún" },
 };
 
     public static TheoryData<string, long, string> HighRangeRoundTripCases => new()
