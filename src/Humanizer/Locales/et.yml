@@ -234,6 +234,7 @@ surfaces:
       underHundredJoinWord: ' '
       omitOneWhenSingularAlways: true
       defaultOrdinalSuffix: ''
+      requireOrdinalException: true
       matchingOrdinalSuffix: null
       ordinalSuffixMatchCharacters: null
       unitsMap: []
@@ -10439,6 +10440,7 @@ surfaces:
         'kakskümmend kaheksa': 28
         'kakskümmend üheksa': 29
         'kahekümne': 20
+        'kahekümneühe': 21
         'kolmkümmend': 30
         'kolmkümmend üks': 31
         'kolmkümmend kaks': 32
@@ -11552,6 +11554,14 @@ surfaces:
         'üheksasaja üheksakümne seitsmes': 997
         'üheksasaja üheksakümne kaheksas': 998
         'üheksasaja üheksakümne üheksas': 999
+        'tuhandes': 1000
+        'kahetuhandes': 2000
+        'kümnetuhandes': 10000
+        'kahekümnetuhandes': 20000
+        'kahekümneühetuhandes': 21000
+        'sajatuhandes': 100000
+      gluedOrdinalScaleSuffixes:
+        'tuhandes': 1000
       negativePrefixes:
         - 'miinus '
 

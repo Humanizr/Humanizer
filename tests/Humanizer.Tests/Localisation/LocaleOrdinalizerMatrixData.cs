@@ -4393,7 +4393,11 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
         new()
         {
+#if NET48
+            { "et", -21, "-21." },
+#else
             { "et", -21, "−21." },
+#endif
             { "sq", -1, "-1-rë" },
         { "mk", -1, "-1." },
 

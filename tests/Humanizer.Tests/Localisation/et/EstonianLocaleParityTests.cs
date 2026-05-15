@@ -42,6 +42,9 @@ public class EstonianLocaleParityTests
     [InlineData("kahekümne esimene", 21)]
     [InlineData("saja esimene", 101)]
     [InlineData("kahe tuhande kahekümne esimene", 2021)]
+    [InlineData("kahetuhandes", 2000)]
+    [InlineData("kahekümnetuhandes", 20000)]
+    [InlineData("kahekümneühetuhandes", 21000)]
     [InlineData("21.", 21)]
     [InlineData("miinus kakskümmend üks", -21)]
     public void ToNumber_ParsesEstonianCardinalOrdinalAndNumericOrdinalForms(string words, long expected) =>
@@ -62,12 +65,27 @@ public class EstonianLocaleParityTests
     }
 
     [Theory]
+    [InlineData(10003)]
+    [InlineData(21001)]
+    public void ToOrdinalWords_RejectsUnmodeledEstonianOrdinalsInsteadOfReturningCardinals(int number) =>
+        Assert.Throws<NotImplementedException>(() => number.ToOrdinalWords(Estonian));
+
+    [Theory]
     [InlineData(0, "0.")]
     [InlineData(1, "1.")]
     [InlineData(21, "21.")]
-    [InlineData(-21, "−21.")]
     public void Ordinalize_UsesEstonianDotSuffix(int number, string expected) =>
         Assert.Equal(expected, number.Ordinalize(Estonian));
+
+    [Fact]
+    public void Ordinalize_UsesEstonianNegativeDotSuffix() =>
+        Assert.Equal(ExpectedNegativeOrdinal, (-21).Ordinalize(Estonian));
+
+#if NET48
+    const string ExpectedNegativeOrdinal = "-21.";
+#else
+    const string ExpectedNegativeOrdinal = "−21.";
+#endif
 
     [Fact]
     public void CollectionHumanize_UsesEstonianConjunction()

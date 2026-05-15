@@ -117,6 +117,11 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             return $"{Convert(number / 10 * 10, gender)}{profile.JoinWord}{profile.CompoundOrdinalWord}";
         }
 
+        if (profile.RequireOrdinalException)
+        {
+            throw new NotImplementedException();
+        }
+
         var words = Convert(number, gender);
         if (words.Length == 0)
         {
@@ -224,6 +229,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 /// <param name="neuterSubHundredReplacements">Neuter overrides for authored under-hundred cardinals.</param>
 /// <param name="scales">The descending scale rows used during decomposition.</param>
 /// <param name="ordinalExceptions">Exact ordinal overrides keyed by value.</param>
+/// <param name="requireOrdinalException">Whether non-exact ordinal inputs should fail instead of falling back to cardinal-derived forms.</param>
 /// <param name="ordinal">The optional gendered word-ordinal profile used by ordinal word conversion.</param>
 /// <param name="compoundOrdinalRemainder">The trailing digit used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalWord">The word used by compound ordinal shortcut rules.</param>
@@ -249,6 +255,7 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     FrozenDictionary<int, string> neuterSubHundredReplacements,
     JoinedScale[] scales,
     FrozenDictionary<int, string>? ordinalExceptions = null,
+    bool requireOrdinalException = false,
     JoinedScaleOrdinalProfile? ordinal = null,
     int? compoundOrdinalRemainder = null,
     string? compoundOrdinalWord = null,
@@ -294,6 +301,8 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public JoinedScale[] Scales { get; } = scales;
     /// <summary>Gets exact ordinal overrides keyed by value.</summary>
     public FrozenDictionary<int, string>? OrdinalExceptions { get; } = ordinalExceptions;
+    /// <summary>Gets a value indicating whether non-exact ordinal inputs should fail instead of falling back to cardinal-derived forms.</summary>
+    public bool RequireOrdinalException { get; } = requireOrdinalException;
     /// <summary>Gets the optional gender-aware ordinal profile.</summary>
     public JoinedScaleOrdinalProfile? Ordinal { get; } = ordinal;
     /// <summary>Gets the trailing digit that triggers the compound ordinal shortcut.</summary>

@@ -456,6 +456,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("nullable-int-string-dictionary", "neuterSubHundredReplacements", null, null, null, null, null, "empty"),
                             Member("builder", "scales", null, null, "joined-scale-array", null, null, null),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, null),
+                            Member("bool", "requireOrdinalException", null, null, null, null, null, null),
                             Member("optional-profile-object", "ordinal", "JoinedScaleOrdinalProfile", null, null, null, null, null,
                                         Member("profile-object", "masculine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
                                                     Member("string", "defaultPrefix", null, null, null, "", null, null),
