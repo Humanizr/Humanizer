@@ -370,10 +370,8 @@ internal sealed class LinkedVigesimalWordsToNumberProfile
         FrozenDictionary<string, long>? ordinalMap = null,
         FrozenDictionary<string, long>? additionalCardinals = null,
         string terminalRemainderAlternateJoiner = "",
-        string terminalRemainderAlternateJoinerInitials = "",
         long scaleCountCompositeThreshold = 100)
     {
-        _ = terminalRemainderAlternateJoinerInitials;
         ExactWords = BuildExactWords(words, scales, additionalCardinals);
         MultiTokenExactWords = TokenizeNumberWords(ExactWords);
         MaximumExactTokenCount = GetMaximumTokenCount(ExactWords.Keys);

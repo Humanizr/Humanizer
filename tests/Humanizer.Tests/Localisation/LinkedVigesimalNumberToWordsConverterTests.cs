@@ -35,8 +35,7 @@ public class LinkedVigesimalNumberToWordsConverterTests
             CreateWords(),
             CreateScales(),
             "a",
-            terminalRemainderAlternateJoiner: "ac",
-            terminalRemainderAlternateJoinerInitials: "ae"));
+            terminalRemainderAlternateJoiner: "ac"));
 
         Assert.Equal(expected, converter.Convert(words));
     }

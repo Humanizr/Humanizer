@@ -1529,7 +1529,7 @@ Nested `scales` fields:
 - `countOverrides` (optional exact phrases keyed by scale count)
 - `countOverridesWithRemainder` (optional exact phrases keyed by scale count)
 
-Parse fields mirror render-side `words`, `scales`, `terminalRemainderJoiner`, `terminalRemainderAlternateJoiner`, and `terminalRemainderAlternateJoinerInitials`, plus optional `negativePrefixes`, `ordinalSuffixes`, `ordinalMap`, and `additionalCardinals`. Parsers accept both the base and alternate terminal joiner tokens.
+Parse fields mirror render-side `words`, `scales`, `terminalRemainderJoiner`, and optional `terminalRemainderAlternateJoiner`, plus optional `negativePrefixes`, `ordinalSuffixes`, `ordinalMap`, and `additionalCardinals`. Parsers accept both the base and alternate terminal joiner tokens; parser profiles do not need `terminalRemainderAlternateJoinerInitials` because they match explicit joiner tokens rather than selecting a joiner while rendering.
 
 ### `stemmed-scale`
 

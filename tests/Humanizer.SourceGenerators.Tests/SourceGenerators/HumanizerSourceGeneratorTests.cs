@@ -1790,7 +1790,6 @@ wordsToNumber:
   engine: 'linked-vigesimal'
   terminalRemainderJoiner: 'a'
   terminalRemainderAlternateJoiner: 'ac'
-  terminalRemainderAlternateJoinerInitials: 'ae'
   words:
     - 'zero'
     - 'apple'
@@ -1818,7 +1817,7 @@ wordsToNumber:
         Assert.Contains("new LinkedVigesimalNumberToWordsProfile(", numberBlock);
         Assert.Contains("FrozenDictionary<int, string>.Empty, \"ac\", \"ae\")", numberBlock);
         Assert.Contains("new LinkedVigesimalWordsToNumberProfile(", wordsBlock);
-        Assert.Contains("null, null, \"ac\", \"ae\")", wordsBlock);
+        Assert.Contains("null, null, \"ac\")", wordsBlock);
     }
 
     [Fact]
