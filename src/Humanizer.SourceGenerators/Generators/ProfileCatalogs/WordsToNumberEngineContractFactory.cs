@@ -124,7 +124,8 @@ public sealed partial class HumanizerSourceGenerator
             CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
             CreateOptionalStringArrayExpression(root, "ordinalSuffixes") + ", " +
             CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") + ", " +
-            CreateOptionalStringLongFrozenDictionaryExpression(root, "additionalCardinals") +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "additionalCardinals") + ", " +
+            QuoteLiteral(GetOptionalString(root, "terminalRemainderAlternateJoiner") ?? string.Empty) +
             "))";
 
         static string CreateScaleLeadingCompoundExpression(JsonElement root) =>

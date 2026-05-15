@@ -80,12 +80,13 @@ class LinkedVigesimalNumberToWordsConverter(LinkedVigesimalNumberToWordsProfile 
 
         if (remainder > 0)
         {
+            var renderedRemainder = ConvertPositive(remainder);
             if (remainder < (ulong)profile.TerminalRemainderThreshold)
             {
-                parts.Add(profile.TerminalRemainderJoiner);
+                parts.Add(profile.GetTerminalRemainderJoiner(renderedRemainder));
             }
 
-            parts.Add(ConvertPositive(remainder));
+            parts.Add(renderedRemainder);
         }
 
         return string.Join(profile.PartJoiner, parts);
@@ -130,7 +131,9 @@ sealed class LinkedVigesimalNumberToWordsProfile(
     string ordinalSuffix,
     string[] words,
     LinkedVigesimalScale[] scales,
-    FrozenDictionary<int, string>? ordinalExceptions = null)
+    FrozenDictionary<int, string>? ordinalExceptions = null,
+    string terminalRemainderAlternateJoiner = "",
+    string terminalRemainderAlternateJoinerInitials = "")
 {
     /// <summary>Gets the word used for zero.</summary>
     public string ZeroWord { get; } = zeroWord;
@@ -142,6 +145,10 @@ sealed class LinkedVigesimalNumberToWordsProfile(
     public string PartJoiner { get; } = partJoiner;
     /// <summary>Gets the linker inserted before terminal low remainders.</summary>
     public string TerminalRemainderJoiner { get; } = terminalRemainderJoiner;
+    /// <summary>Gets the alternate linker inserted before matching terminal low remainders.</summary>
+    public string TerminalRemainderAlternateJoiner { get; } = terminalRemainderAlternateJoiner;
+    /// <summary>Gets the terminal low-remainder initials that use the alternate linker.</summary>
+    public string TerminalRemainderAlternateJoinerInitials { get; } = terminalRemainderAlternateJoinerInitials;
     /// <summary>Gets the threshold below which terminal remainders receive the linker.</summary>
     public int TerminalRemainderThreshold { get; } = terminalRemainderThreshold;
     /// <summary>Gets the fallback ordinal suffix.</summary>
@@ -152,6 +159,19 @@ sealed class LinkedVigesimalNumberToWordsProfile(
     public LinkedVigesimalScale[] Scales { get; } = ValidateScales(scales);
     /// <summary>Gets exact ordinal words keyed by numeric value.</summary>
     public FrozenDictionary<int, string> OrdinalExceptions { get; } = ordinalExceptions ?? FrozenDictionary<int, string>.Empty;
+
+    /// <summary>Gets the terminal low-remainder linker for the rendered remainder.</summary>
+    public string GetTerminalRemainderJoiner(string renderedRemainder)
+    {
+        if (TerminalRemainderAlternateJoiner.Length > 0 &&
+            renderedRemainder.Length > 0 &&
+            TerminalRemainderAlternateJoinerInitials.Contains(renderedRemainder[0]))
+        {
+            return TerminalRemainderAlternateJoiner;
+        }
+
+        return TerminalRemainderJoiner;
+    }
 
     static string[] ValidateWords(string[] value)
     {
