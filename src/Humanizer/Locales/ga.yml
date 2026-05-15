@@ -307,6 +307,8 @@ surfaces:
       tupleSuffix: ''
       ordinalLeadingOneStrategy: 'omit-leading-one'
       ordinalMode: 'english'
+      exactOrdinals:
+        1: 'céad'
       unitsMap:
         0: 'náid'
         1: 'a haon'
@@ -330,7 +332,7 @@ surfaces:
         19: 'a naoi déag'
       ordinalUnitsMap:
         0: 'náidú'
-        1: 'céad'
+        1: 'aonú'
         2: 'dara'
         3: 'tríú'
         4: 'ceathrú'

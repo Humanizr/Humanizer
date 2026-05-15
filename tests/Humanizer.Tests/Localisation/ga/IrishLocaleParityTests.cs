@@ -87,8 +87,10 @@ public class IrishLocaleParityTests
     [InlineData(2, "dara")]
     [InlineData(3, "tríú")]
     [InlineData(20, "fichiú")]
+    [InlineData(21, "fiche agus aonú")]
     [InlineData(42, "daichead agus dara")]
     [InlineData(100, "céadú")]
+    [InlineData(101, "céad agus aonú")]
     [InlineData(1000, "míliú")]
     [InlineData(1000000, "milliúnú")]
     public void NumberToOrdinalWords_ProducesIrishOrdinals(int number, string expected) =>
@@ -101,8 +103,11 @@ public class IrishLocaleParityTests
     [InlineData("céad", 100)]
     [InlineData("a haon déag míle", 11000)]
     [InlineData("a dó dhéag míle", 12000)]
+    [InlineData("a naoi déag míle", 19000)]
     [InlineData("lúide a cúig", -5)]
     [InlineData("aonú", 1)]
+    [InlineData("fiche agus aonú", 21)]
+    [InlineData("céad agus aonú", 101)]
     [InlineData("céadú", 100)]
     [InlineData("míliú", 1000)]
     [InlineData("milliúnú", 1000000)]
@@ -110,16 +115,21 @@ public class IrishLocaleParityTests
         Assert.Equal(expected, words.ToNumber(Irish));
 
     [Theory]
+    [InlineData(21)]
     [InlineData(100)]
+    [InlineData(101)]
     [InlineData(1000)]
     [InlineData(1000000)]
     [InlineData(11000)]
     [InlineData(12000)]
+    [InlineData(19000)]
     public void ToNumber_RoundTripsGeneratedIrishCardinalScaleForms(long number) =>
         Assert.Equal(number, number.ToWords(Irish).ToNumber(Irish));
 
     [Theory]
+    [InlineData(21)]
     [InlineData(100)]
+    [InlineData(101)]
     [InlineData(1000)]
     [InlineData(1000000)]
     public void ToNumber_RoundTripsGeneratedIrishExactScaleOrdinals(int number) =>

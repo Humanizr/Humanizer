@@ -2590,6 +2590,7 @@ public class CoverageGapTests
             ConjunctionalScaleOrdinalLeadingOneStrategy.OmitLeadingOne,
             ConjunctionalScaleOrdinalMode.English,
             "",
+            null,
             units,
             ordinalUnits,
             tens,
