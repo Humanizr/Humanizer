@@ -10393,6 +10393,7 @@ surfaces:
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'
+      allowTerminalOrdinalToken: true
       useHundredMultiplier: true
       ordinalAbbreviationSuffixes:
         - '.'
@@ -10400,15 +10401,23 @@ surfaces:
         - 's'
       cardinalMap:
         'null': 0
+        'ühe': 1
         'üks': 1
+        'kahe': 2
         'kaks': 2
+        'kolme': 3
         'kolm': 3
+        'nelja': 4
         'neli': 4
+        'viie': 5
         'viis': 5
+        'kuue': 6
         'kuus': 6
+        'seitsme': 7
         'seitse': 7
         'kaheksa': 8
         'üheksa': 9
+        'kümne': 10
         'kümme': 10
         'üksteist': 11
         'kaksteist': 12
@@ -10429,6 +10438,7 @@ surfaces:
         'kakskümmend seitse': 27
         'kakskümmend kaheksa': 28
         'kakskümmend üheksa': 29
+        'kahekümne': 20
         'kolmkümmend': 30
         'kolmkümmend üks': 31
         'kolmkümmend kaks': 32
@@ -10439,6 +10449,7 @@ surfaces:
         'kolmkümmend seitse': 37
         'kolmkümmend kaheksa': 38
         'kolmkümmend üheksa': 39
+        'kolmekümne': 30
         'nelikümmend': 40
         'nelikümmend üks': 41
         'nelikümmend kaks': 42
@@ -10449,6 +10460,7 @@ surfaces:
         'nelikümmend seitse': 47
         'nelikümmend kaheksa': 48
         'nelikümmend üheksa': 49
+        'neljakümne': 40
         'viiskümmend': 50
         'viiskümmend üks': 51
         'viiskümmend kaks': 52
@@ -10459,6 +10471,7 @@ surfaces:
         'viiskümmend seitse': 57
         'viiskümmend kaheksa': 58
         'viiskümmend üheksa': 59
+        'viiekümne': 50
         'kuuskümmend': 60
         'kuuskümmend üks': 61
         'kuuskümmend kaks': 62
@@ -10469,6 +10482,7 @@ surfaces:
         'kuuskümmend seitse': 67
         'kuuskümmend kaheksa': 68
         'kuuskümmend üheksa': 69
+        'kuuekümne': 60
         'seitsekümmend': 70
         'seitsekümmend üks': 71
         'seitsekümmend kaks': 72
@@ -10479,6 +10493,7 @@ surfaces:
         'seitsekümmend seitse': 77
         'seitsekümmend kaheksa': 78
         'seitsekümmend üheksa': 79
+        'seitsmekümne': 70
         'kaheksakümmend': 80
         'kaheksakümmend üks': 81
         'kaheksakümmend kaks': 82
@@ -10489,6 +10504,7 @@ surfaces:
         'kaheksakümmend seitse': 87
         'kaheksakümmend kaheksa': 88
         'kaheksakümmend üheksa': 89
+        'kaheksakümne': 80
         'üheksakümmend': 90
         'üheksakümmend üks': 91
         'üheksakümmend kaks': 92
@@ -10499,6 +10515,7 @@ surfaces:
         'üheksakümmend seitse': 97
         'üheksakümmend kaheksa': 98
         'üheksakümmend üheksa': 99
+        'üheksakümne': 90
         'sada': 100
         'saja': 100
         'kahesaja': 200
@@ -10518,15 +10535,21 @@ surfaces:
         'üheksasada': 900
         'üheksasaja': 900
         'tuhat': 1000
+        'tuhande': 1000
         'miljon': 1000000
+        'miljoni': 1000000
         'miljonit': 1000000
         'miljard': 1000000000
+        'miljardi': 1000000000
         'miljardit': 1000000000
         'biljon': 1000000000000
+        'biljoni': 1000000000000
         'biljonit': 1000000000000
         'kvadriljon': 1000000000000000
+        'kvadriljoni': 1000000000000000
         'kvadriljonit': 1000000000000000
         'kvintiljon': 1000000000000000000
+        'kvintiljoni': 1000000000000000000
         'kvintiljonit': 1000000000000000000
       ordinalMap:
         'nullis': 0

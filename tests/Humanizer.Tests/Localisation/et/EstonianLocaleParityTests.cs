@@ -41,6 +41,7 @@ public class EstonianLocaleParityTests
     [InlineData("sada viis", 105)]
     [InlineData("kahekümne esimene", 21)]
     [InlineData("saja esimene", 101)]
+    [InlineData("kahe tuhande kahekümne esimene", 2021)]
     [InlineData("21.", 21)]
     [InlineData("miinus kakskümmend üks", -21)]
     public void ToNumber_ParsesEstonianCardinalOrdinalAndNumericOrdinalForms(string words, long expected) =>
@@ -110,6 +111,7 @@ public class EstonianLocaleParityTests
     [InlineData(13, 23, "13:23")]
     [InlineData(4, 0, "4:00")]
     [InlineData(1, 5, "1:05")]
+    [InlineData(1, 6, "1:06")]
     [InlineData(1, 7, "1:07")]
     public void ToClockNotation_UsesEstonianNumericClockPhrases(int hour, int minute, string expected) =>
         Assert.Equal(expected, new TimeOnly(hour, minute).ToClockNotation());
