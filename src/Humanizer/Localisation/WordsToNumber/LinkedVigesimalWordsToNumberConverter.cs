@@ -254,9 +254,10 @@ internal class LinkedVigesimalWordsToNumberConverter(LinkedVigesimalWordsToNumbe
 
     static bool TryMatchAnyTokenPhrase(string[] tokens, int start, int end, string[][] phraseTokenSets, out int next)
     {
-        foreach (var phraseTokens in phraseTokenSets)
+        for (var index = 0; index < phraseTokenSets.Length; index++)
         {
-            if (TryMatchTokenPhrase(tokens, start, end, phraseTokens, out next))
+            var phraseTokens = phraseTokenSets[index];
+            if (phraseTokens.Length > 0 && TryMatchTokenPhrase(tokens, start, end, phraseTokens, out next))
             {
                 return true;
             }
