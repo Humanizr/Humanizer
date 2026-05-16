@@ -3112,14 +3112,14 @@ static class LocaleNumberTheoryData
         { "eu", 90, "laurogeita hamar" },
         { "eu", 99, "laurogeita hemeretzi" },
         { "eu", 100, "ehun" },
-        { "eu", 101, "ehun bat" },
-        { "eu", 121, "ehun hogeita bat" },
+        { "eu", 101, "ehun eta bat" },
+        { "eu", 121, "ehun eta hogeita bat" },
         { "eu", 200, "berrehun" },
-        { "eu", 999, "bederatziehun laurogeita hemeretzi" },
+        { "eu", 999, "bederatziehun eta laurogeita hemeretzi" },
         { "eu", 1000, "mila" },
-        { "eu", 1001, "mila bat" },
-        { "eu", 3500, "hiru mila bostehun" },
-        { "eu", 1000001, "milioi bat" },
+        { "eu", 1001, "mila eta bat" },
+        { "eu", 3500, "hiru mila eta bostehun" },
+        { "eu", 1000001, "milioi bat eta bat" },
         { "gl", 0, "cero" },
         { "gl", 1, "un" },
         { "gl", 2, "dous" },
@@ -3159,8 +3159,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
-        { "eu", 101, true, "ehun bat" },
-        { "eu", 101, false, "ehun bat" },
+        { "eu", 101, true, "ehun eta bat" },
+        { "eu", 101, false, "ehun eta bat" },
 
             { "et", 101, true, "sada üks" },
             { "et", 101, false, "sada üks" },
@@ -8644,7 +8644,7 @@ static class LocaleNumberTheoryData
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
         { "eu", "hogeita bat", 21L },
-        { "eu", "minus ehun hogeita hiru", -123L },
+        { "eu", "minus ehun eta hogeita hiru", -123L },
 
             { "et", "kakskümmend üks", 21L },
             { "et", "kahekümne esimene", 21L },

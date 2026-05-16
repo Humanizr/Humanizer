@@ -7,6 +7,15 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    exactDateForms:
+      -
+        number: 2
+        form: 'dual'
+        units:
+          - 'day'
+        tenses:
+          - 'past'
+          - 'future'
     timeUnitGenders:
       millisecond: 'neuter'
       second: 'neuter'
@@ -235,7 +244,7 @@ surfaces:
       zeroWord: 'zero'
       minusWord: 'minus'
       negativeJoinWord: ' '
-      joinWord: ' '
+      joinWord: ' eta '
       scaleCountJoinWord: ' '
       underHundredJoinWord: ' '
       omitOneWhenSingularAlways: true
@@ -360,12 +369,12 @@ surfaces:
       scales:
         -
           value: 1000000000000000000
-          name: 'trilioi'
+          name: 'trilioi bat'
           pluralName: 'trilioi'
           omitOneWhenSingular: true
         -
           value: 1000000000000
-          name: 'bilioi'
+          name: 'bilioi bat'
           pluralName: 'bilioi'
           omitOneWhenSingular: true
         -
@@ -375,7 +384,7 @@ surfaces:
           omitOneWhenSingular: true
         -
           value: 1000000
-          name: 'milioi'
+          name: 'milioi bat'
           pluralName: 'milioi'
           omitOneWhenSingular: true
         -
@@ -496,7 +505,7 @@ surfaces:
 
     parse:
       engine: 'token-map'
-      normalizationProfile: 'LowercaseRemovePeriods'
+      normalizationProfile: 'CollapseWhitespace'
       cardinalMap:
         bi: 2
         bat: 1
@@ -626,12 +635,16 @@ surfaces:
       ordinalGenderVariant: 'none'
       negativePrefixes:
         - 'minus '
-      ignoredTokens: []
+      ignoredTokens:
+        - 'eta'
+      allowTerminalOrdinalToken: true
+      allowInvariantIntegerInput: true
       ordinalAbbreviationSuffixes:
         - '.'
       ordinalMap:
         zerogarren: 0
         lehen: 1
+        batgarren: 1
         bigarren: 2
         hirugarren: 3
         laugarren: 4

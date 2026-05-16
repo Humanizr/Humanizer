@@ -284,7 +284,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("2 ມື້ ກ່ອນ", "3 ມື້ ກ່ອນ", "4 ມື້ ກ່ອນ", "5 ມື້ ກ່ອນ", "11 ມື້ ກ່ອນ", "21 ມື້ ກ່ອນ", "ໃນອີກ 2 ມື້", "ໃນອີກ 3 ມື້", "ໃນອີກ 4 ມື້", "ໃນອີກ 5 ມື້", "ໃນອີກ 11 ມື້", "ໃນອີກ 21 ມື້") },
         { "mn", new("2 хоногийн өмнө", "3 хоногийн өмнө", "4 хоногийн өмнө", "5 хоногийн өмнө", "11 хоногийн өмнө", "21 хоногийн өмнө", "2 хоногийн дараа", "3 хоногийн дараа", "4 хоногийн дараа", "5 хоногийн дараа", "11 хоногийн дараа", "21 хоногийн дараа") },
         { "ky", new("2 күн мурун", "3 күн мурун", "4 күн мурун", "5 күн мурун", "11 күн мурун", "21 күн мурун", "2 күндөн кийин", "3 күндөн кийин", "4 күндөн кийин", "5 күндөн кийин", "11 күндөн кийин", "21 күндөн кийин") },
-        { "eu", new("duela 2 egun", "duela 3 egun", "duela 4 egun", "duela 5 egun", "duela 11 egun", "duela 21 egun", "2 egun barru", "3 egun barru", "4 egun barru", "5 egun barru", "11 egun barru", "21 egun barru") },
+        { "eu", new("herenegun", "duela 3 egun", "duela 4 egun", "duela 5 egun", "duela 11 egun", "duela 21 egun", "etzi", "3 egun barru", "4 egun barru", "5 egun barru", "11 egun barru", "21 egun barru") },
         { "gl", new("hai 2 días", "hai 3 días", "hai 4 días", "hai 5 días", "hai 11 días", "hai 21 días", "dentro de 2 días", "dentro de 3 días", "dentro de 4 días", "dentro de 5 días", "dentro de 11 días", "dentro de 21 días") },
         { "ga", new("2 lá ó shin", "3 lá ó shin", "4 lá ó shin", "5 lá ó shin", "11 lá ó shin", "21 lá ó shin", "i gceann 2 lá", "i gceann 3 lá", "i gceann 4 lá", "i gceann 5 lá", "i gceann 11 lá", "i gceann 21 lá") },
 };

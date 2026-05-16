@@ -9,8 +9,8 @@ public class BasqueLocaleParityTests
     [InlineData(21, "hogeita bat")]
     [InlineData(99, "laurogeita hemeretzi")]
     [InlineData(100, "ehun")]
-    [InlineData(101, "ehun bat")]
-    [InlineData(2024, "bi mila hogeita lau")]
+    [InlineData(101, "ehun eta bat")]
+    [InlineData(2024, "bi mila eta hogeita lau")]
     public void NumberToWords_UsesBasqueCardinals(long number, string expected) =>
         Assert.Equal(expected, number.ToWords(new CultureInfo("eu")));
 
@@ -23,9 +23,11 @@ public class BasqueLocaleParityTests
 
     [Theory]
     [InlineData("hogeita bat", 21)]
-    [InlineData("minus ehun hogeita hiru", -123)]
+    [InlineData("minus ehun eta hogeita hiru", -123)]
     [InlineData("lehen", 1)]
     [InlineData("hogeita batgarren", 21)]
+    [InlineData("1.", 1)]
+    [InlineData("23.", 23)]
     public void WordsToNumber_ParsesBasqueCardinalsAndOrdinals(string words, long expected) =>
         Assert.Equal(expected, words.ToNumber(new CultureInfo("eu")));
 
@@ -44,7 +46,7 @@ public class BasqueLocaleParityTests
         Assert.Equal("orain", formatter.DateHumanize_Now());
         Assert.Equal("inoiz ez", formatter.DateHumanize_Never());
         Assert.Equal("atzo", formatter.DateHumanize(TimeUnit.Day, Tense.Past, 1));
-        Assert.Equal("2 egun barru", formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2));
+        Assert.Equal("etzi", formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2));
         Assert.Equal("2 egun", formatter.TimeSpanHumanize(TimeUnit.Day, 2));
         Assert.Equal("ordu bat", formatter.TimeSpanHumanize(TimeUnit.Hour, 1, toWords: true));
         Assert.Equal("byte", formatter.DataUnitHumanize(DataUnit.Byte, 1, toSymbol: false));
