@@ -147,6 +147,7 @@ public sealed partial class HumanizerSourceGenerator
             return "new ModuloSuffixOrdinalizer(new(" +
                    QuoteLiteral(GetRequiredString(root, "defaultSuffix")) + ", " +
                    CreateNullableIntStringFrozenDictionaryExpression(root, "exactSuffixes").Replace("null", "FrozenDictionary<int, string>.Empty") + ", " +
+                   CreateNullableIntStringFrozenDictionaryExpression(root, "lastTwoDigitSuffixes").Replace("null", "FrozenDictionary<int, string>.Empty") + ", " +
                    CreateNullableIntStringFrozenDictionaryExpression(root, "lastDigitSuffixes").Replace("null", "FrozenDictionary<int, string>.Empty") + ", " +
                    lastTwoDigitsRange + ", " +
                    absoluteAtLeast + ", " +

@@ -732,6 +732,7 @@ Fields:
 - `absoluteAtLeast`
 - `exactSuffixes`
 - `lastTwoDigitsRange`
+- `lastTwoDigitSuffixes`
 - `lastDigitSuffixes`
 
 Notes:
@@ -740,6 +741,7 @@ Notes:
 - `defaultSuffix` is the fallback suffix when no special rule matches.
 - `exactSuffixes` overrides exact numeric values.
 - `lastTwoDigitsRange` handles ranges like 11 through 20.
+- `lastTwoDigitSuffixes` handles repeating two-digit endings such as every value ending in 20.
 - `lastDigitSuffixes` handles trailing-digit special cases such as 1, 2, and 3.
 - `absoluteAtLeast` and `useAbsoluteValue` control whether negative numbers are normalized before suffix selection.
 

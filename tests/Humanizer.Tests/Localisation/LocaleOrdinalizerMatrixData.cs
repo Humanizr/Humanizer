@@ -9,6 +9,12 @@ static class LocaleOrdinalizerMatrixData
         { "eu", 1, "1." },
         { "eu", 23, "23." },
 
+            { "tk", 1, "1-nji" },
+            { "tk", 6, "6-njy" },
+            { "tk", 20, "20-nji" },
+            { "tk", 120, "120-nji" },
+            { "tk", 200, "200-nji" },
+
             { "et", 1, "1." },
             { "et", 21, "21." },
             { "sq", 0, "0-të" },
@@ -796,6 +802,10 @@ static class LocaleOrdinalizerMatrixData
         { "eu", 1, GrammaticalGender.Masculine, "1." },
         { "eu", 1, GrammaticalGender.Feminine, "1." },
         { "eu", 1, GrammaticalGender.Neuter, "1." },
+
+            { "tk", 2, GrammaticalGender.Masculine, "2-nji" },
+            { "tk", 2, GrammaticalGender.Feminine, "2-nji" },
+            { "tk", 2, GrammaticalGender.Neuter, "2-nji" },
 
             { "et", 21, GrammaticalGender.Masculine, "21." },
             { "et", 21, GrammaticalGender.Feminine, "21." },
@@ -3807,6 +3817,7 @@ static class LocaleOrdinalizerMatrixData
         {
         { "eu", "0", "0" },
         { "eu", "1", "1." },
+            { "tk", "1", "1-nji" },
 
             { "et", "21", "21." },
             { "sq", "1", "1-rë" },
@@ -4530,6 +4541,8 @@ static class LocaleOrdinalizerMatrixData
     public static TheoryData<string, int, string> OrdinalizerNegativeExpectationTheoryData =>
         new()
         {
+            { "tk", -6, "-6-njy" },
+
 #if NET48
         { "eu", -1, "-1." },
 #else
@@ -4957,6 +4970,7 @@ static class LocaleOrdinalizerMatrixData
         new()
         {
         { "eu", 1, WordForm.Normal, "1." },
+            { "tk", 1, WordForm.Normal, "1-nji" },
 
             { "et", 21, WordForm.Normal, "21." },
             { "sq", 1, WordForm.Abbreviation, "1-rë" },
@@ -5589,6 +5603,10 @@ static class LocaleOrdinalizerMatrixData
         { "eu", 1, GrammaticalGender.Masculine, WordForm.Normal, "1." },
         { "eu", 1, GrammaticalGender.Feminine, WordForm.Normal, "1." },
         { "eu", 1, GrammaticalGender.Neuter, WordForm.Normal, "1." },
+
+            { "tk", 1, GrammaticalGender.Masculine, WordForm.Normal, "1-nji" },
+            { "tk", 1, GrammaticalGender.Feminine, WordForm.Normal, "1-nji" },
+            { "tk", 1, GrammaticalGender.Neuter, WordForm.Normal, "1-nji" },
 
             { "et", 21, GrammaticalGender.Masculine, WordForm.Normal, "21." },
             { "et", 21, GrammaticalGender.Feminine, WordForm.Normal, "21." },
@@ -7334,6 +7352,10 @@ static class LocaleOrdinalizerMatrixData
         { "eu", "1", GrammaticalGender.Masculine, "1." },
         { "eu", "1", GrammaticalGender.Feminine, "1." },
         { "eu", "1", GrammaticalGender.Neuter, "1." },
+
+            { "tk", "1", GrammaticalGender.Masculine, "1-nji" },
+            { "tk", "1", GrammaticalGender.Feminine, "1-nji" },
+            { "tk", "1", GrammaticalGender.Neuter, "1-nji" },
 
             { "et", "21", GrammaticalGender.Masculine, "21." },
             { "et", "21", GrammaticalGender.Feminine, "21." },
@@ -10105,6 +10127,10 @@ static class LocaleOrdinalizerMatrixData
         { "eu", 1, GrammaticalGender.Masculine, "1." },
         { "eu", 1, GrammaticalGender.Feminine, "1." },
         { "eu", 1, GrammaticalGender.Neuter, "1." },
+
+            { "tk", 1, GrammaticalGender.Masculine, "1-nji" },
+            { "tk", 1, GrammaticalGender.Feminine, "1-nji" },
+            { "tk", 1, GrammaticalGender.Neuter, "1-nji" },
 
             { "et", 21, GrammaticalGender.Masculine, "21." },
             { "et", 21, GrammaticalGender.Feminine, "21." },

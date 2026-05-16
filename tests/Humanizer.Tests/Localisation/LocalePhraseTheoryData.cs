@@ -4,6 +4,12 @@ static class LocalePhraseTheoryData
 {
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeCases => new()
     {
+
+        { "tk", 1, TimeUnit.Second, Tense.Past, "bir sekunt öň" },
+        { "tk", 2, TimeUnit.Day, Tense.Past, "2 gün öň" },
+        { "tk", 2, TimeUnit.Day, Tense.Future, "2 gün soň" },
+        { "tk", 0, TimeUnit.Second, Tense.Future, "häzir" },
+
             { "et", 1, TimeUnit.Day, Tense.Past, "eile" },
             { "et", 2, TimeUnit.Day, Tense.Past, "2 päeva tagasi" },
             { "et", 1, TimeUnit.Day, Tense.Future, "homme" },
@@ -1306,6 +1312,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, Tense, string> DateHumanizeBoundaryCases => new()
     {
+        { "tk", 10, TimeUnit.Day, Tense.Future, "10 gün soň" },
+
         { "af", 1, TimeUnit.Hour, Tense.Future, "oor 1 uur" },
         { "af", 1, TimeUnit.Minute, Tense.Future, "oor 1 minuut" },
         { "af", 1, TimeUnit.Month, Tense.Future, "oor 1 maand" },
@@ -1708,6 +1716,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, string> NullDateHumanizeCases => new()
     {
+        { "tk", "hiç haçan" },
+
             { "et", "mitte kunagi" },
         { "sq", "kurrë" },
         { "mk", "никогаш" },
@@ -1854,6 +1864,10 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, string> TimeSpanHumanizeCases => new()
     {
+
+        { "tk", 2, TimeUnit.Day, false, "2 gün" },
+        { "tk", 1, TimeUnit.Hour, true, "bir sagat" },
+
             { "et", 1, TimeUnit.Hour, false, "tund" },
             { "et", 2, TimeUnit.Day, false, "2 päeva" },
             { "et", 0, TimeUnit.Millisecond, true, "nüüd" },
@@ -2824,6 +2838,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, string> TimeSpanPluralizationCases => new()
     {
+        { "tk", 2, TimeUnit.Day, "2 gün" },
+
         { "ar", 3, TimeUnit.Day, "3 أيام" },
         { "ar", 3, TimeUnit.Hour, "3 ساعات" },
         { "ar", 11, TimeUnit.Hour, "11 ساعة" },
@@ -3135,6 +3151,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, TimeUnit, bool, bool, string> TimeSpanAdvancedHumanizeCases => new()
     {
+        { "tk", 2, TimeUnit.Day, false, false, "2 gün" },
+
         { "af", 366, TimeUnit.Day, false, true, "1 jaar" },
         { "af", 731, TimeUnit.Day, false, true, "2 jaar" },
         { "af", 1096, TimeUnit.Day, false, true, "3 jaar" },
@@ -3937,6 +3955,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, bool, string> TimeSpanDayMaxUnitCases => new()
     {
+        { "tk", 14, false, "14 gün" },
+
         { "lt", 1, false, "1 diena" },
         { "lt", 2, false, "2 dienos" },
         { "lt", 9, false, "9 dienos" },
@@ -3970,6 +3990,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, long, TimeUnit, string> TimeSpanMaxUnitCases => new()
     {
+        { "tk", 14, TimeUnit.Day, "14 millisekunt" },
+
         { "ca", 1000, TimeUnit.Millisecond, "1000 mil·lisegons" },
         { "ca", 60000, TimeUnit.Second, "60 segons" },
         { "ca", 3600000, TimeUnit.Minute, "60 minuts" },
@@ -3988,6 +4010,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, long, TimeUnit, bool, string> TimeSpanMinUnitCases => new()
     {
+        { "tk", 1, TimeUnit.Hour, true, "wagt ýok" },
+
         { "ca", 10, TimeUnit.Millisecond, false, "10 mil·lisegons" },
         { "ca", 10, TimeUnit.Second, false, "0 segons" },
         { "ca", 10, TimeUnit.Second, true, "res" },
@@ -4129,6 +4153,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, long, int, bool, string> TimeSpanPrecisionCases => new()
     {
+        { "tk", 1299630020, 3, false, "2 hepde, 1 gün, 1 sagat" },
+
         { "ca", 0, 2, false, "0 mil·lisegons" },
         { "ca", 0, 2, true, "res" },
         { "ca", 0, 3, false, "0 mil·lisegons" },
@@ -4239,6 +4265,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, long, int, bool, string> TimeSpanCountingEmptyUnitCases => new()
     {
+        { "tk", 86400000, 2, false, "1 gün" },
+
         { "ca", 0, 2, false, "0 mil·lisegons" },
         { "ca", 0, 2, true, "res" },
         { "ca", 0, 3, false, "0 mil·lisegons" },
@@ -4317,6 +4345,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, long, int, bool, string> TimeSpanAlternativeCollectionFormatterCases => new()
     {
+        { "tk", 1299630020, 3, false, "2 hepde, 1 gün we 1 sagat" },
+
         { "ca", 0, 2, false, "0 mil·lisegons" },
         { "ca", 0, 2, true, "res" },
         { "ca", 0, 3, false, "0 mil·lisegons" },
@@ -4383,6 +4413,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, long, int, string> TimeSpanNumbersConvertedToWordsCases => new()
     {
+        { "tk", 366, 1, "üç ýüz altmyş alty millisekunt" },
+
         { "ca", 0, 2, "res" },
         { "ca", 0, 3, "res" },
         { "ca", 10, 2, "deu mil·lisegons" },
@@ -4450,6 +4482,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, TimeUnit, string> TimeSpanZeroMinUnitCases => new()
     {
+        { "tk", TimeUnit.Millisecond, "0 millisekunt" },
+
         { "fr", TimeUnit.Year, "0 an" },
         { "fr", TimeUnit.Month, "0 mois" },
         { "fr", TimeUnit.Week, "0 semaine" },
@@ -4478,6 +4512,10 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, bool, string> TimeSpanZeroCases => new()
     {
+
+        { "tk", false, "0 millisekunt" },
+        { "tk", true, "wagt ýok" },
+
         { "fr", false, "0 milliseconde" },
         { "fr", true, "durée nulle" },
         { "fr-BE", false, "0 milliseconde" },
@@ -4498,6 +4536,8 @@ static class LocalePhraseTheoryData
 
     public static TheoryData<string, int, bool, string> TimeSpanAgeCases => new()
     {
+        { "tk", 366, false, "1 ýyl ýaşynda" },
+
         { "ka", 14, false, "2 კვირა" },
         { "af", 14, false, "2 weke oud" },
         { "af", 366, false, "1 jaar oud" },
