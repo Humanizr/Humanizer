@@ -284,6 +284,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("2 ມື້ ກ່ອນ", "3 ມື້ ກ່ອນ", "4 ມື້ ກ່ອນ", "5 ມື້ ກ່ອນ", "11 ມື້ ກ່ອນ", "21 ມື້ ກ່ອນ", "ໃນອີກ 2 ມື້", "ໃນອີກ 3 ມື້", "ໃນອີກ 4 ມື້", "ໃນອີກ 5 ມື້", "ໃນອີກ 11 ມື້", "ໃນອີກ 21 ມື້") },
         { "mn", new("2 хоногийн өмнө", "3 хоногийн өмнө", "4 хоногийн өмнө", "5 хоногийн өмнө", "11 хоногийн өмнө", "21 хоногийн өмнө", "2 хоногийн дараа", "3 хоногийн дараа", "4 хоногийн дараа", "5 хоногийн дараа", "11 хоногийн дараа", "21 хоногийн дараа") },
         { "ky", new("2 күн мурун", "3 күн мурун", "4 күн мурун", "5 күн мурун", "11 күн мурун", "21 күн мурун", "2 күндөн кийин", "3 күндөн кийин", "4 күндөн кийин", "5 күндөн кийин", "11 күндөн кийин", "21 күндөн кийин") },
+        { "eu", new("duela 2 egun", "duela 3 egun", "duela 4 egun", "duela 5 egun", "duela 11 egun", "duela 21 egun", "2 egun barru", "3 egun barru", "4 egun barru", "5 egun barru", "11 egun barru", "21 egun barru") },
         { "gl", new("hai 2 días", "hai 3 días", "hai 4 días", "hai 5 días", "hai 11 días", "hai 21 días", "dentro de 2 días", "dentro de 3 días", "dentro de 4 días", "dentro de 5 días", "dentro de 11 días", "dentro de 21 días") },
         { "ga", new("2 lá ó shin", "3 lá ó shin", "4 lá ó shin", "5 lá ó shin", "11 lá ó shin", "21 lá ó shin", "i gceann 2 lá", "i gceann 3 lá", "i gceann 4 lá", "i gceann 5 lá", "i gceann 11 lá", "i gceann 21 lá") },
 };
@@ -392,6 +393,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("2 ອາທິດ, 1 ມື້ ແລະ 1 ຊົ່ວໂມງ", "1 ມື້, 3 ນາທີ ແລະ 4 ວິນາທີ", "1 ມື້ ແລະ 3 ນາທີ") },
         { "mn", new("2 долоо хоног, 1 өдөр болон 1 цаг", "1 өдөр, 3 минут болон 4 секунд", "1 өдөр болон 3 минут") },
         { "ky", new("2 апта, 1 күн жана 1 саат", "1 күн, 3 мүнөт жана 4 секунд", "1 күн жана 3 мүнөт") },
+        { "eu", new("2 aste, 1 egun eta 1 ordu", "1 egun, 3 minutu eta 4 segundo", "1 egun eta 3 minutu") },
         { "gl", new("2 semanas, 1 día e 1 hora", "1 día, 3 minutos e 4 segundos", "1 día e 3 minutos") },
         { "ga", new("2 sheachtain, 1 lá agus 1 uair an chloig", "1 lá, 3 nóiméad agus 4 soicind", "1 lá agus 3 nóiméad") },
 };
@@ -521,6 +523,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("ມິນລິວິນາທີ", "ວິນາທີ", "ນາທີ", "ຊົ່ວໂມງ", "ມື້", "ອາທິດ", "ເດືອນ", "ປີ") },
         { "mn", new("мс", "сек", "мин", "цаг", "өдөр", "долоо хоног", "сар", "жил") },
         { "ky", new("мс", "секунд", "мүнөт", "саат", "күн", "апта", "ай", "жыл") },
+        { "eu", new("ms", "s", "min", "h", "eg", "ast", "hil", "urt") },
         { "gl", new("ms", "s", "min", "h", "d", "semana", "mes", "ano") },
         { "ga", new("ms", "s", "nóim", "u", "lá", "seacht.", "mí", "bl.") },
 };
@@ -629,6 +632,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("1 b", "2 B", "1,95 KB", "2048 KB") },
         { "mn", new("1 b", "2 B", "1.95 KB", "2048 KB") },
         { "ky", new("1 b", "2 B", "1,95 KB", "2048 KB") },
+        { "eu", new("1 b", "2 B", "1,95 KB", "2048 KB") },
         { "gl", new("1 b", "2 B", "1,95 KB", "2048 KB") },
         { "ga", new("1 b", "2 B", "1.95 KB", "2048 KB") },
 };
@@ -737,6 +741,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("1 ບິດ", "1 ໄບຕ໌", "2 ໄບຕ໌", "2 ກິໂລໄບຕ໌", "2 ເມກະໄບຕ໌") },
         { "mn", new("1 бит", "1 байт", "2 байт", "2 килобайт", "2 мегабайт") },
         { "ky", new("1 бит", "1 байт", "2 байт", "2 килобайт", "2 мегабайт") },
+        { "eu", new("1 bit", "1 byte", "2 bytes", "2 kilobytes", "2 megabytes") },
         { "gl", new("1 bit", "1 byte", "2 bytes", "2 kilobytes", "2 megabytes") },
         { "ga", new("1 giotán", "1 beart", "2 beart", "2 cilibheart", "2 meigibheart") },
 };
@@ -845,6 +850,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("1 ແລະ 2", "1, 2 ແລະ 3", "1, 2, 3 ແລະ 4") },
         { "mn", new("1 болон 2", "1, 2 болон 3", "1, 2, 3 болон 4") },
         { "ky", new("1 жана 2", "1, 2 жана 3", "1, 2, 3 жана 4") },
+        { "eu", new("1 eta 2", "1, 2 eta 3", "1, 2, 3 eta 4") },
         { "gl", new("1 e 2", "1, 2 e 3", "1, 2, 3 e 4") },
         { "ga", new("1 agus 2", "1, 2 agus 3", "1, 2, 3 agus 4") },
 };
@@ -955,6 +961,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("ເໜືອ", "ເໜືອຄ່ອນຕາເວັນອອກ", "ຕາເວັນອອກສຽງເໜືອ", "ຕາເວັນອອກຄ່ອນເໜືອ", "ຕາເວັນອອກ", "ຕາເວັນອອກຄ່ອນໃຕ້", "ຕາເວັນອອກສຽງໃຕ້", "ໃຕ້ຄ່ອນຕາເວັນອອກ", "ໃຕ້", "ໃຕ້ຄ່ອນຕາເວັນຕົກ", "ຕາເວັນຕົກສຽງໃຕ້", "ຕາເວັນຕົກຄ່ອນໃຕ້", "ຕາເວັນຕົກ", "ຕາເວັນຕົກຄ່ອນເໜືອ", "ຕາເວັນຕົກສຽງເໜືອ", "ເໜືອຄ່ອນຕາເວັນຕົກ", "ເໜືອ", "ເໜືອຄ່ອນຕາເວັນອອກ", "ຕາເວັນອອກສຽງເໜືອ", "ຕາເວັນອອກຄ່ອນເໜືອ", "ຕາເວັນອອກ", "ຕາເວັນອອກຄ່ອນໃຕ້", "ຕາເວັນອອກສຽງໃຕ້", "ໃຕ້ຄ່ອນຕາເວັນອອກ", "ໃຕ້", "ໃຕ້ຄ່ອນຕາເວັນຕົກ", "ຕາເວັນຕົກສຽງໃຕ້", "ຕາເວັນຕົກຄ່ອນໃຕ້", "ຕາເວັນຕົກ", "ຕາເວັນຕົກຄ່ອນເໜືອ", "ຕາເວັນຕົກສຽງເໜືອ", "ເໜືອຄ່ອນຕາເວັນຕົກ") },
         { "mn", new("Х", "ХЗХ", "ЗХ", "ЗЗХ", "З", "ЗЗӨ", "ЗӨ", "ӨЗӨ", "Ө", "ӨБӨ", "БӨ", "ББӨ", "Б", "ББХ", "БХ", "ХБХ", "хойд", "хойд-хойд зүүн", "зүүн хойд", "зүүн-зүүн хойд", "зүүн", "зүүн-зүүн өмнөд", "зүүн өмнөд", "өмнөд-зүүн өмнөд", "өмнөд", "өмнөд-баруун өмнөд", "баруун өмнөд", "баруун-баруун өмнөд", "баруун", "баруун-баруун хойд", "баруун хойд", "хойд-баруун хойд") },
         { "ky", new("Тн", "ТнТнЧг", "ТнЧг", "ЧгТнЧг", "Чг", "ЧгТшЧг", "ТшЧг", "ТшТшЧг", "Тш", "ТшТшБт", "ТшБт", "БтТшБт", "Бт", "БтТнБт", "ТнБт", "ТнТнБт", "түндүк", "түндүк-түндүк-чыгыш", "түндүк-чыгыш", "чыгыш-түндүк-чыгыш", "чыгыш", "чыгыш-түштүк-чыгыш", "түштүк-чыгыш", "түштүк-түштүк-чыгыш", "түштүк", "түштүк-түштүк-батыш", "түштүк-батыш", "батыш-түштүк-батыш", "батыш", "батыш-түндүк-батыш", "түндүк-батыш", "түндүк-түндүк-батыш") },
+        { "eu", new("I", "IIE", "IE", "EIE", "E", "EHE", "HE", "HHE", "H", "HHM", "HM", "MHM", "M", "MIM", "IM", "IIM", "ipar", "ipar-ipar-ekialde", "ipar-ekialde", "ekialde-ipar-ekialde", "ekialde", "ekialde-hego-ekialde", "hego-ekialde", "hego-hego-ekialde", "hego", "hego-hego-mendebalde", "hego-mendebalde", "mendebalde-hego-mendebalde", "mendebalde", "mendebalde-ipar-mendebalde", "ipar-mendebalde", "ipar-ipar-mendebalde") },
         { "gl", new("N", "NNE", "NE", "LNE", "L", "LSE", "SE", "SSE", "S", "SSO", "SO", "OSO", "O", "ONO", "NO", "NNO", "norte", "norte-nordés", "nordés", "leste-nordés", "leste", "leste-sueste", "sueste", "sur-sueste", "sur", "sur-sudoeste", "sudoeste", "oeste-sudoeste", "oeste", "oeste-noroeste", "noroeste", "norte-noroeste") },
         { "ga", new("T", "TOT", "OT", "OOT", "O", "OOD", "OD", "DOD", "D", "DID", "ID", "IID", "I", "IIT", "IT", "TIT", "tuaisceart", "tuaisceart-oirthuaisceart", "oirthuaisceart", "oirthear-oirthuaisceart", "oirthear", "oirthear-oirdheisceart", "oirdheisceart", "deisceart-oirdheisceart", "deisceart", "deisceart-iardheisceart", "iardheisceart", "iarthar-iardheisceart", "iarthar", "iarthar-iarthuaisceart", "iarthuaisceart", "tuaisceart-iarthuaisceart") },
 };
@@ -1063,6 +1070,7 @@ public static class LocaleFormatterExactTheoryData
         { "lo", new("ເໜືອ", "ຕາເວັນອອກ", "ໃຕ້", "ຕາເວັນຕົກ") },
         { "mn", new("Х", "З", "Ө", "Б") },
         { "ky", new("Тн", "Чг", "Тш", "Бт") },
+        { "eu", new("I", "E", "H", "M") },
         { "gl", new("N", "L", "S", "O") },
         { "ga", new("T", "O", "D", "I") },
 };

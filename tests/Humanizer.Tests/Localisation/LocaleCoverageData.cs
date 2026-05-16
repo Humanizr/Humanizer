@@ -114,6 +114,7 @@ static class LocaleCoverageData
         { "lo", new(2022, 1, 25, "25 ມັງກອນ 2022") },
         { "mn", new(2022, 1, 25, "2022 оны нэгдүгээр сарын 25") },
         { "ky", new(2022, 1, 25, "25 январь 2022") },
+        { "eu", new(2022, 1, 25, "2022eko urtarrilaren 25") },
         { "gl", new(2022, 1, 25, "25 de xaneiro de 2022") },
         { "ga", new(2022, 1, 25, "25 Eanáir 2022") },
     };
@@ -222,6 +223,7 @@ static class LocaleCoverageData
         { "lo", new(2015, 1, 1, "1 ມັງກອນ 2015") },
         { "mn", new(2015, 1, 1, "2015 оны нэгдүгээр сарын 1") },
         { "ky", new(2015, 1, 1, "1 январь 2015") },
+        { "eu", new(2015, 1, 1, "2015eko urtarrilaren 1") },
         { "gl", new(2015, 1, 1, "1 de xaneiro de 2015") },
         { "ga", new(2015, 1, 1, "1 Eanáir 2015") },
     };
@@ -330,6 +332,7 @@ static class LocaleCoverageData
         { "lo", new(2015, 2, 3, "3 ກຸມພາ 2015") },
         { "mn", new(2015, 2, 3, "2015 оны хоёрдугаар сарын 3") },
         { "ky", new(2015, 2, 3, "3 февраль 2015") },
+        { "eu", new(2015, 2, 3, "2015eko otsailaren 3") },
         { "gl", new(2015, 2, 3, "3 de febreiro de 2015") },
         { "ga", new(2015, 2, 3, "3 Feabhra 2015") },
     };
@@ -356,6 +359,7 @@ static class LocaleCoverageData
         { "es", new(2020, 2, 29, "29 de febrero de 2020") },
         { "mn", new(2020, 2, 29, "2020 оны хоёрдугаар сарын 29") },
         { "ky", new(2020, 2, 29, "29 февраль 2020") },
+        { "eu", new(2020, 2, 29, "2020eko otsailaren 29") },
         { "gl", new(2020, 2, 29, "29 de febreiro de 2020") },
         { "ga", new(2020, 2, 29, "29 Feabhra 2020") },
     };
@@ -381,6 +385,7 @@ static class LocaleCoverageData
         { "es", new(2015, 9, 4, "4 de septiembre de 2015") },
         { "mn", new(2015, 9, 4, "2015 оны есдүгээр сарын 4") },
         { "ky", new(2015, 9, 4, "4 сентябрь 2015") },
+        { "eu", new(2015, 9, 4, "2015eko irailaren 4") },
         { "gl", new(2015, 9, 4, "4 de setembro de 2015") },
         { "ga", new(2015, 9, 4, "4 Meán Fómhair 2015") },
     };
@@ -406,6 +411,7 @@ static class LocaleCoverageData
         { "es", new(1979, 11, 7, "7 de noviembre de 1979") },
         { "mn", new(1979, 11, 7, "1979 оны арван нэгдүгээр сарын 7") },
         { "ky", new(1979, 11, 7, "7 ноябрь 1979") },
+        { "eu", new(1979, 11, 7, "1979eko azaroaren 7") },
         { "gl", new(1979, 11, 7, "7 de novembro de 1979") },
         { "ga", new(1979, 11, 7, "7 Samhain 1979") },
     };
@@ -430,6 +436,7 @@ static class LocaleCoverageData
         { "fr", new(2020, 3, 2, "2 mars 2020") },
         { "mn", new(2020, 3, 2, "2020 оны гуравдугаар сарын 2") },
         { "ky", new(2020, 3, 2, "2 март 2020") },
+        { "eu", new(2020, 3, 2, "2020eko martxoaren 2") },
         { "gl", new(2020, 3, 2, "2 de marzo de 2020") },
         { "ga", new(2020, 3, 2, "2 Márta 2020") },
     };
@@ -455,6 +462,7 @@ static class LocaleCoverageData
         { "fr", new(2021, 10, 31, "31 octobre 2021") },
         { "mn", new(2021, 10, 31, "2021 оны аравдугаар сарын 31") },
         { "ky", new(2021, 10, 31, "31 октябрь 2021") },
+        { "eu", new(2021, 10, 31, "2021eko urriaren 31") },
         { "gl", new(2021, 10, 31, "31 de outubro de 2021") },
         { "ga", new(2021, 10, 31, "31 Deireadh Fómhair 2021") },
     };
@@ -482,6 +490,7 @@ static class LocaleCoverageData
         { "ja", new(2024, 12, 31, "2024年12月31日") },
         { "mn", new(2024, 12, 31, "2024 оны арван хоёрдугаар сарын 31") },
         { "ky", new(2024, 12, 31, "31 декабрь 2024") },
+        { "eu", new(2024, 12, 31, "2024eko abenduaren 31") },
         { "gl", new(2024, 12, 31, "31 de decembro de 2024") },
         { "ga", new(2024, 12, 31, "31 Nollaig 2024") },
     };
@@ -592,6 +601,7 @@ static class LocaleCoverageData
         { "lo", new(13, 23, "13 ໂມງ 23 ນາທີ") },
         { "mn", new(13, 23, "арван гурван цаг хорин гурван минут") },
         { "ky", new(13, 23, "он үч жыйырма үч") },
+        { "eu", new(13, 23, "ordu bata eta hogeita hiru arratsaldean") },
         { "gl", new(13, 23, "a unha e vinte e tres da tarde") },
         { "ga", new(13, 23, "fiche agus a trí tar éis a haon") },
     };
@@ -700,6 +710,7 @@ static class LocaleCoverageData
         { "lo", new(13, 23, "13 ໂມງ 25 ນາທີ") },
         { "mn", new(13, 23, "арван гурван цаг хорин таван минут") },
         { "ky", new(13, 23, "он үч жыйырма беш") },
+        { "eu", new(13, 23, "ordu bata eta hogeita bost arratsaldean") },
         { "gl", new(13, 23, "a unha e vinte e cinco da tarde") },
         { "ga", new(13, 23, "fiche a cúig tar éis a haon") },
     };
@@ -808,6 +819,7 @@ static class LocaleCoverageData
         { "lo", new(1, 5, "1 ໂມງ 5 ນາທີ") },
         { "mn", new(1, 5, "нэг цаг таван минут") },
         { "ky", new(1, 5, "бир нөл беш") },
+        { "eu", new(1, 5, "ordu bata eta bost gauean") },
         { "gl", new(1, 5, "a unha e cinco da madrugada") },
         { "ga", new(1, 5, "cúig tar éis a haon") },
     };
@@ -1261,6 +1273,7 @@ static class LocaleCoverageData
                     { "lo", "ມື້ວານ", "2 ມື້" },
                     { "mn", "өчигдөр", "2 өдөр" },
             { "ky", "кечээ", "2 күн" },
+            { "eu", "atzo", "2 egun" },
             { "gl", "onte", "2 días" },
             { "ga", "inné", "2 lá" },
         };
@@ -1369,6 +1382,7 @@ static class LocaleCoverageData
                     { "lo", "1 ແລະ 2", "1, 2 ແລະ 3" },
                     { "mn", "1 болон 2", "1, 2 болон 3" },
             { "ky", "1 жана 2", "1, 2 жана 3" },
+            { "eu", "1 eta 2", "1, 2 eta 3" },
             { "gl", "1 e 2", "1, 2 e 3" },
             { "ga", "1 agus 2", "1, 2 agus 3" },
         };
@@ -1477,6 +1491,7 @@ static class LocaleCoverageData
                     { "lo", 1, "ທີໜຶ່ງ" },
                     { "mn", 1, "нэгдүгээр" },
             { "ky", 1, "биринчи" },
+            { "eu", 1, "lehen" },
             { "gl", 1, "primeira" },
             { "ga", 1, "céad" },
         };
@@ -1585,6 +1600,7 @@ static class LocaleCoverageData
                     { "lo", 1, "ໜຶ່ງ" },
                     { "mn", 1, "нэг" },
             { "ky", 1, "бир" },
+            { "eu", 1, "bat" },
             { "gl", 1, "un" },
             { "ga", 1, "a haon" },
         };
@@ -1731,6 +1747,7 @@ static class LocaleCoverageData
                     { "lo", 21, "ຊາວເອັດ" },
                     { "mn", 21, "хорин нэг" },
             { "ky", 21, "жыйырма бир" },
+            { "eu", 21, "hogeita bat" },
             { "gl", 21, "vinte e un" },
             { "ga", 42, "daichead agus a dó" },
         };
