@@ -243,6 +243,7 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "or", 1001001L, "ଦଶ ଲକ୍ଷ ଏକ ହଜାର ଏକ" },
         { "gu", 1001001L, "દસ લાખ એક હજાર એક" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
@@ -499,6 +500,7 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "or", 1001001L, "ଦଶ ଲକ୍ଷ ଏକ ହଜାର ଏକ" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
@@ -754,6 +756,7 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "or", 1001001L, "ଦଶ ଲକ୍ଷ ଏକ ହଜାର ଏକ" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
@@ -1009,6 +1012,7 @@ public static class LocaleNumberOverloadTheoryData
         { "zu-ZA", 4325010007018L, "kune itriliyoni kuthathu ikhulu na amashumi amabili kuhlanu ibhiliyoni ishumi isigidi isikhombisa inkulungwane ishumi nesishiyagalombili" },
 
         { "hi", 1001001L, "दस लाख एक हज़ार एक" },
+        { "or", 1001001L, "ଦଶ ଲକ୍ଷ ଏକ ହଜାର ଏକ" },
         { "pa", 1001001L, "ਦਸ ਲੱਖ ਇੱਕ ਹਜ਼ਾਰ ਇੱਕ" },
         { "pa-Arab", 1001001L, "دس لکھ اک ہزار اک" },
         { "mr", 1001001L, "दहा लाख एक हजार एक" },
