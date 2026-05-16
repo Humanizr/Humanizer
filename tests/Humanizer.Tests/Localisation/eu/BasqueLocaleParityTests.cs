@@ -35,6 +35,7 @@ public class BasqueLocaleParityTests
     [InlineData("hogeita batgarren", 21)]
     [InlineData("milioigarren", 1000000)]
     [InlineData("mila milioigarren", 1000000000)]
+    [InlineData("bi mila milioigarren", 2000000000)]
     [InlineData("1.", 1)]
     [InlineData("23.", 23)]
     public void WordsToNumber_ParsesBasqueCardinalsAndOrdinals(string words, long expected) =>

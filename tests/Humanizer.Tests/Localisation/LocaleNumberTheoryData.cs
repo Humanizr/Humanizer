@@ -8655,6 +8655,7 @@ static class LocaleNumberTheoryData
         { "eu", "mila milioi eta bat", 1000000001L },
         { "eu", "milioigarren", 1000000L },
         { "eu", "mila milioigarren", 1000000000L },
+        { "eu", "bi mila milioigarren", 2000000000L },
 
             { "et", "kakskümmend üks", 21L },
             { "et", "kahekümne esimene", 21L },

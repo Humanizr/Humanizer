@@ -373,6 +373,11 @@ surfaces:
           pluralName: 'trilioi'
           omitOneWhenSingular: true
         -
+          value: 1000000000000000
+          name: 'mila bilioi'
+          pluralName: 'mila bilioi'
+          omitOneWhenSingular: true
+        -
           value: 1000000000000
           name: 'bilioi bat'
           pluralName: 'bilioi'
@@ -635,6 +640,7 @@ surfaces:
         hirurogeita hemezortzi: 78
       compositeScaleMap:
         'trilioi bat': 1000000000000000000
+        'mila bilioi': 1000000000000000
         'bilioi bat': 1000000000000
         'mila milioi': 1000000000
         'milioi bat': 1000000
@@ -765,7 +771,8 @@ surfaces:
         bilioigarren: 1000000000000
         mila milioigarren: 1000000000
         trilioigarren: 1000000000000000000
-      gluedOrdinalScaleSuffixes: {}
+      gluedOrdinalScaleSuffixes:
+        mila milioigarren: 1000000000
 
   ordinal:
     numeric:
