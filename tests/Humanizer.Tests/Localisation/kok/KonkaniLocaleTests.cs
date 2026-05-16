@@ -117,7 +117,9 @@ public class KonkaniLocaleTests
     [Theory]
     [InlineData(1, GrammaticalGender.Masculine, "पयलो")]
     [InlineData(5, GrammaticalGender.Masculine, "पांचवो")]
+    [InlineData(19, GrammaticalGender.Masculine, "एकोणीसावो")]
     [InlineData(21, GrammaticalGender.Masculine, "एकविसावो")]
+    [InlineData(30, GrammaticalGender.Feminine, "तिसावी")]
     [InlineData(32, GrammaticalGender.Feminine, "बत्तीसावी")]
     [InlineData(21, GrammaticalGender.Neuter, "एकविसावें")]
     public void ToOrdinalWords_UsesKonkaniGenderedOutput(int number, GrammaticalGender gender, string expected)
