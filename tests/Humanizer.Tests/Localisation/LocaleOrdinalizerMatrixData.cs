@@ -12,6 +12,8 @@ static class LocaleOrdinalizerMatrixData
             { "tk", 1, "1-nji" },
             { "tk", 6, "6-njy" },
             { "tk", 20, "20-nji" },
+            { "tk", 120, "120-nji" },
+            { "tk", 200, "200-nji" },
 
             { "et", 1, "1." },
             { "et", 21, "21." },

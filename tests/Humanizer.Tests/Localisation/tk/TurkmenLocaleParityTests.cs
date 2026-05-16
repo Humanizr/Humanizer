@@ -153,6 +153,8 @@ public class TurkmenLocaleParityTests
     [InlineData(6, "6-njy")]
     [InlineData(10, "10-njy")]
     [InlineData(20, "20-nji")]
+    [InlineData(120, "120-nji")]
+    [InlineData(200, "200-nji")]
     [InlineData(-6, "-6-njy")]
     public void Ordinalize_UsesTurkmenNumericSuffixes(int number, string expected)
     {

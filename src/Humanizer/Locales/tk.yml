@@ -376,6 +376,17 @@ surfaces:
         80: '-nji'
         90: '-njy'
         100: '-nji'
+      lastTwoDigitSuffixes:
+        0: '-nji'
+        10: '-njy'
+        20: '-nji'
+        30: '-njy'
+        40: '-njy'
+        50: '-nji'
+        60: '-njy'
+        70: '-nji'
+        80: '-nji'
+        90: '-njy'
       lastDigitSuffixes:
         0: '-njy'
         6: '-njy'
