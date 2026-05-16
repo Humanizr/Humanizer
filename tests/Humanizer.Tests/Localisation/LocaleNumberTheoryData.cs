@@ -4,6 +4,13 @@ static class LocaleNumberTheoryData
 {
     public static TheoryData<string, int, string> CardinalCases => new()
     {
+
+        { "tk", 0, "nol" },
+        { "tk", 1, "bir" },
+        { "tk", 21, "ýigrimi bir" },
+        { "tk", 105, "ýüz bäş" },
+        { "tk", 1234, "müň iki ýüz otuz dört" },
+
             { "et", 0, "null" },
             { "et", 1, "üks" },
             { "et", 21, "kakskümmend üks" },
@@ -3173,6 +3180,9 @@ static class LocaleNumberTheoryData
         { "eu", 101, true, "ehun eta bat" },
         { "eu", 101, false, "ehun eta bat" },
 
+        { "tk", 101, true, "ýüz bir" },
+        { "tk", 101, false, "ýüz bir" },
+
             { "et", 101, true, "sada üks" },
             { "et", 101, false, "sada üks" },
         { "sq", 105, false, "njëqind e pesë" },
@@ -4064,6 +4074,8 @@ static class LocaleNumberTheoryData
     {
         { "eu", 21, WordForm.Normal, "hogeita bat" },
 
+        { "tk", 2, WordForm.Normal, "iki" },
+
             { "et", 21, WordForm.Normal, "kakskümmend üks" },
         { "sq", 21, WordForm.Abbreviation, "njëzet e një" },
         { "mk", 21, WordForm.Abbreviation, "дваесет и еден" },
@@ -4523,6 +4535,10 @@ static class LocaleNumberTheoryData
         { "eu", 2, GrammaticalGender.Masculine, "bi" },
         { "eu", 2, GrammaticalGender.Feminine, "bi" },
         { "eu", 2, GrammaticalGender.Neuter, "bi" },
+
+        { "tk", 2, GrammaticalGender.Masculine, "iki" },
+        { "tk", 2, GrammaticalGender.Feminine, "iki" },
+        { "tk", 2, GrammaticalGender.Neuter, "iki" },
 
             { "et", 21, GrammaticalGender.Masculine, "kakskümmend üks" },
             { "et", 21, GrammaticalGender.Feminine, "kakskümmend üks" },
@@ -5042,6 +5058,10 @@ static class LocaleNumberTheoryData
         { "eu", 2, WordForm.Normal, GrammaticalGender.Feminine, "bi" },
         { "eu", 2, WordForm.Normal, GrammaticalGender.Neuter, "bi" },
 
+        { "tk", 2, WordForm.Normal, GrammaticalGender.Masculine, "iki" },
+        { "tk", 2, WordForm.Normal, GrammaticalGender.Feminine, "iki" },
+        { "tk", 2, WordForm.Normal, GrammaticalGender.Neuter, "iki" },
+
             { "et", 21, WordForm.Normal, GrammaticalGender.Masculine, "kakskümmend üks" },
             { "et", 21, WordForm.Normal, GrammaticalGender.Feminine, "kakskümmend üks" },
             { "et", 21, WordForm.Normal, GrammaticalGender.Neuter, "kakskümmend üks" },
@@ -5351,6 +5371,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, string> OrdinalCases => new()
     {
+
+        { "tk", 1, "birinji" },
+        { "tk", 21, "ýigrimi birinji" },
+
             { "et", 1, "esimene" },
             { "et", 21, "kahekümne esimene" },
             { "et", 101, "saja esimene" },
@@ -6901,6 +6925,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> OrdinalWordFormCases => new()
     {
+
+        { "tk", 1, WordForm.Normal, "birinji" },
+
             { "et", 21, WordForm.Normal, "kahekümne esimene" },
         { "sq", 1, WordForm.Abbreviation, "i parë" },
         { "mk", 21, WordForm.Abbreviation, "дваесет и прв" },
@@ -7323,6 +7350,11 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> OrdinalGenderCases => new()
     {
+
+        { "tk", 1, GrammaticalGender.Masculine, "birinji" },
+        { "tk", 1, GrammaticalGender.Feminine, "birinji" },
+        { "tk", 1, GrammaticalGender.Neuter, "birinji" },
+
             { "et", 21, GrammaticalGender.Masculine, "kahekümne esimene" },
             { "et", 21, GrammaticalGender.Feminine, "kahekümne esimene" },
             { "et", 21, GrammaticalGender.Neuter, "kahekümne esimene" },
@@ -8258,6 +8290,11 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, WordForm, string> OrdinalWordFormGenderCases => new()
     {
+
+        { "tk", 1, GrammaticalGender.Masculine, WordForm.Normal, "birinji" },
+        { "tk", 1, GrammaticalGender.Feminine, WordForm.Normal, "birinji" },
+        { "tk", 1, GrammaticalGender.Neuter, WordForm.Normal, "birinji" },
+
             { "et", 21, GrammaticalGender.Masculine, WordForm.Normal, "kahekümne esimene" },
             { "et", 21, GrammaticalGender.Feminine, WordForm.Normal, "kahekümne esimene" },
             { "et", 21, GrammaticalGender.Neuter, WordForm.Normal, "kahekümne esimene" },
@@ -8570,6 +8607,9 @@ static class LocaleNumberTheoryData
     {
         { "eu", 2, "bi" },
 
+        { "tk", 1, "ýeke" },
+        { "tk", 2, "jübüt" },
+
             { "et", 2, "kaks" },
         { "sq", 1, "një" },
         { "mk", 2, "два" },
@@ -8692,6 +8732,9 @@ static class LocaleNumberTheoryData
         { "eu", "milioigarren", 1000000L },
         { "eu", "mila milioigarren", 1000000000L },
         { "eu", "bi mila milioigarren", 2000000000L },
+
+        { "tk", "ýigrimi bir", 21L },
+        { "tk", "ýigrimi birinji", 21L },
 
             { "et", "kakskümmend üks", 21L },
             { "et", "kahekümne esimene", 21L },

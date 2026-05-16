@@ -6,6 +6,9 @@ public static class LocaleNumberMagnitudeTheoryData
     {
         { "eu", 1001L, "mila eta bat" },
 
+        { "tk", 1001L, "müň bir" },
+        { "tk", 1000001L, "bir million bir" },
+
             { "et", 1001L, "tuhat üks" },
             { "et", 1000001L, "miljon üks" },
             { "et", 1234567L, "miljon kakssada kolmkümmend neli tuhat viissada kuuskümmend seitse" },
@@ -221,6 +224,7 @@ public static class LocaleNumberMagnitudeTheoryData
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
         { "eu", 1000001L, "milioi bat eta bat" },
+        { "tk", 1001000001L, "bir milliard bir million bir" },
 
             { "et", 1001000001L, "miljard miljon üks" },
         { "sq", 1000000000000L, "një trilion" },
@@ -538,6 +542,8 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, string> HighRangeRoundTripCases => new()
     {
+        { "tk", 1000000000000000000L, "bir kwintillion" },
+
         { "ka", 4325010007018L, "ოთხი ტრილიონ სამას ოცდახუთი მილიარდ ათი მილიონ შვიდი ათას თვრამეტი" },
         { "sw", 1000000000000000000L, "kwintilioni moja" },
         { "so", 1000000000000000000L, "kintilyan" },
