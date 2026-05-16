@@ -3093,6 +3093,36 @@ static class LocaleNumberTheoryData
         { "ky", 1440, "миң төрт жүз кырк" },
         { "ky", 3501, "үч миң беш жүз бир" },
         { "ky", -1346711, "минус бир миллион үч жүз кырк алты миң жети жүз он бир" },
+        { "eu", 0, "zero" },
+        { "eu", 1, "bat" },
+        { "eu", 2, "bi" },
+        { "eu", 3, "hiru" },
+        { "eu", 4, "lau" },
+        { "eu", 5, "bost" },
+        { "eu", 10, "hamar" },
+        { "eu", 11, "hamaika" },
+        { "eu", 12, "hamabi" },
+        { "eu", 19, "hemeretzi" },
+        { "eu", 20, "hogei" },
+        { "eu", 21, "hogeita bat" },
+        { "eu", 22, "hogeita bi" },
+        { "eu", 30, "hogeita hamar" },
+        { "eu", 40, "berrogei" },
+        { "eu", 80, "laurogei" },
+        { "eu", 90, "laurogeita hamar" },
+        { "eu", 99, "laurogeita hemeretzi" },
+        { "eu", 100, "ehun" },
+        { "eu", 101, "ehun eta bat" },
+        { "eu", 121, "ehun eta hogeita bat" },
+        { "eu", 200, "berrehun" },
+        { "eu", 999, "bederatziehun eta laurogeita hemeretzi" },
+        { "eu", 1000, "mila" },
+        { "eu", 1001, "mila eta bat" },
+        { "eu", 3500, "hiru mila eta bostehun" },
+        { "eu", 1000000, "milioi bat" },
+        { "eu", 1000001, "milioi bat eta bat" },
+        { "eu", 1000000000, "mila milioi" },
+        { "eu", 1000000001, "mila milioi eta bat" },
         { "gl", 0, "cero" },
         { "gl", 1, "un" },
         { "gl", 2, "dous" },
@@ -3132,6 +3162,9 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, bool, string> CardinalAddAndCases => new()
     {
+        { "eu", 101, true, "ehun eta bat" },
+        { "eu", 101, false, "ehun eta bat" },
+
             { "et", 101, true, "sada üks" },
             { "et", 101, false, "sada üks" },
         { "sq", 105, false, "njëqind e pesë" },
@@ -4017,6 +4050,8 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, string> CardinalWordFormCases => new()
     {
+        { "eu", 21, WordForm.Normal, "hogeita bat" },
+
             { "et", 21, WordForm.Normal, "kakskümmend üks" },
         { "sq", 21, WordForm.Abbreviation, "njëzet e një" },
         { "mk", 21, WordForm.Abbreviation, "дваесет и еден" },
@@ -4471,6 +4506,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, GrammaticalGender, string> CardinalGenderCases => new()
     {
+        { "eu", 2, GrammaticalGender.Masculine, "bi" },
+        { "eu", 2, GrammaticalGender.Feminine, "bi" },
+        { "eu", 2, GrammaticalGender.Neuter, "bi" },
+
             { "et", 21, GrammaticalGender.Masculine, "kakskümmend üks" },
             { "et", 21, GrammaticalGender.Feminine, "kakskümmend üks" },
             { "et", 21, GrammaticalGender.Neuter, "kakskümmend üks" },
@@ -4982,6 +5021,10 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, int, WordForm, GrammaticalGender, string> CardinalWordFormGenderCases => new()
     {
+        { "eu", 2, WordForm.Normal, GrammaticalGender.Masculine, "bi" },
+        { "eu", 2, WordForm.Normal, GrammaticalGender.Feminine, "bi" },
+        { "eu", 2, WordForm.Normal, GrammaticalGender.Neuter, "bi" },
+
             { "et", 21, WordForm.Normal, GrammaticalGender.Masculine, "kakskümmend üks" },
             { "et", 21, WordForm.Normal, GrammaticalGender.Feminine, "kakskümmend üks" },
             { "et", 21, WordForm.Normal, GrammaticalGender.Neuter, "kakskümmend üks" },
@@ -6820,6 +6863,11 @@ static class LocaleNumberTheoryData
         { "ky", 1000000, "бир миллионунчу" },
         { "ky", 1000000000, "бир миллиардынчы" },
         { "ky", 1022135, "бир миллион жыйырма эки миң жүз отуз бешинчи" },
+        { "eu", 1, "lehen" },
+        { "eu", 2, "bigarren" },
+        { "eu", 21, "hogeita batgarren" },
+        { "eu", 1000000, "milioigarren" },
+        { "eu", 1000000000, "mila milioigarren" },
         { "gl", 1, "primeiro" },
         { "ga", 3, "tríú" },
     };
@@ -7239,6 +7287,7 @@ static class LocaleNumberTheoryData
         { "ky", 3, WordForm.Abbreviation, "үчүнчү" },
         { "ky", 4, WordForm.Abbreviation, "төртүнчү" },
         { "ky", 21, WordForm.Abbreviation, "жыйырма биринчи" },
+        { "eu", 1, WordForm.Normal, "lehen" },
         { "gl", 1, WordForm.Normal, "primeiro" },
         { "ga", 3, WordForm.Abbreviation, "tríú" },
     };
@@ -8165,6 +8214,9 @@ static class LocaleNumberTheoryData
         { "ky", 1, GrammaticalGender.Masculine, "биринчи" },
         { "ky", 1, GrammaticalGender.Neuter, "биринчи" },
         { "gl", 1, GrammaticalGender.Masculine, "primeiro" },
+        { "eu", 1, GrammaticalGender.Masculine, "lehen" },
+        { "eu", 1, GrammaticalGender.Feminine, "lehen" },
+        { "eu", 1, GrammaticalGender.Neuter, "lehen" },
         { "gl", 1, GrammaticalGender.Feminine, "primeira" },
         { "gl", 1, GrammaticalGender.Neuter, "primeiro" },
         { "ga", 3, GrammaticalGender.Masculine, "tríú" },
@@ -8470,6 +8522,9 @@ static class LocaleNumberTheoryData
         { "ky", 3, GrammaticalGender.Masculine, WordForm.Abbreviation, "үчүнчү" },
         { "ky", 3, GrammaticalGender.Neuter, WordForm.Abbreviation, "үчүнчү" },
         { "gl", 1, GrammaticalGender.Masculine, WordForm.Normal, "primeiro" },
+        { "eu", 1, GrammaticalGender.Masculine, WordForm.Normal, "lehen" },
+        { "eu", 1, GrammaticalGender.Feminine, WordForm.Normal, "lehen" },
+        { "eu", 1, GrammaticalGender.Neuter, WordForm.Normal, "lehen" },
         { "gl", 1, GrammaticalGender.Feminine, WordForm.Normal, "primeira" },
         { "gl", 1, GrammaticalGender.Neuter, WordForm.Normal, "primeiro" },
         { "ga", 3, GrammaticalGender.Masculine, WordForm.Abbreviation, "tríú" },
@@ -8478,6 +8533,8 @@ static class LocaleNumberTheoryData
     };
     public static TheoryData<string, int, string> TupleCases => new()
     {
+        { "eu", 2, "bi" },
+
             { "et", 2, "kaks" },
         { "sq", 1, "një" },
         { "mk", 2, "два" },
@@ -8591,6 +8648,15 @@ static class LocaleNumberTheoryData
 
     public static TheoryData<string, string, long> WordsToNumberCases => new()
     {
+        { "eu", "hogeita bat", 21L },
+        { "eu", "minus ehun eta hogeita hiru", -123L },
+        { "eu", "milioi bat", 1000000L },
+        { "eu", "milioi bat eta bat", 1000001L },
+        { "eu", "mila milioi eta bat", 1000000001L },
+        { "eu", "milioigarren", 1000000L },
+        { "eu", "mila milioigarren", 1000000000L },
+        { "eu", "bi mila milioigarren", 2000000000L },
+
             { "et", "kakskümmend üks", 21L },
             { "et", "kahekümne esimene", 21L },
         { "sq", "njëzet e një", 21L },

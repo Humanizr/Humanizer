@@ -4,6 +4,8 @@ public static class LocaleNumberMagnitudeTheoryData
 {
     public static TheoryData<string, long, string> MagnitudeCardinalCases => new()
     {
+        { "eu", 1001L, "mila eta bat" },
+
             { "et", 1001L, "tuhat üks" },
             { "et", 1000001L, "miljon üks" },
             { "et", 1234567L, "miljon kakssada kolmkümmend neli tuhat viissada kuuskümmend seitse" },
@@ -215,6 +217,8 @@ public static class LocaleNumberMagnitudeTheoryData
 
     public static TheoryData<string, long, string> ExtendedMagnitudeCardinalCases => new()
     {
+        { "eu", 1000001L, "milioi bat eta bat" },
+
             { "et", 1001000001L, "miljard miljon üks" },
         { "sq", 1000000000000L, "një trilion" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
@@ -556,6 +560,9 @@ public static class LocaleNumberMagnitudeTheoryData
         { "as", 100000000000000L, "এক মহাপদ্ম" },
         { "bn", 1000000000000000L, "দশ মহাপদ্ম" },
         { "as", 1000000000000000L, "দহ মহাপদ্ম" },
+        { "eu", 1000000000000000L, "mila bilioi" },
+        { "eu", 1000000000000001L, "mila bilioi eta bat" },
+        { "eu", 2000000000000000L, "bi mila bilioi" },
         { "el", 1000000000000L, "ένα τρισεκατομμύριο" },
         { "el", 1000000000001L, "ένα τρισεκατομμύριο ένα" },
         { "el", 1000000000000000L, "ένα τετράκις εκατομμύριο" },

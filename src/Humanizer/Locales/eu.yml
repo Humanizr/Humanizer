@@ -1,0 +1,882 @@
+locale: 'eu'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'eta'
+
+  formatter:
+    engine: 'profiled'
+    exactDateForms:
+      -
+        number: 2
+        form: 'dual'
+        units:
+          - 'day'
+        tenses:
+          - 'past'
+          - 'future'
+    timeUnitGenders:
+      millisecond: 'neuter'
+      second: 'neuter'
+      minute: 'neuter'
+      hour: 'neuter'
+      day: 'neuter'
+      week: 'neuter'
+      month: 'neuter'
+      year: 'neuter'
+
+  phrases:
+    relativeDate:
+      now: 'orain'
+      never: 'inoiz ez'
+      past:
+        millisecond:
+          single: 'duela milisegundo bat'
+          multiple:
+            forms:
+              default: 'milisegundo'
+            beforeCount: 'duela'
+        second:
+          single: 'duela segundo bat'
+          multiple:
+            forms:
+              default: 'segundo'
+            beforeCount: 'duela'
+        minute:
+          single: 'duela minutu bat'
+          multiple:
+            forms:
+              default: 'minutu'
+            beforeCount: 'duela'
+        hour:
+          single: 'duela ordu bat'
+          multiple:
+            forms:
+              default: 'ordu'
+            beforeCount: 'duela'
+        day:
+          single: 'atzo'
+          multiple:
+            forms:
+              default: 'egun'
+            beforeCount: 'duela'
+          template:
+            name: 'two'
+            value: 'herenegun'
+        week:
+          single: 'duela aste bat'
+          multiple:
+            forms:
+              default: 'aste'
+            beforeCount: 'duela'
+        month:
+          single: 'duela hilabete bat'
+          multiple:
+            forms:
+              default: 'hilabete'
+            beforeCount: 'duela'
+        year:
+          single: 'duela urte bat'
+          multiple:
+            forms:
+              default: 'urte'
+            beforeCount: 'duela'
+      future:
+        millisecond:
+          single: 'milisegundo bat barru'
+          multiple:
+            forms:
+              default: 'milisegundo'
+            afterCount: 'barru'
+        second:
+          single: 'segundo bat barru'
+          multiple:
+            forms:
+              default: 'segundo'
+            afterCount: 'barru'
+        minute:
+          single: 'minutu bat barru'
+          multiple:
+            forms:
+              default: 'minutu'
+            afterCount: 'barru'
+        hour:
+          single: 'ordu bat barru'
+          multiple:
+            forms:
+              default: 'ordu'
+            afterCount: 'barru'
+        day:
+          single: 'bihar'
+          multiple:
+            forms:
+              default: 'egun'
+            afterCount: 'barru'
+          template:
+            name: 'two'
+            value: 'etzi'
+        week:
+          single: 'aste bat barru'
+          multiple:
+            forms:
+              default: 'aste'
+            afterCount: 'barru'
+        month:
+          single: 'hilabete bat barru'
+          multiple:
+            forms:
+              default: 'hilabete'
+            afterCount: 'barru'
+        year:
+          single: 'urte bat barru'
+          multiple:
+            forms:
+              default: 'urte'
+            afterCount: 'barru'
+    duration:
+      zero: 'ezer ez'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisegundo'
+          words: 'milisegundo bat'
+        multiple:
+          forms:
+            default: 'milisegundo'
+      second:
+        single:
+          numeric: '1 segundo'
+          words: 'segundo bat'
+        multiple:
+          forms:
+            default: 'segundo'
+      minute:
+        single:
+          numeric: '1 minutu'
+          words: 'minutu bat'
+        multiple:
+          forms:
+            default: 'minutu'
+      hour:
+        single:
+          numeric: '1 ordu'
+          words: 'ordu bat'
+        multiple:
+          forms:
+            default: 'ordu'
+      day:
+        single:
+          numeric: '1 egun'
+          words: 'egun bat'
+        multiple:
+          forms:
+            default: 'egun'
+      week:
+        single:
+          numeric: '1 aste'
+          words: 'aste bat'
+        multiple:
+          forms:
+            default: 'aste'
+      month:
+        single:
+          numeric: '1 hilabete'
+          words: 'hilabete bat'
+        multiple:
+          forms:
+            default: 'hilabete'
+      year:
+        single:
+          numeric: '1 urte'
+          words: 'urte bat'
+        multiple:
+          forms:
+            default: 'urte'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'eg'
+      week:
+        symbol: 'ast'
+      month:
+        symbol: 'hil'
+      year:
+        symbol: 'urt'
+
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'zero'
+      minusWord: 'minus'
+      negativeJoinWord: ' '
+      joinWord: ' eta '
+      scaleCountJoinWord: ' '
+      underHundredJoinWord: ' '
+      omitOneWhenSingularAlways: true
+      defaultOrdinalSuffix: 'garren'
+      requireOrdinalException: false
+      matchingOrdinalSuffix: null
+      ordinalSuffixMatchCharacters: null
+      unitsMap: []
+      tensMap: []
+      hundredsMap:
+        - ''
+        - 'ehun'
+        - 'berrehun'
+        - 'hirurehun'
+        - 'laurehun'
+        - 'bostehun'
+        - 'seiehun'
+        - 'zazpiehun'
+        - 'zortziehun'
+        - 'bederatziehun'
+      subHundredMap:
+        - 'zero'
+        - 'bat'
+        - 'bi'
+        - 'hiru'
+        - 'lau'
+        - 'bost'
+        - 'sei'
+        - 'zazpi'
+        - 'zortzi'
+        - 'bederatzi'
+        - 'hamar'
+        - 'hamaika'
+        - 'hamabi'
+        - 'hamahiru'
+        - 'hamalau'
+        - 'hamabost'
+        - 'hamasei'
+        - 'hamazazpi'
+        - 'hemezortzi'
+        - 'hemeretzi'
+        - 'hogei'
+        - 'hogeita bat'
+        - 'hogeita bi'
+        - 'hogeita hiru'
+        - 'hogeita lau'
+        - 'hogeita bost'
+        - 'hogeita sei'
+        - 'hogeita zazpi'
+        - 'hogeita zortzi'
+        - 'hogeita bederatzi'
+        - 'hogeita hamar'
+        - 'hogeita hamaika'
+        - 'hogeita hamabi'
+        - 'hogeita hamahiru'
+        - 'hogeita hamalau'
+        - 'hogeita hamabost'
+        - 'hogeita hamasei'
+        - 'hogeita hamazazpi'
+        - 'hogeita hemezortzi'
+        - 'hogeita hemeretzi'
+        - 'berrogei'
+        - 'berrogeita bat'
+        - 'berrogeita bi'
+        - 'berrogeita hiru'
+        - 'berrogeita lau'
+        - 'berrogeita bost'
+        - 'berrogeita sei'
+        - 'berrogeita zazpi'
+        - 'berrogeita zortzi'
+        - 'berrogeita bederatzi'
+        - 'berrogeita hamar'
+        - 'berrogeita hamaika'
+        - 'berrogeita hamabi'
+        - 'berrogeita hamahiru'
+        - 'berrogeita hamalau'
+        - 'berrogeita hamabost'
+        - 'berrogeita hamasei'
+        - 'berrogeita hamazazpi'
+        - 'berrogeita hemezortzi'
+        - 'berrogeita hemeretzi'
+        - 'hirurogei'
+        - 'hirurogeita bat'
+        - 'hirurogeita bi'
+        - 'hirurogeita hiru'
+        - 'hirurogeita lau'
+        - 'hirurogeita bost'
+        - 'hirurogeita sei'
+        - 'hirurogeita zazpi'
+        - 'hirurogeita zortzi'
+        - 'hirurogeita bederatzi'
+        - 'hirurogeita hamar'
+        - 'hirurogeita hamaika'
+        - 'hirurogeita hamabi'
+        - 'hirurogeita hamahiru'
+        - 'hirurogeita hamalau'
+        - 'hirurogeita hamabost'
+        - 'hirurogeita hamasei'
+        - 'hirurogeita hamazazpi'
+        - 'hirurogeita hemezortzi'
+        - 'hirurogeita hemeretzi'
+        - 'laurogei'
+        - 'laurogeita bat'
+        - 'laurogeita bi'
+        - 'laurogeita hiru'
+        - 'laurogeita lau'
+        - 'laurogeita bost'
+        - 'laurogeita sei'
+        - 'laurogeita zazpi'
+        - 'laurogeita zortzi'
+        - 'laurogeita bederatzi'
+        - 'laurogeita hamar'
+        - 'laurogeita hamaika'
+        - 'laurogeita hamabi'
+        - 'laurogeita hamahiru'
+        - 'laurogeita hamalau'
+        - 'laurogeita hamabost'
+        - 'laurogeita hamasei'
+        - 'laurogeita hamazazpi'
+        - 'laurogeita hemezortzi'
+        - 'laurogeita hemeretzi'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'trilioi bat'
+          pluralName: 'trilioi'
+          omitOneWhenSingular: true
+        -
+          value: 1000000000000000
+          name: 'mila bilioi'
+          pluralName: 'mila bilioi'
+          omitOneWhenSingular: true
+        -
+          value: 1000000000000
+          name: 'bilioi bat'
+          pluralName: 'bilioi'
+          omitOneWhenSingular: true
+        -
+          value: 1000000000
+          name: 'mila milioi'
+          pluralName: 'mila milioi'
+          omitOneWhenSingular: true
+        -
+          value: 1000000
+          name: 'milioi bat'
+          pluralName: 'milioi'
+          omitOneWhenSingular: true
+        -
+          value: 1000
+          name: 'mila'
+          pluralName: 'mila'
+          omitOneWhenSingular: true
+      ordinalExceptions:
+        0: 'zerogarren'
+        1: 'lehen'
+        2: 'bigarren'
+        3: 'hirugarren'
+        4: 'laugarren'
+        5: 'bosgarren'
+        6: 'seigarren'
+        7: 'zazpigarren'
+        8: 'zortzigarren'
+        9: 'bederatzigarren'
+        10: 'hamargarren'
+        11: 'hamaikagarren'
+        12: 'hamabigarren'
+        13: 'hamahirugarren'
+        14: 'hamalaugarren'
+        15: 'hamabostgarren'
+        16: 'hamaseigarren'
+        17: 'hamazazpigarren'
+        18: 'hemezortzigarren'
+        19: 'hemeretzigarren'
+        20: 'hogeigarren'
+        21: 'hogeita batgarren'
+        22: 'hogeita bigarren'
+        23: 'hogeita hirugarren'
+        24: 'hogeita laugarren'
+        25: 'hogeita bostgarren'
+        26: 'hogeita seigarren'
+        27: 'hogeita zazpigarren'
+        28: 'hogeita zortzigarren'
+        29: 'hogeita bederatzigarren'
+        30: 'hogeita hamargarren'
+        31: 'hogeita hamaikagarren'
+        32: 'hogeita hamabigarren'
+        33: 'hogeita hamahirugarren'
+        34: 'hogeita hamalaugarren'
+        35: 'hogeita hamabostgarren'
+        36: 'hogeita hamaseigarren'
+        37: 'hogeita hamazazpigarren'
+        38: 'hogeita hemezortzigarren'
+        39: 'hogeita hemeretzigarren'
+        40: 'berrogeigarren'
+        41: 'berrogeita batgarren'
+        42: 'berrogeita bigarren'
+        43: 'berrogeita hirugarren'
+        44: 'berrogeita laugarren'
+        45: 'berrogeita bostgarren'
+        46: 'berrogeita seigarren'
+        47: 'berrogeita zazpigarren'
+        48: 'berrogeita zortzigarren'
+        49: 'berrogeita bederatzigarren'
+        50: 'berrogeita hamargarren'
+        51: 'berrogeita hamaikagarren'
+        52: 'berrogeita hamabigarren'
+        53: 'berrogeita hamahirugarren'
+        54: 'berrogeita hamalaugarren'
+        55: 'berrogeita hamabostgarren'
+        56: 'berrogeita hamaseigarren'
+        57: 'berrogeita hamazazpigarren'
+        58: 'berrogeita hemezortzigarren'
+        59: 'berrogeita hemeretzigarren'
+        60: 'hirurogeigarren'
+        61: 'hirurogeita batgarren'
+        62: 'hirurogeita bigarren'
+        63: 'hirurogeita hirugarren'
+        64: 'hirurogeita laugarren'
+        65: 'hirurogeita bostgarren'
+        66: 'hirurogeita seigarren'
+        67: 'hirurogeita zazpigarren'
+        68: 'hirurogeita zortzigarren'
+        69: 'hirurogeita bederatzigarren'
+        70: 'hirurogeita hamargarren'
+        71: 'hirurogeita hamaikagarren'
+        72: 'hirurogeita hamabigarren'
+        73: 'hirurogeita hamahirugarren'
+        74: 'hirurogeita hamalaugarren'
+        75: 'hirurogeita hamabostgarren'
+        76: 'hirurogeita hamaseigarren'
+        77: 'hirurogeita hamazazpigarren'
+        78: 'hirurogeita hemezortzigarren'
+        79: 'hirurogeita hemeretzigarren'
+        80: 'laurogeigarren'
+        81: 'laurogeita batgarren'
+        82: 'laurogeita bigarren'
+        83: 'laurogeita hirugarren'
+        84: 'laurogeita laugarren'
+        85: 'laurogeita bostgarren'
+        86: 'laurogeita seigarren'
+        87: 'laurogeita zazpigarren'
+        88: 'laurogeita zortzigarren'
+        89: 'laurogeita bederatzigarren'
+        90: 'laurogeita hamargarren'
+        91: 'laurogeita hamaikagarren'
+        92: 'laurogeita hamabigarren'
+        93: 'laurogeita hamahirugarren'
+        94: 'laurogeita hamalaugarren'
+        95: 'laurogeita hamabostgarren'
+        96: 'laurogeita hamaseigarren'
+        97: 'laurogeita hamazazpigarren'
+        98: 'laurogeita hemezortzigarren'
+        99: 'laurogeita hemeretzigarren'
+        100: 'ehungarren'
+        200: 'berrehungarren'
+        300: 'hirurehungarren'
+        400: 'laurehungarren'
+        500: 'bostehungarren'
+        600: 'seiehungarren'
+        700: 'zazpiehungarren'
+        800: 'zortziehungarren'
+        900: 'bederatziehungarren'
+        1000000: 'milioigarren'
+        1000000000: 'mila milioigarren'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      cardinalMap:
+        bi: 2
+        bat: 1
+        lau: 4
+        sei: 6
+        bost: 5
+        ehun: 100
+        hiru: 3
+        mila: 1000
+        zero: 0
+        hamar: 10
+        hogei: 20
+        zazpi: 7
+        bilioi: 1000000000000
+        hamabi: 12
+        milioi: 1000000
+        zortzi: 8
+        bilioia: 1000000000000
+        hamaika: 11
+        hamalau: 14
+        hamasei: 16
+        hogeita: 20
+        milioia: 1000000
+        seiehun: 600
+        trilioi: 1000000000000000000
+        berrehun: 200
+        berrogei: 40
+        bilioiak: 1000000000000
+        bostehun: 500
+        hamabost: 15
+        hamahiru: 13
+        laurehun: 400
+        laurogei: 80
+        milioiak: 1000000
+        trilioia: 1000000000000000000
+        bederatzi: 9
+        hamazazpi: 17
+        hemeretzi: 19
+        hirurehun: 300
+        hirurogei: 60
+        trilioiak: 1000000000000000000
+        zazpiehun: 700
+        berrogeita: 40
+        hemezortzi: 18
+        laurogeita: 80
+        zortziehun: 800
+        hirurogeita: 60
+        bederatziehun: 900
+        hogeita bi: 22
+        hogeita bat: 21
+        hogeita lau: 24
+        hogeita sei: 26
+        mila milioi: 1000000000
+        hogeita bost: 25
+        hogeita hiru: 23
+        berrogeita bi: 42
+        hogeita hamar: 30
+        hogeita zazpi: 27
+        laurogeita bi: 82
+        berrogeita bat: 41
+        berrogeita lau: 44
+        berrogeita sei: 46
+        hirurogeita bi: 62
+        hogeita hamabi: 32
+        hogeita zortzi: 28
+        laurogeita bat: 81
+        laurogeita lau: 84
+        laurogeita sei: 86
+        berrogeita bost: 45
+        berrogeita hiru: 43
+        hirurogeita bat: 61
+        hirurogeita lau: 64
+        hirurogeita sei: 66
+        hogeita hamaika: 31
+        hogeita hamalau: 34
+        hogeita hamasei: 36
+        laurogeita bost: 85
+        laurogeita hiru: 83
+        berrogeita hamar: 50
+        berrogeita zazpi: 47
+        hirurogeita bost: 65
+        hirurogeita hiru: 63
+        hogeita hamabost: 35
+        hogeita hamahiru: 33
+        laurogeita hamar: 90
+        laurogeita zazpi: 87
+        berrogeita hamabi: 52
+        berrogeita zortzi: 48
+        hirurogeita hamar: 70
+        hirurogeita zazpi: 67
+        hogeita bederatzi: 29
+        hogeita hamazazpi: 37
+        hogeita hemeretzi: 39
+        laurogeita hamabi: 92
+        laurogeita zortzi: 88
+        berrogeita hamaika: 51
+        berrogeita hamalau: 54
+        berrogeita hamasei: 56
+        hirurogeita hamabi: 72
+        hirurogeita zortzi: 68
+        hogeita hemezortzi: 38
+        laurogeita hamaika: 91
+        laurogeita hamalau: 94
+        laurogeita hamasei: 96
+        berrogeita hamabost: 55
+        berrogeita hamahiru: 53
+        hirurogeita hamaika: 71
+        hirurogeita hamalau: 74
+        hirurogeita hamasei: 76
+        laurogeita hamabost: 95
+        laurogeita hamahiru: 93
+        berrogeita bederatzi: 49
+        berrogeita hamazazpi: 57
+        berrogeita hemeretzi: 59
+        hirurogeita hamabost: 75
+        hirurogeita hamahiru: 73
+        laurogeita bederatzi: 89
+        laurogeita hamazazpi: 97
+        laurogeita hemeretzi: 99
+        berrogeita hemezortzi: 58
+        hirurogeita bederatzi: 69
+        hirurogeita hamazazpi: 77
+        hirurogeita hemeretzi: 79
+        laurogeita hemezortzi: 98
+        hirurogeita hemezortzi: 78
+      compositeScaleMap:
+        'trilioi bat': 1000000000000000000
+        'mila bilioi': 1000000000000000
+        'bilioi bat': 1000000000000
+        'mila milioi': 1000000000
+        'milioi bat': 1000000
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'none'
+      negativePrefixes:
+        - 'minus '
+      ignoredTokens:
+        - 'eta'
+      allowTerminalOrdinalToken: true
+      allowInvariantIntegerInput: true
+      ordinalAbbreviationSuffixes:
+        - '.'
+      ordinalMap:
+        zerogarren: 0
+        lehen: 1
+        batgarren: 1
+        bigarren: 2
+        hirugarren: 3
+        laugarren: 4
+        bosgarren: 5
+        seigarren: 6
+        zazpigarren: 7
+        zortzigarren: 8
+        bederatzigarren: 9
+        hamargarren: 10
+        hamaikagarren: 11
+        hamabigarren: 12
+        hamahirugarren: 13
+        hamalaugarren: 14
+        hamabostgarren: 15
+        hamaseigarren: 16
+        hamazazpigarren: 17
+        hemezortzigarren: 18
+        hemeretzigarren: 19
+        hogeigarren: 20
+        hogeita batgarren: 21
+        hogeita bigarren: 22
+        hogeita hirugarren: 23
+        hogeita laugarren: 24
+        hogeita bostgarren: 25
+        hogeita seigarren: 26
+        hogeita zazpigarren: 27
+        hogeita zortzigarren: 28
+        hogeita bederatzigarren: 29
+        hogeita hamargarren: 30
+        hogeita hamaikagarren: 31
+        hogeita hamabigarren: 32
+        hogeita hamahirugarren: 33
+        hogeita hamalaugarren: 34
+        hogeita hamabostgarren: 35
+        hogeita hamaseigarren: 36
+        hogeita hamazazpigarren: 37
+        hogeita hemezortzigarren: 38
+        hogeita hemeretzigarren: 39
+        berrogeigarren: 40
+        berrogeita batgarren: 41
+        berrogeita bigarren: 42
+        berrogeita hirugarren: 43
+        berrogeita laugarren: 44
+        berrogeita bostgarren: 45
+        berrogeita seigarren: 46
+        berrogeita zazpigarren: 47
+        berrogeita zortzigarren: 48
+        berrogeita bederatzigarren: 49
+        berrogeita hamargarren: 50
+        berrogeita hamaikagarren: 51
+        berrogeita hamabigarren: 52
+        berrogeita hamahirugarren: 53
+        berrogeita hamalaugarren: 54
+        berrogeita hamabostgarren: 55
+        berrogeita hamaseigarren: 56
+        berrogeita hamazazpigarren: 57
+        berrogeita hemezortzigarren: 58
+        berrogeita hemeretzigarren: 59
+        hirurogeigarren: 60
+        hirurogeita batgarren: 61
+        hirurogeita bigarren: 62
+        hirurogeita hirugarren: 63
+        hirurogeita laugarren: 64
+        hirurogeita bostgarren: 65
+        hirurogeita seigarren: 66
+        hirurogeita zazpigarren: 67
+        hirurogeita zortzigarren: 68
+        hirurogeita bederatzigarren: 69
+        hirurogeita hamargarren: 70
+        hirurogeita hamaikagarren: 71
+        hirurogeita hamabigarren: 72
+        hirurogeita hamahirugarren: 73
+        hirurogeita hamalaugarren: 74
+        hirurogeita hamabostgarren: 75
+        hirurogeita hamaseigarren: 76
+        hirurogeita hamazazpigarren: 77
+        hirurogeita hemezortzigarren: 78
+        hirurogeita hemeretzigarren: 79
+        laurogeigarren: 80
+        laurogeita batgarren: 81
+        laurogeita bigarren: 82
+        laurogeita hirugarren: 83
+        laurogeita laugarren: 84
+        laurogeita bostgarren: 85
+        laurogeita seigarren: 86
+        laurogeita zazpigarren: 87
+        laurogeita zortzigarren: 88
+        laurogeita bederatzigarren: 89
+        laurogeita hamargarren: 90
+        laurogeita hamaikagarren: 91
+        laurogeita hamabigarren: 92
+        laurogeita hamahirugarren: 93
+        laurogeita hamalaugarren: 94
+        laurogeita hamabostgarren: 95
+        laurogeita hamaseigarren: 96
+        laurogeita hamazazpigarren: 97
+        laurogeita hemezortzigarren: 98
+        laurogeita hemeretzigarren: 99
+        ehungarren: 100
+        berrehungarren: 200
+        hirurehungarren: 300
+        laurehungarren: 400
+        bostehungarren: 500
+        seiehungarren: 600
+        zazpiehungarren: 700
+        zortziehungarren: 800
+        bederatziehungarren: 900
+      ordinalScaleMap:
+        milagarren: 1000
+        milioigarren: 1000000
+        bilioigarren: 1000000000000
+        mila milioigarren: 1000000000
+        trilioigarren: 1000000000000000000
+      gluedOrdinalScaleSuffixes:
+        mila milioigarren: 1000000000
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+      feminineSuffix: '.'
+      neuterSuffix: '.'
+      zeroAsPlainNumber: true
+
+    date:
+      pattern: "yyyy'eko' MMMM {day}"
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: "yyyy'eko' MMMM {day}"
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'neuter'
+    minuteGender: 'neuter'
+    midnight: 'gauerdia'
+    midday: 'eguerdia'
+    min0: '{hour}'
+    defaultTemplate: '{hour} eta {minutes}'
+    earlyMorning: 'gauean'
+    morning: 'goizean'
+    afternoon: 'arratsaldean'
+    night: 'gauean'
+    hourWordsMap:
+      - 'zero'
+      - 'ordu bata'
+      - 'ordu biak'
+      - 'hirurak'
+      - 'laurak'
+      - 'bostak'
+      - 'seiak'
+      - 'zazpiak'
+      - 'zortziak'
+      - 'bederatziak'
+      - 'hamarrak'
+      - 'hamaikak'
+      - 'hamabiak'
+
+  compass:
+    full:
+      - 'ipar'
+      - 'ipar-ipar-ekialde'
+      - 'ipar-ekialde'
+      - 'ekialde-ipar-ekialde'
+      - 'ekialde'
+      - 'ekialde-hego-ekialde'
+      - 'hego-ekialde'
+      - 'hego-hego-ekialde'
+      - 'hego'
+      - 'hego-hego-mendebalde'
+      - 'hego-mendebalde'
+      - 'mendebalde-hego-mendebalde'
+      - 'mendebalde'
+      - 'mendebalde-ipar-mendebalde'
+      - 'ipar-mendebalde'
+      - 'ipar-ipar-mendebalde'
+    short:
+      - 'I'
+      - 'IIE'
+      - 'IE'
+      - 'EIE'
+      - 'E'
+      - 'EHE'
+      - 'HE'
+      - 'HHE'
+      - 'H'
+      - 'HHM'
+      - 'HM'
+      - 'MHM'
+      - 'M'
+      - 'MIM'
+      - 'IM'
+      - 'IIM'
+
+  calendar:
+    months:
+      - 'urtarrila'
+      - 'otsaila'
+      - 'martxoa'
+      - 'apirila'
+      - 'maiatza'
+      - 'ekaina'
+      - 'uztaila'
+      - 'abuztua'
+      - 'iraila'
+      - 'urria'
+      - 'azaroa'
+      - 'abendua'
+    monthsGenitive:
+      - 'urtarrilaren'
+      - 'otsailaren'
+      - 'martxoaren'
+      - 'apirilaren'
+      - 'maiatzaren'
+      - 'ekainaren'
+      - 'uztailaren'
+      - 'abuztuaren'
+      - 'irailaren'
+      - 'urriaren'
+      - 'azaroaren'
+      - 'abenduaren'

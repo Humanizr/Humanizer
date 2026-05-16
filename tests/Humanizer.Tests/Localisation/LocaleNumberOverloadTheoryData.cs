@@ -4,6 +4,8 @@ public static class LocaleNumberOverloadTheoryData
 {
     public static TheoryData<string, long, string> AddAndCases => new()
     {
+        { "eu", 1000001L, "milioi bat eta bat" },
+
             { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и еден" },
@@ -261,6 +263,8 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormCases => new()
     {
+        { "eu", 1000001L, "milioi bat eta bat" },
+
             { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и еден" },
@@ -517,6 +521,8 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> GenderCases => new()
     {
+        { "eu", 1000001L, "milioi bat eta bat" },
+
             { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и една" },
@@ -773,6 +779,8 @@ public static class LocaleNumberOverloadTheoryData
 
     public static TheoryData<string, long, string> WordFormGenderCases => new()
     {
+        { "eu", 1000001L, "milioi bat eta bat" },
+
             { "et", 1001001L, "miljon tuhat üks" },
         { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и една" },
