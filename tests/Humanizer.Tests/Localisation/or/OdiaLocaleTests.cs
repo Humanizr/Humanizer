@@ -85,6 +85,7 @@ public class OdiaLocaleTests
     }
 
     [Theory]
+    [InlineData("କୋଡିଏ", 20)]
     [InlineData("ଏକୋଇଶ", 21)]
     [InlineData("ଏକ ଶହ ଏକ", 101)]
     [InlineData("ଏକ କୋଟି ତେଇଶି ଲକ୍ଷ ପଇଞ୍ଚାଳିଶ ହଜାର ଛଅ ଶହ ଅଠସ୍ତରି", 12345678)]
@@ -96,7 +97,7 @@ public class OdiaLocaleTests
     [Theory]
     [InlineData(1, "ପ୍ରଥମ")]
     [InlineData(2, "ଦ୍ୱିତୀୟ")]
-    [InlineData(21, "ଏକବିଂଶତିତମ")]
+    [InlineData(21, "ଏକୋଇଶତମ")]
     [InlineData(27, "ସତାଇଶତମ")]
     public void Ordinalize_UsesOdiaOrdinalWords(int number, string expected)
     {
@@ -106,7 +107,7 @@ public class OdiaLocaleTests
 
     [Theory]
     [InlineData("ପ୍ରଥମ", 1)]
-    [InlineData("ଏକବିଂଶତିତମ", 21)]
+    [InlineData("ଏକୋଇଶତମ", 21)]
     [InlineData("ସତାଇଶତମ", 27)]
     public void WordsToNumber_ParsesOdiaOrdinalWords(string words, long expected)
     {
