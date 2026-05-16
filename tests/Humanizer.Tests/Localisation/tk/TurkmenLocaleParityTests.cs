@@ -155,6 +155,8 @@ public class TurkmenLocaleParityTests
     [InlineData(20, "20-nji")]
     [InlineData(120, "120-nji")]
     [InlineData(200, "200-nji")]
+    [InlineData(1000000, "1000000-njy")]
+    [InlineData(1000000000, "1000000000-njy")]
     [InlineData(-6, "-6-njy")]
     public void Ordinalize_UsesTurkmenNumericSuffixes(int number, string expected)
     {
@@ -165,6 +167,7 @@ public class TurkmenLocaleParityTests
     [Theory]
     [InlineData(2022, 1, 25, "25 Ýanwar 2022")]
     [InlineData(2015, 2, 3, "3 Fewral 2015")]
+    [InlineData(2024, 12, 31, "31 Dekabr 2024")]
     public void DateTimeToOrdinalWords_UsesTurkmenDatePattern(int year, int month, int day, string expected)
     {
         Assert.Equal(expected, new DateTime(year, month, day).ToOrdinalWords());
@@ -174,6 +177,7 @@ public class TurkmenLocaleParityTests
     [Theory]
     [InlineData(2022, 1, 25, "25 Ýanwar 2022")]
     [InlineData(2015, 2, 3, "3 Fewral 2015")]
+    [InlineData(2024, 12, 31, "31 Dekabr 2024")]
     public void DateOnlyToOrdinalWords_UsesTurkmenDatePattern(int year, int month, int day, string expected)
     {
         Assert.Equal(expected, new DateOnly(year, month, day).ToOrdinalWords());

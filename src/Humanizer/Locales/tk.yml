@@ -376,6 +376,8 @@ surfaces:
         80: '-nji'
         90: '-njy'
         100: '-nji'
+        1000000: '-njy'
+        1000000000: '-njy'
       lastTwoDigitSuffixes:
         0: '-nji'
         10: '-njy'
