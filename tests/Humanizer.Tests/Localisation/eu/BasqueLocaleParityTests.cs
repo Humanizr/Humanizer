@@ -11,6 +11,8 @@ public class BasqueLocaleParityTests
     [InlineData(100, "ehun")]
     [InlineData(101, "ehun eta bat")]
     [InlineData(2024, "bi mila eta hogeita lau")]
+    [InlineData(1000001, "milioi bat eta bat")]
+    [InlineData(1000000001, "mila milioi eta bat")]
     public void NumberToWords_UsesBasqueCardinals(long number, string expected) =>
         Assert.Equal(expected, number.ToWords(new CultureInfo("eu")));
 
@@ -18,14 +20,21 @@ public class BasqueLocaleParityTests
     [InlineData(1, "lehen")]
     [InlineData(2, "bigarren")]
     [InlineData(21, "hogeita batgarren")]
+    [InlineData(1000000, "milioigarren")]
+    [InlineData(1000000000, "mila milioigarren")]
     public void NumberToWords_UsesBasqueOrdinals(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo("eu")));
 
     [Theory]
     [InlineData("hogeita bat", 21)]
     [InlineData("minus ehun eta hogeita hiru", -123)]
+    [InlineData("milioi bat", 1000000)]
+    [InlineData("milioi bat eta bat", 1000001)]
+    [InlineData("mila milioi eta bat", 1000000001)]
     [InlineData("lehen", 1)]
     [InlineData("hogeita batgarren", 21)]
+    [InlineData("milioigarren", 1000000)]
+    [InlineData("mila milioigarren", 1000000000)]
     [InlineData("1.", 1)]
     [InlineData("23.", 23)]
     public void WordsToNumber_ParsesBasqueCardinalsAndOrdinals(string words, long expected) =>

@@ -502,6 +502,8 @@ surfaces:
         700: 'zazpiehungarren'
         800: 'zortziehungarren'
         900: 'bederatziehungarren'
+        1000000: 'milioigarren'
+        1000000000: 'mila milioigarren'
 
     parse:
       engine: 'token-map'
@@ -631,6 +633,11 @@ surfaces:
         hirurogeita hemeretzi: 79
         laurogeita hemezortzi: 98
         hirurogeita hemezortzi: 78
+      compositeScaleMap:
+        'trilioi bat': 1000000000000000000
+        'bilioi bat': 1000000000000
+        'mila milioi': 1000000000
+        'milioi bat': 1000000
       ordinalNumberToWordsKind: 'self'
       ordinalGenderVariant: 'none'
       negativePrefixes:
@@ -756,6 +763,7 @@ surfaces:
         milagarren: 1000
         milioigarren: 1000000
         bilioigarren: 1000000000000
+        mila milioigarren: 1000000000
         trilioigarren: 1000000000000000000
       gluedOrdinalScaleSuffixes: {}
 

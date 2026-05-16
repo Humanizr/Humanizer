@@ -3119,7 +3119,10 @@ static class LocaleNumberTheoryData
         { "eu", 1000, "mila" },
         { "eu", 1001, "mila eta bat" },
         { "eu", 3500, "hiru mila eta bostehun" },
+        { "eu", 1000000, "milioi bat" },
         { "eu", 1000001, "milioi bat eta bat" },
+        { "eu", 1000000000, "mila milioi" },
+        { "eu", 1000000001, "mila milioi eta bat" },
         { "gl", 0, "cero" },
         { "gl", 1, "un" },
         { "gl", 2, "dous" },
@@ -6863,6 +6866,8 @@ static class LocaleNumberTheoryData
         { "eu", 1, "lehen" },
         { "eu", 2, "bigarren" },
         { "eu", 21, "hogeita batgarren" },
+        { "eu", 1000000, "milioigarren" },
+        { "eu", 1000000000, "mila milioigarren" },
         { "gl", 1, "primeiro" },
         { "ga", 3, "tríú" },
     };
@@ -8645,6 +8650,11 @@ static class LocaleNumberTheoryData
     {
         { "eu", "hogeita bat", 21L },
         { "eu", "minus ehun eta hogeita hiru", -123L },
+        { "eu", "milioi bat", 1000000L },
+        { "eu", "milioi bat eta bat", 1000001L },
+        { "eu", "mila milioi eta bat", 1000000001L },
+        { "eu", "milioigarren", 1000000L },
+        { "eu", "mila milioigarren", 1000000000L },
 
             { "et", "kakskümmend üks", 21L },
             { "et", "kahekümne esimene", 21L },
