@@ -123,6 +123,8 @@ public class TurkmenLocaleParityTests
     [InlineData(30, "otuzynjy")]
     [InlineData(101, "ýüz birinji")]
     [InlineData(100, "ýüzünji")]
+    [InlineData(200, "iki ýüzünji")]
+    [InlineData(1000000, "bir millionunjy")]
     public void NumberToOrdinalWords_ProducesTurkmenOrdinals(int number, string expected)
     {
         Assert.Equal(expected, number.ToOrdinalWords(Tk));
@@ -133,6 +135,8 @@ public class TurkmenLocaleParityTests
     [InlineData("ýigrimi birinji", 21)]
     [InlineData("otuzynjy", 30)]
     [InlineData("ýüz birinji", 101)]
+    [InlineData("iki ýüzünji", 200)]
+    [InlineData("bir millionunjy", 1000000)]
     [InlineData("minus bäş", -5)]
     [InlineData("bir million müň bir", 1001001)]
     public void WordsToNumber_ParsesTurkmenCardinalsAndOrdinals(string words, long expected)

@@ -349,7 +349,13 @@ surfaces:
         togsanynjy: 90
         'ýüzünji': 100
       ordinalScaleMap:
+        'ýüzünji': 100
         'müňünji': 1000
+        millionunjy: 1000000
+        milliardynjy: 1000000000
+        trillionunjy: 1000000000000
+        kwadrillionunjy: 1000000000000000
+        kwintillionunjy: 1000000000000000000
       gluedOrdinalScaleSuffixes:
         'müňünji': 1000
 
