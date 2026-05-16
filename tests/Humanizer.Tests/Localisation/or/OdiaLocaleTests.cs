@@ -73,6 +73,7 @@ public class OdiaLocaleTests
     [Theory]
     [InlineData(0, "ଶୂନ୍ୟ")]
     [InlineData(21, "ଏକୋଇଶ")]
+    [InlineData(68, "ଅଠଷଠି")]
     [InlineData(100, "ଏକ ଶହ")]
     [InlineData(101, "ଏକ ଶହ ଏକ")]
     [InlineData(999, "ନଅ ଶହ ଅନେଶତ")]
@@ -86,6 +87,7 @@ public class OdiaLocaleTests
 
     [Theory]
     [InlineData("କୋଡିଏ", 20)]
+    [InlineData("ଅଠଷଠି", 68)]
     [InlineData("ଏକୋଇଶ", 21)]
     [InlineData("ଏକ ଶହ ଏକ", 101)]
     [InlineData("ଏକ କୋଟି ତେଇଶି ଲକ୍ଷ ପଇଞ୍ଚାଳିଶ ହଜାର ଛଅ ଶହ ଅଠସ୍ତରି", 12345678)]
