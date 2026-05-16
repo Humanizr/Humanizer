@@ -245,7 +245,7 @@ surfaces:
         - 'segsen'
         - 'togsan'
       ordinalSuffixStrategy: 'last-vowel-map'
-      softenTerminalTBeforeSuffix: false
+      softenTerminalTBeforeSuffix: true
       dropTerminalVowelBeforeHarmonySuffix: true
       scales:
         -
@@ -324,6 +324,7 @@ surfaces:
       ordinalNumberToWordsKind: 'self'
       ordinalGenderVariant: 'none'
       useHundredMultiplier: true
+      allowTerminalOrdinalToken: true
       negativePrefixes:
         - 'minus '
       ordinalMap:
@@ -339,6 +340,13 @@ surfaces:
         onunjy: 10
         'ýigriminji': 20
         'ýigrimi birinji': 21
+        otuzynjy: 30
+        kyrkynjy: 40
+        ellinji: 50
+        'altmyşynjy': 60
+        'ýetmişinji': 70
+        segseninji: 80
+        togsanynjy: 90
         'ýüzünji': 100
       ordinalScaleMap:
         'müňünji': 1000

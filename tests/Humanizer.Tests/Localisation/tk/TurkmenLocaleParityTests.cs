@@ -114,11 +114,14 @@ public class TurkmenLocaleParityTests
     [InlineData(1, "birinji")]
     [InlineData(2, "ikinji")]
     [InlineData(3, "üçünji")]
+    [InlineData(4, "dördünji")]
     [InlineData(6, "altynjy")]
     [InlineData(9, "dokuzynjy")]
     [InlineData(10, "onunjy")]
     [InlineData(20, "ýigriminji")]
     [InlineData(21, "ýigrimi birinji")]
+    [InlineData(30, "otuzynjy")]
+    [InlineData(101, "ýüz birinji")]
     [InlineData(100, "ýüzünji")]
     public void NumberToOrdinalWords_ProducesTurkmenOrdinals(int number, string expected)
     {
@@ -128,6 +131,8 @@ public class TurkmenLocaleParityTests
     [Theory]
     [InlineData("ýigrimi bir", 21)]
     [InlineData("ýigrimi birinji", 21)]
+    [InlineData("otuzynjy", 30)]
+    [InlineData("ýüz birinji", 101)]
     [InlineData("minus bäş", -5)]
     [InlineData("bir million müň bir", 1001001)]
     public void WordsToNumber_ParsesTurkmenCardinalsAndOrdinals(string words, long expected)
