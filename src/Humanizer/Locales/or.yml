@@ -1,0 +1,665 @@
+locale: 'or'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'ଏବଂ'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'ବର୍ତ୍ତମାନ'
+      never: 'କେବେ ନୁହେଁ'
+      past:
+        millisecond:
+          single: 'ଏକ ମିଲିସେକେଣ୍ଡ ପୂର୍ବରୁ'
+          multiple:
+            forms:
+              default: 'ମିଲିସେକେଣ୍ଡ'
+            afterCount: 'ପୂର୍ବରୁ'
+        second:
+          single: 'ଏକ ସେକେଣ୍ଡ ପୂର୍ବରୁ'
+          multiple:
+            forms:
+              default: 'ସେକେଣ୍ଡ'
+            afterCount: 'ପୂର୍ବରୁ'
+        minute:
+          single: 'ଏକ ମିନିଟ୍ ପୂର୍ବରୁ'
+          multiple:
+            forms:
+              default: 'ମିନିଟ୍'
+            afterCount: 'ପୂର୍ବରୁ'
+        hour:
+          single: 'ଏକ ଘଣ୍ଟା ପୂର୍ବରୁ'
+          multiple:
+            forms:
+              default: 'ଘଣ୍ଟା'
+            afterCount: 'ପୂର୍ବରୁ'
+        day:
+          single: 'ଗତକାଲି'
+          multiple:
+            forms:
+              default: 'ଦିନ'
+            afterCount: 'ପୂର୍ବରୁ'
+        week:
+          single: 'ଏକ ସପ୍ତାହ ପୂର୍ବରୁ'
+          multiple:
+            forms:
+              default: 'ସପ୍ତାହ'
+            afterCount: 'ପୂର୍ବରୁ'
+        month:
+          single: 'ଏକ ମାସ ପୂର୍ବରୁ'
+          multiple:
+            forms:
+              default: 'ମାସ'
+            afterCount: 'ପୂର୍ବରୁ'
+        year:
+          single: 'ଏକ ବର୍ଷ ପୂର୍ବରୁ'
+          multiple:
+            forms:
+              default: 'ବର୍ଷ'
+            afterCount: 'ପୂର୍ବରୁ'
+      future:
+        millisecond:
+          single: 'ଏକ ମିଲିସେକେଣ୍ଡ ପରେ'
+          multiple:
+            forms:
+              default: 'ମିଲିସେକେଣ୍ଡ'
+            afterCount: 'ପରେ'
+        second:
+          single: 'ଏକ ସେକେଣ୍ଡ ପରେ'
+          multiple:
+            forms:
+              default: 'ସେକେଣ୍ଡ'
+            afterCount: 'ପରେ'
+        minute:
+          single: 'ଏକ ମିନିଟ୍ ପରେ'
+          multiple:
+            forms:
+              default: 'ମିନିଟ୍'
+            afterCount: 'ପରେ'
+        hour:
+          single: 'ଏକ ଘଣ୍ଟା ପରେ'
+          multiple:
+            forms:
+              default: 'ଘଣ୍ଟା'
+            afterCount: 'ପରେ'
+        day:
+          single: 'ଆସନ୍ତାକାଲି'
+          multiple:
+            forms:
+              default: 'ଦିନ'
+            afterCount: 'ପରେ'
+        week:
+          single: 'ଏକ ସପ୍ତାହ ପରେ'
+          multiple:
+            forms:
+              default: 'ସପ୍ତାହ'
+            afterCount: 'ପରେ'
+        month:
+          single: 'ଏକ ମାସ ପରେ'
+          multiple:
+            forms:
+              default: 'ମାସ'
+            afterCount: 'ପରେ'
+        year:
+          single: 'ଏକ ବର୍ଷ ପରେ'
+          multiple:
+            forms:
+              default: 'ବର୍ଷ'
+            afterCount: 'ପରେ'
+    duration:
+      zero: 'ବର୍ତ୍ତମାନ'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 ମିଲିସେକେଣ୍ଡ'
+          words: 'ଏକ ମିଲିସେକେଣ୍ଡ'
+        multiple:
+          forms:
+            default: 'ମିଲିସେକେଣ୍ଡ'
+            singular: 'ମିଲିସେକେଣ୍ଡ'
+      second:
+        single:
+          numeric: '1 ସେକେଣ୍ଡ'
+          words: 'ଏକ ସେକେଣ୍ଡ'
+        multiple:
+          forms:
+            default: 'ସେକେଣ୍ଡ'
+            singular: 'ସେକେଣ୍ଡ'
+      minute:
+        single:
+          numeric: '1 ମିନିଟ୍'
+          words: 'ଏକ ମିନିଟ୍'
+        multiple:
+          forms:
+            default: 'ମିନିଟ୍'
+            singular: 'ମିନିଟ୍'
+      hour:
+        single:
+          numeric: '1 ଘଣ୍ଟା'
+          words: 'ଏକ ଘଣ୍ଟା'
+        multiple:
+          forms:
+            default: 'ଘଣ୍ଟା'
+            singular: 'ଘଣ୍ଟା'
+      day:
+        single:
+          numeric: '1 ଦିନ'
+          words: 'ଏକ ଦିନ'
+        multiple:
+          forms:
+            default: 'ଦିନ'
+            singular: 'ଦିନ'
+      week:
+        single:
+          numeric: '1 ସପ୍ତାହ'
+          words: 'ଏକ ସପ୍ତାହ'
+        multiple:
+          forms:
+            default: 'ସପ୍ତାହ'
+            singular: 'ସପ୍ତାହ'
+      month:
+        single:
+          numeric: '1 ମାସ'
+          words: 'ଏକ ମାସ'
+        multiple:
+          forms:
+            default: 'ମାସ'
+            singular: 'ମାସ'
+      year:
+        single:
+          numeric: '1 ବର୍ଷ'
+          words: 'ଏକ ବର୍ଷ'
+        multiple:
+          forms:
+            default: 'ବର୍ଷ'
+            singular: 'ବର୍ଷ'
+    dataUnits:
+      bit:
+        forms:
+          default: 'ବିଟ'
+          singular: 'ବିଟ'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'ବାଇଟ୍'
+          singular: 'ବାଇଟ୍'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'କିଲୋବାଇଟ୍'
+          singular: 'କିଲୋବାଇଟ୍'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'ମେଗାବାଇଟ୍'
+          singular: 'ମେଗାବାଇଟ୍'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'ଗିଗାବାଇଟ୍'
+          singular: 'ଗିଗାବାଇଟ୍'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ଟେରାବାଇଟ୍'
+          singular: 'ଟେରାବାଇଟ୍'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ମିଲିସେକେଣ୍ଡ'
+      second:
+        symbol: 'ସେକେଣ୍ଡ'
+      minute:
+        symbol: 'ମିନିଟ୍'
+      hour:
+        symbol: 'ଘଣ୍ଟା'
+      day:
+        symbol: 'ଦିନ'
+      week:
+        symbol: 'ସପ୍ତାହ'
+      month:
+        symbol: 'ମାସ'
+      year:
+        symbol: 'ବର୍ଷ'
+
+  number:
+    words:
+      engine: 'indian-grouping-gendered'
+      zeroWord: 'ଶୂନ୍ୟ'
+      negativeWord: 'ଋଣାତ୍ମକ'
+      hundredWord: 'ଶହ'
+      thousandWord: 'ହଜାର'
+      lakhWord: 'ଲକ୍ଷ'
+      singleLakhWord: 'ଏକ'
+      croreWord: 'କୋଟି'
+      arabWord: 'ଅବ୍ଜ'
+      kharabWord: 'ଖର୍ବ'
+      denseUnitsMap:
+        - 'ଶୂନ୍ୟ'
+        - 'ଏକ'
+        - 'ଦୁଇ'
+        - 'ତିନି'
+        - 'ଚାରି'
+        - 'ପାଞ୍ଚ'
+        - 'ଛଅ'
+        - 'ସାତ'
+        - 'ଆଠ'
+        - 'ନଅ'
+        - 'ଦଶ'
+        - 'ଏଗାର'
+        - 'ବାର'
+        - 'ତେର'
+        - 'ଚଉଦ'
+        - 'ପନ୍ଦର'
+        - 'ଶୋଳ'
+        - 'ସତର'
+        - 'ଅଠର'
+        - 'ଉଣେଇଶ'
+        - 'କୋଡ଼ିଏ'
+        - 'ଏକୋଇଶ'
+        - 'ବାଇଶି'
+        - 'ତେଇଶି'
+        - 'ଚବିଶି'
+        - 'ପଚିଶି'
+        - 'ଛବିଶ'
+        - 'ସତାଇଶ'
+        - 'ଅଠାଇଶ'
+        - 'ଅଣତିରିଶ'
+        - 'ତିରିଶ'
+        - 'ଏକତିରିଶ'
+        - 'ବତିଶ'
+        - 'ତେତିଶ'
+        - 'ଚଉତିରିଶ'
+        - 'ପଇଁତିରିଶ'
+        - 'ଛତିଶ'
+        - 'ସତିରିଶ'
+        - 'ଅଟତିରିଶ'
+        - 'ଅଣଚାଳିଶ'
+        - 'ଚାଳିଶ'
+        - 'ଏକଚାଳିଶ'
+        - 'ବୟାଳିଶ'
+        - 'ତେୟାଳିଶ'
+        - 'ଚଉରାଳିଶ'
+        - 'ପଇଞ୍ଚାଳିଶ'
+        - 'ଛୟାଳିଶ'
+        - 'ସତଚାଳିଶ'
+        - 'ଅଟଚାଳିଶ'
+        - 'ଅଣଚାଶ'
+        - 'ପଚାଶ'
+        - 'ଏକାବନ'
+        - 'ବାଆନ'
+        - 'ତେପନ'
+        - 'ଚଉବନ'
+        - 'ପଞ୍ଚାବନ'
+        - 'ଛପନ'
+        - 'ସତାବନ'
+        - 'ଅଠାବନ'
+        - 'ଅଣଷଠି'
+        - 'ଷାଠିଏ'
+        - 'ଏକଷଠି'
+        - 'ବାଷଠି'
+        - 'ତେଷଠି'
+        - 'ଚଉଷଠି'
+        - 'ପଞ୍ଚଷଠି'
+        - 'ଛଅଷଠି'
+        - 'ସତଷଠି'
+        - 'ଅଠଷଠି'
+        - 'ଅଣସତୁରି'
+        - 'ସତୁରି'
+        - 'ଏକସ୍ତରି'
+        - 'ବାଆସ୍ତରି'
+        - 'ତେସ୍ତରି'
+        - 'ଚଉସ୍ତରି'
+        - 'ପଞ୍ଚସ୍ତରି'
+        - 'ଛଅସ୍ତରି'
+        - 'ସତସ୍ତରି'
+        - 'ଅଠସ୍ତରି'
+        - 'ଅଣାଅଶୀ'
+        - 'ଅଶୀ'
+        - 'ଏକାଶୀ'
+        - 'ବୟାଶୀ'
+        - 'ତେୟାଶୀ'
+        - 'ଚଉରାଶୀ'
+        - 'ପଞ୍ଚାଅଶୀ'
+        - 'ଛୟାଶୀ'
+        - 'ସତାଶୀ'
+        - 'ଅଠାଶୀ'
+        - 'ଅଣାନବେ'
+        - 'ନବେ'
+        - 'ଏକାନବେ'
+        - 'ବୟାନବେ'
+        - 'ତେୟାନବେ'
+        - 'ଚଉରାନବେ'
+        - 'ପଞ୍ଚାନବେ'
+        - 'ଛୟାନବେ'
+        - 'ସତାନବେ'
+        - 'ଅଠାନବେ'
+        - 'ଅନେଶତ'
+      # Odia ordinal words are gender-invariant; this engine currently requires
+      # both masculine and feminine blocks, so keep them identical.
+      # The exact replacements mirror the sourced traditional 1-20 ordinal list;
+      # larger values use the cardinal word plus the default suffix.
+      ordinal:
+        masculine:
+          defaultSuffix: 'ତମ'
+          exactReplacements:
+            1: 'ପ୍ରଥମ'
+            2: 'ଦ୍ୱିତୀୟ'
+            3: 'ତୃତୀୟ'
+            4: 'ଚତୁର୍ଥ'
+            5: 'ପଞ୍ଚମ'
+            6: 'ଷଷ୍ଠ'
+            7: 'ସପ୍ତମ'
+            8: 'ଅଷ୍ଟମ'
+            9: 'ନବମ'
+            10: 'ଦଶମ'
+            11: 'ଏକାଦଶ'
+            12: 'ଦ୍ୱାଦଶ'
+            13: 'ତ୍ରୟୋଦଶ'
+            14: 'ଚତୁର୍ଦଶ'
+            15: 'ପଞ୍ଚଦଶ'
+            16: 'ଷୋଡ଼ଶ'
+            17: 'ସପ୍ତଦଶ'
+            18: 'ଅଷ୍ଟାଦଶ'
+            19: 'ଊନବିଂଶ'
+            20: 'ବିଂଶ'
+        feminine:
+          defaultSuffix: 'ତମ'
+          exactReplacements:
+            1: 'ପ୍ରଥମ'
+            2: 'ଦ୍ୱିତୀୟ'
+            3: 'ତୃତୀୟ'
+            4: 'ଚତୁର୍ଥ'
+            5: 'ପଞ୍ଚମ'
+            6: 'ଷଷ୍ଠ'
+            7: 'ସପ୍ତମ'
+            8: 'ଅଷ୍ଟମ'
+            9: 'ନବମ'
+            10: 'ଦଶମ'
+            11: 'ଏକାଦଶ'
+            12: 'ଦ୍ୱାଦଶ'
+            13: 'ତ୍ରୟୋଦଶ'
+            14: 'ଚତୁର୍ଦଶ'
+            15: 'ପଞ୍ଚଦଶ'
+            16: 'ଷୋଡ଼ଶ'
+            17: 'ସପ୍ତଦଶ'
+            18: 'ଅଷ୍ଟାଦଶ'
+            19: 'ଊନବିଂଶ'
+            20: 'ବିଂଶ'
+        neuterFallback: 'masculine'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'all'
+      useHundredMultiplier: true
+      tokenSuffixesToStrip:
+        - 'ତମ'
+      cardinalMap:
+        'ଶୂନ୍ୟ': 0
+        'ଏକ': 1
+        'ଦୁଇ': 2
+        'ତିନି': 3
+        'ଚାରି': 4
+        'ପାଞ୍ଚ': 5
+        'ଛଅ': 6
+        'ସାତ': 7
+        'ଆଠ': 8
+        'ନଅ': 9
+        'ଦଶ': 10
+        'ଏଗାର': 11
+        'ବାର': 12
+        'ତେର': 13
+        'ଚଉଦ': 14
+        'ପନ୍ଦର': 15
+        'ଶୋଳ': 16
+        'ସତର': 17
+        'ଅଠର': 18
+        'ଉଣେଇଶ': 19
+        'କୋଡ଼ିଏ': 20
+        'ଏକୋଇଶ': 21
+        'ବାଇଶି': 22
+        'ତେଇଶି': 23
+        'ଚବିଶି': 24
+        'ପଚିଶି': 25
+        'ଛବିଶ': 26
+        'ସତାଇଶ': 27
+        'ଅଠାଇଶ': 28
+        'ଅଣତିରିଶ': 29
+        'ତିରିଶ': 30
+        'ଏକତିରିଶ': 31
+        'ବତିଶ': 32
+        'ତେତିଶ': 33
+        'ଚଉତିରିଶ': 34
+        'ପଇଁତିରିଶ': 35
+        'ଛତିଶ': 36
+        'ସତିରିଶ': 37
+        'ଅଟତିରିଶ': 38
+        'ଅଣଚାଳିଶ': 39
+        'ଚାଳିଶ': 40
+        'ଏକଚାଳିଶ': 41
+        'ବୟାଳିଶ': 42
+        'ତେୟାଳିଶ': 43
+        'ଚଉରାଳିଶ': 44
+        'ପଇଞ୍ଚାଳିଶ': 45
+        'ଛୟାଳିଶ': 46
+        'ସତଚାଳିଶ': 47
+        'ଅଟଚାଳିଶ': 48
+        'ଅଣଚାଶ': 49
+        'ପଚାଶ': 50
+        'ଏକାବନ': 51
+        'ବାଆନ': 52
+        'ତେପନ': 53
+        'ଚଉବନ': 54
+        'ପଞ୍ଚାବନ': 55
+        'ଛପନ': 56
+        'ସତାବନ': 57
+        'ଅଠାବନ': 58
+        'ଅଣଷଠି': 59
+        'ଷାଠିଏ': 60
+        'ଏକଷଠି': 61
+        'ବାଷଠି': 62
+        'ତେଷଠି': 63
+        'ଚଉଷଠି': 64
+        'ପଞ୍ଚଷଠି': 65
+        'ଛଅଷଠି': 66
+        'ସତଷଠି': 67
+        'ଅଠଷଠି': 68
+        'ଅଣସତୁରି': 69
+        'ସତୁରି': 70
+        'ଏକସ୍ତରି': 71
+        'ବାଆସ୍ତରି': 72
+        'ତେସ୍ତରି': 73
+        'ଚଉସ୍ତରି': 74
+        'ପଞ୍ଚସ୍ତରି': 75
+        'ଛଅସ୍ତରି': 76
+        'ସତସ୍ତରି': 77
+        'ଅଠସ୍ତରି': 78
+        'ଅଣାଅଶୀ': 79
+        'ଅଶୀ': 80
+        'ଏକାଶୀ': 81
+        'ବୟାଶୀ': 82
+        'ତେୟାଶୀ': 83
+        'ଚଉରାଶୀ': 84
+        'ପଞ୍ଚାଅଶୀ': 85
+        'ଛୟାଶୀ': 86
+        'ସତାଶୀ': 87
+        'ଅଠାଶୀ': 88
+        'ଅଣାନବେ': 89
+        'ନବେ': 90
+        'ଏକାନବେ': 91
+        'ବୟାନବେ': 92
+        'ତେୟାନବେ': 93
+        'ଚଉରାନବେ': 94
+        'ପଞ୍ଚାନବେ': 95
+        'ଛୟାନବେ': 96
+        'ସତାନବେ': 97
+        'ଅଠାନବେ': 98
+        'ଅନେଶତ': 99
+        'ଶୁନ': 0
+        'ଶୂନ': 0
+        'କୋଡିଏ': 20
+        'ତିରିଶି': 30
+        'ଚାଳିଶି': 40
+        'ଷାଠି': 60
+        'ଶତ': 100
+        'ଶହ': 100
+        'ହଜାର': 1000
+        'ଲକ୍ଷ': 100000
+        'ଲକ୍ଷିଆ': 100000
+        'କୋଟି': 10000000
+        'କୋରଡ଼': 10000000
+        'ଅବ୍ଜ': 1000000000
+        'ଖର୍ବ': 100000000000
+      ordinalMap:
+        'ପ୍ରଥମ': 1
+        'ଦ୍ୱିତୀୟ': 2
+        'ତୃତୀୟ': 3
+        'ଚତୁର୍ଥ': 4
+        'ପଞ୍ଚମ': 5
+        'ଷଷ୍ଠ': 6
+        'ସପ୍ତମ': 7
+        'ଅଷ୍ଟମ': 8
+        'ନବମ': 9
+        'ଦଶମ': 10
+        'ଏକାଦଶ': 11
+        'ଦ୍ୱାଦଶ': 12
+        'ତ୍ରୟୋଦଶ': 13
+        'ଚତୁର୍ଦଶ': 14
+        'ପଞ୍ଚଦଶ': 15
+        'ଷୋଡ଼ଶ': 16
+        'ସପ୍ତଦଶ': 17
+        'ଅଷ୍ଟାଦଶ': 18
+        'ଊନବିଂଶ': 19
+        'ବିଂଶ': 20
+      negativePrefixes:
+        - 'ଋଣାତ୍ମକ'
+        - 'ମାଇନସ୍'
+
+  ordinal:
+    numeric:
+      # Keep exact replacements in sync with number.words.ordinal above.
+      engine: 'number-word-suffix'
+      useCulture: true
+      masculine:
+        defaultSuffix: 'ତମ'
+        exactReplacements:
+          1: 'ପ୍ରଥମ'
+          2: 'ଦ୍ୱିତୀୟ'
+          3: 'ତୃତୀୟ'
+          4: 'ଚତୁର୍ଥ'
+          5: 'ପଞ୍ଚମ'
+          6: 'ଷଷ୍ଠ'
+          7: 'ସପ୍ତମ'
+          8: 'ଅଷ୍ଟମ'
+          9: 'ନବମ'
+          10: 'ଦଶମ'
+          11: 'ଏକାଦଶ'
+          12: 'ଦ୍ୱାଦଶ'
+          13: 'ତ୍ରୟୋଦଶ'
+          14: 'ଚତୁର୍ଦଶ'
+          15: 'ପଞ୍ଚଦଶ'
+          16: 'ଷୋଡ଼ଶ'
+          17: 'ସପ୍ତଦଶ'
+          18: 'ଅଷ୍ଟାଦଶ'
+          19: 'ଊନବିଂଶ'
+          20: 'ବିଂଶ'
+      neuterFallback: 'masculine'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourGender: 'masculine'
+    minuteGender: 'masculine'
+    hourWordsMap:
+      - ''
+      - 'ଏକ'
+      - 'ଦୁଇ'
+      - 'ତିନି'
+      - 'ଚାରି'
+      - 'ପାଞ୍ଚ'
+      - 'ଛଅ'
+      - 'ସାତ'
+      - 'ଆଠ'
+      - 'ନଅ'
+      - 'ଦଶ'
+      - 'ଏଗାର'
+      - 'ବାର'
+    min0: '{hour}ଟା'
+    defaultTemplate: '{hour}ଟା {minutes} ମିନିଟ୍'
+    earlyMorning: 'ସକାଳ'
+    morning: 'ସକାଳ'
+    afternoon: 'ଦ୍ୱିପ୍ରହର'
+    night: 'ରାତି'
+    evening: 'ସନ୍ଧ୍ୟା'
+    eveningStartHour: 17
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'ଉତ୍ତର'
+      - 'ଉତ୍ତର-ଉତ୍ତର-ପୂର୍ବ'
+      - 'ଉତ୍ତର-ପୂର୍ବ'
+      - 'ପୂର୍ବ-ଉତ୍ତର-ପୂର୍ବ'
+      - 'ପୂର୍ବ'
+      - 'ପୂର୍ବ-ଦକ୍ଷିଣ-ପୂର୍ବ'
+      - 'ଦକ୍ଷିଣ-ପୂର୍ବ'
+      - 'ଦକ୍ଷିଣ-ଦକ୍ଷିଣ-ପୂର୍ବ'
+      - 'ଦକ୍ଷିଣ'
+      - 'ଦକ୍ଷିଣ-ଦକ୍ଷିଣ-ପଶ୍ଚିମ'
+      - 'ଦକ୍ଷିଣ-ପଶ୍ଚିମ'
+      - 'ପଶ୍ଚିମ-ଦକ୍ଷିଣ-ପଶ୍ଚିମ'
+      - 'ପଶ୍ଚିମ'
+      - 'ପଶ୍ଚିମ-ଉତ୍ତର-ପଶ୍ଚିମ'
+      - 'ଉତ୍ତର-ପଶ୍ଚିମ'
+      - 'ଉତ୍ତର-ଉତ୍ତର-ପଶ୍ଚିମ'
+    short:
+      - 'ଉ'
+      - 'ଉ-ଉ-ପୂ'
+      - 'ଉ-ପୂ'
+      - 'ପୂ-ଉ-ପୂ'
+      - 'ପୂ'
+      - 'ପୂ-ଦ-ପୂ'
+      - 'ଦ-ପୂ'
+      - 'ଦ-ଦ-ପୂ'
+      - 'ଦ'
+      - 'ଦ-ଦ-ପ'
+      - 'ଦ-ପ'
+      - 'ପ-ଦ-ପ'
+      - 'ପ'
+      - 'ପ-ଉ-ପ'
+      - 'ଉ-ପ'
+      - 'ଉ-ଉ-ପ'
+
+  calendar:
+    months:
+      - 'ଜାନୁଆରୀ'
+      - 'ଫେବୃଆରୀ'
+      - 'ମାର୍ଚ୍ଚ'
+      - 'ଏପ୍ରିଲ'
+      - 'ମେ'
+      - 'ଜୁନ'
+      - 'ଜୁଲାଇ'
+      - 'ଅଗଷ୍ଟ'
+      - 'ସେପ୍ଟେମ୍ବର'
+      - 'ଅକ୍ଟୋବର'
+      - 'ନଭେମ୍ବର'
+      - 'ଡିସେମ୍ବର'
