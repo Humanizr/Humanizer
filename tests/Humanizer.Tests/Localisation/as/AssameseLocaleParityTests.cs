@@ -1,4 +1,4 @@
-namespace Humanizer.Tests.Localisation.Assamese;
+namespace Humanizer.Tests.Localisation.@as;
 
 [UseCulture("as")]
 public class AssameseLocaleParityTests
