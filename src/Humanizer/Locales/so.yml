@@ -1,0 +1,503 @@
+locale: 'so'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'iyo'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'hadda'
+      never: 'marnaba'
+      past:
+        millisecond:
+          single: '1 milisekan ka hor'
+          multiple:
+            forms:
+              default: 'milisekan'
+            template: '{count} milisekan ka hor'
+        second:
+          single: '1 ilbiriqsi ka hor'
+          multiple:
+            forms:
+              default: 'ilbiriqsi'
+            template: '{count} ilbiriqsi ka hor'
+        minute:
+          single: '1 daqiiqo ka hor'
+          multiple:
+            forms:
+              default: 'daqiiqo'
+            template: '{count} daqiiqo ka hor'
+        hour:
+          single: '1 saac ka hor'
+          multiple:
+            forms:
+              default: 'saacadood'
+            template: '{count} saacadood ka hor'
+        day:
+          single: 'shalay'
+          multiple:
+            forms:
+              default: 'maalmood'
+            template: '{count} maalmood ka hor'
+        week:
+          single: '1 toddobaad ka hor'
+          multiple:
+            forms:
+              default: 'toddobaad'
+            template: '{count} toddobaad ka hor'
+        month:
+          single: '1 bil ka hor'
+          multiple:
+            forms:
+              default: 'bilood'
+            template: '{count} bilood ka hor'
+        year:
+          single: '1 sano ka hor'
+          multiple:
+            forms:
+              default: 'sano'
+            template: '{count} sano ka hor'
+      future:
+        millisecond:
+          single: '1 milisekan kadib'
+          multiple:
+            forms:
+              default: 'milisekan'
+            template: '{count} milisekan kadib'
+        second:
+          single: '1 ilbiriqsi kadib'
+          multiple:
+            forms:
+              default: 'ilbiriqsi'
+            template: '{count} ilbiriqsi kadib'
+        minute:
+          single: '1 daqiiqo kadib'
+          multiple:
+            forms:
+              default: 'daqiiqo'
+            template: '{count} daqiiqo kadib'
+        hour:
+          single: '1 saac kadib'
+          multiple:
+            forms:
+              default: 'saacadood'
+            template: '{count} saacadood kadib'
+        day:
+          single: 'berri'
+          multiple:
+            forms:
+              default: 'maalmood'
+            template: '{count} maalmood kadib'
+        week:
+          single: '1 toddobaad kadib'
+          multiple:
+            forms:
+              default: 'toddobaad'
+            template: '{count} toddobaad kadib'
+        month:
+          single: '1 bil kadib'
+          multiple:
+            forms:
+              default: 'bilood'
+            template: '{count} bilood kadib'
+        year:
+          single: '1 sano kadib'
+          multiple:
+            forms:
+              default: 'sano'
+            template: '{count} sano kadib'
+    duration:
+      zero: 'waqti ma jiro'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisekan'
+          words: 'hal milisekan'
+        multiple:
+          forms:
+            default: 'milisekan'
+      second:
+        single:
+          numeric: '1 ilbiriqsi'
+          words: 'hal ilbiriqsi'
+        multiple:
+          forms:
+            default: 'ilbiriqsi'
+      minute:
+        single:
+          numeric: '1 daqiiqo'
+          words: 'hal daqiiqo'
+        multiple:
+          forms:
+            default: 'daqiiqo'
+      hour:
+        single:
+          numeric: '1 saac'
+          words: 'hal saac'
+        multiple:
+          forms:
+            default: 'saacadood'
+      day:
+        single:
+          numeric: '1 maalin'
+          words: 'hal maalin'
+        multiple:
+          forms:
+            default: 'maalmood'
+      week:
+        single:
+          numeric: '1 toddobaad'
+          words: 'hal toddobaad'
+        multiple:
+          forms:
+            default: 'toddobaad'
+      month:
+        single:
+          numeric: '1 bil'
+          words: 'hal bil'
+        multiple:
+          forms:
+            default: 'bilood'
+      year:
+        single:
+          numeric: '1 sano'
+          words: 'hal sano'
+        multiple:
+          forms:
+            default: 'sano'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bayt'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobayt'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabayt'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabayt'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabayt'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'ilb'
+      minute:
+        symbol: 'daq'
+      hour:
+        symbol: 'saac'
+      day:
+        symbol: 'maal'
+      week:
+        symbol: 'tod'
+      month:
+        symbol: 'bil'
+      year:
+        symbol: 'sano'
+
+  number:
+    words:
+      engine: 'inverted-tens'
+      minusWord: 'laga jaray'
+      unitsMap:
+        - 'eber'
+        - 'kow'
+        - 'laba'
+        - 'saddex'
+        - 'afar'
+        - 'shan'
+        - 'lix'
+        - 'toddoba'
+        - 'siddeed'
+        - 'sagaal'
+        - 'toban'
+        - 'kow iyo toban'
+        - 'laba iyo toban'
+        - 'saddex iyo toban'
+        - 'afar iyo toban'
+        - 'shan iyo toban'
+        - 'lix iyo toban'
+        - 'toddoba iyo toban'
+        - 'siddeed iyo toban'
+        - 'sagaal iyo toban'
+      tensMap:
+        2: 'labaatan'
+        3: 'soddon'
+        4: 'afartan'
+        5: 'konton'
+        6: 'lixdan'
+        7: 'toddobaatan'
+        8: 'siddeetan'
+        9: 'sagaashan'
+      hundredsPrefixMap:
+        0: ''
+        1: ''
+        2: 'laba'
+        3: 'saddex'
+        4: 'afar'
+        5: 'shan'
+        6: 'lix'
+        7: 'toddoba'
+        8: 'siddeed'
+        9: 'sagaal'
+      oneHundredWord: 'boqol'
+      hundredWord: 'boqol'
+      hundredJoiner: ' '
+      hundredRemainderSeparator: ' iyo '
+      unitTensJoiner: ' iyo '
+      scales:
+        -
+          value: 1000000000000000000
+          oneForm: 'kintilyan'
+          manyForm: 'kintilyan'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000000
+          oneForm: 'kwadrilyan'
+          manyForm: 'kwadrilyan'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000000
+          oneForm: 'tirilyan'
+          manyForm: 'tirilyan'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000000
+          oneForm: 'bilyan'
+          manyForm: 'bilyan'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000000
+          oneForm: 'milyan'
+          manyForm: 'milyan'
+          countJoiner: ' '
+          remainderSeparator: ' '
+        -
+          value: 1000
+          oneForm: 'kun'
+          manyForm: 'kun'
+          countJoiner: ' '
+          remainderSeparator: ' '
+      ordinalMode: 'suffix'
+      ordinalExceptions:
+        kow: 'koowaad'
+        laba: 'labaad'
+        afar: 'afraad'
+        toddoba: 'toddobaad'
+        toban: 'tobnaad'
+      ordinalDefaultSuffix: 'aad'
+      removeLeadingOneInOrdinal: false
+    formatting:
+      decimalSeparator: '.'
+      groupSeparator: ','
+      negativeSign: '-'
+    parse:
+      engine: 'inverted-tens'
+      cardinalMap:
+        eber: 0
+        kow: 1
+        hal: 1
+        laba: 2
+        saddex: 3
+        afar: 4
+        shan: 5
+        lix: 6
+        toddoba: 7
+        siddeed: 8
+        sagaal: 9
+        toban: 10
+        labaatan: 20
+        soddon: 30
+        afartan: 40
+        konton: 50
+        lixdan: 60
+        toddobaatan: 70
+        siddeetan: 80
+        sagaashan: 90
+        boqol: 100
+        kun: 1000
+        milyan: 1000000
+        bilyan: 1000000000
+        tirilyan: 1000000000000
+        kwadrilyan: 1000000000000000
+        kintilyan: 1000000000000000000
+      unitMap:
+        kow: 1
+        hal: 1
+        laba: 2
+        saddex: 3
+        afar: 4
+        shan: 5
+        lix: 6
+        toddoba: 7
+        siddeed: 8
+        sagaal: 9
+      tensTokens:
+        -
+          word: 'sagaashan'
+          value: 90
+        -
+          word: 'siddeetan'
+          value: 80
+        -
+          word: 'toddobaatan'
+          value: 70
+        -
+          word: 'lixdan'
+          value: 60
+        -
+          word: 'konton'
+          value: 50
+        -
+          word: 'afartan'
+          value: 40
+        -
+          word: 'soddon'
+          value: 30
+        -
+          word: 'labaatan'
+          value: 20
+        -
+          word: 'toban'
+          value: 10
+      tensLinker: 'iyo'
+      scaleTokens:
+        - 'kintilyan'
+        - 'kwadrilyan'
+        - 'tirilyan'
+        - 'bilyan'
+        - 'milyan'
+        - 'kun'
+        - 'boqol'
+      ordinalMap:
+        koowaad: 1
+        labaad: 2
+        saddexaad: 3
+        afraad: 4
+        shanaad: 5
+        lixaad: 6
+        toddobaad: 7
+        siddeedaad: 8
+        sagaalaad: 9
+        tobnaad: 10
+      negativePrefixes:
+        - 'laga jaray'
+      ignoredTokens:
+        - 'iyo'
+      ordinalSuffixes:
+        - 'aad'
+      unitPartReplacements: []
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: 'aad'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'kow'
+      - 'laba'
+      - 'saddex'
+      - 'afar'
+      - 'shan'
+      - 'lix'
+      - 'toddoba'
+      - 'siddeed'
+      - 'sagaal'
+      - 'toban'
+      - 'kow iyo toban'
+      - 'laba iyo toban'
+    min0: '{hour} saac {dayPeriod}'
+    defaultTemplate: '{hour} iyo {minutes} daqiiqo {dayPeriod}'
+    earlyMorning: 'subaxnimo'
+    morning: 'subaxnimo'
+    afternoon: 'galabnimo'
+    evening: 'fiidnimo'
+    night: 'habeennimo'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'waqooyi'
+      - 'waqooyi-waqooyi bari'
+      - 'waqooyi bari'
+      - 'bari-waqooyi bari'
+      - 'bari'
+      - 'bari-koonfur bari'
+      - 'koonfur bari'
+      - 'koonfur-koonfur bari'
+      - 'koonfur'
+      - 'koonfur-koonfur galbeed'
+      - 'koonfur galbeed'
+      - 'galbeed-koonfur galbeed'
+      - 'galbeed'
+      - 'galbeed-waqooyi galbeed'
+      - 'waqooyi galbeed'
+      - 'waqooyi-waqooyi galbeed'
+    short:
+      - 'W'
+      - 'WWB'
+      - 'WB'
+      - 'BWB'
+      - 'B'
+      - 'BKB'
+      - 'KB'
+      - 'KKB'
+      - 'K'
+      - 'KKG'
+      - 'KG'
+      - 'GKG'
+      - 'G'
+      - 'GWG'
+      - 'WG'
+      - 'WWG'
+
+  calendar:
+    months:
+      - 'Jannaayo'
+      - 'Febraayo'
+      - 'Maarso'
+      - 'Abriil'
+      - 'Maayo'
+      - 'Juun'
+      - 'Luulyo'
+      - 'Ogosto'
+      - 'Sebteembar'
+      - 'Oktoobar'
+      - 'Noofeembar'
+      - 'Diseembar'
