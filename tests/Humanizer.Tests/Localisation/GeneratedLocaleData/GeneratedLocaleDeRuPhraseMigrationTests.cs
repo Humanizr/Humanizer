@@ -46,7 +46,7 @@ public class GeneratedLocaleDeRuPhraseMigrationTests
 
         Assert.True(table.TryGetDatePhrase(TimeUnit.Week, Tense.Future, out var futureWeek));
         Assert.Equal("недель", futureWeek.Multiple?.Forms.Default);
-        Assert.Null(futureWeek.Multiple?.Forms.Dual);
+        Assert.Equal("недели", futureWeek.Multiple?.Forms.Dual);
     }
 
     [Theory]
