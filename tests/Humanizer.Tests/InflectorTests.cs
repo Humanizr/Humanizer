@@ -61,6 +61,23 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
 
     [Theory]
+    [InlineData("arrives", "arrive")]
+    [InlineData("drives", "drive")]
+    [InlineData("curves", "curve")]
+    [InlineData("behaves", "behave")]
+    [InlineData("survives", "survive")]
+    [InlineData("derives", "derive")]
+    [InlineData("knives", "knife")]
+    [InlineData("wives", "wife")]
+    [InlineData("leaves", "leaf")]
+    [InlineData("lives", "life")]
+    [InlineData("scarves", "scarf")]
+    [InlineData("hooves", "hoof")]
+    [InlineData("thieves", "thief")]
+    public void Singularize_Ves_EdgeCases(string plural, string expected) =>
+        Assert.Equal(expected, plural.Singularize());
+
+    [Theory]
     [InlineData("a")]
     [InlineData("A")]
     [InlineData("s")]
@@ -209,7 +226,7 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["index", "indices"];
 
         yield return ["wife", "wives"];
-        yield return ["safe", "saves"];
+        yield return ["safe", "safes"];
         yield return ["half", "halves"];
 
         yield return ["glove", "gloves"];
