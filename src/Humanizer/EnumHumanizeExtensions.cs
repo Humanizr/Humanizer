@@ -5,6 +5,32 @@ namespace Humanizer;
 /// </summary>
 public static class EnumHumanizeExtensions
 {
+    static readonly MethodInfo GenericHumanizeMethod = typeof(EnumHumanizeExtensions)
+        .GetMethods()
+        .Single(method =>
+            method.Name == nameof(Humanize) &&
+            method.IsGenericMethodDefinition &&
+            method.GetParameters().Length == 1 &&
+            method.GetGenericArguments().Length == 1);
+
+    /// <summary>
+    /// Converts an enum value to a human-readable string when the concrete enum type is only known at runtime.
+    /// </summary>
+    /// <param name="input">The enum value to be humanized.</param>
+    /// <returns>A human-readable string representation of the enum value.</returns>
+    public static string Humanize(this Enum input) =>
+        (string)GenericHumanizeMethod
+            .MakeGenericMethod(input.GetType())
+            .Invoke(null, [input])!;
+
+    /// <summary>
+    /// Converts an enum value to a human-readable string with the specified letter casing when the concrete enum type is only known at runtime.
+    /// </summary>
+    /// <param name="input">The enum value to be humanized.</param>
+    /// <param name="casing">The desired letter casing to apply to the humanized enum value.</param>
+    /// <returns>A human-readable string representation of the enum value with the specified casing applied.</returns>
+    public static string Humanize(this Enum input, LetterCasing casing) =>
+        input.Humanize().ApplyCase(casing);
     /// <summary>
     /// Converts an enum value to a human-readable string by intelligently formatting the enum member name
     /// and respecting any <see cref="System.ComponentModel.DescriptionAttribute"/> applied to the member.
