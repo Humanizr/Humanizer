@@ -142,6 +142,8 @@ public class InflectorTests
     [InlineData("customer name $", "customerName$")]
     [InlineData("customer   name", "customerName")]
     [InlineData("", "")]
+    [InlineData("_Name", "_name")]
+    [InlineData("__customer_name", "__customerName")]
     public void Camelize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Camelize());
 
