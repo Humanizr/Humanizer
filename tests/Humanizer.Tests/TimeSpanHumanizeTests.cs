@@ -467,4 +467,22 @@ public class TimeSpanHumanizeTests
         var actual = timeSpan.Humanize(precision: precision, culture: new(culture), maxUnit: TimeUnit.Year, toWords: true);
         Assert.Equal(expected: expected, actual);
     }
+
+    [Fact]
+    public void MaxValue_DoesNotThrow_WhenHumanizingInSeconds()
+    {
+        var result = TimeSpan.MaxValue.Humanize(maxUnit: TimeUnit.Second, minUnit: TimeUnit.Second);
+
+        Assert.NotEmpty(result);
+        Assert.Contains("second", result, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void MinValue_DoesNotThrow_WhenHumanizingInMilliseconds()
+    {
+        var result = TimeSpan.MinValue.Humanize(maxUnit: TimeUnit.Millisecond, minUnit: TimeUnit.Millisecond);
+
+        Assert.NotEmpty(result);
+        Assert.Contains("millisecond", result, StringComparison.OrdinalIgnoreCase);
+    }
 }

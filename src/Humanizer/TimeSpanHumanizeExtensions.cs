@@ -213,17 +213,50 @@ public static class TimeSpanHumanizeExtensions
     {
         if (isTimeUnitToGetTheMaximumTimeUnit)
         {
-            return (int)totalTimeNumberOfUnits;
+            return SaturateToIntCount(totalTimeNumberOfUnits);
         }
 
         return timeNumberOfUnits;
     }
 
+    static int SaturateToIntCount(double value)
+    {
+        if (double.IsNaN(value) || double.IsPositiveInfinity(value))
+        {
+            return int.MaxValue;
+        }
+
+        if (double.IsNegativeInfinity(value))
+        {
+            return int.MinValue;
+        }
+
+        if (value >= int.MaxValue)
+        {
+            return int.MaxValue;
+        }
+
+        if (value <= int.MinValue)
+        {
+            return int.MinValue;
+        }
+
+        return (int)value;
+    }
+
     static string? BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
         // Always use positive units to account for negative timespans
         amountOfTimeUnits != 0
-            ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
+            ? cultureFormatter.TimeSpanHumanize(timeUnitType, GetAbsoluteCount(amountOfTimeUnits), toWords)
             : null;
+
+    static int GetAbsoluteCount(int count) =>
+        count switch
+        {
+            int.MinValue => int.MaxValue,
+            < 0 => -count,
+            _ => count,
+        };
 
     static string HumanizeSinglePart(TimeSpan timeSpan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords)
     {
