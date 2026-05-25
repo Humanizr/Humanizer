@@ -23,6 +23,17 @@ public class EnumHumanizeTests
         Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
 
     [Fact]
+    public void CanHumanizeWhenEnumTypeIsKnownAtRuntimeOnly()
+    {
+        Enum value = EnumUnderTest.MemberWithoutDescriptionAttribute;
+
+        Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, value.Humanize());
+        Assert.Equal(
+            EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
+            value.Humanize(LetterCasing.Title));
+    }
+
+    [Fact]
     public void CanApplyTitleCasingOnEnumHumanization() =>
         Assert.Equal(
             EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
