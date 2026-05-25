@@ -199,6 +199,23 @@ public static partial class InflectorExtensions
     /// </example>
     public static string Camelize(this string input)
     {
+        var leadingUnderscoreLength = 0;
+        while (leadingUnderscoreLength < input.Length && input[leadingUnderscoreLength] == '_')
+        {
+            leadingUnderscoreLength++;
+        }
+
+        if (leadingUnderscoreLength > 0)
+        {
+            var prefix = input[..leadingUnderscoreLength];
+            if (leadingUnderscoreLength == input.Length)
+            {
+                return prefix;
+            }
+
+            return prefix + Camelize(input[leadingUnderscoreLength..]);
+        }
+
         if (TryPascalizeAscii(input, lowerFirst: true, out var result))
         {
             return result;
