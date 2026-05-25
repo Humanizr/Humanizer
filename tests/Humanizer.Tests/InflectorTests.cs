@@ -121,6 +121,7 @@ public class InflectorTests
     [InlineData("customer-first-name", "CustomerFirstName")]
     [InlineData("_customer-first-name", "CustomerFirstName")]
     [InlineData(" customer__first--name", "CustomerFirstName")]
+    [InlineData("admin_area_level_1_long_name", "AdminAreaLevel1LongName")]
     public void Pascalize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Pascalize());
 
