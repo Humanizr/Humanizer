@@ -128,6 +128,16 @@ public class MetricNumeralTests
     public void TestAllSymbolsAsLong(long subject, int? decimals, string expected) =>
         Assert.Equal(expected, subject.ToMetric(decimals: decimals));
 
+    /// <summary>
+    /// https://github.com/Humanizr/Humanizer/issues/1699
+    /// </summary>
+    [Theory]
+    [InlineData(1)]
+    [InlineData(42)]
+    [InlineData(999)]
+    public void LongToMetricDecimalsMatchIntBehavior(long value) =>
+        Assert.Equal(((int)value).ToMetric(decimals: 5), value.ToMetric(decimals: 5));
+
     [Theory]
     [InlineData("1.3M", 1300000, null, null)]
     [InlineData("1.3million", 1300000, MetricNumeralFormats.UseShortScaleWord, null)]

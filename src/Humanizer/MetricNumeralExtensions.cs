@@ -332,10 +332,13 @@ public static class MetricNumeralExtensions
             return BuildMetricRepresentation(input, scale, formats, decimals);
         }
 
+        if (decimals > 0)
+        {
+            return ((double)input).ToMetric(formats, decimals);
+        }
+
         var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
-        var representation = decimals > 0
-            ? $"{input.ToString(nfi)}{nfi.NumberDecimalSeparator}{new string('0', decimals.Value)}"
-            : input.ToString(nfi);
+        var representation = input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
