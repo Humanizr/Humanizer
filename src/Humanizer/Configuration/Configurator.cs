@@ -47,7 +47,7 @@ public static class Configurator
     public static LocaliserRegistry<ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; } = new TimeOnlyToClockNotationConvertersRegistry();
 #endif
 
-    internal static ICollectionFormatter CollectionFormatter => CollectionFormatters.ResolveForUiCulture();
+    internal static ICollectionFormatter CollectionFormatter => CollectionFormatters.ResolveForCulture(null);
 
     /// <summary>
     /// The formatter to be used
@@ -71,20 +71,20 @@ public static class Configurator
     /// <summary>
     /// The ordinalizer to be used
     /// </summary>
-    internal static IOrdinalizer Ordinalizer => Ordinalizers.ResolveForUiCulture();
+    internal static IOrdinalizer Ordinalizer => Ordinalizers.ResolveForCulture(null);
 
     /// <summary>
     /// The ordinalizer to be used
     /// </summary>
-    internal static IDateToOrdinalWordConverter DateToOrdinalWordsConverter => DateToOrdinalWordsConverters.ResolveForUiCulture();
+    internal static IDateToOrdinalWordConverter DateToOrdinalWordsConverter => DateToOrdinalWordsConverters.ResolveForCulture(null);
 
 #if NET6_0_OR_GREATER
     /// <summary>
     /// The ordinalizer to be used
     /// </summary>
-    internal static IDateOnlyToOrdinalWordConverter DateOnlyToOrdinalWordsConverter => DateOnlyToOrdinalWordsConverters.ResolveForUiCulture();
+    internal static IDateOnlyToOrdinalWordConverter DateOnlyToOrdinalWordsConverter => DateOnlyToOrdinalWordsConverters.ResolveForCulture(null);
 
-    internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter => TimeOnlyToClockNotationConverters.ResolveForUiCulture();
+    internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter => TimeOnlyToClockNotationConverters.ResolveForCulture(null);
 #endif
 
     /// <summary>

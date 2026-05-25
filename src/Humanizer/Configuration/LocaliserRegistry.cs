@@ -28,15 +28,15 @@ public class LocaliserRegistry<TLocaliser>
     /// Gets the localiser for the current thread's UI culture
     /// </summary>
     public TLocaliser ResolveForUiCulture() =>
-        ResolveForCulture(null);
+        ResolveForCulture(CultureInfo.CurrentUICulture);
 
     /// <summary>
     /// Gets the localiser for the specified culture
     /// </summary>
-    /// <param name="culture">The culture to retrieve localiser for. If not specified, current thread's UI culture is used.</param>
+    /// <param name="culture">The culture to retrieve localiser for. If not specified, current thread's culture is used.</param>
     public TLocaliser ResolveForCulture(CultureInfo? culture)
     {
-        var cultureInfo = culture ?? CultureInfo.CurrentUICulture;
+        var cultureInfo = culture ?? CultureInfo.CurrentCulture;
         var cultureName = cultureInfo.Name;
 
         // Use ConcurrentDictionary with culture name (string) as key to avoid CultureInfo equality checks
