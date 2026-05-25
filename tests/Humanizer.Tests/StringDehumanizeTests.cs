@@ -21,6 +21,7 @@ public class StringDehumanizeTests
     [InlineData("OneYetTwo", "OneYetTwo")]
     [InlineData("OneNorTwo", "OneNorTwo")]
     [InlineData("WordSoTwo", "WordSoTwo")]
+    [InlineData("   ", "   ")]
     public void CanDehumanizeIntoAPascalCaseWord(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Dehumanize());
 }
