@@ -71,6 +71,15 @@ public class InflectorTests
     public void SingularizeSingleLetter(string input) =>
         Assert.Equal(input, input.Singularize());
 
+    /// <summary>
+    /// https://github.com/Humanizr/Humanizer/issues/1674
+    /// </summary>
+    [Theory]
+    [InlineData("arrive", "arrives")]
+    [InlineData("archive", "archives")]
+    public void SingularizeIveVerbsEndingInEs(string singular, string plural) =>
+        Assert.Equal(singular, plural.Singularize());
+
     //Uppercases individual words and removes some characters
     [Theory]
     [InlineData("some title", "Some Title")]
