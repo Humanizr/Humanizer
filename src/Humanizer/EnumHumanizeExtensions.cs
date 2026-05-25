@@ -5,13 +5,21 @@ namespace Humanizer;
 /// </summary>
 public static class EnumHumanizeExtensions
 {
-    static readonly MethodInfo GenericHumanizeMethod = typeof(EnumHumanizeExtensions)
-        .GetMethods()
-        .Single(method =>
-            method.Name == nameof(Humanize) &&
-            method.IsGenericMethodDefinition &&
-            method.GetParameters().Length == 1 &&
-            method.GetGenericArguments().Length == 1);
+#if NET6_0_OR_GREATER
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "The method is only used by Humanize which already has RequiresUnreferencedCode")]
+    [UnconditionalSuppressMessage("Trimming", "IL2111", Justification = "The method is only used by Humanize which already has RequiresUnreferencedCode")]
+    [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "The method is only used by Humanize which already has RequiresDynamicCode")]
+#endif
+    static MethodInfo GetGenericHumanizeMethodInfo() =>
+        typeof(EnumHumanizeExtensions)
+            .GetMethods()
+            .Single(method =>
+                method.Name == nameof(Humanize) &&
+                method.IsGenericMethodDefinition &&
+                method.GetParameters().Length == 1 &&
+                method.GetGenericArguments().Length == 1);
+
+    static readonly Lazy<MethodInfo> GenericHumanizeMethod = new(GetGenericHumanizeMethodInfo);
 
     /// <summary>
     /// Converts an enum value to a human-readable string when the concrete enum type is only known at runtime.
@@ -21,12 +29,13 @@ public static class EnumHumanizeExtensions
 #if NET6_0_OR_GREATER
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(EnumHumanizeExtensions))]
 #endif
     public static string Humanize(this Enum input)
     {
         try
         {
-            return (string)GenericHumanizeMethod
+            return (string)GenericHumanizeMethod.Value
                 .MakeGenericMethod(input.GetType())
                 .Invoke(null, [input])!;
         }
@@ -42,6 +51,10 @@ public static class EnumHumanizeExtensions
     /// <param name="input">The enum value to be humanized.</param>
     /// <param name="casing">The desired letter casing to apply to the humanized enum value.</param>
     /// <returns>A human-readable string representation of the enum value with the specified casing applied.</returns>
+#if NET6_0_OR_GREATER
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+#endif
     public static string Humanize(this Enum input, LetterCasing casing) =>
         input.Humanize().ApplyCase(casing);
 
