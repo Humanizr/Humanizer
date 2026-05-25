@@ -422,18 +422,17 @@ public static class MetricNumeralExtensions
     /// <returns>A number in a Metric representation</returns>
     static string BuildRepresentation(double input, MetricNumeralFormats? formats, int? decimals)
     {
-        var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
+        var value = decimals.HasValue ? Math.Round(input, decimals.Value) : input;
+        var exponent = (int)Math.Floor(Math.Log10(Math.Abs(value)) / 3);
 
         if (!exponent.Equals(0))
         {
-            return BuildMetricRepresentation(input, exponent, formats, decimals);
+            return BuildMetricRepresentation(value, exponent, formats, decimals);
         }
 
         var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var representation = decimals.HasValue
-            ? Math
-                .Round(input, decimals.Value)
-                .ToString(nfi)
+            ? value.ToString(nfi)
             : input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
