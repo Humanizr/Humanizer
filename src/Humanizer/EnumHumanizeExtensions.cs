@@ -18,10 +18,23 @@ public static class EnumHumanizeExtensions
     /// </summary>
     /// <param name="input">The enum value to be humanized.</param>
     /// <returns>A human-readable string representation of the enum value.</returns>
-    public static string Humanize(this Enum input) =>
-        (string)GenericHumanizeMethod
-            .MakeGenericMethod(input.GetType())
-            .Invoke(null, [input])!;
+#if NET6_0_OR_GREATER
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+#endif
+    public static string Humanize(this Enum input)
+    {
+        try
+        {
+            return (string)GenericHumanizeMethod
+                .MakeGenericMethod(input.GetType())
+                .Invoke(null, [input])!;
+        }
+        catch (TargetInvocationException exception)
+        {
+            throw exception.InnerException!;
+        }
+    }
 
     /// <summary>
     /// Converts an enum value to a human-readable string with the specified letter casing when the concrete enum type is only known at runtime.
@@ -31,6 +44,7 @@ public static class EnumHumanizeExtensions
     /// <returns>A human-readable string representation of the enum value with the specified casing applied.</returns>
     public static string Humanize(this Enum input, LetterCasing casing) =>
         input.Humanize().ApplyCase(casing);
+
     /// <summary>
     /// Converts an enum value to a human-readable string by intelligently formatting the enum member name
     /// and respecting any <see cref="System.ComponentModel.DescriptionAttribute"/> applied to the member.
