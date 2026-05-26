@@ -430,13 +430,21 @@ public static class MetricNumeralExtensions
         }
 
         var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
-        var representation = decimals.HasValue
-            ? Math
-                .Round(input, decimals.Value)
-                .ToString(nfi)
-            : input.ToString(nfi);
-        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
-        return representation + space;
+        if (decimals.HasValue)
+        {
+            var rounded = Math.Round(input, decimals.Value);
+            if (Math.Abs(rounded) >= 1000)
+            {
+                return BuildMetricRepresentation(rounded, 1, formats, decimals);
+            }
+
+            var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
+            return rounded.ToString(nfi) + space;
+        }
+
+        var representation = input.ToString(nfi);
+        var trailingSpace = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
+        return representation + trailingSpace;
     }
 
     /// <summary>

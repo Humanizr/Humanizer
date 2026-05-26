@@ -212,6 +212,7 @@ public class MetricNumeralTests
     [InlineData("1 milli", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseName, null)]
     [InlineData("1 thousandth", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseShortScaleWord, null)]
     [InlineData("1 thousandth", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseLongScaleWord, null)]
+    [InlineData("1k", 999.9, null, 0)]
     public void ToMetric(string expected, double input, MetricNumeralFormats? format, int? decimals) =>
         Assert.Equal(expected, input.ToMetric(format, decimals));
 
