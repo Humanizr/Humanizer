@@ -494,7 +494,7 @@ public static class MetricNumeralExtensions
             {
                 return UnitPrefixes[symbol].LongScaleWord;
             }
-            
+
             if (formatValue.HasFlag(MetricNumeralFormats.UseScaleWord))
             {
                 var culture = CultureInfo.CurrentUICulture;
