@@ -40,7 +40,7 @@ public static class HeadingExtensions
     {
         var val = (int)(heading / 22.5 + .5);
         var headingsIndex = val % 16;
-        return HeadingTableCatalog.Resolve(culture ?? CultureInfo.CurrentUICulture)
+        return HeadingTableCatalog.Resolve(culture ?? CultureInfo.CurrentCulture)
             .GetHeading(style, headingsIndex);
     }
 

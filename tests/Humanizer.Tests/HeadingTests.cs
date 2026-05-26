@@ -186,7 +186,7 @@ public class HeadingTests
         Assert.Equal(expected, heading.FromAbbreviatedHeading(new(culture)));
 
     [Fact]
-    public void ToHeadingUsesCurrentUiCultureWhenCultureIsOmitted()
+    public void ToHeadingUsesCurrentCultureWhenCultureIsOmitted()
     {
         var originalCulture = CultureInfo.CurrentCulture;
         var originalUiCulture = CultureInfo.CurrentUICulture;
@@ -196,7 +196,7 @@ public class HeadingTests
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
             CultureInfo.CurrentUICulture = new CultureInfo("de-DE");
 
-            Assert.Equal("Nord", 0d.ToHeading(HeadingStyle.Full));
+            Assert.Equal("north", 0d.ToHeading(HeadingStyle.Full));
         }
         finally
         {

@@ -14,14 +14,29 @@ public class LocaliserRegistryTests
     }
 
     [Fact]
-    public void ResolveForCultureNullUsesCurrentUiCulture()
+    public void ResolveForCultureNullUsesCurrentCulture()
     {
         var registry = new LocaliserRegistry<string>(culture => $"default:{culture.Name}");
         registry.Register("fr", culture => $"fr:{culture.Name}");
 
         using var _ = new DistinctCultureSwap(new("en-US"), new("fr-CH"));
 
-        Assert.Equal("fr:fr-CH", registry.ResolveForCulture(null));
+        Assert.Equal("default:en-US", registry.ResolveForCulture(null));
+    }
+
+    [Fact]
+    public void ResolveForCultureNullUsesCurrentCultureWhenDistinctFromUiCulture()
+    {
+        var registry = new LocaliserRegistry<string>(culture => $"default:{culture.Name}");
+        registry.Register("en-GB", culture => $"en-GB:{culture.Name}");
+
+        using var _ = new DistinctCultureSwap(new("en-GB"), new("en-US"));
+
+        Assert.Multiple(() =>
+        {
+            Assert.Equal("en-GB:en-GB", registry.ResolveForCulture(null));
+            Assert.Equal("default:en-US", registry.ResolveForUiCulture());
+        });
     }
 
     [Fact]
