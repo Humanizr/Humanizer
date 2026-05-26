@@ -55,11 +55,16 @@ public class TimeSpanDehumanizeTests
         Assert.Equal(new TimeSpan(0, 18, 1), "18:01".DehumanizeTimeSpan(options));
     }
 
-    [Theory]
-    [InlineData("10675200d")]
-    public void TryDehumanizeTimeSpanReturnsFalseForOverflowInput(string input)
+    [Fact]
+    public void TryDehumanizeTimeSpanReturnsFalseForOverflowInput()
     {
-        Assert.False(input.TryDehumanizeTimeSpan(out _));
+        Assert.False("10675200d".TryDehumanizeTimeSpan(out _));
+    }
+
+    [Fact]
+    public void DehumanizeTimeSpanParsesNegativeColonFormatViaTryParseFallback()
+    {
+        Assert.Equal(new TimeSpan(-3, -18, 0), "-3:18:00".DehumanizeTimeSpan());
     }
 
     [Theory]

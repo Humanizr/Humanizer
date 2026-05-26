@@ -195,7 +195,8 @@ public static class TimeSpanDehumanizeExtensions
         if (parts.Length == 3
             && TryParseInvariantInt(parts[0], out var hours)
             && TryParseInvariantInt(parts[1], out var minutes)
-            && TryParseInvariantDouble(parts[2], out var seconds))
+            && TryParseInvariantDouble(parts[2], out var seconds)
+            && hours >= 0 && minutes >= 0 && seconds >= 0)
         {
             result = TimeSpan.FromHours(hours) + TimeSpan.FromMinutes(minutes) + TimeSpan.FromSeconds(seconds);
             return true;
@@ -205,14 +206,16 @@ public static class TimeSpanDehumanizeExtensions
         {
             if (colonFormat == TimeSpanDehumanizeColonFormat.MinutesSeconds
                 && TryParseInvariantInt(parts[0], out var minutesOnly)
-                && TryParseInvariantDouble(parts[1], out var secondsOnly))
+                && TryParseInvariantDouble(parts[1], out var secondsOnly)
+                && minutesOnly >= 0 && secondsOnly >= 0)
             {
                 result = TimeSpan.FromMinutes(minutesOnly) + TimeSpan.FromSeconds(secondsOnly);
                 return true;
             }
 
             if (TryParseInvariantInt(parts[0], out var hoursOnly)
-                && TryParseInvariantDouble(parts[1], out var minutesOnlyFromHours))
+                && TryParseInvariantDouble(parts[1], out var minutesOnlyFromHours)
+                && hoursOnly >= 0 && minutesOnlyFromHours >= 0)
             {
                 result = TimeSpan.FromHours(hoursOnly) + TimeSpan.FromMinutes(minutesOnlyFromHours);
                 return true;
