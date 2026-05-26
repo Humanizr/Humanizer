@@ -52,8 +52,109 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return true;
         }
 
+        TryPrepareNormalizedPhrase(words, out var normalized, out var negative, out unrecognizedWord);
+
+        if (string.IsNullOrEmpty(normalized))
+        {
+            parsedValue = default;
+            unrecognizedWord = words.Trim();
+            return false;
+        }
+
+        if (TryParseOrdinal(normalized, out var value) ||
+            TryParseCardinal(normalized, negative, out value, out unrecognizedWord))
+        {
+            parsedValue = value;
+            if (negative && parsedValue != long.MinValue)
+            {
+                parsedValue = -parsedValue;
+            }
+
+            unrecognizedWord = null;
+            return true;
+        }
+
+        parsedValue = default;
+        return false;
+    }
+
+    /// <summary>
+    /// Attempts to convert a spelled-out decimal phrase into a <see cref="decimal"/> value.
+    /// </summary>
+    /// <param name="words">The localized decimal number phrase.</param>
+    /// <param name="parsedValue">When this method returns, contains the parsed decimal value.</param>
+    /// <param name="unrecognizedWord">When parsing fails, the first unrecognized token.</param>
+    /// <returns><c>true</c> if parsing succeeded; otherwise, <c>false</c>.</returns>
+    internal bool TryConvertDecimal(string words, out decimal parsedValue, out string? unrecognizedWord)
+    {
+        parsedValue = default;
+        unrecognizedWord = null;
+
+        if (rules.DecimalMarkerTokens.Length == 0)
+        {
+            unrecognizedWord = words;
+            return false;
+        }
+
+        TryPrepareNormalizedPhrase(words, out var normalized, out var negative, out unrecognizedWord);
+
+        if (string.IsNullOrEmpty(normalized))
+        {
+            unrecognizedWord = words.Trim();
+            return false;
+        }
+
+        if (!TrySplitOnDecimalMarker(normalized, out var integerPart, out var fractionPart, out unrecognizedWord))
+        {
+            return false;
+        }
+
+        long integerValue = 0;
+        if (integerPart.Length > 0 &&
+            !TryParseCardinal(integerPart, false, out integerValue, out unrecognizedWord))
+        {
+            return false;
+        }
+
+        if (!TryParseDecimalFraction(fractionPart, out var fractionValue, out unrecognizedWord))
+        {
+            return false;
+        }
+
+        try
+        {
+            parsedValue = decimal.Add(integerValue, fractionValue);
+        }
+        catch (OverflowException)
+        {
+            unrecognizedWord = words;
+            return false;
+        }
+
+        if (negative)
+        {
+            parsedValue = -parsedValue;
+        }
+
+        unrecognizedWord = null;
+        return true;
+    }
+
+    void TryPrepareNormalizedPhrase(
+        string words,
+        out string normalized,
+        out bool negative,
+        out string? unrecognizedWord)
+    {
+        unrecognizedWord = null;
+
+        if (string.IsNullOrWhiteSpace(words))
+        {
+            throw new ArgumentException("Input words cannot be empty.");
+        }
+
         var normalizedSource = words.Trim();
-        var negative = false;
+        negative = false;
 
         foreach (var negativePrefix in rules.NegativePrefixes)
         {
@@ -67,7 +168,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             break;
         }
 
-        var normalized = TokenMapWordsToNumberNormalizer.Normalize(normalizedSource, rules.NormalizationProfile);
+        normalized = TokenMapWordsToNumberNormalizer.Normalize(normalizedSource, rules.NormalizationProfile);
 
         if (!negative)
         {
@@ -110,21 +211,143 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             }
         }
 
-        if (TryParseOrdinal(normalized, out var value) ||
-            TryParseCardinal(normalized, negative, out value, out unrecognizedWord))
+        return;
+    }
+
+    bool TrySplitOnDecimalMarker(
+        string normalized,
+        out string integerPart,
+        out string fractionPart,
+        out string? unrecognizedWord)
+    {
+        integerPart = string.Empty;
+        fractionPart = string.Empty;
+        unrecognizedWord = null;
+
+        var markerIndex = -1;
+        string? matchedMarker = null;
+
+        foreach (var marker in rules.DecimalMarkerTokens)
         {
-            parsedValue = value;
-            if (negative && parsedValue != long.MinValue)
+            if (marker.Length == 0)
             {
-                parsedValue = -parsedValue;
+                continue;
             }
 
-            unrecognizedWord = null;
-            return true;
+            var index = 0;
+            while (index <= normalized.Length)
+            {
+                var found = normalized.IndexOf(marker, index, StringComparison.Ordinal);
+                if (found < 0)
+                {
+                    break;
+                }
+
+                var hasLeadingBoundary = found == 0 || normalized[found - 1] == ' ';
+                var end = found + marker.Length;
+                var hasTrailingBoundary = end == normalized.Length || normalized[end] == ' ';
+                if (hasLeadingBoundary && hasTrailingBoundary)
+                {
+                    markerIndex = found;
+                    matchedMarker = marker;
+                    break;
+                }
+
+                index = found + marker.Length;
+            }
+
+            if (matchedMarker is not null)
+            {
+                break;
+            }
         }
 
-        parsedValue = default;
-        return false;
+        if (matchedMarker is null)
+        {
+            unrecognizedWord = normalized;
+            return false;
+        }
+
+        integerPart = normalized[..markerIndex].Trim();
+        fractionPart = normalized[(markerIndex + matchedMarker.Length)..].Trim();
+        if (fractionPart.Length == 0)
+        {
+            unrecognizedWord = normalized;
+            return false;
+        }
+
+        return true;
+    }
+
+    bool TryParseDecimalFraction(string fractionPart, out decimal fractionValue, out string? unrecognizedWord)
+    {
+        fractionValue = default;
+        unrecognizedWord = null;
+
+        if (rules.AllowInvariantDecimalInput)
+        {
+            var compactFraction = fractionPart.Replace(" ", string.Empty);
+            if (compactFraction.Length > 0 &&
+                compactFraction.All(static c => c is >= '0' and <= '9'))
+            {
+                if (compactFraction.Length > 28)
+                {
+                    unrecognizedWord = fractionPart;
+                    return false;
+                }
+
+                if (decimal.TryParse(
+                    "0." + compactFraction,
+                    NumberStyles.Number,
+                    CultureInfo.InvariantCulture,
+                    out var invariantFraction))
+                {
+                    fractionValue = invariantFraction;
+                    return true;
+                }
+            }
+        }
+
+        var scale = 0.1m;
+        foreach (var token in WordsToNumberTokenizer.Enumerate(fractionPart))
+        {
+            var tokenText = token.ToString();
+            if (ShouldIgnore(tokenText))
+            {
+                continue;
+            }
+
+            if (!rules.CardinalMap.TryGetValue(tokenText, out var digit) || digit is < 0 or > 9)
+            {
+                unrecognizedWord = tokenText;
+                return false;
+            }
+
+            if (scale == 0m)
+            {
+                unrecognizedWord = tokenText;
+                return false;
+            }
+
+            try
+            {
+                fractionValue += digit * scale;
+                scale /= 10m;
+            }
+            catch (OverflowException)
+            {
+                unrecognizedWord = fractionPart;
+                return false;
+            }
+        }
+
+        if (scale == 0.1m)
+        {
+            unrecognizedWord = fractionPart;
+            return false;
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -1238,6 +1461,10 @@ internal sealed class TokenMapWordsToNumberRules
     /// </summary>
     public string[] IgnoredTokens { get; init; } = [];
     /// <summary>
+    /// Gets the tokens that split integer and fractional parts of a decimal number phrase.
+    /// </summary>
+    public string[] DecimalMarkerTokens { get; init; } = [];
+    /// <summary>
     /// Gets the leading prefixes that should be trimmed from each token.
     /// </summary>
     public string[] LeadingTokenPrefixesToTrim { get; init; } = [];
@@ -1273,6 +1500,10 @@ internal sealed class TokenMapWordsToNumberRules
     /// Gets a value indicating whether invariant integer input is accepted directly.
     /// </summary>
     public bool AllowInvariantIntegerInput { get; init; }
+    /// <summary>
+    /// Gets a value indicating whether invariant decimal input is accepted in the fractional part.
+    /// </summary>
+    public bool AllowInvariantDecimalInput { get; init; }
     /// <summary>
     /// Gets the base value used when a unit token forms a teen compound.
     /// </summary>

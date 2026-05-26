@@ -26,6 +26,12 @@ public static class Configurator
     private static LocaliserRegistry<IWordsToNumberConverter> WordsToNumberConverters { get; } = new WordsToNumberConverterRegistry();
 
     /// <summary>
+    /// A registry of converters that transform decimal number words into numeric values for the active locale.
+    /// </summary>
+    private static LocaliserRegistry<IWordsToDecimalNumberConverter> WordsToDecimalNumberConverters { get; } =
+        new WordsToDecimalNumberConverterRegistry();
+
+    /// <summary>
     /// A registry of ordinalizers used to localise Ordinalize method
     /// </summary>
     public static LocaliserRegistry<IOrdinalizer> Ordinalizers { get; } = new OrdinalizerRegistry();
@@ -65,6 +71,9 @@ public static class Configurator
 
     internal static IWordsToNumberConverter GetWordsToNumberConverter(CultureInfo culture) =>
         WordsToNumberConverters.ResolveForCulture(culture);
+
+    internal static IWordsToDecimalNumberConverter GetWordsToDecimalNumberConverter(CultureInfo culture) =>
+        WordsToDecimalNumberConverters.ResolveForCulture(culture);
 
 
 
