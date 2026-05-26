@@ -328,6 +328,8 @@ surfaces:
   "allowTerminalOrdinalToken": true,
   "useHundredMultiplier": true,
   "allowInvariantIntegerInput": true,
+  "decimalMarkerTokens": [ "point" ],
+  "allowInvariantDecimalInput": true,
   "teenBaseValue": 11,
   "hundredSuffixValue": 101,
   "unitTokenMinValue": 2,
@@ -353,6 +355,8 @@ surfaces:
         Assert.Contains("AllowTerminalOrdinalToken = true", fullExpression);
         Assert.Contains("UseHundredMultiplier = true", fullExpression);
         Assert.Contains("AllowInvariantIntegerInput = true", fullExpression);
+        Assert.Contains("DecimalMarkerTokens = new string[] { \"point\" }", fullExpression);
+        Assert.Contains("AllowInvariantDecimalInput = true", fullExpression);
         Assert.Contains("TeenBaseValue = 11", fullExpression);
         Assert.Contains("HundredSuffixValue = 101", fullExpression);
         Assert.Contains("UnitTokenMinValue = 2", fullExpression);
@@ -383,6 +387,8 @@ surfaces:
         Assert.Contains("AllowTerminalOrdinalToken = false", minimalExpression);
         Assert.Contains("UseHundredMultiplier = false", minimalExpression);
         Assert.Contains("AllowInvariantIntegerInput = false", minimalExpression);
+        Assert.Contains("DecimalMarkerTokens = Array.Empty<string>()", minimalExpression);
+        Assert.Contains("AllowInvariantDecimalInput = false", minimalExpression);
         Assert.Contains("TeenBaseValue = 10", minimalExpression);
         Assert.Contains("HundredSuffixValue = 100", minimalExpression);
         Assert.Contains("UnitTokenMinValue = 1", minimalExpression);

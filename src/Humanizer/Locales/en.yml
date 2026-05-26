@@ -421,6 +421,9 @@ surfaces:
       allowTerminalOrdinalToken: true
       useHundredMultiplier: true
       allowInvariantIntegerInput: true
+      decimalMarkerTokens:
+        - 'point'
+      allowInvariantDecimalInput: true
 
   ordinal:
     numeric:
