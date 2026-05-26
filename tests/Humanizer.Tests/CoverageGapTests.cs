@@ -1612,7 +1612,7 @@ public class CoverageGapTests
         Assert.False(string.IsNullOrWhiteSpace(999_999_999_999_999_999L.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseShortScaleWord, 3)));
         Assert.False(string.IsNullOrWhiteSpace(999_999_999_999_999_999d.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseLongScaleWord, 4)));
         Assert.False(string.IsNullOrWhiteSpace(long.MaxValue.ToMetric()));
-        Assert.Equal("123.0 ", 123L.ToMetric(MetricNumeralFormats.WithSpace, 1));
+        Assert.Equal("123 ", 123L.ToMetric(MetricNumeralFormats.WithSpace, 1));
         Assert.Equal("1m", InvokePrivate<string>(
             typeof(MetricNumeralExtensions),
             null,
