@@ -1863,6 +1863,22 @@ namespace Humanizer
     {
         public static string ToClockNotation(this System.TimeOnly input, Humanizer.ClockNotationRounding roundToNearestFive = 0) { }
     }
+    public enum TimeSpanDehumanizeColonFormat
+    {
+        HoursMinutes = 0,
+        MinutesSeconds = 1,
+    }
+    public static class TimeSpanDehumanizeExtensions
+    {
+        public static System.TimeSpan DehumanizeTimeSpan(this string input, Humanizer.TimeSpanDehumanizeOptions? options = default) { }
+        public static bool TryDehumanizeTimeSpan(this string input, out System.TimeSpan result, Humanizer.TimeSpanDehumanizeOptions? options = default) { }
+    }
+    public sealed class TimeSpanDehumanizeOptions
+    {
+        public static Humanizer.TimeSpanDehumanizeOptions Default { get; }
+        public Humanizer.TimeSpanDehumanizeColonFormat ColonFormat { get; init; }
+        public TimeSpanDehumanizeOptions() { }
+    }
     public static class TimeSpanHumanizeExtensions
     {
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ", bool toWords = false) { }
