@@ -945,6 +945,10 @@ surfaces:
       gluedOrdinalScaleSuffixes:
         'milésima': 1000
         'milésimo': 1000
+      allowInvariantIntegerInput: true
+      decimalMarkerTokens:
+        - 'coma'
+      allowInvariantDecimalInput: true
 
   ordinal:
     numeric:

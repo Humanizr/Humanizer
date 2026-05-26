@@ -44,3 +44,25 @@ public class WordsToDecimalNumberTests_US
         Assert.Equal("point", unrecognizedWord);
     }
 }
+
+[UseCulture("es-ES")]
+public class WordsToDecimalNumberTests_ES
+{
+    [Theory]
+    [InlineData("tres coma uno cuatro", 3.14)]
+    [InlineData("cero coma cinco", 0.5)]
+    [InlineData("menos dos coma cinco", -2.5)]
+    public void ParsesSpanishDecimalPhrases(string words, decimal expected) =>
+        Assert.Equal(expected, words.ToDecimalNumber(CultureInfo.CurrentCulture));
+}
+
+[UseCulture("pt-PT")]
+public class WordsToDecimalNumberTests_PT
+{
+    [Theory]
+    [InlineData("três vírgula um quatro", 3.14)]
+    [InlineData("zero vírgula cinco", 0.5)]
+    [InlineData("menos dois vírgula cinco", -2.5)]
+    public void ParsesPortugueseDecimalPhrases(string words, decimal expected) =>
+        Assert.Equal(expected, words.ToDecimalNumber(CultureInfo.CurrentCulture));
+}

@@ -801,6 +801,10 @@ surfaces:
         'milésima': 1000
         'milésimo': 1000
       gluedOrdinalScaleSuffixes: {}
+      allowInvariantIntegerInput: true
+      decimalMarkerTokens:
+        - 'vírgula'
+      allowInvariantDecimalInput: true
 
   ordinal:
     numeric:

@@ -257,6 +257,18 @@ surfaces:
     }
 
     [Fact]
+    public void WordsToDecimalNumberRegistrationsIncludeLocalesWithDecimalMarkers()
+    {
+        var registrySource = GetGeneratedSource("WordsToDecimalNumberConverterRegistryRegistrations.g.cs");
+
+        Assert.Contains(
+            "registry.Register(\"en\", static _ => new TokenMapWordsToDecimalNumberConverter((TokenMapWordsToNumberConverter)TokenMapWordsToNumberConverters.En));",
+            registrySource);
+        Assert.Contains("registry.Register(\"es\", static _ => new TokenMapWordsToDecimalNumberConverter((TokenMapWordsToNumberConverter)TokenMapWordsToNumberConverters.Es));", registrySource);
+        Assert.Contains("registry.Register(\"pt\", static _ => new TokenMapWordsToDecimalNumberConverter((TokenMapWordsToNumberConverter)TokenMapWordsToNumberConverters.Pt));", registrySource);
+    }
+
+    [Fact]
     public void WordsToNumberProfilesUseSharedEnginesForEastAsianAndTokenMaps()
     {
         var source = GetGeneratedSource("WordsToNumberProfileCatalog.g.cs");

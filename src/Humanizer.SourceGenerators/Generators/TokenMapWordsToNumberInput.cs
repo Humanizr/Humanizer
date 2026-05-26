@@ -239,6 +239,52 @@ public sealed partial class HumanizerSourceGenerator
                 context.AddSource("TokenMapWordsToNumberConverters." + propertyName + ".g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
             }
 
+            EmitDecimalConverterRegistry(context);
+        }
+
+        void EmitDecimalConverterRegistry(SourceProductionContext context)
+        {
+            if (locales.IsDefaultOrEmpty)
+            {
+                return;
+            }
+
+            var builder = new StringBuilder();
+            builder.AppendLine("namespace Humanizer;");
+            builder.AppendLine();
+            builder.AppendLine("internal static class WordsToDecimalNumberConverterRegistryRegistrations");
+            builder.AppendLine("{");
+            builder.AppendLine("    internal static void Register(WordsToDecimalNumberConverterRegistry registry)");
+            builder.AppendLine("    {");
+
+            var hasRegistrations = false;
+            foreach (var locale in locales.OrderBy(static locale => locale.LocaleCode, StringComparer.Ordinal))
+            {
+                if (locale.DecimalMarkerTokens.IsDefaultOrEmpty)
+                {
+                    continue;
+                }
+
+                hasRegistrations = true;
+                var propertyName = GetTokenMapPropertyName(locale.LocaleCode);
+                builder.Append("        registry.Register(\"");
+                builder.Append(locale.LocaleCode);
+                builder.Append("\", static _ => new TokenMapWordsToDecimalNumberConverter((TokenMapWordsToNumberConverter)TokenMapWordsToNumberConverters.");
+                builder.Append(propertyName);
+                builder.AppendLine("));");
+            }
+
+            if (!hasRegistrations)
+            {
+                return;
+            }
+
+            builder.AppendLine("    }");
+            builder.AppendLine("}");
+
+            context.AddSource(
+                "WordsToDecimalNumberConverterRegistryRegistrations.g.cs",
+                SourceText.From(builder.ToString(), Encoding.UTF8));
         }
 
         static void AppendStringArray(StringBuilder builder, string indent, string propertyName, ImmutableArray<string> values)

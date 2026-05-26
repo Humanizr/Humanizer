@@ -4,8 +4,5 @@ internal class WordsToDecimalNumberConverterRegistry : LocaliserRegistry<IWordsT
 {
     public WordsToDecimalNumberConverterRegistry()
         : base(_ => UnsupportedWordsToDecimalNumberConverter.Instance)
-        => Register(
-            "en",
-            static _ => new TokenMapWordsToDecimalNumberConverter(
-                (TokenMapWordsToNumberConverter)TokenMapWordsToNumberConverters.En));
+        => WordsToDecimalNumberConverterRegistryRegistrations.Register(this);
 }
