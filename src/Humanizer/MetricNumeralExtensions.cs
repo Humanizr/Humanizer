@@ -422,20 +422,29 @@ public static class MetricNumeralExtensions
     /// <returns>A number in a Metric representation</returns>
     static string BuildRepresentation(double input, MetricNumeralFormats? formats, int? decimals)
     {
-        var value = decimals.HasValue ? Math.Round(input, decimals.Value) : input;
-        var exponent = (int)Math.Floor(Math.Log10(Math.Abs(value)) / 3);
+        var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
 
         if (!exponent.Equals(0))
         {
-            return BuildMetricRepresentation(value, exponent, formats, decimals);
+            return BuildMetricRepresentation(input, exponent, formats, decimals);
         }
 
         var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
-        var representation = decimals.HasValue
-            ? value.ToString(nfi)
-            : input.ToString(nfi);
-        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
-        return representation + space;
+        if (decimals.HasValue)
+        {
+            var rounded = Math.Round(input, decimals.Value);
+            if (Math.Abs(rounded) >= 1000)
+            {
+                return BuildMetricRepresentation(rounded, 1, formats, decimals);
+            }
+
+            var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
+            return rounded.ToString(nfi) + space;
+        }
+
+        var representation = input.ToString(nfi);
+        var trailingSpace = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
+        return representation + trailingSpace;
     }
 
     /// <summary>
