@@ -136,5 +136,5 @@ In version 3.0, `Humanize` and `Titleize` now preserve input strings that contai
 ## Related Topics
 
 - [String Dehumanization](string-dehumanization.md) - Convert back to PascalCase
-- [String Transformations](string-transformations.md) - Custom transformations
-- [Inflector Methods](inflector-methods.md) - Titleize, Pascalize, Camelize, etc.
+- [String Transformations](../readme.md#transform-string) - Custom transformations
+- [Inflector Methods](../readme.md#inflector-methods) - Titleize, Pascalize, Camelize, etc.

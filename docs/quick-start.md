@@ -173,7 +173,7 @@ $"You have {singleItem} {"item".ToQuantity(singleItem)}";
 Explore the documentation for detailed information on each feature:
 
 - [String Humanization](string-humanization.md)
-- [DateTime Humanization](datetime-humanization.md)
-- [Number Conversions](number-to-words.md)
-- [Pluralization](pluralization.md)
+- [DateTime Humanization](../readme.md#humanize-datetime)
+- [Number Conversions](../readme.md#number-to-words)
+- [Pluralization](../readme.md#pluralize)
 - [All Features](index.md)

@@ -39,4 +39,4 @@ If the input is already in PascalCase (contains no spaces), it is returned uncha
 ## Related Topics
 
 - [String Humanization](string-humanization.md)
-- [Inflector Methods](inflector-methods.md) - Pascalize, Camelize
+- [Inflector Methods](../readme.md#inflector-methods) - Pascalize, Camelize
