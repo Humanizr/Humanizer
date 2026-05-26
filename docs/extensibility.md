@@ -191,6 +191,6 @@ Configurator.CollectionFormatters.Register("my-culture",
 
 ## Related Topics
 
-- [Custom Vocabularies](custom-vocabularies.md) - Detailed pluralization customization
+- [Custom Vocabularies](../readme.md#adding-words) - Detailed pluralization customization
 - [Localization](localization.md) - Multi-language support
-- [Configuration](configuration.md) - Global configuration options
+- [Configuration](../readme.md#mix-this-into-your-framework-to-simplify-your-life) - Global configuration options
