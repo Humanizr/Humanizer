@@ -43,6 +43,14 @@ public class WordsToDecimalNumberTests_US
         Assert.False("one point two".TryToNumber(out _, CultureInfo.CurrentCulture, out var unrecognizedWord));
         Assert.Equal("point", unrecognizedWord);
     }
+
+    [Fact]
+    public void TryToNumberRejectsLoneNegativePrefix()
+    {
+        Assert.False("minus".TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+        Assert.Equal(0L, parsedNumber);
+        Assert.Equal("minus", unrecognizedWord);
+    }
 }
 
 [UseCulture("es-ES")]

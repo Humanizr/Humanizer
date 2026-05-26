@@ -54,6 +54,13 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
         TryPrepareNormalizedPhrase(words, out var normalized, out var negative, out unrecognizedWord);
 
+        if (string.IsNullOrEmpty(normalized))
+        {
+            parsedValue = default;
+            unrecognizedWord = words.Trim();
+            return false;
+        }
+
         if (TryParseOrdinal(normalized, out var value) ||
             TryParseCardinal(normalized, negative, out value, out unrecognizedWord))
         {
@@ -90,6 +97,12 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         }
 
         TryPrepareNormalizedPhrase(words, out var normalized, out var negative, out unrecognizedWord);
+
+        if (string.IsNullOrEmpty(normalized))
+        {
+            unrecognizedWord = words.Trim();
+            return false;
+        }
 
         if (!TrySplitOnDecimalMarker(normalized, out var integerPart, out var fractionPart, out unrecognizedWord))
         {
@@ -274,6 +287,12 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         if (rules.AllowInvariantDecimalInput)
         {
             var compactFraction = fractionPart.Replace(" ", string.Empty);
+            if (compactFraction.Length > 28)
+            {
+                unrecognizedWord = fractionPart;
+                return false;
+            }
+
             if (compactFraction.Length > 0 &&
                 compactFraction.All(static c => c is >= '0' and <= '9') &&
                 decimal.TryParse(

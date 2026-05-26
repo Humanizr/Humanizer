@@ -244,11 +244,6 @@ public sealed partial class HumanizerSourceGenerator
 
         void EmitDecimalConverterRegistry(SourceProductionContext context)
         {
-            if (locales.IsDefaultOrEmpty)
-            {
-                return;
-            }
-
             var builder = new StringBuilder();
             builder.AppendLine("namespace Humanizer;");
             builder.AppendLine();
@@ -257,26 +252,22 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("    internal static void Register(WordsToDecimalNumberConverterRegistry registry)");
             builder.AppendLine("    {");
 
-            var hasRegistrations = false;
-            foreach (var locale in locales.OrderBy(static locale => locale.LocaleCode, StringComparer.Ordinal))
+            if (!locales.IsDefaultOrEmpty)
             {
-                if (locale.DecimalMarkerTokens.IsDefaultOrEmpty)
+                foreach (var locale in locales.OrderBy(static locale => locale.LocaleCode, StringComparer.Ordinal))
                 {
-                    continue;
+                    if (locale.DecimalMarkerTokens.IsDefaultOrEmpty)
+                    {
+                        continue;
+                    }
+
+                    var propertyName = GetTokenMapPropertyName(locale.LocaleCode);
+                    builder.Append("        registry.Register(\"");
+                    builder.Append(locale.LocaleCode);
+                    builder.Append("\", static _ => new TokenMapWordsToDecimalNumberConverter((TokenMapWordsToNumberConverter)TokenMapWordsToNumberConverters.");
+                    builder.Append(propertyName);
+                    builder.AppendLine("));");
                 }
-
-                hasRegistrations = true;
-                var propertyName = GetTokenMapPropertyName(locale.LocaleCode);
-                builder.Append("        registry.Register(\"");
-                builder.Append(locale.LocaleCode);
-                builder.Append("\", static _ => new TokenMapWordsToDecimalNumberConverter((TokenMapWordsToNumberConverter)TokenMapWordsToNumberConverters.");
-                builder.Append(propertyName);
-                builder.AppendLine("));");
-            }
-
-            if (!hasRegistrations)
-            {
-                return;
             }
 
             builder.AppendLine("    }");
