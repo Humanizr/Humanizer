@@ -1,14 +1,12 @@
-using System.Globalization;
-
 namespace Humanizer.Tests.Localisation.fi;
 
 public class FinnishTimeSpanHumanizeTests
 {
     [Theory]
-    [InlineData(1, "tunti")]
-    [InlineData(2, "2 tuntia")]
-    [InlineData(1, "minuutti", 0, 1)]
-    public void Humanize_UsesFinnishPhrasesForFiFiCulture(int amount, string expected, int hours = 1, int minutes = 0)
+    [InlineData("tunti", 1, 0)]
+    [InlineData("2 tuntia", 2, 0)]
+    [InlineData("minuutti", 0, 1)]
+    public void Humanize_UsesFinnishPhrasesForFiFiCulture(string expected, int hours, int minutes)
     {
         var culture = new CultureInfo("fi-FI");
         var timeSpan = new TimeSpan(hours, minutes, 0);
