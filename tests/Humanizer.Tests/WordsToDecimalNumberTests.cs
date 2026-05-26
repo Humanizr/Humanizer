@@ -27,7 +27,7 @@ public class WordsToDecimalNumberTests_US
     [Fact]
     public void TryToDecimalNumberFailsWhenFractionExceedsDecimalPrecision()
     {
-        var words = "zero point " + string.Join(' ', Enumerable.Repeat("one", 30));
+        var words = "zero point " + string.Join(" ", Enumerable.Repeat("one", 30));
 
         Assert.False(words.TryToDecimalNumber(
             out var parsedNumber,
