@@ -294,7 +294,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             }
         }
 
-        decimal scale = 0.1m;
+        var scale = 0.1m;
         foreach (var token in WordsToNumberTokenizer.Enumerate(fractionPart))
         {
             var tokenText = token.ToString();
