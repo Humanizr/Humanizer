@@ -93,7 +93,7 @@ public class MetricNumeralTests
         }
 
         // 1,000-999,999
-        foreach (var value in (long[])[23456, 123456, 123056, 123999])
+        foreach (var value in (long[])[1245, 23456, 123456, 123056, 123999])
         {
             foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 20])
             {
@@ -113,7 +113,7 @@ public class MetricNumeralTests
         }
 
         // 1,000,000-999,999,999
-        foreach (var value in (long[])[23456789, 123456789, 123050709])
+        foreach (var value in (long[])[23456789, 123456785, 123050709])
         {
             foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 4, 5, 6, 20])
             {
@@ -133,7 +133,7 @@ public class MetricNumeralTests
         }
 
         // 1,000,000,000-999,999,999,999
-        foreach (var value in (long[])[23456789123, 123456789123, 123050709020])
+        foreach (var value in (long[])[23456789165, 123456789123, 123050709020])
         {
             foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 7, 8, 9, 20])
             {
@@ -153,7 +153,7 @@ public class MetricNumeralTests
         }
 
         // 1,000,000,000,000-999,999,999,999,999
-        foreach (var value in (long[])[23456789123456, 123456789123456, 123050709020406])
+        foreach (var value in (long[])[23456789123456, 123456789123465, 123050709020406])
         {
             foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 10, 11, 12, 20])
             {
@@ -173,7 +173,7 @@ public class MetricNumeralTests
         }
 
         // 1,000,000,000,000,000-999,999,999,999,999,999
-        foreach (var value in (long[])[23456789123456789, 123456789123456789, 123050709020406080])
+        foreach (var value in (long[])[23456789123456789, 123456789123456785, 123050709020406080])
         {
             foreach (var decimals in (int?[])[null, 0, 1, 2, 3, 13, 14, 15, 20])
             {
@@ -192,7 +192,7 @@ public class MetricNumeralTests
             }
         }
         // 1,000,000,000,000,000,000-
-        foreach (var value in (long[])[1_001_002_003_004_005_006, 2_305_079_902_040_799_020, long.MaxValue])
+        foreach (var value in (long[])[1_001_002_003_004_006_005, 2_305_079_902_040_799_020, long.MaxValue])
         {
             for (var decimalsValue = -1; decimalsValue <= 20; decimalsValue++)
             {

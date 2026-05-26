@@ -391,16 +391,37 @@ public static class MetricNumeralExtensions
                 decimals = fractionalPartCharacters.Length;
             else if (fractionalPartCharacters[decimals.Value] >= '5')
             {
-                // Apply rounding. Find a digit we can increment, carrying as needed.
-                for (var i = decimals.Value - 1; i >= 0; i--)
-                {
-                    if (fractionalPartCharacters[i] < '9')
-                    {
-                        fractionalPartCharacters[i]++;
-                        break;
-                    }
+                var isExactlyAtMidpoint =
+                    (fractionalPartCharacters[decimals.Value] == '5') &&
+                    (fractionalPartCharacters.AsSpan().Slice(decimals.Value + 1).IndexOfAnyExcept('0') < 0);
 
-                    fractionalPartCharacters[i] = '0'; // loop to carry
+                bool shouldRoundUp;
+
+                if (!isExactlyAtMidpoint)
+                    shouldRoundUp = true;
+                else
+                {
+                    var precedingDigit = fractionalPartCharacters[decimals.Value - 1] - '0';
+
+                    var precedingDigitIsOdd = (precedingDigit & 1) != 0;
+
+                    // Banker's rounding: 3.5 => 4, 4.5 => 4
+                    shouldRoundUp = precedingDigitIsOdd;
+                }
+
+                if (shouldRoundUp)
+                {
+                    // Apply rounding. Find a digit we can increment, carrying as needed.
+                    for (var i = decimals.Value - 1; i >= 0; i--)
+                    {
+                        if (fractionalPartCharacters[i] < '9')
+                        {
+                            fractionalPartCharacters[i]++;
+                            break;
+                        }
+
+                        fractionalPartCharacters[i] = '0'; // loop to carry
+                    }
                 }
             }
 
