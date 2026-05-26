@@ -333,11 +333,8 @@ public static class MetricNumeralExtensions
         }
 
         var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
-        var representation = decimals > 0
-            ? $"{input.ToString(nfi)}{nfi.NumberDecimalSeparator}{new string('0', decimals.Value)}"
-            : input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
-        return representation + space;
+        return input.ToString(nfi) + space;
     }
 
     /// <summary>
