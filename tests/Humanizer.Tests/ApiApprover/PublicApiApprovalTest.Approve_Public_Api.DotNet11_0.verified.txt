@@ -1870,14 +1870,14 @@ namespace Humanizer
     }
     public static class TimeSpanDehumanizeExtensions
     {
-        public static System.TimeSpan DehumanizeTimeSpan(this string input, Humanizer.TimeSpanDehumanizeOptions? options = default) { }
-        public static bool TryDehumanizeTimeSpan(this string input, out System.TimeSpan result, Humanizer.TimeSpanDehumanizeOptions? options = default) { }
+        public static System.TimeSpan DehumanizeTimeSpan(this string input, Humanizer.TimeSpanDehumanizeOptions? options = null) { }
+        public static bool TryDehumanizeTimeSpan(this string input, out System.TimeSpan result, Humanizer.TimeSpanDehumanizeOptions? options = null) { }
     }
     public sealed class TimeSpanDehumanizeOptions
     {
-        public static Humanizer.TimeSpanDehumanizeOptions Default { get; }
-        public Humanizer.TimeSpanDehumanizeColonFormat ColonFormat { get; init; }
         public TimeSpanDehumanizeOptions() { }
+        public Humanizer.TimeSpanDehumanizeColonFormat ColonFormat { get; init; }
+        public static Humanizer.TimeSpanDehumanizeOptions Default { get; }
     }
     public static class TimeSpanHumanizeExtensions
     {
