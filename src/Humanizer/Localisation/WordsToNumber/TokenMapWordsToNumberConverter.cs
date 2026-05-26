@@ -287,22 +287,24 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         if (rules.AllowInvariantDecimalInput)
         {
             var compactFraction = fractionPart.Replace(" ", string.Empty);
-            if (compactFraction.Length > 28)
-            {
-                unrecognizedWord = fractionPart;
-                return false;
-            }
-
             if (compactFraction.Length > 0 &&
-                compactFraction.All(static c => c is >= '0' and <= '9') &&
-                decimal.TryParse(
+                compactFraction.All(static c => c is >= '0' and <= '9'))
+            {
+                if (compactFraction.Length > 28)
+                {
+                    unrecognizedWord = fractionPart;
+                    return false;
+                }
+
+                if (decimal.TryParse(
                     "0." + compactFraction,
                     NumberStyles.Number,
                     CultureInfo.InvariantCulture,
                     out var invariantFraction))
-            {
-                fractionValue = invariantFraction;
-                return true;
+                {
+                    fractionValue = invariantFraction;
+                    return true;
+                }
             }
         }
 
