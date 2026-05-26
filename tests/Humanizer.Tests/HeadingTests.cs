@@ -196,7 +196,7 @@ public class HeadingTests
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
             CultureInfo.CurrentUICulture = new CultureInfo("de-DE");
 
-            Assert.Equal("North", 0d.ToHeading(HeadingStyle.Full));
+            Assert.Equal("north", 0d.ToHeading(HeadingStyle.Full));
         }
         finally
         {
