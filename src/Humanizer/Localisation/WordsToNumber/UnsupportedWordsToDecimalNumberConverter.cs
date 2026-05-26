@@ -5,7 +5,10 @@ namespace Humanizer;
 /// </summary>
 internal sealed class UnsupportedWordsToDecimalNumberConverter : GenderlessWordsToDecimalNumberConverter
 {
-    public static UnsupportedWordsToDecimalNumberConverter Instance { get; } = new();
+    /// <summary>
+    /// Gets the shared fallback converter instance.
+    /// </summary>
+    internal static UnsupportedWordsToDecimalNumberConverter Instance { get; } = new();
 
     UnsupportedWordsToDecimalNumberConverter()
     {

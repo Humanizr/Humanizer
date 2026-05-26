@@ -387,6 +387,8 @@ surfaces:
         Assert.Contains("AllowTerminalOrdinalToken = false", minimalExpression);
         Assert.Contains("UseHundredMultiplier = false", minimalExpression);
         Assert.Contains("AllowInvariantIntegerInput = false", minimalExpression);
+        Assert.Contains("DecimalMarkerTokens = Array.Empty<string>()", minimalExpression);
+        Assert.Contains("AllowInvariantDecimalInput = false", minimalExpression);
         Assert.Contains("TeenBaseValue = 10", minimalExpression);
         Assert.Contains("HundredSuffixValue = 100", minimalExpression);
         Assert.Contains("UnitTokenMinValue = 1", minimalExpression);

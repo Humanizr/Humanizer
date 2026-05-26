@@ -25,6 +25,19 @@ public class WordsToDecimalNumberTests_US
     }
 
     [Fact]
+    public void TryToDecimalNumberFailsWhenFractionExceedsDecimalPrecision()
+    {
+        var words = "zero point " + string.Join(' ', Enumerable.Repeat("one", 30));
+
+        Assert.False(words.TryToDecimalNumber(
+            out var parsedNumber,
+            CultureInfo.CurrentCulture,
+            out var unrecognizedWord));
+        Assert.Equal(0m, parsedNumber);
+        Assert.Equal("one", unrecognizedWord);
+    }
+
+    [Fact]
     public void IntegerToNumberDoesNotParseDecimalPhrases()
     {
         Assert.False("one point two".TryToNumber(out _, CultureInfo.CurrentCulture, out var unrecognizedWord));

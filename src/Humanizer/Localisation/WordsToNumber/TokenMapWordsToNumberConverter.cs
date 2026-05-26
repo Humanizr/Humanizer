@@ -52,13 +52,6 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return true;
         }
 
-        if (rules.AllowInvariantIntegerInput &&
-            long.TryParse(words.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue))
-        {
-            unrecognizedWord = null;
-            return true;
-        }
-
         TryPrepareNormalizedPhrase(words, out var normalized, out var negative, out unrecognizedWord);
 
         if (TryParseOrdinal(normalized, out var value) ||
@@ -304,6 +297,12 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             }
 
             if (!rules.CardinalMap.TryGetValue(tokenText, out var digit) || digit is < 0 or > 9)
+            {
+                unrecognizedWord = tokenText;
+                return false;
+            }
+
+            if (scale == 0m)
             {
                 unrecognizedWord = tokenText;
                 return false;
