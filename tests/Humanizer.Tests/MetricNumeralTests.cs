@@ -87,13 +87,12 @@ public class MetricNumeralTests
 
     [Theory]
     [InlineData(0, 0, "0")]
-    [InlineData(0, 1, "0.0")]
-    [InlineData(0, 3, "0.000")]
-    [InlineData(0, 20, "0.00000000000000000000")]
+    [InlineData(0, 1, "0")]
+    [InlineData(0, 3, "0")]
+    [InlineData(0, 20, "0")]
     [InlineData(123, 0, "123")]
-    [InlineData(123, 1, "123.0")]
-    [InlineData(123, 3, "123.000")]
-    [InlineData(123, 20, "123.00000000000000000000")]
+    [InlineData(123, 1, "123")]
+    [InlineData(123, 3, "123")]
     [InlineData(123456, null, "123.456k")]
     [InlineData(123456, 0, "123k")]
     [InlineData(123456, 1, "123.5k")]
@@ -137,6 +136,13 @@ public class MetricNumeralTests
     [InlineData(999)]
     public void LongToMetricDecimalsMatchIntBehavior(long value) =>
         Assert.Equal(((int)value).ToMetric(decimals: 5), value.ToMetric(decimals: 5));
+
+    [Fact]
+    public void LongToMetricDecimalsMatchIntBehaviorWhenRoundingLimitExceeded()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => 123L.ToMetric(decimals: 20));
+        Assert.Throws<ArgumentOutOfRangeException>(() => ((int)123).ToMetric(decimals: 20));
+    }
 
     [Theory]
     [InlineData("1.3M", 1300000, null, null)]
