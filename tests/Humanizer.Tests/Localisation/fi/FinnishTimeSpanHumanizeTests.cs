@@ -1,5 +1,6 @@
 namespace Humanizer.Tests.Localisation.fi;
 
+[UseCulture("fi-FI")]
 public class FinnishTimeSpanHumanizeTests
 {
     [Theory]
