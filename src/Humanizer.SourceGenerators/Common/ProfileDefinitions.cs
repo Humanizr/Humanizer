@@ -87,6 +87,8 @@ public sealed partial class HumanizerSourceGenerator
         bool allowTerminalOrdinalToken,
         bool useHundredMultiplier,
         bool allowInvariantIntegerInput,
+        ImmutableArray<string> decimalMarkerTokens,
+        bool allowInvariantDecimalInput,
         long? teenBaseValue,
         long? hundredSuffixValue,
         long? unitTokenMinValue,
@@ -119,6 +121,8 @@ public sealed partial class HumanizerSourceGenerator
         public bool AllowTerminalOrdinalToken { get; } = allowTerminalOrdinalToken;
         public bool UseHundredMultiplier { get; } = useHundredMultiplier;
         public bool AllowInvariantIntegerInput { get; } = allowInvariantIntegerInput;
+        public ImmutableArray<string> DecimalMarkerTokens { get; } = decimalMarkerTokens;
+        public bool AllowInvariantDecimalInput { get; } = allowInvariantDecimalInput;
         public long? TeenBaseValue { get; } = teenBaseValue;
         public long? HundredSuffixValue { get; } = hundredSuffixValue;
         public long? UnitTokenMinValue { get; } = unitTokenMinValue;

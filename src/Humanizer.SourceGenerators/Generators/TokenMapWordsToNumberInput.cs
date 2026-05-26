@@ -114,6 +114,8 @@ public sealed partial class HumanizerSourceGenerator
             var allowTerminalOrdinalToken = ReadBoolean(localeCode, localeElement, "allowTerminalOrdinalToken", diagnostics, ref hasErrors);
             var useHundredMultiplier = ReadBoolean(localeCode, localeElement, "useHundredMultiplier", diagnostics, ref hasErrors);
             var allowInvariantIntegerInput = ReadBoolean(localeCode, localeElement, "allowInvariantIntegerInput", diagnostics, ref hasErrors);
+            var decimalMarkerTokens = ReadStringArray(localeCode, localeElement, "decimalMarkerTokens", diagnostics, ref hasErrors);
+            var allowInvariantDecimalInput = ReadBoolean(localeCode, localeElement, "allowInvariantDecimalInput", diagnostics, ref hasErrors);
             var teenBaseValue = ReadLong(localeCode, localeElement, "teenBaseValue", diagnostics, ref hasErrors);
             var hundredSuffixValue = ReadLong(localeCode, localeElement, "hundredSuffixValue", diagnostics, ref hasErrors);
             var unitTokenMinValue = ReadLong(localeCode, localeElement, "unitTokenMinValue", diagnostics, ref hasErrors);
@@ -152,6 +154,8 @@ public sealed partial class HumanizerSourceGenerator
                 allowTerminalOrdinalToken,
                 useHundredMultiplier,
                 allowInvariantIntegerInput,
+                decimalMarkerTokens,
+                allowInvariantDecimalInput,
                 teenBaseValue,
                 hundredSuffixValue,
                 unitTokenMinValue,
@@ -218,6 +222,8 @@ public sealed partial class HumanizerSourceGenerator
                 AppendTrueBooleanValue(builder, "            ", "AllowTerminalOrdinalToken", locale.AllowTerminalOrdinalToken);
                 AppendTrueBooleanValue(builder, "            ", "UseHundredMultiplier", locale.UseHundredMultiplier);
                 AppendTrueBooleanValue(builder, "            ", "AllowInvariantIntegerInput", locale.AllowInvariantIntegerInput);
+                AppendStringArray(builder, "            ", "DecimalMarkerTokens", locale.DecimalMarkerTokens);
+                AppendTrueBooleanValue(builder, "            ", "AllowInvariantDecimalInput", locale.AllowInvariantDecimalInput);
 
                 AppendLongValue(builder, "            ", "TeenBaseValue", locale.TeenBaseValue, defaultValue: 10);
                 AppendLongValue(builder, "            ", "HundredSuffixValue", locale.HundredSuffixValue, defaultValue: 100);

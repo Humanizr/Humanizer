@@ -336,17 +336,17 @@ namespace Humanizer
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
         string? Truncate(string? value, int length, string? truncationString, Humanizer.TruncateFrom truncateFrom = 1);
     }
-    public interface IWordsToNumberConverter
-    {
-        long Convert(string words);
-        bool TryConvert(string words, out long parsedValue);
-        bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber);
-    }
     public interface IWordsToDecimalNumberConverter
     {
         decimal Convert(string words);
         bool TryConvert(string words, out decimal parsedValue);
         bool TryConvert(string words, out decimal parsedValue, out string? unrecognizedNumber);
+    }
+    public interface IWordsToNumberConverter
+    {
+        long Convert(string words);
+        bool TryConvert(string words, out long parsedValue);
+        bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber);
     }
     public class In
     {
@@ -1292,16 +1292,16 @@ namespace Humanizer
         Abbreviation = 1,
         Eifeler = 2,
     }
-    public static class WordsToNumberExtension
-    {
-        public static long ToNumber(this string words, System.Globalization.CultureInfo culture) { }
-        public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture) { }
-        public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
-    }
     public static class WordsToDecimalNumberExtension
     {
         public static decimal ToDecimalNumber(this string words, System.Globalization.CultureInfo culture) { }
         public static bool TryToDecimalNumber(this string words, out decimal parsedNumber, System.Globalization.CultureInfo culture) { }
         public static bool TryToDecimalNumber(this string words, out decimal parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
+    }
+    public static class WordsToNumberExtension
+    {
+        public static long ToNumber(this string words, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
     }
 }
