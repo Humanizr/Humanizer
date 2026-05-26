@@ -498,6 +498,11 @@ public static class MetricNumeralExtensions
             if (formatValue.HasFlag(MetricNumeralFormats.UseScaleWord))
             {
                 var culture = CultureInfo.CurrentUICulture;
+                if (ShortScaleCultureExceptions.Contains(culture.Name))
+                {
+                    return UnitPrefixes[symbol].ShortScaleWord;
+                }
+
                 var isLongScale = LongScaleCultures.Contains(culture.Name)
                                || LongScaleCultures.Contains(culture.TwoLetterISOLanguageName);
                 return isLongScale
@@ -559,8 +564,8 @@ public static class MetricNumeralExtensions
         "de", "de-DE", "de-AT", "de-CH",  // German
         "fr", "fr-FR", "fr-BE", "fr-CH",  // French
         "it", "it-IT", "it-CH",            // Italian
-        "es", "es-ES",                     // Spanish
-        "pt", "pt-PT",                     // Portuguese (NOT pt-BR - Brazil uses short scale)
+        "es-ES",                     // Spanish (Spain); Latin American es-* uses short scale
+        "pt-PT",                     // Portuguese (Portugal); pt-BR uses short scale
         "nl", "nl-NL", "nl-BE",            // Dutch
         "ru", "ru-RU",                     // Russian
         "pl", "pl-PL",                     // Polish
@@ -578,5 +583,14 @@ public static class MetricNumeralExtensions
         "nb", "nb-NO",                     // Norwegian
         "sv", "sv-SE",                     // Swedish
         "da", "da-DK",                     // Danish
+    ];
+
+    /// <summary>
+    /// Cultures that explicitly use short scale even when their two-letter language code
+    /// appears in <see cref="LongScaleCultures"/> for other regions.
+    /// </summary>
+    static readonly HashSet<string> ShortScaleCultureExceptions =
+    [
+        "pt-BR", // Brazil
     ];
 }
