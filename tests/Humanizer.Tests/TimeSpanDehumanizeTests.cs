@@ -1,3 +1,4 @@
+[UseCulture("en-US")]
 public class TimeSpanDehumanizeTests
 {
     static readonly TimeSpan ThreeHoursEighteenMinutes = new(3, 18, 0);
@@ -36,6 +37,8 @@ public class TimeSpanDehumanizeTests
         Assert.Equal(new TimeSpan(0, 12, 30), "12m 30s".DehumanizeTimeSpan());
     }
 
+    [Fact]
+    public void DehumanizeTimeSpanParsesThreeHoursEighteenMinutesFromColonFormats()
     {
         Assert.Equal(ThreeHoursEighteenMinutes, "3:18:00".DehumanizeTimeSpan());
         Assert.Equal(ThreeHoursEighteenMinutes, "3:18".DehumanizeTimeSpan());
@@ -50,6 +53,13 @@ public class TimeSpanDehumanizeTests
         };
 
         Assert.Equal(new TimeSpan(0, 18, 1), "18:01".DehumanizeTimeSpan(options));
+    }
+
+    [Theory]
+    [InlineData("10675200d")]
+    public void TryDehumanizeTimeSpanReturnsFalseForOverflowInput(string input)
+    {
+        Assert.False(input.TryDehumanizeTimeSpan(out _));
     }
 
     [Theory]

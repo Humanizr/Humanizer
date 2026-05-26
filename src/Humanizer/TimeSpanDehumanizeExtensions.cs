@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Humanizer;
 
 /// <summary>
@@ -48,9 +46,17 @@ public static class TimeSpanDehumanizeExtensions
         var text = input.Trim();
         options ??= TimeSpanDehumanizeOptions.Default;
 
-        return TryParseUnitTokens(text, out result)
-               || TryParseColonDuration(text, options.ColonFormat, out result)
-               || TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out result);
+        try
+        {
+            return TryParseUnitTokens(text, out result)
+                   || TryParseColonDuration(text, options.ColonFormat, out result)
+                   || TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out result);
+        }
+        catch (OverflowException)
+        {
+            result = default;
+            return false;
+        }
     }
 
     static bool TryParseUnitTokens(string input, out TimeSpan result)
