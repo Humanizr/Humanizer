@@ -215,6 +215,8 @@ public sealed partial class HumanizerSourceGenerator
                 RuleAssignment("AllowTerminalOrdinalToken", CreateBooleanLiteral(GetBoolean(root, "allowTerminalOrdinalToken"))),
                 RuleAssignment("UseHundredMultiplier", CreateBooleanLiteral(GetBoolean(root, "useHundredMultiplier"))),
                 RuleAssignment("AllowInvariantIntegerInput", CreateBooleanLiteral(GetBoolean(root, "allowInvariantIntegerInput"))),
+                RuleAssignment("DecimalMarkerTokens", CreateOptionalStringArrayExpression(root, "decimalMarkerTokens")),
+                RuleAssignment("AllowInvariantDecimalInput", CreateBooleanLiteral(GetBoolean(root, "allowInvariantDecimalInput"))),
                 RuleAssignment("TeenBaseValue", CreateOptionalInt64Literal(root, "teenBaseValue", "10")),
                 RuleAssignment("HundredSuffixValue", CreateOptionalInt64Literal(root, "hundredSuffixValue", "100")),
                 RuleAssignment("UnitTokenMinValue", CreateOptionalInt64Literal(root, "unitTokenMinValue", "1")),

@@ -384,6 +384,12 @@ namespace Humanizer
         bool TryConvert(string words, out long parsedValue);
         bool TryConvert(string words, out long parsedValue, out string? unrecognizedNumber);
     }
+    public interface IWordsToDecimalNumberConverter
+    {
+        decimal Convert(string words);
+        bool TryConvert(string words, out decimal parsedValue);
+        bool TryConvert(string words, out decimal parsedValue, out string? unrecognizedNumber);
+    }
     public class In
     {
         public In() { }
@@ -1956,5 +1962,11 @@ namespace Humanizer
         public static long ToNumber(this string words, System.Globalization.CultureInfo culture) { }
         public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture) { }
         public static bool TryToNumber(this string words, out long parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
+    }
+    public static class WordsToDecimalNumberExtension
+    {
+        public static decimal ToDecimalNumber(this string words, System.Globalization.CultureInfo culture) { }
+        public static bool TryToDecimalNumber(this string words, out decimal parsedNumber, System.Globalization.CultureInfo culture) { }
+        public static bool TryToDecimalNumber(this string words, out decimal parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
     }
 }
