@@ -56,6 +56,27 @@ public class TimeSpanDehumanizeTests
     }
 
     [Fact]
+    public void DehumanizeTimeSpanParsesThreeHoursEighteenMinutesFromWordPhrases()
+    {
+        Assert.Equal(ThreeHoursEighteenMinutes, "3 hours 18 minutes".DehumanizeTimeSpan());
+        Assert.Equal(ThreeHoursEighteenMinutes, "3 hours, 18 minutes".DehumanizeTimeSpan());
+        Assert.Equal(ThreeHoursEighteenMinutes, "3 hours and 18 minutes".DehumanizeTimeSpan());
+    }
+
+    [Theory]
+    [InlineData(0, 3, 18, 0, 2)]
+    [InlineData(0, 0, 12, 30, 2)]
+    [InlineData(0, 2, 0, 0, 1)]
+    [InlineData(14, 0, 0, 0, 1)]
+    public void DehumanizeTimeSpanRoundTripsHumanizeOutput(int days, int hours, int minutes, int seconds, int precision)
+    {
+        var original = new TimeSpan(days, hours, minutes, seconds);
+        var humanized = original.Humanize(precision: precision);
+
+        Assert.Equal(original, humanized.DehumanizeTimeSpan());
+    }
+
+    [Fact]
     public void TryDehumanizeTimeSpanReturnsFalseForOverflowInput()
     {
         Assert.False("10675200d".TryDehumanizeTimeSpan(out _));

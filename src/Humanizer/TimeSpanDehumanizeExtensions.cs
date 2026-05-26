@@ -67,10 +67,7 @@ public static class TimeSpanDehumanizeExtensions
 
         while (index < input.Length)
         {
-            while (index < input.Length && char.IsWhiteSpace(input[index]))
-            {
-                index++;
-            }
+            SkipTokenSeparators(input, ref index);
 
             if (index >= input.Length)
             {
@@ -93,10 +90,7 @@ public static class TimeSpanDehumanizeExtensions
                 return false;
             }
 
-            while (index < input.Length && char.IsWhiteSpace(input[index]))
-            {
-                index++;
-            }
+            SkipTokenSeparators(input, ref index);
 
             if (!TryReadUnit(input, ref index, out var unit))
             {
@@ -113,6 +107,48 @@ public static class TimeSpanDehumanizeExtensions
         }
 
         return parsedAny;
+    }
+
+    static void SkipTokenSeparators(string input, ref int index)
+    {
+        while (index < input.Length)
+        {
+            while (index < input.Length && char.IsWhiteSpace(input[index]))
+            {
+                index++;
+            }
+
+            if (index < input.Length && input[index] == ',')
+            {
+                index++;
+                continue;
+            }
+
+            if (TrySkipCaseInsensitiveWord(input, ref index, "and"))
+            {
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    static bool TrySkipCaseInsensitiveWord(string input, ref int index, string word)
+    {
+        if (index + word.Length > input.Length
+            || !input.AsSpan(index, word.Length).Equals(word.AsSpan(), StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        var after = index + word.Length;
+        if (after < input.Length && char.IsLetter(input[after]))
+        {
+            return false;
+        }
+
+        index = after;
+        return true;
     }
 
     static bool TryReadUnit(string input, ref int index, out ReadOnlyMemory<char> unit)
