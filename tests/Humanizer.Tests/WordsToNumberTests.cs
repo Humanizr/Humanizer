@@ -369,6 +369,7 @@ public class WordsToNumberTests_Portuguese
 {
     [Theory]
     [InlineData("zero", 0)]
+    [InlineData("um", 1)]
     [InlineData("menos cinco", -5)]
     [InlineData("vinte e um", 21)]
     [InlineData("cento e cinco", 105)]
@@ -386,6 +387,7 @@ public class WordsToNumberTests_Portuguese
 
     [Theory]
     [InlineData("zero", 0, null)]
+    [InlineData("um", 1, null)]
     [InlineData("menos cinco", -5, null)]
     [InlineData("vinte e um", 21, null)]
     [InlineData("cento e cinco", 105, null)]
