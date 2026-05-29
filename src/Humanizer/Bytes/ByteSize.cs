@@ -195,17 +195,28 @@ public struct ByteSize(double byteSize) :
     ///  than or equal to one.
     /// </summary>
     public readonly override string ToString() =>
-        ToString(NumberFormatInfo.CurrentInfo);
+        ToString(CultureInfo.CurrentCulture);
 
     public readonly string ToString(IFormatProvider? provider)
     {
         provider ??= CultureInfo.CurrentCulture;
 
-        return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
+        var culture = provider as CultureInfo;
+
+        // Only inject override for culture-backed providers, never for caller-supplied custom NFI
+        if (culture is not null)
+        {
+            provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
+        }
+
+        return string.Concat(
+            LargestWholeNumberValue.ToString("0.##", provider),
+            " ",
+            GetLargestWholeNumberSymbol(culture));
     }
 
     public readonly string ToString(string? format) =>
-        ToString(format, NumberFormatInfo.CurrentInfo);
+        ToString(format, CultureInfo.CurrentCulture);
 
     public readonly string ToString(string? format, IFormatProvider? provider) =>
         ToString(format, provider, toSymbol: true);
@@ -222,17 +233,23 @@ public struct ByteSize(double byteSize) :
 
         if (format.IndexOfAny(['#', '0']) < 0)
         {
-            format = "0.## " + format;
+            format = string.Concat("0.## ", format);
         }
 
         format = format.Replace("#.##", "0.##");
 
         var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
 
+        // Only inject override for culture-backed providers, never for caller-supplied custom NFI
+        if (provider is CultureInfo overrideCulture)
+        {
+            provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(overrideCulture);
+        }
+
         bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
         string output(double n) => n.ToString(format, provider);
 
-        var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+        var cultureFormatter = Configurator.GetFormatter(culture);
 
         if (has(TerabyteSymbol))
         {
@@ -277,7 +294,10 @@ public struct ByteSize(double byteSize) :
             ? "0"
             : formattedLargeWholeNumberValue;
 
-        return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
+        return string.Concat(
+            formattedLargeWholeNumberValue,
+            " ",
+            toSymbol ? GetLargestWholeNumberSymbol(culture) : GetLargestWholeNumberFullWord(culture));
     }
 
     /// <summary>
@@ -409,7 +429,13 @@ public struct ByteSize(double byteSize) :
             return false;
         }
 
-        // Acquiring culture-specific parsing info
+        // Acquiring culture-specific parsing info — apply decimal separator override for culture-backed providers
+        if (formatProvider is CultureInfo parseCulture
+            && LocaleNumberFormattingOverrides.TryGetDecimalSeparator(parseCulture, out var parseSep))
+        {
+            formatProvider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(parseCulture, parseSep!);
+        }
+
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
 
         // Get or create cached set of special characters from number format strings

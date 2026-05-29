@@ -1,0 +1,5157 @@
+{
+  "environment": {
+    "dotnet_version": "4.0.30319.42000",
+    "framework": ".NET Framework 4.8.9032.0",
+    "os": "Microsoft Windows 10.0.26300 ",
+    "globalization": "NLS",
+    "timestamp": "2026-04-09T06:50:43.4020511Z"
+  },
+  "locales": [
+    {
+      "locale": "af",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "yyyy-MM-dd",
+      "long_date_pattern": "dddd dd MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "vm.",
+      "pm_designator": "nm.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015-01-01",
+          "long": "Donderdag 01 Januarie 2015",
+          "month_standalone": "Januarie 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015-02-03",
+          "long": "Dinsdag 03 Februarie 2015",
+          "month_standalone": "Februarie 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022-01-25",
+          "long": "Dinsdag 25 Januarie 2022",
+          "month_standalone": "Januarie 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020-02-29",
+          "long": "Saterdag 29 Februarie 2020",
+          "month_standalone": "Februarie 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015-09-04",
+          "long": "Vrydag 04 September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979-11-07",
+          "long": "Woensdag 07 November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020-03-02",
+          "long": "Maandag 02 Maart 2020",
+          "month_standalone": "Maart 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021-10-31",
+          "long": "Sondag 31 Oktober 2021",
+          "month_standalone": "Oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024-12-31",
+          "long": "Dinsdag 31 Desember 2024",
+          "month_standalone": "Desember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd/MM/yy",
+      "long_date_pattern": "dd/MMMM/yyyy",
+      "short_time_pattern": "hh:mm tt",
+      "long_time_pattern": "hh:mm:ss tt",
+      "am_designator": "\u0635",
+      "pm_designator": "\u0645",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "10/03/36",
+          "long": "10/\u0631\u0628\u064A\u0639\u00A0\u0627\u0644\u0623\u0648\u0644/1436",
+          "month_standalone": "\u0631\u0628\u064A\u0639\u00A0\u0627\u0644\u0623\u0648\u0644 1436"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "14/04/36",
+          "long": "14/\u0631\u0628\u064A\u0639\u00A0\u0627\u0644\u062B\u0627\u0646\u064A/1436",
+          "month_standalone": "\u0631\u0628\u064A\u0639\u00A0\u0627\u0644\u062B\u0627\u0646\u064A 1436"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "22/06/43",
+          "long": "22/\u062C\u0645\u0627\u062F\u0649\u00A0\u0627\u0644\u062B\u0627\u0646\u064A\u0629/1443",
+          "month_standalone": "\u062C\u0645\u0627\u062F\u0649\u00A0\u0627\u0644\u062B\u0627\u0646\u064A\u0629 1443"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "05/07/41",
+          "long": "05/\u0631\u062C\u0628/1441",
+          "month_standalone": "\u0631\u062C\u0628 1441"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "20/11/36",
+          "long": "20/\u0630\u0648\u00A0\u0627\u0644\u0642\u0639\u062F\u0629/1436",
+          "month_standalone": "\u0630\u0648\u00A0\u0627\u0644\u0642\u0639\u062F\u0629 1436"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "17/12/99",
+          "long": "17/\u0630\u0648\u00A0\u0627\u0644\u062D\u062C\u0629/1399",
+          "month_standalone": "\u0630\u0648\u00A0\u0627\u0644\u062D\u062C\u0629 1399"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "07/07/41",
+          "long": "07/\u0631\u062C\u0628/1441",
+          "month_standalone": "\u0631\u062C\u0628 1441"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "25/03/43",
+          "long": "25/\u0631\u0628\u064A\u0639\u00A0\u0627\u0644\u0623\u0648\u0644/1443",
+          "month_standalone": "\u0631\u0628\u064A\u0639\u00A0\u0627\u0644\u0623\u0648\u0644 1443"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "30/06/46",
+          "long": "30/\u062C\u0645\u0627\u062F\u0649\u00A0\u0627\u0644\u062B\u0627\u0646\u064A\u0629/1446",
+          "month_standalone": "\u062C\u0645\u0627\u062F\u0649\u00A0\u0627\u0644\u062B\u0627\u0646\u064A\u0629 1446"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05 \u0635",
+          "long": "01:05:00 \u0635"
+        },
+        {
+          "ref": "13:23",
+          "short": "01:23 \u0645",
+          "long": "01:23:00 \u0645"
+        },
+        {
+          "ref": "13:25",
+          "short": "01:25 \u0645",
+          "long": "01:25:00 \u0645"
+        }
+      ]
+    },
+    {
+      "locale": "az",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "d MMMM yyyy, dddd",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "1 yanvar 2015, c\u00FCm\u0259 ax\u015Fam\u0131",
+          "month_standalone": "yanvar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "3 fevral 2015, \u00E7\u0259r\u015F\u0259nb\u0259 ax\u015Fam\u0131",
+          "month_standalone": "fevral 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "25 yanvar 2022, \u00E7\u0259r\u015F\u0259nb\u0259 ax\u015Fam\u0131",
+          "month_standalone": "yanvar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "29 fevral 2020, \u015F\u0259nb\u0259",
+          "month_standalone": "fevral 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "4 sentyabr 2015, c\u00FCm\u0259",
+          "month_standalone": "sentyabr 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "7 noyabr 1979, \u00E7\u0259r\u015F\u0259nb\u0259",
+          "month_standalone": "noyabr 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "2 mart 2020, bazar ert\u0259si",
+          "month_standalone": "mart 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "31 oktyabr 2021, bazar",
+          "month_standalone": "oktyabr 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "31 dekabr 2024, \u00E7\u0259r\u015F\u0259nb\u0259 ax\u015Fam\u0131",
+          "month_standalone": "dekabr 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "bg",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.M.yyyy \u0027\u0433.\u0027",
+      "long_date_pattern": "dd MMMM yyyy \u0027\u0433.\u0027",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.1.2015 \u0433.",
+          "long": "01 \u044F\u043D\u0443\u0430\u0440\u0438 2015 \u0433.",
+          "month_standalone": "\u044F\u043D\u0443\u0430\u0440\u0438 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.2.2015 \u0433.",
+          "long": "03 \u0444\u0435\u0432\u0440\u0443\u0430\u0440\u0438 2015 \u0433.",
+          "month_standalone": "\u0444\u0435\u0432\u0440\u0443\u0430\u0440\u0438 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.1.2022 \u0433.",
+          "long": "25 \u044F\u043D\u0443\u0430\u0440\u0438 2022 \u0433.",
+          "month_standalone": "\u044F\u043D\u0443\u0430\u0440\u0438 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.2.2020 \u0433.",
+          "long": "29 \u0444\u0435\u0432\u0440\u0443\u0430\u0440\u0438 2020 \u0433.",
+          "month_standalone": "\u0444\u0435\u0432\u0440\u0443\u0430\u0440\u0438 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.9.2015 \u0433.",
+          "long": "04 \u0441\u0435\u043F\u0442\u0435\u043C\u0432\u0440\u0438 2015 \u0433.",
+          "month_standalone": "\u0441\u0435\u043F\u0442\u0435\u043C\u0432\u0440\u0438 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979 \u0433.",
+          "long": "07 \u043D\u043E\u0435\u043C\u0432\u0440\u0438 1979 \u0433.",
+          "month_standalone": "\u043D\u043E\u0435\u043C\u0432\u0440\u0438 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.3.2020 \u0433.",
+          "long": "02 \u043C\u0430\u0440\u0442 2020 \u0433.",
+          "month_standalone": "\u043C\u0430\u0440\u0442 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021 \u0433.",
+          "long": "31 \u043E\u043A\u0442\u043E\u043C\u0432\u0440\u0438 2021 \u0433.",
+          "month_standalone": "\u043E\u043A\u0442\u043E\u043C\u0432\u0440\u0438 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024 \u0433.",
+          "long": "31 \u0434\u0435\u043A\u0435\u043C\u0432\u0440\u0438 2024 \u0433.",
+          "month_standalone": "\u0434\u0435\u043A\u0435\u043C\u0432\u0440\u0438 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "bn",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "d/M/yyyy",
+      "long_date_pattern": "dddd, d MMMM, yyyy",
+      "short_time_pattern": "h:mm tt",
+      "long_time_pattern": "h:mm:ss tt",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "\u09AC\u09C3\u09B9\u09B8\u09CD\u09AA\u09A4\u09BF\u09AC\u09BE\u09B0, 1 \u099C\u09BE\u09A8\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0, 2015",
+          "month_standalone": "\u099C\u09BE\u09A8\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3/2/2015",
+          "long": "\u09AE\u0999\u09CD\u0997\u09B2\u09AC\u09BE\u09B0, 3 \u09AB\u09C7\u09AC\u09CD\u09B0\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0, 2015",
+          "month_standalone": "\u09AB\u09C7\u09AC\u09CD\u09B0\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/1/2022",
+          "long": "\u09AE\u0999\u09CD\u0997\u09B2\u09AC\u09BE\u09B0, 25 \u099C\u09BE\u09A8\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0, 2022",
+          "month_standalone": "\u099C\u09BE\u09A8\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/2/2020",
+          "long": "\u09B6\u09A8\u09BF\u09AC\u09BE\u09B0, 29 \u09AB\u09C7\u09AC\u09CD\u09B0\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0, 2020",
+          "month_standalone": "\u09AB\u09C7\u09AC\u09CD\u09B0\u09C1\u09AF\u09BC\u09BE\u09B0\u09C0 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4/9/2015",
+          "long": "\u09B6\u09C1\u0995\u09CD\u09B0\u09AC\u09BE\u09B0, 4 \u09B8\u09C7\u09AA\u09CD\u099F\u09C7\u09AE\u09CD\u09AC\u09B0, 2015",
+          "month_standalone": "\u09B8\u09C7\u09AA\u09CD\u099F\u09C7\u09AE\u09CD\u09AC\u09B0 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7/11/1979",
+          "long": "\u09AC\u09C1\u09A7\u09AC\u09BE\u09B0, 7 \u09A8\u09AD\u09C7\u09AE\u09CD\u09AC\u09B0, 1979",
+          "month_standalone": "\u09A8\u09AD\u09C7\u09AE\u09CD\u09AC\u09B0 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2/3/2020",
+          "long": "\u09B8\u09CB\u09AE\u09AC\u09BE\u09B0, 2 \u09AE\u09BE\u09B0\u09CD\u099A, 2020",
+          "month_standalone": "\u09AE\u09BE\u09B0\u09CD\u099A 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "\u09B0\u09AC\u09BF\u09AC\u09BE\u09B0, 31 \u0985\u0995\u09CD\u099F\u09CB\u09AC\u09B0, 2021",
+          "month_standalone": "\u0985\u0995\u09CD\u099F\u09CB\u09AC\u09B0 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "\u09AE\u0999\u09CD\u0997\u09B2\u09AC\u09BE\u09B0, 31 \u09A1\u09BF\u09B8\u09C7\u09AE\u09CD\u09AC\u09B0, 2024",
+          "month_standalone": "\u09A1\u09BF\u09B8\u09C7\u09AE\u09CD\u09AC\u09B0 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05 AM",
+          "long": "1:05:00 AM"
+        },
+        {
+          "ref": "13:23",
+          "short": "1:23 PM",
+          "long": "1:23:00 PM"
+        },
+        {
+          "ref": "13:25",
+          "short": "1:25 PM",
+          "long": "1:25:00 PM"
+        }
+      ]
+    },
+    {
+      "locale": "ca",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d/M/yyyy",
+      "long_date_pattern": "dddd, d MMMM \u0027de\u0027 yyyy",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "a.\u202Fm.",
+      "pm_designator": "p.\u202Fm.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "dijous, 1 de gener de 2015",
+          "month_standalone": "gener 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3/2/2015",
+          "long": "dimarts, 3 de febrer de 2015",
+          "month_standalone": "febrer 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/1/2022",
+          "long": "dimarts, 25 de gener de 2022",
+          "month_standalone": "gener 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/2/2020",
+          "long": "dissabte, 29 de febrer de 2020",
+          "month_standalone": "febrer 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4/9/2015",
+          "long": "divendres, 4 de setembre de 2015",
+          "month_standalone": "setembre 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7/11/1979",
+          "long": "dimecres, 7 de novembre de 1979",
+          "month_standalone": "novembre 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2/3/2020",
+          "long": "dilluns, 2 de mar\u00E7 de 2020",
+          "month_standalone": "mar\u00E7 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "diumenge, 31 d\u2019octubre de 2021",
+          "month_standalone": "octubre 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "dimarts, 31 de desembre de 2024",
+          "month_standalone": "desembre 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "cs",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd d. MMMM yyyy",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "dop.",
+      "pm_designator": "odp.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "\u010Dtvrtek 1. ledna 2015",
+          "month_standalone": "leden 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "\u00FAter\u00FD 3. \u00FAnora 2015",
+          "month_standalone": "\u00FAnor 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "\u00FAter\u00FD 25. ledna 2022",
+          "month_standalone": "leden 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "sobota 29. \u00FAnora 2020",
+          "month_standalone": "\u00FAnor 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "p\u00E1tek 4. z\u00E1\u0159\u00ED 2015",
+          "month_standalone": "z\u00E1\u0159\u00ED 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "st\u0159eda 7. listopadu 1979",
+          "month_standalone": "listopad 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "pond\u011Bl\u00ED 2. b\u0159ezna 2020",
+          "month_standalone": "b\u0159ezen 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "ned\u011Ble 31. \u0159\u00EDjna 2021",
+          "month_standalone": "\u0159\u00EDjen 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "\u00FAter\u00FD 31. prosince 2024",
+          "month_standalone": "prosinec 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "da",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd-MM-yyyy",
+      "long_date_pattern": "d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01-01-2015",
+          "long": "1. januar 2015",
+          "month_standalone": "januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03-02-2015",
+          "long": "3. februar 2015",
+          "month_standalone": "februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25-01-2022",
+          "long": "25. januar 2022",
+          "month_standalone": "januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29-02-2020",
+          "long": "29. februar 2020",
+          "month_standalone": "februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04-09-2015",
+          "long": "4. september 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07-11-1979",
+          "long": "7. november 1979",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02-03-2020",
+          "long": "2. marts 2020",
+          "month_standalone": "marts 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31-10-2021",
+          "long": "31. oktober 2021",
+          "month_standalone": "oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31-12-2024",
+          "long": "31. december 2024",
+          "month_standalone": "december 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "de",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd, d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "Donnerstag, 1. Januar 2015",
+          "month_standalone": "Januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "Dienstag, 3. Februar 2015",
+          "month_standalone": "Februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "Dienstag, 25. Januar 2022",
+          "month_standalone": "Januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "Samstag, 29. Februar 2020",
+          "month_standalone": "Februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "Freitag, 4. September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "Mittwoch, 7. November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "Montag, 2. M\u00E4rz 2020",
+          "month_standalone": "M\u00E4rz 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "Sonntag, 31. Oktober 2021",
+          "month_standalone": "Oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "Dienstag, 31. Dezember 2024",
+          "month_standalone": "Dezember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "de-CH",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd, d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "Donnerstag, 1. Januar 2015",
+          "month_standalone": "Januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "Dienstag, 3. Februar 2015",
+          "month_standalone": "Februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "Dienstag, 25. Januar 2022",
+          "month_standalone": "Januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "Samstag, 29. Februar 2020",
+          "month_standalone": "Februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "Freitag, 4. September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "Mittwoch, 7. November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "Montag, 2. M\u00E4rz 2020",
+          "month_standalone": "M\u00E4rz 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "Sonntag, 31. Oktober 2021",
+          "month_standalone": "Oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "Dienstag, 31. Dezember 2024",
+          "month_standalone": "Dezember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "de-LI",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd, d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "Donnerstag, 1. Januar 2015",
+          "month_standalone": "Januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "Dienstag, 3. Februar 2015",
+          "month_standalone": "Februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "Dienstag, 25. Januar 2022",
+          "month_standalone": "Januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "Samstag, 29. Februar 2020",
+          "month_standalone": "Februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "Freitag, 4. September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "Mittwoch, 7. November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "Montag, 2. M\u00E4rz 2020",
+          "month_standalone": "M\u00E4rz 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "Sonntag, 31. Oktober 2021",
+          "month_standalone": "Oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "Dienstag, 31. Dezember 2024",
+          "month_standalone": "Dezember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "el",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d/M/yyyy",
+      "long_date_pattern": "dddd, d MMMM yyyy",
+      "short_time_pattern": "h:mm tt",
+      "long_time_pattern": "h:mm:ss tt",
+      "am_designator": "\u03C0\u03BC",
+      "pm_designator": "\u03BC\u03BC",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "\u03A0\u03AD\u03BC\u03C0\u03C4\u03B7, 1 \u0399\u03B1\u03BD\u03BF\u03C5\u03B1\u03C1\u03AF\u03BF\u03C5 2015",
+          "month_standalone": "\u0399\u03B1\u03BD\u03BF\u03C5\u03AC\u03C1\u03B9\u03BF\u03C2 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3/2/2015",
+          "long": "\u03A4\u03C1\u03AF\u03C4\u03B7, 3 \u03A6\u03B5\u03B2\u03C1\u03BF\u03C5\u03B1\u03C1\u03AF\u03BF\u03C5 2015",
+          "month_standalone": "\u03A6\u03B5\u03B2\u03C1\u03BF\u03C5\u03AC\u03C1\u03B9\u03BF\u03C2 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/1/2022",
+          "long": "\u03A4\u03C1\u03AF\u03C4\u03B7, 25 \u0399\u03B1\u03BD\u03BF\u03C5\u03B1\u03C1\u03AF\u03BF\u03C5 2022",
+          "month_standalone": "\u0399\u03B1\u03BD\u03BF\u03C5\u03AC\u03C1\u03B9\u03BF\u03C2 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/2/2020",
+          "long": "\u03A3\u03AC\u03B2\u03B2\u03B1\u03C4\u03BF, 29 \u03A6\u03B5\u03B2\u03C1\u03BF\u03C5\u03B1\u03C1\u03AF\u03BF\u03C5 2020",
+          "month_standalone": "\u03A6\u03B5\u03B2\u03C1\u03BF\u03C5\u03AC\u03C1\u03B9\u03BF\u03C2 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4/9/2015",
+          "long": "\u03A0\u03B1\u03C1\u03B1\u03C3\u03BA\u03B5\u03C5\u03AE, 4 \u03A3\u03B5\u03C0\u03C4\u03B5\u03BC\u03B2\u03C1\u03AF\u03BF\u03C5 2015",
+          "month_standalone": "\u03A3\u03B5\u03C0\u03C4\u03AD\u03BC\u03B2\u03C1\u03B9\u03BF\u03C2 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7/11/1979",
+          "long": "\u03A4\u03B5\u03C4\u03AC\u03C1\u03C4\u03B7, 7 \u039D\u03BF\u03B5\u03BC\u03B2\u03C1\u03AF\u03BF\u03C5 1979",
+          "month_standalone": "\u039D\u03BF\u03AD\u03BC\u03B2\u03C1\u03B9\u03BF\u03C2 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2/3/2020",
+          "long": "\u0394\u03B5\u03C5\u03C4\u03AD\u03C1\u03B1, 2 \u039C\u03B1\u03C1\u03C4\u03AF\u03BF\u03C5 2020",
+          "month_standalone": "\u039C\u03AC\u03C1\u03C4\u03B9\u03BF\u03C2 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "\u039A\u03C5\u03C1\u03B9\u03B1\u03BA\u03AE, 31 \u039F\u03BA\u03C4\u03C9\u03B2\u03C1\u03AF\u03BF\u03C5 2021",
+          "month_standalone": "\u039F\u03BA\u03C4\u03CE\u03B2\u03C1\u03B9\u03BF\u03C2 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "\u03A4\u03C1\u03AF\u03C4\u03B7, 31 \u0394\u03B5\u03BA\u03B5\u03BC\u03B2\u03C1\u03AF\u03BF\u03C5 2024",
+          "month_standalone": "\u0394\u03B5\u03BA\u03AD\u03BC\u03B2\u03C1\u03B9\u03BF\u03C2 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05 \u03C0\u03BC",
+          "long": "1:05:00 \u03C0\u03BC"
+        },
+        {
+          "ref": "13:23",
+          "short": "1:23 \u03BC\u03BC",
+          "long": "1:23:00 \u03BC\u03BC"
+        },
+        {
+          "ref": "13:25",
+          "short": "1:25 \u03BC\u03BC",
+          "long": "1:25:00 \u03BC\u03BC"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "M/d/yyyy",
+      "long_date_pattern": "dddd, MMMM d, yyyy",
+      "short_time_pattern": "h:mm tt",
+      "long_time_pattern": "h:mm:ss tt",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "Thursday, January 1, 2015",
+          "month_standalone": "January 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2/3/2015",
+          "long": "Tuesday, February 3, 2015",
+          "month_standalone": "February 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "1/25/2022",
+          "long": "Tuesday, January 25, 2022",
+          "month_standalone": "January 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2/29/2020",
+          "long": "Saturday, February 29, 2020",
+          "month_standalone": "February 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "9/4/2015",
+          "long": "Friday, September 4, 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "11/7/1979",
+          "long": "Wednesday, November 7, 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "3/2/2020",
+          "long": "Monday, March 2, 2020",
+          "month_standalone": "March 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "10/31/2021",
+          "long": "Sunday, October 31, 2021",
+          "month_standalone": "October 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "12/31/2024",
+          "long": "Tuesday, December 31, 2024",
+          "month_standalone": "December 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05 AM",
+          "long": "1:05:00 AM"
+        },
+        {
+          "ref": "13:23",
+          "short": "1:23 PM",
+          "long": "1:23:00 PM"
+        },
+        {
+          "ref": "13:25",
+          "short": "1:25 PM",
+          "long": "1:25:00 PM"
+        }
+      ]
+    },
+    {
+      "locale": "en-GB",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dd MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "01 January 2015",
+          "month_standalone": "January 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "03 February 2015",
+          "month_standalone": "February 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "25 January 2022",
+          "month_standalone": "January 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "29 February 2020",
+          "month_standalone": "February 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "04 September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "07 November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "02 March 2020",
+          "month_standalone": "March 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "31 October 2021",
+          "month_standalone": "October 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "31 December 2024",
+          "month_standalone": "December 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "en-IN",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd-MM-yyyy",
+      "long_date_pattern": "dd MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01-01-2015",
+          "long": "01 January 2015",
+          "month_standalone": "January 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03-02-2015",
+          "long": "03 February 2015",
+          "month_standalone": "February 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25-01-2022",
+          "long": "25 January 2022",
+          "month_standalone": "January 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29-02-2020",
+          "long": "29 February 2020",
+          "month_standalone": "February 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04-09-2015",
+          "long": "04 September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07-11-1979",
+          "long": "07 November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02-03-2020",
+          "long": "02 March 2020",
+          "month_standalone": "March 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31-10-2021",
+          "long": "31 October 2021",
+          "month_standalone": "October 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31-12-2024",
+          "long": "31 December 2024",
+          "month_standalone": "December 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "en-US",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "M/d/yyyy",
+      "long_date_pattern": "dddd, MMMM d, yyyy",
+      "short_time_pattern": "h:mm tt",
+      "long_time_pattern": "h:mm:ss tt",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "Thursday, January 1, 2015",
+          "month_standalone": "January 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2/3/2015",
+          "long": "Tuesday, February 3, 2015",
+          "month_standalone": "February 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "1/25/2022",
+          "long": "Tuesday, January 25, 2022",
+          "month_standalone": "January 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2/29/2020",
+          "long": "Saturday, February 29, 2020",
+          "month_standalone": "February 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "9/4/2015",
+          "long": "Friday, September 4, 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "11/7/1979",
+          "long": "Wednesday, November 7, 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "3/2/2020",
+          "long": "Monday, March 2, 2020",
+          "month_standalone": "March 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "10/31/2021",
+          "long": "Sunday, October 31, 2021",
+          "month_standalone": "October 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "12/31/2024",
+          "long": "Tuesday, December 31, 2024",
+          "month_standalone": "December 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05 AM",
+          "long": "1:05:00 AM"
+        },
+        {
+          "ref": "13:23",
+          "short": "1:23 PM",
+          "long": "1:23:00 PM"
+        },
+        {
+          "ref": "13:25",
+          "short": "1:25 PM",
+          "long": "1:25:00 PM"
+        }
+      ]
+    },
+    {
+      "locale": "es",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, d\u0027 de \u0027MMMM\u0027 de \u0027yyyy",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "jueves, 1 de enero de 2015",
+          "month_standalone": "enero 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "martes, 3 de febrero de 2015",
+          "month_standalone": "febrero 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "martes, 25 de enero de 2022",
+          "month_standalone": "enero 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "s\u00E1bado, 29 de febrero de 2020",
+          "month_standalone": "febrero 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "viernes, 4 de septiembre de 2015",
+          "month_standalone": "septiembre 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "mi\u00E9rcoles, 7 de noviembre de 1979",
+          "month_standalone": "noviembre 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "lunes, 2 de marzo de 2020",
+          "month_standalone": "marzo 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "domingo, 31 de octubre de 2021",
+          "month_standalone": "octubre 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "martes, 31 de diciembre de 2024",
+          "month_standalone": "diciembre 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "fa",
+      "number_decimal_separator": "/",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, d MMMM yyyy",
+      "short_time_pattern": "hh:mm tt",
+      "long_time_pattern": "hh:mm:ss tt",
+      "am_designator": "\u0642.\u0638",
+      "pm_designator": "\u0628.\u0638",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "11/10/1393",
+          "long": "\u067E\u0646\u062C\u0634\u0646\u0628\u0647, 11 \u062F\u06CC 1393",
+          "month_standalone": "\u062F\u06CC 1393"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "14/11/1393",
+          "long": "\u0633\u0647\u00A0\u0634\u0646\u0628\u0647, 14 \u0628\u0647\u0645\u0646 1393",
+          "month_standalone": "\u0628\u0647\u0645\u0646 1393"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "05/11/1400",
+          "long": "\u0633\u0647\u00A0\u0634\u0646\u0628\u0647, 5 \u0628\u0647\u0645\u0646 1400",
+          "month_standalone": "\u0628\u0647\u0645\u0646 1400"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "10/12/1398",
+          "long": "\u0634\u0646\u0628\u0647, 10 \u0627\u0633\u0641\u0646\u062F 1398",
+          "month_standalone": "\u0627\u0633\u0641\u0646\u062F 1398"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "13/06/1394",
+          "long": "\u062C\u0645\u0639\u0647, 13 \u0634\u0647\u0631\u06CC\u0648\u0631 1394",
+          "month_standalone": "\u0634\u0647\u0631\u06CC\u0648\u0631 1394"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "16/08/1358",
+          "long": "\u0686\u0647\u0627\u0631\u0634\u0646\u0628\u0647, 16 \u0622\u0628\u0627\u0646 1358",
+          "month_standalone": "\u0622\u0628\u0627\u0646 1358"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "12/12/1398",
+          "long": "\u062F\u0648\u0634\u0646\u0628\u0647, 12 \u0627\u0633\u0641\u0646\u062F 1398",
+          "month_standalone": "\u0627\u0633\u0641\u0646\u062F 1398"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "09/08/1400",
+          "long": "\u064A\u0643\u0634\u0646\u0628\u0647, 9 \u0622\u0628\u0627\u0646 1400",
+          "month_standalone": "\u0622\u0628\u0627\u0646 1400"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "11/10/1403",
+          "long": "\u0633\u0647\u00A0\u0634\u0646\u0628\u0647, 11 \u062F\u06CC 1403",
+          "month_standalone": "\u062F\u06CC 1403"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05 \u0642.\u0638",
+          "long": "01:05:00 \u0642.\u0638"
+        },
+        {
+          "ref": "13:23",
+          "short": "01:23 \u0628.\u0638",
+          "long": "01:23:00 \u0628.\u0638"
+        },
+        {
+          "ref": "13:25",
+          "short": "01:25 \u0628.\u0638",
+          "long": "01:25:00 \u0628.\u0638"
+        }
+      ]
+    },
+    {
+      "locale": "fi",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.M.yyyy",
+      "long_date_pattern": "dddd d. MMMM yyyy",
+      "short_time_pattern": "H.mm",
+      "long_time_pattern": "H.mm.ss",
+      "am_designator": "ap.",
+      "pm_designator": "ip.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.1.2015",
+          "long": "torstai 1. tammikuuta 2015",
+          "month_standalone": "tammikuu 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.2.2015",
+          "long": "tiistai 3. helmikuuta 2015",
+          "month_standalone": "helmikuu 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.1.2022",
+          "long": "tiistai 25. tammikuuta 2022",
+          "month_standalone": "tammikuu 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.2.2020",
+          "long": "lauantai 29. helmikuuta 2020",
+          "month_standalone": "helmikuu 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.9.2015",
+          "long": "perjantai 4. syyskuuta 2015",
+          "month_standalone": "syyskuu 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979",
+          "long": "keskiviikko 7. marraskuuta 1979",
+          "month_standalone": "marraskuu 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.3.2020",
+          "long": "maanantai 2. maaliskuuta 2020",
+          "month_standalone": "maaliskuu 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "sunnuntai 31. lokakuuta 2021",
+          "month_standalone": "lokakuu 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "tiistai 31. joulukuuta 2024",
+          "month_standalone": "joulukuu 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1.05",
+          "long": "1.05.00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13.23",
+          "long": "13.23.00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13.25",
+          "long": "13.25.00"
+        }
+      ]
+    },
+    {
+      "locale": "fil",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "M/d/yyyy",
+      "long_date_pattern": "dddd, MMMM d, yyyy",
+      "short_time_pattern": "h:mm\u202Ftt",
+      "long_time_pattern": "h:mm:ss\u202Ftt",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "Huwebes, Enero 1, 2015",
+          "month_standalone": "Enero 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2/3/2015",
+          "long": "Martes, Pebrero 3, 2015",
+          "month_standalone": "Pebrero 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "1/25/2022",
+          "long": "Martes, Enero 25, 2022",
+          "month_standalone": "Enero 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2/29/2020",
+          "long": "Sabado, Pebrero 29, 2020",
+          "month_standalone": "Pebrero 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "9/4/2015",
+          "long": "Biyernes, Setyembre 4, 2015",
+          "month_standalone": "Setyembre 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "11/7/1979",
+          "long": "Miyerkules, Nobyembre 7, 1979",
+          "month_standalone": "Nobyembre 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "3/2/2020",
+          "long": "Lunes, Marso 2, 2020",
+          "month_standalone": "Marso 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "10/31/2021",
+          "long": "Linggo, Oktubre 31, 2021",
+          "month_standalone": "Oktubre 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "12/31/2024",
+          "long": "Martes, Disyembre 31, 2024",
+          "month_standalone": "Disyembre 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05\u202FAM",
+          "long": "1:05:00\u202FAM"
+        },
+        {
+          "ref": "13:23",
+          "short": "1:23\u202FPM",
+          "long": "1:23:00\u202FPM"
+        },
+        {
+          "ref": "13:25",
+          "short": "1:25\u202FPM",
+          "long": "1:25:00\u202FPM"
+        }
+      ]
+    },
+    {
+      "locale": "fr",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "jeudi 1 janvier 2015",
+          "month_standalone": "janvier 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "mardi 3 f\u00E9vrier 2015",
+          "month_standalone": "f\u00E9vrier 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "mardi 25 janvier 2022",
+          "month_standalone": "janvier 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "samedi 29 f\u00E9vrier 2020",
+          "month_standalone": "f\u00E9vrier 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "vendredi 4 septembre 2015",
+          "month_standalone": "septembre 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "mercredi 7 novembre 1979",
+          "month_standalone": "novembre 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "lundi 2 mars 2020",
+          "month_standalone": "mars 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "dimanche 31 octobre 2021",
+          "month_standalone": "octobre 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "mardi 31 d\u00E9cembre 2024",
+          "month_standalone": "d\u00E9cembre 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "fr-BE",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd-MM-yy",
+      "long_date_pattern": "dddd d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01-01-15",
+          "long": "jeudi 1 janvier 2015",
+          "month_standalone": "janvier 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03-02-15",
+          "long": "mardi 3 f\u00E9vrier 2015",
+          "month_standalone": "f\u00E9vrier 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25-01-22",
+          "long": "mardi 25 janvier 2022",
+          "month_standalone": "janvier 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29-02-20",
+          "long": "samedi 29 f\u00E9vrier 2020",
+          "month_standalone": "f\u00E9vrier 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04-09-15",
+          "long": "vendredi 4 septembre 2015",
+          "month_standalone": "septembre 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07-11-79",
+          "long": "mercredi 7 novembre 1979",
+          "month_standalone": "novembre 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02-03-20",
+          "long": "lundi 2 mars 2020",
+          "month_standalone": "mars 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31-10-21",
+          "long": "dimanche 31 octobre 2021",
+          "month_standalone": "octobre 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31-12-24",
+          "long": "mardi 31 d\u00E9cembre 2024",
+          "month_standalone": "d\u00E9cembre 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "fr-CH",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd, d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "jeudi, 1 janvier 2015",
+          "month_standalone": "janvier 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "mardi, 3 f\u00E9vrier 2015",
+          "month_standalone": "f\u00E9vrier 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "mardi, 25 janvier 2022",
+          "month_standalone": "janvier 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "samedi, 29 f\u00E9vrier 2020",
+          "month_standalone": "f\u00E9vrier 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "vendredi, 4 septembre 2015",
+          "month_standalone": "septembre 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "mercredi, 7 novembre 1979",
+          "month_standalone": "novembre 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "lundi, 2 mars 2020",
+          "month_standalone": "mars 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "dimanche, 31 octobre 2021",
+          "month_standalone": "octobre 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "mardi, 31 d\u00E9cembre 2024",
+          "month_standalone": "d\u00E9cembre 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "he",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd dd MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05D7\u05DE\u05D9\u05E9\u05D9 01 \u05D9\u05E0\u05D5\u05D0\u05E8 2015",
+          "month_standalone": "\u05D9\u05E0\u05D5\u05D0\u05E8 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05E9\u05DC\u05D9\u05E9\u05D9 03 \u05E4\u05D1\u05E8\u05D5\u05D0\u05E8 2015",
+          "month_standalone": "\u05E4\u05D1\u05E8\u05D5\u05D0\u05E8 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05E9\u05DC\u05D9\u05E9\u05D9 25 \u05D9\u05E0\u05D5\u05D0\u05E8 2022",
+          "month_standalone": "\u05D9\u05E0\u05D5\u05D0\u05E8 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "\u05E9\u05D1\u05EA 29 \u05E4\u05D1\u05E8\u05D5\u05D0\u05E8 2020",
+          "month_standalone": "\u05E4\u05D1\u05E8\u05D5\u05D0\u05E8 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05E9\u05D9\u05E9\u05D9 04 \u05E1\u05E4\u05D8\u05DE\u05D1\u05E8 2015",
+          "month_standalone": "\u05E1\u05E4\u05D8\u05DE\u05D1\u05E8 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05E8\u05D1\u05D9\u05E2\u05D9 07 \u05E0\u05D5\u05D1\u05DE\u05D1\u05E8 1979",
+          "month_standalone": "\u05E0\u05D5\u05D1\u05DE\u05D1\u05E8 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05E9\u05E0\u05D9 02 \u05DE\u05E8\u05E5 2020",
+          "month_standalone": "\u05DE\u05E8\u05E5 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05E8\u05D0\u05E9\u05D5\u05DF 31 \u05D0\u05D5\u05E7\u05D8\u05D5\u05D1\u05E8 2021",
+          "month_standalone": "\u05D0\u05D5\u05E7\u05D8\u05D5\u05D1\u05E8 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "\u05D9\u05D5\u05DD\u00A0\u05E9\u05DC\u05D9\u05E9\u05D9 31 \u05D3\u05E6\u05DE\u05D1\u05E8 2024",
+          "month_standalone": "\u05D3\u05E6\u05DE\u05D1\u05E8 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "hr",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.M.yyyy.",
+      "long_date_pattern": "d. MMMM yyyy.",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.1.2015.",
+          "long": "1. sije\u010Dnja 2015.",
+          "month_standalone": "sije\u010Danj 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.2.2015.",
+          "long": "3. velja\u010De 2015.",
+          "month_standalone": "velja\u010Da 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.1.2022.",
+          "long": "25. sije\u010Dnja 2022.",
+          "month_standalone": "sije\u010Danj 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.2.2020.",
+          "long": "29. velja\u010De 2020.",
+          "month_standalone": "velja\u010Da 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.9.2015.",
+          "long": "4. rujna 2015.",
+          "month_standalone": "rujan 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979.",
+          "long": "7. studenog 1979.",
+          "month_standalone": "studeni 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.3.2020.",
+          "long": "2. o\u017Eujka 2020.",
+          "month_standalone": "o\u017Eujak 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021.",
+          "long": "31. listopada 2021.",
+          "month_standalone": "listopad 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024.",
+          "long": "31. prosinca 2024.",
+          "month_standalone": "prosinac 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "hu",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "yyyy. MM. dd.",
+      "long_date_pattern": "yyyy. MMMM d., dddd",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "de.",
+      "pm_designator": "du.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015. 01. 01.",
+          "long": "2015. janu\u00E1r 1., cs\u00FCt\u00F6rt\u00F6k",
+          "month_standalone": "janu\u00E1r 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015. 02. 03.",
+          "long": "2015. febru\u00E1r 3., kedd",
+          "month_standalone": "febru\u00E1r 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022. 01. 25.",
+          "long": "2022. janu\u00E1r 25., kedd",
+          "month_standalone": "janu\u00E1r 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020. 02. 29.",
+          "long": "2020. febru\u00E1r 29., szombat",
+          "month_standalone": "febru\u00E1r 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015. 09. 04.",
+          "long": "2015. szeptember 4., p\u00E9ntek",
+          "month_standalone": "szeptember 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979. 11. 07.",
+          "long": "1979. november 7., szerda",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020. 03. 02.",
+          "long": "2020. m\u00E1rcius 2., h\u00E9tf\u0151",
+          "month_standalone": "m\u00E1rcius 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021. 10. 31.",
+          "long": "2021. okt\u00F3ber 31., vas\u00E1rnap",
+          "month_standalone": "okt\u00F3ber 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024. 12. 31.",
+          "long": "2024. december 31., kedd",
+          "month_standalone": "december 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "hy",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "d MMMM, yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "1 \u0570\u0578\u0582\u0576\u057E\u0561\u0580\u056B, 2015",
+          "month_standalone": "\u0540\u0578\u0582\u0576\u057E\u0561\u0580 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "3 \u0583\u0565\u057F\u0580\u057E\u0561\u0580\u056B, 2015",
+          "month_standalone": "\u0553\u0565\u057F\u0580\u057E\u0561\u0580 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "25 \u0570\u0578\u0582\u0576\u057E\u0561\u0580\u056B, 2022",
+          "month_standalone": "\u0540\u0578\u0582\u0576\u057E\u0561\u0580 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "29 \u0583\u0565\u057F\u0580\u057E\u0561\u0580\u056B, 2020",
+          "month_standalone": "\u0553\u0565\u057F\u0580\u057E\u0561\u0580 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "4 \u057D\u0565\u057A\u057F\u0565\u0574\u0562\u0565\u0580\u056B, 2015",
+          "month_standalone": "\u054D\u0565\u057A\u057F\u0565\u0574\u0562\u0565\u0580 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "7 \u0576\u0578\u0575\u0565\u0574\u0562\u0565\u0580\u056B, 1979",
+          "month_standalone": "\u0546\u0578\u0575\u0565\u0574\u0562\u0565\u0580 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "2 \u0574\u0561\u0580\u057F\u056B, 2020",
+          "month_standalone": "\u0544\u0561\u0580\u057F 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "31 \u0570\u0578\u056F\u057F\u0565\u0574\u0562\u0565\u0580\u056B, 2021",
+          "month_standalone": "\u0540\u0578\u056F\u057F\u0565\u0574\u0562\u0565\u0580 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "31 \u0564\u0565\u056F\u057F\u0565\u0574\u0562\u0565\u0580\u056B, 2024",
+          "month_standalone": "\u0534\u0565\u056F\u057F\u0565\u0574\u0562\u0565\u0580 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "id",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, dd MMMM yyyy",
+      "short_time_pattern": "HH.mm",
+      "long_time_pattern": "HH.mm.ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "Kamis, 01 Januari 2015",
+          "month_standalone": "Januari 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "Selasa, 03 Februari 2015",
+          "month_standalone": "Februari 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "Selasa, 25 Januari 2022",
+          "month_standalone": "Januari 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "Sabtu, 29 Februari 2020",
+          "month_standalone": "Februari 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "Jumat, 04 September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "Rabu, 07 November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "Senin, 02 Maret 2020",
+          "month_standalone": "Maret 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "Minggu, 31 Oktober 2021",
+          "month_standalone": "Oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "Selasa, 31 Desember 2024",
+          "month_standalone": "Desember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01.05",
+          "long": "01.05.00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13.23",
+          "long": "13.23.00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13.25",
+          "long": "13.25.00"
+        }
+      ]
+    },
+    {
+      "locale": "is",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.M.yyyy",
+      "long_date_pattern": "dddd, d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "f.h.",
+      "pm_designator": "e.h.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.1.2015",
+          "long": "fimmtudagur, 1. jan\u00FAar 2015",
+          "month_standalone": "jan\u00FAar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.2.2015",
+          "long": "\u00FEri\u00F0judagur, 3. febr\u00FAar 2015",
+          "month_standalone": "febr\u00FAar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.1.2022",
+          "long": "\u00FEri\u00F0judagur, 25. jan\u00FAar 2022",
+          "month_standalone": "jan\u00FAar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.2.2020",
+          "long": "laugardagur, 29. febr\u00FAar 2020",
+          "month_standalone": "febr\u00FAar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.9.2015",
+          "long": "f\u00F6studagur, 4. september 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979",
+          "long": "mi\u00F0vikudagur, 7. n\u00F3vember 1979",
+          "month_standalone": "n\u00F3vember 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.3.2020",
+          "long": "m\u00E1nudagur, 2. mars 2020",
+          "month_standalone": "mars 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "sunnudagur, 31. okt\u00F3ber 2021",
+          "month_standalone": "okt\u00F3ber 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "\u00FEri\u00F0judagur, 31. desember 2024",
+          "month_standalone": "desember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "it",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "gioved\u00EC 1 gennaio 2015",
+          "month_standalone": "gennaio 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "marted\u00EC 3 febbraio 2015",
+          "month_standalone": "febbraio 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "marted\u00EC 25 gennaio 2022",
+          "month_standalone": "gennaio 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "sabato 29 febbraio 2020",
+          "month_standalone": "febbraio 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "venerd\u00EC 4 settembre 2015",
+          "month_standalone": "settembre 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "mercoled\u00EC 7 novembre 1979",
+          "month_standalone": "novembre 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "luned\u00EC 2 marzo 2020",
+          "month_standalone": "marzo 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "domenica 31 ottobre 2021",
+          "month_standalone": "ottobre 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "marted\u00EC 31 dicembre 2024",
+          "month_standalone": "dicembre 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ja",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "yyyy/MM/dd",
+      "long_date_pattern": "yyyy\u0027\u5E74\u0027M\u0027\u6708\u0027d\u0027\u65E5\u0027",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "\u5348\u524D",
+      "pm_designator": "\u5348\u5F8C",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015/01/01",
+          "long": "2015\u5E741\u67081\u65E5",
+          "month_standalone": "1\u6708 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015/02/03",
+          "long": "2015\u5E742\u67083\u65E5",
+          "month_standalone": "2\u6708 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022/01/25",
+          "long": "2022\u5E741\u670825\u65E5",
+          "month_standalone": "1\u6708 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020/02/29",
+          "long": "2020\u5E742\u670829\u65E5",
+          "month_standalone": "2\u6708 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015/09/04",
+          "long": "2015\u5E749\u67084\u65E5",
+          "month_standalone": "9\u6708 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979/11/07",
+          "long": "1979\u5E7411\u67087\u65E5",
+          "month_standalone": "11\u6708 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020/03/02",
+          "long": "2020\u5E743\u67082\u65E5",
+          "month_standalone": "3\u6708 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021/10/31",
+          "long": "2021\u5E7410\u670831\u65E5",
+          "month_standalone": "10\u6708 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024/12/31",
+          "long": "2024\u5E7412\u670831\u65E5",
+          "month_standalone": "12\u6708 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "yyyy-MM-dd",
+      "long_date_pattern": "yyyy\u0027\uB144\u0027 M\u0027\uC6D4\u0027 d\u0027\uC77C\u0027 dddd",
+      "short_time_pattern": "tt h:mm",
+      "long_time_pattern": "tt h:mm:ss",
+      "am_designator": "\uC624\uC804",
+      "pm_designator": "\uC624\uD6C4",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015-01-01",
+          "long": "2015\uB144 1\uC6D4 1\uC77C \uBAA9\uC694\uC77C",
+          "month_standalone": "1\uC6D4 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015-02-03",
+          "long": "2015\uB144 2\uC6D4 3\uC77C \uD654\uC694\uC77C",
+          "month_standalone": "2\uC6D4 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022-01-25",
+          "long": "2022\uB144 1\uC6D4 25\uC77C \uD654\uC694\uC77C",
+          "month_standalone": "1\uC6D4 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020-02-29",
+          "long": "2020\uB144 2\uC6D4 29\uC77C \uD1A0\uC694\uC77C",
+          "month_standalone": "2\uC6D4 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015-09-04",
+          "long": "2015\uB144 9\uC6D4 4\uC77C \uAE08\uC694\uC77C",
+          "month_standalone": "9\uC6D4 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979-11-07",
+          "long": "1979\uB144 11\uC6D4 7\uC77C \uC218\uC694\uC77C",
+          "month_standalone": "11\uC6D4 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020-03-02",
+          "long": "2020\uB144 3\uC6D4 2\uC77C \uC6D4\uC694\uC77C",
+          "month_standalone": "3\uC6D4 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021-10-31",
+          "long": "2021\uB144 10\uC6D4 31\uC77C \uC77C\uC694\uC77C",
+          "month_standalone": "10\uC6D4 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024-12-31",
+          "long": "2024\uB144 12\uC6D4 31\uC77C \uD654\uC694\uC77C",
+          "month_standalone": "12\uC6D4 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "\uC624\uC804 1:05",
+          "long": "\uC624\uC804 1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "\uC624\uD6C4 1:23",
+          "long": "\uC624\uD6C4 1:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "\uC624\uD6C4 1:25",
+          "long": "\uC624\uD6C4 1:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ku",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "yyyy/MM/dd",
+      "long_date_pattern": "dddd, dd MMMM, yyyy",
+      "short_time_pattern": "hh:mm tt",
+      "long_time_pattern": "hh:mm:ss tt",
+      "am_designator": "\u067E.\u0646",
+      "pm_designator": "\u062F.\u0646",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015/01/01",
+          "long": "\u067E\u06CE\u0646\u062C\u0634\u06D5\u0645\u0645\u06D5, 01 \u06A9\u0627\u0646\u0648\u0648\u0646\u06CC \u062F\u0648\u0648\u06D5\u0645, 2015",
+          "month_standalone": "\u06A9\u0627\u0646\u0648\u0648\u0646\u06CC \u062F\u0648\u0648\u06D5\u0645 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015/02/03",
+          "long": "\u0633\u06CE\u0634\u06D5\u0645\u0645\u06D5, 03 \u0634\u0648\u0628\u0627\u062A, 2015",
+          "month_standalone": "\u0634\u0648\u0628\u0627\u062A 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022/01/25",
+          "long": "\u0633\u06CE\u0634\u06D5\u0645\u0645\u06D5, 25 \u06A9\u0627\u0646\u0648\u0648\u0646\u06CC \u062F\u0648\u0648\u06D5\u0645, 2022",
+          "month_standalone": "\u06A9\u0627\u0646\u0648\u0648\u0646\u06CC \u062F\u0648\u0648\u06D5\u0645 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020/02/29",
+          "long": "\u0634\u06D5\u0645\u0645\u06D5, 29 \u0634\u0648\u0628\u0627\u062A, 2020",
+          "month_standalone": "\u0634\u0648\u0628\u0627\u062A 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015/09/04",
+          "long": "\u06BE\u06D5\u06CC\u0646\u06CC, 04 \u0626\u06D5\u06CC\u0644\u0648\u0648\u0644, 2015",
+          "month_standalone": "\u0626\u06D5\u06CC\u0644\u0648\u0648\u0644 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979/11/07",
+          "long": "\u0686\u0648\u0627\u0631\u0634\u06D5\u0645\u0645\u06D5, 07 \u062A\u0634\u0631\u06CC\u0646\u06CC \u062F\u0648\u0648\u06D5\u0645, 1979",
+          "month_standalone": "\u062A\u0634\u0631\u06CC\u0646\u06CC \u062F\u0648\u0648\u06D5\u0645 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020/03/02",
+          "long": "\u062F\u0648\u0648\u0634\u06D5\u0645\u0645\u06D5, 02 \u0626\u0627\u0632\u0627\u0631, 2020",
+          "month_standalone": "\u0626\u0627\u0632\u0627\u0631 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021/10/31",
+          "long": "\u06CC\u06D5\u06A9\u0634\u06D5\u0645\u0645\u06D5, 31 \u062A\u0634\u0631\u06CC\u0646\u06CC \u06CC\u06D5\u06A9\u06D5\u0645, 2021",
+          "month_standalone": "\u062A\u0634\u0631\u06CC\u0646\u06CC \u06CC\u06D5\u06A9\u06D5\u0645 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024/12/31",
+          "long": "\u0633\u06CE\u0634\u06D5\u0645\u0645\u06D5, 31 \u06A9\u0627\u0646\u0648\u0646\u06CC \u06CC\u06D5\u06A9\u06D5\u0645, 2024",
+          "month_standalone": "\u06A9\u0627\u0646\u0648\u0646\u06CC \u06CC\u06D5\u06A9\u06D5\u0645 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05 \u067E.\u0646",
+          "long": "01:05:00 \u067E.\u0646"
+        },
+        {
+          "ref": "13:23",
+          "short": "01:23 \u062F.\u0646",
+          "long": "01:23:00 \u062F.\u0646"
+        },
+        {
+          "ref": "13:25",
+          "short": "01:25 \u062F.\u0646",
+          "long": "01:25:00 \u062F.\u0646"
+        }
+      ]
+    },
+    {
+      "locale": "lb",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yy",
+      "long_date_pattern": "d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.15",
+          "long": "1. Januar 2015",
+          "month_standalone": "Januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.15",
+          "long": "3. Februar 2015",
+          "month_standalone": "Februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.22",
+          "long": "25. Januar 2022",
+          "month_standalone": "Januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.20",
+          "long": "29. Februar 2020",
+          "month_standalone": "Februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.15",
+          "long": "4. September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.79",
+          "long": "7. November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.20",
+          "long": "2. M\u00E4erz 2020",
+          "month_standalone": "M\u00E4erz 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.21",
+          "long": "31. Oktober 2021",
+          "month_standalone": "Oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.24",
+          "long": "31. Dezember 2024",
+          "month_standalone": "Dezember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "lt",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "yyyy-MM-dd",
+      "long_date_pattern": "yyyy \u0027m\u0027. MMMM d \u0027d\u0027., dddd",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "prie\u0161piet",
+      "pm_designator": "popiet",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015-01-01",
+          "long": "2015 m. sausio 1 d., ketvirtadienis",
+          "month_standalone": "sausis 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015-02-03",
+          "long": "2015 m. vasario 3 d., antradienis",
+          "month_standalone": "vasaris 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022-01-25",
+          "long": "2022 m. sausio 25 d., antradienis",
+          "month_standalone": "sausis 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020-02-29",
+          "long": "2020 m. vasario 29 d., \u0161e\u0161tadienis",
+          "month_standalone": "vasaris 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015-09-04",
+          "long": "2015 m. rugs\u0117jo 4 d., penktadienis",
+          "month_standalone": "rugs\u0117jis 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979-11-07",
+          "long": "1979 m. lapkri\u010Dio 7 d., tre\u010Diadienis",
+          "month_standalone": "lapkritis 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020-03-02",
+          "long": "2020 m. kovo 2 d., pirmadienis",
+          "month_standalone": "kovas 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021-10-31",
+          "long": "2021 m. spalio 31 d., sekmadienis",
+          "month_standalone": "spalis 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024-12-31",
+          "long": "2024 m. gruod\u017Eio 31 d., antradienis",
+          "month_standalone": "gruodis 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "lv",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd, yyyy. \u0027gada\u0027 d. MMMM",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "priek\u0161p.",
+      "pm_designator": "p\u0113cp.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "ceturtdiena, 2015. gada 1. janv\u0101ris",
+          "month_standalone": "janv\u0101ris 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "otrdiena, 2015. gada 3. febru\u0101ris",
+          "month_standalone": "febru\u0101ris 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "otrdiena, 2022. gada 25. janv\u0101ris",
+          "month_standalone": "janv\u0101ris 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "sestdiena, 2020. gada 29. febru\u0101ris",
+          "month_standalone": "febru\u0101ris 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "piektdiena, 2015. gada 4. septembris",
+          "month_standalone": "septembris 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "tre\u0161diena, 1979. gada 7. novembris",
+          "month_standalone": "novembris 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "pirmdiena, 2020. gada 2. marts",
+          "month_standalone": "marts 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "sv\u0113tdiena, 2021. gada 31. oktobris",
+          "month_standalone": "oktobris 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "otrdiena, 2024. gada 31. decembris",
+          "month_standalone": "decembris 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ms",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "d/MM/yyyy",
+      "long_date_pattern": "dddd, d MMMM yyyy",
+      "short_time_pattern": "h:mm\u202Ftt",
+      "long_time_pattern": "h:mm:ss\u202Ftt",
+      "am_designator": "PG",
+      "pm_designator": "PTG",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/01/2015",
+          "long": "Khamis, 1 Januari 2015",
+          "month_standalone": "Januari 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3/02/2015",
+          "long": "Selasa, 3 Februari 2015",
+          "month_standalone": "Februari 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "Selasa, 25 Januari 2022",
+          "month_standalone": "Januari 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "Sabtu, 29 Februari 2020",
+          "month_standalone": "Februari 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4/09/2015",
+          "long": "Jumaat, 4 September 2015",
+          "month_standalone": "September 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7/11/1979",
+          "long": "Rabu, 7 November 1979",
+          "month_standalone": "November 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2/03/2020",
+          "long": "Isnin, 2 Mac 2020",
+          "month_standalone": "Mac 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "Ahad, 31 Oktober 2021",
+          "month_standalone": "Oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "Selasa, 31 Disember 2024",
+          "month_standalone": "Disember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05\u202FPG",
+          "long": "1:05:00\u202FPG"
+        },
+        {
+          "ref": "13:23",
+          "short": "1:23\u202FPTG",
+          "long": "1:23:00\u202FPTG"
+        },
+        {
+          "ref": "13:25",
+          "short": "1:25\u202FPTG",
+          "long": "1:25:00\u202FPTG"
+        }
+      ]
+    },
+    {
+      "locale": "mt",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, d \u0027ta\u0027\u2019 MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "Il-\u0126amis, 1 ta\u2019 Jannar 2015",
+          "month_standalone": "Jannar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "It-Tlieta, 3 ta\u2019 Frar 2015",
+          "month_standalone": "Frar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "It-Tlieta, 25 ta\u2019 Jannar 2022",
+          "month_standalone": "Jannar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "Is-Sibt, 29 ta\u2019 Frar 2020",
+          "month_standalone": "Frar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "Il-\u0120img\u0127a, 4 ta\u2019 Settembru 2015",
+          "month_standalone": "Settembru 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "L-Erbg\u0127a, 7 ta\u2019 Novembru 1979",
+          "month_standalone": "Novembru 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "It-Tnejn, 2 ta\u2019 Marzu 2020",
+          "month_standalone": "Marzu 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "Il-\u0126add, 31 ta\u2019 Ottubru 2021",
+          "month_standalone": "Ottubru 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "It-Tlieta, 31 ta\u2019 Di\u010Bembru 2024",
+          "month_standalone": "Di\u010Bembru 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "nb",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "a.m.",
+      "pm_designator": "p.m.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "torsdag 1. januar 2015",
+          "month_standalone": "januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "tirsdag 3. februar 2015",
+          "month_standalone": "februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "tirsdag 25. januar 2022",
+          "month_standalone": "januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "l\u00F8rdag 29. februar 2020",
+          "month_standalone": "februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "fredag 4. september 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "onsdag 7. november 1979",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "mandag 2. mars 2020",
+          "month_standalone": "mars 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "s\u00F8ndag 31. oktober 2021",
+          "month_standalone": "oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "tirsdag 31. desember 2024",
+          "month_standalone": "desember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "nl",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d-M-yyyy",
+      "long_date_pattern": "dddd d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1-1-2015",
+          "long": "donderdag 1 januari 2015",
+          "month_standalone": "januari 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3-2-2015",
+          "long": "dinsdag 3 februari 2015",
+          "month_standalone": "februari 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25-1-2022",
+          "long": "dinsdag 25 januari 2022",
+          "month_standalone": "januari 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29-2-2020",
+          "long": "zaterdag 29 februari 2020",
+          "month_standalone": "februari 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4-9-2015",
+          "long": "vrijdag 4 september 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7-11-1979",
+          "long": "woensdag 7 november 1979",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2-3-2020",
+          "long": "maandag 2 maart 2020",
+          "month_standalone": "maart 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31-10-2021",
+          "long": "zondag 31 oktober 2021",
+          "month_standalone": "oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31-12-2024",
+          "long": "dinsdag 31 december 2024",
+          "month_standalone": "december 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "nn",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "f.m.",
+      "pm_designator": "e.m.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "torsdag 1. januar 2015",
+          "month_standalone": "januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "tysdag 3. februar 2015",
+          "month_standalone": "februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "tysdag 25. januar 2022",
+          "month_standalone": "januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "laurdag 29. februar 2020",
+          "month_standalone": "februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "fredag 4. september 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "onsdag 7. november 1979",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "m\u00E5ndag 2. mars 2020",
+          "month_standalone": "mars 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "s\u00F8ndag 31. oktober 2021",
+          "month_standalone": "oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "tysdag 31. desember 2024",
+          "month_standalone": "desember 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "pl",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.MM.yyyy",
+      "long_date_pattern": "dddd, d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.01.2015",
+          "long": "czwartek, 1 stycznia 2015",
+          "month_standalone": "stycze\u0144 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.02.2015",
+          "long": "wtorek, 3 lutego 2015",
+          "month_standalone": "luty 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "wtorek, 25 stycznia 2022",
+          "month_standalone": "stycze\u0144 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "sobota, 29 lutego 2020",
+          "month_standalone": "luty 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.09.2015",
+          "long": "pi\u0105tek, 4 wrze\u015Bnia 2015",
+          "month_standalone": "wrzesie\u0144 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979",
+          "long": "\u015Broda, 7 listopada 1979",
+          "month_standalone": "listopad 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.03.2020",
+          "long": "poniedzia\u0142ek, 2 marca 2020",
+          "month_standalone": "marzec 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "niedziela, 31 pa\u017Adziernika 2021",
+          "month_standalone": "pa\u017Adziernik 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "wtorek, 31 grudnia 2024",
+          "month_standalone": "grudzie\u0144 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "pt",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, d\u0027 de \u0027MMMM\u0027 de \u0027yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "quinta-feira, 1 de janeiro de 2015",
+          "month_standalone": "janeiro 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "ter\u00E7a-feira, 3 de fevereiro de 2015",
+          "month_standalone": "fevereiro 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "ter\u00E7a-feira, 25 de janeiro de 2022",
+          "month_standalone": "janeiro 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "s\u00E1bado, 29 de fevereiro de 2020",
+          "month_standalone": "fevereiro 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "sexta-feira, 4 de setembro de 2015",
+          "month_standalone": "setembro 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "quarta-feira, 7 de novembro de 1979",
+          "month_standalone": "novembro 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "segunda-feira, 2 de mar\u00E7o de 2020",
+          "month_standalone": "mar\u00E7o 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "domingo, 31 de outubro de 2021",
+          "month_standalone": "outubro 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "ter\u00E7a-feira, 31 de dezembro de 2024",
+          "month_standalone": "dezembro 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, d\u0027 de \u0027MMMM\u0027 de \u0027yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "quinta-feira, 1 de janeiro de 2015",
+          "month_standalone": "janeiro 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "ter\u00E7a-feira, 3 de fevereiro de 2015",
+          "month_standalone": "fevereiro 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "ter\u00E7a-feira, 25 de janeiro de 2022",
+          "month_standalone": "janeiro 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "s\u00E1bado, 29 de fevereiro de 2020",
+          "month_standalone": "fevereiro 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "sexta-feira, 4 de setembro de 2015",
+          "month_standalone": "setembro 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "quarta-feira, 7 de novembro de 1979",
+          "month_standalone": "novembro 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "segunda-feira, 2 de mar\u00E7o de 2020",
+          "month_standalone": "mar\u00E7o 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "domingo, 31 de outubro de 2021",
+          "month_standalone": "outubro 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "ter\u00E7a-feira, 31 de dezembro de 2024",
+          "month_standalone": "dezembro 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ro",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "dddd, d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "a.m.",
+      "pm_designator": "p.m.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "joi, 1 ianuarie 2015",
+          "month_standalone": "ianuarie 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "mar\u021Bi, 3 februarie 2015",
+          "month_standalone": "februarie 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "mar\u021Bi, 25 ianuarie 2022",
+          "month_standalone": "ianuarie 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "s\u00E2mb\u0103t\u0103, 29 februarie 2020",
+          "month_standalone": "februarie 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "vineri, 4 septembrie 2015",
+          "month_standalone": "septembrie 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "miercuri, 7 noiembrie 1979",
+          "month_standalone": "noiembrie 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "luni, 2 martie 2020",
+          "month_standalone": "martie 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "duminic\u0103, 31 octombrie 2021",
+          "month_standalone": "octombrie 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "mar\u021Bi, 31 decembrie 2024",
+          "month_standalone": "decembrie 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "d MMMM yyyy \u0027\u0433.\u0027",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "1 \u044F\u043D\u0432\u0430\u0440\u044F 2015 \u0433.",
+          "month_standalone": "\u042F\u043D\u0432\u0430\u0440\u044C 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "3 \u0444\u0435\u0432\u0440\u0430\u043B\u044F 2015 \u0433.",
+          "month_standalone": "\u0424\u0435\u0432\u0440\u0430\u043B\u044C 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "25 \u044F\u043D\u0432\u0430\u0440\u044F 2022 \u0433.",
+          "month_standalone": "\u042F\u043D\u0432\u0430\u0440\u044C 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "29 \u0444\u0435\u0432\u0440\u0430\u043B\u044F 2020 \u0433.",
+          "month_standalone": "\u0424\u0435\u0432\u0440\u0430\u043B\u044C 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "4 \u0441\u0435\u043D\u0442\u044F\u0431\u0440\u044F 2015 \u0433.",
+          "month_standalone": "\u0421\u0435\u043D\u0442\u044F\u0431\u0440\u044C 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "7 \u043D\u043E\u044F\u0431\u0440\u044F 1979 \u0433.",
+          "month_standalone": "\u041D\u043E\u044F\u0431\u0440\u044C 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "2 \u043C\u0430\u0440\u0442\u0430 2020 \u0433.",
+          "month_standalone": "\u041C\u0430\u0440\u0442 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "31 \u043E\u043A\u0442\u044F\u0431\u0440\u044F 2021 \u0433.",
+          "month_standalone": "\u041E\u043A\u0442\u044F\u0431\u0440\u044C 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "31 \u0434\u0435\u043A\u0430\u0431\u0440\u044F 2024 \u0433.",
+          "month_standalone": "\u0414\u0435\u043A\u0430\u0431\u0440\u044C 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "sk",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d. M. yyyy",
+      "long_date_pattern": "dddd d. MMMM yyyy",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1. 1. 2015",
+          "long": "\u0161tvrtok 1. janu\u00E1ra 2015",
+          "month_standalone": "janu\u00E1r 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3. 2. 2015",
+          "long": "utorok 3. febru\u00E1ra 2015",
+          "month_standalone": "febru\u00E1r 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25. 1. 2022",
+          "long": "utorok 25. janu\u00E1ra 2022",
+          "month_standalone": "janu\u00E1r 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29. 2. 2020",
+          "long": "sobota 29. febru\u00E1ra 2020",
+          "month_standalone": "febru\u00E1r 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4. 9. 2015",
+          "long": "piatok 4. septembra 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7. 11. 1979",
+          "long": "streda 7. novembra 1979",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2. 3. 2020",
+          "long": "pondelok 2. marca 2020",
+          "month_standalone": "marec 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31. 10. 2021",
+          "long": "nede\u013Ea 31. okt\u00F3bra 2021",
+          "month_standalone": "okt\u00F3ber 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31. 12. 2024",
+          "long": "utorok 31. decembra 2024",
+          "month_standalone": "december 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "sl",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d. MM. yyyy",
+      "long_date_pattern": "dddd, d. MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "dop.",
+      "pm_designator": "pop.",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1. 01. 2015",
+          "long": "\u010Detrtek, 1. januar 2015",
+          "month_standalone": "januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3. 02. 2015",
+          "long": "torek, 3. februar 2015",
+          "month_standalone": "februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25. 01. 2022",
+          "long": "torek, 25. januar 2022",
+          "month_standalone": "januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29. 02. 2020",
+          "long": "sobota, 29. februar 2020",
+          "month_standalone": "februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4. 09. 2015",
+          "long": "petek, 4. september 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7. 11. 1979",
+          "long": "sreda, 7. november 1979",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2. 03. 2020",
+          "long": "ponedeljek, 2. marec 2020",
+          "month_standalone": "marec 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31. 10. 2021",
+          "long": "nedelja, 31. oktober 2021",
+          "month_standalone": "oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31. 12. 2024",
+          "long": "torek, 31. december 2024",
+          "month_standalone": "december 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "sr",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.M.yyyy.",
+      "long_date_pattern": "dddd, d. MMMM yyyy.",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.1.2015.",
+          "long": "\u010Detvrtak, 1. januar 2015.",
+          "month_standalone": "januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.2.2015.",
+          "long": "utorak, 3. februar 2015.",
+          "month_standalone": "februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.1.2022.",
+          "long": "utorak, 25. januar 2022.",
+          "month_standalone": "januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.2.2020.",
+          "long": "subota, 29. februar 2020.",
+          "month_standalone": "februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.9.2015.",
+          "long": "petak, 4. septembar 2015.",
+          "month_standalone": "septembar 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979.",
+          "long": "sreda, 7. novembar 1979.",
+          "month_standalone": "novembar 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.3.2020.",
+          "long": "ponedeljak, 2. mart 2020.",
+          "month_standalone": "mart 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021.",
+          "long": "nedelja, 31. oktobar 2021.",
+          "month_standalone": "oktobar 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024.",
+          "long": "utorak, 31. decembar 2024.",
+          "month_standalone": "decembar 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "sr-Latn",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.M.yyyy.",
+      "long_date_pattern": "dddd, d. MMMM yyyy.",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.1.2015.",
+          "long": "\u010Detvrtak, 1. januar 2015.",
+          "month_standalone": "januar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.2.2015.",
+          "long": "utorak, 3. februar 2015.",
+          "month_standalone": "februar 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.1.2022.",
+          "long": "utorak, 25. januar 2022.",
+          "month_standalone": "januar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.2.2020.",
+          "long": "subota, 29. februar 2020.",
+          "month_standalone": "februar 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.9.2015.",
+          "long": "petak, 4. septembar 2015.",
+          "month_standalone": "septembar 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979.",
+          "long": "sreda, 7. novembar 1979.",
+          "month_standalone": "novembar 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.3.2020.",
+          "long": "ponedeljak, 2. mart 2020.",
+          "month_standalone": "mart 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021.",
+          "long": "nedelja, 31. oktobar 2021.",
+          "month_standalone": "oktobar 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024.",
+          "long": "utorak, 31. decembar 2024.",
+          "month_standalone": "decembar 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "sv",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "yyyy-MM-dd",
+      "long_date_pattern": "\u0027den \u0027d MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015-01-01",
+          "long": "den 1 januari 2015",
+          "month_standalone": "januari 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015-02-03",
+          "long": "den 3 februari 2015",
+          "month_standalone": "februari 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022-01-25",
+          "long": "den 25 januari 2022",
+          "month_standalone": "januari 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020-02-29",
+          "long": "den 29 februari 2020",
+          "month_standalone": "februari 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015-09-04",
+          "long": "den 4 september 2015",
+          "month_standalone": "september 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979-11-07",
+          "long": "den 7 november 1979",
+          "month_standalone": "november 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020-03-02",
+          "long": "den 2 mars 2020",
+          "month_standalone": "mars 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021-10-31",
+          "long": "den 31 oktober 2021",
+          "month_standalone": "oktober 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024-12-31",
+          "long": "den 31 december 2024",
+          "month_standalone": "december 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "ta",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "dd-MM-yyyy",
+      "long_date_pattern": "dd MMMM yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "\u0B95\u0BBE\u0BB2\u0BC8",
+      "pm_designator": "\u0BAE\u0BBE\u0BB2\u0BC8",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01-01-2015",
+          "long": "01 \u0B9C\u0BA9\u0BB5\u0BB0\u0BBF 2015",
+          "month_standalone": "\u0B9C\u0BA9\u0BB5\u0BB0\u0BBF 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03-02-2015",
+          "long": "03 \u0BAA\u0BBF\u0BAA\u0BCD\u0BB0\u0BB5\u0BB0\u0BBF 2015",
+          "month_standalone": "\u0BAA\u0BBF\u0BAA\u0BCD\u0BB0\u0BB5\u0BB0\u0BBF 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25-01-2022",
+          "long": "25 \u0B9C\u0BA9\u0BB5\u0BB0\u0BBF 2022",
+          "month_standalone": "\u0B9C\u0BA9\u0BB5\u0BB0\u0BBF 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29-02-2020",
+          "long": "29 \u0BAA\u0BBF\u0BAA\u0BCD\u0BB0\u0BB5\u0BB0\u0BBF 2020",
+          "month_standalone": "\u0BAA\u0BBF\u0BAA\u0BCD\u0BB0\u0BB5\u0BB0\u0BBF 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04-09-2015",
+          "long": "04 \u0B9A\u0BC6\u0BAA\u0BCD\u0B9F\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD 2015",
+          "month_standalone": "\u0B9A\u0BC6\u0BAA\u0BCD\u0B9F\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07-11-1979",
+          "long": "07 \u0BA8\u0BB5\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD 1979",
+          "month_standalone": "\u0BA8\u0BB5\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02-03-2020",
+          "long": "02 \u0BAE\u0BBE\u0BB0\u0BCD\u0B9A\u0BCD 2020",
+          "month_standalone": "\u0BAE\u0BBE\u0BB0\u0BCD\u0B9A\u0BCD 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31-10-2021",
+          "long": "31 \u0B85\u0B95\u0BCD\u0B9F\u0BCB\u0BAA\u0BB0\u0BCD 2021",
+          "month_standalone": "\u0B85\u0B95\u0BCD\u0B9F\u0BCB\u0BAA\u0BB0\u0BCD 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31-12-2024",
+          "long": "31 \u0B9F\u0BBF\u0B9A\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD 2024",
+          "month_standalone": "\u0B9F\u0BBF\u0B9A\u0BAE\u0BCD\u0BAA\u0BB0\u0BCD 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "th",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "d/M/yyyy",
+      "long_date_pattern": "d MMMM yyyy",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2558",
+          "long": "1 \u0E21\u0E01\u0E23\u0E32\u0E04\u0E21 2558",
+          "month_standalone": "\u0E21\u0E01\u0E23\u0E32\u0E04\u0E21 2558"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3/2/2558",
+          "long": "3 \u0E01\u0E38\u0E21\u0E20\u0E32\u0E1E\u0E31\u0E19\u0E18\u0E4C 2558",
+          "month_standalone": "\u0E01\u0E38\u0E21\u0E20\u0E32\u0E1E\u0E31\u0E19\u0E18\u0E4C 2558"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/1/2565",
+          "long": "25 \u0E21\u0E01\u0E23\u0E32\u0E04\u0E21 2565",
+          "month_standalone": "\u0E21\u0E01\u0E23\u0E32\u0E04\u0E21 2565"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/2/2563",
+          "long": "29 \u0E01\u0E38\u0E21\u0E20\u0E32\u0E1E\u0E31\u0E19\u0E18\u0E4C 2563",
+          "month_standalone": "\u0E01\u0E38\u0E21\u0E20\u0E32\u0E1E\u0E31\u0E19\u0E18\u0E4C 2563"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4/9/2558",
+          "long": "4 \u0E01\u0E31\u0E19\u0E22\u0E32\u0E22\u0E19 2558",
+          "month_standalone": "\u0E01\u0E31\u0E19\u0E22\u0E32\u0E22\u0E19 2558"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7/11/2522",
+          "long": "7 \u0E1E\u0E24\u0E28\u0E08\u0E34\u0E01\u0E32\u0E22\u0E19 2522",
+          "month_standalone": "\u0E1E\u0E24\u0E28\u0E08\u0E34\u0E01\u0E32\u0E22\u0E19 2522"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2/3/2563",
+          "long": "2 \u0E21\u0E35\u0E19\u0E32\u0E04\u0E21 2563",
+          "month_standalone": "\u0E21\u0E35\u0E19\u0E32\u0E04\u0E21 2563"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2564",
+          "long": "31 \u0E15\u0E38\u0E25\u0E32\u0E04\u0E21 2564",
+          "month_standalone": "\u0E15\u0E38\u0E25\u0E32\u0E04\u0E21 2564"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2567",
+          "long": "31 \u0E18\u0E31\u0E19\u0E27\u0E32\u0E04\u0E21 2567",
+          "month_standalone": "\u0E18\u0E31\u0E19\u0E27\u0E32\u0E04\u0E21 2567"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "tr",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "d.MM.yyyy",
+      "long_date_pattern": "d MMMM yyyy dddd",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "\u00D6\u00D6",
+      "pm_designator": "\u00D6S",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1.01.2015",
+          "long": "1 Ocak 2015 Per\u015Fembe",
+          "month_standalone": "Ocak 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3.02.2015",
+          "long": "3 \u015Eubat 2015 Sal\u0131",
+          "month_standalone": "\u015Eubat 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "25 Ocak 2022 Sal\u0131",
+          "month_standalone": "Ocak 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "29 \u015Eubat 2020 Cumartesi",
+          "month_standalone": "\u015Eubat 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4.09.2015",
+          "long": "4 Eyl\u00FCl 2015 Cuma",
+          "month_standalone": "Eyl\u00FCl 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7.11.1979",
+          "long": "7 Kas\u0131m 1979 \u00C7ar\u015Famba",
+          "month_standalone": "Kas\u0131m 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2.03.2020",
+          "long": "2 Mart 2020 Pazartesi",
+          "month_standalone": "Mart 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "31 Ekim 2021 Pazar",
+          "month_standalone": "Ekim 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "31 Aral\u0131k 2024 Sal\u0131",
+          "month_standalone": "Aral\u0131k 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "uk",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd.MM.yyyy",
+      "long_date_pattern": "d MMMM yyyy\u0027 \u0440.\u0027",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "",
+      "pm_designator": "",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01.01.2015",
+          "long": "1 \u0441\u0456\u0447\u043D\u044F 2015 \u0440.",
+          "month_standalone": "\u0441\u0456\u0447\u0435\u043D\u044C 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03.02.2015",
+          "long": "3 \u043B\u044E\u0442\u043E\u0433\u043E 2015 \u0440.",
+          "month_standalone": "\u043B\u044E\u0442\u0438\u0439 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25.01.2022",
+          "long": "25 \u0441\u0456\u0447\u043D\u044F 2022 \u0440.",
+          "month_standalone": "\u0441\u0456\u0447\u0435\u043D\u044C 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29.02.2020",
+          "long": "29 \u043B\u044E\u0442\u043E\u0433\u043E 2020 \u0440.",
+          "month_standalone": "\u043B\u044E\u0442\u0438\u0439 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04.09.2015",
+          "long": "4 \u0432\u0435\u0440\u0435\u0441\u043D\u044F 2015 \u0440.",
+          "month_standalone": "\u0432\u0435\u0440\u0435\u0441\u0435\u043D\u044C 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07.11.1979",
+          "long": "7 \u043B\u0438\u0441\u0442\u043E\u043F\u0430\u0434\u0430 1979 \u0440.",
+          "month_standalone": "\u043B\u0438\u0441\u0442\u043E\u043F\u0430\u0434 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02.03.2020",
+          "long": "2 \u0431\u0435\u0440\u0435\u0437\u043D\u044F 2020 \u0440.",
+          "month_standalone": "\u0431\u0435\u0440\u0435\u0437\u0435\u043D\u044C 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31.10.2021",
+          "long": "31 \u0436\u043E\u0432\u0442\u043D\u044F 2021 \u0440.",
+          "month_standalone": "\u0436\u043E\u0432\u0442\u0435\u043D\u044C 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31.12.2024",
+          "long": "31 \u0433\u0440\u0443\u0434\u043D\u044F 2024 \u0440.",
+          "month_standalone": "\u0433\u0440\u0443\u0434\u0435\u043D\u044C 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, dd MMMM, yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "\u0422\u041E",
+      "pm_designator": "\u0422\u041A",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "\u043F\u0430\u0439\u0448\u0430\u043D\u0431\u0430, 01 \u044F\u043D\u0432\u0430\u0440, 2015",
+          "month_standalone": "\u044F\u043D\u0432\u0430\u0440 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "\u0441\u0435\u0448\u0430\u043D\u0431\u0430, 03 \u0444\u0435\u0432\u0440\u0430\u043B, 2015",
+          "month_standalone": "\u0444\u0435\u0432\u0440\u0430\u043B 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "\u0441\u0435\u0448\u0430\u043D\u0431\u0430, 25 \u044F\u043D\u0432\u0430\u0440, 2022",
+          "month_standalone": "\u044F\u043D\u0432\u0430\u0440 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "\u0448\u0430\u043D\u0431\u0430, 29 \u0444\u0435\u0432\u0440\u0430\u043B, 2020",
+          "month_standalone": "\u0444\u0435\u0432\u0440\u0430\u043B 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "\u0436\u0443\u043C\u0430, 04 \u0441\u0435\u043D\u0442\u044F\u0431\u0440, 2015",
+          "month_standalone": "\u0441\u0435\u043D\u0442\u044F\u0431\u0440 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "\u0447\u043E\u0440\u0448\u0430\u043D\u0431\u0430, 07 \u043D\u043E\u044F\u0431\u0440, 1979",
+          "month_standalone": "\u043D\u043E\u044F\u0431\u0440 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "\u0434\u0443\u0448\u0430\u043D\u0431\u0430, 02 \u043C\u0430\u0440\u0442, 2020",
+          "month_standalone": "\u043C\u0430\u0440\u0442 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "\u044F\u043A\u0448\u0430\u043D\u0431\u0430, 31 \u043E\u043A\u0442\u044F\u0431\u0440, 2021",
+          "month_standalone": "\u043E\u043A\u0442\u044F\u0431\u0440 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "\u0441\u0435\u0448\u0430\u043D\u0431\u0430, 31 \u0434\u0435\u043A\u0430\u0431\u0440, 2024",
+          "month_standalone": "\u0434\u0435\u043A\u0430\u0431\u0440 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "uz-Latn-UZ",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dddd, d-MMMM, yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "TO",
+      "pm_designator": "TK",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "payshanba, 1-yanvar, 2015",
+          "month_standalone": "Yanvar 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "seshanba, 3-fevral, 2015",
+          "month_standalone": "Fevral 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "seshanba, 25-yanvar, 2022",
+          "month_standalone": "Yanvar 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "shanba, 29-fevral, 2020",
+          "month_standalone": "Fevral 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "juma, 4-sentabr, 2015",
+          "month_standalone": "Sentabr 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "chorshanba, 7-noyabr, 1979",
+          "month_standalone": "Noyabr 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "dushanba, 2-mart, 2020",
+          "month_standalone": "Mart 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "yakshanba, 31-oktabr, 2021",
+          "month_standalone": "Oktabr 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "seshanba, 31-dekabr, 2024",
+          "month_standalone": "Dekabr 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "vi",
+      "number_decimal_separator": ",",
+      "short_date_pattern": "dd/MM/yyyy",
+      "long_date_pattern": "dd MMMM yyyy",
+      "short_time_pattern": "h:mm tt",
+      "long_time_pattern": "h:mm:ss tt",
+      "am_designator": "SA",
+      "pm_designator": "CH",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "01/01/2015",
+          "long": "01 Tha\u0301ng Gi\u00EAng 2015",
+          "month_standalone": "Tha\u0301ng Gi\u00EAng 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "03/02/2015",
+          "long": "03 Tha\u0301ng Hai 2015",
+          "month_standalone": "Tha\u0301ng Hai 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/01/2022",
+          "long": "25 Tha\u0301ng Gi\u00EAng 2022",
+          "month_standalone": "Tha\u0301ng Gi\u00EAng 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/02/2020",
+          "long": "29 Tha\u0301ng Hai 2020",
+          "month_standalone": "Tha\u0301ng Hai 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "04/09/2015",
+          "long": "04 Tha\u0301ng Chi\u0301n 2015",
+          "month_standalone": "Tha\u0301ng Chi\u0301n 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "07/11/1979",
+          "long": "07 Tha\u0301ng M\u01B0\u01A1\u0300i M\u00F4\u0323t 1979",
+          "month_standalone": "Tha\u0301ng M\u01B0\u01A1\u0300i M\u00F4\u0323t 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "02/03/2020",
+          "long": "02 Tha\u0301ng Ba 2020",
+          "month_standalone": "Tha\u0301ng Ba 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "31 Tha\u0301ng M\u01B0\u01A1\u0300i 2021",
+          "month_standalone": "Tha\u0301ng M\u01B0\u01A1\u0300i 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "31 Tha\u0301ng M\u01B0\u01A1\u0300i Hai 2024",
+          "month_standalone": "Tha\u0301ng M\u01B0\u01A1\u0300i Hai 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05 SA",
+          "long": "1:05:00 SA"
+        },
+        {
+          "ref": "13:23",
+          "short": "1:23 CH",
+          "long": "1:23:00 CH"
+        },
+        {
+          "ref": "13:25",
+          "short": "1:25 CH",
+          "long": "1:25:00 CH"
+        }
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "yyyy/M/d",
+      "long_date_pattern": "yyyy\u0027\u5E74\u0027M\u0027\u6708\u0027d\u0027\u65E5\u0027",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "\u4E0A\u5348",
+      "pm_designator": "\u4E0B\u5348",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015/1/1",
+          "long": "2015\u5E741\u67081\u65E5",
+          "month_standalone": "\u4E00\u6708 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015/2/3",
+          "long": "2015\u5E742\u67083\u65E5",
+          "month_standalone": "\u4E8C\u6708 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022/1/25",
+          "long": "2022\u5E741\u670825\u65E5",
+          "month_standalone": "\u4E00\u6708 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020/2/29",
+          "long": "2020\u5E742\u670829\u65E5",
+          "month_standalone": "\u4E8C\u6708 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015/9/4",
+          "long": "2015\u5E749\u67084\u65E5",
+          "month_standalone": "\u4E5D\u6708 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979/11/7",
+          "long": "1979\u5E7411\u67087\u65E5",
+          "month_standalone": "\u5341\u4E00\u6708 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020/3/2",
+          "long": "2020\u5E743\u67082\u65E5",
+          "month_standalone": "\u4E09\u6708 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021/10/31",
+          "long": "2021\u5E7410\u670831\u65E5",
+          "month_standalone": "\u5341\u6708 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024/12/31",
+          "long": "2024\u5E7412\u670831\u65E5",
+          "month_standalone": "\u5341\u4E8C\u6708 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "yyyy/M/d",
+      "long_date_pattern": "yyyy\u0027\u5E74\u0027M\u0027\u6708\u0027d\u0027\u65E5\u0027",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "\u4E0A\u5348",
+      "pm_designator": "\u4E0B\u5348",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "2015/1/1",
+          "long": "2015\u5E741\u67081\u65E5",
+          "month_standalone": "\u4E00\u6708 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2015/2/3",
+          "long": "2015\u5E742\u67083\u65E5",
+          "month_standalone": "\u4E8C\u6708 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "2022/1/25",
+          "long": "2022\u5E741\u670825\u65E5",
+          "month_standalone": "\u4E00\u6708 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2020/2/29",
+          "long": "2020\u5E742\u670829\u65E5",
+          "month_standalone": "\u4E8C\u6708 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "2015/9/4",
+          "long": "2015\u5E749\u67084\u65E5",
+          "month_standalone": "\u4E5D\u6708 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "1979/11/7",
+          "long": "1979\u5E7411\u67087\u65E5",
+          "month_standalone": "\u5341\u4E00\u6708 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2020/3/2",
+          "long": "2020\u5E743\u67082\u65E5",
+          "month_standalone": "\u4E09\u6708 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "2021/10/31",
+          "long": "2021\u5E7410\u670831\u65E5",
+          "month_standalone": "\u5341\u6708 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "2024/12/31",
+          "long": "2024\u5E7412\u670831\u65E5",
+          "month_standalone": "\u5341\u4E8C\u6708 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "d/M/yyyy",
+      "long_date_pattern": "yyyy\u0027\u5E74\u0027M\u0027\u6708\u0027d\u0027\u65E5\u0027",
+      "short_time_pattern": "H:mm",
+      "long_time_pattern": "H:mm:ss",
+      "am_designator": "\u4E0A\u5348",
+      "pm_designator": "\u4E0B\u5348",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "2015\u5E741\u67081\u65E5",
+          "month_standalone": "\u4E00\u6708 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "3/2/2015",
+          "long": "2015\u5E742\u67083\u65E5",
+          "month_standalone": "\u4E8C\u6708 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "25/1/2022",
+          "long": "2022\u5E741\u670825\u65E5",
+          "month_standalone": "\u4E00\u6708 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "29/2/2020",
+          "long": "2020\u5E742\u670829\u65E5",
+          "month_standalone": "\u4E8C\u6708 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "4/9/2015",
+          "long": "2015\u5E749\u67084\u65E5",
+          "month_standalone": "\u4E5D\u6708 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "7/11/1979",
+          "long": "1979\u5E7411\u67087\u65E5",
+          "month_standalone": "\u5341\u4E00\u6708 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "2/3/2020",
+          "long": "2020\u5E743\u67082\u65E5",
+          "month_standalone": "\u4E09\u6708 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "31/10/2021",
+          "long": "2021\u5E7410\u670831\u65E5",
+          "month_standalone": "\u5341\u6708 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "31/12/2024",
+          "long": "2024\u5E7412\u670831\u65E5",
+          "month_standalone": "\u5341\u4E8C\u6708 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "1:05",
+          "long": "1:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    },
+    {
+      "locale": "zu-ZA",
+      "number_decimal_separator": ".",
+      "short_date_pattern": "M/d/yyyy",
+      "long_date_pattern": "dddd, MMMM d, yyyy",
+      "short_time_pattern": "HH:mm",
+      "long_time_pattern": "HH:mm:ss",
+      "am_designator": "AM",
+      "pm_designator": "PM",
+      "dates": [
+        {
+          "ref": "2015-01-01",
+          "short": "1/1/2015",
+          "long": "ULwesine, Januwari 1, 2015",
+          "month_standalone": "Januwari 2015"
+        },
+        {
+          "ref": "2015-02-03",
+          "short": "2/3/2015",
+          "long": "ULwesibili, Februwari 3, 2015",
+          "month_standalone": "Februwari 2015"
+        },
+        {
+          "ref": "2022-01-25",
+          "short": "1/25/2022",
+          "long": "ULwesibili, Januwari 25, 2022",
+          "month_standalone": "Januwari 2022"
+        },
+        {
+          "ref": "2020-02-29",
+          "short": "2/29/2020",
+          "long": "UMgqibelo, Februwari 29, 2020",
+          "month_standalone": "Februwari 2020"
+        },
+        {
+          "ref": "2015-09-04",
+          "short": "9/4/2015",
+          "long": "ULwesihlanu, Septhemba 4, 2015",
+          "month_standalone": "Septhemba 2015"
+        },
+        {
+          "ref": "1979-11-07",
+          "short": "11/7/1979",
+          "long": "ULwesithathu, Novemba 7, 1979",
+          "month_standalone": "Novemba 1979"
+        },
+        {
+          "ref": "2020-03-02",
+          "short": "3/2/2020",
+          "long": "UMsombuluko, Mashi 2, 2020",
+          "month_standalone": "Mashi 2020"
+        },
+        {
+          "ref": "2021-10-31",
+          "short": "10/31/2021",
+          "long": "ISonto, Okthoba 31, 2021",
+          "month_standalone": "Okthoba 2021"
+        },
+        {
+          "ref": "2024-12-31",
+          "short": "12/31/2024",
+          "long": "ULwesibili, Disemba 31, 2024",
+          "month_standalone": "Disemba 2024"
+        }
+      ],
+      "times": [
+        {
+          "ref": "01:05",
+          "short": "01:05",
+          "long": "01:05:00"
+        },
+        {
+          "ref": "13:23",
+          "short": "13:23",
+          "long": "13:23:00"
+        },
+        {
+          "ref": "13:25",
+          "short": "13:25",
+          "long": "13:25:00"
+        }
+      ]
+    }
+  ]
+}

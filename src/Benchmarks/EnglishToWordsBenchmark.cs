@@ -1,13 +1,13 @@
 [MemoryDiagnoser]
 public class EnglishToWordsBenchmark
 {
-    readonly EnglishNumberToWordsConverter converter = new();
+    readonly CultureInfo culture = new("en-US");
 
     [Benchmark]
     public string ToWords() =>
-        converter.Convert(int.MaxValue);
+        int.MaxValue.ToWords(culture);
 
     [Benchmark]
     public string ToWordsOrdinal() =>
-        converter.ConvertToOrdinal(int.MaxValue);
+        int.MaxValue.ToOrdinalWords(culture);
 }

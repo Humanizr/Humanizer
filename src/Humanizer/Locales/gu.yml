@@ -1,0 +1,700 @@
+locale: 'gu'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'અને'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'હમણાં'
+      never: 'ક્યારેય નહીં'
+      past:
+        millisecond:
+          single: 'એક મિલિસેકંડ પહેલાં'
+          multiple:
+            forms:
+              default: 'મિલિસેકંડ'
+            afterCount: 'પહેલાં'
+        second:
+          single: 'એક સેકંડ પહેલાં'
+          multiple:
+            forms:
+              default: 'સેકંડ'
+            afterCount: 'પહેલાં'
+        minute:
+          single: 'એક મિનિટ પહેલાં'
+          multiple:
+            forms:
+              default: 'મિનિટ'
+            afterCount: 'પહેલાં'
+        hour:
+          single: 'એક કલાક પહેલાં'
+          multiple:
+            forms:
+              default: 'કલાક'
+            afterCount: 'પહેલાં'
+        day:
+          single: 'ગઈકાલે'
+          multiple:
+            forms:
+              default: 'દિવસ'
+            afterCount: 'પહેલાં'
+        week:
+          single: 'એક અઠવાડિયા પહેલાં'
+          multiple:
+            forms:
+              default: 'અઠવાડિયા'
+            afterCount: 'પહેલાં'
+        month:
+          single: 'એક મહિના પહેલાં'
+          multiple:
+            forms:
+              default: 'મહિના'
+            afterCount: 'પહેલાં'
+        year:
+          single: 'એક વર્ષ પહેલાં'
+          multiple:
+            forms:
+              default: 'વર્ષ'
+            afterCount: 'પહેલાં'
+      future:
+        millisecond:
+          single: 'એક મિલિસેકંડમાં'
+          multiple:
+            forms:
+              default: 'મિલિસેકંડ'
+            template: '{count} મિલિસેકંડમાં'
+        second:
+          single: 'એક સેકંડમાં'
+          multiple:
+            forms:
+              default: 'સેકંડ'
+            template: '{count} સેકંડમાં'
+        minute:
+          single: 'એક મિનિટમાં'
+          multiple:
+            forms:
+              default: 'મિનિટ'
+            template: '{count} મિનિટમાં'
+        hour:
+          single: 'એક કલાકમાં'
+          multiple:
+            forms:
+              default: 'કલાક'
+            template: '{count} કલાકમાં'
+        day:
+          single: 'આવતીકાલે'
+          multiple:
+            forms:
+              default: 'દિવસ'
+            template: '{count} દિવસમાં'
+        week:
+          single: 'એક અઠવાડિયામાં'
+          multiple:
+            forms:
+              default: 'અઠવાડિયા'
+            template: '{count} અઠવાડિયામાં'
+        month:
+          single: 'એક મહિનામાં'
+          multiple:
+            forms:
+              default: 'મહિના'
+            template: '{count} મહિનામાં'
+        year:
+          single: 'એક વર્ષમાં'
+          multiple:
+            forms:
+              default: 'વર્ષ'
+            template: '{count} વર્ષમાં'
+    duration:
+      zero: 'હમણાં'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 મિલિસેકંડ'
+          words: 'એક મિલિસેકંડ'
+        multiple:
+          forms:
+            default: 'મિલિસેકંડ'
+            singular: 'મિલિસેકંડ'
+      second:
+        single:
+          numeric: '1 સેકંડ'
+          words: 'એક સેકંડ'
+        multiple:
+          forms:
+            default: 'સેકંડ'
+            singular: 'સેકંડ'
+      minute:
+        single:
+          numeric: '1 મિનિટ'
+          words: 'એક મિનિટ'
+        multiple:
+          forms:
+            default: 'મિનિટ'
+            singular: 'મિનિટ'
+      hour:
+        single:
+          numeric: '1 કલાક'
+          words: 'એક કલાક'
+        multiple:
+          forms:
+            default: 'કલાક'
+            singular: 'કલાક'
+      day:
+        single:
+          numeric: '1 દિવસ'
+          words: 'એક દિવસ'
+        multiple:
+          forms:
+            default: 'દિવસ'
+            singular: 'દિવસ'
+      week:
+        single:
+          numeric: '1 અઠવાડિયું'
+          words: 'એક અઠવાડિયું'
+        multiple:
+          forms:
+            default: 'અઠવાડિયા'
+            singular: 'અઠવાડિયું'
+      month:
+        single:
+          numeric: '1 મહિનો'
+          words: 'એક મહિનો'
+        multiple:
+          forms:
+            default: 'મહિના'
+            singular: 'મહિનો'
+      year:
+        single:
+          numeric: '1 વર્ષ'
+          words: 'એક વર્ષ'
+        multiple:
+          forms:
+            default: 'વર્ષ'
+            singular: 'વર્ષ'
+    dataUnits:
+      bit:
+        forms:
+          default: 'બિટ'
+          singular: 'બિટ'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'બાઇટ'
+          singular: 'બાઇટ'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'કિલોબાઇટ'
+          singular: 'કિલોબાઇટ'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'મેગાબાઇટ'
+          singular: 'મેગાબાઇટ'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'ગીગાબાઇટ'
+          singular: 'ગીગાબાઇટ'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ટેરાબાઇટ'
+          singular: 'ટેરાબાઇટ'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'મિલિસેકંડ'
+      second:
+        symbol: 'સેકંડ'
+      minute:
+        symbol: 'મિનિટ'
+      hour:
+        symbol: 'કલાક'
+      day:
+        symbol: 'દિવસ'
+      week:
+        symbol: 'અઠવાડિયું'
+      month:
+        symbol: 'મહિનો'
+      year:
+        symbol: 'વર્ષ'
+
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'શૂન્ય'
+      minusWord: 'નકારાત્મક'
+      negativeJoinWord: ' '
+      joinWord: ' '
+      scaleCountJoinWord: ' '
+      underHundredJoinWord: ''
+      hundredsMap:
+        - 'શૂન્ય'
+        - 'એકસો'
+        - 'બસો'
+        - 'ત્રણસો'
+        - 'ચારસો'
+        - 'પાંચસો'
+        - 'છસો'
+        - 'સાતસો'
+        - 'આઠસો'
+        - 'નવસો'
+      subHundredMap:
+        - 'શૂન્ય'
+        - 'એક'
+        - 'બે'
+        - 'ત્રણ'
+        - 'ચાર'
+        - 'પાંચ'
+        - 'છ'
+        - 'સાત'
+        - 'આઠ'
+        - 'નવ'
+        - 'દસ'
+        - 'અગિયાર'
+        - 'બાર'
+        - 'તેર'
+        - 'ચૌદ'
+        - 'પંદર'
+        - 'સોળ'
+        - 'સત્તર'
+        - 'અઢાર'
+        - 'ઓગણીસ'
+        - 'વીસ'
+        - 'એકવીસ'
+        - 'બાવીસ'
+        - 'તેવીસ'
+        - 'ચોવીસ'
+        - 'પચ્ચીસ'
+        - 'છવીસ'
+        - 'સત્તાવીસ'
+        - 'અઠ્ઠાવીસ'
+        - 'ઓગણત્રીસ'
+        - 'ત્રીસ'
+        - 'એકત્રીસ'
+        - 'બત્રીસ'
+        - 'તેત્રીસ'
+        - 'ચોત્રીસ'
+        - 'પાંત્રીસ'
+        - 'છત્રીસ'
+        - 'સડત્રીસ'
+        - 'આડત્રીસ'
+        - 'ઓગણચાલીસ'
+        - 'ચાલીસ'
+        - 'એકતાલીસ'
+        - 'બેતાલીસ'
+        - 'તેતાલીસ'
+        - 'ચુંમાલીસ'
+        - 'પિસ્તાલીસ'
+        - 'છેતાલીસ'
+        - 'સુડતાલીસ'
+        - 'અડતાલીસ'
+        - 'ઓગણપચાસ'
+        - 'પચાસ'
+        - 'એકાવન'
+        - 'બાવન'
+        - 'ત્રેપન'
+        - 'ચોપન'
+        - 'પંચાવન'
+        - 'છપ્પન'
+        - 'સત્તાવન'
+        - 'અઠ્ઠાવન'
+        - 'ઓગણસાઠ'
+        - 'સાઠ'
+        - 'એકસઠ'
+        - 'બાસઠ'
+        - 'ત્રેસઠ'
+        - 'ચોસઠ'
+        - 'પાંસઠ'
+        - 'છાસઠ'
+        - 'સડસઠ'
+        - 'અડસઠ'
+        - 'ઓગણસિત્તેર'
+        - 'સિત્તેર'
+        - 'એકોતેર'
+        - 'બોતેર'
+        - 'તોતેર'
+        - 'ચુમોતેર'
+        - 'પંચોતેર'
+        - 'છોતેર'
+        - 'સિત્યોતેર'
+        - 'અઠ્યોતેર'
+        - 'ઓગણએંસી'
+        - 'એંસી'
+        - 'એક્યાસી'
+        - 'બ્યાસી'
+        - 'ત્યાસી'
+        - 'ચોર્યાસી'
+        - 'પંચાસી'
+        - 'છ્યાસી'
+        - 'સિત્યાસી'
+        - 'અઠ્યાસી'
+        - 'નેવ્યાસી'
+        - 'નેવું'
+        - 'એકાણું'
+        - 'બાણું'
+        - 'ત્રાણું'
+        - 'ચોરાણું'
+        - 'પંચાણું'
+        - 'છન્નું'
+        - 'સત્તાણું'
+        - 'અઠ્ઠાણું'
+        - 'નવાણું'
+      scales:
+        -
+          value: 100000000000000000
+          name: 'શંખ'
+        -
+          value: 1000000000000000
+          name: 'પદ્મ'
+        -
+          value: 10000000000000
+          name: 'નીલ'
+        -
+          value: 100000000000
+          name: 'ખરબ'
+        -
+          value: 1000000000
+          name: 'અબજ'
+        -
+          value: 10000000
+          name: 'કરોડ'
+        -
+          value: 100000
+          name: 'લાખ'
+        -
+          value: 1000
+          name: 'હજાર'
+      ordinal:
+        masculine:
+          defaultSuffix: 'મો'
+          exactReplacements:
+            0: 'શૂન્યમો'
+            1: 'પહેલો'
+            2: 'બીજો'
+            3: 'ત્રીજો'
+            4: 'ચોથો'
+            5: 'પાંચમો'
+            6: 'છઠ્ઠો'
+        feminine:
+          defaultSuffix: 'મી'
+          exactReplacements:
+            0: 'શૂન્યમી'
+            1: 'પહેલી'
+            2: 'બીજી'
+            3: 'ત્રીજી'
+            4: 'ચોથી'
+            5: 'પાંચમી'
+            6: 'છઠ્ઠી'
+        neuter:
+          defaultSuffix: 'મું'
+          exactReplacements:
+            0: 'શૂન્યમું'
+            1: 'પહેલું'
+            2: 'બીજું'
+            3: 'ત્રીજું'
+            4: 'ચોથું'
+            5: 'પાંચમું'
+            6: 'છઠ્ઠું'
+        neuterFallback: 'masculine'
+
+    formatting:
+      decimalSeparator: '.'
+      groupSeparator: ','
+      negativeSign: '-'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'all'
+      useHundredMultiplier: true
+      tokenSuffixesToStrip:
+        - 'મો'
+        - 'મી'
+        - 'મું'
+      cardinalMap:
+        'શૂન્ય': 0
+        'એક': 1
+        'બે': 2
+        'ત્રણ': 3
+        'ચાર': 4
+        'પાંચ': 5
+        'છ': 6
+        'સાત': 7
+        'આઠ': 8
+        'નવ': 9
+        'દસ': 10
+        'અગિયાર': 11
+        'બાર': 12
+        'તેર': 13
+        'ચૌદ': 14
+        'પંદર': 15
+        'સોળ': 16
+        'સત્તર': 17
+        'અઢાર': 18
+        'ઓગણીસ': 19
+        'વીસ': 20
+        'એકવીસ': 21
+        'બાવીસ': 22
+        'તેવીસ': 23
+        'ચોવીસ': 24
+        'પચ્ચીસ': 25
+        'છવીસ': 26
+        'સત્તાવીસ': 27
+        'અઠ્ઠાવીસ': 28
+        'ઓગણત્રીસ': 29
+        'ત્રીસ': 30
+        'એકત્રીસ': 31
+        'બત્રીસ': 32
+        'તેત્રીસ': 33
+        'ચોત્રીસ': 34
+        'પાંત્રીસ': 35
+        'છત્રીસ': 36
+        'સડત્રીસ': 37
+        'આડત્રીસ': 38
+        'ઓગણચાલીસ': 39
+        'ચાલીસ': 40
+        'એકતાલીસ': 41
+        'બેતાલીસ': 42
+        'તેતાલીસ': 43
+        'ચુંમાલીસ': 44
+        'પિસ્તાલીસ': 45
+        'છેતાલીસ': 46
+        'સુડતાલીસ': 47
+        'અડતાલીસ': 48
+        'ઓગણપચાસ': 49
+        'પચાસ': 50
+        'એકાવન': 51
+        'બાવન': 52
+        'ત્રેપન': 53
+        'ચોપન': 54
+        'પંચાવન': 55
+        'છપ્પન': 56
+        'સત્તાવન': 57
+        'અઠ્ઠાવન': 58
+        'ઓગણસાઠ': 59
+        'સાઠ': 60
+        'એકસઠ': 61
+        'બાસઠ': 62
+        'ત્રેસઠ': 63
+        'ચોસઠ': 64
+        'પાંસઠ': 65
+        'છાસઠ': 66
+        'સડસઠ': 67
+        'અડસઠ': 68
+        'ઓગણસિત્તેર': 69
+        'સિત્તેર': 70
+        'એકોતેર': 71
+        'બોતેર': 72
+        'તોતેર': 73
+        'ચુમોતેર': 74
+        'પંચોતેર': 75
+        'છોતેર': 76
+        'સિત્યોતેર': 77
+        'અઠ્યોતેર': 78
+        'ઓગણએંસી': 79
+        'એંસી': 80
+        'એક્યાસી': 81
+        'બ્યાસી': 82
+        'ત્યાસી': 83
+        'ચોર્યાસી': 84
+        'પંચાસી': 85
+        'છ્યાસી': 86
+        'સિત્યાસી': 87
+        'અઠ્યાસી': 88
+        'નેવ્યાસી': 89
+        'નેવું': 90
+        'એકાણું': 91
+        'બાણું': 92
+        'ત્રાણું': 93
+        'ચોરાણું': 94
+        'પંચાણું': 95
+        'છન્નું': 96
+        'સત્તાણું': 97
+        'અઠ્ઠાણું': 98
+        'નવાણું': 99
+        'સો': 100
+        'એકસો': 100
+        'બસો': 200
+        'ત્રણસો': 300
+        'ચારસો': 400
+        'પાંચસો': 500
+        'છસો': 600
+        'સાતસો': 700
+        'આઠસો': 800
+        'નવસો': 900
+        'હજાર': 1000
+        'લાખ': 100000
+        'કરોડ': 10000000
+        'અબજ': 1000000000
+        'ખરબ': 100000000000
+        'નીલ': 10000000000000
+        'પદ્મ': 1000000000000000
+        'શંખ': 100000000000000000
+      ordinalMap:
+        'શૂન્યમો': 0
+        'શૂન્યમી': 0
+        'શૂન્યમું': 0
+        'પહેલો': 1
+        'પહેલી': 1
+        'પહેલું': 1
+        'બીજો': 2
+        'બીજી': 2
+        'બીજું': 2
+        'ત્રીજો': 3
+        'ત્રીજી': 3
+        'ત્રીજું': 3
+        'ચોથો': 4
+        'ચોથી': 4
+        'ચોથું': 4
+        'પાંચમો': 5
+        'પાંચમી': 5
+        'પાંચમું': 5
+        'છઠ્ઠો': 6
+        'છઠ્ઠી': 6
+        'છઠ્ઠું': 6
+        'એકવીસમો': 21
+        'એકવીસમી': 21
+        'એકવીસમું': 21
+      negativePrefixes:
+        - 'નકારાત્મક'
+        - 'માઇનસ'
+        - 'ઋણાત્મક'
+
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      useCulture: true
+      masculine:
+        defaultSuffix: 'મો'
+        exactReplacements:
+          0: 'શૂન્યમો'
+          1: 'પહેલો'
+          2: 'બીજો'
+          3: 'ત્રીજો'
+          4: 'ચોથો'
+          5: 'પાંચમો'
+          6: 'છઠ્ઠો'
+      feminine:
+        defaultSuffix: 'મી'
+        exactReplacements:
+          0: 'શૂન્યમી'
+          1: 'પહેલી'
+          2: 'બીજી'
+          3: 'ત્રીજી'
+          4: 'ચોથી'
+          5: 'પાંચમી'
+          6: 'છઠ્ઠી'
+      neuter:
+        defaultSuffix: 'મું'
+        exactReplacements:
+          0: 'શૂન્યમું'
+          1: 'પહેલું'
+          2: 'બીજું'
+          3: 'ત્રીજું'
+          4: 'ચોથું'
+          5: 'પાંચમું'
+          6: 'છઠ્ઠું'
+      neuterFallback: 'masculine'
+    date:
+      pattern: '{day} MMMM, yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+    dateOnly:
+      pattern: '{day} MMMM, yyyy'
+      dayMode: 'Numeric'
+      calendarMode: 'Native'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourGender: 'masculine'
+    minuteGender: 'masculine'
+    hourWordsMap:
+      - ''
+      - 'એક'
+      - 'બે'
+      - 'ત્રણ'
+      - 'ચાર'
+      - 'પાંચ'
+      - 'છ'
+      - 'સાત'
+      - 'આઠ'
+      - 'નવ'
+      - 'દસ'
+      - 'અગિયાર'
+      - 'બાર'
+    min0: '{hour} વાગ્યે'
+    defaultTemplate: '{hour} વાગીને {minutes} મિનિટ'
+    earlyMorning: 'સવારે'
+    morning: 'સવારે'
+    afternoon: 'બપોરે'
+    evening: 'સાંજે'
+    night: 'રાત્રે'
+    eveningStartHour: 17
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'ઉત્તર'
+      - 'ઉત્તર-ઉત્તર-પૂર્વ'
+      - 'ઉત્તર-પૂર્વ'
+      - 'પૂર્વ-ઉત્તર-પૂર્વ'
+      - 'પૂર્વ'
+      - 'પૂર્વ-દક્ષિણ-પૂર્વ'
+      - 'દક્ષિણ-પૂર્વ'
+      - 'દક્ષિણ-દક્ષિણ-પૂર્વ'
+      - 'દક્ષિણ'
+      - 'દક્ષિણ-દક્ષિણ-પશ્ચિમ'
+      - 'દક્ષિણ-પશ્ચિમ'
+      - 'પશ્ચિમ-દક્ષિણ-પશ્ચિમ'
+      - 'પશ્ચિમ'
+      - 'પશ્ચિમ-ઉત્તર-પશ્ચિમ'
+      - 'ઉત્તર-પશ્ચિમ'
+      - 'ઉત્તર-ઉત્તર-પશ્ચિમ'
+    short:
+      - 'ઉ'
+      - 'ઉ-ઉ-પૂ'
+      - 'ઉ-પૂ'
+      - 'પૂ-ઉ-પૂ'
+      - 'પૂ'
+      - 'પૂ-દ-પૂ'
+      - 'દ-પૂ'
+      - 'દ-દ-પૂ'
+      - 'દ'
+      - 'દ-દ-પ'
+      - 'દ-પ'
+      - 'પ-દ-પ'
+      - 'પ'
+      - 'પ-ઉ-પ'
+      - 'ઉ-પ'
+      - 'ઉ-ઉ-પ'
+
+  calendar:
+    months:
+      - 'જાન્યુઆરી'
+      - 'ફેબ્રુઆરી'
+      - 'માર્ચ'
+      - 'એપ્રિલ'
+      - 'મે'
+      - 'જૂન'
+      - 'જુલાઈ'
+      - 'ઑગસ્ટ'
+      - 'સપ્ટેમ્બર'
+      - 'ઑક્ટોબર'
+      - 'નવેમ્બર'
+      - 'ડિસેમ્બર'

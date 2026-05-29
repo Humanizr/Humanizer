@@ -32,7 +32,7 @@ jobs:
       - name: Run DevSkim scanner
         uses: microsoft/DevSkim-Action@v1
         with:
-          options-json: .github/workflows/.devskim.json
+          ignore-globs: "**/.git/**,**/bin/**,**/obj/**,**/nuget.config,.flow/**"
     
       - name: Upload DevSkim scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3

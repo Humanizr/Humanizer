@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Transform a time unit into a symbol; e.g. <see cref="TimeUnit.Year"/> => "a"

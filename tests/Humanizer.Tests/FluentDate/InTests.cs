@@ -1,4 +1,4 @@
-﻿public class InTests
+public class InTests
 {
     [Fact]
     public void InJanuary() =>

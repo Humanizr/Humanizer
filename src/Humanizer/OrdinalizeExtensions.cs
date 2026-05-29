@@ -1,16 +1,18 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Ordinalize extensions
 /// </summary>
 public static class OrdinalizeExtensions
 {
+    static readonly ConcurrentDictionary<string, OrdinalNumberFormatting> OrdinalNumberFormattingCache = new(StringComparer.OrdinalIgnoreCase);
+
     /// <summary>
     /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
     /// </summary>
     /// <param name="numberString">The number, in string, to be ordinalized</param>
     public static string Ordinalize(this string numberString) =>
-        Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString);
+        Configurator.Ordinalizer.Convert(int.Parse(numberString), NormalizeOrdinalNumberString(numberString));
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations.
@@ -26,15 +28,18 @@ public static class OrdinalizeExtensions
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
     public static string Ordinalize(this string numberString, WordForm wordForm) =>
-        Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString, wordForm);
+        Configurator.Ordinalizer.Convert(int.Parse(numberString), NormalizeOrdinalNumberString(numberString), wordForm);
 
     /// <summary>
     /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
     /// </summary>
     /// <param name="numberString">The number, in string, to be ordinalized</param>
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    public static string Ordinalize(this string numberString, CultureInfo culture) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString);
+    public static string Ordinalize(this string numberString, CultureInfo culture)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(ParseOrdinalNumber(numberString, resolvedCulture), NormalizeOrdinalNumberString(numberString));
+    }
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations.
@@ -50,8 +55,11 @@ public static class OrdinalizeExtensions
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
-    public static string Ordinalize(this string numberString, CultureInfo culture, WordForm wordForm) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString, wordForm);
+    public static string Ordinalize(this string numberString, CultureInfo culture, WordForm wordForm)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(ParseOrdinalNumber(numberString, resolvedCulture), NormalizeOrdinalNumberString(numberString), wordForm);
+    }
 
     /// <summary>
     /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
@@ -62,7 +70,7 @@ public static class OrdinalizeExtensions
     /// <param name="numberString">The number, in string, to be ordinalized</param>
     /// <param name="gender">The grammatical gender to use for output words</param>
     public static string Ordinalize(this string numberString, GrammaticalGender gender) =>
-        Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString, gender);
+        Configurator.Ordinalizer.Convert(int.Parse(numberString), NormalizeOrdinalNumberString(numberString), gender);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific
@@ -81,7 +89,7 @@ public static class OrdinalizeExtensions
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
     public static string Ordinalize(this string numberString, GrammaticalGender gender, WordForm wordForm) =>
-        Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString, gender, wordForm);
+        Configurator.Ordinalizer.Convert(int.Parse(numberString), NormalizeOrdinalNumberString(numberString), gender, wordForm);
 
     /// <summary>
     /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
@@ -92,8 +100,11 @@ public static class OrdinalizeExtensions
     /// <param name="numberString">The number, in string, to be ordinalized</param>
     /// <param name="gender">The grammatical gender to use for output words</param>
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    public static string Ordinalize(this string numberString, GrammaticalGender gender, CultureInfo culture) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString, gender);
+    public static string Ordinalize(this string numberString, GrammaticalGender gender, CultureInfo culture)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(ParseOrdinalNumber(numberString, resolvedCulture), NormalizeOrdinalNumberString(numberString), gender);
+    }
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific
@@ -112,15 +123,18 @@ public static class OrdinalizeExtensions
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
-    public static string Ordinalize(this string numberString, GrammaticalGender gender, CultureInfo culture, WordForm wordForm) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString, gender, wordForm);
+    public static string Ordinalize(this string numberString, GrammaticalGender gender, CultureInfo culture, WordForm wordForm)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(ParseOrdinalNumber(numberString, resolvedCulture), NormalizeOrdinalNumberString(numberString), gender, wordForm);
+    }
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
     /// </summary>
     /// <param name="number">The number to be ordinalized</param>
     public static string Ordinalize(this int number) =>
-        Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture));
+        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)));
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations.
@@ -136,15 +150,18 @@ public static class OrdinalizeExtensions
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
     public static string Ordinalize(this int number, WordForm wordForm) =>
-        Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), wordForm);
+        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)), wordForm);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
     /// </summary>
     /// <param name="number">The number to be ordinalized</param>
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    public static string Ordinalize(this int number, CultureInfo culture) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, number.ToString(culture));
+    public static string Ordinalize(this int number, CultureInfo culture)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)));
+    }
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations.
@@ -160,8 +177,11 @@ public static class OrdinalizeExtensions
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
-    public static string Ordinalize(this int number, CultureInfo culture, WordForm wordForm) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, number.ToString(culture), wordForm);
+    public static string Ordinalize(this int number, CultureInfo culture, WordForm wordForm)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), wordForm);
+    }
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
@@ -172,7 +192,7 @@ public static class OrdinalizeExtensions
     /// <param name="number">The number to be ordinalized</param>
     /// <param name="gender">The grammatical gender to use for output words</param>
     public static string Ordinalize(this int number, GrammaticalGender gender) =>
-        Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
+        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)), gender);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific
@@ -191,7 +211,7 @@ public static class OrdinalizeExtensions
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
     public static string Ordinalize(this int number, GrammaticalGender gender, WordForm wordForm) =>
-        Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender, wordForm);
+        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)), gender, wordForm);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
@@ -202,8 +222,11 @@ public static class OrdinalizeExtensions
     /// <param name="number">The number to be ordinalized</param>
     /// <param name="gender">The grammatical gender to use for output words</param>
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, number.ToString(culture), gender);
+    public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), gender);
+    }
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific
@@ -222,6 +245,108 @@ public static class OrdinalizeExtensions
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
-    public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture, WordForm wordForm) =>
-        Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, number.ToString(culture), gender, wordForm);
+    public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture, WordForm wordForm)
+    {
+        var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), gender, wordForm);
+    }
+
+    static string FormatOrdinalNumberString(int number, CultureInfo culture)
+    {
+        if (number >= 0)
+        {
+            var positiveFormatting = GetDefaultOrdinalNumberFormatting(culture);
+            return positiveFormatting.UsesInvariantDigits
+                ? number.ToString(CultureInfo.InvariantCulture)
+                : number.ToString(positiveFormatting.NumberFormat);
+        }
+
+        var formatting = GetOrdinalNumberFormatting(culture);
+        if (formatting.NumberFormat.NegativeSign == NumberFormatInfo.InvariantInfo.NegativeSign &&
+            formatting.UsesInvariantDigits &&
+            formatting.NumberFormat.NumberNegativePattern == NumberFormatInfo.InvariantInfo.NumberNegativePattern)
+        {
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+
+        return number.ToString(formatting.NumberFormat);
+    }
+
+    static OrdinalNumberFormatting GetDefaultOrdinalNumberFormatting(CultureInfo culture)
+    {
+        if (string.IsNullOrEmpty(culture.Name))
+        {
+            return CreateOrdinalNumberFormatting(culture);
+        }
+
+        return OrdinalNumberFormattingCache.GetOrAdd(culture.Name, static cultureName =>
+            CreateOrdinalNumberFormatting(CultureInfo.GetCultureInfo(cultureName)));
+    }
+
+    static OrdinalNumberFormatting GetOrdinalNumberFormatting(CultureInfo culture)
+    {
+        if (string.IsNullOrEmpty(culture.Name))
+        {
+            return CreateOrdinalNumberFormatting(culture);
+        }
+
+        var formatting = GetDefaultOrdinalNumberFormatting(culture);
+        if (culture.NumberFormat.NegativeSign == formatting.CultureNegativeSign)
+        {
+            return formatting;
+        }
+
+        return CreateOrdinalNumberFormatting(culture);
+    }
+
+    static OrdinalNumberFormatting CreateOrdinalNumberFormatting(CultureInfo culture)
+    {
+        var cultureNegativeSign = culture.NumberFormat.NegativeSign;
+        var numberFormat = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
+        return new(numberFormat, cultureNegativeSign, UsesInvariantDigits(numberFormat));
+    }
+
+    static bool UsesInvariantDigits(NumberFormatInfo formattingNumberFormat)
+    {
+        var nativeDigits = formattingNumberFormat.NativeDigits;
+        return nativeDigits.Length == 10 &&
+               nativeDigits[0] == "0" &&
+               nativeDigits[1] == "1" &&
+               nativeDigits[2] == "2" &&
+               nativeDigits[3] == "3" &&
+               nativeDigits[4] == "4" &&
+               nativeDigits[5] == "5" &&
+               nativeDigits[6] == "6" &&
+               nativeDigits[7] == "7" &&
+               nativeDigits[8] == "8" &&
+               nativeDigits[9] == "9";
+    }
+
+    readonly record struct OrdinalNumberFormatting(
+        NumberFormatInfo NumberFormat,
+        string CultureNegativeSign,
+        bool UsesInvariantDigits);
+
+    static int ParseOrdinalNumber(string numberString, CultureInfo culture) =>
+        int.Parse(numberString, culture);
+
+    static string NormalizeOrdinalNumberString(string numberString)
+    {
+        var builder = default(System.Text.StringBuilder);
+
+        for (var i = 0; i < numberString.Length; i++)
+        {
+            var character = numberString[i];
+            if (char.GetUnicodeCategory(character) != UnicodeCategory.Format)
+            {
+                builder?.Append(character);
+                continue;
+            }
+
+            builder ??= new System.Text.StringBuilder(numberString.Length);
+            builder.Append(numberString, 0, i);
+        }
+
+        return builder?.ToString() ?? numberString;
+    }
 }

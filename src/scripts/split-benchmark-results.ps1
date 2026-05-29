@@ -7,8 +7,8 @@ param(
 # Keys are substrings or regexes you expect in the runtime name.
 # Left to right match wins. Add or reorder as needed.
 $TfmMap = @(
+  @{ Pattern = '^\.NET\s+11(\.0)?$';   Tfm = 'net11.0' }
   @{ Pattern = '^\.NET\s+10(\.0)?$';   Tfm = 'net10.0' }
-  @{ Pattern = '^\.NET\s+8(\.0)?$';    Tfm = 'net8.0'  }
   @{ Pattern = '^\.NET\s+Framework\s*4\.8$'; Tfm = 'net48'   }
 )
 $DefaultTfm = 'unknown'

@@ -1,4 +1,4 @@
-﻿public class ArithmeticTests
+public class ArithmeticTests
 {
     [Fact]
     public void Add()

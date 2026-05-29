@@ -1,0 +1,398 @@
+locale: 'pt-BR'
+variantOf: 'pt'
+
+surfaces:
+  phrases:
+    relativeDate:
+      now: 'agora'
+      never: 'nunca'
+      past:
+        millisecond:
+          single: 'um milissegundo atrás'
+          multiple:
+            forms:
+              default: 'milissegundos'
+            beforeCount: ''
+            afterCount: 'atrás'
+        second:
+          single: 'um segundo atrás'
+          multiple:
+            forms:
+              default: 'segundos'
+              singular: 'segundo'
+            beforeCount: ''
+            afterCount: 'atrás'
+        minute:
+          single: 'um minuto atrás'
+          multiple:
+            forms:
+              default: 'minutos'
+              singular: 'minuto'
+            beforeCount: ''
+            afterCount: 'atrás'
+        hour:
+          single: 'uma hora atrás'
+          multiple:
+            forms:
+              default: 'horas'
+              singular: 'hora'
+            beforeCount: ''
+            afterCount: 'atrás'
+        day:
+          single: 'ontem'
+          multiple:
+            forms:
+              default: 'dias'
+              singular: 'dia'
+            beforeCount: ''
+            afterCount: 'atrás'
+          template:
+            name: 'two'
+            value: '2 dias atrás'
+        week:
+          single: 'uma semana atrás'
+          multiple:
+            forms:
+              default: 'semanas'
+            beforeCount: ''
+            afterCount: 'atrás'
+        month:
+          single: 'um mês atrás'
+          multiple:
+            forms:
+              default: 'meses'
+              singular: 'mês'
+            beforeCount: ''
+            afterCount: 'atrás'
+        year:
+          single: 'um ano atrás'
+          multiple:
+            forms:
+              default: 'anos'
+              singular: 'ano'
+            beforeCount: ''
+            afterCount: 'atrás'
+      future:
+        millisecond:
+          single: 'em um milissegundo'
+          multiple:
+            forms:
+              default: 'milissegundos'
+            beforeCount: 'em'
+        second:
+          single: 'em um segundo'
+          multiple:
+            forms:
+              default: 'segundos'
+              singular: 'segundo'
+            beforeCount: 'em'
+        minute:
+          single: 'em um minuto'
+          multiple:
+            forms:
+              default: 'minutos'
+              singular: 'minuto'
+            beforeCount: 'em'
+        hour:
+          single: 'em uma hora'
+          multiple:
+            forms:
+              default: 'horas'
+              singular: 'hora'
+            beforeCount: 'em'
+        day:
+          single: 'amanhã'
+          multiple:
+            forms:
+              default: 'dias'
+              singular: 'dia'
+            beforeCount: 'em'
+          template:
+            name: 'two'
+            value: 'em 2 dias'
+        week:
+          single: 'em uma semana'
+          multiple:
+            forms:
+              default: 'semanas'
+            beforeCount: 'em'
+        month:
+          single: 'em um mês'
+          multiple:
+            forms:
+              default: 'meses'
+              singular: 'mês'
+            beforeCount: 'em'
+        year:
+          single: 'em um ano'
+          multiple:
+            forms:
+              default: 'anos'
+              singular: 'ano'
+            beforeCount: 'em'
+    duration:
+      zero: 'sem tempo'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milissegundo'
+          words: 'um milissegundo'
+        multiple:
+          forms:
+            default: 'milissegundos'
+            singular: 'milissegundo'
+      second:
+        single:
+          numeric: '1 segundo'
+          words: 'um segundo'
+        multiple:
+          forms:
+            default: 'segundos'
+            singular: 'segundo'
+      minute:
+        single:
+          numeric: '1 minuto'
+          words: 'um minuto'
+        multiple:
+          forms:
+            default: 'minutos'
+            singular: 'minuto'
+      hour:
+        single:
+          numeric: '1 hora'
+          words: 'uma hora'
+        multiple:
+          forms:
+            default: 'horas'
+            singular: 'hora'
+      day:
+        single:
+          numeric: '1 dia'
+          words: 'um dia'
+        multiple:
+          forms:
+            default: 'dias'
+            singular: 'dia'
+      week:
+        single:
+          numeric: '1 semana'
+          words: 'uma semana'
+        multiple:
+          forms:
+            default: 'semanas'
+            singular: 'semana'
+      month:
+        single:
+          numeric: '1 mês'
+          words: 'um mês'
+        multiple:
+          forms:
+            default: 'meses'
+            singular: 'mês'
+      year:
+        single:
+          numeric: '1 ano'
+          words: 'um ano'
+        multiple:
+          forms:
+            default: 'anos'
+            singular: 'ano'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'bit'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'd'
+      week:
+        symbol: 'semana'
+      month:
+        symbol: 'm'
+      year:
+        symbol: 'a'
+
+  number:
+    words:
+      engine: 'billion-strategy'
+      minusWord: 'menos'
+      andWord: 'e'
+      cardinal:
+        hundredExactWord: 'cem'
+        thousandWord: 'mil'
+        millionSingularWord: 'milhão'
+        millionPluralWord: 'milhões'
+        billionStrategy: 'billion-word'
+        billionSingularWord: 'bilhão'
+        billionPluralWord: 'bilhões'
+        unitsMap:
+          - 'zero'
+          - 'um'
+          - 'dois'
+          - 'três'
+          - 'quatro'
+          - 'cinco'
+          - 'seis'
+          - 'sete'
+          - 'oito'
+          - 'nove'
+          - 'dez'
+          - 'onze'
+          - 'doze'
+          - 'treze'
+          - 'quatorze'
+          - 'quinze'
+          - 'dezesseis'
+          - 'dezessete'
+          - 'dezoito'
+          - 'dezenove'
+        tensMap:
+          - 'zero'
+          - 'dez'
+          - 'vinte'
+          - 'trinta'
+          - 'quarenta'
+          - 'cinquenta'
+          - 'sessenta'
+          - 'setenta'
+          - 'oitenta'
+          - 'noventa'
+        hundredsMap:
+          - 'zero'
+          - 'cento'
+          - 'duzentos'
+          - 'trezentos'
+          - 'quatrocentos'
+          - 'quinhentos'
+          - 'seiscentos'
+          - 'setecentos'
+          - 'oitocentos'
+          - 'novecentos'
+      ordinal:
+        billionStrategy: 'billion-word'
+        thousandWord: 'milésimo'
+        millionWord: 'milionésimo'
+        billionWord: 'bilionésimo'
+        millionJoinMode: 'compact'
+        unitsMap:
+          - 'zero'
+          - 'primeiro'
+          - 'segundo'
+          - 'terceiro'
+          - 'quarto'
+          - 'quinto'
+          - 'sexto'
+          - 'sétimo'
+          - 'oitavo'
+          - 'nono'
+        tensMap:
+          - 'zero'
+          - 'décimo'
+          - 'vigésimo'
+          - 'trigésimo'
+          - 'quadragésimo'
+          - 'quinquagésimo'
+          - 'sexagésimo'
+          - 'septuagésimo'
+          - 'octogésimo'
+          - 'nonagésimo'
+        hundredsMap:
+          - 'zero'
+          - 'centésimo'
+          - 'ducentésimo'
+          - 'trecentésimo'
+          - 'quadringentésimo'
+          - 'quingentésimo'
+          - 'sexcentésimo'
+          - 'septingentésimo'
+          - 'octingentésimo'
+          - 'noningentésimo'
+
+  ordinal:
+    date:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'MasculineOrdinalWhenDayIsOne'
+    dateOnly:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'MasculineOrdinalWhenDayIsOne'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
+    midnight: 'meia-noite'
+    midday: 'meio-dia'
+    min0: '{hour} em ponto'
+    min15: '{hour} e quinze'
+    min30: '{hour} e meia'
+    min40: 'vinte para as {nextHour}'
+    min45: 'quinze para as {nextHour}'
+    min50: 'dez para as {nextHour}'
+    min55: 'cinco para as {nextHour}'
+    defaultTemplate: '{hour} e {minutes}'
+
+  compass:
+    full:
+      - 'norte'
+      - 'norte-nordeste'
+      - 'nordeste'
+      - 'leste-nordeste'
+      - 'leste'
+      - 'leste-sudeste'
+      - 'sudeste'
+      - 'sul-sudeste'
+      - 'sul'
+      - 'sul-sudoeste'
+      - 'sudoeste'
+      - 'oeste-sudoeste'
+      - 'oeste'
+      - 'oeste-noroeste'
+      - 'noroeste'
+      - 'norte-noroeste'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'LNE'
+      - 'L'
+      - 'LSE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSO'
+      - 'SO'
+      - 'OSO'
+      - 'O'
+      - 'ONO'
+      - 'NO'
+      - 'NNO'

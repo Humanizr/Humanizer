@@ -1,0 +1,435 @@
+locale: 'ta'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'மற்றும்'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'இப்போது'
+      never: 'ஒருபோதும் இல்லை'
+      past:
+        millisecond:
+          single: '1 மில்லிவிநாடி முன்'
+          multiple:
+            forms:
+              default: 'மில்லிவிநாடிகள்'
+            afterCount: 'முன்'
+        second:
+          single: '1 வினாடி முன்'
+          multiple:
+            forms:
+              default: 'வினாடிகள்'
+            afterCount: 'முன்'
+        minute:
+          single: '1 நிமிடம் முன்'
+          multiple:
+            forms:
+              default: 'நிமிடங்கள்'
+            afterCount: 'முன்'
+        hour:
+          single: '1 மணி முன்'
+          multiple:
+            forms:
+              default: 'மணிகள்'
+            afterCount: 'முன்'
+        day:
+          single: 'நேற்று'
+          multiple:
+            forms:
+              default: 'நாட்கள்'
+            afterCount: 'முன்'
+        week:
+          single: '1 வாரம் முன்'
+          multiple:
+            forms:
+              default: 'வாரங்கள்'
+            afterCount: 'முன்'
+        month:
+          single: '1 மாதம் முன்'
+          multiple:
+            forms:
+              default: 'மாதங்கள்'
+            afterCount: 'முன்'
+        year:
+          single: '1 ஆண்டு முன்'
+          multiple:
+            forms:
+              default: 'ஆண்டுகள்'
+            afterCount: 'முன்'
+      future:
+        millisecond:
+          single: '1 மில்லிவிநாடி'
+          multiple:
+            forms:
+              default: 'மில்லிவிநாடிகளில்'
+        second:
+          single: '1 வினாடி'
+          multiple:
+            forms:
+              default: 'வினாடிகளில்'
+        minute:
+          single: '1 நிமிடம்'
+          multiple:
+            forms:
+              default: 'நிமிடங்களில்'
+        hour:
+          single: '1 மணி'
+          multiple:
+            forms:
+              default: 'மணிகளில்'
+        day:
+          single: 'நாளை'
+          multiple:
+            forms:
+              default: 'நாட்களில்'
+        week:
+          single: '1 வாரம்'
+          multiple:
+            forms:
+              default: 'வாரங்களில்'
+        month:
+          single: '1 மாதம்'
+          multiple:
+            forms:
+              default: 'மாதங்களில்'
+        year:
+          single: '1 ஆண்டு'
+          multiple:
+            forms:
+              default: 'ஆண்டுகளில்'
+    duration:
+      zero: 'நேரமில்லை'
+      age:
+        template: '{value} வயது'
+      millisecond:
+        single:
+          numeric: '1 மில்லிவிநாடி'
+          words: 'ஒரு மில்லிவிநாடி'
+        multiple:
+          forms:
+            default: 'மில்லிவிநாடிகள்'
+            singular: 'மில்லிவிநாடி'
+      second:
+        single:
+          numeric: '1 வினாடி'
+          words: 'ஒரு வினாடி'
+        multiple:
+          forms:
+            default: 'வினாடிகள்'
+            singular: 'வினாடி'
+      minute:
+        single:
+          numeric: '1 நிமிடம்'
+          words: 'ஒரு நிமிடம்'
+        multiple:
+          forms:
+            default: 'நிமிடங்கள்'
+            singular: 'நிமிடம்'
+      hour:
+        single:
+          numeric: '1 மணி'
+          words: 'ஒரு மணி'
+        multiple:
+          forms:
+            default: 'மணிகள்'
+            singular: 'மணி'
+      day:
+        single:
+          numeric: '1 நாள்'
+          words: 'ஒரு நாள்'
+        multiple:
+          forms:
+            default: 'நாட்கள்'
+            singular: 'நாள்'
+      week:
+        single:
+          numeric: '1 வாரம்'
+          words: 'ஒரு வாரம்'
+        multiple:
+          forms:
+            default: 'வாரங்கள்'
+            singular: 'வாரம்'
+      month:
+        single:
+          numeric: '1 மாதம்'
+          words: 'ஒரு மாதம்'
+        multiple:
+          forms:
+            default: 'மாதங்கள்'
+            singular: 'மாதம்'
+      year:
+        single:
+          numeric: '1 ஆண்டு'
+          words: 'ஒரு ஆண்டு'
+        multiple:
+          forms:
+            default: 'ஆண்டுகள்'
+            singular: 'ஆண்டு'
+    dataUnits:
+      bit:
+        forms:
+          default: 'பிட்கள்'
+          singular: 'பிட்'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'பைட்கள்'
+          singular: 'பைட்'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'கிலோபைட்கள்'
+          singular: 'கிலோபைட்'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'மெகாபைட்கள்'
+          singular: 'மெகாபைட்'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'கிகாபைட்கள்'
+          singular: 'கிகாபைட்'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'டெராபைட்கள்'
+          singular: 'டெராபைட்'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'மில்லிவிநாடி'
+      second:
+        symbol: 'விநாடி'
+      minute:
+        symbol: 'நிமிடம்'
+      hour:
+        symbol: 'மணி'
+      day:
+        symbol: 'நாள்'
+      week:
+        symbol: 'வாரம்'
+      month:
+        symbol: 'மாதம்'
+      year:
+        symbol: 'ஆண்டு'
+
+  number:
+    words:
+      engine: 'indian-grouping'
+      zeroWord: 'சுழியம்'
+      negativeWord: 'கழித்தல்'
+      ordinalSuffix: 'வது'
+      quintillionWord: 'அர்த்தம்'
+      quadrillionWord: 'சங்கம்'
+      lakhWord: 'இலட்ச'
+      singleLakhWord: 'ஒரு'
+      croreWord: 'கோடி'
+      defaultTensWithRemainderSuffix: 'த்து '
+      specialTensWithRemainderSuffix: 'த்தி '
+      nineTensWithRemainderSuffix: 'ற்றி '
+      exactTensDefaultSuffix: 'து'
+      exactTensNineSuffix: 'று'
+      exactThousandsDefaultSuffix: 'தா'
+      exactThousandsNineSuffix: 'றா'
+      thousandContinuingSuffix: 'யிரத்து'
+      thousandExactSuffix: 'யிரம்'
+      thousandsOneBridge: 'ஓரா'
+      lakhContinuingSuffix: 'த்து'
+      lakhExactSuffix: 'ம்'
+      croreContinuingSuffix: 'யே'
+      hundredsContinuingSuffix: 'ற்று'
+      hundredsExactSuffix: 'று'
+      hundredsNineContinuingSuffix: 'த்து'
+      hundredsNineExactSuffix: 'ம்'
+      unitsMap:
+        - 'சுழியம்'
+        - 'ஒன்று'
+        - 'இரண்டு'
+        - 'மூன்று'
+        - 'நான்கு'
+        - 'ஐந்து'
+        - 'ஆறு'
+        - 'ஏழு'
+        - 'எட்டு'
+        - 'ஒன்பது'
+        - 'பத்து'
+        - 'பதினொன்று'
+        - 'பனிரெண்டு'
+        - 'பதிமூன்று'
+        - 'பதினான்கு'
+        - 'பதினைந்து'
+        - 'பதினாறு'
+        - 'பதினேழு'
+        - 'பதினெட்டு'
+        - 'பத்தொன்பது'
+      tensMap:
+        - 'சுழியம்'
+        - 'பத்து'
+        - 'இருப'
+        - 'முப்ப'
+        - 'நாற்ப'
+        - 'ஐம்ப'
+        - 'அறுப'
+        - 'எழுப'
+        - 'எண்ப'
+        - 'தொண்ணூ'
+      hundredsMap:
+        - 'நூ'
+        - 'இருநூ'
+        - 'முன்னூ'
+        - 'நானூ'
+        - 'ஐந்நூ'
+        - 'அறுநூ'
+        - 'எழுநூ'
+        - 'எண்ணூ'
+        - 'தொள்ளாயிர'
+      thousandsMap:
+        - 'ஆ'
+        - 'இரண்டா'
+        - 'மூன்றா'
+        - 'நான்கா'
+        - 'ஐந்தா'
+        - 'ஆறா'
+        - 'ஏழா'
+        - 'எட்டா'
+        - 'ஒன்பதா'
+        - 'பத்தா'
+        - 'பதினொன்றா'
+        - 'பனிரெண்டா'
+        - 'பதிமூன்றா'
+        - 'பதினான்கா'
+        - 'பதினைந்தா'
+        - 'பதினாறா'
+        - 'பதினேழா'
+        - 'பதினெட்டா'
+        - 'பத்தொன்பதா'
+      ordinalExceptions:
+        1: 'முதலாவது'
+        2: 'இரண்டாவது'
+        3: 'மூன்றாவது'
+        4: 'நான்காவது'
+        5: 'ஐந்தாவது'
+        8: 'எட்டாவது'
+        9: 'ஒன்பதாவது'
+        12: 'பனிரெண்டாவது'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      cardinalMap:
+        'சுழியம்': 0
+        'ஒன்று': 1
+        'ஒரு': 1
+        'இருபத்து ஒன்று': 21
+        'இரண்டு': 2
+        'மூன்று': 3
+        'நான்கு': 4
+        'ஐந்து': 5
+        'ஆறு': 6
+        'ஏழு': 7
+        'எட்டு': 8
+        'ஒன்பது': 9
+        'பத்து': 10
+        'பதினெட்டு': 18
+        'நூறு': 100
+        'நூற்று': 100
+        'இலட்சம்': 100000
+        'இலட்சத்து': 100000
+        'கோடியே': 10000000
+        'ஆயிரம்': 1000
+        'ஆயிரத்து': 1000
+        'கோடி': 10000000
+        'சங்கம்': 1000000000000000
+        'அர்த்தம்': 1000000000000000000
+        'ஒன்று சங்கம்': 1000000000000000
+        'ஒன்று அர்த்தம்': 1000000000000000000
+        'நூறு கோடியே பத்து இலட்சத்து ஒன்று': 1001000001
+        'ஒரு கோடியே ஏழாயிரத்து பதினெட்டு': 4325010007018
+      negativePrefixes:
+        - 'கழித்தல் '
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: 'வது'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    dayPeriodPosition: 'prefix'
+    hourOneWord: 'ஒரு மணி'
+    hourSuffixSingular: 'மணி'
+    hourSuffixPlural: 'மணி'
+    minuteSuffixSingular: 'நிமிடம்'
+    minuteSuffixPlural: 'நிமிடம்'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+    earlyMorning: 'அதிகாலை'
+    morning: 'காலை'
+    afternoon: 'பிற்பகல்'
+    night: 'இரவு'
+
+  compass:
+    full:
+      - 'வடக்கு'
+      - 'வட-வடகிழக்கு'
+      - 'வடகிழக்கு'
+      - 'கிழக்கு-வடகிழக்கு'
+      - 'கிழக்கு'
+      - 'கிழக்கு-தென்கிழக்கு'
+      - 'தென்கிழக்கு'
+      - 'தென்-தென்கிழக்கு'
+      - 'தெற்கு'
+      - 'தென்-தென்மேற்கு'
+      - 'தென்மேற்கு'
+      - 'மேற்கு-தென்மேற்கு'
+      - 'மேற்கு'
+      - 'மேற்கு-வடமேற்கு'
+      - 'வடமேற்கு'
+      - 'வட-வடமேற்கு'
+    short:
+      - 'வடக்கு'
+      - 'வட-வடகிழக்கு'
+      - 'வடகிழக்கு'
+      - 'கிழக்கு-வடகிழக்கு'
+      - 'கிழக்கு'
+      - 'கிழக்கு-தென்கிழக்கு'
+      - 'தென்கிழக்கு'
+      - 'தென்-தென்கிழக்கு'
+      - 'தெற்கு'
+      - 'தென்-தென்மேற்கு'
+      - 'தென்மேற்கு'
+      - 'மேற்கு-தென்மேற்கு'
+      - 'மேற்கு'
+      - 'மேற்கு-வடமேற்கு'
+      - 'வடமேற்கு'
+      - 'வட-வடமேற்கு'
+
+  calendar:
+    months:
+      - 'ஜனவரி'
+      - 'பிப்ரவரி'
+      - 'மார்ச்'
+      - 'ஏப்ரல்'
+      - 'மே'
+      - 'ஜூன்'
+      - 'ஜூலை'
+      - 'ஆகஸ்ட்'
+      - 'செப்டம்பர்'
+      - 'அக்டோபர்'
+      - 'நவம்பர்'
+      - 'டிசம்பர்'

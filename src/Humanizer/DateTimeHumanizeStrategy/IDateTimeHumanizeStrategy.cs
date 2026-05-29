@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Implement this interface to create a new strategy for DateTime.Humanize and hook it in the Configurator.DateTimeHumanizeStrategy

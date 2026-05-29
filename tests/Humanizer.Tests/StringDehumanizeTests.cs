@@ -1,4 +1,4 @@
-﻿public class StringDehumanizeTests
+public class StringDehumanizeTests
 {
     [Theory]
     [InlineData("", "")]

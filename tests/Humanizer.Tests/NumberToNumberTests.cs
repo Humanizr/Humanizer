@@ -1,4 +1,4 @@
-﻿public class NumberToNumberTests
+public class NumberToNumberTests
 {
     [Fact]
     public void IntToTens()

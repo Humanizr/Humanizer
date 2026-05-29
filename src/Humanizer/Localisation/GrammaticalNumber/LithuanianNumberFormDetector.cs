@@ -1,23 +1,31 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
+/// <summary>
+/// Detects the Lithuanian grammatical number form for a numeric value.
+/// </summary>
 static class LithuanianNumberFormDetector
 {
+    /// <summary>
+    /// Returns the grammatical number form required for the given <paramref name="number"/>.
+    /// </summary>
+    /// <returns>The Lithuanian grammatical number form.</returns>
     public static LithuanianNumberForm Detect(long number)
     {
         var tens = number % 100 / 10;
         var units = number % 10;
 
-        if (tens == 1 || units == 0) // 10-19, 20, 30, 40 ... 100, 110 ..
+        // Teens and round tens use the genitive plural form, even though the final digit might
+        // otherwise map to the singular or plural buckets.
+        if (tens == 1 || units == 0)
         {
             return LithuanianNumberForm.GenitivePlural;
         }
 
-        if (units == 1) // 1, 21, 31, 41 ... 91, 101, 121 ...
+        if (units == 1)
         {
             return LithuanianNumberForm.Singular;
         }
 
-        // 2-9, 22-29, 32 ...
         return LithuanianNumberForm.Plural;
     }
 }

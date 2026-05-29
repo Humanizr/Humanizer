@@ -52,7 +52,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 
 ## Advanced Topics
 
-- [Localization](localization.md) - Multi-language support
+- [Localization](localization.md) - Multi-language support, YAML locale data, and inheritance
 - [Custom Vocabularies](custom-vocabularies.md) - Add custom pluralization rules
 - [Extensibility](extensibility.md) - Implement custom transformers and truncators
 - [Configuration](configuration.md) - Customize Humanizer behavior

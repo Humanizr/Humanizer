@@ -1,7 +1,9 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
-/// Transform a number into words; e.g. 1 => one
+/// Converts numbers to localized words and ordinals.
+/// The output is culture-aware, including locale-specific high-range scale names and
+/// English-family differences such as <c>en</c>, <c>en-GB</c>, and <c>en-IN</c>.
 /// </summary>
 public static class NumberToWordsExtension
 {
@@ -9,9 +11,11 @@ public static class NumberToWordsExtension
     /// 1.ToOrdinalWords() -> "first"
     /// </summary>
     /// <param name="number">Number to be turned to ordinal words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     public static string ToOrdinalWords(this int number, CultureInfo? culture = null) =>
-        Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number);
+        number == 1 && TryGetNativeFirstOrdinalWord(culture, null) is { } firstOrdinalWord
+            ? firstOrdinalWord
+            : Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number);
 
     /// <summary>
     /// Converts a number to ordinal words supporting locale's specific variations.
@@ -25,7 +29,7 @@ public static class NumberToWordsExtension
     /// </example>
     /// <param name="number">Number to be turned to ordinal words</param>
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     /// <returns>The number converted into ordinal words</returns>
     public static string ToOrdinalWords(this int number, WordForm wordForm, CultureInfo? culture = null) =>
         Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, wordForm);
@@ -37,9 +41,11 @@ public static class NumberToWordsExtension
     /// </summary>
     /// <param name="number">Number to be turned to words</param>
     /// <param name="gender">The grammatical gender to use for output words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     public static string ToOrdinalWords(this int number, GrammaticalGender gender, CultureInfo? culture = null) =>
-        Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
+        number == 1 && TryGetNativeFirstOrdinalWord(culture, gender) is { } firstOrdinalWord
+            ? firstOrdinalWord
+            : Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
 
     /// <summary>
     /// Converts a number to ordinal words supporting locale's specific variations.
@@ -56,29 +62,32 @@ public static class NumberToWordsExtension
     /// <param name="number">Number to be turned to ordinal words</param>
     /// <param name="gender">The grammatical gender to use for output words</param>
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     /// <returns>The number converted into ordinal words</returns>
     public static string ToOrdinalWords(this int number, GrammaticalGender gender, WordForm wordForm, CultureInfo? culture = null) =>
-        Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender, wordForm);
+        number == 1 && TryGetNativeFirstOrdinalWord(culture, gender) is { } firstOrdinalWord
+            ? firstOrdinalWord
+            : Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender, wordForm);
 
     /// <summary>
     /// 1.ToTuple() -> "single"
     /// </summary>
     /// <param name="number">Number to be turned to tuple</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     public static string ToTuple(this int number, CultureInfo? culture = null) =>
         Configurator.GetNumberToWordsConverter(culture).ConvertToTuple(number);
 
     /// <summary>
-    /// 3501.ToWords() -> "three thousand five hundred and one"
+    /// Converts the given value to localized cardinal words.
     /// </summary>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this int number, CultureInfo? culture = null) =>
         ((long)number).ToWords(culture);
 
     /// <summary>
-    /// Converts a number to words supporting specific word variations, including grammatical gender, of some locales.
+    /// Converts the given value to localized cardinal words using both word form and grammatical gender.
     /// </summary>
     /// <example>
     /// In Spanish, numbers ended in 1 change its form depending on their position in the sentence.
@@ -89,22 +98,49 @@ public static class NumberToWordsExtension
     /// </example>
     /// <param name="number">Number to be turned to words</param>
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
     /// <returns>The number converted to words</returns>
     public static string ToWords(this int number, WordForm wordForm, CultureInfo? culture = null) =>
         ((long)number).ToWords(wordForm, culture);
 
+    static string? TryGetNativeFirstOrdinalWord(CultureInfo? culture, GrammaticalGender? gender)
+    {
+        if (culture is null)
+        {
+            return null;
+        }
+
+        return culture.TwoLetterISOLanguageName switch
+        {
+            "da" => "første",
+            "fil" => "una",
+            "id" => "pertama",
+            "ms" => "pertama",
+            "sk" => gender switch
+            {
+                GrammaticalGender.Masculine => "prvý",
+                GrammaticalGender.Feminine => "prvá",
+                GrammaticalGender.Neuter => "prvé",
+                _ => "prvý"
+            },
+            "zu" => "okokuqala",
+            _ => null
+        };
+    }
+
     /// <summary>
-    /// 3501.ToWords(false) -> "three thousand five hundred one"
+    /// Converts the given value to localized cardinal words with an explicit conjunction choice.
     /// </summary>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="addAnd">To add 'and' before the last number.</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="addAnd">Whether to include the culture's conjunction before the terminal group.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this int number, bool addAnd, CultureInfo? culture = null) =>
         ((long)number).ToWords(culture, addAnd);
 
     /// <summary>
-    /// Converts a number to words supporting specific word variations of some locales.
+    /// Converts the given value to localized cardinal words with an explicit conjunction choice
+    /// and requested word form.
     /// </summary>
     /// <example>
     /// In Spanish, numbers ended in 1 changes its form depending on their position in the sentence.
@@ -113,16 +149,16 @@ public static class NumberToWordsExtension
     /// 21.ToWords(WordForm.Abbreviation) -> veintiún // as in "En total, conté veintiún coches"
     /// </code>
     /// </example>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="addAnd">To add 'and' before the last number</param>
-    /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    /// <returns>The number converted to words</returns>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="addAnd">Whether to include the culture's conjunction before the terminal group.</param>
+    /// <param name="wordForm">The requested word form.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this int number, bool addAnd, WordForm wordForm, CultureInfo? culture = null) =>
         ((long)number).ToWords(wordForm, culture, addAnd);
 
     /// <summary>
-    /// For locales that support gender-specific forms
+    /// Converts the given value to localized cardinal words using grammatical gender where supported.
     /// </summary>
     /// <example>
     /// Russian:
@@ -136,14 +172,15 @@ public static class NumberToWordsExtension
     ///   1.ToWords(GrammaticalGender.Feminine) -> "אחת"
     /// </code>
     /// </example>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="gender">The grammatical gender to use for output words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="gender">The grammatical gender to use when the locale supports gendered forms.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this int number, GrammaticalGender gender, CultureInfo? culture = null) =>
         ((long)number).ToWords(gender, culture);
 
     /// <summary>
-    /// Converts a number to words supporting specific word variations, including grammatical gender, of some locales.
+    /// Converts the given value to localized cardinal words using both word form and grammatical gender.
     /// </summary>
     /// <example>
     /// In Spanish, numbers ended in 1 change its form depending on their position in the sentence.
@@ -153,25 +190,26 @@ public static class NumberToWordsExtension
     /// 21.ToWords(WordForm.Normal, GrammaticalGender.Feminine) -> veintiuna // as in "veintiuna personas"
     /// </code>
     /// </example>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
-    /// <param name="gender">The grammatical gender to use for output words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    /// <returns>The number converted to words</returns>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="wordForm">The requested word form.</param>
+    /// <param name="gender">The grammatical gender to use when the locale supports gendered forms.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this int number, WordForm wordForm, GrammaticalGender gender, CultureInfo? culture = null) =>
         ((long)number).ToWords(wordForm, gender, culture);
 
     /// <summary>
-    /// 3501.ToWords() -> "three thousand five hundred and one"
+    /// Converts the given value to localized cardinal words using the culture's default conjunction policy.
     /// </summary>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    /// <param name="addAnd">Whether "and" should be included or not.</param>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <param name="addAnd">Whether to include the culture's conjunction before the terminal group.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this long number, CultureInfo? culture = null, bool addAnd = true) =>
         Configurator.GetNumberToWordsConverter(culture).Convert(number, addAnd);
 
     /// <summary>
-    /// Converts a number to words supporting specific word variations of some locales.
+    /// Converts the given value to localized cardinal words using the requested word form.
     /// </summary>
     /// <example>
     /// In Spanish, numbers ended in 1 changes its form depending on their position in the sentence.
@@ -180,16 +218,16 @@ public static class NumberToWordsExtension
     /// 21.ToWords(WordForm.Abbreviation) -> veintiún // as in "En total, conté veintiún coches"
     /// </code>
     /// </example>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    /// <param name="addAnd">To add 'and' before the last number</param>
-    /// <returns>The number converted to words</returns>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="wordForm">The requested word form.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <param name="addAnd">Whether to include the culture's conjunction before the terminal group.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this long number, WordForm wordForm, CultureInfo? culture = null, bool addAnd = false) =>
         Configurator.GetNumberToWordsConverter(culture).Convert(number, addAnd, wordForm);
 
     /// <summary>
-    /// For locales that support gender-specific forms
+    /// Converts the given value to localized cardinal words using grammatical gender where supported.
     /// </summary>
     /// <example>
     /// Russian:
@@ -204,14 +242,15 @@ public static class NumberToWordsExtension
     /// </code>
     /// </example>
     ///
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="gender">The grammatical gender to use for output words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="gender">The grammatical gender to use when the locale supports gendered forms.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this long number, GrammaticalGender gender, CultureInfo? culture = null) =>
         Configurator.GetNumberToWordsConverter(culture).Convert(number, gender);
 
     /// <summary>
-    /// Converts a number to words supporting specific word variations, including grammatical gender, of some locales.
+    /// Converts the given value to localized cardinal words using both word form and grammatical gender.
     /// </summary>
     /// <example>
     /// In Spanish, numbers ended in 1 changes its form depending on their position in the sentence.
@@ -221,11 +260,11 @@ public static class NumberToWordsExtension
     /// 21.ToWords(WordForm.Normal, GrammaticalGender.Feminine) -> veintiuna // as in "veintiuna personas"
     /// </code>
     /// </example>
-    /// <param name="number">Number to be turned to words</param>
-    /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
-    /// <param name="gender">The grammatical gender to use for output words</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-    /// <returns>The number converted to words</returns>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="wordForm">The requested word form.</param>
+    /// <param name="gender">The grammatical gender to use when the locale supports gendered forms.</param>
+    /// <param name="culture">The culture to use. If <c>null</c>, the current UI culture is used.</param>
+    /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this long number, WordForm wordForm, GrammaticalGender gender, CultureInfo? culture = null) =>
         Configurator.GetNumberToWordsConverter(culture).Convert(number, wordForm, gender);
 }
