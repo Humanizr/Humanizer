@@ -232,9 +232,9 @@ public static class TimeSpanDehumanizeExtensions
             && TryParseInvariantInt(parts[0], out var hours)
             && TryParseInvariantInt(parts[1], out var minutes)
             && TryParseInvariantDouble(parts[2], out var seconds)
-            && hours >= 0 && minutes >= 0 && seconds >= 0)
+            && TryGetColonComponents(hours, minutes, seconds, out var hoursSign, out var hoursMagnitude, out var minutesMagnitude, out var secondsMagnitude))
         {
-            result = TimeSpan.FromHours(hours) + TimeSpan.FromMinutes(minutes) + TimeSpan.FromSeconds(seconds);
+            result = hoursSign * (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude));
             return true;
         }
 
@@ -243,22 +243,64 @@ public static class TimeSpanDehumanizeExtensions
             if (colonFormat == TimeSpanDehumanizeColonFormat.MinutesSeconds
                 && TryParseInvariantInt(parts[0], out var minutesOnly)
                 && TryParseInvariantDouble(parts[1], out var secondsOnly)
-                && minutesOnly >= 0 && secondsOnly >= 0)
+                && TryGetColonComponents(minutesOnly, secondsOnly, out var minutesSign, out var minutesMagnitude, out var secondsMagnitude))
             {
-                result = TimeSpan.FromMinutes(minutesOnly) + TimeSpan.FromSeconds(secondsOnly);
+                result = minutesSign * (TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude));
                 return true;
             }
 
             if (TryParseInvariantInt(parts[0], out var hoursOnly)
                 && TryParseInvariantDouble(parts[1], out var minutesOnlyFromHours)
-                && hoursOnly >= 0 && minutesOnlyFromHours >= 0)
+                && TryGetColonComponents(hoursOnly, minutesOnlyFromHours, out var hoursSign, out var hoursMagnitude, out var minutesMagnitude))
             {
-                result = TimeSpan.FromHours(hoursOnly) + TimeSpan.FromMinutes(minutesOnlyFromHours);
+                result = hoursSign * (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude));
                 return true;
             }
         }
 
         return false;
+    }
+
+    static bool TryGetColonComponents(
+        int leading,
+        double trailing,
+        out int sign,
+        out int leadingMagnitude,
+        out double trailingMagnitude)
+    {
+        return TryGetColonComponents(
+            leading,
+            trailing,
+            0,
+            out sign,
+            out leadingMagnitude,
+            out trailingMagnitude,
+            out _);
+    }
+
+    static bool TryGetColonComponents(
+        int leading,
+        int middle,
+        double trailing,
+        out int sign,
+        out int leadingMagnitude,
+        out int middleMagnitude,
+        out double trailingMagnitude)
+    {
+        if (middle < 0 || trailing < 0)
+        {
+            sign = 0;
+            leadingMagnitude = 0;
+            middleMagnitude = 0;
+            trailingMagnitude = 0;
+            return false;
+        }
+
+        sign = leading < 0 ? -1 : 1;
+        leadingMagnitude = Math.Abs(leading);
+        middleMagnitude = middle;
+        trailingMagnitude = trailing;
+        return true;
     }
 
     static bool TryParseInvariantInt(string value, out int result) =>
