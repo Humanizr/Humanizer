@@ -234,7 +234,7 @@ public static class TimeSpanDehumanizeExtensions
             && TryParseInvariantDouble(parts[2], out var seconds)
             && TryGetColonComponents(hours, minutes, seconds, out var hoursSign, out var hoursMagnitude, out var minutesMagnitude, out var secondsMagnitude))
         {
-            result = hoursSign * (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude));
+            result = (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude)) * hoursSign;
             return true;
         }
 
@@ -245,7 +245,7 @@ public static class TimeSpanDehumanizeExtensions
                 && TryParseInvariantDouble(parts[1], out var secondsOnly)
                 && TryGetColonComponents(minutesOnly, secondsOnly, out var minutesSign, out var minutesMagnitude, out var secondsMagnitude))
             {
-                result = minutesSign * (TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude));
+                result = (TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude)) * minutesSign;
                 return true;
             }
 
@@ -253,7 +253,7 @@ public static class TimeSpanDehumanizeExtensions
                 && TryParseInvariantDouble(parts[1], out var minutesOnlyFromHours)
                 && TryGetColonComponents(hoursOnly, minutesOnlyFromHours, out var hoursSign, out var hoursMagnitude, out var minutesMagnitude))
             {
-                result = hoursSign * (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude));
+                result = (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude)) * hoursSign;
                 return true;
             }
         }
@@ -268,14 +268,18 @@ public static class TimeSpanDehumanizeExtensions
         out int leadingMagnitude,
         out double trailingMagnitude)
     {
-        return TryGetColonComponents(
-            leading,
-            trailing,
-            0,
-            out sign,
-            out leadingMagnitude,
-            out trailingMagnitude,
-            out _);
+        if (trailing < 0)
+        {
+            sign = 0;
+            leadingMagnitude = 0;
+            trailingMagnitude = 0;
+            return false;
+        }
+
+        sign = leading < 0 ? -1 : 1;
+        leadingMagnitude = Math.Abs(leading);
+        trailingMagnitude = trailing;
+        return true;
     }
 
     static bool TryGetColonComponents(
