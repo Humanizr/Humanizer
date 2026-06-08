@@ -56,6 +56,17 @@ public class TimeSpanDehumanizeTests
     }
 
     [Fact]
+    public void DehumanizeTimeSpanParsesNegativeMinutesAndSecondsWhenConfigured()
+    {
+        var options = new TimeSpanDehumanizeOptions
+        {
+            ColonFormat = TimeSpanDehumanizeColonFormat.MinutesSeconds,
+        };
+
+        Assert.Equal(new TimeSpan(0, -18, -1), "-18:01".DehumanizeTimeSpan(options));
+    }
+
+    [Fact]
     public void DehumanizeTimeSpanParsesThreeHoursEighteenMinutesFromWordPhrases()
     {
         Assert.Equal(ThreeHoursEighteenMinutes, "3 hours 18 minutes".DehumanizeTimeSpan());
