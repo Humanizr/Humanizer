@@ -232,9 +232,9 @@ public static class TimeSpanDehumanizeExtensions
             && TryParseInvariantInt(parts[0], out var hours)
             && TryParseInvariantInt(parts[1], out var minutes)
             && TryParseInvariantDouble(parts[2], out var seconds)
-            && TryGetColonComponents(hours, minutes, seconds, out var hoursSign, out var hoursMagnitude, out var minutesMagnitude, out var secondsMagnitude))
+            && TryGetColonComponents(hours, minutes, seconds, out var hmsSign, out var hmsHours, out var hmsMinutes, out var hmsSeconds))
         {
-            result = (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude)) * hoursSign;
+            result = ApplySign(TimeSpan.FromHours(hmsHours) + TimeSpan.FromMinutes(hmsMinutes) + TimeSpan.FromSeconds(hmsSeconds), hmsSign);
             return true;
         }
 
@@ -243,23 +243,26 @@ public static class TimeSpanDehumanizeExtensions
             if (colonFormat == TimeSpanDehumanizeColonFormat.MinutesSeconds
                 && TryParseInvariantInt(parts[0], out var minutesOnly)
                 && TryParseInvariantDouble(parts[1], out var secondsOnly)
-                && TryGetColonComponents(minutesOnly, secondsOnly, out var minutesSign, out var minutesMagnitude, out var secondsMagnitude))
+                && TryGetColonComponents(minutesOnly, secondsOnly, out var msSign, out var msMinutes, out var msSeconds))
             {
-                result = (TimeSpan.FromMinutes(minutesMagnitude) + TimeSpan.FromSeconds(secondsMagnitude)) * minutesSign;
+                result = ApplySign(TimeSpan.FromMinutes(msMinutes) + TimeSpan.FromSeconds(msSeconds), msSign);
                 return true;
             }
 
             if (TryParseInvariantInt(parts[0], out var hoursOnly)
                 && TryParseInvariantDouble(parts[1], out var minutesOnlyFromHours)
-                && TryGetColonComponents(hoursOnly, minutesOnlyFromHours, out var hoursSign, out var hoursMagnitude, out var minutesMagnitude))
+                && TryGetColonComponents(hoursOnly, minutesOnlyFromHours, out var hmSign, out var hmHours, out var hmMinutes))
             {
-                result = (TimeSpan.FromHours(hoursMagnitude) + TimeSpan.FromMinutes(minutesMagnitude)) * hoursSign;
+                result = ApplySign(TimeSpan.FromHours(hmHours) + TimeSpan.FromMinutes(hmMinutes), hmSign);
                 return true;
             }
         }
 
         return false;
     }
+
+    static TimeSpan ApplySign(TimeSpan duration, int sign) =>
+        sign < 0 ? -duration : duration;
 
     static bool TryGetColonComponents(
         int leading,
