@@ -1,0 +1,572 @@
+locale: 'ga'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'agus'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'arabic-like'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'anois'
+      never: 'riamh'
+      past:
+        millisecond:
+          single: 'milleasoicind ó shin'
+          multiple:
+            forms:
+              singular: 'milleasoicind'
+              dual: 'mhilleasoicind'
+              plural: 'milleasoicind'
+              default: 'milleasoicind'
+            template: '{count} {unit} ó shin'
+        second:
+          single: 'soicind ó shin'
+          multiple:
+            forms:
+              singular: 'soicind'
+              dual: 'shoicind'
+              plural: 'soicind'
+              default: 'soicind'
+            template: '{count} {unit} ó shin'
+        minute:
+          single: 'nóiméad ó shin'
+          multiple:
+            forms:
+              singular: 'nóiméad'
+              dual: 'nóiméad'
+              plural: 'nóiméad'
+              default: 'nóiméad'
+            template: '{count} {unit} ó shin'
+        hour:
+          single: 'uair an chloig ó shin'
+          multiple:
+            forms:
+              singular: 'uair an chloig'
+              dual: 'uair an chloig'
+              plural: 'uair an chloig'
+              default: 'uair an chloig'
+            template: '{count} {unit} ó shin'
+        day:
+          single: 'inné'
+          multiple:
+            forms:
+              singular: 'lá'
+              dual: 'lá'
+              plural: 'lá'
+              default: 'lá'
+            template: '{count} {unit} ó shin'
+        week:
+          single: 'seachtain ó shin'
+          multiple:
+            forms:
+              singular: 'seachtain'
+              dual: 'sheachtain'
+              plural: 'seachtain'
+              default: 'seachtain'
+            template: '{count} {unit} ó shin'
+        month:
+          single: 'mí ó shin'
+          multiple:
+            forms:
+              singular: 'mí'
+              dual: 'mhí'
+              plural: 'mí'
+              default: 'mí'
+            template: '{count} {unit} ó shin'
+        year:
+          single: 'bliain ó shin'
+          multiple:
+            forms:
+              singular: 'bliain'
+              dual: 'bhliain'
+              plural: 'bliana'
+              default: 'bliain'
+            template: '{count} {unit} ó shin'
+      future:
+        millisecond:
+          single: 'i gceann milleasoicind'
+          multiple:
+            forms:
+              singular: 'milleasoicind'
+              dual: 'mhilleasoicind'
+              plural: 'milleasoicind'
+              default: 'milleasoicind'
+            template: 'i gceann {count} {unit}'
+        second:
+          single: 'i gceann soicind'
+          multiple:
+            forms:
+              singular: 'soicind'
+              dual: 'shoicind'
+              plural: 'soicind'
+              default: 'soicind'
+            template: 'i gceann {count} {unit}'
+        minute:
+          single: 'i gceann nóiméid'
+          multiple:
+            forms:
+              singular: 'nóiméad'
+              dual: 'nóiméad'
+              plural: 'nóiméad'
+              default: 'nóiméad'
+            template: 'i gceann {count} {unit}'
+        hour:
+          single: 'i gceann uair an chloig'
+          multiple:
+            forms:
+              singular: 'uair an chloig'
+              dual: 'uair an chloig'
+              plural: 'uair an chloig'
+              default: 'uair an chloig'
+            template: 'i gceann {count} {unit}'
+        day:
+          single: 'amárach'
+          multiple:
+            forms:
+              singular: 'lá'
+              dual: 'lá'
+              plural: 'lá'
+              default: 'lá'
+            template: 'i gceann {count} {unit}'
+        week:
+          single: 'i gceann seachtaine'
+          multiple:
+            forms:
+              singular: 'seachtain'
+              dual: 'sheachtain'
+              plural: 'seachtain'
+              default: 'seachtain'
+            template: 'i gceann {count} {unit}'
+        month:
+          single: 'i gceann míosa'
+          multiple:
+            forms:
+              singular: 'mí'
+              dual: 'mhí'
+              plural: 'mí'
+              default: 'mí'
+            template: 'i gceann {count} {unit}'
+        year:
+          single: 'i gceann bliana'
+          multiple:
+            forms:
+              singular: 'bliain'
+              dual: 'bhliain'
+              plural: 'bliana'
+              default: 'bliain'
+            template: 'i gceann {count} {unit}'
+    duration:
+      zero: 'gan am'
+      age:
+        template: '{value} d''aois'
+      millisecond:
+        single:
+          numeric: '1 mhilleasoicind'
+          words: 'aon mhilleasoicind'
+        multiple:
+          forms:
+            singular: 'milleasoicind'
+            dual: 'mhilleasoicind'
+            plural: 'milleasoicind'
+            default: 'milleasoicind'
+      second:
+        single:
+          numeric: '1 soicind'
+          words: 'aon soicind'
+        multiple:
+          forms:
+            singular: 'soicind'
+            dual: 'shoicind'
+            plural: 'soicind'
+            default: 'soicind'
+      minute:
+        single:
+          numeric: '1 nóiméad'
+          words: 'aon nóiméad'
+        multiple:
+          forms:
+            singular: 'nóiméad'
+            dual: 'nóiméad'
+            plural: 'nóiméad'
+            default: 'nóiméad'
+      hour:
+        single:
+          numeric: '1 uair an chloig'
+          words: 'aon uair an chloig'
+        multiple:
+          forms:
+            singular: 'uair an chloig'
+            dual: 'uair an chloig'
+            plural: 'uair an chloig'
+            default: 'uair an chloig'
+      day:
+        single:
+          numeric: '1 lá'
+          words: 'aon lá'
+        multiple:
+          forms:
+            singular: 'lá'
+            dual: 'lá'
+            plural: 'lá'
+            default: 'lá'
+      week:
+        single:
+          numeric: '1 seachtain'
+          words: 'aon seachtain'
+        multiple:
+          forms:
+            singular: 'seachtain'
+            dual: 'sheachtain'
+            plural: 'seachtain'
+            default: 'seachtain'
+      month:
+        single:
+          numeric: '1 mhí'
+          words: 'aon mhí'
+        multiple:
+          forms:
+            singular: 'mí'
+            dual: 'mhí'
+            plural: 'mí'
+            default: 'mí'
+      year:
+        single:
+          numeric: '1 bhliain'
+          words: 'aon bhliain'
+        multiple:
+          forms:
+            singular: 'bliain'
+            dual: 'bhliain'
+            plural: 'bliana'
+            default: 'bliain'
+    dataUnits:
+      bit:
+        forms:
+          singular: 'giotán'
+          default: 'giotán'
+        symbol: 'b'
+      byte:
+        forms:
+          singular: 'beart'
+          default: 'beart'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          singular: 'cilibheart'
+          default: 'cilibheart'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          singular: 'meigibheart'
+          default: 'meigibheart'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          singular: 'gigibheart'
+          default: 'gigibheart'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          singular: 'teiribheart'
+          default: 'teiribheart'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'nóim'
+      hour:
+        symbol: 'u'
+      day:
+        symbol: 'lá'
+      week:
+        symbol: 'seacht.'
+      month:
+        symbol: 'mí'
+      year:
+        symbol: 'bl.'
+
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'lúide'
+      andWord: 'agus'
+      hundredWord: 'céad'
+      hundredOrdinalWord: 'céadú'
+      tensUnitsSeparator: ' agus '
+      defaultAddAnd: true
+      addAndMode: 'always-default'
+      andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
+      tupleSuffix: ''
+      ordinalLeadingOneStrategy: 'omit-leading-one'
+      ordinalMode: 'english'
+      exactOrdinals:
+        1: 'céad'
+      unitsMap:
+        0: 'náid'
+        1: 'a haon'
+        2: 'a dó'
+        3: 'a trí'
+        4: 'a ceathair'
+        5: 'a cúig'
+        6: 'a sé'
+        7: 'a seacht'
+        8: 'a hocht'
+        9: 'a naoi'
+        10: 'a deich'
+        11: 'a haon déag'
+        12: 'a dó dhéag'
+        13: 'a trí déag'
+        14: 'a ceathair déag'
+        15: 'a cúig déag'
+        16: 'a sé déag'
+        17: 'a seacht déag'
+        18: 'a hocht déag'
+        19: 'a naoi déag'
+      ordinalUnitsMap:
+        0: 'náidú'
+        1: 'aonú'
+        2: 'dara'
+        3: 'tríú'
+        4: 'ceathrú'
+        5: 'cúigiú'
+        6: 'séú'
+        7: 'seachtú'
+        8: 'ochtú'
+        9: 'naoú'
+        10: 'deichiú'
+        11: 'aonú déag'
+        12: 'dara déag'
+        13: 'tríú déag'
+        14: 'ceathrú déag'
+        15: 'cúigiú déag'
+        16: 'séú déag'
+        17: 'seachtú déag'
+        18: 'ochtú déag'
+        19: 'naoú déag'
+      tensMap:
+        0: 'náid'
+        1: 'deich'
+        2: 'fiche'
+        3: 'tríocha'
+        4: 'daichead'
+        5: 'caoga'
+        6: 'seasca'
+        7: 'seachtó'
+        8: 'ochtó'
+        9: 'nócha'
+      ordinalTensMap:
+        0: 'náidú'
+        1: 'deichiú'
+        2: 'fichiú'
+        3: 'tríochadú'
+        4: 'daicheadú'
+        5: 'caogadú'
+        6: 'seascadú'
+        7: 'seachtódú'
+        8: 'ochtódú'
+        9: 'nóchadú'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'cuintilliún'
+          ordinalName: 'cuintilliúnú'
+        -
+          value: 1000000000000000
+          name: 'cuaidrilliún'
+          ordinalName: 'cuaidrilliúnú'
+        -
+          value: 1000000000000
+          name: 'trilliún'
+          ordinalName: 'trilliúnú'
+        -
+          value: 1000000000
+          name: 'billiún'
+          ordinalName: 'billiúnú'
+        -
+          value: 1000000
+          name: 'milliún'
+          ordinalName: 'milliúnú'
+        -
+          value: 1000
+          name: 'míle'
+          ordinalName: 'míliú'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        náid: 0
+        a haon: 1
+        haon: 1
+        dó: 2
+        trí: 3
+        ceathair: 4
+        cúig: 5
+        sé: 6
+        seacht: 7
+        hocht: 8
+        naoi: 9
+        a dó: 2
+        a trí: 3
+        a ceathair: 4
+        a cúig: 5
+        a sé: 6
+        a seacht: 7
+        a hocht: 8
+        a naoi: 9
+        a deich: 10
+        deich: 10
+        a haon déag: 11
+        a dó dhéag: 12
+        a trí déag: 13
+        a ceathair déag: 14
+        a cúig déag: 15
+        a sé déag: 16
+        a seacht déag: 17
+        a hocht déag: 18
+        a naoi déag: 19
+        fiche: 20
+        tríocha: 30
+        daichead: 40
+        caoga: 50
+        seasca: 60
+        seachtó: 70
+        ochtó: 80
+        nócha: 90
+        céad: 100
+        míle: 1000
+        milliún: 1000000
+        billiún: 1000000000
+        trilliún: 1000000000000
+        cuaidrilliún: 1000000000000000
+        cuintilliún: 1000000000000000000
+      ordinalMap:
+        náidú: 0
+        aonú: 1
+        dara: 2
+        tríú: 3
+        ceathrú: 4
+        cúigiú: 5
+        séú: 6
+        seachtú: 7
+        ochtú: 8
+        naoú: 9
+        deichiú: 10
+        aonú déag: 11
+        dara déag: 12
+        tríú déag: 13
+        ceathrú déag: 14
+        cúigiú déag: 15
+        séú déag: 16
+        seachtú déag: 17
+        ochtú déag: 18
+        naoú déag: 19
+        fichiú: 20
+        tríochadú: 30
+        daicheadú: 40
+        caogadú: 50
+        seascadú: 60
+        seachtódú: 70
+        ochtódú: 80
+        nóchadú: 90
+        céadú: 100
+        míliú: 1000
+        milliúnú: 1000000
+        billiúnú: 1000000000
+        trilliúnú: 1000000000000
+        cuaidrilliúnú: 1000000000000000
+        cuintilliúnú: 1000000000000000000
+      teenSuffixTokens:
+        - 'déag'
+        - 'dhéag'
+      teenBaseValue: 10
+      negativePrefixes:
+        - 'lúide '
+      ignoredTokens:
+        - 'a'
+        - 'agus'
+      ordinalAbbreviationSuffixes:
+        - 'ú'
+      allowTerminalOrdinalToken: true
+      useHundredMultiplier: true
+      allowInvariantIntegerInput: true
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: 'ú'
+      feminine:
+        defaultSuffix: 'ú'
+      neuter:
+        defaultSuffix: 'ú'
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    midnight: 'meán oíche'
+    midday: 'meán lae'
+    min0: '{hour} a chlog'
+    min5: 'cúig tar éis {hour}'
+    min10: 'deich tar éis {hour}'
+    min15: 'ceathrú tar éis {hour}'
+    min20: 'fiche tar éis {hour}'
+    min25: 'fiche a cúig tar éis {hour}'
+    min30: 'leathuair tar éis {hour}'
+    min35: 'fiche a cúig chun {nextHour}'
+    min40: 'fiche chun {nextHour}'
+    min45: 'ceathrú chun {nextHour}'
+    min50: 'deich chun {nextHour}'
+    min55: 'cúig chun {nextHour}'
+    defaultTemplate: '{minutes} tar éis {hour}'
+
+  compass:
+    full:
+      - 'tuaisceart'
+      - 'tuaisceart-oirthuaisceart'
+      - 'oirthuaisceart'
+      - 'oirthear-oirthuaisceart'
+      - 'oirthear'
+      - 'oirthear-oirdheisceart'
+      - 'oirdheisceart'
+      - 'deisceart-oirdheisceart'
+      - 'deisceart'
+      - 'deisceart-iardheisceart'
+      - 'iardheisceart'
+      - 'iarthar-iardheisceart'
+      - 'iarthar'
+      - 'iarthar-iarthuaisceart'
+      - 'iarthuaisceart'
+      - 'tuaisceart-iarthuaisceart'
+    short:
+      - 'T'
+      - 'TOT'
+      - 'OT'
+      - 'OOT'
+      - 'O'
+      - 'OOD'
+      - 'OD'
+      - 'DOD'
+      - 'D'
+      - 'DID'
+      - 'ID'
+      - 'IID'
+      - 'I'
+      - 'IIT'
+      - 'IT'
+      - 'TIT'

@@ -437,6 +437,16 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
+    [InlineData("{0} old", "2 days", "2 days old")]
+    [InlineData("{value} old", "2 days", "2 days old")]
+    [InlineData("{value}", "2 days", "2 days")]
+    public void AgeFormatterSupportsLegacyAndNamedTemplates(string ageFormat, string value, string expected)
+    {
+        var actual = TimeSpanHumanizeExtensions.FormatAge(value, ageFormat);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
     [InlineData(1, 1, "en-US", "1 millisecond", ", ")]
     [InlineData(6 * 24 * 60 * 60 * 1000, 1, "ru-RU", "6 дней", ", ")]
     [InlineData(11 * 60 * 60 * 1000, 1, "ar", "11 ساعة", ", ")]

@@ -1,0 +1,795 @@
+locale: 'yo'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'àti'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'ní báyìí'
+      never: 'rárá'
+      past:
+        millisecond:
+          single: 'milisẹ́kọ́ńdì 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'milisẹ́kọ́ńdì'
+            template: '{count} milisẹ́kọ́ńdì sẹ́yìn'
+        second:
+          single: 'ìṣẹ́jú-àáyá 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú-àáyá'
+            template: '{count} ìṣẹ́jú-àáyá sẹ́yìn'
+        minute:
+          single: 'ìṣẹ́jú 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú'
+            template: '{count} ìṣẹ́jú sẹ́yìn'
+        hour:
+          single: 'wákàtí 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'wákàtí'
+            template: '{count} wákàtí sẹ́yìn'
+        day:
+          single: 'àná'
+          multiple:
+            forms:
+              default: 'ọjọ́'
+            template: '{count} ọjọ́ sẹ́yìn'
+        week:
+          single: 'ọ̀sẹ̀ 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ọ̀sẹ̀'
+            template: '{count} ọ̀sẹ̀ sẹ́yìn'
+        month:
+          single: 'oṣù 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'oṣù'
+            template: '{count} oṣù sẹ́yìn'
+        year:
+          single: 'ọdún 1 sẹ́yìn'
+          multiple:
+            forms:
+              default: 'ọdún'
+            template: '{count} ọdún sẹ́yìn'
+      future:
+        millisecond:
+          single: 'ní milisẹ́kọ́ńdì 1'
+          multiple:
+            forms:
+              default: 'milisẹ́kọ́ńdì'
+            template: 'ní milisẹ́kọ́ńdì {count}'
+        second:
+          single: 'ní ìṣẹ́jú-àáyá 1'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú-àáyá'
+            template: 'ní ìṣẹ́jú-àáyá {count}'
+        minute:
+          single: 'ní ìṣẹ́jú 1'
+          multiple:
+            forms:
+              default: 'ìṣẹ́jú'
+            template: 'ní ìṣẹ́jú {count}'
+        hour:
+          single: 'ní wákàtí 1'
+          multiple:
+            forms:
+              default: 'wákàtí'
+            template: 'ní wákàtí {count}'
+        day:
+          single: 'ọ̀la'
+          multiple:
+            forms:
+              default: 'ọjọ́'
+            template: 'ní ọjọ́ {count}'
+        week:
+          single: 'ní ọ̀sẹ̀ 1'
+          multiple:
+            forms:
+              default: 'ọ̀sẹ̀'
+            template: 'ní ọ̀sẹ̀ {count}'
+        month:
+          single: 'ní oṣù 1'
+          multiple:
+            forms:
+              default: 'oṣù'
+            template: 'ní oṣù {count}'
+        year:
+          single: 'ní ọdún 1'
+          multiple:
+            forms:
+              default: 'ọdún'
+            template: 'ní ọdún {count}'
+    duration:
+      zero: 'kò sí àkókò'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: 'milisẹ́kọ́ńdì 1'
+          words: 'milisẹ́kọ́ńdì kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'milisẹ́kọ́ńdì'
+      second:
+        single:
+          numeric: 'ìṣẹ́jú-àáyá 1'
+          words: 'ìṣẹ́jú-àáyá kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ìṣẹ́jú-àáyá'
+      minute:
+        single:
+          numeric: 'ìṣẹ́jú 1'
+          words: 'ìṣẹ́jú kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ìṣẹ́jú'
+      hour:
+        single:
+          numeric: 'wákàtí 1'
+          words: 'wákàtí kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'wákàtí'
+      day:
+        single:
+          numeric: 'ọjọ́ 1'
+          words: 'ọjọ́ kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ọjọ́'
+      week:
+        single:
+          numeric: 'ọ̀sẹ̀ 1'
+          words: 'ọ̀sẹ̀ kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ọ̀sẹ̀'
+      month:
+        single:
+          numeric: 'oṣù 1'
+          words: 'oṣù kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'oṣù'
+      year:
+        single:
+          numeric: 'ọdún 1'
+          words: 'ọdún kan'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'ọdún'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bítì'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'báìtì'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kílóbáìtì'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'mẹ́gábáìtì'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gígábáìtì'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'tẹ́rábáìtì'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'ọj'
+      week:
+        symbol: 'ọ̀s'
+      month:
+        symbol: 'oṣ'
+      year:
+        symbol: 'ọd'
+
+  number:
+    words:
+      engine: 'linked-vigesimal'
+      zeroWord: 'odo'
+      negativeWord: 'àìyọkúrò'
+      negativeJoiner: ' '
+      partJoiner: ' '
+      terminalRemainderJoiner: 'lé'
+      terminalRemainderThreshold: 100
+      ordinalSuffix: ''
+      words:
+        - 'odo'
+        - 'ọ̀kan'
+        - 'méjì'
+        - 'mẹ́ta'
+        - 'mẹ́rin'
+        - 'márùn-ún'
+        - 'mẹ́fà'
+        - 'méje'
+        - 'mẹ́jọ'
+        - 'mẹ́sàn-án'
+        - 'mẹ́wàá'
+        - 'mọ́kànlá'
+        - 'méjìlá'
+        - 'mẹ́tàlá'
+        - 'mẹ́rìnlá'
+        - 'mẹ́ẹ̀dógún'
+        - 'mẹ́rìndínlógún'
+        - 'mẹ́tàdínlógún'
+        - 'méjìdínlógún'
+        - 'mọ́kàndínlógún'
+        - 'ogún'
+        - 'ọ̀kanlélógún'
+        - 'méjìlélógún'
+        - 'mẹ́tàlélógún'
+        - 'mẹ́rìnlélógún'
+        - 'márùndínlọ́gbọ̀n'
+        - 'mẹ́rìndínlọ́gbọ̀n'
+        - 'mẹ́tàdínlọ́gbọ̀n'
+        - 'méjìdínlọ́gbọ̀n'
+        - 'ọ̀kàndínlọ́gbọ̀n'
+        - 'ọgbọ̀n'
+        - 'ọ̀kanlélọ́gbọ̀n'
+        - 'méjìlélọ́gbọ̀n'
+        - 'mẹ́tàlélọ́gbọ̀n'
+        - 'mẹ́rìnlélọ́gbọ̀n'
+        - 'márùndínlógójì'
+        - 'mẹ́rìndínlógójì'
+        - 'mẹ́tàdínlógójì'
+        - 'méjìdínlógójì'
+        - 'ọ̀kàndínlógójì'
+        - 'ogójì'
+        - 'ọ̀kanlélógójì'
+        - 'méjìlélógójì'
+        - 'mẹ́tàlélógójì'
+        - 'mẹ́rìnlélógójì'
+        - 'márùndíládọ́ta'
+        - 'mẹ́rìndíládọ́ta'
+        - 'mẹ́tàdíládọ́ta'
+        - 'méjìdíládọ́ta'
+        - 'ọ̀kàndíládọ́ta'
+        - 'àádọ́ta'
+        - 'ọ̀kanléládọ́ta'
+        - 'méjìléládọ́ta'
+        - 'mẹ́tàléládọ́ta'
+        - 'mẹ́rìnléládọ́ta'
+        - 'márùndílọ́gọ́ta'
+        - 'mẹ́rìndílọ́gọ́ta'
+        - 'mẹ́tàdílọ́gọ́ta'
+        - 'méjìdílọ́gọ́ta'
+        - 'ọ̀kàndílọ́gọ́ta'
+        - 'ọgọ́ta'
+        - 'ọ̀kanlélọ́gọ́ta'
+        - 'méjìlélọ́gọ́ta'
+        - 'mẹ́tàlélọ́gọ́ta'
+        - 'mẹ́rìnlélọ́gọ́ta'
+        - 'márùndíládọ́rin'
+        - 'mẹ́rìndíládọ́rin'
+        - 'mẹ́tàdíládọ́rin'
+        - 'méjìdíládọ́rin'
+        - 'ọ̀kàndíládọ́rin'
+        - 'àádọ́rin'
+        - 'ọ̀kanléládọ́rin'
+        - 'méjìléládọ́rin'
+        - 'mẹ́tàléládọ́rin'
+        - 'mẹ́rìnléládọ́rin'
+        - 'márùndílọ́gọ́rin'
+        - 'mẹ́rìndílọ́gọ́rin'
+        - 'mẹ́tàdílọ́gọ́rin'
+        - 'méjìdílọ́gọ́rin'
+        - 'ọ̀kàndílọ́gọ́rin'
+        - 'ọgọ́rin'
+        - 'ọ̀kanlélọ́gọ́rin'
+        - 'méjìlélọ́gọ́rin'
+        - 'mẹ́tàlélọ́gọ́rin'
+        - 'mẹ́rìnlélọ́gọ́rin'
+        - 'márùndíládọ́rùn-ún'
+        - 'mẹ́rìndíládọ́rùn-ún'
+        - 'mẹ́tàdíládọ́rùn-ún'
+        - 'méjìdíládọ́rùn-ún'
+        - 'ọ̀kàndíládọ́rùn-ún'
+        - 'àádọ́rùn-ún'
+        - 'ọ̀kanléládọ́rùn-ún'
+        - 'méjìléládọ́rùn-ún'
+        - 'mẹ́tàléládọ́rùn-ún'
+        - 'mẹ́rìnléládọ́rùn-ún'
+        - 'márùndílọ́gọ́rùn-ún'
+        - 'mẹ́rìndílọ́gọ́rùn-ún'
+        - 'mẹ́tàdílọ́gọ́rùn-ún'
+        - 'méjìdílọ́gọ́rùn-ún'
+        - 'ọ̀kàndílọ́gọ́rùn-ún'
+      scales:
+        -
+          value: 1000000000000000000
+          one: 'kuíńtílíọ̀nù kan'
+          name: 'kuíńtílíọ̀nù'
+        -
+          value: 1000000000000000
+          one: 'kuádírílíọ̀nù kan'
+          name: 'kuádírílíọ̀nù'
+        -
+          value: 1000000000000
+          one: 'tírílíọ̀nù kan'
+          name: 'tírílíọ̀nù'
+        -
+          value: 1000000000
+          one: 'bílíọ̀nù kan'
+          name: 'bílíọ̀nù'
+        -
+          value: 1000000
+          one: 'mílíọ̀nù kan'
+          name: 'mílíọ̀nù'
+        -
+          value: 1000
+          one: 'ẹgbẹ̀rún kan'
+          name: 'ẹgbẹ̀rún'
+        -
+          value: 100
+          one: 'ọgọ́rùn-ún'
+          name: 'ọgọ́rùn-ún'
+          countOverrides:
+            2: 'igba'
+            3: 'ọ̀ọ́dúnrún'
+            4: 'irinwó'
+            5: 'ẹ̀ẹ́dẹ́gbẹ̀ta'
+            6: 'ẹgbẹ̀ta'
+            7: 'ẹ̀ẹ́dẹ́gbẹ̀rin'
+            8: 'ẹgbẹ̀rin'
+            9: 'ẹ̀ẹ́dẹ́gbẹ̀rún'
+      ordinalExceptions:
+        1: 'àkọ́kọ́'
+        2: 'kejì'
+        3: 'kẹta'
+        4: 'kẹrin'
+        5: 'karùn-ún'
+        6: 'kẹfa'
+        7: 'keje'
+        8: 'kẹjọ'
+        9: 'kẹsàn-án'
+        10: 'kẹwàá'
+        11: 'kọ́kànlá'
+        12: 'kejìlá'
+        13: 'kẹ́tàlá'
+        14: 'kẹ́rìnlá'
+        15: 'kẹ́ẹ̀dógún'
+        16: 'kẹ́rìndínlógún'
+        17: 'kẹ́tàdínlógún'
+        18: 'kejìdínlógún'
+        19: 'kọ́kàndínlógún'
+        20: 'ogún'
+        21: 'kọ̀kanlélógún'
+        22: 'kejìlélógún'
+        23: 'kẹ́tàlélógún'
+        24: 'kẹ́rìnlélógún'
+        25: 'karùndínlọ́gbọ̀n'
+        26: 'kẹ́rìndínlọ́gbọ̀n'
+        27: 'kẹ́tàdínlọ́gbọ̀n'
+        28: 'kejìdínlọ́gbọ̀n'
+        29: 'kọ̀kàndínlọ́gbọ̀n'
+        30: 'ọgbọ̀n'
+        31: 'kọ̀kanlélọ́gbọ̀n'
+        32: 'kejìlélọ́gbọ̀n'
+        33: 'kẹ́tàlélọ́gbọ̀n'
+        34: 'kẹ́rìnlélọ́gbọ̀n'
+        35: 'karùndínlógójì'
+        36: 'kẹ́rìndínlógójì'
+        37: 'kẹ́tàdínlógójì'
+        38: 'kejìdínlógójì'
+        39: 'kọ̀kàndínlógójì'
+        40: 'ogójì'
+        41: 'kọ̀kanlélógójì'
+        42: 'kejìlélógójì'
+        43: 'kẹ́tàlélógójì'
+        44: 'kẹ́rìnlélógójì'
+        45: 'karùndíládọ́ta'
+        46: 'kẹ́rìndíládọ́ta'
+        47: 'kẹ́tàdíládọ́ta'
+        48: 'kejìdíládọ́ta'
+        49: 'kọ̀kàndíládọ́ta'
+        50: 'àádọ́ta'
+        51: 'kọ̀kanléládọ́ta'
+        52: 'kejìléládọ́ta'
+        53: 'kẹ́tàléládọ́ta'
+        54: 'kẹ́rìnléládọ́ta'
+        55: 'karùndílọ́gọ́ta'
+        56: 'kẹ́rìndílọ́gọ́ta'
+        57: 'kẹ́tàdílọ́gọ́ta'
+        58: 'kejìdílọ́gọ́ta'
+        59: 'kọ̀kàndílọ́gọ́ta'
+        60: 'ọgọ́ta'
+        61: 'kọ̀kanlélọ́gọ́ta'
+        62: 'kejìlélọ́gọ́ta'
+        63: 'kẹ́tàlélọ́gọ́ta'
+        64: 'kẹ́rìnlélọ́gọ́ta'
+        65: 'karùndíládọ́rin'
+        66: 'kẹ́rìndíládọ́rin'
+        67: 'kẹ́tàdíládọ́rin'
+        68: 'kejìdíládọ́rin'
+        69: 'kọ̀kàndíládọ́rin'
+        70: 'àádọ́rin'
+        71: 'kọ̀kanléládọ́rin'
+        72: 'kejìléládọ́rin'
+        73: 'kẹ́tàléládọ́rin'
+        74: 'kẹ́rìnléládọ́rin'
+        75: 'karùndílọ́gọ́rin'
+        76: 'kẹ́rìndílọ́gọ́rin'
+        77: 'kẹ́tàdílọ́gọ́rin'
+        78: 'kejìdílọ́gọ́rin'
+        79: 'kọ̀kàndílọ́gọ́rin'
+        80: 'ọgọ́rin'
+        81: 'kọ̀kanlélọ́gọ́rin'
+        82: 'kejìlélọ́gọ́rin'
+        83: 'kẹ́tàlélọ́gọ́rin'
+        84: 'kẹ́rìnlélọ́gọ́rin'
+        85: 'karùndíládọ́rùn-ún'
+        86: 'kẹ́rìndíládọ́rùn-ún'
+        87: 'kẹ́tàdíládọ́rùn-ún'
+        88: 'kejìdíládọ́rùn-ún'
+        89: 'kọ̀kàndíládọ́rùn-ún'
+        90: 'àádọ́rùn-ún'
+        91: 'kọ̀kanléládọ́rùn-ún'
+        92: 'kejìléládọ́rùn-ún'
+        93: 'kẹ́tàléládọ́rùn-ún'
+        94: 'kẹ́rìnléládọ́rùn-ún'
+        95: 'karùndílọ́gọ́rùn-ún'
+        96: 'kẹ́rìndílọ́gọ́rùn-ún'
+        97: 'kẹ́tàdílọ́gọ́rùn-ún'
+        98: 'kejìdílọ́gọ́rùn-ún'
+        99: 'kọ̀kàndílọ́gọ́rùn-ún'
+    parse:
+      engine: 'linked-vigesimal'
+      terminalRemainderJoiner: 'lé'
+      words:
+        - 'odo'
+        - 'ọ̀kan'
+        - 'méjì'
+        - 'mẹ́ta'
+        - 'mẹ́rin'
+        - 'márùn-ún'
+        - 'mẹ́fà'
+        - 'méje'
+        - 'mẹ́jọ'
+        - 'mẹ́sàn-án'
+        - 'mẹ́wàá'
+        - 'mọ́kànlá'
+        - 'méjìlá'
+        - 'mẹ́tàlá'
+        - 'mẹ́rìnlá'
+        - 'mẹ́ẹ̀dógún'
+        - 'mẹ́rìndínlógún'
+        - 'mẹ́tàdínlógún'
+        - 'méjìdínlógún'
+        - 'mọ́kàndínlógún'
+        - 'ogún'
+        - 'ọ̀kanlélógún'
+        - 'méjìlélógún'
+        - 'mẹ́tàlélógún'
+        - 'mẹ́rìnlélógún'
+        - 'márùndínlọ́gbọ̀n'
+        - 'mẹ́rìndínlọ́gbọ̀n'
+        - 'mẹ́tàdínlọ́gbọ̀n'
+        - 'méjìdínlọ́gbọ̀n'
+        - 'ọ̀kàndínlọ́gbọ̀n'
+        - 'ọgbọ̀n'
+        - 'ọ̀kanlélọ́gbọ̀n'
+        - 'méjìlélọ́gbọ̀n'
+        - 'mẹ́tàlélọ́gbọ̀n'
+        - 'mẹ́rìnlélọ́gbọ̀n'
+        - 'márùndínlógójì'
+        - 'mẹ́rìndínlógójì'
+        - 'mẹ́tàdínlógójì'
+        - 'méjìdínlógójì'
+        - 'ọ̀kàndínlógójì'
+        - 'ogójì'
+        - 'ọ̀kanlélógójì'
+        - 'méjìlélógójì'
+        - 'mẹ́tàlélógójì'
+        - 'mẹ́rìnlélógójì'
+        - 'márùndíládọ́ta'
+        - 'mẹ́rìndíládọ́ta'
+        - 'mẹ́tàdíládọ́ta'
+        - 'méjìdíládọ́ta'
+        - 'ọ̀kàndíládọ́ta'
+        - 'àádọ́ta'
+        - 'ọ̀kanléládọ́ta'
+        - 'méjìléládọ́ta'
+        - 'mẹ́tàléládọ́ta'
+        - 'mẹ́rìnléládọ́ta'
+        - 'márùndílọ́gọ́ta'
+        - 'mẹ́rìndílọ́gọ́ta'
+        - 'mẹ́tàdílọ́gọ́ta'
+        - 'méjìdílọ́gọ́ta'
+        - 'ọ̀kàndílọ́gọ́ta'
+        - 'ọgọ́ta'
+        - 'ọ̀kanlélọ́gọ́ta'
+        - 'méjìlélọ́gọ́ta'
+        - 'mẹ́tàlélọ́gọ́ta'
+        - 'mẹ́rìnlélọ́gọ́ta'
+        - 'márùndíládọ́rin'
+        - 'mẹ́rìndíládọ́rin'
+        - 'mẹ́tàdíládọ́rin'
+        - 'méjìdíládọ́rin'
+        - 'ọ̀kàndíládọ́rin'
+        - 'àádọ́rin'
+        - 'ọ̀kanléládọ́rin'
+        - 'méjìléládọ́rin'
+        - 'mẹ́tàléládọ́rin'
+        - 'mẹ́rìnléládọ́rin'
+        - 'márùndílọ́gọ́rin'
+        - 'mẹ́rìndílọ́gọ́rin'
+        - 'mẹ́tàdílọ́gọ́rin'
+        - 'méjìdílọ́gọ́rin'
+        - 'ọ̀kàndílọ́gọ́rin'
+        - 'ọgọ́rin'
+        - 'ọ̀kanlélọ́gọ́rin'
+        - 'méjìlélọ́gọ́rin'
+        - 'mẹ́tàlélọ́gọ́rin'
+        - 'mẹ́rìnlélọ́gọ́rin'
+        - 'márùndíládọ́rùn-ún'
+        - 'mẹ́rìndíládọ́rùn-ún'
+        - 'mẹ́tàdíládọ́rùn-ún'
+        - 'méjìdíládọ́rùn-ún'
+        - 'ọ̀kàndíládọ́rùn-ún'
+        - 'àádọ́rùn-ún'
+        - 'ọ̀kanléládọ́rùn-ún'
+        - 'méjìléládọ́rùn-ún'
+        - 'mẹ́tàléládọ́rùn-ún'
+        - 'mẹ́rìnléládọ́rùn-ún'
+        - 'márùndílọ́gọ́rùn-ún'
+        - 'mẹ́rìndílọ́gọ́rùn-ún'
+        - 'mẹ́tàdílọ́gọ́rùn-ún'
+        - 'méjìdílọ́gọ́rùn-ún'
+        - 'ọ̀kàndílọ́gọ́rùn-ún'
+      scales:
+        -
+          value: 1000000000000000000
+          one: 'kuíńtílíọ̀nù kan'
+          name: 'kuíńtílíọ̀nù'
+        -
+          value: 1000000000000000
+          one: 'kuádírílíọ̀nù kan'
+          name: 'kuádírílíọ̀nù'
+        -
+          value: 1000000000000
+          one: 'tírílíọ̀nù kan'
+          name: 'tírílíọ̀nù'
+        -
+          value: 1000000000
+          one: 'bílíọ̀nù kan'
+          name: 'bílíọ̀nù'
+        -
+          value: 1000000
+          one: 'mílíọ̀nù kan'
+          name: 'mílíọ̀nù'
+        -
+          value: 1000
+          one: 'ẹgbẹ̀rún kan'
+          name: 'ẹgbẹ̀rún'
+        -
+          value: 100
+          one: 'ọgọ́rùn-ún'
+          name: 'ọgọ́rùn-ún'
+          countOverrides:
+            2: 'igba'
+            3: 'ọ̀ọ́dúnrún'
+            4: 'irinwó'
+            5: 'ẹ̀ẹ́dẹ́gbẹ̀ta'
+            6: 'ẹgbẹ̀ta'
+            7: 'ẹ̀ẹ́dẹ́gbẹ̀rin'
+            8: 'ẹgbẹ̀rin'
+            9: 'ẹ̀ẹ́dẹ́gbẹ̀rún'
+      negativePrefixes:
+        - 'àìyọkúrò'
+      ordinalMap:
+        'àkọ́kọ́': 1
+        'kejì': 2
+        'kẹta': 3
+        'kẹrin': 4
+        'karùn-ún': 5
+        'kẹfa': 6
+        'keje': 7
+        'kẹjọ': 8
+        'kẹsàn-án': 9
+        'kẹwàá': 10
+        'kọ́kànlá': 11
+        'kejìlá': 12
+        'kẹ́tàlá': 13
+        'kẹ́rìnlá': 14
+        'kẹ́ẹ̀dógún': 15
+        'kẹ́rìndínlógún': 16
+        'kẹ́tàdínlógún': 17
+        'kejìdínlógún': 18
+        'kọ́kàndínlógún': 19
+        'ogún': 20
+        'kọ̀kanlélógún': 21
+        'kejìlélógún': 22
+        'kẹ́tàlélógún': 23
+        'kẹ́rìnlélógún': 24
+        'karùndínlọ́gbọ̀n': 25
+        'kẹ́rìndínlọ́gbọ̀n': 26
+        'kẹ́tàdínlọ́gbọ̀n': 27
+        'kejìdínlọ́gbọ̀n': 28
+        'kọ̀kàndínlọ́gbọ̀n': 29
+        'ọgbọ̀n': 30
+        'kọ̀kanlélọ́gbọ̀n': 31
+        'kejìlélọ́gbọ̀n': 32
+        'kẹ́tàlélọ́gbọ̀n': 33
+        'kẹ́rìnlélọ́gbọ̀n': 34
+        'karùndínlógójì': 35
+        'kẹ́rìndínlógójì': 36
+        'kẹ́tàdínlógójì': 37
+        'kejìdínlógójì': 38
+        'kọ̀kàndínlógójì': 39
+        'ogójì': 40
+        'kọ̀kanlélógójì': 41
+        'kejìlélógójì': 42
+        'kẹ́tàlélógójì': 43
+        'kẹ́rìnlélógójì': 44
+        'karùndíládọ́ta': 45
+        'kẹ́rìndíládọ́ta': 46
+        'kẹ́tàdíládọ́ta': 47
+        'kejìdíládọ́ta': 48
+        'kọ̀kàndíládọ́ta': 49
+        'àádọ́ta': 50
+        'kọ̀kanléládọ́ta': 51
+        'kejìléládọ́ta': 52
+        'kẹ́tàléládọ́ta': 53
+        'kẹ́rìnléládọ́ta': 54
+        'karùndílọ́gọ́ta': 55
+        'kẹ́rìndílọ́gọ́ta': 56
+        'kẹ́tàdílọ́gọ́ta': 57
+        'kejìdílọ́gọ́ta': 58
+        'kọ̀kàndílọ́gọ́ta': 59
+        'ọgọ́ta': 60
+        'kọ̀kanlélọ́gọ́ta': 61
+        'kejìlélọ́gọ́ta': 62
+        'kẹ́tàlélọ́gọ́ta': 63
+        'kẹ́rìnlélọ́gọ́ta': 64
+        'karùndíládọ́rin': 65
+        'kẹ́rìndíládọ́rin': 66
+        'kẹ́tàdíládọ́rin': 67
+        'kejìdíládọ́rin': 68
+        'kọ̀kàndíládọ́rin': 69
+        'àádọ́rin': 70
+        'kọ̀kanléládọ́rin': 71
+        'kejìléládọ́rin': 72
+        'kẹ́tàléládọ́rin': 73
+        'kẹ́rìnléládọ́rin': 74
+        'karùndílọ́gọ́rin': 75
+        'kẹ́rìndílọ́gọ́rin': 76
+        'kẹ́tàdílọ́gọ́rin': 77
+        'kejìdílọ́gọ́rin': 78
+        'kọ̀kàndílọ́gọ́rin': 79
+        'ọgọ́rin': 80
+        'kọ̀kanlélọ́gọ́rin': 81
+        'kejìlélọ́gọ́rin': 82
+        'kẹ́tàlélọ́gọ́rin': 83
+        'kẹ́rìnlélọ́gọ́rin': 84
+        'karùndíládọ́rùn-ún': 85
+        'kẹ́rìndíládọ́rùn-ún': 86
+        'kẹ́tàdíládọ́rùn-ún': 87
+        'kejìdíládọ́rùn-ún': 88
+        'kọ̀kàndíládọ́rùn-ún': 89
+        'àádọ́rùn-ún': 90
+        'kọ̀kanléládọ́rùn-ún': 91
+        'kejìléládọ́rùn-ún': 92
+        'kẹ́tàléládọ́rùn-ún': 93
+        'kẹ́rìnléládọ́rùn-ún': 94
+        'karùndílọ́gọ́rùn-ún': 95
+        'kẹ́rìndílọ́gọ́rùn-ún': 96
+        'kẹ́tàdílọ́gọ́rùn-ún': 97
+        'kejìdílọ́gọ́rùn-ún': 98
+        'kọ̀kàndílọ́gọ́rùn-ún': 99
+      additionalCardinals:
+        kan: 1
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'kan'
+      - 'méjì'
+      - 'mẹ́ta'
+      - 'mẹ́rin'
+      - 'márùn-ún'
+      - 'mẹ́fà'
+      - 'méje'
+      - 'mẹ́jọ'
+      - 'mẹ́sàn-án'
+      - 'mẹ́wàá'
+      - 'mọ́kànlá'
+      - 'méjìlá'
+    min0: 'aago {hour} {dayPeriod}'
+    defaultTemplate: 'aago {hour} kọjá ìṣẹ́jú {minutes} {dayPeriod}'
+    earlyMorning: 'àárọ̀'
+    morning: 'àárọ̀'
+    afternoon: 'ọ̀sán'
+    evening: 'ìrọ̀lẹ́'
+    night: 'alẹ́'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'àríwá'
+      - 'àríwá-àríwá-ìlà-oòrùn'
+      - 'àríwá-ìlà-oòrùn'
+      - 'ìlà-oòrùn-àríwá-ìlà-oòrùn'
+      - 'ìlà-oòrùn'
+      - 'ìlà-oòrùn-gúúsù-ìlà-oòrùn'
+      - 'gúúsù-ìlà-oòrùn'
+      - 'gúúsù-gúúsù-ìlà-oòrùn'
+      - 'gúúsù'
+      - 'gúúsù-gúúsù-ìwọ̀-oòrùn'
+      - 'gúúsù-ìwọ̀-oòrùn'
+      - 'ìwọ̀-oòrùn-gúúsù-ìwọ̀-oòrùn'
+      - 'ìwọ̀-oòrùn'
+      - 'ìwọ̀-oòrùn-àríwá-ìwọ̀-oòrùn'
+      - 'àríwá-ìwọ̀-oòrùn'
+      - 'àríwá-àríwá-ìwọ̀-oòrùn'
+    short:
+      - 'A'
+      - 'AAÌ'
+      - 'AÌ'
+      - 'ÌAÌ'
+      - 'Ì'
+      - 'ÌGÌ'
+      - 'GÌ'
+      - 'GGÌ'
+      - 'G'
+      - 'GGÌw'
+      - 'GÌw'
+      - 'ÌwGÌw'
+      - 'Ìw'
+      - 'ÌwAÌw'
+      - 'AÌw'
+      - 'AAÌw'

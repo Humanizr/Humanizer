@@ -1,0 +1,486 @@
+locale: 'sv'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'och'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitDetector: 'singular-plural'
+    dataUnitSuffixes:
+      singular: '_Singular'
+
+  phrases:
+    relativeDate:
+      now: 'nu'
+      never: 'aldrig'
+      past:
+        millisecond:
+          single: 'en millisekund sedan'
+          multiple:
+            forms:
+              default: 'millisekunder'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+        second:
+          single: 'en sekund sedan'
+          multiple:
+            forms:
+              default: 'sekunder'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+        minute:
+          single: 'en minut sedan'
+          multiple:
+            forms:
+              default: 'minuter'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+        hour:
+          single: 'en timme sedan'
+          multiple:
+            forms:
+              default: 'timmar'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+        day:
+          single: 'igår'
+          multiple:
+            forms:
+              default: 'dagar'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+          template:
+            name: 'two'
+            value: 'i förrgår'
+        week:
+          single: 'en vecka sedan'
+          multiple:
+            forms:
+              default: 'veckor'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+        month:
+          single: 'en månad sedan'
+          multiple:
+            forms:
+              default: 'månader'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+        year:
+          single: 'ett år sedan'
+          multiple:
+            forms:
+              default: 'år'
+            beforeCount: 'för'
+            afterCount: 'sedan'
+      future:
+        millisecond:
+          single: 'om en millisekund'
+          multiple:
+            forms:
+              default: 'millisekunder'
+            beforeCount: 'om'
+        second:
+          single: 'om en sekund'
+          multiple:
+            forms:
+              default: 'sekunder'
+            beforeCount: 'om'
+        minute:
+          single: 'om en minut'
+          multiple:
+            forms:
+              default: 'minuter'
+            beforeCount: 'om'
+        hour:
+          single: 'om en timme'
+          multiple:
+            forms:
+              default: 'timmar'
+            beforeCount: 'om'
+        day:
+          single: 'i morgon'
+          multiple:
+            forms:
+              default: 'dagar'
+            beforeCount: 'om'
+          template:
+            name: 'two'
+            value: 'i övermorgon'
+        week:
+          single: 'om en vecka'
+          multiple:
+            forms:
+              default: 'veckor'
+            beforeCount: 'om'
+        month:
+          single: 'om en månad'
+          multiple:
+            forms:
+              default: 'månader'
+            beforeCount: 'om'
+        year:
+          single: 'om ett år'
+          multiple:
+            forms:
+              default: 'år'
+            beforeCount: 'om'
+    duration:
+      zero: 'ingen tid'
+      age:
+        template: '{value} gammal'
+      millisecond:
+        single:
+          numeric: '1 millisekund'
+          words: 'one millisekund'
+        multiple:
+          forms:
+            default: 'millisekunder'
+      second:
+        single:
+          numeric: '1 sekund'
+          words: 'one sekund'
+        multiple:
+          forms:
+            default: 'sekunder'
+      minute:
+        single:
+          numeric: '1 minut'
+          words: 'one minut'
+        multiple:
+          forms:
+            default: 'minuter'
+      hour:
+        single:
+          numeric: '1 timme'
+          words: 'one timme'
+        multiple:
+          forms:
+            default: 'timmar'
+      day:
+        single:
+          numeric: '1 dag'
+          words: 'one dag'
+        multiple:
+          forms:
+            default: 'dagar'
+      week:
+        single:
+          numeric: '1 vecka'
+          words: 'one vecka'
+        multiple:
+          forms:
+            default: 'veckor'
+      month:
+        single:
+          numeric: 'en månad'
+          words: 'en månad'
+        multiple:
+          forms:
+            default: 'månader'
+      year:
+        single:
+          numeric: 'ett år'
+          words: 'ett år'
+        multiple:
+          forms:
+            default: 'år'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'sek.'
+      minute:
+        symbol: 'min.'
+      hour:
+        symbol: 'timme'
+      day:
+        symbol: 'dag'
+      week:
+        symbol: 'vecka'
+      month:
+        symbol: 'månad'
+      year:
+        symbol: 'år'
+
+  number:
+    words:
+      engine: 'scale-strategy'
+      cardinalStrategy: 'swedish'
+      ordinalStrategy: 'swedish'
+      maximumValue: 9223372036854775807
+      defaultGender: 'neuter'
+      zeroWord: 'noll'
+      minusWord: 'minus'
+      oneDefault: 'ett'
+      oneMasculine: 'en'
+      oneFeminine: 'ett'
+      oneNeuter: 'ett'
+      tensOrdinalSuffix: 'nde'
+      shortOrdinalUpperBoundExclusive: 0
+      hundredWord: 'hundra'
+      hundredCompositeSingularWord: 'hundra'
+      thousandWord: 'tusen'
+      thousandSingularWord: 'ett tusen'
+      thousandCompositeSingularWord: 'ett tusen'
+      unitsMap:
+        - 'noll'
+        - 'ett'
+        - 'två'
+        - 'tre'
+        - 'fyra'
+        - 'fem'
+        - 'sex'
+        - 'sju'
+        - 'åtta'
+        - 'nio'
+        - 'tio'
+        - 'elva'
+        - 'tolv'
+        - 'tretton'
+        - 'fjorton'
+        - 'femton'
+        - 'sexton'
+        - 'sjutton'
+        - 'arton'
+        - 'nitton'
+      tensMap:
+        - 'noll'
+        - 'tio'
+        - 'tjugo'
+        - 'trettio'
+        - 'fyrtio'
+        - 'femtio'
+        - 'sextio'
+        - 'sjuttio'
+        - 'åttio'
+        - 'nittio'
+      hundredUnitMap: []
+      scales:
+        -
+          value: 1000000000000
+          name: 'biljon'
+          plural: 'biljon'
+          prefix: ' '
+          postfix: ' '
+          pluralSuffix: 'er'
+          ordinalSuffix: 'te'
+          displayOneUnit: true
+          gender: 'masculine'
+        -
+          value: 1000000000
+          name: 'miljard'
+          plural: 'miljard'
+          prefix: ' '
+          postfix: ' '
+          pluralSuffix: 'er'
+          ordinalSuffix: 'de'
+          displayOneUnit: true
+          gender: 'masculine'
+        -
+          value: 1000000
+          name: 'miljon'
+          plural: 'miljon'
+          prefix: ' '
+          postfix: ' '
+          pluralSuffix: 'er'
+          ordinalSuffix: 'te'
+          displayOneUnit: true
+          gender: 'masculine'
+        -
+          value: 1000
+          name: 'tusen'
+          plural: 'tusen'
+          prefix: ' '
+          postfix: ' '
+          ordinalSuffix: 'de'
+          displayOneUnit: true
+          gender: 'neuter'
+        -
+          value: 100
+          name: 'hundra'
+          plural: 'hundra'
+          ordinalSuffix: 'de'
+          displayOneUnit: false
+          gender: 'neuter'
+      ordinalExceptions:
+        0: 'nollte'
+        1: 'första'
+        2: 'andra'
+        3: 'tredje'
+        4: 'fjärde'
+        5: 'femte'
+        6: 'sjätte'
+        7: 'sjunde'
+        8: 'åttonde'
+        9: 'nionde'
+        10: 'tionde'
+        11: 'elfte'
+        12: 'tolfte'
+        13: 'trettonde'
+        14: 'fjortonde'
+        15: 'femtonde'
+        16: 'sextonde'
+        17: 'sjuttonde'
+        18: 'artonde'
+        19: 'nittonde'
+        20: 'tjugonde'
+        30: 'trettionde'
+        40: 'fyrtionde'
+        50: 'femtionde'
+        60: 'sextionde'
+        70: 'sjuttionde'
+        80: 'åttionde'
+        90: 'nittionde'
+
+    formatting:
+      negativeSign: '−'
+
+    parse:
+      engine: 'compound-scale'
+      cardinalMap:
+        noll: 0
+        ett: 1
+        en: 1
+        'två': 2
+        tre: 3
+        fyra: 4
+        fem: 5
+        sex: 6
+        sju: 7
+        'åtta': 8
+        nio: 9
+        tio: 10
+        elva: 11
+        tolv: 12
+        tretton: 13
+        fjorton: 14
+        femton: 15
+        sexton: 16
+        sjutton: 17
+        arton: 18
+        nitton: 19
+        tjugo: 20
+        trettio: 30
+        fyrtio: 40
+        femtio: 50
+        sextio: 60
+        sjuttio: 70
+        'åttio': 80
+        nittio: 90
+        hundra: 100
+        tusen: 1000
+        miljon: 1000000
+        miljoner: 1000000
+        miljard: 1000000000
+        miljarder: 1000000000
+      tens:
+        - 'tjugo'
+        - 'trettio'
+        - 'fyrtio'
+        - 'femtio'
+        - 'sextio'
+        - 'sjuttio'
+        - 'åttio'
+        - 'nittio'
+      largeScales:
+        - 'miljard'
+        - 'miljoner'
+        - 'miljon'
+        - 'tusen'
+        - 'hundra'
+      ordinalNumberToWordsKind: 'self'
+      negativePrefixes:
+        - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'modulo-suffix'
+      defaultSuffix: ':e'
+      useAbsoluteValue: true
+      lastTwoDigitsRange:
+        start: 11
+        end: 19
+        suffix: ':e'
+      lastDigitSuffixes:
+        1: ':a'
+        2: ':a'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'neuter'
+    zeroFiller: 'noll'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'nord'
+      - 'nordnordost'
+      - 'nordost'
+      - 'östnordost'
+      - 'ost'
+      - 'östsydost'
+      - 'sydost'
+      - 'sydsydost'
+      - 'syd'
+      - 'sydsydväst'
+      - 'sydväst'
+      - 'västsydväst'
+      - 'väst'
+      - 'västnordväst'
+      - 'nordväst'
+      - 'nordnordväst'
+    short:
+      - 'N'
+      - 'NNO'
+      - 'NO'
+      - 'ONO'
+      - 'O'
+      - 'OSO'
+      - 'SO'
+      - 'SSO'
+      - 'S'
+      - 'SSV'
+      - 'SV'
+      - 'VSV'
+      - 'V'
+      - 'VNV'
+      - 'NV'
+      - 'NNV'

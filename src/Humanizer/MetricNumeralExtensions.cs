@@ -146,8 +146,43 @@ public static class MetricNumeralExtensions
     /// </code>
     /// </example>
     /// <returns>A valid Metric representation</returns>
-    public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null) =>
-        ((double)input).ToMetric(formats, decimals);
+    public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null)
+    {
+        if (!formats.HasValue && !decimals.HasValue)
+        {
+            return BuildDefaultRepresentation(input);
+        }
+
+        return ((double)input).ToMetric(formats, decimals);
+    }
+
+    static string BuildDefaultRepresentation(int input)
+    {
+        if (input == 0)
+        {
+            return input.ToString();
+        }
+
+        var absolute = Math.Abs((long)input);
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
+
+        if (absolute < 1_000)
+        {
+            return input.ToString(nfi);
+        }
+
+        if (absolute < 1_000_000)
+        {
+            return (input / 1_000d).ToString("G15", nfi) + "k";
+        }
+
+        if (absolute < 1_000_000_000)
+        {
+            return (input / 1_000_000d).ToString("G15", nfi) + "M";
+        }
+
+        return (input / 1_000_000_000d).ToString("G15", nfi) + "G";
+    }
 
     /// <summary>
     /// Converts a number into a valid and Human-readable Metric representation.
@@ -297,9 +332,10 @@ public static class MetricNumeralExtensions
             return BuildMetricRepresentation(input, scale, formats, decimals);
         }
 
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var representation = decimals > 0
-            ? $"{input}.{new string('0', decimals.Value)}"
-            : input.ToString();
+            ? $"{input.ToString(nfi)}{nfi.NumberDecimalSeparator}{new string('0', decimals.Value)}"
+            : input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
@@ -355,10 +391,12 @@ public static class MetricNumeralExtensions
             ? Symbols[0][scale - 1]
             : Symbols[1][-scale - 1];
 
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
+
         if (decimals == 0)
         {
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
-            return number + space + GetUnitText(symbol, formats);
+            return number.ToString(nfi) + space + GetUnitText(symbol, formats);
         }
         else
         {
@@ -366,8 +404,8 @@ public static class MetricNumeralExtensions
             var extraZeroes = (decimals.Value - decimalPlaces);
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
 
-            return number
-                 + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+            return number.ToString(nfi)
+                 + nfi.NumberDecimalSeparator
                  + fractionalPart.ToString("d" + decimalPlaces)
                  + (extraZeroes <= 0 ? string.Empty : new string('0', extraZeroes))
                  + space
@@ -391,11 +429,12 @@ public static class MetricNumeralExtensions
             return BuildMetricRepresentation(input, exponent, formats, decimals);
         }
 
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var representation = decimals.HasValue
             ? Math
                 .Round(input, decimals.Value)
-                .ToString()
-            : input.ToString();
+                .ToString(nfi)
+            : input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
@@ -425,8 +464,9 @@ public static class MetricNumeralExtensions
         var symbol = Math.Sign(exponent) == 1
             ? Symbols[0][exponent - 1]
             : Symbols[1][-exponent - 1];
+        var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
-        return number.ToString("G15") + space + GetUnitText(symbol, formats);
+        return number.ToString("G15", nfi) + space + GetUnitText(symbol, formats);
     }
 
     /// <summary>

@@ -1,4 +1,9 @@
 ## --------------------------------------------
+##  Python build artifacts
+__pycache__/
+*.pyc
+
+## --------------------------------------------
 ##  xUnit.net specific ignores
 
 Test*.html
@@ -41,7 +46,6 @@ Storage.dat
 # DNX
 project.lock.json
 *.lock.json
-artifacts/
 
 # Visual Studio profiler
 *.psess
@@ -108,3 +112,20 @@ docs/.sass-cache/
 
 # BenchmarkDotNet artifacts
 **/BenchmarkDotNet.Artifacts/
+
+# Clairvoyance workspace knowledge (machine-specific)
+.clairvoyance/
+.Clairvoyance/
+
+# Ralph autonomous agent logs
+scripts/ralph/logs/
+!.flow/bin/
+
+# Local agent workspace artifacts
+/.worktrees/
+/prompt-exports/
+
+# Claude session lock files (machine-specific)
+/.claude/*.lock
+
+artifacts/

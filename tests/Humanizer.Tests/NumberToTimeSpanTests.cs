@@ -1,4 +1,4 @@
-﻿public class NumberToTimeSpanTests
+public class NumberToTimeSpanTests
 {
     [Fact]
     public void ByteToMilliseconds()

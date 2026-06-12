@@ -1,0 +1,649 @@
+locale: 'ps'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'او'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'اوس'
+      never: 'هېڅکله'
+      past:
+        millisecond:
+          single: 'یوه ملي ثانیه مخکې'
+          multiple:
+            forms:
+              default: 'ملي ثانیې'
+            afterCount: 'مخکې'
+        second:
+          single: 'یوه ثانیه مخکې'
+          multiple:
+            forms:
+              default: 'ثانیې'
+            afterCount: 'مخکې'
+        minute:
+          single: 'یوه دقیقه مخکې'
+          multiple:
+            forms:
+              default: 'دقیقې'
+            afterCount: 'مخکې'
+        hour:
+          single: 'یو ساعت مخکې'
+          multiple:
+            forms:
+              default: 'ساعتونه'
+            afterCount: 'مخکې'
+        day:
+          single: 'پرون'
+          multiple:
+            forms:
+              default: 'ورځې'
+            afterCount: 'مخکې'
+        week:
+          single: 'یوه اونۍ مخکې'
+          multiple:
+            forms:
+              default: 'اونۍ'
+            afterCount: 'مخکې'
+        month:
+          single: 'یوه میاشت مخکې'
+          multiple:
+            forms:
+              default: 'میاشتې'
+            afterCount: 'مخکې'
+        year:
+          single: 'یو کال مخکې'
+          multiple:
+            forms:
+              default: 'کلونه'
+            afterCount: 'مخکې'
+      future:
+        millisecond:
+          single: 'په یوه ملي ثانیه کې'
+          multiple:
+            forms:
+              default: 'ملي ثانیو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+        second:
+          single: 'په یوه ثانیه کې'
+          multiple:
+            forms:
+              default: 'ثانیو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+        minute:
+          single: 'په یوه دقیقه کې'
+          multiple:
+            forms:
+              default: 'دقیقو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+        hour:
+          single: 'په یو ساعت کې'
+          multiple:
+            forms:
+              default: 'ساعتونو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+        day:
+          single: 'سبا'
+          multiple:
+            forms:
+              default: 'ورځو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+        week:
+          single: 'په یوه اونۍ کې'
+          multiple:
+            forms:
+              default: 'اونیو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+        month:
+          single: 'په یوه میاشت کې'
+          multiple:
+            forms:
+              default: 'میاشتو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+        year:
+          single: 'په یو کال کې'
+          multiple:
+            forms:
+              default: 'کلونو'
+            beforeCount: 'په'
+            afterCount: 'کې'
+    duration:
+      zero: 'اوس'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 ملي ثانیه'
+          words: 'یوه ملي ثانیه'
+        multiple:
+          forms:
+            default: 'ملي ثانیې'
+            singular: 'ملي ثانیه'
+      second:
+        single:
+          numeric: '1 ثانیه'
+          words: 'یوه ثانیه'
+        multiple:
+          forms:
+            default: 'ثانیې'
+            singular: 'ثانیه'
+      minute:
+        single:
+          numeric: '1 دقیقه'
+          words: 'یوه دقیقه'
+        multiple:
+          forms:
+            default: 'دقیقې'
+            singular: 'دقیقه'
+      hour:
+        single:
+          numeric: '1 ساعت'
+          words: 'یو ساعت'
+        multiple:
+          forms:
+            default: 'ساعتونه'
+            singular: 'ساعت'
+      day:
+        single:
+          numeric: '1 ورځ'
+          words: 'یوه ورځ'
+        multiple:
+          forms:
+            default: 'ورځې'
+            singular: 'ورځ'
+      week:
+        single:
+          numeric: '1 اونۍ'
+          words: 'یوه اونۍ'
+        multiple:
+          forms:
+            default: 'اونۍ'
+            singular: 'اونۍ'
+      month:
+        single:
+          numeric: '1 میاشت'
+          words: 'یوه میاشت'
+        multiple:
+          forms:
+            default: 'میاشتې'
+            singular: 'میاشت'
+      year:
+        single:
+          numeric: '1 کال'
+          words: 'یو کال'
+        multiple:
+          forms:
+            default: 'کلونه'
+            singular: 'کال'
+    dataUnits:
+      bit:
+        forms:
+          default: 'بیټ'
+          singular: 'بیټ'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'بایټ'
+          singular: 'بایټ'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'کیلوبایټ'
+          singular: 'کیلوبایټ'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'مېګابایټ'
+          singular: 'مېګابایټ'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'ګیګابایټ'
+          singular: 'ګیګابایټ'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'ټېرابایټ'
+          singular: 'ټېرابایټ'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ملي ثانیه'
+      second:
+        symbol: 'ثانیه'
+      minute:
+        symbol: 'دقیقه'
+      hour:
+        symbol: 'ساعت'
+      day:
+        symbol: 'ورځ'
+      week:
+        symbol: 'اونۍ'
+      month:
+        symbol: 'میاشت'
+      year:
+        symbol: 'کال'
+
+  number:
+    words:
+      engine: 'joined-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'صفر'
+      minusWord: 'منفي'
+      negativeJoinWord: ' '
+      joinWord: ' او '
+      scaleCountJoinWord: ' '
+      defaultOrdinalSuffix: 'م'
+      subHundredMap:
+        - 'صفر'
+        - 'یو'
+        - 'دوه'
+        - 'درې'
+        - 'څلور'
+        - 'پنځه'
+        - 'شپږ'
+        - 'اووه'
+        - 'اته'
+        - 'نهه'
+        - 'لس'
+        - 'یوولس'
+        - 'دولس'
+        - 'دیارلس'
+        - 'څوارلس'
+        - 'پنځلس'
+        - 'شپاړس'
+        - 'اوولس'
+        - 'اتلس'
+        - 'نولس'
+        - 'شل'
+        - 'یوویشت'
+        - 'دوه ویشت'
+        - 'درې ویشت'
+        - 'څلور ویشت'
+        - 'پنځه ویشت'
+        - 'شپږ ویشت'
+        - 'اووه ویشت'
+        - 'اته ویشت'
+        - 'نهه ویشت'
+        - 'دېرش'
+        - 'یو دېرش'
+        - 'دوه دېرش'
+        - 'درې دېرش'
+        - 'څلور دېرش'
+        - 'پنځه دېرش'
+        - 'شپږ دېرش'
+        - 'اووه دېرش'
+        - 'اته دېرش'
+        - 'نهه دېرش'
+        - 'څلوېښت'
+        - 'یو څلوېښت'
+        - 'دوه څلوېښت'
+        - 'درې څلوېښت'
+        - 'څلور څلوېښت'
+        - 'پنځه څلوېښت'
+        - 'شپږ څلوېښت'
+        - 'اووه څلوېښت'
+        - 'اته څلوېښت'
+        - 'نهه څلوېښت'
+        - 'پنځوس'
+        - 'یو پنځوس'
+        - 'دوه پنځوس'
+        - 'درې پنځوس'
+        - 'څلور پنځوس'
+        - 'پنځه پنځوس'
+        - 'شپږ پنځوس'
+        - 'اووه پنځوس'
+        - 'اته پنځوس'
+        - 'نهه پنځوس'
+        - 'شپېته'
+        - 'یو شپېته'
+        - 'دوه شپېته'
+        - 'درې شپېته'
+        - 'څلور شپېته'
+        - 'پنځه شپېته'
+        - 'شپږ شپېته'
+        - 'اووه شپېته'
+        - 'اته شپېته'
+        - 'نهه شپېته'
+        - 'اویا'
+        - 'یو اویا'
+        - 'دوه اویا'
+        - 'درې اویا'
+        - 'څلور اویا'
+        - 'پنځه اویا'
+        - 'شپږ اویا'
+        - 'اووه اویا'
+        - 'اته اویا'
+        - 'نهه اویا'
+        - 'اتیا'
+        - 'یو اتیا'
+        - 'دوه اتیا'
+        - 'درې اتیا'
+        - 'څلور اتیا'
+        - 'پنځه اتیا'
+        - 'شپږ اتیا'
+        - 'اووه اتیا'
+        - 'اته اتیا'
+        - 'نهه اتیا'
+        - 'نوي'
+        - 'یو نوي'
+        - 'دوه نوي'
+        - 'درې نوي'
+        - 'څلور نوي'
+        - 'پنځه نوي'
+        - 'شپږ نوي'
+        - 'اووه نوي'
+        - 'اته نوي'
+        - 'نهه نوي'
+      feminineSubHundredReplacements:
+        1: 'یوه'
+      hundredsMap:
+        - 'صفر'
+        - 'سل'
+        - 'دوه سوه'
+        - 'درې سوه'
+        - 'څلور سوه'
+        - 'پنځه سوه'
+        - 'شپږ سوه'
+        - 'اووه سوه'
+        - 'اته سوه'
+        - 'نهه سوه'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'تریلیون'
+        -
+          value: 1000000000000000
+          name: 'بیلیارد'
+        -
+          value: 1000000000000
+          name: 'بیلیون'
+        -
+          value: 1000000000
+          name: 'میلیارد'
+        -
+          value: 1000000
+          name: 'میلیون'
+        -
+          value: 1000
+          name: 'زره'
+      ordinal:
+        masculine:
+          defaultSuffix: 'م'
+          exactReplacements:
+            1: 'لومړی'
+            2: 'دوهم'
+            3: 'درېیم'
+        feminine:
+          defaultSuffix: 'مه'
+          exactReplacements:
+            1: 'لومړۍ'
+            2: 'دوهمه'
+            3: 'درېیمه'
+        neuterFallback: 'masculine'
+
+    formatting:
+      decimalSeparator: '٫'
+      groupSeparator: '٬'
+      negativeSign: '-'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'masculine-and-feminine'
+      useHundredMultiplier: true
+      tokenSuffixesToStrip:
+        - 'م'
+        - 'مه'
+      teenSuffixTokens:
+        - 'ویشت'
+      teenBaseValue: 20
+      cardinalMap:
+        'صفر': 0
+        'یو': 1
+        'یوه': 1
+        'دوه': 2
+        'درې': 3
+        'څلور': 4
+        'پنځه': 5
+        'شپږ': 6
+        'اووه': 7
+        'اوه': 7
+        'اته': 8
+        'نهه': 9
+        'لس': 10
+        'یوولس': 11
+        'دولس': 12
+        'دیارلس': 13
+        'څوارلس': 14
+        'پنځلس': 15
+        'شپاړس': 16
+        'اوولس': 17
+        'اتلس': 18
+        'نولس': 19
+        'شل': 20
+        'ویشت': 20
+        'یوویشت': 21
+        'دوه ویشت': 22
+        'درې ویشت': 23
+        'څلور ویشت': 24
+        'پنځه ویشت': 25
+        'شپږ ویشت': 26
+        'اووه ویشت': 27
+        'اته ویشت': 28
+        'نهه ویشت': 29
+        'دېرش': 30
+        'یو دېرش': 31
+        'دوه دېرش': 32
+        'درې دېرش': 33
+        'څلور دېرش': 34
+        'پنځه دېرش': 35
+        'شپږ دېرش': 36
+        'اووه دېرش': 37
+        'اته دېرش': 38
+        'نهه دېرش': 39
+        'څلوېښت': 40
+        'یو څلوېښت': 41
+        'دوه څلوېښت': 42
+        'درې څلوېښت': 43
+        'څلور څلوېښت': 44
+        'پنځه څلوېښت': 45
+        'شپږ څلوېښت': 46
+        'اووه څلوېښت': 47
+        'اته څلوېښت': 48
+        'نهه څلوېښت': 49
+        'پنځوس': 50
+        'یو پنځوس': 51
+        'دوه پنځوس': 52
+        'درې پنځوس': 53
+        'څلور پنځوس': 54
+        'پنځه پنځوس': 55
+        'شپږ پنځوس': 56
+        'اووه پنځوس': 57
+        'اته پنځوس': 58
+        'نهه پنځوس': 59
+        'شپېته': 60
+        'یو شپېته': 61
+        'دوه شپېته': 62
+        'درې شپېته': 63
+        'څلور شپېته': 64
+        'پنځه شپېته': 65
+        'شپږ شپېته': 66
+        'اووه شپېته': 67
+        'اته شپېته': 68
+        'نهه شپېته': 69
+        'اویا': 70
+        'یو اویا': 71
+        'دوه اویا': 72
+        'درې اویا': 73
+        'څلور اویا': 74
+        'پنځه اویا': 75
+        'شپږ اویا': 76
+        'اووه اویا': 77
+        'اته اویا': 78
+        'نهه اویا': 79
+        'اتیا': 80
+        'یو اتیا': 81
+        'دوه اتیا': 82
+        'درې اتیا': 83
+        'څلور اتیا': 84
+        'پنځه اتیا': 85
+        'شپږ اتیا': 86
+        'اووه اتیا': 87
+        'اته اتیا': 88
+        'نهه اتیا': 89
+        'نوي': 90
+        'یو نوي': 91
+        'دوه نوي': 92
+        'درې نوي': 93
+        'څلور نوي': 94
+        'پنځه نوي': 95
+        'شپږ نوي': 96
+        'اووه نوي': 97
+        'اته نوي': 98
+        'نهه نوي': 99
+        'سل': 100
+        'سوه': 100
+        'زره': 1000
+        'زر': 1000
+        'میلیون': 1000000
+        'میلیارد': 1000000000
+        'بیلیون': 1000000000000
+        'بیلیارد': 1000000000000000
+        'تریلیون': 1000000000000000000
+      ordinalMap:
+        'لومړی': 1
+        'لومړۍ': 1
+        'دوهم': 2
+        'دوهمه': 2
+        'درېیم': 3
+        'درېیمه': 3
+      negativePrefixes:
+        - 'منفي'
+        - 'مائنس'
+      ignoredTokens:
+        - 'او'
+
+  ordinal:
+    numeric:
+      engine: 'number-word-suffix'
+      useCulture: true
+      masculine:
+        defaultSuffix: 'م'
+        exactReplacements:
+          1: 'لومړی'
+          2: 'دوهم'
+          3: 'درېیم'
+      feminine:
+        defaultSuffix: 'مه'
+        exactReplacements:
+          1: 'لومړۍ'
+          2: 'دوهمه'
+          3: 'درېیمه'
+      neuterFallback: 'masculine'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'masculine'
+    minuteGender: 'feminine'
+    hourWordsMap:
+      - ''
+      - 'یوه بجه'
+      - 'دوه بجې'
+      - 'درې بجې'
+      - 'څلور بجې'
+      - 'پنځه بجې'
+      - 'شپږ بجې'
+      - 'اووه بجې'
+      - 'اته بجې'
+      - 'نهه بجې'
+      - 'لس بجې'
+      - 'یوولس بجې'
+      - 'دولس بجې'
+    minuteWordsMap:
+      - ''
+      - 'یوه'
+    min0: '{dayPeriod} {hour}'
+    defaultTemplate: '{dayPeriod} {hour} او {minutes} {minuteSuffix}'
+    minuteSuffixSingular: 'دقیقه'
+    minuteSuffixPlural: 'دقیقې'
+    earlyMorning: 'د شپې'
+    morning: 'سهار'
+    afternoon: 'د غرمې'
+    evening: 'ماښام'
+    night: 'شپه'
+    eveningStartHour: 17
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'شمال'
+      - 'شمال-شمال ختیځ'
+      - 'شمال ختیځ'
+      - 'ختیځ-شمال ختیځ'
+      - 'ختیځ'
+      - 'ختیځ-جنوب ختیځ'
+      - 'جنوب ختیځ'
+      - 'جنوب-جنوب ختیځ'
+      - 'جنوب'
+      - 'جنوب-جنوب لوېدیځ'
+      - 'جنوب لوېدیځ'
+      - 'لوېدیځ-جنوب لوېدیځ'
+      - 'لوېدیځ'
+      - 'لوېدیځ-شمال لوېدیځ'
+      - 'شمال لوېدیځ'
+      - 'شمال-شمال لوېدیځ'
+    short:
+      - 'ش'
+      - 'ش-ش-خ'
+      - 'ش-خ'
+      - 'خ-ش-خ'
+      - 'خ'
+      - 'خ-ج-خ'
+      - 'ج-خ'
+      - 'ج-ج-خ'
+      - 'ج'
+      - 'ج-ج-ل'
+      - 'ج-ل'
+      - 'ل-ج-ل'
+      - 'ل'
+      - 'ل-ش-ل'
+      - 'ش-ل'
+      - 'ش-ش-ل'
+
+  calendar:
+    months:
+      - 'جنوري'
+      - 'فبروري'
+      - 'مارچ'
+      - 'اپرېل'
+      - 'مې'
+      - 'جون'
+      - 'جولای'
+      - 'اګست'
+      - 'سپتمبر'
+      - 'اکتوبر'
+      - 'نومبر'
+      - 'دسمبر'

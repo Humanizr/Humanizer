@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Provides extension methods for converting numeric values to <see cref="TimeSpan"/> instances,

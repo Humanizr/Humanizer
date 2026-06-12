@@ -76,6 +76,16 @@ public class MetricNumeralTests
     }
 
     [Theory]
+    [InlineData("999", 999)]
+    [InlineData("1k", 1000)]
+    [InlineData("999.5k", 999500)]
+    [InlineData("1M", 1000000)]
+    [InlineData("2.147483647G", int.MaxValue)]
+    [InlineData("-2.147483648G", int.MinValue)]
+    public void ToMetricUsesDefaultIntFormatting(string expected, int subject) =>
+        Assert.Equal(expected, subject.ToMetric());
+
+    [Theory]
     [InlineData(0, 0, "0")]
     [InlineData(0, 1, "0.0")]
     [InlineData(0, 3, "0.000")]

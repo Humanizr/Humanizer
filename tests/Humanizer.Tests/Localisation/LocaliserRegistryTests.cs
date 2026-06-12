@@ -40,7 +40,7 @@ public class LocaliserRegistryTests
         var registry = new LocaliserRegistry<string>(culture => $"default:{culture.Name}");
         registry.Register("fr", culture => $"fr:{culture.Name}");
 
-        Assert.Equal("default:zu-ZA", registry.ResolveForCulture(new("zu-ZA")));
+        Assert.Equal("default:eo", registry.ResolveForCulture(new("eo")));
     }
 
     [Fact]

@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 [UseCulture("en-US")]
 public class TimeOnlyHumanizeTests

@@ -66,6 +66,7 @@ public class DateHumanize
                 TimeUnit.Minute => TimeSpan.FromMinutes(unit),
                 TimeUnit.Hour => TimeSpan.FromHours(unit),
                 TimeUnit.Day => TimeSpan.FromDays(unit),
+                TimeUnit.Week => TimeSpan.FromDays(unit * 7),
                 TimeUnit.Month => TimeSpan.FromDays(unit * 31),
                 TimeUnit.Year => TimeSpan.FromDays(unit * 366),
                 _ => new()

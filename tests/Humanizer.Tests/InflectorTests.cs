@@ -141,6 +141,11 @@ public class InflectorTests
     public void Pascalize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Pascalize());
 
+    [Theory, UseCulture("tr-TR")]
+    [InlineData("istanbul_input", "İstanbulİnput")]
+    public void PascalizeUsesTurkishCasing(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Pascalize());
+
     // Same as pascalize, except first char is lowercase
     [Theory]
     [InlineData("customer", "customer")]
@@ -157,6 +162,11 @@ public class InflectorTests
     public void Camelize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Camelize());
 
+    [Theory, UseCulture("tr-TR")]
+    [InlineData("Istanbul_input", "ıstanbulİnput")]
+    public void CamelizeUsesTurkishCasing(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Camelize());
+
     //Makes an underscored lowercase string
     [Theory]
     [InlineData("SomeTitle", "some_title")]
@@ -169,6 +179,11 @@ public class InflectorTests
     public void Underscore(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Underscore());
 
+    [Theory, UseCulture("tr-TR")]
+    [InlineData("IstanbulInput", "ıstanbul_ınput")]
+    public void UnderscoreUsesTurkishCasing(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Underscore());
+
     // transform words into lowercase and separate with a -
     [Theory]
     [InlineData("SomeWords", "some-words")]
@@ -177,6 +192,11 @@ public class InflectorTests
     [InlineData("SomeForeignWords ÆgÑuÄgypten", "some-foreign-words-æg-ñu-ägypten")]
     [InlineData("A VeryShortSENTENCE", "a-very-short-sentence")]
     public void Kebaberize(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Kebaberize());
+
+    [Theory, UseCulture("tr-TR")]
+    [InlineData("IstanbulInput", "ıstanbul-ınput")]
+    public void KebaberizeUsesTurkishCasing(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Kebaberize());
 }
 

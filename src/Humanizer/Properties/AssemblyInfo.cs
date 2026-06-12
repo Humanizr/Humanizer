@@ -1,3 +1,3 @@
-﻿using System.Resources;
+using System.Resources;
 
 [assembly: NeutralResourcesLanguage("en")]

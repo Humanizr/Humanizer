@@ -1,0 +1,6 @@
+<Project>
+  <!-- Terminate Directory.Packages.props search chain. This tool uses inline PackageReference versions. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>

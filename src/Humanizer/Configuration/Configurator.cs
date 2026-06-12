@@ -21,7 +21,7 @@ public static class Configurator
     public static LocaliserRegistry<INumberToWordsConverter> NumberToWordsConverters { get; } = new NumberToWordsConverterRegistry();
 
     /// <summary>
-    /// Registry of converters that transform words into numbers for english language
+    /// A registry of converters that transform words into numbers for the active locale, falling back to English when a locale-specific parser is unavailable.
     /// </summary>
     private static LocaliserRegistry<IWordsToNumberConverter> WordsToNumberConverters { get; } = new WordsToNumberConverterRegistry();
 

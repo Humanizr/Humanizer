@@ -1,0 +1,436 @@
+locale: 'sw'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'na'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'sasa'
+      never: 'kamwe'
+      past:
+        millisecond:
+          single: 'milisekunde 1 iliyopita'
+          multiple:
+            forms:
+              default: 'milisekunde'
+            template: '{count} milisekunde zilizopita'
+        second:
+          single: 'sekunde 1 iliyopita'
+          multiple:
+            forms:
+              default: 'sekunde'
+            template: '{count} sekunde zilizopita'
+        minute:
+          single: 'dakika 1 iliyopita'
+          multiple:
+            forms:
+              default: 'dakika'
+            template: '{count} dakika zilizopita'
+        hour:
+          single: 'saa 1 iliyopita'
+          multiple:
+            forms:
+              default: 'saa'
+            template: '{count} saa zilizopita'
+        day:
+          single: 'jana'
+          multiple:
+            forms:
+              default: 'siku'
+            template: '{count} siku zilizopita'
+        week:
+          single: 'wiki 1 iliyopita'
+          multiple:
+            forms:
+              default: 'wiki'
+            template: '{count} wiki zilizopita'
+        month:
+          single: 'mwezi 1 uliopita'
+          multiple:
+            forms:
+              default: 'miezi'
+            template: '{count} miezi iliyopita'
+        year:
+          single: 'mwaka 1 uliopita'
+          multiple:
+            forms:
+              default: 'miaka'
+            template: '{count} miaka iliyopita'
+      future:
+        millisecond:
+          single: 'baada ya milisekunde 1'
+          multiple:
+            forms:
+              default: 'milisekunde'
+            template: 'baada ya milisekunde {count}'
+        second:
+          single: 'baada ya sekunde 1'
+          multiple:
+            forms:
+              default: 'sekunde'
+            template: 'baada ya sekunde {count}'
+        minute:
+          single: 'baada ya dakika 1'
+          multiple:
+            forms:
+              default: 'dakika'
+            template: 'baada ya dakika {count}'
+        hour:
+          single: 'baada ya saa 1'
+          multiple:
+            forms:
+              default: 'saa'
+            template: 'baada ya saa {count}'
+        day:
+          single: 'kesho'
+          multiple:
+            forms:
+              default: 'siku'
+            template: 'baada ya siku {count}'
+        week:
+          single: 'baada ya wiki 1'
+          multiple:
+            forms:
+              default: 'wiki'
+            template: 'baada ya wiki {count}'
+        month:
+          single: 'baada ya mwezi 1'
+          multiple:
+            forms:
+              default: 'miezi'
+            template: 'baada ya miezi {count}'
+        year:
+          single: 'baada ya mwaka 1'
+          multiple:
+            forms:
+              default: 'miaka'
+            template: 'baada ya miaka {count}'
+    duration:
+      zero: 'hakuna muda'
+      age:
+        template: 'umri wa {value}'
+      millisecond:
+        single:
+          numeric: 'milisekunde 1'
+          words: 'milisekunde moja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'milisekunde'
+      second:
+        single:
+          numeric: 'sekunde 1'
+          words: 'sekunde moja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'sekunde'
+      minute:
+        single:
+          numeric: 'dakika 1'
+          words: 'dakika moja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'dakika'
+      hour:
+        single:
+          numeric: 'saa 1'
+          words: 'saa moja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'saa'
+      day:
+        single:
+          numeric: 'siku 1'
+          words: 'siku moja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'siku'
+      week:
+        single:
+          numeric: 'wiki 1'
+          words: 'wiki moja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'wiki'
+      month:
+        single:
+          numeric: 'mwezi 1'
+          words: 'mwezi mmoja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'miezi'
+      year:
+        single:
+          numeric: 'mwaka 1'
+          words: 'mwaka mmoja'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'miaka'
+    dataUnits:
+      bit:
+        forms:
+          default: 'biti'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'baiti'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobaiti'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabaiti'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabaiti'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabaiti'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'sek'
+      minute:
+        symbol: 'dak'
+      hour:
+        symbol: 'saa'
+      day:
+        symbol: 'sk'
+      week:
+        symbol: 'wk'
+      month:
+        symbol: 'mwez'
+      year:
+        symbol: 'mwk'
+
+  number:
+    words:
+      engine: 'scale-leading-compound'
+      zeroWord: 'sifuri'
+      minusWord: 'hasi'
+      conjunctionWord: 'na'
+      ordinalPrefix: 'ya '
+      unitsMap:
+        - 'sifuri'
+        - 'moja'
+        - 'mbili'
+        - 'tatu'
+        - 'nne'
+        - 'tano'
+        - 'sita'
+        - 'saba'
+        - 'nane'
+        - 'tisa'
+        - 'kumi'
+        - 'kumi na moja'
+        - 'kumi na mbili'
+        - 'kumi na tatu'
+        - 'kumi na nne'
+        - 'kumi na tano'
+        - 'kumi na sita'
+        - 'kumi na saba'
+        - 'kumi na nane'
+        - 'kumi na tisa'
+      tensMap:
+        2: 'ishirini'
+        3: 'thelathini'
+        4: 'arobaini'
+        5: 'hamsini'
+        6: 'sitini'
+        7: 'sabini'
+        8: 'themanini'
+        9: 'tisini'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kwintilioni'
+        -
+          value: 1000000000000000
+          name: 'kwadrilioni'
+        -
+          value: 1000000000000
+          name: 'trilioni'
+        -
+          value: 1000000000
+          name: 'bilioni'
+        -
+          value: 1000000
+          name: 'milioni'
+        -
+          value: 100000
+          name: 'laki'
+        -
+          value: 1000
+          name: 'elfu'
+        -
+          value: 100
+          name: 'mia'
+      ordinalMap:
+        1: 'kwanza'
+        2: 'pili'
+        3: 'tatu'
+        4: 'nne'
+        5: 'tano'
+        6: 'sita'
+        7: 'saba'
+        8: 'nane'
+        9: 'tisa'
+        10: 'kumi'
+    parse:
+      engine: 'scale-leading-compound'
+      conjunctionWord: 'na'
+      minusWord: 'hasi'
+      ordinalPrefix: 'ya '
+      unitsMap:
+        sifuri: 0
+        moja: 1
+        mbili: 2
+        tatu: 3
+        nne: 4
+        tano: 5
+        sita: 6
+        saba: 7
+        nane: 8
+        tisa: 9
+      tensMap:
+        kumi: 10
+        ishirini: 20
+        thelathini: 30
+        arobaini: 40
+        hamsini: 50
+        sitini: 60
+        sabini: 70
+        themanini: 80
+        tisini: 90
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kwintilioni'
+        -
+          value: 1000000000000000
+          name: 'kwadrilioni'
+        -
+          value: 1000000000000
+          name: 'trilioni'
+        -
+          value: 1000000000
+          name: 'bilioni'
+        -
+          value: 1000000
+          name: 'milioni'
+        -
+          value: 100000
+          name: 'laki'
+        -
+          value: 1000
+          name: 'elfu'
+        -
+          value: 100
+          name: 'mia'
+      ordinalMap:
+        kwanza: 1
+        pili: 2
+        tatu: 3
+        nne: 4
+        tano: 5
+        sita: 6
+        saba: 7
+        nane: 8
+        tisa: 9
+        kumi: 10
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    # Traditional Swahili time names hours from the 6:00/18:00 boundary: 1 PM is saa saba.
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'saba'
+      - 'nane'
+      - 'tisa'
+      - 'kumi'
+      - 'kumi na moja'
+      - 'kumi na mbili'
+      - 'moja'
+      - 'mbili'
+      - 'tatu'
+      - 'nne'
+      - 'tano'
+      - 'sita'
+    min0: 'saa {hour} {dayPeriod}'
+    defaultTemplate: 'saa {hour} na dakika {minutes} {dayPeriod}'
+    earlyMorning: 'asubuhi'
+    morning: 'asubuhi'
+    afternoon: 'mchana'
+    evening: 'jioni'
+    night: 'usiku'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'kaskazini'
+      - 'kaskazini-kaskazini mashariki'
+      - 'kaskazini mashariki'
+      - 'mashariki-kaskazini mashariki'
+      - 'mashariki'
+      - 'mashariki-kusini mashariki'
+      - 'kusini mashariki'
+      - 'kusini-kusini mashariki'
+      - 'kusini'
+      - 'kusini-kusini magharibi'
+      - 'kusini magharibi'
+      - 'magharibi-kusini magharibi'
+      - 'magharibi'
+      - 'magharibi-kaskazini magharibi'
+      - 'kaskazini magharibi'
+      - 'kaskazini-kaskazini magharibi'
+    short:
+      - 'K'
+      - 'KKM'
+      - 'KM'
+      - 'MKM'
+      - 'M'
+      - 'MKS'
+      - 'KS'
+      - 'KKS'
+      - 'S'
+      - 'KKG'
+      - 'KG'
+      - 'MKG'
+      - 'G'
+      - 'MKGz'
+      - 'KGz'
+      - 'KKGz'
