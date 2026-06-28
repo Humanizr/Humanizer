@@ -45,8 +45,27 @@ public class GeneratedLocaleDeRuPhraseMigrationTests
         Assert.Equal("минут", timeSpanMinute.Multiple?.Forms.Default);
 
         Assert.True(table.TryGetDatePhrase(TimeUnit.Week, Tense.Future, out var futureWeek));
+        Assert.Equal("неделю", futureWeek.Multiple?.Forms.Singular);
         Assert.Equal("недель", futureWeek.Multiple?.Forms.Default);
         Assert.Equal("недели", futureWeek.Multiple?.Forms.Dual);
+
+        Assert.True(table.TryGetDatePhrase(TimeUnit.Week, Tense.Past, out var pastWeek));
+        Assert.Equal("неделю назад", pastWeek.Single);
+        Assert.Equal("неделю", pastWeek.Multiple?.Forms.Singular);
+        Assert.Equal("недель", pastWeek.Multiple?.Forms.Default);
+        Assert.Equal("недели", pastWeek.Multiple?.Forms.Dual);
+
+        Assert.True(table.TryGetDatePhrase(TimeUnit.Millisecond, Tense.Past, out var pastMillisecond));
+        Assert.Equal("миллисекунду назад", pastMillisecond.Single);
+        Assert.Equal("миллисекунду", pastMillisecond.Multiple?.Forms.Singular);
+        Assert.Equal("миллисекунд", pastMillisecond.Multiple?.Forms.Default);
+        Assert.Equal("миллисекунды", pastMillisecond.Multiple?.Forms.Dual);
+
+        Assert.True(table.TryGetDatePhrase(TimeUnit.Millisecond, Tense.Future, out var futureMillisecond));
+        Assert.Equal("через миллисекунду", futureMillisecond.Single);
+        Assert.Equal("миллисекунду", futureMillisecond.Multiple?.Forms.Singular);
+        Assert.Equal("миллисекунд", futureMillisecond.Multiple?.Forms.Default);
+        Assert.Equal("миллисекунды", futureMillisecond.Multiple?.Forms.Dual);
     }
 
     [Theory]
