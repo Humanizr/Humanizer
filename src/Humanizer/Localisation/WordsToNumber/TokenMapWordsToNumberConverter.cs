@@ -11,10 +11,16 @@ namespace Humanizer;
 /// </remarks>
 internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) : GenderlessWordsToNumberConverter
 {
+    const int MaxCompactGluedScaleCountLength = 96;
+    const int MaxCompactGluedScaleTokenCount = 16;
+    const int MaxCompactGluedScaleStatesPerPosition = 128;
+
     readonly TokenMapWordsToNumberRules rules = rules;
     readonly FrozenDictionary<string, long>? exactOrdinalMap = rules.ExactOrdinalMap;
     readonly FrozenDictionary<string, long>? ordinalScaleMap = rules.OrdinalScaleMap;
     readonly FrozenDictionary<string, long>? gluedOrdinalScaleSuffixes = rules.GluedOrdinalScaleSuffixes;
+    readonly FrozenDictionary<string, long>? gluedScaleSuffixes = rules.GluedScaleSuffixes;
+    Dictionary<char, List<CompactGluedScaleToken>>? compactGluedScaleTokensByFirstCharacter;
 
     /// <inheritdoc />
     public override long Convert(string words)
@@ -46,19 +52,36 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             return true;
         }
 
-        var normalized = TokenMapWordsToNumberNormalizer.Normalize(words, rules.NormalizationProfile);
+        var normalizedSource = words.Trim();
         var negative = false;
 
         foreach (var negativePrefix in rules.NegativePrefixes)
         {
-            if (!normalized.StartsWith(negativePrefix, StringComparison.Ordinal))
+            if (!normalizedSource.StartsWith(negativePrefix, StringComparison.Ordinal))
             {
                 continue;
             }
 
             negative = true;
-            normalized = normalized[negativePrefix.Length..].Trim();
+            normalizedSource = normalizedSource[negativePrefix.Length..].Trim();
             break;
+        }
+
+        var normalized = TokenMapWordsToNumberNormalizer.Normalize(normalizedSource, rules.NormalizationProfile);
+
+        if (!negative)
+        {
+            foreach (var negativePrefix in rules.NegativePrefixes)
+            {
+                if (!normalized.StartsWith(negativePrefix, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                negative = true;
+                normalized = normalized[negativePrefix.Length..].Trim();
+                break;
+            }
         }
 
         foreach (var ordinalPrefix in rules.OrdinalPrefixes)
@@ -88,10 +111,10 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         }
 
         if (TryParseOrdinal(normalized, out var value) ||
-            TryParseCardinal(normalized, out value, out unrecognizedWord))
+            TryParseCardinal(normalized, negative, out value, out unrecognizedWord))
         {
             parsedValue = value;
-            if (negative)
+            if (negative && parsedValue != long.MinValue)
             {
                 parsedValue = -parsedValue;
             }
@@ -212,8 +235,12 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
     /// <param name="value">When this method returns, the parsed numeric value.</param>
     /// <param name="unrecognizedWord">When parsing fails, the token that was not recognized.</param>
     /// <returns><c>true</c> if the phrase was parsed successfully; otherwise, <c>false</c>.</returns>
-    bool TryParseCardinal(string words, out long value, out string? unrecognizedWord)
+    bool TryParseCardinal(string words, bool allowLongMinMagnitude, out long value, out string? unrecognizedWord)
     {
+        var maxMagnitude = allowLongMinMagnitude
+            ? (ulong)long.MaxValue + 1UL
+            : (ulong)long.MaxValue;
+
         try
         {
             // Exact phrase matches win before tokenization so locale data can preserve irregular or
@@ -225,8 +252,15 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 return true;
             }
 
-            long total = 0;
-            long current = 0;
+            if (TryParseGluedScale(words, out var gluedScaleValue))
+            {
+                value = gluedScaleValue;
+                unrecognizedWord = null;
+                return true;
+            }
+
+            ulong total = 0;
+            ulong current = 0;
             unrecognizedWord = null;
             var tokenizer = WordsToNumberTokenizer.Enumerate(words).GetEnumerator();
             string? pendingToken = null;
@@ -241,19 +275,51 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             // This order keeps ambiguous inputs from being consumed by the wrong grammar branch.
             while (TryReadNextToken(ref tokenizer, ref pendingToken, out var token))
             {
-                if (TryParseTerminalOrdinal(token, ref tokenizer, ref pendingToken, total, current, out value, out unrecognizedWord))
+                if (total <= long.MaxValue && current <= long.MaxValue &&
+                    TryParseTerminalOrdinal(token, ref tokenizer, ref pendingToken, (long)total, (long)current, out value, out unrecognizedWord))
                 {
                     return true;
                 }
 
                 if (TryGetCompositeScaleValue(token, ref tokenizer, ref pendingToken, out var compositeScaleValue))
                 {
-                    total = checked(total + checked((current == 0 ? 1 : current) * compositeScaleValue));
+                    if (compositeScaleValue < 0 || !TryApplyCompositeScaledGroup(total, current, (ulong)compositeScaleValue, maxMagnitude, out total))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
                     current = 0;
                     continue;
                 }
 
-                if (!TryGetTokenValue(token, out var tokenValue))
+                if (TryParseGluedScaleParts(token, out var gluedScaleCount, out var gluedScaleTokenValue))
+                {
+                    if (gluedScaleTokenValue < rules.ScaleThreshold)
+                    {
+                        if (!TryAddScaledMagnitude(current, (ulong)gluedScaleCount, (ulong)gluedScaleTokenValue, maxMagnitude, out current))
+                        {
+                            value = default;
+                            unrecognizedWord = words;
+                            return false;
+                        }
+
+                        continue;
+                    }
+
+                    if (!TryAddGluedScaledGroup(total, current, (ulong)gluedScaleCount, (ulong)gluedScaleTokenValue, maxMagnitude, out total))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
+                    current = 0;
+                    continue;
+                }
+
+                if (!TryGetTokenValue(token, out var tokenValue) || tokenValue < 0)
                 {
                     value = default;
                     unrecognizedWord = token;
@@ -262,7 +328,13 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
                 if (TryApplyLookaheadCompound(tokenValue, ref tokenizer, ref pendingToken, out var compoundValue))
                 {
-                    current = checked(current + compoundValue);
+                    if (compoundValue < 0 || !TryAddMagnitude(current, (ulong)compoundValue, maxMagnitude, out current))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
                     continue;
                 }
 
@@ -270,7 +342,13 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 {
                     // Large scales close the current group so "two hundred thousand" becomes
                     // (2 * 100) * 1000 rather than 2 * (100 * 1000) or any other accidental nesting.
-                    total = checked(total + checked((current == 0 ? 1 : current) * tokenValue));
+                    if (!TryAddScaledGroup(total, current, (ulong)tokenValue, maxMagnitude, out total))
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
                     current = 0;
                     continue;
                 }
@@ -279,16 +357,43 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 {
                     // Some locales encode multiplication with an explicit token rather than a scale
                     // word, so the current group is rewritten in place instead of flushed.
-                    current = ApplyMultiplierToken(current, tokenValue);
+                    if (current > long.MaxValue)
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
+                    var multiplied = ApplyMultiplierToken((long)current, tokenValue);
+                    if (multiplied < 0 || (ulong)multiplied > maxMagnitude)
+                    {
+                        value = default;
+                        unrecognizedWord = words;
+                        return false;
+                    }
+
+                    current = (ulong)multiplied;
                     continue;
                 }
 
                 // Anything left is additive by default. This is the final fallback so that odd token
                 // shapes do not silently bypass the scale and multiplier rules above.
-                current = checked(current + tokenValue);
+                if (!TryAddMagnitude(current, (ulong)tokenValue, maxMagnitude, out current))
+                {
+                    value = default;
+                    unrecognizedWord = words;
+                    return false;
+                }
             }
 
-            value = checked(total + current);
+            if (!TryAddMagnitude(total, current, maxMagnitude, out var magnitude) ||
+                !TryCoerceMagnitude(magnitude, allowLongMinMagnitude, out value))
+            {
+                value = default;
+                unrecognizedWord = words;
+                return false;
+            }
+
             return true;
         }
         catch (OverflowException)
@@ -297,6 +402,114 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
             unrecognizedWord = words;
             return false;
         }
+    }
+
+    static bool TryAddGluedScaledGroup(ulong total, ulong current, ulong count, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
+        if (current > 0 && current < scaleValue)
+        {
+            if (!TryAddMagnitude(current, count, maxMagnitude, out var combinedCount))
+            {
+                value = default;
+                return false;
+            }
+
+            return TryAddScaledMagnitude(total, combinedCount, scaleValue, maxMagnitude, out value);
+        }
+
+        if (current == 0 && total > 0 && total < scaleValue)
+        {
+            if (!TryAddMagnitude(total, count, maxMagnitude, out var combinedCount))
+            {
+                value = default;
+                return false;
+            }
+
+            return TryAddScaledMagnitude(0, combinedCount, scaleValue, maxMagnitude, out value);
+        }
+
+        if (current != 0)
+        {
+            if (TryAddMagnitude(total, current, maxMagnitude, out var withCurrent) &&
+                TryAddScaledMagnitude(withCurrent, count, scaleValue, maxMagnitude, out value))
+            {
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+
+        return TryAddScaledMagnitude(total, count, scaleValue, maxMagnitude, out value);
+    }
+
+    static bool TryApplyCompositeScaledGroup(ulong total, ulong current, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
+        if (total > 0 && total < scaleValue)
+        {
+            // A lower accumulated group before a larger composite scale is the scale count, not a final additive prefix.
+            if (!TryAddMagnitude(total, current, maxMagnitude, out var compositeCount))
+            {
+                value = default;
+                return false;
+            }
+
+            return TryAddScaledMagnitude(0, compositeCount, scaleValue, maxMagnitude, out value);
+        }
+
+        return TryAddScaledGroup(total, current, scaleValue, maxMagnitude, out value);
+    }
+
+    static bool TryAddScaledGroup(ulong total, ulong current, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
+        var count = current == 0 ? 1UL : current;
+        return TryAddScaledMagnitude(total, count, scaleValue, maxMagnitude, out value);
+    }
+
+    static bool TryAddScaledMagnitude(ulong total, ulong count, ulong scaleValue, ulong maxMagnitude, out ulong value)
+    {
+        try
+        {
+            var scaled = checked(count * scaleValue);
+            return TryAddMagnitude(total, scaled, maxMagnitude, out value);
+        }
+        catch (OverflowException)
+        {
+            value = default;
+            return false;
+        }
+    }
+
+    static bool TryAddMagnitude(ulong left, ulong right, ulong maxMagnitude, out ulong value)
+    {
+        try
+        {
+            value = checked(left + right);
+            return value <= maxMagnitude;
+        }
+        catch (OverflowException)
+        {
+            value = default;
+            return false;
+        }
+    }
+
+    static bool TryCoerceMagnitude(ulong magnitude, bool allowLongMinMagnitude, out long value)
+    {
+        if (magnitude <= long.MaxValue)
+        {
+            value = (long)magnitude;
+            return true;
+        }
+
+        if (allowLongMinMagnitude && magnitude == (ulong)long.MaxValue + 1UL)
+        {
+            value = long.MinValue;
+            return true;
+        }
+
+        value = default;
+        return false;
     }
 
     /// <summary>
@@ -469,7 +682,7 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
                 continue;
             }
 
-            if (!TryParseCardinal(words[..^suffix.Key.Length], out value, out _))
+            if (!TryParseCardinal(words[..^suffix.Key.Length], false, out value, out _))
             {
                 continue;
             }
@@ -488,6 +701,229 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
 
         value = default;
         return false;
+    }
+
+    /// <summary>
+    /// Parses a glued cardinal scale such as a cardinal count followed by a scale suffix.
+    /// </summary>
+    /// <param name="words">The normalized cardinal phrase or token.</param>
+    /// <param name="value">When this method returns, the parsed numeric value.</param>
+    /// <returns><c>true</c> if the phrase matched a glued cardinal scale; otherwise, <c>false</c>.</returns>
+    bool TryParseGluedScale(string words, out long value)
+    {
+        if (!TryParseGluedScaleParts(words, out var count, out var scaleValue))
+        {
+            value = default;
+            return false;
+        }
+
+        try
+        {
+            value = checked(count * scaleValue);
+            return true;
+        }
+        catch (OverflowException)
+        {
+            value = default;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Splits a glued cardinal scale into the parsed count and scale value.
+    /// </summary>
+    /// <param name="words">The normalized cardinal phrase or token.</param>
+    /// <param name="count">When this method returns, the parsed scale count.</param>
+    /// <param name="scaleValue">When this method returns, the parsed scale value.</param>
+    /// <returns><c>true</c> if the phrase matched a glued cardinal scale; otherwise, <c>false</c>.</returns>
+    bool TryParseGluedScaleParts(string words, out long count, out long scaleValue)
+    {
+        if (gluedScaleSuffixes is null || gluedScaleSuffixes.Count == 0)
+        {
+            count = default;
+            scaleValue = default;
+            return false;
+        }
+
+        foreach (var suffix in gluedScaleSuffixes)
+        {
+            if (!words.EndsWith(suffix.Key, StringComparison.Ordinal) || words.Length == suffix.Key.Length)
+            {
+                continue;
+            }
+
+            if (!TryParseGluedScaleCount(words[..^suffix.Key.Length], out count) ||
+                count <= 0 ||
+                count >= suffix.Value)
+            {
+                continue;
+            }
+
+            scaleValue = suffix.Value;
+            return true;
+        }
+
+        count = default;
+        scaleValue = default;
+        return false;
+    }
+
+    bool TryParseGluedScaleCount(string words, out long count)
+    {
+        if (TryParseCardinal(words, false, out count, out _))
+        {
+            return true;
+        }
+
+        return TryParseCompactGluedScaleCount(words, out count);
+    }
+
+    bool TryParseCompactGluedScaleCount(string words, out long value)
+    {
+        if (words.Length == 0 || words.Length > MaxCompactGluedScaleCountLength)
+        {
+            value = default;
+            return false;
+        }
+
+        var tokensByFirstCharacter = compactGluedScaleTokensByFirstCharacter ??= BuildCompactGluedScaleTokenMap();
+        var statesByPosition = new HashSet<CompactGluedScaleState>?[words.Length + 1];
+        statesByPosition[0] = [new(0, 0, 0)];
+
+        for (var position = 0; position < words.Length; position++)
+        {
+            var states = statesByPosition[position];
+            if (states is null || !tokensByFirstCharacter.TryGetValue(words[position], out var tokens))
+            {
+                continue;
+            }
+
+            foreach (var state in states)
+            {
+                if (state.TokenCount >= MaxCompactGluedScaleTokenCount)
+                {
+                    continue;
+                }
+
+                foreach (var token in tokens)
+                {
+                    var nextPosition = position + token.Text.Length;
+                    if (nextPosition > words.Length ||
+                        string.CompareOrdinal(words, position, token.Text, 0, token.Text.Length) != 0 ||
+                        !TryApplyCompactGluedScaleToken(state, token, out var nextState))
+                    {
+                        continue;
+                    }
+
+                    var nextStates = statesByPosition[nextPosition] ??= [];
+                    if (nextStates.Count >= MaxCompactGluedScaleStatesPerPosition && !nextStates.Contains(nextState))
+                    {
+                        value = default;
+                        return false;
+                    }
+
+                    nextStates.Add(nextState);
+                }
+            }
+        }
+
+        var finalStates = statesByPosition[words.Length];
+        if (finalStates is null)
+        {
+            value = default;
+            return false;
+        }
+
+        var foundValue = false;
+        var bestValue = default(long);
+        foreach (var state in finalStates)
+        {
+            try
+            {
+                var candidate = checked(state.Total + state.Current);
+                if (!foundValue || candidate > bestValue)
+                {
+                    bestValue = candidate;
+                    foundValue = true;
+                }
+            }
+            catch (OverflowException)
+            {
+                value = default;
+                return false;
+            }
+        }
+
+        value = bestValue;
+        return foundValue;
+    }
+
+    Dictionary<char, List<CompactGluedScaleToken>> BuildCompactGluedScaleTokenMap()
+    {
+        var tokensByFirstCharacter = new Dictionary<char, List<CompactGluedScaleToken>>();
+
+        foreach (var token in rules.CardinalMap)
+        {
+            AddCompactGluedScaleToken(tokensByFirstCharacter, token.Key, token.Value);
+        }
+
+        if (gluedScaleSuffixes is not null)
+        {
+            foreach (var suffix in gluedScaleSuffixes)
+            {
+                AddCompactGluedScaleToken(tokensByFirstCharacter, suffix.Key, suffix.Value);
+            }
+        }
+
+        return tokensByFirstCharacter;
+    }
+
+    static void AddCompactGluedScaleToken(Dictionary<char, List<CompactGluedScaleToken>> tokensByFirstCharacter, string token, long value)
+    {
+        if (token.Length == 0)
+        {
+            return;
+        }
+
+        if (!tokensByFirstCharacter.TryGetValue(token[0], out var tokens))
+        {
+            tokens = [];
+            tokensByFirstCharacter.Add(token[0], tokens);
+        }
+
+        var compactToken = new CompactGluedScaleToken(token, value);
+        if (!tokens.Contains(compactToken))
+        {
+            tokens.Add(compactToken);
+        }
+    }
+
+    bool TryApplyCompactGluedScaleToken(CompactGluedScaleState state, CompactGluedScaleToken token, out CompactGluedScaleState nextState)
+    {
+        try
+        {
+            if (token.Value >= rules.ScaleThreshold)
+            {
+                if (state.Total > 0 && state.Total < token.Value)
+                {
+                    nextState = new(checked(checked(state.Total + state.Current) * token.Value), 0, state.TokenCount + 1);
+                    return true;
+                }
+
+                nextState = new(checked(state.Total + checked((state.Current == 0 ? 1 : state.Current) * token.Value)), 0, state.TokenCount + 1);
+                return true;
+            }
+
+            nextState = ShouldMultiplyToken(token.Text, token.Value)
+                ? new(state.Total, ApplyMultiplierToken(state.Current, token.Value), state.TokenCount + 1)
+                : new(state.Total, checked(state.Current + token.Value), state.TokenCount + 1);
+            return true;
+        }
+        catch (OverflowException)
+        {
+            nextState = default;
+            return false;
+        }
     }
 
     /// <summary>
@@ -710,6 +1146,10 @@ internal class TokenMapWordsToNumberConverter(TokenMapWordsToNumberRules rules) 
         return false;
     }
 
+    readonly record struct CompactGluedScaleToken(string Text, long Value);
+
+    readonly record struct CompactGluedScaleState(long Total, long Current, int TokenCount);
+
     /// <summary>
     /// Tries to resolve a token from the cardinal map, including suffix-stripped variants.
     /// </summary>
@@ -769,6 +1209,10 @@ internal sealed class TokenMapWordsToNumberRules
     /// Gets the suffixes that may be glued onto a cardinal stem to form an ordinal scale.
     /// </summary>
     public FrozenDictionary<string, long>? GluedOrdinalScaleSuffixes { get; init; }
+    /// <summary>
+    /// Gets the suffixes that may be glued onto a cardinal count to form a cardinal scale.
+    /// </summary>
+    public FrozenDictionary<string, long>? GluedScaleSuffixes { get; init; }
     /// <summary>
     /// Gets composite scale tokens that are formed from adjacent words.
     /// </summary>
@@ -971,6 +1415,8 @@ static class TokenMapWordsToNumberNormalizer
         // This profile stays allocation-free when the input is already lowercase and only trimmed
         // whitespace needs to be preserved.
         var needsNormalization = false;
+        var sawHyphen = false;
+        var needsBuilderNormalization = false;
         var previousWasSpace = false;
 
         foreach (var current in source)
@@ -978,13 +1424,16 @@ static class TokenMapWordsToNumberNormalizer
             if (current is ',' or '.')
             {
                 needsNormalization = true;
+                needsBuilderNormalization = true;
                 break;
             }
 
             if (current == '-')
             {
                 needsNormalization = true;
-                break;
+                sawHyphen = true;
+                previousWasSpace = false;
+                continue;
             }
 
             if (char.IsWhiteSpace(current))
@@ -992,6 +1441,7 @@ static class TokenMapWordsToNumberNormalizer
                 if (current != ' ' || previousWasSpace)
                 {
                     needsNormalization = true;
+                    needsBuilderNormalization = true;
                     break;
                 }
 
@@ -1002,6 +1452,7 @@ static class TokenMapWordsToNumberNormalizer
             if (char.IsUpper(current))
             {
                 needsNormalization = true;
+                needsBuilderNormalization = true;
                 break;
             }
 
@@ -1013,7 +1464,37 @@ static class TokenMapWordsToNumberNormalizer
             return source.Length == words.Length ? words : source.ToString();
         }
 
+        if (sawHyphen && !needsBuilderNormalization && CanReplaceHyphensWithSpaces(source))
+        {
+            return source.Length == words.Length
+                ? words.Replace('-', ' ')
+                : source.ToString().Replace('-', ' ');
+        }
+
         return NormalizeWithBuilder(words, TokenMapNormalizationProfile.LowercaseRemovePeriods);
+    }
+
+    static bool CanReplaceHyphensWithSpaces(ReadOnlySpan<char> source)
+    {
+        for (var i = 0; i < source.Length; i++)
+        {
+            if (source[i] != '-')
+            {
+                continue;
+            }
+
+            if (i == 0 ||
+                i == source.Length - 1 ||
+                source[i - 1] == '-' ||
+                source[i + 1] == '-' ||
+                source[i - 1] == ' ' ||
+                source[i + 1] == ' ')
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>

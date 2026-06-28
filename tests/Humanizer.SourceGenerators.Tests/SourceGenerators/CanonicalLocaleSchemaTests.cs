@@ -621,6 +621,10 @@ surfaces:
         defaultSuffix: 'y'
         exactReplacements:
           1: 'primera'
+      neuter:
+        defaultSuffix: 'z'
+        exactReplacements:
+          1: 'first-neuter'
       neuterFallback: 'masculine'
 """));
 

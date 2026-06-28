@@ -175,6 +175,7 @@ public class UrduOrdinalTests
                 Feminine: new NumberWordSuffixOrdinalizer.GenderBlock(
                     "ویں",
                     FrozenDictionary<int, string>.Empty),
+                Neuter: null,
                 NeuterFallbackGender: GrammaticalGender.Masculine));
 
         var result = ordinalizer.Convert(-1, "-1", GrammaticalGender.Masculine);

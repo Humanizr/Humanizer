@@ -27,6 +27,18 @@ public class FormatterBenchmarks
     public string RussianTimeSpanHumanize() =>
         russianSample.Humanize(culture: russianCulture);
 
+    [Benchmark(Description = "Russian TimeSpan Humanize multi-part")]
+    public string RussianTimeSpanHumanizeMultiPart() =>
+        russianSample.Humanize(precision: 3, culture: russianCulture);
+
+    [Benchmark(Description = "Russian TimeSpan Humanize zero")]
+    public string RussianTimeSpanHumanizeZero() =>
+        TimeSpan.Zero.Humanize(culture: russianCulture);
+
+    [Benchmark(Description = "Russian TimeSpan Humanize words")]
+    public string RussianTimeSpanHumanizeWords() =>
+        russianSample.Humanize(culture: russianCulture, toWords: true);
+
     [Benchmark(Description = "Arabic DataUnitHumanize")]
     public string ArabicDataUnitHumanize() =>
         arabicFormatter.DataUnitHumanize(DataUnit.Gigabyte, 2, toSymbol: false);

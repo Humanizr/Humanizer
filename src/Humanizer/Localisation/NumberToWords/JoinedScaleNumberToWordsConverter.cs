@@ -9,12 +9,12 @@ namespace Humanizer;
 /// largest value to the smallest and joins the resulting fragments with the generated separator
 /// rules.
 /// </remarks>
-class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
+class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile) : GenderedNumberToWordsConverter
 {
     readonly JoinedScaleNumberToWordsProfile profile = profile;
 
     /// <inheritdoc/>
-    public override string Convert(long number)
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
         // `long.MinValue` is represented as one extra magnitude slot when the profile explicitly
         // allows it; everything else is bounded by the generated profile's declared ceiling.
@@ -34,16 +34,16 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 
         if (number < 0)
         {
-            return $"{profile.MinusWord}{profile.NegativeJoinWord}{ConvertNonNegative(magnitude)}";
+            return $"{profile.MinusWord}{profile.NegativeJoinWord}{ConvertNonNegative(magnitude, gender)}";
         }
 
-        return ConvertNonNegative((ulong)number);
+        return ConvertNonNegative((ulong)number, gender);
     }
 
     /// <summary>
     /// Converts the non-negative portion of a value after magnitude validation.
     /// </summary>
-    string ConvertNonNegative(ulong number)
+    string ConvertNonNegative(ulong number, GrammaticalGender gender)
     {
         var parts = new List<string>();
         var remainder = number;
@@ -60,37 +60,65 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             // Singular scale names may omit the leading one, but only when the locale says that
             // is grammatical. The "first visible scale" check preserves languages where the
             // omission changes once the value is already inside a larger compound.
+            var remaining = remainder % scaleValue;
+            var scaleName = scale.ResolveName(count, remaining > 0);
+
             parts.Add(scale.OmitOneWhenSingular && count == 1 && (profile.OmitOneWhenSingularAlways || parts.Count == 0)
-                ? scale.Name
-                : $"{Convert((long)count)}{profile.ScaleCountJoinWord}{scale.Name}");
-            remainder %= scaleValue;
+                ? scaleName
+                : $"{Convert((long)count, GrammaticalGender.Masculine)}{profile.ScaleCountJoinWord}{scaleName}");
+            remainder = remaining;
         }
 
         // The profile can supply a dedicated hundreds lexicon or a direct sub-hundred lexicon.
         // Keeping both paths avoids forcing all locales into the same tens/units stitching rule.
         if (remainder >= 100)
         {
-            parts.Add(profile.HundredsMap[remainder / 100]);
+            var hundreds = (int)(remainder / 100);
             remainder %= 100;
+            parts.Add(remainder > 0 &&
+                      profile.HundredsMapWithRemainder.Length > hundreds &&
+                      profile.HundredsMapWithRemainder[hundreds].Length > 0
+                ? profile.HundredsMapWithRemainder[hundreds]
+                : profile.HundredsMap[hundreds]);
         }
 
         if (remainder > 0)
         {
-            parts.Add(ConvertUnderHundred((int)remainder));
+            parts.Add(ConvertUnderHundred((int)remainder, gender));
         }
 
         return string.Join(profile.JoinWord, parts);
     }
 
     /// <inheritdoc/>
-    public override string ConvertToOrdinal(int number)
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
+        if (profile.Ordinal is not null)
+        {
+            if (TryConvertToGenderedExactOrdinal(number, gender, out var exactGenderedOrdinal))
+            {
+                return exactGenderedOrdinal;
+            }
+
+            if (profile.RequireOrdinalException)
+            {
+                throw new NotImplementedException();
+            }
+
+            return ConvertToGenderedOrdinal(number, gender);
+        }
+
         // Exact overrides must win before any fallback logic; otherwise compound ordinal shortcut
         // rules would rewrite locale-specific exceptions into a different surface form.
         if (profile.OrdinalExceptions is not null &&
             profile.OrdinalExceptions.TryGetValue(number, out var exactOrdinal))
         {
             return exactOrdinal;
+        }
+
+        if (profile.RequireOrdinalException)
+        {
+            throw new NotImplementedException();
         }
 
         // Some locales only use a compound ordinal for a specific trailing digit. The exclusion
@@ -101,10 +129,10 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             number % 10 == profile.CompoundOrdinalRemainder.Value &&
             !profile.CompoundOrdinalExcludedValues.Contains(number))
         {
-            return $"{Convert(number / 10 * 10)}{profile.JoinWord}{profile.CompoundOrdinalWord}";
+            return $"{Convert(number / 10 * 10, gender)}{profile.JoinWord}{profile.CompoundOrdinalWord}";
         }
 
-        var words = Convert(number);
+        var words = Convert(number, gender);
         if (words.Length == 0)
         {
             return words;
@@ -120,11 +148,64 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         return words + profile.DefaultOrdinalSuffix;
     }
 
+    /// <inheritdoc/>
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm) =>
+        ConvertToOrdinal(number, gender);
+
+    string ConvertToGenderedOrdinal(int number, GrammaticalGender gender)
+    {
+        if (TryConvertToGenderedExactOrdinal(number, gender, out var exactOrdinal))
+        {
+            return exactOrdinal;
+        }
+
+        var block = profile.Ordinal!.Resolve(gender);
+        if (number < 0)
+        {
+            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+            return profile.MinusWord + profile.NegativeJoinWord + FormatGenderedOrdinalBody(magnitude, gender, block);
+        }
+
+        return FormatGenderedOrdinalBody(number, gender, block);
+    }
+
+    bool TryConvertToGenderedExactOrdinal(int number, GrammaticalGender gender, [NotNullWhen(true)] out string? exactOrdinal)
+    {
+        var block = profile.Ordinal!.Resolve(gender);
+        if (number < 0)
+        {
+            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+            if (magnitude <= int.MaxValue && block.ExactReplacements.TryGetValue((int)magnitude, out var negativeExact))
+            {
+                exactOrdinal = profile.MinusWord + profile.NegativeJoinWord + negativeExact;
+                return true;
+            }
+        }
+        else if (block.ExactReplacements.TryGetValue(number, out exactOrdinal))
+        {
+            return true;
+        }
+
+        exactOrdinal = null;
+        return false;
+    }
+
+    string FormatGenderedOrdinalBody(long number, GrammaticalGender gender, JoinedScaleGenderOrdinalBlock block)
+    {
+        var words = Convert(number, gender);
+        return words.Length == 0 ? words : block.DefaultPrefix + words + block.DefaultSuffix;
+    }
+
     /// <summary>
     /// Converts the segment below one hundred, falling back to a generated tens/units joiner when needed.
     /// </summary>
-    string ConvertUnderHundred(int number)
+    string ConvertUnderHundred(int number, GrammaticalGender gender)
     {
+        if (profile.TryGetGenderedSubHundredReplacement(number, gender, out var replacement))
+        {
+            return replacement;
+        }
+
         if (profile.SubHundredMap.Length != 0)
         {
             return profile.SubHundredMap[number];
@@ -168,9 +249,14 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 /// <param name="unitsMap">The unit lexicon.</param>
 /// <param name="tensMap">The tens lexicon.</param>
 /// <param name="hundredsMap">The hundreds lexicon.</param>
+/// <param name="hundredsMapWithRemainder">The hundreds lexicon used when a lower-order remainder follows.</param>
 /// <param name="subHundredMap">The shared under-hundred lexicon.</param>
+/// <param name="feminineSubHundredReplacements">Feminine overrides for authored under-hundred cardinals.</param>
+/// <param name="neuterSubHundredReplacements">Neuter overrides for authored under-hundred cardinals.</param>
 /// <param name="scales">The descending scale rows used during decomposition.</param>
 /// <param name="ordinalExceptions">Exact ordinal overrides keyed by value.</param>
+/// <param name="requireOrdinalException">Whether non-exact ordinal inputs should fail instead of falling back to cardinal-derived forms.</param>
+/// <param name="ordinal">The optional gendered word-ordinal profile used by ordinal word conversion.</param>
 /// <param name="compoundOrdinalRemainder">The trailing digit used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalWord">The word used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalExcludedValues">Values that must not use the compound ordinal shortcut.</param>
@@ -189,9 +275,14 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap,
+    string[] hundredsMapWithRemainder,
     string[] subHundredMap,
+    FrozenDictionary<int, string> feminineSubHundredReplacements,
+    FrozenDictionary<int, string> neuterSubHundredReplacements,
     JoinedScale[] scales,
     FrozenDictionary<int, string>? ordinalExceptions = null,
+    bool requireOrdinalException = false,
+    JoinedScaleOrdinalProfile? ordinal = null,
     int? compoundOrdinalRemainder = null,
     string? compoundOrdinalWord = null,
     FrozenSet<int>? compoundOrdinalExcludedValues = null)
@@ -224,12 +315,22 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public string[] TensMap { get; } = tensMap;
     /// <summary>Gets the hundreds lexicon.</summary>
     public string[] HundredsMap { get; } = hundredsMap;
+    /// <summary>Gets the hundreds lexicon used when a lower-order remainder follows.</summary>
+    public string[] HundredsMapWithRemainder { get; } = hundredsMapWithRemainder;
     /// <summary>Gets the direct under-hundred lexicon used when the locale does not stitch tens and units at runtime.</summary>
     public string[] SubHundredMap { get; } = subHundredMap;
+    /// <summary>Gets feminine overrides for authored under-hundred cardinals.</summary>
+    public FrozenDictionary<int, string> FeminineSubHundredReplacements { get; } = feminineSubHundredReplacements;
+    /// <summary>Gets neuter overrides for authored under-hundred cardinals.</summary>
+    public FrozenDictionary<int, string> NeuterSubHundredReplacements { get; } = neuterSubHundredReplacements;
     /// <summary>Gets the descending scale rows used during decomposition.</summary>
     public JoinedScale[] Scales { get; } = scales;
     /// <summary>Gets exact ordinal overrides keyed by value.</summary>
     public FrozenDictionary<int, string>? OrdinalExceptions { get; } = ordinalExceptions;
+    /// <summary>Gets a value indicating whether non-exact ordinal inputs should fail instead of falling back to cardinal-derived forms.</summary>
+    public bool RequireOrdinalException { get; } = requireOrdinalException;
+    /// <summary>Gets the optional gender-aware ordinal profile.</summary>
+    public JoinedScaleOrdinalProfile? Ordinal { get; } = ordinal;
     /// <summary>Gets the trailing digit that triggers the compound ordinal shortcut.</summary>
     public int? CompoundOrdinalRemainder { get; } = compoundOrdinalRemainder;
     /// <summary>Gets the compound ordinal word appended when the shortcut applies.</summary>
@@ -238,12 +339,88 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public FrozenSet<int> CompoundOrdinalExcludedValues { get; } = compoundOrdinalExcludedValues ?? FrozenSet<int>.Empty;
     /// <summary>Gets a value indicating whether the profile can represent <see cref="long.MinValue"/>.</summary>
     public bool AllowLongMinValue { get; } = maximumValue == long.MaxValue;
+
+    /// <summary>
+    /// Attempts to resolve a gender-specific under-hundred cardinal override.
+    /// </summary>
+    public bool TryGetGenderedSubHundredReplacement(int number, GrammaticalGender gender, [NotNullWhen(true)] out string? replacement)
+    {
+        var replacements = gender switch
+        {
+            GrammaticalGender.Feminine => FeminineSubHundredReplacements,
+            GrammaticalGender.Neuter => NeuterSubHundredReplacements,
+            _ => FrozenDictionary<int, string>.Empty
+        };
+
+        return replacements.TryGetValue(number, out replacement);
+    }
+}
+
+/// <summary>Gender-specific ordinal affixes and exact replacement data.</summary>
+/// <param name="DefaultPrefix">The prefix prepended to the cardinal word form for productive ordinals.</param>
+/// <param name="DefaultSuffix">The suffix appended to the cardinal word form for productive ordinals.</param>
+/// <param name="ExactReplacements">Exact ordinal forms keyed by value.</param>
+internal sealed record JoinedScaleGenderOrdinalBlock(string DefaultPrefix, string DefaultSuffix, FrozenDictionary<int, string> ExactReplacements);
+
+/// <summary>Optional gender-aware ordinal data for joined-scale number profiles.</summary>
+/// <param name="Masculine">The masculine ordinal block.</param>
+/// <param name="Feminine">The optional feminine ordinal block.</param>
+/// <param name="Neuter">The optional neuter ordinal block.</param>
+/// <param name="NeuterFallbackGender">The gender used when no neuter block is authored.</param>
+internal sealed record JoinedScaleOrdinalProfile(
+    JoinedScaleGenderOrdinalBlock Masculine,
+    JoinedScaleGenderOrdinalBlock? Feminine,
+    JoinedScaleGenderOrdinalBlock? Neuter,
+    GrammaticalGender NeuterFallbackGender)
+{
+    /// <summary>Resolves the block for a requested grammatical gender.</summary>
+    public JoinedScaleGenderOrdinalBlock Resolve(GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Feminine => Feminine ?? Masculine,
+            GrammaticalGender.Neuter => Neuter ?? (NeuterFallbackGender == GrammaticalGender.Feminine ? Feminine ?? Masculine : Masculine),
+            _ => Masculine
+        };
 }
 
 /// <summary>
 /// One descending scale row for <see cref="JoinedScaleNumberToWordsConverter"/>.
 /// </summary>
 /// <param name="Value">The divisor for the scale row.</param>
-/// <param name="Name">The localized scale name.</param>
+/// <param name="Name">The localized singular scale name.</param>
+/// <param name="NameWithRemainder">The localized singular scale name used when a lower-order remainder follows.</param>
+/// <param name="PluralName">The localized plural scale name used for counts other than one.</param>
+/// <param name="PluralNameWithRemainder">The localized plural scale name used for counts other than one when a lower-order remainder follows.</param>
 /// <param name="OmitOneWhenSingular">Whether singular counts may omit the explicit one.</param>
-internal readonly record struct JoinedScale(long Value, string Name, bool OmitOneWhenSingular = false);
+internal readonly record struct JoinedScale(
+    long Value,
+    string Name,
+    string NameWithRemainder = "",
+    string PluralName = "",
+    string PluralNameWithRemainder = "",
+    bool OmitOneWhenSingular = false)
+{
+    /// <summary>Resolves the scale name for the rendered scale count and lower-order remainder state.</summary>
+    public string ResolveName(ulong count, bool hasRemainder)
+    {
+        if (count != 1)
+        {
+            if (hasRemainder && PluralNameWithRemainder.Length > 0)
+            {
+                return PluralNameWithRemainder;
+            }
+
+            if (PluralName.Length > 0)
+            {
+                return PluralName;
+            }
+        }
+
+        if (hasRemainder && NameWithRemainder.Length > 0)
+        {
+            return NameWithRemainder;
+        }
+
+        return Name;
+    }
+}

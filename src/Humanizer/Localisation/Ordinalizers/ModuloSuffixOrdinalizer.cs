@@ -44,6 +44,12 @@ class ModuloSuffixOrdinalizer(ModuloSuffixOrdinalizer.Options options) : Default
             return options.AbsoluteAtLeastSuffix;
         }
 
+        var moduloLastTwoDigits = (int)Math.Abs(comparisonValue % 100);
+        if (options.LastTwoDigitSuffixes.TryGetValue(moduloLastTwoDigits, out var lastTwoDigitSuffix))
+        {
+            return lastTwoDigitSuffix;
+        }
+
         var lastDigit = (int)Math.Abs(comparisonValue % 10);
         return options.LastDigitSuffixes.TryGetValue(lastDigit, out var lastDigitSuffix)
             ? lastDigitSuffix
@@ -63,6 +69,7 @@ class ModuloSuffixOrdinalizer(ModuloSuffixOrdinalizer.Options options) : Default
     /// </summary>
     /// <param name="DefaultSuffix">The fallback suffix used when no other rule matches.</param>
     /// <param name="ExactSuffixes">Exact-number suffix overrides.</param>
+    /// <param name="LastTwoDigitSuffixes">Suffixes keyed by the absolute last two digits.</param>
     /// <param name="LastDigitSuffixes">Suffixes keyed by the absolute last digit.</param>
     /// <param name="LastTwoDigitsRange">An optional inclusive range of last-two-digit values.</param>
     /// <param name="AbsoluteAtLeast">An optional lower bound that forces a dedicated suffix.</param>
@@ -71,6 +78,7 @@ class ModuloSuffixOrdinalizer(ModuloSuffixOrdinalizer.Options options) : Default
     public readonly record struct Options(
         string DefaultSuffix,
         FrozenDictionary<int, string> ExactSuffixes,
+        FrozenDictionary<int, string> LastTwoDigitSuffixes,
         FrozenDictionary<int, string> LastDigitSuffixes,
         RangeRule? LastTwoDigitsRange = null,
         long? AbsoluteAtLeast = null,
@@ -79,6 +87,7 @@ class ModuloSuffixOrdinalizer(ModuloSuffixOrdinalizer.Options options) : Default
     {
         public string DefaultSuffix { get; } = DefaultSuffix;
         public FrozenDictionary<int, string> ExactSuffixes { get; } = ExactSuffixes;
+        public FrozenDictionary<int, string> LastTwoDigitSuffixes { get; } = LastTwoDigitSuffixes;
         public FrozenDictionary<int, string> LastDigitSuffixes { get; } = LastDigitSuffixes;
         public RangeRule? LastTwoDigitsRange { get; } = LastTwoDigitsRange;
         public long? AbsoluteAtLeast { get; } = AbsoluteAtLeast;

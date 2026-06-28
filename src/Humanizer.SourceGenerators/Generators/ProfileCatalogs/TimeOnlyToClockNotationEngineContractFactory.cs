@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Text.Json;
 
 namespace Humanizer.SourceGenerators;
@@ -46,6 +47,7 @@ public sealed partial class HumanizerSourceGenerator
                 "string" => QuoteLiteral(GetStringValue(root, member)),
                 "enum" => CreateEnumValue(root, member),
                 "bool" => GetBooleanValue(root, member) ? "true" : "false",
+                "int32" => GetInt32Value(root, member).ToString(CultureInfo.InvariantCulture),
                 "optional-string-array" => EngineContractUtilities.TryGetElement(root, member.SourcePath, out var optionalArray)
                     ? CreateStringArrayExpression(optionalArray)
                     : "Array.Empty<string>()",
@@ -71,6 +73,24 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             return bool.TryParse(member.DefaultValue, out var defaultValue) && defaultValue;
+        }
+
+        static int GetInt32Value(JsonElement root, EngineContractMember member)
+        {
+            if (EngineContractUtilities.TryGetElement(root, member.SourcePath, out var value) &&
+                value.ValueKind == JsonValueKind.Number &&
+                value.TryGetInt32(out var numericValue))
+            {
+                return numericValue;
+            }
+
+            if (member.DefaultValue is not null &&
+                int.TryParse(member.DefaultValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var defaultValue))
+            {
+                return defaultValue;
+            }
+
+            throw new InvalidOperationException($"Missing required int32 property '{member.SourcePath}'.");
         }
 
         static string CreateObjectValue(JsonElement root, EngineContractMember member)

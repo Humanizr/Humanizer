@@ -24,6 +24,11 @@ public class StringHumanizeTests
     public void CanHumanizeStringInPascalCaseInTurkish(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Humanize());
 
+    [Theory, UseCulture("tr-TR")]
+    [InlineData("istanbulInputString", "İstanbul Input String")]
+    public void CanHumanizeStringIntoTitleCaseInTurkish(string input, string expectedResult) =>
+        Assert.Equal(expectedResult, input.Humanize(LetterCasing.Title));
+
     [Theory, UseCulture("ar")]
     [InlineData("جمهورية ألمانيا الاتحادية", "جمهورية ألمانيا الاتحادية")]
     public void CanHumanizeOtherUnicodeLetter(string input, string expectedResult) =>

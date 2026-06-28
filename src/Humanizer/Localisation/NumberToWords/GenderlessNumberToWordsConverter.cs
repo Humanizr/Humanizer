@@ -77,7 +77,7 @@ abstract class GenderlessNumberToWordsConverter : INumberToWordsConverter
     /// <param name="number">The number to convert.</param>
     /// <param name="gender">The grammatical gender to use.</param>
     /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
-    public string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+    public virtual string ConvertToOrdinal(int number, GrammaticalGender gender) =>
         ConvertToOrdinal(number);
 
     /// <summary>

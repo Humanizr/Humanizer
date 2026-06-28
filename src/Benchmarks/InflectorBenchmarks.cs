@@ -10,6 +10,10 @@ public class InflectorBenchmarks
     public string Pascalize() =>
         "some_title for_an article".Pascalize();
 
+    [Benchmark(Description = "Pascalize digit and symbol")]
+    public string PascalizeDigitAndSymbol() =>
+        "customer name $".Pascalize();
+
     [Benchmark(Description = "Camelize")]
     public string Camelize() =>
         "some_title for_an article".Camelize();
@@ -18,6 +22,10 @@ public class InflectorBenchmarks
     public string Underscore() =>
         "SomeClassName".Underscore();
 
+    [Benchmark(Description = "Underscore acronym")]
+    public string UnderscoreAcronym() =>
+        "HTMLParserName".Underscore();
+
     [Benchmark(Description = "Dasherize")]
     public string Dasherize() =>
         "some_text_string".Dasherize();
@@ -25,6 +33,10 @@ public class InflectorBenchmarks
     [Benchmark(Description = "Kebaberize")]
     public string Kebaberize() =>
         "PascalCaseString".Kebaberize();
+
+    [Benchmark(Description = "Kebaberize acronym")]
+    public string KebaberizeAcronym() =>
+        "HTMLParserName".Kebaberize();
 
     [Benchmark(Description = "Titleize")]
     public string Titleize() =>

@@ -27,7 +27,10 @@ public sealed partial class HumanizerSourceGenerator
                 "greedy-compound" => CreateGreedyCompoundExpression(profile),
                 "inverted-tens" => CreateInvertedTensExpression(profile.Root),
                 "linking-affix" => CreateLinkingAffixExpression(profile.Root),
+                "linked-vigesimal" => CreateLinkedVigesimalExpression(profile.Root),
+                "scale-leading-compound" => CreateScaleLeadingCompoundExpression(profile.Root),
                 "prefixed-tens-scale" => CreatePrefixedTensScaleExpression(profile.Root),
+                "stemmed-scale" => CreateStemmedScaleExpression(profile.Root),
                 "suffix-scale" => CreateSuffixScaleExpression(profile.Root),
                 "token-map" => "new TokenMapWordsToNumberConverter(" + CreateTokenMapRulesExpression(profile.Root) + ")",
                 "vigesimal-compound" => CreateVigesimalCompoundExpression(profile.Root),
@@ -113,6 +116,31 @@ public sealed partial class HumanizerSourceGenerator
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
             "))";
 
+        static string CreateLinkedVigesimalExpression(JsonElement root) =>
+            "new LinkedVigesimalWordsToNumberConverter(new LinkedVigesimalWordsToNumberProfile(" +
+            CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "words")) + ", " +
+            CreateLinkedVigesimalScaleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
+            QuoteLiteral(GetOptionalString(root, "terminalRemainderJoiner") ?? string.Empty) + ", " +
+            CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
+            CreateOptionalStringArrayExpression(root, "ordinalSuffixes") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "additionalCardinals") + ", " +
+            QuoteLiteral(GetOptionalString(root, "terminalRemainderAlternateJoiner") ?? string.Empty) +
+            "))";
+
+        static string CreateScaleLeadingCompoundExpression(JsonElement root) =>
+            "new ScaleLeadingCompoundWordsToNumberConverter(new ScaleLeadingCompoundWordsToNumberProfile(" +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "unitsMap")) + ", " +
+            CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "tensMap")) + ", " +
+            CreateScaleLeadingCompoundScaleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
+            QuoteLiteral(GetRequiredString(root, "conjunctionWord")) + ", " +
+            (GetOptionalString(root, "terminalRemainderConjunctionWord") is { } terminalRemainderConjunctionWord ? QuoteLiteral(terminalRemainderConjunctionWord) : "null") + ", " +
+            QuoteLiteral(GetRequiredString(root, "minusWord")) + ", " +
+            QuoteLiteral(GetOptionalString(root, "ordinalPrefix") ?? string.Empty) + ", " +
+            QuoteLiteral(GetOptionalString(root, "ordinalSuffix") ?? string.Empty) + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") +
+            "))";
+
         static string CreatePrefixedTensScaleExpression(JsonElement root) =>
             "new PrefixedTensScaleWordsToNumberConverter(new PrefixedTensScaleWordsToNumberProfile(" +
             CreateStringLongFrozenDictionaryExpression(EngineContractUtilities.GetRequiredElement(root, "cardinalMap")) + ", " +
@@ -120,6 +148,17 @@ public sealed partial class HumanizerSourceGenerator
             CreatePrefixedScaleWordArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
             CreatePrefixedTensRuleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "prefixedTens")) + ", " +
             CreateOptionalStringArrayExpression(root, "negativePrefixes") +
+            "))";
+
+        static string CreateStemmedScaleExpression(JsonElement root) =>
+            "new StemmedScaleWordsToNumberConverter(new StemmedScaleWordsToNumberProfile(" +
+            CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "words")) + ", " +
+            CreateStringArrayExpression(EngineContractUtilities.GetRequiredElement(root, "countStems")) + ", " +
+            CreateStemmedScaleArrayExpression(EngineContractUtilities.GetRequiredElement(root, "scales")) + ", " +
+            CreateOptionalStringArrayExpression(root, "negativePrefixes") + ", " +
+            CreateOptionalStringArrayExpression(root, "ordinalSuffixes") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap") + ", " +
+            CreateOptionalStringLongFrozenDictionaryExpression(root, "additionalCardinals") +
             "))";
 
         static string CreateSuffixScaleExpression(JsonElement root) =>
@@ -160,6 +199,7 @@ public sealed partial class HumanizerSourceGenerator
                 RuleAssignment("ExactOrdinalMap", CreateOptionalStringLongFrozenDictionaryExpression(root, "ordinalMap")),
                 RuleAssignment("OrdinalScaleMap", CreateOptionalStringLongMapOrNull(root, "ordinalScaleMap")),
                 RuleAssignment("GluedOrdinalScaleSuffixes", CreateOptionalStringLongMapOrNull(root, "gluedOrdinalScaleSuffixes")),
+                RuleAssignment("GluedScaleSuffixes", CreateOptionalStringLongMapOrNull(root, "gluedScaleSuffixes")),
                 RuleAssignment("CompositeScaleMap", CreateOptionalStringLongMapOrNull(root, "compositeScaleMap")),
                 RuleAssignment("NormalizationProfile", "TokenMapNormalizationProfile." + ToEnumMemberName(GetRequiredString(root, "normalizationProfile"))),
                 RuleAssignment("NegativePrefixes", CreateOptionalStringArrayExpression(root, "negativePrefixes")),

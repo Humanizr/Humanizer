@@ -32,4 +32,13 @@ public class UrduNumberToWordsTests
     {
         Assert.Equal(number, words.ToNumber(Ur));
     }
+
+    [Theory]
+    [InlineData("ایک اعشاریہ دو")]
+    [InlineData("منفی ایک اعشاریہ پانچ")]
+    public void WordsToNumber_RejectsUnsupportedUrduDecimalPhrases(string words)
+    {
+        Assert.False(words.TryToNumber(out _, Ur));
+        Assert.Throws<ArgumentException>(() => words.ToNumber(Ur));
+    }
 }

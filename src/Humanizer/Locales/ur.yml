@@ -482,8 +482,6 @@ surfaces:
         'کھرب': 100000000000
       negativePrefixes:
         - 'منفی'
-      ignoredTokens:
-        - 'اعشاریہ'
 
   ordinal:
     numeric:

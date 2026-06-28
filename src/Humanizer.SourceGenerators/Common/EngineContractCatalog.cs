@@ -105,6 +105,26 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsOrdinalMap", null, null, null, null, null, null),
                             Member("string-array", "unitsOrdinal", null, null, null, null, null, null),
+                            Member("profile-object", "unitForms", "ConjoinedGenderedUnitForms", null, null, null, null, null,
+                                        Member("nullable-int-string-dictionary", "masculine", null, null, null, null, null, "empty"),
+                                        Member("nullable-int-string-dictionary", "feminine", null, null, null, null, null, "empty"),
+                                        Member("nullable-int-string-dictionary", "neuter", null, null, null, null, null, "empty")
+                                    ),
+                            Member("profile-object", "ordinalZero", "ConjoinedGenderedOrdinalForms", null, null, null, null, null,
+                                        Member("string", "masculine", null, null, null, null, null, null),
+                                        Member("string", "feminine", null, null, null, null, null, null),
+                                        Member("string", "neuter", null, null, null, null, null, null)
+                                    ),
+                            Member("profile-object", "ordinalOverHundredSuffixes", "ConjoinedGenderedOrdinalForms", null, null, null, null, null,
+                                        Member("string", "masculine", null, null, null, null, null, null),
+                                        Member("string", "feminine", null, null, null, null, null, null),
+                                        Member("string", "neuter", null, null, null, null, null, null)
+                                    ),
+                            Member("profile-object", "ordinalUnitsAndTensSuffixes", "ConjoinedGenderedOrdinalForms", null, null, null, null, null,
+                                        Member("string", "masculine", null, null, null, null, null, null),
+                                        Member("string", "feminine", null, null, null, null, null, null),
+                                        Member("string", "neuter", null, null, null, null, null, null)
+                                    ),
                             Member("builder", "scales", null, null, "conjoined-gendered-scale-array", null, null, null)
                         )
             ),
@@ -122,6 +142,8 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "tupleSuffix", null, null, null, null, null, null),
                             Member("enum", "ordinalLeadingOneStrategy", null, "ConjunctionalScaleOrdinalLeadingOneStrategy", null, null, null, null),
                             Member("enum", "ordinalMode", null, "ConjunctionalScaleOrdinalMode", null, null, null, null),
+                            Member("string", "ordinalWholePhrasePrefix", null, null, null, "", null, null),
+                            Member("nullable-int-string-dictionary", "exactOrdinals", null, null, null, null, null, null),
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
@@ -253,6 +275,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("bool", "softenTerminalTBeforeSuffix", null, null, null, null, null, null),
                             Member("bool", "dropTerminalVowelBeforeHarmonySuffix", null, null, null, null, null, null),
                             Member("nullable-char-string-dictionary", "ordinalSuffixes", null, null, null, null, null, null),
+                            Member("nullable-char-string-dictionary", "terminalVowelOrdinalSuffixes", null, null, null, null, null, null),
                             Member("nullable-string", "secondOrdinalSuffixCharacters", null, null, null, null, null, null),
                             Member("optional-string-array", "ordinalSuffixPair", null, null, null, null, null, null),
                             Member("nullable-char-string-dictionary", "tupleSuffixes", null, null, null, null, null, null),
@@ -310,6 +333,18 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "ordinalUnitComponents", null, null, null, null, null, null),
                             Member("string-array", "tupleMap", null, null, null, null, null, null),
                             Member("string-string-dictionary", "ordinalAbbreviations", null, null, null, null, null, null)
+                        )
+            ),
+
+                ["indian-scale-forms"] = Schema("indian-scale-forms", "IndianScaleFormNumberToWordsConverter",
+                Member("profile-object", null, null, null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "negativeWord", null, null, null, null, null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "denseUnitsMap", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "indian-scale-form-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty"),
+                            Member("nullable-string-string-dictionary", "ordinalTerminalReplacements", null, null, null, null, null, "empty")
                         )
             ),
                 ["indian-grouping"] = Schema("indian-grouping", null,
@@ -415,9 +450,31 @@ public sealed partial class HumanizerSourceGenerator
                             Member("optional-string-array", "unitsMap", null, null, null, null, null, null),
                             Member("optional-string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
+                            Member("optional-string-array", "hundredsMapWithRemainder", null, null, null, null, null, null),
                             Member("optional-string-array", "subHundredMap", null, null, null, null, null, null),
+                            Member("nullable-int-string-dictionary", "feminineSubHundredReplacements", null, null, null, null, null, "empty"),
+                            Member("nullable-int-string-dictionary", "neuterSubHundredReplacements", null, null, null, null, null, "empty"),
                             Member("builder", "scales", null, null, "joined-scale-array", null, null, null),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, null),
+                            Member("bool", "requireOrdinalException", null, null, null, null, null, null),
+                            Member("optional-profile-object", "ordinal", "JoinedScaleOrdinalProfile", null, null, null, null, null,
+                                        Member("profile-object", "masculine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultPrefix", null, null, null, "", null, null),
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("optional-profile-object", "feminine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultPrefix", null, null, null, "", null, null),
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("optional-profile-object", "neuter", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
+                                                    Member("string", "defaultPrefix", null, null, null, "", null, null),
+                                                    Member("string", "defaultSuffix", null, null, null, null, null, null),
+                                                    Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
+                                        ),
+                                        Member("enum", "neuterFallback", null, "GrammaticalGender", null, "masculine", null, null)
+                            ),
                             Member("nullable-int64", "compoundOrdinalRemainder", null, null, null, null, null, null),
                             Member("nullable-string", "compoundOrdinalWord", null, null, null, null, null, null),
                             Member("nullable-int-set", "compoundOrdinalExcludedValues", null, null, null, null, null, null)
@@ -531,7 +588,24 @@ public sealed partial class HumanizerSourceGenerator
                         ),
                 Member("culture", null, null, null, null, null, null, null)
             ),
-                // Shared Scandinavian-style engine where the runtime decomposition is stable but the cardinal and ordinal scale strategies diverge by profile data. Strategy enums name the structural choice, not the locale.
+                // Shared scale-leading compound engine for languages that say scale nouns before their
+                // count token, e.g. "hundred one and two" or "thousand two". The conjunction is
+                // data-driven for tens+units and terminal sub-hundred remainders; higher-scale
+                // remainders are space-joined. The parser supports the same scale-token order.
+                ["scale-leading-compound"] = Schema("scale-leading-compound", null,
+                Member("profile-object", null, null, null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "minusWord", null, null, null, null, null, null),
+                            Member("string", "conjunctionWord", null, null, null, null, null, null),
+                            Member("nullable-string", "terminalRemainderConjunctionWord", null, null, null, null, null, null),
+                            Member("string", "ordinalPrefix", null, null, null, "", null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "unitsMap", null, null, null, null, null, null),
+                            Member("string-array", "tensMap", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "scale-leading-compound-scale-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty")
+                        )
+            ),
                 ["scale-strategy"] = Schema("scale-strategy", null,
                 Member("profile-object", null, null, null, null, null, null, null,
                             Member("enum", "cardinalStrategy", null, "ScaleStrategyCardinalMode", null, null, null, null),
@@ -581,6 +655,40 @@ public sealed partial class HumanizerSourceGenerator
                             Member("builder", "scales", null, null, "segmented-scale-array", null, null, null),
                             Member("int32", "maximumOrdinal", null, null, null, null, null, null),
                             Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty")
+                        )
+            ),
+                // Shared engine for linked-vigesimal locales with lexicalized lower numbers and
+                // scale nouns that lead their count words. Count overrides cover exact scale
+                // morphology such as irregular hundreds without using the stemmed-scale engine.
+                ["linked-vigesimal"] = Schema("linked-vigesimal", "LinkedVigesimalNumberToWordsConverter",
+                Member("profile-object", null, "LinkedVigesimalNumberToWordsProfile", null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "negativeWord", null, null, null, null, null, null),
+                            Member("string", "negativeJoiner", null, null, null, " ", null, null),
+                            Member("string", "partJoiner", null, null, null, " ", null, null),
+                            Member("string", "terminalRemainderJoiner", null, null, null, " ", null, null),
+                            Member("int32", "terminalRemainderThreshold", null, null, null, "100", null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "words", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "linked-vigesimal-scale-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty"),
+                            Member("string", "terminalRemainderAlternateJoiner", null, null, null, "", null, null),
+                            Member("string", "terminalRemainderAlternateJoinerInitials", null, null, null, "", null, null)
+                        )
+            ),
+                // Shared engine for locales whose scale count is a bound stem and whose scale suffix
+                // changes when the scale is followed by a lower-order remainder.
+                ["stemmed-scale"] = Schema("stemmed-scale", "StemmedScaleNumberToWordsConverter",
+                Member("profile-object", null, "StemmedScaleNumberToWordsProfile", null, null, null, null, null,
+                            Member("string", "zeroWord", null, null, null, null, null, null),
+                            Member("string", "negativeWord", null, null, null, null, null, null),
+                            Member("string", "negativeJoiner", null, null, null, " ", null, null),
+                            Member("string", "joiner", null, null, null, " ", null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string-array", "words", null, null, null, null, null, null),
+                            Member("string-array", "countStems", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "stemmed-scale-array", null, null, null),
+                            Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
                         )
             ),
                 ["south-slavic-cardinal"] = Schema("south-slavic-cardinal", null,
@@ -723,6 +831,9 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "morning", null, null, null, "", null, null),
                             Member("string", "afternoon", null, null, null, "", null, null),
                             Member("string", "night", null, null, null, "", null, null),
+                            Member("string", "evening", null, null, null, "", null, null),
+                            Member("int32", "eveningStartHour", null, null, null, "21", null, null),
+                            Member("int32", "nightStartHour", null, null, null, "21", null, null),
                             Member("enum", "dayPeriodPosition", null, "PhraseClockDayPeriodPosition", null, "suffix", null, null),
                             Member("string", "hourZeroWord", null, null, null, "", null, null),
                             Member("string", "hourOneWord", null, null, null, "", null, null),

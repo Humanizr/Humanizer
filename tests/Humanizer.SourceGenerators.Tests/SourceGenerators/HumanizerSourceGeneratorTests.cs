@@ -308,6 +308,9 @@ surfaces:
   "gluedOrdinalScaleSuffixes": {
     "th": 1
   },
+  "gluedScaleSuffixes": {
+    "hundred": 100
+  },
   "compositeScaleMap": {
     "million billion": 1000000000000000
   },
@@ -342,6 +345,7 @@ surfaces:
         Assert.Contains("ExactOrdinalMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"first\"] = 1 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("OrdinalScaleMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"thousandth\"] = 1000 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("GluedOrdinalScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal) { [\"th\"] = 1 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
+        Assert.Contains("GluedScaleSuffixes = new Dictionary<string, long>(StringComparer.Ordinal) { [\"hundred\"] = 100 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("CompositeScaleMap = new Dictionary<string, long>(StringComparer.Ordinal) { [\"million billion\"] = 1000000000000000 }.ToFrozenDictionary(StringComparer.Ordinal)", fullExpression);
         Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.LowercaseRemovePeriods", fullExpression);
         Assert.Contains("NegativePrefixes = new string[] { \"minus\" }", fullExpression);
@@ -372,6 +376,7 @@ surfaces:
         Assert.Contains("ExactOrdinalMap = null", minimalExpression);
         Assert.Contains("OrdinalScaleMap = null", minimalExpression);
         Assert.Contains("GluedOrdinalScaleSuffixes = null", minimalExpression);
+        Assert.Contains("GluedScaleSuffixes = null", minimalExpression);
         Assert.Contains("CompositeScaleMap = null", minimalExpression);
         Assert.Contains("NormalizationProfile = TokenMapNormalizationProfile.CollapseWhitespace", minimalExpression);
         Assert.Contains("NegativePrefixes = Array.Empty<string>()", minimalExpression);
@@ -509,6 +514,7 @@ surfaces:
     public void TokenMapOrdinalMapsAreGeneratedFromLocaleData()
     {
         var azerbaijani = GetGeneratedSource("TokenMapWordsToNumberConverters.Az.g.cs");
+        var khmer = GetGeneratedSource("TokenMapWordsToNumberConverters.Km.g.cs");
         var spanish = GetGeneratedSource("TokenMapWordsToNumberConverters.Es.g.cs");
         var ukrainian = GetGeneratedSource("TokenMapWordsToNumberConverters.Uk.g.cs");
 
@@ -522,6 +528,8 @@ surfaces:
         Assert.Contains("OrdinalScaleMap = ", spanish);
         Assert.Contains("OrdinalScaleMap = ", ukrainian);
         Assert.Contains("GluedOrdinalScaleSuffixes = ", spanish);
+        Assert.Contains("GluedScaleSuffixes = ", khmer);
+        Assert.Contains("[\"រយ\"] = 100", khmer);
     }
 
     [Fact]
@@ -694,6 +702,7 @@ wordsToNumber:
         Assert.Contains("Schema(\"harmony-ordinal\"", schemaCatalog);
         Assert.Contains("Member(\"bool\", \"softenTerminalTBeforeSuffix\"", schemaCatalog);
         Assert.Contains("Member(\"bool\", \"dropTerminalVowelBeforeHarmonySuffix\"", schemaCatalog);
+        Assert.Contains("Member(\"nullable-char-string-dictionary\", \"terminalVowelOrdinalSuffixes\"", schemaCatalog);
 
         Assert.Contains("Schema(\"conjoined-gendered-scale\"", schemaCatalog);
         Assert.DoesNotContain("Schema(\"bulgarian\"", schemaCatalog);
@@ -720,6 +729,18 @@ wordsToNumber:
         Assert.Contains("engine: 'harmony-ordinal'", uzbekCyrillicProfile);
         Assert.Contains("new HarmonyOrdinalNumberToWordsConverter(", source);
         Assert.DoesNotContain("new UzbekFamilyNumberToWordsConverter(", source);
+    }
+
+    [Fact]
+    public void KazakhProfileEmitsTerminalVowelOrdinalSuffixes()
+    {
+        var source = GetGeneratedSource("NumberToWordsProfileCatalog.g.cs");
+        var kazakhProfile = GetLocaleFile("kk.yml");
+
+        Assert.Contains("terminalVowelOrdinalSuffixes", kazakhProfile);
+        Assert.Contains("\"сыншы\"", source);
+        Assert.Contains("\"ншы\"", source);
+        Assert.Contains("\"нші\"", source);
     }
 
     [Fact]
@@ -781,6 +802,212 @@ numberToWords:
 
         Assert.Contains("new string[] { \"one-thousandth\", \"one-thousand\" }", source);
         Assert.Contains("new string[] { \"{0}-thousandth\", \"{0}-thousand\" }", source);
+    }
+
+
+    [Fact]
+    public void JoinedScaleProfilesEmitOptionalRemainderAndPluralScaleForms()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'joined-scale'
+  maximumValue: 2000001
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  hundredsMap:
+    - 'zero'
+    - 'one hundred'
+  hundredsMapWithRemainder:
+    - 'zero'
+    - 'one hundred remainder'
+  scales:
+    -
+      value: 1000000
+      name: 'million'
+      nameWithRemainder: 'million remainder'
+      pluralName: 'millions'
+      pluralNameWithRemainder: 'millions remainder'
+    -
+      value: 1000
+      name: 'thousand'
+      nameWithRemainder: 'thousand remainder'
+      omitOneWhenSingular: true
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-joined-scale-forms.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+
+        Assert.Contains("new string[] { \"zero\", \"one hundred remainder\" }", source);
+        Assert.Contains("new(1000000, \"million\", \"million remainder\", \"millions\", \"millions remainder\")", source);
+        Assert.Contains("new(1000, \"thousand\", \"thousand remainder\", \"\", \"\", true)", source);
+    }
+
+    [Fact]
+    public void ConjoinedGenderedScaleProfilesEmitGenderedFormsFromLocaleData()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'conjoined-gendered-scale'
+  maximumValue: 1000
+  minusWord: 'minus'
+  conjunction: 'and'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  tensMap:
+    - 'zero'
+    - 'ten'
+    - 'twenty'
+  hundredsMap:
+    - 'zero'
+    - 'hundred'
+  hundredsOrdinalMap:
+    1: 'hundred'
+  unitsOrdinal:
+    1: 'first'
+    2: 'second'
+  unitForms:
+    masculine:
+      1: 'one-m'
+      2: 'two-m'
+    feminine:
+      1: 'one-f'
+  ordinalZero:
+    masculine: 'zero-m'
+    feminine: 'zero-f'
+    neuter: 'zero-n'
+  ordinalOverHundredSuffixes:
+    masculine: '-over-m'
+    feminine: '-over-f'
+    neuter: '-over-n'
+  ordinalUnitsAndTensSuffixes:
+    masculine: '-unit-m'
+    feminine: '-unit-f'
+    neuter: '-unit-n'
+  scales:
+    -
+      divisor: 1000
+      gender: 'feminine'
+      singular: 'thousand'
+      plural: 'thousands'
+      ordinalStem: 'thousandth'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-conjoined-gendered-scale.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var profileBlock = ExtractCacheClassBody(source, "zz_conjoined_gendered_scale_cache");
+
+        Assert.Contains("new ConjoinedGenderedUnitForms(", profileBlock);
+        Assert.Contains("[1] = \"one-m\"", profileBlock);
+        Assert.Contains("[2] = \"two-m\"", profileBlock);
+        Assert.Contains("[1] = \"one-f\"", profileBlock);
+        Assert.Contains("FrozenDictionary<int, string>.Empty", profileBlock);
+        Assert.Contains("new ConjoinedGenderedOrdinalForms(\"zero-m\", \"zero-f\", \"zero-n\")", profileBlock);
+        Assert.Contains("new ConjoinedGenderedOrdinalForms(\"-over-m\", \"-over-f\", \"-over-n\")", profileBlock);
+        Assert.Contains("new ConjoinedGenderedOrdinalForms(\"-unit-m\", \"-unit-f\", \"-unit-n\")", profileBlock);
+        Assert.Contains("new(1000, GrammaticalGender.Feminine, \"thousand\", \"thousands\", \"thousandth\")", profileBlock);
+        Assert.DoesNotContain("нулев", profileBlock);
+    }
+
+    [Fact]
+    public void JoinedScaleProfilesEmitOptionalGenderedOrdinalBlocks()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'joined-scale'
+  maximumValue: 1000
+  zeroWord: 'zero'
+  minusWord: 'minus'
+  unitsMap:
+    - 'zero'
+    - 'one'
+    - 'two'
+  hundredsMap:
+    - 'zero'
+    - 'one hundred'
+  scales:
+    -
+      value: 1000
+      name: 'thousand'
+  ordinal:
+    masculine:
+      defaultPrefix: 'pre-m'
+      defaultSuffix: 'm'
+      exactReplacements:
+        1: 'first-m'
+    feminine:
+      defaultSuffix: 'f'
+      exactReplacements:
+        1: 'first-f'
+    neuter:
+      defaultSuffix: 'n'
+      exactReplacements:
+        1: 'first-n'
+    neuterFallback: 'feminine'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-joined-gendered-ordinal.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+
+        Assert.Contains("new JoinedScaleOrdinalProfile(", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"pre-m\", \"m\"", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"\", \"f\"", source);
+        Assert.Contains("new JoinedScaleGenderOrdinalBlock(\"\", \"n\"", source);
+        Assert.Contains("GrammaticalGender.Feminine", source);
+    }
+
+    [Fact]
+    public void NumberWordSuffixOrdinalizerProfilesEmitOptionalNeuterBlock()
+    {
+        const string locale = """
+ordinalizer:
+  engine: 'number-word-suffix'
+  masculine:
+    defaultSuffix: 'm'
+    exactReplacements:
+      1: 'first-m'
+  feminine:
+    defaultSuffix: 'f'
+    exactReplacements:
+      1: 'first-f'
+  neuter:
+    defaultSuffix: 'n'
+    exactReplacements:
+      1: 'first-n'
+  neuterFallback: 'feminine'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-number-word-suffix-neuter.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var source = GetGeneratedSource(runResult, "OrdinalizerProfileCatalog.g.cs");
+
+        Assert.Contains("new NumberWordSuffixOrdinalizer(culture, new(", source);
+        Assert.Contains("new(\"n\"", source);
+        Assert.Contains("GrammaticalGender.Feminine", source);
     }
 
     [Fact]
@@ -1154,6 +1381,8 @@ numberToWords:
   tupleSuffix: '-base-tuple'
   ordinalLeadingOneStrategy: 'omit-leading-one'
   ordinalMode: 'english'
+  exactOrdinals:
+    1: 'base-first'
   unitsMap:
     - 'zero'
     - 'one'
@@ -1204,12 +1433,14 @@ numberToWords:
         var baseAndCount = CountOccurrences(source, "base-and");
         var baseHundredCount = CountOccurrences(source, "base-hundred");
         var baseScaleCount = CountOccurrences(source, "base-kilo");
+        var baseFirstCount = CountOccurrences(source, "base-first");
         var childMinusCount = CountOccurrences(source, "child-minus");
         var childScaleCount = CountOccurrences(source, "child-kilo");
 
         Assert.Contains("case \"zz-child\": return", source);
         Assert.True(baseAndCount > baseScaleCount, "Inherited scalar fields should appear in both the parent and child generated profiles.");
         Assert.True(baseHundredCount > baseScaleCount, "Inherited scalar fields should appear in both the parent and child generated profiles.");
+        Assert.True(baseFirstCount > baseScaleCount, "Inherited exact ordinal overrides should appear in both the parent and child generated profiles.");
         Assert.True(childMinusCount > 0);
         Assert.True(childScaleCount > 0);
     }
@@ -1231,6 +1462,8 @@ numberToWords:
   tupleSuffix: '-tuple'
   ordinalLeadingOneStrategy: 'omit-leading-one'
   ordinalMode: 'english'
+  exactOrdinals:
+    1: 'first-exact'
   unitsMap:
     1: 'one'
     2: 'two'
@@ -1266,6 +1499,7 @@ numberToWords:
         Assert.Contains("new string[] { \"\", \"\", \"twenty\", \"thirty\" }", source);
         Assert.Contains("new string[] { \"\", \"first\", \"second\" }", source);
         Assert.Contains("new string[] { \"\", \"\", \"twentieth\", \"thirtieth\" }", source);
+        Assert.Contains("first-exact", source);
     }
 
     [Fact]
@@ -1535,6 +1769,62 @@ numberToWords:
         Assert.Contains("case \"zz-scale-defaults\": return", numberSource);
         Assert.Contains("case \"zz-billion-defaults\": return", numberSource);
         Assert.Contains("case \"zz-joined-defaults\": return", numberSource);
+    }
+
+    [Fact]
+    public void LinkedVigesimalProfilesEmitAlternateTerminalRemainderJoinerFields()
+    {
+        const string locale = """
+numberToWords:
+  engine: 'linked-vigesimal'
+  zeroWord: 'zero'
+  negativeWord: 'minus'
+  terminalRemainderJoiner: 'a'
+  terminalRemainderAlternateJoiner: 'ac'
+  terminalRemainderAlternateJoinerInitials: 'ae'
+  words:
+    - 'zero'
+    - 'apple'
+    - 'bee'
+  scales:
+    -
+      value: 20
+      one: 'twenty'
+      oneWithRemainder: 'twenty-r'
+      name: 'score'
+      nameWithRemainder: 'score-r'
+wordsToNumber:
+  engine: 'linked-vigesimal'
+  terminalRemainderJoiner: 'a'
+  terminalRemainderAlternateJoiner: 'ac'
+  words:
+    - 'zero'
+    - 'apple'
+    - 'bee'
+  scales:
+    -
+      value: 20
+      one: 'twenty'
+      oneWithRemainder: 'twenty-r'
+      name: 'score'
+      nameWithRemainder: 'score-r'
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            @"E:\Dev\Humanizer\src\Humanizer\Locales\zz-linked-vigesimal-joiner.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var numberSource = GetGeneratedSource(runResult, "NumberToWordsProfileCatalog.g.cs");
+        var wordsSource = GetGeneratedSource(runResult, "WordsToNumberProfileCatalog.g.cs");
+        var numberBlock = ExtractCacheClassBody(numberSource, "zz_linked_vigesimal_joiner_cache");
+        var wordsBlock = ExtractCacheClassBody(wordsSource, "zz_linked_vigesimal_joiner_cache");
+
+        Assert.Contains("new LinkedVigesimalNumberToWordsProfile(", numberBlock);
+        Assert.Contains("FrozenDictionary<int, string>.Empty, \"ac\", \"ae\")", numberBlock);
+        Assert.Contains("new LinkedVigesimalWordsToNumberProfile(", wordsBlock);
+        Assert.Contains("null, null, \"ac\")", wordsBlock);
     }
 
     [Fact]

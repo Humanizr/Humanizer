@@ -11,6 +11,9 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     readonly string[] cardinalTokenOrder = profile.CardinalMap.Keys
         .OrderByDescending(static key => key.Length)
         .ToArray();
+    readonly string[] ignoredTokenOrder = profile.IgnoredTokens
+        .OrderByDescending(static key => key.Length)
+        .ToArray();
 
     /// <inheritdoc />
     public override long Convert(string words)
@@ -214,6 +217,8 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
         long total = 0;
         long current = 0;
         var position = 0;
+        var matchedNumericToken = false;
+        var matchedLeadingIgnoredToken = false;
 
         if (string.IsNullOrEmpty(words))
         {
@@ -231,6 +236,22 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
 
             if (!TryReadToken(words, ref position, out var token))
             {
+                if (TryReadIgnoredToken(words, ref position, out var ignoredToken))
+                {
+                    if (!CanIgnoreToken(words, position, ignoredToken, matchedNumericToken, matchedLeadingIgnoredToken))
+                    {
+                        unrecognizedWord = ignoredToken;
+                        return false;
+                    }
+
+                    if (!matchedNumericToken)
+                    {
+                        matchedLeadingIgnoredToken = true;
+                    }
+
+                    continue;
+                }
+
                 // Preserve the raw fragment so the caller sees the actual unparsed word instead of
                 // a synthetic token boundary.
                 var start = position;
@@ -243,16 +264,13 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
                 return false;
             }
 
-            if (ShouldIgnore(token))
-            {
-                continue;
-            }
-
             if (!profile.CardinalMap.TryGetValue(token, out var numeric))
             {
                 unrecognizedWord = token;
                 return false;
             }
+
+            matchedNumericToken = true;
 
             if (numeric == profile.HundredValue)
             {
@@ -267,6 +285,12 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
             {
                 current = checked(current + numeric);
             }
+        }
+
+        if (!matchedNumericToken)
+        {
+            unrecognizedWord = words.Trim();
+            return false;
         }
 
         value = checked(total + current);
@@ -344,15 +368,60 @@ internal class GreedyCompoundWordsToNumberConverter(GreedyCompoundWordsToNumberP
     }
 
     /// <summary>
-    /// Returns <c>true</c> when a token is configured to be ignored during parsing.
+    /// Reads and skips the next ignored token without treating it as a cardinal value token.
     /// </summary>
-    /// <param name="token">The token to inspect.</param>
-    /// <returns><c>true</c> if the token should be skipped; otherwise, <c>false</c>.</returns>
-    bool ShouldIgnore(string token)
+    /// <param name="words">The normalized phrase.</param>
+    /// <param name="position">The current read position within <paramref name="words"/>.</param>
+    /// <param name="token">When this method returns, the matched ignored token.</param>
+    /// <returns><c>true</c> if an ignored token was matched; otherwise, <c>false</c>.</returns>
+    bool TryReadIgnoredToken(string words, ref int position, out string token)
     {
-        foreach (var ignoredToken in profile.IgnoredTokens)
+        foreach (var candidate in ignoredTokenOrder)
         {
-            if (token == ignoredToken)
+            if (position + candidate.Length > words.Length)
+            {
+                continue;
+            }
+
+            if (words.AsSpan(position, candidate.Length).SequenceEqual(candidate.AsSpan()))
+            {
+                token = candidate;
+                position += candidate.Length;
+                return true;
+            }
+        }
+
+        token = string.Empty;
+        return false;
+    }
+
+    bool CanIgnoreToken(string words, int position, string token, bool matchedNumericToken, bool matchedLeadingIgnoredToken)
+    {
+        if (matchedNumericToken)
+        {
+            return !IsOrdinalPrefixToken(token) && HasRemainingCardinalToken(words, position);
+        }
+
+        return !matchedLeadingIgnoredToken && IsOrdinalPrefixToken(token) && HasRemainingCardinalToken(words, position);
+    }
+
+    bool HasRemainingCardinalToken(string words, int position)
+    {
+        while (position < words.Length && char.IsWhiteSpace(words[position]))
+        {
+            position++;
+        }
+
+        return position < words.Length && TryReadToken(words, ref position, out _);
+    }
+
+    bool IsOrdinalPrefixToken(string token)
+    {
+        foreach (var ordinal in profile.OrdinalMap.Keys)
+        {
+            if (ordinal.Length > token.Length &&
+                ordinal.AsSpan(0, token.Length).SequenceEqual(token.AsSpan()) &&
+                char.IsWhiteSpace(ordinal[token.Length]))
             {
                 return true;
             }

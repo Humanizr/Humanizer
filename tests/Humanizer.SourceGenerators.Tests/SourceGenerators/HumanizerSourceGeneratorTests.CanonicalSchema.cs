@@ -101,6 +101,105 @@ surfaces:
         Assert.Contains("[\"huge\"] = 2147483648", childTokenMapSource, StringComparison.Ordinal);
     }
 
+
+    [Fact]
+    public void CanonicalLocaleSchemaEmitsScaleLeadingCompoundNumberProfiles()
+    {
+        const string locale = """
+locale: 'zz-scale'
+surfaces:
+  number:
+    words:
+      engine: 'scale-leading-compound'
+      zeroWord: 'zero'
+      minusWord: 'minus'
+      conjunctionWord: 'and'
+      ordinalPrefix: 'ord '
+      unitsMap:
+        - 'zero'
+        - 'one'
+        - 'two'
+        - 'three'
+        - 'four'
+        - 'five'
+        - 'six'
+        - 'seven'
+        - 'eight'
+        - 'nine'
+        - 'ten'
+        - 'eleven'
+        - 'twelve'
+        - 'thirteen'
+        - 'fourteen'
+        - 'fifteen'
+        - 'sixteen'
+        - 'seventeen'
+        - 'eighteen'
+        - 'nineteen'
+      tensMap:
+        2: 'twenty'
+        3: 'thirty'
+        4: 'forty'
+        5: 'fifty'
+        6: 'sixty'
+        7: 'seventy'
+        8: 'eighty'
+        9: 'ninety'
+      scales:
+        -
+          value: 1000
+          name: 'thousand'
+        -
+          value: 100
+          name: 'hundred'
+      ordinalMap:
+        1: 'first'
+    parse:
+      engine: 'scale-leading-compound'
+      minusWord: 'minus'
+      conjunctionWord: 'and'
+      ordinalPrefix: 'ord '
+      unitsMap:
+        zero: 0
+        one: 1
+        two: 2
+        ten: 10
+      tensMap:
+        twenty: 20
+        thirty: 30
+      scales:
+        -
+          value: 1000
+          name: 'thousand'
+        -
+          value: 100
+          name: 'hundred'
+      ordinalMap:
+        first: 1
+""";
+
+        var runResult = RunGenerator(new InMemoryAdditionalText(
+            "src/Humanizer/Locales/zz-scale.yml",
+            locale));
+
+        Assert.Empty(runResult.Diagnostics);
+
+        var numberToWordsSource = runResult.Results[0].GeneratedSources
+            .Single(source => source.HintName == "NumberToWordsProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+        var wordsToNumberSource = runResult.Results[0].GeneratedSources
+            .Single(source => source.HintName == "WordsToNumberProfileCatalog.g.cs")
+            .SourceText
+            .ToString();
+
+        Assert.Contains("ScaleLeadingCompoundNumberToWordsConverter", numberToWordsSource, StringComparison.Ordinal);
+        Assert.Contains("ScaleLeadingCompoundScale", numberToWordsSource, StringComparison.Ordinal);
+        Assert.Contains("new string[] { \"\", \"\", \"twenty\", \"thirty\"", numberToWordsSource, StringComparison.Ordinal);
+        Assert.Contains("ScaleLeadingCompoundWordsToNumberConverter", wordsToNumberSource, StringComparison.Ordinal);
+        Assert.Contains("[\"twenty\"] = 20", wordsToNumberSource, StringComparison.Ordinal);
+    }
+
     [Fact]
     public void CanonicalLocaleSchemaRejectsOldTopLevelFeatureBlocks()
     {

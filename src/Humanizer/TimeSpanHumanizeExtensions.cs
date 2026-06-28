@@ -35,8 +35,12 @@ public static class TimeSpanHumanizeExtensions
     /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
     public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo? culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string? collectionSeparator = ", ", bool toWords = false)
     {
-        var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit, toWords);
-        timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
+        if (precision == 1 && !countEmptyUnits)
+        {
+            return HumanizeSinglePart(timeSpan, culture, maxUnit, minUnit, toWords);
+        }
+
+        var timeParts = CreatePrecisionLimitedTimeParts(timeSpan, culture, maxUnit, minUnit, precision, countEmptyUnits, toWords);
 
         return ConcatenateTimeSpanParts(timeParts, culture, collectionSeparator);
     }
@@ -74,29 +78,64 @@ public static class TimeSpanHumanizeExtensions
         return string.Format(ageFormat, value);
     }
 
-    static List<string?> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
+    static List<string> CreatePrecisionLimitedTimeParts(
+        TimeSpan timespan,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        TimeUnit minUnit,
+        int precision,
+        bool countEmptyUnits,
+        bool toWords = false)
     {
+        if (precision <= 0)
+        {
+            return [];
+        }
+
         var cultureFormatter = Configurator.GetFormatter(culture);
         var firstValueFound = false;
-        var timeParts = new List<string?>();
+        var countedUnits = 0;
+        var timeParts = new List<string>(Math.Min(precision, TimeUnits.Length));
 
         foreach (var timeUnit in TimeUnits)
         {
             var timePart = GetTimeUnitPart(timeUnit, timespan, maxUnit, minUnit, cultureFormatter, toWords);
 
-            if (timePart != null || firstValueFound)
+            if (timePart == null && !firstValueFound)
             {
-                firstValueFound = true;
+                continue;
+            }
+
+            firstValueFound = true;
+            if (countEmptyUnits)
+            {
+                countedUnits++;
+                if (timePart != null)
+                {
+                    timeParts.Add(timePart);
+                }
+
+                if (countedUnits >= precision)
+                {
+                    return timeParts;
+                }
+            }
+            else if (timePart != null)
+            {
                 timeParts.Add(timePart);
+                if (timeParts.Count >= precision)
+                {
+                    return timeParts;
+                }
             }
         }
 
-        if (IsContainingOnlyNullValue(timeParts))
+        if (timeParts.Count == 0)
         {
             var noTimeValueCultureFormatted = toWords
                 ? cultureFormatter.TimeSpanHumanize_Zero()
                 : cultureFormatter.TimeSpanHumanize(minUnit, 0);
-            timeParts = CreateTimePartsWithNoTimeValue(noTimeValueCultureFormatted);
+            timeParts.Add(noTimeValueCultureFormatted);
         }
 
         return timeParts;
@@ -186,29 +225,24 @@ public static class TimeSpanHumanizeExtensions
             ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
             : null;
 
-    static List<string?> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
-        [noTimeValue];
-
-    static bool IsContainingOnlyNullValue(IEnumerable<string?> timeParts) =>
-        !timeParts.Any(x => x != null);
-
-    static List<string?> SetPrecisionOfTimeSpan(IEnumerable<string?> timeParts, int precision, bool countEmptyUnits)
+    static string HumanizeSinglePart(TimeSpan timeSpan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords)
     {
-        if (!countEmptyUnits)
+        var cultureFormatter = Configurator.GetFormatter(culture);
+        foreach (var timeUnit in TimeUnits)
         {
-            timeParts = timeParts.Where(x => x != null);
+            var timePart = GetTimeUnitPart(timeUnit, timeSpan, maxUnit, minUnit, cultureFormatter, toWords);
+            if (timePart is not null)
+            {
+                return timePart;
+            }
         }
 
-        timeParts = timeParts.Take(precision);
-        if (countEmptyUnits)
-        {
-            timeParts = timeParts.Where(x => x != null);
-        }
-
-        return [.. timeParts];
+        return toWords
+            ? cultureFormatter.TimeSpanHumanize_Zero()
+            : cultureFormatter.TimeSpanHumanize(minUnit, 0);
     }
 
-    static string ConcatenateTimeSpanParts(IEnumerable<string?> timeSpanParts, CultureInfo? culture, string? collectionSeparator)
+    static string ConcatenateTimeSpanParts(List<string> timeSpanParts, CultureInfo? culture, string? collectionSeparator)
     {
         if (collectionSeparator == null)
         {

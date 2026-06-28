@@ -318,6 +318,24 @@ surfaces:
         17: 'седемнадесет'
         18: 'осемнадесет'
         19: 'деветнадесет'
+      unitForms:
+        masculine:
+          1: 'един'
+          2: 'два'
+        feminine:
+          1: 'една'
+      ordinalZero:
+        masculine: 'нулев'
+        feminine: 'нулева'
+        neuter: 'нулево'
+      ordinalOverHundredSuffixes:
+        masculine: 'ен'
+        feminine: 'на'
+        neuter: 'но'
+      ordinalUnitsAndTensSuffixes:
+        masculine: 'и'
+        feminine: 'а'
+        neuter: 'о'
       scales:
         -
           divisor: 1000000000000000000

@@ -5,6 +5,8 @@ namespace Humanizer;
 /// </summary>
 public static class OrdinalizeExtensions
 {
+    static readonly ConcurrentDictionary<string, OrdinalNumberFormatting> OrdinalNumberFormattingCache = new(StringComparer.OrdinalIgnoreCase);
+
     /// <summary>
     /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
     /// </summary>
@@ -158,7 +160,7 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, CultureInfo culture)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))));
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)));
     }
 
     /// <summary>
@@ -178,7 +180,7 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, CultureInfo culture, WordForm wordForm)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))), wordForm);
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), wordForm);
     }
 
     /// <summary>
@@ -223,7 +225,7 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))), gender);
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), gender);
     }
 
     /// <summary>
@@ -246,8 +248,84 @@ public static class OrdinalizeExtensions
     public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture, WordForm wordForm)
     {
         var resolvedCulture = culture ?? CultureInfo.CurrentUICulture;
-        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(number.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(resolvedCulture))), gender, wordForm);
+        return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, NormalizeOrdinalNumberString(FormatOrdinalNumberString(number, resolvedCulture)), gender, wordForm);
     }
+
+    static string FormatOrdinalNumberString(int number, CultureInfo culture)
+    {
+        if (number >= 0)
+        {
+            var positiveFormatting = GetDefaultOrdinalNumberFormatting(culture);
+            return positiveFormatting.UsesInvariantDigits
+                ? number.ToString(CultureInfo.InvariantCulture)
+                : number.ToString(positiveFormatting.NumberFormat);
+        }
+
+        var formatting = GetOrdinalNumberFormatting(culture);
+        if (formatting.NumberFormat.NegativeSign == NumberFormatInfo.InvariantInfo.NegativeSign &&
+            formatting.UsesInvariantDigits &&
+            formatting.NumberFormat.NumberNegativePattern == NumberFormatInfo.InvariantInfo.NumberNegativePattern)
+        {
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+
+        return number.ToString(formatting.NumberFormat);
+    }
+
+    static OrdinalNumberFormatting GetDefaultOrdinalNumberFormatting(CultureInfo culture)
+    {
+        if (string.IsNullOrEmpty(culture.Name))
+        {
+            return CreateOrdinalNumberFormatting(culture);
+        }
+
+        return OrdinalNumberFormattingCache.GetOrAdd(culture.Name, static cultureName =>
+            CreateOrdinalNumberFormatting(CultureInfo.GetCultureInfo(cultureName)));
+    }
+
+    static OrdinalNumberFormatting GetOrdinalNumberFormatting(CultureInfo culture)
+    {
+        if (string.IsNullOrEmpty(culture.Name))
+        {
+            return CreateOrdinalNumberFormatting(culture);
+        }
+
+        var formatting = GetDefaultOrdinalNumberFormatting(culture);
+        if (culture.NumberFormat.NegativeSign == formatting.CultureNegativeSign)
+        {
+            return formatting;
+        }
+
+        return CreateOrdinalNumberFormatting(culture);
+    }
+
+    static OrdinalNumberFormatting CreateOrdinalNumberFormatting(CultureInfo culture)
+    {
+        var cultureNegativeSign = culture.NumberFormat.NegativeSign;
+        var numberFormat = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
+        return new(numberFormat, cultureNegativeSign, UsesInvariantDigits(numberFormat));
+    }
+
+    static bool UsesInvariantDigits(NumberFormatInfo formattingNumberFormat)
+    {
+        var nativeDigits = formattingNumberFormat.NativeDigits;
+        return nativeDigits.Length == 10 &&
+               nativeDigits[0] == "0" &&
+               nativeDigits[1] == "1" &&
+               nativeDigits[2] == "2" &&
+               nativeDigits[3] == "3" &&
+               nativeDigits[4] == "4" &&
+               nativeDigits[5] == "5" &&
+               nativeDigits[6] == "6" &&
+               nativeDigits[7] == "7" &&
+               nativeDigits[8] == "8" &&
+               nativeDigits[9] == "9";
+    }
+
+    readonly record struct OrdinalNumberFormatting(
+        NumberFormatInfo NumberFormat,
+        string CultureNegativeSign,
+        bool UsesInvariantDigits);
 
     static int ParseOrdinalNumber(string numberString, CultureInfo culture) =>
         int.Parse(numberString, culture);

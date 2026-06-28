@@ -147,6 +147,7 @@ public sealed partial class HumanizerSourceGenerator
             return "new ModuloSuffixOrdinalizer(new(" +
                    QuoteLiteral(GetRequiredString(root, "defaultSuffix")) + ", " +
                    CreateNullableIntStringFrozenDictionaryExpression(root, "exactSuffixes").Replace("null", "FrozenDictionary<int, string>.Empty") + ", " +
+                   CreateNullableIntStringFrozenDictionaryExpression(root, "lastTwoDigitSuffixes").Replace("null", "FrozenDictionary<int, string>.Empty") + ", " +
                    CreateNullableIntStringFrozenDictionaryExpression(root, "lastDigitSuffixes").Replace("null", "FrozenDictionary<int, string>.Empty") + ", " +
                    lastTwoDigitsRange + ", " +
                    absoluteAtLeast + ", " +
@@ -220,6 +221,9 @@ public sealed partial class HumanizerSourceGenerator
             var feminineBlock = root.TryGetProperty("feminine", out var feminine) && feminine.ValueKind == JsonValueKind.Object
                 ? CreateNumberWordSuffixGenderBlockExpression(feminine)
                 : masculineBlock;
+            var neuterBlock = root.TryGetProperty("neuter", out var neuter) && neuter.ValueKind == JsonValueKind.Object
+                ? CreateNumberWordSuffixGenderBlockExpression(neuter)
+                : "null";
 
             var neuterFallback = GetOptionalString(root, "neuterFallback") ?? "masculine";
             var neuterGender = neuterFallback.Equals("feminine", StringComparison.OrdinalIgnoreCase)
@@ -230,6 +234,7 @@ public sealed partial class HumanizerSourceGenerator
                    (useCultureParameter ? "culture" : "CultureInfo.InvariantCulture") + ", new(" +
                    masculineBlock + ", " +
                    feminineBlock + ", " +
+                   neuterBlock + ", " +
                    neuterGender +
                    "))";
         }

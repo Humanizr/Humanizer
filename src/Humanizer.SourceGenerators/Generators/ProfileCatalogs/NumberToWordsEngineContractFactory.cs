@@ -57,6 +57,9 @@ public sealed partial class HumanizerSourceGenerator
             member.Kind switch
             {
                 "profile-object" => CreateObjectValue(root, member, useCultureParameter),
+                "optional-profile-object" => EngineContractUtilities.TryGetElement(root, member.SourcePath, out _)
+                    ? CreateObjectValue(root, member, useCultureParameter)
+                    : "null",
                 "culture" => useCultureParameter ? "culture" : "CultureInfo.InvariantCulture",
                 "string" => QuoteLiteral(GetStringValue(root, member)),
                 "nullable-string" => GetOptionalStringValue(root, member) is { } stringValue ? QuoteLiteral(stringValue) : "null",
@@ -169,11 +172,15 @@ public sealed partial class HumanizerSourceGenerator
                 "pluralized-scale-array" => CreatePluralizedScaleArrayExpression(builderRoot),
                 "ordinal-prefix-scale-array" => CreateOrdinalPrefixScaleArrayExpression(builderRoot),
                 "inverted-tens-scale-array" => CreateInvertedTensScaleArrayExpression(builderRoot),
+                "indian-scale-form-array" => CreateIndianScaleFormArrayExpression(builderRoot),
                 "south-slavic-scale-array" => CreateSouthSlavicScaleArrayExpression(builderRoot),
+                "scale-leading-compound-scale-array" => CreateScaleLeadingCompoundScaleArrayExpression(builderRoot),
                 "scandinavian-scale-array" => CreateScaleStrategyScaleArrayExpression(builderRoot),
                 "unit-leading-compound-scale-array" => CreateUnitLeadingCompoundScaleArrayExpression(builderRoot),
                 "conjoined-gendered-scale-array" => CreateConjoinedGenderedScaleArrayExpression(builderRoot),
                 "segmented-scale-array" => CreateSegmentedScaleArrayExpression(builderRoot),
+                "stemmed-scale-array" => CreateStemmedScaleArrayExpression(builderRoot),
+                "linked-vigesimal-scale-array" => CreateLinkedVigesimalScaleArrayExpression(builderRoot),
                 "terminal-ordinal-scale-array" => CreateTerminalOrdinalScaleArrayExpression(builderRoot),
                 "construct-state-scale-array" => CreateConstructStateScaleArrayExpression(builderRoot),
                 "hyphenated-scale" => CreateHyphenatedScaleExpression(builderRoot),

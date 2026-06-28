@@ -34,10 +34,20 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             profile.AddAndMode == ConjunctionalScaleAddAndMode.UseCallerFlag ? addAnd : profile.DefaultAddAnd);
 
     /// <inheritdoc />
-    public override string ConvertToOrdinal(int number) =>
-        profile.OrdinalMode == ConjunctionalScaleOrdinalMode.Cardinal
-            ? Convert(number, profile.DefaultAddAnd)
-            : ConvertCore(number, isOrdinal: true, profile.DefaultAddAnd);
+    public override string ConvertToOrdinal(int number)
+    {
+        if (profile.ExactOrdinals is not null && profile.ExactOrdinals.TryGetValue(number, out var exactOrdinal))
+        {
+            return exactOrdinal;
+        }
+
+        return profile.OrdinalMode switch
+        {
+            ConjunctionalScaleOrdinalMode.Cardinal => Convert(number, profile.DefaultAddAnd),
+            ConjunctionalScaleOrdinalMode.WholePhrasePrefix => ConvertWholePhraseOrdinal(number, profile.DefaultAddAnd),
+            _ => ConvertCore(number, isOrdinal: true, profile.DefaultAddAnd)
+        };
+    }
 
     /// <inheritdoc />
     public override string ConvertToTuple(int number) =>
@@ -144,6 +154,26 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
         parts.Add(GetUnitValue(number, isOrdinal));
     }
 
+    string ConvertWholePhraseOrdinal(long number, bool addAnd)
+    {
+        if (number < 0)
+        {
+            if (number == long.MinValue)
+            {
+                throw new OverflowException("Cannot safely negate long.MinValue.");
+            }
+
+            return $"{profile.MinusWord} {ConvertWholePhraseOrdinal(-number, addAnd)}";
+        }
+
+        if (number < profile.OrdinalUnitsMap.Length)
+        {
+            return GetUnitValue(number, isOrdinal: true);
+        }
+
+        return $"{profile.OrdinalWholePhrasePrefix}{ConvertCore(number, isOrdinal: false, addAnd)}";
+    }
+
     string GetUnitValue(long number, bool isOrdinal) =>
         isOrdinal ? profile.OrdinalUnitsMap[number] : profile.UnitsMap[number];
 
@@ -197,6 +227,8 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
 /// <param name="tupleSuffix">The suffix used when tuples fall back to a numeric affix form.</param>
 /// <param name="ordinalLeadingOneStrategy">The policy that decides whether leading one survives in ordinal scale phrases.</param>
 /// <param name="ordinalMode">The ordinal rendering mode used by the shared engine.</param>
+/// <param name="ordinalWholePhrasePrefix">The prefix prepended to cardinal phrases when whole-phrase ordinal mode is active.</param>
+/// <param name="exactOrdinals">Optional exact ordinal overrides keyed by value.</param>
 /// <param name="unitsMap">The cardinal unit lexicon keyed by value.</param>
 /// <param name="ordinalUnitsMap">The ordinal unit lexicon keyed by value.</param>
 /// <param name="tensMap">The cardinal tens lexicon keyed by decade value.</param>
@@ -215,6 +247,8 @@ sealed class ConjunctionalScaleNumberToWordsProfile(
     string tupleSuffix,
     ConjunctionalScaleOrdinalLeadingOneStrategy ordinalLeadingOneStrategy,
     ConjunctionalScaleOrdinalMode ordinalMode,
+    string ordinalWholePhrasePrefix,
+    FrozenDictionary<int, string>? exactOrdinals,
     string[] unitsMap,
     string[] ordinalUnitsMap,
     string[] tensMap,
@@ -278,6 +312,16 @@ sealed class ConjunctionalScaleNumberToWordsProfile(
     public ConjunctionalScaleOrdinalMode OrdinalMode { get; } = ordinalMode;
 
     /// <summary>
+    /// Gets the prefix prepended to cardinal phrases when <see cref="OrdinalMode"/> is whole-phrase prefix.
+    /// </summary>
+    public string OrdinalWholePhrasePrefix { get; } = ordinalWholePhrasePrefix;
+
+    /// <summary>
+    /// Gets optional exact ordinal overrides keyed by value.
+    /// </summary>
+    public FrozenDictionary<int, string>? ExactOrdinals { get; } = exactOrdinals;
+
+    /// <summary>
     /// Gets the cardinal unit lexicon.
     /// </summary>
     public string[] UnitsMap { get; } = unitsMap;
@@ -339,12 +383,13 @@ enum ConjunctionalScaleOrdinalLeadingOneStrategy
 }
 
 /// <summary>
-/// Describes whether the engine emits true ordinals or intentionally reuses cardinal wording.
+/// Describes whether the engine emits true ordinals, prefixes whole cardinal phrases, or intentionally reuses cardinal wording.
 /// </summary>
 enum ConjunctionalScaleOrdinalMode
 {
     English,
-    Cardinal
+    Cardinal,
+    WholePhrasePrefix
 }
 
 /// <summary>

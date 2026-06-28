@@ -209,7 +209,10 @@ public struct ByteSize(double byteSize) :
             provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
         }
 
-        return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(culture));
+        return string.Concat(
+            LargestWholeNumberValue.ToString("0.##", provider),
+            " ",
+            GetLargestWholeNumberSymbol(culture));
     }
 
     public readonly string ToString(string? format) =>
@@ -230,7 +233,7 @@ public struct ByteSize(double byteSize) :
 
         if (format.IndexOfAny(['#', '0']) < 0)
         {
-            format = "0.## " + format;
+            format = string.Concat("0.## ", format);
         }
 
         format = format.Replace("#.##", "0.##");
@@ -291,7 +294,10 @@ public struct ByteSize(double byteSize) :
             ? "0"
             : formattedLargeWholeNumberValue;
 
-        return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(culture) : GetLargestWholeNumberFullWord(culture))}";
+        return string.Concat(
+            formattedLargeWholeNumberValue,
+            " ",
+            toSymbol ? GetLargestWholeNumberSymbol(culture) : GetLargestWholeNumberFullWord(culture));
     }
 
     /// <summary>

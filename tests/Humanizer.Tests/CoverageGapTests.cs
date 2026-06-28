@@ -759,6 +759,9 @@ public class CoverageGapTests
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize(" ", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one", TokenMapWordsToNumberNormalizer.Normalize(" one ", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("One,\tTwo.", TokenMapNormalizationProfile.LowercaseRemovePeriods));
+        Assert.Equal("thirty four", TokenMapWordsToNumberNormalizer.Normalize("thirty-four", TokenMapNormalizationProfile.LowercaseRemovePeriods));
+        Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one--two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
+        Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one- two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("onetwo", TokenMapWordsToNumberNormalizer.Normalize("one,two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one  two", TokenMapNormalizationProfile.LowercaseRemovePeriods));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one\ttwo", TokenMapNormalizationProfile.LowercaseRemovePeriods));
@@ -766,6 +769,7 @@ public class CoverageGapTests
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize("", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one", TokenMapWordsToNumberNormalizer.Normalize(" one ", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("One,.\tTwo-", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
+        Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one--two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("onetwo", TokenMapWordsToNumberNormalizer.Normalize("one,two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one  two", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
         Assert.Equal("one two", TokenMapWordsToNumberNormalizer.Normalize("one\ttwo", TokenMapNormalizationProfile.LowercaseReplacePeriodsWithSpaces));
@@ -1224,6 +1228,7 @@ public class CoverageGapTests
         var converter = new ConjunctionalScaleNumberToWordsConverter(CreateConjunctionalScaleProfile());
 
         Assert.Equal("minus one", converter.Convert(-1));
+        Assert.Equal("minus one", converter.ConvertToOrdinal(-1));
         Assert.Equal("one hundred", converter.Convert(100, addAnd: false));
         Assert.Equal("one hundred and one", converter.Convert(101));
         Assert.Equal("one thousand and one", converter.Convert(1001));
@@ -1459,7 +1464,10 @@ public class CoverageGapTests
             earlyMorning: "early",
             morning: "morning",
             afternoon: "afternoon",
-            night: "night");
+            night: "night",
+            evening: "evening",
+            eveningStartHour: 17,
+            nightStartHour: 21);
         var converter = new PhraseClockNotationConverter(profile);
 
         Assert.Equal("midnight", converter.Convert(new TimeOnly(0, 0), ClockNotationRounding.None));
@@ -1470,6 +1478,8 @@ public class CoverageGapTests
         Assert.Equal("2 after half 7 minutes-paucal morning", converter.Convert(new TimeOnly(7, 32), ClockNotationRounding.None));
         Assert.Equal("2 before les 8 minutes-paucal morning", converter.Convert(new TimeOnly(7, 58), ClockNotationRounding.None));
         Assert.Equal("23 past 13 minutes-paucal afternoon", converter.Convert(new TimeOnly(13, 23), ClockNotationRounding.None));
+        Assert.Equal("18:0 evening", converter.Convert(new TimeOnly(18, 0), ClockNotationRounding.None));
+        Assert.Equal("21:0 night", converter.Convert(new TimeOnly(21, 0), ClockNotationRounding.None));
         Assert.Equal("2:0 early", converter.Convert(new TimeOnly(1, 58), ClockNotationRounding.NearestFiveMinutes));
 
         var fallback = new PhraseClockNotationConverter(CreateClockProfile());
@@ -1944,6 +1954,7 @@ public class CoverageGapTests
                 Feminine: new NumberWordSuffixOrdinalizer.GenderBlock(
                     "-f",
                     new Dictionary<int, string> { [2] = "second-f" }.ToFrozenDictionary()),
+                Neuter: null,
                 NeuterFallbackGender: GrammaticalGender.Feminine));
 
         Assert.Equal("first-m", ordinalizer.Convert(1, "1"));
@@ -2098,6 +2109,17 @@ public class CoverageGapTests
 
         var missingSuffixes = new HarmonyOrdinalNumberToWordsConverter(CreateHarmonyOrdinalProfile(includeOrdinalSuffixes: false));
         Assert.Throws<InvalidOperationException>(() => missingSuffixes.ConvertToOrdinal(1));
+
+        var terminalVowelSuffixes = new HarmonyOrdinalNumberToWordsConverter(CreateHarmonyOrdinalProfile(
+            terminalVowelOrdinalSuffixes: new Dictionary<char, string> { ['e'] = "zz" }.ToFrozenDictionary()));
+        Assert.Equal("onzz", terminalVowelSuffixes.ConvertToOrdinal(1));
+        Assert.Equal("twenty onzz", terminalVowelSuffixes.ConvertToOrdinal(21));
+        Assert.Equal("ontuple", terminalVowelSuffixes.ConvertToTuple(1));
+
+        var kyrgyzLikeTerminalVowelSuffixes = new HarmonyOrdinalNumberToWordsConverter(CreateKyrgyzLikeHarmonyOrdinalProfile());
+        Assert.Equal("жыйырманчы", kyrgyzLikeTerminalVowelSuffixes.ConvertToOrdinal(20));
+        Assert.Equal("бир миллиардынчы", kyrgyzLikeTerminalVowelSuffixes.ConvertToOrdinal(1000));
+        Assert.Equal("жыйырмалап", kyrgyzLikeTerminalVowelSuffixes.ConvertToTuple(20));
 
         var incompleteMembership = new HarmonyOrdinalNumberToWordsConverter(CreateHarmonyOrdinalProfile(
             ordinalSuffixStrategy: HarmonyOrdinalSuffixStrategy.FinalCharacterMembership,
@@ -2567,6 +2589,8 @@ public class CoverageGapTests
             "-tuple",
             ConjunctionalScaleOrdinalLeadingOneStrategy.OmitLeadingOne,
             ConjunctionalScaleOrdinalMode.English,
+            "",
+            null,
             units,
             ordinalUnits,
             tens,
@@ -2623,6 +2647,7 @@ public class CoverageGapTests
         FrozenDictionary<char, string>? ordinalSuffixes = null,
         bool includeOrdinalSuffixes = true,
         string? secondOrdinalSuffixCharacters = "e",
+        FrozenDictionary<char, string>? terminalVowelOrdinalSuffixes = null,
         string[]? ordinalSuffixPair = null)
     {
         var units = Enumerable.Repeat(string.Empty, 10).ToArray();
@@ -2645,9 +2670,35 @@ public class CoverageGapTests
             softenTerminalTBeforeSuffix: true,
             dropTerminalVowelBeforeHarmonySuffix: true,
             includeOrdinalSuffixes ? ordinalSuffixes ?? new Dictionary<char, string> { ['e'] = "th" }.ToFrozenDictionary() : null,
+            terminalVowelOrdinalSuffixes,
             secondOrdinalSuffixCharacters,
             ordinalSuffixPair ?? ["a", "b"],
             new Dictionary<char, string> { ['e'] = "tuple" }.ToFrozenDictionary());
+    }
+
+    static HarmonyOrdinalNumberToWordsProfile CreateKyrgyzLikeHarmonyOrdinalProfile()
+    {
+        var units = Enumerable.Repeat(string.Empty, 10).ToArray();
+        units[0] = "нөл";
+        units[1] = "бир";
+        var tens = Enumerable.Repeat(string.Empty, 10).ToArray();
+        tens[2] = "жыйырма";
+
+        return new(
+            0,
+            2000,
+            "минус",
+            "жүз",
+            HarmonyOrdinalHundredStrategy.AllowExplicitOneInComposite,
+            units,
+            tens,
+            [new(1000, "миллиард")],
+            HarmonyOrdinalSuffixStrategy.LastVowelMap,
+            softenTerminalTBeforeSuffix: false,
+            dropTerminalVowelBeforeHarmonySuffix: false,
+            new Dictionary<char, string> { ['а'] = "ынчы" }.ToFrozenDictionary(),
+            new Dictionary<char, string> { ['а'] = "нчы" }.ToFrozenDictionary(),
+            tupleSuffixes: new Dictionary<char, string> { ['а'] = "лап" }.ToFrozenDictionary());
     }
 
     static readonly SuffixScaleWordsToNumberProfile SuffixScaleProfile = new(
@@ -3166,6 +3217,9 @@ public class CoverageGapTests
         string morning = "",
         string afternoon = "",
         string night = "",
+        string evening = "",
+        int eveningStartHour = 21,
+        int nightStartHour = 21,
         PhraseClockDayPeriodPosition dayPeriodPosition = PhraseClockDayPeriodPosition.Suffix,
         string hourZeroWord = "",
         string hourOneWord = "",
@@ -3212,6 +3266,9 @@ public class CoverageGapTests
             morning,
             afternoon,
             night,
+            evening,
+            eveningStartHour,
+            nightStartHour,
             dayPeriodPosition,
             hourZeroWord,
             hourOneWord,

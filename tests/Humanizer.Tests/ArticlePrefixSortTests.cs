@@ -9,6 +9,22 @@ public class ArticlePrefixSortTests
     public void SortStringArrayIgnoringArticlePrefixes(string[] input, string[] expectedOutput) =>
         Assert.Equal(expectedOutput, EnglishArticle.PrependArticleSuffix(EnglishArticle.AppendArticlePrefix(input)));
 
+    [Theory]
+    [InlineData("The Éclair", "Éclair The")]
+    [InlineData("An Æon", "Æon An")]
+    [InlineData("The _underscore", "_underscore The")]
+    [InlineData("The 7th Seal", "7th Seal The")]
+    [InlineData("The Ⅻ Monkeys", "The Ⅻ Monkeys")]
+    [InlineData("The \u200Cjoiner", "\u200Cjoiner The")]
+    [InlineData("The \u200Djoiner", "\u200Djoiner The")]
+    [InlineData("The Theater!", "Theater! The")]
+    [InlineData("A  Theater", "A  Theater")]
+    [InlineData("The\tTheater", "The\tTheater")]
+    [InlineData("Theory", "Theory")]
+    [InlineData("An!", "An!")]
+    public void AppendArticlePrefixPreservesRegexEquivalentEdges(string input, string expected) =>
+        Assert.Equal([expected], EnglishArticle.AppendArticlePrefix([input]));
+
     [Fact]
     public void An_Empty_String_Array_Throws_ArgumentOutOfRangeException()
     {

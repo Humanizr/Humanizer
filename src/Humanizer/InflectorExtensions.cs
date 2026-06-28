@@ -171,9 +171,11 @@ public static partial class InflectorExtensions
     /// </code>
     /// </example>
     public static string Pascalize(this string input) =>
-        PascalizeRegex().Replace(input, match => match
-            .Groups[1]
-            .Value.ToUpper());
+        TryPascalizeAscii(input, lowerFirst: false, out var result)
+            ? result
+            : PascalizeRegex().Replace(input, match => match
+                .Groups[1]
+                .Value.ToUpper());
 
     /// <summary>
     /// Converts a string to camelCase (lowerCamelCase) by capitalizing the first letter of each word
@@ -197,12 +199,51 @@ public static partial class InflectorExtensions
     /// </example>
     public static string Camelize(this string input)
     {
+        if (TryPascalizeAscii(input, lowerFirst: true, out var result))
+        {
+            return result;
+        }
+
         var word = input.Pascalize();
         return word.Length > 0
             ? StringHumanizeExtensions.Concat(
                 char.ToLower(word[0]),
                 word.AsSpan(1))
             : word;
+    }
+
+    static bool TryPascalizeAscii(string input, bool lowerFirst, [NotNullWhen(true)] out string? result)
+    {
+        result = null;
+        if (!IsAscii(input))
+        {
+            return false;
+        }
+
+        var textInfo = CultureInfo.CurrentCulture.TextInfo;
+        var buffer = new char[input.Length];
+        var pos = 0;
+        var capitalizeNext = true;
+        for (var i = 0; i < input.Length; i++)
+        {
+            var c = input[i];
+            if (c is ' ' or '_' or '-')
+            {
+                capitalizeNext = true;
+                continue;
+            }
+
+            if (capitalizeNext)
+            {
+                c = pos == 0 && lowerFirst ? textInfo.ToLower(c) : textInfo.ToUpper(c);
+                capitalizeNext = false;
+            }
+
+            buffer[pos++] = c;
+        }
+
+        result = new(buffer, 0, pos);
+        return true;
     }
 
     /// <summary>
@@ -225,11 +266,13 @@ public static partial class InflectorExtensions
     /// </code>
     /// </example>
     public static string Underscore(this string input) =>
-        UnderscoreRegex3()
-            .Replace(
-                UnderscoreRegex2().Replace(
-                    UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_")
-            .ToLower();
+        TryUnderscoreAscii(input, separator: '_', replaceUnderscore: false, out var result)
+            ? result
+            : UnderscoreRegex3()
+                .Replace(
+                    UnderscoreRegex2().Replace(
+                        UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_")
+                .ToLower();
 
     /// <summary>
     /// Replaces all underscores in the string with dashes (hyphens).
@@ -289,6 +332,76 @@ public static partial class InflectorExtensions
     /// </code>
     /// </example>
     public static string Kebaberize(this string input) =>
-        Underscore(input)
-            .Dasherize();
+        TryUnderscoreAscii(input, separator: '-', replaceUnderscore: true, out var result)
+            ? result
+            : Underscore(input)
+                .Dasherize();
+
+    static bool TryUnderscoreAscii(string input, char separator, bool replaceUnderscore, [NotNullWhen(true)] out string? result)
+    {
+        result = null;
+        if (!IsAscii(input))
+        {
+            return false;
+        }
+
+        var textInfo = CultureInfo.CurrentCulture.TextInfo;
+        var buffer = new char[Math.Max(1, input.Length * 2)];
+        var pos = 0;
+        for (var i = 0; i < input.Length; i++)
+        {
+            var c = input[i];
+            if (c == '-' || char.IsWhiteSpace(c) || (replaceUnderscore && c == '_'))
+            {
+                buffer[pos++] = separator;
+                continue;
+            }
+
+            if (IsAsciiUpper(c))
+            {
+                if (pos > 0 && buffer[pos - 1] != separator &&
+                    (IsPreviousLowerOrDigit(input, i) || IsAcronymBoundary(input, i)))
+                {
+                    buffer[pos++] = separator;
+                }
+
+                buffer[pos++] = textInfo.ToLower(c);
+                continue;
+            }
+
+            buffer[pos++] = textInfo.ToLower(c);
+        }
+
+        result = new(buffer, 0, pos);
+        return true;
+    }
+
+    static bool IsPreviousLowerOrDigit(string input, int index) =>
+        index > 0 && (IsAsciiLower(input[index - 1]) || IsAsciiDigit(input[index - 1]));
+
+    static bool IsAcronymBoundary(string input, int index) =>
+        index > 0 && IsAsciiUpper(input[index - 1]) &&
+        index + 1 < input.Length && IsAsciiLower(input[index + 1]);
+
+    static bool IsAscii(string input)
+    {
+        for (var i = 0; i < input.Length; i++)
+        {
+            if (input[i] > '\u007F')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    static bool IsAsciiUpper(char c) =>
+        c is >= 'A' and <= 'Z';
+
+    static bool IsAsciiLower(char c) =>
+        c is >= 'a' and <= 'z';
+
+    static bool IsAsciiDigit(char c) =>
+        c is >= '0' and <= '9';
 }

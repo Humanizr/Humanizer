@@ -349,7 +349,7 @@ A residual locale-specific converter is acceptable only when at least one of the
 
 If a runtime kernel still hard-codes language-specific behavior, do not pretend it is generic. Either make it structurally generic for real or keep the locale name.
 
-Note: as of the locale parity completion, no clock residual leaves remain. All 65 shipped locale files use the unified `phrase-clock` engine for clock notation.
+Note: in the current checked-in locale set, no clock residual leaves remain. All shipped locales resolve clock notation through the unified `phrase-clock` engine, either directly or through locale inheritance.
 
 ## Step-By-Step: Add A Brand New Locale
 
