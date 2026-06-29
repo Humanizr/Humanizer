@@ -79,9 +79,11 @@ public class KazakhLocaleParityTests
     }
 
     [Fact]
-    public void ByteSizeHumanize_UsesKazakhNumberFormatting()
+    public void NumberFormatting_UsesStableKazakhSeparators()
     {
         Assert.Equal("1,95 KB", ByteSize.FromBytes(2000).Humanize("KB", Kk));
+        Assert.Equal("1\u00A0234 KB", ByteSize.FromKilobytes(1234).Humanize("0,0 KB", Kk));
+        Assert.Equal("-1,2k", (-1234L).ToMetric(decimals: 1));
     }
 
     [Theory]
