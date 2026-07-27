@@ -83,7 +83,7 @@ docs/                           # Jekyll documentation site
 
 ## Key Config Files
 
-- `global.json` - .NET SDK version (11.0.100-preview.3)
+- `global.json` - .NET SDK version (11.0.100-preview.6.26359.118)
 - `Directory.Build.props` - Shared MSBuild properties (nullable, warnings-as-errors, analyzers)
 - `Directory.Packages.props` - Central package management (all NuGet versions)
 - `version.json` - Nerdbank.GitVersioning semver config

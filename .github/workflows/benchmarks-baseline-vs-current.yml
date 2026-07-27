@@ -11,7 +11,7 @@ on:
 
   push:
     paths:
-      - '.github/workflows/benchmarks-baseline-vs-current.yml'        
+      - '.github/workflows/benchmarks-baseline-vs-current.yml'
   pull_request:
     paths:
       - '.github/workflows/benchmarks-baseline-vs-current.yml'
@@ -51,8 +51,7 @@ jobs:
       - name: Setup .NET 11 preview
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '11.0.x'
-          dotnet-quality: preview
+          dotnet-version: '11.0.100-preview.6.26359.118'
 
       - name: Display run information
         run: |
@@ -148,8 +147,7 @@ jobs:
       - name: Setup .NET 11 preview
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '11.0.x'
-          dotnet-quality: preview
+          dotnet-version: '11.0.100-preview.6.26359.118'
       
       - name: Clone and Build ResultsComparer
         run: |
@@ -167,6 +165,7 @@ jobs:
 
           dotnet restore "$RUNNER_TEMP/performance/src/tools/ResultsComparer/ResultsComparer.csproj" \
             -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 \
+            -p:WarningsNotAsErrors=NU1902 \
             --configfile "$RUNNER_TEMP/performance-nuget.config"
       
       - name: Locate Benchmark Results
@@ -199,7 +198,7 @@ jobs:
 
           echo "Comparing results for $tfm..."
           compare_exit=0
-          dotnet run --no-restore --project "$RUNNER_TEMP/performance/src/tools/ResultsComparer/ResultsComparer.csproj" -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -f net10.0 --base "${{ steps.results.outputs.baseline_results }}" --diff "${{ steps.results.outputs.current_results }}" --threshold "5%" > "comparisons/diff-$tfm.md" || compare_exit=$?
+          dotnet run --no-restore --project "$RUNNER_TEMP/performance/src/tools/ResultsComparer/ResultsComparer.csproj" -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -p:WarningsNotAsErrors=NU1902 -f net10.0 --base "${{ steps.results.outputs.baseline_results }}" --diff "${{ steps.results.outputs.current_results }}" --threshold "5%" > "comparisons/diff-$tfm.md" || compare_exit=$?
 
           if [ ! -s "comparisons/diff-$tfm.md" ] || grep -q "The build failed" "comparisons/diff-$tfm.md"; then
             cat "comparisons/diff-$tfm.md" >&2 || true
