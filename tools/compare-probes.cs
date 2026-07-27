@@ -125,7 +125,7 @@ foreach (var (label, doc) in data)
             }
         }
 
-        // Raw month name arrays (added in fn-5.1; not present in all probe files)
+        // Raw month name arrays are not present in all probe files.
         foreach (var arrayField in new[] { "month_names_raw", "month_genitive_names_raw" })
         {
             if (localeEl.TryGetProperty(arrayField, out var arrayEl) && arrayEl.ValueKind == System.Text.Json.JsonValueKind.Array)
@@ -379,7 +379,7 @@ static void RunBeforeVsAfterComparison()
     Console.WriteLine("NOTE: Probes capture raw CultureInfo data, not Humanizer output.");
     Console.WriteLine("Before/after probes on the same platform should have identical shared fields");
     Console.WriteLine("because Humanizer overrides operate at the runtime layer, not CultureInfo.");
-    Console.WriteLine("Schema extensions (e.g. month_names_raw added in fn-5.1) are expected");
+    Console.WriteLine("Schema extensions such as month_names_raw are expected");
     Console.WriteLine("differences and do not indicate data regression.");
     Console.WriteLine();
 
