@@ -1,0 +1,30 @@
+diff --git a/src/tools/ResultsComparer/Data.cs b/src/tools/ResultsComparer/Data.cs
+index a663f1e..576768d 100644
+--- a/src/tools/ResultsComparer/Data.cs
++++ b/src/tools/ResultsComparer/Data.cs
+@@ -7,3 +6,0 @@ using SharpCompress.Archives;
+-using SharpCompress.Archives.GZip;
+-using SharpCompress.Archives.Tar;
+-using SharpCompress.Archives.Zip;
+@@ -24 +21 @@ namespace ResultsComparer
+-            using ZipArchive mainArchive = ZipArchive.Open(mainZipStream);
++            using IArchive mainArchive = ArchiveFactory.OpenArchive(mainZipStream);
+@@ -27 +24 @@ namespace ResultsComparer
+-            foreach (ZipArchiveEntry mainArchiveEntry in mainArchive.Entries.Where(e => !e.IsDirectory))
++            foreach (IArchiveEntry mainArchiveEntry in mainArchive.Entries.Where(e => !e.IsDirectory))
+@@ -33 +30 @@ namespace ResultsComparer
+-                    using ZipArchive zipArchive = ZipArchive.Open(zipArchiveEntryCopy);
++                    using IArchive zipArchive = ArchiveFactory.OpenArchive(zipArchiveEntryCopy);
+@@ -45 +42 @@ namespace ResultsComparer
+-                    using GZipArchive gZipArchive = GZipArchive.Open(zipArchiveEntryCopy);
++                    using IArchive gZipArchive = ArchiveFactory.OpenArchive(zipArchiveEntryCopy);
+@@ -52 +49 @@ namespace ResultsComparer
+-                            using TarArchive tarArchive = TarArchive.Open(tarCopy);
++                            using IArchive tarArchive = ArchiveFactory.OpenArchive(tarCopy);
+diff --git a/src/tools/ResultsComparer/Directory.Packages.props b/src/tools/ResultsComparer/Directory.Packages.props
+index d910ce3..9641b2c 100644
+--- a/src/tools/ResultsComparer/Directory.Packages.props
++++ b/src/tools/ResultsComparer/Directory.Packages.props
+@@ -12 +12 @@
+-    <PackageVersion Include="SharpCompress" Version="0.31.0" />
++    <PackageVersion Include="SharpCompress" Version="0.50.1" />
