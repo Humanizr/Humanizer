@@ -11,10 +11,12 @@ on:
 
   push:
     paths:
-      - '.github/workflows/benchmarks-baseline-vs-current.yml'        
+      - '.github/workflows/benchmarks-baseline-vs-current.yml'
+      - '.github/patches/results-comparer-sharpcompress-0.50.1.patch'
   pull_request:
     paths:
       - '.github/workflows/benchmarks-baseline-vs-current.yml'
+      - '.github/patches/results-comparer-sharpcompress-0.50.1.patch'
 
   schedule:
     - cron: '0 4 * * 1'  # Every Monday at 04:00 UTC
@@ -51,8 +53,7 @@ jobs:
       - name: Setup .NET 11 preview
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '11.0.x'
-          dotnet-quality: preview
+          dotnet-version: '11.0.100-preview.6.26359.118'
 
       - name: Display run information
         run: |
@@ -112,6 +113,7 @@ jobs:
     needs: benchmark
     env:
       BASELINE_VERSION: ${{ inputs.baselineVersion || '3.0.10' }}
+      RESULTS_COMPARER_COMMIT: 3c1fc107bbcb472535cbe9d7520b41acc12debd0
     strategy:
       fail-fast: false
       matrix:
@@ -148,12 +150,15 @@ jobs:
       - name: Setup .NET 11 preview
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '11.0.x'
-          dotnet-quality: preview
+          dotnet-version: '11.0.100-preview.6.26359.118'
       
       - name: Clone and Build ResultsComparer
         run: |
-          git clone --depth 1 https://github.com/dotnet/performance "$RUNNER_TEMP/performance"
+          git init "$RUNNER_TEMP/performance"
+          git -C "$RUNNER_TEMP/performance" remote add origin https://github.com/dotnet/performance
+          git -C "$RUNNER_TEMP/performance" fetch --depth 1 origin "$RESULTS_COMPARER_COMMIT"
+          git -C "$RUNNER_TEMP/performance" checkout --detach FETCH_HEAD
+          git -C "$RUNNER_TEMP/performance" apply --unidiff-zero "$GITHUB_WORKSPACE/.github/patches/results-comparer-sharpcompress-0.50.1.patch"
 
           {
             echo '<configuration>'

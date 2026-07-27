@@ -39,8 +39,7 @@ stages:
     - task: UseDotNet@2
       displayName: 'Use .NET 11 SDK'
       inputs:
-        includePreviewVersions: true
-        version: 11.x
+        version: 11.0.100-preview.6.26359.118
 
     - task: DotNetCoreCLI@2
       inputs:
@@ -115,8 +114,7 @@ stages:
     - task: UseDotNet@2
       displayName: 'Use .NET 11 SDK'
       inputs:
-        includePreviewVersions: true
-        version: 11.x
+        version: 11.0.100-preview.6.26359.118
 
     # Install the code signing tool
     - task: DotNetCoreCLI@2
