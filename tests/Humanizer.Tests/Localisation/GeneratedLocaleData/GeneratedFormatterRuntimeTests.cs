@@ -94,12 +94,21 @@ public class GeneratedFormatterRuntimeTests
     }
 
     [Fact]
+    [UseCulture("ru")]
     public void ProfiledFormatterUsesGeneratedPhraseTablesForRussianGrammarSensitivePhrases()
     {
         var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("ru"));
 
         Assert.Equal("через 2 дня", formatter.DateHumanize(TimeUnit.Day, Tense.Future, 2));
         Assert.Equal("через 5 дней", formatter.DateHumanize(TimeUnit.Day, Tense.Future, 5));
+        Assert.Equal("2 миллисекунды назад", formatter.DateHumanize(TimeUnit.Millisecond, Tense.Past, 2));
+        Assert.Equal("21 миллисекунду назад", formatter.DateHumanize(TimeUnit.Millisecond, Tense.Past, 21));
+        Assert.Equal("через 2 миллисекунды", formatter.DateHumanize(TimeUnit.Millisecond, Tense.Future, 2));
+        Assert.Equal("через 21 миллисекунду", formatter.DateHumanize(TimeUnit.Millisecond, Tense.Future, 21));
+        Assert.Equal("2 недели назад", formatter.DateHumanize(TimeUnit.Week, Tense.Past, 2));
+        Assert.Equal("21 неделю назад", formatter.DateHumanize(TimeUnit.Week, Tense.Past, 21));
+        Assert.Equal("через 2 недели", formatter.DateHumanize(TimeUnit.Week, Tense.Future, 2));
+        Assert.Equal("через 21 неделю", formatter.DateHumanize(TimeUnit.Week, Tense.Future, 21));
         Assert.Equal("2 дня", formatter.TimeSpanHumanize(TimeUnit.Day, 2));
         Assert.Equal("один день", formatter.TimeSpanHumanize(TimeUnit.Day, 1, toWords: true));
     }

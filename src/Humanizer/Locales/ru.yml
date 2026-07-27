@@ -27,7 +27,10 @@ surfaces:
         millisecond:
           single: 'миллисекунду назад'
           multiple:
-            forms: 'миллисекунд'
+            forms:
+              default: 'миллисекунд'
+              singular: 'миллисекунду'
+              dual: 'миллисекунды'
             afterCount: 'назад'
         second:
           single: 'секунду назад'
@@ -67,7 +70,10 @@ surfaces:
         week:
           single: 'неделю назад'
           multiple:
-            forms: 'недель'
+            forms:
+              default: 'недель'
+              singular: 'неделю'
+              dual: 'недели'
             afterCount: 'назад'
         month:
           single: 'месяц назад'
@@ -89,7 +95,10 @@ surfaces:
         millisecond:
           single: 'через миллисекунду'
           multiple:
-            forms: 'миллисекунд'
+            forms:
+              default: 'миллисекунд'
+              singular: 'миллисекунду'
+              dual: 'миллисекунды'
             beforeCount: 'через'
         second:
           single: 'через секунду'
@@ -129,7 +138,10 @@ surfaces:
         week:
           single: 'через неделю'
           multiple:
-            forms: 'недель'
+            forms:
+              default: 'недель'
+              singular: 'неделю'
+              dual: 'недели'
             beforeCount: 'через'
         month:
           single: 'через месяц'
