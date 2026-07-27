@@ -234,6 +234,7 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["cafe", "cafes"];
         yield return ["half", "halves"];
         yield return ["golf", "golfs"];
+        yield return ["turf", "turves"];
 
         yield return ["glove", "gloves"];
         yield return ["move", "moves"];
