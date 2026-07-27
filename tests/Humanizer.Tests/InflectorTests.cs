@@ -74,7 +74,9 @@ public class InflectorTests
     [InlineData("scarves", "scarf")]
     [InlineData("hooves", "hoof")]
     [InlineData("thieves", "thief")]
-    public void Singularize_Ves_EdgeCases(string plural, string expected) =>
+    [InlineData("serves", "serve")]
+    [InlineData("solves", "solve")]
+    public void SingularizeVesEdgeCases(string plural, string expected) =>
         Assert.Equal(expected, plural.Singularize());
 
     [Theory]
@@ -226,8 +228,12 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["index", "indices"];
 
         yield return ["wife", "wives"];
+        yield return ["knife", "knives"];
+        yield return ["life", "lives"];
         yield return ["safe", "safes"];
+        yield return ["cafe", "cafes"];
         yield return ["half", "halves"];
+        yield return ["golf", "golfs"];
 
         yield return ["glove", "gloves"];
         yield return ["move", "moves"];

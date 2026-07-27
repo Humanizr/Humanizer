@@ -26,7 +26,8 @@ public static class Vocabularies
         _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
         _default.AddPlural("([dti])um$", "$1a");
         _default.AddPlural("sis$", "ses");
-        _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves");
+        _default.AddPlural("(cal|dwar|el|hal|hoo|lea|loa|scar|sel|shel|thie|whar|wol)f$", "$1ves");
+        _default.AddPlural("(kni|li|wi)fe$", "$1ves");
         _default.AddPlural("(hive)$", "$1s");
         _default.AddPlural("([^aeiouy]|qu)y$", "$1ies");
         _default.AddPlural("(x|ch|ss|sh)$", "$1es");
@@ -46,9 +47,8 @@ public static class Vocabularies
         _default.AddSingular("(.+)ves$", "$1ve");
         _default.AddSingular("(hive)s$", "$1");
         _default.AddSingular("(tive)s$", "$1");
-        _default.AddSingular("([lr])ves$", "$1f");
+        _default.AddSingular("(cal|dwar|el|hal|hoo|lea|loa|scar|sel|shel|thie|whar|wol)ves$", "$1f");
         _default.AddSingular("(li|wi|kni)ves$", "$1fe");
-        _default.AddSingular("(thie|hoo|loa|lea)ves$", "$1f");
         _default.AddSingular("(^zomb)?([^aeiouy]|qu)ies$", "$2y");
         _default.AddSingular("(s)eries$", "$1eries");
         _default.AddSingular("(m)ovies$", "$1ovie");
@@ -94,9 +94,7 @@ public static class Vocabularies
         _default.AddIrregular("tie", "ties", matchEnding: false);
         _default.AddIrregular("lens", "lenses");
         _default.AddIrregular("clove", "cloves");
-        _default.AddIrregular("curve", "curves");
         _default.AddIrregular("valve", "valves");
-        _default.AddIrregular("safe", "safes");
         _default.AddIrregular("explosive", "explosives");
 
         _default.AddUncountable("staff");
