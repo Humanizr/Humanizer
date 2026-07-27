@@ -94,6 +94,7 @@ public class GeneratedFormatterRuntimeTests
     }
 
     [Fact]
+    [UseCulture("ru")]
     public void ProfiledFormatterUsesGeneratedPhraseTablesForRussianGrammarSensitivePhrases()
     {
         var formatter = Configurator.Formatters.ResolveForCulture(new CultureInfo("ru"));
