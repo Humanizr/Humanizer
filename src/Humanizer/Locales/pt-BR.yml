@@ -336,7 +336,103 @@ surfaces:
           - 'septingentésimo'
           - 'octingentésimo'
           - 'noningentésimo'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        zero: 0
+        um: 1
+        dois: 2
+        três: 3
+        quatro: 4
+        cinco: 5
+        seis: 6
+        sete: 7
+        oito: 8
+        nove: 9
+        dez: 10
+        onze: 11
+        doze: 12
+        treze: 13
+        quatorze: 14
+        quinze: 15
+        dezesseis: 16
+        dezessete: 17
+        dezoito: 18
+        dezenove: 19
+        vinte: 20
+        trinta: 30
+        quarenta: 40
+        cinquenta: 50
+        sessenta: 60
+        setenta: 70
+        oitenta: 80
+        noventa: 90
+        cem: 100
+        cento: 100
+        duzentos: 200
+        trezentos: 300
+        quatrocentos: 400
+        quinhentos: 500
+        seiscentos: 600
+        setecentos: 700
+        oitocentos: 800
+        novecentos: 900
+        mil: 1000
+        milhão: 1000000
+        milhões: 1000000
+        bilhão: 1000000000
+        bilhões: 1000000000
+        trilhão: 1000000000000
+        trilhões: 1000000000000
+        quadrilhão: 1000000000000000
+        quadrilhões: 1000000000000000
+        quintilhão: 1000000000000000000
+        quintilhões: 1000000000000000000
+      ordinalMap:
+        primeiro: 1
+        segundo: 2
+        terceiro: 3
+        quarto: 4
+        quinto: 5
+        sexto: 6
+        sétimo: 7
+        oitavo: 8
+        nono: 9
+        décimo: 10
+        décimo primeiro: 11
+        décimo segundo: 12
+        décimo terceiro: 13
+        décimo quarto: 14
+        décimo quinto: 15
+        décimo sexto: 16
+        décimo sétimo: 17
+        décimo oitavo: 18
+        décimo nono: 19
+        vigésimo: 20
+        trigésimo: 30
+        quadragésimo: 40
+        quinquagésimo: 50
+        sexagésimo: 60
+        septuagésimo: 70
+        octogésimo: 80
+        nonagésimo: 90
+        centésimo: 100
+        milésimo: 1000
+        milionésimo: 1000000
+        bilionésimo: 1000000000
+      negativePrefixes:
+        - 'menos '
+      ignoredTokens:
+        - 'e'
+      ordinalAbbreviationSuffixes:
+        - 'º'
+        - 'ª'
+      allowTerminalOrdinalToken: true
+      useHundredMultiplier: true
+      allowInvariantIntegerInput: true
 
+      
   ordinal:
     date:
       pattern: '{day} ''de'' MMMM ''de'' yyyy'
@@ -350,15 +446,17 @@ surfaces:
     hourMode: 'h12'
     hourGender: 'feminine'
     minuteGender: 'feminine'
+    singularArticle: 'a'
+    pluralArticle: 'as'
     midnight: 'meia-noite'
     midday: 'meio-dia'
     min0: '{hour} em ponto'
     min15: '{hour} e quinze'
     min30: '{hour} e meia'
-    min40: 'vinte para as {nextHour}'
-    min45: 'quinze para as {nextHour}'
-    min50: 'dez para as {nextHour}'
-    min55: 'cinco para as {nextHour}'
+    min40: 'vinte para {nextArticle} {nextHour}'
+    min45: 'quinze para {nextArticle} {nextHour}'
+    min50: 'dez para {nextArticle} {nextHour}'
+    min55: 'cinco para {nextArticle} {nextHour}'
     defaultTemplate: '{hour} e {minutes}'
 
   compass:
