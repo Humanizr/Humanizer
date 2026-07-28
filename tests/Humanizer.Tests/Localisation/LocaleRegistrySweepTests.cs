@@ -363,6 +363,16 @@ public class LocaleRegistrySweepTests
             new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes, new("en-US")));
     }
 
+    [Fact]
+    public void TimeOnlyToClockNotation_UnsupportedCulture_UsesEnglishFallback()
+    {
+        using var _ = new DistinctCultureSwap(new("en-US"), new("fr-FR"));
+
+        Assert.Equal(
+            "one twenty-three",
+            new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.None, new("eo")));
+    }
+
     [Theory]
     [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotation1323RoundedExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
     public void TimeOnlyToClockNotation_1323RoundedToNearestFiveMinutes_UsesExpectedForms(string localeName, ClockExpectationRow expected)
