@@ -247,6 +247,41 @@ public class InflectorTests
     public void Kebaberize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Kebaberize());
 
+    [Theory]
+    [InlineData("cat", "cat's")]
+    [InlineData("boss", "boss's")]
+    [InlineData("James", "James's")]
+    [InlineData("CHRIS", "CHRIS's")]
+    [InlineData("fox", "fox's")]
+    [InlineData("O'Brien", "O'Brien's")]
+    [InlineData("Mary-Jane", "Mary-Jane's")]
+    [InlineData("", "")]
+    [InlineData("  ", "  ")]
+    public void ToPossessiveConvertsSingularNouns(string input, string expected) =>
+        Assert.Equal(expected, input.ToPossessive());
+
+    [Theory]
+    [InlineData("dogs", "dogs'")]
+    [InlineData("JONESES", "JONESES'")]
+    [InlineData("children", "children's")]
+    [InlineData("PEOPLE", "PEOPLE's")]
+    public void ToPossessiveConvertsPluralNouns(string input, string expected) =>
+        Assert.Equal(expected, input.ToPossessive(inputIsPlural: true));
+
+    [Theory]
+    [InlineData("James", "James'")]
+    [InlineData("CHRIS", "CHRIS'")]
+    public void ToPossessiveSupportsApostropheOnlyStyleForSingularNounsEndingInS(string input, string expected) =>
+        Assert.Equal(expected, input.ToPossessive(useApostropheOnlyForSingularWordsEndingInS: true));
+
+    [Fact]
+    public void ToPossessivePreservesNull()
+    {
+        string? input = null;
+
+        Assert.Null(input.ToPossessive());
+    }
+
     [Fact, UseCulture("tr-TR")]
     public void IdentifierTransformationsUseInvariantCasingInTurkish() =>
         VerifyIdentifierTransformationsUseInvariantCasing();

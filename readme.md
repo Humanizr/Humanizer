@@ -439,6 +439,20 @@ Convert plural words to singular form:
 ```
 
 
+#### ToPossessive
+
+Convert an English noun or noun phrase to its possessive form:
+
+```csharp
+"cat".ToPossessive() => "cat's"
+"James".ToPossessive() => "James's"
+"dogs".ToPossessive(inputIsPlural: true) => "dogs'"
+"children".ToPossessive(inputIsPlural: true) => "children's"
+
+// Some style guides use only an apostrophe for singular names ending in s
+"James".ToPossessive(useApostropheOnlyForSingularWordsEndingInS: true) => "James'"
+```
+
 ## Adding Words
 
 Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabulary` used by `Inflector`):
