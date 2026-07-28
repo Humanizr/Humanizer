@@ -300,10 +300,10 @@ Culture to use can be specified explicitly. If it is not, current thread's curre
 TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
 ```
 
-In addition, a minimum unit of time may be specified to avoid rolling down to a smaller unit. For example:
+In addition, a minimum unit of time may be specified to avoid rolling down to a smaller unit. The `precision` parameter still controls the maximum number of units returned. For example:
   ```csharp
-  TimeSpan.FromMilliseconds(122500).Humanize(minUnit: TimeUnit.Second) => "2 minutes, 2 seconds"    // instead of 2 minutes, 2 seconds, 500 milliseconds
-  TimeSpan.FromHours(25).Humanize(minUnit: TimeUnit.Day) => "1 Day"   //instead of 1 Day, 1 Hour
+  TimeSpan.FromMilliseconds(122500).Humanize(precision: 3, minUnit: TimeUnit.Second) => "2 minutes, 2 seconds"    // instead of 2 minutes, 2 seconds, 500 milliseconds
+  TimeSpan.FromHours(25).Humanize(precision: 2, minUnit: TimeUnit.Day) => "1 day"   // instead of 1 day, 1 hour
   ```
 
 In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:
