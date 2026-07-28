@@ -352,6 +352,55 @@ public class MetricNumeralTests
     public void ToMetric(string expected, double input, MetricNumeralFormats? format, int? decimals) =>
         Assert.Equal(expected, input.ToMetric(format, decimals));
 
+    [Fact]
+    public void ToMetric_KeepTrailingZeros_IsOptIn()
+    {
+        Assert.Equal("1k", 1000.ToMetric(decimals: 2));
+        Assert.Equal("1k", 1000.ToMetric(MetricNumeralFormats.KeepTrailingZeros));
+        Assert.Equal("1.00k", 1000.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 2));
+    }
+
+    [Theory]
+    [InlineData("0.00", 0d)]
+    [InlineData("123.00", 123d)]
+    [InlineData("1.20k", 1200d)]
+    [InlineData("-1.20k", -1200d)]
+    [InlineData("1.00M", 999999d)]
+    [InlineData("1.00", 0.999999d)]
+    [InlineData("-1.00", -0.999999d)]
+    public void ToMetric_KeepTrailingZeros_Double(string expected, double input) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 2));
+
+    [Theory]
+    [InlineData("0.00000", 0L, 5)]
+    [InlineData("123.00000", 123L, 5)]
+    [InlineData("1.00000k", 1000L, 5)]
+    [InlineData("-1.20000k", -1200L, 5)]
+    [InlineData("1.00M", 999999L, 2)]
+    public void ToMetric_KeepTrailingZeros_Long(string expected, long input, int decimals) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals));
+
+    [Fact]
+    public void ToMetric_KeepTrailingZeros_ComposesWithSpaceForZero()
+    {
+        var formats = MetricNumeralFormats.KeepTrailingZeros | MetricNumeralFormats.WithSpace;
+
+        Assert.Equal("0.00 ", 0L.ToMetric(formats, decimals: 2));
+        Assert.Equal("0.00 ", 0d.ToMetric(formats, decimals: 2));
+    }
+
+    [Fact]
+    public void ToMetric_KeepTrailingZeros_ComposesWithScaleWordAndCulture()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("de-DE"), new("en-US"));
+
+        Assert.Equal(
+            "1,00 billion",
+            1E9.ToMetric(
+                MetricNumeralFormats.KeepTrailingZeros | MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord,
+                decimals: 2));
+    }
+
     [Theory]
     [InlineData(1E+27)]
     [InlineData(1E-27)]
