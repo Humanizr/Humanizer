@@ -132,7 +132,8 @@ public class StringHumanizeTests
 
     [Theory]
     [InlineData("Enable & Disable", "Enable & disable")]
-    [InlineData("&EnableDisable", "& enable disable")]
+    [InlineData("&EnableDisable", "& Enable disable")]
+    [InlineData("&&EnableDisable", "& & Enable disable")]
     [InlineData("EnableDisable&", "Enable disable &")]
     [InlineData("Enable&Disable", "Enable & disable")]
     [InlineData("HTML&CSS", "Html & css")]
@@ -172,6 +173,7 @@ public class StringHumanizeTests
     [InlineData("Normal; Normal and PascalCase", "Normal; normal and pascal case")]
     [InlineData("I,and No One else", "I, and no one else")]
     [InlineData("first. second", "First second")]
+    [InlineData("&EnableDisable", "& Enable disable")]
     public void CanHumanizeIntoSentenceCase(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Humanize(LetterCasing.Sentence));
 

@@ -59,6 +59,20 @@ public static partial class StringHumanizeExtensions
             result = result.ToLower();
         }
 
+        if (result.Length > 0 && result[0] == '&')
+        {
+            var firstWordIndex = 1;
+            while (firstWordIndex < result.Length && result[firstWordIndex] is ' ' or '&')
+                firstWordIndex++;
+
+            if (firstWordIndex < result.Length)
+            {
+                var characters = result.ToCharArray();
+                characters[firstWordIndex] = char.ToUpper(characters[firstWordIndex]);
+                return new(characters);
+            }
+        }
+
         return result.Length > 0
             ? Concat(char.ToUpper(result[0]), result.AsSpan(1, result.Length - 1))
             : result;
