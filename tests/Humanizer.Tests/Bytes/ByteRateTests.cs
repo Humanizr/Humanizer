@@ -54,6 +54,60 @@ public class ByteRateTests
         Assert.Equal(expectedValue, text);
     }
 
+    [Fact]
+    public void ToStringReturnsHumanizedRate() =>
+        Assert.Equal("400 B/s", ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(1)).ToString());
+
+    [Theory]
+    [InlineData(400, 10, 800, 20, 0)]
+    [InlineData(400, 10, 800, 10, -1)]
+    [InlineData(800, 10, 400, 10, 1)]
+    public void ComparesNormalizedRates(
+        long leftBytes,
+        int leftIntervalSeconds,
+        long rightBytes,
+        int rightIntervalSeconds,
+        int expected)
+    {
+        var left = ByteSize.FromBytes(leftBytes).Per(TimeSpan.FromSeconds(leftIntervalSeconds));
+        var right = ByteSize.FromBytes(rightBytes).Per(TimeSpan.FromSeconds(rightIntervalSeconds));
+
+        Assert.Equal(expected, left.CompareTo(right));
+    }
+
+    [Fact]
+    public void EqualsNormalizedRates()
+    {
+        var left = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
+        var right = ByteSize.FromBytes(800).Per(TimeSpan.FromSeconds(20));
+
+        Assert.Equal(left, right);
+        Assert.True(left.Equals((object)right));
+        Assert.Equal(left.GetHashCode(), right.GetHashCode());
+    }
+
+    [Fact]
+    public void DoesNotEqualDifferentOrNullRates()
+    {
+        var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
+        var other = ByteSize.FromBytes(800).Per(TimeSpan.FromSeconds(10));
+
+        Assert.NotEqual(rate, other);
+        Assert.False(rate.Equals(null));
+        Assert.False(rate.Equals((object?)null));
+        Assert.False(rate.Equals(new object()));
+    }
+
+    [Fact]
+    public void UntypedComparisonRejectsOtherTypes()
+    {
+        var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
+
+        Assert.Equal(1, rate.CompareTo(null));
+        Assert.Equal(1, ((IComparable)rate).CompareTo(null));
+        Assert.Throws<ArgumentException>(() => ((IComparable)rate).CompareTo(40d));
+    }
+
     [Theory]
     [InlineData(TimeUnit.Millisecond)]
     [InlineData(TimeUnit.Day)]

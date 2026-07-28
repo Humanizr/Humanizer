@@ -6,7 +6,10 @@ namespace Humanizer;
 /// <remarks>
 /// Create a ByteRate with given quantity of bytes across an interval
 /// </remarks>
-public class ByteRate(ByteSize size, TimeSpan interval)
+public class ByteRate(ByteSize size, TimeSpan interval) :
+    IComparable<ByteRate>,
+    IEquatable<ByteRate>,
+    IComparable
 {
     /// <summary>
     /// Quantity of bytes
@@ -43,4 +46,40 @@ public class ByteRate(ByteSize size, TimeSpan interval)
         return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
             .Humanize(format, culture) + '/' + timeUnit.ToSymbol(culture);
     }
+
+    /// <summary>
+    /// Returns the humanized rate using the default format and time unit.
+    /// </summary>
+    public override string ToString() =>
+        Humanize();
+
+    /// <summary>
+    /// Compares this rate with another rate after normalizing both to bytes per second.
+    /// </summary>
+    /// <param name="other">The rate to compare with.</param>
+    public int CompareTo(ByteRate? other) =>
+        other is null ? 1 : BytesPerSecond.CompareTo(other.BytesPerSecond);
+
+    /// <inheritdoc />
+    public bool Equals(ByteRate? other) =>
+        other is not null && BytesPerSecond.Equals(other.BytesPerSecond);
+
+    /// <inheritdoc />
+    public override bool Equals(object? obj) =>
+        obj is ByteRate other && Equals(other);
+
+    /// <inheritdoc />
+    public override int GetHashCode() =>
+        BytesPerSecond.GetHashCode();
+
+    /// <inheritdoc />
+    public int CompareTo(object? obj) =>
+        obj switch
+        {
+            null => 1,
+            ByteRate other => CompareTo(other),
+            _ => throw new ArgumentException("Object is not a ByteRate", nameof(obj)),
+        };
+
+    double BytesPerSecond => Size.Bytes / Interval.TotalSeconds;
 }
