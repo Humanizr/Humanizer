@@ -99,6 +99,7 @@ public static class Vocabularies
 
         _default.AddUncountable("staff");
         _default.AddUncountable("training");
+        _default.AddUncountable("software");
         _default.AddUncountable("equipment");
         _default.AddUncountable("information");
         _default.AddUncountable("corn");

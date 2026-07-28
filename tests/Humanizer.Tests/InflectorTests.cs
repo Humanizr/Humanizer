@@ -253,6 +253,7 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["personnel", "personnel"];
         yield return ["staff", "staff"];
         yield return ["training", "training"];
+        yield return ["software", "software"];
 
         yield return ["basis", "bases"];
         yield return ["diagnosis", "diagnoses"];
