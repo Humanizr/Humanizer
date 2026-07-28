@@ -243,7 +243,7 @@ public static partial class StringHumanizeExtensions
     /// - Breaks up PascalCase and camelCase text
     /// - Preserves ampersands as separate tokens in PascalCase and camelCase inputs
     /// Registered acronyms use their canonical casing.
-    /// The first letter of the result is always capitalized.
+    /// If the result begins with a letter, that letter is capitalized.
     /// </remarks>
     /// <example>
     /// <code>
