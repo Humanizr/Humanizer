@@ -361,6 +361,32 @@ public static partial class InflectorExtensions
             : Underscore(input)
                 .Dasherize();
 
+    /// <summary>
+    /// Converts an English noun or noun phrase to its possessive form.
+    /// </summary>
+    /// <param name="word">The noun or noun phrase to convert.</param>
+    /// <param name="inputIsPlural">Whether <paramref name="word"/> is plural.</param>
+    /// <param name="useApostropheOnlyForSingularWordsEndingInS">
+    /// Whether singular words ending in <c>s</c> should use only an apostrophe instead of <c>'s</c>.
+    /// </param>
+    /// <returns>The possessive form of <paramref name="word"/>.</returns>
+    [return: NotNullIfNotNull(nameof(word))]
+    public static string? ToPossessive(
+        this string? word,
+        bool inputIsPlural = false,
+        bool useApostropheOnlyForSingularWordsEndingInS = false)
+    {
+        if (word is null || string.IsNullOrWhiteSpace(word))
+        {
+            return word;
+        }
+
+        var endsInS = word.EndsWith("s", StringComparison.OrdinalIgnoreCase);
+        return inputIsPlural && endsInS || useApostropheOnlyForSingularWordsEndingInS && endsInS
+            ? StringHumanizeExtensions.Concat(word.AsSpan(), '\'')
+            : StringHumanizeExtensions.Concat(word.AsSpan(), "'s".AsSpan());
+    }
+
     static bool TryUnderscoreAscii(string input, char separator, bool replaceUnderscore, [NotNullWhen(true)] out string? result)
     {
         result = null;
