@@ -78,6 +78,12 @@ public class StringHumanizeTests
 
             Vocabularies.Default.AddAcronym("iOS");
             Assert.Equal("iOS", "IOS".Humanize());
+            Assert.Equal("iOS", "iOS".Humanize());
+            Assert.Equal("iOS settings", "iOSSettings".Humanize());
+            Assert.Equal("iOS API settings", "iOSAPISettings".Humanize());
+            Assert.Equal("iOS 5", "iOS5".Humanize());
+            Assert.Equal("iOS Settings", "iOS_Settings".Humanize());
+            Assert.Equal("BIOS settings", "BIOSSettings".Humanize());
         }
         finally
         {

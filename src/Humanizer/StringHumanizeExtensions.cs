@@ -247,6 +247,8 @@ public static partial class StringHumanizeExtensions
             return Vocabularies.ApplyAcronyms(input);
         }
 
+        input = Vocabularies.NormalizeAcronyms(input);
+
         // if input contains a dash or underscore which precedes or follows a space (or both, e.g. freestanding)
         // remove the dash/underscore and run it through FromPascalCase
         var humanized = HasFreestandingSpacingChar(input)

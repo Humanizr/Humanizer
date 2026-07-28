@@ -17,6 +17,9 @@ public static class Vocabularies
     internal static string ApplyAcronyms(string input) =>
         Instance.IsValueCreated ? Instance.Value.ApplyAcronyms(input) : input;
 
+    internal static string NormalizeAcronyms(string input) =>
+        Instance.IsValueCreated ? Instance.Value.NormalizeAcronyms(input) : input;
+
     static Vocabulary BuildDefault()
     {
         var _default = new Vocabulary();

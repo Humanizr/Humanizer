@@ -311,6 +311,66 @@ public partial class Vocabulary
         }
     }
 
+    internal string NormalizeAcronyms(string input)
+    {
+        lock (acronyms)
+        {
+            if (acronyms.Count == 0)
+            {
+                return input;
+            }
+
+            StringBuilder? result = null;
+            for (var index = 0; index < input.Length;)
+            {
+                Rule? match = null;
+                if (index == 0 ||
+                    !char.IsLetter(input[index - 1]) ||
+                    (char.IsLower(input[index - 1]) && char.IsUpper(input[index])) ||
+                    (result is { Length: > 0 } && result[^1] == ' '))
+                {
+                    foreach (var acronym in acronyms)
+                    {
+                        var end = index + acronym.Replacement.Length;
+                        if ((match == null || acronym.Replacement.Length > match.Replacement.Length) &&
+                            acronym.MatchesAt(input, index) &&
+                            (end == input.Length || !char.IsLetter(input[end]) || char.IsUpper(input[end])))
+                        {
+                            match = acronym;
+                        }
+                    }
+                }
+
+                if (match == null)
+                {
+                    result?.Append(input[index]);
+                    index++;
+                    continue;
+                }
+
+                if (result == null)
+                {
+                    result = new(input.Length);
+                    result.Append(input, 0, index);
+                }
+
+                if (index > 0 && char.IsLetterOrDigit(input[index - 1]))
+                {
+                    result.Append(' ');
+                }
+
+                result.Append(match.Replacement.ToUpperInvariant());
+                index += match.Replacement.Length;
+                if (index < input.Length && char.IsLetterOrDigit(input[index]))
+                {
+                    result.Append(' ');
+                }
+            }
+
+            return result?.ToString() ?? input;
+        }
+    }
+
     internal void RemoveAcronym(string acronym)
     {
         lock (acronyms)
@@ -349,6 +409,12 @@ public partial class Vocabulary
             var match = regex.Match(word);
             return match.Success && match.Index == 0 && match.Length == word.Length;
         }
+
+        public bool MatchesAt(string word, int index) =>
+            index + replacement.Length <= word.Length &&
+            string.Compare(word, index, replacement, 0, replacement.Length, StringComparison.OrdinalIgnoreCase) == 0;
+
+        public string Replacement => replacement;
 
         public string? Apply(string word, out bool wholeWordMatch)
         {
