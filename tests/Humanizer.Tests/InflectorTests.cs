@@ -220,6 +220,9 @@ public class InflectorTests
     [InlineData("CustomerName", "customerName")]
     [InlineData("_IOModule", "_ioModule")]
     [InlineData("__IOModule", "__ioModule")]
+    [InlineData("-foo", "foo")]
+    [InlineData(" foo", "foo")]
+    [InlineData("__-IOModule", "__ioModule")]
     [InlineData("_", "_")]
     [InlineData("___", "___")]
     public void ToCamelCaseNormalizesUppercaseSequences(string input, string expectedOutput) =>

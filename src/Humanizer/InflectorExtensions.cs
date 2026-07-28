@@ -262,8 +262,16 @@ public static partial class InflectorExtensions
     /// "__XMLHttpRequest".ToCamelCase() => "__xmlHttpRequest"
     /// </code>
     /// </example>
-    public static string ToCamelCase(this string input) =>
-        input.Underscore().Camelize();
+    public static string ToCamelCase(this string input)
+    {
+        var leadingUnderscoreCount = input.Length - input.TrimStart('_').Length;
+        var camelized = input[leadingUnderscoreCount..].Underscore().TrimStart('_').Camelize();
+        return leadingUnderscoreCount > 0
+            ? StringHumanizeExtensions.Concat(
+                input.AsSpan(0, leadingUnderscoreCount),
+                camelized.AsSpan())
+            : camelized;
+    }
 
     static bool TryPascalizeAscii(string input, bool lowerFirst, [NotNullWhen(true)] out string? result)
     {
