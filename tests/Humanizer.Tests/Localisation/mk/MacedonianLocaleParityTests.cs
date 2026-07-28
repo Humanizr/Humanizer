@@ -16,6 +16,9 @@ public class MacedonianLocaleParityTests
     [InlineData(121, "сто дваесет и еден")]
     [InlineData(1001, "илјада и еден")]
     [InlineData(1001001, "еден милион илјада и еден")]
+    [InlineData(1_000_000_000, "една милијарда")]
+    [InlineData(1_000_000_000_000, "еден билион")]
+    [InlineData(1_000_000_000_000_000, "една билијарда")]
     public void ToWords_UsesMacedonianCardinalForms(long number, string expected) =>
         Assert.Equal(expected, number.ToWords(Macedonian));
 
@@ -53,9 +56,15 @@ public class MacedonianLocaleParityTests
     [InlineData("дваесет и прво", 21)]
     [InlineData("стота", 100)]
     [InlineData("илјадито", 1000)]
+    [InlineData("еден билион", 1_000_000_000_000)]
+    [InlineData("билионити", 1_000_000_000_000)]
+    [InlineData("една билијарда", 1_000_000_000_000_000)]
     public void ToNumber_ParsesMacedonianCardinalAndOrdinalForms(string words, long expected) =>
         Assert.Equal(expected, words.ToNumber(Macedonian));
 
+    [Fact]
+    public void ToWords_RejectsMagnitudeWithoutCLDRScaleWord() =>
+        Assert.Throws<NotImplementedException>(() => 1_000_000_000_000_000_000.ToWords(Macedonian));
 
     [Fact]
     public void ToOrdinalWords_HandlesMinimumInteger() =>
