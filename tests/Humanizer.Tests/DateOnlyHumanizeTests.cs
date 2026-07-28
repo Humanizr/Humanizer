@@ -20,14 +20,14 @@ public class DateOnlyHumanizeTests
     [InlineData(true)]
     public void SameDate_UsesDateOnlyWordingWithoutChangingCultureFallback(bool usePrecisionStrategy)
     {
-        Configurator.DateOnlyHumanizeStrategy = usePrecisionStrategy
+        IDateOnlyHumanizeStrategy strategy = usePrecisionStrategy
             ? new PrecisionDateOnlyHumanizeStrategy()
             : new DefaultDateOnlyHumanizeStrategy();
 
         var date = DateOnly.MinValue;
 
-        Assert.Equal("today", date.Humanize(date, new("en-GB")));
-        Assert.Equal("maintenant", date.Humanize(date, new("fr-FR")));
+        Assert.Equal("today", strategy.Humanize(date, date, new("en-GB")));
+        Assert.Equal("maintenant", strategy.Humanize(date, date, new("fr-FR")));
     }
 
     [Fact]
@@ -101,12 +101,12 @@ public class DateOnlyHumanizeTests
         int inputDay,
         string expectedResult)
     {
-        Configurator.DateOnlyHumanizeStrategy = new PrecisionDateOnlyHumanizeStrategy(0.75);
-
         var baseTime = new DateOnly(baseYear, baseMonth, baseDay);
         var inputTime = new DateOnly(inputYear, inputMonth, inputDay);
 
-        Assert.Equal(expectedResult, inputTime.Humanize(baseTime));
+        Assert.Equal(
+            expectedResult,
+            new PrecisionDateOnlyHumanizeStrategy(0.75).Humanize(inputTime, baseTime, CultureInfo.CurrentUICulture));
     }
 
     [Fact]

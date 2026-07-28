@@ -32,29 +32,45 @@ public class TimeOnlyHumanizeTests
     {
         using var strategiesReady = new Barrier(2);
 
-        var defaultResult = Task.Run(() =>
-        {
-            CultureInfo.CurrentCulture = new("en-US");
-            CultureInfo.CurrentUICulture = new("fr");
-            strategiesReady.SignalAndWait();
-
-            return new DefaultTimeOnlyHumanizeStrategy()
-                .Humanize(new(13, 08, 05), new(1, 08, 05), null);
-        });
-        var precisionResult = Task.Run(() =>
-        {
-            CultureInfo.CurrentCulture = new("fr");
-            CultureInfo.CurrentUICulture = new("is");
-            strategiesReady.SignalAndWait();
-
-            return new PrecisionTimeOnlyHumanizeStrategy(0.5)
-                .Humanize(new(13, 08, 05), new(1, 08, 05), null);
-        });
+        var defaultResult = Task.Run(() => Humanize(
+            new("en-US"),
+            new("fr"),
+            new DefaultTimeOnlyHumanizeStrategy()));
+        var precisionResult = Task.Run(() => Humanize(
+            new("fr"),
+            new("is"),
+            new PrecisionTimeOnlyHumanizeStrategy(0.5)));
 
         var results = await Task.WhenAll(defaultResult, precisionResult);
 
         Assert.Equal("dans 12 heures", results[0]);
         Assert.Equal("á morgun", results[1]);
+
+        string Humanize(
+            CultureInfo currentCulture,
+            CultureInfo currentUICulture,
+            ITimeOnlyHumanizeStrategy strategy)
+        {
+            var originalCulture = CultureInfo.CurrentCulture;
+            var originalUICulture = CultureInfo.CurrentUICulture;
+
+            try
+            {
+                CultureInfo.CurrentCulture = currentCulture;
+                CultureInfo.CurrentUICulture = currentUICulture;
+                if (!strategiesReady.SignalAndWait(TimeSpan.FromSeconds(30)))
+                {
+                    throw new TimeoutException("Parallel strategies did not synchronize.");
+                }
+
+                return strategy.Humanize(new(13, 08, 05), new(1, 08, 05), null);
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = originalCulture;
+                CultureInfo.CurrentUICulture = originalUICulture;
+            }
+        }
     }
 
     [Fact]
