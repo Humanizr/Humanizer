@@ -242,7 +242,6 @@ public static partial class StringHumanizeExtensions
     /// </example>
     public static string Humanize(this string input)
     {
-        // if input is all capitals (e.g. an acronym) then return it without change
         if (IsAllUpper(input, 0, input.Length))
         {
             return Vocabularies.ApplyAcronyms(input);
