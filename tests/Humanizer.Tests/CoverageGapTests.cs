@@ -492,6 +492,7 @@ public class CoverageGapTests
     }
 
     [Fact]
+    [UseCulture("en-US")]
     public void SmallUtilityBranchesCoverInvalidAndFallbackPaths()
     {
         Assert.Equal("hello", "HELLO".Transform(CultureInfo.InvariantCulture, To.LowerCase));
