@@ -86,11 +86,6 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
 
         if (number < 0)
         {
-            if (number == long.MinValue)
-            {
-                return "минус " + ConvertPositive((ulong)long.MaxValue + 1UL, gender);
-            }
-
             return "минус " + ConvertPositive((ulong)-number, gender);
         }
 
