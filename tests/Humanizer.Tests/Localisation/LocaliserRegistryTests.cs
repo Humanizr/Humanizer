@@ -14,14 +14,43 @@ public class LocaliserRegistryTests
     }
 
     [Fact]
-    public void ResolveForCultureNullUsesCurrentUiCulture()
+    public void ResolveForCultureNullUsesCurrentCulture()
     {
         var registry = new LocaliserRegistry<string>(culture => $"default:{culture.Name}");
         registry.Register("fr", culture => $"fr:{culture.Name}");
 
         using var _ = new DistinctCultureSwap(new("en-US"), new("fr-CH"));
 
-        Assert.Equal("fr:fr-CH", registry.ResolveForCulture(null));
+        Assert.Equal("default:en-US", registry.ResolveForCulture(null));
+    }
+
+    [Fact]
+    public void DefaultRegistryCallersUseCurrentCulture()
+    {
+        using var _ = new DistinctCultureSwap(new("en-US"), new("de-DE"));
+
+        Assert.Multiple(() =>
+        {
+            Assert.Equal("one", 1.ToWords());
+            Assert.Equal("1st", 1.Ordinalize());
+            Assert.Equal("January 1st, 2015", new DateTime(2015, 1, 1).ToOrdinalWords());
+            Assert.Equal("January 1st, 2015", new DateOnly(2015, 1, 1).ToOrdinalWords());
+            Assert.Equal("a and b", new List<string> { "a", "b" }.Humanize());
+            Assert.Equal("1 day", TimeSpan.FromDays(1).Humanize());
+            Assert.Equal("one twenty-three", new TimeOnly(13, 23).ToClockNotation());
+        });
+    }
+
+    [Fact]
+    public void OrdinalizeNullCultureUsesCurrentCultureForNumberFormatting()
+    {
+        var culture = new CultureInfo("en-US");
+        culture.NumberFormat.NegativeSign = "~";
+        var uiCulture = new CultureInfo("en-US");
+        uiCulture.NumberFormat.NegativeSign = "!";
+        using var _ = new DistinctCultureSwap(culture, uiCulture);
+
+        Assert.Equal("~1st", (-1).Ordinalize(null!));
     }
 
     [Fact]
