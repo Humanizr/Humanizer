@@ -57,6 +57,20 @@ public class DateTimeOffsetHumanizeTests
         Assert.Equal(expectedResult, actualResult);
     }
 
+    [Theory]
+    [InlineData(27)]
+    [InlineData(28)]
+    [InlineData(29)]
+    public void PrecisionStrategy_TwoMonthsAroundSixtyDays(int day)
+    {
+        Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(0.75);
+
+        var inputTime = new DateTimeOffset(2019, 01, day, 0, 0, 0, TimeSpan.Zero);
+        var baseTime = new DateTimeOffset(2019, 03, 29, 0, 0, 0, TimeSpan.Zero);
+
+        Assert.Equal("2 months ago", inputTime.Humanize(baseTime));
+    }
+
     [Fact]
     public void Never()
     {
