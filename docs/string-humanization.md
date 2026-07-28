@@ -27,7 +27,7 @@ using Humanizer;
 
 ## Acronym Handling
 
-Strings containing only uppercase letters are treated as acronyms and left unchanged:
+Strings containing only uppercase letters are treated as acronyms and left unchanged unless they match a registered acronym:
 
 ```csharp
 "HTML".Humanize() // => "HTML"
@@ -36,6 +36,8 @@ Strings containing only uppercase letters are treated as acronyms and left uncha
 // Registration is process-wide; matching uses the registered output casing.
 Vocabularies.Default.AddAcronym("HS");
 "HsAccess".Humanize() // => "HS access"
+Vocabularies.Default.AddAcronym("iOS");
+"IOS".Humanize() // => "iOS"
 ```
 
 To force humanization of all-caps strings, use the `Transform` method:
