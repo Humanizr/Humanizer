@@ -55,6 +55,8 @@ public class InflectorTests
     [InlineData("fish per hour", "fish per hour")]
     [InlineData("(meter per second).", "(meters per second).")]
     [InlineData("joule  PER\tmole per kelvin", "joules  PER\tmole per kelvin")]
+    [InlineData("meter\u00A0per\u00A0second", "meters\u00A0per\u00A0second")]
+    [InlineData("foot\u2009per\u2009second", "feet\u2009per\u2009second")]
     [InlineData("request per customer", "requests per customer")]
     [InlineData("meter per curves", "meters per curves")]
     public void InflectsCompoundRates(string singular, string plural)
@@ -70,11 +72,16 @@ public class InflectorTests
     [Theory]
     [InlineData("as per request", "as per requests")]
     [InlineData("meter/per/second", "meter/per/seconds")]
+    [InlineData("meter\nper\nsecond", "meter\nper\nseconds")]
     public void DoesNotTreatUnstructuredPhrasesAsCompoundRates(string singular, string plural)
     {
         Assert.Equal(plural, singular.Pluralize());
         Assert.Equal(singular, plural.Singularize());
     }
+
+    [Fact]
+    public void SingularizingParenthesizedAsPerPhraseIsUnchanged() =>
+        Assert.Equal("(as per requests)", "(as per requests)".Singularize());
 
     [Fact]
     public void ExplicitPhraseRulesOverrideCompoundRateInflection()

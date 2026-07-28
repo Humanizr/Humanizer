@@ -266,10 +266,10 @@ public partial class Vocabulary
         length >= 2 &&
         word[length - 2] is 'a' or 'A' &&
         word[length - 1] is 's' or 'S' &&
-        (length == 2 || IsHorizontalWhitespace(word[length - 3]));
+        (length == 2 || !char.IsLetterOrDigit(word[length - 3]));
 
     static bool IsHorizontalWhitespace(char character) =>
-        character is ' ' or '\t';
+        character == '\t' || char.GetUnicodeCategory(character) == UnicodeCategory.SpaceSeparator;
 
     static string MatchUpperCase(string word, string replacement) =>
         word.Length > 1 && word.Any(char.IsUpper) && !word.Any(char.IsLower)
