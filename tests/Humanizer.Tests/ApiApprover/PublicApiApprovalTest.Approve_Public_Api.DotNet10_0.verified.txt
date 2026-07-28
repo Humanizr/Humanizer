@@ -1930,6 +1930,8 @@ namespace Humanizer
     {
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ", bool toWords = false) { }
         public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ", bool toWords = false) { }
+        public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ") { }
+        public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ") { }
         public static string ToAge(this System.TimeSpan timeSpan, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 7, bool toWords = false) { }
     }
     public enum TimeUnit

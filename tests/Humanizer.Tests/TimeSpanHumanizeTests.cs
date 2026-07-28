@@ -512,4 +512,71 @@ public class TimeSpanHumanizeTests
         var actual = TimeSpan.FromDays(days).Humanize(precision, maxUnit: maxUnit, minUnit: TimeUnit.Week);
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData(3, "1week, 1d, 1h")]
+    [InlineData(6, "1week, 1d, 1h, 2min, 3s, 4ms")]
+    public void CanUseLocalizedSymbolsWithPrecision(int precision, string expected)
+    {
+        var timeSpan = new TimeSpan(8, 1, 2, 3, 4);
+
+        var actual = timeSpan.HumanizeToSymbols(precision);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SymbolsUseInclusiveMonthToWeekBounds()
+    {
+        var actual = TimeSpan.FromDays(109).HumanizeToSymbols(
+            precision: 2,
+            maxUnit: TimeUnit.Month,
+            minUnit: TimeUnit.Week);
+
+        Assert.Equal("3mo, 2week", actual);
+    }
+
+    [Fact]
+    public void SymbolZeroUsesMinimumUnit()
+    {
+        var actual = TimeSpan.Zero.HumanizeToSymbols(minUnit: TimeUnit.Second);
+
+        Assert.Equal("0s", actual);
+    }
+
+    [Theory]
+    [InlineData(3723004)]
+    [InlineData(-3723004)]
+    public void SymbolsPreserveNegativeSymmetry(long milliseconds)
+    {
+        var actual = TimeSpan.FromMilliseconds(milliseconds).HumanizeToSymbols(precision: 4);
+
+        Assert.Equal("1h, 2min, 3s, 4ms", actual);
+    }
+
+    [Fact]
+    public void DefaultOutputIsUnchangedWhenSymbolsAreNotRequested()
+    {
+        var actual = new TimeSpan(0, 1, 2, 3).Humanize(precision: 3);
+
+        Assert.Equal("1 hour, 2 minutes, 3 seconds", actual);
+    }
+
+    [Fact]
+    public void SymbolsUseTheRequestedCulture()
+    {
+        var actual = TimeSpan.FromMinutes(2).HumanizeToSymbols(culture: new("ka"));
+
+        Assert.Equal("2წთ", actual);
+    }
+
+    [Fact]
+    public void SymbolsCanCountEmptyUnits()
+    {
+        var actual = TimeSpan.FromMilliseconds(3600020).HumanizeToSymbols(
+            precision: 3,
+            countEmptyUnits: true);
+
+        Assert.Equal("1h", actual);
+    }
 }
