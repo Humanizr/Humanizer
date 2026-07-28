@@ -1,0 +1,51 @@
+---
+id: numbers-words-ordinals-roman-bytes-and-quantities
+title: Numbers, words, ordinals, Roman numerals, bytes, and quantities
+sidebar_position: 4
+diataxis: how-to
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import numbers from '!!raw-loader!../_examples/scenarios-numbers/Program.cs';
+
+# Numbers, words, ordinals, Roman numerals, bytes, and quantities
+
+## Orientation
+
+Humanizer provides distinct operations for distinct display jobs:
+
+- `ToWords` and `ToOrdinalWords` spell out numbers.
+- In `3.0.1` and later, `ToNumber` parses supported localized number words.
+- `Ordinalize` adds a numeric ordinal suffix.
+- `ToRoman` and `FromRoman` convert Roman numerals.
+- `ByteSize` and numeric byte extensions choose and format data units.
+- `ToQuantity` combines a count with singular or plural text.
+
+## Example
+
+This source sets English culture explicitly and verifies every result it prints:
+
+<CodeBlock language="csharp" title="Program.cs">{numbers}</CodeBlock>
+
+Pass a `CultureInfo` directly wherever the overload permits it. APIs such as `ToQuantity` also use the ambient culture, so set `CurrentCulture` and `CurrentUICulture` at the application boundary.
+
+## Pitfall
+
+Roman numeral conversion supports integers from 1 through 3999. Treat external Roman or number-word input as untrusted: prefer `TryToNumber` when a failed parse is expected.
+
+`ByteSize` uses binary byte multiples while presenting familiar unit symbols. Do not use its humanized output as a machine-readable size.
+
+## Version notes
+
+The verified calls run across the supported corpus. Number-word parsing is not
+available in Humanizer `2.x`; `ToNumber` and `TryToNumber` first appear in
+`3.0.1` with `int` results, while current builds return `long`. Consult the
+selected-version signature before adding a parser or assigning an explicit
+numeric type.
+
+## Related guides and API
+
+- [Localization and extensibility](./localization-and-extensibility.mdx)
+- [Enums and collections](./enums-and-collections.mdx)
+- [Selected-version API reference](../api/index.md)

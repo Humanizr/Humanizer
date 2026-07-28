@@ -1,0 +1,56 @@
+---
+id: dates-times-durations-and-age
+title: Dates, times, durations, and age
+sidebar_position: 3
+diataxis: how-to
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import dates from '!!raw-loader!../_examples/scenarios-dates/Program.cs';
+
+# Dates, times, durations, and age
+
+## Orientation
+
+Choose the operation by meaning:
+
+- Humanize `DateTime` or `DateTimeOffset` for a relative phrase such as
+  “yesterday.” Humanizer `2.11.10` and later also support `DateOnly` and
+  `TimeOnly` on compatible target frameworks.
+- Humanize `TimeSpan` for elapsed duration such as “2 hours, 5 minutes.”
+- In `3.0.1` and later, call `ToAge` on a `TimeSpan` for an age phrase such as
+  “two years old.”
+
+## Example
+
+Inject the comparison instant and culture instead of reading the clock inside an example or test:
+
+<CodeBlock language="csharp" title="Program.cs">{dates}</CodeBlock>
+
+The program deterministically prints `yesterday; 2 hours, 5 minutes`.
+
+`precision` controls how many non-empty duration units are returned. `maxUnit` and `minUnit` constrain which units may appear.
+
+Humanizer `3.0.1` and later can render an age with
+`TimeSpan.FromDays(750).ToAge(culture, toWords: true)`. It returns
+`two years old` for the culture used above.
+
+## Pitfall
+
+`TimeSpan` has no calendar context. Humanizer therefore approximates months and years when decomposing a duration. Use calendar arithmetic on `DateOnly` or `DateTime` when month length, leap years, or birthdays must be exact.
+
+For `DateTime`, keep the input and comparison basis consistent: explicitly choose UTC or local behavior and inject `dateToCompareAgainst`.
+
+## Version notes
+
+`DateOnly` and `TimeOnly` humanization first appears in `2.11.10` and requires a
+compatible target framework. `ToAge` first appears in `3.0.1`. The shared
+`DateTime`, `DateTimeOffset`, and `TimeSpan` calls shown here run across the
+supported corpus.
+
+## Related guides and API
+
+- [Quick start](../start/quick-start.mdx)
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Selected-version API reference](../api/index.md)

@@ -1,0 +1,48 @@
+---
+id: localization-and-extensibility
+title: Localization and extensibility
+sidebar_position: 6
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import localization from '!!raw-loader!../_examples/scenarios-localization/Program.cs';
+
+# Localization and extensibility
+
+## Orientation
+
+Start with a specific `CultureInfo`. Pass it to Humanizer overloads when possible; otherwise establish `CurrentCulture` and `CurrentUICulture` for the operation. Extend a local transformation with `IStringTransformer` or `ICulturedStringTransformer`. Use `Configurator` registries and strategies only for application-wide behavior.
+
+## Example
+
+This verified example produces French number words and supplies a custom culture-aware transformer:
+
+<CodeBlock language="csharp" title="Program.cs">{localization}</CodeBlock>
+
+The explicit result is `quarante-deux; BONJOUR`. A per-call transformer is isolated and easy to test. A registered `IFormatter`, collection formatter, converter, or date strategy changes global behavior and should be configured during startup.
+
+Culture resolution tries the requested culture and its parents before the registry's default. This lets a specific culture such as `fr-FR` use a `fr` implementation when no more specific registration exists.
+
+## Pitfall
+
+In Humanizer `3.x` and current builds, localizer registries freeze on first
+resolution. Register custom components before any Humanizer call can resolve
+that registry. Humanizer `2.x` registries remain mutable, but startup
+registration still avoids request-to-request behavior changes. Do not mutate
+global strategies per request; concurrent callers can observe the change.
+
+## Version notes
+
+The example uses extension points present across the supported corpus.
+Registry immutability and enum metadata configuration changed in `3.0`;
+available locale data and individual registries are also versioned package
+behavior. Verify the selected snapshot rather than assuming every culture
+supports every operation identically.
+
+## Related guides and API
+
+- [Configuration basics](../start/configuration.mdx)
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Selected-version API reference](../api/index.md)

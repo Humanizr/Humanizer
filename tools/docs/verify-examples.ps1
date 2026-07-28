@@ -1,5 +1,6 @@
 param(
     [switch]$All,
+    [string[]]$Area,
     [string]$Version,
     [string]$ManifestPath,
     [string]$ExamplesRoot
@@ -11,6 +12,13 @@ if (-not $ManifestPath) {
     $ManifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 }
 $explicitExamplesRoot = -not [string]::IsNullOrWhiteSpace($ExamplesRoot)
+$requestedAreas = @(
+    $Area |
+        ForEach-Object { $_ -split "," } |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+        ForEach-Object { $_.Trim() } |
+        Sort-Object -Unique
+)
 
 & (Join-Path $PSScriptRoot "verify-manifest.ps1") `
     -ManifestPath $ManifestPath
@@ -36,19 +44,62 @@ try {
     foreach ($entry in $versions) {
         $entryExamplesRoot = if ($explicitExamplesRoot) {
             $ExamplesRoot
+        } elseif ($requestedAreas.Count -gt 0) {
+            Join-Path $repoRoot "website/docs/_examples"
         } elseif ($entry.published) {
             Join-Path $repoRoot "website/versioned_docs/version-$($entry.version)/_examples"
         } else {
             Join-Path $repoRoot "website/docs/_examples"
         }
-        $projects = @(
+        $allProjects = @(
             Get-ChildItem $entryExamplesRoot `
                 -Filter "*.csproj" `
                 -File `
                 -Recurse
         )
+        foreach ($requestedArea in $requestedAreas) {
+            $matchingProjects = @(
+                $allProjects |
+                Where-Object {
+                    $projectText = Get-Content -Raw $_.FullName
+                    $projectText -match (
+                        "<DocumentationArea>\s*" +
+                        [regex]::Escape($requestedArea) +
+                        "\s*</DocumentationArea>"
+                    )
+                }
+            )
+            if ($matchingProjects.Count -eq 0) {
+                throw "No runnable documentation examples were found in area $requestedArea for $($entry.version)."
+            }
+        }
+        $projects = @(
+            $allProjects |
+                Where-Object {
+                    if ($requestedAreas.Count -eq 0) {
+                        return $true
+                    }
+
+                    $projectText = Get-Content -Raw $_.FullName
+                    return @(
+                        $requestedAreas |
+                            Where-Object {
+                                $projectText -match (
+                                    "<DocumentationArea>\s*" +
+                                    [regex]::Escape($_) +
+                                    "\s*</DocumentationArea>"
+                                )
+                            }
+                    ).Count -gt 0
+                }
+        )
         if ($projects.Count -eq 0) {
-            throw "No runnable documentation examples were found for $($entry.version)."
+            $areaDescription = if ($requestedAreas.Count -gt 0) {
+                " in area(s) $($requestedAreas -join ', ')"
+            } else {
+                ""
+            }
+            throw "No runnable documentation examples were found$areaDescription for $($entry.version)."
         }
 
         for ($projectIndex = 0; $projectIndex -lt $projects.Count; $projectIndex++) {

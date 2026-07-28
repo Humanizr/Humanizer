@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <DefineConstants Condition="$([System.String]::Copy('$(HumanizerPackageVersion)').StartsWith('2.'))">$(DefineConstants);HUMANIZER_V2</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(HumanizerProject)' != ''">

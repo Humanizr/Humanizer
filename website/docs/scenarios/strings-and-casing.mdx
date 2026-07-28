@@ -1,0 +1,39 @@
+---
+id: strings-and-casing
+title: Strings and casing
+sidebar_position: 1
+diataxis: how-to
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import strings from '!!raw-loader!../_examples/scenarios-strings/Program.cs';
+
+# Strings and casing
+
+## Orientation
+
+Use `Humanize` to turn identifiers and delimiter-separated strings into display text. Pass `LetterCasing` when the destination requires sentence, title, lower, or upper casing. Use `Transform` when casing is the task by itself or when composing multiple transformers.
+
+## Example
+
+This verified source covers identifier humanization, casing, the reverse string operation, truncation, and a transformer:
+
+<CodeBlock language="csharp" title="Program.cs">{strings}</CodeBlock>
+
+`Humanize` recognizes PascalCase, camelCase, underscores, dashes, numbers, and common acronym boundaries. All-capital input is treated as an acronym and can remain unchanged; use a casing transformer when you intend to recase it.
+
+## Pitfall
+
+Title and sentence casing use culture-sensitive text operations. Set the culture explicitly when output must be deterministic, and do not assume title casing follows a particular editorial style guide.
+
+## Version notes
+
+The example runs unchanged against `3.0.10` and the current checkout. Unicode and punctuation edge cases have changed across releases; validate those inputs against the version your application uses.
+
+## Related guides and API
+
+- [Truncation and dehumanization](./truncation-and-dehumanization.mdx)
+- [Localization and extensibility](./localization-and-extensibility.mdx)
+- [StringHumanizeExtensions API](../api/Humanizer.StringHumanizeExtensions.md)
+- [CasingExtensions API](../api/Humanizer.CasingExtensions.md)

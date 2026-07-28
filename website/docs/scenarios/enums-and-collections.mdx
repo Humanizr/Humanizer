@@ -1,0 +1,43 @@
+---
+id: enums-and-collections
+title: Enums and collections
+sidebar_position: 5
+diataxis: how-to
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import enumsCollections from '!!raw-loader!../_examples/scenarios-enums-collections/Program.cs';
+
+# Enums and collections
+
+## Orientation
+
+Enum humanization turns member names into readable labels and honors metadata such as `DescriptionAttribute` and `DisplayAttribute`. Enum dehumanization maps those labels back to a member. Collection humanization joins rendered items with the conjunction and punctuation selected for the current UI culture.
+
+## Example
+
+This verified program shows a description override, automatic enum casing, case-insensitive enum dehumanization, and an English collection:
+
+<CodeBlock language="csharp" title="Program.cs">{enumsCollections}</CodeBlock>
+
+The source also uses a display selector for a collection of `Person` values.
+Pass a separator when you need a particular conjunction, but remember that the
+collection formatter controls its placement and punctuation.
+
+## Pitfall
+
+Enum dehumanization throws when no member matches unless you pass `OnNoMatch.ReturnsNull`. It is case-insensitive, but labels still need to be unambiguous.
+
+Collection output is culture-specific. Set `CurrentUICulture` before calling `Humanize`, especially in tests and background work.
+
+## Version notes
+
+The verified enum and collection source runs against `3.0.10` and current. The exact built-in collection punctuation is locale data and may differ by selected release.
+
+## Related guides and API
+
+- [Strings and casing](./strings-and-casing.mdx)
+- [Localization and extensibility](./localization-and-extensibility.mdx)
+- [CollectionHumanizeExtensions API](../api/Humanizer.CollectionHumanizeExtensions.md)
+- [Selected-version API reference](../api/index.md)

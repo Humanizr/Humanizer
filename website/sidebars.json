@@ -6,7 +6,30 @@
       "label": "Start here",
       "collapsed": false,
       "items": [
-        "proof"
+        "start/overview",
+        "start/installation",
+        "start/package-selection",
+        "start/quick-start",
+        "start/configuration"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Scenarios",
+      "items": [
+        "scenarios/strings-and-casing",
+        "scenarios/truncation-and-dehumanization",
+        "scenarios/dates-times-durations-and-age",
+        "scenarios/numbers-words-ordinals-roman-bytes-and-quantities",
+        "scenarios/enums-and-collections",
+        "scenarios/localization-and-extensibility"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Concepts",
+      "items": [
+        "concepts/culture-and-configuration"
       ]
     },
     {

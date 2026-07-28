@@ -1,0 +1,41 @@
+---
+id: truncation-and-dehumanization
+title: Truncation and dehumanization
+sidebar_position: 2
+diataxis: how-to
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import strings from '!!raw-loader!../_examples/scenarios-strings/Program.cs';
+
+# Truncation and dehumanization
+
+## Orientation
+
+Use `Truncate` to fit display text into a length or word budget. Use string `Dehumanize` to convert readable words to PascalCase when you control the vocabulary and only need an identifier-shaped value.
+
+## Example
+
+The truncation and dehumanization calls in this verified source produce `Customer…` and `CustomerOrderHistory`:
+
+<CodeBlock language="csharp" title="Program.cs">{strings}</CodeBlock>
+
+The default truncator uses the single-character ellipsis `…`. The same source
+also verifies `Truncator.FixedNumberOfWords`; other built-in strategies can
+count characters, preserve whole words, or truncate from the left.
+
+## Pitfall
+
+The meaning of `length` depends on the selected `ITruncator`, and the truncation marker consumes space for fixed-length strategies. `Dehumanize` is not a lossless inverse: punctuation and word boundaries can be discarded.
+
+## Version notes
+
+The verified source runs against `3.0.10` and current. Consult the selected-version API for the available `Truncator` strategies and overload order before changing an existing call.
+
+## Related guides and API
+
+- [Strings and casing](./strings-and-casing.mdx)
+- [Enums and collections](./enums-and-collections.mdx)
+- [StringHumanizeExtensions API](../api/Humanizer.StringHumanizeExtensions.md)
+- [Selected-version API reference](../api/index.md)
