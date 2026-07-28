@@ -501,6 +501,7 @@ Convert numbers to ordinal strings (1st, 2nd, 3rd, etc.):
 #### Titleize, Pascalize, Camelize
 
 Convert strings to various coding conventions:
+`Pascalize` and `Camelize` use culture-invariant casing; `Titleize` follows the current culture.
 
 ```csharp
 // Titleize: Title Case with spaces
@@ -517,6 +518,7 @@ Convert strings to various coding conventions:
 #### Underscore, Dasherize, Kebaberize
 
 Transform to common naming conventions:
+`Underscore` and `Kebaberize` use culture-invariant casing.
 
 ```csharp
 // Underscore: snake_case
