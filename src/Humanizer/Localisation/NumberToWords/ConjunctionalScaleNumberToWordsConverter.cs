@@ -33,6 +33,22 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             isOrdinal: false,
             profile.AddAndMode == ConjunctionalScaleAddAndMode.UseCallerFlag ? addAnd : profile.DefaultAddAnd);
 
+    internal ConjunctionalScale[] Scales => profile.Scales;
+
+    internal string ConvertUsingScales(long number, ConjunctionalScale[] scales)
+    {
+        var addAnd = profile.DefaultAddAnd;
+        if (number >= 0)
+        {
+            return ConvertPositive((ulong)number, isOrdinal: false, addAnd, scales);
+        }
+
+        var magnitude = number == long.MinValue
+            ? (ulong)long.MaxValue + 1
+            : (ulong)-number;
+        return $"{profile.MinusWord} {ConvertPositive(magnitude, isOrdinal: false, addAnd, scales)}";
+    }
+
     /// <inheritdoc />
     public override string ConvertToOrdinal(int number)
     {
@@ -73,12 +89,18 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             return $"{profile.MinusWord} {Convert(-number, addAnd)}";
         }
 
+        return ConvertPositive((ulong)number, isOrdinal, addAnd, profile.Scales);
+    }
+
+    string ConvertPositive(ulong number, bool isOrdinal, bool addAnd, ConjunctionalScale[] scales)
+    {
         var parts = new List<string>(20);
         var remainder = number;
 
-        foreach (var scale in profile.Scales)
+        foreach (var scale in scales)
         {
-            var count = remainder / scale.Value;
+            var scaleValue = (ulong)scale.Value;
+            var count = remainder / scaleValue;
             if (count == 0)
             {
                 continue;
@@ -88,17 +110,17 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             // recursing through another full scale walk when the group count is already small.
             if (count < 1000)
             {
-                AppendUnderThousand(parts, count, isOrdinal: false, addAnd, isTerminalScaleRemainder: false);
+                AppendUnderThousand(parts, (long)count, isOrdinal: false, addAnd, isTerminalScaleRemainder: false);
             }
             else
             {
-                parts.Add(ConvertCore(count, isOrdinal: false, addAnd));
+                parts.Add(ConvertPositive(count, isOrdinal: false, addAnd, scales));
             }
-            parts.Add(remainder % scale.Value == 0 && isOrdinal ? scale.OrdinalName : scale.Name);
-            remainder %= scale.Value;
+            parts.Add(remainder % scaleValue == 0 && isOrdinal ? scale.OrdinalName : scale.Name);
+            remainder %= scaleValue;
         }
 
-        AppendUnderThousand(parts, remainder, isOrdinal, addAnd, isTerminalScaleRemainder: true);
+        AppendUnderThousand(parts, (long)remainder, isOrdinal, addAnd, isTerminalScaleRemainder: true);
 
         ApplyOrdinalLeadingOneStrategy(parts, isOrdinal);
 

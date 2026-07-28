@@ -130,6 +130,11 @@ public class LocaleTheoryMatrixCompletenessTests
         AssertLocaleCoverage(LocaleNumberMagnitudeTheoryData.ExtendedMagnitudeCardinalCases, localeName);
 
     [Theory]
+    [MemberData(nameof(LocaleCoverageData.IndianScaleStyleApplicabilityTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void IndianScaleStyleApplicability_ClassifiesEveryShippedLocale(string localeName, bool isApplicable) =>
+        Assert.Equal(localeName == "en-IN", isApplicable);
+
+    [Theory]
     [MemberData(nameof(ShippedLocaleRows))]
     public void LocaleCoverageData_FormatterExpectationTheoryData_IncludeLocale(string localeName) =>
         AssertLocaleCoverage(LocaleCoverageData.FormatterExpectationTheoryData, localeName);
