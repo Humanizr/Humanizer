@@ -170,6 +170,21 @@ UserType.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase)
     => "Member Without Description Attribute"
 ```
 
+Callers can select the enum member name or a specific `DisplayAttribute` value without changing the default metadata precedence:
+
+```csharp
+public enum UserType
+{
+    [Display(Name = "Administrator", Description = "Manages users", ShortName = "Admin")]
+    AdministratorUser
+}
+
+UserType.AdministratorUser.Humanize(LetterCasing.Sentence, EnumHumanizeSource.EnumName) => "Administrator user"
+UserType.AdministratorUser.Humanize(LetterCasing.Sentence, EnumHumanizeSource.DisplayName) => "Administrator"
+UserType.AdministratorUser.Humanize(LetterCasing.Sentence, EnumHumanizeSource.DisplayDescription) => "Manages users"
+UserType.AdministratorUser.Humanize(LetterCasing.Sentence, EnumHumanizeSource.DisplayShortName) => "Admin"
+```
+
 Humanizer works with any attribute containing a `Description` property and supports localized `DisplayAttribute` for multi-language scenarios. This helps you avoid littering enums with unnecessary attributes while still providing customization when needed.
 
 

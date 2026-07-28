@@ -106,6 +106,89 @@ public class EnumHumanizeTests
     public void HonorsLocalizedDisplayAttribute() =>
         Assert.Equal(EnumTestsResources.MemberWithLocalizedDisplayAttribute, EnumUnderTest.MemberWithLocalizedDisplayAttribute.Humanize());
 
+    [Theory]
+    [InlineData(EnumHumanizeSource.Default, "Localized display description")]
+    [InlineData(EnumHumanizeSource.EnumName, "Raw enum name")]
+    [InlineData(EnumHumanizeSource.DisplayName, "Localized display name")]
+    [InlineData(EnumHumanizeSource.DisplayDescription, "Localized display description")]
+    [InlineData(EnumHumanizeSource.DisplayShortName, "Localized short name")]
+    public void CanSelectHumanizeSource(EnumHumanizeSource source, string expected) =>
+        Assert.Equal(expected, EnumHumanizeSourcesUnderTest.RawEnumName.Humanize(LetterCasing.Sentence, source));
+
+    [Fact]
+    public void SelectedMetadataPreservesCasingWhileEnumNameHonorsIt()
+    {
+        var value = EnumHumanizeSourcesUnderTest.RawEnumName;
+
+        Assert.Equal("Localized display name", value.Humanize(LetterCasing.AllCaps, EnumHumanizeSource.DisplayName));
+        Assert.Equal("RAW ENUM NAME", value.Humanize(LetterCasing.AllCaps, EnumHumanizeSource.EnumName));
+    }
+
+    [Theory]
+    [InlineData(EnumHumanizeSource.DisplayName)]
+    [InlineData(EnumHumanizeSource.DisplayDescription)]
+    [InlineData(EnumHumanizeSource.DisplayShortName)]
+    public void MissingSelectedMetadataFallsBackToEnumName(EnumHumanizeSource source) =>
+        Assert.Equal(
+            "No display metadata",
+            EnumHumanizeSourcesUnderTest.NoDisplayMetadata.Humanize(LetterCasing.Sentence, source));
+
+    [Fact]
+    public void DisplayShortNameUsesDisplayNameFallback() =>
+        Assert.Equal(
+            "Display name only",
+            EnumHumanizeSourcesUnderTest.DisplayNameOnly.Humanize(
+                LetterCasing.Sentence,
+                EnumHumanizeSource.DisplayShortName));
+
+    [Fact]
+    public void SelectedSourceDoesNotEvaluateUnrelatedDisplayMetadata()
+    {
+        var value = EnumHumanizeSourcesWithInvalidMetadataUnderTest.RawEnumName;
+
+        Assert.Equal("Raw enum name", value.Humanize(LetterCasing.Sentence, EnumHumanizeSource.EnumName));
+        Assert.Equal("Localized display name", value.Humanize(LetterCasing.Sentence, EnumHumanizeSource.DisplayName));
+    }
+
+    [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void RuntimeEnumCanSelectHumanizeSource()
+    {
+        Enum value = EnumHumanizeSourcesUnderTest.RawEnumName;
+
+        Assert.Equal(
+            "Localized short name",
+            value.Humanize(LetterCasing.Sentence, EnumHumanizeSource.DisplayShortName));
+        Assert.Equal("RAW ENUM NAME", value.Humanize(LetterCasing.AllCaps, EnumHumanizeSource.EnumName));
+    }
+
+    [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void LegacyZeroCasingCallsRemainUnambiguous()
+    {
+        var value = EnumUnderTest.MemberWithoutDescriptionAttribute;
+        Enum runtimeValue = value;
+
+        Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeTitle, value.Humanize(default));
+        Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeTitle, value.Humanize(0));
+        Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeTitle, runtimeValue.Humanize(default));
+        Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeTitle, runtimeValue.Humanize(0));
+    }
+
+    [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void InvalidHumanizeSourceThrows()
+    {
+        var source = (EnumHumanizeSource)42;
+        Enum runtimeValue = EnumHumanizeSourcesUnderTest.RawEnumName;
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => EnumHumanizeSourcesUnderTest.RawEnumName.Humanize(LetterCasing.Title, source));
+        Assert.Throws<ArgumentOutOfRangeException>(() => runtimeValue.Humanize(LetterCasing.Title, source));
+    }
+
     [Fact]
     public void HumanizeCustomPropertyAttributeWithLocator()
     {
@@ -114,6 +197,11 @@ public class EnumHumanizeTests
         try
         {
             Assert.Equal(EnumTestsResources.MemberWithCustomPropertyAttribute, EnumForCustomLocator.MemberWithCustomPropertyAttribute.Humanize());
+            Assert.Equal(
+                "Member with custom property attribute",
+                EnumForCustomLocator.MemberWithCustomPropertyAttribute.Humanize(
+                    LetterCasing.Sentence,
+                    EnumHumanizeSource.DisplayDescription));
         }
         finally
         {
@@ -316,6 +404,35 @@ public class EnumHumanizeTests
             Name = "Display name",
             Description = "Display description",
             ShortName = "Display short name")]
+        RawEnumName
+    }
+
+    enum EnumHumanizeSourcesUnderTest
+    {
+        [System.ComponentModel.DataAnnotations.Display(
+            Name = nameof(EnumHumanizeSourceResources.Name),
+            Description = nameof(EnumHumanizeSourceResources.Description),
+            ShortName = nameof(EnumHumanizeSourceResources.ShortName),
+            ResourceType = typeof(EnumHumanizeSourceResources))]
+        RawEnumName,
+        NoDisplayMetadata,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Display name only")]
+        DisplayNameOnly
+    }
+
+    public static class EnumHumanizeSourceResources
+    {
+        public static string Name => "Localized display name";
+        public static string Description => "Localized display description";
+        public static string ShortName => "Localized short name";
+    }
+
+    enum EnumHumanizeSourcesWithInvalidMetadataUnderTest
+    {
+        [System.ComponentModel.DataAnnotations.Display(
+            Name = nameof(EnumHumanizeSourceResources.Name),
+            Description = "MissingDescription",
+            ResourceType = typeof(EnumHumanizeSourceResources))]
         RawEnumName
     }
 
