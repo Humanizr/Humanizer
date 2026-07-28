@@ -69,19 +69,35 @@ public class DateHumanizeDefaultStrategyTests
 
     [Theory]
     [InlineData(1, "yesterday")]
-    [InlineData(10, "10 days ago")]
-    [InlineData(27, "27 days ago")]
+    [InlineData(6, "6 days ago")]
+    [InlineData(7, "one week ago")]
+    [InlineData(13, "one week ago")]
+    [InlineData(14, "2 weeks ago")]
+    [InlineData(27, "3 weeks ago")]
     [InlineData(32, "one month ago")]
     public void DaysAgo(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
 
     [Theory]
     [InlineData(1, "tomorrow")]
-    [InlineData(10, "10 days from now")]
-    [InlineData(27, "27 days from now")]
+    [InlineData(6, "6 days from now")]
+    [InlineData(7, "one week from now")]
+    [InlineData(13, "one week from now")]
+    [InlineData(14, "2 weeks from now")]
+    [InlineData(27, "3 weeks from now")]
     [InlineData(32, "one month from now")]
     public void DaysFromNow(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
+
+    [Theory]
+    [InlineData(Tense.Past, "one month ago", 3)]
+    [InlineData(Tense.Future, "one month from now", 2)]
+    public void TwentyEightDaysUsesCalendarMonth(Tense tense, string expected, int comparisonMonth)
+    {
+        var comparisonBase = new DateTime(2023, comparisonMonth, 1, 0, 0, 0, DateTimeKind.Local);
+        var comparisonBaseUtc = new DateTime(2023, comparisonMonth, 1, 0, 0, 0, DateTimeKind.Utc);
+        DateHumanize.Verify(expected, 28, TimeUnit.Day, tense, baseDate: comparisonBase, baseDateUtc: comparisonBaseUtc);
+    }
 
     [Theory]
     [InlineData(1, "one month ago")]
@@ -134,6 +150,7 @@ public class DateHumanizeDefaultStrategyTests
     [InlineData(1, TimeUnit.Year, Tense.Future, "en-US", "one year from now")]
     [InlineData(40, TimeUnit.Second, Tense.Past, "ru-RU", "40 секунд назад")]
     [InlineData(2, TimeUnit.Day, Tense.Past, "sv-SE", "för 2 dagar sedan")]
+    [InlineData(2, TimeUnit.Week, Tense.Future, "de-DE", "in 2 Wochen")]
     public void CanSpecifyCultureExplicitly(int unit, TimeUnit timeUnit, Tense tense, string culture, string expected) =>
         DateHumanize.Verify(expected, unit, timeUnit, tense, culture: new(culture));
 }

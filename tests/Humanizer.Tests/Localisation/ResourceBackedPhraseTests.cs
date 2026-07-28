@@ -7,7 +7,7 @@ public class ResourceBackedPhraseTests
     public void UsesExpectedDateHumanizePhrases(string localeName, int unit, TimeUnit timeUnit, Tense tense, string expected)
     {
         var culture = GetCulture(localeName);
-        DateHumanize.Verify(expected, unit, timeUnit, tense, culture: culture);
+        VerifyDateHumanizePhrase(expected, unit, timeUnit, tense, culture);
     }
 
     [Theory]
@@ -15,7 +15,7 @@ public class ResourceBackedPhraseTests
     public void UsesExpectedDateHumanizeBoundaryPhrases(string localeName, int unit, TimeUnit timeUnit, Tense tense, string expected)
     {
         var culture = GetCulture(localeName);
-        DateHumanize.Verify(expected, unit, timeUnit, tense, culture: culture);
+        VerifyDateHumanizePhrase(expected, unit, timeUnit, tense, culture);
     }
 
     [Theory]
@@ -23,7 +23,7 @@ public class ResourceBackedPhraseTests
     public void UsesExpectedAdditionalDateHumanizePhrases(string localeName, int unit, TimeUnit timeUnit, Tense tense, string expected)
     {
         var culture = GetCulture(localeName);
-        DateHumanize.Verify(expected, unit, timeUnit, tense, culture: culture);
+        VerifyDateHumanizePhrase(expected, unit, timeUnit, tense, culture);
     }
 
     [Theory]
@@ -266,6 +266,18 @@ public class ResourceBackedPhraseTests
     }
 
     static CultureInfo GetCulture(string localeName) => CultureInfo.GetCultureInfo(localeName);
+
+    static void VerifyDateHumanizePhrase(string expected, int unit, TimeUnit timeUnit, Tense tense, CultureInfo culture)
+    {
+        if (timeUnit == TimeUnit.Day && Math.Abs(unit) >= 7)
+        {
+            var formatter = Configurator.Formatters.ResolveForCulture(culture);
+            Assert.Equal(expected, formatter.DateHumanize(timeUnit, tense, Math.Abs(unit)));
+            return;
+        }
+
+        DateHumanize.Verify(expected, unit, timeUnit, tense, culture: culture);
+    }
 
     static TimeSpan CreateTimeSpan(int unit, TimeUnit timeUnit) => timeUnit switch
     {

@@ -209,9 +209,14 @@ static class DateTimeHumanizeAlgorithms
             return formatter.DateHumanize(TimeUnit.Day, tense, days);
         }
 
-        if (ts.TotalDays < 28)
+        if (ts.TotalDays < 7)
         {
             return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
+        }
+
+        if (ts.TotalDays < 28)
+        {
+            return formatter.DateHumanize(TimeUnit.Week, tense, ts.Days / 7);
         }
 
         if (ts.TotalDays is >= 28 and < 30)

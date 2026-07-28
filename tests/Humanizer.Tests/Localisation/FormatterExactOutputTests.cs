@@ -2,8 +2,7 @@ namespace Humanizer.Tests.Localisation;
 
 public class FormatterExactOutputTests
 {
-    static readonly DateTime LocalBase = new(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
-    static readonly DateTime UtcBase = new(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
+    static readonly int[] RelativeWeekDayCounts = [7, 14, 21, 27];
     static readonly int[] Pair = [1, 2];
     static readonly int[] Triple = [1, 2, 3];
     static readonly int[] Quadruple = [1, 2, 3, 4];
@@ -13,15 +12,28 @@ public class FormatterExactOutputTests
     public void UsesExpectedDateHumanizeDayPluralOutputs(string localeName, LocaleFormatterExactTheoryData.DateDayPluralExpectationRow expected)
     {
         var culture = GetCulture(localeName);
+        var formatter = Configurator.Formatters.ResolveForCulture(culture);
 
-        for (var index = 0; index < LocaleFormatterExactTheoryData.DatePluralDayCounts.Length; index++)
+        foreach (var dayCount in LocaleFormatterExactTheoryData.DatePluralDayCounts)
         {
-            var dayCount = LocaleFormatterExactTheoryData.DatePluralDayCounts[index];
+            Assert.Equal(expected.PastFor(dayCount), ToVisibleText(formatter.DateHumanize(TimeUnit.Day, Tense.Past, dayCount)));
+            Assert.Equal(expected.FutureFor(dayCount), ToVisibleText(formatter.DateHumanize(TimeUnit.Day, Tense.Future, dayCount)));
+        }
+    }
 
-            Assert.Equal(expected.PastFor(dayCount), ToVisibleText(LocalBase.AddDays(-dayCount).Humanize(false, LocalBase, culture)));
-            Assert.Equal(expected.PastFor(dayCount), ToVisibleText(UtcBase.AddDays(-dayCount).Humanize(true, UtcBase, culture)));
-            Assert.Equal(expected.FutureFor(dayCount), ToVisibleText(LocalBase.AddDays(dayCount).Humanize(false, LocalBase, culture)));
-            Assert.Equal(expected.FutureFor(dayCount), ToVisibleText(UtcBase.AddDays(dayCount).Humanize(true, UtcBase, culture)));
+    [Theory]
+    [MemberData(nameof(LocaleFormatterExactTheoryData.DateDayPluralCases), MemberType = typeof(LocaleFormatterExactTheoryData))]
+    public void UsesExpectedDateHumanizeWeekOutputs(string localeName, LocaleFormatterExactTheoryData.DateDayPluralExpectationRow _)
+    {
+        var culture = GetCulture(localeName);
+        var formatter = Configurator.Formatters.ResolveForCulture(culture);
+
+        foreach (var dayCount in RelativeWeekDayCounts)
+        {
+            var weekCount = dayCount / 7;
+
+            DateHumanize.Verify(formatter.DateHumanize(TimeUnit.Week, Tense.Past, weekCount), dayCount, TimeUnit.Day, Tense.Past, culture: culture);
+            DateHumanize.Verify(formatter.DateHumanize(TimeUnit.Week, Tense.Future, weekCount), dayCount, TimeUnit.Day, Tense.Future, culture: culture);
         }
     }
 
