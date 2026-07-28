@@ -7,13 +7,25 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 {
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
     static readonly Type TypeOfT = typeof(T);
-    static readonly (
-        T Zero,
-        FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized,
-        FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
-        FrozenDictionary<string, T> Dehumanized,
-        FrozenSet<T> Values,
-        bool IsBitFieldEnum) Info = CreateInfo();
+    static class DefaultInfo
+    {
+        public static readonly (
+            T Zero,
+            FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized,
+            FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
+            FrozenDictionary<string, T> Dehumanized,
+            FrozenSet<T> Values,
+            bool IsBitFieldEnum) Value = CreateInfo();
+    }
+
+    static class ExplicitInfo
+    {
+        public static readonly (
+            T Zero,
+            FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
+            FrozenSet<T> Values,
+            bool IsBitFieldEnum) Value = CreateExplicitInfo();
+    }
 
     private static (
         T Zero,
@@ -53,6 +65,24 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             isBitFieldEnum);
     }
 
+    static (
+        T Zero,
+        FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
+        FrozenSet<T> Values,
+        bool IsBitFieldEnum) CreateExplicitInfo()
+    {
+        var valuesArray = Enum.GetValues<T>();
+        var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
+        var sources = new Dictionary<T, (string EnumName, DisplayAttribute? Display)>(valuesArray.Length);
+        foreach (var value in valuesArray)
+        {
+            sources[value] = GetSources(value);
+        }
+
+        var isBitFieldEnum = TypeOfT.GetCustomAttribute<FlagsAttribute>() != null;
+        return (zero, sources.ToFrozenDictionary(), valuesArray.ToFrozenSet(), isBitFieldEnum);
+    }
+
     static void AddAliases(Dictionary<string, T> dehumanized, string caseName, T value)
     {
         var member = TypeOfT.GetField(caseName)!;
@@ -76,17 +106,19 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         }
     }
 
-    public static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenSet<T> Values) GetInfo() =>
-        (Info.Zero, Info.Humanized, Info.Values);
+    public static (T Zero, FrozenSet<T> Values) GetInfo(EnumHumanizeSource source) =>
+        source == EnumHumanizeSource.Default
+            ? (DefaultInfo.Value.Zero, DefaultInfo.Value.Values)
+            : (ExplicitInfo.Value.Zero, ExplicitInfo.Value.Values);
 
     public static (string Text, bool IsMetadata) GetHumanized(T input, EnumHumanizeSource source)
     {
         if (source == EnumHumanizeSource.Default)
         {
-            return Info.Humanized[input];
+            return DefaultInfo.Value.Humanized[input];
         }
 
-        var (enumName, display) = Info.Sources[input];
+        var (enumName, display) = ExplicitInfo.Value.Sources[input];
         var metadata = source switch
         {
             EnumHumanizeSource.EnumName => null,
@@ -100,11 +132,14 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     }
 
     public static FrozenDictionary<string, T> GetDehumanized() =>
-        Info.Dehumanized;
+        DefaultInfo.Value.Dehumanized;
 
-    public static bool TreatAsFlags(T input)
+    public static bool TreatAsFlags(T input, EnumHumanizeSource source)
     {
-        if (!Info.IsBitFieldEnum)
+        var isBitFieldEnum = source == EnumHumanizeSource.Default
+            ? DefaultInfo.Value.IsBitFieldEnum
+            : ExplicitInfo.Value.IsBitFieldEnum;
+        if (!isBitFieldEnum)
         {
             return false;
         }

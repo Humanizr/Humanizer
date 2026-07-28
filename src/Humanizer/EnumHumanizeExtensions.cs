@@ -138,8 +138,8 @@ public static class EnumHumanizeExtensions
             throw new ArgumentOutOfRangeException(nameof(source));
         }
 
-        var (zero, humanized, values) = EnumCache<T>.GetInfo();
-        if (EnumCache<T>.TreatAsFlags(input))
+        var (zero, values) = EnumCache<T>.GetInfo(source);
+        if (EnumCache<T>.TreatAsFlags(input, source))
         {
             if (casing is { } flagsCasing && !Enum.IsDefined(flagsCasing))
             {
@@ -153,9 +153,7 @@ public static class EnumHumanizeExtensions
                 if (value.CompareTo(zero) != 0 && input.HasFlag(value))
                 {
                     flagValues ??= new List<string>();
-                    var flag = source == EnumHumanizeSource.Default
-                        ? humanized[value]
-                        : EnumCache<T>.GetHumanized(value, source);
+                    var flag = EnumCache<T>.GetHumanized(value, source);
                     flagValues.Add(casing is { } flagCasing && !flag.IsMetadata ? flag.Text.ApplyCase(flagCasing) : flag.Text);
                 }
             }
@@ -163,9 +161,7 @@ public static class EnumHumanizeExtensions
             return flagValues?.Humanize() ?? string.Empty;
         }
 
-        var humanizedEnum = source == EnumHumanizeSource.Default
-            ? humanized[input]
-            : EnumCache<T>.GetHumanized(input, source);
+        var humanizedEnum = EnumCache<T>.GetHumanized(input, source);
         if (casing is not { } enumCasing)
         {
             return humanizedEnum.Text;

@@ -142,6 +142,15 @@ public class EnumHumanizeTests
                 EnumHumanizeSource.DisplayShortName));
 
     [Fact]
+    public void SelectedSourceDoesNotEvaluateUnrelatedDisplayMetadata()
+    {
+        var value = EnumHumanizeSourcesWithInvalidMetadataUnderTest.RawEnumName;
+
+        Assert.Equal("Raw enum name", value.Humanize(LetterCasing.Sentence, EnumHumanizeSource.EnumName));
+        Assert.Equal("Localized display name", value.Humanize(LetterCasing.Sentence, EnumHumanizeSource.DisplayName));
+    }
+
+    [Fact]
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void RuntimeEnumCanSelectHumanizeSource()
@@ -416,6 +425,15 @@ public class EnumHumanizeTests
         public static string Name => "Localized display name";
         public static string Description => "Localized display description";
         public static string ShortName => "Localized short name";
+    }
+
+    enum EnumHumanizeSourcesWithInvalidMetadataUnderTest
+    {
+        [System.ComponentModel.DataAnnotations.Display(
+            Name = nameof(EnumHumanizeSourceResources.Name),
+            Description = "MissingDescription",
+            ResourceType = typeof(EnumHumanizeSourceResources))]
+        RawEnumName
     }
 
     enum EnumShortNameAliasUnderTest
