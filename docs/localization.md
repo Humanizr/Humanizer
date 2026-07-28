@@ -1,5 +1,10 @@
 # Localization
 
+> **Legacy documentation snapshot:** this page remains available for the
+> current Jekyll site until the documentation cutover. The maintained source is
+> the [Docusaurus languages documentation](https://github.com/Humanizr/Humanizer/blob/main/website/docs/languages/index.mdx).
+> Do not make new documentation changes in this legacy file.
+
 Humanizer supports many languages and cultures across number, date, time, ordinal, formatter, collection-humanization, clock-notation, and heading surfaces.
 
 Most consumers only need to set a culture. Contributors now author locale-specific generated behavior in one YAML file per locale, and shared runtime kernels are used whenever the behavior is structurally reusable.

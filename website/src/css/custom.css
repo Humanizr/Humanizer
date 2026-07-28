@@ -185,6 +185,50 @@ input {
   white-space: nowrap;
 }
 
+.theme-doc-markdown .languageCoverageRegion {
+  border: 1px solid var(--humanizer-rule);
+  max-height: min(70vh, 42rem);
+  max-width: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.theme-doc-markdown .languageCoverageRegion table {
+  border-collapse: separate;
+  border-spacing: 0;
+  display: table;
+  margin: 0;
+  min-width: 100%;
+  overflow: visible;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.languageCoverageRegion caption {
+  color: var(--humanizer-ink-muted);
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.languageCoverageRegion thead th {
+  background: var(--humanizer-paper-raised);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.languageCoverageRegion :is(th, td):first-child {
+  background: var(--humanizer-paper-raised);
+  left: 0;
+  position: sticky;
+  z-index: 1;
+}
+
+.languageCoverageRegion thead th:first-child {
+  z-index: 3;
+}
+
 .theme-doc-markdown :is(code, a) {
   overflow-wrap: anywhere;
 }

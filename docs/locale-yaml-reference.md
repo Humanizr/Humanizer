@@ -1,6 +1,11 @@
 # Locale YAML Reference
 
-This document is the authoritative authoring reference for `src/Humanizer/Locales/*.yml`.
+> **Legacy documentation snapshot:** this page remains available for the
+> current Jekyll site until the documentation cutover. The maintained source is
+> the [Locale YAML reference](https://github.com/Humanizr/Humanizer/blob/main/website/docs/contributing/locale-yaml-reference.mdx).
+> Do not make new documentation changes in this legacy file.
+
+This frozen document describes the authoring contract for `src/Humanizer/Locales/*.yml`.
 
 If you are adding or changing locale-owned generated behavior, read this document together with [Locale YAML How-To](./locale-yaml-how-to.md) and [Adding Or Updating A Locale](./adding-a-locale.md).
 

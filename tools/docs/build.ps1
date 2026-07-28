@@ -6,6 +6,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+& (Join-Path $PSScriptRoot "generate-language-coverage.ps1") -Check
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 if (-not $ManifestPath) {
     $ManifestPath = Join-Path $repoRoot "website/humanizer-versions.json"

@@ -1,0 +1,196 @@
+---
+id: adding-or-updating-a-locale
+title: Add or update a locale
+sidebar_position: 3
+diataxis: tutorial
+persona: language contributor
+example: illustrative
+---
+
+# Add or update a locale
+
+## Orientation
+
+This tutorial takes a neutral locale from a reported gap to a reviewable
+change. The sample language is fictional so that the workflow is complete
+without presenting invented translations as real ones.
+
+A locale is complete only when every shipped localized surface has intentional
+locale-owned or same-language inherited behavior with concrete proof. One YAML
+file, one successful lookup, or one non-empty result is not completion.
+
+Before editing:
+
+1. Check out the branch that owns the affected Humanizer version.
+2. Install the SDK selected by `global.json`.
+3. Reproduce the behavior with the exact culture, API call, target framework,
+   and platform from the report.
+4. Create the local [preflight and parity map](./parity-and-preflight.mdx).
+5. Obtain native-speaker input for new terms and representative composed
+   output.
+
+The files used in this tutorial are:
+
+- `src/Humanizer/Locales/<locale>.yml` for locale-owned data
+- `tests/Humanizer.Tests/Localisation/<locale>` for runtime behavior
+- `tests/Humanizer.SourceGenerators.Tests` when generated shape or wiring
+  changes
+- `artifacts/YYYY-MM-DD-<locale>-parity-map.md` for local, gitignored evidence
+
+## Example
+
+Suppose neutral `xy` is missing and the parity map shows that its number-word
+and parsing rules fit existing structural engines.
+
+### 1. Create the locale source
+
+Create `src/Humanizer/Locales/xy.yml`:
+
+```yaml
+locale: 'xy'
+
+surfaces:
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: '<native minus word>'
+      andWord: '<native conjunction>'
+      unitsMap:
+        - '<native zero>'
+        - '<native one>'
+        - '<native two>'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        '<native one>': 1
+        '<native two>': 2
+```
+
+Replace every placeholder with native-reviewed text. Continue through the
+parity map in this order:
+
+1. `list`
+2. `formatter`
+3. each `phrases` family
+4. `number.words`
+5. `number.parse`
+6. `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`
+7. `clock`
+8. `compass`
+9. optional `calendar` and `number.formatting` overrides only when a probe
+   proves that platform data is wrong or inconsistent
+
+Omit a block that truly has no locale-owned behavior. Do not add an empty
+mapping as an inheritance or default sentinel.
+
+### 2. Add exact-output runtime proof
+
+Put culture-specific tests beside the closest existing tests under
+`tests/Humanizer.Tests/Localisation/xy`. Use `UseCulture` when the API reads
+ambient culture, and assert the complete natural output:
+
+```csharp
+[Theory]
+[UseCulture("xy")]
+[InlineData(1, "<native one>")]
+[InlineData(2, "<native two>")]
+public void ToWords_UsesXyCardinalRules(int value, string expected) =>
+    Assert.Equal(expected, value.ToWords());
+```
+
+Add separate examples for grammar-sensitive forms, boundary values, negatives,
+and parsing. A render-side `number.words` test does not prove
+`number.parse`, and a parent lookup does not prove natural regional output.
+
+### 3. Prove generated wiring
+
+If the change adds a locale, changes inheritance, adds schema, or changes an
+engine contract, update the closest tests in
+`tests/Humanizer.SourceGenerators.Tests`. Prove the generated registration and
+profile shape, not only that generation completed.
+
+### 4. Close every parity row
+
+For each canonical surface, record:
+
+- the terminal owner and full inheritance path
+- the exact proving assertion
+- the verification command and result
+- native-speaker review status where wording changed
+
+Record the before/after delta and drive both `unknown` and the effective gap
+set to zero. If either remains non-empty, report `parity not complete`.
+
+### 5. Validate and regenerate
+
+Run the [locale validation matrix](./validation-and-testing.mdx), regenerate
+the supported-culture data, and verify it is not stale. Review the generated
+diff together with the YAML change.
+
+### Add a regional variant
+
+A no-delta variant inherits from its same-language parent:
+
+```yaml
+locale: 'ur-PK'
+variantOf: 'ur'
+```
+
+A variant with a real difference adds only that difference:
+
+```yaml
+locale: 'en-US'
+variantOf: 'en'
+
+surfaces:
+  ordinal:
+    date:
+      engine: 'pattern'
+      pattern: 'MMMM {day}, yyyy'
+      dayMode: 'Ordinal'
+```
+
+Do not copy the rest of the parent. Add locale-specific proving assertions for
+inherited behavior and record the ownership chain to its terminal owner.
+
+### Correct an existing locale
+
+Reproduce the reported output first, locate the canonical surface that owns
+it, and make the smallest change at that owner. If several variants inherit
+the block, test the affected variants before changing the neutral parent.
+Update native-reviewed terms, exact-output proof, the parity delta, and
+generated coverage in the same change.
+
+## Result
+
+The finished change has one locale YAML source of truth, an empty effective
+gap set, native-reviewed wording where needed, exact-output and sweep proof,
+current generated coverage, and a warning-free package build. The pull request
+can name the exact ownership paths and assertions that establish parity.
+
+## Pitfall
+
+Generic fallback, an inherited registration, non-empty output, or a compiling
+YAML file does not prove parity. Keep `formatter` and `phrases` separate, and
+account for both `number.words` and `number.parse`.
+
+If existing engines cannot express the language, stop before adding flags or
+imperative hooks. Follow [Choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx)
+and add a genuinely reusable structural kernel only when the rule family
+requires it.
+
+## Version notes
+
+This generated locale pipeline is the `main/preview` contributor model.
+Published versions through `3.0.10` use version-specific package and source
+shapes. Do not assume a current YAML field or engine exists on a historical
+branch.
+
+## Related guides and API
+
+- [Locale YAML how-to](./locale-yaml-how-to.mdx)
+- [Choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx)
+- [Locale YAML reference](./locale-yaml-reference.mdx)
+- [Validation and testing](./validation-and-testing.mdx)
+- [Selected-version API reference](../api/index.md)

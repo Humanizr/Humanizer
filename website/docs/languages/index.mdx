@@ -1,0 +1,66 @@
+---
+id: languages
+title: Languages and cultures
+sidebar_position: 1
+diataxis: explanation
+persona: application developer
+example: illustrative
+---
+
+# Languages and cultures
+
+## Orientation
+
+Humanizer localizes behavior by culture, not by translating one final string.
+Choose a culture for the operation, then use the capability page to confirm
+which locale data is present in the selected documentation version.
+
+The package and the culture are separate choices. Published releases through
+`3.0.10` use the `Humanizer` metapackage to bring in `Humanizer.Core` and its
+locale packages. The current `main/preview` package is consolidated: one
+`Humanizer` reference contains the runtime, generated locale data, and
+analyzers. Installing a culture-specific package does not select that culture,
+and selecting a culture does not install a missing historical package.
+
+## Example
+
+This complete example selects French explicitly:
+
+```csharp
+using System.Globalization;
+using Humanizer;
+
+var french = CultureInfo.GetCultureInfo("fr-FR");
+Console.WriteLine(42.ToWords(french));
+```
+
+Use [culture selection](./using-cultures.mdx) for per-call and ambient-culture
+patterns. Use [supported cultures and capabilities](./supported-cultures.mdx)
+for the generated `main/preview` inventory.
+
+Found a wrong translation, inflection, parser result, or platform-specific
+format? Follow the [language correction guide](../contributing/report-language-issue.mdx)
+or [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
+
+## Pitfall
+
+Do not infer capability coverage from a package name, a neutral-culture
+fallback, or one successful call. A regional culture can resolve locale data
+from a parent such as `fr`, but that resolution does not prove that every
+phrase is natural for every region. Report incorrect inherited behavior just
+as you would incorrect directly authored behavior.
+
+## Version notes
+
+The generated coverage page describes checked-in locale YAML for
+`main/preview`; it is not a claim about a historical package. Stable snapshots
+use their own package and documentation evidence. Package consolidation is a
+current-preview behavior, while published versions through `3.0.10` retain the
+metapackage and locale-package model.
+
+## Related guides and API
+
+- [Choose a culture](./using-cultures.mdx)
+- [Grammar and platform formatting](./grammar-and-platform-formatting.mdx)
+- [Package selection](../start/package-selection.md)
+- [Selected-version API reference](../api/index.md)

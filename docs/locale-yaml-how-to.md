@@ -1,5 +1,10 @@
 # Locale YAML How-To
 
+> **Legacy documentation snapshot:** this page remains available for the
+> current Jekyll site until the documentation cutover. The maintained source is
+> [Locale YAML how-to](https://github.com/Humanizr/Humanizer/blob/main/website/docs/contributing/locale-yaml-how-to.mdx).
+> Do not make new documentation changes in this legacy file.
+
 This is the practical authoring guide for `src/Humanizer/Locales/*.yml`.
 
 Read this first when you need to add a locale, change a locale, or migrate a locale off a residual runtime leaf. Together with [Adding Or Updating A Locale](./adding-a-locale.md), this document is intended to fully describe the allowed locale shape and authoring workflow without requiring contributors to inspect generator source code just to discover what belongs in a locale file.

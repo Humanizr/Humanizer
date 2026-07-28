@@ -20,6 +20,41 @@ function Get-DirectoryDigest {
     )
 }
 
+$fingerprintTempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-fingerprint-$([guid]::NewGuid().ToString('N'))"
+New-Item -ItemType Directory -Path $fingerprintTempRoot | Out-Null
+try {
+    $staleReferencePath = Join-Path $fingerprintTempRoot "locale-yaml-reference.mdx"
+    $referenceText = Get-Content -Raw (
+        Join-Path $repoRoot "website/docs/contributing/locale-yaml-reference.mdx"
+    )
+    $staleReferenceText = [regex]::Replace(
+        $referenceText,
+        "(?m)^(src/Humanizer\.SourceGenerators/Common/CanonicalLocaleAuthoring\.cs )[0-9a-f]{64}$",
+        ('${1}' + ('0' * 64))
+    )
+    [System.IO.File]::WriteAllText(
+        $staleReferencePath,
+        $staleReferenceText,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    $fingerprintOutput = & pwsh -NoProfile -File (
+        Join-Path $PSScriptRoot "generate-language-coverage.ps1"
+    ) `
+        -Check `
+        -ReferencePath $staleReferencePath `
+        -ProjectPath (Join-Path $fingerprintTempRoot "must-not-build.csproj") 2>&1 |
+        Out-String
+    if ($LASTEXITCODE -eq 0) {
+        throw "Stale locale reference fingerprint unexpectedly passed."
+    }
+    if ($fingerprintOutput -notmatch "CanonicalLocaleAuthoring\.cs" -or
+        $fingerprintOutput -notmatch "Re-review") {
+        throw "Stale locale reference fingerprint did not fail with the required review guidance."
+    }
+} finally {
+    Remove-Item $fingerprintTempRoot -Recurse -Force
+}
+
 & (Join-Path $PSScriptRoot "verify-manifest.ps1")
 & (Join-Path $PSScriptRoot "build.ps1") -Version "3.0.10" -ValidateOnly
 

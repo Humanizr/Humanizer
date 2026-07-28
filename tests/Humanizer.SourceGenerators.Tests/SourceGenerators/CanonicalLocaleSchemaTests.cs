@@ -900,6 +900,69 @@ surfaces:
         Assert.Equal(12, hijriSeq.Items.Length);
     }
 
+    [Fact]
+    public void LocaleCoverageUsesCanonicalResolutionAndImmediateParentProvenance()
+    {
+        var coverage = HumanizerSourceGenerator.LocaleCoverageInput.Create(CreateCheckedInLocaleCatalog());
+        var nynorsk = coverage.Locales.Single(static locale => locale.Locale == "nn");
+        var urduIndia = coverage.Locales.Single(static locale => locale.Locale == "ur-IN");
+
+        Assert.Equal("via", nynorsk.Capabilities["list"].Kind);
+        Assert.Equal("nb", nynorsk.Capabilities["list"].Via);
+        Assert.Equal("own", nynorsk.Capabilities["clock"].Kind);
+        Assert.Null(nynorsk.Capabilities["clock"].Via);
+        Assert.Equal("via", urduIndia.Capabilities["calendarOverride"].Kind);
+        Assert.Equal("ur", urduIndia.Capabilities["calendarOverride"].Via);
+        Assert.All(
+            coverage.Locales,
+            locale => Assert.All(
+                coverage.Capabilities.Where(static capability => !capability.Optional),
+                capability => Assert.NotEqual("missing", locale.Capabilities[capability.Key].Kind)));
+    }
+
+    [Fact]
+    public void LocaleCoverageRejectsCanonicalCatalogDiagnostics()
+    {
+        var catalog = CreateCatalog(
+            ("zz-a", """
+locale: 'zz-a'
+variantOf: 'zz-b'
+surfaces: {}
+"""),
+            ("zz-b", """
+locale: 'zz-b'
+variantOf: 'zz-a'
+surfaces: {}
+"""));
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.LocaleCoverageInput.Create(catalog));
+
+        Assert.Contains("inheritance cycle", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void LocaleCoverageTreatsHijriOnlyCalendarAsAnOwnedOverride()
+    {
+        var englishPath = FindCheckedInLocaleFiles()
+            .Single(static path => Path.GetFileName(path) == "en.yml");
+        var catalog = CreateCatalog(
+            ("en", File.ReadAllText(englishPath)),
+            ("en-HI", $"""
+locale: 'en-HI'
+variantOf: 'en'
+surfaces:
+  calendar:
+    hijriMonths:
+{MonthItems(TwelveMonthValues("Hijri"))}
+"""));
+
+        var coverage = HumanizerSourceGenerator.LocaleCoverageInput.Create(catalog);
+        var hijriVariant = coverage.Locales.Single(static locale => locale.Locale == "en-HI");
+
+        Assert.Equal("own", hijriVariant.Capabilities["calendarOverride"].Kind);
+    }
+
     [Theory]
     [InlineData("words", "number.words")]
     [InlineData("parse", "number.parse")]

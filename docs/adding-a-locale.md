@@ -1,5 +1,10 @@
 # Adding Or Updating A Locale
 
+> **Legacy documentation snapshot:** this page remains available for the
+> current Jekyll site until the documentation cutover. The maintained source is
+> [Add or update a locale](https://github.com/Humanizr/Humanizer/blob/main/website/docs/contributing/adding-or-updating-a-locale.mdx).
+> Do not make new documentation changes in this legacy file.
+
 This document is the contributor guide for Humanizer's localization pipeline.
 
 Together with [Locale YAML How-To](./locale-yaml-how-to.md), this document is intended to be sufficient for contributors to understand what a locale file may contain, how locale data flows through the generator, and what must be verified before locale work is complete. Contributors should not need to inspect C# source files just to discover the allowed locale shape or the required parity workflow.

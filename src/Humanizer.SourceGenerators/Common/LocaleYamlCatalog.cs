@@ -250,6 +250,8 @@ public sealed partial class HumanizerSourceGenerator
 
             var resolved = new ResolvedLocaleDefinition(
                 localeCode,
+                locale.Inherits,
+                locale.Features.Keys.ToImmutableHashSet(StringComparer.Ordinal),
                 resolvedFeatureMap,
                 grammar,
                 headings,
@@ -710,6 +712,8 @@ public sealed partial class HumanizerSourceGenerator
 
     internal sealed class ResolvedLocaleDefinition(
         string localeCode,
+        string? variantOf,
+        ImmutableHashSet<string> authoredFeatureNames,
         ImmutableDictionary<string, SimpleYamlValue> resolvedFeatures,
         SimpleYamlMapping? grammar,
         HeadingSet? headings,
@@ -726,6 +730,8 @@ public sealed partial class HumanizerSourceGenerator
         LocaleFeature? wordsToNumber)
     {
         public string LocaleCode { get; } = localeCode;
+        public string? VariantOf { get; } = variantOf;
+        public ImmutableHashSet<string> AuthoredFeatureNames { get; } = authoredFeatureNames;
         public ImmutableDictionary<string, SimpleYamlValue> ResolvedFeatures { get; } = resolvedFeatures;
         public SimpleYamlMapping? Grammar { get; } = grammar;
         public HeadingSet? Headings { get; } = headings;
@@ -742,7 +748,24 @@ public sealed partial class HumanizerSourceGenerator
         public LocaleFeature? WordsToNumber { get; } = wordsToNumber;
 
         public static ResolvedLocaleDefinition Empty(string localeCode) =>
-            new(localeCode, ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal), null, null, null, null, null, null, null, null, null, null, null, null, null);
+            new(
+                localeCode,
+                null,
+                ImmutableHashSet<string>.Empty.WithComparer(StringComparer.Ordinal),
+                ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 
     internal sealed class LocaleFeature(

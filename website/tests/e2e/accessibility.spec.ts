@@ -26,4 +26,35 @@ for (const colorScheme of ['light', 'dark'] as const) {
       expect(violations).toEqual([]);
     });
   }
+
+  for (const viewport of [
+    {name: 'desktop', width: 1280, height: 800},
+    {name: '320px', width: 320, height: 720},
+  ]) {
+    test(`supported cultures table is accessible at ${viewport.name} in ${colorScheme} mode`, async ({
+      page,
+    }) => {
+      await page.setViewportSize(viewport);
+      await page.emulateMedia({colorScheme});
+      await page.goto('/docs/next/languages/supported-cultures/');
+
+      const region = page.getByRole('region', {
+        name: 'Current locale capability coverage',
+      });
+      await expect(region).toBeVisible();
+      await expect(region).toHaveAttribute('tabindex', '0');
+      await expect(
+        region.getByText('Current locale capability coverage', {exact: true}),
+      ).toBeVisible();
+      await region.focus();
+      await expect(region).toBeFocused();
+
+      const results = await new AxeBuilder({page}).analyze();
+      const violations = results.violations.filter(({impact}) =>
+        ['serious', 'critical'].includes(impact ?? ''),
+      );
+
+      expect(violations).toEqual([]);
+    });
+  }
 }

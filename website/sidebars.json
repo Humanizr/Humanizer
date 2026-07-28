@@ -27,6 +27,17 @@
     },
     {
       "type": "category",
+      "label": "Languages",
+      "items": [
+        "languages/languages",
+        "languages/using-cultures",
+        "languages/grammar-and-platform-formatting",
+        "languages/custom-localization",
+        "languages/supported-cultures"
+      ]
+    },
+    {
+      "type": "category",
       "label": "Concepts",
       "items": [
         "concepts/culture-and-configuration"
@@ -47,6 +58,35 @@
       "label": "Analyzer",
       "items": [
         "analyzer/analyzer"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Contributing",
+      "items": [
+        "contributing/contributing",
+        "contributing/report-language-issue",
+        "contributing/adding-or-updating-a-locale",
+        "contributing/locale-yaml-how-to",
+        "contributing/choosing-or-extending-a-locale-engine",
+        "contributing/platform-globalization-overrides",
+        {
+          "type": "category",
+          "label": "Locale YAML reference",
+          "link": {
+            "type": "doc",
+            "id": "contributing/locale-yaml-reference"
+          },
+          "items": [
+            "contributing/locale-yaml-schema-reference",
+            "contributing/locale-yaml-surface-reference",
+            "contributing/words-to-number-engine-reference",
+            "contributing/number-to-words-engine-reference"
+          ]
+        },
+        "contributing/parity-and-preflight",
+        "contributing/validation-and-testing",
+        "contributing/documentation-contributions"
       ]
     },
     {

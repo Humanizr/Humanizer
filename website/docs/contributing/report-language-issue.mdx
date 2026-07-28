@@ -1,0 +1,60 @@
+---
+id: report-language-issue
+title: Report or correct a language issue
+sidebar_position: 2
+diataxis: how-to
+persona: language contributor
+example: illustrative
+---
+
+# Report or correct a language issue
+
+## Orientation
+
+Capture the culture, Humanizer version, exact API call, expected natural
+output, actual output, and platform/target framework. Include grammatical
+context: gender, case, count, tense, or the noun being modified can change the
+correct answer.
+
+[Open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
+
+## Example
+
+Paste a minimal program or test-shaped snippet:
+
+```csharp
+using System.Globalization;
+using Humanizer;
+
+var culture = CultureInfo.GetCultureInfo("fr-CA");
+Console.WriteLine(2.ToWords(culture));
+```
+
+Then state what a native speaker expects in that exact context. If the issue
+appears only on one platform, include both outputs and whether the target uses
+ICU or Windows NLS.
+
+## Pitfall
+
+Do not report only “French is wrong” or assume the nearest English phrase has
+the same grammar. Also do not infer a fix from the generated coverage table:
+`Via fr` identifies an ownership path, not whether neutral French is natural
+for Canada.
+
+For a pull request, update the owning surface once and add exact-output tests.
+Follow the full [locale workflow](./adding-or-updating-a-locale.mdx) when the
+change affects parity or inheritance.
+
+## Version notes
+
+Locale output and package IDs are versioned. The generated coverage table is
+for `main/preview`; it is not evidence for `3.0.10` or an older line. Reproduce
+against the reported version before deciding whether the correction belongs
+on the current branch or in historical documentation.
+
+## Related guides and API
+
+- [Add or update a locale](./adding-or-updating-a-locale.mdx)
+- [Parity and preflight](./parity-and-preflight.mdx)
+- [Supported cultures and capabilities](../languages/supported-cultures.mdx)
+- [Selected-version API reference](../api/index.md)

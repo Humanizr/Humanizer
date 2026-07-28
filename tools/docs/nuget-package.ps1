@@ -92,7 +92,8 @@ function Assert-DocsNuGetPackage {
 function Get-DocsNuGetPackage {
     param(
         [Parameter(Mandatory = $true)]$Entry,
-        [Parameter(Mandatory = $true)][string]$RepoRoot
+        [Parameter(Mandatory = $true)][string]$RepoRoot,
+        [string]$PackageId
     )
 
     if ($Entry.source.kind -ne "nuget") {
@@ -100,11 +101,15 @@ function Get-DocsNuGetPackage {
     }
 
     $packageVersion = $Entry.source.packageVersion
-    if (-not $packageVersion -or -not $Entry.apiPackage) {
+    if (-not $packageVersion -or (-not $PackageId -and -not $Entry.apiPackage)) {
         throw "Version $($Entry.version) is missing NuGet package metadata."
     }
 
-    $packageId = $Entry.apiPackage.ToLowerInvariant()
+    $packageId = if ($PackageId) {
+        $PackageId.ToLowerInvariant()
+    } else {
+        $Entry.apiPackage.ToLowerInvariant()
+    }
     $cacheRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-nuget"
     $packageRoot = Join-Path $cacheRoot "$packageId/$packageVersion"
     $packagePath = Join-Path $packageRoot "$packageId.$packageVersion.nupkg"

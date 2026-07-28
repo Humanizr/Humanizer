@@ -1,0 +1,148 @@
+---
+id: locale-yaml-reference
+title: Locale YAML reference
+sidebar_position: 9
+diataxis: reference
+persona: language contributor
+example: illustrative
+---
+
+# Locale YAML reference
+
+## Orientation
+
+This is the index for the canonical `main/preview` authoring contract under
+`src/Humanizer/Locales/*.yml`. Use the smallest reference that answers the
+question:
+
+- [File schema, inheritance, and lexical tables](./locale-yaml-schema-reference.mdx)
+- [Surface fields and shared strategy values](./locale-yaml-surface-reference.mdx)
+- [Words-to-number engines](./words-to-number-engine-reference.mdx)
+- [Number-to-words engines](./number-to-words-engine-reference.mdx)
+
+Together with [Locale YAML how-to](./locale-yaml-how-to.mdx) and
+[Add or update a locale](./adding-or-updating-a-locale.mdx), these references
+describe the checked-in locale contract without requiring contributors to
+reverse-engineer generator source.
+
+## Example
+
+A regional variant declares its parent and overrides only real differences:
+
+```yaml
+locale: 'en-US'
+variantOf: 'en'
+
+surfaces:
+  list:
+    engine: 'oxford'
+```
+
+Omitted surfaces inherit from `en`. A parity claim still needs a recorded
+ownership chain and proving assertions for inherited surfaces.
+
+## Generator Pipeline Touchpoints
+
+These are the main files that turn locale YAML into runtime behavior:
+
+1. `src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs`
+   - reads YAML
+   - resolves locale inheritance
+   - merges child mappings with parent mappings
+   - normalizes author-facing references such as `self`
+2. `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`
+   - defines the typed generator-side structural contracts for shared engines
+3. `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/*.cs`
+   - emit typed profile catalogs for the supported surfaces
+4. `src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs`
+   - emits the locale-to-implementation registry wiring
+5. `src/Humanizer/Localisation/*`
+   - shared runtime kernels
+
+<!-- humanizer-locale-reference-fingerprint:v1
+src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs 9049b9930bf4766e8ce3698cc4174565190d5be2478226b62aca71749e9b69fa
+src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs 0540d686feaeb3f053fb27fd0eb0e2a88e887b79a6f6dc68c021adfe0f2de877
+src/Humanizer.SourceGenerators/Common/EngineContractModels.cs ca4bd085df761a716b5be707bae8d69a785c385795aeef6fd593c2201befde31
+src/Humanizer.SourceGenerators/Common/EngineContractUtilities.cs c65c01becf23ad9c52de269d2c98b8ee1694ad76352f82cfc828abd4dd40542d
+src/Humanizer.SourceGenerators/Common/GenerationHelpers.cs d02a83d46f834bfb43af8b1a066b0b436ba1a3eb13fe7111526ebd1640cfc24d
+src/Humanizer.SourceGenerators/Common/LocalePhraseNormalization.cs 49374a99a0055edf066a631f5f6649663f3684fe8769b4ec53a341cfd3465823
+src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs 8b9986b6f5f4f4bb92f982a6f34e8eb18a8e1ffe8e2d00c3e0826fb826a0cd1c
+src/Humanizer.SourceGenerators/Common/ProfileDefinitions.cs 1c16b4d79f8a476591b830a264a3deb1633d565adeea25fb6e8565be3773c35d
+src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs 84a4bf1e94705ed85d5375268381478f44b54142f9ad2827054fa7c2f7b9fc19
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/FormatterProfileCatalogInput.cs 9d7a5b20a39c5fef56d3e517076b9c59ea61fed766f04c102d574190f5b93d94
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/NumberToWordsEngineContractFactory.cs 2d408847bd78e3526b52c300d2bb771a33b34815e1bb331de4ccec16faaac789
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalDateProfileCatalogInput.cs 6681d60bb2b4fd6c5f13bcdb74716daed1c8f9007afe0fd5c0288b4a8a5851ba
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalizerProfileCatalogInput.cs 9674c51fb84f48aff3371df9ac87fa32cd30b40b007b3cdb3650b52ef049f846
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/TimeOnlyToClockNotationEngineContractFactory.cs 86b133bf91e44213ea0e1614ad30222b825f3605e17e7a12ae8183fd52c06a65
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/WordsToNumberEngineContractFactory.cs d31cb1c47152e7e447ea67652cbc8593c1f9809d94971ff306a10dd1ba005aad
+src/Humanizer.SourceGenerators/Generators/TokenMapWordsToNumberInput.cs f65699364ac7441e0cbf694bde47c063c55ec5b1a87c9176caac4192626de554
+src/Humanizer/Bytes/ByteSize.cs 2df884d4bcec5a5970ef01c11330a8b28e3f19bf92a6616a7e9737bd171ef798
+src/Humanizer/Configuration/LocaliserRegistry.cs de5e08201213c7e0741d6e10675731836ecd74b155669bd2b2c9d523619cd1d0
+src/Humanizer/GrammaticalGender.cs e223479f2d30f74e6278cff26faf46e7babc4a55efb8692e10d638bb2f50a6be
+src/Humanizer/Localisation/CollectionFormatters/CliticCollectionFormatter.cs 859bdb39ea8a1cb00accefb26b0636b9042329ad050f12a663b037242e13f1f4
+src/Humanizer/Localisation/CollectionFormatters/DefaultCollectionFormatter.cs 9c63f47db0da5cdef9e28eaca5ae4c9c7d159a61adcedfadfa22d6b2021da1ae
+src/Humanizer/Localisation/CollectionFormatters/DelimitedCollectionFormatter.cs 86baac8c6f6e7e7b8b7584f9d6d828865111cfdfb85acf02e041ac92d29c5535
+src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDateCalendarMode.cs 1d614b07b825aa9a863aa18c50341ed3afcaaa2fe61a03422e695c61e3f2edf7
+src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs 396227e41763ab813facef6b48624005f304e30dab17eafb404f299200b21739
+src/Humanizer/Localisation/EifelerRule.cs 8f69199eb9ee94de698cb20bab2e56a02cceaf9307c6ec260e248eef7bd6ed85
+src/Humanizer/Localisation/Formatters/ProfiledFormatter.cs edc50fa9cc28c582586f2ccb18a78fbb339aaa579952512378f07213b02fe39c
+src/Humanizer/Localisation/NumberToWords/BillionStrategyNumberToWordsConverter.cs 7e676c3db150b31bec328e031d060f2b8ec5879961dcfe64a0ec640d62b9786f
+src/Humanizer/Localisation/NumberToWords/ConjunctionalScaleNumberToWordsConverter.cs e09e1a004fd09c2a2232c1adb59dbe66d0283f7564912e76f10febd2ae2c9501
+src/Humanizer/Localisation/NumberToWords/HarmonyOrdinalNumberToWordsConverter.cs 9db61e3e1483e2994d42e12229da51054916f720cabd06d95cf60f093b892d06
+src/Humanizer/Localisation/NumberToWords/InvertedTensNumberToWordsConverter.cs ee4130466811a0382bb8ea098f19f80fedff5e7c47f6e15f03bf792cba20dc2b
+src/Humanizer/Localisation/NumberToWords/JoinedScaleNumberToWordsConverter.cs 58fac05b40a8e97d57d8e99f9fe518d37a1f60667c3e9279096216917d594658
+src/Humanizer/Localisation/NumberToWords/PluralizedScaleNumberToWordsConverter.cs e32f1a543cd6c7b5a6a7218dfc72a5e53b5b5cba05c6a3e72e25ce2f77d53bb1
+src/Humanizer/Localisation/NumberToWords/ScaleStrategyNumberToWordsConverter.cs 0145c20f3740965e1c99ac9afbd65cdc4b03bd5899bd5fe54db91bf20e124f10
+src/Humanizer/Localisation/NumberToWords/SouthSlavicCardinalNumberToWordsConverter.cs 1cc53bf9c848c14eb7f0375f5ba8770ca3d1dcf36c3711e158d7fcc281a02763
+src/Humanizer/Localisation/NumberToWords/UnitLeadingCompoundNumberToWordsConverter.cs 51fc982d487726af4aefe4b8b6f046af7f6ff4683f27681732c0cbd26fb0d467
+src/Humanizer/Localisation/NumberToWords/VariantDecadeNumberToWordsConverter.cs e4d46f52ae746184a922490af5988ff915a6107102ad39adec98d2dc79f7807b
+src/Humanizer/Localisation/Ordinalizers/TemplateOrdinalizer.cs 6fd3e05bb32c61e112dcabab00f6393729af2dffc82384c52fd337b444acef5f
+src/Humanizer/Localisation/Ordinalizers/WordFormTemplateOrdinalizer.cs b3aba0d5f2a570975c668e9b9472449c4f8b04fdb0d18f85b9947bc1133add11
+src/Humanizer/Localisation/TimeToClockNotation/PhraseClockNotationConverter.cs 8a8739a48786166d011facf946339c1fc405f6aab9450a3148c418d50a08b64c
+src/Humanizer/Localisation/WordsToNumber/TokenMapWordsToNumberConverter.cs 5f87a73b9150c19cf57991f32153341c243d916407acbc7d80a68d7de4608798
+src/Humanizer/Localisation/WordsToNumber/TokenMapWordsToNumberOrdinalMapBuilder.cs 3b4f4f6052a1d0cae9c6e20eaaf36f3e6ea6c5fd98e7083100c9c94dcf31feb9
+src/Humanizer/MetricNumeralExtensions.cs 6beee26f5c08172fbf7ea9db372f9828f8710211d5200ec7b79907fa3422fb7c
+src/Humanizer/OrdinalizeExtensions.cs 6f82310ea185713f42d7a2f98f05d7f78d7dedd894b8af87ccf405ba637706dc
+-->
+
+## Regional Variant Checklist
+
+Before creating a new regional variant file:
+
+1. Do not use plain culture fallback as parity proof for a shipped locale.
+2. If the variant has no locale-owned generated overrides, do not create a YAML file.
+3. If the variant differs only in a few fields inside a feature block, declare `variantOf` and override only those fields.
+4. If the variant needs a different `engine`, replace the whole mapping intentionally.
+5. For parity work, inherited surfaces still need locale-specific proving assertions and a recorded inheritance chain to the terminal owner.
+
+A locale parity claim is invalid unless every canonical surface is explicitly accounted for as locale-owned or same-language inherited with proof. There is no shipped-locale exemption list in this repo.
+
+**Exception for no-delta regional variants:** A parity epic may ship minimum-valid no-delta variant files (`locale:` + `variantOf:`) when first-class matrix/sweep coverage is required. This makes the regional culture explicit in `LocaleRegistrySweepTests` and `LocaleTheoryMatrixCompletenessTests` rather than relying on implicit culture fallback. The no-delta file inherits all surfaces from the parent and produces identical output; its purpose is registry presence and test matrix coverage, not linguistic differentiation. The `surfaces` key may be omitted entirely for these files. Examples: `ur-PK.yml` and `ur-IN.yml` ship as no-delta variants of `ur.yml`.
+
+Examples in the current repo:
+
+- `en-US.yml` exists because U.S. ordinal date formatting differs from `en`.
+- `ru-RU.yml` does not need to exist when `ru` already covers the generated behavior.
+- `en-IN.yml` declares `variantOf: 'en'` and overrides only the `number.words` fields that genuinely differ.
+
+## Pitfall
+
+Do not invent fields, use empty mappings as inheritance sentinels, copy a
+parent file into every variant, or reference generator-internal profile keys.
+Changing `engine` replaces that mapped block instead of merging it.
+
+The reference describes accepted structure; it does not prove that authored
+words or inherited behavior are natural for a culture.
+
+## Version notes
+
+This schema documents the canonical `main/preview` locale YAML compiler.
+Published releases through `3.0.10` use their own checked-in localization and
+package shapes. Do not backport a field merely because it appears here.
+
+## Related guides and API
+
+- [Add or update a locale](./adding-or-updating-a-locale.mdx)
+- [Locale YAML how-to](./locale-yaml-how-to.mdx)
+- [Choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx)
+- [Selected-version API reference](../api/index.md)
