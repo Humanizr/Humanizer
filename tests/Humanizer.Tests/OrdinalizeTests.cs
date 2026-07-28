@@ -70,7 +70,7 @@ public class OrdinalizeTests
     [InlineData(-2_147_483_651L, "-2147483651st")]
     [InlineData(long.MinValue, "-9223372036854775808th")]
     public void OrdinalizeLongNumber(long number, string ordinalized) =>
-        Assert.Equal(ordinalized, number.Ordinalize());
+        Assert.Equal(number.Ordinalize(), ordinalized);
 
     [Fact]
     public void OrdinalizeLongNumberUsesCultureSpecificRules()
