@@ -15,9 +15,9 @@ test('documentation publishes the canonical Humanizer logo unchanged', async () 
   assert.deepEqual(await readFile(publicLogo), await readFile(repositoryLogo));
 });
 
-test('social metadata image meets summary card dimensions', async () => {
+test('social metadata image meets Open Graph dimensions', async () => {
   const image = await readFile(socialLogo);
 
-  assert.equal(image.readUInt32BE(16), 144);
-  assert.equal(image.readUInt32BE(20), 144);
+  assert.equal(image.readUInt32BE(16), 200);
+  assert.equal(image.readUInt32BE(20), 200);
 });
