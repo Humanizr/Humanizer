@@ -780,6 +780,10 @@ fileSize.Terabytes => 9.31322575e-9
 fileSize.Petabytes => 1.024e-11
 fileSize.Exabytes  => 1.024e-14
 fileSize.Pebibytes => 9.09494702e-12
+fileSize.Kibibytes => 10
+fileSize.Mebibytes => 0.009765625
+fileSize.Gibibytes => 9.53674316e-6
+fileSize.Tebibytes => 9.31322575e-9
 ```
 
 There are a few extension methods that allow you to turn a number into a ByteSize instance:
@@ -825,7 +829,7 @@ If you want a string representation you can call `ToString` or `Humanize` interc
 ```
 
 You can also optionally provide a format for the expected string representation.
-The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`, `PB`, `EB`, `PiB`.
+The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `KiB`, `MB`, `MiB`, `GB`, `GiB`, `TB`, `TiB`, `PB`, `EB`, `PiB`.
 The formatter uses the built in [`double.ToString` method](https://docs.microsoft.com/dotnet/api/system.double.tostring) with `#.##` as the default format which rounds the number to two decimal places:
 
 ```csharp
@@ -853,8 +857,11 @@ b.Humanize("#.## B");     // 10757.12 B
 (`EB`, 10<sup>18</sup> bytes), plus IEC pebibytes (`PiB`, 2<sup>50</sup>
 bytes). Exbibytes are not supported because one `EiB` is 2<sup>63</sup> bits,
 outside the existing `long`-valued `Bits` range. The older `KB` through `TB`
-APIs retain their historical binary scaling for compatibility; use an explicit
-`PiB` format when IEC provenance matters.
+APIs retain their historical binary scaling for compatibility. The explicit
+`FromKibibytes`, `FromMebibytes`, `FromGibibytes`, and `FromTebibytes`
+factories use those same binary factors with standards-compliant IEC names.
+Use an explicit `KiB`, `MiB`, `GiB`, `TiB`, or `PiB` format when IEC
+provenance matters; default formatting continues to use the historical labels.
 
 The existing `double` byte storage does not retain one-bit increments at these
 magnitudes. The new large-unit factories and `AddPetabytes`, `AddExabytes`, and

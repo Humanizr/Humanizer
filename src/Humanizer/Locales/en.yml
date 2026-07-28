@@ -211,6 +211,18 @@ surfaces:
       pebibyte:
         forms: 'pebibyte'
         symbol: 'PiB'
+      kibibyte:
+        forms: 'kibibyte'
+        symbol: 'KiB'
+      mebibyte:
+        forms: 'mebibyte'
+        symbol: 'MiB'
+      gibibyte:
+        forms: 'gibibyte'
+        symbol: 'GiB'
+      tebibyte:
+        forms: 'tebibyte'
+        symbol: 'TiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

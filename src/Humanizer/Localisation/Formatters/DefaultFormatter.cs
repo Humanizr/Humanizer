@@ -77,7 +77,8 @@ public class DefaultFormatter : IFormatter
             return generated;
         }
 
-        if (dataUnit is DataUnit.Petabyte or DataUnit.Exabyte or DataUnit.Pebibyte &&
+        if (dataUnit is DataUnit.Petabyte or DataUnit.Exabyte or DataUnit.Pebibyte or
+            DataUnit.Kibibyte or DataUnit.Mebibyte or DataUnit.Gibibyte or DataUnit.Tebibyte &&
             !Culture.Name.Equals("en", StringComparison.OrdinalIgnoreCase))
         {
             return EnglishFallback.DataUnitHumanize(dataUnit, count, toSymbol);
