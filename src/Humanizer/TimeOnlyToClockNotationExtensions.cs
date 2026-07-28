@@ -45,8 +45,12 @@ public static class TimeOnlyToClockNotationExtensions
     /// <param name="roundToNearestFive">The rounding mode to apply before formatting the time.</param>
     /// <param name="culture">The culture to use.</param>
     /// <returns>A culture-specific string representation of the time in clock notation.</returns>
-    public static string ToClockNotation(this TimeOnly input, ClockNotationRounding roundToNearestFive, CultureInfo culture) =>
-        Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(culture).Convert(input, roundToNearestFive);
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="culture"/> is <c>null</c>.</exception>
+    public static string ToClockNotation(this TimeOnly input, ClockNotationRounding roundToNearestFive, CultureInfo culture)
+    {
+        ArgumentNullException.ThrowIfNull(culture);
+        return Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(culture).Convert(input, roundToNearestFive);
+    }
 }
 
 #endif

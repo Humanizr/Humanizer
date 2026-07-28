@@ -373,6 +373,15 @@ public class LocaleRegistrySweepTests
             new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.None, new("eo")));
     }
 
+    [Fact]
+    public void TimeOnlyToClockNotation_ExplicitCulture_ThrowsForNullCulture()
+    {
+        var exception = Assert.Throws<ArgumentNullException>(
+            () => new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.None, null!));
+
+        Assert.Equal("culture", exception.ParamName);
+    }
+
     [Theory]
     [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotation1323RoundedExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
     public void TimeOnlyToClockNotation_1323RoundedToNearestFiveMinutes_UsesExpectedForms(string localeName, ClockExpectationRow expected)
