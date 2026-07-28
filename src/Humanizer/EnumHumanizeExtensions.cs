@@ -39,9 +39,10 @@ public static class EnumHumanizeExtensions
                 .MakeGenericMethod(input.GetType())
                 .Invoke(null, [input])!;
         }
-        catch (TargetInvocationException exception)
+        catch (TargetInvocationException exception) when (exception.InnerException is not null)
         {
-            throw exception.InnerException!;
+            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(exception.InnerException).Throw();
+            throw;
         }
     }
 

@@ -36,6 +36,18 @@ public class EnumHumanizeTests
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void RuntimeEnumHumanizationPreservesInnerExceptionStack()
+    {
+        Enum value = (EnumUnderTest)int.MaxValue;
+
+        var exception = Assert.Throws<KeyNotFoundException>(() => value.Humanize());
+
+        Assert.Contains("Humanize[T]", exception.StackTrace);
+    }
+
+    [Fact]
     public void CanApplyTitleCasingOnEnumHumanization() =>
         Assert.Equal(
             EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
