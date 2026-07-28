@@ -103,7 +103,7 @@ public partial class Vocabulary
         var asSingularAsPlural = ApplyRules(plurals, asSingular, false);
         if (asSingular != null &&
             asSingular != word &&
-            asSingular + "s" != word &&
+            !string.Equals(asSingular + "s", word, StringComparison.OrdinalIgnoreCase) &&
             asSingularAsPlural == word &&
             result != word)
         {
@@ -142,7 +142,7 @@ public partial class Vocabulary
         // the Plurality is unknown so we should check all possibilities
         var asPlural = ApplyRules(plurals, word, false);
         if (asPlural == word ||
-            word + "s" == asPlural)
+            string.Equals(word + "s", asPlural, StringComparison.OrdinalIgnoreCase))
         {
             return result ?? word;
         }
@@ -196,8 +196,11 @@ public partial class Vocabulary
         uncountables.Contains(word);
 
     static string MatchUpperCase(string word, string replacement) =>
-        char.IsUpper(word[0]) &&
-        char.IsLower(replacement[0]) ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1)) : replacement;
+        word.Length > 1 && word.Any(char.IsUpper) && !word.Any(char.IsLower)
+            ? replacement.ToUpperInvariant()
+            : char.IsUpper(word[0]) && char.IsLower(replacement[0])
+                ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1))
+                : replacement;
 
     /// <summary>
     /// If the word is the letter s, singular or plural, return the letter s singular

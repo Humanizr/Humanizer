@@ -33,6 +33,24 @@ public class InflectorTests
         Assert.Equal(plural, singular.Pluralize());
 
     [Theory]
+    [InlineData("SINGULAR TYPE NAME", "SINGULAR TYPE NAMES")]
+    [InlineData("BUS", "BUSES")]
+    [InlineData("PERSON", "PEOPLE")]
+    public void InflectionsPreserveAllCaps(string singular, string plural)
+    {
+        Assert.Equal(plural, singular.Pluralize());
+        Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(plural, singular.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(plural, plural.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(singular, singular.Singularize(inputIsKnownToBePlural: false));
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Fact, UseCulture("tr-TR")]
+    public void AllCapsInflectionsUseInvariantCasing() =>
+        Assert.Equal("CACTI", "CACTUS".Pluralize());
+
+    [Theory]
     [ClassData(typeof(PluralTestSource))]
     public void PluralizeWordsWithUnknownPlurality(string singular, string plural)
     {
