@@ -23,6 +23,31 @@ public class EnumHumanizeTests
         Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void CanHumanizeWhenEnumTypeIsKnownAtRuntimeOnly()
+    {
+        Enum value = EnumUnderTest.MemberWithoutDescriptionAttribute;
+
+        Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, value.Humanize());
+        Assert.Equal(
+            EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
+            value.Humanize(LetterCasing.Title));
+    }
+
+    [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void RuntimeEnumHumanizationPreservesInnerExceptionStack()
+    {
+        Enum value = (EnumUnderTest)int.MaxValue;
+
+        var exception = Assert.Throws<KeyNotFoundException>(() => value.Humanize());
+
+        Assert.Contains("Humanize[T]", exception.StackTrace);
+    }
+
+    [Fact]
     public void CanApplyTitleCasingOnEnumHumanization() =>
         Assert.Equal(
             EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
