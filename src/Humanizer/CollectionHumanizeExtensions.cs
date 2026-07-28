@@ -29,6 +29,31 @@ public static class CollectionHumanizeExtensions
         Configurator.CollectionFormatter.Humanize(collection);
 
     /// <summary>
+    /// Transforms a collection into a human-readable string representation using the default separator
+    /// for the specified culture.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
+    /// <param name="collection">The collection to be humanized. Must not be null.</param>
+    /// <param name="culture">The culture whose collection formatter should be used. Must not be null.</param>
+    /// <returns>
+    /// A formatted string representation of the collection elements separated by culture-specific separators.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <paramref name="collection"/> or <paramref name="culture"/> is null.
+    /// </exception>
+    /// <example>
+    /// <code>
+    /// new[] { 1, 2, 3 }.Humanize(new CultureInfo("en-GB")) => "1, 2 and 3"
+    /// </code>
+    /// </example>
+    public static string Humanize<T>(this IEnumerable<T> collection, CultureInfo culture)
+    {
+        ArgumentNullException.ThrowIfNull(culture);
+
+        return Configurator.CollectionFormatters.ResolveForCulture(culture).Humanize(collection);
+    }
+
+    /// <summary>
     /// Transforms a collection into a human-readable string representation using a custom formatter function
     /// for each element, combined with the default separator for the current culture.
     /// </summary>

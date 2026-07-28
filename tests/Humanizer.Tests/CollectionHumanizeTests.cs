@@ -48,6 +48,18 @@ public class CollectionHumanizeTests
     }
 
     [Fact]
+    public void HumanizeUsesSpecifiedCulture() =>
+        Assert.Equal("A, B and C", ThreeStrings.Humanize(new CultureInfo("en-GB")));
+
+    [Fact]
+    public void HumanizeThrowsWhenCultureIsNull()
+    {
+        var exception = Assert.Throws<ArgumentNullException>(() => ThreeStrings.Humanize((CultureInfo)null!));
+
+        Assert.Equal("culture", exception.ParamName);
+    }
+
+    [Fact]
     public void HumanizeUsesOxfordComma()
     {
         var collection = new List<string>
