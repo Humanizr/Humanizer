@@ -174,6 +174,10 @@ public class InflectorTests
     [InlineData("customer name $", "CustomerName$")]
     [InlineData("customer   name", "CustomerName")]
     [InlineData("customer-first-name", "CustomerFirstName")]
+    [InlineData("some-text-here", "SomeTextHere")]
+    [InlineData("some.text.here", "SomeTextHere")]
+    [InlineData("élan.über.", "ÉlanÜber")]
+    [InlineData("customer.name$", "CustomerName$")]
     [InlineData("_customer-first-name", "CustomerFirstName")]
     [InlineData(" customer__first--name", "CustomerFirstName")]
     public void Pascalize(string input, string expectedOutput) =>
@@ -182,6 +186,7 @@ public class InflectorTests
     [Theory]
     [InlineData("SMS parameter provider", "SmsParameterProvider")]
     [InlineData("HTTP IO module", "HttpIoModule")]
+    [InlineData("HTTP.IO.module", "HttpIoModule")]
     [InlineData("XMLHttpRequest", "XmlHttpRequest")]
     [InlineData("CustomerName", "CustomerName")]
     public void PascalizeNormalizesUppercaseSequences(string input, string expectedOutput) =>
@@ -203,9 +208,13 @@ public class InflectorTests
     [InlineData("customer name 1", "customerName1")]
     [InlineData("customer name $", "customerName$")]
     [InlineData("customer   name", "customerName")]
+    [InlineData("some-text-here", "someTextHere")]
+    [InlineData("some.text.here", "someTextHere")]
+    [InlineData("élan.über.", "élanÜber")]
     [InlineData("", "")]
     [InlineData("_Name", "_name")]
     [InlineData("__customer_name", "__customerName")]
+    [InlineData("__élan.über_name", "__élanÜberName")]
     [InlineData("_", "_")]
     [InlineData("___", "___")]
     [InlineData("_Ägypten_name", "_ägyptenName")]
@@ -217,6 +226,7 @@ public class InflectorTests
     [InlineData("IOModule", "ioModule")]
     [InlineData("XMLHttpRequest", "xmlHttpRequest")]
     [InlineData("HTTP IO module", "httpIoModule")]
+    [InlineData("__HTTP.IO.module", "__httpIoModule")]
     [InlineData("CustomerName", "customerName")]
     [InlineData("_IOModule", "_ioModule")]
     [InlineData("__IOModule", "__ioModule")]
@@ -295,10 +305,10 @@ public class InflectorTests
 
     static void VerifyIdentifierTransformationsUseInvariantCasing()
     {
-        Assert.Equal("IWillBreakStuff", "i will_break-stuff".Pascalize());
+        Assert.Equal("IWillBreakStuff", "i.will_break-stuff".Pascalize());
         Assert.Equal("IoModule", "IO module".Pascalize(preserveUppercase: false));
-        Assert.Equal("iWillBreakStuff", "I will_break-stuff".Camelize());
-        Assert.Equal("ioModule", "IOModule".ToCamelCase());
+        Assert.Equal("iWillBreakStuff", "I.will_break-stuff".Camelize());
+        Assert.Equal("ioModule", "IO.module".ToCamelCase());
         Assert.Equal("istanbul_input", "IstanbulInput".Underscore());
         Assert.Equal("istanbul-input", "IstanbulInput".Kebaberize());
 

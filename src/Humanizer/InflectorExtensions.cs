@@ -25,7 +25,7 @@ namespace Humanizer;
 
 public static partial class InflectorExtensions
 {
-    private const string PascalizePattern = @"(?:[ _-]+|^)(.)";
+    private const string PascalizePattern = @"(?:[ _.-]+|^)(.)?";
     private const string UnderscorePattern1 = @"([\p{Lu}]+)([\p{Lu}][\p{Ll}])";
     private const string UnderscorePattern2 = @"([\p{Ll}\d])([\p{Lu}])";
     private const string UnderscorePattern3 = @"[-\s]";
@@ -155,12 +155,12 @@ public static partial class InflectorExtensions
 
     /// <summary>
     /// Converts a string to PascalCase (UpperCamelCase) by capitalizing the first letter of each word
-    /// and removing spaces, underscores, and dashes.
+    /// and removing spaces, underscores, dashes, and dots.
     /// </summary>
     /// <param name="input">The string to be pascalized. Must not be null.</param>
     /// <returns>
     /// A PascalCase version of the input where each word starts with an uppercase letter and 
-    /// spaces, underscores, and dashes are removed.
+    /// spaces, underscores, dashes, and dots are removed.
     /// </returns>
     /// <remarks>
     /// PascalCase (also known as UpperCamelCase) is commonly used for class names and type names in .NET.
@@ -171,6 +171,7 @@ public static partial class InflectorExtensions
     /// "some_property_name".Pascalize() => "SomePropertyName"
     /// "some property name".Pascalize() => "SomePropertyName"
     /// "some-property-name".Pascalize() => "SomePropertyName"
+    /// "some.property.name".Pascalize() => "SomePropertyName"
     /// </code>
     /// </example>
     public static string Pascalize(this string input) =>
@@ -196,7 +197,7 @@ public static partial class InflectorExtensions
 
     /// <summary>
     /// Converts a string to camelCase (lowerCamelCase) by preserving leading underscores, capitalizing
-    /// the first letter of each word except the first word, and removing other spaces, underscores, and dashes.
+    /// the first letter of each word except the first word, and removing other spaces, underscores, dashes, and dots.
     /// </summary>
     /// <param name="input">The string to be camelized. Must not be null.</param>
     /// <returns>
@@ -213,6 +214,7 @@ public static partial class InflectorExtensions
     /// <code>
     /// "some_property_name".Camelize() => "somePropertyName"
     /// "some property name".Camelize() => "somePropertyName"
+    /// "some.property.name".Camelize() => "somePropertyName"
     /// "SomePropertyName".Camelize() => "somePropertyName"
     /// "_some_property_name".Camelize() => "_somePropertyName"
     /// </code>
@@ -288,7 +290,7 @@ public static partial class InflectorExtensions
         for (var i = 0; i < input.Length; i++)
         {
             var c = input[i];
-            if (c is ' ' or '_' or '-')
+            if (c is ' ' or '_' or '-' or '.')
             {
                 capitalizeNext = true;
                 continue;

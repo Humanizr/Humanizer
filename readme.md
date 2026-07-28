@@ -525,10 +525,12 @@ Convert strings to various coding conventions:
 
 // Pascalize: UpperCamelCase without spaces
 "some_title for something".Pascalize() => "SomeTitleForSomething"
+"some.text.here".Pascalize() => "SomeTextHere"
 "SMS parameter provider".Pascalize(preserveUppercase: false) => "SmsParameterProvider"
 
 // Camelize: lowerCamelCase without spaces
 "some_title for something".Camelize() => "someTitleForSomething"
+"some.text.here".Camelize() => "someTextHere"
 "_some_title".Camelize() => "_someTitle"
 
 // ToCamelCase: lowerCamelCase with uppercase sequences normalized as words
