@@ -34,6 +34,23 @@
     },
     {
       "type": "category",
+      "label": "Upgrading",
+      "items": [
+        "upgrading/upgrading",
+        "upgrading/2-x-lines",
+        "upgrading/version-3-migration",
+        "upgrading/version-3-patch-line"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Analyzer",
+      "items": [
+        "analyzer/analyzer"
+      ]
+    },
+    {
+      "type": "category",
       "label": "API reference",
       "items": [
         {

@@ -30,6 +30,8 @@ Console.WriteLine(text); // 2 minutes
 
 - [Start using Humanizer](https://humanizr.net/docs/start/overview/)
 - [Common scenarios](https://humanizr.net/docs/scenarios/strings-and-casing/)
+- [Upgrade between versions](https://humanizr.net/docs/upgrading/)
+- [Configure the migration analyzer](https://humanizr.net/docs/analyzer/)
 - [API reference](https://humanizr.net/docs/api/)
 
 ## Repository

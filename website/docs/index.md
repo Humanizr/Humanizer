@@ -28,3 +28,8 @@ number, enum, collection, and localization tasks.
 
 For exact signatures, open the [API reference](./api/index.md). The version
 selector keeps guides, examples, and API pages in the same release.
+
+## Maintain a project
+
+- [Plan an upgrade](./upgrading/index.mdx) — follow every compatibility boundary between two supported versions.
+- [Migrate namespaces with the analyzer](./analyzer/index.mdx) — configure and run the bundled analyzer locally and in CI.

@@ -1,0 +1,7 @@
+<Project>
+  <ItemGroup Condition="'$(HumanizerExampleExcludeAssets)' != ''">
+    <PackageReference
+      Update="Humanizer"
+      ExcludeAssets="$(HumanizerExampleExcludeAssets)" />
+  </ItemGroup>
+</Project>

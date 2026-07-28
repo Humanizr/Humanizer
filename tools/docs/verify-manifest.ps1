@@ -106,6 +106,27 @@ foreach ($entry in $versions) {
     if ($entry.referenceTfm -notmatch "^net(?:standard)?\d+(?:\.\d+)?$") {
         throw "Version $($entry.version) declares an invalid reference TFM."
     }
+    $exampleExcludedAssetsProperty = $entry.PSObject.Properties[
+        "exampleExcludedAssets"
+    ]
+    $exampleExcludedAssets = if ($null -eq $exampleExcludedAssetsProperty) {
+        @()
+    } else {
+        @($exampleExcludedAssetsProperty.Value)
+    }
+    $supportedExcludedAssets = @(
+        "analyzers",
+        "build",
+        "buildTransitive"
+    )
+    if ($exampleExcludedAssets.Count -ne
+        @($exampleExcludedAssets | Sort-Object -Unique).Count -or
+        @(
+            $exampleExcludedAssets |
+                Where-Object { $_ -notin $supportedExcludedAssets }
+        ).Count -gt 0) {
+        throw "Version $($entry.version) declares invalid example asset exclusions."
+    }
     if ($entry.route -ne "" -and
         ($entry.route -notmatch "^[a-z0-9][a-z0-9.-]*$" -or
             $entry.route.EndsWith("."))) {

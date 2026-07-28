@@ -114,12 +114,31 @@ try {
             $projectArtifacts = Join-Path (
                 $artifactsRoot
             ) "$($entry.version)/$($project.BaseName)-$projectIndex"
-            $inputArguments = if ($entry.source.kind -eq "checkout") {
-                @(
+            $inputArguments = @(
+                if ($entry.source.kind -eq "checkout") {
                     "-p:HumanizerProject=$(Join-Path $repoRoot 'src/Humanizer/Humanizer.csproj')"
-                )
+                } else {
+                    "-p:HumanizerPackageVersion=$($entry.source.packageVersion)"
+                }
+            )
+            $exampleExcludedAssetsProperty = $entry.PSObject.Properties[
+                "exampleExcludedAssets"
+            ]
+            $exampleExcludedAssets = if (
+                $null -eq $exampleExcludedAssetsProperty
+            ) {
+                @()
             } else {
-                @("-p:HumanizerPackageVersion=$($entry.source.packageVersion)")
+                @($exampleExcludedAssetsProperty.Value)
+            }
+            if ($exampleExcludedAssets.Count -gt 0) {
+                $encodedExcludedAssets = (
+                    $exampleExcludedAssets -join "%3B"
+                )
+                $inputArguments += (
+                    "-p:HumanizerExampleExcludeAssets=" +
+                    $encodedExcludedAssets
+                )
             }
             $restoreArguments = @(
                 "restore",

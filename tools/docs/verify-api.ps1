@@ -8,6 +8,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+. (Join-Path $PSScriptRoot "nuget-package.ps1")
 if (-not $ManifestPath) {
     $ManifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 }
@@ -31,27 +32,6 @@ if ($OutputDirectory -and $versions.Count -ne 1) {
     throw "API output requires exactly one selected version."
 }
 
-function Invoke-Checked {
-    param(
-        [Parameter(Mandatory = $true)][string]$FilePath,
-        [Parameter(Mandatory = $true)][string[]]$ArgumentList,
-        [string]$WorkingDirectory = $repoRoot
-    )
-
-    $logPath = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-command-$([guid]::NewGuid().ToString('N')).log"
-    Push-Location $WorkingDirectory
-    try {
-        & $FilePath @ArgumentList *> $logPath
-        if ($LASTEXITCODE -ne 0) {
-            $details = Get-Content -Raw $logPath
-            throw "$FilePath failed with exit code $LASTEXITCODE.`n$details"
-        }
-    } finally {
-        Pop-Location
-        Remove-Item $logPath -Force -ErrorAction SilentlyContinue
-    }
-}
-
 function Get-DirectoryDigest {
     param([Parameter(Mandatory = $true)][string]$Path)
 
@@ -65,125 +45,11 @@ function Get-DirectoryDigest {
     return [Convert]::ToHexString([System.Security.Cryptography.SHA256]::HashData($bytes))
 }
 
-function Assert-NuGetPackage {
-    param(
-        [Parameter(Mandatory = $true)][string]$PackageId,
-        [Parameter(Mandatory = $true)][string]$PackageVersion,
-        [Parameter(Mandatory = $true)][string]$PackagePath
-    )
-
-    $registrationUri = "https://api.nuget.org/v3/registration5-semver1/$PackageId/$PackageVersion.json"
-    $registration = Invoke-RestMethod `
-        -Uri $registrationUri `
-        -MaximumRetryCount 6 `
-        -RetryIntervalSec 10 `
-        -TimeoutSec 30
-    $catalog = Invoke-RestMethod `
-        -Uri $registration.catalogEntry `
-        -MaximumRetryCount 6 `
-        -RetryIntervalSec 10 `
-        -TimeoutSec 30
-    if ($catalog.packageHashAlgorithm -ne "SHA512" -or -not $catalog.packageHash) {
-        throw "NuGet.org did not publish a SHA-512 package hash for $PackageId $PackageVersion."
-    }
-
-    $actualHash = [Convert]::ToBase64String(
-        [System.Security.Cryptography.SHA512]::HashData(
-            [System.IO.File]::ReadAllBytes($PackagePath)
-        )
-    )
-    if ($actualHash -ne $catalog.packageHash) {
-        throw "NuGet.org package hash validation failed for $PackageId $PackageVersion."
-    }
-
-    $archive = [System.IO.Compression.ZipFile]::OpenRead($PackagePath)
-    try {
-        if (-not ($archive.Entries.FullName -contains ".signature.p7s")) {
-            throw "NuGet package is unsigned: $PackageId $PackageVersion."
-        }
-    } finally {
-        $archive.Dispose()
-    }
-
-    try {
-        Invoke-Checked -FilePath "dotnet" -ArgumentList @(
-            "nuget", "verify", $PackagePath,
-            "--all",
-            "--configfile", (Join-Path $repoRoot "nuget.config")
-        )
-        Write-Host "NuGet signature passed: $PackageId $PackageVersion"
-    } catch {
-        $allowedHistoricalCodes = @("NU3028", "NU3037")
-        $reportedCodes = @(
-            [regex]::Matches($_.Exception.Message, "NU\d{4}") |
-                ForEach-Object Value |
-                Sort-Object -Unique
-        )
-        $unexpectedCodes = @(
-            $reportedCodes |
-                Where-Object { $_ -notin $allowedHistoricalCodes }
-        )
-        if ($reportedCodes.Count -eq 0 -or $unexpectedCodes.Count -gt 0) {
-            throw
-        }
-
-        Write-Host "NuGet signature is historical; signed package and NuGet.org SHA-512 passed: $PackageId $PackageVersion"
-    }
-}
-
 function Get-NuGetApiInput {
     param([Parameter(Mandatory = $true)]$Entry)
 
-    $packageVersion = $Entry.source.packageVersion
-    if (-not $packageVersion) {
-        throw "Version $($Entry.version) has no NuGet package version."
-    }
-
-    $packageId = $Entry.apiPackage.ToLowerInvariant()
-    $cacheRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-nuget"
-    $packageRoot = Join-Path $cacheRoot "$packageId/$packageVersion"
-    $packagePath = Join-Path $packageRoot "$packageId.$packageVersion.nupkg"
-    $extractPath = Join-Path $packageRoot "package"
-
-    New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
-    $downloadPackage = {
-        $uri = "https://api.nuget.org/v3-flatcontainer/$packageId/$packageVersion/$packageId.$packageVersion.nupkg"
-        $downloadPath = "$packagePath.$([guid]::NewGuid().ToString('N')).tmp"
-        try {
-            Invoke-WebRequest `
-                -Uri $uri `
-                -OutFile $downloadPath `
-                -MaximumRetryCount 6 `
-                -RetryIntervalSec 10 `
-                -TimeoutSec 30
-            Assert-NuGetPackage `
-                -PackageId $packageId `
-                -PackageVersion $packageVersion `
-                -PackagePath $downloadPath
-            Move-Item $downloadPath $packagePath -Force
-        } finally {
-            Remove-Item $downloadPath -Force -ErrorAction SilentlyContinue
-        }
-    }
-
-    if (Test-Path $packagePath -PathType Leaf) {
-        try {
-            Assert-NuGetPackage `
-                -PackageId $packageId `
-                -PackageVersion $packageVersion `
-                -PackagePath $packagePath
-        } catch {
-            Remove-Item $packagePath -Force
-            & $downloadPackage
-        }
-    } else {
-        & $downloadPackage
-    }
-
-    Remove-Item $extractPath -Recurse -Force -ErrorAction SilentlyContinue
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($packagePath, $extractPath)
-
-    $apiDirectory = Join-Path $extractPath "lib/$($Entry.referenceTfm)"
+    $package = Get-DocsNuGetPackage -Entry $Entry -RepoRoot $repoRoot
+    $apiDirectory = Join-Path $package.ExtractPath "lib/$($Entry.referenceTfm)"
     return [PSCustomObject]@{
         Dll = Join-Path $apiDirectory "Humanizer.dll"
         Xml = Join-Path $apiDirectory "Humanizer.xml"
@@ -194,12 +60,15 @@ function Get-CheckoutApiInput {
     param([Parameter(Mandatory = $true)]$Entry)
 
     $projectPath = Join-Path $repoRoot "src/Humanizer/Humanizer.csproj"
-    Invoke-Checked -FilePath "dotnet" -ArgumentList @(
-        "build", $projectPath,
-        "--configuration", "Release",
-        "--framework", $Entry.referenceTfm,
-        "--nologo"
-    )
+    Invoke-DocsCheckedCommand `
+        -FilePath "dotnet" `
+        -ArgumentList @(
+            "build", $projectPath,
+            "--configuration", "Release",
+            "--framework", $Entry.referenceTfm,
+            "--nologo"
+        ) `
+        -WorkingDirectory $repoRoot
 
     $targetPathLog = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-target-$([guid]::NewGuid().ToString('N')).txt"
     & dotnet msbuild $projectPath `
@@ -338,16 +207,19 @@ foreach ($entry in $versions) {
     }
     New-Item -ItemType Directory -Path $firstOutput | Out-Null
     try {
-        Invoke-Checked -FilePath "dotnet" -ArgumentList @(
-            "tool", "run", "defaultdocumentation", "--",
-            "--AssemblyFilePath", $input.Dll,
-            "--DocumentationFilePath", $input.Xml,
-            "--OutputDirectoryPath", $firstOutput,
-            "--AssemblyPageName", "assembly",
-            "--GeneratedAccessModifiers", "Public",
-            "--GeneratedPages", "Namespaces,Types",
-            "--Sections", "Default"
-        )
+        Invoke-DocsCheckedCommand `
+            -FilePath "dotnet" `
+            -ArgumentList @(
+                "tool", "run", "defaultdocumentation", "--",
+                "--AssemblyFilePath", $input.Dll,
+                "--DocumentationFilePath", $input.Xml,
+                "--OutputDirectoryPath", $firstOutput,
+                "--AssemblyPageName", "assembly",
+                "--GeneratedAccessModifiers", "Public",
+                "--GeneratedPages", "Namespaces,Types",
+                "--Sections", "Default"
+            ) `
+            -WorkingDirectory $repoRoot
         Assert-GeneratedApi -OutputPath $firstOutput -VersionLabel $entry.version
         Assert-CommittedApiProof -GeneratedPath $firstOutput -VersionLabel $entry.version
 
@@ -355,16 +227,19 @@ foreach ($entry in $versions) {
             $secondOutput = "$firstOutput-second"
             New-Item -ItemType Directory -Path $secondOutput | Out-Null
             try {
-                Invoke-Checked -FilePath "dotnet" -ArgumentList @(
-                    "tool", "run", "defaultdocumentation", "--",
-                    "--AssemblyFilePath", $input.Dll,
-                    "--DocumentationFilePath", $input.Xml,
-                    "--OutputDirectoryPath", $secondOutput,
-                    "--AssemblyPageName", "assembly",
-                    "--GeneratedAccessModifiers", "Public",
-                    "--GeneratedPages", "Namespaces,Types",
-                    "--Sections", "Default"
-                )
+                Invoke-DocsCheckedCommand `
+                    -FilePath "dotnet" `
+                    -ArgumentList @(
+                        "tool", "run", "defaultdocumentation", "--",
+                        "--AssemblyFilePath", $input.Dll,
+                        "--DocumentationFilePath", $input.Xml,
+                        "--OutputDirectoryPath", $secondOutput,
+                        "--AssemblyPageName", "assembly",
+                        "--GeneratedAccessModifiers", "Public",
+                        "--GeneratedPages", "Namespaces,Types",
+                        "--Sections", "Default"
+                    ) `
+                    -WorkingDirectory $repoRoot
                 if ((Get-DirectoryDigest $firstOutput) -ne (Get-DirectoryDigest $secondOutput)) {
                     throw "API generation for $($entry.version) is not deterministic."
                 }

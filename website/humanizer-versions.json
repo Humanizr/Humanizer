@@ -77,6 +77,26 @@
       "latestStable": false
     },
     {
+      "version": "3.0.8",
+      "label": "3.0.8",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "3.0.8"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net10.0",
+      "exampleExcludedAssets": [
+        "build",
+        "buildTransitive",
+        "analyzers"
+      ],
+      "compatibilityOverlay": "version-overrides/3.0.8",
+      "route": "3.0.8",
+      "published": false,
+      "latestStable": false
+    },
+    {
       "version": "3.0.10",
       "label": "3.0.10 (latest)",
       "source": {
