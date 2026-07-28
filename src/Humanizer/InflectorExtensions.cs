@@ -181,16 +181,17 @@ public static partial class InflectorExtensions
                 .Value.ToUpperInvariant());
 
     /// <summary>
-    /// Converts a string to camelCase (lowerCamelCase) by capitalizing the first letter of each word
-    /// except the first word, and removing spaces, underscores, and dashes.
+    /// Converts a string to camelCase (lowerCamelCase) by preserving leading underscores, capitalizing
+    /// the first letter of each word except the first word, and removing other spaces, underscores, and dashes.
     /// </summary>
     /// <param name="input">The string to be camelized. Must not be null.</param>
     /// <returns>
-    /// A camelCase version of the input where the first word starts with a lowercase letter,
-    /// subsequent words start with uppercase letters, and spaces, underscores, and dashes are removed.
+    /// A camelCase version of the input where leading underscores are preserved, the first word starts
+    /// with a lowercase letter, subsequent words start with uppercase letters, and other separators are removed.
     /// </returns>
     /// <remarks>
-    /// camelCase is the same as PascalCase except the first character is lowercase.
+    /// camelCase is the same as PascalCase except any leading underscores are preserved and the first
+    /// character after them is lowercase.
     /// It's commonly used for variable and method parameter names in .NET.
     /// Casing is culture-invariant.
     /// </remarks>
@@ -199,21 +200,37 @@ public static partial class InflectorExtensions
     /// "some_property_name".Camelize() => "somePropertyName"
     /// "some property name".Camelize() => "somePropertyName"
     /// "SomePropertyName".Camelize() => "somePropertyName"
+    /// "_some_property_name".Camelize() => "_somePropertyName"
     /// </code>
     /// </example>
     public static string Camelize(this string input)
     {
-        if (TryPascalizeAscii(input, lowerFirst: true, out var result))
+        var leadingUnderscoreCount = 0;
+        while (leadingUnderscoreCount < input.Length && input[leadingUnderscoreCount] == '_')
         {
-            return result;
+            leadingUnderscoreCount++;
         }
 
-        var word = input.Pascalize();
-        return word.Length > 0
+        string camelized;
+        if (TryPascalizeAscii(input, lowerFirst: true, out var result))
+        {
+            camelized = result;
+        }
+        else
+        {
+            var word = input.Pascalize();
+            camelized = word.Length > 0
+                ? StringHumanizeExtensions.Concat(
+                    char.ToLowerInvariant(word[0]),
+                    word.AsSpan(1))
+                : word;
+        }
+
+        return leadingUnderscoreCount > 0
             ? StringHumanizeExtensions.Concat(
-                char.ToLowerInvariant(word[0]),
-                word.AsSpan(1))
-            : word;
+                input.AsSpan(0, leadingUnderscoreCount),
+                camelized.AsSpan())
+            : camelized;
     }
 
     static bool TryPascalizeAscii(string input, bool lowerFirst, [NotNullWhen(true)] out string? result)
