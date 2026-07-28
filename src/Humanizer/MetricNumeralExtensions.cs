@@ -193,7 +193,7 @@ public static class MetricNumeralExtensions
     /// </remarks>
     /// <param name="input">Number to convert to a Metric representation.</param>
     /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
-    /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+    /// <param name="decimals">The maximum number of fractional digits to include. If null, all available precision is preserved. Trailing zeros are omitted.</param>
     /// <example>
     /// <code>
     /// 1000.ToMetric() => "1k"
