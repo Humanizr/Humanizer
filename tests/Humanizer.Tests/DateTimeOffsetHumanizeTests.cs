@@ -63,12 +63,11 @@ public class DateTimeOffsetHumanizeTests
     [InlineData(29)]
     public void PrecisionStrategy_TwoMonthsAroundSixtyDays(int day)
     {
-        Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(0.75);
-
+        var strategy = new PrecisionDateTimeOffsetHumanizeStrategy(0.75);
         var inputTime = new DateTimeOffset(2019, 01, day, 0, 0, 0, TimeSpan.Zero);
         var baseTime = new DateTimeOffset(2019, 03, 29, 0, 0, 0, TimeSpan.Zero);
 
-        Assert.Equal("2 months ago", inputTime.Humanize(baseTime));
+        Assert.Equal("2 months ago", strategy.Humanize(inputTime, baseTime, null));
     }
 
     [Fact]
