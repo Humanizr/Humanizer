@@ -91,7 +91,6 @@ input {
 }
 
 .navbar {
-  backdrop-filter: blur(0.75rem);
   border-bottom: 1px solid var(--humanizer-rule);
 }
 

@@ -37,11 +37,14 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
   await expect(page.getByText('Skip to main content')).toBeFocused();
   await page.keyboard.press('Enter');
   await page.getByRole('button', {name: 'Toggle navigation bar'}).click();
+  const mobileSidebar = page.locator('.navbar-sidebar');
+  expect((await mobileSidebar.boundingBox())?.height).toBe(800);
   await expect(page.getByRole('link', {name: 'Guides'})).toBeVisible();
   await expect(page.getByText('Versions', {exact: true})).toBeVisible();
+  await page.getByRole('button', {name: 'Expand the dropdown'}).click();
+  await expect(page.getByRole('link', {name: 'main/preview'})).toBeVisible();
   await expect(
-    page
-      .locator('.navbar-sidebar')
+    mobileSidebar
       .getByRole('button', {name: /Switch between dark and light mode/}),
   ).toBeVisible();
   await expect(page.getByRole('button', {name: /Search/}).first()).toBeVisible();
