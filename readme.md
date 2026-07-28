@@ -713,6 +713,23 @@ if (!"tenn".TryToNumber(out var invalid, new CultureInfo("en"), out var badWord)
 >
 > **Breaking change:** `ToNumber` now returns `long`. Code that previously stored the result in `int` must either switch to `long` or add an explicit checked cast.
 
+English decimal number words use a separate `decimal`-returning API, leaving the integer API unchanged:
+
+```csharp
+"one point two".ToDecimalNumber(new CultureInfo("en")) => 1.2m
+"minus point zero five".ToDecimalNumber(new CultureInfo("en")) => -0.05m
+
+if ("one point five zero".TryToDecimalNumber(out var amount, new CultureInfo("en")))
+    Console.WriteLine(amount); // Outputs: 1.50
+```
+
+The phrase must contain exactly one `point`. Its fractional part accepts one to 28 digit words
+(`zero` through `nine`) and preserves leading and trailing zeroes. `minus` or `negative` may prefix
+the complete phrase; `and` remains available to the integer grammar but is rejected after `point`.
+Malformed input, decimal overflow, and non-English cultures return `false` from
+`TryToDecimalNumber`; `ToDecimalNumber` throws `FormatException` for invalid English phrases and
+`NotSupportedException` for unsupported cultures.
+
 ### DateTime to ordinal words
 
 Convert dates to ordinal word format:

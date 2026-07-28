@@ -88,9 +88,17 @@ using System.Globalization;
     .ToNumber(new CultureInfo("en-IN"));
 // => 123456789
 
+"one hundred and five point zero two"
+    .ToDecimalNumber(new CultureInfo("en"));
+// => 105.02m
+
 123456789.ToWords(new CultureInfo("en-GB"));
 // => "one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine"
 ```
+
+English decimal phrases use a separate `decimal`-returning API. The fractional part is parsed
+digit by digit and retains its authored scale. Use `TryToDecimalNumber` when input may be malformed
+or outside the `decimal` range.
 
 ### Fluent Dates
 
