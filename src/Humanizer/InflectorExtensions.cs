@@ -86,6 +86,7 @@ public static partial class InflectorExtensions
     /// "cat".Pluralize() => "cats"
     /// "box".Pluralize() => "boxes"
     /// "man".Pluralize() => "men"
+    /// "PERSON".Pluralize() => "PEOPLE"
     /// "cats".Pluralize(inputIsKnownToBeSingular: false) => "cats" (avoids double pluralization)
     /// </code>
     /// </example>
@@ -119,6 +120,7 @@ public static partial class InflectorExtensions
     /// "cats".Singularize() => "cat"
     /// "boxes".Singularize() => "box"
     /// "men".Singularize() => "man"
+    /// "PEOPLE".Singularize() => "PERSON"
     /// "person".Singularize(inputIsKnownToBePlural: false) => "person" (avoids incorrect singularization)
     /// </code>
     /// </example>

@@ -40,6 +40,10 @@ public class InflectorTests
     {
         Assert.Equal(plural, singular.Pluralize());
         Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(plural, singular.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(plural, plural.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(singular, singular.Singularize(inputIsKnownToBePlural: false));
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
     }
 
     [Theory]

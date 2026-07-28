@@ -103,7 +103,7 @@ public partial class Vocabulary
         var asSingularAsPlural = ApplyRules(plurals, asSingular, false);
         if (asSingular != null &&
             asSingular != word &&
-            asSingular + "s" != word &&
+            !string.Equals(asSingular + "s", word, StringComparison.OrdinalIgnoreCase) &&
             asSingularAsPlural == word &&
             result != word)
         {
@@ -142,7 +142,7 @@ public partial class Vocabulary
         // the Plurality is unknown so we should check all possibilities
         var asPlural = ApplyRules(plurals, word, false);
         if (asPlural == word ||
-            word + "s" == asPlural)
+            string.Equals(word + "s", asPlural, StringComparison.OrdinalIgnoreCase))
         {
             return result ?? word;
         }
