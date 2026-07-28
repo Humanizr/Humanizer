@@ -4,13 +4,16 @@
 [assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v11.0", FrameworkDisplayName=".NET 11.0")]
 namespace Humanizer
 {
-    public class ByteRate : System.IComparable, System.IComparable<Humanizer.ByteRate>
+    public class ByteRate : System.IComparable, System.IComparable<Humanizer.ByteRate>, System.IEquatable<Humanizer.ByteRate>
     {
         public ByteRate(Humanizer.ByteSize size, System.TimeSpan interval) { }
         public System.TimeSpan Interval { get; }
         public Humanizer.ByteSize Size { get; }
         public int CompareTo(Humanizer.ByteRate? other) { }
         public int CompareTo(object? obj) { }
+        public bool Equals(Humanizer.ByteRate? other) { }
+        public override bool Equals(object? obj) { }
+        public override int GetHashCode() { }
         public string Humanize(Humanizer.TimeUnit timeUnit = 1) { }
         public string Humanize(string? format, Humanizer.TimeUnit timeUnit = 1, System.Globalization.CultureInfo? culture = null) { }
         public override string ToString() { }

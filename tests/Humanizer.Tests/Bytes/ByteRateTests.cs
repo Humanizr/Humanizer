@@ -76,6 +76,29 @@ public class ByteRateTests
     }
 
     [Fact]
+    public void EqualsNormalizedRates()
+    {
+        var left = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
+        var right = ByteSize.FromBytes(800).Per(TimeSpan.FromSeconds(20));
+
+        Assert.Equal(left, right);
+        Assert.True(left.Equals((object)right));
+        Assert.Equal(left.GetHashCode(), right.GetHashCode());
+    }
+
+    [Fact]
+    public void DoesNotEqualDifferentOrNullRates()
+    {
+        var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
+        var other = ByteSize.FromBytes(800).Per(TimeSpan.FromSeconds(10));
+
+        Assert.NotEqual(rate, other);
+        Assert.False(rate.Equals(null));
+        Assert.False(rate.Equals((object?)null));
+        Assert.False(rate.Equals(new object()));
+    }
+
+    [Fact]
     public void UntypedComparisonRejectsOtherTypes()
     {
         var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));

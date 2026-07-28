@@ -8,6 +8,7 @@ namespace Humanizer;
 /// </remarks>
 public class ByteRate(ByteSize size, TimeSpan interval) :
     IComparable<ByteRate>,
+    IEquatable<ByteRate>,
     IComparable
 {
     /// <summary>
@@ -58,6 +59,18 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
     /// <param name="other">The rate to compare with.</param>
     public int CompareTo(ByteRate? other) =>
         other is null ? 1 : BytesPerSecond.CompareTo(other.BytesPerSecond);
+
+    /// <inheritdoc />
+    public bool Equals(ByteRate? other) =>
+        other is not null && BytesPerSecond.Equals(other.BytesPerSecond);
+
+    /// <inheritdoc />
+    public override bool Equals(object? obj) =>
+        obj is ByteRate other && Equals(other);
+
+    /// <inheritdoc />
+    public override int GetHashCode() =>
+        BytesPerSecond.GetHashCode();
 
     /// <inheritdoc />
     public int CompareTo(object? obj) =>
