@@ -381,6 +381,15 @@ public class MetricNumeralTests
         Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals));
 
     [Fact]
+    public void ToMetric_KeepTrailingZeros_ComposesWithSpaceForZero()
+    {
+        var formats = MetricNumeralFormats.KeepTrailingZeros | MetricNumeralFormats.WithSpace;
+
+        Assert.Equal("0.00 ", 0L.ToMetric(formats, decimals: 2));
+        Assert.Equal("0.00 ", 0d.ToMetric(formats, decimals: 2));
+    }
+
+    [Fact]
     public void ToMetric_KeepTrailingZeros_ComposesWithScaleWordAndCulture()
     {
         using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("de-DE"), new("en-US"));

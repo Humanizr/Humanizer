@@ -217,7 +217,8 @@ public static class MetricNumeralExtensions
             if (ShouldKeepTrailingZeros(formats, decimals))
             {
                 var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
-                return FormatLongWithTrailingZeros(input, decimals.GetValueOrDefault(), nfi);
+                var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
+                return FormatLongWithTrailingZeros(input, decimals.GetValueOrDefault(), nfi) + space;
             }
 
             return input.ToString();
@@ -251,7 +252,8 @@ public static class MetricNumeralExtensions
             if (ShouldKeepTrailingZeros(formats, decimals))
             {
                 var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
-                return input.ToString($"F{decimals.GetValueOrDefault()}", nfi);
+                var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
+                return input.ToString($"F{decimals.GetValueOrDefault()}", nfi) + space;
             }
 
             return input.ToString();
