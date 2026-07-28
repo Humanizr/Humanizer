@@ -18,9 +18,9 @@ static class RtlBidiControlSweep
         '\u2069'
     ];
 
-    public static void AssertRawLocalizedOutputsDoNotContainBidiControls(string localeName)
+    public static void AssertRawLocalizedOutputsDoNotContainBidiControls()
     {
-        var culture = CultureInfo.GetCultureInfo(localeName);
+        var culture = CultureInfo.CurrentCulture;
         var formatter = Configurator.Formatters.ResolveForCulture(culture);
         var outputs = new List<(string Surface, string Value)>
         {
@@ -40,17 +40,17 @@ static class RtlBidiControlSweep
 #endif
 
         foreach (var (surface, value) in outputs)
-            AssertNoBidiControls(localeName, surface, value);
+            AssertNoBidiControls(surface, value);
     }
 
-    public static void AssertNoBidiControls(string localeName, string surface, string value)
+    public static void AssertNoBidiControls(string surface, string value)
     {
         Assert.NotEmpty(value);
         foreach (var bidiControl in BidiControls)
         {
             Assert.False(
                 value.Contains(bidiControl),
-                $"{localeName} {surface} contains U+{(int)bidiControl:X4}: {value}");
+                $"{CultureInfo.CurrentCulture.Name} {surface} contains U+{(int)bidiControl:X4}: {value}");
         }
     }
 }

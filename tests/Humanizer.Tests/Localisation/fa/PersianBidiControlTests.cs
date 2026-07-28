@@ -5,7 +5,7 @@ public class PersianBidiControlTests
 {
     [Fact]
     public void RawLocalizedOutputs_DoNotContainBidiControls() =>
-        RtlBidiControlSweep.AssertRawLocalizedOutputsDoNotContainBidiControls("fa");
+        RtlBidiControlSweep.AssertRawLocalizedOutputsDoNotContainBidiControls();
 
     [Fact]
     public void Output_PreservesZeroWidthNonJoiner()
@@ -15,6 +15,6 @@ public class PersianBidiControlTests
 
         Assert.Equal("2 میلی\u200Cثانیه", value);
         Assert.Contains('\u200C', value);
-        RtlBidiControlSweep.AssertNoBidiControls("fa", "millisecond duration", value);
+        RtlBidiControlSweep.AssertNoBidiControls("millisecond duration", value);
     }
 }

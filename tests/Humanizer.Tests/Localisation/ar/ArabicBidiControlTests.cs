@@ -5,5 +5,5 @@ public class ArabicBidiControlTests
 {
     [Fact]
     public void RawLocalizedOutputs_DoNotContainBidiControls() =>
-        RtlBidiControlSweep.AssertRawLocalizedOutputsDoNotContainBidiControls("ar");
+        RtlBidiControlSweep.AssertRawLocalizedOutputsDoNotContainBidiControls();
 }
