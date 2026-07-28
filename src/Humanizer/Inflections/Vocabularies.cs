@@ -69,6 +69,7 @@ public static class Vocabularies
 
         _default.AddIrregular("person", "people");
         _default.AddIrregular("man", "men");
+        _default.AddSingular("(abdomen|acumen|agnomen|albumen|bitumen|catechumen|cerumen|cognomen|cyclamen|dolmen|duramen|energumen|examen|flamen|flehmen|foramen|germen|gravamen|hegumen|hymen|limen|lumen|nomen|numen|pacmen|praenomen|prenomen|putamen|ramen|regimen|rumen|specimen|stamen|tegmen|tegumen|velamen|yamen|^amen|^omen)$", "$1");
         _default.AddIrregular("human", "humans");
         _default.AddIrregular("child", "children");
         _default.AddIrregular("sex", "sexes");

@@ -79,6 +79,23 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
 
     [Theory]
+    [InlineData("abdomen")]
+    [InlineData("acumen")]
+    [InlineData("dolmen")]
+    [InlineData("hymen")]
+    [InlineData("lumen")]
+    [InlineData("omen")]
+    [InlineData("ramen")]
+    [InlineData("specimen")]
+    [InlineData("Specimen")]
+    [InlineData("Pacmen")]
+    public void SingularizeDoesNotRewriteUnrelatedWordsEndingInMen(string word)
+    {
+        Assert.Equal(word, word.Singularize());
+        Assert.Equal(word, word.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Theory]
     [InlineData("arrives", "arrive")]
     [InlineData("drives", "drive")]
     [InlineData("curves", "curve")]
@@ -263,6 +280,9 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["person", "people"];
 
         yield return ["spokesman", "spokesmen"];
+        yield return ["policeman", "policemen"];
+        yield return ["businessman", "businessmen"];
+        yield return ["seaman", "seamen"];
         yield return ["man", "men"];
         yield return ["woman", "women"];
         yield return ["freshman", "freshmen"];
