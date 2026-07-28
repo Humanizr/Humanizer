@@ -7,10 +7,19 @@ namespace Humanizer;
 /// through YAML-driven configuration: bucket phrases, hour modes, day periods, range templates,
 /// hour/minute suffixes, article selection, and Eifeler rule post-processing.
 /// </summary>
-class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOnlyToClockNotationConverter
+class PhraseClockNotationConverter(PhraseClockNotationProfile profile, CultureInfo culture) : ITimeOnlyToClockNotationConverter
 {
     readonly PhraseClockNotationProfile profile = profile;
+    readonly CultureInfo culture = culture;
     readonly Dictionary<string, TemplatePlan> templatePlans = BuildTemplatePlans(profile);
+
+    internal PhraseClockNotationConverter(PhraseClockNotationProfile profile)
+        : this(profile, CultureInfo.CurrentUICulture)
+    {
+    }
+
+    internal PhraseClockNotationConverter WithCulture(CultureInfo requestedCulture) =>
+        new(profile, requestedCulture);
 
     /// <summary>
     /// Converts the given time using the phrase-clock profile.
@@ -128,9 +137,9 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
         {
             baseWord = profile.HourGender switch
             {
-                GrammaticalGender.Feminine => hourValue.ToWords(GrammaticalGender.Feminine),
-                GrammaticalGender.Neuter => hourValue.ToWords(GrammaticalGender.Neuter),
-                _ => hourValue.ToWords(GrammaticalGender.Masculine)
+                GrammaticalGender.Feminine => hourValue.ToWords(GrammaticalGender.Feminine, culture),
+                GrammaticalGender.Neuter => hourValue.ToWords(GrammaticalGender.Neuter, culture),
+                _ => hourValue.ToWords(GrammaticalGender.Masculine, culture)
             };
         }
 
@@ -166,9 +175,9 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile) : ITimeOn
 
         var words = profile.MinuteGender switch
         {
-            GrammaticalGender.Feminine => minutes.ToWords(GrammaticalGender.Feminine),
-            GrammaticalGender.Neuter => minutes.ToWords(GrammaticalGender.Neuter),
-            _ => minutes.ToWords()
+            GrammaticalGender.Feminine => minutes.ToWords(GrammaticalGender.Feminine, culture),
+            GrammaticalGender.Neuter => minutes.ToWords(GrammaticalGender.Neuter, culture),
+            _ => minutes.ToWords(culture)
         };
 
         // Slovak and similar locales write compound tens+units without spaces in clock notation
