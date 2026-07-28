@@ -10,20 +10,18 @@ class ModuloSuffixOrdinalizer(ModuloSuffixOrdinalizer.Options options) : Default
     /// <summary>
     /// Appends the configured suffix for <paramref name="number"/> to <paramref name="numberString"/>.
     /// </summary>
-    public override string Convert(int number, string numberString) =>
+    public override string Convert(long number, string numberString) =>
         numberString + GetSuffix(number);
 
-    string GetSuffix(int number)
+    string GetSuffix(long number)
     {
-        var comparisonValue = options.UseAbsoluteValue
-            ? Math.Abs((long)number)
-            : number;
+        var absoluteValue = GetAbsoluteValue(number);
 
         // The precedence matters: range rules, exact numbers, and threshold rules can all override
         // the general last-digit fallback for the same locale.
         if (options.LastTwoDigitsRange is { } lastTwoDigitsRange)
         {
-            var lastTwoDigits = Math.Abs(comparisonValue % 100);
+            var lastTwoDigits = (int)(absoluteValue % 100);
             if (lastTwoDigits >= lastTwoDigitsRange.Start &&
                 lastTwoDigits <= lastTwoDigitsRange.End)
             {
@@ -31,29 +29,46 @@ class ModuloSuffixOrdinalizer(ModuloSuffixOrdinalizer.Options options) : Default
             }
         }
 
-        if (comparisonValue <= int.MaxValue &&
-            options.ExactSuffixes.TryGetValue((int)comparisonValue, out var exactSuffix))
+        var hasExactValue = options.UseAbsoluteValue
+            ? TryGetInt32Value(absoluteValue, out var exactValue)
+            : TryGetInt32Value(number, out exactValue);
+        if (hasExactValue &&
+            options.ExactSuffixes.TryGetValue(exactValue, out var exactSuffix))
         {
             return exactSuffix;
         }
 
         if (options.AbsoluteAtLeast is { } absoluteAtLeast &&
-            comparisonValue >= absoluteAtLeast &&
+            (options.UseAbsoluteValue
+                ? absoluteAtLeast <= 0 || absoluteValue >= (ulong)absoluteAtLeast
+                : number >= absoluteAtLeast) &&
             options.AbsoluteAtLeastSuffix is not null)
         {
             return options.AbsoluteAtLeastSuffix;
         }
 
-        var moduloLastTwoDigits = (int)Math.Abs(comparisonValue % 100);
+        var moduloLastTwoDigits = (int)(absoluteValue % 100);
         if (options.LastTwoDigitSuffixes.TryGetValue(moduloLastTwoDigits, out var lastTwoDigitSuffix))
         {
             return lastTwoDigitSuffix;
         }
 
-        var lastDigit = (int)Math.Abs(comparisonValue % 10);
+        var lastDigit = (int)(absoluteValue % 10);
         return options.LastDigitSuffixes.TryGetValue(lastDigit, out var lastDigitSuffix)
             ? lastDigitSuffix
             : options.DefaultSuffix;
+    }
+
+    static bool TryGetInt32Value(ulong number, out int value)
+    {
+        if (number <= int.MaxValue)
+        {
+            value = (int)number;
+            return true;
+        }
+
+        value = default;
+        return false;
     }
 
     /// <summary>

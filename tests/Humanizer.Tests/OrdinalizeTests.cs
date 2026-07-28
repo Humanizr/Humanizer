@@ -66,6 +66,58 @@ public class OrdinalizeTests
         Assert.Equal(number.Ordinalize(), ordinalized);
 
     [Theory]
+    [InlineData(2_147_483_651L, "2147483651st")]
+    [InlineData(-2_147_483_651L, "-2147483651st")]
+    [InlineData(long.MinValue, "-9223372036854775808th")]
+    public void OrdinalizeLongNumber(long number, string ordinalized) =>
+        Assert.Equal(ordinalized, number.Ordinalize());
+
+    [Fact]
+    public void OrdinalizeLongNumberUsesCultureSpecificRules()
+    {
+        const long number = 4_294_967_297;
+
+        Assert.Equal("4294967297ème", number.Ordinalize(new CultureInfo("fr-FR")));
+        Assert.Equal(
+            "2147483651.er",
+            2_147_483_651L.Ordinalize(
+                GrammaticalGender.Masculine,
+                new CultureInfo("es-ES"),
+                WordForm.Abbreviation));
+    }
+
+    [Fact]
+    public void OrdinalizeLongNumberUsesNumberWordSuffixFallback()
+    {
+        const long number = 2_147_483_648;
+        var culture = new CultureInfo("hi-IN");
+
+        Assert.Equal(
+            number.ToWords(GrammaticalGender.Masculine, culture) + "वाँ",
+            number.Ordinalize(GrammaticalGender.Masculine, culture));
+    }
+
+    [Fact]
+    public void OrdinalizeLongOverloads()
+    {
+        const long number = 2_147_483_651;
+        var culture = new CultureInfo("en-US");
+
+        Assert.Equal("2147483651st", number.Ordinalize());
+        Assert.Equal("2147483651st", number.Ordinalize(WordForm.Normal));
+        Assert.Equal("2147483651st", number.Ordinalize(culture));
+        Assert.Equal("2147483651st", number.Ordinalize(culture, WordForm.Normal));
+        Assert.Equal("2147483651st", number.Ordinalize(GrammaticalGender.Masculine));
+        Assert.Equal("2147483651st", number.Ordinalize(GrammaticalGender.Masculine, WordForm.Normal));
+        Assert.Equal("2147483651st", number.Ordinalize(GrammaticalGender.Masculine, culture));
+        Assert.Equal("2147483651st", number.Ordinalize(GrammaticalGender.Masculine, culture, WordForm.Normal));
+    }
+
+    [Fact]
+    public void OrdinalizeStringRemainsIntBounded() =>
+        Assert.Throws<OverflowException>(() => "2147483648".Ordinalize());
+
+    [Theory]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(8)]

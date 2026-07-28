@@ -19,23 +19,23 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
     /// <summary>
     /// Ordinalizes using the default masculine gender.
     /// </summary>
-    public override string Convert(int number, string numberString) =>
+    public override string Convert(long number, string numberString) =>
         Convert(number, numberString, GrammaticalGender.Masculine);
 
     /// <summary>
     /// Ordinalizes using the requested gender.
     /// </summary>
-    public override string Convert(int number, string numberString, GrammaticalGender gender) =>
+    public override string Convert(long number, string numberString, GrammaticalGender gender) =>
         ConvertCore(number, gender);
 
     /// <summary>
     /// Ordinalizes using the requested gender and word form. Word form is ignored because
     /// this engine does not distinguish abbreviation from normal.
     /// </summary>
-    public override string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm) =>
+    public override string Convert(long number, string numberString, GrammaticalGender gender, WordForm wordForm) =>
         ConvertCore(number, gender);
 
-    string ConvertCore(int number, GrammaticalGender gender)
+    string ConvertCore(long number, GrammaticalGender gender)
     {
         var effectiveGender = ResolveEffectiveGender(gender);
         var block = ResolveGenderBlock(effectiveGender);
@@ -46,12 +46,12 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
         // This ensures negative and positive irregulars both come from ExactReplacements.
         if (number < 0)
         {
-            var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+            var magnitude = GetAbsoluteValue(number);
             if (magnitude <= int.MaxValue
                 && block.ExactReplacements.TryGetValue((int)magnitude, out var negExact))
             {
                 var converter = Configurator.GetNumberToWordsConverter(culture);
-                var magnitudeCardinal = converter.Convert((int)magnitude, effectiveGender);
+                var magnitudeCardinal = converter.Convert((long)magnitude, effectiveGender);
                 var negativeCardinal = converter.Convert(number, effectiveGender);
 
                 if (!negativeCardinal.EndsWith(magnitudeCardinal, StringComparison.Ordinal))
@@ -67,7 +67,8 @@ class NumberWordSuffixOrdinalizer(CultureInfo culture, NumberWordSuffixOrdinaliz
             return cardinal + block.DefaultSuffix;
         }
 
-        if (block.ExactReplacements.TryGetValue(number, out var exact))
+        if (TryGetInt32Value(number, out var exactValue) &&
+            block.ExactReplacements.TryGetValue(exactValue, out var exact))
         {
             return exact;
         }

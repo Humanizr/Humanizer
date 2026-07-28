@@ -10,54 +10,68 @@ class TemplateOrdinalizer(TemplateOrdinalizer.Options options) : DefaultOrdinali
     /// <summary>
     /// Ordinalizes the number using the default masculine form.
     /// </summary>
-    public override string Convert(int number, string numberString) =>
+    public override string Convert(long number, string numberString) =>
         Convert(number, numberString, GrammaticalGender.Masculine, WordForm.Normal);
 
     /// <summary>
     /// Ordinalizes the number using the default word form for the requested gender.
     /// </summary>
-    public override string Convert(int number, string numberString, GrammaticalGender gender) =>
+    public override string Convert(long number, string numberString, GrammaticalGender gender) =>
         Convert(number, numberString, gender, WordForm.Normal);
 
     /// <summary>
     /// Ordinalizes the number using the template data for the requested gender and word form.
     /// </summary>
-    public override string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm)
+    public override string Convert(long number, string numberString, GrammaticalGender gender, WordForm wordForm)
     {
         if (options.ZeroAsPlainNumber && number == 0)
         {
             return "0";
         }
 
-        if (options.MinValueAsPlainNumber && number == int.MinValue)
+        if (options.MinValueAsPlainNumber && number is int.MinValue or long.MinValue)
         {
             return "0";
         }
 
         if (number < 0 && options.NegativeMode == NegativeNumberMode.AbsoluteInvariant)
         {
-            var positiveNumber = -number;
-            return Convert(positiveNumber, positiveNumber.ToString(CultureInfo.InvariantCulture), gender, wordForm);
+            var positiveNumber = GetAbsoluteValue(number);
+            return positiveNumber <= long.MaxValue
+                ? Convert((long)positiveNumber, positiveNumber.ToString(CultureInfo.InvariantCulture), gender, wordForm)
+                : Format(positiveNumber, positiveNumber.ToString(CultureInfo.InvariantCulture), gender);
         }
 
         var pattern = GetPattern(gender);
-        if (pattern.ExactReplacements.TryGetValue(number, out var exactReplacement))
+        if (TryGetInt32Value(number, out var exactValue) &&
+            pattern.ExactReplacements.TryGetValue(exactValue, out var exactReplacement))
         {
             return exactReplacement;
         }
 
-        if (pattern.ExactSuffixes.TryGetValue(number, out var exactSuffix))
+        if (TryGetInt32Value(number, out exactValue) &&
+            pattern.ExactSuffixes.TryGetValue(exactValue, out var exactSuffix))
         {
             return pattern.Prefix + numberString + exactSuffix;
         }
 
-        var lastDigit = Math.Abs(number % 10);
+        var lastDigit = (int)(GetAbsoluteValue(number) % 10);
         if (pattern.LastDigitSuffixes.TryGetValue(lastDigit, out var lastDigitSuffix))
         {
             return pattern.Prefix + numberString + lastDigitSuffix;
         }
 
         return pattern.Prefix + numberString + pattern.DefaultSuffix;
+    }
+
+    string Format(ulong number, string numberString, GrammaticalGender gender)
+    {
+        var pattern = GetPattern(gender);
+        var lastDigit = (int)(number % 10);
+        return pattern.Prefix + numberString +
+               (pattern.LastDigitSuffixes.TryGetValue(lastDigit, out var suffix)
+                   ? suffix
+                   : pattern.DefaultSuffix);
     }
 
     Pattern GetPattern(GrammaticalGender gender) =>
