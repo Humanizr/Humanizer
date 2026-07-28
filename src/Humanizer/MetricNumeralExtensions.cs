@@ -611,13 +611,13 @@ public static class MetricNumeralExtensions
     /// <summary>
     /// Language codes that use the <a href="https://en.wikipedia.org/wiki/Long_and_short_scales">long scale</a> system.
     /// In the long scale, <c>1E9</c> is a <c>milliard</c> and <c>1E12</c> is a <c>billion</c>.
-    /// Languages not in this set use the short-scale words. Brazilian Portuguese is handled
-    /// separately because it uses short scale while other Portuguese locales use long scale.
+    /// Languages in this set always use long-scale words. Hybrid-scale languages and
+    /// Brazilian Portuguese are handled separately.
     /// </summary>
     static readonly HashSet<string> LongScaleLanguages =
     [
-        "af", "bs", "ca", "cs", "da", "de", "es", "eu", "fa", "fi", "fr", "gl", "hr",
-        "hu", "is", "it", "lb", "nb", "nl", "nn", "pl", "ps", "pt", "sk", "sl", "sr", "sv"
+        "af", "bs", "ca", "cs", "da", "de", "es", "et", "eu", "fa", "fi", "fr", "gl", "hr",
+        "hu", "is", "it", "lb", "mk", "nb", "nl", "nn", "pl", "ps", "pt", "sk", "sl", "sq", "sr", "sv"
     ];
 
     /// <summary>
