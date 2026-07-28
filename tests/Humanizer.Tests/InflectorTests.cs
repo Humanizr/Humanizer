@@ -46,6 +46,10 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
     }
 
+    [Fact, UseCulture("tr-TR")]
+    public void AllCapsInflectionsUseInvariantCasing() =>
+        Assert.Equal("CACTI", "CACTUS".Pluralize());
+
     [Theory]
     [ClassData(typeof(PluralTestSource))]
     public void PluralizeWordsWithUnknownPlurality(string singular, string plural)

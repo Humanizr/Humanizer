@@ -197,7 +197,7 @@ public partial class Vocabulary
 
     static string MatchUpperCase(string word, string replacement) =>
         word.Length > 1 && word.Any(char.IsUpper) && !word.Any(char.IsLower)
-            ? replacement.ToUpper()
+            ? replacement.ToUpperInvariant()
             : char.IsUpper(word[0]) && char.IsLower(replacement[0])
                 ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1))
                 : replacement;
