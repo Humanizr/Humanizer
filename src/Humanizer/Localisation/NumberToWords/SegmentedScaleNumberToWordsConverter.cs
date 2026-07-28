@@ -9,7 +9,16 @@ class SegmentedScaleNumberToWordsConverter(SegmentedScaleNumberToWordsProfile pr
     readonly SegmentedScaleNumberToWordsProfile profile = profile;
 
     /// <inheritdoc/>
-    public override string Convert(long number)
+    public override string Convert(long number) =>
+        Convert(number, SegmentedScaleVariant.Default);
+
+    /// <inheritdoc/>
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true) =>
+        Convert(number, gender == GrammaticalGender.Feminine
+            ? SegmentedScaleVariant.Pluralized
+            : SegmentedScaleVariant.Default);
+
+    string Convert(long number, SegmentedScaleVariant variant)
     {
         if ((ulong)profile.MaximumValue < GetAbsoluteValue(number))
         {
@@ -28,7 +37,7 @@ class SegmentedScaleNumberToWordsConverter(SegmentedScaleNumberToWordsProfile pr
             parts.Add(profile.MinusWord);
         }
 
-        parts.Add(ConvertCore(remaining, SegmentedScaleVariant.Default));
+        parts.Add(ConvertCore(remaining, variant));
         return string.Join(" ", parts);
     }
 
