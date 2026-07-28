@@ -334,13 +334,36 @@ public static partial class InflectorExtensions
     /// </code>
     /// </example>
     public static string Underscore(this string input) =>
-        TryUnderscoreAscii(input, separator: '_', replaceUnderscore: false, out var result)
-            ? result
-            : UnderscoreRegex3()
-                .Replace(
-                    UnderscoreRegex2().Replace(
-                        UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_")
-                .ToLowerInvariant();
+        input.Underscore(preserveCase: false);
+
+    /// <summary>
+    /// Separates words with underscores, optionally preserving the input casing.
+    /// </summary>
+    /// <param name="input">The string to be underscored. Must not be null.</param>
+    /// <param name="preserveCase">
+    /// <see langword="true"/> to preserve the input casing; <see langword="false"/> to convert the result to lowercase.
+    /// </param>
+    /// <returns>A string with words separated by underscores.</returns>
+    /// <remarks>
+    /// Acronyms are split using identifier word boundaries, and lowercasing is culture-invariant.
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// "SomePropertyName".Underscore(preserveCase: true) => "Some_Property_Name"
+    /// "HTMLParser".Underscore(preserveCase: true) => "HTML_Parser"
+    /// </code>
+    /// </example>
+    public static string Underscore(this string input, bool preserveCase)
+    {
+        if (TryUnderscoreAscii(input, separator: '_', replaceUnderscore: false, preserveCase: preserveCase, out var result))
+            return result;
+
+        result = UnderscoreRegex3()
+            .Replace(
+                UnderscoreRegex2().Replace(
+                    UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_");
+        return preserveCase ? result : result.ToLowerInvariant();
+    }
 
     /// <summary>
     /// Replaces all underscores in the string with dashes (hyphens).
@@ -350,7 +373,7 @@ public static partial class InflectorExtensions
     /// A string with all underscores replaced by dashes.
     /// </returns>
     /// <remarks>
-    /// This is typically used after calling <see cref="Underscore"/> to convert from underscore_case to dash-case (kebab-case).
+    /// This is typically used after calling <see cref="Underscore(string)"/> to convert from underscore_case to dash-case (kebab-case).
     /// </remarks>
     /// <example>
     /// <code>
@@ -389,7 +412,7 @@ public static partial class InflectorExtensions
     /// </returns>
     /// <remarks>
     /// Kebab-case is commonly used for CSS class names, HTML attributes, and URL slugs.
-    /// This is equivalent to calling <see cref="Underscore"/> followed by <see cref="Dasherize"/>.
+    /// This is equivalent to calling <see cref="Underscore(string)"/> followed by <see cref="Dasherize"/>.
     /// Casing is culture-invariant.
     /// </remarks>
     /// <example>
@@ -401,7 +424,7 @@ public static partial class InflectorExtensions
     /// </code>
     /// </example>
     public static string Kebaberize(this string input) =>
-        TryUnderscoreAscii(input, separator: '-', replaceUnderscore: true, out var result)
+        TryUnderscoreAscii(input, separator: '-', replaceUnderscore: true, preserveCase: false, out var result)
             ? result
             : Underscore(input)
                 .Dasherize();
@@ -432,7 +455,12 @@ public static partial class InflectorExtensions
             : StringHumanizeExtensions.Concat(word.AsSpan(), "'s".AsSpan());
     }
 
-    static bool TryUnderscoreAscii(string input, char separator, bool replaceUnderscore, [NotNullWhen(true)] out string? result)
+    static bool TryUnderscoreAscii(
+        string input,
+        char separator,
+        bool replaceUnderscore,
+        bool preserveCase,
+        [NotNullWhen(true)] out string? result)
     {
         result = null;
         if (!IsAscii(input))
@@ -460,11 +488,11 @@ public static partial class InflectorExtensions
                     buffer[pos++] = separator;
                 }
 
-                buffer[pos++] = textInfo.ToLower(c);
+                buffer[pos++] = preserveCase ? c : textInfo.ToLower(c);
                 continue;
             }
 
-            buffer[pos++] = textInfo.ToLower(c);
+            buffer[pos++] = preserveCase ? c : textInfo.ToLower(c);
         }
 
         result = new(buffer, 0, pos);
