@@ -257,6 +257,22 @@ surfaces:
         forms:
           default: 'pébioctet'
         symbol: 'Pio'
+      kibibyte:
+        forms:
+          default: 'kibioctet'
+        symbol: 'Kio'
+      mebibyte:
+        forms:
+          default: 'mébioctet'
+        symbol: 'Mio'
+      gibibyte:
+        forms:
+          default: 'gibioctet'
+        symbol: 'Gio'
+      tebibyte:
+        forms:
+          default: 'tébioctet'
+        symbol: 'Tio'
     timeUnits:
       millisecond:
         symbol: 'ms'

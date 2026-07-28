@@ -48,5 +48,25 @@ public enum DataUnit
     /// <summary>
     /// A pebibyte.
     /// </summary>
-    Pebibyte
+    Pebibyte,
+
+    /// <summary>
+    /// A kibibyte.
+    /// </summary>
+    Kibibyte,
+
+    /// <summary>
+    /// A mebibyte.
+    /// </summary>
+    Mebibyte,
+
+    /// <summary>
+    /// A gibibyte.
+    /// </summary>
+    Gibibyte,
+
+    /// <summary>
+    /// A tebibyte.
+    /// </summary>
+    Tebibyte
 }

@@ -40,9 +40,13 @@ public struct ByteSize(double byteSize) :
 
     public const long BitsInByte = 8;
     public const long BytesInKilobyte = 1024;
+    public const long BytesInKibibyte = BytesInKilobyte;
     public const long BytesInMegabyte = 1048576;
+    public const long BytesInMebibyte = BytesInMegabyte;
     public const long BytesInGigabyte = 1073741824;
+    public const long BytesInGibibyte = BytesInGigabyte;
     public const long BytesInTerabyte = 1099511627776;
+    public const long BytesInTebibyte = BytesInTerabyte;
     public const long BytesInPetabyte = 1000000000000000;
     public const long BytesInExabyte = 1000000000000000000;
     public const long BytesInPebibyte = 1125899906842624;
@@ -53,12 +57,20 @@ public struct ByteSize(double byteSize) :
     public const string Byte = "byte";
     public const string KilobyteSymbol = "KB";
     public const string Kilobyte = "kilobyte";
+    public const string KibibyteSymbol = "KiB";
+    public const string Kibibyte = "kibibyte";
     public const string MegabyteSymbol = "MB";
     public const string Megabyte = "megabyte";
+    public const string MebibyteSymbol = "MiB";
+    public const string Mebibyte = "mebibyte";
     public const string GigabyteSymbol = "GB";
     public const string Gigabyte = "gigabyte";
+    public const string GibibyteSymbol = "GiB";
+    public const string Gibibyte = "gibibyte";
     public const string TerabyteSymbol = "TB";
     public const string Terabyte = "terabyte";
+    public const string TebibyteSymbol = "TiB";
+    public const string Tebibyte = "tebibyte";
     public const string PetabyteSymbol = "PB";
     public const string Petabyte = "petabyte";
     public const string ExabyteSymbol = "EB";
@@ -69,9 +81,13 @@ public struct ByteSize(double byteSize) :
     public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
     public double Bytes { get; } = byteSize;
     public double Kilobytes { get; } = byteSize / BytesInKilobyte;
+    public readonly double Kibibytes => Bytes / BytesInKibibyte;
     public double Megabytes { get; } = byteSize / BytesInMegabyte;
+    public readonly double Mebibytes => Bytes / BytesInMebibyte;
     public double Gigabytes { get; } = byteSize / BytesInGigabyte;
+    public readonly double Gibibytes => Bytes / BytesInGibibyte;
     public double Terabytes { get; } = byteSize / BytesInTerabyte;
+    public readonly double Tebibytes => Bytes / BytesInTebibyte;
     public readonly double Petabytes => Bytes / BytesInPetabyte;
     public readonly double Exabytes => Bytes / BytesInExabyte;
     public readonly double Pebibytes => Bytes / BytesInPebibyte;
@@ -221,14 +237,26 @@ public struct ByteSize(double byteSize) :
     public static ByteSize FromKilobytes(double value) =>
         new(value * BytesInKilobyte);
 
+    public static ByteSize FromKibibytes(double value) =>
+        new(value * BytesInKibibyte);
+
     public static ByteSize FromMegabytes(double value) =>
         new(value * BytesInMegabyte);
+
+    public static ByteSize FromMebibytes(double value) =>
+        new(value * BytesInMebibyte);
 
     public static ByteSize FromGigabytes(double value) =>
         new(value * BytesInGigabyte);
 
+    public static ByteSize FromGibibytes(double value) =>
+        new(value * BytesInGibibyte);
+
     public static ByteSize FromTerabytes(double value) =>
         new(value * BytesInTerabyte);
+
+    public static ByteSize FromTebibytes(double value) =>
+        new(value * BytesInTebibyte);
 
     public static ByteSize FromPetabytes(double value)
     {
@@ -333,6 +361,30 @@ public struct ByteSize(double byteSize) :
         {
             format = replace(format, PebibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Pebibyte, Pebibytes, toSymbol));
             return output(Pebibytes);
+        }
+
+        if (has(TebibyteSymbol))
+        {
+            format = replace(format, TebibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Tebibyte, Tebibytes, toSymbol));
+            return output(Tebibytes);
+        }
+
+        if (has(GibibyteSymbol))
+        {
+            format = replace(format, GibibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gibibyte, Gibibytes, toSymbol));
+            return output(Gibibytes);
+        }
+
+        if (has(MebibyteSymbol))
+        {
+            format = replace(format, MebibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Mebibyte, Mebibytes, toSymbol));
+            return output(Mebibytes);
+        }
+
+        if (has(KibibyteSymbol))
+        {
+            format = replace(format, KibibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kibibyte, Kibibytes, toSymbol));
+            return output(Kibibytes);
         }
 
         if (has(ExabyteSymbol))
@@ -636,16 +688,32 @@ public struct ByteSize(double byteSize) :
                 result = FromKilobytes(number);
                 break;
 
+            case "KIB":
+                result = FromKibibytes(number);
+                break;
+
             case MegabyteSymbol:
                 result = FromMegabytes(number);
+                break;
+
+            case "MIB":
+                result = FromMebibytes(number);
                 break;
 
             case GigabyteSymbol:
                 result = FromGigabytes(number);
                 break;
 
+            case "GIB":
+                result = FromGibibytes(number);
+                break;
+
             case TerabyteSymbol:
                 result = FromTerabytes(number);
+                break;
+
+            case "TIB":
+                result = FromTebibytes(number);
                 break;
 
             case PetabyteSymbol:
