@@ -305,8 +305,19 @@ public class InflectorTests
     [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
     [InlineData("SomeForeignWordsLikeÄgyptenÑu", "some_foreign_words_like_ägypten_ñu")]
     [InlineData("Some wordsTo be Underscored", "some_words_to_be_underscored")]
+    [InlineData("HTMLParserName", "html_parser_name")]
     public void Underscore(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Underscore());
+
+    [Theory]
+    [InlineData("SomeTitle", "Some_Title")]
+    [InlineData("HTMLParserName", "HTML_Parser_Name")]
+    [InlineData("SomeForeignWordsLikeÄgyptenÑu", "Some_Foreign_Words_Like_Ägypten_Ñu")]
+    [InlineData("Some title", "Some_title")]
+    [InlineData("Some-Title", "Some_Title")]
+    [InlineData("Some_Title", "Some_Title")]
+    public void UnderscorePreservesCaseWhenRequested(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Underscore(preserveCase: true));
 
     // transform words into lowercase and separate with a -
     [Theory]

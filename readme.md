@@ -570,6 +570,7 @@ Transform to common naming conventions:
 ```csharp
 // Underscore: snake_case
 "SomeTitle".Underscore() => "some_title"
+"SomeTitle".Underscore(preserveCase: true) => "Some_Title"
 
 // Dasherize/Hyphenate: Replace underscores with dashes
 "some_title".Dasherize() => "some-title"
