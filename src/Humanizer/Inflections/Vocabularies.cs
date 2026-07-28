@@ -26,7 +26,8 @@ public static class Vocabularies
         _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
         _default.AddPlural("([dti])um$", "$1a");
         _default.AddPlural("sis$", "ses");
-        _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves");
+        _default.AddPlural("(cal|dwar|el|hal|hoo|lea|loa|scar|sel|shel|thie|tur|whar|wol)f$", "$1ves");
+        _default.AddPlural("(kni|li|wi)fe$", "$1ves");
         _default.AddPlural("(hive)$", "$1s");
         _default.AddPlural("([^aeiouy]|qu)y$", "$1ies");
         _default.AddPlural("(x|ch|ss|sh)$", "$1es");
@@ -35,7 +36,6 @@ public static class Vocabularies
         _default.AddPlural("^(ox)$", "$1en");
         _default.AddPlural("(quiz)$", "$1zes");
         _default.AddPlural("(buz|blit|walt)z$", "$1zes");
-        _default.AddPlural("(hoo|lea|loa|thie)f$", "$1ves");
         _default.AddPlural("(alumn|alg|larv|vertebr)a$", "$1ae");
         _default.AddPlural("(criteri|phenomen)on$", "$1a");
 
@@ -43,10 +43,11 @@ public static class Vocabularies
         _default.AddSingular("(n)ews$", "$1ews");
         _default.AddSingular("([dti])a$", "$1um");
         _default.AddSingular("(analy|ba|diagno|parenthe|progno|synop|the|ellip|empha|neuro|oa|paraly)ses$", "$1sis");
-        _default.AddSingular("([^f])ves$", "$1fe");
+        _default.AddSingular("(.+)ves$", "$1ve");
         _default.AddSingular("(hive)s$", "$1");
         _default.AddSingular("(tive)s$", "$1");
-        _default.AddSingular("([lr]|hoo|lea|loa|thie)ves$", "$1f");
+        _default.AddSingular("(cal|dwar|el|hal|hoo|lea|loa|scar|sel|shel|thie|tur|whar|wol)ves$", "$1f");
+        _default.AddSingular("(li|wi|kni)ves$", "$1fe");
         _default.AddSingular("(^zomb)?([^aeiouy]|qu)ies$", "$2y");
         _default.AddSingular("(s)eries$", "$1eries");
         _default.AddSingular("(m)ovies$", "$1ovie");
@@ -82,6 +83,7 @@ public static class Vocabularies
         _default.AddIrregular("zombie", "zombies");
         _default.AddIrregular("personnel", "personnel");
         _default.AddIrregular("cache", "caches");
+        _default.AddIrregular("olive", "olives", matchEnding: false);
         _default.AddIrregular("ex", "exes", matchEnding: false);
         _default.AddIrregular("is", "are", matchEnding: false);
         _default.AddIrregular("was", "were", matchEnding: false);
