@@ -201,6 +201,16 @@ public class InflectorTests
         Assert.Equal("élanInput", "Élan_input".Camelize());
         Assert.Equal("élan_input", "ÉlanInput".Underscore());
         Assert.Equal("élan-input", "ÉlanInput".Kebaberize());
+
+        Assert.Equal("İstanbulInput", "İstanbul_input".Pascalize());
+        Assert.Equal("İstanbulInput", "İstanbul_input".Camelize());
+        Assert.Equal("İstanbul_input", "İstanbulInput".Underscore());
+        Assert.Equal("İstanbul-input", "İstanbulInput".Kebaberize());
+
+        Assert.Equal("ıstanbulInput", "ıstanbul_input".Pascalize());
+        Assert.Equal("ıstanbulInput", "ıstanbul_input".Camelize());
+        Assert.Equal("ıstanbul_input", "ıstanbulInput".Underscore());
+        Assert.Equal("ıstanbul-input", "ıstanbulInput".Kebaberize());
     }
 }
 
