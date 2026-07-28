@@ -43,8 +43,8 @@ public class TimeOnlyHumanizeTests
 
         var results = await Task.WhenAll(defaultResult, precisionResult);
 
-        Assert.Equal("dans 12 heures", results[0]);
-        Assert.Equal("á morgun", results[1]);
+        Assert.Equal("12 hours from now", results[0]);
+        Assert.Equal("demain", results[1]);
 
         string Humanize(
             CultureInfo currentCulture,
