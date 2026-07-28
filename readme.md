@@ -512,6 +512,7 @@ Convert strings to various coding conventions:
 
 // Camelize: lowerCamelCase without spaces
 "some_title for something".Camelize() => "someTitleForSomething"
+"_some_title".Camelize() => "_someTitle"
 ```
 
 
