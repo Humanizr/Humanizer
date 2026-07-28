@@ -32,6 +32,10 @@ Strings containing only uppercase letters are treated as acronyms and left uncha
 ```csharp
 "HTML".Humanize() // => "HTML"
 "HUMANIZER".Humanize() // => "HUMANIZER"
+
+// Registration is process-wide; matching uses the registered output casing.
+Vocabularies.Default.AddAcronym("HS");
+"HsAccess".Humanize() // => "HS access"
 ```
 
 To force humanization of all-caps strings, use the `Transform` method:

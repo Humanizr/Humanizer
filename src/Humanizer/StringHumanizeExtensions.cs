@@ -243,22 +243,18 @@ public static partial class StringHumanizeExtensions
         // if input is all capitals (e.g. an acronym) then return it without change
         if (IsAllUpper(input, 0, input.Length))
         {
-            return input;
+            return Vocabularies.ApplyAcronyms(input);
         }
 
         // if input contains a dash or underscore which precedes or follows a space (or both, e.g. freestanding)
         // remove the dash/underscore and run it through FromPascalCase
-        if (HasFreestandingSpacingChar(input))
-        {
-            return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
-        }
+        var humanized = HasFreestandingSpacingChar(input)
+            ? FromPascalCase(FromUnderscoreDashSeparatedWords(input))
+            : input.IndexOfAny(['_', '-']) >= 0
+                ? FromUnderscoreDashSeparatedWords(input)
+                : FromPascalCase(input);
 
-        if (input.IndexOfAny(['_', '-']) >= 0)
-        {
-            return FromUnderscoreDashSeparatedWords(input);
-        }
-
-        return FromPascalCase(input);
+        return Vocabularies.ApplyAcronyms(humanized);
     }
 
     static bool HasFreestandingSpacingChar(string input)

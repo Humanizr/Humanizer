@@ -59,6 +59,42 @@ public class StringHumanizeTests
     public void CanHumanizeStringWithAcronyms(string input, string expectedValue) =>
         Assert.Equal(expectedValue, input.Humanize());
 
+    [Fact]
+    public void CanHumanizeStringsWithCustomAcronyms()
+    {
+        Vocabularies.Default.RemoveAcronym("HS");
+        Vocabularies.Default.RemoveAcronym("iOS");
+        try
+        {
+            Assert.Equal("Hs access", "HsAccess".Humanize());
+
+            Vocabularies.Default.AddAcronym("HS");
+            Vocabularies.Default.AddAcronym("hs");
+
+            Assert.Equal("HS access", "hsAccess".Humanize());
+            Assert.Equal("HS access", "HsAccess".Humanize());
+            Assert.Equal("Uses HS", "UsesHs".Humanize());
+            Assert.Equal("The HTML language", "TheHTMLLanguage".Humanize());
+
+            Vocabularies.Default.AddAcronym("iOS");
+            Assert.Equal("iOS", "IOS".Humanize());
+        }
+        finally
+        {
+            Vocabularies.Default.RemoveAcronym("HS");
+            Vocabularies.Default.RemoveAcronym("iOS");
+        }
+
+        Assert.Equal("Hs access", "HsAccess".Humanize());
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("HS2")]
+    public void CannotAddInvalidAcronym(string? acronym) =>
+        Assert.ThrowsAny<ArgumentException>(() => Vocabularies.Default.AddAcronym(acronym!));
+
     [Theory]
     [InlineData("CanReturnTitleCase", "Can Return Title Case")]
     [InlineData("Can_return_title_Case", "Can Return Title Case")]

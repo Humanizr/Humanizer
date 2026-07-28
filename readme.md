@@ -62,6 +62,11 @@ The foundation of this feature was originally developed for the [BDDfy framework
 "HTML".Humanize() => "HTML"  // Acronym preserved
 "HUMANIZER".Humanize() => "HUMANIZER"  // All caps preserved
 
+// Register a custom acronym using its preferred output casing.
+// Registration is process-wide; matching is case-insensitive.
+Vocabularies.Default.AddAcronym("HS");
+"HsAccess".Humanize() => "HS access"
+
 // Force humanization with Transform
 "HUMANIZER".Transform(To.LowerCase, To.TitleCase) => "Humanizer"
 ```
