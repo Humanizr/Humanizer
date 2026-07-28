@@ -24,9 +24,9 @@ function VersionDropdownNavbarItem(props: Props): ReactNode {
 export default function VersionAwareDropdownNavbarItem(
   props: Props,
 ): ReactNode {
-  return props.className?.split(/\s+/).includes('humanizerVersionDropdown') ? (
-    <VersionDropdownNavbarItem {...props} />
-  ) : (
-    <DropdownNavbarItem {...props} />
-  );
+  if (props.className?.split(/\s+/).includes('humanizerVersionDropdown')) {
+    return <VersionDropdownNavbarItem {...props} />;
+  }
+
+  return <DropdownNavbarItem {...props} />;
 }

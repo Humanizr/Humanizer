@@ -8,6 +8,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+. (Join-Path $PSScriptRoot "nuget-package.ps1")
 if (-not $ManifestPath) {
     $ManifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 }
@@ -59,16 +60,21 @@ try {
                 -File `
                 -Recurse
         )
+        $projectAreas = @{}
+        foreach ($project in $allProjects) {
+            $projectAreas[$project.FullName] = @(
+                [regex]::Matches(
+                    (Get-Content -Raw $project.FullName),
+                    "<DocumentationArea>\s*(?<area>[^<]+?)\s*</DocumentationArea>"
+                ) |
+                    ForEach-Object { $_.Groups["area"].Value.Trim() }
+            )
+        }
         foreach ($requestedArea in $requestedAreas) {
             $matchingProjects = @(
                 $allProjects |
                 Where-Object {
-                    $projectText = Get-Content -Raw $_.FullName
-                    $projectText -match (
-                        "<DocumentationArea>\s*" +
-                        [regex]::Escape($requestedArea) +
-                        "\s*</DocumentationArea>"
-                    )
+                    $projectAreas[$_.FullName] -contains $requestedArea
                 }
             )
             if ($matchingProjects.Count -eq 0) {
@@ -82,15 +88,11 @@ try {
                         return $true
                     }
 
-                    $projectText = Get-Content -Raw $_.FullName
+                    $projectArea = @($projectAreas[$_.FullName])
                     return @(
                         $requestedAreas |
                             Where-Object {
-                                $projectText -match (
-                                    "<DocumentationArea>\s*" +
-                                    [regex]::Escape($_) +
-                                    "\s*</DocumentationArea>"
-                                )
+                                $projectArea -contains $_
                             }
                     ).Count -gt 0
                 }
@@ -174,11 +176,10 @@ try {
                     throw "Example $($project.Name) did not resolve the current Humanizer project."
                 }
             } else {
-                $libraryKey = "$($entry.installPackage)/$($entry.source.packageVersion)"
-                $library = $assets.libraries.PSObject.Properties[$libraryKey]
-                if ($null -eq $library -or $library.Value.type -ne "package") {
-                    throw "Example $($project.Name) did not resolve $libraryKey."
-                }
+                Assert-DocsHumanizerPackageGraph `
+                    -Entry $entry `
+                    -Libraries $assets.libraries `
+                    -Context "Example $($project.Name)"
             }
 
             $runArguments = @(

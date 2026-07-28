@@ -12,9 +12,7 @@ public class LocaliserRegistry<TLocaliser>
     readonly object lockObject = new();
     volatile FrozenDictionary<string, Func<CultureInfo, TLocaliser>>? frozenLocalisers;
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
-#pragma warning disable IL2091
-    readonly ConditionalWeakTable<CultureInfo, TLocaliser> cultureSpecificCache = new();
-#pragma warning restore IL2091
+    readonly ConditionalWeakTable<CultureInfo, StrongBox<TLocaliser>> cultureSpecificCache = new();
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -41,7 +39,10 @@ public class LocaliserRegistry<TLocaliser>
     public TLocaliser ResolveForCulture(CultureInfo? culture)
     {
         var cultureInfo = culture ?? CultureInfo.CurrentCulture;
-        return cultureSpecificCache.GetValue(cultureInfo, c => FindLocaliser(c)(c));
+        return cultureSpecificCache.GetValue(
+            cultureInfo,
+            c => new(FindLocaliser(c)(c))
+        ).Value!;
     }
 
     /// <summary>

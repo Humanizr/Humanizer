@@ -111,7 +111,7 @@ Gender for Brazilian Portuguese locale
 1\.Ordinalize\(GrammaticalGender\.Feminine\) \-\> "1ª"
 
 ```csharp
-public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture);
+public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture);
 ```
 #### Parameters
 
@@ -131,7 +131,7 @@ The grammatical gender to use for output words
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
@@ -144,7 +144,7 @@ Turns a number into an ordinal number used to denote the position in an ordered 
 locale's variations using the grammatical gender provided
 
 ```csharp
-public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm);
+public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture, Humanizer.WordForm wordForm);
 ```
 #### Parameters
 
@@ -164,7 +164,7 @@ The grammatical gender to use for output words
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 <a name='Humanizer.OrdinalizeExtensions.Ordinalize(thisint,Humanizer.GrammaticalGender,System.Globalization.CultureInfo,Humanizer.WordForm).wordForm'></a>
 
@@ -227,7 +227,7 @@ In Spanish:
 Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th\.
 
 ```csharp
-public static string Ordinalize(this int number, System.Globalization.CultureInfo culture);
+public static string Ordinalize(this int number, System.Globalization.CultureInfo? culture);
 ```
 #### Parameters
 
@@ -241,7 +241,7 @@ The number to be ordinalized
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
@@ -253,7 +253,7 @@ Culture to use\. If null, current thread's UI culture is used\.
 Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations\.
 
 ```csharp
-public static string Ordinalize(this int number, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm);
+public static string Ordinalize(this int number, System.Globalization.CultureInfo? culture, Humanizer.WordForm wordForm);
 ```
 #### Parameters
 
@@ -267,7 +267,7 @@ The number to be ordinalized
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 <a name='Humanizer.OrdinalizeExtensions.Ordinalize(thisint,System.Globalization.CultureInfo,Humanizer.WordForm).wordForm'></a>
 
@@ -389,7 +389,7 @@ Gender for Brazilian Portuguese locale
 "1"\.Ordinalize\(GrammaticalGender\.Feminine\) \-\> "1ª"
 
 ```csharp
-public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture);
+public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture);
 ```
 #### Parameters
 
@@ -409,7 +409,7 @@ The grammatical gender to use for output words
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
@@ -422,7 +422,7 @@ Turns a number into an ordinal number used to denote the position in an ordered 
 locale's variations using the grammatical gender provided
 
 ```csharp
-public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm);
+public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture, Humanizer.WordForm wordForm);
 ```
 #### Parameters
 
@@ -442,7 +442,7 @@ The grammatical gender to use for output words
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 <a name='Humanizer.OrdinalizeExtensions.Ordinalize(thisstring,Humanizer.GrammaticalGender,System.Globalization.CultureInfo,Humanizer.WordForm).wordForm'></a>
 
@@ -505,7 +505,7 @@ In Spanish:
 Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th\.
 
 ```csharp
-public static string Ordinalize(this string numberString, System.Globalization.CultureInfo culture);
+public static string Ordinalize(this string numberString, System.Globalization.CultureInfo? culture);
 ```
 #### Parameters
 
@@ -519,7 +519,7 @@ The number, in string, to be ordinalized
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
@@ -531,7 +531,7 @@ Culture to use\. If null, current thread's UI culture is used\.
 Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations\.
 
 ```csharp
-public static string Ordinalize(this string numberString, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm);
+public static string Ordinalize(this string numberString, System.Globalization.CultureInfo? culture, Humanizer.WordForm wordForm);
 ```
 #### Parameters
 
@@ -545,7 +545,7 @@ The number to be ordinalized
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 <a name='Humanizer.OrdinalizeExtensions.Ordinalize(thisstring,System.Globalization.CultureInfo,Humanizer.WordForm).wordForm'></a>
 

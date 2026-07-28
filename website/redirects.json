@@ -136,7 +136,7 @@
       "to": "/docs/contributing/"
     },
     {
-      "from": ["/contributing", "/contributing.html"],
+      "from": ["/contributing", "/contributing.html", "/CONTRIBUTING.md", "/.github/CONTRIBUTING.md"],
       "to": "/docs/contributing/"
     },
     {

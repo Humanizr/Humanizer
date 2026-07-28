@@ -332,29 +332,21 @@ function Get-CurrentEvidence {
     }
 }
 
-function Get-PublishedEvidence {
-    if ($entry.source.kind -ne "nuget" -or -not $entry.source.packageVersion) {
-        throw "Version '$Version' is not backed by a published NuGet package."
-    }
+function Get-PublishedEvidenceFromPackages {
+    param(
+        [Parameter(Mandatory = $true)]$MetaPackage,
+        [Parameter(Mandatory = $true)]$ApiPackage
+    )
 
-    $metaPackage = Get-DocsNuGetPackage `
-        -Entry $entry `
-        -RepoRoot $repoRoot `
-        -PackageId $entry.installPackage
-    $apiPackage = Get-DocsNuGetPackage `
-        -Entry $entry `
-        -RepoRoot $repoRoot `
-        -PackageId $entry.apiPackage
-
-    $nuspecPath = Get-ChildItem $metaPackage.ExtractPath -Filter "*.nuspec" -File |
+    $nuspecPath = Get-ChildItem $MetaPackage.ExtractPath -Filter "*.nuspec" -File |
         Select-Object -ExpandProperty FullName -First 1
     if (-not $nuspecPath) {
-        throw "Verified metapackage is missing its nuspec: $($metaPackage.PackagePath)"
+        throw "Verified metapackage is missing its nuspec: $($MetaPackage.PackagePath)"
     }
-    $apiNuspecPath = Get-ChildItem $apiPackage.ExtractPath -Filter "*.nuspec" -File |
+    $apiNuspecPath = Get-ChildItem $ApiPackage.ExtractPath -Filter "*.nuspec" -File |
         Select-Object -ExpandProperty FullName -First 1
     if (-not $apiNuspecPath) {
-        throw "Verified API package is missing its nuspec: $($apiPackage.PackagePath)"
+        throw "Verified API package is missing its nuspec: $($ApiPackage.PackagePath)"
     }
 
     $nuspec = [xml][System.IO.File]::ReadAllText($nuspecPath)
@@ -415,7 +407,7 @@ function Get-PublishedEvidence {
     }
 
     $xmlByFramework = @{}
-    $libRoot = Join-Path $apiPackage.ExtractPath "lib"
+    $libRoot = Join-Path $ApiPackage.ExtractPath "lib"
     foreach ($frameworkDirectory in Get-ChildItem $libRoot -Directory | Sort-Object Name) {
         $xmlPath = Join-Path $frameworkDirectory.FullName "Humanizer.xml"
         $dllPath = Join-Path $frameworkDirectory.FullName "Humanizer.dll"
@@ -426,7 +418,7 @@ function Get-PublishedEvidence {
         $xmlByFramework[$frameworkDirectory.Name] = $xmlPath
     }
     if ($xmlByFramework.Count -eq 0) {
-        throw "Verified API package has no Humanizer DLL/XML assets: $($apiPackage.PackagePath)"
+        throw "Verified API package has no Humanizer DLL/XML assets: $($ApiPackage.PackagePath)"
     }
 
     return [ordered]@{
@@ -442,6 +434,32 @@ function Get-PublishedEvidence {
             targetFrameworks = @(Sort-TargetFrameworks $xmlByFramework.Keys)
             localeData = "culture packages declared by the verified metapackage; neutral en supplied by the verified API package"
             apiAvailability = Get-ApiAvailability -XmlByFramework $xmlByFramework
+        }
+    }
+}
+
+function Get-PublishedEvidence {
+    if ($entry.source.kind -ne "nuget" -or -not $entry.source.packageVersion) {
+        throw "Version '$Version' is not backed by a published NuGet package."
+    }
+
+    return Use-DocsNuGetPackage `
+        -Entry $entry `
+        -RepoRoot $repoRoot `
+        -PackageId $entry.installPackage `
+        -Action {
+        param($metaPackage)
+
+        Use-DocsNuGetPackage `
+            -Entry $entry `
+            -RepoRoot $repoRoot `
+            -PackageId $entry.apiPackage `
+            -Action {
+            param($apiPackage)
+
+            Get-PublishedEvidenceFromPackages `
+                -MetaPackage $metaPackage `
+                -ApiPackage $apiPackage
         }
     }
 }

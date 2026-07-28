@@ -23,7 +23,13 @@ The executable verifies a two-flag value, case-insensitive generic dehumanizatio
 
 ### Choose metadata and casing
 
-Humanizer prefers supported description/display metadata before deriving words from the member name. That chosen value is also the member's dehumanization label. Pass `LetterCasing` when the derived label needs a specific case. `Configurator.UseEnumDescriptionPropertyLocator` can select a custom description-like property globally and must run before enum metadata is cached.
+Humanizer prefers supported description/display metadata before deriving words
+from the member name. That chosen value is also the member's dehumanization
+label. On `main/preview`, `LetterCasing` changes only labels derived from the
+member name; authored metadata preserves its exact casing.
+`Configurator.UseEnumDescriptionPropertyLocator` can select a custom
+description-like property globally and must run before enum metadata is
+cached.
 
 ### Handle missing input
 
@@ -42,7 +48,8 @@ Labels must be unambiguous even though matching is case-insensitive. Prefer the 
 Enum APIs span the documented corpus, but Humanizer 3 changes generic
 constraints and metadata configuration. The flags example runs against the
 selected package. Consult the selected API before migrating code that stores
-values as the base `Enum` type.
+values as the base `Enum` type. Metadata casing preservation when a
+`LetterCasing` argument is supplied is `main/preview` behavior.
 
 ## Related guides and API
 

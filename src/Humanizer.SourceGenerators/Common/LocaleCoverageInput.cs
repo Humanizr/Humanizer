@@ -66,11 +66,20 @@ public sealed partial class HumanizerSourceGenerator
                     }
 
                     var contributes = definition.AuthoredFeatureNames.Any(locale.AuthoredFeatureNames.Contains);
-                    coverage[definition.Key] = contributes
-                        ? new LocaleCoverageStatus("own", null)
-                        : resolved && locale.VariantOf is not null
-                            ? new LocaleCoverageStatus("via", locale.VariantOf)
-                            : new LocaleCoverageStatus(definition.Optional ? "platform" : "missing", null);
+                    LocaleCoverageStatus status;
+                    if (contributes)
+                    {
+                        status = new LocaleCoverageStatus("own", null);
+                    }
+                    else if (resolved && locale.VariantOf is not null)
+                    {
+                        status = new LocaleCoverageStatus("via", locale.VariantOf);
+                    }
+                    else
+                    {
+                        status = new LocaleCoverageStatus(definition.Optional ? "platform" : "missing", null);
+                    }
+                    coverage[definition.Key] = status;
                 }
 
                 rows.Add(new LocaleCoverageRow(locale.LocaleCode, locale.VariantOf, coverage.ToImmutable()));

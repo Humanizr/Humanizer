@@ -9,7 +9,9 @@ const pagefindRoot = join(siteRoot, 'pagefind');
 const manifest = JSON.parse(
   await readFile(new URL('../humanizer-versions.json', import.meta.url)),
 );
-const versions = manifest.versions;
+const versions = manifest.versions.filter(
+  ({published, version}) => published || version === 'current',
+);
 
 const contentTypes = new Map([
   ['.js', 'text/javascript'],
@@ -83,7 +85,7 @@ try {
     assert.equal(result.meta.version, version.label);
     assert.match(
       result.meta.title,
-      new RegExp(version.label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+      new RegExp(RegExp.escape(version.label)),
     );
     assert(Object.hasOwn(filters.version ?? {}, version.label));
   }

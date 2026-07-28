@@ -1,0 +1,15 @@
+allowBuilds:
+  core-js: false
+minimumReleaseAge: 2880
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - '@algolia/client-analytics@4.27.0'
+  - '@algolia/client-common@4.27.0'
+  - '@algolia/client-personalization@4.27.0'
+  - '@algolia/client-search@4.27.0'
+  - '@algolia/logger-console@4.27.0'
+  - '@algolia/recommend@4.27.0'
+  - '@algolia/requester-browser-xhr@4.27.0'
+  - '@algolia/requester-node-http@4.27.0'
+  - 'algoliasearch@4.27.0'
+  - 'semver@6.3.1'

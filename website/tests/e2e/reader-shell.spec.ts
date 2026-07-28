@@ -1,13 +1,13 @@
 import {expect, test} from '@playwright/test';
 import versionManifest from '../../humanizer-versions.json';
 
-const searchContexts = versionManifest.versions.map(
-  ({label, route, version}) => ({
+const searchContexts = versionManifest.versions
+  .filter(({published, version}) => published || version === 'current')
+  .map(({label, route, version}) => ({
     index: version,
     label,
     path: `/docs/${route ? `${route}/` : ''}start/quick-start/`,
-  }),
-);
+  }));
 const searchIndexes = new Set(
   searchContexts.map(({index}) => `docs-default-${index}`),
 );
@@ -189,25 +189,20 @@ test('contextual search fetches only the selected manifest index', async ({
 test('all-version search is lazy, labeled, keyboard operable, and exact', async ({
   page,
 }) => {
+  const pagefindAssetRequests: string[] = [];
   const pagefindDataRequests: string[] = [];
   page.on('request', (request) => {
     const path = new URL(request.url()).pathname;
-    if (
-      path.startsWith('/pagefind/') &&
-      !path.endsWith('/pagefind-component-ui.js') &&
-      !path.endsWith('/pagefind-component-ui.css')
-    ) {
+    if (path.startsWith('/pagefind/')) {
+      pagefindAssetRequests.push(path);
+    }
+    if (path.startsWith('/pagefind/pagefind.')) {
       pagefindDataRequests.push(path);
     }
   });
 
   await page.goto('/docs/2.14.1/start/quick-start/');
-  await expect(
-    page.locator('link[href="/pagefind/pagefind-component-ui.css"]'),
-  ).toHaveCount(1);
-  await expect(
-    page.locator('script[src="/pagefind/pagefind-component-ui.js"]'),
-  ).toHaveCount(1);
+  expect(pagefindAssetRequests).toEqual([]);
   expect(pagefindDataRequests).toEqual([]);
 
   const trigger = page.getByRole('button', {name: 'All versions'}).first();
@@ -216,6 +211,10 @@ test('all-version search is lazy, labeled, keyboard operable, and exact', async 
 
   const dialog = page.locator('pagefind-modal dialog[open]');
   await expect(dialog).toBeVisible();
+  expect(pagefindAssetRequests).toContain(
+    '/pagefind/pagefind-component-ui.css',
+  );
+  expect(pagefindAssetRequests).toContain('/pagefind/pagefind-component-ui.js');
 
   await dialog
     .getByRole('searchbox')
@@ -356,6 +355,10 @@ test('legacy URLs preserve supported destinations, queries, and fragments', asyn
       target:
         '/docs/upgrading/version-3-migration/?source=legacy#2-consolidate-namespaces',
       targetId: '2-consolidate-namespaces',
+    },
+    {
+      source: '/.github/CONTRIBUTING.md?source=legacy',
+      target: '/docs/contributing/?source=legacy',
     },
   ]) {
     const targetPath = new URL(legacy.target, 'http://127.0.0.1').pathname;

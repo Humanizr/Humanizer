@@ -158,14 +158,45 @@ body:has(.navbar-sidebar--show) .humanizerAllVersionsShell {
   z-index: calc(var(--ifm-z-index-fixed) + 1);
 }
 
-.humanizerAllVersionsShell pagefind-modal-trigger,
-.humanizerAllVersionsShell .pf-trigger-btn {
+.humanizerAllVersionsTrigger {
+  align-items: center;
+  background: var(--humanizer-paper-raised);
+  border: 1px solid var(--humanizer-rule);
+  color: var(--humanizer-ink-muted);
+  cursor: pointer;
+  display: inline-flex;
+  font: 700 0.875rem var(--humanizer-body);
+  height: var(--pf-input-height);
+  justify-content: center;
+  padding: 0 0.75rem;
   width: 100%;
+}
+
+.humanizerAllVersionsTrigger:hover {
+  border-color: var(--humanizer-accent);
+  color: var(--humanizer-ink);
+}
+
+.humanizerAllVersionsTrigger:focus-visible {
+  outline: 2px solid var(--humanizer-accent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 996px) {
   .navbar-sidebar__item {
     padding-bottom: calc(var(--pf-input-height) + 1.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .humanizerContextSearch__version {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .humanizerContextSearch .aa-DetachedSearchButtonPlaceholder {
+    display: none;
   }
 }
 

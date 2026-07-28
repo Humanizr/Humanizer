@@ -65,12 +65,49 @@ public const string Byte = "byte";
 #### Field Value
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+<a name='Humanizer.ByteSize.BytesInExabyte'></a>
+
+## ByteSize\.BytesInExabyte Field
+
+```csharp
+public const long BytesInExabyte = 1000000000000000000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInGibibyte'></a>
+
+## ByteSize\.BytesInGibibyte Field
+
+The number of bytes in a gibibyte, equivalent to the established gigabyte factor\.
+
+```csharp
+public const long BytesInGibibyte = 1073741824;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
 <a name='Humanizer.ByteSize.BytesInGigabyte'></a>
 
 ## ByteSize\.BytesInGigabyte Field
 
 ```csharp
 public const long BytesInGigabyte = 1073741824;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInKibibyte'></a>
+
+## ByteSize\.BytesInKibibyte Field
+
+The number of bytes in a kibibyte, equivalent to the established kilobyte factor\.
+
+```csharp
+public const long BytesInKibibyte = 1024;
 ```
 
 #### Field Value
@@ -87,12 +124,60 @@ public const long BytesInKilobyte = 1024;
 #### Field Value
 [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
 
+<a name='Humanizer.ByteSize.BytesInMebibyte'></a>
+
+## ByteSize\.BytesInMebibyte Field
+
+The number of bytes in a mebibyte, equivalent to the established megabyte factor\.
+
+```csharp
+public const long BytesInMebibyte = 1048576;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
 <a name='Humanizer.ByteSize.BytesInMegabyte'></a>
 
 ## ByteSize\.BytesInMegabyte Field
 
 ```csharp
 public const long BytesInMegabyte = 1048576;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInPebibyte'></a>
+
+## ByteSize\.BytesInPebibyte Field
+
+```csharp
+public const long BytesInPebibyte = 1125899906842624;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInPetabyte'></a>
+
+## ByteSize\.BytesInPetabyte Field
+
+```csharp
+public const long BytesInPetabyte = 1000000000000000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInTebibyte'></a>
+
+## ByteSize\.BytesInTebibyte Field
+
+The number of bytes in a tebibyte, equivalent to the established terabyte factor\.
+
+```csharp
+public const long BytesInTebibyte = 1099511627776;
 ```
 
 #### Field Value
@@ -120,6 +205,54 @@ public const string ByteSymbol = "B";
 #### Field Value
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+<a name='Humanizer.ByteSize.Exabyte'></a>
+
+## ByteSize\.Exabyte Field
+
+```csharp
+public const string Exabyte = "exabyte";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.ExabyteSymbol'></a>
+
+## ByteSize\.ExabyteSymbol Field
+
+```csharp
+public const string ExabyteSymbol = "EB";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.Gibibyte'></a>
+
+## ByteSize\.Gibibyte Field
+
+The name of a gibibyte\.
+
+```csharp
+public const string Gibibyte = "gibibyte";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.GibibyteSymbol'></a>
+
+## ByteSize\.GibibyteSymbol Field
+
+The symbol for a gibibyte\.
+
+```csharp
+public const string GibibyteSymbol = "GiB";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
 <a name='Humanizer.ByteSize.Gigabyte'></a>
 
 ## ByteSize\.Gigabyte Field
@@ -137,6 +270,32 @@ public const string Gigabyte = "gigabyte";
 
 ```csharp
 public const string GigabyteSymbol = "GB";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.Kibibyte'></a>
+
+## ByteSize\.Kibibyte Field
+
+The name of a kibibyte\.
+
+```csharp
+public const string Kibibyte = "kibibyte";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.KibibyteSymbol'></a>
+
+## ByteSize\.KibibyteSymbol Field
+
+The symbol for a kibibyte\.
+
+```csharp
+public const string KibibyteSymbol = "KiB";
 ```
 
 #### Field Value
@@ -175,6 +334,32 @@ public static readonly ByteSize MaxValue;
 #### Field Value
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
+<a name='Humanizer.ByteSize.Mebibyte'></a>
+
+## ByteSize\.Mebibyte Field
+
+The name of a mebibyte\.
+
+```csharp
+public const string Mebibyte = "mebibyte";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.MebibyteSymbol'></a>
+
+## ByteSize\.MebibyteSymbol Field
+
+The symbol for a mebibyte\.
+
+```csharp
+public const string MebibyteSymbol = "MiB";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
 <a name='Humanizer.ByteSize.Megabyte'></a>
 
 ## ByteSize\.Megabyte Field
@@ -207,6 +392,76 @@ public static readonly ByteSize MinValue;
 
 #### Field Value
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.Pebibyte'></a>
+
+## ByteSize\.Pebibyte Field
+
+```csharp
+public const string Pebibyte = "pebibyte";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.PebibyteSymbol'></a>
+
+## ByteSize\.PebibyteSymbol Field
+
+```csharp
+public const string PebibyteSymbol = "PiB";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.Petabyte'></a>
+
+## ByteSize\.Petabyte Field
+
+```csharp
+public const string Petabyte = "petabyte";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.PetabyteSymbol'></a>
+
+## ByteSize\.PetabyteSymbol Field
+
+```csharp
+public const string PetabyteSymbol = "PB";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.Tebibyte'></a>
+
+## ByteSize\.Tebibyte Field
+
+The name of a tebibyte\.
+
+```csharp
+public const string Tebibyte = "tebibyte";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.ByteSize.TebibyteSymbol'></a>
+
+## ByteSize\.TebibyteSymbol Field
+
+The symbol for a tebibyte\.
+
+```csharp
+public const string TebibyteSymbol = "TiB";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Humanizer.ByteSize.Terabyte'></a>
 
@@ -253,12 +508,49 @@ public readonly double Bytes { get; }
 #### Property Value
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
+<a name='Humanizer.ByteSize.Exabytes'></a>
+
+## ByteSize\.Exabytes Property
+
+```csharp
+public readonly double Exabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.Gibibytes'></a>
+
+## ByteSize\.Gibibytes Property
+
+Gets the size in gibibytes\.
+
+```csharp
+public readonly double Gibibytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
 <a name='Humanizer.ByteSize.Gigabytes'></a>
 
 ## ByteSize\.Gigabytes Property
 
 ```csharp
 public readonly double Gigabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.Kibibytes'></a>
+
+## ByteSize\.Kibibytes Property
+
+Gets the size in kibibytes\.
+
+```csharp
+public readonly double Kibibytes { get; }
 ```
 
 #### Property Value
@@ -308,12 +600,60 @@ public readonly double LargestWholeNumberValue { get; }
 #### Property Value
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
+<a name='Humanizer.ByteSize.Mebibytes'></a>
+
+## ByteSize\.Mebibytes Property
+
+Gets the size in mebibytes\.
+
+```csharp
+public readonly double Mebibytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
 <a name='Humanizer.ByteSize.Megabytes'></a>
 
 ## ByteSize\.Megabytes Property
 
 ```csharp
 public readonly double Megabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.Pebibytes'></a>
+
+## ByteSize\.Pebibytes Property
+
+```csharp
+public readonly double Pebibytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.Petabytes'></a>
+
+## ByteSize\.Petabytes Property
+
+```csharp
+public readonly double Petabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.Tebibytes'></a>
+
+## ByteSize\.Tebibytes Property
+
+Gets the size in tebibytes\.
+
+```csharp
+public readonly double Tebibytes { get; }
 ```
 
 #### Property Value
@@ -379,6 +719,22 @@ public readonly Humanizer.ByteSize AddBytes(double value);
 #### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
+<a name='Humanizer.ByteSize.AddExabytes(double)'></a>
+
+## ByteSize\.AddExabytes\(double\) Method
+
+```csharp
+public readonly Humanizer.ByteSize AddExabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.AddExabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
 <a name='Humanizer.ByteSize.AddGigabytes(double)'></a>
 
 ## ByteSize\.AddGigabytes\(double\) Method
@@ -421,6 +777,38 @@ public readonly Humanizer.ByteSize AddMegabytes(double value);
 #### Parameters
 
 <a name='Humanizer.ByteSize.AddMegabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.AddPebibytes(double)'></a>
+
+## ByteSize\.AddPebibytes\(double\) Method
+
+```csharp
+public readonly Humanizer.ByteSize AddPebibytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.AddPebibytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.AddPetabytes(double)'></a>
+
+## ByteSize\.AddPetabytes\(double\) Method
+
+```csharp
+public readonly Humanizer.ByteSize AddPetabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.AddPetabytes(double).value'></a>
 
 `value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
@@ -541,6 +929,40 @@ public static Humanizer.ByteSize FromBytes(double value);
 #### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
+<a name='Humanizer.ByteSize.FromExabytes(double)'></a>
+
+## ByteSize\.FromExabytes\(double\) Method
+
+```csharp
+public static Humanizer.ByteSize FromExabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromExabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.FromGibibytes(double)'></a>
+
+## ByteSize\.FromGibibytes\(double\) Method
+
+Creates a byte size from a number of gibibytes\.
+
+```csharp
+public static Humanizer.ByteSize FromGibibytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromGibibytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
 <a name='Humanizer.ByteSize.FromGigabytes(double)'></a>
 
 ## ByteSize\.FromGigabytes\(double\) Method
@@ -551,6 +973,24 @@ public static Humanizer.ByteSize FromGigabytes(double value);
 #### Parameters
 
 <a name='Humanizer.ByteSize.FromGigabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.FromKibibytes(double)'></a>
+
+## ByteSize\.FromKibibytes\(double\) Method
+
+Creates a byte size from a number of kibibytes\.
+
+```csharp
+public static Humanizer.ByteSize FromKibibytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromKibibytes(double).value'></a>
 
 `value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
@@ -573,6 +1013,24 @@ public static Humanizer.ByteSize FromKilobytes(double value);
 #### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
+<a name='Humanizer.ByteSize.FromMebibytes(double)'></a>
+
+## ByteSize\.FromMebibytes\(double\) Method
+
+Creates a byte size from a number of mebibytes\.
+
+```csharp
+public static Humanizer.ByteSize FromMebibytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromMebibytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
 <a name='Humanizer.ByteSize.FromMegabytes(double)'></a>
 
 ## ByteSize\.FromMegabytes\(double\) Method
@@ -583,6 +1041,56 @@ public static Humanizer.ByteSize FromMegabytes(double value);
 #### Parameters
 
 <a name='Humanizer.ByteSize.FromMegabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.FromPebibytes(double)'></a>
+
+## ByteSize\.FromPebibytes\(double\) Method
+
+```csharp
+public static Humanizer.ByteSize FromPebibytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromPebibytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.FromPetabytes(double)'></a>
+
+## ByteSize\.FromPetabytes\(double\) Method
+
+```csharp
+public static Humanizer.ByteSize FromPetabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromPetabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.FromTebibytes(double)'></a>
+
+## ByteSize\.FromTebibytes\(double\) Method
+
+Creates a byte size from a number of tebibytes\.
+
+```csharp
+public static Humanizer.ByteSize FromTebibytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromTebibytes(double).value'></a>
 
 `value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
@@ -706,7 +1214,7 @@ public readonly Humanizer.ByteSize Subtract(Humanizer.ByteSize bs);
 
 Converts the value of the current ByteSize object to a string with
 full words\. The metric prefix symbol \(bit, byte, kilo, mega, giga,
-tera\) used is the largest metric prefix such that the corresponding
+tera, peta, exa\) used is the largest metric prefix such that the corresponding
 value is greater than or equal to one\.
 
 ```csharp
@@ -730,7 +1238,7 @@ public readonly string ToFullWords(string? format=null, System.IFormatProvider? 
 ## ByteSize\.ToString\(\) Method
 
 Converts the value of the current ByteSize object to a string\.
-The metric prefix symbol \(bit, byte, kilo, mega, giga, tera\) used is
+The metric prefix symbol \(bit, byte, kilo, mega, giga, tera, peta, exa\) used is
 the largest metric prefix such that the corresponding value is greater
  than or equal to one\.
 

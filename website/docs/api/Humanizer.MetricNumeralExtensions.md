@@ -160,7 +160,7 @@ A bitwise combination of [MetricNumeralFormats](Humanizer.MetricNumeralFormats.m
 
 `decimals` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
-If not null it is the numbers of decimals to round the number to
+The maximum number of fractional digits to include\. If null, all available precision is preserved\. Trailing zeros are omitted\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  

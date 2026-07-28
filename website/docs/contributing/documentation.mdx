@@ -51,6 +51,86 @@ The canonical corpus includes `main/preview` as a first-class public preview.
 Published snapshots remain version-honest and immutable except for reviewed,
 targeted factual corrections through the snapshot workflow.
 
+## Validate a documentation change
+
+Restore the pinned tools and site dependencies, then run the same gates used by
+the Pages workflow:
+
+```console
+dotnet tool restore
+pnpm --dir website install --frozen-lockfile
+pwsh tools/docs/build.ps1 -Mode Validate
+pwsh tools/docs/test.ps1 -RequireNativeAot
+pnpm --dir website run check:content
+pnpm --dir website run build
+pnpm --dir website run check:links
+pnpm --dir website run check:search-budget
+pnpm --dir website run check:artifact
+pnpm --dir website run test:unit
+pnpm --dir website run typecheck
+pnpm --dir website run test:ci
+```
+
+The build reads every published package and immutable snapshot from
+`website/humanizer-versions.json`. It does not check out historical branches or
+rewrite a published snapshot.
+
+The repository-scoped Renovate GitHub App keeps Node, pnpm, and site
+dependencies current from `.github/renovate.json`; its pull requests run these
+same gates.
+
+## Publish a stable version
+
+Before package publication, add one unpublished, NuGet-backed version entry,
+its bounded compatibility overlay, and its upgrade boundary and guide in a
+normal pull request. After the signed package is available from NuGet.org,
+dispatch the release workflow from `main`:
+
+```console
+gh workflow run docs-release.yml --ref main \
+  -f version=3.1.0 \
+  -f promote_latest=true
+```
+
+The workflow uses the existing atomic snapshot command, validates the package
+hash and signature with bounded retries, runs the complete site gates, and
+opens a pull request containing only the generated snapshot, sidebar, selector,
+and manifest changes. A retry after the release branch is pushed resumes only
+when that branch changes no paths outside the defined release outputs and those
+outputs exactly match the newly validated result. Any conflict, or an already
+published snapshot, fails without force-pushing or changing the site.
+Production changes only after that pull request is merged and the ordinary
+`main` deployment succeeds.
+
+Use the explicit historical-correction mode for a factual correction to an
+already published page; never regenerate the complete version:
+
+```console
+pwsh tools/docs/snapshot.ps1 -Version 3.0.10 \
+  -CorrectPage scenarios/strings-and-casing.mdx
+```
+
+## Deploy and roll back
+
+`.github/workflows/docs.yml` validates every pull request. A successful `main`
+run uploads the complete Docusaurus output as one Pages artifact. After the
+production smoke test passes, automation stores that exact archive in the
+`docs-pages-archive` prerelease, keyed by workflow run ID, and retains the ten
+newest known-good deployments. A failed gate cannot reach the
+environment-protected deployment job or enter the rollback archive.
+
+To restore a retained artifact, find its successful documentation run ID and
+dispatch the same workflow from `main`:
+
+```console
+gh run list --workflow docs.yml --branch main
+gh workflow run docs.yml --ref main -f rollback_run_id=123456789
+```
+
+The rollback run verifies the retained artifact's custom domain, stable,
+historical, and preview roots, search data, redirects, sitemap, and link safety
+before redeploying it. It does not rebuild historical documentation.
+
 ## Related guides and API
 
 - [Languages and cultures](../languages/index.mdx)

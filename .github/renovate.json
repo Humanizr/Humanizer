@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices"
+  ],
+  "enabledManagers": [
+    "npm",
+    "nodenv"
+  ],
+  "includePaths": [
+    "website/**"
+  ],
+  "prConcurrentLimit": 5
+}

@@ -46,7 +46,7 @@ Storage.dat
 # DNX
 project.lock.json
 *.lock.json
-!website/package-lock.json
+!website/pnpm-lock.yaml
 
 # Visual Studio profiler
 *.psess
@@ -105,11 +105,6 @@ src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.receive
 
 
 *.received.*
-
-# Jekyll
-docs/_site/
-docs/.jekyll-cache/
-docs/.sass-cache/
 
 # BenchmarkDotNet artifacts
 **/BenchmarkDotNet.Artifacts/

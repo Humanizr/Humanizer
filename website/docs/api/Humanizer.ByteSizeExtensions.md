@@ -279,6 +279,150 @@ public static Humanizer.ByteSize Bytes(this ushort input);
 #### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisbyte)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this byte\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this byte input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisbyte).input'></a>
+
+`input` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisdouble)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this double\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this double input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisdouble).input'></a>
+
+`input` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisint)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this int\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this int input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisint).input'></a>
+
+`input` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thislong)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this long\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this long input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thislong).input'></a>
+
+`input` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thissbyte)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this sbyte\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this sbyte input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thissbyte).input'></a>
+
+`input` [System\.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte 'System\.SByte')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisshort)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this short\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this short input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisshort).input'></a>
+
+`input` [System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisuint)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this uint\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this uint input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisuint).input'></a>
+
+`input` [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisushort)'></a>
+
+## ByteSizeExtensions\.Exabytes\(this ushort\) Method
+
+Considers input as exabytes
+
+```csharp
+public static Humanizer.ByteSize Exabytes(this ushort input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Exabytes(thisushort).input'></a>
+
+`input` [System\.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16 'System\.UInt16')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
 <a name='Humanizer.ByteSizeExtensions.Gigabytes(thisbyte)'></a>
 
 ## ByteSizeExtensions\.Gigabytes\(this byte\) Method
@@ -789,6 +933,150 @@ public static Humanizer.ByteSize Megabytes(this ushort input);
 #### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisbyte)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this byte\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this byte input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisbyte).input'></a>
+
+`input` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisdouble)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this double\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this double input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisdouble).input'></a>
+
+`input` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisint)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this int\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this int input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisint).input'></a>
+
+`input` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thislong)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this long\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this long input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thislong).input'></a>
+
+`input` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thissbyte)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this sbyte\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this sbyte input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thissbyte).input'></a>
+
+`input` [System\.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte 'System\.SByte')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisshort)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this short\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this short input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisshort).input'></a>
+
+`input` [System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisuint)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this uint\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this uint input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisuint).input'></a>
+
+`input` [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisushort)'></a>
+
+## ByteSizeExtensions\.Pebibytes\(this ushort\) Method
+
+Considers input as pebibytes
+
+```csharp
+public static Humanizer.ByteSize Pebibytes(this ushort input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Pebibytes(thisushort).input'></a>
+
+`input` [System\.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16 'System\.UInt16')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
 <a name='Humanizer.ByteSizeExtensions.Per(thisHumanizer.ByteSize,System.TimeSpan)'></a>
 
 ## ByteSizeExtensions\.Per\(this ByteSize, TimeSpan\) Method
@@ -814,6 +1102,150 @@ Interval to create rate for
 
 #### Returns
 [ByteRate](Humanizer.ByteRate.md 'Humanizer\.ByteRate')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisbyte)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this byte\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this byte input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisbyte).input'></a>
+
+`input` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisdouble)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this double\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this double input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisdouble).input'></a>
+
+`input` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisint)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this int\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this int input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisint).input'></a>
+
+`input` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thislong)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this long\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this long input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thislong).input'></a>
+
+`input` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thissbyte)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this sbyte\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this sbyte input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thissbyte).input'></a>
+
+`input` [System\.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte 'System\.SByte')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisshort)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this short\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this short input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisshort).input'></a>
+
+`input` [System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisuint)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this uint\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this uint input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisuint).input'></a>
+
+`input` [System\.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32 'System\.UInt32')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisushort)'></a>
+
+## ByteSizeExtensions\.Petabytes\(this ushort\) Method
+
+Considers input as petabytes
+
+```csharp
+public static Humanizer.ByteSize Petabytes(this ushort input);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.Petabytes(thisushort).input'></a>
+
+`input` [System\.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16 'System\.UInt16')
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
 <a name='Humanizer.ByteSizeExtensions.Terabytes(thisbyte)'></a>
 

@@ -17,7 +17,8 @@ Call `TimeSpan.Humanize` for elapsed time and `ToAge` for a human-readable age a
 
 ## Example
 
-This program shows two-unit precision, locale-aware list punctuation, and an age rendered with number words:
+This program shows two-unit precision, locale-aware list punctuation,
+localized compact symbols, and an age rendered with number words:
 
 <CodeBlock language="csharp" title="Program.cs">{durations}</CodeBlock>
 
@@ -31,6 +32,12 @@ This program shows two-unit precision, locale-aware list punctuation, and an age
 
 The default maximum unit is `Week`. Ask for `Month` or `Year` explicitly when those approximate units are acceptable.
 
+### Use compact symbols
+
+On `main/preview`, `HumanizeToSymbols` applies the same precision, empty-unit,
+range, culture, and separator controls but emits localized `TimeUnit` symbols
+such as `1h, 3s, 1ms`.
+
 ### Use `ToAge` deliberately
 
 `ToAge` adds the culture’s age phrase to a duration decomposition. It is convenient for an already computed elapsed span, but it is not a birthday calculator.
@@ -42,8 +49,9 @@ Months and years are approximated from a duration and do not know calendar month
 ## Version notes
 
 `TimeSpan.Humanize` is available across the documented corpus. `ToAge` begins
-in `3.0.1`. The verified executable runs against the selected package; older
-snapshots replace or exclude its age call.
+in `3.0.1`; `HumanizeToSymbols` is a `main/preview` API. The verified
+executable runs against the selected package; older snapshots replace or
+exclude calls they do not support.
 
 ## Related guides and API
 

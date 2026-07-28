@@ -82,31 +82,37 @@ function Assert-UpgradeChain {
 function Get-NuGetPackageEvidence {
     param([Parameter(Mandatory = $true)]$Entry)
 
-    $package = Get-DocsNuGetPackage -Entry $Entry -RepoRoot $repoRoot
-    $entries = @(
-        Get-ChildItem $package.ExtractPath -Recurse -File |
-            ForEach-Object {
-                [System.IO.Path]::GetRelativePath(
-                    $package.ExtractPath,
-                    $_.FullName
-                ).Replace('\', '/')
-            }
-    )
-    $targetsPath = Join-Path $package.ExtractPath "buildTransitive/Humanizer.Core.targets"
-    $xmlPath = Join-Path $package.ExtractPath "lib/$($Entry.referenceTfm)/Humanizer.xml"
-    if (-not (Test-Path $xmlPath -PathType Leaf)) {
-        throw "Published API XML is missing for $($Entry.version): $xmlPath"
-    }
-    $targets = if (Test-Path $targetsPath -PathType Leaf) {
-        Get-Content -Raw $targetsPath
-    } else {
-        ""
-    }
+    return Use-DocsNuGetPackage `
+        -Entry $Entry `
+        -RepoRoot $repoRoot `
+        -Action {
+        param($package)
 
-    return [PSCustomObject]@{
-        Entries = $entries
-        Targets = $targets
-        Xml = Get-Content -Raw $xmlPath
+        $entries = @(
+            Get-ChildItem $package.ExtractPath -Recurse -File |
+                ForEach-Object {
+                    [System.IO.Path]::GetRelativePath(
+                        $package.ExtractPath,
+                        $_.FullName
+                    ).Replace('\', '/')
+                }
+        )
+        $targetsPath = Join-Path $package.ExtractPath "buildTransitive/Humanizer.Core.targets"
+        $xmlPath = Join-Path $package.ExtractPath "lib/$($Entry.referenceTfm)/Humanizer.xml"
+        if (-not (Test-Path $xmlPath -PathType Leaf)) {
+            throw "Published API XML is missing for $($Entry.version): $xmlPath"
+        }
+        $targets = if (Test-Path $targetsPath -PathType Leaf) {
+            Get-Content -Raw $targetsPath
+        } else {
+            ""
+        }
+
+        [PSCustomObject]@{
+            Entries = $entries
+            Targets = $targets
+            Xml = Get-Content -Raw $xmlPath
+        }
     }
 }
 
@@ -127,7 +133,7 @@ $manifest = Get-Content -Raw $ManifestPath | ConvertFrom-Json -Depth 20
 $data = Get-Content -Raw $UpgradeDataPath | ConvertFrom-Json -Depth 20
 $stableManifestVersions = @(
     $manifest.versions |
-        Where-Object version -ne "current" |
+        Where-Object { $_.version -ne "current" -and $_.published } |
         ForEach-Object version
 )
 $upgradeDocsRoot = Join-Path $websiteRoot "docs/upgrading"

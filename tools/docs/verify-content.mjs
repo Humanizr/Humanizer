@@ -146,11 +146,13 @@ for (const area of areas) {
         failures.push(`${relativePage}: focused scenario cannot link only to the API root`);
       }
       const expectedTargets = [...(scenarioApiTargets.get(contractPath) ?? [])].sort();
-      const actualTargets = links
-        .filter((link) => /^\.\.\/api\/[^/]+\.md$/.test(link))
-        .map((link) => path.basename(link))
-        .filter((target, index, targets) => targets.indexOf(target) === index)
-        .sort();
+      const actualTargets = [
+        ...new Set(
+          links
+            .filter((link) => /^\.\.\/api\/[^/]+\.md$/.test(link))
+            .map((link) => path.basename(link)),
+        ),
+      ].sort();
       if (JSON.stringify(actualTargets) !== JSON.stringify(expectedTargets)) {
         failures.push(
           `${relativePage}: API targets differ; actual ${actualTargets.join(', ')}; ` +

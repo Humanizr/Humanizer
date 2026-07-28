@@ -17,7 +17,9 @@ Use date ordinal words when a calendar date should read naturally, and clock not
 
 ## Example
 
-Neither API accepts a culture parameter, so this executable scopes both ambient cultures before making the calls:
+Date ordinal words use ambient culture. `main/preview` can pass a culture
+directly to clock notation; this executable scopes both ambient cultures so
+the same pattern remains clear:
 
 <CodeBlock language="csharp" title="Program.cs">{spokenDates}</CodeBlock>
 
@@ -27,7 +29,11 @@ Neither API accepts a culture parameter, so this executable scopes both ambient 
 
 ### Clock notation
 
-`TimeOnly.ToClockNotation()` renders the exact minute. `ClockNotationRounding.NearestFiveMinutes` first rounds to the nearest five-minute boundary, then selects the phrase. Rounding can cross an hour or day-period boundary.
+`TimeOnly.ToClockNotation()` renders the exact minute.
+`ClockNotationRounding.NearestFiveMinutes` first rounds to the nearest
+five-minute boundary, then selects the phrase. Rounding can cross an hour or
+day-period boundary. On `main/preview`, the overload that also accepts a
+`CultureInfo` avoids changing ambient culture.
 
 ## Pitfall
 
@@ -35,7 +41,9 @@ Locale capability is not uniform. A successful number-word conversion does not p
 
 ## Version notes
 
-`DateTime.ToOrdinalWords` predates the documented corpus. `DateOnly` date words begin with its framework support in `2.11.10`. Clock notation appears in `2.13.14`; this page and executable must be excluded from earlier snapshots.
+`DateTime.ToOrdinalWords` predates the documented corpus. `DateOnly` date words
+begin with its framework support in `2.11.10`. Clock notation appears in
+`2.13.14`; the explicit-culture clock overload is a `main/preview` API.
 
 ## Related guides and API
 

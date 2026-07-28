@@ -1,19 +1,26 @@
 param(
-    [string]$BuildDirectory
+    [string]$BuildDirectory,
+    [string]$RecordVersion
 )
 
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+. (Join-Path $PSScriptRoot "snapshot-state.ps1")
 if (-not $BuildDirectory) {
     $BuildDirectory = Join-Path $repoRoot "website/build"
 }
 
 $manifest = Get-Content -Raw (Join-Path $repoRoot "website/humanizer-versions.json") |
     ConvertFrom-Json -Depth 20
-$baselines = Get-Content -Raw (Join-Path $repoRoot "website/search-index-baselines.json") |
+$baselinePath = Join-Path $repoRoot "website/search-index-baselines.json"
+$baselines = Get-Content -Raw $baselinePath |
     ConvertFrom-Json -Depth 20
 $latest = @($manifest.versions | Where-Object latestStable)
 $preview = @($manifest.versions | Where-Object version -eq "current")
+$searchableVersions = @(
+    $manifest.versions |
+        Where-Object { $_.published -or $_.version -eq "current" }
+)
 if ($latest.Count -ne 1 -or $preview.Count -ne 1 -or $baselines.schemaVersion -ne 1) {
     throw "Search verification metadata is invalid."
 }
@@ -22,7 +29,48 @@ if (-not (Test-Path $BuildDirectory -PathType Container)) {
     throw "Docusaurus build output not found: $BuildDirectory"
 }
 
-$indexes = @($manifest.versions | ForEach-Object {
+$allSearchDirectory = Join-Path $BuildDirectory "pagefind"
+$recordBaseline = $false
+if ($RecordVersion) {
+    $recordEntries = @(
+        $manifest.versions |
+            Where-Object version -eq $RecordVersion
+    )
+    $existingBaseline = $baselines.versions.PSObject.Properties[$RecordVersion]
+    $recordIndex = Join-Path $BuildDirectory (
+        "search-index-docs-default-$RecordVersion.json"
+    )
+    if ($recordEntries.Count -ne 1 -or
+        $RecordVersion -eq "current" -or
+        -not $recordEntries[0].published) {
+        throw "A search baseline can be recorded only for one published stable version."
+    }
+    if ($null -ne $existingBaseline) {
+        throw "Search baseline already exists for $RecordVersion."
+    }
+    if (-not (Test-Path $recordIndex -PathType Leaf) -or
+        -not (Test-Path $allSearchDirectory -PathType Container)) {
+        throw "Build search output is incomplete for $RecordVersion."
+    }
+
+    $allSearchSize = (
+        Get-ChildItem $allSearchDirectory -Recurse -File |
+            Measure-Object -Property Length -Sum
+    ).Sum
+    $baselines.versions |
+        Add-Member `
+            -NotePropertyName $RecordVersion `
+            -NotePropertyValue (Get-Item $recordIndex).Length
+    $baselines.allVersionsBytes = $allSearchSize
+    $baselines.reviewedAt = [DateTime]::UtcNow.ToString("yyyy-MM-dd")
+    $baselines.reviewedCorpus = (
+        "Humanizer $RecordVersion immutable snapshot and every manifest " +
+        "context; Pagefind indexed the complete corpus."
+    )
+    $recordBaseline = $true
+}
+
+$indexes = @($searchableVersions | ForEach-Object {
     $routeSegment = if ($_.route) { "$($_.route)/" } else { "" }
     @{
         Version = $_.label
@@ -67,7 +115,6 @@ if ($LASTEXITCODE -ne 0) {
     throw "Contextual search query verification failed."
 }
 
-$allSearchDirectory = Join-Path $BuildDirectory "pagefind"
 $requiredAllSearchAssets = @(
     "pagefind.js",
     "pagefind-entry.json",
@@ -81,7 +128,7 @@ foreach ($asset in $requiredAllSearchAssets) {
     }
 }
 
-$versionedPages = @($manifest.versions | ForEach-Object {
+$versionedPages = @($searchableVersions | ForEach-Object {
     $relativePath = if ($_.route) {
         "docs/$($_.route)/start/quick-start/index.html"
     }
@@ -97,8 +144,9 @@ foreach ($page in $versionedPages) {
     $html = Get-Content -Raw $page.Path
     if ($html -notmatch 'data-pagefind-filter="version"' -or
         $html -notmatch [Regex]::Escape($page.Label) -or
-        $html -notmatch '<pagefind-modal-trigger[^>]+placeholder="All versions"' -or
-        $html -notmatch '<link[^>]+href="/pagefind/pagefind-component-ui.css"') {
+        $html -notmatch 'class="humanizerAllVersionsTrigger"' -or
+        $html -notmatch '<pagefind-modal reset-on-close>' -or
+        $html -match '<(?:link|script)[^>]+/pagefind/pagefind-component-ui\.(?:css|js)') {
         throw "All-version search metadata is invalid for $($page.Label)."
     }
 }
@@ -121,7 +169,7 @@ $maximumAllSearchSize = [Math]::Floor(
 if ($allSearchSize -gt $maximumAllSearchSize) {
     throw "All-version search grew beyond its reviewed budget: $allSearchSize > $maximumAllSearchSize bytes."
 }
-Write-Host "All-version search passed: $($manifest.versions.Count) versions ($allSearchSize / $maximumAllSearchSize bytes)"
+Write-Host "All-version search passed: $($searchableVersions.Count) versions ($allSearchSize / $maximumAllSearchSize bytes)"
 
 $redirectPath = Join-Path $BuildDirectory "quick-start/index.html"
 if (-not (Test-Path $redirectPath -PathType Leaf) -or
@@ -131,6 +179,11 @@ if (-not (Test-Path $redirectPath -PathType Leaf) -or
 
 if (-not (Test-Path (Join-Path $BuildDirectory ".nojekyll") -PathType Leaf)) {
     throw "The local Pages artifact is missing .nojekyll."
+}
+
+if ($recordBaseline) {
+    Write-SnapshotJson -Value $baselines -Path $baselinePath
+    Write-Host "Recorded reviewed search baselines for $RecordVersion."
 }
 
 Write-Host "All manifest contextual indexes, lazy all-version data, budgets, and Pages artifact proof passed."

@@ -15,7 +15,7 @@ For parity purposes, support is a behavioral question: does the feature work cor
 
 ## Hard Rules
 
-1. Start with the repo docs, not guesswork: read `docs/adding-a-locale.md` and `docs/locale-yaml-how-to.md`, then read `docs/locale-yaml-reference.md` when the surface shape or engine options are unclear.
+1. Start with the repo docs, not guesswork: read `website/docs/contributing/adding-or-updating-a-locale.mdx` and `website/docs/contributing/locale-yaml-how-to.mdx`, then read `website/docs/contributing/locale-yaml-surface-reference.mdx` and `website/docs/contributing/locale-yaml-schema-reference.mdx` when the surface shape or engine options are unclear.
 2. Treat `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs` as the source of truth for canonical locale surfaces.
 3. Treat both new locales and existing shipped locales the same way: the end state is full parity across shipped localized features.
 4. Do not rely on English fallback or unsupported-locale behavior for any shipped locale.
@@ -70,7 +70,7 @@ Create a parity map artifact at:
 
 `artifacts/YYYY-MM-DD-<locale>-parity-map.md`
 
-The `artifacts/` directory is local-only and gitignored. Parity map and audit artifacts live there as working scratch files for the duration of the epic. Do not commit them. Anything that needs to outlive the epic belongs in `docs/`, the spec, or the test suite as proof.
+The `artifacts/` directory is local-only and gitignored. Parity map and audit artifacts live there as working scratch files for the duration of the epic. Do not commit them. Anything that needs to outlive the epic belongs in `website/docs/`, the spec, or the test suite as proof.
 
 Build the parity map as a concrete table, not notes. Use at least these columns:
 

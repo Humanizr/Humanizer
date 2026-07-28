@@ -11,7 +11,9 @@ const siteRoot = resolve(process.argv[2] ?? 'build');
 const manifest = JSON.parse(
   await readFile(new URL('../humanizer-versions.json', import.meta.url)),
 );
-const contexts = manifest.versions;
+const contexts = manifest.versions.filter(
+  ({published, version}) => published || version === 'current',
+);
 const versionRoots = contexts.map(({route}) =>
   route ? `/docs/${route}/` : '/docs/',
 );

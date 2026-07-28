@@ -992,8 +992,8 @@
       "parent": "en",
       "capabilities": {
         "list": {
-          "kind": "via",
-          "via": "en"
+          "kind": "own",
+          "via": null
         },
         "formatter": {
           "kind": "via",
@@ -3758,8 +3758,8 @@
           "via": null
         },
         "numberParse": {
-          "kind": "via",
-          "via": "pt"
+          "kind": "own",
+          "via": null
         },
         "numericOrdinal": {
           "kind": "via",

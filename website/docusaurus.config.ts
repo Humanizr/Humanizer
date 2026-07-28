@@ -17,7 +17,10 @@ if (!latestStable || !preview) {
   throw new Error('The documentation version manifest is incomplete.');
 }
 
-const redirects = redirectInventory.redirects.map(({from, to}) => ({from, to}));
+const redirects = redirectInventory.redirects.map(({from, to}) => ({
+  from: from.filter((source) => !source.startsWith('/.')),
+  to,
+}));
 
 const publishedVersions: Record<
   string,
@@ -54,15 +57,6 @@ const config: Config = {
   trailingSlash: true,
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
-  headTags: [
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'stylesheet',
-        href: '/pagefind/pagefind-component-ui.css',
-      },
-    },
-  ],
   markdown: {
     format: 'detect',
   },

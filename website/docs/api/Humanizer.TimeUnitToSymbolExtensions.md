@@ -30,7 +30,7 @@ Unit of time to be turned to a symbol
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')

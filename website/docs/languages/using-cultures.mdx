@@ -57,6 +57,18 @@ Parent fallback is resolution, not parity proof. If `fr-CA` reaches `fr`, that
 only identifies where the data came from. It does not establish that French
 Canadian wording matches every neutral-French choice.
 
+On `main/preview`, use `Configurator.IsCultureSupported(culture)` before
+choosing an application fallback. It checks generated Humanizer locale data
+through the named parent chain and does not return `true` merely because the
+default English localizers could produce output:
+
+```csharp
+var requested = CultureInfo.GetCultureInfo("fr-FR");
+var culture = Configurator.IsCultureSupported(requested)
+    ? requested
+    : CultureInfo.GetCultureInfo("en");
+```
+
 If inherited or direct output is wrong, follow the
 [language correction guide](../contributing/report-language-issue.mdx) or
 [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
@@ -68,6 +80,7 @@ documentation corpus. The locale set and package layout are versioned:
 `main/preview` has generated locale data in the consolidated `Humanizer`
 package, while published versions through `3.0.10` use the metapackage and
 locale-package graph documented in their snapshot.
+`Configurator.IsCultureSupported` is a `main/preview` API.
 
 ## Related guides and API
 

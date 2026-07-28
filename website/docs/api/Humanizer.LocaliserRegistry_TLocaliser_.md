@@ -99,7 +99,7 @@ public TLocaliser ResolveForCulture(System.Globalization.CultureInfo? culture);
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to retrieve localiser for\. If not specified, current thread's UI culture is used\.
+The culture to retrieve localiser for\. If not specified, current thread's culture is used\.
 
 #### Returns
 [TLocaliser](Humanizer.LocaliserRegistry_TLocaliser_.md#Humanizer.LocaliserRegistry_TLocaliser_.TLocaliser 'Humanizer\.LocaliserRegistry\<TLocaliser\>\.TLocaliser')

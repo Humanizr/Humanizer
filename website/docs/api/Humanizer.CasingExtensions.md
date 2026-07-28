@@ -38,7 +38,7 @@ A new string with the specified casing applied\.
 \- [Title](Humanizer.LetterCasing.md#Humanizer.LetterCasing.Title 'Humanizer\.LetterCasing\.Title'): Each word is capitalized \(e\.g\., "Some String"\)
 \- [LowerCase](Humanizer.LetterCasing.md#Humanizer.LetterCasing.LowerCase 'Humanizer\.LetterCasing\.LowerCase'): All letters are lowercase \(e\.g\., "some string"\)
 \- [AllCaps](Humanizer.LetterCasing.md#Humanizer.LetterCasing.AllCaps 'Humanizer\.LetterCasing\.AllCaps'): All letters are uppercase \(e\.g\., "SOME STRING"\)
-\- [Sentence](Humanizer.LetterCasing.md#Humanizer.LetterCasing.Sentence 'Humanizer\.LetterCasing\.Sentence'): First letter capitalized, rest lowercase \(e\.g\., "Some string"\)
+\- [Sentence](Humanizer.LetterCasing.md#Humanizer.LetterCasing.Sentence 'Humanizer\.LetterCasing\.Sentence'): First character uppercased, remainder unchanged \(e\.g\., "Some string"\)
 
 #### Exceptions
 

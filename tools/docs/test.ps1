@@ -1,5 +1,6 @@
 param(
-    [switch]$RequireNativeAot
+    [switch]$RequireNativeAot,
+    [string]$ReleaseVersion
 )
 
 $ErrorActionPreference = "Stop"
@@ -7,6 +8,7 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 $manifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 . (Join-Path $PSScriptRoot "snapshot-state.ps1")
 . (Join-Path $PSScriptRoot "api-approval.ps1")
+. (Join-Path $PSScriptRoot "nuget-package.ps1")
 
 $fingerprintTempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-fingerprint-$([guid]::NewGuid().ToString('N'))"
 New-Item -ItemType Directory -Path $fingerprintTempRoot | Out-Null
@@ -45,8 +47,13 @@ try {
 
 & (Join-Path $PSScriptRoot "verify-manifest.ps1")
 & (Join-Path $PSScriptRoot "build.ps1") -Version "3.0.10" -ValidateOnly
-& (Join-Path $PSScriptRoot "verify-aot.ps1") `
-    -RequireNativeAot:$RequireNativeAot
+$aotParameters = @{
+    RequireNativeAot = $RequireNativeAot
+}
+if (-not [string]::IsNullOrWhiteSpace($ReleaseVersion)) {
+    $aotParameters.Version = @($ReleaseVersion, "current")
+}
+& (Join-Path $PSScriptRoot "verify-aot.ps1") @aotParameters
 
 $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-tests-$([guid]::NewGuid().ToString('N'))"
 New-Item -ItemType Directory -Path $tempRoot | Out-Null
@@ -124,6 +131,56 @@ try {
         throw "An example restored against the wrong package version."
     }
 
+    $manifest = Get-Content -Raw $manifestPath | ConvertFrom-Json -Depth 20
+    $stableEntry = @(
+        $manifest.versions |
+            Where-Object version -eq "3.0.10"
+    )[0]
+    $mixedPackageGraphFailed = $false
+    try {
+        Assert-DocsHumanizerPackageGraph `
+            -Entry $stableEntry `
+            -Libraries ([PSCustomObject]@{
+                "Humanizer/3.0.10" = [PSCustomObject]@{ type = "package" }
+                "Humanizer.Core/3.0.8" = [PSCustomObject]@{ type = "package" }
+            }) `
+            -Context "Synthetic example"
+    } catch {
+        $mixedPackageGraphFailed = $true
+    }
+    if (-not $mixedPackageGraphFailed) {
+        throw "A mixed Humanizer package graph unexpectedly passed."
+    }
+
+    $extractPaths = [System.Collections.Generic.List[string]]::new()
+    $extractedDllHashes = [System.Collections.Generic.List[string]]::new()
+    foreach ($iteration in 1..2) {
+        Use-DocsNuGetPackage `
+            -Entry $stableEntry `
+            -RepoRoot $repoRoot `
+            -Action {
+            param($package)
+
+            [void]$extractPaths.Add($package.ExtractPath)
+            $dllPath = Join-Path (
+                $package.ExtractPath
+            ) "lib/$($stableEntry.referenceTfm)/Humanizer.dll"
+            [void]$extractedDllHashes.Add(
+                (Get-FileHash $dllPath -Algorithm SHA256).Hash
+            )
+            if ($iteration -eq 1) {
+                Set-Content $dllPath "tampered extraction"
+            }
+        }
+        if (Test-Path $extractPaths[$extractPaths.Count - 1]) {
+            throw "A verified package extraction was not removed after use."
+        }
+    }
+    if ($extractPaths[0] -eq $extractPaths[1] -or
+        $extractedDllHashes[0] -ne $extractedDllHashes[1]) {
+        throw "Verified package extraction was reused instead of recreated."
+    }
+
     $expectedExtras = @(
         "Humanizer.ICulturedStringTransformer",
         "Humanizer.Localisation.DataUnit",
@@ -165,6 +222,82 @@ try {
             throw "PublicAPI extra-type $($case.Name) unexpectedly passed."
         }
     }
+
+    $memberCoverageRoot = Join-Path $tempRoot "api-member-coverage"
+    Copy-Item `
+        (Join-Path $repoRoot "website/docs/api") `
+        $memberCoverageRoot `
+        -Recurse
+    $defaultFormatterPath = Join-Path (
+        $memberCoverageRoot
+    ) "Humanizer.DefaultFormatter.md"
+    $memberLinksPath = Join-Path $tempRoot "api-member-links.txt"
+    $publicLinksPath = Join-Path $tempRoot "public-api-links.txt"
+    $protectedApprovalPath = Join-Path $tempRoot "protected-api-approval.txt"
+    [System.IO.File]::WriteAllText(
+        $memberLinksPath,
+        "./`nT:Humanizer.DefaultFormatter|Humanizer.DefaultFormatter.md|DefaultFormatter`nP:Humanizer.DefaultFormatter.Culture|Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.Culture|Culture`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        $publicLinksPath,
+        "./`nT:Humanizer.DefaultFormatter|Humanizer.DefaultFormatter.md|DefaultFormatter`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        $protectedApprovalPath,
+        "        protected System.Globalization.CultureInfo Culture { get; }`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    Assert-GeneratedApiLinks `
+        -OutputPath $memberCoverageRoot `
+        -LinksPath $memberLinksPath `
+        -VersionLabel "current baseline"
+    Assert-ApiAccessCoverage `
+        -ApiLinksPath $memberLinksPath `
+        -PublicLinksPath $publicLinksPath `
+        -ApprovalPath $protectedApprovalPath `
+        -VersionLabel "current baseline"
+    $publicOnlyFailed = $false
+    try {
+        Assert-ApiAccessCoverage `
+            -ApiLinksPath $publicLinksPath `
+            -PublicLinksPath $publicLinksPath `
+            -ApprovalPath $protectedApprovalPath `
+            -VersionLabel "public-only"
+    } catch {
+        $publicOnlyFailed = $true
+    }
+    if (-not $publicOnlyFailed) {
+        throw "Public-only API generation unexpectedly passed access coverage."
+    }
+    $defaultFormatter = Get-Content -Raw $defaultFormatterPath
+    $cultureAnchor = "<a name='Humanizer.DefaultFormatter.Culture'></a>`n"
+    $withoutCulture = $defaultFormatter.Replace(
+        $cultureAnchor,
+        ""
+    )
+    if ($withoutCulture -eq $defaultFormatter) {
+        throw "The API member-coverage fixture is missing the Culture anchor."
+    }
+    [System.IO.File]::WriteAllText(
+        $defaultFormatterPath,
+        $withoutCulture,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    $memberCoverageFailed = $false
+    try {
+        Assert-GeneratedApiLinks `
+            -OutputPath $memberCoverageRoot `
+            -LinksPath $memberLinksPath `
+            -VersionLabel "current"
+    } catch {
+        $memberCoverageFailed = $true
+    }
+    if (-not $memberCoverageFailed) {
+        throw "An omitted non-representative API member unexpectedly passed."
+    }
+
     $preJournalRoot = Join-Path $tempRoot "pre-journal-website"
     New-Item -ItemType Directory -Path $preJournalRoot | Out-Null
     $preJournalFailed = $false
@@ -549,9 +682,7 @@ try {
             throw "Restarted rollback did not preserve the restored state."
         }
     } finally {
-        Exit-SnapshotMutation `
-            -Lock $restartableLock `
-            -WebsiteRoot $isolatedWebsiteRoot
+        Exit-SnapshotMutation -Lock $restartableLock
     }
 
     $isolatedCurrentApi = Join-Path $isolatedWebsiteRoot "docs/api"
@@ -617,6 +748,15 @@ try {
             ) -Algorithm SHA256).Hash
         }
     }
+    Remove-Item (
+        Join-Path $isolatedWebsiteRoot "docs/_examples"
+    ) -Recurse -Force
+    Copy-Item `
+        (Join-Path $isolatedWebsiteRoot (
+            "versioned_docs/version-3.0.10/_examples"
+        )) `
+        (Join-Path $isolatedWebsiteRoot "docs/_examples") `
+        -Recurse
     $oldLatest = @(
         $isolatedManifest.versions |
             Where-Object version -eq "3.0.8"

@@ -23,7 +23,12 @@ This program parses a size with an explicit provider, performs arithmetic, disti
 
 ### Create and format sizes
 
-Use `Bytes`, `Kilobytes`, `Megabytes`, `Gigabytes`, or `Terabytes` on numeric values, or the corresponding `ByteSize.From...` factories. `Humanize` chooses the largest whole unit and accepts ordinary numeric format strings. `ToFullWords` uses full unit names.
+Use numeric extensions through `Terabytes`, or the corresponding
+`ByteSize.From...` factories. `main/preview` also exposes decimal petabyte and
+exabyte values plus explicit binary `Kibibyte`, `Mebibyte`, `Gibibyte`,
+`Tebibyte`, and `Pebibyte` factories, properties, format tokens, parsing
+symbols, and `DataUnit` values. `Humanize` chooses the largest whole unit and
+accepts ordinary numeric format strings. `ToFullWords` uses full unit names.
 
 ### Parse user input
 
@@ -35,13 +40,20 @@ Call `size.Per(interval).Humanize(format, TimeUnit.Second, culture)`. Rate displ
 
 ## Pitfall
 
-Humanizer’s `KB`, `MB`, `GB`, and `TB` values use binary multiples of 1024. They are not SI decimal units. The symbols `b` and `B` are intentionally case-sensitive: lowercase is bits, uppercase is bytes. Other recognized unit suffixes are case-insensitive. Fractional bits and values without a unit suffix are invalid.
+Humanizer’s legacy `KB`, `MB`, `GB`, and `TB` values use binary multiples of
+1024, while `PB` and `EB` use decimal SI factors. On `main/preview`, prefer the
+explicit IEC symbols `KiB`, `MiB`, `GiB`, `TiB`, and `PiB` when the binary
+meaning must be unambiguous. The symbols `b` and `B` are intentionally
+case-sensitive: lowercase is bits, uppercase is bytes. Other recognized unit
+suffixes are case-insensitive. Fractional bits and values without a unit
+suffix are invalid.
 
 Construct rates with a positive, nonzero interval. Keep `ByteSize` as the model value; formatted output is not a serialization contract.
 
 ## Version notes
 
-Core `ByteSize` creation and formatting span the documented corpus.
+Core `ByteSize` creation and formatting span the documented corpus. Petabyte,
+exabyte, and explicit IEC unit support are `main/preview` additions.
 Culture-aware `ByteRate.Humanize` appears in `2.13.14`; earlier snapshots need a
 reduced example or exclusion. The verified source runs against the selected
 package.

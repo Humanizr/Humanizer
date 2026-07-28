@@ -14,11 +14,16 @@ if (-not $ManifestPath) {
     -ManifestPath $ManifestPath
 
 $manifest = Get-Content -Raw $ManifestPath | ConvertFrom-Json -Depth 20
+$latestStableVersion = [string](
+    $manifest.versions |
+        Where-Object latestStable |
+        Select-Object -ExpandProperty version
+)
 $requestedVersions = @(
     if ($Version.Count -gt 0) {
         $Version
     } else {
-        "3.0.10"
+        $latestStableVersion
         "current"
     }
 )

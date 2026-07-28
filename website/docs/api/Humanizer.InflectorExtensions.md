@@ -11,8 +11,8 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## InflectorExtensions\.Camelize\(this string\) Method
 
-Converts a string to camelCase \(lowerCamelCase\) by capitalizing the first letter of each word
-except the first word, and removing spaces, underscores, and dashes\.
+Converts a string to camelCase \(lowerCamelCase\) by preserving leading underscores, capitalizing
+the first letter of each word except the first word, and removing other spaces, underscores, dashes, and dots\.
 
 ```csharp
 public static string Camelize(this string input);
@@ -27,20 +27,24 @@ The string to be camelized\. Must not be null\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
-A camelCase version of the input where the first word starts with a lowercase letter,
-subsequent words start with uppercase letters, and spaces, underscores, and dashes are removed\.
+A camelCase version of the input where leading underscores are preserved, the first word starts
+with a lowercase letter, subsequent words start with uppercase letters, and other separators are removed\.
 
 ### Example
 
 ```csharp
 "some_property_name".Camelize() => "somePropertyName"
 "some property name".Camelize() => "somePropertyName"
+"some.property.name".Camelize() => "somePropertyName"
 "SomePropertyName".Camelize() => "somePropertyName"
+"_some_property_name".Camelize() => "_somePropertyName"
 ```
 
 ### Remarks
-camelCase is the same as PascalCase except the first character is lowercase\.
+camelCase is the same as PascalCase except any leading underscores are preserved and the first
+character after them is lowercase\.
 It's commonly used for variable and method parameter names in \.NET\.
+Casing is culture\-invariant\.
 
 <a name='Humanizer.InflectorExtensions.Dasherize(thisstring)'></a>
 
@@ -137,13 +141,14 @@ A lowercase string with words separated by hyphens\.
 ### Remarks
 Kebab\-case is commonly used for CSS class names, HTML attributes, and URL slugs\.
 This is equivalent to calling [Underscore\(this string\)](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.Underscore(thisstring) 'Humanizer\.InflectorExtensions\.Underscore\(this string\)') followed by [Dasherize\(this string\)](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.Dasherize(thisstring) 'Humanizer\.InflectorExtensions\.Dasherize\(this string\)')\.
+Casing is culture\-invariant\.
 
 <a name='Humanizer.InflectorExtensions.Pascalize(thisstring)'></a>
 
 ## InflectorExtensions\.Pascalize\(this string\) Method
 
 Converts a string to PascalCase \(UpperCamelCase\) by capitalizing the first letter of each word
-and removing spaces, underscores, and dashes\.
+and removing spaces, underscores, dashes, and dots\.
 
 ```csharp
 public static string Pascalize(this string input);
@@ -159,7 +164,7 @@ The string to be pascalized\. Must not be null\.
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A PascalCase version of the input where each word starts with an uppercase letter and 
-spaces, underscores, and dashes are removed\.
+spaces, underscores, dashes, and dots are removed\.
 
 ### Example
 
@@ -167,10 +172,42 @@ spaces, underscores, and dashes are removed\.
 "some_property_name".Pascalize() => "SomePropertyName"
 "some property name".Pascalize() => "SomePropertyName"
 "some-property-name".Pascalize() => "SomePropertyName"
+"some.property.name".Pascalize() => "SomePropertyName"
 ```
 
 ### Remarks
 PascalCase \(also known as UpperCamelCase\) is commonly used for class names and type names in \.NET\.
+Casing is culture\-invariant\.
+
+<a name='Humanizer.InflectorExtensions.Pascalize(thisstring,bool)'></a>
+
+## InflectorExtensions\.Pascalize\(this string, bool\) Method
+
+Converts a string to PascalCase \(UpperCamelCase\), optionally normalizing uppercase sequences as words\.
+
+```csharp
+public static string Pascalize(this string input, bool preserveUppercase);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Pascalize(thisstring,bool).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be pascalized\. Must not be null\.
+
+<a name='Humanizer.InflectorExtensions.Pascalize(thisstring,bool).preserveUppercase'></a>
+
+`preserveUppercase` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to preserve uppercase sequences; [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to normalize them as words\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A PascalCase version of the input\.
+
+### Remarks
+Uppercase sequences are split using identifier word boundaries, and casing is culture\-invariant\.
 
 <a name='Humanizer.InflectorExtensions.Pluralize(thisstring,bool)'></a>
 
@@ -209,11 +246,14 @@ Handles irregular plurals \(e\.g\., "person" → "people", "child" → "children
 "cat".Pluralize() => "cats"
 "box".Pluralize() => "boxes"
 "man".Pluralize() => "men"
+"meter per second".Pluralize() => "meters per second"
+"PERSON".Pluralize() => "PEOPLE"
 "cats".Pluralize(inputIsKnownToBeSingular: false) => "cats" (avoids double pluralization)
 ```
 
 ### Remarks
 Uses the default vocabulary which includes English pluralization rules and common irregular forms\.
+In compound rates separated by the word "per", the numerator is pluralized and the denominator is preserved\.
 
 <a name='Humanizer.InflectorExtensions.Singularize(thisstring,bool,bool)'></a>
 
@@ -259,11 +299,14 @@ Handles irregular singulars \(e\.g\., "people" → "person", "children" → "chi
 "cats".Singularize() => "cat"
 "boxes".Singularize() => "box"
 "men".Singularize() => "man"
+"meters per second".Singularize() => "meter per second"
+"PEOPLE".Singularize() => "PERSON"
 "person".Singularize(inputIsKnownToBePlural: false) => "person" (avoids incorrect singularization)
 ```
 
 ### Remarks
 Uses the default vocabulary which includes English singularization rules and common irregular forms\.
+In compound rates separated by the word "per", the numerator is singularized and the denominator is preserved\.
 
 <a name='Humanizer.InflectorExtensions.Titleize(thisstring)'></a>
 
@@ -299,6 +342,70 @@ If humanization produces an empty string, returns the original input unchanged\.
 ### Remarks
 This method first humanizes the input \(breaking up PascalCase, underscores, etc\.\) and then applies title casing\.
 
+<a name='Humanizer.InflectorExtensions.ToCamelCase(thisstring)'></a>
+
+## InflectorExtensions\.ToCamelCase\(this string\) Method
+
+Converts a string to camelCase while preserving leading underscores and normalizing uppercase sequences as words\.
+
+```csharp
+public static string ToCamelCase(this string input);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.ToCamelCase(thisstring).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be converted\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A camelCase version of the input with leading underscores preserved and uppercase sequences normalized\.
+
+### Example
+
+```csharp
+"IOModule".ToCamelCase() => "ioModule"
+"__XMLHttpRequest".ToCamelCase() => "__xmlHttpRequest"
+```
+
+### Remarks
+Uppercase sequences are split using identifier word boundaries, and casing is culture\-invariant\.
+
+<a name='Humanizer.InflectorExtensions.ToPossessive(thisstring,bool,bool)'></a>
+
+## InflectorExtensions\.ToPossessive\(this string, bool, bool\) Method
+
+Converts an English noun or noun phrase to its possessive form\.
+
+```csharp
+public static string? ToPossessive(this string? word, bool inputIsPlural=false, bool useApostropheOnlyForSingularWordsEndingInS=false);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.ToPossessive(thisstring,bool,bool).word'></a>
+
+`word` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The noun or noun phrase to convert\.
+
+<a name='Humanizer.InflectorExtensions.ToPossessive(thisstring,bool,bool).inputIsPlural'></a>
+
+`inputIsPlural` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Whether [word](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.ToPossessive(thisstring,bool,bool).word 'Humanizer\.InflectorExtensions\.ToPossessive\(this string, bool, bool\)\.word') is plural\.
+
+<a name='Humanizer.InflectorExtensions.ToPossessive(thisstring,bool,bool).useApostropheOnlyForSingularWordsEndingInS'></a>
+
+`useApostropheOnlyForSingularWordsEndingInS` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Whether singular words ending in `s` should use only an apostrophe instead of `'s`\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The possessive form of [word](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.ToPossessive(thisstring,bool,bool).word 'Humanizer\.InflectorExtensions\.ToPossessive\(this string, bool, bool\)\.word')\.
+
 <a name='Humanizer.InflectorExtensions.Underscore(thisstring)'></a>
 
 ## InflectorExtensions\.Underscore\(this string\) Method
@@ -332,3 +439,4 @@ A lowercase string with words separated by underscores instead of spaces, case c
 
 ### Remarks
 This transformation is commonly used for database column names, file names, and URL slugs in some conventions\.
+Casing is culture\-invariant\.

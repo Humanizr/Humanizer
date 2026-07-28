@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import {expect, test} from '@playwright/test';
+import {expect, test, type Page} from '@playwright/test';
 
 const routes = [
   {name: 'home', path: '/'},
@@ -19,6 +19,15 @@ const routes = [
   {name: 'redirected legacy page', path: '/installation.html'},
 ];
 
+async function expectNoSeriousAccessibilityViolations(page: Page) {
+  const results = await new AxeBuilder({page}).analyze();
+  const violations = results.violations.filter(({impact}) =>
+    ['serious', 'critical'].includes(impact ?? ''),
+  );
+
+  expect(violations).toEqual([]);
+}
+
 for (const colorScheme of ['light', 'dark'] as const) {
   for (const route of routes) {
     test(`${route.name} has no serious accessibility violations in ${colorScheme} mode`, async ({
@@ -27,12 +36,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await page.emulateMedia({colorScheme});
       await page.goto(route.path);
 
-      const results = await new AxeBuilder({page}).analyze();
-      const violations = results.violations.filter(({impact}) =>
-        ['serious', 'critical'].includes(impact ?? ''),
-      );
-
-      expect(violations).toEqual([]);
+      await expectNoSeriousAccessibilityViolations(page);
     });
   }
 
@@ -58,12 +62,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await region.focus();
       await expect(region).toBeFocused();
 
-      const results = await new AxeBuilder({page}).analyze();
-      const violations = results.violations.filter(({impact}) =>
-        ['serious', 'critical'].includes(impact ?? ''),
-      );
-
-      expect(violations).toEqual([]);
+      await expectNoSeriousAccessibilityViolations(page);
     });
   }
 
@@ -80,12 +79,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
     await table.focus();
     await expect(table).toBeFocused();
 
-    const results = await new AxeBuilder({page}).analyze();
-    const violations = results.violations.filter(({impact}) =>
-      ['serious', 'critical'].includes(impact ?? ''),
-    );
-
-    expect(violations).toEqual([]);
+    await expectNoSeriousAccessibilityViolations(page);
   });
 
   test(`all-version modal has no serious accessibility violations in ${colorScheme} mode`, async ({
@@ -96,11 +90,6 @@ for (const colorScheme of ['light', 'dark'] as const) {
     await page.getByRole('button', {name: 'All versions'}).first().click();
     await expect(page.locator('pagefind-modal dialog')).toBeVisible();
 
-    const results = await new AxeBuilder({page}).analyze();
-    const violations = results.violations.filter(({impact}) =>
-      ['serious', 'critical'].includes(impact ?? ''),
-    );
-
-    expect(violations).toEqual([]);
+    await expectNoSeriousAccessibilityViolations(page);
   });
 }

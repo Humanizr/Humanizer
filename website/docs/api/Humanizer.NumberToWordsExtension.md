@@ -44,7 +44,7 @@ Form of the word, i\.e\. abbreviation
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -89,7 +89,7 @@ The grammatical gender to use for output words
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
@@ -121,7 +121,7 @@ Form of the word, i\.e\. abbreviation
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -156,7 +156,7 @@ Number to be turned to ordinal words
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
@@ -182,7 +182,7 @@ Number to be turned to tuple
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
@@ -221,7 +221,7 @@ The requested word form\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -262,7 +262,7 @@ Whether to include the culture's conjunction before the terminal group\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -295,7 +295,7 @@ The grammatical gender to use when the locale supports gendered forms\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -348,7 +348,7 @@ The grammatical gender to use when the locale supports gendered forms\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -390,7 +390,7 @@ Form of the word, i\.e\. abbreviation
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -425,7 +425,7 @@ The value to convert\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -458,7 +458,7 @@ The grammatical gender to use when the locale supports gendered forms\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -511,7 +511,7 @@ The grammatical gender to use when the locale supports gendered forms\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -553,7 +553,7 @@ The requested word form\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 <a name='Humanizer.NumberToWordsExtension.ToWords(thislong,Humanizer.WordForm,System.Globalization.CultureInfo,bool).addAnd'></a>
 
@@ -594,7 +594,7 @@ The value to convert\.
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-The culture to use\. If `null`, the current UI culture is used\.
+The culture to use\. If `null`, the current culture is used\.
 
 <a name='Humanizer.NumberToWordsExtension.ToWords(thislong,System.Globalization.CultureInfo,bool).addAnd'></a>
 

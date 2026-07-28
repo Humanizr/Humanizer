@@ -2,9 +2,11 @@
   "name": "humanizer-docs",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@11.17.0",
   "scripts": {
-    "build": "npm run build:site && npm run build:all-search",
+    "build": "pnpm run build:site && pnpm run build:all-search",
     "build:all-search": "pagefind --site build --root-selector article --glob \"**/index.html\"",
+    "check:artifact": "node scripts/verify-pages-artifact.mjs build",
     "check:links": "node scripts/verify-links.mjs build",
     "build:site": "docusaurus build",
     "check:content": "node ../tools/docs/verify-content.mjs",
@@ -13,7 +15,9 @@
     "serve": "docusaurus serve",
     "start": "docusaurus start",
     "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
-    "test:e2e": "playwright test",
+    "test:ci": "playwright test tests/e2e/reader-shell.spec.ts tests/e2e/accessibility.spec.ts",
+    "test:e2e": "playwright test tests/e2e/reader-shell.spec.ts",
+    "test:production": "playwright test tests/e2e/production.spec.ts",
     "test:unit": "node --test tests/*.test.mjs",
     "typecheck": "tsc"
   },
@@ -21,24 +25,25 @@
     "@cmfcmf/docusaurus-search-local": "2.0.1",
     "@docusaurus/core": "3.10.2",
     "@docusaurus/plugin-client-redirects": "3.10.2",
+    "@docusaurus/plugin-content-docs": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
-    "@mdx-js/react": "^3.0.0",
-    "prism-react-renderer": "^2.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@mdx-js/react": "3.1.1",
+    "prism-react-renderer": "2.4.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
     "@docusaurus/module-type-aliases": "3.10.2",
-    "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
-    "@playwright/test": "1.61.0",
-    "@types/react": "^19.0.0",
+    "@playwright/test": "1.62.0",
+    "@types/react": "19.2.17",
     "pagefind": "1.5.2",
     "raw-loader": "4.0.2",
-    "typescript": "~6.0.2"
+    "typescript": "7.0.2"
   },
   "engines": {
-    "node": "24.18.0"
+    "node": "26.5.0",
+    "pnpm": "11.17.0"
   }
 }

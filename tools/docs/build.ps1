@@ -66,6 +66,8 @@ if ($Mode -eq "Validate") {
     & (Join-Path $PSScriptRoot "verify-examples.ps1") `
         -Version current `
         -ManifestPath $ManifestPath
+    & (Join-Path $PSScriptRoot "verify-upgrade-paths.ps1") `
+        -ManifestPath $ManifestPath
 }
 
 Write-Host "Documentation inputs and generated outputs passed validation."

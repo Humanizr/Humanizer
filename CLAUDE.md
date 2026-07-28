@@ -54,7 +54,8 @@ tests/
   Humanizer.Analyzers.Tests/    # Analyzer unit tests
   Humanizer.SourceGenerators.Tests/  # Source generator tests
   fixtures/                     # Package smoke tests (Console, Blazor, WebApi)
-docs/                           # Jekyll documentation site
+website/                        # Docusaurus source, generated API, and immutable version snapshots
+docs/plans/                     # Documentation implementation plans
 ```
 
 ## Code Conventions
@@ -77,9 +78,9 @@ docs/                           # Jekyll documentation site
 
 - Locale data defined in YAML files under `src/Humanizer/Locales/`
 - Source generators transform YAML into C# lookup tables at build time
-- To add a locale: duplicate a YAML file and translate it; the source generator wires all registries automatically (see `docs/adding-a-locale.md`)
+- To add a locale: duplicate a YAML file and translate it; the source generator wires all registries automatically (see `website/docs/contributing/adding-or-updating-a-locale.mdx`)
 - When ICU-supplied data (month names, decimal separators) differs across platforms, author explicit overrides in `calendar:` and/or `number.formatting:` YAML surfaces
-- See `docs/adding-a-locale.md` and `docs/locale-yaml-reference.md` for the full guide
+- See `website/docs/contributing/adding-or-updating-a-locale.mdx` and `website/docs/contributing/locale-yaml-surface-reference.mdx` for the full guide
 
 ## Key Config Files
 

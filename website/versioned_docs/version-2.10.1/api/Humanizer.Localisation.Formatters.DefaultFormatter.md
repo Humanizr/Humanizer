@@ -124,6 +124,108 @@ Implements [DateHumanize\_Now\(\)](Humanizer.Localisation.Formatters.IFormatter.
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 Returns Now
 
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.Format(string)'></a>
+
+## DefaultFormatter\.Format\(string\) Method
+
+Formats the specified resource key\.
+
+```csharp
+protected virtual string Format(string resourceKey);
+```
+#### Parameters
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.Format(string).resourceKey'></a>
+
+`resourceKey` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The resource key\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+#### Exceptions
+
+[System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
+If the resource not exists on the specified culture\.
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.Format(string,int,bool)'></a>
+
+## DefaultFormatter\.Format\(string, int, bool\) Method
+
+Formats the specified resource key\.
+
+```csharp
+protected virtual string Format(string resourceKey, int number, bool toWords=false);
+```
+#### Parameters
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.Format(string,int,bool).resourceKey'></a>
+
+`resourceKey` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The resource key\.
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.Format(string,int,bool).number'></a>
+
+`number` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The number\.
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.Format(string,int,bool).toWords'></a>
+
+`toWords` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+#### Exceptions
+
+[System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
+If the resource not exists on the specified culture\.
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.GetResourceKey(string)'></a>
+
+## DefaultFormatter\.GetResourceKey\(string\) Method
+
+```csharp
+protected virtual string GetResourceKey(string resourceKey);
+```
+#### Parameters
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.GetResourceKey(string).resourceKey'></a>
+
+`resourceKey` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.GetResourceKey(string,int)'></a>
+
+## DefaultFormatter\.GetResourceKey\(string, int\) Method
+
+Override this method if your locale has complex rules around multiple units; e\.g\. Arabic, Russian
+
+```csharp
+protected virtual string GetResourceKey(string resourceKey, int number);
+```
+#### Parameters
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.GetResourceKey(string,int).resourceKey'></a>
+
+`resourceKey` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The resource key that's being in formatting
+
+<a name='Humanizer.Localisation.Formatters.DefaultFormatter.GetResourceKey(string,int).number'></a>
+
+`number` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The number of the units being used in formatting
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
 <a name='Humanizer.Localisation.Formatters.DefaultFormatter.TimeSpanHumanize(Humanizer.Localisation.TimeUnit,int,bool)'></a>
 
 ## DefaultFormatter\.TimeSpanHumanize\(TimeUnit, int, bool\) Method

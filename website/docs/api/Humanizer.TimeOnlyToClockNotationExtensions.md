@@ -54,3 +54,41 @@ new TimeOnly(15, 7).ToClockNotation(ClockNotationRounding.NearestFiveMinutes) =>
 ### Remarks
 The output format varies by culture\. Some cultures express time differently than others\.
 This method is only available on \.NET 6\.0 and later\.
+
+<a name='Humanizer.TimeOnlyToClockNotationExtensions.ToClockNotation(thisSystem.TimeOnly,Humanizer.ClockNotationRounding,System.Globalization.CultureInfo)'></a>
+
+## TimeOnlyToClockNotationExtensions\.ToClockNotation\(this TimeOnly, ClockNotationRounding, CultureInfo\) Method
+
+Converts a [System\.TimeOnly](https://learn.microsoft.com/en-us/dotnet/api/system.timeonly 'System\.TimeOnly') value to clock notation using the specified culture\.
+
+```csharp
+public static string ToClockNotation(this System.TimeOnly input, Humanizer.ClockNotationRounding roundToNearestFive, System.Globalization.CultureInfo culture);
+```
+#### Parameters
+
+<a name='Humanizer.TimeOnlyToClockNotationExtensions.ToClockNotation(thisSystem.TimeOnly,Humanizer.ClockNotationRounding,System.Globalization.CultureInfo).input'></a>
+
+`input` [System\.TimeOnly](https://learn.microsoft.com/en-us/dotnet/api/system.timeonly 'System\.TimeOnly')
+
+The time to be converted to clock notation\.
+
+<a name='Humanizer.TimeOnlyToClockNotationExtensions.ToClockNotation(thisSystem.TimeOnly,Humanizer.ClockNotationRounding,System.Globalization.CultureInfo).roundToNearestFive'></a>
+
+`roundToNearestFive` [ClockNotationRounding](Humanizer.ClockNotationRounding.md 'Humanizer\.ClockNotationRounding')
+
+The rounding mode to apply before formatting the time\.
+
+<a name='Humanizer.TimeOnlyToClockNotationExtensions.ToClockNotation(thisSystem.TimeOnly,Humanizer.ClockNotationRounding,System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+The culture to use\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A culture\-specific string representation of the time in clock notation\.
+
+#### Exceptions
+
+[System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
+Thrown when [culture](Humanizer.TimeOnlyToClockNotationExtensions.md#Humanizer.TimeOnlyToClockNotationExtensions.ToClockNotation(thisSystem.TimeOnly,Humanizer.ClockNotationRounding,System.Globalization.CultureInfo).culture 'Humanizer\.TimeOnlyToClockNotationExtensions\.ToClockNotation\(this System\.TimeOnly, Humanizer\.ClockNotationRounding, System\.Globalization\.CultureInfo\)\.culture') is `null`\.

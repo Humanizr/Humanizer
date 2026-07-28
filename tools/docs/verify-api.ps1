@@ -63,17 +63,6 @@ function Get-ApiDigest {
     )
 }
 
-function Get-NuGetApiInput {
-    param([Parameter(Mandatory = $true)]$Entry)
-
-    $package = Get-DocsNuGetPackage -Entry $Entry -RepoRoot $repoRoot
-    $apiDirectory = Join-Path $package.ExtractPath "lib/$($Entry.referenceTfm)"
-    return [PSCustomObject]@{
-        Dll = Join-Path $apiDirectory "Humanizer.dll"
-        Xml = Join-Path $apiDirectory "Humanizer.xml"
-    }
-}
-
 function Get-CheckoutApiInput {
     param([Parameter(Mandatory = $true)]$Entry)
 
@@ -110,11 +99,66 @@ function Get-CheckoutApiInput {
     }
 }
 
+function Use-ApiInput {
+    param(
+        [Parameter(Mandatory = $true)]$Entry,
+        [Parameter(Mandatory = $true)][scriptblock]$Action
+    )
+
+    if ($Entry.source.kind -eq "nuget") {
+        $consumeApiInput = $Action
+        return Use-DocsNuGetPackage `
+            -Entry $Entry `
+            -RepoRoot $repoRoot `
+            -Action {
+            param($package)
+
+            $apiDirectory = Join-Path $package.ExtractPath "lib/$($Entry.referenceTfm)"
+            & $consumeApiInput ([PSCustomObject]@{
+                Dll = Join-Path $apiDirectory "Humanizer.dll"
+                Xml = Join-Path $apiDirectory "Humanizer.xml"
+            })
+        }
+    }
+    if ($Entry.source.kind -eq "checkout") {
+        return & $Action (Get-CheckoutApiInput -Entry $Entry)
+    }
+
+    throw "Unsupported API source kind '$($Entry.source.kind)' for $($Entry.version)."
+}
+
+function Invoke-ApiGenerator {
+    param(
+        [Parameter(Mandatory = $true)]$ApiInput,
+        [Parameter(Mandatory = $true)][string]$OutputPath,
+        [Parameter(Mandatory = $true)][string]$LinksPath,
+        [string]$AccessModifiers = "Api"
+    )
+
+    Invoke-DocsCheckedCommand `
+        -FilePath "dotnet" `
+        -ArgumentList @(
+            "tool", "run", "defaultdocumentation", "--",
+            "--AssemblyFilePath", $ApiInput.Dll,
+            "--DocumentationFilePath", $ApiInput.Xml,
+            "--OutputDirectoryPath", $OutputPath,
+            "--AssemblyPageName", "assembly",
+            "--GeneratedAccessModifiers", $AccessModifiers,
+            "--IncludeUndocumentedItems", "true",
+            "--GeneratedPages", "Namespaces,Types",
+            "--Sections", "Default",
+            "--LinksOutputFilePath", $LinksPath,
+            "--LinksBaseUrl", "./"
+        ) `
+        -WorkingDirectory $repoRoot
+}
+
 function Assert-GeneratedApi {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
         [Parameter(Mandatory = $true)][string]$VersionLabel,
         [Parameter(Mandatory = $true)][string]$ApprovalPath,
+        [Parameter(Mandatory = $true)][string]$LinksPath,
         [string[]]$ExpectedExtraTypes = @()
     )
 
@@ -190,6 +234,10 @@ function Assert-GeneratedApi {
         -VersionLabel $VersionLabel `
         -Actual $extraTypes `
         -Expected $ExpectedExtraTypes
+    Assert-GeneratedApiLinks `
+        -OutputPath $OutputPath `
+        -LinksPath $LinksPath `
+        -VersionLabel $VersionLabel
 
     $localPathPattern = "file://|$([regex]::Escape($repoRoot))"
     foreach ($generatedFile in Get-ChildItem $OutputPath -Filter "*.md" -File) {
@@ -256,100 +304,111 @@ function Get-PublicApiApproval {
     return $approvalPath
 }
 
-foreach ($entry in $versions) {
-    if (-not $entry.apiPackage -or -not $entry.referenceTfm) {
-        throw "Version $($entry.version) is missing API package or reference TFM metadata."
-    }
+function Test-ApiEntry {
+    param(
+        [Parameter(Mandatory = $true)]$Entry,
+        [Parameter(Mandatory = $true)]$ApiInput
+    )
 
-    $input = if ($entry.source.kind -eq "nuget") {
-        Get-NuGetApiInput -Entry $entry
-    } elseif ($entry.source.kind -eq "checkout") {
-        Get-CheckoutApiInput -Entry $entry
-    } else {
-        throw "Unsupported API source kind '$($entry.source.kind)' for $($entry.version)."
+    if (-not (Test-Path $ApiInput.Dll -PathType Leaf) -or
+        -not (Test-Path $ApiInput.Xml -PathType Leaf)) {
+        throw "Version $($Entry.version) is missing its declared DLL/XML pair for $($Entry.referenceTfm)."
     }
-
-    if (-not (Test-Path $input.Dll -PathType Leaf) -or -not (Test-Path $input.Xml -PathType Leaf)) {
-        throw "Version $($entry.version) is missing its declared DLL/XML pair for $($entry.referenceTfm)."
+    if ((Split-Path $ApiInput.Dll -Leaf) -ne "Humanizer.dll" -or
+        (Split-Path $ApiInput.Xml -Leaf) -ne "Humanizer.xml") {
+        throw "Version $($Entry.version) selected a supporting assembly instead of Humanizer."
     }
-    if ((Split-Path $input.Dll -Leaf) -ne "Humanizer.dll" -or
-        (Split-Path $input.Xml -Leaf) -ne "Humanizer.xml") {
-        throw "Version $($entry.version) selected a supporting assembly instead of Humanizer."
-    }
-    $approvalPath = Get-PublicApiApproval -Entry $entry
+    $approvalPath = Get-PublicApiApproval -Entry $Entry
     if (-not (Test-Path $approvalPath -PathType Leaf)) {
-        throw "Version $($entry.version) is missing PublicAPI approval evidence."
+        throw "Version $($Entry.version) is missing PublicAPI approval evidence."
     }
 
     $preserveOutput = -not [string]::IsNullOrWhiteSpace($OutputDirectory)
     $firstOutput = if ($preserveOutput) {
         [System.IO.Path]::GetFullPath($OutputDirectory)
     } else {
-        Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-api-$($entry.version)-$([guid]::NewGuid().ToString('N'))"
+        Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-api-$($Entry.version)-$([guid]::NewGuid().ToString('N'))"
     }
     if ($preserveOutput -and (Test-Path $firstOutput)) {
         throw "API output directory already exists: $firstOutput"
     }
+    $firstLinks = "$firstOutput-links.txt"
+    $publicOutput = "$firstOutput-public"
+    $publicLinks = "$publicOutput-links.txt"
     New-Item -ItemType Directory -Path $firstOutput | Out-Null
     try {
-        Invoke-DocsCheckedCommand `
-            -FilePath "dotnet" `
-            -ArgumentList @(
-                "tool", "run", "defaultdocumentation", "--",
-                "--AssemblyFilePath", $input.Dll,
-                "--DocumentationFilePath", $input.Xml,
-                "--OutputDirectoryPath", $firstOutput,
-                "--AssemblyPageName", "assembly",
-                "--GeneratedAccessModifiers", "Public",
-                "--IncludeUndocumentedItems", "true",
-                "--GeneratedPages", "Namespaces,Types",
-                "--Sections", "Default"
-            ) `
-            -WorkingDirectory $repoRoot
+        Invoke-ApiGenerator `
+            -ApiInput $ApiInput `
+            -OutputPath $firstOutput `
+            -LinksPath $firstLinks
         Assert-GeneratedApi `
             -OutputPath $firstOutput `
-            -VersionLabel $entry.version `
+            -VersionLabel $Entry.version `
             -ApprovalPath $approvalPath `
+            -LinksPath $firstLinks `
             -ExpectedExtraTypes @(
-                $entry.publicApiApproval.generatedExtraTypes
+                $Entry.publicApiApproval.generatedExtraTypes
             )
+        New-Item -ItemType Directory -Path $publicOutput | Out-Null
+        Invoke-ApiGenerator `
+            -ApiInput $ApiInput `
+            -OutputPath $publicOutput `
+            -LinksPath $publicLinks `
+            -AccessModifiers "Public"
+        Assert-GeneratedApiLinks `
+            -OutputPath $publicOutput `
+            -LinksPath $publicLinks `
+            -VersionLabel "$($Entry.version) public"
+        Assert-ApiAccessCoverage `
+            -ApiLinksPath $firstLinks `
+            -PublicLinksPath $publicLinks `
+            -ApprovalPath $approvalPath `
+            -VersionLabel $Entry.version
         if (-not $preserveOutput) {
             Assert-CommittedApi `
                 -GeneratedPath $firstOutput `
-                -VersionLabel $entry.version
+                -VersionLabel $Entry.version
         }
 
         if ($All -or $Smoke) {
             $secondOutput = "$firstOutput-second"
+            $secondLinks = "$secondOutput-links.txt"
             New-Item -ItemType Directory -Path $secondOutput | Out-Null
             try {
-                Invoke-DocsCheckedCommand `
-                    -FilePath "dotnet" `
-                    -ArgumentList @(
-                        "tool", "run", "defaultdocumentation", "--",
-                        "--AssemblyFilePath", $input.Dll,
-                        "--DocumentationFilePath", $input.Xml,
-                        "--OutputDirectoryPath", $secondOutput,
-                        "--AssemblyPageName", "assembly",
-                        "--GeneratedAccessModifiers", "Public",
-                        "--IncludeUndocumentedItems", "true",
-                        "--GeneratedPages", "Namespaces,Types",
-                        "--Sections", "Default"
-                    ) `
-                    -WorkingDirectory $repoRoot
+                Invoke-ApiGenerator `
+                    -ApiInput $ApiInput `
+                    -OutputPath $secondOutput `
+                    -LinksPath $secondLinks
                 if ((Get-SnapshotDirectoryDigest $firstOutput) -ne
-                    (Get-SnapshotDirectoryDigest $secondOutput)) {
-                    throw "API generation for $($entry.version) is not deterministic."
+                    (Get-SnapshotDirectoryDigest $secondOutput) -or
+                    (Get-FileHash $firstLinks -Algorithm SHA256).Hash -ne
+                    (Get-FileHash $secondLinks -Algorithm SHA256).Hash) {
+                    throw "API generation for $($Entry.version) is not deterministic."
                 }
             } finally {
                 Remove-Item $secondOutput -Recurse -Force -ErrorAction SilentlyContinue
+                Remove-Item $secondLinks -Force -ErrorAction SilentlyContinue
             }
         }
 
-        Write-Host "API reference passed: $($entry.version) ($($entry.apiPackage), $($entry.referenceTfm))"
+        Write-Host "API reference passed: $($Entry.version) ($($Entry.apiPackage), $($Entry.referenceTfm))"
     } finally {
         if (-not $preserveOutput) {
             Remove-Item $firstOutput -Recurse -Force -ErrorAction SilentlyContinue
         }
+        Remove-Item $firstLinks -Force -ErrorAction SilentlyContinue
+        Remove-Item $publicOutput -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item $publicLinks -Force -ErrorAction SilentlyContinue
+    }
+}
+
+foreach ($entry in $versions) {
+    if (-not $entry.apiPackage -or -not $entry.referenceTfm) {
+        throw "Version $($entry.version) is missing API package or reference TFM metadata."
+    }
+
+    Use-ApiInput -Entry $entry -Action {
+        param($apiInput)
+        Test-ApiEntry -Entry $entry -ApiInput $apiInput
     }
 }

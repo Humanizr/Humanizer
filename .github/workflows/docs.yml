@@ -1,0 +1,294 @@
+name: Documentation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      rollback_run_id:
+        description: Redeploy the retained artifact from this documentation run
+        required: false
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: >-
+    ${{ github.workflow }}-${{
+      github.event_name == 'pull_request' && github.event.pull_request.number ||
+      'production'
+    }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+
+jobs:
+  build:
+    permissions:
+      actions: read
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Require main for rollback
+        if: >-
+          github.event_name == 'workflow_dispatch' &&
+          inputs.rollback_run_id != '' &&
+          github.ref != 'refs/heads/main'
+        run: |
+          echo "Rollbacks must run from main." >&2
+          exit 1
+
+      - name: Setup .NET
+        if: inputs.rollback_run_id == ''
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: website/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: website/.node-version
+          cache: pnpm
+          cache-dependency-path: website/pnpm-lock.yaml
+
+      - name: Cache immutable documentation packages
+        if: inputs.rollback_run_id == ''
+        uses: actions/cache@v6
+        with:
+          path: /tmp/humanizer-docs-nuget/**/*.nupkg
+          key: >-
+            docs-nuget-v2-${{ runner.os }}-${{
+              hashFiles(
+                'website/humanizer-versions.json',
+                'nuget.config',
+                '.config/dotnet-tools.json'
+              )
+            }}
+
+      - name: Restore documentation tools
+        if: inputs.rollback_run_id == ''
+        run: dotnet tool restore
+
+      - name: Restore site dependencies
+        if: inputs.rollback_run_id == ''
+        run: pnpm --dir website install --frozen-lockfile
+
+      - name: Validate manifests, snapshots, APIs, and examples
+        if: inputs.rollback_run_id == ''
+        shell: pwsh
+        run: ./tools/docs/build.ps1 -Mode Validate
+
+      - name: Validate snapshot transactions and Native AOT
+        if: inputs.rollback_run_id == ''
+        shell: pwsh
+        run: ./tools/docs/test.ps1 -RequireNativeAot
+
+      - name: Validate content
+        if: inputs.rollback_run_id == ''
+        run: pnpm --dir website run check:content
+
+      - name: Build the complete site
+        if: inputs.rollback_run_id == ''
+        run: pnpm --dir website run build
+
+      - name: Validate links, SEO, and search budgets
+        if: inputs.rollback_run_id == ''
+        run: |
+          pnpm --dir website run check:links
+          pnpm --dir website run check:search-budget
+
+      - name: Validate site code
+        if: inputs.rollback_run_id == ''
+        run: |
+          pnpm --dir website run test:unit
+          pnpm --dir website run typecheck
+          dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic
+
+      - name: Install browser
+        if: inputs.rollback_run_id == ''
+        run: pnpm --dir website exec playwright install --with-deps chromium
+
+      - name: Validate browser behavior and accessibility
+        if: inputs.rollback_run_id == ''
+        run: pnpm --dir website run test:ci
+
+      - name: Validate rollback source
+        if: inputs.rollback_run_id != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
+        run: |
+          if [[ ! "$ROLLBACK_RUN_ID" =~ ^[0-9]+$ ]]; then
+            echo "Rollback run ID must be numeric." >&2
+            exit 1
+          fi
+          source_run="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/actions/runs/${ROLLBACK_RUN_ID}" \
+              --jq '[.conclusion, .event, .head_branch, .path] | @tsv'
+          )"
+          if [[ "$source_run" != $'success\tpush\tmain\t.github/workflows/docs.yml' ]]; then
+            echo "Rollback source must be a successful main documentation run." >&2
+            exit 1
+          fi
+
+      - name: Restore retained Pages artifact
+        if: inputs.rollback_run_id != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
+        run: |
+          mkdir -p rollback
+          gh release download docs-pages-archive \
+            --pattern "github-pages-${ROLLBACK_RUN_ID}.tar" \
+            --dir rollback
+
+      - name: Extract retained Pages artifact for verification
+        if: inputs.rollback_run_id != ''
+        env:
+          ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
+        run: |
+          mkdir -p website/build
+          tar -xf \
+            "rollback/github-pages-${ROLLBACK_RUN_ID}.tar" \
+            -C website/build
+
+      - name: Verify complete Pages artifact
+        run: pnpm --dir website run check:artifact
+
+      - name: Upload GitHub Pages artifact
+        if: >-
+          github.event_name == 'push' ||
+          inputs.rollback_run_id != ''
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: website/build
+          include-hidden-files: true
+          retention-days: 7
+
+  deploy:
+    if: >-
+      github.event_name == 'push' ||
+      inputs.rollback_run_id != ''
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Deploy complete artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  production-smoke:
+    if: >-
+      github.event_name == 'push' ||
+      inputs.rollback_run_id != ''
+    runs-on: ubuntu-latest
+    needs:
+      - deploy
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - name: Checkout production smoke tests
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: website/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: website/.node-version
+          cache: pnpm
+          cache-dependency-path: website/pnpm-lock.yaml
+
+      - name: Install production smoke dependencies
+        run: |
+          pnpm --dir website install --frozen-lockfile
+          pnpm --dir website exec playwright install --with-deps chromium
+
+      - name: Verify production custom domain
+        env:
+          HUMANIZER_DOCS_BASE_URL: https://humanizr.net
+        run: pnpm --dir website run test:production
+
+      - name: Download deployed Pages artifact
+        if: github.event_name == 'push'
+        uses: actions/download-artifact@v8
+        with:
+          name: github-pages
+          path: rollback
+
+      - name: Retain deployed artifact for rollback
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          archive="rollback/github-pages-${GITHUB_RUN_ID}.tar"
+          mv rollback/artifact.tar "$archive"
+          if ! gh release view docs-pages-archive >/dev/null 2>&1; then
+            gh release create docs-pages-archive \
+              --prerelease \
+              --target "$GITHUB_SHA" \
+              --title "Documentation deployment archive" \
+              --notes "Automation-owned Pages artifacts for exact rollback."
+          fi
+
+          release_id="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
+              --jq .id
+          )"
+          existing_asset_id="$(
+            gh api \
+              --paginate \
+              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
+              --jq ".[] | select(.name == \"github-pages-${GITHUB_RUN_ID}.tar\") | .id" |
+              head -n 1
+          )"
+          if [[ -z "$existing_asset_id" ]]; then
+            gh release upload docs-pages-archive "$archive"
+          else
+            echo "Rollback archive for run ${GITHUB_RUN_ID} is already retained."
+          fi
+
+          gh api \
+              --paginate \
+              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
+              --jq '.[] | select(.name | (startswith("github-pages-") and endswith(".tar"))) | [.created_at, .id, .name] | @tsv' |
+            sort -r |
+            tail -n +11 |
+            while IFS=$'\t' read -r _ asset_id asset_name; do
+              echo "Removing expired rollback archive ${asset_name}."
+              gh api \
+                --method DELETE \
+                "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}"
+            done

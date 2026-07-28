@@ -782,6 +782,6 @@ try {
     }
 } finally {
     if ($null -ne $mutationLock) {
-        Exit-SnapshotMutation -Lock $mutationLock -WebsiteRoot $WebsiteRoot
+        Exit-SnapshotMutation -Lock $mutationLock
     }
 }

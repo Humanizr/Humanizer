@@ -123,9 +123,10 @@ Add more `number.words.*` and `number.parse.*` proof subrows whenever the select
 
 Start with these:
 
-- `docs/adding-a-locale.md`
-- `docs/locale-yaml-how-to.md`
-- `docs/locale-yaml-reference.md`
+- `website/docs/contributing/adding-or-updating-a-locale.mdx`
+- `website/docs/contributing/locale-yaml-how-to.mdx`
+- `website/docs/contributing/locale-yaml-surface-reference.mdx`
+- `website/docs/contributing/locale-yaml-schema-reference.mdx`
 - `src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs`
 - `src/Humanizer/Locales/<locale>.yml`
 - parent locale YAML files when `variantOf` is involved

@@ -44,6 +44,20 @@ public DefaultFormatter(System.Globalization.CultureInfo culture);
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
 The culture used to resolve resources and localized number words\.
+### Properties
+
+<a name='Humanizer.DefaultFormatter.Culture'></a>
+
+## DefaultFormatter\.Culture Property
+
+Gets the culture used to resolve resources and localized number words\.
+
+```csharp
+protected System.Globalization.CultureInfo Culture { protected get; }
+```
+
+#### Property Value
+[System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 ### Methods
 
 <a name='Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool)'></a>
@@ -155,6 +169,39 @@ Implements [DateHumanize\_Now\(\)](Humanizer.IFormatter.md#Humanizer.IFormatter.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.DefaultFormatter.NumberToWords(Humanizer.TimeUnit,int,System.Globalization.CultureInfo)'></a>
+
+## DefaultFormatter\.NumberToWords\(TimeUnit, int, CultureInfo\) Method
+
+Converts a number to words for the current culture\.
+
+```csharp
+protected virtual string NumberToWords(Humanizer.TimeUnit unit, int number, System.Globalization.CultureInfo culture);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.NumberToWords(Humanizer.TimeUnit,int,System.Globalization.CultureInfo).unit'></a>
+
+`unit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The unit being formatted\.
+
+<a name='Humanizer.DefaultFormatter.NumberToWords(Humanizer.TimeUnit,int,System.Globalization.CultureInfo).number'></a>
+
+`number` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The numeric value to convert\.
+
+<a name='Humanizer.DefaultFormatter.NumberToWords(Humanizer.TimeUnit,int,System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+The culture to use when generating the words\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The number rendered as words for the configured culture\.
 
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool)'></a>
 

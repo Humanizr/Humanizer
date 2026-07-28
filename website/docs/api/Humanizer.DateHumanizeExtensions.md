@@ -36,7 +36,7 @@ Date to compare the input against\. If null, current date is used as base
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -75,7 +75,7 @@ Date to compare the input against\. If null, current date is used as base
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -108,7 +108,7 @@ Date to compare the input against\. If null, current date is used as base
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -141,7 +141,7 @@ Date to compare the input against\. If null, current date is used as base
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -180,7 +180,7 @@ Date to compare the input against\. If null, current date is used as base
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -213,7 +213,7 @@ Date to compare the input against\. If null, current date is used as base
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -252,7 +252,7 @@ If [timeToCompareAgainst](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHuma
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -291,7 +291,7 @@ If [timeToCompareAgainst](Humanizer.DateHumanizeExtensions.md#Humanizer.DateHuma
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  

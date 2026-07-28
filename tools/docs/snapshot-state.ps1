@@ -233,10 +233,7 @@ function Enter-SnapshotMutation {
 }
 
 function Exit-SnapshotMutation {
-    param(
-        [Parameter(Mandatory = $true)]$Lock,
-        [Parameter(Mandatory = $true)][string]$WebsiteRoot
-    )
+    param([Parameter(Mandatory = $true)]$Lock)
 
     $Lock.Dispose()
 }

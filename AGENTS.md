@@ -43,7 +43,7 @@ These instructions apply to the entire repository.
 - Rules are defined in `.editorconfig` and enforced at build time via `EnforceCodeStyleInBuild=true`.
 
 ## Localization Guidance
-- When adding a locale, duplicate and translate the relevant YAML locale file under `src/Humanizer/Locales`; the source generator wires all registries automatically (see `docs/adding-a-locale.md`).
+- When adding a locale, duplicate and translate the relevant YAML locale file under `src/Humanizer/Locales`; the source generator wires all registries automatically (see `website/docs/contributing/adding-or-updating-a-locale.mdx`).
 - When ICU-supplied data (month names, decimal separators) differs across platforms, author explicit overrides in `calendar:` and/or `number.formatting:` YAML surfaces rather than changing `CultureInfo` directly.
 - Cover new localization behavior with targeted tests under `tests/Humanizer.Tests/Localisation/{culture}`.
 

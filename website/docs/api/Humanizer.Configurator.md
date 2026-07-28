@@ -173,6 +173,35 @@ public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConv
 [Humanizer\.LocaliserRegistry&lt;](Humanizer.LocaliserRegistry_TLocaliser_.md 'Humanizer\.LocaliserRegistry\<TLocaliser\>')[ITimeOnlyToClockNotationConverter](Humanizer.ITimeOnlyToClockNotationConverter.md 'Humanizer\.ITimeOnlyToClockNotationConverter')[&gt;](Humanizer.LocaliserRegistry_TLocaliser_.md 'Humanizer\.LocaliserRegistry\<TLocaliser\>')
 ### Methods
 
+<a name='Humanizer.Configurator.IsCultureSupported(System.Globalization.CultureInfo)'></a>
+
+## Configurator\.IsCultureSupported\(CultureInfo\) Method
+
+Determines whether Humanizer includes complete generated locale support for the specified culture\.
+
+```csharp
+public static bool IsCultureSupported(System.Globalization.CultureInfo culture);
+```
+#### Parameters
+
+<a name='Humanizer.Configurator.IsCultureSupported(System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+The culture to check\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') when the culture or one of its named parents has generated locale support; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+#### Exceptions
+
+[System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
+Thrown when [culture](Humanizer.Configurator.md#Humanizer.Configurator.IsCultureSupported(System.Globalization.CultureInfo).culture 'Humanizer\.Configurator\.IsCultureSupported\(System\.Globalization\.CultureInfo\)\.culture') is `null`\.
+
+### Remarks
+This considers parent\-culture fallback, but does not report support merely because Humanizer can fall back to its default English localizers\.
+
 <a name='Humanizer.Configurator.UseEnumDescriptionPropertyLocator(System.Func_System.Reflection.PropertyInfo,bool_)'></a>
 
 ## Configurator\.UseEnumDescriptionPropertyLocator\(Func\<PropertyInfo,bool\>\) Method

@@ -21,8 +21,13 @@ assert.match(inventory.unsupportedVersionPaths.behavior, /without redirecting/);
 await access(join(buildRoot, 'index.html'));
 for (const redirect of inventory.redirects) {
   for (const source of redirect.from) {
+    if (source.startsWith('/.')) {
+      await assert.rejects(access(outputPath(source)));
+      continue;
+    }
+
     const html = await readFile(outputPath(source), 'utf8');
-    assert.match(html, new RegExp(`url=${redirect.to.replaceAll('/', '\\/')}`));
+    assert.match(html, new RegExp(`url=${RegExp.escape(redirect.to)}`));
     assert.match(html, /window\.location\.search \+ window\.location\.hash/);
   }
 
@@ -30,7 +35,7 @@ for (const redirect of inventory.redirects) {
     const html = await readFile(outputPath(destination.to), 'utf8');
     assert.match(
       html,
-      new RegExp(`id="${destination.fragment.replaceAll('-', '\\-')}"`),
+      new RegExp(`id="${RegExp.escape(destination.fragment)}"`),
       `${destination.to} is missing #${destination.fragment}`,
     );
   }
@@ -68,10 +73,7 @@ for (const page of seoPages) {
   assert.match(
     html,
     new RegExp(
-      `<link[^>]+rel="canonical"[^>]+href="${page.canonical.replaceAll(
-        '/',
-        '\\/',
-      )}"`,
+      `<link[^>]+rel="canonical"[^>]+href="${RegExp.escape(page.canonical)}"`,
     ),
   );
   if (page.noIndex) {

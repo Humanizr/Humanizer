@@ -89,7 +89,7 @@ function Assert-DocsNuGetPackage {
     }
 }
 
-function Get-DocsNuGetPackage {
+function Get-DocsNuGetArchive {
     param(
         [Parameter(Mandatory = $true)]$Entry,
         [Parameter(Mandatory = $true)][string]$RepoRoot,
@@ -151,35 +151,88 @@ function Get-DocsNuGetPackage {
         & $downloadPackage
     }
 
-    $packageDigest = (Get-FileHash $packagePath -Algorithm SHA256).Hash.ToLowerInvariant()
-    $extractPath = Join-Path $packageRoot "package-$packageDigest"
-    if (-not (Test-Path $extractPath -PathType Container)) {
-        $temporaryExtractPath = "$extractPath-$([guid]::NewGuid().ToString('N')).tmp"
-        try {
-            [System.IO.Compression.ZipFile]::ExtractToDirectory(
-                $packagePath,
-                $temporaryExtractPath
-            )
-            try {
-                [System.IO.Directory]::Move($temporaryExtractPath, $extractPath)
-            } catch [System.IO.IOException] {
-                if (-not (Test-Path $extractPath -PathType Container)) {
-                    throw
-                }
-            }
-        } finally {
-            Remove-Item `
-                $temporaryExtractPath `
-                -Recurse `
-                -Force `
-                -ErrorAction SilentlyContinue
-        }
-    }
-
     return [PSCustomObject]@{
         PackageId = $packageId
         PackageVersion = $packageVersion
         PackagePath = $packagePath
-        ExtractPath = $extractPath
+    }
+}
+
+function Use-DocsNuGetPackage {
+    param(
+        [Parameter(Mandatory = $true)]$Entry,
+        [Parameter(Mandatory = $true)][string]$RepoRoot,
+        [Parameter(Mandatory = $true)][scriptblock]$Action,
+        [string]$PackageId
+    )
+
+    $archive = Get-DocsNuGetArchive `
+        -Entry $Entry `
+        -RepoRoot $RepoRoot `
+        -PackageId $PackageId
+    $extractPath = Join-Path (
+        [System.IO.Path]::GetTempPath()
+    ) "humanizer-docs-extract-$([guid]::NewGuid().ToString('N'))"
+    New-Item -ItemType Directory -Path $extractPath | Out-Null
+    try {
+        [System.IO.Compression.ZipFile]::ExtractToDirectory(
+            $archive.PackagePath,
+            $extractPath
+        )
+        & $Action ([PSCustomObject]@{
+            PackageId = $archive.PackageId
+            PackageVersion = $archive.PackageVersion
+            PackagePath = $archive.PackagePath
+            ExtractPath = $extractPath
+        })
+    } finally {
+        Remove-Item $extractPath -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
+function Assert-DocsHumanizerPackageGraph {
+    param(
+        [Parameter(Mandatory = $true)]$Entry,
+        [Parameter(Mandatory = $true)]$Libraries,
+        [Parameter(Mandatory = $true)][string]$Context
+    )
+
+    $expectedVersion = [string]$Entry.source.packageVersion
+    $resolvedIds = [System.Collections.Generic.HashSet[string]]::new(
+        [System.StringComparer]::OrdinalIgnoreCase
+    )
+    foreach ($library in $Libraries.PSObject.Properties) {
+        $separator = $library.Name.LastIndexOf("/")
+        if ($separator -le 0) {
+            continue
+        }
+
+        $packageId = $library.Name.Substring(0, $separator)
+        if (-not $packageId.Equals(
+                "Humanizer",
+                [System.StringComparison]::OrdinalIgnoreCase
+            ) -and
+            -not $packageId.StartsWith(
+                "Humanizer.",
+                [System.StringComparison]::OrdinalIgnoreCase
+            )) {
+            continue
+        }
+
+        $packageVersion = $library.Name.Substring($separator + 1)
+        if ($library.Value.type -ne "package" -or
+            $packageVersion -ne $expectedVersion) {
+            throw "$Context resolved $packageId $packageVersion instead of package version $expectedVersion."
+        }
+        [void]$resolvedIds.Add($packageId)
+    }
+
+    foreach ($requiredId in @(
+        [string]$Entry.installPackage,
+        [string]$Entry.apiPackage
+    ) | Sort-Object -Unique) {
+        if (-not $resolvedIds.Contains($requiredId)) {
+            throw "$Context did not resolve required package $requiredId $expectedVersion."
+        }
     }
 }

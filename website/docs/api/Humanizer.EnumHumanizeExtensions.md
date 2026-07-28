@@ -9,6 +9,55 @@ public static class EnumHumanizeExtensions
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → EnumHumanizeExtensions
 ### Methods
 
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum)'></a>
+
+## EnumHumanizeExtensions\.Humanize\(this Enum\) Method
+
+Converts an enum value to a human\-readable string when the concrete enum type is only known at runtime\.
+
+```csharp
+public static string Humanize(this System.Enum input);
+```
+#### Parameters
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum).input'></a>
+
+`input` [System\.Enum](https://learn.microsoft.com/en-us/dotnet/api/system.enum 'System\.Enum')
+
+The enum value to be humanized\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A human\-readable string representation of the enum value\.
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum,Humanizer.LetterCasing)'></a>
+
+## EnumHumanizeExtensions\.Humanize\(this Enum, LetterCasing\) Method
+
+Converts an enum value to a human\-readable string with the specified letter casing applied to the enum member name
+when the concrete enum type is only known at runtime\. Authored metadata on a defined enum value is returned unchanged\.
+
+```csharp
+public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing);
+```
+#### Parameters
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum,Humanizer.LetterCasing).input'></a>
+
+`input` [System\.Enum](https://learn.microsoft.com/en-us/dotnet/api/system.enum 'System\.Enum')
+
+The enum value to be humanized\.
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum,Humanizer.LetterCasing).casing'></a>
+
+`casing` [LetterCasing](Humanizer.LetterCasing.md 'Humanizer\.LetterCasing')
+
+The desired letter casing to apply when humanizing the enum member name\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A human\-readable string representation of the enum value\.
+
 <a name='Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT)'></a>
 
 ## EnumHumanizeExtensions\.Humanize\<T\>\(this T\) Method
@@ -69,8 +118,8 @@ The humanization process converts PascalCase to space\-separated text with appro
 
 ## EnumHumanizeExtensions\.Humanize\<T\>\(this T, LetterCasing\) Method
 
-Converts an enum value to a human\-readable string with the specified letter casing applied\.
-Respects any [System\.ComponentModel\.DescriptionAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.descriptionattribute 'System\.ComponentModel\.DescriptionAttribute') applied to the enum member\.
+Converts an enum value to a human\-readable string with the specified letter casing applied to the enum member name\.
+Authored metadata on a defined enum value is returned unchanged\.
 
 ```csharp
 public static string Humanize<T>(this T input, Humanizer.LetterCasing casing)
@@ -95,12 +144,12 @@ The enum value to be humanized\.
 
 `casing` [LetterCasing](Humanizer.LetterCasing.md 'Humanizer\.LetterCasing')
 
-The desired letter casing to apply to the humanized enum value\.
+The desired letter casing to apply when humanizing the enum member name\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
-A human\-readable string representation of the enum value with the specified casing applied\.
-If a [System\.ComponentModel\.DescriptionAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.descriptionattribute 'System\.ComponentModel\.DescriptionAttribute') is present, its value is used and then cased\.
+A human\-readable string representation of the enum value\.
+If a defined enum value has authored metadata such as [System\.ComponentModel\.DescriptionAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.descriptionattribute 'System\.ComponentModel\.DescriptionAttribute'), its value is returned unchanged\.
 
 ### Example
 
@@ -112,4 +161,4 @@ UserType.AnonymousUser.Humanize(LetterCasing.LowerCase) => "anonymous user"
 ```
 
 ### Remarks
-This is a convenience method that combines [Humanize&lt;T&gt;\(this T\)](Humanizer.EnumHumanizeExtensions.md#Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT) 'Humanizer\.EnumHumanizeExtensions\.Humanize\<T\>\(this T\)') with [ApplyCase\(this string, LetterCasing\)](Humanizer.CasingExtensions.md#Humanizer.CasingExtensions.ApplyCase(thisstring,Humanizer.LetterCasing) 'Humanizer\.CasingExtensions\.ApplyCase\(this string, Humanizer\.LetterCasing\)')\.
+For a defined enum value, the specified casing is applied only when the output is derived from the enum member name\.

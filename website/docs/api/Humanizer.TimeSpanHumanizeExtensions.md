@@ -40,7 +40,7 @@ Controls whether empty time units should be counted towards maximum number of ti
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool).maxUnit'></a>
 
@@ -94,7 +94,7 @@ The maximum number of time units to return\. Defaulted is 1 which means the larg
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.Humanize(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool).maxUnit'></a>
 
@@ -123,6 +123,112 @@ Uses words instead of numbers if true\. E\.g\. one day\.
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human readable form using localized unit symbols\.
+
+```csharp
+public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).countEmptyUnits'></a>
+
+`countEmptyUnits` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Controls whether empty time units should be counted towards the maximum number of time units\. Leading empty time units never count\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, current thread's culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\. The default value is [Week](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Week 'Humanizer\.TimeUnit\.Week')\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).minUnit'></a>
+
+`minUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The minimum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator to use when combining humanized time parts\. If null, the default collection formatter for the current culture is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeToSymbols\(this TimeSpan, int, CultureInfo, TimeUnit, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human readable form using localized unit symbols\.
+
+```csharp
+public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision=1, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, current thread's culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\. The default value is [Week](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Week 'Humanizer\.TimeUnit\.Week')\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).minUnit'></a>
+
+`minUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The minimum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbols(thisSystem.TimeSpan,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator to use when combining humanized time parts\. If null, the default collection formatter for the current culture is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
 <a name='Humanizer.TimeSpanHumanizeExtensions.ToAge(thisSystem.TimeSpan,System.Globalization.CultureInfo,Humanizer.TimeUnit,bool)'></a>
 
 ## TimeSpanHumanizeExtensions\.ToAge\(this TimeSpan, CultureInfo, TimeUnit, bool\) Method
@@ -144,7 +250,7 @@ Elapsed time
 
 `culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
 
-Culture to use\. If null, current thread's UI culture is used\.
+Culture to use\. If null, current thread's culture is used\.
 
 <a name='Humanizer.TimeSpanHumanizeExtensions.ToAge(thisSystem.TimeSpan,System.Globalization.CultureInfo,Humanizer.TimeUnit,bool).maxUnit'></a>
 

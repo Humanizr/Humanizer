@@ -29,7 +29,7 @@ public static Humanizer.ICulturedStringTransformer LowerCase { get; }
 
 ## To\.SentenceCase Property
 
-Changes the string to sentence case
+Uppercases the first character of the string, leaving all remaining characters unchanged
 
 ```csharp
 public static Humanizer.ICulturedStringTransformer SentenceCase { get; }
