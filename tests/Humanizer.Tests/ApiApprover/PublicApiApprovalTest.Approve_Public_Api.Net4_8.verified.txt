@@ -691,6 +691,7 @@ namespace Humanizer
         UseShortScaleWord = 4,
         WithSpace = 8,
         UseScaleWord = 16,
+        KeepTrailingZeros = 32,
     }
     public class NoMatchFoundException : System.Exception
     {

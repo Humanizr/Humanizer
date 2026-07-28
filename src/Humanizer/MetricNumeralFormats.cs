@@ -31,5 +31,11 @@ public enum MetricNumeralFormats
     /// based on <see cref="System.Globalization.CultureInfo.CurrentUICulture"/>.
     /// For example, <c>1E9</c> renders as <c>billion</c> in <c>en-US</c> and <c>milliard</c> in <c>de-DE</c>.
     /// </summary>
-    UseScaleWord = 16
+    UseScaleWord = 16,
+
+    /// <summary>
+    /// Include trailing zeros so the number of fractional digits matches the <c>decimals</c> argument.
+    /// Has no effect when <c>decimals</c> is <see langword="null"/>.
+    /// </summary>
+    KeepTrailingZeros = 32
 }

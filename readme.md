@@ -797,6 +797,7 @@ Convert between numbers and metric notation:
 1230d.ToMetric() => "1.23k"
 0.1d.ToMetric() => "100m"
 456789.ToMetric(decimals: 2) => "456.79k"
+1000.ToMetric(MetricNumeralFormats.KeepTrailingZeros, decimals: 2) => "1.00k"
 
 // Locale-aware scale words
 CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("de-DE");
