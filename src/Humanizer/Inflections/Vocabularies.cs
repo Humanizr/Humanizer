@@ -83,6 +83,7 @@ public static class Vocabularies
         _default.AddIrregular("zombie", "zombies");
         _default.AddIrregular("personnel", "personnel");
         _default.AddIrregular("cache", "caches");
+        _default.AddIrregular("olive", "olives", matchEnding: false);
         _default.AddIrregular("ex", "exes", matchEnding: false);
         _default.AddIrregular("is", "are", matchEnding: false);
         _default.AddIrregular("was", "were", matchEnding: false);
