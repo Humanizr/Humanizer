@@ -4,6 +4,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import versionManifest from './humanizer-versions.json';
 import nativeVersions from './versions.json';
 
+const repositoryUrl = 'https://github.com/Humanizr/Humanizer';
 const latestStable = versionManifest.versions.find(
   (version) => version.latestStable,
 );
@@ -42,6 +43,7 @@ const publishedVersions: Record<
 const config: Config = {
   title: 'Humanizer',
   tagline: 'Human-friendly text for .NET',
+  favicon: 'img/favicon.svg',
   url: 'https://humanizr.net',
   baseUrl: '/',
   organizationName: 'Humanizr',
@@ -79,8 +81,22 @@ const config: Config = {
         docs: {
           routeBasePath: 'docs',
           sidebarPath: './sidebars.ts',
+          breadcrumbs: true,
           includeCurrentVersion: true,
           lastVersion: latestStable.version,
+          editUrl: ({version, docPath, permalink}) => {
+            if (version === 'current' && !docPath.startsWith('api/')) {
+              return `${repositoryUrl}/edit/main/website/docs/${docPath}`;
+            }
+
+            const issueTitle = encodeURIComponent(
+              `Documentation issue: ${docPath}`,
+            );
+            const issueBody = encodeURIComponent(
+              `Documentation version: ${version}\nPage: https://humanizr.net${permalink}\n\nDescribe the problem:\n`,
+            );
+            return `${repositoryUrl}/issues/new?title=${issueTitle}&body=${issueBody}`;
+          },
           versions: {
             current: {
               label: preview.label,
@@ -126,22 +142,40 @@ const config: Config = {
     ],
   ],
   themeConfig: {
+    image: 'img/social-card.png',
+    metadata: [
+      {name: 'theme-color', content: '#172026'},
+      {name: 'twitter:card', content: 'summary_large_image'},
+      {property: 'og:type', content: 'website'},
+    ],
     colorMode: {
       defaultMode: 'light',
+      disableSwitch: false,
       respectPrefersColorScheme: true,
     },
     navbar: {
       title: 'Humanizer',
+      logo: {
+        alt: 'Humanizer home',
+        src: 'img/humanizer-mark.svg',
+      },
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'docs',
           position: 'left',
-          label: 'Docs',
+          label: 'Guides',
+        },
+        {
+          type: 'doc',
+          docId: 'api/api',
+          position: 'left',
+          label: 'API',
         },
         {
           type: 'docsVersionDropdown',
           position: 'right',
+          className: 'humanizerVersionDropdown',
         },
         {
           type: 'html',
@@ -150,7 +184,7 @@ const config: Config = {
             '<pagefind-modal-trigger placeholder="All versions" shortcut="mod+shift+k"></pagefind-modal-trigger><pagefind-modal reset-on-close></pagefind-modal>',
         },
         {
-          href: 'https://github.com/Humanizr/Humanizer',
+          href: repositoryUrl,
           label: 'GitHub',
           position: 'right',
         },
@@ -158,11 +192,31 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
+      links: [
+        {
+          title: 'Humanizer',
+          items: [
+            {label: 'Documentation home', to: '/'},
+            {label: 'NuGet package', href: 'https://www.nuget.org/packages/Humanizer'},
+          ],
+        },
+        {
+          title: 'Project',
+          items: [
+            {label: 'GitHub', href: repositoryUrl},
+            {
+              label: 'Report a documentation issue',
+              href: `${repositoryUrl}/issues/new`,
+            },
+          ],
+        },
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} Humanizer contributors. MIT licensed.`,
     },
     prism: {
-      theme: prismThemes.github,
+      theme: prismThemes.vsLight,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['csharp'],
     },
   } satisfies Preset.ThemeConfig,
 };

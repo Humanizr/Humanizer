@@ -10,6 +10,9 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "start": "docusaurus start",
+    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
+    "test:e2e": "playwright test",
+    "test:unit": "node --test tests/*.test.mjs",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -18,15 +21,16 @@
     "@docusaurus/plugin-client-redirects": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@mdx-js/react": "^3.0.0",
-    "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
+    "@playwright/test": "1.61.0",
     "@types/react": "^19.0.0",
     "pagefind": "1.5.2",
     "raw-loader": "4.0.2",
