@@ -9,7 +9,7 @@ namespace Humanizer;
 /// </summary>
 public static partial class StringHumanizeExtensions
 {
-    const string PascalCaseWordPartsPattern = @"(\p{Lu}?\p{Ll}+|[0-9]+(?:\.[0-9]+)?\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?";
+    const string PascalCaseWordPartsPattern = @"(\p{Lu}?\p{Ll}+|[0-9]+(?:\.[0-9]+)?\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?|&";
 
 #if NET7_0_OR_GREATER
     [GeneratedRegex(PascalCaseWordPartsPattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture)]
@@ -54,9 +54,23 @@ public static partial class StringHumanizeExtensions
                     : value.ToLower();
             }));
 
-        if (result.All(c => c == ' ' || char.IsUpper(c)) && result.Contains(' '))
+        if (result.All(c => c is ' ' or '&' || char.IsUpper(c)) && result.Contains(' '))
         {
             result = result.ToLower();
+        }
+
+        if (result.Length > 0 && result[0] == '&')
+        {
+            var firstWordIndex = 1;
+            while (firstWordIndex < result.Length && result[firstWordIndex] is ' ' or '&')
+                firstWordIndex++;
+
+            if (firstWordIndex < result.Length)
+            {
+                var characters = result.ToCharArray();
+                characters[firstWordIndex] = char.ToUpper(characters[firstWordIndex]);
+                return new(characters);
+            }
         }
 
         return result.Length > 0
@@ -227,7 +241,9 @@ public static partial class StringHumanizeExtensions
     /// - Handles freestanding underscores/dashes (e.g., "some _ string")
     /// - Splits on underscores and dashes
     /// - Breaks up PascalCase and camelCase text
+    /// - Preserves ampersands as separate tokens in PascalCase and camelCase inputs
     /// Registered acronyms use their canonical casing.
+    /// Otherwise, if the result begins with a letter, that letter is capitalized.
     /// </remarks>
     /// <example>
     /// <code>
@@ -238,6 +254,7 @@ public static partial class StringHumanizeExtensions
     /// Vocabularies.Default.AddAcronym("iOS");
     /// "IOS".Humanize() => "iOS"
     /// "camelCaseText".Humanize() => "Camel case text"
+    /// "Rock&amp;Roll".Humanize() => "Rock &amp; roll"
     /// </code>
     /// </example>
     public static string Humanize(this string input)

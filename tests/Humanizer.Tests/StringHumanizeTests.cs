@@ -131,6 +131,23 @@ public class StringHumanizeTests
     }
 
     [Theory]
+    [InlineData("Enable & Disable", "Enable & disable")]
+    [InlineData("&EnableDisable", "& Enable disable")]
+    [InlineData("&&EnableDisable", "& & Enable disable")]
+    [InlineData("EnableDisable&", "Enable disable &")]
+    [InlineData("Enable&Disable", "Enable & disable")]
+    [InlineData("HTML&CSS", "Html & css")]
+    [InlineData("TheHTML&CSS", "The HTML & CSS")]
+    public void CanHumanizeStringWithAmpersands(string input, string expectedValue) =>
+        Assert.Equal(expectedValue, input.Humanize());
+
+    [Theory]
+    [InlineData("Enable + Disable", "Enable disable")]
+    [InlineData("Enable / Disable", "Enable disable")]
+    public void OtherPunctuationIsStillRemoved(string input, string expectedValue) =>
+        Assert.Equal(expectedValue, input.Humanize());
+
+    [Theory]
     [InlineData("CanReturnTitleCase", "Can Return Title Case")]
     [InlineData("Can_return_title_Case", "Can Return Title Case")]
     [InlineData("In titles use lower case for prepositions an article or conjunctions", "In Titles Use Lower Case for Prepositions an Article or Conjunctions")]
@@ -138,6 +155,7 @@ public class StringHumanizeTests
     [InlineData("MühldorferStraße23", "Mühldorfer Straße 23")]
     [InlineData("mühldorfer_STRAẞE_23", "Mühldorfer STRAẞE 23")]
     [InlineData("CAN RETURN TITLE CASE", "Can Return Title Case")]
+    [InlineData("Enable & Disable", "Enable & Disable")]
     public void CanHumanizeIntoTitleCase(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Humanize(LetterCasing.Title));
 
@@ -155,6 +173,7 @@ public class StringHumanizeTests
     [InlineData("Normal; Normal and PascalCase", "Normal; normal and pascal case")]
     [InlineData("I,and No One else", "I, and no one else")]
     [InlineData("first. second", "First second")]
+    [InlineData("&EnableDisable", "& Enable disable")]
     public void CanHumanizeIntoSentenceCase(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Humanize(LetterCasing.Sentence));
 
