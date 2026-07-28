@@ -195,6 +195,7 @@ DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
 DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
+DateTime.UtcNow.AddDays(7).Humanize() => "one week from now"
 
 DateTimeOffset.UtcNow.AddHours(1).Humanize() => "an hour from now"
 ```
@@ -213,7 +214,7 @@ Many localizations are available for this method. Here are a few examples:
 DateTime.UtcNow.AddDays(-1).Humanize() => "أمس"
 DateTime.UtcNow.AddDays(-2).Humanize() => "منذ يومين"
 DateTime.UtcNow.AddDays(-3).Humanize() => "منذ 3 أيام"
-DateTime.UtcNow.AddDays(-11).Humanize() => "منذ 11 يوم"
+DateTime.UtcNow.AddDays(-11).Humanize() => "منذ أسبوع واحد"
 
 // In ru-RU culture
 DateTime.UtcNow.AddMinutes(-1).Humanize() => "минуту назад"
