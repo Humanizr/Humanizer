@@ -517,7 +517,7 @@ Convert numbers to ordinal strings (1st, 2nd, 3rd, etc.):
 #### Titleize, Pascalize, Camelize
 
 Convert strings to various coding conventions:
-`Pascalize` and `Camelize` use culture-invariant casing; `Titleize` follows the current culture.
+`Pascalize`, `Camelize`, and `ToCamelCase` use culture-invariant casing; `Titleize` follows the current culture.
 
 ```csharp
 // Titleize: Title Case with spaces
@@ -525,10 +525,14 @@ Convert strings to various coding conventions:
 
 // Pascalize: UpperCamelCase without spaces
 "some_title for something".Pascalize() => "SomeTitleForSomething"
+"SMS parameter provider".Pascalize(preserveUppercase: false) => "SmsParameterProvider"
 
 // Camelize: lowerCamelCase without spaces
 "some_title for something".Camelize() => "someTitleForSomething"
 "_some_title".Camelize() => "_someTitle"
+
+// ToCamelCase: lowerCamelCase with uppercase sequences normalized as words
+"IOModule".ToCamelCase() => "ioModule"
 ```
 
 

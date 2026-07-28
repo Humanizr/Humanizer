@@ -601,10 +601,12 @@ namespace Humanizer
         public static string Hyphenate(this string underscoredWord) { }
         public static string Kebaberize(this string input) { }
         public static string Pascalize(this string input) { }
+        public static string Pascalize(this string input, bool preserveUppercase) { }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
         public static string? Pluralize(this string? word, bool inputIsKnownToBeSingular = true) { }
         public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
         public static string Titleize(this string input) { }
+        public static string ToCamelCase(this string input) { }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
         public static string? ToPossessive(this string? word, bool inputIsPlural = false, bool useApostropheOnlyForSingularWordsEndingInS = false) { }
         public static string Underscore(this string input) { }
