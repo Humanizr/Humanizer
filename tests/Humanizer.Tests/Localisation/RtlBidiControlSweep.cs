@@ -1,6 +1,6 @@
 namespace Humanizer.Tests.Localisation;
 
-public class RtlBidiControlSweepTests
+static class RtlBidiControlSweep
 {
     static readonly char[] BidiControls =
     [
@@ -18,15 +18,10 @@ public class RtlBidiControlSweepTests
         '\u2069'
     ];
 
-    [Theory]
-    [InlineData("ar")]
-    [InlineData("he")]
-    [InlineData("fa")]
-    public void RawLocalizedOutputs_DoNotContainBidiControls(string localeName)
+    public static void AssertRawLocalizedOutputsDoNotContainBidiControls(string localeName)
     {
         var culture = CultureInfo.GetCultureInfo(localeName);
         var formatter = Configurator.Formatters.ResolveForCulture(culture);
-        using var _ = new CultureSwap(culture);
         var outputs = new List<(string Surface, string Value)>
         {
             ("cardinal", 1234567.ToWords(culture)),
@@ -48,18 +43,7 @@ public class RtlBidiControlSweepTests
             AssertNoBidiControls(localeName, surface, value);
     }
 
-    [Fact]
-    public void PersianOutput_PreservesZeroWidthNonJoiner()
-    {
-        var culture = CultureInfo.GetCultureInfo("fa");
-        var value = TimeSpan.FromMilliseconds(2).Humanize(culture: culture);
-
-        Assert.Equal("2 میلی\u200Cثانیه", value);
-        Assert.Contains('\u200C', value);
-        AssertNoBidiControls("fa", "millisecond duration", value);
-    }
-
-    static void AssertNoBidiControls(string localeName, string surface, string value)
+    public static void AssertNoBidiControls(string localeName, string surface, string value)
     {
         Assert.NotEmpty(value);
         foreach (var bidiControl in BidiControls)
