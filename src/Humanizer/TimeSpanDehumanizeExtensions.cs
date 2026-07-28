@@ -99,6 +99,9 @@ public static class TimeSpanDehumanizeExtensions
                     index++;
                     digitCount++;
                 }
+
+                if (fractionStart == index)
+                    return false;
             }
 
             if (digitCount == 0)

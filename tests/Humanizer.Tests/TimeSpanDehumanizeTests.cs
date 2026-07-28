@@ -28,7 +28,7 @@ public class TimeSpanDehumanizeTests
         TimeSpan[] values =
         [
             TimeSpan.Zero,
-            new(1, 2, 3, 4, 5, 6),
+            new(1, 2, 3, 4, 5),
             TimeSpan.FromTicks(-123456789),
             TimeSpan.MaxValue,
             TimeSpan.MinValue
@@ -44,6 +44,8 @@ public class TimeSpanDehumanizeTests
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
+    [InlineData("1.h")]
+    [InlineData("1.ms")]
     [InlineData("1.00000001ms")]
     [InlineData("1,5h")]
     [InlineData("1e3s")]
