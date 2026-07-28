@@ -21,7 +21,7 @@ public static class TimeSpanHumanizeExtensions
     /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
     /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
     public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo? culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string? collectionSeparator = ", ", bool toWords = false) =>
-        Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords);
+        Configurator.TimeSpanHumanizeStrategy.Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords, false);
 
     /// <summary>
     /// Turns a <see cref="TimeSpan"/> into a human readable form using localized unit symbols.
@@ -39,7 +39,7 @@ public static class TimeSpanHumanizeExtensions
         TimeUnit maxUnit = TimeUnit.Week,
         TimeUnit minUnit = TimeUnit.Millisecond,
         string? collectionSeparator = ", ") =>
-        Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, false, true);
+        Configurator.TimeSpanHumanizeStrategy.Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, false, true);
 
     /// <summary>
     /// Turns a TimeSpan into a human readable form. E.g. 1 day.
@@ -52,7 +52,7 @@ public static class TimeSpanHumanizeExtensions
     /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
     /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
     public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo? culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string? collectionSeparator = ", ", bool toWords = false)
-        => Humanize(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, toWords, false);
+        => Configurator.TimeSpanHumanizeStrategy.Humanize(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, toWords, false);
 
     /// <summary>
     /// Turns a <see cref="TimeSpan"/> into a human readable form using localized unit symbols.
@@ -72,9 +72,9 @@ public static class TimeSpanHumanizeExtensions
         TimeUnit maxUnit = TimeUnit.Week,
         TimeUnit minUnit = TimeUnit.Millisecond,
         string? collectionSeparator = ", ") =>
-        Humanize(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, false, true);
+        Configurator.TimeSpanHumanizeStrategy.Humanize(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, false, true);
 
-    static string Humanize(
+    internal static string DefaultHumanize(
         TimeSpan timeSpan,
         int precision,
         bool countEmptyUnits,

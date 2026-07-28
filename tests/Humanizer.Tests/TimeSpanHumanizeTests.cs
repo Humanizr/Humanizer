@@ -589,4 +589,103 @@ public class TimeSpanHumanizeTests
 
         Assert.Equal("1h", actual);
     }
+
+    [Fact]
+    public void DefaultStrategyPreservesExistingOutputs()
+    {
+        var strategy = new DefaultTimeSpanHumanizeStrategy();
+        var timeSpan = new TimeSpan(8, 1, 2, 3, 4);
+
+        Assert.Equal(
+            "1 week, 1 day, 1 hour",
+            strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, false));
+        Assert.Equal(
+            "1week, 1d, 1h",
+            strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, true));
+    }
+
+    [Fact]
+    public void ConfiguredStrategyReceivesEveryOptionFromEveryOverload()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+        var strategy = new RecordingTimeSpanHumanizeStrategy();
+        var culture = new CultureInfo("fr");
+        strategy.Target = TimeSpan.FromTicks(123456789012341);
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = strategy;
+
+            Assert.Equal("custom", strategy.Target.Humanize(2, culture, TimeUnit.Day, TimeUnit.Second, " / ", true));
+            Assert.Equal(new(strategy.Target, 2, false, culture, TimeUnit.Day, TimeUnit.Second, " / ", true, false), strategy.LastCall);
+
+            strategy.Target = TimeSpan.FromTicks(123456789012342);
+            Assert.Equal("custom", strategy.Target.Humanize(3, true, culture, TimeUnit.Hour, TimeUnit.Minute, " + ", true));
+            Assert.Equal(new(strategy.Target, 3, true, culture, TimeUnit.Hour, TimeUnit.Minute, " + ", true, false), strategy.LastCall);
+
+            strategy.Target = TimeSpan.FromTicks(123456789012343);
+            Assert.Equal("custom", strategy.Target.HumanizeToSymbols(4, culture, TimeUnit.Month, TimeUnit.Week, " | "));
+            Assert.Equal(new(strategy.Target, 4, false, culture, TimeUnit.Month, TimeUnit.Week, " | ", false, true), strategy.LastCall);
+
+            strategy.Target = TimeSpan.FromTicks(123456789012344);
+            Assert.Equal("custom", strategy.Target.HumanizeToSymbols(5, true, culture, TimeUnit.Year, TimeUnit.Day, null));
+            Assert.Equal(new(strategy.Target, 5, true, culture, TimeUnit.Year, TimeUnit.Day, null, false, true), strategy.LastCall);
+
+            Assert.Equal(4, strategy.CallCount);
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    sealed class RecordingTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
+    {
+        readonly DefaultTimeSpanHumanizeStrategy defaultStrategy = new();
+
+        public TimeSpan Target { get; set; }
+        public int CallCount { get; private set; }
+        public TimeSpanHumanizeCall? LastCall { get; private set; }
+
+        public string Humanize(
+            TimeSpan timeSpan,
+            int precision,
+            bool countEmptyUnits,
+            CultureInfo? culture,
+            TimeUnit maxUnit,
+            TimeUnit minUnit,
+            string? collectionSeparator,
+            bool toWords,
+            bool toSymbols)
+        {
+            if (timeSpan != Target)
+            {
+                return defaultStrategy.Humanize(
+                    timeSpan,
+                    precision,
+                    countEmptyUnits,
+                    culture,
+                    maxUnit,
+                    minUnit,
+                    collectionSeparator,
+                    toWords,
+                    toSymbols);
+            }
+
+            CallCount++;
+            LastCall = new(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, toWords, toSymbols);
+            return "custom";
+        }
+    }
+
+    sealed record TimeSpanHumanizeCall(
+        TimeSpan TimeSpan,
+        int Precision,
+        bool CountEmptyUnits,
+        CultureInfo? Culture,
+        TimeUnit MaxUnit,
+        TimeUnit MinUnit,
+        string? CollectionSeparator,
+        bool ToWords,
+        bool ToSymbols);
 }
