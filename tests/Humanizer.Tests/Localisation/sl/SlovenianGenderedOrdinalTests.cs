@@ -37,4 +37,17 @@ public class SlovenianGenderedOrdinalTests
         var result = number.Ordinalize(gender, Sl);
         Assert.Equal(masculine, result);
     }
+
+    [Theory]
+    [InlineData(1, GrammaticalGender.Masculine, "prvi")]
+    [InlineData(2, GrammaticalGender.Feminine, "druga")]
+    [InlineData(3, GrammaticalGender.Neuter, "tretje")]
+    [InlineData(21, GrammaticalGender.Masculine, "enaindvajseti")]
+    [InlineData(101, GrammaticalGender.Feminine, "stoprva")]
+    [InlineData(1000, GrammaticalGender.Neuter, "tisoče")]
+    [InlineData(21000, GrammaticalGender.Masculine, "enaindvajsettisoči")]
+    [InlineData(2000000, GrammaticalGender.Masculine, "dvomilijonti")]
+    [InlineData(22000000, GrammaticalGender.Masculine, "dvaindvajsetmilijonti")]
+    public void ToOrdinalWords_ProducesSlovenianWords(int number, GrammaticalGender gender, string expected) =>
+        Assert.Equal(expected, number.ToOrdinalWords(gender, WordForm.Normal, Sl));
 }

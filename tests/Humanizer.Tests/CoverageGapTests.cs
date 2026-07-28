@@ -1975,6 +1975,8 @@ public class CoverageGapTests
         Assert.Equal("two scale-paucal", russian.Convert(2000));
         Assert.Equal("five scale-plural", russian.Convert(5000));
         Assert.Throws<NotImplementedException>(() => russian.Convert(20_001));
+        Assert.Throws<NotImplementedException>(() => russian.ConvertToOrdinal(20_001));
+        Assert.Throws<NotImplementedException>(() => russian.ConvertToOrdinal(-20_001));
 
         var slovenian = new SouthSlavicCardinalNumberToWordsConverter(
             CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Slovenian),
@@ -2005,6 +2007,31 @@ public class CoverageGapTests
                 scales: [new(9_223_372_036_854_775_808UL, GrammaticalGender.Masculine, "min-scale", "min-singular", "min-paucal", "min-plural")]),
             CultureInfo.InvariantCulture);
         Assert.Equal("minus min-scale", longMin.Convert(long.MinValue));
+    }
+
+    [Fact]
+    public void SouthSlavicOrdinalFallsBackWhenGeneratedVariantsAreMissing()
+    {
+        var converter = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile(
+                SouthSlavicScaleFormDetector.Russian,
+                scales:
+                [
+                    new(
+                        1000,
+                        GrammaticalGender.Masculine,
+                        "scale-one",
+                        "scale-singular",
+                        "scale-paucal",
+                        "scale-plural",
+                        Ordinal: "scale-ordinal",
+                        OrdinalCountPrefixes: "")
+                ]),
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal("scale-ordinal", converter.ConvertToOrdinal(1000, GrammaticalGender.Feminine));
+        Assert.Equal("scale-ordinal", converter.ConvertToOrdinal(1000, GrammaticalGender.Neuter));
+        Assert.Equal("twoscale-ordinal", converter.ConvertToOrdinal(2000));
     }
 
     [Theory]
@@ -3050,6 +3077,11 @@ public class CoverageGapTests
             CreateSouthSlavicHundreds(),
             "one-f",
             "two-f",
+            string.Empty,
+            " ",
+            [],
+            [],
+            [],
             scales ?? [new(1000, GrammaticalGender.Masculine, "scale-one", "scale-singular", "scale-paucal", "scale-plural", "scale-dual", "scale-trial")]);
 
     static string[] CreateSouthSlavicUnits()
