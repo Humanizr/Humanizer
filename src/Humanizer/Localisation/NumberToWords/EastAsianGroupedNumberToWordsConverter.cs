@@ -17,8 +17,8 @@ class EastAsianGroupedNumberToWordsConverter(EastAsianGroupedNumberToWordsProfil
     /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public override string Convert(long number) =>
         number < 0
-            ? profile.NegativePrefix + ConvertPositive(-number)
-            : ConvertPositive(number);
+            ? profile.NegativePrefix + ConvertPositive((ulong)(-(number + 1)) + 1)
+            : ConvertPositive((ulong)number);
 
     /// <summary>
     /// Converts the given value to the locale's ordinal form.
@@ -32,13 +32,14 @@ class EastAsianGroupedNumberToWordsConverter(EastAsianGroupedNumberToWordsProfil
             return ordinal;
         }
 
-        return profile.OrdinalPrefix + ConvertPositive(number) + profile.OrdinalSuffix;
+        var cardinal = number < 0 ? string.Empty : ConvertPositive((ulong)number);
+        return profile.OrdinalPrefix + cardinal + profile.OrdinalSuffix;
     }
 
     /// <summary>
     /// Converts a four-digit East Asian group into text.
     /// </summary>
-    string ConvertPositive(long number)
+    string ConvertPositive(ulong number)
     {
         if (number == 0)
         {
