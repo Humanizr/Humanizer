@@ -28,9 +28,7 @@ public static class TimeSpanDehumanizeExtensions
         ArgumentNullException.ThrowIfNull(input);
 
         if (TryDehumanizeTimeSpan(input, out var result))
-        {
             return result;
-        }
 
         throw new FormatException("Value is not a supported TimeSpan format.");
     }
@@ -52,14 +50,10 @@ public static class TimeSpanDehumanizeExtensions
     {
         result = default;
         if (input is null)
-        {
             return false;
-        }
 
         if (TimeSpan.TryParse(input, CultureInfo.InvariantCulture, out result))
-        {
             return true;
-        }
 
         return TryParseCompact(input, out result);
     }
@@ -105,21 +99,15 @@ public static class TimeSpanDehumanizeExtensions
             }
 
             if (digitCount == 0)
-            {
                 return false;
-            }
 
             var numberEnd = index;
             SkipWhitespace(input, ref index);
             if (!TryReadUnit(input, ref index, out var ticksPerUnit))
-            {
                 return false;
-            }
 
             if (!TryGetExactTicks(input, numberStart, numberEnd, fractionStart, ticksPerUnit, out var tokenTicks))
-            {
                 return false;
-            }
 
             ticks += tokenTicks;
             parsedToken = true;
@@ -128,9 +116,7 @@ public static class TimeSpanDehumanizeExtensions
 
         var limit = negative ? NegativeTickLimit : new BigInteger(long.MaxValue);
         if (!parsedToken || ticks > limit)
-        {
             return false;
-        }
 
         if (negative && ticks == NegativeTickLimit)
         {
@@ -147,9 +133,7 @@ public static class TimeSpanDehumanizeExtensions
     {
         ticksPerUnit = 0;
         if (index >= input.Length)
-        {
             return false;
-        }
 
         switch (input[index++])
         {
@@ -204,9 +188,7 @@ public static class TimeSpanDehumanizeExtensions
         }
 
         if (fractionStart >= 0 && normalizedEnd - fractionStart > 28)
-        {
             return false;
-        }
 
         BigInteger coefficient = 0;
         var significantDigits = 0;
@@ -215,15 +197,11 @@ public static class TimeSpanDehumanizeExtensions
         {
             var value = input[index];
             if (value == '.')
-            {
                 continue;
-            }
 
             foundNonZero |= value != '0';
             if (foundNonZero && ++significantDigits > 28)
-            {
                 return false;
-            }
 
             coefficient = coefficient * 10 + (value - '0');
         }
