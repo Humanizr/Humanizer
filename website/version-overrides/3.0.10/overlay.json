@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "replacements": [
+    "index.md",
+    "proof.mdx"
+  ],
+  "exclusions": []
+}

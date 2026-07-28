@@ -2,7 +2,8 @@ param(
     [switch]$All,
     [switch]$Smoke,
     [string]$Version,
-    [string]$ManifestPath
+    [string]$ManifestPath,
+    [string]$OutputDirectory
 )
 
 $ErrorActionPreference = "Stop"
@@ -25,6 +26,9 @@ if ($Version) {
 
 if ($versions.Count -eq 0) {
     throw "No API versions matched the requested verification."
+}
+if ($OutputDirectory -and $versions.Count -ne 1) {
+    throw "API output requires exactly one selected version."
 }
 
 function Invoke-Checked {
@@ -69,8 +73,16 @@ function Assert-NuGetPackage {
     )
 
     $registrationUri = "https://api.nuget.org/v3/registration5-semver1/$PackageId/$PackageVersion.json"
-    $registration = Invoke-RestMethod -Uri $registrationUri
-    $catalog = Invoke-RestMethod -Uri $registration.catalogEntry
+    $registration = Invoke-RestMethod `
+        -Uri $registrationUri `
+        -MaximumRetryCount 6 `
+        -RetryIntervalSec 10 `
+        -TimeoutSec 30
+    $catalog = Invoke-RestMethod `
+        -Uri $registration.catalogEntry `
+        -MaximumRetryCount 6 `
+        -RetryIntervalSec 10 `
+        -TimeoutSec 30
     if ($catalog.packageHashAlgorithm -ne "SHA512" -or -not $catalog.packageHash) {
         throw "NuGet.org did not publish a SHA-512 package hash for $PackageId $PackageVersion."
     }
@@ -134,15 +146,39 @@ function Get-NuGetApiInput {
     $extractPath = Join-Path $packageRoot "package"
 
     New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
-    if (-not (Test-Path $packagePath -PathType Leaf)) {
+    $downloadPackage = {
         $uri = "https://api.nuget.org/v3-flatcontainer/$packageId/$packageVersion/$packageId.$packageVersion.nupkg"
-        Invoke-WebRequest -Uri $uri -OutFile $packagePath
+        $downloadPath = "$packagePath.$([guid]::NewGuid().ToString('N')).tmp"
+        try {
+            Invoke-WebRequest `
+                -Uri $uri `
+                -OutFile $downloadPath `
+                -MaximumRetryCount 6 `
+                -RetryIntervalSec 10 `
+                -TimeoutSec 30
+            Assert-NuGetPackage `
+                -PackageId $packageId `
+                -PackageVersion $packageVersion `
+                -PackagePath $downloadPath
+            Move-Item $downloadPath $packagePath -Force
+        } finally {
+            Remove-Item $downloadPath -Force -ErrorAction SilentlyContinue
+        }
     }
 
-    Assert-NuGetPackage `
-        -PackageId $packageId `
-        -PackageVersion $packageVersion `
-        -PackagePath $packagePath
+    if (Test-Path $packagePath -PathType Leaf) {
+        try {
+            Assert-NuGetPackage `
+                -PackageId $packageId `
+                -PackageVersion $packageVersion `
+                -PackagePath $packagePath
+        } catch {
+            Remove-Item $packagePath -Force
+            & $downloadPackage
+        }
+    } else {
+        & $downloadPackage
+    }
 
     Remove-Item $extractPath -Recurse -Force -ErrorAction SilentlyContinue
     [System.IO.Compression.ZipFile]::ExtractToDirectory($packagePath, $extractPath)
@@ -291,7 +327,15 @@ foreach ($entry in $versions) {
         throw "Version $($entry.version) is missing its declared DLL/XML pair for $($entry.referenceTfm)."
     }
 
-    $firstOutput = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-api-$($entry.version)-$([guid]::NewGuid().ToString('N'))"
+    $preserveOutput = -not [string]::IsNullOrWhiteSpace($OutputDirectory)
+    $firstOutput = if ($preserveOutput) {
+        [System.IO.Path]::GetFullPath($OutputDirectory)
+    } else {
+        Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-api-$($entry.version)-$([guid]::NewGuid().ToString('N'))"
+    }
+    if ($preserveOutput -and (Test-Path $firstOutput)) {
+        throw "API output directory already exists: $firstOutput"
+    }
     New-Item -ItemType Directory -Path $firstOutput | Out-Null
     try {
         Invoke-Checked -FilePath "dotnet" -ArgumentList @(
@@ -331,6 +375,8 @@ foreach ($entry in $versions) {
 
         Write-Host "API proof passed: $($entry.version) ($($entry.apiPackage), $($entry.referenceTfm))"
     } finally {
-        Remove-Item $firstOutput -Recurse -Force -ErrorAction SilentlyContinue
+        if (-not $preserveOutput) {
+            Remove-Item $firstOutput -Recurse -Force -ErrorAction SilentlyContinue
+        }
     }
 }

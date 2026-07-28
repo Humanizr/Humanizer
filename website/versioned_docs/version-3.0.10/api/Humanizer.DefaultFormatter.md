@@ -1,0 +1,182 @@
+## DefaultFormatter Class
+
+Default implementation of IFormatter interface\.
+
+```csharp
+public class DefaultFormatter : Humanizer.IFormatter
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultFormatter
+
+Implements [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter')
+### Constructors
+
+<a name='Humanizer.DefaultFormatter.DefaultFormatter(System.Globalization.CultureInfo)'></a>
+
+## DefaultFormatter\(CultureInfo\) Constructor
+
+Default implementation of IFormatter interface\.
+
+```csharp
+public DefaultFormatter(System.Globalization.CultureInfo culture);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.DefaultFormatter(System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+### Methods
+
+<a name='Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool)'></a>
+
+## DefaultFormatter\.DataUnitHumanize\(DataUnit, double, bool\) Method
+
+Returns the string representation of the provided DataUnit, either as a symbol or full word
+
+```csharp
+public virtual string DataUnitHumanize(Humanizer.DataUnit dataUnit, double count, bool toSymbol=true);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool).dataUnit'></a>
+
+`dataUnit` [Humanizer\.DataUnit](https://learn.microsoft.com/en-us/dotnet/api/humanizer.dataunit 'Humanizer\.DataUnit')
+
+Data unit
+
+<a name='Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool).count'></a>
+
+`count` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+Number of said units, to adjust for singular/plural forms
+
+<a name='Humanizer.DefaultFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool).toSymbol'></a>
+
+`toSymbol` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Indicates whether the data unit should be expressed as symbol or full word
+
+Implements [DataUnitHumanize\(DataUnit, double, bool\)](Humanizer.IFormatter.md#Humanizer.IFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool) 'Humanizer\.IFormatter\.DataUnitHumanize\(Humanizer\.DataUnit, double, bool\)')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+String representation of the provided DataUnit
+
+<a name='Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int)'></a>
+
+## DefaultFormatter\.DateHumanize\(TimeUnit, Tense, int\) Method
+
+Returns the string representation of the provided DateTime
+
+```csharp
+public virtual string DateHumanize(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int unit);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int).timeUnit'></a>
+
+`timeUnit` [Humanizer\.TimeUnit](https://learn.microsoft.com/en-us/dotnet/api/humanizer.timeunit 'Humanizer\.TimeUnit')
+
+<a name='Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int).timeUnitTense'></a>
+
+`timeUnitTense` [Tense](Humanizer.Tense.md 'Humanizer\.Tense')
+
+<a name='Humanizer.DefaultFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int).unit'></a>
+
+`unit` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+Implements [DateHumanize\(TimeUnit, Tense, int\)](Humanizer.IFormatter.md#Humanizer.IFormatter.DateHumanize(Humanizer.TimeUnit,Humanizer.Tense,int) 'Humanizer\.IFormatter\.DateHumanize\(Humanizer\.TimeUnit, Humanizer\.Tense, int\)')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool)'></a>
+
+## DefaultFormatter\.TimeSpanHumanize\(TimeUnit, int, bool\) Method
+
+Returns the string representation of the provided TimeSpan
+
+```csharp
+public virtual string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords=false);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).timeUnit'></a>
+
+`timeUnit` [Humanizer\.TimeUnit](https://learn.microsoft.com/en-us/dotnet/api/humanizer.timeunit 'Humanizer\.TimeUnit')
+
+A time unit to represent\.
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).unit'></a>
+
+`unit` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).toWords'></a>
+
+`toWords` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Implements [TimeSpanHumanize\(TimeUnit, int, bool\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool) 'Humanizer\.IFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, bool\)')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+Is thrown when timeUnit is larger than TimeUnit\.Week
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanize_Age()'></a>
+
+## DefaultFormatter\.TimeSpanHumanize\_Age\(\) Method
+
+Returns the age format that converts a humanized TimeSpan string to an age expression\.
+For instance, in English that format adds the " old" suffix, so that "40 years" becomes "40 years old"\.
+
+```csharp
+public virtual string TimeSpanHumanize_Age();
+```
+
+Implements [TimeSpanHumanize\_Age\(\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeSpanHumanize_Age() 'Humanizer\.IFormatter\.TimeSpanHumanize\_Age\(\)')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+Age format
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanize_Zero()'></a>
+
+## DefaultFormatter\.TimeSpanHumanize\_Zero\(\) Method
+
+0 seconds
+
+```csharp
+public virtual string TimeSpanHumanize_Zero();
+```
+
+Implements [TimeSpanHumanize\_Zero\(\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeSpanHumanize_Zero() 'Humanizer\.IFormatter\.TimeSpanHumanize\_Zero\(\)')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+Returns 0 seconds as the string representation of Zero TimeSpan
+
+<a name='Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit)'></a>
+
+## DefaultFormatter\.TimeUnitHumanize\(TimeUnit\) Method
+
+Returns the symbol for the given TimeUnit
+
+```csharp
+public virtual string TimeUnitHumanize(Humanizer.TimeUnit timeUnit);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit).timeUnit'></a>
+
+`timeUnit` [Humanizer\.TimeUnit](https://learn.microsoft.com/en-us/dotnet/api/humanizer.timeunit 'Humanizer\.TimeUnit')
+
+Time unit
+
+Implements [TimeUnitHumanize\(TimeUnit\)](Humanizer.IFormatter.md#Humanizer.IFormatter.TimeUnitHumanize(Humanizer.TimeUnit) 'Humanizer\.IFormatter\.TimeUnitHumanize\(Humanizer\.TimeUnit\)')
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+String representation of the provided TimeUnit

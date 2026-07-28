@@ -2,6 +2,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import {themes as prismThemes} from 'prism-react-renderer';
 import versionManifest from './humanizer-versions.json';
+import nativeVersions from './versions.json';
 
 const latestStable = versionManifest.versions.find(
   (version) => version.latestStable,
@@ -13,6 +14,30 @@ const preview = versionManifest.versions.find(
 if (!latestStable || !preview) {
   throw new Error('The documentation version manifest is incomplete.');
 }
+
+const publishedVersions: Record<
+  string,
+  {label: string; path: string; banner: 'none'; badge: boolean}
+> = Object.fromEntries(
+  nativeVersions.map((versionName) => {
+    const version = versionManifest.versions.find(
+      (candidate) => candidate.version === versionName,
+    );
+    if (!version?.published) {
+      throw new Error(`Published documentation version is invalid: ${versionName}`);
+    }
+
+    return [
+      versionName,
+      {
+        label: version.label,
+        path: version.route,
+        banner: 'none',
+        badge: true,
+      },
+    ];
+  }),
+);
 
 const config: Config = {
   title: 'Humanizer',
@@ -64,12 +89,7 @@ const config: Config = {
               badge: true,
               noIndex: true,
             },
-            [latestStable.version]: {
-              label: latestStable.label,
-              path: latestStable.route,
-              banner: 'none',
-              badge: true,
-            },
+            ...publishedVersions,
           },
         },
         blog: false,

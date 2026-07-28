@@ -13,7 +13,7 @@
       "referenceTfm": "netstandard2.0",
       "compatibilityOverlay": "version-overrides/2.10.1",
       "route": "2.10.1",
-      "published": true,
+      "published": false,
       "latestStable": false
     },
     {
@@ -28,7 +28,7 @@
       "referenceTfm": "net6.0",
       "compatibilityOverlay": "version-overrides/2.11.10",
       "route": "2.11.10",
-      "published": true,
+      "published": false,
       "latestStable": false
     },
     {
@@ -43,7 +43,7 @@
       "referenceTfm": "net6.0",
       "compatibilityOverlay": "version-overrides/2.13.14",
       "route": "2.13.14",
-      "published": true,
+      "published": false,
       "latestStable": false
     },
     {
@@ -58,7 +58,7 @@
       "referenceTfm": "net6.0",
       "compatibilityOverlay": "version-overrides/2.14.1",
       "route": "2.14.1",
-      "published": true,
+      "published": false,
       "latestStable": false
     },
     {
@@ -73,7 +73,7 @@
       "referenceTfm": "net10.0",
       "compatibilityOverlay": "version-overrides/3.0.1",
       "route": "3.0.1",
-      "published": true,
+      "published": false,
       "latestStable": false
     },
     {

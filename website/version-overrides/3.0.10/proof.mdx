@@ -4,13 +4,16 @@ title: Versioned API proof
 sidebar_position: 1
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import quickStart from '!!raw-loader!./_examples/quick-start/Program.cs';
+
 # Versioned API proof
 
 This stable page proves that one Docusaurus documentation version contains both narrative guidance and generated API reference.
 
-```csharp
-"PascalCaseInput".Humanize();
-```
+<CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
+
+This exact source is compiled and run against Humanizer `3.0.10`.
 
 The selected-version reference is [StringHumanizeExtensions](./api/Humanizer.StringHumanizeExtensions.md).
 
