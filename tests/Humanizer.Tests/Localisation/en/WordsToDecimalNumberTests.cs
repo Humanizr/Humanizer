@@ -1,4 +1,4 @@
-namespace Humanizer.Tests;
+namespace Humanizer.Tests.Localisation.en;
 
 [UseCulture("en-US")]
 public class WordsToDecimalNumberTests
@@ -62,6 +62,21 @@ public class WordsToDecimalNumberTests
     }
 
     [Fact]
+    public void DirectConvertersHonorNullInputContract()
+    {
+        var english = new EnglishWordsToDecimalNumberConverter(CultureInfo.CurrentCulture);
+        var unsupported = UnsupportedWordsToDecimalNumberConverter.Instance;
+
+        Assert.False(english.TryConvert(null!, out _, out var englishUnrecognizedNumber));
+        Assert.Equal(string.Empty, englishUnrecognizedNumber);
+        Assert.True(english.TryConvert("one point two", out _, out var recognizedNumber));
+        Assert.Null(recognizedNumber);
+        Assert.False(unsupported.TryConvert(null!, out _, out var unsupportedUnrecognizedNumber));
+        Assert.Equal(string.Empty, unsupportedUnrecognizedNumber);
+        Assert.Throws<ArgumentNullException>(() => unsupported.Convert(null!));
+    }
+
+    [Fact]
     public void RejectsFractionBeyondDecimalScale()
     {
         var words = $"zero point {string.Join(" ", Enumerable.Repeat("one", 29))}";
@@ -90,7 +105,7 @@ public class WordsToDecimalNumberTests
         var parsed = "minus zero point zero".ToDecimalNumber(CultureInfo.CurrentCulture);
         var bits = decimal.GetBits(parsed);
 
-        Assert.Equal(1, bits[3] >> 16 & 0x7F);
+        Assert.Equal(1, bits[3] >> 16 & 0xFF);
         Assert.NotEqual(0, bits[3] & int.MinValue);
     }
 

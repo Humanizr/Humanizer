@@ -50,9 +50,9 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
     public bool TryConvert(string words, out decimal parsedValue, out string? unrecognizedNumber)
     {
         parsedValue = default;
-        unrecognizedNumber = words;
+        unrecognizedNumber = words ?? string.Empty;
 
-        if (string.IsNullOrWhiteSpace(words))
+        if (words is null || string.IsNullOrWhiteSpace(words))
         {
             return false;
         }
@@ -119,7 +119,7 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
                 NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
                 CultureInfo.InvariantCulture,
                 out parsedValue) ||
-            (decimal.GetBits(parsedValue)[3] >> 16 & 0x7F) != fraction.Length)
+            (decimal.GetBits(parsedValue)[3] >> 16 & 0xFF) != fraction.Length)
         {
             parsedValue = default;
             unrecognizedNumber = words;

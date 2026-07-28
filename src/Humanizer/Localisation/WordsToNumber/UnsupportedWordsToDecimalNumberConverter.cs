@@ -12,8 +12,11 @@ internal sealed class UnsupportedWordsToDecimalNumberConverter : IWordsToDecimal
     }
 
     /// <inheritdoc />
-    public decimal Convert(string words) =>
+    public decimal Convert(string words)
+    {
+        ArgumentNullException.ThrowIfNull(words);
         throw new NotSupportedException("Decimal word parsing is not supported for the requested culture.");
+    }
 
     /// <inheritdoc />
     public bool TryConvert(string words, out decimal parsedValue)
@@ -26,7 +29,7 @@ internal sealed class UnsupportedWordsToDecimalNumberConverter : IWordsToDecimal
     public bool TryConvert(string words, out decimal parsedValue, out string? unrecognizedNumber)
     {
         parsedValue = default;
-        unrecognizedNumber = words;
+        unrecognizedNumber = words ?? string.Empty;
         return false;
     }
 }
