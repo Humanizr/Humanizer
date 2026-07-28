@@ -44,11 +44,23 @@ public class TransformersTests
         Assert.Equal(expectedOutput, input.Transform(To.LowerCase));
 
     [Theory]
+    [InlineData("", "")]
     [InlineData("lower case statement", "Lower case statement")]
     [InlineData("Sentence casing", "Sentence casing")]
     [InlineData("honors UPPER case", "Honors UPPER case")]
+    [InlineData("hello. world? yes! no", "Hello. world? yes! no")]
+    [InlineData("first.\nsecond!\n\nthird?", "First.\nsecond!\n\nthird?")]
+    [InlineData("  hello", "  hello")]
+    [InlineData("123 hello", "123 hello")]
+    [InlineData("NASA and the FBI", "NASA and the FBI")]
     public void TransformToSentenceCase(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Transform(To.SentenceCase));
+
+    [Theory]
+    [InlineData("tr-TR", "istanbul. izmir", "İstanbul. izmir")]
+    [InlineData("fr-FR", "égoïste. déjà", "Égoïste. déjà")]
+    public void TransformToSentenceCaseUsesSpecifiedCulture(string cultureName, string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Transform(new(cultureName), To.SentenceCase));
 
     [Theory]
     [InlineData("lower case statement", "LOWER CASE STATEMENT")]
