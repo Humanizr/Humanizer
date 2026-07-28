@@ -286,6 +286,7 @@ surfaces:
         -
           value: 1000000
           name: 'milion'
+          pluralName: 'milionë'
         -
           value: 1000
           name: 'mijë'
