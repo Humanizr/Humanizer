@@ -359,6 +359,7 @@ public class MetricNumeralTests
     [InlineData(-1E-27)]
     public void ToMetricOnInvalid(double input) =>
         Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
+
     [Theory]
     [InlineData(1E9, "1 billion")]
     [InlineData(1E12, "1 trillion")]
@@ -405,6 +406,13 @@ public class MetricNumeralTests
     [InlineData(1E9, "1 milliard")]
     [InlineData(1E12, "1 billion")]
     public void ToMetric_UseScaleWord_LongScale_Spain(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [UseCulture("ru-RU")]
+    [Theory]
+    [InlineData(1E9, "1 milliard")]
+    [InlineData(1E12, "1 trillion")]
+    public void ToMetric_UseScaleWord_HybridScale(double input, string expected) =>
         Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
 }
 
