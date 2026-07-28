@@ -7,6 +7,20 @@ namespace Humanizer.SourceGenerators.Tests;
 public class LocalePhraseNormalizationTests
 {
     [Fact]
+    public void RelativeDateTodayIsNormalized()
+    {
+        var catalog = HumanizerSourceGenerator.LocalePhraseNormalization.ParseLocalePhraseCatalogForTests(
+            "zz",
+            """
+            phrases:
+              relativeDate:
+                today: 'today'
+            """);
+
+        Assert.Equal("today", catalog.DateHumanize.Today);
+    }
+
+    [Fact]
     public void ScalarFormsCollapseToDefaultOnly()
     {
         var catalog = HumanizerSourceGenerator.LocalePhraseNormalization.ParseLocalePhraseCatalogForTests(

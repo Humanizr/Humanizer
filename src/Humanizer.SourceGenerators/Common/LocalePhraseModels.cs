@@ -26,16 +26,19 @@ public sealed partial class HumanizerSourceGenerator
 
     internal sealed class DateHumanizePhraseSet(
         string? now,
+        string? today,
         string? never,
         ImmutableDictionary<string, DateHumanizePhrase> past,
         ImmutableDictionary<string, DateHumanizePhrase> future)
     {
         public string? Now { get; } = now;
+        public string? Today { get; } = today;
         public string? Never { get; } = never;
         public ImmutableDictionary<string, DateHumanizePhrase> Past { get; } = past;
         public ImmutableDictionary<string, DateHumanizePhrase> Future { get; } = future;
 
         public static DateHumanizePhraseSet Empty { get; } = new(
+            null,
             null,
             null,
             EmptyDateHumanizeUnits,

@@ -46,7 +46,7 @@ public sealed partial class HumanizerSourceGenerator
         static DateHumanizePhraseSet ParseDateHumanize(string localeCode, SimpleYamlValue value, string path)
         {
             var mapping = ExpectMapping(value, path);
-            RejectUnknownKeys(mapping, path, ["now", "never", "past", "future"]);
+            RejectUnknownKeys(mapping, path, ["now", "today", "never", "past", "future"]);
             var past = mapping.TryGetValue("past", out var pastValue)
                 ? ParseDateHumanizeUnits(pastValue, $"{path}.past")
                 : ImmutableDictionary<string, DateHumanizePhrase>.Empty.WithComparers(StringComparer.Ordinal);
@@ -56,6 +56,7 @@ public sealed partial class HumanizerSourceGenerator
 
             return new DateHumanizePhraseSet(
                 GetOptionalLiteral(mapping, "now", $"{path}.now"),
+                GetOptionalLiteral(mapping, "today", $"{path}.today"),
                 GetOptionalLiteral(mapping, "never", $"{path}.never"),
                 past,
                 future);

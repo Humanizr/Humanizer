@@ -204,6 +204,7 @@ surfaces:
   phrases:
     relativeDate:
       now: '<text>'
+      today: '<text>'
       never: '<text>'
       past: {}
       future: {}

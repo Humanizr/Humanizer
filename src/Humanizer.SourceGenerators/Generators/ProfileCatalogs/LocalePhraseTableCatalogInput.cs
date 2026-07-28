@@ -109,6 +109,7 @@ public sealed partial class HumanizerSourceGenerator
         static string CreateLocalePhraseTableExpression(LocalePhraseCatalog catalog) =>
             "new LocalePhraseTable(" +
             QuoteOrNull(catalog.DateHumanize.Now) + ", " +
+            QuoteOrNull(catalog.DateHumanize.Today) + ", " +
             QuoteOrNull(catalog.DateHumanize.Never) + ", " +
             QuoteOrNull(catalog.TimeSpan.Zero) + ", " +
             QuoteOrNull(catalog.TimeSpan.Age) + ", " +

@@ -872,6 +872,7 @@ public sealed partial class HumanizerSourceGenerator
                     DateHumanize = new
                     {
                         locale.Phrases.DateHumanize.Now,
+                        locale.Phrases.DateHumanize.Today,
                         locale.Phrases.DateHumanize.Never,
                         Past = CreateDatePhraseMap(locale.Phrases.DateHumanize.Past),
                         Future = CreateDatePhraseMap(locale.Phrases.DateHumanize.Future)
