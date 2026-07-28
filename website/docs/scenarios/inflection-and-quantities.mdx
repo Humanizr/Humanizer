@@ -37,9 +37,18 @@ Numeric format strings and providers control the displayed number. They do not t
 
 `Vocabularies.Default` supports `AddIrregular`, `AddUncountable`, `AddPlural`, and `AddSingular`. Prefer an irregular or uncountable entry over a broad regular expression. Set `matchEnding: false` when a rule must match the entire noun instead of every word ending with the same letters.
 
+On `main/preview`, `AddAcronym` uses the same vocabulary to preserve the
+canonical casing of a domain acronym during string humanization. Registration
+is case-insensitive, but the registered spelling controls the output. Acronyms
+must contain letters only.
+
 ## Pitfall
 
-Vocabulary changes are process-global. Register domain words once during startup and test them in an isolated process; do not add rules per request. `ToQuantity` treats exactly `1` and `-1` as singular. Fractional values, `NaN`, and infinity use the plural form.
+Vocabulary changes, including acronym registrations on `main/preview`, are
+process-global. Register domain words once during startup and test them in an
+isolated process; do not add rules per request. `ToQuantity` treats exactly `1`
+and `-1` as singular. Fractional values, `NaN`, and infinity use the plural
+form.
 
 This API inflects English nouns. For localized number words and grammar-aware ordinals, use [numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx) and check the [culture capability table](../languages/supported-cultures.mdx).
 
@@ -48,7 +57,8 @@ This API inflects English nouns. For localized number words and grammar-aware or
 Core inflection is available across the documented release set. Individual
 vocabulary rules and overloads have changed, and early Humanizer `3.0.x`
 temporarily lacked quantity overloads restored by `3.0.8`. The verified source
-runs against the selected package.
+runs against the selected package. `AddAcronym` is available on
+`main/preview`.
 
 ## Related guides and API
 

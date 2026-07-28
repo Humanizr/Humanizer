@@ -1,6 +1,6 @@
 ## Vocabularies Class
 
-Container for registered Vocabularies\.  At present, only a single vocabulary is supported: Default\.
+Container for registered vocabularies\. At present, only a single vocabulary is supported: Default\.
 
 ```csharp
 public static class Vocabularies
@@ -13,8 +13,8 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## Vocabularies\.Default Property
 
-The default vocabulary used for singular/plural irregularities\.
-Rules can be added to this vocabulary and will be picked up by called to Singularize\(\) and Pluralize\(\)\.
+The default vocabulary used for singular/plural irregularities and custom acronym casing\.
+Rules and acronyms added to this vocabulary are used by Singularize\(\), Pluralize\(\), and Humanize\(\)\.
 At this time, multiple vocabularies and removing existing rules are not supported\.
 
 ```csharp

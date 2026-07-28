@@ -32,7 +32,10 @@
       "Humanizer.Configurator.md"
     ],
     "scenarios/durations-and-ages.mdx": [
-      "Humanizer.TimeSpanHumanizeExtensions.md"
+      "Humanizer.TimeSpanHumanizeExtensions.md",
+      "Humanizer.TimeSpanDehumanizeExtensions.md",
+      "Humanizer.ITimeSpanHumanizeStrategy.md",
+      "Humanizer.DefaultTimeSpanHumanizeStrategy.md"
     ],
     "scenarios/fluent-dates-and-time-spans.mdx": [
       "Humanizer.NumberToTimeSpanExtensions.md",
@@ -58,10 +61,15 @@
     "scenarios/numbers-in-words-and-ordinals.mdx": [
       "Humanizer.NumberToWordsExtension.md",
       "Humanizer.OrdinalizeExtensions.md",
+      "Humanizer.ILongOrdinalizer.md",
+      "Humanizer.FractionalizeExtensions.md",
+      "Humanizer.ChineseFinancialNumeralExtensions.md",
       "Humanizer.WordForm.md"
     ],
     "scenarios/parse-number-words.mdx": [
-      "Humanizer.WordsToNumberExtension.md"
+      "Humanizer.WordsToNumberExtension.md",
+      "Humanizer.WordsToDecimalNumberExtension.md",
+      "Humanizer.IWordsToDecimalNumberConverter.md"
     ],
     "scenarios/byte-sizes-and-rates.mdx": [
       "Humanizer.ByteSize.md",
@@ -93,7 +101,9 @@
       "Humanizer.Configurator.md",
       "Humanizer.LocaliserRegistry_TLocaliser_.md",
       "Humanizer.ICulturedStringTransformer.md",
-      "Humanizer.ITruncator.md"
+      "Humanizer.ITruncator.md",
+      "Humanizer.ITimeSpanHumanizeStrategy.md",
+      "Humanizer.DefaultTimeSpanHumanizeStrategy.md"
     ],
     "scenarios/specialized-formatting-utilities.mdx": [
       "Humanizer.HeadingExtensions.md",
@@ -165,6 +175,38 @@
     {
       "versions": ["2.10.1", "2.11.10"],
       "target": "Humanizer.TimeUnitToSymbolExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.TimeSpanDehumanizeExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.ITimeSpanHumanizeStrategy.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.DefaultTimeSpanHumanizeStrategy.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.ILongOrdinalizer.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.FractionalizeExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.ChineseFinancialNumeralExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.WordsToDecimalNumberExtension.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.IWordsToDecimalNumberConverter.md"
     }
   ]
 }

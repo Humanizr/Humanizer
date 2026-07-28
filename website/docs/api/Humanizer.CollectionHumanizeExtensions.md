@@ -310,3 +310,49 @@ Thrown when [collection](Humanizer.CollectionHumanizeExtensions.md#Humanizer.Col
 var people = new[] { new Person { Name = "Alice" }, new Person { Name = "Bob" } };
 people.Humanize(p => p.Name, " | ") => "Alice | Bob"
 ```
+
+<a name='Humanizer.CollectionHumanizeExtensions.Humanize_T_(thisSystem.Collections.Generic.IEnumerable_T_,System.Globalization.CultureInfo)'></a>
+
+## CollectionHumanizeExtensions\.Humanize\<T\>\(this IEnumerable\<T\>, CultureInfo\) Method
+
+Transforms a collection into a human\-readable string representation using the default separator
+for the specified culture\.
+
+```csharp
+public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Globalization.CultureInfo culture);
+```
+#### Type parameters
+
+<a name='Humanizer.CollectionHumanizeExtensions.Humanize_T_(thisSystem.Collections.Generic.IEnumerable_T_,System.Globalization.CultureInfo).T'></a>
+
+`T`
+
+The type of elements in the collection\.
+#### Parameters
+
+<a name='Humanizer.CollectionHumanizeExtensions.Humanize_T_(thisSystem.Collections.Generic.IEnumerable_T_,System.Globalization.CultureInfo).collection'></a>
+
+`collection` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[T](Humanizer.CollectionHumanizeExtensions.md#Humanizer.CollectionHumanizeExtensions.Humanize_T_(thisSystem.Collections.Generic.IEnumerable_T_,System.Globalization.CultureInfo).T 'Humanizer\.CollectionHumanizeExtensions\.Humanize\<T\>\(this System\.Collections\.Generic\.IEnumerable\<T\>, System\.Globalization\.CultureInfo\)\.T')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The collection to be humanized\. Must not be null\.
+
+<a name='Humanizer.CollectionHumanizeExtensions.Humanize_T_(thisSystem.Collections.Generic.IEnumerable_T_,System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+The culture whose collection formatter should be used\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A formatted string representation of the collection elements separated by culture\-specific separators\.
+
+#### Exceptions
+
+[System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
+Thrown when [collection](Humanizer.CollectionHumanizeExtensions.md#Humanizer.CollectionHumanizeExtensions.Humanize_T_(thisSystem.Collections.Generic.IEnumerable_T_,System.Globalization.CultureInfo).collection 'Humanizer\.CollectionHumanizeExtensions\.Humanize\<T\>\(this System\.Collections\.Generic\.IEnumerable\<T\>, System\.Globalization\.CultureInfo\)\.collection') or [culture](Humanizer.CollectionHumanizeExtensions.md#Humanizer.CollectionHumanizeExtensions.Humanize_T_(thisSystem.Collections.Generic.IEnumerable_T_,System.Globalization.CultureInfo).culture 'Humanizer\.CollectionHumanizeExtensions\.Humanize\<T\>\(this System\.Collections\.Generic\.IEnumerable\<T\>, System\.Globalization\.CultureInfo\)\.culture') is null\.
+
+### Example
+
+```csharp
+new[] { 1, 2, 3 }.Humanize(new CultureInfo("en-GB")) => "1, 2 and 3"
+```

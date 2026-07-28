@@ -30,3 +30,11 @@ Use the metric prefix \<a href="https://en\.wikipedia\.org/wiki/Long\_and\_short
 `WithSpace` 8
 
 Include a space after the numeral\.
+
+<a name='Humanizer.MetricNumeralFormats.UseScaleWord'></a>
+
+`UseScaleWord` 16
+
+Automatically select between \<a href="https://en\.wikipedia\.org/wiki/Long\_and\_short\_scales"\>long and short scale words\</a\>
+based on [System\.Globalization\.CultureInfo\.CurrentUICulture](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentuiculture 'System\.Globalization\.CultureInfo\.CurrentUICulture')\.
+For example, `1E9` renders as `billion` in `en-US` and `milliard` in `de-DE`\.

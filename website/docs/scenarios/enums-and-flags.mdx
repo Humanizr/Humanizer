@@ -13,11 +13,13 @@ import enumsFlags from '!!raw-loader!../_examples/scenarios-enums-flags/Program.
 
 ## Orientation
 
-Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. Dehumanization matches that resolved label case-insensitively. It does not index every possible raw, humanized, and metadata form. Flags enums are decomposed and joined through the active collection formatter.
+Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. On `main/preview`, dehumanization also recognizes the raw name, its humanized form, and authored display aliases. Flags enums are decomposed and joined through the active collection formatter.
 
 ## Example
 
-The executable verifies a two-flag value, case-insensitive generic dehumanization, no-match behavior, and an unknown flag bit:
+The executable verifies a two-flag value, every `DisplayAttribute` alias,
+case-insensitive generic dehumanization, no-match behavior, and an unknown flag
+bit:
 
 <CodeBlock language="csharp" title="Program.cs">{enumsFlags}</CodeBlock>
 
@@ -31,6 +33,14 @@ member name; authored metadata preserves its exact casing.
 description-like property globally and must run before enum metadata is
 cached.
 
+### Parse accepted aliases
+
+On `main/preview`, `DehumanizeTo<TEnum>` recognizes the raw member name, its
+humanized form, and `DisplayAttribute` name, description, and short-name
+values. It also recognizes a configured description attribute value when that
+value becomes the member's authored description. Matching is
+case-insensitive, including for flags, but does not trim whitespace.
+
 ### Handle missing input
 
 The default `DehumanizeTo<TEnum>` throws `NoMatchFoundException`. Pass `OnNoMatch.ReturnsNull` to the nullable generic overload when an unknown label is expected.
@@ -41,7 +51,13 @@ Known nonzero flags are humanized and joined using the current UI culture. A def
 
 ## Pitfall
 
-Labels must be unambiguous even though matching is case-insensitive. Prefer the generic `DehumanizeTo<TEnum>` overload. The runtime `Type` overload uses reflection and is annotated with `RequiresDynamicCode` and `RequiresUnreferencedCode`; it is not the safe default for trimmed or Native AOT applications.
+Aliases should be unambiguous even though matching is case-insensitive. On
+`main/preview`, a current humanized representation takes precedence over a
+supplemental alias when labels collide; collisions among supplemental aliases
+retain the later enum value in unsigned numeric order. Prefer the generic
+`DehumanizeTo<TEnum>` overload. The runtime `Type` overload uses reflection and
+is annotated with `RequiresDynamicCode` and `RequiresUnreferencedCode`; it is
+not the safe default for trimmed or Native AOT applications.
 
 ## Version notes
 
@@ -49,7 +65,8 @@ Enum APIs span the documented corpus, but Humanizer 3 changes generic
 constraints and metadata configuration. The flags example runs against the
 selected package. Consult the selected API before migrating code that stores
 values as the base `Enum` type. Metadata casing preservation when a
-`LetterCasing` argument is supplied is `main/preview` behavior.
+`LetterCasing` argument is supplied, and dehumanization through raw,
+humanized, and supplemental metadata aliases, are `main/preview` behavior.
 
 ## Related guides and API
 

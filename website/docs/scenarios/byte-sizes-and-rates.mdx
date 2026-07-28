@@ -17,7 +17,9 @@ import bytes from '!!raw-loader!../_examples/scenarios-bytes/Program.cs';
 
 ## Example
 
-This program parses a size with an explicit provider, performs arithmetic, distinguishes bits from bytes, and formats a transfer rate:
+This program parses a size with an explicit provider, performs arithmetic,
+formats exact composite sizes, distinguishes bits from bytes, and formats a
+transfer rate:
 
 <CodeBlock language="csharp" title="Program.cs">{bytes}</CodeBlock>
 
@@ -29,6 +31,20 @@ exabyte values plus explicit binary `Kibibyte`, `Mebibyte`, `Gibibyte`,
 `Tebibyte`, and `Pebibyte` factories, properties, format tokens, parsing
 symbols, and `DataUnit` values. `Humanize` chooses the largest whole unit and
 accepts ordinary numeric format strings. `ToFullWords` uses full unit names.
+
+### Decompose exact quantities
+
+On `main/preview`, `HumanizeComposite` walks the existing units from exabytes
+through bits and returns up to `precision` nonzero parts. It preserves exact
+byte and bit residuals while parts remain available: for example, 81,937 bits
+becomes `10 KB 2 B 1 b` at precision 3. Once the precision is reached, the
+remaining residual is omitted rather than rounded.
+
+The separator is literal and defaults to a space. Set `toWords: true` for
+localized full unit names, and pass an `IFormatProvider` for numeric formatting
+and the leading negative sign. Negative values have one sign before the first
+part; zero is `0 b`. Precision must be positive and the separator cannot be
+`null`.
 
 ### Parse user input
 
@@ -48,15 +64,20 @@ case-sensitive: lowercase is bits, uppercase is bytes. Other recognized unit
 suffixes are case-insensitive. Fractional bits and values without a unit
 suffix are invalid.
 
+`HumanizeComposite` follows those same stored factors: `PB` and `EB` parts are
+decimal SI, while `TB` and smaller legacy labels use binary multiples. It
+preserves the legacy `KB` through `TB` symbols rather than relabeling them as
+IEC units.
+
 Construct rates with a positive, nonzero interval. Keep `ByteSize` as the model value; formatted output is not a serialization contract.
 
 ## Version notes
 
 Core `ByteSize` creation and formatting span the documented corpus. Petabyte,
-exabyte, and explicit IEC unit support are `main/preview` additions.
-Culture-aware `ByteRate.Humanize` appears in `2.13.14`; earlier snapshots need a
-reduced example or exclusion. The verified source runs against the selected
-package.
+exabyte, explicit IEC unit support, and `HumanizeComposite` are `main/preview`
+additions. Culture-aware `ByteRate.Humanize` appears in `2.13.14`; earlier
+snapshots need a reduced example or exclusion. The verified source runs
+against the selected package.
 
 ## Related guides and API
 

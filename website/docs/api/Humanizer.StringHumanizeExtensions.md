@@ -31,7 +31,7 @@ The string to be humanized\. Must not be null\.
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A humanized version of the input string with spaces inserted between words and appropriate
-capitalization\. Preserves all\-uppercase acronyms unchanged\.
+capitalization\. Preserves all\-uppercase acronyms unless registered with different canonical casing\.
 
 ### Example
 
@@ -40,16 +40,21 @@ capitalization\. Preserves all\-uppercase acronyms unchanged\.
 "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
 "dash-separated-string".Humanize() => "Dash separated string"
 "HTML".Humanize() => "HTML"
+Vocabularies.Default.AddAcronym("iOS");
+"IOS".Humanize() => "iOS"
 "camelCaseText".Humanize() => "Camel case text"
+"Rock&Roll".Humanize() => "Rock & roll"
 ```
 
 ### Remarks
 The method applies several rules in order:
-\- If the entire input is uppercase \(an acronym\), it returns unchanged
+\- If the entire input is uppercase \(an acronym\), it returns unchanged unless it matches a registered acronym
 \- Handles freestanding underscores/dashes \(e\.g\., "some \_ string"\)
 \- Splits on underscores and dashes
 \- Breaks up PascalCase and camelCase text
-The first letter of the result is always capitalized\.
+\- Preserves ampersands as separate tokens in PascalCase and camelCase inputs
+Registered acronyms use their canonical casing\.
+Otherwise, if the result begins with a letter, that letter is capitalized\.
 
 <a name='Humanizer.StringHumanizeExtensions.Humanize(thisstring,Humanizer.LetterCasing)'></a>
 

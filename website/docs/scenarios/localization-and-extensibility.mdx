@@ -8,6 +8,7 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import localization from '!!raw-loader!../_examples/scenarios-localization/Program.cs';
+import configuration from '!!raw-loader!../_examples/configuration/Program.cs';
 
 # Localization and extensibility
 
@@ -35,6 +36,20 @@ The result is `quarante-deux; BONJOUR`. A per-call transformer is isolated and e
 
 Registries cover collection formatters, general formatters, number-word converters, ordinalizers, date-ordinal converters, and clock-notation converters. Culture resolution checks the requested culture and its parents before using the registry default.
 
+### Set a global time-span policy
+
+On `main/preview`, assign `Configurator.TimeSpanHumanizeStrategy` once during
+application startup to route every `TimeSpan.Humanize` and
+`HumanizeToSymbols` call through an application-wide policy. The strategy
+receives the requested precision, empty-unit behavior, culture, unit range,
+separator, word mode, and symbol mode.
+
+This runnable configuration keeps the built-in date strategy example and adds
+a custom time-span strategy that delegates all behavior to
+`DefaultTimeSpanHumanizeStrategy` after limiting output to one part:
+
+<CodeBlock language="csharp" title="Program.cs">{configuration}</CodeBlock>
+
 ## Pitfall
 
 In Humanizer `3.x` and current, localizer registries freeze on first resolution. Register components before any Humanizer call can resolve that registry. Humanizer `2.x` registries remain mutable, but startup registration still prevents request-to-request drift. Do not mutate global strategies per request; concurrent callers can observe the change.
@@ -43,7 +58,13 @@ Parent-culture fallback identifies where behavior was resolved. It does not prov
 
 ## Version notes
 
-The example’s local transformer runs across the supported corpus. Registry immutability and enum metadata configuration change in Humanizer 3. Individual registries and locale capabilities are selected-version behavior; historical snapshots must not present current YAML/generator internals as old package behavior.
+The local transformer runs across the supported corpus. Registry immutability
+and enum metadata configuration change in Humanizer 3.
+`TimeSpanHumanizeStrategy`, `ITimeSpanHumanizeStrategy`, and
+`DefaultTimeSpanHumanizeStrategy` are `main/preview` APIs. Individual
+registries and locale capabilities are selected-version behavior; historical
+snapshots must not present current YAML/generator internals as old package
+behavior.
 
 ## Related guides and API
 
@@ -55,3 +76,5 @@ The example’s local transformer runs across the supported corpus. Registry imm
 - [LocaliserRegistry API](../api/Humanizer.LocaliserRegistry_TLocaliser_.md)
 - [ICulturedStringTransformer API](../api/Humanizer.ICulturedStringTransformer.md)
 - [ITruncator API](../api/Humanizer.ITruncator.md)
+- [ITimeSpanHumanizeStrategy API](../api/Humanizer.ITimeSpanHumanizeStrategy.md)
+- [DefaultTimeSpanHumanizeStrategy API](../api/Humanizer.DefaultTimeSpanHumanizeStrategy.md)

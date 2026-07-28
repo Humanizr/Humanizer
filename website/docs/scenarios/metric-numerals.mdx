@@ -13,11 +13,17 @@ import metric from '!!raw-loader!../_examples/scenarios-metric/Program.cs';
 
 ## Orientation
 
-Use `ToMetric` for compact decimal magnitudes such as `123.5k`, and `FromMetric` when an input follows Humanizer’s metric syntax. `MetricNumeralFormats` selects a symbol, SI prefix name, short-scale word, long-scale word, and optional spacing. These APIs follow the current numeric culture.
+Use `ToMetric` for compact decimal magnitudes such as `123.5k`, and
+`FromMetric` when an input follows Humanizer’s metric syntax.
+`MetricNumeralFormats` selects a symbol, SI prefix name, scale word, and
+optional spacing. Numeric text follows `CurrentCulture`; automatic scale-word
+selection follows `CurrentUICulture`.
 
 ## Example
 
-The example pins `en-US`, controls decimals, emits an SI prefix name, and parses a symbol:
+The example pins `en-US` for numbers and `de-DE` for UI language, controls
+decimals, automatically selects a scale word, emits an SI prefix name, and
+parses a symbol:
 
 <CodeBlock language="csharp" title="Program.cs">{metric}</CodeBlock>
 
@@ -29,11 +35,18 @@ The example pins `en-US`, controls decimals, emits an SI prefix name, and parses
 - `UseName` emits an SI prefix name such as `kilo`.
 - `UseShortScaleWord` emits words such as `billion`.
 - `UseLongScaleWord` emits the selected long-scale equivalent.
+- `UseScaleWord` selects the locale’s short, long, or hybrid scale from
+  `CurrentUICulture`.
 
 The nullable `decimals` argument is the maximum number of fractional digits;
 rounding applies at that limit and trailing zeros are omitted. Leave both
 options unset to preserve the available precision in the default
 representation.
+
+Use `UseScaleWord` for user-facing output that should follow the UI locale.
+Use `UseShortScaleWord` or `UseLongScaleWord` when an external format requires
+one scale regardless of locale. `CurrentCulture` still controls the decimal
+separator and other numeric formatting in either case.
 
 ### Parse supported forms
 
@@ -46,13 +59,15 @@ legacy `KB` through `TB` are binary multiples, `PB` and `EB` are decimal SI,
 and explicit IEC symbols such as `KiB` and `PiB` are binary. The supported
 metric exponent range stops before `10^27` and below `10^-27`; out-of-range
 values throw. Because there is no culture parameter, scope `CurrentCulture`
-when parsing or exact output matters.
+when parsing or exact numeric output matters, and scope `CurrentUICulture`
+when `UseScaleWord` must be deterministic.
 
 ## Version notes
 
 Metric conversion spans the documented corpus, but Humanizer 3 removed older
-boolean formatting overloads in favor of `MetricNumeralFormats`. The executable
-uses the selected version's formatting API and runs against that package.
+boolean formatting overloads in favor of `MetricNumeralFormats`.
+`UseScaleWord` is a `main/preview` option. The executable uses the selected
+version's formatting API and runs against that package.
 
 ## Related guides and API
 

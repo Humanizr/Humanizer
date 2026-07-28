@@ -68,8 +68,8 @@ This method uses reflection and is less type\-safe than the generic overload\. U
 
 ## EnumDehumanizeExtensions\.DehumanizeTo\<TTargetEnum\>\(this string\) Method
 
-Converts a humanized string back to its original enum value by matching it against the label
-that [Humanize&lt;T&gt;\(this T\)](Humanizer.EnumHumanizeExtensions.md#Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT) 'Humanizer\.EnumHumanizeExtensions\.Humanize\<T\>\(this T\)') produces for each member\.
+Converts a humanized string back to its original enum value by matching it against enum member names,
+their humanized representations, and configured metadata aliases\.
 
 ```csharp
 public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
@@ -100,7 +100,7 @@ The enum value that matches the input string\.
 Thrown when [TTargetEnum](Humanizer.EnumDehumanizeExtensions.md#Humanizer.EnumDehumanizeExtensions.DehumanizeTo_TTargetEnum_(thisstring).TTargetEnum 'Humanizer\.EnumDehumanizeExtensions\.DehumanizeTo\<TTargetEnum\>\(this string\)\.TTargetEnum') is not an enum type\.
 
 [NoMatchFoundException](Humanizer.NoMatchFoundException.md 'Humanizer\.NoMatchFoundException')  
-Thrown when no enum member's humanized label matches the input string\.
+Thrown when no enum member matches the input string\.
 
 ### Example
 
@@ -108,11 +108,21 @@ Thrown when no enum member's humanized label matches the input string\.
 enum UserType { AnonymousUser, RegisteredUser }
 "Anonymous user".DehumanizeTo<UserType>() => UserType.AnonymousUser
 "Registered user".DehumanizeTo<UserType>() => UserType.RegisteredUser
+"AnonymousUser".DehumanizeTo<UserType>() => UserType.AnonymousUser
 ```
 
 ### Remarks
-Each member contributes one label: its configured description or display value when present,
-otherwise its humanized member name\. Matching that label is case\-insensitive\.
+The method attempts to match the input string against:
+1. The exact enum member name.
+2. The humanized version of the enum member name.
+3. [System\.ComponentModel\.DataAnnotations\.DisplayAttribute\.Name](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.displayattribute.name 'System\.ComponentModel\.DataAnnotations\.DisplayAttribute\.Name'),
+              [System\.ComponentModel\.DataAnnotations\.DisplayAttribute\.Description](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.displayattribute.description 'System\.ComponentModel\.DataAnnotations\.DisplayAttribute\.Description'), and
+              [System\.ComponentModel\.DataAnnotations\.DisplayAttribute\.ShortName](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.displayattribute.shortname 'System\.ComponentModel\.DataAnnotations\.DisplayAttribute\.ShortName') values.
+4. The configured description attribute value when selected as the member's authored description.
+
+Matching is case\-insensitive and does not trim whitespace\. If aliases collide, later values in the enum's
+unsigned numeric order take precedence, while the current humanized representation takes precedence over
+supplemental aliases\.
 
 <a name='Humanizer.EnumDehumanizeExtensions.DehumanizeTo_TTargetEnum_(thisstring,Humanizer.OnNoMatch)'></a>
 

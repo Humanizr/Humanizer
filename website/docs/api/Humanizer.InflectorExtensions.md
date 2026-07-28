@@ -440,3 +440,40 @@ A lowercase string with words separated by underscores instead of spaces, case c
 ### Remarks
 This transformation is commonly used for database column names, file names, and URL slugs in some conventions\.
 Casing is culture\-invariant\.
+
+<a name='Humanizer.InflectorExtensions.Underscore(thisstring,bool)'></a>
+
+## InflectorExtensions\.Underscore\(this string, bool\) Method
+
+Separates words with underscores, optionally preserving the input casing\.
+
+```csharp
+public static string Underscore(this string input, bool preserveCase);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Underscore(thisstring,bool).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be underscored\. Must not be null\.
+
+<a name='Humanizer.InflectorExtensions.Underscore(thisstring,bool).preserveCase'></a>
+
+`preserveCase` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to preserve the input casing; [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to convert the result to lowercase\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A string with words separated by underscores\.
+
+### Example
+
+```csharp
+"SomePropertyName".Underscore(preserveCase: true) => "Some_Property_Name"
+"HTMLParser".Underscore(preserveCase: true) => "HTML_Parser"
+```
+
+### Remarks
+Acronyms are split using identifier word boundaries, and lowercasing is culture\-invariant\.

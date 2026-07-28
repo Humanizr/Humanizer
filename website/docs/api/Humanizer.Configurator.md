@@ -171,6 +171,24 @@ public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConv
 
 #### Property Value
 [Humanizer\.LocaliserRegistry&lt;](Humanizer.LocaliserRegistry_TLocaliser_.md 'Humanizer\.LocaliserRegistry\<TLocaliser\>')[ITimeOnlyToClockNotationConverter](Humanizer.ITimeOnlyToClockNotationConverter.md 'Humanizer\.ITimeOnlyToClockNotationConverter')[&gt;](Humanizer.LocaliserRegistry_TLocaliser_.md 'Humanizer\.LocaliserRegistry\<TLocaliser\>')
+
+<a name='Humanizer.Configurator.TimeSpanHumanizeStrategy'></a>
+
+## Configurator\.TimeSpanHumanizeStrategy Property
+
+The strategy to be used for TimeSpan\.Humanize and TimeSpan\.HumanizeToSymbols
+
+```csharp
+public static Humanizer.ITimeSpanHumanizeStrategy TimeSpanHumanizeStrategy { get; set; }
+```
+
+#### Property Value
+[ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy')
+
+### Remarks
+This property should be set only once during application startup before any humanization operations occur\.
+For thread\-safety, use volatile reads or appropriate synchronization when accessing this property in multi\-threaded scenarios\.
+In production applications, avoid changing this value after the application has started serving requests\.
 ### Methods
 
 <a name='Humanizer.Configurator.IsCultureSupported(System.Globalization.CultureInfo)'></a>

@@ -7,6 +7,10 @@ public static class OrdinalizeExtensions
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → OrdinalizeExtensions
+
+### Remarks
+Ordinalization accepts integral values only\. Callers with fractional values must choose and apply
+an explicit rounding and conversion policy before ordinalizing\.
 ### Methods
 
 <a name='Humanizer.OrdinalizeExtensions.Ordinalize(thisint)'></a>
@@ -286,6 +290,244 @@ In Spanish:
 1.Ordinalize(new CultureInfo("es-ES"),WordForm.Abbreviation) -> 1.er // As in "Vivo en el 1.er piso"
 1.Ordinalize(new CultureInfo("es-ES"), WordForm.Normal) -> 1.º // As in "Fui el 1º de mi promoción"
 ```
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th\.
+
+```csharp
+public static string Ordinalize(this long number);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long, GrammaticalGender\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence using the provided grammatical gender\.
+
+```csharp
+public static string Ordinalize(this long number, Humanizer.GrammaticalGender gender);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender).gender'></a>
+
+`gender` [GrammaticalGender](Humanizer.GrammaticalGender.md 'Humanizer\.GrammaticalGender')
+
+The grammatical gender to use for output words
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,Humanizer.WordForm)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long, GrammaticalGender, WordForm\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific
+locale's variations using the grammatical gender provided\.
+
+```csharp
+public static string Ordinalize(this long number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,Humanizer.WordForm).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,Humanizer.WordForm).gender'></a>
+
+`gender` [GrammaticalGender](Humanizer.GrammaticalGender.md 'Humanizer\.GrammaticalGender')
+
+The grammatical gender to use for output words
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,Humanizer.WordForm).wordForm'></a>
+
+`wordForm` [WordForm](Humanizer.WordForm.md 'Humanizer\.WordForm')
+
+Form of the word, i\.e\. abbreviation
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The number ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long, GrammaticalGender, CultureInfo\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence using the provided grammatical gender\.
+
+```csharp
+public static string Ordinalize(this long number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo).gender'></a>
+
+`gender` [GrammaticalGender](Humanizer.GrammaticalGender.md 'Humanizer\.GrammaticalGender')
+
+The grammatical gender to use for output words
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, current thread's culture is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo,Humanizer.WordForm)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long, GrammaticalGender, CultureInfo, WordForm\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific
+locale's variations using the grammatical gender provided\.
+
+```csharp
+public static string Ordinalize(this long number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture, Humanizer.WordForm wordForm);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo,Humanizer.WordForm).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo,Humanizer.WordForm).gender'></a>
+
+`gender` [GrammaticalGender](Humanizer.GrammaticalGender.md 'Humanizer\.GrammaticalGender')
+
+The grammatical gender to use for output words
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo,Humanizer.WordForm).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, current thread's culture is used\.
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.GrammaticalGender,System.Globalization.CultureInfo,Humanizer.WordForm).wordForm'></a>
+
+`wordForm` [WordForm](Humanizer.WordForm.md 'Humanizer\.WordForm')
+
+Form of the word, i\.e\. abbreviation
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The number ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.WordForm)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long, WordForm\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations\.
+
+```csharp
+public static string Ordinalize(this long number, Humanizer.WordForm wordForm);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.WordForm).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,Humanizer.WordForm).wordForm'></a>
+
+`wordForm` [WordForm](Humanizer.WordForm.md 'Humanizer\.WordForm')
+
+Form of the word, i\.e\. abbreviation
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The number ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,System.Globalization.CultureInfo)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long, CultureInfo\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th\.
+
+```csharp
+public static string Ordinalize(this long number, System.Globalization.CultureInfo? culture);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,System.Globalization.CultureInfo).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, current thread's culture is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,System.Globalization.CultureInfo,Humanizer.WordForm)'></a>
+
+## OrdinalizeExtensions\.Ordinalize\(this long, CultureInfo, WordForm\) Method
+
+Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations\.
+
+```csharp
+public static string Ordinalize(this long number, System.Globalization.CultureInfo? culture, Humanizer.WordForm wordForm);
+```
+#### Parameters
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,System.Globalization.CultureInfo,Humanizer.WordForm).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The number to be ordinalized
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,System.Globalization.CultureInfo,Humanizer.WordForm).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, current thread's culture is used\.
+
+<a name='Humanizer.OrdinalizeExtensions.Ordinalize(thislong,System.Globalization.CultureInfo,Humanizer.WordForm).wordForm'></a>
+
+`wordForm` [WordForm](Humanizer.WordForm.md 'Humanizer\.WordForm')
+
+Form of the word, i\.e\. abbreviation
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The number ordinalized
 
 <a name='Humanizer.OrdinalizeExtensions.Ordinalize(thisstring)'></a>
 

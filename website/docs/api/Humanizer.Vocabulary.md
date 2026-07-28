@@ -1,7 +1,7 @@
 ## Vocabulary Class
 
-A container for exceptions to simple pluralization/singularization rules\.
-Vocabularies\.Default contains an extensive list of rules for US English\.
+A container for custom acronym casing and exceptions to simple pluralization/singularization rules\.
+Vocabularies\.Default contains an extensive list of rules for US English and supports process\-wide acronym registration\.
 At this time, multiple vocabularies and removing existing rules are not supported\.
 
 ```csharp
@@ -10,6 +10,31 @@ public class Vocabulary
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Vocabulary
 ### Methods
+
+<a name='Humanizer.Vocabulary.AddAcronym(string)'></a>
+
+## Vocabulary\.AddAcronym\(string\) Method
+
+Adds an acronym whose casing should be preserved when humanizing strings\.
+
+```csharp
+public void AddAcronym(string acronym);
+```
+#### Parameters
+
+<a name='Humanizer.Vocabulary.AddAcronym(string).acronym'></a>
+
+`acronym` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The letters in the acronym's canonical output casing, e\.g\. "HTML"\.
+
+#### Exceptions
+
+[System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
+[acronym](Humanizer.Vocabulary.md#Humanizer.Vocabulary.AddAcronym(string).acronym 'Humanizer\.Vocabulary\.AddAcronym\(string\)\.acronym') is null\.
+
+[System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
+[acronym](Humanizer.Vocabulary.md#Humanizer.Vocabulary.AddAcronym(string).acronym 'Humanizer\.Vocabulary\.AddAcronym\(string\)\.acronym') is empty or contains a non\-letter\.
 
 <a name='Humanizer.Vocabulary.AddIrregular(string,string,bool)'></a>
 

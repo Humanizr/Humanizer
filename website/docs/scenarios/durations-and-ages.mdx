@@ -18,7 +18,8 @@ Call `TimeSpan.Humanize` for elapsed time and `ToAge` for a human-readable age a
 ## Example
 
 This program shows two-unit precision, locale-aware list punctuation,
-localized compact symbols, and an age rendered with number words:
+localized compact symbols, invariant duration parsing, and an age rendered
+with number words:
 
 <CodeBlock language="csharp" title="Program.cs">{durations}</CodeBlock>
 
@@ -38,6 +39,19 @@ On `main/preview`, `HumanizeToSymbols` applies the same precision, empty-unit,
 range, culture, and separator controls but emits localized `TimeUnit` symbols
 such as `1h, 3s, 1ms`.
 
+### Parse invariant durations
+
+On `main/preview`, `DehumanizeTimeSpan` and `TryDehumanizeTimeSpan` accept
+standard invariant `TimeSpan` text or compact tokens using `ms`, `s`, `m`, `h`,
+`d`, and `w`. Compact tokens may have one leading sign, optional whitespace,
+fractional values that resolve to whole ticks, repeated units, and units in any
+order. A week is seven days.
+
+Use `TryDehumanizeTimeSpan` at an input boundary. It returns `false` and
+`TimeSpan.Zero` for unsupported syntax or an out-of-range value.
+`DehumanizeTimeSpan` throws `FormatException` for the same failures and
+`ArgumentNullException` for `null`.
+
 ### Use `ToAge` deliberately
 
 `ToAge` adds the culture’s age phrase to a duration decomposition. It is convenient for an already computed elapsed span, but it is not a birthday calculator.
@@ -46,15 +60,23 @@ such as `1h, 3s, 1ms`.
 
 Months and years are approximated from a duration and do not know calendar month length or leap years. Negative `TimeSpan` values are rendered with positive unit counts, so preserve direction elsewhere when it matters. A precision of zero or less returns an empty string.
 
+Compact duration input is intentionally culture-invariant and is not a parser
+for localized humanized output. For example, `1.5h` is valid even under a
+comma-decimal culture, while `1,5h`, `one hour`, and `1 hour` are rejected.
+
 ## Version notes
 
 `TimeSpan.Humanize` is available across the documented corpus. `ToAge` begins
-in `3.0.1`; `HumanizeToSymbols` is a `main/preview` API. The verified
-executable runs against the selected package; older snapshots replace or
-exclude calls they do not support.
+in `3.0.1`; `HumanizeToSymbols`, `DehumanizeTimeSpan`, and
+`TryDehumanizeTimeSpan` are `main/preview` APIs. The verified executable runs
+against the selected package; older snapshots replace or exclude calls they
+do not support.
 
 ## Related guides and API
 
 - [Fluent dates and time spans](./fluent-dates-and-time-spans.mdx)
 - [Relative dates and times](./relative-dates-and-times.mdx)
 - [TimeSpanHumanizeExtensions API](../api/Humanizer.TimeSpanHumanizeExtensions.md)
+- [TimeSpanDehumanizeExtensions API](../api/Humanizer.TimeSpanDehumanizeExtensions.md)
+- [ITimeSpanHumanizeStrategy API](../api/Humanizer.ITimeSpanHumanizeStrategy.md)
+- [DefaultTimeSpanHumanizeStrategy API](../api/Humanizer.DefaultTimeSpanHumanizeStrategy.md)

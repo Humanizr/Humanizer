@@ -69,6 +69,21 @@ The current analyzer can offer that checked conversion for recognized assignment
 
 `Resources` and `ResourceKeys` remain public in `3.0.10` and are removed on current. Replace direct resource-key access with typed Humanizer APIs. Custom formatters and converters should implement the typed public interfaces rather than depending on resource names.
 
+### Recheck ampersands in humanized strings
+
+Current preserves `&` as a separate token when humanizing PascalCase or
+camelCase text. `3.0.10` discarded it with other punctuation, so exact-output
+tests and persisted display labels can change:
+
+```csharp
+// 3.0.10: "Research development"
+// main/preview: "Research & development"
+var label = "Research&Development".Humanize();
+```
+
+Other punctuation such as `+` and `/` remains discarded. Compare any output
+that contains ampersands before adopting the preview.
+
 ### Recheck frameworks and localization
 
 `3.0.10` ships `netstandard2.0`, `net48`, `net8.0`, and `net10.0` assets. Current also targets `net11.0`. The preview generates locale registries and formatting data from checked-in YAML instead of shipping the historical locale-assembly implementation. This is an implementation migration, so compare exact localized output your application tests or displays.

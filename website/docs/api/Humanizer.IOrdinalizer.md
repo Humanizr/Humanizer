@@ -5,6 +5,9 @@ Localizes the ordinal form of a number\.
 ```csharp
 public interface IOrdinalizer
 ```
+
+Derived  
+↳ [ILongOrdinalizer](Humanizer.ILongOrdinalizer.md 'Humanizer\.ILongOrdinalizer')
 ### Methods
 
 <a name='Humanizer.IOrdinalizer.Convert(int,string)'></a>

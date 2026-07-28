@@ -5,6 +5,7 @@
 | [ByteRate](Humanizer.ByteRate.md 'Humanizer\.ByteRate') | Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer |
 | [ByteSizeExtensions](Humanizer.ByteSizeExtensions.md 'Humanizer\.ByteSizeExtensions') | Provides extension methods for ByteSize |
 | [CasingExtensions](Humanizer.CasingExtensions.md 'Humanizer\.CasingExtensions') | ApplyCase method to allow changing the case of a sentence easily |
+| [ChineseFinancialNumeralExtensions](Humanizer.ChineseFinancialNumeralExtensions.md 'Humanizer\.ChineseFinancialNumeralExtensions') | Contains extension methods for converting integers to Chinese financial characters\. |
 | [CollectionHumanizeExtensions](Humanizer.CollectionHumanizeExtensions.md 'Humanizer\.CollectionHumanizeExtensions') | Humanizes an IEnumerable into a human readable list |
 | [Configurator](Humanizer.Configurator.md 'Humanizer\.Configurator') | Provides a configuration point for Humanizer |
 | [DateHumanizeExtensions](Humanizer.DateHumanizeExtensions.md 'Humanizer\.DateHumanizeExtensions') | Humanizes DateTime into human readable sentence |
@@ -14,10 +15,12 @@
 | [DefaultDateTimeOffsetHumanizeStrategy](Humanizer.DefaultDateTimeOffsetHumanizeStrategy.md 'Humanizer\.DefaultDateTimeOffsetHumanizeStrategy') | The default 'distance of time' \-\> words calculator\. |
 | [DefaultFormatter](Humanizer.DefaultFormatter.md 'Humanizer\.DefaultFormatter') | Provides the standard formatter implementation for Humanizer locales\. |
 | [DefaultTimeOnlyHumanizeStrategy](Humanizer.DefaultTimeOnlyHumanizeStrategy.md 'Humanizer\.DefaultTimeOnlyHumanizeStrategy') | The default 'distance of time' \-\> words calculator\. |
+| [DefaultTimeSpanHumanizeStrategy](Humanizer.DefaultTimeSpanHumanizeStrategy.md 'Humanizer\.DefaultTimeSpanHumanizeStrategy') | The default strategy for converting [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') values into human\-readable text\. |
 | [DynamicNumberOfCharactersAndPreserveWordsTruncator](Humanizer.DynamicNumberOfCharactersAndPreserveWordsTruncator.md 'Humanizer\.DynamicNumberOfCharactersAndPreserveWordsTruncator') | Truncate a string to a fixed number of letters or digits, preserving whole words by never cutting a word in half\. If a complete word \(plus the delimiter, if any\) cannot fit, then only the delimiter is returned\. When truncating from the left, the delimiter is prepended if a complete word can be preserved; otherwise, only the delimiter is returned\. The allowed count is computed by counting only letters/digits\. |
 | [EnglishArticle](Humanizer.EnglishArticle.md 'Humanizer\.EnglishArticle') | Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article\. |
 | [EnumDehumanizeExtensions](Humanizer.EnumDehumanizeExtensions.md 'Humanizer\.EnumDehumanizeExtensions') | Contains extension methods for dehumanizing Enum string values\. |
 | [EnumHumanizeExtensions](Humanizer.EnumHumanizeExtensions.md 'Humanizer\.EnumHumanizeExtensions') | Contains extension methods for humanizing Enums |
+| [FractionalizeExtensions](Humanizer.FractionalizeExtensions.md 'Humanizer\.FractionalizeExtensions') | Contains extension methods for converting decimals to common fractions\. |
 | [HeadingExtensions](Humanizer.HeadingExtensions.md 'Humanizer\.HeadingExtensions') | Contains extensions to transform a number indicating a heading into the textual representation of the heading\. |
 | [In](Humanizer.In.md 'Humanizer\.In') | |
 | [In\.Eight](Humanizer.In.Eight.md 'Humanizer\.In\.Eight') | |
@@ -84,6 +87,7 @@
 | [StringDehumanizeExtensions](Humanizer.StringDehumanizeExtensions.md 'Humanizer\.StringDehumanizeExtensions') | Contains extension methods for dehumanizing strings\. |
 | [StringHumanizeExtensions](Humanizer.StringHumanizeExtensions.md 'Humanizer\.StringHumanizeExtensions') | Contains extension methods for humanizing string values\. |
 | [TimeOnlyToClockNotationExtensions](Humanizer.TimeOnlyToClockNotationExtensions.md 'Humanizer\.TimeOnlyToClockNotationExtensions') | Humanizes TimeOnly into human readable sentence |
+| [TimeSpanDehumanizeExtensions](Humanizer.TimeSpanDehumanizeExtensions.md 'Humanizer\.TimeSpanDehumanizeExtensions') | Contains extension methods for parsing invariant duration text into a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')\. |
 | [TimeSpanHumanizeExtensions](Humanizer.TimeSpanHumanizeExtensions.md 'Humanizer\.TimeSpanHumanizeExtensions') | Humanizes TimeSpan into human readable form |
 | [TimeUnitToSymbolExtensions](Humanizer.TimeUnitToSymbolExtensions.md 'Humanizer\.TimeUnitToSymbolExtensions') | Transform a time unit into a symbol; e\.g\. [Year](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Year 'Humanizer\.TimeUnit\.Year') =\> "a" |
 | [To](Humanizer.To.md 'Humanizer\.To') | A portal to string transformation using IStringTransformer |
@@ -91,8 +95,9 @@
 | [TruncateExtensions](Humanizer.TruncateExtensions.md 'Humanizer\.TruncateExtensions') | Allow strings to be truncated |
 | [Truncator](Humanizer.Truncator.md 'Humanizer\.Truncator') | Gets a ITruncator |
 | [TupleizeExtensions](Humanizer.TupleizeExtensions.md 'Humanizer\.TupleizeExtensions') | Convert int to named tuple strings \(1 \-\> 'single', 2\-\> 'double' etc\.\)\. Only values 1\-10, 100, and 1000 have specific names\. All others will return 'n\-tuple'\. |
-| [Vocabularies](Humanizer.Vocabularies.md 'Humanizer\.Vocabularies') | Container for registered Vocabularies\.  At present, only a single vocabulary is supported: Default\. |
-| [Vocabulary](Humanizer.Vocabulary.md 'Humanizer\.Vocabulary') | A container for exceptions to simple pluralization/singularization rules\. Vocabularies\.Default contains an extensive list of rules for US English\. At this time, multiple vocabularies and removing existing rules are not supported\. |
+| [Vocabularies](Humanizer.Vocabularies.md 'Humanizer\.Vocabularies') | Container for registered vocabularies\. At present, only a single vocabulary is supported: Default\. |
+| [Vocabulary](Humanizer.Vocabulary.md 'Humanizer\.Vocabulary') | A container for custom acronym casing and exceptions to simple pluralization/singularization rules\. Vocabularies\.Default contains an extensive list of rules for US English and supports process\-wide acronym registration\. At this time, multiple vocabularies and removing existing rules are not supported\. |
+| [WordsToDecimalNumberExtension](Humanizer.WordsToDecimalNumberExtension.md 'Humanizer\.WordsToDecimalNumberExtension') | Converts English decimal number words into [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') values\. |
 | [WordsToNumberExtension](Humanizer.WordsToNumberExtension.md 'Humanizer\.WordsToNumberExtension') | Converts localized number words back into numeric values\. Parsing is culture\-aware, honors locale inheritance, and supports the same natural high\-range forms that the locale authoring data exposes through `number.words` and `number.parse`\. |
 
 | Structs | |
@@ -109,12 +114,15 @@
 | [IDateTimeOffsetHumanizeStrategy](Humanizer.IDateTimeOffsetHumanizeStrategy.md 'Humanizer\.IDateTimeOffsetHumanizeStrategy') | Implement this interface to create a new strategy for DateTime\.Humanize and hook it in the Configurator\.DateTimeOffsetHumanizeStrategy |
 | [IDateToOrdinalWordConverter](Humanizer.IDateToOrdinalWordConverter.md 'Humanizer\.IDateToOrdinalWordConverter') | Converts dates into the localized text used by `ToOrdinalWords`\. |
 | [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter') | Localizes Humanizer's number, date, duration, and unit formatting\. |
+| [ILongOrdinalizer](Humanizer.ILongOrdinalizer.md 'Humanizer\.ILongOrdinalizer') | Localizes the ordinal form of a 64\-bit integer\. |
 | [INumberToWordsConverter](Humanizer.INumberToWordsConverter.md 'Humanizer\.INumberToWordsConverter') | Converts numbers into locale\-specific words, ordinals, and tuple names\. |
 | [IOrdinalizer](Humanizer.IOrdinalizer.md 'Humanizer\.IOrdinalizer') | Localizes the ordinal form of a number\. |
 | [IStringTransformer](Humanizer.IStringTransformer.md 'Humanizer\.IStringTransformer') | Can transform a string |
 | [ITimeOnlyHumanizeStrategy](Humanizer.ITimeOnlyHumanizeStrategy.md 'Humanizer\.ITimeOnlyHumanizeStrategy') | Implement this interface to create a new strategy for TimeOnly\.Humanize and hook it in the Configurator\.TimeOnlyHumanizeStrategy |
 | [ITimeOnlyToClockNotationConverter](Humanizer.ITimeOnlyToClockNotationConverter.md 'Humanizer\.ITimeOnlyToClockNotationConverter') | Converts times into the localized text used by `ToClockNotation`\. |
+| [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy') | Defines a strategy for converting [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') values into human\-readable text\. |
 | [ITruncator](Humanizer.ITruncator.md 'Humanizer\.ITruncator') | Can truncate a string\. |
+| [IWordsToDecimalNumberConverter](Humanizer.IWordsToDecimalNumberConverter.md 'Humanizer\.IWordsToDecimalNumberConverter') | Converts localized decimal number words into [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') values\. |
 | [IWordsToNumberConverter](Humanizer.IWordsToNumberConverter.md 'Humanizer\.IWordsToNumberConverter') | Converts localized number words into numeric values\. |
 
 | Enums | |
