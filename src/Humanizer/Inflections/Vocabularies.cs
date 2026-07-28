@@ -55,7 +55,7 @@ public static class Vocabularies
         _default.AddSingular("(^[m|l])ice$", "$1ouse");
         _default.AddSingular("(?<!^[a-z])(o)es$", "$1");
         _default.AddSingular("(shoe)s$", "$1");
-        _default.AddSingular("(cris|ax|test)es$", "$1is");
+        _default.AddSingular("(^ax|cris|test)es$", "$1is");
         _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)i$", "$1us");
         _default.AddSingular("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis)es$", "$1");
         _default.AddSingular("^(ox)en", "$1");
