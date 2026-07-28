@@ -396,6 +396,8 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["matrix", "matrices"];
 
         yield return ["axis", "axes"];
+        yield return ["coordinate_axis", "coordinate_axes"];
+        yield return ["CoordinateAxis", "CoordinateAxes"];
         yield return ["tax", "taxes"];
         yield return ["fax", "faxes"];
         yield return ["surtax", "surtaxes"];
