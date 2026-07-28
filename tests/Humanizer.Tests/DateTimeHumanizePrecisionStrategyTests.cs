@@ -105,6 +105,12 @@ public class DateTimeHumanizePrecisionStrategyTests
     [InlineData(31, "one month ago")]
     [InlineData(43, "one month ago")]
     [InlineData(53, "2 months ago")]
+    [InlineData(89, "3 months ago")]
+    [InlineData(90, "3 months ago")]
+    [InlineData(91, "3 months ago")]
+    [InlineData(729, "2 years ago")]
+    [InlineData(730, "2 years ago")]
+    [InlineData(731, "2 years ago")]
     public void DaysAgo(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past, DefaultPrecision);
 
@@ -117,6 +123,12 @@ public class DateTimeHumanizePrecisionStrategyTests
     [InlineData(31, "one month from now")]
     [InlineData(43, "one month from now")]
     [InlineData(53, "2 months from now")]
+    [InlineData(89, "3 months from now")]
+    [InlineData(90, "3 months from now")]
+    [InlineData(91, "3 months from now")]
+    [InlineData(729, "2 years from now")]
+    [InlineData(730, "2 years from now")]
+    [InlineData(731, "2 years from now")]
     public void DaysFromNow(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future, DefaultPrecision);
 

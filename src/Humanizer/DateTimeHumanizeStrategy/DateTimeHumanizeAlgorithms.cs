@@ -75,8 +75,7 @@ static class DateTimeHumanizeAlgorithms
         if (days > 31 && days < 365 * precision)
         {
             var factor = Convert.ToInt32(Math.Floor((double)days / 30));
-            var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 30));
-            months = days >= 30 * (factor + precision) ? maxMonths : maxMonths - 1;
+            months = days >= 30 * (factor + precision) ? factor + 1 : factor;
         }
 
         // year calculation
@@ -88,8 +87,7 @@ static class DateTimeHumanizeAlgorithms
         if (days > 365)
         {
             var factor = Convert.ToInt32(Math.Floor((double)days / 365));
-            var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 365));
-            years = days >= 365 * (factor + precision) ? maxMonths : maxMonths - 1;
+            years = days >= 365 * (factor + precision) ? factor + 1 : factor;
         }
 
         // start computing result from larger units to smaller ones
