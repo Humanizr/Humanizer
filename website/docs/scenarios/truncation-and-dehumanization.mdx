@@ -1,7 +1,7 @@
 ---
 id: truncation-and-dehumanization
 title: Truncation and dehumanization
-sidebar_position: 2
+sidebar_position: 3
 diataxis: how-to
 persona: returning developer
 ---
@@ -13,29 +13,42 @@ import strings from '!!raw-loader!../_examples/scenarios-strings/Program.cs';
 
 ## Orientation
 
-Use `Truncate` to fit display text into a length or word budget. Use string `Dehumanize` to convert readable words to PascalCase when you control the vocabulary and only need an identifier-shaped value.
+Use `Truncate` to fit display text into a character or word budget without hand-written substring rules. Select a built-in `ITruncator` according to what the length means. Use string `Dehumanize` separately when readable words must become a PascalCase-shaped identifier.
 
 ## Example
 
-The truncation and dehumanization calls in this verified source produce `Customer…` and `CustomerOrderHistory`:
+The truncation and dehumanization calls in this verified source produce `Customer…`, preserve four complete words, and produce `CustomerOrderHistory`:
 
 <CodeBlock language="csharp" title="Program.cs">{strings}</CodeBlock>
 
-The default truncator uses the single-character ellipsis `…`. The same source
-also verifies `Truncator.FixedNumberOfWords`; other built-in strategies can
-count characters, preserve whole words, or truncate from the left.
+### Choose the truncator
+
+| Strategy | Meaning of `length` |
+| --- | --- |
+| `FixedLength` | Total returned length, including the marker |
+| `FixedNumberOfCharacters` | Characters retained before adding the marker |
+| `FixedNumberOfWords` | Whole words retained |
+| `DynamicLengthAndPreserveWords` | Total length budget, backing up to a word boundary |
+| `DynamicNumberOfCharactersAndPreserveWords` | Character budget, backing up to a word boundary |
+
+The default marker is the single-character ellipsis `…`. Pass a custom marker and `TruncateFrom.Left` when preserving the end of a value matters. Implement `ITruncator` only when none of the five contracts matches the application’s display rule.
+
+### Dehumanize readable text
+
+`Dehumanize` removes word separators and produces PascalCase. It is suitable for application-controlled labels and scaffolding, not for reconstructing an original identifier.
 
 ## Pitfall
 
-The meaning of `length` depends on the selected `ITruncator`, and the truncation marker consumes space for fixed-length strategies. `Dehumanize` is not a lossless inverse: punctuation and word boundaries can be discarded.
+The marker consumes budget for fixed-length strategies. When the marker itself fills the available length, preserve-word strategies can return only the marker or an empty result. Truncation preserves null input, but an application still needs to decide whether null and empty text mean the same thing.
+
+`Dehumanize` is not a lossless inverse: punctuation, casing, acronym, and word-boundary information can be discarded.
 
 ## Version notes
 
-The verified source runs against `3.0.10` and current. Consult the selected-version API for the available `Truncator` strategies and overload order before changing an existing call.
+The verified source runs against `3.0.10` and current. Truncator strategies exist across the documented corpus, but overload order and Unicode behavior vary; consult the selected-version API before editing an old call.
 
 ## Related guides and API
 
 - [Strings and casing](./strings-and-casing.mdx)
-- [Enums and collections](./enums-and-collections.mdx)
-- [StringHumanizeExtensions API](../api/Humanizer.StringHumanizeExtensions.md)
+- [Collections and tuple names](./collections-and-tuples.mdx)
 - [Selected-version API reference](../api/index.md)

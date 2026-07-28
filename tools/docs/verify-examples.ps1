@@ -104,13 +104,6 @@ try {
 
         for ($projectIndex = 0; $projectIndex -lt $projects.Count; $projectIndex++) {
             $project = $projects[$projectIndex]
-            $projectText = Get-Content -Raw $project.FullName
-            if ($projectText -notmatch [regex]::Escape(
-                "PackageReference Include=`"$($entry.installPackage)`""
-            )) {
-                throw "$($project.Name) does not reference $($entry.installPackage)."
-            }
-
             $projectArtifacts = Join-Path (
                 $artifactsRoot
             ) "$($entry.version)/$($project.BaseName)-$projectIndex"

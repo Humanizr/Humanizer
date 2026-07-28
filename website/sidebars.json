@@ -10,18 +10,59 @@
         "start/installation",
         "start/package-selection",
         "start/quick-start",
-        "start/configuration"
+        "start/configuration",
+        "start/troubleshooting"
       ]
     },
     {
       "type": "category",
       "label": "Scenarios",
       "items": [
+        "scenarios/scenarios",
         "scenarios/strings-and-casing",
         "scenarios/truncation-and-dehumanization",
-        "scenarios/dates-times-durations-and-age",
-        "scenarios/numbers-words-ordinals-roman-bytes-and-quantities",
-        "scenarios/enums-and-collections",
+        "scenarios/inflection-and-quantities",
+        {
+          "type": "category",
+          "label": "Date and time",
+          "link": {
+            "type": "doc",
+            "id": "scenarios/dates-times-durations-and-age"
+          },
+          "items": [
+            "scenarios/relative-dates-and-times",
+            "scenarios/durations-and-ages",
+            "scenarios/fluent-dates-and-time-spans",
+            "scenarios/spoken-dates-and-clock-times"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Numbers and data",
+          "link": {
+            "type": "doc",
+            "id": "scenarios/numbers-words-ordinals-roman-bytes-and-quantities"
+          },
+          "items": [
+            "scenarios/numbers-in-words-and-ordinals",
+            "scenarios/parse-number-words",
+            "scenarios/byte-sizes-and-rates",
+            "scenarios/metric-numerals",
+            "scenarios/specialized-formatting-utilities"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Enums and collections",
+          "link": {
+            "type": "doc",
+            "id": "scenarios/enums-and-collections"
+          },
+          "items": [
+            "scenarios/enums-and-flags",
+            "scenarios/collections-and-tuples"
+          ]
+        },
         "scenarios/localization-and-extensibility"
       ]
     },
@@ -40,7 +81,8 @@
       "type": "category",
       "label": "Concepts",
       "items": [
-        "concepts/culture-and-configuration"
+        "concepts/culture-and-configuration",
+        "concepts/trimming-and-native-aot"
       ]
     },
     {
@@ -50,7 +92,8 @@
         "upgrading/upgrading",
         "upgrading/2-x-lines",
         "upgrading/version-3-migration",
-        "upgrading/version-3-patch-line"
+        "upgrading/version-3-patch-line",
+        "upgrading/main-preview"
       ]
     },
     {

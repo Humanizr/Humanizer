@@ -7,6 +7,9 @@ CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 AssertEqual("Customer order history", "CustomerOrderHistory".Humanize());
 AssertEqual("Customer Order History", "CustomerOrderHistory".Humanize(LetterCasing.Title));
 AssertEqual("CustomerOrderHistory", "customer order history".Dehumanize());
+AssertEqual("customer_order_history", "CustomerOrderHistory".Underscore());
+AssertEqual("customer-order-history", "CustomerOrderHistory".Kebaberize());
+AssertEqual("CustomerOrderHistory", "customer_order_history".Pascalize());
 AssertEqual("Customer…", "Customer order history".Truncate(9));
 AssertEqual(
     "Text with more words…",

@@ -40,6 +40,11 @@ Console.WriteLine(new[] { "un", "deux", "trois" }.Humanize());
 The first two calls are explicit. The collection call uses ambient UI culture
 because collection formatting has no culture parameter.
 
+For application code, establish ambient culture once at the request, message,
+or background-job boundary. Keep using explicit overloads inside shared
+services where possible; this prevents one concurrent operation from changing
+another operation's output.
+
 ## Pitfall
 
 `CurrentCulture` and `CurrentUICulture` serve different .NET concerns.
@@ -68,5 +73,6 @@ locale-package graph documented in their snapshot.
 
 - [Supported cultures and capabilities](./supported-cultures.mdx)
 - [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
 - [Package selection](../start/package-selection.md)
 - [Selected-version API reference](../api/index.md)

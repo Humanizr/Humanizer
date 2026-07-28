@@ -1,56 +1,53 @@
 ---
 id: dates-times-durations-and-age
-title: Dates, times, durations, and age
-sidebar_position: 3
-diataxis: how-to
+title: Date, time, duration, and age scenarios
+sidebar_position: 6
+diataxis: reference
 persona: returning developer
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import dates from '!!raw-loader!../_examples/scenarios-dates/Program.cs';
 
-# Dates, times, durations, and age
+# Date, time, duration, and age scenarios
 
 ## Orientation
 
-Choose the operation by meaning:
+Choose the guide by the meaning of the value and the sentence you need:
 
-- Humanize `DateTime` or `DateTimeOffset` for a relative phrase such as
-  “yesterday.” Humanizer `2.11.10` and later also support `DateOnly` and
-  `TimeOnly` on compatible target frameworks.
-- Humanize `TimeSpan` for elapsed duration such as “2 hours, 5 minutes.”
-- In `3.0.1` and later, call `ToAge` on a `TimeSpan` for an age phrase such as
-  “two years old.”
+| Task | Focused guide |
+| --- | --- |
+| Produce “yesterday” or “3 hours ago” | [Relative dates and times](./relative-dates-and-times.mdx) |
+| Produce “2 hours, 5 minutes” or an age phrase | [Durations and ages](./durations-and-ages.mdx) |
+| Build a readable `TimeSpan`, `DateTime`, or `DateOnly` | [Fluent dates and time spans](./fluent-dates-and-time-spans.mdx) |
+| Produce “January 25th, 2022” or “twenty-five past one” | [Spoken dates and clock times](./spoken-dates-and-clock-times.mdx) |
 
 ## Example
 
-Inject the comparison instant and culture instead of reading the clock inside an example or test:
+This verified source demonstrates the two most common display boundaries: a relative UTC date with an injected comparison instant and a two-unit elapsed duration:
 
 <CodeBlock language="csharp" title="Program.cs">{dates}</CodeBlock>
 
-The program deterministically prints `yesterday; 2 hours, 5 minutes`.
+It prints `yesterday; 2 hours, 5 minutes`. Follow the focused guides for the full overload contracts.
 
-`precision` controls how many non-empty duration units are returned. `maxUnit` and `minUnit` constrain which units may appear.
+### Pick a model before an API
 
-Humanizer `3.0.1` and later can render an age with
-`TimeSpan.FromDays(750).ToAge(culture, toWords: true)`. It returns
-`two years old` for the culture used above.
+- Use `DateTimeOffset` when an instant and offset matter.
+- Use `DateOnly` for a calendar date without time-zone meaning.
+- Use `TimeOnly` for a wall-clock time without a date.
+- Use `TimeSpan` for elapsed duration, not calendar arithmetic.
 
 ## Pitfall
 
-`TimeSpan` has no calendar context. Humanizer therefore approximates months and years when decomposing a duration. Use calendar arithmetic on `DateOnly` or `DateTime` when month length, leap years, or birthdays must be exact.
-
-For `DateTime`, keep the input and comparison basis consistent: explicitly choose UTC or local behavior and inject `dateToCompareAgainst`.
+Reading `Now` inside formatting makes examples, tests, and cache behavior unstable. Inject comparison values and set culture explicitly. A `TimeSpan` has no calendar context, so months, years, and ages are approximations; use date arithmetic when leap years, month length, or birthdays must be exact.
 
 ## Version notes
 
-`DateOnly` and `TimeOnly` humanization first appears in `2.11.10` and requires a
-compatible target framework. `ToAge` first appears in `3.0.1`. The shared
-`DateTime`, `DateTimeOffset`, and `TimeSpan` calls shown here run across the
-supported corpus.
+`DateTime`, `DateTimeOffset`, and `TimeSpan` calls span the supported corpus. `DateOnly` and `TimeOnly` humanization begin in `2.11.10`; clock notation begins in `2.13.14`; `ToAge` begins in `3.0.1`. Historical sidebars must omit unavailable focused guides.
 
 ## Related guides and API
 
-- [Quick start](../start/quick-start.mdx)
+- [Relative dates and times](./relative-dates-and-times.mdx)
+- [Durations and ages](./durations-and-ages.mdx)
 - [Culture and global configuration](../concepts/culture-and-configuration.mdx)
 - [Selected-version API reference](../api/index.md)

@@ -1,3 +1,7 @@
+param(
+    [switch]$RequireNativeAot
+)
+
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 $manifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
@@ -57,6 +61,8 @@ try {
 
 & (Join-Path $PSScriptRoot "verify-manifest.ps1")
 & (Join-Path $PSScriptRoot "build.ps1") -Version "3.0.10" -ValidateOnly
+& (Join-Path $PSScriptRoot "verify-aot.ps1") `
+    -RequireNativeAot:$RequireNativeAot
 
 $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-tests-$([guid]::NewGuid().ToString('N'))"
 New-Item -ItemType Directory -Path $tempRoot | Out-Null
@@ -109,13 +115,21 @@ try {
         (Join-Path $repoRoot "website/docs/_examples/quick-start") `
         $badExampleRoot `
         -Recurse
-    $badExampleProject = Join-Path $badExampleRoot "QuickStart.csproj"
-    $badExampleText = (Get-Content -Raw $badExampleProject).Replace(
+    foreach ($buildFile in @(
+        "Directory.Build.props",
+        "Directory.Build.targets"
+    )) {
+        Copy-Item `
+            (Join-Path $repoRoot "website/docs/_examples/$buildFile") `
+            $badExampleRoot
+    }
+    $badExampleTargets = Join-Path $badExampleRoot "Directory.Build.targets"
+    $badExampleText = (Get-Content -Raw $badExampleTargets).Replace(
         'Version="$(HumanizerPackageVersion)"',
         'Version="3.0.10"'
     )
     [System.IO.File]::WriteAllText(
-        $badExampleProject,
+        $badExampleTargets,
         $badExampleText,
         [System.Text.UTF8Encoding]::new($false)
     )

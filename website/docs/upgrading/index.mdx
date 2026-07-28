@@ -83,6 +83,11 @@ order. This is a compatibility path, not a list of every feature or fix.
 introduced Roslyn-versioned analyzer assets that are absent from `3.0.1`;
 `3.0.10` then corrected fallback selection for older build hosts.
 
+The chooser intentionally stops at latest stable `3.0.10`. If you are
+deliberately testing the repository checkout, review
+[3.0.10 to main/preview](./main-preview.mdx) separately. The preview has no
+guessed stable version or installation command.
+
 ## Example
 
 For an upgrade from `2.13.14` to `3.0.10`, the chooser produces this
@@ -115,5 +120,6 @@ major/minor line.
 
 - [Humanizer 3 migration](./version-3-migration.mdx)
 - [Humanizer 3 patch line](./version-3-patch-line.mdx)
+- [Prepare for main/preview](./main-preview.mdx)
 - [Analyzer migration and CI](../analyzer/index.mdx)
 - [Selected-version API reference](../api/index.md)

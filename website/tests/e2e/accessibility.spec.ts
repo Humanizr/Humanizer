@@ -57,4 +57,25 @@ for (const colorScheme of ['light', 'dark'] as const) {
       expect(violations).toEqual([]);
     });
   }
+
+  test(`ordinary Markdown tables are keyboard accessible at 320px in ${colorScheme} mode`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({width: 320, height: 720});
+    await page.emulateMedia({colorScheme});
+    await page.goto('/docs/next/scenarios/');
+
+    const table = page.locator('article table').first();
+    await expect(table).toBeVisible();
+    await expect(table).toHaveAttribute('tabindex', '0');
+    await table.focus();
+    await expect(table).toBeFocused();
+
+    const results = await new AxeBuilder({page}).analyze();
+    const violations = results.violations.filter(({impact}) =>
+      ['serious', 'critical'].includes(impact ?? ''),
+    );
+
+    expect(violations).toEqual([]);
+  });
 }

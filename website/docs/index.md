@@ -17,14 +17,16 @@ number, enum, collection, and localization tasks.
 - [Install Humanizer](./start/installation.mdx) — choose a version and add the package.
 - [Five-minute quick start](./start/quick-start.mdx) — run a verified first example.
 - [Choose the right package](./start/package-selection.md) — understand the release-specific package layout.
+- [Troubleshoot Humanizer](./start/troubleshooting.mdx) — diagnose version, culture, parser, analyzer, and AOT problems.
 
 ## Solve a task
 
-- [Strings and casing](./scenarios/strings-and-casing.mdx)
-- [Dates, times, durations, and age](./scenarios/dates-times-durations-and-age.mdx)
-- [Numbers, words, ordinals, Roman numerals, bytes, and quantities](./scenarios/numbers-words-ordinals-roman-bytes-and-quantities.mdx)
-- [Enums and collections](./scenarios/enums-and-collections.mdx)
-- [Localization and extensibility](./scenarios/localization-and-extensibility.mdx)
+- [Find a Humanizer scenario](./scenarios/index.mdx) — route from the value you have to the text you need.
+- [Inflect nouns and render quantities](./scenarios/inflection-and-quantities.mdx)
+- [Work with dates, times, durations, and ages](./scenarios/dates-times-durations-and-age.mdx)
+- [Format numbers, words, byte sizes, and rates](./scenarios/numbers-words-ordinals-roman-bytes-and-quantities.mdx)
+- [Humanize enums, flags, and collections](./scenarios/enums-and-collections.mdx)
+- [Configure localization and extensibility](./scenarios/localization-and-extensibility.mdx)
 
 For exact signatures, open the [API reference](./api/index.md). The version
 selector keeps guides, examples, and API pages in the same release.
@@ -39,4 +41,6 @@ selector keeps guides, examples, and API pages in the same release.
 ## Maintain a project
 
 - [Plan an upgrade](./upgrading/index.mdx) — follow every compatibility boundary between two supported versions.
+- [Evaluate main/preview](./upgrading/main-preview.mdx) — review verified differences after `3.0.10` without guessing a release number.
 - [Migrate namespaces with the analyzer](./analyzer/index.mdx) — configure and run the bundled analyzer locally and in CI.
+- [Publish trimmed or Native AOT](./concepts/trimming-and-native-aot.mdx) — choose linker-safe enum APIs and run the publish proof.

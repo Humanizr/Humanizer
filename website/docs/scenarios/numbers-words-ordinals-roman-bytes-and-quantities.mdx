@@ -1,51 +1,48 @@
 ---
 id: numbers-words-ordinals-roman-bytes-and-quantities
-title: Numbers, words, ordinals, Roman numerals, bytes, and quantities
-sidebar_position: 4
-diataxis: how-to
+title: Number and data formatting scenarios
+sidebar_position: 11
+diataxis: reference
 persona: returning developer
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import numbers from '!!raw-loader!../_examples/scenarios-numbers/Program.cs';
 
-# Numbers, words, ordinals, Roman numerals, bytes, and quantities
+# Number and data formatting scenarios
 
 ## Orientation
 
-Humanizer provides distinct operations for distinct display jobs:
+Choose one operation instead of treating every formatted number as the same kind of string:
 
-- `ToWords` and `ToOrdinalWords` spell out numbers.
-- In `3.0.1` and later, `ToNumber` parses supported localized number words.
-- `Ordinalize` adds a numeric ordinal suffix.
-- `ToRoman` and `FromRoman` convert Roman numerals.
-- `ByteSize` and numeric byte extensions choose and format data units.
-- `ToQuantity` combines a count with singular or plural text.
+| Task | Focused guide |
+| --- | --- |
+| Spell cardinal or ordinal numbers | [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx) |
+| Parse a localized number phrase | [Parse number words](./parse-number-words.mdx) |
+| Inflect a noun and combine it with a count | [Inflection and quantities](./inflection-and-quantities.mdx) |
+| Format or parse storage and rates | [Byte sizes and rates](./byte-sizes-and-rates.mdx) |
+| Format or parse powers of 1000 | [Metric numerals](./metric-numerals.mdx) |
+| Use Roman, compass, multiplier, tuple, or symbol helpers | [Specialized formatting utilities](./specialized-formatting-utilities.mdx) |
 
 ## Example
 
-This source sets English culture explicitly and verifies every result it prints:
+This verified survey sets English culture and exercises one representative call from several families:
 
 <CodeBlock language="csharp" title="Program.cs">{numbers}</CodeBlock>
 
-Pass a `CultureInfo` directly wherever the overload permits it. APIs such as `ToQuantity` also use the ambient culture, so set `CurrentCulture` and `CurrentUICulture` at the application boundary.
+Focused guides separate the typed model, parsing contract, localization behavior, and failure modes. Pass `CultureInfo` directly where an overload permits it; scope both ambient cultures for APIs without a culture argument.
 
 ## Pitfall
 
-Roman numeral conversion supports integers from 1 through 3999. Treat external Roman or number-word input as untrusted: prefer `TryToNumber` when a failed parse is expected.
-
-`ByteSize` uses binary byte multiples while presenting familiar unit symbols. Do not use its humanized output as a machine-readable size.
+Do not persist humanized number text as the numeric source of truth. `ByteSize` uses binary multiples, metric numerals use decimal powers, number-word parsing has locale-specific grammar, and Roman numerals have a strict range. Keep the typed value and choose a parser only for an input format the application explicitly accepts.
 
 ## Version notes
 
-The verified calls run across the supported corpus. Number-word parsing is not
-available in Humanizer `2.x`; `ToNumber` and `TryToNumber` first appear in
-`3.0.1` with `int` results, while current builds return `long`. Consult the
-selected-version signature before adding a parser or assigning an explicit
-numeric type.
+The survey’s basic calls run on `3.0.10` and current. Number-word parsing begins in `3.0.1` and changes from `int` to `long` on `main/preview`. Culture-aware byte-rate formatting begins in `2.13.14`. Historical snapshots must remove or replace unavailable focused pages.
 
 ## Related guides and API
 
+- [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
+- [Byte sizes and rates](./byte-sizes-and-rates.mdx)
 - [Localization and extensibility](./localization-and-extensibility.mdx)
-- [Enums and collections](./enums-and-collections.mdx)
 - [Selected-version API reference](../api/index.md)

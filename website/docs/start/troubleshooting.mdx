@@ -1,0 +1,67 @@
+---
+id: troubleshooting
+title: Troubleshoot Humanizer
+sidebar_position: 6
+diataxis: how-to
+persona: application developer
+example: illustrative
+---
+
+# Troubleshoot Humanizer
+
+## Orientation
+
+Start with the resolved package version, target framework, culture, exact API call, and platform. Most apparent Humanizer failures come from following documentation for another version, resolving a different package asset, leaving ambient culture implicit, or treating locale-dependent presentation text as invariant data.
+
+## Example
+
+Capture a minimal reproduction before changing configuration:
+
+```csharp
+using System.Globalization;
+using Humanizer;
+
+var culture = CultureInfo.GetCultureInfo("en-US");
+var value = 42.ToWords(culture);
+Console.WriteLine($"{typeof(Configurator).Assembly.GetName().Version}: {value}");
+```
+
+Run `dotnet list package --include-transitive`, inspect the target in `project.assets.json`, and select that Humanizer version in this site.
+
+### Symptoms and actions
+
+| Symptom | Evidence to collect | Action |
+| --- | --- | --- |
+| API page or method is missing | Package version, selected docs version, TFM | Switch the site version; check the page’s version notes and selected-version API root. |
+| `MissingMethodException` or `TypeLoadException` | All direct/transitive Humanizer versions | Align `Humanizer`, `Humanizer.Core`, and historical locale packages; clean `bin`/`obj`, restore, and rebuild. |
+| Output is English or the wrong regional form | `CurrentCulture`, `CurrentUICulture`, explicit argument, package version | Pass culture directly where possible; otherwise set both ambient cultures at the request/job boundary and check locale capability. |
+| Output differs on Windows, Linux, or macOS | OS, TFM, culture, ICU/NLS mode | Compare .NET globalization data and Humanizer’s generated platform-formatting coverage; avoid asserting platform-owned text without an explicit override. |
+| `ToNumber` or `ByteSize.Parse` rejects input | Exact text and culture/provider | Use `TryToNumber` or `TryParse`; inspect the first unrecognized number token and byte unit suffix/case. |
+| Enum input throws `NoMatchFoundException` | Enum members/metadata and input | Use an unambiguous label; pass `OnNoMatch.ReturnsNull` when failure is expected. Matching is case-insensitive. |
+| `HUMANIZER001` | Resolved Humanizer version and source location | Apply the namespace code fix or configure a narrow intentional exception. |
+| `CS8032` or `AD0001` from Humanizer analyzer | SDK/MSBuild and package version | Upgrade to `3.0.10`, clear stale build outputs, and restore. Do not add Roslyn dependencies to the application. |
+| `IL2026` or `IL3050` around enum parsing | Exact overload | Replace runtime `DehumanizeTo(string, Type, ...)` with generic `DehumanizeTo<TEnum>`. |
+| Search or a copied URL opens another API version | Current selector and URL | Re-select the version, then navigate from its API root. Narrative and API routes are versioned together. |
+
+### Reduce culture issues
+
+Set culture explicitly in a one-file reproduction. If the wrong result persists, compare the selected release’s capability page and note whether the culture resolves directly or through a parent. Include platform and TFM when reporting a locale issue.
+
+### Reduce package and analyzer issues
+
+Use `dotnet restore --force-evaluate` after aligning versions. A compiler diagnostic from the analyzer proves it loaded; a loader diagnostic means the host could not load or select the packaged analyzer.
+
+## Pitfall
+
+Do not “fix” a localized output difference by persisting the current humanized string or by setting process-wide culture inside a request. That hides the input boundary and creates concurrent, version-dependent behavior. Keep typed values, scope culture, and assert only output the application intentionally owns.
+
+## Version notes
+
+Package layout, target frameworks, analyzer assets, locale implementation, and API routes all vary across the supported corpus. `3.0.10` is the latest stable boundary. `main/preview` describes the checkout and is not named `3.5` or `4` until release authority assigns a version.
+
+## Related guides and API
+
+- [Install Humanizer](./installation.mdx)
+- [Choose explicit and ambient cultures](../languages/using-cultures.mdx)
+- [Analyzer migration and CI](../analyzer/index.mdx)
+- [Selected-version API reference](../api/index.md)

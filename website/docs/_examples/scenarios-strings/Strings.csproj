@@ -1,24 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
     <DocumentationArea>Scenarios</DocumentationArea>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(HumanizerProject)' != ''">
-    <ProjectReference Include="$(HumanizerProject)" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(HumanizerProject)' == '' and '$(HumanizerPackageVersion)' != ''">
-    <PackageReference Include="Humanizer" Version="$(HumanizerPackageVersion)" />
-  </ItemGroup>
-
-  <Target Name="RequireHumanizerInput" BeforeTargets="Restore">
-    <Error
-      Condition="'$(HumanizerProject)' == '' and '$(HumanizerPackageVersion)' == ''"
-      Text="Set HumanizerProject or HumanizerPackageVersion." />
-  </Target>
 </Project>

@@ -1,0 +1,47 @@
+---
+id: numbers-in-words-and-ordinals
+title: Write numbers and ordinals in words
+sidebar_position: 12
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import numbers from '!!raw-loader!../_examples/scenarios-numbers/Program.cs';
+
+# Write numbers and ordinals in words
+
+## Orientation
+
+Use `ToWords` for cardinal words, `ToOrdinalWords` for word ordinals, and `Ordinalize` when the number should remain numeric with a localized ordinal form. Select culture explicitly and add grammatical gender or word form only when the selected locale advertises that capability.
+
+## Example
+
+The shared number example verifies cardinal words, ordinal words, a numeric ordinal, a Roman numeral, a byte size, and a quantity:
+
+<CodeBlock language="csharp" title="Program.cs">{numbers}</CodeBlock>
+
+### Choose the output
+
+| Desired output | API |
+| --- | --- |
+| `forty-two` | `42.ToWords(culture)` |
+| `twenty-first` | `21.ToOrdinalWords(culture)` |
+| `21st` | `21.Ordinalize(culture)` |
+| A locale-specific tuple word | `number.ToTuple(culture)` |
+
+`ToWords` supports `int` and `long` cardinal values. Word ordinals are `int`-based. Some overloads accept `GrammaticalGender`, `WordForm`, or `addAnd`; use named arguments so intent remains clear across overload changes.
+
+## Pitfall
+
+Grammar features differ by locale. Do not infer gender, abbreviation, Eifeler, or ordinal-word support from cardinal support. String `Ordinalize` parses the input using culture and can throw for malformed or out-of-range text; prefer the numeric overload when the application already has a number.
+
+## Version notes
+
+The basic number-word and ordinal APIs span the documented corpus, but overloads and locale grammar have changed. The verified source targets `3.0.10` and current. Historical snapshots must link to their own capability data and signatures.
+
+## Related guides and API
+
+- [Parse number words](./parse-number-words.mdx)
+- [Metric numerals](./metric-numerals.mdx)
+- [Selected-version number-word and ordinal APIs](../api/index.md)

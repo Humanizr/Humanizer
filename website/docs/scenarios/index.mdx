@@ -1,0 +1,52 @@
+---
+id: scenarios
+title: Find a Humanizer scenario
+sidebar_position: 1
+diataxis: reference
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import quickStart from '!!raw-loader!../_examples/quick-start/Program.cs';
+
+# Find a Humanizer scenario
+
+## Orientation
+
+Start with the value you already have and the text you need to produce. Humanizer keeps dates, durations, numbers, byte sizes, enums, and collections as typed values until the display boundary; each guide below shows the operation, deterministic culture or clock setup, failure behavior, and the versions where the API exists.
+
+| You have | You want | Start here |
+| --- | --- | --- |
+| An identifier or label | Readable text or another identifier convention | [Strings and casing](./strings-and-casing.mdx) |
+| A noun and count | Correct singular/plural quantity text | [Inflection and quantities](./inflection-and-quantities.mdx) |
+| A date, time, or duration | Relative, elapsed, fluent, or spoken output | [Date and time scenarios](./dates-times-durations-and-age.mdx) |
+| A number or number phrase | Words, ordinals, parsing, metric, or Roman output | [Number and data scenarios](./numbers-words-ordinals-roman-bytes-and-quantities.mdx) |
+| An enum or sequence | A readable label or localized list | [Enum and collection scenarios](./enums-and-collections.mdx) |
+| A culture-specific rule | Explicit culture or custom behavior | [Localization and extensibility](./localization-and-extensibility.mdx) |
+
+## Example
+
+Every substantive scenario imports source compiled against Humanizer `3.0.10` and the current checkout. This smallest example demonstrates the shared rule: set culture explicitly, call Humanizer at the presentation boundary, and assert the result.
+
+<CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
+
+### Less common tasks
+
+- [Truncation and dehumanization](./truncation-and-dehumanization.mdx)
+- [Byte sizes and transfer rates](./byte-sizes-and-rates.mdx)
+- [Specialized formatting utilities](./specialized-formatting-utilities.mdx)
+- [Trimming and Native AOT](../concepts/trimming-and-native-aot.mdx)
+
+## Pitfall
+
+Humanized output is presentation text, not a stable storage or wire format. Keep the original typed value and regenerate text for the active culture. A parser such as `TryToNumber` or `ByteSize.TryParse` has an explicit input contract; it does not make arbitrary humanized output round-trip safe.
+
+## Version notes
+
+The site covers selected releases from `2.10.1` through `3.0.10` plus `main/preview`. Use the version selector before copying a call. Focused pages state important API boundaries, and unavailable pages are removed or replaced in historical snapshots.
+
+## Related guides and API
+
+- [Install Humanizer](../start/installation.mdx)
+- [Troubleshooting](../start/troubleshooting.mdx)
+- [Selected-version API reference](../api/index.md)
