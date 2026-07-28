@@ -18,8 +18,8 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile, CultureIn
     {
     }
 
-    internal PhraseClockNotationConverter WithCulture(CultureInfo culture) =>
-        new(profile, culture);
+    internal PhraseClockNotationConverter WithCulture(CultureInfo requestedCulture) =>
+        new(profile, requestedCulture);
 
     /// <summary>
     /// Converts the given time using the phrase-clock profile.
