@@ -12,10 +12,6 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
         @"(?<!\S)point(?!\S)",
         RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
-    static readonly Regex QuintillionMarker = new(
-        @"(?<!\S)quintillion(?!\S)",
-        RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
-
     static readonly FrozenDictionary<string, char> FractionalDigits =
         new Dictionary<string, char>(StringComparer.OrdinalIgnoreCase)
         {
@@ -139,51 +135,43 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
                 return true;
             }
 
-            var markers = QuintillionMarker.Matches(words);
-            if (markers.Count != 1)
+            var initialUnrecognizedNumber = unrecognizedNumber;
+            var tokens = words.Split([' ', '\t', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+
+            for (var index = tokens.Length - 1; index > 0; index--)
             {
-                digits = string.Empty;
-                return false;
+                if (!integerConverter.TryConvert(tokens[index], out var scale, out _) ||
+                    !TryGetScaleDigits(scale, out var scaleDigits))
+                {
+                    continue;
+                }
+
+                var highWords = string.Join(" ", tokens, 0, index);
+                if (!integerConverter.TryConvert(highWords, out var high, out _) || high <= 0)
+                {
+                    continue;
+                }
+
+                var lowWords = string.Join(" ", tokens, index + 1, tokens.Length - index - 1);
+                var low = 0L;
+                if (lowWords.Length > 0 &&
+                    !integerConverter.TryConvert(lowWords, out low, out _) ||
+                    low < 0 ||
+                    low >= scale)
+                {
+                    continue;
+                }
+
+                digits = string.Concat(
+                    high.ToString(CultureInfo.InvariantCulture),
+                    low.ToString($"D{scaleDigits}", CultureInfo.InvariantCulture));
+                unrecognizedNumber = null;
+                return true;
             }
 
-            var marker = markers[0];
-            var highWords = words[..marker.Index].Trim();
-            var lowWords = words[(marker.Index + marker.Length)..].Trim();
-
-            if (highWords.Length == 0 ||
-                !integerConverter.TryConvert(highWords, out var high, out unrecognizedNumber))
-            {
-                digits = string.Empty;
-                return false;
-            }
-
-            if (high <= 0)
-            {
-                digits = string.Empty;
-                unrecognizedNumber = highWords;
-                return false;
-            }
-
-            var low = 0L;
-            if (lowWords.Length > 0 &&
-                !integerConverter.TryConvert(lowWords, out low, out unrecognizedNumber))
-            {
-                digits = string.Empty;
-                return false;
-            }
-
-            if (low is < 0 or >= 1_000_000_000_000_000_000L)
-            {
-                digits = string.Empty;
-                unrecognizedNumber = lowWords;
-                return false;
-            }
-
-            digits = string.Concat(
-                high.ToString(CultureInfo.InvariantCulture),
-                low.ToString("D18", CultureInfo.InvariantCulture));
-            unrecognizedNumber = null;
-            return true;
+            digits = string.Empty;
+            unrecognizedNumber = initialUnrecognizedNumber;
+            return false;
         }
         catch (OverflowException)
         {
@@ -191,6 +179,23 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
             unrecognizedNumber = words;
             return false;
         }
+    }
+
+    static bool TryGetScaleDigits(long value, out int digits)
+    {
+        digits = 0;
+        if (value < 1000)
+        {
+            return false;
+        }
+
+        while (value % 10 == 0)
+        {
+            value /= 10;
+            digits++;
+        }
+
+        return value == 1;
     }
 
     static string? StripNegativePrefix(ref string words)

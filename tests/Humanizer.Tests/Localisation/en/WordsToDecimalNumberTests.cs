@@ -23,6 +23,14 @@ public class WordsToDecimalNumberTests
         Assert.Equal(expected, parsed.ToString(CultureInfo.InvariantCulture));
     }
 
+    [Fact]
+    public void ParsesLocaleSpecificScaleBeyondLongRange()
+    {
+        var parsed = "ninety-three shankh point one".ToDecimalNumber(new("en-IN"));
+
+        Assert.Equal("9300000000000000000.1", parsed.ToString(CultureInfo.InvariantCulture));
+    }
+
     [Theory]
     [InlineData("one", "one")]
     [InlineData("one point", "point")]
