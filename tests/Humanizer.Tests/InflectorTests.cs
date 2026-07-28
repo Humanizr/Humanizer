@@ -98,6 +98,7 @@ public class InflectorTests
     [InlineData("some-title: The beginning", "Some Title: The Beginning")]
     [InlineData("some_title:_the_beginning", "Some Title: the Beginning")]
     [InlineData("some title: The_beginning", "Some Title: The Beginning")]
+    [InlineData("thisIs3.5mmLong", "This Is 3.5mm Long")]
     public void Titleize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Titleize());
 
