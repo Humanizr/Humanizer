@@ -9,12 +9,7 @@ const pagefindRoot = join(siteRoot, 'pagefind');
 const manifest = JSON.parse(
   await readFile(new URL('../humanizer-versions.json', import.meta.url)),
 );
-const versions = [
-  manifest.versions.find((version) => version.latestStable),
-  manifest.versions.find((version) => version.version === 'current'),
-];
-
-assert(versions.every(Boolean), 'Version manifest is missing stable or preview.');
+const versions = manifest.versions;
 
 const contentTypes = new Map([
   ['.js', 'text/javascript'],
@@ -85,16 +80,16 @@ try {
         .map((candidate) => candidate.url)
         .join(', ')}`,
     );
-    assert.equal(result.meta.version, version.version);
+    assert.equal(result.meta.version, version.label);
     assert.match(
       result.meta.title,
       new RegExp(version.label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
     );
-    assert(Object.hasOwn(filters.version ?? {}, version.version));
+    assert(Object.hasOwn(filters.version ?? {}, version.label));
   }
 
   console.log(
-    'Pagefind query passed: stable + preview results and exact version metadata.',
+    `Pagefind query passed: ${versions.length} exact version URLs and public labels.`,
   );
   await pagefind.destroy();
 } finally {

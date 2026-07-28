@@ -3,11 +3,20 @@ import {expect, test} from '@playwright/test';
 
 const routes = [
   {name: 'home', path: '/'},
-  {name: 'docs', path: '/docs/start/quick-start/'},
+  {name: 'tutorial', path: '/docs/start/quick-start/'},
+  {name: 'how-to', path: '/docs/start/configuration/'},
+  {name: 'upgrade', path: '/docs/upgrading/version-3-migration/'},
+  {name: 'API', path: '/docs/api/Humanizer.StringHumanizeExtensions/'},
+  {name: 'language', path: '/docs/languages/using-cultures/'},
   {
     name: 'version unavailable',
     path: '/docs/next/api/NotInThisVersion/',
   },
+  {
+    name: 'unsupported legacy version',
+    path: '/docs/2.9.9/api/NotPublished/',
+  },
+  {name: 'redirected legacy page', path: '/installation.html'},
 ];
 
 for (const colorScheme of ['light', 'dark'] as const) {
@@ -70,6 +79,22 @@ for (const colorScheme of ['light', 'dark'] as const) {
     await expect(table).toHaveAttribute('tabindex', '0');
     await table.focus();
     await expect(table).toBeFocused();
+
+    const results = await new AxeBuilder({page}).analyze();
+    const violations = results.violations.filter(({impact}) =>
+      ['serious', 'critical'].includes(impact ?? ''),
+    );
+
+    expect(violations).toEqual([]);
+  });
+
+  test(`all-version modal has no serious accessibility violations in ${colorScheme} mode`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({colorScheme});
+    await page.goto('/docs/2.14.1/start/quick-start/');
+    await page.getByRole('button', {name: 'All versions'}).first().click();
+    await expect(page.locator('pagefind-modal dialog')).toBeVisible();
 
     const results = await new AxeBuilder({page}).analyze();
     const violations = results.violations.filter(({impact}) =>

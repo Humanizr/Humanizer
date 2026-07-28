@@ -27,7 +27,7 @@ export default function DocItemContentWithVersion({
         data-pagefind-filter="version"
         data-pagefind-ignore
         data-pagefind-meta="version">
-        {version.version}
+        {version.label}
       </span>
       <DocItemContent>{children}</DocItemContent>
     </>

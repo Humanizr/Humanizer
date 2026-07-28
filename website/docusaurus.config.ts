@@ -2,6 +2,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import {themes as prismThemes} from 'prism-react-renderer';
 import versionManifest from './humanizer-versions.json';
+import redirectInventory from './redirects.json';
 import nativeVersions from './versions.json';
 
 const repositoryUrl = 'https://github.com/Humanizr/Humanizer';
@@ -15,6 +16,8 @@ const preview = versionManifest.versions.find(
 if (!latestStable || !preview) {
   throw new Error('The documentation version manifest is incomplete.');
 }
+
+const redirects = redirectInventory.redirects.map(({from, to}) => ({from, to}));
 
 const publishedVersions: Record<
   string,
@@ -57,13 +60,6 @@ const config: Config = {
       attributes: {
         rel: 'stylesheet',
         href: '/pagefind/pagefind-component-ui.css',
-      },
-    },
-    {
-      tagName: 'script',
-      attributes: {
-        type: 'module',
-        src: '/pagefind/pagefind-component-ui.js',
       },
     },
   ],
@@ -132,12 +128,7 @@ const config: Config = {
     [
       '@docusaurus/plugin-client-redirects',
       {
-        redirects: [
-          {
-            from: '/quick-start',
-            to: '/docs/start/quick-start',
-          },
-        ],
+        redirects,
       },
     ],
   ],
@@ -176,12 +167,6 @@ const config: Config = {
           type: 'docsVersionDropdown',
           position: 'right',
           className: 'humanizerVersionDropdown',
-        },
-        {
-          type: 'html',
-          position: 'right',
-          value:
-            '<pagefind-modal-trigger placeholder="All versions" shortcut="mod+shift+k"></pagefind-modal-trigger><pagefind-modal reset-on-close></pagefind-modal>',
         },
         {
           href: repositoryUrl,

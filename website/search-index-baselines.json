@@ -1,9 +1,17 @@
 {
   "schemaVersion": 1,
   "maximumIncreasePercent": 25,
-  "allVersionsBytes": 1016791,
+  "reviewedAt": "2026-07-28",
+  "reviewedCorpus": "U7 immutable guide and API snapshots for every manifest entry; Pagefind indexed 1360 pages.",
+  "allVersionsBytes": 2766347,
   "versions": {
-    "3.0.10": 1227772,
-    "current": 579354
+    "2.10.1": 1023769,
+    "2.11.10": 1422118,
+    "2.13.14": 1448586,
+    "2.14.1": 1480682,
+    "3.0.1": 1621632,
+    "3.0.8": 1657513,
+    "3.0.10": 1643125,
+    "current": 1904738
   }
 }

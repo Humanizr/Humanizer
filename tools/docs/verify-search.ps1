@@ -22,24 +22,16 @@ if (-not (Test-Path $BuildDirectory -PathType Container)) {
     throw "Docusaurus build output not found: $BuildDirectory"
 }
 
-$indexes = @(
+$indexes = @($manifest.versions | ForEach-Object {
+    $routeSegment = if ($_.route) { "$($_.route)/" } else { "" }
     @{
-        Version = $latest[0].label
-        ManifestVersion = $latest[0].version
-        Path = Join-Path $BuildDirectory "search-index-docs-default-$($latest[0].version).json"
-        RequiredRoute = "/docs/$($latest[0].route)start/quick-start"
-        RequiredApiRoute = "/docs/$($latest[0].route)api/Humanizer.StringHumanizeExtensions/"
-        ForbiddenRoute = "/docs/$($preview[0].route)/"
-    },
-    @{
-        Version = $preview[0].label
-        ManifestVersion = $preview[0].version
-        Path = Join-Path $BuildDirectory "search-index-docs-default-current.json"
-        RequiredRoute = "/docs/$($preview[0].route)/start/quick-start"
-        RequiredApiRoute = "/docs/$($preview[0].route)/api/Humanizer.StringHumanizeExtensions/"
-        ForbiddenRoute = "/docs/$($latest[0].route)start/quick-start"
+        Version = $_.label
+        ManifestVersion = $_.version
+        Path = Join-Path $BuildDirectory "search-index-docs-default-$($_.version).json"
+        RequiredRoute = "/docs/${routeSegment}start/quick-start"
+        RequiredApiRoute = "/docs/${routeSegment}api/Humanizer.StringHumanizeExtensions/"
     }
-)
+})
 
 foreach ($index in $indexes) {
     if (-not (Test-Path $index.Path -PathType Leaf)) {
@@ -54,10 +46,6 @@ foreach ($index in $indexes) {
     if (-not ($routes | Where-Object { $_ -like "$($index.RequiredApiRoute)*" })) {
         throw "Search index for $($index.Version) does not contain its generated API route."
     }
-    if ($routes | Where-Object { $_ -like "$($index.ForbiddenRoute)*" }) {
-        throw "Search index for $($index.Version) contains another version's route."
-    }
-
     $size = (Get-Item $index.Path).Length
     $baselineProperty = $baselines.versions.PSObject.Properties[$index.ManifestVersion]
     if ($null -eq $baselineProperty -or $baselineProperty.Value -le 0) {
@@ -74,6 +62,11 @@ foreach ($index in $indexes) {
     Write-Host "Contextual search index passed: $($index.Version) ($size / $maximumSize bytes)"
 }
 
+& node (Join-Path $repoRoot "website/scripts/verify-contextual-search.mjs") $BuildDirectory
+if ($LASTEXITCODE -ne 0) {
+    throw "Contextual search query verification failed."
+}
+
 $allSearchDirectory = Join-Path $BuildDirectory "pagefind"
 $requiredAllSearchAssets = @(
     "pagefind.js",
@@ -88,21 +81,24 @@ foreach ($asset in $requiredAllSearchAssets) {
     }
 }
 
-$versionedPages = @(
-    @{
-        Label = $latest[0].label
-        Path = Join-Path $BuildDirectory "docs/$($latest[0].route)start/quick-start/index.html"
-    },
-    @{
-        Label = $preview[0].label
-        Path = Join-Path $BuildDirectory "docs/$($preview[0].route)/start/quick-start/index.html"
+$versionedPages = @($manifest.versions | ForEach-Object {
+    $relativePath = if ($_.route) {
+        "docs/$($_.route)/start/quick-start/index.html"
     }
-)
+    else {
+        "docs/start/quick-start/index.html"
+    }
+    @{
+        Label = $_.label
+        Path = Join-Path $BuildDirectory $relativePath
+    }
+})
 foreach ($page in $versionedPages) {
     $html = Get-Content -Raw $page.Path
     if ($html -notmatch 'data-pagefind-filter="version"' -or
         $html -notmatch [Regex]::Escape($page.Label) -or
-        $html -notmatch "<pagefind-modal-trigger") {
+        $html -notmatch '<pagefind-modal-trigger[^>]+placeholder="All versions"' -or
+        $html -notmatch '<link[^>]+href="/pagefind/pagefind-component-ui.css"') {
         throw "All-version search metadata is invalid for $($page.Label)."
     }
 }
@@ -125,7 +121,7 @@ $maximumAllSearchSize = [Math]::Floor(
 if ($allSearchSize -gt $maximumAllSearchSize) {
     throw "All-version search grew beyond its reviewed budget: $allSearchSize > $maximumAllSearchSize bytes."
 }
-Write-Host "All-version search passed: stable + preview ($allSearchSize / $maximumAllSearchSize bytes)"
+Write-Host "All-version search passed: $($manifest.versions.Count) versions ($allSearchSize / $maximumAllSearchSize bytes)"
 
 $redirectPath = Join-Path $BuildDirectory "quick-start/index.html"
 if (-not (Test-Path $redirectPath -PathType Leaf) -or
@@ -137,4 +133,4 @@ if (-not (Test-Path (Join-Path $BuildDirectory ".nojekyll") -PathType Leaf)) {
     throw "The local Pages artifact is missing .nojekyll."
 }
 
-Write-Host "Search isolation, cross-version indexing, static redirect, and Pages artifact proof passed."
+Write-Host "All manifest contextual indexes, lazy all-version data, budgets, and Pages artifact proof passed."

@@ -6,6 +6,8 @@
   --humanizer-rule: #c9c4b8;
   --humanizer-accent: #056b84;
   --humanizer-accent-warm: #ad3e2a;
+  --humanizer-all-versions-width: 7.5rem;
+  --pf-input-height: 2.75rem;
   --humanizer-display:
     'Iowan Old Style', 'Baskerville', 'Times New Roman', serif;
   --humanizer-body:
@@ -126,10 +128,45 @@ input {
   width: 1.9rem;
 }
 
-.navbar__items--right pagefind-modal-trigger {
+.humanizerContextSearch {
   align-items: center;
   display: flex;
-  min-height: 2.75rem;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.humanizerContextSearch__version {
+  color: var(--humanizer-ink-muted);
+  font-size: 0.75rem;
+  font-weight: 750;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.humanizerAllVersionsShell {
+  display: none;
+}
+
+body:has(.navbar-sidebar--show) .humanizerAllVersionsShell {
+  bottom: 0;
+  box-sizing: border-box;
+  display: block;
+  left: 0;
+  padding: 0.75rem;
+  position: fixed;
+  width: var(--ifm-navbar-sidebar-width);
+  z-index: calc(var(--ifm-z-index-fixed) + 1);
+}
+
+.humanizerAllVersionsShell pagefind-modal-trigger,
+.humanizerAllVersionsShell .pf-trigger-btn {
+  width: 100%;
+}
+
+@media (max-width: 996px) {
+  .navbar-sidebar__item {
+    padding-bottom: calc(var(--pf-input-height) + 1.5rem);
+  }
 }
 
 .button {
@@ -319,4 +356,44 @@ input {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+html:root:not([data-theme='dark']) {
+  --pf-text-muted: #626262;
+  --pf-text-secondary: #4f5358;
+}
+
+html:root[data-theme='dark'] {
+  --pf-background: #22242e;
+  --pf-border: #55596b;
+  --pf-border-focus: #a7b1d6;
+  --pf-hover: #303340;
+  --pf-mark: #ffffff;
+  --pf-skeleton: #393c4a;
+  --pf-skeleton-shine: #474a5a;
+  --pf-text: #f8f8f2;
+  --pf-text-muted: #c4c8d4;
+  --pf-text-secondary: #d7dae2;
+}
+
+html[data-theme='dark'] .prism-code .token.comment {
+  color: #a7b1d6 !important;
+}
+
+@media (min-width: 997px) {
+  .navbar__inner {
+    padding-right: calc(
+      var(--humanizer-all-versions-width) +
+        var(--ifm-navbar-padding-horizontal)
+    );
+  }
+
+  .humanizerAllVersionsShell {
+    display: block;
+    position: fixed;
+    right: var(--ifm-navbar-padding-horizontal);
+    top: var(--ifm-navbar-padding-vertical);
+    width: var(--humanizer-all-versions-width);
+    z-index: calc(var(--ifm-z-index-fixed) + 1);
+  }
 }
