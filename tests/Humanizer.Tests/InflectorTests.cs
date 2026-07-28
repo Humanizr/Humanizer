@@ -179,11 +179,6 @@ public class InflectorTests
     public void Pascalize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Pascalize());
 
-    [Theory, UseCulture("tr-TR")]
-    [InlineData("istanbul_input", "İstanbulİnput")]
-    public void PascalizeUsesTurkishCasing(string input, string expectedOutput) =>
-        Assert.Equal(expectedOutput, input.Pascalize());
-
     // Same as pascalize, except first char is lowercase
     [Theory]
     [InlineData("customer", "customer")]
@@ -200,11 +195,6 @@ public class InflectorTests
     public void Camelize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Camelize());
 
-    [Theory, UseCulture("tr-TR")]
-    [InlineData("Istanbul_input", "ıstanbulİnput")]
-    public void CamelizeUsesTurkishCasing(string input, string expectedOutput) =>
-        Assert.Equal(expectedOutput, input.Camelize());
-
     //Makes an underscored lowercase string
     [Theory]
     [InlineData("SomeTitle", "some_title")]
@@ -217,11 +207,6 @@ public class InflectorTests
     public void Underscore(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Underscore());
 
-    [Theory, UseCulture("tr-TR")]
-    [InlineData("IstanbulInput", "ıstanbul_ınput")]
-    public void UnderscoreUsesTurkishCasing(string input, string expectedOutput) =>
-        Assert.Equal(expectedOutput, input.Underscore());
-
     // transform words into lowercase and separate with a -
     [Theory]
     [InlineData("SomeWords", "some-words")]
@@ -232,10 +217,36 @@ public class InflectorTests
     public void Kebaberize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Kebaberize());
 
-    [Theory, UseCulture("tr-TR")]
-    [InlineData("IstanbulInput", "ıstanbul-ınput")]
-    public void KebaberizeUsesTurkishCasing(string input, string expectedOutput) =>
-        Assert.Equal(expectedOutput, input.Kebaberize());
+    [Fact, UseCulture("tr-TR")]
+    public void IdentifierTransformationsUseInvariantCasingInTurkish() =>
+        VerifyIdentifierTransformationsUseInvariantCasing();
+
+    [Fact, UseCulture("az-Latn-AZ")]
+    public void IdentifierTransformationsUseInvariantCasingInAzeri() =>
+        VerifyIdentifierTransformationsUseInvariantCasing();
+
+    static void VerifyIdentifierTransformationsUseInvariantCasing()
+    {
+        Assert.Equal("IWillBreakStuff", "i will_break-stuff".Pascalize());
+        Assert.Equal("iWillBreakStuff", "I will_break-stuff".Camelize());
+        Assert.Equal("istanbul_input", "IstanbulInput".Underscore());
+        Assert.Equal("istanbul-input", "IstanbulInput".Kebaberize());
+
+        Assert.Equal("ÉlanInput", "élan_input".Pascalize());
+        Assert.Equal("élanInput", "Élan_input".Camelize());
+        Assert.Equal("élan_input", "ÉlanInput".Underscore());
+        Assert.Equal("élan-input", "ÉlanInput".Kebaberize());
+
+        Assert.Equal("İstanbulInput", "İstanbul_input".Pascalize());
+        Assert.Equal("İstanbulInput", "İstanbul_input".Camelize());
+        Assert.Equal("İstanbul_input", "İstanbulInput".Underscore());
+        Assert.Equal("İstanbul-input", "İstanbulInput".Kebaberize());
+
+        Assert.Equal("ıstanbulInput", "ıstanbul_input".Pascalize());
+        Assert.Equal("ıstanbulInput", "ıstanbul_input".Camelize());
+        Assert.Equal("ıstanbul_input", "ıstanbulInput".Underscore());
+        Assert.Equal("ıstanbul-input", "ıstanbulInput".Kebaberize());
+    }
 }
 
 class PluralTestSource : IEnumerable<object[]>

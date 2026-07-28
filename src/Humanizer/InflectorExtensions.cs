@@ -164,6 +164,7 @@ public static partial class InflectorExtensions
     /// </returns>
     /// <remarks>
     /// PascalCase (also known as UpperCamelCase) is commonly used for class names and type names in .NET.
+    /// Casing is culture-invariant.
     /// </remarks>
     /// <example>
     /// <code>
@@ -177,7 +178,7 @@ public static partial class InflectorExtensions
             ? result
             : PascalizeRegex().Replace(input, match => match
                 .Groups[1]
-                .Value.ToUpper());
+                .Value.ToUpperInvariant());
 
     /// <summary>
     /// Converts a string to camelCase (lowerCamelCase) by capitalizing the first letter of each word
@@ -191,6 +192,7 @@ public static partial class InflectorExtensions
     /// <remarks>
     /// camelCase is the same as PascalCase except the first character is lowercase.
     /// It's commonly used for variable and method parameter names in .NET.
+    /// Casing is culture-invariant.
     /// </remarks>
     /// <example>
     /// <code>
@@ -209,7 +211,7 @@ public static partial class InflectorExtensions
         var word = input.Pascalize();
         return word.Length > 0
             ? StringHumanizeExtensions.Concat(
-                char.ToLower(word[0]),
+                char.ToLowerInvariant(word[0]),
                 word.AsSpan(1))
             : word;
     }
@@ -222,7 +224,7 @@ public static partial class InflectorExtensions
             return false;
         }
 
-        var textInfo = CultureInfo.CurrentCulture.TextInfo;
+        var textInfo = CultureInfo.InvariantCulture.TextInfo;
         var buffer = new char[input.Length];
         var pos = 0;
         var capitalizeNext = true;
@@ -258,6 +260,7 @@ public static partial class InflectorExtensions
     /// </returns>
     /// <remarks>
     /// This transformation is commonly used for database column names, file names, and URL slugs in some conventions.
+    /// Casing is culture-invariant.
     /// </remarks>
     /// <example>
     /// <code>
@@ -274,7 +277,7 @@ public static partial class InflectorExtensions
                 .Replace(
                     UnderscoreRegex2().Replace(
                         UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_")
-                .ToLower();
+                .ToLowerInvariant();
 
     /// <summary>
     /// Replaces all underscores in the string with dashes (hyphens).
@@ -324,6 +327,7 @@ public static partial class InflectorExtensions
     /// <remarks>
     /// Kebab-case is commonly used for CSS class names, HTML attributes, and URL slugs.
     /// This is equivalent to calling <see cref="Underscore"/> followed by <see cref="Dasherize"/>.
+    /// Casing is culture-invariant.
     /// </remarks>
     /// <example>
     /// <code>
@@ -347,7 +351,7 @@ public static partial class InflectorExtensions
             return false;
         }
 
-        var textInfo = CultureInfo.CurrentCulture.TextInfo;
+        var textInfo = CultureInfo.InvariantCulture.TextInfo;
         var buffer = new char[Math.Max(1, input.Length * 2)];
         var pos = 0;
         for (var i = 0; i < input.Length; i++)
