@@ -20,7 +20,8 @@ public static class FractionalizeExtensions
     /// </returns>
     /// <remarks>
     /// The tolerance boundary is inclusive. Equidistant fractions prefer the smaller denominator,
-    /// then the value farther from zero. Fraction components use invariant digits and slash notation.
+    /// then the value farther from zero. Fraction components use invariant digits; slash notation is used
+    /// unless <paramref name="useUnicode"/> requests an available exact glyph.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">
     /// Thrown when <paramref name="maxDenominator"/> is less than one or <paramref name="tolerance"/> is negative.
