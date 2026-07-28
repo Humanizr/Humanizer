@@ -1,18 +1,17 @@
-﻿namespace Humanizer.Localisation
+namespace Humanizer;
+
+/// <summary>
+/// Indicates whether a relative time reference is in the past or the future.
+/// </summary>
+public enum Tense
 {
     /// <summary>
-    /// Enumerates the possible time references; past or future.
+    /// A future reference such as "in 2 days".
     /// </summary>
-    public enum Tense
-    {
-        /// <summary>
-        /// Indicates the future.
-        /// </summary>
-        Future,
+    Future,
 
-        /// <summary>
-        /// Indicates the past.
-        /// </summary>
-        Past
-    }
+    /// <summary>
+    /// A past reference such as "2 days ago".
+    /// </summary>
+    Past
 }

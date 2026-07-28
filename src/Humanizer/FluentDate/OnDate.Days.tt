@@ -1,0 +1,43 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ assembly name="$(TargetPath)" #>
+<#@ import namespace="System" #>
+<#@ import namespace="Humanizer" #>
+#if NET6_0_OR_GREATER
+namespace Humanizer;
+
+public class OnDate
+{
+<#
+const int leapYear = 2012;
+for (var month = 1; month <= 12; month++)
+{
+    var firstDayOfMonth = new DateTime(leapYear, month, 1);
+    var monthName = firstDayOfMonth.ToString("MMMM");#>
+    /// <summary>
+    /// Provides fluent date accessors for <#= monthName #>
+    /// </summary>
+    public class <#= monthName #>
+    {
+        /// <summary>
+        /// The nth day of <#= monthName #> of the current year
+        /// </summary>
+        public static DateOnly The(int dayNumber)
+            => new(DateTime.Now.Year, <#= month #>, dayNumber);
+<#for (var day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
+    {
+        var ordinalDay = day.Ordinalize();#>
+
+        /// <summary>
+        /// The <#= ordinalDay #> day of <#= monthName #> of the current year
+        /// </summary>
+        public static DateOnly The<#= ordinalDay #>
+            => new(DateTime.Now.Year, <#= month #>, <#= day #>);
+<#}#>
+    }
+<#}#>
+}
+
+#endif

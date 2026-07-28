@@ -1,49 +1,63 @@
-// ReSharper disable IdentifierTypo 
+// ReSharper disable IdentifierTypo
 // ReSharper disable StringLiteralTypo
-namespace Humanizer
+namespace Humanizer;
+
+/// <summary>
+/// Convert int to named tuple strings (1 -> 'single', 2-> 'double' etc.).
+/// Only values 1-10, 100, and 1000 have specific names. All others will return 'n-tuple'.
+/// </summary>
+public static class TupleizeExtensions
 {
     /// <summary>
-    /// Convert int to named tuple strings (1 -> 'single', 2-> 'double' etc.).
-    /// Only values 1-10, 100, and 1000 have specific names. All others will return 'n-tuple'.
+    /// Converts an integer to its corresponding tuple name (e.g., 'single', 'double', 'triple').
     /// </summary>
-    public static class TupleizeExtensions
-    {
-        /// <summary>
-        /// Converts integer to named tuple (e.g. 'single', 'double' etc.).
-        /// </summary>
-        /// <param name="input">Integer</param>
-        /// <returns>Named tuple</returns>
-        public static string Tupleize(this int input)
+    /// <param name="input">The integer value to convert to a tuple name.</param>
+    /// <returns>
+    /// A string representing the tuple name:
+    /// - 1 returns "single"
+    /// - 2 returns "double"
+    /// - 3 returns "triple"
+    /// - 4 returns "quadruple"
+    /// - 5 returns "quintuple"
+    /// - 6 returns "sextuple"
+    /// - 7 returns "septuple"
+    /// - 8 returns "octuple"
+    /// - 9 returns "nonuple"
+    /// - 10 returns "decuple"
+    /// - 100 returns "centuple"
+    /// - 1000 returns "milluple"
+    /// - Any other value returns "{value}-tuple" (e.g., "42-tuple")
+    /// </returns>
+    /// <remarks>
+    /// Only values 1-10, 100, and 1000 have specific named tuples. All other values return 
+    /// a generic n-tuple format. Negative values and zero will return in the format "{value}-tuple".
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// 1.Tupleize() => "single"
+    /// 2.Tupleize() => "double"
+    /// 3.Tupleize() => "triple"
+    /// 10.Tupleize() => "decuple"
+    /// 100.Tupleize() => "centuple"
+    /// 42.Tupleize() => "42-tuple"
+    /// (-5).Tupleize() => "-5-tuple"
+    /// </code>
+    /// </example>
+    public static string Tupleize(this int input) =>
+        input switch
         {
-            switch (input)
-            {
-                case 1:
-                    return "single";
-                case 2:
-                    return "double";
-                case 3:
-                    return "triple";
-                case 4:
-                    return "quadruple";
-                case 5:
-                    return "quintuple";
-                case 6:
-                    return "sextuple";
-                case 7:
-                    return "septuple";
-                case 8:
-                    return "octuple";
-                case 9:
-                    return "nonuple";
-                case 10:
-                    return "decuple";
-                case 100:
-                    return "centuple";
-                case 1000:
-                    return "milluple";
-                default:
-                    return $"{input}-tuple";
-            }
-        }
-    }
+            1 => "single",
+            2 => "double",
+            3 => "triple",
+            4 => "quadruple",
+            5 => "quintuple",
+            6 => "sextuple",
+            7 => "septuple",
+            8 => "octuple",
+            9 => "nonuple",
+            10 => "decuple",
+            100 => "centuple",
+            1000 => "milluple",
+            _ => $"{input}-tuple"
+        };
 }

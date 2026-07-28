@@ -1,0 +1,7 @@
+locale: 'en-GB'
+variantOf: 'en'
+
+surfaces:
+  number:
+    words:
+      andStrategy: 'within-group-and-terminal-scale-sub-hundred-remainder'

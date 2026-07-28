@@ -1,0 +1,478 @@
+locale: 'ha'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'da'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'yanzu'
+      never: 'ba a taɓa ba'
+      past:
+        millisecond:
+          single: 'milisakan 1 da ya wuce'
+          multiple:
+            forms:
+              default: 'milisakan'
+            template: '{count} milisakan da suka wuce'
+        second:
+          single: 'sakan 1 da ya wuce'
+          multiple:
+            forms:
+              default: 'sakan'
+            template: '{count} sakan da suka wuce'
+        minute:
+          single: 'minti 1 da ya wuce'
+          multiple:
+            forms:
+              default: 'mintuna'
+            template: '{count} mintuna da suka wuce'
+        hour:
+          single: 'sa''a 1 da ta wuce'
+          multiple:
+            forms:
+              default: 'sa''o''i'
+            template: '{count} sa''o''i da suka wuce'
+        day:
+          single: 'jiya'
+          multiple:
+            forms:
+              default: 'kwanaki'
+            template: '{count} kwanaki da suka wuce'
+        week:
+          single: 'mako 1 da ya wuce'
+          multiple:
+            forms:
+              default: 'makonni'
+            template: '{count} makonni da suka wuce'
+        month:
+          single: 'wata 1 da ya wuce'
+          multiple:
+            forms:
+              default: 'watanni'
+            template: '{count} watanni da suka wuce'
+        year:
+          single: 'shekara 1 da ta wuce'
+          multiple:
+            forms:
+              default: 'shekaru'
+            template: '{count} shekaru da suka wuce'
+      future:
+        millisecond:
+          single: 'nan da milisakan 1'
+          multiple:
+            forms:
+              default: 'milisakan'
+            template: 'nan da milisakan {count}'
+        second:
+          single: 'nan da sakan 1'
+          multiple:
+            forms:
+              default: 'sakan'
+            template: 'nan da sakan {count}'
+        minute:
+          single: 'nan da minti 1'
+          multiple:
+            forms:
+              default: 'mintuna'
+            template: 'nan da mintuna {count}'
+        hour:
+          single: 'nan da sa''a 1'
+          multiple:
+            forms:
+              default: 'sa''o''i'
+            template: 'nan da sa''o''i {count}'
+        day:
+          single: 'gobe'
+          multiple:
+            forms:
+              default: 'kwanaki'
+            template: 'nan da kwanaki {count}'
+        week:
+          single: 'nan da mako 1'
+          multiple:
+            forms:
+              default: 'makonni'
+            template: 'nan da makonni {count}'
+        month:
+          single: 'nan da wata 1'
+          multiple:
+            forms:
+              default: 'watanni'
+            template: 'nan da watanni {count}'
+        year:
+          single: 'nan da shekara 1'
+          multiple:
+            forms:
+              default: 'shekaru'
+            template: 'nan da shekaru {count}'
+    duration:
+      zero: 'babu lokaci'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: 'milisakan 1'
+          words: 'milisakan ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'milisakan'
+      second:
+        single:
+          numeric: 'sakan 1'
+          words: 'sakan ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'sakan'
+      minute:
+        single:
+          numeric: 'minti 1'
+          words: 'minti ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'mintuna'
+      hour:
+        single:
+          numeric: 'sa''a 1'
+          words: 'sa''a ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'sa''o''i'
+      day:
+        single:
+          numeric: 'kwana 1'
+          words: 'kwana ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'kwanaki'
+      week:
+        single:
+          numeric: 'mako 1'
+          words: 'mako ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'makonni'
+      month:
+        single:
+          numeric: 'wata 1'
+          words: 'wata ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'watanni'
+      year:
+        single:
+          numeric: 'shekara 1'
+          words: 'shekara ɗaya'
+        multiple:
+          countPlacement: 'after-form'
+          forms:
+            default: 'shekaru'
+    dataUnits:
+      bit:
+        forms:
+          default: 'biti'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'baiti'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobaiti'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabaiti'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabaiti'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabaiti'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'sa''a'
+      day:
+        symbol: 'kw'
+      week:
+        symbol: 'mk'
+      month:
+        symbol: 'wt'
+      year:
+        symbol: 'sh'
+
+  number:
+    words:
+      engine: 'scale-leading-compound'
+      zeroWord: 'sifili'
+      minusWord: 'debe'
+      conjunctionWord: 'da'
+      terminalRemainderConjunctionWord: 'da kuma'
+      ordinalPrefix: 'na '
+      unitsMap:
+        - 'sifili'
+        - 'ɗaya'
+        - 'biyu'
+        - 'uku'
+        - 'huɗu'
+        - 'biyar'
+        - 'shida'
+        - 'bakwai'
+        - 'takwas'
+        - 'tara'
+        - 'goma'
+        - 'goma sha ɗaya'
+        - 'goma sha biyu'
+        - 'goma sha uku'
+        - 'goma sha huɗu'
+        - 'goma sha biyar'
+        - 'goma sha shida'
+        - 'goma sha bakwai'
+        - 'goma sha takwas'
+        - 'goma sha tara'
+      tensMap:
+        2: 'ashirin'
+        3: 'talatin'
+        4: 'arba''in'
+        5: 'hamsin'
+        6: 'sittin'
+        7: 'saba''in'
+        8: 'tamanin'
+        9: 'casa''in'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kwintiliyan'
+        -
+          value: 1000000000000000
+          name: 'kwadriliyan'
+        -
+          value: 1000000000000
+          name: 'tiriliyan'
+        -
+          value: 1000000000
+          name: 'biliyan'
+        -
+          value: 1000000
+          name: 'miliyan'
+        -
+          value: 100000
+          name: 'dubu ɗari'
+        -
+          value: 1000
+          name: 'dubu'
+        -
+          value: 100
+          name: 'ɗari'
+      ordinalMap:
+        1: 'na farko'
+        2: 'na biyu'
+        3: 'na uku'
+        4: 'na huɗu'
+        5: 'na biyar'
+        6: 'na shida'
+        7: 'na bakwai'
+        8: 'na takwas'
+        9: 'na tara'
+        10: 'na goma'
+    formatting:
+      decimalSeparator: '.'
+      groupSeparator: ','
+      negativeSign: '-'
+    parse:
+      engine: 'scale-leading-compound'
+      conjunctionWord: 'da'
+      terminalRemainderConjunctionWord: 'da kuma'
+      minusWord: 'debe'
+      ordinalPrefix: 'na '
+      unitsMap:
+        sifili: 0
+        ɗaya: 1
+        biyu: 2
+        uku: 3
+        huɗu: 4
+        biyar: 5
+        shida: 6
+        bakwai: 7
+        takwas: 8
+        tara: 9
+        goma: 10
+        'goma sha ɗaya': 11
+        'goma sha daya': 11
+        'goma sha biyu': 12
+        'goma sha uku': 13
+        'goma sha huɗu': 14
+        'goma sha hudu': 14
+        'goma sha biyar': 15
+        'goma sha shida': 16
+        'goma sha bakwai': 17
+        'goma sha takwas': 18
+        'goma sha tara': 19
+      tensMap:
+        ashirin: 20
+        talatin: 30
+        'arba''in': 40
+        hamsin: 50
+        sittin: 60
+        'saba''in': 70
+        tamanin: 80
+        'casa''in': 90
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kwintiliyan'
+        -
+          value: 1000000000000000
+          name: 'kwadriliyan'
+        -
+          value: 1000000000000
+          name: 'tiriliyan'
+        -
+          value: 1000000000
+          name: 'biliyan'
+        -
+          value: 1000000
+          name: 'miliyan'
+        -
+          value: 100000
+          name: 'dubu ɗari'
+        -
+          value: 1000
+          name: 'dubu'
+        -
+          value: 100
+          name: 'ɗari'
+      ordinalMap:
+        'na farko': 1
+        farko: 1
+        'na biyu': 2
+        biyu: 2
+        'na uku': 3
+        uku: 3
+        'na huɗu': 4
+        huɗu: 4
+        'na biyar': 5
+        biyar: 5
+        'na shida': 6
+        shida: 6
+        'na bakwai': 7
+        bakwai: 7
+        'na takwas': 8
+        takwas: 8
+        'na tara': 9
+        tara: 9
+        'na goma': 10
+        goma: 10
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'na '
+        defaultSuffix: ''
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'ɗaya'
+      - 'biyu'
+      - 'uku'
+      - 'huɗu'
+      - 'biyar'
+      - 'shida'
+      - 'bakwai'
+      - 'takwas'
+      - 'tara'
+      - 'goma'
+      - 'goma sha ɗaya'
+      - 'goma sha biyu'
+    min0: 'ƙarfe {hour} {dayPeriod}'
+    defaultTemplate: 'ƙarfe {hour} da minti {minutes} {dayPeriod}'
+    earlyMorning: 'na safe'
+    morning: 'na safe'
+    afternoon: 'na rana'
+    evening: 'na yamma'
+    night: 'na dare'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'arewa'
+      - 'arewa-arewa maso gabas'
+      - 'arewa maso gabas'
+      - 'gabas-arewa maso gabas'
+      - 'gabas'
+      - 'gabas-kudu maso gabas'
+      - 'kudu maso gabas'
+      - 'kudu-kudu maso gabas'
+      - 'kudu'
+      - 'kudu-kudu maso yamma'
+      - 'kudu maso yamma'
+      - 'yamma-kudu maso yamma'
+      - 'yamma'
+      - 'yamma-arewa maso yamma'
+      - 'arewa maso yamma'
+      - 'arewa-arewa maso yamma'
+    short:
+      - 'A'
+      - 'AAG'
+      - 'AG'
+      - 'GAG'
+      - 'G'
+      - 'GKG'
+      - 'KG'
+      - 'KKG'
+      - 'K'
+      - 'KKY'
+      - 'KY'
+      - 'YKY'
+      - 'Y'
+      - 'YAY'
+      - 'AY'
+      - 'AAY'
+
+  calendar:
+    months:
+      - 'Janairu'
+      - 'Fabrairu'
+      - 'Maris'
+      - 'Afrilu'
+      - 'Mayu'
+      - 'Yuni'
+      - 'Yuli'
+      - 'Agusta'
+      - 'Satumba'
+      - 'Oktoba'
+      - 'Nuwamba'
+      - 'Disamba'

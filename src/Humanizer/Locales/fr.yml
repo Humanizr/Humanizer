@@ -1,0 +1,420 @@
+locale: 'fr'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'et'
+
+  formatter:
+    engine: 'profiled'
+    exactDateForms:
+      -
+        number: 2
+        form: 'dual'
+        units:
+          - 'day'
+        tenses:
+          - 'past'
+          - 'future'
+    exactTimeSpanForms:
+      -
+        number: 0
+        form: 'singular'
+
+  phrases:
+    relativeDate:
+      now: 'maintenant'
+      never: 'jamais'
+      past:
+        millisecond:
+          single: 'il y a une milliseconde'
+          multiple:
+            forms:
+              default: 'millisecondes'
+            beforeCount: 'il y a'
+        second:
+          single: 'il y a une seconde'
+          multiple:
+            forms:
+              default: 'secondes'
+            beforeCount: 'il y a'
+        minute:
+          single: 'il y a une minute'
+          multiple:
+            forms:
+              default: 'minutes'
+            beforeCount: 'il y a'
+        hour:
+          single: 'il y a une heure'
+          multiple:
+            forms:
+              default: 'heures'
+            beforeCount: 'il y a'
+        day:
+          single: 'hier'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'il y a {count} jours'
+              singular: 'avant-hier'
+              dual: 'avant-hier'
+              plural: 'avant-hier'
+          template:
+            name: 'two'
+            value: 'avant-hier'
+        week:
+          single: 'il y a une semaine'
+          multiple:
+            forms:
+              default: 'semaines'
+            beforeCount: 'il y a'
+        month:
+          single: 'il y a un mois'
+          multiple:
+            forms:
+              default: 'mois'
+            beforeCount: 'il y a'
+        year:
+          single: 'il y a un an'
+          multiple:
+            forms:
+              default: 'ans'
+            beforeCount: 'il y a'
+      future:
+        millisecond:
+          single: 'dans une milliseconde'
+          multiple:
+            forms:
+              default: 'millisecondes'
+            beforeCount: 'dans'
+        second:
+          single: 'dans une seconde'
+          multiple:
+            forms:
+              default: 'secondes'
+            beforeCount: 'dans'
+        minute:
+          single: 'dans une minute'
+          multiple:
+            forms:
+              default: 'minutes'
+            beforeCount: 'dans'
+        hour:
+          single: 'dans une heure'
+          multiple:
+            forms:
+              default: 'heures'
+            beforeCount: 'dans'
+        day:
+          single: 'demain'
+          multiple:
+            countPlacement: none
+            forms:
+              default: 'dans {count} jours'
+              singular: 'après-demain'
+              dual: 'après-demain'
+              plural: 'après-demain'
+          template:
+            name: 'two'
+            value: 'après-demain'
+        week:
+          single: 'dans une semaine'
+          multiple:
+            forms:
+              default: 'semaines'
+            beforeCount: 'dans'
+        month:
+          single: 'dans un mois'
+          multiple:
+            forms:
+              default: 'mois'
+            beforeCount: 'dans'
+        year:
+          single: 'dans un an'
+          multiple:
+            forms:
+              default: 'ans'
+            beforeCount: 'dans'
+    duration:
+      zero: 'durée nulle'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milliseconde'
+          words: 'une milliseconde'
+        multiple:
+          forms:
+            default: 'millisecondes'
+            singular: 'milliseconde'
+            dual: 'milliseconde'
+            paucal: 'milliseconde'
+            plural: 'milliseconde'
+      second:
+        single:
+          numeric: '1 seconde'
+          words: 'une seconde'
+        multiple:
+          forms:
+            default: 'secondes'
+            singular: 'seconde'
+            dual: 'seconde'
+            paucal: 'seconde'
+            plural: 'seconde'
+      minute:
+        single:
+          numeric: '1 minute'
+          words: 'une minute'
+        multiple:
+          forms:
+            default: 'minutes'
+            singular: 'minute'
+            dual: 'minute'
+            paucal: 'minute'
+            plural: 'minute'
+      hour:
+        single:
+          numeric: '1 heure'
+          words: 'une heure'
+        multiple:
+          forms:
+            default: 'heures'
+            singular: 'heure'
+            dual: 'heure'
+            paucal: 'heure'
+            plural: 'heure'
+      day:
+        single:
+          numeric: '1 jour'
+          words: 'un jour'
+        multiple:
+          forms:
+            default: 'jours'
+            singular: 'jour'
+      week:
+        single:
+          numeric: '1 semaine'
+          words: 'une semaine'
+        multiple:
+          forms:
+            default: 'semaines'
+            singular: 'semaine'
+            dual: 'semaine'
+            paucal: 'semaine'
+            plural: 'semaine'
+      month:
+        single:
+          numeric: '1 mois'
+          words: 'un mois'
+        multiple:
+          forms:
+            default: 'mois'
+      year:
+        single:
+          numeric: '1 an'
+          words: 'un an'
+        multiple:
+          forms:
+            default: 'ans'
+            singular: 'an'
+            dual: 'an'
+            paucal: 'an'
+            plural: 'an'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'octet'
+        symbol: 'o'
+      kilobyte:
+        forms:
+          default: 'kilooctet'
+        symbol: 'Ko'
+      megabyte:
+        forms:
+          default: 'mégaoctet'
+        symbol: 'Mo'
+      gigabyte:
+        forms:
+          default: 'gigaoctet'
+        symbol: 'Go'
+      terabyte:
+        forms:
+          default: 'téraoctet'
+        symbol: 'To'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'j'
+      week:
+        symbol: 'semaine'
+      month:
+        symbol: 'mois'
+      year:
+        symbol: 'a'
+
+  number:
+    words:
+      engine: 'variant-decade'
+      minusWord: 'moins'
+      seventyStrategy: 'sixty-plus-teens'
+      ninetyStrategy: 'eighty-plus-teens'
+      specialSeventyOneEnabled: true
+      specialSeventyOneWord: 'soixante et onze'
+      pluralizeExactEighty: true
+      tensUsingEtWhenUnitIsOne:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      tensMap:
+        - 'zéro'
+        - 'dix'
+        - 'vingt'
+        - 'trente'
+        - 'quarante'
+        - 'cinquante'
+        - 'soixante'
+        - 'soixante'
+        - 'quatre-vingt'
+        - 'quatre-vingt'
+
+    parse:
+      engine: 'vigesimal-compound'
+      cardinalMap:
+        'zéro': 0
+        un: 1
+        une: 1
+        deux: 2
+        trois: 3
+        quatre: 4
+        cinq: 5
+        six: 6
+        sept: 7
+        huit: 8
+        neuf: 9
+        dix: 10
+        onze: 11
+        douze: 12
+        treize: 13
+        quatorze: 14
+        quinze: 15
+        seize: 16
+        vingt: 20
+        trente: 30
+        quarante: 40
+        cinquante: 50
+        soixante: 60
+        cent: 100
+        cents: 100
+        mille: 1000
+        million: 1000000
+        millions: 1000000
+        milliard: 1000000000
+        milliards: 1000000000
+        billion: 1000000000000
+        billions: 1000000000000
+        billiard: 1000000000000000
+        billiards: 1000000000000000
+        trillion: 1000000000000000000
+        trillions: 1000000000000000000
+      ordinalMap:
+        premier: 1
+        'première': 1
+      negativePrefixes:
+        - 'moins '
+      ignoredTokens:
+        - 'et'
+      vigesimalLeadingToken: 'quatre'
+      vigesimalFollowerTokens:
+        - 'vingt'
+        - 'vingts'
+      vigesimalValue: 80
+      teenLeaderToken: 'dix'
+      teenLeaderBases:
+        - 60
+        - 80
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        defaultSuffix: 'ème'
+        exactSuffixes:
+          1: 'er'
+      feminine:
+        defaultSuffix: 'ème'
+        exactSuffixes:
+          1: 'ère'
+      neuter:
+        defaultSuffix: 'ème'
+        exactSuffixes:
+          1: 'er'
+
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'OrdinalWhenDayIsOne'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'OrdinalWhenDayIsOne'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourGender: 'feminine'
+    minuteGender: 'feminine'
+    midnight: 'minuit'
+    midday: 'midi'
+    hourZeroWord: 'minuit'
+    hourTwelveWord: 'midi'
+    hourSuffixSingular: 'heure'
+    hourSuffixPlural: 'heures'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'nord'
+      - 'nord-nord-est'
+      - 'nord-est'
+      - 'est-nord-est'
+      - 'est'
+      - 'est-sud-est'
+      - 'sud-est'
+      - 'sud-sud-est'
+      - 'sud'
+      - 'sud-sud-ouest'
+      - 'sud-ouest'
+      - 'ouest-sud-ouest'
+      - 'ouest'
+      - 'ouest-nord-ouest'
+      - 'nord-ouest'
+      - 'nord-nord-ouest'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSO'
+      - 'SO'
+      - 'OSO'
+      - 'O'
+      - 'ONO'
+      - 'NO'
+      - 'NNO'

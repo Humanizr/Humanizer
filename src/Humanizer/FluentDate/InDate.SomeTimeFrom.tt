@@ -1,0 +1,102 @@
+﻿<#@ template debug="true" hostSpecific="true" culture="en-US"#>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Globalization" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ assembly name="$(TargetPath)" #>
+<#@ import namespace="Humanizer" #>
+#if NET6_0_OR_GREATER
+namespace Humanizer;
+
+/// <summary>
+/// </summary>
+public partial class InDate
+{
+<#for (var i = 1; i <= 10; i++){
+    var plural = i > 1 ? "s" : "";
+
+    var day = "Day" + plural;
+    var week = "Week" + plural;
+    var month = "Month" + plural;
+    var year = "Year" + plural;
+#>
+    /// <summary>
+    /// </summary>
+    public static class <#= i.ToWords().Dehumanize() #>
+    {
+        /// <summary>
+        /// <#= i #> days from now
+        /// </summary>
+        public static DateOnly <#= day #>
+            => DateOnly.FromDateTime(DateTime.UtcNow.AddDays(<#= i #>));
+
+        /// <summary>
+        /// <#= i #> days from the provided date
+        /// </summary>
+        public static DateOnly <#= day #>From(DateOnly date)
+            => date.AddDays(<#= i #>);
+
+        /// <summary>
+        /// <#= i #> days from the provided date
+        /// </summary>
+        public static DateOnly <#= day #>From(DateTime date)
+            => DateOnly.FromDateTime(date.AddDays(<#= i #>));
+
+        /// <summary>
+        /// <#= i #> weeks from now
+        /// </summary>
+        public static DateOnly <#= week #>
+            => DateOnly.FromDateTime(DateTime.UtcNow.AddDays(<#= i * 7 #>));
+
+        /// <summary>
+        /// <#= i #> weeks from the provided date
+        /// </summary>
+        public static DateOnly <#= week #>From(DateOnly date)
+            => date.AddDays(<#= i * 7 #>);
+
+        /// <summary>
+        /// <#= i #> weeks from the provided date
+        /// </summary>
+        public static DateOnly <#= week #>From(DateTime date)
+            => DateOnly.FromDateTime(date.AddDays(<#= i * 7 #>));
+
+        /// <summary>
+        /// <#= i #> months from now
+        /// </summary>
+        public static DateOnly <#= month #>
+            => DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(<#= i #>));
+
+        /// <summary>
+        /// <#= i #> months from the provided date
+        /// </summary>
+        public static DateOnly <#= month #>From(DateOnly date)
+            => date.AddMonths(<#= i #>);
+
+        /// <summary>
+        /// <#= i #> months from the provided date
+        /// </summary>
+        public static DateOnly <#= month #>From(DateTime date)
+            => DateOnly.FromDateTime(date.AddMonths(<#= i #>));
+
+        /// <summary>
+        /// <#= i #> years from now
+        /// </summary>
+        public static DateOnly <#= year #>
+            => DateOnly.FromDateTime(DateTime.UtcNow.AddYears(<#= i #>));
+
+        /// <summary>
+        /// <#= i #> years from the provided date
+        /// </summary>
+        public static DateOnly <#= year #>From(DateOnly date)
+            => date.AddYears(<#= i #>);
+
+        /// <summary>
+        /// <#= i #> years from the provided date
+        /// </summary>
+        public static DateOnly <#= year #>From(DateTime date)
+            => DateOnly.FromDateTime(date.AddYears(<#= i #>));
+    }
+
+<#}#>
+}
+#endif

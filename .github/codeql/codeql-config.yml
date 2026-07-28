@@ -1,0 +1,9 @@
+name: humanizer-codeql
+queries:
+  - uses: security-extended
+  - uses: security-and-quality
+paths:
+  - src/Humanizer/
+paths-ignore:
+  - src/**/bin/**
+  - src/**/obj/**

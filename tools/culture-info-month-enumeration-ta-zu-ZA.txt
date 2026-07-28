@@ -1,0 +1,155 @@
+# Raw CultureInfo.DateTimeFormat.MonthNames enumeration for ta and zu-ZA
+#
+# FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA}
+#
+# Evidence collected:
+#   - macOS net10: preferred path (extended probe with month_names_raw field).
+#     Raw MonthNames output also captured below via standalone enumeration snippet.
+#   - Linux net10: UNREACHABLE from this macOS dev environment. No evidence collected.
+#   - Windows net10: UNREACHABLE from this macOS dev environment. No evidence collected.
+#   - Windows net48: UNREACHABLE from this macOS dev environment. No evidence collected.
+#
+# Per the deterministic decision rule: since 3 of 4 shipping platform targets
+# are unreachable, both ta and zu-ZA are conservatively KEPT in FinalOverrideSet.
+# No subjective "representative enough" judgement was applied. The conservative
+# keep decision follows directly from the evidence gap -- not from any observed
+# platform variance.
+#
+# Snippet source: inline below (self-contained net10.0 top-level statement file)
+# To reproduce:
+#   1. Copy the C# snippet below into a new file (e.g. /tmp/month-enum/Program.cs)
+#   2. Run: dotnet new console -o /tmp/month-enum --force && cp <snippet> /tmp/month-enum/Program.cs
+#   3. Execute: dotnet run --project /tmp/month-enum
+#   Or use: echo '<snippet>' | dotnet-script eval (if dotnet-script is installed)
+
+## Snippet source
+
+```csharp
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+Console.WriteLine("# Raw MonthNames enumeration for ta and zu-ZA");
+Console.WriteLine($"# Platform: {RuntimeInformation.OSDescription}");
+Console.WriteLine($"# Framework: {RuntimeInformation.FrameworkDescription}");
+Console.WriteLine($"# RID: {RuntimeInformation.RuntimeIdentifier}");
+Console.WriteLine($"# Timestamp: {DateTime.UtcNow:O}");
+Console.WriteLine();
+
+foreach (var c in new[]{"ta","zu-ZA"})
+{
+    var culture = CultureInfo.GetCultureInfo(c);
+    var dtf = culture.DateTimeFormat;
+    var months = dtf.MonthNames.Take(12).ToArray();
+    var genitive = dtf.MonthGenitiveNames.Take(12).ToArray();
+
+    Console.WriteLine($"## {c}");
+    Console.WriteLine();
+    Console.WriteLine("MonthNames (12 entries):");
+    for (int i = 0; i < 12; i++)
+        Console.WriteLine($"  [{i}] \"{months[i]}\"");
+    Console.WriteLine();
+    Console.WriteLine("MonthGenitiveNames (12 entries):");
+    for (int i = 0; i < 12; i++)
+        Console.WriteLine($"  [{i}] \"{genitive[i]}\"");
+    Console.WriteLine();
+    Console.WriteLine($"MonthNames == MonthGenitiveNames: {months.SequenceEqual(genitive)}");
+    Console.WriteLine();
+}
+```
+
+## Output: macOS net10 (reachable)
+
+# Raw MonthNames enumeration for ta and zu-ZA
+# Platform: macOS 26.4.1
+# Framework: .NET 10.0.2
+# RID: osx-arm64
+# Timestamp: 2026-04-09T23:15:09.0635250Z
+
+### ta
+
+MonthNames (12 entries):
+  [0] "ஜனவரி"
+  [1] "பிப்ரவரி"
+  [2] "மார்ச்"
+  [3] "ஏப்ரல்"
+  [4] "மே"
+  [5] "ஜூன்"
+  [6] "ஜூலை"
+  [7] "ஆகஸ்ட்"
+  [8] "செப்டம்பர்"
+  [9] "அக்டோபர்"
+  [10] "நவம்பர்"
+  [11] "டிசம்பர்"
+
+MonthGenitiveNames (12 entries):
+  [0] "ஜனவரி"
+  [1] "பிப்ரவரி"
+  [2] "மார்ச்"
+  [3] "ஏப்ரல்"
+  [4] "மே"
+  [5] "ஜூன்"
+  [6] "ஜூலை"
+  [7] "ஆகஸ்ட்"
+  [8] "செப்டம்பர்"
+  [9] "அக்டோபர்"
+  [10] "நவம்பர்"
+  [11] "டிசம்பர்"
+
+MonthNames == MonthGenitiveNames: True
+
+### zu-ZA
+
+MonthNames (12 entries):
+  [0] "Januwari"
+  [1] "Februwari"
+  [2] "Mashi"
+  [3] "Ephreli"
+  [4] "Meyi"
+  [5] "Juni"
+  [6] "Julayi"
+  [7] "Agasti"
+  [8] "Septhemba"
+  [9] "Okthoba"
+  [10] "Novemba"
+  [11] "Disemba"
+
+MonthGenitiveNames (12 entries):
+  [0] "Januwari"
+  [1] "Februwari"
+  [2] "Mashi"
+  [3] "Ephreli"
+  [4] "Meyi"
+  [5] "Juni"
+  [6] "Julayi"
+  [7] "Agasti"
+  [8] "Septhemba"
+  [9] "Okthoba"
+  [10] "Novemba"
+  [11] "Disemba"
+
+MonthNames == MonthGenitiveNames: True
+
+## Output: Linux net10 (UNREACHABLE from macOS dev environment)
+
+Not available. Platform not reachable. ta and zu-ZA conservatively kept in FinalOverrideSet.
+
+## Output: Windows net10 (UNREACHABLE from macOS dev environment)
+
+Not available. Platform not reachable. ta and zu-ZA conservatively kept in FinalOverrideSet.
+
+## Output: Windows net48 (UNREACHABLE from macOS dev environment)
+
+Not available. Platform not reachable. ta and zu-ZA conservatively kept in FinalOverrideSet.
+
+## Corroborating evidence: existing probe-*-after.json month_standalone samples
+
+All 4 platform probes (macOS, Linux, Windows net10, Windows net48) show IDENTICAL
+month_standalone formatted-output values for both ta and zu-ZA across all 9 sampled
+reference dates. While month_standalone is NOT the authoritative contract (it is a
+formatted-output proxy, not the raw MonthNames array), this zero-variance observation
+corroborates that platform variance for these locales is unlikely.
+
+However, per the deterministic rule, corroborating evidence cannot substitute for
+full-platform raw MonthNames evidence. The conservative keep decision stands.

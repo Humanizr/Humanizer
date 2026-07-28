@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>{{ site.title }}</h1>
+            <p>{{ site.description }}</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        {{ content }}
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; {{ 'now' | date: "%Y" }} Humanizer. Licensed under MIT.</p>
+            <p>
+                <a href="https://github.com/Humanizr/Humanizer" target="_blank">GitHub</a> |
+                <a href="https://www.nuget.org/packages/Humanizer" target="_blank">NuGet</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

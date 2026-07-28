@@ -1,0 +1,502 @@
+locale: 'fil'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'at'
+
+  phrases:
+    relativeDate:
+      now: 'ngayon'
+      never: 'hindi kailanman'
+      past:
+        millisecond:
+          single: 'isang milisegundo ang nakalipas'
+          multiple:
+            forms:
+              default: 'milisegundong'
+            afterCount: 'nakalipas'
+        second:
+          single: 'isang segundo ang nakalipas'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} segundong nakalipas'
+              singular: '{count} segundo ang nakalipas'
+        minute:
+          single: 'isang minutong nakalipas'
+          multiple:
+            countPlacement: none
+            forms:
+              default: '{count} minutong nakalipas'
+              singular: '{count} minuto ang nakalipas'
+        hour:
+          single: 'isang oras ang nakalipas'
+          multiple:
+            forms:
+              default: 'oras'
+            afterCount: 'ang nakalipas'
+        day:
+          single: 'kahapon'
+          multiple:
+            forms:
+              default: 'araw'
+            afterCount: 'ang nakalipas'
+          template:
+            name: 'two'
+            value: '2 araw ang nakalipas'
+        week:
+          single: 'isang linggo ang nakalipas'
+          multiple:
+            forms:
+              default: 'linggong'
+            afterCount: 'nakalipas'
+        month:
+          single: 'isang buwan ang nakalipas'
+          multiple:
+            forms:
+              default: 'buwan'
+            afterCount: 'ang nakalipas'
+        year:
+          single: 'isang taong nakalipas'
+          multiple:
+            forms:
+              default: 'taong'
+            afterCount: 'nakalipas'
+      future:
+        millisecond:
+          single: 'isang milisegundo mula ngayon'
+          multiple:
+            forms:
+              default: 'milisegundo'
+            afterCount: 'mula ngayon'
+        second:
+          single: 'isang segundo mula ngayon'
+          multiple:
+            forms:
+              default: 'segundo'
+            afterCount: 'mula ngayon'
+        minute:
+          single: 'isang minuto mula ngayon'
+          multiple:
+            forms:
+              default: 'minuto'
+            afterCount: 'mula ngayon'
+        hour:
+          single: 'isang oras mula ngayon'
+          multiple:
+            forms:
+              default: 'oras'
+            afterCount: 'mula ngayon'
+        day:
+          single: 'bukas'
+          multiple:
+            forms:
+              default: 'araw'
+            afterCount: 'mula ngayon'
+          template:
+            name: 'two'
+            value: '2 araw mula ngayon'
+        week:
+          single: 'isang linggo mula ngayon'
+          multiple:
+            forms:
+              default: 'linggo'
+            afterCount: 'mula ngayon'
+        month:
+          single: 'isang buwan mula ngayon'
+          multiple:
+            forms:
+              default: 'buwan'
+            afterCount: 'mula ngayon'
+        year:
+          single: 'isang taon mula ngayon'
+          multiple:
+            forms:
+              default: 'taon'
+            afterCount: 'mula ngayon'
+    duration:
+      zero: 'walang oras'
+      age:
+        template: '{value} na gulang'
+      millisecond:
+        single:
+          numeric: '1 milisegundo'
+          words: 'isang milisegundo'
+        multiple:
+          forms:
+            default: 'milisegundo'
+      second:
+        single:
+          numeric: '1 segundo'
+          words: 'isang segundo'
+        multiple:
+          forms:
+            default: 'segundo'
+      minute:
+        single:
+          numeric: '1 minuto'
+          words: 'isang minuto'
+        multiple:
+          forms:
+            default: 'minuto'
+      hour:
+        single:
+          numeric: '1 oras'
+          words: 'isang oras'
+        multiple:
+          forms:
+            default: 'oras'
+      day:
+        single:
+          numeric: '1 araw'
+          words: 'isang araw'
+        multiple:
+          forms:
+            default: 'araw'
+      week:
+        single:
+          numeric: '1 linggo'
+          words: 'isang linggo'
+        multiple:
+          forms:
+            default: 'linggo'
+      month:
+        single:
+          numeric: '1 buwan'
+          words: 'isang buwan'
+        multiple:
+          forms:
+            default: 'buwan'
+      year:
+        single:
+          numeric: '1 taon'
+          words: 'isang taon'
+        multiple:
+          forms:
+            default: 'taon'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'oras'
+      day:
+        symbol: 'araw'
+      week:
+        symbol: 'linggo'
+      month:
+        symbol: 'buwan'
+      year:
+        symbol: 'taon'
+
+  number:
+    words:
+      engine: 'linking-scale'
+      maximumValue: 9223372036854775807
+      zeroWord: 'sero'
+      minusWord: 'minus'
+      conjunctionWord: 'at'
+      tensRemainderJoiner: '''t '
+      unitsMap:
+        - 'sero'
+        - 'isa'
+        - 'dalawa'
+        - 'tatlo'
+        - 'apat'
+        - 'lima'
+        - 'anim'
+        - 'pito'
+        - 'walo'
+        - 'siyam'
+        - 'sampu'
+        - 'labing-isa'
+        - 'labing-dalawa'
+        - 'labing-tatlo'
+        - 'labing-apat'
+        - 'labing-lima'
+        - 'labing-anim'
+        - 'labing-pito'
+        - 'labing-walo'
+        - 'labing-siyam'
+      tensMap:
+        2: 'dalawampu'
+        3: 'tatlumpu'
+        4: 'apatnapu'
+        5: 'limampu'
+        6: 'animnapu'
+        7: 'pitumpu'
+        8: 'walumpu'
+        9: 'siyamnapu'
+      hundredWords:
+        1: 'isang daan'
+        2: 'dalawang daan'
+        3: 'tatlong daan'
+        4: 'apat na daan'
+        5: 'limang daan'
+        6: 'anim na daan'
+        7: 'pitong daan'
+        8: 'walong daan'
+        9: 'siyam na daan'
+      scalePrefixes:
+        1: 'isang'
+        2: 'dalawang'
+        3: 'tatlong'
+        4: 'apat na'
+        5: 'limang'
+        6: 'anim na'
+        7: 'pitong'
+        8: 'walong'
+        9: 'siyam na'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kwintilyon'
+        -
+          value: 1000000000000000
+          name: 'kwadrilyon'
+        -
+          value: 1000000000000
+          name: 'trilyon'
+        -
+          value: 1000000000
+          name: 'bilyon'
+        -
+          value: 1000000
+          name: 'milyon'
+        -
+          value: 1000
+          name: 'libo'
+      scaleLinkRules:
+        -
+          suffix: ' isa'
+          replacement: ' isang'
+        -
+          suffix: ' dalawa'
+          replacement: ' dalawang'
+        -
+          suffix: ' tatlo'
+          replacement: ' tatlong'
+        -
+          suffix: ' apat'
+          replacement: ' apat na'
+        -
+          suffix: ' lima'
+          replacement: ' limang'
+        -
+          suffix: ' anim'
+          replacement: ' anim na'
+        -
+          suffix: ' pito'
+          replacement: ' pitong'
+        -
+          suffix: ' walo'
+          replacement: ' walong'
+        -
+          suffix: ' siyam'
+          replacement: ' siyam na'
+
+    parse:
+      engine: 'linking-affix'
+      cardinalMap:
+        sero: 0
+        isa: 1
+        dalawa: 2
+        tatlo: 3
+        apat: 4
+        lima: 5
+        anim: 6
+        pito: 7
+        walo: 8
+        siyam: 9
+        sampu: 10
+        labing: 10
+        dalawampu: 20
+        tatlumpu: 30
+        apatnapu: 40
+        limampu: 50
+        animnapu: 60
+        pitumpu: 70
+        walumpu: 80
+        siyamnapu: 90
+        daan: 100
+        libo: 1000
+        milyon: 1000000
+        bilyon: 1000000000
+        trilyon: 1000000000000
+        kwadrilyon: 1000000000000000
+        kwintilyon: 1000000000000000000
+      teenPrefix: 'labing'
+      teenBaseValue: 10
+      linkedSuffixes:
+        - 'ng'
+        - 't'
+      ignoredTokens:
+        - 'at'
+      negativePrefixes:
+        - 'minus '
+
+  compass:
+    full:
+      - 'hilaga'
+      - 'hilaga-hilagang-silangan'
+      - 'hilagang-silangan'
+      - 'silangan-hilagang-silangan'
+      - 'silangan'
+      - 'silangan-timog-silangan'
+      - 'timog-silangan'
+      - 'timog-timog-silangan'
+      - 'timog'
+      - 'timog-timog-kanluran'
+      - 'timog-kanluran'
+      - 'kanluran-timog-kanluran'
+      - 'kanluran'
+      - 'kanluran-hilagang-kanluran'
+      - 'hilagang-kanluran'
+      - 'hilaga-hilagang-kanluran'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSW'
+      - 'SW'
+      - 'WSW'
+      - 'W'
+      - 'WNW'
+      - 'NW'
+      - 'NNW'
+
+  formatter:
+    engine: 'profiled'
+
+  ordinal:
+    numeric:
+      engine: 'template'
+      masculine:
+        prefix: 'ika-'
+        defaultSuffix: ''
+    date:
+      pattern: 'MMMM {day}, yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: 'MMMM {day}, yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'una'
+      - 'dos'
+      - 'tres'
+      - 'kwatro'
+      - 'singko'
+      - 'sais'
+      - 'siyete'
+      - 'otso'
+      - 'nuwebe'
+      - 'diyes'
+      - 'onse'
+      - 'dose'
+    minuteWordsMap:
+      - ''
+      - 'uno'
+      - 'dos'
+      - 'tres'
+      - 'kwatro'
+      - 'singko'
+      - 'sais'
+      - 'siyete'
+      - 'otso'
+      - 'nuwebe'
+      - 'diyes'
+      - 'onse'
+      - 'dose'
+      - 'trese'
+      - 'katorse'
+      - 'kinse'
+      - 'disisais'
+      - 'disisiyete'
+      - 'disiotso'
+      - 'disinuwebe'
+      - 'beinte'
+      - 'beinte-uno'
+      - 'beinte-dos'
+      - 'beinte-tres'
+      - 'beinte-kwatro'
+      - 'beinte-singko'
+      - 'beinte-sais'
+      - 'beinte-siyete'
+      - 'beinte-otso'
+      - 'beinte-nuwebe'
+      - 'treinta'
+      - 'treinta-uno'
+      - 'treinta-dos'
+      - 'treinta-tres'
+      - 'treinta-kwatro'
+      - 'treinta-singko'
+      - 'treinta-sais'
+      - 'treinta-siyete'
+      - 'treinta-otso'
+      - 'treinta-nuwebe'
+      - 'kuwarenta'
+      - 'kuwarenta-uno'
+      - 'kuwarenta-dos'
+      - 'kuwarenta-tres'
+      - 'kuwarenta-kwatro'
+      - 'kuwarenta-singko'
+      - 'kuwarenta-sais'
+      - 'kuwarenta-siyete'
+      - 'kuwarenta-otso'
+      - 'kuwarenta-nuwebe'
+      - 'singkuwenta'
+      - 'singkuwenta-uno'
+      - 'singkuwenta-dos'
+      - 'singkuwenta-tres'
+      - 'singkuwenta-kwatro'
+      - 'singkuwenta-singko'
+      - 'singkuwenta-sais'
+      - 'singkuwenta-siyete'
+      - 'singkuwenta-otso'
+      - 'singkuwenta-nuwebe'
+    min0: 'ala {hour} ng {dayPeriod}'
+    defaultTemplate: 'ala {hour} {minutes} ng {dayPeriod}'
+    earlyMorning: 'umaga'
+    morning: 'umaga'
+    afternoon: 'hapon'
+    night: 'gabi'

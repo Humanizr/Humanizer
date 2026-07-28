@@ -1,15 +1,23 @@
-namespace Humanizer
+namespace Humanizer;
+
+class ToSentenceCase : ICulturedStringTransformer
 {
-    internal class ToSentenceCase : IStringTransformer
+    public string Transform(string input) =>
+        Transform(input, CultureInfo.CurrentCulture);
+
+    public string Transform(string input, CultureInfo culture)
     {
-        public string Transform(string input)
+
+        if (input.Length >= 1)
         {
-            if (input.Length >= 1)
+            if (char.IsUpper(input[0]))
             {
-                return string.Concat(input.Substring(0, 1).ToUpper(), input.Substring(1));
+                return input;
             }
 
-            return input.ToUpper();
+            return StringHumanizeExtensions.Concat(culture.TextInfo.ToUpper(input[0]), input.AsSpan(1));
         }
+
+        return culture.TextInfo.ToUpper(input);
     }
 }

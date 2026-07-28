@@ -1,12 +1,12 @@
-using System.Globalization;
+namespace Humanizer;
 
-namespace Humanizer
+class ToLowerCase : ICulturedStringTransformer
 {
-    internal class ToLowerCase : IStringTransformer
+    public string Transform(string input) =>
+        Transform(input, CultureInfo.CurrentCulture);
+
+    public string Transform(string input, CultureInfo culture)
     {
-        public string Transform(string input)
-        {
-            return CultureInfo.CurrentCulture.TextInfo.ToLower(input);
-        }
+        return culture.TextInfo.ToLower(input);
     }
 }
