@@ -61,6 +61,16 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
 
     [Theory]
+    [InlineData("specimen")]
+    [InlineData("Specimen")]
+    [InlineData("Pacmen")]
+    public void SingularizeDoesNotRewriteUnrelatedWordsEndingInMen(string word)
+    {
+        Assert.Equal(word, word.Singularize());
+        Assert.Equal(word, word.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Theory]
     [InlineData("arrives", "arrive")]
     [InlineData("drives", "drive")]
     [InlineData("curves", "curve")]
