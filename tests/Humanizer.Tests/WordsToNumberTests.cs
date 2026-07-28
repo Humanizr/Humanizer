@@ -940,6 +940,7 @@ public class WordsToNumberTests_Russian
     [InlineData("ноль", 0, null)]
     [InlineData("минус сто двадцать три", -123, null)]
     [InlineData("одна тысяча сто двенадцать", 1112, null)]
+    [InlineData("ста одиннадцатью тысячами", 111000, null)]
     [InlineData("сто двадцать одна тысяча триста четырнадцать", 121314, null)]
     [InlineData("два миллиона сто тридцать две тысячи четыреста пятнадцать", 2132415, null)]
     [InlineData("первый", 1, null)]
