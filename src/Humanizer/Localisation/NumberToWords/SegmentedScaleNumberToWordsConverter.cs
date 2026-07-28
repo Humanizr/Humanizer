@@ -10,15 +10,19 @@ class SegmentedScaleNumberToWordsConverter(SegmentedScaleNumberToWordsProfile pr
 
     /// <inheritdoc/>
     public override string Convert(long number) =>
-        Convert(number, SegmentedScaleVariant.Default);
+        Convert(number, null);
 
     /// <inheritdoc/>
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true) =>
         Convert(number, gender == GrammaticalGender.Feminine
             ? SegmentedScaleVariant.Pluralized
-            : SegmentedScaleVariant.Default);
+            : null);
 
-    string Convert(long number, SegmentedScaleVariant variant)
+    /// <inheritdoc/>
+    public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true) =>
+        Convert(number, gender, addAnd);
+
+    string Convert(long number, SegmentedScaleVariant? terminalVariant)
     {
         if ((ulong)profile.MaximumValue < GetAbsoluteValue(number))
         {
@@ -37,7 +41,7 @@ class SegmentedScaleNumberToWordsConverter(SegmentedScaleNumberToWordsProfile pr
             parts.Add(profile.MinusWord);
         }
 
-        parts.Add(ConvertCore(remaining, variant));
+        parts.Add(ConvertCore(remaining, SegmentedScaleVariant.Default, terminalVariant));
         return string.Join(" ", parts);
     }
 
@@ -100,23 +104,27 @@ class SegmentedScaleNumberToWordsConverter(SegmentedScaleNumberToWordsProfile pr
     /// <summary>
     /// Converts the current magnitude using the requested segmented variant.
     /// </summary>
-    string ConvertCore(ulong number, SegmentedScaleVariant variant)
+    string ConvertCore(
+        ulong number,
+        SegmentedScaleVariant variant,
+        SegmentedScaleVariant? terminalVariant = null)
     {
+        var effectiveVariant = terminalVariant ?? variant;
         if (number < 13)
         {
-            return (variant == SegmentedScaleVariant.Pluralized
+            return (effectiveVariant == SegmentedScaleVariant.Pluralized
                 ? profile.UnitsPluralized
                 : profile.UnitsDefault)[(int)number];
         }
 
         if (number < 100)
         {
-            return ConvertUnderOneHundred((int)number, variant);
+            return ConvertUnderOneHundred((int)number, effectiveVariant);
         }
 
         if (number < 1000)
         {
-            return ConvertUnderOneThousand((int)number, variant);
+            return ConvertUnderOneThousand((int)number, effectiveVariant);
         }
 
         foreach (var scale in profile.Scales)
@@ -141,7 +149,7 @@ class SegmentedScaleNumberToWordsConverter(SegmentedScaleNumberToWordsProfile pr
             var remainderVariant = count == 1
                 ? scale.SingularRemainderVariant
                 : scale.PluralRemainderVariant;
-            return scaleText + " " + ConvertCore(remainder, remainderVariant);
+            return scaleText + " " + ConvertCore(remainder, remainderVariant, terminalVariant);
         }
 
         return string.Empty;
