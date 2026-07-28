@@ -1,0 +1,66 @@
+---
+id: dates-times-durations-and-age
+title: Date, time, duration, and age scenarios
+sidebar_position: 6
+diataxis: reference
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import dates from '!!raw-loader!../_examples/scenarios-dates/Program.cs';
+
+# Date, time, duration, and age scenarios
+
+## Orientation
+
+Choose the guide by the meaning of the value and the sentence you need:
+
+| Task | Focused guide |
+| --- | --- |
+| Produce “yesterday” or “3 hours ago” | [Relative dates and times](./relative-dates-and-times.mdx) |
+| Produce “2 hours, 5 minutes” or an age phrase | [Durations and ages](./durations-and-ages.mdx) |
+| Build a readable `TimeSpan`, `DateTime`, or `DateOnly` | [Fluent dates and time spans](./fluent-dates-and-time-spans.mdx) |
+| Produce “January 25th, 2022” or “twenty-five past one” | [Spoken dates and clock times](./spoken-dates-and-clock-times.mdx) |
+
+## Example
+
+This verified source demonstrates the two most common display boundaries: a relative UTC date with an injected comparison instant and a two-unit elapsed duration:
+
+<CodeBlock language="csharp" title="Program.cs">{dates}</CodeBlock>
+
+It prints `yesterday; 2 hours, 5 minutes`. Follow the focused guides for the full overload contracts.
+
+### Pick a model before an API
+
+- Use `DateTimeOffset` when an instant and offset matter.
+- Use `DateOnly` for a calendar date without time-zone meaning.
+- Use `TimeOnly` for a wall-clock time without a date.
+- Use `TimeSpan` for elapsed duration, not calendar arithmetic.
+
+## Pitfall
+
+Reading `Now` inside formatting makes examples, tests, and cache behavior unstable. Inject comparison values and set culture explicitly. A `TimeSpan` has no calendar context, so months, years, and ages are approximations; use date arithmetic when leap years, month length, or birthdays must be exact.
+
+## Version notes
+
+`DateTime`, `DateTimeOffset`, and `TimeSpan` calls span the supported corpus. `DateOnly` and `TimeOnly` humanization begin in `2.11.10`; clock notation begins in `2.13.14`; `ToAge` begins in `3.0.1`. Historical sidebars must omit unavailable focused guides.
+
+## Related guides and API
+
+- [Relative dates and times](./relative-dates-and-times.mdx)
+- [Durations and ages](./durations-and-ages.mdx)
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [DateHumanizeExtensions API](../api/Humanizer.DateHumanizeExtensions.md)
+- [TimeSpanHumanizeExtensions API](../api/Humanizer.TimeSpanHumanizeExtensions.md)
+- [TimeSpanDehumanizeExtensions API](../api/Humanizer.TimeSpanDehumanizeExtensions.md)
+- [ITimeSpanHumanizeStrategy API](../api/Humanizer.ITimeSpanHumanizeStrategy.md)
+- [DefaultTimeSpanHumanizeStrategy API](../api/Humanizer.DefaultTimeSpanHumanizeStrategy.md)
+- [NumberToTimeSpanExtensions API](../api/Humanizer.NumberToTimeSpanExtensions.md)
+- [Configurator API](../api/Humanizer.Configurator.md)
+- [PrepositionsExtensions API](../api/Humanizer.PrepositionsExtensions.md)
+- [In API](../api/Humanizer.In.md)
+- [On API](../api/Humanizer.On.md)
+- [InDate API](../api/Humanizer.InDate.md)
+- [OnDate API](../api/Humanizer.OnDate.md)
+- [DateToOrdinalWordsExtensions API](../api/Humanizer.DateToOrdinalWordsExtensions.md)
+- [TimeOnlyToClockNotationExtensions API](../api/Humanizer.TimeOnlyToClockNotationExtensions.md)

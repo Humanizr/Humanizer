@@ -1,0 +1,54 @@
+---
+id: metric-numerals
+title: Format and parse metric numerals
+sidebar_position: 15
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import metric from '!!raw-loader!../_examples/scenarios-metric/Program.cs';
+
+# Format and parse metric numerals
+
+## Orientation
+
+Use `ToMetric` for compact decimal magnitudes such as `123.5k`, and `FromMetric` when an input follows Humanizer’s metric syntax. `MetricNumeralFormats` selects a symbol, SI prefix name, short-scale word, long-scale word, and optional spacing. These APIs follow the current numeric culture.
+
+## Example
+
+The example pins `en-US`, controls decimals, emits an SI prefix name, and parses a symbol:
+
+<CodeBlock language="csharp" title="Program.cs">{metric}</CodeBlock>
+
+### Select the representation
+
+`MetricNumeralFormats` is a flags enum:
+
+- `WithSpace` inserts a space before the suffix.
+- `UseName` emits an SI prefix name such as `kilo`.
+- `UseShortScaleWord` emits words such as `billion`.
+- `UseLongScaleWord` emits the selected long-scale equivalent.
+
+The nullable `decimals` argument controls rounding and trailing digits. Leave both options unset for the default representation.
+
+### Parse supported forms
+
+`FromMetric` accepts a numeric value followed by a supported SI symbol or prefix name, with optional whitespace. It returns `double` and throws `ArgumentException` for invalid syntax. Short- and long-scale words produced by `ToMetric` are display forms and do not round-trip through `FromMetric`.
+
+## Pitfall
+
+Metric prefixes are powers of 1000 and are unrelated to `ByteSize`’s binary multiples. The supported exponent range stops before `10^27` and below `10^-27`; out-of-range values throw. Because there is no culture parameter, scope `CurrentCulture` when parsing or exact output matters.
+
+## Version notes
+
+Metric conversion spans the documented corpus, but Humanizer 3 removed older
+boolean formatting overloads in favor of `MetricNumeralFormats`. The executable
+uses the selected version's formatting API and runs against that package.
+
+## Related guides and API
+
+- [Byte sizes and rates](./byte-sizes-and-rates.mdx)
+- [Specialized formatting utilities](./specialized-formatting-utilities.mdx)
+- [MetricNumeralExtensions API](../api/Humanizer.MetricNumeralExtensions.md)
+- [MetricNumeralFormats API](../api/Humanizer.MetricNumeralFormats.md)

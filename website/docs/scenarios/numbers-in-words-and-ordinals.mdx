@@ -1,0 +1,117 @@
+---
+id: numbers-in-words-and-ordinals
+title: Write numbers and ordinals in words
+sidebar_position: 12
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import numbers from '!!raw-loader!../_examples/scenarios-numbers/Program.cs';
+
+# Write numbers and ordinals in words
+
+## Orientation
+
+Use `ToWords` for cardinal words, `ToOrdinalWords` for word ordinals, and
+`Ordinalize` when the number should remain numeric with a localized ordinal
+form. `Fractionalize` approximates a decimal as a common fraction.
+`ToChineseFinancialCharacters` emits formal Chinese integer characters. Select
+culture explicitly and add grammatical gender or word form only when the
+selected locale advertises that capability.
+
+## Example
+
+The shared number example verifies cardinal words, locale-specific magnitude
+names, 64-bit ordinals, common fractions, simplified and traditional Chinese
+financial characters, and the established number-formatting helpers:
+
+<CodeBlock language="csharp" title="Program.cs">{numbers}</CodeBlock>
+
+### Choose the output
+
+| Desired output | API |
+| --- | --- |
+| `forty-two` | `42.ToWords(culture)` |
+| `twenty-first` | `21.ToOrdinalWords(culture)` |
+| `21st` | `21.Ordinalize(culture)` |
+| `2147483651st` | `2_147_483_651L.Ordinalize(culture)` |
+| `1 1/4` | `1.25m.Fractionalize(5, 0m)` |
+| `壹拾` | `10.ToChineseFinancialCharacters(simplifiedChinese)` |
+| A locale-specific tuple word | `number.ToTuple(culture)` |
+
+`ToWords` supports `int` and `long` cardinal values. Word ordinals are `int`-based. Some overloads accept `GrammaticalGender`, `WordForm`, or `addAnd`; use named arguments so intent remains clear across overload changes.
+
+### Format 64-bit ordinals
+
+On `main/preview`, numeric `Ordinalize` overloads accept the full `long` range
+and retain the selected culture, gender, and `WordForm` rules. String
+`Ordinalize` remains `int`-bounded; parse to `long` first when the input can
+exceed that range.
+
+Built-in ordinalizers support 64-bit values. A custom ordinalizer registered
+through `Configurator.Ordinalizers` can continue to implement `IOrdinalizer`,
+but it is limited to `int` values. Calling a `long` overload outside that range
+throws `NotSupportedException` unless the custom implementation also
+implements `ILongOrdinalizer`.
+
+### Approximate a decimal as a common fraction
+
+`Fractionalize(maxDenominator, tolerance)` returns the closest reduced fraction
+whose denominator does not exceed `maxDenominator`. The tolerance is an
+inclusive maximum absolute error. If no candidate is close enough, the method
+returns the original decimal formatted with `CurrentCulture`.
+
+Set `useUnicode: true` to use a Unicode vulgar-fraction character when an exact
+glyph exists, such as `¾`; otherwise slash notation is retained. Fraction
+components use invariant digits. `maxDenominator` must be at least 1 and
+`tolerance` cannot be negative.
+
+### Emit Chinese financial characters
+
+`ToChineseFinancialCharacters` accepts `int` or `long`, including the full
+signed 64-bit range. A culture in the `zh-Hans` hierarchy (for example
+`zh-CN`) selects simplified characters, while a culture in the `zh-Hant`
+hierarchy (for example `zh-TW`) selects traditional characters. Neutral `zh`
+and non-Chinese cultures throw `NotSupportedException`.
+
+The result is an integer numeral only. Humanizer does not add currency names or
+units such as yuan, jiao, or fen; applications handling money must apply that
+domain policy separately.
+
+### Respect each locale's magnitude ceiling
+
+`long` support does not imply that every locale has words for every `long`
+magnitude. On `main/preview`, Estonian and Albanian follow their CLDR scale
+names through `10^15`: Estonian uses `biljard`, while Albanian uses `miliar`,
+`bilion`, and `biliar` (with their plural forms). Both support values through
+`999,999,999,999,999,999`; `10^18` throws `NotImplementedException` because
+neither locale defines a scale word for it.
+
+## Pitfall
+
+Grammar features and maximum magnitudes differ by locale. Do not infer gender,
+abbreviation, Eifeler, ordinal-word, or full-range support from cardinal
+support. String `Ordinalize` parses the input using culture and can throw for
+malformed or out-of-range text; prefer the numeric overload when the
+application already has a number.
+
+## Version notes
+
+The basic number-word and ordinal APIs span the documented corpus, but overloads
+and locale grammar have changed. `Fractionalize`, Chinese financial numerals,
+64-bit numeric ordinals, and the Estonian and Albanian scale corrections
+described above are `main/preview` behavior. The verified source runs against
+the selected package. Historical snapshots link to their own capability data
+and signatures.
+
+## Related guides and API
+
+- [Parse number words](./parse-number-words.mdx)
+- [Metric numerals](./metric-numerals.mdx)
+- [NumberToWordsExtension API](../api/Humanizer.NumberToWordsExtension.md)
+- [OrdinalizeExtensions API](../api/Humanizer.OrdinalizeExtensions.md)
+- [ILongOrdinalizer API](../api/Humanizer.ILongOrdinalizer.md)
+- [FractionalizeExtensions API](../api/Humanizer.FractionalizeExtensions.md)
+- [ChineseFinancialNumeralExtensions API](../api/Humanizer.ChineseFinancialNumeralExtensions.md)
+- [WordForm API](../api/Humanizer.WordForm.md)

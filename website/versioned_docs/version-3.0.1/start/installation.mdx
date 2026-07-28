@@ -1,0 +1,55 @@
+---
+id: installation
+title: Install Humanizer
+sidebar_position: 2
+diataxis: how-to
+persona: new developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import quickStart from '!!raw-loader!../_examples/quick-start/Program.cs';
+
+# Install Humanizer
+
+## Orientation
+
+Install the `Humanizer` package in the project that produces user-facing text. This snapshot documents Humanizer `3.0.1`.
+
+## Example
+
+Install the selected release:
+
+```console
+dotnet add package Humanizer --version 3.0.1
+```
+
+Then add `using Humanizer;` and run this verified program:
+
+<CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
+
+Humanizer `3.0.1` ships `net10.0`, `net8.0`, `net48`, and `netstandard2.0` assets. A consuming project must target a framework compatible with one of those package assets.
+
+## Confirm the reference
+
+Run:
+
+```console
+dotnet list package
+```
+
+The project should list `Humanizer` at version `3.0.1`. In centrally managed repositories, put the version in `Directory.Packages.props` and omit `--version` from the project command.
+
+## Pitfall
+
+Do not treat compatibility with a `netstandard` asset as a claim that every consuming target framework is explicitly supported. The package metadata above is the selected-release boundary.
+
+## Version notes
+
+The `3.0.1` `Humanizer` package is a metapackage over `Humanizer.Core` and locale packages. See [package selection](./package-selection.md) before replacing package references during an upgrade.
+
+## Related guides and API
+
+- [Package selection](./package-selection.md)
+- [Quick start](./quick-start.mdx)
+- [Troubleshooting](./troubleshooting.mdx)
+- [3.0.1 API reference](../api/index.md)

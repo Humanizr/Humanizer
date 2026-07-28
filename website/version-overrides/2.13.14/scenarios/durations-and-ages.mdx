@@ -1,0 +1,46 @@
+---
+id: durations-and-ages
+title: Format durations and ages
+sidebar_position: 8
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import durations from '!!raw-loader!../_examples/scenarios-durations/Program.cs';
+
+# Format durations and ages
+
+## Orientation
+
+Call `TimeSpan.Humanize` for elapsed time. Precision controls how many units appear; minimum and maximum units define the allowed range. Keep calendar-sensitive calculations in date types and use this API only after the application has a duration.
+
+## Example
+
+This program shows two-unit precision and locale-aware list punctuation:
+
+<CodeBlock language="csharp" title="Program.cs">{durations}</CodeBlock>
+
+### Control the decomposition
+
+- `precision` limits the number of returned non-empty units.
+- `countEmptyUnits: true` counts gaps after the first non-empty unit toward that limit.
+- `maxUnit` and `minUnit` constrain the decomposition.
+- `toWords: true` replaces digits with number words where the locale supports them.
+- `collectionSeparator: null` uses the localized collection formatter; any supplied string is used as a literal separator.
+
+The default maximum unit is `Week`. Ask for `Month` or `Year` explicitly when those approximate units are acceptable.
+
+## Pitfall
+
+Months and years are approximated from a duration and do not know calendar month length or leap years. Negative `TimeSpan` values are rendered with positive unit counts, so preserve direction elsewhere when it matters. A precision of zero or less returns an empty string.
+
+## Version notes
+
+`TimeSpan.Humanize` is available in this 2.x release. `ToAge` is not available until `3.0.1`.
+
+## Related guides and API
+
+- [Fluent dates and time spans](./fluent-dates-and-time-spans.mdx)
+- [Relative dates and times](./relative-dates-and-times.mdx)
+- [TimeSpanHumanizeExtensions API](../api/Humanizer.TimeSpanHumanizeExtensions.md)

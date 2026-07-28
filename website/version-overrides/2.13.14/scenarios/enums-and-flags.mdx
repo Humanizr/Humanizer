@@ -1,0 +1,46 @@
+---
+id: enums-and-flags
+title: Humanize and parse enums and flags
+sidebar_position: 17
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import enumsFlags from '!!raw-loader!../_examples/scenarios-enums-flags/Program.cs';
+
+# Humanize and parse enums and flags
+
+## Orientation
+
+Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. Dehumanization matches that resolved label case-insensitively. It does not index every possible raw, humanized, and metadata form. Flags enums are decomposed and joined through the active collection formatter.
+
+## Example
+
+The executable verifies a two-flag value, case-insensitive generic dehumanization, and an unknown flag bit:
+
+<CodeBlock language="csharp" title="Program.cs">{enumsFlags}</CodeBlock>
+
+### Choose metadata and casing
+
+Humanizer prefers supported description/display metadata before deriving words from the member name. That chosen value is also the member's dehumanization label. Pass `LetterCasing` when the derived label needs a specific case. Assign `Humanizer.Configuration.Configurator.EnumDescriptionPropertyLocator` to select a custom description-like property globally before enum metadata is cached.
+
+### Format flags
+
+Known nonzero flags are humanized and joined using the current UI culture. A defined zero member uses its label. A value containing only unknown bits humanizes to an empty string.
+
+## Pitfall
+
+Labels must be unambiguous even though matching is case-insensitive. The nullable generic no-match overload and 3.x trimming annotations are not present in this release.
+
+## Version notes
+
+These enum APIs use the Humanizer 2 signatures. Humanizer 3 later changes generic constraints and metadata configuration.
+
+## Related guides and API
+
+- [Collections and tuple names](./collections-and-tuples.mdx)
+- [EnumHumanizeExtensions API](../api/Humanizer.EnumHumanizeExtensions.md)
+- [EnumDehumanizeExtensions API](../api/Humanizer.EnumDehumanizeExtensions.md)
+- [OnNoMatch API](../api/Humanizer.OnNoMatch.md)
+- [Configurator API](../api/Humanizer.Configuration.Configurator.md)

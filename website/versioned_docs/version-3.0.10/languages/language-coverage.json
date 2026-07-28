@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 2,
+  "coverageKind": "published-package-cultures",
+  "version": "3.0.10",
+  "generatedFor": "3.0.10",
+  "source": "verified NuGet packages Humanizer and Humanizer.Core",
+  "package": {
+    "id": "Humanizer",
+    "version": "3.0.10",
+    "apiPackage": "Humanizer.Core",
+    "targetFrameworks": [
+      "netstandard2.0",
+      "net48",
+      "net8.0",
+      "net10.0"
+    ],
+    "localeData": "culture packages declared by the verified metapackage; neutral en supplied by the verified API package",
+    "apiAvailability": {
+      "dateOnlyOrdinals": [
+        "net8.0",
+        "net10.0"
+      ],
+      "clockNotation": [
+        "net8.0",
+        "net10.0"
+      ]
+    }
+  },
+  "cultures": [
+    "af",
+    "ar",
+    "az",
+    "bg",
+    "bn",
+    "ca",
+    "cs",
+    "da",
+    "de",
+    "el",
+    "en",
+    "es",
+    "fa",
+    "fi",
+    "fil",
+    "fr",
+    "he",
+    "hr",
+    "hu",
+    "hy",
+    "id",
+    "is",
+    "it",
+    "ja",
+    "ko",
+    "ku",
+    "lb",
+    "lt",
+    "lv",
+    "ms",
+    "mt",
+    "nb",
+    "nl",
+    "pl",
+    "pt",
+    "pt-BR",
+    "ro",
+    "ru",
+    "sk",
+    "sl",
+    "sr",
+    "sr-Latn",
+    "sv",
+    "th",
+    "tr",
+    "uk",
+    "uz-Cyrl-UZ",
+    "uz-Latn-UZ",
+    "vi",
+    "zh-CN",
+    "zh-Hans",
+    "zh-Hant"
+  ]
+}

@@ -1,6 +1,6 @@
 # Learnings from the Urdu (ur) Epic
 
-Reference notes for future locale work, captured from the fn-8 Urdu epic.
+Reference notes captured from the Urdu locale work.
 
 ## Arabic-Script Letter Subset Differences
 

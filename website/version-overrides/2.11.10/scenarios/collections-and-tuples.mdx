@@ -1,0 +1,50 @@
+---
+id: collections-and-tuples
+title: Format collections and tuple names
+sidebar_position: 18
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import collectionsTuples from '!!raw-loader!../_examples/scenarios-collections-tuples/Program.cs';
+
+# Format collections and tuple names
+
+## Orientation
+
+Collection humanization turns a sequence into a localized natural-language list. Pass a display selector when items are domain objects. Tuple helpers produce words such as `double`, `triple`, or `quadruple` for multiplicity labels; they do not transform a collection itself.
+
+## Example
+
+The executable formats strings, projects a record to its display name, verifies the default formatter's null/blank filtering, and produces an invariant English tuple word:
+
+<CodeBlock language="csharp" title="Program.cs">{collectionsTuples}</CodeBlock>
+
+### Format a collection
+
+The no-argument overload calls `ToString` for each item. Formatter overloads accept a function returning `string` or `object`. The default formatter trims each display result and drops null, empty, or whitespace-only results before deciding conjunction placement, punctuation, and the empty/singleton cases.
+
+The `separator` argument represents the desired conjunction token, such as `or`; it is not simply a raw delimiter. For full application-wide customization, register an `ICollectionFormatter` at startup.
+
+### Name a tuple
+
+`Tupleize` returns fixed English names for common sizes and an `n-tuple` fallback. `ToTuple(culture)` uses the selected locale’s number-to-words converter where supported.
+
+## Pitfall
+
+Collection output follows `CurrentUICulture`; set it at the request or job boundary. The default formatter silently removes null or blank display results, so validate required source data before formatting. A custom formatter can define a different contract. The `collectionSeparator` parameter on `TimeSpan.Humanize` has different literal-separator semantics.
+
+## Version notes
+
+Collection humanization and tuple helpers span the documented corpus, while
+punctuation and localized tuple coverage vary by release. The executable
+compiles and runs against this selected package.
+
+## Related guides and API
+
+- [Enums and flags](./enums-and-flags.mdx)
+- [Localization and extensibility](./localization-and-extensibility.mdx)
+- [CollectionHumanizeExtensions API](../api/Humanizer.CollectionHumanizeExtensions.md)
+- [ICollectionFormatter API](../api/Humanizer.Localisation.CollectionFormatters.ICollectionFormatter.md)
+- [TupleizeExtensions API](../api/Humanizer.TupleizeExtensions.md)

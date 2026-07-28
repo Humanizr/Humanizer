@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-07-28",
+  "sourceEvidence": [
+    "https://humanizr.net/",
+    "repository docs/ history"
+  ],
+  "staticPagesLimitation": "GitHub Pages serves client redirect documents with HTTP 200, not HTTP 301 or 308. Each redirect document forwards the query string and fragment it receives; inventoried fragment mappings resolve renamed anchors, while an unmapped old fragment is preserved but is not guaranteed to scroll.",
+  "redirects": [
+    {
+      "from": ["/docs/index", "/docs/index.md"],
+      "to": "/docs/"
+    },
+    {
+      "from": ["/installation", "/installation.html", "/docs/installation", "/docs/installation.html", "/docs/installation.md"],
+      "referrers": ["/installation/", "/docs/installation/"],
+      "to": "/docs/start/installation/",
+      "fragments": {
+        "nuget-packages": {
+          "to": "/docs/start/installation/",
+          "fragment": "example"
+        }
+      }
+    },
+    {
+      "from": ["/quick-start", "/quick-start.html", "/docs/quick-start", "/docs/quick-start.html", "/docs/quick-start.md"],
+      "referrers": ["/quick-start/", "/docs/quick-start/"],
+      "to": "/docs/start/quick-start/",
+      "fragments": {
+        "basic-examples": {
+          "to": "/docs/start/quick-start/",
+          "fragment": "example"
+        }
+      }
+    },
+    {
+      "from": ["/configuration", "/configuration.html", "/application-integration", "/application-integration.html"],
+      "to": "/docs/start/configuration/"
+    },
+    {
+      "from": ["/troubleshooting", "/troubleshooting.html"],
+      "to": "/docs/start/troubleshooting/"
+    },
+    {
+      "from": ["/string-humanization", "/string-humanization.html", "/string-transformations", "/string-transformations.html", "/docs/string-humanization", "/docs/string-humanization.html", "/docs/string-humanization.md"],
+      "referrers": ["/string-humanization/", "/string-transformations/", "/docs/string-humanization/"],
+      "to": "/docs/scenarios/strings-and-casing/",
+      "fragments": {
+        "basic-usage": {
+          "to": "/docs/scenarios/strings-and-casing/",
+          "fragment": "example"
+        }
+      }
+    },
+    {
+      "from": ["/string-dehumanization", "/string-dehumanization.html", "/string-truncation", "/string-truncation.html", "/docs/string-dehumanization", "/docs/string-dehumanization.html", "/docs/string-dehumanization.md", "/docs/string-truncation", "/docs/string-truncation.html", "/docs/string-truncation.md"],
+      "to": "/docs/scenarios/truncation-and-dehumanization/"
+    },
+    {
+      "from": ["/datetime-humanization", "/datetime-humanization.html"],
+      "to": "/docs/scenarios/relative-dates-and-times/"
+    },
+    {
+      "from": ["/timespan-humanization", "/timespan-humanization.html"],
+      "to": "/docs/scenarios/durations-and-ages/"
+    },
+    {
+      "from": ["/dates-and-times", "/dates-and-times.html"],
+      "to": "/docs/scenarios/dates-times-durations-and-age/"
+    },
+    {
+      "from": ["/fluent-date", "/fluent-date.html"],
+      "to": "/docs/scenarios/fluent-dates-and-time-spans/"
+    },
+    {
+      "from": ["/datetime-ordinal-words", "/datetime-ordinal-words.html", "/timeonly-clock-notation", "/timeonly-clock-notation.html"],
+      "to": "/docs/scenarios/spoken-dates-and-clock-times/"
+    },
+    {
+      "from": ["/number-to-words", "/number-to-words.html", "/number-to-ordinal-words", "/number-to-ordinal-words.html", "/ordinalization", "/ordinalization.html"],
+      "to": "/docs/scenarios/numbers-in-words-and-ordinals/"
+    },
+    {
+      "from": ["/words-to-number", "/words-to-number.html"],
+      "to": "/docs/scenarios/parse-number-words/"
+    },
+    {
+      "from": ["/metric-numerals", "/metric-numerals.html"],
+      "to": "/docs/scenarios/metric-numerals/"
+    },
+    {
+      "from": ["/bytesize", "/bytesize.html"],
+      "to": "/docs/scenarios/byte-sizes-and-rates/"
+    },
+    {
+      "from": ["/number-to-numbers", "/number-to-numbers.html", "/roman-numerals", "/roman-numerals.html", "/heading", "/heading.html", "/time-unit-symbols", "/time-unit-symbols.html"],
+      "to": "/docs/scenarios/specialized-formatting-utilities/"
+    },
+    {
+      "from": ["/collection-humanization", "/collection-humanization.html", "/tupleize", "/tupleize.html"],
+      "to": "/docs/scenarios/collections-and-tuples/"
+    },
+    {
+      "from": ["/enum-humanization", "/enum-humanization.html", "/enum-dehumanization", "/enum-dehumanization.html", "/enumerations", "/enumerations.html"],
+      "to": "/docs/scenarios/enums-and-flags/"
+    },
+    {
+      "from": ["/pluralization", "/pluralization.html", "/singularization", "/singularization.html", "/to-quantity", "/to-quantity.html", "/custom-vocabularies", "/custom-vocabularies.html", "/inflector-methods", "/inflector-methods.html"],
+      "to": "/docs/scenarios/inflection-and-quantities/"
+    },
+    {
+      "from": ["/localization", "/localization.html", "/docs/localization", "/docs/localization.html", "/docs/localization.md"],
+      "referrers": ["/localization/", "/docs/localization/"],
+      "to": "/docs/languages/",
+      "fragments": {
+        "supported-locales": {
+          "to": "/docs/languages/supported-cultures/",
+          "fragment": "orientation"
+        }
+      }
+    },
+    {
+      "from": ["/extensibility", "/extensibility.html", "/docs/extensibility", "/docs/extensibility.html", "/docs/extensibility.md"],
+      "to": "/docs/scenarios/localization-and-extensibility/"
+    },
+    {
+      "from": ["/adding-a-locale", "/adding-a-locale.html", "/docs/adding-a-locale", "/docs/adding-a-locale.html", "/docs/adding-a-locale.md"],
+      "to": "/docs/next/contributing/adding-or-updating-a-locale/"
+    },
+    {
+      "from": ["/locale-yaml-how-to", "/locale-yaml-how-to.html", "/docs/locale-yaml-how-to", "/docs/locale-yaml-how-to.html", "/docs/locale-yaml-how-to.md"],
+      "to": "/docs/next/contributing/locale-yaml-how-to/"
+    },
+    {
+      "from": ["/locale-yaml-reference", "/locale-yaml-reference.html", "/docs/locale-yaml-reference", "/docs/locale-yaml-reference.html", "/docs/locale-yaml-reference.md"],
+      "to": "/docs/next/contributing/locale-yaml-reference/"
+    },
+    {
+      "from": ["/contributing", "/contributing.html", "/CONTRIBUTING.md", "/.github/CONTRIBUTING.md"],
+      "to": "/docs/contributing/"
+    },
+    {
+      "from": ["/testing", "/testing.html"],
+      "to": "/docs/contributing/"
+    },
+    {
+      "from": ["/performance", "/performance.html"],
+      "to": "/docs/concepts/trimming-and-native-aot/"
+    },
+    {
+      "from": ["/migration-v3", "/migration-v3.html", "/docs/migration-v3", "/docs/migration-v3.html", "/docs/migration-v3.md"],
+      "referrers": ["/migration-v3/", "/docs/migration-v3/"],
+      "to": "/docs/upgrading/version-3-migration/",
+      "fragments": {
+        "namespace-consolidation-source-breaking": {
+          "to": "/docs/upgrading/version-3-migration/",
+          "fragment": "2-consolidate-namespaces"
+        }
+      }
+    },
+    {
+      "from": ["/v3-namespace-migration", "/v3-namespace-migration.html", "/docs/v3-namespace-migration", "/docs/v3-namespace-migration.html", "/docs/v3-namespace-migration.md"],
+      "to": "/docs/analyzer/"
+    },
+    {
+      "from": ["/api", "/api.html", "/api-reference", "/api-reference.html"],
+      "to": "/docs/api/"
+    }
+  ],
+  "unsupportedVersionPaths": {
+    "match": "/docs/<version-before-2.10.1>/...",
+    "behavior": "Render an explanatory unavailable page at the requested URL without redirecting to the latest version or home."
+  }
+}

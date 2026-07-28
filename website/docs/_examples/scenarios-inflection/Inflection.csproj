@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <DocumentationArea>Scenarios</DocumentationArea>
+  </PropertyGroup>
+</Project>

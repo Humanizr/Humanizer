@@ -1,0 +1,445 @@
+name: Prepare documentation release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Published Humanizer package version
+        required: true
+        type: string
+      promote_latest:
+        description: Make this version the default documentation
+        required: true
+        default: true
+        type: boolean
+
+permissions: {}
+
+concurrency:
+  group: documentation-release-${{ inputs.version }}
+  cancel-in-progress: false
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  RELEASE_VERSION: ${{ inputs.version }}
+
+jobs:
+  snapshot:
+    outputs:
+      base_sha: ${{ steps.patch.outputs.base_sha }}
+      patch_sha256: ${{ steps.patch.outputs.patch_sha256 }}
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the default branch
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "Documentation releases must run from main." >&2
+          exit 1
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate release input
+        shell: pwsh
+        run: |
+          if ($env:RELEASE_VERSION -notmatch '^\d+\.\d+\.\d+$') {
+              throw "Release version must be a three-part stable version."
+          }
+
+          $manifest = Get-Content -Raw website/humanizer-versions.json |
+              ConvertFrom-Json -Depth 20
+          $entries = @(
+              $manifest.versions |
+                  Where-Object version -eq $env:RELEASE_VERSION
+          )
+          if ($entries.Count -ne 1 -or
+              $entries[0].published -or
+              $entries[0].source.kind -ne "nuget") {
+              throw "Declare exactly one unpublished NuGet-backed manifest entry before dispatch."
+          }
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: global.json
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
+        with:
+          package_json_file: website/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version-file: website/.node-version
+          cache: pnpm
+          cache-dependency-path: website/pnpm-lock.yaml
+
+      - name: Cache immutable documentation packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: /tmp/humanizer-docs-nuget/**/*.nupkg
+          key: >-
+            docs-nuget-v2-${{ runner.os }}-${{
+              hashFiles(
+                'website/humanizer-versions.json',
+                'nuget.config',
+                '.config/dotnet-tools.json'
+              )
+            }}
+
+      - name: Restore dependencies
+        run: |
+          dotnet tool restore
+          pnpm --dir website install --frozen-lockfile
+
+      - name: Create promoted snapshot
+        if: inputs.promote_latest
+        shell: pwsh
+        run: >-
+          ./tools/docs/snapshot.ps1
+          -Version $env:RELEASE_VERSION
+          -PromoteLatest
+
+      - name: Create non-default snapshot
+        if: ${{ !inputs.promote_latest }}
+        shell: pwsh
+        run: >-
+          ./tools/docs/snapshot.ps1
+          -Version $env:RELEASE_VERSION
+
+      - name: Validate generated release inputs
+        shell: pwsh
+        run: ./tools/docs/build.ps1 -Mode Validate
+
+      - name: Validate snapshot transactions and Native AOT
+        shell: pwsh
+        run: >-
+          ./tools/docs/test.ps1
+          -RequireNativeAot
+          -ReleaseVersion $env:RELEASE_VERSION
+
+      - name: Build complete site
+        run: |
+          pnpm --dir website run check:content
+          pnpm --dir website run build
+
+      - name: Record new search baselines
+        shell: pwsh
+        run: >-
+          ./tools/docs/verify-search.ps1
+          -RecordVersion $env:RELEASE_VERSION
+
+      - name: Validate complete site
+        run: |
+          pnpm --dir website run check:links
+          pnpm --dir website run check:search-budget
+          pnpm --dir website run check:artifact
+          pnpm --dir website run test:unit
+          pnpm --dir website run typecheck
+          dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic
+
+      - name: Install browser
+        run: pnpm --dir website exec playwright install --with-deps chromium
+
+      - name: Validate browser behavior and accessibility
+        run: pnpm --dir website run test:ci
+
+      - name: Stage the exact generated release diff
+        id: patch
+        run: |
+          git add \
+            website/humanizer-versions.json \
+            website/search-index-baselines.json \
+            website/versions.json \
+            "website/versioned_docs/version-${RELEASE_VERSION}" \
+            "website/versioned_sidebars/version-${RELEASE_VERSION}-sidebars.json"
+
+          if ! git diff --quiet ||
+              test -n "$(git ls-files --others --exclude-standard)"; then
+            echo "Snapshot generation changed files outside the release outputs." >&2
+            git status --short >&2
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "Snapshot generation produced no release changes." >&2
+            exit 1
+          fi
+
+          while IFS= read -r changed_path; do
+            case "$changed_path" in
+              website/humanizer-versions.json | \
+              website/search-index-baselines.json | \
+              website/versions.json | \
+              "website/versioned_docs/version-${RELEASE_VERSION}/"* | \
+              "website/versioned_sidebars/version-${RELEASE_VERSION}-sidebars.json")
+                ;;
+              *)
+                echo "Generated an unexpected path: $changed_path" >&2
+                exit 1
+                ;;
+            esac
+          done < <(git diff --cached --no-renames --name-only)
+
+          git diff \
+            --cached \
+            --binary \
+            --full-index \
+            --no-renames \
+            > "$RUNNER_TEMP/release.patch"
+          patch_sha256="$(
+            sha256sum "$RUNNER_TEMP/release.patch" |
+              awk '{print $1}'
+          )"
+          echo "base_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "patch_sha256=${patch_sha256}" >> "$GITHUB_OUTPUT"
+
+      - name: Transfer validated release diff
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: documentation-release-patch
+          path: ${{ runner.temp }}/release.patch
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs:
+      - snapshot
+    permissions:
+      actions: write
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the default branch
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "Documentation releases must run from main." >&2
+          exit 1
+
+      - name: Checkout validated base
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ needs.snapshot.outputs.base_sha }}
+
+      - name: Download validated release diff
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: documentation-release-patch
+          path: ${{ runner.temp }}/documentation-release-patch
+
+      - name: Revalidate and apply the exact release diff
+        env:
+          EXPECTED_BASE_SHA: ${{ needs.snapshot.outputs.base_sha }}
+          EXPECTED_PATCH_SHA256: ${{ needs.snapshot.outputs.patch_sha256 }}
+        run: |
+          patch="$RUNNER_TEMP/documentation-release-patch/release.patch"
+          if [[ "$(git rev-parse HEAD)" != "$EXPECTED_BASE_SHA" ]]; then
+            echo "Publication checkout does not match the validated base." >&2
+            exit 1
+          fi
+          if [[ ! "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release version must be a three-part stable version." >&2
+            exit 1
+          fi
+          printf '%s  %s\n' "$EXPECTED_PATCH_SHA256" "$patch" |
+            sha256sum -c -
+          git apply --check --index --binary "$patch"
+          git apply --index --binary "$patch"
+
+          if ! git diff --quiet ||
+              test -n "$(git ls-files --others --exclude-standard)"; then
+            echo "Transferred diff produced an unexpected worktree change." >&2
+            git status --short >&2
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "Transferred release diff is empty." >&2
+            exit 1
+          fi
+          while IFS= read -r changed_path; do
+            case "$changed_path" in
+              website/humanizer-versions.json | \
+              website/search-index-baselines.json | \
+              website/versions.json | \
+              "website/versioned_docs/version-${RELEASE_VERSION}/"* | \
+              "website/versioned_sidebars/version-${RELEASE_VERSION}-sidebars.json")
+                ;;
+              *)
+                echo "Transferred an unexpected path: $changed_path" >&2
+                exit 1
+                ;;
+            esac
+          done < <(git diff --cached --no-renames --name-only)
+
+          published_entry_count="$(
+            jq \
+              --arg version "$RELEASE_VERSION" \
+              '[
+                .versions[]
+                | select(
+                    .version == $version and
+                    .published == true and
+                    .source.kind == "nuget"
+                  )
+              ] | length' \
+              website/humanizer-versions.json
+          )"
+          if [[ "$published_entry_count" != 1 ]]; then
+            echo "Transferred manifest does not publish exactly one NuGet-backed release." >&2
+            exit 1
+          fi
+
+      - name: Commit or verify generated snapshot branch
+        id: commit
+        env:
+          EXPECTED_BASE_SHA: ${{ needs.snapshot.outputs.base_sha }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          release_branch="docs/release-${RELEASE_VERSION}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote \
+              --exit-code \
+              --heads \
+              origin \
+              "refs/heads/${release_branch}" >/dev/null; then
+            git fetch \
+              --no-tags \
+              origin \
+              "refs/heads/${release_branch}:refs/remotes/origin/${release_branch}"
+            if ! merge_base="$(
+              git merge-base origin/main "origin/${release_branch}"
+            )"; then
+              echo "Remote release branch has no main merge base." >&2
+              exit 1
+            fi
+
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                website/humanizer-versions.json | \
+                website/search-index-baselines.json | \
+                website/versions.json | \
+                "website/versioned_docs/version-${RELEASE_VERSION}/"* | \
+                "website/versioned_sidebars/version-${RELEASE_VERSION}-sidebars.json")
+                  ;;
+                *)
+                  echo "Remote release branch changed an unexpected path: $changed_path" >&2
+                  exit 1
+                  ;;
+              esac
+            done < <(
+              git diff \
+                --no-renames \
+                --name-only \
+                "$merge_base" \
+                "origin/${release_branch}"
+            )
+
+            if ! git diff \
+                --cached \
+                --quiet \
+                "origin/${release_branch}" \
+                -- \
+                website/humanizer-versions.json \
+                website/search-index-baselines.json \
+                website/versions.json \
+                "website/versioned_docs/version-${RELEASE_VERSION}" \
+                "website/versioned_sidebars/version-${RELEASE_VERSION}-sidebars.json"; then
+              echo "Remote release outputs differ from this validated run." >&2
+              exit 1
+            fi
+          else
+            git switch -c "$release_branch"
+            git commit -m "docs: publish Humanizer ${RELEASE_VERSION} reference"
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                website/humanizer-versions.json | \
+                website/search-index-baselines.json | \
+                website/versions.json | \
+                "website/versioned_docs/version-${RELEASE_VERSION}/"* | \
+                "website/versioned_sidebars/version-${RELEASE_VERSION}-sidebars.json")
+                  ;;
+                *)
+                  echo "Commit contains an unexpected path: $changed_path" >&2
+                  exit 1
+                  ;;
+              esac
+            done < <(
+              git diff \
+                --no-renames \
+                --name-only \
+                "$EXPECTED_BASE_SHA" \
+                HEAD
+            )
+            gh auth setup-git
+            git push origin "HEAD:refs/heads/${release_branch}"
+          fi
+          echo "branch=${release_branch}" >> "$GITHUB_OUTPUT"
+
+      - name: Open release pull request
+        id: pull-request
+        env:
+          EXPECTED_BASE_SHA: ${{ needs.snapshot.outputs.base_sha }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_BRANCH: ${{ steps.commit.outputs.branch }}
+        run: |
+          git fetch \
+            --no-tags \
+            origin \
+            "refs/heads/${RELEASE_BRANCH}:refs/remotes/origin/${RELEASE_BRANCH}"
+          if ! merge_base="$(
+            git merge-base "$EXPECTED_BASE_SHA" "origin/${RELEASE_BRANCH}"
+          )"; then
+            echo "Published release branch has no validated merge base." >&2
+            exit 1
+          fi
+          while IFS= read -r changed_path; do
+            case "$changed_path" in
+              website/humanizer-versions.json | \
+              website/search-index-baselines.json | \
+              website/versions.json | \
+              "website/versioned_docs/version-${RELEASE_VERSION}/"* | \
+              "website/versioned_sidebars/version-${RELEASE_VERSION}-sidebars.json")
+                ;;
+              *)
+                echo "Published release branch contains an unexpected path: $changed_path" >&2
+                exit 1
+                ;;
+            esac
+          done < <(
+            git diff \
+              --no-renames \
+              --name-only \
+              "$merge_base" \
+              "origin/${RELEASE_BRANCH}"
+          )
+          pr_url="$(
+            gh pr list \
+              --base main \
+              --head "$RELEASE_BRANCH" \
+              --state open \
+              --json url \
+              --jq '.[0].url'
+          )"
+          if [[ -z "$pr_url" ]]; then
+            pr_url="$(
+              gh pr create \
+                --base main \
+                --head "$RELEASE_BRANCH" \
+                --title "docs: publish Humanizer ${RELEASE_VERSION} reference" \
+                --body "Generated from the published Humanizer ${RELEASE_VERSION} package. The immutable snapshot, API reference, examples, selector metadata, and complete static site passed the documentation release gates."
+            )"
+          fi
+          gh workflow run docs.yml --ref "$RELEASE_BRANCH"
+          echo "url=${pr_url}" >> "$GITHUB_OUTPUT"
+          echo "Ready ${pr_url}"

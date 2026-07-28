@@ -46,6 +46,7 @@ Storage.dat
 # DNX
 project.lock.json
 *.lock.json
+!website/pnpm-lock.yaml
 
 # Visual Studio profiler
 *.psess
@@ -105,11 +106,6 @@ src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.receive
 
 *.received.*
 
-# Jekyll
-docs/_site/
-docs/.jekyll-cache/
-docs/.sass-cache/
-
 # BenchmarkDotNet artifacts
 **/BenchmarkDotNet.Artifacts/
 
@@ -119,7 +115,6 @@ docs/.sass-cache/
 
 # Ralph autonomous agent logs
 scripts/ralph/logs/
-!.flow/bin/
 
 # Local agent workspace artifacts
 /.worktrees/
@@ -129,3 +124,13 @@ scripts/ralph/logs/
 /.claude/*.lock
 
 artifacts/
+
+# Documentation tooling
+website/node_modules/
+website/.docusaurus/
+website/build/
+website/.snapshot-mutation.lock
+website/.snapshot-transaction/
+website/.snapshot-current-*/
+website/.snapshot-correction-*/
+website/.snapshot-release-*/

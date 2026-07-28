@@ -1,0 +1,90 @@
+---
+id: parity-and-preflight
+title: Locale parity and preflight
+sidebar_position: 7
+diataxis: how-to
+persona: language contributor
+example: illustrative
+---
+
+# Locale parity and preflight
+
+## Orientation
+
+Before editing, create `artifacts/YYYY-MM-DD-<locale>-parity-map.md`. The
+artifact is local, gitignored working evidence. Cover these canonical surfaces:
+
+- `list`, `formatter`, and each `phrases` family
+- `number.words` and `number.parse`, including cardinal and ordinal behavior
+- `number.formatting` when an override is authored
+- `ordinal.numeric`, `ordinal.date`, and `ordinal.dateOnly`
+- `clock` and `compass`
+- each authored or inherited `calendar` array
+
+For every row, record the full ownership path, current and target state,
+support state, proof kind, proving assertion, verification command and result,
+and term-review status.
+
+At the top of the artifact, keep three summaries:
+
+1. the preflight gap set before implementation
+2. the current effective gap set after inheritance is resolved
+3. the before/after parity delta
+
+The final effective gap set must be empty.
+
+## Example
+
+Use only explicit states:
+
+```text
+surface: number.parse.cardinal
+ownership path: fr-CA -> fr
+current state: same-language inherited
+support state: supported
+proof kind: same-language inherited exact-output
+proof: WordsToNumberTests parses the expected fr-CA phrase
+status: proved
+```
+
+Preflight states are `locale-owned`, `same-language inherited`, `missing`,
+`english-fallback`, `unsupported`, or initially `unknown`. Eliminate every
+`unknown` before implementation. The final unresolved set must be empty.
+
+Close the artifact with one line for every canonical surface:
+
+```text
+number.parse: xy -> xy; proved by XyWordsToNumberTests.ParsesCardinals; passed net8.0/net10.0/net11.0
+```
+
+Each closeout line names the complete ownership path, exact assertion, and
+verification result. Include separate lines for nested required blocks such as
+`number.words`, `number.parse`, each `phrases` family, ordinal variants, and
+authored calendar arrays.
+
+## Pitfall
+
+Do not mark a row proved because the full suite passed. Name the exact
+assertion. Registry presence, non-empty output, a culture-aware platform
+fallback, and parent lookup are not linguistic proof.
+
+New locale-owned terms need an independent proposal and native-speaker review,
+followed by review of representative composed output. Record reviewer
+confidence, limitations, rejected alternatives, and the accepted outputs.
+
+If any row remains `unknown`, `missing`, `english-fallback`, or otherwise lacks
+proof, report `parity not complete`; do not smooth it into a general statement
+that tests pass.
+
+## Version notes
+
+This parity contract applies to `main/preview` locale work. A historical
+correction should use the tests and ownership model of its branch, but it still
+must not claim correctness from generic or English fallback.
+
+## Related guides and API
+
+- [Add or update a locale](./adding-or-updating-a-locale.mdx)
+- [Validation and testing](./validation-and-testing.mdx)
+- [Locale YAML reference](./locale-yaml-reference.mdx)
+- [Selected-version API reference](../api/index.md)

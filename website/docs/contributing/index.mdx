@@ -1,0 +1,62 @@
+---
+id: contributing
+title: Contribute to Humanizer documentation and languages
+sidebar_position: 1
+diataxis: explanation
+persona: contributor
+example: illustrative
+---
+
+# Contribute to Humanizer documentation and languages
+
+## Orientation
+
+Start with the smallest path that matches the problem:
+
+- Wrong or awkward output: [report a language issue](./report-language-issue.mdx).
+- Locale behavior needs code or YAML changes: [add or update a locale](./adding-or-updating-a-locale.mdx).
+- Existing engines do not fit: [choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx).
+- Output differs by platform: [probe globalization data and add a narrow override](./platform-globalization-overrides.mdx).
+- Documentation is wrong or unclear: [contribute documentation](./documentation.mdx).
+- You need a field name or engine contract: use the [YAML reference](./locale-yaml-reference.mdx).
+
+Language contribution is visible here without being a prerequisite for using
+Humanizer. User guidance stays under [Languages and cultures](../languages/index.mdx).
+
+## Example
+
+A useful issue report is a compact, reproducible record:
+
+```text
+Culture: fr-CA
+Humanizer version: 3.0.10
+API call: 2.ToWords(culture)
+Expected: ...
+Actual: ...
+Platform/TFM: macOS, net8.0
+```
+
+That is enough to route the problem before anyone changes locale ownership or
+grammar.
+
+## Pitfall
+
+Do not start by copying a parent locale or adding a culture code to a registry.
+A successful lookup is not proof of natural output, and package presence is
+not capability coverage. Trace the owning YAML surface and reproduce the
+behavior first.
+
+## Version notes
+
+The YAML and generator workflow in this contributor cluster describes
+`main/preview`. Published releases through `3.0.10` have version-specific
+package and localization implementations. Report the exact version, and make
+changes against the branch that owns that version.
+
+## Related guides and API
+
+- [Report a language issue](./report-language-issue.mdx)
+- [Add or update a locale](./adding-or-updating-a-locale.mdx)
+- [Choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx)
+- [Supported cultures and capabilities](../languages/supported-cultures.mdx)
+- [Selected-version API reference](../api/index.md)

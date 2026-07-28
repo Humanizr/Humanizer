@@ -1,0 +1,82 @@
+---
+id: version-3-patch-line
+title: Apply Humanizer 3 compatibility restorations
+sidebar_position: 4
+diataxis: explanation
+persona: developer already using Humanizer 3
+example: illustrative
+---
+
+# Apply Humanizer 3 compatibility restorations
+
+## Orientation
+
+`3.0.8` is a compatibility boundary, not just a convenient patch sample.
+Published `Humanizer.Core` packages and tagged source show changes that alter
+the remediation required by users on either side.
+
+### 3.0.1 to 3.0.8 {#3-0-1-to-3-0-8}
+
+Upgrade before investigating analyzer load failures on modern SDK hosts.
+`3.0.1` contains only a Roslyn 3.8 analyzer asset. `3.0.8` contains Roslyn 3.8,
+4.8, and 4.14 variants plus evaluation-time fallback selection for hosts that
+cannot select a versioned component.
+
+The same boundary restores string `ToQuantity(int, ...)` overloads and fixes
+first-word title casing. Remove local shims only after the package update and
+regression tests.
+
+Evidence:
+
+- [Analyzer compatibility fix #1676](https://github.com/Humanizr/Humanizer/pull/1676)
+- [`ToQuantity` restoration #1679](https://github.com/Humanizr/Humanizer/pull/1679)
+- [Title-case fix #1678](https://github.com/Humanizr/Humanizer/pull/1678)
+- Published [`3.0.1`](https://www.nuget.org/packages/Humanizer.Core/3.0.1) and [`3.0.8`](https://www.nuget.org/packages/Humanizer.Core/3.0.8) packages
+
+### 3.0.8 to 3.0.10 {#3-0-8-to-3-0-10}
+
+`3.0.10` moves analyzer fallback selection into a target that runs before
+compilation and removes only the Humanizer analyzer variants before adding the
+Roslyn 3.8 fallback. This matters to older or non-version-aware MSBuild hosts
+that can otherwise load duplicate variants.
+
+If `3.0.8` builds cleanly on every host, this update needs no source rewrite.
+Keep the package update because it removes a tooling-specific failure mode.
+
+Evidence: [package regression fix #1682](https://github.com/Humanizr/Humanizer/pull/1682)
+and the published [`3.0.10` package](https://www.nuget.org/packages/Humanizer.Core/3.0.10).
+
+## Example
+
+This illustrative project-wide check distinguishes migration diagnostics from
+analyzer loading failures:
+
+```console
+dotnet clean
+dotnet restore --force-evaluate
+dotnet build
+dotnet format analyzers --diagnostics HUMANIZER001 --severity info --verify-no-changes
+```
+
+An `HUMANIZER001` result means the analyzer loaded and found old namespace
+usage. `CS8032` or `AD0001` points instead to analyzer loading or execution.
+
+## Pitfall
+
+Do not add direct `System.Memory`, `System.Collections.Immutable`, or Roslyn
+package references to the application merely to make a bundled analyzer load.
+That changes the consumer dependency graph without fixing the packaged analyzer
+selection problem. Upgrade to `3.0.10` first.
+
+## Version notes
+
+The default severity of `HUMANIZER001` is `error` in `3.0.1`, `3.0.8`, and
+`3.0.10`. The analyzer release ledger's older `Warning` row is not the descriptor
+compiled into those packages.
+
+## Related guides and API
+
+- [Plan an upgrade](./index.mdx)
+- [Humanizer 3 migration](./version-3-migration.mdx)
+- [Analyzer migration and CI](../analyzer/index.mdx)
+- [Selected-version API reference](../api/index.md)

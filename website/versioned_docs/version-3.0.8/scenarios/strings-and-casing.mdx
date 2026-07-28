@@ -1,0 +1,65 @@
+---
+id: strings-and-casing
+title: Transform strings, identifiers, and casing
+sidebar_position: 2
+diataxis: how-to
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import strings from '!!raw-loader!../_examples/scenarios-strings/Program.cs';
+
+# Transform strings, identifiers, and casing
+
+## Orientation
+
+Use `Humanize` to turn program-shaped identifiers into display text. Use the identifier transformations when code, file, or route naming is the destination. Apply `LetterCasing` or a cultured transformer only after deciding the word boundaries; casing and identifier conversion solve different problems.
+
+## Example
+
+This verified source covers readable labels, explicit casing, Pascal/snake/kebab conversion, dehumanization, truncation, and a cultured transformer:
+
+<CodeBlock language="csharp" title="Program.cs">{strings}</CodeBlock>
+
+### Turn an identifier into a label
+
+`Humanize` recognizes PascalCase, camelCase, underscores, dashes, numbers, and common acronym boundaries. Pass `LetterCasing.Sentence`, `Title`, `LowerCase`, or `AllCaps` when the label needs a known presentation case. All-capital input is treated as an acronym and can remain unchanged until a casing operation is requested.
+
+### Convert between identifier conventions
+
+| Destination | API |
+| --- | --- |
+| PascalCase | `Pascalize` |
+| camelCase | `Camelize` |
+| snake_case | `Underscore` |
+| kebab-case | `Kebaberize` |
+| Replace underscores with hyphens | `Dasherize` or `Hyphenate` |
+| Title-like identifier words | `Titleize` |
+
+`Dehumanize` is the direct readable-text-to-PascalCase operation. Use the named inflector transformations when the destination convention matters.
+
+### Compose casing transformations
+
+`Transform(To.TitleCase)` and its sentence, upper, and lower siblings use cultured string transformers. Pass a `CultureInfo` to the cultured overload. Implement `IStringTransformer` or `ICulturedStringTransformer` for a local reusable rule without changing process-global configuration.
+
+## Pitfall
+
+Identifier conversions are intentionally lossy. Acronym boundaries, punctuation, whitespace, and Unicode can prevent a round trip. `Dasherize` and `Hyphenate` primarily replace underscores; use `Kebaberize` when the input needs complete word-boundary normalization.
+
+Title and sentence casing use culture-sensitive text operations. Scope culture when output must be deterministic, especially for Turkish and Azerbaijani casing, and do not assume title casing implements a particular editorial style guide.
+
+## Version notes
+
+The verified executable compiles and runs against the selected package. Core
+transformations also exist in `2.x`, but Humanizer 3 changes several delimiter
+and no-letter edge cases. Use the selected snapshot when exact legacy behavior
+matters.
+
+## Related guides and API
+
+- [Truncation and dehumanization](./truncation-and-dehumanization.mdx)
+- [Inflection and quantities](./inflection-and-quantities.mdx)
+- [Localization and extensibility](./localization-and-extensibility.mdx)
+- [StringHumanizeExtensions API](../api/Humanizer.StringHumanizeExtensions.md)
+- [CasingExtensions API](../api/Humanizer.CasingExtensions.md)
+- [LetterCasing API](../api/Humanizer.LetterCasing.md)

@@ -1,0 +1,54 @@
+---
+id: enums-and-flags
+title: Humanize and parse enums and flags
+sidebar_position: 17
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import enumsFlags from '!!raw-loader!../_examples/scenarios-enums-flags/Program.cs';
+
+# Humanize and parse enums and flags
+
+## Orientation
+
+Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. Dehumanization matches that resolved label case-insensitively. It does not index every possible raw, humanized, and metadata form. Flags enums are decomposed and joined through the active collection formatter.
+
+## Example
+
+The executable verifies a two-flag value, case-insensitive generic dehumanization, no-match behavior, and an unknown flag bit:
+
+<CodeBlock language="csharp" title="Program.cs">{enumsFlags}</CodeBlock>
+
+### Choose metadata and casing
+
+Humanizer prefers supported description/display metadata before deriving words from the member name. That chosen value is also the member's dehumanization label. Pass `LetterCasing` when the derived label needs a specific case. `Configurator.UseEnumDescriptionPropertyLocator` can select a custom description-like property globally and must run before enum metadata is cached.
+
+### Handle missing input
+
+The default `DehumanizeTo<TEnum>` throws `NoMatchFoundException`. Pass `OnNoMatch.ReturnsNull` to the nullable generic overload when an unknown label is expected.
+
+### Format flags
+
+Known nonzero flags are humanized and joined using the current UI culture. A defined zero member uses its label. A value containing only unknown bits humanizes to an empty string.
+
+## Pitfall
+
+Labels must be unambiguous even though matching is case-insensitive. Prefer the generic `DehumanizeTo<TEnum>` overload. The runtime `Type` overload uses reflection and is annotated with `RequiresDynamicCode` and `RequiresUnreferencedCode`; it is not the safe default for trimmed or Native AOT applications.
+
+## Version notes
+
+Enum APIs span the documented corpus, but Humanizer 3 changes generic
+constraints and metadata configuration. The flags example runs against the
+selected package. Consult the selected API before migrating code that stores
+values as the base `Enum` type.
+
+## Related guides and API
+
+- [Collections and tuple names](./collections-and-tuples.mdx)
+- [Trimming and Native AOT](../concepts/trimming-and-native-aot.mdx)
+- [EnumHumanizeExtensions API](../api/Humanizer.EnumHumanizeExtensions.md)
+- [EnumDehumanizeExtensions API](../api/Humanizer.EnumDehumanizeExtensions.md)
+- [OnNoMatch API](../api/Humanizer.OnNoMatch.md)
+- [Configurator API](../api/Humanizer.Configurator.md)

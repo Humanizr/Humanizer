@@ -1,0 +1,59 @@
+---
+id: documentation-contributions
+title: Contribute documentation
+sidebar_position: 11
+diataxis: how-to
+persona: documentation contributor
+example: illustrative
+---
+
+# Contribute documentation
+
+## Orientation
+
+Change the canonical page under `website/docs`; do not hand-edit immutable
+version snapshots. Keep the page focused on one reader task and preserve its
+selected-version context. C# is the canonical example language.
+
+A user guide should orient the reader, show a runnable example, name a real
+pitfall, state version boundaries, and link to related guidance plus the
+same-version API root. Contributor-only detail belongs in this cluster rather
+than in the primary user path.
+
+## Example
+
+Use front matter that identifies the page role and primary reader:
+
+```yaml
+---
+id: choose-a-culture
+title: Choose a culture
+diataxis: how-to
+persona: application developer
+example: illustrative
+---
+```
+
+If an example is executable, add it to the documentation example harness and
+import the tested source. Mark non-executable fragments as illustrative and
+keep them syntactically honest.
+
+## Pitfall
+
+Do not copy current behavior into a historical page without package or tagged
+source evidence. Do not link a historical guide to a current API route. Avoid
+hand-maintained language counts and lists; update locale YAML and rerun the one
+coverage generator.
+
+## Version notes
+
+The canonical corpus includes `main/preview` as a first-class public preview.
+Published snapshots remain version-honest and immutable except for reviewed,
+targeted factual corrections through the snapshot workflow.
+
+## Related guides and API
+
+- [Languages and cultures](../languages/index.mdx)
+- [Report a language issue](./report-language-issue.mdx)
+- [Documentation overview](../index.md)
+- [Selected-version API reference](../api/index.md)

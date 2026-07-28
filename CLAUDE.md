@@ -54,7 +54,8 @@ tests/
   Humanizer.Analyzers.Tests/    # Analyzer unit tests
   Humanizer.SourceGenerators.Tests/  # Source generator tests
   fixtures/                     # Package smoke tests (Console, Blazor, WebApi)
-docs/                           # Jekyll documentation site
+website/                        # Docusaurus source, generated API, and immutable version snapshots
+docs/plans/                     # Documentation implementation plans
 ```
 
 ## Code Conventions
@@ -77,9 +78,9 @@ docs/                           # Jekyll documentation site
 
 - Locale data defined in YAML files under `src/Humanizer/Locales/`
 - Source generators transform YAML into C# lookup tables at build time
-- To add a locale: duplicate a YAML file and translate it; the source generator wires all registries automatically (see `docs/adding-a-locale.md`)
+- To add a locale: duplicate a YAML file and translate it; the source generator wires all registries automatically (see `website/docs/contributing/adding-or-updating-a-locale.mdx`)
 - When ICU-supplied data (month names, decimal separators) differs across platforms, author explicit overrides in `calendar:` and/or `number.formatting:` YAML surfaces
-- See `docs/adding-a-locale.md` and `docs/locale-yaml-reference.md` for the full guide
+- See `website/docs/contributing/adding-or-updating-a-locale.mdx` and `website/docs/contributing/locale-yaml-surface-reference.mdx` for the full guide
 
 ## Key Config Files
 
@@ -88,64 +89,3 @@ docs/                           # Jekyll documentation site
 - `Directory.Packages.props` - Central package management (all NuGet versions)
 - `version.json` - Nerdbank.GitVersioning semver config
 - `.editorconfig` - Code style rules enforced at build time
-
-<!-- BEGIN FLOW-NEXT -->
-## Flow-Next
-
-This project uses Flow-Next for task tracking. Use `.flow/bin/flowctl` instead of markdown TODOs or TodoWrite.
-
-**Quick commands:**
-```bash
-.flow/bin/flowctl list                # List all epics + tasks
-.flow/bin/flowctl epics               # List all epics
-.flow/bin/flowctl tasks --epic fn-N   # List tasks for epic
-.flow/bin/flowctl ready --epic fn-N   # What's ready
-.flow/bin/flowctl show fn-N.M         # View task
-.flow/bin/flowctl start fn-N.M        # Claim task
-.flow/bin/flowctl done fn-N.M --summary-file s.md --evidence-json e.json
-```
-
-**Creating a spec** ("create a spec", "spec out X", "write a spec for X"):
-
-A spec = an epic. Create one directly — do NOT use `/flow-next:plan` (that breaks specs into tasks).
-
-```bash
-.flow/bin/flowctl epic create --title "Short title" --json
-.flow/bin/flowctl epic set-plan <epic-id> --file - --json <<'EOF'
-# Title
-
-## Goal & Context
-Why this exists, what problem it solves.
-
-## Architecture & Data Models
-System design, data flow, key components.
-
-## API Contracts
-Endpoints, interfaces, input/output shapes.
-
-## Edge Cases & Constraints
-Failure modes, limits, performance requirements.
-
-## Acceptance Criteria
-- [ ] Testable criterion 1
-- [ ] Testable criterion 2
-
-## Boundaries
-What's explicitly out of scope.
-
-## Decision Context
-Why this approach over alternatives.
-EOF
-```
-
-After creating a spec, choose next step:
-- `/flow-next:plan <epic-id>` — research + break into tasks
-- `/flow-next:interview <epic-id>` — deep Q&A to refine the spec
-
-**Rules:**
-- Use `.flow/bin/flowctl` for ALL task tracking
-- Do NOT create markdown TODOs or use TodoWrite
-- Re-anchor (re-read spec + status) before every task
-
-**More info:** `.flow/bin/flowctl --help` or read `.flow/usage.md`
-<!-- END FLOW-NEXT -->

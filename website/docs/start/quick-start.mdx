@@ -1,0 +1,60 @@
+---
+id: quick-start
+title: Five-minute quick start
+sidebar_position: 4
+diataxis: tutorial
+persona: new developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import quickStart from '!!raw-loader!../_examples/quick-start/Program.cs';
+
+# Five-minute quick start
+
+## Orientation
+
+You will create a console app, install Humanizer, and produce one deterministic duration. You need a .NET 8 or newer SDK.
+
+## Example
+
+Create the project and add the initial latest stable package:
+
+```console
+dotnet new console --name HumanizerQuickStart
+cd HumanizerQuickStart
+dotnet add package Humanizer --version 3.0.10
+```
+
+Replace `Program.cs` with the verified source:
+
+<CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
+
+Run it:
+
+```console
+dotnet run
+```
+
+## Result
+
+The program prints exactly:
+
+```text
+2 minutes
+```
+
+The assertion fails immediately if the selected package produces a different value.
+
+## Pitfall
+
+Many Humanizer operations use the current culture or UI culture when no culture is supplied. Set both explicitly in examples, tests, background work, and any operation whose output must be predictable.
+
+## Version notes
+
+This source is compiled and run against both Humanizer `3.0.10` and the current checkout. Historical snapshots retain the same source and resolve their declared package version.
+
+## Related guides and API
+
+- [Configuration basics](./configuration.mdx)
+- [Dates, times, durations, and age](../scenarios/dates-times-durations-and-age.mdx)
+- [Selected-version API reference](../api/index.md)

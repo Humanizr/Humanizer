@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <DocumentationArea>Concepts</DocumentationArea>
+    <HumanizerProjectGlobalPropertiesToRemove>PublishAot;PublishTrimmed;RuntimeIdentifier;SelfContained</HumanizerProjectGlobalPropertiesToRemove>
+  </PropertyGroup>
+</Project>

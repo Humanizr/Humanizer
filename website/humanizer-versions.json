@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "versions": [
+    {
+      "version": "2.10.1",
+      "label": "2.10.1",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.10.1"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "netstandard2.0",
+      "publicApiApproval": {
+        "tag": "v2.10.1",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt",
+        "generatedExtraTypes": [
+          "Humanizer.ICulturedStringTransformer",
+          "Humanizer.Localisation.DataUnit",
+          "Humanizer.MetricNumeralFormats"
+        ]
+      },
+      "compatibilityOverlay": "version-overrides/2.10.1",
+      "route": "2.10.1",
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "E41D0EFF2137C5B8A2EEEA86B911DE5566599ABC5731D632E7EE580720908080",
+        "sidebarSha256": "DBD638C71D8C9C9AA68BFA2F563D3C9F394996822DF9C8ADBDA0AC3FD8C3CDC1"
+      },
+      "latestStable": false
+    },
+    {
+      "version": "2.11.10",
+      "label": "2.11.10",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.11.10"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net6.0",
+      "publicApiApproval": {
+        "tag": "v2.11.10",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt"
+      },
+      "compatibilityOverlay": "version-overrides/2.11.10",
+      "route": "2.11.10",
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "F8BA4AFD8ACFD92A12A2EB9E2498F379D84E995F9A05E4AEAEFB0F9372CB8DFC",
+        "sidebarSha256": "DBD638C71D8C9C9AA68BFA2F563D3C9F394996822DF9C8ADBDA0AC3FD8C3CDC1"
+      },
+      "latestStable": false
+    },
+    {
+      "version": "2.13.14",
+      "label": "2.13.14",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.13.14"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net6.0",
+      "publicApiApproval": {
+        "tag": "v2.13.14",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt"
+      },
+      "compatibilityOverlay": "version-overrides/2.13.14",
+      "route": "2.13.14",
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "C2618BF67E194B44820754B40EB3C2EE8349624BFE4CA0A2599A37B1C877722C",
+        "sidebarSha256": "47A8C3CEC1A7DD6E6697509399D1B660D545D7FAEB003033F870D3413CB68666"
+      },
+      "latestStable": false
+    },
+    {
+      "version": "2.14.1",
+      "label": "2.14.1",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.14.1"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net6.0",
+      "publicApiApproval": {
+        "tag": "v2.14.1",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt"
+      },
+      "compatibilityOverlay": "version-overrides/2.14.1",
+      "route": "2.14.1",
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "93C852B80A4450CB325E632F375A7078B98DC039C78C26A9E785F60B58DB39FB",
+        "sidebarSha256": "47A8C3CEC1A7DD6E6697509399D1B660D545D7FAEB003033F870D3413CB68666"
+      },
+      "latestStable": false
+    },
+    {
+      "version": "3.0.1",
+      "label": "3.0.1",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "3.0.1"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "tag": "v3.0.1",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
+      "compatibilityOverlay": "version-overrides/3.0.1",
+      "route": "3.0.1",
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "57B363BDCCCD3584D141E0F40E1BBA7F0EA6328F77752554ED87987B5052CBFA",
+        "sidebarSha256": "3B58C95F6EE52AEAA906D27603E1786A76B04B86CADF1885DC15424775C82924"
+      },
+      "latestStable": false
+    },
+    {
+      "version": "3.0.8",
+      "label": "3.0.8",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "3.0.8"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "tag": "v3.0.8",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
+      "exampleExcludedAssets": [
+        "build",
+        "buildTransitive",
+        "analyzers"
+      ],
+      "compatibilityOverlay": "version-overrides/3.0.8",
+      "route": "3.0.8",
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "67B86B8AA93BEAFE0B6D3150388EC8A3C27BD15AC1721DEF2A9AF6077EB19E86",
+        "sidebarSha256": "3B58C95F6EE52AEAA906D27603E1786A76B04B86CADF1885DC15424775C82924"
+      },
+      "latestStable": false
+    },
+    {
+      "version": "3.0.10",
+      "label": "3.0.10 (latest)",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "3.0.10"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "tag": "v3.0.10",
+        "path": "tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
+      "compatibilityOverlay": "version-overrides/3.0.10",
+      "route": "",
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "5E96B55B49550E56405D304B258E76ACAA9FE35F667AC37C5CAADDCBF975DF3C",
+        "sidebarSha256": "3B58C95F6EE52AEAA906D27603E1786A76B04B86CADF1885DC15424775C82924"
+      },
+      "latestStable": true
+    },
+    {
+      "version": "current",
+      "label": "main/preview",
+      "source": {
+        "kind": "checkout",
+        "tag": "main"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer",
+      "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "path": "tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
+      "compatibilityOverlay": "version-overrides/current",
+      "route": "next",
+      "published": false,
+      "latestStable": false
+    }
+  ]
+}

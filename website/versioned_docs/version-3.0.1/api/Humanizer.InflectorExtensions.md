@@ -1,0 +1,334 @@
+## InflectorExtensions Class
+
+```csharp
+public static class InflectorExtensions
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → InflectorExtensions
+### Methods
+
+<a name='Humanizer.InflectorExtensions.Camelize(thisstring)'></a>
+
+## InflectorExtensions\.Camelize\(this string\) Method
+
+Converts a string to camelCase \(lowerCamelCase\) by capitalizing the first letter of each word
+except the first word, and removing spaces, underscores, and dashes\.
+
+```csharp
+public static string Camelize(this string input);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Camelize(thisstring).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be camelized\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A camelCase version of the input where the first word starts with a lowercase letter,
+subsequent words start with uppercase letters, and spaces, underscores, and dashes are removed\.
+
+### Example
+
+```csharp
+"some_property_name".Camelize() => "somePropertyName"
+"some property name".Camelize() => "somePropertyName"
+"SomePropertyName".Camelize() => "somePropertyName"
+```
+
+### Remarks
+camelCase is the same as PascalCase except the first character is lowercase\.
+It's commonly used for variable and method parameter names in \.NET\.
+
+<a name='Humanizer.InflectorExtensions.Dasherize(thisstring)'></a>
+
+## InflectorExtensions\.Dasherize\(this string\) Method
+
+Replaces all underscores in the string with dashes \(hyphens\)\.
+
+```csharp
+public static string Dasherize(this string underscoredWord);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Dasherize(thisstring).underscoredWord'></a>
+
+`underscoredWord` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string containing underscores to be replaced with dashes\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A string with all underscores replaced by dashes\.
+
+### Example
+
+```csharp
+"some_property_name".Dasherize() => "some-property-name"
+"some_longer_property_name".Dasherize() => "some-longer-property-name"
+```
+
+### Remarks
+This is typically used after calling [Underscore\(this string\)](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.Underscore(thisstring) 'Humanizer\.InflectorExtensions\.Underscore\(this string\)') to convert from underscore\_case to dash\-case \(kebab\-case\)\.
+
+<a name='Humanizer.InflectorExtensions.Hyphenate(thisstring)'></a>
+
+## InflectorExtensions\.Hyphenate\(this string\) Method
+
+Replaces all underscores in the string with hyphens\. This is an alias for [Dasherize\(this string\)](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.Dasherize(thisstring) 'Humanizer\.InflectorExtensions\.Dasherize\(this string\)')\.
+
+```csharp
+public static string Hyphenate(this string underscoredWord);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Hyphenate(thisstring).underscoredWord'></a>
+
+`underscoredWord` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string containing underscores to be replaced with hyphens\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A string with all underscores replaced by hyphens\.
+
+### Example
+
+```csharp
+"some_property_name".Hyphenate() => "some-property-name"
+```
+
+### Remarks
+This method is functionally identical to [Dasherize\(this string\)](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.Dasherize(thisstring) 'Humanizer\.InflectorExtensions\.Dasherize\(this string\)') and is provided for API clarity\.
+
+<a name='Humanizer.InflectorExtensions.Kebaberize(thisstring)'></a>
+
+## InflectorExtensions\.Kebaberize\(this string\) Method
+
+Converts a string to kebab\-case \(lowercase words separated by hyphens\), transforming
+PascalCase, camelCase, spaces, and underscores into hyphenated lowercase text\.
+
+```csharp
+public static string Kebaberize(this string input);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Kebaberize(thisstring).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be converted to kebab\-case\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A lowercase string with words separated by hyphens\.
+
+### Example
+
+```csharp
+"SomePropertyName".Kebaberize() => "some-property-name"
+"somePropertyName".Kebaberize() => "some-property-name"
+"some property name".Kebaberize() => "some-property-name"
+"some_property_name".Kebaberize() => "some-property-name"
+```
+
+### Remarks
+Kebab\-case is commonly used for CSS class names, HTML attributes, and URL slugs\.
+This is equivalent to calling [Underscore\(this string\)](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.Underscore(thisstring) 'Humanizer\.InflectorExtensions\.Underscore\(this string\)') followed by [Dasherize\(this string\)](Humanizer.InflectorExtensions.md#Humanizer.InflectorExtensions.Dasherize(thisstring) 'Humanizer\.InflectorExtensions\.Dasherize\(this string\)')\.
+
+<a name='Humanizer.InflectorExtensions.Pascalize(thisstring)'></a>
+
+## InflectorExtensions\.Pascalize\(this string\) Method
+
+Converts a string to PascalCase \(UpperCamelCase\) by capitalizing the first letter of each word
+and removing spaces, underscores, and dashes\.
+
+```csharp
+public static string Pascalize(this string input);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Pascalize(thisstring).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be pascalized\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A PascalCase version of the input where each word starts with an uppercase letter and 
+spaces, underscores, and dashes are removed\.
+
+### Example
+
+```csharp
+"some_property_name".Pascalize() => "SomePropertyName"
+"some property name".Pascalize() => "SomePropertyName"
+"some-property-name".Pascalize() => "SomePropertyName"
+```
+
+### Remarks
+PascalCase \(also known as UpperCamelCase\) is commonly used for class names and type names in \.NET\.
+
+<a name='Humanizer.InflectorExtensions.Pluralize(thisstring,bool)'></a>
+
+## InflectorExtensions\.Pluralize\(this string, bool\) Method
+
+Converts a singular word to its plural form, handling both regular and irregular pluralizations\.
+
+```csharp
+public static string? Pluralize(this string? word, bool inputIsKnownToBeSingular=true);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Pluralize(thisstring,bool).word'></a>
+
+`word` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The word to be pluralized\. Can be null\.
+
+<a name='Humanizer.InflectorExtensions.Pluralize(thisstring,bool).inputIsKnownToBeSingular'></a>
+
+`inputIsKnownToBeSingular` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Indicates whether the input is known to be in singular form\. 
+Set to true \(default\) if you're certain the word is singular\.
+Set to false if the word might already be plural, in which case the method will check and avoid double\-pluralization\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The plural form of the word, or null if the input was null\.
+Handles irregular plurals \(e\.g\., "person" → "people", "child" → "children"\) and regular plurals \(e\.g\., "cat" → "cats"\)\.
+
+### Example
+
+```csharp
+"person".Pluralize() => "people"
+"cat".Pluralize() => "cats"
+"box".Pluralize() => "boxes"
+"man".Pluralize() => "men"
+"cats".Pluralize(inputIsKnownToBeSingular: false) => "cats" (avoids double pluralization)
+```
+
+### Remarks
+Uses the default vocabulary which includes English pluralization rules and common irregular forms\.
+
+<a name='Humanizer.InflectorExtensions.Singularize(thisstring,bool,bool)'></a>
+
+## InflectorExtensions\.Singularize\(this string, bool, bool\) Method
+
+Converts a plural word to its singular form, handling both regular and irregular singularizations\.
+
+```csharp
+public static string Singularize(this string word, bool inputIsKnownToBePlural=true, bool skipSimpleWords=false);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Singularize(thisstring,bool,bool).word'></a>
+
+`word` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The word to be singularized\. Must not be null\.
+
+<a name='Humanizer.InflectorExtensions.Singularize(thisstring,bool,bool).inputIsKnownToBePlural'></a>
+
+`inputIsKnownToBePlural` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Indicates whether the input is known to be in plural form\.
+Set to true \(default\) if you're certain the word is plural\.
+Set to false if the word might already be singular, in which case the method will check and avoid incorrect singularization\.
+
+<a name='Humanizer.InflectorExtensions.Singularize(thisstring,bool,bool).skipSimpleWords'></a>
+
+`skipSimpleWords` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+When true, skips singularization of simple words that just end in 's'\.
+This helps avoid incorrectly singularizing words like "ross" to "ros"\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The singular form of the word\.
+Handles irregular singulars \(e\.g\., "people" → "person", "children" → "child"\) and regular singulars \(e\.g\., "cats" → "cat"\)\.
+
+### Example
+
+```csharp
+"people".Singularize() => "person"
+"cats".Singularize() => "cat"
+"boxes".Singularize() => "box"
+"men".Singularize() => "man"
+"person".Singularize(inputIsKnownToBePlural: false) => "person" (avoids incorrect singularization)
+```
+
+### Remarks
+Uses the default vocabulary which includes English singularization rules and common irregular forms\.
+
+<a name='Humanizer.InflectorExtensions.Titleize(thisstring)'></a>
+
+## InflectorExtensions\.Titleize\(this string\) Method
+
+Converts a string to title case by humanizing it first and then applying title casing\.
+Each word in the result will start with an uppercase letter\.
+
+```csharp
+public static string Titleize(this string input);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Titleize(thisstring).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be converted to title case\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A humanized string with each word capitalized \(title case\)\.
+If humanization produces an empty string, returns the original input unchanged\.
+
+### Example
+
+```csharp
+"some_title".Titleize() => "Some Title"
+"someTitle".Titleize() => "Some Title"
+"some-package_name".Titleize() => "Some Package Name"
+```
+
+### Remarks
+This method first humanizes the input \(breaking up PascalCase, underscores, etc\.\) and then applies title casing\.
+
+<a name='Humanizer.InflectorExtensions.Underscore(thisstring)'></a>
+
+## InflectorExtensions\.Underscore\(this string\) Method
+
+Converts a string to lowercase and separates words with underscores, transforming 
+PascalCase, camelCase, and spaces into underscore\_case\.
+
+```csharp
+public static string Underscore(this string input);
+```
+#### Parameters
+
+<a name='Humanizer.InflectorExtensions.Underscore(thisstring).input'></a>
+
+`input` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The string to be underscored\. Must not be null\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A lowercase string with words separated by underscores instead of spaces, case changes, or dashes\.
+
+### Example
+
+```csharp
+"SomePropertyName".Underscore() => "some_property_name"
+"somePropertyName".Underscore() => "some_property_name"
+"some-property-name".Underscore() => "some_property_name"
+"some property name".Underscore() => "some_property_name"
+```
+
+### Remarks
+This transformation is commonly used for database column names, file names, and URL slugs in some conventions\.

@@ -1,0 +1,113 @@
+import assert from 'node:assert/strict';
+import {mkdtemp, mkdir, rm, writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
+import test from 'node:test';
+import {fileURLToPath} from 'node:url';
+
+const checker = fileURLToPath(
+  new URL('../../tools/docs/verify-content.mjs', import.meta.url),
+);
+const validPage = `---
+diataxis: how-to
+persona: existing user
+---
+
+import example from '!!raw-loader!./Program.cs';
+
+## Orientation
+
+Choose a task.
+
+## Example
+
+The imported program is tested.
+
+## Pitfall
+
+Avoid stale examples.
+
+## Version notes
+
+This behavior is shared by the supported versions.
+
+## Related guides and API
+
+- [Guide](../start/quick-start.mdx)
+- [API](../api/index.md)
+`;
+
+async function withFixture(page, run) {
+  const root = await mkdtemp(path.join(tmpdir(), 'humanizer-content-check-'));
+  try {
+    const area = path.join(root, 'docs', 'sample');
+    await mkdir(area, {recursive: true});
+    await writeFile(path.join(area, 'page.md'), page);
+    await run(root);
+  } finally {
+    await rm(root, {recursive: true, force: true});
+  }
+}
+
+test('content checker accepts a related section that ends at EOF', async () => {
+  await withFixture(validPage, (cwd) => {
+    const result = spawnSync(process.execPath, [checker, 'sample'], {
+      cwd,
+      encoding: 'utf8',
+    });
+
+    assert.equal(result.status, 0, result.stderr);
+  });
+});
+
+test('content checker reports a missing required section', async () => {
+  await withFixture(validPage.replace('## Pitfall', '## Caution'), (cwd) => {
+    const result = spawnSync(process.execPath, [checker, 'sample'], {
+      cwd,
+      encoding: 'utf8',
+    });
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /missing "Pitfall" section/);
+  });
+});
+
+test('content checker rejects an unlabeled illustrative fragment', async () => {
+  const fragment = validPage
+    .replace("import example from '!!raw-loader!./Program.cs';", '')
+    .replace('The imported program is tested.', `\`\`\`csharp
+Console.WriteLine("illustrative");
+\`\`\``);
+
+  await withFixture(fragment, (cwd) => {
+    const result = spawnSync(process.execPath, [checker, 'sample'], {
+      cwd,
+      encoding: 'utf8',
+    });
+
+    assert.equal(result.status, 1);
+    assert.match(
+      result.stderr,
+      /must import tested source or be labeled illustrative/,
+    );
+  });
+});
+
+test('content checker accepts a labeled illustrative fragment', async () => {
+  const fragment = validPage
+    .replace('persona: existing user', 'persona: existing user\nexample: illustrative')
+    .replace("import example from '!!raw-loader!./Program.cs';", '')
+    .replace('The imported program is tested.', `\`\`\`csharp
+Console.WriteLine("illustrative");
+\`\`\``);
+
+  await withFixture(fragment, (cwd) => {
+    const result = spawnSync(process.execPath, [checker, 'sample'], {
+      cwd,
+      encoding: 'utf8',
+    });
+
+    assert.equal(result.status, 0, result.stderr);
+  });
+});

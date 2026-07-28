@@ -1,0 +1,97 @@
+---
+id: parse-number-words
+title: Parse localized number words
+sidebar_position: 13
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import parseNumberWords from '!!raw-loader!../_examples/scenarios-parse-number-words/Program.cs';
+
+# Parse localized number words
+
+## Orientation
+
+Use `TryToNumber` at an input boundary where invalid integer words are expected.
+Use `ToNumber` when invalid text is exceptional and should throw. On
+`main/preview`, the corresponding decimal APIs are `TryToDecimalNumber` and
+`ToDecimalNumber`. All four require an explicit `CultureInfo`, because the
+same words, magnitude system, and token rules do not mean the same thing in
+every culture.
+
+## Example
+
+This executable parses positive and negative integers, checks integer and
+decimal failure details, preserves an authored decimal scale, and verifies the
+unsupported-culture contract. `Convert.ToInt64` keeps the integer assertions
+compatible with the stable `int` result and current `long` result:
+
+<CodeBlock language="csharp" title="Program.cs">{parseNumberWords}</CodeBlock>
+
+### Handle expected failure
+
+The longest `TryToNumber` overload returns:
+
+- `false` when a token cannot be recognized.
+- `0` in the numeric result.
+- The first unrecognized word in the final `out` parameter.
+
+That token is useful for field validation messages. Do not catch `FormatException` for routine input when `TryToNumber` expresses the branch directly.
+
+### Parse English decimal words
+
+`ToDecimalNumber` accepts an English integer phrase followed by exactly one
+`point` marker and between 1 and 28 fractional digit words (`zero` through
+`nine`). The integer part may be omitted, as in `point five`, and a leading
+`minus` or `negative` applies to the complete value. The authored decimal
+scale is preserved, including trailing zeros and signed zero.
+
+The integer side uses the selected English culture's magnitude grammar. For
+example, `en-IN` accepts `ninety-three shankh point one`, while `en-US` does
+not. This is a language parser, not a parser for culture-formatted decimal
+digits.
+
+For malformed input, unsupported cultures, or values that cannot fit in
+`decimal`, `TryToDecimalNumber` returns `false`, sets the result to `0m`, and
+reports a best-effort unrecognized token or phrase when that overload is used.
+For `null` or empty input, that reported value is an empty string.
+`ToDecimalNumber` instead throws:
+
+| Condition | Exception |
+| --- | --- |
+| `null` input | `ArgumentNullException` |
+| Malformed or out-of-range phrase | `FormatException` |
+| Culture outside the English hierarchy | `NotSupportedException` |
+
+### Convert to a narrower type
+
+Current builds return `long`. If the application requires `int`, use a checked conversion after successful parsing:
+
+```csharp
+var value = checked((int)parsedLong);
+```
+
+## Pitfall
+
+The integer parser supports only the locales and word forms represented by its
+selected-version converter. The decimal parser currently supports English
+cultures only. Neither is a general natural-language parser. Preserve the
+explicit culture from the user-input boundary and do not silently fall back to
+English for an unsupported locale.
+
+## Version notes
+
+Words-to-number begins in Humanizer `3.0.1`; this page is unavailable in `2.x`.
+Releases through `3.0.10` return `int`. `main/preview` returns `long`, and its
+analyzer can offer a checked conversion for existing assignments that now fail
+with `CS0029` or `CS0266`. English decimal word parsing is a `main/preview`
+addition.
+
+## Related guides and API
+
+- [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
+- [Troubleshooting](../start/troubleshooting.mdx)
+- [WordsToNumberExtension API](../api/Humanizer.WordsToNumberExtension.md)
+- [WordsToDecimalNumberExtension API](../api/Humanizer.WordsToDecimalNumberExtension.md)
+- [IWordsToDecimalNumberConverter API](../api/Humanizer.IWordsToDecimalNumberConverter.md)

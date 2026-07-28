@@ -1,0 +1,51 @@
+---
+id: configuration
+title: Configuration basics
+sidebar_position: 5
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import configuration from '!!raw-loader!../_examples/configuration/Program.cs';
+
+# Configuration basics
+
+## Orientation
+
+Prefer per-call culture arguments when an overload provides one. Use
+`CultureInfo.CurrentCulture` and `CurrentUICulture` when a Humanizer API follows
+ambient application culture. In this `2.x` release, global configuration lives
+under `Humanizer.Configuration`; reserve `Configurator` for application-wide
+strategies, registries, or enum metadata rules.
+
+Configure global behavior once during application startup, before any request or background worker can use Humanizer.
+
+## Example
+
+This verified example installs the built-in precision date strategy at startup
+and proves the resulting output with an injected comparison instant:
+
+<CodeBlock language="csharp" title="Program.cs">{configuration}</CodeBlock>
+
+For a global date strategy, assign `Configurator.DateTimeHumanizeStrategy` once at startup. For a custom localized component, call the relevant registry's `Register` method before the registry is resolved.
+
+## Pitfall
+
+This `2.x` release keeps `LocaliserRegistry<T>` registrations mutable and
+exposes an assignable `Configurator.EnumDescriptionPropertyLocator`. Late
+changes are allowed, but process-wide configuration can still make concurrent
+requests observe different behavior. Configure it once during startup.
+
+## Version notes
+
+The selected package predates registry freezing and the Humanizer 3
+enum-locator method. Date strategies are under the `2.x`
+strategy namespaces shown by the selected-version API. Confirm that API before
+adopting another global extension point.
+
+## Related guides and API
+
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
+- [Selected-version API reference](../api/index.md)

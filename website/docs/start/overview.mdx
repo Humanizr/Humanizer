@@ -1,0 +1,53 @@
+---
+id: overview
+title: What Humanizer does
+sidebar_position: 1
+diataxis: explanation
+persona: evaluating developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import quickStart from '!!raw-loader!../_examples/quick-start/Program.cs';
+
+# What Humanizer does
+
+## Orientation
+
+Humanizer is a .NET library for turning program-shaped values into text people can read. Its extension methods cover identifiers, enums, dates and times, durations, numbers, byte sizes, quantities, and collections. Localization is part of those operations rather than a separate formatting pass.
+
+Use Humanizer at display boundaries: view models, messages, reports, logs intended for people, and other presentation code. Keep stored values and protocol payloads in their typed forms.
+
+## Example
+
+The same small console program is compiled against Humanizer `3.0.10` and the current checkout during documentation validation:
+
+<CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
+
+It prints `2 minutes`. The culture is explicit, so the result does not change with the machine running the example.
+
+## Choose a path
+
+- New to the library: [install Humanizer](./installation.mdx), then complete the [quick start](./quick-start.mdx).
+- Choosing dependencies: read [package selection](./package-selection.md).
+- Returning user: use the [scenario finder](../scenarios/index.mdx).
+- Something failed: start with [troubleshooting](./troubleshooting.mdx).
+- Need exact signatures: open the [selected-version API reference](../api/index.md).
+
+## Documentation and support
+
+The site covers Humanizer `2.10.1` and later. Published releases receive versioned snapshots; `main/preview` describes the current checkout and is not a stable package. Documentation availability is not a promise that an older release remains under active maintenance. Use the [issue tracker](https://github.com/Humanizr/Humanizer/issues) for confirmed bugs and support questions.
+
+## Pitfall
+
+Humanized text is presentation output, not a stable serialization format. Do not persist it and later depend on parsing it back: cultures, wording, and formatting options can differ.
+
+## Version notes
+
+This canonical page describes the shared surface from Humanizer `2.10.1` onward. Package layout and target frameworks differ by release, so use the version selector before installing or following an API link.
+
+## Related guides and API
+
+- [Quick start](./quick-start.mdx)
+- [Scenario finder](../scenarios/index.mdx)
+- [Troubleshooting](./troubleshooting.mdx)
+- [Selected-version API reference](../api/index.md)

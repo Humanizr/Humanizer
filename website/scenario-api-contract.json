@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "scenarios/strings-and-casing.mdx": [
+      "Humanizer.StringHumanizeExtensions.md",
+      "Humanizer.CasingExtensions.md",
+      "Humanizer.LetterCasing.md"
+    ],
+    "scenarios/truncation-and-dehumanization.mdx": [
+      "Humanizer.TruncateExtensions.md",
+      "Humanizer.Truncator.md",
+      "Humanizer.ITruncator.md",
+      "Humanizer.StringDehumanizeExtensions.md"
+    ],
+    "scenarios/inflection-and-quantities.mdx": [
+      "Humanizer.InflectorExtensions.md",
+      "Humanizer.ToQuantityExtensions.md",
+      "Humanizer.ShowQuantityAs.md",
+      "Humanizer.Vocabularies.md",
+      "Humanizer.Vocabulary.md"
+    ],
+    "scenarios/dates-times-durations-and-age.mdx": {
+      "unionOf": [
+        "scenarios/relative-dates-and-times.mdx",
+        "scenarios/durations-and-ages.mdx",
+        "scenarios/fluent-dates-and-time-spans.mdx",
+        "scenarios/spoken-dates-and-clock-times.mdx"
+      ]
+    },
+    "scenarios/relative-dates-and-times.mdx": [
+      "Humanizer.DateHumanizeExtensions.md",
+      "Humanizer.Configurator.md"
+    ],
+    "scenarios/durations-and-ages.mdx": [
+      "Humanizer.TimeSpanHumanizeExtensions.md",
+      "Humanizer.TimeSpanDehumanizeExtensions.md",
+      "Humanizer.ITimeSpanHumanizeStrategy.md",
+      "Humanizer.DefaultTimeSpanHumanizeStrategy.md"
+    ],
+    "scenarios/fluent-dates-and-time-spans.mdx": [
+      "Humanizer.NumberToTimeSpanExtensions.md",
+      "Humanizer.PrepositionsExtensions.md",
+      "Humanizer.In.md",
+      "Humanizer.On.md",
+      "Humanizer.InDate.md",
+      "Humanizer.OnDate.md"
+    ],
+    "scenarios/spoken-dates-and-clock-times.mdx": [
+      "Humanizer.DateToOrdinalWordsExtensions.md",
+      "Humanizer.TimeOnlyToClockNotationExtensions.md"
+    ],
+    "scenarios/numbers-words-ordinals-roman-bytes-and-quantities.mdx": {
+      "unionOf": [
+        "scenarios/numbers-in-words-and-ordinals.mdx",
+        "scenarios/parse-number-words.mdx",
+        "scenarios/byte-sizes-and-rates.mdx",
+        "scenarios/metric-numerals.mdx",
+        "scenarios/specialized-formatting-utilities.mdx"
+      ]
+    },
+    "scenarios/numbers-in-words-and-ordinals.mdx": [
+      "Humanizer.NumberToWordsExtension.md",
+      "Humanizer.OrdinalizeExtensions.md",
+      "Humanizer.ILongOrdinalizer.md",
+      "Humanizer.FractionalizeExtensions.md",
+      "Humanizer.ChineseFinancialNumeralExtensions.md",
+      "Humanizer.WordForm.md"
+    ],
+    "scenarios/parse-number-words.mdx": [
+      "Humanizer.WordsToNumberExtension.md",
+      "Humanizer.WordsToDecimalNumberExtension.md",
+      "Humanizer.IWordsToDecimalNumberConverter.md"
+    ],
+    "scenarios/byte-sizes-and-rates.mdx": [
+      "Humanizer.ByteSize.md",
+      "Humanizer.ByteSizeExtensions.md",
+      "Humanizer.ByteRate.md"
+    ],
+    "scenarios/metric-numerals.mdx": [
+      "Humanizer.MetricNumeralExtensions.md",
+      "Humanizer.MetricNumeralFormats.md"
+    ],
+    "scenarios/enums-and-collections.mdx": {
+      "unionOf": [
+        "scenarios/enums-and-flags.mdx",
+        "scenarios/collections-and-tuples.mdx"
+      ]
+    },
+    "scenarios/enums-and-flags.mdx": [
+      "Humanizer.EnumHumanizeExtensions.md",
+      "Humanizer.EnumHumanizeSource.md",
+      "Humanizer.EnumDehumanizeExtensions.md",
+      "Humanizer.OnNoMatch.md",
+      "Humanizer.Configurator.md"
+    ],
+    "scenarios/collections-and-tuples.mdx": [
+      "Humanizer.CollectionHumanizeExtensions.md",
+      "Humanizer.ICollectionFormatter.md",
+      "Humanizer.TupleizeExtensions.md"
+    ],
+    "scenarios/localization-and-extensibility.mdx": [
+      "Humanizer.Configurator.md",
+      "Humanizer.LocaliserRegistry_TLocaliser_.md",
+      "Humanizer.ICulturedStringTransformer.md",
+      "Humanizer.ITruncator.md",
+      "Humanizer.ITimeSpanHumanizeStrategy.md",
+      "Humanizer.DefaultTimeSpanHumanizeStrategy.md"
+    ],
+    "scenarios/specialized-formatting-utilities.mdx": [
+      "Humanizer.HeadingExtensions.md",
+      "Humanizer.RomanNumeralExtensions.md",
+      "Humanizer.NumberToNumberExtensions.md",
+      "Humanizer.TupleizeExtensions.md",
+      "Humanizer.TimeUnitToSymbolExtensions.md",
+      "Humanizer.EnglishArticle.md"
+    ]
+  },
+  "substitutions": [
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.ByteSize.md",
+      "replacement": "Humanizer.Bytes.ByteSize.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.ByteRate.md",
+      "replacement": "Humanizer.Bytes.ByteRate.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.Configurator.md",
+      "replacement": "Humanizer.Configuration.Configurator.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.LocaliserRegistry_TLocaliser_.md",
+      "replacement": "Humanizer.Configuration.LocaliserRegistry_TLocaliser_.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.ICollectionFormatter.md",
+      "replacement": "Humanizer.Localisation.CollectionFormatters.ICollectionFormatter.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.Vocabularies.md",
+      "replacement": "Humanizer.Inflections.Vocabularies.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.Vocabulary.md",
+      "replacement": "Humanizer.Inflections.Vocabulary.md"
+    }
+  ],
+  "unavailable": [
+    {
+      "versions": ["2.10.1"],
+      "target": "Humanizer.InDate.md"
+    },
+    {
+      "versions": ["2.10.1"],
+      "target": "Humanizer.OnDate.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14"],
+      "target": "Humanizer.WordForm.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1"],
+      "target": "Humanizer.WordsToNumberExtension.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10"],
+      "target": "Humanizer.TimeOnlyToClockNotationExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10"],
+      "target": "Humanizer.TimeUnitToSymbolExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.TimeSpanDehumanizeExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.ITimeSpanHumanizeStrategy.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.DefaultTimeSpanHumanizeStrategy.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.ILongOrdinalizer.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.FractionalizeExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.ChineseFinancialNumeralExtensions.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.WordsToDecimalNumberExtension.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.IWordsToDecimalNumberConverter.md"
+    },
+    {
+      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
+      "target": "Humanizer.EnumHumanizeSource.md"
+    }
+  ]
+}

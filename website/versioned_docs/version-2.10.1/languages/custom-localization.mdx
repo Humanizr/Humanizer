@@ -1,0 +1,65 @@
+---
+id: custom-localization
+title: Customize localization
+sidebar_position: 4
+diataxis: how-to
+persona: application architect
+example: illustrative
+---
+
+# Customize localization
+
+## Orientation
+
+Prefer a per-call culture or transformer first. Use a custom localiser only when an application needs process-wide behavior that Humanizer `2.10.1` does not provide.
+
+Humanizer 2 exposes its registries through `Humanizer.Configuration.Configurator`. Formatter implementations live under `Humanizer.Localisation.Formatters`.
+
+## Example
+
+Register before application code resolves the formatter registry:
+
+```csharp
+using System.Globalization;
+using Humanizer.Configuration;
+using Humanizer.Localisation.Formatters;
+
+Configurator.Formatters.Register(
+    "en-US",
+    culture => new ProductFormatter(culture.Name));
+
+var culture = CultureInfo.GetCultureInfo("en-US");
+var formatter = Configurator.Formatters.ResolveForCulture(culture);
+Console.WriteLine(formatter.DateHumanize_Now());
+
+sealed class ProductFormatter : DefaultFormatter
+{
+    public ProductFormatter(string localeCode)
+        : base(localeCode)
+    {
+    }
+
+    public override string DateHumanize_Now() => "just now";
+}
+```
+
+The result is `just now`. The Humanizer 2 `DefaultFormatter` constructor takes a locale-code string, and the registry factory receives a `CultureInfo`.
+
+## Pitfall
+
+The Humanizer `2.10.1` registry remains mutable after first resolution. A later `Register` call is permitted, but changing a process-wide component after requests begin can make concurrent work observe different behavior. Configure registries once during startup.
+
+Custom global components affect every caller that resolves that culture. For request-specific text transformation, implement `IStringTransformer` or `ICulturedStringTransformer` and pass it to `Transform` instead.
+
+If the built-in locale is wrong rather than product-specific, follow the [language correction guide](../contributing/report-language-issue.mdx) or [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
+
+## Version notes
+
+Constructor shapes, namespaces, and available registries are version-specific public API. This example follows Humanizer `2.10.1`; do not copy a Humanizer 3 or `main/preview` extension into this application.
+
+## Related guides and API
+
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
+- [Grammar and platform formatting](./grammar-and-platform-formatting.mdx)
+- [2.10.1 API reference](../api/index.md)

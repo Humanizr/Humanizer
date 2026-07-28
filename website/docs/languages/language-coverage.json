@@ -1,0 +1,5191 @@
+{
+  "schemaVersion": 2,
+  "coverageKind": "yaml-capabilities",
+  "version": "current",
+  "generatedFor": "main/preview",
+  "source": "src/Humanizer/Locales/*.yml",
+  "package": {
+    "id": "Humanizer",
+    "version": null,
+    "apiPackage": null,
+    "targetFrameworks": [
+      "netstandard2.0",
+      "net48",
+      "net8.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "localeData": "generated into the main package",
+    "apiAvailability": {
+      "dateOnlyOrdinals": [
+        "net8.0",
+        "net10.0",
+        "net11.0"
+      ],
+      "clockNotation": [
+        "net8.0",
+        "net10.0",
+        "net11.0"
+      ]
+    }
+  },
+  "capabilities": [
+    {
+      "key": "list",
+      "label": "Lists",
+      "optional": false
+    },
+    {
+      "key": "formatter",
+      "label": "Formatter",
+      "optional": false
+    },
+    {
+      "key": "phrases",
+      "label": "Phrases",
+      "optional": false
+    },
+    {
+      "key": "numberWords",
+      "label": "Number to words",
+      "optional": false
+    },
+    {
+      "key": "numberParse",
+      "label": "Words to number",
+      "optional": false
+    },
+    {
+      "key": "numericOrdinal",
+      "label": "Numeric ordinals",
+      "optional": false
+    },
+    {
+      "key": "dateOrdinal",
+      "label": "Date ordinals",
+      "optional": false
+    },
+    {
+      "key": "clock",
+      "label": "Clock notation",
+      "optional": false
+    },
+    {
+      "key": "compass",
+      "label": "Compass headings",
+      "optional": false
+    },
+    {
+      "key": "calendarOverride",
+      "label": "Calendar override",
+      "optional": true
+    },
+    {
+      "key": "numberFormattingOverride",
+      "label": "Number-format override",
+      "optional": true
+    }
+  ],
+  "locales": [
+    {
+      "locale": "af",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "am",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ar",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "as",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "az",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "be",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "bg",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "bn",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "bs",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ca",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "cs",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "cy",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "da",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "de",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "de-CH",
+      "parent": "de",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "de"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "de"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "de"
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "de"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "de"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "de"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "de"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "de-LI",
+      "parent": "de",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "de"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "de"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "de"
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "de"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "de"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "de"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "de"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "el",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "en",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "en-GB",
+      "parent": "en",
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "en"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "en"
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "en"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "en"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "en"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "en"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "en"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "en-IN",
+      "parent": "en",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "en"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "en"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "en"
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "en"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "en"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "en"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "en"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "en-US",
+      "parent": "en",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "en"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "en"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "en"
+        },
+        "numberWords": {
+          "kind": "via",
+          "via": "en"
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "en"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "en"
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "via",
+          "via": "en"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "en"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "es",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "et",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "eu",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "fa",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "fi",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "fil",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "fr",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "fr-BE",
+      "parent": "fr",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "fr-CH",
+      "parent": "fr",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ga",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "gl",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "gu",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ha",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "he",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "hi",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "hr",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "hu",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "hy",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "id",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ig",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "is",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "it",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ja",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ka",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "kk",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "km",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "kn",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ko",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "kok",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ku",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ky",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "lb",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "lo",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "lt",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "lv",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "mk",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ml",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "mn",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "mr",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ms",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "mt",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "my",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "nb",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ne",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "nl",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "nn",
+      "parent": "nb",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "numberWords": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "via",
+          "via": "nb"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "via",
+          "via": "nb"
+        }
+      }
+    },
+    {
+      "locale": "or",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "pa",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "pa-Arab",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "pl",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ps",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "pt",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "parent": "pt",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "pt"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "pt"
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "pt"
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ro",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ru",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "si",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "sk",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "sl",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "so",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "sq",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "sr",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "sr-Latn",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "sv",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "sw",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ta",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "te",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "th",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "tk",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "tr",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "uk",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ur",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "own",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "ur-IN",
+      "parent": "ur",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numberWords": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "calendarOverride": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numberFormattingOverride": {
+          "kind": "via",
+          "via": "ur"
+        }
+      }
+    },
+    {
+      "locale": "ur-PK",
+      "parent": "ur",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numberWords": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "calendarOverride": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "numberFormattingOverride": {
+          "kind": "via",
+          "via": "ur"
+        }
+      }
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "uz-Latn-UZ",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "vi",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "yo",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "parent": "zh-Hans",
+      "capabilities": {
+        "list": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "formatter": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "phrases": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "numberWords": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "numberParse": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "numericOrdinal": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "dateOrdinal": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "clock": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "compass": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "zh-Hans",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "zh-Hant",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "platform",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    },
+    {
+      "locale": "zu-ZA",
+      "parent": null,
+      "capabilities": {
+        "list": {
+          "kind": "own",
+          "via": null
+        },
+        "formatter": {
+          "kind": "own",
+          "via": null
+        },
+        "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "numberWords": {
+          "kind": "own",
+          "via": null
+        },
+        "numberParse": {
+          "kind": "own",
+          "via": null
+        },
+        "numericOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "dateOrdinal": {
+          "kind": "own",
+          "via": null
+        },
+        "clock": {
+          "kind": "own",
+          "via": null
+        },
+        "compass": {
+          "kind": "own",
+          "via": null
+        },
+        "calendarOverride": {
+          "kind": "own",
+          "via": null
+        },
+        "numberFormattingOverride": {
+          "kind": "platform",
+          "via": null
+        }
+      }
+    }
+  ]
+}

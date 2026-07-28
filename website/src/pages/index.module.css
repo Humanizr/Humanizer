@@ -1,0 +1,330 @@
+.home {
+  overflow: hidden;
+}
+
+.homeHero,
+.homeStart,
+.homeScenarios,
+.homeRoutes,
+.homeIndex {
+  margin-inline: auto;
+  max-width: 82rem;
+  width: min(100% - 2rem, 82rem);
+}
+
+.homeHero {
+  display: grid;
+  gap: 3rem;
+  padding-block: clamp(4rem, 12vw, 9rem);
+}
+
+.homeEyebrow {
+  color: var(--humanizer-accent-warm);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.homeHero h1 {
+  font-size: clamp(3.4rem, 16vw, 8.5rem);
+  font-weight: 500;
+  line-height: 0.88;
+  margin: 0;
+  max-width: 9ch;
+}
+
+.homeHero h1 span {
+  color: var(--humanizer-accent);
+  display: block;
+  font-style: italic;
+}
+
+.homeHero__lede {
+  color: var(--humanizer-ink-muted);
+  font-size: clamp(1.05rem, 3vw, 1.35rem);
+  margin-block: 2rem;
+  max-width: 45rem;
+}
+
+.homeHero__actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+}
+
+.homeSpecimen {
+  align-self: end;
+  background: #172026;
+  border-left: 0.35rem solid var(--humanizer-accent-warm);
+  color: #edf3f2;
+  min-width: 0;
+  padding: 1.25rem;
+}
+
+.homeSpecimen__label {
+  align-items: center;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  display: flex;
+  font-family: var(--humanizer-body);
+  font-size: 0.75rem;
+  justify-content: space-between;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.home pre {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.homeSpecimen pre {
+  background: transparent;
+  border: 0;
+  font-size: clamp(0.76rem, 3.4vw, 1rem);
+  margin: 0;
+  padding: 2rem 0 0;
+}
+
+.homeSpecimen code {
+  background: transparent;
+  color: inherit;
+}
+
+.homeCode__comment {
+  color: #8ca0a4;
+}
+
+.homeCode__string {
+  color: #91d9e8;
+}
+
+.homeCode__keyword {
+  color: #f28b73;
+}
+
+.homeCode__result {
+  color: #f1c97a;
+}
+
+.homeIndex {
+  border-block: 1px solid var(--humanizer-rule);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.homeIndex a {
+  align-items: center;
+  color: var(--humanizer-ink);
+  display: flex;
+  font-size: 0.88rem;
+  font-weight: 700;
+  min-height: 3.25rem;
+  padding-inline: 0.75rem;
+}
+
+.homeIndex a:hover {
+  background: var(--humanizer-paper-raised);
+  color: var(--humanizer-accent);
+}
+
+.homeStart,
+.homeScenarios {
+  padding-block: clamp(5rem, 12vw, 9rem);
+}
+
+.homeSectionIntro {
+  margin-bottom: clamp(2.5rem, 7vw, 5rem);
+  max-width: 54rem;
+}
+
+.homeSectionIntro h2,
+.homeRoutes h2 {
+  font-size: clamp(2.4rem, 8vw, 5.75rem);
+  font-weight: 500;
+  line-height: 0.98;
+}
+
+.homeSectionIntro > p:last-child,
+.homeRoutes article > p:not(:global(.humanizerKicker)) {
+  color: var(--humanizer-ink-muted);
+  font-size: 1.05rem;
+  max-width: 42rem;
+}
+
+.homeStart__steps {
+  border-top: 1px solid var(--humanizer-rule);
+}
+
+.homeStart__steps article {
+  border-bottom: 1px solid var(--humanizer-rule);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  padding-block: 2rem;
+}
+
+.homeStart__steps h3,
+.homeScenarioList h3 {
+  font-size: clamp(1.5rem, 5vw, 2.3rem);
+  margin-bottom: 0.35rem;
+}
+
+.homeStepNumber,
+.homeScenarioList__number {
+  color: var(--humanizer-accent-warm);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.homeStart__steps pre {
+  background: #172026;
+  border-radius: 0;
+  color: #edf3f2;
+  font-size: 0.78rem;
+  margin-top: 1.25rem;
+  max-width: 100%;
+  padding: 1.25rem;
+}
+
+.homeExampleLabel {
+  color: var(--humanizer-accent-warm);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-top: 1.25rem;
+  text-transform: uppercase;
+}
+
+.homeScenarios {
+  border-top: 1px solid var(--humanizer-rule);
+}
+
+.homeScenarioList {
+  border-top: 1px solid var(--humanizer-rule);
+}
+
+.homeScenarioList article {
+  align-items: start;
+  border-bottom: 1px solid var(--humanizer-rule);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  padding-block: 1.75rem;
+}
+
+.homeScenarioList p {
+  color: var(--humanizer-ink-muted);
+  margin: 0;
+}
+
+.homeScenarioList code {
+  background: var(--humanizer-paper-raised);
+  border: 1px solid var(--humanizer-rule);
+  color: var(--humanizer-accent);
+  font-size: 0.78rem;
+  grid-column: 2;
+  justify-self: start;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 0.5rem 0.65rem;
+}
+
+.homeRoutes {
+  border-top: 1px solid var(--humanizer-rule);
+  display: grid;
+  padding-bottom: clamp(5rem, 12vw, 9rem);
+}
+
+.homeRoutes article {
+  border-bottom: 1px solid var(--humanizer-rule);
+  padding-block: 3rem;
+}
+
+.homeRoutes h2 {
+  font-size: clamp(2rem, 7vw, 3.6rem);
+}
+
+@media (min-width: 48rem) {
+  .homeHero {
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  }
+
+  .homeIndex {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .homeIndex a {
+    border-right: 1px solid var(--humanizer-rule);
+    justify-content: center;
+  }
+
+  .homeIndex a:last-child {
+    border-right: 0;
+  }
+
+  .homeStart__steps article {
+    gap: 2rem;
+    grid-template-columns: 4rem minmax(0, 1fr);
+  }
+
+  .homeStart__steps article > div {
+    display: grid;
+    gap: 0 2rem;
+    grid-template-columns: minmax(12rem, 0.6fr) minmax(18rem, 1.4fr);
+  }
+
+  .homeStart__steps h3 {
+    grid-column: 1;
+  }
+
+  .homeStart__steps p,
+  .homeStart__steps pre,
+  .homeStart__steps :global(.humanizerTextLink),
+  .homeExampleLabel {
+    grid-column: 2;
+  }
+
+  .homeStart__steps p {
+    grid-row: 1 / span 2;
+  }
+
+  .homeScenarioList article {
+    align-items: center;
+    gap: 2rem;
+    grid-template-columns: 4rem minmax(0, 1fr) minmax(10rem, auto);
+  }
+
+  .homeScenarioList code {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .homeRoutes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .homeRoutes article {
+    border-right: 1px solid var(--humanizer-rule);
+    padding: 3rem 2rem;
+  }
+
+  .homeRoutes article:last-child {
+    border-right: 0;
+  }
+}
+
+@media (min-width: 64rem) {
+  .homeHero,
+  .homeStart,
+  .homeScenarios,
+  .homeRoutes,
+  .homeIndex {
+    width: min(100% - 4rem, 82rem);
+  }
+}

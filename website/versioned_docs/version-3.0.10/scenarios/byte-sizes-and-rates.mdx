@@ -1,0 +1,55 @@
+---
+id: byte-sizes-and-rates
+title: Format byte sizes and transfer rates
+sidebar_position: 14
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import bytes from '!!raw-loader!../_examples/scenarios-bytes/Program.cs';
+
+# Format byte sizes and transfer rates
+
+## Orientation
+
+`ByteSize` keeps a data quantity typed while the application parses, compares, adds, subtracts, and formats it. Numeric extensions create values without manual factors. `ByteRate` combines a size with a measurement interval for display as bytes, kilobytes, or larger units per second, minute, or hour.
+
+## Example
+
+This program parses a size with an explicit provider, performs arithmetic, distinguishes bits from bytes, and formats a transfer rate:
+
+<CodeBlock language="csharp" title="Program.cs">{bytes}</CodeBlock>
+
+### Create and format sizes
+
+Use `Bytes`, `Kilobytes`, `Megabytes`, `Gigabytes`, or `Terabytes` on numeric values, or the corresponding `ByteSize.From...` factories. `Humanize` chooses the largest whole unit and accepts ordinary numeric format strings. `ToFullWords` uses full unit names.
+
+### Parse user input
+
+`Parse` throws for invalid input. `TryParse` accepts `string` or `ReadOnlySpan<char>` and returns `false` without throwing. Supply the same format provider used by the input field.
+
+### Calculate rates
+
+Call `size.Per(interval).Humanize(format, TimeUnit.Second, culture)`. Rate display supports second, minute, and hour units.
+
+## Pitfall
+
+Humanizer’s `KB`, `MB`, `GB`, and `TB` values use binary multiples of 1024. They are not SI decimal units. The symbols `b` and `B` are intentionally case-sensitive: lowercase is bits, uppercase is bytes. Other recognized unit suffixes are case-insensitive. Fractional bits and values without a unit suffix are invalid.
+
+Construct rates with a positive, nonzero interval. Keep `ByteSize` as the model value; formatted output is not a serialization contract.
+
+## Version notes
+
+Core `ByteSize` creation and formatting span the documented corpus.
+Culture-aware `ByteRate.Humanize` appears in `2.13.14`; earlier snapshots need a
+reduced example or exclusion. The verified source runs against the selected
+package.
+
+## Related guides and API
+
+- [Metric numerals](./metric-numerals.mdx)
+- [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
+- [ByteSize API](../api/Humanizer.ByteSize.md)
+- [ByteSizeExtensions API](../api/Humanizer.ByteSizeExtensions.md)
+- [ByteRate API](../api/Humanizer.ByteRate.md)

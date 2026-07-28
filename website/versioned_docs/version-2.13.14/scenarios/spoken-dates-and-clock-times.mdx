@@ -1,0 +1,45 @@
+---
+id: spoken-dates-and-clock-times
+title: Produce spoken dates and clock times
+sidebar_position: 10
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import spokenDates from '!!raw-loader!../_examples/scenarios-spoken-dates/Program.cs';
+
+# Produce spoken dates and clock times
+
+## Orientation
+
+Use date ordinal words when a calendar date should read naturally, and clock notation when a `TimeOnly` value should become a phrase such as “twenty-five past one.” These are localized presentation operations, distinct from relative time and numeric ordinal suffixes.
+
+## Example
+
+Neither API accepts a culture parameter, so this executable scopes both ambient cultures before making the calls:
+
+<CodeBlock language="csharp" title="Program.cs">{spokenDates}</CodeBlock>
+
+### Date ordinal words
+
+`DateTime.ToOrdinalWords()` and `DateOnly.ToOrdinalWords()` order the day, month, and year for the current UI culture. A `GrammaticalCase` overload is available for locales whose date converter supports case-sensitive wording.
+
+### Clock notation
+
+`TimeOnly.ToClockNotation()` renders the exact minute. `ClockNotationRounding.NearestFiveMinutes` first rounds to the nearest five-minute boundary, then selects the phrase. Rounding can cross an hour or day-period boundary.
+
+## Pitfall
+
+Locale capability is not uniform. A successful number-word conversion does not prove that the same locale supplies date ordinal words, grammatical cases, or clock notation. Check [supported cultures and capabilities](../languages/supported-cultures.mdx) and set ambient culture at the request or job boundary.
+
+## Version notes
+
+`DateTime.ToOrdinalWords` predates the documented corpus. `DateOnly` date words begin with its framework support in `2.11.10`. Clock notation appears in `2.13.14`; this page and executable must be excluded from earlier snapshots.
+
+## Related guides and API
+
+- [Relative dates and times](./relative-dates-and-times.mdx)
+- [Choose explicit and ambient cultures](../languages/using-cultures.mdx)
+- [DateToOrdinalWordsExtensions API](../api/Humanizer.DateToOrdinalWordsExtensions.md)
+- [TimeOnlyToClockNotationExtensions API](../api/Humanizer.TimeOnlyToClockNotationExtensions.md)

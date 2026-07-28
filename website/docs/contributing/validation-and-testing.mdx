@@ -1,0 +1,97 @@
+---
+id: validation-and-testing
+title: Validate locale changes
+sidebar_position: 8
+diataxis: how-to
+persona: language contributor
+example: illustrative
+---
+
+# Validate locale changes
+
+## Orientation
+
+Locale changes need exact-output proof and broad sweep proof. Put
+culture-specific xUnit tests under
+`tests/Humanizer.Tests/Localisation/<culture>`. Update source-generator tests
+when schema, inheritance, generated profiles, or registry wiring changes.
+
+Review the registry and fallback sweeps whenever a locale joins or changes a
+surface. A test that only checks for a non-empty result does not prove
+language behavior.
+
+The minimum proof set is:
+
+- exact-output assertions for locale-specific and grammar-sensitive behavior
+- parsing assertions separate from render-side number words
+- full ownership and proof rows in the parity artifact
+- registry and theory-matrix completeness sweeps
+- source-generator assertions when schema, inheritance, profiles, or wiring
+  changes
+- package and formatting validation
+
+## Example
+
+Run the complete locale validation from the repository root:
+
+```powershell
+dotnet test tests/Humanizer.SourceGenerators.Tests/Humanizer.SourceGenerators.Tests.csproj --framework net10.0
+dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0
+dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
+dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net11.0
+dotnet pack src/Humanizer/Humanizer.csproj -c Release -o artifacts/locale-validation
+$packageVersion = '<version printed by dotnet pack>'
+pwsh tests/verify-packages.ps1 -PackageVersion $packageVersion -PackagesDirectory artifacts/locale-validation
+dotnet format Humanizer.slnx --verify-no-changes --verbosity diagnostic
+pwsh tools/docs/generate-language-coverage.ps1
+pwsh tools/docs/generate-language-coverage.ps1 -Check
+```
+
+Confirm that `LocaleRegistrySweepTests` and
+`LocaleTheoryMatrixCompletenessTests` run in the runtime suite. If test filters
+were used during iteration, finish with unfiltered target-framework runs.
+
+Run relevant benchmarks when a shared runtime kernel or registry dispatch path
+changes. On Windows, also run the `net48` test target and compare NLS output
+with modern .NET ICU output where calendar or numeric formatting is involved.
+
+For a calendar or numeric-formatting override, compare exact output for every
+affected path:
+
+- `DateTime.ToOrdinalWords`
+- `DateOnly.ToOrdinalWords` on package targets that contain that API
+- culture-aware integer `Ordinalize` formatting
+- `ByteSize.ToString` and `ByteSize.ToFullWords`
+- `ByteSize.TryParse` for an explicit culture and decimal separator
+- metric numeral formatting
+
+Record OS, target framework, globalization mode, and result in the parity
+artifact.
+
+## Pitfall
+
+Do not commit a regenerated coverage file without its YAML change, or a YAML
+change without regenerated coverage. `-Check` intentionally fails when those
+inputs and output differ.
+
+Do not treat a package build as parity proof. The parity map still needs a
+concrete assertion for every canonical surface and required subrow.
+
+Do not run `net48` on non-Windows hosts, and do not claim a cross-platform
+formatting fix from a single ICU or NLS result. Preserve a failing probe and
+the exact regression assertion that replaces it.
+
+## Version notes
+
+These commands target the current repository and therefore `main/preview`.
+Historical maintenance branches can target different frameworks. Use the
+branch's toolchain while preserving exact-output, sweep, and warning-free pack
+gates.
+
+## Related guides and API
+
+- [Parity and preflight](./parity-and-preflight.mdx)
+- [Locale YAML how-to](./locale-yaml-how-to.mdx)
+- [Override platform globalization data](./platform-globalization-overrides.mdx)
+- [Contribute documentation](./documentation.mdx)
+- [Selected-version API reference](../api/index.md)

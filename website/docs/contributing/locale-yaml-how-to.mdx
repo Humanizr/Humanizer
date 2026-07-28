@@ -1,0 +1,93 @@
+---
+id: locale-yaml-how-to
+title: Locale YAML how-to
+sidebar_position: 4
+diataxis: how-to
+persona: language contributor
+example: illustrative
+---
+
+# Locale YAML how-to
+
+## Orientation
+
+Each file under `src/Humanizer/Locales` owns one locale. YAML holds words,
+phrases, lexical tables, formatting overrides, and structural engine choices.
+Reusable algorithms stay in runtime C#; the source generator compiles YAML
+into typed registrations, so runtime code never parses YAML or JSON.
+
+Valid top-level keys are `locale`, optional `variantOf`, and `surfaces`.
+Canonical surfaces are `list`, `formatter`, `phrases`, `number`, `ordinal`,
+`clock`, `compass`, and `calendar`.
+
+## Example
+
+```yaml
+locale: 'en-US'
+variantOf: 'en'
+
+surfaces:
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'and'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        one: 1
+        two: 2
+```
+
+Author dense lexical tables as sequences when every slot matters. Use numeric
+keys for sparse tables:
+
+```yaml
+tensMap:
+  2: 'twenty'
+  3: 'thirty'
+```
+
+Inheritance merges mappings and replaces sequences. A child scalar replaces
+the parent scalar. Changing `engine` replaces that mapped block.
+
+Use `calendar.months`, `calendar.monthsGenitive`, or `calendar.hijriMonths`
+only when platform globalization data is incorrect or differs across targets.
+Use `number.formatting` for proven decimal-separator, negative-sign, or
+group-separator drift. These overrides do not mutate `CultureInfo` and do not
+override a caller-supplied custom provider.
+
+Follow the complete [platform globalization override recipe](./platform-globalization-overrides.mdx)
+to capture the cross-target probe, author the narrowest override, and test
+every affected API.
+
+## Pitfall
+
+Omission is the inheritance signal; do not use empty mappings. Do not add a
+block merely to say “default.” The narrow exception is
+`engine: 'default'` on the documented ordinal and clock surfaces.
+
+Keep `phrases` (the output tables) separate from `formatter` (selection and
+grammar metadata). Keep render-side `number.words` aligned with parse-side
+`number.parse`.
+
+If no existing engine fits, use the
+[engine-choice workflow](./choosing-or-extending-a-locale-engine.mdx) before
+adding schema or runtime code.
+
+## Version notes
+
+This authoring contract is for `main/preview`. The exhaustive
+[YAML reference](./locale-yaml-reference.mdx) lists the currently accepted
+engines and fields. Historical branches can have different schema and runtime
+ownership; use their source rather than copying a current block backward.
+
+## Related guides and API
+
+- [Add or update a locale](./adding-or-updating-a-locale.mdx)
+- [Locale YAML reference](./locale-yaml-reference.mdx)
+- [Choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx)
+- [Override platform globalization data](./platform-globalization-overrides.mdx)
+- [Parity and preflight](./parity-and-preflight.mdx)
+- [Selected-version API reference](../api/index.md)

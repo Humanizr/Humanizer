@@ -1,0 +1,941 @@
+---
+id: number-to-words-engine-reference
+title: Number-to-words engine reference
+sidebar_position: 9
+diataxis: reference
+persona: language contributor
+example: illustrative
+---
+
+# Number-to-words engine reference
+
+## Orientation
+
+Choose a rendering engine by the language's composition, scale, gender, and
+ordinal rules. Locale-owned lexicons and switches belong in YAML; reusable
+composition stays in the shared runtime kernel.
+
+## Example
+
+```yaml
+surfaces:
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'and'
+```
+
+## Number-To-Words Engines
+
+For every engine below, scalar `*Word`, `*Prefix`, `*Suffix`, `*Joiner`, and `*Separator` fields are literal locale-owned strings. Array `*Map` fields are lexical tables. `scales` is always ordered from larger to smaller scale values unless the engine documentation says otherwise.
+
+When an engine has nested objects such as `cardinal`, `ordinal`, or `endings`, keep those groupings intact in YAML. They exist to keep one locale file readable by semantic area instead of flattening unrelated values into one giant list.
+
+### `agglutinative-ordinal-scale`
+
+Fields:
+
+- `minusWord`
+- `tensSuffix`
+- `teenSuffix`
+- `ordinalTensSuffix`
+- `unitsMap`
+- `ordinalUnitsMap`
+- `scales`
+- `ordinalExceptions`
+
+### `appended-group`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `conjunctionWord`
+- `ordinalZeroWord`
+- `ordinalSeparatorWord`
+- `ordinalPrefix`
+- `firstOrdinalMasculine`
+- `firstOrdinalFeminine`
+- `groups`
+- `appendedGroups`
+- `pluralGroups`
+- `onesGroup`
+- `tensGroup`
+- `hundredsGroup`
+- `appendedTwos`
+- `twos`
+- `feminineOnesGroup`
+- `ordinalExceptions`
+- `feminineOrdinalExceptions`
+
+### `billion-strategy`
+
+Fields:
+
+- `minusWord`
+- `andWord`
+- `cardinal`
+- `ordinal`
+
+Nested `cardinal` fields:
+
+- `hundredExactWord`
+- `thousandWord`
+- `millionSingularWord`
+- `millionPluralWord`
+- `billionStrategy`
+- `billionSingularWord`
+- `billionPluralWord`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+
+Nested `ordinal` fields:
+
+- `billionStrategy`
+- `thousandWord`
+- `millionWord`
+- `billionWord`
+- `millionJoinMode`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+
+Notes:
+
+- Use this engine when a locale's main variability is how it names the billion scale and how the cardinal and ordinal branches differ at higher scales.
+- Keep `cardinal` and `ordinal` words separate even when many values happen to match; they model two distinct runtime sub-profiles.
+- `ordinal.millionJoinMode` controls the separator before `millionWord`: use `spaced` for a space or `compact` for no separator.
+
+### `conjoined-gendered-scale`
+
+Fields:
+
+- `minusWord`
+- `conjunction`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+- `hundredsOrdinalMap`
+- `unitsOrdinal`
+- `unitForms` with optional `masculine`, `feminine`, and `neuter` unit override maps
+- `ordinalZero` with `masculine`, `feminine`, and `neuter` forms
+- `ordinalOverHundredSuffixes` with `masculine`, `feminine`, and `neuter` suffixes for hundreds and scale stems
+- `ordinalUnitsAndTensSuffixes` with `masculine`, `feminine`, and `neuter` suffixes for unit and tens stems
+- `scales`
+
+Notes:
+
+- Omitted `unitForms` gender maps, or missing entries inside a gender map, fall back to `unitsMap`. The ordinal form blocks are required because there is no safe runtime fallback for locale-specific ordinal wording.
+
+### `conjunctional-scale`
+
+Fields:
+
+- `minusWord`
+- `andWord`
+- `hundredWord`
+- `hundredOrdinalWord`
+- `tensUnitsSeparator`
+- `defaultAddAnd`
+- `addAndMode`
+- `andStrategy`
+- `tupleSuffix`
+- `ordinalLeadingOneStrategy`
+- `ordinalMode`
+- `ordinalWholePhrasePrefix`
+- `exactOrdinals`
+- `unitsMap`
+- `ordinalUnitsMap`
+- `tensMap`
+- `ordinalTensMap`
+- `scales`
+- `namedTuples`
+
+Notes:
+
+- `defaultAddAnd`, `addAndMode`, and `andStrategy` together define when conjunctions appear. Do not try to encode that behavior with ad hoc words or duplicated tables.
+- `ordinalMode` decides whether ordinals come from dedicated lexical tables, whole-phrase prefixing, numeric suffixes, or other structural strategies within the shared kernel.
+- `ordinalWholePhrasePrefix` supplies the prefix for locales that form compound ordinals by prefixing the whole cardinal phrase.
+- `exactOrdinals` is a sparse value-to-word map for standalone ordinal exceptions that should bypass the compositional ordinal path. Use it when an exact value has a natural form that is not valid inside compounds; keep compound unit/tens wording in `ordinalUnitsMap` and `ordinalTensMap`.
+- `namedTuples` is for irregular compact tuple-style forms; keep it sparse and comment unusual values in the locale file.
+
+### `construct-state-scale`
+
+Fields:
+
+- `defaultGender`
+- `zeroWord`
+- `minusWord`
+- `andPrefix`
+- `teenMasculineWord`
+- `teenFeminineWord`
+- `teenNormalizationOld`
+- `teenNormalizationNew`
+- `unitsFeminine`
+- `unitsMasculine`
+- `tensMap`
+- `oneHundredWord`
+- `twoHundredsWord`
+- `hundredsPluralSuffix`
+- `thousandsPluralSuffix`
+- `thousandsSingularSuffix`
+- `thousandsSpecialCases`
+- `scales`
+- `useCulture`
+
+### `contextual-decimal`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `ordinalPrefix`
+- `tenWord`
+- `tensWord`
+- `zeroTensWord`
+- `digitWords`
+- `scales`
+- `teenUnitExceptions`
+- `postTensUnitExceptions`
+- `exactOrdinals`
+
+### `contracted-one-scale`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `hundredWord`
+- `hundredUnitWord`
+- `units`
+- `tens`
+- `scales`
+
+### `east-asian-grouped`
+
+Fields:
+
+- `zeroWord`
+- `negativePrefix`
+- `ordinalPrefix`
+- `ordinalSuffix`
+- `digitWords`
+- `smallUnitWords`
+- `largeUnits`
+- `omitOneBeforeTen`
+- `omitOneBeforeTenOnlyWhenLeading`
+- `omitOneBeforeHundred`
+- `omitOneBeforeThousand`
+- `insertZeroInGroup`
+- `insertZeroBetweenGroups`
+- `ordinalMap`
+
+Notes:
+
+- Prefer sparse numeric-slot mappings for `smallUnitWords` or `largeUnits` whenever the locale only defines words from a non-zero starting slot.
+- The `omitOneBefore*` flags are composition rules, not lexical exceptions; if you find yourself adding many one-off words instead, the locale may belong on a different engine.
+
+### `east-slavic`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `zeroOrdinalStem`
+- `hundredsMap`
+- `tensMap`
+- `unitsMap`
+- `unitsOrdinalPrefixes`
+- `tensOrdinalPrefixes`
+- `tensOrdinal`
+- `unitsOrdinal`
+- `feminineOne`
+- `neuterOne`
+- `feminineTwo`
+- `oneOrdinalPrefix`
+- `scales`
+- `endings`
+
+Nested `endings` fields:
+
+- `masculine`
+- `feminine`
+- `neuter`
+
+### `gendered-scale-ordinal`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `feminineSingular`
+- `masculineOrdinalPrefix`
+- `feminineOrdinalPrefix`
+- `masculineOrdinalSuffix`
+- `feminineOrdinalSuffix`
+- `joinGroups`
+- `joinAboveTwenty`
+- `unitsVariants`
+- `teensVariants`
+- `tensMap`
+- `ordinalUnderTenVariants`
+- `scales`
+
+### `harmony-ordinal`
+
+Fields:
+
+- `minimumValue`
+- `maximumValue`
+- `minusWord`
+- `unitsMap`
+- `tensMap`
+- `scales`
+- `tupleSuffixes`
+- `namedTuples`
+- `hundredWord`
+- `hundredStrategy`
+- `ordinalSuffixes`
+- `terminalVowelOrdinalSuffixes`
+- `ordinalSuffixPair`
+- `ordinalSuffixStrategy`
+- `secondOrdinalSuffixCharacters`
+- `softenTerminalTBeforeSuffix`
+- `dropTerminalVowelBeforeHarmonySuffix`
+
+Notes:
+
+- Use this engine only for suffix systems driven by vowel harmony or final-character membership. If the locale needs wholly different tens/hundreds composition, start by checking another render-side engine first.
+- `ordinalSuffixes`, `terminalVowelOrdinalSuffixes`, `ordinalSuffixPair`, and `secondOrdinalSuffixCharacters` work together; document unusual combinations with a YAML comment in the locale file.
+- In `last-vowel-map` mode, `ordinalSuffixes` is the default map selected from the rendered word's last matching vowel. It should model the ordinary/consonant-final stem case, for example a Kyrgyz consonant-final stem with last `а` can use `а: 'ынчы'` to produce `миллиардынчы`.
+- `terminalVowelOrdinalSuffixes` is an optional override map used only when the rendered ordinal stem already ends in a configured vowel. Use it for harmony systems where a vowel-final cardinal stem takes a different ordinal suffix from a consonant-final stem with the same last vowel, for example Kyrgyz `жыйырма` + `нчы` -> `жыйырманчы`, or Kazakh vowel-final stems that use `ншы`/`нші`/`сыншы` instead of the default consonant-final suffixes.
+- `terminalVowelOrdinalSuffixes` does not affect `tupleSuffixes`; tuple rendering always uses the tuple suffix map directly.
+
+### `hyphenated-scale`
+
+Fields:
+
+- `zeroWord`
+- `zeroOrdinalWord`
+- `minusWord`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+- `ordinalUnitsMap`
+- `ordinalUnitsExceptions`
+- `ordinalTensMap`
+- `scales`
+- `thousandScale`
+- `tupleMap`
+- `twoPrefixWord`
+
+### `hyphenated-ordinal`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `unitsMasculine`
+- `unitsFeminine`
+- `teens`
+- `tens`
+- `hundredsMasculine`
+- `hundredsFeminine`
+- `thousandWord`
+- `millionSingular`
+- `millionPlural`
+- `millionSingularPrefix`
+- `masculineCompoundOne`
+- `feminineCompoundOne`
+- `masculineOrdinalOne`
+- `feminineOrdinalOne`
+- `ordinalMasculine`
+- `ordinalFeminine`
+- `ordinalUnitComponents`
+- `ordinalTensStems`
+- `masculineOrdinalAppender`
+- `masculineTensOrdinalSuffix`
+- `feminineTensOrdinalSuffix`
+- `defaultOrdinalAbbreviationMasculine`
+- `defaultOrdinalAbbreviationFeminine`
+- `ordinalAbbreviations`
+- `defaultTensJoiner`
+- `specialTensJoiner`
+- `specialJoinerTensValue`
+- `tupleMap`
+- `tupleFallbackWord`
+
+### `linked-vigesimal`
+
+Use this render and parse engine pair for locales whose natural lower numbers are lexicalized or linked/vigesimal, while larger values are built with scale nouns before their counts. Yoruba (`yo`) uses it for directly authored sub-100 forms such as `mẹ́tàlélógún`, with scale rows for `ẹgbẹ̀rún kan`, `igba`, and other hundred-scale overrides. Do not use this engine for bound-stem scale morphology; use `stemmed-scale` for that case.
+
+Render fields:
+
+- `zeroWord`
+- `negativeWord`
+- `negativeJoiner`
+- `partJoiner`
+- `terminalRemainderJoiner`
+- `terminalRemainderAlternateJoiner` (optional; used when the rendered terminal remainder starts with a configured initial)
+- `terminalRemainderAlternateJoinerInitials` (optional initial-character set for the alternate joiner)
+- `terminalRemainderThreshold`
+- `ordinalSuffix`
+- `words` — dense cardinal words from zero through the highest lexicalized low number
+- `scales`
+- `ordinalExceptions`
+
+Nested `scales` fields:
+
+- `value`
+- `one`
+- `oneWithRemainder` (optional; defaults to `one`)
+- `name`
+- `nameWithRemainder` (optional; defaults to `name`)
+- `countJoiner` (optional; defaults to a space)
+- `countOverrides` (optional exact phrases keyed by scale count)
+- `countOverridesWithRemainder` (optional exact phrases keyed by scale count)
+
+Parse fields mirror render-side `words`, `scales`, `terminalRemainderJoiner`, and optional `terminalRemainderAlternateJoiner`, plus optional `negativePrefixes`, `ordinalSuffixes`, `ordinalMap`, and `additionalCardinals`. Parsers accept both the base and alternate terminal joiner tokens; parser profiles do not need `terminalRemainderAlternateJoinerInitials` because they match explicit joiner tokens rather than selecting a joiner while rendering.
+
+### `stemmed-scale`
+
+Use this render and parse engine pair for additive count+scale systems where a count has an independent cardinal word, but scale composition uses a bound count stem before the scale suffix. Sinhala (`si`) uses it for forms such as `දෙ` + `දහස්` -> `දෙදහස්` while still emitting independent low-number words such as `දෙක`.
+
+Render fields:
+
+- `zeroWord`
+- `negativeWord`
+- `negativeJoiner`
+- `joiner`
+- `ordinalSuffix`
+- `words` — dense cardinal words for 0 through the highest directly authored low number
+- `countStems` — dense bound stems indexed by count; empty entries are allowed for counts that should fall back to `words`
+- `scales`
+- `ordinalExceptions`
+
+Nested `scales` fields:
+
+- `value`
+- `one`
+- `oneWithRemainder`
+- `suffix`
+- `suffixWithRemainder`
+- `stemJoiner` (optional; defaults to empty)
+- `fallbackName` / `fallbackNameWithRemainder` (optional; used when no bound stem exists for a scale count)
+- `fallbackJoiner` (optional; defaults to a space)
+
+Parse fields:
+
+- `words`
+- `countStems`
+- `scales`
+- `negativePrefixes`
+- `ordinalSuffixes`
+- `ordinalMap`
+- `additionalCardinals` (optional)
+
+Notes:
+
+- Keep this engine narrow. It is additive count+scale stem morphology, not a general natural-number grammar engine. Do not use it for vigesimal, subtractive, or clock-like composition.
+- The parser greedily tokenizes generated scale/count forms and low-number phrases so multi-word low cardinals can round-trip.
+- Author `number.words` and `number.parse` with matching `words`, `countStems`, and `scales` unless the parser has a documented reason to accept additional input-only forms.
+
+### `indian-scale-forms`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `ordinalSuffix`
+- `denseUnitsMap`
+- `scales`
+- `ordinalMap`
+- `ordinalTerminalReplacements`
+
+Nested `scales` fields:
+
+- `value`
+- `singular`
+- `singularWithRemainder`
+- `plural`
+- `pluralWithRemainder`
+- `omitOne`
+
+Notes:
+
+- Use this engine for Indian-grouped decimal systems whose scale nouns have singular, plural, and continuing forms. Telugu (`te`) uses it for forms such as lakh/crore scale phrases that change when a lower remainder follows.
+- `denseUnitsMap` must provide words for 0 through 99; the lowest scale value must be covered by that dense range.
+- `scales` are ordered from larger to smaller scale values. Each row can omit the explicit one-count word with `omitOne`.
+- `ordinalTerminalReplacements` rewrites terminal cardinal tokens before appending `ordinalSuffix`, while `ordinalMap` handles exact irregular ordinals.
+
+### `indian-grouping`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+- `thousandsMap`
+- `singleLakhWord`
+- `lakhWord`
+- `croreWord`
+- `quadrillionWord`
+- `quintillionWord`
+- `thousandsOneBridge`
+- `hundredsContinuingSuffix`
+- `hundredsExactSuffix`
+- `hundredsNineContinuingSuffix`
+- `hundredsNineExactSuffix`
+- `defaultTensWithRemainderSuffix`
+- `nineTensWithRemainderSuffix`
+- `specialTensWithRemainderSuffix`
+- `exactTensDefaultSuffix`
+- `exactTensNineSuffix`
+- `thousandContinuingSuffix`
+- `thousandExactSuffix`
+- `lakhContinuingSuffix`
+- `lakhExactSuffix`
+- `croreContinuingSuffix`
+- `ordinalSuffix`
+- `ordinalExceptions`
+
+### `indian-grouping-gendered`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `hundredWord`
+- `thousandWord`
+- `lakhWord`
+- `singleLakhWord`
+- `croreWord`
+- `arabWord`
+- `kharabWord`
+- `denseUnitsMap`
+- `ordinal`
+
+Nested `ordinal` fields:
+
+- `masculine.defaultSuffix`
+- `masculine.exactReplacements`
+- `feminine.defaultSuffix`
+- `feminine.exactReplacements`
+- `neuterFallback`
+
+Notes:
+
+- This engine is used by Indian-subcontinent locales with lakh/crore/arab/kharab grouping and gendered word ordinals, such as Hindi, Punjabi, and Urdu.
+- `denseUnitsMap` supplies the cardinal word forms used below one hundred and for recursive scale counts.
+- `ordinal.masculine` and `ordinal.feminine` model productive suffixes plus exact low-number replacements. `neuterFallback` must be `masculine` or `feminine` and is used when callers request `GrammaticalGender.Neuter` for a two-gender locale.
+
+### `inverted-tens`
+
+Fields:
+
+- `minusWord`
+- `unitsMap`
+- `tensMap`
+- `hundredWord`
+- `oneHundredWord`
+- `hundredsPrefixMap`
+- `unitTensJoiner`
+- `unitTensAlternateJoiner`
+- `unitTensAlternateJoinerUnitEnding`
+- `hundredJoiner`
+- `hundredRemainderSeparator`
+- `hundredTailPrefix`
+- `hundredTailPrefixMode`
+- `scaleTailPrefix`
+- `scaleTailPrefixMode`
+- `leadingOneWord`
+- `leadingOnePreservePrefix`
+- `scales`
+- `ordinalMode`
+- `ordinalDefaultSuffix`
+- `ordinalSteSuffix`
+- `ordinalSteSuffixEndingChars`
+- `ordinalExceptions`
+- `removeLeadingOneInOrdinal`
+
+### `joined-scale`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `joinWord`
+- `negativeJoinWord`
+- `underHundredJoinWord`
+- `scaleCountJoinWord`
+- `compoundOrdinalWord`
+- `compoundOrdinalRemainder`
+- `defaultOrdinalSuffix`
+- `matchingOrdinalSuffix`
+- `ordinalSuffixMatchCharacters`
+- `maximumValue`
+- `omitOneWhenSingularAlways`
+- `subHundredMap`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+- `hundredsMapWithRemainder`
+- `scales`
+  - `value`
+  - `name`
+  - `nameWithRemainder` (optional)
+  - `pluralName` (optional)
+  - `pluralNameWithRemainder` (optional)
+  - `omitOneWhenSingular` (optional)
+- `ordinalExceptions`
+- `requireOrdinalException`: optional boolean. When `true`, `ToOrdinalWords` only accepts exact ordinal replacements and throws `NotImplementedException` for non-exact inputs instead of synthesizing an ordinal through compound, default-suffix, or gendered fallback rules. Use this for locales whose authored ordinal coverage is intentionally finite and should not silently return cardinal-derived words.
+- `compoundOrdinalExcludedValues`
+- `ordinal`: optional gendered word-ordinal profile. When present, it overrides the legacy `defaultOrdinalSuffix`/`ordinalExceptions` path for `ToOrdinalWords(number, gender, culture)`. `requireOrdinalException` still permits authored `exactReplacements` but disables the profile's default prefix/suffix fallback.
+  - `masculine`: gender block with `defaultSuffix` and optional `exactReplacements`.
+  - `feminine`: optional gender block with the same shape as `masculine`.
+  - `neuter`: optional gender block with the same shape as `masculine`.
+  - `neuterFallback`: gender to use when `GrammaticalGender.Neuter` is requested and no `neuter` block exists. Must be `'masculine'` or `'feminine'`.
+  - `joined-scale` intentionally allows omitted `feminine` and `neuter` blocks because some locales only need masculine word ordinals or use masculine as a shared fallback. This differs from `ordinalizer: number-word-suffix`, which requires both `masculine` and `feminine` because that ordinalizer surface models explicitly gendered numeric ordinalization.
+
+Join fields are literal strings, not separator-mode enums:
+
+- `negativeJoinWord` joins `minusWord` to the positive number phrase and defaults to one space.
+- `scaleCountJoinWord` joins a rendered scale count to its scale name and defaults to one space.
+- `underHundredJoinWord` joins pieces inside an under-hundred fragment. Omit it to reuse `joinWord`; set it explicitly when the locale needs a different literal, including an empty string.
+
+### `linking-scale`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `unitsMap`
+- `tensMap`
+- `hundredWords`
+- `conjunctionWord`
+- `tensRemainderJoiner`
+- `scalePrefixes`
+- `scaleLinkRules`
+- `scales`
+
+### `long-scale-stem-ordinal`
+
+Fields:
+
+- `zeroWord`
+- `negativeWord`
+- `unitsMasculine`
+- `unitsFeminine`
+- `unitsMasculineAbbreviation`
+- `tensMap`
+- `tensJoiner`
+- `hundredthsRoots`
+- `thousandthsRoots`
+- `ordinalUnitRoots`
+- `tenthsRoots`
+- `exactHundredWord`
+- `minLongValueWord`
+- `thousandWord`
+- `thousandOrdinalStem`
+- `highestScaleValue`
+- `highestScaleOrdinalSource`
+- `highestScaleOrdinalTarget`
+- `roundHigherScaleCompactValue`
+- `masculineOrdinalEnding`
+- `feminineOrdinalEnding`
+- `tupleMap`
+- `tupleFallbackSuffix`
+- `hundredsMasculine`
+- `hundredsFeminine`
+- `largeScales`
+
+### `dual-form-scale`
+
+Fields:
+
+- `prefixMap`
+- `unitsMap`
+- `tensMap`
+- `conjunction`
+- `hundredWord`
+- `hundredPrefixWord`
+- `dualHundredsWord`
+- `feminineOneWord`
+- `thousandScale`
+- `millionScale`
+- `billionScale`
+- `exactOrdinals`
+- `minusSuffix`
+
+### `ordinal-prefix-scale`
+
+Fields:
+
+- `minusWord`
+- `andWord`
+- `defaultGender`
+- `unitsMap`
+- `masculineUnitsMap`
+- `feminineUnitsMap`
+- `neuterUnitsMap`
+- `tensMap`
+- `unitsOrdinalPrefixes`
+- `tensOrdinalPrefixes`
+- `hundredSingular`
+- `hundredPlural`
+- `ordinalTwoMasculine`
+- `ordinalTwoFeminine`
+- `ordinalTwoNeuter`
+- `masculineOrdinalEnding`
+- `nonMasculineOrdinalEnding`
+- `scales`
+
+### `pluralized-scale`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `zeroOrdinalStem`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+- `scales`
+- `formDetector`
+- `unitVariantStrategy`
+- `ordinalMode`
+- `supportsNeuter`
+- `masculineOrdinalSuffix`
+- `feminineOrdinalSuffix`
+- `ordinalUnitsMap`
+- `ordinalTensMap`
+- `ordinalHundredsMap`
+- `useCulture`
+
+### `scale-leading-compound`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `conjunctionWord`
+- `terminalRemainderConjunctionWord`
+- `ordinalPrefix`
+- `ordinalSuffix`
+- `unitsMap`
+- `tensMap`
+- `scales`
+- `ordinalMap`
+
+Nested `scales` fields:
+
+- `value`
+- `name`
+
+Notes:
+
+- Use this engine for languages whose scale noun precedes the count token, for example a structure like "hundred one and two". Hausa (`ha`) and Swahili (`sw`) use this shared family.
+- `unitsMap` must cover 0 through 19 and `tensMap` must be keyed through index 9.
+- `scales` are ordered from larger to smaller scale values and must include a scale no greater than 100 so the recursive renderer can decompose all larger numbers.
+- `conjunctionWord` joins tens-plus-units and terminal sub-hundred remainders. `terminalRemainderConjunctionWord` can override that conjunction for potentially ambiguous terminal remainders after larger scales; when omitted, it falls back to `conjunctionWord`.
+- Ordinals use `ordinalMap` for exact values. Otherwise the engine wraps the cardinal phrase with `ordinalPrefix` and `ordinalSuffix`.
+
+### `scale-strategy`
+
+Fields:
+
+- `cardinalStrategy`
+- `ordinalStrategy`
+- `maximumValue`
+- `defaultGender`
+- `zeroWord`
+- `minusWord`
+- `oneDefault`
+- `oneMasculine`
+- `oneFeminine`
+- `oneNeuter`
+- `tensLinker`
+- `largeScaleRemainderJoiner`
+- `exactLargeScaleOrdinalSuffix`
+- `exactDefaultOrdinalSuffix`
+- `tensOrdinalTrimEndCharacters`
+- `tensOrdinalSuffix`
+- `shortOrdinalUpperBoundExclusive`
+- `shortOrdinalTrimEndCharacters`
+- `shortOrdinalTrimmedSuffix`
+- `shortOrdinalSuffix`
+- `hundredWord`
+- `hundredCompositeSingularWord`
+- `thousandWord`
+- `thousandSingularWord`
+- `thousandCompositeSingularWord`
+- `unitsMap`
+- `tensMap`
+- `hundredUnitMap`
+- `scales`
+- `ordinalExceptions`
+
+Notes:
+
+- This engine is for locales where the same broad scale decomposition works, but the exact cardinal and ordinal policies vary by strategy enum.
+- Use `cardinalStrategy` and `ordinalStrategy` before adding extra booleans. If a new distinction cannot be named cleanly as a strategy, the kernel may need redesign instead of more flags.
+
+### `segmented-scale`
+
+Fields:
+
+- `maximumValue`
+- `zeroWord`
+- `minusWord`
+- `teenPrefix`
+- `exactOneHundredWord`
+- `unitsDefault`
+- `unitsPluralized`
+- `tensMap`
+- `hundredsDefault`
+- `hundredsPluralized`
+- `scales`
+- `maximumOrdinal`
+- `ordinalMap`
+
+### `south-slavic-cardinal`
+
+Fields:
+
+- `maximumValue`
+- `allowLongMin`
+- `zeroWord`
+- `minusWord`
+- `scaleFormDetector`
+- `numberComposition`
+- `invertedTensLinker`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+- `feminineOne`
+- `feminineTwo`
+- `ordinalSuffix`
+- `ordinalCompoundJoiner`
+- `ordinalUnitsMap`
+- `ordinalTensMap`
+- `ordinalHundredsMap`
+- `scales`
+
+Each `scales` row includes `value`, `gender`, `singular`, `paucal`, and
+`plural`. It can also supply `oneForm`, `dual`, `trialQuadral`, `ordinal`, and
+pipe-delimited `ordinalCountPrefixes`.
+
+### `terminal-ordinal-scale`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `unitStems`
+- `ordinalUnitStems`
+- `tensMap`
+- `hundredsExactStems`
+- `exactOneHundredCardinal`
+- `exactOneHundredAfterHigherScale`
+- `oneHundredWithRemainder`
+- `hundredsPluralWord`
+- `masculineOrdinalSuffix`
+- `feminineOrdinalSuffix`
+- `scales`
+
+### `triad-scale`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `feminineOneWord`
+- `leadingOneWord`
+- `tenWord`
+- `tenOrdinalStem`
+- `commonOrdinalStem`
+- `masculineOrdinalSuffix`
+- `feminineOrdinalSuffix`
+- `ordinalUnit3RestoredVowel`
+- `ordinalUnit6RestoredVowel`
+- `unitsMap`
+- `unitsFinalAccent`
+- `tensMap`
+- `teensMap`
+- `hundredsMap`
+- `ordinalUnderTen`
+- `scales`
+
+### `unit-leading-compound`
+
+Fields:
+
+- `zeroWord`
+- `minusWord`
+- `masculineOne`
+- `feminineOne`
+- `neuterOne`
+- `feminineTwo`
+- `tensJoiner`
+- `tensJoinerTransform`
+- `ordinalStemSuffix`
+- `masculineOrdinalEnding`
+- `feminineOrdinalEnding`
+- `neuterOrdinalEnding`
+- `supportsEifelerRule`
+- `unitsMap`
+- `compoundUnitsMap`
+- `tensMap`
+- `unitsOrdinal`
+- `scales`
+
+### `variant-decade`
+
+Fields:
+
+- `minusWord`
+- `seventyStrategy`
+- `ninetyStrategy`
+- `specialSeventyOneWord`
+- `pluralizeExactEighty`
+- `tensUsingEtWhenUnitIsOne`
+- `tensMap`
+
+### `west-slavic-gendered`
+
+Fields:
+
+- `minusWord`
+- `unitsMap`
+- `tensMap`
+- `hundredsMap`
+- `unitsMasculineForms`
+- `unitsFeminineForms`
+- `unitsNeuterForms`
+- `unitsInvariantForms`
+- `thousands`
+- `millions`
+- `billions`
+- `useCulture`
+
+## Pitfall
+
+Do not select an engine by name resemblance alone or add locale-specific
+branches to a shared kernel. Exact-output tests must cover the rule boundaries,
+not only single-digit examples.
+
+## Version notes
+
+These rendering engines are the accepted `main/preview` contracts.
+Historical branches may use different engines or handwritten converters.
+
+## Related guides and API
+
+- [Words-to-number engines](./words-to-number-engine-reference.mdx)
+- [Choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx)
+- [Locale YAML reference index](./locale-yaml-reference.mdx)
+- [Selected-version API reference](../api/index.md)

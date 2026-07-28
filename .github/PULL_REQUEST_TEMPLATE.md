@@ -9,4 +9,4 @@ Here is a checklist you should tick through before submitting a pull request:
  - [ ] Your PR is (re)based on top of the latest commits from the `main` branch (more info below)
  - [ ] Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
  - [ ] Readme is updated if you change an existing feature or add a new one
- - [ ] Run either `build.cmd` or `build.ps1` and ensure there are no test failures
+ - [ ] Run the applicable validation from `AGENTS.md`; documentation changes include the documentation gates

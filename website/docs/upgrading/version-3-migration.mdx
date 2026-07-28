@@ -1,0 +1,111 @@
+---
+id: version-3-migration
+title: Migrate from 2.14.1 to Humanizer 3
+sidebar_position: 3
+diataxis: how-to
+persona: developer upgrading a 2.x application
+example: illustrative
+---
+
+# Migrate from 2.14.1 to Humanizer 3
+
+## Orientation
+
+Start from a clean build on `2.14.1`. Update the package, apply the namespace
+migration, repair the remaining compiler errors by category, and rebuild every
+assembly that references Humanizer. Target `3.0.10` for the completed migration;
+the `3.0.1` and `3.0.8` boundaries explain why intermediate workarounds may
+exist.
+
+### 1. Check framework and restore tooling
+
+Humanizer 3 package assets are `netstandard2.0`, `net48`, `net8.0`, and
+`net10.0`; the 2.x `netstandard1.0` and `net6.0` assets are gone. A `net6.0` or
+`net7.0` consumer therefore resolves the `netstandard2.0` asset.
+
+The `Humanizer` metapackage's locale dependency parsing requires NuGet tooling
+from .NET SDK `9.0.200` or later. If an older restore host cannot be upgraded,
+reference the exact-version `Humanizer.Core` package and the locale packages
+you need.
+
+### 2. Consolidate namespaces
+
+Humanizer 3 moves public types from sub-namespaces such as `Humanizer.Bytes`,
+`Humanizer.Configuration`, and `Humanizer.Localisation` into `Humanizer`.
+Install `Humanizer` `3.0.10`, then use
+[`HUMANIZER001`](../analyzer/index.mdx) to replace old using directives and
+qualified names.
+
+### 3. Replace removed APIs
+
+| 2.x use | Humanizer 3 remediation |
+| --- | --- |
+| `"{0}".FormatWith(...)` | Use `string.Format(...)`. |
+| Boolean `ToMetric` overloads | Pass `MetricNumeralFormats`. |
+| `EnglishArticles` | Replace the enum-dependent logic in the application. |
+| `Configurator.EnumDescriptionPropertyLocator` | Call `Configurator.UseEnumDescriptionPropertyLocator(...)` during startup, before enum humanization. |
+| `Resources` or `ResourceKeys` | These remain in stable Humanizer 3 releases through `3.0.10`; their removal is a future `main/preview` migration boundary. |
+| String-keyed `DefaultFormatter` hooks | Use typed `IFormatter`/`DefaultFormatter` members. |
+
+The string `ToQuantity(int, ...)` overloads were absent in early Humanizer 3
+and restored in `3.0.6`. Do not rewrite a working 2.x call merely because it
+fails against `3.0.1`; target `3.0.10`.
+
+### 4. Update signatures and extensibility
+
+Enum humanization now uses `where T : struct, Enum`. Code that stores a value as
+the base `Enum` type must preserve or recover its concrete enum type before
+calling `Humanize`. Generic `DehumanizeTo<T>` callers need the same enum
+constraint.
+
+Custom `IFormatter` implementations must implement `TimeSpanHumanize_Age()`.
+Subclasses of `DefaultFormatter` must replace removed string resource-key hooks
+with typed formatter overrides.
+
+### 5. Validate behavior and packages
+
+Test `Titleize`, `Pascalize`, `Dehumanize`, enum humanization, quantities, and
+localized output. Humanizer 3 treats hyphens as `Pascalize` delimiters and
+preserves no-letter strings in `Humanize`/`Titleize`. Locale package IDs also
+normalize several region-specific IDs: `bn-BD`, `fi-FI`, `ko-KR`, `ms-MY`,
+`nb-NO`, and `th-TH` become language-only IDs; `fr-BE` has no direct metapackage
+replacement.
+
+The source evidence is the
+[2.14.1 to 3.0.1 tag comparison](https://github.com/Humanizr/Humanizer/compare/v2.14.1...v3.0.1)
+and [breaking-change report #1656](https://github.com/Humanizr/Humanizer/issues/1656).
+
+## Example
+
+This illustrative migration replaces both an old namespace and a removed
+helper:
+
+```csharp
+// Humanizer 2
+using Humanizer.Configuration;
+var text = "{0:N2}".FormatWith(culture, value);
+
+// Humanizer 3
+using Humanizer;
+var text = string.Format(culture, "{0:N2}", value);
+```
+
+## Pitfall
+
+Do not suppress `HUMANIZER001` across the solution before running its code fix.
+The diagnostic covers only namespace consolidation. Once those mechanical
+changes are applied, the remaining compiler errors point to real API,
+constraint, or package changes.
+
+## Version notes
+
+`3.0.1` is the first supported stable Humanizer 3 snapshot. Continue through
+`3.0.8` and `3.0.10`: those releases restore APIs and correct analyzer loading
+and fallback packaging. The migration is not complete at `3.0.1`.
+
+## Related guides and API
+
+- [Plan an upgrade](./index.mdx)
+- [Humanizer 3 patch line](./version-3-patch-line.mdx)
+- [Analyzer migration and CI](../analyzer/index.mdx)
+- [Selected-version API reference](../api/index.md)

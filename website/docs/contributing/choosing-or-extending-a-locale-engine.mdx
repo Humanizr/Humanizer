@@ -1,0 +1,113 @@
+---
+id: choosing-or-extending-a-locale-engine
+title: Choose or extend a locale engine
+sidebar_position: 5
+diataxis: how-to
+persona: language contributor
+example: illustrative
+---
+
+# Choose or extend a locale engine
+
+## Orientation
+
+Locale YAML owns words, phrases, lexical tables, switches, and structural
+engine choices. Shared runtime kernels own reusable algorithms. Generator C#
+maps a validated YAML structure to typed cached runtime objects. Runtime code
+never parses YAML or JSON.
+
+Use the first path that fits:
+
+1. Inherit proven same-language behavior.
+2. Reuse an existing engine with locale-owned data.
+3. Extend an existing shared engine when the rule family remains coherent.
+4. Add a new shared engine only for a reusable structural rule.
+5. Keep a locale-specific leaf only while the behavior is genuinely
+   procedural and cannot be expressed without exception hooks.
+
+The [engine catalogues](./locale-yaml-reference.mdx) list the existing
+contracts and fields.
+
+## Example
+
+### Reuse an existing engine
+
+Reuse a contract when differences are lexical, list-based, scale-based,
+grammatical metadata, or documented strategy choices:
+
+```yaml
+surfaces:
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: '<native minus word>'
+      andWord: '<native conjunction>'
+```
+
+The algorithm stays in the shared runtime kernel; only locale-owned values
+belong in YAML.
+
+### Extend or add a shared engine
+
+Add a new contract only when:
+
+- the behavior is structural and reusable
+- at least two locales can share it, or one locale and an obvious second
+  checked-in target need it
+- the YAML shape is coherent rather than an exception bucket
+- the runtime kernel remains free of locale-name branches
+
+A shared-engine change normally touches:
+
+1. `src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs`
+2. the relevant generator under
+   `src/Humanizer.SourceGenerators/Generators/ProfileCatalogs`
+3. a structurally named kernel under `src/Humanizer/Localisation`
+4. source-generator tests
+5. culture-specific runtime tests
+6. the relevant benchmark when dispatch or composition is on a hot path
+
+Name the engine for the rule family, such as `conjunctional-scale`, rather
+than for the first language that uses it.
+
+### Migrate a handwritten locale leaf
+
+1. Read the leaf and identify the actual rule family.
+2. Find another locale with the same structure.
+3. Move locale words, tables, and switches into YAML.
+4. Reuse or extend a shared runtime kernel.
+5. Add the typed generator contract and profile emission.
+6. Prove generated wiring and exact runtime parity.
+7. Benchmark the affected hot path.
+8. Remove the leaf only after the parity map has no unresolved rows.
+
+Keep a residual leaf when the morphology is still genuinely procedural,
+generalizing it would require imperative hooks, and no second locale supports
+a coherent abstraction. State that reason in the pull request.
+
+## Pitfall
+
+Do not create a generic-sounding engine that still switches on culture names.
+Do not add one flag per exceptional locale, expose generator-internal profile
+identifiers in YAML, or split one locale across extra data files to make the
+top-level file appear smaller.
+
+Generated locale dispatch must remain direct and cached. Do not introduce
+runtime YAML/JSON parsing, reflection-based registry construction, or
+per-call profile creation. Benchmark shared-kernel changes against the path
+they replace.
+
+## Version notes
+
+The generated engine architecture and paths on this page describe
+`main/preview`. Historical branches can use handwritten converters and
+different generator contracts. Inspect the target branch before applying a
+current engine name or migration sequence.
+
+## Related guides and API
+
+- [Add or update a locale](./adding-or-updating-a-locale.mdx)
+- [Locale YAML how-to](./locale-yaml-how-to.mdx)
+- [Locale YAML reference](./locale-yaml-reference.mdx)
+- [Validation and testing](./validation-and-testing.mdx)
+- [Selected-version API reference](../api/index.md)

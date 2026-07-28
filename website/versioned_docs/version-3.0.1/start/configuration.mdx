@@ -1,0 +1,49 @@
+---
+id: configuration
+title: Configuration basics
+sidebar_position: 5
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import configuration from '!!raw-loader!../_examples/configuration/Program.cs';
+
+# Configuration basics
+
+## Orientation
+
+Prefer per-call culture arguments when an overload provides one. Use `CultureInfo.CurrentCulture` and `CurrentUICulture` when a Humanizer API follows ambient application culture. Reserve `Configurator` for application-wide strategies, registries, or enum metadata rules.
+
+Configure global behavior once during application startup, before any request or background worker can use Humanizer.
+
+## Example
+
+This verified example installs the built-in precision date strategy at startup
+and proves the resulting output with an injected comparison instant:
+
+<CodeBlock language="csharp" title="Program.cs">{configuration}</CodeBlock>
+
+For a global date strategy, assign `Configurator.DateTimeHumanizeStrategy` once at startup. For a custom localized component, call the relevant registry's `Register` method before the registry is resolved.
+
+## Pitfall
+
+In Humanizer `3.x` and current builds, `LocaliserRegistry<T>` freezes its
+registrations on first use, so registering after resolution throws
+`InvalidOperationException`. Likewise, call
+`Configurator.UseEnumDescriptionPropertyLocator` before the first enum
+humanization.
+
+## Version notes
+
+Humanizer `2.x` keeps registries mutable and exposes an assignable
+`Configurator.EnumDescriptionPropertyLocator`; `3.x` introduces registry
+freezing and `UseEnumDescriptionPropertyLocator`. Date strategies exist across
+the supported corpus. Confirm the selected-version API before adopting another
+global extension point.
+
+## Related guides and API
+
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
+- [Selected-version API reference](../api/index.md)

@@ -1,9 +1,9 @@
 # Cross-Platform Verification Signoff
 
-## Epic: fn-3-hard-code-locale-overrides-where-icu
+## Locale override verification
 
 Date: 2026-04-09
-Signoff author: Claire Novotny (automated via fn-3.6 task)
+Signoff author: Claire Novotny
 
 ---
 
@@ -22,7 +22,7 @@ Signoff author: Claire Novotny (automated via fn-3.6 task)
 
 ### Before vs After (all platforms)
 
-The after probes capture the same raw `CultureInfo` data as the before probes plus two new fields (`month_names_raw` and `month_genitive_names_raw`) added in fn-5.1 to provide full 12-month raw `DateTimeFormat.MonthNames` coverage for the override decision rule. On macOS, the after probe was re-run with the extended probe implementation; all pre-existing fields are byte-identical to the before baseline. For Linux/Windows net10/net48, the after probes remain copies of the before baselines (without the new fields) because those platforms are not reachable from this environment.
+The after probes capture the same raw `CultureInfo` data as the before probes plus two new fields (`month_names_raw` and `month_genitive_names_raw`) that provide full 12-month raw `DateTimeFormat.MonthNames` coverage for the override decision rule. On macOS, the after probe was re-run with the extended probe implementation; all pre-existing fields are byte-identical to the before baseline. For Linux/Windows net10/net48, the after probes remain copies of the before baselines (without the new fields) because those platforms are not reachable from this environment.
 
 - The probes capture raw `CultureInfo` data (month names, decimal separators, date/time patterns, and now raw MonthNames/MonthGenitiveNames arrays)
 - Humanizer's overrides operate at the **runtime layer** (source-generated lookup tables), not by modifying `CultureInfo`
@@ -108,7 +108,7 @@ Test run summary: Passed!
   duration: 13s 749ms
 ```
 
-Verified locally in fn-5.8 (commit 04d20eee). The .NET 8 SDK (8.0.419) and runtime (8.0.25) are installed on this machine; the earlier claim that "only .NET 10.0.2 is available" was incorrect.
+Verified locally in commit 04d20eee. The .NET 8 SDK (8.0.419) and runtime (8.0.25) are installed on this machine; the earlier claim that "only .NET 10.0.2 is available" was incorrect.
 
 ### Linux net10.0 / net8.0: REQUIRES LINUX HOST
 
@@ -130,9 +130,9 @@ dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework n
 
 ### Windows net48: REQUIRES WINDOWS HOST (build now green on all platforms)
 
-The test project compiles for `net48` on every platform (macOS, Linux, Windows) as of fn-5.7 (commit 424ed0d2), which added an `#if NET5_0_OR_GREATER` guard around `Enum.GetValues<GrammaticalGender>()` at `LocaleTheoryMatrixCompletenessTests.cs:379`. Test execution still requires a Windows host because the .NET Framework 4.8 runtime is Windows-only. This is the same host-OS requirement as the Linux and Windows sections above -- not a deferral or a blocker.
+The test project compiles for `net48` on every platform (macOS, Linux, Windows) as of commit 424ed0d2, which added an `#if NET5_0_OR_GREATER` guard around `Enum.GetValues<GrammaticalGender>()` at `LocaleTheoryMatrixCompletenessTests.cs:379`. Test execution still requires a Windows host because the .NET Framework 4.8 runtime is Windows-only. This is the same host-OS requirement as the Linux and Windows sections above -- not a deferral or a blocker.
 
-- `dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48` exits 0 on all platforms (verified in fn-5.7)
+- `dotnet build tests/Humanizer.Tests/Humanizer.Tests.csproj -c Release -f net48` exits 0 on all platforms (verified in commit 424ed0d2)
 - `dotnet test --framework net48` requires Windows host (CI matrix)
 
 ---
@@ -189,7 +189,7 @@ The `compare-probes.cs` agreement percentage for non-overridden locales is 75.2%
 
 ## 7. Net48 Build Status
 
-**Resolved in fn-5.7** (commit 424ed0d2): The `Enum.GetValues<GrammaticalGender>()` call at `LocaleTheoryMatrixCompletenessTests.cs:379` was guarded with `#if NET5_0_OR_GREATER`, with a non-generic fallback for net48. The test project now compiles for all three target frameworks (`net10.0`, `net8.0`, `net48`) on every platform.
+**Resolved in commit 424ed0d2**: The `Enum.GetValues<GrammaticalGender>()` call at `LocaleTheoryMatrixCompletenessTests.cs:379` was guarded with `#if NET5_0_OR_GREATER`, with a non-generic fallback for net48. The test project now compiles for all three target frameworks (`net10.0`, `net8.0`, `net48`) on every platform.
 
 **Test execution**: `dotnet test --framework net48` requires a Windows host because the .NET Framework 4.8 runtime is Windows-only. This is a host-OS requirement, not a code defect. The CI workflow runs net48 tests on Windows as part of the standard build matrix.
 
@@ -210,28 +210,28 @@ The `compare-probes.cs` agreement percentage for non-overridden locales is 75.2%
 | Decimal separator overrides: macOS validated | PASS (macOS net10.0 test suite, 38,908 tests) |
 | Decimal separator overrides: cross-platform agreement | CI verification (Linux/Windows require their own hosts; override data authored conservatively) |
 | macOS net10.0: 0 failures | PASS (38,908 passed) |
-| macOS net8.0: 0 failures | PASS (38,908 passed; verified in fn-5.8) |
+| macOS net8.0: 0 failures | PASS (38,908 passed; verified in commit 04d20eee) |
 | Linux net10.0: 0 failures | CI verification (requires Linux host) |
 | Windows net10.0: 0 failures | CI verification (requires Windows host) |
 | net48 probe output committed | PASS (before baseline) |
-| net48 build green on all platforms | PASS (verified in fn-5.7; test execution requires Windows host) |
+| net48 build green on all platforms | PASS (verified in commit 424ed0d2; test execution requires Windows host) |
 | No regressions | PASS (full suite green) |
 | Non-overridden agreement not decreased | PASS (75.2%, unchanged) |
 
 ### Verification completeness
 
-**Locally verified on macOS**: net10.0 (38,908 tests, 0 failures) and net8.0 (38,908 tests, 0 failures). All probe artifacts committed. All override YAML validated by source generator build. net48 build verified green on macOS (fn-5.7).
+**Locally verified on macOS**: net10.0 (38,908 tests, 0 failures) and net8.0 (38,908 tests, 0 failures). All probe artifacts committed. All override YAML validated by source generator build. net48 build verified green on macOS in commit 424ed0d2.
 
 **Requires non-macOS host (CI-host verification):**
 - Linux net10.0 / net8.0 — requires a Linux host to execute; the CI workflow includes these in the standard build matrix
 - Windows net10.0 / net8.0 — requires a Windows host to execute; the CI workflow includes these in the standard build matrix
-- Windows net48 — requires a Windows host to execute (the .NET Framework 4.8 runtime is Windows-only); the test project compiles on all platforms (fn-5.7); the CI workflow includes net48 in the Windows build matrix
+- Windows net48 — requires a Windows host to execute (the .NET Framework 4.8 runtime is Windows-only); the test project compiles on all platforms as of commit 424ed0d2; the CI workflow includes net48 in the Windows build matrix
 
 This sign-off does **not** claim full cross-platform verification. It claims macOS verification on both net10.0 and net8.0. Non-macOS host runs require CI-host verification on the respective platforms.
 
 ### Note on after-probe identity
 
-The probe tool captures raw `CultureInfo` data, not Humanizer output. Since Humanizer's overrides operate at the runtime layer via source-generated lookup tables (not by modifying `CultureInfo`), the pre-existing fields in the "after" probes are identical to the "before" probes. The macOS after probe was re-run with the extended probe implementation (fn-5.1) which adds `month_names_raw` and `month_genitive_names_raw` fields; all pre-existing fields are byte-identical to the before baseline. The Linux/Windows after probes remain copies of their before counterparts (without the new fields) because those platforms are not reachable from the current environment.
+The probe tool captures raw `CultureInfo` data, not Humanizer output. Since Humanizer's overrides operate at the runtime layer via source-generated lookup tables (not by modifying `CultureInfo`), the pre-existing fields in the "after" probes are identical to the "before" probes. The macOS after probe was re-run with the extended probe implementation, which adds `month_names_raw` and `month_genitive_names_raw` fields; all pre-existing fields are byte-identical to the before baseline. The Linux/Windows after probes remain copies of their before counterparts (without the new fields) because those platforms are not reachable from the current environment.
 
 The test suite is the authoritative verification that Humanizer produces consistent output. The macOS test runs (net10.0: 38,908 tests, 0 failures; net8.0: 38,908 tests, 0 failures) confirm all overrides work correctly on macOS. Non-macOS host test runs (Linux, Windows) require CI-host verification on those platforms.
 
@@ -254,10 +254,9 @@ These test runs require their respective host OS. The CI workflow includes them 
 ## Final sign-off
 
 **Date:** 2026-04-10
-**Epic:** fn-5-locale-parity-sign-off-verify-code (Locale parity sign-off: verify code matches claims and docs match current state)
 **Branch:** codex/locale-translation-completion
-**Reviewed-from baseline:** c1bd879a (last commit before fn-5.5 sign-off work)
-**Sign-off commit:** d40bbbe6 (fn-5.5 sign-off), updated by fn-5.7 (424ed0d2), fn-5.8 (04d20eee), fn-5.9 (269460eb)
+**Reviewed-from baseline:** c1bd879a
+**Sign-off commits:** d40bbbe6, 424ed0d2, 04d20eee, 269460eb
 
 ### FinalOverrideSet
 
@@ -265,66 +264,34 @@ These test runs require their respective host OS. The CI workflow includes them 
 
 ### Verified checklist
 
-Each acceptance criterion from the fn-5 epic spec, with the satisfying task and artifact.
-
-| # | Criterion | Task | Verified |
-|---|-----------|------|----------|
-| 1 | `FinalOverrideSet` determined per-locale for ta and zu-ZA, producing concrete 6-member set | fn-5.1 | PASS -- done-summary states `FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA}` |
-| 2 | Decision grounded in full 12-month raw `MonthNames` evidence | fn-5.1 | PASS -- both probes extended with `month_names_raw`; macOS probe re-run |
-| 3 | Preferred-path two-probe lockstep: both probe implementations extended | fn-5.1 | PASS -- `tools/locale-probe.cs` and `tools/locale-probe-net48/Program.cs` both emit `month_names_raw` and `month_genitive_names_raw` |
-| 4 | Path chosen, rationale, unreachable platforms documented | fn-5.1 | PASS -- preferred path; Linux/Windows net10/net48 unreachable |
-| 5 | Each locale in FinalOverrideSet has `calendar:` block in YAML | fn-5.1 | PASS -- `grep -l "^  calendar:" src/Humanizer/Locales/*.yml` returns bn, fa, he, ku, ta, zu-ZA |
-| 6 | `tools/compare-probes.cs:22` matches FinalOverrideSet | fn-5.1 | PASS -- `["bn", "fa", "he", "ku", "ta", "zu-ZA"]` |
-| 7 | `tools/verification-signoff.md` stale claims corrected | fn-5.1 | PASS -- lines 43, 52 match FinalOverrideSet |
-| 8 | Probe-shape reconciliation in verification-signoff.md | fn-5.1 | PASS -- narrative updated for `month_names_raw` / `month_genitive_names_raw` fields |
-| 9 | fn-3 spec full-file audit | fn-5.6 | PASS -- all six-locale references consistent with FinalOverrideSet |
-| 10 | fn-3.3 task full-file audit | fn-5.6 | PASS -- all references consistent; fn-5.6 audit annotation added |
-| 11 | `CLAUDE.md` no longer says "register in formatter/converter registries" | fn-5.2 | PASS -- replaced with source-generator explanation |
-| 12 | `AGENTS.md` same stale instruction removed | fn-5.2 | PASS |
-| 13 | `CLAUDE.md` net48 reframed: all 3 TFMs build everywhere, net48 test execution requires Windows host | fn-5.2, fn-5.7 | PASS |
-| 14 | `AGENTS.md` net48 reframed identically | fn-5.2, fn-5.7 | PASS |
-| 15 | `grep -rn "avoid net48 on" CLAUDE.md AGENTS.md` returns zero | fn-5.5 scan 2c | PASS -- zero matches |
-| 16 | Both files mention `calendar:` / `number.formatting:` escape hatch | fn-5.2 | PASS |
-| 17 | `release_notes.md` vNext entries for phrase-clock, calendar, number.formatting, deleted converter | fn-5.3 | PASS -- lines 58-61 |
-| 18 | `readme.md` enumerates 8 canonical surfaces | fn-5.3 | PASS |
-| 19 | `ARCHITECTURE.md` generator table mentions `LocaleNumberFormattingOverrides.g.cs` | fn-5.3 | PASS |
-| 20 | `ARCHITECTURE.md` prose lists all 8 canonical surfaces | fn-5.3 | PASS |
-| 21 | `.agents/skills/add-locale/SKILL.md` surface inventory updated | fn-5.4 | PASS |
-| 22 | `.agents/skills/add-locale/SKILL.md` required-proof-subrows updated | fn-5.4 | PASS |
-| 23 | `.agents/skills/add-locale/references/parity-checklist.md` updated with corrected paths | fn-5.4 | PASS |
-| 24 | `tools/verification-signoff.md:64` ku decimal-separator shows U+066B | fn-5.1 | PASS |
-| 25 | fn-2 proxy-close executed with artifact mapping | fn-5.5 | PASS -- mapping in `.flow/specs/fn-2-fix-stale-locale-documentation-after.md`; fn-2 closed via flowctl |
-| 26 | Scan battery 2a-2i all pass | fn-5.5, fn-5.8 | PASS -- all scans pass including net8.0 (verified locally in fn-5.8) |
-| 27 | Deleted-converter residual scan scope-based | fn-5.5 scan 2a | PASS -- matches at HumanizerSourceGeneratorTests.cs:68-70 (allowlisted DoesNotContain assertions) + release_notes.md:58 (allowlisted: vNext changelog entry documenting converter removal, added by fn-5.3; scan 2a spec updated to include release_notes.md vNext as an allowlisted scope) |
-| 28 | `dotnet format --verify-no-changes` | fn-5.5 scan 2i | PASS -- 0 of 1596 files formatted |
-| 29 | `dotnet test` net10.0 | fn-5.5 scan 2i | PASS -- 38,908 tests, 0 failures |
-| 30 | `dotnet test` net8.0 | fn-5.8 | PASS -- 38,908 tests, 0 failures (verified locally in fn-5.8, commit 04d20eee) |
-| 31 | net48 build green on all platforms | fn-5.7 | PASS -- `dotnet build -f net48` exits 0 (fn-5.7, commit 424ed0d2); test execution requires Windows host |
+| Criterion | Verified |
+|-----------|----------|
+| `FinalOverrideSet` determined per-locale for ta and zu-ZA, producing concrete 6-member set | PASS -- `FinalOverrideSet = {bn, fa, he, ku, ta, zu-ZA}` |
+| Decision grounded in full 12-month raw `MonthNames` evidence | PASS -- both probes extended with `month_names_raw`; macOS probe re-run |
+| Both probe implementations extended in lockstep | PASS -- `tools/locale-probe.cs` and `tools/locale-probe-net48/Program.cs` emit `month_names_raw` and `month_genitive_names_raw` |
+| Path chosen, rationale, and unreachable platforms documented | PASS -- Linux/Windows net10/net48 were unreachable |
+| Each locale in FinalOverrideSet has a `calendar:` block in YAML | PASS -- bn, fa, he, ku, ta, zu-ZA |
+| `tools/compare-probes.cs` matches FinalOverrideSet | PASS -- `["bn", "fa", "he", "ku", "ta", "zu-ZA"]` |
+| Probe-shape narrative reconciled | PASS -- documents `month_names_raw` and `month_genitive_names_raw` |
+| Agent-facing locale and net48 guidance corrected | PASS -- `CLAUDE.md` and `AGENTS.md` agree |
+| Release notes, readme, and architecture docs updated | PASS |
+| Locale-authoring skill and parity checklist updated | PASS |
+| Deleted-converter residual scan is scope-based | PASS -- only allowlisted assertions and release-note references remain |
+| `dotnet format --verify-no-changes` | PASS -- 0 of 1596 files formatted |
+| `dotnet test` net10.0 | PASS -- 38,908 tests, 0 failures |
+| `dotnet test` net8.0 | PASS -- 38,908 tests, 0 failures in commit 04d20eee |
+| net48 build green on all platforms | PASS -- `dotnet build -f net48` exits 0 in commit 424ed0d2; test execution requires Windows |
 
 ### Gate completeness
 
-All local verification gates pass on macOS for both net10.0 (38,908 tests, 0 failures) and net8.0 (38,908 tests, 0 failures). The net48 test project builds on all platforms (fn-5.7). Non-macOS host test runs (Linux, Windows) require CI-host verification on those platforms. There are no outstanding deferrals -- every item that can be verified on the developer's host has been verified.
-
-### Sub-tasks (fn-5.1 through fn-5.9)
-
-| Task | Title | Status |
-|------|-------|--------|
-| fn-5.1 | Reconcile calendar.months discrepancy for ta and zu-ZA; fix ku decimal-separator typo | done |
-| fn-5.2 | Fix stale agent-facing doc drift in CLAUDE.md and AGENTS.md | done |
-| fn-5.3 | Update release notes vNext, readme.md, and ARCHITECTURE.md | done |
-| fn-5.4 | Refresh repo-local skill .agents/skills/add-locale for 8 canonical surfaces | done |
-| fn-5.5 | Close fn-2 proxy, run residual scans, and append final sign-off report | done |
-| fn-5.6 | Reconcile fn-3 historical spec/task drift against FinalOverrideSet | done |
-| fn-5.7 | Fix net48 test build break (#if guard) and remove stale fn-4 framing | done |
-| fn-5.8 | Run net8.0 tests locally; restore strict net8.0 acceptance; re-record fn-5.5 evidence | done |
-| fn-5.9 | Reconcile sign-off doc, remove improper pitfall entries, close fn-4 superseded | done |
+All local verification gates pass on macOS for both net10.0 (38,908 tests, 0 failures) and net8.0 (38,908 tests, 0 failures). The net48 test project builds on all platforms as of commit 424ed0d2. Non-macOS host test runs (Linux, Windows) require CI-host verification on those platforms. There are no outstanding deferrals -- every item that can be verified on the developer's host has been verified.
 
 ### Resolved items (previously out of scope)
 
-- **net48 build break** (was fn-4): Resolved in fn-5.7 (commit 424ed0d2) with an `#if NET5_0_OR_GREATER` guard. The test project now compiles for net48 on all platforms. fn-4 closed as superseded by fn-5.7 in fn-5.9.
+- **net48 build break**: Resolved in commit 424ed0d2 with an `#if NET5_0_OR_GREATER` guard. The test project now compiles for net48 on all platforms.
 
 ### Follow-up candidates (not gates)
 
 - **R15 -- Source-generator diagnostic for claim-parity**: A build-time diagnostic that enforces "claimed overrides in docs/tools match YAML reality" would catch future drift automatically. Follow-up: new build-time feature with its own test matrix.
 - **R16 -- CI-lint for CLAUDE.md command blocks**: A lint that verifies executable command blocks in CLAUDE.md still work. Follow-up: docs-hygiene.
-- **R18 -- Drift-detection test for compare-probes.cs**: A test that catches future divergence between `tools/compare-probes.cs` claim arrays and YAML reality. Follow-up: fold into R15 epic.
+- **R18 -- Drift-detection test for compare-probes.cs**: A test that catches future divergence between `tools/compare-probes.cs` claim arrays and YAML reality. Follow-up: fold into R15 work.

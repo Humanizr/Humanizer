@@ -1,0 +1,78 @@
+---
+id: using-cultures
+title: Choose explicit and ambient cultures
+sidebar_position: 2
+diataxis: how-to
+persona: application developer
+example: illustrative
+---
+
+# Choose explicit and ambient cultures
+
+## Orientation
+
+Pass a `CultureInfo` directly when an overload accepts one. It makes the
+language choice visible, keeps concurrent requests isolated, and is easy to
+test. Set `CurrentCulture` and `CurrentUICulture` together at a request,
+message, or job boundary for APIs that use ambient culture.
+
+Culture names are .NET culture identifiers. A specific culture such as
+`fr-FR` can fall back through its .NET parent chain to neutral `fr` locale
+data. Humanizer then uses the registry default only if no registered parent
+matches.
+
+## Example
+
+```csharp
+using System.Globalization;
+using Humanizer;
+
+var french = CultureInfo.GetCultureInfo("fr-FR");
+
+Console.WriteLine(42.ToWords(french));
+Console.WriteLine(DateTime.UtcNow.AddDays(-1).Humanize(culture: french));
+
+CultureInfo.CurrentCulture = french;
+CultureInfo.CurrentUICulture = french;
+Console.WriteLine(new[] { "un", "deux", "trois" }.Humanize());
+```
+
+The first two calls are explicit. The collection call uses ambient UI culture
+because collection formatting has no culture parameter.
+
+For application code, establish ambient culture once at the request, message,
+or background-job boundary. Keep using explicit overloads inside shared
+services where possible; this prevents one concurrent operation from changing
+another operation's output.
+
+## Pitfall
+
+`CurrentCulture` and `CurrentUICulture` serve different .NET concerns.
+Numeric/date formatting commonly follows `CurrentCulture`; resource and
+collection localization can follow `CurrentUICulture`. Setting only one can
+produce mixed-language output. Also avoid changing process-wide culture in a
+shared request path when an explicit overload exists.
+
+Parent fallback is resolution, not parity proof. If `fr-CA` reaches `fr`, that
+only identifies where the data came from. It does not establish that French
+Canadian wording matches every neutral-French choice.
+
+If inherited or direct output is wrong, follow the
+[language correction guide](../contributing/report-language-issue.mdx) or
+[open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
+
+## Version notes
+
+Explicit and ambient `CultureInfo` selection applies across the supported
+documentation corpus. The locale set and package layout are versioned:
+`main/preview` has generated locale data in the consolidated `Humanizer`
+package, while published versions through `3.0.10` use the metapackage and
+locale-package graph documented in their snapshot.
+
+## Related guides and API
+
+- [Supported cultures and capabilities](./supported-cultures.mdx)
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
+- [Package selection](../start/package-selection.md)
+- [Selected-version API reference](../api/index.md)

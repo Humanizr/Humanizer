@@ -1,0 +1,50 @@
+---
+id: relative-dates-and-times
+title: Humanize relative dates and times
+sidebar_position: 7
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import dates from '!!raw-loader!../_examples/scenarios-dates/Program.cs';
+
+# Humanize relative dates and times
+
+## Orientation
+
+Relative humanization compares a temporal value with a known base and returns text such as `yesterday`, `3 hours ago`, or `a month from now`. Pass both the comparison base and culture when output must be deterministic. This release supports `DateTime` and `DateTimeOffset`.
+
+## Example
+
+The example compares two UTC `DateTime` values and never reads the machine clock:
+
+<CodeBlock language="csharp" title="Program.cs">{dates}</CodeBlock>
+
+### Choose the temporal type
+
+| Type | Comparison meaning |
+| --- | --- |
+| `DateTime` | Local or UTC behavior selected by `utcDate` and `Kind` |
+| `DateTimeOffset` | Two offset-aware instants |
+
+Nullable overloads return the locale’s “never” phrase for `null`. That is useful for optional activity timestamps but should not replace explicit missing-value handling in domain logic.
+
+### Configure thresholds once
+
+The default strategies choose familiar boundaries such as “yesterday.” `PrecisionDateTimeHumanizeStrategy` and its sibling strategies use a precision factor when applications need more gradual thresholds. Assign a strategy through `Configurator` once during startup.
+
+## Pitfall
+
+Do not compare a local `DateTime` with a UTC base accidentally. Humanizer converts the injected comparison according to `utcDate`; mixed `Kind` values can move the boundary.
+
+## Version notes
+
+`DateOnly` and `TimeOnly` humanization are not present in `2.10.1`; they begin in `2.11.10` on compatible target frameworks.
+
+## Related guides and API
+
+- [Durations and ages](./durations-and-ages.mdx)
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [DateHumanizeExtensions API](../api/Humanizer.DateHumanizeExtensions.md)
+- [Configurator API](../api/Humanizer.Configuration.Configurator.md)
