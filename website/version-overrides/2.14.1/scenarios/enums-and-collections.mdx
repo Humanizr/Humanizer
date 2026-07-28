@@ -1,0 +1,54 @@
+---
+id: enums-and-collections
+title: Enum and collection scenarios
+sidebar_position: 16
+diataxis: reference
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import enumsCollections from '!!raw-loader!../_examples/scenarios-enums-collections/Program.cs';
+
+# Enum and collection scenarios
+
+## Orientation
+
+Enums and collections both become readable presentation text, but their contracts are different. Enum conversion maps between a typed member and a label, while collection humanization delegates conjunction and punctuation to a locale-aware formatter.
+
+- [Enums and flags](./enums-and-flags.mdx) covers metadata, case-insensitive parsing, no-match behavior, flags, and typed overload choice.
+- [Collections and tuple names](./collections-and-tuples.mdx) covers list punctuation, display selectors, custom formatters, and multiplicity words.
+
+## Example
+
+This verified survey shows a description override, automatic enum casing, case-insensitive enum dehumanization, and an English collection:
+
+<CodeBlock language="csharp" title="Program.cs">{enumsCollections}</CodeBlock>
+
+The source also projects `Person` records to display names. Follow the focused pages for flags, unknown values, localized punctuation, and custom formatters.
+
+## Pitfall
+
+Enum labels must be unambiguous even though matching is case-insensitive. The default no-match behavior throws. Collection output is culture-specific and can differ by selected release; scope `CurrentUICulture` before formatting in tests or background work.
+
+This `2.x` API predates trimming annotations on the runtime `Type` overload.
+Generic enum APIs preserve compile-time type information, but they do not prove
+that a `2.x` application is linker-safe. Validate trimming or Native AOT at the
+application boundary.
+
+## Version notes
+
+The verified survey compiles and runs against this selected package. Enum
+generic constraints and metadata configuration change in Humanizer 3. Locale
+punctuation is versioned data even when the source call compiles unchanged.
+
+## Related guides and API
+
+- [Enums and flags](./enums-and-flags.mdx)
+- [Collections and tuple names](./collections-and-tuples.mdx)
+- [EnumHumanizeExtensions API](../api/Humanizer.EnumHumanizeExtensions.md)
+- [EnumDehumanizeExtensions API](../api/Humanizer.EnumDehumanizeExtensions.md)
+- [CollectionHumanizeExtensions API](../api/Humanizer.CollectionHumanizeExtensions.md)
+- [OnNoMatch API](../api/Humanizer.OnNoMatch.md)
+- [Configurator API](../api/Humanizer.Configuration.Configurator.md)
+- [ICollectionFormatter API](../api/Humanizer.Localisation.CollectionFormatters.ICollectionFormatter.md)
+- [TupleizeExtensions API](../api/Humanizer.TupleizeExtensions.md)

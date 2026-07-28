@@ -5,24 +5,8 @@ param(
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 $manifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
-
-function Get-DirectoryDigest {
-    param([Parameter(Mandatory = $true)][string]$Path)
-
-    $lines = Get-ChildItem $Path -File -Recurse -Force |
-        Sort-Object FullName |
-        ForEach-Object {
-            $relativePath = [System.IO.Path]::GetRelativePath(
-                $Path,
-                $_.FullName
-            ).Replace("\", "/")
-            "$relativePath $((Get-FileHash $_.FullName -Algorithm SHA256).Hash)"
-        }
-    $bytes = [System.Text.Encoding]::UTF8.GetBytes(($lines -join "`n"))
-    return [Convert]::ToHexString(
-        [System.Security.Cryptography.SHA256]::HashData($bytes)
-    )
-}
+. (Join-Path $PSScriptRoot "snapshot-state.ps1")
+. (Join-Path $PSScriptRoot "api-approval.ps1")
 
 $fingerprintTempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-fingerprint-$([guid]::NewGuid().ToString('N'))"
 New-Item -ItemType Directory -Path $fingerprintTempRoot | Out-Null
@@ -140,117 +124,607 @@ try {
         throw "An example restored against the wrong package version."
     }
 
+    $expectedExtras = @(
+        "Humanizer.ICulturedStringTransformer",
+        "Humanizer.Localisation.DataUnit",
+        "Humanizer.MetricNumeralFormats"
+    )
+    $invalidExtraSets = @(
+        [PSCustomObject]@{
+            Name = "missing declaration"
+            Actual = $expectedExtras
+            Expected = $expectedExtras[0..1]
+        },
+        [PSCustomObject]@{
+            Name = "unexpected generated type"
+            Actual = @($expectedExtras + "Humanizer.Unexpected")
+            Expected = $expectedExtras
+        },
+        [PSCustomObject]@{
+            Name = "duplicate exception"
+            Actual = $expectedExtras
+            Expected = @($expectedExtras + $expectedExtras[0])
+        },
+        [PSCustomObject]@{
+            Name = "now-approved unused exception"
+            Actual = $expectedExtras[0..1]
+            Expected = $expectedExtras
+        }
+    )
+    foreach ($case in $invalidExtraSets) {
+        $failed = $false
+        try {
+            Assert-GeneratedExtraTypes `
+                -VersionLabel "2.10.1" `
+                -Actual $case.Actual `
+                -Expected $case.Expected
+        } catch {
+            $failed = $true
+        }
+        if (-not $failed) {
+            throw "PublicAPI extra-type $($case.Name) unexpectedly passed."
+        }
+    }
+    $preJournalRoot = Join-Path $tempRoot "pre-journal-website"
+    New-Item -ItemType Directory -Path $preJournalRoot | Out-Null
+    $preJournalFailed = $false
+    try {
+        Invoke-SnapshotTransaction `
+            -WebsiteRoot $preJournalRoot `
+            -Changes @(
+                [PSCustomObject]@{
+                    Target = "not-an-allowed-target"
+                    Source = (Join-Path $tempRoot "missing-source")
+                }
+            )
+    } catch {
+        $preJournalFailed = $true
+    }
+    if (-not $preJournalFailed -or
+        (Test-Path (Join-Path $preJournalRoot ".snapshot-transaction"))) {
+        throw "Pre-journal snapshot failure left stale transaction state."
+    }
+
+    $journalInvariantRoot = Join-Path $tempRoot "journal-invariant-website"
+    New-Item -ItemType Directory -Path $journalInvariantRoot | Out-Null
+    $journalInvariantVersions = Join-Path $journalInvariantRoot "versions.json"
+    $journalInvariantManifest = Join-Path (
+        $journalInvariantRoot
+    ) "humanizer-versions.json"
+    $journalSourceOne = Join-Path $tempRoot "journal-source-one.json"
+    $journalSourceTwo = Join-Path $tempRoot "journal-source-two.json"
+    [System.IO.File]::WriteAllText(
+        $journalInvariantVersions,
+        "[`"3.0.10`"]`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        $journalInvariantManifest,
+        "{`"schemaVersion`":1}`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        $journalSourceOne,
+        "[]`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        $journalSourceTwo,
+        "{} `n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    $journalInvariantVersionsHash = (
+        Get-FileHash $journalInvariantVersions -Algorithm SHA256
+    ).Hash
+    $journalInvariantManifestHash = (
+        Get-FileHash $journalInvariantManifest -Algorithm SHA256
+    ).Hash
+    foreach ($case in @(
+        [PSCustomObject]@{
+            Name = "duplicate target"
+            ExpectedError = "unique targets"
+            Changes = @(
+                [PSCustomObject]@{
+                    Target = "versions.json"
+                    Source = $journalSourceOne
+                },
+                [PSCustomObject]@{
+                    Target = "versions.json"
+                    Source = $journalSourceTwo
+                }
+            )
+        },
+        [PSCustomObject]@{
+            Name = "manifest before another target"
+            ExpectedError = "manifest target must be last"
+            Changes = @(
+                [PSCustomObject]@{
+                    Target = "humanizer-versions.json"
+                    Source = $journalSourceOne
+                },
+                [PSCustomObject]@{
+                    Target = "versions.json"
+                    Source = $journalSourceTwo
+                }
+            )
+        }
+    )) {
+        $journalInvariantFailed = $false
+        try {
+            Invoke-SnapshotTransaction `
+                -WebsiteRoot $journalInvariantRoot `
+                -Changes $case.Changes
+        } catch {
+            $journalInvariantFailed =
+                $_.Exception.Message -match $case.ExpectedError
+        }
+        if (-not $journalInvariantFailed -or
+            (Get-FileHash $journalInvariantVersions -Algorithm SHA256).Hash -ne
+                $journalInvariantVersionsHash -or
+            (Get-FileHash $journalInvariantManifest -Algorithm SHA256).Hash -ne
+                $journalInvariantManifestHash -or
+            (Test-Path (
+                Join-Path $journalInvariantRoot ".snapshot-transaction"
+            ))) {
+            throw "Pre-journal $($case.Name) rejection was not fail-closed."
+        }
+    }
+
     $snapshotPath = Join-Path $repoRoot "website/versioned_docs/version-3.0.10"
     $sidebarsPath = Join-Path $repoRoot "website/versioned_sidebars/version-3.0.10-sidebars.json"
     $versionsPath = Join-Path $repoRoot "website/versions.json"
-    $snapshotDigest = Get-DirectoryDigest $snapshotPath
+    $snapshotDigest = Get-SnapshotDirectoryDigest $snapshotPath
     $sidebarsHash = (Get-FileHash $sidebarsPath -Algorithm SHA256).Hash
     $versionsHash = (Get-FileHash $versionsPath -Algorithm SHA256).Hash
 
-    & pwsh -NoProfile -File (Join-Path $PSScriptRoot "snapshot.ps1") `
-        -Version "3.0.10" *> $null
-    if ($LASTEXITCODE -eq 0) {
-        throw "Existing snapshot mutation unexpectedly passed."
+    foreach ($rejectedArguments in @(
+        @("-Version", "3.0.10"),
+        @("-Version", "3.0.10", "-CorrectPage", "api/Humanizer.StringHumanizeExtensions.md"),
+        @("-All")
+    )) {
+        & pwsh -NoProfile -File (
+            Join-Path $PSScriptRoot "snapshot.ps1"
+        ) @rejectedArguments *> $null
+        if ($LASTEXITCODE -eq 0) {
+            throw "Rejected snapshot operation unexpectedly passed: $($rejectedArguments -join ' ')"
+        }
     }
-
-    & pwsh -NoProfile -File (Join-Path $PSScriptRoot "snapshot.ps1") `
-        -Version "3.0.10" `
-        -CorrectPage "api/Humanizer.StringHumanizeExtensions.md" *> $null
-    if ($LASTEXITCODE -eq 0) {
-        throw "Generated API correction unexpectedly passed."
-    }
-
-    if ((Get-DirectoryDigest $snapshotPath) -ne $snapshotDigest -or
+    if ((Get-SnapshotDirectoryDigest $snapshotPath) -ne $snapshotDigest -or
         (Get-FileHash $sidebarsPath -Algorithm SHA256).Hash -ne $sidebarsHash -or
         (Get-FileHash $versionsPath -Algorithm SHA256).Hash -ne $versionsHash) {
         throw "A rejected snapshot operation changed immutable output."
     }
 
     $isolatedWebsiteRoot = Join-Path $tempRoot "website"
-    New-Item -ItemType Directory `
-        -Path (Join-Path $isolatedWebsiteRoot "docs") `
-        -Force | Out-Null
-    New-Item -ItemType Directory `
-        -Path (Join-Path $isolatedWebsiteRoot "versioned_docs/version-3.0.10") `
-        -Force | Out-Null
-    New-Item -ItemType Directory `
-        -Path (Join-Path $isolatedWebsiteRoot "versioned_sidebars") `
-        -Force | Out-Null
-    Copy-Item `
-        (Join-Path $repoRoot "website/humanizer-versions.json") `
-        $isolatedWebsiteRoot
-    Copy-Item `
-        (Join-Path $repoRoot "website/versions.json") `
-        $isolatedWebsiteRoot
-    Copy-Item `
-        (Join-Path $repoRoot "website/version-overrides") `
-        $isolatedWebsiteRoot `
-        -Recurse
-    foreach ($path in @("index.md", "proof.mdx")) {
+    New-Item -ItemType Directory -Path $isolatedWebsiteRoot | Out-Null
+    foreach ($path in @(
+        "docs",
+        "version-overrides",
+        "versioned_docs",
+        "versioned_sidebars"
+    )) {
         Copy-Item `
-            (Join-Path $repoRoot "website/docs/$path") `
-            (Join-Path $isolatedWebsiteRoot "docs/$path")
-        Copy-Item `
-            (Join-Path $snapshotPath $path) `
-            (Join-Path $isolatedWebsiteRoot "versioned_docs/version-3.0.10/$path")
+            (Join-Path $repoRoot "website/$path") `
+            $isolatedWebsiteRoot `
+            -Recurse
     }
-    Copy-Item `
-        $sidebarsPath `
-        (Join-Path $isolatedWebsiteRoot "versioned_sidebars")
+    foreach ($path in @(
+        "humanizer-versions.json",
+        "scenario-api-contract.json",
+        "sidebars.json",
+        "versions.json"
+    )) {
+        Copy-Item `
+            (Join-Path $repoRoot "website/$path") `
+            $isolatedWebsiteRoot
+    }
+    $isolatedManifestPath = Join-Path (
+        $isolatedWebsiteRoot
+    ) "humanizer-versions.json"
 
-    $isolatedOverlayProof = Join-Path (
+    $global:HumanizerSnapshotLockProbeRoot = $isolatedWebsiteRoot
+    $global:HumanizerSnapshotLockProbeResult = $null
+    $lockBreakpoint = Set-PSBreakpoint `
+        -Command Assert-FrozenSnapshot `
+        -Action {
+            $lockPath = Join-Path (
+                $global:HumanizerSnapshotLockProbeRoot
+            ) ".snapshot-mutation.lock"
+            try {
+                $probe = [System.IO.File]::Open(
+                    $lockPath,
+                    [System.IO.FileMode]::OpenOrCreate,
+                    [System.IO.FileAccess]::ReadWrite,
+                    [System.IO.FileShare]::None
+                )
+                $probe.Dispose()
+                $global:HumanizerSnapshotLockProbeResult = "released"
+            } catch [System.IO.IOException] {
+                $global:HumanizerSnapshotLockProbeResult = "held"
+            } catch {
+                $global:HumanizerSnapshotLockProbeResult =
+                    "error:$($_.Exception.GetType().FullName)"
+            }
+        }
+    try {
+        & (Join-Path $PSScriptRoot "snapshot.ps1") `
+            -Version "3.0.10" `
+            -Check `
+            -ManifestPath $isolatedManifestPath `
+            -WebsiteRoot $isolatedWebsiteRoot *> $null
+        $lockProbeResult = $global:HumanizerSnapshotLockProbeResult
+    } finally {
+        Remove-PSBreakpoint $lockBreakpoint
+        Remove-Variable `
+            HumanizerSnapshotLockProbeRoot `
+            -Scope Global `
+            -ErrorAction SilentlyContinue
+        Remove-Variable `
+            HumanizerSnapshotLockProbeResult `
+            -Scope Global `
+            -ErrorAction SilentlyContinue
+    }
+    if ($lockProbeResult -ne "held") {
+        throw "Snapshot check did not retain the global lock: $lockProbeResult"
+    }
+
+    $identicalOverlayPath = Join-Path (
         $isolatedWebsiteRoot
-    ) "version-overrides/3.0.10/proof.mdx"
-    $isolatedSnapshotProof = Join-Path (
+    ) "version-overrides/3.0.10/analyzer/index.mdx"
+    Copy-Item (
+        Join-Path $isolatedWebsiteRoot "docs/analyzer/index.mdx"
+    ) $identicalOverlayPath -Force
+    & pwsh -NoProfile -File (
+        Join-Path $PSScriptRoot "verify-manifest.ps1"
+    ) `
+        -ManifestPath $isolatedManifestPath `
+        -WebsiteRoot $isolatedWebsiteRoot *> $null
+    if ($LASTEXITCODE -eq 0) {
+        throw "A byte-identical overlay unexpectedly passed."
+    }
+    Copy-Item (
+        Join-Path $repoRoot "website/version-overrides/3.0.10/analyzer/index.mdx"
+    ) $identicalOverlayPath -Force
+
+    $deletedPublishedPath = Join-Path (
         $isolatedWebsiteRoot
-    ) "versioned_docs/version-3.0.10/proof.mdx"
-    $snapshotProofHash = (
-        Get-FileHash $isolatedSnapshotProof -Algorithm SHA256
+    ) "versioned_docs/version-2.10.1/start/overview.mdx"
+    Remove-Item $deletedPublishedPath -Force
+    & pwsh -NoProfile -File (
+        Join-Path $PSScriptRoot "snapshot.ps1"
+    ) `
+        -All `
+        -Check `
+        -ManifestPath $isolatedManifestPath `
+        -WebsiteRoot $isolatedWebsiteRoot *> $null
+    if ($LASTEXITCODE -eq 0) {
+        throw "A deleted published snapshot file unexpectedly passed."
+    }
+    Copy-Item (
+        Join-Path $repoRoot "website/versioned_docs/version-2.10.1/start/overview.mdx"
+    ) $deletedPublishedPath
+
+    $transactionRoot = Join-Path $isolatedWebsiteRoot ".snapshot-transaction"
+    New-Item -ItemType Directory `
+        -Path (Join-Path $transactionRoot "backups") `
+        -Force | Out-Null
+    $versionsBeforeDigest = (Get-FileHash (
+        Join-Path $isolatedWebsiteRoot "versions.json"
+    ) -Algorithm SHA256).Hash
+    Copy-Item (
+        Join-Path $isolatedWebsiteRoot "versions.json"
+    ) (Join-Path $transactionRoot "backups/0")
+    [System.IO.File]::WriteAllText(
+        (Join-Path $isolatedWebsiteRoot "versions.json"),
+        "[]`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    $versionsAfterDigest = (Get-FileHash (
+        Join-Path $isolatedWebsiteRoot "versions.json"
+    ) -Algorithm SHA256).Hash
+    Write-SnapshotJson `
+        -Value ([PSCustomObject]@{
+            schemaVersion = 1
+            state = "applying"
+            targets = @(
+                [PSCustomObject]@{
+                    index = 0
+                    target = "versions.json"
+                    staged = "staged/0"
+                    backup = "backups/0"
+                    hadOriginal = $true
+                    backupReady = $true
+                    installing = $true
+                    installed = $false
+                    beforeDigest = $versionsBeforeDigest
+                    afterDigest = $versionsAfterDigest
+                }
+            )
+        }) `
+        -Path (Join-Path $transactionRoot "journal.json")
+    [System.IO.File]::WriteAllText(
+        (Join-Path $isolatedWebsiteRoot ".snapshot-mutation.lock"),
+        '{"pid":-1,"startedUtc":"stale"}',
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    $recoveryFailedForExpectedReason = $false
+    try {
+        & (Join-Path $PSScriptRoot "snapshot.ps1") `
+            -Version "not-declared" `
+            -Check `
+            -ManifestPath $isolatedManifestPath `
+            -WebsiteRoot $isolatedWebsiteRoot *> $null
+    } catch {
+        $recoveryFailedForExpectedReason =
+            $_.Exception.Message -match "not declared exactly once"
+    }
+    if (-not $recoveryFailedForExpectedReason -or
+        (Get-Content -Raw (Join-Path $isolatedWebsiteRoot "versions.json")) -eq
+            "[]`n" -or
+        (Test-Path $transactionRoot)) {
+        throw "A stale snapshot transaction was not recovered before validation."
+    }
+
+    New-Item -ItemType Directory `
+        -Path (Join-Path $transactionRoot "backups") `
+        -Force | Out-Null
+    $restartableVersionsPath = Join-Path (
+        $isolatedWebsiteRoot
+    ) "versions.json"
+    $restartableBeforeDigest = (
+        Get-FileHash $restartableVersionsPath -Algorithm SHA256
     ).Hash
+    Copy-Item `
+        $restartableVersionsPath `
+        (Join-Path $transactionRoot "backups/0")
+    $restartableAfterSource = Join-Path (
+        $tempRoot
+    ) "restartable-after-versions.json"
+    $restartableAbsentSource = Join-Path (
+        $tempRoot
+    ) "restartable-after-sidebar.json"
+    [System.IO.File]::WriteAllText(
+        $restartableAfterSource,
+        "[]`n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    [System.IO.File]::WriteAllText(
+        $restartableAbsentSource,
+        "{} `n",
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    $restartableAbsentTarget = (
+        "versioned_sidebars/version-9.9.9-sidebars.json"
+    )
+    Write-SnapshotJson `
+        -Value ([PSCustomObject]@{
+            schemaVersion = 1
+            state = "applying"
+            targets = @(
+                [PSCustomObject]@{
+                    index = 0
+                    target = "versions.json"
+                    staged = "staged/0"
+                    backup = "backups/0"
+                    hadOriginal = $true
+                    backupReady = $true
+                    installing = $false
+                    installed = $true
+                    beforeDigest = $restartableBeforeDigest
+                    afterDigest = (
+                        Get-FileHash `
+                            $restartableAfterSource `
+                            -Algorithm SHA256
+                    ).Hash
+                },
+                [PSCustomObject]@{
+                    index = 1
+                    target = $restartableAbsentTarget
+                    staged = "staged/1"
+                    backup = "backups/1"
+                    hadOriginal = $false
+                    backupReady = $false
+                    installing = $false
+                    installed = $true
+                    beforeDigest = $null
+                    afterDigest = (
+                        Get-FileHash `
+                            $restartableAbsentSource `
+                            -Algorithm SHA256
+                    ).Hash
+                }
+            )
+        }) `
+        -Path (Join-Path $transactionRoot "journal.json")
+    $restartableLock = Enter-SnapshotMutation `
+        -WebsiteRoot $isolatedWebsiteRoot
+    try {
+        if ((Get-FileHash (
+                Join-Path $isolatedWebsiteRoot "versions.json"
+            ) -Algorithm SHA256).Hash -ne $restartableBeforeDigest -or
+            (Test-Path (
+                Join-Path $isolatedWebsiteRoot $restartableAbsentTarget
+            )) -or
+            (Test-Path $transactionRoot)) {
+            throw "Restarted rollback did not preserve the restored state."
+        }
+    } finally {
+        Exit-SnapshotMutation `
+            -Lock $restartableLock `
+            -WebsiteRoot $isolatedWebsiteRoot
+    }
+
+    $isolatedCurrentApi = Join-Path $isolatedWebsiteRoot "docs/api"
+    $currentApiDigest = Get-SnapshotDirectoryDigest $isolatedCurrentApi
+    Add-Content (
+        Join-Path $isolatedCurrentApi "index.md"
+    ) "`n<!-- tampered current API -->"
+    $currentCheckFailed = $false
+    try {
+        & (Join-Path $PSScriptRoot "snapshot.ps1") `
+            -Version current `
+            -Check `
+            -ManifestPath $isolatedManifestPath `
+            -WebsiteRoot $isolatedWebsiteRoot *> $null
+    } catch {
+        $currentCheckFailed = $true
+    }
+    if (-not $currentCheckFailed) {
+        throw "A tampered current API unexpectedly passed."
+    }
+    & (Join-Path $PSScriptRoot "snapshot.ps1") `
+        -Version current `
+        -ManifestPath $isolatedManifestPath `
+        -WebsiteRoot $isolatedWebsiteRoot *> $null
+    if ((Get-SnapshotDirectoryDigest $isolatedCurrentApi) -ne
+        $currentApiDigest) {
+        throw "Current API refresh did not restore the deterministic tree."
+    }
+    & (Join-Path $PSScriptRoot "snapshot.ps1") `
+        -Version current `
+        -Check `
+        -ManifestPath $isolatedManifestPath `
+        -WebsiteRoot $isolatedWebsiteRoot *> $null
+
+    $priorVersions = @(
+        "2.10.1",
+        "2.11.10",
+        "2.13.14",
+        "2.14.1",
+        "3.0.1",
+        "3.0.8"
+    )
+    $priorState = @{}
+    $isolatedManifest = Get-Content -Raw $isolatedManifestPath |
+        ConvertFrom-Json -Depth 20
+    foreach ($priorVersion in $priorVersions) {
+        $priorEntry = @(
+            $isolatedManifest.versions |
+                Where-Object version -eq $priorVersion
+        )[0]
+        $priorState[$priorVersion] = [PSCustomObject]@{
+            ManifestSnapshot = $priorEntry.immutability.snapshotSha256
+            ManifestSidebar = $priorEntry.immutability.sidebarSha256
+            LiveSnapshot = Get-SnapshotDirectoryDigest (
+                Join-Path $isolatedWebsiteRoot (
+                    "versioned_docs/version-$priorVersion"
+                )
+            )
+            LiveSidebar = (Get-FileHash (
+                Join-Path $isolatedWebsiteRoot (
+                    "versioned_sidebars/version-$priorVersion-sidebars.json"
+                )
+            ) -Algorithm SHA256).Hash
+        }
+    }
+    $oldLatest = @(
+        $isolatedManifest.versions |
+            Where-Object version -eq "3.0.8"
+    )[0]
+    $oldLatest.latestStable = $true
+    $oldLatest.route = ""
+    $oldLatest.label = "3.0.8 (latest)"
+    $future = @(
+        $isolatedManifest.versions |
+            Where-Object version -eq "3.0.10"
+    )[0]
+    $future.published = $false
+    $future.latestStable = $false
+    $future.route = "3.0.10"
+    $future.label = "3.0.10"
+    $future.PSObject.Properties.Remove("immutability")
+    Write-SnapshotJson -Value $isolatedManifest -Path $isolatedManifestPath
+    Write-SnapshotJson `
+        -Value @($priorVersions | Sort-Object {
+            [System.Management.Automation.SemanticVersion]::Parse($_)
+        } -Descending) `
+        -Path (Join-Path $isolatedWebsiteRoot "versions.json") `
+        -AsArray
+    Remove-Item (
+        Join-Path $isolatedWebsiteRoot "versioned_docs/version-3.0.10"
+    ) -Recurse -Force
+    Remove-Item (
+        Join-Path $isolatedWebsiteRoot (
+            "versioned_sidebars/version-3.0.10-sidebars.json"
+        )
+    ) -Force
+    & (Join-Path $PSScriptRoot "snapshot.ps1") `
+        -Version "3.0.10" `
+        -PromoteLatest `
+        -ManifestPath $isolatedManifestPath `
+        -WebsiteRoot $isolatedWebsiteRoot *> $null
+    $releasedManifest = Get-Content -Raw $isolatedManifestPath |
+        ConvertFrom-Json -Depth 20
+    foreach ($priorVersion in $priorVersions) {
+        $releasedEntry = @(
+            $releasedManifest.versions |
+                Where-Object version -eq $priorVersion
+        )[0]
+        $before = $priorState[$priorVersion]
+        if ($releasedEntry.immutability.snapshotSha256 -ne
+                $before.ManifestSnapshot -or
+            $releasedEntry.immutability.sidebarSha256 -ne
+                $before.ManifestSidebar -or
+            (Get-SnapshotDirectoryDigest (
+                Join-Path $isolatedWebsiteRoot (
+                    "versioned_docs/version-$priorVersion"
+                )
+            )) -ne $before.LiveSnapshot -or
+            (Get-FileHash (
+                Join-Path $isolatedWebsiteRoot (
+                    "versioned_sidebars/version-$priorVersion-sidebars.json"
+                )
+            ) -Algorithm SHA256).Hash -ne $before.LiveSidebar) {
+            throw "Future release changed prior immutable state: $priorVersion"
+        }
+    }
+
+    $correctionPath = "scenarios/parse-number-words.mdx"
+    $isolatedOverlayPage = Join-Path (
+        $isolatedWebsiteRoot
+    ) "version-overrides/3.0.10/$correctionPath"
+    $isolatedSnapshotPage = Join-Path (
+        $isolatedWebsiteRoot
+    ) "versioned_docs/version-3.0.10/$correctionPath"
+    $snapshotPageHash = (
+        Get-FileHash $isolatedSnapshotPage -Algorithm SHA256
+    ).Hash
+    $snapshotTreeDigest = Get-SnapshotDirectoryDigest (
+        Split-Path (Split-Path $isolatedSnapshotPage -Parent) -Parent
+    )
+    $manifestHash = (Get-FileHash $isolatedManifestPath -Algorithm SHA256).Hash
+    $recordedDigest = @(
+        $releasedManifest.versions |
+            Where-Object version -eq "3.0.10"
+    )[0].immutability.snapshotSha256
     Add-Content `
-        $isolatedOverlayProof `
-        "`n<!-- correction transaction test -->"
+        $isolatedOverlayPage `
+        "`n[broken correction](./missing-correction.mdx)"
     $correctionFailed = $false
     try {
         & (Join-Path $PSScriptRoot "snapshot.ps1") `
             -Version "3.0.10" `
-            -CorrectPage @("proof.mdx", "missing.md") `
-            -ManifestPath (Join-Path $isolatedWebsiteRoot "humanizer-versions.json") `
+            -CorrectPage $correctionPath `
+            -ManifestPath $isolatedManifestPath `
             -WebsiteRoot $isolatedWebsiteRoot *> $null
     } catch {
         $correctionFailed = $true
     }
-    if (-not $correctionFailed) {
-        throw "Invalid multi-page historical correction unexpectedly passed."
-    }
-    if ((Get-FileHash $isolatedSnapshotProof -Algorithm SHA256).Hash -ne
-        $snapshotProofHash) {
-        throw "Failed multi-page correction partially changed a snapshot."
-    }
-
-    foreach ($iteration in 1..2) {
-        & pwsh -NoProfile -File (Join-Path $PSScriptRoot "snapshot.ps1") `
-            -Version "3.0.10" `
-            -Check *> $null
-        if ($LASTEXITCODE -ne 0) {
-            throw "Snapshot idempotence check $iteration failed."
-        }
-    }
-
-    & pwsh -NoProfile -File (Join-Path $PSScriptRoot "snapshot.ps1") `
-        -Version "3.0.10" `
-        -CorrectPage "proof.mdx" `
-        -Check *> $null
-    if ($LASTEXITCODE -ne 0) {
-        throw "Exact historical page correction check failed."
-    }
-
-    & pwsh -NoProfile -File (Join-Path $PSScriptRoot "snapshot.ps1") `
-        -Version "3.0.10" `
-        -CorrectPage "_examples/quick-start/Program.cs" `
-        -Check *> $null
-    if ($LASTEXITCODE -ne 0) {
-        throw "Exact historical example correction check failed."
+    $afterFailedManifest = Get-Content -Raw $isolatedManifestPath |
+        ConvertFrom-Json -Depth 20
+    if (-not $correctionFailed -or
+        (Get-FileHash $isolatedSnapshotPage -Algorithm SHA256).Hash -ne
+            $snapshotPageHash -or
+        (Get-SnapshotDirectoryDigest (
+            Split-Path (Split-Path $isolatedSnapshotPage -Parent) -Parent
+        )) -ne $snapshotTreeDigest -or
+        (Get-FileHash $isolatedManifestPath -Algorithm SHA256).Hash -ne
+            $manifestHash -or
+        @(
+            $afterFailedManifest.versions |
+                Where-Object version -eq "3.0.10"
+        )[0].immutability.snapshotSha256 -ne $recordedDigest) {
+        throw "Failed staged correction changed content or immutable digest."
     }
 } finally {
     Remove-Item $tempRoot -Recurse -Force

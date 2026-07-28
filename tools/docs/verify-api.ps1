@@ -3,15 +3,22 @@ param(
     [switch]$Smoke,
     [string]$Version,
     [string]$ManifestPath,
-    [string]$OutputDirectory
+    [string]$OutputDirectory,
+    [string]$WebsiteRoot
 )
 
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 . (Join-Path $PSScriptRoot "nuget-package.ps1")
+. (Join-Path $PSScriptRoot "snapshot-state.ps1")
+. (Join-Path $PSScriptRoot "api-approval.ps1")
 if (-not $ManifestPath) {
     $ManifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 }
+if (-not $WebsiteRoot) {
+    $WebsiteRoot = Join-Path $repoRoot "website"
+}
+$WebsiteRoot = [System.IO.Path]::GetFullPath($WebsiteRoot)
 
 if (-not (Test-Path $ManifestPath -PathType Leaf)) {
     throw "Version manifest not found: $ManifestPath"
@@ -32,17 +39,28 @@ if ($OutputDirectory -and $versions.Count -ne 1) {
     throw "API output requires exactly one selected version."
 }
 
-function Get-DirectoryDigest {
+function Get-ApiDigest {
     param([Parameter(Mandatory = $true)][string]$Path)
 
     $lines = Get-ChildItem $Path -File -Recurse |
+        Where-Object {
+            [System.IO.Path]::GetRelativePath(
+                $Path,
+                $_.FullName
+            ).Replace("\", "/") -ne "index.md"
+        } |
         Sort-Object FullName |
         ForEach-Object {
-            $relativePath = [System.IO.Path]::GetRelativePath($Path, $_.FullName).Replace('\', '/')
+            $relativePath = [System.IO.Path]::GetRelativePath(
+                $Path,
+                $_.FullName
+            ).Replace("\", "/")
             "$relativePath $((Get-FileHash $_.FullName -Algorithm SHA256).Hash)"
         }
     $bytes = [System.Text.Encoding]::UTF8.GetBytes(($lines -join "`n"))
-    return [Convert]::ToHexString([System.Security.Cryptography.SHA256]::HashData($bytes))
+    return [Convert]::ToHexString(
+        [System.Security.Cryptography.SHA256]::HashData($bytes)
+    )
 }
 
 function Get-NuGetApiInput {
@@ -95,7 +113,9 @@ function Get-CheckoutApiInput {
 function Assert-GeneratedApi {
     param(
         [Parameter(Mandatory = $true)][string]$OutputPath,
-        [Parameter(Mandatory = $true)][string]$VersionLabel
+        [Parameter(Mandatory = $true)][string]$VersionLabel,
+        [Parameter(Mandatory = $true)][string]$ApprovalPath,
+        [string[]]$ExpectedExtraTypes = @()
     )
 
     $requiredFiles = @(
@@ -120,65 +140,122 @@ function Assert-GeneratedApi {
         throw "$VersionLabel did not preserve generic member names."
     }
 
+    $approvalTypes = [System.Collections.Generic.List[string]]::new()
+    $namespace = ""
+    $parents = @{}
+    foreach ($line in Get-Content $ApprovalPath) {
+        if ($line -match "^namespace (?<name>\S+)") {
+            $namespace = $Matches["name"]
+            $parents = @{}
+            continue
+        }
+        if ($line -notmatch "^(?<indent> +)public (?:(?:static|sealed|abstract|readonly|ref|partial) )*(?:class|struct|interface|enum|delegate)(?: static)? (?<name>[A-Za-z0-9_]+(?:<[^>]+>)?)") {
+            continue
+        }
+
+        $depth = [int]($Matches["indent"].Length / 4)
+        $parents[$depth] = $Matches["name"]
+        foreach ($key in @($parents.Keys)) {
+            if ($key -gt $depth) {
+                $parents.Remove($key)
+            }
+        }
+        $qualifiedName = "$namespace.$(
+            ((1..$depth | ForEach-Object { $parents[$_] }) -join ".")
+        )"
+        $approvalTypes.Add(
+            $qualifiedName.
+                Replace("<", "_").
+                Replace(">", "_").
+                Replace(",", "_")
+        )
+    }
+    $approvalTypes = @($approvalTypes | Sort-Object -Unique)
+    $generatedTypes = @(
+        Get-ChildItem $OutputPath -Filter "*.md" -File |
+            Where-Object {
+                (Get-Content -Raw $_.FullName) -match (
+                    "(?m)^## .+ (?:Class|Struct|Interface|Enum|Delegate)$"
+                )
+            } |
+            ForEach-Object BaseName |
+            Sort-Object -Unique
+    )
+    $missingTypes = @($approvalTypes | Where-Object { $_ -notin $generatedTypes })
+    $extraTypes = @($generatedTypes | Where-Object { $_ -notin $approvalTypes })
+    if ($approvalTypes.Count -eq 0 -or $missingTypes.Count -gt 0) {
+        throw "$VersionLabel API type coverage differs from its PublicAPI approval. Missing: $($missingTypes -join ', '); extra: $($extraTypes -join ', ')."
+    }
+    Assert-GeneratedExtraTypes `
+        -VersionLabel $VersionLabel `
+        -Actual $extraTypes `
+        -Expected $ExpectedExtraTypes
+
     $localPathPattern = "file://|$([regex]::Escape($repoRoot))"
-    $leakedFile = Get-ChildItem $OutputPath -Filter "*.md" -File -Recurse |
-        Where-Object { (Get-Content -Raw $_.FullName) -match $localPathPattern } |
-        Select-Object -First 1
-    if ($leakedFile) {
-        throw "$VersionLabel leaked a local source path in $($leakedFile.Name)."
+    foreach ($generatedFile in Get-ChildItem $OutputPath -Filter "*.md" -File) {
+        $content = Get-Content -Raw $generatedFile.FullName
+        if ($content -match $localPathPattern) {
+            throw "$VersionLabel leaked a local source path in $($generatedFile.Name)."
+        }
+        if ($content -match "<xref") {
+            throw "$VersionLabel left unresolved XML cross-references in $($generatedFile.Name)."
+        }
+        foreach ($link in [regex]::Matches(
+            $content,
+            "\]\((?<target>[^)\s]+\.md)(?:#[^)\s']+)?"
+        )) {
+            $targetPath = Join-Path $OutputPath $link.Groups["target"].Value
+            if (-not (Test-Path $targetPath -PathType Leaf)) {
+                throw "$VersionLabel generated a broken API link in $($generatedFile.Name): $($link.Value)"
+            }
+        }
     }
 
-    if ($VersionLabel -in @("3.0.10", "current")) {
-        if ($stringApi -notmatch "StringHumanizeExtensions\\\.Humanize\\\(this string, LetterCasing\\\) Method") {
-            throw "$VersionLabel did not preserve overload headings."
-        }
-        if ($stringApi -notmatch "\[ApplyCase\\\(this string, LetterCasing\\\)\]\(Humanizer\.CasingExtensions\.md#") {
-            throw "$VersionLabel did not preserve XML cross-references as relative Markdown links."
-        }
-        if ($collectionApi -notmatch "\[collection\]\(Humanizer\.CollectionHumanizeExtensions\.md#") {
-            throw "$VersionLabel did not preserve XML parameter references."
-        }
-        if ($stringApi -notmatch "<a name='Humanizer\.StringHumanizeExtensions\.Humanize") {
-            throw "$VersionLabel did not emit member anchors."
-        }
-        if ($stringApi -match "<xref") {
-            throw "$VersionLabel left unresolved XML cross-references."
-        }
+    if ($stringApi -notmatch "<a name='Humanizer\.StringHumanizeExtensions\.Humanize") {
+        throw "$VersionLabel did not emit member anchors."
     }
 }
 
-function Assert-CommittedApiProof {
+function Assert-CommittedApi {
     param(
         [Parameter(Mandatory = $true)][string]$GeneratedPath,
         [Parameter(Mandatory = $true)][string]$VersionLabel
     )
 
     $committedPath = if ($VersionLabel -eq "current") {
-        Join-Path $repoRoot "website/docs/api"
-    } elseif ($VersionLabel -eq "3.0.10") {
-        Join-Path $repoRoot "website/versioned_docs/version-3.0.10/api"
+        Join-Path $WebsiteRoot "docs/api"
     } else {
-        return
+        Join-Path $WebsiteRoot "versioned_docs/version-$VersionLabel/api"
     }
-
-    $requiredFiles = @(
-        "Humanizer.CasingExtensions.md",
-        "Humanizer.CollectionHumanizeExtensions.md",
-        "Humanizer.LetterCasing.md",
-        "Humanizer.StringHumanizeExtensions.md"
-    )
-    foreach ($file in $requiredFiles) {
-        $generatedFile = Join-Path $GeneratedPath $file
-        $committedFile = Join-Path $committedPath $file
-        if (-not (Test-Path $committedFile -PathType Leaf) -or
-            (Get-FileHash $generatedFile -Algorithm SHA256).Hash -ne
-            (Get-FileHash $committedFile -Algorithm SHA256).Hash) {
-            throw "Committed API proof file is stale or modified: $committedFile"
-        }
+    if (-not (Test-Path $committedPath -PathType Container) -or
+        (Get-ApiDigest $GeneratedPath) -ne
+        (Get-ApiDigest $committedPath)) {
+        throw "Committed API tree is stale or modified: $committedPath"
     }
 }
 
-$deterministicVersions = @("3.0.10", "current")
+function Get-PublicApiApproval {
+    param([Parameter(Mandatory = $true)]$Entry)
+
+    if ($Entry.version -eq "current") {
+        return Join-Path $repoRoot $Entry.publicApiApproval.path
+    }
+
+    $approvalRoot = Join-Path (
+        [System.IO.Path]::GetTempPath()
+    ) "humanizer-docs-public-api/$($Entry.version)"
+    $approvalPath = Join-Path $approvalRoot "approval.txt"
+    New-Item -ItemType Directory -Path $approvalRoot -Force | Out-Null
+    $uri = "https://raw.githubusercontent.com/Humanizr/Humanizer/$($Entry.publicApiApproval.tag)/$($Entry.publicApiApproval.path)"
+    Invoke-WebRequest `
+        -Uri $uri `
+        -OutFile $approvalPath `
+        -MaximumRetryCount 6 `
+        -RetryIntervalSec 10 `
+        -TimeoutSec 30
+    return $approvalPath
+}
+
 foreach ($entry in $versions) {
     if (-not $entry.apiPackage -or -not $entry.referenceTfm) {
         throw "Version $($entry.version) is missing API package or reference TFM metadata."
@@ -194,6 +271,14 @@ foreach ($entry in $versions) {
 
     if (-not (Test-Path $input.Dll -PathType Leaf) -or -not (Test-Path $input.Xml -PathType Leaf)) {
         throw "Version $($entry.version) is missing its declared DLL/XML pair for $($entry.referenceTfm)."
+    }
+    if ((Split-Path $input.Dll -Leaf) -ne "Humanizer.dll" -or
+        (Split-Path $input.Xml -Leaf) -ne "Humanizer.xml") {
+        throw "Version $($entry.version) selected a supporting assembly instead of Humanizer."
+    }
+    $approvalPath = Get-PublicApiApproval -Entry $entry
+    if (-not (Test-Path $approvalPath -PathType Leaf)) {
+        throw "Version $($entry.version) is missing PublicAPI approval evidence."
     }
 
     $preserveOutput = -not [string]::IsNullOrWhiteSpace($OutputDirectory)
@@ -216,14 +301,25 @@ foreach ($entry in $versions) {
                 "--OutputDirectoryPath", $firstOutput,
                 "--AssemblyPageName", "assembly",
                 "--GeneratedAccessModifiers", "Public",
+                "--IncludeUndocumentedItems", "true",
                 "--GeneratedPages", "Namespaces,Types",
                 "--Sections", "Default"
             ) `
             -WorkingDirectory $repoRoot
-        Assert-GeneratedApi -OutputPath $firstOutput -VersionLabel $entry.version
-        Assert-CommittedApiProof -GeneratedPath $firstOutput -VersionLabel $entry.version
+        Assert-GeneratedApi `
+            -OutputPath $firstOutput `
+            -VersionLabel $entry.version `
+            -ApprovalPath $approvalPath `
+            -ExpectedExtraTypes @(
+                $entry.publicApiApproval.generatedExtraTypes
+            )
+        if (-not $preserveOutput) {
+            Assert-CommittedApi `
+                -GeneratedPath $firstOutput `
+                -VersionLabel $entry.version
+        }
 
-        if (($All -or $Smoke) -and $deterministicVersions -contains $entry.version) {
+        if ($All -or $Smoke) {
             $secondOutput = "$firstOutput-second"
             New-Item -ItemType Directory -Path $secondOutput | Out-Null
             try {
@@ -236,11 +332,13 @@ foreach ($entry in $versions) {
                         "--OutputDirectoryPath", $secondOutput,
                         "--AssemblyPageName", "assembly",
                         "--GeneratedAccessModifiers", "Public",
+                        "--IncludeUndocumentedItems", "true",
                         "--GeneratedPages", "Namespaces,Types",
                         "--Sections", "Default"
                     ) `
                     -WorkingDirectory $repoRoot
-                if ((Get-DirectoryDigest $firstOutput) -ne (Get-DirectoryDigest $secondOutput)) {
+                if ((Get-SnapshotDirectoryDigest $firstOutput) -ne
+                    (Get-SnapshotDirectoryDigest $secondOutput)) {
                     throw "API generation for $($entry.version) is not deterministic."
                 }
             } finally {
@@ -248,7 +346,7 @@ foreach ($entry in $versions) {
             }
         }
 
-        Write-Host "API proof passed: $($entry.version) ($($entry.apiPackage), $($entry.referenceTfm))"
+        Write-Host "API reference passed: $($entry.version) ($($entry.apiPackage), $($entry.referenceTfm))"
     } finally {
         if (-not $preserveOutput) {
             Remove-Item $firstOutput -Recurse -Force -ErrorAction SilentlyContinue

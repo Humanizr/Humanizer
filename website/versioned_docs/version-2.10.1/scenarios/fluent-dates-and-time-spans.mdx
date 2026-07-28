@@ -1,0 +1,49 @@
+---
+id: fluent-dates-and-time-spans
+title: Compose dates and time spans fluently
+sidebar_position: 9
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import fluentDates from '!!raw-loader!../_examples/scenarios-fluent-dates/Program.cs';
+
+# Compose dates and time spans fluently
+
+## Orientation
+
+Humanizer’s numeric time-span extensions make duration constants readable, while `In`, `On`, and the date preposition extensions build calendar values. Use duration helpers for fixed elapsed time and calendar helpers for month/year arithmetic. Inject a starting date instead of relying on “now” when code or tests must be repeatable.
+
+## Example
+
+The executable composes a 36-hour duration, adds two calendar months to a fixed date, and constructs a dated appointment:
+
+<CodeBlock language="csharp" title="Program.cs">{fluentDates}</CodeBlock>
+
+### Fixed durations
+
+Numeric values expose `Milliseconds`, `Seconds`, `Minutes`, `Hours`, `Days`, and `Weeks`. A call such as `1.5.Days()` produces a `TimeSpan`; its day is always 24 hours.
+
+### Calendar arithmetic
+
+`In.One` through `In.Ten` provide `DaysFrom`, `WeeksFrom`, `MonthsFrom`, and `YearsFrom`. Month and year forms delegate to `DateTime.AddMonths`/`AddYears`: they are calendar-sized operations rather than estimated `TimeSpan` values, but they do not select a culture-specific `Calendar`.
+
+`On.April.The3rd`, `In.AprilOf(2025)`, `At`, `AtNoon`, `AtMidnight`, and `In(year)` are readable constructors around `DateTime`.
+
+## Pitfall
+
+Properties without `From` or `Of(year)` read `DateTime.Now` or `UtcNow`. Avoid them in deterministic code. `MonthsFrom` and `YearsFrom` inherit `AddMonths`/`AddYears` normalization, so moving February 29 into a non-leap year produces February 28. By contrast, `date.In(year)` reconstructs the same month and day in the requested year and throws when that date does not exist. Constructors for impossible month/day combinations also throw.
+
+## Version notes
+
+The `DateTime` fluent surface and time-span extensions are available here. `DateOnly`, `InDate`, and `OnDate` appear only in later releases.
+
+## Related guides and API
+
+- [Durations and ages](./durations-and-ages.mdx)
+- [Relative dates and times](./relative-dates-and-times.mdx)
+- [NumberToTimeSpanExtensions API](../api/Humanizer.NumberToTimeSpanExtensions.md)
+- [PrepositionsExtensions API](../api/Humanizer.PrepositionsExtensions.md)
+- [In API](../api/Humanizer.In.md)
+- [On API](../api/Humanizer.On.md)

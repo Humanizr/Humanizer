@@ -1,0 +1,60 @@
+---
+id: trimming-and-native-aot
+title: Trimming and Native AOT
+sidebar_position: 2
+diataxis: explanation
+persona: application architect
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import aot from '!!raw-loader!../_examples/scenarios-aot/Program.cs';
+
+# Trimming and Native AOT
+
+## Orientation
+
+Humanizer `3.0.1` and later publish compatibility metadata for trimming and Native AOT on compatible target frameworks. Most extension methods are static and trim naturally. Enum dehumanization is the important choice point: use the generic overload when the enum type is known at compile time, and treat the runtime `Type` overload as reflection-dependent.
+
+## Example
+
+This tiny executable uses only generic enum APIs. Documentation validation runs it normally, publishes it as a self-contained trimmed application, and publishes it with Native AOT on supported host operating-system and architecture combinations:
+
+<CodeBlock language="csharp" title="Program.cs">{aot}</CodeBlock>
+
+The repository verifier is:
+
+```console
+pwsh tools/docs/verify-aot.ps1
+```
+
+It tests Humanizer `3.0.10` and a freshly packed current checkout from an isolated package cache. The normal documentation test gate invokes it automatically. A supported host must complete both publish modes and run both binaries. An unsupported local OS/architecture is reported and skipped; CI can require a supported host with:
+
+```console
+pwsh tools/docs/test.ps1 -RequireNativeAot
+```
+
+### Prefer statically known enum types
+
+```csharp
+var state = "Ready to ship".DehumanizeTo<JobState>();
+```
+
+The generic parameter gives the trimmer and AOT compiler the enum’s public fields. By contrast, `DehumanizeTo(string, Type, ...)` constructs a generic method through reflection and is annotated with both `RequiresUnreferencedCode` and `RequiresDynamicCode`.
+
+### Read warnings as API feedback
+
+An `IL2026` warning on the runtime enum overload means the linker cannot prove the target enum members survive. `IL3050` means Native AOT cannot guarantee creation of the required code. Replacing the overload with the generic form is the normal remediation; suppressing either warning does not make the dynamic path safe.
+
+## Pitfall
+
+Assembly compatibility metadata is not proof that every consumer call, dependency, target framework, and runtime identifier is safe. Keep trim warnings enabled, publish the actual application in CI, and execute a smoke path through its Humanizer calls. Reflection-heavy application code around Humanizer can still require its own annotations.
+
+## Version notes
+
+This compatibility claim begins with Humanizer `3.0.1`; `2.x` snapshots must exclude this page. The current package emits `IsTrimmable` and, on current compatible TFMs, `IsAotCompatible` metadata. The publish verifier is the behavioral proof for `3.0.10` and current, rather than a promise about every historical target framework.
+
+## Related guides and API
+
+- [Enums and flags](../scenarios/enums-and-flags.mdx)
+- [Troubleshooting](../start/troubleshooting.mdx)
+- [Selected-version API reference](../api/index.md)

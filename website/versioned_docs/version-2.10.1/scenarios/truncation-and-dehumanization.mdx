@@ -1,0 +1,55 @@
+---
+id: truncation-and-dehumanization
+title: Truncation and dehumanization
+sidebar_position: 3
+diataxis: how-to
+persona: returning developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import strings from '!!raw-loader!../_examples/scenarios-strings/Program.cs';
+
+# Truncation and dehumanization
+
+## Orientation
+
+Use `Truncate` to fit display text into a character or word budget without hand-written substring rules. Select a built-in `ITruncator` according to what the length means. Use string `Dehumanize` separately when readable words must become a PascalCase-shaped identifier.
+
+## Example
+
+The truncation and dehumanization calls in this verified source produce `Customer…`, preserve four complete words, and produce `CustomerOrderHistory`:
+
+<CodeBlock language="csharp" title="Program.cs">{strings}</CodeBlock>
+
+### Choose the truncator
+
+| Strategy | Meaning of `length` |
+| --- | --- |
+| `FixedLength` | Total returned length, including the marker |
+| `FixedNumberOfCharacters` | Characters retained before adding the marker |
+| `FixedNumberOfWords` | Whole words retained |
+
+The default marker is the single-character ellipsis `…`. Pass a custom marker and `TruncateFrom.Left` when preserving the end of a value matters. Implement `ITruncator` only when none of the three selected-release contracts matches the application’s display rule.
+
+### Dehumanize readable text
+
+`Dehumanize` removes word separators and produces PascalCase. It is suitable for application-controlled labels and scaffolding, not for reconstructing an original identifier.
+
+## Pitfall
+
+The marker consumes budget for fixed-length strategies. Truncation preserves null input, but an application still needs to decide whether null and empty text mean the same thing.
+
+`Dehumanize` is not a lossless inverse: punctuation, casing, acronym, and word-boundary information can be discarded.
+
+## Version notes
+
+The verified source compiles and runs against the selected package. Humanizer `2.10.1` exposes the three fixed truncator strategies listed above. The two built-in preserve-word strategies begin in `3.0.1`; implement `ITruncator` when this selected release needs that behavior.
+
+## Related guides and API
+
+- [Strings and casing](./strings-and-casing.mdx)
+- [Collections and tuple names](./collections-and-tuples.mdx)
+- [TruncateExtensions API](../api/Humanizer.TruncateExtensions.md)
+- [Truncator API](../api/Humanizer.Truncator.md)
+- [ITruncator API](../api/Humanizer.ITruncator.md)
+- [StringDehumanizeExtensions API](../api/Humanizer.StringDehumanizeExtensions.md)

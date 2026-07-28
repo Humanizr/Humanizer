@@ -1,0 +1,23 @@
+<Project>
+  <ItemGroup Condition="'$(HumanizerProject)' != ''">
+    <ProjectReference
+      Include="$(HumanizerProject)"
+      GlobalPropertiesToRemove="$(HumanizerProjectGlobalPropertiesToRemove)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(HumanizerProject)' == '' and '$(HumanizerPackageVersion)' != ''">
+    <PackageReference Include="Humanizer" Version="$(HumanizerPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(HumanizerExampleExcludeAssets)' != ''">
+    <PackageReference
+      Update="Humanizer"
+      ExcludeAssets="$(HumanizerExampleExcludeAssets)" />
+  </ItemGroup>
+
+  <Target Name="RequireHumanizerInput" BeforeTargets="Restore">
+    <Error
+      Condition="'$(HumanizerProject)' == '' and '$(HumanizerPackageVersion)' == ''"
+      Text="Set HumanizerProject or HumanizerPackageVersion." />
+  </Target>
+</Project>

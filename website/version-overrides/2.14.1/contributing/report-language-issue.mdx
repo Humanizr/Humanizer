@@ -1,0 +1,41 @@
+---
+id: report-language-issue
+title: Report a language issue
+sidebar_position: 2
+diataxis: how-to
+persona: Humanizer user
+example: illustrative
+---
+
+# Report a language issue
+
+## Orientation
+
+Report the selected Humanizer version, culture, runtime, input, expected
+output, and actual output.
+
+## Example
+
+```text
+Humanizer: selected snapshot
+Culture: fr-FR
+Input: ...
+Expected: ...
+Actual: ...
+```
+
+## Pitfall
+
+Platform globalization data can differ. Include the operating system and
+runtime instead of assuming the package alone produced the difference.
+
+## Version notes
+
+Historical packages predate the current locale YAML and source-generator
+workflow. Use tagged source when proposing a historical correction.
+
+## Related guides and API
+
+- [Languages and cultures](../languages/index.mdx)
+- [Contribute to Humanizer](./index.mdx)
+- [Selected-version API reference](../api/index.md)

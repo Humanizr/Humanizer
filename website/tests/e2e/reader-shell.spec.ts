@@ -36,7 +36,7 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
   await expect(page.getByRole('button', {name: 'All versions'})).toBeVisible();
 
   for (const path of [
-    '/docs/proof/',
+    '/docs/start/quick-start/',
     '/docs/api/Humanizer.ByteSize/',
   ]) {
     await page.goto(path);
@@ -65,7 +65,7 @@ test('theme follows the system default and remains keyboard switchable', async (
 test('version preview is labeled, noindex, and self-canonical', async ({
   page,
 }) => {
-  await page.goto('/docs/next/proof/');
+  await page.goto('/docs/next/start/quick-start/');
 
   await expect(page.getByText(/unreleased documentation/i)).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
@@ -74,13 +74,13 @@ test('version preview is labeled, noindex, and self-canonical', async ({
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://humanizr.net/docs/next/proof/',
+    'https://humanizr.net/docs/next/start/quick-start/',
   );
 
-  await page.goto('/docs/proof/');
+  await page.goto('/docs/start/quick-start/');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://humanizr.net/docs/proof/',
+    'https://humanizr.net/docs/start/quick-start/',
   );
   await expect(
     page.getByRole('link', {name: 'Edit or report this page'}),
@@ -90,13 +90,13 @@ test('version preview is labeled, noindex, and self-canonical', async ({
 test('version not found preserves the requested API path and target version', async ({
   page,
 }) => {
-  await page.goto('/docs/api/Humanizer.ByteSize/');
+  await page.goto('/docs/api/Humanizer.Resources/');
   await page.locator('.humanizerVersionDropdown').focus();
   await page.keyboard.press('Enter');
   await page.getByRole('link', {name: 'main/preview'}).click();
 
   await expect(page).toHaveURL(
-    /\/docs\/next\/api\/Humanizer\.ByteSize\/$/,
+    /\/docs\/next\/api\/Humanizer\.Resources\/$/,
   );
   await expect
     .poll(() =>

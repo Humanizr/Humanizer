@@ -1,0 +1,58 @@
+---
+id: culture-and-configuration
+title: Culture and global configuration
+sidebar_position: 1
+diataxis: explanation
+persona: application architect
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import localization from '!!raw-loader!../_examples/scenarios-localization/Program.cs';
+
+# Culture and global configuration
+
+## Orientation
+
+Humanizer chooses language and grammar from one of three places:
+
+1. A `CultureInfo` passed to the operation.
+2. `CultureInfo.CurrentCulture` or `CurrentUICulture`, depending on the API.
+3. A configured registry fallback when the requested culture has no matching component.
+
+Per-call culture is the narrowest and safest choice. Ambient culture is useful when a request pipeline already establishes it. Global `Configurator` changes are process-wide policy.
+
+## Example
+
+The example passes French directly to `ToWords`, establishes French ambient culture for APIs that need it, and keeps the custom transformer local:
+
+<CodeBlock language="csharp" title="Program.cs">{localization}</CodeBlock>
+
+That separation is intentional: select language close to the call, and reserve global configuration for behavior that truly applies to the entire application.
+
+## Registry behavior in this release
+
+This `2.x` release keeps `LocaliserRegistry<TLocaliser>` registrations mutable.
+Changing a process-wide registry after requests have begun can therefore make
+later work observe different components. Register custom components once during
+startup even though the API does not freeze the table.
+
+Date humanization strategies are mutable properties under the `2.x` strategy
+namespaces. Enum description-property selection is also assignable through
+`Configurator.EnumDescriptionPropertyLocator`; set both policies during
+startup.
+
+## Pitfall
+
+Setting only `CurrentCulture` is not always enough. Collection and enum localization can depend on `CurrentUICulture`, while numeric formatting commonly follows `CurrentCulture`. Set both at a well-defined boundary when you need consistent ambient behavior.
+
+## Version notes
+
+The selected package uses the mutable `2.x` configuration model and the
+`Humanizer.Configuration` namespace. Treat its generated API reference as the
+authority for exact strategy and registry type names.
+
+## Related guides and API
+
+- [Configuration basics](../start/configuration.mdx)
+- [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
+- [Selected-version API reference](../api/index.md)

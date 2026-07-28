@@ -44,7 +44,8 @@ qualified names.
 | Boolean `ToMetric` overloads | Pass `MetricNumeralFormats`. |
 | `EnglishArticles` | Replace the enum-dependent logic in the application. |
 | `Configurator.EnumDescriptionPropertyLocator` | Call `Configurator.UseEnumDescriptionPropertyLocator(...)` during startup, before enum humanization. |
-| `Resources`, `ResourceKeys`, or string-keyed `DefaultFormatter` hooks | Use typed Humanizer APIs and typed `IFormatter`/`DefaultFormatter` members. |
+| `Resources` or `ResourceKeys` | These remain in stable Humanizer 3 releases through `3.0.10`; their removal is a future `main/preview` migration boundary. |
+| String-keyed `DefaultFormatter` hooks | Use typed `IFormatter`/`DefaultFormatter` members. |
 
 The string `ToQuantity(int, ...)` overloads were absent in early Humanizer 3
 and restored in `3.0.6`. Do not rewrite a working 2.x call merely because it

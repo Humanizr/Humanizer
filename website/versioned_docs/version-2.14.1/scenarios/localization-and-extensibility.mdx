@@ -1,0 +1,57 @@
+---
+id: localization-and-extensibility
+title: Localization and extensibility
+sidebar_position: 19
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import localization from '!!raw-loader!../_examples/scenarios-localization/Program.cs';
+
+# Localization and extensibility
+
+## Orientation
+
+Start with culture selection, then choose the narrowest extension point. Pass `CultureInfo` per call when possible. Establish `CurrentCulture` and `CurrentUICulture` at a request or job boundary for ambient APIs. Use a local interface implementation for one operation and reserve `Configurator` registries or strategies for process-wide application policy.
+
+## Example
+
+This verified example produces French number words and supplies a per-call culture-aware transformer:
+
+<CodeBlock language="csharp" title="Program.cs">{localization}</CodeBlock>
+
+The result is `quarante-deux; BONJOUR`. A per-call transformer is isolated and easy to test.
+
+### Choose an extension point
+
+| Need | Preferred extension |
+| --- | --- |
+| One local string operation | `IStringTransformer` or `ICulturedStringTransformer` |
+| A custom truncation rule | `ITruncator` passed to `Truncate` |
+| Relative date thresholds | A date/time strategy assigned once |
+| Application-wide locale component | The matching `LocaliserRegistry<T>` |
+| Enum metadata property | assign `Configurator.EnumDescriptionPropertyLocator` at startup |
+
+Registries cover collection formatters, general formatters, number-word converters, ordinalizers, date-ordinal converters, and clock-notation converters. Culture resolution checks the requested culture and its parents before using the registry default.
+
+## Pitfall
+
+In Humanizer `3.x` and current, localizer registries freeze on first resolution. Register components before any Humanizer call can resolve that registry. Humanizer `2.x` registries remain mutable, but startup registration still prevents request-to-request drift. Do not mutate global strategies per request; concurrent callers can observe the change.
+
+Parent-culture fallback identifies where behavior was resolved. It does not prove that inherited wording is correct for every region.
+
+## Version notes
+
+The example’s local transformer runs across the supported corpus. Registry immutability and enum metadata configuration change in Humanizer 3. Individual registries and locale capabilities are selected-version behavior; historical snapshots must not present current YAML/generator internals as old package behavior.
+
+## Related guides and API
+
+- [Configuration basics](../start/configuration.mdx)
+- [Choose explicit and ambient cultures](../languages/using-cultures.mdx)
+- [Custom localization](../languages/custom-localization.mdx)
+- [Culture and global configuration](../concepts/culture-and-configuration.mdx)
+- [Configurator API](../api/Humanizer.Configuration.Configurator.md)
+- [LocaliserRegistry API](../api/Humanizer.Configuration.LocaliserRegistry_TLocaliser_.md)
+- [ICulturedStringTransformer API](../api/Humanizer.ICulturedStringTransformer.md)
+- [ITruncator API](../api/Humanizer.ITruncator.md)

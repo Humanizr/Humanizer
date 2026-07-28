@@ -1,0 +1,80 @@
+---
+id: 2-x-lines
+title: Move between supported 2.x lines
+sidebar_position: 2
+diataxis: how-to
+persona: developer maintaining a Humanizer 2 application
+example: illustrative
+---
+
+# Move between supported 2.x lines
+
+## Orientation
+
+The supported 2.x snapshots are compatibility checkpoints, not claims that
+every intervening package is breaking. Move through them in order, restore with
+your real SDK and target frameworks, and regression-test the formatting surfaces
+your application asserts or persists.
+
+## Example
+
+The package update itself is ordinary. This example is illustrative; choose the
+target selected in the documentation:
+
+```console
+dotnet add package Humanizer --version 2.14.1
+dotnet restore --locked-mode
+dotnet test
+```
+
+### 2.10.1 to 2.11.10 {#2-10-1-to-2-11-10}
+
+`Humanizer.Core` `2.11.10` adds a `net6.0` asset alongside the existing
+`netstandard1.0` and `netstandard2.0` assets. It also introduces
+`DateOnly`/`TimeOnly` support. Recreate or review `project.assets.json` and test
+date/time output if your application begins selecting the new asset.
+
+Evidence: [tag comparison](https://github.com/Humanizr/Humanizer/compare/v2.10.1...v2.11.10),
+[DateOnly/TimeOnly change](https://github.com/Humanizr/Humanizer/pull/1080), and
+the published [`2.11.10` package](https://www.nuget.org/packages/Humanizer.Core/2.11.10).
+
+### 2.11.10 to 2.13.14 {#2-11-10-to-2-13-14}
+
+This line adds APIs and formatter behavior including byte-rate humanization,
+time-unit humanization, and a `TimeOnly` clock strategy. There is no repository
+evidence of a broad source rewrite comparable to Humanizer 3. Compile first,
+then test only the affected surfaces you use.
+
+Evidence: [tag comparison](https://github.com/Humanizr/Humanizer/compare/v2.11.10...v2.13.14),
+[byte-rate change](https://github.com/Humanizr/Humanizer/pull/1108), and
+[time-unit change](https://github.com/Humanizr/Humanizer/pull/1106).
+
+### 2.13.14 to 2.14.1 {#2-13-14-to-2-14-1}
+
+The tagged range is dominated by locale corrections and additions rather than a
+package or namespace migration. Compare localized output that appears in
+snapshots, persisted data, or exact-string tests. No general source rewrite is
+required.
+
+Evidence: [tag comparison](https://github.com/Humanizr/Humanizer/compare/v2.13.14...v2.14.1)
+and the published [`2.14.1` package](https://www.nuget.org/packages/Humanizer.Core/2.14.1).
+
+## Pitfall
+
+Do not interpret “no broad source rewrite” as “no output can change.”
+Humanizer's value is formatted text, so a locale correction can be observable
+even when compilation succeeds.
+
+## Version notes
+
+All four supported 2.x `Humanizer` packages are metapackages whose normal
+consumer install brings in `Humanizer.Core` and locale packages. Keep all
+directly referenced Humanizer package versions aligned; mixed locale/core
+versions are not an upgrade path.
+
+## Related guides and API
+
+- [Plan an upgrade](./index.mdx)
+- [Humanizer 3 migration](./version-3-migration.mdx)
+- [Package selection](../start/package-selection.md)
+- [Selected-version API reference](../api/index.md)

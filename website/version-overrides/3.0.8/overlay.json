@@ -1,5 +1,32 @@
 {
   "schemaVersion": 1,
-  "replacements": [],
-  "exclusions": []
+  "replacements": [
+    "index.md",
+    "upgrading/index.mdx",
+    "upgrading/version-3-migration.mdx",
+    "scenarios/parse-number-words.mdx",
+    "analyzer/index.mdx",
+    "start/installation.mdx",
+    "start/overview.mdx",
+    "start/package-selection.md",
+    "start/quick-start.mdx",
+    "start/troubleshooting.mdx",
+    "contributing/index.mdx",
+    "contributing/report-language-issue.mdx",
+    "_examples/scenarios-parse-number-words/Program.cs"
+  ],
+  "exclusions": [
+    "upgrading/main-preview.mdx",
+    "contributing/adding-or-updating-a-locale.mdx",
+    "contributing/choosing-or-extending-a-locale-engine.mdx",
+    "contributing/locale-yaml-how-to.mdx",
+    "contributing/locale-yaml-reference.mdx",
+    "contributing/locale-yaml-schema-reference.mdx",
+    "contributing/locale-yaml-surface-reference.mdx",
+    "contributing/number-to-words-engine-reference.mdx",
+    "contributing/parity-and-preflight.mdx",
+    "contributing/platform-globalization-overrides.mdx",
+    "contributing/validation-and-testing.mdx",
+    "contributing/words-to-number-engine-reference.mdx"
+  ]
 }

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "boundaries": [
+    {
+      "from": "2.10.1",
+      "to": "2.11.10",
+      "title": "Adopt the .NET 6 asset and DateOnly/TimeOnly APIs",
+      "summary": "Restore with your real target frameworks and regression-test date and time formatting.",
+      "guide": "./2-x-lines#2-10-1-to-2-11-10"
+    },
+    {
+      "from": "2.11.10",
+      "to": "2.13.14",
+      "title": "Validate added rate, time-unit, and clock-notation behavior",
+      "summary": "No broad source rewrite is required; test any formatting surfaces you use.",
+      "guide": "./2-x-lines#2-11-10-to-2-13-14"
+    },
+    {
+      "from": "2.13.14",
+      "to": "2.14.1",
+      "title": "Validate locale corrections",
+      "summary": "No broad source rewrite is required; compare localized output that your application persists or asserts.",
+      "guide": "./2-x-lines#2-13-14-to-2-14-1"
+    },
+    {
+      "from": "2.14.1",
+      "to": "3.0.1",
+      "title": "Apply the Humanizer 3 source and package migration",
+      "summary": "Consolidate namespaces, replace removed APIs, update framework/tooling expectations, and rebuild all consumers.",
+      "guide": "./version-3-migration"
+    },
+    {
+      "from": "3.0.1",
+      "to": "3.0.8",
+      "title": "Take the 3.0 patch-line compatibility restorations",
+      "summary": "Remove workarounds for restored quantity overloads and move to the Roslyn-versioned analyzer assets.",
+      "guide": "./version-3-patch-line#3-0-1-to-3-0-8"
+    },
+    {
+      "from": "3.0.8",
+      "to": "3.0.10",
+      "title": "Take the analyzer fallback packaging fix",
+      "summary": "Upgrade when older or non-version-aware build hosts load duplicate analyzer variants.",
+      "guide": "./version-3-patch-line#3-0-8-to-3-0-10"
+    }
+  ]
+}

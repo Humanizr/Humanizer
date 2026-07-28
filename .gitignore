@@ -134,3 +134,8 @@ artifacts/
 website/node_modules/
 website/.docusaurus/
 website/build/
+website/.snapshot-mutation.lock
+website/.snapshot-transaction/
+website/.snapshot-current-*/
+website/.snapshot-correction-*/
+website/.snapshot-release-*/

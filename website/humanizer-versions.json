@@ -11,9 +11,22 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer.Core",
       "referenceTfm": "netstandard2.0",
+      "publicApiApproval": {
+        "tag": "v2.10.1",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt",
+        "generatedExtraTypes": [
+          "Humanizer.ICulturedStringTransformer",
+          "Humanizer.Localisation.DataUnit",
+          "Humanizer.MetricNumeralFormats"
+        ]
+      },
       "compatibilityOverlay": "version-overrides/2.10.1",
       "route": "2.10.1",
-      "published": false,
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "3B73A2E224B6E41EB7E68AC2AE7A8E0C0335AA61545D888524851968157B648F",
+        "sidebarSha256": "DBD638C71D8C9C9AA68BFA2F563D3C9F394996822DF9C8ADBDA0AC3FD8C3CDC1"
+      },
       "latestStable": false
     },
     {
@@ -26,9 +39,17 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer.Core",
       "referenceTfm": "net6.0",
+      "publicApiApproval": {
+        "tag": "v2.11.10",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt"
+      },
       "compatibilityOverlay": "version-overrides/2.11.10",
       "route": "2.11.10",
-      "published": false,
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "79E1B0B2AE071DECB4676E7559DEB1A7F3DE5D8A12CA938ADEF0DE053984564F",
+        "sidebarSha256": "DBD638C71D8C9C9AA68BFA2F563D3C9F394996822DF9C8ADBDA0AC3FD8C3CDC1"
+      },
       "latestStable": false
     },
     {
@@ -41,9 +62,17 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer.Core",
       "referenceTfm": "net6.0",
+      "publicApiApproval": {
+        "tag": "v2.13.14",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt"
+      },
       "compatibilityOverlay": "version-overrides/2.13.14",
       "route": "2.13.14",
-      "published": false,
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "25E8783CBA808BF89DFD3C65A680F88BB670E001B16F0A13C4983EC8F558E7FF",
+        "sidebarSha256": "47A8C3CEC1A7DD6E6697509399D1B660D545D7FAEB003033F870D3413CB68666"
+      },
       "latestStable": false
     },
     {
@@ -56,9 +85,17 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer.Core",
       "referenceTfm": "net6.0",
+      "publicApiApproval": {
+        "tag": "v2.14.1",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.approved.txt"
+      },
       "compatibilityOverlay": "version-overrides/2.14.1",
       "route": "2.14.1",
-      "published": false,
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "5C1EE94486C0D7E914895E4F8C5896F145E172FEB803B2232CAD7C258F3CF1F0",
+        "sidebarSha256": "47A8C3CEC1A7DD6E6697509399D1B660D545D7FAEB003033F870D3413CB68666"
+      },
       "latestStable": false
     },
     {
@@ -71,9 +108,17 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer.Core",
       "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "tag": "v3.0.1",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
       "compatibilityOverlay": "version-overrides/3.0.1",
       "route": "3.0.1",
-      "published": false,
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "D56FB7389ED8E24ED730FFB2B7B26B1CC1BBED59876A6FEB5673DEE880099EC7",
+        "sidebarSha256": "3B58C95F6EE52AEAA906D27603E1786A76B04B86CADF1885DC15424775C82924"
+      },
       "latestStable": false
     },
     {
@@ -86,6 +131,10 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer.Core",
       "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "tag": "v3.0.8",
+        "path": "src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
       "exampleExcludedAssets": [
         "build",
         "buildTransitive",
@@ -93,7 +142,11 @@
       ],
       "compatibilityOverlay": "version-overrides/3.0.8",
       "route": "3.0.8",
-      "published": false,
+      "published": true,
+      "immutability": {
+        "snapshotSha256": "D87DC7A3C9C30FA9BF1E36A806AD1427F4A0EA304E697B4B5BA6421CA46DC2F8",
+        "sidebarSha256": "3B58C95F6EE52AEAA906D27603E1786A76B04B86CADF1885DC15424775C82924"
+      },
       "latestStable": false
     },
     {
@@ -106,9 +159,17 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer.Core",
       "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "tag": "v3.0.10",
+        "path": "tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
       "compatibilityOverlay": "version-overrides/3.0.10",
       "route": "",
       "published": true,
+      "immutability": {
+        "snapshotSha256": "C5C066B726F845EB50AB25B0DFBF62F89176E944EFA2A37459C3D12ED1171075",
+        "sidebarSha256": "3B58C95F6EE52AEAA906D27603E1786A76B04B86CADF1885DC15424775C82924"
+      },
       "latestStable": true
     },
     {
@@ -121,6 +182,9 @@
       "installPackage": "Humanizer",
       "apiPackage": "Humanizer",
       "referenceTfm": "net10.0",
+      "publicApiApproval": {
+        "path": "tests/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.Approve_Public_Api.DotNet10_0.verified.txt"
+      },
       "compatibilityOverlay": "version-overrides/current",
       "route": "next",
       "published": false,

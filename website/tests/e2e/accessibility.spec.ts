@@ -3,7 +3,7 @@ import {expect, test} from '@playwright/test';
 
 const routes = [
   {name: 'home', path: '/'},
-  {name: 'docs', path: '/docs/proof/'},
+  {name: 'docs', path: '/docs/start/quick-start/'},
   {
     name: 'version unavailable',
     path: '/docs/next/api/NotInThisVersion/',

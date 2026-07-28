@@ -21,7 +21,9 @@ $requestedAreas = @(
 )
 
 & (Join-Path $PSScriptRoot "verify-manifest.ps1") `
-    -ManifestPath $ManifestPath
+    -ManifestPath $ManifestPath `
+    -WebsiteRoot (Split-Path $ManifestPath -Parent) `
+    -SkipNativeState:$explicitExamplesRoot
 
 $manifest = Get-Content -Raw $ManifestPath | ConvertFrom-Json -Depth 20
 $versions = @($manifest.versions)

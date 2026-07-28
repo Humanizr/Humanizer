@@ -1,0 +1,119 @@
+---
+id: analyzer
+title: Migrate namespaces with the analyzer
+sidebar_position: 1
+diataxis: how-to
+persona: developer migrating a Humanizer 2 codebase
+example: illustrative
+---
+
+# Migrate namespaces with the analyzer
+
+## Orientation
+
+Humanizer 3 bundles analyzer assets in `Humanizer.Core`; a normal reference to
+the `Humanizer` package brings them in. Do not install a separate analyzer
+package. `HUMANIZER001` finds Humanizer 2 sub-namespace using directives and
+qualified names that must move to the root `Humanizer` namespace.
+
+The shipped descriptor is enabled by default with severity `error`. It can fail
+local and CI builds even when `TreatWarningsAsErrors` is false. The analyzer
+release ledger and older prose call it a warning, but the source descriptor,
+tagged packages, tests, and package smoke builds establish the actual behavior.
+
+### Apply the automated migration
+
+First update the package, then apply the fix:
+
+```console
+dotnet add package Humanizer --version 3.0.1
+dotnet restore
+dotnet format analyzers --diagnostics HUMANIZER001 --severity info
+dotnet build
+dotnet test
+```
+
+The code action is named **Update to Humanizer namespace** and supports Roslyn
+Fix All. Review the result: Fix All replaces each matching directive or
+qualified prefix, but it does not promise to deduplicate identical
+`using Humanizer;` directives.
+
+### Configure or suppress the diagnostic
+
+Use ordinary Roslyn configuration; Humanizer has no custom analyzer options.
+During a staged migration, lower the severity in the narrowest applicable
+`.editorconfig`:
+
+```ini
+[*.cs]
+dotnet_diagnostic.HUMANIZER001.severity = warning
+```
+
+Use `none` only for code that must remain on Humanizer 2. For a narrow source
+exception:
+
+```csharp
+#pragma warning disable HUMANIZER001
+using Humanizer.Bytes;
+#pragma warning restore HUMANIZER001
+```
+
+MSBuild's project-wide equivalent is
+`<NoWarn>$(NoWarn);HUMANIZER001</NoWarn>`. Prefer `.editorconfig` because its
+file scope makes temporary exceptions visible.
+
+### Run it in CI
+
+Run restore and the normal build first. Because the diagnostic defaults to an
+error, the build is the enforcement gate. Add a no-change format check when CI
+must also prove that the code fix has been applied:
+
+```console
+dotnet build --no-restore
+dotnet format analyzers --no-restore --diagnostics HUMANIZER001 --severity info --verify-no-changes
+```
+
+Pin the SDK used locally and in CI. Humanizer `3.0.1` ships the initial analyzer
+layout; some Roslyn hosts can report `CS8032` or `AD0001`.
+
+### Troubleshoot
+
+| Symptom | Consumer action |
+| --- | --- |
+| `HUMANIZER001` | The analyzer loaded. Apply the code fix or configure an intentional exception. |
+| No diagnostic for a listed old namespace | Confirm the resolved `Humanizer.Core` version in `project.assets.json`, remove stale `bin`/`obj`, restore, and rebuild. |
+| `CS8032` or `AD0001` | This is the known `3.0.1` analyzer-host boundary; upgrade rather than patching analyzer dependencies into the application. |
+| IDE and CI disagree | Compare SDK/MSBuild versions and the resolved package lock file, then restart the IDE after a clean restore. |
+
+## Example
+
+This example is illustrative of the migration performed by the code fix:
+
+```csharp
+// Before
+using Humanizer.Bytes;
+var size = Humanizer.Bytes.ByteSize.FromKilobytes(10);
+
+// After
+using Humanizer;
+var size = Humanizer.ByteSize.FromKilobytes(10);
+```
+
+## Pitfall
+
+The analyzer fixes namespaces only. It does not replace removed APIs, update
+enum generic constraints, repair formatter implementations, or validate
+behavior changes. Continue through the Humanizer 3 migration guide after the
+diagnostic is clean.
+
+## Version notes
+
+`HUMANIZER001` first appears in `3.0.1` with default severity `error`. Later
+patches change analyzer packaging and host compatibility.
+
+## Related guides and API
+
+- [Humanizer 3 migration](../upgrading/version-3-migration.mdx)
+- [Humanizer 3 patch line](../upgrading/version-3-patch-line.mdx)
+- [Configuration](../start/configuration.mdx)
+- [Selected-version API reference](../api/index.md)

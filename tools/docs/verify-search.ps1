@@ -27,7 +27,7 @@ $indexes = @(
         Version = $latest[0].label
         ManifestVersion = $latest[0].version
         Path = Join-Path $BuildDirectory "search-index-docs-default-$($latest[0].version).json"
-        RequiredRoute = "/docs/$($latest[0].route)proof"
+        RequiredRoute = "/docs/$($latest[0].route)start/quick-start"
         RequiredApiRoute = "/docs/$($latest[0].route)api/Humanizer.StringHumanizeExtensions/"
         ForbiddenRoute = "/docs/$($preview[0].route)/"
     },
@@ -35,9 +35,9 @@ $indexes = @(
         Version = $preview[0].label
         ManifestVersion = $preview[0].version
         Path = Join-Path $BuildDirectory "search-index-docs-default-current.json"
-        RequiredRoute = "/docs/$($preview[0].route)/proof"
+        RequiredRoute = "/docs/$($preview[0].route)/start/quick-start"
         RequiredApiRoute = "/docs/$($preview[0].route)/api/Humanizer.StringHumanizeExtensions/"
-        ForbiddenRoute = "/docs/$($latest[0].route)proof"
+        ForbiddenRoute = "/docs/$($latest[0].route)start/quick-start"
     }
 )
 
@@ -49,7 +49,7 @@ foreach ($index in $indexes) {
     $data = Get-Content -Raw $index.Path | ConvertFrom-Json -Depth 100
     $routes = @($data.documents.sectionRoute)
     if (-not ($routes | Where-Object { $_ -like "$($index.RequiredRoute)*" })) {
-        throw "Search index for $($index.Version) does not contain its proof route."
+        throw "Search index for $($index.Version) does not contain its quick-start route."
     }
     if (-not ($routes | Where-Object { $_ -like "$($index.RequiredApiRoute)*" })) {
         throw "Search index for $($index.Version) does not contain its generated API route."
@@ -91,11 +91,11 @@ foreach ($asset in $requiredAllSearchAssets) {
 $versionedPages = @(
     @{
         Label = $latest[0].label
-        Path = Join-Path $BuildDirectory "docs/$($latest[0].route)proof/index.html"
+        Path = Join-Path $BuildDirectory "docs/$($latest[0].route)start/quick-start/index.html"
     },
     @{
         Label = $preview[0].label
-        Path = Join-Path $BuildDirectory "docs/$($preview[0].route)/proof/index.html"
+        Path = Join-Path $BuildDirectory "docs/$($preview[0].route)/start/quick-start/index.html"
     }
 )
 foreach ($page in $versionedPages) {
@@ -129,7 +129,7 @@ Write-Host "All-version search passed: stable + preview ($allSearchSize / $maxim
 
 $redirectPath = Join-Path $BuildDirectory "quick-start/index.html"
 if (-not (Test-Path $redirectPath -PathType Leaf) -or
-    (Get-Content -Raw $redirectPath) -notmatch "/docs/proof") {
+    (Get-Content -Raw $redirectPath) -notmatch "/docs/start/quick-start") {
     throw "The static quick-start redirect page is missing or invalid."
 }
 

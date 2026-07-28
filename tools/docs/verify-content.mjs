@@ -10,6 +10,53 @@ const areas = requestedAreas.length > 0
 const roles = new Set(['tutorial', 'how-to', 'explanation', 'reference']);
 const prohibitedProductName = ['Flow', 'Next'].join(' ');
 const failures = [];
+let scenarioApiTargets = new Map();
+if (areas.includes('scenarios')) {
+  const scenarioApiContract = JSON.parse(
+    await readFile(
+      path.resolve(process.cwd(), 'scenario-api-contract.json'),
+      'utf8',
+    ),
+  );
+  if (scenarioApiContract.schemaVersion !== 1) {
+    throw new Error('Unsupported scenario API contract schema.');
+  }
+  const scenarioPageContracts = new Map(
+    Object.entries(scenarioApiContract.pages),
+  );
+  function resolveScenarioTargets(page, resolving = new Set()) {
+    const entry = scenarioPageContracts.get(page);
+    if (Array.isArray(entry)) {
+      return entry;
+    }
+    if (!entry || !Array.isArray(entry.unionOf) || resolving.has(page)) {
+      throw new Error(`Invalid scenario API union: ${page}`);
+    }
+    const nextResolving = new Set(resolving).add(page);
+    return [...new Set(entry.unionOf.flatMap(
+      (member) => resolveScenarioTargets(member, nextResolving),
+    ))];
+  }
+  scenarioApiTargets = new Map(
+    [...scenarioPageContracts.keys()].map(
+      (page) => [page, resolveScenarioTargets(page)],
+    ),
+  );
+  const canonicalScenarioPages = (
+    await readdir(path.join(docsRoot, 'scenarios'))
+  )
+    .filter((name) => name !== 'index.mdx' && /\.mdx?$/.test(name))
+    .map((name) => `scenarios/${name}`)
+    .sort();
+  if (
+    JSON.stringify([...scenarioApiTargets.keys()].sort()) !==
+    JSON.stringify(canonicalScenarioPages)
+  ) {
+    throw new Error(
+      'The scenario API contract must exactly cover every non-index scenario page.',
+    );
+  }
+}
 
 for (const area of areas) {
   const areaRoot = path.join(docsRoot, area);
@@ -88,6 +135,28 @@ for (const area of areas) {
     }
     if (!links.some((link) => /(^|\/)api(\/|$|\/index\.md$)/.test(link))) {
       failures.push(`${relativePage}: related section needs a same-version API link`);
+    }
+    if (area === 'scenarios' && path.basename(page) !== 'index.mdx') {
+      const contractPath = relativePage.replaceAll(path.sep, '/');
+      if (!scenarioApiTargets.has(contractPath)) {
+        failures.push(`${relativePage}: missing scenario API contract`);
+      }
+      const rootOnly = links.filter((link) => /\/api\/?index\.md$/.test(link));
+      if (rootOnly.length > 0) {
+        failures.push(`${relativePage}: focused scenario cannot link only to the API root`);
+      }
+      const expectedTargets = [...(scenarioApiTargets.get(contractPath) ?? [])].sort();
+      const actualTargets = links
+        .filter((link) => /^\.\.\/api\/[^/]+\.md$/.test(link))
+        .map((link) => path.basename(link))
+        .filter((target, index, targets) => targets.indexOf(target) === index)
+        .sort();
+      if (JSON.stringify(actualTargets) !== JSON.stringify(expectedTargets)) {
+        failures.push(
+          `${relativePage}: API targets differ; actual ${actualTargets.join(', ')}; ` +
+          `expected ${expectedTargets.join(', ')}`,
+        );
+      }
     }
 
     if (metadata.diataxis === 'tutorial' && !/^## Result$/m.test(content)) {

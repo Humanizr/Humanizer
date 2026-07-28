@@ -6,6 +6,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+. (Join-Path $PSScriptRoot "snapshot-state.ps1")
 if (-not $WebsiteRoot) {
     $WebsiteRoot = Join-Path $repoRoot "website"
 }
@@ -80,6 +81,7 @@ $requiredProperties = @(
     "installPackage",
     "apiPackage",
     "referenceTfm",
+    "publicApiApproval",
     "compatibilityOverlay",
     "route",
     "published",
@@ -105,6 +107,41 @@ foreach ($entry in $versions) {
     }
     if ($entry.referenceTfm -notmatch "^net(?:standard)?\d+(?:\.\d+)?$") {
         throw "Version $($entry.version) declares an invalid reference TFM."
+    }
+    if ($null -eq $entry.publicApiApproval.path -or
+        [string]::IsNullOrWhiteSpace($entry.publicApiApproval.path) -or
+        [System.IO.Path]::IsPathRooted($entry.publicApiApproval.path) -or
+        $entry.publicApiApproval.path.Contains("\") -or
+        $entry.publicApiApproval.path -match "(^|/)\.\.(/|$)" -or
+        $entry.publicApiApproval.path -notmatch "\.(?:approved|verified)\.txt$") {
+        throw "Version $($entry.version) declares invalid PublicAPI approval evidence."
+    }
+    $expectedGeneratedExtras = if ($entry.version -eq "2.10.1") {
+        @(
+            "Humanizer.ICulturedStringTransformer",
+            "Humanizer.Localisation.DataUnit",
+            "Humanizer.MetricNumeralFormats"
+        )
+    } else {
+        @()
+    }
+    $generatedExtrasProperty = $entry.publicApiApproval.PSObject.Properties[
+        "generatedExtraTypes"
+    ]
+    $rawDeclaredGeneratedExtras = if ($null -eq $generatedExtrasProperty) {
+        @()
+    } else {
+        @($generatedExtrasProperty.Value)
+    }
+    $declaredGeneratedExtras = @(
+        $rawDeclaredGeneratedExtras |
+            Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+            Sort-Object -Unique
+    )
+    if ($rawDeclaredGeneratedExtras.Count -ne $declaredGeneratedExtras.Count -or
+        ($declaredGeneratedExtras -join "`n") -ne
+        ($expectedGeneratedExtras -join "`n")) {
+        throw "Version $($entry.version) declares invalid generated PublicAPI exceptions."
     }
     $exampleExcludedAssetsProperty = $entry.PSObject.Properties[
         "exampleExcludedAssets"
@@ -183,6 +220,10 @@ foreach ($entry in $versions) {
             -not (Test-Path $replacementPath -PathType Leaf)) {
             throw "Compatibility replacement '$path' is incomplete."
         }
+        if ((Get-FileHash $canonicalPath -Algorithm SHA256).Hash -eq
+            (Get-FileHash $replacementPath -Algorithm SHA256).Hash) {
+            throw "Compatibility replacement '$path' is byte-identical to canonical content."
+        }
     }
     foreach ($path in $exclusions) {
         Assert-OverlayPath `
@@ -218,6 +259,7 @@ foreach ($entry in $versions) {
     if ($entry.version -eq "current") {
         if ($entry.source.kind -ne "checkout" -or
             $entry.source.tag -ne "main" -or
+            $null -ne $entry.publicApiApproval.PSObject.Properties["tag"] -or
             $entry.route -ne "next" -or
             $entry.published -or
             $entry.latestStable -or
@@ -228,9 +270,21 @@ foreach ($entry in $versions) {
         if ($entry.version -notmatch "^\d+\.\d+\.\d+(?:\.\d+)?$" -or
             $entry.source.kind -ne "nuget" -or
             $entry.source.packageVersion -ne $entry.version -or
+            $entry.publicApiApproval.tag -ne "v$($entry.version)" -or
             $entry.route -eq "next") {
             throw "Stable version $($entry.version) has invalid NuGet source metadata."
         }
+    }
+
+    $immutabilityProperty = $entry.PSObject.Properties["immutability"]
+    if ($entry.version -ne "current" -and $entry.published) {
+        if ($null -eq $immutabilityProperty -or
+            $immutabilityProperty.Value.snapshotSha256 -notmatch "^[A-F0-9]{64}$" -or
+            $immutabilityProperty.Value.sidebarSha256 -notmatch "^[A-F0-9]{64}$") {
+            throw "Published version $($entry.version) is missing immutable artifact digests."
+        }
+    } elseif ($null -ne $immutabilityProperty) {
+        throw "Unpublished version $($entry.version) cannot declare immutable artifact digests."
     }
 }
 
@@ -299,15 +353,24 @@ if (-not $SkipNativeState) {
     )
     if (($nativeVersions -join "`n") -ne
         ($expectedNativeVersions -join "`n")) {
-        throw "Docusaurus versions.json does not match published manifest entries."
+        throw "Docusaurus versions.json does not match published manifest entries. Actual: $($nativeVersions -join ', '); expected: $($expectedNativeVersions -join ', ')."
     }
 
     foreach ($version in $nativeVersions) {
+        $publishedEntry = @(
+            $stableVersions | Where-Object version -eq $version
+        )[0]
         $docsPath = Join-Path $WebsiteRoot "versioned_docs/version-$version"
         $sidebarsPath = Join-Path $WebsiteRoot "versioned_sidebars/version-$version-sidebars.json"
         if (-not (Test-Path $docsPath -PathType Container) -or
             -not (Test-Path $sidebarsPath -PathType Leaf)) {
             throw "Published snapshot $version is incomplete."
+        }
+        $snapshotDigest = Get-SnapshotDirectoryDigest -Path $docsPath
+        $sidebarDigest = (Get-FileHash $sidebarsPath -Algorithm SHA256).Hash
+        if ($snapshotDigest -ne $publishedEntry.immutability.snapshotSha256 -or
+            $sidebarDigest -ne $publishedEntry.immutability.sidebarSha256) {
+            throw "Published snapshot $version differs from its immutable artifact digests."
         }
     }
 

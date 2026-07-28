@@ -1,12 +1,9 @@
 ---
 id: api
-title: API proof
+title: API reference
 sidebar_position: 2
 ---
 
-# API proof
+# Humanizer API reference
 
-This generated-reference proof uses the current `Humanizer` checkout targeting `net10.0`.
-
-- [StringHumanizeExtensions](./Humanizer.StringHumanizeExtensions.md)
-- [CollectionHumanizeExtensions](./Humanizer.CollectionHumanizeExtensions.md)
+Generated from the `main/preview` `Humanizer` checkout using the `net10.0` reference assembly.

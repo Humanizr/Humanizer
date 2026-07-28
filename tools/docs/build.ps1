@@ -28,20 +28,21 @@ if ($Version -and -not ($versions.version -contains $Version)) {
 }
 
 $websiteRoot = Join-Path $repoRoot "website"
-$proofRoots = @(
+foreach ($root in @(
     (Join-Path $websiteRoot "docs"),
     (Join-Path $websiteRoot "versioned_docs/version-$($latest[0].version)")
-)
-foreach ($proofRoot in $proofRoots) {
-    $guidePath = Join-Path $proofRoot "proof.mdx"
-    $apiPath = Join-Path $proofRoot "api/Humanizer.StringHumanizeExtensions.md"
-    if (-not (Test-Path $guidePath -PathType Leaf) -or -not (Test-Path $apiPath -PathType Leaf)) {
-        throw "The versioned guide-to-API proof is incomplete under $proofRoot."
-    }
-
-    $guide = Get-Content -Raw $guidePath
-    if ($guide -notmatch "\(\./api/Humanizer\.StringHumanizeExtensions\.md\)") {
-        throw "The guide under $proofRoot does not use a relative same-version API link."
+)) {
+    foreach ($required in @(
+        "start",
+        "scenarios",
+        "upgrading",
+        "languages",
+        "api/index.md",
+        "api/Humanizer.StringHumanizeExtensions.md"
+    )) {
+        if (-not (Test-Path (Join-Path $root $required))) {
+            throw "The documentation root is incomplete under $root`: $required"
+        }
     }
 }
 
@@ -54,17 +55,16 @@ if (-not $ValidateOnly -and $Mode -ne "Validate") {
 }
 
 if ($Mode -eq "Validate") {
-    foreach ($entry in $versions | Where-Object published) {
-        & (Join-Path $PSScriptRoot "snapshot.ps1") `
-            -Version $entry.version `
-            -Check `
-            -ManifestPath $ManifestPath
-    }
-    & (Join-Path $PSScriptRoot "verify-api.ps1") `
+    & (Join-Path $PSScriptRoot "snapshot.ps1") `
         -All `
+        -Check `
+        -ManifestPath $ManifestPath
+    & (Join-Path $PSScriptRoot "snapshot.ps1") `
+        -Version current `
+        -Check `
         -ManifestPath $ManifestPath
     & (Join-Path $PSScriptRoot "verify-examples.ps1") `
-        -All `
+        -Version current `
         -ManifestPath $ManifestPath
 }
 

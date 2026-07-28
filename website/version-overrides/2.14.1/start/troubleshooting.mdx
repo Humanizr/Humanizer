@@ -1,0 +1,66 @@
+---
+id: troubleshooting
+title: Troubleshoot Humanizer
+sidebar_position: 6
+diataxis: how-to
+persona: application developer
+example: illustrative
+---
+
+# Troubleshoot Humanizer
+
+## Orientation
+
+Start with the resolved Humanizer `2.14.1` package, target framework, culture, exact API call, and platform. Most apparent failures come from following documentation for another version, resolving a different package asset, leaving ambient culture implicit, or treating locale-dependent presentation text as invariant data.
+
+## Example
+
+Capture a minimal reproduction before changing configuration:
+
+```csharp
+using System.Globalization;
+using Humanizer;
+using Humanizer.Configuration;
+
+var culture = CultureInfo.GetCultureInfo("en-US");
+var value = 42.ToWords(culture);
+Console.WriteLine($"{typeof(Configurator).Assembly.GetName().Version}: {value}");
+```
+
+Run `dotnet list package --include-transitive`, inspect the target in `project.assets.json`, and select Humanizer `2.14.1` in this site.
+
+### Symptoms and actions
+
+| Symptom | Evidence to collect | Action |
+| --- | --- | --- |
+| API page or method is missing | Package version, selected docs version, TFM | Keep the site on `2.14.1`; check the page’s version notes and selected API root. |
+| `MissingMethodException` or `TypeLoadException` | All direct/transitive Humanizer versions | Align `Humanizer`, `Humanizer.Core`, and locale packages; clean `bin`/`obj`, restore, and rebuild. |
+| Output is English or the wrong regional form | `CurrentCulture`, `CurrentUICulture`, explicit argument, package version | Pass culture directly where possible; otherwise set both ambient cultures at the request/job boundary and check locale capability. |
+| Output differs on Windows, Linux, or macOS | OS, TFM, culture, globalization mode | Compare platform globalization data and the selected release’s formatting coverage; avoid asserting platform-owned text without an explicit override. |
+| A selected-version parser rejects input | Exact text and culture/provider | Confirm the parser and overload exist in the `2.14.1` API and inspect the first unrecognized token or unit. |
+| Enum input throws `NoMatchFoundException` | Enum members/metadata and input | Use an unambiguous label; pass `OnNoMatch.ReturnsNull` when failure is expected. Matching is case-insensitive. |
+| `CS8032` or `AD0001` from a Humanizer analyzer after migration | SDK/MSBuild and package version | Follow the Humanizer 3 analyzer migration guide, clear stale build outputs, and restore. Humanizer `2.14.1` does not bundle that analyzer. |
+| Search or a copied URL opens another API version | Current selector and URL | Re-select `2.14.1`, then navigate from its API root. Narrative and API routes are versioned together. |
+
+### Reduce culture issues
+
+Set culture explicitly in a one-file reproduction. If the wrong result persists, compare the `2.14.1` capability page and note whether the culture resolves directly or through a parent. Include platform and TFM when reporting a locale issue.
+
+### Reduce package issues
+
+Use `dotnet restore --force-evaluate` after aligning versions. Inspect direct and transitive Humanizer packages together before changing application code.
+
+## Pitfall
+
+Do not “fix” a localized output difference by persisting the current humanized string or by setting process-wide culture inside a request. That hides the input boundary and creates concurrent, version-dependent behavior. Keep typed values, scope culture, and assert only output the application intentionally owns.
+
+## Version notes
+
+Package layout, target frameworks, locale implementation, and API routes on this page are scoped to Humanizer `2.14.1`.
+
+## Related guides and API
+
+- [Install Humanizer](./installation.mdx)
+- [Choose explicit and ambient cultures](../languages/using-cultures.mdx)
+- [Analyzer migration and CI](../analyzer/index.mdx)
+- [2.14.1 API reference](../api/index.md)

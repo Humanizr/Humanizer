@@ -135,7 +135,7 @@ const config: Config = {
         redirects: [
           {
             from: '/quick-start',
-            to: '/docs/proof',
+            to: '/docs/start/quick-start',
           },
         ],
       },

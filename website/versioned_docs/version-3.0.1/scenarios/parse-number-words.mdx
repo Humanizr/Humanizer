@@ -1,0 +1,46 @@
+---
+id: parse-number-words
+title: Parse localized number words
+sidebar_position: 13
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import parseNumberWords from '!!raw-loader!../_examples/scenarios-parse-number-words/Program.cs';
+
+# Parse localized number words
+
+## Orientation
+
+Use `TryToNumber` at an input boundary where invalid words are expected. Use `ToNumber` when invalid text is exceptional and should throw. Both require an explicit `CultureInfo`, because the same words and token rules do not mean the same thing in every language.
+
+## Example
+
+This executable parses a positive phrase, a negative phrase, and an invalid token using the stable `int` result:
+
+<CodeBlock language="csharp" title="Program.cs">{parseNumberWords}</CodeBlock>
+
+### Handle expected failure
+
+The longest `TryToNumber` overload returns:
+
+- `false` when a token cannot be recognized.
+- `0` in the numeric result.
+- The first unrecognized word in the final `out` parameter.
+
+That token is useful for field validation messages. Do not catch `FormatException` for routine input when `TryToNumber` expresses the branch directly.
+
+## Pitfall
+
+The parser supports only the locales and word forms represented by its selected-version converter. It is not a general natural-language parser. Preserve the explicit culture from the user-input boundary and do not silently fall back to English for an unsupported locale.
+
+## Version notes
+
+Words-to-number begins in Humanizer `3.0.1` and returns `int` through `3.0.10`.
+
+## Related guides and API
+
+- [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
+- [Troubleshooting](../start/troubleshooting.mdx)
+- [WordsToNumberExtension API](../api/Humanizer.WordsToNumberExtension.md)

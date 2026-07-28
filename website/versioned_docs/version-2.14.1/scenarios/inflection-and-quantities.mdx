@@ -1,0 +1,58 @@
+---
+id: inflection-and-quantities
+title: Inflect nouns and render quantities
+sidebar_position: 4
+diataxis: how-to
+persona: application developer
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import inflection from '!!raw-loader!../_examples/scenarios-inflection/Program.cs';
+
+# Inflect nouns and render quantities
+
+## Orientation
+
+Use `Pluralize` or `Singularize` when the application has an English noun but not a count. Use `ToQuantity` when the count and noun belong together. Humanizer’s vocabulary handles common irregular and uncountable English nouns; an application can add domain-specific rules before it begins formatting text.
+
+## Example
+
+This isolated executable covers a built-in irregular noun, a quantity written as words, and one application-specific irregular pair:
+
+<CodeBlock language="csharp" title="Program.cs">{inflection}</CodeBlock>
+
+### Tell Humanizer what the input means
+
+`Pluralize(inputIsKnownToBeSingular: false)` avoids pluralizing an input that may already be plural. The matching `Singularize` flag avoids a second singularization. `Singularize(skipSimpleWords: true)` specifically skips the simple trailing-`s` rule for a one-word input; irregular and other configured rules still apply.
+
+`ToQuantity` accepts:
+
+- `ShowQuantityAs.None` for only the correctly inflected noun.
+- `ShowQuantityAs.Numeric` for a formatted numeric count.
+- `ShowQuantityAs.Words` for a localized number word followed by the noun.
+
+Numeric format strings and providers control the displayed number. They do not turn the English inflector into a localized noun engine.
+
+### Extend the vocabulary
+
+`Humanizer.Inflections.Vocabularies.Default` supports `AddIrregular`, `AddUncountable`, `AddPlural`, and `AddSingular`. Prefer an irregular or uncountable entry over a broad regular expression. Set `matchEnding: false` when a rule must match the entire noun instead of every word ending with the same letters.
+
+## Pitfall
+
+Vocabulary changes are process-global. Register domain words once during startup and test them in an isolated process; do not add rules per request. In Humanizer 2, only positive `1` selects the singular form; `-1` is plural.
+
+This API inflects English nouns. For localized number words and grammar-aware ordinals, use [numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx) and check the [culture capability table](../languages/supported-cultures.mdx).
+
+## Version notes
+
+Core inflection is available here under the `Humanizer.Inflections` namespace. Humanizer 3 consolidates the namespace and changes negative-one quantity behavior.
+
+## Related guides and API
+
+- [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
+- [Localization and extensibility](./localization-and-extensibility.mdx)
+- [InflectorExtensions API](../api/Humanizer.InflectorExtensions.md)
+- [ToQuantityExtensions API](../api/Humanizer.ToQuantityExtensions.md)
+- [ShowQuantityAs API](../api/Humanizer.ShowQuantityAs.md)
+- [Vocabularies API](../api/Humanizer.Inflections.Vocabularies.md)
+- [Vocabulary API](../api/Humanizer.Inflections.Vocabulary.md)
