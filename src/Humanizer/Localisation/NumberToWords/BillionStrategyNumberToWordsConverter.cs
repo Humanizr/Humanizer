@@ -85,18 +85,13 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
 
         if (number / 100 > 0)
         {
-            if (number == 100)
-            {
-                // Exact one hundred is lexicalized only when it terminates the phrase; otherwise it
-                // behaves like the start of a larger compound and needs the conjunction.
-                parts.Add(parts.Count > 0
-                    ? $"{profile.AndWord} {profile.Cardinal.HundredExactWord}"
-                    : profile.Cardinal.HundredExactWord);
-            }
-            else
-            {
-                parts.Add(ApplyGender(profile.Cardinal.HundredsMap[number / 100], gender));
-            }
+            var hundreds = number == 100
+                ? profile.Cardinal.HundredExactWord
+                : ApplyGender(profile.Cardinal.HundredsMap[number / 100], gender);
+
+            parts.Add(parts.Count > 0 && number % 100 == 0
+                ? $"{profile.AndWord} {hundreds}"
+                : hundreds);
 
             number %= 100;
         }
