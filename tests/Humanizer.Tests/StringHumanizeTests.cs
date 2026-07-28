@@ -64,6 +64,7 @@ public class StringHumanizeTests
     {
         Vocabularies.Default.RemoveAcronym("HS");
         Vocabularies.Default.RemoveAcronym("iOS");
+        Vocabularies.Default.RemoveAcronym("API");
         try
         {
             Assert.Equal("Hs access", "HsAccess".Humanize());
@@ -77,18 +78,21 @@ public class StringHumanizeTests
             Assert.Equal("The HTML language", "TheHTMLLanguage".Humanize());
 
             Vocabularies.Default.AddAcronym("iOS");
+            Vocabularies.Default.AddAcronym("API");
             Assert.Equal("iOS", "IOS".Humanize());
             Assert.Equal("iOS", "iOS".Humanize());
             Assert.Equal("iOS settings", "iOSSettings".Humanize());
             Assert.Equal("iOS API settings", "iOSAPISettings".Humanize());
             Assert.Equal("iOS 5", "iOS5".Humanize());
             Assert.Equal("iOS Settings", "iOS_Settings".Humanize());
+            Assert.Equal("iOS API Settings", "iOSAPI_Settings".Humanize());
             Assert.Equal("BIOS settings", "BIOSSettings".Humanize());
         }
         finally
         {
             Vocabularies.Default.RemoveAcronym("HS");
             Vocabularies.Default.RemoveAcronym("iOS");
+            Vocabularies.Default.RemoveAcronym("API");
         }
 
         Assert.Equal("Hs access", "HsAccess".Humanize());

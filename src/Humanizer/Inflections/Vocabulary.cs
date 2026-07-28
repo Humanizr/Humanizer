@@ -354,7 +354,9 @@ public partial class Vocabulary
                     result.Append(input, 0, index);
                 }
 
-                if (index > 0 && char.IsLetterOrDigit(input[index - 1]))
+                if (index > 0 &&
+                    char.IsLetterOrDigit(input[index - 1]) &&
+                    result[^1] != ' ')
                 {
                     result.Append(' ');
                 }
