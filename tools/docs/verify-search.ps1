@@ -53,6 +53,34 @@ if ($RecordVersion) {
         throw "Build search output is incomplete for $RecordVersion."
     }
 
+    $releaseTag = [string]$recordEntries[0].publicApiApproval.tag
+    if ($releaseTag -ne "v$RecordVersion") {
+        throw "Search baseline release tag is missing or malformed for $RecordVersion."
+    }
+    $tagCommit = @(
+        & git -C $repoRoot rev-parse --verify "$releaseTag^{commit}" 2>$null
+    )
+    if ($LASTEXITCODE -ne 0 -or
+        $tagCommit.Count -ne 1 -or
+        $tagCommit[0] -notmatch "^[0-9a-fA-F]{40,64}$") {
+        throw "Search baseline release tag is unavailable: $releaseTag"
+    }
+    $reviewedAt = @(
+        & git -C $repoRoot show -s --format=%cs $tagCommit[0] 2>$null
+    )
+    $parsedReviewDate = [DateTime]::MinValue
+    if ($LASTEXITCODE -ne 0 -or
+        $reviewedAt.Count -ne 1 -or
+        -not [DateTime]::TryParseExact(
+            $reviewedAt[0],
+            "yyyy-MM-dd",
+            [System.Globalization.CultureInfo]::InvariantCulture,
+            [System.Globalization.DateTimeStyles]::None,
+            [ref]$parsedReviewDate
+        )) {
+        throw "Search baseline release commit date is missing or malformed: $releaseTag"
+    }
+
     $allSearchSize = (
         Get-ChildItem $allSearchDirectory -Recurse -File |
             Measure-Object -Property Length -Sum
@@ -62,7 +90,7 @@ if ($RecordVersion) {
             -NotePropertyName $RecordVersion `
             -NotePropertyValue (Get-Item $recordIndex).Length
     $baselines.allVersionsBytes = $allSearchSize
-    $baselines.reviewedAt = [DateTime]::UtcNow.ToString("yyyy-MM-dd")
+    $baselines.reviewedAt = $reviewedAt[0]
     $baselines.reviewedCorpus = (
         "Humanizer $RecordVersion immutable snapshot and every manifest " +
         "context; Pagefind indexed the complete corpus."

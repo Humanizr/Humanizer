@@ -46,7 +46,76 @@ try {
 }
 
 & (Join-Path $PSScriptRoot "verify-manifest.ps1")
-& (Join-Path $PSScriptRoot "build.ps1") -Version "3.0.10" -ValidateOnly
+$fixtureManifest = Get-Content -Raw $manifestPath |
+    ConvertFrom-Json -Depth 20
+$fixtureLatest = @($fixtureManifest.versions | Where-Object latestStable)
+$candidateVersion = if ([string]::IsNullOrWhiteSpace($ReleaseVersion)) {
+    if ($fixtureLatest.Count -ne 1) {
+        throw "The release fixture requires exactly one latest stable version."
+    }
+    [string]$fixtureLatest[0].version
+} else {
+    $ReleaseVersion
+}
+$candidateEntries = @(
+    $fixtureManifest.versions |
+        Where-Object version -eq $candidateVersion
+)
+$priorPublishedVersions = @(
+    $fixtureManifest.versions |
+        Where-Object {
+            $_.version -ne "current" -and
+            $_.published -and
+            $_.version -ne $candidateVersion
+        } |
+        Sort-Object {
+            [System.Management.Automation.SemanticVersion]::Parse(
+                $_.version
+            )
+        } -Descending |
+        ForEach-Object version
+)
+if ($candidateEntries.Count -ne 1 -or
+    -not $candidateEntries[0].published -or
+    $priorPublishedVersions.Count -eq 0) {
+    throw "The release fixture requires one published candidate and at least one prior published version."
+}
+$candidateEntry = $candidateEntries[0]
+$candidateSemanticVersion =
+    [System.Management.Automation.SemanticVersion]::Parse($candidateVersion)
+$previousLatestEntry = if ($candidateEntry.latestStable) {
+    @(
+        $fixtureManifest.versions |
+            Where-Object {
+                $_.version -ne "current" -and
+                $_.published -and
+                $_.version -ne $candidateVersion -and
+                [System.Management.Automation.SemanticVersion]::Parse(
+                    $_.version
+                ) -lt $candidateSemanticVersion
+            } |
+            Sort-Object {
+                [System.Management.Automation.SemanticVersion]::Parse(
+                    $_.version
+                )
+            } -Descending
+    )[0]
+} else {
+    $fixtureLatest[0]
+}
+if ($null -eq $previousLatestEntry) {
+    throw "The release fixture requires a default predecessor."
+}
+$previousLatestVersion = [string]$previousLatestEntry.version
+$canPromoteCandidate =
+    $candidateSemanticVersion -gt
+        [System.Management.Automation.SemanticVersion]::Parse(
+            $previousLatestVersion
+        )
+
+& (Join-Path $PSScriptRoot "build.ps1") `
+    -Version $candidateVersion `
+    -ValidateOnly
 $aotParameters = @{
     RequireNativeAot = $RequireNativeAot
 }
@@ -117,7 +186,7 @@ try {
     $badExampleTargets = Join-Path $badExampleRoot "Directory.Build.targets"
     $badExampleText = (Get-Content -Raw $badExampleTargets).Replace(
         'Version="$(HumanizerPackageVersion)"',
-        'Version="3.0.10"'
+        "Version=`"$candidateVersion`""
     )
     [System.IO.File]::WriteAllText(
         $badExampleTargets,
@@ -125,24 +194,21 @@ try {
         [System.Text.UTF8Encoding]::new($false)
     )
     & pwsh -NoProfile -File (Join-Path $PSScriptRoot "verify-examples.ps1") `
-        -Version "2.10.1" `
+        -Version $previousLatestVersion `
         -ExamplesRoot $badExampleRoot *> $null
     if ($LASTEXITCODE -eq 0) {
         throw "An example restored against the wrong package version."
     }
 
-    $manifest = Get-Content -Raw $manifestPath | ConvertFrom-Json -Depth 20
-    $stableEntry = @(
-        $manifest.versions |
-            Where-Object version -eq "3.0.10"
-    )[0]
     $mixedPackageGraphFailed = $false
     try {
         Assert-DocsHumanizerPackageGraph `
-            -Entry $stableEntry `
+            -Entry $candidateEntry `
             -Libraries ([PSCustomObject]@{
-                "Humanizer/3.0.10" = [PSCustomObject]@{ type = "package" }
-                "Humanizer.Core/3.0.8" = [PSCustomObject]@{ type = "package" }
+                "Humanizer/$candidateVersion" =
+                    [PSCustomObject]@{ type = "package" }
+                "Humanizer.Core/$previousLatestVersion" =
+                    [PSCustomObject]@{ type = "package" }
             }) `
             -Context "Synthetic example"
     } catch {
@@ -156,7 +222,7 @@ try {
     $extractedDllHashes = [System.Collections.Generic.List[string]]::new()
     foreach ($iteration in 1..2) {
         Use-DocsNuGetPackage `
-            -Entry $stableEntry `
+            -Entry $candidateEntry `
             -RepoRoot $repoRoot `
             -Action {
             param($package)
@@ -164,7 +230,7 @@ try {
             [void]$extractPaths.Add($package.ExtractPath)
             $dllPath = Join-Path (
                 $package.ExtractPath
-            ) "lib/$($stableEntry.referenceTfm)/Humanizer.dll"
+            ) "lib/$($candidateEntry.referenceTfm)/Humanizer.dll"
             [void]$extractedDllHashes.Add(
                 (Get-FileHash $dllPath -Algorithm SHA256).Hash
             )
@@ -328,7 +394,7 @@ try {
     $journalSourceTwo = Join-Path $tempRoot "journal-source-two.json"
     [System.IO.File]::WriteAllText(
         $journalInvariantVersions,
-        "[`"3.0.10`"]`n",
+        "[`"$candidateVersion`"]`n",
         [System.Text.UTF8Encoding]::new($false)
     )
     [System.IO.File]::WriteAllText(
@@ -403,16 +469,53 @@ try {
         }
     }
 
-    $snapshotPath = Join-Path $repoRoot "website/versioned_docs/version-3.0.10"
-    $sidebarsPath = Join-Path $repoRoot "website/versioned_sidebars/version-3.0.10-sidebars.json"
+    $validationRollbackFailed = $false
+    try {
+        Invoke-SnapshotTransaction `
+            -WebsiteRoot $journalInvariantRoot `
+            -Changes @(
+                [PSCustomObject]@{
+                    Target = "versions.json"
+                    Source = $journalSourceOne
+                },
+                [PSCustomObject]@{
+                    Target = "humanizer-versions.json"
+                    Source = $journalSourceTwo
+                }
+            ) `
+            -Validate {
+                throw "Synthetic post-install validation failure."
+            }
+    } catch {
+        $validationRollbackFailed =
+            $_.Exception.Message -match
+                "Synthetic post-install validation failure"
+    }
+    if (-not $validationRollbackFailed -or
+        (Get-FileHash $journalInvariantVersions -Algorithm SHA256).Hash -ne
+            $journalInvariantVersionsHash -or
+        (Get-FileHash $journalInvariantManifest -Algorithm SHA256).Hash -ne
+            $journalInvariantManifestHash -or
+        (Test-Path (
+            Join-Path $journalInvariantRoot ".snapshot-transaction"
+        ))) {
+        throw "Post-install validation failure was not rolled back atomically."
+    }
+
+    $snapshotPath = Join-Path $repoRoot (
+        "website/versioned_docs/version-$candidateVersion"
+    )
+    $sidebarsPath = Join-Path $repoRoot (
+        "website/versioned_sidebars/version-$candidateVersion-sidebars.json"
+    )
     $versionsPath = Join-Path $repoRoot "website/versions.json"
     $snapshotDigest = Get-SnapshotDirectoryDigest $snapshotPath
     $sidebarsHash = (Get-FileHash $sidebarsPath -Algorithm SHA256).Hash
     $versionsHash = (Get-FileHash $versionsPath -Algorithm SHA256).Hash
 
     foreach ($rejectedArguments in @(
-        @("-Version", "3.0.10"),
-        @("-Version", "3.0.10", "-CorrectPage", "api/Humanizer.StringHumanizeExtensions.md"),
+        @("-Version", $candidateVersion),
+        @("-Version", $candidateVersion, "-CorrectPage", "api/Humanizer.StringHumanizeExtensions.md"),
         @("-All")
     )) {
         & pwsh -NoProfile -File (
@@ -481,7 +584,7 @@ try {
         }
     try {
         & (Join-Path $PSScriptRoot "snapshot.ps1") `
-            -Version "3.0.10" `
+            -Version $candidateVersion `
             -Check `
             -ManifestPath $isolatedManifestPath `
             -WebsiteRoot $isolatedWebsiteRoot *> $null
@@ -501,11 +604,43 @@ try {
         throw "Snapshot check did not retain the global lock: $lockProbeResult"
     }
 
+    $isolatedFixtureManifest = Get-Content -Raw $isolatedManifestPath |
+        ConvertFrom-Json -Depth 20
+    $identicalOverlayFixture = @(
+        foreach ($entry in $isolatedFixtureManifest.versions) {
+            if ([string]::IsNullOrWhiteSpace(
+                $entry.compatibilityOverlay
+            )) {
+                continue
+            }
+            $overlayRoot = Join-Path (
+                $isolatedWebsiteRoot
+            ) $entry.compatibilityOverlay
+            $overlay = Get-Content -Raw (
+                Join-Path $overlayRoot "overlay.json"
+            ) | ConvertFrom-Json -Depth 20
+            foreach ($path in @($overlay.replacements)) {
+                if (Test-Path (
+                    Join-Path $isolatedWebsiteRoot "docs/$path"
+                ) -PathType Leaf) {
+                    [PSCustomObject]@{
+                        Entry = $entry
+                        Path = $path
+                        Root = $overlayRoot
+                    }
+                }
+            }
+        }
+    )[0]
+    if ($null -eq $identicalOverlayFixture) {
+        throw "The documentation fixture requires one authored overlay replacement."
+    }
+    $identicalOverlayRelativePath = $identicalOverlayFixture.Path
     $identicalOverlayPath = Join-Path (
-        $isolatedWebsiteRoot
-    ) "version-overrides/3.0.10/analyzer/index.mdx"
+        $identicalOverlayFixture.Root
+    ) $identicalOverlayRelativePath
     Copy-Item (
-        Join-Path $isolatedWebsiteRoot "docs/analyzer/index.mdx"
+        Join-Path $isolatedWebsiteRoot "docs/$identicalOverlayRelativePath"
     ) $identicalOverlayPath -Force
     & pwsh -NoProfile -File (
         Join-Path $PSScriptRoot "verify-manifest.ps1"
@@ -516,12 +651,17 @@ try {
         throw "A byte-identical overlay unexpectedly passed."
     }
     Copy-Item (
-        Join-Path $repoRoot "website/version-overrides/3.0.10/analyzer/index.mdx"
+        Join-Path (
+            Join-Path $repoRoot (
+                "website/$($identicalOverlayFixture.Entry.compatibilityOverlay)"
+            )
+        ) $identicalOverlayRelativePath
     ) $identicalOverlayPath -Force
 
+    $oldestPublishedVersion = $priorPublishedVersions[-1]
     $deletedPublishedPath = Join-Path (
         $isolatedWebsiteRoot
-    ) "versioned_docs/version-2.10.1/start/overview.mdx"
+    ) "versioned_docs/version-$oldestPublishedVersion/start/overview.mdx"
     Remove-Item $deletedPublishedPath -Force
     & pwsh -NoProfile -File (
         Join-Path $PSScriptRoot "snapshot.ps1"
@@ -534,7 +674,9 @@ try {
         throw "A deleted published snapshot file unexpectedly passed."
     }
     Copy-Item (
-        Join-Path $repoRoot "website/versioned_docs/version-2.10.1/start/overview.mdx"
+        Join-Path $repoRoot (
+            "website/versioned_docs/version-$oldestPublishedVersion/start/overview.mdx"
+        )
     ) $deletedPublishedPath
 
     $transactionRoot = Join-Path $isolatedWebsiteRoot ".snapshot-transaction"
@@ -717,17 +859,33 @@ try {
         -ManifestPath $isolatedManifestPath `
         -WebsiteRoot $isolatedWebsiteRoot *> $null
 
-    $priorVersions = @(
-        "2.10.1",
-        "2.11.10",
-        "2.13.14",
-        "2.14.1",
-        "3.0.1",
-        "3.0.8"
-    )
-    $priorState = @{}
     $isolatedManifest = Get-Content -Raw $isolatedManifestPath |
         ConvertFrom-Json -Depth 20
+    $isolatedCandidateEntries = @(
+        $isolatedManifest.versions |
+            Where-Object version -eq $candidateVersion
+    )
+    $priorVersions = @(
+        $isolatedManifest.versions |
+            Where-Object {
+                $_.version -ne "current" -and
+                $_.published -and
+                $_.version -ne $candidateVersion
+            } |
+            Sort-Object {
+                [System.Management.Automation.SemanticVersion]::Parse(
+                    $_.version
+                )
+            } -Descending |
+            ForEach-Object version
+    )
+    if ($isolatedCandidateEntries.Count -ne 1 -or
+        -not $isolatedCandidateEntries[0].published -or
+        $priorVersions.Count -eq 0 -or
+        $previousLatestVersion -notin $priorVersions) {
+        throw "The isolated release fixture has invalid publication state."
+    }
+    $priorState = @{}
     foreach ($priorVersion in $priorVersions) {
         $priorEntry = @(
             $isolatedManifest.versions |
@@ -750,10 +908,10 @@ try {
     }
     $releaseSnapshotPath = Join-Path (
         $isolatedWebsiteRoot
-    ) "versioned_docs/version-3.0.10"
+    ) "versioned_docs/version-$candidateVersion"
     $releaseSidebarPath = Join-Path (
         $isolatedWebsiteRoot
-    ) "versioned_sidebars/version-3.0.10-sidebars.json"
+    ) "versioned_sidebars/version-$candidateVersion-sidebars.json"
     $releaseSnapshotDigest = Get-SnapshotDirectoryDigest $releaseSnapshotPath
     $releaseSidebarHash = (
         Get-FileHash $releaseSidebarPath -Algorithm SHA256
@@ -777,7 +935,7 @@ try {
     ) -Force
     $releaseOverlayRoot = Join-Path (
         $isolatedWebsiteRoot
-    ) "version-overrides/3.0.10"
+    ) $isolatedCandidateEntries[0].compatibilityOverlay
     $releaseOverlay = Get-Content -Raw (
         Join-Path $releaseOverlayRoot "overlay.json"
     ) | ConvertFrom-Json -Depth 20
@@ -792,113 +950,211 @@ try {
             -Force | Out-Null
         Copy-Item (Join-Path $canonicalDocsRoot $path) $destination -Force
     }
-    $oldLatest = @(
+    foreach ($priorEntry in (
         $isolatedManifest.versions |
-            Where-Object version -eq "3.0.8"
+            Where-Object {
+                $_.version -ne "current" -and
+                $_.version -ne $candidateVersion
+            }
+    )) {
+        $priorEntry.latestStable = $false
+        $priorEntry.route = $priorEntry.version
+        $priorEntry.label = $priorEntry.version
+    }
+    $previousLatest = @(
+        $isolatedManifest.versions |
+            Where-Object version -eq $previousLatestVersion
     )[0]
-    $oldLatest.latestStable = $true
-    $oldLatest.route = ""
-    $oldLatest.label = "3.0.8 (latest)"
+    $previousLatest.latestStable = $true
+    $previousLatest.route = ""
+    $previousLatest.label = "$previousLatestVersion (latest)"
     $future = @(
         $isolatedManifest.versions |
-            Where-Object version -eq "3.0.10"
+            Where-Object version -eq $candidateVersion
     )[0]
     $future.published = $false
     $future.latestStable = $false
-    $future.route = "3.0.10"
-    $future.label = "3.0.10"
+    $future.route = $candidateVersion
+    $future.label = $candidateVersion
     $future.PSObject.Properties.Remove("immutability")
     Write-SnapshotJson -Value $isolatedManifest -Path $isolatedManifestPath
     Write-SnapshotJson `
-        -Value @($priorVersions | Sort-Object {
-            [System.Management.Automation.SemanticVersion]::Parse($_)
-        } -Descending) `
+        -Value $priorVersions `
         -Path (Join-Path $isolatedWebsiteRoot "versions.json") `
         -AsArray
     Remove-Item (
-        Join-Path $isolatedWebsiteRoot "versioned_docs/version-3.0.10"
+        Join-Path $isolatedWebsiteRoot (
+            "versioned_docs/version-$candidateVersion"
+        )
     ) -Recurse -Force
     Remove-Item (
         Join-Path $isolatedWebsiteRoot (
-            "versioned_sidebars/version-3.0.10-sidebars.json"
+            "versioned_sidebars/version-$candidateVersion-sidebars.json"
         )
     ) -Force
-    & (Join-Path $PSScriptRoot "snapshot.ps1") `
-        -Version "3.0.10" `
-        -PromoteLatest `
-        -ManifestPath $isolatedManifestPath `
-        -WebsiteRoot $isolatedWebsiteRoot *> $null
-    $releasedManifest = Get-Content -Raw $isolatedManifestPath |
-        ConvertFrom-Json -Depth 20
-    $releasedEntry = @(
-        $releasedManifest.versions |
-            Where-Object version -eq "3.0.10"
-    )[0]
-    if ($releasedEntry.immutability.snapshotSha256 -ne
-            $releaseSnapshotDigest -or
-        $releasedEntry.immutability.sidebarSha256 -ne
-            $releaseSidebarHash -or
-        (Get-SnapshotDirectoryDigest (
-            Join-Path $isolatedWebsiteRoot (
-                "versioned_docs/version-3.0.10"
-            )
-        )) -ne $releaseSnapshotDigest -or
-        (Get-FileHash (
-            Join-Path $isolatedWebsiteRoot (
-                "versioned_sidebars/version-3.0.10-sidebars.json"
-            )
-        ) -Algorithm SHA256).Hash -ne $releaseSidebarHash) {
-        throw "Release round trip changed immutable 3.0.10 state."
-    }
-    foreach ($priorVersion in $priorVersions) {
-        $releasedEntry = @(
-            $releasedManifest.versions |
-                Where-Object version -eq $priorVersion
-        )[0]
-        $before = $priorState[$priorVersion]
-        if ($releasedEntry.immutability.snapshotSha256 -ne
-                $before.ManifestSnapshot -or
-            $releasedEntry.immutability.sidebarSha256 -ne
-                $before.ManifestSidebar -or
+
+    $assertReleaseRoundTrip = {
+        param(
+            [Parameter(Mandatory = $true)]$ReleasedManifest,
+            [Parameter(Mandatory = $true)][string]$Mode
+        )
+
+        $releasedCandidates = @(
+            $ReleasedManifest.versions |
+                Where-Object version -eq $candidateVersion
+        )
+        if ($releasedCandidates.Count -ne 1) {
+            throw "$Mode release did not retain exactly one candidate."
+        }
+        $releasedCandidate = $releasedCandidates[0]
+        if ($releasedCandidate.immutability.snapshotSha256 -ne
+                $releaseSnapshotDigest -or
+            $releasedCandidate.immutability.sidebarSha256 -ne
+                $releaseSidebarHash -or
             (Get-SnapshotDirectoryDigest (
                 Join-Path $isolatedWebsiteRoot (
-                    "versioned_docs/version-$priorVersion"
+                    "versioned_docs/version-$candidateVersion"
                 )
-            )) -ne $before.LiveSnapshot -or
+            )) -ne $releaseSnapshotDigest -or
             (Get-FileHash (
                 Join-Path $isolatedWebsiteRoot (
-                    "versioned_sidebars/version-$priorVersion-sidebars.json"
+                    "versioned_sidebars/version-$candidateVersion-sidebars.json"
                 )
-            ) -Algorithm SHA256).Hash -ne $before.LiveSidebar) {
-            throw "Future release changed prior immutable state: $priorVersion"
+            ) -Algorithm SHA256).Hash -ne $releaseSidebarHash) {
+            throw "$Mode release round trip changed immutable $candidateVersion state."
+        }
+        foreach ($priorVersion in $priorVersions) {
+            $releasedPrior = @(
+                $ReleasedManifest.versions |
+                    Where-Object version -eq $priorVersion
+            )[0]
+            $before = $priorState[$priorVersion]
+            if ($releasedPrior.immutability.snapshotSha256 -ne
+                    $before.ManifestSnapshot -or
+                $releasedPrior.immutability.sidebarSha256 -ne
+                    $before.ManifestSidebar -or
+                (Get-SnapshotDirectoryDigest (
+                    Join-Path $isolatedWebsiteRoot (
+                        "versioned_docs/version-$priorVersion"
+                    )
+                )) -ne $before.LiveSnapshot -or
+                (Get-FileHash (
+                    Join-Path $isolatedWebsiteRoot (
+                        "versioned_sidebars/version-$priorVersion-sidebars.json"
+                    )
+                ) -Algorithm SHA256).Hash -ne $before.LiveSidebar) {
+                throw "$Mode release changed prior immutable state: $priorVersion"
+            }
         }
     }
 
-    $correctionPath = "scenarios/parse-number-words.mdx"
-    $isolatedOverlayPage = Join-Path (
-        $isolatedWebsiteRoot
-    ) "version-overrides/3.0.10/$correctionPath"
-    $isolatedSnapshotPage = Join-Path (
-        $isolatedWebsiteRoot
-    ) "versioned_docs/version-3.0.10/$correctionPath"
+    & (Join-Path $PSScriptRoot "snapshot.ps1") `
+        -Version $candidateVersion `
+        -ManifestPath $isolatedManifestPath `
+        -WebsiteRoot $isolatedWebsiteRoot *> $null
+    $nonDefaultManifest = Get-Content -Raw $isolatedManifestPath |
+        ConvertFrom-Json -Depth 20
+    & $assertReleaseRoundTrip `
+        -ReleasedManifest $nonDefaultManifest `
+        -Mode "Non-default"
+    $nonDefaultCandidate = @(
+        $nonDefaultManifest.versions |
+            Where-Object version -eq $candidateVersion
+    )[0]
+    $nonDefaultLatest = @(
+        $nonDefaultManifest.versions |
+            Where-Object version -eq $previousLatestVersion
+    )[0]
+    if (-not $nonDefaultCandidate.published -or
+        $nonDefaultCandidate.latestStable -or
+        $nonDefaultCandidate.route -ne $candidateVersion -or
+        $nonDefaultCandidate.label -ne $candidateVersion -or
+        -not $nonDefaultLatest.latestStable -or
+        $nonDefaultLatest.route -ne "" -or
+        $nonDefaultLatest.label -ne "$previousLatestVersion (latest)") {
+        throw "Non-default publication changed latest-version routing."
+    }
+
+    if ($canPromoteCandidate) {
+        $nonDefaultCandidate.published = $false
+        $nonDefaultCandidate.PSObject.Properties.Remove("immutability")
+        Write-SnapshotJson `
+            -Value $nonDefaultManifest `
+            -Path $isolatedManifestPath
+        Write-SnapshotJson `
+            -Value $priorVersions `
+            -Path (Join-Path $isolatedWebsiteRoot "versions.json") `
+            -AsArray
+        Remove-Item (
+            Join-Path $isolatedWebsiteRoot (
+                "versioned_docs/version-$candidateVersion"
+            )
+        ) -Recurse -Force
+        Remove-Item (
+            Join-Path $isolatedWebsiteRoot (
+                "versioned_sidebars/version-$candidateVersion-sidebars.json"
+            )
+        ) -Force
+        & (Join-Path $PSScriptRoot "snapshot.ps1") `
+            -Version $candidateVersion `
+            -PromoteLatest `
+            -ManifestPath $isolatedManifestPath `
+            -WebsiteRoot $isolatedWebsiteRoot *> $null
+        $releasedManifest = Get-Content -Raw $isolatedManifestPath |
+            ConvertFrom-Json -Depth 20
+        & $assertReleaseRoundTrip `
+            -ReleasedManifest $releasedManifest `
+            -Mode "Promoted"
+        $promotedCandidate = @(
+            $releasedManifest.versions |
+                Where-Object version -eq $candidateVersion
+        )[0]
+        $demotedLatest = @(
+            $releasedManifest.versions |
+                Where-Object version -eq $previousLatestVersion
+        )[0]
+        if (-not $promotedCandidate.latestStable -or
+            $promotedCandidate.route -ne "" -or
+            $promotedCandidate.label -ne "$candidateVersion (latest)" -or
+            $demotedLatest.latestStable -or
+            $demotedLatest.route -ne $previousLatestVersion -or
+            $demotedLatest.label -ne $previousLatestVersion) {
+            throw "Promoted publication did not update latest-version routing."
+        }
+    } else {
+        $releasedManifest = $nonDefaultManifest
+    }
+
+    $correctionPath = "start/overview.mdx"
+    $correctionSourceRoot = if (
+        $correctionPath -in @($releaseOverlay.replacements)
+    ) {
+        $releaseOverlayRoot
+    } else {
+        Join-Path $isolatedWebsiteRoot "docs"
+    }
+    $isolatedCorrectionPage = Join-Path $correctionSourceRoot $correctionPath
+    $isolatedSnapshotPage = Join-Path $releaseSnapshotPath $correctionPath
+    if (-not (Test-Path $isolatedCorrectionPage -PathType Leaf) -or
+        -not (Test-Path $isolatedSnapshotPage -PathType Leaf)) {
+        throw "The release fixture requires the authored overview page."
+    }
     $snapshotPageHash = (
         Get-FileHash $isolatedSnapshotPage -Algorithm SHA256
     ).Hash
-    $snapshotTreeDigest = Get-SnapshotDirectoryDigest (
-        Split-Path (Split-Path $isolatedSnapshotPage -Parent) -Parent
-    )
+    $snapshotTreeDigest = Get-SnapshotDirectoryDigest $releaseSnapshotPath
     $manifestHash = (Get-FileHash $isolatedManifestPath -Algorithm SHA256).Hash
     $recordedDigest = @(
         $releasedManifest.versions |
-            Where-Object version -eq "3.0.10"
+            Where-Object version -eq $candidateVersion
     )[0].immutability.snapshotSha256
     Add-Content `
-        $isolatedOverlayPage `
+        $isolatedCorrectionPage `
         "`n[broken correction](./missing-correction.mdx)"
     $correctionFailed = $false
     try {
         & (Join-Path $PSScriptRoot "snapshot.ps1") `
-            -Version "3.0.10" `
+            -Version $candidateVersion `
             -CorrectPage $correctionPath `
             -ManifestPath $isolatedManifestPath `
             -WebsiteRoot $isolatedWebsiteRoot *> $null
@@ -910,14 +1166,13 @@ try {
     if (-not $correctionFailed -or
         (Get-FileHash $isolatedSnapshotPage -Algorithm SHA256).Hash -ne
             $snapshotPageHash -or
-        (Get-SnapshotDirectoryDigest (
-            Split-Path (Split-Path $isolatedSnapshotPage -Parent) -Parent
-        )) -ne $snapshotTreeDigest -or
+        (Get-SnapshotDirectoryDigest $releaseSnapshotPath) -ne
+            $snapshotTreeDigest -or
         (Get-FileHash $isolatedManifestPath -Algorithm SHA256).Hash -ne
             $manifestHash -or
         @(
             $afterFailedManifest.versions |
-                Where-Object version -eq "3.0.10"
+                Where-Object version -eq $candidateVersion
         )[0].immutability.snapshotSha256 -ne $recordedDigest) {
         throw "Failed staged correction changed content or immutable digest."
     }

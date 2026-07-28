@@ -4,6 +4,40 @@ test('deployed site preserves reader, version, search, and legacy contracts', as
   page,
   request,
 }) => {
+  const expectedSha = process.env.HUMANIZER_DOCS_EXPECTED_SHA;
+  if (!expectedSha || !/^[0-9a-f]{40}$/.test(expectedSha)) {
+    throw new Error('HUMANIZER_DOCS_EXPECTED_SHA must be a full Git SHA.');
+  }
+  await expect
+    .poll(
+      async () => {
+        const response = await request.get(
+          `/deployment.json?expected=${expectedSha}`,
+          {
+            headers: {
+              'cache-control': 'no-cache',
+            },
+          },
+        );
+        if (!response.ok()) {
+          return undefined;
+        }
+        const deployment = (await response.json()) as {sourceSha?: string};
+        return deployment.sourceSha;
+      },
+      {
+        intervals: [1_000, 2_000, 5_000, 10_000],
+        timeout: 120_000,
+      },
+    )
+    .toBe(expectedSha);
+
+  if (process.env.HUMANIZER_DOCS_BOOTSTRAP_ROLLBACK === 'true') {
+    const response = await page.goto('/');
+    expect(response?.ok()).toBe(true);
+    return;
+  }
+
   await page.goto('/');
   await expect(
     page.getByRole('heading', {name: 'Make software sound like people.'}),

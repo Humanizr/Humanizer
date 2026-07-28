@@ -322,9 +322,8 @@ $publishedStableVersions = @($stableVersions | Where-Object published)
 if ($latest.Count -ne 1 -or
     $latest[0].route -ne "" -or
     -not $latest[0].published -or
-    $publishedStableVersions.Count -eq 0 -or
-    $latest[0].version -ne $publishedStableVersions[-1].version) {
-    throw "Exactly one published newest stable version must own the empty route."
+    $publishedStableVersions.Count -eq 0) {
+    throw "Exactly one published stable version must own the empty route."
 }
 foreach ($entry in $stableVersions | Where-Object { -not $_.latestStable }) {
     if ($entry.route -ne $entry.version) {

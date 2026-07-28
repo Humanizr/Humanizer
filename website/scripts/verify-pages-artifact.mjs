@@ -3,33 +3,38 @@ import {lstat, readFile, readdir} from 'node:fs/promises';
 import {join, resolve} from 'node:path';
 
 const buildRoot = resolve(process.argv[2] ?? 'build');
-const requiredFiles = [
-  '.nojekyll',
-  '404.html',
-  'CNAME',
-  'docs/2.10.1/index.html',
-  'docs/index.html',
-  'docs/next/index.html',
-  'index.html',
-  'pagefind/pagefind.js',
-  'robots.txt',
-  'search-index-docs-default-current.json',
-  'sitemap.xml',
-];
+const bootstrapRollback = process.argv.includes('--bootstrap-rollback');
+const requiredFiles = bootstrapRollback
+  ? ['deployment.json', 'index.html']
+  : [
+      '.nojekyll',
+      '404.html',
+      'CNAME',
+      'docs/2.10.1/index.html',
+      'docs/index.html',
+      'docs/next/index.html',
+      'index.html',
+      'pagefind/pagefind.js',
+      'robots.txt',
+      'search-index-docs-default-current.json',
+      'sitemap.xml',
+    ];
 
 for (const path of requiredFiles) {
   const stats = await lstat(join(buildRoot, path));
   assert(stats.isFile(), `Pages artifact is missing ${path}.`);
 }
 
-assert.equal(
-  (await readFile(join(buildRoot, 'CNAME'), 'utf8')).trim(),
-  'humanizr.net',
-);
-assert.match(
-  await readFile(join(buildRoot, 'robots.txt'), 'utf8'),
-  /Sitemap: https:\/\/humanizr\.net\/sitemap\.xml/,
-);
+if (!bootstrapRollback) {
+  assert.equal(
+    (await readFile(join(buildRoot, 'CNAME'), 'utf8')).trim(),
+    'humanizr.net',
+  );
+  assert.match(
+    await readFile(join(buildRoot, 'robots.txt'), 'utf8'),
+    /Sitemap: https:\/\/humanizr\.net\/sitemap\.xml/,
+  );
+}
 
 async function rejectLinks(directory) {
   for (const entry of await readdir(directory, {withFileTypes: true})) {
@@ -47,5 +52,7 @@ async function rejectLinks(directory) {
 
 await rejectLinks(buildRoot);
 console.log(
-  'Pages artifact passed: custom domain, stable/history/preview roots, search, SEO, and link safety.',
+  bootstrapRollback
+    ? 'Bootstrap rollback artifact passed: deployment identity, homepage, and link safety.'
+    : 'Pages artifact passed: custom domain, stable/history/preview roots, search, SEO, and link safety.',
 );

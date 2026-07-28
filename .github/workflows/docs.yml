@@ -11,16 +11,29 @@ on:
         description: Redeploy the retained artifact from this documentation run
         required: false
         type: string
+      expected_pointer_run_id:
+        description: Automation guard for a queued recovery
+        required: false
+        type: string
 
 permissions: {}
 
 concurrency:
   group: >-
-    ${{ github.workflow }}-${{
-      github.event_name == 'pull_request' && github.event.pull_request.number ||
-      'production'
+    ${{
+      github.event_name == 'pull_request' &&
+      format(
+        'documentation-pr-{0}-{1}',
+        github.event.pull_request.number,
+        github.run_id
+      ) ||
+      github.event_name == 'workflow_dispatch' &&
+      inputs.rollback_run_id == '' &&
+      format('documentation-validation-{0}', github.ref) ||
+      'pages'
     }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  queue: max
+  cancel-in-progress: false
 
 env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
@@ -28,13 +41,19 @@ env:
 
 jobs:
   build:
+    outputs:
+      bootstrap_rollback: >-
+        ${{ steps.rollback-source.outputs.bootstrap_rollback || 'false' }}
+      recovery_stale: >-
+        ${{ steps.rollback-source.outputs.recovery_stale || 'false' }}
+      source_sha: ${{ steps.deployment-identity.outputs.source_sha }}
     permissions:
       actions: read
       contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
 
@@ -49,17 +68,17 @@ jobs:
 
       - name: Setup .NET
         if: inputs.rollback_run_id == ''
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           global-json-file: global.json
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
         with:
           package_json_file: website/package.json
 
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version-file: website/.node-version
           cache: pnpm
@@ -67,7 +86,7 @@ jobs:
 
       - name: Cache immutable documentation packages
         if: inputs.rollback_run_id == ''
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: /tmp/humanizer-docs-nuget/**/*.nupkg
           key: >-
@@ -127,8 +146,10 @@ jobs:
         run: pnpm --dir website run test:ci
 
       - name: Validate rollback source
+        id: rollback-source
         if: inputs.rollback_run_id != ''
         env:
+          EXPECTED_POINTER_RUN_ID: ${{ inputs.expected_pointer_run_id }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
         run: |
@@ -136,18 +157,115 @@ jobs:
             echo "Rollback run ID must be numeric." >&2
             exit 1
           fi
+          if [[ -n "$EXPECTED_POINTER_RUN_ID" ]]; then
+            if [[ "$EXPECTED_POINTER_RUN_ID" != none &&
+                  ! "$EXPECTED_POINTER_RUN_ID" =~ ^[0-9]+$ ]]; then
+              echo "Expected deployment pointer run ID is invalid." >&2
+              exit 1
+            fi
+            current_pointer_run_id=none
+            if gh release view docs-pages-archive >/dev/null 2>&1; then
+              release_id="$(
+                gh api \
+                  "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
+                  --jq .id
+              )"
+              pointer_asset_id="$(
+                gh api \
+                  --paginate \
+                  "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
+                  --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id] | @tsv' |
+                  sort -r |
+                  head -n 1 |
+                  cut -f 2
+              )"
+              if [[ -n "$pointer_asset_id" ]]; then
+                gh api \
+                  -H "Accept: application/octet-stream" \
+                  "repos/${GITHUB_REPOSITORY}/releases/assets/${pointer_asset_id}" \
+                  > current-deployment.json
+                current_pointer_run_id="$(
+                  jq -r '.deploymentRunId // empty' current-deployment.json
+                )"
+                if [[ ! "$current_pointer_run_id" =~ ^[0-9]+$ ]]; then
+                  echo "Current deployment pointer is invalid." >&2
+                  exit 1
+                fi
+              fi
+            fi
+            if [[ "$current_pointer_run_id" != "$EXPECTED_POINTER_RUN_ID" ]]; then
+              echo "Recovery was superseded by a newer production result."
+              echo "recovery_stale=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
           source_run="$(
             gh api \
               "repos/${GITHUB_REPOSITORY}/actions/runs/${ROLLBACK_RUN_ID}" \
-              --jq '[.conclusion, .event, .head_branch, .path] | @tsv'
+              --jq '[.conclusion, .event, .head_branch, .path, .head_sha] | @tsv'
           )"
-          if [[ "$source_run" != $'success\tpush\tmain\t.github/workflows/docs.yml' ]]; then
-            echo "Rollback source must be a successful main documentation run." >&2
+          IFS=$'\t' read -r conclusion event branch path source_sha <<<"$source_run"
+          if [[ "$conclusion" != success ||
+                "$event" != push ||
+                "$branch" != main ||
+                ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Rollback source must be a successful main push." >&2
             exit 1
           fi
 
+          bootstrap_rollback=false
+          if [[ "$path" == ".github/workflows/docs.yml" ]]; then
+            :
+          elif [[ "$path" == ".github/workflows/jekyll-gh-pages.yml" ]]; then
+            runs="$(
+              gh api \
+                --paginate \
+                --slurp \
+                "repos/${GITHUB_REPOSITORY}/actions/runs?branch=main&event=push&status=success&per_page=100"
+            )"
+            latest_docs_run="$(
+              jq -r '
+                [
+                  .[].workflow_runs[]
+                  | select(.path == ".github/workflows/docs.yml")
+                ]
+                | sort_by(.created_at)
+                | last
+                | .id // empty
+              ' <<<"$runs"
+            )"
+            latest_legacy_run="$(
+              jq -r '
+                [
+                  .[].workflow_runs[]
+                  | select(.path == ".github/workflows/jekyll-gh-pages.yml")
+                ]
+                | sort_by(.created_at)
+                | last
+                | .id // empty
+              ' <<<"$runs"
+            )"
+            if [[ -n "$latest_docs_run" ||
+                  "$ROLLBACK_RUN_ID" != "$latest_legacy_run" ]]; then
+              echo "Legacy rollback is allowed only for the latest bootstrap deployment." >&2
+              exit 1
+            fi
+            bootstrap_rollback=true
+          else
+            echo "Rollback source is not an approved documentation workflow." >&2
+            exit 1
+          fi
+
+          {
+            echo "bootstrap_rollback=${bootstrap_rollback}"
+            echo "recovery_stale=false"
+            echo "source_sha=${source_sha}"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Restore retained Pages artifact
-        if: inputs.rollback_run_id != ''
+        if: >-
+          inputs.rollback_run_id != '' &&
+          steps.rollback-source.outputs.recovery_stale != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
@@ -155,10 +273,17 @@ jobs:
           mkdir -p rollback
           gh release download docs-pages-archive \
             --pattern "github-pages-${ROLLBACK_RUN_ID}.tar" \
+            --pattern "github-pages-${ROLLBACK_RUN_ID}.tar.sha256" \
             --dir rollback
+          (
+            cd rollback
+            sha256sum -c "github-pages-${ROLLBACK_RUN_ID}.tar.sha256"
+          )
 
       - name: Extract retained Pages artifact for verification
-        if: inputs.rollback_run_id != ''
+        if: >-
+          inputs.rollback_run_id != '' &&
+          steps.rollback-source.outputs.recovery_stale != 'true'
         env:
           ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
         run: |
@@ -167,68 +292,473 @@ jobs:
             "rollback/github-pages-${ROLLBACK_RUN_ID}.tar" \
             -C website/build
 
+      - name: Write deployment identity
+        id: deployment-identity
+        if: steps.rollback-source.outputs.recovery_stale != 'true'
+        env:
+          SOURCE_SHA: >-
+            ${{
+              inputs.rollback_run_id != '' &&
+              steps.rollback-source.outputs.source_sha ||
+              github.sha
+            }}
+        run: |
+          printf '{"sourceSha":"%s"}\n' "$SOURCE_SHA" \
+            > website/build/deployment.json
+          echo "source_sha=${SOURCE_SHA}" >> "$GITHUB_OUTPUT"
+
       - name: Verify complete Pages artifact
+        if: >-
+          steps.rollback-source.outputs.recovery_stale != 'true' &&
+          steps.rollback-source.outputs.bootstrap_rollback != 'true'
         run: pnpm --dir website run check:artifact
+
+      - name: Verify bootstrap rollback artifact
+        if: >-
+          steps.rollback-source.outputs.recovery_stale != 'true' &&
+          steps.rollback-source.outputs.bootstrap_rollback == 'true'
+        run: >-
+          node website/scripts/verify-pages-artifact.mjs
+          website/build
+          --bootstrap-rollback
 
       - name: Upload GitHub Pages artifact
         if: >-
-          github.event_name == 'push' ||
-          inputs.rollback_run_id != ''
-        uses: actions/upload-pages-artifact@v5
+          steps.rollback-source.outputs.recovery_stale != 'true' &&
+          (
+            github.event_name == 'push' ||
+            inputs.rollback_run_id != ''
+          )
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: website/build
           include-hidden-files: true
           retention-days: 7
 
+  retain-pages-artifacts:
+    if: github.event_name == 'push'
+    outputs:
+      prior_deployment_run_id: ${{ steps.prior.outputs.deployment_run_id }}
+      prior_run_id: ${{ steps.prior.outputs.run_id }}
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - name: Locate the currently deployable Pages run
+        id: prior
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          prior=
+          if gh release view docs-pages-archive >/dev/null 2>&1; then
+            release_id="$(
+              gh api \
+                "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
+                --jq .id
+            )"
+            pointer_asset="$(
+              gh api \
+                --paginate \
+                "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
+                --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id] | @tsv' |
+                sort -r |
+                head -n 1
+            )"
+            if [[ -n "$pointer_asset" ]]; then
+              IFS=$'\t' read -r _ pointer_asset_id <<<"$pointer_asset"
+              gh api \
+                -H "Accept: application/octet-stream" \
+                "repos/${GITHUB_REPOSITORY}/releases/assets/${pointer_asset_id}" \
+                > prior-deployment.json
+              prior="$(
+                jq -r \
+                  '[.archiveRunId, .sourceSha, ".github/workflows/docs.yml", .deploymentRunId] | @tsv' \
+                  prior-deployment.json
+              )"
+              IFS=$'\t' read -r run_id source_sha source_path deployment_run_id \
+                <<<"$prior"
+              if [[ ! "$run_id" =~ ^[0-9]+$ ||
+                    ! "$source_sha" =~ ^[0-9a-f]{40}$ ||
+                    ! "$deployment_run_id" =~ ^[0-9]+$ ]]; then
+                echo "Latest deployment pointer is invalid." >&2
+                exit 1
+              fi
+              pointer_run="$(
+                gh api \
+                  "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}" \
+                  --jq '[.conclusion, .event, .head_branch, .path] | @tsv'
+              )"
+              if [[ "$pointer_run" != $'success\tpush\tmain\t.github/workflows/docs.yml' &&
+                    "$pointer_run" != $'success\tworkflow_dispatch\tmain\t.github/workflows/docs.yml' ]]; then
+                echo "Latest deployment pointer is not backed by a successful main documentation run." >&2
+                exit 1
+              fi
+              archive_run="$(
+                gh api \
+                  "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" \
+                  --jq '[.conclusion, .event, .head_branch, .path, .head_sha] | @tsv'
+              )"
+              IFS=$'\t' read -r archive_conclusion archive_event \
+                archive_branch archive_path archive_sha <<<"$archive_run"
+              if [[ "$archive_conclusion" != success ||
+                    "$archive_event" != push ||
+                    "$archive_branch" != main ||
+                    "$archive_sha" != "$source_sha" ||
+                    (
+                      "$archive_path" != ".github/workflows/docs.yml" &&
+                      "$archive_path" != ".github/workflows/jekyll-gh-pages.yml"
+                    ) ]]; then
+                echo "Latest deployment pointer names an invalid archive source." >&2
+                exit 1
+              fi
+              if [[ "$archive_path" == ".github/workflows/jekyll-gh-pages.yml" ]]; then
+                bootstrap_runs="$(
+                  gh api \
+                    --paginate \
+                    --slurp \
+                    "repos/${GITHUB_REPOSITORY}/actions/runs?branch=main&event=push&status=success&per_page=100"
+                )"
+                latest_docs_run="$(
+                  jq -r '
+                    [
+                      .[].workflow_runs[]
+                      | select(.path == ".github/workflows/docs.yml")
+                    ]
+                    | sort_by(.created_at)
+                    | last
+                    | .id // empty
+                  ' <<<"$bootstrap_runs"
+                )"
+                latest_legacy_run="$(
+                  jq -r '
+                    [
+                      .[].workflow_runs[]
+                      | select(.path == ".github/workflows/jekyll-gh-pages.yml")
+                    ]
+                    | sort_by(.created_at)
+                    | last
+                    | .id // empty
+                  ' <<<"$bootstrap_runs"
+                )"
+                if [[ -n "$latest_docs_run" ||
+                      "$run_id" != "$latest_legacy_run" ]]; then
+                  echo "Legacy deployment pointer is no longer a valid bootstrap source." >&2
+                  exit 1
+                fi
+              fi
+            fi
+          fi
+
+          if [[ -z "$prior" ]]; then
+            runs="$(
+              gh api \
+                --paginate \
+                --slurp \
+                "repos/${GITHUB_REPOSITORY}/actions/runs?branch=main&event=push&status=success&per_page=100"
+            )"
+            prior="$(
+              jq -r '
+                [
+                  .[].workflow_runs[]
+                  | select(.path == ".github/workflows/docs.yml")
+                ]
+                | sort_by(.created_at)
+                | last
+                | [.id, .head_sha, .path]
+                | @tsv
+              ' <<<"$runs"
+            )"
+            if [[ "$prior" == "null	null	null" ]]; then
+              prior="$(
+                jq -r '
+                  [
+                    .[].workflow_runs[]
+                    | select(.path == ".github/workflows/jekyll-gh-pages.yml")
+                  ]
+                  | sort_by(.created_at)
+                  | last
+                  | [.id, .head_sha, .path]
+                  | @tsv
+                ' <<<"$runs"
+              )"
+            fi
+          fi
+          IFS=$'\t' read -r run_id source_sha source_path <<<"$prior"
+          if [[ ! "$run_id" =~ ^[0-9]+$ ||
+                ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "No successful main documentation deployment is available to retain." >&2
+            exit 1
+          fi
+          echo "Retaining prior deployment ${run_id} from ${source_path}."
+          {
+            echo "deployment_run_id=${deployment_run_id:-none}"
+            echo "run_id=${run_id}"
+            echo "source_sha=${source_sha}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Inspect retained prior artifact
+        id: prior-archive
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
+        run: |
+          archive_name="github-pages-${PRIOR_RUN_ID}.tar"
+          checksum_name="${archive_name}.sha256"
+          archive_count=0
+          checksum_count=0
+          if gh release view docs-pages-archive >/dev/null 2>&1; then
+            release_id="$(
+              gh api \
+                "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
+                --jq .id
+            )"
+            assets="$(
+              gh api \
+                --paginate \
+                --slurp \
+                "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100"
+            )"
+            archive_count="$(
+              jq --arg name "$archive_name" \
+                '[.[][] | select(.name == $name)] | length' <<<"$assets"
+            )"
+            checksum_count="$(
+              jq --arg name "$checksum_name" \
+                '[.[][] | select(.name == $name)] | length' <<<"$assets"
+            )"
+          fi
+          if [[ "$archive_count" == 1 && "$checksum_count" == 1 ]]; then
+            mkdir -p prior-archive
+            gh release download docs-pages-archive \
+              --pattern "$archive_name" \
+              --pattern "$checksum_name" \
+              --dir prior-archive
+            (
+              cd prior-archive
+              sha256sum -c "$checksum_name"
+            )
+            echo "download=false" >> "$GITHUB_OUTPUT"
+          elif [[ "$archive_count" == 0 && "$checksum_count" == 0 ]]; then
+            echo "download=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Prior rollback archive is incomplete or duplicated." >&2
+            exit 1
+          fi
+
+      - name: Download prior Pages artifact
+        if: steps.prior-archive.outputs.download == 'true'
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: github-pages
+          path: prior-download
+          repository: ${{ github.repository }}
+          run-id: ${{ steps.prior.outputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Retain and verify prior Pages artifact
+        if: steps.prior-archive.outputs.download == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
+          PRIOR_SOURCE_SHA: ${{ steps.prior.outputs.source_sha }}
+        run: |
+          mkdir -p prior-archive
+          archive_name="github-pages-${PRIOR_RUN_ID}.tar"
+          checksum_name="${archive_name}.sha256"
+          mv prior-download/artifact.tar "prior-archive/${archive_name}"
+          (
+            cd prior-archive
+            sha256sum "$archive_name" > "$checksum_name"
+            sha256sum -c "$checksum_name"
+          )
+          if ! gh release view docs-pages-archive >/dev/null 2>&1; then
+            gh release create docs-pages-archive \
+              --prerelease \
+              --target "$PRIOR_SOURCE_SHA" \
+              --title "Documentation deployment archive" \
+              --notes "Automation-owned Pages artifacts for exact rollback."
+          fi
+          gh release upload docs-pages-archive \
+            "prior-archive/${archive_name}" \
+            "prior-archive/${checksum_name}"
+          mkdir prior-verify
+          gh release download docs-pages-archive \
+            --pattern "$archive_name" \
+            --pattern "$checksum_name" \
+            --dir prior-verify
+          (
+            cd prior-verify
+            sha256sum -c "$checksum_name"
+          )
+
+      - name: Download current Pages artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: github-pages
+          path: current-archive
+
+      - name: Retain and verify current Pages artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
+        run: |
+          archive_name="github-pages-${GITHUB_RUN_ID}.tar"
+          checksum_name="${archive_name}.sha256"
+          mv current-archive/artifact.tar "current-archive/${archive_name}"
+          (
+            cd current-archive
+            sha256sum "$archive_name" > "$checksum_name"
+            sha256sum -c "$checksum_name"
+          )
+          if ! gh release view docs-pages-archive >/dev/null 2>&1; then
+            gh release create docs-pages-archive \
+              --prerelease \
+              --target "$GITHUB_SHA" \
+              --title "Documentation deployment archive" \
+              --notes "Automation-owned Pages artifacts for exact rollback."
+          fi
+          release_id="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
+              --jq .id
+          )"
+          existing_assets="$(
+            gh api \
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100"
+          )"
+          archive_count="$(
+            jq --arg name "$archive_name" \
+              '[.[][] | select(.name == $name)] | length' \
+              <<<"$existing_assets"
+          )"
+          checksum_count="$(
+            jq --arg name "$checksum_name" \
+              '[.[][] | select(.name == $name)] | length' \
+              <<<"$existing_assets"
+          )"
+          if [[ "$archive_count" == 0 && "$checksum_count" == 0 ]]; then
+            gh release upload docs-pages-archive \
+              "current-archive/${archive_name}" \
+              "current-archive/${checksum_name}"
+          elif [[ "$archive_count" == 1 && "$checksum_count" == 1 ]]; then
+            mkdir current-existing
+            gh release download docs-pages-archive \
+              --pattern "$archive_name" \
+              --pattern "$checksum_name" \
+              --dir current-existing
+            (
+              cd current-existing
+              sha256sum -c "$checksum_name"
+            )
+            mkdir current-tree existing-tree
+            tar -xf "current-archive/${archive_name}" -C current-tree
+            tar -xf "current-existing/${archive_name}" -C existing-tree
+            diff --no-dereference --recursive current-tree existing-tree
+          else
+            echo "Current rollback archive is incomplete or duplicated." >&2
+            exit 1
+          fi
+
+          mkdir current-verify
+          gh release download docs-pages-archive \
+            --pattern "$archive_name" \
+            --pattern "$checksum_name" \
+            --dir current-verify
+          (
+            cd current-verify
+            sha256sum -c "$checksum_name"
+          )
+
+          gh api \
+              --paginate \
+              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
+              --jq '.[] | select(.name | (startswith("github-pages-") and endswith(".tar"))) | [.created_at, .name] | @tsv' |
+            sort -r |
+            tail -n +11 |
+            while IFS=$'\t' read -r _ expired_name; do
+              if [[ "$expired_name" == "github-pages-${PRIOR_RUN_ID}.tar" ]]; then
+                echo "Keeping currently deployable rollback asset ${expired_name}."
+                continue
+              fi
+              for name in "$expired_name" "${expired_name}.sha256"; do
+                asset_id="$(
+                  gh api \
+                    --paginate \
+                    "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
+                    --jq ".[] | select(.name == \"${name}\") | .id" |
+                    head -n 1
+                )"
+                if [[ -n "$asset_id" ]]; then
+                  echo "Removing expired rollback asset ${name}."
+                  gh api \
+                    --method DELETE \
+                    "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}"
+                fi
+              done
+            done
+
   deploy:
     if: >-
-      github.event_name == 'push' ||
-      inputs.rollback_run_id != ''
+      always() &&
+      needs.build.result == 'success' &&
+      needs.build.outputs.recovery_stale != 'true' &&
+      (
+        inputs.rollback_run_id != '' ||
+        (
+          github.event_name == 'push' &&
+          needs.retain-pages-artifacts.result == 'success'
+        )
+      )
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs:
       - build
+      - retain-pages-artifacts
     permissions:
       contents: read
       id-token: write
       pages: write
     steps:
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
 
       - name: Deploy complete artifact
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5
 
   production-smoke:
     if: >-
-      github.event_name == 'push' ||
-      inputs.rollback_run_id != ''
+      always() &&
+      needs.build.result == 'success' &&
+      needs.deploy.result == 'success'
     runs-on: ubuntu-latest
     needs:
+      - build
       - deploy
     permissions:
-      actions: read
-      contents: write
+      contents: read
     steps:
       - name: Checkout production smoke tests
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
         with:
           package_json_file: website/package.json
 
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version-file: website/.node-version
-          cache: pnpm
-          cache-dependency-path: website/pnpm-lock.yaml
 
       - name: Install production smoke dependencies
         run: |
@@ -238,30 +768,48 @@ jobs:
       - name: Verify production custom domain
         env:
           HUMANIZER_DOCS_BASE_URL: https://humanizr.net
+          HUMANIZER_DOCS_BOOTSTRAP_ROLLBACK: >-
+            ${{ needs.build.outputs.bootstrap_rollback }}
+          HUMANIZER_DOCS_EXPECTED_SHA: ${{ needs.build.outputs.source_sha }}
         run: pnpm --dir website run test:production
 
-      - name: Download deployed Pages artifact
-        if: github.event_name == 'push'
-        uses: actions/download-artifact@v8
-        with:
-          name: github-pages
-          path: rollback
-
-      - name: Retain deployed artifact for rollback
-        if: github.event_name == 'push'
+  record-production-deployment:
+    if: >-
+      always() &&
+      needs.build.result == 'success' &&
+      needs.deploy.result == 'success' &&
+      needs.production-smoke.result == 'success'
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - deploy
+      - production-smoke
+    permissions:
+      contents: write
+    steps:
+      - name: Record exact currently deployable archive
         env:
+          ARCHIVE_RUN_ID: >-
+            ${{
+              inputs.rollback_run_id != '' &&
+              inputs.rollback_run_id ||
+              github.run_id
+            }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_SHA: ${{ needs.build.outputs.source_sha }}
         run: |
-          archive="rollback/github-pages-${GITHUB_RUN_ID}.tar"
-          mv rollback/artifact.tar "$archive"
-          if ! gh release view docs-pages-archive >/dev/null 2>&1; then
-            gh release create docs-pages-archive \
-              --prerelease \
-              --target "$GITHUB_SHA" \
-              --title "Documentation deployment archive" \
-              --notes "Automation-owned Pages artifacts for exact rollback."
+          if [[ ! "$ARCHIVE_RUN_ID" =~ ^[0-9]+$ ||
+                ! "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Deployment identity is invalid." >&2
+            exit 1
           fi
-
+          pointer_name="deployment-${GITHUB_RUN_ID}.json"
+          printf \
+            '{"archiveRunId":"%s","sourceSha":"%s","deploymentRunId":"%s"}\n' \
+            "$ARCHIVE_RUN_ID" \
+            "$SOURCE_SHA" \
+            "$GITHUB_RUN_ID" \
+            > "$pointer_name"
           release_id="$(
             gh api \
               "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
@@ -271,24 +819,110 @@ jobs:
             gh api \
               --paginate \
               "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-              --jq ".[] | select(.name == \"github-pages-${GITHUB_RUN_ID}.tar\") | .id" |
+              --jq ".[] | select(.name == \"${pointer_name}\") | .id" |
               head -n 1
           )"
           if [[ -z "$existing_asset_id" ]]; then
-            gh release upload docs-pages-archive "$archive"
+            gh release upload docs-pages-archive "$pointer_name"
           else
-            echo "Rollback archive for run ${GITHUB_RUN_ID} is already retained."
+            mkdir existing-pointer
+            gh api \
+              -H "Accept: application/octet-stream" \
+              "repos/${GITHUB_REPOSITORY}/releases/assets/${existing_asset_id}" \
+              > "existing-pointer/${pointer_name}"
+            cmp "$pointer_name" "existing-pointer/${pointer_name}"
           fi
-
           gh api \
               --paginate \
               "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-              --jq '.[] | select(.name | (startswith("github-pages-") and endswith(".tar"))) | [.created_at, .id, .name] | @tsv' |
+              --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id, .name] | @tsv' |
             sort -r |
             tail -n +11 |
             while IFS=$'\t' read -r _ asset_id asset_name; do
-              echo "Removing expired rollback archive ${asset_name}."
+              echo "Removing expired deployment pointer ${asset_name}."
               gh api \
                 --method DELETE \
                 "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}"
             done
+
+  recover-after-smoke-failure:
+    if: >-
+      always() &&
+      needs.deploy.result == 'success' &&
+      needs.production-smoke.result == 'failure' &&
+      (
+        (
+          github.event_name == 'push' &&
+          needs.retain-pages-artifacts.result == 'success'
+        ) ||
+        (
+          github.event_name == 'workflow_dispatch' &&
+          inputs.rollback_run_id != ''
+        )
+      )
+    runs-on: ubuntu-latest
+    needs:
+      - retain-pages-artifacts
+      - deploy
+      - production-smoke
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Dispatch exact retained recovery
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRIOR_DEPLOYMENT_RUN_ID: >-
+            ${{ needs.retain-pages-artifacts.outputs.prior_deployment_run_id }}
+          PRIOR_RUN_ID: ${{ needs.retain-pages-artifacts.outputs.prior_run_id }}
+          REQUESTED_ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
+        run: |
+          recovery_run_id="$PRIOR_RUN_ID"
+          expected_pointer_run_id="$PRIOR_DEPLOYMENT_RUN_ID"
+          if [[ -n "$REQUESTED_ROLLBACK_RUN_ID" ]]; then
+            release_id="$(
+              gh api \
+                "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
+                --jq .id
+            )"
+            pointer_asset_id="$(
+              gh api \
+                --paginate \
+                "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
+                --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id] | @tsv' |
+                sort -r |
+                head -n 1 |
+                cut -f 2
+            )"
+            if [[ ! "$pointer_asset_id" =~ ^[0-9]+$ ]]; then
+              echo "The last known-good deployment pointer is unavailable." >&2
+              exit 1
+            fi
+            gh api \
+              -H "Accept: application/octet-stream" \
+              "repos/${GITHUB_REPOSITORY}/releases/assets/${pointer_asset_id}" \
+              > prior-deployment.json
+            recovery_run_id="$(
+              jq -r '.archiveRunId // empty' prior-deployment.json
+            )"
+            expected_pointer_run_id="$(
+              jq -r '.deploymentRunId // empty' prior-deployment.json
+            )"
+            if [[ "$recovery_run_id" == "$REQUESTED_ROLLBACK_RUN_ID" ]]; then
+              echo "The last known-good artifact also failed smoke; automatic recovery stopped." >&2
+              exit 1
+            fi
+          fi
+          if [[ ! "$recovery_run_id" =~ ^[0-9]+$ ]]; then
+            echo "Retained recovery run ID is unavailable." >&2
+            exit 1
+          fi
+          if [[ "$expected_pointer_run_id" != none &&
+                ! "$expected_pointer_run_id" =~ ^[0-9]+$ ]]; then
+            echo "Retained deployment pointer run ID is unavailable." >&2
+            exit 1
+          fi
+          gh workflow run docs.yml \
+            --ref main \
+            -f "rollback_run_id=${recovery_run_id}" \
+            -f "expected_pointer_run_id=${expected_pointer_run_id}"
