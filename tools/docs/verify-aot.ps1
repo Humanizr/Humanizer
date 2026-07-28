@@ -27,6 +27,11 @@ $requestedVersions = @(
         "current"
     }
 )
+if ("current" -in $requestedVersions -and
+    $latestStableVersion -notin $requestedVersions) {
+    # Seed external AOT packages under the repository's trusted-signer policy.
+    $requestedVersions = @($latestStableVersion) + $requestedVersions
+}
 $entries = @(
     $manifest.versions |
         Where-Object { $_.version -in $requestedVersions }
@@ -68,6 +73,7 @@ $tempRoot = Join-Path (
 $packageRoot = Join-Path $tempRoot "packages"
 $restorePackagesRoot = Join-Path $tempRoot "restore-packages"
 $checkoutPackage = $null
+$checkoutNuGetConfig = Join-Path $tempRoot "NuGet.config"
 
 function Invoke-PublishedExample {
     param(
@@ -96,10 +102,7 @@ function Invoke-PublishedExample {
     }
     if ($Entry.source.kind -eq "checkout") {
         $arguments += "-p:HumanizerPackageVersion=$checkoutPackageVersion"
-        $arguments += @(
-            "--source", $packageRoot,
-            "--source", "https://api.nuget.org/v3/index.json"
-        )
+        $arguments += "-p:RestoreConfigFile=$checkoutNuGetConfig"
     } else {
         $arguments += "-p:HumanizerPackageVersion=$($Entry.source.packageVersion)"
     }
@@ -198,6 +201,26 @@ function Invoke-PublishedExample {
 try {
     if (@($entries | Where-Object { $_.source.kind -eq "checkout" }).Count -gt 0) {
         New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
+        $escapedPackageRoot = [System.Security.SecurityElement]::Escape(
+            $packageRoot
+        )
+        $checkoutNuGetConfigContents = @"
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <config>
+    <add key="signatureValidationMode" value="accept" />
+  </config>
+  <packageSources>
+    <clear />
+    <add key="checkout" value="$escapedPackageRoot" />
+  </packageSources>
+</configuration>
+"@
+        [System.IO.File]::WriteAllText(
+            $checkoutNuGetConfig,
+            $checkoutNuGetConfigContents,
+            [System.Text.UTF8Encoding]::new($false)
+        )
         & dotnet pack `
             (Join-Path $repoRoot "src/Humanizer/Humanizer.csproj") `
             --configuration Release `
