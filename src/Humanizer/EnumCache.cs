@@ -7,15 +7,28 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 {
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
     static readonly Type TypeOfT = typeof(T);
-    static readonly (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) Info = CreateInfo();
+    static readonly (
+        T Zero,
+        FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized,
+        FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
+        FrozenDictionary<string, T> Dehumanized,
+        FrozenSet<T> Values,
+        bool IsBitFieldEnum) Info = CreateInfo();
 
-    private static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
+    private static (
+        T Zero,
+        FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized,
+        FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
+        FrozenDictionary<string, T> Dehumanized,
+        FrozenSet<T> Values,
+        bool IsBitFieldEnum) CreateInfo()
     {
         var valuesArray = Enum.GetValues<T>();
         var namesArray = Enum.GetNames(TypeOfT);
         var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
         var humanized = new Dictionary<T, (string Text, bool IsMetadata)>(count);
+        var sources = new Dictionary<T, (string EnumName, DisplayAttribute? Display)>(count);
         var dehumanized = new Dictionary<string, T>(count * 6, StringComparer.OrdinalIgnoreCase);
         for (var i = 0; i < namesArray.Length; i++)
         {
@@ -26,6 +39,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         {
             var description = GetDescription(value);
             humanized[value] = description;
+            sources[value] = GetSources(value);
             dehumanized[description.Text] = value;
         }
 
@@ -33,6 +47,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         return (
             zero,
             humanized.ToFrozenDictionary(),
+            sources.ToFrozenDictionary(),
             dehumanized.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase),
             valuesArray.ToFrozenSet(),
             isBitFieldEnum);
@@ -64,6 +79,26 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     public static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenSet<T> Values) GetInfo() =>
         (Info.Zero, Info.Humanized, Info.Values);
 
+    public static (string Text, bool IsMetadata) GetHumanized(T input, EnumHumanizeSource source)
+    {
+        if (source == EnumHumanizeSource.Default)
+        {
+            return Info.Humanized[input];
+        }
+
+        var (enumName, display) = Info.Sources[input];
+        var metadata = source switch
+        {
+            EnumHumanizeSource.EnumName => null,
+            EnumHumanizeSource.DisplayName => display?.GetName(),
+            EnumHumanizeSource.DisplayDescription => display?.GetDescription(),
+            EnumHumanizeSource.DisplayShortName => display?.GetShortName(),
+            _ => throw new ArgumentOutOfRangeException(nameof(source))
+        };
+
+        return metadata is null ? (enumName, false) : (metadata, true);
+    }
+
     public static FrozenDictionary<string, T> GetDehumanized() =>
         Info.Dehumanized;
 
@@ -92,6 +127,17 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         }
 
         return (caseName.Humanize(), false);
+    }
+
+    static (string EnumName, DisplayAttribute? Display) GetSources(T input)
+    {
+#if NET5_0_OR_GREATER
+        var caseName = Enum.GetName(input)!;
+#else
+        var caseName = Enum.GetName(TypeOfT, input)!;
+#endif
+        var member = TypeOfT.GetField(caseName)!;
+        return (caseName.Humanize(), member.GetCustomAttribute<DisplayAttribute>());
     }
 
     [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Reflection over attribute properties is intentional and documented.")]

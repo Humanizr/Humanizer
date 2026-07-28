@@ -355,10 +355,24 @@ namespace Humanizer
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
         public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing) { }
+        [System.Diagnostics.CodeAnalysis.DynamicDependency(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods, typeof(Humanizer.EnumHumanizeExtensions))]
+        [System.Diagnostics.CodeAnalysis.RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+        public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing, Humanizer.EnumHumanizeSource source) { }
         public static string Humanize<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)]  T>(this T input)
             where T :  struct, System.Enum { }
         public static string Humanize<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)]  T>(this T input, Humanizer.LetterCasing casing)
             where T :  struct, System.Enum { }
+        public static string Humanize<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)]  T>(this T input, Humanizer.LetterCasing casing, Humanizer.EnumHumanizeSource source)
+            where T :  struct, System.Enum { }
+    }
+    public enum EnumHumanizeSource
+    {
+        Default = 0,
+        EnumName = 1,
+        DisplayName = 2,
+        DisplayDescription = 3,
+        DisplayShortName = 4,
     }
     public static class FractionalizeExtensions
     {
