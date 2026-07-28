@@ -55,12 +55,13 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("#if NET6_0_OR_GREATER");
             builder.AppendLine();
             builder.AppendLine("using System;");
+            builder.AppendLine("using System.Globalization;");
             builder.AppendLine();
             builder.AppendLine("namespace Humanizer;");
             builder.AppendLine();
             builder.AppendLine("static partial class TimeOnlyToClockNotationProfileCatalog");
             builder.AppendLine("{");
-            builder.AppendLine("    public static ITimeOnlyToClockNotationConverter Resolve(string kind)");
+            builder.AppendLine("    public static ITimeOnlyToClockNotationConverter Resolve(string kind, CultureInfo culture)");
             builder.AppendLine("    {");
             builder.AppendLine("        switch (kind)");
             builder.AppendLine("        {");
@@ -71,7 +72,7 @@ public sealed partial class HumanizerSourceGenerator
                 builder.Append(QuoteLiteral(profile.ProfileName));
                 builder.Append(": return ");
                 builder.Append(GetCatalogPropertyName(profile.ProfileName));
-                builder.AppendLine(";");
+                builder.AppendLine(".WithCulture(culture);");
             }
 
             builder.AppendLine("            default: throw new ArgumentOutOfRangeException(nameof(kind), kind, \"Unknown clock-notation profile.\");");
@@ -85,7 +86,7 @@ public sealed partial class HumanizerSourceGenerator
                     builder,
                     "    ",
                     "static",
-                    "ITimeOnlyToClockNotationConverter",
+                    "PhraseClockNotationConverter",
                     GetCatalogPropertyName(profile.ProfileName),
                     TimeOnlyToClockNotationEngineContractFactory.Create(profile, contracts));
                 builder.AppendLine();

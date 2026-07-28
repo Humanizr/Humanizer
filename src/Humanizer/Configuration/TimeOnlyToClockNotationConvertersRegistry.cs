@@ -4,7 +4,7 @@ namespace Humanizer;
 
 class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToClockNotationConverter>
 {
-    public TimeOnlyToClockNotationConvertersRegistry() : base(_ => TimeOnlyToClockNotationProfileCatalog.Resolve("en")) =>
+    public TimeOnlyToClockNotationConvertersRegistry() : base(culture => TimeOnlyToClockNotationProfileCatalog.Resolve("en", culture)) =>
         TimeOnlyToClockNotationConvertersRegistryRegistrations.Register(this);
 }
 

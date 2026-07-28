@@ -341,6 +341,29 @@ public class LocaleRegistrySweepTests
     }
 
     [Theory]
+    [InlineData("en-US", "one twenty-three")]
+    [InlineData("en-IN", "one twenty three")]
+    [InlineData("es-ES", "la una y veintitrés de la tarde")]
+    [InlineData("fr-FR", "treize heures vingt-trois")]
+    public void TimeOnlyToClockNotation_ResolvedCulture_DoesNotUseCurrentUiCulture(string localeName, string expected)
+    {
+        using var _ = new DistinctCultureSwap(new("en-US"), new("de-DE"));
+        var converter = Configurator.TimeOnlyToClockNotationConverters.ResolveForCulture(new(localeName));
+
+        Assert.Equal(expected, converter.Convert(new(13, 23), ClockNotationRounding.None));
+    }
+
+    [Fact]
+    public void TimeOnlyToClockNotation_ExplicitCulture_DoesNotUseCurrentUiCulture()
+    {
+        using var _ = new DistinctCultureSwap(new("en-US"), new("de-DE"));
+
+        Assert.Equal(
+            "twenty-five past one",
+            new TimeOnly(13, 23).ToClockNotation(ClockNotationRounding.NearestFiveMinutes, new("en-US")));
+    }
+
+    [Theory]
     [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotation1323RoundedExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
     public void TimeOnlyToClockNotation_1323RoundedToNearestFiveMinutes_UsesExpectedForms(string localeName, ClockExpectationRow expected)
     {

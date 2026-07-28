@@ -72,8 +72,8 @@ public sealed partial class HumanizerSourceGenerator
 
         static string? CreateTimeOnlyToClockNotation(string profile) =>
             profile == "default"
-                ? "TimeOnlyToClockNotationProfileCatalog.Resolve(" + Quote("en") + ")"
-                : "TimeOnlyToClockNotationProfileCatalog.Resolve(" + Quote(profile) + ")";
+                ? "TimeOnlyToClockNotationProfileCatalog.Resolve(" + Quote("en") + ", culture)"
+                : "TimeOnlyToClockNotationProfileCatalog.Resolve(" + Quote(profile) + ", culture)";
 
         static string? CreateWordsToNumber(string profile, string? argument) =>
             profile switch
