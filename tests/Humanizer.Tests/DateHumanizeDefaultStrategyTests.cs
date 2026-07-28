@@ -90,6 +90,16 @@ public class DateHumanizeDefaultStrategyTests
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
 
     [Theory]
+    [InlineData(Tense.Past, "one month ago", 3)]
+    [InlineData(Tense.Future, "one month from now", 2)]
+    public void TwentyEightDaysUsesCalendarMonth(Tense tense, string expected, int comparisonMonth)
+    {
+        var comparisonBase = new DateTime(2023, comparisonMonth, 1, 0, 0, 0, DateTimeKind.Local);
+        var comparisonBaseUtc = new DateTime(2023, comparisonMonth, 1, 0, 0, 0, DateTimeKind.Utc);
+        DateHumanize.Verify(expected, 28, TimeUnit.Day, tense, baseDate: comparisonBase, baseDateUtc: comparisonBaseUtc);
+    }
+
+    [Theory]
     [InlineData(1, "one month ago")]
     [InlineData(10, "10 months ago")]
     [InlineData(11, "11 months ago")]

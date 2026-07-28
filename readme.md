@@ -195,7 +195,8 @@ DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
 DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
-DateTime.UtcNow.AddDays(7).Humanize() => "one week from now"
+var now = DateTime.UtcNow;
+now.AddDays(7).Humanize(dateToCompareAgainst: now) => "one week from now"
 
 DateTimeOffset.UtcNow.AddHours(1).Humanize() => "an hour from now"
 ```
