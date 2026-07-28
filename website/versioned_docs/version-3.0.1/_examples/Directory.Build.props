@@ -7,4 +7,8 @@
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <PropertyGroup Label="HumanizerDocumentationSnapshot">
+    <HumanizerPackageVersion
+      Condition="'$(HumanizerProject)' == '' and '$(HumanizerPackageVersion)' == ''">3.0.1</HumanizerPackageVersion>
+  </PropertyGroup>
 </Project>

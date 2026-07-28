@@ -10,6 +10,61 @@ $manifestPath = Join-Path $repoRoot "website/humanizer-versions.json"
 . (Join-Path $PSScriptRoot "api-approval.ps1")
 . (Join-Path $PSScriptRoot "nuget-package.ps1")
 
+function Assert-VersionedExampleDefaults {
+    param(
+        [Parameter(Mandatory = $true)]$Entry,
+        [Parameter(Mandatory = $true)][string]$ExamplesRoot
+    )
+
+    [xml]$props = Get-Content -Raw (
+        Join-Path $ExamplesRoot "Directory.Build.props"
+    )
+    $groups = @(
+        $props.SelectNodes(
+            "/Project/PropertyGroup[@Label='HumanizerDocumentationSnapshot']"
+        )
+    )
+    if ($groups.Count -ne 1) {
+        throw "Version $($Entry.version) must declare one example-default group."
+    }
+
+    $versionNodes = @($groups[0].SelectNodes("HumanizerPackageVersion"))
+    $expectedVersionCondition =
+        "'`$(HumanizerProject)' == '' and " +
+        "'`$(HumanizerPackageVersion)' == ''"
+    if ($versionNodes.Count -ne 1 -or
+        $versionNodes[0].InnerText -ne $Entry.source.packageVersion -or
+        $versionNodes[0].GetAttribute("Condition") -ne
+            $expectedVersionCondition) {
+        throw "Version $($Entry.version) does not default to its exact package."
+    }
+
+    $excludedAssetsProperty = $Entry.PSObject.Properties[
+        "exampleExcludedAssets"
+    ]
+    $expectedExcludedAssets = if ($null -eq $excludedAssetsProperty) {
+        ""
+    } else {
+        @($excludedAssetsProperty.Value) -join ";"
+    }
+    $excludedAssetNodes = @(
+        $groups[0].SelectNodes("HumanizerExampleExcludeAssets")
+    )
+    if (($expectedExcludedAssets -eq "" -and
+            $excludedAssetNodes.Count -ne 0) -or
+        ($expectedExcludedAssets -ne "" -and
+            ($excludedAssetNodes.Count -ne 1 -or
+                $excludedAssetNodes[0].InnerText -ne
+                    $expectedExcludedAssets -or
+                $excludedAssetNodes[0].GetAttribute("Condition") -ne
+                    ("'`$(HumanizerProject)' == '' and " +
+                        "'`$(HumanizerPackageVersion)' == " +
+                        "'$($Entry.source.packageVersion)' and " +
+                        "'`$(HumanizerExampleExcludeAssets)' == ''")))) {
+        throw "Version $($Entry.version) has incorrect example asset defaults."
+    }
+}
+
 $fingerprintTempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-fingerprint-$([guid]::NewGuid().ToString('N'))"
 New-Item -ItemType Directory -Path $fingerprintTempRoot | Out-Null
 try {
@@ -113,6 +168,17 @@ $canPromoteCandidate =
             $previousLatestVersion
         )
 
+foreach ($publishedEntry in @(
+    $fixtureManifest.versions |
+        Where-Object { $_.version -ne "current" -and $_.published }
+)) {
+    Assert-VersionedExampleDefaults `
+        -Entry $publishedEntry `
+        -ExamplesRoot (Join-Path $repoRoot (
+            "website/versioned_docs/version-$($publishedEntry.version)/_examples"
+        ))
+}
+
 & (Join-Path $PSScriptRoot "build.ps1") `
     -Version $candidateVersion `
     -ValidateOnly
@@ -127,6 +193,17 @@ if (-not [string]::IsNullOrWhiteSpace($ReleaseVersion)) {
 $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "humanizer-docs-tests-$([guid]::NewGuid().ToString('N'))"
 New-Item -ItemType Directory -Path $tempRoot | Out-Null
 try {
+    $currentRestoreOutput = & dotnet restore (
+        Join-Path $repoRoot "website/docs/_examples/quick-start/QuickStart.csproj"
+    ) `
+        --artifacts-path (Join-Path $tempRoot "current-without-input") `
+        --nologo 2>&1 | Out-String
+    if ($LASTEXITCODE -eq 0 -or
+        $currentRestoreOutput -notmatch
+            "Set HumanizerProject or HumanizerPackageVersion") {
+        throw "Canonical current examples did not require an explicit input."
+    }
+
     $invalidManifestPath = Join-Path $tempRoot "invalid-manifest.json"
     '{"schemaVersion":1,"versions":[]}' | Set-Content $invalidManifestPath
     & pwsh -NoProfile -File (Join-Path $PSScriptRoot "build.ps1") -ValidateOnly -ManifestPath $invalidManifestPath *> $null
@@ -172,7 +249,9 @@ try {
 
     $badExampleRoot = Join-Path $tempRoot "bad-example"
     Copy-Item `
-        (Join-Path $repoRoot "website/docs/_examples/quick-start") `
+        (Join-Path $repoRoot (
+            "website/versioned_docs/version-$previousLatestVersion/_examples/quick-start"
+        )) `
         $badExampleRoot `
         -Recurse
     foreach ($buildFile in @(
@@ -180,7 +259,9 @@ try {
         "Directory.Build.targets"
     )) {
         Copy-Item `
-            (Join-Path $repoRoot "website/docs/_examples/$buildFile") `
+            (Join-Path $repoRoot (
+                "website/versioned_docs/version-$previousLatestVersion/_examples/$buildFile"
+            )) `
             $badExampleRoot
     }
     $badExampleTargets = Join-Path $badExampleRoot "Directory.Build.targets"
@@ -927,6 +1008,11 @@ try {
     Copy-Item $releaseSnapshotPath (
         Join-Path $isolatedWebsiteRoot "docs"
     ) -Recurse
+    Copy-Item (
+        Join-Path $canonicalDocsRoot "_examples/Directory.Build.props"
+    ) (
+        Join-Path $isolatedWebsiteRoot "docs/_examples/Directory.Build.props"
+    ) -Force
     Remove-Item (
         Join-Path $isolatedWebsiteRoot "docs/api"
     ) -Recurse -Force
@@ -1007,6 +1093,11 @@ try {
             throw "$Mode release did not retain exactly one candidate."
         }
         $releasedCandidate = $releasedCandidates[0]
+        Assert-VersionedExampleDefaults `
+            -Entry $releasedCandidate `
+            -ExamplesRoot (Join-Path $isolatedWebsiteRoot (
+                "versioned_docs/version-$candidateVersion/_examples"
+            ))
         if ($releasedCandidate.immutability.snapshotSha256 -ne
                 $releaseSnapshotDigest -or
             $releasedCandidate.immutability.sidebarSha256 -ne

@@ -7,4 +7,10 @@
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <PropertyGroup Label="HumanizerDocumentationSnapshot">
+    <HumanizerPackageVersion
+      Condition="'$(HumanizerProject)' == '' and '$(HumanizerPackageVersion)' == ''">3.0.8</HumanizerPackageVersion>
+    <HumanizerExampleExcludeAssets
+      Condition="'$(HumanizerProject)' == '' and '$(HumanizerPackageVersion)' == '3.0.8' and '$(HumanizerExampleExcludeAssets)' == ''">build;buildTransitive;analyzers</HumanizerExampleExcludeAssets>
+  </PropertyGroup>
 </Project>

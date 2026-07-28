@@ -43,6 +43,9 @@ if ($versions.Count -eq 0) {
 $artifactsRoot = Join-Path (
     [System.IO.Path]::GetTempPath()
 ) "humanizer-docs-examples-$([guid]::NewGuid().ToString('N'))"
+$canonicalExamplesRoot = [System.IO.Path]::GetFullPath(
+    (Join-Path $repoRoot "website/docs/_examples")
+)
 try {
     foreach ($entry in $versions) {
         $entryExamplesRoot = if ($explicitExamplesRoot) {
@@ -111,10 +114,14 @@ try {
             $projectArtifacts = Join-Path (
                 $artifactsRoot
             ) "$($entry.version)/$($project.BaseName)-$projectIndex"
+            $usesVersionedDefaults =
+                $entry.source.kind -eq "nuget" -and
+                [System.IO.Path]::GetFullPath($entryExamplesRoot) -ne
+                    $canonicalExamplesRoot
             $inputArguments = @(
                 if ($entry.source.kind -eq "checkout") {
                     "-p:HumanizerProject=$(Join-Path $repoRoot 'src/Humanizer/Humanizer.csproj')"
-                } else {
+                } elseif (-not $usesVersionedDefaults) {
                     "-p:HumanizerPackageVersion=$($entry.source.packageVersion)"
                 }
             )
@@ -128,7 +135,8 @@ try {
             } else {
                 @($exampleExcludedAssetsProperty.Value)
             }
-            if ($exampleExcludedAssets.Count -gt 0) {
+            if ($exampleExcludedAssets.Count -gt 0 -and
+                -not $usesVersionedDefaults) {
                 $encodedExcludedAssets = (
                     $exampleExcludedAssets -join "%3B"
                 )

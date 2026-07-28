@@ -381,6 +381,57 @@ $provenance
     )
 }
 
+function Set-VersionedExampleDefaults {
+    param(
+        [Parameter(Mandatory = $true)][string]$ExamplesRoot,
+        [Parameter(Mandatory = $true)]$Entry
+    )
+
+    if ($Entry.source.kind -ne "nuget" -or
+        $Entry.source.packageVersion -ne $Entry.version) {
+        throw "Versioned example defaults require an exact NuGet-backed version."
+    }
+
+    $propsPath = Join-Path $ExamplesRoot "Directory.Build.props"
+    $props = Get-Content -Raw $propsPath
+    if ($props -match 'Label="HumanizerDocumentationSnapshot"' -or
+        ([regex]::Matches($props, "</Project>")).Count -ne 1) {
+        throw "Versioned example props cannot be stamped safely: $propsPath"
+    }
+
+    $excludedAssetsProperty = $Entry.PSObject.Properties[
+        "exampleExcludedAssets"
+    ]
+    $excludedAssets = if ($null -eq $excludedAssetsProperty) {
+        @()
+    } else {
+        @($excludedAssetsProperty.Value)
+    }
+    $excludedAssetsDefault = if ($excludedAssets.Count -eq 0) {
+        ""
+    } else {
+        @"
+    <HumanizerExampleExcludeAssets
+      Condition="'`$(HumanizerProject)' == '' and '`$(HumanizerPackageVersion)' == '$($Entry.source.packageVersion)' and '`$(HumanizerExampleExcludeAssets)' == ''">$($excludedAssets -join ";")</HumanizerExampleExcludeAssets>
+"@
+    }
+    if ($excludedAssetsDefault) {
+        $excludedAssetsDefault += "`n"
+    }
+    $defaults = @"
+  <PropertyGroup Label="HumanizerDocumentationSnapshot">
+    <HumanizerPackageVersion
+      Condition="'`$(HumanizerProject)' == '' and '`$(HumanizerPackageVersion)' == ''">$($Entry.source.packageVersion)</HumanizerPackageVersion>
+$excludedAssetsDefault  </PropertyGroup>
+
+"@
+    [System.IO.File]::WriteAllText(
+        $propsPath,
+        $props.Replace("</Project>", "$defaults</Project>"),
+        [System.Text.UTF8Encoding]::new($false)
+    )
+}
+
 function Assert-FrozenSnapshot {
     param([Parameter(Mandatory = $true)]$Entry)
 
@@ -663,6 +714,9 @@ try {
                 -Force | Out-Null
             Copy-Item (Join-Path $overlayRoot $path) $destination -Force
         }
+        Set-VersionedExampleDefaults `
+            -ExamplesRoot (Join-Path $stagingDocs "_examples") `
+            -Entry $entry
 
         $stagingApi = Join-Path $stagingDocs "api"
         & (Join-Path $PSScriptRoot "verify-api.ps1") `
