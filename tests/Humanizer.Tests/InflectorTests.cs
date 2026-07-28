@@ -262,6 +262,8 @@ class PluralTestSource : IEnumerable<object[]>
 
         yield return ["spokesman", "spokesmen"];
         yield return ["policeman", "policemen"];
+        yield return ["businessman", "businessmen"];
+        yield return ["seaman", "seamen"];
         yield return ["man", "men"];
         yield return ["woman", "women"];
         yield return ["freshman", "freshmen"];
