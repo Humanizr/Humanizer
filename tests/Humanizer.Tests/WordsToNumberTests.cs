@@ -1105,6 +1105,28 @@ public class WordsToNumberTests_Slovak
 public class WordsToNumberTests_Ukrainian
 {
     [Theory]
+    [InlineData("п’ята", 5)]
+    [InlineData("п’ятий", 5)]
+    [InlineData("п’яте", 5)]
+    [InlineData("двадцять п’ята", 25)]
+    [InlineData("двадцять п’ятий", 25)]
+    [InlineData("двадцять п’яте", 25)]
+    [InlineData("П’ЯТА.", 5)]
+    public void OrdinalParser_AcceptsCanonicalCurlyApostropheForms(string words, long expectedNumber)
+    {
+        var culture = CultureInfo.CurrentCulture;
+
+        Assert.Equal(expectedNumber, words.ToNumber(culture));
+
+        Assert.True(words.TryToNumber(out var parsedNumber, culture));
+        Assert.Equal(expectedNumber, parsedNumber);
+
+        Assert.True(words.TryToNumber(out parsedNumber, culture, out var unrecognizedWord));
+        Assert.Equal(expectedNumber, parsedNumber);
+        Assert.Null(unrecognizedWord);
+    }
+
+    [Theory]
     [InlineData("нуль", 0, null)]
     [InlineData("мінус сто двадцять три", -123, null)]
     [InlineData("одна тисяча сто дванадцять", 1112, null)]
