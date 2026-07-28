@@ -573,23 +573,11 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void SymbolsUseCurrentCultureWhenCultureIsNotSpecified()
     {
-        var currentCulture = CultureInfo.CurrentCulture;
-        var currentUICulture = CultureInfo.CurrentUICulture;
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("ka"), new("en-US"));
 
-        try
-        {
-            CultureInfo.CurrentCulture = new("ka");
-            CultureInfo.CurrentUICulture = new("en-US");
+        var actual = TimeSpan.FromMinutes(2).HumanizeToSymbols();
 
-            var actual = TimeSpan.FromMinutes(2).HumanizeToSymbols();
-
-            Assert.Equal("2წთ", actual);
-        }
-        finally
-        {
-            CultureInfo.CurrentCulture = currentCulture;
-            CultureInfo.CurrentUICulture = currentUICulture;
-        }
+        Assert.Equal("2წთ", actual);
     }
 
     [Fact]
