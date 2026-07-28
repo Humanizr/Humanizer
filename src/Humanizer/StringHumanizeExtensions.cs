@@ -9,7 +9,7 @@ namespace Humanizer;
 /// </summary>
 public static partial class StringHumanizeExtensions
 {
-    const string PascalCaseWordPartsPattern = @"(\p{Lu}?\p{Ll}+|[0-9]+\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?";
+    const string PascalCaseWordPartsPattern = @"(\p{Lu}?\p{Ll}+|[0-9]+(?:\.[0-9]+)?\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?";
 
 #if NET7_0_OR_GREATER
     [GeneratedRegex(PascalCaseWordPartsPattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture)]
