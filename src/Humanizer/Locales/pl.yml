@@ -7,10 +7,10 @@ surfaces:
 
   formatter:
     engine: 'profiled'
-    resourceKeyDetector: 'between2-and4-paucal'
+    resourceKeyDetector: 'polish'
     resourceKeySuffixes:
       paucal: '_Paucal'
-    dataUnitDetector: 'between2-and4-paucal'
+    dataUnitDetector: 'polish'
     dataUnitSuffixes:
       singular: '_Singular'
       paucal: '_Paucal'

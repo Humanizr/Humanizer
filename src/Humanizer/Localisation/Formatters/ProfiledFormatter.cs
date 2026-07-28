@@ -28,6 +28,11 @@ enum FormatterNumberDetectorKind
     Between2And4Paucal,
 
     /// <summary>
+    /// Use the Polish paucal form for values ending in two through four, except twelve through fourteen.
+    /// </summary>
+    Polish,
+
+    /// <summary>
     /// Use the South Slavic singular, paucal, and default rules.
     /// </summary>
     SouthSlavic,
@@ -263,6 +268,7 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
                 > 1 and < 5 => FormatterNumberForm.Paucal,
                 _ => FormatterNumberForm.Default
             },
+            FormatterNumberDetectorKind.Polish => DetectPolishForm(absoluteNumber),
             FormatterNumberDetectorKind.SouthSlavic => DetectSouthSlavicForm(absoluteNumber),
             FormatterNumberDetectorKind.Slovenian => absoluteNumber switch
             {
@@ -309,6 +315,13 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             },
             _ => forms.Resolve(form)
         };
+
+    static FormatterNumberForm DetectPolishForm(int absoluteNumber) =>
+        absoluteNumber % 10 is > 1 and < 5 && absoluteNumber % 100 is not 12 and not 13 and not 14
+            ? FormatterNumberForm.Paucal
+            : absoluteNumber == 1
+                ? FormatterNumberForm.Singular
+                : FormatterNumberForm.Default;
 
     /// <summary>
     /// Detects the South Slavic singular and paucal forms.

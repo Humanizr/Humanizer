@@ -554,6 +554,7 @@ These are the non-lexical option values that currently appear in checked-in loca
 - `arabic-like`
 - `between2-and4-paucal`
 - `lithuanian`
+- `polish`
 - `russian`
 - `slovenian`
 - `south-slavic`
@@ -563,6 +564,7 @@ These are the non-lexical option values that currently appear in checked-in loca
 - `arabic-like`
 - `between2-and4-paucal`
 - `lithuanian`
+- `polish`
 - `russian`
 - `singular-plural`
 - `slovenian`
