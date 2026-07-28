@@ -142,7 +142,62 @@ public sealed partial class HumanizerSourceGenerator
                 context.AddSource(helperName + ".g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
             }
 
+            EmitSupportedCultureApi(context);
             EmitNumberFormattingOverrides(context);
+        }
+
+        void EmitSupportedCultureApi(SourceProductionContext context)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("using System;");
+            builder.AppendLine("using System.Collections.Generic;");
+            builder.AppendLine("using System.Globalization;");
+            builder.AppendLine();
+            builder.AppendLine("namespace Humanizer;");
+            builder.AppendLine();
+            builder.AppendLine("public static partial class Configurator");
+            builder.AppendLine("{");
+            builder.AppendLine("    /// <summary>");
+            builder.AppendLine("    /// Determines whether Humanizer includes complete generated locale support for the specified culture.");
+            builder.AppendLine("    /// </summary>");
+            builder.AppendLine("    /// <param name=\"culture\">The culture to check.</param>");
+            builder.AppendLine("    /// <returns><see langword=\"true\"/> when the culture or one of its named parents has generated locale support; otherwise, <see langword=\"false\"/>.</returns>");
+            builder.AppendLine("    /// <remarks>");
+            builder.AppendLine("    /// This considers parent-culture fallback, but does not report support merely because Humanizer can fall back to its default English localizers.");
+            builder.AppendLine("    /// </remarks>");
+            builder.AppendLine("    /// <exception cref=\"ArgumentNullException\">Thrown when <paramref name=\"culture\"/> is <c>null</c>.</exception>");
+            builder.AppendLine("    public static bool IsCultureSupported(CultureInfo culture)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        if (culture is null)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            throw new ArgumentNullException(nameof(culture));");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        for (var current = culture; !string.IsNullOrEmpty(current.Name); current = current.Parent)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            if (SupportedLocaleCodes.Contains(current.Name))");
+            builder.AppendLine("            {");
+            builder.AppendLine("                return true;");
+            builder.AppendLine("            }");
+            builder.AppendLine("        }");
+            builder.AppendLine();
+            builder.AppendLine("        return false;");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    static readonly HashSet<string> SupportedLocaleCodes = new(StringComparer.OrdinalIgnoreCase)");
+            builder.AppendLine("    {");
+
+            foreach (var locale in locales.OrderBy(static locale => locale.LocaleCode, StringComparer.Ordinal))
+            {
+                builder.Append("        \"");
+                builder.Append(locale.LocaleCode);
+                builder.AppendLine("\",");
+            }
+
+            builder.AppendLine("    };");
+            builder.AppendLine("}");
+
+            context.AddSource("Configurator.SupportedCultures.g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
         }
 
         void EmitNumberFormattingOverrides(SourceProductionContext context)

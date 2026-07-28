@@ -3,7 +3,7 @@ namespace Humanizer;
 /// <summary>
 /// Provides a configuration point for Humanizer
 /// </summary>
-public static class Configurator
+public static partial class Configurator
 {
     /// <summary>
     /// A registry of formatters used to format collections based on the current locale

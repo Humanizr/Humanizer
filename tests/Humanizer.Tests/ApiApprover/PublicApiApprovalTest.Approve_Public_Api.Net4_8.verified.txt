@@ -214,6 +214,7 @@ namespace Humanizer
         public static Humanizer.LocaliserRegistry<Humanizer.IFormatter> Formatters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.INumberToWordsConverter> NumberToWordsConverters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.IOrdinalizer> Ordinalizers { get; }
+        public static bool IsCultureSupported(System.Globalization.CultureInfo culture) { }
         public static void UseEnumDescriptionPropertyLocator(System.Func<System.Reflection.PropertyInfo, bool> func) { }
     }
     public enum DataUnit
