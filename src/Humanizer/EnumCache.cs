@@ -38,7 +38,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             isBitFieldEnum);
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Reflection over attribute properties is intentional and documented.")]
     static void AddAliases(Dictionary<string, T> dehumanized, string caseName, T value)
     {
         var member = TypeOfT.GetField(caseName)!;
@@ -51,25 +50,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             AddAlias(displayAttribute.GetName());
             AddAlias(displayAttribute.GetDescription());
             AddAlias(displayAttribute.GetShortName());
-        }
-
-        foreach (var attr in member.GetCustomAttributes())
-        {
-            if (attr is DisplayAttribute)
-            {
-                continue;
-            }
-
-#pragma warning disable IL2072 // Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The return value of the source method does not have matching annotations.
-            foreach (var property in attr.GetType().GetRuntimeProperties())
-#pragma warning restore IL2072
-            {
-                if (property.PropertyType == typeof(string) &&
-                    Configurator.EnumDescriptionPropertyLocator(property))
-                {
-                    AddAlias((string?)property.GetValue(attr, null));
-                }
-            }
         }
 
         void AddAlias(string? alias)

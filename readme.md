@@ -190,7 +190,8 @@ Convert humanized strings back to their original enum values:
 ```
 
 The method is case-insensitive and recognizes raw and humanized enum names, `DisplayAttribute` name,
-description, and short-name values, plus configured description attribute values.
+description, and short-name values, plus a configured description attribute value when selected as
+the member's authored description.
 
 
 ### Humanize DateTime

@@ -20,12 +20,14 @@ public static class EnumDehumanizeExtensions
     /// </exception>
     /// <remarks>
     /// The method attempts to match the input string against:
-    /// 1. The exact enum member name
-    /// 2. The humanized version of the enum member name
-    /// 3. <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.Name"/>,
+    /// <list type="number">
+    /// <item><description>The exact enum member name.</description></item>
+    /// <item><description>The humanized version of the enum member name.</description></item>
+    /// <item><description><see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.Name"/>,
     /// <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.Description"/>, and
-    /// <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName"/> values
-    /// 4. Any configured description attribute value on the enum member
+    /// <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName"/> values.</description></item>
+    /// <item><description>The configured description attribute value when selected as the member's authored description.</description></item>
+    /// </list>
     /// Matching is case-insensitive and does not trim whitespace. If aliases collide, later values in the enum's
     /// unsigned numeric order take precedence, while the current humanized representation takes precedence over
     /// supplemental aliases.

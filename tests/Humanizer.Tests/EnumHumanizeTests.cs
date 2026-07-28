@@ -235,7 +235,6 @@ public class EnumHumanizeTests
     [InlineData("Display name")]
     [InlineData("Display description")]
     [InlineData("Display short name")]
-    [InlineData("Configured description")]
     [InlineData("display SHORT name")]
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
@@ -258,14 +257,14 @@ public class EnumHumanizeTests
     }
 
     [Fact]
-    public void DehumanizeRecognizesConfiguredDescriptionAliasAlongsideDisplayMetadata()
+    public void DehumanizeRecognizesConfiguredDescriptionAsCanonicalAlias()
     {
         Configurator.ResetUseEnumDescriptionPropertyLocator();
         Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
         try
         {
             Assert.Equal(EnumCustomAliasUnderTest.RawEnumName, "Configured description".DehumanizeTo<EnumCustomAliasUnderTest>());
-            Assert.Equal("Display description", EnumCustomAliasUnderTest.RawEnumName.Humanize());
+            Assert.Equal("Configured description", EnumCustomAliasUnderTest.RawEnumName.Humanize());
         }
         finally
         {
@@ -329,7 +328,6 @@ public class EnumHumanizeTests
     enum EnumCustomAliasUnderTest
     {
         [CustomProperty("Configured description")]
-        [System.ComponentModel.DataAnnotations.Display(Description = "Display description")]
         RawEnumName
     }
 
