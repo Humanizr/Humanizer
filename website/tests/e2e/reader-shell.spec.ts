@@ -49,7 +49,7 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
 
   for (const path of [
     '/docs/start/quick-start/',
-    '/docs/api/Humanizer.ByteSize/',
+    '/docs/api/Humanizer/',
   ]) {
     await page.goto(path);
     const contentWidth = await page.evaluate(

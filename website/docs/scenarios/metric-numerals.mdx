@@ -53,8 +53,10 @@ Use `UseScaleWord` for user-facing output that should follow the UI locale.
 Use `UseShortScaleWord` or `UseLongScaleWord` when an external format requires
 one scale regardless of locale. `CurrentCulture` still controls the decimal
 separator and other numeric formatting in either case. `KeepTrailingZeros`
-composes with those representations and with `WithSpace`. When no suffix is
-present, `WithSpace` still emits its trailing space, including for zero.
+composes with those representations and with `WithSpace`. When
+`KeepTrailingZeros` is active with a non-null `decimals` value, `WithSpace`
+still emits its trailing space even when no suffix is present, including for
+zero.
 
 ### Parse supported forms
 
