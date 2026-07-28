@@ -116,6 +116,16 @@ public class FractionalizeTests
             decimal.Truncate(decimal.Parse(input, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture),
             decimal.Parse(input, CultureInfo.InvariantCulture).Fractionalize(10, 0m));
 
+    [Fact]
+    public void UsesInvariantFormattingForWholeValues()
+    {
+        var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+        culture.NumberFormat.NegativeSign = "~";
+        CultureInfo.CurrentCulture = culture;
+
+        Assert.Equal("-1", (-1m).Fractionalize(10, 0m));
+    }
+
     [Theory]
     [InlineData("7922816251426433759354395033.5", "7922816251426433759354395033 1/2")]
     [InlineData("-7922816251426433759354395033.5", "-7922816251426433759354395033 1/2")]

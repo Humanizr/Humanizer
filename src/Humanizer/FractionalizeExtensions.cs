@@ -48,9 +48,8 @@ public static class FractionalizeExtensions
             throw new ArgumentOutOfRangeException(nameof(tolerance));
 #endif
 
-        var numberFormat = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         if (decimal.Truncate(input) == input)
-            return input.ToString("0", numberFormat);
+            return input.ToString("0", CultureInfo.InvariantCulture);
 
         var value = ToFraction(input);
         var approximation = LimitDenominator(BigInteger.Abs(value.Numerator), value.Denominator, maxDenominator);
@@ -58,7 +57,7 @@ public static class FractionalizeExtensions
             approximation.Numerator = -approximation.Numerator;
 
         if (!IsWithinTolerance(value, approximation, ToFraction(tolerance)))
-            return input.ToString(numberFormat);
+            return input.ToString(LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture));
 
         return Format(approximation, useUnicode);
     }
