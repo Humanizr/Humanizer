@@ -36,6 +36,16 @@ date.Humanize(culture: new CultureInfo("es"));
 1234.ToNumber(new CultureInfo("es"));
 ```
 
+To choose a fallback before humanizing, check whether the culture or one of its named parents has a complete generated Humanizer locale. This does not report support solely because Humanizer can use its default English fallback:
+
+```csharp
+var culture = new CultureInfo("fr-FR");
+if (Configurator.IsCultureSupported(culture))
+{
+    return date.Humanize(culture: culture);
+}
+```
+
 ## Grammatical Features
 
 Some languages require additional grammatical information:
