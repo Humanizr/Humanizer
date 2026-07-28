@@ -7,7 +7,17 @@ const repositoryLogo = fileURLToPath(new URL('../../logo.png', import.meta.url))
 const publicLogo = fileURLToPath(
   new URL('../static/img/logo.png', import.meta.url),
 );
+const socialLogo = fileURLToPath(
+  new URL('../static/img/social-logo.png', import.meta.url),
+);
 
 test('documentation publishes the canonical Humanizer logo unchanged', async () => {
   assert.deepEqual(await readFile(publicLogo), await readFile(repositoryLogo));
+});
+
+test('social metadata image meets summary card dimensions', async () => {
+  const image = await readFile(socialLogo);
+
+  assert.equal(image.readUInt32BE(16), 144);
+  assert.equal(image.readUInt32BE(20), 144);
 });

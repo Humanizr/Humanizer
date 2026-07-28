@@ -83,11 +83,11 @@ test('canonical branding renders in the shell and page metadata', async ({
   );
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     'content',
-    `https://humanizr.net${logoPath}`,
+    'https://humanizr.net/img/social-logo.png',
   );
   await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
     'content',
-    `https://humanizr.net${logoPath}`,
+    'https://humanizr.net/img/social-logo.png',
   );
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
     'content',

@@ -127,7 +127,7 @@ const config: Config = {
     ],
   ],
   themeConfig: {
-    image: 'img/logo.png',
+    image: 'img/social-logo.png',
     metadata: [
       {name: 'theme-color', content: '#172026'},
       {name: 'twitter:card', content: 'summary'},
