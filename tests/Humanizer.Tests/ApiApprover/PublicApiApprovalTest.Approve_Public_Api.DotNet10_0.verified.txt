@@ -355,6 +355,10 @@ namespace Humanizer
         public static string Humanize<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)]  T>(this T input, Humanizer.LetterCasing casing)
             where T :  struct, System.Enum { }
     }
+    public static class FractionalizeExtensions
+    {
+        public static string Fractionalize(this decimal input, int maxDenominator, decimal tolerance, bool useUnicode = false) { }
+    }
     public enum GrammaticalCase
     {
         Nominative = 0,
