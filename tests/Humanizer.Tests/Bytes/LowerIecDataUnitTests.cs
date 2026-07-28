@@ -27,6 +27,10 @@ public class LowerIecDataUnitTests
     public void FormatsExplicitLowerIecUnits(double bytes, string format, string expected) =>
         Assert.Equal(expected, ByteSize.FromBytes(bytes).ToString(format));
 
+    [Fact]
+    public void FormatsUppercaseIecTokenWithTurkishCulture() =>
+        Assert.Equal("1 KiB", ByteSize.FromKibibytes(1).ToString("KIB", new CultureInfo("tr")));
+
     [Theory]
     [InlineData("1KiB", 1024)]
     [InlineData("1.5 mib", 1572864)]

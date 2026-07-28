@@ -346,10 +346,10 @@ public struct ByteSize(double byteSize) :
             provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(overrideCulture);
         }
 
-        bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
+        bool has(string s) => format.Contains(s, StringComparison.OrdinalIgnoreCase);
         string replace(string source, string oldValue, string newValue)
         {
-            var index = culture.CompareInfo.IndexOf(source, oldValue, CompareOptions.IgnoreCase);
+            var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(source, oldValue, CompareOptions.OrdinalIgnoreCase);
             return source.Remove(index, oldValue.Length).Insert(index, newValue);
         }
 
