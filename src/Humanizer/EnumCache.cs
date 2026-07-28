@@ -12,10 +12,16 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     private static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
         var valuesArray = Enum.GetValues<T>();
+        var namesArray = Enum.GetNames(TypeOfT);
         var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
         var humanized = new Dictionary<T, (string Text, bool IsMetadata)>(count);
-        var dehumanized = new Dictionary<string, T>(count, StringComparer.OrdinalIgnoreCase);
+        var dehumanized = new Dictionary<string, T>(count * 6, StringComparer.OrdinalIgnoreCase);
+        for (var i = 0; i < namesArray.Length; i++)
+        {
+            AddAliases(dehumanized, namesArray[i], valuesArray[i]);
+        }
+
         foreach (var value in valuesArray)
         {
             var description = GetDescription(value);
@@ -30,6 +36,49 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             dehumanized.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase),
             valuesArray.ToFrozenSet(),
             isBitFieldEnum);
+    }
+
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Reflection over attribute properties is intentional and documented.")]
+    static void AddAliases(Dictionary<string, T> dehumanized, string caseName, T value)
+    {
+        var member = TypeOfT.GetField(caseName)!;
+        dehumanized[caseName] = value;
+        dehumanized[caseName.Humanize()] = value;
+
+        var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
+        if (displayAttribute != null)
+        {
+            AddAlias(displayAttribute.GetName());
+            AddAlias(displayAttribute.GetDescription());
+            AddAlias(displayAttribute.GetShortName());
+        }
+
+        foreach (var attr in member.GetCustomAttributes())
+        {
+            if (attr is DisplayAttribute)
+            {
+                continue;
+            }
+
+#pragma warning disable IL2072 // Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The return value of the source method does not have matching annotations.
+            foreach (var property in attr.GetType().GetRuntimeProperties())
+#pragma warning restore IL2072
+            {
+                if (property.PropertyType == typeof(string) &&
+                    Configurator.EnumDescriptionPropertyLocator(property))
+                {
+                    AddAlias((string?)property.GetValue(attr, null));
+                }
+            }
+        }
+
+        void AddAlias(string? alias)
+        {
+            if (alias != null)
+            {
+                dehumanized[alias] = value;
+            }
+        }
     }
 
     public static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenSet<T> Values) GetInfo() =>

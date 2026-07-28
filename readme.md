@@ -189,7 +189,8 @@ Convert humanized strings back to their original enum values:
 "Invalid".DehumanizeTo<UserType>(OnNoMatch.ReturnsNull) => null
 ```
 
-The method honors `DescriptionAttribute` and is case-insensitive.
+The method is case-insensitive and recognizes raw and humanized enum names, `DisplayAttribute` name,
+description, and short-name values, plus configured description attribute values.
 
 
 ### Humanize DateTime

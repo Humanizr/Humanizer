@@ -192,6 +192,8 @@ public class EnumHumanizeTests
     [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeTitle, EnumUnderTest.MemberWithoutDescriptionAttribute)]
     [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase, EnumUnderTest.MemberWithoutDescriptionAttribute)]
     [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute)]
+    [InlineData(nameof(EnumUnderTest.MemberWithoutDescriptionAttribute), EnumUnderTest.MemberWithoutDescriptionAttribute)]
+    [InlineData("memberwithoutdescriptionattribute", EnumUnderTest.MemberWithoutDescriptionAttribute)]
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeIsCaseInsensitive(string input, EnumUnderTest expectedEnum)
@@ -227,9 +229,128 @@ public class EnumHumanizeTests
         Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo(typeof(EnumUnderTest)));
     }
 
+    [Theory]
+    [InlineData(nameof(EnumAliasesUnderTest.RawEnumName))]
+    [InlineData("Raw enum name")]
+    [InlineData("Display name")]
+    [InlineData("Display description")]
+    [InlineData("Display short name")]
+    [InlineData("Configured description")]
+    [InlineData("display SHORT name")]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void DehumanizeRecognizesEnumAliases(string input)
+    {
+        Assert.Equal(EnumAliasesUnderTest.RawEnumName, input.DehumanizeTo<EnumAliasesUnderTest>());
+        Assert.Equal(EnumAliasesUnderTest.RawEnumName, input.DehumanizeTo(typeof(EnumAliasesUnderTest)));
+        Assert.Equal("Display description", EnumAliasesUnderTest.RawEnumName.Humanize());
+    }
+
+    [Fact]
+    public void DehumanizeDoesNotTrimAliases() =>
+        Assert.Null(" Display name ".DehumanizeTo<EnumAliasesUnderTest>(OnNoMatch.ReturnsNull));
+
+    [Fact]
+    public void DehumanizeRecognizesShortNameWithoutChangingHumanizeSource()
+    {
+        Assert.Equal(EnumShortNameAliasUnderTest.RawEnumName, "Display short name".DehumanizeTo<EnumShortNameAliasUnderTest>());
+        Assert.Equal("Raw enum name", EnumShortNameAliasUnderTest.RawEnumName.Humanize());
+    }
+
+    [Fact]
+    public void DehumanizeRecognizesConfiguredDescriptionAliasAlongsideDisplayMetadata()
+    {
+        Configurator.ResetUseEnumDescriptionPropertyLocator();
+        Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
+        try
+        {
+            Assert.Equal(EnumCustomAliasUnderTest.RawEnumName, "Configured description".DehumanizeTo<EnumCustomAliasUnderTest>());
+            Assert.Equal("Display description", EnumCustomAliasUnderTest.RawEnumName.Humanize());
+        }
+        finally
+        {
+            Configurator.ResetUseEnumDescriptionPropertyLocator();
+        }
+    }
+
+    [Theory]
+    [InlineData(nameof(BitFieldEnumUnderTest.DARK_GRAY))]
+    [InlineData("dark gray")]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void DehumanizePreservesFlagsAliases(string input)
+    {
+        Assert.Equal(BitFieldEnumUnderTest.DARK_GRAY, input.DehumanizeTo<BitFieldEnumUnderTest>());
+        Assert.Equal(BitFieldEnumUnderTest.DARK_GRAY, input.DehumanizeTo(typeof(BitFieldEnumUnderTest)));
+    }
+
+    [Theory]
+    [InlineData(nameof(EnumAliasCollisionUnderTest.RawName), (int)EnumAliasCollisionUnderTest.MetadataName)]
+    [InlineData("Supplemental collision", (int)EnumAliasCollisionUnderTest.LaterValue)]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void DehumanizeAliasCollisionsUseExistingCachePrecedence(string input, int expectedValue)
+    {
+        var expected = (EnumAliasCollisionUnderTest)expectedValue;
+        Assert.Equal(expected, input.DehumanizeTo<EnumAliasCollisionUnderTest>());
+        Assert.Equal(expected, input.DehumanizeTo(typeof(EnumAliasCollisionUnderTest)));
+    }
+
+    [Theory]
+    [InlineData(nameof(EnumDuplicateValueAliasesUnderTest.FirstName))]
+    [InlineData(nameof(EnumDuplicateValueAliasesUnderTest.SecondName))]
+    [InlineData("First display name")]
+    [InlineData("Second display name")]
+    public void DehumanizeRecognizesAliasesForDuplicateEnumValues(string input) =>
+        Assert.Equal(EnumDuplicateValueAliasesUnderTest.FirstName, input.DehumanizeTo<EnumDuplicateValueAliasesUnderTest>());
+
     enum DummyEnum
     {
         First,
         Second
     }
+
+    enum EnumAliasesUnderTest
+    {
+        [System.ComponentModel.Description("Configured description")]
+        [System.ComponentModel.DataAnnotations.Display(
+            Name = "Display name",
+            Description = "Display description",
+            ShortName = "Display short name")]
+        RawEnumName
+    }
+
+    enum EnumShortNameAliasUnderTest
+    {
+        [System.ComponentModel.DataAnnotations.Display(ShortName = "Display short name")]
+        RawEnumName
+    }
+
+    enum EnumCustomAliasUnderTest
+    {
+        [CustomProperty("Configured description")]
+        [System.ComponentModel.DataAnnotations.Display(Description = "Display description")]
+        RawEnumName
+    }
+
+    enum EnumAliasCollisionUnderTest
+    {
+        RawName = 0,
+        [System.ComponentModel.Description(nameof(RawName))]
+        MetadataName = 1,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Supplemental collision", Description = "Later canonical")]
+        LaterValue = 3,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Supplemental collision", Description = "Earlier canonical")]
+        EarlierValue = 2
+    }
+
+#pragma warning disable CA1069 // Duplicate values verify aliases for every declared enum name.
+    enum EnumDuplicateValueAliasesUnderTest
+    {
+        [System.ComponentModel.DataAnnotations.Display(Name = "First display name")]
+        FirstName = 0,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Second display name")]
+        SecondName = 0
+    }
+#pragma warning restore CA1069
 }
