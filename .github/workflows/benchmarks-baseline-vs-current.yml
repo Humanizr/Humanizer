@@ -34,22 +34,22 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup .NET 8
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '8.0.x'
 
       - name: Setup .NET 10
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '10.0.x'
 
       - name: Setup .NET 11 preview
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '11.0.100-preview.6.26359.118'
 
@@ -92,14 +92,14 @@ jobs:
           done < <(find "$out" -type f -name '*.md')
       
       - name: Upload JSON Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: humanizer-bdn-${{ matrix.kind }}-${{ matrix.targetFramework }}-json
           path: artifacts/${{ matrix.kind }}/${{ matrix.targetFramework }}/**/*.json
           retention-days: 7
       
       - name: Upload All Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: humanizer-bdn-${{ matrix.kind }}-${{ matrix.targetFramework }}-all
           path: artifacts/${{ matrix.kind }}/${{ matrix.targetFramework }}/
@@ -118,34 +118,34 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Download Baseline JSON
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: humanizer-bdn-baseline-${{ matrix.targetFramework }}-json
           path: baseline
       
       - name: Download Current JSON
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: humanizer-bdn-current-${{ matrix.targetFramework }}-json
           path: current
       
       - name: Setup .NET 8
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '8.0.x'
 
       - name: Setup .NET 10
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '10.0.x'
 
       - name: Setup .NET 11 preview
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '11.0.100-preview.6.26359.118'
       
@@ -237,7 +237,7 @@ jobs:
           fi
       
       - name: Upload Comparison Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: humanizer-bdn-comparison-${{ matrix.targetFramework }}
