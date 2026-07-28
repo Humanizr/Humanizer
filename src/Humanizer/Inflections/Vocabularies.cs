@@ -68,8 +68,12 @@ public static class Vocabularies
         _default.AddSingular("([b|r|c]ook|room|smooth)ies$", "$1ie");
 
         _default.AddIrregular("person", "people");
-        _default.AddIrregular("man", "men");
-        _default.AddSingular("^(specimen|pacmen)$", "$1");
+        _default.AddIrregular("man", "men", matchEnding: false);
+        _default.AddIrregular("spokesman", "spokesmen", matchEnding: false);
+        _default.AddIrregular("policeman", "policemen", matchEnding: false);
+        _default.AddIrregular("woman", "women", matchEnding: false);
+        _default.AddIrregular("freshman", "freshmen", matchEnding: false);
+        _default.AddIrregular("chairman", "chairmen", matchEnding: false);
         _default.AddIrregular("human", "humans");
         _default.AddIrregular("child", "children");
         _default.AddIrregular("sex", "sexes");

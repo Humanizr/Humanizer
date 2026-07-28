@@ -61,6 +61,13 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
 
     [Theory]
+    [InlineData("abdomen")]
+    [InlineData("acumen")]
+    [InlineData("dolmen")]
+    [InlineData("hymen")]
+    [InlineData("lumen")]
+    [InlineData("omen")]
+    [InlineData("ramen")]
     [InlineData("specimen")]
     [InlineData("Specimen")]
     [InlineData("Pacmen")]
