@@ -134,7 +134,7 @@ public static class OrdinalizeExtensions
     /// </summary>
     /// <param name="number">The number to be ordinalized</param>
     public static string Ordinalize(this int number) =>
-        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)));
+        number.Ordinalize(CultureInfo.CurrentCulture);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific locale's variations.
@@ -150,7 +150,7 @@ public static class OrdinalizeExtensions
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
     public static string Ordinalize(this int number, WordForm wordForm) =>
-        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)), wordForm);
+        number.Ordinalize(CultureInfo.CurrentCulture, wordForm);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
@@ -192,7 +192,7 @@ public static class OrdinalizeExtensions
     /// <param name="number">The number to be ordinalized</param>
     /// <param name="gender">The grammatical gender to use for output words</param>
     public static string Ordinalize(this int number, GrammaticalGender gender) =>
-        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)), gender);
+        number.Ordinalize(gender, CultureInfo.CurrentCulture);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence supporting specific
@@ -211,7 +211,7 @@ public static class OrdinalizeExtensions
     /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
     /// <returns>The number ordinalized</returns>
     public static string Ordinalize(this int number, GrammaticalGender gender, WordForm wordForm) =>
-        Configurator.Ordinalizer.Convert(number, NormalizeOrdinalNumberString(number.ToString(CultureInfo.InvariantCulture)), gender, wordForm);
+        number.Ordinalize(gender, CultureInfo.CurrentCulture, wordForm);
 
     /// <summary>
     /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.

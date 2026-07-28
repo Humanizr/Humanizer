@@ -71,7 +71,11 @@ public class LocaliserRegistryTests
         uiCulture.NumberFormat.NegativeSign = "!";
         using var _ = new DistinctCultureSwap(culture, uiCulture);
 
-        Assert.Equal("~1st", (-1).Ordinalize(null!));
+        Assert.Multiple(() =>
+        {
+            Assert.Equal("~1st", (-1).Ordinalize());
+            Assert.Equal("~1st", (-1).Ordinalize(null));
+        });
     }
 
     [Fact]
