@@ -4,6 +4,7 @@ public class FormatterExactOutputTests
 {
     static readonly DateTime LocalBase = new(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
     static readonly DateTime UtcBase = new(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
+    static readonly int[] RelativeDayCounts = [2, 3, 4, 5];
     static readonly int[] Pair = [1, 2];
     static readonly int[] Triple = [1, 2, 3];
     static readonly int[] Quadruple = [1, 2, 3, 4];
@@ -14,10 +15,8 @@ public class FormatterExactOutputTests
     {
         var culture = GetCulture(localeName);
 
-        for (var index = 0; index < LocaleFormatterExactTheoryData.DatePluralDayCounts.Length; index++)
+        foreach (var dayCount in RelativeDayCounts)
         {
-            var dayCount = LocaleFormatterExactTheoryData.DatePluralDayCounts[index];
-
             Assert.Equal(expected.PastFor(dayCount), ToVisibleText(LocalBase.AddDays(-dayCount).Humanize(false, LocalBase, culture)));
             Assert.Equal(expected.PastFor(dayCount), ToVisibleText(UtcBase.AddDays(-dayCount).Humanize(true, UtcBase, culture)));
             Assert.Equal(expected.FutureFor(dayCount), ToVisibleText(LocalBase.AddDays(dayCount).Humanize(false, LocalBase, culture)));

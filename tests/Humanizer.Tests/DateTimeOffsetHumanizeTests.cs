@@ -30,6 +30,17 @@ public class DateTimeOffsetHumanizeTests
     }
 
     [Fact]
+    public void DefaultStrategy_WeekAcrossDifferentOffsets()
+    {
+        Configurator.DateTimeOffsetHumanizeStrategy = new DefaultDateTimeOffsetHumanizeStrategy();
+
+        var baseTime = new DateTimeOffset(2024, 01, 01, 10, 0, 0, TimeSpan.FromHours(2));
+        var inputTime = new DateTimeOffset(2024, 01, 08, 03, 0, 0, TimeSpan.FromHours(-5));
+
+        Assert.Equal("one week from now", inputTime.Humanize(baseTime));
+    }
+
+    [Fact]
     public void PrecisionStrategy_SameOffset()
     {
         Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(0.75);
