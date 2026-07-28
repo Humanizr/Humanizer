@@ -490,6 +490,21 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
+    [InlineData(30, "4 weeks, 2 days")]
+    [InlineData(-30, "4 weeks, 2 days")]
+    [InlineData(31, "1 month")]
+    [InlineData(-31, "1 month")]
+    [InlineData(32, "1 month, 1 day")]
+    [InlineData(-32, "1 month, 1 day")]
+    [InlineData(60, "1 month, 4 weeks, 1 day")]
+    [InlineData(-60, "1 month, 4 weeks, 1 day")]
+    public void PositiveAndNegativeMonthsUseTheSameDecomposition(int days, string expected)
+    {
+        var actual = TimeSpan.FromDays(days).Humanize(precision: 3, maxUnit: TimeUnit.Month, minUnit: TimeUnit.Minute);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
     [InlineData(TimeUnit.Month, 109, 2, "3 months, 2 weeks")]
     [InlineData(TimeUnit.Year, 474, 3, "1 year, 3 months, 2 weeks")]
     public void CanRequestWeeksBelowMonthOrYear(TimeUnit maxUnit, int days, int precision, string expected)
