@@ -13,7 +13,7 @@ For more information see the [.NET Foundation Code of Conduct](http://www.dotnet
 This project uses modern SDK-style .NET projects, so you'll need a current .NET SDK to open and compile the repository.
 
 ### <a id="contribution-guideline">Contribution guideline</a>
-This project uses [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests.
+This project uses [GitHub flow](https://scottchacon.com/2011/08/31/github-flow/) for pull requests.
 So if you want to contribute, fork the repo, preferably create a local branch, based off of the `main` branch, to avoid conflicts with other activities, fix an issue, run the repository build and test commands, and send a PR if all is green.
 
 Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:

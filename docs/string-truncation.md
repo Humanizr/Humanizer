@@ -178,4 +178,4 @@ var notification = comment.Truncate(40);
 ## Related Topics
 
 - [String Humanization](string-humanization.md)
-- [String Transformations](string-transformations.md)
+- [String Transformations](https://github.com/Humanizr/Humanizer#transform-string)
