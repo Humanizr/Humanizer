@@ -127,7 +127,7 @@ public class ResourceBackedPhraseTests
         var culture = GetCulture(localeName);
         var query = from day in Enumerable.Range(0, 100000)
                     let timeSpan = TimeSpan.FromDays(day)
-                    let text = timeSpan.Humanize(precision: 3, culture: culture, maxUnit: TimeUnit.Year)
+                    let text = timeSpan.Humanize(precision: 4, culture: culture, maxUnit: TimeUnit.Year)
                     select text;
         var grouping = from text in query
                        group text by text into g
