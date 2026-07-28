@@ -15,6 +15,12 @@ public class AlbanianLocaleParityTests
     [InlineData(101, "njëqind e një")]
     [InlineData(1234, "një mijë e dyqind e tridhjetë e katër")]
     [InlineData(1000000, "një milion")]
+    [InlineData(1_000_000_000, "një miliar")]
+    [InlineData(2_000_000_000, "dy miliarë")]
+    [InlineData(1_000_000_000_000, "një bilion")]
+    [InlineData(2_000_000_000_000, "dy bilionë")]
+    [InlineData(1_000_000_000_000_000, "një biliar")]
+    [InlineData(2_000_000_000_000_000, "dy biliarë")]
     [InlineData(-21, "minus njëzet e një")]
     public void NumberToWords_ProducesAlbanianCardinals(long number, string expected)
     {
@@ -38,6 +44,11 @@ public class AlbanianLocaleParityTests
     [InlineData("minus njëzet e një", -21)]
     [InlineData("i parë", 1)]
     [InlineData("i njëzet e një", 21)]
+    [InlineData("dy miliarë", 2_000_000_000)]
+    [InlineData("një bilion", 1_000_000_000_000)]
+    [InlineData("dy bilionë", 2_000_000_000_000)]
+    [InlineData("një biliar", 1_000_000_000_000_000)]
+    [InlineData("dy biliarë", 2_000_000_000_000_000)]
     public void WordsToNumber_ParsesAlbanianCardinalsAndOrdinals(string words, long expected)
     {
         Assert.Equal(expected, words.ToNumber(Sq));
@@ -45,6 +56,10 @@ public class AlbanianLocaleParityTests
         Assert.Equal(expected, parsed);
         Assert.Null(unrecognizedWord);
     }
+
+    [Fact]
+    public void NumberToWords_RejectsMagnitudeWithoutCLDRScaleWord() =>
+        Assert.Throws<NotImplementedException>(() => 1_000_000_000_000_000_000.ToWords(Sq));
 
     [Theory]
     [InlineData(1, "1-rë")]

@@ -14,7 +14,7 @@ public static class LocaleNumberMagnitudeTheoryData
             { "et", 1234567L, "miljon kakssada kolmkümmend neli tuhat viissada kuuskümmend seitse" },
         { "sq", 1000000L, "një milion" },
         { "sq", 12345678L, "dymbëdhjetë milion e treqind e dyzet e pesë mijë e gjashtëqind e shtatëdhjetë e tetë" },
-        { "sq", 1000000000L, "një miliard" },
+        { "sq", 1000000000L, "një miliar" },
         { "mk", 1001L, "илјада и еден" },
         { "mk", 1000001L, "еден милион и еден" },
         { "mk", 1234567L, "еден милион двесте триесет и четири илјади петстотини шеесет и седум" },
@@ -227,10 +227,10 @@ public static class LocaleNumberMagnitudeTheoryData
         { "tk", 1001000001L, "bir milliard bir million bir" },
 
             { "et", 1001000001L, "miljard miljon üks" },
-        { "sq", 1000000000000L, "një trilion" },
-        { "sq", 1234567890123L, "një trilion e dyqind e tridhjetë e katër miliard e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "sq", 1000000000000L, "një bilion" },
+        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001000001L, "една милијарда еден милион и еден" },
-        { "mk", 4325010007018L, "четири трилиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
+        { "mk", 4325010007018L, "четири билиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
 
         { "be", 1001001L, "адзін мільён адна тысяча адзін" },
         { "be", 1001000001L, "адзін мільярд адзін мільён адзін" },

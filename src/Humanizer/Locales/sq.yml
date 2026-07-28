@@ -217,7 +217,7 @@ surfaces:
   number:
     words:
       engine: 'joined-scale'
-      maximumValue: 9223372036854775807
+      maximumValue: 999999999999999999
       zeroWord: 'zero'
       minusWord: 'minus'
       negativeJoinWord: ' '
@@ -272,17 +272,17 @@ surfaces:
         - 'nëntëqind'
       scales:
         -
-          value: 1000000000000000000
-          name: 'kuintilion'
-        -
           value: 1000000000000000
-          name: 'kuadrilion'
+          name: 'biliar'
+          pluralName: 'biliarë'
         -
           value: 1000000000000
-          name: 'trilion'
+          name: 'bilion'
+          pluralName: 'bilionë'
         -
           value: 1000000000
-          name: 'miliard'
+          name: 'miliar'
+          pluralName: 'miliarë'
         -
           value: 1000000
           name: 'milion'
@@ -400,12 +400,18 @@ surfaces:
         milion: 1000000
         'milionë': 1000000
         milione: 1000000
+        miliar: 1000000000
+        'miliarë': 1000000000
+        miliare: 1000000000
         miliard: 1000000000
         'miliardë': 1000000000
         miliarde: 1000000000
-        trilion: 1000000000000
-        kuadrilion: 1000000000000000
-        kuintilion: 1000000000000000000
+        bilion: 1000000000000
+        'bilionë': 1000000000000
+        bilione: 1000000000000
+        biliar: 1000000000000000
+        'biliarë': 1000000000000000
+        biliare: 1000000000000000
       ordinalMap:
         'zerotë': 0
         zerote: 0

@@ -225,7 +225,7 @@ surfaces:
   number:
     words:
       engine: 'joined-scale'
-      maximumValue: 9223372036854775807
+      maximumValue: 999999999999999999
       zeroWord: 'null'
       minusWord: 'miinus'
       negativeJoinWord: ' '
@@ -353,14 +353,9 @@ surfaces:
         - 'üheksakümmend üheksa'
       scales:
         -
-          value: 1000000000000000000
-          name: 'kvintiljon'
-          pluralName: 'kvintiljonit'
-          omitOneWhenSingular: true
-        -
           value: 1000000000000000
-          name: 'kvadriljon'
-          pluralName: 'kvadriljonit'
+          name: 'biljard'
+          pluralName: 'biljardit'
           omitOneWhenSingular: true
         -
           value: 1000000000000
@@ -10547,12 +10542,9 @@ surfaces:
         'biljon': 1000000000000
         'biljoni': 1000000000000
         'biljonit': 1000000000000
-        'kvadriljon': 1000000000000000
-        'kvadriljoni': 1000000000000000
-        'kvadriljonit': 1000000000000000
-        'kvintiljon': 1000000000000000000
-        'kvintiljoni': 1000000000000000000
-        'kvintiljonit': 1000000000000000000
+        'biljard': 1000000000000000
+        'biljardi': 1000000000000000
+        'biljardit': 1000000000000000
       ordinalMap:
         'nullis': 0
         'esimene': 1
