@@ -32,7 +32,7 @@ public enum EnumForCustomLocator
 
 public class EnumTestsResources
 {
-    public const string MemberWithDescriptionAttribute = "Some Description";
+    public const string MemberWithDescriptionAttribute = "SpaceX and the Moon";
     public const string MemberWithDescriptionAttributeSubclass = "Description in Description subclass";
     public const string MemberWithCustomDescriptionAttribute = "Description in custom Description attribute";
     public const string MemberWithImposterDescriptionAttribute = "Member with imposter description attribute";
@@ -40,7 +40,7 @@ public class EnumTestsResources
     public const string MemberWithoutDescriptionAttributeSentence = "Member without description attribute";
     public const string MemberWithoutDescriptionAttributeTitle = "Member Without Description Attribute";
     public const string MemberWithoutDescriptionAttributeLowerCase = "member without description attribute";
-    public const string MemberWithDisplayAttribute = "Description from Display attribute";
+    public const string MemberWithDisplayAttribute = "iPhone from NASA";
     public const string MemberWithDisplayAttributeWithoutDescription = "Displayattribute without description";
     public static string MemberWithLocalizedDisplayAttribute => "Localized description from Display attribute";
 }

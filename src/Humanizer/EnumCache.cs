@@ -7,20 +7,20 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 {
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
     static readonly Type TypeOfT = typeof(T);
-    static readonly (T Zero, FrozenDictionary<T, string> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) Info = CreateInfo();
+    static readonly (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) Info = CreateInfo();
 
-    private static (T Zero, FrozenDictionary<T, string> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
+    private static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
         var valuesArray = Enum.GetValues<T>();
         var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
-        var humanized = new Dictionary<T, string>(count);
+        var humanized = new Dictionary<T, (string Text, bool IsMetadata)>(count);
         var dehumanized = new Dictionary<string, T>(count, StringComparer.OrdinalIgnoreCase);
         foreach (var value in valuesArray)
         {
             var description = GetDescription(value);
             humanized[value] = description;
-            dehumanized[description] = value;
+            dehumanized[description.Text] = value;
         }
 
         var isBitFieldEnum = TypeOfT.GetCustomAttribute<FlagsAttribute>() != null;
@@ -32,11 +32,14 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             isBitFieldEnum);
     }
 
-    public static (T Zero, FrozenDictionary<T, string> Humanized, FrozenSet<T> Values) GetInfo() =>
+    public static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenSet<T> Values) GetInfo() =>
         (Info.Zero, Info.Humanized, Info.Values);
 
     public static FrozenDictionary<string, T> GetDehumanized() =>
         Info.Dehumanized;
+
+    public static bool IsMetadata(T input) =>
+        Info.Humanized.TryGetValue(input, out var humanized) && humanized.IsMetadata;
 
     public static bool TreatAsFlags(T input)
     {
@@ -48,7 +51,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         return !Enum.IsDefined(TypeOfT, input);
     }
 
-    static string GetDescription(T input)
+    static (string Text, bool IsMetadata) GetDescription(T input)
     {
 #if NET5_0_OR_GREATER
         var caseName = Enum.GetName(input)!;
@@ -59,10 +62,10 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 
         if (TryGetDescription(member, out var description))
         {
-            return description;
+            return (description, true);
         }
 
-        return caseName.Humanize();
+        return (caseName.Humanize(), false);
     }
 
     [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Reflection over attribute properties is intentional and documented.")]
