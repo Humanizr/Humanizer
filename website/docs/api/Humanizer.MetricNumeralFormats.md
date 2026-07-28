@@ -38,3 +38,10 @@ Include a space after the numeral\.
 Automatically select between \<a href="https://en\.wikipedia\.org/wiki/Long\_and\_short\_scales"\>long and short scale words\</a\>
 based on [System\.Globalization\.CultureInfo\.CurrentUICulture](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentuiculture 'System\.Globalization\.CultureInfo\.CurrentUICulture')\.
 For example, `1E9` renders as `billion` in `en-US` and `milliard` in `de-DE`\.
+
+<a name='Humanizer.MetricNumeralFormats.KeepTrailingZeros'></a>
+
+`KeepTrailingZeros` 32
+
+Include trailing zeros so the number of fractional digits matches the `decimals` argument\.
+Has no effect when `decimals` is [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null')\.

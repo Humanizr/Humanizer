@@ -16,14 +16,15 @@ import metric from '!!raw-loader!../_examples/scenarios-metric/Program.cs';
 Use `ToMetric` for compact decimal magnitudes such as `123.5k`, and
 `FromMetric` when an input follows Humanizer’s metric syntax.
 `MetricNumeralFormats` selects a symbol, SI prefix name, scale word, and
-optional spacing. Numeric text follows `CurrentCulture`; automatic scale-word
+optional spacing. On `main/preview`, it can also preserve a fixed number of
+fractional digits. Numeric text follows `CurrentCulture`; automatic scale-word
 selection follows `CurrentUICulture`.
 
 ## Example
 
 The example pins `en-US` for numbers and `de-DE` for UI language, controls
-decimals, automatically selects a scale word, emits an SI prefix name, and
-parses a symbol:
+decimals, preserves a fixed decimal width, automatically selects a scale word,
+emits an SI prefix name, and parses a symbol:
 
 <CodeBlock language="csharp" title="Program.cs">{metric}</CodeBlock>
 
@@ -37,16 +38,23 @@ parses a symbol:
 - `UseLongScaleWord` emits the selected long-scale equivalent.
 - `UseScaleWord` selects the locale’s short, long, or hybrid scale from
   `CurrentUICulture`.
+- `KeepTrailingZeros` includes exactly the number of fractional digits requested
+  by `decimals`.
 
-The nullable `decimals` argument is the maximum number of fractional digits;
-rounding applies at that limit and trailing zeros are omitted. Leave both
-options unset to preserve the available precision in the default
-representation.
+Without `KeepTrailingZeros`, the nullable `decimals` argument is the maximum
+number of fractional digits: rounding applies at that limit and trailing zeros
+are omitted. Combine `KeepTrailingZeros` with a non-null `decimals` value when
+fixed-width output matters. The flag has no effect when `decimals` is `null`.
+It also applies to zero, negative values, values without a metric prefix, and
+values rounded into the next prefix. Leave both options unset to preserve the
+available precision in the default representation.
 
 Use `UseScaleWord` for user-facing output that should follow the UI locale.
 Use `UseShortScaleWord` or `UseLongScaleWord` when an external format requires
 one scale regardless of locale. `CurrentCulture` still controls the decimal
-separator and other numeric formatting in either case.
+separator and other numeric formatting in either case. `KeepTrailingZeros`
+composes with those representations and with `WithSpace`. When no suffix is
+present, `WithSpace` still emits its trailing space, including for zero.
 
 ### Parse supported forms
 
@@ -66,8 +74,9 @@ when `UseScaleWord` must be deterministic.
 
 Metric conversion spans the documented corpus, but Humanizer 3 removed older
 boolean formatting overloads in favor of `MetricNumeralFormats`.
-`UseScaleWord` is a `main/preview` option. The executable uses the selected
-version's formatting API and runs against that package.
+`UseScaleWord` and `KeepTrailingZeros` are `main/preview` options. The
+executable uses the selected version's formatting API and runs against that
+package.
 
 ## Related guides and API
 

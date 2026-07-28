@@ -58,6 +58,39 @@ The desired letter casing to apply when humanizing the enum member name\.
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A human\-readable string representation of the enum value\.
 
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource)'></a>
+
+## EnumHumanizeExtensions\.Humanize\(this Enum, LetterCasing, EnumHumanizeSource\) Method
+
+Converts an enum value to a human\-readable string using the specified casing and source when the concrete enum type is only known at runtime\.
+
+```csharp
+public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing, Humanizer.EnumHumanizeSource source);
+```
+#### Parameters
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).input'></a>
+
+`input` [System\.Enum](https://learn.microsoft.com/en-us/dotnet/api/system.enum 'System\.Enum')
+
+The enum value to be humanized\.
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).casing'></a>
+
+`casing` [LetterCasing](Humanizer.LetterCasing.md 'Humanizer\.LetterCasing')
+
+The desired letter casing to apply when humanizing the enum member name\.
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize(thisSystem.Enum,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).source'></a>
+
+`source` [EnumHumanizeSource](Humanizer.EnumHumanizeSource.md 'Humanizer\.EnumHumanizeSource')
+
+The source used to humanize the enum value\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A human\-readable string representation of the enum value\.
+
 <a name='Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT)'></a>
 
 ## EnumHumanizeExtensions\.Humanize\<T\>\(this T\) Method
@@ -162,3 +195,44 @@ UserType.AnonymousUser.Humanize(LetterCasing.LowerCase) => "anonymous user"
 
 ### Remarks
 For a defined enum value, the specified casing is applied only when the output is derived from the enum member name\.
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource)'></a>
+
+## EnumHumanizeExtensions\.Humanize\<T\>\(this T, LetterCasing, EnumHumanizeSource\) Method
+
+Converts an enum value to a human\-readable string using the specified casing and source\.
+
+```csharp
+public static string Humanize<T>(this T input, Humanizer.LetterCasing casing, Humanizer.EnumHumanizeSource source)
+    where T : struct, System.Enum;
+```
+#### Type parameters
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).T'></a>
+
+`T`
+
+The enum type\. Must be a struct and implement [System\.Enum](https://learn.microsoft.com/en-us/dotnet/api/system.enum 'System\.Enum')\.
+#### Parameters
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).input'></a>
+
+`input` [T](Humanizer.EnumHumanizeExtensions.md#Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).T 'Humanizer\.EnumHumanizeExtensions\.Humanize\<T\>\(this T, Humanizer\.LetterCasing, Humanizer\.EnumHumanizeSource\)\.T')
+
+The enum value to be humanized\.
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).casing'></a>
+
+`casing` [LetterCasing](Humanizer.LetterCasing.md 'Humanizer\.LetterCasing')
+
+The desired letter casing to apply when humanizing the enum member name\.
+
+<a name='Humanizer.EnumHumanizeExtensions.Humanize_T_(thisT,Humanizer.LetterCasing,Humanizer.EnumHumanizeSource).source'></a>
+
+`source` [EnumHumanizeSource](Humanizer.EnumHumanizeSource.md 'Humanizer\.EnumHumanizeSource')
+
+The source used to humanize the enum value\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+A human\-readable string representation of the enum value\.

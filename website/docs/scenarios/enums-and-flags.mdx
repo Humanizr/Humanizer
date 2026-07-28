@@ -17,9 +17,10 @@ Enum humanization resolves one display label for each member: supported descript
 
 ## Example
 
-The executable verifies a two-flag value, every `DisplayAttribute` alias,
-case-insensitive generic dehumanization, no-match behavior, and an unknown flag
-bit:
+The executable verifies a two-flag value, explicit enum-name and
+`DisplayAttribute` source selection, every dehumanization alias,
+case-insensitive generic dehumanization, no-match behavior, metadata fallback,
+and an unknown flag bit:
 
 <CodeBlock language="csharp" title="Program.cs">{enumsFlags}</CodeBlock>
 
@@ -32,6 +33,35 @@ member name; authored metadata preserves its exact casing.
 `Configurator.UseEnumDescriptionPropertyLocator` can select a custom
 description-like property globally and must run before enum metadata is
 cached.
+
+### Select the humanization source
+
+On `main/preview`, pass both `LetterCasing` and `EnumHumanizeSource` when the
+default metadata precedence is not the desired presentation:
+
+- `Default` preserves the existing precedence. A `DisplayAttribute` uses its
+  `Description`, then its `Name`, then the member name. Without that attribute,
+  a configured description-like property is checked before the member name.
+- `EnumName` derives text from the member name and applies the requested casing.
+- `DisplayName` uses `DisplayAttribute.Name`.
+- `DisplayDescription` uses `DisplayAttribute.Description`.
+- `DisplayShortName` uses `DisplayAttribute.ShortName`, then its `Name`.
+
+If selected display metadata is missing, Humanizer falls back to the humanized
+enum member name and applies the requested casing. Authored display metadata
+preserves its casing, and localized `DisplayAttribute` getters are honored. For
+flags, the selected source and fallback apply independently to each constituent
+before the labels are joined.
+
+Source selection intentionally uses the
+`Humanize(LetterCasing, EnumHumanizeSource)` overload; there is no source-only
+overload, so existing calls such as `Humanize(default)` and `Humanize(0)` keep
+their prior meaning. An undefined `EnumHumanizeSource` throws
+`ArgumentOutOfRangeException`. Explicit source selection reads only the chosen
+`DisplayAttribute` property, so an unrelated invalid localized property does
+not break the call. A custom description-property locator affects the default
+path, not the explicitly selected `DisplayAttribute` sources. It does not
+change dehumanization aliases or their collision rules.
 
 ### Parse accepted aliases
 
@@ -54,10 +84,11 @@ Known nonzero flags are humanized and joined using the current UI culture. A def
 Aliases should be unambiguous even though matching is case-insensitive. On
 `main/preview`, a current humanized representation takes precedence over a
 supplemental alias when labels collide; collisions among supplemental aliases
-retain the later enum value in unsigned numeric order. Prefer the generic
-`DehumanizeTo<TEnum>` overload. The runtime `Type` overload uses reflection and
-is annotated with `RequiresDynamicCode` and `RequiresUnreferencedCode`; it is
-not the safe default for trimmed or Native AOT applications.
+retain the later enum value in unsigned numeric order. Prefer the generic enum
+overloads. Runtime enum humanization and the runtime `Type` dehumanization
+overload use reflection and are annotated with `RequiresDynamicCode` and
+`RequiresUnreferencedCode`; they are not the safe default for trimmed or Native
+AOT applications.
 
 ## Version notes
 
@@ -67,12 +98,15 @@ selected package. Consult the selected API before migrating code that stores
 values as the base `Enum` type. Metadata casing preservation when a
 `LetterCasing` argument is supplied, and dehumanization through raw,
 humanized, and supplemental metadata aliases, are `main/preview` behavior.
+`EnumHumanizeSource` and its two casing-plus-source overloads are also
+`main/preview` APIs.
 
 ## Related guides and API
 
 - [Collections and tuple names](./collections-and-tuples.mdx)
 - [Trimming and Native AOT](../concepts/trimming-and-native-aot.mdx)
 - [EnumHumanizeExtensions API](../api/Humanizer.EnumHumanizeExtensions.md)
+- [EnumHumanizeSource API](../api/Humanizer.EnumHumanizeSource.md)
 - [EnumDehumanizeExtensions API](../api/Humanizer.EnumDehumanizeExtensions.md)
 - [OnNoMatch API](../api/Humanizer.OnNoMatch.md)
 - [Configurator API](../api/Humanizer.Configurator.md)

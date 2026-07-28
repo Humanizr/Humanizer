@@ -129,6 +129,7 @@
 | :--- | :--- |
 | [ClockNotationRounding](Humanizer.ClockNotationRounding.md 'Humanizer\.ClockNotationRounding') | Options for specifying readable clock notation |
 | [DataUnit](Humanizer.DataUnit.md 'Humanizer\.DataUnit') | Represents the data units supported by Humanizer's data\-size formatting\. |
+| [EnumHumanizeSource](Humanizer.EnumHumanizeSource.md 'Humanizer\.EnumHumanizeSource') | Specifies the source used to humanize an enum value\. |
 | [GrammaticalCase](Humanizer.GrammaticalCase.md 'Humanizer\.GrammaticalCase') | Options for specifying the desired grammatical case for the output words |
 | [GrammaticalGender](Humanizer.GrammaticalGender.md 'Humanizer\.GrammaticalGender') | Options for specifying the desired grammatical gender for the output words |
 | [HeadingStyle](Humanizer.HeadingStyle.md 'Humanizer\.HeadingStyle') | Style for the cardinal direction humanization |
