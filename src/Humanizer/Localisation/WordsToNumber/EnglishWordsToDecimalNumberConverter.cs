@@ -12,6 +12,10 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
         @"(?<!\S)point(?!\S)",
         RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
+    static readonly Regex QuintillionMarker = new(
+        @"(?<!\S)quintillion(?!\S)",
+        RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+
     static readonly FrozenDictionary<string, char> FractionalDigits =
         new Dictionary<string, char>(StringComparer.OrdinalIgnoreCase)
         {
@@ -75,12 +79,9 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
             return false;
         }
 
-        var integerValue = 0L;
+        var integerDigits = "0";
         if (integerWords.Length > 0 &&
-            !integerConverter.TryConvert(
-                negativePrefix is null ? integerWords : $"{negativePrefix} {integerWords}",
-                out integerValue,
-                out unrecognizedNumber))
+            !TryConvertIntegerPart(integerWords, out integerDigits, out unrecognizedNumber))
         {
             return false;
         }
@@ -109,9 +110,7 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
             return false;
         }
 
-        var signedInteger = negativePrefix is not null && integerValue == 0
-            ? "-0"
-            : integerValue.ToString(CultureInfo.InvariantCulture);
+        var signedInteger = negativePrefix is null ? integerDigits : $"-{integerDigits}";
         var invariantValue = $"{signedInteger}.{fraction}";
 
         if (!decimal.TryParse(
@@ -128,6 +127,70 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
 
         unrecognizedNumber = null;
         return true;
+    }
+
+    bool TryConvertIntegerPart(string words, out string digits, out string? unrecognizedNumber)
+    {
+        try
+        {
+            if (integerConverter.TryConvert(words, out var value, out unrecognizedNumber))
+            {
+                digits = value.ToString(CultureInfo.InvariantCulture);
+                return true;
+            }
+
+            var markers = QuintillionMarker.Matches(words);
+            if (markers.Count != 1)
+            {
+                digits = string.Empty;
+                return false;
+            }
+
+            var marker = markers[0];
+            var highWords = words[..marker.Index].Trim();
+            var lowWords = words[(marker.Index + marker.Length)..].Trim();
+
+            if (highWords.Length == 0 ||
+                !integerConverter.TryConvert(highWords, out var high, out unrecognizedNumber))
+            {
+                digits = string.Empty;
+                return false;
+            }
+
+            if (high <= 0)
+            {
+                digits = string.Empty;
+                unrecognizedNumber = highWords;
+                return false;
+            }
+
+            var low = 0L;
+            if (lowWords.Length > 0 &&
+                !integerConverter.TryConvert(lowWords, out low, out unrecognizedNumber))
+            {
+                digits = string.Empty;
+                return false;
+            }
+
+            if (low is < 0 or >= 1_000_000_000_000_000_000L)
+            {
+                digits = string.Empty;
+                unrecognizedNumber = lowWords;
+                return false;
+            }
+
+            digits = string.Concat(
+                high.ToString(CultureInfo.InvariantCulture),
+                low.ToString("D18", CultureInfo.InvariantCulture));
+            unrecognizedNumber = null;
+            return true;
+        }
+        catch (OverflowException)
+        {
+            digits = string.Empty;
+            unrecognizedNumber = words;
+            return false;
+        }
     }
 
     static string? StripNegativePrefix(ref string words)

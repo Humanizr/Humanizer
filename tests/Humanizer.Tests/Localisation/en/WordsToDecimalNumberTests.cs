@@ -12,6 +12,9 @@ public class WordsToDecimalNumberTests
     [InlineData("minus zero point five", "-0.5")]
     [InlineData("negative point zero five", "-0.05")]
     [InlineData("one hundred and five point zero", "105.0")]
+    [InlineData("ten quintillion point one", "10000000000000000000.1")]
+    [InlineData("ten quintillion one point two", "10000000000000000001.2")]
+    [InlineData("negative ten quintillion point one", "-10000000000000000000.1")]
     [InlineData("point five", "0.5")]
     public void ParsesEnglishDecimalPhrasesAndPreservesScale(string words, string expected)
     {
