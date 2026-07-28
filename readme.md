@@ -807,6 +807,17 @@ CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("de-DE");
 "100m".FromMetric() => 0.1
 ```
 
+### Common fractions
+
+Convert a decimal to the closest common fraction within a caller-supplied tolerance:
+
+```csharp
+1.25m.Fractionalize(maxDenominator: 5, tolerance: 0m) => "1 1/4"
+0.34m.Fractionalize(maxDenominator: 5, tolerance: 0.01m) => "1/3"
+0.75m.Fractionalize(maxDenominator: 4, tolerance: 0m, useUnicode: true) => "¾"
+0.11m.Fractionalize(maxDenominator: 10, tolerance: 0m) => "0.11"
+```
+
 
 ### ByteSize
 
