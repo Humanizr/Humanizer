@@ -30,6 +30,8 @@ public class ToQuantityTests
     [InlineData("slices", -1, "-1 slice")]
     [InlineData("slices", 2, "2 slices")]
     [InlineData("slices", -2, "-2 slices")]
+    [InlineData("meter per second", 2, "2 meters per second")]
+    [InlineData("meters per second", 1, "1 meter per second")]
     public void ToQuantity(string word, int quantity, string expected) =>
         Assert.Equal(expected, word.ToQuantity(quantity));
 
@@ -125,6 +127,7 @@ public class ToQuantityTests
     [InlineData("hour", 1, "1 hour")]
     [InlineData("hour", 0.5, "0.5 hours")]
     [InlineData("hour", 22.4, "22.4 hours")]
+    [InlineData("meter per second", 2.5, "2.5 meters per second")]
     public void ToDoubleQuantityNumeric(string word, double quantity, string expected) =>
         // ReSharper disable once RedundantArgumentDefaultValue
         Assert.Equal(expected, word.ToQuantity(quantity));

@@ -150,6 +150,7 @@ public static class Vocabularies
         //Fix 1132
         _default.AddUncountable("metadata");
 
+        _default.MarkRulesAsBuiltIn();
         return _default;
     }
 }

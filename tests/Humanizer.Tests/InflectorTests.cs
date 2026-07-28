@@ -46,6 +46,64 @@ public class InflectorTests
         Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
     }
 
+    [Theory]
+    [InlineData("meter per second", "meters per second")]
+    [InlineData("nautical mile per hour", "nautical miles per hour")]
+    [InlineData("foot per second", "feet per second")]
+    [InlineData("Foot per Second", "Feet per Second")]
+    [InlineData("FOOT PER SECOND", "FEET PER SECOND")]
+    [InlineData("fish per hour", "fish per hour")]
+    [InlineData("(meter per second).", "(meters per second).")]
+    [InlineData("joule  PER\tmole per kelvin", "joules  PER\tmole per kelvin")]
+    [InlineData("meter\u00A0per\u00A0second", "meters\u00A0per\u00A0second")]
+    [InlineData("foot\u2009per\u2009second", "feet\u2009per\u2009second")]
+    [InlineData("request per customer", "requests per customer")]
+    [InlineData("meter per curves", "meters per curves")]
+    public void InflectsCompoundRates(string singular, string plural)
+    {
+        Assert.Equal(plural, singular.Pluralize());
+        Assert.Equal(singular, plural.Singularize());
+        Assert.Equal(plural, singular.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(plural, plural.Pluralize(inputIsKnownToBeSingular: false));
+        Assert.Equal(singular, singular.Singularize(inputIsKnownToBePlural: false));
+        Assert.Equal(singular, plural.Singularize(inputIsKnownToBePlural: false));
+    }
+
+    [Theory]
+    [InlineData("as per request", "as per requests")]
+    [InlineData("meter/per/second", "meter/per/seconds")]
+    [InlineData("meter\nper\nsecond", "meter\nper\nseconds")]
+    public void DoesNotTreatUnstructuredPhrasesAsCompoundRates(string singular, string plural)
+    {
+        Assert.Equal(plural, singular.Pluralize());
+        Assert.Equal(singular, plural.Singularize());
+    }
+
+    [Fact]
+    public void SingularizingParenthesizedAsPerPhraseIsUnchanged() =>
+        Assert.Equal("(as per requests)", "(as per requests)".Singularize());
+
+    [Fact]
+    public void ExplicitPhraseRulesOverrideCompoundRateInflection()
+    {
+        var vocabulary = new Vocabulary();
+        vocabulary.AddPlural("meter per second", "meter rate units");
+        vocabulary.AddSingular("meters per second", "meters rate unit");
+
+        Assert.Equal("meter rate units", vocabulary.Pluralize("meter per second"));
+        Assert.Equal("meters rate unit", vocabulary.Singularize("meters per second"));
+    }
+
+    [Fact]
+    public void ExplicitUncountableCompoundRateIsPreserved()
+    {
+        var vocabulary = new Vocabulary();
+        vocabulary.AddUncountable("meter per second");
+
+        Assert.Equal("meter per second", vocabulary.Pluralize("meter per second"));
+        Assert.Equal("meter per second", vocabulary.Singularize("meter per second"));
+    }
+
     [Fact, UseCulture("tr-TR")]
     public void AllCapsInflectionsUseInvariantCasing() =>
         Assert.Equal("CACTI", "CACTUS".Pluralize());
