@@ -60,7 +60,7 @@ Control the output casing:
 
 Available casing options:
 - `LetterCasing.Title` - Capitalizes the first letter of each word
-- `LetterCasing.Sentence` - Uppercases only the first character, leaving the remainder unchanged
+- `LetterCasing.Sentence` - Uppercases only the first character of the humanized result, leaving the remainder of that result unchanged
 - `LetterCasing.AllCaps` - All uppercase
 - `LetterCasing.LowerCase` - All lowercase
 
