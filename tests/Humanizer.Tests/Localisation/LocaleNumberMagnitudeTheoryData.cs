@@ -13,7 +13,7 @@ public static class LocaleNumberMagnitudeTheoryData
             { "et", 1000001L, "miljon üks" },
             { "et", 1234567L, "miljon kakssada kolmkümmend neli tuhat viissada kuuskümmend seitse" },
         { "sq", 1000000L, "një milion" },
-        { "sq", 12345678L, "dymbëdhjetë milion e treqind e dyzet e pesë mijë e gjashtëqind e shtatëdhjetë e tetë" },
+        { "sq", 12345678L, "dymbëdhjetë milionë e treqind e dyzet e pesë mijë e gjashtëqind e shtatëdhjetë e tetë" },
         { "sq", 1000000000L, "një miliar" },
         { "mk", 1001L, "илјада и еден" },
         { "mk", 1000001L, "еден милион и еден" },
@@ -228,7 +228,7 @@ public static class LocaleNumberMagnitudeTheoryData
 
             { "et", 1001000001L, "miljard miljon üks" },
         { "sq", 1000000000000L, "një bilion" },
-        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milionë e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001000001L, "една милијарда еден милион и еден" },
         { "mk", 4325010007018L, "четири билиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
 

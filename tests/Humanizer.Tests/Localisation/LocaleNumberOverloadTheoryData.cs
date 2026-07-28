@@ -8,7 +8,7 @@ public static class LocaleNumberOverloadTheoryData
         { "tk", 1001001L, "bir million müň bir" },
 
             { "et", 1001001L, "miljon tuhat üks" },
-        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milionë e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и еден" },
         { "mk", 1001000001L, "една милијарда еден милион и еден" },
         { "mk", 4325010007018L, "четири билиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
@@ -271,7 +271,7 @@ public static class LocaleNumberOverloadTheoryData
         { "tk", 1001001L, "bir million müň bir" },
 
             { "et", 1001001L, "miljon tuhat üks" },
-        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milionë e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и еден" },
         { "mk", 1001000001L, "една милијарда еден милион и еден" },
         { "mk", 4325010007018L, "четири билиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
@@ -533,7 +533,7 @@ public static class LocaleNumberOverloadTheoryData
         { "tk", 1001001L, "bir million müň bir" },
 
             { "et", 1001001L, "miljon tuhat üks" },
-        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milionë e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и една" },
         { "mk", 1001000001L, "една милијарда еден милион и една" },
         { "mk", 4325010007018L, "четири билиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },
@@ -795,7 +795,7 @@ public static class LocaleNumberOverloadTheoryData
         { "tk", 1001001L, "bir million müň bir" },
 
             { "et", 1001001L, "miljon tuhat üks" },
-        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milion e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
+        { "sq", 1234567890123L, "një bilion e dyqind e tridhjetë e katër miliarë e pesëqind e gjashtëdhjetë e shtatë milionë e tetëqind e nëntëdhjetë mijë e njëqind e njëzet e tre" },
         { "mk", 1001001L, "еден милион илјада и една" },
         { "mk", 1001000001L, "една милијарда еден милион и една" },
         { "mk", 4325010007018L, "четири билиони триста дваесет и пет милијарди десет милиони седум илјади и осумнаесет" },

@@ -15,6 +15,7 @@ public class AlbanianLocaleParityTests
     [InlineData(101, "njëqind e një")]
     [InlineData(1234, "një mijë e dyqind e tridhjetë e katër")]
     [InlineData(1000000, "një milion")]
+    [InlineData(2_000_000, "dy milionë")]
     [InlineData(1_000_000_000, "një miliar")]
     [InlineData(2_000_000_000, "dy miliarë")]
     [InlineData(1_000_000_000_000, "një bilion")]
