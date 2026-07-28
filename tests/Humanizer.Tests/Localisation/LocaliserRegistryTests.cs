@@ -34,10 +34,31 @@ public class LocaliserRegistryTests
             Assert.Equal("one", 1.ToWords());
             Assert.Equal("1st", 1.Ordinalize());
             Assert.Equal("January 1st, 2015", new DateTime(2015, 1, 1).ToOrdinalWords());
+#if NET6_0_OR_GREATER
             Assert.Equal("January 1st, 2015", new DateOnly(2015, 1, 1).ToOrdinalWords());
+#endif
             Assert.Equal("a and b", new List<string> { "a", "b" }.Humanize());
             Assert.Equal("1 day", TimeSpan.FromDays(1).Humanize());
+#if NET6_0_OR_GREATER
             Assert.Equal("one twenty-three", new TimeOnly(13, 23).ToClockNotation());
+#endif
+        });
+    }
+
+    [Fact]
+    public void RegistryCacheDistinguishesCulturesWithTheSameName()
+    {
+        var culture = new CultureInfo("en-US");
+        culture.NumberFormat.NegativeSign = "~";
+        var uiCulture = new CultureInfo("en-US");
+        uiCulture.NumberFormat.NegativeSign = "!";
+        var registry = new LocaliserRegistry<string>(resolvedCulture => resolvedCulture.NumberFormat.NegativeSign);
+        using var _ = new DistinctCultureSwap(culture, uiCulture);
+
+        Assert.Multiple(() =>
+        {
+            Assert.Equal("!", registry.ResolveForUiCulture());
+            Assert.Equal("~", registry.ResolveForCulture(null));
         });
     }
 

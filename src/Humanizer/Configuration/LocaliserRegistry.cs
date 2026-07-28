@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace Humanizer;
 
 /// <summary>
@@ -10,7 +12,9 @@ public class LocaliserRegistry<TLocaliser>
     readonly object lockObject = new();
     volatile FrozenDictionary<string, Func<CultureInfo, TLocaliser>>? frozenLocalisers;
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
-    readonly ConcurrentDictionary<string, TLocaliser> cultureSpecificCache = new();
+#pragma warning disable IL2091
+    readonly ConditionalWeakTable<CultureInfo, TLocaliser> cultureSpecificCache = new();
+#pragma warning restore IL2091
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -37,15 +41,7 @@ public class LocaliserRegistry<TLocaliser>
     public TLocaliser ResolveForCulture(CultureInfo? culture)
     {
         var cultureInfo = culture ?? CultureInfo.CurrentCulture;
-        var cultureName = cultureInfo.Name;
-
-        // Use ConcurrentDictionary with culture name (string) as key to avoid CultureInfo equality checks
-        // and reduce allocations when the same culture is requested multiple times
-        return cultureSpecificCache.GetOrAdd(cultureName, _ =>
-        {
-            var factory = FindLocaliser(cultureInfo);
-            return factory(cultureInfo);
-        });
+        return cultureSpecificCache.GetValue(cultureInfo, c => FindLocaliser(c)(c));
     }
 
     /// <summary>

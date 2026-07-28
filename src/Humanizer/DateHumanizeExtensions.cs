@@ -11,7 +11,7 @@ public static class DateHumanizeExtensions
     /// <param name="input">The date to be humanized</param>
     /// <param name="utcDate">Nullable boolean value indicating whether the date is in UTC or local. If null, current date is used with the same DateTimeKind of input</param>
     /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTime input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
@@ -28,7 +28,7 @@ public static class DateHumanizeExtensions
     /// <param name="input">The date to be humanized</param>
     /// <param name="utcDate">Nullable boolean value indicating whether the date is in UTC or local. If null, current date is used with the same DateTimeKind of input</param>
     /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTime? input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
@@ -47,7 +47,7 @@ public static class DateHumanizeExtensions
     /// </summary>
     /// <param name="input">The date to be humanized</param>
     /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
@@ -61,7 +61,7 @@ public static class DateHumanizeExtensions
     /// </summary>
     /// <param name="input">The date to be humanized</param>
     /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTimeOffset? input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
@@ -81,7 +81,7 @@ public static class DateHumanizeExtensions
     /// </summary>
     /// <param name="input">The date to be humanized</param>
     /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateOnly input, DateOnly? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
@@ -94,7 +94,7 @@ public static class DateHumanizeExtensions
     /// </summary>
     /// <param name="input">The date to be humanized</param>
     /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateOnly? input, DateOnly? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
@@ -114,7 +114,7 @@ public static class DateHumanizeExtensions
     /// <param name="input">The date to be humanized</param>
     /// <param name="useUtc">If <paramref name="timeToCompareAgainst"/> is null, used to determine if the current time is UTC or local. Defaults to UTC.</param>
     /// <param name="timeToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this TimeOnly input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo? culture = null)
     {
@@ -129,7 +129,7 @@ public static class DateHumanizeExtensions
     /// <param name="input">The date to be humanized</param>
     /// <param name="useUtc">If <paramref name="timeToCompareAgainst"/> is null, used to determine if the current time is UTC or local. Defaults to UTC.</param>
     /// <param name="timeToCompareAgainst">Time to compare the input against. If null, current date is used as base</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <returns>distance of time in words</returns>
     public static string Humanize(this TimeOnly? input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo? culture = null)
     {
