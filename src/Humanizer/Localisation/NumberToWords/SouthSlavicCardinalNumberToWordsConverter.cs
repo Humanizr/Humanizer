@@ -49,6 +49,11 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
+        if (GetAbsoluteValue(number) > profile.MaximumValue)
+        {
+            throw new NotImplementedException();
+        }
+
         if (number < 0)
         {
             return profile.MinusWord + " " + ConvertOrdinalPositive(-(long)number, gender);

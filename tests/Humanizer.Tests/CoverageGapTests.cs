@@ -1974,6 +1974,8 @@ public class CoverageGapTests
         Assert.Equal("two scale-paucal", russian.Convert(2000));
         Assert.Equal("five scale-plural", russian.Convert(5000));
         Assert.Throws<NotImplementedException>(() => russian.Convert(20_001));
+        Assert.Throws<NotImplementedException>(() => russian.ConvertToOrdinal(20_001));
+        Assert.Throws<NotImplementedException>(() => russian.ConvertToOrdinal(-20_001));
 
         var slovenian = new SouthSlavicCardinalNumberToWordsConverter(
             CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Slovenian),
