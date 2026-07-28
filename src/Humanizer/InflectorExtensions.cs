@@ -211,14 +211,15 @@ public static partial class InflectorExtensions
             leadingUnderscoreCount++;
         }
 
+        var suffix = leadingUnderscoreCount > 0 ? input[leadingUnderscoreCount..] : input;
         string camelized;
-        if (TryPascalizeAscii(input, lowerFirst: true, out var result))
+        if (TryPascalizeAscii(suffix, lowerFirst: true, out var result))
         {
             camelized = result;
         }
         else
         {
-            var word = input.Pascalize();
+            var word = suffix.Pascalize();
             camelized = word.Length > 0
                 ? StringHumanizeExtensions.Concat(
                     char.ToLowerInvariant(word[0]),
