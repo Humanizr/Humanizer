@@ -79,6 +79,7 @@ public static partial class InflectorExtensions
     /// </returns>
     /// <remarks>
     /// Uses the default vocabulary which includes English pluralization rules and common irregular forms.
+    /// In compound rates separated by the word "per", the numerator is pluralized and the denominator is preserved.
     /// </remarks>
     /// <example>
     /// <code>
@@ -86,6 +87,7 @@ public static partial class InflectorExtensions
     /// "cat".Pluralize() => "cats"
     /// "box".Pluralize() => "boxes"
     /// "man".Pluralize() => "men"
+    /// "meter per second".Pluralize() => "meters per second"
     /// "PERSON".Pluralize() => "PEOPLE"
     /// "cats".Pluralize(inputIsKnownToBeSingular: false) => "cats" (avoids double pluralization)
     /// </code>
@@ -113,6 +115,7 @@ public static partial class InflectorExtensions
     /// </returns>
     /// <remarks>
     /// Uses the default vocabulary which includes English singularization rules and common irregular forms.
+    /// In compound rates separated by the word "per", the numerator is singularized and the denominator is preserved.
     /// </remarks>
     /// <example>
     /// <code>
@@ -120,6 +123,7 @@ public static partial class InflectorExtensions
     /// "cats".Singularize() => "cat"
     /// "boxes".Singularize() => "box"
     /// "men".Singularize() => "man"
+    /// "meters per second".Singularize() => "meter per second"
     /// "PEOPLE".Singularize() => "PERSON"
     /// "person".Singularize(inputIsKnownToBePlural: false) => "person" (avoids incorrect singularization)
     /// </code>

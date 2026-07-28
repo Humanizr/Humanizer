@@ -418,6 +418,7 @@ Intelligently pluralize words, handling irregular and uncountable forms:
 "Man".Pluralize() => "Men"
 "string".Pluralize() => "strings"
 "person".Pluralize() => "people"
+"meter per second".Pluralize() => "meters per second"
 
 // Uncertain plurality? Use the optional parameter
 "Men".Pluralize(inputIsKnownToBeSingular: false) => "Men"
@@ -433,6 +434,7 @@ Convert plural words to singular form:
 "Men".Singularize() => "Man"
 "strings".Singularize() => "string"
 "people".Singularize() => "person"
+"meters per second".Singularize() => "meter per second"
 
 // Uncertain plurality? Use the optional parameter
 "Man".Singularize(inputIsKnownToBePlural: false) => "Man"

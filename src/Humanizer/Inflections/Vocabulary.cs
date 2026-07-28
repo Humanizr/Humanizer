@@ -73,6 +73,19 @@ public partial class Vocabulary
     public void AddSingular(string rule, string replacement) =>
         singulars.Add(new(rule, replacement));
 
+    internal void MarkRulesAsBuiltIn()
+    {
+        foreach (var rule in plurals)
+        {
+            rule.IsBuiltIn = true;
+        }
+
+        foreach (var rule in singulars)
+        {
+            rule.IsBuiltIn = true;
+        }
+    }
+
     /// <summary>
     /// Pluralizes the provided input considering irregular words
     /// </summary>
@@ -92,7 +105,13 @@ public partial class Vocabulary
             return s + "s";
         }
 
-        var result = ApplyRules(plurals, word, false);
+        var result = ApplyRules(plurals, word, false, out var wholeWordMatch);
+
+        var compoundHeadLength = CompoundHeadLength(word);
+        if (compoundHeadLength > 0 && !wholeWordMatch)
+        {
+            return Pluralize(word[..compoundHeadLength], inputIsKnownToBeSingular) + word[compoundHeadLength..];
+        }
 
         if (inputIsKnownToBeSingular)
         {
@@ -132,7 +151,13 @@ public partial class Vocabulary
             return s;
         }
 
-        var result = ApplyRules(singulars, word, skipSimpleWords);
+        var result = ApplyRules(singulars, word, skipSimpleWords, out var wholeWordMatch);
+
+        var compoundHeadLength = CompoundHeadLength(word);
+        if (compoundHeadLength > 0 && !wholeWordMatch)
+        {
+            return Singularize(word[..compoundHeadLength], inputIsKnownToBePlural, skipSimpleWords) + word[compoundHeadLength..];
+        }
 
         if (inputIsKnownToBePlural)
         {
@@ -159,6 +184,13 @@ public partial class Vocabulary
 
     string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)
     {
+        return ApplyRules(rules, word, skipFirstRule, out _);
+    }
+
+    string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule, out bool wholeWordMatch)
+    {
+        wholeWordMatch = false;
+
         if (word == null)
         {
             return null;
@@ -171,6 +203,7 @@ public partial class Vocabulary
 
         if (IsUncountable(word))
         {
+            wholeWordMatch = true;
             return word;
         }
 
@@ -178,7 +211,7 @@ public partial class Vocabulary
         var end = skipFirstRule ? 1 : 0;
         for (var i = rules.Count - 1; i >= end; i--)
         {
-            if ((result = rules[i].Apply(word)) != null)
+            if ((result = rules[i].Apply(word, out wholeWordMatch)) != null)
             {
                 break;
             }
@@ -194,6 +227,49 @@ public partial class Vocabulary
 
     bool IsUncountable(string word) =>
         uncountables.Contains(word);
+
+    static int CompoundHeadLength(string word)
+    {
+        for (var i = 1; i < word.Length - 3; i++)
+        {
+            if (!IsHorizontalWhitespace(word[i - 1]) ||
+                word[i] is not ('p' or 'P') ||
+                word[i + 1] is not ('e' or 'E') ||
+                word[i + 2] is not ('r' or 'R') ||
+                !IsHorizontalWhitespace(word[i + 3]))
+            {
+                continue;
+            }
+
+            var headLength = i - 1;
+            while (headLength > 0 && IsHorizontalWhitespace(word[headLength - 1]))
+            {
+                headLength--;
+            }
+
+            var complementStart = i + 4;
+            while (complementStart < word.Length && IsHorizontalWhitespace(word[complementStart]))
+            {
+                complementStart++;
+            }
+
+            if (headLength > 0 && complementStart < word.Length && !EndsWithAs(word, headLength))
+            {
+                return headLength;
+            }
+        }
+
+        return 0;
+    }
+
+    static bool EndsWithAs(string word, int length) =>
+        length >= 2 &&
+        word[length - 2] is 'a' or 'A' &&
+        word[length - 1] is 's' or 'S' &&
+        (length == 2 || IsHorizontalWhitespace(word[length - 3]));
+
+    static bool IsHorizontalWhitespace(char character) =>
+        character is ' ' or '\t';
 
     static string MatchUpperCase(string word, string replacement) =>
         word.Length > 1 && word.Any(char.IsUpper) && !word.Any(char.IsLower)
@@ -215,13 +291,18 @@ public partial class Vocabulary
     {
         readonly Regex regex = new(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        public string? Apply(string word)
+        public bool IsBuiltIn { get; set; }
+
+        public string? Apply(string word, out bool wholeWordMatch)
         {
-            if (!regex.IsMatch(word))
+            var match = regex.Match(word);
+            if (!match.Success)
             {
+                wholeWordMatch = false;
                 return null;
             }
 
+            wholeWordMatch = !IsBuiltIn && match.Index == 0 && match.Length == word.Length;
             return regex.Replace(word, replacement);
         }
     }
