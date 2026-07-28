@@ -748,15 +748,50 @@ try {
             ) -Algorithm SHA256).Hash
         }
     }
-    Remove-Item (
-        Join-Path $isolatedWebsiteRoot "docs/_examples"
-    ) -Recurse -Force
+    $releaseSnapshotPath = Join-Path (
+        $isolatedWebsiteRoot
+    ) "versioned_docs/version-3.0.10"
+    $releaseSidebarPath = Join-Path (
+        $isolatedWebsiteRoot
+    ) "versioned_sidebars/version-3.0.10-sidebars.json"
+    $releaseSnapshotDigest = Get-SnapshotDirectoryDigest $releaseSnapshotPath
+    $releaseSidebarHash = (
+        Get-FileHash $releaseSidebarPath -Algorithm SHA256
+    ).Hash
+    $canonicalDocsRoot = Join-Path $tempRoot "canonical-docs"
     Copy-Item `
-        (Join-Path $isolatedWebsiteRoot (
-            "versioned_docs/version-3.0.10/_examples"
-        )) `
-        (Join-Path $isolatedWebsiteRoot "docs/_examples") `
+        (Join-Path $isolatedWebsiteRoot "docs") `
+        $canonicalDocsRoot `
         -Recurse
+    Remove-Item (
+        Join-Path $isolatedWebsiteRoot "docs"
+    ) -Recurse -Force
+    Copy-Item $releaseSnapshotPath (
+        Join-Path $isolatedWebsiteRoot "docs"
+    ) -Recurse
+    Remove-Item (
+        Join-Path $isolatedWebsiteRoot "docs/api"
+    ) -Recurse -Force
+    Copy-Item $releaseSidebarPath (
+        Join-Path $isolatedWebsiteRoot "sidebars.json"
+    ) -Force
+    $releaseOverlayRoot = Join-Path (
+        $isolatedWebsiteRoot
+    ) "version-overrides/3.0.10"
+    $releaseOverlay = Get-Content -Raw (
+        Join-Path $releaseOverlayRoot "overlay.json"
+    ) | ConvertFrom-Json -Depth 20
+    foreach ($path in @(
+        $releaseOverlay.replacements + $releaseOverlay.exclusions
+    )) {
+        $destination = Join-Path (
+            Join-Path $isolatedWebsiteRoot "docs"
+        ) $path
+        New-Item -ItemType Directory `
+            -Path (Split-Path $destination -Parent) `
+            -Force | Out-Null
+        Copy-Item (Join-Path $canonicalDocsRoot $path) $destination -Force
+    }
     $oldLatest = @(
         $isolatedManifest.versions |
             Where-Object version -eq "3.0.8"
@@ -795,6 +830,26 @@ try {
         -WebsiteRoot $isolatedWebsiteRoot *> $null
     $releasedManifest = Get-Content -Raw $isolatedManifestPath |
         ConvertFrom-Json -Depth 20
+    $releasedEntry = @(
+        $releasedManifest.versions |
+            Where-Object version -eq "3.0.10"
+    )[0]
+    if ($releasedEntry.immutability.snapshotSha256 -ne
+            $releaseSnapshotDigest -or
+        $releasedEntry.immutability.sidebarSha256 -ne
+            $releaseSidebarHash -or
+        (Get-SnapshotDirectoryDigest (
+            Join-Path $isolatedWebsiteRoot (
+                "versioned_docs/version-3.0.10"
+            )
+        )) -ne $releaseSnapshotDigest -or
+        (Get-FileHash (
+            Join-Path $isolatedWebsiteRoot (
+                "versioned_sidebars/version-3.0.10-sidebars.json"
+            )
+        ) -Algorithm SHA256).Hash -ne $releaseSidebarHash) {
+        throw "Release round trip changed immutable 3.0.10 state."
+    }
     foreach ($priorVersion in $priorVersions) {
         $releasedEntry = @(
             $releasedManifest.versions |
