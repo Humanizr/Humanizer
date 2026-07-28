@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "versions": [
+    {
+      "version": "2.10.1",
+      "label": "2.10.1",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.10.1"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "netstandard2.0",
+      "compatibilityOverlay": "version-overrides/2.10.1",
+      "route": "2.10.1",
+      "published": true,
+      "latestStable": false
+    },
+    {
+      "version": "2.11.10",
+      "label": "2.11.10",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.11.10"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net6.0",
+      "compatibilityOverlay": "version-overrides/2.11.10",
+      "route": "2.11.10",
+      "published": true,
+      "latestStable": false
+    },
+    {
+      "version": "2.13.14",
+      "label": "2.13.14",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.13.14"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net6.0",
+      "compatibilityOverlay": "version-overrides/2.13.14",
+      "route": "2.13.14",
+      "published": true,
+      "latestStable": false
+    },
+    {
+      "version": "2.14.1",
+      "label": "2.14.1",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "2.14.1"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net6.0",
+      "compatibilityOverlay": "version-overrides/2.14.1",
+      "route": "2.14.1",
+      "published": true,
+      "latestStable": false
+    },
+    {
+      "version": "3.0.1",
+      "label": "3.0.1",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "3.0.1"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net10.0",
+      "compatibilityOverlay": "version-overrides/3.0.1",
+      "route": "3.0.1",
+      "published": true,
+      "latestStable": false
+    },
+    {
+      "version": "3.0.10",
+      "label": "3.0.10 (latest)",
+      "source": {
+        "kind": "nuget",
+        "packageVersion": "3.0.10"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer.Core",
+      "referenceTfm": "net10.0",
+      "compatibilityOverlay": "version-overrides/3.0.10",
+      "route": "",
+      "published": true,
+      "latestStable": true
+    },
+    {
+      "version": "current",
+      "label": "main/preview",
+      "source": {
+        "kind": "checkout",
+        "tag": "main"
+      },
+      "installPackage": "Humanizer",
+      "apiPackage": "Humanizer",
+      "referenceTfm": "net10.0",
+      "compatibilityOverlay": "version-overrides/current",
+      "route": "next",
+      "published": false,
+      "latestStable": false
+    }
+  ]
+}

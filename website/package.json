@@ -1,0 +1,37 @@
+{
+  "name": "humanizer-docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:site && npm run build:all-search",
+    "build:all-search": "pagefind --site build --root-selector article",
+    "build:site": "docusaurus build",
+    "check:search-budget": "pwsh ../tools/docs/verify-search.ps1",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "start": "docusaurus start",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@cmfcmf/docusaurus-search-local": "2.0.1",
+    "@docusaurus/core": "3.10.2",
+    "@docusaurus/plugin-client-redirects": "3.10.2",
+    "@docusaurus/preset-classic": "3.10.2",
+    "@mdx-js/react": "^3.0.0",
+    "clsx": "^2.0.0",
+    "prism-react-renderer": "^2.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.10.2",
+    "@docusaurus/tsconfig": "3.10.2",
+    "@docusaurus/types": "3.10.2",
+    "@types/react": "^19.0.0",
+    "pagefind": "1.5.2",
+    "typescript": "~6.0.2"
+  },
+  "engines": {
+    "node": "24.18.0"
+  }
+}

@@ -36,6 +36,11 @@
 *.adoc     text
 *.textile  text
 *.mustache text
+
+# Generated API Markdown uses trailing spaces for hard line breaks.
+website/docs/api/*.md whitespace=-trailing-space
+website/versioned_docs/**/api/*.md whitespace=-trailing-space
+
 # Per RFC 4180, .csv should be CRLF
 *.csv      text eol=crlf
 *.tab      text

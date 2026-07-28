@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "maximumIncreasePercent": 25,
+  "allVersionsBytes": 663542,
+  "versions": {
+    "3.0.10": 31352,
+    "current": 31846
+  }
+}
