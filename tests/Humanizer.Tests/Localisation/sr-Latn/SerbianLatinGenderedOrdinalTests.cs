@@ -37,4 +37,32 @@ public class SerbianLatinGenderedOrdinalTests
         var result = number.Ordinalize(gender, SrLatn);
         Assert.Equal(masculine, result);
     }
+
+    [Theory]
+    [InlineData(0, GrammaticalGender.Masculine, "nulti")]
+    [InlineData(1, GrammaticalGender.Masculine, "prvi")]
+    [InlineData(2, GrammaticalGender.Feminine, "druga")]
+    [InlineData(3, GrammaticalGender.Neuter, "treće")]
+    [InlineData(11, GrammaticalGender.Masculine, "jedanaesti")]
+    [InlineData(20, GrammaticalGender.Feminine, "dvadeseta")]
+    [InlineData(21, GrammaticalGender.Neuter, "dvadeset prvo")]
+    [InlineData(100, GrammaticalGender.Masculine, "stoti")]
+    [InlineData(101, GrammaticalGender.Feminine, "sto prva")]
+    [InlineData(200, GrammaticalGender.Neuter, "dvestoto")]
+    [InlineData(1000, GrammaticalGender.Masculine, "hiljaditi")]
+    [InlineData(2000, GrammaticalGender.Masculine, "dvehiljaditi")]
+    [InlineData(21000, GrammaticalGender.Masculine, "dvadesetjednohiljaditi")]
+    [InlineData(2000000, GrammaticalGender.Masculine, "dvomilioniti")]
+    [InlineData(22000000, GrammaticalGender.Masculine, "dvadesetdvomilioniti")]
+    [InlineData(102000000, GrammaticalGender.Masculine, "stodvomilioniti")]
+    [InlineData(2001, GrammaticalGender.Masculine, "dve hiljade prvi")]
+    [InlineData(-1, GrammaticalGender.Masculine, "- prvi")]
+    public void ToOrdinalWords_ProducesSerbianWords(int number, GrammaticalGender gender, string expected)
+    {
+        Assert.Equal(expected, number.ToOrdinalWords(gender, SrLatn));
+        if (gender == GrammaticalGender.Masculine)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(SrLatn));
+        }
+    }
 }

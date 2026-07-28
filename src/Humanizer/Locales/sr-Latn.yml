@@ -298,7 +298,6 @@ surfaces:
   number:
     words:
       engine: 'south-slavic-cardinal'
-      useCulture: true
       maximumValue: 9223372036854775807
       allowLongMin: true
       zeroWord: 'nula'
@@ -348,6 +347,46 @@ surfaces:
         - 'devetsto'
       feminineOne: 'jedna'
       feminineTwo: 'dve'
+      ordinalUnitsMap:
+        - 'nulti|nulta|nulto'
+        - 'prvi|prva|prvo'
+        - 'drugi|druga|drugo'
+        - 'treći|treća|treće'
+        - 'četvrti|četvrta|četvrto'
+        - 'peti|peta|peto'
+        - 'šesti|šesta|šesto'
+        - 'sedmi|sedma|sedmo'
+        - 'osmi|osma|osmo'
+        - 'deveti|deveta|deveto'
+        - 'deseti|deseta|deseto'
+        - 'jedanaesti|jedanaesta|jedanaesto'
+        - 'dvanaesti|dvanaesta|dvanaesto'
+        - 'trinaesti|trinaesta|trinaesto'
+        - 'četrnaesti|četrnaesta|četrnaesto'
+        - 'petnaesti|petnaesta|petnaesto'
+        - 'šesnaesti|šesnaesta|šesnaesto'
+        - 'sedamnaesti|sedamnaesta|sedamnaesto'
+        - 'osamnaesti|osamnaesta|osamnaesto'
+        - 'devetnaesti|devetnaesta|devetnaesto'
+      ordinalTensMap:
+        2: 'dvadeseti|dvadeseta|dvadeseto'
+        3: 'trideseti|trideseta|trideseto'
+        4: 'četrdeseti|četrdeseta|četrdeseto'
+        5: 'pedeseti|pedeseta|pedeseto'
+        6: 'šezdeseti|šezdeseta|šezdeseto'
+        7: 'sedamdeseti|sedamdeseta|sedamdeseto'
+        8: 'osamdeseti|osamdeseta|osamdeseto'
+        9: 'devedeseti|devedeseta|devedeseto'
+      ordinalHundredsMap:
+        1: 'stoti|stota|stoto'
+        2: 'dvestoti|dvestota|dvestoto'
+        3: 'tristoti|tristota|tristoto'
+        4: 'četiristoti|četiristota|četiristoto'
+        5: 'petstoti|petstota|petstoto'
+        6: 'šeststoti|šeststota|šeststoto'
+        7: 'sedamstoti|sedamstota|sedamstoto'
+        8: 'osamstoti|osamstota|osamstoto'
+        9: 'devetstoti|devetstota|devetstoto'
       scales:
         -
           value: 1000000000000000000
@@ -356,6 +395,8 @@ surfaces:
           singular: 'trilion'
           paucal: 'triliona'
           plural: 'triliona'
+          ordinal: 'trilioniti|trilionita|trilionito'
+          ordinalCountPrefixes: 'jedno|dvo'
         -
           value: 1000000000000000
           gender: 'feminine'
@@ -363,6 +404,8 @@ surfaces:
           singular: 'bilijarda'
           paucal: 'bilijarde'
           plural: 'bilijardi'
+          ordinal: 'bilijarditi|bilijardita|bilijardito'
+          ordinalCountPrefixes: 'jedno|dvo'
         -
           value: 1000000000000
           gender: 'masculine'
@@ -370,6 +413,8 @@ surfaces:
           singular: 'bilion'
           paucal: 'biliona'
           plural: 'biliona'
+          ordinal: 'bilioniti|bilionita|bilionito'
+          ordinalCountPrefixes: 'jedno|dvo'
         -
           value: 1000000000
           gender: 'feminine'
@@ -377,6 +422,8 @@ surfaces:
           singular: 'milijarda'
           paucal: 'milijarde'
           plural: 'milijardi'
+          ordinal: 'milijarditi|milijardita|milijardito'
+          ordinalCountPrefixes: 'jedno|dvo'
         -
           value: 1000000
           gender: 'masculine'
@@ -384,6 +431,8 @@ surfaces:
           singular: 'milion'
           paucal: 'miliona'
           plural: 'miliona'
+          ordinal: 'milioniti|milionita|milionito'
+          ordinalCountPrefixes: 'jedno|dvo'
         -
           value: 1000
           gender: 'feminine'
@@ -391,6 +440,8 @@ surfaces:
           singular: 'hiljada'
           paucal: 'hiljade'
           plural: 'hiljada'
+          ordinal: 'hiljaditi|hiljadita|hiljadito'
+          ordinalCountPrefixes: 'jedno|dve'
 
     parse:
       engine: 'token-map'

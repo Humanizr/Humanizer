@@ -93,11 +93,23 @@ public class BosnianLocaleParityTests
     }
 
     [Theory]
-    [InlineData(1, "1")]
-    [InlineData(21, "21")]
+    [InlineData(1, "prvi")]
+    [InlineData(21, "dvadeset prvi")]
+    [InlineData(100, "stoti")]
+    [InlineData(1000, "hiljaditi")]
+    [InlineData(2000, "dvijehiljaditi")]
     public void NumberToOrdinalWords_UsesBosnianLocaleConverter(int number, string expected)
     {
         Assert.Equal(expected, number.ToOrdinalWords(Bs));
+    }
+
+    [Theory]
+    [InlineData(2, GrammaticalGender.Masculine, "drugi")]
+    [InlineData(2, GrammaticalGender.Feminine, "druga")]
+    [InlineData(2, GrammaticalGender.Neuter, "drugo")]
+    public void NumberToOrdinalWords_UsesBosnianGender(int number, GrammaticalGender gender, string expected)
+    {
+        Assert.Equal(expected, number.ToOrdinalWords(gender, WordForm.Normal, Bs));
     }
 
     [Theory]

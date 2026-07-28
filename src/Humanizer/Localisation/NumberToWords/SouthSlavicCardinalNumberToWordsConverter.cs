@@ -4,9 +4,14 @@ namespace Humanizer;
 /// Renders South Slavic cardinal numbers with generated scale-form detection and gendered unit
 /// overrides.
 /// </summary>
-class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWordsProfile profile, CultureInfo culture) : GenderlessNumberToWordsConverter
+class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWordsProfile profile) : GenderlessNumberToWordsConverter
 {
     readonly SouthSlavicCardinalNumberToWordsProfile profile = profile;
+
+    public SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWordsProfile profile, CultureInfo _)
+        : this(profile)
+    {
+    }
 
     /// <inheritdoc/>
     public override string Convert(long input)
@@ -39,7 +44,115 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
 
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number) =>
-        number.ToString(culture);
+        ConvertToOrdinal(number, GrammaticalGender.Masculine);
+
+    /// <inheritdoc/>
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+    {
+        if (number < 0)
+        {
+            return profile.MinusWord + " " + ConvertOrdinalPositive(-(long)number, gender);
+        }
+
+        return ConvertOrdinalPositive(number, gender);
+    }
+
+    /// <inheritdoc/>
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm) =>
+        ConvertToOrdinal(number, gender);
+
+    string ConvertOrdinalPositive(long number, GrammaticalGender gender)
+    {
+        if (number < 20)
+        {
+            return GetOrdinal(profile.OrdinalUnitsMap[(int)number], gender);
+        }
+
+        foreach (var scale in profile.Scales)
+        {
+            if ((ulong)number < scale.Value)
+            {
+                continue;
+            }
+
+            var count = number / (long)scale.Value;
+            var remainder = number % (long)scale.Value;
+            if (remainder == 0 && scale.Ordinal.Length > 0)
+            {
+                var ordinal = GetOrdinal(scale.Ordinal, gender);
+                return count == 1
+                    ? ordinal
+                    : JoinOrdinalScaleCount(count, scale, ordinal);
+            }
+
+            return Convert(number - remainder) + profile.OrdinalCompoundJoiner + ConvertOrdinalPositive(remainder, gender);
+        }
+
+        if (number >= 100)
+        {
+            var hundreds = (int)(number / 100);
+            var remainder = number % 100;
+            if (remainder == 0)
+            {
+                return GetOrdinal(profile.OrdinalHundredsMap[hundreds], gender);
+            }
+
+            return profile.HundredsMap[hundreds] + profile.OrdinalCompoundJoiner + ConvertOrdinalPositive(remainder, gender);
+        }
+
+        if (profile.NumberComposition == SouthSlavicNumberComposition.InvertedTensWithLinker)
+        {
+            return ConvertPositive((ulong)number, GrammaticalGender.Masculine) + GetOrdinal(profile.OrdinalSuffix, gender);
+        }
+
+        var tens = (int)(number / 10);
+        var units = (int)(number % 10);
+        return units == 0
+            ? GetOrdinal(profile.OrdinalTensMap[tens], gender)
+            : profile.TensMap[tens] + " " + GetOrdinal(profile.OrdinalUnitsMap[units], gender);
+    }
+
+    string JoinOrdinalScaleCount(long count, SouthSlavicScale scale, string ordinal)
+    {
+        var prefixes = scale.OrdinalCountPrefixes.Split('|');
+        if (count == 2 && prefixes[1].Length > 0)
+        {
+            return prefixes[1] + ordinal;
+        }
+
+        var countWords = ConvertPositive((ulong)count, scale.Gender);
+        var terminalPrefix = (count % 10) switch
+        {
+            1 when count % 100 != 11 => prefixes[0],
+            2 when count % 100 != 12 => prefixes[1],
+            _ => string.Empty
+        };
+        var lastSpace = countWords.LastIndexOf(' ');
+        if (terminalPrefix.Length > 0 && lastSpace >= 0)
+        {
+            countWords = countWords[..(lastSpace + 1)] + terminalPrefix;
+        }
+
+        return countWords.Replace(" ", "") + ordinal;
+    }
+
+    string ConvertPositive(ulong number, GrammaticalGender gender)
+    {
+        var parts = new List<string>(4);
+        AppendPositive(parts, number, gender);
+        return string.Join(" ", parts);
+    }
+
+    static string GetOrdinal(string variants, GrammaticalGender gender)
+    {
+        var forms = variants.Split('|');
+        return gender switch
+        {
+            GrammaticalGender.Feminine => forms[1],
+            GrammaticalGender.Neuter => forms[2],
+            _ => forms[0]
+        };
+    }
 
     /// <summary>
     /// Appends the positive magnitude using the configured scale rows.
@@ -173,6 +286,11 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
 /// <param name="hundredsMap">The hundreds lexicon.</param>
 /// <param name="feminineOne">The feminine form used for one.</param>
 /// <param name="feminineTwo">The feminine form used for two.</param>
+/// <param name="ordinalSuffix">The gendered suffix used by inverted compound ordinals.</param>
+/// <param name="ordinalCompoundJoiner">The separator before the terminal ordinal segment.</param>
+/// <param name="ordinalUnitsMap">The gendered ordinal forms from zero through nineteen.</param>
+/// <param name="ordinalTensMap">The gendered ordinal forms for exact tens.</param>
+/// <param name="ordinalHundredsMap">The gendered ordinal forms for exact hundreds.</param>
 /// <param name="scales">The descending scale rows used during decomposition.</param>
 internal sealed class SouthSlavicCardinalNumberToWordsProfile(
     ulong maximumValue,
@@ -187,6 +305,11 @@ internal sealed class SouthSlavicCardinalNumberToWordsProfile(
     string[] hundredsMap,
     string feminineOne,
     string feminineTwo,
+    string ordinalSuffix,
+    string ordinalCompoundJoiner,
+    string[] ordinalUnitsMap,
+    string[] ordinalTensMap,
+    string[] ordinalHundredsMap,
     SouthSlavicScale[] scales)
 {
     /// <summary>Gets the maximum supported absolute value.</summary>
@@ -213,6 +336,16 @@ internal sealed class SouthSlavicCardinalNumberToWordsProfile(
     public string FeminineOne { get; } = feminineOne;
     /// <summary>Gets the feminine form used for two.</summary>
     public string FeminineTwo { get; } = feminineTwo;
+    /// <summary>Gets the gendered suffix used by inverted compound ordinals.</summary>
+    public string OrdinalSuffix { get; } = ordinalSuffix;
+    /// <summary>Gets the separator between cardinal prefixes and the terminal ordinal segment.</summary>
+    public string OrdinalCompoundJoiner { get; } = ordinalCompoundJoiner;
+    /// <summary>Gets the gendered ordinal forms from zero through nineteen.</summary>
+    public string[] OrdinalUnitsMap { get; } = ordinalUnitsMap;
+    /// <summary>Gets the gendered ordinal forms for exact tens.</summary>
+    public string[] OrdinalTensMap { get; } = ordinalTensMap;
+    /// <summary>Gets the gendered ordinal forms for exact hundreds.</summary>
+    public string[] OrdinalHundredsMap { get; } = ordinalHundredsMap;
     /// <summary>Gets the descending scale rows used during decomposition.</summary>
     public SouthSlavicScale[] Scales { get; } = scales;
 }
@@ -228,6 +361,8 @@ internal sealed class SouthSlavicCardinalNumberToWordsProfile(
 /// <param name="Plural">The plural form.</param>
 /// <param name="Dual">The dual form, if the locale distinguishes it.</param>
 /// <param name="TrialQuadral">The trial or quadral form, if the locale distinguishes it.</param>
+/// <param name="Ordinal">The gendered exact ordinal forms for the scale.</param>
+/// <param name="OrdinalCountPrefixes">The bound forms for one and two before the ordinal scale.</param>
 internal readonly record struct SouthSlavicScale(
     ulong Value,
     GrammaticalGender Gender,
@@ -236,7 +371,9 @@ internal readonly record struct SouthSlavicScale(
     string Paucal,
     string Plural,
     string? Dual = null,
-    string? TrialQuadral = null);
+    string? TrialQuadral = null,
+    string Ordinal = "",
+    string OrdinalCountPrefixes = "|");
 
 /// <summary>
 /// Selects the grammatical-number detector used for scale forms.

@@ -899,7 +899,9 @@ public sealed partial class HumanizerSourceGenerator
             RequiredStringValue("paucal"),
             RequiredStringValue("plural"),
             OptionalStringValue("dual"),
-            OptionalStringValue("trialQuadral"));
+            OptionalStringValue("trialQuadral"),
+            OptionalStringValue("ordinal"),
+            OptionalStringValue("ordinalCountPrefixes", "|"));
 
     static string CreateInvertedTensScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(

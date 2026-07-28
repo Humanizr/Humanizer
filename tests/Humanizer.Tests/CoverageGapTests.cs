@@ -3049,6 +3049,11 @@ public class CoverageGapTests
             CreateSouthSlavicHundreds(),
             "one-f",
             "two-f",
+            string.Empty,
+            " ",
+            [],
+            [],
+            [],
             scales ?? [new(1000, GrammaticalGender.Masculine, "scale-one", "scale-singular", "scale-paucal", "scale-plural", "scale-dual", "scale-trial")]);
 
     static string[] CreateSouthSlavicUnits()

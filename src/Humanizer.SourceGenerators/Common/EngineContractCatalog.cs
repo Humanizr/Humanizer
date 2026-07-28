@@ -705,9 +705,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("string", "feminineOne", null, null, null, null, null, null),
                             Member("string", "feminineTwo", null, null, null, null, null, null),
+                            Member("string", "ordinalSuffix", null, null, null, "", null, null),
+                            Member("string", "ordinalCompoundJoiner", null, null, null, " ", null, null),
+                            Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
+                            Member("string-array", "ordinalTensMap", null, null, null, null, null, null),
+                            Member("string-array", "ordinalHundredsMap", null, null, null, null, null, null),
                             Member("builder", "scales", null, null, "south-slavic-scale-array", null, null, null)
-                        ),
-                Member("culture", null, null, null, null, null, null, null)
+                        )
             ),
                 ["terminal-ordinal-scale"] = Schema("terminal-ordinal-scale", null,
                 Member("profile-object", null, null, null, null, null, null, null,

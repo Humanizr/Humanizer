@@ -312,7 +312,6 @@ surfaces:
   number:
     words:
       engine: 'south-slavic-cardinal'
-      useCulture: true
       maximumValue: 9223372036854775807
       allowLongMin: false
       zeroWord: 'nič'
@@ -365,6 +364,48 @@ surfaces:
         - 'devetsto'
       feminineOne: 'ena'
       feminineTwo: 'dve'
+      ordinalSuffix: 'i|a|o'
+      ordinalCompoundJoiner: ''
+      ordinalUnitsMap:
+        - 'ničti|ničta|ničto'
+        - 'prvi|prva|prvo'
+        - 'drugi|druga|drugo'
+        - 'tretji|tretja|tretje'
+        - 'četrti|četrta|četrto'
+        - 'peti|peta|peto'
+        - 'šesti|šesta|šesto'
+        - 'sedmi|sedma|sedmo'
+        - 'osmi|osma|osmo'
+        - 'deveti|deveta|deveto'
+        - 'deseti|deseta|deseto'
+        - 'enajsti|enajsta|enajsto'
+        - 'dvanajsti|dvanajsta|dvanajsto'
+        - 'trinajsti|trinajsta|trinajsto'
+        - 'štirinajsti|štirinajsta|štirinajsto'
+        - 'petnajsti|petnajsta|petnajsto'
+        - 'šestnajsti|šestnajsta|šestnajsto'
+        - 'sedemnajsti|sedemnajsta|sedemnajsto'
+        - 'osemnajsti|osemnajsta|osemnajsto'
+        - 'devetnajsti|devetnajsta|devetnajsto'
+      ordinalTensMap:
+        2: 'dvajseti|dvajseta|dvajseto'
+        3: 'trideseti|trideseta|trideseto'
+        4: 'štirideseti|štirideseta|štirideseto'
+        5: 'petdeseti|petdeseta|petdeseto'
+        6: 'šestdeseti|šestdeseta|šestdeseto'
+        7: 'sedemdeseti|sedemdeseta|sedemdeseto'
+        8: 'osemdeseti|osemdeseta|osemdeseto'
+        9: 'devetdeseti|devetdeseta|devetdeseto'
+      ordinalHundredsMap:
+        1: 'stoti|stota|stoto'
+        2: 'dvestoti|dvestota|dvestoto'
+        3: 'tristoti|tristota|tristoto'
+        4: 'štiristoti|štiristota|štiristoto'
+        5: 'petstoti|petstota|petstoto'
+        6: 'šeststoti|šeststota|šeststoto'
+        7: 'sedemstoti|sedemstota|sedemstoto'
+        8: 'osemstoti|osemstota|osemstoto'
+        9: 'devetstoti|devetstota|devetstoto'
       scales:
         -
           value: 1000000000000000000
@@ -375,6 +416,8 @@ surfaces:
           dual: 'trilijona'
           trialQuadral: 'trilijone'
           plural: 'trilijonov'
+          ordinal: 'trilijonti|trilijonta|trilijonto'
+          ordinalCountPrefixes: '|dvo'
         -
           value: 1000000000000000
           gender: 'feminine'
@@ -384,6 +427,8 @@ surfaces:
           dual: 'bilijarde'
           trialQuadral: 'bilijarde'
           plural: 'bilijard'
+          ordinal: 'bilijardti|bilijardta|bilijardto'
+          ordinalCountPrefixes: '|dvo'
         -
           value: 1000000000000
           gender: 'masculine'
@@ -393,6 +438,8 @@ surfaces:
           dual: 'bilijona'
           trialQuadral: 'bilijoni'
           plural: 'bilijonov'
+          ordinal: 'bilijonti|bilijonta|bilijonto'
+          ordinalCountPrefixes: '|dvo'
         -
           value: 1000000000
           gender: 'feminine'
@@ -402,6 +449,8 @@ surfaces:
           dual: 'milijardi'
           trialQuadral: 'milijarde'
           plural: 'milijard'
+          ordinal: 'milijardti|milijardta|milijardto'
+          ordinalCountPrefixes: '|dvo'
         -
           value: 1000000
           gender: 'masculine'
@@ -411,6 +460,8 @@ surfaces:
           dual: 'milijona'
           trialQuadral: 'milijone'
           plural: 'milijonov'
+          ordinal: 'milijonti|milijonta|milijonto'
+          ordinalCountPrefixes: '|dvo'
         -
           value: 1000
           gender: 'masculine'
@@ -420,6 +471,8 @@ surfaces:
           dual: 'tisoč'
           trialQuadral: 'tisoč'
           plural: 'tisoč'
+          ordinal: 'tisoči|tisoča|tisoče'
+          ordinalCountPrefixes: '|dvo'
 
     formatting:
       negativeSign: '−'
