@@ -33,6 +33,14 @@ public class DateOnlyHumanizeTests
     }
 
     [Fact]
+    public void TodayWording_PreservesCustomNowOverride()
+    {
+        var formatter = new CustomNowFormatter();
+
+        Assert.Equal("custom now", formatter.DateHumanize_Today());
+    }
+
+    [Fact]
     public void DefaultStrategy_MonthApart()
     {
         Configurator.DateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
@@ -122,6 +130,13 @@ public class DateOnlyHumanizeTests
         DateOnly? never = new DateOnly(2015, 12, 7);
 
         Assert.Equal(never.Value.Humanize(), never.Humanize());
+    }
+
+    sealed class CustomNowFormatter()
+        : DefaultFormatter("en")
+    {
+        public override string DateHumanize_Now() =>
+            "custom now";
     }
 }
 
