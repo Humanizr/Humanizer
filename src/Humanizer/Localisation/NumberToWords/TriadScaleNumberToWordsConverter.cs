@@ -84,15 +84,16 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
             return "quattro bilioni trecentoventicinque miliardi dieci milioni settemiladiciotto";
         }
 
-        if (input is > int.MaxValue or < int.MinValue)
+        var maximumMagnitude = (long)profile.Scales[^1].Value * 1000;
+        if (input >= maximumMagnitude || input <= -maximumMagnitude)
         {
             throw new NotImplementedException();
         }
 
-        var number = (int)input;
+        var number = input;
         if (number < 0)
         {
-            return profile.MinusWord + " " + Convert(Math.Abs(number), gender);
+            return profile.MinusWord + " " + Convert(-number, gender);
         }
 
         if (number == 0)
@@ -159,14 +160,14 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
     /// <summary>
     /// Splits a number into three-digit triads, least significant first.
     /// </summary>
-    static int SplitEveryThreeDigits(int number, Span<int> parts)
+    static int SplitEveryThreeDigits(long number, Span<int> parts)
     {
         var count = 0;
         var remaining = number;
 
         while (remaining > 0)
         {
-            parts[count++] = remaining % 1000;
+            parts[count++] = (int)(remaining % 1000);
             remaining /= 1000;
         }
 
