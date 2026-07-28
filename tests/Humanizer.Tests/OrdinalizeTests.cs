@@ -87,6 +87,17 @@ public class OrdinalizeTests
     }
 
     [Fact]
+    public void OrdinalizeLongMinValueUsesCultureSpecificRules()
+    {
+        Assert.Equal(
+            "9223372036854775808.º",
+            long.MinValue.Ordinalize(new CultureInfo("es-ES"), WordForm.Normal));
+        Assert.Equal(
+            "9223372036854775808è",
+            long.MinValue.Ordinalize(new CultureInfo("ca-ES")));
+    }
+
+    [Fact]
     public void OrdinalizeLongNumberUsesNumberWordSuffixFallback()
     {
         const long number = 2_147_483_648;
