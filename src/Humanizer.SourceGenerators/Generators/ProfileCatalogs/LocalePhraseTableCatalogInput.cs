@@ -29,7 +29,10 @@ public sealed partial class HumanizerSourceGenerator
             "kilobyte",
             "megabyte",
             "gigabyte",
-            "terabyte"
+            "terabyte",
+            "petabyte",
+            "exabyte",
+            "pebibyte"
         ];
 
         readonly ImmutableArray<LocalePhraseCatalog> catalogs = catalogs;

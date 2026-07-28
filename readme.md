@@ -769,6 +769,9 @@ fileSize.Kilobytes => 10
 fileSize.Megabytes => 0.009765625
 fileSize.Gigabytes => 9.53674316e-6
 fileSize.Terabytes => 9.31322575e-9
+fileSize.Petabytes => 1.024e-11
+fileSize.Exabytes  => 1.024e-14
+fileSize.Pebibytes => 9.09494702e-12
 ```
 
 There are a few extension methods that allow you to turn a number into a ByteSize instance:
@@ -780,6 +783,9 @@ There are a few extension methods that allow you to turn a number into a ByteSiz
 (2.5).Megabytes();
 (10.2).Gigabytes();
 (4.7).Terabytes();
+(1.2).Petabytes();
+(1).Exabytes();
+(1).Pebibytes();
 ```
 
 You can also add/subtract the values using +/- operators and Add/Subtract methods:
@@ -811,7 +817,7 @@ If you want a string representation you can call `ToString` or `Humanize` interc
 ```
 
 You can also optionally provide a format for the expected string representation.
-The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`.
+The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`, `PB`, `EB`, `PiB`.
 The formatter uses the built in [`double.ToString` method](https://docs.microsoft.com/dotnet/api/system.double.tostring) with `#.##` as the default format which rounds the number to two decimal places:
 
 ```csharp
@@ -834,6 +840,19 @@ b.ToString("#.#### MB");  // .0103 MB
 b.Humanize("0.00 GB");    // 0 GB
 b.Humanize("#.## B");     // 10757.12 B
 ```
+
+`ByteSize` supports SI petabytes (`PB`, 10<sup>15</sup> bytes) and exabytes
+(`EB`, 10<sup>18</sup> bytes), plus IEC pebibytes (`PiB`, 2<sup>50</sup>
+bytes). Exbibytes are not supported because one `EiB` is 2<sup>63</sup> bits,
+outside the existing `long`-valued `Bits` range. The older `KB` through `TB`
+APIs retain their historical binary scaling for compatibility; use an explicit
+`PiB` format when IEC provenance matters.
+
+The existing `double` byte storage does not retain one-bit increments at these
+magnitudes. The new large-unit factories and `AddPetabytes`, `AddExabytes`, and
+`AddPebibytes` reject values outside the `Bits` range. Existing constructors,
+lower-unit factories, and general arithmetic retain their historical behavior.
+Locales without a translated large-unit phrase fall back to the English unit.
 
 If you want a string representation with full words you can call `ToFullWords` on the `ByteSize` instance:
 
@@ -873,6 +892,9 @@ ByteSize.Parse("1.55 gb");
 ByteSize.Parse("1.55 TB");
 ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
+ByteSize.Parse("1.55 PB");
+ByteSize.Parse("1.1 EB");
+ByteSize.Parse("1 PiB");
 ```
 
 Finally, if you need to calculate the rate at which a quantity of bytes has been transferred, you can use the `Per` method of `ByteSize`. The `Per` method accepts one argument - the measurement interval for the bytes; this is the amount of time it took to transfer the bytes.

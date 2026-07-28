@@ -201,6 +201,15 @@ surfaces:
       terabyte:
         forms: 'terabyte'
         symbol: 'TB'
+      petabyte:
+        forms: 'petabyte'
+        symbol: 'PB'
+      exabyte:
+        forms: 'exabyte'
+        symbol: 'EB'
+      pebibyte:
+        forms: 'pebibyte'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

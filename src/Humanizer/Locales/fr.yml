@@ -245,6 +245,18 @@ surfaces:
         forms:
           default: 'téraoctet'
         symbol: 'To'
+      petabyte:
+        forms:
+          default: 'pétaoctet'
+        symbol: 'Po'
+      exabyte:
+        forms:
+          default: 'exaoctet'
+        symbol: 'Eo'
+      pebibyte:
+        forms:
+          default: 'pébioctet'
+        symbol: 'Pio'
     timeUnits:
       millisecond:
         symbol: 'ms'
