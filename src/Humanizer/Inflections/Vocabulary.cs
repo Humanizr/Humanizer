@@ -196,8 +196,11 @@ public partial class Vocabulary
         uncountables.Contains(word);
 
     static string MatchUpperCase(string word, string replacement) =>
-        char.IsUpper(word[0]) &&
-        char.IsLower(replacement[0]) ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1)) : replacement;
+        word.Length > 1 && word.Any(char.IsUpper) && !word.Any(char.IsLower)
+            ? replacement.ToUpper()
+            : char.IsUpper(word[0]) && char.IsLower(replacement[0])
+                ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1))
+                : replacement;
 
     /// <summary>
     /// If the word is the letter s, singular or plural, return the letter s singular

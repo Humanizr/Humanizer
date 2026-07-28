@@ -33,6 +33,16 @@ public class InflectorTests
         Assert.Equal(plural, singular.Pluralize());
 
     [Theory]
+    [InlineData("SINGULAR TYPE NAME", "SINGULAR TYPE NAMES")]
+    [InlineData("BUS", "BUSES")]
+    [InlineData("PERSON", "PEOPLE")]
+    public void InflectionsPreserveAllCaps(string singular, string plural)
+    {
+        Assert.Equal(plural, singular.Pluralize());
+        Assert.Equal(singular, plural.Singularize());
+    }
+
+    [Theory]
     [ClassData(typeof(PluralTestSource))]
     public void PluralizeWordsWithUnknownPlurality(string singular, string plural)
     {
