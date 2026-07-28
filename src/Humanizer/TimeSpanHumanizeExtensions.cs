@@ -213,7 +213,7 @@ public static class TimeSpanHumanizeExtensions
     {
         if (isTimeUnitToGetTheMaximumTimeUnit)
         {
-            return (int)totalTimeNumberOfUnits;
+            return (int)Math.Max(-int.MaxValue, Math.Min(totalTimeNumberOfUnits, int.MaxValue));
         }
 
         return timeNumberOfUnits;

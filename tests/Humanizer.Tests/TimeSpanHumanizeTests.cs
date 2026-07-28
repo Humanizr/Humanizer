@@ -467,4 +467,14 @@ public class TimeSpanHumanizeTests
         var actual = timeSpan.Humanize(precision: precision, culture: new(culture), maxUnit: TimeUnit.Year, toWords: true);
         Assert.Equal(expected: expected, actual);
     }
+
+    [Theory]
+    [InlineData(TimeUnit.Millisecond, "2147483647 milliseconds")]
+    [InlineData(TimeUnit.Second, "2147483647 seconds")]
+    [InlineData(TimeUnit.Minute, "2147483647 minutes")]
+    public void LargeTimeSpansSaturateCounts(TimeUnit unit, string expected)
+    {
+        Assert.Equal(expected, TimeSpan.MaxValue.Humanize(maxUnit: unit, minUnit: unit));
+        Assert.Equal(expected, TimeSpan.MinValue.Humanize(maxUnit: unit, minUnit: unit));
+    }
 }
