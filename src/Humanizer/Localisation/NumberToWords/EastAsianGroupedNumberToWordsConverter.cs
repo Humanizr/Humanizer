@@ -32,7 +32,13 @@ class EastAsianGroupedNumberToWordsConverter(EastAsianGroupedNumberToWordsProfil
             return ordinal;
         }
 
-        var cardinal = number < 0 ? string.Empty : ConvertPositive((ulong)number);
+        if (number < 0)
+        {
+            var magnitude = (ulong)(-(long)number);
+            return profile.NegativePrefix + profile.OrdinalPrefix + ConvertPositive(magnitude) + profile.OrdinalSuffix;
+        }
+
+        var cardinal = ConvertPositive((ulong)number);
         return profile.OrdinalPrefix + cardinal + profile.OrdinalSuffix;
     }
 
