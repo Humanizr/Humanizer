@@ -227,7 +227,9 @@ public static partial class StringHumanizeExtensions
     /// - Handles freestanding underscores/dashes (e.g., "some _ string")
     /// - Splits on underscores and dashes
     /// - Breaks up PascalCase and camelCase text
+    /// - Preserves ampersands as separate tokens in PascalCase and camelCase inputs
     /// Registered acronyms use their canonical casing.
+    /// The first letter of the result is always capitalized.
     /// </remarks>
     /// <example>
     /// <code>
@@ -238,6 +240,7 @@ public static partial class StringHumanizeExtensions
     /// Vocabularies.Default.AddAcronym("iOS");
     /// "IOS".Humanize() => "iOS"
     /// "camelCaseText".Humanize() => "Camel case text"
+    /// "Rock&amp;Roll".Humanize() => "Rock &amp; roll"
     /// </code>
     /// </example>
     public static string Humanize(this string input)
