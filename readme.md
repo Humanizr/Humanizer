@@ -353,6 +353,11 @@ If words are preferred to numbers, a `toWords: true` parameter can be set to con
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, toWords: true) => "two weeks, one day, one hour"
 ```
 
+For compact output, `HumanizeToSymbols` uses the existing localized `TimeUnit` symbols:
+```csharp
+TimeSpan.FromMilliseconds(1299630020).HumanizeToSymbols(precision: 5) => "2week, 1d, 1h, 30s, 20ms"
+```
+
 By calling `ToAge`, a `TimeSpan` can also be expressed as an age.
 For cultures that do not define an age expression, the result will be the same as calling `Humanize` _(but with a default `maxUnit` equal to `TimeUnit.Year`)_. 
 
