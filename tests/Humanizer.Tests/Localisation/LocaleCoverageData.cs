@@ -1330,7 +1330,7 @@ static class LocaleCoverageData
             { "de-LI", "1 und 2", "1, 2 und 3" },
             { "el", "1 και 2", "1, 2 και 3" },
             { "en", "1 and 2", "1, 2, and 3" },
-            { "en-GB", "1 and 2", "1, 2, and 3" },
+            { "en-GB", "1 and 2", "1, 2 and 3" },
             { "en-IN", "1 and 2", "1, 2, and 3" },
             { "en-US", "1 and 2", "1, 2, and 3" },
             { "es", "1 y 2", "1, 2 y 3" },

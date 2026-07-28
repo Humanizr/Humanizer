@@ -2,6 +2,10 @@ locale: 'en-GB'
 variantOf: 'en'
 
 surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'and'
+
   number:
     words:
       andStrategy: 'within-group-and-terminal-scale-sub-hundred-remainder'
