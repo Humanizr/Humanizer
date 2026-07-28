@@ -165,6 +165,7 @@ namespace Humanizer
         public static string Humanize(this Humanizer.ByteSize input, System.IFormatProvider formatProvider) { }
         public static string Humanize(this Humanizer.ByteSize input, string? format = null) { }
         public static string Humanize(this Humanizer.ByteSize input, string? format, System.IFormatProvider? formatProvider) { }
+        public static string HumanizeComposite(this Humanizer.ByteSize input, int precision = 2, System.IFormatProvider? formatProvider = null, string separator = " ", bool toWords = false) { }
         public static Humanizer.ByteSize Kilobytes(this byte input) { }
         public static Humanizer.ByteSize Kilobytes(this double input) { }
         public static Humanizer.ByteSize Kilobytes(this int input) { }

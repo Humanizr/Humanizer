@@ -429,4 +429,88 @@ public class ByteSizeExtensionsTests
             .Bits()
             .Humanize(format, cultureInfo));
     }
+
+    [Fact]
+    public void HumanizesCompositeBytesWithoutChangingDefaultHumanize()
+    {
+        var input = 10242.Bytes();
+
+        Assert.Equal("10 KB", input.Humanize());
+        Assert.Equal("10 KB 2 B", input.HumanizeComposite());
+        Assert.Equal("10 kilobytes, 2 bytes", input.HumanizeComposite(separator: ", ", toWords: true));
+    }
+
+    [Theory]
+    [InlineData(1, "1 MB")]
+    [InlineData(2, "1 MB 1 KB")]
+    [InlineData(3, "1 MB 1 KB 1 B")]
+    public void LimitsCompositeOutputToNonZeroParts(int precision, string expected)
+    {
+        var input = ByteSize.FromBytes(ByteSize.BytesInMegabyte + ByteSize.BytesInKilobyte + 1);
+
+        Assert.Equal(expected, input.HumanizeComposite(precision));
+    }
+
+    [Theory]
+    [InlineData(1023, "1023 B")]
+    [InlineData(1024, "1 KB")]
+    [InlineData(0, "0 b")]
+    public void HumanizesCompositeBoundaries(long bytes, string expected) =>
+        Assert.Equal(expected, bytes.Bytes().HumanizeComposite());
+
+    [Fact]
+    public void HumanizesCompositeBitResidualsExactly() =>
+        Assert.Equal("10 KB 2 B 1 b", ByteSize.FromBits(81937).HumanizeComposite(3));
+
+    [Fact]
+    public void UsesExistingLargeUnitFactorsInDescendingOrder()
+    {
+        var input = ByteSize.FromBytes(ByteSize.BytesInPetabyte + ByteSize.BytesInTerabyte + ByteSize.BytesInGigabyte);
+
+        Assert.Equal("1 PB 1 TB 1 GB", input.HumanizeComposite(3));
+        Assert.Equal("1 EB", ByteSize.FromExabytes(1).HumanizeComposite());
+    }
+
+    [Fact]
+    public void HumanizesNegativeCompositeValuesWithOneLeadingSign()
+    {
+        var numberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+        numberFormat.NegativeSign = "~";
+
+        Assert.Equal("-10 KB 2 B", (-10242).Bytes().HumanizeComposite());
+        Assert.Equal("~10 KB 2 B", (-10242).Bytes().HumanizeComposite(formatProvider: numberFormat));
+        Assert.Equal("-1 EB", ByteSize.FromBits(long.MinValue).HumanizeComposite(1));
+    }
+
+    [Fact]
+    public void HumanizesCompositeWithSeparatorAndCulture()
+    {
+        var input = ByteSize.FromBytes(ByteSize.BytesInMegabyte + ByteSize.BytesInKilobyte + 1);
+
+        Assert.Equal("1 MB, 1 KB, 1 B", input.HumanizeComposite(3, separator: ", "));
+        Assert.Equal("1 Mo 1 Ko 1 o", input.HumanizeComposite(3, new CultureInfo("fr")));
+        Assert.Equal("1 megabyte, 1 kilobyte, 1 byte", input.HumanizeComposite(3, separator: ", ", toWords: true));
+    }
+
+    [Fact]
+    public void PreservesLegacyLabelsForLowerIecCompositeValues()
+    {
+        var input = ByteSize.FromBytes(ByteSize.BytesInMebibyte + ByteSize.BytesInKibibyte);
+
+        Assert.Equal("1 MB 1 KB", input.HumanizeComposite());
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void RejectsInvalidCompositePrecision(int precision)
+    {
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => 1.Bytes().HumanizeComposite(precision));
+
+        Assert.Equal(nameof(precision), exception.ParamName);
+    }
+
+    [Fact]
+    public void RejectsNullCompositeSeparator() =>
+        Assert.Throws<ArgumentNullException>(() => 1.Bytes().HumanizeComposite(separator: null!));
 }
