@@ -796,6 +796,10 @@ Convert between numbers and metric notation:
 0.1d.ToMetric() => "100m"
 456789.ToMetric(decimals: 2) => "456.79k"
 
+// Locale-aware scale words
+CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("de-DE");
+1E9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord) => "1 milliard"
+
 // From Metric
 "1.23k".FromMetric() => 1230
 "100m".FromMetric() => 0.1

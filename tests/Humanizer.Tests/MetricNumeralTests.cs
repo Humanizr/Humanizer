@@ -359,6 +359,82 @@ public class MetricNumeralTests
     [InlineData(-1E-27)]
     public void ToMetricOnInvalid(double input) =>
         Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
+
+    [Theory]
+    [InlineData(1E9, "1 billion")]
+    [InlineData(1E12, "1 trillion")]
+    public void ToMetric_UseScaleWord_ShortScale(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [Fact]
+    public void ToMetric_UseScaleWord_UsesCurrentUiCulture()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("de-DE"));
+
+        Assert.Equal("1.5 milliard", 1.5E9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [Theory]
+    [InlineData("et-EE")]
+    [InlineData("mk-MK")]
+    [InlineData("sq-AL")]
+    public void ToMetric_UseScaleWord_LongScale_FromCorrectedLocaleData(string uiCulture)
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new(uiCulture));
+
+        Assert.Equal("1 milliard", 1E9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+        Assert.Equal("1 billion", 1E12.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+        Assert.Equal("1 billiard", 1E15.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [UseCulture("de-DE")]
+    [Theory]
+    [InlineData(1E9, "1 milliard")]
+    [InlineData(1E12, "1 billion")]
+    public void ToMetric_UseScaleWord_LongScale_German(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [UseCulture("fr-FR")]
+    [Theory]
+    [InlineData(1E9, "1 milliard")]
+    [InlineData(1E12, "1 billion")]
+    public void ToMetric_UseScaleWord_LongScale_French(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [UseCulture("pt-BR")]
+    [Theory]
+    [InlineData(1E9, "1 billion")]
+    [InlineData(1E12, "1 trillion")]
+    public void ToMetric_UseScaleWord_ShortScale_Brazil(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [UseCulture("pt-PT")]
+    [Theory]
+    [InlineData(1E9, "1 milliard")]
+    [InlineData(1E12, "1 billion")]
+    public void ToMetric_UseScaleWord_LongScale_Portugal(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [UseCulture("es-MX")]
+    [Theory]
+    [InlineData(1E9, "1 milliard")]
+    [InlineData(1E12, "1 billion")]
+    public void ToMetric_UseScaleWord_LongScale_LatinAmericanSpanish(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [UseCulture("es-ES")]
+    [Theory]
+    [InlineData(1E9, "1 milliard")]
+    [InlineData(1E12, "1 billion")]
+    public void ToMetric_UseScaleWord_LongScale_Spain(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
+    [UseCulture("ru-RU")]
+    [Theory]
+    [InlineData(1E9, "1 milliard")]
+    [InlineData(1E12, "1 trillion")]
+    public void ToMetric_UseScaleWord_HybridScale(double input, string expected) =>
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
 }
 
 [UseCulture("de-DE")]

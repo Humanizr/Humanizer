@@ -553,6 +553,18 @@ public static class MetricNumeralExtensions
             {
                 return UnitPrefixes[symbol].LongScaleWord;
             }
+
+            if (formatValue.HasFlag(MetricNumeralFormats.UseScaleWord))
+            {
+                var culture = CultureInfo.CurrentUICulture;
+                var language = culture.TwoLetterISOLanguageName;
+                var useLongScale = culture.Name != "pt-BR" &&
+                                   (LongScaleLanguages.Contains(language) ||
+                                    (HybridScaleLanguages.Contains(language) && symbol is 'G' or 'n'));
+                return useLongScale
+                    ? UnitPrefixes[symbol].LongScaleWord
+                    : UnitPrefixes[symbol].ShortScaleWord;
+            }
         }
 
         return symbol.ToString();
@@ -595,4 +607,26 @@ public static class MetricNumeralExtensions
         public string ShortScaleWord { get; } = shortScaleWord;
         public readonly string LongScaleWord => longScaleWord ?? ShortScaleWord;
     }
+
+    /// <summary>
+    /// Language codes that use the <a href="https://en.wikipedia.org/wiki/Long_and_short_scales">long scale</a> system.
+    /// In the long scale, <c>1E9</c> is a <c>milliard</c> and <c>1E12</c> is a <c>billion</c>.
+    /// Languages in this set always use long-scale words. Hybrid-scale languages and
+    /// Brazilian Portuguese are handled separately.
+    /// </summary>
+    static readonly HashSet<string> LongScaleLanguages =
+    [
+        "af", "bs", "ca", "cs", "da", "de", "es", "et", "eu", "fa", "fi", "fr", "gl", "hr",
+        "hu", "is", "it", "lb", "mk", "nb", "nl", "nn", "pl", "ps", "pt", "sk", "sl", "sq", "sr", "sv"
+    ];
+
+    /// <summary>
+    /// Language codes that use a milliard-style word at <c>1E9</c>, then short-scale words
+    /// beginning with trillion at <c>1E12</c>.
+    /// </summary>
+    static readonly HashSet<string> HybridScaleLanguages =
+    [
+        "ar", "az", "be", "bg", "he", "hy", "id", "ka", "kk", "ku", "ky", "lt", "lv",
+        "ro", "ru", "tk", "tr", "uk", "uz"
+    ];
 }
