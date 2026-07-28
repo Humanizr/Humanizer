@@ -150,10 +150,8 @@ Implement custom date/time/number formatting:
 ```csharp
 public interface IFormatter
 {
-    string DateHumanize(DateTime value, DateTime? comparisonBase, 
-                       CultureInfo culture);
-    string TimeSpanHumanize(TimeSpan timeSpan, int precision, 
-                           CultureInfo culture);
+    string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit);
+    string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false);
     // ... other methods
 }
 ```
@@ -162,6 +160,12 @@ Register your formatter:
 
 ```csharp
 Configurator.Formatters.Register("my-culture", new MyFormatter());
+```
+
+Formatters localize time units after Humanizer selects them. To customize `TimeSpan` decomposition, precision, bounds, separators, or word and symbol selection, implement `ITimeSpanHumanizeStrategy` and register it at application startup:
+
+```csharp
+Configurator.TimeSpanHumanizeStrategy = new MyTimeSpanHumanizeStrategy();
 ```
 
 ## Configuration

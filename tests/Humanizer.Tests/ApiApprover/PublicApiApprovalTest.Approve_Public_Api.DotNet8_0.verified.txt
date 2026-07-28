@@ -240,6 +240,7 @@ namespace Humanizer
         public static Humanizer.LocaliserRegistry<Humanizer.IOrdinalizer> Ordinalizers { get; }
         public static Humanizer.ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy { get; set; }
         public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; }
+        public static Humanizer.ITimeSpanHumanizeStrategy TimeSpanHumanizeStrategy { get; set; }
         public static bool IsCultureSupported(System.Globalization.CultureInfo culture) { }
         public static void UseEnumDescriptionPropertyLocator(System.Func<System.Reflection.PropertyInfo, bool> func) { }
     }
@@ -311,6 +312,11 @@ namespace Humanizer
     {
         public DefaultTimeOnlyHumanizeStrategy() { }
         public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalization.CultureInfo? culture) { }
+    }
+    public class DefaultTimeSpanHumanizeStrategy : Humanizer.ITimeSpanHumanizeStrategy
+    {
+        public DefaultTimeSpanHumanizeStrategy() { }
+        public string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toWords, bool toSymbols) { }
     }
     public class DynamicNumberOfCharactersAndPreserveWordsTruncator : Humanizer.ITruncator
     {
@@ -455,6 +461,10 @@ namespace Humanizer
     public interface ITimeOnlyToClockNotationConverter
     {
         string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive);
+    }
+    public interface ITimeSpanHumanizeStrategy
+    {
+        string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toWords, bool toSymbols);
     }
     public interface ITruncator
     {
