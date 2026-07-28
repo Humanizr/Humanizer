@@ -754,6 +754,31 @@ public class CoverageGapTests
     }
 
     [Fact]
+    public void TemplateOrdinalizersFormatLongMinValueWithoutOverflow()
+    {
+        var pattern = CreateTemplateOrdinalizerPattern("t-", "-ordinal");
+        var templateOrdinalizer = new TemplateOrdinalizer(
+            new(
+                pattern,
+                pattern,
+                pattern,
+                MinValueAsPlainNumber: false,
+                NegativeMode: TemplateOrdinalizer.NegativeNumberMode.AbsoluteInvariant));
+        Assert.Equal(
+            "t-9223372036854775808-ordinal",
+            templateOrdinalizer.Convert(long.MinValue, long.MinValue.ToString(CultureInfo.InvariantCulture)));
+
+        var wordFormOrdinalizer = new WordFormTemplateOrdinalizer(
+            CultureInfo.InvariantCulture,
+            CreateWordFormTemplateOrdinalizerOptions(
+                WordFormTemplateOrdinalizer.NegativeNumberMode.AbsoluteInvariant,
+                minValueAsPlainNumber: false));
+        Assert.Equal(
+            "m-9223372036854775808-m",
+            wordFormOrdinalizer.Convert(long.MinValue, long.MinValue.ToString(CultureInfo.InvariantCulture)));
+    }
+
+    [Fact]
     public void TokenMapWordsToNumberNormalizerCoversFastAndBuilderEdges()
     {
         Assert.Equal(string.Empty, TokenMapWordsToNumberNormalizer.Normalize("   ", TokenMapNormalizationProfile.CollapseWhitespace));
@@ -3040,6 +3065,9 @@ public class CoverageGapTests
             (exactReplacements ?? []).ToFrozenDictionary(),
             (exactSuffixes ?? []).ToFrozenDictionary(),
             (lastDigitSuffixes ?? []).ToFrozenDictionary());
+
+    static TemplateOrdinalizer.Pattern CreateTemplateOrdinalizerPattern(string prefix, string defaultSuffix) =>
+        new(prefix, defaultSuffix, FrozenDictionary<int, string>.Empty, FrozenDictionary<int, string>.Empty, FrozenDictionary<int, string>.Empty);
 
     static PluralizedScaleNumberToWordsProfile CreatePluralizedScaleProfile(
         PluralizedScaleFormDetector formDetector,
