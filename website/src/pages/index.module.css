@@ -18,6 +18,15 @@
   padding-block: clamp(4rem, 12vw, 9rem);
 }
 
+.homeHero__logo {
+  background: #fff;
+  box-sizing: content-box;
+  height: clamp(5.5rem, 12vw, 7.25rem);
+  margin-bottom: 1.5rem;
+  padding: 0.35rem;
+  width: auto;
+}
+
 .homeEyebrow {
   color: var(--humanizer-accent-warm);
   font-size: 0.78rem;

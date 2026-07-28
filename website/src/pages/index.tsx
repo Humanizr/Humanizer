@@ -1,4 +1,5 @@
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import styles from './index.module.css';
 
@@ -31,6 +32,8 @@ const scenarioGroups = [
 ];
 
 export default function Home(): React.JSX.Element {
+  const logoUrl = useBaseUrl('/img/logo.png');
+
   return (
     <Layout
       title="Human-friendly text for .NET"
@@ -38,6 +41,13 @@ export default function Home(): React.JSX.Element {
       <main className={styles.home}>
         <section className={styles.homeHero} aria-labelledby="home-title">
           <div className={styles.homeHero__copy}>
+            <img
+              alt="Humanizer logo"
+              className={styles.homeHero__logo}
+              height="115"
+              src={logoUrl}
+              width="115"
+            />
             <p className={styles.homeEyebrow}>Humanizer for .NET</p>
             <h1 id="home-title">
               Make software

@@ -49,7 +49,7 @@ const publishedVersions: Record<
 const config: Config = {
   title: 'Humanizer',
   tagline: 'Human-friendly text for .NET',
-  favicon: 'img/favicon.svg',
+  favicon: 'img/logo.png',
   url: 'https://humanizr.net',
   baseUrl: '/',
   organizationName: 'Humanizr',
@@ -127,10 +127,10 @@ const config: Config = {
     ],
   ],
   themeConfig: {
-    image: 'img/social-card.png',
+    image: 'img/logo.png',
     metadata: [
       {name: 'theme-color', content: '#172026'},
-      {name: 'twitter:card', content: 'summary_large_image'},
+      {name: 'twitter:card', content: 'summary'},
       {property: 'og:type', content: 'website'},
     ],
     colorMode: {
@@ -142,7 +142,7 @@ const config: Config = {
       title: 'Humanizer',
       logo: {
         alt: 'Humanizer home',
-        src: 'img/humanizer-mark.svg',
+        src: 'img/logo.png',
       },
       items: [
         {
