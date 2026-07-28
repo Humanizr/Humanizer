@@ -1,5 +1,3 @@
-using Humanizer;
-
 namespace Humanizer;
 
 /// <summary>
@@ -7,7 +5,7 @@ namespace Humanizer;
 /// Vocabularies.Default contains an extensive list of rules for US English.
 /// At this time, multiple vocabularies and removing existing rules are not supported.
 /// </summary>
-public class Vocabulary
+public partial class Vocabulary
 {
     internal Vocabulary()
     {
@@ -16,12 +14,19 @@ public class Vocabulary
     readonly List<Rule> plurals = [];
     readonly List<Rule> singulars = [];
     readonly HashSet<string> uncountables = new(StringComparer.CurrentCultureIgnoreCase);
-    readonly Regex letterS = new("^([sS])[sS]*$");
 
-    readonly Dictionary<string, char> possessiveExceptionMap = new Dictionary<string, char>(StringComparer.OrdinalIgnoreCase)
-    {
-        { "it", 's' },
-    };
+    private const string LetterSPattern = "^([sS])[sS]*$";
+
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(LetterSPattern)]
+    private static partial Regex LetterSRegexGenerated();
+
+    private static Regex LetterSRegex() => LetterSRegexGenerated();
+#else
+    private static readonly Regex LetterSRegexField = new(LetterSPattern, RegexOptions.Compiled);
+
+    private static Regex LetterSRegex() => LetterSRegexField;
+#endif
 
     /// <summary>
     /// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx, e.g. "person" and "people".
@@ -33,8 +38,8 @@ public class Vocabulary
     {
         if (matchEnding)
         {
-            var singularSubstring = singular.Substring(1);
-            var pluralSubString = plural.Substring(1);
+            var singularSubstring = singular[1..];
+            var pluralSubString = plural[1..];
             AddPlural($"({singular[0]}){singularSubstring}$", $"$1{pluralSubString}");
             AddSingular($"({plural[0]}){pluralSubString}$", $"$1{singularSubstring}");
         }
@@ -98,7 +103,7 @@ public class Vocabulary
         var asSingularAsPlural = ApplyRules(plurals, asSingular, false);
         if (asSingular != null &&
             asSingular != word &&
-            asSingular + "s" != word &&
+            !string.Equals(asSingular + "s", word, StringComparison.OrdinalIgnoreCase) &&
             asSingularAsPlural == word &&
             result != word)
         {
@@ -137,7 +142,7 @@ public class Vocabulary
         // the Plurality is unknown so we should check all possibilities
         var asPlural = ApplyRules(plurals, word, false);
         if (asPlural == word ||
-            word + "s" == asPlural)
+            string.Equals(word + "s", asPlural, StringComparison.OrdinalIgnoreCase))
         {
             return result ?? word;
         }
@@ -150,36 +155,6 @@ public class Vocabulary
         }
 
         return word;
-    }
-
-    public string? ToPossessive(string? word, PossesiveSuffixOverride? possessiveSuffix)
-    {
-        if (word == null || string.IsNullOrWhiteSpace(word))
-        {
-            return word;
-        }
-
-        switch (possessiveSuffix)
-        {
-            case PossesiveSuffixOverride.S_ONLY:
-                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), 's');
-            case PossesiveSuffixOverride.APOSTROPHE_ONLY:
-                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), '\'');
-            case PossesiveSuffixOverride.APOSTROPHE_S:
-                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), "'s".AsSpan());
-        }
-
-        if (possessiveExceptionMap.TryGetValue(word, out var suffix))
-        {
-            return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), suffix);
-        }
-
-        if (word[word.Length - 1] == 's')
-        {
-            return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), '\'');
-        }
-
-        return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), "'s".AsSpan());
     }
 
     string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)
@@ -221,15 +196,18 @@ public class Vocabulary
         uncountables.Contains(word);
 
     static string MatchUpperCase(string word, string replacement) =>
-        char.IsUpper(word[0]) &&
-        char.IsLower(replacement[0]) ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1)) : replacement;
+        word.Length > 1 && word.Any(char.IsUpper) && !word.Any(char.IsLower)
+            ? replacement.ToUpperInvariant()
+            : char.IsUpper(word[0]) && char.IsLower(replacement[0])
+                ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1))
+                : replacement;
 
     /// <summary>
     /// If the word is the letter s, singular or plural, return the letter s singular
     /// </summary>
-    string? LetterS(string word)
+    static string? LetterS(string word)
     {
-        var s = letterS.Match(word);
+        var s = LetterSRegex().Match(word);
         return s.Groups.Count > 1 ? s.Groups[1].Value : null;
     }
 

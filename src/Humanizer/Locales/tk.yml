@@ -1,0 +1,461 @@
+locale: 'tk'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'we'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'häzir'
+      never: 'hiç haçan'
+      past:
+        millisecond:
+          single: 'bir millisekunt öň'
+          multiple:
+            forms:
+              default: 'millisekunt'
+            afterCount: 'öň'
+        second:
+          single: 'bir sekunt öň'
+          multiple:
+            forms:
+              default: 'sekunt'
+            afterCount: 'öň'
+        minute:
+          single: 'bir minut öň'
+          multiple:
+            forms:
+              default: 'minut'
+            afterCount: 'öň'
+        hour:
+          single: 'bir sagat öň'
+          multiple:
+            forms:
+              default: 'sagat'
+            afterCount: 'öň'
+        day:
+          single: 'düýn'
+          multiple:
+            forms:
+              default: 'gün'
+            afterCount: 'öň'
+        week:
+          single: 'bir hepde öň'
+          multiple:
+            forms:
+              default: 'hepde'
+            afterCount: 'öň'
+        month:
+          single: 'bir aý öň'
+          multiple:
+            forms:
+              default: 'aý'
+            afterCount: 'öň'
+        year:
+          single: 'bir ýyl öň'
+          multiple:
+            forms:
+              default: 'ýyl'
+            afterCount: 'öň'
+      future:
+        millisecond:
+          single: 'bir millisekunt soň'
+          multiple:
+            forms:
+              default: 'millisekunt'
+            afterCount: 'soň'
+        second:
+          single: 'bir sekunt soň'
+          multiple:
+            forms:
+              default: 'sekunt'
+            afterCount: 'soň'
+        minute:
+          single: 'bir minut soň'
+          multiple:
+            forms:
+              default: 'minut'
+            afterCount: 'soň'
+        hour:
+          single: 'bir sagat soň'
+          multiple:
+            forms:
+              default: 'sagat'
+            afterCount: 'soň'
+        day:
+          single: 'ertir'
+          multiple:
+            forms:
+              default: 'gün'
+            afterCount: 'soň'
+        week:
+          single: 'bir hepde soň'
+          multiple:
+            forms:
+              default: 'hepde'
+            afterCount: 'soň'
+        month:
+          single: 'bir aý soň'
+          multiple:
+            forms:
+              default: 'aý'
+            afterCount: 'soň'
+        year:
+          single: 'bir ýyl soň'
+          multiple:
+            forms:
+              default: 'ýyl'
+            afterCount: 'soň'
+    duration:
+      zero: 'wagt ýok'
+      age:
+        template: '{value} ýaşynda'
+      millisecond:
+        single:
+          numeric: '1 millisekunt'
+          words: 'bir millisekunt'
+        multiple:
+          forms:
+            default: 'millisekunt'
+      second:
+        single:
+          numeric: '1 sekunt'
+          words: 'bir sekunt'
+        multiple:
+          forms:
+            default: 'sekunt'
+      minute:
+        single:
+          numeric: '1 minut'
+          words: 'bir minut'
+        multiple:
+          forms:
+            default: 'minut'
+      hour:
+        single:
+          numeric: '1 sagat'
+          words: 'bir sagat'
+        multiple:
+          forms:
+            default: 'sagat'
+      day:
+        single:
+          numeric: '1 gün'
+          words: 'bir gün'
+        multiple:
+          forms:
+            default: 'gün'
+      week:
+        single:
+          numeric: '1 hepde'
+          words: 'bir hepde'
+        multiple:
+          forms:
+            default: 'hepde'
+      month:
+        single:
+          numeric: '1 aý'
+          words: 'bir aý'
+        multiple:
+          forms:
+            default: 'aý'
+      year:
+        single:
+          numeric: '1 ýyl'
+          words: 'bir ýyl'
+        multiple:
+          forms:
+            default: 'ýyl'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'baýt'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobaýt'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabaýt'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabaýt'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabaýt'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'sekunt'
+      minute:
+        symbol: 'minut'
+      hour:
+        symbol: 'sagat'
+      day:
+        symbol: 'gün'
+      week:
+        symbol: 'hepde'
+      month:
+        symbol: 'aý'
+      year:
+        symbol: 'ýyl'
+
+  number:
+    words:
+      engine: 'harmony-ordinal'
+      minimumValue: -9223372036854775807
+      maximumValue: 9223372036854775807
+      minusWord: 'minus'
+      hundredWord: 'ýüz'
+      hundredStrategy: 'omit-one-when-singular'
+      unitsMap:
+        - 'nol'
+        - 'bir'
+        - 'iki'
+        - 'üç'
+        - 'dört'
+        - 'bäş'
+        - 'alty'
+        - 'ýedi'
+        - 'sekiz'
+        - 'dokuz'
+      tensMap:
+        - 'nol'
+        - 'on'
+        - 'ýigrimi'
+        - 'otuz'
+        - 'kyrk'
+        - 'elli'
+        - 'altmyş'
+        - 'ýetmiş'
+        - 'segsen'
+        - 'togsan'
+      ordinalSuffixStrategy: 'last-vowel-map'
+      softenTerminalTBeforeSuffix: true
+      dropTerminalVowelBeforeHarmonySuffix: true
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'kwintillion'
+        -
+          value: 1000000000000000
+          name: 'kwadrillion'
+        -
+          value: 1000000000000
+          name: 'trillion'
+        -
+          value: 1000000000
+          name: 'milliard'
+        -
+          value: 1000000
+          name: 'million'
+        -
+          value: 1000
+          name: 'müň'
+          omitOneWhenSingular: true
+      ordinalSuffixes:
+        a: 'ynjy'
+        y: 'ynjy'
+        o: 'unjy'
+        u: 'ynjy'
+        e: 'inji'
+        'ä': 'inji'
+        i: 'inji'
+        'ö': 'ünji'
+        'ü': 'ünji'
+      tupleSuffixes:
+        a: 'ly'
+        y: 'ly'
+        o: 'ly'
+        u: 'ly'
+        e: 'li'
+        'ä': 'li'
+        i: 'li'
+        'ö': 'li'
+        'ü': 'li'
+      namedTuples:
+        1: 'ýeke'
+        2: 'jübüt'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'CollapseWhitespace'
+      cardinalMap:
+        nol: 0
+        bir: 1
+        iki: 2
+        'üç': 3
+        'dört': 4
+        'bäş': 5
+        alty: 6
+        'ýedi': 7
+        sekiz: 8
+        dokuz: 9
+        on: 10
+        'ýigrimi': 20
+        otuz: 30
+        kyrk: 40
+        elli: 50
+        'altmyş': 60
+        'ýetmiş': 70
+        segsen: 80
+        togsan: 90
+        'ýüz': 100
+        'müň': 1000
+        million: 1000000
+        milliard: 1000000000
+        trillion: 1000000000000
+        kwadrillion: 1000000000000000
+        kwintillion: 1000000000000000000
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'none'
+      useHundredMultiplier: true
+      allowTerminalOrdinalToken: true
+      negativePrefixes:
+        - 'minus '
+      ordinalMap:
+        birinji: 1
+        ikinji: 2
+        'üçünji': 3
+        'dördünji': 4
+        'bäşinji': 5
+        altynjy: 6
+        'ýedinji': 7
+        sekizinji: 8
+        dokuzynjy: 9
+        onunjy: 10
+        'ýigriminji': 20
+        'ýigrimi birinji': 21
+        otuzynjy: 30
+        kyrkynjy: 40
+        ellinji: 50
+        'altmyşynjy': 60
+        'ýetmişinji': 70
+        segseninji: 80
+        togsanynjy: 90
+        'ýüzünji': 100
+      ordinalScaleMap:
+        'ýüzünji': 100
+        'müňünji': 1000
+        millionunjy: 1000000
+        milliardynjy: 1000000000
+        trillionunjy: 1000000000000
+        kwadrillionunjy: 1000000000000000
+        kwintillionunjy: 1000000000000000000
+      gluedOrdinalScaleSuffixes:
+        'müňünji': 1000
+
+  ordinal:
+    numeric:
+      engine: 'modulo-suffix'
+      defaultSuffix: '-nji'
+      useAbsoluteValue: true
+      exactSuffixes:
+        0: '-njy'
+        10: '-njy'
+        20: '-nji'
+        30: '-njy'
+        40: '-njy'
+        50: '-nji'
+        60: '-njy'
+        70: '-nji'
+        80: '-nji'
+        90: '-njy'
+        100: '-nji'
+        1000000: '-njy'
+        1000000000: '-njy'
+      lastTwoDigitSuffixes:
+        0: '-nji'
+        10: '-njy'
+        20: '-nji'
+        30: '-njy'
+        40: '-njy'
+        50: '-nji'
+        60: '-njy'
+        70: '-nji'
+        80: '-nji'
+        90: '-njy'
+      lastDigitSuffixes:
+        0: '-njy'
+        6: '-njy'
+        9: '-njy'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    min0: '{hour} sagat'
+    defaultTemplate: '{hour} sagat {minutes} minut'
+
+  compass:
+    full:
+      - 'demirgazyk'
+      - 'demirgazyk-demirgazyk-gündogar'
+      - 'demirgazyk-gündogar'
+      - 'gündogar-demirgazyk-gündogar'
+      - 'gündogar'
+      - 'gündogar-günorta-gündogar'
+      - 'günorta-gündogar'
+      - 'günorta-günorta-gündogar'
+      - 'günorta'
+      - 'günorta-günorta-günbatar'
+      - 'günorta-günbatar'
+      - 'günbatar-günorta-günbatar'
+      - 'günbatar'
+      - 'günbatar-demirgazyk-günbatar'
+      - 'demirgazyk-günbatar'
+      - 'demirgazyk-demirgazyk-günbatar'
+    short:
+      - 'D'
+      - 'DDGd'
+      - 'DGd'
+      - 'GdDGd'
+      - 'Gd'
+      - 'GdGGd'
+      - 'GGd'
+      - 'GGGd'
+      - 'G'
+      - 'GGGb'
+      - 'GGb'
+      - 'GbGGb'
+      - 'Gb'
+      - 'GbDGb'
+      - 'DGb'
+      - 'DDGb'
+
+  calendar:
+    months:
+      - 'Ýanwar'
+      - 'Fewral'
+      - 'Mart'
+      - 'Aprel'
+      - 'Maý'
+      - 'Iýun'
+      - 'Iýul'
+      - 'Awgust'
+      - 'Sentýabr'
+      - 'Oktýabr'
+      - 'Noýabr'
+      - 'Dekabr'

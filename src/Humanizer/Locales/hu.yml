@@ -1,0 +1,428 @@
+locale: 'hu'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'és'
+
+  formatter:
+    engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
+
+  phrases:
+    relativeDate:
+      now: 'most'
+      never: 'soha'
+      past:
+        millisecond:
+          single: 'egy ezredmásodperce'
+          multiple:
+            forms:
+              default: 'ezredmásodperce'
+        second:
+          single: 'egy másodperce'
+          multiple:
+            forms:
+              default: 'másodperce'
+        minute:
+          single: 'egy perce'
+          multiple:
+            forms:
+              default: 'perce'
+        hour:
+          single: 'egy órája'
+          multiple:
+            forms:
+              default: 'órája'
+        day:
+          single: 'tegnap'
+          multiple:
+            forms:
+              default: 'napja'
+          template:
+            name: 'two'
+            value: 'tegnapelőtt'
+        week:
+          single: 'egy hete'
+          multiple:
+            forms:
+              default: 'hete'
+        month:
+          single: 'egy hónapja'
+          multiple:
+            forms:
+              default: 'hónapja'
+        year:
+          single: 'egy éve'
+          multiple:
+            forms:
+              default: 'éve'
+      future:
+        millisecond:
+          single: 'egy ezredmásodperc múlva'
+          multiple:
+            forms:
+              default: 'ezredmásodperc'
+            afterCount: 'múlva'
+        second:
+          single: 'egy másodperc múlva'
+          multiple:
+            forms:
+              default: 'másodperc'
+            afterCount: 'múlva'
+        minute:
+          single: 'egy perc múlva'
+          multiple:
+            forms:
+              default: 'perc'
+            afterCount: 'múlva'
+        hour:
+          single: 'egy óra múlva'
+          multiple:
+            forms:
+              default: 'óra'
+            afterCount: 'múlva'
+        day:
+          single: 'holnap'
+          multiple:
+            forms:
+              default: 'nap'
+            afterCount: 'múlva'
+          template:
+            name: 'two'
+            value: 'holnapután'
+        week:
+          single: 'egy hét múlva'
+          multiple:
+            forms:
+              default: 'hét'
+            afterCount: 'múlva'
+        month:
+          single: 'egy hónap múlva'
+          multiple:
+            forms:
+              default: 'hónap'
+            afterCount: 'múlva'
+        year:
+          single: 'egy év múlva'
+          multiple:
+            forms:
+              default: 'év'
+            afterCount: 'múlva'
+    duration:
+      zero: 'nincs idő'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 ezredmásodperc'
+          words: 'egy ezredmásodperc'
+        multiple:
+          forms:
+            default: 'ezredmásodperc'
+      second:
+        single:
+          numeric: '1 másodperc'
+          words: 'egy másodperc'
+        multiple:
+          forms:
+            default: 'másodperc'
+      minute:
+        single:
+          numeric: '1 perc'
+          words: 'egy perc'
+        multiple:
+          forms:
+            default: 'perc'
+      hour:
+        single:
+          numeric: '1 óra'
+          words: 'egy óra'
+        multiple:
+          forms:
+            default: 'óra'
+      day:
+        single:
+          numeric: '1 nap'
+          words: 'egy nap'
+        multiple:
+          forms:
+            default: 'nap'
+      week:
+        single:
+          numeric: '1 hét'
+          words: 'egy hét'
+        multiple:
+          forms:
+            default: 'hét'
+      month:
+        single:
+          numeric: '1 hónap'
+          words: 'egy hónap'
+        multiple:
+          forms:
+            default: 'hónap'
+      year:
+        single:
+          numeric: '1 év'
+          words: 'egy év'
+        multiple:
+          forms:
+            default: 'év'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'bájt'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobájt'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabájt'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabájt'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabájt'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 'm'
+      minute:
+        symbol: 'p'
+      hour:
+        symbol: 'ó'
+      day:
+        symbol: 'n'
+      week:
+        symbol: 'hét'
+      month:
+        symbol: 'h'
+      year:
+        symbol: 'é'
+
+  number:
+    words:
+      engine: 'hyphenated-scale'
+      zeroWord: 'nulla'
+      zeroOrdinalWord: 'nulladik'
+      minusWord: 'mínusz'
+      twoPrefixWord: 'két'
+      unitsMap:
+        1: 'egy'
+        2: 'kettő'
+        3: 'három'
+        4: 'négy'
+        5: 'öt'
+        6: 'hat'
+        7: 'hét'
+        8: 'nyolc'
+        9: 'kilenc'
+      ordinalUnitsMap:
+        1: 'első'
+        2: 'második'
+        3: 'harmadik'
+        4: 'negyedik'
+        5: 'ötödik'
+        6: 'hatodik'
+        7: 'hetedik'
+        8: 'nyolcadik'
+        9: 'kilencedik'
+      tensMap:
+        1: 'tizen'
+        2: 'huszon'
+        3: 'harminc'
+        4: 'negyven'
+        5: 'ötven'
+        6: 'hatvan'
+        7: 'hetven'
+        8: 'nyolcvan'
+        9: 'kilencven'
+      ordinalTensMap:
+        1: 'tizedik'
+        2: 'huszadik'
+        3: 'harmincadik'
+        4: 'negyvenedik'
+        5: 'ötvenedik'
+        6: 'hatvanadik'
+        7: 'hetvenedik'
+        8: 'nyolcvanadik'
+        9: 'kilencvenedik'
+      hundredsMap:
+        1: 'száz'
+        2: 'kétszáz'
+        3: 'háromszáz'
+        4: 'négyszáz'
+        5: 'ötszáz'
+        6: 'hatszáz'
+        7: 'hétszáz'
+        8: 'nyolcszáz'
+        9: 'kilencszáz'
+      ordinalUnitsExceptions:
+        1: 'egyedik'
+        2: 'kettedik'
+      wholeTensExceptions:
+        10: 'tíz'
+        20: 'húsz'
+      scales:
+        -
+          divisor: 1000000000000000000
+          cardinal: 'trillió'
+          ordinal: 'trilliomodik'
+        -
+          divisor: 1000000000000000
+          cardinal: 'billiárd'
+          ordinal: 'billiárdodik'
+        -
+          divisor: 1000000000000
+          cardinal: 'billió'
+          ordinal: 'billiomodik'
+        -
+          divisor: 1000000000
+          cardinal: 'milliárd'
+          ordinal: 'milliárdodik'
+        -
+          divisor: 1000000
+          cardinal: 'millió'
+          ordinal: 'milliomodik'
+      thousandScale:
+        divisor: 1000
+        cardinal: 'ezer'
+        ordinal: 'ezredik'
+      tupleMap:
+        1: 'szimpla'
+        2: 'dupla'
+        3: 'tripla'
+        4: 'kvadrupla'
+        5: 'pentapla'
+        6: 'hexapla'
+        7: 'heptapla'
+        8: 'octapla'
+        9: 'nonapla'
+        10: 'dekapla'
+        100: 'hektapla'
+        1000: 'kiliapla'
+
+    parse:
+      engine: 'prefixed-tens-scale'
+      cardinalMap:
+        nulla: 0
+        egy: 1
+        ket: 2
+        ketto: 2
+        harom: 3
+        negy: 4
+        ot: 5
+        hat: 6
+        het: 7
+        nyolc: 8
+        kilenc: 9
+        tiz: 10
+        husz: 20
+        harminc: 30
+        negyven: 40
+        otven: 50
+        hatvan: 60
+        hetven: 70
+        nyolcvan: 80
+        kilencven: 90
+        szaz: 100
+        ezer: 1000
+        millio: 1000000
+        milliard: 1000000000
+        billio: 1000000000000
+        billiard: 1000000000000000
+        trillio: 1000000000000000000
+      tensMap:
+        harminc: 30
+        negyven: 40
+        otven: 50
+        hatvan: 60
+        hetven: 70
+        nyolcvan: 80
+        kilencven: 90
+      scales:
+        trillio: 1000000000000000000
+        billiard: 1000000000000000
+        billio: 1000000000000
+        milliard: 1000000000
+        millio: 1000000
+        ezer: 1000
+        szaz: 100
+      prefixedTens:
+        tizen: 10
+        huszon: 20
+      negativePrefixes:
+        - 'minusz '
+        - 'minus '
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.'
+
+    date:
+      engine: 'pattern'
+      pattern: 'yyyy. MMMM {day}'
+      dayMode: 'DotSuffix'
+    dateOnly:
+      engine: 'pattern'
+      pattern: 'yyyy. MMMM {day}'
+      dayMode: 'DotSuffix'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h24'
+    hourSuffixSingular: 'óra'
+    hourSuffixPlural: 'óra'
+    minuteSuffixSingular: 'perc'
+    minuteSuffixPlural: 'perc'
+    min0: '{hour}'
+    defaultTemplate: '{hour} {minutes} {minuteSuffix}'
+
+  compass:
+    full:
+      - 'észak'
+      - 'észak-északkelet'
+      - 'északkelet'
+      - 'kelet-északkelet'
+      - 'kelet'
+      - 'kelet-délkelet'
+      - 'délkelet'
+      - 'dél-délkelet'
+      - 'dél'
+      - 'dél-délnyugat'
+      - 'délnyugat'
+      - 'nyugat-délnyugat'
+      - 'nyugat'
+      - 'nyugat-északnyugat'
+      - 'északnyugat'
+      - 'észak-északnyugat'
+    short:
+      - 'É'
+      - 'ÉÉK'
+      - 'ÉK'
+      - 'KÉK'
+      - 'K'
+      - 'KDK'
+      - 'DK'
+      - 'DDK'
+      - 'D'
+      - 'DDNy'
+      - 'DNy'
+      - 'NyDNy'
+      - 'Ny'
+      - 'NyÉNy'
+      - 'ÉNy'
+      - 'ÉÉNy'

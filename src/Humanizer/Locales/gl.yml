@@ -1,0 +1,694 @@
+locale: 'gl'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'e'
+
+  formatter:
+    engine: 'profiled'
+    timeUnitGenders:
+      millisecond: 'masculine'
+      second: 'masculine'
+      minute: 'masculine'
+      hour: 'feminine'
+      day: 'masculine'
+      week: 'feminine'
+      month: 'masculine'
+      year: 'masculine'
+
+  phrases:
+    relativeDate:
+      now: 'agora'
+      never: 'nunca'
+      past:
+        millisecond:
+          single: 'hai un milisegundo'
+          multiple:
+            forms:
+              default: 'milisegundos'
+              singular: 'milisegundo'
+            beforeCount: 'hai'
+        second:
+          single: 'hai un segundo'
+          multiple:
+            forms:
+              default: 'segundos'
+              singular: 'segundo'
+            beforeCount: 'hai'
+        minute:
+          single: 'hai un minuto'
+          multiple:
+            forms:
+              default: 'minutos'
+              singular: 'minuto'
+            beforeCount: 'hai'
+        hour:
+          single: 'hai unha hora'
+          multiple:
+            forms:
+              default: 'horas'
+              singular: 'hora'
+            beforeCount: 'hai'
+        day:
+          single: 'onte'
+          multiple:
+            forms:
+              default: 'días'
+              singular: 'día'
+            beforeCount: 'hai'
+          template:
+            name: 'two'
+            value: 'antonte'
+        week:
+          single: 'hai unha semana'
+          multiple:
+            forms:
+              default: 'semanas'
+              singular: 'semana'
+            beforeCount: 'hai'
+        month:
+          single: 'hai un mes'
+          multiple:
+            forms:
+              default: 'meses'
+              singular: 'mes'
+            beforeCount: 'hai'
+        year:
+          single: 'hai un ano'
+          multiple:
+            forms:
+              default: 'anos'
+              singular: 'ano'
+            beforeCount: 'hai'
+      future:
+        millisecond:
+          single: 'dentro dun milisegundo'
+          multiple:
+            forms:
+              default: 'milisegundos'
+              singular: 'milisegundo'
+            beforeCount: 'dentro de'
+        second:
+          single: 'dentro dun segundo'
+          multiple:
+            forms:
+              default: 'segundos'
+              singular: 'segundo'
+            beforeCount: 'dentro de'
+        minute:
+          single: 'dentro dun minuto'
+          multiple:
+            forms:
+              default: 'minutos'
+              singular: 'minuto'
+            beforeCount: 'dentro de'
+        hour:
+          single: 'dentro dunha hora'
+          multiple:
+            forms:
+              default: 'horas'
+              singular: 'hora'
+            beforeCount: 'dentro de'
+        day:
+          single: 'mañá'
+          multiple:
+            forms:
+              default: 'días'
+              singular: 'día'
+            beforeCount: 'dentro de'
+          template:
+            name: 'two'
+            value: 'pasadomañá'
+        week:
+          single: 'dentro dunha semana'
+          multiple:
+            forms:
+              default: 'semanas'
+              singular: 'semana'
+            beforeCount: 'dentro de'
+        month:
+          single: 'dentro dun mes'
+          multiple:
+            forms:
+              default: 'meses'
+              singular: 'mes'
+            beforeCount: 'dentro de'
+        year:
+          single: 'dentro dun ano'
+          multiple:
+            forms:
+              default: 'anos'
+              singular: 'ano'
+            beforeCount: 'dentro de'
+    duration:
+      zero: 'nada'
+      age:
+        template: '{value}'
+      millisecond:
+        single:
+          numeric: '1 milisegundo'
+          words: 'un milisegundo'
+        multiple:
+          forms:
+            default: 'milisegundos'
+            singular: 'milisegundo'
+      second:
+        single:
+          numeric: '1 segundo'
+          words: 'un segundo'
+        multiple:
+          forms:
+            default: 'segundos'
+            singular: 'segundo'
+      minute:
+        single:
+          numeric: '1 minuto'
+          words: 'un minuto'
+        multiple:
+          forms:
+            default: 'minutos'
+            singular: 'minuto'
+      hour:
+        single:
+          numeric: '1 hora'
+          words: 'unha hora'
+        multiple:
+          forms:
+            default: 'horas'
+            singular: 'hora'
+      day:
+        single:
+          numeric: '1 día'
+          words: 'un día'
+        multiple:
+          forms:
+            default: 'días'
+            singular: 'día'
+      week:
+        single:
+          numeric: '1 semana'
+          words: 'unha semana'
+        multiple:
+          forms:
+            default: 'semanas'
+            singular: 'semana'
+      month:
+        single:
+          numeric: '1 mes'
+          words: 'un mes'
+        multiple:
+          forms:
+            default: 'meses'
+            singular: 'mes'
+      year:
+        single:
+          numeric: '1 ano'
+          words: 'un ano'
+        multiple:
+          forms:
+            default: 'anos'
+            singular: 'ano'
+    dataUnits:
+      bit:
+        forms:
+          default: 'bit'
+        symbol: 'b'
+      byte:
+        forms:
+          default: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          default: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          default: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          default: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          default: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'd'
+      week:
+        symbol: 'semana'
+      month:
+        symbol: 'mes'
+      year:
+        symbol: 'ano'
+
+  number:
+    words:
+      engine: 'long-scale-stem-ordinal'
+      zeroWord: 'cero'
+      negativeWord: 'menos'
+      exactHundredWord: 'cen'
+      thousandWord: 'mil'
+      tensJoiner: 'e'
+      thousandOrdinalStem: 'milésim'
+      masculineOrdinalEnding: 'o'
+      feminineOrdinalEnding: 'a'
+      minLongValueWord: 'menos nove trillóns douscentos vinte e tres mil trescentos setenta e dous billóns trinta e seis mil oitocentos cincuenta e catro millóns setecentos setenta e cinco mil oitocentos oito'
+      highestScaleValue: 1000000
+      roundHigherScaleCompactValue: 1000000000
+      highestScaleOrdinalSource: 'milésim'
+      highestScaleOrdinalTarget: 'millonésim'
+      tupleFallbackSuffix: ' veces'
+      hundredsMasculine:
+        - 'cero'
+        - 'cento'
+        - 'douscentos'
+        - 'trescentos'
+        - 'catrocentos'
+        - 'cincocentos'
+        - 'seiscentos'
+        - 'setecentos'
+        - 'oitocentos'
+        - 'novecentos'
+      hundredsFeminine:
+        - 'cero'
+        - 'cento'
+        - 'dúascentas'
+        - 'trescentas'
+        - 'catrocentas'
+        - 'cincocentas'
+        - 'seiscentas'
+        - 'setecentas'
+        - 'oitocentas'
+        - 'novecentas'
+      hundredthsRoots:
+        1: 'centésim'
+        2: 'ducentésim'
+        3: 'tricentésim'
+        4: 'cuadraxentésim'
+        5: 'quinxentésim'
+        6: 'sexcentésim'
+        7: 'septinxentésim'
+        8: 'octinxentésim'
+        9: 'noninxentésim'
+      ordinalUnitRoots:
+        1: 'primeir'
+        2: 'segund'
+        3: 'terceir'
+        4: 'cuart'
+        5: 'quint'
+        6: 'sext'
+        7: 'sétim'
+        8: 'oitav'
+        9: 'noven'
+      tensMap:
+        - 'cero'
+        - 'dez'
+        - 'vinte'
+        - 'trinta'
+        - 'corenta'
+        - 'cincuenta'
+        - 'sesenta'
+        - 'setenta'
+        - 'oitenta'
+        - 'noventa'
+      tenthsRoots:
+        1: 'décim'
+        2: 'vixésim'
+        3: 'trixésim'
+        4: 'cuadraxésim'
+        5: 'quincuaxésim'
+        6: 'sesaxésim'
+        7: 'septuaxésim'
+        8: 'octoxésim'
+        9: 'nonaxésim'
+      thousandthsRoots:
+        1: 'milésim'
+        2: 'dousmilésim'
+        3: 'tresmilésim'
+        4: 'catromilésim'
+        5: 'cincomilésim'
+        6: 'seismilésim'
+        7: 'setemilésim'
+        8: 'oitomilésim'
+        9: 'novemilésim'
+      tupleMap:
+        - 'cero veces'
+        - 'unha vez'
+        - 'dobre'
+        - 'triplo'
+        - 'cuádruplo'
+        - 'quíntuplo'
+        - 'séxtuplo'
+        - 'séptuplo'
+        - 'óctuplo'
+        - 'nónuplo'
+        - 'décuplo'
+        - 'undécuplo'
+        - 'duodécuplo'
+        - 'terciodécuplo'
+      unitsMasculine:
+        - 'cero'
+        - 'un'
+        - 'dous'
+        - 'tres'
+        - 'catro'
+        - 'cinco'
+        - 'seis'
+        - 'sete'
+        - 'oito'
+        - 'nove'
+        - 'dez'
+        - 'once'
+        - 'doce'
+        - 'trece'
+        - 'catorce'
+        - 'quince'
+        - 'dezaseis'
+        - 'dezasete'
+        - 'dezaoito'
+        - 'dezanove'
+        - 'vinte'
+        - 'vinte e un'
+        - 'vinte e dous'
+        - 'vinte e tres'
+        - 'vinte e catro'
+        - 'vinte e cinco'
+        - 'vinte e seis'
+        - 'vinte e sete'
+        - 'vinte e oito'
+        - 'vinte e nove'
+      unitsMasculineAbbreviation:
+        - 'cero'
+        - 'un'
+        - 'dous'
+        - 'tres'
+        - 'catro'
+        - 'cinco'
+        - 'seis'
+        - 'sete'
+        - 'oito'
+        - 'nove'
+        - 'dez'
+        - 'once'
+        - 'doce'
+        - 'trece'
+        - 'catorce'
+        - 'quince'
+        - 'dezaseis'
+        - 'dezasete'
+        - 'dezaoito'
+        - 'dezanove'
+        - 'vinte'
+        - 'vinte e un'
+        - 'vinte e dous'
+        - 'vinte e tres'
+        - 'vinte e catro'
+        - 'vinte e cinco'
+        - 'vinte e seis'
+        - 'vinte e sete'
+        - 'vinte e oito'
+        - 'vinte e nove'
+      unitsFeminine:
+        - 'cero'
+        - 'unha'
+        - 'dúas'
+        - 'tres'
+        - 'catro'
+        - 'cinco'
+        - 'seis'
+        - 'sete'
+        - 'oito'
+        - 'nove'
+        - 'dez'
+        - 'once'
+        - 'doce'
+        - 'trece'
+        - 'catorce'
+        - 'quince'
+        - 'dezaseis'
+        - 'dezasete'
+        - 'dezaoito'
+        - 'dezanove'
+        - 'vinte'
+        - 'vinte e unha'
+        - 'vinte e dúas'
+        - 'vinte e tres'
+        - 'vinte e catro'
+        - 'vinte e cinco'
+        - 'vinte e seis'
+        - 'vinte e sete'
+        - 'vinte e oito'
+        - 'vinte e nove'
+      largeScales:
+        -
+          value: 1000000000000000000
+          singularPrefix: 'un'
+          singular: 'trillón'
+          plural: 'trillóns'
+        -
+          value: 1000000000000
+          singularPrefix: 'un'
+          singular: 'billón'
+          plural: 'billóns'
+        -
+          value: 1000000
+          singularPrefix: 'un'
+          singular: 'millón'
+          plural: 'millóns'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        cero: 0
+        un: 1
+        unha: 1
+        dous: 2
+        dúas: 2
+        duas: 2
+        tres: 3
+        catro: 4
+        cinco: 5
+        seis: 6
+        sete: 7
+        oito: 8
+        nove: 9
+        dez: 10
+        once: 11
+        doce: 12
+        trece: 13
+        catorce: 14
+        quince: 15
+        dezaseis: 16
+        dezasete: 17
+        dezaoito: 18
+        dezanove: 19
+        vinte: 20
+        trinta: 30
+        corenta: 40
+        cincuenta: 50
+        sesenta: 60
+        setenta: 70
+        oitenta: 80
+        noventa: 90
+        cen: 100
+        cento: 100
+        douscentos: 200
+        duascentas: 200
+        dúascentas: 200
+        trescentos: 300
+        trescentas: 300
+        catrocentos: 400
+        catrocentas: 400
+        cincocentos: 500
+        cincocentas: 500
+        seiscentos: 600
+        seiscentas: 600
+        setecentos: 700
+        setecentas: 700
+        oitocentos: 800
+        oitocentas: 800
+        novecentos: 900
+        novecentas: 900
+        mil: 1000
+        millón: 1000000
+        millon: 1000000
+        millóns: 1000000
+        millons: 1000000
+        billón: 1000000000000
+        billon: 1000000000000
+        billóns: 1000000000000
+        billons: 1000000000000
+        trillón: 1000000000000000000
+        trillon: 1000000000000000000
+        trillóns: 1000000000000000000
+        trillons: 1000000000000000000
+      ordinalNumberToWordsKind: 'self'
+      ordinalGenderVariant: 'masculine-and-feminine'
+      negativePrefixes:
+        - 'menos '
+      ignoredTokens:
+        - 'e'
+      ordinalAbbreviationSuffixes:
+        - '.º'
+        - '.ª'
+        - 'º'
+        - 'ª'
+      ordinalMap:
+        primeira: 1
+        primeiro: 1
+        segunda: 2
+        segundo: 2
+        terceira: 3
+        terceiro: 3
+        cuarta: 4
+        cuarto: 4
+        quinta: 5
+        quinto: 5
+        sexta: 6
+        sexto: 6
+        sétima: 7
+        sétimo: 7
+        setima: 7
+        setimo: 7
+        oitava: 8
+        oitavo: 8
+        novena: 9
+        noveno: 9
+        décima: 10
+        décimo: 10
+        decima: 10
+        decimo: 10
+        vixésima: 20
+        vixésimo: 20
+        'vixésima primeira': 21
+        'vixésimo primeiro': 21
+        'vixesima primeira': 21
+        'vixesimo primeiro': 21
+        vixesima: 20
+        vixesimo: 20
+        trixésima: 30
+        trixésimo: 30
+        trixesima: 30
+        trixesimo: 30
+        centésima: 100
+        centésimo: 100
+        centesima: 100
+        centesimo: 100
+        milésima: 1000
+        milésimo: 1000
+        milesima: 1000
+        milesimo: 1000
+        millonésima: 1000000
+        millonésimo: 1000000
+        millonesima: 1000000
+        millonesimo: 1000000
+      ordinalScaleMap:
+        milésima: 1000
+        milésimo: 1000
+        milesima: 1000
+        milesimo: 1000
+        millonésima: 1000000
+        millonésimo: 1000000
+        millonesima: 1000000
+        millonesimo: 1000000
+      gluedOrdinalScaleSuffixes: {}
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: '.º'
+      feminineSuffix: '.ª'
+      neuterSuffix: '.º'
+      zeroAsPlainNumber: true
+
+    date:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} ''de'' MMMM ''de'' yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    hourGender: 'feminine'
+    minuteGender: 'masculine'
+    midnight: 'medianoite'
+    midday: 'mediodía'
+    singularArticle: 'a'
+    pluralArticle: 'as'
+    min0: '{article} {hour}'
+    min15: '{article} {hour} e cuarto'
+    min30: '{article} {hour} e media'
+    min35: '{nextArticle} {nextHour} menos vinte e cinco'
+    min40: '{nextArticle} {nextHour} menos vinte'
+    min45: '{nextArticle} {nextHour} menos cuarto'
+    min50: '{nextArticle} {nextHour} menos dez'
+    min55: '{nextArticle} {nextHour} menos cinco'
+    defaultTemplate: '{article} {hour} e {minutes}'
+    earlyMorning: 'da madrugada'
+    morning: 'da mañá'
+    afternoon: 'da tarde'
+    night: 'da noite'
+    hourWordsMap:
+      - 'cero'
+      - 'unha'
+      - 'dúas'
+      - 'tres'
+      - 'catro'
+      - 'cinco'
+      - 'seis'
+      - 'sete'
+      - 'oito'
+      - 'nove'
+      - 'dez'
+      - 'once'
+      - 'doce'
+
+  compass:
+    full:
+      - 'norte'
+      - 'norte-nordés'
+      - 'nordés'
+      - 'leste-nordés'
+      - 'leste'
+      - 'leste-sueste'
+      - 'sueste'
+      - 'sur-sueste'
+      - 'sur'
+      - 'sur-sudoeste'
+      - 'sudoeste'
+      - 'oeste-sudoeste'
+      - 'oeste'
+      - 'oeste-noroeste'
+      - 'noroeste'
+      - 'norte-noroeste'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'LNE'
+      - 'L'
+      - 'LSE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSO'
+      - 'SO'
+      - 'OSO'
+      - 'O'
+      - 'ONO'
+      - 'NO'
+      - 'NNO'

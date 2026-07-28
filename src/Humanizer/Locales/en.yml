@@ -1,0 +1,503 @@
+locale: 'en'
+
+surfaces:
+  list:
+    engine: 'oxford'
+
+  phrases:
+    relativeDate:
+      now: 'now'
+      never: 'never'
+      past:
+        millisecond:
+          single: 'one millisecond ago'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              default: 'milliseconds'
+        second:
+          single: 'one second ago'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              singular: 'second'
+              default: 'seconds'
+        minute:
+          single: 'a minute ago'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              singular: 'minute'
+              default: 'minutes'
+        hour:
+          single: 'an hour ago'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              singular: 'hour'
+              default: 'hours'
+        day:
+          single: 'yesterday'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              singular: 'day'
+              default: 'days'
+        week:
+          single: 'one week ago'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              singular: 'week'
+              default: 'weeks'
+        month:
+          single: 'one month ago'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              default: 'months'
+        year:
+          single: 'one year ago'
+          multiple:
+            afterCount: 'ago'
+            forms:
+              default: 'years'
+      future:
+        millisecond:
+          single: 'one millisecond from now'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              default: 'milliseconds'
+        second:
+          single: 'one second from now'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              singular: 'second'
+              default: 'seconds'
+        minute:
+          single: 'a minute from now'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              singular: 'minute'
+              default: 'minutes'
+        hour:
+          single: 'an hour from now'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              singular: 'hour'
+              default: 'hours'
+        day:
+          single: 'tomorrow'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              singular: 'day'
+              default: 'days'
+        week:
+          single: 'one week from now'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              singular: 'week'
+              default: 'weeks'
+        month:
+          single: 'one month from now'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              default: 'months'
+        year:
+          single: 'one year from now'
+          multiple:
+            afterCount: 'from now'
+            forms:
+              default: 'years'
+    duration:
+      zero: 'no time'
+      age:
+        template: '{value} old'
+      millisecond:
+        single:
+          numeric: '1 millisecond'
+          words: 'one millisecond'
+        multiple:
+          forms:
+            singular: 'millisecond'
+            default: 'milliseconds'
+      second:
+        single:
+          numeric: '1 second'
+          words: 'one second'
+        multiple:
+          forms:
+            singular: 'second'
+            default: 'seconds'
+      minute:
+        single:
+          numeric: '1 minute'
+          words: 'one minute'
+        multiple:
+          forms:
+            singular: 'minute'
+            default: 'minutes'
+      hour:
+        single:
+          numeric: '1 hour'
+          words: 'one hour'
+        multiple:
+          forms:
+            singular: 'hour'
+            default: 'hours'
+      day:
+        single:
+          numeric: '1 day'
+          words: 'one day'
+        multiple:
+          forms:
+            singular: 'day'
+            default: 'days'
+      week:
+        single:
+          numeric: '1 week'
+          words: 'one week'
+        multiple:
+          forms:
+            singular: 'week'
+            default: 'weeks'
+      month:
+        single:
+          numeric: '1 month'
+          words: 'one month'
+        multiple:
+          forms:
+            default: 'months'
+      year:
+        single:
+          numeric: '1 year'
+          words: 'one year'
+        multiple:
+          forms:
+            default: 'years'
+    dataUnits:
+      bit:
+        forms: 'bit'
+        symbol: 'b'
+      byte:
+        forms: 'byte'
+        symbol: 'B'
+      kilobyte:
+        forms: 'kilobyte'
+        symbol: 'KB'
+      megabyte:
+        forms: 'megabyte'
+        symbol: 'MB'
+      gigabyte:
+        forms: 'gigabyte'
+        symbol: 'GB'
+      terabyte:
+        forms: 'terabyte'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ms'
+      second:
+        symbol: 's'
+      minute:
+        symbol: 'min'
+      hour:
+        symbol: 'h'
+      day:
+        symbol: 'd'
+      week:
+        symbol: 'week'
+      month:
+        symbol: 'mo'
+      year:
+        symbol: 'y'
+
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'minus'
+      andWord: 'and'
+      hundredWord: 'hundred'
+      hundredOrdinalWord: 'hundredth'
+      tensUnitsSeparator: '-'
+      defaultAddAnd: true
+      addAndMode: 'use-caller-flag'
+      andStrategy: 'within-group-and-after-scale-sub-hundred-remainder'
+      tupleSuffix: '-tuple'
+      ordinalLeadingOneStrategy: 'omit-leading-one'
+      ordinalMode: 'english'
+      unitsMap:
+        0: 'zero'
+        1: 'one'
+        2: 'two'
+        3: 'three'
+        4: 'four'
+        5: 'five'
+        6: 'six'
+        7: 'seven'
+        8: 'eight'
+        9: 'nine'
+        10: 'ten'
+        11: 'eleven'
+        12: 'twelve'
+        13: 'thirteen'
+        14: 'fourteen'
+        15: 'fifteen'
+        16: 'sixteen'
+        17: 'seventeen'
+        18: 'eighteen'
+        19: 'nineteen'
+      ordinalUnitsMap:
+        0: 'zeroth'
+        1: 'first'
+        2: 'second'
+        3: 'third'
+        4: 'fourth'
+        5: 'fifth'
+        6: 'sixth'
+        7: 'seventh'
+        8: 'eighth'
+        9: 'ninth'
+        10: 'tenth'
+        11: 'eleventh'
+        12: 'twelfth'
+        13: 'thirteenth'
+        14: 'fourteenth'
+        15: 'fifteenth'
+        16: 'sixteenth'
+        17: 'seventeenth'
+        18: 'eighteenth'
+        19: 'nineteenth'
+      tensMap:
+        - 'zero'
+        - 'ten'
+        - 'twenty'
+        - 'thirty'
+        - 'forty'
+        - 'fifty'
+        - 'sixty'
+        - 'seventy'
+        - 'eighty'
+        - 'ninety'
+      ordinalTensMap:
+        - 'zeroth'
+        - 'tenth'
+        - 'twentieth'
+        - 'thirtieth'
+        - 'fortieth'
+        - 'fiftieth'
+        - 'sixtieth'
+        - 'seventieth'
+        - 'eightieth'
+        - 'ninetieth'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'quintillion'
+          ordinalName: 'quintillionth'
+        -
+          value: 1000000000000000
+          name: 'quadrillion'
+          ordinalName: 'quadrillionth'
+        -
+          value: 1000000000000
+          name: 'trillion'
+          ordinalName: 'trillionth'
+        -
+          value: 1000000000
+          name: 'billion'
+          ordinalName: 'billionth'
+        -
+          value: 1000000
+          name: 'million'
+          ordinalName: 'millionth'
+        -
+          value: 1000
+          name: 'thousand'
+          ordinalName: 'thousandth'
+      namedTuples:
+        1: 'single'
+        2: 'double'
+        3: 'triple'
+        4: 'quadruple'
+        5: 'quintuple'
+        6: 'sextuple'
+        7: 'septuple'
+        8: 'octuple'
+        9: 'nonuple'
+        10: 'decuple'
+        100: 'centuple'
+        1000: 'milluple'
+
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        zero: 0
+        one: 1
+        two: 2
+        three: 3
+        four: 4
+        five: 5
+        six: 6
+        seven: 7
+        eight: 8
+        nine: 9
+        ten: 10
+        eleven: 11
+        twelve: 12
+        thirteen: 13
+        fourteen: 14
+        fifteen: 15
+        sixteen: 16
+        seventeen: 17
+        eighteen: 18
+        nineteen: 19
+        twenty: 20
+        thirty: 30
+        forty: 40
+        fifty: 50
+        sixty: 60
+        seventy: 70
+        eighty: 80
+        ninety: 90
+        hundred: 100
+        thousand: 1000
+        million: 1000000
+        billion: 1000000000
+        trillion: 1000000000000
+        quadrillion: 1000000000000000
+        quintillion: 1000000000000000000
+      ordinalMap:
+        first: 1
+        second: 2
+        third: 3
+        fourth: 4
+        fifth: 5
+        sixth: 6
+        seventh: 7
+        eighth: 8
+        ninth: 9
+        tenth: 10
+        eleventh: 11
+        twelfth: 12
+        thirteenth: 13
+        fourteenth: 14
+        fifteenth: 15
+        sixteenth: 16
+        seventeenth: 17
+        eighteenth: 18
+        nineteenth: 19
+        twentieth: 20
+        thirtieth: 30
+        fortieth: 40
+        fiftieth: 50
+        sixtieth: 60
+        seventieth: 70
+        eightieth: 80
+        ninetieth: 90
+        hundredth: 100
+        thousandth: 1000
+        trillionth: 1000000000000
+        quadrillionth: 1000000000000000
+        quintillionth: 1000000000000000000
+      negativePrefixes:
+        - 'minus '
+        - 'negative '
+      ignoredTokens:
+        - 'and'
+      ordinalAbbreviationSuffixes:
+        - 'st'
+        - 'nd'
+        - 'rd'
+        - 'th'
+      allowTerminalOrdinalToken: true
+      useHundredMultiplier: true
+      allowInvariantIntegerInput: true
+
+  ordinal:
+    numeric:
+      engine: 'modulo-suffix'
+      defaultSuffix: 'th'
+      useAbsoluteValue: true
+      lastTwoDigitsRange:
+        start: 11
+        end: 20
+        suffix: 'th'
+      lastDigitSuffixes:
+        1: 'st'
+        2: 'nd'
+        3: 'rd'
+
+    date:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Ordinal'
+    dateOnly:
+      engine: 'pattern'
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Ordinal'
+
+  clock:
+    engine: 'phrase-clock'
+    hourMode: 'h12'
+    midnight: 'midnight'
+    midday: 'noon'
+    min0: "{hour} o'clock"
+    min5: 'five past {hour}'
+    min10: 'ten past {hour}'
+    min15: 'a quarter past {hour}'
+    min20: 'twenty past {hour}'
+    min25: 'twenty-five past {hour}'
+    min30: 'half past {hour}'
+    min40: 'twenty to {nextHour}'
+    min45: 'a quarter to {nextHour}'
+    min50: 'ten to {nextHour}'
+    min55: 'five to {nextHour}'
+    defaultTemplate: '{hour} {minutes}'
+
+  compass:
+    full:
+      - 'north'
+      - 'north-northeast'
+      - 'northeast'
+      - 'east-northeast'
+      - 'east'
+      - 'east-southeast'
+      - 'southeast'
+      - 'south-southeast'
+      - 'south'
+      - 'south-southwest'
+      - 'southwest'
+      - 'west-southwest'
+      - 'west'
+      - 'west-northwest'
+      - 'northwest'
+      - 'north-northwest'
+    short:
+      - 'N'
+      - 'NNE'
+      - 'NE'
+      - 'ENE'
+      - 'E'
+      - 'ESE'
+      - 'SE'
+      - 'SSE'
+      - 'S'
+      - 'SSW'
+      - 'SW'
+      - 'WSW'
+      - 'W'
+      - 'WNW'
+      - 'NW'
+      - 'NNW'
+
+  formatter:
+    engine: 'profiled'

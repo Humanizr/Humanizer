@@ -1,0 +1,32 @@
+<Project>
+
+
+  <PropertyGroup>
+    <Product>$(Product) ($(TargetFramework))</Product>
+  </PropertyGroup>
+
+
+  <PropertyGroup>
+    <EnableSourceLink Condition="'$(Configuration)' == 'Debug'">false</EnableSourceLink>
+    <EnableNETAnalyzers Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'">true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">
+    <ItemGroup>
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition=" '$(SourceRevisionId)' != '' ">
+        <_Parameter1>CommitHash</_Parameter1>
+        <_Parameter2>$(SourceRevisionId)</_Parameter2>
+      </AssemblyAttribute>
+
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition=" '$(PublicRelease)' == 'true' ">
+        <_Parameter1>CloudBuildNumber</_Parameter1>
+        <_Parameter2>$(BuildVersionSimple)</_Parameter2>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition=" '$(PublicRelease)' == 'false' ">
+        <_Parameter1>CloudBuildNumber</_Parameter1>
+        <_Parameter2>$(BuildVersionSimple)$(SemVerBuildSuffix)</_Parameter2>
+      </AssemblyAttribute>
+    </ItemGroup>
+
+  </Target>
+</Project>

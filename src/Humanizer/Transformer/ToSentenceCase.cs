@@ -3,11 +3,10 @@ namespace Humanizer;
 class ToSentenceCase : ICulturedStringTransformer
 {
     public string Transform(string input) =>
-        Transform(input, null);
+        Transform(input, CultureInfo.CurrentCulture);
 
-    public string Transform(string input, CultureInfo? culture)
+    public string Transform(string input, CultureInfo culture)
     {
-        culture ??= CultureInfo.CurrentCulture;
 
         if (input.Length >= 1)
         {

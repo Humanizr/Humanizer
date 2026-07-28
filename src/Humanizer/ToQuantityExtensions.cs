@@ -42,6 +42,37 @@ public static class ToQuantityExtensions
     /// "men".ToQuantity(2) => "2 men"
     /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
     /// </example>
+    public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric) =>
+        input.ToQuantity((long)quantity, showQuantityAs, format: null, formatProvider: null);
+
+    /// <summary>
+    /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
+    /// </summary>
+    /// <param name="input">The word to be prefixed</param>
+    /// <param name="quantity">The quantity of the word</param>
+    /// <param name="format">A standard or custom numeric format string.</param>
+    /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+    /// <example>
+    /// "request".ToQuantity(0) => "0 requests"
+    /// "request".ToQuantity(10000, format: "N0") => "10,000 requests"
+    /// "request".ToQuantity(1, format: "N0") => "1 request"
+    /// </example>
+    public static string ToQuantity(this string input, int quantity, string? format, IFormatProvider? formatProvider = null) =>
+        input.ToQuantity((long)quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
+
+    /// <summary>
+    /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
+    /// </summary>
+    /// <param name="input">The word to be prefixed</param>
+    /// <param name="quantity">The quantity of the word</param>
+    /// <param name="showQuantityAs">How to show the quantity. Numeric by default</param>
+    /// <example>
+    /// "request".ToQuantity(0) => "0 requests"
+    /// "request".ToQuantity(1) => "1 request"
+    /// "request".ToQuantity(2) => "2 requests"
+    /// "men".ToQuantity(2) => "2 men"
+    /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
+    /// </example>
     public static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric) =>
         input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
 
@@ -62,7 +93,7 @@ public static class ToQuantityExtensions
 
     static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string? format = null, IFormatProvider? formatProvider = null)
     {
-        var transformedInput = quantity == 1 || quantity == -1
+        var transformedInput = quantity is 1 or -1
             ? input.Singularize(inputIsKnownToBePlural: false)
             : input.Pluralize(inputIsKnownToBeSingular: false);
 
@@ -73,10 +104,13 @@ public static class ToQuantityExtensions
 
         if (showQuantityAs == ShowQuantityAs.Numeric)
         {
-            return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+            var quantityStr = quantity.ToString(format, formatProvider);
+            return formatProvider != null
+                ? string.Format(formatProvider, "{0} {1}", quantityStr, transformedInput)
+                : ConcatWithSpace(quantityStr, transformedInput);
         }
 
-        return $"{quantity.ToWords()} {transformedInput}";
+        return ConcatWithSpace(quantity.ToWords(), transformedInput);
     }
 
     /// <summary>
@@ -93,11 +127,17 @@ public static class ToQuantityExtensions
     /// </example>
     public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider? formatProvider = null)
     {
-        var transformedInput = quantity == 1 || quantity == -1
+        var isFinite = !(double.IsNaN(quantity) || double.IsInfinity(quantity));
+        var isSingular = isFinite && quantity == Math.Truncate(quantity) && Math.Abs(quantity) == 1d;
+
+        var transformedInput = isSingular
             ? input.Singularize(inputIsKnownToBePlural: false)
             : input.Pluralize(inputIsKnownToBeSingular: false);
 
-        return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+        var quantityStr = quantity.ToString(format, formatProvider);
+        return formatProvider != null
+            ? string.Format(formatProvider, "{0} {1}", quantityStr, transformedInput)
+            : ConcatWithSpace(quantityStr, transformedInput);
     }
 
     /// <summary>
@@ -110,4 +150,18 @@ public static class ToQuantityExtensions
     /// </example>
     public static string ToQuantity(this string input, double quantity) =>
         ToQuantity(input, quantity, null, null);
+
+    static string ConcatWithSpace(string left, string right)
+    {
+#if NET6_0_OR_GREATER
+        return string.Create(left.Length + 1 + right.Length, (left, right), (span, state) =>
+        {
+            state.left.CopyTo(span);
+            span[state.left.Length] = ' ';
+            state.right.CopyTo(span[(state.left.Length + 1)..]);
+        });
+#else
+        return string.Concat(left, " ", right);
+#endif
+    }
 }

@@ -1,9 +1,7 @@
-﻿using System.Globalization;
-
 [MemoryDiagnoser(false)]
 public class ItalianNumberBenchmarks
 {
-    static CultureInfo culture = new("it");
+    static readonly CultureInfo culture = new("it");
     [Benchmark(Description = "ItalianNumber.ToOrdinalWords")]
     public void ToOrdinalWords()
     {
@@ -14,7 +12,7 @@ public class ItalianNumberBenchmarks
         }
     }
 
-    static int[] numbers =
+    static readonly int[] numbers =
     [
         0,
         1,

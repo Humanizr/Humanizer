@@ -1,0 +1,519 @@
+locale: 'am'
+
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'እና'
+
+  formatter:
+    engine: 'profiled'
+    pluralRule: 'singular-plural'
+    dataUnitPluralRule: 'singular-plural'
+
+  phrases:
+    relativeDate:
+      now: 'አሁን'
+      never: 'ፈጽሞ'
+      past:
+        millisecond:
+          single: 'ከ 1 ሚሊሰከንድ በፊት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ሚሊሰከንዶች'
+        second:
+          single: 'ከ 1 ሰከንድ በፊት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ሰከንዶች'
+        minute:
+          single: 'ከ 1 ደቂቃ በፊት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ደቂቃዎች'
+        hour:
+          single: 'ከ 1 ሰዓት በፊት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ሰዓታት'
+        day:
+          single: 'ትናንት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ቀናት'
+        week:
+          single: 'ከ 1 ሳምንት በፊት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ሳምንታት'
+        month:
+          single: 'ከ 1 ወር በፊት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ወራት'
+        year:
+          single: 'ከ 1 ዓመት በፊት'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በፊት'
+            forms:
+              default: 'ዓመታት'
+      future:
+        millisecond:
+          single: 'ከ 1 ሚሊሰከንድ በኋላ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ሚሊሰከንዶች'
+        second:
+          single: 'ከ 1 ሰከንድ በኋላ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ሰከንዶች'
+        minute:
+          single: 'ከ 1 ደቂቃ በኋላ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ደቂቃዎች'
+        hour:
+          single: 'ከ 1 ሰዓት በኋላ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ሰዓታት'
+        day:
+          single: 'ነገ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ቀናት'
+        week:
+          single: 'ከ 1 ሳምንት በኋላ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ሳምንታት'
+        month:
+          single: 'ከ 1 ወር በኋላ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ወራት'
+        year:
+          single: 'ከ 1 ዓመት በኋላ'
+          multiple:
+            beforeCount: 'ከ'
+            afterCount: 'በኋላ'
+            forms:
+              default: 'ዓመታት'
+    duration:
+      zero: 'ጊዜ የለም'
+      age:
+        template: '{value} ዕድሜ'
+      millisecond:
+        single:
+          numeric: '1 ሚሊሰከንድ'
+          words: 'አንድ ሚሊሰከንድ'
+        multiple:
+          forms:
+            singular: 'ሚሊሰከንድ'
+            default: 'ሚሊሰከንዶች'
+      second:
+        single:
+          numeric: '1 ሰከንድ'
+          words: 'አንድ ሰከንድ'
+        multiple:
+          forms:
+            singular: 'ሰከንድ'
+            default: 'ሰከንዶች'
+      minute:
+        single:
+          numeric: '1 ደቂቃ'
+          words: 'አንድ ደቂቃ'
+        multiple:
+          forms:
+            singular: 'ደቂቃ'
+            default: 'ደቂቃዎች'
+      hour:
+        single:
+          numeric: '1 ሰዓት'
+          words: 'አንድ ሰዓት'
+        multiple:
+          forms:
+            singular: 'ሰዓት'
+            default: 'ሰዓታት'
+      day:
+        single:
+          numeric: '1 ቀን'
+          words: 'አንድ ቀን'
+        multiple:
+          forms:
+            singular: 'ቀን'
+            default: 'ቀናት'
+      week:
+        single:
+          numeric: '1 ሳምንት'
+          words: 'አንድ ሳምንት'
+        multiple:
+          forms:
+            singular: 'ሳምንት'
+            default: 'ሳምንታት'
+      month:
+        single:
+          numeric: '1 ወር'
+          words: 'አንድ ወር'
+        multiple:
+          forms:
+            singular: 'ወር'
+            default: 'ወራት'
+      year:
+        single:
+          numeric: '1 ዓመት'
+          words: 'አንድ ዓመት'
+        multiple:
+          forms:
+            singular: 'ዓመት'
+            default: 'ዓመታት'
+    dataUnits:
+      bit:
+        forms:
+          singular: 'ቢት'
+          default: 'ቢቶች'
+        symbol: 'b'
+      byte:
+        forms:
+          singular: 'ባይት'
+          default: 'ባይቶች'
+        symbol: 'B'
+      kilobyte:
+        forms:
+          singular: 'ኪሎባይት'
+          default: 'ኪሎባይቶች'
+        symbol: 'KB'
+      megabyte:
+        forms:
+          singular: 'ሜጋባይት'
+          default: 'ሜጋባይቶች'
+        symbol: 'MB'
+      gigabyte:
+        forms:
+          singular: 'ጊጋባይት'
+          default: 'ጊጋባይቶች'
+        symbol: 'GB'
+      terabyte:
+        forms:
+          singular: 'ቴራባይት'
+          default: 'ቴራባይቶች'
+        symbol: 'TB'
+    timeUnits:
+      millisecond:
+        symbol: 'ሚሊሰከንድ'
+      second:
+        symbol: 'ሰከንድ'
+      minute:
+        symbol: 'ደቂቃ'
+      hour:
+        symbol: 'ሰዓት'
+      day:
+        symbol: 'ቀን'
+      week:
+        symbol: 'ሳምንት'
+      month:
+        symbol: 'ወር'
+      year:
+        symbol: 'ዓመት'
+
+  number:
+    words:
+      engine: 'conjunctional-scale'
+      minusWord: 'አሉታዊ'
+      andWord: 'እና'
+      hundredWord: 'መቶ'
+      hundredOrdinalWord: 'መቶኛ'
+      tensUnitsSeparator: ' '
+      defaultAddAnd: false
+      addAndMode: 'always-default'
+      andStrategy: 'never'
+      tupleSuffix: '-ቱፕል'
+      ordinalLeadingOneStrategy: 'keep-leading-one'
+      ordinalMode: 'english'
+      unitsMap:
+        0: 'ዜሮ'
+        1: 'አንድ'
+        2: 'ሁለት'
+        3: 'ሶስት'
+        4: 'አራት'
+        5: 'አምስት'
+        6: 'ስድስት'
+        7: 'ሰባት'
+        8: 'ስምንት'
+        9: 'ዘጠኝ'
+        10: 'አስር'
+        11: 'አስራ አንድ'
+        12: 'አስራ ሁለት'
+        13: 'አስራ ሶስት'
+        14: 'አስራ አራት'
+        15: 'አስራ አምስት'
+        16: 'አስራ ስድስት'
+        17: 'አስራ ሰባት'
+        18: 'አስራ ስምንት'
+        19: 'አስራ ዘጠኝ'
+      ordinalUnitsMap:
+        0: 'ዜሮኛ'
+        1: 'አንደኛ'
+        2: 'ሁለተኛ'
+        3: 'ሶስተኛ'
+        4: 'አራተኛ'
+        5: 'አምስተኛ'
+        6: 'ስድስተኛ'
+        7: 'ሰባተኛ'
+        8: 'ስምንተኛ'
+        9: 'ዘጠነኛ'
+        10: 'አስረኛ'
+        11: 'አስራ አንደኛ'
+        12: 'አስራ ሁለተኛ'
+        13: 'አስራ ሶስተኛ'
+        14: 'አስራ አራተኛ'
+        15: 'አስራ አምስተኛ'
+        16: 'አስራ ስድስተኛ'
+        17: 'አስራ ሰባተኛ'
+        18: 'አስራ ስምንተኛ'
+        19: 'አስራ ዘጠነኛ'
+      tensMap:
+        2: 'ሃያ'
+        3: 'ሰላሳ'
+        4: 'አርባ'
+        5: 'ሃምሳ'
+        6: 'ስልሳ'
+        7: 'ሰባ'
+        8: 'ሰማንያ'
+        9: 'ዘጠና'
+      ordinalTensMap:
+        2: 'ሃያኛ'
+        3: 'ሰላሳኛ'
+        4: 'አርባኛ'
+        5: 'ሃምሳኛ'
+        6: 'ስልሳኛ'
+        7: 'ሰባኛ'
+        8: 'ሰማንያኛ'
+        9: 'ዘጠናኛ'
+      scales:
+        -
+          value: 1000000000000000000
+          name: 'ኩዊንቲሊዮን'
+          ordinalName: 'ኩዊንቲሊዮንኛ'
+        -
+          value: 1000000000000000
+          name: 'ኳድሪሊዮን'
+          ordinalName: 'ኳድሪሊዮንኛ'
+        -
+          value: 1000000000000
+          name: 'ትሪሊዮን'
+          ordinalName: 'ትሪሊዮንኛ'
+        -
+          value: 1000000000
+          name: 'ቢሊዮን'
+          ordinalName: 'ቢሊዮንኛ'
+        -
+          value: 1000000
+          name: 'ሚሊዮን'
+          ordinalName: 'ሚሊዮንኛ'
+        -
+          value: 1000
+          name: 'ሺህ'
+          ordinalName: 'ሺኛ'
+      namedTuples:
+        1: 'ነጠላ'
+        2: 'ጥንድ'
+        3: 'ሶስትዮሽ'
+    parse:
+      engine: 'token-map'
+      normalizationProfile: 'LowercaseRemovePeriods'
+      cardinalMap:
+        'ዜሮ': 0
+        'አንድ': 1
+        'ሁለት': 2
+        'ሶስት': 3
+        'አራት': 4
+        'አምስት': 5
+        'ስድስት': 6
+        'ሰባት': 7
+        'ስምንት': 8
+        'ዘጠኝ': 9
+        'አስር': 10
+        'አስራ': 10
+        'ሃያ': 20
+        'ሰላሳ': 30
+        'አርባ': 40
+        'ሃምሳ': 50
+        'ስልሳ': 60
+        'ሰባ': 70
+        'ሰማንያ': 80
+        'ዘጠና': 90
+        'መቶ': 100
+        'ሺህ': 1000
+        'ሚሊዮን': 1000000
+        'ቢሊዮን': 1000000000
+        'ትሪሊዮን': 1000000000000
+        'ኳድሪሊዮን': 1000000000000000
+        'ኩዊንቲሊዮን': 1000000000000000000
+      ordinalMap:
+        'ዜሮኛ': 0
+        'አንደኛ': 1
+        'ሁለተኛ': 2
+        'ሶስተኛ': 3
+        'አራተኛ': 4
+        'አምስተኛ': 5
+        'ስድስተኛ': 6
+        'ሰባተኛ': 7
+        'ስምንተኛ': 8
+        'ዘጠነኛ': 9
+        'አስረኛ': 10
+        'ሃያኛ': 20
+        'ሰላሳኛ': 30
+        'አርባኛ': 40
+        'ሃምሳኛ': 50
+        'ስልሳኛ': 60
+        'ሰባኛ': 70
+        'ሰማንያኛ': 80
+        'ዘጠናኛ': 90
+        'መቶኛ': 100
+        'ሺኛ': 1000
+        'ሚሊዮንኛ': 1000000
+        'ቢሊዮንኛ': 1000000000
+        'ትሪሊዮንኛ': 1000000000000
+        'ኳድሪሊዮንኛ': 1000000000000000
+        'ኩዊንቲሊዮንኛ': 1000000000000000000
+      ordinalScaleMap:
+        'መቶኛ': 100
+        'ሺኛ': 1000
+        'ሚሊዮንኛ': 1000000
+        'ቢሊዮንኛ': 1000000000
+        'ትሪሊዮንኛ': 1000000000000
+        'ኳድሪሊዮንኛ': 1000000000000000
+        'ኩዊንቲሊዮንኛ': 1000000000000000000
+      negativePrefixes:
+        - 'አሉታዊ'
+        - '-'
+      ordinalAbbreviationSuffixes:
+        - 'ኛ'
+      allowTerminalOrdinalToken: true
+      useHundredMultiplier: true
+      allowInvariantIntegerInput: true
+
+  ordinal:
+    numeric:
+      engine: 'suffix'
+      masculineSuffix: 'ኛ'
+      feminineSuffix: 'ኛ'
+      neuterSuffix: 'ኛ'
+    date:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+    dateOnly:
+      pattern: '{day} MMMM yyyy'
+      dayMode: 'Numeric'
+
+  clock:
+    engine: 'phrase-clock'
+    # Ethiopian/Amharic time counts hours from the 6:00/18:00 boundary.
+    hourMode: 'h12'
+    hourWordsMap:
+      - ''
+      - 'ሰባት'
+      - 'ስምንት'
+      - 'ዘጠኝ'
+      - 'አስር'
+      - 'አስራ አንድ'
+      - 'አስራ ሁለት'
+      - 'አንድ'
+      - 'ሁለት'
+      - 'ሶስት'
+      - 'አራት'
+      - 'አምስት'
+      - 'ስድስት'
+    dayPeriodPosition: 'prefix'
+    minuteSuffixSingular: 'ደቂቃ'
+    minuteSuffixPlural: 'ደቂቃ'
+    min0: '{hour} ሰዓት'
+    defaultTemplate: '{hour} ሰዓት {minutes} {minuteSuffix}'
+    earlyMorning: 'ከሌሊቱ'
+    morning: 'ከጠዋቱ'
+    afternoon: 'ከቀኑ'
+    evening: 'ከምሽቱ'
+    night: 'ከሌሊቱ'
+    eveningStartHour: 18
+    nightStartHour: 21
+
+  compass:
+    full:
+      - 'ሰሜን'
+      - 'ሰሜን-ሰሜን ምስራቅ'
+      - 'ሰሜን ምስራቅ'
+      - 'ምስራቅ-ሰሜን ምስራቅ'
+      - 'ምስራቅ'
+      - 'ምስራቅ-ደቡብ ምስራቅ'
+      - 'ደቡብ ምስራቅ'
+      - 'ደቡብ-ደቡብ ምስራቅ'
+      - 'ደቡብ'
+      - 'ደቡብ-ደቡብ ምዕራብ'
+      - 'ደቡብ ምዕራብ'
+      - 'ምዕራብ-ደቡብ ምዕራብ'
+      - 'ምዕራብ'
+      - 'ምዕራብ-ሰሜን ምዕራብ'
+      - 'ሰሜን ምዕራብ'
+      - 'ሰሜን-ሰሜን ምዕራብ'
+    short:
+      - 'ሰ'
+      - 'ሰሰም'
+      - 'ሰም'
+      - 'ምሰም'
+      - 'ም'
+      - 'ምደም'
+      - 'ደም'
+      - 'ደደም'
+      - 'ደ'
+      - 'ደደምዕ'
+      - 'ደምዕ'
+      - 'ምዕደምዕ'
+      - 'ምዕ'
+      - 'ምዕሰምዕ'
+      - 'ሰምዕ'
+      - 'ሰሰምዕ'
+
+  calendar:
+    months:
+      - 'ጃንዋሪ'
+      - 'ፌብሩዋሪ'
+      - 'ማርች'
+      - 'ኤፕሪል'
+      - 'ሜይ'
+      - 'ጁን'
+      - 'ጁላይ'
+      - 'ኦገስት'
+      - 'ሴፕቴምበር'
+      - 'ኦክቶበር'
+      - 'ኖቬምበር'
+      - 'ዲሴምበር'

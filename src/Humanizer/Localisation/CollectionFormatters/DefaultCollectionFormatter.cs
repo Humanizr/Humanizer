@@ -1,11 +1,14 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
-class DefaultCollectionFormatter : ICollectionFormatter
+/// <summary>
+/// Formats collections by joining their items with a localized conjunction.
+/// </summary>
+class DefaultCollectionFormatter(string defaultSeparator) : ICollectionFormatter
 {
-    protected string DefaultSeparator = "";
-
-    public DefaultCollectionFormatter(string defaultSeparator) =>
-        DefaultSeparator = defaultSeparator;
+    /// <summary>
+    /// Gets the separator used when callers do not provide one explicitly.
+    /// </summary>
+    protected string DefaultSeparator { get; } = defaultSeparator;
 
     public virtual string Humanize<T>(IEnumerable<T> collection) =>
         Humanize(collection, o => o?.ToString(), DefaultSeparator);
@@ -21,48 +24,63 @@ class DefaultCollectionFormatter : ICollectionFormatter
 
     public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator)
     {
-        if (collection == null)
-        {
-            throw new ArgumentNullException(nameof(collection));
-        }
+        ArgumentNullException.ThrowIfNull(collection);
+        ArgumentNullException.ThrowIfNull(objectFormatter);
 
-        if (objectFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(objectFormatter));
-        }
-
-        return HumanizeDisplayStrings(
-            collection.Select(objectFormatter),
-            separator);
+        return HumanizeDisplayStrings(collection, objectFormatter, separator);
     }
 
     public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator)
     {
-        if (collection == null)
-        {
-            throw new ArgumentNullException(nameof(collection));
-        }
+        ArgumentNullException.ThrowIfNull(collection);
+        ArgumentNullException.ThrowIfNull(objectFormatter);
 
-        if (objectFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(objectFormatter));
-        }
-
-        return HumanizeDisplayStrings(
-            collection
-                .Select(objectFormatter)
-                .Select(o => o?.ToString()),
-            separator);
+        return HumanizeDisplayObjects(collection, objectFormatter, separator);
     }
 
-    string HumanizeDisplayStrings(IEnumerable<string?> strings, string separator)
+    string HumanizeDisplayStrings<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator)
     {
-        var itemsArray = strings
-            .Select(item => item == null ? string.Empty : item.Trim())
-            .Where(item => !string.IsNullOrWhiteSpace(item))
-            .ToArray();
+        var items = CreateDisplayItems(collection);
+        foreach (var item in collection)
+        {
+            AddDisplayString(items, objectFormatter(item));
+        }
 
-        var count = itemsArray.Length;
+        return HumanizeDisplayItems(items, separator);
+    }
+
+    string HumanizeDisplayObjects<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator)
+    {
+        var items = CreateDisplayItems(collection);
+        foreach (var item in collection)
+        {
+            AddDisplayString(items, objectFormatter(item)?.ToString());
+        }
+
+        return HumanizeDisplayItems(items, separator);
+    }
+
+    static List<string> CreateDisplayItems<T>(IEnumerable<T> collection) =>
+        collection switch
+        {
+            ICollection<T> items => new(items.Count),
+            IReadOnlyCollection<T> items => new(items.Count),
+            _ => []
+        };
+
+    static void AddDisplayString(List<string> items, string? item)
+    {
+        if (string.IsNullOrWhiteSpace(item))
+        {
+            return;
+        }
+
+        items.Add(item!.Trim());
+    }
+
+    string HumanizeDisplayItems(List<string> items, string separator)
+    {
+        var count = items.Count;
 
         if (count == 0)
         {
@@ -71,14 +89,46 @@ class DefaultCollectionFormatter : ICollectionFormatter
 
         if (count == 1)
         {
-            return itemsArray[0];
+            return items[0];
         }
 
-        return string.Format(GetConjunctionFormatString(count),
-            string.Join(", ", itemsArray, 0, itemsArray.Length - 1),
+        var conjunctionFormat = GetConjunctionFormatString(count);
+        if (conjunctionFormat == "{0} {1} {2}")
+        {
+            return count == 2
+                ? string.Concat(items[0], " ", separator, " ", items[1])
+                : string.Concat(JoinLeadingItems(items), " ", separator, " ", items[^1]);
+        }
+
+        return string.Format(conjunctionFormat,
+            JoinLeadingItems(items),
             separator,
-            itemsArray[^1]);
+            items[^1]);
     }
 
+    static string JoinLeadingItems(List<string> items)
+    {
+        var count = items.Count - 1;
+        if (count == 1)
+        {
+            return items[0];
+        }
+
+        var builder = new StringBuilder();
+        builder.Append(items[0]);
+        for (var i = 1; i < count; i++)
+        {
+            builder.Append(", ");
+            builder.Append(items[i]);
+        }
+
+        return builder.ToString();
+    }
+
+    /// <summary>
+    /// Returns the format string used to combine the final two items.
+    /// </summary>
+    /// <param name="itemCount">The number of displayable items remaining after filtering.</param>
+    /// <returns>The format string used for the final join operation.</returns>
     protected virtual string GetConjunctionFormatString(int itemCount) => "{0} {1} {2}";
 }

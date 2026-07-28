@@ -27,10 +27,19 @@ stages:
         version: 8.x
 
     - task: UseDotNet@2
+      displayName: 'Use .NET 9 SDK'
+      inputs:
+        version: 9.x
+
+    - task: UseDotNet@2
       displayName: 'Use .NET 10 SDK'
       inputs:
-        includePreviewVersions: true
         version: 10.x
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET 11 SDK'
+      inputs:
+        version: 11.0.100-preview.6.26359.118
 
     - task: DotNetCoreCLI@2
       inputs:
@@ -39,38 +48,50 @@ stages:
         arguments: install --tool-path . nbgv
       displayName: Install NBGV tool
 
-    - script: nbgv cloud
+    - script: nbgv cloud -c -a
       displayName: Set Version
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: build
-        projects: .\src\Humanizer\Humanizer.csproj
-        arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\Packages 
+        command: pack
+        packagesToPack: ./src/Humanizer/Humanizer.csproj
+        packDirectory: $(Build.ArtifactStagingDirectory)/Packages
+        configuration: $(BuildConfiguration)
       displayName: Restore, Build, and Pack
+
+    - pwsh: |
+        $(Build.SourcesDirectory)/tests/verify-packages.ps1 `
+          -PackageVersion '$(NBGV_NuGetPackageVersion)' `
+          -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
+      displayName: Verify Package Structure and Dependencies
+      failOnStderr: false
 
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
+        projects: Humanizer.slnx
+        arguments: -c $(BuildConfiguration) -- --coverage --coverage-output-format cobertura --xunit-info
       displayName: Run Tests
 
     # Generate code coverage report
     # https://danielpalme.github.io/ReportGenerator/
     - task: reportgenerator@5
       displayName: Generate Code Coverage Report
+      condition: succeededOrFailed()
       inputs:
-        reports: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
-        targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
-        reporttypes: HtmlInline_AzurePipelines;Cobertura;Badges
+        reports: '$(Agent.TempDirectory)/**/*.cobertura.xml'
+        sourcedirs: $(Build.SourcesDirectory)
+        targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/
+        reporttypes: HtmlInline_AzurePipelines_Dark;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
+        customSettings: 'settings:rawMode=false'
         publishCodeCoverageResults: true
-      
-    - publish: $(Build.ArtifactStagingDirectory)\Packages
+
+    - publish: $(Build.ArtifactStagingDirectory)/Packages
       displayName: Publish build packages
       artifact: BuildPackages
-  
+      condition: succeededOrFailed()
+
 
 - stage: CodeSign
   dependsOn: Build
@@ -91,10 +112,9 @@ stages:
       displayName: Download build artifacts
 
     - task: UseDotNet@2
-      displayName: 'Use .NET 10 SDK'
+      displayName: 'Use .NET 11 SDK'
       inputs:
-        includePreviewVersions: true
-        version: 10.x
+        version: 11.0.100-preview.6.26359.118
 
     # Install the code signing tool
     - task: DotNetCoreCLI@2

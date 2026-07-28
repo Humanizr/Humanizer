@@ -1,14 +1,9 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace Humanizer;
 
 class DateOnlyToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateOnlyToOrdinalWordConverter>
 {
-    public DateOnlyToOrdinalWordsConverterRegistry() : base(new DefaultDateOnlyToOrdinalWordConverter())
-    {
-        Register("en-US", new UsDateOnlyToOrdinalWordsConverter());
-        Register("fr", new FrDateOnlyToOrdinalWordsConverter());
-        Register("es", new EsDateOnlyToOrdinalWordsConverter());
-        Register("lt", new LtDateOnlyToOrdinalWordsConverter());
-    }
+    public DateOnlyToOrdinalWordsConverterRegistry() : base(_ => new DefaultDateOnlyToOrdinalWordConverter()) =>
+        DateOnlyToOrdinalWordsConverterRegistryRegistrations.Register(this);
 }
 #endif

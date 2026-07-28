@@ -1,0 +1,3 @@
+<Project>
+  <!-- Terminate Directory.Build.targets search chain to isolate this tool from repo-wide targets. -->
+</Project>

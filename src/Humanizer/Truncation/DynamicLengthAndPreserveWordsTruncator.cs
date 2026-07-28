@@ -13,26 +13,32 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
     public string? Truncate(string? value, int length, string? truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
     {
         if (value == null)
+        {
             return null;
+        }
+
         if (value.Length == 0)
+        {
             return value;
+        }
 
         // For this scenario we expect a single-character delimiter.
         // If truncation string is null, treat it as empty.
-        if (truncationString == null)
-            truncationString = string.Empty;
+        truncationString ??= string.Empty;
 
         // If the delimiter itself is longer than the allowed length, fall back to a basic substring.
         if (truncationString.Length > length)
         {
             return truncateFrom == TruncateFrom.Right
-                ? value.Substring(0, length)
-                : value.Substring(value.Length - length);
+                ? value[..length]
+                : value[^length..];
         }
 
         // If the whole string fits, return it.
         if (value.Length <= length)
+        {
             return value;
+        }
 
         return truncateFrom == TruncateFrom.Right
             ? TruncateFromRight(value, length, truncationString)
@@ -45,7 +51,9 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
         // Determine how many characters (after the delimiter) are allowed.
         var allowedContentLength = length - truncationString.Length;
         if (allowedContentLength <= 0)
+        {
             return truncationString;
+        }
 
         // We'll scan backward from the end of the string for a whitespace boundary
         // such that the substring (after trimming) is no longer than allowedContentLength.
@@ -62,10 +70,13 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
                 }
             }
         }
-        var candidate = value.Substring(candidateStart).TrimStart();
+        var candidate = value[candidateStart..].TrimStart();
         // If the candidate word is too long (i.e. would be partial) or empty, return just the delimiter.
         if (candidate.Length > allowedContentLength || candidate.Length == 0)
+        {
             return truncationString;
+        }
+
         return truncationString + candidate;
     }
 
@@ -73,19 +84,28 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
     {
         var effectiveLength = length - truncationString.Length;
         if (effectiveLength <= 0)
+        {
             return truncationString;
+        }
         // If the cutoff falls in the middle of a word, backtrack to the last space.
         if (effectiveLength < value.Length && !char.IsWhiteSpace(value[effectiveLength]))
         {
             var lastSpace = value.LastIndexOf(' ', effectiveLength);
             if (lastSpace > 0)
+            {
                 effectiveLength = lastSpace;
+            }
             else
+            {
                 return truncationString;
+            }
         }
-        var prefix = value.Substring(0, effectiveLength).TrimEnd();
+        var prefix = value[..effectiveLength].TrimEnd();
         if (prefix.Length == 0)
+        {
             return truncationString;
+        }
+
         return prefix + truncationString;
     }
 }

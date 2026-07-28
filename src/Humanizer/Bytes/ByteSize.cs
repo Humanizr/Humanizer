@@ -21,6 +21,8 @@
 //THE SOFTWARE.
 
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
 using static System.Globalization.NumberStyles;
 
 namespace Humanizer;
@@ -31,6 +33,8 @@ public struct ByteSize(double byteSize) :
     IComparable,
     IFormattable
 {
+    static readonly ConditionalWeakTable<NumberFormatInfo, HashSet<char>> NumberFormatSpecialCharsCache = new();
+
     public static readonly ByteSize MinValue = FromBits(long.MinValue);
     public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
 
@@ -53,16 +57,16 @@ public struct ByteSize(double byteSize) :
     public const string TerabyteSymbol = "TB";
     public const string Terabyte = "terabyte";
 
-    public long Bits { get; } = (long) Math.Ceiling(byteSize * BitsInByte);
+    public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
     public double Bytes { get; } = byteSize;
     public double Kilobytes { get; } = byteSize / BytesInKilobyte;
     public double Megabytes { get; } = byteSize / BytesInMegabyte;
     public double Gigabytes { get; } = byteSize / BytesInGigabyte;
     public double Terabytes { get; } = byteSize / BytesInTerabyte;
 
-    public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
+    public readonly string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
-    public string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
+    public readonly string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
     {
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
@@ -95,9 +99,9 @@ public struct ByteSize(double byteSize) :
         return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: true);
     }
 
-    public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
+    public readonly string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
 
-    public string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
+    public readonly string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
     {
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
@@ -130,7 +134,7 @@ public struct ByteSize(double byteSize) :
         return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: false);
     }
 
-    public double LargestWholeNumberValue
+    public readonly double LargestWholeNumberValue
     {
         get
         {
@@ -167,7 +171,7 @@ public struct ByteSize(double byteSize) :
     // Get ceiling because bis are whole units
 
     public static ByteSize FromBits(long value) =>
-        new(value / (double) BitsInByte);
+        new(value / (double)BitsInByte);
 
     public static ByteSize FromBytes(double value) =>
         new(value);
@@ -190,43 +194,62 @@ public struct ByteSize(double byteSize) :
     /// the largest metric prefix such that the corresponding value is greater
     ///  than or equal to one.
     /// </summary>
-    public override string ToString() =>
-        ToString(NumberFormatInfo.CurrentInfo);
+    public readonly override string ToString() =>
+        ToString(CultureInfo.CurrentCulture);
 
-    public string ToString(IFormatProvider? provider)
+    public readonly string ToString(IFormatProvider? provider)
     {
         provider ??= CultureInfo.CurrentCulture;
 
-        return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
+        var culture = provider as CultureInfo;
+
+        // Only inject override for culture-backed providers, never for caller-supplied custom NFI
+        if (culture is not null)
+        {
+            provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
+        }
+
+        return string.Concat(
+            LargestWholeNumberValue.ToString("0.##", provider),
+            " ",
+            GetLargestWholeNumberSymbol(culture));
     }
 
-    public string ToString(string? format) =>
-        ToString(format, NumberFormatInfo.CurrentInfo);
+    public readonly string ToString(string? format) =>
+        ToString(format, CultureInfo.CurrentCulture);
 
-    public string ToString(string? format, IFormatProvider? provider) =>
+    public readonly string ToString(string? format, IFormatProvider? provider) =>
         ToString(format, provider, toSymbol: true);
 
-    string ToString(string? format, IFormatProvider? provider, bool toSymbol)
+    readonly string ToString(string? format, IFormatProvider? provider, bool toSymbol)
     {
         format ??= "G";
         provider ??= CultureInfo.CurrentCulture;
 
         if (format == "G")
-            format = "0.##";
-
-        if (!format.Contains("#") && !format.Contains("0"))
         {
-            format = "0.## " + format;
+            format = "0.##";
+        }
+
+        if (format.IndexOfAny(['#', '0']) < 0)
+        {
+            format = string.Concat("0.## ", format);
         }
 
         format = format.Replace("#.##", "0.##");
 
         var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
 
+        // Only inject override for culture-backed providers, never for caller-supplied custom NFI
+        if (provider is CultureInfo overrideCulture)
+        {
+            provider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(overrideCulture);
+        }
+
         bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
         string output(double n) => n.ToString(format, provider);
 
-        var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+        var cultureFormatter = Configurator.GetFormatter(culture);
 
         if (has(TerabyteSymbol))
         {
@@ -253,13 +276,13 @@ public struct ByteSize(double byteSize) :
         }
 
         // Byte and Bit symbol look must be case-sensitive
-        if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
+        if (format.Contains(ByteSymbol, StringComparison.Ordinal))
         {
             format = format.Replace(ByteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol));
             return output(Bytes);
         }
 
-        if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
+        if (format.Contains(BitSymbol, StringComparison.Ordinal))
         {
             format = format.Replace(BitSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol));
             return output(Bits);
@@ -271,7 +294,10 @@ public struct ByteSize(double byteSize) :
             ? "0"
             : formattedLargeWholeNumberValue;
 
-        return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
+        return string.Concat(
+            formattedLargeWholeNumberValue,
+            " ",
+            toSymbol ? GetLargestWholeNumberSymbol(culture) : GetLargestWholeNumberFullWord(culture));
     }
 
     /// <summary>
@@ -280,10 +306,10 @@ public struct ByteSize(double byteSize) :
     /// tera) used is the largest metric prefix such that the corresponding
     /// value is greater than or equal to one.
     /// </summary>
-    public string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
+    public readonly string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
         ToString(format, provider, toSymbol: false);
 
-    public override bool Equals(object? value)
+    public readonly override bool Equals(object? value)
     {
         if (value == null)
         {
@@ -303,13 +329,13 @@ public struct ByteSize(double byteSize) :
         return Equals(other);
     }
 
-    public bool Equals(ByteSize value) =>
+    public readonly bool Equals(ByteSize value) =>
         Bits == value.Bits;
 
-    public override int GetHashCode() =>
+    public readonly override int GetHashCode() =>
         Bits.GetHashCode();
 
-    public int CompareTo(object? obj)
+    public readonly int CompareTo(object? obj)
     {
         if (obj == null)
         {
@@ -324,31 +350,31 @@ public struct ByteSize(double byteSize) :
         throw new ArgumentException("Object is not a ByteSize");
     }
 
-    public int CompareTo(ByteSize other) =>
+    public readonly int CompareTo(ByteSize other) =>
         Bits.CompareTo(other.Bits);
 
-    public ByteSize Add(ByteSize bs) =>
+    public readonly ByteSize Add(ByteSize bs) =>
         new(Bytes + bs.Bytes);
 
-    public ByteSize AddBits(long value) =>
+    public readonly ByteSize AddBits(long value) =>
         this + FromBits(value);
 
-    public ByteSize AddBytes(double value) =>
+    public readonly ByteSize AddBytes(double value) =>
         this + FromBytes(value);
 
-    public ByteSize AddKilobytes(double value) =>
+    public readonly ByteSize AddKilobytes(double value) =>
         this + FromKilobytes(value);
 
-    public ByteSize AddMegabytes(double value) =>
+    public readonly ByteSize AddMegabytes(double value) =>
         this + FromMegabytes(value);
 
-    public ByteSize AddGigabytes(double value) =>
+    public readonly ByteSize AddGigabytes(double value) =>
         this + FromGigabytes(value);
 
-    public ByteSize AddTerabytes(double value) =>
+    public readonly ByteSize AddTerabytes(double value) =>
         this + FromTerabytes(value);
 
-    public ByteSize Subtract(ByteSize bs) =>
+    public readonly ByteSize Subtract(ByteSize bs) =>
         new(Bytes - bs.Bytes);
 
     public static ByteSize operator +(ByteSize b1, ByteSize b2) =>
@@ -403,15 +429,26 @@ public struct ByteSize(double byteSize) :
             return false;
         }
 
-        // Acquiring culture-specific parsing info
+        // Acquiring culture-specific parsing info — apply decimal separator override for culture-backed providers
+        if (formatProvider is CultureInfo parseCulture
+            && LocaleNumberFormattingOverrides.TryGetDecimalSeparator(parseCulture, out var parseSep))
+        {
+            formatProvider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(parseCulture, parseSep!);
+        }
+
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
-        CharSpan numberSpecialChars =
-        [
-            Convert.ToChar(numberFormat.NumberDecimalSeparator),
-            Convert.ToChar(numberFormat.NumberGroupSeparator),
-            Convert.ToChar(numberFormat.PositiveSign),
-            Convert.ToChar(numberFormat.NegativeSign),
-        ];
+
+        // Get or create cached set of special characters from number format strings
+        // Note: These can be multi-character strings in some cultures (e.g., Arabic)
+        var specialCharsSet = NumberFormatSpecialCharsCache.GetValue(
+            numberFormat,
+            static nfi => new HashSet<char>(
+                nfi.NumberDecimalSeparator
+                    .Concat(nfi.NumberGroupSeparator)
+                    .Concat(nfi.PositiveSign)
+                    .Concat(nfi.NegativeSign)
+            )
+        );
 
         // Setup the result
         result = default;
@@ -420,7 +457,7 @@ public struct ByteSize(double byteSize) :
         int lastNumber;
         for (lastNumber = 0; lastNumber < s.Length; lastNumber++)
         {
-            if (!(char.IsDigit(s[lastNumber]) || numberSpecialChars.Contains(s[lastNumber])))
+            if (!(char.IsDigit(s[lastNumber]) || specialCharsSet.Contains(s[lastNumber])))
             {
                 break;
             }
@@ -433,10 +470,9 @@ public struct ByteSize(double byteSize) :
 
         // Cut the input string in half
         var numberPart = s
-            .Slice(0, lastNumber)
+[..lastNumber]
             .Trim();
-        var sizePart = s
-            .Slice(lastNumber, s.Length - lastNumber)
+        var sizePart = s[lastNumber..]
             .Trim();
 
         if (sizePart.Length is not (1 or 2))
@@ -467,17 +503,25 @@ public struct ByteSize(double byteSize) :
             case ByteSymbol:
                 if (sizePart.SequenceEqual(BitSymbol))
                 {
-                    // Bits
-                    if (number % 1 != 0) // Can't have partial bits
+                    if (!double.IsFinite(number))
                     {
                         return false;
                     }
 
-                    result = FromBits((long) number);
+                    if (number != Math.Truncate(number))
+                    {
+                        return false;
+                    }
+
+                    if (number < long.MinValue || number > long.MaxValue)
+                    {
+                        return false;
+                    }
+
+                    result = FromBits((long)number);
                 }
                 else
                 {
-                    // Bytes
                     result = FromBytes(number);
                 }
 
@@ -511,10 +555,7 @@ public struct ByteSize(double byteSize) :
 
     public static ByteSize Parse(string s, IFormatProvider? formatProvider)
     {
-        if (s == null)
-        {
-            throw new ArgumentNullException(nameof(s));
-        }
+        ArgumentNullException.ThrowIfNull(s);
 
         if (TryParse(s, formatProvider, out var result))
         {
