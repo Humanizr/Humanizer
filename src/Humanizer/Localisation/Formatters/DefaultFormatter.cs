@@ -5,6 +5,7 @@ namespace Humanizer;
 /// </summary>
 public class DefaultFormatter : IFormatter
 {
+    static readonly DefaultFormatter EnglishFallback = new(CultureInfo.GetCultureInfo("en"));
     readonly LocalePhraseTable phraseTable;
     private protected LocalePhraseTable PhraseTable => phraseTable;
 
@@ -69,6 +70,12 @@ public class DefaultFormatter : IFormatter
         if (TryFormatDataUnitFromPhraseTable(dataUnit, count, toSymbol, out var generated))
         {
             return generated;
+        }
+
+        if (dataUnit is DataUnit.Petabyte or DataUnit.Exabyte or DataUnit.Pebibyte &&
+            !Culture.Name.Equals("en", StringComparison.OrdinalIgnoreCase))
+        {
+            return EnglishFallback.DataUnitHumanize(dataUnit, count, toSymbol);
         }
 
         throw new InvalidOperationException($"Missing generated data-unit phrase for '{Culture.Name}' and unit '{dataUnit}'.");

@@ -33,5 +33,20 @@ public enum DataUnit
     /// <summary>
     /// A terabyte.
     /// </summary>
-    Terabyte
+    Terabyte,
+
+    /// <summary>
+    /// A petabyte.
+    /// </summary>
+    Petabyte,
+
+    /// <summary>
+    /// An exabyte.
+    /// </summary>
+    Exabyte,
+
+    /// <summary>
+    /// A pebibyte.
+    /// </summary>
+    Pebibyte
 }

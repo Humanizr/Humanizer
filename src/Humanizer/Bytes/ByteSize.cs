@@ -43,6 +43,9 @@ public struct ByteSize(double byteSize) :
     public const long BytesInMegabyte = 1048576;
     public const long BytesInGigabyte = 1073741824;
     public const long BytesInTerabyte = 1099511627776;
+    public const long BytesInPetabyte = 1000000000000000;
+    public const long BytesInExabyte = 1000000000000000000;
+    public const long BytesInPebibyte = 1125899906842624;
 
     public const string BitSymbol = "b";
     public const string Bit = "bit";
@@ -56,6 +59,12 @@ public struct ByteSize(double byteSize) :
     public const string Gigabyte = "gigabyte";
     public const string TerabyteSymbol = "TB";
     public const string Terabyte = "terabyte";
+    public const string PetabyteSymbol = "PB";
+    public const string Petabyte = "petabyte";
+    public const string ExabyteSymbol = "EB";
+    public const string Exabyte = "exabyte";
+    public const string PebibyteSymbol = "PiB";
+    public const string Pebibyte = "pebibyte";
 
     public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
     public double Bytes { get; } = byteSize;
@@ -63,6 +72,9 @@ public struct ByteSize(double byteSize) :
     public double Megabytes { get; } = byteSize / BytesInMegabyte;
     public double Gigabytes { get; } = byteSize / BytesInGigabyte;
     public double Terabytes { get; } = byteSize / BytesInTerabyte;
+    public readonly double Petabytes => Bytes / BytesInPetabyte;
+    public readonly double Exabytes => Bytes / BytesInExabyte;
+    public readonly double Pebibytes => Bytes / BytesInPebibyte;
 
     public readonly string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
@@ -71,6 +83,16 @@ public struct ByteSize(double byteSize) :
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
         // Absolute value is used to deal with negative values
+        if (Math.Abs(Exabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Exabyte, Exabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Petabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Petabyte, Petabytes, toSymbol: true);
+        }
+
         if (Math.Abs(Terabytes) >= 1)
         {
             return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: true);
@@ -106,6 +128,16 @@ public struct ByteSize(double byteSize) :
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
         // Absolute value is used to deal with negative values
+        if (Math.Abs(Exabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Exabyte, Exabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Petabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Petabyte, Petabytes, toSymbol: false);
+        }
+
         if (Math.Abs(Terabytes) >= 1)
         {
             return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: false);
@@ -139,6 +171,16 @@ public struct ByteSize(double byteSize) :
         get
         {
             // Absolute value is used to deal with negative values
+            if (Math.Abs(Exabytes) >= 1)
+            {
+                return Exabytes;
+            }
+
+            if (Math.Abs(Petabytes) >= 1)
+            {
+                return Petabytes;
+            }
+
             if (Math.Abs(Terabytes) >= 1)
             {
                 return Terabytes;
@@ -188,9 +230,39 @@ public struct ByteSize(double byteSize) :
     public static ByteSize FromTerabytes(double value) =>
         new(value * BytesInTerabyte);
 
+    public static ByteSize FromPetabytes(double value)
+    {
+        if (!IsSupportedUnitValue(value, BytesInPetabyte))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * BytesInPetabyte);
+    }
+
+    public static ByteSize FromExabytes(double value)
+    {
+        if (!IsSupportedUnitValue(value, BytesInExabyte))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * BytesInExabyte);
+    }
+
+    public static ByteSize FromPebibytes(double value)
+    {
+        if (!IsSupportedUnitValue(value, BytesInPebibyte))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * BytesInPebibyte);
+    }
+
     /// <summary>
     /// Converts the value of the current ByteSize object to a string.
-    /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
+    /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera, peta, exa) used is
     /// the largest metric prefix such that the corresponding value is greater
     ///  than or equal to one.
     /// </summary>
@@ -247,31 +319,55 @@ public struct ByteSize(double byteSize) :
         }
 
         bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
+        string replace(string source, string oldValue, string newValue)
+        {
+            var index = culture.CompareInfo.IndexOf(source, oldValue, CompareOptions.IgnoreCase);
+            return source.Remove(index, oldValue.Length).Insert(index, newValue);
+        }
+
         string output(double n) => n.ToString(format, provider);
 
         var cultureFormatter = Configurator.GetFormatter(culture);
 
+        if (has(PebibyteSymbol))
+        {
+            format = replace(format, PebibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Pebibyte, Pebibytes, toSymbol));
+            return output(Pebibytes);
+        }
+
+        if (has(ExabyteSymbol))
+        {
+            format = replace(format, ExabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Exabyte, Exabytes, toSymbol));
+            return output(Exabytes);
+        }
+
+        if (has(PetabyteSymbol))
+        {
+            format = replace(format, PetabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Petabyte, Petabytes, toSymbol));
+            return output(Petabytes);
+        }
+
         if (has(TerabyteSymbol))
         {
-            format = format.Replace(TerabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol));
+            format = replace(format, TerabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol));
             return output(Terabytes);
         }
 
         if (has(GigabyteSymbol))
         {
-            format = format.Replace(GigabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol));
+            format = replace(format, GigabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol));
             return output(Gigabytes);
         }
 
         if (has(MegabyteSymbol))
         {
-            format = format.Replace(MegabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol));
+            format = replace(format, MegabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol));
             return output(Megabytes);
         }
 
         if (has(KilobyteSymbol))
         {
-            format = format.Replace(KilobyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol));
+            format = replace(format, KilobyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol));
             return output(Kilobytes);
         }
 
@@ -303,7 +399,7 @@ public struct ByteSize(double byteSize) :
     /// <summary>
     /// Converts the value of the current ByteSize object to a string with
     /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga,
-    /// tera) used is the largest metric prefix such that the corresponding
+    /// tera, peta, exa) used is the largest metric prefix such that the corresponding
     /// value is greater than or equal to one.
     /// </summary>
     public readonly string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
@@ -373,6 +469,15 @@ public struct ByteSize(double byteSize) :
 
     public readonly ByteSize AddTerabytes(double value) =>
         this + FromTerabytes(value);
+
+    public readonly ByteSize AddPetabytes(double value) =>
+        AddUnit(Petabytes, value, BytesInPetabyte);
+
+    public readonly ByteSize AddExabytes(double value) =>
+        AddUnit(Exabytes, value, BytesInExabyte);
+
+    public readonly ByteSize AddPebibytes(double value) =>
+        AddUnit(Pebibytes, value, BytesInPebibyte);
 
     public readonly ByteSize Subtract(ByteSize bs) =>
         new(Bytes - bs.Bytes);
@@ -475,7 +580,7 @@ public struct ByteSize(double byteSize) :
         var sizePart = s[lastNumber..]
             .Trim();
 
-        if (sizePart.Length is not (1 or 2))
+        if (sizePart.Length is < 1 or > 3)
         {
             return false;
         }
@@ -543,11 +648,57 @@ public struct ByteSize(double byteSize) :
                 result = FromTerabytes(number);
                 break;
 
+            case PetabyteSymbol:
+                if (!IsSupportedUnitValue(number, BytesInPetabyte))
+                {
+                    return false;
+                }
+
+                result = FromPetabytes(number);
+                break;
+
+            case ExabyteSymbol:
+                if (!IsSupportedUnitValue(number, BytesInExabyte))
+                {
+                    return false;
+                }
+
+                result = FromExabytes(number);
+                break;
+
+            case "PIB":
+                if (!IsSupportedUnitValue(number, BytesInPebibyte))
+                {
+                    return false;
+                }
+
+                result = FromPebibytes(number);
+                break;
+
             default:
                 return false;
         }
 
         return true;
+    }
+
+    static bool IsSupportedUnitValue(double value, double bytesPerUnit)
+    {
+        var bytes = value * bytesPerUnit;
+        return double.IsFinite(bytes) &&
+            bytes >= -BytesInPebibyte * 1024d &&
+            bytes < BytesInPebibyte * 1024d;
+    }
+
+    static ByteSize AddUnit(double current, double value, double bytesPerUnit)
+    {
+        var result = current + value;
+        if (!IsSupportedUnitValue(result, bytesPerUnit))
+        {
+            throw new OverflowException("The result is outside the range supported by ByteSize.Bits.");
+        }
+
+        return new(result * bytesPerUnit);
     }
 
     public static ByteSize Parse(string s) =>

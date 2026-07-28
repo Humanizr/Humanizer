@@ -289,6 +289,150 @@ public static class ByteSizeExtensions
         ByteSize.FromTerabytes(input);
 
     /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this byte input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this sbyte input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this short input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this ushort input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this int input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this uint input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this double input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabytes
+    /// </summary>
+    public static ByteSize Petabytes(this long input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this byte input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this sbyte input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this short input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this ushort input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this int input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this uint input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this double input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabytes
+    /// </summary>
+    public static ByteSize Exabytes(this long input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this byte input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this sbyte input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this short input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this ushort input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this int input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this uint input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this double input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
+    /// Considers input as pebibytes
+    /// </summary>
+    public static ByteSize Pebibytes(this long input) =>
+        ByteSize.FromPebibytes(input);
+
+    /// <summary>
     /// Turns a byte quantity into human readable form, eg 2 GB
     /// </summary>
     /// <param name="format">The string format to use</param>
