@@ -179,6 +179,18 @@ public class InflectorTests
     public void Pascalize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Pascalize());
 
+    [Theory]
+    [InlineData("SMS parameter provider", "SmsParameterProvider")]
+    [InlineData("HTTP IO module", "HttpIoModule")]
+    [InlineData("XMLHttpRequest", "XmlHttpRequest")]
+    [InlineData("CustomerName", "CustomerName")]
+    public void PascalizeNormalizesUppercaseSequences(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Pascalize(preserveUppercase: false));
+
+    [Fact]
+    public void PascalizePreservesUppercaseSequencesWhenRequested() =>
+        Assert.Equal("SMSParameterProvider", "SMS parameter provider".Pascalize(preserveUppercase: true));
+
     // Same as pascalize, except first char is lowercase
     [Theory]
     [InlineData("customer", "customer")]
@@ -200,6 +212,18 @@ public class InflectorTests
     [InlineData("_\nÄ", "_\nÄ")]
     public void Camelize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Camelize());
+
+    [Theory]
+    [InlineData("IOModule", "ioModule")]
+    [InlineData("XMLHttpRequest", "xmlHttpRequest")]
+    [InlineData("HTTP IO module", "httpIoModule")]
+    [InlineData("CustomerName", "customerName")]
+    [InlineData("_IOModule", "_ioModule")]
+    [InlineData("__IOModule", "__ioModule")]
+    [InlineData("_", "_")]
+    [InlineData("___", "___")]
+    public void ToCamelCaseNormalizesUppercaseSequences(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.ToCamelCase());
 
     //Makes an underscored lowercase string
     [Theory]
@@ -234,7 +258,9 @@ public class InflectorTests
     static void VerifyIdentifierTransformationsUseInvariantCasing()
     {
         Assert.Equal("IWillBreakStuff", "i will_break-stuff".Pascalize());
+        Assert.Equal("IoModule", "IO module".Pascalize(preserveUppercase: false));
         Assert.Equal("iWillBreakStuff", "I will_break-stuff".Camelize());
+        Assert.Equal("ioModule", "IOModule".ToCamelCase());
         Assert.Equal("istanbul_input", "IstanbulInput".Underscore());
         Assert.Equal("istanbul-input", "IstanbulInput".Kebaberize());
 

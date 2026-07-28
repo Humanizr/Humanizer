@@ -181,6 +181,20 @@ public static partial class InflectorExtensions
                 .Value.ToUpperInvariant());
 
     /// <summary>
+    /// Converts a string to PascalCase (UpperCamelCase), optionally normalizing uppercase sequences as words.
+    /// </summary>
+    /// <param name="input">The string to be pascalized. Must not be null.</param>
+    /// <param name="preserveUppercase">
+    /// <see langword="true"/> to preserve uppercase sequences; <see langword="false"/> to normalize them as words.
+    /// </param>
+    /// <returns>A PascalCase version of the input.</returns>
+    /// <remarks>
+    /// Uppercase sequences are split using identifier word boundaries, and casing is culture-invariant.
+    /// </remarks>
+    public static string Pascalize(this string input, bool preserveUppercase) =>
+        preserveUppercase ? input.Pascalize() : input.Underscore().Pascalize();
+
+    /// <summary>
     /// Converts a string to camelCase (lowerCamelCase) by preserving leading underscores, capitalizing
     /// the first letter of each word except the first word, and removing other spaces, underscores, and dashes.
     /// </summary>
@@ -233,6 +247,23 @@ public static partial class InflectorExtensions
                 camelized.AsSpan())
             : camelized;
     }
+
+    /// <summary>
+    /// Converts a string to camelCase while preserving leading underscores and normalizing uppercase sequences as words.
+    /// </summary>
+    /// <param name="input">The string to be converted. Must not be null.</param>
+    /// <returns>A camelCase version of the input with leading underscores preserved and uppercase sequences normalized.</returns>
+    /// <remarks>
+    /// Uppercase sequences are split using identifier word boundaries, and casing is culture-invariant.
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// "IOModule".ToCamelCase() => "ioModule"
+    /// "__XMLHttpRequest".ToCamelCase() => "__xmlHttpRequest"
+    /// </code>
+    /// </example>
+    public static string ToCamelCase(this string input) =>
+        input.Underscore().Camelize();
 
     static bool TryPascalizeAscii(string input, bool lowerFirst, [NotNullWhen(true)] out string? result)
     {
