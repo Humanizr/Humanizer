@@ -26,7 +26,7 @@ These instructions apply to the entire repository.
 ## Testing Expectations
 - Every functional change must include or update xUnit tests in `tests/Humanizer.Tests`.
 - Use culture-specific folders and `UseCulture` attribute for localization tests when applicable.
-- Run the test suite for the supported .NET targets: `dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0`, `--framework net10.0`, and `--framework net11.0` on all platforms. The `net48` TFM is only included in the test project on Windows; run `--framework net48` tests only on Windows hosts. Allow a few minutes for each run to complete.
+- Run the test suite for the supported .NET targets: `dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0`, `dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0`, and `dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net11.0` on all platforms. The `net48` TFM is only included in the test project on Windows; run `dotnet test tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net48` tests only on Windows hosts. Allow a few minutes for each run to complete.
 - The repository uses Microsoft Testing Platform. Filter targeted runs with `--filter-class <fully-qualified-class-name>`, `--filter-method <fully-qualified-method-name>`, or `--filter-namespace <namespace>`; do not use the legacy VSTest `--filter FullyQualifiedName~...` syntax.
 - Tests that require a specific culture must declare it with `UseCulture`; do not rely on the process's ambient culture, which is invariant-like when WSL starts with `C.UTF-8`.
 
