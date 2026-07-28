@@ -20,6 +20,14 @@ public enum ShortBitFieldEnumUnderTest : short
     DARK_GRAY = 2
 }
 
+[Flags]
+public enum MixedMetadataBitFieldEnumUnderTest
+{
+    [Display(Description = "SpaceX")]
+    AuthoredMetadata = 1,
+    NameDerived = 2
+}
+
 public class BitFlagEnumTestsResources
 {
     public const string None = "None";

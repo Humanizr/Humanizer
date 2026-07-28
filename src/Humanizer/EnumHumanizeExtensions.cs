@@ -10,16 +10,38 @@ public static class EnumHumanizeExtensions
     [UnconditionalSuppressMessage("Trimming", "IL2111", Justification = "The method is only used by Humanize which already has RequiresUnreferencedCode")]
     [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "The method is only used by Humanize which already has RequiresDynamicCode")]
 #endif
-    static MethodInfo GetGenericHumanizeMethodInfo() =>
+    static MethodInfo GetGenericHumanizeMethodInfo(int parameterCount) =>
         typeof(EnumHumanizeExtensions)
             .GetMethods()
             .Single(method =>
                 method.Name == nameof(Humanize) &&
                 method.IsGenericMethodDefinition &&
-                method.GetParameters().Length == 1 &&
+                method.GetParameters().Length == parameterCount &&
                 method.GetGenericArguments().Length == 1);
 
-    static readonly Lazy<MethodInfo> GenericHumanizeMethod = new(GetGenericHumanizeMethodInfo);
+    static readonly Lazy<MethodInfo> GenericHumanizeMethod = new(() => GetGenericHumanizeMethodInfo(1));
+    static readonly Lazy<MethodInfo> GenericHumanizeWithCasingMethod = new(() => GetGenericHumanizeMethodInfo(2));
+
+#if NET6_0_OR_GREATER
+    [UnconditionalSuppressMessage("Trimming", "IL2060", Justification = "The method is only used by Humanize which preserves the generic methods with DynamicDependency")]
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "The method is only used by Humanize which already has RequiresUnreferencedCode")]
+    [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "The method is only used by Humanize which already has RequiresDynamicCode")]
+    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(EnumHumanizeExtensions))]
+#endif
+    static string InvokeGenericHumanize(Enum input, Lazy<MethodInfo> method, params object[] arguments)
+    {
+        try
+        {
+            return (string)method.Value
+                .MakeGenericMethod(input.GetType())
+                .Invoke(null, arguments)!;
+        }
+        catch (TargetInvocationException exception) when (exception.InnerException is not null)
+        {
+            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(exception.InnerException).Throw();
+            throw;
+        }
+    }
 
     /// <summary>
     /// Converts an enum value to a human-readable string when the concrete enum type is only known at runtime.
@@ -31,33 +53,22 @@ public static class EnumHumanizeExtensions
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(EnumHumanizeExtensions))]
 #endif
-    public static string Humanize(this Enum input)
-    {
-        try
-        {
-            return (string)GenericHumanizeMethod.Value
-                .MakeGenericMethod(input.GetType())
-                .Invoke(null, [input])!;
-        }
-        catch (TargetInvocationException exception) when (exception.InnerException is not null)
-        {
-            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(exception.InnerException).Throw();
-            throw;
-        }
-    }
+    public static string Humanize(this Enum input) =>
+        InvokeGenericHumanize(input, GenericHumanizeMethod, input);
 
     /// <summary>
-    /// Converts an enum value to a human-readable string with the specified letter casing when the concrete enum type is only known at runtime.
+    /// Converts an enum value to a human-readable string with the specified letter casing applied to the enum member name
+    /// when the concrete enum type is only known at runtime. Authored metadata on a defined enum value is returned unchanged.
     /// </summary>
     /// <param name="input">The enum value to be humanized.</param>
-    /// <param name="casing">The desired letter casing to apply to the humanized enum value.</param>
-    /// <returns>A human-readable string representation of the enum value with the specified casing applied.</returns>
+    /// <param name="casing">The desired letter casing to apply when humanizing the enum member name.</param>
+    /// <returns>A human-readable string representation of the enum value.</returns>
 #if NET6_0_OR_GREATER
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
 #endif
     public static string Humanize(this Enum input, LetterCasing casing) =>
-        input.Humanize().ApplyCase(casing);
+        InvokeGenericHumanize(input, GenericHumanizeWithCasingMethod, input, casing);
 
     /// <summary>
     /// Converts an enum value to a human-readable string by intelligently formatting the enum member name
@@ -94,11 +105,20 @@ public static class EnumHumanizeExtensions
     /// </code>
     /// </example>
     public static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(this T input)
+        where T : struct, Enum =>
+        Humanize(input, null);
+
+    static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(T input, LetterCasing? casing)
         where T : struct, Enum
     {
         var (zero, humanized, values) = EnumCache<T>.GetInfo();
         if (EnumCache<T>.TreatAsFlags(input))
         {
+            if (casing is { } flagsCasing && !Enum.IsDefined(flagsCasing))
+            {
+                throw new ArgumentOutOfRangeException(nameof(casing));
+            }
+
             // Avoid LINQ allocations by manually iterating and building the list
             List<string>? flagValues = null;
             foreach (var value in values)
@@ -106,30 +126,42 @@ public static class EnumHumanizeExtensions
                 if (value.CompareTo(zero) != 0 && input.HasFlag(value))
                 {
                     flagValues ??= new List<string>();
-                    flagValues.Add(humanized[value]);
+                    var flag = humanized[value];
+                    flagValues.Add(casing is { } flagCasing && !flag.IsMetadata ? flag.Text.ApplyCase(flagCasing) : flag.Text);
                 }
             }
 
             return flagValues?.Humanize() ?? string.Empty;
         }
 
-        return humanized[input];
+        var humanizedEnum = humanized[input];
+        if (casing is not { } enumCasing)
+        {
+            return humanizedEnum.Text;
+        }
+
+        if (!Enum.IsDefined(enumCasing))
+        {
+            throw new ArgumentOutOfRangeException(nameof(casing));
+        }
+
+        return humanizedEnum.IsMetadata ? humanizedEnum.Text : humanizedEnum.Text.ApplyCase(enumCasing);
     }
 
 
     /// <summary>
-    /// Converts an enum value to a human-readable string with the specified letter casing applied.
-    /// Respects any <see cref="System.ComponentModel.DescriptionAttribute"/> applied to the enum member.
+    /// Converts an enum value to a human-readable string with the specified letter casing applied to the enum member name.
+    /// Authored metadata on a defined enum value is returned unchanged.
     /// </summary>
     /// <typeparam name="T">The enum type. Must be a struct and implement <see cref="Enum"/>.</typeparam>
     /// <param name="input">The enum value to be humanized.</param>
-    /// <param name="casing">The desired letter casing to apply to the humanized enum value.</param>
+    /// <param name="casing">The desired letter casing to apply when humanizing the enum member name.</param>
     /// <returns>
-    /// A human-readable string representation of the enum value with the specified casing applied.
-    /// If a <see cref="System.ComponentModel.DescriptionAttribute"/> is present, its value is used and then cased.
+    /// A human-readable string representation of the enum value.
+    /// If a defined enum value has authored metadata such as <see cref="System.ComponentModel.DescriptionAttribute"/>, its value is returned unchanged.
     /// </returns>
     /// <remarks>
-    /// This is a convenience method that combines <see cref="Humanize{T}(T)"/> with <see cref="CasingExtensions.ApplyCase"/>.
+    /// For a defined enum value, the specified casing is applied only when the output is derived from the enum member name.
     /// </remarks>
     /// <example>
     /// <code>
@@ -141,9 +173,5 @@ public static class EnumHumanizeExtensions
     /// </example>
     public static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(this T input, LetterCasing casing)
         where T : struct, Enum
-    {
-        var humanizedEnum = Humanize(input);
-
-        return humanizedEnum.ApplyCase(casing);
-    }
+        => Humanize(input, (LetterCasing?)casing);
 }

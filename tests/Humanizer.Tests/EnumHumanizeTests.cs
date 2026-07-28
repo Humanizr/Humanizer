@@ -6,6 +6,18 @@ public class EnumHumanizeTests
     public void HonorsDescriptionAttribute() =>
         Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
 
+    [Theory]
+    [InlineData(LetterCasing.Title)]
+    [InlineData(LetterCasing.AllCaps)]
+    [InlineData(LetterCasing.LowerCase)]
+    [InlineData(LetterCasing.Sentence)]
+    public void CasingPreservesDescriptionAttribute(LetterCasing casing) =>
+        Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize(casing));
+
+    [Fact]
+    public void InvalidCasingStillThrowsForDescriptionAttribute() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() => EnumUnderTest.MemberWithDescriptionAttribute.Humanize((LetterCasing)42));
+
     [Fact]
     public void HonorsDescriptionAttributeSubclasses() =>
         Assert.Equal("Overridden " + EnumTestsResources.MemberWithDescriptionAttributeSubclass, EnumUnderTest.MemberWithDescriptionAttributeSubclass.Humanize());
@@ -33,6 +45,17 @@ public class EnumHumanizeTests
         Assert.Equal(
             EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
             value.Humanize(LetterCasing.Title));
+    }
+
+    [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    public void RuntimeEnumCasingPreservesDescriptionAttribute()
+    {
+        Enum value = EnumUnderTest.MemberWithDescriptionAttribute;
+
+        Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, value.Humanize(LetterCasing.Title));
+        Assert.Throws<ArgumentOutOfRangeException>(() => value.Humanize((LetterCasing)42));
     }
 
     [Fact]
@@ -66,6 +89,14 @@ public class EnumHumanizeTests
     [Fact]
     public void HonorsDisplayAttribute() =>
         Assert.Equal(EnumTestsResources.MemberWithDisplayAttribute, EnumUnderTest.MemberWithDisplayAttribute.Humanize());
+
+    [Theory]
+    [InlineData(LetterCasing.Title)]
+    [InlineData(LetterCasing.AllCaps)]
+    [InlineData(LetterCasing.LowerCase)]
+    [InlineData(LetterCasing.Sentence)]
+    public void CasingPreservesDisplayAttribute(LetterCasing casing) =>
+        Assert.Equal(EnumTestsResources.MemberWithDisplayAttribute, EnumUnderTest.MemberWithDisplayAttribute.Humanize(casing));
 
     [Fact]
     public void HandlesDisplayAttributeWithNoDescription() =>
