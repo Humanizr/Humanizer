@@ -14,6 +14,7 @@ on:
         type: boolean
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -254,5 +255,6 @@ jobs:
                 --body "Generated from the published Humanizer ${RELEASE_VERSION} package. The immutable snapshot, API reference, examples, selector metadata, and complete static site passed the documentation release gates."
             )"
           fi
+          gh workflow run docs.yml --ref "$RELEASE_BRANCH"
           echo "url=${pr_url}" >> "$GITHUB_OUTPUT"
           echo "Ready ${pr_url}"
