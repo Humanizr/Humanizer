@@ -369,6 +369,16 @@ TimeSpan.FromDays(750).ToAge() => "2 years old"
 TimeSpan.FromDays(750).ToAge() => "2 ans"
 ```
 
+### Dehumanize TimeSpan
+
+Standard invariant `TimeSpan` text and compact duration tokens can be parsed with `DehumanizeTimeSpan` or `TryDehumanizeTimeSpan`:
+
+```csharp
+"3h18m".DehumanizeTimeSpan() => TimeSpan.FromHours(3) + TimeSpan.FromMinutes(18)
+"1.5w 2d".TryDehumanizeTimeSpan(out var duration) => true
+```
+
+Compact parsing accepts the invariant symbols `ms`, `s`, `m`, `h`, `d`, and `w`, with one week equal to seven days. Colon-separated values use the standard invariant `TimeSpan` interpretation. Localized phrases, number words, months, and years are not supported.
 
 ### Humanize Collections
 

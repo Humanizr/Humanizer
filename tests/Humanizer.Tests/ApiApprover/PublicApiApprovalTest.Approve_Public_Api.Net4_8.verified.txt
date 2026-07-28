@@ -1280,6 +1280,11 @@ namespace Humanizer
         Future = 0,
         Past = 1,
     }
+    public static class TimeSpanDehumanizeExtensions
+    {
+        public static System.TimeSpan DehumanizeTimeSpan(this string input) { }
+        public static bool TryDehumanizeTimeSpan(this string? input, out System.TimeSpan result) { }
+    }
     public static class TimeSpanHumanizeExtensions
     {
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ", bool toWords = false) { }
