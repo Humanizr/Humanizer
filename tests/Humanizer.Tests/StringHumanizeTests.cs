@@ -59,7 +59,7 @@ public class StringHumanizeTests
     public void CanHumanizeStringWithAcronyms(string input, string expectedValue) =>
         Assert.Equal(expectedValue, input.Humanize());
 
-    [Fact]
+    [Fact, UseCulture("tr-TR")]
     public void CanHumanizeStringsWithCustomAcronyms()
     {
         Vocabularies.Default.RemoveAcronym("HS");
@@ -94,6 +94,31 @@ public class StringHumanizeTests
     [InlineData("HS2")]
     public void CannotAddInvalidAcronym(string? acronym) =>
         Assert.ThrowsAny<ArgumentException>(() => Vocabularies.Default.AddAcronym(acronym!));
+
+    [Fact]
+    public void CanRegisterCustomAcronymsWhileMatching()
+    {
+        var vocabulary = new Vocabulary();
+        vocabulary.AddAcronym("AA");
+
+        Parallel.Invoke(
+            () =>
+            {
+                foreach (var letter in Enumerable.Range('B', 25))
+                {
+                    vocabulary.AddAcronym($"A{(char)letter}");
+                }
+            },
+            () =>
+            {
+                for (var i = 0; i < 1000; i++)
+                {
+                    _ = vocabulary.ApplyAcronyms("Uses aa");
+                }
+            });
+
+        Assert.Equal("Uses AA", vocabulary.ApplyAcronyms("Uses aa"));
+    }
 
     [Theory]
     [InlineData("CanReturnTitleCase", "Can Return Title Case")]

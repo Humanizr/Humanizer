@@ -43,9 +43,15 @@ public partial class Vocabulary
             throw new ArgumentException("Acronym must contain only letters.", nameof(acronym));
         }
 
-        if (!acronyms.Any(rule => rule.IsFullMatch(acronym)))
+        lock (acronyms)
         {
-            acronyms.Add(new($@"\b{Regex.Escape(acronym)}\b", acronym.Replace("$", "$$")));
+            if (!acronyms.Any(rule => rule.IsFullMatch(acronym)))
+            {
+                acronyms.Add(new(
+                    $@"\b{Regex.Escape(acronym)}\b",
+                    acronym.Replace("$", "$$"),
+                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled));
+            }
         }
     }
 
@@ -294,16 +300,24 @@ public partial class Vocabulary
 
     internal string ApplyAcronyms(string input)
     {
-        foreach (var acronym in acronyms)
+        lock (acronyms)
         {
-            input = acronym.Apply(input, out _) ?? input;
-        }
+            foreach (var acronym in acronyms)
+            {
+                input = acronym.Apply(input, out _) ?? input;
+            }
 
-        return input;
+            return input;
+        }
     }
 
-    internal void RemoveAcronym(string acronym) =>
-        acronyms.RemoveAll(rule => rule.IsFullMatch(acronym));
+    internal void RemoveAcronym(string acronym)
+    {
+        lock (acronyms)
+        {
+            acronyms.RemoveAll(rule => rule.IsFullMatch(acronym));
+        }
+    }
 
     static string MatchUpperCase(string word, string replacement) =>
         word.Length > 1 && word.Any(char.IsUpper) && !word.Any(char.IsLower)
@@ -321,9 +335,12 @@ public partial class Vocabulary
         return s.Groups.Count > 1 ? s.Groups[1].Value : null;
     }
 
-    class Rule(string pattern, string replacement)
+    class Rule(
+        string pattern,
+        string replacement,
+        RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Compiled)
     {
-        readonly Regex regex = new(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        readonly Regex regex = new(pattern, options);
 
         public bool IsBuiltIn { get; set; }
 
