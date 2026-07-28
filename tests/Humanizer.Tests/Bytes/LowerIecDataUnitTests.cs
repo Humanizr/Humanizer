@@ -31,6 +31,26 @@ public class LowerIecDataUnitTests
     public void FormatsUppercaseIecTokenWithTurkishCulture() =>
         Assert.Equal("1 KiB", ByteSize.FromKibibytes(1).ToString("KIB", new CultureInfo("tr")));
 
+    [Fact]
+    public void RejectsUnsupportedLowerIecFactoryValues()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.FromKibibytes(1125899906842624));
+        Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.FromMebibytes(1099511627776));
+        Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.FromGibibytes(1073741824));
+        Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.FromTebibytes(1048576));
+    }
+
+    [Theory]
+    [InlineData("1125899906842624 KiB")]
+    [InlineData("1099511627776 MiB")]
+    [InlineData("1073741824 GiB")]
+    [InlineData("1048576 TiB")]
+    public void TryParseReturnsFalseForUnsupportedLowerIecValues(string input)
+    {
+        Assert.False(ByteSize.TryParse(input, out _));
+        Assert.False(ByteSize.TryParse(input.AsSpan(), out _));
+    }
+
     [Theory]
     [InlineData("1KiB", 1024)]
     [InlineData("1.5 mib", 1572864)]

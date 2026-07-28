@@ -40,12 +40,24 @@ public struct ByteSize(double byteSize) :
 
     public const long BitsInByte = 8;
     public const long BytesInKilobyte = 1024;
+    /// <summary>
+    /// The number of bytes in a kibibyte, equivalent to the established kilobyte factor.
+    /// </summary>
     public const long BytesInKibibyte = BytesInKilobyte;
     public const long BytesInMegabyte = 1048576;
+    /// <summary>
+    /// The number of bytes in a mebibyte, equivalent to the established megabyte factor.
+    /// </summary>
     public const long BytesInMebibyte = BytesInMegabyte;
     public const long BytesInGigabyte = 1073741824;
+    /// <summary>
+    /// The number of bytes in a gibibyte, equivalent to the established gigabyte factor.
+    /// </summary>
     public const long BytesInGibibyte = BytesInGigabyte;
     public const long BytesInTerabyte = 1099511627776;
+    /// <summary>
+    /// The number of bytes in a tebibyte, equivalent to the established terabyte factor.
+    /// </summary>
     public const long BytesInTebibyte = BytesInTerabyte;
     public const long BytesInPetabyte = 1000000000000000;
     public const long BytesInExabyte = 1000000000000000000;
@@ -57,19 +69,43 @@ public struct ByteSize(double byteSize) :
     public const string Byte = "byte";
     public const string KilobyteSymbol = "KB";
     public const string Kilobyte = "kilobyte";
+    /// <summary>
+    /// The symbol for a kibibyte.
+    /// </summary>
     public const string KibibyteSymbol = "KiB";
+    /// <summary>
+    /// The name of a kibibyte.
+    /// </summary>
     public const string Kibibyte = "kibibyte";
     public const string MegabyteSymbol = "MB";
     public const string Megabyte = "megabyte";
+    /// <summary>
+    /// The symbol for a mebibyte.
+    /// </summary>
     public const string MebibyteSymbol = "MiB";
+    /// <summary>
+    /// The name of a mebibyte.
+    /// </summary>
     public const string Mebibyte = "mebibyte";
     public const string GigabyteSymbol = "GB";
     public const string Gigabyte = "gigabyte";
+    /// <summary>
+    /// The symbol for a gibibyte.
+    /// </summary>
     public const string GibibyteSymbol = "GiB";
+    /// <summary>
+    /// The name of a gibibyte.
+    /// </summary>
     public const string Gibibyte = "gibibyte";
     public const string TerabyteSymbol = "TB";
     public const string Terabyte = "terabyte";
+    /// <summary>
+    /// The symbol for a tebibyte.
+    /// </summary>
     public const string TebibyteSymbol = "TiB";
+    /// <summary>
+    /// The name of a tebibyte.
+    /// </summary>
     public const string Tebibyte = "tebibyte";
     public const string PetabyteSymbol = "PB";
     public const string Petabyte = "petabyte";
@@ -81,12 +117,24 @@ public struct ByteSize(double byteSize) :
     public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
     public double Bytes { get; } = byteSize;
     public double Kilobytes { get; } = byteSize / BytesInKilobyte;
+    /// <summary>
+    /// Gets the size in kibibytes.
+    /// </summary>
     public readonly double Kibibytes => Bytes / BytesInKibibyte;
     public double Megabytes { get; } = byteSize / BytesInMegabyte;
+    /// <summary>
+    /// Gets the size in mebibytes.
+    /// </summary>
     public readonly double Mebibytes => Bytes / BytesInMebibyte;
     public double Gigabytes { get; } = byteSize / BytesInGigabyte;
+    /// <summary>
+    /// Gets the size in gibibytes.
+    /// </summary>
     public readonly double Gibibytes => Bytes / BytesInGibibyte;
     public double Terabytes { get; } = byteSize / BytesInTerabyte;
+    /// <summary>
+    /// Gets the size in tebibytes.
+    /// </summary>
     public readonly double Tebibytes => Bytes / BytesInTebibyte;
     public readonly double Petabytes => Bytes / BytesInPetabyte;
     public readonly double Exabytes => Bytes / BytesInExabyte;
@@ -237,26 +285,66 @@ public struct ByteSize(double byteSize) :
     public static ByteSize FromKilobytes(double value) =>
         new(value * BytesInKilobyte);
 
-    public static ByteSize FromKibibytes(double value) =>
-        new(value * BytesInKibibyte);
+    /// <summary>
+    /// Creates a byte size from a number of kibibytes.
+    /// </summary>
+    public static ByteSize FromKibibytes(double value)
+    {
+        if (!IsSupportedUnitValue(value, BytesInKibibyte))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * BytesInKibibyte);
+    }
 
     public static ByteSize FromMegabytes(double value) =>
         new(value * BytesInMegabyte);
 
-    public static ByteSize FromMebibytes(double value) =>
-        new(value * BytesInMebibyte);
+    /// <summary>
+    /// Creates a byte size from a number of mebibytes.
+    /// </summary>
+    public static ByteSize FromMebibytes(double value)
+    {
+        if (!IsSupportedUnitValue(value, BytesInMebibyte))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * BytesInMebibyte);
+    }
 
     public static ByteSize FromGigabytes(double value) =>
         new(value * BytesInGigabyte);
 
-    public static ByteSize FromGibibytes(double value) =>
-        new(value * BytesInGibibyte);
+    /// <summary>
+    /// Creates a byte size from a number of gibibytes.
+    /// </summary>
+    public static ByteSize FromGibibytes(double value)
+    {
+        if (!IsSupportedUnitValue(value, BytesInGibibyte))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * BytesInGibibyte);
+    }
 
     public static ByteSize FromTerabytes(double value) =>
         new(value * BytesInTerabyte);
 
-    public static ByteSize FromTebibytes(double value) =>
-        new(value * BytesInTebibyte);
+    /// <summary>
+    /// Creates a byte size from a number of tebibytes.
+    /// </summary>
+    public static ByteSize FromTebibytes(double value)
+    {
+        if (!IsSupportedUnitValue(value, BytesInTebibyte))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * BytesInTebibyte);
+    }
 
     public static ByteSize FromPetabytes(double value)
     {
@@ -689,6 +777,11 @@ public struct ByteSize(double byteSize) :
                 break;
 
             case "KIB":
+                if (!IsSupportedUnitValue(number, BytesInKibibyte))
+                {
+                    return false;
+                }
+
                 result = FromKibibytes(number);
                 break;
 
@@ -697,6 +790,11 @@ public struct ByteSize(double byteSize) :
                 break;
 
             case "MIB":
+                if (!IsSupportedUnitValue(number, BytesInMebibyte))
+                {
+                    return false;
+                }
+
                 result = FromMebibytes(number);
                 break;
 
@@ -705,6 +803,11 @@ public struct ByteSize(double byteSize) :
                 break;
 
             case "GIB":
+                if (!IsSupportedUnitValue(number, BytesInGibibyte))
+                {
+                    return false;
+                }
+
                 result = FromGibibytes(number);
                 break;
 
@@ -713,6 +816,11 @@ public struct ByteSize(double byteSize) :
                 break;
 
             case "TIB":
+                if (!IsSupportedUnitValue(number, BytesInTebibyte))
+                {
+                    return false;
+                }
+
                 result = FromTebibytes(number);
                 break;
 
