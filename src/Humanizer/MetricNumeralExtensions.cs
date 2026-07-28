@@ -484,12 +484,16 @@ public static class MetricNumeralExtensions
             return BuildMetricRepresentation(input, exponent, formats, decimals);
         }
 
+        if (decimals.HasValue)
+        {
+            input = Math.Round(input, decimals.Value);
+
+            if (Math.Abs(input) >= 1000)
+                return BuildMetricRepresentation(input, 1, formats, decimals);
+        }
+
         var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
-        var representation = decimals.HasValue
-            ? Math
-                .Round(input, decimals.Value)
-                .ToString(nfi)
-            : input.ToString(nfi);
+        var representation = input.ToString(nfi);
         var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
