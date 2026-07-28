@@ -81,6 +81,9 @@ public class MetricNumeralTests
         static decimal RemoveTrailingZeroes(ref decimal value)
             => value /= 1.000000000000000000000000000000000M;
 
+        static string FormatExpected(decimal value, string suffix) =>
+            value.ToString(CultureInfo.InvariantCulture) + suffix;
+
         var data = new TheoryData<long, int?, string>();
 
         // 0-999
@@ -88,7 +91,7 @@ public class MetricNumeralTests
         {
             foreach (var decimals in (int?[])[null, 0, 1, 3, 20])
             {
-                data.Add(value, decimals, value.ToString());
+                data.Add(value, decimals, value.ToString(CultureInfo.InvariantCulture));
             }
         }
 
@@ -106,7 +109,7 @@ public class MetricNumeralTests
 
                 RemoveTrailingZeroes(ref truncatedValue);
 
-                var expected = truncatedValue + "k";
+                var expected = FormatExpected(truncatedValue, "k");
 
                 data.Add(value, decimals, expected);
             }
@@ -126,7 +129,7 @@ public class MetricNumeralTests
 
                 RemoveTrailingZeroes(ref truncatedValue);
 
-                var expected = truncatedValue + "M";
+                var expected = FormatExpected(truncatedValue, "M");
 
                 data.Add(value, decimals, expected);
             }
@@ -146,7 +149,7 @@ public class MetricNumeralTests
 
                 RemoveTrailingZeroes(ref truncatedValue);
 
-                var expected = truncatedValue + "G";
+                var expected = FormatExpected(truncatedValue, "G");
 
                 data.Add(value, decimals, expected);
             }
@@ -166,7 +169,7 @@ public class MetricNumeralTests
 
                 RemoveTrailingZeroes(ref truncatedValue);
 
-                var expected = truncatedValue + "T";
+                var expected = FormatExpected(truncatedValue, "T");
 
                 data.Add(value, decimals, expected);
             }
@@ -186,7 +189,7 @@ public class MetricNumeralTests
 
                 RemoveTrailingZeroes(ref truncatedValue);
 
-                var expected = truncatedValue + "P";
+                var expected = FormatExpected(truncatedValue, "P");
 
                 data.Add(value, decimals, expected);
             }
@@ -207,7 +210,7 @@ public class MetricNumeralTests
 
                 RemoveTrailingZeroes(ref truncatedValue);
 
-                var expected = truncatedValue + "E";
+                var expected = FormatExpected(truncatedValue, "E");
 
                 data.Add(value, decimals, expected);
             }
@@ -352,4 +355,18 @@ public class MetricNumeralTests
     [InlineData(-1E-27)]
     public void ToMetricOnInvalid(double input) =>
         Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
+}
+
+[UseCulture("de-DE")]
+public class MetricNumeralTestDataTests
+{
+    [Fact]
+    public void LongTestCaseExpectationsUseInvariantCulture()
+    {
+        var testCase = MetricNumeralTests
+            .GenerateLongToMetricTestCases()
+            .Single(x => x.Data.Item1 == 1245 && x.Data.Item2 == 2);
+
+        Assert.Equal("1.24k", testCase.Data.Item3);
+    }
 }
