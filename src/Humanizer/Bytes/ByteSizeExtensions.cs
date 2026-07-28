@@ -455,6 +455,85 @@ public static class ByteSizeExtensions
         string.IsNullOrWhiteSpace(format) ? input.ToString(formatProvider) : input.ToString(format, formatProvider);
 
     /// <summary>
+    /// Turns a byte quantity into a composite human-readable form using descending units, e.g. 10 KB 2 B.
+    /// </summary>
+    /// <param name="input">The byte quantity to humanize.</param>
+    /// <param name="precision">The maximum number of non-zero parts to return.</param>
+    /// <param name="formatProvider">The format provider to use. If null, the current culture is used.</param>
+    /// <param name="separator">The separator to use between parts.</param>
+    /// <param name="toWords">Uses unit words instead of symbols if true.</param>
+    /// <returns>The composite byte quantity.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="precision"/> is less than one.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="separator"/> is null.</exception>
+    public static string HumanizeComposite(
+        this ByteSize input,
+        int precision = 2,
+        IFormatProvider? formatProvider = null,
+        string separator = " ",
+        bool toWords = false)
+    {
+        if (precision < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(precision), precision, "Precision must be greater than zero.");
+        }
+
+        ArgumentNullException.ThrowIfNull(separator);
+
+        formatProvider ??= CultureInfo.CurrentCulture;
+        var culture = formatProvider as CultureInfo;
+        if (culture is not null)
+        {
+            formatProvider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
+        }
+
+        var formatter = Configurator.GetFormatter(culture);
+        var isNegative = input.Bits < 0;
+        var remainingBits = isNegative
+            ? (ulong)(-(input.Bits + 1)) + 1
+            : (ulong)input.Bits;
+
+        if (remainingBits == 0)
+        {
+            return string.Concat("0 ", formatter.DataUnitHumanize(DataUnit.Bit, 0, toSymbol: !toWords));
+        }
+
+        var parts = new List<string>(Math.Min(precision, 8));
+
+        void addPart(ulong bitsPerUnit, DataUnit unit)
+        {
+            if (parts.Count >= precision)
+            {
+                return;
+            }
+
+            var count = remainingBits / bitsPerUnit;
+            if (count == 0)
+            {
+                return;
+            }
+
+            parts.Add(string.Concat(
+                count.ToString(formatProvider),
+                " ",
+                formatter.DataUnitHumanize(unit, count, toSymbol: !toWords)));
+            remainingBits %= bitsPerUnit;
+        }
+
+        addPart((ulong)ByteSize.BytesInExabyte * ByteSize.BitsInByte, DataUnit.Exabyte);
+        addPart((ulong)ByteSize.BytesInPetabyte * ByteSize.BitsInByte, DataUnit.Petabyte);
+        addPart((ulong)ByteSize.BytesInTerabyte * ByteSize.BitsInByte, DataUnit.Terabyte);
+        addPart((ulong)ByteSize.BytesInGigabyte * ByteSize.BitsInByte, DataUnit.Gigabyte);
+        addPart((ulong)ByteSize.BytesInMegabyte * ByteSize.BitsInByte, DataUnit.Megabyte);
+        addPart((ulong)ByteSize.BytesInKilobyte * ByteSize.BitsInByte, DataUnit.Kilobyte);
+        addPart(ByteSize.BitsInByte, DataUnit.Byte);
+        addPart(1, DataUnit.Bit);
+
+        return string.Concat(
+            isNegative ? NumberFormatInfo.GetInstance(formatProvider).NegativeSign : null,
+            string.Join(separator, parts));
+    }
+
+    /// <summary>
     /// Turns a quantity of bytes in a given interval into a rate that can be manipulated
     /// </summary>
     /// <param name="size">Quantity of bytes</param>

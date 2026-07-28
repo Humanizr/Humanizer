@@ -872,6 +872,28 @@ If you want a string representation you can call `ToString` or `Humanize` interc
 (1024).Gigabytes().ToString(); // 1 TB
 ```
 
+Use `HumanizeComposite` to emit up to the requested number of non-zero parts:
+
+```csharp
+10242.Bytes().HumanizeComposite();                    // 10 KB 2 B
+10242.Bytes().HumanizeComposite(1);                   // 10 KB
+10242.Bytes().HumanizeComposite(
+    separator: ", ", toWords: true);                  // 10 kilobytes, 2 bytes
+1024.Bytes().HumanizeComposite();                     // 1 KB
+(-10242).Bytes().HumanizeComposite();                 // -10 KB 2 B
+0.Bytes().HumanizeComposite();                        // 0 b
+10242.Bytes().HumanizeComposite(formatProvider:
+    new CultureInfo("fr"));                           // 10 Ko 2 o
+```
+
+Composite formatting decomposes the stored bit count from `EB` through `b`,
+uses a space between parts by default, and never rounds a residual into a
+different unit. Each unit keeps its existing factor: `PB` and `EB` remain SI,
+while `KB` through `TB` and their default labels retain their historical binary
+behavior. The lower IEC factories therefore decompose to the same values while
+the existing explicit `Humanize` and `ToString` format tokens remain the way to
+request `KiB` through `TiB` labels.
+
 You can also optionally provide a format for the expected string representation.
 The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `KiB`, `MB`, `MiB`, `GB`, `GiB`, `TB`, `TiB`, `PB`, `EB`, `PiB`.
 The formatter uses the built in [`double.ToString` method](https://docs.microsoft.com/dotnet/api/system.double.tostring) with `#.##` as the default format which rounds the number to two decimal places:
