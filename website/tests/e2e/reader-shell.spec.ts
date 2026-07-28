@@ -1,4 +1,4 @@
-import {expect, test} from '@playwright/test';
+import {expect, test, type Route} from '@playwright/test';
 import versionManifest from '../../humanizer-versions.json';
 
 const searchContexts = versionManifest.versions
@@ -75,6 +75,30 @@ test('theme follows the system default and remains keyboard switchable', async (
   await themeToggle.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+});
+
+test('homepage upgrade and language paths open their dedicated guides', async ({
+  page,
+}) => {
+  for (const destination of [
+    {
+      heading: 'Plan an upgrade',
+      link: 'Open upgrading guidance',
+      path: '/docs/upgrading/',
+    },
+    {
+      heading: 'Languages and cultures',
+      link: 'Explore language support',
+      path: '/docs/languages/',
+    },
+  ]) {
+    await page.goto('/');
+    await page.getByRole('link', {name: destination.link}).click();
+    await expect(page).toHaveURL(destination.path);
+    await expect(
+      page.getByRole('heading', {name: destination.heading, level: 1}),
+    ).toBeVisible();
+  }
 });
 
 test('version preview is labeled, noindex, and self-canonical', async ({
@@ -234,6 +258,42 @@ test('all-version search is lazy, labeled, keyboard operable, and exact', async 
   await expect(trigger).toBeFocused();
 });
 
+test('all-version search recovers after its first component load fails', async ({
+  page,
+}) => {
+  let releaseFailedAsset = () => {};
+  const failedAssetMayFinish = new Promise<void>((resolve) => {
+    releaseFailedAsset = resolve;
+  });
+  let markAssetRequested = () => {};
+  const failedAssetRequested = new Promise<void>((resolve) => {
+    markAssetRequested = resolve;
+  });
+  const componentAsset = '**/pagefind/pagefind-component-ui.css';
+  const failFirstComponentLoad = async (route: Route) => {
+    markAssetRequested();
+    await failedAssetMayFinish;
+    await route.abort('failed');
+  };
+  await page.route(componentAsset, failFirstComponentLoad);
+
+  await page.goto('/docs/2.14.1/start/quick-start/');
+  const trigger = page.locator('.humanizerAllVersionsTrigger').first();
+  await trigger.click();
+  await failedAssetRequested;
+  await expect(trigger).toHaveAttribute('aria-busy', 'true');
+  await expect(trigger).toHaveText('Loading…');
+
+  releaseFailedAsset();
+  await expect(trigger).toHaveAttribute('aria-busy', 'false');
+  await expect(trigger).toHaveText('All versions');
+  await expect(page.locator('pagefind-modal dialog[open]')).toHaveCount(0);
+
+  await page.unroute(componentAsset, failFirstComponentLoad);
+  await trigger.click();
+  await expect(page.locator('pagefind-modal dialog[open]')).toBeVisible();
+});
+
 test('mobile all-version modal preserves touch size, focus, and viewport', async ({
   page,
 }) => {
@@ -363,6 +423,22 @@ test('legacy URLs preserve supported destinations, queries, and fragments', asyn
       source: '/.github/CONTRIBUTING.md?source=legacy',
       target: '/docs/contributing/?source=legacy',
     },
+    {
+      source: '/docs/adding-a-locale.md?source=legacy',
+      target:
+        '/docs/next/contributing/adding-or-updating-a-locale/?source=legacy',
+      heading: 'Add or update a locale',
+    },
+    {
+      source: '/docs/locale-yaml-how-to.md?source=legacy',
+      target: '/docs/next/contributing/locale-yaml-how-to/?source=legacy',
+      heading: 'Locale YAML how-to',
+    },
+    {
+      source: '/docs/locale-yaml-reference.md?source=legacy',
+      target: '/docs/next/contributing/locale-yaml-reference/?source=legacy',
+      heading: 'Locale YAML reference',
+    },
   ]) {
     const targetPath = new URL(legacy.target, 'http://127.0.0.1').pathname;
     const finalResponse = page.waitForResponse(
@@ -387,6 +463,11 @@ test('legacy URLs preserve supported destinations, queries, and fragments', asyn
           }),
         )
         .toBe(true);
+    }
+    if (legacy.heading) {
+      await expect(
+        page.getByRole('heading', {name: legacy.heading, level: 1}),
+      ).toBeVisible();
     }
   }
 

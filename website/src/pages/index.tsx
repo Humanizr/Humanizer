@@ -185,7 +185,7 @@ export default function Home(): React.JSX.Element {
               Use version-specific guidance for package, namespace, analyzer,
               and behavior changes instead of reconstructing history.
             </p>
-            <Link className="humanizerTextLink" to="/docs/">
+            <Link className="humanizerTextLink" to="/docs/upgrading/">
               Open upgrading guidance <span aria-hidden="true">→</span>
             </Link>
           </article>
@@ -207,7 +207,7 @@ export default function Home(): React.JSX.Element {
               Understand culture selection and locale behavior, then find the
               focused contribution guidance when language output needs work.
             </p>
-            <Link className="humanizerTextLink" to="/docs/">
+            <Link className="humanizerTextLink" to="/docs/languages/">
               Explore language support <span aria-hidden="true">→</span>
             </Link>
           </article>

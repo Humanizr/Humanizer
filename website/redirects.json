@@ -125,15 +125,15 @@
     },
     {
       "from": ["/adding-a-locale", "/adding-a-locale.html", "/docs/adding-a-locale", "/docs/adding-a-locale.html", "/docs/adding-a-locale.md"],
-      "to": "/docs/contributing/"
+      "to": "/docs/next/contributing/adding-or-updating-a-locale/"
     },
     {
       "from": ["/locale-yaml-how-to", "/locale-yaml-how-to.html", "/docs/locale-yaml-how-to", "/docs/locale-yaml-how-to.html", "/docs/locale-yaml-how-to.md"],
-      "to": "/docs/contributing/"
+      "to": "/docs/next/contributing/locale-yaml-how-to/"
     },
     {
       "from": ["/locale-yaml-reference", "/locale-yaml-reference.html", "/docs/locale-yaml-reference", "/docs/locale-yaml-reference.html", "/docs/locale-yaml-reference.md"],
-      "to": "/docs/contributing/"
+      "to": "/docs/next/contributing/locale-yaml-reference/"
     },
     {
       "from": ["/contributing", "/contributing.html", "/CONTRIBUTING.md", "/.github/CONTRIBUTING.md"],
