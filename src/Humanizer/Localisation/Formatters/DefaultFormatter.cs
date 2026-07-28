@@ -37,6 +37,9 @@ public class DefaultFormatter : IFormatter
     public virtual string DateHumanize_Now() =>
         phraseTable.DateNow ?? "now";
 
+    internal string DateHumanize_Today() =>
+        phraseTable.DateToday ?? DateHumanize_Now();
+
     /// <inheritdoc/>
     public virtual string DateHumanize_Never() =>
         phraseTable.DateNever ?? "never";

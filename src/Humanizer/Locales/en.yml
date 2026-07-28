@@ -7,6 +7,7 @@ surfaces:
   phrases:
     relativeDate:
       now: 'now'
+      today: 'today'
       never: 'never'
       past:
         millisecond:

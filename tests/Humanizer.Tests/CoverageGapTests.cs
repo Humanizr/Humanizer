@@ -2347,7 +2347,7 @@ public class CoverageGapTests
         dataUnits[(int)DataUnit.Byte] = new(Symbol: "B");
         timeUnits[(int)TimeUnit.Second] = new(Symbol: "s");
 
-        return new("now", "never", "zero", "age", datePast, dateFuture, timeSpanUnits, dataUnits, timeUnits);
+        return new("now", "today", "never", "zero", "age", datePast, dateFuture, timeSpanUnits, dataUnits, timeUnits);
     }
 
     static T?[] NewPhraseArray<T, TEnum>()
@@ -3177,7 +3177,7 @@ public class CoverageGapTests
         dataUnits[(int)DataUnit.Byte] = dataUnit;
         timeUnits[(int)TimeUnit.Hour] = timeUnit;
 
-        return new(null, null, null, null, datePast, dateFuturePhrases, timeSpanUnits, dataUnits, timeUnits);
+        return new(null, null, null, null, null, datePast, dateFuturePhrases, timeSpanUnits, dataUnits, timeUnits);
     }
 
     static ProfiledFormatter CreateProfiledFormatter(

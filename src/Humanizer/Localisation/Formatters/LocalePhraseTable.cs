@@ -53,6 +53,7 @@ readonly record struct LocalizedUnitPhrase(
 
 sealed class LocalePhraseTable(
     string? dateNow,
+    string? dateToday,
     string? dateNever,
     string? timeSpanZero,
     string? timeSpanAge,
@@ -69,6 +70,7 @@ sealed class LocalePhraseTable(
     readonly LocalizedUnitPhrase?[] timeUnits = timeUnits;
 
     public string? DateNow { get; } = dateNow;
+    public string? DateToday { get; } = dateToday;
     public string? DateNever { get; } = dateNever;
     public string? TimeSpanZero { get; } = timeSpanZero;
     public string? TimeSpanAge { get; } = timeSpanAge;

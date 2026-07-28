@@ -22,7 +22,12 @@ static class DateTimeHumanizeAlgorithms
     /// </summary>
     public static string PrecisionHumanize(DateOnly input, DateOnly comparisonBase, double precision, CultureInfo? culture)
     {
-        var diffDays = Math.Abs(comparisonBase.DayOfYear - input.DayOfYear);
+        if (input == comparisonBase)
+        {
+            return DateOnlyHumanizeToday(culture);
+        }
+
+        var diffDays = Math.Abs(comparisonBase.DayNumber - input.DayNumber);
         var ts = new TimeSpan(diffDays, 0, 0, 0);
         var tense = input > comparisonBase ? Tense.Future : Tense.Past;
 
@@ -147,6 +152,11 @@ static class DateTimeHumanizeAlgorithms
     /// </summary>
     public static string DefaultHumanize(DateOnly input, DateOnly comparisonBase, CultureInfo? culture)
     {
+        if (input == comparisonBase)
+        {
+            return DateOnlyHumanizeToday(culture);
+        }
+
         var tense = input > comparisonBase ? Tense.Future : Tense.Past;
         var diffDays = Math.Abs(comparisonBase.DayNumber - input.DayNumber);
         var ts = new TimeSpan(diffDays, 0, 0, 0);
@@ -156,6 +166,14 @@ static class DateTimeHumanizeAlgorithms
         var days = Math.Abs(input.DayNumber - comparisonBase.DayNumber);
 
         return DefaultHumanize(ts, sameMonth, days, tense, culture);
+    }
+
+    static string DateOnlyHumanizeToday(CultureInfo? culture)
+    {
+        var formatter = Configurator.GetFormatter(culture);
+        return formatter is DefaultFormatter defaultFormatter
+            ? defaultFormatter.DateHumanize_Today()
+            : formatter.DateHumanize_Now();
     }
 
     /// <summary>
