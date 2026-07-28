@@ -241,6 +241,8 @@ namespace Humanizer
     }
     public static class EnumHumanizeExtensions
     {
+        public static string Humanize(this System.Enum input) { }
+        public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing) { }
         public static string Humanize<T>(this T input)
             where T :  struct, System.Enum { }
         public static string Humanize<T>(this T input, Humanizer.LetterCasing casing)
