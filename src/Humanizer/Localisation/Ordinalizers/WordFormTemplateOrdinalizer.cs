@@ -11,19 +11,19 @@ class WordFormTemplateOrdinalizer(CultureInfo culture, WordFormTemplateOrdinaliz
     /// <summary>
     /// Ordinalizes the number using the default masculine form.
     /// </summary>
-    public override string Convert(int number, string numberString) =>
+    public override string Convert(long number, string numberString) =>
         Convert(number, numberString, GrammaticalGender.Masculine, WordForm.Normal);
 
     /// <summary>
     /// Ordinalizes the number using the default word form for the requested gender.
     /// </summary>
-    public override string Convert(int number, string numberString, GrammaticalGender gender) =>
+    public override string Convert(long number, string numberString, GrammaticalGender gender) =>
         Convert(number, numberString, gender, WordForm.Normal);
 
     /// <summary>
     /// Ordinalizes the number using the template data for the requested gender and word form.
     /// </summary>
-    public override string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm)
+    public override string Convert(long number, string numberString, GrammaticalGender gender, WordForm wordForm)
     {
         if (options.ZeroAsPlainNumber && number == 0)
         {
@@ -37,11 +37,12 @@ class WordFormTemplateOrdinalizer(CultureInfo culture, WordFormTemplateOrdinaliz
 
         if (number < 0)
         {
+            var positiveNumber = GetAbsoluteValue(number);
             return options.NegativeMode switch
             {
                 NegativeNumberMode.None => Format(number, numberString, gender, wordForm),
-                NegativeNumberMode.AbsoluteInvariant => Convert(-number, (-number).ToString(CultureInfo.InvariantCulture), gender, wordForm),
-                NegativeNumberMode.AbsoluteCulture => Convert(-number, (-number).ToString(culture), gender, wordForm),
+                NegativeNumberMode.AbsoluteInvariant => ConvertAbsolute(positiveNumber, positiveNumber.ToString(CultureInfo.InvariantCulture), gender, wordForm),
+                NegativeNumberMode.AbsoluteCulture => ConvertAbsolute(positiveNumber, positiveNumber.ToString(culture), gender, wordForm),
                 _ => throw new InvalidOperationException("Unknown negative number mode.")
             };
         }
@@ -49,26 +50,43 @@ class WordFormTemplateOrdinalizer(CultureInfo culture, WordFormTemplateOrdinaliz
         return Format(number, numberString, gender, wordForm);
     }
 
-    string Format(int number, string numberString, GrammaticalGender gender, WordForm wordForm)
+    string ConvertAbsolute(ulong number, string numberString, GrammaticalGender gender, WordForm wordForm) =>
+        number <= long.MaxValue
+            ? Convert((long)number, numberString, gender, wordForm)
+            : Format(number, numberString, gender, wordForm);
+
+    string Format(long number, string numberString, GrammaticalGender gender, WordForm wordForm)
     {
         var pattern = GetPattern(gender, wordForm);
-        if (pattern.ExactReplacements.TryGetValue(number, out var exactReplacement))
+        if (TryGetInt32Value(number, out var exactValue) &&
+            pattern.ExactReplacements.TryGetValue(exactValue, out var exactReplacement))
         {
             return exactReplacement;
         }
 
-        if (pattern.ExactSuffixes.TryGetValue(number, out var exactSuffix))
+        if (TryGetInt32Value(number, out exactValue) &&
+            pattern.ExactSuffixes.TryGetValue(exactValue, out var exactSuffix))
         {
             return pattern.Prefix + numberString + exactSuffix;
         }
 
-        var lastDigit = Math.Abs(number % 10);
+        var lastDigit = (int)(GetAbsoluteValue(number) % 10);
         if (pattern.LastDigitSuffixes.TryGetValue(lastDigit, out var lastDigitSuffix))
         {
             return pattern.Prefix + numberString + lastDigitSuffix;
         }
 
         return pattern.Prefix + numberString + pattern.DefaultSuffix;
+    }
+
+    string Format(ulong number, string numberString, GrammaticalGender gender, WordForm wordForm)
+    {
+        var pattern = GetPattern(gender, wordForm);
+        var lastDigit = (int)(number % 10);
+        return pattern.Prefix + numberString +
+               (pattern.LastDigitSuffixes.TryGetValue(lastDigit, out var suffix)
+                   ? suffix
+                   : pattern.DefaultSuffix);
     }
 
     Pattern GetPattern(GrammaticalGender gender, WordForm wordForm)

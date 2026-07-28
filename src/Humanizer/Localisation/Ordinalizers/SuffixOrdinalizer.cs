@@ -19,13 +19,13 @@ class SuffixOrdinalizer(string masculineSuffix, string feminineSuffix, string ne
     /// <summary>
     /// Ordinalizes the number using the masculine suffix by default.
     /// </summary>
-    public override string Convert(int number, string numberString) =>
+    public override string Convert(long number, string numberString) =>
         Convert(number, numberString, GrammaticalGender.Masculine);
 
     /// <summary>
     /// Ordinalizes the number using the suffix for the requested grammatical gender.
     /// </summary>
-    public override string Convert(int number, string numberString, GrammaticalGender gender)
+    public override string Convert(long number, string numberString, GrammaticalGender gender)
     {
         if (zeroAsPlainNumber && number == 0)
         {
