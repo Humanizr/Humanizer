@@ -708,6 +708,27 @@ surfaces:
     }
 
     [Fact]
+    public void SemanticDiffDetectsRelativeDateTodayChanges()
+    {
+        var leftCatalog = CreateCatalog(("zz", """
+locale: 'zz'
+surfaces:
+  phrases:
+    relativeDate:
+      today: 'today'
+"""));
+        var rightCatalog = CreateCatalog(("zz", """
+locale: 'zz'
+surfaces:
+  phrases:
+    relativeDate:
+      today: 'this day'
+"""));
+
+        Assert.NotEmpty(HumanizerSourceGenerator.LocaleSemanticDiff.Compare(leftCatalog.Locales, rightCatalog.Locales));
+    }
+
+    [Fact]
     public void CanonicalSurfacesMustBeMappings()
     {
         var exception = Assert.Throws<InvalidOperationException>(() =>

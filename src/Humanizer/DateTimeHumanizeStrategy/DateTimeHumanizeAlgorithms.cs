@@ -171,9 +171,10 @@ static class DateTimeHumanizeAlgorithms
     static string DateOnlyHumanizeToday(CultureInfo? culture)
     {
         var formatter = Configurator.GetFormatter(culture);
+        var now = formatter.DateHumanize(TimeUnit.Millisecond, Tense.Past, 0);
         return formatter is DefaultFormatter defaultFormatter
-            ? defaultFormatter.DateHumanize_Today()
-            : formatter.DateHumanize_Now();
+            ? defaultFormatter.DateHumanize_Today(now)
+            : now;
     }
 
     /// <summary>

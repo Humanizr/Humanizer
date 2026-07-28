@@ -33,11 +33,12 @@ public class DateOnlyHumanizeTests
     }
 
     [Fact]
-    public void TodayWording_PreservesCustomNowOverride()
+    public void TodayWording_PreservesCustomDateHumanizeOverride()
     {
-        var formatter = new CustomNowFormatter();
+        var formatter = new CustomDateHumanizeFormatter();
+        var now = formatter.DateHumanize(TimeUnit.Millisecond, Tense.Past, 0);
 
-        Assert.Equal("custom now", formatter.DateHumanize_Today());
+        Assert.Equal("custom now", formatter.DateHumanize_Today(now));
     }
 
     [Fact]
@@ -132,11 +133,11 @@ public class DateOnlyHumanizeTests
         Assert.Equal(never.Value.Humanize(), never.Humanize());
     }
 
-    sealed class CustomNowFormatter()
+    sealed class CustomDateHumanizeFormatter()
         : DefaultFormatter("en")
     {
-        public override string DateHumanize_Now() =>
-            "custom now";
+        public override string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit) =>
+            $"custom {base.DateHumanize(timeUnit, timeUnitTense, unit)}";
     }
 }
 

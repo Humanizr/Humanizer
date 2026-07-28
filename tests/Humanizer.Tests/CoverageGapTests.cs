@@ -617,6 +617,9 @@ public class CoverageGapTests
             timeUnit: new(Forms: new("hour"))));
 
         Assert.Equal("now", scalarFallbacks.DateHumanize_Now());
+        Assert.Equal(
+            "today",
+            new FormatterHarness(CreateLocalePhraseTable(dateToday: "today")).DateHumanize_Today("now"));
         Assert.Equal("never", scalarFallbacks.DateHumanize_Never());
         Assert.Equal("no time", scalarFallbacks.TimeSpanHumanize_Zero());
         Assert.Equal("{0}", scalarFallbacks.TimeSpanHumanize_Age());
@@ -3159,6 +3162,7 @@ public class CoverageGapTests
     }
 
     static LocalePhraseTable CreateLocalePhraseTable(
+        string? dateToday = null,
         LocalizedDatePhrase? dateFuture = null,
         LocalizedTimeSpanPhrase? timeSpan = null,
         LocalizedUnitPhrase? dataUnit = null,
@@ -3177,7 +3181,7 @@ public class CoverageGapTests
         dataUnits[(int)DataUnit.Byte] = dataUnit;
         timeUnits[(int)TimeUnit.Hour] = timeUnit;
 
-        return new(null, null, null, null, null, datePast, dateFuturePhrases, timeSpanUnits, dataUnits, timeUnits);
+        return new(null, dateToday, null, null, null, datePast, dateFuturePhrases, timeSpanUnits, dataUnits, timeUnits);
     }
 
     static ProfiledFormatter CreateProfiledFormatter(

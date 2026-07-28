@@ -37,13 +37,10 @@ public class DefaultFormatter : IFormatter
     public virtual string DateHumanize_Now() =>
         phraseTable.DateNow ?? "now";
 
-    internal string DateHumanize_Today()
-    {
-        var now = DateHumanize_Now();
-        return now == phraseTable.DateNow
+    internal string DateHumanize_Today(string now) =>
+        now == (phraseTable.DateNow ?? "now")
             ? phraseTable.DateToday ?? now
             : now;
-    }
 
     /// <inheritdoc/>
     public virtual string DateHumanize_Never() =>
