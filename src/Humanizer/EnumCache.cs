@@ -38,9 +38,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     public static FrozenDictionary<string, T> GetDehumanized() =>
         Info.Dehumanized;
 
-    public static bool IsMetadata(T input) =>
-        Info.Humanized.TryGetValue(input, out var humanized) && humanized.IsMetadata;
-
     public static bool TreatAsFlags(T input)
     {
         if (!Info.IsBitFieldEnum)

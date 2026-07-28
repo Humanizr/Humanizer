@@ -105,11 +105,20 @@ public static class EnumHumanizeExtensions
     /// </code>
     /// </example>
     public static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(this T input)
+        where T : struct, Enum =>
+        Humanize(input, null);
+
+    static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(T input, LetterCasing? casing)
         where T : struct, Enum
     {
         var (zero, humanized, values) = EnumCache<T>.GetInfo();
         if (EnumCache<T>.TreatAsFlags(input))
         {
+            if (casing is { } flagsCasing && !Enum.IsDefined(flagsCasing))
+            {
+                throw new ArgumentOutOfRangeException(nameof(casing));
+            }
+
             // Avoid LINQ allocations by manually iterating and building the list
             List<string>? flagValues = null;
             foreach (var value in values)
@@ -117,14 +126,26 @@ public static class EnumHumanizeExtensions
                 if (value.CompareTo(zero) != 0 && input.HasFlag(value))
                 {
                     flagValues ??= new List<string>();
-                    flagValues.Add(humanized[value].Text);
+                    var flag = humanized[value];
+                    flagValues.Add(casing is { } flagCasing && !flag.IsMetadata ? flag.Text.ApplyCase(flagCasing) : flag.Text);
                 }
             }
 
             return flagValues?.Humanize() ?? string.Empty;
         }
 
-        return humanized[input].Text;
+        var humanizedEnum = humanized[input];
+        if (casing is not { } enumCasing)
+        {
+            return humanizedEnum.Text;
+        }
+
+        if (!Enum.IsDefined(enumCasing))
+        {
+            throw new ArgumentOutOfRangeException(nameof(casing));
+        }
+
+        return humanizedEnum.IsMetadata ? humanizedEnum.Text : humanizedEnum.Text.ApplyCase(enumCasing);
     }
 
 
@@ -152,13 +173,5 @@ public static class EnumHumanizeExtensions
     /// </example>
     public static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(this T input, LetterCasing casing)
         where T : struct, Enum
-    {
-        var humanizedEnum = Humanize(input);
-        if (!Enum.IsDefined(casing))
-        {
-            throw new ArgumentOutOfRangeException(nameof(casing));
-        }
-
-        return EnumCache<T>.IsMetadata(input) ? humanizedEnum : humanizedEnum.ApplyCase(casing);
-    }
+        => Humanize(input, (LetterCasing?)casing);
 }
