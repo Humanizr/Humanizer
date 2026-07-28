@@ -111,7 +111,7 @@ class TemplateOrdinalizer(TemplateOrdinalizer.Options options) : DefaultOrdinali
     /// <param name="Feminine">The feminine pattern.</param>
     /// <param name="Neuter">The neuter pattern.</param>
     /// <param name="ZeroAsPlainNumber">Whether zero should be returned as plain <c>0</c>.</param>
-    /// <param name="MinValueAsPlainNumber">Whether <see cref="int.MinValue"/> should be returned as plain <c>0</c>.</param>
+    /// <param name="MinValueAsPlainNumber">Whether <see cref="int.MinValue"/> and <see cref="long.MinValue"/> should be returned as plain <c>0</c>.</param>
     /// <param name="NegativeMode">How negative numbers should be normalized before formatting.</param>
     public readonly record struct Options(
         Pattern Masculine,
