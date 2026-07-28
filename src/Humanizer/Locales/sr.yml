@@ -416,24 +416,6 @@ surfaces:
           ordinal: 'билионити|билионита|билионито'
           ordinalCountPrefixes: 'једно|дво'
         -
-          value: 1000000000000000
-          gender: 'feminine'
-          oneForm: 'билијарда'
-          singular: 'билијарда'
-          paucal: 'билијарде'
-          plural: 'билијарди'
-          ordinal: 'билијардити|билијардита|билијардито'
-          ordinalCountPrefixes: 'једно|дво'
-        -
-          value: 1000000000000
-          gender: 'masculine'
-          oneForm: 'билион'
-          singular: 'билион'
-          paucal: 'билиона'
-          plural: 'билиона'
-          ordinal: 'билионити|билионита|билионито'
-          ordinalCountPrefixes: 'једно|дво'
-        -
           value: 1000000000
           gender: 'feminine'
           oneForm: 'милијарда'

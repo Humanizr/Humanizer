@@ -2008,6 +2008,31 @@ public class CoverageGapTests
         Assert.Equal("minus min-scale", longMin.Convert(long.MinValue));
     }
 
+    [Fact]
+    public void SouthSlavicOrdinalFallsBackWhenGeneratedVariantsAreMissing()
+    {
+        var converter = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile(
+                SouthSlavicScaleFormDetector.Russian,
+                scales:
+                [
+                    new(
+                        1000,
+                        GrammaticalGender.Masculine,
+                        "scale-one",
+                        "scale-singular",
+                        "scale-paucal",
+                        "scale-plural",
+                        Ordinal: "scale-ordinal",
+                        OrdinalCountPrefixes: "")
+                ]),
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal("scale-ordinal", converter.ConvertToOrdinal(1000, GrammaticalGender.Feminine));
+        Assert.Equal("scale-ordinal", converter.ConvertToOrdinal(1000, GrammaticalGender.Neuter));
+        Assert.Equal("twoscale-ordinal", converter.ConvertToOrdinal(2000));
+    }
+
     [Theory]
     [InlineData(4, GrammaticalGender.Masculine, "4è")]
     [InlineData(7, GrammaticalGender.Masculine, "7n")]

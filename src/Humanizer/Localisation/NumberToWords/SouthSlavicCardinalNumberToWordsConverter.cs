@@ -114,22 +114,24 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
         var units = (int)(number % 10);
         return units == 0
             ? GetOrdinal(profile.OrdinalTensMap[tens], gender)
-            : profile.TensMap[tens] + " " + GetOrdinal(profile.OrdinalUnitsMap[units], gender);
+            : profile.TensMap[tens] + profile.OrdinalCompoundJoiner + GetOrdinal(profile.OrdinalUnitsMap[units], gender);
     }
 
     string JoinOrdinalScaleCount(long count, SouthSlavicScale scale, string ordinal)
     {
         var prefixes = scale.OrdinalCountPrefixes.Split('|');
-        if (count == 2 && prefixes[1].Length > 0)
+        var onePrefix = prefixes[0];
+        var twoPrefix = prefixes.Length > 1 ? prefixes[1] : string.Empty;
+        if (count == 2 && twoPrefix.Length > 0)
         {
-            return prefixes[1] + ordinal;
+            return twoPrefix + ordinal;
         }
 
         var countWords = ConvertPositive((ulong)count, scale.Gender);
         var terminalPrefix = (count % 10) switch
         {
-            1 when count % 100 != 11 => prefixes[0],
-            2 when count % 100 != 12 => prefixes[1],
+            1 when count % 100 != 11 => onePrefix,
+            2 when count % 100 != 12 => twoPrefix,
             _ => string.Empty
         };
         var lastSpace = countWords.LastIndexOf(' ');
@@ -151,12 +153,13 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     static string GetOrdinal(string variants, GrammaticalGender gender)
     {
         var forms = variants.Split('|');
-        return gender switch
+        var index = gender switch
         {
-            GrammaticalGender.Feminine => forms[1],
-            GrammaticalGender.Neuter => forms[2],
-            _ => forms[0]
+            GrammaticalGender.Feminine => 1,
+            GrammaticalGender.Neuter => 2,
+            _ => 0
         };
+        return index < forms.Length ? forms[index] : forms[0];
     }
 
     /// <summary>

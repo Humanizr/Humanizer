@@ -44,6 +44,7 @@ public class CroatianGenderedOrdinalTests
     [InlineData(3, GrammaticalGender.Neuter, "treće")]
     [InlineData(21, GrammaticalGender.Masculine, "dvadeset prvi")]
     [InlineData(100, GrammaticalGender.Feminine, "stota")]
+    [InlineData(600, GrammaticalGender.Masculine, "šeststoti")]
     [InlineData(1000, GrammaticalGender.Neuter, "tisućito")]
     [InlineData(2000, GrammaticalGender.Masculine, "dvijetisućiti")]
     public void ToOrdinalWords_ProducesCroatianWords(int number, GrammaticalGender gender, string expected) =>
