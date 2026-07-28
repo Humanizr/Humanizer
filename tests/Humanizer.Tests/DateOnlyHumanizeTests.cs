@@ -6,8 +6,6 @@ public class DateOnlyHumanizeTests
     [Fact]
     public void DefaultStrategy_SameDate()
     {
-        Configurator.DateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
-
         var inputTime = new DateOnly(2015, 07, 05);
         var baseTime = new DateOnly(2015, 07, 05);
 
@@ -22,14 +20,14 @@ public class DateOnlyHumanizeTests
     [InlineData(true)]
     public void SameDate_UsesDateOnlyWordingWithoutChangingCultureFallback(bool usePrecisionStrategy)
     {
-        Configurator.DateOnlyHumanizeStrategy = usePrecisionStrategy
+        IDateOnlyHumanizeStrategy strategy = usePrecisionStrategy
             ? new PrecisionDateOnlyHumanizeStrategy()
             : new DefaultDateOnlyHumanizeStrategy();
 
         var date = DateOnly.MinValue;
 
-        Assert.Equal("today", date.Humanize(date, new("en-GB")));
-        Assert.Equal("maintenant", date.Humanize(date, new("fr-FR")));
+        Assert.Equal("today", strategy.Humanize(date, date, new("en-GB")));
+        Assert.Equal("maintenant", strategy.Humanize(date, date, new("fr-FR")));
     }
 
     [Fact]
@@ -44,8 +42,6 @@ public class DateOnlyHumanizeTests
     [Fact]
     public void DefaultStrategy_MonthApart()
     {
-        Configurator.DateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
-
         var inputTime = new DateOnly(2015, 08, 05);
         var baseTime = new DateOnly(2015, 07, 05);
 
@@ -58,8 +54,6 @@ public class DateOnlyHumanizeTests
     [Fact]
     public void DefaultStrategy_DaysAgo()
     {
-        Configurator.DateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
-
         var inputTime = new DateOnly(2015, 07, 02);
         var baseTime = new DateOnly(2015, 07, 05);
 
@@ -72,8 +66,6 @@ public class DateOnlyHumanizeTests
     [Fact]
     public void DefaultStrategy_YearsAgo()
     {
-        Configurator.DateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
-
         var baseDate = DateTime.Now;
         var inputTime = DateOnly.FromDateTime(baseDate.AddMonths(-24));
         var baseTime = DateOnly.FromDateTime(baseDate);
@@ -87,13 +79,12 @@ public class DateOnlyHumanizeTests
     [Fact]
     public void PrecisionStrategy_NextDay()
     {
-        Configurator.DateOnlyHumanizeStrategy = new PrecisionDateOnlyHumanizeStrategy(0.75);
-
         var inputTime = new DateOnly(2015, 07, 05);
         var baseTime = new DateOnly(2015, 07, 04);
 
         const string expectedResult = "tomorrow";
-        var actualResult = inputTime.Humanize(baseTime);
+        var actualResult = new PrecisionDateOnlyHumanizeStrategy(0.75)
+            .Humanize(inputTime, baseTime, CultureInfo.CurrentUICulture);
 
         Assert.Equal(expectedResult, actualResult);
     }
@@ -110,12 +101,12 @@ public class DateOnlyHumanizeTests
         int inputDay,
         string expectedResult)
     {
-        Configurator.DateOnlyHumanizeStrategy = new PrecisionDateOnlyHumanizeStrategy(0.75);
-
         var baseTime = new DateOnly(baseYear, baseMonth, baseDay);
         var inputTime = new DateOnly(inputYear, inputMonth, inputDay);
 
-        Assert.Equal(expectedResult, inputTime.Humanize(baseTime));
+        Assert.Equal(
+            expectedResult,
+            new PrecisionDateOnlyHumanizeStrategy(0.75).Humanize(inputTime, baseTime, CultureInfo.CurrentUICulture));
     }
 
     [Fact]

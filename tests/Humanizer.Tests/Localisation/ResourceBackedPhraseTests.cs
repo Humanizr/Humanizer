@@ -40,9 +40,10 @@ public class ResourceBackedPhraseTests
     public void UsesExpectedTimeOnlyDefaultHumanizePhrases(string localeName, string inputTime, string comparisonBase, string expected)
     {
         var culture = GetCulture(localeName);
-        Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
 
-        Assert.Equal(expected, TimeOnly.Parse(inputTime).Humanize(TimeOnly.Parse(comparisonBase), culture: culture));
+        Assert.Equal(
+            expected,
+            new DefaultTimeOnlyHumanizeStrategy().Humanize(TimeOnly.Parse(inputTime), TimeOnly.Parse(comparisonBase), culture));
     }
 
     [Theory]
@@ -50,9 +51,10 @@ public class ResourceBackedPhraseTests
     public void UsesExpectedTimeOnlyPrecisionHumanizePhrases(string localeName, string inputTime, string comparisonBase, double precision, string expected)
     {
         var culture = GetCulture(localeName);
-        Configurator.TimeOnlyHumanizeStrategy = new PrecisionTimeOnlyHumanizeStrategy(precision);
 
-        Assert.Equal(expected, TimeOnly.Parse(inputTime).Humanize(TimeOnly.Parse(comparisonBase), culture: culture));
+        Assert.Equal(
+            expected,
+            new PrecisionTimeOnlyHumanizeStrategy(precision).Humanize(TimeOnly.Parse(inputTime), TimeOnly.Parse(comparisonBase), culture));
     }
 
     [Theory]
@@ -60,7 +62,6 @@ public class ResourceBackedPhraseTests
     public void UsesExpectedTimeOnlyNeverPhrase(string localeName, string expected)
     {
         var culture = GetCulture(localeName);
-        Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
 
         Assert.Equal(expected, ((TimeOnly?)null).Humanize(culture: culture));
     }
@@ -70,7 +71,6 @@ public class ResourceBackedPhraseTests
     public void TimeOnlyNullableValueMatchesNonNullableHumanize(string localeName, string timeValue)
     {
         var culture = GetCulture(localeName);
-        Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
         var nullableTime = TimeOnly.Parse(timeValue);
 
         Assert.Equal(nullableTime.Humanize(culture: culture), ((TimeOnly?)nullableTime).Humanize(culture: culture));
