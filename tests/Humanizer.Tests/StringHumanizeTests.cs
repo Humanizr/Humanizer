@@ -59,6 +59,77 @@ public class StringHumanizeTests
     public void CanHumanizeStringWithAcronyms(string input, string expectedValue) =>
         Assert.Equal(expectedValue, input.Humanize());
 
+    [Fact, UseCulture("tr-TR")]
+    public void CanHumanizeStringsWithCustomAcronyms()
+    {
+        Vocabularies.Default.RemoveAcronym("HS");
+        Vocabularies.Default.RemoveAcronym("iOS");
+        Vocabularies.Default.RemoveAcronym("API");
+        try
+        {
+            Assert.Equal("Hs access", "HsAccess".Humanize());
+
+            Vocabularies.Default.AddAcronym("HS");
+            Vocabularies.Default.AddAcronym("hs");
+
+            Assert.Equal("HS access", "hsAccess".Humanize());
+            Assert.Equal("HS access", "HsAccess".Humanize());
+            Assert.Equal("Uses HS", "UsesHs".Humanize());
+            Assert.Equal("The HTML language", "TheHTMLLanguage".Humanize());
+
+            Vocabularies.Default.AddAcronym("iOS");
+            Vocabularies.Default.AddAcronym("API");
+            Assert.Equal("iOS", "IOS".Humanize());
+            Assert.Equal("iOS", "iOS".Humanize());
+            Assert.Equal("iOS settings", "iOSSettings".Humanize());
+            Assert.Equal("iOS API settings", "iOSAPISettings".Humanize());
+            Assert.Equal("iOS 5", "iOS5".Humanize());
+            Assert.Equal("iOS Settings", "iOS_Settings".Humanize());
+            Assert.Equal("iOS API Settings", "iOSAPI_Settings".Humanize());
+            Assert.Equal("BIOS settings", "BIOSSettings".Humanize());
+        }
+        finally
+        {
+            Vocabularies.Default.RemoveAcronym("HS");
+            Vocabularies.Default.RemoveAcronym("iOS");
+            Vocabularies.Default.RemoveAcronym("API");
+        }
+
+        Assert.Equal("Hs access", "HsAccess".Humanize());
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("HS2")]
+    public void CannotAddInvalidAcronym(string? acronym) =>
+        Assert.ThrowsAny<ArgumentException>(() => Vocabularies.Default.AddAcronym(acronym!));
+
+    [Fact]
+    public void CanRegisterCustomAcronymsWhileMatching()
+    {
+        var vocabulary = new Vocabulary();
+        vocabulary.AddAcronym("AA");
+
+        Parallel.Invoke(
+            () =>
+            {
+                foreach (var letter in Enumerable.Range('B', 25))
+                {
+                    vocabulary.AddAcronym($"A{(char)letter}");
+                }
+            },
+            () =>
+            {
+                for (var i = 0; i < 1000; i++)
+                {
+                    _ = vocabulary.ApplyAcronyms("Uses aa");
+                }
+            });
+
+        Assert.Equal("Uses AA", vocabulary.ApplyAcronyms("Uses aa"));
+    }
+
     [Theory]
     [InlineData("CanReturnTitleCase", "Can Return Title Case")]
     [InlineData("Can_return_title_Case", "Can Return Title Case")]

@@ -2030,6 +2030,7 @@ namespace Humanizer
     }
     public class Vocabulary
     {
+        public void AddAcronym(string acronym) { }
         public void AddIrregular(string singular, string plural, bool matchEnding = true) { }
         public void AddPlural(string rule, string replacement) { }
         public void AddSingular(string rule, string replacement) { }

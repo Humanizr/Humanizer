@@ -219,15 +219,15 @@ public static partial class StringHumanizeExtensions
     /// <param name="input">The string to be humanized. Must not be null.</param>
     /// <returns>
     /// A humanized version of the input string with spaces inserted between words and appropriate
-    /// capitalization. Preserves all-uppercase acronyms unchanged.
+    /// capitalization. Preserves all-uppercase acronyms unless registered with different canonical casing.
     /// </returns>
     /// <remarks>
     /// The method applies several rules in order:
-    /// - If the entire input is uppercase (an acronym), it returns unchanged
+    /// - If the entire input is uppercase (an acronym), it returns unchanged unless it matches a registered acronym
     /// - Handles freestanding underscores/dashes (e.g., "some _ string")
     /// - Splits on underscores and dashes
     /// - Breaks up PascalCase and camelCase text
-    /// The first letter of the result is always capitalized.
+    /// Registered acronyms use their canonical casing.
     /// </remarks>
     /// <example>
     /// <code>
@@ -235,30 +235,29 @@ public static partial class StringHumanizeExtensions
     /// "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
     /// "dash-separated-string".Humanize() => "Dash separated string"
     /// "HTML".Humanize() => "HTML"
+    /// Vocabularies.Default.AddAcronym("iOS");
+    /// "IOS".Humanize() => "iOS"
     /// "camelCaseText".Humanize() => "Camel case text"
     /// </code>
     /// </example>
     public static string Humanize(this string input)
     {
-        // if input is all capitals (e.g. an acronym) then return it without change
         if (IsAllUpper(input, 0, input.Length))
         {
-            return input;
+            return Vocabularies.ApplyAcronyms(input);
         }
+
+        input = Vocabularies.NormalizeAcronyms(input);
 
         // if input contains a dash or underscore which precedes or follows a space (or both, e.g. freestanding)
         // remove the dash/underscore and run it through FromPascalCase
-        if (HasFreestandingSpacingChar(input))
-        {
-            return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
-        }
+        var humanized = HasFreestandingSpacingChar(input)
+            ? FromPascalCase(FromUnderscoreDashSeparatedWords(input))
+            : input.IndexOfAny(['_', '-']) >= 0
+                ? FromUnderscoreDashSeparatedWords(input)
+                : FromPascalCase(input);
 
-        if (input.IndexOfAny(['_', '-']) >= 0)
-        {
-            return FromUnderscoreDashSeparatedWords(input);
-        }
-
-        return FromPascalCase(input);
+        return Vocabularies.ApplyAcronyms(humanized);
     }
 
     static bool HasFreestandingSpacingChar(string input)

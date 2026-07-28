@@ -56,11 +56,18 @@ The foundation of this feature was originally developed for the [BDDfy framework
     => "Dash separated string"
 ```
 
-**Acronym Handling**: Strings containing only uppercase letters are treated as acronyms and left unchanged. To humanize any string, use the `Transform` method:
+**Acronym Handling**: Strings containing only uppercase letters are treated as acronyms and left unchanged unless they match a registered acronym. To humanize any string, use the `Transform` method:
 
 ```csharp
 "HTML".Humanize() => "HTML"  // Acronym preserved
 "HUMANIZER".Humanize() => "HUMANIZER"  // All caps preserved
+
+// Register a custom acronym using its preferred output casing.
+// Registration is process-wide; matching is case-insensitive.
+Vocabularies.Default.AddAcronym("HS");
+"HsAccess".Humanize() => "HS access"
+Vocabularies.Default.AddAcronym("iOS");
+"IOS".Humanize() => "iOS"
 
 // Force humanization with Transform
 "HUMANIZER".Transform(To.LowerCase, To.TitleCase) => "Humanizer"
