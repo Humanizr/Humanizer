@@ -213,6 +213,11 @@ namespace Humanizer
     {
         public static string ApplyCase(this string input, Humanizer.LetterCasing casing) { }
     }
+    public static class ChineseFinancialNumeralExtensions
+    {
+        public static string ToChineseFinancialCharacters(this int number, System.Globalization.CultureInfo culture) { }
+        public static string ToChineseFinancialCharacters(this long number, System.Globalization.CultureInfo culture) { }
+    }
     public enum ClockNotationRounding
     {
         None = 0,

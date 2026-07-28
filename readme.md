@@ -666,6 +666,10 @@ Convert numbers to their word representation:
 // Culture-specific large-number behavior
 123456789.ToWords(new CultureInfo("en-GB")) => "one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine"
 123456789.ToWords(new CultureInfo("en-IN")) => "twelve crore thirty-four lakh fifty-six thousand seven hundred and eighty-nine"
+
+// Chinese financial characters (culture selects simplified or traditional)
+123.ToChineseFinancialCharacters(new CultureInfo("zh-CN")) => "壹佰贰拾叁"
+123.ToChineseFinancialCharacters(new CultureInfo("zh-TW")) => "壹佰貳拾參"
 ```
 
 
