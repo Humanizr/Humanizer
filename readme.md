@@ -234,7 +234,7 @@ Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(pr
 Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision: .75); // configure when humanizing DateTimeOffset
 ```
 
-The default precision is set to .75, but you can pass your desired precision too. With precision set to 0.75:
+The precision-based strategies default to .75, but you can pass your desired precision instead. With precision set to .75:
 
 ```csharp
 44 seconds => 44 seconds ago/from now
