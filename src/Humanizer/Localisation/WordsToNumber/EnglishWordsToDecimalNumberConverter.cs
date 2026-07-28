@@ -83,7 +83,7 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
         }
 
         var fraction = new StringBuilder();
-        foreach (var token in fractionWords.Split([' ', '\t', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries))
+        foreach (var token in fractionWords.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries))
         {
             if (!FractionalDigits.TryGetValue(token, out var digit))
             {
@@ -136,7 +136,7 @@ internal sealed class EnglishWordsToDecimalNumberConverter(CultureInfo culture) 
             }
 
             var initialUnrecognizedNumber = unrecognizedNumber;
-            var tokens = words.Split([' ', '\t', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+            var tokens = words.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
 
             for (var index = tokens.Length - 1; index > 0; index--)
             {

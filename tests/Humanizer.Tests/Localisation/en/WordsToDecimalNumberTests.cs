@@ -6,6 +6,7 @@ public class WordsToDecimalNumberTests
     [Theory]
     [InlineData("one point two", "1.2")]
     [InlineData("three point one four", "3.14")]
+    [InlineData("one point two\u00A0three", "1.23")]
     [InlineData("zero point zero five", "0.05")]
     [InlineData("one point five zero", "1.50")]
     [InlineData("minus two point five", "-2.5")]
