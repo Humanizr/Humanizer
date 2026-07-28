@@ -12,10 +12,16 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     private static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
         var valuesArray = Enum.GetValues<T>();
+        var namesArray = Enum.GetNames(TypeOfT);
         var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
         var humanized = new Dictionary<T, (string Text, bool IsMetadata)>(count);
-        var dehumanized = new Dictionary<string, T>(count, StringComparer.OrdinalIgnoreCase);
+        var dehumanized = new Dictionary<string, T>(count * 6, StringComparer.OrdinalIgnoreCase);
+        for (var i = 0; i < namesArray.Length; i++)
+        {
+            AddAliases(dehumanized, namesArray[i], valuesArray[i]);
+        }
+
         foreach (var value in valuesArray)
         {
             var description = GetDescription(value);
@@ -30,6 +36,29 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             dehumanized.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase),
             valuesArray.ToFrozenSet(),
             isBitFieldEnum);
+    }
+
+    static void AddAliases(Dictionary<string, T> dehumanized, string caseName, T value)
+    {
+        var member = TypeOfT.GetField(caseName)!;
+        dehumanized[caseName] = value;
+        dehumanized[caseName.Humanize()] = value;
+
+        var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
+        if (displayAttribute != null)
+        {
+            AddAlias(displayAttribute.GetName());
+            AddAlias(displayAttribute.GetDescription());
+            AddAlias(displayAttribute.GetShortName());
+        }
+
+        void AddAlias(string? alias)
+        {
+            if (alias != null)
+            {
+                dehumanized[alias] = value;
+            }
+        }
     }
 
     public static (T Zero, FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized, FrozenSet<T> Values) GetInfo() =>

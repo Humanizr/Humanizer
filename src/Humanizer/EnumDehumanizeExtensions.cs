@@ -6,8 +6,8 @@ namespace Humanizer;
 public static class EnumDehumanizeExtensions
 {
     /// <summary>
-    /// Converts a humanized string back to its original enum value by matching it against enum member names 
-    /// and their humanized representations (including <see cref="System.ComponentModel.DescriptionAttribute"/> values).
+    /// Converts a humanized string back to its original enum value by matching it against enum member names,
+    /// their humanized representations, and configured metadata aliases.
     /// </summary>
     /// <typeparam name="TTargetEnum">The enum type to convert to. Must be a struct and implement <see cref="Enum"/>.</typeparam>
     /// <param name="input">The humanized string to be converted back to an enum value. Must not be null.</param>
@@ -16,15 +16,21 @@ public static class EnumDehumanizeExtensions
     /// </returns>
     /// <exception cref="ArgumentException">Thrown when <typeparamref name="TTargetEnum"/> is not an enum type.</exception>
     /// <exception cref="NoMatchFoundException">
-    /// Thrown when no enum member matches the input string (including checking member names, 
-    /// humanized names, and description attributes).
+    /// Thrown when no enum member matches the input string.
     /// </exception>
     /// <remarks>
     /// The method attempts to match the input string against:
-    /// 1. The exact enum member name
-    /// 2. The humanized version of the enum member name
-    /// 3. Any <see cref="System.ComponentModel.DescriptionAttribute"/> value on the enum member
-    /// Matching is case-sensitive.
+    /// <list type="number">
+    /// <item><description>The exact enum member name.</description></item>
+    /// <item><description>The humanized version of the enum member name.</description></item>
+    /// <item><description><see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.Name"/>,
+    /// <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.Description"/>, and
+    /// <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName"/> values.</description></item>
+    /// <item><description>The configured description attribute value when selected as the member's authored description.</description></item>
+    /// </list>
+    /// Matching is case-insensitive and does not trim whitespace. If aliases collide, later values in the enum's
+    /// unsigned numeric order take precedence, while the current humanized representation takes precedence over
+    /// supplemental aliases.
     /// </remarks>
     /// <example>
     /// <code>
