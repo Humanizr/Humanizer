@@ -28,7 +28,7 @@ public static class TimeSpanHumanizeExtensions
     /// </summary>
     /// <param name="timeSpan">The time span to humanize.</param>
     /// <param name="precision">The maximum number of time units to return.</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Week"/>.</param>
     /// <param name="minUnit">The minimum unit of time to output.</param>
     /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
@@ -60,7 +60,7 @@ public static class TimeSpanHumanizeExtensions
     /// <param name="timeSpan">The time span to humanize.</param>
     /// <param name="precision">The maximum number of time units to return.</param>
     /// <param name="countEmptyUnits">Controls whether empty time units should be counted towards the maximum number of time units. Leading empty time units never count.</param>
-    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+    /// <param name="culture">Culture to use. If null, current thread's culture is used.</param>
     /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Week"/>.</param>
     /// <param name="minUnit">The minimum unit of time to output.</param>
     /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
@@ -300,7 +300,7 @@ public static class TimeSpanHumanizeExtensions
         bool toWords,
         bool toSymbols) =>
         toSymbols
-            ? string.Concat(amount.ToString(culture ?? CultureInfo.CurrentUICulture), cultureFormatter.TimeUnitHumanize(timeUnit))
+            ? string.Concat(amount.ToString(culture ?? CultureInfo.CurrentCulture), cultureFormatter.TimeUnitHumanize(timeUnit))
             : cultureFormatter.TimeSpanHumanize(timeUnit, amount, toWords);
 
     static string HumanizeSinglePart(TimeSpan timeSpan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords, bool toSymbols)

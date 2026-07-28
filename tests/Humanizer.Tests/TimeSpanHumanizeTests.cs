@@ -571,6 +571,28 @@ public class TimeSpanHumanizeTests
     }
 
     [Fact]
+    public void SymbolsUseCurrentCultureWhenCultureIsNotSpecified()
+    {
+        var currentCulture = CultureInfo.CurrentCulture;
+        var currentUICulture = CultureInfo.CurrentUICulture;
+
+        try
+        {
+            CultureInfo.CurrentCulture = new("ka");
+            CultureInfo.CurrentUICulture = new("en-US");
+
+            var actual = TimeSpan.FromMinutes(2).HumanizeToSymbols();
+
+            Assert.Equal("2წთ", actual);
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = currentCulture;
+            CultureInfo.CurrentUICulture = currentUICulture;
+        }
+    }
+
+    [Fact]
     public void SymbolsCanCountEmptyUnits()
     {
         var actual = TimeSpan.FromMilliseconds(3600020).HumanizeToSymbols(
