@@ -12,7 +12,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         public static readonly (
             T Zero,
             FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized,
-            FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
             FrozenDictionary<string, T> Dehumanized,
             FrozenSet<T> Values,
             bool IsBitFieldEnum) Value = CreateInfo();
@@ -30,7 +29,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     private static (
         T Zero,
         FrozenDictionary<T, (string Text, bool IsMetadata)> Humanized,
-        FrozenDictionary<T, (string EnumName, DisplayAttribute? Display)> Sources,
         FrozenDictionary<string, T> Dehumanized,
         FrozenSet<T> Values,
         bool IsBitFieldEnum) CreateInfo()
@@ -40,7 +38,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
         var humanized = new Dictionary<T, (string Text, bool IsMetadata)>(count);
-        var sources = new Dictionary<T, (string EnumName, DisplayAttribute? Display)>(count);
         var dehumanized = new Dictionary<string, T>(count * 6, StringComparer.OrdinalIgnoreCase);
         for (var i = 0; i < namesArray.Length; i++)
         {
@@ -51,7 +48,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         {
             var description = GetDescription(value);
             humanized[value] = description;
-            sources[value] = GetSources(value);
             dehumanized[description.Text] = value;
         }
 
@@ -59,7 +55,6 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         return (
             zero,
             humanized.ToFrozenDictionary(),
-            sources.ToFrozenDictionary(),
             dehumanized.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase),
             valuesArray.ToFrozenSet(),
             isBitFieldEnum);
