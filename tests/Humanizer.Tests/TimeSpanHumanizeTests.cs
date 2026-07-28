@@ -53,6 +53,17 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
+    [InlineData(-30, "4 weeks, 2 days")]
+    [InlineData(-31, "1 month")]
+    [InlineData(-32, "1 month, 1 day")]
+    [InlineData(-60, "1 month, 29 days")]
+    public void NegativeMonths(int days, string expected)
+    {
+        var actual = TimeSpan.FromDays(days).Humanize(precision: 3, maxUnit: TimeUnit.Month, minUnit: TimeUnit.Minute);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
     [InlineData(14, "2 weeks")]
     [InlineData(7, "1 week")]
     [InlineData(-14, "2 weeks")]

@@ -155,58 +155,59 @@ public static class TimeSpanHumanizeExtensions
     static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
     {
         var isTimeUnitToGetTheMaximumTimeUnit = timeUnitToGet == maximumTimeUnit;
+        var absoluteDays = Math.Abs(timespan.Days);
         return timeUnitToGet switch
         {
             TimeUnit.Millisecond => GetNormalCaseTimeAsInteger(timespan.Milliseconds, timespan.TotalMilliseconds, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Second => GetNormalCaseTimeAsInteger(timespan.Seconds, timespan.TotalSeconds, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Minute => GetNormalCaseTimeAsInteger(timespan.Minutes, timespan.TotalMinutes, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Hour => GetNormalCaseTimeAsInteger(timespan.Hours, timespan.TotalHours, isTimeUnitToGetTheMaximumTimeUnit),
-            TimeUnit.Day => GetSpecialCaseDaysAsInteger(timespan, maximumTimeUnit),
-            TimeUnit.Week => GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
-            TimeUnit.Month => GetSpecialCaseMonthAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
-            TimeUnit.Year => GetSpecialCaseYearAsInteger(timespan),
+            TimeUnit.Day => GetSpecialCaseDaysAsInteger(absoluteDays, maximumTimeUnit),
+            TimeUnit.Week => GetSpecialCaseWeeksAsInteger(absoluteDays, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Month => GetSpecialCaseMonthAsInteger(absoluteDays, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Year => GetSpecialCaseYearAsInteger(absoluteDays),
             _ => 0
         };
     }
 
-    static int GetSpecialCaseMonthAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+    static int GetSpecialCaseMonthAsInteger(int days, bool isTimeUnitToGetTheMaximumTimeUnit)
     {
         if (isTimeUnitToGetTheMaximumTimeUnit)
         {
-            return (int)(timespan.Days / DaysInAMonth);
+            return (int)(days / DaysInAMonth);
         }
 
-        var remainingDays = timespan.Days % DaysInAYear;
+        var remainingDays = days % DaysInAYear;
         return (int)(remainingDays / DaysInAMonth);
     }
 
-    static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
-        (int)(timespan.Days / DaysInAYear);
+    static int GetSpecialCaseYearAsInteger(int days) =>
+        (int)(days / DaysInAYear);
 
-    static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+    static int GetSpecialCaseWeeksAsInteger(int days, bool isTimeUnitToGetTheMaximumTimeUnit)
     {
-        if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < DaysInAMonth)
+        if (isTimeUnitToGetTheMaximumTimeUnit || days < DaysInAMonth)
         {
-            return timespan.Days / DaysInAWeek;
+            return days / DaysInAWeek;
         }
 
         return 0;
     }
 
-    static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
+    static int GetSpecialCaseDaysAsInteger(int days, TimeUnit maximumTimeUnit)
     {
         if (maximumTimeUnit == TimeUnit.Day)
         {
-            return timespan.Days;
+            return days;
         }
 
-        if (timespan.Days < DaysInAMonth || maximumTimeUnit == TimeUnit.Week)
+        if (days < DaysInAMonth || maximumTimeUnit == TimeUnit.Week)
         {
-            var remainingDays = timespan.Days % DaysInAWeek;
+            var remainingDays = days % DaysInAWeek;
             return remainingDays;
         }
 
-        return (int)(timespan.Days % DaysInAMonth);
+        return (int)(days % DaysInAMonth);
     }
 
     static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)
