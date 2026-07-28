@@ -1028,7 +1028,8 @@ public class CoverageGapTests
         Assert.Throws<ArgumentOutOfRangeException>(() => 2.ToOrdinalWords((GrammaticalGender)999, new CultureInfo("is")));
         Assert.Throws<ArgumentOutOfRangeException>(() => 1.ToWords((GrammaticalGender)999, new CultureInfo("is")));
         Assert.Throws<ArgumentOutOfRangeException>(() => 1.ToWords((GrammaticalGender)999, new CultureInfo("cs")));
-        Assert.Throws<NotImplementedException>(() => ((long)int.MaxValue + 1).ToWords(new CultureInfo("it")));
+        Assert.Throws<NotImplementedException>(() => 1_000_000_000_000L.ToWords(new CultureInfo("it")));
+        Assert.Throws<NotImplementedException>(() => (-1_000_000_000_000L).ToWords(new CultureInfo("it")));
         Assert.Throws<NotImplementedException>(() => ((long)int.MaxValue + 1).ToWords(new CultureInfo("ro")));
         Assert.Throws<ArgumentOutOfRangeException>(() => 1.ToOrdinalWords((GrammaticalGender)999, new CultureInfo("de")));
         Assert.False(string.IsNullOrWhiteSpace(0.ToOrdinalWords(new CultureInfo("lv"))));

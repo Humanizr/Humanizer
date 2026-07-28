@@ -416,6 +416,8 @@ public static class LocaleNumberMagnitudeTheoryData
         { "is", 1001000001L, "einn milljarður ein milljón og einn" },
         { "is", 4325010007018L, "fjórar billjónir þrjú hundruð tuttugu og fimm milljarðar tíu milljónir sjö þúsund og átján" },
         { "it", 1001000001L, "un miliardo un milione uno" },
+        { "it-IT", 998999456789L, "novecentonovantotto miliardi novecentonovantanove milioni quattrocentocinquantaseimilasettecentoottantanove" },
+        { "it-IT", -998999456789L, "meno novecentonovantotto miliardi novecentonovantanove milioni quattrocentocinquantaseimilasettecentoottantanove" },
         { "it", 4325010007018L, "quattro bilioni trecentoventicinque miliardi dieci milioni settemiladiciotto" },
         { "ja", 1001000001L, "十億百万一" },
         { "ja", 4325010007018L, "四兆三千二百五十億千万七千十八" },
