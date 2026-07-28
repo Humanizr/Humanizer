@@ -15,7 +15,7 @@ public static class CasingExtensions
     /// - <see cref="LetterCasing.Title"/>: Each word is capitalized (e.g., "Some String")
     /// - <see cref="LetterCasing.LowerCase"/>: All letters are lowercase (e.g., "some string")
     /// - <see cref="LetterCasing.AllCaps"/>: All letters are uppercase (e.g., "SOME STRING")
-    /// - <see cref="LetterCasing.Sentence"/>: First letter capitalized, rest lowercase (e.g., "Some string")
+    /// - <see cref="LetterCasing.Sentence"/>: First character uppercased, remainder unchanged (e.g., "Some string")
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when an invalid <see cref="LetterCasing"/> value is provided.</exception>
     /// <example>

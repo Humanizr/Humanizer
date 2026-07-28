@@ -42,7 +42,7 @@ public static class To
     public static ICulturedStringTransformer UpperCase { get; } = new ToUpperCase();
 
     /// <summary>
-    /// Changes the string to sentence case
+    /// Uppercases the first character of the string, leaving all remaining characters unchanged
     /// </summary>
     /// <example>
     /// "lower case statement" -> "Lower case statement"

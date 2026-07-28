@@ -83,6 +83,7 @@ public class StringHumanizeTests
     [InlineData("égoïste", "Égoïste")]
     [InlineData("Normal; Normal and PascalCase", "Normal; normal and pascal case")]
     [InlineData("I,and No One else", "I, and no one else")]
+    [InlineData("first. second", "First second")]
     public void CanHumanizeIntoSentenceCase(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Humanize(LetterCasing.Sentence));
 
