@@ -25,7 +25,12 @@ function selectRun(filter, workflowRuns) {
   });
 
   assert.equal(result.status, 0, result.stderr);
-  return result.stdout;
+  return result.stdout.trimEnd();
+}
+
+function selectPrior(workflowRuns) {
+  const documentation = selectRun(filters[0], workflowRuns);
+  return documentation || selectRun(filters[1], workflowRuns);
 }
 
 const legacyRun = {
@@ -37,11 +42,9 @@ const legacyRun = {
 
 test('first documentation deployment retains the latest legacy deployment', () => {
   assert.equal(filters.length, 2);
-  assert.equal(selectRun(filters[0], [legacyRun]), '');
-
   assert.equal(
-    selectRun(filters[1], [legacyRun]),
-    `${legacyRun.id}\t${legacyRun.head_sha}\t${legacyRun.path}\n`,
+    selectPrior([legacyRun]),
+    `${legacyRun.id}\t${legacyRun.head_sha}\t${legacyRun.path}`,
   );
 });
 
@@ -49,17 +52,17 @@ test('subsequent deployments retain the latest successful documentation run', ()
   const documentationRun = {
     ...legacyRun,
     created_at: '2026-07-29T00:00:00Z',
+    head_sha: '0123456789abcdef0123456789abcdef01234567',
     id: 30410000000,
     path: '.github/workflows/docs.yml',
   };
 
   assert.equal(
-    selectRun(filters[0], [legacyRun, documentationRun]),
-    `${documentationRun.id}\t${documentationRun.head_sha}\t${documentationRun.path}\n`,
+    selectPrior([legacyRun, documentationRun]),
+    `${documentationRun.id}\t${documentationRun.head_sha}\t${documentationRun.path}`,
   );
 });
 
 test('missing deployment history fails closed', () => {
-  assert.equal(selectRun(filters[0], []), '');
-  assert.equal(selectRun(filters[1], []), '');
+  assert.equal(selectPrior([]), '');
 });
