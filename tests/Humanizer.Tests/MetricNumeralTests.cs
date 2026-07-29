@@ -516,12 +516,16 @@ public class MetricNumeralTests
         Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
 
     [Theory]
+    [InlineData(1E-3, "1 thousandth")]
+    [InlineData(1E-18, "1 quintillionth")]
+    [InlineData(1E-21, "1 z")]
     [InlineData(1E9, "1 billion")]
     [InlineData(1E12, "1 trillion")]
     public void ToMetric_UseScaleWord_ShortScale(double input, string expected) =>
         Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
 
     [Theory]
+    [InlineData(1E3, "1 tausend")]
     [InlineData(1E9, "1 Milliarde")]
     [InlineData(1_000_000_000.000001, "1 Milliarde")]
     [InlineData(1.5E9, "1.5 Milliarden")]
@@ -531,6 +535,38 @@ public class MetricNumeralTests
         using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("de-DE"));
 
         Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [Theory]
+    [InlineData("hr", 2E9, "2 milijarde")]
+    [InlineData("lt", 2E9, "2 milijardai")]
+    [InlineData("ru", 2E9, "2 миллиарда")]
+    [InlineData("sk", 2E9, "2 miliardy")]
+    [InlineData("sl", 2E9, "2 milijardi")]
+    [InlineData("sl", 3E9, "3 milijarde")]
+    public void ToMetric_UseScaleWord_UsesLocaleAuthoredCountForm(string uiCulture, double input, string expected)
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new(uiCulture));
+
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [Fact]
+    public void ToMetric_UseScaleWord_UsesLocaleAuthoredCountFormForLong()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("lt"));
+
+        Assert.Equal(
+            "2 milijardai",
+            2_000_000_000L.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [Fact]
+    public void ToMetric_UseScaleWord_UsesLocaleAuthoredInverseScaleWord()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("am"));
+
+        Assert.Equal("1 ሺኛ", 1E-3.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
     }
 
     [Theory]

@@ -50,11 +50,18 @@ public sealed partial class HumanizerSourceGenerator
         public JsonElement Root { get; } = root;
     }
 
-    readonly struct MetricScaleWordDefinition(char symbol, string singular, string plural)
+    readonly struct MetricScaleWordDefinition(
+        char symbol,
+        string singular,
+        string plural,
+        string? two = null,
+        string? few = null)
     {
         public char Symbol { get; } = symbol;
         public string Singular { get; } = singular;
         public string Plural { get; } = plural;
+        public string? Two { get; } = two;
+        public string? Few { get; } = few;
     }
 
     readonly struct MetricScaleWordProfileDefinition(

@@ -472,24 +472,25 @@ public static class MetricNumeralExtensions
                 }
             }
 
-            var unitText = GetUnitText(scale, formats, Math.Abs(number) == 1);
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
             var representation = keepTrailingZeros
                 ? FormatLongWithTrailingZeros(number, requestedDecimals.GetValueOrDefault(), nfi)
                 : number.ToString(nfi);
+            var unitText = GetUnitText(scale, formats, number);
             return representation + space + unitText;
         }
         else
         {
-            var unitText = GetUnitText(scale, formats, singular: false);
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
-
-            return number.ToString(nfi)
-                 + nfi.NumberDecimalSeparator
-                 + new string(fractionalPartCharacters, 0, decimals.Value)
-                 + (keepTrailingZeros && requestedDecimals > decimals ? new string('0', requestedDecimals.Value - decimals.Value) : string.Empty)
-                 + space
-                 + unitText;
+            var representation = number.ToString(nfi)
+                                 + nfi.NumberDecimalSeparator
+                                 + new string(fractionalPartCharacters, 0, decimals.Value)
+                                 + (keepTrailingZeros && requestedDecimals > decimals ? new string('0', requestedDecimals.Value - decimals.Value) : string.Empty);
+            var displayedNumber = double.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+                ? parsedNumber
+                : number;
+            var unitText = GetUnitText(scale, formats, displayedNumber);
+            return representation + space + unitText;
         }
     }
 
@@ -551,9 +552,10 @@ public static class MetricNumeralExtensions
         var representation = ShouldKeepTrailingZeros(formats, decimals)
             ? number.ToString($"F{decimals.GetValueOrDefault()}", nfi)
             : number.ToString("G15", nfi);
-        var singular = double.TryParse(representation, NumberStyles.Float, nfi, out var displayedNumber) &&
-                       Math.Abs(displayedNumber) == 1;
-        var unitText = GetUnitText(exponent, formats, singular);
+        var displayedNumber = double.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+            ? parsedNumber
+            : number;
+        var unitText = GetUnitText(exponent, formats, displayedNumber);
         var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
         return representation + space + unitText;
     }
@@ -561,11 +563,11 @@ public static class MetricNumeralExtensions
     /// <summary>
     /// Get the unit for a power-of-1000 scale.
     /// </summary>
-    static string GetUnitText(int scale, MetricNumeralFormats? formats, bool singular) =>
+    static string GetUnitText(int scale, MetricNumeralFormats? formats, double displayedNumber) =>
         Math.Sign(scale) switch
         {
-            +1 => GetUnitText(Symbols[0][scale - 1], formats, singular),
-            -1 => GetUnitText(Symbols[1][-scale - 1], formats, singular),
+            +1 => GetUnitText(Symbols[0][scale - 1], formats, displayedNumber),
+            -1 => GetUnitText(Symbols[1][-scale - 1], formats, displayedNumber),
             _ => string.Empty
         };
 
@@ -575,7 +577,7 @@ public static class MetricNumeralExtensions
     /// <param name="symbol">The symbol linked to the unit</param>
     /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
     /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
-    static string GetUnitText(char symbol, MetricNumeralFormats? formats, bool singular)
+    static string GetUnitText(char symbol, MetricNumeralFormats? formats, double displayedNumber)
     {
         if (formats.HasValue)
         {
@@ -597,7 +599,7 @@ public static class MetricNumeralExtensions
 
             if (formatValue.HasFlag(MetricNumeralFormats.UseScaleWord))
             {
-                return LocalizedMetricScaleWordCatalog.TryResolve(CultureInfo.CurrentUICulture, symbol, singular, out var scaleWord)
+                return LocalizedMetricScaleWordCatalog.TryResolve(CultureInfo.CurrentUICulture, symbol, displayedNumber, out var scaleWord)
                     ? scaleWord
                     : symbol.ToString();
             }

@@ -122,7 +122,11 @@ public sealed partial class HumanizerSourceGenerator
         string? pluralProperty,
         long? fixedValue = null,
         MetricScaleWordTransform transform = MetricScaleWordTransform.None,
-        bool singularOptional = false)
+        bool singularOptional = false,
+        string? paucalProperty = null,
+        string? inverseSingularProperty = null,
+        string? dualProperty = null,
+        string? trialQuadralProperty = null)
     {
         public string? ValueProperty { get; } = valueProperty;
         public string SingularProperty { get; } = singularProperty;
@@ -130,5 +134,9 @@ public sealed partial class HumanizerSourceGenerator
         public long? FixedValue { get; } = fixedValue;
         public MetricScaleWordTransform Transform { get; } = transform;
         public bool SingularOptional { get; } = singularOptional;
+        public string? PaucalProperty { get; } = paucalProperty;
+        public string? InverseSingularProperty { get; } = inverseSingularProperty;
+        public string? DualProperty { get; } = dualProperty;
+        public string? TrialQuadralProperty { get; } = trialQuadralProperty;
     }
 }

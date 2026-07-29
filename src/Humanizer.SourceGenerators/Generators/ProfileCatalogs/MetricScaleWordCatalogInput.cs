@@ -58,7 +58,7 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine();
             builder.AppendLine("static partial class LocalizedMetricScaleWordCatalog");
             builder.AppendLine("{");
-            builder.AppendLine("    private static partial bool TryResolveCore(string localeCode, char symbol, bool singular, out string value)");
+            builder.AppendLine("    private static partial bool TryResolveCore(string localeCode, char symbol, CardinalPluralCategory category, out string value)");
             builder.AppendLine("    {");
             builder.AppendLine("        switch (localeCode)");
             builder.AppendLine("        {");
@@ -76,13 +76,25 @@ public sealed partial class HumanizerSourceGenerator
                     builder.Append("                    case '");
                     builder.Append(scaleWord.Symbol);
                     builder.Append("': value = ");
-                    if (scaleWord.Singular == scaleWord.Plural)
+                    if (scaleWord.Two is not null || scaleWord.Few is not null)
+                    {
+                        builder.Append("MetricScaleWordForms.Select(category, ");
+                        builder.Append(QuoteLiteral(scaleWord.Singular));
+                        builder.Append(", ");
+                        builder.Append(QuoteLiteral(scaleWord.Plural));
+                        builder.Append(", ");
+                        builder.Append(scaleWord.Two is null ? "null" : QuoteLiteral(scaleWord.Two));
+                        builder.Append(", ");
+                        builder.Append(scaleWord.Few is null ? "null" : QuoteLiteral(scaleWord.Few));
+                        builder.Append(')');
+                    }
+                    else if (scaleWord.Singular == scaleWord.Plural)
                     {
                         builder.Append(QuoteLiteral(scaleWord.Singular));
                     }
                     else
                     {
-                        builder.Append("singular ? ");
+                        builder.Append("category == CardinalPluralCategory.One ? ");
                         builder.Append(QuoteLiteral(scaleWord.Singular));
                         builder.Append(" : ");
                         builder.Append(QuoteLiteral(scaleWord.Plural));

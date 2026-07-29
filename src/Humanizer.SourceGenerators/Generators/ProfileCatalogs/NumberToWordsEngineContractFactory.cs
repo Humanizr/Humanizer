@@ -139,15 +139,6 @@ public sealed partial class HumanizerSourceGenerator
                 return;
             }
 
-            if ((contract.Transform & MetricScaleWordTransform.TrimFirstWord) != 0)
-            {
-                singular = RemoveFirstWord(singular);
-            }
-            else if ((contract.Transform & MetricScaleWordTransform.TrimAuthoredOne) != 0)
-            {
-                singular = RemoveAuthoredOne(singular, profileRoot);
-            }
-
             var plural = contract.PluralProperty is null
                 ? singular
                 : GetOptionalString(row, contract.PluralProperty)?.Trim() ?? singular;
@@ -156,7 +147,42 @@ public sealed partial class HumanizerSourceGenerator
                 plural = plural.Replace("{0}", string.Empty).Trim();
             }
 
-            words[symbol] = new(symbol, singular, plural);
+            if ((contract.Transform & MetricScaleWordTransform.TrimFirstWord) != 0)
+            {
+                var projectedSingular = RemoveFirstWord(singular);
+                singular = projectedSingular == singular &&
+                           (contract.Transform & MetricScaleWordTransform.StripPluralFormatPlaceholder) != 0
+                    ? plural
+                    : projectedSingular;
+            }
+            else if ((contract.Transform & MetricScaleWordTransform.TrimAuthoredOne) != 0)
+            {
+                singular = RemoveAuthoredOne(singular, profileRoot);
+            }
+
+            var paucal = contract.PaucalProperty is null
+                ? null
+                : GetOptionalString(row, contract.PaucalProperty)?.Trim();
+            var dual = contract.DualProperty is null
+                ? null
+                : GetOptionalString(row, contract.DualProperty)?.Trim();
+            var trialQuadral = contract.TrialQuadralProperty is null
+                ? null
+                : GetOptionalString(row, contract.TrialQuadralProperty)?.Trim();
+
+            words[symbol] = new(
+                symbol,
+                singular,
+                plural,
+                dual,
+                trialQuadral ?? paucal);
+
+            if (contract.InverseSingularProperty is not null &&
+                TryGetInverseMetricSymbol(value, out var inverseSymbol) &&
+                GetOptionalString(row, contract.InverseSingularProperty)?.Trim() is { Length: > 0 } inverse)
+            {
+                words[inverseSymbol] = new(inverseSymbol, inverse, inverse);
+            }
         }
 
         static void AddEngineMetricScaleWords(
@@ -314,6 +340,21 @@ public sealed partial class HumanizerSourceGenerator
                 1_000_000_000_000 => 'T',
                 1_000_000_000_000_000 => 'P',
                 1_000_000_000_000_000_000 => 'E',
+                _ => default
+            };
+            return symbol != default;
+        }
+
+        static bool TryGetInverseMetricSymbol(long value, out char symbol)
+        {
+            symbol = value switch
+            {
+                1_000 => 'm',
+                1_000_000 => 'μ',
+                1_000_000_000 => 'n',
+                1_000_000_000_000 => 'p',
+                1_000_000_000_000_000 => 'f',
+                1_000_000_000_000_000_000 => 'a',
                 _ => default
             };
             return symbol != default;

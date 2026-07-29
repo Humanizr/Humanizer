@@ -36,7 +36,11 @@ public sealed partial class HumanizerSourceGenerator
             string singularProperty,
             string? pluralProperty = null,
             MetricScaleWordTransform transform = MetricScaleWordTransform.None,
-            bool singularOptional = false) =>
+            bool singularOptional = false,
+            string? paucalProperty = null,
+            string? inverseSingularProperty = null,
+            string? dualProperty = null,
+            string? trialQuadralProperty = null) =>
             new(
                 "builder",
                 sourcePath,
@@ -46,7 +50,16 @@ public sealed partial class HumanizerSourceGenerator
                 null,
                 null,
                 null,
-                new(valueProperty, singularProperty, pluralProperty, transform: transform, singularOptional: singularOptional),
+                new(
+                    valueProperty,
+                    singularProperty,
+                    pluralProperty,
+                    transform: transform,
+                    singularOptional: singularOptional,
+                    paucalProperty: paucalProperty,
+                    inverseSingularProperty: inverseSingularProperty,
+                    dualProperty: dualProperty,
+                    trialQuadralProperty: trialQuadralProperty),
                 ImmutableArray<EngineContractMember>.Empty);
 
         static EngineContractMember FixedScaleMember(
@@ -54,7 +67,9 @@ public sealed partial class HumanizerSourceGenerator
             string builder,
             long value,
             string singularProperty = "singular",
-            string? pluralProperty = "plural") =>
+            string? pluralProperty = "plural",
+            string? paucalProperty = null,
+            string? dualProperty = null) =>
             new(
                 "builder",
                 sourcePath,
@@ -64,7 +79,13 @@ public sealed partial class HumanizerSourceGenerator
                 null,
                 null,
                 null,
-                new(null, singularProperty, pluralProperty, value),
+                new(
+                    null,
+                    singularProperty,
+                    pluralProperty,
+                    value,
+                    paucalProperty: paucalProperty,
+                    dualProperty: dualProperty),
                 ImmutableArray<EngineContractMember>.Empty);
 
         static ImmutableDictionary<string, EngineContract> CreateNumberToWordsSchemas() =>
@@ -194,7 +215,12 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalTensMap", null, null, null, null, null, null),
-                            ScaleMember("scales", "conjunctional-scale-array", "value", "name"),
+                            ScaleMember(
+                                "scales",
+                                "conjunctional-scale-array",
+                                "value",
+                                "name",
+                                inverseSingularProperty: "ordinalName"),
                             Member("nullable-int-string-dictionary", "namedTuples", null, null, null, null, null, null)
                         )
             ),
@@ -282,7 +308,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "neuterOne", null, null, null, null, null, null),
                             Member("string", "feminineTwo", null, null, null, null, null, null),
                             Member("string", "oneOrdinalPrefix", null, null, null, "одно", null, null),
-                            ScaleMember("scales", "east-slavic-scale-array", "value", "singular", "plural"),
+                            ScaleMember(
+                                "scales",
+                                "east-slavic-scale-array",
+                                "value",
+                                "singular",
+                                "plural",
+                                paucalProperty: "paucal"),
                             Member("builder", "endings.masculine", null, null, "east-slavic-gender-ending", null, null, null),
                             Member("builder", "endings.feminine", null, null, "east-slavic-gender-ending", null, null, null),
                             Member("builder", "endings.neuter", null, null, "east-slavic-gender-ending", null, null, null)
@@ -602,12 +634,12 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("string-array", "prefixMap", null, null, null, null, null, null),
-                            FixedScaleMember("thousandScale", "dual-form-scale", 1_000),
-                            FixedScaleMember("millionScale", "dual-form-scale", 1_000_000),
-                            FixedScaleMember("billionScale", "dual-form-scale", 1_000_000_000),
-                            FixedScaleMember("trillionScale", "dual-form-scale", 1_000_000_000_000),
-                            FixedScaleMember("quadrillionScale", "dual-form-scale", 1_000_000_000_000_000),
-                            FixedScaleMember("quintillionScale", "dual-form-scale", 1_000_000_000_000_000_000)
+                            FixedScaleMember("thousandScale", "dual-form-scale", 1_000, dualProperty: "dual"),
+                            FixedScaleMember("millionScale", "dual-form-scale", 1_000_000, dualProperty: "dual"),
+                            FixedScaleMember("billionScale", "dual-form-scale", 1_000_000_000, dualProperty: "dual"),
+                            FixedScaleMember("trillionScale", "dual-form-scale", 1_000_000_000_000, dualProperty: "dual"),
+                            FixedScaleMember("quadrillionScale", "dual-form-scale", 1_000_000_000_000_000, dualProperty: "dual"),
+                            FixedScaleMember("quintillionScale", "dual-form-scale", 1_000_000_000_000_000_000, dualProperty: "dual")
                         )
             ),
                 ["ordinal-prefix-scale"] = Schema("ordinal-prefix-scale", null,
@@ -646,7 +678,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
-                            ScaleMember("scales", "pluralized-scale-array", "value", "singular", "plural"),
+                            ScaleMember(
+                                "scales",
+                                "pluralized-scale-array",
+                                "value",
+                                "singular",
+                                "plural",
+                                paucalProperty: "paucal"),
                             Member("enum", "formDetector", null, "PluralizedScaleFormDetector", null, null, null, null),
                             Member("enum", "unitVariantStrategy", null, "PluralizedScaleUnitVariantStrategy", null, "none", null, null),
                             Member("enum", "ordinalMode", null, "PluralizedScaleOrdinalMode", null, "numeric-culture", null, null),
@@ -792,7 +830,15 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalTensMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalHundredsMap", null, null, null, null, null, null),
-                            ScaleMember("scales", "south-slavic-scale-array", "value", "singular", "plural")
+                            ScaleMember(
+                                "scales",
+                                "south-slavic-scale-array",
+                                "value",
+                                "singular",
+                                "plural",
+                                paucalProperty: "paucal",
+                                dualProperty: "dual",
+                                trialQuadralProperty: "trialQuadral")
                         )
             ),
                 ["terminal-ordinal-scale"] = Schema("terminal-ordinal-scale", null,
@@ -897,10 +943,10 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "unitsFeminineForms", null, null, null, null, null, null),
                             Member("string-array", "unitsNeuterForms", null, null, null, null, null, null),
                             Member("string-array", "unitsInvariantForms", null, null, null, null, null, null),
-                            FixedScaleMember("thousands", "west-slavic-scale-forms", 1_000),
-                            FixedScaleMember("millions", "west-slavic-scale-forms", 1_000_000),
-                            FixedScaleMember("trillions", "west-slavic-scale-forms", 1_000_000_000_000),
-                            FixedScaleMember("billions", "west-slavic-scale-forms", 1_000_000_000)
+                            FixedScaleMember("thousands", "west-slavic-scale-forms", 1_000, paucalProperty: "paucal"),
+                            FixedScaleMember("millions", "west-slavic-scale-forms", 1_000_000, paucalProperty: "paucal"),
+                            FixedScaleMember("trillions", "west-slavic-scale-forms", 1_000_000_000_000, paucalProperty: "paucal"),
+                            FixedScaleMember("billions", "west-slavic-scale-forms", 1_000_000_000, paucalProperty: "paucal")
                         ),
                 Member("culture", null, null, null, null, null, null, null)
             ),
