@@ -102,6 +102,14 @@ function selectRollback(releases, runId, attempt) {
     .at(-1);
 }
 
+function validAttempt({conclusion, jobs}) {
+  const required = ['build', 'deploy', 'production-smoke', 'stage-pages-release'];
+  return (
+    conclusion === 'success' ||
+    required.every((name) => jobs[name] === 'success')
+  );
+}
+
 const legacyRun = {
   created_at: '2026-07-28T18:17:11Z',
   head_sha: 'e7a24480ea2e5f796a0528842ef3f2743af4e59a',
@@ -118,7 +126,11 @@ test('first documentation deployment retains the latest legacy deployment', () =
   );
   assert.match(
     normalizedWorkflow,
-    /\$'success\\tpush\\tmain\\t\.github\/workflows\/jekyll-gh-pages\.yml\\t'/,
+    /"\$pointer_path" == "\.github\/workflows\/jekyll-gh-pages\.yml"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$pointer_path" == "\.github\/workflows\/jekyll-gh-pages\.yml" &&\s+"\$pointer_event" != push/,
   );
 });
 
@@ -301,6 +313,33 @@ test('ambiguous publication recovers the remotely published candidate', () => {
   assert.match(
     normalizedWorkflow,
     /needs\.record-production-deployment\.result == 'failure'/,
+  );
+});
+
+test('future selection accepts a published pointer after record failure', () => {
+  const jobs = {
+    build: 'success',
+    deploy: 'success',
+    'production-smoke': 'success',
+    'record-production-deployment': 'failure',
+    'stage-pages-release': 'success',
+  };
+
+  assert.equal(validAttempt({conclusion: 'failure', jobs}), true);
+  assert.equal(
+    validAttempt({
+      conclusion: 'failure',
+      jobs: {...jobs, 'production-smoke': 'failure'},
+    }),
+    false,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /actions\/runs\/\$\{deployment_run_id\}\/attempts\/\$\{deployment_run_attempt\}\/jobs/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$pointer_jobs" != "build,deploy,production-smoke,stage-pages-release"/,
   );
 });
 

@@ -655,11 +655,58 @@ jobs:
                   "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${deployment_run_attempt}" \
                   --jq '[.conclusion, .event, .head_branch, .path, .run_attempt] | @tsv'
               )"
-              if [[ "$pointer_run" != $'success\tpush\tmain\t.github/workflows/docs.yml\t'"$deployment_run_attempt" &&
-                    "$pointer_run" != $'success\tworkflow_dispatch\tmain\t.github/workflows/docs.yml\t'"$deployment_run_attempt" &&
-                    "$pointer_run" != $'success\tpush\tmain\t.github/workflows/jekyll-gh-pages.yml\t'"$deployment_run_attempt" ]]; then
+              IFS=$'\t' read -r pointer_conclusion pointer_event \
+                pointer_branch pointer_path pointer_attempt <<<"$pointer_run"
+              if [[ "$pointer_branch" != main ||
+                    "$pointer_attempt" != "$deployment_run_attempt" ||
+                    (
+                      "$pointer_event" != push &&
+                      "$pointer_event" != workflow_dispatch
+                    ) ||
+                    (
+                      "$pointer_path" != ".github/workflows/docs.yml" &&
+                      "$pointer_path" != ".github/workflows/jekyll-gh-pages.yml"
+                    ) ||
+                    (
+                      "$pointer_path" == ".github/workflows/jekyll-gh-pages.yml" &&
+                      "$pointer_event" != push
+                    ) ]]; then
                 echo "Latest deployment pointer is not backed by a successful main documentation run." >&2
                 exit 1
+              fi
+              if [[ "$pointer_conclusion" != success ]]; then
+                if [[ "$pointer_path" != ".github/workflows/docs.yml" ]]; then
+                  echo "Failed legacy workflow attempts are not deployment pointers." >&2
+                  exit 1
+                fi
+                pointer_jobs="$(
+                  gh api \
+                    --paginate \
+                    --slurp \
+                    "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${deployment_run_attempt}/jobs?per_page=100" |
+                    jq -r '
+                      [
+                        .[][].jobs[]
+                        | select(
+                            (
+                              .name == "build"
+                              or .name == "stage-pages-release"
+                              or .name == "deploy"
+                              or .name == "production-smoke"
+                            )
+                            and .conclusion == "success"
+                          )
+                        | .name
+                      ]
+                      | unique
+                      | sort
+                      | join(",")
+                    '
+                )"
+                if [[ "$pointer_jobs" != "build,deploy,production-smoke,stage-pages-release" ]]; then
+                  echo "Failed deployment attempt lacks successful publication evidence." >&2
+                  exit 1
+                fi
               fi
               archive_run="$(
                 gh api \
