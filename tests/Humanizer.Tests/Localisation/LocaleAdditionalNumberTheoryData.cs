@@ -1746,7 +1746,7 @@ public static class LocaleAdditionalNumberTheoryData
         { "et", 1000000000, "miljardes" },
         { "en", -21, "minus twenty-first" },
         { "es-ES", int.MinValue, "dos mil ciento cuarenta y siete millones cuatrocientos ochenta y tres milésimo sexcentésimo cuadragésimo octavo" },
-        { "gl", int.MinValue, "dous mil cento corenta e sete millóns catrocentos oitenta e tres milmilésimo sexcentésimo cuadraxésimo oitavo" },
+        { "gl", int.MinValue, "dous mil cento corenta e sete millóns catrocentos oitenta e tres milésimo sexcentésimo cuadraxésimo oitavo" },
         { "is", int.MaxValue, "tveir milljarðar eitt hundrað fjörutíu og sjö milljónir fjögur hundruð áttatíu og þrjú þúsund sex hundruð fertugasti og sjöundi" },
         { "is", int.MinValue, "mínus tveir milljarðar eitt hundrað fjörutíu og sjö milljónir fjögur hundruð áttatíu og þrjú þúsund sex hundruð fertugasti og áttundi" },
         { "mt", int.MaxValue, "il-żewġ biljuni u mija u sebgħa u erbgħin miljun u erbgħa mija u tlieta u tmenin elf u sitt mija u sebgħa u erbgħin" },

@@ -308,7 +308,7 @@ surfaces:
       exactHundredWord: 'cen'
       thousandWord: 'mil'
       tensJoiner: 'e'
-      thousandOrdinalStem: 'milésim'
+      thousandOrdinalStem: 'ésim'
       masculineOrdinalEnding: 'o'
       feminineOrdinalEnding: 'a'
       minLongValueWord: 'menos nove trillóns douscentos vinte e tres mil trescentos setenta e dous billóns trinta e seis mil oitocentos cincuenta e catro millóns setecentos setenta e cinco mil oitocentos oito'

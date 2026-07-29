@@ -190,7 +190,7 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
 
         if (hundreds != 0)
         {
-            AddUnit(builder, (ulong)hundreds, GrammaticalGender.Neuter);
+            AddUnit(builder, hundreds, GrammaticalGender.Neuter);
             builder.Add(hundreds == 1 ? profile.HundredSingular : profile.HundredPlural);
         }
 
