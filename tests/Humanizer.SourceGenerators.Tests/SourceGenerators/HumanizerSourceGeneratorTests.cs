@@ -2097,7 +2097,6 @@ wordsToNumber:
   inflection:
     cardinalRule: 'Other'
     disposition: 'selector-only'
-    source: 'synthetic source-generator test profile'
 """;
             if (candidateText.Contains("surfaces: {}", StringComparison.Ordinal))
             {

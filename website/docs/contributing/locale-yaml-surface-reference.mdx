@@ -89,8 +89,6 @@ Fields:
 - `disposition`: `selector-only` when Humanizer supplies category selection
   but no noun lexicon, or `lexicon` when `lexemes` contains at least one exact
   noun.
-- `source`: required, non-empty linguistic provenance for the selector and any
-  authored lexemes.
 - `regionalRules`: optional mapping from a same-language regional culture to a
   different checked-in CLDR cardinal selector. Use this only when CLDR defines
   a regional rule that differs from the neutral locale, such as `pt-PT`.
@@ -116,7 +114,6 @@ surfaces:
   inflection:
     cardinalRule: 'Spanish'
     disposition: 'lexicon'
-    source: 'CLDR 48.2; RAE-ASALE plural guidance'
     lexemes:
       persona:
         one: 'persona'

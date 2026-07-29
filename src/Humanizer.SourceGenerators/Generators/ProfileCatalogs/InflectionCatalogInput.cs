@@ -183,7 +183,7 @@ public sealed partial class HumanizerSourceGenerator
         static InflectionProfileInput ParseProfile(string localeCode, SimpleYamlMapping mapping)
         {
             foreach (var property in mapping.Values.Keys.Where(
-                         static property => property is not ("cardinalRule" or "disposition" or "source" or "lexemes" or "regionalRules")))
+                         static property => property is not ("cardinalRule" or "disposition" or "lexemes" or "regionalRules")))
             {
                 throw new InvalidOperationException(
                     $"surfaces.inflection defines unsupported property '{property}'.");
@@ -203,13 +203,6 @@ public sealed partial class HumanizerSourceGenerator
             {
                 throw new InvalidOperationException(
                     "surfaces.inflection disposition must be 'selector-only' or 'lexicon'; productive and invariant claims require separate linguistic review.");
-            }
-
-            var source = mapping.GetScalar("source")
-                ?? throw new InvalidOperationException("surfaces.inflection must define source.");
-            if (string.IsNullOrWhiteSpace(source))
-            {
-                throw new InvalidOperationException("surfaces.inflection source must not be empty.");
             }
 
             var lexemes = ImmutableArray<InflectionLexemeInput>.Empty;

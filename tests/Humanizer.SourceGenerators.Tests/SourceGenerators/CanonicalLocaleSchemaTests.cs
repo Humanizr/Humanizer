@@ -737,7 +737,6 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'lexicon'
-    source: 'test'
     lexemes:
       person:
         one: 'person'
@@ -749,7 +748,6 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'lexicon'
-    source: 'test'
     lexemes:
       person:
         one: 'person'
@@ -769,7 +767,6 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'lexicon'
-    source: 'test'
     lexemes:
       person:
         one: 'person'
@@ -785,7 +782,6 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'lexicon'
-    source: 'test'
     lexemes:
       bok:
         one: 'bok'
@@ -798,7 +794,6 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
-    source: 'test'
 """));
 
         Assert.Empty(catalog.Diagnostics);

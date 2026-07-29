@@ -281,7 +281,6 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
-    source: 'test'
 """;
         const string regionalLocale = """
 locale: 'aa-ZZ'
@@ -306,7 +305,6 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
-    source: 'test'
 """;
         const string missingLocale = """
 locale: 'zz'
@@ -358,7 +356,6 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: '{{disposition}}'
-    source: 'test'
 """;
 
         var runResult = RunGenerator(
@@ -379,7 +376,6 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'lexicon'
-    source: 'test'
     lexemes:
       café:
         one: 'café'

@@ -131,15 +131,16 @@ static partial class LocalizedInflectionCatalog
 
     static bool TryResolve(CultureInfo culture, [NotNullWhen(true)] out LocalizedInflectionProfile? profile)
     {
+        profile = null;
         for (var current = culture; !string.IsNullOrEmpty(current.Name); current = current.Parent)
         {
-            if (TryResolveCore(current.Name, out profile))
+            if (TryResolveCore(current.Name, out var resolvedProfile))
             {
+                profile = resolvedProfile;
                 return true;
             }
         }
 
-        profile = null;
         return false;
     }
 

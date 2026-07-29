@@ -4,7 +4,6 @@ surfaces:
   inflection:
     cardinalRule: 'French'
     disposition: 'selector-only'
-    source: 'Unicode CLDR 48.2 release-48-2 (11299982, Unicode-3.0); no built-in noun morphology'
 
   list:
     engine: 'conjunction'
