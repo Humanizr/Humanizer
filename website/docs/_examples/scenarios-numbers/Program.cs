@@ -16,12 +16,11 @@ AssertEqual("2147483651st", 2_147_483_651L.Ordinalize(culture));
 AssertEqual("-9223372036854775808th", long.MinValue.Ordinalize(culture));
 AssertEqual("biljard", 1_000_000_000_000_000L.ToWords(estonian));
 AssertEqual("dy biliarë", 2_000_000_000_000_000L.ToWords(albanian));
+AssertEqual("triljon", 1_000_000_000_000_000_000L.ToWords(estonian));
 AssertEqual("one arab", 1_000_000_000L.ToIndianWords());
 AssertEqual(
     "one hundred crore",
     1_000_000_000L.ToIndianWords(IndianScaleStyle.CroreBased));
-AssertThrows<NotImplementedException>(
-    () => 1_000_000_000_000_000_000L.ToWords(estonian));
 AssertEqual("1 1/4", 1.25m.Fractionalize(5, 0m));
 AssertEqual("1/3", 0.34m.Fractionalize(5, 0.01m));
 AssertEqual("¾", 0.75m.Fractionalize(4, 0m, useUnicode: true));

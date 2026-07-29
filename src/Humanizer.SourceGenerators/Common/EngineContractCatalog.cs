@@ -81,6 +81,7 @@ public sealed partial class HumanizerSourceGenerator
                                         Member("nullable-string", "billionSingularWord", null, null, null, null, null, null),
                                         Member("nullable-string", "billionPluralWord", null, null, null, null, null, null),
                                         Member("builder", "scales", null, null, "billion-strategy-cardinal-scale-array", null, null, null),
+                                        Member("presence-bool", "scales", null, null, null, null, null, null),
                                         Member("string-array", "unitsMap", null, null, null, null, null, null),
                                         Member("string-array", "tensMap", null, null, null, null, null, null),
                                         Member("string-array", "hundredsMap", null, null, null, null, null, null)

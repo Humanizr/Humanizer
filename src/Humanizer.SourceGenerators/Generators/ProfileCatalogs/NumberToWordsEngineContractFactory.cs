@@ -64,6 +64,7 @@ public sealed partial class HumanizerSourceGenerator
                 "string" => QuoteLiteral(GetStringValue(root, member)),
                 "nullable-string" => GetOptionalStringValue(root, member) is { } stringValue ? QuoteLiteral(stringValue) : "null",
                 "bool" => GetBooleanValue(root, member) ? "true" : "false",
+                "presence-bool" => EngineContractUtilities.TryGetElement(root, member.SourcePath, out _) ? "true" : "false",
                 "int64" => GetInt64Value(root, member).ToString(CultureInfo.InvariantCulture),
                 "nullable-int64" => GetOptionalInt64Value(root, member)?.ToString(CultureInfo.InvariantCulture) ?? "null",
                 "int32" => checked((int)GetInt64Value(root, member)).ToString(CultureInfo.InvariantCulture),

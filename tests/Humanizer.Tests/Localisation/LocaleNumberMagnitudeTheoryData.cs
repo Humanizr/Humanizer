@@ -299,6 +299,8 @@ public static class LocaleNumberMagnitudeTheoryData
         { "ca", 4325010007018L, "quatre bilions tres-cents vint-i-cinc mil milions deu milions set mil divuit" },
         { "ca", 4325010007017L, "quatre bilions tres-cents vint-i-cinc mil milions deu milions set mil disset" },
         { "ca", 4325010007019L, "quatre bilions tres-cents vint-i-cinc mil milions deu milions set mil dinou" },
+        { "ca", 21000000000000L, "vint-i-un bilions" },
+        { "ca", 101000000000000L, "cent un bilions" },
         { "ca", 1000000000000L, "un bilió" },
         { "ca", 1000000000000000L, "mil bilions" },
         { "ca", 1000000000000000000L, "un trilió" },

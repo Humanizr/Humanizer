@@ -91,22 +91,20 @@ The result is an integer numeral only. Humanizer does not add currency names or
 units such as yuan, jiao, or fen; applications handling money must apply that
 domain policy separately.
 
-### Respect each locale's magnitude ceiling
+### Use the full `long` range
 
-`long` support does not imply that every locale has words for every `long`
-magnitude. On `main/preview`, Estonian and Albanian follow their CLDR scale
-names through `10^15`: Estonian uses `biljard`, while Albanian uses `miliar`,
-`bilion`, and `biliar` (with their plural forms). Both support values through
-`999,999,999,999,999,999`; `10^18` throws `NotImplementedException` because
-neither locale defines a scale word for it.
+On `main/preview`, every built-in number-word locale supports the full signed
+`long` range. Estonian follows its authored scale names through `triljon`;
+Albanian uses `miliar`, `bilion`, `biliar`, and `trilion`, with their plural
+forms. Custom converters can retain narrower ranges when their profiles do not
+define the required scale words.
 
 ## Pitfall
 
-Grammar features and maximum magnitudes differ by locale. Do not infer gender,
-abbreviation, Eifeler, ordinal-word, or full-range support from cardinal
-support. String `Ordinalize` parses the input using culture and can throw for
-malformed or out-of-range text; prefer the numeric overload when the
-application already has a number.
+Grammar features differ by locale. Do not infer gender, abbreviation, Eifeler,
+or ordinal-word support from cardinal support. String `Ordinalize` parses the
+input using culture and can throw for malformed or out-of-range text; prefer
+the numeric overload when the application already has a number.
 
 ## Version notes
 

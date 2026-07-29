@@ -57,12 +57,12 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
 
         if (number < 100)
         {
-            return GetTens((int)number, gender);
+            return GetTens((int)number, gender, isScaleCount);
         }
 
         if (number < 1000)
         {
-            return GetHundreds((int)number, gender);
+            return GetHundreds((int)number, gender, isScaleCount);
         }
 
         return GetScaleWords(number, gender, isScaleCount);
@@ -251,7 +251,7 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <summary>
     /// Gets the localized tens word for the supplied value.
     /// </summary>
-    string GetTens(int number, GrammaticalGender gender)
+    string GetTens(int number, GrammaticalGender gender, bool isScaleCount)
     {
         var tens = number / 10;
         var units = number % 10;
@@ -262,13 +262,13 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
 
         // Hyphenated cardinals keep the unit first and the tens second, joined by the locale's
         // configured separator.
-        return profile.Tens[tens] + GetTensJoiner(tens) + GetCompoundUnit(units, gender);
+        return profile.Tens[tens] + GetTensJoiner(tens) + GetCompoundUnit(units, gender, isScaleCount);
     }
 
     /// <summary>
     /// Gets the localized hundreds word for the supplied value.
     /// </summary>
-    string GetHundreds(int number, GrammaticalGender gender)
+    string GetHundreds(int number, GrammaticalGender gender, bool isScaleCount)
     {
         var hundreds = number / 100;
         var remainder = number % 100;
@@ -280,7 +280,9 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
 
         // Recurse through the main cardinal path so teen values keep their exact lexical forms,
         // but preserve the locale's dedicated unit-one compound forms for values like 101.
-        return hundredPart + " " + (remainder < 10 ? GetCompoundUnit(remainder, gender) : Convert(remainder, gender));
+        return hundredPart + " " + (remainder < 10
+            ? GetCompoundUnit(remainder, gender, isScaleCount)
+            : ConvertPositive((ulong)remainder, gender, isScaleCount, false));
     }
 
     /// <summary>
@@ -322,10 +324,10 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <summary>
     /// Gets the unit word used when a compound ends in one.
     /// </summary>
-    string GetCompoundUnit(int number, GrammaticalGender gender) =>
+    string GetCompoundUnit(int number, GrammaticalGender gender, bool isScaleCount) =>
         // Masculine compounds keep a dedicated "one" form only in the unit position.
         number == 1 && gender == GrammaticalGender.Masculine
-            ? profile.MasculineCompoundOne
+            ? isScaleCount ? profile.MasculineScaleCountOne : profile.MasculineCompoundOne
             : GetUnit(number, gender);
 
     /// <summary>

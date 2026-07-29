@@ -30,6 +30,11 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
         var magnitude = GetAbsoluteValue(input);
+        if (!profile.Cardinal.HasAuthoredScales && magnitude > 999_999_999_999)
+        {
+            throw new ArgumentOutOfRangeException(nameof(input), input, "Legacy billion profiles support values through 999,999,999,999.");
+        }
+
         if (magnitude >= 1_000_000_000)
         {
             switch (profile.Cardinal.BillionStrategy)
@@ -333,6 +338,7 @@ sealed class BillionStrategyCardinalLexicon(
     string? billionSingularWord,
     string? billionPluralWord,
     BillionStrategyCardinalScale[] scales,
+    bool hasAuthoredScales,
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap)
@@ -374,6 +380,9 @@ sealed class BillionStrategyCardinalLexicon(
 
     /// <summary>Gets the descending cardinal scale rows.</summary>
     public BillionStrategyCardinalScale[] Scales { get; } = scales;
+
+    /// <summary>Gets whether the locale authored its cardinal scale rows.</summary>
+    public bool HasAuthoredScales { get; } = hasAuthoredScales;
 
     /// <summary>
     /// Gets the cardinal units lexicon.

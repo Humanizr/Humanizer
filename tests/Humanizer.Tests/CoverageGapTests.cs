@@ -1404,6 +1404,33 @@ public class CoverageGapTests
             Assert.Throws<InvalidOperationException>(() => invalidOrdinal.ConvertToOrdinal(1_000_000_000)).Message);
     }
 
+    [Theory]
+    [InlineData(1_000_000_000_000)]
+    [InlineData(-1_000_000_000_000)]
+    [InlineData(long.MinValue)]
+    public void BillionStrategyConverterRetainsLegacyCardinalRangeLimit(long number)
+    {
+        var converter = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.BillionWord,
+            BillionOrdinalStrategy.BillionWord,
+            hasAuthoredScales: false));
+
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => converter.Convert(number));
+
+        Assert.Equal("input", exception.ParamName);
+        Assert.Contains("999,999,999,999", exception.Message);
+    }
+
+    [Fact]
+    public void BillionStrategyConverterAllowsAuthoredScalesBeyondLegacyRange()
+    {
+        var converter = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            BillionCardinalStrategy.BillionWord,
+            BillionOrdinalStrategy.BillionWord));
+
+        Assert.Equal("mil bilhões", converter.Convert(1_000_000_000_000));
+    }
+
     [UseCulture("en-US")]
     [Fact]
     public void OrdinalDatePatternCoversMonthSubstitutionNonAdjacentAndNoMonthCases()
@@ -2569,7 +2596,8 @@ public class CoverageGapTests
         BillionOrdinalStrategy ordinalStrategy,
         string? billionSingularWord = "bilhão",
         string? billionPluralWord = "bilhões",
-        string? ordinalBillionWord = "bilionésimo")
+        string? ordinalBillionWord = "bilionésimo",
+        bool hasAuthoredScales = true)
     {
         var units = Enumerable.Repeat(string.Empty, 20).ToArray();
         units[0] = "zero";
@@ -2611,6 +2639,7 @@ public class CoverageGapTests
                 billionSingularWord,
                 billionPluralWord,
                 scales,
+                hasAuthoredScales,
                 units,
                 tens,
                 hundreds),
