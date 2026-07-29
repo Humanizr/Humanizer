@@ -9,7 +9,7 @@ const workflow = readFileSync(
   'utf8',
 );
 const normalizedWorkflow = workflow.replaceAll('\r\n', '\n');
-const locateStep = workflow
+const locateStep = normalizedWorkflow
   .split('- name: Locate the currently deployable Pages run')[1]
   .split('- name: Inspect retained prior artifact')[0];
 const fallbackSelection = locateStep.slice(
@@ -80,5 +80,6 @@ test('expensive documentation gates run in parallel before retention', () => {
     .split('\n  deploy:\n')[0];
 
   assert.match(validation, /gate:\n          - manifests\n          - runtime/);
+  assert.match(validation, /permissions:\n      actions: read\n      contents: read/);
   assert.match(retention, /needs:\n      - build\n      - validate/);
 });
