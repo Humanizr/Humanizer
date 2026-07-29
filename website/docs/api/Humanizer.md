@@ -4,6 +4,7 @@
 | :--- | :--- |
 | [ByteRate](Humanizer.ByteRate.md 'Humanizer\.ByteRate') | Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer |
 | [ByteSizeExtensions](Humanizer.ByteSizeExtensions.md 'Humanizer\.ByteSizeExtensions') | Provides extension methods for ByteSize |
+| [CardinalInflectionForms](Humanizer.CardinalInflectionForms.md 'Humanizer\.CardinalInflectionForms') | Provides authored forms of one common noun for cardinal\-count inflection\. |
 | [CasingExtensions](Humanizer.CasingExtensions.md 'Humanizer\.CasingExtensions') | ApplyCase method to allow changing the case of a sentence easily |
 | [ChineseFinancialNumeralExtensions](Humanizer.ChineseFinancialNumeralExtensions.md 'Humanizer\.ChineseFinancialNumeralExtensions') | Contains extension methods for converting integers to Chinese financial characters\. |
 | [CollectionHumanizeExtensions](Humanizer.CollectionHumanizeExtensions.md 'Humanizer\.CollectionHumanizeExtensions') | Humanizes an IEnumerable into a human readable list |

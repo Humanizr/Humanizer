@@ -1,6 +1,13 @@
 locale: 'pt'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Portuguese'
+    disposition: 'selector-only'
+    source: 'Unicode CLDR 48.2 release-48-2 (11299982, Unicode-3.0); no built-in noun morphology'
+    regionalRules:
+      pt-PT: 'CatalanItalian'
+
   list:
     engine: 'conjunction'
     value: 'e'

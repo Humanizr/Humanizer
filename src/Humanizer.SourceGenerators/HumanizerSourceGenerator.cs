@@ -35,6 +35,11 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(formatterProfiles, static (productionContext, input) => input.Emit(productionContext));
 
+        var inflectionProfiles = localeCatalog
+            .Select(static (catalog, _) => InflectionCatalogInput.Create(catalog));
+
+        context.RegisterSourceOutput(inflectionProfiles, static (productionContext, input) => input.Emit(productionContext));
+
         var numberToWordsProfiles = localeCatalog
             .Select(static (catalog, _) => NumberToWordsProfileCatalogInput.Create(catalog));
 

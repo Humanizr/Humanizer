@@ -1,6 +1,15 @@
 locale: 'en'
 
 surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'lexicon'
+    source: 'CLDR 48.2 release-48-2 (11299982, Unicode-3.0); person/people: Humanizer Vocabularies.Default'
+    lexemes:
+      person:
+        one: 'person'
+        other: 'people'
+
   list:
     engine: 'oxford'
 

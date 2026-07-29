@@ -1,6 +1,16 @@
 locale: 'es'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Spanish'
+    disposition: 'lexicon'
+    source: 'CLDR 48.2 release-48-2 (11299982, Unicode-3.0); persona/personas: RAE-ASALE plural rule for vowel-final common nouns'
+    lexemes:
+      persona:
+        one: 'persona'
+        many: 'personas'
+        other: 'personas'
+
   list:
     engine: 'conjunction'
     value: 'y'

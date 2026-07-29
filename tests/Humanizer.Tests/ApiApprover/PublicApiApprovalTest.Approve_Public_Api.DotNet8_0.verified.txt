@@ -209,6 +209,18 @@ namespace Humanizer
         public static Humanizer.ByteSize Terabytes(this uint input) { }
         public static Humanizer.ByteSize Terabytes(this ushort input) { }
     }
+    public sealed class CardinalInflectionForms
+    {
+        public CardinalInflectionForms(string lemma, string other, string? zero = null, string? one = null, string? two = null, string? few = null, string? many = null) { }
+        public string? Few { get; }
+        public string Lemma { get; }
+        public string? Many { get; }
+        public string? One { get; }
+        public string Other { get; }
+        public string? Two { get; }
+        public string? Zero { get; }
+        public static Humanizer.CardinalInflectionForms Invariant(string lemma) { }
+    }
     public static class CasingExtensions
     {
         public static string ApplyCase(this string input, Humanizer.LetterCasing casing) { }
@@ -912,6 +924,9 @@ namespace Humanizer
         public static string ToCamelCase(this string input) { }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
         public static string? ToPossessive(this string? word, bool inputIsPlural = false, bool useApostropheOnlyForSingularWordsEndingInS = false) { }
+        public static bool TryInflect(this Humanizer.CardinalInflectionForms forms, decimal quantity, System.Globalization.CultureInfo culture, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string? result) { }
+        public static bool TryInflect(this string lemma, decimal quantity, System.Globalization.CultureInfo culture, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string? result) { }
+        public static bool TryLemmatize(this string form, System.Globalization.CultureInfo culture, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string? lemma) { }
         public static string Underscore(this string input) { }
         public static string Underscore(this string input, bool preserveCase) { }
     }

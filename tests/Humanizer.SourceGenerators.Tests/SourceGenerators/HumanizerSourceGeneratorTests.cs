@@ -2053,12 +2053,18 @@ wordsToNumber:
             SourceText.From(File.ReadAllText(path), Encoding.UTF8);
     }
 
-    sealed class InMemoryAdditionalText(string path, string text, bool canonicalizeLegacySchema = true) : AdditionalText
+    sealed class InMemoryAdditionalText(
+        string path,
+        string text,
+        bool canonicalizeLegacySchema = true,
+        bool addDefaultInflection = true) : AdditionalText
     {
         readonly string path = path;
-        readonly string text = canonicalizeLegacySchema
-            ? CanonicalizeLocaleText(path, text)
-            : text;
+        readonly string text = AddDefaultInflection(
+            canonicalizeLegacySchema
+                ? CanonicalizeLocaleText(path, text)
+                : text,
+            canonicalizeLegacySchema && addDefaultInflection);
 
         public override string Path => path;
 
@@ -2075,6 +2081,35 @@ wordsToNumber:
             }
 
             return HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(localeCode, candidateText);
+        }
+
+        static string AddDefaultInflection(string candidateText, bool enabled)
+        {
+            if (!enabled ||
+                candidateText.Contains("  inflection:", StringComparison.Ordinal) ||
+                candidateText.Contains("variantOf:", StringComparison.Ordinal))
+            {
+                return candidateText;
+            }
+
+            const string inflection = """
+  inflection:
+    cardinalRule: 'Other'
+    disposition: 'selector-only'
+    source: 'synthetic source-generator test profile'
+""";
+            if (candidateText.Contains("surfaces: {}", StringComparison.Ordinal))
+            {
+                return candidateText.Replace(
+                    "surfaces: {}",
+                    $"surfaces:\n{inflection}",
+                    StringComparison.Ordinal);
+            }
+
+            return candidateText.Replace(
+                "surfaces:\n",
+                $"surfaces:\n{inflection}\n",
+                StringComparison.Ordinal);
         }
     }
 }

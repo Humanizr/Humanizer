@@ -85,6 +85,7 @@ function Get-ReferenceFingerprintEntries {
         "src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/TimeOnlyToClockNotationEngineContractFactory.cs",
         "src/Humanizer.SourceGenerators/Generators/TokenMapWordsToNumberInput.cs",
         "src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/FormatterProfileCatalogInput.cs",
+        "src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/InflectionCatalogInput.cs",
         "src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalizerProfileCatalogInput.cs",
         "src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalDateProfileCatalogInput.cs",
         "src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs",

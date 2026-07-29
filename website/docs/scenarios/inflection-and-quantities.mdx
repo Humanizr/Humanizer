@@ -17,7 +17,9 @@ Use `Pluralize` or `Singularize` when the application has an English noun but no
 
 ## Example
 
-This isolated executable covers a built-in irregular noun, a quantity written as words, and one application-specific irregular pair:
+This isolated executable covers a built-in English irregular noun, a quantity
+written as words, one application-specific irregular pair, caller-authored
+Polish cardinal forms, and Humanizer's exact Spanish lexicon:
 
 <CodeBlock language="csharp" title="Program.cs">{inflection}</CodeBlock>
 
@@ -32,6 +34,35 @@ This isolated executable covers a built-in irregular noun, a quantity written as
 - `ShowQuantityAs.Words` for a localized number word followed by the noun.
 
 Numeric format strings and providers control the displayed number. They do not turn the English inflector into a localized noun engine.
+
+### Inflect a localized noun for a count
+
+On `main/preview` for v4, `CardinalInflectionForms.TryInflect` selects an
+authored form using the explicit culture's Unicode CLDR decimal cardinal rule.
+This category selector is available for every supported culture. If the
+selected category has no explicitly authored form, the operation returns
+`false`; it does not infer that two categories share a spelling. Use
+`CardinalInflectionForms.Invariant` for an invariant noun, or explicitly supply
+equal forms when categories share spelling. The encoded decimal scale is
+significant, so a culture can select different categories for `1m` and `1.0m`.
+
+`string.TryInflect` and `TryLemmatize` use a bounded, exact lexicon. The initial
+catalog contains English `person`/`people` and Spanish
+`persona`/`personas`; unknown or ambiguous forms return `false`. Matching is
+Unicode NFC-normalized, ordinal, and case-sensitive. It never falls back to
+English and does not guess noun morphology.
+
+CLDR categories are count-selection tags, not complete grammatical categories.
+`CardinalInflectionForms` models one bare common noun from a citation form. It
+does not independently select articles, adjectives, classifiers, gender,
+case, or whole phrases; an authored count form may already include the case
+required by that quantity.
+
+The selector follows the
+[Unicode CLDR plural-rule contract](https://cldr.unicode.org/index/cldr-spec/plural-rules)
+and its [decimal operands](https://unicode.org/reports/tr35/tr35-numbers.html).
+The Spanish exact form follows the
+[RAE/ASALE plural rule for nouns ending in an unstressed vowel](https://www.rae.es/dpd/plural).
 
 ### Extend the vocabulary
 
@@ -50,7 +81,11 @@ isolated process; do not add rules per request. `ToQuantity` treats exactly `1`
 and `-1` as singular. Fractional values, `NaN`, and infinity use the plural
 form.
 
-This API inflects English nouns. For localized number words and grammar-aware ordinals, use [numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx) and check the [culture capability table](../languages/supported-cultures.mdx).
+The legacy `Pluralize`, `Singularize`, vocabulary, and `ToQuantity` APIs
+continue to inflect English nouns. For localized number words and
+grammar-aware ordinals, use
+[numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx) and check
+the [culture capability table](../languages/supported-cultures.mdx).
 
 ## Version notes
 
@@ -59,12 +94,14 @@ vocabulary rules and overloads have changed, and early Humanizer `3.0.x`
 temporarily lacked quantity overloads restored by `3.0.8`. The verified source
 runs against the selected package. `AddAcronym` is available on
 `main/preview`.
+Culture-explicit cardinal inflection and lemmatization are new in v4.
 
 ## Related guides and API
 
 - [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
 - [Localization and extensibility](./localization-and-extensibility.mdx)
 - [InflectorExtensions API](../api/Humanizer.InflectorExtensions.md)
+- [CardinalInflectionForms API](../api/Humanizer.CardinalInflectionForms.md)
 - [ToQuantityExtensions API](../api/Humanizer.ToQuantityExtensions.md)
 - [ShowQuantityAs API](../api/Humanizer.ShowQuantityAs.md)
 - [Vocabularies API](../api/Humanizer.Vocabularies.md)

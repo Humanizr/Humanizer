@@ -271,4 +271,130 @@ surfaces:
 
         Assert.Contains(messages, message => message.Contains("must match file locale 'zz-file'", StringComparison.Ordinal));
     }
+
+    [Fact]
+    public void InflectionProfilesInheritWithinTheSameLanguage()
+    {
+        const string parentLocale = """
+locale: 'aa'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'selector-only'
+    source: 'test'
+""";
+        const string regionalLocale = """
+locale: 'aa-ZZ'
+variantOf: 'aa'
+""";
+        var inheritedRun = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/aa.yml", parentLocale),
+            new InMemoryAdditionalText("src/Humanizer/Locales/aa-ZZ.yml", regionalLocale));
+
+        Assert.Empty(inheritedRun.Diagnostics);
+        var source = GetGeneratedSource(inheritedRun, "LocalizedInflectionCatalog.g.cs");
+        Assert.Contains("[\"aa\"]", source, StringComparison.Ordinal);
+        Assert.Contains("[\"aa-ZZ\"]", source, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void InflectionProfilesRequireEveryRootOnceTheFeatureIsEnabled()
+    {
+        const string enabledLocale = """
+locale: 'aa'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'selector-only'
+    source: 'test'
+""";
+        const string missingLocale = """
+locale: 'zz'
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'and'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/aa.yml", enabledLocale),
+            new InMemoryAdditionalText(
+                "src/Humanizer/Locales/zz.yml",
+                missingLocale,
+                addDefaultInflection: false));
+
+        Assert.Contains(
+            runResult.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(
+                    "Every root or cross-language locale profile must author surfaces.inflection explicitly.",
+                    StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void InflectionProfilesEmitEuropeanPortugueseCardinalOverride()
+    {
+        var runResult = RunGenerator();
+
+        Assert.Empty(runResult.Diagnostics);
+        var source = GetGeneratedSource(runResult, "LocalizedInflectionCatalog.g.cs");
+        Assert.Contains("[\"pt-PT\"]", source, StringComparison.Ordinal);
+        Assert.Contains(
+            "new LocalizedInflectionProfile(CardinalPluralRuleKind.CatalanItalian",
+            source,
+            StringComparison.Ordinal);
+    }
+
+    [Theory]
+    [InlineData("guessed", "disposition must be 'selector-only' or 'lexicon'")]
+    [InlineData("lexicon", "requires at least one exact lexeme")]
+    public void InflectionProfilesRejectUnsupportedOrEmptyLexiconDispositions(
+        string disposition,
+        string expectedMessage)
+    {
+        var locale = $$"""
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: '{{disposition}}'
+    source: 'test'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Contains(
+            runResult.Diagnostics,
+            diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(expectedMessage, StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void InflectionProfilesRejectCanonicallyEquivalentLemmaKeys()
+    {
+        const string locale = """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'lexicon'
+    source: 'test'
+    lexemes:
+      café:
+        one: 'café'
+        other: 'cafés'
+      café:
+        one: 'café'
+        other: 'cafés'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Contains(
+            runResult.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("canonically equivalent lemma", StringComparison.Ordinal));
+    }
 }
