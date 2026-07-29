@@ -984,7 +984,11 @@ jobs:
             deployment_run_id deployment_run_attempt <<<"$prior"
           if [[ ! "$run_id" =~ ^[0-9]+$ ||
                 ! "$run_attempt" =~ ^[0-9]+$ ||
-                ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
+                ! "$source_sha" =~ ^[0-9a-f]{40}$ ||
+                (
+                  "$source_path" != ".github/workflows/docs.yml" &&
+                  "$source_path" != ".github/workflows/jekyll-gh-pages.yml"
+                ) ]]; then
             echo "No successful main documentation deployment is available to retain." >&2
             exit 1
           fi
@@ -995,6 +999,7 @@ jobs:
             echo "run_attempt=${run_attempt}"
             echo "run_id=${run_id}"
             echo "source_sha=${source_sha}"
+            echo "source_path=${source_path}"
           } >> "$GITHUB_OUTPUT"
 
       - name: Inspect retained prior artifact
@@ -1092,12 +1097,39 @@ jobs:
           PRIOR_RUN_ATTEMPT: ${{ steps.prior.outputs.run_attempt }}
           PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
           PRIOR_SOURCE_SHA: ${{ steps.prior.outputs.source_sha }}
+          PRIOR_SOURCE_PATH: ${{ steps.prior.outputs.source_path }}
         run: |
           mkdir -p prior-archive
           archive_tag="docs-pages-deployment-v1-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}"
           archive_name="github-pages-${PRIOR_RUN_ID}-${PRIOR_RUN_ATTEMPT}.tar"
           checksum_name="${archive_name}.sha256"
           pointer_name="deployment-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}.json"
+          if [[ "$PRIOR_SOURCE_PATH" == ".github/workflows/docs.yml" ]]; then
+            if ! tar -xOf prior-download/artifact.tar ./deployment.json \
+              > prior-download/deployment.json; then
+              echo "Prior Pages artifact has no deployment identity." >&2
+              exit 1
+            fi
+            if ! jq -e \
+              --arg sourceSha "$PRIOR_SOURCE_SHA" \
+              --argjson archiveRunId "$PRIOR_RUN_ID" \
+              --argjson archiveRunAttempt "$PRIOR_RUN_ATTEMPT" \
+              '.sourceSha == $sourceSha
+                and .archiveRunId == $archiveRunId
+                and .archiveRunAttempt == $archiveRunAttempt' \
+              prior-download/deployment.json >/dev/null; then
+              echo "Prior Pages artifact does not match its selected workflow attempt." >&2
+              exit 1
+            fi
+          elif [[ "$PRIOR_SOURCE_PATH" == ".github/workflows/jekyll-gh-pages.yml" ]]; then
+            if [[ "$PRIOR_RUN_ATTEMPT" != 1 ]]; then
+              echo "A rerun legacy artifact cannot prove its exact attempt." >&2
+              exit 1
+            fi
+          else
+            echo "Prior Pages artifact has an invalid workflow source." >&2
+            exit 1
+          fi
           mv prior-download/artifact.tar "prior-archive/${archive_name}"
           (
             cd prior-archive

@@ -152,6 +152,18 @@ function productionMatchesCandidate(production, candidate) {
   );
 }
 
+function downloadedArtifactMatches(selected, embedded) {
+  if (selected.path === '.github/workflows/jekyll-gh-pages.yml')
+    return selected.attempt === 1;
+
+  return (
+    selected.path === '.github/workflows/docs.yml' &&
+    embedded.sourceSha === selected.sourceSha &&
+    embedded.archiveRunId === selected.runId &&
+    embedded.archiveRunAttempt === selected.attempt
+  );
+}
+
 const legacyRun = {
   created_at: '2026-07-28T18:17:11Z',
   head_sha: 'e7a24480ea2e5f796a0528842ef3f2743af4e59a',
@@ -247,6 +259,59 @@ test('pre-staging documentation archives remain honest bootstrap sources', () =>
   assert.match(
     normalizedWorkflow,
     /manifest_bootstrap[\s\S]*?Rollback bootstrap publication is invalid/,
+  );
+});
+
+test('bootstrap retention rejects an artifact from a different rerun attempt', () => {
+  const selected = {
+    attempt: 1,
+    path: '.github/workflows/docs.yml',
+    runId: 30386738318,
+    sourceSha: legacyRun.head_sha,
+  };
+  const embedded = {
+    archiveRunAttempt: 2,
+    archiveRunId: selected.runId,
+    sourceSha: selected.sourceSha,
+  };
+
+  assert.equal(downloadedArtifactMatches(selected, embedded), false);
+  assert.equal(
+    downloadedArtifactMatches(selected, {
+      ...embedded,
+      archiveRunAttempt: selected.attempt,
+    }),
+    true,
+  );
+  assert.equal(
+    downloadedArtifactMatches(
+      {...selected, path: '.github/workflows/jekyll-gh-pages.yml'},
+      {},
+    ),
+    true,
+  );
+  assert.equal(
+    downloadedArtifactMatches(
+      {
+        ...selected,
+        attempt: 2,
+        path: '.github/workflows/jekyll-gh-pages.yml',
+      },
+      {},
+    ),
+    false,
+  );
+  assert.match(
+    retainStep,
+    /tar -xOf prior-download\/artifact\.tar \.\/deployment\.json/,
+  );
+  assert.match(
+    retainStep,
+    /\.sourceSha == \$sourceSha\s+and \.archiveRunId == \$archiveRunId\s+and \.archiveRunAttempt == \$archiveRunAttempt[\s\S]*?prior-download\/deployment\.json/,
+  );
+  assert.match(
+    retainStep,
+    /"\$PRIOR_RUN_ATTEMPT" != 1[\s\S]*?rerun legacy artifact cannot prove its exact attempt/,
   );
 });
 
