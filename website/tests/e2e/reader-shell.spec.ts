@@ -127,7 +127,7 @@ test('homepage quick-start and language paths open their dedicated guides', asyn
     {
       heading: 'Supported cultures',
       link: 'See supported cultures',
-      path: '/docs/next/languages/supported-cultures/',
+      path: '/docs/languages/supported-cultures/',
     },
   ]) {
     await page.goto('/');
@@ -200,6 +200,18 @@ test('version not found preserves the requested API path and target version', as
   await expect(
     page.getByRole('link', {name: 'Guides', exact: true}),
   ).toHaveAttribute('href', '/docs/next/');
+  await expect(
+    page.getByRole('link', {name: 'Run the five-minute example'}),
+  ).toHaveAttribute('href', '/docs/next/start/quick-start/');
+  await expect(
+    page.getByRole('link', {name: 'See supported cultures'}),
+  ).toHaveAttribute('href', '/docs/next/languages/supported-cultures/');
+  await expect(
+    page.getByRole('link', {name: 'Open the guides'}),
+  ).toHaveAttribute('href', '/docs/next/');
+  await expect(
+    page.getByRole('link', {name: 'Browse exact signatures'}),
+  ).toHaveAttribute('href', '/docs/next/api/');
 
   await page.goto('/docs/next/api/Humanizer.ByteSize/');
   await page.locator('.humanizerVersionDropdown').focus();

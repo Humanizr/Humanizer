@@ -10,8 +10,13 @@
  * decorative metrics, or invented product imagery.
  */
 import Link from '@docusaurus/Link';
+import {
+  useLatestVersion,
+  useVersions,
+} from '@docusaurus/plugin-content-docs/client';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
+import {useEffect, useState} from 'react';
 import styles from './index.module.css';
 
 const transformations = [
@@ -38,29 +43,43 @@ const taskRoutes = [
     title: 'Strings',
     prompt: 'Identifiers, casing, pluralization',
     sample: '.Humanize()  .Pluralize()  .Singularize()',
-    to: '/docs/scenarios/strings-and-casing/',
+    to: 'scenarios/strings-and-casing/',
   },
   {
     title: 'Dates & time',
     prompt: 'Relative time, durations, ages, clocks',
     sample: '.Humanize()  .ToAge()  .ToClockNotation()',
-    to: '/docs/scenarios/dates-times-durations-and-age/',
+    to: 'scenarios/dates-times-durations-and-age/',
   },
   {
     title: 'Numbers',
     prompt: 'Words, ordinals, quantities, byte sizes',
     sample: '.ToWords()  .Ordinalize()  .Bytes()',
-    to: '/docs/scenarios/numbers-words-ordinals-roman-bytes-and-quantities/',
+    to: 'scenarios/numbers-words-ordinals-roman-bytes-and-quantities/',
   },
   {
     title: 'Application values',
     prompt: 'Enums, flags, collections',
     sample: '.Humanize()  .DehumanizeTo<T>()',
-    to: '/docs/scenarios/enums-and-collections/',
+    to: 'scenarios/enums-and-collections/',
   },
 ];
 
 export default function Home(): React.JSX.Element {
+  const versions = useVersions(undefined);
+  const latestVersion = useLatestVersion(undefined);
+  const [docsVersion, setDocsVersion] = useState(latestVersion);
+
+  useEffect(() => {
+    const preferredVersionName = localStorage.getItem(
+      'docs-preferred-version-default',
+    );
+    setDocsVersion(
+      versions.find(({name}) => name === preferredVersionName) ?? latestVersion,
+    );
+  }, [latestVersion, versions]);
+
+  const docsPath = (path: string) => `${docsVersion.path}/${path}`;
   const logoUrl = useBaseUrl('/img/logo.png');
 
   return (
@@ -87,10 +106,10 @@ export default function Home(): React.JSX.Element {
               every supported culture.
             </p>
             <div className={styles.heroActions}>
-              <Link className="button button--primary" to="/docs/start/quick-start/">
+              <Link className="button button--primary" to={docsPath('start/quick-start/')}>
                 Run the five-minute example
               </Link>
-              <Link className={styles.textLink} to="/docs/scenarios/">
+              <Link className={styles.textLink} to={docsPath('scenarios/')}>
                 Find an API by task <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -130,7 +149,7 @@ export default function Home(): React.JSX.Element {
           </div>
           <div className={styles.taskList}>
             {taskRoutes.map(({title, prompt, sample, to}) => (
-              <Link className={styles.task} key={title} to={to}>
+              <Link className={styles.task} key={title} to={docsPath(to)}>
                 <div>
                   <h3>{title}</h3>
                   <p>{prompt}</p>
@@ -147,12 +166,12 @@ export default function Home(): React.JSX.Element {
           <div>
             <h2 id="languages-title">Supported means supported.</h2>
             <p>
-              Every listed culture supports every applicable localized
-              feature. Missing behavior or English fallback is a bug, not a
-              capability tier.
+              Humanizer 4 makes one promise: every listed culture supports
+              every applicable localized feature. Missing behavior or English
+              fallback is a bug, not a capability tier.
             </p>
           </div>
-          <Link className={styles.textLink} to="/docs/next/languages/supported-cultures/">
+          <Link className={styles.textLink} to={docsPath('languages/supported-cultures/')}>
             See supported cultures <span aria-hidden="true">→</span>
           </Link>
         </section>
@@ -167,10 +186,10 @@ export default function Home(): React.JSX.Element {
             search results, and generated API reference follow that package.
           </p>
           <div className={styles.referenceLinks}>
-            <Link className="button button--primary" to="/docs/">
+            <Link className="button button--primary" to={docsPath('')}>
               Open the guides
             </Link>
-            <Link className={styles.textLink} to="/docs/api/">
+            <Link className={styles.textLink} to={docsPath('api/')}>
               Browse exact signatures <span aria-hidden="true">→</span>
             </Link>
           </div>
