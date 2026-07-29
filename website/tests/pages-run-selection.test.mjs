@@ -668,6 +668,54 @@ test('candidate staging tolerates eventual release-list visibility', () => {
   assert.notEqual(select([[candidate, candidate]]).status, 0);
 });
 
+test('final publication tolerates eventual release-list visibility', () => {
+  const sourceSha = '0123456789abcdef0123456789abcdef01234567';
+  const record = normalizedWorkflow
+    .split('\n  record-production-deployment:\n')[1]
+    .split('\n  recover-after-production-failure:\n')[0];
+  const filter = record.match(
+    /jq -r --arg tag "\$pointer_tag" '\n([\s\S]*?)\n\s+'/,
+  )?.[1];
+  assert.ok(filter);
+  assert.match(
+    record,
+    /for attempt in \{1\.\.10\}; do[\s\S]*?release="\$\(find_final_release\)"[\s\S]*?\[\[ -n "\$release" \]\] && break[\s\S]*?sleep 1/,
+  );
+
+  const finalRelease = {
+    assets: [
+      {name: 'github-pages-200-1.tar.sha256'},
+      {name: 'deployment-200-1.json'},
+      {name: 'github-pages-200-1.tar'},
+    ],
+    draft: true,
+    id: 400,
+    immutable: false,
+    tag_name: 'docs-pages-deployment-v1-200-1',
+    target_commitish: sourceSha,
+  };
+  const select = (pages) =>
+    spawnSync(
+      'jq',
+      ['-r', '--arg', 'tag', finalRelease.tag_name, filter],
+      {
+        encoding: 'utf8',
+        input: JSON.stringify(pages),
+      },
+    );
+
+  const absent = select([[]]);
+  assert.equal(absent.status, 0, absent.stderr);
+  assert.equal(absent.stdout, '');
+  const visible = select([[finalRelease]]);
+  assert.equal(visible.status, 0, visible.stderr);
+  assert.equal(
+    visible.stdout.trimEnd(),
+    `400\ttrue\tfalse\t${sourceSha}\t3\tdeployment-200-1.json,github-pages-200-1.tar,github-pages-200-1.tar.sha256`,
+  );
+  assert.notEqual(select([[finalRelease, finalRelease]]).status, 0);
+});
+
 test('immutable releases contain exactly archive, checksum, and manifest', () => {
   assert.doesNotMatch(normalizedWorkflow, /gh release upload/);
   assert.doesNotMatch(normalizedWorkflow, /--method DELETE/);

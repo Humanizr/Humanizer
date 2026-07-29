@@ -1653,7 +1653,7 @@ jobs:
             "$GITHUB_RUN_ATTEMPT" \
             > "final/${pointer_name}"
           pointer_tag="docs-pages-deployment-v1-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-          release="$(
+          find_final_release() {
             gh api \
               --paginate \
               --slurp \
@@ -1675,10 +1675,11 @@ jobs:
                     .target_commitish,
                     (.assets | length),
                     ([.assets[].name] | sort | join(","))
-                  ]
+                ]
                 | @tsv
               '
-          )"
+          }
+          release="$(find_final_release)"
           if [[ -z "$release" ]]; then
             gh release create "$pointer_tag" \
               "final/${archive_name}" \
@@ -1690,33 +1691,16 @@ jobs:
               --target "$SOURCE_SHA" \
               --title "Documentation deployment ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}" \
               --notes "Automation-owned exact deployment release."
+            for attempt in {1..10}; do
+              release="$(find_final_release)"
+              [[ -n "$release" ]] && break
+              sleep 1
+            done
           fi
-          release="$(
-            gh api \
-              --paginate \
-              --slurp \
-              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
-              jq -r --arg tag "$pointer_tag" '
-                [
-                  .[][]
-                  | select(.tag_name == $tag)
-                ]
-                | if length != 1 then
-                    error("final release is unavailable or duplicated")
-                  else
-                    first
-                  end
-                | [
-                    .id,
-                    .draft,
-                    .immutable,
-                    .target_commitish,
-                    (.assets | length),
-                    ([.assets[].name] | sort | join(","))
-                  ]
-                | @tsv
-              '
-          )"
+          if [[ -z "$release" ]]; then
+            echo "Final release did not become visible." >&2
+            exit 1
+          fi
           IFS=$'\t' read -r release_id draft immutable target \
             asset_count asset_names <<<"$release"
           if [[ ! "$release_id" =~ ^[0-9]+$ ||
