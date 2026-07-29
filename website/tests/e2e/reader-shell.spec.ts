@@ -530,7 +530,10 @@ test('static redirect documents remap fragments after directory normalization', 
   await page.route('**/docs/quick-start.md/**', (route) =>
     route.fulfill({
       contentType: 'text/html',
-      path: path.resolve('build/docs/quick-start.md/index.html'),
+      path: path.resolve(
+        __dirname,
+        '../../build/docs/quick-start.md/index.html',
+      ),
     }),
   );
 
