@@ -42,7 +42,7 @@ function selectPrior(workflowRuns) {
 
 function deploymentAssets(manifest) {
   return [
-    `deployment-${manifest.deploymentRunId}-${manifest.deploymentRunAttempt}.json`,
+    `deployment-${manifest.deploymentRunId}-${manifest.publicationRunAttempt}.json`,
     `github-pages-${manifest.archiveRunId}-${manifest.archiveRunAttempt}.tar`,
     `github-pages-${manifest.archiveRunId}-${manifest.archiveRunAttempt}.tar.sha256`,
   ].sort();
@@ -53,19 +53,25 @@ function release({
   archiveRunId = 100,
   deploymentAttempt = 1,
   deploymentRunId = 200,
+  deployAttempt = deploymentAttempt,
   digestValid = true,
   draft = false,
   immutable = true,
   publishedAt = deploymentAttempt,
+  smokeAttempt = deploymentAttempt,
   sourceSha = '0123456789abcdef0123456789abcdef01234567',
+  stageAttempt = deploymentAttempt,
 }) {
   const manifest = {
     archiveRunAttempt: archiveAttempt,
     archiveRunId,
-    deploymentRunAttempt: deploymentAttempt,
     deploymentRunId,
+    deployRunAttempt: deployAttempt,
+    publicationRunAttempt: deploymentAttempt,
     schemaVersion: 1,
+    smokeRunAttempt: smokeAttempt,
     sourceSha,
+    stageRunAttempt: stageAttempt,
   };
 
   return {
@@ -87,7 +93,7 @@ function validRelease(candidate) {
     candidate.digestValid &&
     manifest.schemaVersion === 1 &&
     candidate.tag ===
-      `docs-pages-deployment-v1-${manifest.deploymentRunId}-${manifest.deploymentRunAttempt}` &&
+      `docs-pages-deployment-v1-${manifest.deploymentRunId}-${manifest.publicationRunAttempt}` &&
     candidate.assets.join() === deploymentAssets(manifest).join()
   );
 }
@@ -104,11 +110,18 @@ function selectRollback(releases, runId, attempt) {
     .at(-1);
 }
 
-function validAttempt({conclusion, jobs, required}) {
+function validEvidence(candidate, {archiveAttempts, deploymentAttempts}) {
+  const manifest = candidate.manifest;
+  const publication = deploymentAttempts[manifest.publicationRunAttempt];
   return (
-    conclusion === 'success' ||
-    (conclusion === 'failure' &&
-      required.every((name) => jobs[name] === 'success'))
+    validRelease(candidate) &&
+    ['success', 'failure'].includes(publication?.conclusion) &&
+    archiveAttempts[manifest.archiveRunAttempt]?.build === 'success' &&
+    deploymentAttempts[manifest.stageRunAttempt]?.['stage-pages-release'] ===
+      'success' &&
+    deploymentAttempts[manifest.deployRunAttempt]?.deploy === 'success' &&
+    deploymentAttempts[manifest.smokeRunAttempt]?.['production-smoke'] ===
+      'success'
   );
 }
 
@@ -194,7 +207,7 @@ test('deployment release stays draft until production is verified', () => {
     .split('\n  record-production-deployment:\n')[1]
     .split('\n  recover-after-production-failure:\n')[0];
 
-  assert.match(stage, /docs-pages-deployment-v1-\$\{GITHUB_RUN_ID\}-\$\{GITHUB_RUN_ATTEMPT\}/);
+  assert.match(stage, /docs-pages-candidate-v1-\$\{GITHUB_RUN_ID\}-\$\{GITHUB_RUN_ATTEMPT\}/);
   assert.match(stage, /gh release create "\$release_tag"[\s\S]*?--draft/);
   assert.match(deploy, /needs\.stage-pages-release\.result == 'success'/);
   assert.match(record, /needs\.production-smoke\.result == 'success'/);
@@ -208,6 +221,10 @@ test('immutable releases contain exactly archive, checksum, and manifest', () =>
   assert.match(
     normalizedWorkflow,
     /gh release create "\$release_tag" \\\n\s+"candidate\/\$\{archive_name\}" \\\n\s+"candidate\/\$\{checksum_name\}" \\\n\s+"candidate\/\$\{pointer_name\}"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /gh release create "\$pointer_tag" \\\n\s+"final\/\$\{archive_name\}" \\\n\s+"final\/\$\{checksum_name\}" \\\n\s+"final\/\$\{pointer_name\}"/,
   );
   assert.match(normalizedWorkflow, /"\$asset_count" != 3/);
   assert.match(
@@ -290,25 +307,79 @@ test('failed smoke or publication dispatches exact prior recovery', () => {
   );
 });
 
-test('failed-job reruns preserve the staged archive and release identity', () => {
-  const staged = release({
-    deploymentAttempt: 1,
+test('stage attempt one can publish after deploy and smoke succeed on attempt two', () => {
+  const published = release({
+    deploymentAttempt: 2,
     deploymentRunId: 300,
-    draft: true,
-    immutable: false,
+    deployAttempt: 2,
+    smokeAttempt: 2,
+    stageAttempt: 1,
   });
-  const currentAttempt = 2;
+  const evidence = {
+    archiveAttempts: {1: {build: 'success'}},
+    deploymentAttempts: {
+      1: {
+        conclusion: 'failure',
+        deploy: 'failure',
+        'stage-pages-release': 'success',
+      },
+      2: {
+        conclusion: 'success',
+        deploy: 'success',
+        'production-smoke': 'success',
+        'record-production-deployment': 'success',
+      },
+    },
+  };
 
-  assert.equal(staged.manifest.deploymentRunAttempt, 1);
-  assert.notEqual(staged.manifest.deploymentRunAttempt, currentAttempt);
-  assert.doesNotMatch(
+  assert.equal(validEvidence(published, evidence), true);
+  assert.equal(published.manifest.stageRunAttempt, 1);
+  assert.equal(published.manifest.deployRunAttempt, 2);
+  assert.equal(published.manifest.smokeRunAttempt, 2);
+  assert.equal(published.manifest.publicationRunAttempt, 2);
+  assert.match(
     normalizedWorkflow,
-    /if \[\[ "\$source_attempt" != "\$GITHUB_RUN_ATTEMPT" \]\]; then/,
+    /release_prefix="docs-pages-candidate-v1-\$\{GITHUB_RUN_ID\}-"/,
   );
   assert.match(
     normalizedWorkflow,
-    /pointer_tag="\$source_tag"/,
+    /pointer_tag="docs-pages-deployment-v1-\$\{GITHUB_RUN_ID\}-\$\{GITHUB_RUN_ATTEMPT\}"/,
   );
+});
+
+test('stage and deploy attempt one can publish after smoke succeeds on attempt two', () => {
+  const published = release({
+    deploymentAttempt: 2,
+    deploymentRunId: 301,
+    deployAttempt: 1,
+    smokeAttempt: 2,
+    stageAttempt: 1,
+  });
+  const evidence = {
+    archiveAttempts: {1: {build: 'success'}},
+    deploymentAttempts: {
+      1: {
+        conclusion: 'failure',
+        deploy: 'success',
+        'production-smoke': 'failure',
+        'stage-pages-release': 'success',
+      },
+      2: {
+        conclusion: 'success',
+        'production-smoke': 'success',
+        'record-production-deployment': 'success',
+      },
+    },
+  };
+
+  assert.equal(validEvidence(published, evidence), true);
+  assert.equal(published.manifest.deployRunAttempt, 1);
+  assert.equal(published.manifest.smokeRunAttempt, 2);
+});
+
+test('publication remains bound to exact archive production identity', () => {
+  const staged = release({deploymentRunId: 302});
+
   assert.match(
     normalizedWorkflow,
     /ARCHIVE_RUN_ATTEMPT: \$\{\{ needs\.build\.outputs\.archive_run_attempt \}\}/,
@@ -350,7 +421,7 @@ test('failed-job reruns preserve the staged archive and release identity', () =>
     .split('\n  recover-after-production-failure:\n')[0];
   const currentProductionGuard = record
     .split('> current-production.json')[1]
-    ?.split('pointer_name="$source_pointer_name"')[0];
+    ?.split('mkdir final')[0];
   assert.ok(currentProductionGuard);
   assert.match(
     currentProductionGuard,
@@ -381,79 +452,96 @@ test('ambiguous publication recovers the remotely published candidate', () => {
   );
 });
 
-test('future selection accepts a published pointer after record failure', () => {
-  const jobs = {
-    build: 'success',
-    deploy: 'success',
-    'production-smoke': 'success',
-    'record-production-deployment': 'failure',
-    'stage-pages-release': 'success',
+test('remote publication remains selectable after the record client fails', () => {
+  const published = release({deploymentRunId: 400});
+  const evidence = {
+    archiveAttempts: {1: {build: 'success'}},
+    deploymentAttempts: {
+      1: {
+        conclusion: 'failure',
+        deploy: 'success',
+        'production-smoke': 'success',
+        'record-production-deployment': 'failure',
+        'stage-pages-release': 'success',
+      },
+    },
   };
 
-  assert.equal(
-    validAttempt({
-      conclusion: 'failure',
-      jobs,
-      required: ['deploy', 'production-smoke', 'stage-pages-release'],
-    }),
-    true,
-  );
-  assert.equal(
-    validAttempt({
-      conclusion: 'failure',
-      jobs,
-      required: ['build'],
-    }),
-    true,
-  );
-  assert.equal(
-    validAttempt({
-      conclusion: 'failure',
-      jobs: {...jobs, 'production-smoke': 'failure'},
-      required: ['deploy', 'production-smoke', 'stage-pages-release'],
-    }),
-    false,
-  );
-  assert.equal(
-    validAttempt({
-      conclusion: 'cancelled',
-      jobs,
-      required: ['deploy', 'production-smoke', 'stage-pages-release'],
-    }),
-    false,
-  );
-  assert.equal(
-    validAttempt({
-      conclusion: 'timed_out',
-      jobs,
-      required: ['build'],
-    }),
-    false,
-  );
+  assert.equal(validEvidence(published, evidence), true);
   assert.match(
     normalizedWorkflow,
-    /actions\/runs\/\$\{deployment_run_id\}\/attempts\/\$\{deployment_run_attempt\}\/jobs/,
+    /"\$pointer_conclusion" != success &&\s+"\$pointer_conclusion" != failure/,
   );
+});
+
+test('every publication phase rejects missing or non-success evidence', () => {
+  const published = release({deploymentRunId: 401});
+  const valid = {
+    archiveAttempts: {1: {build: 'success'}},
+    deploymentAttempts: {
+      1: {
+        conclusion: 'success',
+        deploy: 'success',
+        'production-smoke': 'success',
+        'stage-pages-release': 'success',
+      },
+    },
+  };
+
+  for (const status of [
+    undefined,
+    'failure',
+    'cancelled',
+    'timed_out',
+    'action_required',
+    null,
+  ]) {
+    for (const phase of [
+      ['archiveAttempts', 'build'],
+      ['deploymentAttempts', 'stage-pages-release'],
+      ['deploymentAttempts', 'deploy'],
+      ['deploymentAttempts', 'production-smoke'],
+    ]) {
+      const evidence = structuredClone(valid);
+      evidence[phase[0]][1][phase[1]] = status;
+      assert.equal(validEvidence(published, evidence), false);
+    }
+  }
+  for (const conclusion of [
+    undefined,
+    'cancelled',
+    'timed_out',
+    'action_required',
+    null,
+  ]) {
+    const evidence = structuredClone(valid);
+    evidence.deploymentAttempts[1].conclusion = conclusion;
+    assert.equal(validEvidence(published, evidence), false);
+  }
   assert.match(
     normalizedWorkflow,
-    /"\$pointer_jobs" != "deploy,production-smoke,stage-pages-release"/,
+    /actions\/runs\/\$\{deployment_run_id\}\/attempts\/\$\{phase_attempt\}\/jobs/,
   );
   assert.match(
     normalizedWorkflow,
     /"\$archive_jobs" != "build"/,
   );
-  assert.match(
-    normalizedWorkflow,
-    /"\$conclusion" != failure[\s\S]*?Incomplete workflow attempts are not rollback sources/,
-  );
-  assert.match(
-    normalizedWorkflow,
-    /"\$pointer_conclusion" != failure[\s\S]*?Incomplete workflow attempts are not deployment pointers/,
-  );
-  assert.match(
-    normalizedWorkflow,
-    /"\$archive_conclusion" != failure[\s\S]*?Incomplete workflow attempts are not archive sources/,
-  );
+});
+
+test('a full rerun publishes its new attempt-two candidate', () => {
+  const first = release({deploymentRunId: 402});
+  const second = release({
+    archiveAttempt: 2,
+    deploymentAttempt: 2,
+    deploymentRunId: 402,
+    deployAttempt: 2,
+    smokeAttempt: 2,
+    stageAttempt: 2,
+  });
+
+  assert.equal(second.manifest.stageRunAttempt, 2);
+  assert.notEqual(second.assets.join(), first.assets.join());
+  assert.match(normalizedWorkflow, /sort_by\(\.deployment_attempt\)[\s\S]*?\(last \/\/ empty\)/);
 });
 
 test('older attempts remain exact rollback sources after reruns', () => {
@@ -495,7 +583,7 @@ test('rollback guidance uses the archive identity after redeployment', () => {
 
   assert.notEqual(
     rolledForward.manifest.archiveRunAttempt,
-    rolledForward.manifest.deploymentRunAttempt,
+    rolledForward.manifest.publicationRunAttempt,
   );
   assert.match(deploymentGuide, /jq -r \.archiveRunId/);
   assert.match(deploymentGuide, /jq -r \.archiveRunAttempt/);
