@@ -501,7 +501,11 @@ jobs:
               github.sha
             }}
         run: |
-          printf '{"sourceSha":"%s"}\n' "$SOURCE_SHA" \
+          printf \
+            '{"sourceSha":"%s","deploymentRunId":%s,"deploymentRunAttempt":%s}\n' \
+            "$SOURCE_SHA" \
+            "$GITHUB_RUN_ID" \
+            "$GITHUB_RUN_ATTEMPT" \
             > website/build/deployment.json
           echo "source_sha=${SOURCE_SHA}" >> "$GITHUB_OUTPUT"
 
@@ -1353,6 +1357,27 @@ jobs:
                 "$deployment_run_attempt" != "$source_attempt" ||
                 "$asset_names" != "${source_pointer_name},${archive_name},${checksum_name}" ]]; then
             echo "Deployment candidate manifest is invalid." >&2
+            exit 1
+          fi
+          curl \
+            --fail \
+            --header "Cache-Control: no-cache" \
+            --retry 4 \
+            --retry-all-errors \
+            --retry-delay 2 \
+            --show-error \
+            --silent \
+            "https://humanizr.net/deployment.json?run=${deployment_run_id}&attempt=${deployment_run_attempt}" \
+            > current-production.json
+          if ! jq -e \
+            --arg sourceSha "$SOURCE_SHA" \
+            --argjson deploymentRunId "$deployment_run_id" \
+            --argjson deploymentRunAttempt "$deployment_run_attempt" \
+            '.sourceSha == $sourceSha
+              and .deploymentRunId == $deploymentRunId
+              and .deploymentRunAttempt == $deploymentRunAttempt' \
+            current-production.json >/dev/null; then
+            echo "Production no longer matches the deployment candidate." >&2
             exit 1
           fi
 

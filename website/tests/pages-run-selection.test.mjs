@@ -110,6 +110,14 @@ function validAttempt({conclusion, jobs}) {
   );
 }
 
+function productionMatchesCandidate(production, candidate) {
+  return (
+    production.sourceSha === candidate.sourceSha &&
+    production.deploymentRunId === candidate.deploymentRunId &&
+    production.deploymentRunAttempt === candidate.deploymentRunAttempt
+  );
+}
+
 const legacyRun = {
   created_at: '2026-07-28T18:17:11Z',
   head_sha: 'e7a24480ea2e5f796a0528842ef3f2743af4e59a',
@@ -294,6 +302,22 @@ test('failed-job reruns roll the staged attempt forward', () => {
   assert.match(
     normalizedWorkflow,
     /pointer_tag="\$\{release_prefix\}\$\{GITHUB_RUN_ATTEMPT\}"/,
+  );
+  assert.equal(productionMatchesCandidate(staged.manifest, staged.manifest), true);
+  assert.equal(
+    productionMatchesCandidate(
+      {
+        ...staged.manifest,
+        deploymentRunId: 299,
+        deploymentRunAttempt: 1,
+      },
+      staged.manifest,
+    ),
+    false,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /\.deploymentRunId == \$deploymentRunId\s+and \.deploymentRunAttempt == \$deploymentRunAttempt/,
   );
 });
 
