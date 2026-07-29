@@ -338,7 +338,8 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         decimal count,
         CardinalPluralCategory category) =>
         profile.PrepositionMode == FormatterPrepositionMode.RomanianDe &&
-        dataUnit is >= DataUnit.DecimalKilobyte and <= DataUnit.BinaryPebibyte &&
+        (dataUnit is DataUnit.Bit or DataUnit.Byte ||
+         dataUnit is >= DataUnit.DecimalKilobyte and <= DataUnit.BinaryPebibyte) &&
         ShouldUseRomanianPreposition(count)
             ? "de "
             : string.Empty;

@@ -689,6 +689,24 @@ public class ByteSizeUnitSystemTests
     }
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", ByteSize.BytesInDecimalMegabyte)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", ByteSize.BytesInMebibyte)]
+    public void ParsesScientificExplicitOutput(
+        ByteSizeUnitSystem unitSystem,
+        string symbol,
+        double bytes)
+    {
+        var size = ByteSize.FromBytes(bytes);
+        var formatted = size.Format(unitSystem, $"E0 {symbol}", CultureInfo.InvariantCulture);
+
+        Assert.Equal(size, ByteSize.ParseWithUnitSystem(formatted, unitSystem, CultureInfo.InvariantCulture));
+        Assert.Equal(
+            15,
+            ByteSize.ParseWithUnitSystem("1.5E+001 b", unitSystem, CultureInfo.InvariantCulture).Bits);
+        Assert.False(ByteSize.TryParseWithUnitSystem("1.5E-001 b", unitSystem, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Theory]
     [InlineData(long.MaxValue, ByteSizeUnitSystem.DecimalSi, "9223372036854775807 b")]
     [InlineData(long.MinValue, ByteSizeUnitSystem.DecimalSi, "-9223372036854775808 b")]
     [InlineData(long.MaxValue, ByteSizeUnitSystem.BinaryIec, "9223372036854775807 b")]

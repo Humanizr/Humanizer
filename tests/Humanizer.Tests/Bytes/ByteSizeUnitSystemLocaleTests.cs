@@ -154,6 +154,44 @@ public class ByteSizeUnitSystemLocaleTests
     }
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void RomanianExplicitSharedUnitWordsUseDeAtNumericBoundaries(ByteSizeUnitSystem unitSystem)
+    {
+        var culture = CultureInfo.GetCultureInfo("ro");
+        Assert.Equal(
+            "0 de bit",
+            ByteSize.FromBits(0).HumanizeCompositeWithUnitSystem(
+                unitSystem,
+                precision: 1,
+                formatProvider: culture,
+                toWords: true));
+
+        foreach (var (count, usesDe) in new[]
+                 {
+                     (0, true),
+                     (19, false),
+                     (20, true),
+                     (21, true),
+                     (101, false),
+                     (120, true)
+                 })
+        {
+            verify(ByteSize.FromBits(count), "b", "bit", count, usesDe);
+            verify(ByteSize.FromBytes(count), "B", count == 1 ? "byte" : "bytes", count, usesDe);
+        }
+
+        void verify(ByteSize size, string symbol, string unitWord, int count, bool usesDe)
+        {
+            var expected = usesDe
+                ? $"{count} de {unitWord}"
+                : $"{count} {unitWord}";
+
+            Assert.Equal(expected, size.FormatFullWords(unitSystem, $"0 {symbol}", culture));
+        }
+    }
+
+    [Theory]
     [InlineData(ByteSizeUnitSystem.DecimalSi, ByteSize.BytesInDecimalKilobyte, "kilobyți")]
     [InlineData(ByteSizeUnitSystem.BinaryIec, ByteSize.BytesInKibibyte, "kibibyți")]
     public void RomanianExplicitWordCompositesUseDeAtNumericBoundaries(
@@ -186,24 +224,35 @@ public class ByteSizeUnitSystemLocaleTests
                     toWords: true));
         }
 
-        var multipart = ByteSize.FromBytes(20 * bytesPerUnit + 1);
-        var expectedMultipart = $"20 de {unitWord} 1 byte";
-        Assert.Equal(
-            expectedMultipart,
-            multipart.HumanizeCompositeWithUnitSystem(
-                unitSystem,
-                precision: 2,
-                formatProvider: culture,
-                toWords: true));
-
         var negativeSign = NumberFormatInfo.GetInstance(culture).NegativeSign;
-        Assert.Equal(
-            negativeSign + expectedMultipart,
-            (-multipart).HumanizeCompositeWithUnitSystem(
-                unitSystem,
-                precision: 2,
-                formatProvider: culture,
-                toWords: true));
+        foreach (var (byteCount, usesDe) in new[]
+                 {
+                     (19, false),
+                     (20, true),
+                     (21, true),
+                     (101, false),
+                     (120, true)
+                 })
+        {
+            var multipart = ByteSize.FromBytes(20 * bytesPerUnit + byteCount);
+            var bytePhrase = usesDe ? $"{byteCount} de bytes" : $"{byteCount} bytes";
+            var expected = $"20 de {unitWord} {bytePhrase}";
+
+            Assert.Equal(
+                expected,
+                multipart.HumanizeCompositeWithUnitSystem(
+                    unitSystem,
+                    precision: 2,
+                    formatProvider: culture,
+                    toWords: true));
+            Assert.Equal(
+                negativeSign + expected,
+                (-multipart).HumanizeCompositeWithUnitSystem(
+                    unitSystem,
+                    precision: 2,
+                    formatProvider: culture,
+                    toWords: true));
+        }
     }
 
     [Theory]

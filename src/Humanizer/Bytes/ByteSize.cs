@@ -1655,9 +1655,20 @@ public struct ByteSize(double byteSize) :
 
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
         var lastNumber = 0;
-        while (lastNumber < s.Length &&
-               (char.IsDigit(s[lastNumber]) || IsNumberFormatCharacter(s[lastNumber], numberFormat)))
+        while (lastNumber < s.Length)
         {
+            if (!char.IsDigit(s[lastNumber]) &&
+                !IsNumberFormatCharacter(s[lastNumber], numberFormat))
+            {
+                if (!TryGetExponentLength(s[lastNumber..], numberFormat, out var exponentLength))
+                {
+                    break;
+                }
+
+                lastNumber += exponentLength;
+                continue;
+            }
+
             lastNumber++;
         }
 
@@ -1673,7 +1684,7 @@ public struct ByteSize(double byteSize) :
             return false;
         }
 
-        const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign;
+        const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign | AllowExponent;
         if (!double.TryParse(
 #if NET
             numberPart,
@@ -1739,6 +1750,48 @@ public struct ByteSize(double byteSize) :
         }
 
         return false;
+    }
+
+    static bool TryGetExponentLength(CharSpan value, NumberFormatInfo numberFormat, out int length)
+    {
+        length = 0;
+        if (value.IsEmpty || value[0] is not ('E' or 'e'))
+        {
+            return false;
+        }
+
+        var current = 1;
+        if (!TryConsumeNumberFormatToken(value, ref current, numberFormat.PositiveSign))
+        {
+            TryConsumeNumberFormatToken(value, ref current, numberFormat.NegativeSign);
+        }
+
+        var digitStart = current;
+        while (current < value.Length && char.IsDigit(value[current]))
+        {
+            current++;
+        }
+
+        if (current == digitStart)
+        {
+            return false;
+        }
+
+        length = current;
+        return true;
+    }
+
+    static bool TryConsumeNumberFormatToken(CharSpan value, ref int current, string token)
+    {
+        if (token.Length == 0 ||
+            value.Length - current < token.Length ||
+            !value.Slice(current, token.Length).SequenceEqual(token))
+        {
+            return false;
+        }
+
+        current += token.Length;
+        return true;
     }
 
     static bool IsNumberFormatCharacter(char value, NumberFormatInfo numberFormat) =>
