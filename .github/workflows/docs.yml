@@ -371,10 +371,7 @@ jobs:
               jq -r '
                 [
                   .[].workflow_runs[]
-                  | select(
-                      .path == ".github/workflows/docs.yml"
-                      and .run_attempt == 1
-                    )
+                  | select(.path == ".github/workflows/docs.yml")
                 ]
                 | sort_by(.created_at)
                 | last
@@ -385,10 +382,7 @@ jobs:
               jq -r '
                 [
                   .[].workflow_runs[]
-                  | select(
-                      .path == ".github/workflows/jekyll-gh-pages.yml"
-                      and .run_attempt == 1
-                    )
+                  | select(.path == ".github/workflows/jekyll-gh-pages.yml")
                 ]
                 | sort_by(.created_at)
                 | last
@@ -926,10 +920,7 @@ jobs:
                   jq -r '
                     [
                       .[].workflow_runs[]
-                      | select(
-                          .path == ".github/workflows/docs.yml"
-                          and .run_attempt == 1
-                        )
+                      | select(.path == ".github/workflows/docs.yml")
                     ]
                     | sort_by(.created_at)
                     | last
@@ -940,10 +931,7 @@ jobs:
                   jq -r '
                     [
                       .[].workflow_runs[]
-                      | select(
-                          .path == ".github/workflows/jekyll-gh-pages.yml"
-                          and .run_attempt == 1
-                        )
+                      | select(.path == ".github/workflows/jekyll-gh-pages.yml")
                     ]
                     | sort_by(.created_at)
                     | last

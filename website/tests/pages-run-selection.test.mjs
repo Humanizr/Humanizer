@@ -21,6 +21,13 @@ const locateStep = normalizedWorkflow
 const fallbackSelection = locateStep.slice(
   locateStep.indexOf('if [[ -z "$prior" ]]; then'),
 );
+const legacyPointerPolicy = locateStep.slice(
+  0,
+  locateStep.indexOf('if [[ -z "$prior" ]]; then'),
+);
+const rollbackSourceStep = normalizedWorkflow
+  .split('- name: Validate rollback source')[1]
+  .split('- name: Restore retained Pages artifact')[0];
 const retainStep = normalizedWorkflow
   .split('- name: Retain and verify prior Pages artifact')[1]
   .split('  stage-pages-release:')[0];
@@ -41,6 +48,18 @@ function selectRun(filter, workflowRuns) {
 function selectPrior(workflowRuns) {
   const documentation = selectRun(filters[0], workflowRuns);
   return documentation || selectRun(filters[1], workflowRuns);
+}
+
+function legacyIsCurrent(workflowRuns, legacyId) {
+  const documentation = workflowRuns.filter(
+    ({path}) => path === '.github/workflows/docs.yml',
+  );
+  const latestLegacy = workflowRuns
+    .filter(({path}) => path === '.github/workflows/jekyll-gh-pages.yml')
+    .sort((left, right) => left.created_at.localeCompare(right.created_at))
+    .at(-1);
+
+  return documentation.length === 0 && latestLegacy?.id === legacyId;
 }
 
 function deploymentAssets(manifest) {
@@ -343,6 +362,34 @@ test('bootstrap selection skips reruns and continues to an older provable source
     selectPrior([legacyRun, rerun]),
     `${legacyRun.id}\t1\t${legacyRun.head_sha}\t${legacyRun.path}`,
   );
+  assert.equal(
+    filters.every((filter) => filter.includes('.run_attempt == 1')),
+    true,
+  );
+});
+
+test('a modern attempt-two deployment supersedes legacy policy but is not a bootstrap download', () => {
+  const modernRerun = {
+    ...legacyRun,
+    created_at: '2026-07-29T02:00:00Z',
+    id: 30420000000,
+    path: '.github/workflows/docs.yml',
+    run_attempt: 2,
+  };
+  const rollbackSupersession = rollbackSourceStep
+    .split('latest_docs_run="$(')[1]
+    .split('latest_legacy_run="$(')[0];
+  const pointerSupersession = legacyPointerPolicy
+    .split('latest_docs_run="$(')[1]
+    .split('latest_legacy_run="$(')[0];
+
+  assert.equal(legacyIsCurrent([legacyRun, modernRerun], legacyRun.id), false);
+  assert.equal(
+    selectPrior([legacyRun, modernRerun]),
+    `${legacyRun.id}\t1\t${legacyRun.head_sha}\t${legacyRun.path}`,
+  );
+  assert.doesNotMatch(rollbackSupersession, /run_attempt == 1/);
+  assert.doesNotMatch(pointerSupersession, /run_attempt == 1/);
   assert.equal(
     filters.every((filter) => filter.includes('.run_attempt == 1')),
     true,
