@@ -297,6 +297,7 @@ public class LocalizedInflectionTests
     }
 
     [Fact]
+    [UseCulture("en")]
     public void ExistingEnglishInflectionAndQuantityContractsAreUnchanged()
     {
         Assert.Equal("people", "person".Pluralize());

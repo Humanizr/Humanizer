@@ -21,7 +21,7 @@ public sealed class CardinalInflectionForms
     /// <param name="few">The form for the CLDR <c>few</c> category, or <see langword="null"/> when unavailable.</param>
     /// <param name="many">The form for the CLDR <c>many</c> category, or <see langword="null"/> when unavailable.</param>
     /// <exception cref="ArgumentException">
-    /// <paramref name="lemma"/> or <paramref name="other"/> is empty, or an optional supplied form is empty.
+    /// <paramref name="lemma"/> or <paramref name="other"/> is empty or whitespace, or an optional supplied form is empty or whitespace.
     /// </exception>
     /// <exception cref="ArgumentNullException"><paramref name="lemma"/> or <paramref name="other"/> is <see langword="null"/>.</exception>
     public CardinalInflectionForms(
@@ -82,7 +82,7 @@ public sealed class CardinalInflectionForms
     /// </summary>
     /// <param name="lemma">The invariant citation form.</param>
     /// <returns>A form set containing <paramref name="lemma"/> for every category.</returns>
-    /// <exception cref="ArgumentException"><paramref name="lemma"/> is empty.</exception>
+    /// <exception cref="ArgumentException"><paramref name="lemma"/> is empty or whitespace.</exception>
     /// <exception cref="ArgumentNullException"><paramref name="lemma"/> is <see langword="null"/>.</exception>
     public static CardinalInflectionForms Invariant(string lemma) =>
         new(lemma, lemma, lemma, lemma, lemma, lemma, lemma);

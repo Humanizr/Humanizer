@@ -70,7 +70,7 @@ The form for the CLDR `many` category, or [null](https://docs.microsoft.com/en-u
 #### Exceptions
 
 [System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
-[lemma](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.CardinalInflectionForms(string,string,string,string,string,string,string).lemma 'Humanizer\.CardinalInflectionForms\.CardinalInflectionForms\(string, string, string, string, string, string, string\)\.lemma') or [other](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.CardinalInflectionForms(string,string,string,string,string,string,string).other 'Humanizer\.CardinalInflectionForms\.CardinalInflectionForms\(string, string, string, string, string, string, string\)\.other') is empty, or an optional supplied form is empty\.
+[lemma](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.CardinalInflectionForms(string,string,string,string,string,string,string).lemma 'Humanizer\.CardinalInflectionForms\.CardinalInflectionForms\(string, string, string, string, string, string, string\)\.lemma') or [other](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.CardinalInflectionForms(string,string,string,string,string,string,string).other 'Humanizer\.CardinalInflectionForms\.CardinalInflectionForms\(string, string, string, string, string, string, string\)\.other') is empty or whitespace, or an optional supplied form is empty or whitespace\.
 
 [System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 [lemma](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.CardinalInflectionForms(string,string,string,string,string,string,string).lemma 'Humanizer\.CardinalInflectionForms\.CardinalInflectionForms\(string, string, string, string, string, string, string\)\.lemma') or [other](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.CardinalInflectionForms(string,string,string,string,string,string,string).other 'Humanizer\.CardinalInflectionForms\.CardinalInflectionForms\(string, string, string, string, string, string, string\)\.other') is [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null')\.
@@ -192,7 +192,7 @@ A form set containing [lemma](Humanizer.CardinalInflectionForms.md#Humanizer.Car
 #### Exceptions
 
 [System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
-[lemma](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.Invariant(string).lemma 'Humanizer\.CardinalInflectionForms\.Invariant\(string\)\.lemma') is empty\.
+[lemma](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.Invariant(string).lemma 'Humanizer\.CardinalInflectionForms\.Invariant\(string\)\.lemma') is empty or whitespace\.
 
 [System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 [lemma](Humanizer.CardinalInflectionForms.md#Humanizer.CardinalInflectionForms.Invariant(string).lemma 'Humanizer\.CardinalInflectionForms\.Invariant\(string\)\.lemma') is [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null')\.
