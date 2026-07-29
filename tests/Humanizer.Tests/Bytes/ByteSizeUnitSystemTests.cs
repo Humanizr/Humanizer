@@ -158,6 +158,33 @@ public class ByteSizeUnitSystemTests
     }
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", "megabyte")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", "mebibyte")]
+    public void StandardPercentFormatsUsePercentSeparators(
+        ByteSizeUnitSystem unitSystem,
+        string unit,
+        string singular)
+    {
+        var numberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+        numberFormat.PercentDecimalSeparator = ",";
+        numberFormat.PercentGroupSeparator = ".";
+        numberFormat.PercentPositivePattern = 1;
+        var bytes = unitSystem == ByteSizeUnitSystem.DecimalSi
+            ? ByteSize.BytesInDecimalMegabyte
+            : ByteSize.BytesInMebibyte;
+
+        Assert.Equal(
+            $"{0.01.ToString("P1", numberFormat)} {singular}",
+            ByteSize.FromBytes(0.01 * bytes).FormatFullWords(unitSystem, $"P1 {unit}", numberFormat));
+        Assert.Equal(
+            $"1.0 {singular}",
+            ByteSize.FromBytes(bytes).FormatFullWords(unitSystem, $"0.0 {unit}", numberFormat));
+        Assert.Equal(
+            $"1.0{numberFormat.PerMilleSymbol} {singular}",
+            ByteSize.FromBytes(0.001 * bytes).FormatFullWords(unitSystem, $"0.0‰ {unit}", numberFormat));
+    }
+
+    [Theory]
     [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", "megabyte", "megabytes")]
     [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", "mebibyte", "mebibytes")]
     public void StandardCurrencyFormatsUseDisplayedCount(
@@ -437,6 +464,21 @@ public class ByteSizeUnitSystemTests
         Assert.Equal(
             "[1,0] KiB",
             ByteSize.FromBytes(-1023.96).Format(ByteSizeUnitSystem.BinaryIec, "0.0;[0.0];0.0", french));
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, 999999.6, "1‰ GB", "1‰ gigabyte")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, 1048575.6, "1000‰ MiB", "1000‰ mebibytes")]
+    public void RepeatsAutomaticCarryUntilDisplayedCountFits(
+        ByteSizeUnitSystem unitSystem,
+        double bytes,
+        string expectedSymbol,
+        string expectedWords)
+    {
+        var size = ByteSize.FromBytes(bytes);
+
+        Assert.Equal(expectedSymbol, size.Format(unitSystem, "0‰", CultureInfo.InvariantCulture));
+        Assert.Equal(expectedWords, size.FormatFullWords(unitSystem, "0‰", CultureInfo.InvariantCulture));
     }
 
     [Theory]

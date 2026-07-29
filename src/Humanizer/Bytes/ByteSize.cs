@@ -720,21 +720,26 @@ public struct ByteSize(double byteSize) :
         if (explicitUnit is null)
         {
             var systemRadix = unitSystem == ByteSizeUnitSystem.DecimalSi ? 1000d : 1024d;
-            var unitIndex = Array.IndexOf(units, unit);
-            SystemUnit? nextUnit = unit.DataUnit switch
+            while (true)
             {
-                DataUnit.Byte => units[^1],
-                _ when unitIndex > 0 => units[unitIndex - 1],
-                _ => null
-            };
-            if (nextUnit is { } promotedUnit &&
-                TryGetDisplayedCount(
-                    value,
-                    numericFormat.Replace("#.##", "0.##"),
-                    formatProvider,
-                    out var displayedValue) &&
-                Math.Abs(displayedValue) >= (decimal)systemRadix)
-            {
+                var unitIndex = Array.IndexOf(units, unit);
+                SystemUnit? nextUnit = unit.DataUnit switch
+                {
+                    DataUnit.Byte => units[^1],
+                    _ when unitIndex > 0 => units[unitIndex - 1],
+                    _ => null
+                };
+                if (nextUnit is not { } promotedUnit ||
+                    !TryGetDisplayedCount(
+                        value,
+                        numericFormat.Replace("#.##", "0.##"),
+                        formatProvider,
+                        out var displayedValue) ||
+                    Math.Abs(displayedValue) < (decimal)systemRadix)
+                {
+                    break;
+                }
+
                 unit = promotedUnit;
                 value = Bytes / unit.Bytes;
             }
@@ -816,26 +821,46 @@ public struct ByteSize(double byteSize) :
         double value,
         string format,
         IFormatProvider formatProvider,
-        out decimal count) =>
-        TryParseDisplayedCount(value.ToString(SanitizeNumericFormat(format), formatProvider), formatProvider, out count);
+        out decimal count)
+    {
+        var numericFormat = SanitizeNumericFormat(format);
+        return TryParseDisplayedCount(
+            value.ToString(numericFormat, formatProvider),
+            formatProvider,
+            IsStandardNumericFormat(numericFormat) && numericFormat[0] is 'P' or 'p',
+            out count);
+    }
 
     static bool TryGetDisplayedCount(
         long value,
         string format,
         IFormatProvider formatProvider,
-        out decimal count) =>
-        TryParseDisplayedCount(value.ToString(SanitizeNumericFormat(format), formatProvider), formatProvider, out count);
+        out decimal count)
+    {
+        var numericFormat = SanitizeNumericFormat(format);
+        return TryParseDisplayedCount(
+            value.ToString(numericFormat, formatProvider),
+            formatProvider,
+            IsStandardNumericFormat(numericFormat) && numericFormat[0] is 'P' or 'p',
+            out count);
+    }
 
-    static bool TryParseDisplayedCount(string value, IFormatProvider formatProvider, out decimal count)
+    static bool TryParseDisplayedCount(
+        string value,
+        IFormatProvider formatProvider,
+        bool usePercentSeparators,
+        out decimal count)
     {
         const NumberStyles styles = NumberStyles.Float | NumberStyles.AllowThousands;
-        if (decimal.TryParse(value, styles, formatProvider, out count))
+        if (!usePercentSeparators &&
+            decimal.TryParse(value, styles, formatProvider, out count))
         {
             return true;
         }
 
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
-        if (decimal.TryParse(value, NumberStyles.Currency, numberFormat, out count))
+        if (!usePercentSeparators &&
+            decimal.TryParse(value, NumberStyles.Currency, numberFormat, out count))
         {
             return true;
         }
@@ -851,7 +876,19 @@ public struct ByteSize(double byteSize) :
             withoutDecorators = withoutDecorators.Replace(numberFormat.PerMilleSymbol, string.Empty);
         }
 
-        return decimal.TryParse(withoutDecorators.Trim(), styles, formatProvider, out count);
+        var undecoratedValue = withoutDecorators.Trim();
+        if (usePercentSeparators)
+        {
+            var percentNumberFormat = (NumberFormatInfo)numberFormat.Clone();
+            percentNumberFormat.NumberDecimalSeparator = numberFormat.PercentDecimalSeparator;
+            percentNumberFormat.NumberGroupSeparator = numberFormat.PercentGroupSeparator;
+            if (decimal.TryParse(undecoratedValue, styles, percentNumberFormat, out count))
+            {
+                return true;
+            }
+        }
+
+        return decimal.TryParse(undecoratedValue, styles, formatProvider, out count);
     }
 
     static string SanitizeNumericFormat(string format)
