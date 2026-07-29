@@ -733,7 +733,7 @@ public struct ByteSize(double byteSize) :
                 if (nextUnit is not { } promotedUnit ||
                     !TryGetDisplayedCount(
                         value,
-                        numericFormat.Replace("#.##", "0.##"),
+                        ReplaceFormatToken(numericFormat, "#.##", "0.##"),
                         formatProvider,
                         out var displayedValue) ||
                     Math.Abs(displayedValue) < (decimal)systemRadix)
@@ -755,7 +755,7 @@ public struct ByteSize(double byteSize) :
                 : numericFormat;
             if (countFormat.Length > 0)
             {
-                var resolvedCountFormat = countFormat.Replace("#.##", "0.##");
+                var resolvedCountFormat = ReplaceFormatToken(countFormat, "#.##", "0.##");
                 var hasDisplayedCount = unit.DataUnit == DataUnit.Bit
                     ? TryGetDisplayedCount(Bits, resolvedCountFormat, formatProvider, out var displayedDecimal)
                     : TryGetDisplayedCount(value, resolvedCountFormat, formatProvider, out displayedDecimal);
@@ -809,13 +809,13 @@ public struct ByteSize(double byteSize) :
                 numericFormat = string.Concat("0.## ", numericFormat);
             }
 
-            var resolvedFormat = numericFormat.Replace("#.##", "0.##");
+            var resolvedFormat = ReplaceFormatToken(numericFormat, "#.##", "0.##");
             return unit.DataUnit == DataUnit.Bit
                 ? Bits.ToString(resolvedFormat, formatProvider)
                 : value.ToString(resolvedFormat, formatProvider);
         }
 
-        return string.Concat(value.ToString(numericFormat.Replace("#.##", "0.##"), formatProvider), " ", unitText);
+        return string.Concat(value.ToString(ReplaceFormatToken(numericFormat, "#.##", "0.##"), formatProvider), " ", unitText);
     }
 
     static bool TryGetDisplayedCount(

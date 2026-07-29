@@ -837,4 +837,36 @@ public class ByteSizeUnitSystemTests
         Assert.True(ByteSize.TryParseWithUnitSystem($"~1_500,5 {symbol}", unitSystem, numberFormat, out var parsed));
         Assert.Equal(ByteSize.FromBytes(-1500.5 * bytesPerUnit), parsed);
     }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void AutomaticFormattingPreservesNumericLookingLiterals(ByteSizeUnitSystem unitSystem)
+    {
+        foreach (var format in new[] { "0 '#.##'", @"0 \#\.\#\#" })
+        {
+            var size = ByteSize.FromBytes(1);
+
+            Assert.Equal("1 #.## B", size.Format(unitSystem, format, CultureInfo.InvariantCulture));
+            Assert.Equal("1 #.## byte", size.FormatFullWords(unitSystem, format, CultureInfo.InvariantCulture));
+        }
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, ByteSize.BytesInDecimalKilobyte, "kB", "kilobyte")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, ByteSize.BytesInKibibyte, "KiB", "kibibyte")]
+    public void ExplicitUnitFormattingPreservesNumericLookingLiterals(
+        ByteSizeUnitSystem unitSystem,
+        double bytes,
+        string symbol,
+        string unitWord)
+    {
+        foreach (var format in new[] { $"0 '#.##' {symbol}", $@"0 \#\.\#\# {symbol}" })
+        {
+            var size = ByteSize.FromBytes(bytes);
+
+            Assert.Equal($"1 #.## {symbol}", size.Format(unitSystem, format, CultureInfo.InvariantCulture));
+            Assert.Equal($"1 #.## {unitWord}", size.FormatFullWords(unitSystem, format, CultureInfo.InvariantCulture));
+        }
+    }
 }
