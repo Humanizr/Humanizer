@@ -147,6 +147,7 @@ function validEvidence(candidate, {archiveAttempts, deploymentAttempts}) {
   if (manifest.bootstrapSource) {
     return (
       validRelease(candidate) &&
+      manifest.archiveRunAttempt === 1 &&
       publication?.conclusion === 'success' &&
       archiveIsValid
     );
@@ -242,6 +243,21 @@ test('pre-staging documentation archives remain honest bootstrap sources', () =>
   });
 
   assert.equal(validEvidence(bootstrap, bootstrapEvidence), true);
+  assert.equal(
+    validEvidence(
+      release({
+        archiveAttempt: 2,
+        archiveRunId: bootstrap.manifest.archiveRunId,
+        bootstrapSource: true,
+        deploymentRunId: bootstrap.manifest.deploymentRunId,
+      }),
+      {
+        archiveAttempts: {2: {build: 'success'}},
+        deploymentAttempts: {1: {conclusion: 'success'}},
+      },
+    ),
+    false,
+  );
   assert.equal(validEvidence(failedFirstDeployment, phasedEvidence), false);
   assert.equal(
     selectRollback(
@@ -277,6 +293,14 @@ test('pre-staging documentation archives remain honest bootstrap sources', () =>
   assert.match(
     normalizedWorkflow,
     /manifest_bootstrap[\s\S]*?Rollback bootstrap publication is invalid/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /manifest_bootstrap[\s\S]*?"\$ROLLBACK_RUN_ATTEMPT" != 1[\s\S]*?Rollback bootstrap releases must use attempt one/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$bootstrap_source" == true &&\s+"\$run_attempt" != 1/,
   );
 });
 

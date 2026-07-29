@@ -481,6 +481,10 @@ jobs:
             jq -r '.bootstrapSource // false' "rollback/${pointer_name}"
           )"
           if [[ "$manifest_bootstrap" == true ]]; then
+            if [[ "$ROLLBACK_RUN_ATTEMPT" != 1 ]]; then
+              echo "Rollback bootstrap releases must use attempt one." >&2
+              exit 1
+            fi
             bootstrap_publication="$(
               gh api \
                 "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${deployment_run_attempt}" \
@@ -775,6 +779,10 @@ jobs:
                     ! "$source_sha" =~ ^[0-9a-f]{40}$ ||
                     "$deployment_run_id" != "$pointer_run_id" ||
                     "$publication_run_attempt" != "$pointer_run_attempt" ||
+                    (
+                      "$bootstrap_source" == true &&
+                      "$run_attempt" != 1
+                    ) ||
                     (
                       "$bootstrap_source" != true &&
                       (
