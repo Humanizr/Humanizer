@@ -10,6 +10,9 @@ static class LocaleCoverageData
 
     public static IReadOnlyList<string> ShippedLocales => ShippedLocaleNames;
 
+    public static TheoryData<string, bool> IndianScaleStyleApplicabilityTheoryData { get; } =
+        CreateIndianScaleStyleApplicabilityTheoryData();
+
     // Representative non-first-of-month date sample.
     public static TheoryData<string, DateExpectationRow> DateToOrdinalWords2022January25ExpectationTheoryData { get; } = new()
     {
@@ -1802,6 +1805,17 @@ static class LocaleCoverageData
         }
 
         throw new Xunit.Sdk.XunitException("Could not locate src/Humanizer/Locales.");
+    }
+
+    static TheoryData<string, bool> CreateIndianScaleStyleApplicabilityTheoryData()
+    {
+        var result = new TheoryData<string, bool>();
+        foreach (var localeName in ShippedLocaleNames)
+        {
+            result.Add(localeName, localeName == "en-IN");
+        }
+
+        return result;
     }
 }
 

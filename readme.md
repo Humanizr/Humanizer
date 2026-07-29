@@ -22,8 +22,10 @@ using Humanizer;
 
 var culture = CultureInfo.GetCultureInfo("en-US");
 var text = TimeSpan.FromMinutes(2).Humanize(culture: culture);
+var indianNumber = 1_000_000_000L.ToIndianWords(IndianScaleStyle.CroreBased);
 
 Console.WriteLine(text); // 2 minutes
+Console.WriteLine(indianNumber); // one hundred crore
 ```
 
 ## Documentation

@@ -664,6 +664,11 @@ namespace Humanizer
             public static System.DateTime YearsFrom(System.DateTime date) { }
         }
     }
+    public enum IndianScaleStyle
+    {
+        NamedScales = 0,
+        CroreBased = 1,
+    }
     public static class InflectorExtensions
     {
         public static string Camelize(this string input) { }
@@ -809,6 +814,8 @@ namespace Humanizer
     }
     public static class NumberToWordsExtension
     {
+        public static string ToIndianWords(this int number, Humanizer.IndianScaleStyle scaleStyle = 0) { }
+        public static string ToIndianWords(this long number, Humanizer.IndianScaleStyle scaleStyle = 0) { }
         public static string ToOrdinalWords(this int number, System.Globalization.CultureInfo? culture = null) { }
         public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture = null) { }
         public static string ToOrdinalWords(this int number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo? culture = null) { }

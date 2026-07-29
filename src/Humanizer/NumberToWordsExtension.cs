@@ -7,6 +7,16 @@ namespace Humanizer;
 /// </summary>
 public static class NumberToWordsExtension
 {
+    static readonly ConjunctionalScale[] CroreBasedIndianScales =
+    [
+        new(100_000_000_000_000_000, "shankh", "shankh"),
+        new(1_000_000_000_000_000, "padma", "padma"),
+        new(1_000_000_000_000, "lakh crore", "lakh crore"),
+        new(10_000_000, "crore", "crore"),
+        new(100_000, "lakh", "lakh"),
+        new(1000, "thousand", "thousand")
+    ];
+
     /// <summary>
     /// 1.ToOrdinalWords() -> "first"
     /// </summary>
@@ -85,6 +95,16 @@ public static class NumberToWordsExtension
     /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this int number, CultureInfo? culture = null) =>
         ((long)number).ToWords(culture);
+
+    /// <summary>
+    /// Converts the given value to Indian English cardinal words using the selected large-number vocabulary.
+    /// </summary>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="scaleStyle">The Indian large-number vocabulary to use.</param>
+    /// <returns>The Indian English cardinal words for <paramref name="number"/>.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="scaleStyle"/> is not a defined value.</exception>
+    public static string ToIndianWords(this int number, IndianScaleStyle scaleStyle = IndianScaleStyle.NamedScales) =>
+        ((long)number).ToIndianWords(scaleStyle);
 
     /// <summary>
     /// Converts the given value to localized cardinal words using both word form and grammatical gender.
@@ -207,6 +227,29 @@ public static class NumberToWordsExtension
     /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public static string ToWords(this long number, CultureInfo? culture = null, bool addAnd = true) =>
         Configurator.GetNumberToWordsConverter(culture).Convert(number, addAnd);
+
+    /// <summary>
+    /// Converts the given value to Indian English cardinal words using the selected large-number vocabulary.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="IndianScaleStyle.NamedScales"/> uses the named-scale vocabulary of the <c>en-IN</c> culture.
+    /// <see cref="IndianScaleStyle.CroreBased"/> uses common crore-based expressions without changing
+    /// the configured converter or the behavior of other locales.
+    /// </remarks>
+    /// <param name="number">The value to convert.</param>
+    /// <param name="scaleStyle">The Indian large-number vocabulary to use.</param>
+    /// <returns>The Indian English cardinal words for <paramref name="number"/>.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="scaleStyle"/> is not a defined value.</exception>
+    public static string ToIndianWords(this long number, IndianScaleStyle scaleStyle = IndianScaleStyle.NamedScales)
+    {
+        var converter = (ConjunctionalScaleNumberToWordsConverter)NumberToWordsProfileCatalog.Resolve("en-IN", CultureInfo.InvariantCulture);
+        return scaleStyle switch
+        {
+            IndianScaleStyle.NamedScales => converter.ConvertUsingScales(number, converter.Scales),
+            IndianScaleStyle.CroreBased => converter.ConvertUsingScales(number, CroreBasedIndianScales),
+            _ => throw new ArgumentOutOfRangeException(nameof(scaleStyle))
+        };
+    }
 
     /// <summary>
     /// Converts the given value to localized cardinal words using the requested word form.
