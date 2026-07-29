@@ -45,6 +45,23 @@ function selectRun(filter, workflowRuns) {
   return result.stdout.trimEnd();
 }
 
+function selectSuccessfulJobs(jobPages) {
+  const result = spawnSync(
+    'jq',
+    [
+      '-r',
+      '[.[].jobs[] | select(.conclusion == "success") | .name] | sort | join(",")',
+    ],
+    {
+      encoding: 'utf8',
+      input: JSON.stringify(jobPages),
+    },
+  );
+
+  assert.equal(result.status, 0, result.stderr);
+  return result.stdout.trimEnd();
+}
+
 function selectPrior(workflowRuns) {
   const documentation = selectRun(filters[0], workflowRuns);
   return documentation || selectRun(filters[1], workflowRuns);
@@ -474,6 +491,35 @@ test('release operations have repository context without a checkout', () => {
   assert.match(workflowEnv, /^  GH_REPO: \$\{\{ github\.repository \}\}$/m);
   assert.match(normalizedWorkflow, /defaults:\n  run:\n    shell: bash/);
   assert.doesNotMatch(normalizedWorkflow, /2>\/dev\/null \|\|\n\s+true/);
+});
+
+test('workflow job queries use the actual paginated slurp response shape', () => {
+  const jobPages = [
+    {
+      jobs: [
+        {conclusion: 'success', name: 'deploy'},
+        {conclusion: 'failure', name: 'record-production-deployment'},
+      ],
+      total_count: 3,
+    },
+    {
+      jobs: [{conclusion: 'success', name: 'production-smoke'}],
+      total_count: 3,
+    },
+  ];
+  const endpointCount =
+    normalizedWorkflow.match(/\/jobs\?per_page=100/g)?.length ?? 0;
+  const iteratorCount =
+    normalizedWorkflow.match(/\.\[\]\.jobs\[\]/g)?.length ?? 0;
+
+  assert.equal(
+    selectSuccessfulJobs(jobPages),
+    'deploy,production-smoke',
+  );
+  assert.ok(endpointCount > 0);
+  assert.equal(iteratorCount, endpointCount);
+  assert.doesNotMatch(normalizedWorkflow, /\.\[\]\[\]\.jobs\[\]/);
+  assert.match(normalizedWorkflow, /\.\[\]\.workflow_runs\[\]/);
 });
 
 test('expensive documentation gates run in parallel before retention', () => {
