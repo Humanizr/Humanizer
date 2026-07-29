@@ -1532,7 +1532,8 @@ public struct ByteSize(double byteSize) :
     /// <param name="formatProvider">The provider used to parse the numeric value.</param>
     /// <returns>The parsed byte size.</returns>
     /// <remarks>
-    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
     /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
@@ -1562,7 +1563,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
     /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
@@ -1583,7 +1585,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
     /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
@@ -1604,7 +1607,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
     /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
@@ -1625,7 +1629,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
     /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
