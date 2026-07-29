@@ -28,8 +28,9 @@ static partial class LocalizedInflectionCatalog
              string.Equals(current.TwoLetterISOLanguageName, language, StringComparison.OrdinalIgnoreCase);
              current = current.Parent)
         {
-            if (TryResolveCore(current.Name, out rule))
+            if (TryResolveCore(current.Name, out var resolvedRule))
             {
+                rule = resolvedRule;
                 return true;
             }
         }
