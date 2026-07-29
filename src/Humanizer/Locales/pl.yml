@@ -1,6 +1,10 @@
 locale: 'pl'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Polish'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'i'

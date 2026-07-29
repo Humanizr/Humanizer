@@ -729,6 +729,83 @@ surfaces:
     }
 
     [Fact]
+    public void SemanticDiffDetectsInflectionChanges()
+    {
+        var leftCatalog = CreateCatalog(("zz", """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'lexicon'
+    lexemes:
+      person:
+        one: 'person'
+        other: 'people'
+"""));
+        var rightCatalog = CreateCatalog(("zz", """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'lexicon'
+    lexemes:
+      person:
+        one: 'person'
+        other: 'persons'
+"""));
+
+        Assert.NotEmpty(HumanizerSourceGenerator.LocaleSemanticDiff.Compare(leftCatalog.Locales, rightCatalog.Locales));
+    }
+
+    [Fact]
+    public void InflectionInheritanceRequiresTheSameLanguageSubtag()
+    {
+        var catalog = CreateCatalog(
+            ("en", """
+locale: 'en'
+surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'lexicon'
+    lexemes:
+      person:
+        one: 'person'
+        other: 'people'
+"""),
+            ("en-ZZ", """
+locale: 'en-ZZ'
+variantOf: 'en'
+"""),
+            ("nb", """
+locale: 'nb'
+surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'lexicon'
+    lexemes:
+      bok:
+        one: 'bok'
+        other: 'bøker'
+"""),
+            ("nn", """
+locale: 'nn'
+variantOf: 'nb'
+surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'selector-only'
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var regional = catalog.Locales.Single(static locale => locale.LocaleCode == "en-ZZ");
+        var nynorsk = catalog.Locales.Single(static locale => locale.LocaleCode == "nn");
+
+        Assert.True(regional.Inflection!.TryGetValue("lexemes", out _));
+        Assert.False(nynorsk.Inflection!.TryGetValue("lexemes", out _));
+    }
+
+    [Fact]
     public void CanonicalSurfacesMustBeMappings()
     {
         var exception = Assert.Throws<InvalidOperationException>(() =>
@@ -903,16 +980,32 @@ surfaces:
     [Fact]
     public void LocaleCoverageUsesCanonicalResolutionAndImmediateParentProvenance()
     {
-        var coverage = HumanizerSourceGenerator.LocaleCoverageInput.Create(CreateCheckedInLocaleCatalog());
+        var catalog = CreateCheckedInLocaleCatalog();
+        var coverage = HumanizerSourceGenerator.LocaleCoverageInput.Create(catalog);
         var nynorsk = coverage.Locales.Single(static locale => locale.Locale == "nn");
+        var english = coverage.Locales.Single(static locale => locale.Locale == "en");
+        var englishUnitedStates = coverage.Locales.Single(static locale => locale.Locale == "en-US");
         var urduIndia = coverage.Locales.Single(static locale => locale.Locale == "ur-IN");
 
         Assert.Equal("via", nynorsk.Capabilities["list"].Kind);
         Assert.Equal("nb", nynorsk.Capabilities["list"].Via);
         Assert.Equal("own", nynorsk.Capabilities["clock"].Kind);
         Assert.Null(nynorsk.Capabilities["clock"].Via);
+        Assert.Equal("own", nynorsk.Capabilities["inflection"].Kind);
+        Assert.Null(nynorsk.Capabilities["inflection"].Via);
+        Assert.Equal("own", english.Capabilities["inflection"].Kind);
+        Assert.Equal("via", englishUnitedStates.Capabilities["inflection"].Kind);
+        Assert.Equal("en", englishUnitedStates.Capabilities["inflection"].Via);
         Assert.Equal("via", urduIndia.Capabilities["calendarOverride"].Kind);
         Assert.Equal("ur", urduIndia.Capabilities["calendarOverride"].Via);
+        Assert.All(
+            catalog.Locales.Where(static locale =>
+                locale.VariantOf is null ||
+                !string.Equals(
+                    locale.LocaleCode.Split('-')[0],
+                    locale.VariantOf.Split('-')[0],
+                    StringComparison.OrdinalIgnoreCase)),
+            static locale => Assert.Contains("inflection", locale.AuthoredFeatureNames));
         Assert.All(
             coverage.Locales,
             locale => Assert.All(

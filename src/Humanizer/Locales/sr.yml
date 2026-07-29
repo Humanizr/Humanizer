@@ -1,6 +1,10 @@
 locale: 'sr'
 
 surfaces:
+  inflection:
+    cardinalRule: 'SouthSlavic'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'и'

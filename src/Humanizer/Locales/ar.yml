@@ -1,6 +1,10 @@
 locale: 'ar'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Arabic'
+    disposition: 'selector-only'
+
   list:
     engine: 'clitic'
     value: 'و'

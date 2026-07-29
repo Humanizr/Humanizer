@@ -1,6 +1,10 @@
 locale: 'ta'
 
 surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'மற்றும்'

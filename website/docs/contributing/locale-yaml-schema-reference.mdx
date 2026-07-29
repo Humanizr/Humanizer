@@ -50,6 +50,7 @@ They are not parsed at runtime.
    - `list`
    - `formatter`
    - `phrases`
+   - `inflection`
    - `number`
    - `ordinal`
    - `clock`
@@ -60,6 +61,9 @@ They are not parsed at runtime.
 7. Generator implementation contracts do not belong here.
 8. Shipped locales are expected to resolve both `number.words` and `number.parse`, either locale-owned or same-language inherited with proof.
 9. `number.formatting` is a nested member under `number`, alongside `number.words` and `number.parse`.
+10. `inflection` may inherit only from a locale with the same primary language
+    subtag. A cross-language relationship such as `nn` → `nb` must author its
+    own inflection profile.
 
 ## Merge Rules
 

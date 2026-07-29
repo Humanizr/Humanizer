@@ -1,6 +1,12 @@
 locale: 'pt'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Portuguese'
+    disposition: 'selector-only'
+    regionalRules:
+      pt-PT: 'CatalanItalian'
+
   list:
     engine: 'conjunction'
     value: 'e'

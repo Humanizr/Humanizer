@@ -1,6 +1,10 @@
 locale: 'is'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Icelandic'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'og'

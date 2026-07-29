@@ -1,6 +1,10 @@
 locale: 'si'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Sinhala'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'සහ'

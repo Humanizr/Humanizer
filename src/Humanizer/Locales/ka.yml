@@ -1,5 +1,9 @@
 locale: 'ka'
 surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'და'

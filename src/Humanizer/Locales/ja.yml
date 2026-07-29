@@ -1,6 +1,10 @@
 locale: 'ja'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Other'
+    disposition: 'selector-only'
+
   list:
     engine: 'delimited'
     value: '、'

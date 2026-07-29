@@ -28,6 +28,25 @@ Console.WriteLine(text); // 2 minutes
 Console.WriteLine(indianNumber); // one hundred crore
 ```
 
+In v4 previews, applications can provide the exact noun forms for a culture's
+CLDR cardinal categories:
+
+```csharp
+var files = new CardinalInflectionForms(
+    lemma: "plik",
+    other: "pliku",
+    few: "pliki",
+    many: "plików");
+
+if (files.TryInflect(5m, CultureInfo.GetCultureInfo("pl"), out var noun))
+    Console.WriteLine(noun); // plików
+```
+
+`TryInflect` returns `false` when the selected category has no authored form;
+it does not guess localized morphology or fall back to English. See
+[inflection and quantities](https://humanizr.net/docs/scenarios/inflection-and-quantities/)
+for the exact-form and lemmatization contracts.
+
 ## Documentation
 
 - [Start using Humanizer](https://humanizr.net/docs/start/overview/)

@@ -1,6 +1,10 @@
 locale: 'cs'
 
 surfaces:
+  inflection:
+    cardinalRule: 'CzechSlovak'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'a'

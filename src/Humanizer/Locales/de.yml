@@ -1,6 +1,10 @@
 locale: 'de'
 
 surfaces:
+  inflection:
+    cardinalRule: 'EnglishLike'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'und'

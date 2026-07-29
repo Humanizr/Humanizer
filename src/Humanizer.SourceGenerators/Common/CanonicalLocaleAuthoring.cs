@@ -46,7 +46,8 @@ public sealed partial class HumanizerSourceGenerator
             "ordinal",
             "clock",
             "compass",
-            "calendar"
+            "calendar",
+            "inflection"
         ];
 
         internal static CanonicalLocaleDocument Parse(string localeCode, string fileText)
@@ -188,6 +189,11 @@ public sealed partial class HumanizerSourceGenerator
                     case "calendar":
                         AddCalendarFeatures(document.LocaleCode, surfaceMapping, features);
                         break;
+
+                    case "inflection":
+                        features["inflection"] = surfaceMapping;
+                        break;
+
                     default:
                         break;
                 }
@@ -894,7 +900,8 @@ public sealed partial class HumanizerSourceGenerator
                 Clock = CreateFeatureFingerprint(locale.TimeOnlyToClockNotation),
                 Formatter = CreateFeatureFingerprint(locale.Formatter),
                 Calendar = locale.Calendar is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.Calendar)),
-                NumberFormatting = locale.NumberFormatting is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.NumberFormatting))
+                NumberFormatting = locale.NumberFormatting is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.NumberFormatting)),
+                Inflection = locale.Inflection is null ? null : NormalizeJson(LocaleCatalogInput.ToJsonElement(locale.Inflection))
             };
 
         static object? CreateFeatureFingerprint(LocaleFeature? feature)

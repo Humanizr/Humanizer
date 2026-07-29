@@ -1,6 +1,10 @@
 locale: 'ro'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Romanian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'și'

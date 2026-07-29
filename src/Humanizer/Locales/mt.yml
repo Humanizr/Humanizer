@@ -1,6 +1,10 @@
 locale: 'mt'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Maltese'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'u'

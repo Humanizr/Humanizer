@@ -1,6 +1,10 @@
 locale: 'fr'
 
 surfaces:
+  inflection:
+    cardinalRule: 'French'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'et'

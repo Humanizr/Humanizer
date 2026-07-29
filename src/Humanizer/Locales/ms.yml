@@ -1,6 +1,10 @@
 locale: 'ms'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Other'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'dan'

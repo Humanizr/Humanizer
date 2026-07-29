@@ -58,6 +58,7 @@ public sealed partial class HumanizerSourceGenerator
             "formatter",
             "grammar",
             "headings",
+            "inflection",
             "numberFormatting",
             "numberToWords",
             "ordinalizer",
@@ -215,7 +216,7 @@ public sealed partial class HumanizerSourceGenerator
             var resolvedFeatures = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
             foreach (var featureName in SupportedFeatureNames)
             {
-                if (ResolveFeatureValue(locale.LocaleCode, featureName, locale.Features, inherited.ResolvedFeatures) is { } resolvedFeatureValue)
+                if (ResolveFeatureValue(locale.LocaleCode, locale.Inherits, featureName, locale.Features, inherited.ResolvedFeatures) is { } resolvedFeatureValue)
                 {
                     resolvedFeatures[featureName] = resolvedFeatureValue;
                 }
@@ -247,6 +248,11 @@ public sealed partial class HumanizerSourceGenerator
                 diagnostics,
                 static (resolvedLocaleCode, features) => ResolveNumberFormatting(resolvedLocaleCode, features),
                 resolvedFeatureMap);
+            var inflection = TryResolveLocalePart(
+                locale.LocaleCode,
+                diagnostics,
+                static (resolvedLocaleCode, features) => ResolveInflection(resolvedLocaleCode, features),
+                resolvedFeatureMap);
 
             var resolved = new ResolvedLocaleDefinition(
                 localeCode,
@@ -258,6 +264,7 @@ public sealed partial class HumanizerSourceGenerator
                 phraseCatalog,
                 calendar,
                 numberFormatting,
+                inflection,
                 TryResolveLocalePart(
                     locale.LocaleCode,
                     diagnostics,
@@ -321,13 +328,35 @@ public sealed partial class HumanizerSourceGenerator
 
         static SimpleYamlValue? ResolveFeatureValue(
             string localeCode,
+            string? inheritedLocaleCode,
             string featureName,
             ImmutableDictionary<string, SimpleYamlValue> features,
             ImmutableDictionary<string, SimpleYamlValue> inheritedFeatures)
         {
             _ = features.TryGetValue(featureName, out var localValue);
             _ = inheritedFeatures.TryGetValue(featureName, out var inheritedValue);
+            if (featureName == "inflection" &&
+                inheritedLocaleCode is not null &&
+                !SharesExactLanguageSubtag(localeCode, inheritedLocaleCode))
+            {
+                inheritedValue = null;
+            }
+
             return MergeFeatureValue(localeCode, featureName, inheritedValue, localValue);
+        }
+
+        static bool SharesExactLanguageSubtag(string localeCode, string inheritedLocaleCode) =>
+            string.Equals(
+                GetExactLanguageSubtag(localeCode),
+                GetExactLanguageSubtag(inheritedLocaleCode),
+                StringComparison.OrdinalIgnoreCase);
+
+        static string GetExactLanguageSubtag(string localeCode)
+        {
+            var separatorIndex = localeCode.IndexOf('-');
+            return separatorIndex >= 0
+                ? localeCode.Substring(0, separatorIndex)
+                : localeCode;
         }
 
         static LocaleFeature? ResolveFeature(
@@ -420,6 +449,16 @@ public sealed partial class HumanizerSourceGenerator
                 ? null
                 : formattingValue as SimpleYamlMapping
                 ?? throw new InvalidOperationException($"Locale '{localeCode}.numberFormatting' must be a mapping.");
+        }
+
+        static SimpleYamlMapping? ResolveInflection(
+            string localeCode,
+            ImmutableDictionary<string, SimpleYamlValue> features)
+        {
+            return !features.TryGetValue("inflection", out var inflectionValue)
+                ? null
+                : inflectionValue as SimpleYamlMapping
+                ?? throw new InvalidOperationException($"Locale '{localeCode}.inflection' must be a mapping.");
         }
 
         static ImmutableArray<string> ParseHeadingSequence(SimpleYamlMapping mapping, string key, string localeCode)
@@ -720,6 +759,7 @@ public sealed partial class HumanizerSourceGenerator
         LocalePhraseCatalog? phrases,
         SimpleYamlMapping? calendar,
         SimpleYamlMapping? numberFormatting,
+        SimpleYamlMapping? inflection,
         LocaleFeature? collectionFormatter,
         LocaleFeature? dateOnlyToOrdinalWords,
         LocaleFeature? dateToOrdinalWords,
@@ -738,6 +778,7 @@ public sealed partial class HumanizerSourceGenerator
         public LocalePhraseCatalog? Phrases { get; } = phrases;
         public SimpleYamlMapping? Calendar { get; } = calendar;
         public SimpleYamlMapping? NumberFormatting { get; } = numberFormatting;
+        public SimpleYamlMapping? Inflection { get; } = inflection;
         public LocaleFeature? CollectionFormatter { get; } = collectionFormatter;
         public LocaleFeature? DateOnlyToOrdinalWords { get; } = dateOnlyToOrdinalWords;
         public LocaleFeature? DateToOrdinalWords { get; } = dateToOrdinalWords;
@@ -753,6 +794,7 @@ public sealed partial class HumanizerSourceGenerator
                 null,
                 ImmutableHashSet<string>.Empty.WithComparer(StringComparer.Ordinal),
                 ImmutableDictionary<string, SimpleYamlValue>.Empty.WithComparers(StringComparer.Ordinal),
+                null,
                 null,
                 null,
                 null,

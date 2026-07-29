@@ -1,6 +1,10 @@
 locale: 'mk'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Macedonian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'и'

@@ -1,6 +1,10 @@
 locale: 'ne'
 
 surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'र'

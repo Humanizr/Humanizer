@@ -1,6 +1,10 @@
 locale: 'pa'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Punjabi'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'ਅਤੇ'

@@ -1,6 +1,10 @@
 locale: 'lt'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Lithuanian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'ir'

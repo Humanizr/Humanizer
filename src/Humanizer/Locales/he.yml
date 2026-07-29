@@ -1,6 +1,10 @@
 locale: 'he'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Hebrew'
+    disposition: 'selector-only'
+
   list:
     engine: 'clitic'
     value: 'ו'

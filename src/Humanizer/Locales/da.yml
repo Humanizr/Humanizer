@@ -1,6 +1,10 @@
 locale: 'da'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Danish'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'og'

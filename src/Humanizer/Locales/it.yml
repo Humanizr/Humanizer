@@ -1,6 +1,10 @@
 locale: 'it'
 
 surfaces:
+  inflection:
+    cardinalRule: 'CatalanItalian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'e'

@@ -1,6 +1,10 @@
 locale: 'fil'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Filipino'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'at'

@@ -1,6 +1,10 @@
 locale: 'lv'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Latvian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'un'

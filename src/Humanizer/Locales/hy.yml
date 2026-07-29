@@ -1,6 +1,10 @@
 locale: 'hy'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Armenian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'և'

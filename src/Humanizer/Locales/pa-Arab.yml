@@ -1,6 +1,10 @@
 locale: 'pa-Arab'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Punjabi'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'اتے'

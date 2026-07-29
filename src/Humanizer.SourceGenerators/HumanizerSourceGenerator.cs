@@ -5,6 +5,7 @@ namespace Humanizer.SourceGenerators;
 [Generator]
 public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 {
+    /// <inheritdoc />
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var localeFiles = context.AdditionalTextsProvider
@@ -34,6 +35,11 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
             .Select(static (catalog, _) => FormatterProfileCatalogInput.Create(catalog));
 
         context.RegisterSourceOutput(formatterProfiles, static (productionContext, input) => input.Emit(productionContext));
+
+        var inflectionProfiles = localeCatalog
+            .Select(static (catalog, _) => InflectionCatalogInput.Create(catalog));
+
+        context.RegisterSourceOutput(inflectionProfiles, static (productionContext, input) => input.Emit(productionContext));
 
         var numberToWordsProfiles = localeCatalog
             .Select(static (catalog, _) => NumberToWordsProfileCatalogInput.Create(catalog));

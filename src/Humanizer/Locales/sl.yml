@@ -1,6 +1,10 @@
 locale: 'sl'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Slovenian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'in'

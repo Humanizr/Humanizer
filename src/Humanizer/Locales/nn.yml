@@ -2,5 +2,9 @@ locale: 'nn'
 variantOf: 'nb'
 
 surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'selector-only'
+
   clock:
     hourOneWord: 'eit'

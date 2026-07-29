@@ -1,6 +1,10 @@
 locale: 'hr'
 
 surfaces:
+  inflection:
+    cardinalRule: 'SouthSlavic'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'i'

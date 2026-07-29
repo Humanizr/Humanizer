@@ -1,6 +1,10 @@
 locale: 'ga'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Irish'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'agus'

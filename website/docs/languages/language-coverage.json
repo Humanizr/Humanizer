@@ -46,6 +46,11 @@
       "optional": false
     },
     {
+      "key": "inflection",
+      "label": "Cardinal category selection",
+      "optional": false
+    },
+    {
       "key": "numberWords",
       "label": "Number to words",
       "optional": false
@@ -103,6 +108,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -150,6 +159,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -203,6 +216,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -250,6 +267,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -303,6 +324,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -350,6 +375,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -403,6 +432,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -450,6 +483,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -503,6 +540,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -550,6 +591,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -603,6 +648,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -650,6 +699,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -703,6 +756,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -750,6 +807,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -803,6 +864,10 @@
           "kind": "via",
           "via": "de"
         },
+        "inflection": {
+          "kind": "via",
+          "via": "de"
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -850,6 +915,10 @@
           "via": "de"
         },
         "phrases": {
+          "kind": "via",
+          "via": "de"
+        },
+        "inflection": {
           "kind": "via",
           "via": "de"
         },
@@ -903,6 +972,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -950,6 +1023,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1003,6 +1080,10 @@
           "kind": "via",
           "via": "en"
         },
+        "inflection": {
+          "kind": "via",
+          "via": "en"
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1050,6 +1131,10 @@
           "via": "en"
         },
         "phrases": {
+          "kind": "via",
+          "via": "en"
+        },
+        "inflection": {
           "kind": "via",
           "via": "en"
         },
@@ -1103,6 +1188,10 @@
           "kind": "via",
           "via": "en"
         },
+        "inflection": {
+          "kind": "via",
+          "via": "en"
+        },
         "numberWords": {
           "kind": "via",
           "via": "en"
@@ -1150,6 +1239,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1203,6 +1296,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1250,6 +1347,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1303,6 +1404,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1350,6 +1455,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1403,6 +1512,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1450,6 +1563,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1503,6 +1620,10 @@
           "kind": "via",
           "via": "fr"
         },
+        "inflection": {
+          "kind": "via",
+          "via": "fr"
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1550,6 +1671,10 @@
           "via": "fr"
         },
         "phrases": {
+          "kind": "via",
+          "via": "fr"
+        },
+        "inflection": {
           "kind": "via",
           "via": "fr"
         },
@@ -1603,6 +1728,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1650,6 +1779,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1703,6 +1836,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1750,6 +1887,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1803,6 +1944,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1850,6 +1995,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -1903,6 +2052,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -1950,6 +2103,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2003,6 +2160,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2050,6 +2211,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2103,6 +2268,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2150,6 +2319,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2203,6 +2376,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2250,6 +2427,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2303,6 +2484,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2350,6 +2535,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2403,6 +2592,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2450,6 +2643,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2503,6 +2700,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2550,6 +2751,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2603,6 +2808,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2650,6 +2859,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2703,6 +2916,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2750,6 +2967,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2803,6 +3024,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2850,6 +3075,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -2903,6 +3132,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -2950,6 +3183,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3003,6 +3240,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3050,6 +3291,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3103,6 +3348,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3150,6 +3399,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3203,6 +3456,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3250,6 +3507,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3303,6 +3564,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3350,6 +3615,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3403,6 +3672,10 @@
           "kind": "via",
           "via": "nb"
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "via",
           "via": "nb"
@@ -3450,6 +3723,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3503,6 +3780,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3550,6 +3831,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3603,6 +3888,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3650,6 +3939,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3703,6 +3996,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3753,6 +4050,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "via",
+          "via": "pt"
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3800,6 +4101,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3853,6 +4158,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -3900,6 +4209,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -3953,6 +4266,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4000,6 +4317,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4053,6 +4374,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4100,6 +4425,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4153,6 +4482,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4200,6 +4533,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4253,6 +4590,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4300,6 +4641,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4353,6 +4698,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4400,6 +4749,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4453,6 +4806,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4500,6 +4857,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4553,6 +4914,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4600,6 +4965,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4653,6 +5022,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4700,6 +5073,10 @@
           "via": "ur"
         },
         "phrases": {
+          "kind": "via",
+          "via": "ur"
+        },
+        "inflection": {
           "kind": "via",
           "via": "ur"
         },
@@ -4753,6 +5130,10 @@
           "kind": "via",
           "via": "ur"
         },
+        "inflection": {
+          "kind": "via",
+          "via": "ur"
+        },
         "numberWords": {
           "kind": "via",
           "via": "ur"
@@ -4800,6 +5181,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4853,6 +5238,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -4900,6 +5289,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },
@@ -4953,6 +5346,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -5000,6 +5397,10 @@
           "via": "zh-Hans"
         },
         "phrases": {
+          "kind": "via",
+          "via": "zh-Hans"
+        },
+        "inflection": {
           "kind": "via",
           "via": "zh-Hans"
         },
@@ -5053,6 +5454,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -5103,6 +5508,10 @@
           "kind": "own",
           "via": null
         },
+        "inflection": {
+          "kind": "own",
+          "via": null
+        },
         "numberWords": {
           "kind": "own",
           "via": null
@@ -5150,6 +5559,10 @@
           "via": null
         },
         "phrases": {
+          "kind": "own",
+          "via": null
+        },
+        "inflection": {
           "kind": "own",
           "via": null
         },

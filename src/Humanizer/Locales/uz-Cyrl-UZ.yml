@@ -1,6 +1,10 @@
 locale: 'uz-Cyrl-UZ'
 
 surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'ва'

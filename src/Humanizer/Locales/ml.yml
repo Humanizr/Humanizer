@@ -1,6 +1,10 @@
 locale: 'ml'
 
 surfaces:
+  inflection:
+    cardinalRule: 'One'
+    disposition: 'selector-only'
+
   list:
     engine: 'delimited'
     value: ', '

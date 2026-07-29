@@ -2053,12 +2053,18 @@ wordsToNumber:
             SourceText.From(File.ReadAllText(path), Encoding.UTF8);
     }
 
-    sealed class InMemoryAdditionalText(string path, string text, bool canonicalizeLegacySchema = true) : AdditionalText
+    sealed class InMemoryAdditionalText(
+        string path,
+        string text,
+        bool canonicalizeLegacySchema = true,
+        bool addDefaultInflection = true) : AdditionalText
     {
         readonly string path = path;
-        readonly string text = canonicalizeLegacySchema
-            ? CanonicalizeLocaleText(path, text)
-            : text;
+        readonly string text = AddDefaultInflection(
+            canonicalizeLegacySchema
+                ? CanonicalizeLocaleText(path, text)
+                : text,
+            canonicalizeLegacySchema && addDefaultInflection);
 
         public override string Path => path;
 
@@ -2075,6 +2081,39 @@ wordsToNumber:
             }
 
             return HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(localeCode, candidateText);
+        }
+
+        static string AddDefaultInflection(string candidateText, bool enabled)
+        {
+            if (!enabled ||
+                candidateText.Split('\n').Any(
+                    static line => string.Equals(line.TrimEnd('\r'), "  inflection:", StringComparison.Ordinal)) ||
+                candidateText.Contains("variantOf:", StringComparison.Ordinal))
+            {
+                return candidateText;
+            }
+
+            const string inflection = """
+  inflection:
+    cardinalRule: 'Other'
+    disposition: 'selector-only'
+""";
+            var lineEnding = candidateText.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+            var normalizedInflection = inflection
+                .Replace("\r\n", "\n", StringComparison.Ordinal)
+                .Replace("\n", lineEnding, StringComparison.Ordinal);
+            if (candidateText.Contains("surfaces: {}", StringComparison.Ordinal))
+            {
+                return candidateText.Replace(
+                    "surfaces: {}",
+                    $"surfaces:{lineEnding}{normalizedInflection}",
+                    StringComparison.Ordinal);
+            }
+
+            return candidateText.Replace(
+                $"surfaces:{lineEnding}",
+                $"surfaces:{lineEnding}{normalizedInflection}{lineEnding}",
+                StringComparison.Ordinal);
         }
     }
 }

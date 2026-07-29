@@ -1,6 +1,10 @@
 locale: 'kn'
 
 surfaces:
+  inflection:
+    cardinalRule: 'AmharicLike'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'ಮತ್ತು'

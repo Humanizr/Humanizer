@@ -1,6 +1,10 @@
 locale: 'be'
 
 surfaces:
+  inflection:
+    cardinalRule: 'Belarusian'
+    disposition: 'selector-only'
+
   list:
     engine: 'conjunction'
     value: 'і'
