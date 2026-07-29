@@ -21,6 +21,9 @@ const locateStep = normalizedWorkflow
 const fallbackSelection = locateStep.slice(
   locateStep.indexOf('if [[ -z "$prior" ]]; then'),
 );
+const retainStep = normalizedWorkflow
+  .split('- name: Retain and verify prior Pages artifact')[1]
+  .split('  stage-pages-release:')[0];
 const filters = [
   ...fallbackSelection.matchAll(/jq -r '\n([\s\S]*?)\n\s+' <<<"\$runs"/g),
 ].map((match) => match[1]);
@@ -51,6 +54,7 @@ function deploymentAssets(manifest) {
 function release({
   archiveAttempt = 1,
   archiveRunId = 100,
+  bootstrapSource = false,
   deploymentAttempt = 1,
   deploymentRunId = 200,
   deployAttempt = deploymentAttempt,
@@ -73,6 +77,12 @@ function release({
     sourceSha,
     stageRunAttempt: stageAttempt,
   };
+  if (bootstrapSource) {
+    manifest.bootstrapSource = true;
+    delete manifest.deployRunAttempt;
+    delete manifest.smokeRunAttempt;
+    delete manifest.stageRunAttempt;
+  }
 
   return {
     assets: deploymentAssets(manifest),
@@ -113,10 +123,19 @@ function selectRollback(releases, runId, attempt) {
 function validEvidence(candidate, {archiveAttempts, deploymentAttempts}) {
   const manifest = candidate.manifest;
   const publication = deploymentAttempts[manifest.publicationRunAttempt];
+  const archiveIsValid =
+    archiveAttempts[manifest.archiveRunAttempt]?.build === 'success';
+  if (manifest.bootstrapSource) {
+    return (
+      validRelease(candidate) &&
+      publication?.conclusion === 'success' &&
+      archiveIsValid
+    );
+  }
   return (
     validRelease(candidate) &&
     ['success', 'failure'].includes(publication?.conclusion) &&
-    archiveAttempts[manifest.archiveRunAttempt]?.build === 'success' &&
+    archiveIsValid &&
     deploymentAttempts[manifest.stageRunAttempt]?.['stage-pages-release'] ===
       'success' &&
     deploymentAttempts[manifest.deployRunAttempt]?.deploy === 'success' &&
@@ -154,6 +173,80 @@ test('first documentation deployment retains the latest legacy deployment', () =
   assert.match(
     normalizedWorkflow,
     /"\$pointer_path" == "\.github\/workflows\/jekyll-gh-pages\.yml" &&\s+"\$pointer_event" != push/,
+  );
+});
+
+test('pre-staging documentation archives remain honest bootstrap sources', () => {
+  const bootstrap = release({
+    archiveRunId: 30386738318,
+    bootstrapSource: true,
+    deploymentRunId: 30386738318,
+    publishedAt: 1,
+  });
+  const bootstrapEvidence = {
+    archiveAttempts: {1: {build: 'success'}},
+    deploymentAttempts: {1: {conclusion: 'success'}},
+  };
+  const phased = release({
+    archiveRunId: 30430000000,
+    deploymentRunId: 30430000000,
+    publishedAt: 2,
+  });
+  const phasedEvidence = {
+    archiveAttempts: {1: {build: 'success'}},
+    deploymentAttempts: {
+      1: {
+        conclusion: 'success',
+        deploy: 'success',
+        'production-smoke': 'success',
+        'stage-pages-release': 'success',
+      },
+    },
+  };
+  const failedFirstDeployment = release({
+    archiveRunId: 30420000000,
+    deploymentRunId: 30420000000,
+    draft: true,
+    immutable: false,
+    publishedAt: 2,
+  });
+
+  assert.equal(validEvidence(bootstrap, bootstrapEvidence), true);
+  assert.equal(validEvidence(failedFirstDeployment, phasedEvidence), false);
+  assert.equal(
+    selectRollback(
+      [bootstrap, failedFirstDeployment],
+      bootstrap.manifest.archiveRunId,
+      bootstrap.manifest.archiveRunAttempt,
+    ),
+    bootstrap,
+  );
+  assert.equal(
+    validEvidence(bootstrap, {
+      ...bootstrapEvidence,
+      deploymentAttempts: {1: {conclusion: 'failure'}},
+    }),
+    false,
+  );
+  assert.equal(validEvidence(phased, phasedEvidence), true);
+  assert.equal(
+    [bootstrap, phased].sort(
+      (left, right) => left.publishedAt - right.publishedAt,
+    ).at(-1),
+    phased,
+  );
+  assert.match(retainStep, /"bootstrapSource":true/);
+  assert.doesNotMatch(
+    retainStep,
+    /"stageRunAttempt"|"deployRunAttempt"|"smokeRunAttempt"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$bootstrap_source" == true[\s\S]*?"\$pointer_conclusion" != success/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /manifest_bootstrap[\s\S]*?Rollback bootstrap publication is invalid/,
   );
 });
 
@@ -588,4 +681,19 @@ test('rollback guidance uses the archive identity after redeployment', () => {
   assert.match(deploymentGuide, /jq -r \.archiveRunId/);
   assert.match(deploymentGuide, /jq -r \.archiveRunAttempt/);
   assert.doesNotMatch(deploymentGuide, /gh run view .*--json .*attempt/);
+});
+
+test('deployment guidance distinguishes staged candidates from final releases', () => {
+  assert.match(
+    deploymentGuide,
+    /draft `docs-pages-candidate-v1-<run-id>-<attempt>` prerelease/,
+  );
+  assert.match(
+    deploymentGuide,
+    /creates and publishes a[\s\S]*?`docs-pages-deployment-v1-<run-id>-<attempt>` release/,
+  );
+  assert.doesNotMatch(
+    deploymentGuide,
+    /draft `docs-pages-deployment-v1-<run-id>-<attempt>` prerelease/,
+  );
 });

@@ -115,10 +115,11 @@ pwsh tools/docs/snapshot.ps1 -Version 3.0.10 \
 `.github/workflows/docs.yml` validates every pull request. A successful `main`
 run uploads the complete Docusaurus output as one Pages artifact. After the
 build passes, automation stages the archive, checksum, and deployment manifest
-together in a draft `docs-pages-deployment-v1-<run-id>-<attempt>` prerelease.
-The draft is published and made immutable only after the production smoke test
-passes. Failed or abandoned attempts therefore cannot become the current
-rollback source.
+together in a draft `docs-pages-candidate-v1-<run-id>-<attempt>` prerelease.
+After the production smoke test passes, automation creates and publishes a
+separate immutable `docs-pages-deployment-v1-<run-id>-<attempt>` release.
+Failed or abandoned attempts therefore cannot become the current rollback
+source.
 
 To restore a retained artifact, select its immutable deployment release and
 read the archive run ID and attempt from that release's manifest. These can

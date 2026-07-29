@@ -477,7 +477,30 @@ jobs:
               and .deploymentRunId == $deploymentRunId
               and .publicationRunAttempt == $publicationRunAttempt' \
             "rollback/${pointer_name}" >/dev/null
-          if [[ "$BOOTSTRAP_ROLLBACK" != true ]]; then
+          manifest_bootstrap="$(
+            jq -r '.bootstrapSource // false' "rollback/${pointer_name}"
+          )"
+          if [[ "$manifest_bootstrap" == true ]]; then
+            bootstrap_publication="$(
+              gh api \
+                "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${deployment_run_attempt}" \
+                --jq '[.conclusion, .event, .head_branch, .path, .run_attempt] | @tsv'
+            )"
+            IFS=$'\t' read -r bootstrap_conclusion bootstrap_event \
+              bootstrap_branch bootstrap_path bootstrap_attempt \
+              <<<"$bootstrap_publication"
+            if [[ "$bootstrap_conclusion" != success ||
+                  "$bootstrap_event" != push ||
+                  "$bootstrap_branch" != main ||
+                  "$bootstrap_attempt" != "$deployment_run_attempt" ||
+                  (
+                    "$bootstrap_path" != ".github/workflows/docs.yml" &&
+                    "$bootstrap_path" != ".github/workflows/jekyll-gh-pages.yml"
+                  ) ]]; then
+              echo "Rollback bootstrap publication is invalid." >&2
+              exit 1
+            fi
+          elif [[ "$BOOTSTRAP_ROLLBACK" != true ]]; then
             phase_attempts="$(
               jq -r '
                 [
@@ -733,26 +756,36 @@ jobs:
                       .sourceSha,
                       ".github/workflows/docs.yml",
                       .deploymentRunId,
-                      .stageRunAttempt,
-                      .deployRunAttempt,
-                      .smokeRunAttempt,
-                      .publicationRunAttempt
+                      (.stageRunAttempt // 0),
+                      (.deployRunAttempt // 0),
+                      (.smokeRunAttempt // 0),
+                      .publicationRunAttempt,
+                      (.bootstrapSource // false)
                     ]
                   | @tsv
                 ' prior-deployment.json
               )"
               IFS=$'\t' read -r run_id run_attempt source_sha source_path \
                 deployment_run_id stage_run_attempt deploy_run_attempt \
-                smoke_run_attempt publication_run_attempt <<<"$prior"
+                smoke_run_attempt publication_run_attempt bootstrap_source \
+                <<<"$prior"
               deployment_run_attempt="$publication_run_attempt"
               if [[ ! "$run_id" =~ ^[0-9]+$ ||
                     ! "$run_attempt" =~ ^[0-9]+$ ||
                     ! "$source_sha" =~ ^[0-9a-f]{40}$ ||
                     "$deployment_run_id" != "$pointer_run_id" ||
                     "$publication_run_attempt" != "$pointer_run_attempt" ||
-                    ! "$stage_run_attempt" =~ ^[0-9]+$ ||
-                    ! "$deploy_run_attempt" =~ ^[0-9]+$ ||
-                    ! "$smoke_run_attempt" =~ ^[0-9]+$ ]]; then
+                    (
+                      "$bootstrap_source" != true &&
+                      (
+                        ! "$stage_run_attempt" =~ ^[0-9]+$ ||
+                        "$stage_run_attempt" == 0 ||
+                        ! "$deploy_run_attempt" =~ ^[0-9]+$ ||
+                        "$deploy_run_attempt" == 0 ||
+                        ! "$smoke_run_attempt" =~ ^[0-9]+$ ||
+                        "$smoke_run_attempt" == 0
+                      )
+                    ) ]]; then
                 echo "Latest deployment pointer is invalid." >&2
                 exit 1
               fi
@@ -785,7 +818,12 @@ jobs:
                 echo "Incomplete workflow attempts are not deployment pointers." >&2
                 exit 1
               fi
-              if [[ "$pointer_path" == ".github/workflows/docs.yml" ]]; then
+              if [[ "$bootstrap_source" == true ]]; then
+                if [[ "$pointer_conclusion" != success ]]; then
+                  echo "Bootstrap deployment pointers must be successful." >&2
+                  exit 1
+                fi
+              elif [[ "$pointer_path" == ".github/workflows/docs.yml" ]]; then
                 for phase in \
                   "stage-pages-release:${stage_run_attempt}" \
                   "deploy:${deploy_run_attempt}" \
@@ -1067,14 +1105,11 @@ jobs:
             sha256sum -c "$checksum_name"
           )
           printf \
-            '{"schemaVersion":1,"archiveRunId":%s,"archiveRunAttempt":%s,"sourceSha":"%s","deploymentRunId":%s,"stageRunAttempt":%s,"deployRunAttempt":%s,"smokeRunAttempt":%s,"publicationRunAttempt":%s}\n' \
+            '{"schemaVersion":1,"archiveRunId":%s,"archiveRunAttempt":%s,"sourceSha":"%s","deploymentRunId":%s,"publicationRunAttempt":%s,"bootstrapSource":true}\n' \
             "$PRIOR_RUN_ID" \
             "$PRIOR_RUN_ATTEMPT" \
             "$PRIOR_SOURCE_SHA" \
             "$PRIOR_DEPLOYMENT_RUN_ID" \
-            "$PRIOR_DEPLOYMENT_RUN_ATTEMPT" \
-            "$PRIOR_DEPLOYMENT_RUN_ATTEMPT" \
-            "$PRIOR_DEPLOYMENT_RUN_ATTEMPT" \
             "$PRIOR_DEPLOYMENT_RUN_ATTEMPT" \
             > "prior-archive/${pointer_name}"
           gh release create "$archive_tag" \
