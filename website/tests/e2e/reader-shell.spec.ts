@@ -62,6 +62,39 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
   }
 });
 
+test('canonical branding renders in the shell and page metadata', async ({
+  page,
+}) => {
+  await page.goto('/');
+
+  const logoPath = '/img/logo.png';
+  const navbarLogo = page.getByRole('img', {name: 'Humanizer home'});
+  const heroLogo = page.getByRole('img', {name: 'Humanizer logo'});
+
+  await expect(navbarLogo).toHaveAttribute('src', logoPath);
+  await expect(heroLogo).toHaveAttribute('src', logoPath);
+  await expect(heroLogo).toBeVisible();
+  await expect
+    .poll(() => heroLogo.evaluate((image: HTMLImageElement) => image.naturalWidth))
+    .toBe(115);
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
+    'href',
+    logoPath,
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    'content',
+    'https://humanizr.net/img/social-logo.png',
+  );
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+    'content',
+    'https://humanizr.net/img/social-logo.png',
+  );
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    'content',
+    'summary',
+  );
+});
+
 test('theme follows the system default and remains keyboard switchable', async ({
   page,
 }) => {
