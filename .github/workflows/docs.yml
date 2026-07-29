@@ -38,6 +38,7 @@ concurrency:
 env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_NOLOGO: true
+  GH_REPO: ${{ github.repository }}
 
 jobs:
   build:
