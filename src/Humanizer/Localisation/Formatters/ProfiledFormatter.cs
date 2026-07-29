@@ -167,7 +167,7 @@ enum FormatterTenseMask
 // Shared formatter kernel used whenever a locale can be expressed as declarative resource-key,
 // suffix, preposition, and gender-selection rules. The generator builds FormatterProfile
 // instances from locale-owned YAML so runtime formatting stays branch-light and parse-free.
-sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : DefaultFormatter(culture)
+sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : DefaultFormatter(culture), IFractionalTimeSpanFormatter
 {
     const char LuxembourgishEifelerSuffix = 'n';
     readonly FormatterProfile profile = profile;
@@ -189,6 +189,57 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         => TryGetExactTimeSpanForm(unit, number, out var form)
             ? form
             : DetectNumberForm(number, profile.PhraseDetector);
+
+    internal override FormatterNumberForm GetFractionalTimeSpanPhraseForm(
+        decimal seconds,
+        CardinalPluralCategory category) =>
+        profile.PhraseDetector switch
+        {
+            FormatterNumberDetectorKind.SingularPlural =>
+                category == CardinalPluralCategory.One
+                    ? FormatterNumberForm.Singular
+                    : FormatterNumberForm.Plural,
+            FormatterNumberDetectorKind.ArabicLike => category switch
+            {
+                CardinalPluralCategory.Two => FormatterNumberForm.Dual,
+                CardinalPluralCategory.Few => FormatterNumberForm.Plural,
+                CardinalPluralCategory.Many when seconds is >= 3 and <= 10 => FormatterNumberForm.Plural,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Between2And4Paucal => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                CardinalPluralCategory.Many => FormatterNumberForm.Plural,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Polish => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.SouthSlavic or FormatterNumberDetectorKind.Russian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Slovenian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Two => FormatterNumberForm.Dual,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Lithuanian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Default,
+                _ => FormatterNumberForm.Plural
+            },
+            _ => base.GetFractionalTimeSpanPhraseForm(seconds, category)
+        };
 
     internal override FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
@@ -225,7 +276,7 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     internal override string GetDatePhraseSecondaryPlaceholder(TimeUnit unit, Tense tense, int count) =>
         GetSecondaryPlaceholder(unit, count);
 
-    internal override string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, int count, bool toWords) =>
+    internal override string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, decimal count, bool toWords) =>
         GetSecondaryPlaceholder(unit, count);
 
     /// <summary>
@@ -389,20 +440,28 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     /// <summary>
     /// Determines whether Romanian needs the <c>de</c> preposition for the current value.
     /// </summary>
-    static bool ShouldUseRomanianPreposition(int number)
+    static bool ShouldUseRomanianPreposition(decimal number)
     {
         var numeral = Math.Abs(number % 100);
         return numeral is < 1 or > 19;
     }
 
-    string GetSecondaryPlaceholder(TimeUnit unit, int number) =>
+    string GetSecondaryPlaceholder(TimeUnit unit, decimal number) =>
         (profile.PrepositionMode, profile.SecondaryPlaceholderMode) switch
         {
             (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.None) => string.Empty,
             (FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None) =>
                 ShouldUseRomanianPreposition(number) ? " de" : string.Empty,
             (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN) =>
-                EifelerRule.DoesApply(NumberToWords(unit, number, Culture).AsSpan()) ? string.Empty : LuxembourgishEifelerSuffix.ToString(),
+                EifelerRule.DoesApply(
+                    NumberToWords(
+                        unit,
+                        number >= int.MaxValue
+                            ? int.MaxValue
+                            : decimal.ToInt32(decimal.Truncate(number)),
+                        Culture).AsSpan())
+                    ? string.Empty
+                    : LuxembourgishEifelerSuffix.ToString(),
             _ => throw new UnreachableException()
         };
 

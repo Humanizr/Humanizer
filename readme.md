@@ -23,9 +23,16 @@ using Humanizer;
 var culture = CultureInfo.GetCultureInfo("en-US");
 var text = TimeSpan.FromMinutes(2).Humanize(culture: culture);
 var indianNumber = 1_000_000_000L.ToIndianWords(IndianScaleStyle.CroreBased);
+var precise = TimeSpan.FromMilliseconds(1500).HumanizeWithFractionalSeconds(
+    precision: 1,
+    maxFractionalDigits: 3,
+    roundingMode: MidpointRounding.ToEven,
+    culture: culture,
+    maxUnit: TimeUnit.Second);
 
 Console.WriteLine(text); // 2 minutes
 Console.WriteLine(indianNumber); // one hundred crore
+Console.WriteLine(precise); // 1.5 seconds
 ```
 
 In v4 previews, applications can provide the exact noun forms for a culture's

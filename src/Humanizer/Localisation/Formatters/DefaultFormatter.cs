@@ -63,6 +63,71 @@ public class DefaultFormatter : IFormatter
             ? result
             : throw new InvalidOperationException($"Missing generated time-span phrase for '{Culture.Name}' and unit '{timeUnit}'.");
 
+    /// <summary>
+    /// Returns the localized representation of a non-negative seconds value.
+    /// </summary>
+    /// <param name="seconds">The non-negative seconds value to format.</param>
+    /// <param name="toSymbols">Whether the seconds unit is rendered as a symbol.</param>
+    /// <returns>The localized seconds value.</returns>
+    public virtual string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols)
+    {
+#if NET8_0_OR_GREATER
+        ArgumentOutOfRangeException.ThrowIfNegative(seconds);
+#else
+        if (seconds < 0)
+            throw new ArgumentOutOfRangeException(nameof(seconds));
+#endif
+
+        var visibleSeconds = decimal.Parse(
+            seconds.ToString("0.#######", CultureInfo.InvariantCulture),
+            CultureInfo.InvariantCulture);
+        var countValue = visibleSeconds.ToString(
+            "0.#######",
+            LocaleNumberFormattingOverrides.GetFormattingNumberFormat(Culture));
+
+        var category = ValidateFractionalSecondGrammar(visibleSeconds, toSymbols);
+
+        if (toSymbols)
+        {
+            return string.Concat(countValue, TimeUnitHumanize(TimeUnit.Second));
+        }
+
+        if (!phraseTable.TryGetTimeSpanPhrase(TimeUnit.Second, out var phrase) ||
+            phrase.Multiple is not { } multiple)
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second phrase for '{Culture.Name}'.");
+        }
+
+        if (visibleSeconds == 1 && phrase.Single is { } single)
+        {
+            return single;
+        }
+
+        var form = GetFractionalTimeSpanPhraseForm(visibleSeconds, category);
+        return RenderCountedPhrase(
+            multiple,
+            ResolveTimeSpanPhraseForms(multiple.Forms, form),
+            countValue,
+            GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit.Second, visibleSeconds, false));
+    }
+
+    internal CardinalPluralCategory ValidateFractionalSecondGrammar(decimal seconds, bool toSymbols)
+    {
+        if (!LocalizedInflectionCatalog.TrySelectCategory(Culture, seconds, out var category))
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second grammar for '{Culture.Name}'.");
+        }
+
+        if (!toSymbols &&
+            (!phraseTable.TryGetTimeSpanPhrase(TimeUnit.Second, out var phrase) ||
+             phrase.Multiple is null))
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second phrase for '{Culture.Name}'.");
+        }
+
+        return category;
+    }
+
     /// <inheritdoc/>
     public virtual string TimeSpanHumanize_Age()
     {
@@ -115,6 +180,13 @@ public class DefaultFormatter : IFormatter
     internal virtual FormatterNumberForm GetTimeSpanPhraseForm(TimeUnit unit, int number, bool toWords) =>
         Math.Abs(number) == 1 ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
 
+    internal virtual FormatterNumberForm GetFractionalTimeSpanPhraseForm(
+        decimal seconds,
+        CardinalPluralCategory category) =>
+        category == CardinalPluralCategory.One
+            ? FormatterNumberForm.Singular
+            : FormatterNumberForm.Default;
+
     internal virtual FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         Math.Abs(count) == 1d ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
 
@@ -148,7 +220,7 @@ public class DefaultFormatter : IFormatter
     internal virtual string GetDatePhraseSecondaryPlaceholder(TimeUnit unit, Tense tense, int count) =>
         string.Empty;
 
-    internal virtual string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, int count, bool toWords) =>
+    internal virtual string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, decimal count, bool toWords) =>
         string.Empty;
 
     private protected bool TryFormatDataUnitFromPhraseTable(DataUnit dataUnit, double count, bool toSymbol, out string result)

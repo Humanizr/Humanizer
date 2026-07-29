@@ -243,6 +243,33 @@ The localized duration phrase\.
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 If [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).timeUnit 'Humanizer\.DefaultFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, bool\)\.timeUnit') is unsupported or [unit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,bool).unit 'Humanizer\.DefaultFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, bool\)\.unit') is negative\.
 
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool)'></a>
+
+## DefaultFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\) Method
+
+Returns the localized representation of a non\-negative seconds value\.
+
+```csharp
+public virtual string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool).seconds'></a>
+
+`seconds` [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal')
+
+The non\-negative seconds value to format\.
+
+<a name='Humanizer.DefaultFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool).toSymbols'></a>
+
+`toSymbols` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Whether the seconds unit is rendered as a symbol\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The localized seconds value\.
+
 <a name='Humanizer.DefaultFormatter.TimeSpanHumanize_Age()'></a>
 
 ## DefaultFormatter\.TimeSpanHumanize\_Age\(\) Method

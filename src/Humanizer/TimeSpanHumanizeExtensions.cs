@@ -74,6 +74,439 @@ public static class TimeSpanHumanizeExtensions
         string? collectionSeparator = ", ") =>
         Configurator.TimeSpanHumanizeStrategy.Humanize(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, false, true);
 
+    /// <summary>
+    /// Turns a <see cref="TimeSpan"/> into a human-readable form with fractional seconds.
+    /// </summary>
+    /// <param name="timeSpan">The time span to humanize.</param>
+    /// <param name="precision">The maximum number of time units to return.</param>
+    /// <param name="maxFractionalDigits">The maximum number of fractional-second digits, from 0 through 7.</param>
+    /// <param name="roundingMode">The midpoint rounding mode. Only <see cref="MidpointRounding.ToEven"/> and <see cref="MidpointRounding.AwayFromZero"/> are supported.</param>
+    /// <param name="culture">Culture to use. If null, the current culture is used.</param>
+    /// <param name="maxUnit">The maximum unit of time to output.</param>
+    /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
+    /// <returns>The human-readable time span, using seconds as its minimum unit.</returns>
+    public static string HumanizeWithFractionalSeconds(
+        this TimeSpan timeSpan,
+        int precision,
+        int maxFractionalDigits,
+        MidpointRounding roundingMode,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        string? collectionSeparator = ", ") =>
+        HumanizeWithFractionalSeconds(
+            timeSpan,
+            precision,
+            false,
+            maxFractionalDigits,
+            roundingMode,
+            culture,
+            maxUnit,
+            collectionSeparator);
+
+    /// <summary>
+    /// Turns a <see cref="TimeSpan"/> into a human-readable form with fractional seconds.
+    /// </summary>
+    /// <param name="timeSpan">The time span to humanize.</param>
+    /// <param name="precision">The maximum number of time units to return.</param>
+    /// <param name="countEmptyUnits">Whether empty time units count toward <paramref name="precision"/>.</param>
+    /// <param name="maxFractionalDigits">The maximum number of fractional-second digits, from 0 through 7.</param>
+    /// <param name="roundingMode">The midpoint rounding mode. Only <see cref="MidpointRounding.ToEven"/> and <see cref="MidpointRounding.AwayFromZero"/> are supported.</param>
+    /// <param name="culture">Culture to use. If null, the current culture is used.</param>
+    /// <param name="maxUnit">The maximum unit of time to output.</param>
+    /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
+    /// <returns>The human-readable time span, using seconds as its minimum unit.</returns>
+    public static string HumanizeWithFractionalSeconds(
+        this TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        int maxFractionalDigits,
+        MidpointRounding roundingMode,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        string? collectionSeparator = ", ") =>
+        HumanizeWithFractionalSecondsCore(
+            timeSpan,
+            precision,
+            countEmptyUnits,
+            maxFractionalDigits,
+            roundingMode,
+            culture,
+            maxUnit,
+            collectionSeparator,
+            false);
+
+    /// <summary>
+    /// Turns a <see cref="TimeSpan"/> into a human-readable form using localized unit symbols and fractional seconds.
+    /// </summary>
+    /// <param name="timeSpan">The time span to humanize.</param>
+    /// <param name="precision">The maximum number of time units to return.</param>
+    /// <param name="maxFractionalDigits">The maximum number of fractional-second digits, from 0 through 7.</param>
+    /// <param name="roundingMode">The midpoint rounding mode. Only <see cref="MidpointRounding.ToEven"/> and <see cref="MidpointRounding.AwayFromZero"/> are supported.</param>
+    /// <param name="culture">Culture to use. If null, the current culture is used.</param>
+    /// <param name="maxUnit">The maximum unit of time to output.</param>
+    /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
+    /// <returns>The human-readable time span, using seconds as its minimum unit.</returns>
+    public static string HumanizeToSymbolsWithFractionalSeconds(
+        this TimeSpan timeSpan,
+        int precision,
+        int maxFractionalDigits,
+        MidpointRounding roundingMode,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        string? collectionSeparator = ", ") =>
+        HumanizeToSymbolsWithFractionalSeconds(
+            timeSpan,
+            precision,
+            false,
+            maxFractionalDigits,
+            roundingMode,
+            culture,
+            maxUnit,
+            collectionSeparator);
+
+    /// <summary>
+    /// Turns a <see cref="TimeSpan"/> into a human-readable form using localized unit symbols and fractional seconds.
+    /// </summary>
+    /// <param name="timeSpan">The time span to humanize.</param>
+    /// <param name="precision">The maximum number of time units to return.</param>
+    /// <param name="countEmptyUnits">Whether empty time units count toward <paramref name="precision"/>.</param>
+    /// <param name="maxFractionalDigits">The maximum number of fractional-second digits, from 0 through 7.</param>
+    /// <param name="roundingMode">The midpoint rounding mode. Only <see cref="MidpointRounding.ToEven"/> and <see cref="MidpointRounding.AwayFromZero"/> are supported.</param>
+    /// <param name="culture">Culture to use. If null, the current culture is used.</param>
+    /// <param name="maxUnit">The maximum unit of time to output.</param>
+    /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
+    /// <returns>The human-readable time span, using seconds as its minimum unit.</returns>
+    public static string HumanizeToSymbolsWithFractionalSeconds(
+        this TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        int maxFractionalDigits,
+        MidpointRounding roundingMode,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        string? collectionSeparator = ", ") =>
+        HumanizeWithFractionalSecondsCore(
+            timeSpan,
+            precision,
+            countEmptyUnits,
+            maxFractionalDigits,
+            roundingMode,
+            culture,
+            maxUnit,
+            collectionSeparator,
+            true);
+
+    static string HumanizeWithFractionalSecondsCore(
+        TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        int maxFractionalDigits,
+        MidpointRounding roundingMode,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        string? collectionSeparator,
+        bool toSymbols)
+    {
+        ValidateFractionalSecondArguments(maxFractionalDigits, roundingMode, maxUnit);
+
+        var strategy = Configurator.TimeSpanHumanizeStrategy;
+        if (strategy.GetType() == typeof(DefaultTimeSpanHumanizeStrategy))
+        {
+            return ((DefaultTimeSpanHumanizeStrategy)strategy).HumanizeWithFractionalSeconds(
+                timeSpan,
+                precision,
+                countEmptyUnits,
+                culture,
+                maxUnit,
+                collectionSeparator,
+                maxFractionalDigits,
+                roundingMode,
+                toSymbols);
+        }
+
+        if (strategy is IFractionalTimeSpanHumanizeStrategy fractionalStrategy)
+        {
+            return fractionalStrategy.HumanizeWithFractionalSeconds(
+                timeSpan,
+                precision,
+                countEmptyUnits,
+                culture,
+                maxUnit,
+                collectionSeparator,
+                maxFractionalDigits,
+                roundingMode,
+                toSymbols);
+        }
+
+        var roundedTimeSpan = RoundToFractionalSecondPrecision(timeSpan, maxFractionalDigits, roundingMode);
+        if (HasVisibleFractionalSeconds(roundedTimeSpan, precision, countEmptyUnits, maxUnit))
+        {
+            throw new InvalidOperationException(
+                $"The configured {nameof(ITimeSpanHumanizeStrategy)} does not support fractional seconds. " +
+                $"Implement {nameof(IFractionalTimeSpanHumanizeStrategy)} to handle genuinely fractional results.");
+        }
+
+        return strategy.Humanize(
+            roundedTimeSpan.ToTimeSpan(),
+            precision,
+            countEmptyUnits,
+            culture,
+            maxUnit,
+            TimeUnit.Second,
+            collectionSeparator,
+            false,
+            toSymbols);
+    }
+
+    internal static void ValidateFractionalSecondArguments(
+        int maxFractionalDigits,
+        MidpointRounding roundingMode,
+        TimeUnit maxUnit)
+    {
+        if (maxFractionalDigits is < 0 or > 7)
+        {
+            throw new ArgumentOutOfRangeException(nameof(maxFractionalDigits));
+        }
+
+        if (roundingMode is not (MidpointRounding.ToEven or MidpointRounding.AwayFromZero))
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(roundingMode),
+                roundingMode,
+                "Fractional seconds support only midpoint rounding ToEven and AwayFromZero.");
+        }
+
+        if (maxUnit is < TimeUnit.Second or > TimeUnit.Year)
+        {
+            throw new ArgumentOutOfRangeException(nameof(maxUnit));
+        }
+    }
+
+    static RoundedTimeSpan RoundToFractionalSecondPrecision(
+        TimeSpan timeSpan,
+        int maxFractionalDigits,
+        MidpointRounding roundingMode)
+    {
+        var magnitudeTicks = Math.Abs((decimal)timeSpan.Ticks);
+        var quantumTicks = DecimalPowersOfTen[7 - maxFractionalDigits];
+        var roundedMagnitudeTicks = decimal.Round(magnitudeTicks / quantumTicks, 0, roundingMode) * quantumTicks;
+        return new(roundedMagnitudeTicks, timeSpan.Ticks < 0);
+    }
+
+    static bool HasVisibleFractionalSeconds(
+        RoundedTimeSpan roundedTimeSpan,
+        int precision,
+        bool countEmptyUnits,
+        TimeUnit maxUnit) =>
+        CreateFractionalSecondParts(roundedTimeSpan, precision, countEmptyUnits, maxUnit)
+            .Any(static part => part.Unit == TimeUnit.Second && decimal.Truncate(part.Value) != part.Value);
+
+    internal static string DefaultHumanizeWithFractionalSeconds(
+        TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        string? collectionSeparator,
+        int maxFractionalDigits,
+        MidpointRounding roundingMode,
+        bool toSymbols)
+    {
+        ValidateFractionalSecondArguments(maxFractionalDigits, roundingMode, maxUnit);
+
+        var roundedTimeSpan = RoundToFractionalSecondPrecision(timeSpan, maxFractionalDigits, roundingMode);
+        var parts = CreateFractionalSecondParts(roundedTimeSpan, precision, countEmptyUnits, maxUnit);
+        var formatter = Configurator.GetFormatter(culture);
+        var formattedParts = new List<string>(parts.Count);
+        foreach (var part in parts)
+        {
+            if (part.Unit != TimeUnit.Second)
+            {
+                formattedParts.Add(FormatTimePart(
+                    formatter,
+                    part.Unit,
+                    decimal.ToInt32(part.Value),
+                    culture,
+                    false,
+                    toSymbols));
+                continue;
+            }
+
+            if (IsBuiltInFractionalTimeSpanFormatter(formatter))
+            {
+                ((DefaultFormatter)formatter).ValidateFractionalSecondGrammar(part.Value, toSymbols);
+            }
+
+            if (decimal.Truncate(part.Value) == part.Value &&
+                part.Value is >= int.MinValue and <= int.MaxValue)
+            {
+                formattedParts.Add(FormatTimePart(
+                    formatter,
+                    TimeUnit.Second,
+                    SaturateToInt(part.Value),
+                    culture,
+                    false,
+                    toSymbols));
+                continue;
+            }
+
+            if (formatter.GetType() == typeof(DefaultFormatter))
+            {
+                formattedParts.Add(((DefaultFormatter)formatter).TimeSpanHumanizeWithFractionalSeconds(part.Value, toSymbols));
+                continue;
+            }
+
+            if (formatter is not IFractionalTimeSpanFormatter fractionalFormatter)
+            {
+                throw new InvalidOperationException(
+                    $"The configured {nameof(IFormatter)} for '{culture?.Name ?? CultureInfo.CurrentCulture.Name}' " +
+                    $"does not support fractional seconds. Implement {nameof(IFractionalTimeSpanFormatter)}.");
+            }
+
+            formattedParts.Add(fractionalFormatter.TimeSpanHumanizeWithFractionalSeconds(part.Value, toSymbols));
+        }
+
+        return ConcatenateTimeSpanParts(formattedParts, culture, collectionSeparator);
+    }
+
+    static bool IsBuiltInFractionalTimeSpanFormatter(IFormatter formatter) =>
+        formatter.GetType() == typeof(DefaultFormatter) || formatter is ProfiledFormatter;
+    static List<FractionalSecondPart> CreateFractionalSecondParts(
+        RoundedTimeSpan roundedTimeSpan,
+        int precision,
+        bool countEmptyUnits,
+        TimeUnit maxUnit)
+    {
+        if (precision <= 0)
+        {
+            return [];
+        }
+
+        var parts = new List<FractionalSecondPart>(Math.Min(precision, TimeUnits.Length));
+        var firstValueFound = false;
+        var countedUnits = 0;
+
+        foreach (var timeUnit in TimeUnits)
+        {
+            if (timeUnit > maxUnit || timeUnit < TimeUnit.Second)
+            {
+                continue;
+            }
+
+            var value = timeUnit == TimeUnit.Second
+                ? GetFractionalSeconds(roundedTimeSpan, maxUnit)
+                : GetRoundedTimeUnitNumericalValue(timeUnit, roundedTimeSpan.MagnitudeTicks, maxUnit);
+            if (value == 0 && !firstValueFound)
+            {
+                continue;
+            }
+
+            firstValueFound = true;
+            if (countEmptyUnits)
+            {
+                countedUnits++;
+                if (value != 0)
+                {
+                    parts.Add(new(timeUnit, value));
+                }
+
+                if (countedUnits >= precision)
+                {
+                    return parts;
+                }
+            }
+            else if (value != 0)
+            {
+                parts.Add(new(timeUnit, value));
+                if (parts.Count >= precision)
+                {
+                    return parts;
+                }
+            }
+        }
+
+        if (parts.Count == 0)
+        {
+            parts.Add(new(TimeUnit.Second, 0));
+        }
+
+        return parts;
+    }
+
+    static decimal GetFractionalSeconds(RoundedTimeSpan timeSpan, TimeUnit maxUnit) =>
+        maxUnit == TimeUnit.Second
+            ? timeSpan.MagnitudeTicks / TimeSpan.TicksPerSecond
+            : timeSpan.MagnitudeTicks % TimeSpan.TicksPerMinute / TimeSpan.TicksPerSecond;
+
+    static decimal GetRoundedTimeUnitNumericalValue(
+        TimeUnit timeUnit,
+        decimal magnitudeTicks,
+        TimeUnit maximumTimeUnit)
+    {
+        var wholeDays = decimal.ToInt32(decimal.Truncate(magnitudeTicks / TimeSpan.TicksPerDay));
+        var isMaximum = timeUnit == maximumTimeUnit;
+
+        return timeUnit switch
+        {
+            TimeUnit.Minute => isMaximum
+                ? SaturateToInt(magnitudeTicks / TimeSpan.TicksPerMinute)
+                : decimal.Truncate(magnitudeTicks / TimeSpan.TicksPerMinute) % 60,
+            TimeUnit.Hour => isMaximum
+                ? SaturateToInt(magnitudeTicks / TimeSpan.TicksPerHour)
+                : decimal.Truncate(magnitudeTicks / TimeSpan.TicksPerHour) % 24,
+            TimeUnit.Day => maximumTimeUnit switch
+            {
+                TimeUnit.Day => wholeDays,
+                TimeUnit.Week => wholeDays % DaysInAWeek,
+                _ => (int)(wholeDays % DaysInAMonth) % DaysInAWeek
+            },
+            TimeUnit.Week => maximumTimeUnit == TimeUnit.Week
+                ? wholeDays / DaysInAWeek
+                : (int)(wholeDays % DaysInAMonth) / DaysInAWeek,
+            TimeUnit.Month => isMaximum
+                ? (int)(wholeDays / DaysInAMonth)
+                : (int)((wholeDays % DaysInAYear) / DaysInAMonth),
+            TimeUnit.Year => (int)(wholeDays / DaysInAYear),
+            _ => 0
+        };
+    }
+
+    static int SaturateToInt(decimal value) =>
+        value >= int.MaxValue ? int.MaxValue : decimal.ToInt32(decimal.Truncate(value));
+
+    static readonly decimal[] DecimalPowersOfTen =
+    [
+        1m,
+        10m,
+        100m,
+        1000m,
+        10000m,
+        100000m,
+        1000000m,
+        10000000m
+    ];
+
+    readonly record struct FractionalSecondPart(TimeUnit Unit, decimal Value);
+
+    readonly record struct RoundedTimeSpan(decimal MagnitudeTicks, bool IsNegative)
+    {
+        public TimeSpan ToTimeSpan()
+        {
+            var ticks = IsNegative ? -MagnitudeTicks : MagnitudeTicks;
+            if (ticks >= long.MaxValue)
+            {
+                return TimeSpan.MaxValue;
+            }
+
+            if (ticks <= long.MinValue)
+            {
+                return TimeSpan.MinValue;
+            }
+
+            return TimeSpan.FromTicks(decimal.ToInt64(ticks));
+        }
+    }
+
     internal static string DefaultHumanize(
         TimeSpan timeSpan,
         int precision,

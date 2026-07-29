@@ -306,6 +306,7 @@ namespace Humanizer
         public virtual string DateHumanize_Now() { }
         protected virtual string NumberToWords(Humanizer.TimeUnit unit, int number, System.Globalization.CultureInfo culture) { }
         public virtual string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords = false) { }
+        public virtual string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols) { }
         public virtual string TimeSpanHumanize_Age() { }
         public virtual string TimeSpanHumanize_Zero() { }
         public virtual string TimeUnitHumanize(Humanizer.TimeUnit timeUnit) { }
@@ -314,6 +315,7 @@ namespace Humanizer
     {
         public DefaultTimeSpanHumanizeStrategy() { }
         public string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toWords, bool toSymbols) { }
+        public virtual string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols) { }
     }
     public class DynamicNumberOfCharactersAndPreserveWordsTruncator : Humanizer.ITruncator
     {
@@ -423,6 +425,14 @@ namespace Humanizer
         string TimeSpanHumanize_Age();
         string TimeSpanHumanize_Zero();
         string TimeUnitHumanize(Humanizer.TimeUnit timeUnit);
+    }
+    public interface IFractionalTimeSpanFormatter
+    {
+        string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols);
+    }
+    public interface IFractionalTimeSpanHumanizeStrategy
+    {
+        string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols);
     }
     public interface ILongOrdinalizer : Humanizer.IOrdinalizer
     {
@@ -1369,6 +1379,10 @@ namespace Humanizer
         public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ", bool toWords = false) { }
         public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ") { }
         public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ") { }
+        public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
+        public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
+        public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
+        public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
         public static string ToAge(this System.TimeSpan timeSpan, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 7, bool toWords = false) { }
     }
     public enum TimeUnit

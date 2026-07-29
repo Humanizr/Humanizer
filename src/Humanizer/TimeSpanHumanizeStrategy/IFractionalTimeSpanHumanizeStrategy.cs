@@ -1,32 +1,10 @@
 namespace Humanizer;
 
 /// <summary>
-/// The default strategy for converting <see cref="TimeSpan"/> values into human-readable text.
+/// Extends a time-span humanization strategy with fractional-second support.
 /// </summary>
-public class DefaultTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
+public interface IFractionalTimeSpanHumanizeStrategy
 {
-    /// <inheritdoc />
-    public string Humanize(
-        TimeSpan timeSpan,
-        int precision,
-        bool countEmptyUnits,
-        CultureInfo? culture,
-        TimeUnit maxUnit,
-        TimeUnit minUnit,
-        string? collectionSeparator,
-        bool toWords,
-        bool toSymbols) =>
-        TimeSpanHumanizeExtensions.DefaultHumanize(
-            timeSpan,
-            precision,
-            countEmptyUnits,
-            culture,
-            maxUnit,
-            minUnit,
-            collectionSeparator,
-            toWords,
-            toSymbols);
-
     /// <summary>
     /// Converts a <see cref="TimeSpan"/> into human-readable text with seconds as the minimum unit.
     /// </summary>
@@ -40,7 +18,7 @@ public class DefaultTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
     /// <param name="roundingMode">The midpoint rounding mode.</param>
     /// <param name="toSymbols">Whether time units are rendered as symbols.</param>
     /// <returns>The human-readable time span.</returns>
-    public virtual string HumanizeWithFractionalSeconds(
+    string HumanizeWithFractionalSeconds(
         TimeSpan timeSpan,
         int precision,
         bool countEmptyUnits,
@@ -49,15 +27,5 @@ public class DefaultTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
         string? collectionSeparator,
         int maxFractionalDigits,
         MidpointRounding roundingMode,
-        bool toSymbols) =>
-        TimeSpanHumanizeExtensions.DefaultHumanizeWithFractionalSeconds(
-            timeSpan,
-            precision,
-            countEmptyUnits,
-            culture,
-            maxUnit,
-            collectionSeparator,
-            maxFractionalDigits,
-            roundingMode,
-            toSymbols);
+        bool toSymbols);
 }
