@@ -158,9 +158,8 @@ function downloadedArtifactMatches(selected, embedded) {
 
   return (
     selected.path === '.github/workflows/docs.yml' &&
-    embedded.sourceSha === selected.sourceSha &&
-    embedded.archiveRunId === selected.runId &&
-    embedded.archiveRunAttempt === selected.attempt
+    selected.attempt === 1 &&
+    embedded.sourceSha === selected.sourceSha
   );
 }
 
@@ -262,26 +261,24 @@ test('pre-staging documentation archives remain honest bootstrap sources', () =>
   );
 });
 
-test('bootstrap retention rejects an artifact from a different rerun attempt', () => {
+test('bootstrap retention accepts only single-attempt artifacts with the historical identity shape', () => {
   const selected = {
     attempt: 1,
     path: '.github/workflows/docs.yml',
-    runId: 30386738318,
-    sourceSha: legacyRun.head_sha,
+    runId: 30418201624,
+    sourceSha: '567fa79f7d3f0563910bb73ed9ad27db5e82d58c',
   };
   const embedded = {
-    archiveRunAttempt: 2,
-    archiveRunId: selected.runId,
     sourceSha: selected.sourceSha,
   };
 
-  assert.equal(downloadedArtifactMatches(selected, embedded), false);
+  assert.equal(downloadedArtifactMatches(selected, embedded), true);
+  assert.equal(downloadedArtifactMatches({...selected, attempt: 2}, embedded), false);
   assert.equal(
     downloadedArtifactMatches(selected, {
-      ...embedded,
-      archiveRunAttempt: selected.attempt,
+      sourceSha: '0123456789abcdef0123456789abcdef01234567',
     }),
-    true,
+    false,
   );
   assert.equal(
     downloadedArtifactMatches(
@@ -306,12 +303,49 @@ test('bootstrap retention rejects an artifact from a different rerun attempt', (
     /tar -xOf prior-download\/artifact\.tar \.\/deployment\.json/,
   );
   assert.match(
+    normalizedWorkflow,
+    /- name: Download prior Pages artifact[\s\S]*?run-id: \$\{\{ steps\.prior\.outputs\.run_id \}\}/,
+  );
+  assert.match(
     retainStep,
-    /\.sourceSha == \$sourceSha\s+and \.archiveRunId == \$archiveRunId\s+and \.archiveRunAttempt == \$archiveRunAttempt[\s\S]*?prior-download\/deployment\.json/,
+    /\.sourceSha == \$sourceSha' \\\n\s+prior-download\/deployment\.json/,
+  );
+  assert.match(
+    retainStep,
+    /"\$PRIOR_RUN_ATTEMPT" != 1[\s\S]*?rerun pre-staging artifact cannot prove its exact attempt/,
   );
   assert.match(
     retainStep,
     /"\$PRIOR_RUN_ATTEMPT" != 1[\s\S]*?rerun legacy artifact cannot prove its exact attempt/,
+  );
+});
+
+test('bootstrap selection skips reruns and continues to an older provable source', () => {
+  const olderDocumentation = {
+    ...legacyRun,
+    created_at: '2026-07-29T01:00:00Z',
+    head_sha: '0123456789abcdef0123456789abcdef01234567',
+    id: 30410000000,
+    path: '.github/workflows/docs.yml',
+  };
+  const rerun = {
+    ...olderDocumentation,
+    created_at: '2026-07-29T02:00:00Z',
+    id: 30420000000,
+    run_attempt: 2,
+  };
+
+  assert.equal(
+    selectPrior([legacyRun, olderDocumentation, rerun]),
+    `${olderDocumentation.id}\t1\t${olderDocumentation.head_sha}\t${olderDocumentation.path}`,
+  );
+  assert.equal(
+    selectPrior([legacyRun, rerun]),
+    `${legacyRun.id}\t1\t${legacyRun.head_sha}\t${legacyRun.path}`,
+  );
+  assert.equal(
+    filters.every((filter) => filter.includes('.run_attempt == 1')),
+    true,
   );
 });
 

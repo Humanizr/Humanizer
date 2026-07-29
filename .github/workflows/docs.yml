@@ -371,7 +371,10 @@ jobs:
               jq -r '
                 [
                   .[].workflow_runs[]
-                  | select(.path == ".github/workflows/docs.yml")
+                  | select(
+                      .path == ".github/workflows/docs.yml"
+                      and .run_attempt == 1
+                    )
                 ]
                 | sort_by(.created_at)
                 | last
@@ -382,7 +385,10 @@ jobs:
               jq -r '
                 [
                   .[].workflow_runs[]
-                  | select(.path == ".github/workflows/jekyll-gh-pages.yml")
+                  | select(
+                      .path == ".github/workflows/jekyll-gh-pages.yml"
+                      and .run_attempt == 1
+                    )
                 ]
                 | sort_by(.created_at)
                 | last
@@ -920,7 +926,10 @@ jobs:
                   jq -r '
                     [
                       .[].workflow_runs[]
-                      | select(.path == ".github/workflows/docs.yml")
+                      | select(
+                          .path == ".github/workflows/docs.yml"
+                          and .run_attempt == 1
+                        )
                     ]
                     | sort_by(.created_at)
                     | last
@@ -931,7 +940,10 @@ jobs:
                   jq -r '
                     [
                       .[].workflow_runs[]
-                      | select(.path == ".github/workflows/jekyll-gh-pages.yml")
+                      | select(
+                          .path == ".github/workflows/jekyll-gh-pages.yml"
+                          and .run_attempt == 1
+                        )
                     ]
                     | sort_by(.created_at)
                     | last
@@ -957,7 +969,10 @@ jobs:
               jq -r '
                 [
                   .[].workflow_runs[]
-                  | select(.path == ".github/workflows/docs.yml")
+                  | select(
+                      .path == ".github/workflows/docs.yml"
+                      and .run_attempt == 1
+                    )
                 ]
                 | sort_by(.created_at)
                 | (last // empty)
@@ -970,7 +985,10 @@ jobs:
                 jq -r '
                   [
                     .[].workflow_runs[]
-                    | select(.path == ".github/workflows/jekyll-gh-pages.yml")
+                    | select(
+                        .path == ".github/workflows/jekyll-gh-pages.yml"
+                        and .run_attempt == 1
+                      )
                   ]
                   | sort_by(.created_at)
                   | (last // empty)
@@ -1105,6 +1123,10 @@ jobs:
           checksum_name="${archive_name}.sha256"
           pointer_name="deployment-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}.json"
           if [[ "$PRIOR_SOURCE_PATH" == ".github/workflows/docs.yml" ]]; then
+            if [[ "$PRIOR_RUN_ATTEMPT" != 1 ]]; then
+              echo "A rerun pre-staging artifact cannot prove its exact attempt." >&2
+              exit 1
+            fi
             if ! tar -xOf prior-download/artifact.tar ./deployment.json \
               > prior-download/deployment.json; then
               echo "Prior Pages artifact has no deployment identity." >&2
@@ -1112,13 +1134,9 @@ jobs:
             fi
             if ! jq -e \
               --arg sourceSha "$PRIOR_SOURCE_SHA" \
-              --argjson archiveRunId "$PRIOR_RUN_ID" \
-              --argjson archiveRunAttempt "$PRIOR_RUN_ATTEMPT" \
-              '.sourceSha == $sourceSha
-                and .archiveRunId == $archiveRunId
-                and .archiveRunAttempt == $archiveRunAttempt' \
+              '.sourceSha == $sourceSha' \
               prior-download/deployment.json >/dev/null; then
-              echo "Prior Pages artifact does not match its selected workflow attempt." >&2
+              echo "Prior Pages artifact does not match its selected workflow source." >&2
               exit 1
             fi
           elif [[ "$PRIOR_SOURCE_PATH" == ".github/workflows/jekyll-gh-pages.yml" ]]; then
