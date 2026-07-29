@@ -280,9 +280,6 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         CardinalPluralCategory category) =>
         profile.DataUnitDetector switch
         {
-            FormatterNumberDetectorKind.None
-                when dataUnit is >= DataUnit.DecimalKilobyte and <= DataUnit.BinaryPebibyte =>
-                count == 1 ? FormatterNumberForm.Singular : FormatterNumberForm.Default,
             FormatterNumberDetectorKind.None =>
                 category == CardinalPluralCategory.One ? FormatterNumberForm.Singular : FormatterNumberForm.Default,
             FormatterNumberDetectorKind.SingularPlural

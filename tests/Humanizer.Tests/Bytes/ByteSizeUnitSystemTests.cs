@@ -377,6 +377,28 @@ public class ByteSizeUnitSystemTests
             ByteSize.FromBytes(0.5 * bytes).FormatFullWords(unitSystem, $"0.0 {symbol}", culture));
     }
 
+    [Theory]
+    [InlineData("fr", 0, "0 kilooctet", "0 kibioctet")]
+    [InlineData("pt", 0, "0 kilobyte", "0 kibibyte")]
+    [InlineData("da", 0.5, "0,5 kilobyte", "0,5 kibibyte")]
+    public void ExactFullWordsUseCanonicalOneCategory(
+        string cultureName,
+        double count,
+        string expectedDecimal,
+        string expectedBinary)
+    {
+        var culture = CultureInfo.GetCultureInfo(cultureName);
+
+        Assert.Equal(
+            expectedDecimal,
+            ByteSize.FromBytes(count * ByteSize.BytesInDecimalKilobyte)
+                .FormatFullWords(ByteSizeUnitSystem.DecimalSi, "0.## kB", culture));
+        Assert.Equal(
+            expectedBinary,
+            ByteSize.FromBytes(count * ByteSize.BytesInKibibyte)
+                .FormatFullWords(ByteSizeUnitSystem.BinaryIec, "0.## KiB", culture));
+    }
+
     [Fact]
     public void StandardFormatsDoNotReplaceTextInsideUnitToken()
     {
