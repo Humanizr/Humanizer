@@ -308,7 +308,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             return new CountedPhrase(
-                preserveDuplicateForms ? forms : forms?.CollapseDuplicates(),
+                preserveDuplicateForms ? forms : forms.CollapseDuplicates(),
                 countPlacement,
                 GetOptionalLiteral(mapping, "beforeCount", $"{path}.beforeCount", ["prep"]),
                 GetOptionalLiteral(mapping, "afterCount", $"{path}.afterCount", ["prep"]),
