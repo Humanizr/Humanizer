@@ -5,7 +5,7 @@ namespace Humanizer;
 /// </summary>
 /// <remarks>
 /// For <see cref="DecimalSi"/> and <see cref="BinaryIec"/>, explicit parsers and format-token selectors
-/// match SI/IEC prefixed unit symbols without regard to letter casing, while formatting emits canonical symbol casing.
+/// match SI/IEC-prefixed unit symbols without regard to letter casing, while formatting emits canonical symbol casing.
 /// The <c>b</c> and <c>B</c> symbols remain case-sensitive.
 /// <see cref="Legacy"/> preserves the established parsing and formatting behavior.
 /// </remarks>

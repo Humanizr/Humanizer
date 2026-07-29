@@ -269,7 +269,10 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
                     : profile.CaseTimeSpanDetector);
 
     internal override FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
-        DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
+        profile.DataUnitDetector == FormatterNumberDetectorKind.None &&
+        dataUnit is >= DataUnit.DecimalKilobyte and <= DataUnit.BinaryPebibyte
+            ? base.GetDataUnitPhraseForm(dataUnit, count)
+            : DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
 
     internal override FormatterNumberForm GetDataUnitPhraseForm(
         DataUnit dataUnit,

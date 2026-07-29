@@ -279,6 +279,15 @@ public class ByteSizeUnitSystemTests
     }
 
     [Fact]
+    public void ExplicitFullWordsHandleTinyDisplayedDecimals() =>
+        Assert.Equal(
+            "0.0000000000000000000000000001 kilobyte",
+            ByteSize.FromDecimalKilobytes(1e-28).FormatFullWords(
+                ByteSizeUnitSystem.DecimalSi,
+                "0.0000000000000000000000000000 kB",
+                CultureInfo.InvariantCulture));
+
+    [Fact]
     public void StandardFormatsDoNotReplaceTextInsideUnitToken()
     {
         var culture = CultureInfo.InvariantCulture;

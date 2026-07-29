@@ -372,7 +372,10 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
     }
 
     static decimal NormalizeDecimal(decimal value) =>
-        decimal.Parse(value.ToString("G29", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+        decimal.Parse(
+            value.ToString("G29", CultureInfo.InvariantCulture),
+            NumberStyles.Float,
+            CultureInfo.InvariantCulture);
 
     bool TryFormatDateFromPhraseTable(TimeUnit unit, Tense tense, int count, out string result)
     {

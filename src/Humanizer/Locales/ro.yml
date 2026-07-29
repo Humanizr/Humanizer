@@ -356,22 +356,22 @@ surfaces:
         symbol: 'TB'
       decimalKilobyte:
         forms:
-          default: 'kilobytes'
+          default: 'kilobyți'
           singular: 'kilobyte'
         symbol: 'kB'
       decimalMegabyte:
         forms:
-          default: 'megabytes'
+          default: 'megabyți'
           singular: 'megabyte'
         symbol: 'MB'
       decimalGigabyte:
         forms:
-          default: 'gigabytes'
+          default: 'gigabyți'
           singular: 'gigabyte'
         symbol: 'GB'
       decimalTerabyte:
         forms:
-          default: 'terabytes'
+          default: 'terabyți'
           singular: 'terabyte'
         symbol: 'TB'
       decimalPetabyte:

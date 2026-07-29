@@ -27,6 +27,6 @@ Uses binary IEC units where each successive unit is 1024 times the previous unit
 
 ### Remarks
 For [DecimalSi](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.DecimalSi 'Humanizer\.ByteSizeUnitSystem\.DecimalSi') and [BinaryIec](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.BinaryIec 'Humanizer\.ByteSizeUnitSystem\.BinaryIec'), explicit parsers and format\-token selectors
-match SI/IEC prefixed unit symbols without regard to letter casing, while formatting emits canonical symbol casing\.
+match SI/IEC\-prefixed unit symbols without regard to letter casing, while formatting emits canonical symbol casing\.
 The `b` and `B` symbols remain case\-sensitive\.
 [Legacy](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.Legacy 'Humanizer\.ByteSizeUnitSystem\.Legacy') preserves the established parsing and formatting behavior\.
