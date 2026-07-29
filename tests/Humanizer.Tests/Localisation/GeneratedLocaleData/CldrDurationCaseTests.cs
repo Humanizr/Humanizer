@@ -418,7 +418,11 @@ public class CldrDurationCaseTests
             }
 
             IGrammaticalCaseTimeSpanFormatter formatter = new DefaultFormatter(localeCode);
+#if NET5_0_OR_GREATER
             foreach (var grammaticalCase in Enum.GetValues<GrammaticalCase>())
+#else
+            foreach (var grammaticalCase in (GrammaticalCase[])Enum.GetValues(typeof(GrammaticalCase)))
+#endif
             {
                 if (!table.TryGetCase(grammaticalCase, out var durationCase))
                 {
