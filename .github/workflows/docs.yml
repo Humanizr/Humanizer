@@ -1410,6 +1410,7 @@ jobs:
       - production-smoke
       - stage-pages-release
     permissions:
+      actions: read
       contents: write
     steps:
       - name: Record exact currently deployable archive

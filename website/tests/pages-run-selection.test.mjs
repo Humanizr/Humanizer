@@ -369,6 +369,7 @@ test('deployment release stays draft until production is verified', () => {
   assert.match(stage, /gh release create "\$release_tag"[\s\S]*?--draft/);
   assert.match(deploy, /needs\.stage-pages-release\.result == 'success'/);
   assert.match(record, /needs\.production-smoke\.result == 'success'/);
+  assert.match(record, /permissions:\n      actions: read\n      contents: write/);
   assert.match(record, /--method PATCH[\s\S]*?-F draft=false/);
   assert.match(record, /"\$draft" != false[\s\S]*?"\$immutable" != true/);
 });
