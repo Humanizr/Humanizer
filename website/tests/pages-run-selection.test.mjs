@@ -72,6 +72,8 @@ test('missing deployment history fails closed', () => {
 test('release operations have repository context without a checkout', () => {
   const workflowEnv = normalizedWorkflow.match(/^env:\n([\s\S]*?)^\S/m)?.[1];
   assert.match(workflowEnv, /^  GH_REPO: \$\{\{ github\.repository \}\}$/m);
+  assert.match(normalizedWorkflow, /defaults:\n  run:\n    shell: bash/);
+  assert.doesNotMatch(normalizedWorkflow, /2>\/dev\/null \|\|\n\s+true/);
 });
 
 test('expensive documentation gates run in parallel before retention', () => {

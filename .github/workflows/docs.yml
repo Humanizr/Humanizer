@@ -26,6 +26,10 @@ on:
 
 permissions: {}
 
+defaults:
+  run:
+    shell: bash
+
 concurrency:
   group: >-
     ${{
@@ -745,17 +749,27 @@ jobs:
           pointer_name="deployment-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}.json"
           release="$(
             gh api \
-              "repos/${GITHUB_REPOSITORY}/releases/tags/${archive_tag}" \
-              --jq '
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r --arg tag "$archive_tag" '
                 [
-                  .immutable,
-                  .target_commitish,
-                  (.assets | length),
-                  ([.assets[].name] | sort | join(","))
+                  .[][]
+                  | select(.tag_name == $tag)
                 ]
+                | if length > 1 then
+                    error("duplicate prior rollback release")
+                  else
+                    (first // empty)
+                  end
+                | [
+                    .immutable,
+                    .target_commitish,
+                    (.assets | length),
+                    ([.assets[].name] | sort | join(","))
+                  ]
                 | @tsv
-              ' 2>/dev/null ||
-              true
+              '
           )"
           if [[ -n "$release" ]]; then
             IFS=$'\t' read -r immutable target asset_count asset_names \
