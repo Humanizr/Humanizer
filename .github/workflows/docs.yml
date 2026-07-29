@@ -979,17 +979,25 @@ jobs:
             if [[ -z "$prior" ]]; then
               prior="$(
                 jq -r '
-                  [
-                    .[].workflow_runs[]
-                    | select(
-                        .path == ".github/workflows/jekyll-gh-pages.yml"
-                        and .run_attempt == 1
-                      )
-                  ]
-                  | sort_by(.created_at)
-                  | (last // empty)
-                  | [.id, .run_attempt, .head_sha, .path]
-                  | @tsv
+                  . as $runs
+                  | if any(
+                      $runs[].workflow_runs[];
+                      .path == ".github/workflows/docs.yml"
+                    ) then
+                      empty
+                    else
+                      [
+                        $runs[].workflow_runs[]
+                        | select(
+                            .path == ".github/workflows/jekyll-gh-pages.yml"
+                            and .run_attempt == 1
+                          )
+                      ]
+                      | sort_by(.created_at)
+                      | (last // empty)
+                      | [.id, .run_attempt, .head_sha, .path]
+                      | @tsv
+                    end
                 ' <<<"$runs"
               )"
             fi

@@ -62,6 +62,22 @@ function legacyIsCurrent(workflowRuns, legacyId) {
   return documentation.length === 0 && latestLegacy?.id === legacyId;
 }
 
+function bootstrapLifecycle(workflowRuns) {
+  const retained = selectPrior(workflowRuns);
+  if (!retained)
+    return {recoverable: false, reselected: '', retained};
+
+  const [runId, , , path] = retained.split('\t');
+  const recoverable =
+    path === '.github/workflows/docs.yml' ||
+    legacyIsCurrent(workflowRuns, Number(runId));
+  return {
+    recoverable,
+    reselected: recoverable ? retained : '',
+    retained,
+  };
+}
+
 function deploymentAssets(manifest) {
   return [
     `deployment-${manifest.deploymentRunId}-${manifest.publicationRunAttempt}.json`,
@@ -384,7 +400,7 @@ test('bootstrap selection skips reruns and continues to an older provable source
   );
   assert.equal(
     selectPrior([legacyRun, rerun]),
-    `${legacyRun.id}\t1\t${legacyRun.head_sha}\t${legacyRun.path}`,
+    '',
   );
   assert.equal(
     filters.every((filter) => filter.includes('.run_attempt == 1')),
@@ -392,7 +408,7 @@ test('bootstrap selection skips reruns and continues to an older provable source
   );
 });
 
-test('a modern attempt-two deployment supersedes legacy policy but is not a bootstrap download', () => {
+test('retain, recovery, and reselection agree after a modern attempt-two deployment', () => {
   const modernRerun = {
     ...legacyRun,
     created_at: '2026-07-29T02:00:00Z',
@@ -408,15 +424,29 @@ test('a modern attempt-two deployment supersedes legacy policy but is not a boot
     .split('latest_legacy_run="$(')[0];
 
   assert.equal(legacyIsCurrent([legacyRun, modernRerun], legacyRun.id), false);
-  assert.equal(
-    selectPrior([legacyRun, modernRerun]),
-    `${legacyRun.id}\t1\t${legacyRun.head_sha}\t${legacyRun.path}`,
+  assert.deepEqual(
+    bootstrapLifecycle([legacyRun, modernRerun]),
+    {recoverable: false, reselected: '', retained: ''},
+  );
+  const legacyIdentity =
+    `${legacyRun.id}\t1\t${legacyRun.head_sha}\t${legacyRun.path}`;
+  assert.deepEqual(
+    bootstrapLifecycle([legacyRun]),
+    {
+      recoverable: true,
+      reselected: legacyIdentity,
+      retained: legacyIdentity,
+    },
   );
   assert.doesNotMatch(rollbackSupersession, /run_attempt == 1/);
   assert.doesNotMatch(pointerSupersession, /run_attempt == 1/);
   assert.equal(
     filters.every((filter) => filter.includes('.run_attempt == 1')),
     true,
+  );
+  assert.match(
+    filters[1],
+    /if any\([\s\S]*?\.github\/workflows\/docs\.yml[\s\S]*?\) then\s+empty/,
   );
 });
 
