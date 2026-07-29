@@ -33,6 +33,10 @@ public struct ByteSize(double byteSize) :
     IComparable,
     IFormattable
 {
+    ByteSize(double byteSize, long bits)
+        : this(byteSize) =>
+        Bits = bits;
+
     static readonly ConditionalWeakTable<NumberFormatInfo, HashSet<char>> NumberFormatSpecialCharsCache = new();
 
     public static readonly ByteSize MinValue = FromBits(long.MinValue);
@@ -302,7 +306,7 @@ public struct ByteSize(double byteSize) :
     // Get ceiling because bis are whole units
 
     public static ByteSize FromBits(long value) =>
-        new(value / (double)BitsInByte);
+        new(value / (double)BitsInByte, value);
 
     public static ByteSize FromBytes(double value) =>
         new(value);
@@ -752,7 +756,10 @@ public struct ByteSize(double byteSize) :
                 numericFormat = string.Concat("0.## ", numericFormat);
             }
 
-            return value.ToString(numericFormat.Replace("#.##", "0.##"), formatProvider);
+            var resolvedFormat = numericFormat.Replace("#.##", "0.##");
+            return unit.DataUnit == DataUnit.Bit
+                ? Bits.ToString(resolvedFormat, formatProvider)
+                : value.ToString(resolvedFormat, formatProvider);
         }
 
         return string.Concat(value.ToString(numericFormat.Replace("#.##", "0.##"), formatProvider), " ", unitText);
@@ -781,15 +788,18 @@ public struct ByteSize(double byteSize) :
             return null;
         }
 
+        SystemUnit? selectedUnit = null;
         foreach (var unit in units)
         {
             if (format.Contains(unit.Symbol, StringComparison.OrdinalIgnoreCase))
             {
-                return unit;
+                selectedUnit = unit;
+                break;
             }
         }
 
-        foreach (var unit in DecimalUnits.Concat(BinaryUnits))
+        var incompatibleUnits = ReferenceEquals(units, DecimalUnits) ? BinaryUnits : DecimalUnits;
+        foreach (var unit in incompatibleUnits)
         {
             if (format.Contains(unit.Symbol, StringComparison.OrdinalIgnoreCase))
             {
@@ -800,6 +810,11 @@ public struct ByteSize(double byteSize) :
         if (format.Contains("EiB", StringComparison.OrdinalIgnoreCase))
         {
             throw new FormatException("EiB is outside the range supported by ByteSize.Bits.");
+        }
+
+        if (selectedUnit is not null)
+        {
+            return selectedUnit;
         }
 
         if (format.Contains(ByteSymbol, StringComparison.Ordinal))

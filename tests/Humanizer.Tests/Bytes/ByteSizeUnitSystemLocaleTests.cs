@@ -36,10 +36,10 @@ public class ByteSizeUnitSystemLocaleTests
         var coveredLocales = rootGroups
             .Select(group => group.Key)
             .Concat(variants)
-            .Order(StringComparer.Ordinal)
+            .OrderBy(locale => locale, StringComparer.Ordinal)
             .ToArray();
         var shippedLocales = Humanizer.Tests.Localisation.LocaleCoverageData.ShippedLocales
-            .Order(StringComparer.Ordinal)
+            .OrderBy(locale => locale, StringComparer.Ordinal)
             .ToArray();
 
         Assert.Equal(90, rootGroups.Length);
@@ -81,6 +81,24 @@ public class ByteSizeUnitSystemLocaleTests
             var unitWord = Configurator.Formatters.ResolveForCulture(culture).DataUnitHumanize(dataUnit, count, toSymbol: false);
             Assert.Equal(expected, $"{count} {unitWord}");
         }
+    }
+
+    [Theory]
+    [InlineData("sl", ByteSizeUnitSystem.DecimalSi, "kB", 3, "3 kilobajti")]
+    [InlineData("sl", ByteSizeUnitSystem.BinaryIec, "KiB", 4, "4 kibibajti")]
+    [InlineData("ar", ByteSizeUnitSystem.DecimalSi, "MB", 11, "11 ميجابايت")]
+    public void FormatsRepresentativePaucalAndManyUnitWords(
+        string locale,
+        ByteSizeUnitSystem unitSystem,
+        string symbol,
+        int count,
+        string expected)
+    {
+        var size = ByteSize.ParseWithUnitSystem($"{count} {symbol}", unitSystem, CultureInfo.InvariantCulture);
+
+        Assert.Equal(
+            expected,
+            size.FormatFullWords(unitSystem, $"0 {symbol}", CultureInfo.GetCultureInfo(locale)));
     }
 
     [Theory]

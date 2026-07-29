@@ -254,6 +254,8 @@ public class ByteSizeUnitSystemTests
         Assert.False(ByteSize.TryParseWithUnitSystem("1 MiB", ByteSizeUnitSystem.DecimalSi, out _));
         Assert.False(ByteSize.TryParseWithUnitSystem("1 EiB", ByteSizeUnitSystem.BinaryIec, out _));
         Assert.Throws<FormatException>(() => ByteSize.FromBytes(1).Format(ByteSizeUnitSystem.BinaryIec, "0 EiB"));
+        Assert.Throws<FormatException>(() => ByteSize.FromBytes(1).Format(ByteSizeUnitSystem.DecimalSi, "0 MB MiB"));
+        Assert.Throws<FormatException>(() => ByteSize.FromBytes(1).Format(ByteSizeUnitSystem.BinaryIec, "0 KiB kB"));
         Assert.EndsWith(" PiB", ByteSize.MaxValue.Format(ByteSizeUnitSystem.BinaryIec));
         Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.FromBytes(1).Format((ByteSizeUnitSystem)99));
         Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.TryParseWithUnitSystem("1 B", (ByteSizeUnitSystem)99, out _));
@@ -270,6 +272,40 @@ public class ByteSizeUnitSystemTests
             ByteSize.ParseWithUnitSystem($"{long.MinValue} b", ByteSizeUnitSystem.BinaryIec));
         Assert.False(ByteSize.TryParseWithUnitSystem("9223372036854775808 b", ByteSizeUnitSystem.DecimalSi, out _));
         Assert.False(ByteSize.TryParseWithUnitSystem("-9223372036854775809 b", ByteSizeUnitSystem.BinaryIec, out _));
+    }
+
+    [Theory]
+    [InlineData(long.MaxValue, ByteSizeUnitSystem.DecimalSi, "9223372036854775807 b")]
+    [InlineData(long.MinValue, ByteSizeUnitSystem.DecimalSi, "-9223372036854775808 b")]
+    [InlineData(long.MaxValue, ByteSizeUnitSystem.BinaryIec, "9223372036854775807 b")]
+    [InlineData(long.MinValue, ByteSizeUnitSystem.BinaryIec, "-9223372036854775808 b")]
+    public void FormatsAndParsesExactBitRange(
+        long bits,
+        ByteSizeUnitSystem unitSystem,
+        string expected)
+    {
+        var formatted = ByteSize.FromBits(bits).Format(unitSystem, "0 b", CultureInfo.InvariantCulture);
+
+        Assert.Equal(expected, formatted);
+        Assert.Equal(
+            ByteSize.FromBits(bits),
+            ByteSize.ParseWithUnitSystem(formatted, unitSystem, CultureInfo.InvariantCulture));
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void ExplicitBitFormatUsesStoredBitsForNegativeSubByte(ByteSizeUnitSystem unitSystem)
+    {
+        var size = ByteSize.FromBytes(-0.999);
+        var formatted = size.Format(unitSystem, "0 b", CultureInfo.InvariantCulture);
+
+        Assert.Equal(-7, size.Bits);
+        Assert.Equal("-7 b", formatted);
+        Assert.Equal("-8 b", size.Format(unitSystem, formatProvider: CultureInfo.InvariantCulture));
+        Assert.Equal(
+            size.Bits,
+            ByteSize.ParseWithUnitSystem(formatted, unitSystem, CultureInfo.InvariantCulture).Bits);
     }
 
     [Fact]
