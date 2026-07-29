@@ -6,79 +6,119 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'oblique'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/pa.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       oblique:
-        units:
-          millisecond:
-            sameAsNominative: true
-          second:
-            single:
-              numeric: '1 ਸਕਿੰਟ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ਸਕਿੰਟਾਂ'
-                singular: '{count} ਸਕਿੰਟਾਂ'
-                dual: '{count} ਸਕਿੰਟਾਂ'
-                paucal: '{count} ਸਕਿੰਟਾਂ'
-                plural: '{count} ਸਕਿੰਟਾਂ'
-          minute:
-            single:
-              numeric: '1 ਮਿੰਟ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ਮਿੰਟਾਂ'
-                singular: '{count} ਮਿੰਟਾਂ'
-                dual: '{count} ਮਿੰਟਾਂ'
-                paucal: '{count} ਮਿੰਟਾਂ'
-                plural: '{count} ਮਿੰਟਾਂ'
-          hour:
-            single:
-              numeric: '1 ਘੰਟੇ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ਘੰਟਿਆਂ'
-                singular: '{count} ਘੰਟੇ'
-                dual: '{count} ਘੰਟਿਆਂ'
-                paucal: '{count} ਘੰਟਿਆਂ'
-                plural: '{count} ਘੰਟਿਆਂ'
-          day:
-            sameAsNominative: true
-          week:
-            single:
-              numeric: '1 ਹਫ਼ਤੇ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ਹਫ਼ਤਿਆਂ'
-                singular: '{count} ਹਫ਼ਤੇ'
-                dual: '{count} ਹਫ਼ਤਿਆਂ'
-                paucal: '{count} ਹਫ਼ਤਿਆਂ'
-                plural: '{count} ਹਫ਼ਤਿਆਂ'
-          month:
-            single:
-              numeric: '1 ਮਹੀਨੇ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ਮਹੀਨਿਆਂ'
-                singular: '{count} ਮਹੀਨੇ'
-                dual: '{count} ਮਹੀਨਿਆਂ'
-                paucal: '{count} ਮਹੀਨਿਆਂ'
-                plural: '{count} ਮਹੀਨਿਆਂ'
-          year:
-            single:
-              numeric: '1 ਸਾਲ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ਸਾਲਾਂ'
-                singular: '{count} ਸਾਲਾਂ'
-                dual: '{count} ਸਾਲਾਂ'
-                paucal: '{count} ਸਾਲਾਂ'
-                plural: '{count} ਸਾਲਾਂ'
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ਸਕਿੰਟ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ਸਕਿੰਟਾਂ'
+                    singular: '{count} ਸਕਿੰਟਾਂ'
+                    dual: '{count} ਸਕਿੰਟਾਂ'
+                    paucal: '{count} ਸਕਿੰਟਾਂ'
+                    plural: '{count} ਸਕਿੰਟਾਂ'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ਮਿੰਟ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ਮਿੰਟਾਂ'
+                    singular: '{count} ਮਿੰਟਾਂ'
+                    dual: '{count} ਮਿੰਟਾਂ'
+                    paucal: '{count} ਮਿੰਟਾਂ'
+                    plural: '{count} ਮਿੰਟਾਂ'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ਘੰਟੇ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ਘੰਟਿਆਂ'
+                    singular: '{count} ਘੰਟੇ'
+                    dual: '{count} ਘੰਟਿਆਂ'
+                    paucal: '{count} ਘੰਟਿਆਂ'
+                    plural: '{count} ਘੰਟਿਆਂ'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ਹਫ਼ਤੇ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ਹਫ਼ਤਿਆਂ'
+                    singular: '{count} ਹਫ਼ਤੇ'
+                    dual: '{count} ਹਫ਼ਤਿਆਂ'
+                    paucal: '{count} ਹਫ਼ਤਿਆਂ'
+                    plural: '{count} ਹਫ਼ਤਿਆਂ'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ਮਹੀਨੇ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ਮਹੀਨਿਆਂ'
+                    singular: '{count} ਮਹੀਨੇ'
+                    dual: '{count} ਮਹੀਨਿਆਂ'
+                    paucal: '{count} ਮਹੀਨਿਆਂ'
+                    plural: '{count} ਮਹੀਨਿਆਂ'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ਸਾਲ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ਸਾਲਾਂ'
+                    singular: '{count} ਸਾਲਾਂ'
+                    dual: '{count} ਸਾਲਾਂ'
+                    paucal: '{count} ਸਾਲਾਂ'
+                    plural: '{count} ਸਾਲਾਂ'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

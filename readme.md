@@ -63,7 +63,7 @@ for the exact-form and lemmatization contracts.
 
 `HumanizeWithCase` returns only the duration phrase; add any required
 preposition yourself. Singular forms may include a locale-authored one-word
-or article, while multiple counts remain numeric. Locales and custom
+or article, and a locale may encode a count in the unit form. Locales and custom
 components without verified case support throw `NotSupportedException`
 instead of falling back to English.
 

@@ -5,7 +5,394 @@ surfaces:
     cardinalRule: 'AmharicLike'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - genitive
+      - accusative
+      - dative
+      - locative
+      - instrumental
+      - vocative
+      - ergative
+      - ablative
+    sources:
+      inventory:
+        kind: 'grammar'
+        url: 'https://www.jstor.org/stable/j.ctv4v305r'
+        revision: 'George Cardona, A Gujarati Reference Grammar, University of Pennsylvania Press, 1965, stable JSTOR j.ctv4v305r'
+        locator: 'Chapter 4, Nominal system, pp. 61-84: oblique stems and -ne/-ma/-thi/-e postpositions'
+        credit: 'George Cardona'
+      gujtb:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Gujarati-GujTB/blob/df3467fecffaab2cf3fbfb457f7366fc43f597da/gu_gujtb-ud-test.conllu#L219-L232'
+        revision: 'df3467fecffaab2cf3fbfb457f7366fc43f597da'
+        locator: 'lines 219-232 attest દિવસે; lines 707-710 attest અઠવાડિયામાં; lines 1889-1896 repeat દિવસે'
+        credit: 'Universal Dependencies Gujarati GujTB contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      genitive:
+        notApplicable: 'Gujarati genitive agreement requires an omitted possessed head.'
+        provenance:
+          - 'inventory'
+      accusative:
+        sameRenderedAs: 'dative'
+        provenance:
+          - 'inventory'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 મિલિસેકંડને'
+                  words: 'એક મિલિસેકંડને'
+                multiple:
+                  forms: '{count} મિલિસેકંડને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 સેકંડને'
+                  words: 'એક સેકંડને'
+                multiple:
+                  forms: '{count} સેકંડને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 મિનિટને'
+                  words: 'એક મિનિટને'
+                multiple:
+                  forms: '{count} મિનિટને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 કલાકને'
+                  words: 'એક કલાકને'
+                multiple:
+                  forms: '{count} કલાકને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 દિવસને'
+                  words: 'એક દિવસને'
+                multiple:
+                  forms: '{count} દિવસને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 અઠવાડિયાને'
+                  words: 'એક અઠવાડિયાને'
+                multiple:
+                  forms: '{count} અઠવાડિયાને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 મહિનાને'
+                  words: 'એક મહિનાને'
+                multiple:
+                  forms: '{count} મહિનાને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 વર્ષને'
+                  words: 'એક વર્ષને'
+                multiple:
+                  forms: '{count} વર્ષને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 મિલિસેકંડમાં'
+                  words: 'એક મિલિસેકંડમાં'
+                multiple:
+                  forms: '{count} મિલિસેકંડમાં'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 સેકંડમાં'
+                  words: 'એક સેકંડમાં'
+                multiple:
+                  forms: '{count} સેકંડમાં'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 મિનિટમાં'
+                  words: 'એક મિનિટમાં'
+                multiple:
+                  forms: '{count} મિનિટમાં'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 કલાકમાં'
+                  words: 'એક કલાકમાં'
+                multiple:
+                  forms: '{count} કલાકમાં'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 દિવસે'
+                  words: 'એક દિવસે'
+                multiple:
+                  forms: '{count} દિવસે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'gujtb'
+            week:
+              phrase:
+                single:
+                  numeric: '1 અઠવાડિયામાં'
+                  words: 'એક અઠવાડિયામાં'
+                multiple:
+                  forms: '{count} અઠવાડિયામાં'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'gujtb'
+            month:
+              phrase:
+                single:
+                  numeric: '1 મહિનામાં'
+                  words: 'એક મહિનામાં'
+                multiple:
+                  forms: '{count} મહિનામાં'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 વર્ષમાં'
+                  words: 'એક વર્ષમાં'
+                multiple:
+                  forms: '{count} વર્ષમાં'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 મિલિસેકંડથી'
+                  words: 'એક મિલિસેકંડથી'
+                multiple:
+                  forms: '{count} મિલિસેકંડથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 સેકંડથી'
+                  words: 'એક સેકંડથી'
+                multiple:
+                  forms: '{count} સેકંડથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 મિનિટથી'
+                  words: 'એક મિનિટથી'
+                multiple:
+                  forms: '{count} મિનિટથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 કલાકથી'
+                  words: 'એક કલાકથી'
+                multiple:
+                  forms: '{count} કલાકથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 દિવસથી'
+                  words: 'એક દિવસથી'
+                multiple:
+                  forms: '{count} દિવસથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 અઠવાડિયાથી'
+                  words: 'એક અઠવાડિયાથી'
+                multiple:
+                  forms: '{count} અઠવાડિયાથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 મહિનાથી'
+                  words: 'એક મહિનાથી'
+                multiple:
+                  forms: '{count} મહિનાથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 વર્ષથી'
+                  words: 'એક વર્ષથી'
+                multiple:
+                  forms: '{count} વર્ષથી'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'inventory'
+      ergative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 મિલિસેકંડે'
+                  words: 'એક મિલિસેકંડે'
+                multiple:
+                  forms: '{count} મિલિસેકંડે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 સેકંડે'
+                  words: 'એક સેકંડે'
+                multiple:
+                  forms: '{count} સેકંડે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 મિનિટે'
+                  words: 'એક મિનિટે'
+                multiple:
+                  forms: '{count} મિનિટે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 કલાકે'
+                  words: 'એક કલાકે'
+                multiple:
+                  forms: '{count} કલાકે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 દિવસે'
+                  words: 'એક દિવસે'
+                multiple:
+                  forms: '{count} દિવસે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 અઠવાડિયે'
+                  words: 'એક અઠવાડિયે'
+                multiple:
+                  forms: '{count} અઠવાડિયે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 મહિને'
+                  words: 'એક મહિને'
+                multiple:
+                  forms: '{count} મહિને'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 વર્ષે'
+                  words: 'એક વર્ષે'
+                multiple:
+                  forms: '{count} વર્ષે'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      ablative:
+        sameRenderedAs: 'instrumental'
+        provenance:
+          - 'inventory'
 
   list:
     engine: 'conjunction'

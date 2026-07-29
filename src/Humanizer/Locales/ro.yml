@@ -6,97 +6,139 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ro.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: 'unei milisecunde'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de milisecunde'
-                singular: 'unei milisecunde'
-                dual: '{count} de milisecunde'
-                paucal: '{count} milisecunde'
-                plural: '{count} de milisecunde'
-          second:
-            single:
-              numeric: 'unei secunde'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de secunde'
-                singular: 'unei secunde'
-                dual: '{count} de secunde'
-                paucal: '{count} secunde'
-                plural: '{count} de secunde'
-          minute:
-            single:
-              numeric: 'unui minut'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de minute'
-                singular: 'unui minut'
-                dual: '{count} de minute'
-                paucal: '{count} minute'
-                plural: '{count} de minute'
-          hour:
-            single:
-              numeric: 'unei ore'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de ore'
-                singular: 'unei ore'
-                dual: '{count} de ore'
-                paucal: '{count} de ore'
-                plural: '{count} de ore'
-          day:
-            single:
-              numeric: 'unei zile'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de zile'
-                singular: 'unei zile'
-                dual: '{count} de zile'
-                paucal: '{count} de zile'
-                plural: '{count} de zile'
-          week:
-            single:
-              numeric: 'unei săptămâni'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de săptămâni'
-                singular: 'unei săptămâni'
-                dual: '{count} de săptămâni'
-                paucal: '{count} săptămâni'
-                plural: '{count} de săptămâni'
-          month:
-            single:
-              numeric: 'unei luni'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de luni'
-                singular: 'unei luni'
-                dual: '{count} de luni'
-                paucal: '{count} de luni'
-                plural: '{count} de luni'
-          year:
-            single:
-              numeric: 'unui an'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} de ani'
-                singular: 'unui an'
-                dual: '{count} de ani'
-                paucal: '{count} de ani'
-                plural: '{count} de ani'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'unei milisecunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} milisecunde'
+                    singular: 'unei milisecunde'
+                    dual: '{count} de milisecunde'
+                    paucal: '{count} milisecunde'
+                    plural: '{count} de milisecunde'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: 'unei secunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} secunde'
+                    singular: 'unei secunde'
+                    dual: '{count} de secunde'
+                    paucal: '{count} secunde'
+                    plural: '{count} de secunde'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: 'unui minut'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} minute'
+                    singular: 'unui minut'
+                    dual: '{count} de minute'
+                    paucal: '{count} minute'
+                    plural: '{count} de minute'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: 'unei ore'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} ore'
+                    singular: 'unei ore'
+                    dual: '{count} de ore'
+                    paucal: '{count} de ore'
+                    plural: '{count} de ore'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: 'unei zile'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} zile'
+                    singular: 'unei zile'
+                    dual: '{count} de zile'
+                    paucal: '{count} de zile'
+                    plural: '{count} de zile'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: 'unei săptămâni'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} săptămâni'
+                    singular: 'unei săptămâni'
+                    dual: '{count} de săptămâni'
+                    paucal: '{count} săptămâni'
+                    plural: '{count} de săptămâni'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: 'unei luni'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} luni'
+                    singular: 'unei luni'
+                    dual: '{count} de luni'
+                    paucal: '{count} de luni'
+                    plural: '{count} de luni'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: 'unui an'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count}{prep} ani'
+                    singular: 'unui an'
+                    dual: '{count} de ani'
+                    paucal: '{count} de ani'
+                    plural: '{count} de ani'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

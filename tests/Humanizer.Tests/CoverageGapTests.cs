@@ -1759,6 +1759,13 @@ public class CoverageGapTests
     [Fact]
     public void ProfiledFormatterCoversRemainingStaticDetectorAndFallbackBranches()
     {
+        Assert.Equal(FormatterNumberForm.Zero, DetectArabicCardinalForm(0));
+        Assert.Equal(FormatterNumberForm.Singular, DetectArabicCardinalForm(1));
+        Assert.Equal(FormatterNumberForm.Dual, DetectArabicCardinalForm(2));
+        Assert.Equal(FormatterNumberForm.Plural, DetectArabicCardinalForm(3));
+        Assert.Equal(FormatterNumberForm.Many, DetectArabicCardinalForm(11));
+        Assert.Equal(FormatterNumberForm.Default, DetectArabicCardinalForm(100));
+        Assert.Equal(FormatterNumberForm.Plural, DetectArabicCardinalForm(103));
         Assert.Equal(FormatterNumberForm.Plural, InvokePrivate<FormatterNumberForm>(
             typeof(ProfiledFormatter),
             null,
@@ -1822,6 +1829,15 @@ public class CoverageGapTests
             TimeUnit.Day,
             2m));
     }
+
+    static FormatterNumberForm DetectArabicCardinalForm(int number) =>
+        InvokePrivate<FormatterNumberForm>(
+            typeof(ProfiledFormatter),
+            null,
+            "DetectNumberForm",
+            [typeof(int), typeof(FormatterNumberDetectorKind)],
+            number,
+            FormatterNumberDetectorKind.ArabicCardinal);
 
     [Fact]
     public void ProfiledFormatterCoversRemainingPhraseResolutionBranches()

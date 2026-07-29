@@ -6,367 +6,581 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'locative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/lv.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunde'
+                  words: 'viena milisekunde'
+                multiple:
+                  forms:
+                    default: 'milisekundes'
+                    singular: 'milisekunde'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunde'
+                  words: 'viena sekunde'
+                multiple:
+                  forms:
+                    default: 'sekundes'
+                    singular: 'sekunde'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minūte'
+                  words: 'viena minūte'
+                multiple:
+                  forms:
+                    default: 'minūtes'
+                    singular: 'minūte'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 stunda'
+                  words: 'viena stunda'
+                multiple:
+                  forms:
+                    default: 'stundas'
+                    singular: 'stunda'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 diena'
+                  words: 'viena diena'
+                multiple:
+                  forms:
+                    default: 'dienas'
+                    singular: 'diena'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nedēļa'
+                  words: 'viena nedēļa'
+                multiple:
+                  forms:
+                    default: 'nedēļas'
+                    singular: 'nedēļa'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mēnesis'
+                  words: 'viens mēnesis'
+                multiple:
+                  forms:
+                    default: 'mēneši'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 gads'
+                  words: 'viens gads'
+                multiple:
+                  forms:
+                    default: 'gadi'
+
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundes'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekunžu'
-                singular: '{count} milisekundes'
-                dual: '{count} milisekunžu'
-                paucal: '{count} milisekunžu'
-                plural: '{count} milisekunžu'
-          second:
-            single:
-              numeric: '1 sekundes'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekunžu'
-                singular: '{count} sekundes'
-                dual: '{count} sekunžu'
-                paucal: '{count} sekunžu'
-                plural: '{count} sekunžu'
-          minute:
-            single:
-              numeric: '1 minūtes'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minūšu'
-                singular: '{count} minūtes'
-                dual: '{count} minūšu'
-                paucal: '{count} minūšu'
-                plural: '{count} minūšu'
-          hour:
-            single:
-              numeric: '1 stundas'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} stundu'
-                singular: '{count} stundas'
-                dual: '{count} stundu'
-                paucal: '{count} stundu'
-                plural: '{count} stundu'
-          day:
-            single:
-              numeric: '1 dienas'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienu'
-                singular: '{count} dienas'
-                dual: '{count} dienu'
-                paucal: '{count} dienu'
-                plural: '{count} dienu'
-          week:
-            single:
-              numeric: '1 nedēļas'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} nedēļu'
-                singular: '{count} nedēļas'
-                dual: '{count} nedēļu'
-                paucal: '{count} nedēļu'
-                plural: '{count} nedēļu'
-          month:
-            single:
-              numeric: '1 mēneša'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mēnešu'
-                singular: '{count} mēneša'
-                dual: '{count} mēnešu'
-                paucal: '{count} mēnešu'
-                plural: '{count} mēnešu'
-          year:
-            single:
-              numeric: '1 gada'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} gadu'
-                singular: '{count} gada'
-                dual: '{count} gadu'
-                paucal: '{count} gadu'
-                plural: '{count} gadu'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundes'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekunžu'
+                    singular: '{count} milisekundes'
+                    dual: '{count} milisekunžu'
+                    paucal: '{count} milisekunžu'
+                    plural: '{count} milisekunžu'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundes'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekunžu'
+                    singular: '{count} sekundes'
+                    dual: '{count} sekunžu'
+                    paucal: '{count} sekunžu'
+                    plural: '{count} sekunžu'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minūtes'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minūšu'
+                    singular: '{count} minūtes'
+                    dual: '{count} minūšu'
+                    paucal: '{count} minūšu'
+                    plural: '{count} minūšu'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 stundas'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} stundu'
+                    singular: '{count} stundas'
+                    dual: '{count} stundu'
+                    paucal: '{count} stundu'
+                    plural: '{count} stundu'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dienas'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienu'
+                    singular: '{count} dienas'
+                    dual: '{count} dienu'
+                    paucal: '{count} dienu'
+                    plural: '{count} dienu'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nedēļas'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} nedēļu'
+                    singular: '{count} nedēļas'
+                    dual: '{count} nedēļu'
+                    paucal: '{count} nedēļu'
+                    plural: '{count} nedēļu'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mēneša'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mēnešu'
+                    singular: '{count} mēneša'
+                    dual: '{count} mēnešu'
+                    paucal: '{count} mēnešu'
+                    plural: '{count} mēnešu'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 gada'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} gadu'
+                    singular: '{count} gada'
+                    dual: '{count} gadu'
+                    paucal: '{count} gadu'
+                    plural: '{count} gadu'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundei'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundēm'
-                singular: '{count} milisekundei'
-                dual: '{count} milisekundēm'
-                paucal: '{count} milisekundēm'
-                plural: '{count} milisekundēm'
-          second:
-            single:
-              numeric: '1 sekundei'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundēm'
-                singular: '{count} sekundei'
-                dual: '{count} sekundēm'
-                paucal: '{count} sekundēm'
-                plural: '{count} sekundēm'
-          minute:
-            single:
-              numeric: '1 minūtei'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minūtēm'
-                singular: '{count} minūtei'
-                dual: '{count} minūtēm'
-                paucal: '{count} minūtēm'
-                plural: '{count} minūtēm'
-          hour:
-            single:
-              numeric: '1 stundai'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} stundām'
-                singular: '{count} stundai'
-                dual: '{count} stundām'
-                paucal: '{count} stundām'
-                plural: '{count} stundām'
-          day:
-            single:
-              numeric: '1 dienai'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienām'
-                singular: '{count} dienai'
-                dual: '{count} dienām'
-                paucal: '{count} dienām'
-                plural: '{count} dienām'
-          week:
-            single:
-              numeric: '1 nedēļai'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} nedēļām'
-                singular: '{count} nedēļai'
-                dual: '{count} nedēļām'
-                paucal: '{count} nedēļām'
-                plural: '{count} nedēļām'
-          month:
-            single:
-              numeric: '1 mēnesim'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mēnešiem'
-                singular: '{count} mēnesim'
-                dual: '{count} mēnešiem'
-                paucal: '{count} mēnešiem'
-                plural: '{count} mēnešiem'
-          year:
-            single:
-              numeric: '1 gadam'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} gadiem'
-                singular: '{count} gadam'
-                dual: '{count} gadiem'
-                paucal: '{count} gadiem'
-                plural: '{count} gadiem'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundei'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundēm'
+                    singular: '{count} milisekundei'
+                    dual: '{count} milisekundēm'
+                    paucal: '{count} milisekundēm'
+                    plural: '{count} milisekundēm'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundei'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundēm'
+                    singular: '{count} sekundei'
+                    dual: '{count} sekundēm'
+                    paucal: '{count} sekundēm'
+                    plural: '{count} sekundēm'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minūtei'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minūtēm'
+                    singular: '{count} minūtei'
+                    dual: '{count} minūtēm'
+                    paucal: '{count} minūtēm'
+                    plural: '{count} minūtēm'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 stundai'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} stundām'
+                    singular: '{count} stundai'
+                    dual: '{count} stundām'
+                    paucal: '{count} stundām'
+                    plural: '{count} stundām'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dienai'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienām'
+                    singular: '{count} dienai'
+                    dual: '{count} dienām'
+                    paucal: '{count} dienām'
+                    plural: '{count} dienām'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nedēļai'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} nedēļām'
+                    singular: '{count} nedēļai'
+                    dual: '{count} nedēļām'
+                    paucal: '{count} nedēļām'
+                    plural: '{count} nedēļām'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mēnesim'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mēnešiem'
+                    singular: '{count} mēnesim'
+                    dual: '{count} mēnešiem'
+                    paucal: '{count} mēnešiem'
+                    plural: '{count} mēnešiem'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 gadam'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} gadiem'
+                    singular: '{count} gadam'
+                    dual: '{count} gadiem'
+                    paucal: '{count} gadiem'
+                    plural: '{count} gadiem'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundi'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundes'
-                singular: '{count} milisekundi'
-                dual: '{count} milisekundes'
-                paucal: '{count} milisekundes'
-                plural: '{count} milisekundes'
-          second:
-            single:
-              numeric: '1 sekundi'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundes'
-                singular: '{count} sekundi'
-                dual: '{count} sekundes'
-                paucal: '{count} sekundes'
-                plural: '{count} sekundes'
-          minute:
-            single:
-              numeric: '1 minūti'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minūtes'
-                singular: '{count} minūti'
-                dual: '{count} minūtes'
-                paucal: '{count} minūtes'
-                plural: '{count} minūtes'
-          hour:
-            single:
-              numeric: '1 stundu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} stundas'
-                singular: '{count} stundu'
-                dual: '{count} stundas'
-                paucal: '{count} stundas'
-                plural: '{count} stundas'
-          day:
-            single:
-              numeric: '1 dienu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienas'
-                singular: '{count} dienu'
-                dual: '{count} dienas'
-                paucal: '{count} dienas'
-                plural: '{count} dienas'
-          week:
-            single:
-              numeric: '1 nedēļu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} nedēļas'
-                singular: '{count} nedēļu'
-                dual: '{count} nedēļas'
-                paucal: '{count} nedēļas'
-                plural: '{count} nedēļas'
-          month:
-            single:
-              numeric: '1 mēnesi'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mēnešus'
-                singular: '{count} mēnesi'
-                dual: '{count} mēnešus'
-                paucal: '{count} mēnešus'
-                plural: '{count} mēnešus'
-          year:
-            single:
-              numeric: '1 gadu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} gadus'
-                singular: '{count} gadu'
-                dual: '{count} gadus'
-                paucal: '{count} gadus'
-                plural: '{count} gadus'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundes'
+                    singular: '{count} milisekundi'
+                    dual: '{count} milisekundes'
+                    paucal: '{count} milisekundes'
+                    plural: '{count} milisekundes'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundes'
+                    singular: '{count} sekundi'
+                    dual: '{count} sekundes'
+                    paucal: '{count} sekundes'
+                    plural: '{count} sekundes'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minūti'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minūtes'
+                    singular: '{count} minūti'
+                    dual: '{count} minūtes'
+                    paucal: '{count} minūtes'
+                    plural: '{count} minūtes'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 stundu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} stundas'
+                    singular: '{count} stundu'
+                    dual: '{count} stundas'
+                    paucal: '{count} stundas'
+                    plural: '{count} stundas'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dienu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienas'
+                    singular: '{count} dienu'
+                    dual: '{count} dienas'
+                    paucal: '{count} dienas'
+                    plural: '{count} dienas'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nedēļu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} nedēļas'
+                    singular: '{count} nedēļu'
+                    dual: '{count} nedēļas'
+                    paucal: '{count} nedēļas'
+                    plural: '{count} nedēļas'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mēnesi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mēnešus'
+                    singular: '{count} mēnesi'
+                    dual: '{count} mēnešus'
+                    paucal: '{count} mēnešus'
+                    plural: '{count} mēnešus'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 gadu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} gadus'
+                    singular: '{count} gadu'
+                    dual: '{count} gadus'
+                    paucal: '{count} gadus'
+                    plural: '{count} gadus'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       locative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundē'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundēs'
-                singular: '{count} milisekundē'
-                dual: '{count} milisekundēs'
-                paucal: '{count} milisekundēs'
-                plural: '{count} milisekundēs'
-          second:
-            single:
-              numeric: '1 sekundē'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundēs'
-                singular: '{count} sekundē'
-                dual: '{count} sekundēs'
-                paucal: '{count} sekundēs'
-                plural: '{count} sekundēs'
-          minute:
-            single:
-              numeric: '1 minūtē'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minūtēs'
-                singular: '{count} minūtē'
-                dual: '{count} minūtēs'
-                paucal: '{count} minūtēs'
-                plural: '{count} minūtēs'
-          hour:
-            single:
-              numeric: '1 stundā'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} stundās'
-                singular: '{count} stundā'
-                dual: '{count} stundās'
-                paucal: '{count} stundās'
-                plural: '{count} stundās'
-          day:
-            single:
-              numeric: '1 dienā'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienās'
-                singular: '{count} dienā'
-                dual: '{count} dienās'
-                paucal: '{count} dienās'
-                plural: '{count} dienās'
-          week:
-            single:
-              numeric: '1 nedēļā'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} nedēļās'
-                singular: '{count} nedēļā'
-                dual: '{count} nedēļās'
-                paucal: '{count} nedēļās'
-                plural: '{count} nedēļās'
-          month:
-            single:
-              numeric: '1 mēnesī'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mēnešos'
-                singular: '{count} mēnesī'
-                dual: '{count} mēnešos'
-                paucal: '{count} mēnešos'
-                plural: '{count} mēnešos'
-          year:
-            single:
-              numeric: '1 gadā'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} gados'
-                singular: '{count} gadā'
-                dual: '{count} gados'
-                paucal: '{count} gados'
-                plural: '{count} gados'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundē'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundēs'
+                    singular: '{count} milisekundē'
+                    dual: '{count} milisekundēs'
+                    paucal: '{count} milisekundēs'
+                    plural: '{count} milisekundēs'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundē'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundēs'
+                    singular: '{count} sekundē'
+                    dual: '{count} sekundēs'
+                    paucal: '{count} sekundēs'
+                    plural: '{count} sekundēs'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minūtē'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minūtēs'
+                    singular: '{count} minūtē'
+                    dual: '{count} minūtēs'
+                    paucal: '{count} minūtēs'
+                    plural: '{count} minūtēs'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 stundā'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} stundās'
+                    singular: '{count} stundā'
+                    dual: '{count} stundās'
+                    paucal: '{count} stundās'
+                    plural: '{count} stundās'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dienā'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienās'
+                    singular: '{count} dienā'
+                    dual: '{count} dienās'
+                    paucal: '{count} dienās'
+                    plural: '{count} dienās'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nedēļā'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} nedēļās'
+                    singular: '{count} nedēļā'
+                    dual: '{count} nedēļās'
+                    paucal: '{count} nedēļās'
+                    plural: '{count} nedēļās'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mēnesī'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mēnešos'
+                    singular: '{count} mēnesī'
+                    dual: '{count} mēnešos'
+                    paucal: '{count} mēnešos'
+                    plural: '{count} mēnešos'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 gadā'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} gados'
+                    singular: '{count} gadā'
+                    dual: '{count} gados'
+                    paucal: '{count} gados'
+                    plural: '{count} gados'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

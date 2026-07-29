@@ -6,565 +6,767 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'ablative'
+      - 'ergative'
+      - 'locative'
+      - 'oblique'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/mr.xml#L8005-L8191'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'units/unitLength[@type=long]/unit[@type=duration-year through duration-millisecond]/unitPattern[@case], lines 8005-8191'
+        credit: 'Unicode CLDR Marathi contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 मिलिसेकंदाचा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिलिसेकंदांचा'
-                singular: '{count} मिलिसेकंदाचा'
-                dual: '{count} मिलिसेकंदांचा'
-                paucal: '{count} मिलिसेकंदांचा'
-                plural: '{count} मिलिसेकंदांचा'
-          second:
-            single:
-              numeric: '1 सेकंदाचा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} सेकंदांचे'
-                singular: '{count} सेकंदाचा'
-                dual: '{count} सेकंदांचे'
-                paucal: '{count} सेकंदांचे'
-                plural: '{count} सेकंदांचे'
-          minute:
-            single:
-              numeric: '1 मिनिटाचा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिनिटांचे'
-                singular: '{count} मिनिटाचा'
-                dual: '{count} मिनिटांचे'
-                paucal: '{count} मिनिटांचे'
-                plural: '{count} मिनिटांचे'
-          hour:
-            single:
-              numeric: '1 तासाचा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} तासांचे'
-                singular: '{count} तासाचा'
-                dual: '{count} तासांचे'
-                paucal: '{count} तासांचे'
-                plural: '{count} तासांचे'
-          day:
-            single:
-              numeric: '1 दिवसाची'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} दिवसांचे'
-                singular: '{count} दिवसाची'
-                dual: '{count} दिवसांचे'
-                paucal: '{count} दिवसांचे'
-                plural: '{count} दिवसांचे'
-          week:
-            single:
-              numeric: '1 आठवड्याचा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} आठवड्यांचे'
-                singular: '{count} आठवड्याचा'
-                dual: '{count} आठवड्यांचे'
-                paucal: '{count} आठवड्यांचे'
-                plural: '{count} आठवड्यांचे'
-          month:
-            single:
-              numeric: '1 महिन्याचा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} महिन्यांचे'
-                singular: '{count} महिन्याचा'
-                dual: '{count} महिन्यांचे'
-                paucal: '{count} महिन्यांचे'
-                plural: '{count} महिन्यांचे'
-          year:
-            single:
-              numeric: '1 वर्षाचा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} वर्षांचे'
-                singular: '{count} वर्षाचा'
-                dual: '{count} वर्षांचे'
-                paucal: '{count} वर्षांचे'
-                plural: '{count} वर्षांचे'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकंदाचा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिलिसेकंदांचा'
+                    singular: '{count} मिलिसेकंदाचा'
+                    dual: '{count} मिलिसेकंदांचा'
+                    paucal: '{count} मिलिसेकंदांचा'
+                    plural: '{count} मिलिसेकंदांचा'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकंदाचा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} सेकंदांचे'
+                    singular: '{count} सेकंदाचा'
+                    dual: '{count} सेकंदांचे'
+                    paucal: '{count} सेकंदांचे'
+                    plural: '{count} सेकंदांचे'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनिटाचा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिनिटांचे'
+                    singular: '{count} मिनिटाचा'
+                    dual: '{count} मिनिटांचे'
+                    paucal: '{count} मिनिटांचे'
+                    plural: '{count} मिनिटांचे'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 तासाचा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} तासांचे'
+                    singular: '{count} तासाचा'
+                    dual: '{count} तासांचे'
+                    paucal: '{count} तासांचे'
+                    plural: '{count} तासांचे'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिवसाची'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} दिवसांचे'
+                    singular: '{count} दिवसाची'
+                    dual: '{count} दिवसांचे'
+                    paucal: '{count} दिवसांचे'
+                    plural: '{count} दिवसांचे'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 आठवड्याचा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} आठवड्यांचे'
+                    singular: '{count} आठवड्याचा'
+                    dual: '{count} आठवड्यांचे'
+                    paucal: '{count} आठवड्यांचे'
+                    plural: '{count} आठवड्यांचे'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिन्याचा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} महिन्यांचे'
+                    singular: '{count} महिन्याचा'
+                    dual: '{count} महिन्यांचे'
+                    paucal: '{count} महिन्यांचे'
+                    plural: '{count} महिन्यांचे'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षाचा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} वर्षांचे'
+                    singular: '{count} वर्षाचा'
+                    dual: '{count} वर्षांचे'
+                    paucal: '{count} वर्षांचे'
+                    plural: '{count} वर्षांचे'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 मिलिसेकंदासाठी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिलिसेकंदांसाठी'
-                singular: '{count} मिलिसेकंदासाठी'
-                dual: '{count} मिलिसेकंदांसाठी'
-                paucal: '{count} मिलिसेकंदांसाठी'
-                plural: '{count} मिलिसेकंदांसाठी'
-          second:
-            single:
-              numeric: '1 सेकंदाला'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} सेकंदांसाठी'
-                singular: '{count} सेकंदाला'
-                dual: '{count} सेकंदांसाठी'
-                paucal: '{count} सेकंदांसाठी'
-                plural: '{count} सेकंदांसाठी'
-          minute:
-            single:
-              numeric: '1 मिनिटाला'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिनिटांसाठी'
-                singular: '{count} मिनिटाला'
-                dual: '{count} मिनिटांसाठी'
-                paucal: '{count} मिनिटांसाठी'
-                plural: '{count} मिनिटांसाठी'
-          hour:
-            single:
-              numeric: '1 तासाला'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} तासांसाठी'
-                singular: '{count} तासाला'
-                dual: '{count} तासांसाठी'
-                paucal: '{count} तासांसाठी'
-                plural: '{count} तासांसाठी'
-          day:
-            single:
-              numeric: '1 दिवसाने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} दिवसांना'
-                singular: '{count} दिवसाने'
-                dual: '{count} दिवसांना'
-                paucal: '{count} दिवसांना'
-                plural: '{count} दिवसांना'
-          week:
-            single:
-              numeric: '1 आठवड्याला'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} आठवड्यांसाठी'
-                singular: '{count} आठवड्याला'
-                dual: '{count} आठवड्यांसाठी'
-                paucal: '{count} आठवड्यांसाठी'
-                plural: '{count} आठवड्यांसाठी'
-          month:
-            single:
-              numeric: '1 महिन्याला'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} महिन्यांसाठी'
-                singular: '{count} महिन्याला'
-                dual: '{count} महिन्यांसाठी'
-                paucal: '{count} महिन्यांसाठी'
-                plural: '{count} महिन्यांसाठी'
-          year:
-            single:
-              numeric: '1 वर्षाला'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} वर्षांसाठी'
-                singular: '{count} वर्षाला'
-                dual: '{count} वर्षांसाठी'
-                paucal: '{count} वर्षांसाठी'
-                plural: '{count} वर्षांसाठी'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकंदासाठी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिलिसेकंदांसाठी'
+                    singular: '{count} मिलिसेकंदासाठी'
+                    dual: '{count} मिलिसेकंदांसाठी'
+                    paucal: '{count} मिलिसेकंदांसाठी'
+                    plural: '{count} मिलिसेकंदांसाठी'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकंदाला'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} सेकंदांसाठी'
+                    singular: '{count} सेकंदाला'
+                    dual: '{count} सेकंदांसाठी'
+                    paucal: '{count} सेकंदांसाठी'
+                    plural: '{count} सेकंदांसाठी'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनिटाला'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिनिटांसाठी'
+                    singular: '{count} मिनिटाला'
+                    dual: '{count} मिनिटांसाठी'
+                    paucal: '{count} मिनिटांसाठी'
+                    plural: '{count} मिनिटांसाठी'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 तासाला'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} तासांसाठी'
+                    singular: '{count} तासाला'
+                    dual: '{count} तासांसाठी'
+                    paucal: '{count} तासांसाठी'
+                    plural: '{count} तासांसाठी'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिवसाने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} दिवसांना'
+                    singular: '{count} दिवसाने'
+                    dual: '{count} दिवसांना'
+                    paucal: '{count} दिवसांना'
+                    plural: '{count} दिवसांना'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 आठवड्याला'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} आठवड्यांसाठी'
+                    singular: '{count} आठवड्याला'
+                    dual: '{count} आठवड्यांसाठी'
+                    paucal: '{count} आठवड्यांसाठी'
+                    plural: '{count} आठवड्यांसाठी'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिन्याला'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} महिन्यांसाठी'
+                    singular: '{count} महिन्याला'
+                    dual: '{count} महिन्यांसाठी'
+                    paucal: '{count} महिन्यांसाठी'
+                    plural: '{count} महिन्यांसाठी'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षाला'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} वर्षांसाठी'
+                    singular: '{count} वर्षाला'
+                    dual: '{count} वर्षांसाठी'
+                    paucal: '{count} वर्षांसाठी'
+                    plural: '{count} वर्षांसाठी'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 मिलिसेकंदाला'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिलिसेकंदांनी'
-                singular: '{count} मिलिसेकंदाला'
-                dual: '{count} मिलिसेकंदांनी'
-                paucal: '{count} मिलिसेकंदांनी'
-                plural: '{count} मिलिसेकंदांनी'
-          second:
-            single:
-              numeric: '1 सेकंदास'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} सेकंदांना'
-                singular: '{count} सेकंदास'
-                dual: '{count} सेकंदांना'
-                paucal: '{count} सेकंदांना'
-                plural: '{count} सेकंदांना'
-          minute:
-            single:
-              numeric: '1 मिनिटास'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिनिटांना'
-                singular: '{count} मिनिटास'
-                dual: '{count} मिनिटांना'
-                paucal: '{count} मिनिटांना'
-                plural: '{count} मिनिटांना'
-          hour:
-            single:
-              numeric: '1 तासास'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} तासांना'
-                singular: '{count} तासास'
-                dual: '{count} तासांना'
-                paucal: '{count} तासांना'
-                plural: '{count} तासांना'
-          day:
-            single:
-              numeric: '1 दिवसास'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} दिवसांनी'
-                singular: '{count} दिवसास'
-                dual: '{count} दिवसांनी'
-                paucal: '{count} दिवसांनी'
-                plural: '{count} दिवसांनी'
-          week:
-            single:
-              numeric: '1 आठवड्यास'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} आठवड्यांना'
-                singular: '{count} आठवड्यास'
-                dual: '{count} आठवड्यांना'
-                paucal: '{count} आठवड्यांना'
-                plural: '{count} आठवड्यांना'
-          month:
-            single:
-              numeric: '1 महिन्यास'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} महिन्यांना'
-                singular: '{count} महिन्यास'
-                dual: '{count} महिन्यांना'
-                paucal: '{count} महिन्यांना'
-                plural: '{count} महिन्यांना'
-          year:
-            single:
-              numeric: '1 वर्षास'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} वर्षांना'
-                singular: '{count} वर्षास'
-                dual: '{count} वर्षांना'
-                paucal: '{count} वर्षांना'
-                plural: '{count} वर्षांना'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकंदाला'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिलिसेकंदांनी'
+                    singular: '{count} मिलिसेकंदाला'
+                    dual: '{count} मिलिसेकंदांनी'
+                    paucal: '{count} मिलिसेकंदांनी'
+                    plural: '{count} मिलिसेकंदांनी'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकंदास'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} सेकंदांना'
+                    singular: '{count} सेकंदास'
+                    dual: '{count} सेकंदांना'
+                    paucal: '{count} सेकंदांना'
+                    plural: '{count} सेकंदांना'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनिटास'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिनिटांना'
+                    singular: '{count} मिनिटास'
+                    dual: '{count} मिनिटांना'
+                    paucal: '{count} मिनिटांना'
+                    plural: '{count} मिनिटांना'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 तासास'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} तासांना'
+                    singular: '{count} तासास'
+                    dual: '{count} तासांना'
+                    paucal: '{count} तासांना'
+                    plural: '{count} तासांना'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिवसास'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} दिवसांनी'
+                    singular: '{count} दिवसास'
+                    dual: '{count} दिवसांनी'
+                    paucal: '{count} दिवसांनी'
+                    plural: '{count} दिवसांनी'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 आठवड्यास'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} आठवड्यांना'
+                    singular: '{count} आठवड्यास'
+                    dual: '{count} आठवड्यांना'
+                    paucal: '{count} आठवड्यांना'
+                    plural: '{count} आठवड्यांना'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिन्यास'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} महिन्यांना'
+                    singular: '{count} महिन्यास'
+                    dual: '{count} महिन्यांना'
+                    paucal: '{count} महिन्यांना'
+                    plural: '{count} महिन्यांना'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षास'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} वर्षांना'
+                    singular: '{count} वर्षास'
+                    dual: '{count} वर्षांना'
+                    paucal: '{count} वर्षांना'
+                    plural: '{count} वर्षांना'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       ablative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 मिलिसेकंदापासून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिलिसेकंदांहून'
-                singular: '{count} मिलिसेकंदापासून'
-                dual: '{count} मिलिसेकंदांहून'
-                paucal: '{count} मिलिसेकंदांहून'
-                plural: '{count} मिलिसेकंदांहून'
-          second:
-            single:
-              numeric: '1 सेकंदापासून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} सेकंदांपासून'
-                singular: '{count} सेकंदापासून'
-                dual: '{count} सेकंदांपासून'
-                paucal: '{count} सेकंदांपासून'
-                plural: '{count} सेकंदांपासून'
-          minute:
-            single:
-              numeric: '1 मिनिटापासून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिनिटांपासून'
-                singular: '{count} मिनिटापासून'
-                dual: '{count} मिनिटांपासून'
-                paucal: '{count} मिनिटांपासून'
-                plural: '{count} मिनिटांपासून'
-          hour:
-            single:
-              numeric: '1 तासापासून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} तासांपासून'
-                singular: '{count} तासापासून'
-                dual: '{count} तासांपासून'
-                paucal: '{count} तासांपासून'
-                plural: '{count} तासांपासून'
-          day:
-            single:
-              numeric: '1 दिवसाहून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} दिवसांहून'
-                singular: '{count} दिवसाहून'
-                dual: '{count} दिवसांहून'
-                paucal: '{count} दिवसांहून'
-                plural: '{count} दिवसांहून'
-          week:
-            single:
-              numeric: '1 आठवड्यापासून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} आठवड्यांपासून'
-                singular: '{count} आठवड्यापासून'
-                dual: '{count} आठवड्यांपासून'
-                paucal: '{count} आठवड्यांपासून'
-                plural: '{count} आठवड्यांपासून'
-          month:
-            single:
-              numeric: '1 महिन्यापासून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} महिन्यांपासून'
-                singular: '{count} महिन्यापासून'
-                dual: '{count} महिन्यांपासून'
-                paucal: '{count} महिन्यांपासून'
-                plural: '{count} महिन्यांपासून'
-          year:
-            single:
-              numeric: '1 वर्षापासून'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} वर्षांपासून'
-                singular: '{count} वर्षापासून'
-                dual: '{count} वर्षांपासून'
-                paucal: '{count} वर्षांपासून'
-                plural: '{count} वर्षांपासून'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकंदापासून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिलिसेकंदांहून'
+                    singular: '{count} मिलिसेकंदापासून'
+                    dual: '{count} मिलिसेकंदांहून'
+                    paucal: '{count} मिलिसेकंदांहून'
+                    plural: '{count} मिलिसेकंदांहून'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकंदापासून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} सेकंदांपासून'
+                    singular: '{count} सेकंदापासून'
+                    dual: '{count} सेकंदांपासून'
+                    paucal: '{count} सेकंदांपासून'
+                    plural: '{count} सेकंदांपासून'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनिटापासून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिनिटांपासून'
+                    singular: '{count} मिनिटापासून'
+                    dual: '{count} मिनिटांपासून'
+                    paucal: '{count} मिनिटांपासून'
+                    plural: '{count} मिनिटांपासून'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 तासापासून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} तासांपासून'
+                    singular: '{count} तासापासून'
+                    dual: '{count} तासांपासून'
+                    paucal: '{count} तासांपासून'
+                    plural: '{count} तासांपासून'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिवसाहून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} दिवसांहून'
+                    singular: '{count} दिवसाहून'
+                    dual: '{count} दिवसांहून'
+                    paucal: '{count} दिवसांहून'
+                    plural: '{count} दिवसांहून'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 आठवड्यापासून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} आठवड्यांपासून'
+                    singular: '{count} आठवड्यापासून'
+                    dual: '{count} आठवड्यांपासून'
+                    paucal: '{count} आठवड्यांपासून'
+                    plural: '{count} आठवड्यांपासून'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिन्यापासून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} महिन्यांपासून'
+                    singular: '{count} महिन्यापासून'
+                    dual: '{count} महिन्यांपासून'
+                    paucal: '{count} महिन्यांपासून'
+                    plural: '{count} महिन्यांपासून'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षापासून'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} वर्षांपासून'
+                    singular: '{count} वर्षापासून'
+                    dual: '{count} वर्षांपासून'
+                    paucal: '{count} वर्षांपासून'
+                    plural: '{count} वर्षांपासून'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       ergative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 मिलिसेकंदाने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिलिसेकंदांत'
-                singular: '{count} मिलिसेकंदाने'
-                dual: '{count} मिलिसेकंदांत'
-                paucal: '{count} मिलिसेकंदांत'
-                plural: '{count} मिलिसेकंदांत'
-          second:
-            single:
-              numeric: '1 सेकंदाने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} सेकंदांनी'
-                singular: '{count} सेकंदाने'
-                dual: '{count} सेकंदांनी'
-                paucal: '{count} सेकंदांनी'
-                plural: '{count} सेकंदांनी'
-          minute:
-            single:
-              numeric: '1 मिनिटाने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिनिटांनी'
-                singular: '{count} मिनिटाने'
-                dual: '{count} मिनिटांनी'
-                paucal: '{count} मिनिटांनी'
-                plural: '{count} मिनिटांनी'
-          hour:
-            single:
-              numeric: '1 तासाने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} तासांनी'
-                singular: '{count} तासाने'
-                dual: '{count} तासांनी'
-                paucal: '{count} तासांनी'
-                plural: '{count} तासांनी'
-          day:
-            single:
-              numeric: '1 दिवसाशी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} दिवसांशी'
-                singular: '{count} दिवसाशी'
-                dual: '{count} दिवसांशी'
-                paucal: '{count} दिवसांशी'
-                plural: '{count} दिवसांशी'
-          week:
-            single:
-              numeric: '1 आठवड्याने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} आठवड्यांनी'
-                singular: '{count} आठवड्याने'
-                dual: '{count} आठवड्यांनी'
-                paucal: '{count} आठवड्यांनी'
-                plural: '{count} आठवड्यांनी'
-          month:
-            single:
-              numeric: '1 महिन्याने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} महिन्यांनी'
-                singular: '{count} महिन्याने'
-                dual: '{count} महिन्यांनी'
-                paucal: '{count} महिन्यांनी'
-                plural: '{count} महिन्यांनी'
-          year:
-            single:
-              numeric: '1 वर्षाने'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} वर्षांनी'
-                singular: '{count} वर्षाने'
-                dual: '{count} वर्षांनी'
-                paucal: '{count} वर्षांनी'
-                plural: '{count} वर्षांनी'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकंदाने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिलिसेकंदांत'
+                    singular: '{count} मिलिसेकंदाने'
+                    dual: '{count} मिलिसेकंदांत'
+                    paucal: '{count} मिलिसेकंदांत'
+                    plural: '{count} मिलिसेकंदांत'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकंदाने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} सेकंदांनी'
+                    singular: '{count} सेकंदाने'
+                    dual: '{count} सेकंदांनी'
+                    paucal: '{count} सेकंदांनी'
+                    plural: '{count} सेकंदांनी'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनिटाने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिनिटांनी'
+                    singular: '{count} मिनिटाने'
+                    dual: '{count} मिनिटांनी'
+                    paucal: '{count} मिनिटांनी'
+                    plural: '{count} मिनिटांनी'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 तासाने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} तासांनी'
+                    singular: '{count} तासाने'
+                    dual: '{count} तासांनी'
+                    paucal: '{count} तासांनी'
+                    plural: '{count} तासांनी'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिवसाशी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} दिवसांशी'
+                    singular: '{count} दिवसाशी'
+                    dual: '{count} दिवसांशी'
+                    paucal: '{count} दिवसांशी'
+                    plural: '{count} दिवसांशी'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 आठवड्याने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} आठवड्यांनी'
+                    singular: '{count} आठवड्याने'
+                    dual: '{count} आठवड्यांनी'
+                    paucal: '{count} आठवड्यांनी'
+                    plural: '{count} आठवड्यांनी'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिन्याने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} महिन्यांनी'
+                    singular: '{count} महिन्याने'
+                    dual: '{count} महिन्यांनी'
+                    paucal: '{count} महिन्यांनी'
+                    plural: '{count} महिन्यांनी'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षाने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} वर्षांनी'
+                    singular: '{count} वर्षाने'
+                    dual: '{count} वर्षांनी'
+                    paucal: '{count} वर्षांनी'
+                    plural: '{count} वर्षांनी'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       locative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 मिलिसेकंदात'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिलिसेकंदांत'
-                singular: '{count} मिलिसेकंदात'
-                dual: '{count} मिलिसेकंदांत'
-                paucal: '{count} मिलिसेकंदांत'
-                plural: '{count} मिलिसेकंदांत'
-          second:
-            single:
-              numeric: '1 सेकंदाशी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} सेकंदांचा'
-                singular: '{count} सेकंदाशी'
-                dual: '{count} सेकंदांचा'
-                paucal: '{count} सेकंदांचा'
-                plural: '{count} सेकंदांचा'
-          minute:
-            single:
-              numeric: '1 मिनिटाशी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} मिनिटांचा'
-                singular: '{count} मिनिटाशी'
-                dual: '{count} मिनिटांचा'
-                paucal: '{count} मिनिटांचा'
-                plural: '{count} मिनिटांचा'
-          hour:
-            single:
-              numeric: '1 तासाशी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} तासांचा'
-                singular: '{count} तासाशी'
-                dual: '{count} तासांचा'
-                paucal: '{count} तासांचा'
-                plural: '{count} तासांचा'
-          day:
-            single:
-              numeric: '1 दिवसा'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} दिवसांच्या'
-                singular: '{count} दिवसा'
-                dual: '{count} दिवसांच्या'
-                paucal: '{count} दिवसांच्या'
-                plural: '{count} दिवसांच्या'
-          week:
-            single:
-              numeric: '1 आठवड्याशी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} आठवड्यांचा'
-                singular: '{count} आठवड्याशी'
-                dual: '{count} आठवड्यांचा'
-                paucal: '{count} आठवड्यांचा'
-                plural: '{count} आठवड्यांचा'
-          month:
-            single:
-              numeric: '1 महिन्याशी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} महिन्यांचा'
-                singular: '{count} महिन्याशी'
-                dual: '{count} महिन्यांचा'
-                paucal: '{count} महिन्यांचा'
-                plural: '{count} महिन्यांचा'
-          year:
-            single:
-              numeric: '1 वर्षाशी'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} वर्षांचा'
-                singular: '{count} वर्षाशी'
-                dual: '{count} वर्षांचा'
-                paucal: '{count} वर्षांचा'
-                plural: '{count} वर्षांचा'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकंदात'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिलिसेकंदांत'
+                    singular: '{count} मिलिसेकंदात'
+                    dual: '{count} मिलिसेकंदांत'
+                    paucal: '{count} मिलिसेकंदांत'
+                    plural: '{count} मिलिसेकंदांत'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकंदाशी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} सेकंदांचा'
+                    singular: '{count} सेकंदाशी'
+                    dual: '{count} सेकंदांचा'
+                    paucal: '{count} सेकंदांचा'
+                    plural: '{count} सेकंदांचा'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनिटाशी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} मिनिटांचा'
+                    singular: '{count} मिनिटाशी'
+                    dual: '{count} मिनिटांचा'
+                    paucal: '{count} मिनिटांचा'
+                    plural: '{count} मिनिटांचा'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 तासाशी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} तासांचा'
+                    singular: '{count} तासाशी'
+                    dual: '{count} तासांचा'
+                    paucal: '{count} तासांचा'
+                    plural: '{count} तासांचा'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिवसा'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} दिवसांच्या'
+                    singular: '{count} दिवसा'
+                    dual: '{count} दिवसांच्या'
+                    paucal: '{count} दिवसांच्या'
+                    plural: '{count} दिवसांच्या'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 आठवड्याशी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} आठवड्यांचा'
+                    singular: '{count} आठवड्याशी'
+                    dual: '{count} आठवड्यांचा'
+                    paucal: '{count} आठवड्यांचा'
+                    plural: '{count} आठवड्यांचा'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिन्याशी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} महिन्यांचा'
+                    singular: '{count} महिन्याशी'
+                    dual: '{count} महिन्यांचा'
+                    paucal: '{count} महिन्यांचा'
+                    plural: '{count} महिन्यांचा'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षाशी'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} वर्षांचा'
+                    singular: '{count} वर्षाशी'
+                    dual: '{count} वर्षांचा'
+                    paucal: '{count} वर्षांचा'
+                    plural: '{count} वर्षांचा'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       oblique:
-        units:
-          millisecond:
-            unsupported: true
-          second:
-            sameAsNominative: true
-          minute:
-            sameAsNominative: true
-          hour:
-            sameAsNominative: true
-          day:
-            sameAsNominative: true
-          week:
-            sameAsNominative: true
-          month:
-            sameAsNominative: true
-          year:
-            sameAsNominative: true
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            second:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            minute:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            hour:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            month:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            year:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

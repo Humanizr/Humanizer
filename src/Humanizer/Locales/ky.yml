@@ -5,7 +5,568 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'ablative'
+      - 'locative'
+      - 'equative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://files.eric.ed.gov/fulltext/ED358742.pdf'
+        revision: 'ED358742'
+        locator: 'Kyrgyz core case paradigms; analytic instrumental and productive equative reviewed against UD Kyrgyz'
+        credit: 'ERIC and Universal Dependencies contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунддун'
+                multiple:
+                  forms: '{count} миллисекунддун'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунддун'
+                multiple:
+                  forms: '{count} секунддун'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 мүнөттүн'
+                multiple:
+                  forms: '{count} мүнөттүн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 сааттын'
+                multiple:
+                  forms: '{count} сааттын'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 күндүн'
+                multiple:
+                  forms: '{count} күндүн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 аптанын'
+                multiple:
+                  forms: '{count} аптанын'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 айдын'
+                multiple:
+                  forms: '{count} айдын'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жылдын'
+                multiple:
+                  forms: '{count} жылдын'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундга'
+                multiple:
+                  forms: '{count} миллисекундга'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундга'
+                multiple:
+                  forms: '{count} секундга'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 мүнөткө'
+                multiple:
+                  forms: '{count} мүнөткө'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 саатка'
+                multiple:
+                  forms: '{count} саатка'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 күнгө'
+                multiple:
+                  forms: '{count} күнгө'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 аптага'
+                multiple:
+                  forms: '{count} аптага'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 айга'
+                multiple:
+                  forms: '{count} айга'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жылга'
+                multiple:
+                  forms: '{count} жылга'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундду'
+                multiple:
+                  forms: '{count} миллисекундду'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундду'
+                multiple:
+                  forms: '{count} секундду'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 мүнөттү'
+                multiple:
+                  forms: '{count} мүнөттү'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 саатты'
+                multiple:
+                  forms: '{count} саатты'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 күндү'
+                multiple:
+                  forms: '{count} күндү'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 аптаны'
+                multiple:
+                  forms: '{count} аптаны'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 айды'
+                multiple:
+                  forms: '{count} айды'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жылды'
+                multiple:
+                  forms: '{count} жылды'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунд менен'
+                multiple:
+                  forms: '{count} миллисекунд менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунд менен'
+                multiple:
+                  forms: '{count} секунд менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 мүнөт менен'
+                multiple:
+                  forms: '{count} мүнөт менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 саат менен'
+                multiple:
+                  forms: '{count} саат менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 күн менен'
+                multiple:
+                  forms: '{count} күн менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 апта менен'
+                multiple:
+                  forms: '{count} апта менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ай менен'
+                multiple:
+                  forms: '{count} ай менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жыл менен'
+                multiple:
+                  forms: '{count} жыл менен'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунддан'
+                multiple:
+                  forms: '{count} миллисекунддан'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунддан'
+                multiple:
+                  forms: '{count} секунддан'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 мүнөттөн'
+                multiple:
+                  forms: '{count} мүнөттөн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 сааттан'
+                multiple:
+                  forms: '{count} сааттан'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 күндөн'
+                multiple:
+                  forms: '{count} күндөн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 аптадан'
+                multiple:
+                  forms: '{count} аптадан'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 айдан'
+                multiple:
+                  forms: '{count} айдан'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жылдан'
+                multiple:
+                  forms: '{count} жылдан'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундда'
+                multiple:
+                  forms: '{count} миллисекундда'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундда'
+                multiple:
+                  forms: '{count} секундда'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 мүнөттө'
+                multiple:
+                  forms: '{count} мүнөттө'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 саатта'
+                multiple:
+                  forms: '{count} саатта'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 күндө'
+                multiple:
+                  forms: '{count} күндө'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 аптада'
+                multiple:
+                  forms: '{count} аптада'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 айда'
+                multiple:
+                  forms: '{count} айда'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жылда'
+                multiple:
+                  forms: '{count} жылда'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      equative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунддай'
+                multiple:
+                  forms: '{count} миллисекунддай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунддай'
+                multiple:
+                  forms: '{count} секунддай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 мүнөттөй'
+                multiple:
+                  forms: '{count} мүнөттөй'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 сааттай'
+                multiple:
+                  forms: '{count} сааттай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 күндөй'
+                multiple:
+                  forms: '{count} күндөй'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 аптадай'
+                multiple:
+                  forms: '{count} аптадай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 айдай'
+                multiple:
+                  forms: '{count} айдай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жылдай'
+                multiple:
+                  forms: '{count} жылдай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

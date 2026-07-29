@@ -312,7 +312,7 @@ namespace Humanizer
         public DefaultDateTimeOffsetHumanizeStrategy() { }
         public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
-    public class DefaultFormatter : Humanizer.IFormatter
+    public class DefaultFormatter : Humanizer.IFormatter, Humanizer.IGrammaticalCaseTimeSpanFormatter
     {
         public DefaultFormatter(System.Globalization.CultureInfo culture) { }
         public DefaultFormatter(string localeCode) { }
@@ -333,7 +333,7 @@ namespace Humanizer
         public DefaultTimeOnlyHumanizeStrategy() { }
         public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
-    public class DefaultTimeSpanHumanizeStrategy : Humanizer.ITimeSpanHumanizeStrategy
+    public class DefaultTimeSpanHumanizeStrategy : Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy, Humanizer.ITimeSpanHumanizeStrategy
     {
         public DefaultTimeSpanHumanizeStrategy() { }
         public string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toWords, bool toSymbols) { }
@@ -401,6 +401,30 @@ namespace Humanizer
         Accusative = 3,
         Instrumental = 4,
         Prepositional = 5,
+        Ablative = 6,
+        Comitative = 7,
+        Ergative = 8,
+        Locative = 9,
+        Oblique = 10,
+        Partitive = 11,
+        Vocative = 12,
+        Elative = 13,
+        Illative = 14,
+        Sociative = 15,
+        Terminative = 16,
+        Translative = 17,
+        Absolutive = 18,
+        Additive = 19,
+        Inessive = 20,
+        Allative = 21,
+        Adessive = 22,
+        Essive = 23,
+        Abessive = 24,
+        Equative = 25,
+        Directive = 26,
+        Lative = 27,
+        Benefactive = 28,
+        Causal = 29,
     }
     public enum GrammaticalGender
     {
@@ -475,6 +499,14 @@ namespace Humanizer
     public interface IFractionalTimeSpanHumanizeStrategy
     {
         string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols);
+    }
+    public interface IGrammaticalCaseTimeSpanFormatter : Humanizer.IFormatter
+    {
+        string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, Humanizer.GrammaticalCase grammaticalCase);
+    }
+    public interface IGrammaticalCaseTimeSpanHumanizeStrategy : Humanizer.ITimeSpanHumanizeStrategy
+    {
+        string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toSymbols, Humanizer.GrammaticalCase grammaticalCase);
     }
     public interface ILongOrdinalizer : Humanizer.IOrdinalizer
     {
@@ -2055,6 +2087,8 @@ namespace Humanizer
         public static string HumanizeToSymbols(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ") { }
         public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
         public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
+        public static string HumanizeWithCase(this System.TimeSpan timeSpan, Humanizer.GrammaticalCase grammaticalCase, int precision = 1, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ") { }
+        public static string HumanizeWithCase(this System.TimeSpan timeSpan, Humanizer.GrammaticalCase grammaticalCase, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ") { }
         public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
         public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator = ", ") { }
         public static string ToAge(this System.TimeSpan timeSpan, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 7, bool toWords = false) { }

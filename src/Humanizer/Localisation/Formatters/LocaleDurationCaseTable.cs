@@ -3,7 +3,7 @@ namespace Humanizer;
 enum LocaleDurationCaseClassification
 {
     Distinct,
-    SameAsNominative,
+    Invariant,
     NotApplicable,
     Unsupported
 }
@@ -12,6 +12,7 @@ enum LocalizedDurationCaseUnitKind
 {
     Phrase,
     SameAsNominative,
+    NotApplicable,
     Unsupported
 }
 
@@ -23,14 +24,22 @@ readonly record struct LocalizedDurationCase(LocalizedDurationCaseUnit[] Units);
 
 sealed class LocaleDurationCaseTable(
     LocaleDurationCaseClassification classification,
+    GrammaticalCase citationCase,
     LocalizedDurationCase?[] cases)
 {
     readonly LocalizedDurationCase?[] cases = cases;
 
     public LocaleDurationCaseClassification Classification { get; } = classification;
+    public GrammaticalCase CitationCase { get; } = citationCase;
 
     public bool TryGetCase(GrammaticalCase grammaticalCase, out LocalizedDurationCase value)
     {
+        if ((uint)grammaticalCase >= (uint)cases.Length)
+        {
+            value = default;
+            return false;
+        }
+
         var candidate = cases[(int)grammaticalCase];
         if (candidate is { } found)
         {

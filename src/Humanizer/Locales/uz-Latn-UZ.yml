@@ -5,7 +5,494 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'locative'
+      - 'ablative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://slaviccenters.duke.edu/sites/slaviccenters.duke.edu/files/file-attachments/uzbek.original.pdf'
+        revision: '2010'
+        locator: 'six-case paradigms and invariant suffixes'
+        credit: 'Duke Slavic and Eurasian Language Resource Center'
+    cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekund'
+                  words: 'bir millisekund'
+                multiple:
+                  forms:
+                    default: 'millisekund'
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekund'
+                  words: 'bir sekund'
+                multiple:
+                  forms:
+                    default: 'sekund'
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minut'
+                  words: 'bir minut'
+                multiple:
+                  forms:
+                    default: 'minut'
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 soat'
+                  words: 'bir soat'
+                multiple:
+                  forms:
+                    default: 'soat'
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 kun'
+                  words: 'bir kun'
+                multiple:
+                  forms:
+                    default: 'kun'
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hafta'
+                  words: 'bir hafta'
+                multiple:
+                  forms:
+                    default: 'hafta'
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 oy'
+                  words: 'bir oy'
+                multiple:
+                  forms:
+                    default: 'oy'
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yil'
+                  words: 'bir yil'
+                multiple:
+                  forms:
+                    default: 'yil'
+
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundning'
+                multiple:
+                  forms: '{count} millisekundning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundning'
+                multiple:
+                  forms: '{count} sekundning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutning'
+                multiple:
+                  forms: '{count} minutning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 soatning'
+                multiple:
+                  forms: '{count} soatning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 kunning'
+                multiple:
+                  forms: '{count} kunning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftaning'
+                multiple:
+                  forms: '{count} haftaning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 oyning'
+                multiple:
+                  forms: '{count} oyning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yilning'
+                multiple:
+                  forms: '{count} yilning'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundga'
+                multiple:
+                  forms: '{count} millisekundga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundga'
+                multiple:
+                  forms: '{count} sekundga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutga'
+                multiple:
+                  forms: '{count} minutga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 soatga'
+                multiple:
+                  forms: '{count} soatga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 kunga'
+                multiple:
+                  forms: '{count} kunga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftaga'
+                multiple:
+                  forms: '{count} haftaga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 oyga'
+                multiple:
+                  forms: '{count} oyga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yilga'
+                multiple:
+                  forms: '{count} yilga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundni'
+                multiple:
+                  forms: '{count} millisekundni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundni'
+                multiple:
+                  forms: '{count} sekundni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutni'
+                multiple:
+                  forms: '{count} minutni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 soatni'
+                multiple:
+                  forms: '{count} soatni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 kunni'
+                multiple:
+                  forms: '{count} kunni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftani'
+                multiple:
+                  forms: '{count} haftani'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 oyni'
+                multiple:
+                  forms: '{count} oyni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yilni'
+                multiple:
+                  forms: '{count} yilni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundda'
+                multiple:
+                  forms: '{count} millisekundda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundda'
+                multiple:
+                  forms: '{count} sekundda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutda'
+                multiple:
+                  forms: '{count} minutda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 soatda'
+                multiple:
+                  forms: '{count} soatda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 kunda'
+                multiple:
+                  forms: '{count} kunda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftada'
+                multiple:
+                  forms: '{count} haftada'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 oyda'
+                multiple:
+                  forms: '{count} oyda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yilda'
+                multiple:
+                  forms: '{count} yilda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekunddan'
+                multiple:
+                  forms: '{count} millisekunddan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunddan'
+                multiple:
+                  forms: '{count} sekunddan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutdan'
+                multiple:
+                  forms: '{count} minutdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 soatdan'
+                multiple:
+                  forms: '{count} soatdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 kundan'
+                multiple:
+                  forms: '{count} kundan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftadan'
+                multiple:
+                  forms: '{count} haftadan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 oydan'
+                multiple:
+                  forms: '{count} oydan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yildan'
+                multiple:
+                  forms: '{count} yildan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

@@ -81,7 +81,7 @@ The grammatical case used to select each unit phrase\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
-A bare duration phrase with locale\-authored singular forms and numeric multiple counts\.
+A bare locale\-authored duration phrase whose count may be explicit or encoded by the unit form\.
 
 #### Exceptions
 

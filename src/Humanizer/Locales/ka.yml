@@ -4,7 +4,423 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'ergative'
+      - 'dative'
+      - 'genitive'
+      - 'instrumental'
+      - 'essive'
+      - 'vocative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://iris.univr.it/bitstream/11562/918386/1/Artoni%20PhD%20Thesis.pdf'
+        revision: '2014'
+        locator: 'Georgian nominal case paradigms derived from Aronson'
+        credit: 'Daniele Artoni'
+      corpus:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Georgian-GLC/tree/5c0d105dfbafc1e490ab1a362b66a6caef866f8f'
+        revision: '5c0d105dfbafc1e490ab1a362b66a6caef866f8f'
+        locator: 'duration noun case forms'
+        credit: 'Universal Dependencies Georgian GLC contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      ergative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 მილიწამმა'
+                multiple:
+                  forms: '{count} მილიწამმა'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 წამმა'
+                multiple:
+                  forms: '{count} წამმა'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 წუთმა'
+                multiple:
+                  forms: '{count} წუთმა'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 საათმა'
+                multiple:
+                  forms: '{count} საათმა'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 დღემ'
+                multiple:
+                  forms: '{count} დღემ'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 კვირამ'
+                multiple:
+                  forms: '{count} კვირამ'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 თვემ'
+                multiple:
+                  forms: '{count} თვემ'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 წელმა'
+                multiple:
+                  forms: '{count} წელმა'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 მილიწამს'
+                multiple:
+                  forms: '{count} მილიწამს'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 წამს'
+                multiple:
+                  forms: '{count} წამს'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 წუთს'
+                multiple:
+                  forms: '{count} წუთს'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 საათს'
+                multiple:
+                  forms: '{count} საათს'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 დღეს'
+                multiple:
+                  forms: '{count} დღეს'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 კვირას'
+                multiple:
+                  forms: '{count} კვირას'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 თვეს'
+                multiple:
+                  forms: '{count} თვეს'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 წელს'
+                multiple:
+                  forms: '{count} წელს'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 მილიწამის'
+                multiple:
+                  forms: '{count} მილიწამის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 წამის'
+                multiple:
+                  forms: '{count} წამის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 წუთის'
+                multiple:
+                  forms: '{count} წუთის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 საათის'
+                multiple:
+                  forms: '{count} საათის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 დღის'
+                multiple:
+                  forms: '{count} დღის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 კვირის'
+                multiple:
+                  forms: '{count} კვირის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 თვის'
+                multiple:
+                  forms: '{count} თვის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 წლის'
+                multiple:
+                  forms: '{count} წლის'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 მილიწამით'
+                multiple:
+                  forms: '{count} მილიწამით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 წამით'
+                multiple:
+                  forms: '{count} წამით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 წუთით'
+                multiple:
+                  forms: '{count} წუთით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 საათით'
+                multiple:
+                  forms: '{count} საათით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 დღით'
+                multiple:
+                  forms: '{count} დღით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 კვირით'
+                multiple:
+                  forms: '{count} კვირით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 თვით'
+                multiple:
+                  forms: '{count} თვით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 წლით'
+                multiple:
+                  forms: '{count} წლით'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      essive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 მილიწამად'
+                multiple:
+                  forms: '{count} მილიწამად'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 წამად'
+                multiple:
+                  forms: '{count} წამად'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 წუთად'
+                multiple:
+                  forms: '{count} წუთად'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 საათად'
+                multiple:
+                  forms: '{count} საათად'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 დღედ'
+                multiple:
+                  forms: '{count} დღედ'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 კვირად'
+                multiple:
+                  forms: '{count} კვირად'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 თვედ'
+                multiple:
+                  forms: '{count} თვედ'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 წლად'
+                multiple:
+                  forms: '{count} წლად'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

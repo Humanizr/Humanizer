@@ -133,7 +133,13 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         int unit,
         GrammaticalCase grammaticalCase)
     {
-        if ((uint)grammaticalCase > (uint)GrammaticalCase.Translative)
+        if (GetType().Assembly != typeof(DefaultFormatter).Assembly)
+        {
+            throw new NotSupportedException(
+                $"Custom formatter type '{GetType().FullName}' must explicitly implement {nameof(IGrammaticalCaseTimeSpanFormatter)} to support grammatical-case-aware durations.");
+        }
+
+        if ((uint)grammaticalCase > (uint)GrammaticalCase.Causal)
         {
             throw new ArgumentOutOfRangeException(nameof(grammaticalCase), grammaticalCase, "Unsupported grammatical case.");
         }
@@ -159,12 +165,6 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
                 $"Culture '{Culture.Name}' does not support grammatical-case duration phrases.");
         }
 
-        if (grammaticalCase == GrammaticalCase.Nominative ||
-            table.Classification == LocaleDurationCaseClassification.SameAsNominative)
-        {
-            return FormatCaseAwareNominative(timeUnit, unit);
-        }
-
         if (!table.TryGetCase(grammaticalCase, out var caseOverlay))
         {
             throw new NotSupportedException(
@@ -175,6 +175,8 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         return unitOverlay.Kind switch
         {
             LocalizedDurationCaseUnitKind.SameAsNominative => FormatCaseAwareNominative(timeUnit, unit),
+            LocalizedDurationCaseUnitKind.NotApplicable => throw new NotSupportedException(
+                $"Culture '{Culture.Name}' does not apply grammatical case '{grammaticalCase}' to duration unit '{timeUnit}'."),
             LocalizedDurationCaseUnitKind.Unsupported => throw new NotSupportedException(
                 $"Culture '{Culture.Name}' does not support grammatical case '{grammaticalCase}' for duration unit '{timeUnit}'."),
             _ => FormatCaseAwareTimeSpanPhrase(
@@ -246,6 +248,9 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
             ? FormatterNumberForm.Singular
             : FormatterNumberForm.Default;
 
+    internal virtual FormatterNumberForm GetCaseAwareTimeSpanPhraseForm(TimeUnit unit, int number) =>
+        GetTimeSpanPhraseForm(unit, number, false);
+
     internal virtual FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         Math.Abs(count) == 1d ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
 
@@ -254,6 +259,9 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
 
     internal virtual string ResolveTimeSpanPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         forms.Resolve(form);
+
+    internal virtual string ResolveCaseAwareTimeSpanPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
+        ResolveTimeSpanPhraseForms(forms, form);
 
     internal virtual string ResolveDataUnitPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         forms.Resolve(form);
@@ -421,11 +429,11 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
                 $"Missing generated time-span phrase for '{Culture.Name}' and unit '{unit}'.");
         }
 
-        var form = GetTimeSpanPhraseForm(unit, count, false);
+        var form = GetCaseAwareTimeSpanPhraseForm(unit, count);
         return RenderCountedPhrase(
             multiple,
-            ResolveTimeSpanPhraseForms(multiple.Forms, form),
-            count.ToString(CultureInfo.CurrentCulture),
+            ResolveCaseAwareTimeSpanPhraseForms(multiple.Forms, form),
+            count.ToString(Culture),
             GetTimeSpanPhraseSecondaryPlaceholder(unit, count, false));
     }
 

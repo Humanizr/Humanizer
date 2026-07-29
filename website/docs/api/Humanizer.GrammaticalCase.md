@@ -114,3 +114,75 @@ Indicates an endpoint or limit
 `Translative` 17
 
 Indicates transition into a state
+
+<a name='Humanizer.GrammaticalCase.Absolutive'></a>
+
+`Absolutive` 18
+
+Indicates the unmarked argument of an intransitive verb or object of a transitive verb
+
+<a name='Humanizer.GrammaticalCase.Additive'></a>
+
+`Additive` 19
+
+Indicates the Estonian short illative form
+
+<a name='Humanizer.GrammaticalCase.Inessive'></a>
+
+`Inessive` 20
+
+Indicates location within
+
+<a name='Humanizer.GrammaticalCase.Allative'></a>
+
+`Allative` 21
+
+Indicates motion onto or toward
+
+<a name='Humanizer.GrammaticalCase.Adessive'></a>
+
+`Adessive` 22
+
+Indicates location on or at
+
+<a name='Humanizer.GrammaticalCase.Essive'></a>
+
+`Essive` 23
+
+Indicates a temporary state or role
+
+<a name='Humanizer.GrammaticalCase.Abessive'></a>
+
+`Abessive` 24
+
+Indicates absence or being without
+
+<a name='Humanizer.GrammaticalCase.Equative'></a>
+
+`Equative` 25
+
+Indicates comparison or equivalence
+
+<a name='Humanizer.GrammaticalCase.Directive'></a>
+
+`Directive` 26
+
+Indicates motion or direction toward
+
+<a name='Humanizer.GrammaticalCase.Lative'></a>
+
+`Lative` 27
+
+Indicates direction toward a destination
+
+<a name='Humanizer.GrammaticalCase.Benefactive'></a>
+
+`Benefactive` 28
+
+Indicates an intended beneficiary
+
+<a name='Humanizer.GrammaticalCase.Causal'></a>
+
+`Causal` 29
+
+Indicates a cause or reason

@@ -43,7 +43,7 @@ The grammatical case used to select the unit phrase\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
-A locale\-authored singular phrase or a phrase with a numeric multiple count\.
+A locale\-authored phrase whose count may be explicit or encoded by the unit form\.
 
 #### Exceptions
 

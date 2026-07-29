@@ -8,7 +8,9 @@ namespace Humanizer.SourceGenerators;
 
 public sealed partial class HumanizerSourceGenerator
 {
-    sealed class LocaleDurationCaseTableCatalogInput(ImmutableArray<DurationCaseCatalog> catalogs)
+    sealed class LocaleDurationCaseTableCatalogInput(
+        ImmutableArray<DurationCaseCatalog> catalogs,
+        ImmutableArray<Diagnostic> diagnostics)
     {
         static readonly string[] TimeUnitOrder =
         [
@@ -22,43 +24,42 @@ public sealed partial class HumanizerSourceGenerator
             "year"
         ];
 
-        static readonly string[] CaseOrder =
-        [
-            "nominative",
-            "genitive",
-            "dative",
-            "accusative",
-            "instrumental",
-            "prepositional",
-            "ablative",
-            "comitative",
-            "ergative",
-            "locative",
-            "oblique",
-            "partitive",
-            "vocative",
-            "elative",
-            "illative",
-            "sociative",
-            "terminative",
-            "translative"
-        ];
-
         readonly ImmutableArray<DurationCaseCatalog> catalogs = catalogs;
+        readonly ImmutableArray<Diagnostic> diagnostics = diagnostics;
 
         public static LocaleDurationCaseTableCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
             if (!localeCatalog.Diagnostics.IsEmpty)
             {
-                return new LocaleDurationCaseTableCatalogInput([]);
+                return new LocaleDurationCaseTableCatalogInput([], []);
             }
 
-            var coverage = DurationCaseCoverageInput.Create(localeCatalog);
-            return new LocaleDurationCaseTableCatalogInput(coverage.Catalogs);
+            try
+            {
+                var coverage = DurationCaseCoverageInput.Create(localeCatalog);
+                return new LocaleDurationCaseTableCatalogInput(coverage.Catalogs, []);
+            }
+            catch (InvalidOperationException exception)
+            {
+                return new LocaleDurationCaseTableCatalogInput(
+                    [],
+                    [
+                        Diagnostic.Create(
+                            Diagnostics.InvalidLocaleDefinition,
+                            Location.None,
+                            "durationCases",
+                            exception.Message)
+                    ]);
+            }
         }
 
         public void Emit(SourceProductionContext context)
         {
+            foreach (var diagnostic in diagnostics)
+            {
+                context.ReportDiagnostic(diagnostic);
+            }
+
             if (catalogs.IsDefaultOrEmpty)
             {
                 return;
@@ -77,6 +78,7 @@ public sealed partial class HumanizerSourceGenerator
             builder.AppendLine("{");
             builder.AppendLine("    internal static partial LocaleDurationCaseTable? ResolveCore(string localeCode) =>");
             builder.AppendLine("        Factories.TryGetValue(localeCode, out var factory) ? factory() : null;");
+            builder.AppendLine("    internal static IEnumerable<string> LocaleCodes => Factories.Keys;");
             builder.AppendLine();
             builder.AppendLine("    static readonly FrozenDictionary<string, Func<LocaleDurationCaseTable>> Factories = new Dictionary<string, Func<LocaleDurationCaseTable>>(StringComparer.Ordinal)");
             builder.AppendLine("    {");
@@ -104,6 +106,10 @@ public sealed partial class HumanizerSourceGenerator
                     "new LocaleDurationCaseTable(LocaleDurationCaseClassification." +
                     catalog.Classification +
                     ", " +
+                    "GrammaticalCase." +
+                    char.ToUpperInvariant(catalog.CitationCase[0]) +
+                    catalog.CitationCase.Substring(1) +
+                    ", " +
                     CreateCasesExpression(catalog) +
                     ")");
                 builder.AppendLine();
@@ -116,14 +122,14 @@ public sealed partial class HumanizerSourceGenerator
         static string CreateCasesExpression(DurationCaseCatalog catalog)
         {
             var builder = new StringBuilder("new LocalizedDurationCase?[] { ");
-            for (var index = 0; index < CaseOrder.Length; index++)
+            for (var index = 0; index < DurationCaseNormalization.Cases.Length; index++)
             {
                 if (index > 0)
                 {
                     builder.Append(", ");
                 }
 
-                builder.Append(catalog.Cases.TryGetValue(CaseOrder[index], out var overlay)
+                builder.Append(catalog.Cases.TryGetValue(DurationCaseNormalization.Cases[index], out var overlay)
                     ? CreateCaseExpression(overlay)
                     : "null");
             }
@@ -154,6 +160,8 @@ public sealed partial class HumanizerSourceGenerator
             {
                 DurationCaseUnitKind.SameAsNominative =>
                     "new LocalizedDurationCaseUnit(LocalizedDurationCaseUnitKind.SameAsNominative)",
+                DurationCaseUnitKind.NotApplicable =>
+                    "new LocalizedDurationCaseUnit(LocalizedDurationCaseUnitKind.NotApplicable)",
                 DurationCaseUnitKind.Unsupported =>
                     "new LocalizedDurationCaseUnit(LocalizedDurationCaseUnitKind.Unsupported)",
                 _ =>
@@ -186,10 +194,12 @@ public sealed partial class HumanizerSourceGenerator
                 ? "null"
                 : "new LocalizedPhraseForms(" +
                   QuoteLiteral(forms.Default) + ", " +
+                  QuoteOrNull(forms.Zero) + ", " +
                   QuoteOrNull(forms.Singular) + ", " +
                   QuoteOrNull(forms.Dual) + ", " +
                   QuoteOrNull(forms.Paucal) + ", " +
-                  QuoteOrNull(forms.Plural) +
+                  QuoteOrNull(forms.Plural) + ", " +
+                  QuoteOrNull(forms.Many) +
                   ")";
 
         static string CreateTemplateExpression(NamedTemplatePhrase? template) =>

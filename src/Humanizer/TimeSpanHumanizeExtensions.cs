@@ -65,7 +65,7 @@ public static class TimeSpanHumanizeExtensions
     /// <param name="maxUnit">The maximum unit of time to output.</param>
     /// <param name="minUnit">The minimum unit of time to output.</param>
     /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
-    /// <returns>The locale-authored unit-case phrase. Singular output may include a localized word or article; multiple units use digits.</returns>
+    /// <returns>The locale-authored unit-case phrase. The count may be written explicitly or encoded by the unit form.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="grammaticalCase"/> is not defined.</exception>
     /// <exception cref="NotSupportedException">The configured strategy, selected formatter, locale, or duration unit does not support the requested case.</exception>
     public static string HumanizeWithCase(
@@ -98,7 +98,7 @@ public static class TimeSpanHumanizeExtensions
     /// <param name="maxUnit">The maximum unit of time to output.</param>
     /// <param name="minUnit">The minimum unit of time to output.</param>
     /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
-    /// <returns>The locale-authored unit-case phrase. Singular output may include a localized word or article; multiple units use digits.</returns>
+    /// <returns>The locale-authored unit-case phrase. The count may be written explicitly or encoded by the unit form.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="grammaticalCase"/> is not defined.</exception>
     /// <exception cref="NotSupportedException">The configured strategy, selected formatter, locale, or duration unit does not support the requested case.</exception>
     public static string HumanizeWithCase(
@@ -405,7 +405,8 @@ public static class TimeSpanHumanizeExtensions
                     decimal.ToInt32(part.Value),
                     culture,
                     false,
-                    toSymbols));
+                    toSymbols,
+                    null));
                 continue;
             }
 
@@ -423,7 +424,8 @@ public static class TimeSpanHumanizeExtensions
                     SaturateToInt(part.Value),
                     culture,
                     false,
-                    toSymbols));
+                    toSymbols,
+                    null));
                 continue;
             }
 
@@ -606,7 +608,7 @@ public static class TimeSpanHumanizeExtensions
             toSymbols,
             null);
 
-    internal static string DefaultHumanize(
+    internal static string DefaultHumanizeWithCase(
         TimeSpan timeSpan,
         int precision,
         bool countEmptyUnits,
@@ -912,7 +914,7 @@ public static class TimeSpanHumanizeExtensions
                 : cultureFormatter is IGrammaticalCaseTimeSpanFormatter caseFormatter
                     ? caseFormatter.TimeSpanHumanize(timeUnit, amount, grammaticalCase.Value)
                     : throw new NotSupportedException(
-                        $"The formatter for '{culture?.Name ?? CultureInfo.CurrentUICulture.Name}' does not support grammatical-case-aware durations.");
+                        $"The formatter for '{culture?.Name ?? CultureInfo.CurrentCulture.Name}' does not support grammatical-case-aware durations.");
 
     static string HumanizeSinglePart(
         TimeSpan timeSpan,
@@ -956,7 +958,7 @@ public static class TimeSpanHumanizeExtensions
 
     static void ValidateGrammaticalCase(GrammaticalCase grammaticalCase)
     {
-        if ((uint)grammaticalCase > (uint)GrammaticalCase.Translative)
+        if ((uint)grammaticalCase > (uint)GrammaticalCase.Causal)
         {
             throw new ArgumentOutOfRangeException(nameof(grammaticalCase), grammaticalCase, "Unsupported grammatical case.");
         }

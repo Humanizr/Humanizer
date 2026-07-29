@@ -11,7 +11,7 @@ public interface IGrammaticalCaseTimeSpanFormatter : IFormatter
     /// <param name="timeUnit">The unit being described.</param>
     /// <param name="unit">The number of units being described.</param>
     /// <param name="grammaticalCase">The grammatical case used to select the unit phrase.</param>
-    /// <returns>A locale-authored singular phrase or a phrase with a numeric multiple count.</returns>
+    /// <returns>A locale-authored phrase whose count may be explicit or encoded by the unit form.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="timeUnit"/> or <paramref name="grammaticalCase"/> is outside its defined enum range.
     /// </exception>

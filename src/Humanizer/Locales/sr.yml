@@ -6,232 +6,441 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'accusative'
+      - 'instrumental'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/sr.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 милисекунда'
+                  words: 'једна милисекунда'
+                multiple:
+                  forms:
+                    default: 'милисекунди'
+                    singular: 'милисекунде'
+                    dual: 'милисекунде'
+                    paucal: 'милисекунде'
+                    plural: 'милисекунде'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунда'
+                  words: 'једна секунда'
+                multiple:
+                  forms:
+                    default: 'секунди'
+                    singular: 'секунде'
+                    dual: 'секунде'
+                    paucal: 'секунде'
+                    plural: 'секунде'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минут'
+                  words: 'један минут'
+                multiple:
+                  forms:
+                    default: 'минута'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 сат'
+                  words: 'један сат'
+                multiple:
+                  forms:
+                    default: 'сати'
+                    singular: 'сата'
+                    dual: 'сата'
+                    paucal: 'сата'
+                    plural: 'сата'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дан'
+                  words: 'један дан'
+                multiple:
+                  forms:
+                    default: 'дана'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 недеља'
+                  words: 'једна недеља'
+                multiple:
+                  forms:
+                    default: 'недеља'
+                    singular: 'недеље'
+                    dual: 'недеље'
+                    paucal: 'недеље'
+                    plural: 'недеље'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месец'
+                  words: 'један месец'
+                multiple:
+                  forms:
+                    default: 'месеци'
+                    singular: 'месеца'
+                    dual: 'месеца'
+                    paucal: 'месеца'
+                    plural: 'месеца'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 година'
+                  words: 'једна година'
+                multiple:
+                  forms:
+                    default: 'година'
+                    singular: 'године'
+                    dual: 'године'
+                    paucal: 'године'
+                    plural: 'године'
+
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 милисекунде'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} милисекунди'
-                singular: '{count} милисекунде'
-                dual: '{count} милисекунди'
-                paucal: '{count} милисекунде'
-                plural: '{count} милисекунди'
-          second:
-            single:
-              numeric: '1 секунде'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секунди'
-                singular: '{count} секунде'
-                dual: '{count} секунди'
-                paucal: '{count} секунде'
-                plural: '{count} секунди'
-          minute:
-            single:
-              numeric: '1 минута'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минута'
-                singular: '{count} минута'
-                dual: '{count} минута'
-                paucal: '{count} минута'
-                plural: '{count} минута'
-          hour:
-            single:
-              numeric: '1 сата'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} сата'
-                singular: '{count} сата'
-                dual: '{count} сата'
-                paucal: '{count} сата'
-                plural: '{count} сата'
-          day:
-            single:
-              numeric: '1 дана'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} дана'
-                singular: '{count} дана'
-                dual: '{count} дана'
-                paucal: '{count} дана'
-                plural: '{count} дана'
-          week:
-            single:
-              numeric: '1 недеље'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} недеља'
-                singular: '{count} недеље'
-                dual: '{count} недеља'
-                paucal: '{count} недеље'
-                plural: '{count} недеља'
-          month:
-            single:
-              numeric: '1 месеца'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} месеци'
-                singular: '{count} месеца'
-                dual: '{count} месеци'
-                paucal: '{count} месеца'
-                plural: '{count} месеци'
-          year:
-            single:
-              numeric: '1 године'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} година'
-                singular: '{count} године'
-                dual: '{count} година'
-                paucal: '{count} године'
-                plural: '{count} година'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 милисекунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} милисекунди'
+                    singular: '{count} милисекунде'
+                    dual: '{count} милисекунди'
+                    paucal: '{count} милисекунде'
+                    plural: '{count} милисекунди'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секунде'
+                    dual: '{count} секунди'
+                    paucal: '{count} секунде'
+                    plural: '{count} секунди'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минута'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минута'
+                    singular: '{count} минута'
+                    dual: '{count} минута'
+                    paucal: '{count} минута'
+                    plural: '{count} минута'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 сата'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} сата'
+                    singular: '{count} сата'
+                    dual: '{count} сата'
+                    paucal: '{count} сата'
+                    plural: '{count} сата'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дана'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дана'
+                    singular: '{count} дана'
+                    dual: '{count} дана'
+                    paucal: '{count} дана'
+                    plural: '{count} дана'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 недеље'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} недеља'
+                    singular: '{count} недеље'
+                    dual: '{count} недеља'
+                    paucal: '{count} недеље'
+                    plural: '{count} недеља'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месеца'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месеци'
+                    singular: '{count} месеца'
+                    dual: '{count} месеци'
+                    paucal: '{count} месеца'
+                    plural: '{count} месеци'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 године'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} година'
+                    singular: '{count} године'
+                    dual: '{count} година'
+                    paucal: '{count} године'
+                    plural: '{count} година'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            sameAsNominative: true
-          second:
-            single:
-              numeric: '1 секунду'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секунди'
-                singular: '{count} секунду'
-                dual: '{count} секунди'
-                paucal: '{count} секунде'
-                plural: '{count} секунди'
-          minute:
-            sameAsNominative: true
-          hour:
-            sameAsNominative: true
-          day:
-            sameAsNominative: true
-          week:
-            single:
-              numeric: '1 недељу'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} недеља'
-                singular: '{count} недељу'
-                dual: '{count} недеља'
-                paucal: '{count} недеље'
-                plural: '{count} недеља'
-          month:
-            sameAsNominative: true
-          year:
-            single:
-              numeric: '1 годину'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} година'
-                singular: '{count} годину'
-                dual: '{count} година'
-                paucal: '{count} године'
-                plural: '{count} година'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 милисекунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} милисекунди'
+                    singular: '{count} милисекунду'
+                    dual: '{count} милисекунди'
+                    paucal: '{count} милисекунде'
+                    plural: '{count} милисекунди'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секунду'
+                    dual: '{count} секунди'
+                    paucal: '{count} секунде'
+                    plural: '{count} секунди'
+              provenance:
+                - 'cldr48'
+            minute:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            hour:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 недељу'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} недеља'
+                    singular: '{count} недељу'
+                    dual: '{count} недеља'
+                    paucal: '{count} недеље'
+                    plural: '{count} недеља'
+              provenance:
+                - 'cldr48'
+            month:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 годину'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} година'
+                    singular: '{count} годину'
+                    dual: '{count} година'
+                    paucal: '{count} године'
+                    plural: '{count} година'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       instrumental:
-        units:
-          millisecond:
-            single:
-              numeric: '1 милисекундом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} милисекунди'
-                singular: '{count} милисекундом'
-                dual: '{count} милисекунди'
-                paucal: '{count} милисекунде'
-                plural: '{count} милисекунди'
-          second:
-            single:
-              numeric: '1 секундом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секунди'
-                singular: '{count} секундом'
-                dual: '{count} секунди'
-                paucal: '{count} секунде'
-                plural: '{count} секунди'
-          minute:
-            single:
-              numeric: '1 минутом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минута'
-                singular: '{count} минутом'
-                dual: '{count} минута'
-                paucal: '{count} минута'
-                plural: '{count} минута'
-          hour:
-            single:
-              numeric: '1 сатом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} сатом'
-                singular: '{count} сатом'
-                dual: '{count} сатом'
-                paucal: '{count} сатом'
-                plural: '{count} сатом'
-          day:
-            single:
-              numeric: '1 даном'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} даном'
-                singular: '{count} даном'
-                dual: '{count} даном'
-                paucal: '{count} даном'
-                plural: '{count} даном'
-          week:
-            single:
-              numeric: '1 недељом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} недеља'
-                singular: '{count} недељом'
-                dual: '{count} недеља'
-                paucal: '{count} недеље'
-                plural: '{count} недеља'
-          month:
-            single:
-              numeric: '1 месецом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} месеци'
-                singular: '{count} месецом'
-                dual: '{count} месеци'
-                paucal: '{count} месеца'
-                plural: '{count} месеци'
-          year:
-            single:
-              numeric: '1 годином'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} година'
-                singular: '{count} годином'
-                dual: '{count} година'
-                paucal: '{count} године'
-                plural: '{count} година'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 милисекундом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} милисекунди'
+                    singular: '{count} милисекундом'
+                    dual: '{count} милисекунди'
+                    paucal: '{count} милисекунде'
+                    plural: '{count} милисекунди'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секундом'
+                    dual: '{count} секунди'
+                    paucal: '{count} секунде'
+                    plural: '{count} секунди'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минутом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минута'
+                    singular: '{count} минутом'
+                    dual: '{count} минута'
+                    paucal: '{count} минута'
+                    plural: '{count} минута'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 сатом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} сатом'
+                    singular: '{count} сатом'
+                    dual: '{count} сатом'
+                    paucal: '{count} сатом'
+                    plural: '{count} сатом'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 даном'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} даном'
+                    singular: '{count} даном'
+                    dual: '{count} даном'
+                    paucal: '{count} даном'
+                    plural: '{count} даном'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 недељом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} недеља'
+                    singular: '{count} недељом'
+                    dual: '{count} недеља'
+                    paucal: '{count} недеље'
+                    plural: '{count} недеља'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месецом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месеци'
+                    singular: '{count} месецом'
+                    dual: '{count} месеци'
+                    paucal: '{count} месеца'
+                    plural: '{count} месеци'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 годином'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} година'
+                    singular: '{count} годином'
+                    dual: '{count} година'
+                    paucal: '{count} године'
+                    plural: '{count} година'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

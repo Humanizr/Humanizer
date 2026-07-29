@@ -19,7 +19,7 @@ public interface IGrammaticalCaseTimeSpanHumanizeStrategy : ITimeSpanHumanizeStr
     /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
     /// <param name="toSymbols">Whether time units are rendered as symbols.</param>
     /// <param name="grammaticalCase">The grammatical case used to select each unit phrase.</param>
-    /// <returns>A bare duration phrase with locale-authored singular forms and numeric multiple counts.</returns>
+    /// <returns>A bare locale-authored duration phrase whose count may be explicit or encoded by the unit form.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="grammaticalCase"/> is outside its defined enum range.
     /// </exception>

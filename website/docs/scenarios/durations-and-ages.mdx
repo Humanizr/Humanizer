@@ -63,7 +63,7 @@ from the configured formatter. A custom
 
 On `main/preview`, `HumanizeWithCase` selects a locale-authored grammatical
 case form for each duration unit. A singular form may include a localized word
-or article; multiple units use digits:
+or article, and a locale may encode a count in the inflected unit form:
 
 ```csharp
 var german = CultureInfo.GetCultureInfo("de-DE");
@@ -78,18 +78,19 @@ The method returns a bare duration phrase and never adds a preposition.
 `Nominative` also uses the case-aware locale data, so an authored singular
 one-word or article can differ from ordinary `Humanize`. The API deliberately
 has no `toWords` option: singular forms are complete locale-authored phrases,
-while every multiple count is numeric. Existing `Humanize(toWords: true)`
-behavior is unchanged.
+while counted forms follow the locale's verified duration grammar. Existing
+case-free `Humanize`, including `Humanize(toWords: true)`, continues to use the
+legacy duration surface unchanged.
 
 Case coverage is explicit for every locale:
 
 - `distinct` means the locale supplies an authored form for the case.
-- `same-as-nominative` means the case is supported and intentionally uses the
-  locale's case-aware nominative phrase.
+- `sameRenderedAs` means a case is supported and intentionally uses another
+  verified case rendering.
 - `not-applicable` means the narrowed duration-case surface does not apply to
   that locale.
-- `unsupported` means the locale has an applicable case system, but verified
-  duration forms are unavailable.
+- release validation rejects missing or unsupported applicable roots, cases,
+  and units.
 
 An unavailable requested case or unit throws `NotSupportedException`; it
 never falls back to English or invents morphology. Availability can differ by
@@ -98,8 +99,10 @@ a nominative millisecond form. A custom strategy or formatter must implement
 the corresponding grammatical-case capability interface, or every
 `HumanizeWithCase` call fails clearly, including `Nominative`.
 
-The checked-in duration forms use the explicit long-duration case data from
-[CLDR 48 at the audited commit](https://github.com/unicode-org/cldr/tree/acd6d88ae493633240e19a87a721076a8a75c310/common/main).
+The checked-in duration forms use explicit long-duration case data from
+[CLDR 48 at the audited commit](https://github.com/unicode-org/cldr/tree/acd6d88ae493633240e19a87a721076a8a75c310/common/main)
+where available, plus the per-locale grammar, corpus, dictionary, and
+native-review sources recorded in each locale file.
 See [Unicode LDML](https://unicode.org/reports/tr35/tr35-general.html) for the
 underlying locale-data model.
 

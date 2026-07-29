@@ -222,10 +222,12 @@ public sealed partial class HumanizerSourceGenerator
                 ? "null"
                 : "new LocalizedPhraseForms(" +
                   QuoteLiteral(forms.Default) + ", " +
+                  QuoteOrNull(forms.Zero) + ", " +
                   QuoteOrNull(forms.Singular) + ", " +
                   QuoteOrNull(forms.Dual) + ", " +
                   QuoteOrNull(forms.Paucal) + ", " +
-                  QuoteOrNull(forms.Plural) +
+                  QuoteOrNull(forms.Plural) + ", " +
+                  QuoteOrNull(forms.Many) +
                   ")";
 
         static string CreateTemplateExpression(NamedTemplatePhrase? template) =>

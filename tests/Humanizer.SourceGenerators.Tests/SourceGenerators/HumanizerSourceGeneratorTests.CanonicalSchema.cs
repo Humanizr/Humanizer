@@ -326,6 +326,33 @@ surfaces:
     }
 
     [Fact]
+    public void DurationCasesRequireEveryRootToClassifyTheSurface()
+    {
+        const string locale = """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'Other'
+    disposition: 'selector-only'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Contains(
+            runResult.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(
+                    "must classify the durationCases surface",
+                    StringComparison.Ordinal));
+        Assert.DoesNotContain(
+            runResult.GeneratedTrees,
+            static tree => tree.FilePath.EndsWith(
+                "LocaleDurationCaseTableCatalog.g.cs",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void InflectionProfilesRequireEveryRootOnceTheFeatureIsEnabled()
     {
         const string enabledLocale = """

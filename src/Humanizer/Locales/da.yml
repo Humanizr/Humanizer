@@ -6,97 +6,139 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/da.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 millisekunds'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} millisekunders'
-                singular: '{count} millisekunds'
-                dual: '{count} millisekunders'
-                paucal: '{count} millisekunders'
-                plural: '{count} millisekunders'
-          second:
-            single:
-              numeric: '1 sekunds'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekunders'
-                singular: '{count} sekunds'
-                dual: '{count} sekunders'
-                paucal: '{count} sekunders'
-                plural: '{count} sekunders'
-          minute:
-            single:
-              numeric: '1 minuts'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutters'
-                singular: '{count} minuts'
-                dual: '{count} minutters'
-                paucal: '{count} minutters'
-                plural: '{count} minutters'
-          hour:
-            single:
-              numeric: '1 times'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} timers'
-                singular: '{count} times'
-                dual: '{count} timers'
-                paucal: '{count} timers'
-                plural: '{count} timers'
-          day:
-            single:
-              numeric: '1 dags'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dages'
-                singular: '{count} dags'
-                dual: '{count} dages'
-                paucal: '{count} dages'
-                plural: '{count} dages'
-          week:
-            single:
-              numeric: '1 uges'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ugers'
-                singular: '{count} uges'
-                dual: '{count} ugers'
-                paucal: '{count} ugers'
-                plural: '{count} ugers'
-          month:
-            single:
-              numeric: '1 måneds'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} måneders'
-                singular: '{count} måneds'
-                dual: '{count} måneders'
-                paucal: '{count} måneders'
-                plural: '{count} måneders'
-          year:
-            single:
-              numeric: '1 års'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} års'
-                singular: '{count} års'
-                dual: '{count} års'
-                paucal: '{count} års'
-                plural: '{count} års'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekunds'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} millisekunders'
+                    singular: '{count} millisekunds'
+                    dual: '{count} millisekunders'
+                    paucal: '{count} millisekunders'
+                    plural: '{count} millisekunders'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunds'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekunders'
+                    singular: '{count} sekunds'
+                    dual: '{count} sekunders'
+                    paucal: '{count} sekunders'
+                    plural: '{count} sekunders'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuts'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutters'
+                    singular: '{count} minuts'
+                    dual: '{count} minutters'
+                    paucal: '{count} minutters'
+                    plural: '{count} minutters'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 times'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} timers'
+                    singular: '{count} times'
+                    dual: '{count} timers'
+                    paucal: '{count} timers'
+                    plural: '{count} timers'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dags'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dages'
+                    singular: '{count} dags'
+                    dual: '{count} dages'
+                    paucal: '{count} dages'
+                    plural: '{count} dages'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 uges'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ugers'
+                    singular: '{count} uges'
+                    dual: '{count} ugers'
+                    paucal: '{count} ugers'
+                    plural: '{count} ugers'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 måneds'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} måneders'
+                    singular: '{count} måneds'
+                    dual: '{count} måneders'
+                    paucal: '{count} måneders'
+                    plural: '{count} måneders'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 års'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} års'
+                    singular: '{count} års'
+                    dual: '{count} års'
+                    paucal: '{count} års'
+                    plural: '{count} års'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

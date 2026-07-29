@@ -146,6 +146,7 @@ public sealed partial class HumanizerSourceGenerator
             var prepositionMode = GetGrammarScalar(profile.Grammar, "prepositionMode") ?? GetOptionalString(profile.Root, "prepositionMode");
             var secondaryPlaceholderMode = GetGrammarScalar(profile.Grammar, "secondaryPlaceholderMode") ?? GetOptionalString(profile.Root, "secondaryPlaceholderMode");
             var fallbackTransform = GetOptionalString(profile.Root, "dataUnitFallbackTransform");
+            var caseTimeSpanDetector = GetGrammarScalar(profile.Grammar, "casePluralRule");
 
             return "new FormatterProfile(" +
                    CreateFormatterNumberDetectorExpression(phraseDetector) + ", " +
@@ -156,7 +157,8 @@ public sealed partial class HumanizerSourceGenerator
                    CreateFormatterFallbackTransformExpression(fallbackTransform) + ", " +
                    CreateFormatterPrepositionModeExpression(prepositionMode) + ", " +
                    CreateFormatterSecondaryPlaceholderModeExpression(secondaryPlaceholderMode) + ", " +
-                   CreateTimeUnitGenderMapExpression(profile) +
+                   CreateTimeUnitGenderMapExpression(profile) + ", " +
+                   CreateFormatterNumberDetectorExpression(caseTimeSpanDetector) +
                    ")";
         }
 

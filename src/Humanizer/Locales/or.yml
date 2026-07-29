@@ -5,8 +5,468 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
-
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - accusative
+      - instrumental
+      - dative
+      - ablative
+      - genitive
+      - locative
+      - vocative
+    sources:
+      inventory:
+        kind: 'grammar'
+        url: 'https://arxiv.org/abs/2205.11976'
+        revision: 'arXiv:2205.11976v1, 24 May 2022'
+        locator: 'Section 2, Table 1: accusative/dative -ku, instrumental -re, ablative -ru, genitive -ra, locative -re'
+        credit: 'Shantipriya Parida, Kalyanamalini Sahoo, Atul K. Ojha, Saraswati Sahoo, Satya Ranjan Dash, and Bijayalaxmi Dash'
+      governmentCorpus:
+        kind: 'corpus'
+        url: 'https://osepa.odisha.gov.in/upload/ebooks/CLASS-III/Class-III%28Math%29-workbook.pdf'
+        revision: 'Odisha School Education Programme Authority Class III mathematics workbook, accessed 2026-07-29'
+        locator: 'time exercise attests exact joined spelling ମିନିଟ୍‌ରେ'
+        credit: 'Odisha School Education Programme Authority'
+      governmentDativeCorpus:
+        kind: 'corpus'
+        url: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1817413'
+        revision: 'Press Information Bureau release PRID 1817413, 20 April 2022'
+        locator: 'attests exact phrase ୩୦ ମିନିଟ୍‌କୁ'
+        credit: 'Press Information Bureau, Government of India'
+      governmentAblativeCorpus:
+        kind: 'corpus'
+        url: 'https://osepa.odisha.gov.in/upload/ebooks/CLASS-VII/Science-VII-P-1-228_compressed.pdf'
+        revision: 'Odisha School Education Programme Authority Class VII science textbook, accessed 2026-07-29'
+        locator: 'attests exact joined spelling ମିନିଟ୍‌ରୁ'
+        credit: 'Odisha School Education Programme Authority'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ମିଲିସେକେଣ୍ଡକୁ'
+                  words: 'ଏକ ମିଲିସେକେଣ୍ଡକୁ'
+                multiple:
+                  forms: '{count} ମିଲିସେକେଣ୍ଡକୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ସେକେଣ୍ଡକୁ'
+                  words: 'ଏକ ସେକେଣ୍ଡକୁ'
+                multiple:
+                  forms: '{count} ସେକେଣ୍ଡକୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ମିନିଟ୍‌କୁ'
+                  words: 'ଏକ ମିନିଟ୍‌କୁ'
+                multiple:
+                  forms: '{count} ମିନିଟ୍‌କୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ଘଣ୍ଟାକୁ'
+                  words: 'ଏକ ଘଣ୍ଟାକୁ'
+                multiple:
+                  forms: '{count} ଘଣ୍ଟାକୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ଦିନକୁ'
+                  words: 'ଏକ ଦିନକୁ'
+                multiple:
+                  forms: '{count} ଦିନକୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ସପ୍ତାହକୁ'
+                  words: 'ଏକ ସପ୍ତାହକୁ'
+                multiple:
+                  forms: '{count} ସପ୍ତାହକୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ମାସକୁ'
+                  words: 'ଏକ ମାସକୁ'
+                multiple:
+                  forms: '{count} ମାସକୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ବର୍ଷକୁ'
+                  words: 'ଏକ ବର୍ଷକୁ'
+                multiple:
+                  forms: '{count} ବର୍ଷକୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ମିଲିସେକେଣ୍ଡରେ'
+                  words: 'ଏକ ମିଲିସେକେଣ୍ଡରେ'
+                multiple:
+                  forms: '{count} ମିଲିସେକେଣ୍ଡରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ସେକେଣ୍ଡରେ'
+                  words: 'ଏକ ସେକେଣ୍ଡରେ'
+                multiple:
+                  forms: '{count} ସେକେଣ୍ଡରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ମିନିଟ୍‌ରେ'
+                  words: 'ଏକ ମିନିଟ୍‌ରେ'
+                multiple:
+                  forms: '{count} ମିନିଟ୍‌ରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ଘଣ୍ଟାରେ'
+                  words: 'ଏକ ଘଣ୍ଟାରେ'
+                multiple:
+                  forms: '{count} ଘଣ୍ଟାରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ଦିନରେ'
+                  words: 'ଏକ ଦିନରେ'
+                multiple:
+                  forms: '{count} ଦିନରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ସପ୍ତାହରେ'
+                  words: 'ଏକ ସପ୍ତାହରେ'
+                multiple:
+                  forms: '{count} ସପ୍ତାହରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ମାସରେ'
+                  words: 'ଏକ ମାସରେ'
+                multiple:
+                  forms: '{count} ମାସରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ବର୍ଷରେ'
+                  words: 'ଏକ ବର୍ଷରେ'
+                multiple:
+                  forms: '{count} ବର୍ଷରେ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      dative:
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+            second:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+            minute:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+                - 'governmentDativeCorpus'
+            hour:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+            day:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+            week:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+            month:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+            year:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ମିଲିସେକେଣ୍ଡରୁ'
+                  words: 'ଏକ ମିଲିସେକେଣ୍ଡରୁ'
+                multiple:
+                  forms: '{count} ମିଲିସେକେଣ୍ଡରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ସେକେଣ୍ଡରୁ'
+                  words: 'ଏକ ସେକେଣ୍ଡରୁ'
+                multiple:
+                  forms: '{count} ସେକେଣ୍ଡରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ମିନିଟ୍‌ରୁ'
+                  words: 'ଏକ ମିନିଟ୍‌ରୁ'
+                multiple:
+                  forms: '{count} ମିନିଟ୍‌ରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'governmentAblativeCorpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ଘଣ୍ଟାରୁ'
+                  words: 'ଏକ ଘଣ୍ଟାରୁ'
+                multiple:
+                  forms: '{count} ଘଣ୍ଟାରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ଦିନରୁ'
+                  words: 'ଏକ ଦିନରୁ'
+                multiple:
+                  forms: '{count} ଦିନରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ସପ୍ତାହରୁ'
+                  words: 'ଏକ ସପ୍ତାହରୁ'
+                multiple:
+                  forms: '{count} ସପ୍ତାହରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ମାସରୁ'
+                  words: 'ଏକ ମାସରୁ'
+                multiple:
+                  forms: '{count} ମାସରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ବର୍ଷରୁ'
+                  words: 'ଏକ ବର୍ଷରୁ'
+                multiple:
+                  forms: '{count} ବର୍ଷରୁ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ମିଲିସେକେଣ୍ଡର'
+                  words: 'ଏକ ମିଲିସେକେଣ୍ଡର'
+                multiple:
+                  forms: '{count} ମିଲିସେକେଣ୍ଡର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ସେକେଣ୍ଡର'
+                  words: 'ଏକ ସେକେଣ୍ଡର'
+                multiple:
+                  forms: '{count} ସେକେଣ୍ଡର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ମିନିଟ୍‌ର'
+                  words: 'ଏକ ମିନିଟ୍‌ର'
+                multiple:
+                  forms: '{count} ମିନିଟ୍‌ର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ଘଣ୍ଟାର'
+                  words: 'ଏକ ଘଣ୍ଟାର'
+                multiple:
+                  forms: '{count} ଘଣ୍ଟାର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ଦିନର'
+                  words: 'ଏକ ଦିନର'
+                multiple:
+                  forms: '{count} ଦିନର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ସପ୍ତାହର'
+                  words: 'ଏକ ସପ୍ତାହର'
+                multiple:
+                  forms: '{count} ସପ୍ତାହର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ମାସର'
+                  words: 'ଏକ ମାସର'
+                multiple:
+                  forms: '{count} ମାସର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ବର୍ଷର'
+                  words: 'ଏକ ବର୍ଷର'
+                multiple:
+                  forms: '{count} ବର୍ଷର'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      locative:
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+            second:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+            minute:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+                - 'governmentCorpus'
+            hour:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+            day:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+            week:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+            month:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+            year:
+              sameRenderedAs: 'instrumental'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'inventory'
   list:
     engine: 'conjunction'
     value: 'ଏବଂ'

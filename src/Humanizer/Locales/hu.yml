@@ -6,367 +6,493 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'accusative'
+      - 'instrumental'
+      - 'terminative'
+      - 'translative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/hu.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ezredmásodpercet'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ezredmásodpercig'
-                singular: '{count} ezredmásodpercet'
-                dual: '{count} ezredmásodpercig'
-                paucal: '{count} ezredmásodpercig'
-                plural: '{count} ezredmásodpercig'
-          second:
-            single:
-              numeric: '1 másodpercet'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} másodpercet'
-                singular: '{count} másodpercet'
-                dual: '{count} másodpercet'
-                paucal: '{count} másodpercet'
-                plural: '{count} másodpercet'
-          minute:
-            single:
-              numeric: '1 percet'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} percet'
-                singular: '{count} percet'
-                dual: '{count} percet'
-                paucal: '{count} percet'
-                plural: '{count} percet'
-          hour:
-            single:
-              numeric: '1 órát'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} órát'
-                singular: '{count} órát'
-                dual: '{count} órát'
-                paucal: '{count} órát'
-                plural: '{count} órát'
-          day:
-            single:
-              numeric: '1 napot'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} napot'
-                singular: '{count} napot'
-                dual: '{count} napot'
-                paucal: '{count} napot'
-                plural: '{count} napot'
-          week:
-            single:
-              numeric: '1 hetet'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} hetet'
-                singular: '{count} hetet'
-                dual: '{count} hetet'
-                paucal: '{count} hetet'
-                plural: '{count} hetet'
-          month:
-            single:
-              numeric: '1 hónapot'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} hónapot'
-                singular: '{count} hónapot'
-                dual: '{count} hónapot'
-                paucal: '{count} hónapot'
-                plural: '{count} hónapot'
-          year:
-            single:
-              numeric: '1 évet'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} évet'
-                singular: '{count} évet'
-                dual: '{count} évet'
-                paucal: '{count} évet'
-                plural: '{count} évet'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ezredmásodpercet'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ezredmásodpercet'
+                    singular: '{count} ezredmásodpercet'
+                    dual: '{count} ezredmásodpercet'
+                    paucal: '{count} ezredmásodpercet'
+                    plural: '{count} ezredmásodpercet'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 másodpercet'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} másodpercet'
+                    singular: '{count} másodpercet'
+                    dual: '{count} másodpercet'
+                    paucal: '{count} másodpercet'
+                    plural: '{count} másodpercet'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 percet'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} percet'
+                    singular: '{count} percet'
+                    dual: '{count} percet'
+                    paucal: '{count} percet'
+                    plural: '{count} percet'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 órát'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} órát'
+                    singular: '{count} órát'
+                    dual: '{count} órát'
+                    paucal: '{count} órát'
+                    plural: '{count} órát'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 napot'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} napot'
+                    singular: '{count} napot'
+                    dual: '{count} napot'
+                    paucal: '{count} napot'
+                    plural: '{count} napot'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hetet'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} hetet'
+                    singular: '{count} hetet'
+                    dual: '{count} hetet'
+                    paucal: '{count} hetet'
+                    plural: '{count} hetet'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hónapot'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} hónapot'
+                    singular: '{count} hónapot'
+                    dual: '{count} hónapot'
+                    paucal: '{count} hónapot'
+                    plural: '{count} hónapot'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 évet'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} évet'
+                    singular: '{count} évet'
+                    dual: '{count} évet'
+                    paucal: '{count} évet'
+                    plural: '{count} évet'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       instrumental:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ezredmásodperccel'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ezredmásodperccel'
-                singular: '{count} ezredmásodperccel'
-                dual: '{count} ezredmásodperccel'
-                paucal: '{count} ezredmásodperccel'
-                plural: '{count} ezredmásodperccel'
-          second:
-            single:
-              numeric: '1 másodperccel'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} másodperccel'
-                singular: '{count} másodperccel'
-                dual: '{count} másodperccel'
-                paucal: '{count} másodperccel'
-                plural: '{count} másodperccel'
-          minute:
-            single:
-              numeric: '1 perccel'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} perccel'
-                singular: '{count} perccel'
-                dual: '{count} perccel'
-                paucal: '{count} perccel'
-                plural: '{count} perccel'
-          hour:
-            single:
-              numeric: '1 órával'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} órával'
-                singular: '{count} órával'
-                dual: '{count} órával'
-                paucal: '{count} órával'
-                plural: '{count} órával'
-          day:
-            single:
-              numeric: '1 nappal'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} nappal'
-                singular: '{count} nappal'
-                dual: '{count} nappal'
-                paucal: '{count} nappal'
-                plural: '{count} nappal'
-          week:
-            single:
-              numeric: '1 héttel'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} héttel'
-                singular: '{count} héttel'
-                dual: '{count} héttel'
-                paucal: '{count} héttel'
-                plural: '{count} héttel'
-          month:
-            single:
-              numeric: '1 hónappal'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} hónappal'
-                singular: '{count} hónappal'
-                dual: '{count} hónappal'
-                paucal: '{count} hónappal'
-                plural: '{count} hónappal'
-          year:
-            single:
-              numeric: '1 évvel'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} évvel'
-                singular: '{count} évvel'
-                dual: '{count} évvel'
-                paucal: '{count} évvel'
-                plural: '{count} évvel'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ezredmásodperccel'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ezredmásodperccel'
+                    singular: '{count} ezredmásodperccel'
+                    dual: '{count} ezredmásodperccel'
+                    paucal: '{count} ezredmásodperccel'
+                    plural: '{count} ezredmásodperccel'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 másodperccel'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} másodperccel'
+                    singular: '{count} másodperccel'
+                    dual: '{count} másodperccel'
+                    paucal: '{count} másodperccel'
+                    plural: '{count} másodperccel'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 perccel'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} perccel'
+                    singular: '{count} perccel'
+                    dual: '{count} perccel'
+                    paucal: '{count} perccel'
+                    plural: '{count} perccel'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 órával'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} órával'
+                    singular: '{count} órával'
+                    dual: '{count} órával'
+                    paucal: '{count} órával'
+                    plural: '{count} órával'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 nappal'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} nappal'
+                    singular: '{count} nappal'
+                    dual: '{count} nappal'
+                    paucal: '{count} nappal'
+                    plural: '{count} nappal'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 héttel'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} héttel'
+                    singular: '{count} héttel'
+                    dual: '{count} héttel'
+                    paucal: '{count} héttel'
+                    plural: '{count} héttel'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hónappal'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} hónappal'
+                    singular: '{count} hónappal'
+                    dual: '{count} hónappal'
+                    paucal: '{count} hónappal'
+                    plural: '{count} hónappal'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 évvel'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} évvel'
+                    singular: '{count} évvel'
+                    dual: '{count} évvel'
+                    paucal: '{count} évvel'
+                    plural: '{count} évvel'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       terminative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ezredmásodpercig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ezredmásodpercig'
-                singular: '{count} ezredmásodpercig'
-                dual: '{count} ezredmásodpercig'
-                paucal: '{count} ezredmásodpercig'
-                plural: '{count} ezredmásodpercig'
-          second:
-            single:
-              numeric: '1 másodpercig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} másodpercig'
-                singular: '{count} másodpercig'
-                dual: '{count} másodpercig'
-                paucal: '{count} másodpercig'
-                plural: '{count} másodpercig'
-          minute:
-            single:
-              numeric: '1 percig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} percig'
-                singular: '{count} percig'
-                dual: '{count} percig'
-                paucal: '{count} percig'
-                plural: '{count} percig'
-          hour:
-            single:
-              numeric: '1 óráig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} óráig'
-                singular: '{count} óráig'
-                dual: '{count} óráig'
-                paucal: '{count} óráig'
-                plural: '{count} óráig'
-          day:
-            single:
-              numeric: '1 napig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} napig'
-                singular: '{count} napig'
-                dual: '{count} napig'
-                paucal: '{count} napig'
-                plural: '{count} napig'
-          week:
-            single:
-              numeric: '1 hétig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} hétig'
-                singular: '{count} hétig'
-                dual: '{count} hétig'
-                paucal: '{count} hétig'
-                plural: '{count} hétig'
-          month:
-            single:
-              numeric: '1 hónapig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} hónapig'
-                singular: '{count} hónapig'
-                dual: '{count} hónapig'
-                paucal: '{count} hónapig'
-                plural: '{count} hónapig'
-          year:
-            single:
-              numeric: '1 évig'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} évig'
-                singular: '{count} évig'
-                dual: '{count} évig'
-                paucal: '{count} évig'
-                plural: '{count} évig'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ezredmásodpercig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ezredmásodpercig'
+                    singular: '{count} ezredmásodpercig'
+                    dual: '{count} ezredmásodpercig'
+                    paucal: '{count} ezredmásodpercig'
+                    plural: '{count} ezredmásodpercig'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 másodpercig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} másodpercig'
+                    singular: '{count} másodpercig'
+                    dual: '{count} másodpercig'
+                    paucal: '{count} másodpercig'
+                    plural: '{count} másodpercig'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 percig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} percig'
+                    singular: '{count} percig'
+                    dual: '{count} percig'
+                    paucal: '{count} percig'
+                    plural: '{count} percig'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 óráig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} óráig'
+                    singular: '{count} óráig'
+                    dual: '{count} óráig'
+                    paucal: '{count} óráig'
+                    plural: '{count} óráig'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 napig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} napig'
+                    singular: '{count} napig'
+                    dual: '{count} napig'
+                    paucal: '{count} napig'
+                    plural: '{count} napig'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hétig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} hétig'
+                    singular: '{count} hétig'
+                    dual: '{count} hétig'
+                    paucal: '{count} hétig'
+                    plural: '{count} hétig'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hónapig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} hónapig'
+                    singular: '{count} hónapig'
+                    dual: '{count} hónapig'
+                    paucal: '{count} hónapig'
+                    plural: '{count} hónapig'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 évig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} évig'
+                    singular: '{count} évig'
+                    dual: '{count} évig'
+                    paucal: '{count} évig'
+                    plural: '{count} évig'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       translative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ezredmásodperccé'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ezredmásodperccé'
-                singular: '{count} ezredmásodperccé'
-                dual: '{count} ezredmásodperccé'
-                paucal: '{count} ezredmásodperccé'
-                plural: '{count} ezredmásodperccé'
-          second:
-            single:
-              numeric: '1 másodperccé'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} másodperccé'
-                singular: '{count} másodperccé'
-                dual: '{count} másodperccé'
-                paucal: '{count} másodperccé'
-                plural: '{count} másodperccé'
-          minute:
-            single:
-              numeric: '1 perccé'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} perccé'
-                singular: '{count} perccé'
-                dual: '{count} perccé'
-                paucal: '{count} perccé'
-                plural: '{count} perccé'
-          hour:
-            single:
-              numeric: '1 órává'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} órává'
-                singular: '{count} órává'
-                dual: '{count} órává'
-                paucal: '{count} órává'
-                plural: '{count} órává'
-          day:
-            single:
-              numeric: '1 nappá'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} nappá'
-                singular: '{count} nappá'
-                dual: '{count} nappá'
-                paucal: '{count} nappá'
-                plural: '{count} nappá'
-          week:
-            single:
-              numeric: '1 hétté'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} hétté'
-                singular: '{count} hétté'
-                dual: '{count} hétté'
-                paucal: '{count} hétté'
-                plural: '{count} hétté'
-          month:
-            single:
-              numeric: '1 hónappá'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} hónappá'
-                singular: '{count} hónappá'
-                dual: '{count} hónappá'
-                paucal: '{count} hónappá'
-                plural: '{count} hónappá'
-          year:
-            single:
-              numeric: '1 évvé'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} évvé'
-                singular: '{count} évvé'
-                dual: '{count} évvé'
-                paucal: '{count} évvé'
-                plural: '{count} évvé'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ezredmásodperccé'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ezredmásodperccé'
+                    singular: '{count} ezredmásodperccé'
+                    dual: '{count} ezredmásodperccé'
+                    paucal: '{count} ezredmásodperccé'
+                    plural: '{count} ezredmásodperccé'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 másodperccé'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} másodperccé'
+                    singular: '{count} másodperccé'
+                    dual: '{count} másodperccé'
+                    paucal: '{count} másodperccé'
+                    plural: '{count} másodperccé'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 perccé'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} perccé'
+                    singular: '{count} perccé'
+                    dual: '{count} perccé'
+                    paucal: '{count} perccé'
+                    plural: '{count} perccé'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 órává'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} órává'
+                    singular: '{count} órává'
+                    dual: '{count} órává'
+                    paucal: '{count} órává'
+                    plural: '{count} órává'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 nappá'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} nappá'
+                    singular: '{count} nappá'
+                    dual: '{count} nappá'
+                    paucal: '{count} nappá'
+                    plural: '{count} nappá'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hétté'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} hétté'
+                    singular: '{count} hétté'
+                    dual: '{count} hétté'
+                    paucal: '{count} hétté'
+                    plural: '{count} hétté'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hónappá'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} hónappá'
+                    singular: '{count} hónappá'
+                    dual: '{count} hónappá'
+                    paucal: '{count} hónappá'
+                    plural: '{count} hónappá'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 évvé'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} évvé'
+                    singular: '{count} évvé'
+                    dual: '{count} évvé'
+                    paucal: '{count} évvé'
+                    plural: '{count} évvé'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

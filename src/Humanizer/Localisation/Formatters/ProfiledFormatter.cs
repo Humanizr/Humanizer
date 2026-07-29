@@ -23,6 +23,11 @@ enum FormatterNumberDetectorKind
     ArabicLike,
 
     /// <summary>
+    /// Use the full Arabic cardinal categories, including modulo-100 few and many forms.
+    /// </summary>
+    ArabicCardinal,
+
+    /// <summary>
     /// Use a paucal form for values between two and four.
     /// </summary>
     Between2And4Paucal,
@@ -64,6 +69,11 @@ enum FormatterNumberForm
     Default,
 
     /// <summary>
+    /// Use the zero form.
+    /// </summary>
+    Zero,
+
+    /// <summary>
     /// Use the singular form.
     /// </summary>
     Singular,
@@ -81,7 +91,12 @@ enum FormatterNumberForm
     /// <summary>
     /// Use the plural form.
     /// </summary>
-    Plural
+    Plural,
+
+    /// <summary>
+    /// Use the many form.
+    /// </summary>
+    Many
 }
 
 /// <summary>
@@ -244,6 +259,15 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             _ => base.GetFractionalTimeSpanPhraseForm(seconds, category)
         };
 
+    internal override FormatterNumberForm GetCaseAwareTimeSpanPhraseForm(TimeUnit unit, int number)
+        => TryGetExactTimeSpanForm(unit, number, out var form)
+            ? form
+            : DetectNumberForm(
+                number,
+                profile.CaseTimeSpanDetector == FormatterNumberDetectorKind.None
+                    ? profile.PhraseDetector
+                    : profile.CaseTimeSpanDetector);
+
     internal override FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
 
@@ -252,6 +276,14 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
 
     internal override string ResolveTimeSpanPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         ResolveProfiledPhraseForms(forms, form, profile.PhraseDetector);
+
+    internal override string ResolveCaseAwareTimeSpanPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
+        ResolveProfiledPhraseForms(
+            forms,
+            form,
+            profile.CaseTimeSpanDetector == FormatterNumberDetectorKind.None
+                ? profile.PhraseDetector
+                : profile.CaseTimeSpanDetector);
 
     internal override string ResolveDataUnitPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         ResolveProfiledPhraseForms(forms, form, profile.DataUnitDetector);
@@ -314,6 +346,15 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
                 1 => FormatterNumberForm.Singular,
                 2 => FormatterNumberForm.Dual,
                 >= 3 and <= 10 => FormatterNumberForm.Plural,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.ArabicCardinal => absoluteNumber switch
+            {
+                0 => FormatterNumberForm.Zero,
+                1 => FormatterNumberForm.Singular,
+                2 => FormatterNumberForm.Dual,
+                _ when absoluteNumber % 100 is >= 3 and <= 10 => FormatterNumberForm.Plural,
+                _ when absoluteNumber % 100 is >= 11 and <= 99 => FormatterNumberForm.Many,
                 _ => FormatterNumberForm.Default
             },
             FormatterNumberDetectorKind.Between2And4Paucal => absoluteNumber switch
@@ -501,6 +542,7 @@ sealed record FormatterProfile
     /// <param name="prepositionMode">The mode that controls locale-specific preposition placeholders.</param>
     /// <param name="secondaryPlaceholderMode">The mode that controls locale-specific secondary placeholders.</param>
     /// <param name="unitGenders">Optional grammatical genders used when converting units to words.</param>
+    /// <param name="caseTimeSpanDetector">The detector used only for grammatical-case duration phrases.</param>
     public FormatterProfile(
         FormatterNumberDetectorKind phraseDetector,
         FormatterDateFormRule[] exactDateForms,
@@ -510,7 +552,8 @@ sealed record FormatterProfile
         FormatterDataUnitFallbackTransform dataUnitFallbackTransform,
         FormatterPrepositionMode prepositionMode,
         FormatterSecondaryPlaceholderMode secondaryPlaceholderMode,
-        FrozenDictionary<TimeUnit, GrammaticalGender>? unitGenders = null)
+        FrozenDictionary<TimeUnit, GrammaticalGender>? unitGenders = null,
+        FormatterNumberDetectorKind caseTimeSpanDetector = FormatterNumberDetectorKind.None)
     {
         PhraseDetector = phraseDetector;
         ExactDateForms = exactDateForms;
@@ -521,6 +564,7 @@ sealed record FormatterProfile
         PrepositionMode = prepositionMode;
         SecondaryPlaceholderMode = secondaryPlaceholderMode;
         UnitGenders = unitGenders ?? FrozenDictionary<TimeUnit, GrammaticalGender>.Empty;
+        CaseTimeSpanDetector = caseTimeSpanDetector;
     }
 
     /// <summary>
@@ -567,6 +611,11 @@ sealed record FormatterProfile
     /// Gets the optional grammatical genders used when converting units to words.
     /// </summary>
     public FrozenDictionary<TimeUnit, GrammaticalGender> UnitGenders { get; }
+
+    /// <summary>
+    /// Gets the detector used only for grammatical-case duration phrases.
+    /// </summary>
+    public FormatterNumberDetectorKind CaseTimeSpanDetector { get; }
 }
 
 /// <summary>

@@ -45,52 +45,102 @@ ownership chain and proving assertions for inherited surfaces.
 
 Every terminal locale root must classify `surfaces.durationCases`; a regional
 variant may inherit that classification only through its declared
-same-language `variantOf` chain. The accepted classifications are:
+same-language, same-script `variantOf` chain. An authored child block replaces
+the parent's entire duration-case surface; omit the block to inherit it.
 
-- `distinct`: the locale has one or more verified non-nominative duration
-  cases and supplies complete overlays.
-- `same-as-nominative`: the narrowed duration-case surface is supported but
-  intentionally uses the locale's case-aware nominative phrases.
+The release classifications are:
+
+- `distinct`: the locale has an evidenced case inventory and explicitly
+  realizes every inventory case.
+- `invariant`: the locale has an evidenced inventory whose applicable cases
+  have the same written duration rendering.
 - `not-applicable`: grammatical case is not applicable to this locale's
-  narrowed duration surface.
-- `unsupported`: a grammatical case system is applicable, but trustworthy
-  duration forms are not available.
+  narrowed written duration surface, with an authoritative reason.
 
-A `distinct` locale lists only verified non-nominative cases under `cases`.
-Each listed case must explicitly account for all eight units:
-`millisecond`, `second`, `minute`, `hour`, `day`, `week`, `month`, and `year`.
-A unit is either a complete duration phrase, `sameAsNominative: true`, or
-`unsupported: true`. There is no partial leaf fallback, and unresolved CLDR
-inheritance markers such as `↑↑↑` are rejected.
+`unsupported` is available only while developing locale data. Release
+validation rejects every applicable unsupported root, case, and unit.
+
+Each non-`not-applicable` root declares:
+
+- `inventory`: every case in the language's written bare-duration scope.
+- `citationCase`: the inventory case whose authored base-duration phrases
+  provide the locale's citation rendering. It is commonly `nominative`, but
+  locales such as Basque use `absolutive`; the generator rejects a citation
+  case that is absent from the inventory.
+- `sources`: immutable CLDR, grammar, corpus, native-authored, or native-review
+  evidence with URL, revision, locator, and credit.
+- `cases`: exactly one realization for every inventory case.
+
+A case realization is exactly one of:
+
+- `authored`, with all eight units;
+- `sameRenderedAs: <case>`, for an evidenced same-written-output relationship;
+- `notApplicable: <reason>`, with provenance; or
+- development-only `unsupported: <reason>`.
+
+An authored unit is exactly one of `phrase`, `sameRenderedAs`,
+`notApplicable`, or development-only `unsupported`. Case and unit aliases are
+flattened during generation. Missing targets, self references, cycles, and
+aliases to unavailable data fail generation.
 
 ```yaml
 surfaces:
   durationCases:
     classification: 'distinct'
+    inventory:
+      - 'nominative'
+      - 'dative'
+    citationCase: 'nominative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/de.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance: [cldr48]
       dative:
-        units:
-          millisecond:
-            sameAsNominative: true
-          second:
-            single:
-              numeric: '1 Sekunde'
-              words: 'einer Sekunde'
-            multiple:
-              forms: 'Sekunden'
-          # minute through year are also required
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: nominative
+              provenance: [cldr48]
+            second:
+              phrase:
+                single:
+                  numeric: '1 Sekunde'
+                  words: 'einer Sekunde'
+                multiple:
+                  forms: 'Sekunden'
+              provenance: [cldr48]
+            # minute through year are also required
+        provenance: [cldr48]
 ```
 
-Phrase mappings use the same singular and counted-phrase grammar as
-`surfaces.phrases.duration`, but an authored overlay must provide a singular
-phrase and numeric multiple forms. The singular `words` variant can contain a
-locale-authored one-word or article phrase; multiple counts remain numeric.
-Do not add prepositions or arbitrary number-word declension to this surface.
+Case-aware calls validate the requested case against `inventory` before
+looking up a phrase and fail clearly when it is unavailable. Existing
+case-free `Humanize` calls continue to use the legacy duration path unchanged.
+
+Phrase leaves use the same singular and counted-phrase grammar as
+`surfaces.phrases.duration`. Every authored leaf supplies a singular phrase and
+a numeric `multiple` phrase. When
+`surfaces.formatter.casePluralRule` is explicitly declared, every reachable
+named multiple form is also required for authored overlays and citation/base
+duration phrases. For example, `casePluralRule: arabic-cardinal` requires
+`default`, `zero`, `dual`, `plural`, and `many`; count 1 remains the separate
+singular branch. Without an explicit case plural rule, normal multiple-form
+fallback remains valid. The singular `words` variant can contain a
+locale-authored one-word or article phrase; counted forms may write the count
+or encode it in the unit morphology. Do not synthesize prepositions or
+arbitrary number-word declension.
 
 At runtime, `HumanizeWithCase` returns a bare duration phrase. `Nominative`
-also uses the case-aware singular selection. `same-as-nominative` and
-`sameAsNominative` select that locale phrase; `not-applicable`, `unsupported`,
-an absent requested case, or an unsupported unit throws
+also uses the case-aware singular selection. `sameRenderedAs` selects the
+evidenced same-language rendering; `notApplicable`, `unsupported`, an absent
+requested case, or an unsupported unit throws
 `NotSupportedException`. Missing classifications or incomplete overlays fail
 generation, and no path falls back to English or invents morphology.
 Case-aware duration formatting is independent of relative-date and
@@ -115,17 +165,19 @@ These are the main files that turn locale YAML into runtime behavior:
    - shared runtime kernels
 
 <!-- humanizer-locale-reference-fingerprint:v1
-src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs 29bea0d874bc68b5cde63a052d36da61939f8595305642e4e948626002447ad1
+src/Humanizer.SourceGenerators/Common/CanonicalLocaleAuthoring.cs 1a97379e27bd7c68a65b540260c4c4e5c16de79197bc6ea11096260388b21864
+src/Humanizer.SourceGenerators/Common/DurationCaseModels.cs 55622c375dcce6046b891f2c0bd94ce4a6a1d32b98dbbb5de36f0d9f77335702
 src/Humanizer.SourceGenerators/Common/EngineContractCatalog.cs e293be598ad2466e4b98716ce334ca08f7aebc1e9c9e527e10e50d106f9c4553
 src/Humanizer.SourceGenerators/Common/EngineContractModels.cs ca4bd085df761a716b5be707bae8d69a785c385795aeef6fd593c2201befde31
 src/Humanizer.SourceGenerators/Common/EngineContractUtilities.cs c65c01becf23ad9c52de269d2c98b8ee1694ad76352f82cfc828abd4dd40542d
 src/Humanizer.SourceGenerators/Common/GenerationHelpers.cs be15de6880cec4ce91d59f09931055a7113f995bc0b00d9d2aac96e0ac3d37f7
-src/Humanizer.SourceGenerators/Common/LocalePhraseNormalization.cs 0354dd61975bf6455ac828daafb0e62d830f68f45087c45fbf20695630b7e4e4
-src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs 575ae811b5a7f1034ad66fed8736f93617bd39705913854a4af243eb33b9f432
+src/Humanizer.SourceGenerators/Common/LocalePhraseNormalization.cs 269364d7230c1617b32ec24d1c678e8d8ca1d21b40cb62ab2801d501c93a0fa5
+src/Humanizer.SourceGenerators/Common/LocaleYamlCatalog.cs 71bd37bf02949583538aeb66ec193ff75db2908deb4e3c4a8559b89b190c9d4d
 src/Humanizer.SourceGenerators/Common/ProfileDefinitions.cs 1c16b4d79f8a476591b830a264a3deb1633d565adeea25fb6e8565be3773c35d
 src/Humanizer.SourceGenerators/Generators/LocaleRegistryInput.cs bc5c840398e324a7faccd998accf4fcbfa3bda03f32875cfd581a3a816569ede
-src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/FormatterProfileCatalogInput.cs 9d7a5b20a39c5fef56d3e517076b9c59ea61fed766f04c102d574190f5b93d94
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/FormatterProfileCatalogInput.cs e5c84ebc2a49dc140661df936bbf8877e7e09a2fb00faa052c00317a0375bbec
 src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/InflectionCatalogInput.cs 515c16622e95ca3f85d15959704497590245fbf5d8c0fa1d30b782c11fc899df
+src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/LocaleDurationCaseTableCatalogInput.cs 6ff672d656061ed52325eba2b73abcc081d07ee90ff656bd06aaf06638bad615
 src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/NumberToWordsEngineContractFactory.cs 2d408847bd78e3526b52c300d2bb771a33b34815e1bb331de4ccec16faaac789
 src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalDateProfileCatalogInput.cs 6681d60bb2b4fd6c5f13bcdb74716daed1c8f9007afe0fd5c0288b4a8a5851ba
 src/Humanizer.SourceGenerators/Generators/ProfileCatalogs/OrdinalizerProfileCatalogInput.cs 9674c51fb84f48aff3371df9ac87fa32cd30b40b007b3cdb3650b52ef049f846
@@ -141,7 +193,9 @@ src/Humanizer/Localisation/CollectionFormatters/DelimitedCollectionFormatter.cs 
 src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDateCalendarMode.cs 1d614b07b825aa9a863aa18c50341ed3afcaaa2fe61a03422e695c61e3f2edf7
 src/Humanizer/Localisation/DateToOrdinalWords/OrdinalDatePattern.cs 396227e41763ab813facef6b48624005f304e30dab17eafb404f299200b21739
 src/Humanizer/Localisation/EifelerRule.cs 8f69199eb9ee94de698cb20bab2e56a02cceaf9307c6ec260e248eef7bd6ed85
-src/Humanizer/Localisation/Formatters/ProfiledFormatter.cs c0521e5cafc3d2fef13bfb54db9b27744f255edaad990913f4e5dc932a4ac23f
+src/Humanizer/Localisation/Formatters/DefaultFormatter.cs f2a205977d304b179d4ffba37379ab2988012516a9a197b016d895a9a6664094
+src/Humanizer/Localisation/Formatters/LocaleDurationCaseTable.cs 4a309d05341f65249fffabe942f599ff40419380931f53d1b8e1913b3b417b1d
+src/Humanizer/Localisation/Formatters/ProfiledFormatter.cs 15bff85e18b8d6e848b9521f3af07ef566c4c97e33289ecd5214a343e2656eea
 src/Humanizer/Localisation/NumberToWords/BillionStrategyNumberToWordsConverter.cs a72be9112e92ceb6c806f88d9e66fe50b54dff4d93b737b342fc94ad01bd7287
 src/Humanizer/Localisation/NumberToWords/ConjunctionalScaleNumberToWordsConverter.cs de9af76989a0e4b983071d761e0f31ee5bc4c91ce93a9a81d799c8845c96c915
 src/Humanizer/Localisation/NumberToWords/HarmonyOrdinalNumberToWordsConverter.cs 9db61e3e1483e2994d42e12229da51054916f720cabd06d95cf60f093b892d06

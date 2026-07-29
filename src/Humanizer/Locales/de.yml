@@ -6,205 +6,303 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/de.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 Millisekunde'
-              words: 'einer Millisekunde'
-            multiple:
-              forms: 'Millisekunden'
-              wordsVariant:
-                forms: 'Millisekunden'
-          second:
-            single:
-              numeric: '1 Sekunde'
-              words: 'einer Sekunde'
-            multiple:
-              forms: 'Sekunden'
-              wordsVariant:
-                forms: 'Sekunden'
-          minute:
-            single:
-              numeric: '1 Minute'
-              words: 'einer Minute'
-            multiple:
-              forms: 'Minuten'
-              wordsVariant:
-                forms: 'Minuten'
-          hour:
-            single:
-              numeric: '1 Stunde'
-              words: 'einer Stunde'
-            multiple:
-              forms: 'Stunden'
-              wordsVariant:
-                forms: 'Stunden'
-          day:
-            single:
-              numeric: '1 Tages'
-              words: 'eines Tages'
-            multiple:
-              forms: 'Tage'
-              wordsVariant:
-                forms: 'Tage'
-          week:
-            single:
-              numeric: '1 Woche'
-              words: 'einer Woche'
-            multiple:
-              forms: 'Wochen'
-              wordsVariant:
-                forms: 'Wochen'
-          month:
-            single:
-              numeric: '1 Monats'
-              words: 'eines Monats'
-            multiple:
-              forms: 'Monate'
-              wordsVariant:
-                forms: 'Monate'
-          year:
-            single:
-              numeric: '1 Jahres'
-              words: 'eines Jahres'
-            multiple:
-              forms: 'Jahre'
-              wordsVariant:
-                forms: 'Jahre'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 Millisekunde'
+                  words: 'einer Millisekunde'
+                multiple:
+                  forms: 'Millisekunden'
+                  wordsVariant:
+                    forms: 'Millisekunden'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 Sekunde'
+                  words: 'einer Sekunde'
+                multiple:
+                  forms: 'Sekunden'
+                  wordsVariant:
+                    forms: 'Sekunden'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 Minute'
+                  words: 'einer Minute'
+                multiple:
+                  forms: 'Minuten'
+                  wordsVariant:
+                    forms: 'Minuten'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 Stunde'
+                  words: 'einer Stunde'
+                multiple:
+                  forms: 'Stunden'
+                  wordsVariant:
+                    forms: 'Stunden'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 Tages'
+                  words: 'eines Tages'
+                multiple:
+                  forms: 'Tage'
+                  wordsVariant:
+                    forms: 'Tage'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 Woche'
+                  words: 'einer Woche'
+                multiple:
+                  forms: 'Wochen'
+                  wordsVariant:
+                    forms: 'Wochen'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 Monats'
+                  words: 'eines Monats'
+                multiple:
+                  forms: 'Monate'
+                  wordsVariant:
+                    forms: 'Monate'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 Jahres'
+                  words: 'eines Jahres'
+                multiple:
+                  forms: 'Jahre'
+                  wordsVariant:
+                    forms: 'Jahre'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 Millisekunde'
-              words: 'einer Millisekunde'
-            multiple:
-              forms: 'Millisekunden'
-              wordsVariant:
-                forms: 'Millisekunden'
-          second:
-            single:
-              numeric: '1 Sekunde'
-              words: 'einer Sekunde'
-            multiple:
-              forms: 'Sekunden'
-              wordsVariant:
-                forms: 'Sekunden'
-          minute:
-            single:
-              numeric: '1 Minute'
-              words: 'einer Minute'
-            multiple:
-              forms: 'Minuten'
-              wordsVariant:
-                forms: 'Minuten'
-          hour:
-            single:
-              numeric: '1 Stunde'
-              words: 'einer Stunde'
-            multiple:
-              forms: 'Stunden'
-              wordsVariant:
-                forms: 'Stunden'
-          day:
-            single:
-              numeric: '1 Tag'
-              words: 'einem Tag'
-            multiple:
-              forms: 'Tagen'
-              wordsVariant:
-                forms: 'Tagen'
-          week:
-            single:
-              numeric: '1 Woche'
-              words: 'einer Woche'
-            multiple:
-              forms: 'Wochen'
-              wordsVariant:
-                forms: 'Wochen'
-          month:
-            single:
-              numeric: '1 Monat'
-              words: 'einem Monat'
-            multiple:
-              forms: 'Monaten'
-              wordsVariant:
-                forms: 'Monaten'
-          year:
-            single:
-              numeric: '1 Jahr'
-              words: 'einem Jahr'
-            multiple:
-              forms: 'Jahren'
-              wordsVariant:
-                forms: 'Jahren'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 Millisekunde'
+                  words: 'einer Millisekunde'
+                multiple:
+                  forms: 'Millisekunden'
+                  wordsVariant:
+                    forms: 'Millisekunden'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 Sekunde'
+                  words: 'einer Sekunde'
+                multiple:
+                  forms: 'Sekunden'
+                  wordsVariant:
+                    forms: 'Sekunden'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 Minute'
+                  words: 'einer Minute'
+                multiple:
+                  forms: 'Minuten'
+                  wordsVariant:
+                    forms: 'Minuten'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 Stunde'
+                  words: 'einer Stunde'
+                multiple:
+                  forms: 'Stunden'
+                  wordsVariant:
+                    forms: 'Stunden'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 Tag'
+                  words: 'einem Tag'
+                multiple:
+                  forms: 'Tagen'
+                  wordsVariant:
+                    forms: 'Tagen'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 Woche'
+                  words: 'einer Woche'
+                multiple:
+                  forms: 'Wochen'
+                  wordsVariant:
+                    forms: 'Wochen'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 Monat'
+                  words: 'einem Monat'
+                multiple:
+                  forms: 'Monaten'
+                  wordsVariant:
+                    forms: 'Monaten'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 Jahr'
+                  words: 'einem Jahr'
+                multiple:
+                  forms: 'Jahren'
+                  wordsVariant:
+                    forms: 'Jahren'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 Millisekunde'
-              words: 'eine Millisekunde'
-            multiple:
-              forms: 'Millisekunden'
-              wordsVariant:
-                forms: 'Millisekunden'
-          second:
-            single:
-              numeric: '1 Sekunde'
-              words: 'eine Sekunde'
-            multiple:
-              forms: 'Sekunden'
-              wordsVariant:
-                forms: 'Sekunden'
-          minute:
-            single:
-              numeric: '1 Minute'
-              words: 'eine Minute'
-            multiple:
-              forms: 'Minuten'
-              wordsVariant:
-                forms: 'Minuten'
-          hour:
-            single:
-              numeric: '1 Stunde'
-              words: 'eine Stunde'
-            multiple:
-              forms: 'Stunden'
-              wordsVariant:
-                forms: 'Stunden'
-          day:
-            single:
-              numeric: '1 Tag'
-              words: 'einen Tag'
-            multiple:
-              forms: 'Tage'
-              wordsVariant:
-                forms: 'Tage'
-          week:
-            single:
-              numeric: '1 Woche'
-              words: 'eine Woche'
-            multiple:
-              forms: 'Wochen'
-              wordsVariant:
-                forms: 'Wochen'
-          month:
-            single:
-              numeric: '1 Monat'
-              words: 'einen Monat'
-            multiple:
-              forms: 'Monate'
-              wordsVariant:
-                forms: 'Monate'
-          year:
-            single:
-              numeric: '1 Jahr'
-              words: 'ein Jahr'
-            multiple:
-              forms: 'Jahre'
-              wordsVariant:
-                forms: 'Jahre'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 Millisekunde'
+                  words: 'eine Millisekunde'
+                multiple:
+                  forms: 'Millisekunden'
+                  wordsVariant:
+                    forms: 'Millisekunden'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 Sekunde'
+                  words: 'eine Sekunde'
+                multiple:
+                  forms: 'Sekunden'
+                  wordsVariant:
+                    forms: 'Sekunden'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 Minute'
+                  words: 'eine Minute'
+                multiple:
+                  forms: 'Minuten'
+                  wordsVariant:
+                    forms: 'Minuten'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 Stunde'
+                  words: 'eine Stunde'
+                multiple:
+                  forms: 'Stunden'
+                  wordsVariant:
+                    forms: 'Stunden'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 Tag'
+                  words: 'einen Tag'
+                multiple:
+                  forms: 'Tage'
+                  wordsVariant:
+                    forms: 'Tage'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 Woche'
+                  words: 'eine Woche'
+                multiple:
+                  forms: 'Wochen'
+                  wordsVariant:
+                    forms: 'Wochen'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 Monat'
+                  words: 'einen Monat'
+                multiple:
+                  forms: 'Monate'
+                  wordsVariant:
+                    forms: 'Monate'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 Jahr'
+                  words: 'ein Jahr'
+                multiple:
+                  forms: 'Jahre'
+                  wordsVariant:
+                    forms: 'Jahre'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

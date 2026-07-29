@@ -5,7 +5,153 @@ surfaces:
     cardinalRule: 'Irish'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'accusative'
+      - 'dative'
+      - 'genitive'
+      - 'vocative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://books.google.com/books?id=KCAf0gEACAAJ'
+        revision: 'Foclóir Gaeilge–Béarla, 1977, ISBN 9780686282808'
+        locator: 'milleasoicind, soicind, nóiméad, uair, lá, seachtain, mí, and bliain headword paradigms'
+        credit: 'Niall Ó Dónaill; Oifig an tSoláthair'
+      corpus:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Irish-IDT/tree/5f7e01835e0b61b96a70bebff68ecc4b37a0ee87'
+        revision: '5f7e01835e0b61b96a70bebff68ecc4b37a0ee87'
+        locator: 'modern common-form case equivalence and duration noun forms'
+        credit: 'Universal Dependencies Irish IDT contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      accusative:
+        sameRenderedAs: 'nominative'
+        provenance:
+          - 'corpus'
+      dative:
+        sameRenderedAs: 'nominative'
+        provenance:
+          - 'corpus'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 mhilleasoicind'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} milleasoicind'
+                    dual: '{count} mhilleasoicind'
+                    plural: '{count} milleasoicind'
+                    default: '{count} milleasoicind'
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 soicind'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} soicind'
+                    dual: '{count} shoicind'
+                    plural: '{count} soicind'
+                    default: '{count} soicind'
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 nóiméid'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} nóiméad'
+                    dual: '{count} nóiméad'
+                    plural: '{count} nóiméad'
+                    default: '{count} nóiméad'
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 uaire an chloig'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} uair an chloig'
+                    dual: '{count} uair an chloig'
+                    plural: '{count} uair an chloig'
+                    default: '{count} uair an chloig'
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 lae'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} lá'
+                    dual: '{count} lá'
+                    plural: '{count} lá'
+                    default: '{count} lá'
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 seachtaine'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} seachtain'
+                    dual: '{count} sheachtain'
+                    plural: '{count} seachtain'
+                    default: '{count} seachtain'
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 míosa'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} mí'
+                    dual: '{count} mhí'
+                    plural: '{count} mí'
+                    default: '{count} mí'
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 bliana'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    singular: '{count} bliain'
+                    dual: '{count} bhliain'
+                    plural: '{count} bliana'
+                    default: '{count} bliain'
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

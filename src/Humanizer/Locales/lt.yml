@@ -6,457 +6,611 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'locative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/lt.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundės'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundžių'
-                singular: '{count} milisekundės'
-                dual: '{count} milisekundžių'
-                paucal: '{count} milisekundžių'
-                plural: '{count} milisekundės'
-          second:
-            single:
-              numeric: '1 sekundės'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundžių'
-                singular: '{count} sekundės'
-                dual: '{count} sekundžių'
-                paucal: '{count} sekundžių'
-                plural: '{count} sekundės'
-          minute:
-            single:
-              numeric: '1 minutės'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minučių'
-                singular: '{count} minutės'
-                dual: '{count} minučių'
-                paucal: '{count} minučių'
-                plural: '{count} minutės'
-          hour:
-            single:
-              numeric: '1 valandos'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} valandų'
-                singular: '{count} valandos'
-                dual: '{count} valandų'
-                paucal: '{count} valandų'
-                plural: '{count} valandos'
-          day:
-            single:
-              numeric: '1 dienos'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienų'
-                singular: '{count} dienos'
-                dual: '{count} dienų'
-                paucal: '{count} dienų'
-                plural: '{count} dienos'
-          week:
-            single:
-              numeric: '1 savaitės'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} savaičių'
-                singular: '{count} savaitės'
-                dual: '{count} savaičių'
-                paucal: '{count} savaičių'
-                plural: '{count} savaitės'
-          month:
-            single:
-              numeric: '1 mėnesio'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mėnesių'
-                singular: '{count} mėnesio'
-                dual: '{count} mėnesių'
-                paucal: '{count} mėnesių'
-                plural: '{count} mėnesio'
-          year:
-            single:
-              numeric: '1 metų'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} metų'
-                singular: '{count} metų'
-                dual: '{count} metų'
-                paucal: '{count} metų'
-                plural: '{count} metų'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundės'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundžių'
+                    singular: '{count} milisekundės'
+                    dual: '{count} milisekundžių'
+                    paucal: '{count} milisekundžių'
+                    plural: '{count} milisekundės'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundės'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundžių'
+                    singular: '{count} sekundės'
+                    dual: '{count} sekundžių'
+                    paucal: '{count} sekundžių'
+                    plural: '{count} sekundės'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutės'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minučių'
+                    singular: '{count} minutės'
+                    dual: '{count} minučių'
+                    paucal: '{count} minučių'
+                    plural: '{count} minutės'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 valandos'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} valandų'
+                    singular: '{count} valandos'
+                    dual: '{count} valandų'
+                    paucal: '{count} valandų'
+                    plural: '{count} valandos'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dienos'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienų'
+                    singular: '{count} dienos'
+                    dual: '{count} dienų'
+                    paucal: '{count} dienų'
+                    plural: '{count} dienos'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 savaitės'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} savaičių'
+                    singular: '{count} savaitės'
+                    dual: '{count} savaičių'
+                    paucal: '{count} savaičių'
+                    plural: '{count} savaitės'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mėnesio'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mėnesių'
+                    singular: '{count} mėnesio'
+                    dual: '{count} mėnesių'
+                    paucal: '{count} mėnesių'
+                    plural: '{count} mėnesio'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 metų'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} metų'
+                    singular: '{count} metų'
+                    dual: '{count} metų'
+                    paucal: '{count} metų'
+                    plural: '{count} metų'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundei'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundėms'
-                singular: '{count} milisekundei'
-                dual: '{count} milisekundžių'
-                paucal: '{count} milisekundėms'
-                plural: '{count} milisekundės'
-          second:
-            single:
-              numeric: '1 sekundei'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundėms'
-                singular: '{count} sekundei'
-                dual: '{count} sekundžių'
-                paucal: '{count} sekundėms'
-                plural: '{count} sekundės'
-          minute:
-            single:
-              numeric: '1 minutei'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutėms'
-                singular: '{count} minutei'
-                dual: '{count} minučių'
-                paucal: '{count} minutėms'
-                plural: '{count} minutės'
-          hour:
-            single:
-              numeric: '1 valandai'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} valandoms'
-                singular: '{count} valandai'
-                dual: '{count} valandų'
-                paucal: '{count} valandoms'
-                plural: '{count} valandos'
-          day:
-            single:
-              numeric: '1 dienai'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienoms'
-                singular: '{count} dienai'
-                dual: '{count} dienų'
-                paucal: '{count} dienoms'
-                plural: '{count} dienos'
-          week:
-            single:
-              numeric: '1 savaitei'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} savaitėms'
-                singular: '{count} savaitei'
-                dual: '{count} savaičių'
-                paucal: '{count} savaitėms'
-                plural: '{count} savaitės'
-          month:
-            single:
-              numeric: '1 mėnesiui'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mėnesiams'
-                singular: '{count} mėnesiui'
-                dual: '{count} mėnesių'
-                paucal: '{count} mėnesiams'
-                plural: '{count} mėnesio'
-          year:
-            single:
-              numeric: '1 metams'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} metams'
-                singular: '{count} metams'
-                dual: '{count} metų'
-                paucal: '{count} metams'
-                plural: '{count} metų'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundei'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundėms'
+                    singular: '{count} milisekundei'
+                    dual: '{count} milisekundžių'
+                    paucal: '{count} milisekundėms'
+                    plural: '{count} milisekundės'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundei'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundėms'
+                    singular: '{count} sekundei'
+                    dual: '{count} sekundžių'
+                    paucal: '{count} sekundėms'
+                    plural: '{count} sekundės'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutei'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutėms'
+                    singular: '{count} minutei'
+                    dual: '{count} minučių'
+                    paucal: '{count} minutėms'
+                    plural: '{count} minutės'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 valandai'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} valandoms'
+                    singular: '{count} valandai'
+                    dual: '{count} valandų'
+                    paucal: '{count} valandoms'
+                    plural: '{count} valandos'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dienai'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienoms'
+                    singular: '{count} dienai'
+                    dual: '{count} dienų'
+                    paucal: '{count} dienoms'
+                    plural: '{count} dienos'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 savaitei'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} savaitėms'
+                    singular: '{count} savaitei'
+                    dual: '{count} savaičių'
+                    paucal: '{count} savaitėms'
+                    plural: '{count} savaitės'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mėnesiui'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mėnesiams'
+                    singular: '{count} mėnesiui'
+                    dual: '{count} mėnesių'
+                    paucal: '{count} mėnesiams'
+                    plural: '{count} mėnesio'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 metams'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} metams'
+                    singular: '{count} metams'
+                    dual: '{count} metų'
+                    paucal: '{count} metams'
+                    plural: '{count} metų'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundę'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundes'
-                singular: '{count} milisekundę'
-                dual: '{count} milisekundžių'
-                paucal: '{count} milisekundes'
-                plural: '{count} milisekundės'
-          second:
-            single:
-              numeric: '1 sekundę'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundes'
-                singular: '{count} sekundę'
-                dual: '{count} sekundžių'
-                paucal: '{count} sekundes'
-                plural: '{count} sekundės'
-          minute:
-            single:
-              numeric: '1 minutę'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutes'
-                singular: '{count} minutę'
-                dual: '{count} minučių'
-                paucal: '{count} minutes'
-                plural: '{count} minutės'
-          hour:
-            single:
-              numeric: '1 valandą'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} valandas'
-                singular: '{count} valandą'
-                dual: '{count} valandų'
-                paucal: '{count} valandas'
-                plural: '{count} valandos'
-          day:
-            single:
-              numeric: '1 dieną'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienas'
-                singular: '{count} dieną'
-                dual: '{count} dienų'
-                paucal: '{count} dienas'
-                plural: '{count} dienos'
-          week:
-            single:
-              numeric: '1 savaitę'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} savaites'
-                singular: '{count} savaitę'
-                dual: '{count} savaičių'
-                paucal: '{count} savaites'
-                plural: '{count} savaitės'
-          month:
-            single:
-              numeric: '1 mėnesį'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mėnesius'
-                singular: '{count} mėnesį'
-                dual: '{count} mėnesių'
-                paucal: '{count} mėnesius'
-                plural: '{count} mėnesio'
-          year:
-            single:
-              numeric: '1 metus'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} metus'
-                singular: '{count} metus'
-                dual: '{count} metų'
-                paucal: '{count} metus'
-                plural: '{count} metų'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundę'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundes'
+                    singular: '{count} milisekundę'
+                    dual: '{count} milisekundžių'
+                    paucal: '{count} milisekundes'
+                    plural: '{count} milisekundės'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundę'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundes'
+                    singular: '{count} sekundę'
+                    dual: '{count} sekundžių'
+                    paucal: '{count} sekundes'
+                    plural: '{count} sekundės'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutę'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutes'
+                    singular: '{count} minutę'
+                    dual: '{count} minučių'
+                    paucal: '{count} minutes'
+                    plural: '{count} minutės'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 valandą'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} valandas'
+                    singular: '{count} valandą'
+                    dual: '{count} valandų'
+                    paucal: '{count} valandas'
+                    plural: '{count} valandos'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dieną'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienas'
+                    singular: '{count} dieną'
+                    dual: '{count} dienų'
+                    paucal: '{count} dienas'
+                    plural: '{count} dienos'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 savaitę'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} savaites'
+                    singular: '{count} savaitę'
+                    dual: '{count} savaičių'
+                    paucal: '{count} savaites'
+                    plural: '{count} savaitės'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mėnesį'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mėnesius'
+                    singular: '{count} mėnesį'
+                    dual: '{count} mėnesių'
+                    paucal: '{count} mėnesius'
+                    plural: '{count} mėnesio'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 metus'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} metus'
+                    singular: '{count} metus'
+                    dual: '{count} metų'
+                    paucal: '{count} metus'
+                    plural: '{count} metų'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       instrumental:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekunde'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundėmis'
-                singular: '{count} milisekunde'
-                dual: '{count} milisekundžių'
-                paucal: '{count} milisekundėmis'
-                plural: '{count} milisekundės'
-          second:
-            single:
-              numeric: '1 sekunde'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundėmis'
-                singular: '{count} sekunde'
-                dual: '{count} sekundžių'
-                paucal: '{count} sekundėmis'
-                plural: '{count} sekundės'
-          minute:
-            single:
-              numeric: '1 minute'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutėms'
-                singular: '{count} minute'
-                dual: '{count} minučių'
-                paucal: '{count} minutėms'
-                plural: '{count} minutės'
-          hour:
-            single:
-              numeric: '1 valanda'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} valandomis'
-                singular: '{count} valanda'
-                dual: '{count} valandų'
-                paucal: '{count} valandomis'
-                plural: '{count} valandos'
-          day:
-            single:
-              numeric: '1 diena'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienomis'
-                singular: '{count} diena'
-                dual: '{count} dienų'
-                paucal: '{count} dienomis'
-                plural: '{count} dienos'
-          week:
-            single:
-              numeric: '1 savaite'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} savaitėmis'
-                singular: '{count} savaite'
-                dual: '{count} savaičių'
-                paucal: '{count} savaitėmis'
-                plural: '{count} savaitės'
-          month:
-            single:
-              numeric: '1 mėnesiu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mėnesiais'
-                singular: '{count} mėnesiu'
-                dual: '{count} mėnesių'
-                paucal: '{count} mėnesiais'
-                plural: '{count} mėnesio'
-          year:
-            single:
-              numeric: '1 metais'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} metais'
-                singular: '{count} metais'
-                dual: '{count} metų'
-                paucal: '{count} metais'
-                plural: '{count} metų'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundėmis'
+                    singular: '{count} milisekunde'
+                    dual: '{count} milisekundžių'
+                    paucal: '{count} milisekundėmis'
+                    plural: '{count} milisekundės'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundėmis'
+                    singular: '{count} sekunde'
+                    dual: '{count} sekundžių'
+                    paucal: '{count} sekundėmis'
+                    plural: '{count} sekundės'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minute'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutėms'
+                    singular: '{count} minute'
+                    dual: '{count} minučių'
+                    paucal: '{count} minutėms'
+                    plural: '{count} minutės'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 valanda'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} valandomis'
+                    singular: '{count} valanda'
+                    dual: '{count} valandų'
+                    paucal: '{count} valandomis'
+                    plural: '{count} valandos'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 diena'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienomis'
+                    singular: '{count} diena'
+                    dual: '{count} dienų'
+                    paucal: '{count} dienomis'
+                    plural: '{count} dienos'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 savaite'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} savaitėmis'
+                    singular: '{count} savaite'
+                    dual: '{count} savaičių'
+                    paucal: '{count} savaitėmis'
+                    plural: '{count} savaitės'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mėnesiu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mėnesiais'
+                    singular: '{count} mėnesiu'
+                    dual: '{count} mėnesių'
+                    paucal: '{count} mėnesiais'
+                    plural: '{count} mėnesio'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 metais'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} metais'
+                    singular: '{count} metais'
+                    dual: '{count} metų'
+                    paucal: '{count} metais'
+                    plural: '{count} metų'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       locative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundėje'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundėse'
-                singular: '{count} milisekundėje'
-                dual: '{count} milisekundžių'
-                paucal: '{count} milisekundėse'
-                plural: '{count} milisekundės'
-          second:
-            single:
-              numeric: '1 sekundėje'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundėse'
-                singular: '{count} sekundėje'
-                dual: '{count} sekundžių'
-                paucal: '{count} sekundėse'
-                plural: '{count} sekundės'
-          minute:
-            single:
-              numeric: '1 minutėje'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutėse'
-                singular: '{count} minutėje'
-                dual: '{count} minučių'
-                paucal: '{count} minutėse'
-                plural: '{count} minutės'
-          hour:
-            single:
-              numeric: '1 valandoje'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} valandose'
-                singular: '{count} valandoje'
-                dual: '{count} valandų'
-                paucal: '{count} valandose'
-                plural: '{count} valandos'
-          day:
-            single:
-              numeric: '1 dienoje'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dienose'
-                singular: '{count} dienoje'
-                dual: '{count} dienų'
-                paucal: '{count} dienose'
-                plural: '{count} dienos'
-          week:
-            single:
-              numeric: '1 savaitėje'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} savaitėse'
-                singular: '{count} savaitėje'
-                dual: '{count} savaičių'
-                paucal: '{count} savaitėse'
-                plural: '{count} savaitės'
-          month:
-            single:
-              numeric: '1 mėnesyje'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mėnesiuose'
-                singular: '{count} mėnesyje'
-                dual: '{count} mėnesių'
-                paucal: '{count} mėnesiuose'
-                plural: '{count} mėnesio'
-          year:
-            single:
-              numeric: '1 metuose'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} metuose'
-                singular: '{count} metuose'
-                dual: '{count} metų'
-                paucal: '{count} metuose'
-                plural: '{count} metų'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundėje'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundėse'
+                    singular: '{count} milisekundėje'
+                    dual: '{count} milisekundžių'
+                    paucal: '{count} milisekundėse'
+                    plural: '{count} milisekundės'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundėje'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundėse'
+                    singular: '{count} sekundėje'
+                    dual: '{count} sekundžių'
+                    paucal: '{count} sekundėse'
+                    plural: '{count} sekundės'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutėje'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutėse'
+                    singular: '{count} minutėje'
+                    dual: '{count} minučių'
+                    paucal: '{count} minutėse'
+                    plural: '{count} minutės'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 valandoje'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} valandose'
+                    singular: '{count} valandoje'
+                    dual: '{count} valandų'
+                    paucal: '{count} valandose'
+                    plural: '{count} valandos'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dienoje'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dienose'
+                    singular: '{count} dienoje'
+                    dual: '{count} dienų'
+                    paucal: '{count} dienose'
+                    plural: '{count} dienos'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 savaitėje'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} savaitėse'
+                    singular: '{count} savaitėje'
+                    dual: '{count} savaičių'
+                    paucal: '{count} savaitėse'
+                    plural: '{count} savaitės'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mėnesyje'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mėnesiuose'
+                    singular: '{count} mėnesyje'
+                    dual: '{count} mėnesių'
+                    paucal: '{count} mėnesiuose'
+                    plural: '{count} mėnesio'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 metuose'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} metuose'
+                    singular: '{count} metuose'
+                    dual: '{count} metų'
+                    paucal: '{count} metuose'
+                    plural: '{count} metų'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

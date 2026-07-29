@@ -5,8 +5,418 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
-
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - ergative
+      - accusative
+      - dative
+      - genitive
+      - locative
+      - instrumental
+      - ablative
+      - vocative
+    sources:
+      inventory:
+        kind: 'grammar'
+        url: 'https://publications.lib.chalmers.se/records/fulltext/161384.pdf'
+        revision: 'sha256:9471ee63e8b86e56e0b663dec5f54d74ffccd1b013aeee55692942d2887f3739'
+        locator: 'PDF pp. 16-19, Tables 2.1-2.2 and section 2.2: regular noun suffixes लाई, ले, बाट, को, and मा and lexical-paradigm concatenation; pp. 36-38, section 3.1.2: stem plus optional plural and required inflectional suffix'
+        credit: 'Dinesh Simkhada, Chalmers University of Technology'
+      ergative:
+        kind: 'grammar'
+        url: 'https://github.com/UniversalDependencies/docs/blob/44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9/_ne/index.md#L181-L188'
+        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9'
+        locator: 'lines 113-124: fused Nepali morphology; lines 181-188: ले ergative/instrumental marking'
+        credit: 'Universal Dependencies Nepali contributors'
+      unitUsage:
+        kind: 'corpus'
+        url: 'https://learning.cehrd.gov.np/pluginfile.php/127/mod_resource/content/1/my%20math%204.pdf'
+        revision: 'sha256:fa6de4be5a36890fef3615ea199b26dc54d22d34a0ae09e3c8f888af89099eae; Nepal Government Curriculum Development Centre Grade 4 Mathematics, 2079 edition'
+        locator: 'PDF pp. 107-108: counted सेकेन्ड, मिनेट, घण्टा, दिन, हप्ता, महिना, वर्ष; महिनालाई, दिनलाई, हप्तालाई, वर्षलाई; and 4 घण्टाबाट'
+        credit: 'Curriculum Development Centre, Government of Nepal'
+      millisecond:
+        kind: 'corpus'
+        url: 'https://cms.ntc.net.np/storage/media/vqcCSocrsonB4wSku5HOL38rLylPHKxXCjC47XQI.pdf'
+        revision: 'sha256:bd414ba66f3267e84580d6f418a19020e4ef016ed7579769ca768804be02fd42'
+        locator: 'PDF p. 5: exact counted spelling ३५० मिलिसेकेन्ड'
+        credit: 'Nepal Telecommunications Company Limited'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+          - 'unitUsage'
+          - 'millisecond'
+      ergative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकेन्डले'
+                  words: 'एक मिलिसेकेन्डले'
+                multiple:
+                  forms: '{count} मिलिसेकेन्डले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकेन्डले'
+                  words: 'एक सेकेन्डले'
+                multiple:
+                  forms: '{count} सेकेन्डले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनेटले'
+                  words: 'एक मिनेटले'
+                multiple:
+                  forms: '{count} मिनेटले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 घण्टाले'
+                  words: 'एक घण्टाले'
+                multiple:
+                  forms: '{count} घण्टाले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिनले'
+                  words: 'एक दिनले'
+                multiple:
+                  forms: '{count} दिनले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 हप्ताले'
+                  words: 'एक हप्ताले'
+                multiple:
+                  forms: '{count} हप्ताले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिनाले'
+                  words: 'एक महिनाले'
+                multiple:
+                  forms: '{count} महिनाले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षले'
+                  words: 'एक वर्षले'
+                multiple:
+                  forms: '{count} वर्षले'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'ergative'
+          - 'unitUsage'
+          - 'millisecond'
+      accusative:
+        sameRenderedAs: 'dative'
+        provenance:
+          - 'inventory'
+          - 'unitUsage'
+          - 'millisecond'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकेन्डलाई'
+                  words: 'एक मिलिसेकेन्डलाई'
+                multiple:
+                  forms: '{count} मिलिसेकेन्डलाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकेन्डलाई'
+                  words: 'एक सेकेन्डलाई'
+                multiple:
+                  forms: '{count} सेकेन्डलाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनेटलाई'
+                  words: 'एक मिनेटलाई'
+                multiple:
+                  forms: '{count} मिनेटलाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 घण्टालाई'
+                  words: 'एक घण्टालाई'
+                multiple:
+                  forms: '{count} घण्टालाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिनलाई'
+                  words: 'एक दिनलाई'
+                multiple:
+                  forms: '{count} दिनलाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 हप्तालाई'
+                  words: 'एक हप्तालाई'
+                multiple:
+                  forms: '{count} हप्तालाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिनालाई'
+                  words: 'एक महिनालाई'
+                multiple:
+                  forms: '{count} महिनालाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षलाई'
+                  words: 'एक वर्षलाई'
+                multiple:
+                  forms: '{count} वर्षलाई'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'unitUsage'
+          - 'millisecond'
+      genitive:
+        notApplicable: 'Nepali genitive agreement requires an omitted possessed head.'
+        provenance:
+          - 'inventory'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकेन्डमा'
+                  words: 'एक मिलिसेकेन्डमा'
+                multiple:
+                  forms: '{count} मिलिसेकेन्डमा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकेन्डमा'
+                  words: 'एक सेकेन्डमा'
+                multiple:
+                  forms: '{count} सेकेन्डमा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनेटमा'
+                  words: 'एक मिनेटमा'
+                multiple:
+                  forms: '{count} मिनेटमा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 घण्टामा'
+                  words: 'एक घण्टामा'
+                multiple:
+                  forms: '{count} घण्टामा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिनमा'
+                  words: 'एक दिनमा'
+                multiple:
+                  forms: '{count} दिनमा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 हप्तामा'
+                  words: 'एक हप्तामा'
+                multiple:
+                  forms: '{count} हप्तामा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिनामा'
+                  words: 'एक महिनामा'
+                multiple:
+                  forms: '{count} महिनामा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षमा'
+                  words: 'एक वर्षमा'
+                multiple:
+                  forms: '{count} वर्षमा'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'unitUsage'
+          - 'millisecond'
+      instrumental:
+        sameRenderedAs: 'ergative'
+        provenance:
+          - 'inventory'
+          - 'ergative'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 मिलिसेकेन्डबाट'
+                  words: 'एक मिलिसेकेन्डबाट'
+                multiple:
+                  forms: '{count} मिलिसेकेन्डबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 सेकेन्डबाट'
+                  words: 'एक सेकेन्डबाट'
+                multiple:
+                  forms: '{count} सेकेन्डबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 मिनेटबाट'
+                  words: 'एक मिनेटबाट'
+                multiple:
+                  forms: '{count} मिनेटबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 घण्टाबाट'
+                  words: 'एक घण्टाबाट'
+                multiple:
+                  forms: '{count} घण्टाबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिनबाट'
+                  words: 'एक दिनबाट'
+                multiple:
+                  forms: '{count} दिनबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 हप्ताबाट'
+                  words: 'एक हप्ताबाट'
+                multiple:
+                  forms: '{count} हप्ताबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महिनाबाट'
+                  words: 'एक महिनाबाट'
+                multiple:
+                  forms: '{count} महिनाबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 वर्षबाट'
+                  words: 'एक वर्षबाट'
+                multiple:
+                  forms: '{count} वर्षबाट'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'unitUsage'
+          - 'millisecond'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'inventory'
   list:
     engine: 'conjunction'
     value: 'र'

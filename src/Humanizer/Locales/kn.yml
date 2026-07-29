@@ -6,403 +6,498 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'locative'
+      - 'vocative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/kn.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ಮಿಲಿಸೆಕೆಂಡಿನ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
-                singular: '{count} ಮಿಲಿಸೆಕೆಂಡಿನ'
-                dual: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
-                paucal: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
-                plural: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
-          second:
-            single:
-              numeric: '1 ಸೆಕೆಂಡಿನ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಸೆಕೆಂಡುಗಳ'
-                singular: '{count} ಸೆಕೆಂಡಿನ'
-                dual: '{count} ಸೆಕೆಂಡುಗಳ'
-                paucal: '{count} ಸೆಕೆಂಡುಗಳ'
-                plural: '{count} ಸೆಕೆಂಡುಗಳ'
-          minute:
-            single:
-              numeric: '1 ನಿಮಿಷದ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ನಿಮಿಷಗಳ'
-                singular: '{count} ನಿಮಿಷದ'
-                dual: '{count} ನಿಮಿಷಗಳ'
-                paucal: '{count} ನಿಮಿಷಗಳ'
-                plural: '{count} ನಿಮಿಷಗಳ'
-          hour:
-            single:
-              numeric: '1 ಗಂಟೆಯ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಗಂಟೆಗಳ'
-                singular: '{count} ಗಂಟೆಯ'
-                dual: '{count} ಗಂಟೆಗಳ'
-                paucal: '{count} ಗಂಟೆಗಳ'
-                plural: '{count} ಗಂಟೆಗಳ'
-          day:
-            single:
-              numeric: '1 ದಿನದ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ದಿನಗಳ'
-                singular: '{count} ದಿನದ'
-                dual: '{count} ದಿನಗಳ'
-                paucal: '{count} ದಿನಗಳ'
-                plural: '{count} ದಿನಗಳ'
-          week:
-            single:
-              numeric: '1 ವಾರದ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವಾರಗಳ'
-                singular: '{count} ವಾರದ'
-                dual: '{count} ವಾರಗಳ'
-                paucal: '{count} ವಾರಗಳ'
-                plural: '{count} ವಾರಗಳ'
-          month:
-            single:
-              numeric: '1 ತಿಂಗಳ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ತಿಂಗಳುಗಳ'
-                singular: '{count} ತಿಂಗಳ'
-                dual: '{count} ತಿಂಗಳುಗಳ'
-                paucal: '{count} ತಿಂಗಳುಗಳ'
-                plural: '{count} ತಿಂಗಳುಗಳ'
-          year:
-            single:
-              numeric: '1 ವರ್ಷದ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವರ್ಷಗಳ'
-                singular: '{count} ವರ್ಷದ'
-                dual: '{count} ವರ್ಷಗಳ'
-                paucal: '{count} ವರ್ಷಗಳ'
-                plural: '{count} ವರ್ಷಗಳ'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ಮಿಲಿಸೆಕೆಂಡಿನ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
+                    singular: '{count} ಮಿಲಿಸೆಕೆಂಡಿನ'
+                    dual: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
+                    paucal: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
+                    plural: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳ'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ಸೆಕೆಂಡಿನ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಸೆಕೆಂಡುಗಳ'
+                    singular: '{count} ಸೆಕೆಂಡಿನ'
+                    dual: '{count} ಸೆಕೆಂಡುಗಳ'
+                    paucal: '{count} ಸೆಕೆಂಡುಗಳ'
+                    plural: '{count} ಸೆಕೆಂಡುಗಳ'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ನಿಮಿಷದ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ನಿಮಿಷಗಳ'
+                    singular: '{count} ನಿಮಿಷದ'
+                    dual: '{count} ನಿಮಿಷಗಳ'
+                    paucal: '{count} ನಿಮಿಷಗಳ'
+                    plural: '{count} ನಿಮಿಷಗಳ'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ಗಂಟೆಯ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಗಂಟೆಗಳ'
+                    singular: '{count} ಗಂಟೆಯ'
+                    dual: '{count} ಗಂಟೆಗಳ'
+                    paucal: '{count} ಗಂಟೆಗಳ'
+                    plural: '{count} ಗಂಟೆಗಳ'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ದಿನದ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ದಿನಗಳ'
+                    singular: '{count} ದಿನದ'
+                    dual: '{count} ದಿನಗಳ'
+                    paucal: '{count} ದಿನಗಳ'
+                    plural: '{count} ದಿನಗಳ'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ವಾರದ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವಾರಗಳ'
+                    singular: '{count} ವಾರದ'
+                    dual: '{count} ವಾರಗಳ'
+                    paucal: '{count} ವಾರಗಳ'
+                    plural: '{count} ವಾರಗಳ'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ತಿಂಗಳ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ತಿಂಗಳುಗಳ'
+                    singular: '{count} ತಿಂಗಳ'
+                    dual: '{count} ತಿಂಗಳುಗಳ'
+                    paucal: '{count} ತಿಂಗಳುಗಳ'
+                    plural: '{count} ತಿಂಗಳುಗಳ'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ವರ್ಷದ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವರ್ಷಗಳ'
+                    singular: '{count} ವರ್ಷದ'
+                    dual: '{count} ವರ್ಷಗಳ'
+                    paucal: '{count} ವರ್ಷಗಳ'
+                    plural: '{count} ವರ್ಷಗಳ'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ಮಿಲಿಸೆಕೆಂಡಿಗೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
-                singular: '{count} ಮಿಲಿಸೆಕೆಂಡಿಗೆ'
-                dual: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
-                paucal: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
-                plural: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
-          second:
-            single:
-              numeric: '1 ಸೆಕೆಂಡಿಗೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
-                singular: '{count} ಸೆಕೆಂಡಿಗೆ'
-                dual: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
-                paucal: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
-                plural: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
-          minute:
-            single:
-              numeric: '1 ನಿಮಿಷಕ್ಕೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ನಿಮಿಷಗಳಿಗೆ'
-                singular: '{count} ನಿಮಿಷಕ್ಕೆ'
-                dual: '{count} ನಿಮಿಷಗಳಿಗೆ'
-                paucal: '{count} ನಿಮಿಷಗಳಿಗೆ'
-                plural: '{count} ನಿಮಿಷಗಳಿಗೆ'
-          hour:
-            single:
-              numeric: '1 ಗಂಟೆಗೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಗಂಟೆಗಳಿಗೆ'
-                singular: '{count} ಗಂಟೆಗೆ'
-                dual: '{count} ಗಂಟೆಗಳಿಗೆ'
-                paucal: '{count} ಗಂಟೆಗಳಿಗೆ'
-                plural: '{count} ಗಂಟೆಗಳಿಗೆ'
-          day:
-            single:
-              numeric: '1 ದಿನಕ್ಕೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ದಿನಗಳಿಗೆ'
-                singular: '{count} ದಿನಕ್ಕೆ'
-                dual: '{count} ದಿನಗಳಿಗೆ'
-                paucal: '{count} ದಿನಗಳಿಗೆ'
-                plural: '{count} ದಿನಗಳಿಗೆ'
-          week:
-            single:
-              numeric: '1 ವಾರಕ್ಕೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವಾರಗಳಿಗೆ'
-                singular: '{count} ವಾರಕ್ಕೆ'
-                dual: '{count} ವಾರಗಳಿಗೆ'
-                paucal: '{count} ವಾರಗಳಿಗೆ'
-                plural: '{count} ವಾರಗಳಿಗೆ'
-          month:
-            single:
-              numeric: '1 ತಿಂಗಳಿಗೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ತಿಂಗಳುಗಳಿಗೆ'
-                singular: '{count} ತಿಂಗಳಿಗೆ'
-                dual: '{count} ತಿಂಗಳುಗಳಿಗೆ'
-                paucal: '{count} ತಿಂಗಳುಗಳಿಗೆ'
-                plural: '{count} ತಿಂಗಳುಗಳಿಗೆ'
-          year:
-            single:
-              numeric: '1 ವರ್ಷಕ್ಕೆ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವರ್ಷಗಳಿಗೆ'
-                singular: '{count} ವರ್ಷಕ್ಕೆ'
-                dual: '{count} ವರ್ಷಗಳಿಗೆ'
-                paucal: '{count} ವರ್ಷಗಳಿಗೆ'
-                plural: '{count} ವರ್ಷಗಳಿಗೆ'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ಮಿಲಿಸೆಕೆಂಡಿಗೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
+                    singular: '{count} ಮಿಲಿಸೆಕೆಂಡಿಗೆ'
+                    dual: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
+                    paucal: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
+                    plural: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ಸೆಕೆಂಡಿಗೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
+                    singular: '{count} ಸೆಕೆಂಡಿಗೆ'
+                    dual: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
+                    paucal: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
+                    plural: '{count} ಸೆಕೆಂಡುಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ನಿಮಿಷಕ್ಕೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ನಿಮಿಷಗಳಿಗೆ'
+                    singular: '{count} ನಿಮಿಷಕ್ಕೆ'
+                    dual: '{count} ನಿಮಿಷಗಳಿಗೆ'
+                    paucal: '{count} ನಿಮಿಷಗಳಿಗೆ'
+                    plural: '{count} ನಿಮಿಷಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ಗಂಟೆಗೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಗಂಟೆಗಳಿಗೆ'
+                    singular: '{count} ಗಂಟೆಗೆ'
+                    dual: '{count} ಗಂಟೆಗಳಿಗೆ'
+                    paucal: '{count} ಗಂಟೆಗಳಿಗೆ'
+                    plural: '{count} ಗಂಟೆಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ದಿನಕ್ಕೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ದಿನಗಳಿಗೆ'
+                    singular: '{count} ದಿನಕ್ಕೆ'
+                    dual: '{count} ದಿನಗಳಿಗೆ'
+                    paucal: '{count} ದಿನಗಳಿಗೆ'
+                    plural: '{count} ದಿನಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ವಾರಕ್ಕೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವಾರಗಳಿಗೆ'
+                    singular: '{count} ವಾರಕ್ಕೆ'
+                    dual: '{count} ವಾರಗಳಿಗೆ'
+                    paucal: '{count} ವಾರಗಳಿಗೆ'
+                    plural: '{count} ವಾರಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ತಿಂಗಳಿಗೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ತಿಂಗಳುಗಳಿಗೆ'
+                    singular: '{count} ತಿಂಗಳಿಗೆ'
+                    dual: '{count} ತಿಂಗಳುಗಳಿಗೆ'
+                    paucal: '{count} ತಿಂಗಳುಗಳಿಗೆ'
+                    plural: '{count} ತಿಂಗಳುಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ವರ್ಷಕ್ಕೆ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವರ್ಷಗಳಿಗೆ'
+                    singular: '{count} ವರ್ಷಕ್ಕೆ'
+                    dual: '{count} ವರ್ಷಗಳಿಗೆ'
+                    paucal: '{count} ವರ್ಷಗಳಿಗೆ'
+                    plural: '{count} ವರ್ಷಗಳಿಗೆ'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ಮಿಲಿಸೆಕೆಂಡ್ ಅನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
-                singular: '{count} ಮಿಲಿಸೆಕೆಂಡ್ ಅನ್ನು'
-                dual: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
-                paucal: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
-                plural: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
-          second:
-            single:
-              numeric: '1 ಸೆಕೆಂಡನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
-                singular: '{count} ಸೆಕೆಂಡನ್ನು'
-                dual: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
-                paucal: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
-                plural: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
-          minute:
-            single:
-              numeric: '1 ನಿಮಿಷವನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ನಿಮಿಷಗಳನ್ನು'
-                singular: '{count} ನಿಮಿಷವನ್ನು'
-                dual: '{count} ನಿಮಿಷಗಳನ್ನು'
-                paucal: '{count} ನಿಮಿಷಗಳನ್ನು'
-                plural: '{count} ನಿಮಿಷಗಳನ್ನು'
-          hour:
-            single:
-              numeric: '1 ಗಂಟೆಯನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಗಂಟೆಗಳನ್ನು'
-                singular: '{count} ಗಂಟೆಯನ್ನು'
-                dual: '{count} ಗಂಟೆಗಳನ್ನು'
-                paucal: '{count} ಗಂಟೆಗಳನ್ನು'
-                plural: '{count} ಗಂಟೆಗಳನ್ನು'
-          day:
-            single:
-              numeric: '1 ದಿನವನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ದಿನಗಳನ್ನು'
-                singular: '{count} ದಿನವನ್ನು'
-                dual: '{count} ದಿನಗಳನ್ನು'
-                paucal: '{count} ದಿನಗಳನ್ನು'
-                plural: '{count} ದಿನಗಳನ್ನು'
-          week:
-            single:
-              numeric: '1 ವಾರವನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವಾರಗಳನ್ನು'
-                singular: '{count} ವಾರವನ್ನು'
-                dual: '{count} ವಾರಗಳನ್ನು'
-                paucal: '{count} ವಾರಗಳನ್ನು'
-                plural: '{count} ವಾರಗಳನ್ನು'
-          month:
-            single:
-              numeric: '1 ತಿಂಗಳನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ತಿಂಗಳುಗಳನ್ನು'
-                singular: '{count} ತಿಂಗಳನ್ನು'
-                dual: '{count} ತಿಂಗಳುಗಳನ್ನು'
-                paucal: '{count} ತಿಂಗಳುಗಳನ್ನು'
-                plural: '{count} ತಿಂಗಳುಗಳನ್ನು'
-          year:
-            single:
-              numeric: '1 ವರ್ಷವನ್ನು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವರ್ಷಗಳನ್ನು'
-                singular: '{count} ವರ್ಷವನ್ನು'
-                dual: '{count} ವರ್ಷಗಳನ್ನು'
-                paucal: '{count} ವರ್ಷಗಳನ್ನು'
-                plural: '{count} ವರ್ಷಗಳನ್ನು'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ಮಿಲಿಸೆಕೆಂಡ್ ಅನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
+                    singular: '{count} ಮಿಲಿಸೆಕೆಂಡ್ ಅನ್ನು'
+                    dual: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
+                    paucal: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
+                    plural: '{count} ಮಿಲಿಸೆಕೆಂಡ್‌ಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ಸೆಕೆಂಡನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
+                    singular: '{count} ಸೆಕೆಂಡನ್ನು'
+                    dual: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
+                    paucal: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
+                    plural: '{count} ಸೆಕೆಂಡುಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ನಿಮಿಷವನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ನಿಮಿಷಗಳನ್ನು'
+                    singular: '{count} ನಿಮಿಷವನ್ನು'
+                    dual: '{count} ನಿಮಿಷಗಳನ್ನು'
+                    paucal: '{count} ನಿಮಿಷಗಳನ್ನು'
+                    plural: '{count} ನಿಮಿಷಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ಗಂಟೆಯನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಗಂಟೆಗಳನ್ನು'
+                    singular: '{count} ಗಂಟೆಯನ್ನು'
+                    dual: '{count} ಗಂಟೆಗಳನ್ನು'
+                    paucal: '{count} ಗಂಟೆಗಳನ್ನು'
+                    plural: '{count} ಗಂಟೆಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ದಿನವನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ದಿನಗಳನ್ನು'
+                    singular: '{count} ದಿನವನ್ನು'
+                    dual: '{count} ದಿನಗಳನ್ನು'
+                    paucal: '{count} ದಿನಗಳನ್ನು'
+                    plural: '{count} ದಿನಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ವಾರವನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವಾರಗಳನ್ನು'
+                    singular: '{count} ವಾರವನ್ನು'
+                    dual: '{count} ವಾರಗಳನ್ನು'
+                    paucal: '{count} ವಾರಗಳನ್ನು'
+                    plural: '{count} ವಾರಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ತಿಂಗಳನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ತಿಂಗಳುಗಳನ್ನು'
+                    singular: '{count} ತಿಂಗಳನ್ನು'
+                    dual: '{count} ತಿಂಗಳುಗಳನ್ನು'
+                    paucal: '{count} ತಿಂಗಳುಗಳನ್ನು'
+                    plural: '{count} ತಿಂಗಳುಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ವರ್ಷವನ್ನು'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವರ್ಷಗಳನ್ನು'
+                    singular: '{count} ವರ್ಷವನ್ನು'
+                    dual: '{count} ವರ್ಷಗಳನ್ನು'
+                    paucal: '{count} ವರ್ಷಗಳನ್ನು'
+                    plural: '{count} ವರ್ಷಗಳನ್ನು'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       locative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 ಮಿಲಿಸೆಕೆಂಡಿನಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-                singular: '{count} ಮಿಲಿಸೆಕೆಂಡಿನಲ್ಲಿ'
-                dual: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-                paucal: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-                plural: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-          second:
-            single:
-              numeric: '1 ಸೆಕೆಂಡಿನಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-                singular: '{count} ಸೆಕೆಂಡಿನಲ್ಲಿ'
-                dual: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-                paucal: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-                plural: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
-          minute:
-            single:
-              numeric: '1 ನಿಮಿಷದಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
-                singular: '{count} ನಿಮಿಷದಲ್ಲಿ'
-                dual: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
-                paucal: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
-                plural: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
-          hour:
-            single:
-              numeric: '1 ಗಂಟೆಯಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
-                singular: '{count} ಗಂಟೆಯಲ್ಲಿ'
-                dual: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
-                paucal: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
-                plural: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
-          day:
-            single:
-              numeric: '1 ದಿನದಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ದಿನಗಳಲ್ಲಿ'
-                singular: '{count} ದಿನದಲ್ಲಿ'
-                dual: '{count} ದಿನಗಳಲ್ಲಿ'
-                paucal: '{count} ದಿನಗಳಲ್ಲಿ'
-                plural: '{count} ದಿನಗಳಲ್ಲಿ'
-          week:
-            single:
-              numeric: '1 ವಾರದಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವಾರಗಳಲ್ಲಿ'
-                singular: '{count} ವಾರದಲ್ಲಿ'
-                dual: '{count} ವಾರಗಳಲ್ಲಿ'
-                paucal: '{count} ವಾರಗಳಲ್ಲಿ'
-                plural: '{count} ವಾರಗಳಲ್ಲಿ'
-          month:
-            single:
-              numeric: '1 ತಿಂಗಳಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
-                singular: '{count} ತಿಂಗಳಲ್ಲಿ'
-                dual: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
-                paucal: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
-                plural: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
-          year:
-            single:
-              numeric: '1 ವರ್ಷದಲ್ಲಿ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವರ್ಷಗಳಲ್ಲಿ'
-                singular: '{count} ವರ್ಷದಲ್ಲಿ'
-                dual: '{count} ವರ್ಷಗಳಲ್ಲಿ'
-                paucal: '{count} ವರ್ಷಗಳಲ್ಲಿ'
-                plural: '{count} ವರ್ಷಗಳಲ್ಲಿ'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ಮಿಲಿಸೆಕೆಂಡಿನಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+                    singular: '{count} ಮಿಲಿಸೆಕೆಂಡಿನಲ್ಲಿ'
+                    dual: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+                    paucal: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+                    plural: '{count} ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ಸೆಕೆಂಡಿನಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+                    singular: '{count} ಸೆಕೆಂಡಿನಲ್ಲಿ'
+                    dual: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+                    paucal: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+                    plural: '{count} ಸೆಕೆಂಡುಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 ನಿಮಿಷದಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
+                    singular: '{count} ನಿಮಿಷದಲ್ಲಿ'
+                    dual: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
+                    paucal: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
+                    plural: '{count} ನಿಮಿಷಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ಗಂಟೆಯಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
+                    singular: '{count} ಗಂಟೆಯಲ್ಲಿ'
+                    dual: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
+                    paucal: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
+                    plural: '{count} ಗಂಟೆಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ದಿನದಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ದಿನಗಳಲ್ಲಿ'
+                    singular: '{count} ದಿನದಲ್ಲಿ'
+                    dual: '{count} ದಿನಗಳಲ್ಲಿ'
+                    paucal: '{count} ದಿನಗಳಲ್ಲಿ'
+                    plural: '{count} ದಿನಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ವಾರದಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವಾರಗಳಲ್ಲಿ'
+                    singular: '{count} ವಾರದಲ್ಲಿ'
+                    dual: '{count} ವಾರಗಳಲ್ಲಿ'
+                    paucal: '{count} ವಾರಗಳಲ್ಲಿ'
+                    plural: '{count} ವಾರಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ತಿಂಗಳಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
+                    singular: '{count} ತಿಂಗಳಲ್ಲಿ'
+                    dual: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
+                    paucal: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
+                    plural: '{count} ತಿಂಗಳುಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ವರ್ಷದಲ್ಲಿ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ವರ್ಷಗಳಲ್ಲಿ'
+                    singular: '{count} ವರ್ಷದಲ್ಲಿ'
+                    dual: '{count} ವರ್ಷಗಳಲ್ಲಿ'
+                    paucal: '{count} ವರ್ಷಗಳಲ್ಲಿ'
+                    plural: '{count} ವರ್ಷಗಳಲ್ಲಿ'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       vocative:
-        units:
-          millisecond:
-            unsupported: true
-          second:
-            sameAsNominative: true
-          minute:
-            sameAsNominative: true
-          hour:
-            sameAsNominative: true
-          day:
-            sameAsNominative: true
-          week:
-            sameAsNominative: true
-          month:
-            single:
-              numeric: '1 ತಿಂಗಳು'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ತಿಂಗಳುಗಳು'
-                singular: '{count} ತಿಂಗಳು'
-                dual: '{count} ತಿಂಗಳುಗಳು'
-                paucal: '{count} ತಿಂಗಳುಗಳು'
-                plural: '{count} ತಿಂಗಳುಗಳು'
-          year:
-            single:
-              numeric: '1 ವರ್ಷ'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ವರ್ಷ'
-                singular: '{count} ವರ್ಷ'
-                dual: '{count} ವರ್ಷ'
-                paucal: '{count} ವರ್ಷ'
-                plural: '{count} ವರ್ಷ'
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

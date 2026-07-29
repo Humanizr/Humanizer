@@ -85,6 +85,8 @@ surfaces:
 locale: 'zz-child'
 variantOf: 'zz-base'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   ordinal:
     date:
       pattern: '{day} MMMM yyyy'
@@ -510,7 +512,7 @@ surfaces:
         Assert.Contains("через два дня", source);
         Assert.Contains("vorgestern", source);
         Assert.Contains("PhraseCountPlacement.BeforeForm", source);
-        Assert.Contains("new LocalizedPhraseForms(\"days\", \"day\"", source);
+        Assert.Contains("new LocalizedPhraseForms(\"days\", null, \"day\"", source);
         Assert.Contains("new LocalizedUnitPhrase(new LocalizedPhraseForms(\"byte\"", source);
     }
 
@@ -1437,6 +1439,9 @@ numberToWords:
         const string childLocale = """
 inherits: 'zz-base'
 
+durationCases:
+  classification: 'not-applicable'
+
 numberToWords:
   engine: 'conjunctional-scale'
   minusWord: 'child-minus'
@@ -2109,9 +2114,11 @@ wordsToNumber:
     {
         readonly string path = path;
         readonly string text = AddDefaultInflection(
-            canonicalizeLegacySchema
-                ? CanonicalizeLocaleText(path, text)
-                : text,
+            AddDefaultDurationEvidence(
+                canonicalizeLegacySchema
+                    ? CanonicalizeLocaleText(path, text)
+                    : text,
+                canonicalizeLegacySchema),
             canonicalizeLegacySchema && addDefaultInflection);
 
         public override string Path => path;
@@ -2129,6 +2136,36 @@ wordsToNumber:
             }
 
             return HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(localeCode, candidateText);
+        }
+
+        static string AddDefaultDurationEvidence(string candidateText, bool enabled)
+        {
+            if (!enabled)
+            {
+                return candidateText;
+            }
+
+            var lineEnding = candidateText.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+            var marker = $"  durationCases:{lineEnding}    classification: 'not-applicable'{lineEnding}";
+            if (!candidateText.Contains(marker, StringComparison.Ordinal))
+            {
+                return candidateText;
+            }
+
+            var evidence = string.Join(
+                lineEnding,
+                "    reason: 'Synthetic fixture does not exercise duration-case behavior.'",
+                "    sources:",
+                "      fixture:",
+                "        kind: 'grammar'",
+                "        url: 'https://example.invalid/duration-cases'",
+                "        revision: 'synthetic-test-fixture'",
+                "        locator: 'not applicable to this fixture'",
+                "        credit: 'Humanizer test suite'",
+                "    provenance:",
+                "      - fixture",
+                "");
+            return candidateText.Replace(marker, marker + evidence, StringComparison.Ordinal);
         }
 
         static string AddDefaultInflection(string candidateText, bool enabled)

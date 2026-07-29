@@ -1029,19 +1029,18 @@ surfaces:
         Assert.Equal("de", swissGerman.InheritedFrom);
         Assert.Equal("not-applicable", english.Classification);
         Assert.Equal("distinct", nynorsk.Classification);
-        Assert.Equal("unsupported", azerbaijani.Classification);
-        Assert.Equal(28, coverage.Rows.Count(static locale => locale.Classification == "distinct"));
-        Assert.Equal(28, coverage.Rows.Count(static locale => locale.Classification == "unsupported"));
-        Assert.Equal(35, coverage.Rows.Count(static locale => locale.Classification == "not-applicable"));
+        Assert.Equal("distinct", azerbaijani.Classification);
+        Assert.Equal(57, coverage.Rows.Count(static locale => locale.Classification == "distinct"));
+        Assert.DoesNotContain(coverage.Rows, static locale => locale.Classification == "unsupported");
+        Assert.Equal(34, coverage.Rows.Count(static locale => locale.Classification == "not-applicable"));
         Assert.Equal(11, coverage.Rows.Count(static locale => locale.Classification == "same-language-inherited"));
         Assert.All(
             coverage.Rows,
             static locale => Assert.True(
                 locale.Classification is
                     "distinct" or
-                    "same-as-nominative" or
+                    "invariant" or
                     "not-applicable" or
-                    "unsupported" or
                     "same-language-inherited"));
     }
 

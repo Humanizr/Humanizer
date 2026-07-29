@@ -349,6 +349,144 @@ The separator used to combine time parts\. If null, the culture's default collec
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span, using seconds as its minimum unit\.
 
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, bool, CultureInfo, TimeUnit, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a bare duration using locale\-authored unit\-case phrases\.
+No preposition is added\.
+
+```csharp
+public static string HumanizeWithCase(this System.TimeSpan timeSpan, Humanizer.GrammaticalCase grammaticalCase, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).grammaticalCase'></a>
+
+`grammaticalCase` [GrammaticalCase](Humanizer.GrammaticalCase.md 'Humanizer\.GrammaticalCase')
+
+The grammatical case used to select each unit phrase\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).countEmptyUnits'></a>
+
+`countEmptyUnits` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Whether empty time units count toward [precision](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).precision 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithCase\(this System\.TimeSpan, Humanizer\.GrammaticalCase, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)\.precision')\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, the current thread's culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).minUnit'></a>
+
+`minUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The minimum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The locale\-authored unit\-case phrase\. The count may be written explicitly or encoded by the unit form\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[grammaticalCase](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).grammaticalCase 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithCase\(this System\.TimeSpan, Humanizer\.GrammaticalCase, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)\.grammaticalCase') is not defined\.
+
+[System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
+The configured strategy, selected formatter, locale, or duration unit does not support the requested case\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeWithCase\(this TimeSpan, GrammaticalCase, int, CultureInfo, TimeUnit, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a bare duration using locale\-authored unit\-case phrases\.
+No preposition is added\.
+
+```csharp
+public static string HumanizeWithCase(this System.TimeSpan timeSpan, Humanizer.GrammaticalCase grammaticalCase, int precision=1, System.Globalization.CultureInfo? culture=null, Humanizer.TimeUnit maxUnit=Humanizer.TimeUnit.Week, Humanizer.TimeUnit minUnit=Humanizer.TimeUnit.Millisecond, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).grammaticalCase'></a>
+
+`grammaticalCase` [GrammaticalCase](Humanizer.GrammaticalCase.md 'Humanizer\.GrammaticalCase')
+
+The grammatical case used to select each unit phrase\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, the current thread's culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).minUnit'></a>
+
+`minUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The minimum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The locale\-authored unit\-case phrase\. The count may be written explicitly or encoded by the unit form\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[grammaticalCase](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithCase(thisSystem.TimeSpan,Humanizer.GrammaticalCase,int,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string).grammaticalCase 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithCase\(this System\.TimeSpan, Humanizer\.GrammaticalCase, int, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string\)\.grammaticalCase') is not defined\.
+
+[System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
+The configured strategy, selected formatter, locale, or duration unit does not support the requested case\.
+
 <a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
 
 ## TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method

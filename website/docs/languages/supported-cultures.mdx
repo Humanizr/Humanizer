@@ -68,8 +68,10 @@ Console.WriteLine(123.ToWords(culture));
     <p>
       Grammatical-case duration coverage is narrower than general locale
       coverage and is classified separately as <code>distinct</code>,
-      <code>same-as-nominative</code>, <code>not-applicable</code>, or
-      <code>unsupported</code>. An <code>Own</code> or
+      <code>invariant</code>, or <code>not-applicable</code>. Case and unit
+      realizations may be authored, evidenced as rendering the same as another
+      case, or explicitly not applicable; release validation rejects
+      unsupported applicable entries. An <code>Own</code> or
       <code>Via …</code> cell in this table does not imply that
       <code>HumanizeWithCase</code> supports every case or duration unit.
       See the duration guide for the runtime contract.

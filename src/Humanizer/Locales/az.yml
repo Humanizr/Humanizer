@@ -5,7 +5,577 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'comitative'
+      - 'locative'
+      - 'ablative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://www.researchgate.net/publication/387296040_JALA_GARIBOVA_SABINA_ALIYEVA_A_GRAMMAR_OF_CONTEMPORARY_AZERBAIJANI_A_GRAMMAR_OF_CONTEMPORARY_AZERBAIJANI'
+        revision: '2024'
+        locator: 'nominal case paradigms and ilə instrumental-comitative construction'
+        credit: 'Jala Garibova and Sabina Aliyeva'
+    cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisaniyə'
+                  words: 'bir millisaniyə'
+                multiple:
+                  forms:
+                    default: 'millisaniyə'
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyə'
+                  words: 'bir saniyə'
+                multiple:
+                  forms:
+                    default: 'saniyə'
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dəqiqə'
+                  words: 'bir dəqiqə'
+                multiple:
+                  forms:
+                    default: 'dəqiqə'
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saat'
+                  words: 'bir saat'
+                multiple:
+                  forms:
+                    default: 'saat'
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 gün'
+                  words: 'bir gün'
+                multiple:
+                  forms:
+                    default: 'gün'
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 həftə'
+                  words: 'bir həftə'
+                multiple:
+                  forms:
+                    default: 'həftə'
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ay'
+                  words: 'bir ay'
+                multiple:
+                  forms:
+                    default: 'ay'
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 il'
+                  words: 'bir il'
+                multiple:
+                  forms:
+                    default: 'il'
+
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisaniyənin'
+                multiple:
+                  forms: '{count} millisaniyənin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyənin'
+                multiple:
+                  forms: '{count} saniyənin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dəqiqənin'
+                multiple:
+                  forms: '{count} dəqiqənin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatın'
+                multiple:
+                  forms: '{count} saatın'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günün'
+                multiple:
+                  forms: '{count} günün'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 həftənin'
+                multiple:
+                  forms: '{count} həftənin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayın'
+                multiple:
+                  forms: '{count} ayın'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ilin'
+                multiple:
+                  forms: '{count} ilin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisaniyəyə'
+                multiple:
+                  forms: '{count} millisaniyəyə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyəyə'
+                multiple:
+                  forms: '{count} saniyəyə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dəqiqəyə'
+                multiple:
+                  forms: '{count} dəqiqəyə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saata'
+                multiple:
+                  forms: '{count} saata'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günə'
+                multiple:
+                  forms: '{count} günə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 həftəyə'
+                multiple:
+                  forms: '{count} həftəyə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aya'
+                multiple:
+                  forms: '{count} aya'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ilə'
+                multiple:
+                  forms: '{count} ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisaniyəni'
+                multiple:
+                  forms: '{count} millisaniyəni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyəni'
+                multiple:
+                  forms: '{count} saniyəni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dəqiqəni'
+                multiple:
+                  forms: '{count} dəqiqəni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatı'
+                multiple:
+                  forms: '{count} saatı'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günü'
+                multiple:
+                  forms: '{count} günü'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 həftəni'
+                multiple:
+                  forms: '{count} həftəni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayı'
+                multiple:
+                  forms: '{count} ayı'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ili'
+                multiple:
+                  forms: '{count} ili'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisaniyə ilə'
+                multiple:
+                  forms: '{count} millisaniyə ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyə ilə'
+                multiple:
+                  forms: '{count} saniyə ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dəqiqə ilə'
+                multiple:
+                  forms: '{count} dəqiqə ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saat ilə'
+                multiple:
+                  forms: '{count} saat ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 gün ilə'
+                multiple:
+                  forms: '{count} gün ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 həftə ilə'
+                multiple:
+                  forms: '{count} həftə ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ay ilə'
+                multiple:
+                  forms: '{count} ay ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 il ilə'
+                multiple:
+                  forms: '{count} il ilə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      comitative:
+        sameRenderedAs: 'instrumental'
+        provenance:
+          - 'grammar'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisaniyədə'
+                multiple:
+                  forms: '{count} millisaniyədə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyədə'
+                multiple:
+                  forms: '{count} saniyədə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dəqiqədə'
+                multiple:
+                  forms: '{count} dəqiqədə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatda'
+                multiple:
+                  forms: '{count} saatda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 gündə'
+                multiple:
+                  forms: '{count} gündə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 həftədə'
+                multiple:
+                  forms: '{count} həftədə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayda'
+                multiple:
+                  forms: '{count} ayda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ildə'
+                multiple:
+                  forms: '{count} ildə'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisaniyədən'
+                multiple:
+                  forms: '{count} millisaniyədən'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyədən'
+                multiple:
+                  forms: '{count} saniyədən'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dəqiqədən'
+                multiple:
+                  forms: '{count} dəqiqədən'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatdan'
+                multiple:
+                  forms: '{count} saatdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 gündən'
+                multiple:
+                  forms: '{count} gündən'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 həftədən'
+                multiple:
+                  forms: '{count} həftədən'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aydan'
+                multiple:
+                  forms: '{count} aydan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ildən'
+                multiple:
+                  forms: '{count} ildən'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

@@ -77,4 +77,52 @@ public enum GrammaticalCase
     /// Indicates transition into a state
     /// </summary>
     Translative,
+    /// <summary>
+    /// Indicates the unmarked argument of an intransitive verb or object of a transitive verb
+    /// </summary>
+    Absolutive,
+    /// <summary>
+    /// Indicates the Estonian short illative form
+    /// </summary>
+    Additive,
+    /// <summary>
+    /// Indicates location within
+    /// </summary>
+    Inessive,
+    /// <summary>
+    /// Indicates motion onto or toward
+    /// </summary>
+    Allative,
+    /// <summary>
+    /// Indicates location on or at
+    /// </summary>
+    Adessive,
+    /// <summary>
+    /// Indicates a temporary state or role
+    /// </summary>
+    Essive,
+    /// <summary>
+    /// Indicates absence or being without
+    /// </summary>
+    Abessive,
+    /// <summary>
+    /// Indicates comparison or equivalence
+    /// </summary>
+    Equative,
+    /// <summary>
+    /// Indicates motion or direction toward
+    /// </summary>
+    Directive,
+    /// <summary>
+    /// Indicates direction toward a destination
+    /// </summary>
+    Lative,
+    /// <summary>
+    /// Indicates an intended beneficiary
+    /// </summary>
+    Benefactive,
+    /// <summary>
+    /// Indicates a cause or reason
+    /// </summary>
+    Causal,
 }

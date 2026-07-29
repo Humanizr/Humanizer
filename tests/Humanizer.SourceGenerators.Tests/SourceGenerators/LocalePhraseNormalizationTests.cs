@@ -362,6 +362,122 @@ phrases:
     }
 
     [Fact]
+    public void AuthoredDurationClassificationReplacesInheritedDistinctCases()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+durationCases:
+  classification: distinct
+  cases:
+    dative:
+      units:
+        millisecond:
+          sameAsNominative: true
+        second:
+          sameAsNominative: true
+        minute:
+          sameAsNominative: true
+        hour:
+          sameAsNominative: true
+        day:
+          sameAsNominative: true
+        week:
+          sameAsNominative: true
+        month:
+          sameAsNominative: true
+        year:
+          sameAsNominative: true
+"""),
+            ("zz-child", """
+inherits: 'zz'
+
+durationCases:
+  classification: unsupported
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var child = catalog.Locales.Single(static locale => locale.LocaleCode == "zz-child");
+        var durationCases = HumanizerSourceGenerator.DurationCaseNormalization.ParseLegacyForTests(
+            child.LocaleCode,
+            child.ResolvedFeatures["durationCases"]);
+
+        Assert.Equal(HumanizerSourceGenerator.DurationCaseClassification.Unsupported, durationCases.Classification);
+        Assert.Empty(durationCases.Cases);
+    }
+
+    [Fact]
+    public void AuthoredDurationUnitKindsReplaceInheritedPhrases()
+    {
+        var catalog = CreateCatalog(
+            ("zz", """
+durationCases:
+  classification: distinct
+  cases:
+    dative:
+      units:
+        millisecond:
+          sameAsNominative: true
+        second:
+          sameAsNominative: true
+        minute:
+          sameAsNominative: true
+        hour:
+          single:
+            numeric: '1 parent-hour'
+          multiple:
+            forms: 'parent-hours'
+        day:
+          single:
+            numeric: '1 parent-day'
+          multiple:
+            forms: 'parent-days'
+        week:
+          sameAsNominative: true
+        month:
+          sameAsNominative: true
+        year:
+          sameAsNominative: true
+"""),
+            ("zz-child", """
+inherits: 'zz'
+
+durationCases:
+  classification: distinct
+  cases:
+    dative:
+      units:
+        millisecond:
+          sameAsNominative: true
+        second:
+          sameAsNominative: true
+        minute:
+          sameAsNominative: true
+        hour:
+          sameAsNominative: true
+        day:
+          unsupported: true
+        week:
+          sameAsNominative: true
+        month:
+          sameAsNominative: true
+        year:
+          sameAsNominative: true
+"""));
+
+        Assert.Empty(catalog.Diagnostics);
+
+        var child = catalog.Locales.Single(static locale => locale.LocaleCode == "zz-child");
+        var durationCases = HumanizerSourceGenerator.DurationCaseNormalization.ParseLegacyForTests(
+            child.LocaleCode,
+            child.ResolvedFeatures["durationCases"]);
+        var dative = durationCases.Cases["dative"];
+
+        Assert.Equal(HumanizerSourceGenerator.DurationCaseUnitKind.SameAsNominative, dative.Units["hour"].Kind);
+        Assert.Equal(HumanizerSourceGenerator.DurationCaseUnitKind.Unsupported, dative.Units["day"].Kind);
+    }
+
+    [Fact]
     public void LocaleCatalogInputReportsMalformedGrammarAndPhraseDataAsDiagnostics()
     {
         var catalog = CreateCatalog(
@@ -404,6 +520,74 @@ surfaces: {}
             catalog.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
                 diagnostic.GetMessage().Contains("inheritance cycle", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void DurationCasesRejectCrossScriptInheritance()
+    {
+        var catalog = CreateCatalog(
+            ("uz", """
+            locale: 'uz'
+            surfaces:
+              durationCases:
+                classification: 'unsupported'
+            """),
+            ("uz-Cyrl-UZ", """
+            locale: 'uz-Cyrl-UZ'
+            variantOf: 'uz'
+            surfaces: {}
+            """));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("script-incompatible", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void DurationCasesAllowVettedScriptlessVariantToInheritExplicitScriptParent()
+    {
+        var catalog = CreateCatalog(
+            ("zh-Hans", """
+            locale: 'zh-Hans'
+            surfaces:
+              durationCases:
+                classification: 'not-applicable'
+            """),
+            ("zh-CN", """
+            locale: 'zh-CN'
+            variantOf: 'zh-Hans'
+            surfaces: {}
+            """));
+
+        Assert.Empty(catalog.Diagnostics);
+        Assert.True(
+            catalog.Locales
+                .Single(static locale => locale.LocaleCode == "zh-CN")
+                .ResolvedFeatures
+                .ContainsKey("durationCases"));
+    }
+
+    [Fact]
+    public void DurationCasesRejectUnvettedScriptlessVariantInheritance()
+    {
+        var catalog = CreateCatalog(
+            ("pa-Arab", """
+            locale: 'pa-Arab'
+            surfaces:
+              durationCases:
+                classification: 'unsupported'
+            """),
+            ("pa-PK", """
+            locale: 'pa-PK'
+            variantOf: 'pa-Arab'
+            surfaces: {}
+            """));
+
+        Assert.Contains(
+            catalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("script-incompatible", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -518,10 +702,512 @@ surfaces: {}
         Assert.Empty(catalog.Cases);
     }
 
+    [Fact]
+    public void ExplicitDurationCaseAliasesFlattenToAuthoredTerminal()
+    {
+        var catalog = ParseDurationCases(
+            """
+            classification: distinct
+            citationCase: nominative
+            inventory:
+              - nominative
+              - dative
+              - accusative
+            sources:
+              native:
+                kind: native-review
+                url: 'https://example.test/reviews/1'
+                revision: 'abc123'
+                locator: 'comment-1'
+                credit: 'Example reviewer'
+                reviewed: '2026-07-29'
+            cases:
+              nominative:
+                authored: base-duration
+                provenance:
+                  - native
+              dative:
+                sameRenderedAs: nominative
+                provenance:
+                  - native
+              accusative:
+                sameRenderedAs: dative
+                provenance:
+                  - native
+            """);
+
+        Assert.Equal(
+            HumanizerSourceGenerator.DurationCaseUnitKind.SameAsNominative,
+            catalog.Cases["accusative"].Units["day"].Kind);
+    }
+
+    [Fact]
+    public void ExplicitDurationCaseAliasesRejectCycles()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                """
+                classification: distinct
+                citationCase: nominative
+                inventory:
+                  - nominative
+                  - dative
+                  - accusative
+                sources:
+                  native:
+                    kind: native-review
+                    url: 'https://example.test/reviews/1'
+                    revision: 'abc123'
+                    locator: 'comment-1'
+                    credit: 'Example reviewer'
+                    reviewed: '2026-07-29'
+                cases:
+                  nominative:
+                    authored: base-duration
+                    provenance:
+                      - native
+                  dative:
+                    sameRenderedAs: accusative
+                    provenance:
+                      - native
+                  accusative:
+                    sameRenderedAs: dative
+                    provenance:
+                      - native
+                """));
+
+        Assert.Contains("sameRenderedAs cycle", exception.Message);
+    }
+
+    [Fact]
+    public void ExplicitDurationCasesSupportEvidencedUnitNotApplicable()
+    {
+        var catalog = ParseDurationCases(
+            """
+            classification: distinct
+            citationCase: nominative
+            inventory:
+              - nominative
+              - sociative
+            sources:
+              cldr:
+                kind: cldr
+                url: 'https://github.com/unicode-org/cldr/blob/acd6d88/common/main/ml.xml'
+                revision: 'acd6d88'
+                locator: 'duration-unit-millisecond'
+                credit: 'Unicode CLDR contributors'
+            cases:
+              nominative:
+                authored: base-duration
+                provenance:
+                  - cldr
+              sociative:
+                authored:
+                  units:
+                    millisecond:
+                      notApplicable: 'The audited duration surface has no sociative millisecond.'
+                      provenance:
+                        - cldr
+                    second:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - cldr
+                    minute:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - cldr
+                    hour:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - cldr
+                    day:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - cldr
+                    week:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - cldr
+                    month:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - cldr
+                    year:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - cldr
+                provenance:
+                  - cldr
+            """);
+
+        Assert.Equal(
+            HumanizerSourceGenerator.DurationCaseUnitKind.NotApplicable,
+            catalog.Cases["sociative"].Units["millisecond"].Kind);
+        Assert.Equal(
+            HumanizerSourceGenerator.DurationCaseUnitKind.SameAsNominative,
+            catalog.Cases["sociative"].Units["second"].Kind);
+    }
+
+    [Fact]
+    public void ExplicitDurationCasesSupportAnAbsolutiveCitationCase()
+    {
+        var catalog = ParseDurationCases(
+            """
+            classification: distinct
+            citationCase: absolutive
+            inventory:
+              - absolutive
+            sources:
+              grammar:
+                kind: grammar
+                url: 'https://example.test/basque-grammar'
+                revision: 'abc123'
+                locator: 'case inventory'
+                credit: 'Example grammar'
+            cases:
+              absolutive:
+                authored: base-duration
+                provenance:
+                  - grammar
+            """);
+
+        Assert.Equal("absolutive", catalog.CitationCase);
+        Assert.Equal(
+            HumanizerSourceGenerator.DurationCaseUnitKind.SameAsNominative,
+            catalog.Cases["absolutive"].Units["day"].Kind);
+        Assert.DoesNotContain("nominative", catalog.Inventory);
+    }
+
+    [Fact]
+    public void ExplicitDurationCasesRequireCitationCaseInInventory()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                """
+                classification: distinct
+                citationCase: absolutive
+                inventory:
+                  - nominative
+                sources:
+                  grammar:
+                    kind: grammar
+                    url: 'https://example.test/grammar'
+                    revision: 'abc123'
+                    locator: 'case inventory'
+                    credit: 'Example grammar'
+                cases:
+                  nominative:
+                    unsupported: 'test fixture'
+                """));
+
+        Assert.Contains("citationCase", exception.Message);
+        Assert.Contains("inventory", exception.Message);
+    }
+
+    [Fact]
+    public void ReleaseDurationCasesRejectUnsupportedRoot()
+    {
+        var catalog = ParseDurationCases(
+            """
+            classification: unsupported
+            citationCase: nominative
+            inventory:
+              - nominative
+            sources:
+              grammar:
+                kind: grammar
+                url: 'https://example.com/grammar'
+                revision: 'test'
+                locator: 'test fixture'
+                credit: 'Test'
+            cases:
+              nominative:
+                unsupported: 'test fixture'
+            """);
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseCoverageInput.ValidateReleaseCompleteness(catalog));
+
+        Assert.Contains("zz.durationCases.classification", exception.Message);
+    }
+
+    [Fact]
+    public void ReleaseDurationCasesRejectLegacyProfile()
+    {
+        var catalog = ParseDurationCases("classification: not-applicable");
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseCoverageInput.ValidateReleaseCompleteness(catalog));
+
+        Assert.Contains("explicit inventory, reason, sources, and provenance", exception.Message);
+    }
+
+    [Fact]
+    public void ReleaseDurationCasesRejectUnsupportedCase()
+    {
+        var catalog = ParseDurationCases(
+            """
+            classification: distinct
+            citationCase: nominative
+            inventory:
+              - nominative
+              - dative
+            sources:
+              grammar:
+                kind: grammar
+                url: 'https://example.test/grammar'
+                revision: 'abc123'
+                locator: 'duration cases'
+                credit: 'Example grammar'
+            cases:
+              nominative:
+                authored: base-duration
+                provenance:
+                  - grammar
+              dative:
+                unsupported: 'Awaiting sourced forms.'
+            """);
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseCoverageInput.ValidateReleaseCompleteness(catalog));
+
+        Assert.Contains("zz.durationCases.cases.dative", exception.Message);
+    }
+
+    [Fact]
+    public void ReleaseDurationCasesRejectUnsupportedUnit()
+    {
+        var catalog = ParseDurationCases(
+            """
+            classification: distinct
+            citationCase: nominative
+            inventory:
+              - nominative
+              - dative
+            sources:
+              grammar:
+                kind: grammar
+                url: 'https://example.test/grammar'
+                revision: 'abc123'
+                locator: 'duration cases'
+                credit: 'Example grammar'
+            cases:
+              nominative:
+                authored: base-duration
+                provenance:
+                  - grammar
+              dative:
+                authored:
+                  units:
+                    millisecond:
+                      unsupported: 'Awaiting sourced form.'
+                    second:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - grammar
+                    minute:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - grammar
+                    hour:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - grammar
+                    day:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - grammar
+                    week:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - grammar
+                    month:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - grammar
+                    year:
+                      sameRenderedAs: nominative
+                      provenance:
+                        - grammar
+                provenance:
+                  - grammar
+            """);
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseCoverageInput.ValidateReleaseCompleteness(catalog));
+
+        Assert.Contains(
+            "zz.durationCases.cases.dative.authored.units.millisecond",
+            exception.Message);
+    }
+
+    [Fact]
+    public void ReleaseDurationCasesRequireEveryReachablePluralForm()
+    {
+        var locale = GetLocaleFile("ar").ReplaceLineEndings("\n");
+        const string zeroForm = "                    zero: '{count} ملي ثانية'\n";
+        var zeroFormIndex = locale.IndexOf(zeroForm, StringComparison.Ordinal);
+        Assert.True(zeroFormIndex >= 0);
+        locale = locale.Remove(zeroFormIndex, zeroForm.Length);
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseCoverageInput.Create(
+                CreateCatalog(("ar", locale))));
+
+        Assert.Contains(
+            "ar.durationCases.cases.nominative.authored.units.millisecond.phrase.multiple.forms",
+            exception.Message);
+        Assert.Contains("reachable 'zero' form", exception.Message);
+    }
+
+    [Fact]
+    public void CitationDurationCasesRequireNumericMultipleFormsForDedicatedCaseRule()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseNormalization.ParseForTests(
+                "zz",
+                """
+                  classification: invariant
+                  citationCase: nominative
+                  inventory:
+                    - nominative
+                  sources:
+                    grammar:
+                      kind: grammar
+                      url: 'https://example.test/grammar'
+                      revision: 'abc123'
+                      locator: 'duration cases'
+                      credit: 'Example grammar'
+                  cases:
+                    nominative:
+                      authored: base-duration
+                      provenance:
+                        - grammar
+                """,
+                casePluralRule: "arabic-cardinal",
+                phrasesText:
+                """
+                  duration:
+                    millisecond:
+                      single: 'one millisecond'
+                """));
+
+        Assert.Contains("zz.phrases.duration.millisecond", exception.Message);
+        Assert.Contains("numeric multiple forms", exception.Message);
+    }
+
+    [Fact]
+    public void CitationDurationCasesRequireNumericMultipleFormsWithoutDedicatedCaseRule()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseNormalization.ParseForTests(
+                "zz",
+                InvariantCitationDurationCases,
+                phrasesText:
+                """
+                  duration:
+                    millisecond:
+                      single: 'one millisecond'
+                """));
+
+        Assert.Contains("zz.phrases.duration.millisecond", exception.Message);
+        Assert.Contains("numeric multiple forms", exception.Message);
+    }
+
+    [Fact]
+    public void CitationDurationCasesAllowOrdinaryMultipleFallback()
+    {
+        var catalog = HumanizerSourceGenerator.DurationCaseNormalization.ParseForTests(
+            "zz",
+            InvariantCitationDurationCases,
+            phrasesText:
+            """
+              duration:
+                millisecond:
+                  single: 'one millisecond'
+                  multiple: '{count} milliseconds'
+                second:
+                  single: 'one second'
+                  multiple: '{count} seconds'
+                minute:
+                  single: 'one minute'
+                  multiple: '{count} minutes'
+                hour:
+                  single: 'one hour'
+                  multiple: '{count} hours'
+                day:
+                  single: 'one day'
+                  multiple: '{count} days'
+                week:
+                  single: 'one week'
+                  multiple: '{count} weeks'
+                month:
+                  single: 'one month'
+                  multiple: '{count} months'
+                year:
+                  single: 'one year'
+                  multiple: '{count} years'
+            """);
+
+        Assert.Equal(
+            HumanizerSourceGenerator.DurationCaseClassification.Invariant,
+            catalog.Classification);
+    }
+
+    const string InvariantCitationDurationCases =
+        """
+          classification: invariant
+          citationCase: nominative
+          inventory:
+            - nominative
+          sources:
+            grammar:
+              kind: grammar
+              url: 'https://example.test/grammar'
+              revision: 'abc123'
+              locator: 'duration cases'
+              credit: 'Example grammar'
+          cases:
+            nominative:
+              authored: base-duration
+              provenance:
+                - grammar
+        """;
+
+    const string CompleteCitationDurationPhrases =
+        """
+          duration:
+            millisecond:
+              single: 'one millisecond'
+              multiple: '{count} milliseconds'
+            second:
+              single: 'one second'
+              multiple: '{count} seconds'
+            minute:
+              single: 'one minute'
+              multiple: '{count} minutes'
+            hour:
+              single: 'one hour'
+              multiple: '{count} hours'
+            day:
+              single: 'one day'
+              multiple: '{count} days'
+            week:
+              single: 'one week'
+              multiple: '{count} weeks'
+            month:
+              single: 'one month'
+              multiple: '{count} months'
+            year:
+              single: 'one year'
+              multiple: '{count} years'
+        """;
+
     static HumanizerSourceGenerator.DurationCaseCatalog ParseDurationCases(string body) =>
         HumanizerSourceGenerator.DurationCaseNormalization.ParseForTests(
             "zz",
-            string.Join(Environment.NewLine, body.Split(Environment.NewLine).Select(static line => $"  {line}")));
+            string.Join(Environment.NewLine, body.Split(Environment.NewLine).Select(static line => $"  {line}")),
+            phrasesText: CompleteCitationDurationPhrases);
 
     static HumanizerSourceGenerator.LocaleCatalogInput CreateCatalog(params (string LocaleCode, string FileText)[] files) =>
         HumanizerSourceGenerator.LocaleCatalogInput.Create(ImmutableArray.CreateRange(

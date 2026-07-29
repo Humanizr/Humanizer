@@ -6,520 +6,694 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'prepositional'
+      - 'locative'
+      - 'vocative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ru.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 миллисекунды'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} миллисекунд'
-                singular: '{count} миллисекунды'
-                dual: '{count} миллисекунды'
-                paucal: '{count} миллисекунд'
-                plural: '{count} миллисекунд'
-          second:
-            single:
-              numeric: '1 секунды'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секунд'
-                singular: '{count} секунды'
-                dual: '{count} секунды'
-                paucal: '{count} секунд'
-                plural: '{count} секунд'
-          minute:
-            single:
-              numeric: '1 минуты'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минут'
-                singular: '{count} минуты'
-                dual: '{count} минуты'
-                paucal: '{count} минут'
-                plural: '{count} минут'
-          hour:
-            single:
-              numeric: '1 часа'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} часов'
-                singular: '{count} часа'
-                dual: '{count} часа'
-                paucal: '{count} часов'
-                plural: '{count} часов'
-          day:
-            single:
-              numeric: '1 дня'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} дней'
-                singular: '{count} дня'
-                dual: '{count} дня'
-                paucal: '{count} дней'
-                plural: '{count} дней'
-          week:
-            single:
-              numeric: '1 недели'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} недель'
-                singular: '{count} недели'
-                dual: '{count} недели'
-                paucal: '{count} недель'
-                plural: '{count} недель'
-          month:
-            single:
-              numeric: '1 месяца'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} месяцев'
-                singular: '{count} месяца'
-                dual: '{count} месяца'
-                paucal: '{count} месяцев'
-                plural: '{count} месяцев'
-          year:
-            single:
-              numeric: '1 года'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} лет'
-                singular: '{count} года'
-                dual: '{count} года'
-                paucal: '{count} лет'
-                plural: '{count} лет'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунды'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} миллисекунд'
+                    singular: '{count} миллисекунды'
+                    dual: '{count} миллисекунды'
+                    paucal: '{count} миллисекунд'
+                    plural: '{count} миллисекунд'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунды'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунд'
+                    singular: '{count} секунды'
+                    dual: '{count} секунды'
+                    paucal: '{count} секунд'
+                    plural: '{count} секунд'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минуты'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минут'
+                    singular: '{count} минуты'
+                    dual: '{count} минуты'
+                    paucal: '{count} минут'
+                    plural: '{count} минут'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 часа'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} часов'
+                    singular: '{count} часа'
+                    dual: '{count} часа'
+                    paucal: '{count} часов'
+                    plural: '{count} часов'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дня'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дней'
+                    singular: '{count} дня'
+                    dual: '{count} дня'
+                    paucal: '{count} дней'
+                    plural: '{count} дней'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 недели'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} недель'
+                    singular: '{count} недели'
+                    dual: '{count} недели'
+                    paucal: '{count} недель'
+                    plural: '{count} недель'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяца'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцев'
+                    singular: '{count} месяца'
+                    dual: '{count} месяца'
+                    paucal: '{count} месяцев'
+                    plural: '{count} месяцев'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 года'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} лет'
+                    singular: '{count} года'
+                    dual: '{count} года'
+                    paucal: '{count} лет'
+                    plural: '{count} лет'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 миллисекунде'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} миллисекундам'
-                singular: '{count} миллисекунде'
-                dual: '{count} миллисекунды'
-                paucal: '{count} миллисекундам'
-                plural: '{count} миллисекундам'
-          second:
-            single:
-              numeric: '1 секунде'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секундам'
-                singular: '{count} секунде'
-                dual: '{count} секунды'
-                paucal: '{count} секундам'
-                plural: '{count} секундам'
-          minute:
-            single:
-              numeric: '1 минуте'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минутам'
-                singular: '{count} минуте'
-                dual: '{count} минуты'
-                paucal: '{count} минутам'
-                plural: '{count} минутам'
-          hour:
-            single:
-              numeric: '1 часу'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} часам'
-                singular: '{count} часу'
-                dual: '{count} часа'
-                paucal: '{count} часам'
-                plural: '{count} часам'
-          day:
-            single:
-              numeric: '1 дню'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} дням'
-                singular: '{count} дню'
-                dual: '{count} дня'
-                paucal: '{count} дням'
-                plural: '{count} дням'
-          week:
-            single:
-              numeric: '1 неделе'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} неделям'
-                singular: '{count} неделе'
-                dual: '{count} недели'
-                paucal: '{count} неделям'
-                plural: '{count} неделям'
-          month:
-            single:
-              numeric: '1 месяцу'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} месяцам'
-                singular: '{count} месяцу'
-                dual: '{count} месяца'
-                paucal: '{count} месяцам'
-                plural: '{count} месяцам'
-          year:
-            single:
-              numeric: '1 году'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} годам'
-                singular: '{count} году'
-                dual: '{count} года'
-                paucal: '{count} годам'
-                plural: '{count} годам'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} миллисекундам'
+                    singular: '{count} миллисекунде'
+                    dual: '{count} миллисекунды'
+                    paucal: '{count} миллисекундам'
+                    plural: '{count} миллисекундам'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секундам'
+                    singular: '{count} секунде'
+                    dual: '{count} секунды'
+                    paucal: '{count} секундам'
+                    plural: '{count} секундам'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минуте'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минутам'
+                    singular: '{count} минуте'
+                    dual: '{count} минуты'
+                    paucal: '{count} минутам'
+                    plural: '{count} минутам'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 часу'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} часам'
+                    singular: '{count} часу'
+                    dual: '{count} часа'
+                    paucal: '{count} часам'
+                    plural: '{count} часам'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дню'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дням'
+                    singular: '{count} дню'
+                    dual: '{count} дня'
+                    paucal: '{count} дням'
+                    plural: '{count} дням'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 неделе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} неделям'
+                    singular: '{count} неделе'
+                    dual: '{count} недели'
+                    paucal: '{count} неделям'
+                    plural: '{count} неделям'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяцу'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцам'
+                    singular: '{count} месяцу'
+                    dual: '{count} месяца'
+                    paucal: '{count} месяцам'
+                    plural: '{count} месяцам'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 году'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} годам'
+                    singular: '{count} году'
+                    dual: '{count} года'
+                    paucal: '{count} годам'
+                    plural: '{count} годам'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 миллисекунду'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} миллисекунд'
-                singular: '{count} миллисекунду'
-                dual: '{count} миллисекунды'
-                paucal: '{count} миллисекунды'
-                plural: '{count} миллисекунд'
-          second:
-            single:
-              numeric: '1 секунду'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секунд'
-                singular: '{count} секунду'
-                dual: '{count} секунды'
-                paucal: '{count} секунды'
-                plural: '{count} секунд'
-          minute:
-            single:
-              numeric: '1 минуту'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минут'
-                singular: '{count} минуту'
-                dual: '{count} минуты'
-                paucal: '{count} минуты'
-                plural: '{count} минут'
-          hour:
-            sameAsNominative: true
-          day:
-            sameAsNominative: true
-          week:
-            single:
-              numeric: '1 неделю'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} недель'
-                singular: '{count} неделю'
-                dual: '{count} недели'
-                paucal: '{count} недели'
-                plural: '{count} недель'
-          month:
-            sameAsNominative: true
-          year:
-            sameAsNominative: true
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} миллисекунд'
+                    singular: '{count} миллисекунду'
+                    dual: '{count} миллисекунды'
+                    paucal: '{count} миллисекунды'
+                    plural: '{count} миллисекунд'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунд'
+                    singular: '{count} секунду'
+                    dual: '{count} секунды'
+                    paucal: '{count} секунды'
+                    plural: '{count} секунд'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минуту'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минут'
+                    singular: '{count} минуту'
+                    dual: '{count} минуты'
+                    paucal: '{count} минуты'
+                    plural: '{count} минут'
+              provenance:
+                - 'cldr48'
+            hour:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 неделю'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} недель'
+                    singular: '{count} неделю'
+                    dual: '{count} недели'
+                    paucal: '{count} недели'
+                    plural: '{count} недель'
+              provenance:
+                - 'cldr48'
+            month:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            year:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       instrumental:
-        units:
-          millisecond:
-            single:
-              numeric: '1 миллисекундой'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} миллисекундами'
-                singular: '{count} миллисекундой'
-                dual: '{count} миллисекунды'
-                paucal: '{count} миллисекундами'
-                plural: '{count} миллисекундами'
-          second:
-            single:
-              numeric: '1 секундой'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секундами'
-                singular: '{count} секундой'
-                dual: '{count} секунды'
-                paucal: '{count} секундами'
-                plural: '{count} секундами'
-          minute:
-            single:
-              numeric: '1 минутой'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минутами'
-                singular: '{count} минутой'
-                dual: '{count} минуты'
-                paucal: '{count} минутами'
-                plural: '{count} минутами'
-          hour:
-            single:
-              numeric: '1 часом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} часами'
-                singular: '{count} часом'
-                dual: '{count} часа'
-                paucal: '{count} часами'
-                plural: '{count} часами'
-          day:
-            single:
-              numeric: '1 днём'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} днями'
-                singular: '{count} днём'
-                dual: '{count} дня'
-                paucal: '{count} днями'
-                plural: '{count} днями'
-          week:
-            single:
-              numeric: '1 неделей'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} неделями'
-                singular: '{count} неделей'
-                dual: '{count} недели'
-                paucal: '{count} неделями'
-                plural: '{count} неделями'
-          month:
-            single:
-              numeric: '1 месяцем'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} месяцами'
-                singular: '{count} месяцем'
-                dual: '{count} месяца'
-                paucal: '{count} месяцами'
-                plural: '{count} месяцами'
-          year:
-            single:
-              numeric: '1 годом'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} годами'
-                singular: '{count} годом'
-                dual: '{count} года'
-                paucal: '{count} годами'
-                plural: '{count} годами'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундой'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} миллисекундами'
+                    singular: '{count} миллисекундой'
+                    dual: '{count} миллисекунды'
+                    paucal: '{count} миллисекундами'
+                    plural: '{count} миллисекундами'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундой'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секундами'
+                    singular: '{count} секундой'
+                    dual: '{count} секунды'
+                    paucal: '{count} секундами'
+                    plural: '{count} секундами'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минутой'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минутами'
+                    singular: '{count} минутой'
+                    dual: '{count} минуты'
+                    paucal: '{count} минутами'
+                    plural: '{count} минутами'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 часом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} часами'
+                    singular: '{count} часом'
+                    dual: '{count} часа'
+                    paucal: '{count} часами'
+                    plural: '{count} часами'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 днём'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} днями'
+                    singular: '{count} днём'
+                    dual: '{count} дня'
+                    paucal: '{count} днями'
+                    plural: '{count} днями'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 неделей'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} неделями'
+                    singular: '{count} неделей'
+                    dual: '{count} недели'
+                    paucal: '{count} неделями'
+                    plural: '{count} неделями'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяцем'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцами'
+                    singular: '{count} месяцем'
+                    dual: '{count} месяца'
+                    paucal: '{count} месяцами'
+                    plural: '{count} месяцами'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 годом'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} годами'
+                    singular: '{count} годом'
+                    dual: '{count} года'
+                    paucal: '{count} годами'
+                    plural: '{count} годами'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       prepositional:
-        units:
-          millisecond:
-            single:
-              numeric: '1 миллисекунде'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} миллисекундах'
-                singular: '{count} миллисекунде'
-                dual: '{count} миллисекунды'
-                paucal: '{count} миллисекундах'
-                plural: '{count} миллисекундах'
-          second:
-            single:
-              numeric: '1 секунде'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секундах'
-                singular: '{count} секунде'
-                dual: '{count} секунды'
-                paucal: '{count} секундах'
-                plural: '{count} секундах'
-          minute:
-            single:
-              numeric: '1 минуте'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минутах'
-                singular: '{count} минуте'
-                dual: '{count} минуты'
-                paucal: '{count} минутах'
-                plural: '{count} минутах'
-          hour:
-            single:
-              numeric: '1 часе'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} часах'
-                singular: '{count} часе'
-                dual: '{count} часа'
-                paucal: '{count} часах'
-                plural: '{count} часах'
-          day:
-            single:
-              numeric: '1 дне'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} днях'
-                singular: '{count} дне'
-                dual: '{count} дня'
-                paucal: '{count} днях'
-                plural: '{count} днях'
-          week:
-            single:
-              numeric: '1 неделе'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} неделях'
-                singular: '{count} неделе'
-                dual: '{count} недели'
-                paucal: '{count} неделях'
-                plural: '{count} неделях'
-          month:
-            single:
-              numeric: '1 месяце'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} месяцах'
-                singular: '{count} месяце'
-                dual: '{count} месяца'
-                paucal: '{count} месяцах'
-                plural: '{count} месяцах'
-          year:
-            single:
-              numeric: '1 годе'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} годах'
-                singular: '{count} годе'
-                dual: '{count} года'
-                paucal: '{count} годах'
-                plural: '{count} годах'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} миллисекундах'
+                    singular: '{count} миллисекунде'
+                    dual: '{count} миллисекунды'
+                    paucal: '{count} миллисекундах'
+                    plural: '{count} миллисекундах'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секундах'
+                    singular: '{count} секунде'
+                    dual: '{count} секунды'
+                    paucal: '{count} секундах'
+                    plural: '{count} секундах'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минуте'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минутах'
+                    singular: '{count} минуте'
+                    dual: '{count} минуты'
+                    paucal: '{count} минутах'
+                    plural: '{count} минутах'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 часе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} часах'
+                    singular: '{count} часе'
+                    dual: '{count} часа'
+                    paucal: '{count} часах'
+                    plural: '{count} часах'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дне'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} днях'
+                    singular: '{count} дне'
+                    dual: '{count} дня'
+                    paucal: '{count} днях'
+                    plural: '{count} днях'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 неделе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} неделях'
+                    singular: '{count} неделе'
+                    dual: '{count} недели'
+                    paucal: '{count} неделях'
+                    plural: '{count} неделях'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяце'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцах'
+                    singular: '{count} месяце'
+                    dual: '{count} месяца'
+                    paucal: '{count} месяцах'
+                    plural: '{count} месяцах'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 годе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} годах'
+                    singular: '{count} годе'
+                    dual: '{count} года'
+                    paucal: '{count} годах'
+                    plural: '{count} годах'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       locative:
-        units:
-          millisecond:
-            unsupported: true
-          second:
-            single:
-              numeric: '1 секунде'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} секундах'
-                singular: '{count} секунде'
-                dual: '{count} секунды'
-                paucal: '{count} секундах'
-                plural: '{count} секундах'
-          minute:
-            single:
-              numeric: '1 минуте'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} минутах'
-                singular: '{count} минуте'
-                dual: '{count} минуты'
-                paucal: '{count} минутах'
-                plural: '{count} минутах'
-          hour:
-            single:
-              numeric: '1 часе'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} часах'
-                singular: '{count} часе'
-                dual: '{count} часа'
-                paucal: '{count} часах'
-                plural: '{count} часах'
-          day:
-            single:
-              numeric: '1 дне'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} днях'
-                singular: '{count} дне'
-                dual: '{count} дня'
-                paucal: '{count} днях'
-                plural: '{count} днях'
-          week:
-            single:
-              numeric: '1 неделе'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} неделях'
-                singular: '{count} неделе'
-                dual: '{count} недели'
-                paucal: '{count} неделях'
-                plural: '{count} неделях'
-          month:
-            single:
-              numeric: '1 месяце'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} месяцах'
-                singular: '{count} месяце'
-                dual: '{count} месяца'
-                paucal: '{count} месяцах'
-                plural: '{count} месяцах'
-          year:
-            single:
-              numeric: '1 годе'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} годах'
-                singular: '{count} годе'
-                dual: '{count} года'
-                paucal: '{count} годах'
-                plural: '{count} годах'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} миллисекундах'
+                    singular: '{count} миллисекунде'
+                    dual: '{count} миллисекунды'
+                    paucal: '{count} миллисекундах'
+                    plural: '{count} миллисекундах'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунде'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секундах'
+                    singular: '{count} секунде'
+                    dual: '{count} секунды'
+                    paucal: '{count} секундах'
+                    plural: '{count} секундах'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минуте'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} минутах'
+                    singular: '{count} минуте'
+                    dual: '{count} минуты'
+                    paucal: '{count} минутах'
+                    plural: '{count} минутах'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 часе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} часах'
+                    singular: '{count} часе'
+                    dual: '{count} часа'
+                    paucal: '{count} часах'
+                    plural: '{count} часах'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дне'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} днях'
+                    singular: '{count} дне'
+                    dual: '{count} дня'
+                    paucal: '{count} днях'
+                    plural: '{count} днях'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 неделе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} неделях'
+                    singular: '{count} неделе'
+                    dual: '{count} недели'
+                    paucal: '{count} неделях'
+                    plural: '{count} неделях'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяце'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцах'
+                    singular: '{count} месяце'
+                    dual: '{count} месяца'
+                    paucal: '{count} месяцах'
+                    plural: '{count} месяцах'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 годе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} годах'
+                    singular: '{count} годе'
+                    dual: '{count} года'
+                    paucal: '{count} годах'
+                    plural: '{count} годах'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       vocative:
-        units:
-          millisecond:
-            unsupported: true
-          second:
-            sameAsNominative: true
-          minute:
-            sameAsNominative: true
-          hour:
-            sameAsNominative: true
-          day:
-            sameAsNominative: true
-          week:
-            sameAsNominative: true
-          month:
-            sameAsNominative: true
-          year:
-            sameAsNominative: true
+        notApplicable: 'Modern Russian vocative address forms do not apply to a written bare quantitative duration.'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

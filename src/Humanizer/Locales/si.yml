@@ -5,8 +5,310 @@ surfaces:
     cardinalRule: 'Sinhala'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
-
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - genitive
+      - accusative
+      - dative
+      - ablative
+      - instrumental
+      - locative
+      - vocative
+    sources:
+      inventory:
+        kind: 'grammar'
+        url: 'https://aclanthology.org/W16-37.pdf'
+        revision: 'WSSANLP 2016 proceedings, paper pp. 163-172'
+        locator: 'PDF p. 178: inanimate singular dative/genitive/instrumental and plural -වලට/-වල/-වලින් paradigms'
+        credit: 'Sandareka Fernando, Surangika Ranathunga, Sanath Jayasena, and Gihan Dias'
+      computationalGrammar:
+        kind: 'grammar'
+        url: 'https://doi.org/10.1007/978-3-642-28604-9_16'
+        revision: 'Liyanage, Pushpananda, Herath, and Weerasinghe, LNCS 7181 (2012), pp. 188-200'
+        locator: 'Table 2, pp. 192-193: inanimate direct, dative, genitive, and instrumental singular/plural paradigms'
+        credit: 'Chamila Liyanage, Randil Pushpananda, Dulip Lakmal Herath, and Ruvan Weerasinghe'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+          - 'computationalGrammar'
+      genitive:
+        sameRenderedAs: 'locative'
+        provenance:
+          - 'inventory'
+          - 'computationalGrammar'
+      accusative:
+        notApplicable: 'This animate Sinhala case paradigm does not apply to inanimate duration nouns.'
+        provenance:
+          - 'inventory'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 මිලි තත්පරයකට'
+                  words: 'එක් මිලි තත්පරයකට'
+                multiple:
+                  forms: '{count} මිලි තත්පරවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 තත්පරයකට'
+                  words: 'එක් තත්පරයකට'
+                multiple:
+                  forms: '{count} තත්පරවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 මිනිත්තුවකට'
+                  words: 'එක් මිනිත්තුවකට'
+                multiple:
+                  forms: '{count} මිනිත්තුවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 පැයකට'
+                  words: 'එක් පැයකට'
+                multiple:
+                  forms: '{count} පැයවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 දිනයකට'
+                  words: 'එක් දිනයකට'
+                multiple:
+                  forms: '{count} දිනවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 සතියකට'
+                  words: 'එක් සතියකට'
+                multiple:
+                  forms: '{count} සතිවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 මාසයකට'
+                  words: 'එක් මාසයකට'
+                multiple:
+                  forms: '{count} මාසවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 අවුරුද්දකට'
+                  words: 'එක් අවුරුද්දකට'
+                multiple:
+                  forms: '{count} අවුරුදුවලට'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'computationalGrammar'
+      ablative:
+        sameRenderedAs: 'instrumental'
+        provenance:
+          - 'inventory'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 මිලි තත්පරයකින්'
+                  words: 'එක් මිලි තත්පරයකින්'
+                multiple:
+                  forms: '{count} මිලි තත්පරවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 තත්පරයකින්'
+                  words: 'එක් තත්පරයකින්'
+                multiple:
+                  forms: '{count} තත්පරවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 මිනිත්තුවකින්'
+                  words: 'එක් මිනිත්තුවකින්'
+                multiple:
+                  forms: '{count} මිනිත්තුවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 පැයකින්'
+                  words: 'එක් පැයකින්'
+                multiple:
+                  forms: '{count} පැයවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 දිනයකින්'
+                  words: 'එක් දිනයකින්'
+                multiple:
+                  forms: '{count} දිනවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 සතියකින්'
+                  words: 'එක් සතියකින්'
+                multiple:
+                  forms: '{count} සතිවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 මාසයකින්'
+                  words: 'එක් මාසයකින්'
+                multiple:
+                  forms: '{count} මාසවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 අවුරුද්දකින්'
+                  words: 'එක් අවුරුද්දකින්'
+                multiple:
+                  forms: '{count} අවුරුදුවලින්'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'computationalGrammar'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 මිලි තත්පරයක'
+                  words: 'එක් මිලි තත්පරයක'
+                multiple:
+                  forms: '{count} මිලි තත්පරවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 තත්පරයක'
+                  words: 'එක් තත්පරයක'
+                multiple:
+                  forms: '{count} තත්පරවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 මිනිත්තුවක'
+                  words: 'එක් මිනිත්තුවක'
+                multiple:
+                  forms: '{count} මිනිත්තුවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 පැයක'
+                  words: 'එක් පැයක'
+                multiple:
+                  forms: '{count} පැයවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 දිනයක'
+                  words: 'එක් දිනයක'
+                multiple:
+                  forms: '{count} දිනවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 සතියක'
+                  words: 'එක් සතියක'
+                multiple:
+                  forms: '{count} සතිවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 මාසයක'
+                  words: 'එක් මාසයක'
+                multiple:
+                  forms: '{count} මාසවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 අවුරුද්දක'
+                  words: 'එක් අවුරුද්දක'
+                multiple:
+                  forms: '{count} අවුරුදුවල'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      vocative:
+        notApplicable: 'Direct address does not apply to an inanimate written bare quantitative duration.'
+        provenance:
+          - 'inventory'
   list:
     engine: 'conjunction'
     value: 'සහ'

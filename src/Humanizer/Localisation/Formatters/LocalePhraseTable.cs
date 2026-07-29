@@ -11,18 +11,22 @@ readonly record struct PhraseTemplate(string? Name, string Template);
 
 readonly record struct LocalizedPhraseForms(
     string Default,
+    string? Zero = null,
     string? Singular = null,
     string? Dual = null,
     string? Paucal = null,
-    string? Plural = null)
+    string? Plural = null,
+    string? Many = null)
 {
     public string Resolve(FormatterNumberForm form) =>
         form switch
         {
+            FormatterNumberForm.Zero => Zero ?? Default,
             FormatterNumberForm.Singular => Singular ?? Default,
             FormatterNumberForm.Dual => Dual ?? Default,
             FormatterNumberForm.Paucal => Paucal ?? Default,
             FormatterNumberForm.Plural => Plural ?? Default,
+            FormatterNumberForm.Many => Many ?? Default,
             _ => Default
         };
 }

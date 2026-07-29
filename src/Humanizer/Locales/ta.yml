@@ -6,277 +6,375 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'dative'
+      - 'accusative'
+      - 'ablative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ta.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 மில்லிவிநாடிக்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மில்லிவிநாடிகளுக்கு'
-                singular: '{count} மில்லிவிநாடிக்கு'
-                dual: '{count} மில்லிவிநாடிகளுக்கு'
-                paucal: '{count} மில்லிவிநாடிகளுக்கு'
-                plural: '{count} மில்லிவிநாடிகளுக்கு'
-          second:
-            single:
-              numeric: '1 விநாடிக்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} விநாடிகளுக்கு'
-                singular: '{count} விநாடிக்கு'
-                dual: '{count} விநாடிகளுக்கு'
-                paucal: '{count} விநாடிகளுக்கு'
-                plural: '{count} விநாடிகளுக்கு'
-          minute:
-            single:
-              numeric: '1 நிமிடத்திற்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} நிமிடங்களுக்கு'
-                singular: '{count} நிமிடத்திற்கு'
-                dual: '{count} நிமிடங்களுக்கு'
-                paucal: '{count} நிமிடங்களுக்கு'
-                plural: '{count} நிமிடங்களுக்கு'
-          hour:
-            single:
-              numeric: '1 மணிநேரத்திற்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மணிநேரத்திற்கு'
-                singular: '{count} மணிநேரத்திற்கு'
-                dual: '{count} மணிநேரத்திற்கு'
-                paucal: '{count} மணிநேரத்திற்கு'
-                plural: '{count} மணிநேரத்திற்கு'
-          day:
-            single:
-              numeric: '1 நாளுக்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} நாட்களுக்கு'
-                singular: '{count} நாளுக்கு'
-                dual: '{count} நாட்களுக்கு'
-                paucal: '{count} நாட்களுக்கு'
-                plural: '{count} நாட்களுக்கு'
-          week:
-            single:
-              numeric: '1 வாரத்திற்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} வாரங்களுக்கு'
-                singular: '{count} வாரத்திற்கு'
-                dual: '{count} வாரங்களுக்கு'
-                paucal: '{count} வாரங்களுக்கு'
-                plural: '{count} வாரங்களுக்கு'
-          month:
-            single:
-              numeric: '1 மாதத்திற்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மாதங்களுக்கு'
-                singular: '{count} மாதத்திற்கு'
-                dual: '{count} மாதங்களுக்கு'
-                paucal: '{count} மாதங்களுக்கு'
-                plural: '{count} மாதங்களுக்கு'
-          year:
-            single:
-              numeric: '1 ஆண்டுக்கு'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ஆண்டுகளுக்கு'
-                singular: '{count} ஆண்டுக்கு'
-                dual: '{count} ஆண்டுகளுக்கு'
-                paucal: '{count} ஆண்டுகளுக்கு'
-                plural: '{count} ஆண்டுகளுக்கு'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 மில்லிவிநாடிக்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மில்லிவிநாடிகளுக்கு'
+                    singular: '{count} மில்லிவிநாடிக்கு'
+                    dual: '{count} மில்லிவிநாடிகளுக்கு'
+                    paucal: '{count} மில்லிவிநாடிகளுக்கு'
+                    plural: '{count} மில்லிவிநாடிகளுக்கு'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 விநாடிக்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} விநாடிகளுக்கு'
+                    singular: '{count} விநாடிக்கு'
+                    dual: '{count} விநாடிகளுக்கு'
+                    paucal: '{count} விநாடிகளுக்கு'
+                    plural: '{count} விநாடிகளுக்கு'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 நிமிடத்திற்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} நிமிடங்களுக்கு'
+                    singular: '{count} நிமிடத்திற்கு'
+                    dual: '{count} நிமிடங்களுக்கு'
+                    paucal: '{count} நிமிடங்களுக்கு'
+                    plural: '{count} நிமிடங்களுக்கு'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 மணிநேரத்திற்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மணிநேரத்திற்கு'
+                    singular: '{count} மணிநேரத்திற்கு'
+                    dual: '{count} மணிநேரத்திற்கு'
+                    paucal: '{count} மணிநேரத்திற்கு'
+                    plural: '{count} மணிநேரத்திற்கு'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 நாளுக்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} நாட்களுக்கு'
+                    singular: '{count} நாளுக்கு'
+                    dual: '{count} நாட்களுக்கு'
+                    paucal: '{count} நாட்களுக்கு'
+                    plural: '{count} நாட்களுக்கு'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 வாரத்திற்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} வாரங்களுக்கு'
+                    singular: '{count} வாரத்திற்கு'
+                    dual: '{count} வாரங்களுக்கு'
+                    paucal: '{count} வாரங்களுக்கு'
+                    plural: '{count} வாரங்களுக்கு'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 மாதத்திற்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மாதங்களுக்கு'
+                    singular: '{count} மாதத்திற்கு'
+                    dual: '{count} மாதங்களுக்கு'
+                    paucal: '{count} மாதங்களுக்கு'
+                    plural: '{count} மாதங்களுக்கு'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ஆண்டுக்கு'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ஆண்டுகளுக்கு'
+                    singular: '{count} ஆண்டுக்கு'
+                    dual: '{count} ஆண்டுகளுக்கு'
+                    paucal: '{count} ஆண்டுகளுக்கு'
+                    plural: '{count} ஆண்டுகளுக்கு'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 மில்லிவிநாடியை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மில்லிவிநாடிகளை'
-                singular: '{count} மில்லிவிநாடியை'
-                dual: '{count} மில்லிவிநாடிகளை'
-                paucal: '{count} மில்லிவிநாடிகளை'
-                plural: '{count} மில்லிவிநாடிகளை'
-          second:
-            single:
-              numeric: '1 விநாடியை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} விநாடிகளை'
-                singular: '{count} விநாடியை'
-                dual: '{count} விநாடிகளை'
-                paucal: '{count} விநாடிகளை'
-                plural: '{count} விநாடிகளை'
-          minute:
-            single:
-              numeric: '1 நிமிடத்தை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} நிமிடங்களை'
-                singular: '{count} நிமிடத்தை'
-                dual: '{count} நிமிடங்களை'
-                paucal: '{count} நிமிடங்களை'
-                plural: '{count} நிமிடங்களை'
-          hour:
-            single:
-              numeric: '1 மணிநேரத்தை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மணிநேரத்தை'
-                singular: '{count} மணிநேரத்தை'
-                dual: '{count} மணிநேரத்தை'
-                paucal: '{count} மணிநேரத்தை'
-                plural: '{count} மணிநேரத்தை'
-          day:
-            single:
-              numeric: 'நாளை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} நாட்களை'
-                singular: 'நாளை'
-                dual: '{count} நாட்களை'
-                paucal: '{count} நாட்களை'
-                plural: '{count} நாட்களை'
-          week:
-            single:
-              numeric: '1 வாரத்தை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} வாரங்களை'
-                singular: '{count} வாரத்தை'
-                dual: '{count} வாரங்களை'
-                paucal: '{count} வாரங்களை'
-                plural: '{count} வாரங்களை'
-          month:
-            single:
-              numeric: '1 மாதத்தை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மாதங்களை'
-                singular: '{count} மாதத்தை'
-                dual: '{count} மாதங்களை'
-                paucal: '{count} மாதங்களை'
-                plural: '{count} மாதங்களை'
-          year:
-            single:
-              numeric: '1 ஆண்டை'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ஆண்டுகளை'
-                singular: '{count} ஆண்டை'
-                dual: '{count} ஆண்டுகளை'
-                paucal: '{count} ஆண்டுகளை'
-                plural: '{count} ஆண்டுகளை'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 மில்லிவிநாடியை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மில்லிவிநாடிகளை'
+                    singular: '{count} மில்லிவிநாடியை'
+                    dual: '{count} மில்லிவிநாடிகளை'
+                    paucal: '{count} மில்லிவிநாடிகளை'
+                    plural: '{count} மில்லிவிநாடிகளை'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 விநாடியை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} விநாடிகளை'
+                    singular: '{count} விநாடியை'
+                    dual: '{count} விநாடிகளை'
+                    paucal: '{count} விநாடிகளை'
+                    plural: '{count} விநாடிகளை'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 நிமிடத்தை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} நிமிடங்களை'
+                    singular: '{count} நிமிடத்தை'
+                    dual: '{count} நிமிடங்களை'
+                    paucal: '{count} நிமிடங்களை'
+                    plural: '{count} நிமிடங்களை'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 மணிநேரத்தை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மணிநேரத்தை'
+                    singular: '{count} மணிநேரத்தை'
+                    dual: '{count} மணிநேரத்தை'
+                    paucal: '{count} மணிநேரத்தை'
+                    plural: '{count} மணிநேரத்தை'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 நாளை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} நாட்களை'
+                    singular: '{count} நாளை'
+                    dual: '{count} நாட்களை'
+                    paucal: '{count} நாட்களை'
+                    plural: '{count} நாட்களை'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 வாரத்தை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} வாரங்களை'
+                    singular: '{count} வாரத்தை'
+                    dual: '{count} வாரங்களை'
+                    paucal: '{count} வாரங்களை'
+                    plural: '{count} வாரங்களை'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 மாதத்தை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மாதங்களை'
+                    singular: '{count} மாதத்தை'
+                    dual: '{count} மாதங்களை'
+                    paucal: '{count} மாதங்களை'
+                    plural: '{count} மாதங்களை'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ஆண்டை'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ஆண்டுகளை'
+                    singular: '{count} ஆண்டை'
+                    dual: '{count} ஆண்டுகளை'
+                    paucal: '{count} ஆண்டுகளை'
+                    plural: '{count} ஆண்டுகளை'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       ablative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 மில்லிவிநாடியில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மில்லிவிநாடிகளில்'
-                singular: '{count} மில்லிவிநாடியில்'
-                dual: '{count} மில்லிவிநாடிகளில்'
-                paucal: '{count} மில்லிவிநாடிகளில்'
-                plural: '{count} மில்லிவிநாடிகளில்'
-          second:
-            single:
-              numeric: '1 விநாடியில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} விநாடிகளில்'
-                singular: '{count} விநாடியில்'
-                dual: '{count} விநாடிகளில்'
-                paucal: '{count} விநாடிகளில்'
-                plural: '{count} விநாடிகளில்'
-          minute:
-            single:
-              numeric: '1 நிமிடத்தில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} நிமிடங்களில்'
-                singular: '{count} நிமிடத்தில்'
-                dual: '{count} நிமிடங்களில்'
-                paucal: '{count} நிமிடங்களில்'
-                plural: '{count} நிமிடங்களில்'
-          hour:
-            single:
-              numeric: '1 மணிநேரத்தில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மணிநேரத்தில்'
-                singular: '{count} மணிநேரத்தில்'
-                dual: '{count} மணிநேரத்தில்'
-                paucal: '{count} மணிநேரத்தில்'
-                plural: '{count} மணிநேரத்தில்'
-          day:
-            single:
-              numeric: '1 நாளில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} நாட்களில்'
-                singular: '{count} நாளில்'
-                dual: '{count} நாட்களில்'
-                paucal: '{count} நாட்களில்'
-                plural: '{count} நாட்களில்'
-          week:
-            single:
-              numeric: '1 வாரத்தில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} வாரங்களில்'
-                singular: '{count} வாரத்தில்'
-                dual: '{count} வாரங்களில்'
-                paucal: '{count} வாரங்களில்'
-                plural: '{count} வாரங்களில்'
-          month:
-            single:
-              numeric: '1 மாதத்தில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} மாதங்களில்'
-                singular: '{count} மாதத்தில்'
-                dual: '{count} மாதங்களில்'
-                paucal: '{count} மாதங்களில்'
-                plural: '{count} மாதங்களில்'
-          year:
-            single:
-              numeric: '1 ஆண்டில்'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ஆண்டுகளில்'
-                singular: '{count} ஆண்டில்'
-                dual: '{count} ஆண்டுகளில்'
-                paucal: '{count} ஆண்டுகளில்'
-                plural: '{count} ஆண்டுகளில்'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 மில்லிவிநாடியில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மில்லிவிநாடிகளில்'
+                    singular: '{count} மில்லிவிநாடியில்'
+                    dual: '{count} மில்லிவிநாடிகளில்'
+                    paucal: '{count} மில்லிவிநாடிகளில்'
+                    plural: '{count} மில்லிவிநாடிகளில்'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 விநாடியில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} விநாடிகளில்'
+                    singular: '{count} விநாடியில்'
+                    dual: '{count} விநாடிகளில்'
+                    paucal: '{count} விநாடிகளில்'
+                    plural: '{count} விநாடிகளில்'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 நிமிடத்தில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} நிமிடங்களில்'
+                    singular: '{count} நிமிடத்தில்'
+                    dual: '{count} நிமிடங்களில்'
+                    paucal: '{count} நிமிடங்களில்'
+                    plural: '{count} நிமிடங்களில்'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 மணிநேரத்தில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மணிநேரத்தில்'
+                    singular: '{count} மணிநேரத்தில்'
+                    dual: '{count} மணிநேரத்தில்'
+                    paucal: '{count} மணிநேரத்தில்'
+                    plural: '{count} மணிநேரத்தில்'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 நாளில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} நாட்களில்'
+                    singular: '{count} நாளில்'
+                    dual: '{count} நாட்களில்'
+                    paucal: '{count} நாட்களில்'
+                    plural: '{count} நாட்களில்'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 வாரத்தில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} வாரங்களில்'
+                    singular: '{count} வாரத்தில்'
+                    dual: '{count} வாரங்களில்'
+                    paucal: '{count} வாரங்களில்'
+                    plural: '{count} வாரங்களில்'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 மாதத்தில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} மாதங்களில்'
+                    singular: '{count} மாதத்தில்'
+                    dual: '{count} மாதங்களில்'
+                    paucal: '{count} மாதங்களில்'
+                    plural: '{count} மாதங்களில்'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ஆண்டில்'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ஆண்டுகளில்'
+                    singular: '{count} ஆண்டில்'
+                    dual: '{count} ஆண்டுகளில்'
+                    paucal: '{count} ஆண்டுகளில்'
+                    plural: '{count} ஆண்டுகளில்'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

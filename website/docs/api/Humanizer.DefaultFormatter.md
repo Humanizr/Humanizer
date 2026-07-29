@@ -3,12 +3,12 @@
 Provides the standard formatter implementation for Humanizer locales\.
 
 ```csharp
-public class DefaultFormatter : Humanizer.IFormatter
+public class DefaultFormatter : Humanizer.IGrammaticalCaseTimeSpanFormatter, Humanizer.IFormatter
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultFormatter
 
-Implements [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter')
+Implements [IGrammaticalCaseTimeSpanFormatter](Humanizer.IGrammaticalCaseTimeSpanFormatter.md 'Humanizer\.IGrammaticalCaseTimeSpanFormatter'), [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter')
 ### Constructors
 
 <a name='Humanizer.DefaultFormatter.DefaultFormatter(string)'></a>
@@ -329,3 +329,27 @@ The localized symbol for [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.Defa
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 If [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeUnitHumanize(Humanizer.TimeUnit).timeUnit 'Humanizer\.DefaultFormatter\.TimeUnitHumanize\(Humanizer\.TimeUnit\)\.timeUnit') is unsupported\.
+### Explicit Interface Implementations
+
+<a name='Humanizer.DefaultFormatter.Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase)'></a>
+
+## Humanizer\.IGrammaticalCaseTimeSpanFormatter\.TimeSpanHumanize\(TimeUnit, int, GrammaticalCase\) Method
+
+```csharp
+string Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, Humanizer.GrammaticalCase grammaticalCase);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultFormatter.Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase).timeUnit'></a>
+
+`timeUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+<a name='Humanizer.DefaultFormatter.Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase).unit'></a>
+
+`unit` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='Humanizer.DefaultFormatter.Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase).grammaticalCase'></a>
+
+`grammaticalCase` [GrammaticalCase](Humanizer.GrammaticalCase.md 'Humanizer\.GrammaticalCase')
+
+Implements [TimeSpanHumanize\(TimeUnit, int, GrammaticalCase\)](Humanizer.IGrammaticalCaseTimeSpanFormatter.md#Humanizer.IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(Humanizer.TimeUnit,int,Humanizer.GrammaticalCase) 'Humanizer\.IGrammaticalCaseTimeSpanFormatter\.TimeSpanHumanize\(Humanizer\.TimeUnit, int, Humanizer\.GrammaticalCase\)')

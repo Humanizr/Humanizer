@@ -5,7 +5,509 @@ surfaces:
     cardinalRule: 'AmharicLike'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - accusative
+      - dative
+      - genitive
+      - locative
+      - ablative
+      - ergative
+      - allative
+    sources:
+      inventory:
+        kind: 'grammar'
+        url: 'https://github.com/UniversalDependencies/docs/blob/44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9/_as/index.md'
+        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9'
+        locator: 'Assamese nominal case inventory'
+        credit: 'Universal Dependencies Assamese contributors'
+      morphology:
+        kind: 'grammar'
+        url: 'https://www.languageinindia.com/feb2019/v19i2feb2019PART2.pdf'
+        revision: 'sha256:8a8e601b3b4d944e0bd818c63f553278cff5005df03e88b56b14b6533bdbd05f'
+        locator: 'pp. 101-102, Assamese case suffixes; terminology differs from UD, which supplies the API labels'
+        credit: 'Palash Das, Madhumita Barbora, and Utpal Sharma'
+      nativeUsage:
+        kind: 'corpus'
+        url: 'https://www.aiimsguwahati.ac.in/uploads/publications/AMFE.pdf'
+        revision: 'sha256:1693320408e13e5b40b239b69e40c00f36582433b1cc6e2cf1ef641d1e16e148'
+        locator: 'Assamese medical phrase “কিমান দিনৰ পৰা জ্বৰ আছে?” attesting spaced genitive + পৰা'
+        credit: 'All India Institute of Medical Sciences Guwahati'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      accusative:
+        sameRenderedAs: 'dative'
+        provenance:
+          - 'inventory'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'এক মিলিছেকেণ্ডক'
+                multiple:
+                  forms: '{count} মিলিছেকেণ্ডক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: 'এক ছেকেণ্ডক'
+                multiple:
+                  forms: '{count} ছেকেণ্ডক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: 'এক মিনিটক'
+                multiple:
+                  forms: '{count} মিনিটক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: 'এক ঘণ্টাক'
+                multiple:
+                  forms: '{count} ঘণ্টাক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: 'এক দিনক'
+                multiple:
+                  forms: '{count} দিনক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: 'এক সপ্তাহক'
+                multiple:
+                  forms: '{count} সপ্তাহক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: 'এক মাহক'
+                multiple:
+                  forms: '{count} মাহক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: 'এক বছৰক'
+                multiple:
+                  forms: '{count} বছৰক'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'এক মিলিছেকেণ্ডৰ'
+                multiple:
+                  forms: '{count} মিলিছেকেণ্ডৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: 'এক ছেকেণ্ডৰ'
+                multiple:
+                  forms: '{count} ছেকেণ্ডৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: 'এক মিনিটৰ'
+                multiple:
+                  forms: '{count} মিনিটৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: 'এক ঘণ্টাৰ'
+                multiple:
+                  forms: '{count} ঘণ্টাৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: 'এক দিনৰ'
+                multiple:
+                  forms: '{count} দিনৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: 'এক সপ্তাহৰ'
+                multiple:
+                  forms: '{count} সপ্তাহৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: 'এক মাহৰ'
+                multiple:
+                  forms: '{count} মাহৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: 'এক বছৰৰ'
+                multiple:
+                  forms: '{count} বছৰৰ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'এক মিলিছেকেণ্ডত'
+                multiple:
+                  forms: '{count} মিলিছেকেণ্ডত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: 'এক ছেকেণ্ডত'
+                multiple:
+                  forms: '{count} ছেকেণ্ডত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: 'এক মিনিটত'
+                multiple:
+                  forms: '{count} মিনিটত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: 'এক ঘণ্টাত'
+                multiple:
+                  forms: '{count} ঘণ্টাত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: 'এক দিনত'
+                multiple:
+                  forms: '{count} দিনত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: 'এক সপ্তাহত'
+                multiple:
+                  forms: '{count} সপ্তাহত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: 'এক মাহত'
+                multiple:
+                  forms: '{count} মাহত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: 'এক বছৰত'
+                multiple:
+                  forms: '{count} বছৰত'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'এক মিলিছেকেণ্ডৰ পৰা'
+                multiple:
+                  forms: '{count} মিলিছেকেণ্ডৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: 'এক ছেকেণ্ডৰ পৰা'
+                multiple:
+                  forms: '{count} ছেকেণ্ডৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: 'এক মিনিটৰ পৰা'
+                multiple:
+                  forms: '{count} মিনিটৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: 'এক ঘণ্টাৰ পৰা'
+                multiple:
+                  forms: '{count} ঘণ্টাৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: 'এক দিনৰ পৰা'
+                multiple:
+                  forms: '{count} দিনৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: 'এক সপ্তাহৰ পৰা'
+                multiple:
+                  forms: '{count} সপ্তাহৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: 'এক মাহৰ পৰা'
+                multiple:
+                  forms: '{count} মাহৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: 'এক বছৰৰ পৰা'
+                multiple:
+                  forms: '{count} বছৰৰ পৰা'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'nativeUsage'
+      ergative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'এক মিলিছেকেণ্ডে'
+                multiple:
+                  forms: '{count} মিলিছেকেণ্ডে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: 'এক ছেকেণ্ডে'
+                multiple:
+                  forms: '{count} ছেকেণ্ডে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: 'এক মিনিটে'
+                multiple:
+                  forms: '{count} মিনিটে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: 'এক ঘণ্টাই'
+                multiple:
+                  forms: '{count} ঘণ্টাই'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: 'এক দিনে'
+                multiple:
+                  forms: '{count} দিনে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: 'এক সপ্তাহে'
+                multiple:
+                  forms: '{count} সপ্তাহে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: 'এক মাহে'
+                multiple:
+                  forms: '{count} মাহে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: 'এক বছৰে'
+                multiple:
+                  forms: '{count} বছৰে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      allative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'এক মিলিছেকেণ্ডলৈ'
+                multiple:
+                  forms: '{count} মিলিছেকেণ্ডলৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: 'এক ছেকেণ্ডলৈ'
+                multiple:
+                  forms: '{count} ছেকেণ্ডলৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: 'এক মিনিটলৈ'
+                multiple:
+                  forms: '{count} মিনিটলৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: 'এক ঘণ্টালৈ'
+                multiple:
+                  forms: '{count} ঘণ্টালৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: 'এক দিনলৈ'
+                multiple:
+                  forms: '{count} দিনলৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: 'এক সপ্তাহলৈ'
+                multiple:
+                  forms: '{count} সপ্তাহলৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: 'এক মাহলৈ'
+                multiple:
+                  forms: '{count} মাহলৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: 'এক বছৰলৈ'
+                multiple:
+                  forms: '{count} বছৰলৈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+          - 'morphology'
 
   list:
     engine: 'conjunction'

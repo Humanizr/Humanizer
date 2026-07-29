@@ -3,12 +3,12 @@
 The default strategy for converting [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') values into human\-readable text\.
 
 ```csharp
-public class DefaultTimeSpanHumanizeStrategy : Humanizer.ITimeSpanHumanizeStrategy
+public class DefaultTimeSpanHumanizeStrategy : Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy, Humanizer.ITimeSpanHumanizeStrategy
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultTimeSpanHumanizeStrategy
 
-Implements [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy')
+Implements [IGrammaticalCaseTimeSpanHumanizeStrategy](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy'), [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy')
 ### Methods
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool)'></a>
@@ -150,3 +150,51 @@ Whether time units are rendered as symbols\.
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The human\-readable time span\.
+### Explicit Interface Implementations
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase)'></a>
+
+## Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\) Method
+
+```csharp
+string Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toSymbols, Humanizer.GrammaticalCase grammaticalCase);
+```
+#### Parameters
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).countEmptyUnits'></a>
+
+`countEmptyUnits` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).minUnit'></a>
+
+`minUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).toSymbols'></a>
+
+`toSymbols` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+<a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase).grammaticalCase'></a>
+
+`grammaticalCase` [GrammaticalCase](Humanizer.GrammaticalCase.md 'Humanizer\.GrammaticalCase')
+
+Implements [Humanize\(TimeSpan, int, bool, CultureInfo, TimeUnit, TimeUnit, string, bool, GrammaticalCase\)](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md#Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,Humanizer.GrammaticalCase) 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy\.Humanize\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, Humanizer\.TimeUnit, string, bool, Humanizer\.GrammaticalCase\)')

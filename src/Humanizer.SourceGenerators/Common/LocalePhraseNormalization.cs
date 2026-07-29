@@ -187,7 +187,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var mapping = ExpectMapping(value, path);
-            RejectUnknownKeys(mapping, path, ["forms", "default", "singular", "dual", "paucal", "plural", "symbol", "template"]);
+            RejectUnknownKeys(mapping, path, ["forms", "default", "zero", "singular", "dual", "paucal", "plural", "many", "symbol", "template"]);
 
             var forms = ParseOptionalPhraseForms(mapping, path);
             var symbol = GetOptionalLiteral(mapping, "symbol", $"{path}.symbol");
@@ -223,7 +223,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var mapping = ExpectMapping(value, path);
-            RejectUnknownKeys(mapping, path, ["forms", "default", "singular", "dual", "paucal", "plural", "symbol", "template"]);
+            RejectUnknownKeys(mapping, path, ["forms", "default", "zero", "singular", "dual", "paucal", "plural", "many", "symbol", "template"]);
 
             var forms = ParseOptionalPhraseForms(mapping, path);
             var symbol = GetOptionalLiteral(mapping, "symbol", $"{path}.symbol");
@@ -250,7 +250,7 @@ public sealed partial class HumanizerSourceGenerator
             RejectUnknownKeys(
                 mapping,
                 path,
-                ["forms", "default", "singular", "dual", "paucal", "plural", "template", "countPlacement", "beforeCount", "afterCount", .. allowedExtraKeys]);
+                ["forms", "default", "zero", "singular", "dual", "paucal", "plural", "many", "template", "countPlacement", "beforeCount", "afterCount", .. allowedExtraKeys]);
             var countPlacement = ParseCountPlacement(mapping, path);
             var formPlaceholders = countPlacement == CountPlacement.None
                 ? ["count", "prep"]
@@ -317,7 +317,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var mapping = ExpectMapping(value, path);
-            RejectUnknownKeys(mapping, path, ["default", "singular", "dual", "paucal", "plural"]);
+            RejectUnknownKeys(mapping, path, ["default", "zero", "singular", "dual", "paucal", "plural", "many"]);
             if (!TryParseDirectPhraseForms(mapping, path, out var forms, allowedPlaceholders))
             {
                 throw new InvalidOperationException($"Phrase forms '{path}' must define at least one form.");
@@ -329,19 +329,21 @@ public sealed partial class HumanizerSourceGenerator
         static bool TryParseDirectPhraseForms(SimpleYamlMapping mapping, string path, out PhraseForms forms, params string[] allowedPlaceholders)
         {
             var defaultValue = GetOptionalLiteral(mapping, "default", $"{path}.default", allowedPlaceholders);
+            var zero = GetOptionalLiteral(mapping, "zero", $"{path}.zero", allowedPlaceholders);
             var singular = GetOptionalLiteral(mapping, "singular", $"{path}.singular", allowedPlaceholders);
             var dual = GetOptionalLiteral(mapping, "dual", $"{path}.dual", allowedPlaceholders);
             var paucal = GetOptionalLiteral(mapping, "paucal", $"{path}.paucal", allowedPlaceholders);
             var plural = GetOptionalLiteral(mapping, "plural", $"{path}.plural", allowedPlaceholders);
+            var many = GetOptionalLiteral(mapping, "many", $"{path}.many", allowedPlaceholders);
 
-            defaultValue ??= singular ?? dual ?? paucal ?? plural;
+            defaultValue ??= zero ?? singular ?? dual ?? paucal ?? plural ?? many;
             if (defaultValue is null)
             {
                 forms = null!;
                 return false;
             }
 
-            forms = new PhraseForms(defaultValue, singular, dual, paucal, plural);
+            forms = new PhraseForms(defaultValue, zero, singular, dual, paucal, plural, many);
             return true;
         }
 

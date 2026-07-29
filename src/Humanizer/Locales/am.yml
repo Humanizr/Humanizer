@@ -6,25 +6,59 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'accusative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/am.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            sameAsNominative: true
-          second:
-            sameAsNominative: true
-          minute:
-            sameAsNominative: true
-          hour:
-            sameAsNominative: true
-          day:
-            sameAsNominative: true
-          week:
-            sameAsNominative: true
-          month:
-            sameAsNominative: true
-          year:
-            sameAsNominative: true
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            second:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            minute:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            hour:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            month:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            year:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

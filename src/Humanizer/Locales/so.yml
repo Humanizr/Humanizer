@@ -5,7 +5,51 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'absolutive'
+    inventory:
+      - absolutive
+      - nominative
+      - genitive
+      - vocative
+    sources:
+      inventory:
+        kind: 'grammar'
+        url: 'https://orthographyclearinghouse.org/theses/mohamedAnOverviewtheInterfacebetweenAspectsofSomaliPhonologyandMorphology.pdf'
+        revision: 'sha256:bcb9043a0e2a8c2549a9ea0e105ec6d70eaf55c70c38cd8a4e21da5d28abfa9c'
+        locator: 'pp. 36-37, 54-55, and 140'
+        credit: 'Ahmed Mohamed, St. Cloud State University'
+      nilsson:
+        kind: 'grammar'
+        url: 'https://morgannilsson.se/ppt/2017-10-17-Moskva.pdf'
+        revision: 'Morgan Nilsson, Does tone mark case in Somali?, 2017'
+        locator: 'pp. 5-16: clause-final subject case and associative N2 genitive'
+        credit: 'Morgan Nilsson'
+      green:
+        kind: 'grammar'
+        url: 'https://dokumen.pub/somali-grammar-9781501503610-9781501511653-9781501521409.html'
+        revision: 'Somali Grammar, ISBN 9781501503610'
+        locator: 'sections 9.2 and 9.5: declension-specific subject and associative morphology'
+        credit: 'Christopher R. Green'
+    cases:
+      absolutive:
+        authored: 'base-duration'
+        provenance:
+          - inventory
+      nominative:
+        notApplicable: 'Somali subject-case realization depends on clause-final position, information structure, and lexeme declension, none of which is present in a standalone numeric bare-duration phrase.'
+        provenance:
+          - nilsson
+          - green
+      genitive:
+        notApplicable: 'Somali genitive is the second member of an associative construction and has no context-free standalone numeric bare-duration realization.'
+        provenance:
+          - nilsson
+          - green
+      vocative:
+        notApplicable: 'Somali vocative morphology is direct-address morphology and does not apply to a bare quantitative duration.'
+        provenance:
+          - inventory
 
   list:
     engine: 'conjunction'

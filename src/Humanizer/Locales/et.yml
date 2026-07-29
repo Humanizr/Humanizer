@@ -5,7 +5,1210 @@ surfaces:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'partitive'
+      - 'additive'
+      - 'illative'
+      - 'inessive'
+      - 'elative'
+      - 'allative'
+      - 'adessive'
+      - 'ablative'
+      - 'translative'
+      - 'terminative'
+      - 'essive'
+      - 'abessive'
+      - 'comitative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://arhiiv.eki.ee/books/ekk09/index.php?link=M_53'
+        revision: 'EKK-2009'
+        locator: 'Estonian nominal case paradigms and Additive productivity'
+        credit: 'Institute of the Estonian Language'
+      corpus:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Estonian-EDT/tree/594d1c3902783812d383227e640c0ae782798efd'
+        revision: '594d1c3902783812d383227e640c0ae782798efd'
+        locator: 'duration-unit case forms'
+        credit: 'Universal Dependencies Estonian EDT contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundi'
+                multiple:
+                  forms: '{count} millisekundi'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundi'
+                multiple:
+                  forms: '{count} sekundi'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuti'
+                multiple:
+                  forms: '{count} minuti'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunni'
+                multiple:
+                  forms: '{count} tunni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päeva'
+                multiple:
+                  forms: '{count} päeva'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädala'
+                multiple:
+                  forms: '{count} nädala'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuu'
+                multiple:
+                  forms: '{count} kuu'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aasta'
+                multiple:
+                  forms: '{count} aasta'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      partitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundit'
+                multiple:
+                  forms: '{count} millisekundit'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundit'
+                multiple:
+                  forms: '{count} sekundit'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutit'
+                multiple:
+                  forms: '{count} minutit'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tundi'
+                multiple:
+                  forms: '{count} tundi'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päeva'
+                multiple:
+                  forms: '{count} päeva'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalat'
+                multiple:
+                  forms: '{count} nädalat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuud'
+                multiple:
+                  forms: '{count} kuud'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastat'
+                multiple:
+                  forms: '{count} aastat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      additive:
+        authored:
+          units:
+            millisecond:
+              notApplicable: 'This lexeme has no productive Estonian short illative (Additive) form.'
+              provenance:
+                - 'grammar'
+            second:
+              notApplicable: 'This lexeme has no productive Estonian short illative (Additive) form.'
+              provenance:
+                - 'grammar'
+            minute:
+              notApplicable: 'This lexeme has no productive Estonian short illative (Additive) form.'
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tundi'
+                multiple:
+                  forms: '{count} tundi'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päeva'
+                multiple:
+                  forms: '{count} päeva'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              notApplicable: 'This lexeme has no productive Estonian short illative (Additive) form.'
+              provenance:
+                - 'grammar'
+            month:
+              notApplicable: 'This lexeme has no productive Estonian short illative (Additive) form.'
+              provenance:
+                - 'grammar'
+            year:
+              notApplicable: 'This lexeme has no productive Estonian short illative (Additive) form.'
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      illative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundisse'
+                multiple:
+                  forms: '{count} millisekundisse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundisse'
+                multiple:
+                  forms: '{count} sekundisse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutisse'
+                multiple:
+                  forms: '{count} minutisse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnisse'
+                multiple:
+                  forms: '{count} tunnisse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevasse'
+                multiple:
+                  forms: '{count} päevasse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalasse'
+                multiple:
+                  forms: '{count} nädalasse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuusse'
+                multiple:
+                  forms: '{count} kuusse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastasse'
+                multiple:
+                  forms: '{count} aastasse'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      inessive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundis'
+                multiple:
+                  forms: '{count} millisekundis'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundis'
+                multiple:
+                  forms: '{count} sekundis'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutis'
+                multiple:
+                  forms: '{count} minutis'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnis'
+                multiple:
+                  forms: '{count} tunnis'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevas'
+                multiple:
+                  forms: '{count} päevas'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalas'
+                multiple:
+                  forms: '{count} nädalas'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuus'
+                multiple:
+                  forms: '{count} kuus'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastas'
+                multiple:
+                  forms: '{count} aastas'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      elative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundist'
+                multiple:
+                  forms: '{count} millisekundist'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundist'
+                multiple:
+                  forms: '{count} sekundist'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutist'
+                multiple:
+                  forms: '{count} minutist'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnist'
+                multiple:
+                  forms: '{count} tunnist'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevast'
+                multiple:
+                  forms: '{count} päevast'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalast'
+                multiple:
+                  forms: '{count} nädalast'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuust'
+                multiple:
+                  forms: '{count} kuust'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastast'
+                multiple:
+                  forms: '{count} aastast'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      allative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundile'
+                multiple:
+                  forms: '{count} millisekundile'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundile'
+                multiple:
+                  forms: '{count} sekundile'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutile'
+                multiple:
+                  forms: '{count} minutile'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnile'
+                multiple:
+                  forms: '{count} tunnile'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevale'
+                multiple:
+                  forms: '{count} päevale'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalale'
+                multiple:
+                  forms: '{count} nädalale'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuule'
+                multiple:
+                  forms: '{count} kuule'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastale'
+                multiple:
+                  forms: '{count} aastale'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      adessive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundil'
+                multiple:
+                  forms: '{count} millisekundil'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundil'
+                multiple:
+                  forms: '{count} sekundil'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutil'
+                multiple:
+                  forms: '{count} minutil'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnil'
+                multiple:
+                  forms: '{count} tunnil'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päeval'
+                multiple:
+                  forms: '{count} päeval'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalal'
+                multiple:
+                  forms: '{count} nädalal'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuul'
+                multiple:
+                  forms: '{count} kuul'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastal'
+                multiple:
+                  forms: '{count} aastal'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundilt'
+                multiple:
+                  forms: '{count} millisekundilt'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundilt'
+                multiple:
+                  forms: '{count} sekundilt'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutilt'
+                multiple:
+                  forms: '{count} minutilt'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnilt'
+                multiple:
+                  forms: '{count} tunnilt'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevalt'
+                multiple:
+                  forms: '{count} päevalt'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalalt'
+                multiple:
+                  forms: '{count} nädalalt'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuult'
+                multiple:
+                  forms: '{count} kuult'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastalt'
+                multiple:
+                  forms: '{count} aastalt'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      translative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundiks'
+                multiple:
+                  forms: '{count} millisekundiks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundiks'
+                multiple:
+                  forms: '{count} sekundiks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutiks'
+                multiple:
+                  forms: '{count} minutiks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunniks'
+                multiple:
+                  forms: '{count} tunniks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevaks'
+                multiple:
+                  forms: '{count} päevaks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalaks'
+                multiple:
+                  forms: '{count} nädalaks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuuks'
+                multiple:
+                  forms: '{count} kuuks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastaks'
+                multiple:
+                  forms: '{count} aastaks'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      terminative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundini'
+                multiple:
+                  forms: '{count} millisekundini'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundini'
+                multiple:
+                  forms: '{count} sekundini'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutini'
+                multiple:
+                  forms: '{count} minutini'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnini'
+                multiple:
+                  forms: '{count} tunnini'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevani'
+                multiple:
+                  forms: '{count} päevani'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalani'
+                multiple:
+                  forms: '{count} nädalani'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuuni'
+                multiple:
+                  forms: '{count} kuuni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastani'
+                multiple:
+                  forms: '{count} aastani'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      essive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundina'
+                multiple:
+                  forms: '{count} millisekundina'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundina'
+                multiple:
+                  forms: '{count} sekundina'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutina'
+                multiple:
+                  forms: '{count} minutina'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnina'
+                multiple:
+                  forms: '{count} tunnina'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevana'
+                multiple:
+                  forms: '{count} päevana'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalana'
+                multiple:
+                  forms: '{count} nädalana'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuuna'
+                multiple:
+                  forms: '{count} kuuna'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastana'
+                multiple:
+                  forms: '{count} aastana'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      abessive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundita'
+                multiple:
+                  forms: '{count} millisekundita'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundita'
+                multiple:
+                  forms: '{count} sekundita'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutita'
+                multiple:
+                  forms: '{count} minutita'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunnita'
+                multiple:
+                  forms: '{count} tunnita'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevata'
+                multiple:
+                  forms: '{count} päevata'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalata'
+                multiple:
+                  forms: '{count} nädalata'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuuta'
+                multiple:
+                  forms: '{count} kuuta'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastata'
+                multiple:
+                  forms: '{count} aastata'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
+      comitative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundiga'
+                multiple:
+                  forms: '{count} millisekundiga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundiga'
+                multiple:
+                  forms: '{count} sekundiga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutiga'
+                multiple:
+                  forms: '{count} minutiga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 tunniga'
+                multiple:
+                  forms: '{count} tunniga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 päevaga'
+                multiple:
+                  forms: '{count} päevaga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 nädalaga'
+                multiple:
+                  forms: '{count} nädalaga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 kuuga'
+                multiple:
+                  forms: '{count} kuuga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 aastaga'
+                multiple:
+                  forms: '{count} aastaga'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+                - 'corpus'
+        provenance:
+          - 'grammar'
+          - 'corpus'
 
   list:
     engine: 'conjunction'

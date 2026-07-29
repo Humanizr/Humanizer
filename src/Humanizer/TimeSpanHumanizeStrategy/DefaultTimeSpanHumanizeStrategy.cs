@@ -70,8 +70,15 @@ public class DefaultTimeSpanHumanizeStrategy : IGrammaticalCaseTimeSpanHumanizeS
         TimeUnit minUnit,
         string? collectionSeparator,
         bool toSymbols,
-        GrammaticalCase grammaticalCase) =>
-        TimeSpanHumanizeExtensions.DefaultHumanize(
+        GrammaticalCase grammaticalCase)
+    {
+        if (GetType().Assembly != typeof(DefaultTimeSpanHumanizeStrategy).Assembly)
+        {
+            throw new NotSupportedException(
+                $"Custom strategy type '{GetType().FullName}' must explicitly implement {nameof(IGrammaticalCaseTimeSpanHumanizeStrategy)} to support grammatical-case-aware durations.");
+        }
+
+        return TimeSpanHumanizeExtensions.DefaultHumanizeWithCase(
             timeSpan,
             precision,
             countEmptyUnits,
@@ -81,4 +88,5 @@ public class DefaultTimeSpanHumanizeStrategy : IGrammaticalCaseTimeSpanHumanizeS
             collectionSeparator,
             toSymbols,
             grammaticalCase);
+    }
 }

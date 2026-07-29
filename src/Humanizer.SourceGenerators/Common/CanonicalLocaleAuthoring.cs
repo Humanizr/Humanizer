@@ -147,6 +147,7 @@ public sealed partial class HumanizerSourceGenerator
                         foreach (var propertyName in new[]
                         {
                             "pluralRule",
+                            "casePluralRule",
                             "dataUnitPluralRule",
                             "dataUnitNonIntegralForm",
                             "prepositionMode",

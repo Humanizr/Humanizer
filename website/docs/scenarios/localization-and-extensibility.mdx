@@ -67,8 +67,9 @@ continue to use `ITimeSpanHumanizeStrategy` and `IFormatter` unchanged.
 
 The case-aware formatter receives the duration unit, numeric count, and
 grammatical case. It returns a complete locale-authored unit-case phrase:
-singular output may contain a localized one-word or article, while multiple
-counts remain numeric. It must not add a preposition. Install custom
+singular output may contain a localized one-word or article, while a counted
+form may render the count explicitly or encode it in the unit form. It must
+not add a preposition. Install custom
 strategies and formatters during startup, before registry resolution freezes.
 
 ## Pitfall

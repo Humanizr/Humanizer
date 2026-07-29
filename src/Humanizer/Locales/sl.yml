@@ -6,448 +6,714 @@ surfaces:
     disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'locative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/sl.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
     cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunda'
+                  words: 'ena milisekunda'
+                multiple:
+                  forms:
+                    default: 'milisekund'
+                    singular: 'milisekundi'
+                    dual: 'milisekundi'
+                    paucal: 'milisekunde'
+                    plural: 'milisekundi'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunda'
+                  words: 'ena sekunda'
+                multiple:
+                  forms:
+                    default: 'sekund'
+                    singular: 'sekundi'
+                    dual: 'sekundi'
+                    paucal: 'sekunde'
+                    plural: 'sekundi'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuta'
+                  words: 'ena minuta'
+                multiple:
+                  forms:
+                    default: 'minut'
+                    singular: 'minuti'
+                    dual: 'minuti'
+                    paucal: 'minute'
+                    plural: 'minuti'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ura'
+                  words: 'ena ura'
+                multiple:
+                  forms:
+                    default: 'ur'
+                    singular: 'uri'
+                    dual: 'uri'
+                    paucal: 'ure'
+                    plural: 'uri'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dan'
+                  words: 'en dan'
+                multiple:
+                  forms:
+                    default: 'dni'
+                    singular: 'dneva'
+                    dual: 'dneva'
+                    plural: 'dneva'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 teden'
+                  words: 'en teden'
+                multiple:
+                  forms:
+                    default: 'tednov'
+                    singular: 'tedna'
+                    dual: 'tedna'
+                    paucal: 'tedne'
+                    plural: 'tedna'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mesec'
+                  words: 'en mesec'
+                multiple:
+                  forms:
+                    default: 'mesecev'
+                    singular: 'meseca'
+                    dual: 'meseca'
+                    paucal: 'mesece'
+                    plural: 'meseca'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 leto'
+                  words: 'eno leto'
+                multiple:
+                  forms:
+                    default: 'let'
+                    singular: 'leti'
+                    dual: 'leti'
+                    paucal: 'leta'
+                    plural: 'leti'
+
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       genitive:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekunde'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekund'
-                singular: '{count} milisekunde'
-                dual: '{count} milisekund'
-                paucal: '{count} milisekund'
-                plural: '{count} milisekund'
-          second:
-            single:
-              numeric: '1 sekunde'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekund'
-                singular: '{count} sekunde'
-                dual: '{count} sekund'
-                paucal: '{count} sekund'
-                plural: '{count} sekund'
-          minute:
-            single:
-              numeric: '1 minute'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minut'
-                singular: '{count} minute'
-                dual: '{count} minut'
-                paucal: '{count} minut'
-                plural: '{count} minut'
-          hour:
-            single:
-              numeric: '1 ure'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ur'
-                singular: '{count} ure'
-                dual: '{count} ur'
-                paucal: '{count} ur'
-                plural: '{count} ur'
-          day:
-            single:
-              numeric: '1 dneva'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dni'
-                singular: '{count} dneva'
-                dual: '{count} dni'
-                paucal: '{count} dni'
-                plural: '{count} dni'
-          week:
-            single:
-              numeric: '1 tedna'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} tednov'
-                singular: '{count} tedna'
-                dual: '{count} tednov'
-                paucal: '{count} tednov'
-                plural: '{count} tednov'
-          month:
-            single:
-              numeric: '1 meseca'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mesecev'
-                singular: '{count} meseca'
-                dual: '{count} mesecev'
-                paucal: '{count} mesecev'
-                plural: '{count} mesecev'
-          year:
-            single:
-              numeric: '1 leta'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} let'
-                singular: '{count} leta'
-                dual: '{count} let'
-                paucal: '{count} let'
-                plural: '{count} let'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekund'
+                    singular: '{count} milisekunde'
+                    dual: '{count} milisekund'
+                    paucal: '{count} milisekund'
+                    plural: '{count} milisekund'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekund'
+                    singular: '{count} sekunde'
+                    dual: '{count} sekund'
+                    paucal: '{count} sekund'
+                    plural: '{count} sekund'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minute'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minut'
+                    singular: '{count} minute'
+                    dual: '{count} minut'
+                    paucal: '{count} minut'
+                    plural: '{count} minut'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ure'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ur'
+                    singular: '{count} ure'
+                    dual: '{count} ur'
+                    paucal: '{count} ur'
+                    plural: '{count} ur'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dneva'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dni'
+                    singular: '{count} dneva'
+                    dual: '{count} dni'
+                    paucal: '{count} dni'
+                    plural: '{count} dni'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 tedna'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} tednov'
+                    singular: '{count} tedna'
+                    dual: '{count} tednov'
+                    paucal: '{count} tednov'
+                    plural: '{count} tednov'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 meseca'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mesecev'
+                    singular: '{count} meseca'
+                    dual: '{count} mesecev'
+                    paucal: '{count} mesecev'
+                    plural: '{count} mesecev'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 leta'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} let'
+                    singular: '{count} leta'
+                    dual: '{count} let'
+                    paucal: '{count} let'
+                    plural: '{count} let'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       dative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundi'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundam'
-                singular: '{count} milisekundi'
-                dual: '{count} milisekundama'
-                paucal: '{count} milisekundam'
-                plural: '{count} milisekundam'
-          second:
-            single:
-              numeric: '1 sekundi'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundam'
-                singular: '{count} sekundi'
-                dual: '{count} sekundama'
-                paucal: '{count} sekundam'
-                plural: '{count} sekundam'
-          minute:
-            single:
-              numeric: '1 minuti'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutam'
-                singular: '{count} minuti'
-                dual: '{count} minutama'
-                paucal: '{count} minutam'
-                plural: '{count} minutam'
-          hour:
-            single:
-              numeric: '1 uri'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} uram'
-                singular: '{count} uri'
-                dual: '{count} urama'
-                paucal: '{count} uram'
-                plural: '{count} uram'
-          day:
-            single:
-              numeric: '1 dnevu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dnem'
-                singular: '{count} dnevu'
-                dual: '{count} dnema'
-                paucal: '{count} dnem'
-                plural: '{count} dnem'
-          week:
-            single:
-              numeric: '1 tednu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} tednom'
-                singular: '{count} tednu'
-                dual: '{count} tednoma'
-                paucal: '{count} tednom'
-                plural: '{count} tednom'
-          month:
-            single:
-              numeric: '1 mesecu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mesecem'
-                singular: '{count} mesecu'
-                dual: '{count} mesecema'
-                paucal: '{count} mesecem'
-                plural: '{count} mesecem'
-          year:
-            single:
-              numeric: '1 letu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} letom'
-                singular: '{count} letu'
-                dual: '{count} letoma'
-                paucal: '{count} letom'
-                plural: '{count} letom'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundam'
+                    singular: '{count} milisekundi'
+                    dual: '{count} milisekundama'
+                    paucal: '{count} milisekundam'
+                    plural: '{count} milisekundam'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundam'
+                    singular: '{count} sekundi'
+                    dual: '{count} sekundama'
+                    paucal: '{count} sekundam'
+                    plural: '{count} sekundam'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuti'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutam'
+                    singular: '{count} minuti'
+                    dual: '{count} minutama'
+                    paucal: '{count} minutam'
+                    plural: '{count} minutam'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 uri'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} uram'
+                    singular: '{count} uri'
+                    dual: '{count} urama'
+                    paucal: '{count} uram'
+                    plural: '{count} uram'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dnevu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dnem'
+                    singular: '{count} dnevu'
+                    dual: '{count} dnema'
+                    paucal: '{count} dnem'
+                    plural: '{count} dnem'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 tednu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} tednom'
+                    singular: '{count} tednu'
+                    dual: '{count} tednoma'
+                    paucal: '{count} tednom'
+                    plural: '{count} tednom'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mesecu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mesecem'
+                    singular: '{count} mesecu'
+                    dual: '{count} mesecema'
+                    paucal: '{count} mesecem'
+                    plural: '{count} mesecem'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 letu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} letom'
+                    singular: '{count} letu'
+                    dual: '{count} letoma'
+                    paucal: '{count} letom'
+                    plural: '{count} letom'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       accusative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundo'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekund'
-                singular: '{count} milisekundo'
-                dual: '{count} milisekundi'
-                paucal: '{count} milisekunde'
-                plural: '{count} milisekund'
-          second:
-            single:
-              numeric: '1 sekundo'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekund'
-                singular: '{count} sekundo'
-                dual: '{count} sekundi'
-                paucal: '{count} sekunde'
-                plural: '{count} sekund'
-          minute:
-            single:
-              numeric: '1 minuto'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minut'
-                singular: '{count} minuto'
-                dual: '{count} minuti'
-                paucal: '{count} minute'
-                plural: '{count} minut'
-          hour:
-            single:
-              numeric: '1 uro'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} ur'
-                singular: '{count} uro'
-                dual: '{count} uri'
-                paucal: '{count} ure'
-                plural: '{count} ur'
-          day:
-            sameAsNominative: true
-          week:
-            single:
-              numeric: '1 teden'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} tednov'
-                singular: '{count} teden'
-                dual: '{count} tedna'
-                paucal: '{count} tedne'
-                plural: '{count} tednov'
-          month:
-            single:
-              numeric: '1 mesec'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mesecev'
-                singular: '{count} mesec'
-                dual: '{count} meseca'
-                paucal: '{count} mesece'
-                plural: '{count} mesecev'
-          year:
-            single:
-              numeric: '1 leto'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} let'
-                singular: '{count} leto'
-                dual: '{count} leti'
-                paucal: '{count} leta'
-                plural: '{count} let'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundo'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekund'
+                    singular: '{count} milisekundo'
+                    dual: '{count} milisekundi'
+                    paucal: '{count} milisekunde'
+                    plural: '{count} milisekund'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundo'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekund'
+                    singular: '{count} sekundo'
+                    dual: '{count} sekundi'
+                    paucal: '{count} sekunde'
+                    plural: '{count} sekund'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuto'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minut'
+                    singular: '{count} minuto'
+                    dual: '{count} minuti'
+                    paucal: '{count} minute'
+                    plural: '{count} minut'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 uro'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ur'
+                    singular: '{count} uro'
+                    dual: '{count} uri'
+                    paucal: '{count} ure'
+                    plural: '{count} ur'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 teden'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} tednov'
+                    singular: '{count} teden'
+                    dual: '{count} tedna'
+                    paucal: '{count} tedne'
+                    plural: '{count} tednov'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mesec'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mesecev'
+                    singular: '{count} mesec'
+                    dual: '{count} meseca'
+                    paucal: '{count} mesece'
+                    plural: '{count} mesecev'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 leto'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} let'
+                    singular: '{count} leto'
+                    dual: '{count} leti'
+                    paucal: '{count} leta'
+                    plural: '{count} let'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       instrumental:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundo'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundami'
-                singular: '{count} milisekundo'
-                dual: '{count} milisekundama'
-                paucal: '{count} milisekundami'
-                plural: '{count} milisekundami'
-          second:
-            single:
-              numeric: '1 sekundo'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundami'
-                singular: '{count} sekundo'
-                dual: '{count} sekundama'
-                paucal: '{count} sekundami'
-                plural: '{count} sekundami'
-          minute:
-            single:
-              numeric: '1 minuto'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutami'
-                singular: '{count} minuto'
-                dual: '{count} minutama'
-                paucal: '{count} minutami'
-                plural: '{count} minutami'
-          hour:
-            single:
-              numeric: '1 uro'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} urami'
-                singular: '{count} uro'
-                dual: '{count} urama'
-                paucal: '{count} urami'
-                plural: '{count} urami'
-          day:
-            single:
-              numeric: '1 dnevom'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dnevi'
-                singular: '{count} dnevom'
-                dual: '{count} dnema'
-                paucal: '{count} dnevi'
-                plural: '{count} dnevi'
-          week:
-            single:
-              numeric: '1 tednom'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} tedni'
-                singular: '{count} tednom'
-                dual: '{count} tednoma'
-                paucal: '{count} tedni'
-                plural: '{count} tedni'
-          month:
-            single:
-              numeric: '1 mesecem'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} meseci'
-                singular: '{count} mesecem'
-                dual: '{count} mesecema'
-                paucal: '{count} meseci'
-                plural: '{count} meseci'
-          year:
-            single:
-              numeric: '1 letom'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} leti'
-                singular: '{count} letom'
-                dual: '{count} letoma'
-                paucal: '{count} leti'
-                plural: '{count} leti'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundo'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundami'
+                    singular: '{count} milisekundo'
+                    dual: '{count} milisekundama'
+                    paucal: '{count} milisekundami'
+                    plural: '{count} milisekundami'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundo'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundami'
+                    singular: '{count} sekundo'
+                    dual: '{count} sekundama'
+                    paucal: '{count} sekundami'
+                    plural: '{count} sekundami'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuto'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutami'
+                    singular: '{count} minuto'
+                    dual: '{count} minutama'
+                    paucal: '{count} minutami'
+                    plural: '{count} minutami'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 uro'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} urami'
+                    singular: '{count} uro'
+                    dual: '{count} urama'
+                    paucal: '{count} urami'
+                    plural: '{count} urami'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dnevom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dnevi'
+                    singular: '{count} dnevom'
+                    dual: '{count} dnema'
+                    paucal: '{count} dnevi'
+                    plural: '{count} dnevi'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 tednom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} tedni'
+                    singular: '{count} tednom'
+                    dual: '{count} tednoma'
+                    paucal: '{count} tedni'
+                    plural: '{count} tedni'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mesecem'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} meseci'
+                    singular: '{count} mesecem'
+                    dual: '{count} mesecema'
+                    paucal: '{count} meseci'
+                    plural: '{count} meseci'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 letom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} leti'
+                    singular: '{count} letom'
+                    dual: '{count} letoma'
+                    paucal: '{count} leti'
+                    plural: '{count} leti'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
       locative:
-        units:
-          millisecond:
-            single:
-              numeric: '1 milisekundi'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} milisekundah'
-                singular: '{count} milisekundi'
-                dual: '{count} milisekundah'
-                paucal: '{count} milisekundah'
-                plural: '{count} milisekundah'
-          second:
-            single:
-              numeric: '1 sekundi'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} sekundah'
-                singular: '{count} sekundi'
-                dual: '{count} sekundah'
-                paucal: '{count} sekundah'
-                plural: '{count} sekundah'
-          minute:
-            single:
-              numeric: '1 minuti'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} minutah'
-                singular: '{count} minuti'
-                dual: '{count} minutah'
-                paucal: '{count} minutah'
-                plural: '{count} minutah'
-          hour:
-            single:
-              numeric: '1 uri'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} urah'
-                singular: '{count} uri'
-                dual: '{count} urah'
-                paucal: '{count} urah'
-                plural: '{count} urah'
-          day:
-            single:
-              numeric: '1 dnevu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} dneh'
-                singular: '{count} dnevu'
-                dual: '{count} dneh'
-                paucal: '{count} dneh'
-                plural: '{count} dneh'
-          week:
-            single:
-              numeric: '1 tednu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} tednih'
-                singular: '{count} tednu'
-                dual: '{count} tednih'
-                paucal: '{count} tednih'
-                plural: '{count} tednih'
-          month:
-            single:
-              numeric: '1 mesecu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} mesecih'
-                singular: '{count} mesecu'
-                dual: '{count} mesecih'
-                paucal: '{count} mesecih'
-                plural: '{count} mesecih'
-          year:
-            single:
-              numeric: '1 letu'
-            multiple:
-              countPlacement: none
-              forms:
-                default: '{count} letih'
-                singular: '{count} letu'
-                dual: '{count} letih'
-                paucal: '{count} letih'
-                plural: '{count} letih'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundah'
+                    singular: '{count} milisekundi'
+                    dual: '{count} milisekundah'
+                    paucal: '{count} milisekundah'
+                    plural: '{count} milisekundah'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundah'
+                    singular: '{count} sekundi'
+                    dual: '{count} sekundah'
+                    paucal: '{count} sekundah'
+                    plural: '{count} sekundah'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuti'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutah'
+                    singular: '{count} minuti'
+                    dual: '{count} minutah'
+                    paucal: '{count} minutah'
+                    plural: '{count} minutah'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 uri'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} urah'
+                    singular: '{count} uri'
+                    dual: '{count} urah'
+                    paucal: '{count} urah'
+                    plural: '{count} urah'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dnevu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dneh'
+                    singular: '{count} dnevu'
+                    dual: '{count} dneh'
+                    paucal: '{count} dneh'
+                    plural: '{count} dneh'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 tednu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} tednih'
+                    singular: '{count} tednu'
+                    dual: '{count} tednih'
+                    paucal: '{count} tednih'
+                    plural: '{count} tednih'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mesecu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mesecih'
+                    singular: '{count} mesecu'
+                    dual: '{count} mesecih'
+                    paucal: '{count} mesecih'
+                    plural: '{count} mesecih'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 letu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} letih'
+                    singular: '{count} letu'
+                    dual: '{count} letih'
+                    paucal: '{count} letih'
+                    plural: '{count} letih'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

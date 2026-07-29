@@ -5,7 +5,215 @@ surfaces:
     cardinalRule: 'One'
     disposition: 'selector-only'
   durationCases:
-    classification: 'unsupported'
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'ablative'
+      - 'vocative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://universaldependencies.org/udw20/papers/2020.udw2020-1.20.pdf'
+        revision: '2020'
+        locator: 'Albanian case morphology and genitive linker agreement'
+        credit: 'Universal Dependencies Albanian contributors'
+      corpus:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Albanian-TSA/tree/f9f4cf1be5564b5d50bafe7d4d6234d5552cdfce'
+        revision: 'f9f4cf1be5564b5d50bafe7d4d6234d5552cdfce'
+        locator: 'duration noun dative and ablative forms'
+        credit: 'Universal Dependencies Albanian TSA contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'corpus'
+      genitive:
+        notApplicable: 'A context-free bare duration cannot supply the governor-agreeing Albanian genitive linker.'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekonde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekondave'
+              provenance:
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekonde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekondave'
+              provenance:
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minute'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutave'
+              provenance:
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ore'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} orëve'
+              provenance:
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dite'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ditëve'
+              provenance:
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 jave'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} javëve'
+              provenance:
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 muaji'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} muajve'
+              provenance:
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 viti'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} viteve'
+              provenance:
+                - 'corpus'
+        provenance:
+          - 'corpus'
+      accusative:
+        sameRenderedAs: 'nominative'
+        provenance:
+          - 'corpus'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekonde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekondash'
+              provenance:
+                - 'corpus'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekonde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekondash'
+              provenance:
+                - 'corpus'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minute'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutash'
+              provenance:
+                - 'corpus'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ore'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} orësh'
+              provenance:
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dite'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ditësh'
+              provenance:
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 jave'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} javësh'
+              provenance:
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 muaji'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} muajsh'
+              provenance:
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 viti'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} vjetësh'
+              provenance:
+                - 'corpus'
+        provenance:
+          - 'corpus'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'
