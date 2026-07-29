@@ -5,19 +5,19 @@ using System.Reflection;
 [UseCulture("en")]
 public class ByteSizeUnitSystemLocaleTests
 {
-    static readonly (ByteSizeUnitSystem System, string Symbol, DataUnit DataUnit)[] Units =
+    static readonly (ByteSizeUnitSystem System, string Symbol, DataUnit DataUnit, long Bytes)[] Units =
     [
-        (ByteSizeUnitSystem.DecimalSi, "kB", DataUnit.DecimalKilobyte),
-        (ByteSizeUnitSystem.DecimalSi, "MB", DataUnit.DecimalMegabyte),
-        (ByteSizeUnitSystem.DecimalSi, "GB", DataUnit.DecimalGigabyte),
-        (ByteSizeUnitSystem.DecimalSi, "TB", DataUnit.DecimalTerabyte),
-        (ByteSizeUnitSystem.DecimalSi, "PB", DataUnit.DecimalPetabyte),
-        (ByteSizeUnitSystem.DecimalSi, "EB", DataUnit.DecimalExabyte),
-        (ByteSizeUnitSystem.BinaryIec, "KiB", DataUnit.BinaryKibibyte),
-        (ByteSizeUnitSystem.BinaryIec, "MiB", DataUnit.BinaryMebibyte),
-        (ByteSizeUnitSystem.BinaryIec, "GiB", DataUnit.BinaryGibibyte),
-        (ByteSizeUnitSystem.BinaryIec, "TiB", DataUnit.BinaryTebibyte),
-        (ByteSizeUnitSystem.BinaryIec, "PiB", DataUnit.BinaryPebibyte)
+        (ByteSizeUnitSystem.DecimalSi, "kB", DataUnit.DecimalKilobyte, ByteSize.BytesInDecimalKilobyte),
+        (ByteSizeUnitSystem.DecimalSi, "MB", DataUnit.DecimalMegabyte, ByteSize.BytesInDecimalMegabyte),
+        (ByteSizeUnitSystem.DecimalSi, "GB", DataUnit.DecimalGigabyte, ByteSize.BytesInDecimalGigabyte),
+        (ByteSizeUnitSystem.DecimalSi, "TB", DataUnit.DecimalTerabyte, ByteSize.BytesInDecimalTerabyte),
+        (ByteSizeUnitSystem.DecimalSi, "PB", DataUnit.DecimalPetabyte, ByteSize.BytesInDecimalPetabyte),
+        (ByteSizeUnitSystem.DecimalSi, "EB", DataUnit.DecimalExabyte, ByteSize.BytesInDecimalExabyte),
+        (ByteSizeUnitSystem.BinaryIec, "KiB", DataUnit.BinaryKibibyte, ByteSize.BytesInKibibyte),
+        (ByteSizeUnitSystem.BinaryIec, "MiB", DataUnit.BinaryMebibyte, ByteSize.BytesInMebibyte),
+        (ByteSizeUnitSystem.BinaryIec, "GiB", DataUnit.BinaryGibibyte, ByteSize.BytesInGibibyte),
+        (ByteSizeUnitSystem.BinaryIec, "TiB", DataUnit.BinaryTebibyte, ByteSize.BytesInTebibyte),
+        (ByteSizeUnitSystem.BinaryIec, "PiB", DataUnit.BinaryPebibyte, ByteSize.BytesInPebibyte)
     ];
 
     [Fact]
@@ -77,9 +77,10 @@ public class ByteSizeUnitSystemLocaleTests
 
         void verify(int count, string expected)
         {
-            var dataUnit = Assert.Single(Units, unit => unit.System == unitSystem && unit.Symbol == symbol).DataUnit;
-            var unitWord = Configurator.Formatters.ResolveForCulture(culture).DataUnitHumanize(dataUnit, count, toSymbol: false);
-            Assert.Equal(expected, $"{count} {unitWord}");
+            var unit = Assert.Single(Units, candidate => candidate.System == unitSystem && candidate.Symbol == symbol);
+            var size = ByteSize.FromBytes(count * unit.Bytes);
+
+            Assert.Equal(expected, size.FormatFullWords(unitSystem, $"0 {symbol}", culture));
         }
     }
 
@@ -150,6 +151,59 @@ public class ByteSizeUnitSystemLocaleTests
                 expected,
                 size.FormatFullWords(unitSystem, $"{format} {symbol}", culture));
         }
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, ByteSize.BytesInDecimalKilobyte, "kilobyți")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, ByteSize.BytesInKibibyte, "kibibyți")]
+    public void RomanianExplicitWordCompositesUseDeAtNumericBoundaries(
+        ByteSizeUnitSystem unitSystem,
+        long bytesPerUnit,
+        string unitWord)
+    {
+        var culture = CultureInfo.GetCultureInfo("ro");
+
+        foreach (var (count, usesDe) in new[]
+                 {
+                     (19, false),
+                     (20, true),
+                     (21, true),
+                     (101, false),
+                     (120, true)
+                 })
+        {
+            var size = ByteSize.FromBytes(count * bytesPerUnit);
+            var expected = usesDe
+                ? $"{count} de {unitWord}"
+                : $"{count} {unitWord}";
+
+            Assert.Equal(
+                expected,
+                size.HumanizeCompositeWithUnitSystem(
+                    unitSystem,
+                    precision: 1,
+                    formatProvider: culture,
+                    toWords: true));
+        }
+
+        var multipart = ByteSize.FromBytes(20 * bytesPerUnit + 1);
+        var expectedMultipart = $"20 de {unitWord} 1 byte";
+        Assert.Equal(
+            expectedMultipart,
+            multipart.HumanizeCompositeWithUnitSystem(
+                unitSystem,
+                precision: 2,
+                formatProvider: culture,
+                toWords: true));
+
+        var negativeSign = NumberFormatInfo.GetInstance(culture).NegativeSign;
+        Assert.Equal(
+            negativeSign + expectedMultipart,
+            (-multipart).HumanizeCompositeWithUnitSystem(
+                unitSystem,
+                precision: 2,
+                formatProvider: culture,
+                toWords: true));
     }
 
     [Theory]

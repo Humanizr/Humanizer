@@ -605,6 +605,13 @@ public static class ByteSizeExtensions
         }
 
         var formatter = Configurator.GetFormatter(culture);
+        var builtInFormatter = formatter as DefaultFormatter;
+        if (builtInFormatter is not null &&
+            formatter.GetType().Assembly != typeof(DefaultFormatter).Assembly)
+        {
+            builtInFormatter = null;
+        }
+
         var isNegative = input.Bits < 0;
         var remainingBits = isNegative
             ? (ulong)(-(input.Bits + 1)) + 1
@@ -614,7 +621,7 @@ public static class ByteSizeExtensions
         if (remainingBits == 0)
         {
             return string.Concat("0 ", toWords
-                ? formatter.DataUnitHumanize(DataUnit.Bit, 0, toSymbol: false)
+                ? humanizeUnit(DataUnit.Bit, 0)
                 : ByteSize.BitSymbol);
         }
 
@@ -634,7 +641,7 @@ public static class ByteSizeExtensions
             }
 
             var unitText = toWords
-                ? formatter.DataUnitHumanize(unit.DataUnit, count, toSymbol: false)
+                ? humanizeUnit(unit.DataUnit, count)
                 : unit.Symbol;
             parts.Add(string.Concat(count.ToString(formatProvider), " ", unitText));
             remainingBits %= bitsPerUnit;
@@ -663,9 +670,14 @@ public static class ByteSizeExtensions
             parts.Add(string.Concat(
                 count.ToString(formatProvider),
                 " ",
-                toWords ? formatter.DataUnitHumanize(dataUnit, count, toSymbol: false) : symbol));
+                toWords ? humanizeUnit(dataUnit, count) : symbol));
             remainingBits %= bitsPerUnit;
         }
+
+        string humanizeUnit(DataUnit dataUnit, ulong count) =>
+            builtInFormatter is not null
+                ? builtInFormatter.DataUnitHumanizeExact(dataUnit, count, toSymbol: false)
+                : formatter.DataUnitHumanize(dataUnit, count, toSymbol: false);
     }
 
     static readonly CompositeUnit[] DecimalCompositeUnits =
