@@ -133,6 +133,7 @@
 | [GrammaticalCase](Humanizer.GrammaticalCase.md 'Humanizer\.GrammaticalCase') | Options for specifying the desired grammatical case for the output words |
 | [GrammaticalGender](Humanizer.GrammaticalGender.md 'Humanizer\.GrammaticalGender') | Options for specifying the desired grammatical gender for the output words |
 | [HeadingStyle](Humanizer.HeadingStyle.md 'Humanizer\.HeadingStyle') | Style for the cardinal direction humanization |
+| [IndianScaleStyle](Humanizer.IndianScaleStyle.md 'Humanizer\.IndianScaleStyle') | Selects the large\-number vocabulary used by [ToIndianWords\(this long, IndianScaleStyle\)](Humanizer.NumberToWordsExtension.md#Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle) 'Humanizer\.NumberToWordsExtension\.ToIndianWords\(this long, Humanizer\.IndianScaleStyle\)')\. |
 | [LetterCasing](Humanizer.LetterCasing.md 'Humanizer\.LetterCasing') | Options for specifying the desired letter casing for the output string |
 | [MetricNumeralFormats](Humanizer.MetricNumeralFormats.md 'Humanizer\.MetricNumeralFormats') | Flags for formatting the metric representation of numerals\. |
 | [OnNoMatch](Humanizer.OnNoMatch.md 'Humanizer\.OnNoMatch') | Dictating what should be done when a match is not found \- currently used only for DehumanizeTo |

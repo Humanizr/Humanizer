@@ -11,6 +11,70 @@ public static class NumberToWordsExtension
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → NumberToWordsExtension
 ### Methods
 
+<a name='Humanizer.NumberToWordsExtension.ToIndianWords(thisint,Humanizer.IndianScaleStyle)'></a>
+
+## NumberToWordsExtension\.ToIndianWords\(this int, IndianScaleStyle\) Method
+
+Converts the given value to Indian English cardinal words using the selected large\-number vocabulary\.
+
+```csharp
+public static string ToIndianWords(this int number, Humanizer.IndianScaleStyle scaleStyle=Humanizer.IndianScaleStyle.NamedScales);
+```
+#### Parameters
+
+<a name='Humanizer.NumberToWordsExtension.ToIndianWords(thisint,Humanizer.IndianScaleStyle).number'></a>
+
+`number` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The value to convert\.
+
+<a name='Humanizer.NumberToWordsExtension.ToIndianWords(thisint,Humanizer.IndianScaleStyle).scaleStyle'></a>
+
+`scaleStyle` [IndianScaleStyle](Humanizer.IndianScaleStyle.md 'Humanizer\.IndianScaleStyle')
+
+The Indian large\-number vocabulary to use\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The Indian English cardinal words for [number](Humanizer.NumberToWordsExtension.md#Humanizer.NumberToWordsExtension.ToIndianWords(thisint,Humanizer.IndianScaleStyle).number 'Humanizer\.NumberToWordsExtension\.ToIndianWords\(this int, Humanizer\.IndianScaleStyle\)\.number')\.
+
+<a name='Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle)'></a>
+
+## NumberToWordsExtension\.ToIndianWords\(this long, IndianScaleStyle\) Method
+
+Converts the given value to Indian English cardinal words using the selected large\-number vocabulary\.
+
+```csharp
+public static string ToIndianWords(this long number, Humanizer.IndianScaleStyle scaleStyle=Humanizer.IndianScaleStyle.NamedScales);
+```
+#### Parameters
+
+<a name='Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle).number'></a>
+
+`number` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+The value to convert\.
+
+<a name='Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle).scaleStyle'></a>
+
+`scaleStyle` [IndianScaleStyle](Humanizer.IndianScaleStyle.md 'Humanizer\.IndianScaleStyle')
+
+The Indian large\-number vocabulary to use\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The Indian English cardinal words for [number](Humanizer.NumberToWordsExtension.md#Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle).number 'Humanizer\.NumberToWordsExtension\.ToIndianWords\(this long, Humanizer\.IndianScaleStyle\)\.number')\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[scaleStyle](Humanizer.NumberToWordsExtension.md#Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle).scaleStyle 'Humanizer\.NumberToWordsExtension\.ToIndianWords\(this long, Humanizer\.IndianScaleStyle\)\.scaleStyle') is not a defined value\.
+
+### Remarks
+[NamedScales](Humanizer.IndianScaleStyle.md#Humanizer.IndianScaleStyle.NamedScales 'Humanizer\.IndianScaleStyle\.NamedScales') uses the named\-scale vocabulary of the `en-IN` culture\.
+            [CroreBased](Humanizer.IndianScaleStyle.md#Humanizer.IndianScaleStyle.CroreBased 'Humanizer\.IndianScaleStyle\.CroreBased') uses common crore\-based expressions without changing
+            the configured converter or the behavior of other locales\.
+
 <a name='Humanizer.NumberToWordsExtension.ToOrdinalWords(thisint,Humanizer.GrammaticalGender,Humanizer.WordForm,System.Globalization.CultureInfo)'></a>
 
 ## NumberToWordsExtension\.ToOrdinalWords\(this int, GrammaticalGender, WordForm, CultureInfo\) Method
