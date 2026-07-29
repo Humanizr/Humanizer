@@ -17,6 +17,8 @@ AssertEqual("-9223372036854775808th", long.MinValue.Ordinalize(culture));
 AssertEqual("biljard", 1_000_000_000_000_000L.ToWords(estonian));
 AssertEqual("dy biliarë", 2_000_000_000_000_000L.ToWords(albanian));
 AssertEqual("triljon", 1_000_000_000_000_000_000L.ToWords(estonian));
+AssertNotEmpty(long.MaxValue.ToWords(estonian));
+AssertNotEmpty(long.MinValue.ToWords(estonian));
 AssertEqual("one arab", 1_000_000_000L.ToIndianWords());
 AssertEqual(
     "one hundred crore",
@@ -42,6 +44,12 @@ static void AssertEqual<T>(T expected, T actual)
 {
     if (!EqualityComparer<T>.Default.Equals(actual, expected))
         throw new InvalidOperationException($"Expected '{expected}', got '{actual}'.");
+}
+
+static void AssertNotEmpty(string actual)
+{
+    if (string.IsNullOrWhiteSpace(actual))
+        throw new InvalidOperationException("Expected localized number words.");
 }
 
 static void AssertThrows<TException>(Action action)

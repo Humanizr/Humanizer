@@ -96,8 +96,11 @@ domain policy separately.
 On `main/preview`, every built-in number-word locale supports the full signed
 `long` range. Estonian follows its authored scale names through `triljon`;
 Albanian uses `miliar`, `bilion`, `biliar`, and `trilion`, with their plural
-forms. Custom converters can retain narrower ranges when their profiles do not
-define the required scale words.
+forms. The executable above calls `ToWords` for both `long.MaxValue` and
+`long.MinValue`; supported built-in locales no longer use magnitude ceilings
+or `NotImplementedException` as a partial-coverage boundary. Custom converters
+can retain narrower ranges when their profiles do not define the required
+scale words.
 
 ## Pitfall
 
