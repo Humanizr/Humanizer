@@ -261,13 +261,15 @@ public class FractionalTimeSpanHumanizeTests
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void UnsupportedCultureDoesNotFallBackToEnglish()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void UnsupportedCultureDoesNotFallBackToEnglish(bool toSymbols)
     {
         var formatter = new DefaultFormatter(new CultureInfo("eo"));
 
         var exception = Assert.Throws<InvalidOperationException>(
-            () => formatter.TimeSpanHumanizeWithFractionalSeconds(0.5m, false));
+            () => formatter.TimeSpanHumanizeWithFractionalSeconds(0.5m, toSymbols));
 
         Assert.Contains("fractional-second grammar", exception.Message);
     }

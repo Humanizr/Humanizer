@@ -79,6 +79,12 @@ public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
         var countValue = visibleSeconds.ToString(
             "0.#######",
             LocaleNumberFormattingOverrides.GetFormattingNumberFormat(Culture));
+
+        if (!LocalizedInflectionCatalog.TrySelectCategory(Culture, visibleSeconds, out var category))
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second grammar for '{Culture.Name}'.");
+        }
+
         if (toSymbols)
         {
             return string.Concat(countValue, TimeUnitHumanize(TimeUnit.Second));
@@ -88,11 +94,6 @@ public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
             phrase.Multiple is not { } multiple)
         {
             throw new InvalidOperationException($"Missing generated fractional-second phrase for '{Culture.Name}'.");
-        }
-
-        if (!LocalizedInflectionCatalog.TrySelectCategory(Culture, visibleSeconds, out var category))
-        {
-            throw new InvalidOperationException($"Missing generated fractional-second grammar for '{Culture.Name}'.");
         }
 
         if (visibleSeconds == 1 && phrase.Single is { } single)
