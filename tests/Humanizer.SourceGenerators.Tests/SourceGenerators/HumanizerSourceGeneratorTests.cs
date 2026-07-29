@@ -1811,6 +1811,7 @@ numberToWords:
     unitsMap:
 """,
             StringComparison.Ordinal);
+        Assert.NotEqual(billionLocale, billionAuthoredLocale);
 
         var runResult = RunGenerator(
             new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-variant-defaults.yml", variantLocale),
@@ -1833,10 +1834,14 @@ numberToWords:
         Assert.Contains("case \"zz-inverted-defaults\": return", numberSource);
         Assert.Contains("case \"zz-scale-defaults\": return", numberSource);
         Assert.Contains("case \"zz-billion-defaults\": return", numberSource);
-        Assert.Contains("new BillionStrategyNumberToWordsConverter(new(\"minus\", \"and\", new(\"one hundred\", \"thousand\", \"million\", \"millions\", BillionCardinalStrategy.ThousandMillions, null, null, new BillionStrategyCardinalScale[] { new(1000000UL, \"million\", \"millions\") }, false,", numberSource);
         Assert.Contains("case \"zz-billion-authored\": return", numberSource);
-        Assert.Contains("new BillionStrategyCardinalScale[] { new(1000000000000UL, \"trillion\", \"trillions\") }, true,", numberSource);
         Assert.Contains("case \"zz-joined-defaults\": return", numberSource);
+
+        var defaultBlock = ExtractCacheClassBody(numberSource, "zz_billion_defaults_cache");
+        Assert.Contains("new BillionStrategyCardinalScale[] { new(1000000UL, \"million\", \"millions\") }, false,", defaultBlock);
+
+        var authoredBlock = ExtractCacheClassBody(numberSource, "zz_billion_authored_cache");
+        Assert.Contains("new BillionStrategyCardinalScale[] { new(1000000000000UL, \"trillion\", \"trillions\") }, true,", authoredBlock);
     }
 
     [Fact]

@@ -1302,6 +1302,7 @@ public class CoverageGapTests
         Assert.Equal("millionth-large", converter.ConvertToOrdinal(1_000_000));
         Assert.Equal("twentieth", converter.ConvertToOrdinal(20));
         Assert.Equal("sixth", converter.ConvertToOrdinal(6));
+        Assert.StartsWith("minus ", converter.Convert(long.MinValue));
 
         var invalidCardinal = new ScaleStrategyNumberToWordsConverter(CreateScaleStrategyProfile(
             (ScaleStrategyCardinalMode)42,
@@ -1320,6 +1321,7 @@ public class CoverageGapTests
         Assert.Equal("one-m thousandth-scale", converter.ConvertToOrdinal(1_000));
         Assert.Equal("twentieth", converter.ConvertToOrdinal(20));
         Assert.Equal("twentyfirst", converter.ConvertToOrdinal(21));
+        Assert.StartsWith("minus ", converter.Convert(long.MinValue));
 
         var suffixOrdinal = new ScaleStrategyNumberToWordsConverter(CreateScaleStrategyProfile(
             ScaleStrategyCardinalMode.Swedish,
