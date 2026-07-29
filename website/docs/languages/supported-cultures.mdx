@@ -11,6 +11,9 @@ import coverage from './language-coverage.json';
 
 # Supported cultures
 
+export const supportedCultures =
+  coverage.locales?.map(({locale}) => locale) ?? coverage.cultures ?? [];
+
 ## Orientation
 
 Humanizer 4 treats locale support as all-or-nothing. Every culture listed below
@@ -31,10 +34,10 @@ var culture = CultureInfo.GetCultureInfo("pt-BR");
 Console.WriteLine(123.ToWords(culture));
 ```
 
-<p>This version supports {coverage.locales.length} cultures:</p>
+<p>This version supports {supportedCultures.length} cultures:</p>
 
 <ul className="supportedCultureList" aria-label="Supported cultures">
-  {coverage.locales.map(({locale}) => (
+  {supportedCultures.map((locale) => (
     <li key={locale}><code>{locale}</code></li>
   ))}
 </ul>
