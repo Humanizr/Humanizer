@@ -68,5 +68,6 @@ test('missing deployment history fails closed', () => {
 });
 
 test('release operations have repository context without a checkout', () => {
-  assert.match(workflow, /^env:\n(?:  .+\n)*  GH_REPO: \$\{\{ github\.repository \}\}$/m);
+  const workflowEnv = workflow.replaceAll('\r\n', '\n').match(/^env:\n([\s\S]*?)^\S/m)?.[1];
+  assert.match(workflowEnv, /^  GH_REPO: \$\{\{ github\.repository \}\}$/m);
 });
