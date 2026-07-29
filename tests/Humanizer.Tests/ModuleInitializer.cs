@@ -29,7 +29,7 @@ public static class ModuleInitializer
         public string TimeUnitHumanize(TimeUnit timeUnit) => formatter.TimeUnitHumanize(timeUnit);
     }
 
-    internal sealed class CapturingFractionalFormatter() : DefaultFormatter("en")
+    internal sealed class CapturingFractionalFormatter() : DefaultFormatter("en"), IFractionalTimeSpanFormatter
     {
         public override string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols) =>
             FormattableString.Invariant($"{seconds}|{toSymbols}");

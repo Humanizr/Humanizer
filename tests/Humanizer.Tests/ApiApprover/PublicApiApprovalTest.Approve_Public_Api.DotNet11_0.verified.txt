@@ -312,7 +312,7 @@ namespace Humanizer
         public DefaultDateTimeOffsetHumanizeStrategy() { }
         public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
-    public class DefaultFormatter : Humanizer.IFormatter, Humanizer.IFractionalTimeSpanFormatter
+    public class DefaultFormatter : Humanizer.IFormatter
     {
         public DefaultFormatter(System.Globalization.CultureInfo culture) { }
         public DefaultFormatter(string localeCode) { }

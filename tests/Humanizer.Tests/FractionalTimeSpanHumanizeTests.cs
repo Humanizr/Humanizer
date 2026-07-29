@@ -274,6 +274,31 @@ public class FractionalTimeSpanHumanizeTests
         Assert.Contains("fractional-second grammar", exception.Message);
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void RoundedIntegralUnsupportedCultureDoesNotFallBackToEnglish(bool toSymbols)
+    {
+        var culture = new CultureInfo("eo");
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => toSymbols
+                ? TimeSpan.FromSeconds(1.6).HumanizeToSymbolsWithFractionalSeconds(
+                    1,
+                    0,
+                    MidpointRounding.ToEven,
+                    culture,
+                    TimeUnit.Second)
+                : TimeSpan.FromSeconds(1.6).HumanizeWithFractionalSeconds(
+                    1,
+                    0,
+                    MidpointRounding.ToEven,
+                    culture,
+                    TimeUnit.Second));
+
+        Assert.Contains("fractional-second grammar", exception.Message);
+    }
+
     [Fact]
     public void LegacyFormatterHandlesRoundedIntegralButRejectsFractionalTerminal()
     {
@@ -318,6 +343,15 @@ public class FractionalTimeSpanHumanizeTests
             TimeUnit.Second);
 
         Assert.Equal("derived legacy 2", actual);
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => TimeSpan.FromSeconds(1.5).HumanizeWithFractionalSeconds(
+                1,
+                1,
+                MidpointRounding.ToEven,
+                new("en-MY"),
+                TimeUnit.Second));
+        Assert.Contains(nameof(IFractionalTimeSpanFormatter), exception.Message);
     }
 
     [Fact]

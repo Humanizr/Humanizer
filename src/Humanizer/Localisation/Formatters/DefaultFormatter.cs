@@ -3,7 +3,7 @@ namespace Humanizer;
 /// <summary>
 /// Provides the standard formatter implementation for Humanizer locales.
 /// </summary>
-public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
+public class DefaultFormatter : IFormatter
 {
     static readonly DefaultFormatter EnglishFallback = new(CultureInfo.GetCultureInfo("en"));
     readonly LocalePhraseTable phraseTable;
@@ -80,10 +80,7 @@ public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
             "0.#######",
             LocaleNumberFormattingOverrides.GetFormattingNumberFormat(Culture));
 
-        if (!LocalizedInflectionCatalog.TrySelectCategory(Culture, visibleSeconds, out var category))
-        {
-            throw new InvalidOperationException($"Missing generated fractional-second grammar for '{Culture.Name}'.");
-        }
+        var category = ValidateFractionalSecondGrammar(visibleSeconds, toSymbols);
 
         if (toSymbols)
         {
@@ -107,6 +104,23 @@ public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
             ResolveTimeSpanPhraseForms(multiple.Forms, form),
             countValue,
             GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit.Second, visibleSeconds, false));
+    }
+
+    internal CardinalPluralCategory ValidateFractionalSecondGrammar(decimal seconds, bool toSymbols)
+    {
+        if (!LocalizedInflectionCatalog.TrySelectCategory(Culture, seconds, out var category))
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second grammar for '{Culture.Name}'.");
+        }
+
+        if (!toSymbols &&
+            (!phraseTable.TryGetTimeSpanPhrase(TimeUnit.Second, out var phrase) ||
+             phrase.Multiple is null))
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second phrase for '{Culture.Name}'.");
+        }
+
+        return category;
     }
 
     /// <inheritdoc/>

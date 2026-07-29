@@ -167,7 +167,7 @@ enum FormatterTenseMask
 // Shared formatter kernel used whenever a locale can be expressed as declarative resource-key,
 // suffix, preposition, and gender-selection rules. The generator builds FormatterProfile
 // instances from locale-owned YAML so runtime formatting stays branch-light and parse-free.
-sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : DefaultFormatter(culture)
+sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : DefaultFormatter(culture), IFractionalTimeSpanFormatter
 {
     const char LuxembourgishEifelerSuffix = 'n';
     readonly FormatterProfile profile = profile;

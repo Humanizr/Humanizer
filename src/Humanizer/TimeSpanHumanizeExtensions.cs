@@ -317,6 +317,11 @@ public static class TimeSpanHumanizeExtensions
                 continue;
             }
 
+            if (IsBuiltInFractionalTimeSpanFormatter(formatter))
+            {
+                ((DefaultFormatter)formatter).ValidateFractionalSecondGrammar(part.Value, toSymbols);
+            }
+
             if (decimal.Truncate(part.Value) == part.Value)
             {
                 formattedParts.Add(FormatTimePart(
@@ -326,6 +331,12 @@ public static class TimeSpanHumanizeExtensions
                     culture,
                     false,
                     toSymbols));
+                continue;
+            }
+
+            if (formatter.GetType() == typeof(DefaultFormatter))
+            {
+                formattedParts.Add(((DefaultFormatter)formatter).TimeSpanHumanizeWithFractionalSeconds(part.Value, toSymbols));
                 continue;
             }
 
@@ -342,6 +353,8 @@ public static class TimeSpanHumanizeExtensions
         return ConcatenateTimeSpanParts(formattedParts, culture, collectionSeparator);
     }
 
+    static bool IsBuiltInFractionalTimeSpanFormatter(IFormatter formatter) =>
+        formatter.GetType() == typeof(DefaultFormatter) || formatter is ProfiledFormatter;
     static List<FractionalSecondPart> CreateFractionalSecondParts(
         RoundedTimeSpan roundedTimeSpan,
         int precision,
