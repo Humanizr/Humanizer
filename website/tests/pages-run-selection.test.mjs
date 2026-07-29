@@ -132,6 +132,18 @@ test('rollback is bound to an exact successful run attempt', () => {
   );
   assert.match(
     normalizedWorkflow,
+    /actions\/runs\/\$\{ROLLBACK_RUN_ID\}\/attempts\/\$\{ROLLBACK_RUN_ATTEMPT\}/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /actions\/runs\/\$\{deployment_run_id\}\/attempts\/\$\{deployment_run_attempt\}/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /actions\/runs\/\$\{run_id\}\/attempts\/\$\{run_attempt\}/,
+  );
+  assert.match(
+    normalizedWorkflow,
     /\.archiveRunAttempt == \$archiveRunAttempt/,
   );
   assert.match(

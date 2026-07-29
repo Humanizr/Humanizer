@@ -309,7 +309,7 @@ jobs:
           fi
           source_run="$(
             gh api \
-              "repos/${GITHUB_REPOSITORY}/actions/runs/${ROLLBACK_RUN_ID}" \
+              "repos/${GITHUB_REPOSITORY}/actions/runs/${ROLLBACK_RUN_ID}/attempts/${ROLLBACK_RUN_ATTEMPT}" \
               --jq '[.conclusion, .event, .head_branch, .path, .head_sha, .run_attempt] | @tsv'
           )"
           IFS=$'\t' read -r conclusion event branch path source_sha run_attempt \
@@ -617,7 +617,7 @@ jobs:
               fi
               pointer_run="$(
                 gh api \
-                  "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}" \
+                  "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${deployment_run_attempt}" \
                   --jq '[.conclusion, .event, .head_branch, .path, .run_attempt] | @tsv'
               )"
               if [[ "$pointer_run" != $'success\tpush\tmain\t.github/workflows/docs.yml\t'"$deployment_run_attempt" &&
@@ -627,7 +627,7 @@ jobs:
               fi
               archive_run="$(
                 gh api \
-                  "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" \
+                  "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/attempts/${run_attempt}" \
                   --jq '[.conclusion, .event, .head_branch, .path, .head_sha, .run_attempt] | @tsv'
               )"
               IFS=$'\t' read -r archive_conclusion archive_event \
