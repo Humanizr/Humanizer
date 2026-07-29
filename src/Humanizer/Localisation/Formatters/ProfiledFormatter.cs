@@ -375,6 +375,12 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     internal override bool ShouldAppendImplicitDataUnitPluralSuffix(DataUnit dataUnit, double count, FormatterNumberForm form, LocalizedPhraseForms forms, PhraseTemplate? template) =>
         base.ShouldAppendImplicitDataUnitPluralSuffix(dataUnit, count, form, forms, template);
 
+    internal override bool ShouldAppendImplicitDataUnitPluralSuffixExact(
+        FormatterNumberForm form,
+        LocalizedPhraseForms forms) =>
+        profile.DataUnitDetector == FormatterNumberDetectorKind.None &&
+        base.ShouldAppendImplicitDataUnitPluralSuffixExact(form, forms);
+
     internal override string TransformDataUnitResult(DataUnit dataUnit, double count, FormatterNumberForm form, string result, LocalizedPhraseForms forms, PhraseTemplate? template) =>
         profile.DataUnitFallbackTransform == FormatterDataUnitFallbackTransform.None ||
         profile.DataUnitDetector != FormatterNumberDetectorKind.None

@@ -1641,6 +1641,7 @@ public struct ByteSize(double byteSize) :
             return TryParse(s, formatProvider, out result);
         }
 
+        formatProvider ??= CultureInfo.CurrentCulture;
         s = s.TrimStart();
         result = default;
         if (s.IsEmpty)

@@ -358,6 +358,25 @@ public class ByteSizeUnitSystemTests
                 "0.0000000000000000000000000000 kB",
                 CultureInfo.InvariantCulture));
 
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, ByteSize.BytesInDecimalKilobyte, "kB", "kilobytes")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, ByteSize.BytesInKibibyte, "KiB", "kibibytes")]
+    public void EnglishExactFullWordsPluralizeZeroAndFractionalOther(
+        ByteSizeUnitSystem unitSystem,
+        double bytes,
+        string symbol,
+        string plural)
+    {
+        var culture = CultureInfo.GetCultureInfo("en");
+
+        Assert.Equal(
+            $"0 {plural}",
+            ByteSize.FromBytes(0).FormatFullWords(unitSystem, $"0 {symbol}", culture));
+        Assert.Equal(
+            $"0.5 {plural}",
+            ByteSize.FromBytes(0.5 * bytes).FormatFullWords(unitSystem, $"0.0 {symbol}", culture));
+    }
+
     [Fact]
     public void StandardFormatsDoNotReplaceTextInsideUnitToken()
     {
@@ -957,5 +976,28 @@ public class ByteSizeUnitSystemTests
             Assert.Equal($"1 #.## {symbol}", size.Format(unitSystem, format, CultureInfo.InvariantCulture));
             Assert.Equal($"1 #.## {unitWord}", size.FormatFullWords(unitSystem, format, CultureInfo.InvariantCulture));
         }
+    }
+}
+
+[UseCulture("fi")]
+public class ByteSizeUnitSystemCurrentCultureTests
+{
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, ByteSize.BytesInDecimalKilobyte, "kB")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, ByteSize.BytesInKibibyte, "KiB")]
+    public void ExplicitDefaultProviderRoundTripsFormattingOverrides(
+        ByteSizeUnitSystem unitSystem,
+        double bytes,
+        string symbol)
+    {
+        var size = ByteSize.FromBytes(-1.5 * bytes);
+        var formatted = size.Format(unitSystem, $"0.0 {symbol}");
+
+        Assert.StartsWith("−", formatted);
+        Assert.Equal(size, ByteSize.ParseWithUnitSystem(formatted, unitSystem));
+        Assert.True(ByteSize.TryParseWithUnitSystem(formatted, unitSystem, out var parsed));
+        Assert.Equal(size, parsed);
+        Assert.True(ByteSize.TryParseSpanWithUnitSystem(formatted.AsSpan(), unitSystem, out parsed));
+        Assert.Equal(size, parsed);
     }
 }

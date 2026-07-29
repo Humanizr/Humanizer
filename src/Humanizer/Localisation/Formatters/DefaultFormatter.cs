@@ -299,6 +299,12 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         forms.Singular is null &&
         template is null;
 
+    internal virtual bool ShouldAppendImplicitDataUnitPluralSuffixExact(
+        FormatterNumberForm form,
+        LocalizedPhraseForms forms) =>
+        form == FormatterNumberForm.Default &&
+        forms is { Singular: null, Dual: null, Paucal: null, Plural: null };
+
     internal virtual string TransformDataUnitResult(DataUnit dataUnit, double count, FormatterNumberForm form, string result, LocalizedPhraseForms forms, PhraseTemplate? template) =>
         result;
 
@@ -312,11 +318,11 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
     {
         if (toSymbol)
         {
-            return TryFormatDataUnitFromPhraseTable(dataUnit, count, default, toSymbol: true, out result);
+            return TryFormatDataUnitFromPhraseTable(dataUnit, count, default, toSymbol: true, exactCategory: null, out result);
         }
 
         var form = GetDataUnitPhraseForm(dataUnit, count);
-        return TryFormatDataUnitFromPhraseTable(dataUnit, count, form, toSymbol: false, out result);
+        return TryFormatDataUnitFromPhraseTable(dataUnit, count, form, toSymbol: false, exactCategory: null, out result);
     }
 
     internal string DataUnitHumanizeExact(DataUnit dataUnit, decimal count, bool toSymbol)
@@ -328,7 +334,7 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         }
 
         var form = GetDataUnitPhraseForm(dataUnit, magnitude, category);
-        var result = TryFormatDataUnitFromPhraseTable(dataUnit, (double)magnitude, form, toSymbol, out var phrase)
+        var result = TryFormatDataUnitFromPhraseTable(dataUnit, (double)magnitude, form, toSymbol, category, out var phrase)
             ? phrase
             : DataUnitHumanize(dataUnit, (double)magnitude, toSymbol);
         return GetDataUnitPhrasePrefix(dataUnit, magnitude, category) + result;
@@ -339,6 +345,7 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         double count,
         FormatterNumberForm form,
         bool toSymbol,
+        CardinalPluralCategory? exactCategory,
         out string result)
     {
         result = null!;
@@ -368,7 +375,9 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         {
             result = RenderTemplate(template, FormatCountValue(count), result, string.Empty);
         }
-        else if (ShouldAppendImplicitDataUnitPluralSuffix(dataUnit, count, form, forms, phrase.Template))
+        else if (exactCategory is not null
+                     ? ShouldAppendImplicitDataUnitPluralSuffixExact(form, forms)
+                     : ShouldAppendImplicitDataUnitPluralSuffix(dataUnit, count, form, forms, phrase.Template))
         {
             result += "s";
         }

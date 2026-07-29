@@ -4,7 +4,7 @@ public class ByteSizeMultiSectionFormatTests
     [Theory]
     [InlineData(1_000_000, "1 megabyte")]
     [InlineData(-2_000_000, "-2 megabytes")]
-    [InlineData(0, "0 megabyte")]
+    [InlineData(0, "0 megabytes")]
     public void ReplacesExplicitUnitTokensInEveryCustomFormatSection(double bytes, string expected)
     {
         var result = ByteSize.FromBytes(bytes).FormatFullWords(
