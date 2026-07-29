@@ -3,7 +3,6 @@ locale: 'ro'
 surfaces:
   inflection:
     cardinalRule: 'Romanian'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

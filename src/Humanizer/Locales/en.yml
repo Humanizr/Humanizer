@@ -3,11 +3,6 @@ locale: 'en'
 surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
-    disposition: 'lexicon'
-    lexemes:
-      person:
-        one: 'person'
-        other: 'people'
   durationCases:
     classification: 'not-applicable'
     sources:

@@ -4,7 +4,6 @@ variantOf: 'nb'
 surfaces:
   inflection:
     cardinalRule: 'One'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

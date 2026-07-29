@@ -3,7 +3,6 @@ locale: 'uz-Latn-UZ'
 surfaces:
   inflection:
     cardinalRule: 'One'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

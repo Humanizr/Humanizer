@@ -3,7 +3,6 @@ locale: 'lt'
 surfaces:
   inflection:
     cardinalRule: 'Lithuanian'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

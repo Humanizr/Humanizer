@@ -3,7 +3,6 @@ locale: 'hy'
 surfaces:
   inflection:
     cardinalRule: 'Armenian'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

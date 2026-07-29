@@ -3,7 +3,6 @@ locale: 'sr'
 surfaces:
   inflection:
     cardinalRule: 'SouthSlavic'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

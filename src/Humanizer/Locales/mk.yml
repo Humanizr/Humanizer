@@ -3,7 +3,6 @@ locale: 'mk'
 surfaces:
   inflection:
     cardinalRule: 'Macedonian'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

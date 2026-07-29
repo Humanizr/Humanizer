@@ -3,12 +3,6 @@ locale: 'es'
 surfaces:
   inflection:
     cardinalRule: 'Spanish'
-    disposition: 'lexicon'
-    lexemes:
-      persona:
-        one: 'persona'
-        many: 'personas'
-        other: 'personas'
   durationCases:
     classification: 'not-applicable'
     sources:

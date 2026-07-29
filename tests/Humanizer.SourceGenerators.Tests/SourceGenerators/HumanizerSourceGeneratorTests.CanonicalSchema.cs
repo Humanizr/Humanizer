@@ -286,7 +286,6 @@ surfaces:
     classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
-    disposition: 'selector-only'
 """;
         const string regionalLocale = """
 locale: 'aa-ZZ'
@@ -333,7 +332,6 @@ locale: 'zz'
 surfaces:
   inflection:
     cardinalRule: 'Other'
-    disposition: 'selector-only'
 """;
 
         var runResult = RunGenerator(
@@ -392,7 +390,6 @@ surfaces:
     classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
-    disposition: 'selector-only'
 """;
         const string missingLocale = """
 locale: 'zz'
@@ -428,39 +425,13 @@ surfaces:
         var source = GetGeneratedSource(runResult, "LocalizedInflectionCatalog.g.cs");
         Assert.Contains("[\"pt-PT\"]", source, StringComparison.Ordinal);
         Assert.Contains(
-            "new LocalizedInflectionProfile(CardinalPluralRuleKind.CatalanItalian",
+            "[\"pt-PT\"] = CardinalPluralRuleKind.CatalanItalian",
             source,
             StringComparison.Ordinal);
     }
 
-    [Theory]
-    [InlineData("guessed", "disposition must be 'selector-only' or 'lexicon'")]
-    [InlineData("lexicon", "requires at least one exact lexeme")]
-    public void InflectionProfilesRejectUnsupportedOrEmptyLexiconDispositions(
-        string disposition,
-        string expectedMessage)
-    {
-        var locale = $$"""
-locale: 'zz'
-surfaces:
-  durationCases:
-    classification: 'not-applicable'
-  inflection:
-    cardinalRule: 'EnglishLike'
-    disposition: '{{disposition}}'
-""";
-
-        var runResult = RunGenerator(
-            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
-
-        Assert.Contains(
-            runResult.Diagnostics,
-            diagnostic => diagnostic.Id == "HSG003" &&
-                diagnostic.GetMessage().Contains(expectedMessage, StringComparison.Ordinal));
-    }
-
     [Fact]
-    public void InflectionProfilesRejectCanonicallyEquivalentLemmaKeys()
+    public void InflectionProfilesRejectRemovedLexiconProperties()
     {
         const string locale = """
 locale: 'zz'
@@ -469,14 +440,7 @@ surfaces:
     classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
-    disposition: 'lexicon'
-    lexemes:
-      café:
-        one: 'café'
-        other: 'cafés'
-      café:
-        one: 'café'
-        other: 'cafés'
+    disposition: 'selector-only'
 """;
 
         var runResult = RunGenerator(
@@ -485,6 +449,6 @@ surfaces:
         Assert.Contains(
             runResult.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
-                diagnostic.GetMessage().Contains("canonically equivalent lemma", StringComparison.Ordinal));
+                diagnostic.GetMessage().Contains("unsupported property 'disposition'", StringComparison.Ordinal));
     }
 }

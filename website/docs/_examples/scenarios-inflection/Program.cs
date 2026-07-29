@@ -13,21 +13,18 @@ Vocabularies.Default.AddIrregular("cactoid", "cactoidae", matchEnding: false);
 AssertEqual("cactoidae", "cactoid".Pluralize());
 AssertEqual("cactoid", "cactoidae".Singularize());
 
-var polishForms = new CardinalInflectionForms(
-    lemma: "plik",
+var polishForms = new PluralizationForms(
+    singular: "plik",
     other: "pliku",
     one: "plik",
     few: "pliki",
     many: "plików");
-AssertTrue(polishForms.TryInflect(5m, CultureInfo.GetCultureInfo("pl"), out var polish));
+AssertTrue(polishForms.TryPluralize(5m, CultureInfo.GetCultureInfo("pl"), out var polish));
 AssertEqual("plików", polish);
+AssertTrue(polishForms.TrySingularize("pliki", out var singular));
+AssertEqual("plik", singular);
 
-AssertTrue("persona".TryInflect(2m, CultureInfo.GetCultureInfo("es"), out var spanish));
-AssertEqual("personas", spanish);
-AssertTrue("personas".TryLemmatize(CultureInfo.GetCultureInfo("es"), out var lemma));
-AssertEqual("persona", lemma);
-
-Console.WriteLine("people; two people; cactoidae; plików; personas");
+Console.WriteLine("people; two people; cactoidae; plików; plik");
 
 static void AssertEqual(string expected, string? actual)
 {

@@ -3,7 +3,6 @@ locale: 'pa-Arab'
 surfaces:
   inflection:
     cardinalRule: 'Punjabi'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

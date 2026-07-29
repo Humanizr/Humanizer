@@ -3,7 +3,6 @@ locale: 'ca'
 surfaces:
   inflection:
     cardinalRule: 'CatalanItalian'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

@@ -3,7 +3,6 @@ locale: 'ar'
 surfaces:
   inflection:
     cardinalRule: 'Arabic'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

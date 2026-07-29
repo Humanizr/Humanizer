@@ -3,7 +3,6 @@ locale: 'fil'
 surfaces:
   inflection:
     cardinalRule: 'Filipino'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

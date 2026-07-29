@@ -13,7 +13,7 @@ public sealed partial class HumanizerSourceGenerator
             new("list", "Lists", optional: false, ["collectionFormatter"], static locale => locale.CollectionFormatter is not null),
             new("formatter", "Formatter", optional: false, ["formatter"], static locale => locale.Formatter is not null),
             new("phrases", "Phrases", optional: false, ["phrases"], static locale => locale.Phrases is not null),
-            new("inflection", "Cardinal category selection", optional: false, ["inflection"], static locale => locale.Inflection is not null),
+            new("inflection", "Cardinal plural rules", optional: false, ["inflection"], static locale => locale.Inflection is not null),
             new("numberWords", "Number to words", optional: false, ["numberToWords"], static locale => locale.NumberToWords is not null),
             new("numberParse", "Words to number", optional: false, ["wordsToNumber"], static locale => locale.WordsToNumber is not null),
             new("numericOrdinal", "Numeric ordinals", optional: false, ["ordinalizer"], static locale => locale.Ordinalizer is not null),

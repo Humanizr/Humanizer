@@ -3,7 +3,6 @@ locale: 'ga'
 surfaces:
   inflection:
     cardinalRule: 'Irish'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

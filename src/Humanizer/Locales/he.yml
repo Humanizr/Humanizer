@@ -3,7 +3,6 @@ locale: 'he'
 surfaces:
   inflection:
     cardinalRule: 'Hebrew'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

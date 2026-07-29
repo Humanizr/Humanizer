@@ -46,20 +46,21 @@ In v4 previews, applications can provide the exact noun forms for a culture's
 CLDR cardinal categories:
 
 ```csharp
-var files = new CardinalInflectionForms(
-    lemma: "plik",
+var files = new PluralizationForms(
+    singular: "plik",
     other: "pliku",
     few: "pliki",
     many: "plików");
 
-if (files.TryInflect(5m, CultureInfo.GetCultureInfo("pl"), out var noun))
+if (files.TryPluralize(5m, CultureInfo.GetCultureInfo("pl"), out var noun))
     Console.WriteLine(noun); // plików
 ```
 
-`TryInflect` returns `false` when the selected category has no authored form;
-it does not guess localized morphology or fall back to English. See
+`TryPluralize` uses the required cardinal rule for every supported culture and
+returns `false` when the selected form was not supplied. `TrySingularize`
+resolves any exact form in the same set. See
 [inflection and quantities](https://humanizr.net/docs/scenarios/inflection-and-quantities/)
-for the exact-form and lemmatization contracts.
+for examples.
 
 `HumanizeWithCase` returns only the duration phrase; add any required
 preposition yourself. Singular forms may include a locale-authored one-word
