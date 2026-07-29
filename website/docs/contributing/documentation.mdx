@@ -114,17 +114,27 @@ pwsh tools/docs/snapshot.ps1 -Version 3.0.10 \
 
 `.github/workflows/docs.yml` validates every pull request. A successful `main`
 run uploads the complete Docusaurus output as one Pages artifact. After the
-production smoke test passes, automation stores that exact archive in the
-`docs-pages-archive` prerelease, keyed by workflow run ID, and retains the ten
-newest known-good deployments. A failed gate cannot reach the
-environment-protected deployment job or enter the rollback archive.
+build passes, automation stages the archive, checksum, and deployment manifest
+together in a draft `docs-pages-candidate-v1-<run-id>-<attempt>` prerelease.
+After the production smoke test passes, automation creates and publishes a
+separate immutable `docs-pages-deployment-v1-<run-id>-<attempt>` release.
+Failed or abandoned attempts therefore cannot become the current rollback
+source.
 
-To restore a retained artifact, find its successful documentation run ID and
-dispatch the same workflow from `main`:
+To restore a retained artifact, select its immutable deployment release and
+read the archive run ID and attempt from that release's manifest. These can
+differ from the deployment attempt after a failed-job rerun:
 
 ```console
-gh run list --workflow docs.yml --branch main
-gh workflow run docs.yml --ref main -f rollback_run_id=123456789
+release_tag=docs-pages-deployment-v1-123456789-2
+manifest=$(mktemp)
+gh release download "$release_tag" \
+  --pattern 'deployment-*.json' \
+  --output "$manifest"
+jq '{archiveRunId, archiveRunAttempt}' "$manifest"
+gh workflow run docs.yml --ref main \
+  -f rollback_run_id="$(jq -r .archiveRunId "$manifest")" \
+  -f rollback_run_attempt="$(jq -r .archiveRunAttempt "$manifest")"
 ```
 
 The rollback run verifies the retained artifact's custom domain, stable,

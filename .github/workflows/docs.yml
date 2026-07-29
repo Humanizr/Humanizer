@@ -11,12 +11,24 @@ on:
         description: Redeploy the retained artifact from this documentation run
         required: false
         type: string
+      rollback_run_attempt:
+        description: Exact attempt of the retained documentation run
+        required: false
+        type: string
       expected_pointer_run_id:
         description: Automation guard for a queued recovery
         required: false
         type: string
+      expected_pointer_run_attempt:
+        description: Exact attempt guarded by queued recovery
+        required: false
+        type: string
 
 permissions: {}
+
+defaults:
+  run:
+    shell: bash
 
 concurrency:
   group: >-
@@ -41,8 +53,60 @@ env:
   GH_REPO: ${{ github.repository }}
 
 jobs:
+  validate:
+    if: inputs.rollback_run_id == ''
+    permissions:
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        gate:
+          - manifests
+          - runtime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: global.json
+
+      - name: Cache immutable documentation packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: /tmp/humanizer-docs-nuget/**/*.nupkg
+          key: >-
+            docs-nuget-v2-${{ runner.os }}-${{
+              hashFiles(
+                'website/humanizer-versions.json',
+                'nuget.config',
+                '.config/dotnet-tools.json'
+              )
+            }}-${{ matrix.gate }}
+
+      - name: Restore documentation tools
+        run: dotnet tool restore
+
+      - name: Validate manifests, snapshots, APIs, and examples
+        if: matrix.gate == 'manifests'
+        shell: pwsh
+        run: ./tools/docs/build.ps1 -Mode Validate
+
+      - name: Validate snapshot transactions and Native AOT
+        if: matrix.gate == 'runtime'
+        shell: pwsh
+        run: ./tools/docs/test.ps1 -RequireNativeAot
+
   build:
     outputs:
+      archive_run_attempt: ${{ steps.deployment-identity.outputs.archive_run_attempt }}
+      archive_run_id: ${{ steps.deployment-identity.outputs.archive_run_id }}
       bootstrap_rollback: >-
         ${{ steps.rollback-source.outputs.bootstrap_rollback || 'false' }}
       recovery_stale: >-
@@ -86,37 +150,9 @@ jobs:
           cache: pnpm
           cache-dependency-path: website/pnpm-lock.yaml
 
-      - name: Cache immutable documentation packages
-        if: inputs.rollback_run_id == ''
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        with:
-          path: /tmp/humanizer-docs-nuget/**/*.nupkg
-          key: >-
-            docs-nuget-v2-${{ runner.os }}-${{
-              hashFiles(
-                'website/humanizer-versions.json',
-                'nuget.config',
-                '.config/dotnet-tools.json'
-              )
-            }}
-
-      - name: Restore documentation tools
-        if: inputs.rollback_run_id == ''
-        run: dotnet tool restore
-
       - name: Restore site dependencies
         if: inputs.rollback_run_id == ''
         run: pnpm --dir website install --frozen-lockfile
-
-      - name: Validate manifests, snapshots, APIs, and examples
-        if: inputs.rollback_run_id == ''
-        shell: pwsh
-        run: ./tools/docs/build.ps1 -Mode Validate
-
-      - name: Validate snapshot transactions and Native AOT
-        if: inputs.rollback_run_id == ''
-        shell: pwsh
-        run: ./tools/docs/test.ps1 -RequireNativeAot
 
       - name: Validate content
         if: inputs.rollback_run_id == ''
@@ -151,12 +187,19 @@ jobs:
         id: rollback-source
         if: inputs.rollback_run_id != ''
         env:
+          EXPECTED_POINTER_RUN_ATTEMPT: >-
+            ${{ inputs.expected_pointer_run_attempt }}
           EXPECTED_POINTER_RUN_ID: ${{ inputs.expected_pointer_run_id }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ROLLBACK_RUN_ATTEMPT: ${{ inputs.rollback_run_attempt }}
           ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
         run: |
           if [[ ! "$ROLLBACK_RUN_ID" =~ ^[0-9]+$ ]]; then
             echo "Rollback run ID must be numeric." >&2
+            exit 1
+          fi
+          if [[ ! "$ROLLBACK_RUN_ATTEMPT" =~ ^[0-9]+$ ]]; then
+            echo "Rollback run attempt must be numeric." >&2
             exit 1
           fi
           if [[ -n "$EXPECTED_POINTER_RUN_ID" ]]; then
@@ -165,37 +208,102 @@ jobs:
               echo "Expected deployment pointer run ID is invalid." >&2
               exit 1
             fi
+            if [[ "$EXPECTED_POINTER_RUN_ID" == none ]]; then
+              if [[ "$EXPECTED_POINTER_RUN_ATTEMPT" != none ]]; then
+                echo "Expected deployment pointer attempt is invalid." >&2
+                exit 1
+              fi
+            elif [[ ! "$EXPECTED_POINTER_RUN_ATTEMPT" =~ ^[0-9]+$ ]]; then
+              echo "Expected deployment pointer attempt is invalid." >&2
+              exit 1
+            fi
             current_pointer_run_id=none
-            if gh release view docs-pages-archive >/dev/null 2>&1; then
-              release_id="$(
-                gh api \
-                  "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
-                  --jq .id
-              )"
-              pointer_asset_id="$(
-                gh api \
-                  --paginate \
-                  "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-                  --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id] | @tsv' |
-                  sort -r |
-                  head -n 1 |
-                  cut -f 2
-              )"
-              if [[ -n "$pointer_asset_id" ]]; then
-                gh api \
-                  -H "Accept: application/octet-stream" \
-                  "repos/${GITHUB_REPOSITORY}/releases/assets/${pointer_asset_id}" \
-                  > current-deployment.json
-                current_pointer_run_id="$(
-                  jq -r '.deploymentRunId // empty' current-deployment.json
-                )"
-                if [[ ! "$current_pointer_run_id" =~ ^[0-9]+$ ]]; then
-                  echo "Current deployment pointer is invalid." >&2
-                  exit 1
-                fi
+            current_pointer_run_attempt=none
+            pointer="$(
+              gh api \
+                --paginate \
+                --slurp \
+                "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+                jq -r '
+                  [
+                    .[][]
+                    | select(
+                        .tag_name
+                        | startswith("docs-pages-deployment-v1-")
+                      )
+                    | select(.draft == false and .immutable == true)
+                  ]
+                  | sort_by(.published_at)
+                  | (last // empty)
+                  | [
+                      .tag_name,
+                      (.assets | length),
+                      ([
+                        .assets[]
+                        | select(
+                            .name
+                            | (
+                                startswith("deployment-")
+                                and endswith(".json")
+                              )
+                          )
+                      ] | length),
+                      ([
+                        .assets[]
+                        | select(
+                            .name
+                            | (
+                                startswith("deployment-")
+                                and endswith(".json")
+                              )
+                          )
+                      ][0].id // empty),
+                      ([
+                        .assets[]
+                        | select(
+                            .name
+                            | (
+                                startswith("deployment-")
+                                and endswith(".json")
+                              )
+                          )
+                      ][0].name // empty)
+                    ]
+                  | @tsv
+                '
+            )"
+            if [[ -n "$pointer" ]]; then
+              IFS=$'\t' read -r pointer_tag asset_count pointer_count \
+                pointer_asset_id pointer_asset_name <<<"$pointer"
+              pointer_key="${pointer_tag#docs-pages-deployment-v1-}"
+              current_pointer_run_id="${pointer_key%-*}"
+              current_pointer_run_attempt="${pointer_key##*-}"
+              if [[ ! "$current_pointer_run_id" =~ ^[0-9]+$ ||
+                    ! "$current_pointer_run_attempt" =~ ^[0-9]+$ ||
+                    "$asset_count" != 3 ||
+                    "$pointer_count" != 1 ||
+                    "$pointer_asset_name" != "deployment-${current_pointer_run_id}-${current_pointer_run_attempt}.json" ||
+                    ! "$pointer_asset_id" =~ ^[0-9]+$ ]]; then
+                echo "Current deployment pointer release is invalid." >&2
+                exit 1
+              fi
+              gh api \
+                -H "Accept: application/octet-stream" \
+                "repos/${GITHUB_REPOSITORY}/releases/assets/${pointer_asset_id}" \
+                > current-deployment.json
+              if ! jq -e \
+                --argjson deploymentRunId "$current_pointer_run_id" \
+                --argjson publicationRunAttempt "$current_pointer_run_attempt" \
+                '.schemaVersion == 1
+                  and .deploymentRunId == $deploymentRunId
+                  and .publicationRunAttempt == $publicationRunAttempt' \
+                current-deployment.json >/dev/null; then
+                echo "Current deployment pointer is invalid." >&2
+                exit 1
               fi
             fi
-            if [[ "$current_pointer_run_id" != "$EXPECTED_POINTER_RUN_ID" ]]; then
+            if [[ "$current_pointer_run_id" != "$EXPECTED_POINTER_RUN_ID" ||
+                  "$current_pointer_run_attempt" != "$EXPECTED_POINTER_RUN_ATTEMPT" ]]; then
               echo "Recovery was superseded by a newer production result."
               echo "recovery_stale=true" >> "$GITHUB_OUTPUT"
               exit 0
@@ -203,15 +311,49 @@ jobs:
           fi
           source_run="$(
             gh api \
-              "repos/${GITHUB_REPOSITORY}/actions/runs/${ROLLBACK_RUN_ID}" \
-              --jq '[.conclusion, .event, .head_branch, .path, .head_sha] | @tsv'
+              "repos/${GITHUB_REPOSITORY}/actions/runs/${ROLLBACK_RUN_ID}/attempts/${ROLLBACK_RUN_ATTEMPT}" \
+              --jq '[.conclusion, .event, .head_branch, .path, .head_sha, .run_attempt] | @tsv'
           )"
-          IFS=$'\t' read -r conclusion event branch path source_sha <<<"$source_run"
-          if [[ "$conclusion" != success ||
-                "$event" != push ||
+          IFS=$'\t' read -r conclusion event branch path source_sha run_attempt \
+            <<<"$source_run"
+          if [[ "$event" != push ||
                 "$branch" != main ||
+                "$run_attempt" != "$ROLLBACK_RUN_ATTEMPT" ||
                 ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
             echo "Rollback source must be a successful main push." >&2
+            exit 1
+          fi
+          if [[ "$path" == ".github/workflows/docs.yml" ]]; then
+            if [[ "$conclusion" != success &&
+                  "$conclusion" != failure ]]; then
+              echo "Incomplete workflow attempts are not rollback sources." >&2
+              exit 1
+            fi
+            recovery_jobs="$(
+              gh api \
+                --paginate \
+                --slurp \
+                "repos/${GITHUB_REPOSITORY}/actions/runs/${ROLLBACK_RUN_ID}/attempts/${ROLLBACK_RUN_ATTEMPT}/jobs?per_page=100" |
+                jq -r '
+                  [
+                    .[].jobs[]
+                    | select(
+                        .name == "build"
+                        and .conclusion == "success"
+                      )
+                    | .name
+                  ]
+                  | unique
+                  | sort
+                  | join(",")
+                '
+            )"
+            if [[ "$recovery_jobs" != "build" ]]; then
+              echo "Workflow attempt lacks successful archive evidence." >&2
+              exit 1
+            fi
+          elif [[ "$conclusion" != success ]]; then
+            echo "Incomplete legacy workflow attempts are not rollback sources." >&2
             exit 1
           fi
 
@@ -269,35 +411,203 @@ jobs:
           inputs.rollback_run_id != '' &&
           steps.rollback-source.outputs.recovery_stale != 'true'
         env:
+          BOOTSTRAP_ROLLBACK: ${{ steps.rollback-source.outputs.bootstrap_rollback }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ROLLBACK_RUN_ATTEMPT: ${{ inputs.rollback_run_attempt }}
           ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
+          ROLLBACK_SOURCE_SHA: ${{ steps.rollback-source.outputs.source_sha }}
         run: |
           mkdir -p rollback
-          gh release download docs-pages-archive \
-            --pattern "github-pages-${ROLLBACK_RUN_ID}.tar" \
-            --pattern "github-pages-${ROLLBACK_RUN_ID}.tar.sha256" \
+          archive_name="github-pages-${ROLLBACK_RUN_ID}-${ROLLBACK_RUN_ATTEMPT}.tar"
+          checksum_name="${archive_name}.sha256"
+          release_tag="$(
+            gh api \
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r \
+                --arg archive "$archive_name" \
+                --arg checksum "$checksum_name" \
+                --arg source "$ROLLBACK_SOURCE_SHA" '
+                  [
+                    .[][]
+                    | select(
+                        .draft == false
+                        and .immutable == true
+                        and .target_commitish == $source
+                      )
+                    | select(
+                        ([.assets[].name] | index($archive)) != null
+                        and ([.assets[].name] | index($checksum)) != null
+                        and (.assets | length) == 3
+                      )
+                  ]
+                  | sort_by(.published_at)
+                  | (last // empty)
+                  | .tag_name
+                '
+          )"
+          if [[ "$release_tag" != docs-pages-deployment-v1-* ]]; then
+            echo "Exact immutable rollback release is unavailable." >&2
+            exit 1
+          fi
+          deployment_key="${release_tag#docs-pages-deployment-v1-}"
+          deployment_run_id="${deployment_key%-*}"
+          deployment_run_attempt="${deployment_key##*-}"
+          pointer_name="deployment-${deployment_run_id}-${deployment_run_attempt}.json"
+          gh release download "$release_tag" \
+            --pattern "$archive_name" \
+            --pattern "$checksum_name" \
+            --pattern "$pointer_name" \
             --dir rollback
           (
             cd rollback
-            sha256sum -c "github-pages-${ROLLBACK_RUN_ID}.tar.sha256"
+            sha256sum -c "$checksum_name"
           )
+          jq -e \
+            --argjson archiveRunId "$ROLLBACK_RUN_ID" \
+            --argjson archiveRunAttempt "$ROLLBACK_RUN_ATTEMPT" \
+            --argjson deploymentRunId "$deployment_run_id" \
+            --argjson publicationRunAttempt "$deployment_run_attempt" \
+            --arg sourceSha "$ROLLBACK_SOURCE_SHA" \
+            '.schemaVersion == 1
+              and .archiveRunId == $archiveRunId
+              and .archiveRunAttempt == $archiveRunAttempt
+              and .sourceSha == $sourceSha
+              and .deploymentRunId == $deploymentRunId
+              and .publicationRunAttempt == $publicationRunAttempt' \
+            "rollback/${pointer_name}" >/dev/null
+          manifest_bootstrap="$(
+            jq -r '.bootstrapSource // false' "rollback/${pointer_name}"
+          )"
+          if [[ "$manifest_bootstrap" == true ]]; then
+            if [[ "$ROLLBACK_RUN_ATTEMPT" != 1 ]]; then
+              echo "Rollback bootstrap releases must use attempt one." >&2
+              exit 1
+            fi
+            bootstrap_publication="$(
+              gh api \
+                "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${deployment_run_attempt}" \
+                --jq '[.conclusion, .event, .head_branch, .path, .run_attempt] | @tsv'
+            )"
+            IFS=$'\t' read -r bootstrap_conclusion bootstrap_event \
+              bootstrap_branch bootstrap_path bootstrap_attempt \
+              <<<"$bootstrap_publication"
+            if [[ "$bootstrap_conclusion" != success ||
+                  "$bootstrap_event" != push ||
+                  "$bootstrap_branch" != main ||
+                  "$bootstrap_attempt" != "$deployment_run_attempt" ||
+                  (
+                    "$bootstrap_path" != ".github/workflows/docs.yml" &&
+                    "$bootstrap_path" != ".github/workflows/jekyll-gh-pages.yml"
+                  ) ]]; then
+              echo "Rollback bootstrap publication is invalid." >&2
+              exit 1
+            fi
+          elif [[ "$BOOTSTRAP_ROLLBACK" != true ]]; then
+            phase_attempts="$(
+              jq -r '
+                [
+                  .stageRunAttempt,
+                  .deployRunAttempt,
+                  .smokeRunAttempt,
+                  .publicationRunAttempt
+                ]
+                | @tsv
+              ' "rollback/${pointer_name}"
+            )"
+            IFS=$'\t' read -r stage_run_attempt deploy_run_attempt \
+              smoke_run_attempt publication_run_attempt <<<"$phase_attempts"
+            if [[ "$publication_run_attempt" != "$deployment_run_attempt" ||
+                  ! "$stage_run_attempt" =~ ^[0-9]+$ ||
+                  ! "$deploy_run_attempt" =~ ^[0-9]+$ ||
+                  ! "$smoke_run_attempt" =~ ^[0-9]+$ ]]; then
+              echo "Rollback publication provenance is invalid." >&2
+              exit 1
+            fi
+            publication_run="$(
+              gh api \
+                "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${publication_run_attempt}" \
+                --jq '[.conclusion, .event, .head_branch, .path, .run_attempt] | @tsv'
+            )"
+            IFS=$'\t' read -r publication_conclusion publication_event \
+              publication_branch publication_path publication_attempt \
+              <<<"$publication_run"
+            if [[ "$publication_branch" != main ||
+                  "$publication_path" != ".github/workflows/docs.yml" ||
+                  "$publication_attempt" != "$publication_run_attempt" ||
+                  (
+                    "$publication_event" != push &&
+                    "$publication_event" != workflow_dispatch
+                  ) ||
+                  (
+                    "$publication_conclusion" != success &&
+                    "$publication_conclusion" != failure
+                  ) ]]; then
+              echo "Rollback publication attempt is invalid." >&2
+              exit 1
+            fi
+            for phase in \
+              "stage-pages-release:${stage_run_attempt}" \
+              "deploy:${deploy_run_attempt}" \
+              "production-smoke:${smoke_run_attempt}"; do
+              phase_name="${phase%%:*}"
+              phase_attempt="${phase##*:}"
+              phase_jobs="$(
+                gh api \
+                  --paginate \
+                  --slurp \
+                  "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${phase_attempt}/jobs?per_page=100" |
+                  jq -r --arg name "$phase_name" '
+                    [
+                      .[].jobs[]
+                      | select(
+                          .name == $name
+                          and .conclusion == "success"
+                        )
+                      | .name
+                    ]
+                    | unique
+                    | join(",")
+                  '
+              )"
+              if [[ "$phase_jobs" != "$phase_name" ]]; then
+                echo "Rollback release lacks exact successful ${phase_name} evidence." >&2
+                exit 1
+              fi
+            done
+          fi
 
       - name: Extract retained Pages artifact for verification
         if: >-
           inputs.rollback_run_id != '' &&
           steps.rollback-source.outputs.recovery_stale != 'true'
         env:
+          ROLLBACK_RUN_ATTEMPT: ${{ inputs.rollback_run_attempt }}
           ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
         run: |
           mkdir -p website/build
+          archive_name="github-pages-${ROLLBACK_RUN_ID}-${ROLLBACK_RUN_ATTEMPT}.tar"
           tar -xf \
-            "rollback/github-pages-${ROLLBACK_RUN_ID}.tar" \
+            "rollback/${archive_name}" \
             -C website/build
 
       - name: Write deployment identity
         id: deployment-identity
         if: steps.rollback-source.outputs.recovery_stale != 'true'
         env:
+          ARCHIVE_RUN_ATTEMPT: >-
+            ${{
+              inputs.rollback_run_id != '' &&
+              inputs.rollback_run_attempt ||
+              github.run_attempt
+            }}
+          ARCHIVE_RUN_ID: >-
+            ${{
+              inputs.rollback_run_id != '' &&
+              inputs.rollback_run_id ||
+              github.run_id
+            }}
           SOURCE_SHA: >-
             ${{
               inputs.rollback_run_id != '' &&
@@ -305,8 +615,19 @@ jobs:
               github.sha
             }}
         run: |
-          printf '{"sourceSha":"%s"}\n' "$SOURCE_SHA" \
+          if [[ ! "$ARCHIVE_RUN_ID" =~ ^[0-9]+$ ||
+                ! "$ARCHIVE_RUN_ATTEMPT" =~ ^[0-9]+$ ]]; then
+            echo "Deployment archive identity is invalid." >&2
+            exit 1
+          fi
+          printf \
+            '{"sourceSha":"%s","archiveRunId":%s,"archiveRunAttempt":%s}\n' \
+            "$SOURCE_SHA" \
+            "$ARCHIVE_RUN_ID" \
+            "$ARCHIVE_RUN_ATTEMPT" \
             > website/build/deployment.json
+          echo "archive_run_id=${ARCHIVE_RUN_ID}" >> "$GITHUB_OUTPUT"
+          echo "archive_run_attempt=${ARCHIVE_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
           echo "source_sha=${SOURCE_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Verify complete Pages artifact
@@ -340,11 +661,14 @@ jobs:
   retain-pages-artifacts:
     if: github.event_name == 'push'
     outputs:
+      prior_deployment_run_attempt: ${{ steps.prior.outputs.deployment_run_attempt }}
       prior_deployment_run_id: ${{ steps.prior.outputs.deployment_run_id }}
+      prior_run_attempt: ${{ steps.prior.outputs.run_attempt }}
       prior_run_id: ${{ steps.prior.outputs.run_id }}
     runs-on: ubuntu-latest
     needs:
       - build
+      - validate
     permissions:
       actions: read
       contents: write
@@ -355,65 +679,242 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           prior=
-          if gh release view docs-pages-archive >/dev/null 2>&1; then
-            release_id="$(
-              gh api \
-                "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
-                --jq .id
-            )"
-            pointer_asset="$(
-              gh api \
-                --paginate \
-                "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-                --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id] | @tsv' |
-                sort -r |
-                head -n 1
-            )"
-            if [[ -n "$pointer_asset" ]]; then
-              IFS=$'\t' read -r _ pointer_asset_id <<<"$pointer_asset"
+          pointer="$(
+            gh api \
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r '
+                [
+                  .[][]
+                  | select(
+                      .tag_name
+                      | startswith("docs-pages-deployment-v1-")
+                    )
+                  | select(.draft == false and .immutable == true)
+                ]
+                | sort_by(.published_at)
+                | (last // empty)
+                | [
+                    .tag_name,
+                    (.assets | length),
+                    ([
+                      .assets[]
+                      | select(
+                          .name
+                          | (
+                              startswith("deployment-")
+                              and endswith(".json")
+                            )
+                        )
+                    ] | length),
+                    ([
+                      .assets[]
+                      | select(
+                          .name
+                          | (
+                              startswith("deployment-")
+                              and endswith(".json")
+                            )
+                        )
+                    ][0].id // empty),
+                    ([
+                      .assets[]
+                      | select(
+                          .name
+                          | (
+                              startswith("deployment-")
+                              and endswith(".json")
+                            )
+                        )
+                    ][0].name // empty)
+                  ]
+                | @tsv
+              '
+          )"
+          if [[ -n "$pointer" ]]; then
+            IFS=$'\t' read -r pointer_tag asset_count pointer_count \
+              pointer_asset_id pointer_asset_name <<<"$pointer"
+            pointer_key="${pointer_tag#docs-pages-deployment-v1-}"
+            pointer_run_id="${pointer_key%-*}"
+            pointer_run_attempt="${pointer_key##*-}"
+            if [[ ! "$pointer_run_id" =~ ^[0-9]+$ ||
+                  ! "$pointer_run_attempt" =~ ^[0-9]+$ ||
+                  "$asset_count" != 3 ||
+                  "$pointer_count" != 1 ||
+                  "$pointer_asset_name" != "deployment-${pointer_run_id}-${pointer_run_attempt}.json" ||
+                  ! "$pointer_asset_id" =~ ^[0-9]+$ ]]; then
+              echo "Latest deployment pointer release is invalid." >&2
+              exit 1
+            fi
               gh api \
                 -H "Accept: application/octet-stream" \
                 "repos/${GITHUB_REPOSITORY}/releases/assets/${pointer_asset_id}" \
                 > prior-deployment.json
               prior="$(
-                jq -r \
-                  '[.archiveRunId, .sourceSha, ".github/workflows/docs.yml", .deploymentRunId] | @tsv' \
-                  prior-deployment.json
+                jq -r '
+                  select(.schemaVersion == 1)
+                  | [
+                      .archiveRunId,
+                      .archiveRunAttempt,
+                      .sourceSha,
+                      ".github/workflows/docs.yml",
+                      .deploymentRunId,
+                      (.stageRunAttempt // 0),
+                      (.deployRunAttempt // 0),
+                      (.smokeRunAttempt // 0),
+                      .publicationRunAttempt,
+                      (.bootstrapSource // false)
+                    ]
+                  | @tsv
+                ' prior-deployment.json
               )"
-              IFS=$'\t' read -r run_id source_sha source_path deployment_run_id \
+              IFS=$'\t' read -r run_id run_attempt source_sha source_path \
+                deployment_run_id stage_run_attempt deploy_run_attempt \
+                smoke_run_attempt publication_run_attempt bootstrap_source \
                 <<<"$prior"
+              deployment_run_attempt="$publication_run_attempt"
               if [[ ! "$run_id" =~ ^[0-9]+$ ||
+                    ! "$run_attempt" =~ ^[0-9]+$ ||
                     ! "$source_sha" =~ ^[0-9a-f]{40}$ ||
-                    ! "$deployment_run_id" =~ ^[0-9]+$ ]]; then
+                    "$deployment_run_id" != "$pointer_run_id" ||
+                    "$publication_run_attempt" != "$pointer_run_attempt" ||
+                    (
+                      "$bootstrap_source" == true &&
+                      "$run_attempt" != 1
+                    ) ||
+                    (
+                      "$bootstrap_source" != true &&
+                      (
+                        ! "$stage_run_attempt" =~ ^[0-9]+$ ||
+                        "$stage_run_attempt" == 0 ||
+                        ! "$deploy_run_attempt" =~ ^[0-9]+$ ||
+                        "$deploy_run_attempt" == 0 ||
+                        ! "$smoke_run_attempt" =~ ^[0-9]+$ ||
+                        "$smoke_run_attempt" == 0
+                      )
+                    ) ]]; then
                 echo "Latest deployment pointer is invalid." >&2
                 exit 1
               fi
               pointer_run="$(
                 gh api \
-                  "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}" \
-                  --jq '[.conclusion, .event, .head_branch, .path] | @tsv'
+                  "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${deployment_run_attempt}" \
+                  --jq '[.conclusion, .event, .head_branch, .path, .run_attempt] | @tsv'
               )"
-              if [[ "$pointer_run" != $'success\tpush\tmain\t.github/workflows/docs.yml' &&
-                    "$pointer_run" != $'success\tworkflow_dispatch\tmain\t.github/workflows/docs.yml' ]]; then
+              IFS=$'\t' read -r pointer_conclusion pointer_event \
+                pointer_branch pointer_path pointer_attempt <<<"$pointer_run"
+              if [[ "$pointer_branch" != main ||
+                    "$pointer_attempt" != "$deployment_run_attempt" ||
+                    (
+                      "$pointer_event" != push &&
+                      "$pointer_event" != workflow_dispatch
+                    ) ||
+                    (
+                      "$pointer_path" != ".github/workflows/docs.yml" &&
+                      "$pointer_path" != ".github/workflows/jekyll-gh-pages.yml"
+                    ) ||
+                    (
+                      "$pointer_path" == ".github/workflows/jekyll-gh-pages.yml" &&
+                      "$pointer_event" != push
+                    ) ]]; then
                 echo "Latest deployment pointer is not backed by a successful main documentation run." >&2
+                exit 1
+              fi
+              if [[ "$pointer_conclusion" != success &&
+                    "$pointer_conclusion" != failure ]]; then
+                echo "Incomplete workflow attempts are not deployment pointers." >&2
+                exit 1
+              fi
+              if [[ "$bootstrap_source" == true ]]; then
+                if [[ "$pointer_conclusion" != success ]]; then
+                  echo "Bootstrap deployment pointers must be successful." >&2
+                  exit 1
+                fi
+              elif [[ "$pointer_path" == ".github/workflows/docs.yml" ]]; then
+                for phase in \
+                  "stage-pages-release:${stage_run_attempt}" \
+                  "deploy:${deploy_run_attempt}" \
+                  "production-smoke:${smoke_run_attempt}"; do
+                  phase_name="${phase%%:*}"
+                  phase_attempt="${phase##*:}"
+                  phase_jobs="$(
+                    gh api \
+                      --paginate \
+                      --slurp \
+                      "repos/${GITHUB_REPOSITORY}/actions/runs/${deployment_run_id}/attempts/${phase_attempt}/jobs?per_page=100" |
+                      jq -r --arg name "$phase_name" '
+                        [
+                          .[].jobs[]
+                          | select(
+                              .name == $name
+                              and .conclusion == "success"
+                            )
+                          | .name
+                        ]
+                        | unique
+                        | join(",")
+                      '
+                  )"
+                  if [[ "$phase_jobs" != "$phase_name" ]]; then
+                    echo "Deployment pointer lacks exact successful ${phase_name} evidence." >&2
+                    exit 1
+                  fi
+                done
+              elif [[ "$pointer_conclusion" != success ]]; then
+                echo "Failed legacy workflow attempts are not deployment pointers." >&2
                 exit 1
               fi
               archive_run="$(
                 gh api \
-                  "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" \
-                  --jq '[.conclusion, .event, .head_branch, .path, .head_sha] | @tsv'
+                  "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/attempts/${run_attempt}" \
+                  --jq '[.conclusion, .event, .head_branch, .path, .head_sha, .run_attempt] | @tsv'
               )"
               IFS=$'\t' read -r archive_conclusion archive_event \
-                archive_branch archive_path archive_sha <<<"$archive_run"
-              if [[ "$archive_conclusion" != success ||
-                    "$archive_event" != push ||
+                archive_branch archive_path archive_sha archive_attempt \
+                <<<"$archive_run"
+              if [[ "$archive_event" != push ||
                     "$archive_branch" != main ||
                     "$archive_sha" != "$source_sha" ||
+                    "$archive_attempt" != "$run_attempt" ||
                     (
                       "$archive_path" != ".github/workflows/docs.yml" &&
                       "$archive_path" != ".github/workflows/jekyll-gh-pages.yml"
                     ) ]]; then
                 echo "Latest deployment pointer names an invalid archive source." >&2
+                exit 1
+              fi
+              if [[ "$archive_path" == ".github/workflows/docs.yml" ]]; then
+                if [[ "$archive_conclusion" != success &&
+                      "$archive_conclusion" != failure ]]; then
+                  echo "Incomplete workflow attempts are not archive sources." >&2
+                  exit 1
+                fi
+                archive_jobs="$(
+                  gh api \
+                    --paginate \
+                    --slurp \
+                    "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/attempts/${run_attempt}/jobs?per_page=100" |
+                    jq -r '
+                      [
+                        .[].jobs[]
+                        | select(
+                            .name == "build"
+                            and .conclusion == "success"
+                          )
+                        | .name
+                      ]
+                      | unique
+                      | sort
+                      | join(",")
+                    '
+                )"
+                if [[ "$archive_jobs" != "build" ]]; then
+                  echo "Latest deployment pointer lacks successful archive evidence." >&2
+                  exit 1
+                fi
+              elif [[ "$archive_conclusion" != success ]]; then
+                echo "Incomplete legacy workflow attempts are not archive sources." >&2
                 exit 1
               fi
               if [[ "$archive_path" == ".github/workflows/jekyll-gh-pages.yml" ]]; then
@@ -451,7 +952,6 @@ jobs:
                   exit 1
                 fi
               fi
-            fi
           fi
 
           if [[ -z "$prior" ]]; then
@@ -465,89 +965,143 @@ jobs:
               jq -r '
                 [
                   .[].workflow_runs[]
-                  | select(.path == ".github/workflows/docs.yml")
+                  | select(
+                      .path == ".github/workflows/docs.yml"
+                      and .run_attempt == 1
+                    )
                 ]
                 | sort_by(.created_at)
                 | (last // empty)
-                | [.id, .head_sha, .path]
+                | [.id, .run_attempt, .head_sha, .path]
                 | @tsv
               ' <<<"$runs"
             )"
             if [[ -z "$prior" ]]; then
               prior="$(
                 jq -r '
-                  [
-                    .[].workflow_runs[]
-                    | select(.path == ".github/workflows/jekyll-gh-pages.yml")
-                  ]
-                  | sort_by(.created_at)
-                  | (last // empty)
-                  | [.id, .head_sha, .path]
-                  | @tsv
+                  . as $runs
+                  | if any(
+                      $runs[].workflow_runs[];
+                      .path == ".github/workflows/docs.yml"
+                    ) then
+                      empty
+                    else
+                      [
+                        $runs[].workflow_runs[]
+                        | select(
+                            .path == ".github/workflows/jekyll-gh-pages.yml"
+                            and .run_attempt == 1
+                          )
+                      ]
+                      | sort_by(.created_at)
+                      | (last // empty)
+                      | [.id, .run_attempt, .head_sha, .path]
+                      | @tsv
+                    end
                 ' <<<"$runs"
               )"
             fi
+            IFS=$'\t' read -r run_id run_attempt source_sha source_path \
+              <<<"$prior"
+            deployment_run_id="$run_id"
+            deployment_run_attempt="$run_attempt"
           fi
-          IFS=$'\t' read -r run_id source_sha source_path <<<"$prior"
           if [[ ! "$run_id" =~ ^[0-9]+$ ||
-                ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
+                ! "$run_attempt" =~ ^[0-9]+$ ||
+                ! "$deployment_run_id" =~ ^[0-9]+$ ||
+                ! "$deployment_run_attempt" =~ ^[0-9]+$ ||
+                ! "$source_sha" =~ ^[0-9a-f]{40}$ ||
+                (
+                  "$source_path" != ".github/workflows/docs.yml" &&
+                  "$source_path" != ".github/workflows/jekyll-gh-pages.yml"
+                ) ]]; then
             echo "No successful main documentation deployment is available to retain." >&2
             exit 1
           fi
           echo "Retaining prior deployment ${run_id} from ${source_path}."
           {
-            echo "deployment_run_id=${deployment_run_id:-none}"
+            echo "deployment_run_attempt=${deployment_run_attempt}"
+            echo "deployment_run_id=${deployment_run_id}"
+            echo "run_attempt=${run_attempt}"
             echo "run_id=${run_id}"
             echo "source_sha=${source_sha}"
+            echo "source_path=${source_path}"
           } >> "$GITHUB_OUTPUT"
 
       - name: Inspect retained prior artifact
         id: prior-archive
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRIOR_DEPLOYMENT_RUN_ATTEMPT: ${{ steps.prior.outputs.deployment_run_attempt }}
+          PRIOR_DEPLOYMENT_RUN_ID: ${{ steps.prior.outputs.deployment_run_id }}
+          PRIOR_RUN_ATTEMPT: ${{ steps.prior.outputs.run_attempt }}
           PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
+          PRIOR_SOURCE_SHA: ${{ steps.prior.outputs.source_sha }}
         run: |
-          archive_name="github-pages-${PRIOR_RUN_ID}.tar"
+          archive_tag="docs-pages-deployment-v1-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}"
+          archive_name="github-pages-${PRIOR_RUN_ID}-${PRIOR_RUN_ATTEMPT}.tar"
           checksum_name="${archive_name}.sha256"
-          archive_count=0
-          checksum_count=0
-          if gh release view docs-pages-archive >/dev/null 2>&1; then
-            release_id="$(
-              gh api \
-                "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
-                --jq .id
-            )"
-            assets="$(
-              gh api \
-                --paginate \
-                --slurp \
-                "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100"
-            )"
-            archive_count="$(
-              jq --arg name "$archive_name" \
-                '[.[][] | select(.name == $name)] | length' <<<"$assets"
-            )"
-            checksum_count="$(
-              jq --arg name "$checksum_name" \
-                '[.[][] | select(.name == $name)] | length' <<<"$assets"
-            )"
-          fi
-          if [[ "$archive_count" == 1 && "$checksum_count" == 1 ]]; then
+          pointer_name="deployment-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}.json"
+          release="$(
+            gh api \
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r --arg tag "$archive_tag" '
+                [
+                  .[][]
+                  | select(.tag_name == $tag)
+                ]
+                | if length > 1 then
+                    error("duplicate prior rollback release")
+                  else
+                    (first // empty)
+                  end
+                | [
+                    .immutable,
+                    .target_commitish,
+                    (.assets | length),
+                    ([.assets[].name] | sort | join(","))
+                  ]
+                | @tsv
+              '
+          )"
+          if [[ -n "$release" ]]; then
+            IFS=$'\t' read -r immutable target asset_count asset_names \
+              <<<"$release"
+            if [[ "$immutable" != true ||
+                  "$target" != "$PRIOR_SOURCE_SHA" ||
+                  "$asset_count" != 3 ||
+                  "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ]]; then
+              echo "Prior rollback release is invalid." >&2
+              exit 1
+            fi
             mkdir -p prior-archive
-            gh release download docs-pages-archive \
+            gh release download "$archive_tag" \
               --pattern "$archive_name" \
               --pattern "$checksum_name" \
+              --pattern "$pointer_name" \
               --dir prior-archive
             (
               cd prior-archive
               sha256sum -c "$checksum_name"
             )
+            jq -e \
+              --argjson archiveRunId "$PRIOR_RUN_ID" \
+              --argjson archiveRunAttempt "$PRIOR_RUN_ATTEMPT" \
+              --arg sourceSha "$PRIOR_SOURCE_SHA" \
+              --argjson deploymentRunId "$PRIOR_DEPLOYMENT_RUN_ID" \
+              --argjson publicationRunAttempt "$PRIOR_DEPLOYMENT_RUN_ATTEMPT" \
+              '.schemaVersion == 1
+                and .archiveRunId == $archiveRunId
+                and .archiveRunAttempt == $archiveRunAttempt
+                and .sourceSha == $sourceSha
+                and .deploymentRunId == $deploymentRunId
+                and .publicationRunAttempt == $publicationRunAttempt' \
+              "prior-archive/${pointer_name}" >/dev/null
             echo "download=false" >> "$GITHUB_OUTPUT"
-          elif [[ "$archive_count" == 0 && "$checksum_count" == 0 ]]; then
-            echo "download=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Prior rollback archive is incomplete or duplicated." >&2
-            exit 1
+            echo "download=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Download prior Pages artifact
@@ -564,150 +1118,243 @@ jobs:
         if: steps.prior-archive.outputs.download == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRIOR_DEPLOYMENT_RUN_ATTEMPT: ${{ steps.prior.outputs.deployment_run_attempt }}
+          PRIOR_DEPLOYMENT_RUN_ID: ${{ steps.prior.outputs.deployment_run_id }}
+          PRIOR_RUN_ATTEMPT: ${{ steps.prior.outputs.run_attempt }}
           PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
           PRIOR_SOURCE_SHA: ${{ steps.prior.outputs.source_sha }}
+          PRIOR_SOURCE_PATH: ${{ steps.prior.outputs.source_path }}
         run: |
           mkdir -p prior-archive
-          archive_name="github-pages-${PRIOR_RUN_ID}.tar"
+          archive_tag="docs-pages-deployment-v1-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}"
+          archive_name="github-pages-${PRIOR_RUN_ID}-${PRIOR_RUN_ATTEMPT}.tar"
           checksum_name="${archive_name}.sha256"
+          pointer_name="deployment-${PRIOR_DEPLOYMENT_RUN_ID}-${PRIOR_DEPLOYMENT_RUN_ATTEMPT}.json"
+          if [[ "$PRIOR_SOURCE_PATH" == ".github/workflows/docs.yml" ]]; then
+            if [[ "$PRIOR_RUN_ATTEMPT" != 1 ]]; then
+              echo "A rerun pre-staging artifact cannot prove its exact attempt." >&2
+              exit 1
+            fi
+            if ! tar -xOf prior-download/artifact.tar ./deployment.json \
+              > prior-download/deployment.json; then
+              echo "Prior Pages artifact has no deployment identity." >&2
+              exit 1
+            fi
+            if ! jq -e \
+              --arg sourceSha "$PRIOR_SOURCE_SHA" \
+              '.sourceSha == $sourceSha' \
+              prior-download/deployment.json >/dev/null; then
+              echo "Prior Pages artifact does not match its selected workflow source." >&2
+              exit 1
+            fi
+          elif [[ "$PRIOR_SOURCE_PATH" == ".github/workflows/jekyll-gh-pages.yml" ]]; then
+            if [[ "$PRIOR_RUN_ATTEMPT" != 1 ]]; then
+              echo "A rerun legacy artifact cannot prove its exact attempt." >&2
+              exit 1
+            fi
+          else
+            echo "Prior Pages artifact has an invalid workflow source." >&2
+            exit 1
+          fi
           mv prior-download/artifact.tar "prior-archive/${archive_name}"
           (
             cd prior-archive
             sha256sum "$archive_name" > "$checksum_name"
             sha256sum -c "$checksum_name"
           )
-          if ! gh release view docs-pages-archive >/dev/null 2>&1; then
-            gh release create docs-pages-archive \
-              --prerelease \
-              --target "$PRIOR_SOURCE_SHA" \
-              --title "Documentation deployment archive" \
-              --notes "Automation-owned Pages artifacts for exact rollback."
-          fi
-          gh release upload docs-pages-archive \
+          printf \
+            '{"schemaVersion":1,"archiveRunId":%s,"archiveRunAttempt":%s,"sourceSha":"%s","deploymentRunId":%s,"publicationRunAttempt":%s,"bootstrapSource":true}\n' \
+            "$PRIOR_RUN_ID" \
+            "$PRIOR_RUN_ATTEMPT" \
+            "$PRIOR_SOURCE_SHA" \
+            "$PRIOR_DEPLOYMENT_RUN_ID" \
+            "$PRIOR_DEPLOYMENT_RUN_ATTEMPT" \
+            > "prior-archive/${pointer_name}"
+          gh release create "$archive_tag" \
             "prior-archive/${archive_name}" \
-            "prior-archive/${checksum_name}"
+            "prior-archive/${checksum_name}" \
+            "prior-archive/${pointer_name}" \
+            --latest=false \
+            --prerelease \
+            --target "$PRIOR_SOURCE_SHA" \
+            --title "Documentation deployment ${PRIOR_DEPLOYMENT_RUN_ID}/${PRIOR_DEPLOYMENT_RUN_ATTEMPT}" \
+            --notes "Automation-owned Pages artifact for exact rollback."
           mkdir prior-verify
-          gh release download docs-pages-archive \
+          gh release download "$archive_tag" \
             --pattern "$archive_name" \
             --pattern "$checksum_name" \
+            --pattern "$pointer_name" \
             --dir prior-verify
           (
             cd prior-verify
             sha256sum -c "$checksum_name"
           )
 
-      - name: Download current Pages artifact
+  stage-pages-release:
+    if: >-
+      always() &&
+      needs.build.result == 'success' &&
+      needs.build.outputs.recovery_stale != 'true' &&
+      (
+        inputs.rollback_run_id != '' ||
+        (
+          github.event_name == 'push' &&
+          needs.retain-pages-artifacts.result == 'success'
+        )
+      )
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - retain-pages-artifacts
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - name: Download candidate Pages artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: github-pages
-          path: current-archive
+          path: candidate
 
-      - name: Retain and verify current Pages artifact
+      - name: Stage and verify mutable deployment release
         env:
+          ARCHIVE_RUN_ATTEMPT: ${{ needs.build.outputs.archive_run_attempt }}
+          ARCHIVE_RUN_ID: ${{ needs.build.outputs.archive_run_id }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
+          SOURCE_SHA: ${{ needs.build.outputs.source_sha }}
         run: |
-          archive_name="github-pages-${GITHUB_RUN_ID}.tar"
+          if [[ ! "$ARCHIVE_RUN_ID" =~ ^[0-9]+$ ||
+                ! "$ARCHIVE_RUN_ATTEMPT" =~ ^[0-9]+$ ||
+                ! "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Candidate deployment identity is invalid." >&2
+            exit 1
+          fi
+          release_tag="docs-pages-candidate-v1-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          archive_name="github-pages-${ARCHIVE_RUN_ID}-${ARCHIVE_RUN_ATTEMPT}.tar"
           checksum_name="${archive_name}.sha256"
-          mv current-archive/artifact.tar "current-archive/${archive_name}"
+          pointer_name="deployment-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.json"
+          mv candidate/artifact.tar "candidate/${archive_name}"
           (
-            cd current-archive
+            cd candidate
             sha256sum "$archive_name" > "$checksum_name"
             sha256sum -c "$checksum_name"
           )
-          if ! gh release view docs-pages-archive >/dev/null 2>&1; then
-            gh release create docs-pages-archive \
-              --prerelease \
-              --target "$GITHUB_SHA" \
-              --title "Documentation deployment archive" \
-              --notes "Automation-owned Pages artifacts for exact rollback."
-          fi
-          release_id="$(
-            gh api \
-              "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
-              --jq .id
-          )"
-          existing_assets="$(
+          printf \
+            '{"schemaVersion":1,"archiveRunId":%s,"archiveRunAttempt":%s,"sourceSha":"%s","deploymentRunId":%s,"stageRunAttempt":%s}\n' \
+            "$ARCHIVE_RUN_ID" \
+            "$ARCHIVE_RUN_ATTEMPT" \
+            "$SOURCE_SHA" \
+            "$GITHUB_RUN_ID" \
+            "$GITHUB_RUN_ATTEMPT" \
+            > "candidate/${pointer_name}"
+          release="$(
             gh api \
               --paginate \
               --slurp \
-              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100"
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r --arg tag "$release_tag" '
+                [
+                  .[][]
+                  | select(.tag_name == $tag)
+                ]
+                | if length > 1 then
+                    error("duplicate candidate release")
+                  else
+                    (first // empty)
+                  end
+                | [
+                    .id,
+                    .draft,
+                    .immutable,
+                    .target_commitish,
+                    (.assets | length),
+                    ([.assets[].name] | sort | join(","))
+                  ]
+                | @tsv
+              '
           )"
-          archive_count="$(
-            jq --arg name "$archive_name" \
-              '[.[][] | select(.name == $name)] | length' \
-              <<<"$existing_assets"
+          if [[ -z "$release" ]]; then
+            gh release create "$release_tag" \
+              "candidate/${archive_name}" \
+              "candidate/${checksum_name}" \
+              "candidate/${pointer_name}" \
+              --draft \
+              --latest=false \
+              --prerelease \
+              --target "$SOURCE_SHA" \
+              --title "Documentation deployment ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}" \
+              --notes "Automation-owned exact deployment candidate."
+          fi
+          release="$(
+            gh api \
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r --arg tag "$release_tag" '
+                [
+                  .[][]
+                  | select(.tag_name == $tag)
+                ]
+                | if length != 1 then
+                    error("candidate release is unavailable or duplicated")
+                  else
+                    first
+                  end
+                | [
+                    .id,
+                    .draft,
+                    .immutable,
+                    .target_commitish,
+                    (.assets | length),
+                    ([.assets[].name] | sort | join(","))
+                  ]
+                | @tsv
+              '
           )"
-          checksum_count="$(
-            jq --arg name "$checksum_name" \
-              '[.[][] | select(.name == $name)] | length' \
-              <<<"$existing_assets"
-          )"
-          if [[ "$archive_count" == 0 && "$checksum_count" == 0 ]]; then
-            gh release upload docs-pages-archive \
-              "current-archive/${archive_name}" \
-              "current-archive/${checksum_name}"
-          elif [[ "$archive_count" == 1 && "$checksum_count" == 1 ]]; then
-            mkdir current-existing
-            gh release download docs-pages-archive \
-              --pattern "$archive_name" \
-              --pattern "$checksum_name" \
-              --dir current-existing
-            (
-              cd current-existing
-              sha256sum -c "$checksum_name"
-            )
-            mkdir current-tree existing-tree
-            tar -xf "current-archive/${archive_name}" -C current-tree
-            tar -xf "current-existing/${archive_name}" -C existing-tree
-            diff --no-dereference --recursive current-tree existing-tree
-          else
-            echo "Current rollback archive is incomplete or duplicated." >&2
+          IFS=$'\t' read -r release_id draft immutable target \
+            asset_count asset_names <<<"$release"
+          if [[ ! "$release_id" =~ ^[0-9]+$ ||
+                "$target" != "$SOURCE_SHA" ||
+                "$asset_count" != 3 ||
+                "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ||
+                ! (
+                  (
+                    "$draft" == true &&
+                    "$immutable" == false
+                  ) ||
+                  (
+                    "$draft" == false &&
+                    "$immutable" == true
+                  )
+                ) ]]; then
+            echo "Candidate deployment release is invalid." >&2
             exit 1
           fi
-
-          mkdir current-verify
-          gh release download docs-pages-archive \
-            --pattern "$archive_name" \
-            --pattern "$checksum_name" \
-            --dir current-verify
+          mkdir candidate-verify
+          gh api \
+            "repos/${GITHUB_REPOSITORY}/releases/${release_id}" \
+            --jq '.assets[] | [.name, .id] | @tsv' |
+            while IFS=$'\t' read -r name asset_id; do
+              gh api \
+                -H "Accept: application/octet-stream" \
+                "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}" \
+                > "candidate-verify/${name}"
+            done
           (
-            cd current-verify
+            cd candidate-verify
             sha256sum -c "$checksum_name"
           )
-
-          gh api \
-              --paginate \
-              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-              --jq '.[] | select(.name | (startswith("github-pages-") and endswith(".tar"))) | [.created_at, .name] | @tsv' |
-            sort -r |
-            tail -n +11 |
-            while IFS=$'\t' read -r _ expired_name; do
-              if [[ "$expired_name" == "github-pages-${PRIOR_RUN_ID}.tar" ]]; then
-                echo "Keeping currently deployable rollback asset ${expired_name}."
-                continue
-              fi
-              for name in "$expired_name" "${expired_name}.sha256"; do
-                asset_id="$(
-                  gh api \
-                    --paginate \
-                    "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-                    --jq ".[] | select(.name == \"${name}\") | .id" |
-                    head -n 1
-                )"
-                if [[ -n "$asset_id" ]]; then
-                  echo "Removing expired rollback asset ${name}."
-                  gh api \
-                    --method DELETE \
-                    "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}"
-                fi
-              done
-            done
+          cmp "candidate/${pointer_name}" "candidate-verify/${pointer_name}"
+          mkdir candidate-tree verify-tree
+          tar -xf "candidate/${archive_name}" -C candidate-tree
+          tar -xf "candidate-verify/${archive_name}" -C verify-tree
+          diff --no-dereference --recursive candidate-tree verify-tree
 
   deploy:
     if: >-
       always() &&
       needs.build.result == 'success' &&
+      needs.stage-pages-release.result == 'success' &&
       needs.build.outputs.recovery_stale != 'true' &&
       (
         inputs.rollback_run_id != '' ||
@@ -723,6 +1370,7 @@ jobs:
     needs:
       - build
       - retain-pages-artifacts
+      - stage-pages-release
     permissions:
       contents: read
       id-token: write
@@ -786,72 +1434,372 @@ jobs:
       - build
       - deploy
       - production-smoke
+      - stage-pages-release
     permissions:
+      actions: read
       contents: write
     steps:
       - name: Record exact currently deployable archive
         env:
-          ARCHIVE_RUN_ID: >-
-            ${{
-              inputs.rollback_run_id != '' &&
-              inputs.rollback_run_id ||
-              github.run_id
-            }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_SHA: ${{ needs.build.outputs.source_sha }}
         run: |
-          if [[ ! "$ARCHIVE_RUN_ID" =~ ^[0-9]+$ ||
-                ! "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+          if [[ ! "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
             echo "Deployment identity is invalid." >&2
             exit 1
           fi
-          pointer_name="deployment-${GITHUB_RUN_ID}.json"
-          printf \
-            '{"archiveRunId":"%s","sourceSha":"%s","deploymentRunId":"%s"}\n' \
-            "$ARCHIVE_RUN_ID" \
-            "$SOURCE_SHA" \
-            "$GITHUB_RUN_ID" \
-            > "$pointer_name"
-          release_id="$(
-            gh api \
-              "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
-              --jq .id
-          )"
-          existing_asset_id="$(
+          release_prefix="docs-pages-candidate-v1-${GITHUB_RUN_ID}-"
+          release="$(
             gh api \
               --paginate \
-              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-              --jq ".[] | select(.name == \"${pointer_name}\") | .id" |
-              head -n 1
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r --arg prefix "$release_prefix" '
+                [
+                  .[][]
+                  | select(.tag_name | startswith($prefix))
+                  | . + {
+                      deployment_attempt: (
+                        .tag_name
+                        | ltrimstr($prefix)
+                        | select(test("^[0-9]+$"))
+                        | tonumber
+                      )
+                    }
+                ]
+                | sort_by(.deployment_attempt)
+                | (last // empty)
+                | [
+                    .tag_name,
+                    .deployment_attempt,
+                    .id,
+                    .draft,
+                    .immutable,
+                    .target_commitish,
+                    (.assets | length),
+                    ([.assets[].name] | sort | join(",")),
+                    ([
+                      .assets[]
+                      | select(
+                          .name
+                          | (
+                              startswith("deployment-")
+                              and endswith(".json")
+                            )
+                        )
+                    ] | length),
+                    ([
+                      .assets[]
+                      | select(
+                          .name
+                          | (
+                              startswith("deployment-")
+                              and endswith(".json")
+                            )
+                        )
+                    ][0].id // empty)
+                  ]
+                | @tsv
+              '
           )"
-          if [[ -z "$existing_asset_id" ]]; then
-            gh release upload docs-pages-archive "$pointer_name"
-          else
-            mkdir existing-pointer
-            gh api \
-              -H "Accept: application/octet-stream" \
-              "repos/${GITHUB_REPOSITORY}/releases/assets/${existing_asset_id}" \
-              > "existing-pointer/${pointer_name}"
-            cmp "$pointer_name" "existing-pointer/${pointer_name}"
+          IFS=$'\t' read -r source_tag source_attempt release_id draft \
+            immutable target asset_count asset_names manifest_count \
+            manifest_asset_id <<<"$release"
+          if [[ "$source_tag" != "${release_prefix}${source_attempt}" ||
+                ! "$source_attempt" =~ ^[0-9]+$ ||
+                ! "$release_id" =~ ^[0-9]+$ ||
+                "$target" != "$SOURCE_SHA" ||
+                "$asset_count" != 3 ||
+                "$manifest_count" != 1 ||
+                ! "$manifest_asset_id" =~ ^[0-9]+$ ||
+                ! (
+                  (
+                    "$draft" == true &&
+                    "$immutable" == false
+                  ) ||
+                  (
+                    "$draft" == false &&
+                    "$immutable" == true
+                  )
+                ) ]]; then
+            echo "Deployment candidate release is invalid." >&2
+            exit 1
           fi
           gh api \
+            -H "Accept: application/octet-stream" \
+            "repos/${GITHUB_REPOSITORY}/releases/assets/${manifest_asset_id}" \
+            > source-deployment.json
+          source_manifest="$(
+            jq -r '
+              select(.schemaVersion == 1)
+              | [
+                  .archiveRunId,
+                  .archiveRunAttempt,
+                  .sourceSha,
+                  .deploymentRunId,
+                  .stageRunAttempt
+                ]
+              | @tsv
+            ' source-deployment.json
+          )"
+          IFS=$'\t' read -r archive_run_id archive_run_attempt source_sha \
+            deployment_run_id stage_run_attempt <<<"$source_manifest"
+          archive_name="github-pages-${archive_run_id}-${archive_run_attempt}.tar"
+          checksum_name="${archive_name}.sha256"
+          source_pointer_name="deployment-${GITHUB_RUN_ID}-${source_attempt}.json"
+          if [[ ! "$archive_run_id" =~ ^[0-9]+$ ||
+                ! "$archive_run_attempt" =~ ^[0-9]+$ ||
+                "$source_sha" != "$SOURCE_SHA" ||
+                "$deployment_run_id" != "$GITHUB_RUN_ID" ||
+                "$stage_run_attempt" != "$source_attempt" ||
+                "$asset_names" != "${source_pointer_name},${archive_name},${checksum_name}" ]]; then
+            echo "Deployment candidate manifest is invalid." >&2
+            exit 1
+          fi
+          stage_jobs="$(
+            gh api \
               --paginate \
-              "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-              --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id, .name] | @tsv' |
-            sort -r |
-            tail -n +11 |
-            while IFS=$'\t' read -r _ asset_id asset_name; do
-              echo "Removing expired deployment pointer ${asset_name}."
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/attempts/${stage_run_attempt}/jobs?per_page=100" |
+              jq -r '
+                [
+                  .[].jobs[]
+                  | select(
+                      .name == "stage-pages-release"
+                      and .conclusion == "success"
+                    )
+                  | .name
+                ]
+                | unique
+                | join(",")
+              '
+          )"
+          if [[ "$stage_jobs" != "stage-pages-release" ]]; then
+            echo "Deployment candidate lacks successful staging evidence." >&2
+            exit 1
+          fi
+          deploy_run_attempt=
+          smoke_run_attempt=
+          for ((attempt = 1; attempt <= GITHUB_RUN_ATTEMPT; attempt++)); do
+            successful_jobs="$(
               gh api \
-                --method DELETE \
-                "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}"
-            done
+                --paginate \
+                --slurp \
+                "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/attempts/${attempt}/jobs?per_page=100" |
+                jq -r '
+                  [
+                    .[].jobs[]
+                    | select(
+                        (
+                          .name == "deploy"
+                          or .name == "production-smoke"
+                        )
+                        and .conclusion == "success"
+                      )
+                    | .name
+                  ]
+                  | unique
+                  | sort
+                  | join(",")
+                '
+            )"
+            if [[ "$successful_jobs" == "deploy" ||
+                  "$successful_jobs" == "deploy,production-smoke" ]]; then
+              deploy_run_attempt="$attempt"
+            fi
+            if [[ "$successful_jobs" == "deploy,production-smoke" ||
+                  "$successful_jobs" == "production-smoke" ]]; then
+              smoke_run_attempt="$attempt"
+            fi
+          done
+          if [[ ! "$deploy_run_attempt" =~ ^[0-9]+$ ||
+                ! "$smoke_run_attempt" =~ ^[0-9]+$ ]]; then
+            echo "Deployment candidate lacks successful production evidence." >&2
+            exit 1
+          fi
+          curl \
+            --fail \
+            --header "Cache-Control: no-cache" \
+            --retry 4 \
+            --retry-all-errors \
+            --retry-delay 2 \
+            --show-error \
+            --silent \
+            "https://humanizr.net/deployment.json?run=${deployment_run_id}&attempt=${GITHUB_RUN_ATTEMPT}" \
+            > current-production.json
+          if ! jq -e \
+            --arg sourceSha "$SOURCE_SHA" \
+            --argjson archiveRunId "$archive_run_id" \
+            --argjson archiveRunAttempt "$archive_run_attempt" \
+            '.sourceSha == $sourceSha
+              and .archiveRunId == $archiveRunId
+              and .archiveRunAttempt == $archiveRunAttempt' \
+            current-production.json >/dev/null; then
+            echo "Production no longer matches the deployment candidate." >&2
+            exit 1
+          fi
 
-  recover-after-smoke-failure:
+          mkdir final
+          gh api \
+            "repos/${GITHUB_REPOSITORY}/releases/${release_id}" \
+            --jq '.assets[] | [.name, .id] | @tsv' |
+            while IFS=$'\t' read -r name asset_id; do
+              if [[ "$name" == "$archive_name" ||
+                    "$name" == "$checksum_name" ]]; then
+                gh api \
+                  -H "Accept: application/octet-stream" \
+                  "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}" \
+                  > "final/${name}"
+              fi
+            done
+          (
+            cd final
+            sha256sum -c "$checksum_name"
+          )
+          pointer_name="deployment-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.json"
+          printf \
+            '{"schemaVersion":1,"archiveRunId":%s,"archiveRunAttempt":%s,"sourceSha":"%s","deploymentRunId":%s,"stageRunAttempt":%s,"deployRunAttempt":%s,"smokeRunAttempt":%s,"publicationRunAttempt":%s}\n' \
+            "$archive_run_id" \
+            "$archive_run_attempt" \
+            "$SOURCE_SHA" \
+            "$GITHUB_RUN_ID" \
+            "$stage_run_attempt" \
+            "$deploy_run_attempt" \
+            "$smoke_run_attempt" \
+            "$GITHUB_RUN_ATTEMPT" \
+            > "final/${pointer_name}"
+          pointer_tag="docs-pages-deployment-v1-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          release="$(
+            gh api \
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r --arg tag "$pointer_tag" '
+                [
+                  .[][]
+                  | select(.tag_name == $tag)
+                ]
+                | if length > 1 then
+                    error("final release is duplicated")
+                  else
+                    (first // empty)
+                  end
+                | [
+                    .id,
+                    .draft,
+                    .immutable,
+                    .target_commitish,
+                    (.assets | length),
+                    ([.assets[].name] | sort | join(","))
+                  ]
+                | @tsv
+              '
+          )"
+          if [[ -z "$release" ]]; then
+            gh release create "$pointer_tag" \
+              "final/${archive_name}" \
+              "final/${checksum_name}" \
+              "final/${pointer_name}" \
+              --draft \
+              --latest=false \
+              --prerelease \
+              --target "$SOURCE_SHA" \
+              --title "Documentation deployment ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}" \
+              --notes "Automation-owned exact deployment release."
+          fi
+          release="$(
+            gh api \
+              --paginate \
+              --slurp \
+              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r --arg tag "$pointer_tag" '
+                [
+                  .[][]
+                  | select(.tag_name == $tag)
+                ]
+                | if length != 1 then
+                    error("final release is unavailable or duplicated")
+                  else
+                    first
+                  end
+                | [
+                    .id,
+                    .draft,
+                    .immutable,
+                    .target_commitish,
+                    (.assets | length),
+                    ([.assets[].name] | sort | join(","))
+                  ]
+                | @tsv
+              '
+          )"
+          IFS=$'\t' read -r release_id draft immutable target \
+            asset_count asset_names <<<"$release"
+          if [[ ! "$release_id" =~ ^[0-9]+$ ||
+                "$target" != "$SOURCE_SHA" ||
+                "$asset_count" != 3 ||
+                "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ||
+                ! (
+                  (
+                    "$draft" == true &&
+                    "$immutable" == false
+                  ) ||
+                  (
+                    "$draft" == false &&
+                    "$immutable" == true
+                  )
+                ) ]]; then
+            echo "Deployment publication candidate is invalid." >&2
+            exit 1
+          fi
+          mkdir final-verify
+          gh api \
+            "repos/${GITHUB_REPOSITORY}/releases/${release_id}" \
+            --jq '.assets[] | [.name, .id] | @tsv' |
+            while IFS=$'\t' read -r name asset_id; do
+              gh api \
+                -H "Accept: application/octet-stream" \
+                "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}" \
+                > "final-verify/${name}"
+            done
+          (
+            cd final-verify
+            sha256sum -c "$checksum_name"
+          )
+          cmp "final/${pointer_name}" "final-verify/${pointer_name}"
+          if [[ "$draft" == true ]]; then
+            gh api \
+              --method PATCH \
+              "repos/${GITHUB_REPOSITORY}/releases/${release_id}" \
+              -F draft=false >/dev/null
+          fi
+          published="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/releases/${release_id}" \
+              --jq '[.draft, .immutable, .target_commitish, (.assets | length), ([.assets[].name] | sort | join(","))] | @tsv'
+          )"
+          IFS=$'\t' read -r draft immutable target asset_count asset_names \
+            <<<"$published"
+          if [[ "$draft" != false ||
+                "$immutable" != true ||
+                "$target" != "$SOURCE_SHA" ||
+                "$asset_count" != 3 ||
+                "$asset_names" != "${pointer_name},${archive_name},${checksum_name}" ]]; then
+            echo "Published deployment release is invalid." >&2
+            exit 1
+          fi
+
+  recover-after-production-failure:
     if: >-
       always() &&
       needs.deploy.result == 'success' &&
-      needs.production-smoke.result == 'failure' &&
+      (
+        needs.production-smoke.result == 'failure' ||
+        (
+          needs.production-smoke.result == 'success' &&
+          needs.record-production-deployment.result == 'failure'
+        )
+      ) &&
       (
         (
           github.event_name == 'push' &&
@@ -867,6 +1815,7 @@ jobs:
       - retain-pages-artifacts
       - deploy
       - production-smoke
+      - record-production-deployment
     permissions:
       actions: write
       contents: read
@@ -874,29 +1823,88 @@ jobs:
       - name: Dispatch exact retained recovery
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRIOR_DEPLOYMENT_RUN_ATTEMPT: >-
+            ${{ needs.retain-pages-artifacts.outputs.prior_deployment_run_attempt }}
           PRIOR_DEPLOYMENT_RUN_ID: >-
             ${{ needs.retain-pages-artifacts.outputs.prior_deployment_run_id }}
+          PRIOR_RUN_ATTEMPT: >-
+            ${{ needs.retain-pages-artifacts.outputs.prior_run_attempt }}
           PRIOR_RUN_ID: ${{ needs.retain-pages-artifacts.outputs.prior_run_id }}
+          RECORD_RESULT: ${{ needs.record-production-deployment.result }}
+          REQUESTED_ROLLBACK_RUN_ATTEMPT: ${{ inputs.rollback_run_attempt }}
           REQUESTED_ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
         run: |
           recovery_run_id="$PRIOR_RUN_ID"
+          recovery_run_attempt="$PRIOR_RUN_ATTEMPT"
           expected_pointer_run_id="$PRIOR_DEPLOYMENT_RUN_ID"
-          if [[ -n "$REQUESTED_ROLLBACK_RUN_ID" ]]; then
-            release_id="$(
-              gh api \
-                "repos/${GITHUB_REPOSITORY}/releases/tags/docs-pages-archive" \
-                --jq .id
-            )"
-            pointer_asset_id="$(
+          expected_pointer_run_attempt="$PRIOR_DEPLOYMENT_RUN_ATTEMPT"
+          if [[ -n "$REQUESTED_ROLLBACK_RUN_ID" ||
+                "$RECORD_RESULT" == failure ]]; then
+            pointer="$(
               gh api \
                 --paginate \
-                "repos/${GITHUB_REPOSITORY}/releases/${release_id}/assets?per_page=100" \
-                --jq '.[] | select(.name | (startswith("deployment-") and endswith(".json"))) | [.created_at, .id] | @tsv' |
-                sort -r |
-                head -n 1 |
-                cut -f 2
+                --slurp \
+                "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+                jq -r '
+                  [
+                    .[][]
+                    | select(
+                        .tag_name
+                        | startswith("docs-pages-deployment-v1-")
+                      )
+                    | select(.draft == false and .immutable == true)
+                  ]
+                  | sort_by(.published_at)
+                  | (last // empty)
+                  | [
+                      .tag_name,
+                      (.assets | length),
+                      ([.assets[].name] | sort | join(",")),
+                      ([
+                        .assets[]
+                        | select(
+                            .name
+                            | (
+                                startswith("deployment-")
+                                and endswith(".json")
+                              )
+                          )
+                      ] | length),
+                      ([
+                        .assets[]
+                        | select(
+                            .name
+                            | (
+                                startswith("deployment-")
+                                and endswith(".json")
+                              )
+                          )
+                      ][0].id // empty),
+                      ([
+                        .assets[]
+                        | select(
+                            .name
+                            | (
+                                startswith("deployment-")
+                                and endswith(".json")
+                              )
+                          )
+                      ][0].name // empty)
+                    ]
+                  | @tsv
+                '
             )"
-            if [[ ! "$pointer_asset_id" =~ ^[0-9]+$ ]]; then
+            IFS=$'\t' read -r pointer_tag asset_count asset_names pointer_count \
+              pointer_asset_id pointer_asset_name <<<"$pointer"
+            pointer_key="${pointer_tag#docs-pages-deployment-v1-}"
+            pointer_run_id="${pointer_key%-*}"
+            pointer_run_attempt="${pointer_key##*-}"
+            if [[ ! "$pointer_run_id" =~ ^[0-9]+$ ||
+                  ! "$pointer_run_attempt" =~ ^[0-9]+$ ||
+                  "$asset_count" != 3 ||
+                  "$pointer_count" != 1 ||
+                  "$pointer_asset_name" != "deployment-${pointer_run_id}-${pointer_run_attempt}.json" ||
+                  ! "$pointer_asset_id" =~ ^[0-9]+$ ]]; then
               echo "The last known-good deployment pointer is unavailable." >&2
               exit 1
             fi
@@ -907,24 +1915,50 @@ jobs:
             recovery_run_id="$(
               jq -r '.archiveRunId // empty' prior-deployment.json
             )"
+            recovery_run_attempt="$(
+              jq -r '.archiveRunAttempt // empty' prior-deployment.json
+            )"
             expected_pointer_run_id="$(
               jq -r '.deploymentRunId // empty' prior-deployment.json
             )"
-            if [[ "$recovery_run_id" == "$REQUESTED_ROLLBACK_RUN_ID" ]]; then
-              echo "The last known-good artifact also failed smoke; automatic recovery stopped." >&2
+            expected_pointer_run_attempt="$(
+              jq -r '.publicationRunAttempt // empty' prior-deployment.json
+            )"
+            archive_name="github-pages-${recovery_run_id}-${recovery_run_attempt}.tar"
+            checksum_name="${archive_name}.sha256"
+            if ! jq -e \
+              --argjson deploymentRunId "$pointer_run_id" \
+              --argjson publicationRunAttempt "$pointer_run_attempt" \
+              '.schemaVersion == 1
+                and .deploymentRunId == $deploymentRunId
+                and .publicationRunAttempt == $publicationRunAttempt' \
+              prior-deployment.json >/dev/null; then
+              echo "The last known-good deployment pointer is invalid." >&2
+              exit 1
+            fi
+            if [[ "$asset_names" != "${pointer_asset_name},${archive_name},${checksum_name}" ]]; then
+              echo "The last known-good deployment assets are invalid." >&2
+              exit 1
+            fi
+            if [[ "$recovery_run_id" == "$REQUESTED_ROLLBACK_RUN_ID" &&
+                  "$recovery_run_attempt" == "$REQUESTED_ROLLBACK_RUN_ATTEMPT" ]]; then
+              echo "The requested recovery artifact is already the last known-good deployment; automatic recovery stopped." >&2
               exit 1
             fi
           fi
-          if [[ ! "$recovery_run_id" =~ ^[0-9]+$ ]]; then
-            echo "Retained recovery run ID is unavailable." >&2
+          if [[ ! "$recovery_run_id" =~ ^[0-9]+$ ||
+                ! "$recovery_run_attempt" =~ ^[0-9]+$ ]]; then
+            echo "Retained recovery run is unavailable." >&2
             exit 1
           fi
-          if [[ "$expected_pointer_run_id" != none &&
-                ! "$expected_pointer_run_id" =~ ^[0-9]+$ ]]; then
-            echo "Retained deployment pointer run ID is unavailable." >&2
+          if [[ ! "$expected_pointer_run_id" =~ ^[0-9]+$ ||
+                ! "$expected_pointer_run_attempt" =~ ^[0-9]+$ ]]; then
+            echo "Retained deployment pointer is unavailable." >&2
             exit 1
           fi
           gh workflow run docs.yml \
             --ref main \
             -f "rollback_run_id=${recovery_run_id}" \
-            -f "expected_pointer_run_id=${expected_pointer_run_id}"
+            -f "rollback_run_attempt=${recovery_run_attempt}" \
+            -f "expected_pointer_run_id=${expected_pointer_run_id}" \
+            -f "expected_pointer_run_attempt=${expected_pointer_run_attempt}"
