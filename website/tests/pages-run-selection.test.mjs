@@ -84,3 +84,17 @@ test('expensive documentation gates run in parallel before retention', () => {
   assert.match(validation, /\}\}-\$\{\{ matrix\.gate \}\}/);
   assert.match(retention, /needs:\n      - build\n      - validate/);
 });
+
+test('immutable rollback releases publish complete assets initially', () => {
+  assert.doesNotMatch(normalizedWorkflow, /gh release upload/);
+  assert.match(
+    normalizedWorkflow,
+    /gh release create "\$archive_tag" \\\n\s+"[^"]*\$\{archive_name\}" \\\n\s+"[^"]*\$\{checksum_name\}"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /gh release create "\$pointer_tag" \\\n\s+"\$pointer_name"/,
+  );
+  assert.match(normalizedWorkflow, /docs-pages-archive-\$\{GITHUB_RUN_ID\}/);
+  assert.match(normalizedWorkflow, /docs-pages-deployment-\$\{GITHUB_RUN_ID\}/);
+});
