@@ -107,7 +107,8 @@ function selectRollback(releases, runId, attempt) {
 function validAttempt({conclusion, jobs, required}) {
   return (
     conclusion === 'success' ||
-    required.every((name) => jobs[name] === 'success')
+    (conclusion === 'failure' &&
+      required.every((name) => jobs[name] === 'success'))
   );
 }
 
@@ -413,6 +414,22 @@ test('future selection accepts a published pointer after record failure', () => 
     }),
     false,
   );
+  assert.equal(
+    validAttempt({
+      conclusion: 'cancelled',
+      jobs,
+      required: ['deploy', 'production-smoke', 'stage-pages-release'],
+    }),
+    false,
+  );
+  assert.equal(
+    validAttempt({
+      conclusion: 'timed_out',
+      jobs,
+      required: ['build'],
+    }),
+    false,
+  );
   assert.match(
     normalizedWorkflow,
     /actions\/runs\/\$\{deployment_run_id\}\/attempts\/\$\{deployment_run_attempt\}\/jobs/,
@@ -424,6 +441,18 @@ test('future selection accepts a published pointer after record failure', () => 
   assert.match(
     normalizedWorkflow,
     /"\$archive_jobs" != "build"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$conclusion" != failure[\s\S]*?Incomplete workflow attempts are not rollback sources/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$pointer_conclusion" != failure[\s\S]*?Incomplete workflow attempts are not deployment pointers/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$archive_conclusion" != failure[\s\S]*?Incomplete workflow attempts are not archive sources/,
   );
 });
 

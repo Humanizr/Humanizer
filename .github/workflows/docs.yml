@@ -324,6 +324,10 @@ jobs:
             exit 1
           fi
           if [[ "$conclusion" != success ]]; then
+            if [[ "$conclusion" != failure ]]; then
+              echo "Incomplete workflow attempts are not rollback sources." >&2
+              exit 1
+            fi
             if [[ "$path" != ".github/workflows/docs.yml" ]]; then
               echo "Failed workflow attempts are not rollback sources." >&2
               exit 1
@@ -700,6 +704,10 @@ jobs:
                 exit 1
               fi
               if [[ "$pointer_conclusion" != success ]]; then
+                if [[ "$pointer_conclusion" != failure ]]; then
+                  echo "Incomplete workflow attempts are not deployment pointers." >&2
+                  exit 1
+                fi
                 if [[ "$pointer_path" != ".github/workflows/docs.yml" ]]; then
                   echo "Failed legacy workflow attempts are not deployment pointers." >&2
                   exit 1
@@ -752,6 +760,10 @@ jobs:
                 exit 1
               fi
               if [[ "$archive_conclusion" != success ]]; then
+                if [[ "$archive_conclusion" != failure ]]; then
+                  echo "Incomplete workflow attempts are not archive sources." >&2
+                  exit 1
+                fi
                 archive_jobs="$(
                   gh api \
                     --paginate \
