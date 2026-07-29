@@ -12,6 +12,9 @@ colors:
   proof-text: "#edf3f2"
   proof-output: "#91d9e8"
   promise-teal: "#045b6e"
+  white: "#fff"
+  promise-text-muted: "#d7f3f8"
+  promise-text-soft: "#e5f6f9"
   dark-paper: "#11191c"
   dark-paper-raised: "#192327"
   dark-ink: "#edf3f2"
@@ -45,6 +48,20 @@ typography:
     fontSize: "0.78rem"
     fontWeight: 800
     letterSpacing: "0.16em"
+  identity:
+    fontSize: "0.9rem"
+  lede:
+    fontSize: "clamp(1.1rem, 2vw, 1.35rem)"
+  proof-label:
+    fontSize: "0.72rem"
+  proof-code:
+    fontSize: "clamp(0.76rem, 2.4vw, 0.95rem)"
+  route-heading:
+    fontSize: "clamp(1.4rem, 3vw, 2rem)"
+  reference-heading:
+    fontSize: "1.25rem"
+  promise-copy:
+    fontSize: "1.1rem"
 rounded:
   square: "0"
   focus: "0.15rem"

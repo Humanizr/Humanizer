@@ -1,5 +1,6 @@
 .home {
   --home-gutter: clamp(1rem, 4vw, 4rem);
+
   overflow: hidden;
 }
 
@@ -112,7 +113,6 @@
 }
 
 .proofCaption {
-  clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
@@ -122,8 +122,8 @@
 }
 
 .proof th {
-  border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
-  color: color-mix(in srgb, currentColor 72%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, currentcolor 25%, transparent);
+  color: color-mix(in srgb, currentcolor 72%, transparent);
   font-size: 0.72rem;
   font-weight: 750;
   letter-spacing: 0.06em;
@@ -150,7 +150,7 @@
 }
 
 .proofRow {
-  border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, currentcolor 18%, transparent);
 }
 
 .proofRow:last-child {

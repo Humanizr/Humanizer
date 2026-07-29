@@ -20,13 +20,24 @@
     "accentRust": "#ad3e2a",
     "proofText": "#edf3f2",
     "proofOutput": "#91d9e8",
-    "promiseTeal": "#045b6e"
+    "promiseTeal": "#045b6e",
+    "white": "#fff",
+    "promiseTextMuted": "#d7f3f8",
+    "promiseTextSoft": "#e5f6f9"
   },
   "typography": {
     "docsDisplay": "Iowan Old Style, Baskerville, Times New Roman, serif",
     "homeDisplay": "Avenir Next, Segoe UI, Helvetica Neue, sans-serif",
     "body": "Avenir Next, Segoe UI, Helvetica Neue, sans-serif",
-    "readingMeasure": "72ch"
+    "readingMeasure": "72ch",
+    "identity": "0.9rem",
+    "label": "0.78rem",
+    "lede": "clamp(1.1rem, 2vw, 1.35rem)",
+    "proofLabel": "0.72rem",
+    "proofCode": "clamp(0.76rem, 2.4vw, 0.95rem)",
+    "routeHeading": "clamp(1.4rem, 3vw, 2rem)",
+    "referenceHeading": "1.25rem",
+    "promiseCopy": "1.1rem"
   },
   "components": [
     {
