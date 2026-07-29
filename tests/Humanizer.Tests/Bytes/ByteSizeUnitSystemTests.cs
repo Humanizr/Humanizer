@@ -62,6 +62,10 @@ public class ByteSizeUnitSystemTests
         Assert.Equal(
             rate.Humanize(format, TimeUnit.Minute, culture),
             rate.HumanizeWithUnitSystem(ByteSizeUnitSystem.Legacy, format, TimeUnit.Minute, culture));
+        var exactRate = ByteSize.FromBits(9_007_199_254_740_993).Per(TimeSpan.FromSeconds(2));
+        Assert.Equal(
+            exactRate.Humanize("0 b", TimeUnit.Minute, culture),
+            exactRate.HumanizeWithUnitSystem(ByteSizeUnitSystem.Legacy, "0 b", TimeUnit.Minute, culture));
         Assert.Equal(ByteSize.Parse(text, culture), ByteSize.ParseWithUnitSystem(text, ByteSizeUnitSystem.Legacy, culture));
 
         Assert.True(ByteSize.TryParse(text, culture, out var parsed));
@@ -75,6 +79,78 @@ public class ByteSizeUnitSystemTests
             culture,
             out var parsedSpanWithSystem));
         Assert.Equal(parsedSpan, parsedSpanWithSystem);
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "fr")]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "fr-CA")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "fr")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "fr-CA")]
+    public void ExplicitSystemsUseCanonicalBaseUnitSymbols(ByteSizeUnitSystem unitSystem, string cultureName)
+    {
+        var culture = CultureInfo.GetCultureInfo(cultureName);
+        var byteSize = ByteSize.FromBytes(1);
+        var bitSize = ByteSize.FromBits(1);
+        var formattedBytes = byteSize.Format(unitSystem, "0.0 B", culture);
+        var formattedBits = bitSize.Format(unitSystem, "0 b", culture);
+
+        Assert.Equal($"{1d.ToString("0.0", culture)} B", formattedBytes);
+        Assert.Equal("1 b", formattedBits);
+        Assert.Equal($"{1d.ToString("0.0", culture)} b", bitSize.Format(unitSystem, "0.0 b", culture));
+        Assert.Equal("1 B", byteSize.Format(unitSystem, formatProvider: culture));
+        Assert.Equal("1 b", bitSize.Format(unitSystem, formatProvider: culture));
+        Assert.Equal(byteSize, ByteSize.ParseWithUnitSystem(formattedBytes, unitSystem, culture));
+        Assert.Equal(bitSize, ByteSize.ParseWithUnitSystem(formattedBits, unitSystem, culture));
+        Assert.Equal(byteSize.ToFullWords("0 B", culture), byteSize.FormatFullWords(unitSystem, "0 B", culture));
+        Assert.Equal(bitSize.ToFullWords("0 b", culture), bitSize.FormatFullWords(unitSystem, "0 b", culture));
+    }
+
+    [Fact]
+    public void LegacyLocaleDataUnitBehaviorRemainsUnchanged()
+    {
+        var kurdish = CultureInfo.GetCultureInfo("ku");
+        Assert.Equal("2 بایتs", ByteSize.FromBytes(2).ToFullWords("0 B", kurdish));
+        Assert.Equal("2 کیلۆبایتs", ByteSize.FromKilobytes(2).ToFullWords("0 KB", kurdish));
+        Assert.Equal("2 مێگابایتs", ByteSize.FromMegabytes(2).ToFullWords("0 MB", kurdish));
+
+        var lithuanian = CultureInfo.GetCultureInfo("lt");
+        Assert.Equal("2 gigabaitass", ByteSize.FromGigabytes(2).ToFullWords("0 GB", lithuanian));
+
+        var ukrainian = CultureInfo.GetCultureInfo("uk");
+        var zero = new ByteSize(0);
+        Assert.Equal("0 біт", zero.ToFullWords("0 b", ukrainian));
+        Assert.Equal("0 байт", zero.ToFullWords("0 B", ukrainian));
+        Assert.Equal("0 кілобайт", zero.ToFullWords("0 KB", ukrainian));
+        Assert.Equal("0 мегабайт", zero.ToFullWords("0 MB", ukrainian));
+        Assert.Equal("0 гігабайт", zero.ToFullWords("0 GB", ukrainian));
+        Assert.Equal("0 терабайт", zero.ToFullWords("0 TB", ukrainian));
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", "megabytes")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", "mebibytes")]
+    public void FullWordsUseDecoratedDisplayedCount(
+        ByteSizeUnitSystem unitSystem,
+        string unit,
+        string plural)
+    {
+        var bytes = unitSystem == ByteSizeUnitSystem.DecimalSi
+            ? ByteSize.BytesInDecimalMegabyte
+            : ByteSize.BytesInMebibyte;
+        var size = ByteSize.FromBytes(bytes);
+        var culture = CultureInfo.GetCultureInfo("en-US");
+
+        Assert.Equal($"100% {plural}", size.FormatFullWords(unitSystem, $"0% {unit}", culture));
+        Assert.Equal($"-100% {plural}", (-size).FormatFullWords(unitSystem, $"0% {unit}", culture));
+        Assert.Equal($"1000‰ {plural}", size.FormatFullWords(unitSystem, $"0‰ {unit}", culture));
+
+        if (unitSystem == ByteSizeUnitSystem.DecimalSi)
+        {
+            var french = CultureInfo.GetCultureInfo("fr");
+            Assert.Equal(
+                $"{1d.ToString("0%", french)} mégaoctets",
+                size.FormatFullWords(unitSystem, $"0% {unit}", french));
+        }
     }
 
     [Fact]
@@ -231,7 +307,75 @@ public class ByteSizeUnitSystemTests
         Assert.Equal(
             "1E+0 MB",
             ByteSize.FromBytes(999600).Format(ByteSizeUnitSystem.DecimalSi, "0E+0"));
+        Assert.Equal(
+            "999.999 B",
+            ByteSize.FromBytes(999.9994).Format(
+                ByteSizeUnitSystem.DecimalSi,
+                "F3",
+                CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "1.000 kB",
+            ByteSize.FromBytes(999.9996).Format(
+                ByteSizeUnitSystem.DecimalSi,
+                "F3",
+                CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "1023.999 B",
+            ByteSize.FromBytes(1023.9994).Format(
+                ByteSizeUnitSystem.BinaryIec,
+                "F3",
+                CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "1.000 KiB",
+            ByteSize.FromBytes(1023.9996).Format(
+                ByteSizeUnitSystem.BinaryIec,
+                "F3",
+                CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "(1) kB",
+            ByteSize.FromBytes(-999.6).Format(
+                ByteSizeUnitSystem.DecimalSi,
+                "0;(0);0",
+                CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "(1) KiB",
+            ByteSize.FromBytes(-1023.6).Format(
+                ByteSizeUnitSystem.BinaryIec,
+                "0;(0);0",
+                CultureInfo.InvariantCulture));
+        var french = CultureInfo.GetCultureInfo("fr");
+        Assert.Equal(
+            "[1,0] kB",
+            ByteSize.FromBytes(-999.96).Format(ByteSizeUnitSystem.DecimalSi, "0.0;[0.0];0.0", french));
+        Assert.Equal(
+            "[1,0] KiB",
+            ByteSize.FromBytes(-1023.96).Format(ByteSizeUnitSystem.BinaryIec, "0.0;[0.0];0.0", french));
     }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "0 'gibberish'", "1 gibberish B")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "0 'MB'", "1 MB B")]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "0 \\M\\i\\B", "1 MiB B")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "0 \\M\\B", "1 MB B")]
+    public void IgnoresQuotedAndEscapedUnitLikeLiterals(
+        ByteSizeUnitSystem unitSystem,
+        string format,
+        string expected) =>
+        Assert.Equal(
+            expected,
+            ByteSize.FromBytes(1).Format(unitSystem, format, CultureInfo.InvariantCulture));
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, -1000, "0.0 'MiB' kB;-0.0 'MiB' kB;0.0 'MiB' kB", "-1.0 MiB kB")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, -1024, "0.0 'MB' KiB;-0.0 'MB' KiB;0.0 'MB' KiB", "-1.0 MB KiB")]
+    public void SelectsOnlyActiveUnitTokensAcrossCustomFormatSections(
+        ByteSizeUnitSystem unitSystem,
+        double bytes,
+        string format,
+        string expected) =>
+        Assert.Equal(
+            expected,
+            ByteSize.FromBytes(bytes).Format(unitSystem, format, CultureInfo.InvariantCulture));
 
     [Theory]
     [InlineData("1 kB", ByteSizeUnitSystem.DecimalSi, 1000)]
@@ -340,6 +484,15 @@ public class ByteSizeUnitSystemTests
             ByteSize.FromBits(bits).FormatFullWords(
                 ByteSizeUnitSystem.DecimalSi,
                 "0 b",
+                CultureInfo.GetCultureInfo("sl")));
+
+    [Fact]
+    public void ExplicitBitFullWordsUseDisplayedStandardFormatForWideLocaleGrammar() =>
+        Assert.Equal(
+            "9E+015 bitov",
+            ByteSize.FromBits(9_007_199_254_741_001).FormatFullWords(
+                ByteSizeUnitSystem.DecimalSi,
+                "E0 b",
                 CultureInfo.GetCultureInfo("sl")));
 
     [Fact]

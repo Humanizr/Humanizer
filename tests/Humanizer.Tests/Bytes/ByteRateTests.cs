@@ -86,6 +86,19 @@ public class ByteRateTests
     }
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void ExplicitBitRatesPreserveExactDirectInputs(ByteSizeUnitSystem unitSystem)
+    {
+        var size = ByteSize.FromBits(-1);
+        var rate = size.Per(TimeSpan.FromSeconds(0.5));
+
+        Assert.Equal(-1, size.Bits);
+        Assert.Equal("-2 b/s", rate.HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal("-0.25 B/s", rate.HumanizeWithUnitSystem(unitSystem, "0.## B"));
+    }
+
+    [Theory]
     [InlineData(-9007199254740993, 2, "-4503599627370496 b/s")]
     [InlineData(9007199254740993, -2, "-4503599627370496 b/s")]
     [InlineData(-9007199254740993, -2, "4503599627370497 b/s")]

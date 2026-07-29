@@ -828,43 +828,37 @@ surfaces:
     dataUnits:
       bit:
         forms:
-          default: 'бітів'
-          singular: 'біт'
+          default: 'біт'
           paucal: 'біти'
           plural: 'бітів'
         symbol: 'b'
       byte:
         forms:
-          default: 'байтів'
-          singular: 'байт'
+          default: 'байт'
           paucal: 'байти'
           plural: 'байтів'
         symbol: 'B'
       kilobyte:
         forms:
-          default: 'кілобайтів'
-          singular: 'кілобайт'
+          default: 'кілобайт'
           paucal: 'кілобайти'
           plural: 'кілобайтів'
         symbol: 'KB'
       megabyte:
         forms:
-          default: 'мегабайтів'
-          singular: 'мегабайт'
+          default: 'мегабайт'
           paucal: 'мегабайти'
           plural: 'мегабайтів'
         symbol: 'MB'
       gigabyte:
         forms:
-          default: 'гігабайтів'
-          singular: 'гігабайт'
+          default: 'гігабайт'
           paucal: 'гігабайти'
           plural: 'гігабайтів'
         symbol: 'GB'
       terabyte:
         forms:
-          default: 'терабайтів'
-          singular: 'терабайт'
+          default: 'терабайт'
           paucal: 'терабайти'
           plural: 'терабайтів'
         symbol: 'TB'

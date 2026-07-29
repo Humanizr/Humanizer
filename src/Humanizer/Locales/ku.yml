@@ -452,7 +452,6 @@ surfaces:
 
   formatter:
     engine: 'profiled'
-    dataUnitFallbackTransform: 'trim-trailing-s'
 
   clock:
     engine: 'phrase-clock'

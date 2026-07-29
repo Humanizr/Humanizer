@@ -74,6 +74,11 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
         TimeUnit timeUnit = TimeUnit.Second,
         CultureInfo? culture = null)
     {
+        if (unitSystem == ByteSizeUnitSystem.Legacy)
+        {
+            return Humanize(format, timeUnit, culture);
+        }
+
         var displayInterval = timeUnit switch
         {
             TimeUnit.Second => TimeSpan.FromSeconds(1),
@@ -93,7 +98,7 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
         }
 
         var bytes = Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds;
-        if (Interval.Ticks == 0 || Size.Bytes != Size.Bits / (double)ByteSize.BitsInByte)
+        if (Interval.Ticks == 0 || !Size.Bytes.Equals(Size.Bits / (double)ByteSize.BitsInByte))
         {
             return new(bytes);
         }
