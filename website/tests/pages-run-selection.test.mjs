@@ -39,13 +39,14 @@ const legacyRun = {
   head_sha: 'e7a24480ea2e5f796a0528842ef3f2743af4e59a',
   id: 30386738318,
   path: '.github/workflows/jekyll-gh-pages.yml',
+  run_attempt: 1,
 };
 
 test('first documentation deployment retains the latest legacy deployment', () => {
   assert.equal(filters.length, 2);
   assert.equal(
     selectPrior([legacyRun]),
-    `${legacyRun.id}\t${legacyRun.head_sha}\t${legacyRun.path}`,
+    `${legacyRun.id}\t${legacyRun.run_attempt}\t${legacyRun.head_sha}\t${legacyRun.path}`,
   );
 });
 
@@ -60,7 +61,7 @@ test('subsequent deployments retain the latest successful documentation run', ()
 
   assert.equal(
     selectPrior([legacyRun, documentationRun]),
-    `${documentationRun.id}\t${documentationRun.head_sha}\t${documentationRun.path}`,
+    `${documentationRun.id}\t${documentationRun.run_attempt}\t${documentationRun.head_sha}\t${documentationRun.path}`,
   );
 });
 
@@ -85,16 +86,85 @@ test('expensive documentation gates run in parallel before retention', () => {
   assert.match(retention, /needs:\n      - build\n      - validate/);
 });
 
-test('immutable rollback releases publish complete assets initially', () => {
+test('deployment release stays draft until production is verified', () => {
+  const stage = normalizedWorkflow
+    .split('\n  stage-pages-release:\n')[1]
+    .split('\n  deploy:\n')[0];
+  const deploy = normalizedWorkflow
+    .split('\n  deploy:\n')[1]
+    .split('\n  production-smoke:\n')[0];
+  const record = normalizedWorkflow
+    .split('\n  record-production-deployment:\n')[1]
+    .split('\n  recover-after-production-failure:\n')[0];
+
+  assert.match(stage, /docs-pages-deployment-v1-\$\{GITHUB_RUN_ID\}-\$\{GITHUB_RUN_ATTEMPT\}/);
+  assert.match(stage, /gh release create "\$release_tag"[\s\S]*?--draft/);
+  assert.match(deploy, /needs\.stage-pages-release\.result == 'success'/);
+  assert.match(record, /needs\.production-smoke\.result == 'success'/);
+  assert.match(record, /--method PATCH[\s\S]*?-F draft=false/);
+  assert.match(record, /"\$draft" != false[\s\S]*?"\$immutable" != true/);
+});
+
+test('immutable releases contain exactly archive, checksum, and manifest', () => {
   assert.doesNotMatch(normalizedWorkflow, /gh release upload/);
+  assert.doesNotMatch(normalizedWorkflow, /--method DELETE/);
   assert.match(
     normalizedWorkflow,
-    /gh release create "\$archive_tag" \\\n\s+"[^"]*\$\{archive_name\}" \\\n\s+"[^"]*\$\{checksum_name\}"/,
+    /gh release create "\$release_tag" \\\n\s+"candidate\/\$\{archive_name\}" \\\n\s+"candidate\/\$\{checksum_name\}" \\\n\s+"candidate\/\$\{pointer_name\}"/,
+  );
+  assert.match(normalizedWorkflow, /"\$asset_count" != 3/);
+  assert.match(
+    normalizedWorkflow,
+    /"\$asset_names" != "\$\{pointer_name\},\$\{archive_name\},\$\{checksum_name\}"/,
+  );
+  assert.match(normalizedWorkflow, /sha256sum -c "\$checksum_name"/);
+  assert.match(normalizedWorkflow, /cmp "candidate\/\$\{pointer_name\}"/);
+});
+
+test('rollback is bound to an exact successful run attempt', () => {
+  assert.match(normalizedWorkflow, /inputs:\n\s+rollback_run_id:[\s\S]*?rollback_run_attempt:/);
+  assert.match(
+    normalizedWorkflow,
+    /"\$run_attempt" != "\$ROLLBACK_RUN_ATTEMPT"/,
   );
   assert.match(
     normalizedWorkflow,
-    /gh release create "\$pointer_tag" \\\n\s+"\$pointer_name"/,
+    /\.archiveRunAttempt == \$archiveRunAttempt/,
   );
-  assert.match(normalizedWorkflow, /docs-pages-archive-\$\{GITHUB_RUN_ID\}/);
-  assert.match(normalizedWorkflow, /docs-pages-deployment-\$\{GITHUB_RUN_ID\}/);
+  assert.match(
+    normalizedWorkflow,
+    /-f "rollback_run_attempt=\$\{recovery_run_attempt\}"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /-f "expected_pointer_run_attempt=\$\{expected_pointer_run_attempt\}"/,
+  );
+});
+
+test('draft, malformed, incomplete, and digest-mismatched releases fail closed', () => {
+  const selection = normalizedWorkflow
+    .split('- name: Locate the currently deployable Pages run')[1]
+    .split('- name: Inspect retained prior artifact')[0];
+
+  assert.match(selection, /select\(\.draft == false and \.immutable == true\)/);
+  assert.match(selection, /select\(\.schemaVersion == 1\)/);
+  assert.match(selection, /"\$asset_count" != 3/);
+  assert.match(selection, /"\$pointer_count" != 1/);
+  assert.match(normalizedWorkflow, /sha256sum -c "\$checksum_name"/);
+});
+
+test('failed smoke or publication dispatches exact prior recovery', () => {
+  const recovery = normalizedWorkflow.split(
+    '\n  recover-after-production-failure:\n',
+  )[1];
+
+  assert.match(recovery, /needs\.production-smoke\.result == 'failure'/);
+  assert.match(
+    recovery,
+    /needs\.record-production-deployment\.result == 'failure'/,
+  );
+  assert.match(
+    recovery,
+    /"\$recovery_run_id" == "\$REQUESTED_ROLLBACK_RUN_ID" &&\n\s+"\$recovery_run_attempt" == "\$REQUESTED_ROLLBACK_RUN_ATTEMPT"/,
+  );
 });

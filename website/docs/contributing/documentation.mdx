@@ -114,11 +114,10 @@ pwsh tools/docs/snapshot.ps1 -Version 3.0.10 \
 
 `.github/workflows/docs.yml` validates every pull request. A successful `main`
 run uploads the complete Docusaurus output as one Pages artifact. After the
-production smoke test passes, automation stores that exact archive in the
-immutable `docs-pages-archive-<run-id>` prerelease and records the successful
-deployment in a separate immutable `docs-pages-deployment-<run-id>` prerelease.
-Each release publishes its complete asset set in one transaction. A failed gate
-cannot reach the environment-protected deployment job or become the current
+build passes, automation stages the archive, checksum, and deployment manifest
+together in a draft `docs-pages-deployment-v1-<run-id>-<attempt>` prerelease.
+The draft is published and made immutable only after the production smoke test
+passes. Failed or abandoned attempts therefore cannot become the current
 rollback source.
 
 To restore a retained artifact, find its successful documentation run ID and
@@ -126,7 +125,9 @@ dispatch the same workflow from `main`:
 
 ```console
 gh run list --workflow docs.yml --branch main
-gh workflow run docs.yml --ref main -f rollback_run_id=123456789
+gh workflow run docs.yml --ref main \
+  -f rollback_run_id=123456789 \
+  -f rollback_run_attempt=1
 ```
 
 The rollback run verifies the retained artifact's custom domain, stable,
