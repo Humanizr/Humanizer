@@ -127,7 +127,7 @@ test('homepage quick-start and language paths open their dedicated guides', asyn
     {
       heading: 'Supported cultures',
       link: 'See supported cultures',
-      path: '/docs/languages/supported-cultures/',
+      path: '/docs/next/languages/supported-cultures/',
     },
   ]) {
     await page.goto('/');

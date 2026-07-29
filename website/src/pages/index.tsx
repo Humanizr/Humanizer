@@ -152,7 +152,7 @@ export default function Home(): React.JSX.Element {
               capability tier.
             </p>
           </div>
-          <Link className={styles.textLink} to="/docs/languages/supported-cultures/">
+          <Link className={styles.textLink} to="/docs/next/languages/supported-cultures/">
             See supported cultures <span aria-hidden="true">→</span>
           </Link>
         </section>
