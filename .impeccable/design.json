@@ -35,6 +35,7 @@
     "lede": "clamp(1.1rem, 2vw, 1.35rem)",
     "proofLabel": "0.72rem",
     "proofCode": "clamp(0.76rem, 2.4vw, 0.95rem)",
+    "installCode": "clamp(0.85rem, 2vw, 1rem)",
     "routeHeading": "clamp(1.4rem, 3vw, 2rem)",
     "referenceHeading": "1.25rem",
     "promiseCopy": "1.1rem"

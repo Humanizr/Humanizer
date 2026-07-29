@@ -56,6 +56,8 @@ typography:
     fontSize: "0.72rem"
   proof-code:
     fontSize: "clamp(0.76rem, 2.4vw, 0.95rem)"
+  install-code:
+    fontSize: "clamp(0.85rem, 2vw, 1rem)"
   route-heading:
     fontSize: "clamp(1.4rem, 3vw, 2rem)"
   reference-heading:

@@ -43,7 +43,7 @@ const taskRoutes = [
   {
     title: 'Dates & time',
     prompt: 'Relative time, durations, ages, clocks',
-    sample: '.Humanize()  .HumanizeToSymbols()  .ToClockNotation()',
+    sample: '.Humanize()  .ToAge()  .ToClockNotation()',
     to: '/docs/scenarios/dates-times-durations-and-age/',
   },
   {
