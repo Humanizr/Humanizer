@@ -1304,6 +1304,14 @@ public class CoverageGapTests
         Assert.Equal("sixth", converter.ConvertToOrdinal(6));
         Assert.StartsWith("minus ", converter.Convert(long.MinValue));
 
+        var bounded = new ScaleStrategyNumberToWordsConverter(CreateScaleStrategyProfile(
+            ScaleStrategyCardinalMode.NorwegianBokmal,
+            ScaleStrategyOrdinalMode.NorwegianBokmal,
+            maximumValue: 100));
+        Assert.Equal("number", Assert.Throws<ArgumentOutOfRangeException>(() => bounded.Convert(101)).ParamName);
+        Assert.Equal("number", Assert.Throws<ArgumentOutOfRangeException>(() => bounded.Convert(-101)).ParamName);
+        Assert.Equal("number", Assert.Throws<ArgumentOutOfRangeException>(() => bounded.ConvertToOrdinal(101)).ParamName);
+
         var invalidCardinal = new ScaleStrategyNumberToWordsConverter(CreateScaleStrategyProfile(
             (ScaleStrategyCardinalMode)42,
             ScaleStrategyOrdinalMode.NorwegianBokmal));
@@ -1357,6 +1365,8 @@ public class CoverageGapTests
         Assert.Equal("segundo bilionésimo", billionWords.ConvertToOrdinal(2_000_000_000));
         Assert.Equal("bilionésima", billionWords.ConvertToOrdinal(1_000_000_000, GrammaticalGender.Feminine));
         Assert.Equal("segunda bilionésima", billionWords.ConvertToOrdinal(2_000_000_000, GrammaticalGender.Feminine));
+        Assert.Equal("menos vigésimo primeiro", billionWords.ConvertToOrdinal(-21));
+        Assert.StartsWith("menos ", billionWords.ConvertToOrdinal(int.MinValue));
 
         Assert.Equal("duzentas e duas", billionWords.Convert(202, GrammaticalGender.Feminine));
     }
@@ -2064,7 +2074,7 @@ public class CoverageGapTests
     public void SouthSlavicCardinalConverterCoversScaleDetectorAndLongMinBranches()
     {
         var russian = new SouthSlavicCardinalNumberToWordsConverter(
-            CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Russian),
+            CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Russian, maximumValue: 20_001),
             CultureInfo.InvariantCulture);
 
         Assert.Equal("scale-one", russian.Convert(1000));
@@ -2073,6 +2083,12 @@ public class CoverageGapTests
         Assert.Equal("twenty scale-plural one", russian.Convert(20_001));
         Assert.Equal("twenty scale-plural first", russian.ConvertToOrdinal(20_001));
         Assert.Equal("minus twenty scale-plural first", russian.ConvertToOrdinal(-20_001));
+
+        var bounded = new SouthSlavicCardinalNumberToWordsConverter(
+            CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Russian),
+            CultureInfo.InvariantCulture);
+        Assert.Equal("input", Assert.Throws<ArgumentOutOfRangeException>(() => bounded.Convert(20_001)).ParamName);
+        Assert.Equal("number", Assert.Throws<ArgumentOutOfRangeException>(() => bounded.ConvertToOrdinal(20_001)).ParamName);
 
         var slovenian = new SouthSlavicCardinalNumberToWordsConverter(
             CreateSouthSlavicProfile(SouthSlavicScaleFormDetector.Slovenian),
@@ -2539,11 +2555,12 @@ public class CoverageGapTests
     static ScaleStrategyNumberToWordsProfile CreateScaleStrategyProfile(
         ScaleStrategyCardinalMode cardinalMode,
         ScaleStrategyOrdinalMode ordinalMode,
-        FrozenDictionary<int, string>? ordinalExceptions = null) =>
+        FrozenDictionary<int, string>? ordinalExceptions = null,
+        long maximumValue = long.MaxValue) =>
         new(
             cardinalMode,
             ordinalMode,
-            long.MaxValue,
+            maximumValue,
             GrammaticalGender.Masculine,
             "zero",
             "minus",

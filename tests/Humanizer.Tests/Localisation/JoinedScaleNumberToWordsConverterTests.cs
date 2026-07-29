@@ -77,7 +77,8 @@ public class JoinedScaleNumberToWordsConverterTests
             compositionalOrdinal: new(
                 new Dictionary<string, string> { ["thousand-r"] = "thousand-o" }.ToFrozenDictionary(),
                 new Dictionary<string, string> { ["one"] = "first" }.ToFrozenDictionary(),
-                ["one"])));
+                ["one"]),
+            joinWord: "  "));
 
         Assert.Equal(expected, converter.ConvertToOrdinal(number));
     }
@@ -101,13 +102,14 @@ public class JoinedScaleNumberToWordsConverterTests
         JoinedScaleOrdinalProfile? ordinal = null,
         JoinedScaleCompositionalOrdinalProfile? compositionalOrdinal = null,
         int? compoundOrdinalRemainder = null,
-        string? compoundOrdinalWord = null) =>
+        string? compoundOrdinalWord = null,
+        string joinWord = " ") =>
         new(
             2_000_001,
             "zero",
             "minus",
             " ",
-            " ",
+            joinWord,
             " ",
             "",
             false,

@@ -144,6 +144,13 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
     /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
+        var magnitude = number < 0 ? -(long)number : number;
+        var words = ConvertOrdinalPositive(magnitude, gender);
+        return number < 0 ? $"{profile.MinusWord} {words}" : words;
+    }
+
+    string ConvertOrdinalPositive(long number, GrammaticalGender gender)
+    {
         if (number == 0)
         {
             return "zero";
@@ -163,7 +170,7 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
                 ? ApplyOrdinalGender(profile.Ordinal.MillionWord, gender)
                 : string.Format(
                     "{0}" + (profile.Ordinal.MillionJoinMode == BillionOrdinalMillionJoinMode.Compact ? string.Empty : " ") + ApplyOrdinalGender(profile.Ordinal.MillionWord, gender),
-                    ConvertToOrdinal(number / 1_000_000, gender)));
+                    ConvertOrdinalPositive(number / 1_000_000, gender)));
 
             number %= 1_000_000;
         }
@@ -172,26 +179,26 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
         {
             parts.Add(number / 1000 == 1
                 ? ApplyOrdinalGender(profile.Ordinal.ThousandWord, gender)
-                : string.Format("{0} " + ApplyOrdinalGender(profile.Ordinal.ThousandWord, gender), ConvertToOrdinal(number / 1000, gender)));
+                : string.Format("{0} " + ApplyOrdinalGender(profile.Ordinal.ThousandWord, gender), ConvertOrdinalPositive(number / 1000, gender)));
 
             number %= 1000;
         }
 
         if (number / 100 > 0)
         {
-            parts.Add(ApplyOrdinalGender(profile.Ordinal.HundredsMap[number / 100], gender));
+            parts.Add(ApplyOrdinalGender(profile.Ordinal.HundredsMap[(int)(number / 100)], gender));
             number %= 100;
         }
 
         if (number / 10 > 0)
         {
-            parts.Add(ApplyOrdinalGender(profile.Ordinal.TensMap[number / 10], gender));
+            parts.Add(ApplyOrdinalGender(profile.Ordinal.TensMap[(int)(number / 10)], gender));
             number %= 10;
         }
 
         if (number > 0)
         {
-            parts.Add(ApplyOrdinalGender(profile.Ordinal.UnitsMap[number], gender));
+            parts.Add(ApplyOrdinalGender(profile.Ordinal.UnitsMap[(int)number], gender));
         }
 
         return string.Join(" ", parts);
@@ -202,7 +209,7 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
     /// <summary>
     /// Renders the ordinal billions segment using the locale's billion-scale strategy.
     /// </summary>
-    string BuildOrdinalBillions(int number, GrammaticalGender gender)
+    string BuildOrdinalBillions(long number, GrammaticalGender gender)
     {
         return profile.Ordinal.BillionStrategy switch
         {
@@ -214,7 +221,7 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
             // Or it can use a dedicated ordinal billion word and recurse through the billion count.
             BillionOrdinalStrategy.BillionWord => number / 1_000_000_000 == 1
                 ? ApplyOrdinalGender(profile.Ordinal.BillionWord ?? throw new InvalidOperationException("Billion-word ordinal strategy requires a billion ordinal word."), gender)
-                : string.Format("{0} " + ApplyOrdinalGender(profile.Ordinal.BillionWord ?? throw new InvalidOperationException("Billion-word ordinal strategy requires a billion ordinal word."), gender), ConvertToOrdinal(number / 1_000_000_000, gender)),
+                : string.Format("{0} " + ApplyOrdinalGender(profile.Ordinal.BillionWord ?? throw new InvalidOperationException("Billion-word ordinal strategy requires a billion ordinal word."), gender), ConvertOrdinalPositive(number / 1_000_000_000, gender)),
             _ => throw new InvalidOperationException("Unsupported billion-strategy ordinal mode.")
         };
     }

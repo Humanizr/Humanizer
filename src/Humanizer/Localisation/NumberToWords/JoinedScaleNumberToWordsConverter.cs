@@ -201,7 +201,7 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 
         var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
         var words = Convert(magnitude, gender);
-        var tokens = words.Split(' ');
+        var tokens = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var ordinal = profile.CompositionalOrdinal!;
 
         for (var index = 0; index < tokens.Length - 1; index++)

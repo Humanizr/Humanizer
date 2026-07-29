@@ -16,13 +16,19 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     /// <inheritdoc/>
     public override string Convert(long input)
     {
+        var magnitude = GetAbsoluteValue(input);
+        if (magnitude > profile.MaximumValue && !(input == long.MinValue && profile.AllowLongMin))
+        {
+            throw new ArgumentOutOfRangeException(nameof(input), input, $"The configured profile supports magnitudes through {profile.MaximumValue}.");
+        }
+
         if (input == 0)
         {
             return profile.ZeroWord;
         }
 
         var parts = new List<string>(8);
-        var remaining = GetAbsoluteValue(input);
+        var remaining = magnitude;
 
         if (input < 0)
         {
@@ -41,12 +47,18 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-        if (number < 0)
+        var magnitude = GetAbsoluteValue(number);
+        if (magnitude > profile.MaximumValue)
         {
-            return profile.MinusWord + " " + ConvertOrdinalPositive(-(long)number, gender);
+            throw new ArgumentOutOfRangeException(nameof(number), number, $"The configured profile supports magnitudes through {profile.MaximumValue}.");
         }
 
-        return ConvertOrdinalPositive(number, gender);
+        if (number < 0)
+        {
+            return profile.MinusWord + " " + ConvertOrdinalPositive((long)magnitude, gender);
+        }
+
+        return ConvertOrdinalPositive((long)magnitude, gender);
     }
 
     /// <inheritdoc/>

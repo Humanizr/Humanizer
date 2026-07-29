@@ -24,22 +24,37 @@ class ScaleStrategyNumberToWordsConverter(ScaleStrategyNumberToWordsProfile prof
     readonly ScaleStrategyNumberToWordsProfile profile = profile;
 
     /// <inheritdoc/>
-    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true) =>
-        profile.CardinalStrategy switch
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
+    {
+        EnsureMagnitudeInRange(number, nameof(number));
+        return profile.CardinalStrategy switch
         {
             ScaleStrategyCardinalMode.NorwegianBokmal => ConvertNorwegian(number, gender),
             ScaleStrategyCardinalMode.Swedish => ConvertSwedish(number, profile.DefaultGender),
             _ => throw new InvalidOperationException("Unsupported Scandinavian cardinal strategy.")
         };
+    }
 
     /// <inheritdoc/>
-    public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-        profile.OrdinalStrategy switch
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+    {
+        EnsureMagnitudeInRange(number, nameof(number));
+        return profile.OrdinalStrategy switch
         {
             ScaleStrategyOrdinalMode.NorwegianBokmal => ConvertNorwegianOrdinal(number, gender),
             ScaleStrategyOrdinalMode.Swedish => ConvertSwedishOrdinal(number, profile.DefaultGender),
             _ => throw new InvalidOperationException("Unsupported Scandinavian ordinal strategy.")
         };
+    }
+
+    void EnsureMagnitudeInRange(long number, string parameterName)
+    {
+        var maximumMagnitude = (ulong)profile.MaximumValue + (profile.MaximumValue == long.MaxValue ? 1UL : 0UL);
+        if (GetAbsoluteValue(number) > maximumMagnitude)
+        {
+            throw new ArgumentOutOfRangeException(parameterName, number, $"The configured profile supports magnitudes through {maximumMagnitude}.");
+        }
+    }
 
     // Norwegian compounds are mostly concatenative, but large-scale spacing and exact ordinals still vary by generated suffix settings.
     // The profile still owns the lexical ceiling, but the renderer now walks the long range
