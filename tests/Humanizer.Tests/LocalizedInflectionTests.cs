@@ -64,7 +64,7 @@ public class LocalizedInflectionTests
 
     [Theory]
     [MemberData(nameof(CardinalRuleCases))]
-    public void SelectsClDrCardinalCategories(
+    public void SelectsCLDRCardinalCategories(
         string locale,
         decimal quantity,
         int expected)
@@ -80,7 +80,7 @@ public class LocalizedInflectionTests
 
     [Theory]
     [MemberData(nameof(CardinalOperandCases))]
-    public void PreservesClDrDecimalOperands(
+    public void PreservesCLDRDecimalOperands(
         decimal quantity,
         decimal expectedN,
         decimal expectedI,
@@ -217,7 +217,7 @@ public class LocalizedInflectionTests
     [InlineData("pt-PT", "1.0", 0)]
     [InlineData("pt-PT", "1", 2)]
     [InlineData("pt-PT", "1000000", 5)]
-    public void EuropeanPortugueseUsesItsRegionalClDrCardinalRule(
+    public void EuropeanPortugueseUsesItsRegionalCLDRCardinalRule(
         string locale,
         string quantity,
         int expected)

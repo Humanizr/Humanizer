@@ -38,8 +38,8 @@ var files = new CardinalInflectionForms(
     few: "pliki",
     many: "plików");
 
-files.TryInflect(5m, CultureInfo.GetCultureInfo("pl"), out var noun);
-Console.WriteLine(noun); // plików
+if (files.TryInflect(5m, CultureInfo.GetCultureInfo("pl"), out var noun))
+    Console.WriteLine(noun); // plików
 ```
 
 `TryInflect` returns `false` when the selected category has no authored form;
