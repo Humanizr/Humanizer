@@ -392,6 +392,7 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <param name="OrdinalUnitComponents">The unit stems used inside compound ordinals.</param>
     /// <param name="TupleMap">The exact tuple names keyed by number.</param>
     /// <param name="OrdinalAbbreviations">The exact ordinal abbreviations keyed by number and gender.</param>
+    /// <param name="Scales">The descending cardinal and ordinal scale rows.</param>
     public sealed record Profile(
         string ZeroWord,
         string NegativeWord,

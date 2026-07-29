@@ -35,7 +35,7 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
             throw new ArgumentOutOfRangeException(nameof(input), input, "Legacy billion profiles support values through 999,999,999,999.");
         }
 
-        if (magnitude >= 1_000_000_000)
+        if (!profile.Cardinal.HasAuthoredScales && magnitude >= 1_000_000_000)
         {
             switch (profile.Cardinal.BillionStrategy)
             {

@@ -1365,7 +1365,8 @@ public class CoverageGapTests
         var missingSingular = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
             BillionCardinalStrategy.BillionWord,
             BillionOrdinalStrategy.BillionWord,
-            billionSingularWord: null));
+            billionSingularWord: null,
+            hasAuthoredScales: false));
         Assert.Equal(
             "Billion-word cardinal strategy requires a singular billion word.",
             Assert.Throws<InvalidOperationException>(() => missingSingular.Convert(1_000_000_000)).Message);
@@ -1373,7 +1374,8 @@ public class CoverageGapTests
         var missingPlural = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
             BillionCardinalStrategy.BillionWord,
             BillionOrdinalStrategy.BillionWord,
-            billionPluralWord: null));
+            billionPluralWord: null,
+            hasAuthoredScales: false));
         Assert.Equal(
             "Billion-word cardinal strategy requires a plural billion word.",
             Assert.Throws<InvalidOperationException>(() => missingPlural.Convert(2_000_000_000)).Message);
@@ -1391,7 +1393,8 @@ public class CoverageGapTests
 
         var invalidCardinal = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
             (BillionCardinalStrategy)42,
-            BillionOrdinalStrategy.BillionWord));
+            BillionOrdinalStrategy.BillionWord,
+            hasAuthoredScales: false));
         Assert.Equal(
             "Unsupported billion-strategy cardinal mode.",
             Assert.Throws<InvalidOperationException>(() => invalidCardinal.Convert(1_000_000_000)).Message);
@@ -1429,6 +1432,12 @@ public class CoverageGapTests
             BillionOrdinalStrategy.BillionWord));
 
         Assert.Equal("mil bilhões", converter.Convert(1_000_000_000_000));
+
+        var converterWithUnusedLegacyStrategy = new BillionStrategyNumberToWordsConverter(CreateBillionStrategyProfile(
+            (BillionCardinalStrategy)42,
+            BillionOrdinalStrategy.BillionWord));
+
+        Assert.Equal("um bilhão", converterWithUnusedLegacyStrategy.Convert(1_000_000_000));
     }
 
     [UseCulture("en-US")]

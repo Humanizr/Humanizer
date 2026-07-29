@@ -65,11 +65,29 @@ public class JoinedScaleNumberToWordsConverterTests
         Assert.Equal("twoth", converter.ConvertToOrdinal(2));
     }
 
+    [Theory]
+    [InlineData(1001, "thousand-ofirst")]
+    [InlineData(-1001, "minus thousand-ofirst")]
+    public void SupportsCompositionalOrdinalTokenReplacementAndCompaction(int number, string expected)
+    {
+        var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
+            [new(1000, "thousand", "thousand-r", OmitOneWhenSingular: true)],
+            ["", "hundred"],
+            ["", "hundred-r"],
+            compositionalOrdinal: new(
+                new Dictionary<string, string> { ["thousand-r"] = "thousand-o" }.ToFrozenDictionary(),
+                new Dictionary<string, string> { ["one"] = "first" }.ToFrozenDictionary(),
+                ["one"])));
+
+        Assert.Equal(expected, converter.ConvertToOrdinal(number));
+    }
+
     static JoinedScaleNumberToWordsProfile CreateProfile(
         JoinedScale[] scales,
         string[] hundredsMap,
         string[] hundredsMapWithRemainder,
         JoinedScaleOrdinalProfile? ordinal = null,
+        JoinedScaleCompositionalOrdinalProfile? compositionalOrdinal = null,
         int? compoundOrdinalRemainder = null,
         string? compoundOrdinalWord = null) =>
         new(
@@ -93,6 +111,7 @@ public class JoinedScaleNumberToWordsConverterTests
             FrozenDictionary<int, string>.Empty,
             scales,
             ordinal: ordinal,
+            compositionalOrdinal: compositionalOrdinal,
             compoundOrdinalRemainder: compoundOrdinalRemainder,
             compoundOrdinalWord: compoundOrdinalWord);
 

@@ -79,7 +79,7 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
 
         // Higher ordinals start from the cardinal shape and then apply a sequence of locale-specific
         // terminal edits.
-        var words = Convert(magnitude, gender).Replace(" de ", " ");
+        var words = RemoveTerminalScaleJoiner(Convert(magnitude, gender));
 
         if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci", StringComparison.Ordinal))
         {
@@ -142,6 +142,22 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
 
         var result = GetOrdinalPrefix(gender) + " " + words + GetOrdinalSuffix(gender, masculineSuffix);
         return number < 0 ? profile.MinusWord + " " + result : result;
+    }
+
+    string RemoveTerminalScaleJoiner(string words)
+    {
+        foreach (var scale in profile.Scales)
+        {
+            var terminalScaleJoiner = " " + profile.JoinAboveTwenty + " " + scale.Plural;
+            if (words.EndsWith(terminalScaleJoiner, StringComparison.Ordinal))
+            {
+                return StringHumanizeExtensions.Concat(
+                    words.AsSpan(0, words.Length - terminalScaleJoiner.Length),
+                    (" " + scale.Plural).AsSpan());
+            }
+        }
+
+        return words;
     }
 
     /// <summary>
