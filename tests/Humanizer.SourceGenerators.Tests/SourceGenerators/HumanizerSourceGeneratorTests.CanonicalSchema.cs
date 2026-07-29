@@ -297,6 +297,27 @@ variantOf: 'aa'
     }
 
     [Fact]
+    public void SyntheticInflectionSupportsCrLfLocaleText()
+    {
+        const string locale = """
+locale: 'zz'
+surfaces:
+  list:
+    engine: 'conjunction'
+    value: 'and'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText(
+                "src/Humanizer/Locales/zz.yml",
+                locale.Replace("\n", "\r\n", StringComparison.Ordinal)));
+
+        Assert.Empty(runResult.Diagnostics);
+        var source = GetGeneratedSource(runResult, "LocalizedInflectionCatalog.g.cs");
+        Assert.Contains("[\"zz\"]", source, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void InflectionProfilesRequireEveryRootOnceTheFeatureIsEnabled()
     {
         const string enabledLocale = """

@@ -2098,17 +2098,21 @@ wordsToNumber:
     cardinalRule: 'Other'
     disposition: 'selector-only'
 """;
+            var lineEnding = candidateText.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+            var normalizedInflection = inflection
+                .Replace("\r\n", "\n", StringComparison.Ordinal)
+                .Replace("\n", lineEnding, StringComparison.Ordinal);
             if (candidateText.Contains("surfaces: {}", StringComparison.Ordinal))
             {
                 return candidateText.Replace(
                     "surfaces: {}",
-                    $"surfaces:\n{inflection}",
+                    $"surfaces:{lineEnding}{normalizedInflection}",
                     StringComparison.Ordinal);
             }
 
             return candidateText.Replace(
-                "surfaces:\n",
-                $"surfaces:\n{inflection}\n",
+                $"surfaces:{lineEnding}",
+                $"surfaces:{lineEnding}{normalizedInflection}{lineEnding}",
                 StringComparison.Ordinal);
         }
     }
