@@ -600,6 +600,9 @@ public class TimeSpanHumanizeTests
             "1 week, 1 day, 1 hour",
             strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, false));
         Assert.Equal(
+            "1 week, 1 day, 1 hour",
+            strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, default));
+        Assert.Equal(
             "1week, 1d, 1h",
             strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, true));
     }
@@ -627,11 +630,30 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void CaseAwareFormatterRejectsInvalidTimeUnit()
     {
-        var formatter = new DefaultFormatter("de");
+        IGrammaticalCaseTimeSpanFormatter formatter = new DefaultFormatter("de");
         var exception = Assert.Throws<ArgumentOutOfRangeException>(
             () => formatter.TimeSpanHumanize((TimeUnit)int.MaxValue, 1, GrammaticalCase.Dative));
 
         Assert.Equal("timeUnit", exception.ParamName);
+    }
+
+    [Fact]
+    public void DefaultLiteralPreservesLegacyFormatterOverload()
+    {
+        var formatter = new DefaultFormatter("en");
+
+        Assert.Equal("1 day", formatter.TimeSpanHumanize(TimeUnit.Day, 1, default));
+    }
+
+    [Theory]
+    [InlineData("en-US")]
+    [InlineData("ar")]
+    public void NominativeRejectsUnavailableLocale(string culture)
+    {
+        Assert.Throws<NotSupportedException>(
+            () => TimeSpan.FromDays(1).HumanizeWithCase(
+                GrammaticalCase.Nominative,
+                culture: new(culture)));
     }
 
     [Fact]

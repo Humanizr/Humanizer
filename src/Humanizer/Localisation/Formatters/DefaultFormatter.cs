@@ -128,8 +128,7 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         return category;
     }
 
-    /// <inheritdoc/>
-    public virtual string TimeSpanHumanize(
+    string IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(
         TimeUnit timeUnit,
         int unit,
         GrammaticalCase grammaticalCase)
@@ -144,19 +143,9 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
             throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, "Unsupported time unit.");
         }
 
-        if (grammaticalCase == GrammaticalCase.Nominative)
-        {
-            return FormatCaseAwareNominative(timeUnit, unit);
-        }
-
         var table = LocaleDurationCaseTableCatalog.Resolve(Culture)
             ?? throw new NotSupportedException(
                 $"Culture '{Culture.Name}' has no grammatical-case classification for duration phrases.");
-
-        if (table.Classification == LocaleDurationCaseClassification.SameAsNominative)
-        {
-            return FormatCaseAwareNominative(timeUnit, unit);
-        }
 
         if (table.Classification == LocaleDurationCaseClassification.Unsupported)
         {
@@ -164,8 +153,19 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
                 $"Culture '{Culture.Name}' has an applicable grammatical case system, but verified duration forms are unavailable.");
         }
 
-        if (table.Classification == LocaleDurationCaseClassification.NotApplicable ||
-            !table.TryGetCase(grammaticalCase, out var caseOverlay))
+        if (table.Classification == LocaleDurationCaseClassification.NotApplicable)
+        {
+            throw new NotSupportedException(
+                $"Culture '{Culture.Name}' does not support grammatical-case duration phrases.");
+        }
+
+        if (grammaticalCase == GrammaticalCase.Nominative ||
+            table.Classification == LocaleDurationCaseClassification.SameAsNominative)
+        {
+            return FormatCaseAwareNominative(timeUnit, unit);
+        }
+
+        if (!table.TryGetCase(grammaticalCase, out var caseOverlay))
         {
             throw new NotSupportedException(
                 $"Culture '{Culture.Name}' does not support grammatical case '{grammaticalCase}' for duration phrases.");

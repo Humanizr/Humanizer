@@ -61,8 +61,7 @@ public class DefaultTimeSpanHumanizeStrategy : IGrammaticalCaseTimeSpanHumanizeS
             roundingMode,
             toSymbols);
 
-    /// <inheritdoc />
-    public string Humanize(
+    string IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(
         TimeSpan timeSpan,
         int precision,
         bool countEmptyUnits,

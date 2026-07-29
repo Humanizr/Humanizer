@@ -174,15 +174,21 @@ public sealed partial class HumanizerSourceGenerator
 
             var casesMapping = ExpectMapping(casesValue, $"{path}.cases");
             var cases = ImmutableDictionary.CreateBuilder<string, DurationCaseOverlay>(StringComparer.Ordinal);
-            foreach (var entry in casesMapping.Values)
+            foreach (var caseName in casesMapping.Values.Keys.OrderBy(static name => name, StringComparer.Ordinal))
             {
-                if (!Cases.Contains(entry.Key, StringComparer.Ordinal) || entry.Key == "nominative")
+                if (!Cases.Contains(caseName, StringComparer.Ordinal) || caseName == "nominative")
                 {
                     throw new InvalidOperationException(
-                        $"'{path}.cases' defines unsupported non-nominative case '{entry.Key}'.");
+                        $"'{path}.cases' defines unsupported non-nominative case '{caseName}'.");
                 }
+            }
 
-                cases[entry.Key] = ParseCase(entry.Value, $"{path}.cases.{entry.Key}");
+            foreach (var caseName in Cases)
+            {
+                if (caseName != "nominative" && casesMapping.TryGetValue(caseName, out var caseValue))
+                {
+                    cases[caseName] = ParseCase(caseValue, $"{path}.cases.{caseName}");
+                }
             }
 
             if (cases.Count == 0)

@@ -549,6 +549,7 @@ public sealed partial class HumanizerSourceGenerator
             "collectionFormatter",
             "dateOnlyToOrdinalWords",
             "dateToOrdinalWords",
+            "durationCases",
             "formatter",
             "grammar",
             "headings",
@@ -597,6 +598,7 @@ public sealed partial class HumanizerSourceGenerator
 
             builder.AppendLine();
             builder.AppendLine("surfaces:");
+            AppendMigratedSurface(builder, "durationCases", root, "durationCases");
             AppendMigratedSurface(builder, "list", root, "collectionFormatter", isCollectionFormatter: true);
             AppendMigratedFormatterSurface(builder, root);
             AppendMigratedPhrasesSurface(builder, root);

@@ -10,6 +10,8 @@ public partial class HumanizerSourceGeneratorTests
         const string parentLocale = """
 locale: 'zz-parent'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   list:
     engine: 'conjunction'
     pairTemplate: '{0} and {1}'
@@ -108,6 +110,8 @@ surfaces:
         const string locale = """
 locale: 'zz-scale'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   number:
     words:
       engine: 'scale-leading-compound'

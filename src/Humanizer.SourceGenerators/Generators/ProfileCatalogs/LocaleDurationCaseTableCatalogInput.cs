@@ -48,12 +48,22 @@ public sealed partial class HumanizerSourceGenerator
 
         public static LocaleDurationCaseTableCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
+            if (!localeCatalog.Diagnostics.IsEmpty)
+            {
+                return new LocaleDurationCaseTableCatalogInput([]);
+            }
+
             var coverage = DurationCaseCoverageInput.Create(localeCatalog);
             return new LocaleDurationCaseTableCatalogInput(coverage.Catalogs);
         }
 
         public void Emit(SourceProductionContext context)
         {
+            if (catalogs.IsDefaultOrEmpty)
+            {
+                return;
+            }
+
             var builder = new StringBuilder();
             builder.AppendLine("#nullable enable");
             builder.AppendLine();
@@ -85,13 +95,18 @@ public sealed partial class HumanizerSourceGenerator
 
             foreach (var catalog in catalogs.OrderBy(static catalog => catalog.LocaleCode, StringComparer.Ordinal))
             {
-                builder.Append("    static LocaleDurationCaseTable ");
-                builder.Append(GetPropertyName(catalog.LocaleCode));
-                builder.Append(" => new(LocaleDurationCaseClassification.");
-                builder.Append(catalog.Classification);
-                builder.Append(", ");
-                builder.Append(CreateCasesExpression(catalog));
-                builder.AppendLine(");");
+                AppendLazyCachedMember(
+                    builder,
+                    "    ",
+                    "static",
+                    "LocaleDurationCaseTable",
+                    GetPropertyName(catalog.LocaleCode),
+                    "new LocaleDurationCaseTable(LocaleDurationCaseClassification." +
+                    catalog.Classification +
+                    ", " +
+                    CreateCasesExpression(catalog) +
+                    ")");
+                builder.AppendLine();
             }
 
             builder.AppendLine("}");
