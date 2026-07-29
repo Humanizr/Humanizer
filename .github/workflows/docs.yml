@@ -467,12 +467,12 @@ jobs:
                   | select(.path == ".github/workflows/docs.yml")
                 ]
                 | sort_by(.created_at)
-                | last
+                | (last // empty)
                 | [.id, .head_sha, .path]
                 | @tsv
               ' <<<"$runs"
             )"
-            if [[ "$prior" == "null	null	null" ]]; then
+            if [[ -z "$prior" ]]; then
               prior="$(
                 jq -r '
                   [
@@ -480,7 +480,7 @@ jobs:
                     | select(.path == ".github/workflows/jekyll-gh-pages.yml")
                   ]
                   | sort_by(.created_at)
-                  | last
+                  | (last // empty)
                   | [.id, .head_sha, .path]
                   | @tsv
                 ' <<<"$runs"
