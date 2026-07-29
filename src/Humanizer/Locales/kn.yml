@@ -702,6 +702,61 @@ surfaces:
           default: 'ಟೆರಾಬೈಟ್ಗಳು'
           singular: 'ಟೆರಾಬೈಟ್'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'ಕಿಲೋಬೈಟ್ಗಳು'
+          singular: 'ಕಿಲೋಬೈಟ್'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'ಮೆಗಾಬೈಟ್ಗಳು'
+          singular: 'ಮೆಗಾಬೈಟ್'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ಗಿಗಾಬೈಟ್ಗಳು'
+          singular: 'ಗಿಗಾಬೈಟ್'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'ಟೆರಾಬೈಟ್ಗಳು'
+          singular: 'ಟೆರಾಬೈಟ್'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'ಪೆಟಾಬೈಟ್ಗಳು'
+          singular: 'ಪೆಟಾಬೈಟ್'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ಎಕ್ಸಾಬೈಟ್ಗಳು'
+          singular: 'ಎಕ್ಸಾಬೈಟ್'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'ಕಿಬಿಬೈಟ್ಗಳು'
+          singular: 'ಕಿಬಿಬೈಟ್'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'ಮೆಬಿಬೈಟ್ಗಳು'
+          singular: 'ಮೆಬಿಬೈಟ್'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ಗಿಬಿಬೈಟ್ಗಳು'
+          singular: 'ಗಿಬಿಬೈಟ್'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'ಟೆಬಿಬೈಟ್ಗಳು'
+          singular: 'ಟೆಬಿಬೈಟ್'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'ಪೆಬಿಬೈಟ್ಗಳು'
+          singular: 'ಪೆಬಿಬೈಟ್'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ಮಿಲಿಸೆಕೆಂಡ್'

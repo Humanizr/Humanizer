@@ -132,6 +132,7 @@
 
 | Enums | |
 | :--- | :--- |
+| [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem') | Selects the unit system used by explicit [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize') parsing and formatting APIs\. |
 | [ClockNotationRounding](Humanizer.ClockNotationRounding.md 'Humanizer\.ClockNotationRounding') | Options for specifying readable clock notation |
 | [DataUnit](Humanizer.DataUnit.md 'Humanizer\.DataUnit') | Represents the data units supported by Humanizer's data\-size formatting\. |
 | [EnumHumanizeSource](Humanizer.EnumHumanizeSource.md 'Humanizer\.EnumHumanizeSource') | Specifies the source used to humanize an enum value\. |

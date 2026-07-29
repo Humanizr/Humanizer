@@ -1066,6 +1066,72 @@ surfaces:
           singular: 'terabajt'
           paucal: 'terabajty'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kilobajtów'
+          singular: 'kilobajt'
+          paucal: 'kilobajty'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'megabajtów'
+          singular: 'megabajt'
+          paucal: 'megabajty'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gigabajtów'
+          singular: 'gigabajt'
+          paucal: 'gigabajty'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'terabajtów'
+          singular: 'terabajt'
+          paucal: 'terabajty'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'petabajtów'
+          singular: 'petabajt'
+          paucal: 'petabajty'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'eksabajtów'
+          singular: 'eksabajt'
+          paucal: 'eksabajty'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kibibajtów'
+          singular: 'kibibajt'
+          paucal: 'kibibajty'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mebibajtów'
+          singular: 'mebibajt'
+          paucal: 'mebibajty'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gibibajtów'
+          singular: 'gibibajt'
+          paucal: 'gibibajty'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tebibajtów'
+          singular: 'tebibajt'
+          paucal: 'tebibajty'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pebibajtów'
+          singular: 'pebibajt'
+          paucal: 'pebibajty'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

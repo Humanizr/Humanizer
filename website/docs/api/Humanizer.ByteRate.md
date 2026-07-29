@@ -197,6 +197,60 @@ Culture to use\. If null, current thread's culture is used\.
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+<a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo)'></a>
+
+## ByteRate\.HumanizeWithUnitSystem\(ByteSizeUnitSystem, string, TimeUnit, CultureInfo\) Method
+
+Calculates and humanizes this rate using an explicitly selected byte\-size unit system\.
+
+```csharp
+public string HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem unitSystem, string? format=null, Humanizer.TimeUnit timeUnit=Humanizer.TimeUnit.Second, System.Globalization.CultureInfo? culture=null);
+```
+#### Parameters
+
+<a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The byte\-size unit system to use\.
+
+<a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).format'></a>
+
+`format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The numeric format and optional byte\-size unit token\. For [DecimalSi](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.DecimalSi 'Humanizer\.ByteSizeUnitSystem\.DecimalSi') and
+[BinaryIec](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.BinaryIec 'Humanizer\.ByteSizeUnitSystem\.BinaryIec'), SI/IEC\-prefixed unit tokens are matched case\-insensitively,
+while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\.
+[Legacy](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.Legacy 'Humanizer\.ByteSizeUnitSystem\.Legacy') preserves established matching behavior\.
+
+<a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).timeUnit'></a>
+
+`timeUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The time unit to use for the displayed rate\.
+
+<a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+The culture used to format the numeric value, byte\-size unit, and time\-unit symbol\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The humanized rate\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteRate.md#Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).unitSystem 'Humanizer\.ByteRate\.HumanizeWithUnitSystem\(Humanizer\.ByteSizeUnitSystem, string, Humanizer\.TimeUnit, System\.Globalization\.CultureInfo\)\.unitSystem') is not defined\.
+
+[System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
+[timeUnit](Humanizer.ByteRate.md#Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).timeUnit 'Humanizer\.ByteRate\.HumanizeWithUnitSystem\(Humanizer\.ByteSizeUnitSystem, string, Humanizer\.TimeUnit, System\.Globalization\.CultureInfo\)\.timeUnit') is not [Second](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Second 'Humanizer\.TimeUnit\.Second'), [Minute](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Minute 'Humanizer\.TimeUnit\.Minute'),
+            or [Hour](Humanizer.TimeUnit.md#Humanizer.TimeUnit.Hour 'Humanizer\.TimeUnit\.Hour')\.
+
+[System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
+[format](Humanizer.ByteRate.md#Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).format 'Humanizer\.ByteRate\.HumanizeWithUnitSystem\(Humanizer\.ByteSizeUnitSystem, string, Humanizer\.TimeUnit, System\.Globalization\.CultureInfo\)\.format') is invalid, or selects a token not supported by the selected non\-legacy system\.
+
 <a name='Humanizer.ByteRate.ToString()'></a>
 
 ## ByteRate\.ToString\(\) Method

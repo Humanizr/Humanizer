@@ -36,7 +36,18 @@ public sealed partial class HumanizerSourceGenerator
             "kibibyte",
             "mebibyte",
             "gibibyte",
-            "tebibyte"
+            "tebibyte",
+            "decimalKilobyte",
+            "decimalMegabyte",
+            "decimalGigabyte",
+            "decimalTerabyte",
+            "decimalPetabyte",
+            "decimalExabyte",
+            "binaryKibibyte",
+            "binaryMebibyte",
+            "binaryGibibyte",
+            "binaryTebibyte",
+            "binaryPebibyte"
         ];
 
         readonly ImmutableArray<LocalePhraseCatalog> catalogs = catalogs;

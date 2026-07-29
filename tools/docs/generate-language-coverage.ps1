@@ -47,6 +47,7 @@ function Get-NormalizedSha256 {
 function Get-ReferenceFingerprintEntries {
     $paths = @(
         "src/Humanizer/Bytes/ByteSize.cs",
+        "src/Humanizer/Bytes/ByteSizeExtensions.cs",
         "src/Humanizer/Configuration/LocaliserRegistry.cs",
         "src/Humanizer/GrammaticalGender.cs",
         "src/Humanizer/Localisation/CollectionFormatters/CliticCollectionFormatter.cs",

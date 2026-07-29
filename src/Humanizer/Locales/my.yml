@@ -212,6 +212,50 @@ surfaces:
         forms:
           default: 'တယ်ရာဘိုက်'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'ကီလိုဘိုက်'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'မီဂါဘိုက်'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ဂစ်ဂါဘိုက်'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'တယ်ရာဘိုက်'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'ပက်တာဘိုက်'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'အိတ်စ်ဆာဘိုက်'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'ကီဘီဘိုက်'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'မက်ဘီဘိုက်'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ဂီဘီဘိုက်'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'တယ်ဘီဘိုက်'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'ပယ်ဘီဘိုက်'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'မီလီစက္ကန့်'

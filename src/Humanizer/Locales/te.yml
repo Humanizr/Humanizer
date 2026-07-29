@@ -904,6 +904,61 @@ surfaces:
           default: 'టెరాబైట్లు'
           singular: 'టెరాబైట్'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'కిలోబైట్లు'
+          singular: 'కిలోబైట్'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'మెగాబైట్లు'
+          singular: 'మెగాబైట్'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'గిగాబైట్లు'
+          singular: 'గిగాబైట్'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'టెరాబైట్లు'
+          singular: 'టెరాబైట్'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'పెటాబైట్లు'
+          singular: 'పెటాబైట్'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ఎక్సాబైట్లు'
+          singular: 'ఎక్సాబైట్'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'కిబిబైట్లు'
+          singular: 'కిబిబైట్'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'మెబిబైట్లు'
+          singular: 'మెబిబైట్'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'గిబిబైట్లు'
+          singular: 'గిబిబైట్'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'టెబిబైట్లు'
+          singular: 'టెబిబైట్'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'పెబిబైట్లు'
+          singular: 'పెబిబైట్'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'మిల్లీసెకను'

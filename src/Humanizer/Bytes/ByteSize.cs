@@ -33,6 +33,10 @@ public struct ByteSize(double byteSize) :
     IComparable,
     IFormattable
 {
+    ByteSize(double byteSize, long bits)
+        : this(byteSize) =>
+        Bits = bits;
+
     static readonly ConditionalWeakTable<NumberFormatInfo, HashSet<char>> NumberFormatSpecialCharsCache = new();
 
     public static readonly ByteSize MinValue = FromBits(long.MinValue);
@@ -62,6 +66,19 @@ public struct ByteSize(double byteSize) :
     public const long BytesInPetabyte = 1000000000000000;
     public const long BytesInExabyte = 1000000000000000000;
     public const long BytesInPebibyte = 1125899906842624;
+
+    /// <summary>Gets the number of bytes in one decimal SI kilobyte.</summary>
+    public const long BytesInDecimalKilobyte = 1000;
+    /// <summary>Gets the number of bytes in one decimal SI megabyte.</summary>
+    public const long BytesInDecimalMegabyte = 1000000;
+    /// <summary>Gets the number of bytes in one decimal SI gigabyte.</summary>
+    public const long BytesInDecimalGigabyte = 1000000000;
+    /// <summary>Gets the number of bytes in one decimal SI terabyte.</summary>
+    public const long BytesInDecimalTerabyte = 1000000000000;
+    /// <summary>Gets the number of bytes in one decimal SI petabyte.</summary>
+    public const long BytesInDecimalPetabyte = 1000000000000000;
+    /// <summary>Gets the number of bytes in one decimal SI exabyte.</summary>
+    public const long BytesInDecimalExabyte = 1000000000000000000;
 
     public const string BitSymbol = "b";
     public const string Bit = "bit";
@@ -139,6 +156,18 @@ public struct ByteSize(double byteSize) :
     public readonly double Petabytes => Bytes / BytesInPetabyte;
     public readonly double Exabytes => Bytes / BytesInExabyte;
     public readonly double Pebibytes => Bytes / BytesInPebibyte;
+    /// <summary>Gets this value expressed in decimal SI kilobytes.</summary>
+    public readonly double DecimalKilobytes => Bytes / BytesInDecimalKilobyte;
+    /// <summary>Gets this value expressed in decimal SI megabytes.</summary>
+    public readonly double DecimalMegabytes => Bytes / BytesInDecimalMegabyte;
+    /// <summary>Gets this value expressed in decimal SI gigabytes.</summary>
+    public readonly double DecimalGigabytes => Bytes / BytesInDecimalGigabyte;
+    /// <summary>Gets this value expressed in decimal SI terabytes.</summary>
+    public readonly double DecimalTerabytes => Bytes / BytesInDecimalTerabyte;
+    /// <summary>Gets this value expressed in decimal SI petabytes.</summary>
+    public readonly double DecimalPetabytes => Bytes / BytesInDecimalPetabyte;
+    /// <summary>Gets this value expressed in decimal SI exabytes.</summary>
+    public readonly double DecimalExabytes => Bytes / BytesInDecimalExabyte;
 
     public readonly string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
@@ -279,6 +308,9 @@ public struct ByteSize(double byteSize) :
     public static ByteSize FromBits(long value) =>
         new(value / (double)BitsInByte);
 
+    internal static ByteSize FromBytesAndBits(double bytes, long bits) =>
+        new(bytes, bits);
+
     public static ByteSize FromBytes(double value) =>
         new(value);
 
@@ -374,6 +406,70 @@ public struct ByteSize(double byteSize) :
         }
 
         return new(value * BytesInPebibyte);
+    }
+
+    /// <summary>Creates a byte size from a number of decimal SI kilobytes.</summary>
+    /// <param name="value">The number of decimal SI kilobytes.</param>
+    /// <returns>The equivalent byte size.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="value"/> is not finite or is outside the range supported by <see cref="Bits"/>.
+    /// </exception>
+    public static ByteSize FromDecimalKilobytes(double value) =>
+        FromDecimalUnit(value, BytesInDecimalKilobyte);
+
+    /// <summary>Creates a byte size from a number of decimal SI megabytes.</summary>
+    /// <param name="value">The number of decimal SI megabytes.</param>
+    /// <returns>The equivalent byte size.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="value"/> is not finite or is outside the range supported by <see cref="Bits"/>.
+    /// </exception>
+    public static ByteSize FromDecimalMegabytes(double value) =>
+        FromDecimalUnit(value, BytesInDecimalMegabyte);
+
+    /// <summary>Creates a byte size from a number of decimal SI gigabytes.</summary>
+    /// <param name="value">The number of decimal SI gigabytes.</param>
+    /// <returns>The equivalent byte size.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="value"/> is not finite or is outside the range supported by <see cref="Bits"/>.
+    /// </exception>
+    public static ByteSize FromDecimalGigabytes(double value) =>
+        FromDecimalUnit(value, BytesInDecimalGigabyte);
+
+    /// <summary>Creates a byte size from a number of decimal SI terabytes.</summary>
+    /// <param name="value">The number of decimal SI terabytes.</param>
+    /// <returns>The equivalent byte size.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="value"/> is not finite or is outside the range supported by <see cref="Bits"/>.
+    /// </exception>
+    public static ByteSize FromDecimalTerabytes(double value) =>
+        FromDecimalUnit(value, BytesInDecimalTerabyte);
+
+    /// <summary>Creates a byte size from a number of decimal SI petabytes.</summary>
+    /// <param name="value">The number of decimal SI petabytes.</param>
+    /// <returns>The equivalent byte size.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="value"/> is not finite or is outside the range supported by <see cref="Bits"/>.
+    /// </exception>
+    public static ByteSize FromDecimalPetabytes(double value) =>
+        FromDecimalUnit(value, BytesInDecimalPetabyte);
+
+    /// <summary>Creates a byte size from a number of decimal SI exabytes.</summary>
+    /// <param name="value">The number of decimal SI exabytes.</param>
+    /// <returns>The equivalent byte size.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="value"/> is not finite or is outside the range supported by <see cref="Bits"/>.
+    /// </exception>
+    public static ByteSize FromDecimalExabytes(double value) =>
+        FromDecimalUnit(value, BytesInDecimalExabyte);
+
+    static ByteSize FromDecimalUnit(double value, long bytesPerUnit)
+    {
+        if (!IsSupportedUnitValue(value, bytesPerUnit))
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "The value must be finite and fit the range supported by ByteSize.Bits.");
+        }
+
+        return new(value * bytesPerUnit);
     }
 
     /// <summary>
@@ -544,6 +640,576 @@ public struct ByteSize(double byteSize) :
     /// </summary>
     public readonly string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
         ToString(format, provider, toSymbol: false);
+
+    /// <summary>
+    /// Formats this value with an explicitly selected unit system.
+    /// </summary>
+    /// <param name="unitSystem">The unit system to use.</param>
+    /// <param name="format">
+    /// The numeric format and optional unit token. For <see cref="ByteSizeUnitSystem.DecimalSi"/> and
+    /// <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed unit tokens are matched case-insensitively,
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing.
+    /// <see cref="ByteSizeUnitSystem.Legacy"/> preserves established matching behavior. At most one distinct
+    /// unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
+    /// sections.
+    /// </param>
+    /// <param name="formatProvider">The provider used to format the numeric value.</param>
+    /// <returns>The formatted byte size.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    /// <exception cref="FormatException">
+    /// <paramref name="format"/> is invalid, contains mixed unit tokens, or selects a token not supported by the
+    /// selected non-legacy system.
+    /// </exception>
+    public readonly string Format(
+        ByteSizeUnitSystem unitSystem,
+        string? format = null,
+        IFormatProvider? formatProvider = null) =>
+        unitSystem == ByteSizeUnitSystem.Legacy
+            ? ToString(format, formatProvider)
+            : FormatWithUnitSystem(unitSystem, format, formatProvider, toSymbol: true);
+
+    /// <summary>
+    /// Formats this value with localized unit words from an explicitly selected unit system.
+    /// </summary>
+    /// <param name="unitSystem">The unit system to use.</param>
+    /// <param name="format">
+    /// The numeric format and optional unit token. For <see cref="ByteSizeUnitSystem.DecimalSi"/> and
+    /// <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed unit tokens are matched case-insensitively,
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; localized words replace the selected token.
+    /// <see cref="ByteSizeUnitSystem.Legacy"/> preserves established matching behavior. At most one distinct
+    /// unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
+    /// sections.
+    /// </param>
+    /// <param name="formatProvider">The provider used to format the numeric value and select localized unit words.</param>
+    /// <returns>The formatted byte size using localized unit words.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    /// <exception cref="FormatException">
+    /// <paramref name="format"/> is invalid, contains mixed unit tokens, or selects a token not supported by the
+    /// selected non-legacy system.
+    /// </exception>
+    public readonly string FormatFullWords(
+        ByteSizeUnitSystem unitSystem,
+        string? format = null,
+        IFormatProvider? formatProvider = null) =>
+        unitSystem == ByteSizeUnitSystem.Legacy
+            ? ToFullWords(format, formatProvider)
+            : FormatWithUnitSystem(unitSystem, format, formatProvider, toSymbol: false);
+
+    readonly string FormatWithUnitSystem(
+        ByteSizeUnitSystem unitSystem,
+        string? format,
+        IFormatProvider? formatProvider,
+        bool toSymbol)
+    {
+        ValidateUnitSystem(unitSystem);
+        formatProvider ??= CultureInfo.CurrentCulture;
+        var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
+        if (formatProvider is CultureInfo overrideCulture)
+        {
+            formatProvider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(overrideCulture);
+        }
+
+        var units = GetUnits(unitSystem);
+        var explicitUnit = FindFormatUnit(format, units);
+        var unit = explicitUnit ?? SelectUnit(units);
+        var value = unit.DataUnit == DataUnit.Bit
+            ? Bits
+            : Bytes / unit.Bytes;
+        var numericFormat = string.IsNullOrWhiteSpace(format) || format == "G" ? "0.##" : format!;
+
+        if (explicitUnit is null)
+        {
+            var systemRadix = unitSystem == ByteSizeUnitSystem.DecimalSi ? 1000d : 1024d;
+            while (true)
+            {
+                var unitIndex = Array.IndexOf(units, unit);
+                SystemUnit? nextUnit = unit.DataUnit switch
+                {
+                    DataUnit.Bit => new(1, ByteSymbol, DataUnit.Byte),
+                    DataUnit.Byte => units[^1],
+                    _ when unitIndex > 0 => units[unitIndex - 1],
+                    _ => null
+                };
+                if (nextUnit is not { } promotedUnit ||
+                    !TryGetDisplayedCount(
+                        value,
+                        ReplaceFormatToken(numericFormat, "#.##", "0.##"),
+                        formatProvider,
+                        out var displayedValue) ||
+                    Math.Abs(displayedValue) < (decimal)systemRadix)
+                {
+                    break;
+                }
+
+                unit = promotedUnit;
+                value = Bytes / unit.Bytes;
+            }
+        }
+
+        var phraseCount = unit.DataUnit == DataUnit.Bit ? Bits : value;
+        decimal? exactPhraseCount = unit.DataUnit == DataUnit.Bit ? Bits : null;
+        if (!toSymbol)
+        {
+            var countFormat = explicitUnit is { } selectedUnit
+                ? ReplaceFormatToken(numericFormat, selectedUnit.Symbol, string.Empty).Trim()
+                : numericFormat;
+            if (countFormat.Length == 0 && explicitUnit is not null)
+            {
+                countFormat = "0.##";
+            }
+
+            if (countFormat.Length > 0)
+            {
+                var resolvedCountFormat = ReplaceFormatToken(countFormat, "#.##", "0.##");
+                var hasDisplayedCount = unit.DataUnit == DataUnit.Bit
+                    ? TryGetDisplayedCount(Bits, resolvedCountFormat, formatProvider, out var displayedDecimal)
+                    : TryGetDisplayedCount(value, resolvedCountFormat, formatProvider, out displayedDecimal);
+                if (hasDisplayedCount)
+                {
+                    exactPhraseCount = displayedDecimal;
+                }
+            }
+        }
+
+        var formatter = Configurator.GetFormatter(culture);
+        var builtInFormatter = formatter as DefaultFormatter;
+        if (builtInFormatter is not null &&
+            formatter.GetType().Assembly != typeof(DefaultFormatter).Assembly)
+        {
+            builtInFormatter = null;
+        }
+
+        var unitText = toSymbol
+            ? unit.Symbol
+            : builtInFormatter is not null
+                ? exactPhraseCount is { } exactCount
+                    ? builtInFormatter.DataUnitHumanizeExact(unit.DataUnit, exactCount, toSymbol: false)
+                    : builtInFormatter.DataUnitHumanize(unit.DataUnit, Math.Abs(phraseCount), toSymbol: false)
+                : formatter.DataUnitHumanize(
+                    unit.DataUnit,
+                    exactPhraseCount is { } displayedCount ? (double)displayedCount : phraseCount,
+                    toSymbol: false);
+
+        if (explicitUnit is { } selected)
+        {
+            var standardFormat = ReplaceFormatToken(numericFormat, selected.Symbol, string.Empty).Trim();
+            if (IsStandardNumericFormat(standardFormat))
+            {
+                var formattedValue = unit.DataUnit == DataUnit.Bit
+                    ? Bits.ToString(standardFormat, formatProvider)
+                    : value.ToString(standardFormat, formatProvider);
+                var sentinel = FindFormatSentinel(numericFormat, formattedValue, unitText);
+
+                var protectedFormat = ReplaceFormatToken(numericFormat, selected.Symbol, sentinel);
+                return ReplaceFormatToken(protectedFormat, standardFormat, formattedValue)
+                    .Replace(sentinel, unitText);
+            }
+
+            var formatTemplate = numericFormat;
+            var formatWithoutUnit = ReplaceFormatToken(numericFormat, selected.Symbol, string.Empty);
+            if (MaskFormatLiterals(formatWithoutUnit).IndexOfAny(['#', '0']) < 0)
+            {
+                formatTemplate = string.Concat("0.## ", formatTemplate);
+                formatWithoutUnit = string.Concat("0.## ", formatWithoutUnit);
+            }
+
+            var resolvedFormatWithoutUnit = ReplaceFormatToken(formatWithoutUnit, "#.##", "0.##");
+            var formattedWithoutUnit = unit.DataUnit == DataUnit.Bit
+                ? Bits.ToString(resolvedFormatWithoutUnit, formatProvider)
+                : value.ToString(resolvedFormatWithoutUnit, formatProvider);
+            var customSentinel = FindFormatSentinel(formatTemplate, formattedWithoutUnit, unitText);
+
+            var customProtectedFormat = ReplaceFormatToken(formatTemplate, selected.Symbol, customSentinel);
+            var resolvedFormat = ReplaceFormatToken(customProtectedFormat, "#.##", "0.##");
+            var customFormattedValue = unit.DataUnit == DataUnit.Bit
+                ? Bits.ToString(resolvedFormat, formatProvider)
+                : value.ToString(resolvedFormat, formatProvider);
+            return customFormattedValue.Replace(customSentinel, unitText);
+        }
+
+        return string.Concat(value.ToString(ReplaceFormatToken(numericFormat, "#.##", "0.##"), formatProvider), " ", unitText);
+    }
+
+    static bool TryGetDisplayedCount(
+        double value,
+        string format,
+        IFormatProvider formatProvider,
+        out decimal count)
+    {
+        var numericFormat = SanitizeNumericFormat(format);
+        return TryParseDisplayedCount(
+            value.ToString(numericFormat, formatProvider),
+            formatProvider,
+            IsStandardNumericFormat(numericFormat) && numericFormat[0] is 'P' or 'p',
+            out count);
+    }
+
+    static bool TryGetDisplayedCount(
+        long value,
+        string format,
+        IFormatProvider formatProvider,
+        out decimal count)
+    {
+        var numericFormat = SanitizeNumericFormat(format);
+        return TryParseDisplayedCount(
+            value.ToString(numericFormat, formatProvider),
+            formatProvider,
+            IsStandardNumericFormat(numericFormat) && numericFormat[0] is 'P' or 'p',
+            out count);
+    }
+
+    static bool TryParseDisplayedCount(
+        string value,
+        IFormatProvider formatProvider,
+        bool usePercentSeparators,
+        out decimal count)
+    {
+        const NumberStyles styles = NumberStyles.Float | NumberStyles.AllowThousands;
+        if (!usePercentSeparators &&
+            decimal.TryParse(value, styles, formatProvider, out count))
+        {
+            return true;
+        }
+
+        var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
+        if (!usePercentSeparators &&
+            decimal.TryParse(value, NumberStyles.Currency, numberFormat, out count))
+        {
+            return true;
+        }
+
+        var withoutDecorators = value;
+        if (numberFormat.PercentSymbol.Length > 0)
+        {
+            withoutDecorators = withoutDecorators.Replace(numberFormat.PercentSymbol, string.Empty);
+        }
+
+        if (numberFormat.PerMilleSymbol.Length > 0)
+        {
+            withoutDecorators = withoutDecorators.Replace(numberFormat.PerMilleSymbol, string.Empty);
+        }
+
+        var undecoratedValue = withoutDecorators.Trim();
+        if (usePercentSeparators)
+        {
+            var isNegative = numberFormat.NegativeSign.Length > 0 &&
+                             undecoratedValue.Contains(numberFormat.NegativeSign);
+            if (isNegative)
+            {
+                undecoratedValue = undecoratedValue.Replace(numberFormat.NegativeSign, string.Empty).Trim();
+            }
+
+            var percentNumberFormat = (NumberFormatInfo)numberFormat.Clone();
+            percentNumberFormat.NumberDecimalSeparator = numberFormat.PercentDecimalSeparator;
+            percentNumberFormat.NumberGroupSeparator = numberFormat.PercentGroupSeparator;
+            if (decimal.TryParse(undecoratedValue, styles, percentNumberFormat, out count))
+            {
+                if (isNegative)
+                {
+                    count = -count;
+                }
+
+                return true;
+            }
+        }
+
+        return decimal.TryParse(undecoratedValue, styles, formatProvider, out count);
+    }
+
+    static string SanitizeNumericFormat(string format)
+    {
+        if (IsStandardNumericFormat(format))
+        {
+            return format;
+        }
+
+        var result = new StringBuilder(format.Length);
+        var quote = '\0';
+        for (var index = 0; index < format.Length; index++)
+        {
+            var character = format[index];
+            if (quote != '\0')
+            {
+                if (character == '\\')
+                {
+                    index++;
+                    continue;
+                }
+
+                if (character == quote)
+                {
+                    quote = '\0';
+                }
+
+                continue;
+            }
+
+            if (character is '\'' or '"')
+            {
+                quote = character;
+                continue;
+            }
+
+            if (character == '\\')
+            {
+                index++;
+                continue;
+            }
+
+            if (character is '0' or '#' or '.' or ',' or '%' or '‰' or ';')
+            {
+                result.Append(character);
+                continue;
+            }
+
+            if (character is 'E' or 'e' &&
+                index + 1 < format.Length &&
+                format[index + 1] is '+' or '-' or '0')
+            {
+                result.Append(character);
+                if (format[index + 1] is '+' or '-')
+                {
+                    result.Append(format[++index]);
+                }
+            }
+        }
+
+        return result.Length == 0 ? "0.##" : result.ToString();
+    }
+
+    static bool IsStandardNumericFormat(string format)
+    {
+        if (format.Length == 0 ||
+            format[0] is not (>= 'A' and <= 'Z') and not (>= 'a' and <= 'z'))
+        {
+            return false;
+        }
+
+        for (var index = 1; index < format.Length; index++)
+        {
+            if (format[index] is < '0' or > '9')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    readonly SystemUnit SelectUnit(SystemUnit[] units)
+    {
+        var absoluteBytes = Math.Abs(Bytes);
+        foreach (var unit in units)
+        {
+            if (absoluteBytes >= unit.Bytes)
+            {
+                return unit;
+            }
+        }
+
+        return absoluteBytes >= 1
+            ? new(1, ByteSymbol, DataUnit.Byte)
+            : new(1d / BitsInByte, BitSymbol, DataUnit.Bit);
+    }
+
+    static SystemUnit? FindFormatUnit(string? format, SystemUnit[] units)
+    {
+        if (string.IsNullOrWhiteSpace(format) || format == "G")
+        {
+            return null;
+        }
+
+        var maskedFormat = MaskFormatLiterals(format!);
+        var incompatibleUnits = ReferenceEquals(units, DecimalUnits) ? BinaryUnits : DecimalUnits;
+        foreach (var unit in incompatibleUnits)
+        {
+            if (maskedFormat.Contains(unit.Symbol, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new FormatException($"Unit token '{unit.Symbol}' does not belong to the selected byte-size unit system.");
+            }
+        }
+
+        if (maskedFormat.Contains("EiB", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new FormatException("EiB is outside the range supported by ByteSize.Bits.");
+        }
+
+        SystemUnit? selectedUnit = null;
+        var remainingFormat = maskedFormat;
+        foreach (var unit in units)
+        {
+            if (!remainingFormat.Contains(unit.Symbol, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (selectedUnit is not null && selectedUnit.Value.DataUnit != unit.DataUnit)
+            {
+                throw new FormatException("A byte-size format can contain only one distinct unit token.");
+            }
+
+            selectedUnit = unit;
+            remainingFormat = ReplaceOrdinalIgnoreCase(
+                remainingFormat,
+                unit.Symbol,
+                new(' ', unit.Symbol.Length));
+        }
+
+        var containsBytes = remainingFormat.Contains(ByteSymbol, StringComparison.Ordinal);
+        var containsBits = remainingFormat.Contains(BitSymbol, StringComparison.Ordinal);
+        var tokenCount = (selectedUnit is null ? 0 : 1) + (containsBytes ? 1 : 0) + (containsBits ? 1 : 0);
+        if (tokenCount > 1)
+        {
+            throw new FormatException("A byte-size format can contain only one distinct unit token.");
+        }
+
+        if (selectedUnit is not null)
+        {
+            return selectedUnit;
+        }
+
+        if (containsBytes)
+        {
+            return new(1, ByteSymbol, DataUnit.Byte);
+        }
+
+        return containsBits
+            ? new(1d / BitsInByte, BitSymbol, DataUnit.Bit)
+            : null;
+    }
+
+    static string MaskFormatLiterals(string format)
+    {
+        var result = format.ToCharArray();
+        var quote = '\0';
+        for (var index = 0; index < result.Length; index++)
+        {
+            var character = result[index];
+            if (quote != '\0')
+            {
+                result[index] = '\0';
+                if (character == '\\' && ++index < result.Length)
+                {
+                    result[index] = '\0';
+                    continue;
+                }
+
+                if (character == quote)
+                {
+                    quote = '\0';
+                }
+
+                continue;
+            }
+
+            if (character is '\'' or '"')
+            {
+                quote = character;
+                result[index] = '\0';
+            }
+            else if (character == '\\')
+            {
+                result[index] = '\0';
+                if (++index < result.Length)
+                {
+                    result[index] = '\0';
+                }
+            }
+        }
+
+        return new(result);
+    }
+
+    static string FindFormatSentinel(params string[] values)
+    {
+        for (var candidate = '\uE000'; candidate <= '\uF8FF'; candidate++)
+        {
+            if (values.All(value => !value.Contains(candidate)))
+            {
+                return candidate.ToString();
+            }
+        }
+
+        throw new FormatException("Unable to protect the byte-size unit token.");
+    }
+
+    static string ReplaceFormatToken(string format, string token, string replacement)
+    {
+        var maskedFormat = MaskFormatLiterals(format);
+        var searchStart = 0;
+        var indexes = new List<int>();
+        while (true)
+        {
+            var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                maskedFormat,
+                token,
+                searchStart,
+                CompareOptions.OrdinalIgnoreCase);
+            if (index < 0)
+            {
+                break;
+            }
+
+            indexes.Add(index);
+            searchStart = index + token.Length;
+        }
+
+        for (var index = indexes.Count - 1; index >= 0; index--)
+        {
+            format = format.Remove(indexes[index], token.Length).Insert(indexes[index], replacement);
+        }
+
+        return format;
+    }
+
+    static string ReplaceOrdinalIgnoreCase(string value, string oldValue, string newValue)
+    {
+        var searchStart = 0;
+        while (true)
+        {
+            var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                value,
+                oldValue,
+                searchStart,
+                CompareOptions.OrdinalIgnoreCase);
+            if (index < 0)
+            {
+                return value;
+            }
+
+            value = value.Remove(index, oldValue.Length).Insert(index, newValue);
+            searchStart = index + newValue.Length;
+        }
+    }
+
+    static SystemUnit[] GetUnits(ByteSizeUnitSystem unitSystem) =>
+        unitSystem switch
+        {
+            ByteSizeUnitSystem.DecimalSi => DecimalUnits,
+            ByteSizeUnitSystem.BinaryIec => BinaryUnits,
+            _ => throw new ArgumentOutOfRangeException(nameof(unitSystem), unitSystem, "Unknown byte-size unit system.")
+        };
+
+    static readonly SystemUnit[] DecimalUnits =
+    [
+        new(BytesInDecimalExabyte, "EB", DataUnit.DecimalExabyte),
+        new(BytesInDecimalPetabyte, "PB", DataUnit.DecimalPetabyte),
+        new(BytesInDecimalTerabyte, "TB", DataUnit.DecimalTerabyte),
+        new(BytesInDecimalGigabyte, "GB", DataUnit.DecimalGigabyte),
+        new(BytesInDecimalMegabyte, "MB", DataUnit.DecimalMegabyte),
+        new(BytesInDecimalKilobyte, "kB", DataUnit.DecimalKilobyte)
+    ];
+
+    static readonly SystemUnit[] BinaryUnits =
+    [
+        new(BytesInPebibyte, "PiB", DataUnit.BinaryPebibyte),
+        new(BytesInTebibyte, "TiB", DataUnit.BinaryTebibyte),
+        new(BytesInGibibyte, "GiB", DataUnit.BinaryGibibyte),
+        new(BytesInMebibyte, "MiB", DataUnit.BinaryMebibyte),
+        new(BytesInKibibyte, "KiB", DataUnit.BinaryKibibyte)
+    ];
+
+    readonly record struct SystemUnit(double Bytes, string Symbol, DataUnit DataUnit);
 
     public readonly override bool Equals(object? value)
     {
@@ -856,6 +1522,296 @@ public struct ByteSize(double byteSize) :
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Parses a byte size using only the tokens defined by the selected unit system.
+    /// </summary>
+    /// <param name="s">The text to parse.</param>
+    /// <param name="unitSystem">The unit system whose tokens are accepted.</param>
+    /// <param name="formatProvider">The provider used to parse the numeric value.</param>
+    /// <returns>The parsed byte size.</returns>
+    /// <remarks>
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not valid for the selected unit system.</exception>
+    public static ByteSize ParseWithUnitSystem(
+        string s,
+        ByteSizeUnitSystem unitSystem,
+        IFormatProvider? formatProvider = null)
+    {
+        ArgumentNullException.ThrowIfNull(s);
+        if (TryParseSpanWithUnitSystem(s.AsSpan(), unitSystem, formatProvider, out var result))
+        {
+            return result;
+        }
+
+        throw new FormatException("Value is not in the correct format");
+    }
+
+    /// <summary>
+    /// Attempts to parse a byte size using only the tokens defined by the selected unit system.
+    /// </summary>
+    /// <param name="s">The text to parse.</param>
+    /// <param name="unitSystem">The unit system whose tokens are accepted.</param>
+    /// <param name="result">
+    /// When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value.
+    /// </param>
+    /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    public static bool TryParseWithUnitSystem(
+        string? s,
+        ByteSizeUnitSystem unitSystem,
+        out ByteSize result) =>
+        TryParseSpanWithUnitSystem(s.AsSpan(), unitSystem, null, out result);
+
+    /// <summary>
+    /// Attempts to parse a byte size using only the tokens defined by the selected unit system.
+    /// </summary>
+    /// <param name="s">The text to parse.</param>
+    /// <param name="unitSystem">The unit system whose tokens are accepted.</param>
+    /// <param name="formatProvider">The provider used to parse the numeric value.</param>
+    /// <param name="result">
+    /// When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value.
+    /// </param>
+    /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    public static bool TryParseWithUnitSystem(
+        string? s,
+        ByteSizeUnitSystem unitSystem,
+        IFormatProvider? formatProvider,
+        out ByteSize result) =>
+        TryParseSpanWithUnitSystem(s.AsSpan(), unitSystem, formatProvider, out result);
+
+    /// <summary>
+    /// Attempts to parse a byte-size character span using only the tokens defined by the selected unit system.
+    /// </summary>
+    /// <param name="s">The character span to parse.</param>
+    /// <param name="unitSystem">The unit system whose tokens are accepted.</param>
+    /// <param name="result">
+    /// When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value.
+    /// </param>
+    /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    public static bool TryParseSpanWithUnitSystem(
+        CharSpan s,
+        ByteSizeUnitSystem unitSystem,
+        out ByteSize result) =>
+        TryParseSpanWithUnitSystem(s, unitSystem, null, out result);
+
+    /// <summary>
+    /// Attempts to parse a byte-size character span using only the tokens defined by the selected unit system.
+    /// </summary>
+    /// <param name="s">The character span to parse.</param>
+    /// <param name="unitSystem">The unit system whose tokens are accepted.</param>
+    /// <param name="formatProvider">The provider used to parse the numeric value.</param>
+    /// <param name="result">
+    /// When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value.
+    /// </param>
+    /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// For <see cref="ByteSizeUnitSystem.DecimalSi"/> and <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed
+    /// unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    public static bool TryParseSpanWithUnitSystem(
+        CharSpan s,
+        ByteSizeUnitSystem unitSystem,
+        IFormatProvider? formatProvider,
+        out ByteSize result)
+    {
+        ValidateUnitSystem(unitSystem);
+        if (unitSystem == ByteSizeUnitSystem.Legacy)
+        {
+            return TryParse(s, formatProvider, out result);
+        }
+
+        formatProvider ??= CultureInfo.CurrentCulture;
+        s = s.TrimStart();
+        result = default;
+        if (s.IsEmpty)
+        {
+            return false;
+        }
+
+        if (formatProvider is CultureInfo parseCulture)
+        {
+            formatProvider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(parseCulture);
+        }
+
+        var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
+        var lastNumber = 0;
+        while (lastNumber < s.Length)
+        {
+            if (!char.IsDigit(s[lastNumber]) &&
+                !IsNumberFormatCharacter(s[lastNumber], numberFormat))
+            {
+                if (!TryGetExponentLength(s[lastNumber..], numberFormat, out var exponentLength))
+                {
+                    break;
+                }
+
+                lastNumber += exponentLength;
+                continue;
+            }
+
+            lastNumber++;
+        }
+
+        if (lastNumber == s.Length)
+        {
+            return false;
+        }
+
+        var numberPart = s[..lastNumber].Trim();
+        var unitPart = s[lastNumber..].Trim();
+        if (unitPart.Length is < 1 or > 3)
+        {
+            return false;
+        }
+
+        const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign | AllowExponent;
+        if (!double.TryParse(
+#if NET
+            numberPart,
+#else
+            numberPart.ToString(),
+#endif
+            numberStyles,
+            formatProvider,
+            out var number))
+        {
+            return false;
+        }
+
+        if (unitPart.SequenceEqual(BitSymbol))
+        {
+            if (!decimal.TryParse(
+#if NET
+                numberPart,
+#else
+                numberPart.ToString(),
+#endif
+                numberStyles,
+                formatProvider,
+                out var bitCount) ||
+                bitCount != decimal.Truncate(bitCount) ||
+                bitCount < long.MinValue ||
+                bitCount > long.MaxValue)
+            {
+                return false;
+            }
+
+            var bits = (long)bitCount;
+            result = FromBytesAndBits(bits / (double)BitsInByte, bits);
+            return true;
+        }
+
+        if (unitPart.SequenceEqual(ByteSymbol))
+        {
+            if (!IsSupportedUnitValue(number, 1))
+            {
+                return false;
+            }
+
+            result = FromBytes(number);
+            return true;
+        }
+
+        var units = GetUnits(unitSystem);
+        foreach (var unit in units)
+        {
+            if (!unitPart.Equals(unit.Symbol, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (!IsSupportedUnitValue(number, unit.Bytes))
+            {
+                return false;
+            }
+
+            result = new(number * unit.Bytes);
+            return true;
+        }
+
+        return false;
+    }
+
+    static bool TryGetExponentLength(CharSpan value, NumberFormatInfo numberFormat, out int length)
+    {
+        length = 0;
+        if (value.IsEmpty || value[0] is not ('E' or 'e'))
+        {
+            return false;
+        }
+
+        var current = 1;
+        if (!TryConsumeNumberFormatToken(value, ref current, numberFormat.PositiveSign))
+        {
+            TryConsumeNumberFormatToken(value, ref current, numberFormat.NegativeSign);
+        }
+
+        var digitStart = current;
+        while (current < value.Length && char.IsDigit(value[current]))
+        {
+            current++;
+        }
+
+        if (current == digitStart)
+        {
+            return false;
+        }
+
+        length = current;
+        return true;
+    }
+
+    static bool TryConsumeNumberFormatToken(CharSpan value, ref int current, string token)
+    {
+        if (token.Length == 0 ||
+            value.Length - current < token.Length ||
+            !value.Slice(current, token.Length).SequenceEqual(token))
+        {
+            return false;
+        }
+
+        current += token.Length;
+        return true;
+    }
+
+    static bool IsNumberFormatCharacter(char value, NumberFormatInfo numberFormat) =>
+        numberFormat.NumberDecimalSeparator.Contains(value) ||
+        numberFormat.NumberGroupSeparator.Contains(value) ||
+        numberFormat.PositiveSign.Contains(value) ||
+        numberFormat.NegativeSign.Contains(value);
+
+    static void ValidateUnitSystem(ByteSizeUnitSystem unitSystem)
+    {
+        if (unitSystem is < ByteSizeUnitSystem.Legacy or > ByteSizeUnitSystem.BinaryIec)
+        {
+            throw new ArgumentOutOfRangeException(nameof(unitSystem), unitSystem, "Unknown byte-size unit system.");
+        }
     }
 
     static bool IsSupportedUnitValue(double value, double bytesPerUnit)

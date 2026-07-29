@@ -68,5 +68,38 @@ public enum DataUnit
     /// <summary>
     /// A tebibyte.
     /// </summary>
-    Tebibyte
+    Tebibyte,
+
+    /// <summary>A decimal SI kilobyte.</summary>
+    DecimalKilobyte = 13,
+
+    /// <summary>A decimal SI megabyte.</summary>
+    DecimalMegabyte = 14,
+
+    /// <summary>A decimal SI gigabyte.</summary>
+    DecimalGigabyte = 15,
+
+    /// <summary>A decimal SI terabyte.</summary>
+    DecimalTerabyte = 16,
+
+    /// <summary>A decimal SI petabyte.</summary>
+    DecimalPetabyte = 17,
+
+    /// <summary>A decimal SI exabyte.</summary>
+    DecimalExabyte = 18,
+
+    /// <summary>A binary IEC kibibyte used by explicit unit-system formatting.</summary>
+    BinaryKibibyte = 19,
+
+    /// <summary>A binary IEC mebibyte used by explicit unit-system formatting.</summary>
+    BinaryMebibyte = 20,
+
+    /// <summary>A binary IEC gibibyte used by explicit unit-system formatting.</summary>
+    BinaryGibibyte = 21,
+
+    /// <summary>A binary IEC tebibyte used by explicit unit-system formatting.</summary>
+    BinaryTebibyte = 22,
+
+    /// <summary>A binary IEC pebibyte used by explicit unit-system formatting.</summary>
+    BinaryPebibyte = 23
 }

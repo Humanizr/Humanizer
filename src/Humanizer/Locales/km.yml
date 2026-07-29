@@ -218,6 +218,50 @@ surfaces:
         forms:
           default: 'តេរ៉ាបៃ'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'គីឡូបៃ'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'មេហ្គាបៃ'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ជីហ្គាបៃ'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'តេរ៉ាបៃ'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'ប៉េតាបៃ'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'អិចសាបៃ'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'គីប៊ីបៃ'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'មេប៊ីបៃ'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ជីប៊ីបៃ'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'តេប៊ីបៃ'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'ប៉េប៊ីបៃ'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'មិល្លីវិនាទី'

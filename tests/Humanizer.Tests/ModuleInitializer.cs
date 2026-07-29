@@ -25,7 +25,9 @@ public static class ModuleInitializer
             formatter.TimeSpanHumanize(timeUnit, unit, toWords);
         public string TimeSpanHumanize_Age() => formatter.TimeSpanHumanize_Age();
         public string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
-            formatter.DataUnitHumanize(dataUnit, count, toSymbol);
+            toSymbol
+                ? formatter.DataUnitHumanize(dataUnit, count, toSymbol)
+                : $"{formatter.DataUnitHumanize(dataUnit, count, toSymbol)} #.## 0";
         public string TimeUnitHumanize(TimeUnit timeUnit) => formatter.TimeUnitHumanize(timeUnit);
     }
 

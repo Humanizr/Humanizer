@@ -59,6 +59,87 @@ public class ByteRateTests
         Assert.Equal("400 B/s", ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(1)).ToString());
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void ExplicitUnitSystemsPreserveExactIdentityAndIntegralBitScaling(ByteSizeUnitSystem unitSystem)
+    {
+        var exactSize = ByteSize.ParseWithUnitSystem(
+            "9007199254740993 b",
+            unitSystem,
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal(
+            "9007199254740993 b/s",
+            exactSize
+                .Per(TimeSpan.FromSeconds(1))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal(
+            "4503599627370497 b/s",
+            exactSize
+                .Per(TimeSpan.FromSeconds(2))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal(
+            $"{long.MaxValue} b/s",
+            ByteSize.ParseWithUnitSystem($"{long.MaxValue} b", unitSystem, CultureInfo.InvariantCulture)
+                .Per(TimeSpan.FromSeconds(1))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal(
+            $"{long.MinValue} b/s",
+            ByteSize.MinValue
+                .Per(TimeSpan.FromSeconds(1))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void ExplicitBitRatesPreserveExactDirectInputs(ByteSizeUnitSystem unitSystem)
+    {
+        var size = ByteSize.FromBits(-1);
+        var rate = size.Per(TimeSpan.FromSeconds(0.5));
+
+        Assert.Equal(-1, size.Bits);
+        Assert.Equal("-2 b/s", rate.HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal("-0.25 B/s", rate.HumanizeWithUnitSystem(unitSystem, "0.## B"));
+        Assert.Equal(
+            "0 b/s",
+            size.Per(TimeSpan.FromSeconds(2)).HumanizeWithUnitSystem(unitSystem));
+    }
+
+    [Theory]
+    [InlineData(-9007199254740993, 2, "-4503599627370496 b/s")]
+    [InlineData(9007199254740993, -2, "-4503599627370496 b/s")]
+    [InlineData(-9007199254740993, -2, "4503599627370497 b/s")]
+    public void ExplicitUnitSystemsApplySignedRationalCeiling(long bits, int intervalSeconds, string expected) =>
+        Assert.Equal(
+            expected,
+            ByteSize.ParseWithUnitSystem(
+                    $"{bits} b",
+                    ByteSizeUnitSystem.DecimalSi,
+                    CultureInfo.InvariantCulture)
+                .Per(TimeSpan.FromSeconds(intervalSeconds))
+                .HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, "0 b"));
+
+    [Fact]
+    public void ExplicitUnitSystemsPreserveLegacyFallbackForUndefinedOrOutOfRangeRates()
+    {
+        verifyFallback(ByteSize.FromBits(1), TimeSpan.Zero);
+        verifyFallback(ByteSize.MaxValue, TimeSpan.FromTicks(1));
+
+        static void verifyFallback(ByteSize size, TimeSpan interval)
+        {
+            var displayInterval = TimeSpan.FromSeconds(1);
+            var scaledBytes = size.Bytes / interval.TotalSeconds * displayInterval.TotalSeconds;
+            var expected = new ByteSize(scaledBytes)
+                .HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, "0 b") + "/s";
+
+            Assert.Equal(
+                expected,
+                size.Per(interval).HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, "0 b"));
+        }
+    }
+
+    [Theory]
     [InlineData(400, 10, 800, 20, 0)]
     [InlineData(400, 10, 800, 10, -1)]
     [InlineData(800, 10, 400, 10, 1)]

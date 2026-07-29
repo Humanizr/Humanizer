@@ -483,6 +483,39 @@ surfaces:
         forms:
           default: 'τεραμπάιτ'
         symbol: 'TB'
+      decimalKilobyte:
+        forms: 'κιλομπάιτ'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms: 'μεγαμπάιτ'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms: 'γιγαμπάιτ'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms: 'τεραμπάιτ'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms: 'πεταμπάιτ'
+        symbol: 'PB'
+      decimalExabyte:
+        forms: 'εξαμπάιτ'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms: 'κιμπιμπάιτ'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms: 'μεμπιμπάιτ'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms: 'γκιμπιμπάιτ'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms: 'τεμπιμπάιτ'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms: 'πεμπιμπάιτ'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'χιλ.δ.'

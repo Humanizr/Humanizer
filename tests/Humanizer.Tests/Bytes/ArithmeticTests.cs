@@ -22,6 +22,29 @@ public class ArithmeticTests
     }
 
     [Fact]
+    [UseCulture("en-US")]
+    public void RangeBoundaryArithmeticPreservesLegacyResults()
+    {
+        var result = ByteSize.MaxValue + ByteSize.MinValue;
+        var zero = new ByteSize(0);
+
+        Assert.Equal(0, result.Bytes);
+        Assert.Equal(0, result.Bits);
+        Assert.Equal(zero, result);
+        Assert.Equal(0, result.CompareTo(zero));
+        Assert.Equal("0 b", result.ToString());
+    }
+
+    [Fact]
+    public void AddBitsPreservesLegacyBytesBasedRounding()
+    {
+        var result = ByteSize.FromBits(9_007_199_254_740_992).AddBits(1);
+
+        Assert.Equal(1_125_899_906_842_624, result.Bytes);
+        Assert.Equal(9_007_199_254_740_992, result.Bits);
+    }
+
+    [Fact]
     public void AddBytes()
     {
         var size = ByteSize

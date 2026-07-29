@@ -227,6 +227,61 @@ surfaces:
           default: 'ama-terabytes'
           singular: 'i-terabyte'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'ama-kilobytes'
+          singular: 'i-kilobyte'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'ama-megabytes'
+          singular: 'i-megabyte'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ama-gigabytes'
+          singular: 'i-gigabyte'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'ama-terabytes'
+          singular: 'i-terabyte'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'ama-petabytes'
+          singular: 'i-petabyte'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ama-exabytes'
+          singular: 'i-exabyte'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'ama-kibibytes'
+          singular: 'i-kibibyte'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'ama-mebibytes'
+          singular: 'i-mebibyte'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ama-gibibytes'
+          singular: 'i-gibibyte'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'ama-tebibytes'
+          singular: 'i-tebibyte'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'ama-pebibytes'
+          singular: 'i-pebibyte'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'imilisekhondi'

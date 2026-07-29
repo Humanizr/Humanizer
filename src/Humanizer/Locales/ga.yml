@@ -427,6 +427,61 @@ surfaces:
           singular: 'teiribheart'
           default: 'teiribheart'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'cilibheart'
+          singular: 'cilibheart'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'meigibheart'
+          singular: 'meigibheart'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gigibheart'
+          singular: 'gigibheart'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'teiribheart'
+          singular: 'teiribheart'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'peitibheart'
+          singular: 'peitibheart'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'eicsibheart'
+          singular: 'eicsibheart'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'cíbibheart'
+          singular: 'cíbibheart'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mébibheart'
+          singular: 'mébibheart'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gíbibheart'
+          singular: 'gíbibheart'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tébibheart'
+          singular: 'tébibheart'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pébibheart'
+          singular: 'pébibheart'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

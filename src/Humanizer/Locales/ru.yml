@@ -954,6 +954,50 @@ surfaces:
         forms: 'терабайт'
         symbol: 'ТБ'
         template: '{unit}'
+      decimalKilobyte:
+        forms: 'килобайт'
+        symbol: 'kB'
+        template: '{unit}'
+      decimalMegabyte:
+        forms: 'мегабайт'
+        symbol: 'MB'
+        template: '{unit}'
+      decimalGigabyte:
+        forms: 'гигабайт'
+        symbol: 'GB'
+        template: '{unit}'
+      decimalTerabyte:
+        forms: 'терабайт'
+        symbol: 'TB'
+        template: '{unit}'
+      decimalPetabyte:
+        forms: 'петабайт'
+        symbol: 'PB'
+        template: '{unit}'
+      decimalExabyte:
+        forms: 'эксабайт'
+        symbol: 'EB'
+        template: '{unit}'
+      binaryKibibyte:
+        forms: 'кибибайт'
+        symbol: 'KiB'
+        template: '{unit}'
+      binaryMebibyte:
+        forms: 'мебибайт'
+        symbol: 'MiB'
+        template: '{unit}'
+      binaryGibibyte:
+        forms: 'гибибайт'
+        symbol: 'GiB'
+        template: '{unit}'
+      binaryTebibyte:
+        forms: 'тебибайт'
+        symbol: 'TiB'
+        template: '{unit}'
+      binaryPebibyte:
+        forms: 'пебибайт'
+        symbol: 'PiB'
+        template: '{unit}'
     timeUnits:
       millisecond:
         symbol: 'мс.'

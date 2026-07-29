@@ -354,6 +354,61 @@ surfaces:
         forms:
           default: 'terabytes'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kilobyți'
+          singular: 'kilobyte'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'megabyți'
+          singular: 'megabyte'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gigabyți'
+          singular: 'gigabyte'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'terabyți'
+          singular: 'terabyte'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'petabyți'
+          singular: 'petabyte'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'exabyți'
+          singular: 'exabyte'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kibibyți'
+          singular: 'kibibyte'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mebibyți'
+          singular: 'mebibyte'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gibibyți'
+          singular: 'gibibyte'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tebibyți'
+          singular: 'tebibyte'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pebibyți'
+          singular: 'pebibyte'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

@@ -210,6 +210,61 @@ surfaces:
         forms:
           default: 'เทราไบต์'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'กิโลไบต์'
+          singular: 'กิโลไบต์'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'เมกะไบต์'
+          singular: 'เมกะไบต์'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'กิกะไบต์'
+          singular: 'กิกะไบต์'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'เทราไบต์'
+          singular: 'เทราไบต์'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'เพตะไบต์'
+          singular: 'เพตะไบต์'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'เอกซะไบต์'
+          singular: 'เอกซะไบต์'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'คิบิไบต์'
+          singular: 'คิบิไบต์'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'เมบิไบต์'
+          singular: 'เมบิไบต์'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'กิบิไบต์'
+          singular: 'กิบิไบต์'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'เทบิไบต์'
+          singular: 'เทบิไบต์'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'เพบิไบต์'
+          singular: 'เพบิไบต์'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'มิลลิวินาที'

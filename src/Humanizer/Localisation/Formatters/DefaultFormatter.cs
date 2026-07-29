@@ -257,6 +257,18 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
     internal virtual FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         Math.Abs(count) == 1d ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
 
+    internal virtual FormatterNumberForm GetDataUnitPhraseForm(
+        DataUnit dataUnit,
+        decimal count,
+        CardinalPluralCategory category) =>
+        category == CardinalPluralCategory.One ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
+
+    internal virtual string GetDataUnitPhrasePrefix(
+        DataUnit dataUnit,
+        decimal count,
+        CardinalPluralCategory category) =>
+        string.Empty;
+
     internal virtual string ResolveDatePhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         forms.Resolve(form);
 
@@ -287,6 +299,12 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         forms.Singular is null &&
         template is null;
 
+    internal virtual bool ShouldAppendImplicitDataUnitPluralSuffixExact(
+        FormatterNumberForm form,
+        LocalizedPhraseForms forms) =>
+        form == FormatterNumberForm.Default &&
+        forms is { Singular: null, Dual: null, Paucal: null, Plural: null };
+
     internal virtual string TransformDataUnitResult(DataUnit dataUnit, double count, FormatterNumberForm form, string result, LocalizedPhraseForms forms, PhraseTemplate? template) =>
         result;
 
@@ -297,6 +315,38 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         string.Empty;
 
     private protected bool TryFormatDataUnitFromPhraseTable(DataUnit dataUnit, double count, bool toSymbol, out string result)
+    {
+        if (toSymbol)
+        {
+            return TryFormatDataUnitFromPhraseTable(dataUnit, count, default, toSymbol: true, exactCategory: null, out result);
+        }
+
+        var form = GetDataUnitPhraseForm(dataUnit, count);
+        return TryFormatDataUnitFromPhraseTable(dataUnit, count, form, toSymbol: false, exactCategory: null, out result);
+    }
+
+    internal string DataUnitHumanizeExact(DataUnit dataUnit, decimal count, bool toSymbol)
+    {
+        var magnitude = NormalizeDecimal(Math.Abs(count));
+        if (!LocalizedInflectionCatalog.TrySelectCategory(Culture, magnitude, out var category))
+        {
+            return DataUnitHumanize(dataUnit, (double)magnitude, toSymbol);
+        }
+
+        var form = GetDataUnitPhraseForm(dataUnit, magnitude, category);
+        var result = TryFormatDataUnitFromPhraseTable(dataUnit, (double)magnitude, form, toSymbol, category, out var phrase)
+            ? phrase
+            : DataUnitHumanize(dataUnit, (double)magnitude, toSymbol);
+        return GetDataUnitPhrasePrefix(dataUnit, magnitude, category) + result;
+    }
+
+    bool TryFormatDataUnitFromPhraseTable(
+        DataUnit dataUnit,
+        double count,
+        FormatterNumberForm form,
+        bool toSymbol,
+        CardinalPluralCategory? exactCategory,
+        out string result)
     {
         result = null!;
         if (!phraseTable.TryGetDataUnitPhrase(dataUnit, out var phrase))
@@ -320,13 +370,14 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
             return false;
         }
 
-        var form = GetDataUnitPhraseForm(dataUnit, count);
         result = ResolveDataUnitPhraseForms(forms, form);
         if (phrase.Template is { } template)
         {
             result = RenderTemplate(template, FormatCountValue(count), result, string.Empty);
         }
-        else if (ShouldAppendImplicitDataUnitPluralSuffix(dataUnit, count, form, forms, phrase.Template))
+        else if (exactCategory is not null
+                     ? ShouldAppendImplicitDataUnitPluralSuffixExact(form, forms)
+                     : ShouldAppendImplicitDataUnitPluralSuffix(dataUnit, count, form, forms, phrase.Template))
         {
             result += "s";
         }
@@ -335,6 +386,12 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
 
         return true;
     }
+
+    static decimal NormalizeDecimal(decimal value) =>
+        decimal.Parse(
+            value.ToString("G29", CultureInfo.InvariantCulture),
+            NumberStyles.Float,
+            CultureInfo.InvariantCulture);
 
     bool TryFormatDateFromPhraseTable(TimeUnit unit, Tense tense, int count, out string result)
     {

@@ -862,6 +862,83 @@ surfaces:
           paucal: 'терабайти'
           plural: 'терабайтів'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'кілобайтів'
+          singular: 'кілобайт'
+          paucal: 'кілобайти'
+          plural: 'кілобайтів'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'мегабайтів'
+          singular: 'мегабайт'
+          paucal: 'мегабайти'
+          plural: 'мегабайтів'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'гігабайтів'
+          singular: 'гігабайт'
+          paucal: 'гігабайти'
+          plural: 'гігабайтів'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'терабайтів'
+          singular: 'терабайт'
+          paucal: 'терабайти'
+          plural: 'терабайтів'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'петабайтів'
+          singular: 'петабайт'
+          paucal: 'петабайти'
+          plural: 'петабайтів'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ексабайтів'
+          singular: 'ексабайт'
+          paucal: 'ексабайти'
+          plural: 'ексабайтів'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'кібібайтів'
+          singular: 'кібібайт'
+          paucal: 'кібібайти'
+          plural: 'кібібайтів'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'мебібайтів'
+          singular: 'мебібайт'
+          paucal: 'мебібайти'
+          plural: 'мебібайтів'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'гібібайтів'
+          singular: 'гібібайт'
+          paucal: 'гібібайти'
+          plural: 'гібібайтів'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'тебібайтів'
+          singular: 'тебібайт'
+          paucal: 'тебібайти'
+          plural: 'тебібайтів'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'пебібайтів'
+          singular: 'пебібайт'
+          paucal: 'пебібайти'
+          plural: 'пебібайтів'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'мс.'

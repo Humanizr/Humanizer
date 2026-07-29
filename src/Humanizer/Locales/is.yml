@@ -584,6 +584,50 @@ surfaces:
         forms:
           default: 'terabæti'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kílóbæti'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'megabæti'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gígabæti'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'terabæti'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'petabæti'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'exabæti'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kibibæti'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mebibæti'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gibibæti'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tebibæti'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pebibæti'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'millisekúnda'

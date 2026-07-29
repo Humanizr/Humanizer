@@ -624,6 +624,61 @@ surfaces:
           default: 'ტერაბაიტი'
           singular: 'ტერაბაიტი'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'კილობაიტი'
+          singular: 'კილობაიტი'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'მეგაბაიტი'
+          singular: 'მეგაბაიტი'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'გიგაბაიტი'
+          singular: 'გიგაბაიტი'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'ტერაბაიტი'
+          singular: 'ტერაბაიტი'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'პეტაბაიტი'
+          singular: 'პეტაბაიტი'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ექსაბაიტი'
+          singular: 'ექსაბაიტი'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'კიბიბაიტი'
+          singular: 'კიბიბაიტი'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'მებიბაიტი'
+          singular: 'მებიბაიტი'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'გიბიბაიტი'
+          singular: 'გიბიბაიტი'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'ტებიბაიტი'
+          singular: 'ტებიბაიტი'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'პებიბაიტი'
+          singular: 'პებიბაიტი'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'მწმ'

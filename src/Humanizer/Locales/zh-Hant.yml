@@ -202,6 +202,61 @@ surfaces:
         forms:
           default: '兆位元組'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: '千位元組'
+          singular: '千位元組'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: '百萬位元組'
+          singular: '百萬位元組'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: '十億位元組'
+          singular: '十億位元組'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: '兆位元組'
+          singular: '兆位元組'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: '拍位元組'
+          singular: '拍位元組'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: '艾位元組'
+          singular: '艾位元組'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: '二進位千位元組'
+          singular: '二進位千位元組'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: '二進位百萬位元組'
+          singular: '二進位百萬位元組'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: '二進位十億位元組'
+          singular: '二進位十億位元組'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: '二進位兆位元組'
+          singular: '二進位兆位元組'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: '二進位拍位元組'
+          singular: '二進位拍位元組'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: '毫秒'

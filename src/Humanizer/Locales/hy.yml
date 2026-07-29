@@ -687,6 +687,50 @@ surfaces:
         forms:
           default: 'տերաբայթ'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'կիլոբայթ'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'մեգաբայթ'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'գիգաբայթ'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'տերաբայթ'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'պետաբայթ'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'էքսաբայթ'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'կիբիբայթ'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'մեբիբայթ'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'գիբիբայթ'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'տեբիբայթ'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'պեբիբայթ'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'մվ'

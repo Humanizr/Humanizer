@@ -678,6 +678,61 @@ surfaces:
           default: 'ଟେରାବାଇଟ୍'
           singular: 'ଟେରାବାଇଟ୍'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'କିଲୋବାଇଟ୍'
+          singular: 'କିଲୋବାଇଟ୍'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'ମେଗାବାଇଟ୍'
+          singular: 'ମେଗାବାଇଟ୍'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ଗିଗାବାଇଟ୍'
+          singular: 'ଗିଗାବାଇଟ୍'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'ଟେରାବାଇଟ୍'
+          singular: 'ଟେରାବାଇଟ୍'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'ପେଟାବାଇଟ୍'
+          singular: 'ପେଟାବାଇଟ୍'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ଏକ୍ସାବାଇଟ୍'
+          singular: 'ଏକ୍ସାବାଇଟ୍'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'କିବିବାଇଟ୍'
+          singular: 'କିବିବାଇଟ୍'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'ମେବିବାଇଟ୍'
+          singular: 'ମେବିବାଇଟ୍'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ଗିବିବାଇଟ୍'
+          singular: 'ଗିବିବାଇଟ୍'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'ଟେବିବାଇଟ୍'
+          singular: 'ଟେବିବାଇଟ୍'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'ପେବିବାଇଟ୍'
+          singular: 'ପେବିବାଇଟ୍'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ମିଲିସେକେଣ୍ଡ'

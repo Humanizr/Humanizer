@@ -578,6 +578,61 @@ surfaces:
           default: 'டெராபைட்கள்'
           singular: 'டெராபைட்'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'கிலோபைட்கள்'
+          singular: 'கிலோபைட்'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'மெகாபைட்கள்'
+          singular: 'மெகாபைட்'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'கிகாபைட்கள்'
+          singular: 'கிகாபைட்'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'டெராபைட்கள்'
+          singular: 'டெராபைட்'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'பெடாபைட்கள்'
+          singular: 'பெடாபைட்'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'எக்ஸாபைட்கள்'
+          singular: 'எக்ஸாபைட்'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'கிபிபைட்கள்'
+          singular: 'கிபிபைட்'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'மெபிபைட்கள்'
+          singular: 'மெபிபைட்'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ஜிபிபைட்கள்'
+          singular: 'ஜிபிபைட்'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'டெபிபைட்கள்'
+          singular: 'டெபிபைட்'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'பெபிபைட்கள்'
+          singular: 'பெபிபைட்'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'மில்லிவிநாடி'

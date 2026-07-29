@@ -202,6 +202,61 @@ surfaces:
         forms:
           default: '太字节'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: '千字节'
+          singular: '千字节'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: '兆字节'
+          singular: '兆字节'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: '吉字节'
+          singular: '吉字节'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: '太字节'
+          singular: '太字节'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: '拍字节'
+          singular: '拍字节'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: '艾字节'
+          singular: '艾字节'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: '二进制千字节'
+          singular: '二进制千字节'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: '二进制兆字节'
+          singular: '二进制兆字节'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: '二进制吉字节'
+          singular: '二进制吉字节'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: '二进制太字节'
+          singular: '二进制太字节'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: '二进制拍字节'
+          singular: '二进制拍字节'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: '毫秒'
