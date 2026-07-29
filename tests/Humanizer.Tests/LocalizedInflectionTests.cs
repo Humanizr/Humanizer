@@ -98,7 +98,8 @@ public class LocalizedInflectionTests
         { 1.30m, 1.30m, 1m, 2, 1, 30m, 3m },
         { 1.03m, 1.03m, 1m, 2, 2, 3m, 3m },
         { 1.230m, 1.230m, 1m, 3, 2, 230m, 23m },
-        { -1.230m, 1.230m, 1m, 3, 2, 230m, 23m }
+        { -1.230m, 1.230m, 1m, 3, 2, 230m, 23m },
+        { -0.0000000000000000000000000010m, 0.0000000000000000000000000010m, 0m, 28, 27, 10m, 1m }
     };
 
     [Theory]
@@ -177,6 +178,9 @@ public class LocalizedInflectionTests
         Assert.Equal(decimal.MaxValue, operands.N);
         Assert.Equal(decimal.MaxValue, operands.I);
         Assert.Equal(0, operands.V);
+        Assert.Equal(0, operands.W);
+        Assert.Equal(0m, operands.F);
+        Assert.Equal(0m, operands.T);
     }
 
     [Fact]

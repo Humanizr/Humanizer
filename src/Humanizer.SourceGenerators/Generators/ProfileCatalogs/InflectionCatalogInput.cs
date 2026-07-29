@@ -92,7 +92,7 @@ public sealed partial class HumanizerSourceGenerator
                         profiles.AddRange(ParseRegionalProfiles(locale.LocaleCode, locale.Inflection, profile));
                     }
                 }
-                catch (Exception exception)
+                catch (InvalidOperationException exception)
                 {
                     diagnostics.Add(CreateDiagnostic(locale.LocaleCode, exception.Message));
                 }
@@ -182,13 +182,11 @@ public sealed partial class HumanizerSourceGenerator
 
         static InflectionProfileInput ParseProfile(string localeCode, SimpleYamlMapping mapping)
         {
-            foreach (var property in mapping.Values.Keys)
+            foreach (var property in mapping.Values.Keys.Where(
+                         static property => property is not ("cardinalRule" or "disposition" or "source" or "lexemes" or "regionalRules")))
             {
-                if (property is not ("cardinalRule" or "disposition" or "source" or "lexemes" or "regionalRules"))
-                {
-                    throw new InvalidOperationException(
-                        $"surfaces.inflection defines unsupported property '{property}'.");
-                }
+                throw new InvalidOperationException(
+                    $"surfaces.inflection defines unsupported property '{property}'.");
             }
 
             var cardinalRule = mapping.GetScalar("cardinalRule")
@@ -239,13 +237,11 @@ public sealed partial class HumanizerSourceGenerator
                             $"surfaces.inflection.lexemes contains canonically equivalent lemma '{lexeme.Key}'.");
                     }
 
-                    foreach (var property in forms.Values.Keys)
+                    foreach (var property in forms.Values.Keys.Where(
+                                 static property => property is not ("zero" or "one" or "two" or "few" or "many" or "other")))
                     {
-                        if (property is not ("zero" or "one" or "two" or "few" or "many" or "other"))
-                        {
-                            throw new InvalidOperationException(
-                                $"surfaces.inflection.lexemes.{lexeme.Key} defines unsupported category '{property}'.");
-                        }
+                        throw new InvalidOperationException(
+                            $"surfaces.inflection.lexemes.{lexeme.Key} defines unsupported category '{property}'.");
                     }
 
                     var authoredForms = forms.Values.ToImmutableDictionary(

@@ -123,12 +123,9 @@ public sealed class CardinalInflectionForms
 
     static string? ValidateOptionalForm(string? value, string parameterName)
     {
-        if (value is not null)
+        if (value is not null && string.IsNullOrWhiteSpace(value))
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException("Value cannot be empty or whitespace.", parameterName);
-            }
+            throw new ArgumentException("Value cannot be empty or whitespace.", parameterName);
         }
 
         return value;

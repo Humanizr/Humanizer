@@ -68,17 +68,9 @@ static class CardinalPluralRules
                                                  f % 10 == 1 && f % 100 != 11
                 ? CardinalPluralCategory.One
                 : CardinalPluralCategory.Other,
-            CardinalPluralRuleKind.Filipino => v == 0 && i is 1 or 2 or 3 ||
-                                              v == 0 && i % 10 is not (4 or 6 or 9) ||
-                                              v != 0 && f % 10 is not (4 or 6 or 9)
-                ? CardinalPluralCategory.One
-                : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.Filipino => SelectFilipino(value),
             CardinalPluralRuleKind.Latvian => SelectLatvian(value),
-            CardinalPluralRuleKind.Hebrew => i == 1 && v == 0 || i == 0 && v != 0
-                ? CardinalPluralCategory.One
-                : i == 2 && v == 0
-                    ? CardinalPluralCategory.Two
-                    : CardinalPluralCategory.Other,
+            CardinalPluralRuleKind.Hebrew => SelectHebrew(value),
             CardinalPluralRuleKind.Romanian => i == 1 && v == 0
                 ? CardinalPluralCategory.One
                 : v != 0 || n == 0 || n != 1 && IsIntegerInRange(n % 100, 1, 19)
@@ -125,19 +117,52 @@ static class CardinalPluralRules
         };
     }
 
+    static CardinalPluralCategory SelectFilipino(CardinalPluralOperands value)
+    {
+        var integerIsOneToThree = value.V == 0 && value.I is 1 or 2 or 3;
+        var integerEndsInSupportedDigit = value.V == 0 && value.I % 10 is not (4 or 6 or 9);
+        var fractionEndsInSupportedDigit = value.V != 0 && value.F % 10 is not (4 or 6 or 9);
+        return integerIsOneToThree || integerEndsInSupportedDigit || fractionEndsInSupportedDigit
+            ? CardinalPluralCategory.One
+            : CardinalPluralCategory.Other;
+    }
+
+    static CardinalPluralCategory SelectHebrew(CardinalPluralOperands value)
+    {
+        if (value.I == 1 && value.V == 0)
+        {
+            return CardinalPluralCategory.One;
+        }
+
+        if (value.I == 0 && value.V != 0)
+        {
+            return CardinalPluralCategory.One;
+        }
+
+        return value.I == 2 && value.V == 0
+            ? CardinalPluralCategory.Two
+            : CardinalPluralCategory.Other;
+    }
+
     static CardinalPluralCategory SelectLatvian(CardinalPluralOperands value)
     {
         var n = value.N;
         var v = value.V;
         var f = value.F;
-        if (n % 10 == 0 || IsIntegerInRange(n % 100, 11, 19) || v == 2 && f % 100 is >= 11 and <= 19)
+        var wholeEndsInZero = n % 10 == 0;
+        var wholeEndsInElevenToNineteen = IsIntegerInRange(n % 100, 11, 19);
+        var twoDigitFractionEndsInElevenToNineteen = v == 2 && f % 100 is >= 11 and <= 19;
+        if (wholeEndsInZero || wholeEndsInElevenToNineteen || twoDigitFractionEndsInElevenToNineteen)
         {
             return CardinalPluralCategory.Zero;
         }
 
-        return n % 10 == 1 && n % 100 != 11 ||
-               v == 2 && f % 10 == 1 && f % 100 != 11 ||
-               v != 2 && f % 10 == 1
+        var wholeEndsInOneButNotEleven = n % 10 == 1 && n % 100 != 11;
+        var twoDigitFractionEndsInOneButNotEleven = v == 2 && f % 10 == 1 && f % 100 != 11;
+        var otherFractionEndsInOne = v != 2 && f % 10 == 1;
+        return wholeEndsInOneButNotEleven ||
+               twoDigitFractionEndsInOneButNotEleven ||
+               otherFractionEndsInOne
             ? CardinalPluralCategory.One
             : CardinalPluralCategory.Other;
     }
@@ -191,9 +216,22 @@ static class CardinalPluralRules
             return CardinalPluralCategory.Few;
         }
 
-        return v == 0 && i != 1 && i % 10 is >= 0 and <= 1 ||
-               v == 0 && i % 10 is >= 5 and <= 9 ||
-               v == 0 && i % 100 is >= 12 and <= 14
+        if (v != 0)
+        {
+            return CardinalPluralCategory.Other;
+        }
+
+        if (i != 1 && i % 10 is >= 0 and <= 1)
+        {
+            return CardinalPluralCategory.Many;
+        }
+
+        if (i % 10 is >= 5 and <= 9)
+        {
+            return CardinalPluralCategory.Many;
+        }
+
+        return i % 100 is >= 12 and <= 14
             ? CardinalPluralCategory.Many
             : CardinalPluralCategory.Other;
     }
@@ -245,9 +283,22 @@ static class CardinalPluralRules
             return CardinalPluralCategory.Few;
         }
 
-        return v == 0 && i % 10 == 0 ||
-               v == 0 && i % 10 is >= 5 and <= 9 ||
-               v == 0 && i % 100 is >= 11 and <= 14
+        if (v != 0)
+        {
+            return CardinalPluralCategory.Other;
+        }
+
+        if (i % 10 == 0)
+        {
+            return CardinalPluralCategory.Many;
+        }
+
+        if (i % 10 is >= 5 and <= 9)
+        {
+            return CardinalPluralCategory.Many;
+        }
+
+        return i % 100 is >= 11 and <= 14
             ? CardinalPluralCategory.Many
             : CardinalPluralCategory.Other;
     }

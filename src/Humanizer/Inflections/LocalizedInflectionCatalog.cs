@@ -40,9 +40,8 @@ sealed class LocalizedInflectionProfile
         IReadOnlyDictionary<string, CardinalInflectionForms> lexemes)
     {
         var reverse = new Dictionary<string, string?>(StringComparer.Ordinal);
-        foreach (var entry in lexemes)
+        foreach (var forms in lexemes.Values)
         {
-            var forms = entry.Value;
             AddReverse(reverse, forms.Lemma, forms.Lemma);
             AddReverse(reverse, forms.Other, forms.Lemma);
             AddReverse(reverse, forms.Zero, forms.Lemma);
