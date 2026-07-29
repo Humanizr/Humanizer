@@ -209,7 +209,22 @@ public static class TimeSpanHumanizeExtensions
     {
         ValidateFractionalSecondArguments(maxFractionalDigits, roundingMode, maxUnit);
 
-        if (Configurator.TimeSpanHumanizeStrategy is IFractionalTimeSpanHumanizeStrategy fractionalStrategy)
+        var strategy = Configurator.TimeSpanHumanizeStrategy;
+        if (strategy.GetType() == typeof(DefaultTimeSpanHumanizeStrategy))
+        {
+            return ((DefaultTimeSpanHumanizeStrategy)strategy).HumanizeWithFractionalSeconds(
+                timeSpan,
+                precision,
+                countEmptyUnits,
+                culture,
+                maxUnit,
+                collectionSeparator,
+                maxFractionalDigits,
+                roundingMode,
+                toSymbols);
+        }
+
+        if (strategy is IFractionalTimeSpanHumanizeStrategy fractionalStrategy)
         {
             return fractionalStrategy.HumanizeWithFractionalSeconds(
                 timeSpan,
@@ -231,7 +246,7 @@ public static class TimeSpanHumanizeExtensions
                 $"Implement {nameof(IFractionalTimeSpanHumanizeStrategy)} to handle genuinely fractional results.");
         }
 
-        return Configurator.TimeSpanHumanizeStrategy.Humanize(
+        return strategy.Humanize(
             roundedTimeSpan.ToTimeSpan(),
             precision,
             countEmptyUnits,
@@ -322,7 +337,8 @@ public static class TimeSpanHumanizeExtensions
                 ((DefaultFormatter)formatter).ValidateFractionalSecondGrammar(part.Value, toSymbols);
             }
 
-            if (decimal.Truncate(part.Value) == part.Value)
+            if (decimal.Truncate(part.Value) == part.Value &&
+                part.Value is >= int.MinValue and <= int.MaxValue)
             {
                 formattedParts.Add(FormatTimePart(
                     formatter,

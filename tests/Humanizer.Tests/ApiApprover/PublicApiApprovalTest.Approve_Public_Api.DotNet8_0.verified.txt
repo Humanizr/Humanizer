@@ -332,11 +332,11 @@ namespace Humanizer
         public DefaultTimeOnlyHumanizeStrategy() { }
         public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
-    public class DefaultTimeSpanHumanizeStrategy : Humanizer.IFractionalTimeSpanHumanizeStrategy, Humanizer.ITimeSpanHumanizeStrategy
+    public class DefaultTimeSpanHumanizeStrategy : Humanizer.ITimeSpanHumanizeStrategy
     {
         public DefaultTimeSpanHumanizeStrategy() { }
         public string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, Humanizer.TimeUnit minUnit, string? collectionSeparator, bool toWords, bool toSymbols) { }
-        public string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols) { }
+        public virtual string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols) { }
     }
     public class DynamicNumberOfCharactersAndPreserveWordsTruncator : Humanizer.ITruncator
     {

@@ -5,9 +5,6 @@ Extends a formatter with support for fractional\-second duration values\.
 ```csharp
 public interface IFractionalTimeSpanFormatter
 ```
-
-Derived  
-↳ [DefaultFormatter](Humanizer.DefaultFormatter.md 'Humanizer\.DefaultFormatter')
 ### Methods
 
 <a name='Humanizer.IFractionalTimeSpanFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool)'></a>

@@ -5,9 +5,6 @@ Extends a time\-span humanization strategy with fractional\-second support\.
 ```csharp
 public interface IFractionalTimeSpanHumanizeStrategy
 ```
-
-Derived  
-↳ [DefaultTimeSpanHumanizeStrategy](Humanizer.DefaultTimeSpanHumanizeStrategy.md 'Humanizer\.DefaultTimeSpanHumanizeStrategy')
 ### Methods
 
 <a name='Humanizer.IFractionalTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool)'></a>

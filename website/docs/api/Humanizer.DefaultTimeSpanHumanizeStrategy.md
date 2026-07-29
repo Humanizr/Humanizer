@@ -3,12 +3,12 @@
 The default strategy for converting [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') values into human\-readable text\.
 
 ```csharp
-public class DefaultTimeSpanHumanizeStrategy : Humanizer.ITimeSpanHumanizeStrategy, Humanizer.IFractionalTimeSpanHumanizeStrategy
+public class DefaultTimeSpanHumanizeStrategy : Humanizer.ITimeSpanHumanizeStrategy
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultTimeSpanHumanizeStrategy
 
-Implements [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy'), [IFractionalTimeSpanHumanizeStrategy](Humanizer.IFractionalTimeSpanHumanizeStrategy.md 'Humanizer\.IFractionalTimeSpanHumanizeStrategy')
+Implements [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy')
 ### Methods
 
 <a name='Humanizer.DefaultTimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool)'></a>
@@ -89,7 +89,7 @@ The human\-readable time span\.
 Converts a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into human\-readable text with seconds as the minimum unit\.
 
 ```csharp
-public string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols);
+public virtual string HumanizeWithFractionalSeconds(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator, int maxFractionalDigits, System.MidpointRounding roundingMode, bool toSymbols);
 ```
 #### Parameters
 
@@ -146,8 +146,6 @@ The midpoint rounding mode\.
 `toSymbols` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 Whether time units are rendered as symbols\.
-
-Implements [HumanizeWithFractionalSeconds\(TimeSpan, int, bool, CultureInfo, TimeUnit, string, int, MidpointRounding, bool\)](Humanizer.IFractionalTimeSpanHumanizeStrategy.md#Humanizer.IFractionalTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,string,int,System.MidpointRounding,bool) 'Humanizer\.IFractionalTimeSpanHumanizeStrategy\.HumanizeWithFractionalSeconds\(System\.TimeSpan, int, bool, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string, int, System\.MidpointRounding, bool\)')
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  

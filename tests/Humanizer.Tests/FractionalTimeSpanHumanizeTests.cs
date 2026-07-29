@@ -75,6 +75,21 @@ public class FractionalTimeSpanHumanizeTests
                 TimeUnit.Week));
     }
 
+    [Theory]
+    [InlineData(21474836476000000)]
+    [InlineData(-21474836476000000)]
+    public void RoundedIntegralSecondsBeyondIntRangeRetainTheirValue(long ticks)
+    {
+        var actual = TimeSpan.FromTicks(ticks).HumanizeWithFractionalSeconds(
+            1,
+            0,
+            MidpointRounding.ToEven,
+            English,
+            TimeUnit.Second);
+
+        Assert.Equal("2147483648 seconds", actual);
+    }
+
     [Fact]
     public void PrecisionCanReachASeparatedFractionalTerminal()
     {
@@ -300,7 +315,7 @@ public class FractionalTimeSpanHumanizeTests
     }
 
     [Fact]
-    public void LegacyFormatterHandlesRoundedIntegralButRejectsFractionalTerminal()
+    public void LegacyFormatterHandlesRepresentableIntegralButRejectsUnsupportedTerminals()
     {
         var culture = new CultureInfo("en-150");
 
@@ -312,16 +327,16 @@ public class FractionalTimeSpanHumanizeTests
                 MidpointRounding.ToEven,
                 culture,
                 TimeUnit.Second));
-        Assert.Equal(
-            "2147483647 seconds",
-            TimeSpan.MaxValue.HumanizeWithFractionalSeconds(
+        var largeException = Assert.Throws<InvalidOperationException>(
+            () => TimeSpan.MaxValue.HumanizeWithFractionalSeconds(
                 1,
                 0,
                 MidpointRounding.ToEven,
                 culture,
                 TimeUnit.Second));
+        Assert.Contains(nameof(IFractionalTimeSpanFormatter), largeException.Message);
 
-        var exception = Assert.Throws<InvalidOperationException>(
+        var fractionalException = Assert.Throws<InvalidOperationException>(
             () => TimeSpan.FromSeconds(1.5).HumanizeWithFractionalSeconds(
                 1,
                 1,
@@ -329,7 +344,7 @@ public class FractionalTimeSpanHumanizeTests
                 culture,
                 TimeUnit.Second));
 
-        Assert.Contains(nameof(IFractionalTimeSpanFormatter), exception.Message);
+        Assert.Contains(nameof(IFractionalTimeSpanFormatter), fractionalException.Message);
     }
 
     [Fact]
@@ -373,6 +388,14 @@ public class FractionalTimeSpanHumanizeTests
             timeSpan.HumanizeToSymbolsWithFractionalSeconds(
                 1,
                 7,
+                MidpointRounding.ToEven,
+                culture,
+                TimeUnit.Second));
+        Assert.Equal(
+            "2147483648|False",
+            TimeSpan.FromTicks(21474836476000000).HumanizeWithFractionalSeconds(
+                1,
+                0,
                 MidpointRounding.ToEven,
                 culture,
                 TimeUnit.Second));
@@ -515,6 +538,65 @@ public class FractionalTimeSpanHumanizeTests
     }
 
     [Fact]
+    public void DerivedDefaultStrategyRequiresExplicitFractionalOptIn()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+        var strategy = new DerivedLegacyStrategy();
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = strategy;
+
+            Assert.Equal(
+                "derived legacy",
+                TimeSpan.FromSeconds(1.6).HumanizeWithFractionalSeconds(
+                    1,
+                    0,
+                    MidpointRounding.ToEven,
+                    English,
+                    TimeUnit.Second));
+            Assert.Equal(TimeSpan.FromSeconds(2), strategy.LastTimeSpan);
+
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => TimeSpan.FromSeconds(1.5).HumanizeWithFractionalSeconds(
+                    1,
+                    1,
+                    MidpointRounding.ToEven,
+                    English,
+                    TimeUnit.Second));
+            Assert.Contains(nameof(IFractionalTimeSpanHumanizeStrategy), exception.Message);
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    [Fact]
+    public void DerivedDefaultStrategyCanExplicitlyOptInToFractionalRequests()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = new DerivedFractionalStrategy();
+
+            Assert.Equal(
+                "derived fractional",
+                TimeSpan.FromSeconds(1.5).HumanizeWithFractionalSeconds(
+                    1,
+                    1,
+                    MidpointRounding.ToEven,
+                    English,
+                    TimeUnit.Second));
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    [Fact]
     public void LegacyCallsRemainUnambiguousAndUnchanged()
     {
         Assert.Equal(string.Empty, default(TimeSpan).Humanize(default));
@@ -581,6 +663,41 @@ public class FractionalTimeSpanHumanizeTests
                 toSymbols);
             return "fractional";
         }
+    }
+
+    sealed class DerivedLegacyStrategy : DefaultTimeSpanHumanizeStrategy, ITimeSpanHumanizeStrategy
+    {
+        public TimeSpan LastTimeSpan { get; private set; }
+
+        public new string Humanize(
+            TimeSpan timeSpan,
+            int precision,
+            bool countEmptyUnits,
+            CultureInfo? culture,
+            TimeUnit maxUnit,
+            TimeUnit minUnit,
+            string? collectionSeparator,
+            bool toWords,
+            bool toSymbols)
+        {
+            LastTimeSpan = timeSpan;
+            return "derived legacy";
+        }
+    }
+
+    sealed class DerivedFractionalStrategy : DefaultTimeSpanHumanizeStrategy, IFractionalTimeSpanHumanizeStrategy
+    {
+        string IFractionalTimeSpanHumanizeStrategy.HumanizeWithFractionalSeconds(
+            TimeSpan timeSpan,
+            int precision,
+            bool countEmptyUnits,
+            CultureInfo? culture,
+            TimeUnit maxUnit,
+            string? collectionSeparator,
+            int maxFractionalDigits,
+            MidpointRounding roundingMode,
+            bool toSymbols) =>
+            "derived fractional";
     }
 
     sealed record FractionalCall(

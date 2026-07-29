@@ -3,12 +3,12 @@
 Provides the standard formatter implementation for Humanizer locales\.
 
 ```csharp
-public class DefaultFormatter : Humanizer.IFormatter, Humanizer.IFractionalTimeSpanFormatter
+public class DefaultFormatter : Humanizer.IFormatter
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → DefaultFormatter
 
-Implements [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter'), [IFractionalTimeSpanFormatter](Humanizer.IFractionalTimeSpanFormatter.md 'Humanizer\.IFractionalTimeSpanFormatter')
+Implements [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter')
 ### Constructors
 
 <a name='Humanizer.DefaultFormatter.DefaultFormatter(string)'></a>
@@ -247,7 +247,7 @@ If [timeUnit](Humanizer.DefaultFormatter.md#Humanizer.DefaultFormatter.TimeSpanH
 
 ## DefaultFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\) Method
 
-Returns the localized representation of a seconds value\.
+Returns the localized representation of a non\-negative seconds value\.
 
 ```csharp
 public virtual string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols);
@@ -265,8 +265,6 @@ The non\-negative seconds value to format\.
 `toSymbols` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 Whether the seconds unit is rendered as a symbol\.
-
-Implements [TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\)](Humanizer.IFractionalTimeSpanFormatter.md#Humanizer.IFractionalTimeSpanFormatter.TimeSpanHumanizeWithFractionalSeconds(decimal,bool) 'Humanizer\.IFractionalTimeSpanFormatter\.TimeSpanHumanizeWithFractionalSeconds\(decimal, bool\)')
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  

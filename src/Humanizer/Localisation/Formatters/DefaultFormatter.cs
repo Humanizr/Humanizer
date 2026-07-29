@@ -63,7 +63,12 @@ public class DefaultFormatter : IFormatter
             ? result
             : throw new InvalidOperationException($"Missing generated time-span phrase for '{Culture.Name}' and unit '{timeUnit}'.");
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Returns the localized representation of a non-negative seconds value.
+    /// </summary>
+    /// <param name="seconds">The non-negative seconds value to format.</param>
+    /// <param name="toSymbols">Whether the seconds unit is rendered as a symbol.</param>
+    /// <returns>The localized seconds value.</returns>
     public virtual string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols)
     {
 #if NET8_0_OR_GREATER
