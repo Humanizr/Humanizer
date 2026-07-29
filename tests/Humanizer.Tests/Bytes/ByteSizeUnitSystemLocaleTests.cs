@@ -102,6 +102,48 @@ public class ByteSizeUnitSystemLocaleTests
     }
 
     [Theory]
+    [InlineData("lt", ByteSizeUnitSystem.DecimalSi, "kB", "−")]
+    [InlineData("lt", ByteSizeUnitSystem.BinaryIec, "KiB", "−")]
+    [InlineData("kk", ByteSizeUnitSystem.DecimalSi, "kB", " ")]
+    [InlineData("kk", ByteSizeUnitSystem.BinaryIec, "KiB", " ")]
+    public void ExplicitFormattingOverridesRoundTrip(
+        string locale,
+        ByteSizeUnitSystem unitSystem,
+        string symbol,
+        string expectedOverride)
+    {
+        var culture = CultureInfo.GetCultureInfo(locale);
+        var bytesPerUnit = unitSystem == ByteSizeUnitSystem.DecimalSi
+            ? ByteSize.BytesInDecimalKilobyte
+            : ByteSize.BytesInKibibyte;
+        var size = ByteSize.FromBytes(-1234 * bytesPerUnit);
+        var formatted = size.Format(unitSystem, $"#,##0 {symbol}", culture);
+
+        Assert.Contains(expectedOverride, formatted);
+        Assert.Equal(size, ByteSize.ParseWithUnitSystem(formatted, unitSystem, culture));
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "kB", "kilobyți")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "KiB", "kibibyți")]
+    public void RomanianExplicitFullWordsUseDeForOtherCategory(
+        ByteSizeUnitSystem unitSystem,
+        string symbol,
+        string unitWord)
+    {
+        var culture = CultureInfo.GetCultureInfo("ro");
+
+        foreach (var count in new[] { 20, 21 })
+        {
+            var size = ByteSize.ParseWithUnitSystem($"{count} {symbol}", unitSystem, CultureInfo.InvariantCulture);
+
+            Assert.Equal(
+                $"{count} de {unitWord}",
+                size.FormatFullWords(unitSystem, $"0 {symbol}", culture));
+        }
+    }
+
+    [Theory]
     [MemberData(nameof(ByteSizeUnitSystemLocaleTheoryData.VariantParents), MemberType = typeof(ByteSizeUnitSystemLocaleTheoryData))]
     public void RegionalVariantsInheritTheirParentUnitWords(string variant, string parent)
     {

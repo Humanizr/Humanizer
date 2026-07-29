@@ -263,6 +263,12 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         CardinalPluralCategory category) =>
         category == CardinalPluralCategory.One ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
 
+    internal virtual string GetDataUnitPhrasePrefix(
+        DataUnit dataUnit,
+        decimal count,
+        CardinalPluralCategory category) =>
+        string.Empty;
+
     internal virtual string ResolveDatePhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         forms.Resolve(form);
 
@@ -322,9 +328,10 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         }
 
         var form = GetDataUnitPhraseForm(dataUnit, magnitude, category);
-        return TryFormatDataUnitFromPhraseTable(dataUnit, (double)magnitude, form, toSymbol, out var result)
-            ? result
+        var result = TryFormatDataUnitFromPhraseTable(dataUnit, (double)magnitude, form, toSymbol, out var phrase)
+            ? phrase
             : DataUnitHumanize(dataUnit, (double)magnitude, toSymbol);
+        return GetDataUnitPhrasePrefix(dataUnit, magnitude, category) + result;
     }
 
     bool TryFormatDataUnitFromPhraseTable(

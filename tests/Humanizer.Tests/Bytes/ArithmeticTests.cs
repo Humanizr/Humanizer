@@ -22,6 +22,7 @@ public class ArithmeticTests
     }
 
     [Fact]
+    [UseCulture("en-US")]
     public void RangeBoundaryArithmeticPreservesLegacyResults()
     {
         var result = ByteSize.MaxValue + ByteSize.MinValue;

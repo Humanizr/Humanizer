@@ -327,6 +327,16 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             _ => throw new UnreachableException()
         };
 
+    internal override string GetDataUnitPhrasePrefix(
+        DataUnit dataUnit,
+        decimal count,
+        CardinalPluralCategory category) =>
+        profile.PrepositionMode == FormatterPrepositionMode.RomanianDe &&
+        dataUnit is >= DataUnit.DecimalKilobyte and <= DataUnit.BinaryPebibyte &&
+        category == CardinalPluralCategory.Other
+            ? "de "
+            : string.Empty;
+
     internal override string ResolveDatePhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         ResolveProfiledPhraseForms(forms, form, profile.PhraseDetector);
 

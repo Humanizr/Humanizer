@@ -1623,10 +1623,9 @@ public struct ByteSize(double byteSize) :
             return false;
         }
 
-        if (formatProvider is CultureInfo parseCulture &&
-            LocaleNumberFormattingOverrides.TryGetDecimalSeparator(parseCulture, out var parseSeparator))
+        if (formatProvider is CultureInfo parseCulture)
         {
-            formatProvider = LocaleNumberFormattingOverrides.GetCachedNumberFormat(parseCulture, parseSeparator!);
+            formatProvider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(parseCulture);
         }
 
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
