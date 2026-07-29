@@ -4,6 +4,8 @@ surfaces:
   inflection:
     cardinalRule: 'Belarusian'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'unsupported'
 
   list:
     engine: 'conjunction'

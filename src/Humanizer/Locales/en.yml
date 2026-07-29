@@ -8,6 +8,8 @@ surfaces:
       person:
         one: 'person'
         other: 'people'
+  durationCases:
+    classification: 'not-applicable'
 
   list:
     engine: 'oxford'

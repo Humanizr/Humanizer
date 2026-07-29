@@ -7,7 +7,8 @@ public interface ITimeSpanHumanizeStrategy
 ```
 
 Derived  
-↳ [DefaultTimeSpanHumanizeStrategy](Humanizer.DefaultTimeSpanHumanizeStrategy.md 'Humanizer\.DefaultTimeSpanHumanizeStrategy')
+↳ [DefaultTimeSpanHumanizeStrategy](Humanizer.DefaultTimeSpanHumanizeStrategy.md 'Humanizer\.DefaultTimeSpanHumanizeStrategy')  
+↳ [IGrammaticalCaseTimeSpanHumanizeStrategy](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy')
 ### Methods
 
 <a name='Humanizer.ITimeSpanHumanizeStrategy.Humanize(System.TimeSpan,int,bool,System.Globalization.CultureInfo,Humanizer.TimeUnit,Humanizer.TimeUnit,string,bool,bool)'></a>

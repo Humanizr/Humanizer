@@ -4,6 +4,126 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 χιλιοστού του δευτερολέπτου'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} χιλιοστών του δευτερολέπτου'
+                singular: '{count} χιλιοστού του δευτερολέπτου'
+                dual: '{count} χιλιοστών του δευτερολέπτου'
+                paucal: '{count} χιλιοστών του δευτερολέπτου'
+                plural: '{count} χιλιοστών του δευτερολέπτου'
+          second:
+            single:
+              numeric: '1 δευτερολέπτου'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} δευτερολέπτων'
+                singular: '{count} δευτερολέπτου'
+                dual: '{count} δευτερολέπτων'
+                paucal: '{count} δευτερολέπτων'
+                plural: '{count} δευτερολέπτων'
+          minute:
+            single:
+              numeric: '1 λεπτού'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} λεπτών'
+                singular: '{count} λεπτού'
+                dual: '{count} λεπτών'
+                paucal: '{count} λεπτών'
+                plural: '{count} λεπτών'
+          hour:
+            single:
+              numeric: '1 ώρας'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ωρών'
+                singular: '{count} ώρας'
+                dual: '{count} ωρών'
+                paucal: '{count} ωρών'
+                plural: '{count} ωρών'
+          day:
+            single:
+              numeric: '1 ημέρας'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ημερών'
+                singular: '{count} ημέρας'
+                dual: '{count} ημερών'
+                paucal: '{count} ημερών'
+                plural: '{count} ημερών'
+          week:
+            single:
+              numeric: '1 εβδομάδας'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} εβδομάδων'
+                singular: '{count} εβδομάδας'
+                dual: '{count} εβδομάδων'
+                paucal: '{count} εβδομάδων'
+                plural: '{count} εβδομάδων'
+          month:
+            single:
+              numeric: '1 μήνα'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} μηνών'
+                singular: '{count} μήνα'
+                dual: '{count} μηνών'
+                paucal: '{count} μηνών'
+                plural: '{count} μηνών'
+          year:
+            single:
+              numeric: '1 έτους'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ετών'
+                singular: '{count} έτους'
+                dual: '{count} ετών'
+                paucal: '{count} ετών'
+                plural: '{count} ετών'
+      accusative:
+        units:
+          millisecond:
+            sameAsNominative: true
+          second:
+            sameAsNominative: true
+          minute:
+            sameAsNominative: true
+          hour:
+            sameAsNominative: true
+          day:
+            sameAsNominative: true
+          week:
+            sameAsNominative: true
+          month:
+            single:
+              numeric: '1 μήνα'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} μήνες'
+                singular: '{count} μήνα'
+                dual: '{count} μήνες'
+                paucal: '{count} μήνες'
+                plural: '{count} μήνες'
+          year:
+            sameAsNominative: true
 
   list:
     engine: 'conjunction'

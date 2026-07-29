@@ -4,6 +4,234 @@ surfaces:
   inflection:
     cardinalRule: 'SouthSlavic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 милисекунде'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} милисекунди'
+                singular: '{count} милисекунде'
+                dual: '{count} милисекунди'
+                paucal: '{count} милисекунде'
+                plural: '{count} милисекунди'
+          second:
+            single:
+              numeric: '1 секунде'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} секунди'
+                singular: '{count} секунде'
+                dual: '{count} секунди'
+                paucal: '{count} секунде'
+                plural: '{count} секунди'
+          minute:
+            single:
+              numeric: '1 минута'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} минута'
+                singular: '{count} минута'
+                dual: '{count} минута'
+                paucal: '{count} минута'
+                plural: '{count} минута'
+          hour:
+            single:
+              numeric: '1 сата'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} сата'
+                singular: '{count} сата'
+                dual: '{count} сата'
+                paucal: '{count} сата'
+                plural: '{count} сата'
+          day:
+            single:
+              numeric: '1 дана'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} дана'
+                singular: '{count} дана'
+                dual: '{count} дана'
+                paucal: '{count} дана'
+                plural: '{count} дана'
+          week:
+            single:
+              numeric: '1 недеље'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} недеља'
+                singular: '{count} недеље'
+                dual: '{count} недеља'
+                paucal: '{count} недеље'
+                plural: '{count} недеља'
+          month:
+            single:
+              numeric: '1 месеца'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} месеци'
+                singular: '{count} месеца'
+                dual: '{count} месеци'
+                paucal: '{count} месеца'
+                plural: '{count} месеци'
+          year:
+            single:
+              numeric: '1 године'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} година'
+                singular: '{count} године'
+                dual: '{count} година'
+                paucal: '{count} године'
+                plural: '{count} година'
+      accusative:
+        units:
+          millisecond:
+            sameAsNominative: true
+          second:
+            single:
+              numeric: '1 секунду'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} секунди'
+                singular: '{count} секунду'
+                dual: '{count} секунди'
+                paucal: '{count} секунде'
+                plural: '{count} секунди'
+          minute:
+            sameAsNominative: true
+          hour:
+            sameAsNominative: true
+          day:
+            sameAsNominative: true
+          week:
+            single:
+              numeric: '1 недељу'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} недеља'
+                singular: '{count} недељу'
+                dual: '{count} недеља'
+                paucal: '{count} недеље'
+                plural: '{count} недеља'
+          month:
+            sameAsNominative: true
+          year:
+            single:
+              numeric: '1 годину'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} година'
+                singular: '{count} годину'
+                dual: '{count} година'
+                paucal: '{count} године'
+                plural: '{count} година'
+      instrumental:
+        units:
+          millisecond:
+            single:
+              numeric: '1 милисекундом'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} милисекунди'
+                singular: '{count} милисекундом'
+                dual: '{count} милисекунди'
+                paucal: '{count} милисекунде'
+                plural: '{count} милисекунди'
+          second:
+            single:
+              numeric: '1 секундом'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} секунди'
+                singular: '{count} секундом'
+                dual: '{count} секунди'
+                paucal: '{count} секунде'
+                plural: '{count} секунди'
+          minute:
+            single:
+              numeric: '1 минутом'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} минута'
+                singular: '{count} минутом'
+                dual: '{count} минута'
+                paucal: '{count} минута'
+                plural: '{count} минута'
+          hour:
+            single:
+              numeric: '1 сатом'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} сатом'
+                singular: '{count} сатом'
+                dual: '{count} сатом'
+                paucal: '{count} сатом'
+                plural: '{count} сатом'
+          day:
+            single:
+              numeric: '1 даном'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} даном'
+                singular: '{count} даном'
+                dual: '{count} даном'
+                paucal: '{count} даном'
+                plural: '{count} даном'
+          week:
+            single:
+              numeric: '1 недељом'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} недеља'
+                singular: '{count} недељом'
+                dual: '{count} недеља'
+                paucal: '{count} недеље'
+                plural: '{count} недеља'
+          month:
+            single:
+              numeric: '1 месецом'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} месеци'
+                singular: '{count} месецом'
+                dual: '{count} месеци'
+                paucal: '{count} месеца'
+                plural: '{count} месеци'
+          year:
+            single:
+              numeric: '1 годином'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} година'
+                singular: '{count} годином'
+                dual: '{count} година'
+                paucal: '{count} године'
+                plural: '{count} година'
 
   list:
     engine: 'conjunction'

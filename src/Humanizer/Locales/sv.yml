@@ -4,6 +4,99 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekunds'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekunders'
+                singular: '{count} millisekunds'
+                dual: '{count} millisekunders'
+                paucal: '{count} millisekunders'
+                plural: '{count} millisekunders'
+          second:
+            single:
+              numeric: '1 sekunds'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekunders'
+                singular: '{count} sekunds'
+                dual: '{count} sekunders'
+                paucal: '{count} sekunders'
+                plural: '{count} sekunders'
+          minute:
+            single:
+              numeric: '1 minuts'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuters'
+                singular: '{count} minuts'
+                dual: '{count} minuters'
+                paucal: '{count} minuters'
+                plural: '{count} minuters'
+          hour:
+            single:
+              numeric: '1 timmes'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} timmars'
+                singular: '{count} timmes'
+                dual: '{count} timmars'
+                paucal: '{count} timmars'
+                plural: '{count} timmars'
+          day:
+            single:
+              numeric: '1 dygns'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dygns'
+                singular: '{count} dygns'
+                dual: '{count} dygns'
+                paucal: '{count} dygns'
+                plural: '{count} dygns'
+          week:
+            single:
+              numeric: '1 veckas'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} veckors'
+                singular: '{count} veckas'
+                dual: '{count} veckors'
+                paucal: '{count} veckors'
+                plural: '{count} veckors'
+          month:
+            single:
+              numeric: '1 månads'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} månaders'
+                singular: '{count} månads'
+                dual: '{count} månaders'
+                paucal: '{count} månaders'
+                plural: '{count} månaders'
+          year:
+            single:
+              numeric: '1 års'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} års'
+                singular: '{count} års'
+                dual: '{count} års'
+                paucal: '{count} års'
+                plural: '{count} års'
 
   list:
     engine: 'conjunction'

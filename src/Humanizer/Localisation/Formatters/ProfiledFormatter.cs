@@ -176,9 +176,12 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     /// Converts numbers using a gender-aware rule when the profile provides one.
     /// </summary>
     protected override string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
-        profile.UnitGenders.TryGetValue(unit, out var gender)
+        GetTimeUnitGender(unit) is { } gender
             ? number.ToWords(gender, culture)
             : base.NumberToWords(unit, number, culture);
+
+    internal override GrammaticalGender? GetTimeUnitGender(TimeUnit unit) =>
+        profile.UnitGenders.TryGetValue(unit, out var gender) ? gender : null;
 
     internal override FormatterNumberForm GetDatePhraseForm(TimeUnit unit, Tense tense, int number)
         => TryGetExactDateForm(unit, tense, number, out var form)

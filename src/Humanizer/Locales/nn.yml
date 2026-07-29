@@ -5,6 +5,99 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekunds'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekunds'
+                singular: '{count} millisekunds'
+                dual: '{count} millisekunds'
+                paucal: '{count} millisekunds'
+                plural: '{count} millisekunds'
+          second:
+            single:
+              numeric: '1 sekunds'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekunds'
+                singular: '{count} sekunds'
+                dual: '{count} sekunds'
+                paucal: '{count} sekunds'
+                plural: '{count} sekunds'
+          minute:
+            single:
+              numeric: '1 minutts'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minutts'
+                singular: '{count} minutts'
+                dual: '{count} minutts'
+                paucal: '{count} minutts'
+                plural: '{count} minutts'
+          hour:
+            single:
+              numeric: '1 times'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} timars'
+                singular: '{count} times'
+                dual: '{count} timars'
+                paucal: '{count} timars'
+                plural: '{count} timars'
+          day:
+            single:
+              numeric: '1 døgns'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} døgns'
+                singular: '{count} døgns'
+                dual: '{count} døgns'
+                paucal: '{count} døgns'
+                plural: '{count} døgns'
+          week:
+            single:
+              numeric: '1 vekes'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} vekers'
+                singular: '{count} vekes'
+                dual: '{count} vekers'
+                paucal: '{count} vekers'
+                plural: '{count} vekers'
+          month:
+            single:
+              numeric: '1 månads'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} månadars'
+                singular: '{count} månads'
+                dual: '{count} månadars'
+                paucal: '{count} månadars'
+                plural: '{count} månadars'
+          year:
+            single:
+              numeric: '1 års'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} års'
+                singular: '{count} års'
+                dual: '{count} års'
+                paucal: '{count} års'
+                plural: '{count} års'
 
   clock:
     hourOneWord: 'eit'

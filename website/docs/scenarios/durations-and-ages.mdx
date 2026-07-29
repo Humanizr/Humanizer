@@ -59,6 +59,50 @@ genuinely fractional terminal values require `IFractionalTimeSpanFormatter`
 from the configured formatter. A custom
 `IFractionalTimeSpanHumanizeStrategy` may own its fractional formatting.
 
+### Apply grammatical case
+
+On `main/preview`, `HumanizeWithCase` selects a locale-authored grammatical
+case form for each duration unit. A singular form may include a localized word
+or article; multiple units use digits:
+
+```csharp
+var german = CultureInfo.GetCultureInfo("de-DE");
+var duration = TimeSpan.FromDays(7).HumanizeWithCase(
+    GrammaticalCase.Dative,
+    culture: german);
+
+Console.WriteLine($"in {duration}"); // in einer Woche
+```
+
+The method returns a bare duration phrase and never adds a preposition.
+`Nominative` also uses the case-aware locale data, so an authored singular
+one-word or article can differ from ordinary `Humanize`. The API deliberately
+has no `toWords` option: singular forms are complete locale-authored phrases,
+while every multiple count is numeric. Existing `Humanize(toWords: true)`
+behavior is unchanged.
+
+Case coverage is explicit for every locale:
+
+- `distinct` means the locale supplies an authored form for the case.
+- `same-as-nominative` means the case is supported and intentionally uses the
+  locale's case-aware nominative phrase.
+- `not-applicable` means the narrowed duration-case surface does not apply to
+  that locale.
+- `unsupported` means the locale has an applicable case system, but verified
+  duration forms are unavailable.
+
+An unavailable requested case or unit throws `NotSupportedException`; it
+never falls back to English or invents morphology. Availability can differ by
+unit. For example, Malayalam has verified case forms through seconds but only
+a nominative millisecond form. A custom strategy or formatter must implement
+the corresponding grammatical-case capability interface, or every
+`HumanizeWithCase` call fails clearly, including `Nominative`.
+
+The checked-in duration forms use the explicit long-duration case data from
+[CLDR 48 at the audited commit](https://github.com/unicode-org/cldr/tree/acd6d88ae493633240e19a87a721076a8a75c310/common/main).
+See [Unicode LDML](https://unicode.org/reports/tr35/tr35-general.html) for the
+underlying locale-data model.
+
 ### Parse invariant durations
 
 On `main/preview`, `DehumanizeTimeSpan` and `TryDehumanizeTimeSpan` accept
@@ -87,7 +131,7 @@ comma-decimal culture, while `1,5h`, `one hour`, and `1 hour` are rejected.
 ## Version notes
 
 `TimeSpan.Humanize` is available across the documented corpus. `ToAge` begins
-in `3.0.1`; `HumanizeToSymbols`, `DehumanizeTimeSpan`, and
+in `3.0.1`; `HumanizeWithCase`, `HumanizeToSymbols`, `DehumanizeTimeSpan`, and
 `TryDehumanizeTimeSpan` are `main/preview` APIs. The verified executable runs
 against the selected package; older snapshots replace or exclude calls they
 do not support.
@@ -99,4 +143,6 @@ do not support.
 - [TimeSpanHumanizeExtensions API](../api/Humanizer.TimeSpanHumanizeExtensions.md)
 - [TimeSpanDehumanizeExtensions API](../api/Humanizer.TimeSpanDehumanizeExtensions.md)
 - [ITimeSpanHumanizeStrategy API](../api/Humanizer.ITimeSpanHumanizeStrategy.md)
+- [IGrammaticalCaseTimeSpanHumanizeStrategy API](../api/Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md)
+- [IGrammaticalCaseTimeSpanFormatter API](../api/Humanizer.IGrammaticalCaseTimeSpanFormatter.md)
 - [DefaultTimeSpanHumanizeStrategy API](../api/Humanizer.DefaultTimeSpanHumanizeStrategy.md)

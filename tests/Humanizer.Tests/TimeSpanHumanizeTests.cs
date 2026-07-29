@@ -605,6 +605,125 @@ public class TimeSpanHumanizeTests
     }
 
     [Fact]
+    public void GrammaticalCaseAppliesToEveryPart()
+    {
+        var actual = new TimeSpan(8, 2, 0, 0).HumanizeWithCase(
+            GrammaticalCase.Dative,
+            precision: 3,
+            culture: new("de-DE"));
+
+        Assert.Equal("einer Woche, einem Tag, 2 Stunden", actual);
+    }
+
+    [Fact]
+    public void InvalidGrammaticalCaseThrows()
+    {
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(
+            () => TimeSpan.FromDays(1).HumanizeWithCase((GrammaticalCase)int.MaxValue));
+
+        Assert.Equal("grammaticalCase", exception.ParamName);
+    }
+
+    [Fact]
+    public void CaseAwareFormatterRejectsInvalidTimeUnit()
+    {
+        var formatter = new DefaultFormatter("de");
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(
+            () => formatter.TimeSpanHumanize((TimeUnit)int.MaxValue, 1, GrammaticalCase.Dative));
+
+        Assert.Equal("timeUnit", exception.ParamName);
+    }
+
+    [Fact]
+    public void NominativeCaseRejectsLegacyCustomStrategy()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+        var strategy = new RecordingTimeSpanHumanizeStrategy
+        {
+            Target = TimeSpan.FromDays(1)
+        };
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = strategy;
+
+            var exception = Assert.Throws<NotSupportedException>(
+                () => strategy.Target.HumanizeWithCase(GrammaticalCase.Nominative));
+
+            Assert.Contains(nameof(ITimeSpanHumanizeStrategy), exception.Message);
+            Assert.Equal(0, strategy.CallCount);
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    [Fact]
+    public void NonNominativeCaseRejectsLegacyCustomStrategy()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+        var strategy = new RecordingTimeSpanHumanizeStrategy
+        {
+            Target = TimeSpan.FromDays(1)
+        };
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = strategy;
+
+            var exception = Assert.Throws<NotSupportedException>(
+                () => strategy.Target.HumanizeWithCase(GrammaticalCase.Dative));
+
+            Assert.Contains(nameof(ITimeSpanHumanizeStrategy), exception.Message);
+            Assert.Equal(0, strategy.CallCount);
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    [Fact]
+    public void LegacyFormattingPreservesCustomFormatterCompatibility()
+    {
+        var formatter = new LegacyFormatter();
+
+        Assert.Equal(
+            "custom",
+            TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                null));
+
+        var nominativeException = Assert.Throws<NotSupportedException>(
+            () => TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                GrammaticalCase.Nominative));
+        var dativeException = Assert.Throws<NotSupportedException>(
+            () => TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                GrammaticalCase.Dative));
+
+        Assert.Contains("formatter", nominativeException.Message);
+        Assert.Contains("formatter", dativeException.Message);
+    }
+
+    [Fact]
     public void ConfiguredStrategyReceivesEveryOptionFromEveryOverload()
     {
         var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
@@ -676,6 +795,18 @@ public class TimeSpanHumanizeTests
             LastCall = new(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, toWords, toSymbols);
             return "custom";
         }
+    }
+
+    sealed class LegacyFormatter : IFormatter
+    {
+        public string DateHumanize_Now() => throw new NotSupportedException();
+        public string DateHumanize_Never() => throw new NotSupportedException();
+        public string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit) => throw new NotSupportedException();
+        public string TimeSpanHumanize_Zero() => throw new NotSupportedException();
+        public string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false) => "custom";
+        public string TimeSpanHumanize_Age() => throw new NotSupportedException();
+        public string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) => throw new NotSupportedException();
+        public string TimeUnitHumanize(TimeUnit timeUnit) => throw new NotSupportedException();
     }
 
     sealed record TimeSpanHumanizeCall(

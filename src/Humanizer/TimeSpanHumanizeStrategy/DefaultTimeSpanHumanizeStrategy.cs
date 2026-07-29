@@ -3,7 +3,7 @@ namespace Humanizer;
 /// <summary>
 /// The default strategy for converting <see cref="TimeSpan"/> values into human-readable text.
 /// </summary>
-public class DefaultTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
+public class DefaultTimeSpanHumanizeStrategy : IGrammaticalCaseTimeSpanHumanizeStrategy
 {
     /// <inheritdoc />
     public string Humanize(
@@ -60,4 +60,26 @@ public class DefaultTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
             maxFractionalDigits,
             roundingMode,
             toSymbols);
+
+    /// <inheritdoc />
+    public string Humanize(
+        TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        TimeUnit minUnit,
+        string? collectionSeparator,
+        bool toSymbols,
+        GrammaticalCase grammaticalCase) =>
+        TimeSpanHumanizeExtensions.DefaultHumanize(
+            timeSpan,
+            precision,
+            countEmptyUnits,
+            culture,
+            maxUnit,
+            minUnit,
+            collectionSeparator,
+            toSymbols,
+            grammaticalCase);
 }

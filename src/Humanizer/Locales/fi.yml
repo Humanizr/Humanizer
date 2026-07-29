@@ -4,6 +4,369 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekunnin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekunnin'
+                singular: '{count} millisekunnin'
+                dual: '{count} millisekunnin'
+                paucal: '{count} millisekunnin'
+                plural: '{count} millisekunnin'
+          second:
+            single:
+              numeric: '1 sekunnin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekunnin'
+                singular: '{count} sekunnin'
+                dual: '{count} sekunnin'
+                paucal: '{count} sekunnin'
+                plural: '{count} sekunnin'
+          minute:
+            single:
+              numeric: '1 minuutin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuutin'
+                singular: '{count} minuutin'
+                dual: '{count} minuutin'
+                paucal: '{count} minuutin'
+                plural: '{count} minuutin'
+          hour:
+            single:
+              numeric: '1 tunnin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tunnin'
+                singular: '{count} tunnin'
+                dual: '{count} tunnin'
+                paucal: '{count} tunnin'
+                plural: '{count} tunnin'
+          day:
+            single:
+              numeric: '1 päivän'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} päivän'
+                singular: '{count} päivän'
+                dual: '{count} päivän'
+                paucal: '{count} päivän'
+                plural: '{count} päivän'
+          week:
+            single:
+              numeric: '1 viikon'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} viikon'
+                singular: '{count} viikon'
+                dual: '{count} viikon'
+                paucal: '{count} viikon'
+                plural: '{count} viikon'
+          month:
+            single:
+              numeric: '1 kuukauden'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} kuukauden'
+                singular: '{count} kuukauden'
+                dual: '{count} kuukauden'
+                paucal: '{count} kuukauden'
+                plural: '{count} kuukauden'
+          year:
+            single:
+              numeric: '1 vuoden'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} vuoden'
+                singular: '{count} vuoden'
+                dual: '{count} vuoden'
+                paucal: '{count} vuoden'
+                plural: '{count} vuoden'
+      partitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekuntia'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekuntia'
+                singular: '{count} millisekuntia'
+                dual: '{count} millisekuntia'
+                paucal: '{count} millisekuntia'
+                plural: '{count} millisekuntia'
+          second:
+            single:
+              numeric: '1 sekuntia'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekuntia'
+                singular: '{count} sekuntia'
+                dual: '{count} sekuntia'
+                paucal: '{count} sekuntia'
+                plural: '{count} sekuntia'
+          minute:
+            single:
+              numeric: '1 minuuttia'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuuttia'
+                singular: '{count} minuuttia'
+                dual: '{count} minuuttia'
+                paucal: '{count} minuuttia'
+                plural: '{count} minuuttia'
+          hour:
+            single:
+              numeric: '1 tuntia'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tuntia'
+                singular: '{count} tuntia'
+                dual: '{count} tuntia'
+                paucal: '{count} tuntia'
+                plural: '{count} tuntia'
+          day:
+            single:
+              numeric: '1 päivää'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} päivää'
+                singular: '{count} päivää'
+                dual: '{count} päivää'
+                paucal: '{count} päivää'
+                plural: '{count} päivää'
+          week:
+            single:
+              numeric: '1 viikkoa'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} viikkoa'
+                singular: '{count} viikkoa'
+                dual: '{count} viikkoa'
+                paucal: '{count} viikkoa'
+                plural: '{count} viikkoa'
+          month:
+            single:
+              numeric: '1 kuukautta'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} kuukautta'
+                singular: '{count} kuukautta'
+                dual: '{count} kuukautta'
+                paucal: '{count} kuukautta'
+                plural: '{count} kuukautta'
+          year:
+            single:
+              numeric: '1 vuotta'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} vuoteen'
+                singular: '{count} vuotta'
+                dual: '{count} vuoteen'
+                paucal: '{count} vuoteen'
+                plural: '{count} vuoteen'
+      elative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekunnista'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekunnista'
+                singular: '{count} millisekunnista'
+                dual: '{count} millisekunnista'
+                paucal: '{count} millisekunnista'
+                plural: '{count} millisekunnista'
+          second:
+            single:
+              numeric: '1 sekunnista'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekunnista'
+                singular: '{count} sekunnista'
+                dual: '{count} sekunnista'
+                paucal: '{count} sekunnista'
+                plural: '{count} sekunnista'
+          minute:
+            single:
+              numeric: '1 minuutista'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuutista'
+                singular: '{count} minuutista'
+                dual: '{count} minuutista'
+                paucal: '{count} minuutista'
+                plural: '{count} minuutista'
+          hour:
+            single:
+              numeric: '1 tunnista'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tunnista'
+                singular: '{count} tunnista'
+                dual: '{count} tunnista'
+                paucal: '{count} tunnista'
+                plural: '{count} tunnista'
+          day:
+            single:
+              numeric: '1 päivästä'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} päivästä'
+                singular: '{count} päivästä'
+                dual: '{count} päivästä'
+                paucal: '{count} päivästä'
+                plural: '{count} päivästä'
+          week:
+            single:
+              numeric: '1 viikosta'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} viikosta'
+                singular: '{count} viikosta'
+                dual: '{count} viikosta'
+                paucal: '{count} viikosta'
+                plural: '{count} viikosta'
+          month:
+            single:
+              numeric: '1 kuukaudesta'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} kuukaudesta'
+                singular: '{count} kuukaudesta'
+                dual: '{count} kuukaudesta'
+                paucal: '{count} kuukaudesta'
+                plural: '{count} kuukaudesta'
+          year:
+            single:
+              numeric: '1 vuodesta'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} vuodesta'
+                singular: '{count} vuodesta'
+                dual: '{count} vuodesta'
+                paucal: '{count} vuodesta'
+                plural: '{count} vuodesta'
+      illative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekuntiin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekuntiin'
+                singular: '{count} millisekuntiin'
+                dual: '{count} millisekuntiin'
+                paucal: '{count} millisekuntiin'
+                plural: '{count} millisekuntiin'
+          second:
+            single:
+              numeric: '1 sekuntiin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekuntiin'
+                singular: '{count} sekuntiin'
+                dual: '{count} sekuntiin'
+                paucal: '{count} sekuntiin'
+                plural: '{count} sekuntiin'
+          minute:
+            single:
+              numeric: '1 minuuttiin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuutista'
+                singular: '{count} minuuttiin'
+                dual: '{count} minuutista'
+                paucal: '{count} minuutista'
+                plural: '{count} minuutista'
+          hour:
+            single:
+              numeric: '1 tuntiin'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tuntiin'
+                singular: '{count} tuntiin'
+                dual: '{count} tuntiin'
+                paucal: '{count} tuntiin'
+                plural: '{count} tuntiin'
+          day:
+            single:
+              numeric: '1 päivään'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} päivään'
+                singular: '{count} päivään'
+                dual: '{count} päivään'
+                paucal: '{count} päivään'
+                plural: '{count} päivään'
+          week:
+            single:
+              numeric: '1 viikkoon'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} viikkoon'
+                singular: '{count} viikkoon'
+                dual: '{count} viikkoon'
+                paucal: '{count} viikkoon'
+                plural: '{count} viikkoon'
+          month:
+            single:
+              numeric: '1 kuukauteen'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} kuukauteen'
+                singular: '{count} kuukauteen'
+                dual: '{count} kuukauteen'
+                paucal: '{count} kuukauteen'
+                plural: '{count} kuukauteen'
+          year:
+            single:
+              numeric: '1 vuoteen'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} vuoteen'
+                singular: '{count} vuoteen'
+                dual: '{count} vuoteen'
+                paucal: '{count} vuoteen'
+                plural: '{count} vuoteen'
 
   list:
     engine: 'conjunction'

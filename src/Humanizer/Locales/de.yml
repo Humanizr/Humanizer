@@ -4,6 +4,207 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 Millisekunde'
+              words: 'einer Millisekunde'
+            multiple:
+              forms: 'Millisekunden'
+              wordsVariant:
+                forms: 'Millisekunden'
+          second:
+            single:
+              numeric: '1 Sekunde'
+              words: 'einer Sekunde'
+            multiple:
+              forms: 'Sekunden'
+              wordsVariant:
+                forms: 'Sekunden'
+          minute:
+            single:
+              numeric: '1 Minute'
+              words: 'einer Minute'
+            multiple:
+              forms: 'Minuten'
+              wordsVariant:
+                forms: 'Minuten'
+          hour:
+            single:
+              numeric: '1 Stunde'
+              words: 'einer Stunde'
+            multiple:
+              forms: 'Stunden'
+              wordsVariant:
+                forms: 'Stunden'
+          day:
+            single:
+              numeric: '1 Tages'
+              words: 'eines Tages'
+            multiple:
+              forms: 'Tage'
+              wordsVariant:
+                forms: 'Tage'
+          week:
+            single:
+              numeric: '1 Woche'
+              words: 'einer Woche'
+            multiple:
+              forms: 'Wochen'
+              wordsVariant:
+                forms: 'Wochen'
+          month:
+            single:
+              numeric: '1 Monats'
+              words: 'eines Monats'
+            multiple:
+              forms: 'Monate'
+              wordsVariant:
+                forms: 'Monate'
+          year:
+            single:
+              numeric: '1 Jahres'
+              words: 'eines Jahres'
+            multiple:
+              forms: 'Jahre'
+              wordsVariant:
+                forms: 'Jahre'
+      dative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 Millisekunde'
+              words: 'einer Millisekunde'
+            multiple:
+              forms: 'Millisekunden'
+              wordsVariant:
+                forms: 'Millisekunden'
+          second:
+            single:
+              numeric: '1 Sekunde'
+              words: 'einer Sekunde'
+            multiple:
+              forms: 'Sekunden'
+              wordsVariant:
+                forms: 'Sekunden'
+          minute:
+            single:
+              numeric: '1 Minute'
+              words: 'einer Minute'
+            multiple:
+              forms: 'Minuten'
+              wordsVariant:
+                forms: 'Minuten'
+          hour:
+            single:
+              numeric: '1 Stunde'
+              words: 'einer Stunde'
+            multiple:
+              forms: 'Stunden'
+              wordsVariant:
+                forms: 'Stunden'
+          day:
+            single:
+              numeric: '1 Tag'
+              words: 'einem Tag'
+            multiple:
+              forms: 'Tagen'
+              wordsVariant:
+                forms: 'Tagen'
+          week:
+            single:
+              numeric: '1 Woche'
+              words: 'einer Woche'
+            multiple:
+              forms: 'Wochen'
+              wordsVariant:
+                forms: 'Wochen'
+          month:
+            single:
+              numeric: '1 Monat'
+              words: 'einem Monat'
+            multiple:
+              forms: 'Monaten'
+              wordsVariant:
+                forms: 'Monaten'
+          year:
+            single:
+              numeric: '1 Jahr'
+              words: 'einem Jahr'
+            multiple:
+              forms: 'Jahren'
+              wordsVariant:
+                forms: 'Jahren'
+      accusative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 Millisekunde'
+              words: 'eine Millisekunde'
+            multiple:
+              forms: 'Millisekunden'
+              wordsVariant:
+                forms: 'Millisekunden'
+          second:
+            single:
+              numeric: '1 Sekunde'
+              words: 'eine Sekunde'
+            multiple:
+              forms: 'Sekunden'
+              wordsVariant:
+                forms: 'Sekunden'
+          minute:
+            single:
+              numeric: '1 Minute'
+              words: 'eine Minute'
+            multiple:
+              forms: 'Minuten'
+              wordsVariant:
+                forms: 'Minuten'
+          hour:
+            single:
+              numeric: '1 Stunde'
+              words: 'eine Stunde'
+            multiple:
+              forms: 'Stunden'
+              wordsVariant:
+                forms: 'Stunden'
+          day:
+            single:
+              numeric: '1 Tag'
+              words: 'einen Tag'
+            multiple:
+              forms: 'Tage'
+              wordsVariant:
+                forms: 'Tage'
+          week:
+            single:
+              numeric: '1 Woche'
+              words: 'eine Woche'
+            multiple:
+              forms: 'Wochen'
+              wordsVariant:
+                forms: 'Wochen'
+          month:
+            single:
+              numeric: '1 Monat'
+              words: 'einen Monat'
+            multiple:
+              forms: 'Monate'
+              wordsVariant:
+                forms: 'Monate'
+          year:
+            single:
+              numeric: '1 Jahr'
+              words: 'ein Jahr'
+            multiple:
+              forms: 'Jahre'
+              wordsVariant:
+                forms: 'Jahre'
 
   list:
     engine: 'conjunction'

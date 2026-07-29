@@ -4,6 +4,8 @@ surfaces:
   inflection:
     cardinalRule: 'Arabic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'unsupported'
 
   list:
     engine: 'clitic'

@@ -4,6 +4,477 @@ surfaces:
   inflection:
     cardinalRule: 'Polish'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundy'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekund'
+                singular: '{count} milisekundy'
+                dual: '{count} milisekundy'
+                paucal: '{count} milisekund'
+                plural: '{count} milisekund'
+          second:
+            single:
+              numeric: '1 sekundy'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekund'
+                singular: '{count} sekundy'
+                dual: '{count} sekundy'
+                paucal: '{count} sekund'
+                plural: '{count} sekund'
+          minute:
+            single:
+              numeric: '1 minuty'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minut'
+                singular: '{count} minuty'
+                dual: '{count} minuty'
+                paucal: '{count} minut'
+                plural: '{count} minut'
+          hour:
+            single:
+              numeric: '1 godziny'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godzin'
+                singular: '{count} godziny'
+                dual: '{count} godziny'
+                paucal: '{count} godzin'
+                plural: '{count} godzin'
+          day:
+            single:
+              numeric: '1 dnia'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dnia'
+                singular: '{count} dnia'
+                dual: '{count} dnia'
+                paucal: '{count} dnia'
+                plural: '{count} dnia'
+          week:
+            single:
+              numeric: '1 tygodnia'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tygodni'
+                singular: '{count} tygodnia'
+                dual: '{count} tygodnia'
+                paucal: '{count} tygodni'
+                plural: '{count} tygodni'
+          month:
+            single:
+              numeric: '1 miesiąca'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} miesięcy'
+                singular: '{count} miesiąca'
+                dual: '{count} miesiąca'
+                paucal: '{count} miesięcy'
+                plural: '{count} miesięcy'
+          year:
+            single:
+              numeric: '1 roku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} lat'
+                singular: '{count} roku'
+                dual: '{count} lat'
+                paucal: '{count} lat'
+                plural: '{count} lat'
+      dative:
+        units:
+          millisecond:
+            unsupported: true
+          second:
+            single:
+              numeric: '1 sekundzie'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundom'
+                singular: '{count} sekundzie'
+                dual: '{count} sekundy'
+                paucal: '{count} sekundom'
+                plural: '{count} sekundom'
+          minute:
+            single:
+              numeric: '1 minucie'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minutom'
+                singular: '{count} minucie'
+                dual: '{count} minuty'
+                paucal: '{count} minutom'
+                plural: '{count} minutom'
+          hour:
+            single:
+              numeric: '1 godzinie'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godzinom'
+                singular: '{count} godzinie'
+                dual: '{count} godziny'
+                paucal: '{count} godzinom'
+                plural: '{count} godzinom'
+          day:
+            single:
+              numeric: '1 dniowi'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dniom'
+                singular: '{count} dniowi'
+                dual: '{count} dniom'
+                paucal: '{count} dniom'
+                plural: '{count} dniom'
+          week:
+            single:
+              numeric: '1 tygodniowi'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tygodniom'
+                singular: '{count} tygodniowi'
+                dual: '{count} tygodnia'
+                paucal: '{count} tygodniom'
+                plural: '{count} tygodniom'
+          month:
+            single:
+              numeric: '1 miesiącowi'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} miesiącom'
+                singular: '{count} miesiącowi'
+                dual: '{count} miesiąca'
+                paucal: '{count} miesiącom'
+                plural: '{count} miesiącom'
+          year:
+            single:
+              numeric: '1 rokowi'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} latom'
+                singular: '{count} rokowi'
+                dual: '{count} latom'
+                paucal: '{count} latom'
+                plural: '{count} latom'
+      accusative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundę'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekund'
+                singular: '{count} milisekundę'
+                dual: '{count} milisekundy'
+                paucal: '{count} milisekundy'
+                plural: '{count} milisekund'
+          second:
+            single:
+              numeric: '1 sekundę'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekund'
+                singular: '{count} sekundę'
+                dual: '{count} sekundy'
+                paucal: '{count} sekundy'
+                plural: '{count} sekund'
+          minute:
+            single:
+              numeric: '1 minutę'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minut'
+                singular: '{count} minutę'
+                dual: '{count} minuty'
+                paucal: '{count} minuty'
+                plural: '{count} minut'
+          hour:
+            single:
+              numeric: '1 godzinę'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godzin'
+                singular: '{count} godzinę'
+                dual: '{count} godziny'
+                paucal: '{count} godziny'
+                plural: '{count} godzin'
+          day:
+            sameAsNominative: true
+          week:
+            sameAsNominative: true
+          month:
+            sameAsNominative: true
+          year:
+            sameAsNominative: true
+      instrumental:
+        units:
+          millisecond:
+            unsupported: true
+          second:
+            single:
+              numeric: '1 sekundą'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundami'
+                singular: '{count} sekundą'
+                dual: '{count} sekundy'
+                paucal: '{count} sekundami'
+                plural: '{count} sekundami'
+          minute:
+            single:
+              numeric: '1 minutą'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minutami'
+                singular: '{count} minutą'
+                dual: '{count} minuty'
+                paucal: '{count} minutami'
+                plural: '{count} minutami'
+          hour:
+            single:
+              numeric: '1 godziną'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godzinami'
+                singular: '{count} godziną'
+                dual: '{count} godziny'
+                paucal: '{count} godzinami'
+                plural: '{count} godzinami'
+          day:
+            single:
+              numeric: '1 dniem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dniami'
+                singular: '{count} dniem'
+                dual: '{count} dniami'
+                paucal: '{count} dniami'
+                plural: '{count} dniami'
+          week:
+            single:
+              numeric: '1 tygodniem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tygodniami'
+                singular: '{count} tygodniem'
+                dual: '{count} tygodnia'
+                paucal: '{count} tygodniami'
+                plural: '{count} tygodniami'
+          month:
+            single:
+              numeric: '1 miesiącem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} miesiącami'
+                singular: '{count} miesiącem'
+                dual: '{count} miesiąca'
+                paucal: '{count} miesiącami'
+                plural: '{count} miesiącami'
+          year:
+            single:
+              numeric: '1 rokiem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} latami'
+                singular: '{count} rokiem'
+                dual: '{count} latami'
+                paucal: '{count} latami'
+                plural: '{count} latami'
+      locative:
+        units:
+          millisecond:
+            unsupported: true
+          second:
+            single:
+              numeric: '1 sekundzie'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundach'
+                singular: '{count} sekundzie'
+                dual: '{count} sekundy'
+                paucal: '{count} sekundach'
+                plural: '{count} sekundach'
+          minute:
+            single:
+              numeric: '1 minucie'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minutach'
+                singular: '{count} minucie'
+                dual: '{count} minuty'
+                paucal: '{count} minutach'
+                plural: '{count} minutach'
+          hour:
+            single:
+              numeric: '1 godzinie'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godzinach'
+                singular: '{count} godzinie'
+                dual: '{count} godziny'
+                paucal: '{count} godzinach'
+                plural: '{count} godzinach'
+          day:
+            single:
+              numeric: '1 dniu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dniach'
+                singular: '{count} dniu'
+                dual: '{count} dniach'
+                paucal: '{count} dniach'
+                plural: '{count} dniach'
+          week:
+            single:
+              numeric: '1 tygodniu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tygodniach'
+                singular: '{count} tygodniu'
+                dual: '{count} tygodnia'
+                paucal: '{count} tygodniach'
+                plural: '{count} tygodniach'
+          month:
+            single:
+              numeric: '1 miesiącu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} miesiącach'
+                singular: '{count} miesiącu'
+                dual: '{count} miesiąca'
+                paucal: '{count} miesiącach'
+                plural: '{count} miesiącach'
+          year:
+            single:
+              numeric: '1 roku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} latach'
+                singular: '{count} roku'
+                dual: '{count} latach'
+                paucal: '{count} latach'
+                plural: '{count} latach'
+      vocative:
+        units:
+          millisecond:
+            unsupported: true
+          second:
+            single:
+              numeric: '1 sekundo'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekund'
+                singular: '{count} sekundo'
+                dual: '{count} sekundy'
+                paucal: '{count} sekundy'
+                plural: '{count} sekund'
+          minute:
+            single:
+              numeric: '1 minuto'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minut'
+                singular: '{count} minuto'
+                dual: '{count} minuty'
+                paucal: '{count} minuty'
+                plural: '{count} minut'
+          hour:
+            single:
+              numeric: '1 godzino'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godzin'
+                singular: '{count} godzino'
+                dual: '{count} godziny'
+                paucal: '{count} godziny'
+                plural: '{count} godzin'
+          day:
+            single:
+              numeric: '1 dniu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dniu'
+                singular: '{count} dniu'
+                dual: '{count} dniu'
+                paucal: '{count} dniu'
+                plural: '{count} dniu'
+          week:
+            single:
+              numeric: '1 tygodniu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tygodni'
+                singular: '{count} tygodniu'
+                dual: '{count} tygodnia'
+                paucal: '{count} tygodnie'
+                plural: '{count} tygodni'
+          month:
+            single:
+              numeric: '1 miesiącu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} miesięcy'
+                singular: '{count} miesiącu'
+                dual: '{count} miesiąca'
+                paucal: '{count} miesiące'
+                plural: '{count} miesięcy'
+          year:
+            single:
+              numeric: '1 roku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} roku'
+                singular: '{count} roku'
+                dual: '{count} roku'
+                paucal: '{count} roku'
+                plural: '{count} roku'
 
   list:
     engine: 'conjunction'

@@ -4,6 +4,27 @@ surfaces:
   inflection:
     cardinalRule: 'AmharicLike'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      accusative:
+        units:
+          millisecond:
+            sameAsNominative: true
+          second:
+            sameAsNominative: true
+          minute:
+            sameAsNominative: true
+          hour:
+            sameAsNominative: true
+          day:
+            sameAsNominative: true
+          week:
+            sameAsNominative: true
+          month:
+            sameAsNominative: true
+          year:
+            sameAsNominative: true
 
   list:
     engine: 'conjunction'

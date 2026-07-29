@@ -445,6 +445,84 @@ surfaces: {}
         Assert.Equal("日", phrases.TimeUnit.Units["day"].Symbol);
     }
 
+    [Fact]
+    public void DurationCaseOverlayRequiresEveryTimeUnit()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                """
+                classification: distinct
+                cases:
+                  dative:
+                    units:
+                      day:
+                        sameAsNominative: true
+                """));
+
+        Assert.Contains("must explicitly define 'millisecond'", exception.Message);
+    }
+
+    [Fact]
+    public void DurationCaseOverlayRejectsUnknownCases()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                """
+                classification: distinct
+                cases:
+                  sublative:
+                    units: {}
+                """));
+
+        Assert.Contains("unsupported non-nominative case 'sublative'", exception.Message);
+    }
+
+    [Fact]
+    public void DurationCaseOverlayRejectsUnresolvedCldrInheritanceMarkers()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                """
+                classification: distinct
+                cases:
+                  dative:
+                    units:
+                      millisecond:
+                        single:
+                          numeric: '↑↑↑'
+                """));
+
+        Assert.Contains("unresolved CLDR inheritance marker", exception.Message);
+    }
+
+    [Theory]
+    [InlineData("same-as-nominative")]
+    [InlineData("not-applicable")]
+    [InlineData("unsupported")]
+    public void NonDistinctDurationClassificationsRejectCaseData(string classification)
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                "classification: " + classification + Environment.NewLine +
+                "cases: {}"));
+
+        Assert.Contains("only valid when classification is 'distinct'", exception.Message);
+    }
+
+    [Fact]
+    public void UnsupportedDurationClassificationIsDistinctFromNotApplicable()
+    {
+        var catalog = ParseDurationCases("classification: unsupported");
+
+        Assert.Equal(HumanizerSourceGenerator.DurationCaseClassification.Unsupported, catalog.Classification);
+        Assert.Empty(catalog.Cases);
+    }
+
+    static HumanizerSourceGenerator.DurationCaseCatalog ParseDurationCases(string body) =>
+        HumanizerSourceGenerator.DurationCaseNormalization.ParseForTests(
+            "zz",
+            string.Join(Environment.NewLine, body.Split(Environment.NewLine).Select(static line => $"  {line}")));
+
     static HumanizerSourceGenerator.LocaleCatalogInput CreateCatalog(params (string LocaleCode, string FileText)[] files) =>
         HumanizerSourceGenerator.LocaleCatalogInput.Create(ImmutableArray.CreateRange(
             files.Select(static file =>

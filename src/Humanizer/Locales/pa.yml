@@ -4,6 +4,81 @@ surfaces:
   inflection:
     cardinalRule: 'Punjabi'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      oblique:
+        units:
+          millisecond:
+            sameAsNominative: true
+          second:
+            single:
+              numeric: '1 ਸਕਿੰਟ'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ਸਕਿੰਟਾਂ'
+                singular: '{count} ਸਕਿੰਟਾਂ'
+                dual: '{count} ਸਕਿੰਟਾਂ'
+                paucal: '{count} ਸਕਿੰਟਾਂ'
+                plural: '{count} ਸਕਿੰਟਾਂ'
+          minute:
+            single:
+              numeric: '1 ਮਿੰਟ'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ਮਿੰਟਾਂ'
+                singular: '{count} ਮਿੰਟਾਂ'
+                dual: '{count} ਮਿੰਟਾਂ'
+                paucal: '{count} ਮਿੰਟਾਂ'
+                plural: '{count} ਮਿੰਟਾਂ'
+          hour:
+            single:
+              numeric: '1 ਘੰਟੇ'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ਘੰਟਿਆਂ'
+                singular: '{count} ਘੰਟੇ'
+                dual: '{count} ਘੰਟਿਆਂ'
+                paucal: '{count} ਘੰਟਿਆਂ'
+                plural: '{count} ਘੰਟਿਆਂ'
+          day:
+            sameAsNominative: true
+          week:
+            single:
+              numeric: '1 ਹਫ਼ਤੇ'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ਹਫ਼ਤਿਆਂ'
+                singular: '{count} ਹਫ਼ਤੇ'
+                dual: '{count} ਹਫ਼ਤਿਆਂ'
+                paucal: '{count} ਹਫ਼ਤਿਆਂ'
+                plural: '{count} ਹਫ਼ਤਿਆਂ'
+          month:
+            single:
+              numeric: '1 ਮਹੀਨੇ'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ਮਹੀਨਿਆਂ'
+                singular: '{count} ਮਹੀਨੇ'
+                dual: '{count} ਮਹੀਨਿਆਂ'
+                paucal: '{count} ਮਹੀਨਿਆਂ'
+                plural: '{count} ਮਹੀਨਿਆਂ'
+          year:
+            single:
+              numeric: '1 ਸਾਲ'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ਸਾਲਾਂ'
+                singular: '{count} ਸਾਲਾਂ'
+                dual: '{count} ਸਾਲਾਂ'
+                paucal: '{count} ਸਾਲਾਂ'
+                plural: '{count} ਸਾਲਾਂ'
 
   list:
     engine: 'conjunction'

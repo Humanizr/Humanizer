@@ -41,6 +41,7 @@ public sealed partial class HumanizerSourceGenerator
         [
             "list",
             "formatter",
+            "durationCases",
             "phrases",
             "number",
             "ordinal",
@@ -164,6 +165,10 @@ public sealed partial class HumanizerSourceGenerator
                             features["grammar"] = new SimpleYamlMapping(grammar.ToImmutable());
                         }
 
+                        break;
+
+                    case "durationCases":
+                        features["durationCases"] = surfaceMapping;
                         break;
 
                     case "phrases":

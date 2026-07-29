@@ -3,6 +3,8 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'unsupported'
 
   list:
     engine: 'conjunction'

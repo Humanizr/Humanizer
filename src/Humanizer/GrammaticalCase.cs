@@ -29,4 +29,52 @@ public enum GrammaticalCase
     /// Indicates the object of a preposition
     /// </summary>
     Prepositional,
+    /// <summary>
+    /// Indicates motion away from a noun
+    /// </summary>
+    Ablative,
+    /// <summary>
+    /// Indicates accompaniment
+    /// </summary>
+    Comitative,
+    /// <summary>
+    /// Indicates the agent of a transitive verb in an ergative construction
+    /// </summary>
+    Ergative,
+    /// <summary>
+    /// Indicates location
+    /// </summary>
+    Locative,
+    /// <summary>
+    /// Indicates a form used before a case-marking postposition or suffix
+    /// </summary>
+    Oblique,
+    /// <summary>
+    /// Indicates a partial or indefinite quantity
+    /// </summary>
+    Partitive,
+    /// <summary>
+    /// Indicates direct address
+    /// </summary>
+    Vocative,
+    /// <summary>
+    /// Indicates motion out of or away from within
+    /// </summary>
+    Elative,
+    /// <summary>
+    /// Indicates motion into
+    /// </summary>
+    Illative,
+    /// <summary>
+    /// Indicates association or accompaniment expressed by the Malayalam sociative case
+    /// </summary>
+    Sociative,
+    /// <summary>
+    /// Indicates an endpoint or limit
+    /// </summary>
+    Terminative,
+    /// <summary>
+    /// Indicates transition into a state
+    /// </summary>
+    Translative,
 }

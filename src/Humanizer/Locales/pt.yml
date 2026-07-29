@@ -6,6 +6,8 @@ surfaces:
     disposition: 'selector-only'
     regionalRules:
       pt-PT: 'CatalanItalian'
+  durationCases:
+    classification: 'not-applicable'
 
   list:
     engine: 'conjunction'

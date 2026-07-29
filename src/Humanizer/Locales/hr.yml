@@ -4,6 +4,243 @@ surfaces:
   inflection:
     cardinalRule: 'SouthSlavic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekunde'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekundi'
+                singular: '{count} milisekunde'
+                dual: '{count} milisekundi'
+                paucal: '{count} milisekunde'
+                plural: '{count} milisekundi'
+          second:
+            single:
+              numeric: '1 sekunde'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundi'
+                singular: '{count} sekunde'
+                dual: '{count} sekundi'
+                paucal: '{count} sekunde'
+                plural: '{count} sekundi'
+          minute:
+            single:
+              numeric: '1 minute'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuta'
+                singular: '{count} minute'
+                dual: '{count} minuta'
+                paucal: '{count} minute'
+                plural: '{count} minuta'
+          hour:
+            single:
+              numeric: '1 sata'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sati'
+                singular: '{count} sata'
+                dual: '{count} sati'
+                paucal: '{count} sata'
+                plural: '{count} sati'
+          day:
+            single:
+              numeric: '1 dana'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dana'
+                singular: '{count} dana'
+                dual: '{count} dana'
+                paucal: '{count} dana'
+                plural: '{count} dana'
+          week:
+            single:
+              numeric: '1 tjedna'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tjedana'
+                singular: '{count} tjedna'
+                dual: '{count} tjedana'
+                paucal: '{count} tjedna'
+                plural: '{count} tjedana'
+          month:
+            single:
+              numeric: '1 mjeseca'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mjeseci'
+                singular: '{count} mjeseca'
+                dual: '{count} mjeseci'
+                paucal: '{count} mjeseca'
+                plural: '{count} mjeseci'
+          year:
+            single:
+              numeric: '1 godine'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godina'
+                singular: '{count} godine'
+                dual: '{count} godina'
+                paucal: '{count} godine'
+                plural: '{count} godina'
+      accusative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekundi'
+                singular: '{count} milisekundu'
+                dual: '{count} milisekundi'
+                paucal: '{count} milisekunde'
+                plural: '{count} milisekundi'
+          second:
+            single:
+              numeric: '1 sekundu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundi'
+                singular: '{count} sekundu'
+                dual: '{count} sekundi'
+                paucal: '{count} sekunde'
+                plural: '{count} sekundi'
+          minute:
+            single:
+              numeric: '1 minutu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuta'
+                singular: '{count} minutu'
+                dual: '{count} minuta'
+                paucal: '{count} minute'
+                plural: '{count} minuta'
+          hour:
+            sameAsNominative: true
+          day:
+            sameAsNominative: true
+          week:
+            sameAsNominative: true
+          month:
+            sameAsNominative: true
+          year:
+            single:
+              numeric: '1 godinu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godina'
+                singular: '{count} godinu'
+                dual: '{count} godina'
+                paucal: '{count} godine'
+                plural: '{count} godina'
+      instrumental:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekundi'
+                singular: '{count} milisekundom'
+                dual: '{count} milisekundi'
+                paucal: '{count} milisekunde'
+                plural: '{count} milisekundi'
+          second:
+            single:
+              numeric: '1 sekundom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundi'
+                singular: '{count} sekundom'
+                dual: '{count} sekundi'
+                paucal: '{count} sekunde'
+                plural: '{count} sekundi'
+          minute:
+            single:
+              numeric: '1 minutom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minuta'
+                singular: '{count} minutom'
+                dual: '{count} minuta'
+                paucal: '{count} minute'
+                plural: '{count} minuta'
+          hour:
+            single:
+              numeric: '1 satom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sati'
+                singular: '{count} satom'
+                dual: '{count} sati'
+                paucal: '{count} sata'
+                plural: '{count} sati'
+          day:
+            single:
+              numeric: '1 danom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} danom'
+                singular: '{count} danom'
+                dual: '{count} danom'
+                paucal: '{count} danom'
+                plural: '{count} danom'
+          week:
+            single:
+              numeric: '1 tjednom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} tjedana'
+                singular: '{count} tjednom'
+                dual: '{count} tjedana'
+                paucal: '{count} tjedna'
+                plural: '{count} tjedana'
+          month:
+            single:
+              numeric: '1 mjesecom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mjeseci'
+                singular: '{count} mjesecom'
+                dual: '{count} mjeseci'
+                paucal: '{count} mjeseca'
+                plural: '{count} mjeseci'
+          year:
+            single:
+              numeric: '1 godinom'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} godina'
+                singular: '{count} godinom'
+                dual: '{count} godina'
+                paucal: '{count} godine'
+                plural: '{count} godina'
 
   list:
     engine: 'conjunction'

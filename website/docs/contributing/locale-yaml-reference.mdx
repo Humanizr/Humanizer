@@ -41,6 +41,61 @@ surfaces:
 Omitted surfaces inherit from `en`. A parity claim still needs a recorded
 ownership chain and proving assertions for inherited surfaces.
 
+## Grammatical-case duration surface
+
+Every terminal locale root must classify `surfaces.durationCases`; a regional
+variant may inherit that classification only through its declared
+same-language `variantOf` chain. The accepted classifications are:
+
+- `distinct`: the locale has one or more verified non-nominative duration
+  cases and supplies complete overlays.
+- `same-as-nominative`: the narrowed duration-case surface is supported but
+  intentionally uses the locale's case-aware nominative phrases.
+- `not-applicable`: grammatical case is not applicable to this locale's
+  narrowed duration surface.
+- `unsupported`: a grammatical case system is applicable, but trustworthy
+  duration forms are not available.
+
+A `distinct` locale lists only verified non-nominative cases under `cases`.
+Each listed case must explicitly account for all eight units:
+`millisecond`, `second`, `minute`, `hour`, `day`, `week`, `month`, and `year`.
+A unit is either a complete duration phrase, `sameAsNominative: true`, or
+`unsupported: true`. There is no partial leaf fallback, and unresolved CLDR
+inheritance markers such as `↑↑↑` are rejected.
+
+```yaml
+surfaces:
+  durationCases:
+    classification: 'distinct'
+    cases:
+      dative:
+        units:
+          millisecond:
+            sameAsNominative: true
+          second:
+            single:
+              numeric: '1 Sekunde'
+              words: 'einer Sekunde'
+            multiple:
+              forms: 'Sekunden'
+          # minute through year are also required
+```
+
+Phrase mappings use the same singular and counted-phrase grammar as
+`surfaces.phrases.duration`, but an authored overlay must provide a singular
+phrase and numeric multiple forms. The singular `words` variant can contain a
+locale-authored one-word or article phrase; multiple counts remain numeric.
+Do not add prepositions or arbitrary number-word declension to this surface.
+
+At runtime, `HumanizeWithCase` returns a bare duration phrase. `Nominative`
+also uses the case-aware singular selection. `same-as-nominative` and
+`sameAsNominative` select that locale phrase; `not-applicable`, `unsupported`,
+an absent requested case, or an unsupported unit throws
+`NotSupportedException`. Missing classifications or incomplete overlays fail
+generation, and no path falls back to English or invents morphology.
+Case-aware duration formatting is independent of relative-date and
+date-ordinal grammar.
+
 ## Generator Pipeline Touchpoints
 
 These are the main files that turn locale YAML into runtime behavior:

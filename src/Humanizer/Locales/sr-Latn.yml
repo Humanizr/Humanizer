@@ -4,6 +4,8 @@ surfaces:
   inflection:
     cardinalRule: 'SouthSlavic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'not-applicable'
 
   list:
     engine: 'conjunction'

@@ -4,6 +4,99 @@ surfaces:
   inflection:
     cardinalRule: 'Romanian'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: 'unei milisecunde'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de milisecunde'
+                singular: 'unei milisecunde'
+                dual: '{count} de milisecunde'
+                paucal: '{count} milisecunde'
+                plural: '{count} de milisecunde'
+          second:
+            single:
+              numeric: 'unei secunde'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de secunde'
+                singular: 'unei secunde'
+                dual: '{count} de secunde'
+                paucal: '{count} secunde'
+                plural: '{count} de secunde'
+          minute:
+            single:
+              numeric: 'unui minut'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de minute'
+                singular: 'unui minut'
+                dual: '{count} de minute'
+                paucal: '{count} minute'
+                plural: '{count} de minute'
+          hour:
+            single:
+              numeric: 'unei ore'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de ore'
+                singular: 'unei ore'
+                dual: '{count} de ore'
+                paucal: '{count} de ore'
+                plural: '{count} de ore'
+          day:
+            single:
+              numeric: 'unei zile'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de zile'
+                singular: 'unei zile'
+                dual: '{count} de zile'
+                paucal: '{count} de zile'
+                plural: '{count} de zile'
+          week:
+            single:
+              numeric: 'unei săptămâni'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de săptămâni'
+                singular: 'unei săptămâni'
+                dual: '{count} de săptămâni'
+                paucal: '{count} săptămâni'
+                plural: '{count} de săptămâni'
+          month:
+            single:
+              numeric: 'unei luni'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de luni'
+                singular: 'unei luni'
+                dual: '{count} de luni'
+                paucal: '{count} de luni'
+                plural: '{count} de luni'
+          year:
+            single:
+              numeric: 'unui an'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} de ani'
+                singular: 'unui an'
+                dual: '{count} de ani'
+                paucal: '{count} de ani'
+                plural: '{count} de ani'
 
   list:
     engine: 'conjunction'

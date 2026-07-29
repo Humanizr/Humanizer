@@ -4,6 +4,261 @@ surfaces:
   inflection:
     cardinalRule: 'Icelandic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekúndu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekúndna'
+                singular: '{count} millisekúndu'
+                dual: '{count} millisekúndna'
+                paucal: '{count} millisekúndna'
+                plural: '{count} millisekúndna'
+          second:
+            single:
+              numeric: '1 sekúndu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekúndna'
+                singular: '{count} sekúndu'
+                dual: '{count} sekúndna'
+                paucal: '{count} sekúndna'
+                plural: '{count} sekúndna'
+          minute:
+            single:
+              numeric: '1 mínútu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mínútna'
+                singular: '{count} mínútu'
+                dual: '{count} mínútna'
+                paucal: '{count} mínútna'
+                plural: '{count} mínútna'
+          hour:
+            single:
+              numeric: '1 klukkustundar'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} klukkustunda'
+                singular: '{count} klukkustundar'
+                dual: '{count} klukkustunda'
+                paucal: '{count} klukkustunda'
+                plural: '{count} klukkustunda'
+          day:
+            single:
+              numeric: '1 dags'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} daga'
+                singular: '{count} dags'
+                dual: '{count} daga'
+                paucal: '{count} daga'
+                plural: '{count} daga'
+          week:
+            single:
+              numeric: '1 viku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} vikna'
+                singular: '{count} viku'
+                dual: '{count} vikna'
+                paucal: '{count} vikna'
+                plural: '{count} vikna'
+          month:
+            single:
+              numeric: '1 mánaðar'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mánaða'
+                singular: '{count} mánaðar'
+                dual: '{count} mánaða'
+                paucal: '{count} mánaða'
+                plural: '{count} mánaða'
+          year:
+            single:
+              numeric: '1 árs'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ára'
+                singular: '{count} árs'
+                dual: '{count} ára'
+                paucal: '{count} ára'
+                plural: '{count} ára'
+      dative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekúndu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekúndum'
+                singular: '{count} millisekúndu'
+                dual: '{count} millisekúndum'
+                paucal: '{count} millisekúndum'
+                plural: '{count} millisekúndum'
+          second:
+            single:
+              numeric: '1 sekúndu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekúndum'
+                singular: '{count} sekúndu'
+                dual: '{count} sekúndum'
+                paucal: '{count} sekúndum'
+                plural: '{count} sekúndum'
+          minute:
+            single:
+              numeric: '1 mínútu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mínútum'
+                singular: '{count} mínútu'
+                dual: '{count} mínútum'
+                paucal: '{count} mínútum'
+                plural: '{count} mínútum'
+          hour:
+            single:
+              numeric: '1 klukkustund'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} klukkustundum'
+                singular: '{count} klukkustund'
+                dual: '{count} klukkustundum'
+                paucal: '{count} klukkustundum'
+                plural: '{count} klukkustundum'
+          day:
+            single:
+              numeric: '1 degi'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dögum'
+                singular: '{count} degi'
+                dual: '{count} dögum'
+                paucal: '{count} dögum'
+                plural: '{count} dögum'
+          week:
+            single:
+              numeric: '1 viku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} vikum'
+                singular: '{count} viku'
+                dual: '{count} vikum'
+                paucal: '{count} vikum'
+                plural: '{count} vikum'
+          month:
+            single:
+              numeric: '1 mánuði'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mánuðum'
+                singular: '{count} mánuði'
+                dual: '{count} mánuðum'
+                paucal: '{count} mánuðum'
+                plural: '{count} mánuðum'
+          year:
+            single:
+              numeric: '1 ári'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} árum'
+                singular: '{count} ári'
+                dual: '{count} árum'
+                paucal: '{count} árum'
+                plural: '{count} árum'
+      accusative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 millisekúndu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} millisekúndur'
+                singular: '{count} millisekúndu'
+                dual: '{count} millisekúndur'
+                paucal: '{count} millisekúndur'
+                plural: '{count} millisekúndur'
+          second:
+            single:
+              numeric: '1 sekúndu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekúndur'
+                singular: '{count} sekúndu'
+                dual: '{count} sekúndur'
+                paucal: '{count} sekúndur'
+                plural: '{count} sekúndur'
+          minute:
+            single:
+              numeric: '1 mínútu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mínútur'
+                singular: '{count} mínútu'
+                dual: '{count} mínútur'
+                paucal: '{count} mínútur'
+                plural: '{count} mínútur'
+          hour:
+            sameAsNominative: true
+          day:
+            single:
+              numeric: '1 dag'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} daga'
+                singular: '{count} dag'
+                dual: '{count} daga'
+                paucal: '{count} daga'
+                plural: '{count} daga'
+          week:
+            single:
+              numeric: '1 viku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} viku'
+                singular: '{count} viku'
+                dual: '{count} viku'
+                paucal: '{count} viku'
+                plural: '{count} viku'
+          month:
+            single:
+              numeric: '1 mánuð'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} mánuði'
+                singular: '{count} mánuð'
+                dual: '{count} mánuði'
+                paucal: '{count} mánuði'
+                plural: '{count} mánuði'
+          year:
+            sameAsNominative: true
 
   list:
     engine: 'conjunction'

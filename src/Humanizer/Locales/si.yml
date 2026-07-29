@@ -4,6 +4,8 @@ surfaces:
   inflection:
     cardinalRule: 'Sinhala'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'unsupported'
 
   list:
     engine: 'conjunction'

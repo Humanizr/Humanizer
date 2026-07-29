@@ -55,6 +55,7 @@ public sealed partial class HumanizerSourceGenerator
             "collectionFormatter",
             "dateOnlyToOrdinalWords",
             "dateToOrdinalWords",
+            "durationCases",
             "formatter",
             "grammar",
             "headings",

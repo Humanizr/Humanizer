@@ -4,6 +4,423 @@ surfaces:
   inflection:
     cardinalRule: 'CzechSlovak'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      genitive:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundy'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekund'
+                singular: '{count} milisekundy'
+                dual: '{count} milisekund'
+                paucal: '{count} milisekund'
+                plural: '{count} milisekundy'
+          second:
+            single:
+              numeric: '1 sekundy'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekund'
+                singular: '{count} sekundy'
+                dual: '{count} sekund'
+                paucal: '{count} sekund'
+                plural: '{count} sekundy'
+          minute:
+            single:
+              numeric: '1 minuty'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minut'
+                singular: '{count} minuty'
+                dual: '{count} minut'
+                paucal: '{count} minut'
+                plural: '{count} minuty'
+          hour:
+            single:
+              numeric: '1 hodiny'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} hodin'
+                singular: '{count} hodiny'
+                dual: '{count} hodin'
+                paucal: '{count} hodin'
+                plural: '{count} hodiny'
+          day:
+            single:
+              numeric: '1 dne'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dnů'
+                singular: '{count} dne'
+                dual: '{count} dnů'
+                paucal: '{count} dnů'
+                plural: '{count} dnů'
+          week:
+            single:
+              numeric: '1 týdne'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} týdnů'
+                singular: '{count} týdne'
+                dual: '{count} týdnů'
+                paucal: '{count} týdnů'
+                plural: '{count} týdne'
+          month:
+            single:
+              numeric: '1 měsíce'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} měsíců'
+                singular: '{count} měsíce'
+                dual: '{count} měsíců'
+                paucal: '{count} měsíců'
+                plural: '{count} měsíce'
+          year:
+            single:
+              numeric: '1 roku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} let'
+                singular: '{count} roku'
+                dual: '{count} let'
+                paucal: '{count} let'
+                plural: '{count} let'
+      dative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundě'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekundám'
+                singular: '{count} milisekundě'
+                dual: '{count} milisekundám'
+                paucal: '{count} milisekundám'
+                plural: '{count} milisekundy'
+          second:
+            single:
+              numeric: '1 sekundě'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundám'
+                singular: '{count} sekundě'
+                dual: '{count} sekundám'
+                paucal: '{count} sekundám'
+                plural: '{count} sekundy'
+          minute:
+            single:
+              numeric: '1 minutě'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minutám'
+                singular: '{count} minutě'
+                dual: '{count} minutám'
+                paucal: '{count} minutám'
+                plural: '{count} minuty'
+          hour:
+            single:
+              numeric: '1 hodině'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} hodinám'
+                singular: '{count} hodině'
+                dual: '{count} hodinám'
+                paucal: '{count} hodinám'
+                plural: '{count} hodiny'
+          day:
+            single:
+              numeric: '1 dni'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dnům'
+                singular: '{count} dni'
+                dual: '{count} dnům'
+                paucal: '{count} dnům'
+                plural: '{count} dnům'
+          week:
+            single:
+              numeric: '1 týdnu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} týdnům'
+                singular: '{count} týdnu'
+                dual: '{count} týdnům'
+                paucal: '{count} týdnům'
+                plural: '{count} týdne'
+          month:
+            single:
+              numeric: '1 měsíci'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} měsícům'
+                singular: '{count} měsíci'
+                dual: '{count} měsícům'
+                paucal: '{count} měsícům'
+                plural: '{count} měsíce'
+          year:
+            single:
+              numeric: '1 roku'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} letům'
+                singular: '{count} roku'
+                dual: '{count} letům'
+                paucal: '{count} letům'
+                plural: '{count} letům'
+      accusative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekund'
+                singular: '{count} milisekundu'
+                dual: '{count} milisekund'
+                paucal: '{count} milisekundy'
+                plural: '{count} milisekundy'
+          second:
+            single:
+              numeric: '1 sekundu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekund'
+                singular: '{count} sekundu'
+                dual: '{count} sekund'
+                paucal: '{count} sekundy'
+                plural: '{count} sekundy'
+          minute:
+            single:
+              numeric: '1 minutu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minut'
+                singular: '{count} minutu'
+                dual: '{count} minut'
+                paucal: '{count} minuty'
+                plural: '{count} minuty'
+          hour:
+            single:
+              numeric: '1 hodinu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} hodin'
+                singular: '{count} hodinu'
+                dual: '{count} hodin'
+                paucal: '{count} hodiny'
+                plural: '{count} hodiny'
+          day:
+            sameAsNominative: true
+          week:
+            sameAsNominative: true
+          month:
+            sameAsNominative: true
+          year:
+            sameAsNominative: true
+      instrumental:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundou'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekundami'
+                singular: '{count} milisekundou'
+                dual: '{count} milisekundami'
+                paucal: '{count} milisekundami'
+                plural: '{count} milisekundy'
+          second:
+            single:
+              numeric: '1 sekundou'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundami'
+                singular: '{count} sekundou'
+                dual: '{count} sekundami'
+                paucal: '{count} sekundami'
+                plural: '{count} sekundy'
+          minute:
+            single:
+              numeric: '1 minutou'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minutami'
+                singular: '{count} minutou'
+                dual: '{count} minutami'
+                paucal: '{count} minutami'
+                plural: '{count} minuty'
+          hour:
+            single:
+              numeric: '1 hodinou'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} hodinami'
+                singular: '{count} hodinou'
+                dual: '{count} hodinami'
+                paucal: '{count} hodinami'
+                plural: '{count} hodiny'
+          day:
+            single:
+              numeric: '1 dnem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dny'
+                singular: '{count} dnem'
+                dual: '{count} dny'
+                paucal: '{count} dny'
+                plural: '{count} dny'
+          week:
+            single:
+              numeric: '1 týdnem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} týdny'
+                singular: '{count} týdnem'
+                dual: '{count} týdny'
+                paucal: '{count} týdny'
+                plural: '{count} týdne'
+          month:
+            single:
+              numeric: '1 měsícem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} měsíci'
+                singular: '{count} měsícem'
+                dual: '{count} měsíci'
+                paucal: '{count} měsíci'
+                plural: '{count} měsíce'
+          year:
+            single:
+              numeric: '1 rokem'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} lety'
+                singular: '{count} rokem'
+                dual: '{count} lety'
+                paucal: '{count} lety'
+                plural: '{count} lety'
+      locative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 milisekundě'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} milisekundách'
+                singular: '{count} milisekundě'
+                dual: '{count} milisekundách'
+                paucal: '{count} milisekundách'
+                plural: '{count} milisekundy'
+          second:
+            single:
+              numeric: '1 sekundě'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} sekundách'
+                singular: '{count} sekundě'
+                dual: '{count} sekundách'
+                paucal: '{count} sekundách'
+                plural: '{count} sekundy'
+          minute:
+            single:
+              numeric: '1 minutě'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} minutách'
+                singular: '{count} minutě'
+                dual: '{count} minutách'
+                paucal: '{count} minutách'
+                plural: '{count} minuty'
+          hour:
+            single:
+              numeric: '1 hodině'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} hodinách'
+                singular: '{count} hodině'
+                dual: '{count} hodinách'
+                paucal: '{count} hodinách'
+                plural: '{count} hodiny'
+          day:
+            single:
+              numeric: '1 dnu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} dnech'
+                singular: '{count} dnu'
+                dual: '{count} dnech'
+                paucal: '{count} dnech'
+                plural: '{count} dnech'
+          week:
+            single:
+              numeric: '1 týdnu'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} týdnech'
+                singular: '{count} týdnu'
+                dual: '{count} týdnech'
+                paucal: '{count} týdnech'
+                plural: '{count} týdne'
+          month:
+            single:
+              numeric: '1 měsíci'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} měsících'
+                singular: '{count} měsíci'
+                dual: '{count} měsících'
+                paucal: '{count} měsících'
+                plural: '{count} měsíce'
+          year:
+            single:
+              numeric: '1 roce'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} letech'
+                singular: '{count} roce'
+                dual: '{count} letech'
+                paucal: '{count} letech'
+                plural: '{count} letech'
 
   list:
     engine: 'conjunction'

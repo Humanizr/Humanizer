@@ -4,6 +4,369 @@ surfaces:
   inflection:
     cardinalRule: 'Armenian'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      dative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 միլիվայրկյանին'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} միլիվայրկյանին'
+                singular: '{count} միլիվայրկյանին'
+                dual: '{count} միլիվայրկյանին'
+                paucal: '{count} միլիվայրկյանին'
+                plural: '{count} միլիվայրկյանին'
+          second:
+            single:
+              numeric: '1 վայրկյանին'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} վայրկյանին'
+                singular: '{count} վայրկյանին'
+                dual: '{count} վայրկյանին'
+                paucal: '{count} վայրկյանին'
+                plural: '{count} վայրկյանին'
+          minute:
+            single:
+              numeric: '1 րոպեին'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} րոպեին'
+                singular: '{count} րոպեին'
+                dual: '{count} րոպեին'
+                paucal: '{count} րոպեին'
+                plural: '{count} րոպեին'
+          hour:
+            single:
+              numeric: '1 ժամին'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ժամին'
+                singular: '{count} ժամին'
+                dual: '{count} ժամին'
+                paucal: '{count} ժամին'
+                plural: '{count} ժամին'
+          day:
+            single:
+              numeric: '1 օրվան'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} օրվան'
+                singular: '{count} օրվան'
+                dual: '{count} օրվան'
+                paucal: '{count} օրվան'
+                plural: '{count} օրվան'
+          week:
+            single:
+              numeric: '1 շաբաթվան'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} շաբաթվան'
+                singular: '{count} շաբաթվան'
+                dual: '{count} շաբաթվան'
+                paucal: '{count} շաբաթվան'
+                plural: '{count} շաբաթվան'
+          month:
+            single:
+              numeric: '1 ամսին'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ամսին'
+                singular: '{count} ամսին'
+                dual: '{count} ամսին'
+                paucal: '{count} ամսին'
+                plural: '{count} ամսին'
+          year:
+            single:
+              numeric: '1 տարուն'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} տարուն'
+                singular: '{count} տարուն'
+                dual: '{count} տարուն'
+                paucal: '{count} տարուն'
+                plural: '{count} տարուն'
+      instrumental:
+        units:
+          millisecond:
+            single:
+              numeric: '1 միլիվայրկյանով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} միլիվայրկյանով'
+                singular: '{count} միլիվայրկյանով'
+                dual: '{count} միլիվայրկյանով'
+                paucal: '{count} միլիվայրկյանով'
+                plural: '{count} միլիվայրկյանով'
+          second:
+            single:
+              numeric: '1 վայրկյանով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} վայրկյանով'
+                singular: '{count} վայրկյանով'
+                dual: '{count} վայրկյանով'
+                paucal: '{count} վայրկյանով'
+                plural: '{count} վայրկյանով'
+          minute:
+            single:
+              numeric: '1 րոպեով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} րոպեով'
+                singular: '{count} րոպեով'
+                dual: '{count} րոպեով'
+                paucal: '{count} րոպեով'
+                plural: '{count} րոպեով'
+          hour:
+            single:
+              numeric: '1 ժամով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ժամով'
+                singular: '{count} ժամով'
+                dual: '{count} ժամով'
+                paucal: '{count} ժամով'
+                plural: '{count} ժամով'
+          day:
+            single:
+              numeric: '1 օրով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} օրով'
+                singular: '{count} օրով'
+                dual: '{count} օրով'
+                paucal: '{count} օրով'
+                plural: '{count} օրով'
+          week:
+            single:
+              numeric: '1 շաբաթով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} շաբաթով'
+                singular: '{count} շաբաթով'
+                dual: '{count} շաբաթով'
+                paucal: '{count} շաբաթով'
+                plural: '{count} շաբաթով'
+          month:
+            single:
+              numeric: '1 ամսով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ամսով'
+                singular: '{count} ամսով'
+                dual: '{count} ամսով'
+                paucal: '{count} ամսով'
+                plural: '{count} ամսով'
+          year:
+            single:
+              numeric: '1 տարով'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} տարով'
+                singular: '{count} տարով'
+                dual: '{count} տարով'
+                paucal: '{count} տարով'
+                plural: '{count} տարով'
+      ablative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 միլիվայրկյանից'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} միլիվայրկյանից'
+                singular: '{count} միլիվայրկյանից'
+                dual: '{count} միլիվայրկյանից'
+                paucal: '{count} միլիվայրկյանից'
+                plural: '{count} միլիվայրկյանից'
+          second:
+            single:
+              numeric: '1 վայրկյանից'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} վայրկյանից'
+                singular: '{count} վայրկյանից'
+                dual: '{count} վայրկյանից'
+                paucal: '{count} վայրկյանից'
+                plural: '{count} վայրկյանից'
+          minute:
+            single:
+              numeric: '1 րոպեից'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} րոպեից'
+                singular: '{count} րոպեից'
+                dual: '{count} րոպեից'
+                paucal: '{count} րոպեից'
+                plural: '{count} րոպեից'
+          hour:
+            single:
+              numeric: '1 ժամից'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ժամից'
+                singular: '{count} ժամից'
+                dual: '{count} ժամից'
+                paucal: '{count} ժամից'
+                plural: '{count} ժամից'
+          day:
+            single:
+              numeric: '1 օրից'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} օրից'
+                singular: '{count} օրից'
+                dual: '{count} օրից'
+                paucal: '{count} օրից'
+                plural: '{count} օրից'
+          week:
+            single:
+              numeric: '1 շաբաթից'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} շաբաթից'
+                singular: '{count} շաբաթից'
+                dual: '{count} շաբաթից'
+                paucal: '{count} շաբաթից'
+                plural: '{count} շաբաթից'
+          month:
+            single:
+              numeric: '1 ամսից'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ամսից'
+                singular: '{count} ամսից'
+                dual: '{count} ամսից'
+                paucal: '{count} ամսից'
+                plural: '{count} ամսից'
+          year:
+            single:
+              numeric: '1 տարուց'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} տարուց'
+                singular: '{count} տարուց'
+                dual: '{count} տարուց'
+                paucal: '{count} տարուց'
+                plural: '{count} տարուց'
+      locative:
+        units:
+          millisecond:
+            single:
+              numeric: '1 միլիվայրկյանում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} միլիվայրկյանում'
+                singular: '{count} միլիվայրկյանում'
+                dual: '{count} միլիվայրկյանում'
+                paucal: '{count} միլիվայրկյանում'
+                plural: '{count} միլիվայրկյանում'
+          second:
+            single:
+              numeric: '1 վայրկյանում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} վայրկյանում'
+                singular: '{count} վայրկյանում'
+                dual: '{count} վայրկյանում'
+                paucal: '{count} վայրկյանում'
+                plural: '{count} վայրկյանում'
+          minute:
+            single:
+              numeric: '1 րոպեում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} րոպեում'
+                singular: '{count} րոպեում'
+                dual: '{count} րոպեում'
+                paucal: '{count} րոպեում'
+                plural: '{count} րոպեում'
+          hour:
+            single:
+              numeric: '1 ժամում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ժամում'
+                singular: '{count} ժամում'
+                dual: '{count} ժամում'
+                paucal: '{count} ժամում'
+                plural: '{count} ժամում'
+          day:
+            single:
+              numeric: '1 օրում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} օրում'
+                singular: '{count} օրում'
+                dual: '{count} օրում'
+                paucal: '{count} օրում'
+                plural: '{count} օրում'
+          week:
+            single:
+              numeric: '1 շաբաթում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} շաբաթում'
+                singular: '{count} շաբաթում'
+                dual: '{count} շաբաթում'
+                paucal: '{count} շաբաթում'
+                plural: '{count} շաբաթում'
+          month:
+            single:
+              numeric: '1 ամսում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} ամսում'
+                singular: '{count} ամսում'
+                dual: '{count} ամսում'
+                paucal: '{count} ամսում'
+                plural: '{count} ամսում'
+          year:
+            single:
+              numeric: '1 տարում'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} տարում'
+                singular: '{count} տարում'
+                dual: '{count} տարում'
+                paucal: '{count} տարում'
+                plural: '{count} տարում'
 
   list:
     engine: 'conjunction'

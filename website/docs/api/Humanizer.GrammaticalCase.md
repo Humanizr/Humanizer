@@ -42,3 +42,75 @@ Indicates an object used in performing an action
 `Prepositional` 5
 
 Indicates the object of a preposition
+
+<a name='Humanizer.GrammaticalCase.Ablative'></a>
+
+`Ablative` 6
+
+Indicates motion away from a noun
+
+<a name='Humanizer.GrammaticalCase.Comitative'></a>
+
+`Comitative` 7
+
+Indicates accompaniment
+
+<a name='Humanizer.GrammaticalCase.Ergative'></a>
+
+`Ergative` 8
+
+Indicates the agent of a transitive verb in an ergative construction
+
+<a name='Humanizer.GrammaticalCase.Locative'></a>
+
+`Locative` 9
+
+Indicates location
+
+<a name='Humanizer.GrammaticalCase.Oblique'></a>
+
+`Oblique` 10
+
+Indicates a form used before a case\-marking postposition or suffix
+
+<a name='Humanizer.GrammaticalCase.Partitive'></a>
+
+`Partitive` 11
+
+Indicates a partial or indefinite quantity
+
+<a name='Humanizer.GrammaticalCase.Vocative'></a>
+
+`Vocative` 12
+
+Indicates direct address
+
+<a name='Humanizer.GrammaticalCase.Elative'></a>
+
+`Elative` 13
+
+Indicates motion out of or away from within
+
+<a name='Humanizer.GrammaticalCase.Illative'></a>
+
+`Illative` 14
+
+Indicates motion into
+
+<a name='Humanizer.GrammaticalCase.Sociative'></a>
+
+`Sociative` 15
+
+Indicates association or accompaniment expressed by the Malayalam sociative case
+
+<a name='Humanizer.GrammaticalCase.Terminative'></a>
+
+`Terminative` 16
+
+Indicates an endpoint or limit
+
+<a name='Humanizer.GrammaticalCase.Translative'></a>
+
+`Translative` 17
+
+Indicates transition into a state

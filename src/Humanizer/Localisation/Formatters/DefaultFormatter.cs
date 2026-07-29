@@ -3,7 +3,7 @@ namespace Humanizer;
 /// <summary>
 /// Provides the standard formatter implementation for Humanizer locales.
 /// </summary>
-public class DefaultFormatter : IFormatter
+public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
 {
     static readonly DefaultFormatter EnglishFallback = new(CultureInfo.GetCultureInfo("en"));
     readonly LocalePhraseTable phraseTable;
@@ -129,6 +129,62 @@ public class DefaultFormatter : IFormatter
     }
 
     /// <inheritdoc/>
+    public virtual string TimeSpanHumanize(
+        TimeUnit timeUnit,
+        int unit,
+        GrammaticalCase grammaticalCase)
+    {
+        if ((uint)grammaticalCase > (uint)GrammaticalCase.Translative)
+        {
+            throw new ArgumentOutOfRangeException(nameof(grammaticalCase), grammaticalCase, "Unsupported grammatical case.");
+        }
+
+        if ((uint)timeUnit > (uint)TimeUnit.Year)
+        {
+            throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, "Unsupported time unit.");
+        }
+
+        if (grammaticalCase == GrammaticalCase.Nominative)
+        {
+            return FormatCaseAwareNominative(timeUnit, unit);
+        }
+
+        var table = LocaleDurationCaseTableCatalog.Resolve(Culture)
+            ?? throw new NotSupportedException(
+                $"Culture '{Culture.Name}' has no grammatical-case classification for duration phrases.");
+
+        if (table.Classification == LocaleDurationCaseClassification.SameAsNominative)
+        {
+            return FormatCaseAwareNominative(timeUnit, unit);
+        }
+
+        if (table.Classification == LocaleDurationCaseClassification.Unsupported)
+        {
+            throw new NotSupportedException(
+                $"Culture '{Culture.Name}' has an applicable grammatical case system, but verified duration forms are unavailable.");
+        }
+
+        if (table.Classification == LocaleDurationCaseClassification.NotApplicable ||
+            !table.TryGetCase(grammaticalCase, out var caseOverlay))
+        {
+            throw new NotSupportedException(
+                $"Culture '{Culture.Name}' does not support grammatical case '{grammaticalCase}' for duration phrases.");
+        }
+
+        var unitOverlay = caseOverlay.Units[(int)timeUnit];
+        return unitOverlay.Kind switch
+        {
+            LocalizedDurationCaseUnitKind.SameAsNominative => FormatCaseAwareNominative(timeUnit, unit),
+            LocalizedDurationCaseUnitKind.Unsupported => throw new NotSupportedException(
+                $"Culture '{Culture.Name}' does not support grammatical case '{grammaticalCase}' for duration unit '{timeUnit}'."),
+            _ => FormatCaseAwareTimeSpanPhrase(
+                timeUnit,
+                unit,
+                unitOverlay.Phrase!.Value)
+        };
+    }
+
+    /// <inheritdoc/>
     public virtual string TimeSpanHumanize_Age()
     {
         return phraseTable.TimeSpanAge ?? "{0}";
@@ -173,6 +229,9 @@ public class DefaultFormatter : IFormatter
     /// <returns>The number rendered as words for the configured culture.</returns>
     protected virtual string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
         number.ToWords(culture);
+
+    internal virtual GrammaticalGender? GetTimeUnitGender(TimeUnit unit) =>
+        null;
 
     internal virtual FormatterNumberForm GetDatePhraseForm(TimeUnit unit, Tense tense, int number) =>
         Math.Abs(number) == 1 ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
@@ -329,29 +388,78 @@ public class DefaultFormatter : IFormatter
             return false;
         }
 
+        result = FormatTimeSpanPhrase(
+            unit,
+            count,
+            toWords,
+            phrase);
+        return true;
+    }
+
+    string FormatCaseAwareNominative(TimeUnit unit, int count)
+    {
+        if (!phraseTable.TryGetTimeSpanPhrase(unit, out var phrase) ||
+            !ShouldUseTimeSpanPhraseTable(unit, count, false, phrase))
+        {
+            throw new InvalidOperationException(
+                $"Missing generated time-span phrase for '{Culture.Name}' and unit '{unit}'.");
+        }
+
+        return FormatCaseAwareTimeSpanPhrase(unit, count, phrase);
+    }
+
+    string FormatCaseAwareTimeSpanPhrase(TimeUnit unit, int count, LocalizedTimeSpanPhrase phrase)
+    {
+        if (count == 1 && (phrase.SingleWordsVariant ?? phrase.Single) is { } single)
+        {
+            return single;
+        }
+
+        if (phrase.Multiple is not { } multiple)
+        {
+            throw new InvalidOperationException(
+                $"Missing generated time-span phrase for '{Culture.Name}' and unit '{unit}'.");
+        }
+
+        var form = GetTimeSpanPhraseForm(unit, count, false);
+        return RenderCountedPhrase(
+            multiple,
+            ResolveTimeSpanPhraseForms(multiple.Forms, form),
+            count.ToString(CultureInfo.CurrentCulture),
+            GetTimeSpanPhraseSecondaryPlaceholder(unit, count, false));
+    }
+
+    string FormatTimeSpanPhrase(
+        TimeUnit unit,
+        int count,
+        bool toWords,
+        LocalizedTimeSpanPhrase phrase)
+    {
         if (count == 1)
         {
-            var single = toWords ? phrase.SingleWordsVariant ?? phrase.Single : phrase.Single;
+            var single = toWords
+                ? phrase.SingleWordsVariant ??
+                  phrase.Single
+                : phrase.Single;
             if (single is not null)
             {
-                result = single;
-                return true;
+                return single;
             }
         }
 
         var multiple = toWords ? phrase.MultipleWordsVariant ?? phrase.Multiple : phrase.Multiple;
         if (multiple is not { } countedPhrase)
         {
-            return false;
+            throw new InvalidOperationException(
+                $"Missing generated time-span phrase for '{Culture.Name}' and unit '{unit}'.");
         }
 
         var form = GetTimeSpanPhraseForm(unit, count, toWords);
-        result = RenderCountedPhrase(
+        return RenderCountedPhrase(
             countedPhrase,
             ResolveTimeSpanPhraseForms(countedPhrase.Forms, form),
             FormatCountValue(unit, count, toWords),
             GetTimeSpanPhraseSecondaryPlaceholder(unit, count, toWords));
-        return true;
     }
 
     string FormatCountValue(TimeUnit unit, int number, bool toWords) =>

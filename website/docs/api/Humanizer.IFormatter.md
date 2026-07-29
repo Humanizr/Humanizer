@@ -7,7 +7,8 @@ public interface IFormatter
 ```
 
 Derived  
-↳ [DefaultFormatter](Humanizer.DefaultFormatter.md 'Humanizer\.DefaultFormatter')
+↳ [DefaultFormatter](Humanizer.DefaultFormatter.md 'Humanizer\.DefaultFormatter')  
+↳ [IGrammaticalCaseTimeSpanFormatter](Humanizer.IGrammaticalCaseTimeSpanFormatter.md 'Humanizer\.IGrammaticalCaseTimeSpanFormatter')
 ### Methods
 
 <a name='Humanizer.IFormatter.DataUnitHumanize(Humanizer.DataUnit,double,bool)'></a>

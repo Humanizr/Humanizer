@@ -121,7 +121,7 @@ public sealed partial class HumanizerSourceGenerator
                 builder.ToImmutable());
         }
 
-        static TimeSpanPhrase ParseTimeSpanPhrase(SimpleYamlValue value, string path)
+        internal static TimeSpanPhrase ParseTimeSpanPhrase(SimpleYamlValue value, string path)
         {
             if (value is SimpleYamlScalar scalar)
             {

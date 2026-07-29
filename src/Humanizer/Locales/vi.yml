@@ -4,6 +4,8 @@ surfaces:
   inflection:
     cardinalRule: 'Other'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'not-applicable'
 
   list:
     engine: 'conjunction'

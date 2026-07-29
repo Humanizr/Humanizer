@@ -9,6 +9,8 @@ surfaces:
         one: 'persona'
         many: 'personas'
         other: 'personas'
+  durationCases:
+    classification: 'not-applicable'
 
   list:
     engine: 'conjunction'

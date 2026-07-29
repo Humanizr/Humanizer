@@ -4,6 +4,54 @@ surfaces:
   inflection:
     cardinalRule: 'AmharicLike'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    cases:
+      oblique:
+        units:
+          millisecond:
+            sameAsNominative: true
+          second:
+            sameAsNominative: true
+          minute:
+            sameAsNominative: true
+          hour:
+            single:
+              numeric: '1 घंटे'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} घंटों'
+                singular: '{count} घंटे'
+                dual: '{count} घंटों'
+                paucal: '{count} घंटों'
+                plural: '{count} घंटों'
+          day:
+            single:
+              numeric: '1 दिन'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} दिनों'
+                singular: '{count} दिनों'
+                dual: '{count} दिनों'
+                paucal: '{count} दिनों'
+                plural: '{count} दिनों'
+          week:
+            sameAsNominative: true
+          month:
+            single:
+              numeric: '1 महीने'
+            multiple:
+              countPlacement: none
+              forms:
+                default: '{count} महीनों'
+                singular: '{count} महीने'
+                dual: '{count} महीनों'
+                paucal: '{count} महीनों'
+                plural: '{count} महीनों'
+          year:
+            sameAsNominative: true
 
   list:
     engine: 'conjunction'
