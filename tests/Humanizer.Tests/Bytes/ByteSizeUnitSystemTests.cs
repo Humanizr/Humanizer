@@ -158,6 +158,77 @@ public class ByteSizeUnitSystemTests
     }
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", ByteSize.BytesInDecimalMegabyte, "en-150", "megabyte #.## 0")]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", ByteSize.BytesInDecimalMegabyte, "en-MY", "megabyte")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", ByteSize.BytesInMebibyte, "en-150", "mebibyte #.## 0")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", ByteSize.BytesInMebibyte, "en-MY", "mebibyte")]
+    public void CustomFormattersReceiveDisplayedCount(
+        ByteSizeUnitSystem unitSystem,
+        string unit,
+        double bytes,
+        string locale,
+        string expectedUnitText) =>
+        Assert.Equal(
+            $"1 {expectedUnitText}",
+            ByteSize.FromBytes(1.2 * bytes).FormatFullWords(
+                unitSystem,
+                $"0 {unit}",
+                CultureInfo.GetCultureInfo(locale)));
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", ByteSize.BytesInDecimalMegabyte, "megabyte")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", ByteSize.BytesInMebibyte, "mebibyte")]
+    public void UnitOnlyFullWordsUseDisplayedCount(
+        ByteSizeUnitSystem unitSystem,
+        string unit,
+        double bytes,
+        string singular)
+    {
+        var size = ByteSize.FromBytes(1.004 * bytes);
+
+        Assert.Equal(
+            $"1 {singular}",
+            size.FormatFullWords(unitSystem, unit, CultureInfo.InvariantCulture));
+        Assert.Equal(
+            $"1 {singular} #.## 0",
+            size.FormatFullWords(unitSystem, unit, CultureInfo.GetCultureInfo("en-150")));
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", ByteSize.BytesInDecimalMegabyte, "megabyte", "megabytes")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", ByteSize.BytesInMebibyte, "mebibyte", "mebibytes")]
+    public void RegisteredFormatterUnitTextIsOpaqueToNumericFormatting(
+        ByteSizeUnitSystem unitSystem,
+        string unit,
+        double bytes,
+        string singular,
+        string plural)
+    {
+        var culture = CultureInfo.GetCultureInfo("en-150");
+        var size = ByteSize.FromBytes(1.2 * bytes);
+        var expected = $"1.2 {plural} #.## 0";
+
+        Assert.Equal(expected, size.FormatFullWords(unitSystem, $"0.0 {unit}", culture));
+        Assert.Equal(expected, size.FormatFullWords(unitSystem, unit, culture));
+
+        var customCulture = (CultureInfo)culture.Clone();
+        customCulture.NumberFormat.NumberDecimalSeparator = "\u0001";
+        Assert.Equal(
+            $"1\u00012 {plural} #.## 0",
+            size.FormatFullWords(unitSystem, $"0.0 {unit}", customCulture));
+
+        Assert.Equal(
+            $"1\u0001{singular} #.## 0",
+            size.FormatFullWords(unitSystem, $"0'\u0001'{unit}", culture));
+
+        customCulture.NumberFormat.CurrencySymbol = "\u0001";
+        customCulture.NumberFormat.CurrencyPositivePattern = 1;
+        Assert.Equal(
+            $"1\u0001{singular} #.## 0",
+            size.FormatFullWords(unitSystem, $"C0{unit}", customCulture));
+    }
+
+    [Theory]
     [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", "megabyte")]
     [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", "mebibyte")]
     public void StandardPercentFormatsUsePercentSeparators(

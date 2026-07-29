@@ -753,6 +753,11 @@ public struct ByteSize(double byteSize) :
             var countFormat = explicitUnit is { } selectedUnit
                 ? ReplaceFormatToken(numericFormat, selectedUnit.Symbol, string.Empty).Trim()
                 : numericFormat;
+            if (countFormat.Length == 0 && explicitUnit is not null)
+            {
+                countFormat = "0.##";
+            }
+
             if (countFormat.Length > 0)
             {
                 var resolvedCountFormat = ReplaceFormatToken(countFormat, "#.##", "0.##");
@@ -780,7 +785,10 @@ public struct ByteSize(double byteSize) :
                 ? exactPhraseCount is { } exactCount
                     ? builtInFormatter.DataUnitHumanizeExact(unit.DataUnit, exactCount, toSymbol: false)
                     : builtInFormatter.DataUnitHumanize(unit.DataUnit, Math.Abs(phraseCount), toSymbol: false)
-                : formatter.DataUnitHumanize(unit.DataUnit, phraseCount, toSymbol: false);
+                : formatter.DataUnitHumanize(
+                    unit.DataUnit,
+                    exactPhraseCount is { } displayedCount ? (double)displayedCount : phraseCount,
+                    toSymbol: false);
 
         if (explicitUnit is { } selected)
         {
@@ -790,29 +798,33 @@ public struct ByteSize(double byteSize) :
                 var formattedValue = unit.DataUnit == DataUnit.Bit
                     ? Bits.ToString(standardFormat, formatProvider)
                     : value.ToString(standardFormat, formatProvider);
-                var sentinel = "\u0001";
-                while (numericFormat.Contains(sentinel) ||
-                       formattedValue.Contains(sentinel) ||
-                       unitText.Contains(sentinel))
-                {
-                    sentinel = new('\u0001', sentinel.Length + 1);
-                }
+                var sentinel = FindFormatSentinel(numericFormat, formattedValue, unitText);
 
                 var protectedFormat = ReplaceFormatToken(numericFormat, selected.Symbol, sentinel);
                 return ReplaceFormatToken(protectedFormat, standardFormat, formattedValue)
                     .Replace(sentinel, unitText);
             }
 
-            numericFormat = ReplaceFormatToken(numericFormat, selected.Symbol, unitText);
-            if (numericFormat.IndexOfAny(['#', '0']) < 0)
+            var formatTemplate = numericFormat;
+            var formatWithoutUnit = ReplaceFormatToken(numericFormat, selected.Symbol, string.Empty);
+            if (MaskFormatLiterals(formatWithoutUnit).IndexOfAny(['#', '0']) < 0)
             {
-                numericFormat = string.Concat("0.## ", numericFormat);
+                formatTemplate = string.Concat("0.## ", formatTemplate);
+                formatWithoutUnit = string.Concat("0.## ", formatWithoutUnit);
             }
 
-            var resolvedFormat = ReplaceFormatToken(numericFormat, "#.##", "0.##");
-            return unit.DataUnit == DataUnit.Bit
+            var resolvedFormatWithoutUnit = ReplaceFormatToken(formatWithoutUnit, "#.##", "0.##");
+            var formattedWithoutUnit = unit.DataUnit == DataUnit.Bit
+                ? Bits.ToString(resolvedFormatWithoutUnit, formatProvider)
+                : value.ToString(resolvedFormatWithoutUnit, formatProvider);
+            var customSentinel = FindFormatSentinel(formatTemplate, formattedWithoutUnit, unitText);
+
+            var customProtectedFormat = ReplaceFormatToken(formatTemplate, selected.Symbol, customSentinel);
+            var resolvedFormat = ReplaceFormatToken(customProtectedFormat, "#.##", "0.##");
+            var customFormattedValue = unit.DataUnit == DataUnit.Bit
                 ? Bits.ToString(resolvedFormat, formatProvider)
                 : value.ToString(resolvedFormat, formatProvider);
+            return customFormattedValue.Replace(customSentinel, unitText);
         }
 
         return string.Concat(value.ToString(ReplaceFormatToken(numericFormat, "#.##", "0.##"), formatProvider), " ", unitText);
@@ -1106,6 +1118,19 @@ public struct ByteSize(double byteSize) :
         }
 
         return new(result);
+    }
+
+    static string FindFormatSentinel(params string[] values)
+    {
+        for (var candidate = '\uE000'; candidate <= '\uF8FF'; candidate++)
+        {
+            if (values.All(value => !value.Contains(candidate)))
+            {
+                return candidate.ToString();
+            }
+        }
+
+        throw new FormatException("Unable to protect the byte-size unit token.");
     }
 
     static string ReplaceFormatToken(string format, string token, string replacement)
