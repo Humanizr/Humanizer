@@ -1045,7 +1045,7 @@ public class CoverageGapTests
 
         var catalan = new CultureInfo("ca");
         Assert.Equal("mil milions", 1_000_000_000L.ToWords(catalan));
-        Assert.Equal("mil milionè", 1_000_000_000.ToOrdinalWords(catalan));
+        Assert.Equal("mil milionèsim", 1_000_000_000.ToOrdinalWords(catalan));
         Assert.Equal(
             "menys dos mil cent quaranta-set milions quatre-cents vuitanta-tres mil sis-cents quaranta-vuitè",
             int.MinValue.ToOrdinalWords(catalan));
@@ -1265,7 +1265,7 @@ public class CoverageGapTests
         var converter = new ConjunctionalScaleNumberToWordsConverter(CreateConjunctionalScaleProfile());
 
         Assert.Equal("minus one", converter.Convert(-1));
-        Assert.Equal("minus one", converter.ConvertToOrdinal(-1));
+        Assert.Equal("minus first", converter.ConvertToOrdinal(-1));
         Assert.Equal("one hundred", converter.Convert(100, addAnd: false));
         Assert.Equal("one hundred and one", converter.Convert(101));
         Assert.Equal("one thousand and one", converter.Convert(1001));

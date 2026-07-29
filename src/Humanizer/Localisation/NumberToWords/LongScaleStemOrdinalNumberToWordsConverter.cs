@@ -201,16 +201,17 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm)
     {
-        if (number is 0 or int.MinValue)
+        if (number == 0)
         {
             return profile.ZeroWord;
         }
 
-        if (number < 0)
-        {
-            return ConvertToOrdinal(Math.Abs(number), gender);
-        }
+        var magnitude = number < 0 ? -(long)number : number;
+        return ConvertOrdinalPositive(magnitude, gender, wordForm);
+    }
 
+    string ConvertOrdinalPositive(long number, GrammaticalGender gender, WordForm wordForm)
+    {
         if (IsRoundHigherScale(number))
         {
             // Round higher-scale ordinals are formed by taking the cardinal multiple and appending
@@ -222,7 +223,7 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
         {
             // Round highest-scale values piggyback on the next-lower scale and then rewrite the
             // highest-scale source stem; this avoids duplicating the locale's irregular stem logic.
-            return ConvertToOrdinal(number / 1000, gender)
+            return ConvertOrdinalPositive(number / 1000, gender, WordForm.Normal)
                 .Replace(profile.HighestScaleOrdinalSource, profile.HighestScaleOrdinalTarget);
         }
 
@@ -309,9 +310,9 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
     /// <summary>
     /// Renders the high-thousands ordinal stem and returns the remainder below one thousand.
     /// </summary>
-    string ConvertHigherThousandsOrdinal(int number, out int remainder, GrammaticalGender gender)
+    string ConvertHigherThousandsOrdinal(long number, out int remainder, GrammaticalGender gender)
     {
-        remainder = number;
+        remainder = (int)number;
         if (number / 10000 <= 0)
         {
             return string.Empty;
@@ -334,7 +335,7 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
             wordPart = wordPart.Remove(wordPart.LastIndexOf(' '), 1);
         }
 
-        remainder = number % 1000;
+        remainder = (int)(number % 1000);
         return wordPart + profile.ThousandOrdinalStem + GetGenderedOrdinalEnding(gender);
     }
 
@@ -431,7 +432,7 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
     /// <summary>
     /// Builds the special ordinal form used for round values above the highest scale.
     /// </summary>
-    string ConvertRoundHigherScaleOrdinal(int number, GrammaticalGender gender)
+    string ConvertRoundHigherScaleOrdinal(long number, GrammaticalGender gender)
     {
         var cardinalPart = Convert(number / profile.HighestScaleValue, WordForm.Abbreviation, gender);
         var separator = number == profile.RoundHigherScaleCompactValue ? string.Empty : " ";
@@ -454,13 +455,13 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
     /// <summary>
     /// Determines whether a value is an exact round higher-scale value.
     /// </summary>
-    bool IsRoundHigherScale(int number) =>
+    bool IsRoundHigherScale(long number) =>
         number >= profile.RoundHigherScaleCompactValue && number % profile.HighestScaleValue == 0;
 
     /// <summary>
     /// Determines whether a value is an exact round highest-scale value.
     /// </summary>
-    bool IsRoundHighestScale(int number) =>
+    bool IsRoundHighestScale(long number) =>
         number >= profile.HighestScaleValue && number % profile.HighestScaleValue == 0;
 
     /// <summary>
@@ -475,7 +476,7 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
     /// <summary>
     /// Determines whether the value matches one of the round-number shapes that needs a stem rewrite.
     /// </summary>
-    static bool IsRoundNumber(int number) =>
+    static bool IsRoundNumber(long number) =>
         (number % 10000 == 0 && number < 100000)
         || (number % 100000 == 0 && number < 1000000)
         || (number % 1000000 == 0 && number < 10000000)

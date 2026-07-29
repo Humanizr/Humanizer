@@ -324,22 +324,22 @@ surfaces:
           singularPrefix: 'un'
           singular: 'trilió'
           plural: 'trilions'
-          ordinalMasculine: 'trilionè'
-          ordinalFeminine: 'trilionena'
+          ordinalMasculine: 'trilionèsim'
+          ordinalFeminine: 'trilionèsima'
         -
           value: 1000000000000
           singularPrefix: 'un'
           singular: 'bilió'
           plural: 'bilions'
-          ordinalMasculine: 'bilionè'
-          ordinalFeminine: 'bilionena'
+          ordinalMasculine: 'bilionèsim'
+          ordinalFeminine: 'bilionèsima'
         -
           value: 1000000
           singularPrefix: 'un'
           singular: 'milió'
           plural: 'milions'
-          ordinalMasculine: 'milionè'
-          ordinalFeminine: 'milionena'
+          ordinalMasculine: 'milionèsim'
+          ordinalFeminine: 'milionèsima'
           groupCountByThousands: true
         -
           value: 1000

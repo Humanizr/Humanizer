@@ -94,7 +94,7 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
             var magnitude = number == long.MinValue
                 ? (ulong)long.MaxValue + 1
                 : (ulong)-number;
-            return $"{profile.MinusWord} {ConvertPositive(magnitude, isOrdinal: false, addAnd, profile.Scales)}";
+            return $"{profile.MinusWord} {ConvertPositive(magnitude, isOrdinal, addAnd, profile.Scales)}";
         }
 
         return ConvertPositive((ulong)number, isOrdinal, addAnd, profile.Scales);

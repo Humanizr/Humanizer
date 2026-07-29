@@ -39,13 +39,6 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
         }
 
         var parts = new List<string>();
-        if (input < 0)
-        {
-            // The sign is emitted once and the absolute value is routed through the same positive
-            // decomposition so the gender rules stay identical for positive and negative values.
-            parts.Add(profile.MinusWord);
-        }
-
         var magnitude = GetAbsoluteValue(input);
         // Scale rows are processed from largest to smallest so the ordinal/cardinal decision can be
         // made after we know whether a given row terminates the phrase.
@@ -54,9 +47,15 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
             CollectScaleParts(parts, ref magnitude, isOrdinal, scale, gender);
         }
 
+        var finalPartStartIndex = parts.Count;
         CollectPartsUnderOneThousand(parts, ref magnitude, isOrdinal, gender);
+        if (finalPartStartIndex > 0 && parts.Count - finalPartStartIndex == 1)
+        {
+            parts.Insert(finalPartStartIndex, profile.Conjunction);
+        }
 
-        return string.Join(" ", parts);
+        var words = string.Join(" ", parts);
+        return input < 0 ? profile.MinusWord + " " + words : words;
     }
 
     void CollectScaleParts(List<string> parts, ref ulong number, bool isOrdinal, ConjoinedGenderedScale scale, GrammaticalGender requestedGender)
@@ -99,6 +98,7 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
             return;
         }
 
+        var partStartIndex = parts.Count;
         if (number >= 100)
         {
             var hundreds = number / 100;
@@ -145,7 +145,7 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
             }
         }
 
-        if (parts.Count > 1)
+        if (parts.Count - partStartIndex > 1)
         {
             // Insert the conjunction before the last spoken element so compounds keep the same
             // internal rhythm as the cardinal form.

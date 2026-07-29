@@ -13,6 +13,7 @@ public class BulgarianNumberToWordsTests
     [InlineData(2, GrammaticalGender.Feminine, "две")]
     [InlineData(2, GrammaticalGender.Neuter, "две")]
     [InlineData(1000, GrammaticalGender.Neuter, "една хиляда")]
+    [InlineData(-1, GrammaticalGender.Neuter, "минус едно")]
     public void ToWords_UsesBulgarianGenderedUnitForms(int number, GrammaticalGender gender, string expected) =>
         Assert.Equal(expected, number.ToWords(gender, Bg));
 
@@ -32,6 +33,7 @@ public class BulgarianNumberToWordsTests
     [InlineData(1000, GrammaticalGender.Masculine, "една хиляден")]
     [InlineData(1000, GrammaticalGender.Feminine, "една хилядна")]
     [InlineData(1000, GrammaticalGender.Neuter, "една хилядно")]
+    [InlineData(-1, GrammaticalGender.Neuter, "минус първо")]
     public void ToOrdinalWords_UsesBulgarianGenderedOrdinalForms(int number, GrammaticalGender gender, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(gender, Bg));
 }
