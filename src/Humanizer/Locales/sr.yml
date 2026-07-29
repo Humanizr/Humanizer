@@ -60,6 +60,7 @@ surfaces:
                   forms:
                     default: 'минута'
                     singular: 'минут'
+                    paucal: 'минута'
               provenance:
                 - 'cldr48'
             hour:
@@ -85,6 +86,7 @@ surfaces:
                   forms:
                     default: 'дана'
                     singular: 'дан'
+                    paucal: 'дана'
               provenance:
                 - 'cldr48'
             week:
@@ -378,11 +380,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} сатом'
+                    default: '{count} сати'
                     singular: '{count} сатом'
-                    dual: '{count} сатом'
-                    paucal: '{count} сатом'
-                    plural: '{count} сатом'
+                    dual: '{count} сата'
+                    paucal: '{count} сата'
+                    plural: '{count} сата'
               provenance:
                 - 'cldr48'
             day:
@@ -392,11 +394,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} даном'
+                    default: '{count} дана'
                     singular: '{count} даном'
-                    dual: '{count} даном'
-                    paucal: '{count} даном'
-                    plural: '{count} даном'
+                    dual: '{count} дана'
+                    paucal: '{count} дана'
+                    plural: '{count} дана'
               provenance:
                 - 'cldr48'
             week:
@@ -450,6 +452,7 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    casePluralRule: 'south-slavic'
     resourceKeyDetector: 'south-slavic'
     resourceKeySuffixes:
       paucal: '_Paucal'

@@ -16,6 +16,12 @@ surfaces:
       - instrumental
       - locative
     sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/bs.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit nominative patterns'
+        credit: 'Unicode CLDR contributors'
       inventory:
         kind: 'grammar'
         url: 'https://untz.ba/wp-content/uploads/2021/02/BOSANSKI_JEZIK_2018.pdf'
@@ -24,9 +30,106 @@ surfaces:
         credit: 'Sedina Brkic-Mededovic, University of Tuzla'
     cases:
       nominative:
-        authored: 'base-duration'
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunda'
+                  words: 'jedna milisekunda'
+                multiple:
+                  forms:
+                    default: 'milisekundi'
+                    singular: 'milisekunda'
+                    paucal: 'milisekunde'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunda'
+                  words: 'jedna sekunda'
+                multiple:
+                  forms:
+                    default: 'sekundi'
+                    singular: 'sekunda'
+                    paucal: 'sekunde'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuta'
+                  words: 'jedna minuta'
+                multiple:
+                  forms:
+                    default: 'minuta'
+                    singular: 'minuta'
+                    paucal: 'minute'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sat'
+                  words: 'jedan sat'
+                multiple:
+                  forms:
+                    default: 'sati'
+                    singular: 'sat'
+                    paucal: 'sata'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dan'
+                  words: 'jedan dan'
+                multiple:
+                  forms:
+                    default: 'dana'
+                    singular: 'dan'
+                    paucal: 'dana'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 sedmica'
+                  words: 'jedna sedmica'
+                multiple:
+                  forms:
+                    default: 'sedmica'
+                    singular: 'sedmica'
+                    paucal: 'sedmice'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjesec'
+                  words: 'jedan mjesec'
+                multiple:
+                  forms:
+                    default: 'mjeseci'
+                    singular: 'mjesec'
+                    paucal: 'mjeseca'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godina'
+                  words: 'jedna godina'
+                multiple:
+                  forms:
+                    default: 'godina'
+                    singular: 'godina'
+                    paucal: 'godine'
+              provenance:
+                - 'cldr48'
         provenance:
-          - inventory
+          - 'cldr48'
       genitive:
         authored:
           units:
@@ -510,6 +613,7 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    casePluralRule: 'south-slavic'
     resourceKeyDetector: 'south-slavic'
     resourceKeySuffixes:
       paucal: '_Paucal'

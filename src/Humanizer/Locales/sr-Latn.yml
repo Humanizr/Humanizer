@@ -60,6 +60,7 @@ surfaces:
                   forms:
                     default: 'minuta'
                     singular: 'minut'
+                    paucal: 'minuta'
               provenance:
                 - 'cldr48'
             hour:
@@ -85,6 +86,7 @@ surfaces:
                   forms:
                     default: 'dana'
                     singular: 'dan'
+                    paucal: 'dana'
               provenance:
                 - 'cldr48'
             week:
@@ -378,11 +380,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} satom'
+                    default: '{count} sati'
                     singular: '{count} satom'
-                    dual: '{count} satom'
-                    paucal: '{count} satom'
-                    plural: '{count} satom'
+                    dual: '{count} sata'
+                    paucal: '{count} sata'
+                    plural: '{count} sata'
               provenance:
                 - 'cldr48'
             day:
@@ -392,11 +394,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} danom'
+                    default: '{count} dana'
                     singular: '{count} danom'
-                    dual: '{count} danom'
-                    paucal: '{count} danom'
-                    plural: '{count} danom'
+                    dual: '{count} dana'
+                    paucal: '{count} dana'
+                    plural: '{count} dana'
               provenance:
                 - 'cldr48'
             week:
@@ -450,6 +452,7 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    casePluralRule: 'south-slavic'
     resourceKeyDetector: 'south-slavic'
     resourceKeySuffixes:
       paucal: '_Paucal'

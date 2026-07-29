@@ -1061,6 +1061,50 @@ surfaces: {}
     }
 
     [Fact]
+    public void ReleaseDurationCasesUseTheEffectiveFormatterNumberDetector()
+    {
+        var locale = GetLocaleFile("bs").ReplaceLineEndings("\n");
+        const string singularForm = "                    singular: 'milisekunda'\n";
+        var singularFormIndex = locale.IndexOf(singularForm, StringComparison.Ordinal);
+        Assert.True(singularFormIndex >= 0);
+        locale = locale.Remove(singularFormIndex, singularForm.Length);
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseCoverageInput.Create(
+                CreateCatalog(("bs", locale))));
+
+        Assert.Contains(
+            "bs.durationCases.cases.nominative.authored.units.millisecond.phrase.multiple.forms",
+            exception.Message);
+        Assert.Contains("reachable 'singular' form", exception.Message);
+    }
+
+    [Fact]
+    public void ExplicitSouthSlavicCaseRuleRequiresPaucalForms()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => HumanizerSourceGenerator.DurationCaseNormalization.ParseForTests(
+                "zz",
+                InvariantCitationDurationCases,
+                casePluralRule: "south-slavic",
+                phrasesText: CreateSouthSlavicCitationDurationPhrases(includePaucal: false)));
+
+        Assert.Contains("Case overlay 'zz.phrases.duration", exception.Message);
+        Assert.Contains("reachable 'paucal' form", exception.Message);
+    }
+
+    [Fact]
+    public void OrdinaryFormatterDetectorAllowsNamedFormFallback()
+    {
+        var coverage = HumanizerSourceGenerator.DurationCaseCoverageInput.Create(
+            CreateCatalog(("am", GetLocaleFile("am"))));
+
+        Assert.Contains(
+            coverage.Catalogs,
+            static catalog => catalog.LocaleCode == "am");
+    }
+
+    [Fact]
     public void CitationDurationCasesRequireNumericMultipleFormsForDedicatedCaseRule()
     {
         var exception = Assert.Throws<InvalidOperationException>(
@@ -1203,10 +1247,36 @@ surfaces: {}
               multiple: '{count} years'
         """;
 
+    static readonly string[] SouthSlavicDurationUnits =
+    [
+        "millisecond",
+        "second",
+        "minute",
+        "hour",
+        "day",
+        "week",
+        "month",
+        "year"
+    ];
+
+    static string CreateSouthSlavicCitationDurationPhrases(bool includePaucal)
+    {
+        var paucal = includePaucal ? "\n          paucal: '{count} units'" : string.Empty;
+        return "  duration:\n" + string.Join(
+            "\n",
+            SouthSlavicDurationUnits.Select(unit =>
+                    $"    {unit}:\n" +
+                    $"      single: 'one {unit}'\n" +
+                    "      multiple:\n" +
+                    "        forms:\n" +
+                    "          default: '{count} units'\n" +
+                    $"          singular: '{{count}} {unit}'{paucal}"));
+    }
+
     static HumanizerSourceGenerator.DurationCaseCatalog ParseDurationCases(string body) =>
         HumanizerSourceGenerator.DurationCaseNormalization.ParseForTests(
             "zz",
-            string.Join(Environment.NewLine, body.Split(Environment.NewLine).Select(static line => $"  {line}")),
+            string.Join("\n", body.ReplaceLineEndings("\n").Split('\n').Select(static line => $"  {line}")),
             phrasesText: CompleteCitationDurationPhrases);
 
     static HumanizerSourceGenerator.LocaleCatalogInput CreateCatalog(params (string LocaleCode, string FileText)[] files) =>

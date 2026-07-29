@@ -234,6 +234,14 @@ public class CldrDurationCaseTests
     }
 
     [Theory]
+    [InlineData("bs", TimeUnit.Millisecond, "21 milisekunda")]
+    [InlineData("bs", TimeUnit.Second, "21 sekunda")]
+    [InlineData("bs", TimeUnit.Minute, "21 minuta")]
+    [InlineData("bs", TimeUnit.Hour, "21 sat")]
+    [InlineData("bs", TimeUnit.Day, "21 dan")]
+    [InlineData("bs", TimeUnit.Week, "21 sedmica")]
+    [InlineData("bs", TimeUnit.Month, "21 mjesec")]
+    [InlineData("bs", TimeUnit.Year, "21 godina")]
     [InlineData("hr", TimeUnit.Millisecond, "21 milisekunda")]
     [InlineData("hr", TimeUnit.Second, "21 sekunda")]
     [InlineData("hr", TimeUnit.Minute, "21 minuta")]
@@ -271,6 +279,15 @@ public class CldrDurationCaseTests
     }
 
     [Theory]
+    [InlineData("bs", TimeUnit.Hour, 1, "jedan sat")]
+    [InlineData("bs", TimeUnit.Hour, 2, "2 sata")]
+    [InlineData("bs", TimeUnit.Hour, 4, "4 sata")]
+    [InlineData("bs", TimeUnit.Hour, 5, "5 sati")]
+    [InlineData("bs", TimeUnit.Hour, 11, "11 sati")]
+    [InlineData("bs", TimeUnit.Hour, 21, "21 sat")]
+    [InlineData("bs", TimeUnit.Hour, 22, "22 sata")]
+    [InlineData("bs", TimeUnit.Hour, 25, "25 sati")]
+    [InlineData("bs", TimeUnit.Hour, 101, "101 sat")]
     [InlineData("hr", TimeUnit.Hour, 1, "jedan sat")]
     [InlineData("hr", TimeUnit.Hour, 2, "2 sata")]
     [InlineData("hr", TimeUnit.Hour, 4, "4 sata")]
@@ -280,6 +297,9 @@ public class CldrDurationCaseTests
     [InlineData("hr", TimeUnit.Hour, 22, "22 sata")]
     [InlineData("hr", TimeUnit.Hour, 25, "25 sati")]
     [InlineData("hr", TimeUnit.Hour, 101, "101 sat")]
+    [InlineData("hr", TimeUnit.Day, 2, "2 dana")]
+    [InlineData("hr", TimeUnit.Day, 4, "4 dana")]
+    [InlineData("hr", TimeUnit.Day, 22, "22 dana")]
     [InlineData("sr", TimeUnit.Month, 1, "један месец")]
     [InlineData("sr", TimeUnit.Month, 2, "2 месеца")]
     [InlineData("sr", TimeUnit.Month, 4, "4 месеца")]
@@ -289,6 +309,12 @@ public class CldrDurationCaseTests
     [InlineData("sr", TimeUnit.Month, 22, "22 месеца")]
     [InlineData("sr", TimeUnit.Month, 25, "25 месеци")]
     [InlineData("sr", TimeUnit.Month, 101, "101 месец")]
+    [InlineData("sr", TimeUnit.Minute, 2, "2 минута")]
+    [InlineData("sr", TimeUnit.Minute, 4, "4 минута")]
+    [InlineData("sr", TimeUnit.Minute, 22, "22 минута")]
+    [InlineData("sr", TimeUnit.Day, 2, "2 дана")]
+    [InlineData("sr", TimeUnit.Day, 4, "4 дана")]
+    [InlineData("sr", TimeUnit.Day, 22, "22 дана")]
     [InlineData("sr-Latn", TimeUnit.Second, 1, "jedna sekunda")]
     [InlineData("sr-Latn", TimeUnit.Second, 2, "2 sekunde")]
     [InlineData("sr-Latn", TimeUnit.Second, 4, "4 sekunde")]
@@ -298,6 +324,12 @@ public class CldrDurationCaseTests
     [InlineData("sr-Latn", TimeUnit.Second, 22, "22 sekunde")]
     [InlineData("sr-Latn", TimeUnit.Second, 25, "25 sekundi")]
     [InlineData("sr-Latn", TimeUnit.Second, 101, "101 sekunda")]
+    [InlineData("sr-Latn", TimeUnit.Minute, 2, "2 minuta")]
+    [InlineData("sr-Latn", TimeUnit.Minute, 4, "4 minuta")]
+    [InlineData("sr-Latn", TimeUnit.Minute, 22, "22 minuta")]
+    [InlineData("sr-Latn", TimeUnit.Day, 2, "2 dana")]
+    [InlineData("sr-Latn", TimeUnit.Day, 4, "4 dana")]
+    [InlineData("sr-Latn", TimeUnit.Day, 22, "22 dana")]
     public void SouthSlavicCitationCasesUseModuloNumberForms(
         string cultureName,
         TimeUnit unit,
@@ -309,6 +341,69 @@ public class CldrDurationCaseTests
         Assert.Equal(
             expected,
             formatter.TimeSpanHumanize(unit, count, GrammaticalCase.Nominative));
+    }
+
+    [Theory]
+    [InlineData(TimeUnit.Millisecond, 3, "3 milisekunde")]
+    [InlineData(TimeUnit.Millisecond, 5, "5 milisekundi")]
+    [InlineData(TimeUnit.Millisecond, 21, "21 milisekundom")]
+    [InlineData(TimeUnit.Second, 3, "3 sekunde")]
+    [InlineData(TimeUnit.Second, 5, "5 sekundi")]
+    [InlineData(TimeUnit.Second, 21, "21 sekundom")]
+    [InlineData(TimeUnit.Minute, 3, "3 minute")]
+    [InlineData(TimeUnit.Minute, 5, "5 minuta")]
+    [InlineData(TimeUnit.Minute, 21, "21 minutom")]
+    [InlineData(TimeUnit.Hour, 3, "3 sata")]
+    [InlineData(TimeUnit.Hour, 5, "5 sati")]
+    [InlineData(TimeUnit.Hour, 21, "21 satom")]
+    [InlineData(TimeUnit.Day, 3, "3 dana")]
+    [InlineData(TimeUnit.Day, 5, "5 dana")]
+    [InlineData(TimeUnit.Day, 21, "21 danom")]
+    [InlineData(TimeUnit.Week, 3, "3 tjedna")]
+    [InlineData(TimeUnit.Week, 5, "5 tjedana")]
+    [InlineData(TimeUnit.Week, 21, "21 tjednom")]
+    [InlineData(TimeUnit.Month, 3, "3 mjeseca")]
+    [InlineData(TimeUnit.Month, 5, "5 mjeseci")]
+    [InlineData(TimeUnit.Month, 21, "21 mjesecom")]
+    [InlineData(TimeUnit.Year, 3, "3 godine")]
+    [InlineData(TimeUnit.Year, 5, "5 godina")]
+    [InlineData(TimeUnit.Year, 21, "21 godinom")]
+    public void CroatianInstrumentalUsesNumeralGovernedForms(
+        TimeUnit unit,
+        int count,
+        string expected)
+    {
+        IGrammaticalCaseTimeSpanFormatter formatter = new DefaultFormatter("hr");
+
+        Assert.Equal(
+            expected,
+            formatter.TimeSpanHumanize(unit, count, GrammaticalCase.Instrumental));
+    }
+
+    [Theory]
+    [InlineData("sr", TimeUnit.Hour, 3, "3 сата")]
+    [InlineData("sr", TimeUnit.Hour, 5, "5 сати")]
+    [InlineData("sr", TimeUnit.Hour, 21, "21 сатом")]
+    [InlineData("sr", TimeUnit.Day, 3, "3 дана")]
+    [InlineData("sr", TimeUnit.Day, 5, "5 дана")]
+    [InlineData("sr", TimeUnit.Day, 21, "21 даном")]
+    [InlineData("sr-Latn", TimeUnit.Hour, 3, "3 sata")]
+    [InlineData("sr-Latn", TimeUnit.Hour, 5, "5 sati")]
+    [InlineData("sr-Latn", TimeUnit.Hour, 21, "21 satom")]
+    [InlineData("sr-Latn", TimeUnit.Day, 3, "3 dana")]
+    [InlineData("sr-Latn", TimeUnit.Day, 5, "5 dana")]
+    [InlineData("sr-Latn", TimeUnit.Day, 21, "21 danom")]
+    public void SerbianInstrumentalUsesNumeralGovernedForms(
+        string cultureName,
+        TimeUnit unit,
+        int count,
+        string expected)
+    {
+        IGrammaticalCaseTimeSpanFormatter formatter = new DefaultFormatter(cultureName);
+
+        Assert.Equal(
+            expected,
+            formatter.TimeSpanHumanize(unit, count, GrammaticalCase.Instrumental));
     }
 
     [Fact]

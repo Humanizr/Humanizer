@@ -88,6 +88,7 @@ surfaces:
                   forms:
                     default: 'dana'
                     singular: 'dan'
+                    paucal: 'dana'
               provenance:
                 - 'cldr48'
             week:
@@ -339,11 +340,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} milisekundama'
+                    default: '{count} milisekundi'
                     singular: '{count} milisekundom'
-                    dual: '{count} milisekundama'
-                    paucal: '{count} milisekundama'
-                    plural: '{count} milisekundama'
+                    dual: '{count} milisekunde'
+                    paucal: '{count} milisekunde'
+                    plural: '{count} milisekunde'
               provenance:
                 - 'cldr48'
             second:
@@ -353,11 +354,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} sekundama'
+                    default: '{count} sekundi'
                     singular: '{count} sekundom'
-                    dual: '{count} sekundama'
-                    paucal: '{count} sekundama'
-                    plural: '{count} sekundama'
+                    dual: '{count} sekunde'
+                    paucal: '{count} sekunde'
+                    plural: '{count} sekunde'
               provenance:
                 - 'cldr48'
             minute:
@@ -367,11 +368,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} minutama'
+                    default: '{count} minuta'
                     singular: '{count} minutom'
-                    dual: '{count} minutama'
-                    paucal: '{count} minutama'
-                    plural: '{count} minutama'
+                    dual: '{count} minute'
+                    paucal: '{count} minute'
+                    plural: '{count} minute'
               provenance:
                 - 'cldr48'
             hour:
@@ -381,11 +382,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} satima'
+                    default: '{count} sati'
                     singular: '{count} satom'
-                    dual: '{count} satima'
-                    paucal: '{count} satima'
-                    plural: '{count} satima'
+                    dual: '{count} sata'
+                    paucal: '{count} sata'
+                    plural: '{count} sata'
               provenance:
                 - 'cldr48'
             day:
@@ -395,11 +396,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} danima'
+                    default: '{count} dana'
                     singular: '{count} danom'
-                    dual: '{count} danima'
-                    paucal: '{count} danima'
-                    plural: '{count} danima'
+                    dual: '{count} dana'
+                    paucal: '{count} dana'
+                    plural: '{count} dana'
               provenance:
                 - 'cldr48'
             week:
@@ -409,11 +410,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} tjednima'
+                    default: '{count} tjedana'
                     singular: '{count} tjednom'
-                    dual: '{count} tjednima'
-                    paucal: '{count} tjednima'
-                    plural: '{count} tjednima'
+                    dual: '{count} tjedna'
+                    paucal: '{count} tjedna'
+                    plural: '{count} tjedna'
               provenance:
                 - 'cldr48'
             month:
@@ -423,11 +424,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} mjesecima'
+                    default: '{count} mjeseci'
                     singular: '{count} mjesecom'
-                    dual: '{count} mjesecima'
-                    paucal: '{count} mjesecima'
-                    plural: '{count} mjesecima'
+                    dual: '{count} mjeseca'
+                    paucal: '{count} mjeseca'
+                    plural: '{count} mjeseca'
               provenance:
                 - 'cldr48'
             year:
@@ -437,11 +438,11 @@ surfaces:
                 multiple:
                   countPlacement: none
                   forms:
-                    default: '{count} godinama'
+                    default: '{count} godina'
                     singular: '{count} godinom'
-                    dual: '{count} godinama'
-                    paucal: '{count} godinama'
-                    plural: '{count} godinama'
+                    dual: '{count} godine'
+                    paucal: '{count} godine'
+                    plural: '{count} godine'
               provenance:
                 - 'cldr48'
         provenance:
@@ -453,6 +454,7 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    casePluralRule: 'south-slavic'
     resourceKeyDetector: 'south-slavic'
     resourceKeySuffixes:
       paucal: '_Paucal'

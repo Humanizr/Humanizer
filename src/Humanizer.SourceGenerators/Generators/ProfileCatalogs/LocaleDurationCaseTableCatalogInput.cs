@@ -43,7 +43,7 @@ public sealed partial class HumanizerSourceGenerator
                     coverage.Catalogs,
                     localeCatalog.Locales.ToImmutableDictionary(
                         static locale => locale.LocaleCode,
-                        static locale => GetCaseTimeSpanDetector(locale),
+                        static locale => GetDurationCaseNumberDetector(locale),
                         StringComparer.Ordinal),
                     []);
             }
@@ -128,18 +128,6 @@ public sealed partial class HumanizerSourceGenerator
 
             builder.AppendLine("}");
             context.AddSource("LocaleDurationCaseTableCatalog.g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
-        }
-
-        static string? GetCaseTimeSpanDetector(ResolvedLocaleDefinition locale)
-        {
-            if (locale.Formatter is not { } formatter)
-            {
-                return null;
-            }
-
-            return GetOptionalString(formatter.ProfileRoot, "casePluralRule")
-                ?? GetOptionalString(formatter.ProfileRoot, "pluralRule")
-                ?? GetOptionalString(formatter.ProfileRoot, "resourceKeyDetector");
         }
 
         static string CreateCasesExpression(DurationCaseCatalog catalog)

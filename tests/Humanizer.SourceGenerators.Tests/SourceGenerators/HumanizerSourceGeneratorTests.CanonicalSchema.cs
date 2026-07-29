@@ -368,6 +368,21 @@ surfaces:
     }
 
     [Fact]
+    public void DurationCaseTablesPreserveRequiredNamedFormsMatchingDefault()
+    {
+        var source = GetGeneratedSource("LocaleDurationCaseTableCatalog.g.cs");
+        var bsStart = source.IndexOf("static class Locale_bs_cache", StringComparison.Ordinal);
+        var caStart = source.IndexOf("static LocaleDurationCaseTable Locale_ca", bsStart, StringComparison.Ordinal);
+
+        Assert.True(bsStart >= 0);
+        Assert.True(caStart > bsStart);
+        Assert.Contains(
+            "new LocalizedPhraseForms(\"dana\", null, \"dan\", null, \"dana\"",
+            source[bsStart..caStart],
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void InflectionProfilesRequireEveryRootOnceTheFeatureIsEnabled()
     {
         const string enabledLocale = """

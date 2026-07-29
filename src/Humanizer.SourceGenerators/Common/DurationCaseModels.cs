@@ -137,7 +137,7 @@ public sealed partial class HumanizerSourceGenerator
                 var catalog = DurationCaseNormalization.Parse(
                     locale.LocaleCode,
                     value,
-                    locale.Grammar?.GetScalar("casePluralRule"),
+                    GetExplicitDurationCaseNumberDetector(locale),
                     phrases);
                 catalogs.Add(catalog);
                 rows.Add(new DurationCaseCoverageRow(
@@ -782,7 +782,10 @@ public sealed partial class HumanizerSourceGenerator
                     phraseValue,
                     $"{path}.phrase",
                     requiredMultipleForms);
-                var phrase = LocalePhraseNormalization.ParseTimeSpanPhrase(phraseValue, $"{path}.phrase");
+                var phrase = LocalePhraseNormalization.ParseTimeSpanPhrase(
+                    phraseValue,
+                    $"{path}.phrase",
+                    preserveDuplicateForms: !requiredMultipleForms.IsEmpty);
                 if (phrase.Single is null || phrase.Multiple?.Forms is null)
                 {
                     throw new InvalidOperationException(
