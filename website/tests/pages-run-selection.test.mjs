@@ -62,6 +62,32 @@ function selectSuccessfulJobs(jobPages) {
   return result.stdout.trimEnd();
 }
 
+function parsePriorTsv(prior, pointer) {
+  const script = `
+set -euo pipefail
+prior=$1
+if [[ $2 == pointer ]]; then
+  IFS=$'\\t' read -r run_id run_attempt source_sha source_path \\
+    deployment_run_id stage_run_attempt deploy_run_attempt \\
+    smoke_run_attempt publication_run_attempt bootstrap_source <<<"$prior"
+  deployment_run_attempt=$publication_run_attempt
+else
+  IFS=$'\\t' read -r run_id run_attempt source_sha source_path <<<"$prior"
+  deployment_run_id=$run_id
+  deployment_run_attempt=$run_attempt
+fi
+printf '%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n' \\
+  "$run_id" "$run_attempt" "$source_sha" "$source_path" \\
+  "$deployment_run_id" "$deployment_run_attempt"
+`;
+  const result = spawnSync('bash', ['-c', script, 'bash', prior, pointer], {
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr);
+  return result.stdout.trimEnd();
+}
+
 function selectPrior(workflowRuns) {
   const documentation = selectRun(filters[0], workflowRuns);
   return documentation || selectRun(filters[1], workflowRuns);
@@ -520,6 +546,45 @@ test('workflow job queries use the actual paginated slurp response shape', () =>
   assert.equal(iteratorCount, endpointCount);
   assert.doesNotMatch(normalizedWorkflow, /\.\[\]\[\]\.jobs\[\]/);
   assert.match(normalizedWorkflow, /\.\[\]\.workflow_runs\[\]/);
+});
+
+test('pointer and fallback TSVs preserve their distinct deployment identities', () => {
+  const sourceSha = '0123456789abcdef0123456789abcdef01234567';
+  const pointer = [
+    100,
+    1,
+    sourceSha,
+    '.github/workflows/docs.yml',
+    200,
+    1,
+    2,
+    2,
+    3,
+    false,
+  ].join('\t');
+  const fallback = [
+    300,
+    1,
+    sourceSha,
+    '.github/workflows/jekyll-gh-pages.yml',
+  ].join('\t');
+
+  assert.equal(
+    parsePriorTsv(pointer, 'pointer'),
+    `100\t1\t${sourceSha}\t.github/workflows/docs.yml\t200\t3`,
+  );
+  assert.equal(
+    parsePriorTsv(fallback, 'fallback'),
+    `300\t1\t${sourceSha}\t.github/workflows/jekyll-gh-pages.yml\t300\t1`,
+  );
+  assert.match(
+    fallbackSelection,
+    /read -r run_id run_attempt source_sha source_path \\\n\s+<<<"\$prior"[\s\S]*?deployment_run_id="\$run_id"[\s\S]*?deployment_run_attempt="\$run_attempt"/,
+  );
+  assert.doesNotMatch(
+    fallbackSelection,
+    /source_path \\\n\s+deployment_run_id deployment_run_attempt <<<"\$prior"/,
+  );
 });
 
 test('expensive documentation gates run in parallel before retention', () => {

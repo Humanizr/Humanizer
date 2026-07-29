@@ -1001,11 +1001,15 @@ jobs:
                 ' <<<"$runs"
               )"
             fi
+            IFS=$'\t' read -r run_id run_attempt source_sha source_path \
+              <<<"$prior"
+            deployment_run_id="$run_id"
+            deployment_run_attempt="$run_attempt"
           fi
-          IFS=$'\t' read -r run_id run_attempt source_sha source_path \
-            deployment_run_id deployment_run_attempt <<<"$prior"
           if [[ ! "$run_id" =~ ^[0-9]+$ ||
                 ! "$run_attempt" =~ ^[0-9]+$ ||
+                ! "$deployment_run_id" =~ ^[0-9]+$ ||
+                ! "$deployment_run_attempt" =~ ^[0-9]+$ ||
                 ! "$source_sha" =~ ^[0-9a-f]{40}$ ||
                 (
                   "$source_path" != ".github/workflows/docs.yml" &&
@@ -1016,8 +1020,8 @@ jobs:
           fi
           echo "Retaining prior deployment ${run_id} from ${source_path}."
           {
-            echo "deployment_run_attempt=${deployment_run_attempt:-$run_attempt}"
-            echo "deployment_run_id=${deployment_run_id:-$run_id}"
+            echo "deployment_run_attempt=${deployment_run_attempt}"
+            echo "deployment_run_id=${deployment_run_id}"
             echo "run_attempt=${run_attempt}"
             echo "run_id=${run_id}"
             echo "source_sha=${source_sha}"
