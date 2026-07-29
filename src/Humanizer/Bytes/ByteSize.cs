@@ -1629,17 +1629,9 @@ public struct ByteSize(double byteSize) :
         }
 
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
-        var specialCharacters = NumberFormatSpecialCharsCache.GetValue(
-            numberFormat,
-            static value => new HashSet<char>(
-                value.NumberDecimalSeparator
-                    .Concat(value.NumberGroupSeparator)
-                    .Concat(value.PositiveSign)
-                    .Concat(value.NegativeSign)));
-
         var lastNumber = 0;
         while (lastNumber < s.Length &&
-               (char.IsDigit(s[lastNumber]) || specialCharacters.Contains(s[lastNumber])))
+               (char.IsDigit(s[lastNumber]) || IsNumberFormatCharacter(s[lastNumber], numberFormat)))
         {
             lastNumber++;
         }
@@ -1723,6 +1715,12 @@ public struct ByteSize(double byteSize) :
 
         return false;
     }
+
+    static bool IsNumberFormatCharacter(char value, NumberFormatInfo numberFormat) =>
+        numberFormat.NumberDecimalSeparator.Contains(value) ||
+        numberFormat.NumberGroupSeparator.Contains(value) ||
+        numberFormat.PositiveSign.Contains(value) ||
+        numberFormat.NegativeSign.Contains(value);
 
     static void ValidateUnitSystem(ByteSizeUnitSystem unitSystem)
     {

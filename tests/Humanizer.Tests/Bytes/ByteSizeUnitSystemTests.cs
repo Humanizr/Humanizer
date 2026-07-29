@@ -817,4 +817,24 @@ public class ByteSizeUnitSystemTests
             }
         }
     }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", ByteSize.BytesInDecimalMegabyte)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", ByteSize.BytesInMebibyte)]
+    public void ExplicitParsingUsesCurrentMutableNumberFormat(
+        ByteSizeUnitSystem unitSystem,
+        string symbol,
+        double bytesPerUnit)
+    {
+        var numberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+
+        Assert.True(ByteSize.TryParseWithUnitSystem($"1.5 {symbol}", unitSystem, numberFormat, out _));
+
+        numberFormat.NegativeSign = "~";
+        numberFormat.NumberDecimalSeparator = ",";
+        numberFormat.NumberGroupSeparator = "_";
+
+        Assert.True(ByteSize.TryParseWithUnitSystem($"~1_500,5 {symbol}", unitSystem, numberFormat, out var parsed));
+        Assert.Equal(ByteSize.FromBytes(-1500.5 * bytesPerUnit), parsed);
+    }
 }
