@@ -38,6 +38,11 @@ The Indian large\-number vocabulary to use\.
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The Indian English cardinal words for [number](Humanizer.NumberToWordsExtension.md#Humanizer.NumberToWordsExtension.ToIndianWords(thisint,Humanizer.IndianScaleStyle).number 'Humanizer\.NumberToWordsExtension\.ToIndianWords\(this int, Humanizer\.IndianScaleStyle\)\.number')\.
 
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[scaleStyle](Humanizer.NumberToWordsExtension.md#Humanizer.NumberToWordsExtension.ToIndianWords(thisint,Humanizer.IndianScaleStyle).scaleStyle 'Humanizer\.NumberToWordsExtension\.ToIndianWords\(this int, Humanizer\.IndianScaleStyle\)\.scaleStyle') is not a defined value\.
+
 <a name='Humanizer.NumberToWordsExtension.ToIndianWords(thislong,Humanizer.IndianScaleStyle)'></a>
 
 ## NumberToWordsExtension\.ToIndianWords\(this long, IndianScaleStyle\) Method

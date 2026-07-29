@@ -102,6 +102,7 @@ public static class NumberToWordsExtension
     /// <param name="number">The value to convert.</param>
     /// <param name="scaleStyle">The Indian large-number vocabulary to use.</param>
     /// <returns>The Indian English cardinal words for <paramref name="number"/>.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="scaleStyle"/> is not a defined value.</exception>
     public static string ToIndianWords(this int number, IndianScaleStyle scaleStyle = IndianScaleStyle.NamedScales) =>
         ((long)number).ToIndianWords(scaleStyle);
 
