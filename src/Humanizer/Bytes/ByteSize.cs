@@ -784,10 +784,17 @@ public struct ByteSize(double byteSize) :
                 var formattedValue = unit.DataUnit == DataUnit.Bit
                     ? Bits.ToString(standardFormat, formatProvider)
                     : value.ToString(standardFormat, formatProvider);
-                return ReplaceFormatToken(
-                    ReplaceFormatToken(numericFormat, standardFormat, formattedValue),
-                    selected.Symbol,
-                    unitText);
+                var sentinel = "\u0001";
+                while (numericFormat.Contains(sentinel) ||
+                       formattedValue.Contains(sentinel) ||
+                       unitText.Contains(sentinel))
+                {
+                    sentinel += "\u0001";
+                }
+
+                var protectedFormat = ReplaceFormatToken(numericFormat, selected.Symbol, sentinel);
+                return ReplaceFormatToken(protectedFormat, standardFormat, formattedValue)
+                    .Replace(sentinel, unitText);
             }
 
             numericFormat = ReplaceFormatToken(numericFormat, selected.Symbol, unitText);

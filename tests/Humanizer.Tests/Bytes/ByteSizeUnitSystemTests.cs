@@ -203,6 +203,43 @@ public class ByteSizeUnitSystemTests
             ByteSize.FromBytes(1.2 * bytes).FormatFullWords(unitSystem, $"C0 {unit}", culture));
     }
 
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "B", "byte")]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "b", "bit")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "B", "byte")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "b", "bit")]
+    public void StandardCurrencyFormatsDoNotReplaceCurrencySymbolAsUnit(
+        ByteSizeUnitSystem unitSystem,
+        string symbol,
+        string word)
+    {
+        var numberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+        numberFormat.CurrencySymbol = symbol;
+        var size = symbol == ByteSize.ByteSymbol
+            ? ByteSize.FromBytes(1)
+            : ByteSize.ParseWithUnitSystem("1 b", unitSystem, CultureInfo.InvariantCulture);
+
+        Assert.Equal(
+            $"{symbol}1 {word}",
+            size.FormatFullWords(unitSystem, $"C0 {symbol}", numberFormat));
+    }
+
+    [Fact]
+    public void StandardFormatsDoNotReplaceTextInsideUnitToken()
+    {
+        var culture = CultureInfo.InvariantCulture;
+
+        Assert.Equal(
+            $"{1d.ToString("G", culture)} GB",
+            ByteSize.FromDecimalGigabytes(1).Format(ByteSizeUnitSystem.DecimalSi, "G GB", culture));
+        Assert.Equal(
+            $"{1d.ToString("P", culture)} PB",
+            ByteSize.FromDecimalPetabytes(1).Format(ByteSizeUnitSystem.DecimalSi, "P PB", culture));
+        Assert.Equal(
+            $"{1d.ToString("E", culture)} EB",
+            ByteSize.FromDecimalExabytes(1).Format(ByteSizeUnitSystem.DecimalSi, "E EB", culture));
+    }
+
     [Fact]
     public void ExposesDecimalConstantsComputedPropertiesAndFactories()
     {
@@ -653,9 +690,15 @@ public class ByteSizeUnitSystemTests
             Assert.EndsWith(" kB 1 B", ByteSize.FromBytes(2001).HumanizeCompositeWithUnitSystem(
                 ByteSizeUnitSystem.DecimalSi,
                 formatProvider: culture));
+            Assert.EndsWith(" KiB 1 B", ByteSize.FromBytes(2049).HumanizeCompositeWithUnitSystem(
+                ByteSizeUnitSystem.BinaryIec,
+                formatProvider: culture));
             Assert.Contains("kB/", ByteSize.FromDecimalKilobytes(2)
                 .Per(TimeSpan.FromSeconds(1))
                 .HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, culture: culture));
+            Assert.Contains("KiB/", ByteSize.FromKibibytes(2)
+                .Per(TimeSpan.FromSeconds(1))
+                .HumanizeWithUnitSystem(ByteSizeUnitSystem.BinaryIec, culture: culture));
 
             verifyUnits(decimalUnits, ByteSizeUnitSystem.DecimalSi);
             verifyUnits(binaryUnits, ByteSizeUnitSystem.BinaryIec);
