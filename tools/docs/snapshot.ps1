@@ -359,7 +359,7 @@ function Add-ApiLanding {
     )
 
     $provenance = if ($Entry.version -eq "current") {
-        "Generated from the ``main/preview`` ``$($Entry.apiPackage)`` checkout using the ``$($Entry.referenceTfm)`` reference assembly."
+        "Generated from the Humanizer 4 ``$($Entry.referenceTfm)`` reference assembly."
     } else {
         "Generated from ``$($Entry.apiPackage)`` ``$($Entry.source.packageVersion)`` using the ``$($Entry.referenceTfm)`` reference assembly."
     }

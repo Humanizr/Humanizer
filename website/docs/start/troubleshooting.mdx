@@ -34,7 +34,7 @@ Run `dotnet list package --include-transitive`, inspect the target in `project.a
 | --- | --- | --- |
 | API page or method is missing | Package version, selected docs version, TFM | Switch the site version; check the page’s version notes and selected-version API root. |
 | `MissingMethodException` or `TypeLoadException` | All direct/transitive Humanizer versions | Align `Humanizer`, `Humanizer.Core`, and historical locale packages; clean `bin`/`obj`, restore, and rebuild. |
-| Output is English or the wrong regional form | `CurrentCulture`, `CurrentUICulture`, explicit argument, package version | Pass culture directly where possible; otherwise set both ambient cultures at the request/job boundary and check locale capability. |
+| Output is English or the wrong regional form | `CurrentCulture`, `CurrentUICulture`, explicit argument, package version | Pass culture directly where possible; otherwise set both ambient cultures at the request/job boundary. If the culture is listed as supported, the wrong language is a bug. |
 | Output differs on Windows, Linux, or macOS | OS, TFM, culture, ICU/NLS mode | Compare .NET globalization data and Humanizer’s generated platform-formatting coverage; avoid asserting platform-owned text without an explicit override. |
 | A selected-version parser rejects input | Exact text and culture/provider | Confirm the parser exists in the selected API, use its `Try` form when available, and inspect the first unrecognized token or unit. |
 | Enum input throws `NoMatchFoundException` | Enum members/metadata and input | Use an unambiguous label; pass `OnNoMatch.ReturnsNull` when failure is expected. Matching is case-insensitive. |
@@ -45,7 +45,9 @@ Run `dotnet list package --include-transitive`, inspect the target in `project.a
 
 ### Reduce culture issues
 
-Set culture explicitly in a one-file reproduction. If the wrong result persists, compare the selected release’s capability page and note whether the culture resolves directly or through a parent. Include platform and TFM when reporting a locale issue.
+Set culture explicitly in a one-file reproduction. If the wrong result
+persists, confirm that the culture is listed for the selected release and
+report the bug. Include platform and TFM.
 
 ### Reduce package and analyzer issues
 
@@ -59,8 +61,7 @@ Do not “fix” a localized output difference by persisting the current humaniz
 
 Package layout, target frameworks, analyzer assets, locale implementation, and
 API routes all vary across the supported corpus. This page follows the selected
-documentation version; `main/preview` describes an unreleased checkout rather
-than a stable package.
+documentation version.
 
 ## Related guides and API
 

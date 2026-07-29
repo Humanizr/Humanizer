@@ -57,7 +57,7 @@ Parent fallback is resolution, not parity proof. If `fr-CA` reaches `fr`, that
 only identifies where the data came from. It does not establish that French
 Canadian wording matches every neutral-French choice.
 
-On `main/preview`, use `Configurator.IsCultureSupported(culture)` before
+On `Humanizer 4`, use `Configurator.IsCultureSupported(culture)` before
 choosing an application fallback. It checks generated Humanizer locale data
 through the named parent chain and does not return `true` merely because the
 default English localizers could produce output:
@@ -77,14 +77,14 @@ If inherited or direct output is wrong, follow the
 
 Explicit and ambient `CultureInfo` selection applies across the supported
 documentation corpus. The locale set and package layout are versioned:
-`main/preview` has generated locale data in the consolidated `Humanizer`
+`Humanizer 4` has generated locale data in the consolidated `Humanizer`
 package, while published versions through `3.0.10` use the metapackage and
 locale-package graph documented in their snapshot.
-`Configurator.IsCultureSupported` is a `main/preview` API.
+`Configurator.IsCultureSupported` is a `Humanizer 4` API.
 
 ## Related guides and API
 
-- [Supported cultures and capabilities](./supported-cultures.mdx)
+- [Supported cultures](./supported-cultures.mdx)
 - [Culture and global configuration](../concepts/culture-and-configuration.mdx)
 - [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
 - [Package selection](../start/package-selection.md)

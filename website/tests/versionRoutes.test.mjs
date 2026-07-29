@@ -9,7 +9,7 @@ import {
 const versions = [
   {label: '3.0.10 (latest)', name: '3.0.10', path: '/docs'},
   {label: '2.10.1', name: '2.10.1', path: '/docs/2.10.1'},
-  {label: 'main/preview', name: 'current', path: '/docs/next'},
+  {label: '4.0 (next)', name: 'current', path: '/docs/next'},
 ];
 
 test('version context prefers the explicit preview route', () => {
@@ -18,7 +18,7 @@ test('version context prefers the explicit preview route', () => {
     {
       apiRoot: '/docs/next/api/',
       docsRoot: '/docs/next/',
-      label: 'main/preview',
+      label: '4.0 (next)',
       path: '/docs/next',
       relativePath: 'api/Missing/',
     },
@@ -60,7 +60,7 @@ test('unsupported versions are limited to releases before 2.10.1', () => {
 test('unsupported-version policy fails closed without published semver data', () => {
   assert.equal(
     getUnsupportedVersionContext('/docs/1.0/api/Missing/', [
-      {label: 'main/preview', name: 'current', path: '/docs/next'},
+      {label: '4.0 (next)', name: 'current', path: '/docs/next'},
     ]),
     undefined,
   );
@@ -70,7 +70,7 @@ test('version switch preserves a path only when Docusaurus fell back to a root',
   const items = [
     {label: '3.0.10', to: '/docs/api/Humanizer.ByteSize/'},
     {
-      label: 'main/preview',
+      label: '4.0 (next)',
       onClick: 'save preferred version',
       to: '/docs/next?query=bytes#members',
     },
@@ -86,7 +86,7 @@ test('version switch preserves a path only when Docusaurus fell back to a root',
       {label: '3.0.10', to: '/docs/api/Humanizer.ByteSize/'},
       {
         'data-noBrokenLinkCheck': true,
-        label: 'main/preview',
+        label: '4.0 (next)',
         onClick: 'save preferred version',
         to: '/docs/next/api/Humanizer.ByteSize/?query=bytes#members',
       },
@@ -97,10 +97,10 @@ test('version switch preserves a path only when Docusaurus fell back to a root',
 test('version switch leaves a version root unchanged from a version root', () => {
   assert.deepEqual(
     preserveUnavailableVersionPath(
-      [{label: 'main/preview', to: '/docs/next/'}],
+      [{label: '4.0 (next)', to: '/docs/next/'}],
       '/docs/',
       versions,
     ),
-    [{label: 'main/preview', to: '/docs/next/'}],
+    [{label: '4.0 (next)', to: '/docs/next/'}],
   );
 });

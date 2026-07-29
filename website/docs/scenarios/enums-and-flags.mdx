@@ -13,7 +13,7 @@ import enumsFlags from '!!raw-loader!../_examples/scenarios-enums-flags/Program.
 
 ## Orientation
 
-Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. On `main/preview`, dehumanization also recognizes the raw name, its humanized form, and authored display aliases. Flags enums are decomposed and joined through the active collection formatter.
+Enum humanization resolves one display label for each member: supported description/display metadata when present, otherwise the humanized member name. On `Humanizer 4`, dehumanization also recognizes the raw name, its humanized form, and authored display aliases. Flags enums are decomposed and joined through the active collection formatter.
 
 ## Example
 
@@ -28,7 +28,7 @@ and an unknown flag bit:
 
 Humanizer prefers supported description/display metadata before deriving words
 from the member name. That chosen value is also the member's dehumanization
-label. On `main/preview`, `LetterCasing` changes only labels derived from the
+label. On `Humanizer 4`, `LetterCasing` changes only labels derived from the
 member name; authored metadata preserves its exact casing.
 `Configurator.UseEnumDescriptionPropertyLocator` can select a custom
 description-like property globally and must run before enum metadata is
@@ -36,7 +36,7 @@ cached.
 
 ### Select the humanization source
 
-On `main/preview`, pass both `LetterCasing` and `EnumHumanizeSource` when the
+On `Humanizer 4`, pass both `LetterCasing` and `EnumHumanizeSource` when the
 default metadata precedence is not the desired presentation:
 
 - `Default` preserves the existing precedence. A `DisplayAttribute` uses its
@@ -65,7 +65,7 @@ change dehumanization aliases or their collision rules.
 
 ### Parse accepted aliases
 
-On `main/preview`, `DehumanizeTo<TEnum>` recognizes the raw member name, its
+On `Humanizer 4`, `DehumanizeTo<TEnum>` recognizes the raw member name, its
 humanized form, and `DisplayAttribute` name, description, and short-name
 values. It also recognizes a configured description attribute value when that
 value becomes the member's authored description. Matching is
@@ -82,7 +82,7 @@ Known nonzero flags are humanized and joined using the current UI culture. A def
 ## Pitfall
 
 Aliases should be unambiguous even though matching is case-insensitive. On
-`main/preview`, a current humanized representation takes precedence over a
+`Humanizer 4`, a current humanized representation takes precedence over a
 supplemental alias when labels collide; collisions among supplemental aliases
 retain the later enum value in unsigned numeric order. Prefer the generic enum
 overloads. Runtime enum humanization and the runtime `Type` dehumanization
@@ -97,9 +97,9 @@ constraints and metadata configuration. The flags example runs against the
 selected package. Consult the selected API before migrating code that stores
 values as the base `Enum` type. Metadata casing preservation when a
 `LetterCasing` argument is supplied, and dehumanization through raw,
-humanized, and supplemental metadata aliases, are `main/preview` behavior.
+humanized, and supplemental metadata aliases, are `Humanizer 4` behavior.
 `EnumHumanizeSource` and its two casing-plus-source overloads are also
-`main/preview` APIs.
+`Humanizer 4` APIs.
 
 ## Related guides and API
 

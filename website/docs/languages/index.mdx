@@ -12,12 +12,13 @@ example: illustrative
 ## Orientation
 
 Humanizer localizes behavior by culture, not by translating one final string.
-Choose a culture for the operation, then use the capability page to confirm
-which locale data is present in the selected documentation version.
+Choose a culture for the operation, then confirm that it is listed for the
+selected documentation version. Every listed culture supports every applicable
+localized feature.
 
 The package and the culture are separate choices. Published releases through
 `3.0.10` use the `Humanizer` metapackage to bring in `Humanizer.Core` and its
-locale packages. The current `main/preview` package is consolidated: one
+locale packages. Humanizer 4 is consolidated: one
 `Humanizer` reference contains the runtime, generated locale data, and
 analyzers. Installing a culture-specific package does not select that culture,
 and selecting a culture does not install a missing historical package.
@@ -35,7 +36,7 @@ Console.WriteLine(42.ToWords(french));
 ```
 
 Use [culture selection](./using-cultures.mdx) for per-call and ambient-culture
-patterns. Use [supported cultures and capabilities](./supported-cultures.mdx)
+patterns. Use [supported cultures](./supported-cultures.mdx)
 for the selected-version inventory.
 Use the [scenario finder](../scenarios/index.mdx) to reach the focused guide for
 number words, dates, clock notation, collections, or another localized task.
@@ -46,17 +47,16 @@ or [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/
 
 ## Pitfall
 
-Do not infer capability coverage from a package name, a neutral-culture
-fallback, or one successful call. A regional culture can resolve locale data
-from a parent such as `fr`, but that resolution does not prove that every
-phrase is natural for every region. Report incorrect inherited behavior just
-as you would incorrect directly authored behavior.
+Do not infer support from a package name or English fallback. A regional
+culture can reuse a same-language parent such as `fr`; that is an
+implementation detail, not partial support. Report incorrect inherited
+behavior just as you would incorrect directly authored behavior.
 
 ## Version notes
 
 The generated coverage page is scoped to the selected documentation version.
 Stable snapshots use their own package and documentation evidence. Package
-consolidation is a current-preview behavior, while published versions through
+consolidation is Humanizer 4 behavior, while published versions through
 `3.0.10` retain the metapackage and locale-package model.
 
 ## Related guides and API

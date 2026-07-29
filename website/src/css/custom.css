@@ -299,6 +299,20 @@ body:has(.navbar-sidebar--show) .humanizerAllVersionsShell {
   z-index: 3;
 }
 
+.supportedCultureList {
+  display: grid;
+  gap: 0.5rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.supportedCultureList li {
+  border-bottom: 1px solid var(--humanizer-rule);
+  padding-block: 0.4rem;
+}
+
 .theme-doc-markdown :is(code, a) {
   overflow-wrap: anywhere;
 }

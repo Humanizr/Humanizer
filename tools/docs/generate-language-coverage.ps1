@@ -329,7 +329,7 @@ function Get-CurrentEvidence {
     return [ordered]@{
         coverageKind = "yaml-capabilities"
         versionKey = "current"
-        generatedFor = "main/preview"
+        generatedFor = "4.0"
         source = "src/Humanizer/Locales/*.yml"
         localesPath = [System.IO.Path]::GetFullPath($LocalesPath)
         package = [ordered]@{

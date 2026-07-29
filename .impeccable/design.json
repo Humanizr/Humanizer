@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 2,
+  "title": "Design System: Humanizer Documentation",
+  "updatedAt": "2026-07-29T20:30:55Z",
+  "northStar": "The Working Proof Sheet: an editorial, code-forward documentation world where real C# input and output prove Humanizer.",
+  "breakpoints": {
+    "smallPhone": "360px",
+    "phone": "480px",
+    "taskGrid": "48rem",
+    "desktopMax": "996px",
+    "desktopMin": "997px"
+  },
+  "colors": {
+    "paper": "#f7f3e9",
+    "paperRaised": "#fffdf7",
+    "ink": "#172026",
+    "inkMuted": "#566269",
+    "rule": "#c9c4b8",
+    "accentTeal": "#056b84",
+    "accentRust": "#ad3e2a",
+    "proofText": "#edf3f2",
+    "proofOutput": "#91d9e8",
+    "promiseTeal": "#045b6e"
+  },
+  "typography": {
+    "docsDisplay": "Iowan Old Style, Baskerville, Times New Roman, serif",
+    "homeDisplay": "Avenir Next, Segoe UI, Helvetica Neue, sans-serif",
+    "body": "Avenir Next, Segoe UI, Helvetica Neue, sans-serif",
+    "readingMeasure": "72ch"
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "className": "ds-button-primary",
+      "css": "background: var(--ifm-font-color-base); color: var(--ifm-background-color); min-height: 2.75rem; border-radius: 0;"
+    },
+    {
+      "name": "Text Link",
+      "className": "ds-text-link",
+      "css": "color: var(--ifm-link-color); text-decoration: underline; text-underline-offset: 0.2em;"
+    },
+    {
+      "name": "Proof Sheet",
+      "className": "ds-proof-sheet",
+      "css": "background: #172026; color: #edf3f2; border-radius: 0; padding: clamp(1rem, 3vw, 2rem);"
+    },
+    {
+      "name": "Task Route",
+      "className": "ds-task-route",
+      "css": "border-top: 1px solid var(--ifm-color-emphasis-300); padding-block: 1.5rem;"
+    },
+    {
+      "name": "Language Promise",
+      "className": "ds-language-promise",
+      "css": "background: #045b6e; color: #fff; border-radius: 0; padding: clamp(2rem, 5vw, 4rem);"
+    },
+    {
+      "name": "Navigation",
+      "className": "ds-navigation",
+      "css": "border-bottom: 1px solid var(--ifm-color-emphasis-300); box-shadow: none;"
+    },
+    {
+      "name": "Supported Culture List",
+      "className": "ds-supported-culture-list",
+      "css": "display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: 0.75rem 1rem;"
+    }
+  ],
+  "effects": {
+    "shadow": "0 1px 0 var(--ifm-color-emphasis-300)",
+    "motion": "scroll-behavior: smooth"
+  },
+  "rules": [
+    "Teal signals navigation or capability; rust labels structure or focus.",
+    "Use ruled separation or a tone change instead of elevation.",
+    "Keep every claim version-correct and behaviorally verified.",
+    "Every listed culture supports every applicable localized feature."
+  ],
+  "dos": [
+    "Use deterministic runnable C#.",
+    "Reuse canonical assets.",
+    "Keep NuGet installation and proof in the first viewport.",
+    "Preserve visible focus and reduced-motion behavior."
+  ],
+  "donts": [
+    "Do not add cards, pills, gradients, decorative shadows, or invented imagery.",
+    "Do not invent metrics, customers, testimonials, or benchmarks.",
+    "Do not present partial-culture capability tiers."
+  ]
+}

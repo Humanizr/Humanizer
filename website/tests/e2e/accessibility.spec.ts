@@ -44,23 +44,16 @@ for (const colorScheme of ['light', 'dark'] as const) {
     {name: 'desktop', width: 1280, height: 800},
     {name: '320px', width: 320, height: 720},
   ]) {
-    test(`supported cultures table is accessible at ${viewport.name} in ${colorScheme} mode`, async ({
+    test(`supported cultures list is accessible at ${viewport.name} in ${colorScheme} mode`, async ({
       page,
     }) => {
       await page.setViewportSize(viewport);
       await page.emulateMedia({colorScheme});
       await page.goto('/docs/next/languages/supported-cultures/');
 
-      const region = page.getByRole('region', {
-        name: 'Current locale capability coverage',
-      });
-      await expect(region).toBeVisible();
-      await expect(region).toHaveAttribute('tabindex', '0');
-      await expect(
-        region.getByText('Current locale capability coverage', {exact: true}),
-      ).toBeVisible();
-      await region.focus();
-      await expect(region).toBeFocused();
+      const cultures = page.getByRole('list', {name: 'Supported cultures'});
+      await expect(cultures).toBeVisible();
+      await expect(cultures.getByText('en', {exact: true})).toBeVisible();
 
       await expectNoSeriousAccessibilityViolations(page);
     });
