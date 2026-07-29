@@ -18,20 +18,20 @@ For ordinary applications, install `Humanizer`. That name is stable even though 
 | Documentation version | Normal install | Package shape |
 | --- | --- | --- |
 | `2.10.1` through `3.0.10` | `Humanizer` | Metapackage that brings in `Humanizer.Core` and locale packages |
-| `main/preview` | Build from the checkout | Consolidated `Humanizer` library with generated locale data |
+| `4.0` | `Humanizer` | Consolidated library with runtime, generated locale data, and analyzers |
 
 The API reference for releases through `3.0.10` is generated from `Humanizer.Core`, because that is where the public implementation assembly lives. That does not change the normal install command.
 
 ## Example
 
-Install the selected stable version:
+Install Humanizer from NuGet:
 
 ```console
-dotnet add package Humanizer --version 3.0.10
+dotnet add package Humanizer --version 4.0.0
 ```
 
 Then use the same `Humanizer` namespace regardless of package layout. This
-verified program is compiled against the selected package and current checkout:
+verified program is compiled against the selected package:
 
 <CodeBlock language="csharp" title="Program.cs">{quickStart}</CodeBlock>
 
@@ -39,7 +39,9 @@ Choose `Humanizer.Core` directly only when you deliberately want the older relea
 
 ## Pitfall
 
-Do not copy `Humanizer.Core.<locale>` references from a historical release into the current preview. Locale packaging is version-specific, and package names are not proof that an API or language surface is present in another release.
+Do not copy `Humanizer.Core.<locale>` references from a historical release into
+Humanizer 4. Locale packaging is version-specific, and package names are not
+proof that an API is present in another release.
 
 ## Version notes
 

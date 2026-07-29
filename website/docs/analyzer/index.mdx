@@ -87,7 +87,7 @@ component selection.
 | Duplicate analyzer/load behavior on `3.0.8` | Upgrade to `3.0.10` for the fallback-selection fix. |
 | IDE and CI disagree | Compare SDK/MSBuild versions and the resolved package lock file, then restart the IDE after a clean restore. |
 
-The current preview also offers a separate words-to-number code fix on compiler
+Humanizer 4 also offers a separate words-to-number code fix on compiler
 diagnostics `CS0029` and `CS0266`. It wraps recognized Humanizer calls in a
 checked `int` conversion. That feature is not part of `HUMANIZER001` and is not
 present in `3.0.1`, `3.0.8`, or `3.0.10`.
@@ -116,7 +116,7 @@ diagnostic is clean.
 ## Version notes
 
 `HUMANIZER001` first appears in supported stable version `3.0.1` and retains
-default severity `error` through `3.0.10` and current preview. Analyzer loading
+default severity `error` through `3.0.10` and Humanizer 4. Analyzer loading
 is materially more robust at the `3.0.8` and `3.0.10` boundaries.
 
 ## Related guides and API

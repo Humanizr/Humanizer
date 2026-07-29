@@ -17,7 +17,7 @@ Humanizer chooses language and grammar from one of three places:
 
 1. A `CultureInfo` passed to the operation.
 2. `CultureInfo.CurrentCulture` or `CurrentUICulture`, depending on the API.
-3. A configured registry fallback when the requested culture has no matching component.
+3. A configured registry fallback for a culture that is not listed as supported.
 
 Per-call culture is the narrowest and safest choice. Ambient culture is useful when a request pipeline already establishes it. Global `Configurator` changes are process-wide policy.
 

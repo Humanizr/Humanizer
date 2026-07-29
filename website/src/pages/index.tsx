@@ -1,226 +1,198 @@
+/*
+ * THESIS: Humanizer is a small, direct transformation from program values to
+ * readable language.
+ * OWN-WORLD: A working proof sheet pairs real C# input with human output.
+ * STORY: Understand the library, install it, choose the value you have, then
+ * follow the version-correct guide.
+ * FIRST VIEWPORT: Canonical identity, promise, install command, first call, and
+ * output are all visible without scrolling on a typical laptop.
+ * FORM: One typographic sheet with ruled transformation rows; no card grid,
+ * decorative metrics, or invented product imagery.
+ */
 import Link from '@docusaurus/Link';
+import {
+  useLatestVersion,
+  useVersions,
+} from '@docusaurus/plugin-content-docs/client';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
+import {useEffect, useState} from 'react';
 import styles from './index.module.css';
 
-const scenarioGroups = [
+const transformations = [
   {
-    number: '01',
-    title: 'Strings & casing',
-    description:
-      'Humanize identifiers, transform casing, and reverse display text.',
-    sample: '"PascalCaseInput".Humanize()',
+    input: '"PascalCaseInput".Humanize()',
+    output: '"Pascal case input"',
   },
   {
-    number: '02',
+    input: '"person".Pluralize()',
+    output: '"people"',
+  },
+  {
+    input: '42.ToWords(CultureInfo.GetCultureInfo("en"))',
+    output: '"forty-two"',
+  },
+  {
+    input: '"person".ToQuantity(2)',
+    output: '"2 people"',
+  },
+];
+
+const taskRoutes = [
+  {
+    title: 'Strings',
+    prompt: 'Identifiers, casing, pluralization',
+    sample: '.Humanize()  .Pluralize()  .Singularize()',
+    to: 'scenarios/strings-and-casing/',
+  },
+  {
     title: 'Dates & time',
-    description: 'Describe moments, durations, ages, and calendar values naturally.',
-    sample: 'date.Humanize()',
+    prompt: 'Relative time, durations, ages, clocks',
+    sample: '.Humanize()  .ToAge()  .ToClockNotation()',
+    to: 'scenarios/dates-times-durations-and-age/',
   },
   {
-    number: '03',
-    title: 'Numbers & quantities',
-    description: 'Write numbers, ordinals, byte sizes, and quantities for people.',
-    sample: '42.ToWords()',
+    title: 'Numbers',
+    prompt: 'Words, ordinals, quantities, byte sizes',
+    sample: '.ToWords()  .Ordinalize()  .Bytes()',
+    to: 'scenarios/numbers-words-ordinals-roman-bytes-and-quantities/',
   },
   {
-    number: '04',
-    title: 'Enums & collections',
-    description: 'Turn application values and lists into readable interface copy.',
-    sample: 'items.Humanize()',
+    title: 'Application values',
+    prompt: 'Enums, flags, collections',
+    sample: '.Humanize()  .DehumanizeTo<T>()',
+    to: 'scenarios/enums-and-collections/',
   },
 ];
 
 export default function Home(): React.JSX.Element {
+  const versions = useVersions(undefined);
+  const latestVersion = useLatestVersion(undefined);
+  const [docsVersion, setDocsVersion] = useState(latestVersion);
+
+  useEffect(() => {
+    const preferredVersionName = localStorage.getItem(
+      'docs-preferred-version-default',
+    );
+    setDocsVersion(
+      versions.find(({name}) => name === preferredVersionName) ?? latestVersion,
+    );
+  }, [latestVersion, versions]);
+
+  const docsPath = (path: string) => `${docsVersion.path}/${path}`;
   const logoUrl = useBaseUrl('/img/logo.png');
 
   return (
     <Layout
       title="Human-friendly text for .NET"
-      description="Humanizer documentation for turning dates, times, numbers, quantities, and strings into human-friendly text.">
+      description="Turn .NET strings, dates, times, numbers, quantities, enums, and collections into text people can read.">
       <main className={styles.home}>
-        <section className={styles.homeHero} aria-labelledby="home-title">
-          <div className={styles.homeHero__copy}>
-            <img
-              alt="Humanizer logo"
-              className={styles.homeHero__logo}
-              height="115"
-              src={logoUrl}
-              width="115"
-            />
-            <p className={styles.homeEyebrow}>Humanizer for .NET</p>
-            <h1 id="home-title">
-              Make software
-              <span>sound like people.</span>
-            </h1>
-            <p className={styles.homeHero__lede}>
-              A mature .NET library for turning dates, times, numbers,
-              quantities, strings, enums, and collections into language people
-              understand.
+        <section className={styles.hero} aria-labelledby="home-title">
+          <div className={styles.heroCopy}>
+            <div className={styles.identity}>
+              <img
+                alt="Humanizer logo"
+                className={styles.logo}
+                height="115"
+                src={logoUrl}
+                width="115"
+              />
+              <span>Humanizer for .NET</span>
+            </div>
+            <h1 id="home-title">Turn .NET values into words people understand.</h1>
+            <p className={styles.lede}>
+              Humanizer adds focused extension methods for readable strings,
+              dates, times, numbers, quantities, enums, and collections—across
+              every supported culture.
             </p>
-            <div className={styles.homeHero__actions}>
-              <Link className="button button--primary" to="/docs/">
-                Start with Humanizer
+            <div className={styles.heroActions}>
+              <Link className="button button--primary" to={docsPath('start/quick-start/')}>
+                Run the five-minute example
               </Link>
-              <Link className="humanizerTextLink" to="/docs/api/">
-                Browse the API <span aria-hidden="true">↗</span>
+              <Link className={styles.textLink} to={docsPath('scenarios/')}>
+                Find an API by task <span aria-hidden="true">→</span>
               </Link>
             </div>
-          </div>
-          <div
-            className={styles.homeSpecimen}
-            aria-label="Illustrative Humanizer code example">
-            <div className={styles.homeSpecimen__label}>
-              <span>Illustrative C#</span>
-              <span>input → output</span>
+            <div className={styles.install}>
+              <span>Install from NuGet</span>
+              <code>dotnet add package Humanizer</code>
             </div>
-            <pre>
-              <code>
-                <span className={styles.homeCode__comment}>
-                  // less machine, more human
-                </span>
-                {'\n'}
-                <span className={styles.homeCode__string}>
-                  &quot;PascalCaseInput&quot;
-                </span>
-                .Humanize()
-                {'\n'}
-                <span className={styles.homeCode__result}>
-                  → &quot;Pascal case input&quot;
-                </span>
-              </code>
-            </pre>
           </div>
+
+          <table className={styles.proof}>
+            <caption className={styles.proofCaption}>
+              Humanizer input and output examples
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">C# input</th>
+                <th aria-label="becomes" scope="col" />
+                <th scope="col">Readable output</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transformations.map(({input, output}) => (
+                <tr className={styles.proofRow} key={input}>
+                  <td><code>{input}</code></td>
+                  <td aria-hidden="true">→</td>
+                  <td><samp>{output}</samp></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
 
-        <nav className={styles.homeIndex} aria-label="Documentation sections">
-          <a href="#install">Install</a>
-          <a href="#quick-start">Quick start</a>
-          <a href="#scenarios">Scenarios</a>
-          <a href="#upgrading">Upgrading</a>
-          <Link to="/docs/api/">API</Link>
-          <a href="#languages">Languages</a>
-        </nav>
-
-        <section className={styles.homeStart} aria-labelledby="quick-start">
-          <div className={styles.homeSectionIntro}>
-            <p className="humanizerKicker">Start</p>
-            <h2 id="quick-start">From package to useful text in minutes.</h2>
-            <p>
-              Install the package, import the namespace, and call the extension
-              that matches the value you want to present.
-            </p>
+        <section className={styles.tasks} aria-labelledby="tasks-title">
+          <div className={styles.sectionLead}>
+            <p>Start with the value you have</p>
+            <h2 id="tasks-title">Use the method that says what it does.</h2>
           </div>
-          <div className={styles.homeStart__steps}>
-            <article id="install">
-              <span className={styles.homeStepNumber}>01</span>
-              <div>
-                <h3>Install</h3>
-                <p>Add the latest stable Humanizer package to your project.</p>
-                <pre>
-                  <code>dotnet add package Humanizer</code>
-                </pre>
-              </div>
-            </article>
-            <article>
-              <span className={styles.homeStepNumber}>02</span>
-              <div>
-                <h3>Humanize</h3>
-                <p>
-                  Use focused extension methods on the values you already have.
-                </p>
-                <span className={styles.homeExampleLabel}>
-                  Illustrative example
-                </span>
-                <pre>
-                  <code>
-                    <span className={styles.homeCode__keyword}>using</span>{' '}
-                    Humanizer;
-                    {'\n\n'}
-                    <span className={styles.homeCode__string}>
-                      &quot;Underscored_input_string_is_turned_into_sentence&quot;
-                    </span>
-                    {'\n    '}.Humanize();
-                  </code>
-                </pre>
-              </div>
-            </article>
-            <article>
-              <span className={styles.homeStepNumber}>03</span>
-              <div>
-                <h3>Go deeper</h3>
-                <p>
-                  Follow the version-correct guide, then move directly into
-                  precise reference when you need it.
-                </p>
-                <Link className="humanizerTextLink" to="/docs/">
-                  Read the overview <span aria-hidden="true">→</span>
-                </Link>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section
-          className={styles.homeScenarios}
-          id="scenarios"
-          aria-labelledby="scenarios-title">
-          <div className={styles.homeSectionIntro}>
-            <p className="humanizerKicker">Scenarios</p>
-            <h2 id="scenarios-title">Start with the job in front of you.</h2>
-          </div>
-          <div className={styles.homeScenarioList}>
-            {scenarioGroups.map((scenario) => (
-              <article key={scenario.number}>
-                <span className={styles.homeScenarioList__number}>
-                  {scenario.number}
-                </span>
+          <div className={styles.taskList}>
+            {taskRoutes.map(({title, prompt, sample, to}) => (
+              <Link className={styles.task} key={title} to={docsPath(to)}>
                 <div>
-                  <h3>{scenario.title}</h3>
-                  <p>{scenario.description}</p>
+                  <h3>{title}</h3>
+                  <p>{prompt}</p>
                 </div>
-                <code>{scenario.sample}</code>
-              </article>
+                <code>{sample}</code>
+                <span aria-hidden="true">↗</span>
+              </Link>
             ))}
           </div>
         </section>
 
-        <section
-          className={styles.homeRoutes}
-          aria-label="More documentation paths">
-          <article id="upgrading">
-            <p className="humanizerKicker">Upgrading</p>
-            <h2>Move between releases with the boundaries in view.</h2>
+        <section className={styles.languagePromise} aria-labelledby="languages-title">
+          <p>Language support</p>
+          <div>
+            <h2 id="languages-title">Supported means supported.</h2>
             <p>
-              Use version-specific guidance for package, namespace, analyzer,
-              and behavior changes instead of reconstructing history.
+              Humanizer 4 makes one promise: every listed culture supports
+              every applicable localized feature. Missing behavior or English
+              fallback is a bug, not a capability tier.
             </p>
-            <Link className="humanizerTextLink" to="/docs/upgrading/">
-              Open upgrading guidance <span aria-hidden="true">→</span>
+          </div>
+          <Link className={styles.textLink} to={docsPath('languages/supported-cultures/')}>
+            See supported cultures <span aria-hidden="true">→</span>
+          </Link>
+        </section>
+
+        <section className={styles.reference} aria-labelledby="reference-title">
+          <div>
+            <p>Version-correct by design</p>
+            <h2 id="reference-title">Guides and signatures stay together.</h2>
+          </div>
+          <p>
+            Choose your Humanizer version once. The guides, runnable examples,
+            search results, and generated API reference follow that package.
+          </p>
+          <div className={styles.referenceLinks}>
+            <Link className="button button--primary" to={docsPath('')}>
+              Open the guides
             </Link>
-          </article>
-          <article>
-            <p className="humanizerKicker">Reference</p>
-            <h2>Exact signatures, in the version you selected.</h2>
-            <p>
-              Generated API pages live beside the guides, share their version,
-              and remain searchable as one documentation set.
-            </p>
-            <Link className="humanizerTextLink" to="/docs/api/">
-              Browse the API <span aria-hidden="true">→</span>
+            <Link className={styles.textLink} to={docsPath('api/')}>
+              Browse exact signatures <span aria-hidden="true">→</span>
             </Link>
-          </article>
-          <article id="languages">
-            <p className="humanizerKicker">Languages</p>
-            <h2>Culture-aware output, with a direct correction path.</h2>
-            <p>
-              Understand culture selection and locale behavior, then find the
-              focused contribution guidance when language output needs work.
-            </p>
-            <Link className="humanizerTextLink" to="/docs/languages/">
-              Explore language support <span aria-hidden="true">→</span>
-            </Link>
-          </article>
+          </div>
         </section>
       </main>
     </Layout>

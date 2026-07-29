@@ -39,7 +39,7 @@ Registries cover collection formatters, general formatters, number-word converte
 
 ### Set a global time-span policy
 
-On `main/preview`, assign `Configurator.TimeSpanHumanizeStrategy` once during
+On `Humanizer 4`, assign `Configurator.TimeSpanHumanizeStrategy` once during
 application startup to route every `TimeSpan.Humanize` and
 `HumanizeToSymbols` call through an application-wide policy. Fractional-second
 calls use `IFractionalTimeSpanHumanizeStrategy` when the configured strategy
@@ -83,8 +83,8 @@ Parent-culture fallback identifies where behavior was resolved. It does not prov
 The local transformer runs across the supported corpus. Registry immutability
 and enum metadata configuration change in Humanizer 3.
 `TimeSpanHumanizeStrategy`, `ITimeSpanHumanizeStrategy`, and
-`DefaultTimeSpanHumanizeStrategy` are `main/preview` APIs. Individual
-registries and locale capabilities are selected-version behavior; historical
+`DefaultTimeSpanHumanizeStrategy` are Humanizer 4 APIs. Individual registries
+and supported-culture inventories are selected-version behavior; historical
 snapshots must not present current YAML/generator internals as old package
 behavior.
 

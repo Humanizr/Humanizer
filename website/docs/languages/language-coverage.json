@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "coverageKind": "yaml-capabilities",
   "version": "current",
-  "generatedFor": "main/preview",
+  "generatedFor": "4.0",
   "source": "src/Humanizer/Locales/*.yml",
   "package": {
     "id": "Humanizer",

@@ -34,13 +34,13 @@ selector keeps guides, examples, and API pages in the same release.
 ## Use and improve languages
 
 - [Languages and cultures](./languages/index.mdx) — choose a culture and understand the package boundary.
-- [Supported cultures and capabilities](./languages/supported-cultures.mdx) — inspect generated `main/preview` coverage.
+- [Supported cultures](./languages/supported-cultures.mdx) — find the culture codes supported by this version.
 - [Report or correct a language issue](./contributing/report-language-issue.mdx) — provide the linguistic and platform context needed for a reliable fix.
 - [Contribute to Humanizer](./contributing/index.mdx) — follow the locale, validation, and documentation workflows.
 
 ## Maintain a project
 
 - [Plan an upgrade](./upgrading/index.mdx) — follow every compatibility boundary between two supported versions.
-- [Evaluate main/preview](./upgrading/main-preview.mdx) — review verified differences after `3.0.10` without guessing a release number.
+- [Upgrade to Humanizer 4](./upgrading/main-preview.mdx) — review verified differences from `3.0.10`.
 - [Migrate namespaces with the analyzer](./analyzer/index.mdx) — configure and run the bundled analyzer locally and in CI.
 - [Publish trimmed or Native AOT](./concepts/trimming-and-native-aot.mdx) — choose linker-safe enum APIs and run the publish proof.

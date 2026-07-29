@@ -22,7 +22,7 @@ humanization strategies are separate process-wide properties.
 
 ## Example
 
-In `main/preview`, register before any code resolves the formatter registry:
+In `Humanizer 4`, register before any code resolves the formatter registry:
 
 ```csharp
 using System.Globalization;
@@ -46,7 +46,7 @@ sealed class ProductFormatter(CultureInfo culture)
 The result is `just now`. Register the narrowest component that owns the
 behavior; do not replace a formatter merely to change number words.
 
-On `main/preview`, a custom formatter used by `HumanizeWithCase` must also
+In Humanizer 4, a custom formatter used by `HumanizeWithCase` must also
 implement `IGrammaticalCaseTimeSpanFormatter`. A custom global time-span
 strategy must implement `IGrammaticalCaseTimeSpanHumanizeStrategy`. Existing
 `IFormatter` and `ITimeSpanHumanizeStrategy` implementations continue to work
@@ -55,7 +55,7 @@ for the existing duration APIs, but case-aware calls fail with
 
 ## Pitfall
 
-In Humanizer `3.x` and `main/preview`, a `LocaliserRegistry` freezes on first
+In Humanizer `3.x` and `Humanizer 4`, a `LocaliserRegistry` freezes on first
 resolution. A later `Register` call throws. Configure registries once during
 startup, before hosted services, request handlers, or static initializers can
 call Humanizer.
@@ -70,10 +70,10 @@ If the built-in locale is wrong rather than product-specific, follow the
 
 ## Version notes
 
-Humanizer `2.x` registries remain mutable; `3.x` and `main/preview` freeze them
+Humanizer `2.x` registries remain mutable; `3.x` and `Humanizer 4` freeze them
 after first use. Constructor shapes and available registries are
 version-specific public API. Compile against the selected package and follow
-that snapshot's API reference rather than copying a `main/preview` extension
+that snapshot's API reference rather than copying a `Humanizer 4` extension
 into a historical application.
 
 ## Related guides and API

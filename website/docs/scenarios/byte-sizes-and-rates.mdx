@@ -26,7 +26,7 @@ transfer rate:
 ### Create and format sizes
 
 Use numeric extensions through `Terabytes`, or the corresponding
-`ByteSize.From...` factories. `main/preview` also exposes decimal petabyte and
+`ByteSize.From...` factories. `Humanizer 4` also exposes decimal petabyte and
 exabyte values plus explicit binary `Kibibyte`, `Mebibyte`, `Gibibyte`,
 `Tebibyte`, and `Pebibyte` factories, properties, format tokens, parsing
 symbols, and `DataUnit` values. `Humanize` chooses the largest whole unit and
@@ -57,7 +57,7 @@ The choice is explicit and is not stored in `ByteSize`.
 
 ### Decompose exact quantities
 
-On `main/preview`, `HumanizeComposite` walks the existing units from exabytes
+On `Humanizer 4`, `HumanizeComposite` walks the existing units from exabytes
 through bits and returns up to `precision` nonzero parts. It preserves exact
 byte and bit residuals while parts remain available: for example, 81,937 bits
 becomes `10 KB 2 B 1 b` at precision 3. Once the precision is reached, the
@@ -87,7 +87,7 @@ Use `HumanizeWithUnitSystem` on `ByteRate` for explicit SI or IEC rate output.
 ## Pitfall
 
 Humanizer’s legacy `KB`, `MB`, `GB`, and `TB` values use binary multiples of
-1024, while `PB` and `EB` use decimal SI factors. On `main/preview`, prefer the
+1024, while `PB` and `EB` use decimal SI factors. On `Humanizer 4`, prefer the
 explicit IEC symbols `KiB`, `MiB`, `GiB`, `TiB`, and `PiB` when the binary
 meaning must be unambiguous. The symbols `b` and `B` are intentionally
 case-sensitive: lowercase is bits, uppercase is bytes. Other recognized unit
@@ -109,7 +109,7 @@ Construct rates with a positive, nonzero interval. Keep `ByteSize` as the model 
 ## Version notes
 
 Core `ByteSize` creation and formatting span the documented corpus. Petabyte,
-exabyte, explicit IEC unit support, and `HumanizeComposite` are `main/preview`
+exabyte, explicit IEC unit support, and `HumanizeComposite` are `Humanizer 4`
 additions. Culture-aware `ByteRate.Humanize` appears in `2.13.14`; earlier
 snapshots need a reduced example or exclusion. The verified source runs
 against the selected package.

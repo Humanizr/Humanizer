@@ -37,7 +37,7 @@ Numeric format strings and providers control the displayed number. They do not t
 
 ### Pluralize a localized noun for a count
 
-On `main/preview` for v4, `PluralizationForms.TryPluralize` selects a
+On `Humanizer 4`, `PluralizationForms.TryPluralize` selects a
 caller-supplied form using the explicit culture's Unicode CLDR decimal cardinal
 rule. Every supported culture supplies this rule. If the selected form was not
 supplied, the operation returns `false`; it does not guess morphology or fall
@@ -59,14 +59,14 @@ and its [decimal operands](https://unicode.org/reports/tr35/tr35-numbers.html).
 
 `Vocabularies.Default` supports `AddIrregular`, `AddUncountable`, `AddPlural`, and `AddSingular`. Prefer an irregular or uncountable entry over a broad regular expression. Set `matchEnding: false` when a rule must match the entire noun instead of every word ending with the same letters.
 
-On `main/preview`, `AddAcronym` uses the same vocabulary to preserve the
+In Humanizer 4, `AddAcronym` uses the same vocabulary to preserve the
 canonical casing of a domain acronym during string humanization. Registration
 is case-insensitive, but the registered spelling controls the output. Acronyms
 must contain letters only.
 
 ## Pitfall
 
-Vocabulary changes, including acronym registrations on `main/preview`, are
+Vocabulary changes, including acronym registrations in Humanizer 4, are
 process-global. Register domain words once during startup and test them in an
 isolated process; do not add rules per request. `ToQuantity` treats exactly `1`
 and `-1` as singular. Fractional values, `NaN`, and infinity use the plural
@@ -82,7 +82,7 @@ Core inflection is available across the documented release set. Individual
 vocabulary rules and overloads have changed, and early Humanizer `3.0.x`
 temporarily lacked quantity overloads restored by `3.0.8`. The verified source
 runs against the selected package. `AddAcronym` is available on
-`main/preview`.
+`Humanizer 4`.
 Culture-explicit `PluralizationForms` are new in v4.
 
 ## Related guides and API

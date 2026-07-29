@@ -1,6 +1,6 @@
 ---
 id: supported-cultures
-title: Supported cultures and capabilities
+title: Supported cultures
 sidebar_position: 5
 diataxis: reference
 persona: application developer
@@ -9,38 +9,22 @@ example: illustrative
 
 import coverage from './language-coverage.json';
 
-export function CoverageValue({status}) {
-  if (status.kind === 'own') {
-    return 'Own';
-  }
-  if (status.kind === 'via') {
-    return <span>Via <code>{status.via}</code></span>;
-  }
-  return status.kind === 'platform'
-    ? <span title="Uses platform globalization data">Platform</span>
-    : 'Missing';
-}
+export const supportedCultures =
+  coverage.locales?.map(({locale}) => locale) ?? coverage.cultures ?? [];
 
-# Supported cultures and capabilities
+# Supported cultures
 
 ## Orientation
 
-This inventory is generated for <code>{coverage.generatedFor}</code> from
-<code>{coverage.source}</code>. The verified
-<code>{coverage.package.id}</code> assets target
-<code>{coverage.package.targetFrameworks.join(', ')}</code>, and their locale
-evidence is {coverage.package.localeData}.
-
-`DateOnly` ordinals are present in the
-<code>{coverage.package.apiAvailability.dateOnlyOrdinals.join(', ') || 'none'}</code>
-assets. Clock notation is present in the
-<code>{coverage.package.apiAvailability.clockNotation.join(', ') || 'none'}</code>
-assets. Those lists come from exact members in each package XML documentation
-file, not from a version-number assumption.
+Humanizer 4 treats locale support as all-or-nothing. Every culture listed below
+supports every applicable localized feature. Regional cultures may reuse a
+same-language parent, and calendar or numeric formatting may use .NET
+globalization data when no Humanizer override is needed; neither represents
+partial support.
 
 ## Example
 
-Use the culture code in the first column with `CultureInfo`:
+Use a culture code from the list with `CultureInfo`:
 
 ```csharp
 using System.Globalization;
@@ -50,101 +34,19 @@ var culture = CultureInfo.GetCultureInfo("pt-BR");
 Console.WriteLine(123.ToWords(culture));
 ```
 
-{coverage.coverageKind === 'yaml-capabilities' ? (
-  <>
-    <p>
-      The table contains {coverage.locales.length} checked-in locale files.
-      <code>Own</code> means that locale contributes at least one canonical
-      block for the capability. <code>Via …</code> means the capability is
-      fully inherited through the immediate same-language parent.
-      <code>Platform</code> means an optional calendar or number-formatting
-      override is absent, so Humanizer uses .NET globalization data.
-    </p>
-    <p>
-      The canonical source-generator parser rejects invalid schemas, missing
-      required capabilities, inheritance cycles, and cross-language parents
-      before this output is written.
-    </p>
-    <p>
-      Grammatical-case duration coverage is narrower than general locale
-      coverage and is classified separately as <code>distinct</code>,
-      <code>invariant</code>, or <code>not-applicable</code>. Case and unit
-      realizations may be authored, evidenced as rendering the same as another
-      case, or explicitly not applicable; release validation rejects
-      unsupported applicable entries. An <code>Own</code> or
-      <code>Via …</code> cell in this table does not imply that
-      <code>HumanizeWithCase</code> supports every case or duration unit.
-      See the duration guide for the runtime contract.
-    </p>
-    <div
-      aria-label="Current locale capability coverage"
-      className="languageCoverageRegion"
-      role="region"
-      tabIndex={0}>
-      <table>
-        <caption>Current locale capability coverage</caption>
-        <thead>
-          <tr>
-            <th>Culture</th>
-            <th>Parent</th>
-            {coverage.capabilities.map((capability) => (
-              <th key={capability.key}>{capability.label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {coverage.locales.map((locale) => (
-            <tr key={locale.locale}>
-              <th scope="row"><code>{locale.locale}</code></th>
-              <td>{locale.parent ? <code>{locale.parent}</code> : '—'}</td>
-              {coverage.capabilities.map((capability) => (
-                <td key={capability.key}>
-                  <CoverageValue status={locale.capabilities[capability.key]} />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </>
-) : (
-  <>
-    <p>
-      This published release predates the current canonical YAML model. Its
-      culture list comes from locale dependencies in the verified
-      <code>{coverage.package.id}</code> metapackage, plus neutral
-      <code>en</code> from the verified
-      <code>{coverage.package.apiPackage}</code> package. It does not claim
-      per-capability ownership that the packages cannot prove.
-    </p>
-    <div
-      aria-label="Published cultures for this version"
-      className="languageCoverageRegion"
-      role="region"
-      tabIndex={0}>
-      <table>
-        <caption>Published cultures for this version</caption>
-        <thead>
-          <tr><th>Published culture</th></tr>
-        </thead>
-        <tbody>
-          {coverage.cultures.map((culture) => (
-            <tr key={culture}><th scope="row"><code>{culture}</code></th></tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </>
-)}
+<p>This version supports {supportedCultures.length} cultures:</p>
+
+<ul className="supportedCultureList" aria-label="Supported cultures">
+  {supportedCultures.map((locale) => (
+    <li key={locale}><code>{locale}</code></li>
+  ))}
+</ul>
 
 ## Pitfall
 
-For current YAML coverage, do not read `Platform` as unsupported. Calendar and
-numeric overrides exist only when Humanizer must replace platform-supplied
-values. Conversely, neither a current `Own`/`Via` cell nor a historical package
-dependency proves that one sample establishes complete linguistic correctness.
-If output is wrong, use the correction path.
+A listed culture is supported. Missing behavior, English fallback, or
+incorrect language in that culture is a bug. If output is wrong, use the
+correction path.
 
 [Open the correction guide](../contributing/report-language-issue.mdx) or
 [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
@@ -152,14 +54,12 @@ If output is wrong, use the correction path.
 ## Version notes
 
 The sibling `language-coverage.json` is generated separately for each docs
-version. Current coverage uses the canonical source tree. Published snapshots
-use their own verified NuGet packages; they never inherit the preview culture
-inventory.
+version. Published snapshots use their own verified NuGet packages and culture
+lists; they never inherit another version's inventory.
 
 ## Related guides and API
 
 - [Choose a culture](./using-cultures.mdx)
 - [Grammar and platform formatting](./grammar-and-platform-formatting.mdx)
-- [Format durations and ages](../scenarios/durations-and-ages.mdx)
 - [Report or correct a language issue](../contributing/report-language-issue.mdx)
 - [Selected-version API reference](../api/index.md)

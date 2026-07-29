@@ -32,7 +32,10 @@ The repository verifier is:
 pwsh tools/docs/verify-aot.ps1
 ```
 
-It tests Humanizer `3.0.10` and a freshly packed current checkout from an isolated package cache. The normal documentation test gate invokes it automatically. A supported host must complete both publish modes and run both binaries. An unsupported local OS/architecture is reported and skipped; CI can require a supported host with:
+It tests the selected Humanizer NuGet package from an isolated package cache.
+The normal documentation test gate invokes it automatically. A supported host
+must complete both publish modes and run both binaries. An unsupported local
+OS/architecture is reported and skipped; CI can require a supported host with:
 
 ```console
 pwsh tools/docs/test.ps1 -RequireNativeAot
@@ -51,7 +54,7 @@ The generic parameter gives the trimmer and AOT compiler the enum’s public
 fields. By contrast, `DehumanizeTo(string, Type, ...)` and the base-`Enum`
 `Humanize(...)` overloads construct generic methods through reflection and are
 annotated with both `RequiresUnreferencedCode` and `RequiresDynamicCode`. The
-source-selecting humanization overload is available on `main/preview`.
+source-selecting humanization overload is available on `Humanizer 4`.
 
 ### Read warnings as API feedback
 
@@ -67,7 +70,11 @@ Assembly compatibility metadata is not proof that every consumer call, dependenc
 
 ## Version notes
 
-This compatibility claim begins with Humanizer `3.0.1`; `2.x` snapshots must exclude this page. The current package emits `IsTrimmable` and, on current compatible TFMs, `IsAotCompatible` metadata. The publish verifier is the behavioral proof for `3.0.10` and current, rather than a promise about every historical target framework.
+This compatibility claim begins with Humanizer `3.0.1`; `2.x` snapshots must
+exclude this page. Humanizer 4 emits `IsTrimmable` and, on compatible TFMs,
+`IsAotCompatible` metadata. The publish verifier is the behavioral proof for
+`3.0.10` and Humanizer 4, rather than a promise about every historical target
+framework.
 
 ## Related guides and API
 

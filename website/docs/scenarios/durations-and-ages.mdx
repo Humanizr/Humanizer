@@ -36,13 +36,13 @@ The default maximum unit is `Week`. Ask for `Month` or `Year` explicitly when th
 
 ### Use compact symbols
 
-On `main/preview`, `HumanizeToSymbols` applies the same precision, empty-unit,
+In Humanizer 4, `HumanizeToSymbols` applies the same precision, empty-unit,
 range, culture, and separator controls but emits localized `TimeUnit` symbols
 such as `1h, 3s, 1ms`.
 
 ### Keep sub-second precision in seconds
 
-On `main/preview`, use `HumanizeWithFractionalSeconds` or
+In Humanizer 4, use `HumanizeWithFractionalSeconds` or
 `HumanizeToSymbolsWithFractionalSeconds` when milliseconds should appear as a
 fraction of the seconds unit. These APIs always use `Second` as the inclusive
 minimum unit. Supply the precision, maximum unit, maximum fractional digits,
@@ -61,7 +61,7 @@ from the configured formatter. A custom
 
 ### Apply grammatical case
 
-On `main/preview`, `HumanizeWithCase` selects a locale-authored grammatical
+In Humanizer 4, `HumanizeWithCase` selects a locale-authored grammatical
 case form for each duration unit. A singular form may include a localized word
 or article, and a locale may encode a count in the inflected unit form:
 
@@ -109,7 +109,7 @@ underlying locale-data model.
 
 ### Parse invariant durations
 
-On `main/preview`, `DehumanizeTimeSpan` and `TryDehumanizeTimeSpan` accept
+In Humanizer 4, `DehumanizeTimeSpan` and `TryDehumanizeTimeSpan` accept
 standard invariant `TimeSpan` text or compact tokens using `ms`, `s`, `m`, `h`,
 `d`, and `w`. Compact tokens may have one leading sign, optional whitespace,
 fractional values that resolve to whole ticks, repeated units, and units in any
@@ -136,7 +136,7 @@ comma-decimal culture, while `1,5h`, `one hour`, and `1 hour` are rejected.
 
 `TimeSpan.Humanize` is available across the documented corpus. `ToAge` begins
 in `3.0.1`; `HumanizeWithCase`, `HumanizeToSymbols`, `DehumanizeTimeSpan`, and
-`TryDehumanizeTimeSpan` are `main/preview` APIs. The verified executable runs
+`TryDehumanizeTimeSpan` are `Humanizer 4` APIs. The verified executable runs
 against the selected package; older snapshots replace or exclude calls they
 do not support.
 

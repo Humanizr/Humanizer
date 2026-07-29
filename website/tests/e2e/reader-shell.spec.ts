@@ -25,10 +25,12 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
     );
     expect(pageWidth).toBeLessThanOrEqual(width);
     await expect(
-      page.getByRole('heading', {name: 'Make software sound like people.'}),
+      page.getByRole('heading', {
+        name: 'Turn .NET values into words people understand.',
+      }),
     ).toBeVisible();
     await expect(
-      page.getByRole('navigation', {name: 'Documentation sections'}),
+      page.getByRole('table', {name: 'Humanizer input and output examples'}),
     ).toBeVisible();
   }
 
@@ -40,10 +42,12 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
   await page.getByRole('button', {name: 'Toggle navigation bar'}).click();
   const mobileSidebar = page.locator('.navbar-sidebar');
   expect((await mobileSidebar.boundingBox())?.height).toBe(800);
-  await expect(page.getByRole('link', {name: 'Guides'})).toBeVisible();
+  await expect(
+    page.getByRole('link', {name: 'Guides', exact: true}),
+  ).toBeVisible();
   await expect(page.getByText('Versions', {exact: true})).toBeVisible();
   await page.getByRole('button', {name: 'Expand the dropdown'}).click();
-  await expect(page.getByRole('link', {name: 'main/preview'})).toBeVisible();
+  await expect(page.getByRole('link', {name: '4.0 (next)'})).toBeVisible();
   await expect(
     mobileSidebar
       .getByRole('button', {name: /Switch between dark and light mode/}),
@@ -111,19 +115,19 @@ test('theme follows the system default and remains keyboard switchable', async (
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('homepage upgrade and language paths open their dedicated guides', async ({
+test('homepage quick-start and language paths open their dedicated guides', async ({
   page,
 }) => {
   for (const destination of [
     {
-      heading: 'Plan an upgrade',
-      link: 'Open upgrading guidance',
-      path: '/docs/upgrading/',
+      heading: 'Five-minute quick start',
+      link: 'Run the five-minute example',
+      path: '/docs/start/quick-start/',
     },
     {
-      heading: 'Languages and cultures',
-      link: 'Explore language support',
-      path: '/docs/languages/',
+      heading: 'Supported cultures',
+      link: 'See supported cultures',
+      path: '/docs/languages/supported-cultures/',
     },
   ]) {
     await page.goto('/');
@@ -166,7 +170,7 @@ test('version not found preserves the requested API path and target version', as
   await page.goto('/docs/api/Humanizer.Resources/');
   await page.locator('.humanizerVersionDropdown').focus();
   await page.keyboard.press('Enter');
-  await page.getByRole('link', {name: 'main/preview'}).click();
+  await page.getByRole('link', {name: '4.0 (next)'}).click();
 
   await expect(page).toHaveURL(
     /\/docs\/next\/api\/Humanizer\.Resources\/$/,
@@ -182,21 +186,32 @@ test('version not found preserves the requested API path and target version', as
     page.getByRole('heading', {name: 'Not available in this version.'}),
   ).toBeVisible();
   await expect(
-    page.getByText('main/preview', {exact: true}).first(),
+    page.getByText('4.0 (next)', {exact: true}).first(),
   ).toBeVisible();
   await expect(
-    page.getByRole('link', {name: 'Browse main/preview docs'}),
+    page.getByRole('link', {name: 'Browse 4.0 (next) docs'}),
   ).toHaveAttribute('href', '/docs/next/');
   await expect(
-    page.getByRole('link', {name: 'Open main/preview API'}),
+    page.getByRole('link', {name: 'Open 4.0 (next) API'}),
   ).toHaveAttribute('href', '/docs/next/api/');
 
   await page.goto('/');
   await page.reload();
-  await expect(page.getByRole('link', {name: 'Guides'})).toHaveAttribute(
-    'href',
-    '/docs/next/',
-  );
+  await expect(
+    page.getByRole('link', {name: 'Guides', exact: true}),
+  ).toHaveAttribute('href', '/docs/next/');
+  await expect(
+    page.getByRole('link', {name: 'Run the five-minute example'}),
+  ).toHaveAttribute('href', '/docs/next/start/quick-start/');
+  await expect(
+    page.getByRole('link', {name: 'See supported cultures'}),
+  ).toHaveAttribute('href', '/docs/next/languages/supported-cultures/');
+  await expect(
+    page.getByRole('link', {name: 'Open the guides'}),
+  ).toHaveAttribute('href', '/docs/next/');
+  await expect(
+    page.getByRole('link', {name: 'Browse exact signatures'}),
+  ).toHaveAttribute('href', '/docs/next/api/');
 
   await page.goto('/docs/next/api/Humanizer.ByteSize/');
   await page.locator('.humanizerVersionDropdown').focus();

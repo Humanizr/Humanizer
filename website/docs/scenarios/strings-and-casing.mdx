@@ -25,14 +25,14 @@ This verified source covers readable labels, custom acronym casing, ampersands, 
 
 `Humanize` recognizes PascalCase, camelCase, underscores, dashes, numbers, and common acronym boundaries. Pass `LetterCasing.Sentence`, `Title`, `LowerCase`, or `AllCaps` when the label needs a known presentation case. All-capital input is treated as an acronym and can remain unchanged until a casing operation is requested.
 
-On `main/preview`, `Humanize` preserves ampersands as separate tokens instead
+On `Humanizer 4`, `Humanize` preserves ampersands as separate tokens instead
 of discarding them with other punctuation. For example,
 `"Research&Development".Humanize()` returns `"Research & development"`.
 Other punctuation such as `+` and `/` is still removed.
 
 ### Preserve domain acronym casing
 
-On `main/preview`, call `Vocabularies.Default.AddAcronym` once during startup
+On `Humanizer 4`, call `Vocabularies.Default.AddAcronym` once during startup
 when an acronym has required output casing. Registration matches
 case-insensitively, while the registered spelling supplies the output:
 registering `iOS` makes `"IOSSettings".Humanize()` return `"iOS settings"`.
@@ -55,7 +55,7 @@ tests that change it isolated.
 
 `Dehumanize` is the direct readable-text-to-PascalCase operation. Use the named inflector transformations when the destination convention matters.
 
-`Underscore()` lowercases its output. On `main/preview`, pass
+`Underscore()` lowercases its output. On `Humanizer 4`, pass
 `preserveCase: true` to retain the input casing while inserting boundaries:
 `"HTMLParser".Underscore(preserveCase: true)` returns `"HTML_Parser"`.
 
@@ -74,7 +74,7 @@ Title and sentence casing use culture-sensitive text operations. Scope culture w
 The verified executable compiles and runs against the selected package. Core
 transformations also exist in `2.x`, but custom acronym registration,
 ampersand preservation, and the case-preserving `Underscore` overload are
-`main/preview` behavior. Humanizer 3 also changes several delimiter and
+`Humanizer 4` behavior. Humanizer 3 also changes several delimiter and
 no-letter edge cases. Use the selected snapshot when exact legacy behavior
 matters.
 
