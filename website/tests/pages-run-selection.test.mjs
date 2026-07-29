@@ -9,6 +9,12 @@ const workflow = readFileSync(
   'utf8',
 );
 const normalizedWorkflow = workflow.replaceAll('\r\n', '\n');
+const deploymentGuide = readFileSync(
+  fileURLToPath(
+    new URL('../docs/contributing/documentation.mdx', import.meta.url),
+  ),
+  'utf8',
+);
 const locateStep = normalizedWorkflow
   .split('- name: Locate the currently deployable Pages run')[1]
   .split('- name: Inspect retained prior artifact')[0];
@@ -325,4 +331,21 @@ test('stored attempt one is not replaced by latest rerun attempt two', () => {
 
   assert.match(endpoint, /\/attempts\/1$/);
   assert.doesNotMatch(endpoint, new RegExp(`/attempts/${latestAttempt}$`));
+});
+
+test('rollback guidance uses the archive identity after roll-forward', () => {
+  const rolledForward = release({
+    archiveAttempt: 1,
+    archiveRunId: 700,
+    deploymentAttempt: 2,
+    deploymentRunId: 700,
+  });
+
+  assert.notEqual(
+    rolledForward.manifest.archiveRunAttempt,
+    rolledForward.manifest.deploymentRunAttempt,
+  );
+  assert.match(deploymentGuide, /jq -r \.archiveRunId/);
+  assert.match(deploymentGuide, /jq -r \.archiveRunAttempt/);
+  assert.doesNotMatch(deploymentGuide, /gh run view .*--json .*attempt/);
 });
