@@ -24,6 +24,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     /// </summary>
     /// <param name="input">The number to convert.</param>
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="input"/> is outside the configured profile range.</exception>
     public override string Convert(long input)
     {
         if (input > profile.MaximumValue || input < profile.MinimumValue)
