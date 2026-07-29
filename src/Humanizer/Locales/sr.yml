@@ -955,6 +955,7 @@ surfaces:
           ordinalCountPrefixes: 'једно|две'
 
     parse:
+      decimalMarker: 'кома'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

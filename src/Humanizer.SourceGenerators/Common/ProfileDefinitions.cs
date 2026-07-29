@@ -50,6 +50,21 @@ public sealed partial class HumanizerSourceGenerator
         public JsonElement Root { get; } = root;
     }
 
+    readonly struct MetricScaleWordDefinition(char symbol, string singular, string plural)
+    {
+        public char Symbol { get; } = symbol;
+        public string Singular { get; } = singular;
+        public string Plural { get; } = plural;
+    }
+
+    readonly struct MetricScaleWordProfileDefinition(
+        string localeCode,
+        ImmutableArray<MetricScaleWordDefinition> scaleWords)
+    {
+        public string LocaleCode { get; } = localeCode;
+        public ImmutableArray<MetricScaleWordDefinition> ScaleWords { get; } = scaleWords;
+    }
+
     sealed class WordsToNumberProfileDefinition(string profileName, string engine, JsonElement root)
     {
         public string ProfileName { get; } = profileName;

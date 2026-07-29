@@ -1,3 +1,5 @@
+using Humanizer.Tests.Localisation;
+
 [UseCulture("en-US")]
 public class DateTimeOffsetHumanizeTests
 {
@@ -79,6 +81,21 @@ public class DateTimeOffsetHumanizeTests
         var baseTime = new DateTimeOffset(2019, 03, 29, 0, 0, 0, TimeSpan.Zero);
 
         Assert.Equal("2 months ago", strategy.Humanize(inputTime, baseTime, null));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.FormatterExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Humanize_UsesSpecifiedCulture(string localeName, string expectedYesterday, string _)
+    {
+        var baseTime = new DateTimeOffset(2024, 1, 2, 12, 0, 0, TimeSpan.Zero);
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(
+            expectedYesterday,
+            baseTime.AddDays(-1).Humanize(baseTime, culture));
+        Assert.Equal(
+            Configurator.GetFormatter(culture).DateHumanize(TimeUnit.Day, Tense.Past, 2),
+            baseTime.AddDays(-2).Humanize(baseTime, culture));
     }
 
     [Fact]

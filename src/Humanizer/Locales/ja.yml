@@ -301,6 +301,7 @@ surfaces:
       insertZeroBetweenGroups: false
 
     parse:
+      decimalMarker: '点'
       engine: 'east-asian-positional'
       negativePrefixes:
         - 'マイナス'

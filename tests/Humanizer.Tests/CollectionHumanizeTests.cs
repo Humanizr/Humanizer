@@ -10,6 +10,8 @@ public class SomeClass
 public class CollectionHumanizeTests
 {
     static readonly object?[] NullObjects = [null, null];
+    static readonly int[] CollectionPair = [1, 2];
+    static readonly int[] CollectionTriple = [1, 2, 3];
     static readonly string[] ThreeStrings = ["A", "B", "C"];
     static readonly int?[] NullableInts = [1, null, 3];
     static readonly string[] StringsWithEmptyItem = ["A", " ", "C"];
@@ -50,6 +52,18 @@ public class CollectionHumanizeTests
     [Fact]
     public void HumanizeUsesSpecifiedCulture() =>
         Assert.Equal("A, B and C", ThreeStrings.Humanize(new CultureInfo("en-GB")));
+
+    [Theory]
+    [MemberData(
+        nameof(Humanizer.Tests.Localisation.LocaleCoverageData.CollectionFormatterExpectationTheoryData),
+        MemberType = typeof(Humanizer.Tests.Localisation.LocaleCoverageData))]
+    public void HumanizeUsesSpecifiedCultureForEverySupportedLocale(string localeName, string expectedTwo, string expectedThree)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expectedTwo, CollectionPair.Humanize(culture));
+        Assert.Equal(expectedThree, CollectionTriple.Humanize(culture));
+    }
 
     [Fact]
     public void HumanizeThrowsWhenCultureIsNull()

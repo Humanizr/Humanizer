@@ -501,6 +501,7 @@ surfaces:
       negativeSign: '−'
 
     parse:
+      decimalMarker: 'komma'
       engine: 'compound-scale'
       cardinalMap:
         'null': 0

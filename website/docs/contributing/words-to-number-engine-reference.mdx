@@ -30,6 +30,14 @@ surfaces:
 
 ## Words-To-Number Engines
 
+Every released locale root declares `decimalMarker` beside `engine` under
+`surfaces.number.parse`. `WordsToDecimalNumber` parses the integer and
+fractional digit phrases with that locale's existing words-to-number engine.
+Whitespace-delimited engines require token boundaries around the marker and
+fractional digits; East Asian positional engines may use their authored joined
+forms. Regional variants inherit only through their declared same-language,
+same-script `variantOf` chain.
+
 ### `compound-scale`
 
 Fields:

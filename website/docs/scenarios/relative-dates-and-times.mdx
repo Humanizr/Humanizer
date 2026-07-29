@@ -17,7 +17,9 @@ Relative humanization compares a temporal value with a known base and returns te
 
 ## Example
 
-The example compares two UTC `DateTime` values and never reads the machine clock:
+The example compares two UTC `DateTime` values and never reads the machine clock.
+The same explicit `CultureInfo` argument is available on the `DateTimeOffset`,
+`DateOnly`, and `TimeOnly` overloads:
 
 <CodeBlock language="csharp" title="Program.cs">{dates}</CodeBlock>
 

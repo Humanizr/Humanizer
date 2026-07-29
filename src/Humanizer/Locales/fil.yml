@@ -373,6 +373,7 @@ surfaces:
           replacement: ' siyam na'
 
     parse:
+      decimalMarker: 'tuldok'
       engine: 'linking-affix'
       cardinalMap:
         sero: 0

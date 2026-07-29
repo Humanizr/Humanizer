@@ -367,6 +367,7 @@ surfaces:
         9: 'tisa'
         10: 'kumi'
     parse:
+      decimalMarker: 'nukta'
       engine: 'scale-leading-compound'
       conjunctionWord: 'na'
       minusWord: 'hasi'

@@ -499,6 +499,7 @@ surfaces:
       negativeSign: '-'
 
     parse:
+      decimalMarker: 'दशमलव'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'

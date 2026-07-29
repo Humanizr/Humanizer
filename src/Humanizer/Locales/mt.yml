@@ -462,6 +462,7 @@ surfaces:
         usePrefixMapForLowerDigits: false
 
     parse:
+      decimalMarker: 'punt'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

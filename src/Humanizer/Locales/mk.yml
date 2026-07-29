@@ -316,7 +316,46 @@ surfaces:
     words:
       engine: 'macedonian'
       useCulture: true
+      scales:
+        -
+          value: 1000000000000000000
+          gender: 'masculine'
+          singular: 'трилион'
+          plural: 'трилиони'
+          ordinalStem: 'трилионит'
+        -
+          value: 1000000000000000
+          gender: 'feminine'
+          singular: 'билијарда'
+          plural: 'билијарди'
+          ordinalStem: 'билијардит'
+        -
+          value: 1000000000000
+          gender: 'masculine'
+          singular: 'билион'
+          plural: 'билиони'
+          ordinalStem: 'билионит'
+        -
+          value: 1000000000
+          gender: 'feminine'
+          singular: 'милијарда'
+          plural: 'милијарди'
+          ordinalStem: 'милијардит'
+        -
+          value: 1000000
+          gender: 'masculine'
+          singular: 'милион'
+          plural: 'милиони'
+          ordinalStem: 'милионит'
+        -
+          value: 1000
+          gender: 'feminine'
+          singular: 'илјада'
+          plural: 'илјади'
+          ordinalStem: 'илјадит'
+          omitOne: true
     parse:
+      decimalMarker: 'кома'
       engine: 'token-map'
       normalizationProfile: 'LowercaseReplacePeriodsWithSpaces'
       cardinalMap:

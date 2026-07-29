@@ -1213,6 +1213,7 @@ surfaces:
       negativeSign: '-'
 
     parse:
+      decimalMarker: 'दशांश'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'

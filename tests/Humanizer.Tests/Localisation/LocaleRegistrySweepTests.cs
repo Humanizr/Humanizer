@@ -157,6 +157,7 @@ public class LocaleRegistrySweepTests
         using var _ = new CultureSwap(new(localeName));
         var date = new DateTime(expected.Year, expected.Month, expected.Day);
         Assert.Equal(expected.Expected, date.ToOrdinalWords());
+        Assert.Equal(expected.Expected, date.ToOrdinalWords(GrammaticalCase.Genitive));
     }
 
     [Theory]
@@ -253,6 +254,7 @@ public class LocaleRegistrySweepTests
         using var _ = new CultureSwap(new(localeName));
         var date = new DateOnly(expected.Year, expected.Month, expected.Day);
         Assert.Equal(expected.Expected, date.ToOrdinalWords());
+        Assert.Equal(expected.Expected, date.ToOrdinalWords(GrammaticalCase.Genitive));
     }
 
     [Theory]
@@ -348,6 +350,15 @@ public class LocaleRegistrySweepTests
         using var _ = new CultureSwap(new(localeName));
         var time = new TimeOnly(expected.Hours, expected.Minutes);
         Assert.Equal(expected.Expected, time.ToClockNotation());
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.TimeOnlyToClockNotation1323ExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void TimeOnlyToClockNotation_1323_ExplicitCulture_UsesExpectedForms(string localeName, ClockExpectationRow expected)
+    {
+        var time = new TimeOnly(expected.Hours, expected.Minutes);
+
+        Assert.Equal(expected.Expected, time.ToClockNotation(ClockNotationRounding.None, new(localeName)));
     }
 
     [Theory]

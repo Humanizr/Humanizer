@@ -1124,6 +1124,7 @@ surfaces:
             3: 'є'
 
     parse:
+      decimalMarker: 'кома'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

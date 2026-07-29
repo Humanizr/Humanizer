@@ -420,6 +420,7 @@ surfaces:
       groupSeparator: ','
       negativeSign: '-'
     parse:
+      decimalMarker: 'dhibic'
       engine: 'inverted-tens'
       cardinalMap:
         eber: 0

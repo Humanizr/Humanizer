@@ -14,16 +14,16 @@ import parseNumberWords from '!!raw-loader!../_examples/scenarios-parse-number-w
 ## Orientation
 
 Use `TryToNumber` at an input boundary where invalid integer words are expected.
-Use `ToNumber` when invalid text is exceptional and should throw. On
-`main/preview`, the corresponding decimal APIs are `TryToDecimalNumber` and
+Use `ToNumber` when invalid text is exceptional and should throw.
+Humanizer 4 adds the corresponding decimal APIs `TryToDecimalNumber` and
 `ToDecimalNumber`. All four require an explicit `CultureInfo`, because the
 same words, magnitude system, and token rules do not mean the same thing in
 every culture.
 
 ## Example
 
-This executable parses positive and negative integers, checks integer and
-decimal failure details, preserves an authored decimal scale, and verifies the
+This executable parses positive and negative integers, parses English and
+French decimal words, preserves an authored decimal scale, and verifies the
 unsupported-culture contract. `Convert.ToInt64` keeps the integer assertions
 compatible with the stable `int` result and current `long` result:
 
@@ -39,18 +39,29 @@ The longest `TryToNumber` overload returns:
 
 That token is useful for field validation messages. Do not catch `FormatException` for routine input when `TryToNumber` expresses the branch directly.
 
-### Parse English decimal words
+### Parse localized decimal words
 
-`ToDecimalNumber` accepts an English integer phrase followed by exactly one
-`point` marker and between 1 and 28 fractional digit words (`zero` through
-`nine`). The integer part may be omitted, as in `point five`, and a leading
-`minus` or `negative` applies to the complete value. The authored decimal
-scale is preserved, including trailing zeros and signed zero.
+`ToDecimalNumber` accepts a localized integer phrase followed by exactly one
+locale-specific decimal marker and between 1 and 28 localized fractional digit
+words. English accepts `one point two`, French accepts `un virgule deux`,
+Hindi accepts `एक दशमलव दो`, and Urdu accepts `ایک اعشاریہ دو`. The integer
+part may be omitted, and a locale-supported negative affix applies to the
+complete value. The authored decimal scale is preserved, including trailing
+zeros and signed zero. Whitespace-tokenized grammars require boundaries around
+the decimal marker and each fractional digit, while negative affixes keep their
+profile-authored boundary. Joined-script profiles such as Chinese use their
+authored joined tokenization instead.
 
-The integer side uses the selected English culture's magnitude grammar. For
-example, `en-IN` accepts `ninety-three shankh point one`, while `en-US` does
-not. This is a language parser, not a parser for culture-formatted decimal
-digits.
+The integer side and each fractional digit reuse the selected culture's
+generated number-word profiles. For example, `en-IN` accepts
+`ninety-three shankh point one`, while `en-US` does not. Locale variants and
+same-language descendants inherit their localized parent profile; unsupported
+languages never fall back to English. English preserves scale composition past
+the `long` range when the final value fits in `decimal`; other cultures use the
+range accepted by their own words-to-number grammar.
+
+Locale-authored decimal markers use reviewed spoken terms where available.
+Locales without a spoken marker use their standard decimal separator token.
 
 For malformed input, unsupported cultures, or values that cannot fit in
 `decimal`, `TryToDecimalNumber` returns `false`, sets the result to `0m`, and
@@ -62,7 +73,7 @@ For `null` or empty input, that reported value is an empty string.
 | --- | --- |
 | `null` input | `ArgumentNullException` |
 | Malformed or out-of-range phrase | `FormatException` |
-| Culture outside the English hierarchy | `NotSupportedException` |
+| Unsupported culture | `NotSupportedException` |
 
 ### Convert to a narrower type
 
@@ -74,19 +85,16 @@ var value = checked((int)parsedLong);
 
 ## Pitfall
 
-The integer parser supports only the locales and word forms represented by its
-selected-version converter. The decimal parser currently supports English
-cultures only. Neither is a general natural-language parser. Preserve the
-explicit culture from the user-input boundary and do not silently fall back to
-English for an unsupported locale.
+The parsers support only the locales and word forms represented by the selected
+version's generated profiles. They are not general natural-language parsers.
+Preserve the explicit culture from the user-input boundary.
 
 ## Version notes
 
 Words-to-number begins in Humanizer `3.0.1`; this page is unavailable in `2.x`.
-Releases through `3.0.10` return `int`. `main/preview` returns `long`, and its
+Releases through `3.0.10` return `int`. Humanizer 4 returns `long`, and its
 analyzer can offer a checked conversion for existing assignments that now fail
-with `CS0029` or `CS0266`. English decimal word parsing is a `main/preview`
-addition.
+with `CS0029` or `CS0266`. Decimal word parsing is available in Humanizer 4.
 
 ## Related guides and API
 

@@ -827,6 +827,7 @@ surfaces:
         - 'nchi'
 
     parse:
+      decimalMarker: ','
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

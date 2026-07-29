@@ -407,6 +407,7 @@ surfaces:
         1000: 'milluple'
 
     parse:
+      decimalMarker: 'point'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

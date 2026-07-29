@@ -639,6 +639,7 @@ surfaces:
       negativeSign: '−'
 
     parse:
+      decimalMarker: 'komma'
       engine: 'compound-scale'
       cardinalMap:
         noll: 0

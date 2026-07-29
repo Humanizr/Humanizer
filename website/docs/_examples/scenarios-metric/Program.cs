@@ -20,7 +20,7 @@ var parsed = "1.5k".FromMetric();
 AssertEqual("123.5k", symbol);
 AssertEqual("1.00k", fixedWidth);
 AssertEqual("1 kilo", name);
-AssertEqual("1.50 milliard", scaleWord);
+AssertEqual("1.50 Milliarden", scaleWord);
 AssertEqual(1500d, parsed);
 
 Console.WriteLine($"{symbol}; {fixedWidth}; {name}; {scaleWord}; {parsed}");

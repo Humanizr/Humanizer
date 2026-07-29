@@ -435,6 +435,7 @@ surfaces:
           countGender: 'masculine'
 
     parse:
+      decimalMarker: 'נקודה'
       engine: 'token-map'
       normalizationProfile: 'punctuation-to-spaces-remove-diacritics'
       allowInvariantIntegerInput: true

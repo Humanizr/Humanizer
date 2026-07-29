@@ -339,6 +339,7 @@ surfaces:
           oneWord: 'seribu'
 
     parse:
+      decimalMarker: 'perpuluhan'
       engine: 'contracted-scale'
       minusWord: 'minus'
       cardinalMap:

@@ -354,6 +354,7 @@ surfaces:
         19: '열아홉째'
 
     parse:
+      decimalMarker: '점'
       engine: 'east-asian-positional'
       negativePrefixes:
         - '마이너스'

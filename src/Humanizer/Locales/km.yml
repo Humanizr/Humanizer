@@ -358,6 +358,7 @@ surfaces:
             1000: 'ទីមួយពាន់'
             1234: 'ទីមួយពាន់ ពីររយ សាមសិបបួន'
     parse:
+      decimalMarker: 'ចុច'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       allowTerminalOrdinalToken: true

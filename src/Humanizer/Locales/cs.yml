@@ -1121,6 +1121,7 @@ surfaces:
         plural: 'miliard'
 
     parse:
+      decimalMarker: 'čárka'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

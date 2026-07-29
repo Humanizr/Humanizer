@@ -605,6 +605,7 @@ surfaces:
           name: 'míle'
           ordinalName: 'míliú'
     parse:
+      decimalMarker: 'pointe'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

@@ -350,6 +350,7 @@ surfaces:
       groupSeparator: ','
       negativeSign: '-'
     parse:
+      decimalMarker: '.'
       engine: 'scale-leading-compound'
       conjunctionWord: 'da'
       terminalRemainderConjunctionWord: 'da kuma'

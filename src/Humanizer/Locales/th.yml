@@ -351,6 +351,7 @@ surfaces:
           name: 'ร้อย'
 
     parse:
+      decimalMarker: 'จุด'
       engine: 'east-asian-positional'
       negativePrefixes:
         - 'ลบ'

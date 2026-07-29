@@ -973,6 +973,7 @@ surfaces:
           ordinalStem: 'tūkstoš'
 
     parse:
+      decimalMarker: 'komats'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

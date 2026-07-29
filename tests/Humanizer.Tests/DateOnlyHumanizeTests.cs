@@ -1,5 +1,7 @@
 #if NET6_0_OR_GREATER
 
+using Humanizer.Tests.Localisation;
+
 [UseCulture("en-US")]
 public class DateOnlyHumanizeTests
 {
@@ -107,6 +109,19 @@ public class DateOnlyHumanizeTests
         Assert.Equal(
             expectedResult,
             new PrecisionDateOnlyHumanizeStrategy(0.75).Humanize(inputTime, baseTime, CultureInfo.CurrentUICulture));
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleCoverageData.FormatterExpectationTheoryData), MemberType = typeof(LocaleCoverageData))]
+    public void Humanize_UsesSpecifiedCulture(string localeName, string expectedYesterday, string _)
+    {
+        var baseDate = new DateOnly(2024, 1, 2);
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(expectedYesterday, baseDate.AddDays(-1).Humanize(baseDate, culture));
+        Assert.Equal(
+            Configurator.GetFormatter(culture).DateHumanize(TimeUnit.Day, Tense.Past, 2),
+            baseDate.AddDays(-2).Humanize(baseDate, culture));
     }
 
     [Fact]

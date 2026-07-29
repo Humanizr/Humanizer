@@ -11763,6 +11763,7 @@ surfaces:
         100000: 'sajatuhandes'
 
     parse:
+      decimalMarker: 'koma'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'

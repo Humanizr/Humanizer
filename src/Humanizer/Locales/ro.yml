@@ -511,6 +511,7 @@ surfaces:
           countGender: 'feminine'
 
     parse:
+      decimalMarker: 'virgulă'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriodsAndDiacritics'
       cardinalMap:

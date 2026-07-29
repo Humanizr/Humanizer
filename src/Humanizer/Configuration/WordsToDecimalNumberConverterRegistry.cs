@@ -4,5 +4,5 @@ internal sealed class WordsToDecimalNumberConverterRegistry : LocaliserRegistry<
 {
     public WordsToDecimalNumberConverterRegistry()
         : base(UnsupportedWordsToDecimalNumberConverter.Instance) =>
-        Register("en", static culture => new EnglishWordsToDecimalNumberConverter(culture));
+        WordsToDecimalNumberConverterRegistryRegistrations.Register(this);
 }

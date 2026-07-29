@@ -27,7 +27,45 @@ public sealed partial class HumanizerSourceGenerator
             string? fallbackSourcePath = null,
             string? missingValue = null,
             params EngineContractMember[] members) =>
-            new(kind, sourcePath, typeName, enumType, builder, defaultValue, fallbackSourcePath, missingValue, members.ToImmutableArray());
+            new(kind, sourcePath, typeName, enumType, builder, defaultValue, fallbackSourcePath, missingValue, null, members.ToImmutableArray());
+
+        static EngineContractMember ScaleMember(
+            string sourcePath,
+            string builder,
+            string valueProperty,
+            string singularProperty,
+            string? pluralProperty = null,
+            MetricScaleWordTransform transform = MetricScaleWordTransform.None,
+            bool singularOptional = false) =>
+            new(
+                "builder",
+                sourcePath,
+                null,
+                null,
+                builder,
+                null,
+                null,
+                null,
+                new(valueProperty, singularProperty, pluralProperty, transform: transform, singularOptional: singularOptional),
+                ImmutableArray<EngineContractMember>.Empty);
+
+        static EngineContractMember FixedScaleMember(
+            string sourcePath,
+            string builder,
+            long value,
+            string singularProperty = "singular",
+            string? pluralProperty = "plural") =>
+            new(
+                "builder",
+                sourcePath,
+                null,
+                null,
+                builder,
+                null,
+                null,
+                null,
+                new(null, singularProperty, pluralProperty, value),
+                ImmutableArray<EngineContractMember>.Empty);
 
         static ImmutableDictionary<string, EngineContract> CreateNumberToWordsSchemas() =>
             new Dictionary<string, EngineContract>(StringComparer.Ordinal)
@@ -40,7 +78,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "ordinalTensSuffix", null, null, null, null, null, null),
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "agglutinative-ordinal-scale-array", null, null, null),
+                            ScaleMember("scales", "agglutinative-ordinal-scale-array", "value", "singularCardinal", "pluralCardinal"),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
                         )
             ),
@@ -80,7 +118,13 @@ public sealed partial class HumanizerSourceGenerator
                                         Member("enum", "billionStrategy", null, "BillionCardinalStrategy", null, null, null, null),
                                         Member("nullable-string", "billionSingularWord", null, null, null, null, null, null),
                                         Member("nullable-string", "billionPluralWord", null, null, null, null, null, null),
-                                        Member("builder", "scales", null, null, "billion-strategy-cardinal-scale-array", null, null, null),
+                                        ScaleMember(
+                                            "scales",
+                                            "billion-strategy-cardinal-scale-array",
+                                            "value",
+                                            "singular",
+                                            "plural",
+                                            MetricScaleWordTransform.TrimAuthoredOne),
                                         Member("presence-bool", "scales", null, null, null, null, null, null),
                                         Member("string-array", "unitsMap", null, null, null, null, null, null),
                                         Member("string-array", "tensMap", null, null, null, null, null, null),
@@ -127,7 +171,7 @@ public sealed partial class HumanizerSourceGenerator
                                         Member("string", "feminine", null, null, null, null, null, null),
                                         Member("string", "neuter", null, null, null, null, null, null)
                                     ),
-                            Member("builder", "scales", null, null, "conjoined-gendered-scale-array", null, null, null)
+                            ScaleMember("scales", "conjoined-gendered-scale-array", "divisor", "singular", "plural")
                         )
             ),
                 // Shared scale-decomposition engine for locales whose main variability is conjunction placement, ordinal naming, and scale metadata. Locale-owned YAML provides the words and strategy enums; the runtime kernel stays generic.
@@ -150,7 +194,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalTensMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "conjunctional-scale-array", null, null, null),
+                            ScaleMember("scales", "conjunctional-scale-array", "value", "name"),
                             Member("nullable-int-string-dictionary", "namedTuples", null, null, null, null, null, null)
                         )
             ),
@@ -173,7 +217,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "thousandsPluralSuffix", null, null, null, null, null, null),
                             Member("string", "thousandsSingularSuffix", null, null, null, null, null, null),
                             Member("nullable-int-string-dictionary", "thousandsSpecialCases", null, null, null, null, null, "empty"),
-                            Member("builder", "scales", null, null, "construct-state-scale-array", null, null, null)
+                            ScaleMember("scales", "construct-state-scale-array", "value", "singular")
                         ),
                 Member("culture", null, null, null, null, null, null, null)
             ),
@@ -186,7 +230,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "tensWord", null, null, null, null, null, null),
                             Member("string", "zeroTensWord", null, null, null, null, null, null),
                             Member("string-array", "digitWords", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "contextual-decimal-scale-array", null, null, null),
+                            ScaleMember("scales", "contextual-decimal-scale-array", "value", "name"),
                             Member("nullable-int-string-dictionary", "teenUnitExceptions", null, null, null, null, null, "empty"),
                             Member("nullable-int-string-dictionary", "postTensUnitExceptions", null, null, null, null, null, "empty"),
                             Member("nullable-int-string-dictionary", "exactOrdinals", null, null, null, null, null, "empty")
@@ -201,7 +245,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "hundredUnitWord", null, null, null, null, null, null),
                             Member("string-array", "units", null, null, null, null, null, null),
                             Member("string-array", "tens", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "contracted-one-scale-array", null, null, null)
+                            ScaleMember("scales", "contracted-one-scale-array", "value", "name")
                         )
             ),
                 ["east-asian-grouped"] = Schema("east-asian-grouped", null,
@@ -238,7 +282,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "neuterOne", null, null, null, null, null, null),
                             Member("string", "feminineTwo", null, null, null, null, null, null),
                             Member("string", "oneOrdinalPrefix", null, null, null, "одно", null, null),
-                            Member("builder", "scales", null, null, "east-slavic-scale-array", null, null, null),
+                            ScaleMember("scales", "east-slavic-scale-array", "value", "singular", "plural"),
                             Member("builder", "endings.masculine", null, null, "east-slavic-gender-ending", null, null, null),
                             Member("builder", "endings.feminine", null, null, "east-slavic-gender-ending", null, null, null),
                             Member("builder", "endings.neuter", null, null, "east-slavic-gender-ending", null, null, null)
@@ -259,7 +303,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "teensVariants", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalUnderTenVariants", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "gendered-scale-ordinal-array", null, null, null)
+                            ScaleMember(
+                                "scales",
+                                "gendered-scale-ordinal-array",
+                                "value",
+                                "singular",
+                                "plural",
+                                MetricScaleWordTransform.TrimFirstWord)
                         )
             ),
                 // Shared decimal-scale engine for locales whose ordinal behavior is driven by harmony or final-character suffix selection. The schema models the reusable suffix system directly instead of naming a language family.
@@ -272,7 +322,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("enum", "hundredStrategy", null, "HarmonyOrdinalHundredStrategy", null, null, null, null),
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "harmony-ordinal-scale-array", null, null, null),
+                            ScaleMember("scales", "harmony-ordinal-scale-array", "value", "name"),
                             Member("enum", "ordinalSuffixStrategy", null, "HarmonyOrdinalSuffixStrategy", null, null, null, null),
                             Member("bool", "softenTerminalTBeforeSuffix", null, null, null, null, null, null),
                             Member("bool", "dropTerminalVowelBeforeHarmonySuffix", null, null, null, null, null, null),
@@ -297,8 +347,8 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("nullable-int-string-dictionary", "ordinalUnitsExceptions", null, null, null, null, null, "empty"),
                             Member("nullable-int-string-dictionary", "wholeTensExceptions", null, null, null, null, null, "empty"),
-                            Member("builder", "scales", null, null, "hyphenated-scale-array", null, null, null),
-                            Member("builder", "thousandScale", null, null, "hyphenated-scale", null, null, null),
+                            ScaleMember("scales", "hyphenated-scale-array", "divisor", "cardinal"),
+                            FixedScaleMember("thousandScale", "hyphenated-scale", 1_000, "cardinal", null),
                             Member("nullable-int-string-dictionary", "tupleMap", null, null, null, null, null, "empty")
                         )
             ),
@@ -337,7 +387,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "ordinalUnitComponents", null, null, null, null, null, null),
                             Member("string-array", "tupleMap", null, null, null, null, null, null),
                             Member("string-string-dictionary", "ordinalAbbreviations", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "hyphenated-ordinal-scale-array", null, null, null)
+                            ScaleMember("scales", "hyphenated-ordinal-scale-array", "value", "singular", "plural")
                         )
             ),
 
@@ -347,7 +397,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "negativeWord", null, null, null, null, null, null),
                             Member("string", "ordinalSuffix", null, null, null, "", null, null),
                             Member("string-array", "denseUnitsMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "indian-scale-form-array", null, null, null),
+                            ScaleMember("scales", "indian-scale-form-array", "value", "singular", "plural"),
                             Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty"),
                             Member("nullable-string-string-dictionary", "ordinalTerminalReplacements", null, null, null, null, null, "empty")
                         )
@@ -428,7 +478,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "unitTensJoiner", null, null, null, null, null, null),
                             Member("string", "unitTensAlternateJoinerUnitEnding", null, null, null, "", null, null),
                             Member("string", "unitTensAlternateJoiner", null, null, null, null, "unitTensJoiner", null),
-                            Member("builder", "scales", null, null, "inverted-tens-scale-array", null, null, null),
+                            ScaleMember(
+                                "scales",
+                                "inverted-tens-scale-array",
+                                "value",
+                                "oneForm",
+                                "manyForm",
+                                MetricScaleWordTransform.TrimFirstWord),
                             Member("enum", "ordinalMode", null, "InvertedTensOrdinalMode", null, "suffix", null, null),
                             Member("nullable-string-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty"),
                             Member("string", "ordinalSteSuffixEndingChars", null, null, null, "", null, null),
@@ -459,7 +515,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("optional-string-array", "subHundredMap", null, null, null, null, null, null),
                             Member("nullable-int-string-dictionary", "feminineSubHundredReplacements", null, null, null, null, null, "empty"),
                             Member("nullable-int-string-dictionary", "neuterSubHundredReplacements", null, null, null, null, null, "empty"),
-                            Member("builder", "scales", null, null, "joined-scale-array", null, null, null),
+                            ScaleMember("scales", "joined-scale-array", "value", "name", "pluralName"),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, null),
                             Member("optional-profile-object", "ordinal", "JoinedScaleOrdinalProfile", null, null, null, null, null,
                                         Member("profile-object", "masculine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
@@ -499,7 +555,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredWords", null, null, null, null, null, null),
                             Member("string-array", "scalePrefixes", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "linking-scale-array", null, null, null),
+                            ScaleMember("scales", "linking-scale-array", "value", "name"),
                             Member("builder", "scaleLinkRules", null, null, "linking-suffix-rule-array", null, null, null)
                         )
             ),
@@ -530,7 +586,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "unitsMasculine", null, null, null, null, null, null),
                             Member("string-array", "unitsMasculineAbbreviation", null, null, null, null, null, null),
                             Member("string-array", "unitsFeminine", null, null, null, null, null, null),
-                            Member("builder", "largeScales", null, null, "long-scale-word-array", null, null, null)
+                            ScaleMember("largeScales", "long-scale-word-array", "value", "singular", "plural")
                         )
             ),
                 ["dual-form-scale"] = Schema("dual-form-scale", "DualFormScaleNumberToWordsConverter",
@@ -546,12 +602,12 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("string-array", "prefixMap", null, null, null, null, null, null),
-                            Member("builder", "thousandScale", null, null, "dual-form-scale", null, null, null),
-                            Member("builder", "millionScale", null, null, "dual-form-scale", null, null, null),
-                            Member("builder", "billionScale", null, null, "dual-form-scale", null, null, null),
-                            Member("builder", "trillionScale", null, null, "dual-form-scale", null, null, null),
-                            Member("builder", "quadrillionScale", null, null, "dual-form-scale", null, null, null),
-                            Member("builder", "quintillionScale", null, null, "dual-form-scale", null, null, null)
+                            FixedScaleMember("thousandScale", "dual-form-scale", 1_000),
+                            FixedScaleMember("millionScale", "dual-form-scale", 1_000_000),
+                            FixedScaleMember("billionScale", "dual-form-scale", 1_000_000_000),
+                            FixedScaleMember("trillionScale", "dual-form-scale", 1_000_000_000_000),
+                            FixedScaleMember("quadrillionScale", "dual-form-scale", 1_000_000_000_000_000),
+                            FixedScaleMember("quintillionScale", "dual-form-scale", 1_000_000_000_000_000_000)
                         )
             ),
                 ["ordinal-prefix-scale"] = Schema("ordinal-prefix-scale", null,
@@ -573,7 +629,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "ordinalTwoMasculine", null, null, null, null, null, null),
                             Member("string", "ordinalTwoFeminine", null, null, null, null, null, null),
                             Member("string", "ordinalTwoNeuter", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "ordinal-prefix-scale-array", null, null, null)
+                            ScaleMember(
+                                "scales",
+                                "ordinal-prefix-scale-array",
+                                "value",
+                                "singular",
+                                "plural",
+                                MetricScaleWordTransform.TrimFirstWord)
                         )
             ),
                 ["pluralized-scale"] = Schema("pluralized-scale", null,
@@ -584,7 +646,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "pluralized-scale-array", null, null, null),
+                            ScaleMember("scales", "pluralized-scale-array", "value", "singular", "plural"),
                             Member("enum", "formDetector", null, "PluralizedScaleFormDetector", null, null, null, null),
                             Member("enum", "unitVariantStrategy", null, "PluralizedScaleUnitVariantStrategy", null, "none", null, null),
                             Member("enum", "ordinalMode", null, "PluralizedScaleOrdinalMode", null, "numeric-culture", null, null),
@@ -611,7 +673,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "ordinalSuffix", null, null, null, "", null, null),
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "scale-leading-compound-scale-array", null, null, null),
+                            ScaleMember("scales", "scale-leading-compound-scale-array", "value", "name"),
                             Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty")
                         )
             ),
@@ -645,7 +707,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "unitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredUnitMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "scandinavian-scale-array", null, null, null),
+                            ScaleMember("scales", "scandinavian-scale-array", "value", "name", "plural"),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
                         )
             ),
@@ -661,7 +723,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsDefault", null, null, null, null, null, null),
                             Member("string-array", "hundredsPluralized", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "segmented-scale-array", null, null, null),
+                            ScaleMember(
+                                "scales",
+                                "segmented-scale-array",
+                                "value",
+                                "singular",
+                                "plural",
+                                MetricScaleWordTransform.TrimFirstWord),
                             Member("int32", "maximumOrdinal", null, null, null, null, null, null),
                             Member("nullable-int-string-dictionary", "ordinalMap", null, null, null, null, null, "empty")
                         )
@@ -679,7 +747,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("int32", "terminalRemainderThreshold", null, null, null, "100", null, null),
                             Member("string", "ordinalSuffix", null, null, null, "", null, null),
                             Member("string-array", "words", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "linked-vigesimal-scale-array", null, null, null),
+                            ScaleMember("scales", "linked-vigesimal-scale-array", "value", "name"),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty"),
                             Member("string", "terminalRemainderAlternateJoiner", null, null, null, "", null, null),
                             Member("string", "terminalRemainderAlternateJoinerInitials", null, null, null, "", null, null)
@@ -696,7 +764,12 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "ordinalSuffix", null, null, null, "", null, null),
                             Member("string-array", "words", null, null, null, null, null, null),
                             Member("string-array", "countStems", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "stemmed-scale-array", null, null, null),
+                            ScaleMember(
+                                "scales",
+                                "stemmed-scale-array",
+                                "value",
+                                "fallbackName",
+                                singularOptional: true),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, "empty")
                         )
             ),
@@ -719,7 +792,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "ordinalUnitsMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalTensMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalHundredsMap", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "south-slavic-scale-array", null, null, null)
+                            ScaleMember("scales", "south-slavic-scale-array", "value", "singular", "plural")
                         )
             ),
                 ["terminal-ordinal-scale"] = Schema("terminal-ordinal-scale", null,
@@ -736,7 +809,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "hundredsPluralWord", null, null, null, null, null, null),
                             Member("string", "masculineOrdinalSuffix", null, null, null, null, null, null),
                             Member("string", "feminineOrdinalSuffix", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "terminal-ordinal-scale-array", null, null, null)
+                            ScaleMember("scales", "terminal-ordinal-scale-array", "value", "exactSingularCardinal", "pluralCardinal")
                         )
             ),
                 ["triad-scale"] = Schema("triad-scale", null,
@@ -758,7 +831,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "teensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("string-array", "ordinalUnderTen", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "triad-scale-array", null, null, null)
+                            ScaleMember(
+                                "scales",
+                                "triad-scale-array",
+                                "value",
+                                "singular",
+                                "plural",
+                                MetricScaleWordTransform.TrimFirstWord)
                         )
             ),
                 // Shared engine for locales whose compound tens place the unit before the tens word. Locale YAML supplies joiner transforms, scale metadata, and gendered lexical forms.
@@ -781,8 +860,18 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "compoundUnitsMap", null, null, null, null, null, null),
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "unitsOrdinal", null, null, null, null, null, null),
-                            Member("builder", "scales", null, null, "unit-leading-compound-scale-array", null, null, null)
+                            ScaleMember(
+                                "scales",
+                                "unit-leading-compound-scale-array",
+                                "value",
+                                "singularCardinal",
+                                "pluralCardinalFormat",
+                                MetricScaleWordTransform.TrimFirstWord | MetricScaleWordTransform.StripPluralFormatPlaceholder)
                         )
+            ),
+                ["macedonian"] = Schema("macedonian", "MacedonianNumberToWordsConverter",
+                Member("culture", null, null, null, null, null, null, null),
+                ScaleMember("scales", "macedonian-scale-array", "value", "singular", "plural")
             ),
                 // Shared engine for locales that differ mainly in how 70/80/90 decades are composed. The runtime kernel stays generic; locale-owned YAML chooses the decade strategy and exact overrides.
                 ["variant-decade"] = Schema("variant-decade", null,
@@ -794,7 +883,8 @@ public sealed partial class HumanizerSourceGenerator
                             Member("nullable-string", "specialSeventyOneWord", null, null, null, null, null, null),
                             Member("bool", "pluralizeExactEighty", null, null, null, null, null, null),
                             Member("nullable-int-set", "tensUsingEtWhenUnitIsOne", null, null, null, null, null, "empty"),
-                            Member("string-array", "tensMap", null, null, null, null, null, null)
+                            Member("string-array", "tensMap", null, null, null, null, null, null),
+                            ScaleMember("scales", "variant-decade-scale-array", "value", "singular", "plural")
                         )
             ),
                 ["west-slavic-gendered"] = Schema("west-slavic-gendered", null,
@@ -807,10 +897,10 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "unitsFeminineForms", null, null, null, null, null, null),
                             Member("string-array", "unitsNeuterForms", null, null, null, null, null, null),
                             Member("string-array", "unitsInvariantForms", null, null, null, null, null, null),
-                            Member("builder", "thousands", null, null, "west-slavic-scale-forms", null, null, null),
-                            Member("builder", "millions", null, null, "west-slavic-scale-forms", null, null, null),
-                            Member("builder", "trillions", null, null, "west-slavic-scale-forms", null, null, null),
-                            Member("builder", "billions", null, null, "west-slavic-scale-forms", null, null, null)
+                            FixedScaleMember("thousands", "west-slavic-scale-forms", 1_000),
+                            FixedScaleMember("millions", "west-slavic-scale-forms", 1_000_000),
+                            FixedScaleMember("trillions", "west-slavic-scale-forms", 1_000_000_000_000),
+                            FixedScaleMember("billions", "west-slavic-scale-forms", 1_000_000_000)
                         ),
                 Member("culture", null, null, null, null, null, null, null)
             ),

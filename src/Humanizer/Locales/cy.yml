@@ -1121,6 +1121,7 @@ surfaces:
         20: 'ugeinfed'
         21: 'unfed ar hugain'
     parse:
+      decimalMarker: 'pwynt'
       engine: 'linked-vigesimal'
       terminalRemainderJoiner: 'a'
       terminalRemainderAlternateJoiner: 'ac'

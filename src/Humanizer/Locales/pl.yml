@@ -1241,6 +1241,7 @@ surfaces:
           plural: 'tysięcy'
 
     parse:
+      decimalMarker: 'przecinek'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

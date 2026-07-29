@@ -417,6 +417,7 @@ surfaces:
           - 'noningentésimo'
 
     parse:
+      decimalMarker: 'vírgula'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

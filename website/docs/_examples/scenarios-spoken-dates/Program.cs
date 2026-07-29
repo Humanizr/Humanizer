@@ -6,13 +6,15 @@ CultureInfo.CurrentCulture = culture;
 CultureInfo.CurrentUICulture = culture;
 
 var date = new DateTime(2022, 1, 25).ToOrdinalWords();
+var dateInGenitive = new DateOnly(2022, 1, 25).ToOrdinalWords(GrammaticalCase.Genitive);
 var time = new TimeOnly(13, 23)
-    .ToClockNotation(ClockNotationRounding.NearestFiveMinutes);
+    .ToClockNotation(ClockNotationRounding.NearestFiveMinutes, culture);
 
 AssertEqual("January 25th, 2022", date);
+AssertEqual("January 25th, 2022", dateInGenitive);
 AssertEqual("twenty-five past one", time);
 
-Console.WriteLine($"{date}; {time}");
+Console.WriteLine($"{date}; {dateInGenitive}; {time}");
 
 static void AssertEqual(string expected, string actual)
 {

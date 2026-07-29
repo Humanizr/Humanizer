@@ -558,6 +558,7 @@ surfaces:
       negativeSign: '-'
 
     parse:
+      decimalMarker: 'اعشاریہ'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       useHundredMultiplier: true

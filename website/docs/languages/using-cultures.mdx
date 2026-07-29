@@ -31,14 +31,14 @@ var french = CultureInfo.GetCultureInfo("fr-FR");
 
 Console.WriteLine(42.ToWords(french));
 Console.WriteLine(DateTime.UtcNow.AddDays(-1).Humanize(culture: french));
+Console.WriteLine(new[] { "un", "deux", "trois" }.Humanize(french));
 
 CultureInfo.CurrentCulture = french;
 CultureInfo.CurrentUICulture = french;
-Console.WriteLine(new[] { "un", "deux", "trois" }.Humanize());
+Console.WriteLine(42.ToWords());
 ```
 
-The first two calls are explicit. The collection call uses ambient UI culture
-because collection formatting has no culture parameter.
+The first three calls are explicit. The final call uses the ambient culture.
 
 For application code, establish ambient culture once at the request, message,
 or background-job boundary. Keep using explicit overloads inside shared
@@ -48,19 +48,19 @@ another operation's output.
 ## Pitfall
 
 `CurrentCulture` and `CurrentUICulture` serve different .NET concerns.
-Numeric/date formatting commonly follows `CurrentCulture`; resource and
-collection localization can follow `CurrentUICulture`. Setting only one can
-produce mixed-language output. Also avoid changing process-wide culture in a
-shared request path when an explicit overload exists.
+Humanizer's ambient localizer registries, including collection formatting,
+follow `CurrentCulture`; application resources can follow `CurrentUICulture`.
+Setting only one can produce mixed-language output. Also avoid changing
+process-wide culture in a shared request path when an explicit overload exists.
 
 Parent fallback is resolution, not parity proof. If `fr-CA` reaches `fr`, that
 only identifies where the data came from. It does not establish that French
 Canadian wording matches every neutral-French choice.
 
-On `Humanizer 4`, use `Configurator.IsCultureSupported(culture)` before
-choosing an application fallback. It checks generated Humanizer locale data
-through the named parent chain and does not return `true` merely because the
-default English localizers could produce output:
+In Humanizer 4, use `Configurator.IsCultureSupported(culture)` before choosing
+an application fallback. It checks generated Humanizer locale data through the
+named parent chain and does not return `true` merely because the default English
+localizers could produce output:
 
 ```csharp
 var requested = CultureInfo.GetCultureInfo("fr-FR");
@@ -76,11 +76,10 @@ If inherited or direct output is wrong, follow the
 ## Version notes
 
 Explicit and ambient `CultureInfo` selection applies across the supported
-documentation corpus. The locale set and package layout are versioned:
-`Humanizer 4` has generated locale data in the consolidated `Humanizer`
-package, while published versions through `3.0.10` use the metapackage and
-locale-package graph documented in their snapshot.
-`Configurator.IsCultureSupported` is a `Humanizer 4` API.
+documentation corpus. Humanizer 4 ships generated locale data and
+`Configurator.IsCultureSupported` in the consolidated `Humanizer` NuGet
+package. Releases through `3.0.10` use the metapackage and locale-package graph
+documented in their snapshot.
 
 ## Related guides and API
 

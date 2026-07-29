@@ -374,6 +374,7 @@ surfaces:
           omitOneWhenSingular: true
 
     parse:
+      decimalMarker: '٫'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

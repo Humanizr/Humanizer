@@ -970,6 +970,7 @@ surfaces:
       negativeSign: '−'
 
     parse:
+      decimalMarker: 'zarez'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

@@ -3,6 +3,10 @@ namespace Humanizer.Tests.Localisation.en;
 [UseCulture("en-US")]
 public class WordsToDecimalNumberTests
 {
+    public static IEnumerable<object[]> SupportedCultureRows =>
+        global::Humanizer.Tests.Localisation.LocaleCoverageData.ShippedLocales
+            .Select(static localeName => new object[] { localeName });
+
     [Theory]
     [InlineData("one point two", "1.2")]
     [InlineData("three point one four", "3.14")]
@@ -41,6 +45,9 @@ public class WordsToDecimalNumberTests
     [InlineData("one point ten", "ten")]
     [InlineData("one point 2", "2")]
     [InlineData("one dot two", "one dot two")]
+    [InlineData("onepointtwo", "onepointtwo")]
+    [InlineData("one point twothree", "twothree")]
+    [InlineData("minusone point two", "minusone")]
     public void RejectsMalformedDecimalPhrases(string words, string expectedUnrecognizedWord)
     {
         var success = words.TryToDecimalNumber(
@@ -76,7 +83,11 @@ public class WordsToDecimalNumberTests
     [Fact]
     public void DirectConvertersHonorNullInputContract()
     {
-        var english = new EnglishWordsToDecimalNumberConverter(CultureInfo.CurrentCulture);
+        var english = new LocalizedWordsToDecimalNumberConverter(
+            CultureInfo.CurrentCulture,
+            "point",
+            ["minus ", "negative "],
+            []);
         var unsupported = UnsupportedWordsToDecimalNumberConverter.Instance;
 
         Assert.False(english.TryConvert(null!, out _, out var englishUnrecognizedNumber));
@@ -122,17 +133,80 @@ public class WordsToDecimalNumberTests
     }
 
     [Fact]
-    public void UnsupportedCultureUsesTryAndThrowConventions()
+    public void FrenchCultureParsesLocalizedDecimalWords()
     {
         var culture = new CultureInfo("fr-FR");
 
-        Assert.False("one point two".TryToDecimalNumber(
+        Assert.True("un virgule deux".TryToDecimalNumber(
+            out var parsed,
+            culture,
+            out var unrecognizedWord));
+        Assert.Equal(1.2m, parsed);
+        Assert.Null(unrecognizedWord);
+        Assert.Equal(1.2m, "un virgule deux".ToDecimalNumber(culture));
+    }
+
+    [Theory]
+    [InlineData("fr-FR", "un virgule deux")]
+    [InlineData("hi-IN", "एक दशमलव दो")]
+    [InlineData("ur-PK", "ایک اعشاریہ دو")]
+    [InlineData("zh-CN", "一点二")]
+    public void ParsesRepresentativeNativeDecimalPhrases(string cultureName, string words) =>
+        Assert.Equal(1.2m, words.ToDecimalNumber(new(cultureName)));
+
+    [Fact]
+    public void MalteseParsesNegativeSuffixAfterCompleteDecimalPhrase() =>
+        Assert.Equal(
+            -1.2m,
+            "wieħed punt tnejn inqas minn żero".ToDecimalNumber(new("mt")));
+
+    [Theory]
+    [MemberData(nameof(SupportedCultureRows))]
+    public void AllSupportedCulturesParseAuthoredDecimalMarkerWithGeneratedDigits(string cultureName)
+    {
+        var culture = new CultureInfo(cultureName);
+        var converter = Assert.IsType<LocalizedWordsToDecimalNumberConverter>(
+            Configurator.GetWordsToDecimalNumberConverter(culture));
+        var words = $"{1.ToWords(culture)} {converter.DecimalMarker} {2.ToWords(culture)}";
+
+        Assert.True(words.TryToDecimalNumber(out var parsed, culture, out var unrecognizedWord));
+        Assert.Equal(1.2m, parsed);
+        Assert.Null(unrecognizedWord);
+        Assert.Equal(1.2m, words.ToDecimalNumber(culture));
+    }
+
+    [Fact]
+    public void SameLanguageDescendantUsesLocalizedParentProfile()
+    {
+        var culture = new CultureInfo("fr-CA");
+
+        Assert.Equal(1.2m, "un virgule deux".ToDecimalNumber(culture));
+    }
+
+    [Fact]
+    public void NonEnglishCultureDoesNotUseEnglishOverflowComposition()
+    {
+        var culture = new CultureInfo("fr-FR");
+
+        Assert.False("dix trillions virgule un".TryToDecimalNumber(
+            out var parsed,
+            culture,
+            out _));
+        Assert.Equal(0m, parsed);
+    }
+
+    [Fact]
+    public void UnsupportedCultureUsesTryAndThrowConventions()
+    {
+        var culture = new CultureInfo("gd");
+
+        Assert.False("aon point dhà".TryToDecimalNumber(
             out var parsed,
             culture,
             out var unrecognizedWord));
         Assert.Equal(0m, parsed);
-        Assert.Equal("one point two", unrecognizedWord);
-        Assert.Throws<NotSupportedException>(() => "one point two".ToDecimalNumber(culture));
+        Assert.Equal("aon point dhà", unrecognizedWord);
+        Assert.Throws<NotSupportedException>(() => "aon point dhà".ToDecimalNumber(culture));
     }
 
     [Fact]

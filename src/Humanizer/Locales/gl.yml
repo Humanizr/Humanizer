@@ -516,6 +516,7 @@ surfaces:
           plural: 'millóns'
 
     parse:
+      decimalMarker: 'coma'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

@@ -897,6 +897,7 @@ surfaces:
         'عشر': 'العاشرة'
 
     parse:
+      decimalMarker: 'فاصل'
       engine: 'token-map'
       normalizationProfile: 'collapse-whitespace'
       negativePrefixes:

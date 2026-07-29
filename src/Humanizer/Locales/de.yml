@@ -698,6 +698,7 @@ surfaces:
           ordinalPlural: '{0}hundert'
 
     parse:
+      decimalMarker: 'Komma'
       engine: 'inverted-tens'
       cardinalMap:
         'null': 0

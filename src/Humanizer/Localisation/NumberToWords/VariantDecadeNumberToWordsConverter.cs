@@ -38,14 +38,10 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
             parts.Add(profile.MinusWord);
         }
 
-        // Large-scale traversal remains explicit because the lexical family is stable and the
-        // generated profile only needs to drive the decade behavior rather than the long-scale map.
-        CollectParts(parts, ref magnitude, 1000000000000000000, "trillion");
-        CollectParts(parts, ref magnitude, 1000000000000000, "billiard");
-        CollectParts(parts, ref magnitude, 1000000000000, "billion");
-        CollectParts(parts, ref magnitude, 1000000000, "milliard");
-        CollectParts(parts, ref magnitude, 1000000, "million");
-        CollectThousands(parts, ref magnitude, 1000, "mille");
+        foreach (var scale in profile.Scales)
+        {
+            CollectParts(parts, ref magnitude, scale);
+        }
 
         CollectPartsUnderAThousand(parts, magnitude, gender, true);
 
@@ -142,29 +138,22 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
         number %= d;
     }
 
-    // Higher scales stay fully structural in this family. The only special-case long-scale rule is
-    // whether the singular form omits the leading "un", which is handled in the explicit callers.
-    void CollectParts(List<string> parts, ref ulong number, ulong d, string form)
+    void CollectParts(List<string> parts, ref ulong number, VariantDecadeScale scale)
     {
-        if (number < d)
+        if (number < scale.Value)
         {
             return;
         }
 
-        var result = number / d;
+        var result = number / scale.Value;
 
-        CollectPartsUnderAThousand(parts, result, GrammaticalGender.Masculine, true);
-
-        if (result == 1)
+        if (!(scale.OmitOne && result == 1))
         {
-            parts.Add(form);
-        }
-        else
-        {
-            parts.Add(form + "s");
+            CollectPartsUnderAThousand(parts, result, GrammaticalGender.Masculine, scale.PluralizeMultiplier);
         }
 
-        number %= d;
+        parts.Add(result == 1 ? scale.Singular : scale.Plural);
+        number %= scale.Value;
     }
 
     void CollectPartsUnderAThousand(List<string> parts, ulong number, GrammaticalGender gender, bool pluralize)
@@ -175,24 +164,6 @@ class VariantDecadeNumberToWordsConverter(VariantDecadeNumberToWordsProfile prof
         {
             CollectPartsUnderAHundred(parts, ref number, gender, pluralize);
         }
-    }
-
-    void CollectThousands(List<string> parts, ref ulong number, ulong d, string form)
-    {
-        if (number < d)
-        {
-            return;
-        }
-
-        var result = number / d;
-        if (result > 1)
-        {
-            CollectPartsUnderAThousand(parts, result, GrammaticalGender.Masculine, false);
-        }
-
-        parts.Add(form);
-
-        number %= d;
     }
 
     // Under one hundred is where the family divergence lives, so the strategy enums only apply
@@ -303,7 +274,8 @@ sealed class VariantDecadeNumberToWordsProfile(
     string? specialSeventyOneWord,
     bool pluralizeExactEighty,
     FrozenSet<int> tensUsingEtWhenUnitIsOne,
-    string[] tensMap)
+    string[] tensMap,
+    VariantDecadeScale[] scales)
 {
     /// <summary>Gets the word used to prefix negative values.</summary>
     public string MinusWord { get; } = minusWord;
@@ -321,4 +293,13 @@ sealed class VariantDecadeNumberToWordsProfile(
     public FrozenSet<int> TensUsingEtWhenUnitIsOne { get; } = tensUsingEtWhenUnitIsOne;
     /// <summary>Gets the tens lexicon.</summary>
     public string[] TensMap { get; } = tensMap;
+    /// <summary>Gets the descending scale rows.</summary>
+    public VariantDecadeScale[] Scales { get; } = scales;
 }
+
+readonly record struct VariantDecadeScale(
+    ulong Value,
+    string Singular,
+    string Plural,
+    bool OmitOne = false,
+    bool PluralizeMultiplier = true);

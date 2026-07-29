@@ -475,6 +475,7 @@ surfaces:
       groupSeparator: '.'
 
     parse:
+      decimalMarker: 'Komma'
       engine: 'inverted-tens'
       cardinalMap:
         'null': 0
