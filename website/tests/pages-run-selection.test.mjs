@@ -85,6 +85,7 @@ test('expensive documentation gates run in parallel before retention', () => {
   assert.match(validation, /gate:\n          - manifests\n          - runtime/);
   assert.match(validation, /permissions:\n      actions: read\n      contents: read/);
   assert.match(validation, /\}\}-\$\{\{ matrix\.gate \}\}/);
+  assert.doesNotMatch(validation, /^    needs:/m);
   assert.match(retention, /needs:\n      - build\n      - validate/);
 });
 
