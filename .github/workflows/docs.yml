@@ -105,6 +105,8 @@ jobs:
 
   build:
     outputs:
+      archive_run_attempt: ${{ steps.deployment-identity.outputs.archive_run_attempt }}
+      archive_run_id: ${{ steps.deployment-identity.outputs.archive_run_id }}
       bootstrap_rollback: >-
         ${{ steps.rollback-source.outputs.bootstrap_rollback || 'false' }}
       recovery_stale: >-
@@ -494,6 +496,18 @@ jobs:
         id: deployment-identity
         if: steps.rollback-source.outputs.recovery_stale != 'true'
         env:
+          ARCHIVE_RUN_ATTEMPT: >-
+            ${{
+              inputs.rollback_run_id != '' &&
+              inputs.rollback_run_attempt ||
+              github.run_attempt
+            }}
+          ARCHIVE_RUN_ID: >-
+            ${{
+              inputs.rollback_run_id != '' &&
+              inputs.rollback_run_id ||
+              github.run_id
+            }}
           SOURCE_SHA: >-
             ${{
               inputs.rollback_run_id != '' &&
@@ -501,12 +515,19 @@ jobs:
               github.sha
             }}
         run: |
+          if [[ ! "$ARCHIVE_RUN_ID" =~ ^[0-9]+$ ||
+                ! "$ARCHIVE_RUN_ATTEMPT" =~ ^[0-9]+$ ]]; then
+            echo "Deployment archive identity is invalid." >&2
+            exit 1
+          fi
           printf \
-            '{"sourceSha":"%s","deploymentRunId":%s,"deploymentRunAttempt":%s}\n' \
+            '{"sourceSha":"%s","archiveRunId":%s,"archiveRunAttempt":%s}\n' \
             "$SOURCE_SHA" \
-            "$GITHUB_RUN_ID" \
-            "$GITHUB_RUN_ATTEMPT" \
+            "$ARCHIVE_RUN_ID" \
+            "$ARCHIVE_RUN_ATTEMPT" \
             > website/build/deployment.json
+          echo "archive_run_id=${ARCHIVE_RUN_ID}" >> "$GITHUB_OUTPUT"
+          echo "archive_run_attempt=${ARCHIVE_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
           echo "source_sha=${SOURCE_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Verify complete Pages artifact
@@ -693,8 +714,7 @@ jobs:
                         .[][].jobs[]
                         | select(
                             (
-                              .name == "build"
-                              or .name == "stage-pages-release"
+                              .name == "stage-pages-release"
                               or .name == "deploy"
                               or .name == "production-smoke"
                             )
@@ -707,7 +727,7 @@ jobs:
                       | join(",")
                     '
                 )"
-                if [[ "$pointer_jobs" != "build,deploy,production-smoke,stage-pages-release" ]]; then
+                if [[ "$pointer_jobs" != "deploy,production-smoke,stage-pages-release" ]]; then
                   echo "Failed deployment attempt lacks successful publication evidence." >&2
                   exit 1
                 fi
@@ -741,12 +761,7 @@ jobs:
                       [
                         .[][].jobs[]
                         | select(
-                            (
-                              .name == "build"
-                              or .name == "stage-pages-release"
-                              or .name == "deploy"
-                              or .name == "production-smoke"
-                            )
+                            .name == "build"
                             and .conclusion == "success"
                           )
                         | .name
@@ -756,7 +771,7 @@ jobs:
                       | join(",")
                     '
                 )"
-                if [[ "$archive_jobs" != "build,deploy,production-smoke,stage-pages-release" ]]; then
+                if [[ "$archive_jobs" != "build" ]]; then
                   echo "Latest deployment pointer lacks successful archive evidence." >&2
                   exit 1
                 fi
@@ -1012,18 +1027,8 @@ jobs:
 
       - name: Stage and verify mutable deployment release
         env:
-          ARCHIVE_RUN_ATTEMPT: >-
-            ${{
-              inputs.rollback_run_id != '' &&
-              inputs.rollback_run_attempt ||
-              github.run_attempt
-            }}
-          ARCHIVE_RUN_ID: >-
-            ${{
-              inputs.rollback_run_id != '' &&
-              inputs.rollback_run_id ||
-              github.run_id
-            }}
+          ARCHIVE_RUN_ATTEMPT: ${{ needs.build.outputs.archive_run_attempt }}
+          ARCHIVE_RUN_ID: ${{ needs.build.outputs.archive_run_id }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_SHA: ${{ needs.build.outputs.source_sha }}
         run: |
@@ -1371,86 +1376,18 @@ jobs:
             > current-production.json
           if ! jq -e \
             --arg sourceSha "$SOURCE_SHA" \
-            --argjson deploymentRunId "$deployment_run_id" \
-            --argjson deploymentRunAttempt "$deployment_run_attempt" \
+            --argjson archiveRunId "$archive_run_id" \
+            --argjson archiveRunAttempt "$archive_run_attempt" \
             '.sourceSha == $sourceSha
-              and .deploymentRunId == $deploymentRunId
-              and .deploymentRunAttempt == $deploymentRunAttempt' \
+              and .archiveRunId == $archiveRunId
+              and .archiveRunAttempt == $archiveRunAttempt' \
             current-production.json >/dev/null; then
             echo "Production no longer matches the deployment candidate." >&2
             exit 1
           fi
 
-          if [[ "$source_attempt" != "$GITHUB_RUN_ATTEMPT" ]]; then
-            mkdir roll-forward
-            gh api \
-              "repos/${GITHUB_REPOSITORY}/releases/${release_id}" \
-              --jq '.assets[] | [.name, .id] | @tsv' |
-              while IFS=$'\t' read -r name asset_id; do
-                if [[ "$name" == "$archive_name" ||
-                      "$name" == "$checksum_name" ]]; then
-                  gh api \
-                    -H "Accept: application/octet-stream" \
-                    "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}" \
-                    > "roll-forward/${name}"
-                fi
-              done
-            (
-              cd roll-forward
-              sha256sum -c "$checksum_name"
-            )
-            pointer_name="deployment-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.json"
-            printf \
-              '{"schemaVersion":1,"archiveRunId":%s,"archiveRunAttempt":%s,"sourceSha":"%s","deploymentRunId":%s,"deploymentRunAttempt":%s}\n' \
-              "$archive_run_id" \
-              "$archive_run_attempt" \
-              "$SOURCE_SHA" \
-              "$GITHUB_RUN_ID" \
-              "$GITHUB_RUN_ATTEMPT" \
-              > "roll-forward/${pointer_name}"
-            pointer_tag="${release_prefix}${GITHUB_RUN_ATTEMPT}"
-            gh release create "$pointer_tag" \
-              "roll-forward/${archive_name}" \
-              "roll-forward/${checksum_name}" \
-              "roll-forward/${pointer_name}" \
-              --draft \
-              --latest=false \
-              --prerelease \
-              --target "$SOURCE_SHA" \
-              --title "Documentation deployment ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}" \
-              --notes "Automation-owned exact deployment candidate."
-            release="$(
-              gh api \
-                --paginate \
-                --slurp \
-                "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
-                jq -r --arg tag "$pointer_tag" '
-                  [
-                    .[][]
-                    | select(.tag_name == $tag)
-                  ]
-                  | if length != 1 then
-                      error("roll-forward release is unavailable or duplicated")
-                    else
-                      first
-                    end
-                  | [
-                      .id,
-                      .draft,
-                      .immutable,
-                      .target_commitish,
-                      (.assets | length),
-                      ([.assets[].name] | sort | join(","))
-                    ]
-                  | @tsv
-                '
-            )"
-            IFS=$'\t' read -r release_id draft immutable target \
-              asset_count asset_names <<<"$release"
-          else
-            pointer_name="$source_pointer_name"
-            pointer_tag="$source_tag"
-          fi
+          pointer_name="$source_pointer_name"
+          pointer_tag="$source_tag"
           if [[ ! "$release_id" =~ ^[0-9]+$ ||
                 "$target" != "$SOURCE_SHA" ||
                 "$asset_count" != 3 ||
@@ -1534,7 +1471,6 @@ jobs:
           RECORD_RESULT: ${{ needs.record-production-deployment.result }}
           REQUESTED_ROLLBACK_RUN_ATTEMPT: ${{ inputs.rollback_run_attempt }}
           REQUESTED_ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
-          SMOKE_RESULT: ${{ needs.production-smoke.result }}
         run: |
           recovery_run_id="$PRIOR_RUN_ID"
           recovery_run_attempt="$PRIOR_RUN_ATTEMPT"
@@ -1642,10 +1578,9 @@ jobs:
               echo "The last known-good deployment assets are invalid." >&2
               exit 1
             fi
-            if [[ "$SMOKE_RESULT" == failure &&
-                  "$recovery_run_id" == "$REQUESTED_ROLLBACK_RUN_ID" &&
+            if [[ "$recovery_run_id" == "$REQUESTED_ROLLBACK_RUN_ID" &&
                   "$recovery_run_attempt" == "$REQUESTED_ROLLBACK_RUN_ATTEMPT" ]]; then
-              echo "The last known-good artifact also failed smoke; automatic recovery stopped." >&2
+              echo "The requested recovery artifact is already the last known-good deployment; automatic recovery stopped." >&2
               exit 1
             fi
           fi

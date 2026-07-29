@@ -104,8 +104,7 @@ function selectRollback(releases, runId, attempt) {
     .at(-1);
 }
 
-function validAttempt({conclusion, jobs}) {
-  const required = ['build', 'deploy', 'production-smoke', 'stage-pages-release'];
+function validAttempt({conclusion, jobs, required}) {
   return (
     conclusion === 'success' ||
     required.every((name) => jobs[name] === 'success')
@@ -115,8 +114,8 @@ function validAttempt({conclusion, jobs}) {
 function productionMatchesCandidate(production, candidate) {
   return (
     production.sourceSha === candidate.sourceSha &&
-    production.deploymentRunId === candidate.deploymentRunId &&
-    production.deploymentRunAttempt === candidate.deploymentRunAttempt
+    production.archiveRunId === candidate.archiveRunId &&
+    production.archiveRunAttempt === candidate.archiveRunAttempt
   );
 }
 
@@ -284,9 +283,13 @@ test('failed smoke or publication dispatches exact prior recovery', () => {
     recovery,
     /"\$recovery_run_id" == "\$REQUESTED_ROLLBACK_RUN_ID" &&\n\s+"\$recovery_run_attempt" == "\$REQUESTED_ROLLBACK_RUN_ATTEMPT"/,
   );
+  assert.doesNotMatch(
+    recovery,
+    /SMOKE_RESULT[\s\S]*?"\$recovery_run_id" == "\$REQUESTED_ROLLBACK_RUN_ID"/,
+  );
 });
 
-test('failed-job reruns roll the staged attempt forward', () => {
+test('failed-job reruns preserve the staged archive and release identity', () => {
   const staged = release({
     deploymentAttempt: 1,
     deploymentRunId: 300,
@@ -297,20 +300,28 @@ test('failed-job reruns roll the staged attempt forward', () => {
 
   assert.equal(staged.manifest.deploymentRunAttempt, 1);
   assert.notEqual(staged.manifest.deploymentRunAttempt, currentAttempt);
-  assert.match(
+  assert.doesNotMatch(
     normalizedWorkflow,
     /if \[\[ "\$source_attempt" != "\$GITHUB_RUN_ATTEMPT" \]\]; then/,
   );
   assert.match(
     normalizedWorkflow,
-    /pointer_tag="\$\{release_prefix\}\$\{GITHUB_RUN_ATTEMPT\}"/,
+    /pointer_tag="\$source_tag"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /ARCHIVE_RUN_ATTEMPT: \$\{\{ needs\.build\.outputs\.archive_run_attempt \}\}/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /ARCHIVE_RUN_ID: \$\{\{ needs\.build\.outputs\.archive_run_id \}\}/,
   );
   assert.equal(productionMatchesCandidate(staged.manifest, staged.manifest), true);
   assert.equal(
     productionMatchesCandidate(
       {
         ...staged.manifest,
-        deploymentRunId: 299,
+        archiveRunId: 99,
       },
       staged.manifest,
     ),
@@ -318,7 +329,7 @@ test('failed-job reruns roll the staged attempt forward', () => {
   );
   assert.equal(
     productionMatchesCandidate(
-      {...staged.manifest, deploymentRunAttempt: 2},
+      {...staged.manifest, archiveRunAttempt: 2},
       staged.manifest,
     ),
     false,
@@ -338,15 +349,15 @@ test('failed-job reruns roll the staged attempt forward', () => {
     .split('\n  recover-after-production-failure:\n')[0];
   const currentProductionGuard = record
     .split('> current-production.json')[1]
-    ?.split('if [[ "$source_attempt" != "$GITHUB_RUN_ATTEMPT" ]]')[0];
+    ?.split('pointer_name="$source_pointer_name"')[0];
   assert.ok(currentProductionGuard);
   assert.match(
     currentProductionGuard,
-    /--arg sourceSha "\$SOURCE_SHA"[\s\S]*?--argjson deploymentRunId "\$deployment_run_id"[\s\S]*?--argjson deploymentRunAttempt "\$deployment_run_attempt"/,
+    /--arg sourceSha "\$SOURCE_SHA"[\s\S]*?--argjson archiveRunId "\$archive_run_id"[\s\S]*?--argjson archiveRunAttempt "\$archive_run_attempt"/,
   );
   assert.match(
     currentProductionGuard,
-    /\.sourceSha == \$sourceSha\s+and \.deploymentRunId == \$deploymentRunId\s+and \.deploymentRunAttempt == \$deploymentRunAttempt[\s\S]*?current-production\.json/,
+    /\.sourceSha == \$sourceSha\s+and \.archiveRunId == \$archiveRunId\s+and \.archiveRunAttempt == \$archiveRunAttempt[\s\S]*?current-production\.json/,
   );
 });
 
@@ -378,11 +389,27 @@ test('future selection accepts a published pointer after record failure', () => 
     'stage-pages-release': 'success',
   };
 
-  assert.equal(validAttempt({conclusion: 'failure', jobs}), true);
+  assert.equal(
+    validAttempt({
+      conclusion: 'failure',
+      jobs,
+      required: ['deploy', 'production-smoke', 'stage-pages-release'],
+    }),
+    true,
+  );
+  assert.equal(
+    validAttempt({
+      conclusion: 'failure',
+      jobs,
+      required: ['build'],
+    }),
+    true,
+  );
   assert.equal(
     validAttempt({
       conclusion: 'failure',
       jobs: {...jobs, 'production-smoke': 'failure'},
+      required: ['deploy', 'production-smoke', 'stage-pages-release'],
     }),
     false,
   );
@@ -392,7 +419,11 @@ test('future selection accepts a published pointer after record failure', () => 
   );
   assert.match(
     normalizedWorkflow,
-    /"\$pointer_jobs" != "build,deploy,production-smoke,stage-pages-release"/,
+    /"\$pointer_jobs" != "deploy,production-smoke,stage-pages-release"/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /"\$archive_jobs" != "build"/,
   );
 });
 
@@ -425,7 +456,7 @@ test('stored attempt one is not replaced by latest rerun attempt two', () => {
   assert.doesNotMatch(endpoint, new RegExp(`/attempts/${latestAttempt}$`));
 });
 
-test('rollback guidance uses the archive identity after roll-forward', () => {
+test('rollback guidance uses the archive identity after redeployment', () => {
   const rolledForward = release({
     archiveAttempt: 1,
     archiveRunId: 700,
