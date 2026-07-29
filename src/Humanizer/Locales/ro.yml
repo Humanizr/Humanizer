@@ -357,10 +357,12 @@ surfaces:
       decimalKilobyte:
         forms:
           default: 'kilobytes'
+          singular: 'kilobyte'
         symbol: 'kB'
       decimalMegabyte:
         forms:
           default: 'megabytes'
+          singular: 'megabyte'
         symbol: 'MB'
       decimalGigabyte:
         forms:
@@ -370,6 +372,7 @@ surfaces:
       decimalTerabyte:
         forms:
           default: 'terabytes'
+          singular: 'terabyte'
         symbol: 'TB'
       decimalPetabyte:
         forms:
