@@ -218,8 +218,10 @@ The byte\-size unit system to use\.
 
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The numeric format and optional byte\-size unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
+The numeric format and optional byte\-size unit token\. For [DecimalSi](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.DecimalSi 'Humanizer\.ByteSizeUnitSystem\.DecimalSi') and
+[BinaryIec](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.BinaryIec 'Humanizer\.ByteSizeUnitSystem\.BinaryIec'), SI/IEC\-prefixed unit tokens are matched case\-insensitively,
 while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\.
+[Legacy](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.Legacy 'Humanizer\.ByteSizeUnitSystem\.Legacy') preserves established matching behavior\.
 
 <a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).timeUnit'></a>
 

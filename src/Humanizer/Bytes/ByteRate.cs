@@ -54,8 +54,10 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
     /// </summary>
     /// <param name="unitSystem">The byte-size unit system to use.</param>
     /// <param name="format">
-    /// The numeric format and optional byte-size unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
+    /// The numeric format and optional byte-size unit token. For <see cref="ByteSizeUnitSystem.DecimalSi"/> and
+    /// <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed unit tokens are matched case-insensitively,
     /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing.
+    /// <see cref="ByteSizeUnitSystem.Legacy"/> preserves established matching behavior.
     /// </param>
     /// <param name="timeUnit">The time unit to use for the displayed rate.</param>
     /// <param name="culture">The culture used to format the numeric value, byte-size unit, and time-unit symbol.</param>

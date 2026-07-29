@@ -460,8 +460,10 @@ public static class ByteSizeExtensions
     /// <param name="input">The byte quantity to humanize.</param>
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
-    /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
+    /// The numeric format and optional unit token. For <see cref="ByteSizeUnitSystem.DecimalSi"/> and
+    /// <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed unit tokens are matched case-insensitively,
     /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing.
+    /// <see cref="ByteSizeUnitSystem.Legacy"/> preserves established matching behavior.
     /// </param>
     /// <param name="formatProvider">The provider used to format the numeric value.</param>
     /// <returns>The humanized byte quantity.</returns>

@@ -646,8 +646,10 @@ public struct ByteSize(double byteSize) :
     /// </summary>
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
-    /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
-    /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing. At most one distinct
+    /// The numeric format and optional unit token. For <see cref="ByteSizeUnitSystem.DecimalSi"/> and
+    /// <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed unit tokens are matched case-insensitively,
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing.
+    /// <see cref="ByteSizeUnitSystem.Legacy"/> preserves established matching behavior. At most one distinct
     /// unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
     /// sections.
     /// </param>
@@ -671,10 +673,12 @@ public struct ByteSize(double byteSize) :
     /// </summary>
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
-    /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
-    /// while <c>b</c> and <c>B</c> remain case-sensitive; localized words replace the selected token. At most one
-    /// distinct unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric
-    /// format sections.
+    /// The numeric format and optional unit token. For <see cref="ByteSizeUnitSystem.DecimalSi"/> and
+    /// <see cref="ByteSizeUnitSystem.BinaryIec"/>, SI/IEC-prefixed unit tokens are matched case-insensitively,
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; localized words replace the selected token.
+    /// <see cref="ByteSizeUnitSystem.Legacy"/> preserves established matching behavior. At most one distinct
+    /// unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
+    /// sections.
     /// </param>
     /// <param name="formatProvider">The provider used to format the numeric value and select localized unit words.</param>
     /// <returns>The formatted byte size using localized unit words.</returns>

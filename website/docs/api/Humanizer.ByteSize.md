@@ -1074,8 +1074,10 @@ The unit system to use\.
 
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The numeric format and optional unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
-while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\. At most one distinct
+The numeric format and optional unit token\. For [DecimalSi](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.DecimalSi 'Humanizer\.ByteSizeUnitSystem\.DecimalSi') and
+[BinaryIec](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.BinaryIec 'Humanizer\.ByteSizeUnitSystem\.BinaryIec'), SI/IEC\-prefixed unit tokens are matched case\-insensitively,
+while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\.
+[Legacy](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.Legacy 'Humanizer\.ByteSizeUnitSystem\.Legacy') preserves established matching behavior\. At most one distinct
 unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
 sections\.
 
@@ -1119,10 +1121,12 @@ The unit system to use\.
 
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The numeric format and optional unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
-while `b` and `B` remain case\-sensitive; localized words replace the selected token\. At most one
-distinct unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric
-format sections\.
+The numeric format and optional unit token\. For [DecimalSi](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.DecimalSi 'Humanizer\.ByteSizeUnitSystem\.DecimalSi') and
+[BinaryIec](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.BinaryIec 'Humanizer\.ByteSizeUnitSystem\.BinaryIec'), SI/IEC\-prefixed unit tokens are matched case\-insensitively,
+while `b` and `B` remain case\-sensitive; localized words replace the selected token\.
+[Legacy](Humanizer.ByteSizeUnitSystem.md#Humanizer.ByteSizeUnitSystem.Legacy 'Humanizer\.ByteSizeUnitSystem\.Legacy') preserves established matching behavior\. At most one distinct
+unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
+sections\.
 
 <a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
 
