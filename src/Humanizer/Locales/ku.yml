@@ -219,55 +219,67 @@ surfaces:
           default: 'کیلۆبایت'
           singular: 'کیلۆبایت'
         symbol: 'kB'
+        template: '{unit}'
       decimalMegabyte:
         forms:
           default: 'مێگابایت'
           singular: 'مێگابایت'
         symbol: 'MB'
+        template: '{unit}'
       decimalGigabyte:
         forms:
           default: 'گیگابایت'
           singular: 'گیگابایت'
         symbol: 'GB'
+        template: '{unit}'
       decimalTerabyte:
         forms:
           default: 'تێرابایت'
           singular: 'تێرابایت'
         symbol: 'TB'
+        template: '{unit}'
       decimalPetabyte:
         forms:
           default: 'پێتابایت'
           singular: 'پێتابایت'
         symbol: 'PB'
+        template: '{unit}'
       decimalExabyte:
-        default: 'ئێگزابایت'
-        singular: 'ئێگزابایت'
+        forms:
+          default: 'ئێگزابایت'
+          singular: 'ئێگزابایت'
         symbol: 'EB'
+        template: '{unit}'
       binaryKibibyte:
         forms:
           default: 'کیبیبایت'
           singular: 'کیبیبایت'
         symbol: 'KiB'
+        template: '{unit}'
       binaryMebibyte:
         forms:
           default: 'مێبیبایت'
           singular: 'مێبیبایت'
         symbol: 'MiB'
+        template: '{unit}'
       binaryGibibyte:
         forms:
           default: 'گیبیبایت'
           singular: 'گیبیبایت'
         symbol: 'GiB'
+        template: '{unit}'
       binaryTebibyte:
         forms:
           default: 'تێبیبایت'
           singular: 'تێبیبایت'
         symbol: 'TiB'
+        template: '{unit}'
       binaryPebibyte:
         forms:
           default: 'پێبیبایت'
           singular: 'پێبیبایت'
         symbol: 'PiB'
+        template: '{unit}'
     timeUnits:
       millisecond:
         symbol: 'میلیچرکە'
@@ -440,6 +452,7 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    dataUnitFallbackTransform: 'trim-trailing-s'
 
   clock:
     engine: 'phrase-clock'

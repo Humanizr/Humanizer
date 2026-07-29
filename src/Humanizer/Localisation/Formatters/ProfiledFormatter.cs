@@ -271,6 +271,59 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     internal override FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
 
+    internal override FormatterNumberForm GetDataUnitPhraseForm(
+        DataUnit dataUnit,
+        decimal count,
+        CardinalPluralCategory category) =>
+        profile.DataUnitDetector switch
+        {
+            FormatterNumberDetectorKind.None =>
+                category == CardinalPluralCategory.One ? FormatterNumberForm.Singular : FormatterNumberForm.Default,
+            FormatterNumberDetectorKind.SingularPlural =>
+                category == CardinalPluralCategory.One ? FormatterNumberForm.Singular : FormatterNumberForm.Plural,
+            FormatterNumberDetectorKind.ArabicLike => category switch
+            {
+                CardinalPluralCategory.One when count == 1 => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Two => FormatterNumberForm.Dual,
+                CardinalPluralCategory.Few => FormatterNumberForm.Plural,
+                CardinalPluralCategory.Many when count is >= 3 and <= 10 => FormatterNumberForm.Plural,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Between2And4Paucal => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                CardinalPluralCategory.Many => FormatterNumberForm.Plural,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Polish => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.SouthSlavic or FormatterNumberDetectorKind.Russian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Slovenian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Two => FormatterNumberForm.Dual,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Lithuanian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Default,
+                _ => FormatterNumberForm.Plural
+            },
+            _ => throw new UnreachableException()
+        };
+
     internal override string ResolveDatePhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         ResolveProfiledPhraseForms(forms, form, profile.PhraseDetector);
 

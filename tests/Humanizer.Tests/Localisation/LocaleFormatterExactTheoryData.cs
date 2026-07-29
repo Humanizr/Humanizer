@@ -712,7 +712,7 @@ public static class LocaleFormatterExactTheoryData
         { "it", new("1 bit", "1 byte", "2 byte", "2 kilobyte", "2 megabyte") },
         { "ja", new("1 ビット", "1 バイト", "2 バイト", "2 キロバイト", "2 メガバイト") },
         { "ko", new("1 비트", "1 바이트", "2 바이트", "2 킬로바이트", "2 메가바이트") },
-        { "ku", new("1 بیت", "1 بایت", "2 بایتs", "2 کیلۆبایتs", "2 مێگابایتs") },
+        { "ku", new("1 بیت", "1 بایت", "2 بایت", "2 کیلۆبایت", "2 مێگابایت") },
         { "lb", new("1 Bit", "1 Byte", "2 Byte", "2 Kilobyte", "2 Megabyte") },
         { "lt", new("1 bitas", "1 baitas", "2 baitai", "2 kilobaitai", "2 megabaitai") },
         { "lv", new("1 bits", "1 baits", "2 baiti", "2 kilobaiti", "2 megabaiti") },

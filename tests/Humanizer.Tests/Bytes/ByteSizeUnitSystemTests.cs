@@ -256,6 +256,9 @@ public class ByteSizeUnitSystemTests
         Assert.Throws<FormatException>(() => ByteSize.FromBytes(1).Format(ByteSizeUnitSystem.BinaryIec, "0 EiB"));
         Assert.Throws<FormatException>(() => ByteSize.FromBytes(1).Format(ByteSizeUnitSystem.DecimalSi, "0 MB MiB"));
         Assert.Throws<FormatException>(() => ByteSize.FromBytes(1).Format(ByteSizeUnitSystem.BinaryIec, "0 KiB kB"));
+        Assert.Throws<FormatException>(() => ByteSize.FromDecimalMegabytes(1).Format(ByteSizeUnitSystem.DecimalSi, "0 MB kB"));
+        Assert.Throws<FormatException>(() => ByteSize.FromBytes(1).Format(ByteSizeUnitSystem.DecimalSi, "0 B b"));
+        Assert.Throws<FormatException>(() => ByteSize.FromDecimalMegabytes(1).Format(ByteSizeUnitSystem.DecimalSi, "0 MB B"));
         Assert.EndsWith(" PiB", ByteSize.MaxValue.Format(ByteSizeUnitSystem.BinaryIec));
         Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.FromBytes(1).Format((ByteSizeUnitSystem)99));
         Assert.Throws<ArgumentOutOfRangeException>(() => ByteSize.TryParseWithUnitSystem("1 B", (ByteSizeUnitSystem)99, out _));
@@ -306,6 +309,65 @@ public class ByteSizeUnitSystemTests
         Assert.Equal(
             size.Bits,
             ByteSize.ParseWithUnitSystem(formatted, unitSystem, CultureInfo.InvariantCulture).Bits);
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void ExplicitBitFullWordsUsesStoredBitsForInflection(ByteSizeUnitSystem unitSystem)
+    {
+        var size = ByteSize.FromBytes(-0.249);
+
+        Assert.Equal(-1, size.Bits);
+        Assert.Equal(
+            "-1 bit",
+            size.FormatFullWords(unitSystem, "0 b", CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "-2 bits",
+            ByteSize.FromBits(-2).FormatFullWords(
+                unitSystem,
+                "0 b",
+                CultureInfo.GetCultureInfo("en")));
+    }
+
+    [Theory]
+    [InlineData(9007199254741001, "9007199254741001 bit")]
+    [InlineData(long.MaxValue, "9223372036854775807 bitov")]
+    [InlineData(long.MinValue, "−9223372036854775808 bitov")]
+    public void ExplicitBitFullWordsPreserveWideLocaleGrammar(long bits, string expected) =>
+        Assert.Equal(
+            expected,
+            ByteSize.FromBits(bits).FormatFullWords(
+                ByteSizeUnitSystem.DecimalSi,
+                "0 b",
+                CultureInfo.GetCultureInfo("sl")));
+
+    [Fact]
+    public void ExplicitFullWordsPreserveWidePolishModuloGrammar() =>
+        Assert.Equal(
+            "2147483652 kilobajty",
+            ByteSize.FromDecimalKilobytes(2_147_483_652).FormatFullWords(
+                ByteSizeUnitSystem.DecimalSi,
+                "0 kB",
+                CultureInfo.GetCultureInfo("pl")));
+
+    [Fact]
+    public void ExplicitFullWordsPreserveHebrewIntegralAndFractionalForms()
+    {
+        var culture = CultureInfo.GetCultureInfo("he");
+
+        Assert.Equal(
+            "1 קילובייט",
+            ByteSize.FromDecimalKilobytes(1).FormatFullWords(
+                ByteSizeUnitSystem.DecimalSi,
+                "0 kB",
+                culture));
+        Assert.Equal(
+            "1.5 קילובייטים",
+            ByteSize.FromDecimalKilobytes(1.5).FormatFullWords(
+                ByteSizeUnitSystem.DecimalSi,
+                "0.0 kB",
+                culture));
     }
 
     [Fact]

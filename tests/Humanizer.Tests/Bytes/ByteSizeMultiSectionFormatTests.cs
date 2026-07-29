@@ -3,7 +3,7 @@ public class ByteSizeMultiSectionFormatTests
 {
     [Theory]
     [InlineData(1_000_000, "1 megabyte")]
-    [InlineData(-2_000_000, "-2 megabyte")]
+    [InlineData(-2_000_000, "-2 megabytes")]
     [InlineData(0, "0 megabyte")]
     public void ReplacesExplicitUnitTokensInEveryCustomFormatSection(double bytes, string expected)
     {
@@ -14,6 +14,21 @@ public class ByteSizeMultiSectionFormatTests
 
         Assert.Equal(expected, result);
     }
+
+    [Fact]
+    public void LegacyFullWordsPreservesNegativeImplicitSuffixBehavior() =>
+        Assert.Equal(
+            "-2 megabyte",
+            ByteSize.FromMegabytes(-2).ToFullWords("0", CultureInfo.GetCultureInfo("en-US")));
+
+    [Fact]
+    public void DecoratedNegativeExplicitFormatUsesMagnitudeForGrammar() =>
+        Assert.Equal(
+            "negative 2 megabytes",
+            ByteSize.FromDecimalMegabytes(-2).FormatFullWords(
+                ByteSizeUnitSystem.DecimalSi,
+                "0 MB;'negative '0 MB;0 MB",
+                CultureInfo.GetCultureInfo("en-US")));
 
     [Fact]
     public void ReplacesEveryExplicitUnitTokenWithLocalizedWords()

@@ -891,7 +891,8 @@ surfaces:
         symbol: 'MB'
       gigabyte:
         forms:
-          default: 'gigabaitas'
+          default: 'gigabaitai'
+          singular: 'gigabaitas'
           plural: 'gigabaitų'
         symbol: 'GB'
       terabyte:
@@ -914,7 +915,8 @@ surfaces:
         symbol: 'MB'
       decimalGigabyte:
         forms:
-          default: 'gigabaitas'
+          default: 'gigabaitai'
+          singular: 'gigabaitas'
           plural: 'gigabaitų'
         symbol: 'GB'
       decimalTerabyte:

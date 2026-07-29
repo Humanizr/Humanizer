@@ -308,6 +308,9 @@ public struct ByteSize(double byteSize) :
     public static ByteSize FromBits(long value) =>
         new(value / (double)BitsInByte, value);
 
+    internal static ByteSize FromBytesAndBits(double bytes, long bits) =>
+        new(bytes, bits);
+
     public static ByteSize FromBytes(double value) =>
         new(value);
 
@@ -700,7 +703,9 @@ public struct ByteSize(double byteSize) :
         var explicitUnit = FindFormatUnit(format, units);
         var unit = explicitUnit ?? SelectUnit(units);
         var value = unit.DataUnit == DataUnit.Bit
-            ? (Bytes < 0 ? -1 : 1) * Math.Ceiling(Math.Abs(Bytes) * BitsInByte)
+            ? explicitUnit is not null
+                ? Bits
+                : (Bytes < 0 ? -1 : 1) * Math.Ceiling(Math.Abs(Bytes) * BitsInByte)
             : Bytes / unit.Bytes;
         var numericFormat = string.IsNullOrWhiteSpace(format) || format == "G" ? "0.##" : format!;
 
@@ -728,25 +733,52 @@ public struct ByteSize(double byteSize) :
             }
         }
 
-        var phraseCount = value;
+        var phraseCount = unit.DataUnit == DataUnit.Bit && explicitUnit is not null ? Bits : value;
+        decimal? exactPhraseCount = unit.DataUnit == DataUnit.Bit && explicitUnit is not null ? Bits : null;
         if (!toSymbol)
         {
             var countFormat = explicitUnit is { } selectedUnit
                 ? ReplaceOrdinalIgnoreCase(numericFormat, selectedUnit.Symbol, string.Empty).Trim()
                 : numericFormat;
-            if (countFormat.Length > 0 &&
-                double.TryParse(
-                    value.ToString(countFormat.Replace("#.##", "0.##"), formatProvider),
+            if (countFormat.Length > 0)
+            {
+                var resolvedCountFormat = countFormat.Replace("#.##", "0.##");
+                var displayedCountText = unit.DataUnit == DataUnit.Bit && explicitUnit is not null
+                    ? Bits.ToString(resolvedCountFormat, formatProvider)
+                    : value.ToString(resolvedCountFormat, formatProvider);
+                if (decimal.TryParse(
+                    displayedCountText,
+                    NumberStyles.Float | NumberStyles.AllowThousands,
+                    formatProvider,
+                    out var displayedDecimal))
+                {
+                    exactPhraseCount = displayedDecimal;
+                    phraseCount = (double)displayedDecimal;
+                }
+                else if (double.TryParse(
+                    displayedCountText,
                     NumberStyles.Float | NumberStyles.AllowThousands,
                     formatProvider,
                     out var displayedCount))
-            {
-                phraseCount = displayedCount;
+                {
+                    phraseCount = displayedCount;
+                }
             }
         }
 
         var formatter = Configurator.GetFormatter(culture);
-        var unitText = formatter.DataUnitHumanize(unit.DataUnit, phraseCount, toSymbol);
+        var builtInFormatter = formatter as DefaultFormatter;
+        if (builtInFormatter is not null &&
+            formatter.GetType().Assembly != typeof(DefaultFormatter).Assembly)
+        {
+            builtInFormatter = null;
+        }
+
+        var unitText = !toSymbol && builtInFormatter is not null
+            ? exactPhraseCount is { } exactCount
+                ? builtInFormatter.DataUnitHumanizeExact(unit.DataUnit, exactCount, toSymbol: false)
+                : builtInFormatter.DataUnitHumanize(unit.DataUnit, Math.Abs(phraseCount), toSymbol: false)
+            : formatter.DataUnitHumanize(unit.DataUnit, phraseCount, toSymbol);
 
         if (explicitUnit is { } selected)
         {
@@ -788,16 +820,6 @@ public struct ByteSize(double byteSize) :
             return null;
         }
 
-        SystemUnit? selectedUnit = null;
-        foreach (var unit in units)
-        {
-            if (format.Contains(unit.Symbol, StringComparison.OrdinalIgnoreCase))
-            {
-                selectedUnit = unit;
-                break;
-            }
-        }
-
         var incompatibleUnits = ReferenceEquals(units, DecimalUnits) ? BinaryUnits : DecimalUnits;
         foreach (var unit in incompatibleUnits)
         {
@@ -812,17 +834,45 @@ public struct ByteSize(double byteSize) :
             throw new FormatException("EiB is outside the range supported by ByteSize.Bits.");
         }
 
+        SystemUnit? selectedUnit = null;
+        var remainingFormat = format!;
+        foreach (var unit in units)
+        {
+            if (!remainingFormat.Contains(unit.Symbol, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (selectedUnit is not null && selectedUnit.Value.DataUnit != unit.DataUnit)
+            {
+                throw new FormatException("A byte-size format can contain only one distinct unit token.");
+            }
+
+            selectedUnit = unit;
+            remainingFormat = ReplaceOrdinalIgnoreCase(
+                remainingFormat,
+                unit.Symbol,
+                new(' ', unit.Symbol.Length));
+        }
+
+        var containsBytes = remainingFormat.Contains(ByteSymbol, StringComparison.Ordinal);
+        var containsBits = remainingFormat.Contains(BitSymbol, StringComparison.Ordinal);
+        if ((selectedUnit is not null && (containsBytes || containsBits)) || containsBytes && containsBits)
+        {
+            throw new FormatException("A byte-size format can contain only one distinct unit token.");
+        }
+
         if (selectedUnit is not null)
         {
             return selectedUnit;
         }
 
-        if (format.Contains(ByteSymbol, StringComparison.Ordinal))
+        if (containsBytes)
         {
             return new(1, ByteSymbol, DataUnit.Byte);
         }
 
-        return format.Contains(BitSymbol, StringComparison.Ordinal)
+        return containsBits
             ? new(1d / BitsInByte, BitSymbol, DataUnit.Bit)
             : null;
     }
@@ -921,10 +971,15 @@ public struct ByteSize(double byteSize) :
         Bits.CompareTo(other.Bits);
 
     public readonly ByteSize Add(ByteSize bs) =>
-        new(Bytes + bs.Bytes);
+        this + bs;
 
-    public readonly ByteSize AddBits(long value) =>
-        this + FromBits(value);
+    public readonly ByteSize AddBits(long value)
+    {
+        var bytes = Bytes + value / (double)BitsInByte;
+        return TryAddBits(Bits, value, out var bits)
+            ? new(bytes, bits)
+            : new(bytes);
+    }
 
     public readonly ByteSize AddBytes(double value) =>
         this + FromBytes(value);
@@ -951,22 +1006,67 @@ public struct ByteSize(double byteSize) :
         AddUnit(Pebibytes, value, BytesInPebibyte);
 
     public readonly ByteSize Subtract(ByteSize bs) =>
-        new(Bytes - bs.Bytes);
+        this - bs;
 
-    public static ByteSize operator +(ByteSize b1, ByteSize b2) =>
-        new(b1.Bytes + b2.Bytes);
+    public static ByteSize operator +(ByteSize b1, ByteSize b2)
+    {
+        var bytes = b1.Bytes + b2.Bytes;
+        return (b1.IsBitAligned || b2.IsBitAligned) &&
+            TryAddBits(b1.Bits, b2.Bits, out var bits)
+                ? new(bytes, bits)
+                : new(bytes);
+    }
 
-    public static ByteSize operator -(ByteSize b1, ByteSize b2) =>
-        new(b1.Bytes - b2.Bytes);
+    public static ByteSize operator -(ByteSize b1, ByteSize b2)
+    {
+        var bytes = b1.Bytes - b2.Bytes;
+        return b2.IsBitAligned &&
+            TrySubtractBits(b1.Bits, b2.Bits, out var bits)
+                ? new(bytes, bits)
+                : new(bytes);
+    }
 
     public static ByteSize operator ++(ByteSize b) =>
-        new(b.Bytes + 1);
+        b + FromBytes(1);
 
     public static ByteSize operator -(ByteSize b) =>
-        new(-b.Bytes);
+        b.IsBitAligned && b.Bits != long.MinValue
+            ? new(-b.Bytes, -b.Bits)
+            : new(-b.Bytes);
 
     public static ByteSize operator --(ByteSize b) =>
-        new(b.Bytes - 1);
+        b - FromBytes(1);
+
+    readonly bool IsBitAligned =>
+        Bytes == Bits / (double)BitsInByte;
+
+    static bool TryAddBits(long left, long right, out long result)
+    {
+        try
+        {
+            result = checked(left + right);
+            return true;
+        }
+        catch (OverflowException)
+        {
+            result = default;
+            return false;
+        }
+    }
+
+    static bool TrySubtractBits(long left, long right, out long result)
+    {
+        try
+        {
+            result = checked(left - right);
+            return true;
+        }
+        catch (OverflowException)
+        {
+            result = default;
+            return false;
+        }
+    }
 
     public static bool operator ==(ByteSize b1, ByteSize b2) =>
         b1.Bits == b2.Bits;

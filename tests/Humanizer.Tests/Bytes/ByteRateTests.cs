@@ -59,6 +59,63 @@ public class ByteRateTests
         Assert.Equal("400 B/s", ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(1)).ToString());
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec)]
+    public void ExplicitUnitSystemsPreserveExactIdentityAndIntegralBitScaling(ByteSizeUnitSystem unitSystem)
+    {
+        Assert.Equal(
+            "9007199254740993 b/s",
+            ByteSize.FromBits(9_007_199_254_740_993)
+                .Per(TimeSpan.FromSeconds(1))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal(
+            "4503599627370497 b/s",
+            ByteSize.FromBits(9_007_199_254_740_993)
+                .Per(TimeSpan.FromSeconds(2))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal(
+            $"{long.MaxValue} b/s",
+            ByteSize.MaxValue
+                .Per(TimeSpan.FromSeconds(1))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+        Assert.Equal(
+            $"{long.MinValue} b/s",
+            ByteSize.MinValue
+                .Per(TimeSpan.FromSeconds(1))
+                .HumanizeWithUnitSystem(unitSystem, "0 b"));
+    }
+
+    [Theory]
+    [InlineData(-9007199254740993, 2, "-4503599627370496 b/s")]
+    [InlineData(9007199254740993, -2, "-4503599627370496 b/s")]
+    [InlineData(-9007199254740993, -2, "4503599627370497 b/s")]
+    public void ExplicitUnitSystemsApplySignedRationalCeiling(long bits, int intervalSeconds, string expected) =>
+        Assert.Equal(
+            expected,
+            ByteSize.FromBits(bits)
+                .Per(TimeSpan.FromSeconds(intervalSeconds))
+                .HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, "0 b"));
+
+    [Fact]
+    public void ExplicitUnitSystemsPreserveLegacyFallbackForUndefinedOrOutOfRangeRates()
+    {
+        verifyFallback(ByteSize.FromBits(1), TimeSpan.Zero);
+        verifyFallback(ByteSize.MaxValue, TimeSpan.FromTicks(1));
+
+        static void verifyFallback(ByteSize size, TimeSpan interval)
+        {
+            var displayInterval = TimeSpan.FromSeconds(1);
+            var scaledBytes = size.Bytes / interval.TotalSeconds * displayInterval.TotalSeconds;
+            var expected = new ByteSize(scaledBytes)
+                .HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, "0 b") + "/s";
+
+            Assert.Equal(
+                expected,
+                size.Per(interval).HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, "0 b"));
+        }
+    }
+
+    [Theory]
     [InlineData(400, 10, 800, 20, 0)]
     [InlineData(400, 10, 800, 10, -1)]
     [InlineData(800, 10, 400, 10, 1)]

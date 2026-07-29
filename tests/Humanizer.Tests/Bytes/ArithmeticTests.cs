@@ -22,6 +22,48 @@ public class ArithmeticTests
     }
 
     [Fact]
+    public void PreservesExactBitsAtRangeBoundaries()
+    {
+        Assert.Equal(long.MaxValue, ByteSize.MaxValue.AddBits(0).Bits);
+        Assert.Equal(long.MaxValue - 1, ByteSize.MaxValue.AddBits(-1).Bits);
+        Assert.Equal(long.MaxValue - 1, (ByteSize.MaxValue - ByteSize.FromBits(1)).Bits);
+        Assert.Equal(long.MinValue + 1, ByteSize.MinValue.AddBits(1).Bits);
+        Assert.Equal(-long.MaxValue, (-ByteSize.MaxValue).Bits);
+    }
+
+    [Fact]
+    public void PreservesLegacyFractionalByteArithmetic()
+    {
+        var fractional = ByteSize.FromBytes(0.01);
+
+        Assert.Equal(1, (fractional + fractional).Bits);
+        Assert.Equal(0, (-fractional).Bits);
+    }
+
+    [Fact]
+    public void ExactArithmeticRemainsCommutativeOnlyWhereLegacyRoundingAllows()
+    {
+        var exact = ByteSize.FromBits(9_007_199_254_740_993);
+        var fractional = ByteSize.FromBytes(0.01);
+
+        Assert.Equal(9_007_199_254_740_994, (exact + fractional).Bits);
+        Assert.Equal(9_007_199_254_740_994, (fractional + exact).Bits);
+        Assert.Equal(0, (ByteSize.FromBits(1) - ByteSize.FromBytes(0.249)).Bits);
+        Assert.Equal(1, (ByteSize.FromBytes(0.249) - ByteSize.FromBits(1)).Bits);
+    }
+
+    [Fact]
+    public void ExactArithmeticOverflowPreservesLegacyFallback()
+    {
+        var increment = ByteSize.FromBits(1);
+        var legacy = new ByteSize(ByteSize.MaxValue.Bytes + increment.Bytes);
+
+        Assert.Equal(legacy, ByteSize.MaxValue + increment);
+        Assert.Equal(legacy, ByteSize.MaxValue.AddBits(1));
+        Assert.Equal(legacy.Bytes, (ByteSize.MaxValue + increment).Bytes);
+    }
+
+    [Fact]
     public void AddBytes()
     {
         var size = ByteSize
