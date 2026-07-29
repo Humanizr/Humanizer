@@ -317,26 +317,26 @@ public static class TimeSpanHumanizeExtensions
                 continue;
             }
 
-            if (formatter is IFractionalTimeSpanFormatter fractionalFormatter)
+            if (decimal.Truncate(part.Value) == part.Value)
             {
-                formattedParts.Add(fractionalFormatter.TimeSpanHumanizeWithFractionalSeconds(part.Value, toSymbols));
+                formattedParts.Add(FormatTimePart(
+                    formatter,
+                    TimeUnit.Second,
+                    SaturateToInt(part.Value),
+                    culture,
+                    false,
+                    toSymbols));
                 continue;
             }
 
-            if (decimal.Truncate(part.Value) != part.Value)
+            if (formatter is not IFractionalTimeSpanFormatter fractionalFormatter)
             {
                 throw new InvalidOperationException(
                     $"The configured {nameof(IFormatter)} for '{culture?.Name ?? CultureInfo.CurrentCulture.Name}' " +
                     $"does not support fractional seconds. Implement {nameof(IFractionalTimeSpanFormatter)}.");
             }
 
-            formattedParts.Add(FormatTimePart(
-                formatter,
-                TimeUnit.Second,
-                SaturateToInt(part.Value),
-                culture,
-                false,
-                toSymbols));
+            formattedParts.Add(fractionalFormatter.TimeSpanHumanizeWithFractionalSeconds(part.Value, toSymbols));
         }
 
         return ConcatenateTimeSpanParts(formattedParts, culture, collectionSeparator);

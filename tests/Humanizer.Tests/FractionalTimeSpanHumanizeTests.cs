@@ -308,6 +308,19 @@ public class FractionalTimeSpanHumanizeTests
     }
 
     [Fact]
+    public void DerivedFormatterUsesLegacyOverrideForRoundedIntegralTerminal()
+    {
+        var actual = TimeSpan.FromSeconds(1.6).HumanizeWithFractionalSeconds(
+            1,
+            0,
+            MidpointRounding.ToEven,
+            new("en-MY"),
+            TimeUnit.Second);
+
+        Assert.Equal("derived legacy 2", actual);
+    }
+
+    [Fact]
     public void RegisteredFractionalFormatterReceivesSecondsAndSymbolMode()
     {
         var culture = new CultureInfo("en-001");

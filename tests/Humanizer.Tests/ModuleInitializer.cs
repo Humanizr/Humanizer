@@ -9,6 +9,7 @@ public static class ModuleInitializer
         VerifierSettings.InitializePlugins();
         Configurator.Formatters.Register("en-150", new LegacyFormatter());
         Configurator.Formatters.Register("en-001", new CapturingFractionalFormatter());
+        Configurator.Formatters.Register("en-MY", new DerivedLegacyFormatter());
     }
 
     sealed class LegacyFormatter : IFormatter
@@ -32,5 +33,11 @@ public static class ModuleInitializer
     {
         public override string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols) =>
             FormattableString.Invariant($"{seconds}|{toSymbols}");
+    }
+
+    sealed class DerivedLegacyFormatter() : DefaultFormatter("en")
+    {
+        public override string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false) =>
+            $"derived legacy {unit}";
     }
 }
