@@ -18,7 +18,7 @@ surfaces:
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/sl.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'long duration-unit case patterns'
         credit: 'Unicode CLDR contributors'
     cases:

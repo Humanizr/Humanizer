@@ -14,13 +14,13 @@ surfaces:
       inventory:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'Urdu nominative/oblique inventory and unit-case scope'
         credit: 'Unicode CLDR contributors'
       unitGrammar:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ur.xml#L7244-L7263'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'duration-minute, duration-second, and duration-millisecond are masculine; short-unit data at lines 8489-8504 supplies exact base lexemes منٹ, سیکنڈ, and ملی سیکنڈ'
         credit: 'Unicode CLDR contributors'
       morphology:
@@ -32,7 +32,7 @@ surfaces:
       corpus:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Urdu-UDTB/tree/3c84e48ec137908b3fdf24afb6e5a31201c43bf0'
-        revision: '3c84e48ec137908b3fdf24afb6e5a31201c43bf0'
+        revision: '3c84e48ec137908b3fdf24afb6e5a31201c43bf0' # DevSkim: ignore DS173237
         locator: 'Attested duration forms دنوں, سالوں, مہینوں, گھنٹوں, ہفتوں and singular oblique forms'
         credit: 'Universal Dependencies Urdu UDTB contributors'
     cases:

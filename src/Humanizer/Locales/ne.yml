@@ -27,7 +27,7 @@ surfaces:
       ergative:
         kind: 'grammar'
         url: 'https://github.com/UniversalDependencies/docs/blob/44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9/_ne/index.md#L181-L188'
-        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9'
+        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9' # DevSkim: ignore DS173237
         locator: 'lines 113-124: fused Nepali morphology; lines 181-188: ले ergative/instrumental marking'
         credit: 'Universal Dependencies Nepali contributors'
       unitUsage:

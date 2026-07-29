@@ -23,7 +23,7 @@ surfaces:
       corpus:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Irish-IDT/tree/5f7e01835e0b61b96a70bebff68ecc4b37a0ee87'
-        revision: '5f7e01835e0b61b96a70bebff68ecc4b37a0ee87'
+        revision: '5f7e01835e0b61b96a70bebff68ecc4b37a0ee87' # DevSkim: ignore DS173237
         locator: 'modern common-form case equivalence and duration noun forms'
         credit: 'Universal Dependencies Irish IDT contributors'
     cases:

@@ -10,7 +10,7 @@ surfaces:
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'ca grammatical-case inventory'
         credit: 'Unicode CLDR contributors'
     reason: 'The narrowed written bare-duration surface has no applicable case contrast.'

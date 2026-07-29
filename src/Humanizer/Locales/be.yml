@@ -18,13 +18,13 @@ surfaces:
       inventory:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Belarusian-HSE/tree/b16f57824829650a92e20c0d6b64739c0652e329'
-        revision: 'b16f57824829650a92e20c0d6b64739c0652e329'
+        revision: 'b16f57824829650a92e20c0d6b64739c0652e329' # DevSkim: ignore DS173237
         locator: 'manually native-annotated Case inventory and quantitative duration examples'
         credit: 'Olga Lyashevskaya, Angelika Peljak-Lapinska, Daria Petrova, and Yana Shishkina'
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/be.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'Belarusian duration lexemes and cardinal categories'
         credit: 'Unicode CLDR contributors'
     cases:

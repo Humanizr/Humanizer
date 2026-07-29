@@ -10,6 +10,7 @@ public sealed partial class HumanizerSourceGenerator
 {
     sealed class LocaleDurationCaseTableCatalogInput(
         ImmutableArray<DurationCaseCatalog> catalogs,
+        ImmutableDictionary<string, string?> caseTimeSpanDetectors,
         ImmutableArray<Diagnostic> diagnostics)
     {
         static readonly string[] TimeUnitOrder =
@@ -25,24 +26,32 @@ public sealed partial class HumanizerSourceGenerator
         ];
 
         readonly ImmutableArray<DurationCaseCatalog> catalogs = catalogs;
+        readonly ImmutableDictionary<string, string?> caseTimeSpanDetectors = caseTimeSpanDetectors;
         readonly ImmutableArray<Diagnostic> diagnostics = diagnostics;
 
         public static LocaleDurationCaseTableCatalogInput Create(LocaleCatalogInput localeCatalog)
         {
             if (!localeCatalog.Diagnostics.IsEmpty)
             {
-                return new LocaleDurationCaseTableCatalogInput([], []);
+                return new LocaleDurationCaseTableCatalogInput([], ImmutableDictionary<string, string?>.Empty, []);
             }
 
             try
             {
                 var coverage = DurationCaseCoverageInput.Create(localeCatalog);
-                return new LocaleDurationCaseTableCatalogInput(coverage.Catalogs, []);
+                return new LocaleDurationCaseTableCatalogInput(
+                    coverage.Catalogs,
+                    localeCatalog.Locales.ToImmutableDictionary(
+                        static locale => locale.LocaleCode,
+                        static locale => GetCaseTimeSpanDetector(locale),
+                        StringComparer.Ordinal),
+                    []);
             }
             catch (InvalidOperationException exception)
             {
                 return new LocaleDurationCaseTableCatalogInput(
                     [],
+                    ImmutableDictionary<string, string?>.Empty,
                     [
                         Diagnostic.Create(
                             Diagnostics.InvalidLocaleDefinition,
@@ -110,6 +119,8 @@ public sealed partial class HumanizerSourceGenerator
                     char.ToUpperInvariant(catalog.CitationCase[0]) +
                     catalog.CitationCase.Substring(1) +
                     ", " +
+                    CreateFormatterNumberDetectorExpression(caseTimeSpanDetectors[catalog.LocaleCode]) +
+                    ", " +
                     CreateCasesExpression(catalog) +
                     ")");
                 builder.AppendLine();
@@ -117,6 +128,18 @@ public sealed partial class HumanizerSourceGenerator
 
             builder.AppendLine("}");
             context.AddSource("LocaleDurationCaseTableCatalog.g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
+        }
+
+        static string? GetCaseTimeSpanDetector(ResolvedLocaleDefinition locale)
+        {
+            if (locale.Formatter is not { } formatter)
+            {
+                return null;
+            }
+
+            return GetOptionalString(formatter.ProfileRoot, "casePluralRule")
+                ?? GetOptionalString(formatter.ProfileRoot, "pluralRule")
+                ?? GetOptionalString(formatter.ProfileRoot, "resourceKeyDetector");
         }
 
         static string CreateCasesExpression(DurationCaseCatalog catalog)

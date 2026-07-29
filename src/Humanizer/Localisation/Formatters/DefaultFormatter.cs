@@ -249,7 +249,10 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
             : FormatterNumberForm.Default;
 
     internal virtual FormatterNumberForm GetCaseAwareTimeSpanPhraseForm(TimeUnit unit, int number) =>
-        GetTimeSpanPhraseForm(unit, number, false);
+        LocaleDurationCaseTableCatalog.Resolve(Culture) is { } table &&
+        table.NumberDetector != FormatterNumberDetectorKind.None
+            ? ProfiledFormatter.DetectNumberForm(number, table.NumberDetector)
+            : GetTimeSpanPhraseForm(unit, number, false);
 
     internal virtual FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         Math.Abs(count) == 1d ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
@@ -261,7 +264,10 @@ public class DefaultFormatter : IGrammaticalCaseTimeSpanFormatter
         forms.Resolve(form);
 
     internal virtual string ResolveCaseAwareTimeSpanPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
-        ResolveTimeSpanPhraseForms(forms, form);
+        LocaleDurationCaseTableCatalog.Resolve(Culture) is { } table &&
+        table.NumberDetector != FormatterNumberDetectorKind.None
+            ? ProfiledFormatter.ResolveProfiledPhraseForms(forms, form, table.NumberDetector)
+            : ResolveTimeSpanPhraseForms(forms, form);
 
     internal virtual string ResolveDataUnitPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form) =>
         forms.Resolve(form);

@@ -16,7 +16,7 @@ surfaces:
       inventory:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'Punjabi nominal nominative and oblique cases; CLDR does not declare Punjabi unit-case scope'
         credit: 'Unicode CLDR contributors'
       morphology:

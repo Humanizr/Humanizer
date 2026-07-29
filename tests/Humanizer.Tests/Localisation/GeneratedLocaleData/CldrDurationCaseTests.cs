@@ -233,6 +233,84 @@ public class CldrDurationCaseTests
             formatter.TimeSpanHumanize(unit, 1, GrammaticalCase.Nominative));
     }
 
+    [Theory]
+    [InlineData("hr", TimeUnit.Millisecond, "21 milisekunda")]
+    [InlineData("hr", TimeUnit.Second, "21 sekunda")]
+    [InlineData("hr", TimeUnit.Minute, "21 minuta")]
+    [InlineData("hr", TimeUnit.Hour, "21 sat")]
+    [InlineData("hr", TimeUnit.Day, "21 dan")]
+    [InlineData("hr", TimeUnit.Week, "21 tjedan")]
+    [InlineData("hr", TimeUnit.Month, "21 mjesec")]
+    [InlineData("hr", TimeUnit.Year, "21 godina")]
+    [InlineData("sr", TimeUnit.Millisecond, "21 милисекунда")]
+    [InlineData("sr", TimeUnit.Second, "21 секунда")]
+    [InlineData("sr", TimeUnit.Minute, "21 минут")]
+    [InlineData("sr", TimeUnit.Hour, "21 сат")]
+    [InlineData("sr", TimeUnit.Day, "21 дан")]
+    [InlineData("sr", TimeUnit.Week, "21 недеља")]
+    [InlineData("sr", TimeUnit.Month, "21 месец")]
+    [InlineData("sr", TimeUnit.Year, "21 година")]
+    [InlineData("sr-Latn", TimeUnit.Millisecond, "21 milisekunda")]
+    [InlineData("sr-Latn", TimeUnit.Second, "21 sekunda")]
+    [InlineData("sr-Latn", TimeUnit.Minute, "21 minut")]
+    [InlineData("sr-Latn", TimeUnit.Hour, "21 sat")]
+    [InlineData("sr-Latn", TimeUnit.Day, "21 dan")]
+    [InlineData("sr-Latn", TimeUnit.Week, "21 nedelja")]
+    [InlineData("sr-Latn", TimeUnit.Month, "21 mesec")]
+    [InlineData("sr-Latn", TimeUnit.Year, "21 godina")]
+    public void SouthSlavicCitationCasesUseNominativeFormsForCountsEndingInOne(
+        string cultureName,
+        TimeUnit unit,
+        string expected)
+    {
+        IGrammaticalCaseTimeSpanFormatter formatter = new DefaultFormatter(cultureName);
+
+        Assert.Equal(
+            expected,
+            formatter.TimeSpanHumanize(unit, 21, GrammaticalCase.Nominative));
+    }
+
+    [Theory]
+    [InlineData("hr", TimeUnit.Hour, 1, "jedan sat")]
+    [InlineData("hr", TimeUnit.Hour, 2, "2 sata")]
+    [InlineData("hr", TimeUnit.Hour, 4, "4 sata")]
+    [InlineData("hr", TimeUnit.Hour, 5, "5 sati")]
+    [InlineData("hr", TimeUnit.Hour, 11, "11 sati")]
+    [InlineData("hr", TimeUnit.Hour, 21, "21 sat")]
+    [InlineData("hr", TimeUnit.Hour, 22, "22 sata")]
+    [InlineData("hr", TimeUnit.Hour, 25, "25 sati")]
+    [InlineData("hr", TimeUnit.Hour, 101, "101 sat")]
+    [InlineData("sr", TimeUnit.Month, 1, "један месец")]
+    [InlineData("sr", TimeUnit.Month, 2, "2 месеца")]
+    [InlineData("sr", TimeUnit.Month, 4, "4 месеца")]
+    [InlineData("sr", TimeUnit.Month, 5, "5 месеци")]
+    [InlineData("sr", TimeUnit.Month, 11, "11 месеци")]
+    [InlineData("sr", TimeUnit.Month, 21, "21 месец")]
+    [InlineData("sr", TimeUnit.Month, 22, "22 месеца")]
+    [InlineData("sr", TimeUnit.Month, 25, "25 месеци")]
+    [InlineData("sr", TimeUnit.Month, 101, "101 месец")]
+    [InlineData("sr-Latn", TimeUnit.Second, 1, "jedna sekunda")]
+    [InlineData("sr-Latn", TimeUnit.Second, 2, "2 sekunde")]
+    [InlineData("sr-Latn", TimeUnit.Second, 4, "4 sekunde")]
+    [InlineData("sr-Latn", TimeUnit.Second, 5, "5 sekundi")]
+    [InlineData("sr-Latn", TimeUnit.Second, 11, "11 sekundi")]
+    [InlineData("sr-Latn", TimeUnit.Second, 21, "21 sekunda")]
+    [InlineData("sr-Latn", TimeUnit.Second, 22, "22 sekunde")]
+    [InlineData("sr-Latn", TimeUnit.Second, 25, "25 sekundi")]
+    [InlineData("sr-Latn", TimeUnit.Second, 101, "101 sekunda")]
+    public void SouthSlavicCitationCasesUseModuloNumberForms(
+        string cultureName,
+        TimeUnit unit,
+        int count,
+        string expected)
+    {
+        IGrammaticalCaseTimeSpanFormatter formatter = new DefaultFormatter(cultureName);
+
+        Assert.Equal(
+            expected,
+            formatter.TimeSpanHumanize(unit, count, GrammaticalCase.Nominative));
+    }
+
     [Fact]
     public void EverySupportedLocaleCaseAndUnitFormatsEveryReachableCountFamily()
     {

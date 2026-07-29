@@ -16,7 +16,7 @@ surfaces:
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/sr.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'long duration-unit case patterns'
         credit: 'Unicode CLDR contributors'
     cases:
@@ -31,7 +31,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'милисекунди'
-                    singular: 'милисекунде'
+                    singular: 'милисекунда'
                     dual: 'милисекунде'
                     paucal: 'милисекунде'
                     plural: 'милисекунде'
@@ -45,7 +45,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'секунди'
-                    singular: 'секунде'
+                    singular: 'секунда'
                     dual: 'секунде'
                     paucal: 'секунде'
                     plural: 'секунде'
@@ -59,6 +59,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'минута'
+                    singular: 'минут'
               provenance:
                 - 'cldr48'
             hour:
@@ -69,7 +70,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'сати'
-                    singular: 'сата'
+                    singular: 'сат'
                     dual: 'сата'
                     paucal: 'сата'
                     plural: 'сата'
@@ -83,6 +84,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'дана'
+                    singular: 'дан'
               provenance:
                 - 'cldr48'
             week:
@@ -93,7 +95,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'недеља'
-                    singular: 'недеље'
+                    singular: 'недеља'
                     dual: 'недеље'
                     paucal: 'недеље'
                     plural: 'недеље'
@@ -107,7 +109,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'месеци'
-                    singular: 'месеца'
+                    singular: 'месец'
                     dual: 'месеца'
                     paucal: 'месеца'
                     plural: 'месеца'
@@ -121,7 +123,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'година'
-                    singular: 'године'
+                    singular: 'година'
                     dual: 'године'
                     paucal: 'године'
                     plural: 'године'

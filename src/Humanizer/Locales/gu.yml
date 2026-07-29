@@ -27,7 +27,7 @@ surfaces:
       gujtb:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Gujarati-GujTB/blob/df3467fecffaab2cf3fbfb457f7366fc43f597da/gu_gujtb-ud-test.conllu#L219-L232'
-        revision: 'df3467fecffaab2cf3fbfb457f7366fc43f597da'
+        revision: 'df3467fecffaab2cf3fbfb457f7366fc43f597da' # DevSkim: ignore DS173237
         locator: 'lines 219-232 attest દિવસે; lines 707-710 attest અઠવાડિયામાં; lines 1889-1896 repeat દિવસે'
         credit: 'Universal Dependencies Gujarati GujTB contributors'
     cases:

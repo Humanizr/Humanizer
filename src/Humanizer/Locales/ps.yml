@@ -18,13 +18,13 @@ surfaces:
       inventory:
         kind: 'grammar'
         url: 'https://github.com/UniversalDependencies/docs/blob/44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9/_ps/feat/Case.md'
-        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9'
+        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9' # DevSkim: ignore DS173237
         locator: 'lines 94-150: productive Oblique I and Oblique II/Ablative rules'
         credit: 'Universal Dependencies Pashto contributors'
       unitLexemes:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ps.xml#L6698-L6750'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'long and short duration lines 6698-6750 and 7867-7919: exact year, month, week, hour, minute, second, and composed millisecond unit forms'
         credit: 'Unicode CLDR contributors'
       lexemes:
@@ -36,7 +36,7 @@ surfaces:
       corpus:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Pashto-Prince/blob/388c86dcf6e504edc5d53fa209ae783b2514c443/ps_prince-ud-test.conllu#L1-L13'
-        revision: '388c86dcf6e504edc5d53fa209ae783b2514c443'
+        revision: '388c86dcf6e504edc5d53fa209ae783b2514c443' # DevSkim: ignore DS173237
         locator: 'ps_prince-ud-test.conllu lines 1-13: شپږو کالو; lines 110-124: شپږ میاشتې; lines 764-790: شپږ کاله وړاندې'
         credit: 'Universal Dependencies Pashto Prince contributors'
       orthography:

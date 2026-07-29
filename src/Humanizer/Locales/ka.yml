@@ -24,7 +24,7 @@ surfaces:
       corpus:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Georgian-GLC/tree/5c0d105dfbafc1e490ab1a362b66a6caef866f8f'
-        revision: '5c0d105dfbafc1e490ab1a362b66a6caef866f8f'
+        revision: '5c0d105dfbafc1e490ab1a362b66a6caef866f8f' # DevSkim: ignore DS173237
         locator: 'duration noun case forms'
         credit: 'Universal Dependencies Georgian GLC contributors'
     cases:

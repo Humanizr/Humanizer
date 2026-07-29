@@ -769,7 +769,7 @@ public static class TimeSpanHumanizeExtensions
 
         if (timeParts.Count == 0)
         {
-            var noTimeValueCultureFormatted = grammaticalCase is null && toWords
+            var noTimeValueCultureFormatted = grammaticalCase is null && toWords && !toSymbols
                     ? cultureFormatter.TimeSpanHumanize_Zero()
                     : FormatTimePart(
                         cultureFormatter,
@@ -944,7 +944,7 @@ public static class TimeSpanHumanizeExtensions
             }
         }
 
-        return grammaticalCase is null && toWords
+        return grammaticalCase is null && toWords && !toSymbols
                 ? cultureFormatter.TimeSpanHumanize_Zero()
                 : FormatTimePart(
                     cultureFormatter,

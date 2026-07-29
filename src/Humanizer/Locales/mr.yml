@@ -20,7 +20,7 @@ surfaces:
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/mr.xml#L8005-L8191'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'units/unitLength[@type=long]/unit[@type=duration-year through duration-millisecond]/unitPattern[@case], lines 8005-8191'
         credit: 'Unicode CLDR Marathi contributors'
     cases:

@@ -33,7 +33,7 @@ surfaces:
       corpus:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Basque-BDT/tree/49ca48c5b3b78b03229095cbea3fa94111644c6f'
-        revision: '49ca48c5b3b78b03229095cbea3fa94111644c6f'
+        revision: '49ca48c5b3b78b03229095cbea3fa94111644c6f' # DevSkim: ignore DS173237
         locator: 'duration noun case forms'
         credit: 'Universal Dependencies Basque BDT contributors'
     cases:

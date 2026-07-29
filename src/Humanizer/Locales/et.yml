@@ -33,7 +33,7 @@ surfaces:
       corpus:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Estonian-EDT/tree/594d1c3902783812d383227e640c0ae782798efd'
-        revision: '594d1c3902783812d383227e640c0ae782798efd'
+        revision: '594d1c3902783812d383227e640c0ae782798efd' # DevSkim: ignore DS173237
         locator: 'duration-unit case forms'
         credit: 'Universal Dependencies Estonian EDT contributors'
     cases:

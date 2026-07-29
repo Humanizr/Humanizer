@@ -16,7 +16,7 @@ surfaces:
       inventory:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'Bengali nominal and unit case inventory'
         credit: 'Unicode CLDR contributors'
       morphology:
@@ -28,7 +28,7 @@ surfaces:
       unitLexemes:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/bn.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'lines 3254-3855 and 8210-8213: exact year, month, week, day, hour, minute, second, and millisecond duration stems'
         credit: 'Unicode CLDR contributors'
       allomorphy:

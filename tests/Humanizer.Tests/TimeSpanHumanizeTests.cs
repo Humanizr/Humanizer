@@ -608,6 +608,20 @@ public class TimeSpanHumanizeTests
     }
 
     [Fact]
+    public void DefaultStrategyPreservesSymbolPrecedenceForZeroFallbacks()
+    {
+        var strategy = new DefaultTimeSpanHumanizeStrategy();
+        var culture = new CultureInfo("en-US");
+
+        Assert.Equal(
+            "0ms",
+            strategy.Humanize(TimeSpan.Zero, 1, false, culture, TimeUnit.Week, TimeUnit.Millisecond, ", ", true, true));
+        Assert.Equal(
+            "0s",
+            strategy.Humanize(TimeSpan.FromMilliseconds(1), 2, false, culture, TimeUnit.Week, TimeUnit.Second, ", ", true, true));
+    }
+
+    [Fact]
     public void GrammaticalCaseAppliesToEveryPart()
     {
         var actual = new TimeSpan(8, 2, 0, 0).HumanizeWithCase(

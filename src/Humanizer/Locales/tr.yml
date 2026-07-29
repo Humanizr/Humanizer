@@ -20,7 +20,7 @@ surfaces:
       grammar:
         kind: 'grammar'
         url: 'https://raw.githubusercontent.com/UniversalDependencies/docs/44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9/_tr/feat/Case.md'
-        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9'
+        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9' # DevSkim: ignore DS173237
         locator: 'Turkish case suffix classes'
         credit: 'Universal Dependencies contributors'
       equative:

@@ -24,7 +24,7 @@ surfaces:
       corpus:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Albanian-TSA/tree/f9f4cf1be5564b5d50bafe7d4d6234d5552cdfce'
-        revision: 'f9f4cf1be5564b5d50bafe7d4d6234d5552cdfce'
+        revision: 'f9f4cf1be5564b5d50bafe7d4d6234d5552cdfce' # DevSkim: ignore DS173237
         locator: 'duration noun dative and ablative forms'
         credit: 'Universal Dependencies Albanian TSA contributors'
     cases:

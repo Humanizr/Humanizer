@@ -16,7 +16,7 @@ surfaces:
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/hr.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'long duration-unit case patterns'
         credit: 'Unicode CLDR contributors'
     cases:
@@ -31,7 +31,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'milisekundi'
-                    singular: 'milisekunde'
+                    singular: 'milisekunda'
                     dual: 'milisekunde'
                     paucal: 'milisekunde'
                     plural: 'milisekunde'
@@ -45,7 +45,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'sekundi'
-                    singular: 'sekunde'
+                    singular: 'sekunda'
                     dual: 'sekunde'
                     paucal: 'sekunde'
                     plural: 'sekunde'
@@ -59,7 +59,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'minuta'
-                    singular: 'minute'
+                    singular: 'minuta'
                     dual: 'minute'
                     paucal: 'minute'
                     plural: 'minute'
@@ -73,7 +73,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'sati'
-                    singular: 'sata'
+                    singular: 'sat'
                     dual: 'sata'
                     paucal: 'sata'
                     plural: 'sata'
@@ -87,6 +87,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'dana'
+                    singular: 'dan'
               provenance:
                 - 'cldr48'
             week:
@@ -97,7 +98,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'tjedana'
-                    singular: 'tjedna'
+                    singular: 'tjedan'
                     dual: 'tjedna'
                     paucal: 'tjedna'
                     plural: 'tjedna'
@@ -111,7 +112,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'mjeseci'
-                    singular: 'mjeseca'
+                    singular: 'mjesec'
                     dual: 'mjeseca'
                     paucal: 'mjeseca'
                     plural: 'mjeseca'
@@ -125,7 +126,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'godina'
-                    singular: 'godine'
+                    singular: 'godina'
                     dual: 'godine'
                     paucal: 'godine'
                     plural: 'godine'

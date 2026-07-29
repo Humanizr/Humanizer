@@ -84,11 +84,12 @@ legacy duration surface unchanged.
 
 Case coverage is explicit for every locale:
 
-- `distinct` means the locale supplies an authored form for the case.
-- `sameRenderedAs` means a case is supported and intentionally uses another
-  verified case rendering.
-- `not-applicable` means the narrowed duration-case surface does not apply to
-  that locale.
+- `distinct` means the locale declares an evidenced duration-case inventory and
+  explicitly realizes every case and unit in that inventory.
+- Each case or unit realization is either authored, intentionally
+  `sameRenderedAs` another verified case, or explicitly `notApplicable`.
+- Root duration-case classifications are `distinct`, `not-applicable`, or
+  inherited from a same-language, same-script parent.
 - release validation rejects missing or unsupported applicable roots, cases,
   and units.
 

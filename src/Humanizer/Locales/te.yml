@@ -19,13 +19,13 @@ surfaces:
       inventory:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'Telugu nominal and unit case inventory'
         credit: 'Unicode CLDR contributors'
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/te.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'Telugu duration roots and inflected long-unit forms'
         credit: 'Unicode CLDR contributors'
       brown:
@@ -37,7 +37,7 @@ surfaces:
       udTelugu:
         kind: 'corpus'
         url: 'https://github.com/UniversalDependencies/UD_Telugu-MTG/tree/4fa1e73fe368d3c784fc4f0d53e8beffe563b406'
-        revision: '4fa1e73fe368d3c784fc4f0d53e8beffe563b406'
+        revision: '4fa1e73fe368d3c784fc4f0d53e8beffe563b406' # DevSkim: ignore DS173237
         locator: 'attested inflected Telugu duration lexemes'
         credit: 'Universal Dependencies Telugu MTG contributors'
     cases:

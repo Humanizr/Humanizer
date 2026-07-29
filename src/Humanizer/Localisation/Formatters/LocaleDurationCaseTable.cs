@@ -25,12 +25,14 @@ readonly record struct LocalizedDurationCase(LocalizedDurationCaseUnit[] Units);
 sealed class LocaleDurationCaseTable(
     LocaleDurationCaseClassification classification,
     GrammaticalCase citationCase,
+    FormatterNumberDetectorKind numberDetector,
     LocalizedDurationCase?[] cases)
 {
     readonly LocalizedDurationCase?[] cases = cases;
 
     public LocaleDurationCaseClassification Classification { get; } = classification;
     public GrammaticalCase CitationCase { get; } = citationCase;
+    public FormatterNumberDetectorKind NumberDetector { get; } = numberDetector;
 
     public bool TryGetCase(GrammaticalCase grammaticalCase, out LocalizedDurationCase value)
     {

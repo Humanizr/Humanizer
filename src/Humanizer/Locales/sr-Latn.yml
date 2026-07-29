@@ -16,7 +16,7 @@ surfaces:
       cldr48:
         kind: 'cldr'
         url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/sr_Latn.xml'
-        revision: 'acd6d88ae493633240e19a87a721076a8a75c310'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
         locator: 'long duration-unit case patterns'
         credit: 'Unicode CLDR contributors'
     cases:
@@ -31,7 +31,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'milisekundi'
-                    singular: 'milisekunde'
+                    singular: 'milisekunda'
                     dual: 'milisekunde'
                     paucal: 'milisekunde'
                     plural: 'milisekunde'
@@ -45,7 +45,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'sekundi'
-                    singular: 'sekunde'
+                    singular: 'sekunda'
                     dual: 'sekunde'
                     paucal: 'sekunde'
                     plural: 'sekunde'
@@ -59,6 +59,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'minuta'
+                    singular: 'minut'
               provenance:
                 - 'cldr48'
             hour:
@@ -69,7 +70,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'sati'
-                    singular: 'sata'
+                    singular: 'sat'
                     dual: 'sata'
                     paucal: 'sata'
                     plural: 'sata'
@@ -83,6 +84,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'dana'
+                    singular: 'dan'
               provenance:
                 - 'cldr48'
             week:
@@ -93,7 +95,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'nedelja'
-                    singular: 'nedelje'
+                    singular: 'nedelja'
                     dual: 'nedelje'
                     paucal: 'nedelje'
                     plural: 'nedelje'
@@ -107,7 +109,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'meseci'
-                    singular: 'meseca'
+                    singular: 'mesec'
                     dual: 'meseca'
                     paucal: 'meseca'
                     plural: 'meseca'
@@ -121,7 +123,7 @@ surfaces:
                 multiple:
                   forms:
                     default: 'godina'
-                    singular: 'godine'
+                    singular: 'godina'
                     dual: 'godine'
                     paucal: 'godine'
                     plural: 'godine'

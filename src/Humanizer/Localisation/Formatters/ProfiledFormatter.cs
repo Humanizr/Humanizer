@@ -333,7 +333,7 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     /// <summary>
     /// Detects the grammatical form for integer counts.
     /// </summary>
-    static FormatterNumberForm DetectNumberForm(int number, FormatterNumberDetectorKind detector)
+    internal static FormatterNumberForm DetectNumberForm(int number, FormatterNumberDetectorKind detector)
     {
         var absoluteNumber = Math.Abs(number);
 
@@ -388,7 +388,7 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         };
     }
 
-    static string ResolveProfiledPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form, FormatterNumberDetectorKind detector) =>
+    internal static string ResolveProfiledPhraseForms(LocalizedPhraseForms forms, FormatterNumberForm form, FormatterNumberDetectorKind detector) =>
         detector switch
         {
             FormatterNumberDetectorKind.Between2And4Paucal or FormatterNumberDetectorKind.SouthSlavic => form switch

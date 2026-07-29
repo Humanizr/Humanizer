@@ -353,6 +353,21 @@ surfaces:
     }
 
     [Fact]
+    public void DurationCaseTablesCarryTheEffectiveFormatterNumberDetector()
+    {
+        var source = GetGeneratedSource("LocaleDurationCaseTableCatalog.g.cs");
+        var hrStart = source.IndexOf("static class Locale_hr_cache", StringComparison.Ordinal);
+        var huStart = source.IndexOf("static LocaleDurationCaseTable Locale_hu", hrStart, StringComparison.Ordinal);
+
+        Assert.True(hrStart >= 0);
+        Assert.True(huStart > hrStart);
+        Assert.Contains(
+            "FormatterNumberDetectorKind.SouthSlavic",
+            source[hrStart..huStart],
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void InflectionProfilesRequireEveryRootOnceTheFeatureIsEnabled()
     {
         const string enabledLocale = """
