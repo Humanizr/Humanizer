@@ -185,6 +185,33 @@ public class ByteSizeUnitSystemTests
     }
 
     [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", "megabytes", 9.996)]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", "mebibytes", 10.236)]
+    public void StandardPercentFormatsUseTrailingNegativePatterns(
+        ByteSizeUnitSystem unitSystem,
+        string unit,
+        string plural,
+        double carryBytes)
+    {
+        var numberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+        var bytes = unitSystem == ByteSizeUnitSystem.DecimalSi
+            ? ByteSize.BytesInDecimalMegabyte
+            : ByteSize.BytesInMebibyte;
+        var promotedUnit = unitSystem == ByteSizeUnitSystem.DecimalSi ? "kB" : "KiB";
+
+        foreach (var pattern in new[] { 5, 7 })
+        {
+            numberFormat.PercentNegativePattern = pattern;
+            Assert.Equal(
+                $"{(-0.016).ToString("P0", numberFormat)} {plural}",
+                ByteSize.FromBytes(-0.016 * bytes).FormatFullWords(unitSystem, $"P0 {unit}", numberFormat));
+            Assert.Equal(
+                $"{(-0.009996).ToString("P0", numberFormat)} {promotedUnit}",
+                ByteSize.FromBytes(-carryBytes).Format(unitSystem, "P0", numberFormat));
+        }
+    }
+
+    [Theory]
     [InlineData(ByteSizeUnitSystem.DecimalSi, "MB", "megabyte", "megabytes")]
     [InlineData(ByteSizeUnitSystem.BinaryIec, "MiB", "mebibyte", "mebibytes")]
     public void StandardCurrencyFormatsUseDisplayedCount(
@@ -476,6 +503,21 @@ public class ByteSizeUnitSystemTests
         string expectedWords)
     {
         var size = ByteSize.FromBytes(bytes);
+
+        Assert.Equal(expectedSymbol, size.Format(unitSystem, "0‰", CultureInfo.InvariantCulture));
+        Assert.Equal(expectedWords, size.FormatFullWords(unitSystem, "0‰", CultureInfo.InvariantCulture));
+    }
+
+    [Theory]
+    [InlineData(ByteSizeUnitSystem.DecimalSi, 1, "125‰ B", "125‰ bytes")]
+    [InlineData(ByteSizeUnitSystem.BinaryIec, 2, "250‰ B", "250‰ bytes")]
+    public void CarriesAutomaticBitsToBytes(
+        ByteSizeUnitSystem unitSystem,
+        long bits,
+        string expectedSymbol,
+        string expectedWords)
+    {
+        var size = ByteSize.FromBits(bits);
 
         Assert.Equal(expectedSymbol, size.Format(unitSystem, "0‰", CultureInfo.InvariantCulture));
         Assert.Equal(expectedWords, size.FormatFullWords(unitSystem, "0‰", CultureInfo.InvariantCulture));

@@ -725,6 +725,7 @@ public struct ByteSize(double byteSize) :
                 var unitIndex = Array.IndexOf(units, unit);
                 SystemUnit? nextUnit = unit.DataUnit switch
                 {
+                    DataUnit.Bit => new(1, ByteSymbol, DataUnit.Byte),
                     DataUnit.Byte => units[^1],
                     _ when unitIndex > 0 => units[unitIndex - 1],
                     _ => null
@@ -794,7 +795,7 @@ public struct ByteSize(double byteSize) :
                        formattedValue.Contains(sentinel) ||
                        unitText.Contains(sentinel))
                 {
-                    sentinel += "\u0001";
+                    sentinel = new('\u0001', sentinel.Length + 1);
                 }
 
                 var protectedFormat = ReplaceFormatToken(numericFormat, selected.Symbol, sentinel);
@@ -879,11 +880,23 @@ public struct ByteSize(double byteSize) :
         var undecoratedValue = withoutDecorators.Trim();
         if (usePercentSeparators)
         {
+            var isNegative = numberFormat.NegativeSign.Length > 0 &&
+                             undecoratedValue.Contains(numberFormat.NegativeSign);
+            if (isNegative)
+            {
+                undecoratedValue = undecoratedValue.Replace(numberFormat.NegativeSign, string.Empty).Trim();
+            }
+
             var percentNumberFormat = (NumberFormatInfo)numberFormat.Clone();
             percentNumberFormat.NumberDecimalSeparator = numberFormat.PercentDecimalSeparator;
             percentNumberFormat.NumberGroupSeparator = numberFormat.PercentGroupSeparator;
             if (decimal.TryParse(undecoratedValue, styles, percentNumberFormat, out count))
             {
+                if (isNegative)
+                {
+                    count = -count;
+                }
+
                 return true;
             }
         }
