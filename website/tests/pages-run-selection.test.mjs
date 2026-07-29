@@ -8,6 +8,7 @@ const workflow = readFileSync(
   fileURLToPath(new URL('../../.github/workflows/docs.yml', import.meta.url)),
   'utf8',
 );
+const normalizedWorkflow = workflow.replaceAll('\r\n', '\n');
 const locateStep = workflow
   .split('- name: Locate the currently deployable Pages run')[1]
   .split('- name: Inspect retained prior artifact')[0];
@@ -68,6 +69,16 @@ test('missing deployment history fails closed', () => {
 });
 
 test('release operations have repository context without a checkout', () => {
-  const workflowEnv = workflow.replaceAll('\r\n', '\n').match(/^env:\n([\s\S]*?)^\S/m)?.[1];
+  const workflowEnv = normalizedWorkflow.match(/^env:\n([\s\S]*?)^\S/m)?.[1];
   assert.match(workflowEnv, /^  GH_REPO: \$\{\{ github\.repository \}\}$/m);
+});
+
+test('expensive documentation gates run in parallel before retention', () => {
+  const validation = normalizedWorkflow.split('\n  validate:\n')[1].split('\n  build:\n')[0];
+  const retention = normalizedWorkflow
+    .split('\n  retain-pages-artifacts:\n')[1]
+    .split('\n  deploy:\n')[0];
+
+  assert.match(validation, /gate:\n          - manifests\n          - runtime/);
+  assert.match(retention, /needs:\n      - build\n      - validate/);
 });

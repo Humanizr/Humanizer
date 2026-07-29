@@ -41,6 +41,53 @@ env:
   GH_REPO: ${{ github.repository }}
 
 jobs:
+  validate:
+    if: inputs.rollback_run_id == ''
+    strategy:
+      fail-fast: false
+      matrix:
+        gate:
+          - manifests
+          - runtime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: global.json
+
+      - name: Cache immutable documentation packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: /tmp/humanizer-docs-nuget/**/*.nupkg
+          key: >-
+            docs-nuget-v2-${{ runner.os }}-${{
+              hashFiles(
+                'website/humanizer-versions.json',
+                'nuget.config',
+                '.config/dotnet-tools.json'
+              )
+            }}
+
+      - name: Restore documentation tools
+        run: dotnet tool restore
+
+      - name: Validate manifests, snapshots, APIs, and examples
+        if: matrix.gate == 'manifests'
+        shell: pwsh
+        run: ./tools/docs/build.ps1 -Mode Validate
+
+      - name: Validate snapshot transactions and Native AOT
+        if: matrix.gate == 'runtime'
+        shell: pwsh
+        run: ./tools/docs/test.ps1 -RequireNativeAot
+
   build:
     outputs:
       bootstrap_rollback: >-
@@ -86,37 +133,9 @@ jobs:
           cache: pnpm
           cache-dependency-path: website/pnpm-lock.yaml
 
-      - name: Cache immutable documentation packages
-        if: inputs.rollback_run_id == ''
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        with:
-          path: /tmp/humanizer-docs-nuget/**/*.nupkg
-          key: >-
-            docs-nuget-v2-${{ runner.os }}-${{
-              hashFiles(
-                'website/humanizer-versions.json',
-                'nuget.config',
-                '.config/dotnet-tools.json'
-              )
-            }}
-
-      - name: Restore documentation tools
-        if: inputs.rollback_run_id == ''
-        run: dotnet tool restore
-
       - name: Restore site dependencies
         if: inputs.rollback_run_id == ''
         run: pnpm --dir website install --frozen-lockfile
-
-      - name: Validate manifests, snapshots, APIs, and examples
-        if: inputs.rollback_run_id == ''
-        shell: pwsh
-        run: ./tools/docs/build.ps1 -Mode Validate
-
-      - name: Validate snapshot transactions and Native AOT
-        if: inputs.rollback_run_id == ''
-        shell: pwsh
-        run: ./tools/docs/test.ps1 -RequireNativeAot
 
       - name: Validate content
         if: inputs.rollback_run_id == ''
@@ -345,6 +364,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build
+      - validate
     permissions:
       actions: read
       contents: write
