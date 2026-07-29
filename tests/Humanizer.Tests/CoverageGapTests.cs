@@ -1818,9 +1818,9 @@ public class CoverageGapTests
             typeof(ProfiledFormatter),
             invalidPlaceholder,
             "GetSecondaryPlaceholder",
-            [typeof(TimeUnit), typeof(int)],
+            [typeof(TimeUnit), typeof(decimal)],
             TimeUnit.Day,
-            2));
+            2m));
     }
 
     [Fact]
@@ -1897,30 +1897,30 @@ public class CoverageGapTests
             typeof(ProfiledFormatter),
             CreateProfiledFormatter(FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None),
             "GetSecondaryPlaceholder",
-            [typeof(TimeUnit), typeof(int)],
+            [typeof(TimeUnit), typeof(decimal)],
             TimeUnit.Day,
-            20));
+            20m));
         Assert.Equal(string.Empty, InvokePrivate<string>(
             typeof(ProfiledFormatter),
             CreateProfiledFormatter(FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None),
             "GetSecondaryPlaceholder",
-            [typeof(TimeUnit), typeof(int)],
+            [typeof(TimeUnit), typeof(decimal)],
             TimeUnit.Day,
-            19));
+            19m));
         Assert.Equal("n", InvokePrivate<string>(
             typeof(ProfiledFormatter),
             CreateProfiledFormatter(FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN),
             "GetSecondaryPlaceholder",
-            [typeof(TimeUnit), typeof(int)],
+            [typeof(TimeUnit), typeof(decimal)],
             TimeUnit.Day,
-            3));
+            3m));
         Assert.Equal(string.Empty, InvokePrivate<string>(
             typeof(ProfiledFormatter),
             CreateProfiledFormatter(FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN),
             "GetSecondaryPlaceholder",
-            [typeof(TimeUnit), typeof(int)],
+            [typeof(TimeUnit), typeof(decimal)],
             TimeUnit.Day,
-            4));
+            4m));
 
         var exactTwoFormatter = CreateProfiledFormatter(
             FormatterPrepositionMode.None,
@@ -1967,9 +1967,9 @@ public class CoverageGapTests
             typeof(ProfiledFormatter),
             CreateProfiledFormatter(FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.None),
             "GetSecondaryPlaceholder",
-            [typeof(TimeUnit), typeof(int)],
+            [typeof(TimeUnit), typeof(decimal)],
             TimeUnit.Day,
-            2));
+            2m));
     }
 
     [Fact]

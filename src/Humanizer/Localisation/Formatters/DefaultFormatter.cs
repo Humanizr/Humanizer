@@ -76,7 +76,9 @@ public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
         var visibleSeconds = decimal.Parse(
             seconds.ToString("0.#######", CultureInfo.InvariantCulture),
             CultureInfo.InvariantCulture);
-        var countValue = visibleSeconds.ToString("0.#######", Culture);
+        var countValue = visibleSeconds.ToString(
+            "0.#######",
+            LocaleNumberFormattingOverrides.GetFormattingNumberFormat(Culture));
         if (toSymbols)
         {
             return string.Concat(countValue, TimeUnitHumanize(TimeUnit.Second));
@@ -103,7 +105,7 @@ public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
             multiple,
             ResolveTimeSpanPhraseForms(multiple.Forms, form),
             countValue,
-            string.Empty);
+            GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit.Second, visibleSeconds, false));
     }
 
     /// <inheritdoc/>
@@ -198,7 +200,7 @@ public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
     internal virtual string GetDatePhraseSecondaryPlaceholder(TimeUnit unit, Tense tense, int count) =>
         string.Empty;
 
-    internal virtual string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, int count, bool toWords) =>
+    internal virtual string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, decimal count, bool toWords) =>
         string.Empty;
 
     private protected bool TryFormatDataUnitFromPhraseTable(DataUnit dataUnit, double count, bool toSymbol, out string result)

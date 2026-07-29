@@ -2,15 +2,13 @@ using VerifyTests.DiffPlex;
 
 public static class ModuleInitializer
 {
-    internal static CapturingFractionalFormatter FractionalFormatter { get; } = new();
-
     [ModuleInitializer]
     public static void Initialize()
     {
         VerifyDiffPlex.Initialize(OutputType.Compact);
         VerifierSettings.InitializePlugins();
         Configurator.Formatters.Register("en-150", new LegacyFormatter());
-        Configurator.Formatters.Register("en-001", FractionalFormatter);
+        Configurator.Formatters.Register("en-001", new CapturingFractionalFormatter());
     }
 
     sealed class LegacyFormatter : IFormatter
@@ -32,12 +30,7 @@ public static class ModuleInitializer
 
     internal sealed class CapturingFractionalFormatter() : DefaultFormatter("en")
     {
-        public List<(decimal Seconds, bool ToSymbols)> Calls { get; } = [];
-
-        public override string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols)
-        {
-            Calls.Add((seconds, toSymbols));
-            return "captured";
-        }
+        public override string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols) =>
+            FormattableString.Invariant($"{seconds}|{toSymbols}");
     }
 }

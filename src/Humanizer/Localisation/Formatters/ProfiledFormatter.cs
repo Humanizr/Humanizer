@@ -276,7 +276,7 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     internal override string GetDatePhraseSecondaryPlaceholder(TimeUnit unit, Tense tense, int count) =>
         GetSecondaryPlaceholder(unit, count);
 
-    internal override string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, int count, bool toWords) =>
+    internal override string GetTimeSpanPhraseSecondaryPlaceholder(TimeUnit unit, decimal count, bool toWords) =>
         GetSecondaryPlaceholder(unit, count);
 
     /// <summary>
@@ -440,20 +440,28 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
     /// <summary>
     /// Determines whether Romanian needs the <c>de</c> preposition for the current value.
     /// </summary>
-    static bool ShouldUseRomanianPreposition(int number)
+    static bool ShouldUseRomanianPreposition(decimal number)
     {
         var numeral = Math.Abs(number % 100);
         return numeral is < 1 or > 19;
     }
 
-    string GetSecondaryPlaceholder(TimeUnit unit, int number) =>
+    string GetSecondaryPlaceholder(TimeUnit unit, decimal number) =>
         (profile.PrepositionMode, profile.SecondaryPlaceholderMode) switch
         {
             (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.None) => string.Empty,
             (FormatterPrepositionMode.RomanianDe, FormatterSecondaryPlaceholderMode.None) =>
                 ShouldUseRomanianPreposition(number) ? " de" : string.Empty,
             (FormatterPrepositionMode.None, FormatterSecondaryPlaceholderMode.LuxembourgishEifelerN) =>
-                EifelerRule.DoesApply(NumberToWords(unit, number, Culture).AsSpan()) ? string.Empty : LuxembourgishEifelerSuffix.ToString(),
+                EifelerRule.DoesApply(
+                    NumberToWords(
+                        unit,
+                        number >= int.MaxValue
+                            ? int.MaxValue
+                            : decimal.ToInt32(decimal.Truncate(number)),
+                        Culture).AsSpan())
+                    ? string.Empty
+                    : LuxembourgishEifelerSuffix.ToString(),
             _ => throw new UnreachableException()
         };
 

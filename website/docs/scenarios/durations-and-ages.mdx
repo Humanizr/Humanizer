@@ -54,7 +54,10 @@ The entire duration is rounded before it is decomposed, so a value such as
 The digit count is a maximum from zero through seven; trailing zeros are
 trimmed. Numeric text and CLDR seconds grammar follow the requested culture
 for every supported locale, including same-language parent inheritance.
-Fractional requests never fall back to English.
+Fractional requests never fall back to English. With the default strategy,
+genuinely fractional terminal values require `IFractionalTimeSpanFormatter`
+from the configured formatter. A custom
+`IFractionalTimeSpanHumanizeStrategy` may own its fractional formatting.
 
 ### Parse invariant durations
 

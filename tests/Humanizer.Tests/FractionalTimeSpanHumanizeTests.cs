@@ -180,9 +180,9 @@ public class FractionalTimeSpanHumanizeTests
                 TimeUnit.Second));
 
     [Theory]
-    [InlineData(MidpointRounding.ToZero)]
-    [InlineData(MidpointRounding.ToNegativeInfinity)]
-    [InlineData(MidpointRounding.ToPositiveInfinity)]
+    [InlineData((MidpointRounding)2)]
+    [InlineData((MidpointRounding)3)]
+    [InlineData((MidpointRounding)4)]
     public void RejectsDirectionalRounding(MidpointRounding roundingMode) =>
         Assert.Throws<ArgumentOutOfRangeException>(
             () => TimeSpan.Zero.HumanizeWithFractionalSeconds(
@@ -192,21 +192,28 @@ public class FractionalTimeSpanHumanizeTests
                 English,
                 TimeUnit.Second));
 
-    [Fact]
-    public void SymbolsUseLocalizedNumberFormattingAndExistingSecondSymbol()
+    [Theory]
+    [InlineData("fr-FR", "1,5s")]
+    [InlineData("fr-CH", "1.5s")]
+    public void SymbolsUseLocalizedNumberFormattingAndExistingSecondSymbol(
+        string cultureName,
+        string expected)
     {
         var actual = TimeSpan.FromSeconds(1.5).HumanizeToSymbolsWithFractionalSeconds(
             1,
             7,
             MidpointRounding.ToEven,
-            new("fr-FR"),
+            new(cultureName),
             TimeUnit.Second);
 
-        Assert.Equal("1,5s", actual);
+        Assert.Equal(expected, actual);
     }
 
     [Theory]
     [InlineData("fr-FR", 0.5, "0,5 seconde")]
+    [InlineData("fr-CH", 0.5, "0.5 seconde")]
+    [InlineData("ro", 1.5, "1,5 secunde")]
+    [InlineData("ro", 20.5, "20,5 de secunde")]
     [InlineData("ru-RU", 1.5, "1,5 секунд")]
     [InlineData("sl", 1.5, "1,5 sekunde")]
     [InlineData("cs", 1.5, "1,5 sekundy")]
@@ -301,13 +308,11 @@ public class FractionalTimeSpanHumanizeTests
     [Fact]
     public void RegisteredFractionalFormatterReceivesSecondsAndSymbolMode()
     {
-        var formatter = ModuleInitializer.FractionalFormatter;
-        formatter.Calls.Clear();
         var culture = new CultureInfo("en-001");
         var timeSpan = TimeSpan.FromTicks(12345678);
 
         Assert.Equal(
-            "captured",
+            "1.2345678|False",
             timeSpan.HumanizeWithFractionalSeconds(
                 1,
                 7,
@@ -315,17 +320,13 @@ public class FractionalTimeSpanHumanizeTests
                 culture,
                 TimeUnit.Second));
         Assert.Equal(
-            "captured",
+            "1.2345678|True",
             timeSpan.HumanizeToSymbolsWithFractionalSeconds(
                 1,
                 7,
                 MidpointRounding.ToEven,
                 culture,
                 TimeUnit.Second));
-
-        Assert.Equal(
-            [(1.2345678m, false), (1.2345678m, true)],
-            formatter.Calls);
     }
 
     [Fact]
@@ -398,7 +399,7 @@ public class FractionalTimeSpanHumanizeTests
     [Theory]
     [InlineData(-1, MidpointRounding.ToEven, TimeUnit.Second, "maxFractionalDigits")]
     [InlineData(8, MidpointRounding.ToEven, TimeUnit.Second, "maxFractionalDigits")]
-    [InlineData(3, MidpointRounding.ToZero, TimeUnit.Second, "roundingMode")]
+    [InlineData(3, (MidpointRounding)2, TimeUnit.Second, "roundingMode")]
     [InlineData(3, MidpointRounding.ToEven, TimeUnit.Millisecond, "maxUnit")]
     public void DirectDefaultStrategyCallsValidateFractionalArguments(
         int maxFractionalDigits,
