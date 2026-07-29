@@ -34,6 +34,68 @@ function selectPrior(workflowRuns) {
   return documentation || selectRun(filters[1], workflowRuns);
 }
 
+function deploymentAssets(manifest) {
+  return [
+    `deployment-${manifest.deploymentRunId}-${manifest.deploymentRunAttempt}.json`,
+    `github-pages-${manifest.archiveRunId}-${manifest.archiveRunAttempt}.tar`,
+    `github-pages-${manifest.archiveRunId}-${manifest.archiveRunAttempt}.tar.sha256`,
+  ].sort();
+}
+
+function release({
+  archiveAttempt = 1,
+  archiveRunId = 100,
+  deploymentAttempt = 1,
+  deploymentRunId = 200,
+  digestValid = true,
+  draft = false,
+  immutable = true,
+  publishedAt = deploymentAttempt,
+}) {
+  const manifest = {
+    archiveRunAttempt: archiveAttempt,
+    archiveRunId,
+    deploymentRunAttempt: deploymentAttempt,
+    deploymentRunId,
+    schemaVersion: 1,
+  };
+
+  return {
+    assets: deploymentAssets(manifest),
+    digestValid,
+    draft,
+    immutable,
+    manifest,
+    publishedAt,
+    tag: `docs-pages-deployment-v1-${deploymentRunId}-${deploymentAttempt}`,
+  };
+}
+
+function validRelease(candidate) {
+  const manifest = candidate.manifest;
+  return (
+    !candidate.draft &&
+    candidate.immutable &&
+    candidate.digestValid &&
+    manifest.schemaVersion === 1 &&
+    candidate.tag ===
+      `docs-pages-deployment-v1-${manifest.deploymentRunId}-${manifest.deploymentRunAttempt}` &&
+    candidate.assets.join() === deploymentAssets(manifest).join()
+  );
+}
+
+function selectRollback(releases, runId, attempt) {
+  return releases
+    .filter(validRelease)
+    .filter(
+      ({manifest}) =>
+        manifest.archiveRunId === runId &&
+        manifest.archiveRunAttempt === attempt,
+    )
+    .sort((left, right) => left.publishedAt - right.publishedAt)
+    .at(-1);
+}
+
 const legacyRun = {
   created_at: '2026-07-28T18:17:11Z',
   head_sha: 'e7a24480ea2e5f796a0528842ef3f2743af4e59a',
@@ -47,6 +109,10 @@ test('first documentation deployment retains the latest legacy deployment', () =
   assert.equal(
     selectPrior([legacyRun]),
     `${legacyRun.id}\t${legacyRun.run_attempt}\t${legacyRun.head_sha}\t${legacyRun.path}`,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /\$'success\\tpush\\tmain\\t\.github\/workflows\/jekyll-gh-pages\.yml\\t'/,
   );
 });
 
@@ -144,6 +210,10 @@ test('rollback is bound to an exact successful run attempt', () => {
   );
   assert.match(
     normalizedWorkflow,
+    /github-pages-\$\{ROLLBACK_RUN_ID\}-\$\{ROLLBACK_RUN_ATTEMPT\}\.tar/,
+  );
+  assert.match(
+    normalizedWorkflow,
     /\.archiveRunAttempt == \$archiveRunAttempt/,
   );
   assert.match(
@@ -166,6 +236,10 @@ test('draft, malformed, incomplete, and digest-mismatched releases fail closed',
   assert.match(selection, /"\$asset_count" != 3/);
   assert.match(selection, /"\$pointer_count" != 1/);
   assert.match(normalizedWorkflow, /sha256sum -c "\$checksum_name"/);
+
+  assert.equal(validRelease(release({draft: true, immutable: false})), false);
+  assert.equal(validRelease({...release({}), assets: []}), false);
+  assert.equal(validRelease(release({digestValid: false})), false);
 });
 
 test('failed smoke or publication dispatches exact prior recovery', () => {
@@ -182,4 +256,73 @@ test('failed smoke or publication dispatches exact prior recovery', () => {
     recovery,
     /"\$recovery_run_id" == "\$REQUESTED_ROLLBACK_RUN_ID" &&\n\s+"\$recovery_run_attempt" == "\$REQUESTED_ROLLBACK_RUN_ATTEMPT"/,
   );
+});
+
+test('failed-job reruns roll the staged attempt forward', () => {
+  const staged = release({
+    deploymentAttempt: 1,
+    deploymentRunId: 300,
+    draft: true,
+    immutable: false,
+  });
+  const currentAttempt = 2;
+
+  assert.equal(staged.manifest.deploymentRunAttempt, 1);
+  assert.notEqual(staged.manifest.deploymentRunAttempt, currentAttempt);
+  assert.match(
+    normalizedWorkflow,
+    /if \[\[ "\$source_attempt" != "\$GITHUB_RUN_ATTEMPT" \]\]; then/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /pointer_tag="\$\{release_prefix\}\$\{GITHUB_RUN_ATTEMPT\}"/,
+  );
+});
+
+test('ambiguous publication recovers the remotely published candidate', () => {
+  const prior = release({deploymentRunId: 399, publishedAt: 1});
+  const remotelyPublished = release({
+    archiveRunId: 400,
+    deploymentRunId: 400,
+    publishedAt: 2,
+  });
+
+  assert.equal(selectRollback([prior, remotelyPublished], 400, 1), remotelyPublished);
+  assert.match(
+    normalizedWorkflow,
+    /"\$RECORD_RESULT" == failure/,
+  );
+  assert.match(
+    normalizedWorkflow,
+    /needs\.record-production-deployment\.result == 'failure'/,
+  );
+});
+
+test('older attempts remain exact rollback sources after reruns', () => {
+  const first = release({
+    archiveAttempt: 1,
+    archiveRunId: 500,
+    deploymentAttempt: 1,
+    deploymentRunId: 500,
+  });
+  const second = release({
+    archiveAttempt: 2,
+    archiveRunId: 500,
+    deploymentAttempt: 2,
+    deploymentRunId: 500,
+  });
+
+  assert.equal(selectRollback([first, second], 500, 1), first);
+  assert.equal(selectRollback([first, second], 500, 2), second);
+  assert.notEqual(first.assets[1], second.assets[1]);
+});
+
+test('stored attempt one is not replaced by latest rerun attempt two', () => {
+  const runId = 600;
+  const storedAttempt = 1;
+  const latestAttempt = 2;
+  const endpoint = `actions/runs/${runId}/attempts/${storedAttempt}`;
+
+  assert.match(endpoint, /\/attempts\/1$/);
+  assert.doesNotMatch(endpoint, new RegExp(`/attempts/${latestAttempt}$`));
 });
