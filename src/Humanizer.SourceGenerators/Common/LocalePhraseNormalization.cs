@@ -9,7 +9,10 @@ public sealed partial class HumanizerSourceGenerator
     {
         static readonly Regex PlaceholderRegex = new(@"\{(?<name>[^}]+)\}", RegexOptions.Compiled);
 
-        internal static LocalePhraseCatalog Create(string localeCode, SimpleYamlMapping phrases)
+        internal static LocalePhraseCatalog Create(
+            string localeCode,
+            SimpleYamlMapping phrases,
+            bool preserveDurationCaseForms = false)
         {
             RejectUnknownKeys(phrases, $"{localeCode}.phrases", ["relativeDate", "duration", "dataUnits", "timeUnits"]);
 
@@ -18,7 +21,11 @@ public sealed partial class HumanizerSourceGenerator
                 : DateHumanizePhraseSet.Empty;
 
             var timeSpan = phrases.TryGetValue("duration", out var timeSpanValue)
-                ? ParseTimeSpan(localeCode, timeSpanValue, $"{localeCode}.phrases.duration")
+                ? ParseTimeSpan(
+                    localeCode,
+                    timeSpanValue,
+                    $"{localeCode}.phrases.duration",
+                    preserveDurationCaseForms)
                 : TimeSpanPhraseSet.Empty;
 
             var dataUnit = phrases.TryGetValue("dataUnits", out var dataUnitValue)
@@ -32,7 +39,10 @@ public sealed partial class HumanizerSourceGenerator
             return new LocalePhraseCatalog(localeCode, dateHumanize, timeSpan, dataUnit, timeUnit);
         }
 
-        internal static LocalePhraseCatalog ParseLocalePhraseCatalogForTests(string localeCode, string fileText)
+        internal static LocalePhraseCatalog ParseLocalePhraseCatalogForTests(
+            string localeCode,
+            string fileText,
+            bool preserveDurationCaseForms = false)
         {
             var root = SimpleYamlParser.Parse(fileText);
             if (!root.TryGetValue("phrases", out var phrases) || phrases is not SimpleYamlMapping phraseMapping)
@@ -40,7 +50,7 @@ public sealed partial class HumanizerSourceGenerator
                 throw new InvalidOperationException($"Locale '{localeCode}' does not define a 'phrases' mapping.");
             }
 
-            return Create(localeCode, phraseMapping);
+            return Create(localeCode, phraseMapping, preserveDurationCaseForms);
         }
 
         static DateHumanizePhraseSet ParseDateHumanize(string localeCode, SimpleYamlValue value, string path)
@@ -100,7 +110,11 @@ public sealed partial class HumanizerSourceGenerator
             return new DateHumanizePhrase(single, multiple, template);
         }
 
-        static TimeSpanPhraseSet ParseTimeSpan(string localeCode, SimpleYamlValue value, string path)
+        static TimeSpanPhraseSet ParseTimeSpan(
+            string localeCode,
+            SimpleYamlValue value,
+            string path,
+            bool preserveDurationCaseForms)
         {
             var mapping = ExpectMapping(value, path);
             var builder = ImmutableDictionary.CreateBuilder<string, TimeSpanPhrase>(StringComparer.Ordinal);
@@ -112,7 +126,10 @@ public sealed partial class HumanizerSourceGenerator
                     continue;
                 }
 
-                builder[entry.Key] = ParseTimeSpanPhrase(entry.Value, $"{path}.{entry.Key}");
+                builder[entry.Key] = ParseTimeSpanPhrase(
+                    entry.Value,
+                    $"{path}.{entry.Key}",
+                    preserveDurationCaseForms);
             }
 
             return new TimeSpanPhraseSet(

@@ -436,10 +436,15 @@ public sealed partial class HumanizerSourceGenerator
             string localeCode,
             ImmutableDictionary<string, SimpleYamlValue> features)
         {
+            var preserveDurationCaseForms =
+                features.TryGetValue("formatter", out var formatterValue) &&
+                formatterValue is SimpleYamlMapping formatter &&
+                formatter.GetScalar("casePluralRule") is not null;
+
             return !features.TryGetValue("phrases", out var phraseValue)
                 ? null
                 : phraseValue is SimpleYamlMapping mapping
-                ? LocalePhraseNormalization.Create(localeCode, mapping)
+                ? LocalePhraseNormalization.Create(localeCode, mapping, preserveDurationCaseForms)
                 : throw new InvalidOperationException($"Locale '{localeCode}.phrases' must be a mapping.");
         }
 

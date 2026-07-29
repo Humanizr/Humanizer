@@ -1852,6 +1852,14 @@ public class CoverageGapTests
             forms,
             FormatterNumberForm.Paucal,
             FormatterNumberDetectorKind.Between2And4Paucal));
+        Assert.Equal("units", InvokePrivate<string>(
+            typeof(ProfiledFormatter),
+            null,
+            "ResolveProfiledPhraseForms",
+            [typeof(LocalizedPhraseForms), typeof(FormatterNumberForm), typeof(FormatterNumberDetectorKind)],
+            new LocalizedPhraseForms("units", Singular: "unit", Paucal: "units"),
+            FormatterNumberForm.Paucal,
+            FormatterNumberDetectorKind.SouthSlavic));
         Assert.Equal("dual", InvokePrivate<string>(
             typeof(ProfiledFormatter),
             null,

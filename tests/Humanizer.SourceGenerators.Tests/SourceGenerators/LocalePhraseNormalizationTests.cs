@@ -68,6 +68,32 @@ public class LocalePhraseNormalizationTests
     }
 
     [Fact]
+    public void ExplicitCaseContractPreservesDuplicateDurationForms()
+    {
+        const string phrases = """
+            phrases:
+              duration:
+                day:
+                  multiple:
+                    forms:
+                      default: 'days'
+                      singular: 'day'
+                      paucal: 'days'
+            """;
+
+        var ordinary = HumanizerSourceGenerator.LocalePhraseNormalization.ParseLocalePhraseCatalogForTests(
+            "zz",
+            phrases);
+        var caseAware = HumanizerSourceGenerator.LocalePhraseNormalization.ParseLocalePhraseCatalogForTests(
+            "zz",
+            phrases,
+            preserveDurationCaseForms: true);
+
+        Assert.Null(ordinary.TimeSpan.Units["day"].Multiple!.Forms!.Paucal);
+        Assert.Equal("days", caseAware.TimeSpan.Units["day"].Multiple!.Forms!.Paucal);
+    }
+
+    [Fact]
     public void BeforeAndAfterCountTextAreNormalized()
     {
         var catalog = HumanizerSourceGenerator.LocalePhraseNormalization.ParseLocalePhraseCatalogForTests(
