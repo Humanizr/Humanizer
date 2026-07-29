@@ -23,11 +23,13 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
             return profile.ZeroWord;
         }
 
-        if (number < 0)
-        {
-            return profile.NegativeWord + " " + Convert(-number, gender);
-        }
+        var magnitude = number < 0 ? unchecked((ulong)(-(number + 1)) + 1) : (ulong)number;
+        var words = ConvertPositive(magnitude, gender);
+        return number < 0 ? profile.NegativeWord + " " + words : words;
+    }
 
+    string ConvertPositive(ulong number, GrammaticalGender gender)
+    {
         var result = string.Empty;
         var groupLevel = 0;
 
@@ -48,7 +50,7 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
                 // dedicated "two hundred" contraction for the current group.
                 process = tens == 0 && hundreds == 2
                     ? profile.AppendedTwos[0]
-                    : profile.HundredsGroup[hundreds];
+                    : profile.HundredsGroup[(int)hundreds];
             }
 
             if (tens > 0)
@@ -83,8 +85,8 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
                         else
                         {
                             process += gender == GrammaticalGender.Feminine && groupLevel == 0
-                                ? profile.FeminineOnesGroup[tens]
-                                : profile.OnesGroup[tens];
+                                ? profile.FeminineOnesGroup[(int)tens]
+                                : profile.OnesGroup[(int)tens];
                         }
                     }
                 }
@@ -101,8 +103,8 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
                         }
 
                         process += gender == GrammaticalGender.Feminine
-                            ? profile.FeminineOnesGroup[ones]
-                            : profile.OnesGroup[ones];
+                            ? profile.FeminineOnesGroup[(int)ones]
+                            : profile.OnesGroup[(int)ones];
                     }
 
                     if (!string.IsNullOrEmpty(process))
@@ -111,7 +113,7 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
                         process += " " + profile.ConjunctionWord + " ";
                     }
 
-                    process += profile.TensGroup[tens];
+                    process += profile.TensGroup[(int)tens];
                 }
             }
 
@@ -169,6 +171,13 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
             return profile.OrdinalZeroWord;
         }
 
+        var magnitude = number < 0 ? -(long)number : number;
+        var words = ConvertOrdinalPositive(magnitude, gender);
+        return number < 0 ? profile.NegativeWord + " " + words : words;
+    }
+
+    string ConvertOrdinalPositive(long number, GrammaticalGender gender)
+    {
         var beforeOneHundredNumber = number % 100;
         var overTensPart = number / 100 * 100;
         var beforeOneHundredWord = string.Empty;
@@ -201,7 +210,7 @@ class AppendedGroupNumberToWordsConverter(AppendedGroupNumberToWordsConverter.Pr
     /// <param name="number">The numeric value represented by <paramref name="word"/>.</param>
     /// <param name="gender">The grammatical gender to apply when choosing ordinal forms.</param>
     /// <returns>The ordinal rendering for the supplied fragment.</returns>
-    string ParseNumber(string word, int number, GrammaticalGender gender)
+    string ParseNumber(string word, long number, GrammaticalGender gender)
     {
         if (number == 1)
         {

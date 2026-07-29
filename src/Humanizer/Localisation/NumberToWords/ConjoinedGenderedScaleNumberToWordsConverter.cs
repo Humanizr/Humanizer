@@ -44,29 +44,30 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
             // The sign is emitted once and the absolute value is routed through the same positive
             // decomposition so the gender rules stay identical for positive and negative values.
             parts.Add(profile.MinusWord);
-            input = -input;
         }
 
+        var magnitude = GetAbsoluteValue(input);
         // Scale rows are processed from largest to smallest so the ordinal/cardinal decision can be
         // made after we know whether a given row terminates the phrase.
         foreach (var scale in profile.Scales)
         {
-            CollectScaleParts(parts, ref input, isOrdinal, scale, gender);
+            CollectScaleParts(parts, ref magnitude, isOrdinal, scale, gender);
         }
 
-        CollectPartsUnderOneThousand(parts, ref input, isOrdinal, gender);
+        CollectPartsUnderOneThousand(parts, ref magnitude, isOrdinal, gender);
 
         return string.Join(" ", parts);
     }
 
-    void CollectScaleParts(List<string> parts, ref long number, bool isOrdinal, ConjoinedGenderedScale scale, GrammaticalGender requestedGender)
+    void CollectScaleParts(List<string> parts, ref ulong number, bool isOrdinal, ConjoinedGenderedScale scale, GrammaticalGender requestedGender)
     {
-        if (number < scale.Divisor)
+        var divisor = (ulong)scale.Divisor;
+        if (number < divisor)
         {
             return;
         }
 
-        var result = number / scale.Divisor;
+        var result = number / divisor;
 
         if (parts.Count > 0)
         {
@@ -79,7 +80,7 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
         // appended, which keeps the locale's scale grammar localized to the profile.
         CollectPartsUnderOneThousand(parts, ref result, false, scale.Gender);
 
-        number %= scale.Divisor;
+        number %= divisor;
         if (number == 0 && isOrdinal)
         {
             // Ordinal scale words are only used when this scale is the terminal segment.
@@ -91,7 +92,7 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
         }
     }
 
-    void CollectPartsUnderOneThousand(List<string> parts, ref long number, bool isOrdinal, GrammaticalGender gender)
+    void CollectPartsUnderOneThousand(List<string> parts, ref ulong number, bool isOrdinal, GrammaticalGender gender)
     {
         if (number == 0)
         {
@@ -152,7 +153,7 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
         }
     }
 
-    string GetUnit(long number, GrammaticalGender gender) =>
+    string GetUnit(ulong number, GrammaticalGender gender) =>
         profile.UnitForms.Get(gender).TryGetValue((int)number, out var genderedUnit)
             ? genderedUnit
             : profile.UnitsMap[number];
@@ -162,6 +163,9 @@ class ConjoinedGenderedScaleNumberToWordsConverter(ConjoinedGenderedScaleNumberT
 
     string ToOrdinalUnitsAndTens(string word, GrammaticalGender gender) =>
         word + profile.OrdinalUnitsAndTensSuffixes.Get(gender);
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }
 
 /// <summary>

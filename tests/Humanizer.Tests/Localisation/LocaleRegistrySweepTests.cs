@@ -55,6 +55,16 @@ public class LocaleRegistrySweepTests
         Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine, culture));
     }
 
+    [Theory]
+    [MemberData(nameof(ShippedLocaleRows))]
+    public void NumberToWords_NativeLocales_SupportSignedLongEndpoints(string localeName)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.False(string.IsNullOrWhiteSpace(long.MaxValue.ToWords(culture)));
+        Assert.False(string.IsNullOrWhiteSpace(long.MinValue.ToWords(culture)));
+    }
+
     [Fact]
     public void NumberToWords_BrazilianPortuguese_UsesGenderedForms()
     {

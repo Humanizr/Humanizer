@@ -102,24 +102,23 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
             return GetUnitValue(0, isOrdinal);
         }
 
-        if (number < 0)
-        {
-            // Preserve the cardinal/ordinal mode through the negative branch so negative ordinals do
-            // not silently fall back to the cardinal renderer.
-            return profile.NegativeWord + " " + ConvertImpl(-number, isOrdinal);
-        }
+        var words = ConvertPositive(GetAbsoluteValue(number), isOrdinal);
+        return number < 0 ? profile.NegativeWord + " " + words : words;
+    }
 
+    string ConvertPositive(ulong number, bool isOrdinal)
+    {
         var parts = new List<string>();
 
         if (number / 1_000_000_000_000_000_000 > 0)
         {
-            parts.Add(Convert(number / 1_000_000_000_000_000_000) + " " + profile.QuintillionWord);
+            parts.Add(ConvertPositive(number / 1_000_000_000_000_000_000, false) + " " + profile.QuintillionWord);
             number %= 1_000_000_000_000_000_000;
         }
 
         if (number / 1_000_000_000_000_000 > 0)
         {
-            parts.Add(Convert(number / 1_000_000_000_000_000) + " " + profile.QuadrillionWord);
+            parts.Add(ConvertPositive(number / 1_000_000_000_000_000, false) + " " + profile.QuadrillionWord);
             number %= 1_000_000_000_000_000;
         }
 
@@ -158,7 +157,7 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
     /// <summary>
     /// Returns the locale-specific unit word, applying ordinal exceptions when required.
     /// </summary>
-    string GetUnitValue(long number, bool isOrdinal)
+    string GetUnitValue(ulong number, bool isOrdinal)
     {
         if (isOrdinal)
         {
@@ -167,16 +166,16 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
                 return exceptionString;
             }
 
-            return profile.UnitsMap[number] + profile.OrdinalSuffix;
+            return profile.UnitsMap[(int)number] + profile.OrdinalSuffix;
         }
 
-        return profile.UnitsMap[number];
+        return profile.UnitsMap[(int)number];
     }
 
     /// <summary>
     /// Returns the tens word, including suffixes for remainders, exact forms, and thousand forms.
     /// </summary>
-    string GetTensValue(long number, bool isOrdinal, bool isThousand = false)
+    string GetTensValue(ulong number, bool isOrdinal, bool isThousand = false)
     {
         if (number < 20)
         {
@@ -184,7 +183,7 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
         }
 
         var quotient = number / 10;
-        var lastPart = profile.TensMap[quotient];
+        var lastPart = profile.TensMap[(int)quotient];
 
         if (number % 10 > 0)
         {
@@ -230,7 +229,7 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
     /// <summary>
     /// Builds the lakhs segment and consumes the part of <paramref name="number"/> that it covers.
     /// </summary>
-    string GetLakhsValue(ref long number, bool isOrdinal)
+    string GetLakhsValue(ref ulong number, bool isOrdinal)
     {
         var numberAboveTen = number / 100_000;
         string localWord;
@@ -258,12 +257,24 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
     /// <summary>
     /// Builds the crore segment and consumes the part of <paramref name="number"/> that it covers.
     /// </summary>
-    string GetCroresValue(ref long number)
+    string GetCroresValue(ref ulong number)
     {
         var localWord = string.Empty;
         var numberAboveTen = number / 10_000_000;
 
-        if (numberAboveTen is > 99_999 and <= 9_999_999)
+        if (numberAboveTen > 9_999_999)
+        {
+            localWord = ConvertPositive(numberAboveTen, false) + " " + profile.CroreWord;
+            if (number % 10_000_000 != 0 && number % 100_000_000 != 0)
+            {
+                localWord += profile.CroreContinuingSuffix;
+            }
+
+            number %= 10_000_000;
+            return localWord;
+        }
+
+        if (numberAboveTen > 99_999)
         {
             // Very large crore counts recurse through the lakh helper first because the same Indian
             // grouping grammar repeats inside the count that precedes "crore".
@@ -306,7 +317,7 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
     /// <summary>
     /// Builds the thousands segment and consumes the part of <paramref name="number"/> that it covers.
     /// </summary>
-    string GetThousandsValue(ref long number)
+    string GetThousandsValue(ref ulong number)
     {
         var numberAboveTen = number / 1000;
         var localWord = string.Empty;
@@ -323,12 +334,12 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
             }
             else if (numberAboveTen % 10 > 1)
             {
-                localWord += profile.ThousandsMap[numberAboveTen % 10 - 1];
+                localWord += profile.ThousandsMap[(int)(numberAboveTen % 10 - 1)];
             }
         }
         else
         {
-            localWord += profile.ThousandsMap[number / 1000 - 1];
+            localWord += profile.ThousandsMap[(int)(number / 1000 - 1)];
         }
 
         number %= 1000;
@@ -342,9 +353,9 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
     /// <summary>
     /// Builds the hundreds segment and consumes the part of <paramref name="number"/> that it covers.
     /// </summary>
-    string GetHundredsValue(ref long number)
+    string GetHundredsValue(ref ulong number)
     {
-        var localWord = profile.HundredsMap[number / 100 - 1];
+        var localWord = profile.HundredsMap[(int)(number / 100 - 1)];
         if (number / 100 == 9)
         {
             localWord += number % 100 == 0
@@ -361,4 +372,7 @@ class IndianGroupingNumberToWordsConverter(IndianGroupingNumberToWordsConverter.
         number %= 100;
         return localWord;
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }

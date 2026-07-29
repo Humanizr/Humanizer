@@ -193,7 +193,7 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
             {
                 var thousands = count / 1000;
                 var units = count % 1000;
-                if (units > 0 && (units == 1 || thousands < 10 || units >= 100))
+                if (units > 0 && (thousands < 10 || units >= 100))
                 {
                     var combined = ConvertPositive(
                         count,
@@ -211,7 +211,9 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
                 grouped += " " + scale.Plural;
                 if (units > 0)
                 {
-                    grouped += " " + ConvertPositive(units, GrammaticalGender.Masculine, true, false) + " " + scale.Plural;
+                    grouped += units == 1
+                        ? " " + scale.SingularPrefix + " " + scale.Singular
+                        : " " + ConvertPositive(units, GrammaticalGender.Masculine, true, false) + " " + scale.Plural;
                 }
 
                 return remainder == 0

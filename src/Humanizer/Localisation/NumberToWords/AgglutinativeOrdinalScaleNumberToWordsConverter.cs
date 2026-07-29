@@ -19,12 +19,9 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input)
     {
-        if (input < 0)
-        {
-            return profile.MinusWord + Convert(-input);
-        }
-
-        return ConvertCardinal(input);
+        var magnitude = input < 0 ? unchecked((ulong)(-(input + 1)) + 1) : (ulong)input;
+        var words = ConvertCardinal(magnitude);
+        return input < 0 ? profile.MinusWord + words : words;
     }
 
     /// <summary>
@@ -33,9 +30,11 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
     /// <param name="number">The value to convert.</param>
     /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number) =>
-        ConvertOrdinal(number, useExceptions: false);
+        number < 0
+            ? profile.MinusWord + ConvertOrdinalPositive(-(long)number, useExceptions: false)
+            : ConvertOrdinalPositive(number, useExceptions: false);
 
-    string ConvertCardinal(long number)
+    string ConvertCardinal(ulong number)
     {
         if (number == 0)
         {
@@ -49,7 +48,7 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
         // share of the remainder before tens and units are handled.
         foreach (var scale in profile.Scales)
         {
-            var divisor = scale.Value;
+            var divisor = (ulong)scale.Value;
             if (remainder / divisor <= 0)
             {
                 continue;
@@ -87,16 +86,11 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
         return string.Concat(parts);
     }
 
-    string ConvertOrdinal(int number, bool useExceptions)
+    string ConvertOrdinalPositive(long number, bool useExceptions)
     {
         if (number == 0)
         {
             return profile.OrdinalUnitsMap[0];
-        }
-
-        if (number < 0)
-        {
-            return profile.MinusWord + ConvertOrdinal(-number, useExceptions: false);
         }
 
         var parts = new List<string>();
@@ -114,26 +108,26 @@ class AgglutinativeOrdinalScaleNumberToWordsConverter(AgglutinativeOrdinalScaleN
 
             var count = (int)(remainder / divisor);
             var scaleRemainder = (int)(remainder % divisor);
-            parts.Add((count == 1 ? string.Empty : ConvertOrdinal(count, useExceptions: true)) + scale.OrdinalWord);
+            parts.Add((count == 1 ? string.Empty : ConvertOrdinalPositive(count, useExceptions: true)) + scale.OrdinalWord);
             remainder = scaleRemainder;
         }
 
         if (remainder >= 20)
         {
             // Tens ordinals are suffix-driven, so only the count portion recurses.
-            parts.Add(ConvertOrdinal(remainder / 10, useExceptions: true) + profile.OrdinalTensSuffix);
+            parts.Add(ConvertOrdinalPositive(remainder / 10, useExceptions: true) + profile.OrdinalTensSuffix);
             remainder %= 10;
         }
         else if (remainder is > 10 and < 20)
         {
             // Teen ordinals use the unit ordinal map, not the cardinal teen suffix.
-            parts.Add(GetOrdinalUnit(remainder % 10, useExceptions: true) + profile.TeenSuffix);
+            parts.Add(GetOrdinalUnit((int)(remainder % 10), useExceptions: true) + profile.TeenSuffix);
             remainder = 0;
         }
 
         if (remainder is > 0 and <= 10)
         {
-            parts.Add(GetOrdinalUnit(remainder, useExceptions));
+            parts.Add(GetOrdinalUnit((int)remainder, useExceptions));
         }
 
         return string.Concat(parts);

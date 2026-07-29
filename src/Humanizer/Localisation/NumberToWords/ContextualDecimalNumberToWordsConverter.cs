@@ -19,7 +19,7 @@ class ContextualDecimalNumberToWordsConverter(ContextualDecimalNumberToWordsProf
     public override string Convert(long number) =>
         number == 0
             ? profile.ZeroWord
-            : ConvertCardinal(number);
+            : (number < 0 ? profile.MinusWord : string.Empty) + ConvertCardinal(GetMagnitude(number));
 
     /// <summary>
     /// Converts the given value into its localized ordinal form.
@@ -29,25 +29,19 @@ class ContextualDecimalNumberToWordsConverter(ContextualDecimalNumberToWordsProf
     public override string ConvertToOrdinal(int number) =>
         profile.OrdinalPrefix + ConvertOrdinalBody(number);
 
-    string ConvertCardinal(long number, bool hasTens = false, bool hasHigherGroup = false, bool usePostTensUnitExceptions = false)
+    string ConvertCardinal(ulong number, bool hasTens = false, bool hasHigherGroup = false, bool usePostTensUnitExceptions = false)
     {
-        if (number < 0)
-        {
-            // Preserve the sign separately so the positive path can stay focused on the locale's
-            // recursive decimal syntax.
-            return profile.MinusWord + ConvertCardinal(-number, hasTens, hasHigherGroup, usePostTensUnitExceptions);
-        }
-
         foreach (var scale in profile.Scales)
         {
-            if (number < scale.Value)
+            var scaleValue = (ulong)scale.Value;
+            if (number < scaleValue)
             {
                 continue;
             }
 
             // Scale rows recurse first so the remainder can decide whether it needs an explicit
             // zero-tens form or a post-tens unit override.
-            return $"{ConvertCardinal(number / scale.Value)} {scale.Name} {ConvertCardinal(number % scale.Value, hasHigherGroup: true)}".TrimEnd();
+            return $"{ConvertCardinal(number / scaleValue)} {scale.Name} {ConvertCardinal(number % scaleValue, hasHigherGroup: true)}".TrimEnd();
         }
 
         if (number >= 20)
@@ -86,6 +80,9 @@ class ContextualDecimalNumberToWordsConverter(ContextualDecimalNumberToWordsProf
 
         return profile.DigitWords[(int)number];
     }
+
+    static ulong GetMagnitude(long number) =>
+        number >= 0 ? (ulong)number : unchecked((ulong)(-(number + 1)) + 1);
 
     string ConvertOrdinalBody(int number)
     {

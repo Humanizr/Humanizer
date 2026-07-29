@@ -21,23 +21,23 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
         if (number < 0)
         {
             parts.Add(profile.MinusWord);
-            number = -number;
         }
 
+        var magnitude = GetAbsoluteValue(number);
         var needsAnd = false;
         foreach (var scale in profile.Scales)
         {
-            CollectScaleParts(parts, ref number, ref needsAnd, scale);
+            CollectScaleParts(parts, ref magnitude, ref needsAnd, scale);
         }
 
-        if (number > 0)
+        if (magnitude > 0)
         {
-            if (needsAnd && IsAndSplitNeeded((int)number))
+            if (needsAnd && IsAndSplitNeeded((int)magnitude))
             {
                 parts.Add(profile.AndWord);
             }
 
-            CollectUnderOneThousand(parts, number, gender);
+            CollectUnderOneThousand(parts, magnitude, gender);
         }
 
         return string.Join(" ", parts);
@@ -51,6 +51,13 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
             return profile.UnitsOrdinalPrefixes[0] + GetOrdinalEnding(gender);
         }
 
+        var magnitude = number < 0 ? -(long)number : number;
+        var words = ConvertOrdinalPositive(magnitude, gender);
+        return number < 0 ? profile.MinusWord + " " + words : words;
+    }
+
+    string ConvertOrdinalPositive(long number, GrammaticalGender gender)
+    {
         var parts = new List<string?>();
         var needsAnd = false;
 
@@ -61,12 +68,12 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
 
         if (number > 0)
         {
-            if (needsAnd && IsAndSplitNeeded(number))
+            if (needsAnd && IsAndSplitNeeded((int)number))
             {
                 parts.Add(profile.AndWord);
             }
 
-            CollectOrdinalUnderOneThousand(parts, number, gender, gender, useScaleOrdinalPrefix: false, string.Empty);
+            CollectOrdinalUnderOneThousand(parts, (int)number, gender, gender, useScaleOrdinalPrefix: false, string.Empty);
         }
 
         return string.Join(" ", parts);
@@ -89,15 +96,16 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
     /// <summary>
     /// Appends the cardinal rendering for one scale row.
     /// </summary>
-    void CollectScaleParts(List<string?> parts, ref long number, ref bool needsAnd, OrdinalPrefixScale scale)
+    void CollectScaleParts(List<string?> parts, ref ulong number, ref bool needsAnd, OrdinalPrefixScale scale)
     {
-        var quotient = number / scale.Value;
+        var scaleValue = (ulong)scale.Value;
+        var quotient = number / scaleValue;
         if (quotient == 0)
         {
             return;
         }
 
-        number %= scale.Value;
+        number %= scaleValue;
         var startIndex = parts.Count;
         if (quotient == 1)
         {
@@ -120,7 +128,7 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
     /// <summary>
     /// Appends the ordinal rendering for one scale row.
     /// </summary>
-    void CollectOrdinalScaleParts(List<string?> parts, ref int number, ref bool needsAnd, OrdinalPrefixScale scale, GrammaticalGender ordinalGender)
+    void CollectOrdinalScaleParts(List<string?> parts, ref long number, ref bool needsAnd, OrdinalPrefixScale scale, GrammaticalGender ordinalGender)
     {
         var quotient = number / (int)scale.Value;
         if (quotient == 0)
@@ -137,14 +145,14 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
             }
             else
             {
-                CollectUnderOneThousand(parts, quotient, scale.Gender);
+                CollectUnderOneThousand(parts, (ulong)quotient, scale.Gender);
                 parts.Add(scale.Plural);
             }
         }
         else
         {
             var startIndex = parts.Count;
-            CollectOrdinalUnderOneThousand(parts, quotient, scale.Gender, ordinalGender, useScaleOrdinalPrefix: true, scale.OrdinalPrefix);
+            CollectOrdinalUnderOneThousand(parts, (int)quotient, scale.Gender, ordinalGender, useScaleOrdinalPrefix: true, scale.OrdinalPrefix);
             if (number == 0 && needsAnd && !ContainsAndWord(parts, startIndex))
             {
                 parts.Insert(startIndex, profile.AndWord);
@@ -173,7 +181,7 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
     /// <summary>
     /// Renders the under-one-thousand cardinal fragment.
     /// </summary>
-    void CollectUnderOneThousand(List<string?> builder, long number, GrammaticalGender gender)
+    void CollectUnderOneThousand(List<string?> builder, ulong number, GrammaticalGender gender)
     {
         var hundreds = number / 100;
         var hundredRemainder = number % 100;
@@ -182,7 +190,7 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
 
         if (hundreds != 0)
         {
-            AddUnit(builder, hundreds, GrammaticalGender.Neuter);
+            AddUnit(builder, (ulong)hundreds, GrammaticalGender.Neuter);
             builder.Add(hundreds == 1 ? profile.HundredSingular : profile.HundredPlural);
         }
 
@@ -233,7 +241,7 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
 
         if (hundreds != 0)
         {
-            AddUnit(builder, hundreds, GrammaticalGender.Neuter);
+            AddUnit(builder, (ulong)hundreds, GrammaticalGender.Neuter);
             var hundredPrefix = hundreds == 1 ? profile.HundredSingular : profile.HundredPlural;
             if (hundredRemainder < 20 && !useScaleOrdinalPrefix)
             {
@@ -274,7 +282,7 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
 
             if (useScaleOrdinalPrefix)
             {
-                AddUnit(builder, hundredRemainder, partGender);
+                AddUnit(builder, (ulong)hundredRemainder, partGender);
             }
             else
             {
@@ -315,7 +323,7 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
     /// <summary>
     /// Adds a gendered unit word when the locale provides one.
     /// </summary>
-    void AddUnit(List<string?> builder, long number, GrammaticalGender gender)
+    void AddUnit(List<string?> builder, ulong number, GrammaticalGender gender)
     {
         if (number is > 0 and < 5)
         {
@@ -332,6 +340,9 @@ class OrdinalPrefixScaleNumberToWordsConverter(OrdinalPrefixScaleNumberToWordsPr
 
         builder.Add(profile.UnitsMap[number]);
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }
 
 /// <summary>

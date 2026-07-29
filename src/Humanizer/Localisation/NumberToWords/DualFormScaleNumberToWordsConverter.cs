@@ -20,18 +20,8 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        var negativeNumber = false;
-
-        if (input < 0)
-        {
-            // Keep the sign separate so the recursive positive path can stay focused on scale
-            // morphology and gender selection.
-            negativeNumber = true;
-            input *= -1;
-        }
-
-        var text = ConvertPositive(input, gender);
-        return text + (negativeNumber ? $" {profile.MinusSuffix}" : string.Empty);
+        var text = ConvertPositive(GetMagnitude(input), gender);
+        return text + (input < 0 ? $" {profile.MinusSuffix}" : string.Empty);
     }
 
     /// <summary>
@@ -42,40 +32,34 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
     /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-        if (number <= 20)
+        var magnitude = number < 0 ? -(long)number : number;
+        if (magnitude <= 20)
         {
             // The first twenty ordinals are fully irregular and are therefore stored as exact
             // words.
-            return profile.ExactOrdinals[number];
+            var exact = profile.ExactOrdinals[(int)magnitude];
+            return number < 0 ? exact + " " + profile.MinusSuffix : exact;
         }
 
-        var ordinal = Convert(number, gender);
+        var cardinal = ConvertPositive((ulong)magnitude, gender);
 
         // Abbreviated ordinals are built from the cardinal spelling and then prefixed according to
         // the locale's orthographic conventions.
-        if (ordinal.StartsWith('d'))
+        var ordinal = cardinal[0] switch
         {
-            return $"id-{Convert(number, gender)}";
-        }
-        if (ordinal.StartsWith('s'))
-        {
-            return $"is-{Convert(number, gender)}";
-        }
-        if (ordinal.StartsWith('t'))
-        {
-            return $"it-{Convert(number, gender)}";
-        }
-        if (ordinal.StartsWith('e'))
-        {
-            return $"l-{Convert(number, gender)}";
-        }
-        return $"il-{Convert(number, gender)}";
+            'd' => $"id-{cardinal}",
+            's' => $"is-{cardinal}",
+            't' => $"it-{cardinal}",
+            'e' => $"l-{cardinal}",
+            _ => $"il-{cardinal}"
+        };
+        return number < 0 ? ordinal + " " + profile.MinusSuffix : ordinal;
     }
 
     /// <summary>
     /// Renders a tens or unit fragment, optionally using the prefix map used by the locale.
     /// </summary>
-    string GetTens(long value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
+    string GetTens(ulong value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
     {
         if (value == 1 && gender == GrammaticalGender.Feminine)
         {
@@ -86,39 +70,39 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         if (value < 11 && usePrefixMap && usePrefixMapForLowerDigits)
         {
             // Some lower-digit combinations use the prefix map instead of the ordinary unit table.
-            return profile.PrefixMap[value];
+            return profile.PrefixMap[(int)value];
         }
 
         if (value < 11 && usePrefixMap && !usePrefixMapForLowerDigits)
         {
             // Other scale rows prefer the hundreds map for the same low-digit range.
-            return profile.HundredsMap[value];
+            return profile.HundredsMap[(int)value];
         }
 
         if (value is > 10 and < 20 && usePrefixMap)
         {
             // Teen forms can also come from the prefix map when the scale row needs a contracted
             // stem.
-            return profile.PrefixMap[value];
+            return profile.PrefixMap[(int)value];
         }
 
         if (value < 20)
         {
-            return profile.UnitsMap[value];
+            return profile.UnitsMap[(int)value];
         }
 
         var single = value % 10;
         var numberOfTens = value / 10;
         if (single == 0)
         {
-            return profile.TensMap[numberOfTens];
+            return profile.TensMap[(int)numberOfTens];
         }
 
         // Compound tens are rendered as "unit + conjunction + tens" in the dual-form family.
-        return $"{profile.UnitsMap[single]} {profile.Conjunction} {profile.TensMap[numberOfTens]}";
+        return $"{profile.UnitsMap[(int)single]} {profile.Conjunction} {profile.TensMap[(int)numberOfTens]}";
     }
 
-    string GetHundreds(long value, bool usePrefixMap, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
+    string GetHundreds(ulong value, bool usePrefixMap, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
     {
         if (value < 100)
         {
@@ -141,7 +125,7 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         else
         {
             // Larger hundreds are built from the digit table plus the shared hundred word.
-            hundredsText = profile.HundredsMap[numberOfHundreds] + $" {profile.HundredWord}";
+            hundredsText = profile.HundredsMap[(int)numberOfHundreds] + $" {profile.HundredWord}";
         }
 
         if (tens == 0)
@@ -152,7 +136,7 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         return $"{hundredsText} {profile.Conjunction} {GetTens(tens, usePrefixMap, usePrefixMapForLowerValueDigits, gender)}";
     }
 
-    string ConvertPositive(long value, GrammaticalGender gender)
+    string ConvertPositive(ulong value, GrammaticalGender gender)
     {
         if (value < 1000)
         {
@@ -161,13 +145,14 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
 
         foreach (var scale in profile.Scales)
         {
-            if (value < scale.Value)
+            var scaleValue = (ulong)scale.Value;
+            if (value < scaleValue)
             {
                 continue;
             }
 
-            var count = value / scale.Value;
-            var remainder = value % scale.Value;
+            var count = value / scaleValue;
+            var remainder = value % scaleValue;
             var text = GetScaleText(count, count % 100, scale.Forms, gender);
             if (remainder == 0)
             {
@@ -180,7 +165,7 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         return GetHundreds(value, false, false, gender);
     }
 
-    string GetScaleText(long count, long lastTwoDigits, DualFormScale scale, GrammaticalGender gender)
+    string GetScaleText(ulong count, ulong lastTwoDigits, DualFormScale scale, GrammaticalGender gender)
     {
         if (count == 1)
         {
@@ -215,6 +200,9 @@ class DualFormScaleNumberToWordsConverter(DualFormScaleNumberToWordsProfile prof
         // Everything else falls back to the plural scale noun after the rendered count.
         return $"{GetHundreds(count, true, scale.UsePrefixMapForLowerDigits, gender)} {scale.Plural}";
     }
+
+    static ulong GetMagnitude(long number) =>
+        number >= 0 ? (ulong)number : unchecked((ulong)(-(number + 1)) + 1);
 }
 
 /// <summary>
