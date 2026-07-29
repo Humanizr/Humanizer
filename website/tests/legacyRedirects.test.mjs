@@ -31,6 +31,16 @@ test('same-origin exact legacy referrers can migrate a fragment', () => {
     ),
     '/docs/start/installation/?source=legacy#example',
   );
+  assert.equal(
+    resolveLegacyFragmentFromReferrer(
+      '/docs/start/quick-start/',
+      '?source=legacy',
+      '#basic-examples',
+      `${origin}/docs/quick-start.md/?source=legacy`,
+      origin,
+    ),
+    '/docs/start/quick-start/?source=legacy#example',
+  );
 });
 
 test('direct canonical visits and unrelated referrers cannot migrate fragments', () => {

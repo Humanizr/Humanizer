@@ -76,10 +76,17 @@ export function resolveLegacyFragmentFromReferrer(
     return undefined;
   }
 
+  const referrerPathnames = [
+    referrerUrl.pathname,
+    referrerUrl.pathname.replace(/\/$/, ''),
+  ];
   const redirect = redirects.find(
     ({from, referrers = []}) =>
-      from.includes(referrerUrl.pathname) ||
-      referrers.includes(referrerUrl.pathname),
+      referrerPathnames.some(
+        (referrerPathname) =>
+          from.includes(referrerPathname) ||
+          referrers.includes(referrerPathname),
+      ),
   );
   if (!redirect || redirect.to !== pathname) {
     return undefined;

@@ -1,3 +1,4 @@
+import path from 'node:path';
 import {expect, test, type Route} from '@playwright/test';
 import versionManifest from '../../humanizer-versions.json';
 
@@ -521,6 +522,26 @@ test('legacy URLs preserve supported destinations, queries, and fragments', asyn
   const prefixResponse = await page.goto('/docs/localization.md/extra');
   expect(prefixResponse?.status()).toBe(404);
   await expect(page).toHaveURL('/docs/localization.md/extra/');
+});
+
+test('static redirect documents remap fragments after directory normalization', async ({
+  page,
+}) => {
+  await page.route('**/docs/quick-start.md/**', (route) =>
+    route.fulfill({
+      contentType: 'text/html',
+      path: path.resolve(
+        __dirname,
+        '../../build/docs/quick-start.md/index.html',
+      ),
+    }),
+  );
+
+  await page.goto('/docs/quick-start.md/?source=legacy#basic-examples');
+  await expect(page).toHaveURL(
+    '/docs/start/quick-start/?source=legacy#example',
+  );
+  await expect(page.locator('#example')).toBeVisible();
 });
 
 test('version dropdown exposes every manifest snapshot and preview', async ({
