@@ -76,7 +76,7 @@ jobs:
                 'nuget.config',
                 '.config/dotnet-tools.json'
               )
-            }}
+            }}-${{ matrix.gate }}
 
       - name: Restore documentation tools
         run: dotnet tool restore
