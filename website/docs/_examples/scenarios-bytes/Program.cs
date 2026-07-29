@@ -54,7 +54,7 @@ AssertEqual(false, ByteSize.TryParseWithUnitSystem("1 MB", ByteSizeUnitSystem.Bi
 AssertEqual("1 MB/s", decimalRate);
 AssertEqual("1 MiB/s", binaryRate);
 
-Console.WriteLine("1.5 KB; 2 KB; 10 KB 2 B 1 b; 1.5 MB/s; 1 MB; 1 MiB/s");
+Console.WriteLine("1.5 KB; 2 KB; 10 KB 2 B 1 b; 1.5 MB/s; 1 MB; 1 MB/s; 1 MiB/s");
 
 static void AssertEqual<T>(T expected, T actual)
 {

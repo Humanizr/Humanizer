@@ -784,8 +784,8 @@ The unit system to use\.
 
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The numeric format and optional unit token\. For decimal SI and binary IEC, unit tokens are
-matched case\-insensitively and output uses canonical symbol casing\.
+The numeric format and optional unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
+while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\.
 
 <a name='Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
 

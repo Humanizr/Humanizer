@@ -460,8 +460,8 @@ public static class ByteSizeExtensions
     /// <param name="input">The byte quantity to humanize.</param>
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
-    /// The numeric format and optional unit token. For decimal SI and binary IEC, unit tokens are
-    /// matched case-insensitively and output uses canonical symbol casing.
+    /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing.
     /// </param>
     /// <param name="formatProvider">The provider used to format the numeric value.</param>
     /// <returns>The humanized byte quantity.</returns>
@@ -474,7 +474,9 @@ public static class ByteSizeExtensions
         ByteSizeUnitSystem unitSystem,
         string? format = null,
         IFormatProvider? formatProvider = null) =>
-        input.Format(unitSystem, format, formatProvider);
+        unitSystem == ByteSizeUnitSystem.Legacy
+            ? input.Humanize(format, formatProvider)
+            : input.Format(unitSystem, format, formatProvider);
 
     /// <summary>
     /// Turns a byte quantity into a composite human-readable form using descending units, e.g. 10 KB 2 B.

@@ -21,7 +21,14 @@ public class ByteSizeUnitSystemTests
             field => verifyField(field, "<Terabytes>k__BackingField", typeof(double)));
         Assert.Equal(1024, ByteSize.BytesInKilobyte);
         Assert.Equal(0, (int)ByteSizeUnitSystem.Legacy);
-        Assert.Equal(Enumerable.Range(0, 13), Enum.GetValues<DataUnit>().Take(13).Select(value => (int)value));
+#if NET5_0_OR_GREATER
+        var dataUnits = Enum.GetValues<DataUnit>();
+#else
+        var dataUnits = (DataUnit[])Enum.GetValues(typeof(DataUnit));
+#endif
+        Assert.Equal(
+            Enumerable.Range(0, 13),
+            dataUnits.Take(13).Select(value => (int)value));
         Assert.Equal("1 KB", ByteSize.FromBytes(1024).ToString());
         Assert.Equal(ByteSize.FromKilobytes(1), ByteSize.Parse("1 KB", default(IFormatProvider)));
 
@@ -174,7 +181,7 @@ public class ByteSizeUnitSystemTests
     [InlineData("el", 2, ByteSizeUnitSystem.BinaryIec, "GiB", "2 γκιμπιμπάιτ")]
     [InlineData("he", 0, ByteSizeUnitSystem.DecimalSi, "EB", "0 אקסה-בייטים")]
     [InlineData("ig", 2, ByteSizeUnitSystem.DecimalSi, "GB", "2 jigabaịt")]
-    [InlineData("ku", 0, ByteSizeUnitSystem.DecimalSi, "EB", "0 exabyte")]
+    [InlineData("ku", 0, ByteSizeUnitSystem.DecimalSi, "EB", "0 ئێگزابایت")]
     [InlineData("my", 2, ByteSizeUnitSystem.BinaryIec, "MiB", "2 မက်ဘီဘိုက်")]
     [InlineData("so", 2, ByteSizeUnitSystem.DecimalSi, "PB", "2 betabeyt")]
     [InlineData("zh-Hans", 2, ByteSizeUnitSystem.BinaryIec, "PiB", "2 二进制拍字节")]

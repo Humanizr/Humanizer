@@ -16,6 +16,7 @@ namespace Humanizer
         public override int GetHashCode() { }
         public string Humanize(Humanizer.TimeUnit timeUnit = 1) { }
         public string Humanize(string? format, Humanizer.TimeUnit timeUnit = 1, System.Globalization.CultureInfo? culture = null) { }
+        public string HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem unitSystem, string? format = null, Humanizer.TimeUnit timeUnit = 1, System.Globalization.CultureInfo? culture = null) { }
         public override string ToString() { }
     }
     public struct ByteSize : System.IComparable, System.IComparable<Humanizer.ByteSize>, System.IEquatable<Humanizer.ByteSize>, System.IFormattable
@@ -25,6 +26,12 @@ namespace Humanizer
         public const long BitsInByte = 8;
         public const string Byte = "byte";
         public const string ByteSymbol = "B";
+        public const long BytesInDecimalExabyte = 1000000000000000000;
+        public const long BytesInDecimalGigabyte = 1000000000;
+        public const long BytesInDecimalKilobyte = 1000;
+        public const long BytesInDecimalMegabyte = 1000000;
+        public const long BytesInDecimalPetabyte = 1000000000000000;
+        public const long BytesInDecimalTerabyte = 1000000000000;
         public const long BytesInExabyte = 1000000000000000000;
         public const long BytesInGibibyte = 1073741824;
         public const long BytesInGigabyte = 1073741824;
@@ -63,6 +70,12 @@ namespace Humanizer
         public ByteSize(double byteSize) { }
         public long Bits { get; }
         public double Bytes { get; }
+        public double DecimalExabytes { get; }
+        public double DecimalGigabytes { get; }
+        public double DecimalKilobytes { get; }
+        public double DecimalMegabytes { get; }
+        public double DecimalPetabytes { get; }
+        public double DecimalTerabytes { get; }
         public double Exabytes { get; }
         public double Gibibytes { get; }
         public double Gigabytes { get; }
@@ -91,6 +104,8 @@ namespace Humanizer
         public int CompareTo(object? obj) { }
         public bool Equals(Humanizer.ByteSize value) { }
         public override bool Equals(object? value) { }
+        public string Format(Humanizer.ByteSizeUnitSystem unitSystem, string? format = null, System.IFormatProvider? formatProvider = null) { }
+        public string FormatFullWords(Humanizer.ByteSizeUnitSystem unitSystem, string? format = null, System.IFormatProvider? formatProvider = null) { }
         public override int GetHashCode() { }
         public string GetLargestWholeNumberFullWord(System.IFormatProvider? provider = null) { }
         public string GetLargestWholeNumberSymbol(System.IFormatProvider? provider = null) { }
@@ -102,6 +117,12 @@ namespace Humanizer
         public string ToString(string? format, System.IFormatProvider? provider) { }
         public static Humanizer.ByteSize FromBits(long value) { }
         public static Humanizer.ByteSize FromBytes(double value) { }
+        public static Humanizer.ByteSize FromDecimalExabytes(double value) { }
+        public static Humanizer.ByteSize FromDecimalGigabytes(double value) { }
+        public static Humanizer.ByteSize FromDecimalKilobytes(double value) { }
+        public static Humanizer.ByteSize FromDecimalMegabytes(double value) { }
+        public static Humanizer.ByteSize FromDecimalPetabytes(double value) { }
+        public static Humanizer.ByteSize FromDecimalTerabytes(double value) { }
         public static Humanizer.ByteSize FromExabytes(double value) { }
         public static Humanizer.ByteSize FromGibibytes(double value) { }
         public static Humanizer.ByteSize FromGigabytes(double value) { }
@@ -115,10 +136,15 @@ namespace Humanizer
         public static Humanizer.ByteSize FromTerabytes(double value) { }
         public static Humanizer.ByteSize Parse(string s) { }
         public static Humanizer.ByteSize Parse(string s, System.IFormatProvider? formatProvider) { }
+        public static Humanizer.ByteSize ParseWithUnitSystem(string s, Humanizer.ByteSizeUnitSystem unitSystem, System.IFormatProvider? formatProvider = null) { }
         public static bool TryParse(System.ReadOnlySpan<char> s, out Humanizer.ByteSize result) { }
         public static bool TryParse(string? s, out Humanizer.ByteSize result) { }
         public static bool TryParse(System.ReadOnlySpan<char> s, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result) { }
         public static bool TryParse(string? s, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result) { }
+        public static bool TryParseSpanWithUnitSystem(System.ReadOnlySpan<char> s, Humanizer.ByteSizeUnitSystem unitSystem, out Humanizer.ByteSize result) { }
+        public static bool TryParseSpanWithUnitSystem(System.ReadOnlySpan<char> s, Humanizer.ByteSizeUnitSystem unitSystem, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result) { }
+        public static bool TryParseWithUnitSystem(string? s, Humanizer.ByteSizeUnitSystem unitSystem, out Humanizer.ByteSize result) { }
+        public static bool TryParseWithUnitSystem(string? s, Humanizer.ByteSizeUnitSystem unitSystem, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result) { }
         public static bool operator !=(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
         public static Humanizer.ByteSize operator +(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
         public static Humanizer.ByteSize operator ++(Humanizer.ByteSize b) { }
@@ -168,6 +194,8 @@ namespace Humanizer
         public static string Humanize(this Humanizer.ByteSize input, string? format = null) { }
         public static string Humanize(this Humanizer.ByteSize input, string? format, System.IFormatProvider? formatProvider) { }
         public static string HumanizeComposite(this Humanizer.ByteSize input, int precision = 2, System.IFormatProvider? formatProvider = null, string separator = " ", bool toWords = false) { }
+        public static string HumanizeCompositeWithUnitSystem(this Humanizer.ByteSize input, Humanizer.ByteSizeUnitSystem unitSystem, int precision = 2, System.IFormatProvider? formatProvider = null, string separator = " ", bool toWords = false) { }
+        public static string HumanizeWithUnitSystem(this Humanizer.ByteSize input, Humanizer.ByteSizeUnitSystem unitSystem, string? format = null, System.IFormatProvider? formatProvider = null) { }
         public static Humanizer.ByteSize Kilobytes(this byte input) { }
         public static Humanizer.ByteSize Kilobytes(this double input) { }
         public static Humanizer.ByteSize Kilobytes(this int input) { }
@@ -284,6 +312,17 @@ namespace Humanizer
         Mebibyte = 10,
         Gibibyte = 11,
         Tebibyte = 12,
+        DecimalKilobyte = 13,
+        DecimalMegabyte = 14,
+        DecimalGigabyte = 15,
+        DecimalTerabyte = 16,
+        DecimalPetabyte = 17,
+        DecimalExabyte = 18,
+        BinaryKibibyte = 19,
+        BinaryMebibyte = 20,
+        BinaryGibibyte = 21,
+        BinaryTebibyte = 22,
+        BinaryPebibyte = 23,
     }
     public static class DateHumanizeExtensions
     {

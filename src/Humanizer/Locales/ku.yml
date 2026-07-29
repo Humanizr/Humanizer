@@ -240,9 +240,8 @@ surfaces:
           singular: 'پێتابایت'
         symbol: 'PB'
       decimalExabyte:
-        forms:
-          default: 'exabyte'
-          singular: 'exabyte'
+        default: 'ئێگزابایت'
+        singular: 'ئێگزابایت'
         symbol: 'EB'
       binaryKibibyte:
         forms:

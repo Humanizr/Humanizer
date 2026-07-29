@@ -639,8 +639,8 @@ public struct ByteSize(double byteSize) :
     /// </summary>
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
-    /// The numeric format and optional unit token. For decimal SI and binary IEC, unit tokens are
-    /// matched case-insensitively and output uses the selected system's canonical symbol casing.
+    /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing.
     /// </param>
     /// <param name="formatProvider">The provider used to format the numeric value.</param>
     /// <returns>The formatted byte size.</returns>
@@ -661,8 +661,8 @@ public struct ByteSize(double byteSize) :
     /// </summary>
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
-    /// The numeric format and optional unit token. For decimal SI and binary IEC, unit tokens are
-    /// matched case-insensitively and localized words replace the token selected from the requested system.
+    /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; localized words replace the selected token.
     /// </param>
     /// <param name="formatProvider">The provider used to format the numeric value and select localized unit words.</param>
     /// <returns>The formatted byte size using localized unit words.</returns>
@@ -814,8 +814,22 @@ public struct ByteSize(double byteSize) :
 
     static string ReplaceOrdinalIgnoreCase(string value, string oldValue, string newValue)
     {
-        var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(value, oldValue, CompareOptions.OrdinalIgnoreCase);
-        return index < 0 ? value : value.Remove(index, oldValue.Length).Insert(index, newValue);
+        var searchStart = 0;
+        while (true)
+        {
+            var index = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                value,
+                oldValue,
+                searchStart,
+                CompareOptions.OrdinalIgnoreCase);
+            if (index < 0)
+            {
+                return value;
+            }
+
+            value = value.Remove(index, oldValue.Length).Insert(index, newValue);
+            searchStart = index + newValue.Length;
+        }
     }
 
     static SystemUnit[] GetUnits(ByteSizeUnitSystem unitSystem) =>
@@ -1168,8 +1182,8 @@ public struct ByteSize(double byteSize) :
     /// <param name="formatProvider">The provider used to parse the numeric value.</param>
     /// <returns>The parsed byte size.</returns>
     /// <remarks>
-    /// Decimal SI and binary IEC unit tokens are matched case-insensitively. Legacy parsing preserves
-    /// the established behavior.
+    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
@@ -1198,8 +1212,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// Decimal SI and binary IEC unit tokens are matched case-insensitively. Legacy parsing preserves
-    /// the established behavior.
+    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
     public static bool TryParseWithUnitSystem(
@@ -1219,8 +1233,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// Decimal SI and binary IEC unit tokens are matched case-insensitively. Legacy parsing preserves
-    /// the established behavior.
+    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
     public static bool TryParseWithUnitSystem(
@@ -1240,8 +1254,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// Decimal SI and binary IEC unit tokens are matched case-insensitively. Legacy parsing preserves
-    /// the established behavior.
+    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
     public static bool TryParseSpanWithUnitSystem(
@@ -1261,8 +1275,8 @@ public struct ByteSize(double byteSize) :
     /// </param>
     /// <returns><see langword="true"/> if parsing succeeded; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// Decimal SI and binary IEC unit tokens are matched case-insensitively. Legacy parsing preserves
-    /// the established behavior.
+    /// SI/IEC prefixed unit tokens are matched case-insensitively, while <c>b</c> and <c>B</c> remain case-sensitive.
+    /// Legacy parsing preserves the established behavior.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
     public static bool TryParseSpanWithUnitSystem(

@@ -1074,8 +1074,8 @@ The unit system to use\.
 
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The numeric format and optional unit token\. For decimal SI and binary IEC, unit tokens are
-matched case\-insensitively and output uses the selected system's canonical symbol casing\.
+The numeric format and optional unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
+while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\.
 
 <a name='Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
 
@@ -1116,8 +1116,8 @@ The unit system to use\.
 
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The numeric format and optional unit token\. For decimal SI and binary IEC, unit tokens are
-matched case\-insensitively and localized words replace the token selected from the requested system\.
+The numeric format and optional unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
+while `b` and `B` remain case\-sensitive; localized words replace the selected token\.
 
 <a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
 
@@ -1633,8 +1633,8 @@ The parsed byte size\.
 [s](Humanizer.ByteSize.md#Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider).s 'Humanizer\.ByteSize\.ParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider\)\.s') is not valid for the selected unit system\.
 
 ### Remarks
-Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
-the established behavior\.
+SI/IEC prefixed unit tokens are matched case\-insensitively, while `b` and `B` remain case\-sensitive\.
+Legacy parsing preserves the established behavior\.
 
 <a name='Humanizer.ByteSize.Subtract(Humanizer.ByteSize)'></a>
 
@@ -1874,8 +1874,8 @@ When this method returns, contains the parsed byte size if parsing succeeded; ot
 [unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseSpanWithUnitSystem\(System\.ReadOnlySpan\<char\>, Humanizer\.ByteSizeUnitSystem, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
 
 ### Remarks
-Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
-the established behavior\.
+SI/IEC prefixed unit tokens are matched case\-insensitively, while `b` and `B` remain case\-sensitive\.
+Legacy parsing preserves the established behavior\.
 
 <a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize)'></a>
 
@@ -1922,8 +1922,8 @@ When this method returns, contains the parsed byte size if parsing succeeded; ot
 [unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseSpanWithUnitSystem\(System\.ReadOnlySpan\<char\>, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
 
 ### Remarks
-Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
-the established behavior\.
+SI/IEC prefixed unit tokens are matched case\-insensitively, while `b` and `B` remain case\-sensitive\.
+Legacy parsing preserves the established behavior\.
 
 <a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize)'></a>
 
@@ -1964,8 +1964,8 @@ When this method returns, contains the parsed byte size if parsing succeeded; ot
 [unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
 
 ### Remarks
-Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
-the established behavior\.
+SI/IEC prefixed unit tokens are matched case\-insensitively, while `b` and `B` remain case\-sensitive\.
+Legacy parsing preserves the established behavior\.
 
 <a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize)'></a>
 
@@ -2012,8 +2012,8 @@ When this method returns, contains the parsed byte size if parsing succeeded; ot
 [unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
 
 ### Remarks
-Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
-the established behavior\.
+SI/IEC prefixed unit tokens are matched case\-insensitively, while `b` and `B` remain case\-sensitive\.
+Legacy parsing preserves the established behavior\.
 ### Operators
 
 <a name='Humanizer.ByteSize.op_Addition(Humanizer.ByteSize,Humanizer.ByteSize)'></a>

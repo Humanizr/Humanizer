@@ -218,8 +218,8 @@ The byte\-size unit system to use\.
 
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The numeric format and optional byte\-size unit token\. For decimal SI and binary IEC, unit tokens are
-matched case\-insensitively and output uses canonical symbol casing\.
+The numeric format and optional byte\-size unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
+while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\.
 
 <a name='Humanizer.ByteRate.HumanizeWithUnitSystem(Humanizer.ByteSizeUnitSystem,string,Humanizer.TimeUnit,System.Globalization.CultureInfo).timeUnit'></a>
 
