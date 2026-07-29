@@ -16,14 +16,6 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     /// <inheritdoc/>
     public override string Convert(long input)
     {
-        // The generated profile owns the supported magnitude ceiling, with an extra slot only when
-        // the locale explicitly allows `long.MinValue` to survive the absolute-value conversion.
-        if (GetAbsoluteValue(input) > profile.MaximumValue &&
-            !(profile.AllowLongMin && input == long.MinValue))
-        {
-            throw new NotImplementedException();
-        }
-
         if (input == 0)
         {
             return profile.ZeroWord;
@@ -49,11 +41,6 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-        if (GetAbsoluteValue(number) > profile.MaximumValue)
-        {
-            throw new NotImplementedException();
-        }
-
         if (number < 0)
         {
             return profile.MinusWord + " " + ConvertOrdinalPositive(-(long)number, gender);

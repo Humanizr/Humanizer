@@ -148,6 +148,12 @@ public sealed partial class HumanizerSourceGenerator
                 throw new InvalidOperationException("Builder members require a builder name.");
             }
 
+            if (member.Builder == "billion-strategy-cardinal-scale-array" &&
+                !EngineContractUtilities.TryGetElement(root, member.SourcePath, out _))
+            {
+                return CreateLegacyBillionStrategyCardinalScaleArrayExpression(root);
+            }
+
             var builderRoot = string.IsNullOrWhiteSpace(member.SourcePath)
                 ? root
                 : EngineContractUtilities.GetRequiredElement(root, member.SourcePath);
@@ -158,6 +164,7 @@ public sealed partial class HumanizerSourceGenerator
             return member.Builder switch
             {
                 "harmony-ordinal-scale-array" => CreateHarmonyOrdinalScaleArrayExpression(builderRoot),
+                "billion-strategy-cardinal-scale-array" => CreateBillionStrategyCardinalScaleArrayExpression(builderRoot),
                 "contracted-one-scale-array" => CreateContractedOneScaleArrayExpression(builderRoot),
                 "linking-scale-array" => CreateLinkingScaleArrayExpression(builderRoot),
                 "linking-suffix-rule-array" => CreateLinkingSuffixRuleArrayExpression(builderRoot),
@@ -185,6 +192,7 @@ public sealed partial class HumanizerSourceGenerator
                 "construct-state-scale-array" => CreateConstructStateScaleArrayExpression(builderRoot),
                 "hyphenated-scale" => CreateHyphenatedScaleExpression(builderRoot),
                 "hyphenated-scale-array" => CreateHyphenatedScaleArrayExpression(builderRoot),
+                "hyphenated-ordinal-scale-array" => CreateHyphenatedOrdinalScaleArrayExpression(builderRoot),
                 "dual-form-scale" => CreateDualFormScaleExpression(builderRoot),
                 "triad-scale-array" => CreateTriadScaleArrayExpression(builderRoot),
                 "gendered-scale-ordinal-array" => CreateGenderedScaleOrdinalArrayExpression(builderRoot),

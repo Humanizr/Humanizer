@@ -63,8 +63,8 @@ public class MacedonianLocaleParityTests
         Assert.Equal(expected, words.ToNumber(Macedonian));
 
     [Fact]
-    public void ToWords_RejectsMagnitudeWithoutCLDRScaleWord() =>
-        Assert.Throws<NotImplementedException>(() => 1_000_000_000_000_000_000.ToWords(Macedonian));
+    public void ToWords_UsesMacedonianLongScaleTrillion() =>
+        Assert.Equal("еден трилион", 1_000_000_000_000_000_000.ToWords(Macedonian));
 
     [Fact]
     public void ToOrdinalWords_HandlesMinimumInteger() =>

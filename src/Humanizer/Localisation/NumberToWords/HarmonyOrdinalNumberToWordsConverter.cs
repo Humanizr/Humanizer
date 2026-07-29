@@ -26,14 +26,11 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input)
     {
-        if (input > profile.MaximumValue || input < profile.MinimumValue)
-        {
-            throw new NotImplementedException();
-        }
-
         // The cardinal path shares one recursive engine for all supported magnitudes; the
-        // profile only constrains the legal range and the exact hundred behavior.
-        return ConvertCore(input, allowExactHundredWord: true);
+        // profile decides the exact hundred behavior. Keeping the sign outside the magnitude
+        // decomposition makes long.MinValue representable without overflowing.
+        var words = ConvertCore(GetAbsoluteValue(input), allowExactHundredWord: true);
+        return input < 0 ? $"{profile.MinusWord} {words}" : words;
     }
 
     // Composite counts recurse through the same decimal-scale engine; only the generated
@@ -42,19 +39,11 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     /// Converts a number using the shared decimal decomposition while honoring the requested
     /// exact-hundred behavior.
     /// </summary>
-    string ConvertCore(long input, bool allowExactHundredWord)
+    string ConvertCore(ulong number, bool allowExactHundredWord)
     {
-        var number = input;
         if (number == 0)
         {
             return profile.UnitsMap[0];
-        }
-
-        if (number < 0)
-        {
-            // Keep the sign outside the recursive decomposition so harmony rules apply to the
-            // magnitude alone.
-            return $"{profile.MinusWord} {ConvertCore(-number, allowExactHundredWord)}";
         }
 
         if (allowExactHundredWord &&
@@ -70,7 +59,8 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
 
         foreach (var scale in profile.Scales)
         {
-            var count = number / scale.Value;
+            var scaleValue = (ulong)scale.Value;
+            var count = number / scaleValue;
             if (count <= 0)
             {
                 continue;
@@ -81,7 +71,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             parts.Add(scale.OmitOneWhenSingular && count == 1
                 ? scale.Name
                 : $"{ConvertCore(count, scale.AllowBareHundredInCount)} {scale.Name}");
-            number %= scale.Value;
+            number %= scaleValue;
         }
 
         var hundred = number / 100;
@@ -112,7 +102,7 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     /// <summary>
     /// Renders the hundreds portion according to the locale's exact-hundred strategy.
     /// </summary>
-    string FormatHundreds(long hundred)
+    string FormatHundreds(ulong hundred)
     {
         if (hundred > 1)
         {
@@ -126,6 +116,9 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
             ? $"{profile.UnitsMap[1]} {profile.HundredWord}"
             : profile.HundredWord;
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     /// <summary>
     /// Converts the given value using the locale's harmony-based ordinal rules.

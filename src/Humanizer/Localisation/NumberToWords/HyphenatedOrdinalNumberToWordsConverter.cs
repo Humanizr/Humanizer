@@ -18,30 +18,33 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <returns>The localized cardinal words for <paramref name="number"/>.</returns>
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
-        if (number == 1_001_000_001L)
-        {
-            return gender == GrammaticalGender.Feminine ? "mil un milions una" : "mil un milions u";
-        }
-
-        if (number == 4_325_010_007_018L)
-        {
-            return "quatre bilions tres-cents vint-i-cinc mil milions deu milions set mil divuit";
-        }
-
-        if (number == 0)
+        var magnitude = GetAbsoluteValue(number);
+        if (magnitude == 0)
         {
             return profile.ZeroWord;
         }
 
-        if (number < 0)
-        {
-            // Keep the sign separate so the positive branch can stay focused on the locale's
-            // hyphenation rules and gendered lexicon.
-            return profile.NegativeWord + " " + Convert(-number, gender);
-        }
+        var words = ConvertPositive(magnitude, gender, false, false);
+        return number < 0 ? profile.NegativeWord + " " + words : words;
+    }
 
+    string ConvertPositive(ulong number, GrammaticalGender gender, bool isScaleCount, bool isScaleRemainder)
+    {
         if (number < 10)
         {
+            if (number == 1 && gender == GrammaticalGender.Masculine)
+            {
+                if (isScaleCount)
+                {
+                    return profile.MasculineScaleCountOne;
+                }
+
+                if (isScaleRemainder)
+                {
+                    return profile.MasculineCompoundOne;
+                }
+            }
+
             return GetUnit((int)number, gender);
         }
 
@@ -49,7 +52,7 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
         {
             // Teens are stored as exact words because they often do not decompose cleanly into the
             // same unit and tens tables as higher numbers.
-            return profile.Teens[number - 10];
+            return profile.Teens[(int)(number - 10)];
         }
 
         if (number < 100)
@@ -62,17 +65,7 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
             return GetHundreds((int)number, gender);
         }
 
-        if (number < 1_000_000)
-        {
-            return GetThousands((int)number, gender);
-        }
-
-        if (number < 1_000_000_000)
-        {
-            return GetMillions((int)number, gender);
-        }
-
-        throw new NotImplementedException();
+        return GetScaleWords(number, gender, isScaleCount);
     }
 
     /// <summary>
@@ -83,11 +76,13 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-        if (number < 0)
-        {
-            return profile.NegativeWord + " " + ConvertToOrdinal(-number, gender);
-        }
+        var magnitude = number == int.MinValue ? (ulong)int.MaxValue + 1 : (ulong)Math.Abs(number);
+        var words = ConvertToOrdinalPositive(magnitude, gender);
+        return number < 0 ? profile.NegativeWord + " " + words : words;
+    }
 
+    string ConvertToOrdinalPositive(ulong number, GrammaticalGender gender)
+    {
         if (number == 0)
         {
             return profile.ZeroWord;
@@ -98,32 +93,49 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
             ? profile.OrdinalFeminine
             : profile.OrdinalMasculine;
 
-        if (number < exactOrdinals.Length && !string.IsNullOrEmpty(exactOrdinals[number]))
+        if (number < (ulong)exactOrdinals.Length && !string.IsNullOrEmpty(exactOrdinals[(int)number]))
         {
-            return exactOrdinals[number];
+            return exactOrdinals[(int)number];
         }
 
         if (number < 100)
         {
-            return GetOrdinalTens(number, gender);
+            return GetOrdinalTens((int)number, gender);
         }
 
         if (number < 1000)
         {
-            return GetOrdinalHundreds(number, gender);
+            return GetOrdinalHundreds((int)number, gender);
         }
 
-        if (number < 1_000_000)
+        foreach (var scale in profile.Scales)
         {
-            return GetOrdinalThousands(number, gender);
+            if (number < scale.Value)
+            {
+                continue;
+            }
+
+            var count = number / scale.Value;
+            var remainder = number % scale.Value;
+            var scaleOrdinal = gender == GrammaticalGender.Feminine
+                ? scale.OrdinalFeminine
+                : scale.OrdinalMasculine;
+            if (remainder == 0)
+            {
+                return count == 1
+                    ? scaleOrdinal
+                    : ConvertPositive(
+                        count,
+                        scale.CountUsesRequestedGender ? gender : GrammaticalGender.Masculine,
+                        true,
+                        false) + " " + scaleOrdinal;
+            }
+
+            return ConvertPositive(number - remainder, gender, false, false) + " " +
+                   ConvertToOrdinalPositive(remainder, gender);
         }
 
-        if (number < 1_000_000_000)
-        {
-            return GetOrdinalMillions(number, gender);
-        }
-
-        throw new NotImplementedException();
+        throw new InvalidOperationException("The scale profile must include the thousand row.");
     }
 
     /// <summary>
@@ -160,11 +172,75 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <returns>The localized tuple words for <paramref name="number"/>.</returns>
     public override string ConvertToTuple(int number)
     {
-        number = Math.Abs(number);
-        return number < profile.TupleMap.Length
-            ? profile.TupleMap[number]
-            : Convert(number) + " " + profile.TupleFallbackWord;
+        var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+        return magnitude < profile.TupleMap.Length
+            ? profile.TupleMap[(int)magnitude]
+            : Convert(magnitude) + " " + profile.TupleFallbackWord;
     }
+
+    string GetScaleWords(ulong number, GrammaticalGender gender, bool isScaleCount)
+    {
+        foreach (var scale in profile.Scales)
+        {
+            if (number < scale.Value)
+            {
+                continue;
+            }
+
+            var count = number / scale.Value;
+            var remainder = number % scale.Value;
+            if (scale.GroupCountByThousands && count >= 1000)
+            {
+                var thousands = count / 1000;
+                var units = count % 1000;
+                if (units > 0 && (thousands < 10 || units >= 100))
+                {
+                    var combined = ConvertPositive(
+                        count,
+                        scale.CountUsesRequestedGender ? gender : GrammaticalGender.Masculine,
+                        true,
+                        false) + " " + scale.Plural;
+                    return remainder == 0
+                        ? combined
+                        : combined + " " + ConvertPositive(remainder, gender, isScaleCount, !isScaleCount);
+                }
+
+                var grouped = thousands == 1
+                    ? profile.ThousandWord
+                    : ConvertPositive(thousands, GrammaticalGender.Masculine, true, false) + " " + profile.ThousandWord;
+                grouped += " " + scale.Plural;
+                if (units > 0)
+                {
+                    grouped += " " + ConvertPositive(units, GrammaticalGender.Masculine, true, false) + " " + scale.Plural;
+                }
+
+                return remainder == 0
+                    ? grouped
+                    : grouped + " " + ConvertPositive(remainder, gender, isScaleCount, !isScaleCount);
+            }
+
+            var scalePart = count == 1
+                ? scale.OmitOne
+                    ? scale.Singular
+                    : scale.SingularPrefix + " " + scale.Singular
+                : ConvertPositive(
+                    count,
+                    scale.CountUsesRequestedGender ? gender : GrammaticalGender.Masculine,
+                    true,
+                    false) + " " + scale.Plural;
+            if (remainder == 0)
+            {
+                return scalePart;
+            }
+
+            return scalePart + " " + ConvertPositive(remainder, gender, isScaleCount, !isScaleCount);
+        }
+
+        throw new InvalidOperationException("The scale profile must include the thousand row.");
+    }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     /// <summary>
     /// Gets the gendered unit word for the supplied value.
@@ -208,42 +284,6 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     }
 
     /// <summary>
-    /// Gets the localized thousands phrase for the supplied value.
-    /// </summary>
-    string GetThousands(int number, GrammaticalGender gender)
-    {
-        var thousands = number / 1000;
-        var remainder = number % 1000;
-        var thousandPart = thousands == 1
-            ? profile.ThousandWord
-            : Convert(thousands, gender) + " " + profile.ThousandWord;
-        if (remainder == 0)
-        {
-            return thousandPart;
-        }
-
-        return thousandPart + " " + (remainder == 1 && gender == GrammaticalGender.Masculine ? profile.MasculineCompoundOne : Convert(remainder, gender));
-    }
-
-    /// <summary>
-    /// Gets the localized millions phrase for the supplied value.
-    /// </summary>
-    string GetMillions(int number, GrammaticalGender gender)
-    {
-        var millions = number / 1_000_000;
-        var remainder = number % 1_000_000;
-        var millionPart = millions == 1
-            ? profile.MillionSingularPrefix + " " + profile.MillionSingular
-            : Convert(millions, GrammaticalGender.Masculine) + " " + profile.MillionPlural;
-        if (remainder == 0)
-        {
-            return millionPart;
-        }
-
-        return millionPart + " " + (remainder == 1 && gender == GrammaticalGender.Masculine ? profile.MasculineCompoundOne : Convert(remainder, gender));
-    }
-
-    /// <summary>
     /// Renders the ordinal tens component for the supplied value.
     /// </summary>
     string GetOrdinalTens(int number, GrammaticalGender gender)
@@ -269,91 +309,14 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
         var hundreds = number / 100;
         var remainder = number % 100;
         var hundredPart = gender == GrammaticalGender.Feminine ? profile.HundredsFeminine[hundreds] : profile.HundredsMasculine[hundreds];
-        if (remainder == 0 && hundreds == 1)
-        {
-            // One hundred is a special ordinal because the tens suffix attaches directly to the
-            // hundred stem in the masculine/feminine tables.
-            return hundredPart + (gender == GrammaticalGender.Feminine ? profile.FeminineTensOrdinalSuffix : profile.MasculineTensOrdinalSuffix);
-        }
-
         if (remainder == 0)
         {
-            return hundredPart;
+            return gender == GrammaticalGender.Feminine
+                ? profile.OrdinalHundredsFeminine[hundreds]
+                : profile.OrdinalHundredsMasculine[hundreds];
         }
 
-        string rest;
-        if (hundreds == 1 && remainder % 10 != 0)
-        {
-            // Hundred-plus-remainder cases recurse into the ordinal renderer so the lower portion can
-            // keep its own abbreviation and append rules.
-            rest = ConvertToOrdinal(remainder, gender);
-        }
-        else
-        {
-            // Other hundreds keep the cardinal remainder, with a masculine ordinal appender only
-            // when the locale expects one.
-            rest = Convert(remainder, gender);
-            if (gender == GrammaticalGender.Masculine && remainder != 1 && remainder % 10 == 1)
-            {
-                rest += profile.MasculineOrdinalAppender;
-            }
-        }
-
-        return hundredPart + " " + rest;
-    }
-
-    /// <summary>
-    /// Renders the ordinal thousands component for the supplied value.
-    /// </summary>
-    string GetOrdinalThousands(int number, GrammaticalGender gender)
-    {
-        var thousands = number / 1000;
-        var remainder = number % 1000;
-        var thousandPart = thousands == 1 ? profile.ThousandWord : Convert(thousands, gender) + " " + profile.ThousandWord;
-        if (remainder == 0)
-        {
-            return thousandPart;
-        }
-
-        if (remainder == 100)
-        {
-            // Exact one hundred after a thousand keeps the dedicated hundred form.
-            return thousandPart + " " + profile.HundredsMasculine[1];
-        }
-
-        var rest = Convert(remainder, gender);
-        if (gender == GrammaticalGender.Masculine && remainder != 1 && remainder % 10 == 1)
-        {
-            // Masculine ordinals append a final marker only when the remainder ends in one.
-            rest += profile.MasculineOrdinalAppender;
-        }
-
-        return thousandPart + " " + rest;
-    }
-
-    /// <summary>
-    /// Renders the ordinal millions component for the supplied value.
-    /// </summary>
-    string GetOrdinalMillions(int number, GrammaticalGender gender)
-    {
-        var millions = number / 1_000_000;
-        var remainder = number % 1_000_000;
-        var millionPart = millions == 1
-            ? profile.MillionSingularPrefix + " " + profile.MillionSingular
-            : Convert(millions, GrammaticalGender.Masculine) + " " + profile.MillionPlural;
-        if (remainder == 0)
-        {
-            return millionPart;
-        }
-
-        var rest = Convert(remainder, gender);
-        if (gender == GrammaticalGender.Masculine && remainder != 1 && remainder % 10 == 1)
-        {
-            // Million ordinals follow the same masculine appender rule as thousands.
-            rest += profile.MasculineOrdinalAppender;
-        }
-
-        return millionPart + " " + rest;
+        return hundredPart + " " + ConvertToOrdinalPositive((ulong)remainder, gender);
     }
 
     /// <summary>
@@ -402,6 +365,7 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <param name="MillionPlural">The plural million noun.</param>
     /// <param name="MasculineCompoundOne">The masculine unit-one form used inside compounds.</param>
     /// <param name="FeminineCompoundOne">The feminine unit-one form used inside compounds.</param>
+    /// <param name="MasculineScaleCountOne">The masculine cardinal one form used before scale nouns.</param>
     /// <param name="MasculineOrdinalOne">The exact masculine ordinal form for one inside compounds.</param>
     /// <param name="FeminineOrdinalOne">The exact feminine ordinal form for one inside compounds.</param>
     /// <param name="DefaultTensJoiner">The default separator inserted between tens and trailing unit words.</param>
@@ -409,7 +373,6 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <param name="SpecialJoinerTensValue">The tens digit that uses <paramref name="SpecialTensJoiner"/> instead of the default separator.</param>
     /// <param name="MasculineTensOrdinalSuffix">The suffix appended to masculine tens stems when the tens are terminal.</param>
     /// <param name="FeminineTensOrdinalSuffix">The suffix appended to feminine tens stems when the tens are terminal.</param>
-    /// <param name="MasculineOrdinalAppender">The extra masculine marker added when a compound remainder ends in one.</param>
     /// <param name="DefaultOrdinalAbbreviationMasculine">The fallback masculine ordinal abbreviation suffix.</param>
     /// <param name="DefaultOrdinalAbbreviationFeminine">The fallback feminine ordinal abbreviation suffix.</param>
     /// <param name="TupleFallbackWord">The noun appended when tuple rendering falls back to a numeric phrase.</param>
@@ -419,6 +382,8 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
     /// <param name="Tens">The tens words keyed by decade value.</param>
     /// <param name="HundredsMasculine">The masculine hundreds words keyed by digit value.</param>
     /// <param name="HundredsFeminine">The feminine hundreds words keyed by digit value.</param>
+    /// <param name="OrdinalHundredsMasculine">The masculine exact hundred ordinals keyed by digit value.</param>
+    /// <param name="OrdinalHundredsFeminine">The feminine exact hundred ordinals keyed by digit value.</param>
     /// <param name="OrdinalMasculine">The exact masculine ordinal lookup table keyed by absolute value.</param>
     /// <param name="OrdinalFeminine">The exact feminine ordinal lookup table keyed by absolute value.</param>
     /// <param name="OrdinalTensStems">The stems used when an exact tens value becomes ordinal.</param>
@@ -434,6 +399,7 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
         string MillionPlural,
         string MasculineCompoundOne,
         string FeminineCompoundOne,
+        string MasculineScaleCountOne,
         string MasculineOrdinalOne,
         string FeminineOrdinalOne,
         string DefaultTensJoiner,
@@ -441,7 +407,6 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
         int SpecialJoinerTensValue,
         string MasculineTensOrdinalSuffix,
         string FeminineTensOrdinalSuffix,
-        string MasculineOrdinalAppender,
         string DefaultOrdinalAbbreviationMasculine,
         string DefaultOrdinalAbbreviationFeminine,
         string TupleFallbackWord,
@@ -451,10 +416,25 @@ class HyphenatedOrdinalNumberToWordsConverter(HyphenatedOrdinalNumberToWordsConv
         string[] Tens,
         string[] HundredsMasculine,
         string[] HundredsFeminine,
+        string[] OrdinalHundredsMasculine,
+        string[] OrdinalHundredsFeminine,
         string[] OrdinalMasculine,
         string[] OrdinalFeminine,
         string[] OrdinalTensStems,
         string[] OrdinalUnitComponents,
         string[] TupleMap,
-        FrozenDictionary<string, string> OrdinalAbbreviations);
+        FrozenDictionary<string, string> OrdinalAbbreviations,
+        Scale[] Scales);
+
+    /// <summary>One descending cardinal scale row.</summary>
+    public sealed record Scale(
+        ulong Value,
+        string SingularPrefix,
+        string Singular,
+        string Plural,
+        string OrdinalMasculine,
+        string OrdinalFeminine,
+        bool OmitOne = false,
+        bool CountUsesRequestedGender = false,
+        bool GroupCountByThousands = false);
 }

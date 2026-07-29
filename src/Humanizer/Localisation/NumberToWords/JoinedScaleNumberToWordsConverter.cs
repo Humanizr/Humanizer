@@ -21,12 +21,6 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         var magnitude = number == long.MinValue
             ? (ulong)long.MaxValue + 1
             : (ulong)Math.Abs(number);
-        var maximumMagnitude = (ulong)profile.MaximumValue + (profile.AllowLongMinValue ? 1UL : 0UL);
-        if (magnitude > maximumMagnitude)
-        {
-            throw new NotImplementedException();
-        }
-
         if (number == 0)
         {
             return profile.ZeroWord;
@@ -100,12 +94,12 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
                 return exactGenderedOrdinal;
             }
 
-            if (profile.RequireOrdinalException)
-            {
-                throw new NotImplementedException();
-            }
-
             return ConvertToGenderedOrdinal(number, gender);
+        }
+
+        if (profile.CompositionalOrdinal is not null)
+        {
+            return ConvertToCompositionalOrdinal(number, gender);
         }
 
         // Exact overrides must win before any fallback logic; otherwise compound ordinal shortcut
@@ -114,11 +108,6 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
             profile.OrdinalExceptions.TryGetValue(number, out var exactOrdinal))
         {
             return exactOrdinal;
-        }
-
-        if (profile.RequireOrdinalException)
-        {
-            throw new NotImplementedException();
         }
 
         // Some locales only use a compound ordinal for a specific trailing digit. The exclusion
@@ -196,6 +185,38 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         return words.Length == 0 ? words : block.DefaultPrefix + words + block.DefaultSuffix;
     }
 
+    string ConvertToCompositionalOrdinal(int number, GrammaticalGender gender)
+    {
+        if (profile.OrdinalExceptions is not null &&
+            profile.OrdinalExceptions.TryGetValue(number, out var exactOrdinal))
+        {
+            return exactOrdinal;
+        }
+
+        var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+        var words = Convert(magnitude, gender);
+        var tokens = words.Split(' ');
+        var ordinal = profile.CompositionalOrdinal!;
+
+        for (var index = 0; index < tokens.Length - 1; index++)
+        {
+            if (ordinal.NonTerminalReplacements.TryGetValue(tokens[index], out var replacement))
+            {
+                tokens[index] = replacement;
+            }
+        }
+
+        var terminal = tokens[^1];
+        if (ordinal.TerminalReplacements.TryGetValue(terminal, out var terminalReplacement))
+        {
+            tokens[^1] = terminalReplacement;
+        }
+
+        var joiner = Array.IndexOf(ordinal.CompactTerminalWords, terminal) >= 0 ? string.Empty : profile.JoinWord;
+        var result = string.Join(joiner, tokens);
+        return number < 0 ? profile.MinusWord + profile.NegativeJoinWord + result : result;
+    }
+
     /// <summary>
     /// Converts the segment below one hundred, falling back to a generated tens/units joiner when needed.
     /// </summary>
@@ -255,8 +276,8 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
 /// <param name="neuterSubHundredReplacements">Neuter overrides for authored under-hundred cardinals.</param>
 /// <param name="scales">The descending scale rows used during decomposition.</param>
 /// <param name="ordinalExceptions">Exact ordinal overrides keyed by value.</param>
-/// <param name="requireOrdinalException">Whether non-exact ordinal inputs should fail instead of falling back to cardinal-derived forms.</param>
 /// <param name="ordinal">The optional gendered word-ordinal profile used by ordinal word conversion.</param>
+/// <param name="compositionalOrdinal">The optional token-based compositional ordinal profile.</param>
 /// <param name="compoundOrdinalRemainder">The trailing digit used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalWord">The word used by compound ordinal shortcut rules.</param>
 /// <param name="compoundOrdinalExcludedValues">Values that must not use the compound ordinal shortcut.</param>
@@ -281,8 +302,8 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     FrozenDictionary<int, string> neuterSubHundredReplacements,
     JoinedScale[] scales,
     FrozenDictionary<int, string>? ordinalExceptions = null,
-    bool requireOrdinalException = false,
     JoinedScaleOrdinalProfile? ordinal = null,
+    JoinedScaleCompositionalOrdinalProfile? compositionalOrdinal = null,
     int? compoundOrdinalRemainder = null,
     string? compoundOrdinalWord = null,
     FrozenSet<int>? compoundOrdinalExcludedValues = null)
@@ -327,10 +348,10 @@ internal sealed class JoinedScaleNumberToWordsProfile(
     public JoinedScale[] Scales { get; } = scales;
     /// <summary>Gets exact ordinal overrides keyed by value.</summary>
     public FrozenDictionary<int, string>? OrdinalExceptions { get; } = ordinalExceptions;
-    /// <summary>Gets a value indicating whether non-exact ordinal inputs should fail instead of falling back to cardinal-derived forms.</summary>
-    public bool RequireOrdinalException { get; } = requireOrdinalException;
     /// <summary>Gets the optional gender-aware ordinal profile.</summary>
     public JoinedScaleOrdinalProfile? Ordinal { get; } = ordinal;
+    /// <summary>Gets the optional token-based compositional ordinal profile.</summary>
+    public JoinedScaleCompositionalOrdinalProfile? CompositionalOrdinal { get; } = compositionalOrdinal;
     /// <summary>Gets the trailing digit that triggers the compound ordinal shortcut.</summary>
     public int? CompoundOrdinalRemainder { get; } = compoundOrdinalRemainder;
     /// <summary>Gets the compound ordinal word appended when the shortcut applies.</summary>
@@ -355,6 +376,12 @@ internal sealed class JoinedScaleNumberToWordsProfile(
         return replacements.TryGetValue(number, out replacement);
     }
 }
+
+/// <summary>Authored token transformations for compositional ordinals.</summary>
+internal sealed record JoinedScaleCompositionalOrdinalProfile(
+    FrozenDictionary<string, string> NonTerminalReplacements,
+    FrozenDictionary<string, string> TerminalReplacements,
+    string[] CompactTerminalWords);
 
 /// <summary>Gender-specific ordinal affixes and exact replacement data.</summary>
 /// <param name="DefaultPrefix">The prefix prepended to the cardinal word form for productive ordinals.</param>

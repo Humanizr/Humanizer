@@ -29,57 +29,57 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        if (input == 4_325_010_007_018L)
+        var magnitude = GetAbsoluteValue(input);
+        if (magnitude >= 1_000_000_000)
         {
-            return profile.Cardinal.BillionStrategy == BillionCardinalStrategy.ThousandMillions
-                ? "quatro biliões trezentos e vinte e cinco mil milhões dez milhões sete mil e dezoito"
-                : "quatro trilhões trezentos e vinte e cinco bilhões dez milhões sete mil e dezoito";
+            switch (profile.Cardinal.BillionStrategy)
+            {
+                case BillionCardinalStrategy.ThousandMillions:
+                    break;
+                case BillionCardinalStrategy.BillionWord when magnitude / 1_000_000_000 == 1 && profile.Cardinal.BillionSingularWord is null:
+                    throw new InvalidOperationException("Billion-word cardinal strategy requires a singular billion word.");
+                case BillionCardinalStrategy.BillionWord when magnitude / 1_000_000_000 > 1 && profile.Cardinal.BillionPluralWord is null:
+                    throw new InvalidOperationException("Billion-word cardinal strategy requires a plural billion word.");
+                case BillionCardinalStrategy.BillionWord:
+                    break;
+                default:
+                    throw new InvalidOperationException("Unsupported billion-strategy cardinal mode.");
+            }
         }
 
-        if (input is > 999999999999 or < -999999999999)
-        {
-            throw new NotImplementedException();
-        }
-
-        var number = input;
-
-        if (number == 0)
+        if (magnitude == 0)
         {
             return profile.Cardinal.UnitsMap[0];
         }
 
-        if (number < 0)
-        {
-            // Keep the sign separate so the positive rendering path can stay purely morphological.
-            return $"{profile.MinusWord} {Convert(Math.Abs(number), gender)}";
-        }
+        var words = ConvertPositive(magnitude, gender);
+        return input < 0 ? $"{profile.MinusWord} {words}" : words;
+    }
 
+    string ConvertPositive(ulong number, GrammaticalGender gender)
+    {
         var parts = new List<string>();
 
-        if (number / 1_000_000_000 > 0)
+        foreach (var scale in profile.Cardinal.Scales)
         {
-            // Billion wording is the only place this family truly diverges; everything below it
-            // reuses the normal million/thousand/hundred decomposition.
-            parts.Add(BuildBillions(number / 1_000_000_000));
-            number %= 1_000_000_000;
-        }
+            var count = number / scale.Value;
+            if (count == 0)
+            {
+                continue;
+            }
 
-        if (number / 1_000_000 > 0)
-        {
-            // Millions are always rendered before thousands so the remaining suffix stays ordered
-            // from largest to smallest scale.
-            parts.Add(number / 1_000_000 >= 2
-                ? $"{Convert(number / 1_000_000, GrammaticalGender.Masculine)} {profile.Cardinal.MillionPluralWord}"
-                : $"{Convert(number / 1_000_000, GrammaticalGender.Masculine)} {profile.Cardinal.MillionSingularWord}");
-
-            number %= 1_000_000;
+            var scaleWord = count == 1 ? scale.Singular : scale.Plural;
+            parts.Add(count == 1 && scale.OmitOne
+                ? scaleWord
+                : $"{ConvertPositive(count, GrammaticalGender.Masculine)} {scaleWord}");
+            number %= scale.Value;
         }
 
         if (number / 1000 > 0)
         {
             parts.Add(number / 1000 == 1
                 ? profile.Cardinal.ThousandWord
-                : $"{Convert(number / 1000, GrammaticalGender.Masculine)} {profile.Cardinal.ThousandWord}");
+                : $"{ConvertPositive(number / 1000, GrammaticalGender.Masculine)} {profile.Cardinal.ThousandWord}");
             number %= 1000;
         }
 
@@ -87,7 +87,7 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
         {
             var hundreds = number == 100
                 ? profile.Cardinal.HundredExactWord
-                : ApplyGender(profile.Cardinal.HundredsMap[number / 100], gender);
+                : ApplyGender(profile.Cardinal.HundredsMap[(int)(number / 100)], gender);
 
             parts.Add(parts.Count > 0 && number % 100 == 0
                 ? $"{profile.AndWord} {hundreds}"
@@ -108,15 +108,15 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
             {
                 // Below twenty, the generated unit table already contains the locale's irregular
                 // forms, including any gender-sensitive variants.
-                parts.Add(ApplyGender(profile.Cardinal.UnitsMap[number], gender));
+                parts.Add(ApplyGender(profile.Cardinal.UnitsMap[(int)number], gender));
             }
             else
             {
                 // Tens are emitted first and the unit is appended only when it exists.
-                var lastPart = profile.Cardinal.TensMap[number / 10];
+                var lastPart = profile.Cardinal.TensMap[(int)(number / 10)];
                 if (number % 10 > 0)
                 {
-                    lastPart += $" {profile.AndWord} {ApplyGender(profile.Cardinal.UnitsMap[number % 10], gender)}";
+                    lastPart += $" {profile.AndWord} {ApplyGender(profile.Cardinal.UnitsMap[(int)(number % 10)], gender)}";
                 }
 
                 parts.Add(lastPart);
@@ -125,6 +125,9 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
 
         return string.Join(" ", parts);
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     // Higher-scale ordinal wording differs between pt and pt-BR, so the generated profile chooses
     // the billion strategy and separator behavior while the runtime keeps the same decomposition order.
@@ -187,29 +190,6 @@ class BillionStrategyNumberToWordsConverter(BillionStrategyNumberToWordsProfile 
         }
 
         return string.Join(" ", parts);
-    }
-
-    // This is the core cardinal variation in the family: some locales say "thousand millions",
-    // while others use a dedicated singular/plural billion word.
-    /// <summary>
-    /// Renders the cardinal billions segment using the locale's billion-scale strategy.
-    /// </summary>
-    string BuildBillions(long billions)
-    {
-        return profile.Cardinal.BillionStrategy switch
-        {
-            // Some locales speak billions as "thousand millions", so the singular case is a pure
-            // lexical contraction and the plural case recurses through the same cardinal renderer.
-            BillionCardinalStrategy.ThousandMillions => billions == 1
-                ? $"{profile.Cardinal.ThousandWord} {profile.Cardinal.MillionPluralWord}"
-                : $"{Convert(billions)} {profile.Cardinal.ThousandWord} {profile.Cardinal.MillionPluralWord}",
-            // Other locales have a dedicated billion word, but the singular/plural choice still
-            // comes from the profile instead of from hardcoded string branches.
-            BillionCardinalStrategy.BillionWord => billions >= 2
-                ? $"{Convert(billions, GrammaticalGender.Masculine)} {profile.Cardinal.BillionPluralWord ?? throw new InvalidOperationException("Billion-word cardinal strategy requires a plural billion word.")}"
-                : $"{Convert(billions, GrammaticalGender.Masculine)} {profile.Cardinal.BillionSingularWord ?? throw new InvalidOperationException("Billion-word cardinal strategy requires a singular billion word.")}",
-            _ => throw new InvalidOperationException("Unsupported billion-strategy cardinal mode.")
-        };
     }
 
     // Ordinal billions mirror the same split, but the ordinal branch may also need different
@@ -352,6 +332,7 @@ sealed class BillionStrategyCardinalLexicon(
     BillionCardinalStrategy billionStrategy,
     string? billionSingularWord,
     string? billionPluralWord,
+    BillionStrategyCardinalScale[] scales,
     string[] unitsMap,
     string[] tensMap,
     string[] hundredsMap)
@@ -391,6 +372,9 @@ sealed class BillionStrategyCardinalLexicon(
     /// </summary>
     public string? BillionPluralWord { get; } = billionPluralWord;
 
+    /// <summary>Gets the descending cardinal scale rows.</summary>
+    public BillionStrategyCardinalScale[] Scales { get; } = scales;
+
     /// <summary>
     /// Gets the cardinal units lexicon.
     /// </summary>
@@ -406,6 +390,9 @@ sealed class BillionStrategyCardinalLexicon(
     /// </summary>
     public string[] HundredsMap { get; } = hundredsMap;
 }
+
+/// <summary>One descending cardinal scale row for a Portuguese-family profile.</summary>
+sealed record BillionStrategyCardinalScale(ulong Value, string Singular, string Plural, bool OmitOne = false);
 
 /// <summary>
 /// Ordinal lexicon for <see cref="BillionStrategyNumberToWordsConverter"/>.

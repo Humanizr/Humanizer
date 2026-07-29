@@ -36,27 +36,25 @@ public class JoinedScaleNumberToWordsConverterTests
     }
 
     [Fact]
-    public void RequireOrdinalExceptionDisablesCompoundOrdinalFallback()
+    public void SupportsCompoundOrdinalFallback()
     {
         var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
             [],
             ["", "hundred"],
             [],
-            requireOrdinalException: true,
             compoundOrdinalRemainder: 1,
             compoundOrdinalWord: "first"));
 
-        Assert.Throws<NotImplementedException>(() => converter.ConvertToOrdinal(21));
+        Assert.Equal("20 first", converter.ConvertToOrdinal(21));
     }
 
     [Fact]
-    public void RequireOrdinalExceptionDisablesGenderedOrdinalFallbackButKeepsExactReplacements()
+    public void SupportsGenderedOrdinalFallbackAndExactReplacements()
     {
         var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
             [],
             ["", "hundred"],
             [],
-            requireOrdinalException: true,
             ordinal: new JoinedScaleOrdinalProfile(
                 new("", "th", new Dictionary<int, string> { [1] = "first" }.ToFrozenDictionary()),
                 null,
@@ -64,14 +62,13 @@ public class JoinedScaleNumberToWordsConverterTests
                 GrammaticalGender.Masculine)));
 
         Assert.Equal("first", converter.ConvertToOrdinal(1));
-        Assert.Throws<NotImplementedException>(() => converter.ConvertToOrdinal(2));
+        Assert.Equal("twoth", converter.ConvertToOrdinal(2));
     }
 
     static JoinedScaleNumberToWordsProfile CreateProfile(
         JoinedScale[] scales,
         string[] hundredsMap,
         string[] hundredsMapWithRemainder,
-        bool requireOrdinalException = false,
         JoinedScaleOrdinalProfile? ordinal = null,
         int? compoundOrdinalRemainder = null,
         string? compoundOrdinalWord = null) =>
@@ -95,7 +92,6 @@ public class JoinedScaleNumberToWordsConverterTests
             FrozenDictionary<int, string>.Empty,
             FrozenDictionary<int, string>.Empty,
             scales,
-            requireOrdinalException: requireOrdinalException,
             ordinal: ordinal,
             compoundOrdinalRemainder: compoundOrdinalRemainder,
             compoundOrdinalWord: compoundOrdinalWord);

@@ -1103,7 +1103,7 @@ surfaces:
     words:
       engine: 'south-slavic-cardinal'
       maximumValue: 9223372036854775807
-      allowLongMin: false
+      allowLongMin: true
       zeroWord: 'nič'
       minusWord: 'minus'
       scaleFormDetector: 'slovenian'

@@ -5,8 +5,6 @@ namespace Humanizer;
 /// </summary>
 class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWordsConverter(GrammaticalGender.Masculine)
 {
-    const long MaximumValue = 999_999_999_999_999_999;
-
     static readonly string[] MasculineUnits =
     [
         "нула", "еден", "два", "три", "четири", "пет", "шест", "седум", "осум", "девет",
@@ -37,6 +35,7 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
 
     static readonly Scale[] Scales =
     [
+        new(1_000_000_000_000_000_000, GrammaticalGender.Masculine, "трилион", "трилиони", "трилионит"),
         new(1_000_000_000_000_000, GrammaticalGender.Feminine, "билијарда", "билијарди", "билијардит"),
         new(1_000_000_000_000, GrammaticalGender.Masculine, "билион", "билиони", "билионит"),
         new(1_000_000_000, GrammaticalGender.Feminine, "милијарда", "милијарди", "милијардит"),
@@ -76,9 +75,6 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
 
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
-        if (number is > MaximumValue or < -MaximumValue)
-            throw new NotImplementedException();
-
         if (number == 0)
         {
             return MasculineUnits[0];
@@ -86,11 +82,14 @@ class MacedonianNumberToWordsConverter(CultureInfo culture) : GenderedNumberToWo
 
         if (number < 0)
         {
-            return "минус " + ConvertPositive((ulong)-number, gender);
+            return "минус " + ConvertPositive(GetAbsoluteValue(number), gender);
         }
 
         return ConvertPositive((ulong)number, gender);
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true) =>
         Convert(number, gender, addAnd);

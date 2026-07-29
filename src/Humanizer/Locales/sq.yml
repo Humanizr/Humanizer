@@ -485,7 +485,7 @@ surfaces:
   number:
     words:
       engine: 'joined-scale'
-      maximumValue: 999999999999999999
+      maximumValue: 9223372036854775807
       zeroWord: 'zero'
       minusWord: 'minus'
       negativeJoinWord: ' '
@@ -539,6 +539,10 @@ surfaces:
         - 'tetëqind'
         - 'nëntëqind'
       scales:
+        -
+          value: 1000000000000000000
+          name: 'trilion'
+          pluralName: 'trilionë'
         -
           value: 1000000000000000
           name: 'biliar'

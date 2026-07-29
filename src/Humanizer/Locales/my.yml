@@ -276,7 +276,7 @@ surfaces:
   number:
     words:
       engine: 'joined-scale'
-      maximumValue: 999999999
+      maximumValue: 9223372036854775807
       zeroWord: 'သုည'
       minusWord: 'အနုတ်'
       negativeJoinWord: ' '

@@ -87,6 +87,7 @@ Nested `cardinal` fields:
 - `billionStrategy`
 - `billionSingularWord`
 - `billionPluralWord`
+- `scales`
 - `unitsMap`
 - `tensMap`
 - `hundredsMap`
@@ -106,6 +107,7 @@ Notes:
 
 - Use this engine when a locale's main variability is how it names the billion scale and how the cardinal and ordinal branches differ at higher scales.
 - Keep `cardinal` and `ordinal` words separate even when many values happen to match; they model two distinct runtime sub-profiles.
+- Prefer descending `cardinal.scales` rows for authored values above one million. Each row declares `value`, `singular`, `plural`, and optional `omitOne`; the legacy billion fields remain available for existing profiles.
 - `ordinal.millionJoinMode` controls the separator before `millionWord`: use `spaced` for a space or `compact` for no separator.
 
 ### `conjoined-gendered-scale`
@@ -349,13 +351,15 @@ Fields:
 - `millionSingularPrefix`
 - `masculineCompoundOne`
 - `feminineCompoundOne`
+- `masculineScaleCountOne`
 - `masculineOrdinalOne`
 - `feminineOrdinalOne`
+- `ordinalHundredsMasculine`
+- `ordinalHundredsFeminine`
 - `ordinalMasculine`
 - `ordinalFeminine`
 - `ordinalUnitComponents`
 - `ordinalTensStems`
-- `masculineOrdinalAppender`
 - `masculineTensOrdinalSuffix`
 - `feminineTensOrdinalSuffix`
 - `defaultOrdinalAbbreviationMasculine`
@@ -366,6 +370,11 @@ Fields:
 - `specialJoinerTensValue`
 - `tupleMap`
 - `tupleFallbackWord`
+- `scales`
+
+Scale rows declare `value`, `singular`, `plural`, `ordinalMasculine`, and
+`ordinalFeminine`. They may also declare `singularPrefix`, `omitOne`,
+`countUsesRequestedGender`, and `groupCountByThousands`.
 
 ### `linked-vigesimal`
 
@@ -592,14 +601,17 @@ Fields:
   - `pluralNameWithRemainder` (optional)
   - `omitOneWhenSingular` (optional)
 - `ordinalExceptions`
-- `requireOrdinalException`: optional boolean. When `true`, `ToOrdinalWords` only accepts exact ordinal replacements and throws `NotImplementedException` for non-exact inputs instead of synthesizing an ordinal through compound, default-suffix, or gendered fallback rules. Use this for locales whose authored ordinal coverage is intentionally finite and should not silently return cardinal-derived words.
 - `compoundOrdinalExcludedValues`
-- `ordinal`: optional gendered word-ordinal profile. When present, it overrides the legacy `defaultOrdinalSuffix`/`ordinalExceptions` path for `ToOrdinalWords(number, gender, culture)`. `requireOrdinalException` still permits authored `exactReplacements` but disables the profile's default prefix/suffix fallback.
+- `ordinal`: optional gendered word-ordinal profile. When present, it overrides the legacy `defaultOrdinalSuffix`/`ordinalExceptions` path for `ToOrdinalWords(number, gender, culture)`.
   - `masculine`: gender block with `defaultSuffix` and optional `exactReplacements`.
   - `feminine`: optional gender block with the same shape as `masculine`.
   - `neuter`: optional gender block with the same shape as `masculine`.
   - `neuterFallback`: gender to use when `GrammaticalGender.Neuter` is requested and no `neuter` block exists. Must be `'masculine'` or `'feminine'`.
   - `joined-scale` intentionally allows omitted `feminine` and `neuter` blocks because some locales only need masculine word ordinals or use masculine as a shared fallback. This differs from `ordinalizer: number-word-suffix`, which requires both `masculine` and `feminine` because that ordinalizer surface models explicitly gendered numeric ordinalization.
+- `compositionalOrdinal`: optional word-replacement profile for locales that form compound ordinals by changing each cardinal token.
+  - `nonTerminalReplacements`: token replacements used before the final token.
+  - `terminalReplacements`: token replacements used for the final token.
+  - `compactTerminalWords`: scale words that join directly to the preceding transformed count.
 
 Join fields are literal strings, not separator-mode enums:
 

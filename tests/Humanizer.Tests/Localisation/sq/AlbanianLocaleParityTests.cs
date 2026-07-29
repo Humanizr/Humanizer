@@ -59,8 +59,8 @@ public class AlbanianLocaleParityTests
     }
 
     [Fact]
-    public void NumberToWords_RejectsMagnitudeWithoutCLDRScaleWord() =>
-        Assert.Throws<NotImplementedException>(() => 1_000_000_000_000_000_000.ToWords(Sq));
+    public void NumberToWords_UsesAlbanianLongScaleTrillion() =>
+        Assert.Equal("një trilion", 1_000_000_000_000_000_000.ToWords(Sq));
 
     [Theory]
     [InlineData(1, "1-rë")]

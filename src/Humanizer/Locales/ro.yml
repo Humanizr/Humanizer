@@ -480,16 +480,34 @@ surfaces:
         9: 'nouălea|noua'
       scales:
         -
-          singular: 'o mie'
-          plural: 'mii'
+          value: 1000000000000000000
+          singular: 'un cvintilion'
+          plural: 'cvintilioane'
           countGender: 'feminine'
         -
+          value: 1000000000000000
+          singular: 'un cvadrilion'
+          plural: 'cvadrilioane'
+          countGender: 'feminine'
+        -
+          value: 1000000000000
+          singular: 'un trilion'
+          plural: 'trilioane'
+          countGender: 'feminine'
+        -
+          value: 1000000000
+          singular: 'un miliard'
+          plural: 'miliarde'
+          countGender: 'feminine'
+        -
+          value: 1000000
           singular: 'un milion'
           plural: 'milioane'
           countGender: 'feminine'
         -
-          singular: 'un miliard'
-          plural: 'miliarde'
+          value: 1000
+          singular: 'o mie'
+          plural: 'mii'
           countGender: 'feminine'
 
     parse:
