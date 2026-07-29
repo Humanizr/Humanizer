@@ -48,6 +48,23 @@ AssertEqual(
         .HumanizeComposite(precision: 3, formatProvider: culture));
 AssertEqual("1 MB", decimalSize.Format(ByteSizeUnitSystem.DecimalSi, formatProvider: culture));
 AssertEqual("976.56 KiB", decimalSize.Format(ByteSizeUnitSystem.BinaryIec, formatProvider: culture));
+AssertEqual(
+    "1 MB 1 kB 1 B",
+    ByteSize.FromBytes(1_001_001)
+        .HumanizeCompositeWithUnitSystem(
+            ByteSizeUnitSystem.DecimalSi,
+            precision: 3,
+            formatProvider: culture));
+AssertEqual(
+    "1 MiB 1 KiB 1 B",
+    ByteSize.FromBytes(
+            ByteSize.BytesInMebibyte +
+            ByteSize.BytesInKibibyte +
+            1)
+        .HumanizeCompositeWithUnitSystem(
+            ByteSizeUnitSystem.BinaryIec,
+            precision: 3,
+            formatProvider: culture));
 AssertEqual(decimalSize, ByteSize.ParseWithUnitSystem("1 MB", ByteSizeUnitSystem.DecimalSi, culture));
 AssertEqual(binarySize, ByteSize.ParseWithUnitSystem("1 MiB", ByteSizeUnitSystem.BinaryIec, culture));
 AssertEqual(false, ByteSize.TryParseWithUnitSystem("1 MB", ByteSizeUnitSystem.BinaryIec, culture, out _));

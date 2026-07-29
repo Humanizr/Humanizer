@@ -67,6 +67,19 @@ or article, and a locale may encode a count in the unit form. Locales and custom
 components without verified case support throw `NotSupportedException`
 instead of falling back to English.
 
+V4 previews also provide opt-in decimal SI and binary IEC byte-size APIs:
+
+```csharp
+var size = ByteSize.FromBytes(1_000_000);
+
+Console.WriteLine(size.Format(ByteSizeUnitSystem.DecimalSi)); // 1 MB
+Console.WriteLine(size.Format(ByteSizeUnitSystem.BinaryIec)); // 976.56 KiB
+```
+
+Legacy byte-size APIs keep their established unit factors. See
+[byte sizes and rates](https://humanizr.net/docs/scenarios/byte-sizes-and-rates/)
+for explicit formatting, parsing, composites, and rates.
+
 ## Documentation
 
 - [Start using Humanizer](https://humanizr.net/docs/start/overview/)

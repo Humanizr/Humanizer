@@ -1075,7 +1075,9 @@ The unit system to use\.
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The numeric format and optional unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
-while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\.
+while `b` and `B` remain case\-sensitive; output uses canonical symbol casing\. At most one distinct
+unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
+sections\.
 
 <a name='Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
 
@@ -1093,7 +1095,8 @@ The formatted byte size\.
 [unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem 'Humanizer\.ByteSize\.Format\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.unitSystem') is not defined\.
 
 [System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
-[format](Humanizer.ByteSize.md#Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format 'Humanizer\.ByteSize\.Format\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.format') is invalid, or selects a token not supported by the selected non\-legacy system\.
+[format](Humanizer.ByteSize.md#Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format 'Humanizer\.ByteSize\.Format\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.format') is invalid, contains mixed unit tokens, or selects a token not supported by the
+            selected non\-legacy system\.
 
 <a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider)'></a>
 
@@ -1117,7 +1120,9 @@ The unit system to use\.
 `format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The numeric format and optional unit token\. SI/IEC prefixed unit tokens are matched case\-insensitively,
-while `b` and `B` remain case\-sensitive; localized words replace the selected token\.
+while `b` and `B` remain case\-sensitive; localized words replace the selected token\. At most one
+distinct unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric
+format sections\.
 
 <a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
 
@@ -1135,7 +1140,8 @@ The formatted byte size using localized unit words\.
 [unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem 'Humanizer\.ByteSize\.FormatFullWords\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.unitSystem') is not defined\.
 
 [System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
-[format](Humanizer.ByteSize.md#Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format 'Humanizer\.ByteSize\.FormatFullWords\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.format') is invalid, or selects a token not supported by the selected non\-legacy system\.
+[format](Humanizer.ByteSize.md#Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format 'Humanizer\.ByteSize\.FormatFullWords\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.format') is invalid, contains mixed unit tokens, or selects a token not supported by the
+            selected non\-legacy system\.
 
 <a name='Humanizer.ByteSize.FromBits(long)'></a>
 

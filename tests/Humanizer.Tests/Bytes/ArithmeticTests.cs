@@ -35,6 +35,15 @@ public class ArithmeticTests
     }
 
     [Fact]
+    public void AddBitsPreservesLegacyBytesBasedRounding()
+    {
+        var result = ByteSize.FromBits(9_007_199_254_740_992).AddBits(1);
+
+        Assert.Equal(1_125_899_906_842_624, result.Bytes);
+        Assert.Equal(9_007_199_254_740_992, result.Bits);
+    }
+
+    [Fact]
     public void AddBytes()
     {
         var size = ByteSize

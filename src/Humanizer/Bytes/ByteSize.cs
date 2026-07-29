@@ -306,7 +306,7 @@ public struct ByteSize(double byteSize) :
     // Get ceiling because bis are whole units
 
     public static ByteSize FromBits(long value) =>
-        new(value / (double)BitsInByte, value);
+        new(value / (double)BitsInByte);
 
     internal static ByteSize FromBytesAndBits(double bytes, long bits) =>
         new(bytes, bits);
@@ -647,13 +647,16 @@ public struct ByteSize(double byteSize) :
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
     /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
-    /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing.
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; output uses canonical symbol casing. At most one distinct
+    /// unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric format
+    /// sections.
     /// </param>
     /// <param name="formatProvider">The provider used to format the numeric value.</param>
     /// <returns>The formatted byte size.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
     /// <exception cref="FormatException">
-    /// <paramref name="format"/> is invalid, or selects a token not supported by the selected non-legacy system.
+    /// <paramref name="format"/> is invalid, contains mixed unit tokens, or selects a token not supported by the
+    /// selected non-legacy system.
     /// </exception>
     public readonly string Format(
         ByteSizeUnitSystem unitSystem,
@@ -669,13 +672,16 @@ public struct ByteSize(double byteSize) :
     /// <param name="unitSystem">The unit system to use.</param>
     /// <param name="format">
     /// The numeric format and optional unit token. SI/IEC prefixed unit tokens are matched case-insensitively,
-    /// while <c>b</c> and <c>B</c> remain case-sensitive; localized words replace the selected token.
+    /// while <c>b</c> and <c>B</c> remain case-sensitive; localized words replace the selected token. At most one
+    /// distinct unescaped, unquoted unit token is permitted, although the same token may be repeated across numeric
+    /// format sections.
     /// </param>
     /// <param name="formatProvider">The provider used to format the numeric value and select localized unit words.</param>
     /// <returns>The formatted byte size using localized unit words.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
     /// <exception cref="FormatException">
-    /// <paramref name="format"/> is invalid, or selects a token not supported by the selected non-legacy system.
+    /// <paramref name="format"/> is invalid, contains mixed unit tokens, or selects a token not supported by the
+    /// selected non-legacy system.
     /// </exception>
     public readonly string FormatFullWords(
         ByteSizeUnitSystem unitSystem,
@@ -703,9 +709,7 @@ public struct ByteSize(double byteSize) :
         var explicitUnit = FindFormatUnit(format, units);
         var unit = explicitUnit ?? SelectUnit(units);
         var value = unit.DataUnit == DataUnit.Bit
-            ? explicitUnit is not null
-                ? Bits
-                : (Bytes < 0 ? -1 : 1) * Math.Ceiling(Math.Abs(Bytes) * BitsInByte)
+            ? Bits
             : Bytes / unit.Bytes;
         var numericFormat = string.IsNullOrWhiteSpace(format) || format == "G" ? "0.##" : format!;
 
@@ -732,8 +736,8 @@ public struct ByteSize(double byteSize) :
             }
         }
 
-        var phraseCount = unit.DataUnit == DataUnit.Bit && explicitUnit is not null ? Bits : value;
-        decimal? exactPhraseCount = unit.DataUnit == DataUnit.Bit && explicitUnit is not null ? Bits : null;
+        var phraseCount = unit.DataUnit == DataUnit.Bit ? Bits : value;
+        decimal? exactPhraseCount = unit.DataUnit == DataUnit.Bit ? Bits : null;
         if (!toSymbol)
         {
             var countFormat = explicitUnit is { } selectedUnit
@@ -742,7 +746,7 @@ public struct ByteSize(double byteSize) :
             if (countFormat.Length > 0)
             {
                 var resolvedCountFormat = countFormat.Replace("#.##", "0.##");
-                var hasDisplayedCount = unit.DataUnit == DataUnit.Bit && explicitUnit is not null
+                var hasDisplayedCount = unit.DataUnit == DataUnit.Bit
                     ? TryGetDisplayedCount(Bits, resolvedCountFormat, formatProvider, out var displayedDecimal)
                     : TryGetDisplayedCount(value, resolvedCountFormat, formatProvider, out displayedDecimal);
                 if (hasDisplayedCount)
@@ -820,6 +824,11 @@ public struct ByteSize(double byteSize) :
         }
 
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
+        if (decimal.TryParse(value, NumberStyles.Currency, numberFormat, out count))
+        {
+            return true;
+        }
+
         var withoutDecorators = value;
         if (numberFormat.PercentSymbol.Length > 0)
         {
@@ -1603,20 +1612,24 @@ public struct ByteSize(double byteSize) :
 
         if (unitPart.SequenceEqual(BitSymbol))
         {
-            if (!long.TryParse(
+            if (!decimal.TryParse(
 #if NET
                 numberPart,
 #else
                 numberPart.ToString(),
 #endif
-                AllowThousands | AllowLeadingSign,
+                numberStyles,
                 formatProvider,
-                out var bits))
+                out var bitCount) ||
+                bitCount != decimal.Truncate(bitCount) ||
+                bitCount < long.MinValue ||
+                bitCount > long.MaxValue)
             {
                 return false;
             }
 
-            result = FromBits(bits);
+            var bits = (long)bitCount;
+            result = FromBytesAndBits(bits / (double)BitsInByte, bits);
             return true;
         }
 

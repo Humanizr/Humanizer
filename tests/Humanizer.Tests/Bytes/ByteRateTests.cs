@@ -63,19 +63,24 @@ public class ByteRateTests
     [InlineData(ByteSizeUnitSystem.BinaryIec)]
     public void ExplicitUnitSystemsPreserveExactIdentityAndIntegralBitScaling(ByteSizeUnitSystem unitSystem)
     {
+        var exactSize = ByteSize.ParseWithUnitSystem(
+            "9007199254740993 b",
+            unitSystem,
+            CultureInfo.InvariantCulture);
+
         Assert.Equal(
             "9007199254740993 b/s",
-            ByteSize.FromBits(9_007_199_254_740_993)
+            exactSize
                 .Per(TimeSpan.FromSeconds(1))
                 .HumanizeWithUnitSystem(unitSystem, "0 b"));
         Assert.Equal(
             "4503599627370497 b/s",
-            ByteSize.FromBits(9_007_199_254_740_993)
+            exactSize
                 .Per(TimeSpan.FromSeconds(2))
                 .HumanizeWithUnitSystem(unitSystem, "0 b"));
         Assert.Equal(
             $"{long.MaxValue} b/s",
-            ByteSize.MaxValue
+            ByteSize.ParseWithUnitSystem($"{long.MaxValue} b", unitSystem, CultureInfo.InvariantCulture)
                 .Per(TimeSpan.FromSeconds(1))
                 .HumanizeWithUnitSystem(unitSystem, "0 b"));
         Assert.Equal(
@@ -96,6 +101,9 @@ public class ByteRateTests
         Assert.Equal(-1, size.Bits);
         Assert.Equal("-2 b/s", rate.HumanizeWithUnitSystem(unitSystem, "0 b"));
         Assert.Equal("-0.25 B/s", rate.HumanizeWithUnitSystem(unitSystem, "0.## B"));
+        Assert.Equal(
+            "0 b/s",
+            size.Per(TimeSpan.FromSeconds(2)).HumanizeWithUnitSystem(unitSystem));
     }
 
     [Theory]
@@ -105,7 +113,10 @@ public class ByteRateTests
     public void ExplicitUnitSystemsApplySignedRationalCeiling(long bits, int intervalSeconds, string expected) =>
         Assert.Equal(
             expected,
-            ByteSize.FromBits(bits)
+            ByteSize.ParseWithUnitSystem(
+                    $"{bits} b",
+                    ByteSizeUnitSystem.DecimalSi,
+                    CultureInfo.InvariantCulture)
                 .Per(TimeSpan.FromSeconds(intervalSeconds))
                 .HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, "0 b"));
 

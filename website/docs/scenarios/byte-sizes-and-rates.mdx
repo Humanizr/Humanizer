@@ -40,6 +40,14 @@ var size = ByteSize.FromBytes(1_000_000);
 size.Format(ByteSizeUnitSystem.DecimalSi);   // 1 MB
 size.Format(ByteSizeUnitSystem.BinaryIec);   // 976.56 KiB
 size.FormatFullWords(ByteSizeUnitSystem.DecimalSi); // 1 megabyte
+ByteSize.FromBytes(1_001_001)
+    .HumanizeCompositeWithUnitSystem(
+        ByteSizeUnitSystem.DecimalSi,
+        precision: 3); // 1 MB 1 kB 1 B
+ByteSize.FromBytes(1_049_601)
+    .HumanizeCompositeWithUnitSystem(
+        ByteSizeUnitSystem.BinaryIec,
+        precision: 3); // 1 MiB 1 KiB 1 B
 ```
 
 `DecimalSi` uses `kB`, `MB`, `GB`, `TB`, `PB`, and `EB` with powers of 1000.
@@ -59,7 +67,8 @@ The separator is literal and defaults to a space. Set `toWords: true` for
 localized full unit names, and pass an `IFormatProvider` for numeric formatting
 and the leading negative sign. Negative values have one sign before the first
 part; zero is `0 b`. Precision must be positive and the separator cannot be
-`null`.
+`null`. Use `HumanizeCompositeWithUnitSystem` to decompose with one explicit
+SI or IEC ladder throughout the result.
 
 ### Parse user input
 
