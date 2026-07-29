@@ -57,6 +57,7 @@ function release({
   draft = false,
   immutable = true,
   publishedAt = deploymentAttempt,
+  sourceSha = '0123456789abcdef0123456789abcdef01234567',
 }) {
   const manifest = {
     archiveRunAttempt: archiveAttempt,
@@ -64,6 +65,7 @@ function release({
     deploymentRunAttempt: deploymentAttempt,
     deploymentRunId,
     schemaVersion: 1,
+    sourceSha,
   };
 
   return {
@@ -309,15 +311,42 @@ test('failed-job reruns roll the staged attempt forward', () => {
       {
         ...staged.manifest,
         deploymentRunId: 299,
-        deploymentRunAttempt: 1,
       },
       staged.manifest,
     ),
     false,
   );
+  assert.equal(
+    productionMatchesCandidate(
+      {...staged.manifest, deploymentRunAttempt: 2},
+      staged.manifest,
+    ),
+    false,
+  );
+  assert.equal(
+    productionMatchesCandidate(
+      {
+        ...staged.manifest,
+        sourceSha: 'fedcba9876543210fedcba9876543210fedcba98',
+      },
+      staged.manifest,
+    ),
+    false,
+  );
+  const record = normalizedWorkflow
+    .split('\n  record-production-deployment:\n')[1]
+    .split('\n  recover-after-production-failure:\n')[0];
+  const currentProductionGuard = record
+    .split('> current-production.json')[1]
+    ?.split('if [[ "$source_attempt" != "$GITHUB_RUN_ATTEMPT" ]]')[0];
+  assert.ok(currentProductionGuard);
   assert.match(
-    normalizedWorkflow,
-    /\.deploymentRunId == \$deploymentRunId\s+and \.deploymentRunAttempt == \$deploymentRunAttempt/,
+    currentProductionGuard,
+    /--arg sourceSha "\$SOURCE_SHA"[\s\S]*?--argjson deploymentRunId "\$deployment_run_id"[\s\S]*?--argjson deploymentRunAttempt "\$deployment_run_attempt"/,
+  );
+  assert.match(
+    currentProductionGuard,
+    /\.sourceSha == \$sourceSha\s+and \.deploymentRunId == \$deploymentRunId\s+and \.deploymentRunAttempt == \$deploymentRunAttempt[\s\S]*?current-production\.json/,
   );
 });
 
