@@ -381,6 +381,9 @@ public class ByteSizeUnitSystemTests
     [InlineData("fr", 0, "0 kilooctet", "0 kibioctet")]
     [InlineData("pt", 0, "0 kilobyte", "0 kibibyte")]
     [InlineData("da", 0.5, "0,5 kilobyte", "0,5 kibibyte")]
+    [InlineData("fil", 4, "4 kilobytes", "4 kibibytes")]
+    [InlineData("mk", 21, "21 килобајт", "21 кибибајт")]
+    [InlineData("mk", 1.1, "1,1 килобајт", "1,1 кибибајт")]
     public void ExactFullWordsUseCanonicalOneCategory(
         string cultureName,
         double count,

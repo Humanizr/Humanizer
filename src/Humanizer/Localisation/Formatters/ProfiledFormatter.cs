@@ -282,9 +282,6 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         {
             FormatterNumberDetectorKind.None =>
                 category == CardinalPluralCategory.One ? FormatterNumberForm.Singular : FormatterNumberForm.Default,
-            FormatterNumberDetectorKind.SingularPlural
-                when dataUnit is >= DataUnit.DecimalKilobyte and <= DataUnit.BinaryPebibyte =>
-                count == 1 ? FormatterNumberForm.Singular : FormatterNumberForm.Plural,
             FormatterNumberDetectorKind.SingularPlural =>
                 category == CardinalPluralCategory.One ? FormatterNumberForm.Singular : FormatterNumberForm.Plural,
             FormatterNumberDetectorKind.ArabicLike => category switch
