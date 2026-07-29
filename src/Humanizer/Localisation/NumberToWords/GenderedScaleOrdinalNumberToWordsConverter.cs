@@ -22,63 +22,32 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        if (input == 4_325_010_007_018L)
-        {
-            return "patru trilioane trei sute douăzeci și cinci de miliarde zece milioane șapte mii optsprezece";
-        }
-
-        if (input is > int.MaxValue or < int.MinValue)
-        {
-            throw new NotImplementedException();
-        }
-
-        var number = (int)input;
-        if (number == 0)
+        var magnitude = GetAbsoluteValue(input);
+        if (magnitude == 0)
         {
             return profile.ZeroWord;
         }
 
-        var prefixMinus = false;
-        if (number < 0)
+        var parts = new List<string>();
+        foreach (var scale in profile.Scales)
         {
-            // Carry the sign separately so the digit splitting logic only has to reason about
-            // positive triads.
-            prefixMinus = true;
-            number = -number;
-        }
-
-        // Fixed triad splitting keeps the scale-to-index mapping trivial: index 0 is the units
-        // triad, index 1 is thousands, and so on.
-        Span<int> parts = stackalloc int[profile.Scales.Length + 1];
-        var count = SplitEveryThreeDigits(number, parts);
-        var words = string.Empty;
-
-        for (var index = 0; index < count; index++)
-        {
-            var part = parts[index];
-            if (part == 0)
+            var count = (int)(magnitude / scale.Value);
+            if (count == 0)
             {
                 continue;
             }
 
-            var segment = index == 0
-                ? ConvertTriad(part, gender)
-                : ConvertScalePart(index, part);
-
-            if (!string.IsNullOrEmpty(segment))
-            {
-                // Build the phrase from the tail inward so scale words can be prepended after the
-                // lower triad has been rendered.
-                words = segment.Trim() + " " + words.Trim();
-            }
+            parts.Add(ConvertScalePart(scale, count));
+            magnitude %= scale.Value;
         }
 
-        if (prefixMinus)
+        if (magnitude > 0)
         {
-            words = profile.MinusWord + " " + words;
+            parts.Add(ConvertTriad((int)magnitude, gender));
         }
 
-        return words.Trim().Replace("  ", " ");
+        var words = string.Join(" ", parts).Replace("  ", " ");
+        return input < 0 ? profile.MinusWord + " " + words : words;
     }
 
     /// <summary>
@@ -89,25 +58,28 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
     /// <returns>The localized ordinal words for <paramref name="number"/>.</returns>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-        if (number == 0)
+        var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+        if (magnitude == 0)
         {
             return profile.ZeroWord;
         }
 
-        if (number == 1)
+        if (magnitude == 1)
         {
-            return ordinalsUnderTen[number].Get(gender);
+            var ordinal = ordinalsUnderTen[1].Get(gender);
+            return number < 0 ? profile.MinusWord + " " + ordinal : ordinal;
         }
 
-        if (number <= 9)
+        if (magnitude <= 9)
         {
             // Low ordinals are formed by prefixing the shared ordinal stem to the unit word.
-            return GetOrdinalPrefix(gender) + " " + ordinalsUnderTen[number].Get(gender);
+            var ordinal = GetOrdinalPrefix(gender) + " " + ordinalsUnderTen[(int)magnitude].Get(gender);
+            return number < 0 ? profile.MinusWord + " " + ordinal : ordinal;
         }
 
         // Higher ordinals start from the cardinal shape and then apply a sequence of locale-specific
         // terminal edits.
-        var words = Convert(number, gender).Replace(" de ", " ");
+        var words = RemoveTerminalScaleJoiner(Convert(magnitude, gender));
 
         if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci", StringComparison.Ordinal))
         {
@@ -154,6 +126,10 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
             // Billion ordinals follow the same masculine suffix extension as million ordinals.
             masculineSuffix = "u" + masculineSuffix;
         }
+        else if (words.EndsWith("opt", StringComparison.Ordinal) && gender != GrammaticalGender.Feminine)
+        {
+            words += "u";
+        }
 
         if (gender == GrammaticalGender.Feminine &&
             !words.EndsWith("zece", StringComparison.Ordinal) &&
@@ -164,25 +140,24 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
             words = words[..^1];
         }
 
-        return GetOrdinalPrefix(gender) + " " + words + GetOrdinalSuffix(gender, masculineSuffix);
+        var result = GetOrdinalPrefix(gender) + " " + words + GetOrdinalSuffix(gender, masculineSuffix);
+        return number < 0 ? profile.MinusWord + " " + result : result;
     }
 
-    /// <summary>
-    /// Splits the number into base-1000 triads, least significant triad first.
-    /// </summary>
-    static int SplitEveryThreeDigits(int number, Span<int> parts)
+    string RemoveTerminalScaleJoiner(string words)
     {
-        var count = 0;
-        var remaining = number;
-        while (remaining > 0)
+        foreach (var scale in profile.Scales)
         {
-            // The split is stored least-significant first so the rendering loop can index directly
-            // into the generated scale rows.
-            parts[count++] = remaining % 1000;
-            remaining /= 1000;
+            var terminalScaleJoiner = " " + profile.JoinAboveTwenty + " " + scale.Plural;
+            if (words.EndsWith(terminalScaleJoiner, StringComparison.Ordinal))
+            {
+                return StringHumanizeExtensions.Concat(
+                    words.AsSpan(0, words.Length - terminalScaleJoiner.Length),
+                    (" " + scale.Plural).AsSpan());
+            }
         }
 
-        return count;
+        return words;
     }
 
     /// <summary>
@@ -255,9 +230,8 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
     /// <summary>
     /// Converts a higher scale group into cardinal words.
     /// </summary>
-    string ConvertScalePart(int scaleIndex, int number)
+    string ConvertScalePart(Scale scale, int number)
     {
-        var scale = profile.Scales[scaleIndex - 1];
         if (number == 1)
         {
             // Singular scale nouns are stored directly because they are the most common ordinal
@@ -269,6 +243,9 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
         var joiner = number >= 20 ? " " + profile.JoinAboveTwenty : string.Empty;
         return countWords + joiner + " " + scale.Plural;
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     /// <summary>
     /// Parsed gendered word variants for a single lexical item.
@@ -358,10 +335,12 @@ class GenderedScaleOrdinalNumberToWordsConverter(GenderedScaleOrdinalNumberToWor
     /// <summary>
     /// One descending scale row for <see cref="GenderedScaleOrdinalNumberToWordsConverter"/>.
     /// </summary>
+    /// <param name="Value">The numeric scale value.</param>
     /// <param name="Singular">The singular scale noun used when the group count is exactly one.</param>
     /// <param name="Plural">The plural scale noun used for counts above one.</param>
     /// <param name="CountGender">The grammatical gender to use when rendering the count that precedes this scale.</param>
     public sealed record Scale(
+        ulong Value,
         string Singular,
         string Plural,
         GrammaticalGender CountGender);

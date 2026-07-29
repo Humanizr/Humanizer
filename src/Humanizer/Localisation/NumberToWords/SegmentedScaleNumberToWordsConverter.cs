@@ -24,7 +24,8 @@ class SegmentedScaleNumberToWordsConverter(SegmentedScaleNumberToWordsProfile pr
 
     string Convert(long number, SegmentedScaleVariant? terminalVariant)
     {
-        if ((ulong)profile.MaximumValue < GetAbsoluteValue(number))
+        var maximumMagnitude = (ulong)profile.MaximumValue + (profile.MaximumValue == long.MaxValue ? 1UL : 0UL);
+        if (maximumMagnitude < GetAbsoluteValue(number))
         {
             return string.Empty;
         }

@@ -23,16 +23,18 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
     /// </summary>
     string ConvertInternal(long number, bool isOrdinal)
     {
-        // Zero and negative values short-circuit before the scale walk because this family only
-        // models the positive hyphenation grammar.
-        switch (number)
+        if (number == 0)
         {
-            case 0:
-                return isOrdinal ? profile.ZeroOrdinalWord : profile.ZeroWord;
-            case < 0:
-                return $"{profile.MinusWord} {ConvertInternal(-number, isOrdinal)}";
+            return isOrdinal ? profile.ZeroOrdinalWord : profile.ZeroWord;
         }
 
+        var magnitude = GetAbsoluteValue(number);
+        var words = ConvertPositive(magnitude, isOrdinal);
+        return number < 0 ? $"{profile.MinusWord} {words}" : words;
+    }
+
+    string ConvertPositive(ulong number, bool isOrdinal)
+    {
         var isLessThanTen = number < 10;
         var parts = new List<string>(10);
 
@@ -71,7 +73,7 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
     /// <summary>
     /// Returns the one-thousand segment used by locales that spell 1,000-1,999 as a direct prefix.
     /// </summary>
-    string GetOneThousandPart(ref long number, bool isOrdinal)
+    string GetOneThousandPart(ref ulong number, bool isOrdinal)
     {
         const int divisor = 1_000;
 
@@ -86,9 +88,10 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
     /// <summary>
     /// Decomposes the current scale row and appends the localized result to <paramref name="parts"/>.
     /// </summary>
-    void CollectParts(List<string> parts, ref long number, bool isOrdinal, bool isLessThanTen, HyphenatedScale scale)
+    void CollectParts(List<string> parts, ref ulong number, bool isOrdinal, bool isLessThanTen, HyphenatedScale scale)
     {
-        var result = number / scale.Divisor;
+        var divisor = (ulong)scale.Divisor;
+        var result = number / divisor;
         if (result == 0)
         {
             return;
@@ -96,14 +99,14 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
 
         var prefixNumber = GetUnderAThousandPart(result, isOrdinal, true, isLessThanTen);
 
-        number %= scale.Divisor;
+        number %= divisor;
         parts.Add(number == 0 && isOrdinal ? prefixNumber + scale.Ordinal : prefixNumber + scale.Cardinal);
     }
 
     /// <summary>
     /// Renders the fragment below one thousand, optionally using ordinal forms for the terminal digit.
     /// </summary>
-    string GetUnderAThousandPart(long number, bool isOrdinal, bool isPrefix, bool originalLessThanTen)
+    string GetUnderAThousandPart(ulong number, bool isOrdinal, bool isPrefix, bool originalLessThanTen)
     {
         var numberString = "";
         if (100 <= number)
@@ -112,10 +115,10 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
             // be reused with a generic suffix.
             if (isOrdinal && number % 100 == 0)
             {
-                return profile.HundredsMap[number / 100] + "adik";
+                return profile.HundredsMap[(int)(number / 100)] + "adik";
             }
 
-            numberString += profile.HundredsMap[number / 100];
+            numberString += profile.HundredsMap[(int)(number / 100)];
             number %= 100;
         }
 
@@ -125,12 +128,12 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
             // in the tens table, so suffixing the cardinal form would be wrong.
             if (isOrdinal && number % 10 == 0)
             {
-                return numberString + profile.OrdinalTensMap[number / 10];
+                return numberString + profile.OrdinalTensMap[(int)(number / 10)];
             }
 
             numberString += profile.WholeTensExceptions.TryGetValue((int)number, out var value)
                 ? value
-                : profile.TensMap[number / 10];
+                : profile.TensMap[(int)(number / 10)];
             number %= 10;
         }
 
@@ -140,7 +143,7 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
         }
         else
         {
-            numberString += isPrefix && number == 2 ? profile.TwoPrefixWord : profile.UnitsMap[number];
+            numberString += isPrefix && number == 2 ? profile.TwoPrefixWord : profile.UnitsMap[(int)number];
         }
 
         return numberString;
@@ -149,17 +152,20 @@ class HyphenatedScaleNumberToWordsConverter(HyphenatedScaleNumberToWordsProfile 
     /// <summary>
     /// Returns the ordinal unit word, including locale-specific exceptions when the value is not a direct suffix case.
     /// </summary>
-    string GetOrdinalOnes(long number, bool lessThanTen)
+    string GetOrdinalOnes(ulong number, bool lessThanTen)
     {
         if (lessThanTen)
         {
-            return profile.OrdinalUnitsMap[number];
+            return profile.OrdinalUnitsMap[(int)number];
         }
 
         return profile.OrdinalUnitsExceptions.TryGetValue((int)number, out var value)
             ? value
-            : profile.OrdinalUnitsMap[number];
+            : profile.OrdinalUnitsMap[(int)number];
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     /// <inheritdoc/>
     public override string ConvertToTuple(int number) =>

@@ -41,20 +41,20 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
         }
 
         var parts = new List<string>();
+        var magnitude = GetMagnitude(number);
         if (number < 0)
         {
             parts.Add(profile.MinusWord);
-            number = -number;
         }
 
         foreach (var scale in profile.Scales)
         {
-            CollectParts(parts, ref number, scale);
+            CollectParts(parts, ref magnitude, scale);
         }
 
-        if (number > 0)
+        if (magnitude > 0)
         {
-            parts.Add(ConvertUnderOneHundred((int)number, wordForm, gender));
+            parts.Add(ConvertUnderOneHundred((int)magnitude, wordForm, gender));
         }
 
         return string.Concat(parts);
@@ -74,11 +74,10 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
         }
 
         var parts = new List<string>();
-        long remaining = number;
-        if (remaining < 0)
+        var remaining = GetMagnitude(number);
+        if (number < 0)
         {
             parts.Add(profile.MinusWord);
-            remaining = -remaining;
         }
 
         foreach (var scale in profile.Scales)
@@ -104,16 +103,17 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
         return string.Concat(parts);
     }
 
-    void CollectParts(List<string> parts, ref long number, UnitLeadingCompoundScale scale)
+    void CollectParts(List<string> parts, ref ulong number, UnitLeadingCompoundScale scale)
     {
-        var count = number / scale.Value;
+        var scaleValue = (ulong)scale.Value;
+        var count = number / scaleValue;
         if (count == 0)
         {
             return;
         }
 
         parts.Add(BuildCardinalScalePart(count, scale));
-        number %= scale.Value;
+        number %= scaleValue;
         if (scale.AddSpaceBeforeNextPart && number > 0)
         {
             // Spaces are emitted as explicit segments so the final `string.Concat` preserves the
@@ -122,22 +122,23 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
         }
     }
 
-    void CollectOrdinalParts(List<string> parts, ref long number, UnitLeadingCompoundScale scale)
+    void CollectOrdinalParts(List<string> parts, ref ulong number, UnitLeadingCompoundScale scale)
     {
-        var count = number / scale.Value;
+        var scaleValue = (ulong)scale.Value;
+        var count = number / scaleValue;
         if (count == 0)
         {
             return;
         }
 
-        var hasRemainder = number % scale.Value != 0;
+        var hasRemainder = number % scaleValue != 0;
         parts.Add(BuildOrdinalScalePart(count, scale, hasRemainder));
-        number %= scale.Value;
+        number %= scaleValue;
     }
 
     // Cardinal scale rows format either a dedicated singular form or a generated plural format fed
     // by the recursively rendered count phrase.
-    string BuildCardinalScalePart(long count, UnitLeadingCompoundScale scale)
+    string BuildCardinalScalePart(ulong count, UnitLeadingCompoundScale scale)
     {
         if (count == 1)
         {
@@ -150,7 +151,7 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
     }
 
     // Ordinal scale rows distinguish exact terminal ordinals from continued phrases with a remainder.
-    string BuildOrdinalScalePart(long count, UnitLeadingCompoundScale scale, bool hasRemainder)
+    string BuildOrdinalScalePart(ulong count, UnitLeadingCompoundScale scale, bool hasRemainder)
     {
         if (count == 1)
         {
@@ -164,7 +165,7 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
 
     // Some locales transform the count form or the tens joiner depending on the next word. That
     // rule stays generated and localized through the profile rather than by branching on locale name.
-    string ConvertCount(long count, UnitLeadingCompoundScale scale)
+    string ConvertCount(ulong count, UnitLeadingCompoundScale scale)
     {
         var wordForm = profile.TensJoinerTransform == CompoundTensJoinerTransform.Eifeler &&
                        scale.CountWordFormNextWord is { Length: > 0 } nextWord &&
@@ -172,8 +173,22 @@ class UnitLeadingCompoundNumberToWordsConverter(UnitLeadingCompoundNumberToWords
             ? WordForm.Eifeler
             : WordForm.Normal;
 
-        return Convert(count, wordForm, scale.CountGender);
+        var parts = new List<string>();
+        foreach (var nestedScale in profile.Scales)
+        {
+            CollectParts(parts, ref count, nestedScale);
+        }
+
+        if (count > 0)
+        {
+            parts.Add(ConvertUnderOneHundred((int)count, wordForm, scale.CountGender));
+        }
+
+        return string.Concat(parts);
     }
+
+    static ulong GetMagnitude(long number) =>
+        number >= 0 ? (ulong)number : unchecked((ulong)(-(number + 1)) + 1);
 
     // Under one hundred is the heart of the family: emit units directly for small numbers, or put
     // the unit form in front of the tens stem with the configured joiner.

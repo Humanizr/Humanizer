@@ -770,7 +770,7 @@ surfaces:
   number:
     words:
       engine: 'harmony-ordinal'
-      minimumValue: -2147483648
+      minimumValue: -9223372036854775808
       maximumValue: 9223372036854775807
       minusWord: 'минус'
       hundredWord: 'юз'

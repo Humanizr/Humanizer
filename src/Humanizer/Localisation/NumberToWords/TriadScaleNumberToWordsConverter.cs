@@ -60,7 +60,7 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
     /// <param name="RemoveLeadingOneOnExactOrdinal">A value indicating whether an exact scale ordinal drops the leading one-word.</param>
     /// <param name="ExactOrdinalSuffix">The suffix appended when a larger exact multiple of this scale becomes ordinal.</param>
     public sealed record TriadScale(
-        int Value,
+        ulong Value,
         string Singular,
         string Plural,
         string CountToScaleJoiner,
@@ -79,51 +79,37 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
     /// <inheritdoc />
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        if (input == 4_325_010_007_018L)
-        {
-            return "quattro bilioni trecentoventicinque miliardi dieci milioni settemiladiciotto";
-        }
-
-        var maximumMagnitude = (long)profile.Scales[^1].Value * 1000;
-        if (input >= maximumMagnitude || input <= -maximumMagnitude)
-        {
-            throw new NotImplementedException();
-        }
-
-        var number = input;
-        if (number < 0)
-        {
-            return profile.MinusWord + " " + Convert(-number, gender);
-        }
-
-        if (number == 0)
+        var magnitude = GetAbsoluteValue(input);
+        if (magnitude == 0)
         {
             return profile.ZeroWord;
         }
 
-        if (gender == GrammaticalGender.Feminine && number == 1)
+        if (gender == GrammaticalGender.Feminine && magnitude == 1)
         {
-            return profile.FeminineOneWord;
+            return input < 0 ? profile.MinusWord + " " + profile.FeminineOneWord : profile.FeminineOneWord;
         }
 
-        // The triad walk is least-significant-first, so the working span needs one extra slot and
-        // the reconstruction loop can prepend each rendered block without allocating temporary strings.
-        Span<int> parts = stackalloc int[profile.Scales.Length + 1];
-        var count = SplitEveryThreeDigits(number, parts);
-        var words = string.Empty;
-
-        for (var index = 0; index < count; index++)
+        var words = new StringBuilder();
+        foreach (var scale in profile.Scales)
         {
-            var part = parts[index];
-            if (part == 0)
+            var count = (int)(magnitude / scale.Value);
+            if (count == 0)
             {
                 continue;
             }
 
-            words = (index == 0 ? ConvertTriad(part, true) : ConvertScalePart(index, part)) + words;
+            words.Append(ConvertScalePart(scale, count));
+            magnitude %= scale.Value;
         }
 
-        return words.TrimEnd();
+        if (magnitude > 0)
+        {
+            words.Append(ConvertTriad((int)magnitude, true));
+        }
+
+        var result = words.ToString().TrimEnd();
+        return input < 0 ? profile.MinusWord + " " + result : result;
     }
 
     /// <summary>
@@ -132,54 +118,37 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
     /// <inheritdoc />
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-        if (number == 0)
+        var magnitude = number == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(number);
+        if (magnitude == 0)
         {
             return profile.ZeroWord;
         }
 
-        if (number <= 9)
+        if (magnitude <= 9)
         {
-            return profile.OrdinalUnderTen[number] + GetOrdinalGenderSuffix(gender);
+            var ordinal = profile.OrdinalUnderTen[(int)magnitude] + GetOrdinalGenderSuffix(gender);
+            return number < 0 ? profile.MinusWord + " " + ordinal : ordinal;
         }
 
-        var words = Convert(number, gender);
-        if (number % 100 == 10)
+        var words = Convert(magnitude, gender);
+        if (magnitude % 100 == 10)
         {
-            // This family does not build the "ten" ordinal by suffixing the cardinal word; the
-            // stem rewrite is a dedicated rule because the trailing consonant changes.
-            return words[..^profile.TenWord.Length] + profile.TenOrdinalStem + GetOrdinalGenderSuffix(gender);
+            words = words[..^profile.TenWord.Length] + profile.TenOrdinalStem + GetOrdinalGenderSuffix(gender);
+            return number < 0 ? profile.MinusWord + " " + words : words;
         }
 
         words = words[..^1];
-        words = ApplyOrdinalVowelRestoration(words, number % 10);
-        words = ApplyExactScaleOrdinalTransforms(words, number);
-
-        return words + profile.CommonOrdinalStem + GetOrdinalGenderSuffix(gender);
-    }
-
-    /// <summary>
-    /// Splits a number into three-digit triads, least significant first.
-    /// </summary>
-    static int SplitEveryThreeDigits(long number, Span<int> parts)
-    {
-        var count = 0;
-        var remaining = number;
-
-        while (remaining > 0)
-        {
-            parts[count++] = (int)(remaining % 1000);
-            remaining /= 1000;
-        }
-
-        return count;
+        words = ApplyOrdinalVowelRestoration(words, (int)(magnitude % 10));
+        words = ApplyExactScaleOrdinalTransforms(words, magnitude);
+        words += profile.CommonOrdinalStem + GetOrdinalGenderSuffix(gender);
+        return number < 0 ? profile.MinusWord + " " + words : words;
     }
 
     /// <summary>
     /// Converts a scaled triad and appends the locale-specific scale name.
     /// </summary>
-    string ConvertScalePart(int scaleIndex, int number)
+    string ConvertScalePart(TriadScale scale, int number)
     {
-        var scale = profile.Scales[scaleIndex - 1];
         if (number == 1)
         {
             return scale.Singular;
@@ -192,6 +161,9 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
 
         return scale.AppendTrailingSpace ? joined + " " : joined;
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     /// <summary>
     /// Returns the ordinal suffix for the requested gender.
@@ -213,14 +185,13 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
     /// <summary>
     /// Applies exact scale ordinal compaction and suffix rules.
     /// </summary>
-    string ApplyExactScaleOrdinalTransforms(string words, int number)
+    string ApplyExactScaleOrdinalTransforms(string words, long number)
     {
         // Walk from the largest scale downward so the first exact scale match wins. A smaller
         // match would be wrong here because the rewrite needs the outermost terminating scale.
-        for (var index = profile.Scales.Length - 1; index >= 0; index--)
+        foreach (var scale in profile.Scales)
         {
-            var scale = profile.Scales[index];
-            if (number < scale.Value || number % scale.Value != 0)
+            if ((ulong)number < scale.Value || (ulong)number % scale.Value != 0)
             {
                 continue;
             }
@@ -230,14 +201,14 @@ class TriadScaleNumberToWordsConverter(TriadScaleNumberToWordsConverter.Profile 
                 words = words.Replace(scale.OrdinalCompactionMatch, scale.OrdinalCompactionReplacement);
             }
 
-            if (scale.RemoveLeadingOneOnExactOrdinal && number == scale.Value)
+            if (scale.RemoveLeadingOneOnExactOrdinal && (ulong)number == scale.Value)
             {
                 // Some exact ordinals drop the leading one only when the scale itself is the whole
                 // value; nested scales must keep it or the phrase becomes ungrammatical.
                 words = words.Replace(profile.LeadingOneWord, string.Empty);
             }
 
-            if (!string.IsNullOrEmpty(scale.ExactOrdinalSuffix) && number > scale.Value)
+            if (!string.IsNullOrEmpty(scale.ExactOrdinalSuffix) && (ulong)number > scale.Value)
             {
                 words += scale.ExactOrdinalSuffix;
             }

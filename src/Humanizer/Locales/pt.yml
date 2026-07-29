@@ -308,6 +308,32 @@ surfaces:
         millionSingularWord: 'milhão'
         millionPluralWord: 'milhões'
         billionStrategy: 'thousand-millions'
+        scales:
+          -
+            value: 1000000000000000000
+            singular: 'um trilião'
+            plural: 'triliões'
+            omitOne: true
+          -
+            value: 1000000000000000
+            singular: 'mil biliões'
+            plural: 'mil biliões'
+            omitOne: true
+          -
+            value: 1000000000000
+            singular: 'um bilião'
+            plural: 'biliões'
+            omitOne: true
+          -
+            value: 1000000000
+            singular: 'mil milhões'
+            plural: 'mil milhões'
+            omitOne: true
+          -
+            value: 1000000
+            singular: 'um milhão'
+            plural: 'milhões'
+            omitOne: true
         unitsMap:
           - 'zero'
           - 'um'

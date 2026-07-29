@@ -36,27 +36,25 @@ public class JoinedScaleNumberToWordsConverterTests
     }
 
     [Fact]
-    public void RequireOrdinalExceptionDisablesCompoundOrdinalFallback()
+    public void SupportsCompoundOrdinalFallback()
     {
         var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
             [],
             ["", "hundred"],
             [],
-            requireOrdinalException: true,
             compoundOrdinalRemainder: 1,
             compoundOrdinalWord: "first"));
 
-        Assert.Throws<NotImplementedException>(() => converter.ConvertToOrdinal(21));
+        Assert.Equal("20 first", converter.ConvertToOrdinal(21));
     }
 
     [Fact]
-    public void RequireOrdinalExceptionDisablesGenderedOrdinalFallbackButKeepsExactReplacements()
+    public void SupportsGenderedOrdinalFallbackAndExactReplacements()
     {
         var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
             [],
             ["", "hundred"],
             [],
-            requireOrdinalException: true,
             ordinal: new JoinedScaleOrdinalProfile(
                 new("", "th", new Dictionary<int, string> { [1] = "first" }.ToFrozenDictionary()),
                 null,
@@ -64,23 +62,54 @@ public class JoinedScaleNumberToWordsConverterTests
                 GrammaticalGender.Masculine)));
 
         Assert.Equal("first", converter.ConvertToOrdinal(1));
-        Assert.Throws<NotImplementedException>(() => converter.ConvertToOrdinal(2));
+        Assert.Equal("twoth", converter.ConvertToOrdinal(2));
+    }
+
+    [Theory]
+    [InlineData(1001, "thousand-ofirst")]
+    [InlineData(-1001, "minus thousand-ofirst")]
+    public void SupportsCompositionalOrdinalTokenReplacementAndCompaction(int number, string expected)
+    {
+        var converter = new JoinedScaleNumberToWordsConverter(CreateProfile(
+            [new(1000, "thousand", "thousand-r", OmitOneWhenSingular: true)],
+            ["", "hundred"],
+            ["", "hundred-r"],
+            compositionalOrdinal: new(
+                new Dictionary<string, string> { ["thousand-r"] = "thousand-o" }.ToFrozenDictionary(),
+                new Dictionary<string, string> { ["one"] = "first" }.ToFrozenDictionary(),
+                ["one"]),
+            joinWord: "  "));
+
+        Assert.Equal(expected, converter.ConvertToOrdinal(number));
+    }
+
+    [Theory]
+    [InlineData(2_000_002)]
+    [InlineData(long.MinValue)]
+    public void RejectsValuesOutsideTheConfiguredProfileRange(long number)
+    {
+        var converter = new JoinedScaleNumberToWordsConverter(CreateProfile([], ["", "hundred"], []));
+
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => converter.Convert(number));
+
+        Assert.Equal("number", exception.ParamName);
     }
 
     static JoinedScaleNumberToWordsProfile CreateProfile(
         JoinedScale[] scales,
         string[] hundredsMap,
         string[] hundredsMapWithRemainder,
-        bool requireOrdinalException = false,
         JoinedScaleOrdinalProfile? ordinal = null,
+        JoinedScaleCompositionalOrdinalProfile? compositionalOrdinal = null,
         int? compoundOrdinalRemainder = null,
-        string? compoundOrdinalWord = null) =>
+        string? compoundOrdinalWord = null,
+        string joinWord = " ") =>
         new(
             2_000_001,
             "zero",
             "minus",
             " ",
-            " ",
+            joinWord,
             " ",
             "",
             false,
@@ -95,8 +124,8 @@ public class JoinedScaleNumberToWordsConverterTests
             FrozenDictionary<int, string>.Empty,
             FrozenDictionary<int, string>.Empty,
             scales,
-            requireOrdinalException: requireOrdinalException,
             ordinal: ordinal,
+            compositionalOrdinal: compositionalOrdinal,
             compoundOrdinalRemainder: compoundOrdinalRemainder,
             compoundOrdinalWord: compoundOrdinalWord);
 

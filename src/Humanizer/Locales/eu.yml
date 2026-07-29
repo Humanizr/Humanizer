@@ -1327,7 +1327,6 @@ surfaces:
       underHundredJoinWord: ' '
       omitOneWhenSingularAlways: true
       defaultOrdinalSuffix: 'garren'
-      requireOrdinalException: false
       matchingOrdinalSuffix: null
       ordinalSuffixMatchCharacters: null
       unitsMap: []

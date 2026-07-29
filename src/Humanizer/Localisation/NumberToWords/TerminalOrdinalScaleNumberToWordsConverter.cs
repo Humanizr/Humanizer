@@ -15,31 +15,38 @@ class TerminalOrdinalScaleNumberToWordsConverter(TerminalOrdinalScaleNumberToWor
             return profile.ZeroWord;
         }
 
+        var parts = new List<string>(6);
         if (input < 0)
         {
-            return profile.MinusWord + " " + Convert(-input, gender);
+            parts.Add(profile.MinusWord);
         }
 
-        var parts = new List<string>(6);
+        AppendCardinalPositive(parts, GetAbsoluteValue(input), gender);
+        return string.Join(" ", parts);
+    }
+
+    void AppendCardinalPositive(List<string> parts, ulong input, GrammaticalGender gender)
+    {
         var remaining = input;
+        var scalePartStartIndex = parts.Count;
 
         // Cardinal rendering walks the scale table from large to small and leaves the terminal
         // under-thousand segment for the final helper so the same scale metadata can serve ordinals.
         foreach (var scale in profile.Scales)
         {
-            var count = remaining / scale.Value;
+            var scaleValue = (ulong)scale.Value;
+            var count = remaining / scaleValue;
             if (count == 0)
             {
                 continue;
             }
 
-            var hasRemainder = remaining % scale.Value != 0;
+            var hasRemainder = remaining % scaleValue != 0;
             parts.Add(BuildCardinalScalePart(count, hasRemainder, scale));
-            remaining %= scale.Value;
+            remaining %= scaleValue;
         }
 
-        AppendCardinalUnderOneThousand(parts, (int)remaining, gender, parts.Count > 0);
-        return string.Join(" ", parts);
+        AppendCardinalUnderOneThousand(parts, (int)remaining, gender, parts.Count > scalePartStartIndex);
     }
 
     /// <inheritdoc/>
@@ -54,20 +61,20 @@ class TerminalOrdinalScaleNumberToWordsConverter(TerminalOrdinalScaleNumberToWor
         if (input < 0)
         {
             parts.Add(profile.MinusWord);
-            input = -input;
         }
 
-        var remaining = input;
+        var remaining = GetAbsoluteValue(input);
         foreach (var scale in profile.Scales)
         {
-            var count = remaining / scale.Value;
+            var scaleValue = (ulong)scale.Value;
+            var count = remaining / scaleValue;
             if (count == 0)
             {
                 continue;
             }
 
-            var hasRemainder = remaining % (int)scale.Value != 0;
-            remaining %= (int)scale.Value;
+            var hasRemainder = remaining % scaleValue != 0;
+            remaining %= scaleValue;
             if (remaining == 0)
             {
                 // Exact scale ordinals terminate here because the current scale already became the
@@ -81,30 +88,37 @@ class TerminalOrdinalScaleNumberToWordsConverter(TerminalOrdinalScaleNumberToWor
             parts.Add(BuildCardinalScalePart(count, hasRemainder, scale));
         }
 
-        AppendOrdinalUnderOneThousand(parts, remaining, gender);
+        AppendOrdinalUnderOneThousand(parts, (int)remaining, gender);
         return string.Join(" ", parts);
     }
 
     /// <summary>
     /// Builds a cardinal scale fragment.
     /// </summary>
-    string BuildCardinalScalePart(long count, bool hasRemainder, TerminalOrdinalScale scale)
+    string BuildCardinalScalePart(ulong count, bool hasRemainder, TerminalOrdinalScale scale)
     {
         if (count == 1)
         {
             return hasRemainder ? scale.SingularWithRemainderCardinal : scale.ExactSingularCardinal;
         }
 
-        return Convert(count, GrammaticalGender.Masculine) + " " + scale.PluralCardinal;
+        return ConvertPositive(count, GrammaticalGender.Masculine) + " " + scale.PluralCardinal;
     }
 
     /// <summary>
     /// Builds an ordinal scale fragment.
     /// </summary>
-    string BuildOrdinalScalePart(long count, TerminalOrdinalScale scale, GrammaticalGender gender) =>
+    string BuildOrdinalScalePart(ulong count, TerminalOrdinalScale scale, GrammaticalGender gender) =>
         count == 1
             ? scale.OrdinalStem + GetOrdinalSuffix(gender)
-            : Convert(count, GrammaticalGender.Masculine) + " " + scale.OrdinalStem + GetOrdinalSuffix(gender);
+            : ConvertPositive(count, GrammaticalGender.Masculine) + " " + scale.OrdinalStem + GetOrdinalSuffix(gender);
+
+    string ConvertPositive(ulong number, GrammaticalGender gender)
+    {
+        var parts = new List<string>(4);
+        AppendCardinalPositive(parts, number, gender);
+        return string.Join(" ", parts);
+    }
 
     /// <summary>
     /// Appends the cardinal fragment below one thousand.
@@ -215,6 +229,9 @@ class TerminalOrdinalScaleNumberToWordsConverter(TerminalOrdinalScaleNumberToWor
 
     static GrammaticalGender NormalizeGender(GrammaticalGender gender) =>
         gender == GrammaticalGender.Neuter ? GrammaticalGender.Masculine : gender;
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }
 
 /// <summary>

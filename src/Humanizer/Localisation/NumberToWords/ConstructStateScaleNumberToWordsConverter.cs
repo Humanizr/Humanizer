@@ -27,28 +27,28 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
             return profile.ZeroWord;
         }
 
-        if (input < 0)
-        {
-            // The sign is carried separately so the positive path can remain focused on construct
-            // state and gender rules.
-            return profile.MinusWord + " " + Convert(-input, gender);
-        }
+        var magnitude = input < 0 ? unchecked((ulong)(-(input + 1)) + 1) : (ulong)input;
+        var words = ConvertPositive(magnitude, gender);
+        return input < 0 ? profile.MinusWord + " " + words : words;
+    }
 
-        var number = input;
+    string ConvertPositive(ulong number, GrammaticalGender gender)
+    {
         var parts = new List<string>(6);
 
         foreach (var scale in profile.Scales)
         {
-            if (number < scale.Value)
+            var scaleValue = (ulong)scale.Value;
+            if (number < scaleValue)
             {
                 continue;
             }
 
             // Large scale rows stay fully data-driven; count gender is part of the generated scale
             // row because different locales need different agreement for the same magnitude.
-            var count = number / scale.Value;
+            var count = number / scaleValue;
             parts.Add(BuildLargeScalePart(count, scale));
-            number %= scale.Value;
+            number %= scaleValue;
         }
 
         if (number >= 1000)
@@ -84,15 +84,15 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
     public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
         number.ToString(culture);
 
-    string BuildLargeScalePart(long count, ConstructStateScale scale) =>
+    string BuildLargeScalePart(ulong count, ConstructStateScale scale) =>
         count switch
         {
             1 => scale.Singular,
             2 => scale.DualPrefix + " " + scale.Singular,
-            _ => Convert(count, scale.CountGender) + " " + scale.Singular
+            _ => ConvertPositive(count, scale.CountGender) + " " + scale.Singular
         };
 
-    string BuildThousandsPart(long thousands)
+    string BuildThousandsPart(ulong thousands)
     {
         if (thousands <= int.MaxValue && profile.ThousandsSpecialCases.TryGetValue((int)thousands, out var special))
         {
@@ -103,10 +103,10 @@ class ConstructStateScaleNumberToWordsConverter(ConstructStateScaleNumberToWords
         {
             // Small thousand counts use the feminine unit table plus the plural suffix; the
             // singular suffix is reserved for the recursive fallback above ten.
-            return profile.UnitsFeminine[thousands] + profile.ThousandsPluralSuffix;
+            return profile.UnitsFeminine[(int)thousands] + profile.ThousandsPluralSuffix;
         }
 
-        return Convert(thousands) + profile.ThousandsSingularSuffix;
+        return ConvertPositive(thousands, profile.DefaultGender) + profile.ThousandsSingularSuffix;
     }
 
     string BuildHundredsPart(int hundreds) =>

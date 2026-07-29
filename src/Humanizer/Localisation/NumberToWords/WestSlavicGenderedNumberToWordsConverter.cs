@@ -17,23 +17,18 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
             return profile.UnitsMap[0];
         }
 
-        if (number == long.MinValue)
-        {
-            throw new NotImplementedException();
-        }
-
         var parts = new List<string>();
+        var magnitude = GetAbsoluteValue(number);
         if (number < 0)
         {
             parts.Add(profile.MinusWord);
-            number = -number;
         }
 
-        CollectScale(parts, ref number, 1_000_000_000_000, GrammaticalGender.Masculine, profile.Trillions);
-        CollectScale(parts, ref number, 1_000_000_000, GrammaticalGender.Feminine, profile.Billions);
-        CollectScale(parts, ref number, 1_000_000, GrammaticalGender.Masculine, profile.Millions);
-        CollectScale(parts, ref number, 1_000, GrammaticalGender.Masculine, profile.Thousands);
-        CollectLessThanThousand(parts, number, gender);
+        CollectScale(parts, ref magnitude, 1_000_000_000_000, GrammaticalGender.Masculine, profile.Trillions);
+        CollectScale(parts, ref magnitude, 1_000_000_000, GrammaticalGender.Feminine, profile.Billions);
+        CollectScale(parts, ref magnitude, 1_000_000, GrammaticalGender.Masculine, profile.Millions);
+        CollectScale(parts, ref magnitude, 1_000, GrammaticalGender.Masculine, profile.Thousands);
+        CollectLessThanThousand(parts, magnitude, gender);
 
         return string.Join(" ", parts);
     }
@@ -45,7 +40,7 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
     /// <summary>
     /// Appends one scale row and consumes the part of the number it covers.
     /// </summary>
-    void CollectScale(List<string> parts, ref long number, long divisor, GrammaticalGender gender, WestSlavicScaleForms forms)
+    void CollectScale(List<string> parts, ref ulong number, ulong divisor, GrammaticalGender gender, WestSlavicScaleForms forms)
     {
         var scaleNumber = number / divisor;
         if (scaleNumber <= 0)
@@ -62,7 +57,7 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
 
         if (scaleNumber >= 1000)
         {
-            parts.Add(Convert(scaleNumber, GrammaticalGender.Masculine));
+            parts.Add(Convert((long)scaleNumber, GrammaticalGender.Masculine));
         }
         else
         {
@@ -83,7 +78,7 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
     /// <summary>
     /// Appends the fragment below one thousand.
     /// </summary>
-    void CollectLessThanThousand(List<string> parts, long number, GrammaticalGender? gender)
+    void CollectLessThanThousand(List<string> parts, ulong number, GrammaticalGender? gender)
     {
         if (number >= 100)
         {
@@ -106,7 +101,7 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
     /// <summary>
     /// Returns the unit form for the requested gender.
     /// </summary>
-    string UnitByGender(long number, GrammaticalGender? gender)
+    string UnitByGender(ulong number, GrammaticalGender? gender)
     {
         if (number != 1 && number != 2)
         {
@@ -122,6 +117,9 @@ class WestSlavicGenderedNumberToWordsConverter(WestSlavicNumberToWordsProfile pr
             _ => throw new ArgumentOutOfRangeException(nameof(gender))
         };
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 }
 
 /// <summary>

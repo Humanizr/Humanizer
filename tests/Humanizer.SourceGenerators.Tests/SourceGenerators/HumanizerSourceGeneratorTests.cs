@@ -1799,12 +1799,27 @@ numberToWords:
       name: 'thousand'
 """;
 
+        var billionAuthoredLocale = billionLocale.Replace(
+            "    billionStrategy: 'thousand-millions'\n    unitsMap:",
+            """
+    billionStrategy: 'thousand-millions'
+    scales:
+      -
+        value: 1000000000000
+        singular: 'trillion'
+        plural: 'trillions'
+    unitsMap:
+""",
+            StringComparison.Ordinal);
+        Assert.NotEqual(billionLocale, billionAuthoredLocale);
+
         var runResult = RunGenerator(
             new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-variant-defaults.yml", variantLocale),
             new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-triad-defaults.yml", triadLocale),
             new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-inverted-defaults.yml", invertedLocale),
             new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-scale-defaults.yml", scaleLocale),
             new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-billion-defaults.yml", billionLocale),
+            new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-billion-authored.yml", billionAuthoredLocale),
             new InMemoryAdditionalText(@"E:\Dev\Humanizer\src\Humanizer\Locales\zz-joined-defaults.yml", joinedLocale));
 
         Assert.Empty(runResult.Diagnostics);
@@ -1819,7 +1834,14 @@ numberToWords:
         Assert.Contains("case \"zz-inverted-defaults\": return", numberSource);
         Assert.Contains("case \"zz-scale-defaults\": return", numberSource);
         Assert.Contains("case \"zz-billion-defaults\": return", numberSource);
+        Assert.Contains("case \"zz-billion-authored\": return", numberSource);
         Assert.Contains("case \"zz-joined-defaults\": return", numberSource);
+
+        var defaultBlock = ExtractCacheClassBody(numberSource, "zz_billion_defaults_cache");
+        Assert.Contains("new BillionStrategyCardinalScale[] { new(1000000UL, \"million\", \"millions\") }, false,", defaultBlock);
+
+        var authoredBlock = ExtractCacheClassBody(numberSource, "zz_billion_authored_cache");
+        Assert.Contains("new BillionStrategyCardinalScale[] { new(1000000000000UL, \"trillion\", \"trillions\") }, true,", authoredBlock);
     }
 
     [Fact]

@@ -80,6 +80,8 @@ public sealed partial class HumanizerSourceGenerator
                                         Member("enum", "billionStrategy", null, "BillionCardinalStrategy", null, null, null, null),
                                         Member("nullable-string", "billionSingularWord", null, null, null, null, null, null),
                                         Member("nullable-string", "billionPluralWord", null, null, null, null, null, null),
+                                        Member("builder", "scales", null, null, "billion-strategy-cardinal-scale-array", null, null, null),
+                                        Member("presence-bool", "scales", null, null, null, null, null, null),
                                         Member("string-array", "unitsMap", null, null, null, null, null, null),
                                         Member("string-array", "tensMap", null, null, null, null, null, null),
                                         Member("string-array", "hundredsMap", null, null, null, null, null, null)
@@ -310,6 +312,7 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string", "millionPlural", null, null, null, null, null, null),
                             Member("string", "masculineCompoundOne", null, null, null, null, null, null),
                             Member("string", "feminineCompoundOne", null, null, null, null, null, null),
+                            Member("string", "masculineScaleCountOne", null, null, null, null, null, null),
                             Member("string", "masculineOrdinalOne", null, null, null, null, null, null),
                             Member("string", "feminineOrdinalOne", null, null, null, null, null, null),
                             Member("string", "defaultTensJoiner", null, null, null, null, null, null),
@@ -317,7 +320,6 @@ public sealed partial class HumanizerSourceGenerator
                             Member("int32", "specialJoinerTensValue", null, null, null, null, null, null),
                             Member("string", "masculineTensOrdinalSuffix", null, null, null, null, null, null),
                             Member("string", "feminineTensOrdinalSuffix", null, null, null, null, null, null),
-                            Member("string", "masculineOrdinalAppender", null, null, null, null, null, null),
                             Member("string", "defaultOrdinalAbbreviationMasculine", null, null, null, null, null, null),
                             Member("string", "defaultOrdinalAbbreviationFeminine", null, null, null, null, null, null),
                             Member("string", "tupleFallbackWord", null, null, null, null, null, null),
@@ -327,12 +329,15 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "tens", null, null, null, null, null, null),
                             Member("string-array", "hundredsMasculine", null, null, null, null, null, null),
                             Member("string-array", "hundredsFeminine", null, null, null, null, null, null),
+                            Member("string-array", "ordinalHundredsMasculine", null, null, null, null, null, null),
+                            Member("string-array", "ordinalHundredsFeminine", null, null, null, null, null, null),
                             Member("string-array", "ordinalMasculine", null, null, null, null, null, null),
                             Member("string-array", "ordinalFeminine", null, null, null, null, null, null),
                             Member("string-array", "ordinalTensStems", null, null, null, null, null, null),
                             Member("string-array", "ordinalUnitComponents", null, null, null, null, null, null),
                             Member("string-array", "tupleMap", null, null, null, null, null, null),
-                            Member("string-string-dictionary", "ordinalAbbreviations", null, null, null, null, null, null)
+                            Member("string-string-dictionary", "ordinalAbbreviations", null, null, null, null, null, null),
+                            Member("builder", "scales", null, null, "hyphenated-ordinal-scale-array", null, null, null)
                         )
             ),
 
@@ -456,7 +461,6 @@ public sealed partial class HumanizerSourceGenerator
                             Member("nullable-int-string-dictionary", "neuterSubHundredReplacements", null, null, null, null, null, "empty"),
                             Member("builder", "scales", null, null, "joined-scale-array", null, null, null),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, null),
-                            Member("bool", "requireOrdinalException", null, null, null, null, null, null),
                             Member("optional-profile-object", "ordinal", "JoinedScaleOrdinalProfile", null, null, null, null, null,
                                         Member("profile-object", "masculine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
                                                     Member("string", "defaultPrefix", null, null, null, "", null, null),
@@ -474,6 +478,11 @@ public sealed partial class HumanizerSourceGenerator
                                                     Member("nullable-int-string-dictionary", "exactReplacements", null, null, null, null, null, "empty")
                                         ),
                                         Member("enum", "neuterFallback", null, "GrammaticalGender", null, "masculine", null, null)
+                            ),
+                            Member("optional-profile-object", "compositionalOrdinal", "JoinedScaleCompositionalOrdinalProfile", null, null, null, null, null,
+                                        Member("nullable-string-string-dictionary", "nonTerminalReplacements", null, null, null, null, null, "empty"),
+                                        Member("nullable-string-string-dictionary", "terminalReplacements", null, null, null, null, null, "empty"),
+                                        Member("optional-string-array", "compactTerminalWords", null, null, null, null, null, null)
                             ),
                             Member("nullable-int64", "compoundOrdinalRemainder", null, null, null, null, null, null),
                             Member("nullable-string", "compoundOrdinalWord", null, null, null, null, null, null),

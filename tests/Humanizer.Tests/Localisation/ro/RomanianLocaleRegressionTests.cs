@@ -21,6 +21,18 @@ public class RomanianLocaleRegressionTests
         Assert.Equal(expected, formatter.TimeSpanHumanize(unit, 1, toWords: true));
     }
 
+    [Theory]
+    [InlineData(-1, "minus primul")]
+    [InlineData(-2, "minus al doilea")]
+    [InlineData(
+        225_010_018,
+        "al două sute douăzeci și cinci de milioane zece mii optsprezecelea")]
+    [InlineData(
+        int.MinValue,
+        "minus al două miliarde o sută patruzeci și șapte de milioane patru sute optzeci și trei de mii șase sute patruzeci și optulea")]
+    public void ToOrdinalWordsPreservesHighScaleGrammarAndNegativeMagnitude(int number, string expected) =>
+        Assert.Equal(expected, number.ToOrdinalWords(Romanian));
+
 #if NET6_0_OR_GREATER
     [Fact]
     public void ExactHourUsesMin0Template() =>

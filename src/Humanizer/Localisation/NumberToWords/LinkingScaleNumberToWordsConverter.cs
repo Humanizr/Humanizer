@@ -16,23 +16,19 @@ class LinkingScaleNumberToWordsConverter(LinkingScaleNumberToWordsProfile profil
             return profile.ZeroWord;
         }
 
-        if (number < 0)
-        {
-            return $"{profile.MinusWord} {Convert(-number)}";
-        }
-
         var parts = new List<string>();
-        var remainder = number;
+        var remainder = GetMagnitude(number);
 
         foreach (var scale in profile.Scales)
         {
-            var part = remainder / scale.Value;
-            if (part <= 0)
+            var scaleValue = (ulong)scale.Value;
+            var part = remainder / scaleValue;
+            if (part == 0)
             {
                 continue;
             }
 
-            remainder %= scale.Value;
+            remainder %= scaleValue;
             parts.Add(BuildScalePart(part, scale.Name));
         }
 
@@ -41,7 +37,8 @@ class LinkingScaleNumberToWordsConverter(LinkingScaleNumberToWordsProfile profil
             parts.Add(ConvertUnderThousand(remainder));
         }
 
-        return string.Join(" ", parts);
+        var words = string.Join(" ", parts);
+        return number < 0 ? $"{profile.MinusWord} {words}" : words;
     }
 
     /// <inheritdoc/>
@@ -50,9 +47,9 @@ class LinkingScaleNumberToWordsConverter(LinkingScaleNumberToWordsProfile profil
     /// <summary>
     /// Builds the rendered count and scale name for a scale row.
     /// </summary>
-    string BuildScalePart(long part, string scale)
+    string BuildScalePart(ulong part, string scale)
     {
-        if (part < profile.ScalePrefixes.Length && !string.IsNullOrEmpty(profile.ScalePrefixes[part]))
+        if (part < (ulong)profile.ScalePrefixes.Length && !string.IsNullOrEmpty(profile.ScalePrefixes[(int)part]))
         {
             return $"{profile.ScalePrefixes[(int)part]} {scale}";
         }
@@ -63,7 +60,7 @@ class LinkingScaleNumberToWordsConverter(LinkingScaleNumberToWordsProfile profil
     /// <summary>
     /// Converts the fragment below one thousand.
     /// </summary>
-    string ConvertUnderThousand(long number)
+    string ConvertUnderThousand(ulong number)
     {
         if (number < 100)
         {
@@ -85,9 +82,9 @@ class LinkingScaleNumberToWordsConverter(LinkingScaleNumberToWordsProfile profil
     /// <summary>
     /// Converts the fragment below one hundred.
     /// </summary>
-    string ConvertUnderHundred(long number)
+    string ConvertUnderHundred(ulong number)
     {
-        if (number < profile.UnitsMap.Length)
+        if (number < (ulong)profile.UnitsMap.Length)
         {
             return profile.UnitsMap[(int)number];
         }
@@ -100,6 +97,9 @@ class LinkingScaleNumberToWordsConverter(LinkingScaleNumberToWordsProfile profil
             ? tensWord
             : tensWord + profile.TensRemainderJoiner + profile.UnitsMap[(int)remainder];
     }
+
+    static ulong GetMagnitude(long number) =>
+        number >= 0 ? (ulong)number : unchecked((ulong)(-(number + 1)) + 1);
 
     /// <summary>
     /// Applies any generated scale-linking suffix replacement to the rendered count.

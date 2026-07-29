@@ -254,6 +254,32 @@ surfaces:
         billionStrategy: 'billion-word'
         billionSingularWord: 'bilhão'
         billionPluralWord: 'bilhões'
+        scales:
+          -
+            value: 1000000000000000000
+            singular: 'um quintilhão'
+            plural: 'quintilhões'
+            omitOne: true
+          -
+            value: 1000000000000000
+            singular: 'um quadrilhão'
+            plural: 'quadrilhões'
+            omitOne: true
+          -
+            value: 1000000000000
+            singular: 'um trilhão'
+            plural: 'trilhões'
+            omitOne: true
+          -
+            value: 1000000000
+            singular: 'um bilhão'
+            plural: 'bilhões'
+            omitOne: true
+          -
+            value: 1000000
+            singular: 'um milhão'
+            plural: 'milhões'
+            omitOne: true
         unitsMap:
           - 'zero'
           - 'um'

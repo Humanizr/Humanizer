@@ -307,17 +307,48 @@ surfaces:
       millionPlural: 'milions'
       masculineCompoundOne: 'u'
       feminineCompoundOne: 'una'
-      masculineOrdinalOne: 'un'
-      feminineOrdinalOne: 'una'
+      masculineScaleCountOne: 'un'
+      masculineOrdinalOne: 'unè'
+      feminineOrdinalOne: 'unena'
       defaultTensJoiner: '-'
       specialTensJoiner: '-i-'
       specialJoinerTensValue: 2
       masculineTensOrdinalSuffix: 'è'
       feminineTensOrdinalSuffix: 'ena'
-      masculineOrdinalAppender: 'n'
       defaultOrdinalAbbreviationMasculine: 'è'
       defaultOrdinalAbbreviationFeminine: 'a'
       tupleFallbackWord: 'vegades'
+      scales:
+        -
+          value: 1000000000000000000
+          singularPrefix: 'un'
+          singular: 'trilió'
+          plural: 'trilions'
+          ordinalMasculine: 'trilionèsim'
+          ordinalFeminine: 'trilionèsima'
+        -
+          value: 1000000000000
+          singularPrefix: 'un'
+          singular: 'bilió'
+          plural: 'bilions'
+          ordinalMasculine: 'bilionèsim'
+          ordinalFeminine: 'bilionèsima'
+        -
+          value: 1000000
+          singularPrefix: 'un'
+          singular: 'milió'
+          plural: 'milions'
+          ordinalMasculine: 'milionèsim'
+          ordinalFeminine: 'milionèsima'
+          groupCountByThousands: true
+        -
+          value: 1000
+          singular: 'mil'
+          plural: 'mil'
+          ordinalMasculine: 'milè'
+          ordinalFeminine: 'milena'
+          omitOne: true
+          countUsesRequestedGender: true
       unitsMasculine:
         1: 'un'
         2: 'dos'
@@ -379,6 +410,26 @@ surfaces:
         7: 'set-centes'
         8: 'vuit-centes'
         9: 'nou-centes'
+      ordinalHundredsMasculine:
+        1: 'centè'
+        2: 'dos-centè'
+        3: 'tres-centè'
+        4: 'quatre-centè'
+        5: 'cinc-centè'
+        6: 'sis-centè'
+        7: 'set-centè'
+        8: 'vuit-centè'
+        9: 'nou-centè'
+      ordinalHundredsFeminine:
+        1: 'centena'
+        2: 'dos-centena'
+        3: 'tres-centena'
+        4: 'quatre-centena'
+        5: 'cinc-centena'
+        6: 'sis-centena'
+        7: 'set-centena'
+        8: 'vuit-centena'
+        9: 'nou-centena'
       ordinalMasculine:
         1: 'primer'
         2: 'segon'

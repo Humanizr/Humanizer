@@ -5651,7 +5651,7 @@ static class LocaleNumberTheoryData
         { "ca", 11, "onzè" },
         { "ca", 12, "dotzè" },
         { "ca", 20, "vintè" },
-        { "ca", 21, "vint-i-un" },
+        { "ca", 21, "vint-i-unè" },
         { "ca", 100, "centè" },
         { "ca", 101, "cent primer" },
         { "cs", 1, "1" },

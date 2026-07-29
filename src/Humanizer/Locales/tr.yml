@@ -850,7 +850,7 @@ surfaces:
   number:
     words:
       engine: 'harmony-ordinal'
-      minimumValue: -9223372036854775807
+      minimumValue: -9223372036854775808
       maximumValue: 9223372036854775807
       minusWord: 'eksi'
       hundredWord: 'yüz'

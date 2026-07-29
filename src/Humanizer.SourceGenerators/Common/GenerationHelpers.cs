@@ -717,6 +717,51 @@ public sealed partial class HumanizerSourceGenerator
         return builder.ToString();
     }
 
+    static string CreateBillionStrategyCardinalScaleArrayExpression(JsonElement arrayElement)
+    {
+        var builder = new StringBuilder("new BillionStrategyCardinalScale[] { ");
+        var first = true;
+        foreach (var item in arrayElement.EnumerateArray())
+        {
+            if (!first)
+            {
+                builder.Append(", ");
+            }
+
+            builder.Append("new(");
+            builder.Append(GetRequiredInt64(item, "value").ToString(CultureInfo.InvariantCulture));
+            builder.Append("UL, ");
+            builder.Append(QuoteLiteral(GetRequiredString(item, "singular")));
+            builder.Append(", ");
+            builder.Append(QuoteLiteral(GetRequiredString(item, "plural")));
+            if (GetBoolean(item, "omitOne"))
+            {
+                builder.Append(", true");
+            }
+
+            builder.Append(')');
+            first = false;
+        }
+
+        builder.Append(" }");
+        return builder.ToString();
+    }
+
+    static string CreateLegacyBillionStrategyCardinalScaleArrayExpression(JsonElement cardinalElement)
+    {
+        var millionScale = $"new(1000000UL, {QuoteLiteral(GetRequiredString(cardinalElement, "millionSingularWord"))}, {QuoteLiteral(GetRequiredString(cardinalElement, "millionPluralWord"))})";
+        if (GetRequiredString(cardinalElement, "billionStrategy") != "billion-word")
+        {
+            return $"new BillionStrategyCardinalScale[] {{ {millionScale} }}";
+        }
+
+        var billionSingular = GetOptionalString(cardinalElement, "billionSingularWord")
+            ?? throw new InvalidOperationException("Billion-word cardinal strategy requires a singular billion word.");
+        var billionPlural = GetOptionalString(cardinalElement, "billionPluralWord")
+            ?? throw new InvalidOperationException("Billion-word cardinal strategy requires a plural billion word.");
+        return $"new BillionStrategyCardinalScale[] {{ new(1000000000UL, {QuoteLiteral(billionSingular)}, {QuoteLiteral(billionPlural)}), {millionScale} }}";
+    }
+
     static string CreateContractedOneScaleArrayExpression(JsonElement arrayElement)
     {
         if (arrayElement.ValueKind != JsonValueKind.Array)
@@ -1092,6 +1137,20 @@ public sealed partial class HumanizerSourceGenerator
             RequiredStringValue("cardinal"),
             RequiredStringValue("ordinal"));
 
+    static string CreateHyphenatedOrdinalScaleArrayExpression(JsonElement arrayElement)
+        => CreateTypedConstructorArrayExpression(
+            "HyphenatedOrdinalNumberToWordsConverter.Scale",
+            arrayElement,
+            element => GetRequiredInt64(element, "value").ToString(CultureInfo.InvariantCulture) + "UL",
+            OptionalStringValue("singularPrefix"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredStringValue("ordinalMasculine"),
+            RequiredStringValue("ordinalFeminine"),
+            BooleanValue("omitOne"),
+            BooleanValue("countUsesRequestedGender"),
+            BooleanValue("groupCountByThousands"));
+
     static string CreateDualFormScaleExpression(JsonElement element) =>
         CreateTargetTypedConstructorExpression(
             element,
@@ -1104,7 +1163,7 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "TriadScaleNumberToWordsConverter.TriadScale",
             arrayElement,
-            element => checked((int)GetRequiredInt64(element, "value")).ToString(CultureInfo.InvariantCulture),
+            element => GetRequiredInt64(element, "value").ToString(CultureInfo.InvariantCulture) + "UL",
             RequiredStringValue("singular"),
             RequiredStringValue("plural"),
             OptionalStringValue("countToScaleJoiner"),
@@ -1119,6 +1178,7 @@ public sealed partial class HumanizerSourceGenerator
         => CreateTypedConstructorArrayExpression(
             "GenderedScaleOrdinalNumberToWordsConverter.Scale",
             arrayElement,
+            element => GetRequiredInt64(element, "value").ToString(CultureInfo.InvariantCulture) + "UL",
             RequiredStringValue("singular"),
             RequiredStringValue("plural"),
             RequiredEnumValue("countGender", "GrammaticalGender"));

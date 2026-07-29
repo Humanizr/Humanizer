@@ -16,13 +16,14 @@ class InvertedTensNumberToWordsConverter(InvertedTensNumberToWordsProfile profil
             return profile.UnitsMap[0];
         }
 
+        var builder = new StringBuilder();
         if (number < 0)
         {
-            return $"{profile.MinusWord} {Convert(-number)}";
+            builder.Append(profile.MinusWord);
+            builder.Append(' ');
         }
 
-        var builder = new StringBuilder();
-        AppendNumber(builder, number);
+        AppendNumber(builder, GetAbsoluteValue(number));
         return builder.ToString();
     }
 
@@ -73,13 +74,14 @@ class InvertedTensNumberToWordsConverter(InvertedTensNumberToWordsProfile profil
     /// Appends the cardinal rendering for the given number, including higher scale rows and
     /// remainders.
     /// </summary>
-    void AppendNumber(StringBuilder builder, long number)
+    void AppendNumber(StringBuilder builder, ulong number)
     {
         var hasScalePrefix = false;
 
         foreach (var scale in profile.Scales)
         {
-            var count = number / scale.Value;
+            var scaleValue = (ulong)scale.Value;
+            var count = number / scaleValue;
             if (count == 0)
             {
                 continue;
@@ -96,7 +98,7 @@ class InvertedTensNumberToWordsConverter(InvertedTensNumberToWordsProfile profil
                 builder.Append(scale.ManyForm);
             }
 
-            number %= scale.Value;
+            number %= scaleValue;
             hasScalePrefix = true;
 
             if (number > 0)
@@ -110,6 +112,9 @@ class InvertedTensNumberToWordsConverter(InvertedTensNumberToWordsProfile profil
             AppendLessThanThousand(builder, (int)number, hasScalePrefix);
         }
     }
+
+    static ulong GetAbsoluteValue(long value) =>
+        value >= 0 ? (ulong)value : unchecked((ulong)(-(value + 1)) + 1);
 
     /// <summary>
     /// Appends the segment below one thousand, applying any locale-specific tail prefix rules.

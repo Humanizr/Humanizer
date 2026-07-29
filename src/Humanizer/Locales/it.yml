@@ -357,22 +357,34 @@ surfaces:
         9: 'non'
       scales:
         -
-          value: 1000
-          singular: 'mille'
-          plural: 'mila'
-          countUsesFinalAccent: false
-          appendTrailingSpace: false
-          removeLeadingOneOnExactOrdinal: false
-          exactOrdinalSuffix: 'l'
-        -
-          value: 1000000
-          singular: 'un milione '
-          plural: 'milioni'
+          value: 1000000000000000000
+          singular: 'un trilione '
+          plural: 'trilioni'
           countToScaleJoiner: ' '
           countUsesFinalAccent: true
           appendTrailingSpace: true
-          ordinalCompactionMatch: ' milion'
-          ordinalCompactionReplacement: 'milion'
+          ordinalCompactionMatch: ' trilion'
+          ordinalCompactionReplacement: 'trilion'
+          removeLeadingOneOnExactOrdinal: true
+        -
+          value: 1000000000000000
+          singular: 'un biliardo '
+          plural: 'biliardi'
+          countToScaleJoiner: ' '
+          countUsesFinalAccent: true
+          appendTrailingSpace: true
+          ordinalCompactionMatch: ' biliard'
+          ordinalCompactionReplacement: 'biliard'
+          removeLeadingOneOnExactOrdinal: true
+        -
+          value: 1000000000000
+          singular: 'un bilione '
+          plural: 'bilioni'
+          countToScaleJoiner: ' '
+          countUsesFinalAccent: true
+          appendTrailingSpace: true
+          ordinalCompactionMatch: ' bilion'
+          ordinalCompactionReplacement: 'bilion'
           removeLeadingOneOnExactOrdinal: true
         -
           value: 1000000000
@@ -384,6 +396,24 @@ surfaces:
           ordinalCompactionMatch: ' miliard'
           ordinalCompactionReplacement: 'miliard'
           removeLeadingOneOnExactOrdinal: true
+        -
+          value: 1000000
+          singular: 'un milione '
+          plural: 'milioni'
+          countToScaleJoiner: ' '
+          countUsesFinalAccent: true
+          appendTrailingSpace: true
+          ordinalCompactionMatch: ' milion'
+          ordinalCompactionReplacement: 'milion'
+          removeLeadingOneOnExactOrdinal: true
+        -
+          value: 1000
+          singular: 'mille'
+          plural: 'mila'
+          countUsesFinalAccent: false
+          appendTrailingSpace: false
+          removeLeadingOneOnExactOrdinal: false
+          exactOrdinalSuffix: 'l'
 
     parse:
       engine: 'greedy-compound'

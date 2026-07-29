@@ -16,12 +16,10 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     /// <inheritdoc/>
     public override string Convert(long input)
     {
-        // The generated profile owns the supported magnitude ceiling, with an extra slot only when
-        // the locale explicitly allows `long.MinValue` to survive the absolute-value conversion.
-        if (GetAbsoluteValue(input) > profile.MaximumValue &&
-            !(profile.AllowLongMin && input == long.MinValue))
+        var magnitude = GetAbsoluteValue(input);
+        if (magnitude > profile.MaximumValue && !(input == long.MinValue && profile.AllowLongMin))
         {
-            throw new NotImplementedException();
+            throw new ArgumentOutOfRangeException(nameof(input), input, $"The configured profile supports magnitudes through {profile.MaximumValue}.");
         }
 
         if (input == 0)
@@ -30,7 +28,7 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
         }
 
         var parts = new List<string>(8);
-        var remaining = GetAbsoluteValue(input);
+        var remaining = magnitude;
 
         if (input < 0)
         {
@@ -49,17 +47,18 @@ class SouthSlavicCardinalNumberToWordsConverter(SouthSlavicCardinalNumberToWords
     /// <inheritdoc/>
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-        if (GetAbsoluteValue(number) > profile.MaximumValue)
+        var magnitude = GetAbsoluteValue(number);
+        if (magnitude > profile.MaximumValue)
         {
-            throw new NotImplementedException();
+            throw new ArgumentOutOfRangeException(nameof(number), number, $"The configured profile supports magnitudes through {profile.MaximumValue}.");
         }
 
         if (number < 0)
         {
-            return profile.MinusWord + " " + ConvertOrdinalPositive(-(long)number, gender);
+            return profile.MinusWord + " " + ConvertOrdinalPositive((long)magnitude, gender);
         }
 
-        return ConvertOrdinalPositive(number, gender);
+        return ConvertOrdinalPositive((long)magnitude, gender);
     }
 
     /// <inheritdoc/>

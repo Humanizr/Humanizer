@@ -56,8 +56,8 @@ public class EstonianLocaleParityTests
         Assert.Equal(expected, words.ToNumber(Estonian));
 
     [Fact]
-    public void ToWords_RejectsMagnitudeWithoutCLDRScaleWord() =>
-        Assert.Throws<NotImplementedException>(() => 1_000_000_000_000_000_000.ToWords(Estonian));
+    public void ToWords_UsesEstonianLongScaleTrillion() =>
+        Assert.Equal("triljon", 1_000_000_000_000_000_000.ToWords(Estonian));
 
     [Fact]
     public void ToNumber_DoesNotTreatMinusWordAsZeroToken() =>
@@ -73,10 +73,10 @@ public class EstonianLocaleParityTests
     }
 
     [Theory]
-    [InlineData(10003)]
-    [InlineData(21001)]
-    public void ToOrdinalWords_RejectsUnmodeledEstonianOrdinalsInsteadOfReturningCardinals(int number) =>
-        Assert.Throws<NotImplementedException>(() => number.ToOrdinalWords(Estonian));
+    [InlineData(10003, "kümne tuhande kolmas")]
+    [InlineData(21001, "kahekümne ühe tuhande esimene")]
+    public void ToOrdinalWords_ComposesEstonianOrdinals(int number, string expected) =>
+        Assert.Equal(expected, number.ToOrdinalWords(Estonian));
 
     [Theory]
     [InlineData(0, "0.")]

@@ -32,12 +32,8 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
             return profile.ZeroWord;
         }
 
-        if (number < 0)
-        {
-            return $"{profile.MinusWord} {Convert(-number)}";
-        }
-
-        return ConvertPositive(number);
+        var words = ConvertPositive(GetMagnitude(number));
+        return number < 0 ? $"{profile.MinusWord} {words}" : words;
     }
 
     /// <summary>
@@ -46,7 +42,7 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
     /// The only family-specific decision is whether a scale row has a dedicated contracted
     /// one-word form.
     /// </summary>
-    string ConvertPositive(long number)
+    string ConvertPositive(ulong number)
     {
         var parts = new List<string>();
 
@@ -54,13 +50,14 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
         // "seribu" can be emitted only when the generated profile says the locale has one.
         foreach (var scale in profile.Scales)
         {
-            if (number < scale.Value)
+            var scaleValue = (ulong)scale.Value;
+            if (number < scaleValue)
             {
                 continue;
             }
 
-            var part = number / scale.Value;
-            number %= scale.Value;
+            var part = number / scaleValue;
+            number %= scaleValue;
 
             if (part == 0)
             {
@@ -92,13 +89,13 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
     /// </summary>
     /// <param name="count">The hundreds count within the current triad.</param>
     /// <returns>The localized hundreds phrase for <paramref name="count"/>.</returns>
-    protected virtual string GetHundredsWord(long count) =>
-        count == 1 ? profile.HundredWord : $"{profile.Units[count]} {profile.HundredUnitWord}";
+    protected virtual string GetHundredsWord(ulong count) =>
+        count == 1 ? profile.HundredWord : $"{profile.Units[(int)count]} {profile.HundredUnitWord}";
 
     /// <summary>
     /// Converts a number below one thousand.
     /// </summary>
-    string ConvertUnderThousand(long number)
+    string ConvertUnderThousand(ulong number)
     {
         if (number < 100)
         {
@@ -121,12 +118,12 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
     /// <summary>
     /// Converts a number below one hundred.
     /// </summary>
-    string ConvertUnderHundred(long number)
+    string ConvertUnderHundred(ulong number)
     {
-        if (number < profile.Units.Length)
+        if (number < (ulong)profile.Units.Length)
         {
             // Units and teens are stored as exact table lookups so the common path stays simple.
-            return profile.Units[number];
+            return profile.Units[(int)number];
         }
 
         var tens = (int)(number / 10);
@@ -137,8 +134,11 @@ class ContractedOneScaleNumberToWordsConverter(ContractedOneScaleNumberToWordsPr
         // table lookup.
         return remainder == 0
             ? tensWord
-            : $"{tensWord} {profile.Units[remainder]}";
+            : $"{tensWord} {profile.Units[(int)remainder]}";
     }
+
+    static ulong GetMagnitude(long number) =>
+        number >= 0 ? (ulong)number : unchecked((ulong)(-(number + 1)) + 1);
 
     /// <summary>
     /// Converts the given value to its locale-specific ordinal form.
