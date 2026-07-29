@@ -1247,7 +1247,7 @@ jobs:
             "$GITHUB_RUN_ID" \
             "$GITHUB_RUN_ATTEMPT" \
             > "candidate/${pointer_name}"
-          release="$(
+          find_candidate_release() {
             gh api \
               --paginate \
               --slurp \
@@ -1272,7 +1272,8 @@ jobs:
                   ]
                 | @tsv
               '
-          )"
+          }
+          release="$(find_candidate_release)"
           if [[ -z "$release" ]]; then
             gh release create "$release_tag" \
               "candidate/${archive_name}" \
@@ -1284,33 +1285,16 @@ jobs:
               --target "$SOURCE_SHA" \
               --title "Documentation deployment ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}" \
               --notes "Automation-owned exact deployment candidate."
+            for attempt in {1..10}; do
+              release="$(find_candidate_release)"
+              [[ -n "$release" ]] && break
+              sleep 1
+            done
           fi
-          release="$(
-            gh api \
-              --paginate \
-              --slurp \
-              "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
-              jq -r --arg tag "$release_tag" '
-                [
-                  .[][]
-                  | select(.tag_name == $tag)
-                ]
-                | if length != 1 then
-                    error("candidate release is unavailable or duplicated")
-                  else
-                    first
-                  end
-                | [
-                    .id,
-                    .draft,
-                    .immutable,
-                    .target_commitish,
-                    (.assets | length),
-                    ([.assets[].name] | sort | join(","))
-                  ]
-                | @tsv
-              '
-          )"
+          if [[ -z "$release" ]]; then
+            echo "Candidate release did not become visible." >&2
+            exit 1
+          fi
           IFS=$'\t' read -r release_id draft immutable target \
             asset_count asset_names <<<"$release"
           if [[ ! "$release_id" =~ ^[0-9]+$ ||
