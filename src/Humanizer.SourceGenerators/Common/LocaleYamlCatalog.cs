@@ -55,6 +55,7 @@ public sealed partial class HumanizerSourceGenerator
             "collectionFormatter",
             "dateOnlyToOrdinalWords",
             "dateToOrdinalWords",
+            "durationCases",
             "formatter",
             "grammar",
             "headings",
@@ -342,6 +343,17 @@ public sealed partial class HumanizerSourceGenerator
                 inheritedValue = null;
             }
 
+            if (featureName == "durationCases" &&
+                localValue is null &&
+                inheritedValue is not null &&
+                inheritedLocaleCode is not null &&
+                (!SharesExactLanguageSubtag(localeCode, inheritedLocaleCode) ||
+                 !HasCompatibleScript(localeCode, inheritedLocaleCode)))
+            {
+                throw new InvalidOperationException(
+                    $"Locale '{localeCode}' must author durationCases instead of inheriting them from language or script-incompatible locale '{inheritedLocaleCode}'.");
+            }
+
             return MergeFeatureValue(localeCode, featureName, inheritedValue, localValue);
         }
 
@@ -357,6 +369,34 @@ public sealed partial class HumanizerSourceGenerator
             return separatorIndex >= 0
                 ? localeCode.Substring(0, separatorIndex)
                 : localeCode;
+        }
+
+        static bool HasCompatibleScript(string localeCode, string inheritedLocaleCode)
+        {
+            var localeScript = GetScriptSubtag(localeCode);
+            var inheritedScript = GetScriptSubtag(inheritedLocaleCode);
+            if (localeScript is null || inheritedScript is null)
+            {
+                return localeScript is null &&
+                       inheritedScript is null ||
+                       string.Equals(localeCode, "zh-CN", StringComparison.OrdinalIgnoreCase) &&
+                       string.Equals(inheritedLocaleCode, "zh-Hans", StringComparison.OrdinalIgnoreCase);
+            }
+
+            return string.Equals(localeScript, inheritedScript, StringComparison.OrdinalIgnoreCase);
+        }
+
+        static string? GetScriptSubtag(string localeCode)
+        {
+            foreach (var subtag in localeCode.Split('-').Skip(1))
+            {
+                if (subtag.Length == 4 && subtag.All(char.IsLetter))
+                {
+                    return subtag;
+                }
+            }
+
+            return null;
         }
 
         static LocaleFeature? ResolveFeature(
@@ -396,10 +436,15 @@ public sealed partial class HumanizerSourceGenerator
             string localeCode,
             ImmutableDictionary<string, SimpleYamlValue> features)
         {
+            var preserveDurationCaseForms =
+                features.TryGetValue("formatter", out var formatterValue) &&
+                formatterValue is SimpleYamlMapping formatter &&
+                formatter.GetScalar("casePluralRule") is not null;
+
             return !features.TryGetValue("phrases", out var phraseValue)
                 ? null
                 : phraseValue is SimpleYamlMapping mapping
-                ? LocalePhraseNormalization.Create(localeCode, mapping)
+                ? LocalePhraseNormalization.Create(localeCode, mapping, preserveDurationCaseForms)
                 : throw new InvalidOperationException($"Locale '{localeCode}.phrases' must be a mapping.");
         }
 
@@ -517,6 +562,7 @@ public sealed partial class HumanizerSourceGenerator
         /// <summary>
         /// Merges a child locale feature with its inherited parent feature during generation.
         /// Mappings merge recursively, while scalars and sequences replace the inherited value.
+        /// Authored duration-case surfaces replace the inherited discriminated union entirely.
         /// If a child mapping switches to a different <c>engine</c>, the child mapping replaces
         /// the parent mapping entirely so fields from the old engine cannot leak into the new one.
         /// </summary>
@@ -532,6 +578,11 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             if (inheritedValue is null)
+            {
+                return localValue;
+            }
+
+            if (featureName == "durationCases")
             {
                 return localValue;
             }

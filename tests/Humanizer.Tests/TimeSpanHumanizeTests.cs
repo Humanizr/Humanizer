@@ -600,8 +600,319 @@ public class TimeSpanHumanizeTests
             "1 week, 1 day, 1 hour",
             strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, false));
         Assert.Equal(
+            "1 week, 1 day, 1 hour",
+            strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, default));
+        Assert.Equal(
             "1week, 1d, 1h",
             strategy.Humanize(timeSpan, 3, false, new("en-US"), TimeUnit.Week, TimeUnit.Millisecond, ", ", false, true));
+    }
+
+    [Fact]
+    public void DefaultStrategyPreservesSymbolPrecedenceForZeroFallbacks()
+    {
+        var strategy = new DefaultTimeSpanHumanizeStrategy();
+        var culture = new CultureInfo("en-US");
+
+        Assert.Equal(
+            "0ms",
+            strategy.Humanize(TimeSpan.Zero, 1, false, culture, TimeUnit.Week, TimeUnit.Millisecond, ", ", true, true));
+        Assert.Equal(
+            "0s",
+            strategy.Humanize(TimeSpan.FromMilliseconds(1), 2, false, culture, TimeUnit.Week, TimeUnit.Second, ", ", true, true));
+    }
+
+    [Fact]
+    public void GrammaticalCaseAppliesToEveryPart()
+    {
+        var actual = new TimeSpan(8, 2, 0, 0).HumanizeWithCase(
+            GrammaticalCase.Dative,
+            precision: 3,
+            culture: new("de-DE"));
+
+        Assert.Equal("einer Woche, einem Tag, 2 Stunden", actual);
+    }
+
+    [Fact]
+    public void BasqueUsesAbsolutiveAsItsCitationCase()
+    {
+        var culture = new CultureInfo("eu");
+        var duration = TimeSpan.FromDays(1);
+
+        Assert.Equal("1 egun", duration.Humanize(culture: culture));
+        Assert.Equal(
+            "egun bat",
+            duration.HumanizeWithCase(GrammaticalCase.Absolutive, culture: culture));
+        Assert.Throws<NotSupportedException>(
+            () => duration.HumanizeWithCase(GrammaticalCase.Nominative, culture: culture));
+    }
+
+    [Theory]
+    [InlineData("az", "one gün", "bir gün")]
+    [InlineData("cs", "one den", "jeden den")]
+    [InlineData("el", "one μέρα", "μία μέρα")]
+    [InlineData("hr", "one dan", "jedan dan")]
+    [InlineData("lv", "one diena", "viena diena")]
+    [InlineData("pl", "one dzień", "jeden dzień")]
+    [InlineData("sk", "one deň", "jeden deň")]
+    [InlineData("sl", "one dan", "en dan")]
+    [InlineData("sr-Latn", "one dan", "jedan dan")]
+    [InlineData("sr", "one дан", "један дан")]
+    [InlineData("sv", "one dag", "en dag")]
+    [InlineData("uz-Cyrl-UZ", "one кун", "бир кун")]
+    [InlineData("uz-Latn-UZ", "one kun", "bir kun")]
+    public void CaseAwareCitationDoesNotChangeLegacyToWords(
+        string cultureName,
+        string legacy,
+        string caseAware)
+    {
+        var culture = new CultureInfo(cultureName);
+        var duration = TimeSpan.FromDays(1);
+
+        Assert.Equal(legacy, duration.Humanize(toWords: true, culture: culture));
+        Assert.Equal(
+            caseAware,
+            duration.HumanizeWithCase(GrammaticalCase.Nominative, culture: culture));
+    }
+
+    [Fact]
+    public void InvalidGrammaticalCaseThrows()
+    {
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(
+            () => TimeSpan.FromDays(1).HumanizeWithCase((GrammaticalCase)int.MaxValue));
+
+        Assert.Equal("grammaticalCase", exception.ParamName);
+    }
+
+    [Fact]
+    public void CaseAwareFormatterRejectsInvalidTimeUnit()
+    {
+        IGrammaticalCaseTimeSpanFormatter formatter = new DefaultFormatter("de");
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(
+            () => formatter.TimeSpanHumanize((TimeUnit)int.MaxValue, 1, GrammaticalCase.Dative));
+
+        Assert.Equal("timeUnit", exception.ParamName);
+    }
+
+    [Fact]
+    public void DefaultLiteralPreservesLegacyFormatterOverload()
+    {
+        var formatter = new DefaultFormatter("en");
+
+        Assert.Equal("1 day", formatter.TimeSpanHumanize(TimeUnit.Day, 1, default));
+    }
+
+    [Theory]
+    [InlineData("en-US")]
+    public void NominativeRejectsUnavailableLocale(string culture)
+    {
+        Assert.Throws<NotSupportedException>(
+            () => TimeSpan.FromDays(1).HumanizeWithCase(
+                GrammaticalCase.Nominative,
+                culture: new(culture)));
+    }
+
+    [Fact]
+    public void NominativeCaseRejectsLegacyCustomStrategy()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+        var strategy = new RecordingTimeSpanHumanizeStrategy
+        {
+            Target = TimeSpan.FromDays(1)
+        };
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = strategy;
+
+            var exception = Assert.Throws<NotSupportedException>(
+                () => strategy.Target.HumanizeWithCase(GrammaticalCase.Nominative));
+
+            Assert.Contains(nameof(ITimeSpanHumanizeStrategy), exception.Message);
+            Assert.Equal(0, strategy.CallCount);
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    [Fact]
+    public void NonNominativeCaseRejectsLegacyCustomStrategy()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+        var strategy = new RecordingTimeSpanHumanizeStrategy
+        {
+            Target = TimeSpan.FromDays(1)
+        };
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = strategy;
+
+            var exception = Assert.Throws<NotSupportedException>(
+                () => strategy.Target.HumanizeWithCase(GrammaticalCase.Dative));
+
+            Assert.Contains(nameof(ITimeSpanHumanizeStrategy), exception.Message);
+            Assert.Equal(0, strategy.CallCount);
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    [Fact]
+    public void LegacyFormattingPreservesCustomFormatterCompatibility()
+    {
+        var formatter = new LegacyFormatter();
+
+        Assert.Equal(
+            "custom",
+            TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                null));
+
+        var nominativeException = Assert.Throws<NotSupportedException>(
+            () => TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                GrammaticalCase.Nominative));
+        var dativeException = Assert.Throws<NotSupportedException>(
+            () => TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                GrammaticalCase.Dative));
+
+        Assert.Contains("formatter", nominativeException.Message);
+        Assert.Contains("formatter", dativeException.Message);
+    }
+
+    [Fact]
+    public void UnsupportedFormatterReportsTheFormattingCulture()
+    {
+        var originalUiCulture = CultureInfo.CurrentUICulture;
+        try
+        {
+            CultureInfo.CurrentUICulture = new("fr-FR");
+
+            var exception = Assert.Throws<NotSupportedException>(
+                () => TimeSpanHumanizeExtensions.FormatTimePart(
+                    new LegacyFormatter(),
+                    TimeUnit.Day,
+                    1,
+                    null,
+                    false,
+                    false,
+                    GrammaticalCase.Dative));
+
+            Assert.Contains(CultureInfo.CurrentCulture.Name, exception.Message);
+            Assert.DoesNotContain(CultureInfo.CurrentUICulture.Name, exception.Message);
+        }
+        finally
+        {
+            CultureInfo.CurrentUICulture = originalUiCulture;
+        }
+    }
+
+    [Fact]
+    public void DefaultFormatterSubclassMustExplicitlyOptIntoGrammaticalCaseSupport()
+    {
+        var formatter = new LegacyDefaultFormatterSubclass();
+
+        Assert.Equal(
+            "custom",
+            TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                null));
+
+        var exception = Assert.Throws<NotSupportedException>(
+            () => TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                GrammaticalCase.Dative));
+
+        Assert.Contains(nameof(IGrammaticalCaseTimeSpanFormatter), exception.Message);
+    }
+
+    [Fact]
+    public void DefaultStrategySubclassMustExplicitlyOptIntoGrammaticalCaseSupport()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+        var strategy = new LegacyDefaultStrategySubclass();
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = strategy;
+
+            Assert.Equal("custom", TimeSpan.FromDays(1).Humanize());
+
+            var exception = Assert.Throws<NotSupportedException>(
+                () => TimeSpan.FromDays(1).HumanizeWithCase(GrammaticalCase.Dative));
+
+            Assert.Contains(nameof(IGrammaticalCaseTimeSpanHumanizeStrategy), exception.Message);
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
+    }
+
+    [Fact]
+    public void DefaultFormatterSubclassCanExplicitlyOptIntoGrammaticalCaseSupport()
+    {
+        var formatter = new OptedInDefaultFormatterSubclass();
+
+        Assert.Equal(
+            "custom case",
+            TimeSpanHumanizeExtensions.FormatTimePart(
+                formatter,
+                TimeUnit.Day,
+                1,
+                CultureInfo.InvariantCulture,
+                false,
+                false,
+                GrammaticalCase.Dative));
+    }
+
+    [Fact]
+    public void DefaultStrategySubclassCanExplicitlyOptIntoGrammaticalCaseSupport()
+    {
+        var originalStrategy = Configurator.TimeSpanHumanizeStrategy;
+
+        try
+        {
+            Configurator.TimeSpanHumanizeStrategy = new OptedInDefaultStrategySubclass();
+
+            Assert.Equal(
+                "custom case",
+                TimeSpan.FromDays(1).HumanizeWithCase(GrammaticalCase.Dative));
+        }
+        finally
+        {
+            Configurator.TimeSpanHumanizeStrategy = originalStrategy;
+        }
     }
 
     [Fact]
@@ -676,6 +987,69 @@ public class TimeSpanHumanizeTests
             LastCall = new(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, toWords, toSymbols);
             return "custom";
         }
+    }
+
+    sealed class LegacyFormatter : IFormatter
+    {
+        public string DateHumanize_Now() => throw new NotSupportedException();
+        public string DateHumanize_Never() => throw new NotSupportedException();
+        public string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit) => throw new NotSupportedException();
+        public string TimeSpanHumanize_Zero() => throw new NotSupportedException();
+        public string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false) => "custom";
+        public string TimeSpanHumanize_Age() => throw new NotSupportedException();
+        public string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) => throw new NotSupportedException();
+        public string TimeUnitHumanize(TimeUnit timeUnit) => throw new NotSupportedException();
+    }
+
+    sealed class LegacyDefaultFormatterSubclass()
+        : DefaultFormatter(CultureInfo.InvariantCulture)
+    {
+        public override string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false) => "custom";
+    }
+
+    sealed class OptedInDefaultFormatterSubclass()
+        : DefaultFormatter(CultureInfo.InvariantCulture),
+          IGrammaticalCaseTimeSpanFormatter
+    {
+        string IGrammaticalCaseTimeSpanFormatter.TimeSpanHumanize(
+            TimeUnit timeUnit,
+            int unit,
+            GrammaticalCase grammaticalCase) =>
+            "custom case";
+    }
+
+    sealed class LegacyDefaultStrategySubclass
+        : DefaultTimeSpanHumanizeStrategy,
+          ITimeSpanHumanizeStrategy
+    {
+        string ITimeSpanHumanizeStrategy.Humanize(
+            TimeSpan timeSpan,
+            int precision,
+            bool countEmptyUnits,
+            CultureInfo? culture,
+            TimeUnit maxUnit,
+            TimeUnit minUnit,
+            string? collectionSeparator,
+            bool toWords,
+            bool toSymbols) =>
+            "custom";
+    }
+
+    sealed class OptedInDefaultStrategySubclass
+        : DefaultTimeSpanHumanizeStrategy,
+          IGrammaticalCaseTimeSpanHumanizeStrategy
+    {
+        string IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(
+            TimeSpan timeSpan,
+            int precision,
+            bool countEmptyUnits,
+            CultureInfo? culture,
+            TimeUnit maxUnit,
+            TimeUnit minUnit,
+            string? collectionSeparator,
+            bool toSymbols,
+            GrammaticalCase grammaticalCase) =>
+            "custom case";
     }
 
     sealed record TimeSpanHumanizeCall(

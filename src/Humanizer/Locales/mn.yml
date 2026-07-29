@@ -4,6 +4,574 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'locative'
+      - 'accusative'
+      - 'ablative'
+      - 'instrumental'
+      - 'comitative'
+      - 'directive'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://journal.num.edu.mn/ms/article/view/5851'
+        revision: '10.22353/ms20224606'
+        locator: 'eight-case inventory including dative-locative and directive; forms checked against the official normative dictionary'
+        credit: 'National University of Mongolia and Mongolian Language Council'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундын'
+                multiple:
+                  forms: '{count} миллисекундын'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундийн'
+                multiple:
+                  forms: '{count} секундийн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минутын'
+                multiple:
+                  forms: '{count} минутын'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 цагийн'
+                multiple:
+                  forms: '{count} цагийн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 өдрийн'
+                multiple:
+                  forms: '{count} өдрийн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 долоо хоногийн'
+                multiple:
+                  forms: '{count} долоо хоногийн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 сарын'
+                multiple:
+                  forms: '{count} сарын'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жилийн'
+                multiple:
+                  forms: '{count} жилийн'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундэд'
+                multiple:
+                  forms: '{count} миллисекундэд'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундэд'
+                multiple:
+                  forms: '{count} секундэд'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минутад'
+                multiple:
+                  forms: '{count} минутад'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 цагт'
+                multiple:
+                  forms: '{count} цагт'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 өдөрт'
+                multiple:
+                  forms: '{count} өдөрт'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 долоо хоногт'
+                multiple:
+                  forms: '{count} долоо хоногт'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 сард'
+                multiple:
+                  forms: '{count} сард'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жилд'
+                multiple:
+                  forms: '{count} жилд'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      locative:
+        sameRenderedAs: 'dative'
+        provenance:
+          - 'grammar'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундыг'
+                multiple:
+                  forms: '{count} миллисекундыг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундийг'
+                multiple:
+                  forms: '{count} секундийг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минутыг'
+                multiple:
+                  forms: '{count} минутыг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 цагийг'
+                multiple:
+                  forms: '{count} цагийг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 өдрийг'
+                multiple:
+                  forms: '{count} өдрийг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 долоо хоногийг'
+                multiple:
+                  forms: '{count} долоо хоногийг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 сарыг'
+                multiple:
+                  forms: '{count} сарыг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жилийг'
+                multiple:
+                  forms: '{count} жилийг'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундээс'
+                multiple:
+                  forms: '{count} миллисекундээс'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундээс'
+                multiple:
+                  forms: '{count} секундээс'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минутаас'
+                multiple:
+                  forms: '{count} минутаас'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 цагаас'
+                multiple:
+                  forms: '{count} цагаас'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 өдрөөс'
+                multiple:
+                  forms: '{count} өдрөөс'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 долоо хоногоос'
+                multiple:
+                  forms: '{count} долоо хоногоос'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 сараас'
+                multiple:
+                  forms: '{count} сараас'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жилээс'
+                multiple:
+                  forms: '{count} жилээс'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундээр'
+                multiple:
+                  forms: '{count} миллисекундээр'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундээр'
+                multiple:
+                  forms: '{count} секундээр'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минутаар'
+                multiple:
+                  forms: '{count} минутаар'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 цагаар'
+                multiple:
+                  forms: '{count} цагаар'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 өдрөөр'
+                multiple:
+                  forms: '{count} өдрөөр'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 долоо хоногоор'
+                multiple:
+                  forms: '{count} долоо хоногоор'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 сараар'
+                multiple:
+                  forms: '{count} сараар'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жилээр'
+                multiple:
+                  forms: '{count} жилээр'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      comitative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекундтэй'
+                multiple:
+                  forms: '{count} миллисекундтэй'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундтэй'
+                multiple:
+                  forms: '{count} секундтэй'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минуттай'
+                multiple:
+                  forms: '{count} минуттай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 цагтай'
+                multiple:
+                  forms: '{count} цагтай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 өдөртэй'
+                multiple:
+                  forms: '{count} өдөртэй'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 долоо хоногтой'
+                multiple:
+                  forms: '{count} долоо хоногтой'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 сартай'
+                multiple:
+                  forms: '{count} сартай'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жилтэй'
+                multiple:
+                  forms: '{count} жилтэй'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      directive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 миллисекунд рүү'
+                multiple:
+                  forms: '{count} миллисекунд рүү'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунд рүү'
+                multiple:
+                  forms: '{count} секунд рүү'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 минут руу'
+                multiple:
+                  forms: '{count} минут руу'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 цаг руу'
+                multiple:
+                  forms: '{count} цаг руу'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 өдөр рүү'
+                multiple:
+                  forms: '{count} өдөр рүү'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 долоо хоног руу'
+                multiple:
+                  forms: '{count} долоо хоног руу'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 сар луу'
+                multiple:
+                  forms: '{count} сар луу'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 жил рүү'
+                multiple:
+                  forms: '{count} жил рүү'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

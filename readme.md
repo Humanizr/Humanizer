@@ -33,6 +33,13 @@ var precise = TimeSpan.FromMilliseconds(1500).HumanizeWithFractionalSeconds(
 Console.WriteLine(text); // 2 minutes
 Console.WriteLine(indianNumber); // one hundred crore
 Console.WriteLine(precise); // 1.5 seconds
+
+var german = CultureInfo.GetCultureInfo("de-DE");
+var duration = TimeSpan.FromDays(7).HumanizeWithCase(
+    GrammaticalCase.Dative,
+    culture: german);
+
+Console.WriteLine($"in {duration}"); // in einer Woche
 ```
 
 In v4 previews, applications can provide the exact noun forms for a culture's
@@ -53,6 +60,12 @@ if (files.TryInflect(5m, CultureInfo.GetCultureInfo("pl"), out var noun))
 it does not guess localized morphology or fall back to English. See
 [inflection and quantities](https://humanizr.net/docs/scenarios/inflection-and-quantities/)
 for the exact-form and lemmatization contracts.
+
+`HumanizeWithCase` returns only the duration phrase; add any required
+preposition yourself. Singular forms may include a locale-authored one-word
+or article, and a locale may encode a count in the unit form. Locales and custom
+components without verified case support throw `NotSupportedException`
+instead of falling back to English.
 
 ## Documentation
 

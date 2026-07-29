@@ -65,6 +65,17 @@ Console.WriteLine(123.ToWords(culture));
       required capabilities, inheritance cycles, and cross-language parents
       before this output is written.
     </p>
+    <p>
+      Grammatical-case duration coverage is narrower than general locale
+      coverage and is classified separately as <code>distinct</code>,
+      <code>invariant</code>, or <code>not-applicable</code>. Case and unit
+      realizations may be authored, evidenced as rendering the same as another
+      case, or explicitly not applicable; release validation rejects
+      unsupported applicable entries. An <code>Own</code> or
+      <code>Via …</code> cell in this table does not imply that
+      <code>HumanizeWithCase</code> supports every case or duration unit.
+      See the duration guide for the runtime contract.
+    </p>
     <div
       aria-label="Current locale capability coverage"
       className="languageCoverageRegion"
@@ -149,5 +160,6 @@ inventory.
 
 - [Choose a culture](./using-cultures.mdx)
 - [Grammar and platform formatting](./grammar-and-platform-formatting.mdx)
+- [Format durations and ages](../scenarios/durations-and-ages.mdx)
 - [Report or correct a language issue](../contributing/report-language-issue.mdx)
 - [Selected-version API reference](../api/index.md)

@@ -4,6 +4,413 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'locative'
+      - 'ablative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://parsistrans.com/wp-content/uploads/2019/02/TurkmenLanguageLearningGuide_001.pdf'
+        revision: '2019-02'
+        locator: 'pages 12-13, complete case allomorph table and consonant voicing'
+        credit: 'Peace Corps Turkmen Language Grammar Guide'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundyň'
+                multiple:
+                  forms: '{count} millisekundyň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundyň'
+                multiple:
+                  forms: '{count} sekundyň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minudyň'
+                multiple:
+                  forms: '{count} minudyň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sagadyň'
+                multiple:
+                  forms: '{count} sagadyň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günüň'
+                multiple:
+                  forms: '{count} günüň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hepdäniň'
+                multiple:
+                  forms: '{count} hepdäniň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aýyň'
+                multiple:
+                  forms: '{count} aýyň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ýylyň'
+                multiple:
+                  forms: '{count} ýylyň'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekunda'
+                multiple:
+                  forms: '{count} millisekunda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunda'
+                multiple:
+                  forms: '{count} sekunda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuta'
+                multiple:
+                  forms: '{count} minuta'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sagada'
+                multiple:
+                  forms: '{count} sagada'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 güne'
+                multiple:
+                  forms: '{count} güne'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hepdä'
+                multiple:
+                  forms: '{count} hepdä'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aýa'
+                multiple:
+                  forms: '{count} aýa'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ýyla'
+                multiple:
+                  forms: '{count} ýyla'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekundy'
+                multiple:
+                  forms: '{count} millisekundy'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundy'
+                multiple:
+                  forms: '{count} sekundy'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minudy'
+                multiple:
+                  forms: '{count} minudy'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sagady'
+                multiple:
+                  forms: '{count} sagady'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 güni'
+                multiple:
+                  forms: '{count} güni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hepdäni'
+                multiple:
+                  forms: '{count} hepdäni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aýy'
+                multiple:
+                  forms: '{count} aýy'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ýyly'
+                multiple:
+                  forms: '{count} ýyly'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekuntda'
+                multiple:
+                  forms: '{count} millisekuntda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekuntda'
+                multiple:
+                  forms: '{count} sekuntda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutda'
+                multiple:
+                  forms: '{count} minutda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sagatda'
+                multiple:
+                  forms: '{count} sagatda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günde'
+                multiple:
+                  forms: '{count} günde'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hepdede'
+                multiple:
+                  forms: '{count} hepdede'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aýda'
+                multiple:
+                  forms: '{count} aýda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ýylda'
+                multiple:
+                  forms: '{count} ýylda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekuntdan'
+                multiple:
+                  forms: '{count} millisekuntdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekuntdan'
+                multiple:
+                  forms: '{count} sekuntdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutdan'
+                multiple:
+                  forms: '{count} minutdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sagatdan'
+                multiple:
+                  forms: '{count} sagatdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günden'
+                multiple:
+                  forms: '{count} günden'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 hepdeden'
+                multiple:
+                  forms: '{count} hepdeden'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aýdan'
+                multiple:
+                  forms: '{count} aýdan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ýyldan'
+                multiple:
+                  forms: '{count} ýyldan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

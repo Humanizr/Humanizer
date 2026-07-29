@@ -46,6 +46,12 @@ Pass grammar explicitly when the surrounding noun or sentence determines it.
 The default gender or case is a locale convention, not a guess about your
 domain text.
 
+On `main/preview`, `TimeSpan.HumanizeWithCase` applies case only to a bare
+duration phrase. It does not add a preposition and does not alter the separate
+relative-date or date-ordinal grammar paths. Singular duration forms may be
+complete locale-authored one-word or article phrases; counted forms may write
+the number explicitly or encode it in the unit form.
+
 ## Pitfall
 
 Not every grammatical option has a distinct natural form in every locale.
@@ -75,5 +81,6 @@ framework on which those types exist.
 
 - [Choose a culture](./using-cultures.mdx)
 - [Supported cultures and capabilities](./supported-cultures.mdx)
+- [Format durations and ages](../scenarios/durations-and-ages.mdx)
 - [Localization scenarios](../scenarios/localization-and-extensibility.mdx)
 - [Selected-version API reference](../api/index.md)

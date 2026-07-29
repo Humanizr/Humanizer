@@ -4,6 +4,282 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'accusative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/el.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'cldr48'
+            second:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'cldr48'
+            minute:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'cldr48'
+            hour:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'cldr48'
+            week:
+              sameRenderedAs: 'accusative'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 μήνας'
+                  words: 'ένας μήνας'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} μήνες'
+                    singular: '{count} μήνας'
+                    dual: '{count} μήνες'
+                    paucal: '{count} μήνες'
+                    plural: '{count} μήνες'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 έτος'
+                  words: 'ένα έτος'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} έτη'
+                    singular: '{count} έτος'
+                    dual: '{count} έτη'
+                    paucal: '{count} έτη'
+                    plural: '{count} έτη'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 χιλιοστού του δευτερολέπτου'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} χιλιοστών του δευτερολέπτου'
+                    singular: '{count} χιλιοστού του δευτερολέπτου'
+                    dual: '{count} χιλιοστών του δευτερολέπτου'
+                    paucal: '{count} χιλιοστών του δευτερολέπτου'
+                    plural: '{count} χιλιοστών του δευτερολέπτου'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 δευτερολέπτου'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} δευτερολέπτων'
+                    singular: '{count} δευτερολέπτου'
+                    dual: '{count} δευτερολέπτων'
+                    paucal: '{count} δευτερολέπτων'
+                    plural: '{count} δευτερολέπτων'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 λεπτού'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} λεπτών'
+                    singular: '{count} λεπτού'
+                    dual: '{count} λεπτών'
+                    paucal: '{count} λεπτών'
+                    plural: '{count} λεπτών'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ώρας'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ωρών'
+                    singular: '{count} ώρας'
+                    dual: '{count} ωρών'
+                    paucal: '{count} ωρών'
+                    plural: '{count} ωρών'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ημέρας'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ημερών'
+                    singular: '{count} ημέρας'
+                    dual: '{count} ημερών'
+                    paucal: '{count} ημερών'
+                    plural: '{count} ημερών'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 εβδομάδας'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} εβδομάδων'
+                    singular: '{count} εβδομάδας'
+                    dual: '{count} εβδομάδων'
+                    paucal: '{count} εβδομάδων'
+                    plural: '{count} εβδομάδων'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 μήνα'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} μηνών'
+                    singular: '{count} μήνα'
+                    dual: '{count} μηνών'
+                    paucal: '{count} μηνών'
+                    plural: '{count} μηνών'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 έτους'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ετών'
+                    singular: '{count} έτους'
+                    dual: '{count} ετών'
+                    paucal: '{count} ετών'
+                    plural: '{count} ετών'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 χιλιοστό του δευτερολέπτου'
+                  words: 'ένα χιλιοστό του δευτερολέπτου'
+                multiple:
+                  forms: '{count} χιλιοστά του δευτερολέπτου'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 δευτερόλεπτο'
+                  words: 'ένα δευτερόλεπτο'
+                multiple:
+                  forms: '{count} δευτερόλεπτα'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 λεπτό'
+                  words: 'ένα λεπτό'
+                multiple:
+                  forms: '{count} λεπτά'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ώρα'
+                  words: 'μία ώρα'
+                multiple:
+                  forms: '{count} ώρες'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 μέρα'
+                  words: 'μία μέρα'
+                multiple:
+                  forms: '{count} μέρες'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 βδομάδα'
+                  words: 'μία βδομάδα'
+                multiple:
+                  forms: '{count} βδομάδες'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 μήνα'
+                  words: 'έναν μήνα'
+                multiple:
+                  forms: '{count} μήνες'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 χρόνο'
+                  words: 'έναν χρόνο'
+                multiple:
+                  forms: '{count} χρόνια'
+                  countPlacement: none
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

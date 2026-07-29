@@ -55,6 +55,83 @@ public static class TimeSpanHumanizeExtensions
         => Configurator.TimeSpanHumanizeStrategy.Humanize(timeSpan, precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, toWords, false);
 
     /// <summary>
+    /// Turns a <see cref="TimeSpan"/> into a bare duration using locale-authored unit-case phrases.
+    /// No preposition is added.
+    /// </summary>
+    /// <param name="timeSpan">The time span to humanize.</param>
+    /// <param name="grammaticalCase">The grammatical case used to select each unit phrase.</param>
+    /// <param name="precision">The maximum number of time units to return.</param>
+    /// <param name="culture">Culture to use. If null, the current thread's culture is used.</param>
+    /// <param name="maxUnit">The maximum unit of time to output.</param>
+    /// <param name="minUnit">The minimum unit of time to output.</param>
+    /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
+    /// <returns>The locale-authored unit-case phrase. The count may be written explicitly or encoded by the unit form.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="grammaticalCase"/> is not defined.</exception>
+    /// <exception cref="NotSupportedException">The configured strategy, selected formatter, locale, or duration unit does not support the requested case.</exception>
+    public static string HumanizeWithCase(
+        this TimeSpan timeSpan,
+        GrammaticalCase grammaticalCase,
+        int precision = 1,
+        CultureInfo? culture = null,
+        TimeUnit maxUnit = TimeUnit.Week,
+        TimeUnit minUnit = TimeUnit.Millisecond,
+        string? collectionSeparator = ", ") =>
+        HumanizeWithCase(
+            timeSpan,
+            grammaticalCase,
+            precision,
+            false,
+            culture,
+            maxUnit,
+            minUnit,
+            collectionSeparator);
+
+    /// <summary>
+    /// Turns a <see cref="TimeSpan"/> into a bare duration using locale-authored unit-case phrases.
+    /// No preposition is added.
+    /// </summary>
+    /// <param name="timeSpan">The time span to humanize.</param>
+    /// <param name="grammaticalCase">The grammatical case used to select each unit phrase.</param>
+    /// <param name="precision">The maximum number of time units to return.</param>
+    /// <param name="countEmptyUnits">Whether empty time units count toward <paramref name="precision"/>.</param>
+    /// <param name="culture">Culture to use. If null, the current thread's culture is used.</param>
+    /// <param name="maxUnit">The maximum unit of time to output.</param>
+    /// <param name="minUnit">The minimum unit of time to output.</param>
+    /// <param name="collectionSeparator">The separator used to combine time parts. If null, the culture's default collection formatter is used.</param>
+    /// <returns>The locale-authored unit-case phrase. The count may be written explicitly or encoded by the unit form.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="grammaticalCase"/> is not defined.</exception>
+    /// <exception cref="NotSupportedException">The configured strategy, selected formatter, locale, or duration unit does not support the requested case.</exception>
+    public static string HumanizeWithCase(
+        this TimeSpan timeSpan,
+        GrammaticalCase grammaticalCase,
+        int precision,
+        bool countEmptyUnits,
+        CultureInfo? culture = null,
+        TimeUnit maxUnit = TimeUnit.Week,
+        TimeUnit minUnit = TimeUnit.Millisecond,
+        string? collectionSeparator = ", ")
+    {
+        ValidateGrammaticalCase(grammaticalCase);
+
+        if (Configurator.TimeSpanHumanizeStrategy is not IGrammaticalCaseTimeSpanHumanizeStrategy strategy)
+        {
+            throw new NotSupportedException(
+                $"The configured {nameof(ITimeSpanHumanizeStrategy)} does not support grammatical-case-aware durations.");
+        }
+
+        return strategy.Humanize(
+            timeSpan,
+            precision,
+            countEmptyUnits,
+            culture,
+            maxUnit,
+            minUnit,
+            collectionSeparator,
+            false,
+            grammaticalCase);
+    }
+
+    /// <summary>
     /// Turns a <see cref="TimeSpan"/> into a human readable form using localized unit symbols.
     /// </summary>
     /// <param name="timeSpan">The time span to humanize.</param>
@@ -328,7 +405,8 @@ public static class TimeSpanHumanizeExtensions
                     decimal.ToInt32(part.Value),
                     culture,
                     false,
-                    toSymbols));
+                    toSymbols,
+                    null));
                 continue;
             }
 
@@ -346,7 +424,8 @@ public static class TimeSpanHumanizeExtensions
                     SaturateToInt(part.Value),
                     culture,
                     false,
-                    toSymbols));
+                    toSymbols,
+                    null));
                 continue;
             }
 
@@ -517,13 +596,77 @@ public static class TimeSpanHumanizeExtensions
         string? collectionSeparator,
         bool toWords,
         bool toSymbols)
+        => DefaultHumanizeCore(
+            timeSpan,
+            precision,
+            countEmptyUnits,
+            culture,
+            maxUnit,
+            minUnit,
+            collectionSeparator,
+            toWords,
+            toSymbols,
+            null);
+
+    internal static string DefaultHumanizeWithCase(
+        TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        TimeUnit minUnit,
+        string? collectionSeparator,
+        bool toSymbols,
+        GrammaticalCase grammaticalCase)
+        => DefaultHumanizeCore(
+            timeSpan,
+            precision,
+            countEmptyUnits,
+            culture,
+            maxUnit,
+            minUnit,
+            collectionSeparator,
+            false,
+            toSymbols,
+            grammaticalCase);
+
+    static string DefaultHumanizeCore(
+        TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        TimeUnit minUnit,
+        string? collectionSeparator,
+        bool toWords,
+        bool toSymbols,
+        GrammaticalCase? grammaticalCase)
     {
-        if (precision == 1 && !countEmptyUnits)
+        if (grammaticalCase is { } requestedCase)
         {
-            return HumanizeSinglePart(timeSpan, culture, maxUnit, minUnit, toWords, toSymbols);
+            ValidateGrammaticalCase(requestedCase);
         }
 
-        var timeParts = CreatePrecisionLimitedTimeParts(timeSpan, culture, maxUnit, minUnit, precision, countEmptyUnits, toWords, toSymbols);
+        if (toSymbols && grammaticalCase is not null)
+        {
+            throw new NotSupportedException("Grammatical case is not supported for time-unit symbols.");
+        }
+
+        if (precision == 1 && !countEmptyUnits)
+        {
+            return HumanizeSinglePart(timeSpan, culture, maxUnit, minUnit, toWords, toSymbols, grammaticalCase);
+        }
+
+        var timeParts = CreatePrecisionLimitedTimeParts(
+            timeSpan,
+            culture,
+            maxUnit,
+            minUnit,
+            precision,
+            countEmptyUnits,
+            toWords,
+            toSymbols,
+            grammaticalCase);
 
         return ConcatenateTimeSpanParts(timeParts, culture, collectionSeparator);
     }
@@ -569,7 +712,8 @@ public static class TimeSpanHumanizeExtensions
         int precision,
         bool countEmptyUnits,
         bool toWords,
-        bool toSymbols)
+        bool toSymbols,
+        GrammaticalCase? grammaticalCase)
     {
         if (precision <= 0)
         {
@@ -583,7 +727,16 @@ public static class TimeSpanHumanizeExtensions
 
         foreach (var timeUnit in TimeUnits)
         {
-            var timePart = GetTimeUnitPart(timeUnit, timespan, maxUnit, minUnit, cultureFormatter, culture, toWords, toSymbols);
+            var timePart = GetTimeUnitPart(
+                timeUnit,
+                timespan,
+                maxUnit,
+                minUnit,
+                cultureFormatter,
+                culture,
+                toWords,
+                toSymbols,
+                grammaticalCase);
 
             if (timePart == null && !firstValueFound)
             {
@@ -616,11 +769,16 @@ public static class TimeSpanHumanizeExtensions
 
         if (timeParts.Count == 0)
         {
-            var noTimeValueCultureFormatted = toSymbols
-                ? FormatTimePart(cultureFormatter, minUnit, 0, culture, false, true)
-                : toWords
+            var noTimeValueCultureFormatted = grammaticalCase is null && toWords && !toSymbols
                     ? cultureFormatter.TimeSpanHumanize_Zero()
-                    : cultureFormatter.TimeSpanHumanize(minUnit, 0);
+                    : FormatTimePart(
+                        cultureFormatter,
+                        minUnit,
+                        0,
+                        culture,
+                        toWords,
+                        toSymbols,
+                        grammaticalCase);
             timeParts.Add(noTimeValueCultureFormatted);
         }
 
@@ -635,12 +793,20 @@ public static class TimeSpanHumanizeExtensions
         IFormatter cultureFormatter,
         CultureInfo? culture,
         bool toWords,
-        bool toSymbols)
+        bool toSymbols,
+        GrammaticalCase? grammaticalCase)
     {
         if (timeUnitToGet <= maximumTimeUnit && timeUnitToGet >= minimumTimeUnit)
         {
             var numberOfTimeUnits = GetTimeUnitNumericalValue(timeUnitToGet, timespan, maximumTimeUnit);
-            return BuildFormatTimePart(cultureFormatter, timeUnitToGet, numberOfTimeUnits, culture, toWords, toSymbols);
+            return BuildFormatTimePart(
+                cultureFormatter,
+                timeUnitToGet,
+                numberOfTimeUnits,
+                culture,
+                toWords,
+                toSymbols,
+                grammaticalCase);
         }
 
         return null;
@@ -719,40 +885,83 @@ public static class TimeSpanHumanizeExtensions
         int amountOfTimeUnits,
         CultureInfo? culture,
         bool toWords,
-        bool toSymbols) =>
+        bool toSymbols,
+        GrammaticalCase? grammaticalCase) =>
         // Always use positive units to account for negative timespans
         amountOfTimeUnits != 0
-            ? FormatTimePart(cultureFormatter, timeUnitType, Math.Abs(amountOfTimeUnits), culture, toWords, toSymbols)
+            ? FormatTimePart(
+                cultureFormatter,
+                timeUnitType,
+                Math.Abs(amountOfTimeUnits),
+                culture,
+                toWords,
+                toSymbols,
+                grammaticalCase)
             : null;
 
-    static string FormatTimePart(
+    internal static string FormatTimePart(
         IFormatter cultureFormatter,
         TimeUnit timeUnit,
         int amount,
         CultureInfo? culture,
         bool toWords,
-        bool toSymbols) =>
+        bool toSymbols,
+        GrammaticalCase? grammaticalCase) =>
         toSymbols
             ? string.Concat(amount.ToString(culture ?? CultureInfo.CurrentCulture), cultureFormatter.TimeUnitHumanize(timeUnit))
-            : cultureFormatter.TimeSpanHumanize(timeUnit, amount, toWords);
+            : grammaticalCase is null
+                ? cultureFormatter.TimeSpanHumanize(timeUnit, amount, toWords)
+                : cultureFormatter is IGrammaticalCaseTimeSpanFormatter caseFormatter
+                    ? caseFormatter.TimeSpanHumanize(timeUnit, amount, grammaticalCase.Value)
+                    : throw new NotSupportedException(
+                        $"The formatter for '{culture?.Name ?? CultureInfo.CurrentCulture.Name}' does not support grammatical-case-aware durations.");
 
-    static string HumanizeSinglePart(TimeSpan timeSpan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords, bool toSymbols)
+    static string HumanizeSinglePart(
+        TimeSpan timeSpan,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        TimeUnit minUnit,
+        bool toWords,
+        bool toSymbols,
+        GrammaticalCase? grammaticalCase)
     {
         var cultureFormatter = Configurator.GetFormatter(culture);
         foreach (var timeUnit in TimeUnits)
         {
-            var timePart = GetTimeUnitPart(timeUnit, timeSpan, maxUnit, minUnit, cultureFormatter, culture, toWords, toSymbols);
+            var timePart = GetTimeUnitPart(
+                timeUnit,
+                timeSpan,
+                maxUnit,
+                minUnit,
+                cultureFormatter,
+                culture,
+                toWords,
+                toSymbols,
+                grammaticalCase);
             if (timePart is not null)
             {
                 return timePart;
             }
         }
 
-        return toSymbols
-            ? FormatTimePart(cultureFormatter, minUnit, 0, culture, false, true)
-            : toWords
+        return grammaticalCase is null && toWords && !toSymbols
                 ? cultureFormatter.TimeSpanHumanize_Zero()
-                : cultureFormatter.TimeSpanHumanize(minUnit, 0);
+                : FormatTimePart(
+                    cultureFormatter,
+                    minUnit,
+                    0,
+                    culture,
+                    toWords,
+                    toSymbols,
+                    grammaticalCase);
+    }
+
+    static void ValidateGrammaticalCase(GrammaticalCase grammaticalCase)
+    {
+        if ((uint)grammaticalCase > (uint)GrammaticalCase.Causal)
+        {
+            throw new ArgumentOutOfRangeException(nameof(grammaticalCase), grammaticalCase, "Unsupported grammatical case.");
+        }
     }
 
     static string ConcatenateTimeSpanParts(List<string> timeSpanParts, CultureInfo? culture, string? collectionSeparator)

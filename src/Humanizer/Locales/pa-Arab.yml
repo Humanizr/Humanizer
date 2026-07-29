@@ -4,7 +4,118 @@ surfaces:
   inflection:
     cardinalRule: 'Punjabi'
     disposition: 'selector-only'
-
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - oblique
+      - ablative
+      - vocative
+    sources:
+      inventory:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Punjabi nominal nominative and oblique cases; CLDR does not declare Punjabi unit-case scope'
+        credit: 'Unicode CLDR contributors'
+      morphology:
+        kind: 'grammar'
+        url: 'https://aclanthology.org/Y10-1020.pdf'
+        revision: 'sha256:acd300f0c714e33fdb6dfe6dc4d1646b63b33181e32ab24fdb9e6c74dd3518f5'
+        locator: 'pp. 165 and 171, Shahmukhi noun paradigms; ablative is singular-only and unavailable for plurals'
+        credit: 'Muhammad Humayoun and Aarne Ranta'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      oblique:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ملی سیکنڈ'
+                multiple:
+                  forms: '{count} ملی سیکنڈاں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+            second:
+              phrase:
+                single:
+                  numeric: '1 سیکنڈ'
+                multiple:
+                  forms: '{count} سیکنڈاں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 منٹ'
+                multiple:
+                  forms: '{count} منٹاں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 گھنٹے'
+                multiple:
+                  forms: '{count} گھنٹیاں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+            day:
+              phrase:
+                single:
+                  numeric: '1 دن'
+                multiple:
+                  forms: '{count} دناں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ہفتے'
+                multiple:
+                  forms: '{count} ہفتیاں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+            month:
+              phrase:
+                single:
+                  numeric: '1 مہینے'
+                multiple:
+                  forms: '{count} مہینیاں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+            year:
+              phrase:
+                single:
+                  numeric: '1 سال'
+                multiple:
+                  forms: '{count} سالاں'
+                  countPlacement: none
+              provenance:
+                - 'morphology'
+        provenance:
+          - 'inventory'
+          - 'morphology'
+      ablative:
+        notApplicable: 'Punjabi has a vestigial singular morphological ablative, but no plural ablative noun form; plural source phrases require oblique plus an ablative postposition, outside this bare all-count API.'
+        provenance:
+          - 'morphology'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'morphology'
   list:
     engine: 'conjunction'
     value: 'اتے'

@@ -4,7 +4,239 @@ surfaces:
   inflection:
     cardinalRule: 'AmharicLike'
     disposition: 'selector-only'
-
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - accusative
+      - genitive
+      - locative
+    sources:
+      inventory:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Bengali nominal and unit case inventory'
+        credit: 'Unicode CLDR contributors'
+      morphology:
+        kind: 'grammar'
+        url: 'https://www.caluniv.ac.in/academic/Linguistics/DJ_Linguistics_23.pdf'
+        revision: 'sha256:de97948e29e679c224b8528f711aca8c910a66777624bc5ebae66adce4b0bc20'
+        locator: 'p. 95, Table 1: Standard Bangla inanimate accusative and case-marker inventory'
+        credit: 'Department of Linguistics, University of Calcutta'
+      unitLexemes:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/bn.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'lines 3254-3855 and 8210-8213: exact year, month, week, day, hour, minute, second, and millisecond duration stems'
+        credit: 'Unicode CLDR contributors'
+      allomorphy:
+        kind: 'grammar'
+        url: 'https://doi.org/10.1515/9781614512295'
+        revision: 'Anne Boyle David, Thomas J. Conners, and Dustin A. Chacón, Descriptive Grammar of Bangla, 2015'
+        locator: 'sections 5.3.2.1, pp. 63-65, genitive allomorphy; 5.3.4, p. 67, locative allomorphy'
+        credit: 'Anne Boyle David, Thomas J. Conners, and Dustin A. Chacón'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      accusative:
+        sameRenderedAs: 'nominative'
+        provenance:
+          - 'inventory'
+          - 'morphology'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 মিলিসেকেন্ডের'
+                multiple:
+                  forms: '{count} মিলিসেকেন্ডের'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            second:
+              phrase:
+                single:
+                  numeric: '1 সেকেন্ডের'
+                multiple:
+                  forms: '{count} সেকেন্ডের'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 মিনিটের'
+                multiple:
+                  forms: '{count} মিনিটের'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ঘণ্টার'
+                multiple:
+                  forms: '{count} ঘণ্টার'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            day:
+              phrase:
+                single:
+                  numeric: '1 দিনের'
+                multiple:
+                  forms: '{count} দিনের'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            week:
+              phrase:
+                single:
+                  numeric: '1 সপ্তাহের'
+                multiple:
+                  forms: '{count} সপ্তাহের'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            month:
+              phrase:
+                single:
+                  numeric: '1 মাসের'
+                multiple:
+                  forms: '{count} মাসের'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            year:
+              phrase:
+                single:
+                  numeric: '1 বছরের'
+                multiple:
+                  forms: '{count} বছরের'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+        provenance:
+          - 'inventory'
+          - 'unitLexemes'
+          - 'allomorphy'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 মিলিসেকেন্ডে'
+                multiple:
+                  forms: '{count} মিলিসেকেন্ডে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            second:
+              phrase:
+                single:
+                  numeric: '1 সেকেন্ডে'
+                multiple:
+                  forms: '{count} সেকেন্ডে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 মিনিটে'
+                multiple:
+                  forms: '{count} মিনিটে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ঘণ্টায়'
+                multiple:
+                  forms: '{count} ঘণ্টায়'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            day:
+              phrase:
+                single:
+                  numeric: '1 দিনে'
+                multiple:
+                  forms: '{count} দিনে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            week:
+              phrase:
+                single:
+                  numeric: '1 সপ্তাহে'
+                multiple:
+                  forms: '{count} সপ্তাহে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            month:
+              phrase:
+                single:
+                  numeric: '1 মাসে'
+                multiple:
+                  forms: '{count} মাসে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+            year:
+              phrase:
+                single:
+                  numeric: '1 বছরে'
+                multiple:
+                  forms: '{count} বছরে'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'allomorphy'
+        provenance:
+          - 'inventory'
+          - 'unitLexemes'
+          - 'allomorphy'
   list:
     engine: 'conjunction'
     value: 'ও'

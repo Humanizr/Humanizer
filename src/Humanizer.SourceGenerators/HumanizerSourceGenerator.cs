@@ -21,6 +21,11 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(localePhraseTables, static (productionContext, input) => input.Emit(productionContext));
 
+        var localeDurationCases = localeCatalog
+            .Select(static (catalog, _) => LocaleDurationCaseTableCatalogInput.Create(catalog));
+
+        context.RegisterSourceOutput(localeDurationCases, static (productionContext, input) => input.Emit(productionContext));
+
         var headingTables = localeCatalog
             .Select(static (catalog, _) => HeadingTableCatalogInput.Create(catalog));
 

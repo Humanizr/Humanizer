@@ -10,6 +10,8 @@ public partial class HumanizerSourceGeneratorTests
         const string parentLocale = """
 locale: 'zz-parent'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   list:
     engine: 'conjunction'
     pairTemplate: '{0} and {1}'
@@ -108,6 +110,8 @@ surfaces:
         const string locale = """
 locale: 'zz-scale'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   number:
     words:
       engine: 'scale-leading-compound'
@@ -278,6 +282,8 @@ surfaces:
         const string parentLocale = """
 locale: 'aa'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
@@ -302,6 +308,8 @@ variantOf: 'aa'
         const string locale = """
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   list:
     engine: 'conjunction'
     value: 'and'
@@ -318,11 +326,70 @@ surfaces:
     }
 
     [Fact]
+    public void DurationCasesRequireEveryRootToClassifyTheSurface()
+    {
+        const string locale = """
+locale: 'zz'
+surfaces:
+  inflection:
+    cardinalRule: 'Other'
+    disposition: 'selector-only'
+""";
+
+        var runResult = RunGenerator(
+            new InMemoryAdditionalText("src/Humanizer/Locales/zz.yml", locale));
+
+        Assert.Contains(
+            runResult.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains(
+                    "must classify the durationCases surface",
+                    StringComparison.Ordinal));
+        Assert.DoesNotContain(
+            runResult.GeneratedTrees,
+            static tree => tree.FilePath.EndsWith(
+                "LocaleDurationCaseTableCatalog.g.cs",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void DurationCaseTablesCarryTheEffectiveFormatterNumberDetector()
+    {
+        var source = GetGeneratedSource("LocaleDurationCaseTableCatalog.g.cs");
+        var hrStart = source.IndexOf("static class Locale_hr_cache", StringComparison.Ordinal);
+        var huStart = source.IndexOf("static LocaleDurationCaseTable Locale_hu", hrStart, StringComparison.Ordinal);
+
+        Assert.True(hrStart >= 0);
+        Assert.True(huStart > hrStart);
+        Assert.Contains(
+            "FormatterNumberDetectorKind.SouthSlavic",
+            source[hrStart..huStart],
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void DurationCaseTablesPreserveRequiredNamedFormsMatchingDefault()
+    {
+        var source = GetGeneratedSource("LocaleDurationCaseTableCatalog.g.cs");
+        var bsStart = source.IndexOf("static class Locale_bs_cache", StringComparison.Ordinal);
+        var caStart = source.IndexOf("static LocaleDurationCaseTable Locale_ca", bsStart, StringComparison.Ordinal);
+
+        Assert.True(bsStart >= 0);
+        Assert.True(caStart > bsStart);
+        Assert.Contains(
+            "new LocalizedPhraseForms(\"dana\", null, \"dan\", null, \"dana\"",
+            source[bsStart..caStart],
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void InflectionProfilesRequireEveryRootOnceTheFeatureIsEnabled()
     {
         const string enabledLocale = """
 locale: 'aa'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
@@ -330,6 +397,8 @@ surfaces:
         const string missingLocale = """
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   list:
     engine: 'conjunction'
     value: 'and'
@@ -374,6 +443,8 @@ surfaces:
         var locale = $$"""
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: '{{disposition}}'
@@ -394,6 +465,8 @@ surfaces:
         const string locale = """
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'lexicon'

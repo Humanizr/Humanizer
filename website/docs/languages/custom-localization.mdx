@@ -46,6 +46,13 @@ sealed class ProductFormatter(CultureInfo culture)
 The result is `just now`. Register the narrowest component that owns the
 behavior; do not replace a formatter merely to change number words.
 
+On `main/preview`, a custom formatter used by `HumanizeWithCase` must also
+implement `IGrammaticalCaseTimeSpanFormatter`. A custom global time-span
+strategy must implement `IGrammaticalCaseTimeSpanHumanizeStrategy`. Existing
+`IFormatter` and `ITimeSpanHumanizeStrategy` implementations continue to work
+for the existing duration APIs, but case-aware calls fail with
+`NotSupportedException` instead of silently using another locale.
+
 ## Pitfall
 
 In Humanizer `3.x` and `main/preview`, a `LocaliserRegistry` freezes on first
@@ -73,5 +80,6 @@ into a historical application.
 
 - [Culture and global configuration](../concepts/culture-and-configuration.mdx)
 - [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
+- [Format durations and ages](../scenarios/durations-and-ages.mdx)
 - [Grammar and platform formatting](./grammar-and-platform-formatting.mdx)
 - [Selected-version API reference](../api/index.md)

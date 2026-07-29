@@ -5,6 +5,141 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/nn.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekunds'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} millisekunds'
+                    singular: '{count} millisekunds'
+                    dual: '{count} millisekunds'
+                    paucal: '{count} millisekunds'
+                    plural: '{count} millisekunds'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunds'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekunds'
+                    singular: '{count} sekunds'
+                    dual: '{count} sekunds'
+                    paucal: '{count} sekunds'
+                    plural: '{count} sekunds'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutts'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutts'
+                    singular: '{count} minutts'
+                    dual: '{count} minutts'
+                    paucal: '{count} minutts'
+                    plural: '{count} minutts'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 times'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} timars'
+                    singular: '{count} times'
+                    dual: '{count} timars'
+                    paucal: '{count} timars'
+                    plural: '{count} timars'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 døgns'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} døgns'
+                    singular: '{count} døgns'
+                    dual: '{count} døgns'
+                    paucal: '{count} døgns'
+                    plural: '{count} døgns'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 vekes'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} vekers'
+                    singular: '{count} vekes'
+                    dual: '{count} vekers'
+                    paucal: '{count} vekers'
+                    plural: '{count} vekers'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 månads'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} månadars'
+                    singular: '{count} månads'
+                    dual: '{count} månadars'
+                    paucal: '{count} månadars'
+                    plural: '{count} månadars'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 års'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} års'
+                    singular: '{count} års'
+                    dual: '{count} års'
+                    paucal: '{count} års'
+                    plural: '{count} års'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   clock:
     hourOneWord: 'eit'

@@ -1014,6 +1014,37 @@ surfaces:
     }
 
     [Fact]
+    public void DurationCaseCoverageClassifiesEveryCheckedInLocale()
+    {
+        var coverage = HumanizerSourceGenerator.DurationCaseCoverageInput.Create(CreateCheckedInLocaleCatalog());
+        var german = coverage.Rows.Single(static locale => locale.Locale == "de");
+        var swissGerman = coverage.Rows.Single(static locale => locale.Locale == "de-CH");
+        var english = coverage.Rows.Single(static locale => locale.Locale == "en");
+        var nynorsk = coverage.Rows.Single(static locale => locale.Locale == "nn");
+        var azerbaijani = coverage.Rows.Single(static locale => locale.Locale == "az");
+
+        Assert.Equal(102, coverage.Rows.Length);
+        Assert.Equal("distinct", german.Classification);
+        Assert.Equal("same-language-inherited", swissGerman.Classification);
+        Assert.Equal("de", swissGerman.InheritedFrom);
+        Assert.Equal("not-applicable", english.Classification);
+        Assert.Equal("distinct", nynorsk.Classification);
+        Assert.Equal("distinct", azerbaijani.Classification);
+        Assert.Equal(57, coverage.Rows.Count(static locale => locale.Classification == "distinct"));
+        Assert.DoesNotContain(coverage.Rows, static locale => locale.Classification == "unsupported");
+        Assert.Equal(34, coverage.Rows.Count(static locale => locale.Classification == "not-applicable"));
+        Assert.Equal(11, coverage.Rows.Count(static locale => locale.Classification == "same-language-inherited"));
+        Assert.All(
+            coverage.Rows,
+            static locale => Assert.True(
+                locale.Classification is
+                    "distinct" or
+                    "invariant" or
+                    "not-applicable" or
+                    "same-language-inherited"));
+    }
+
+    [Fact]
     public void LocaleCoverageRejectsCanonicalCatalogDiagnostics()
     {
         var catalog = CreateCatalog(

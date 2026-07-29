@@ -4,6 +4,357 @@ surfaces:
   inflection:
     cardinalRule: 'Icelandic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/is.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekúndu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} millisekúndna'
+                    singular: '{count} millisekúndu'
+                    dual: '{count} millisekúndna'
+                    paucal: '{count} millisekúndna'
+                    plural: '{count} millisekúndna'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekúndu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekúndna'
+                    singular: '{count} sekúndu'
+                    dual: '{count} sekúndna'
+                    paucal: '{count} sekúndna'
+                    plural: '{count} sekúndna'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 mínútu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mínútna'
+                    singular: '{count} mínútu'
+                    dual: '{count} mínútna'
+                    paucal: '{count} mínútna'
+                    plural: '{count} mínútna'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 klukkustundar'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} klukkustunda'
+                    singular: '{count} klukkustundar'
+                    dual: '{count} klukkustunda'
+                    paucal: '{count} klukkustunda'
+                    plural: '{count} klukkustunda'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dags'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} daga'
+                    singular: '{count} dags'
+                    dual: '{count} daga'
+                    paucal: '{count} daga'
+                    plural: '{count} daga'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 viku'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} vikna'
+                    singular: '{count} viku'
+                    dual: '{count} vikna'
+                    paucal: '{count} vikna'
+                    plural: '{count} vikna'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mánaðar'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mánaða'
+                    singular: '{count} mánaðar'
+                    dual: '{count} mánaða'
+                    paucal: '{count} mánaða'
+                    plural: '{count} mánaða'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 árs'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ára'
+                    singular: '{count} árs'
+                    dual: '{count} ára'
+                    paucal: '{count} ára'
+                    plural: '{count} ára'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekúndu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} millisekúndum'
+                    singular: '{count} millisekúndu'
+                    dual: '{count} millisekúndum'
+                    paucal: '{count} millisekúndum'
+                    plural: '{count} millisekúndum'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekúndu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekúndum'
+                    singular: '{count} sekúndu'
+                    dual: '{count} sekúndum'
+                    paucal: '{count} sekúndum'
+                    plural: '{count} sekúndum'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 mínútu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mínútum'
+                    singular: '{count} mínútu'
+                    dual: '{count} mínútum'
+                    paucal: '{count} mínútum'
+                    plural: '{count} mínútum'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 klukkustund'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} klukkustundum'
+                    singular: '{count} klukkustund'
+                    dual: '{count} klukkustundum'
+                    paucal: '{count} klukkustundum'
+                    plural: '{count} klukkustundum'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 degi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dögum'
+                    singular: '{count} degi'
+                    dual: '{count} dögum'
+                    paucal: '{count} dögum'
+                    plural: '{count} dögum'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 viku'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} vikum'
+                    singular: '{count} viku'
+                    dual: '{count} vikum'
+                    paucal: '{count} vikum'
+                    plural: '{count} vikum'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mánuði'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mánuðum'
+                    singular: '{count} mánuði'
+                    dual: '{count} mánuðum'
+                    paucal: '{count} mánuðum'
+                    plural: '{count} mánuðum'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 ári'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} árum'
+                    singular: '{count} ári'
+                    dual: '{count} árum'
+                    paucal: '{count} árum'
+                    plural: '{count} árum'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 millisekúndu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} millisekúndur'
+                    singular: '{count} millisekúndu'
+                    dual: '{count} millisekúndur'
+                    paucal: '{count} millisekúndur'
+                    plural: '{count} millisekúndur'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekúndu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekúndur'
+                    singular: '{count} sekúndu'
+                    dual: '{count} sekúndur'
+                    paucal: '{count} sekúndur'
+                    plural: '{count} sekúndur'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 mínútu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mínútur'
+                    singular: '{count} mínútu'
+                    dual: '{count} mínútur'
+                    paucal: '{count} mínútur'
+                    plural: '{count} mínútur'
+              provenance:
+                - 'cldr48'
+            hour:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dag'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} daga'
+                    singular: '{count} dag'
+                    dual: '{count} daga'
+                    paucal: '{count} daga'
+                    plural: '{count} daga'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 viku'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} vikur'
+                    singular: '{count} viku'
+                    dual: '{count} vikur'
+                    paucal: '{count} vikur'
+                    plural: '{count} vikur'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mánuð'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mánuði'
+                    singular: '{count} mánuð'
+                    dual: '{count} mánuði'
+                    paucal: '{count} mánuði'
+                    plural: '{count} mánuði'
+              provenance:
+                - 'cldr48'
+            year:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

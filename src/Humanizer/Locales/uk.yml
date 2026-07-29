@@ -4,6 +4,573 @@ surfaces:
   inflection:
     cardinalRule: 'RussianUkrainian'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'locative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/uk.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекунди'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекунди'
+                    singular: '{count} мілісекунди'
+                    dual: '{count} мілісекунди'
+                    paucal: '{count} мілісекунд'
+                    plural: '{count} мілісекунд'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунди'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секунди'
+                    dual: '{count} секунди'
+                    paucal: '{count} секунд'
+                    plural: '{count} секунд'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвилини'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвилини'
+                    singular: '{count} хвилини'
+                    dual: '{count} хвилини'
+                    paucal: '{count} хвилин'
+                    plural: '{count} хвилин'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 години'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} години'
+                    singular: '{count} години'
+                    dual: '{count} години'
+                    paucal: '{count} годин'
+                    plural: '{count} годин'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дня'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дня'
+                    singular: '{count} дня'
+                    dual: '{count} дня'
+                    paucal: '{count} днів'
+                    plural: '{count} днів'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тижня'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тижня'
+                    singular: '{count} тижня'
+                    dual: '{count} тижня'
+                    paucal: '{count} тижнів'
+                    plural: '{count} тижнів'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 місяця'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} місяця'
+                    singular: '{count} місяця'
+                    dual: '{count} місяця'
+                    paucal: '{count} місяців'
+                    plural: '{count} місяців'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 року'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} року'
+                    singular: '{count} року'
+                    dual: '{count} року'
+                    paucal: '{count} років'
+                    plural: '{count} років'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекунді'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекунди'
+                    singular: '{count} мілісекунді'
+                    dual: '{count} мілісекунди'
+                    paucal: '{count} мілісекундам'
+                    plural: '{count} мілісекундам'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунді'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секунді'
+                    dual: '{count} секунди'
+                    paucal: '{count} секундам'
+                    plural: '{count} секундам'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвилині'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвилини'
+                    singular: '{count} хвилині'
+                    dual: '{count} хвилини'
+                    paucal: '{count} хвилинам'
+                    plural: '{count} хвилинам'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 годині'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} години'
+                    singular: '{count} годині'
+                    dual: '{count} години'
+                    paucal: '{count} годинам'
+                    plural: '{count} годинам'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дню'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дня'
+                    singular: '{count} дню'
+                    dual: '{count} дня'
+                    paucal: '{count} дням'
+                    plural: '{count} дням'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тижню'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тижня'
+                    singular: '{count} тижню'
+                    dual: '{count} тижня'
+                    paucal: '{count} тижням'
+                    plural: '{count} тижням'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 місяцю'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} місяця'
+                    singular: '{count} місяцю'
+                    dual: '{count} місяця'
+                    paucal: '{count} місяцям'
+                    plural: '{count} місяцям'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 року'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} року'
+                    singular: '{count} року'
+                    dual: '{count} року'
+                    paucal: '{count} рокам'
+                    plural: '{count} рокам'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекунди'
+                    singular: '{count} мілісекунду'
+                    dual: '{count} мілісекунди'
+                    paucal: '{count} мілісекунди'
+                    plural: '{count} мілісекунд'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секунду'
+                    dual: '{count} секунди'
+                    paucal: '{count} секунди'
+                    plural: '{count} секунд'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвилину'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвилини'
+                    singular: '{count} хвилину'
+                    dual: '{count} хвилини'
+                    paucal: '{count} хвилини'
+                    plural: '{count} хвилин'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 годину'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} години'
+                    singular: '{count} годину'
+                    dual: '{count} години'
+                    paucal: '{count} години'
+                    plural: '{count} годин'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            month:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            year:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекундою'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекунди'
+                    singular: '{count} мілісекундою'
+                    dual: '{count} мілісекунди'
+                    paucal: '{count} мілісекундами'
+                    plural: '{count} мілісекундами'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундою'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секундою'
+                    dual: '{count} секунди'
+                    paucal: '{count} секундами'
+                    plural: '{count} секундами'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвилиною'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвилини'
+                    singular: '{count} хвилиною'
+                    dual: '{count} хвилини'
+                    paucal: '{count} хвилинами'
+                    plural: '{count} хвилинами'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 годиною'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} години'
+                    singular: '{count} годиною'
+                    dual: '{count} години'
+                    paucal: '{count} годинами'
+                    plural: '{count} годинами'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 днем'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дня'
+                    singular: '{count} днем'
+                    dual: '{count} дня'
+                    paucal: '{count} днями'
+                    plural: '{count} днями'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тижнем'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тижня'
+                    singular: '{count} тижнем'
+                    dual: '{count} тижня'
+                    paucal: '{count} тижнями'
+                    plural: '{count} тижнями'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 місяцем'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} місяця'
+                    singular: '{count} місяцем'
+                    dual: '{count} місяця'
+                    paucal: '{count} місяцями'
+                    plural: '{count} місяцями'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 роком'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} року'
+                    singular: '{count} роком'
+                    dual: '{count} року'
+                    paucal: '{count} роками'
+                    plural: '{count} роками'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекунді'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекунди'
+                    singular: '{count} мілісекунді'
+                    dual: '{count} мілісекунди'
+                    paucal: '{count} мілісекундах'
+                    plural: '{count} мілісекундах'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунді'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунди'
+                    singular: '{count} секунді'
+                    dual: '{count} секунди'
+                    paucal: '{count} секундах'
+                    plural: '{count} секундах'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвилині'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвилини'
+                    singular: '{count} хвилині'
+                    dual: '{count} хвилини'
+                    paucal: '{count} хвилинах'
+                    plural: '{count} хвилинах'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 годині'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} години'
+                    singular: '{count} годині'
+                    dual: '{count} години'
+                    paucal: '{count} годинах'
+                    plural: '{count} годинах'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дні'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дня'
+                    singular: '{count} дні'
+                    dual: '{count} дня'
+                    paucal: '{count} днях'
+                    plural: '{count} днях'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тижні'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тижня'
+                    singular: '{count} тижні'
+                    dual: '{count} тижня'
+                    paucal: '{count} тижнях'
+                    plural: '{count} тижнях'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 місяці'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} місяця'
+                    singular: '{count} місяці'
+                    dual: '{count} місяця'
+                    paucal: '{count} місяцях'
+                    plural: '{count} місяцях'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 році'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} року'
+                    singular: '{count} році'
+                    dual: '{count} року'
+                    paucal: '{count} роках'
+                    plural: '{count} роках'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

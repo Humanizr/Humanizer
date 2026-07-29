@@ -41,6 +41,7 @@ public sealed partial class HumanizerSourceGenerator
         [
             "list",
             "formatter",
+            "durationCases",
             "phrases",
             "number",
             "ordinal",
@@ -146,6 +147,7 @@ public sealed partial class HumanizerSourceGenerator
                         foreach (var propertyName in new[]
                         {
                             "pluralRule",
+                            "casePluralRule",
                             "dataUnitPluralRule",
                             "dataUnitNonIntegralForm",
                             "prepositionMode",
@@ -164,6 +166,10 @@ public sealed partial class HumanizerSourceGenerator
                             features["grammar"] = new SimpleYamlMapping(grammar.ToImmutable());
                         }
 
+                        break;
+
+                    case "durationCases":
+                        features["durationCases"] = surfaceMapping;
                         break;
 
                     case "phrases":
@@ -544,6 +550,7 @@ public sealed partial class HumanizerSourceGenerator
             "collectionFormatter",
             "dateOnlyToOrdinalWords",
             "dateToOrdinalWords",
+            "durationCases",
             "formatter",
             "grammar",
             "headings",
@@ -592,6 +599,7 @@ public sealed partial class HumanizerSourceGenerator
 
             builder.AppendLine();
             builder.AppendLine("surfaces:");
+            AppendMigratedSurface(builder, "durationCases", root, "durationCases");
             AppendMigratedSurface(builder, "list", root, "collectionFormatter", isCollectionFormatter: true);
             AppendMigratedFormatterSurface(builder, root);
             AppendMigratedPhrasesSurface(builder, root);

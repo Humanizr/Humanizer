@@ -4,6 +4,694 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - oblique
+      - genitive
+      - accusative
+      - dative
+      - locative
+      - instrumental
+    sources:
+      inventory:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Telugu nominal and unit case inventory'
+        credit: 'Unicode CLDR contributors'
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/te.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Telugu duration roots and inflected long-unit forms'
+        credit: 'Unicode CLDR contributors'
+      brown:
+        kind: 'grammar'
+        url: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/A_Grammar_of_the_Telugu_Language_%28IA_grammaroftelugul0000brow%29.pdf'
+        revision: 'C. P. Brown, A Grammar of the Telugu Language'
+        locator: 'noun cases, pages 50 and following'
+        credit: 'C. P. Brown'
+      udTelugu:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Telugu-MTG/tree/4fa1e73fe368d3c784fc4f0d53e8beffe563b406'
+        revision: '4fa1e73fe368d3c784fc4f0d53e8beffe563b406' # DevSkim: ignore DS173237
+        locator: 'attested inflected Telugu duration lexemes'
+        credit: 'Universal Dependencies Telugu MTG contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      oblique:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 మిల్లీసెకను'
+                  words: 'ఒక మిల్లీసెకను'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} మిల్లీసెకన్ల'
+                    singular: '{count} మిల్లీసెకను'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            second:
+              phrase:
+                single:
+                  numeric: '1 సెకను'
+                  words: 'ఒక సెకను'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సెకన్ల'
+                    singular: '{count} సెకను'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 నిమిషం'
+                  words: 'ఒక నిమిషం'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నిమిషాల'
+                    singular: '{count} నిమిషం'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 గంట'
+                  words: 'ఒక గంట'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} గంటల'
+                    singular: '{count} గంట'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            day:
+              phrase:
+                single:
+                  numeric: '1 రోజు'
+                  words: 'ఒక రోజు'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} రోజుల'
+                    singular: '{count} రోజు'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            week:
+              phrase:
+                single:
+                  numeric: '1 వారం'
+                  words: 'ఒక వారం'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} వారాల'
+                    singular: '{count} వారం'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            month:
+              phrase:
+                single:
+                  numeric: '1 నెల'
+                  words: 'ఒక నెల'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నెలల'
+                    singular: '{count} నెల'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            year:
+              phrase:
+                single:
+                  numeric: '1 సంవత్సరం'
+                  words: 'ఒక సంవత్సరం'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సంవత్సరాల'
+                    singular: '{count} సంవత్సరం'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+        provenance:
+          - 'inventory'
+          - 'cldr48'
+          - 'brown'
+          - 'udTelugu'
+      genitive:
+        sameRenderedAs: 'oblique'
+        provenance:
+          - 'inventory'
+          - 'cldr48'
+          - 'brown'
+          - 'udTelugu'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 మిల్లీసెకనును'
+                  words: 'ఒక మిల్లీసెకనును'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} మిల్లీసెకన్లను'
+                    singular: '{count} మిల్లీసెకనును'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            second:
+              phrase:
+                single:
+                  numeric: '1 సెకనును'
+                  words: 'ఒక సెకనును'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సెకన్లను'
+                    singular: '{count} సెకనును'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 నిమిషాన్ని'
+                  words: 'ఒక నిమిషాన్ని'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నిమిషాలను'
+                    singular: '{count} నిమిషాన్ని'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 గంటను'
+                  words: 'ఒక గంటను'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} గంటలను'
+                    singular: '{count} గంటను'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            day:
+              phrase:
+                single:
+                  numeric: '1 రోజును'
+                  words: 'ఒక రోజును'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} రోజులను'
+                    singular: '{count} రోజును'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            week:
+              phrase:
+                single:
+                  numeric: '1 వారాన్ని'
+                  words: 'ఒక వారాన్ని'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} వారాలను'
+                    singular: '{count} వారాన్ని'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            month:
+              phrase:
+                single:
+                  numeric: '1 నెలను'
+                  words: 'ఒక నెలను'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నెలలను'
+                    singular: '{count} నెలను'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            year:
+              phrase:
+                single:
+                  numeric: '1 సంవత్సరాన్ని'
+                  words: 'ఒక సంవత్సరాన్ని'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సంవత్సరాలను'
+                    singular: '{count} సంవత్సరాన్ని'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+        provenance:
+          - 'inventory'
+          - 'cldr48'
+          - 'brown'
+          - 'udTelugu'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 మిల్లీసెకనుకు'
+                  words: 'ఒక మిల్లీసెకనుకు'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} మిల్లీసెకన్లకు'
+                    singular: '{count} మిల్లీసెకనుకు'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            second:
+              phrase:
+                single:
+                  numeric: '1 సెకనుకు'
+                  words: 'ఒక సెకనుకు'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సెకన్లకు'
+                    singular: '{count} సెకనుకు'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 నిమిషానికి'
+                  words: 'ఒక నిమిషానికి'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నిమిషాలకు'
+                    singular: '{count} నిమిషానికి'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 గంటకు'
+                  words: 'ఒక గంటకు'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} గంటలకు'
+                    singular: '{count} గంటకు'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            day:
+              phrase:
+                single:
+                  numeric: '1 రోజుకు'
+                  words: 'ఒక రోజుకు'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} రోజులకు'
+                    singular: '{count} రోజుకు'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            week:
+              phrase:
+                single:
+                  numeric: '1 వారానికి'
+                  words: 'ఒక వారానికి'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} వారాలకు'
+                    singular: '{count} వారానికి'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            month:
+              phrase:
+                single:
+                  numeric: '1 నెలకు'
+                  words: 'ఒక నెలకు'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నెలలకు'
+                    singular: '{count} నెలకు'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            year:
+              phrase:
+                single:
+                  numeric: '1 సంవత్సరానికి'
+                  words: 'ఒక సంవత్సరానికి'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సంవత్సరాలకు'
+                    singular: '{count} సంవత్సరానికి'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+        provenance:
+          - 'inventory'
+          - 'cldr48'
+          - 'brown'
+          - 'udTelugu'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 మిల్లీసెకనులో'
+                  words: 'ఒక మిల్లీసెకనులో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} మిల్లీసెకన్లలో'
+                    singular: '{count} మిల్లీసెకనులో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            second:
+              phrase:
+                single:
+                  numeric: '1 సెకనులో'
+                  words: 'ఒక సెకనులో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సెకన్లలో'
+                    singular: '{count} సెకనులో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 నిమిషంలో'
+                  words: 'ఒక నిమిషంలో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నిమిషాల్లో'
+                    singular: '{count} నిమిషంలో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 గంటలో'
+                  words: 'ఒక గంటలో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} గంటల్లో'
+                    singular: '{count} గంటలో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            day:
+              phrase:
+                single:
+                  numeric: '1 రోజులో'
+                  words: 'ఒక రోజులో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} రోజుల్లో'
+                    singular: '{count} రోజులో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            week:
+              phrase:
+                single:
+                  numeric: '1 వారంలో'
+                  words: 'ఒక వారంలో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} వారాల్లో'
+                    singular: '{count} వారంలో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            month:
+              phrase:
+                single:
+                  numeric: '1 నెలలో'
+                  words: 'ఒక నెలలో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నెలల్లో'
+                    singular: '{count} నెలలో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            year:
+              phrase:
+                single:
+                  numeric: '1 సంవత్సరంలో'
+                  words: 'ఒక సంవత్సరంలో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సంవత్సరాల్లో'
+                    singular: '{count} సంవత్సరంలో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+        provenance:
+          - 'inventory'
+          - 'cldr48'
+          - 'brown'
+          - 'udTelugu'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 మిల్లీసెకనుతో'
+                  words: 'ఒక మిల్లీసెకనుతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} మిల్లీసెకన్లతో'
+                    singular: '{count} మిల్లీసెకనుతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            second:
+              phrase:
+                single:
+                  numeric: '1 సెకనుతో'
+                  words: 'ఒక సెకనుతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సెకన్లతో'
+                    singular: '{count} సెకనుతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 నిమిషంతో'
+                  words: 'ఒక నిమిషంతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నిమిషాలతో'
+                    singular: '{count} నిమిషంతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 గంటతో'
+                  words: 'ఒక గంటతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} గంటలతో'
+                    singular: '{count} గంటతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            day:
+              phrase:
+                single:
+                  numeric: '1 రోజుతో'
+                  words: 'ఒక రోజుతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} రోజులతో'
+                    singular: '{count} రోజుతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            week:
+              phrase:
+                single:
+                  numeric: '1 వారంతో'
+                  words: 'ఒక వారంతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} వారాలతో'
+                    singular: '{count} వారంతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            month:
+              phrase:
+                single:
+                  numeric: '1 నెలతో'
+                  words: 'ఒక నెలతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} నెలలతో'
+                    singular: '{count} నెలతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+            year:
+              phrase:
+                single:
+                  numeric: '1 సంవత్సరంతో'
+                  words: 'ఒక సంవత్సరంతో'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} సంవత్సరాలతో'
+                    singular: '{count} సంవత్సరంతో'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+                - 'brown'
+                - 'udTelugu'
+        provenance:
+          - 'inventory'
+          - 'cldr48'
+          - 'brown'
+          - 'udTelugu'
 
   list:
     engine: 'conjunction'

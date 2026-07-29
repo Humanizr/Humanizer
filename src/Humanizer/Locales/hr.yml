@@ -4,6 +4,449 @@ surfaces:
   inflection:
     cardinalRule: 'SouthSlavic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'accusative'
+      - 'instrumental'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/hr.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunda'
+                  words: 'jedna milisekunda'
+                multiple:
+                  forms:
+                    default: 'milisekundi'
+                    singular: 'milisekunda'
+                    dual: 'milisekunde'
+                    paucal: 'milisekunde'
+                    plural: 'milisekunde'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunda'
+                  words: 'jedna sekunda'
+                multiple:
+                  forms:
+                    default: 'sekundi'
+                    singular: 'sekunda'
+                    dual: 'sekunde'
+                    paucal: 'sekunde'
+                    plural: 'sekunde'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuta'
+                  words: 'jedna minuta'
+                multiple:
+                  forms:
+                    default: 'minuta'
+                    singular: 'minuta'
+                    dual: 'minute'
+                    paucal: 'minute'
+                    plural: 'minute'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sat'
+                  words: 'jedan sat'
+                multiple:
+                  forms:
+                    default: 'sati'
+                    singular: 'sat'
+                    dual: 'sata'
+                    paucal: 'sata'
+                    plural: 'sata'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dan'
+                  words: 'jedan dan'
+                multiple:
+                  forms:
+                    default: 'dana'
+                    singular: 'dan'
+                    paucal: 'dana'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 tjedan'
+                  words: 'jedan tjedan'
+                multiple:
+                  forms:
+                    default: 'tjedana'
+                    singular: 'tjedan'
+                    dual: 'tjedna'
+                    paucal: 'tjedna'
+                    plural: 'tjedna'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjesec'
+                  words: 'jedan mjesec'
+                multiple:
+                  forms:
+                    default: 'mjeseci'
+                    singular: 'mjesec'
+                    dual: 'mjeseca'
+                    paucal: 'mjeseca'
+                    plural: 'mjeseca'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godina'
+                  words: 'jedna godina'
+                multiple:
+                  forms:
+                    default: 'godina'
+                    singular: 'godina'
+                    dual: 'godine'
+                    paucal: 'godine'
+                    plural: 'godine'
+
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundi'
+                    singular: '{count} milisekunde'
+                    dual: '{count} milisekundi'
+                    paucal: '{count} milisekunde'
+                    plural: '{count} milisekundi'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundi'
+                    singular: '{count} sekunde'
+                    dual: '{count} sekundi'
+                    paucal: '{count} sekunde'
+                    plural: '{count} sekundi'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minute'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minuta'
+                    singular: '{count} minute'
+                    dual: '{count} minuta'
+                    paucal: '{count} minute'
+                    plural: '{count} minuta'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sata'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sati'
+                    singular: '{count} sata'
+                    dual: '{count} sati'
+                    paucal: '{count} sata'
+                    plural: '{count} sati'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dana'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dana'
+                    singular: '{count} dana'
+                    dual: '{count} dana'
+                    paucal: '{count} dana'
+                    plural: '{count} dana'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 tjedna'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} tjedana'
+                    singular: '{count} tjedna'
+                    dual: '{count} tjedana'
+                    paucal: '{count} tjedna'
+                    plural: '{count} tjedana'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjeseca'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mjeseci'
+                    singular: '{count} mjeseca'
+                    dual: '{count} mjeseci'
+                    paucal: '{count} mjeseca'
+                    plural: '{count} mjeseci'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godine'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} godina'
+                    singular: '{count} godine'
+                    dual: '{count} godina'
+                    paucal: '{count} godine'
+                    plural: '{count} godina'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundi'
+                    singular: '{count} milisekundu'
+                    dual: '{count} milisekundi'
+                    paucal: '{count} milisekunde'
+                    plural: '{count} milisekundi'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundi'
+                    singular: '{count} sekundu'
+                    dual: '{count} sekundi'
+                    paucal: '{count} sekunde'
+                    plural: '{count} sekundi'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minuta'
+                    singular: '{count} minutu'
+                    dual: '{count} minuta'
+                    paucal: '{count} minute'
+                    plural: '{count} minuta'
+              provenance:
+                - 'cldr48'
+            hour:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            day:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            week:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            month:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godinu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} godina'
+                    singular: '{count} godinu'
+                    dual: '{count} godina'
+                    paucal: '{count} godine'
+                    plural: '{count} godina'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundi'
+                    singular: '{count} milisekundom'
+                    dual: '{count} milisekunde'
+                    paucal: '{count} milisekunde'
+                    plural: '{count} milisekunde'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundi'
+                    singular: '{count} sekundom'
+                    dual: '{count} sekunde'
+                    paucal: '{count} sekunde'
+                    plural: '{count} sekunde'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minuta'
+                    singular: '{count} minutom'
+                    dual: '{count} minute'
+                    paucal: '{count} minute'
+                    plural: '{count} minute'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 satom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sati'
+                    singular: '{count} satom'
+                    dual: '{count} sata'
+                    paucal: '{count} sata'
+                    plural: '{count} sata'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 danom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dana'
+                    singular: '{count} danom'
+                    dual: '{count} dana'
+                    paucal: '{count} dana'
+                    plural: '{count} dana'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 tjednom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} tjedana'
+                    singular: '{count} tjednom'
+                    dual: '{count} tjedna'
+                    paucal: '{count} tjedna'
+                    plural: '{count} tjedna'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjesecom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mjeseci'
+                    singular: '{count} mjesecom'
+                    dual: '{count} mjeseca'
+                    paucal: '{count} mjeseca'
+                    plural: '{count} mjeseca'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godinom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} godina'
+                    singular: '{count} godinom'
+                    dual: '{count} godine'
+                    paucal: '{count} godine'
+                    plural: '{count} godine'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'
@@ -11,6 +454,7 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    casePluralRule: 'south-slavic'
     resourceKeyDetector: 'south-slavic'
     resourceKeySuffixes:
       paucal: '_Paucal'

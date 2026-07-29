@@ -4,7 +4,137 @@ surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
-
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - oblique
+    sources:
+      inventory:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Urdu nominative/oblique inventory and unit-case scope'
+        credit: 'Unicode CLDR contributors'
+      unitGrammar:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ur.xml#L7244-L7263'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'duration-minute, duration-second, and duration-millisecond are masculine; short-unit data at lines 8489-8504 supplies exact base lexemes منٹ, سیکنڈ, and ملی سیکنڈ'
+        credit: 'Unicode CLDR contributors'
+      morphology:
+        kind: 'grammar'
+        url: 'https://urdu.la.utexas.edu/wp-content/uploads/sites/10/2022/12/Plurality-in-Urdu-UT-Urdu-OER.pdf'
+        revision: 'sha256:5240fdca93db56731e39f77ccbc37c9446de813cf8a514cf4fdb88475d993f02'
+        locator: 'pp. 1-3: marked/unmarked oblique rules and the explicit-number time-word exception'
+        credit: 'Gregory M. Bruce, University of Texas at Austin Urdu OER'
+      corpus:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Urdu-UDTB/tree/3c84e48ec137908b3fdf24afb6e5a31201c43bf0'
+        revision: '3c84e48ec137908b3fdf24afb6e5a31201c43bf0' # DevSkim: ignore DS173237
+        locator: 'Attested duration forms دنوں, سالوں, مہینوں, گھنٹوں, ہفتوں and singular oblique forms'
+        credit: 'Universal Dependencies Urdu UDTB contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      oblique:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ملی سیکنڈ'
+                multiple:
+                  forms: '{count} ملی سیکنڈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitGrammar'
+                - 'morphology'
+            second:
+              phrase:
+                single:
+                  numeric: '1 سیکنڈ'
+                multiple:
+                  forms: '{count} سیکنڈ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitGrammar'
+                - 'morphology'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 منٹ'
+                multiple:
+                  forms: '{count} منٹ'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitGrammar'
+                - 'morphology'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 گھنٹے'
+                multiple:
+                  forms: '{count} گھنٹے'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'morphology'
+                - 'corpus'
+            day:
+              phrase:
+                single:
+                  numeric: '1 دن'
+                multiple:
+                  forms: '{count} دن'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'morphology'
+                - 'corpus'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ہفتے'
+                multiple:
+                  forms: '{count} ہفتے'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'morphology'
+                - 'corpus'
+            month:
+              phrase:
+                single:
+                  numeric: '1 مہینے'
+                multiple:
+                  forms: '{count} مہینے'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'morphology'
+                - 'corpus'
+            year:
+              phrase:
+                single:
+                  numeric: '1 سال'
+                multiple:
+                  forms: '{count} سال'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'morphology'
+                - 'corpus'
+        provenance:
+          - 'inventory'
+          - 'morphology'
+          - 'corpus'
   list:
     engine: 'conjunction'
     value: 'اور'

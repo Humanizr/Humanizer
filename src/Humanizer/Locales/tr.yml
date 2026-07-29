@@ -4,6 +4,575 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'locative'
+      - 'ablative'
+      - 'equative'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://raw.githubusercontent.com/UniversalDependencies/docs/44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9/_tr/feat/Case.md'
+        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9' # DevSkim: ignore DS173237
+        locator: 'Turkish case suffix classes'
+        credit: 'Universal Dependencies contributors'
+      equative:
+        kind: 'grammar'
+        url: 'https://dergipark.org.tr/tr/download/article-file/396112'
+        revision: '2017'
+        locator: 'productive +CA equative with amount and duration use'
+        credit: 'DergiPark article contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisaniyenin'
+                multiple:
+                  forms: '{count} milisaniyenin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyenin'
+                multiple:
+                  forms: '{count} saniyenin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dakikanın'
+                multiple:
+                  forms: '{count} dakikanın'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatin'
+                multiple:
+                  forms: '{count} saatin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günün'
+                multiple:
+                  forms: '{count} günün'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftanın'
+                multiple:
+                  forms: '{count} haftanın'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayın'
+                multiple:
+                  forms: '{count} ayın'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yılın'
+                multiple:
+                  forms: '{count} yılın'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisaniyeye'
+                multiple:
+                  forms: '{count} milisaniyeye'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyeye'
+                multiple:
+                  forms: '{count} saniyeye'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dakikaya'
+                multiple:
+                  forms: '{count} dakikaya'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saate'
+                multiple:
+                  forms: '{count} saate'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 güne'
+                multiple:
+                  forms: '{count} güne'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftaya'
+                multiple:
+                  forms: '{count} haftaya'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aya'
+                multiple:
+                  forms: '{count} aya'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yıla'
+                multiple:
+                  forms: '{count} yıla'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisaniyeyi'
+                multiple:
+                  forms: '{count} milisaniyeyi'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyeyi'
+                multiple:
+                  forms: '{count} saniyeyi'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dakikayı'
+                multiple:
+                  forms: '{count} dakikayı'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saati'
+                multiple:
+                  forms: '{count} saati'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günü'
+                multiple:
+                  forms: '{count} günü'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftayı'
+                multiple:
+                  forms: '{count} haftayı'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayı'
+                multiple:
+                  forms: '{count} ayı'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yılı'
+                multiple:
+                  forms: '{count} yılı'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisaniyeyle'
+                multiple:
+                  forms: '{count} milisaniyeyle'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyeyle'
+                multiple:
+                  forms: '{count} saniyeyle'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dakikayla'
+                multiple:
+                  forms: '{count} dakikayla'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatle'
+                multiple:
+                  forms: '{count} saatle'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günle'
+                multiple:
+                  forms: '{count} günle'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftayla'
+                multiple:
+                  forms: '{count} haftayla'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayla'
+                multiple:
+                  forms: '{count} ayla'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yılla'
+                multiple:
+                  forms: '{count} yılla'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisaniyede'
+                multiple:
+                  forms: '{count} milisaniyede'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyede'
+                multiple:
+                  forms: '{count} saniyede'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dakikada'
+                multiple:
+                  forms: '{count} dakikada'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatte'
+                multiple:
+                  forms: '{count} saatte'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günde'
+                multiple:
+                  forms: '{count} günde'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftada'
+                multiple:
+                  forms: '{count} haftada'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayda'
+                multiple:
+                  forms: '{count} ayda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yılda'
+                multiple:
+                  forms: '{count} yılda'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisaniyeden'
+                multiple:
+                  forms: '{count} milisaniyeden'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyeden'
+                multiple:
+                  forms: '{count} saniyeden'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dakikadan'
+                multiple:
+                  forms: '{count} dakikadan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatten'
+                multiple:
+                  forms: '{count} saatten'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günden'
+                multiple:
+                  forms: '{count} günden'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftadan'
+                multiple:
+                  forms: '{count} haftadan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 aydan'
+                multiple:
+                  forms: '{count} aydan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yıldan'
+                multiple:
+                  forms: '{count} yıldan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      equative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisaniyece'
+                multiple:
+                  forms: '{count} milisaniyece'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+            second:
+              phrase:
+                single:
+                  numeric: '1 saniyece'
+                multiple:
+                  forms: '{count} saniyece'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 dakikaca'
+                multiple:
+                  forms: '{count} dakikaca'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 saatçe'
+                multiple:
+                  forms: '{count} saatçe'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+            day:
+              phrase:
+                single:
+                  numeric: '1 günce'
+                multiple:
+                  forms: '{count} günce'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+            week:
+              phrase:
+                single:
+                  numeric: '1 haftaca'
+                multiple:
+                  forms: '{count} haftaca'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+            month:
+              phrase:
+                single:
+                  numeric: '1 ayca'
+                multiple:
+                  forms: '{count} ayca'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+            year:
+              phrase:
+                single:
+                  numeric: '1 yılca'
+                multiple:
+                  forms: '{count} yılca'
+                  countPlacement: none
+              provenance:
+                - 'equative'
+        provenance:
+          - 'equative'
 
   list:
     engine: 'conjunction'

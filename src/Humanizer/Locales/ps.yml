@@ -4,7 +4,228 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
-
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - oblique
+      - ablative
+      - locative
+      - genitive
+      - vocative
+    sources:
+      inventory:
+        kind: 'grammar'
+        url: 'https://github.com/UniversalDependencies/docs/blob/44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9/_ps/feat/Case.md'
+        revision: '44f7cd2edacc6ef2e38b7f9ef5435907fe4efcf9' # DevSkim: ignore DS173237
+        locator: 'lines 94-150: productive Oblique I and Oblique II/Ablative rules'
+        credit: 'Universal Dependencies Pashto contributors'
+      unitLexemes:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ps.xml#L6698-L6750'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long and short duration lines 6698-6750 and 7867-7919: exact year, month, week, hour, minute, second, and composed millisecond unit forms'
+        credit: 'Unicode CLDR contributors'
+      lexemes:
+        kind: 'corpus'
+        url: 'https://doi.org/10.5281/zenodo.17487678'
+        revision: 'Open Pashto-English Dictionary XML, SHA256 084646f7f34df58d3869b8c5559487ea76506813c647ef3ab67437c2bd7e9f0a'
+        locator: 'Duration headwords: اونۍ id 7869, ثانيه id 16238, دقيقه id 22030, ساعت id 25666, کال id 30729, ورځ id 36643, مياشت id 38791; کال lists oblique plurals کالو/کلو'
+        credit: 'Open Pashto-English Dictionary contributors'
+      corpus:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Pashto-Prince/blob/388c86dcf6e504edc5d53fa209ae783b2514c443/ps_prince-ud-test.conllu#L1-L13'
+        revision: '388c86dcf6e504edc5d53fa209ae783b2514c443' # DevSkim: ignore DS173237
+        locator: 'ps_prince-ud-test.conllu lines 1-13: شپږو کالو; lines 110-124: شپږ میاشتې; lines 764-790: شپږ کاله وړاندې'
+        credit: 'Universal Dependencies Pashto Prince contributors'
+      orthography:
+        kind: 'grammar'
+        url: 'https://doi.org/10.1515/9781614512318'
+        revision: 'Anne David, A Descriptive Grammar of Pashto and its Dialects, 2014'
+        locator: 'section 3.2.1.2, p. 17: ی and ي orthographic variants do not change pronunciation'
+        credit: 'Anne David'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'inventory'
+      oblique:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 ملي ثانیې'
+                multiple:
+                  forms: '{count} ملي ثانیو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            second:
+              phrase:
+                single:
+                  numeric: '1 ثانیې'
+                multiple:
+                  forms: '{count} ثانیو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 دقیقې'
+                multiple:
+                  forms: '{count} دقیقو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ساعت'
+                multiple:
+                  forms: '{count} ساعتونو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ورځې'
+                multiple:
+                  forms: '{count} ورځو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            week:
+              phrase:
+                single:
+                  numeric: '1 اونۍ'
+                multiple:
+                  forms: '{count} اونیو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            month:
+              phrase:
+                single:
+                  numeric: '1 میاشتې'
+                multiple:
+                  forms: '{count} میاشتو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            year:
+              phrase:
+                single:
+                  numeric: '1 کال'
+                multiple:
+                  forms: '{count} کالو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+        provenance:
+          - 'inventory'
+          - 'unitLexemes'
+          - 'lexemes'
+          - 'corpus'
+          - 'orthography'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'oblique'
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            second:
+              sameRenderedAs: 'oblique'
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            minute:
+              sameRenderedAs: 'oblique'
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ساعته'
+                multiple:
+                  forms: '{count} ساعتونو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            day:
+              sameRenderedAs: 'oblique'
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            week:
+              sameRenderedAs: 'oblique'
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            month:
+              sameRenderedAs: 'oblique'
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+            year:
+              phrase:
+                single:
+                  numeric: '1 کاله'
+                multiple:
+                  forms: '{count} کالو'
+                  countPlacement: none
+              provenance:
+                - 'inventory'
+                - 'unitLexemes'
+                - 'lexemes'
+        provenance:
+          - 'inventory'
+          - 'unitLexemes'
+          - 'lexemes'
+          - 'corpus'
+          - 'orthography'
+      locative:
+        notApplicable: 'Pashto locative duration marking requires an adposition absent from a bare phrase.'
+        provenance:
+          - 'inventory'
+      genitive:
+        notApplicable: 'The cited Pashto inventory does not define an independent bare-noun genitive duration form.'
+        provenance:
+          - 'inventory'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - 'inventory'
   list:
     engine: 'conjunction'
     value: 'او'

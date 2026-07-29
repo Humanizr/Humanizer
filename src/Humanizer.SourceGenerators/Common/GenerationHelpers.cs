@@ -210,6 +210,28 @@ public sealed partial class HumanizerSourceGenerator
             ? property.GetString()
             : null;
 
+    static string? GetExplicitDurationCaseNumberDetector(ResolvedLocaleDefinition locale)
+    {
+        if (locale.Formatter is not { } formatter)
+        {
+            return null;
+        }
+
+        return GetOptionalString(formatter.ProfileRoot, "casePluralRule");
+    }
+
+    static string? GetDurationCaseNumberDetector(ResolvedLocaleDefinition locale)
+    {
+        if (locale.Formatter is not { } formatter)
+        {
+            return null;
+        }
+
+        return GetExplicitDurationCaseNumberDetector(locale)
+            ?? GetOptionalString(formatter.ProfileRoot, "pluralRule")
+            ?? GetOptionalString(formatter.ProfileRoot, "resourceKeyDetector");
+    }
+
     static bool GetBoolean(JsonElement element, string propertyName) =>
         element.TryGetProperty(propertyName, out var valueElement) &&
         valueElement.ValueKind == JsonValueKind.True;

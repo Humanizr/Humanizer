@@ -4,6 +4,608 @@ surfaces:
   inflection:
     cardinalRule: 'SouthSlavic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - genitive
+      - dative
+      - accusative
+      - vocative
+      - instrumental
+      - locative
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/bs.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit nominative patterns'
+        credit: 'Unicode CLDR contributors'
+      inventory:
+        kind: 'grammar'
+        url: 'https://untz.ba/wp-content/uploads/2021/02/BOSANSKI_JEZIK_2018.pdf'
+        revision: 'sha256:ca34fbff0dd844a0592dc65839d2df8dd32428554d5e304b0646d08f935422c4'
+        locator: 'pp. 17-26, Zavisna brojcana kvalifikacija'
+        credit: 'Sedina Brkic-Mededovic, University of Tuzla'
+    cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunda'
+                  words: 'jedna milisekunda'
+                multiple:
+                  forms:
+                    default: 'milisekundi'
+                    singular: 'milisekunda'
+                    paucal: 'milisekunde'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunda'
+                  words: 'jedna sekunda'
+                multiple:
+                  forms:
+                    default: 'sekundi'
+                    singular: 'sekunda'
+                    paucal: 'sekunde'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuta'
+                  words: 'jedna minuta'
+                multiple:
+                  forms:
+                    default: 'minuta'
+                    singular: 'minuta'
+                    paucal: 'minute'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sat'
+                  words: 'jedan sat'
+                multiple:
+                  forms:
+                    default: 'sati'
+                    singular: 'sat'
+                    paucal: 'sata'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dan'
+                  words: 'jedan dan'
+                multiple:
+                  forms:
+                    default: 'dana'
+                    singular: 'dan'
+                    paucal: 'dana'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 sedmica'
+                  words: 'jedna sedmica'
+                multiple:
+                  forms:
+                    default: 'sedmica'
+                    singular: 'sedmica'
+                    paucal: 'sedmice'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjesec'
+                  words: 'jedan mjesec'
+                multiple:
+                  forms:
+                    default: 'mjeseci'
+                    singular: 'mjesec'
+                    paucal: 'mjeseca'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godina'
+                  words: 'jedna godina'
+                multiple:
+                  forms:
+                    default: 'godina'
+                    singular: 'godina'
+                    paucal: 'godine'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundi'
+                    singular: '{count} milisekunde'
+                    dual: '{count} milisekundi'
+                    paucal: '{count} milisekundi'
+                    plural: '{count} milisekundi'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekunde'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundi'
+                    singular: '{count} sekunde'
+                    dual: '{count} sekundi'
+                    paucal: '{count} sekundi'
+                    plural: '{count} sekundi'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minute'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minuta'
+                    singular: '{count} minute'
+                    dual: '{count} minuta'
+                    paucal: '{count} minuta'
+                    plural: '{count} minuta'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sata'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sati'
+                    singular: '{count} sata'
+                    dual: '{count} sati'
+                    paucal: '{count} sati'
+                    plural: '{count} sati'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dana'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dana'
+                    singular: '{count} dana'
+                    dual: '{count} dana'
+                    paucal: '{count} dana'
+                    plural: '{count} dana'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 sedmice'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sedmica'
+                    singular: '{count} sedmice'
+                    dual: '{count} sedmica'
+                    paucal: '{count} sedmica'
+                    plural: '{count} sedmica'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjeseca'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mjeseci'
+                    singular: '{count} mjeseca'
+                    dual: '{count} mjeseci'
+                    paucal: '{count} mjeseci'
+                    plural: '{count} mjeseci'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godine'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} godina'
+                    singular: '{count} godine'
+                    dual: '{count} godina'
+                    paucal: '{count} godina'
+                    plural: '{count} godina'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundama'
+                    singular: '{count} milisekundi'
+                    dual: '{count} milisekundama'
+                    paucal: '{count} milisekundama'
+                    plural: '{count} milisekundama'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundi'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundama'
+                    singular: '{count} sekundi'
+                    dual: '{count} sekundama'
+                    paucal: '{count} sekundama'
+                    plural: '{count} sekundama'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuti'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutama'
+                    singular: '{count} minuti'
+                    dual: '{count} minutama'
+                    paucal: '{count} minutama'
+                    plural: '{count} minutama'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 satu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} satima'
+                    singular: '{count} satu'
+                    dual: '{count} satima'
+                    paucal: '{count} satima'
+                    plural: '{count} satima'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 danu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} danima'
+                    singular: '{count} danu'
+                    dual: '{count} danima'
+                    paucal: '{count} danima'
+                    plural: '{count} danima'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 sedmici'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sedmicama'
+                    singular: '{count} sedmici'
+                    dual: '{count} sedmicama'
+                    paucal: '{count} sedmicama'
+                    plural: '{count} sedmicama'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjesecu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mjesecima'
+                    singular: '{count} mjesecu'
+                    dual: '{count} mjesecima'
+                    paucal: '{count} mjesecima'
+                    plural: '{count} mjesecima'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godini'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} godinama'
+                    singular: '{count} godini'
+                    dual: '{count} godinama'
+                    paucal: '{count} godinama'
+                    plural: '{count} godinama'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundi'
+                    singular: '{count} milisekundu'
+                    dual: '{count} milisekunde'
+                    paucal: '{count} milisekunde'
+                    plural: '{count} milisekunde'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundi'
+                    singular: '{count} sekundu'
+                    dual: '{count} sekunde'
+                    paucal: '{count} sekunde'
+                    plural: '{count} sekunde'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minuta'
+                    singular: '{count} minutu'
+                    dual: '{count} minute'
+                    paucal: '{count} minute'
+                    plural: '{count} minute'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 sat'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sati'
+                    singular: '{count} sat'
+                    dual: '{count} sata'
+                    paucal: '{count} sata'
+                    plural: '{count} sata'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 dan'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} dana'
+                    singular: '{count} dan'
+                    dual: '{count} dana'
+                    paucal: '{count} dana'
+                    plural: '{count} dana'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 sedmicu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sedmica'
+                    singular: '{count} sedmicu'
+                    dual: '{count} sedmice'
+                    paucal: '{count} sedmice'
+                    plural: '{count} sedmice'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjesec'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mjeseci'
+                    singular: '{count} mjesec'
+                    dual: '{count} mjeseca'
+                    paucal: '{count} mjeseca'
+                    plural: '{count} mjeseca'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godinu'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} godina'
+                    singular: '{count} godinu'
+                    dual: '{count} godine'
+                    paucal: '{count} godine'
+                    plural: '{count} godine'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      vocative:
+        notApplicable: 'Direct address does not apply to a written bare quantitative duration.'
+        provenance:
+          - inventory
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisekundom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} milisekundama'
+                    singular: '{count} milisekundom'
+                    dual: '{count} milisekundama'
+                    paucal: '{count} milisekundama'
+                    plural: '{count} milisekundama'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 sekundom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sekundama'
+                    singular: '{count} sekundom'
+                    dual: '{count} sekundama'
+                    paucal: '{count} sekundama'
+                    plural: '{count} sekundama'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} minutama'
+                    singular: '{count} minutom'
+                    dual: '{count} minutama'
+                    paucal: '{count} minutama'
+                    plural: '{count} minutama'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 satom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} satima'
+                    singular: '{count} satom'
+                    dual: '{count} satima'
+                    paucal: '{count} satima'
+                    plural: '{count} satima'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 danom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} danima'
+                    singular: '{count} danom'
+                    dual: '{count} danima'
+                    paucal: '{count} danima'
+                    plural: '{count} danima'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 sedmicom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} sedmicama'
+                    singular: '{count} sedmicom'
+                    dual: '{count} sedmicama'
+                    paucal: '{count} sedmicama'
+                    plural: '{count} sedmicama'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 mjesecom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} mjesecima'
+                    singular: '{count} mjesecom'
+                    dual: '{count} mjesecima'
+                    paucal: '{count} mjesecima'
+                    plural: '{count} mjesecima'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 godinom'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} godinama'
+                    singular: '{count} godinom'
+                    dual: '{count} godinama'
+                    paucal: '{count} godinama'
+                    plural: '{count} godinama'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      locative:
+        sameRenderedAs: 'dative'
+        provenance:
+          - inventory
 
   list:
     engine: 'conjunction'
@@ -11,6 +613,7 @@ surfaces:
 
   formatter:
     engine: 'profiled'
+    casePluralRule: 'south-slavic'
     resourceKeyDetector: 'south-slavic'
     resourceKeySuffixes:
       paucal: '_Paucal'

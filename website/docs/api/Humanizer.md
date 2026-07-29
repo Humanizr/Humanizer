@@ -117,6 +117,8 @@
 | [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter') | Localizes Humanizer's number, date, duration, and unit formatting\. |
 | [IFractionalTimeSpanFormatter](Humanizer.IFractionalTimeSpanFormatter.md 'Humanizer\.IFractionalTimeSpanFormatter') | Extends a formatter with support for fractional\-second duration values\. |
 | [IFractionalTimeSpanHumanizeStrategy](Humanizer.IFractionalTimeSpanHumanizeStrategy.md 'Humanizer\.IFractionalTimeSpanHumanizeStrategy') | Extends a time\-span humanization strategy with fractional\-second support\. |
+| [IGrammaticalCaseTimeSpanFormatter](Humanizer.IGrammaticalCaseTimeSpanFormatter.md 'Humanizer\.IGrammaticalCaseTimeSpanFormatter') | Optionally extends a locale formatter with grammatical\-case\-aware duration phrases\. |
+| [IGrammaticalCaseTimeSpanHumanizeStrategy](Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md 'Humanizer\.IGrammaticalCaseTimeSpanHumanizeStrategy') | Optionally extends a time\-span humanization strategy with grammatical\-case support\. Existing [ITimeSpanHumanizeStrategy](Humanizer.ITimeSpanHumanizeStrategy.md 'Humanizer\.ITimeSpanHumanizeStrategy') implementations remain valid for existing duration APIs but cannot service `HumanizeWithCase`\. |
 | [ILongOrdinalizer](Humanizer.ILongOrdinalizer.md 'Humanizer\.ILongOrdinalizer') | Localizes the ordinal form of a 64\-bit integer\. |
 | [INumberToWordsConverter](Humanizer.INumberToWordsConverter.md 'Humanizer\.INumberToWordsConverter') | Converts numbers into locale\-specific words, ordinals, and tuple names\. |
 | [IOrdinalizer](Humanizer.IOrdinalizer.md 'Humanizer\.IOrdinalizer') | Localizes the ordinal form of a number\. |

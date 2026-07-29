@@ -9,7 +9,10 @@ public sealed partial class HumanizerSourceGenerator
     {
         static readonly Regex PlaceholderRegex = new(@"\{(?<name>[^}]+)\}", RegexOptions.Compiled);
 
-        internal static LocalePhraseCatalog Create(string localeCode, SimpleYamlMapping phrases)
+        internal static LocalePhraseCatalog Create(
+            string localeCode,
+            SimpleYamlMapping phrases,
+            bool preserveDurationCaseForms = false)
         {
             RejectUnknownKeys(phrases, $"{localeCode}.phrases", ["relativeDate", "duration", "dataUnits", "timeUnits"]);
 
@@ -18,7 +21,11 @@ public sealed partial class HumanizerSourceGenerator
                 : DateHumanizePhraseSet.Empty;
 
             var timeSpan = phrases.TryGetValue("duration", out var timeSpanValue)
-                ? ParseTimeSpan(localeCode, timeSpanValue, $"{localeCode}.phrases.duration")
+                ? ParseTimeSpan(
+                    localeCode,
+                    timeSpanValue,
+                    $"{localeCode}.phrases.duration",
+                    preserveDurationCaseForms)
                 : TimeSpanPhraseSet.Empty;
 
             var dataUnit = phrases.TryGetValue("dataUnits", out var dataUnitValue)
@@ -32,7 +39,10 @@ public sealed partial class HumanizerSourceGenerator
             return new LocalePhraseCatalog(localeCode, dateHumanize, timeSpan, dataUnit, timeUnit);
         }
 
-        internal static LocalePhraseCatalog ParseLocalePhraseCatalogForTests(string localeCode, string fileText)
+        internal static LocalePhraseCatalog ParseLocalePhraseCatalogForTests(
+            string localeCode,
+            string fileText,
+            bool preserveDurationCaseForms = false)
         {
             var root = SimpleYamlParser.Parse(fileText);
             if (!root.TryGetValue("phrases", out var phrases) || phrases is not SimpleYamlMapping phraseMapping)
@@ -40,7 +50,7 @@ public sealed partial class HumanizerSourceGenerator
                 throw new InvalidOperationException($"Locale '{localeCode}' does not define a 'phrases' mapping.");
             }
 
-            return Create(localeCode, phraseMapping);
+            return Create(localeCode, phraseMapping, preserveDurationCaseForms);
         }
 
         static DateHumanizePhraseSet ParseDateHumanize(string localeCode, SimpleYamlValue value, string path)
@@ -100,7 +110,11 @@ public sealed partial class HumanizerSourceGenerator
             return new DateHumanizePhrase(single, multiple, template);
         }
 
-        static TimeSpanPhraseSet ParseTimeSpan(string localeCode, SimpleYamlValue value, string path)
+        static TimeSpanPhraseSet ParseTimeSpan(
+            string localeCode,
+            SimpleYamlValue value,
+            string path,
+            bool preserveDurationCaseForms)
         {
             var mapping = ExpectMapping(value, path);
             var builder = ImmutableDictionary.CreateBuilder<string, TimeSpanPhrase>(StringComparer.Ordinal);
@@ -112,7 +126,10 @@ public sealed partial class HumanizerSourceGenerator
                     continue;
                 }
 
-                builder[entry.Key] = ParseTimeSpanPhrase(entry.Value, $"{path}.{entry.Key}");
+                builder[entry.Key] = ParseTimeSpanPhrase(
+                    entry.Value,
+                    $"{path}.{entry.Key}",
+                    preserveDurationCaseForms);
             }
 
             return new TimeSpanPhraseSet(
@@ -121,7 +138,10 @@ public sealed partial class HumanizerSourceGenerator
                 builder.ToImmutable());
         }
 
-        static TimeSpanPhrase ParseTimeSpanPhrase(SimpleYamlValue value, string path)
+        internal static TimeSpanPhrase ParseTimeSpanPhrase(
+            SimpleYamlValue value,
+            string path,
+            bool preserveDuplicateForms = false)
         {
             if (value is SimpleYamlScalar scalar)
             {
@@ -135,7 +155,11 @@ public sealed partial class HumanizerSourceGenerator
                 : default;
 
             var multiple = mapping.TryGetValue("multiple", out var multipleValue)
-                ? ParseCountedPhrase(multipleValue, $"{path}.multiple", ["wordsVariant"])
+                ? ParseCountedPhrase(
+                    multipleValue,
+                    $"{path}.multiple",
+                    preserveDuplicateForms,
+                    ["wordsVariant"])
                 : null;
 
             CountedPhrase? multipleWordsVariant = null;
@@ -143,7 +167,10 @@ public sealed partial class HumanizerSourceGenerator
                 multipleValue is SimpleYamlMapping multipleMapping &&
                 multipleMapping.TryGetValue("wordsVariant", out var wordsVariant))
             {
-                multipleWordsVariant = ParseCountedPhrase(wordsVariant, $"{path}.multiple.wordsVariant");
+                multipleWordsVariant = ParseCountedPhrase(
+                    wordsVariant,
+                    $"{path}.multiple.wordsVariant",
+                    preserveDuplicateForms);
             }
 
             var template = mapping.TryGetValue("template", out var templateValue)
@@ -187,7 +214,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var mapping = ExpectMapping(value, path);
-            RejectUnknownKeys(mapping, path, ["forms", "default", "singular", "dual", "paucal", "plural", "symbol", "template"]);
+            RejectUnknownKeys(mapping, path, ["forms", "default", "zero", "singular", "dual", "paucal", "plural", "many", "symbol", "template"]);
 
             var forms = ParseOptionalPhraseForms(mapping, path);
             var symbol = GetOptionalLiteral(mapping, "symbol", $"{path}.symbol");
@@ -223,7 +250,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             var mapping = ExpectMapping(value, path);
-            RejectUnknownKeys(mapping, path, ["forms", "default", "singular", "dual", "paucal", "plural", "symbol", "template"]);
+            RejectUnknownKeys(mapping, path, ["forms", "default", "zero", "singular", "dual", "paucal", "plural", "many", "symbol", "template"]);
 
             var forms = ParseOptionalPhraseForms(mapping, path);
             var symbol = GetOptionalLiteral(mapping, "symbol", $"{path}.symbol");
@@ -238,24 +265,39 @@ public sealed partial class HumanizerSourceGenerator
             return new TimeUnitPhrase(forms, symbol, template);
         }
 
-        static CountedPhrase ParseCountedPhrase(SimpleYamlValue value, string path, params string[] allowedExtraKeys)
+        static CountedPhrase ParseCountedPhrase(
+            SimpleYamlValue value,
+            string path,
+            params string[] allowedExtraKeys) =>
+            ParseCountedPhrase(value, path, preserveDuplicateForms: false, allowedExtraKeys);
+
+        static CountedPhrase ParseCountedPhrase(
+            SimpleYamlValue value,
+            string path,
+            bool preserveDuplicateForms,
+            params string[] allowedExtraKeys)
         {
             if (value is SimpleYamlScalar scalar)
             {
+                var scalarForms = PhraseForms.FromScalar(ValidateLiteralText(path, scalar.Value));
                 return new CountedPhrase(
-                    PhraseForms.FromScalar(ValidateLiteralText(path, scalar.Value)).CollapseDuplicates());
+                    preserveDuplicateForms ? scalarForms : scalarForms.CollapseDuplicates());
             }
 
             var mapping = ExpectMapping(value, path);
             RejectUnknownKeys(
                 mapping,
                 path,
-                ["forms", "default", "singular", "dual", "paucal", "plural", "template", "countPlacement", "beforeCount", "afterCount", .. allowedExtraKeys]);
+                ["forms", "default", "zero", "singular", "dual", "paucal", "plural", "many", "template", "countPlacement", "beforeCount", "afterCount", .. allowedExtraKeys]);
             var countPlacement = ParseCountPlacement(mapping, path);
             var formPlaceholders = countPlacement == CountPlacement.None
                 ? ["count", "prep"]
                 : Array.Empty<string>();
-            var forms = ParseOptionalPhraseForms(mapping, path, formPlaceholders);
+            var forms = ParseOptionalPhraseForms(
+                mapping,
+                path,
+                preserveDuplicateForms,
+                formPlaceholders);
             var namedTemplate = mapping.TryGetValue("template", out var templateValue)
                 ? ParseNamedTemplate(templateValue, $"{path}.template", ["count", "unit", "prep"])
                 : null;
@@ -266,7 +308,7 @@ public sealed partial class HumanizerSourceGenerator
             }
 
             return new CountedPhrase(
-                forms?.CollapseDuplicates(),
+                preserveDuplicateForms ? forms : forms.CollapseDuplicates(),
                 countPlacement,
                 GetOptionalLiteral(mapping, "beforeCount", $"{path}.beforeCount", ["prep"]),
                 GetOptionalLiteral(mapping, "afterCount", $"{path}.afterCount", ["prep"]),
@@ -294,11 +336,25 @@ public sealed partial class HumanizerSourceGenerator
             return (single, wordsVariant);
         }
 
-        static PhraseForms? ParseOptionalPhraseForms(SimpleYamlMapping mapping, string path, params string[] allowedPlaceholders)
+        static PhraseForms? ParseOptionalPhraseForms(
+            SimpleYamlMapping mapping,
+            string path,
+            params string[] allowedPlaceholders) =>
+            ParseOptionalPhraseForms(mapping, path, preserveDuplicateForms: false, allowedPlaceholders);
+
+        static PhraseForms? ParseOptionalPhraseForms(
+            SimpleYamlMapping mapping,
+            string path,
+            bool preserveDuplicateForms,
+            params string[] allowedPlaceholders)
         {
             if (mapping.TryGetValue("forms", out var formsValue))
             {
-                return ParsePhraseForms(formsValue, $"{path}.forms", allowedPlaceholders);
+                return ParsePhraseForms(
+                    formsValue,
+                    $"{path}.forms",
+                    preserveDuplicateForms,
+                    allowedPlaceholders);
             }
 
             if (TryParseDirectPhraseForms(mapping, path, out var directForms, allowedPlaceholders))
@@ -309,39 +365,46 @@ public sealed partial class HumanizerSourceGenerator
             return null;
         }
 
-        static PhraseForms ParsePhraseForms(SimpleYamlValue value, string path, params string[] allowedPlaceholders)
+        static PhraseForms ParsePhraseForms(
+            SimpleYamlValue value,
+            string path,
+            bool preserveDuplicateForms,
+            params string[] allowedPlaceholders)
         {
             if (value is SimpleYamlScalar scalar)
             {
-                return PhraseForms.FromScalar(ValidateLiteralText(path, scalar.Value, allowedPlaceholders)).CollapseDuplicates();
+                var scalarForms = PhraseForms.FromScalar(ValidateLiteralText(path, scalar.Value, allowedPlaceholders));
+                return preserveDuplicateForms ? scalarForms : scalarForms.CollapseDuplicates();
             }
 
             var mapping = ExpectMapping(value, path);
-            RejectUnknownKeys(mapping, path, ["default", "singular", "dual", "paucal", "plural"]);
+            RejectUnknownKeys(mapping, path, ["default", "zero", "singular", "dual", "paucal", "plural", "many"]);
             if (!TryParseDirectPhraseForms(mapping, path, out var forms, allowedPlaceholders))
             {
                 throw new InvalidOperationException($"Phrase forms '{path}' must define at least one form.");
             }
 
-            return forms.CollapseDuplicates();
+            return preserveDuplicateForms ? forms : forms.CollapseDuplicates();
         }
 
         static bool TryParseDirectPhraseForms(SimpleYamlMapping mapping, string path, out PhraseForms forms, params string[] allowedPlaceholders)
         {
             var defaultValue = GetOptionalLiteral(mapping, "default", $"{path}.default", allowedPlaceholders);
+            var zero = GetOptionalLiteral(mapping, "zero", $"{path}.zero", allowedPlaceholders);
             var singular = GetOptionalLiteral(mapping, "singular", $"{path}.singular", allowedPlaceholders);
             var dual = GetOptionalLiteral(mapping, "dual", $"{path}.dual", allowedPlaceholders);
             var paucal = GetOptionalLiteral(mapping, "paucal", $"{path}.paucal", allowedPlaceholders);
             var plural = GetOptionalLiteral(mapping, "plural", $"{path}.plural", allowedPlaceholders);
+            var many = GetOptionalLiteral(mapping, "many", $"{path}.many", allowedPlaceholders);
 
-            defaultValue ??= singular ?? dual ?? paucal ?? plural;
+            defaultValue ??= zero ?? singular ?? dual ?? paucal ?? plural ?? many;
             if (defaultValue is null)
             {
                 forms = null!;
                 return false;
             }
 
-            forms = new PhraseForms(defaultValue, singular, dual, paucal, plural);
+            forms = new PhraseForms(defaultValue, zero, singular, dual, paucal, plural, many);
             return true;
         }
 

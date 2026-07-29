@@ -4,6 +4,413 @@ surfaces:
   inflection:
     cardinalRule: 'Arabic'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - genitive
+      - accusative
+    sources:
+      inventory:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/supplemental/grammaticalFeatures.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Arabic nominal and unit case inventory'
+        credit: 'Unicode CLDR contributors'
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ar.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Arabic long-duration unit lexemes and plural categories'
+        credit: 'Unicode CLDR contributors'
+      arabicCase:
+        kind: 'grammar'
+        url: 'https://aclanthology.org/D07-1116/'
+        revision: 'ACL Anthology D07-1116'
+        locator: 'Arabic nominative dual -ان and accusative/genitive dual -ين'
+        credit: 'Nizar Habash, Ryan Gabbard, Owen Rambow, Seth Kulick, and Mitchell P. Marcus'
+      arabicNumerals:
+        kind: 'grammar'
+        url: 'https://aclanthology.org/W07-0802/'
+        revision: 'ACL Anthology W07-0802'
+        locator: 'Arabic numeral government for counted nouns'
+        credit: 'Ali Dada'
+    cases:
+      nominative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'مللي ثانية واحدة'
+                  words: 'مللي ثانية واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ملي ثانية'
+                    zero: '{count} ملي ثانية'
+                    dual: '{count} ملي ثانية'
+                    plural: '{count} ملي ثانية'
+                    many: '{count} ملي ثانية'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            second:
+              phrase:
+                single:
+                  numeric: 'ثانية واحدة'
+                  words: 'ثانية واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ثانية'
+                    zero: '{count} ثانية'
+                    dual: 'ثانيتان'
+                    plural: '{count} ثوان'
+                    many: '{count} ثانية'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            minute:
+              phrase:
+                single:
+                  numeric: 'دقيقة واحدة'
+                  words: 'دقيقة واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} دقيقة'
+                    zero: '{count} دقيقة'
+                    dual: 'دقيقتان'
+                    plural: '{count} دقائق'
+                    many: '{count} دقيقة'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            hour:
+              phrase:
+                single:
+                  numeric: 'ساعة واحدة'
+                  words: 'ساعة واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ساعة'
+                    zero: '{count} ساعة'
+                    dual: 'ساعتان'
+                    plural: '{count} ساعات'
+                    many: '{count} ساعة'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            day:
+              phrase:
+                single:
+                  numeric: 'يوم واحد'
+                  words: 'يوم واحد'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} يوم'
+                    zero: '{count} يوم'
+                    dual: 'يومان'
+                    plural: '{count} أيام'
+                    many: '{count} يوما'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            week:
+              phrase:
+                single:
+                  numeric: 'أسبوع واحد'
+                  words: 'أسبوع واحد'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} أسبوع'
+                    zero: '{count} أسبوع'
+                    dual: 'أسبوعان'
+                    plural: '{count} أسابيع'
+                    many: '{count} أسبوعا'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            month:
+              phrase:
+                single:
+                  numeric: 'شهر واحد'
+                  words: 'شهر واحد'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} شهر'
+                    zero: '{count} شهر'
+                    dual: 'شهران'
+                    plural: '{count} أشهر'
+                    many: '{count} شهرا'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            year:
+              phrase:
+                single:
+                  numeric: 'سنة واحدة'
+                  words: 'سنة واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} سنة'
+                    zero: '{count} سنة'
+                    dual: 'سنتان'
+                    plural: '{count} سنوات'
+                    many: '{count} سنة'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+        provenance:
+          - 'cldr48'
+          - 'arabicCase'
+          - 'arabicNumerals'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: 'مللي ثانية واحدة'
+                  words: 'مللي ثانية واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ملي ثانية'
+                    zero: '{count} ملي ثانية'
+                    dual: '{count} ملي ثانية'
+                    plural: '{count} ملي ثانية'
+                    many: '{count} ملي ثانية'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            second:
+              phrase:
+                single:
+                  numeric: 'ثانية واحدة'
+                  words: 'ثانية واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ثانية'
+                    zero: '{count} ثانية'
+                    dual: 'ثانيتين'
+                    plural: '{count} ثوان'
+                    many: '{count} ثانية'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            minute:
+              phrase:
+                single:
+                  numeric: 'دقيقة واحدة'
+                  words: 'دقيقة واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} دقيقة'
+                    zero: '{count} دقيقة'
+                    dual: 'دقيقتين'
+                    plural: '{count} دقائق'
+                    many: '{count} دقيقة'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            hour:
+              phrase:
+                single:
+                  numeric: 'ساعة واحدة'
+                  words: 'ساعة واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ساعة'
+                    zero: '{count} ساعة'
+                    dual: 'ساعتين'
+                    plural: '{count} ساعات'
+                    many: '{count} ساعة'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            day:
+              phrase:
+                single:
+                  numeric: 'يوم واحد'
+                  words: 'يوم واحد'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} يوم'
+                    zero: '{count} يوم'
+                    dual: 'يومين'
+                    plural: '{count} أيام'
+                    many: '{count} يوما'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            week:
+              phrase:
+                single:
+                  numeric: 'أسبوع واحد'
+                  words: 'أسبوع واحد'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} أسبوع'
+                    zero: '{count} أسبوع'
+                    dual: 'أسبوعين'
+                    plural: '{count} أسابيع'
+                    many: '{count} أسبوعا'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            month:
+              phrase:
+                single:
+                  numeric: 'شهر واحد'
+                  words: 'شهر واحد'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} شهر'
+                    zero: '{count} شهر'
+                    dual: 'شهرين'
+                    plural: '{count} أشهر'
+                    many: '{count} شهرا'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            year:
+              phrase:
+                single:
+                  numeric: 'سنة واحدة'
+                  words: 'سنة واحدة'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} سنة'
+                    zero: '{count} سنة'
+                    dual: 'سنتين'
+                    plural: '{count} سنوات'
+                    many: '{count} سنة'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+        provenance:
+          - 'cldr48'
+          - 'arabicCase'
+          - 'arabicNumerals'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'genitive'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            second:
+              sameRenderedAs: 'genitive'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            minute:
+              sameRenderedAs: 'genitive'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            hour:
+              sameRenderedAs: 'genitive'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            day:
+              phrase:
+                single:
+                  numeric: 'يوما واحدا'
+                  words: 'يوما واحدا'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} يوم'
+                    zero: '{count} يوم'
+                    dual: 'يومين'
+                    plural: '{count} أيام'
+                    many: '{count} يوما'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            week:
+              phrase:
+                single:
+                  numeric: 'أسبوعا واحدا'
+                  words: 'أسبوعا واحدا'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} أسبوع'
+                    zero: '{count} أسبوع'
+                    dual: 'أسبوعين'
+                    plural: '{count} أسابيع'
+                    many: '{count} أسبوعا'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            month:
+              phrase:
+                single:
+                  numeric: 'شهرا واحدا'
+                  words: 'شهرا واحدا'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} شهر'
+                    zero: '{count} شهر'
+                    dual: 'شهرين'
+                    plural: '{count} أشهر'
+                    many: '{count} شهرا'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+            year:
+              sameRenderedAs: 'genitive'
+              provenance:
+                - 'cldr48'
+                - 'arabicCase'
+                - 'arabicNumerals'
+        provenance:
+          - 'cldr48'
+          - 'arabicCase'
+          - 'arabicNumerals'
 
   list:
     engine: 'clitic'
@@ -13,6 +420,7 @@ surfaces:
     engine: 'profiled'
     dataUnitFallbackTransform: 'trim-trailing-s'
     pluralRule: 'arabic-like'
+    casePluralRule: 'arabic-cardinal'
 
   phrases:
     relativeDate:

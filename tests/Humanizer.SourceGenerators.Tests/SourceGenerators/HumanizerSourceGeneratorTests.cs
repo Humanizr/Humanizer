@@ -76,13 +76,17 @@ public partial class HumanizerSourceGeneratorTests
     {
         const string baseLocale = """
 locale: 'zz-base'
-surfaces: {}
+surfaces:
+  durationCases:
+    classification: 'not-applicable'
 """;
 
         const string childLocale = """
 locale: 'zz-child'
 variantOf: 'zz-base'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   ordinal:
     date:
       pattern: '{day} MMMM yyyy'
@@ -508,7 +512,7 @@ surfaces:
         Assert.Contains("через два дня", source);
         Assert.Contains("vorgestern", source);
         Assert.Contains("PhraseCountPlacement.BeforeForm", source);
-        Assert.Contains("new LocalizedPhraseForms(\"days\", \"day\"", source);
+        Assert.Contains("new LocalizedPhraseForms(\"days\", null, \"day\"", source);
         Assert.Contains("new LocalizedUnitPhrase(new LocalizedPhraseForms(\"byte\"", source);
     }
 
@@ -538,6 +542,8 @@ surfaces:
     public void TokenMapLocalesReportDiagnosticsAndSkipGenerationWhenInputIsMalformed()
     {
         const string invalidLocale = """
+durationCases:
+  classification: 'not-applicable'
 wordsToNumber:
   engine: 'token-map'
   normalizationProfile: 42
@@ -749,6 +755,8 @@ wordsToNumber:
     public void UnitLeadingCompoundScalesAcceptNamedOrdinalCases()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'unit-leading-compound'
   zeroWord: 'zero'
@@ -811,6 +819,8 @@ numberToWords:
     public void JoinedScaleProfilesEmitOptionalRemainderAndPluralScaleForms()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'joined-scale'
   maximumValue: 2000001
@@ -857,6 +867,8 @@ numberToWords:
     public void ConjoinedGenderedScaleProfilesEmitGenderedFormsFromLocaleData()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'conjoined-gendered-scale'
   maximumValue: 1000
@@ -930,6 +942,8 @@ numberToWords:
     public void JoinedScaleProfilesEmitOptionalGenderedOrdinalBlocks()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'joined-scale'
   maximumValue: 1000
@@ -982,6 +996,8 @@ numberToWords:
     public void NumberWordSuffixOrdinalizerProfilesEmitOptionalNeuterBlock()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 ordinalizer:
   engine: 'number-word-suffix'
   masculine:
@@ -1016,6 +1032,8 @@ ordinalizer:
     public void NumberToWordsUnknownEngineFallsBackToConventionalConverterName()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'semantic-custom'
 """;
@@ -1035,6 +1053,8 @@ numberToWords:
     public void FormatterProfilesAcceptGrammarAliasesAndPreferThemOverLegacyFields()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 formatter:
   engine: 'profiled'
   resourceKeyDetector: 'arabic-like'
@@ -1125,6 +1145,8 @@ grammar:
     public void FormatterProfilesAcceptExactDateAndTimeSpanFormRules()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 formatter:
   engine: 'profiled'
   resourceKeyDetector: 'singular-plural'
@@ -1163,6 +1185,8 @@ formatter:
     public void NumberToWordsProfilesAcceptExactAndSpecialCaseLexiconNames()
     {
         const string dualFormLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'dual-form-scale'
   conjunction: 'u'
@@ -1230,6 +1254,8 @@ numberToWords:
 """;
 
         const string contextualLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'contextual-decimal'
   zeroWord: 'zero'
@@ -1254,6 +1280,8 @@ numberToWords:
 """;
 
         const string westSlavicLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'west-slavic-gendered'
   useCulture: true
@@ -1324,6 +1352,8 @@ numberToWords:
     public void PrefixedTensScaleProfilesAcceptCompactScaleAndPrefixMappings()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 wordsToNumber:
   engine: 'prefixed-tens-scale'
   cardinalMap:
@@ -1370,6 +1400,8 @@ wordsToNumber:
     public void ChildLocaleMappingsMergeWithParentMappingsAtGenerationTime()
     {
         const string baseLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'conjunctional-scale'
   minusWord: 'base-minus'
@@ -1406,6 +1438,9 @@ numberToWords:
 
         const string childLocale = """
 inherits: 'zz-base'
+
+durationCases:
+  classification: 'not-applicable'
 
 numberToWords:
   engine: 'conjunctional-scale'
@@ -1451,6 +1486,8 @@ numberToWords:
     public void SparseNumericLexicalTablesExpandIntoGeneratedArrays()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'conjunctional-scale'
   minusWord: 'minus'
@@ -1508,6 +1545,8 @@ numberToWords:
     public void NumberToWordsProfilesAcceptOmittedEmptyStringDefaults()
     {
         const string variantLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'variant-decade'
   minusWord: 'minus'
@@ -1530,6 +1569,8 @@ numberToWords:
 """;
 
         const string triadLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'triad-scale'
   zeroWord: 'zero'
@@ -1606,6 +1647,8 @@ numberToWords:
 """;
 
         const string invertedLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'inverted-tens'
   minusWord: 'minus'
@@ -1652,6 +1695,8 @@ numberToWords:
 """;
 
         const string scaleLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'scale-strategy'
   cardinalStrategy: 'swedish'
@@ -1693,6 +1738,8 @@ numberToWords:
 """;
 
         const string billionLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'billion-strategy'
   minusWord: 'minus'
@@ -1728,6 +1775,8 @@ numberToWords:
 """;
 
         const string joinedLocale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'joined-scale'
   maximumValue: 1000
@@ -1777,6 +1826,8 @@ numberToWords:
     public void LinkedVigesimalProfilesEmitAlternateTerminalRemainderJoinerFields()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 numberToWords:
   engine: 'linked-vigesimal'
   zeroWord: 'zero'
@@ -1833,6 +1884,8 @@ wordsToNumber:
     public void WordsToNumberProfilesAcceptOmittedEmptyIgnoredToken()
     {
         const string locale = """
+durationCases:
+  classification: 'not-applicable'
 wordsToNumber:
   engine: 'compound-scale'
   cardinalMap:
@@ -2061,9 +2114,11 @@ wordsToNumber:
     {
         readonly string path = path;
         readonly string text = AddDefaultInflection(
-            canonicalizeLegacySchema
-                ? CanonicalizeLocaleText(path, text)
-                : text,
+            AddDefaultDurationEvidence(
+                canonicalizeLegacySchema
+                    ? CanonicalizeLocaleText(path, text)
+                    : text,
+                canonicalizeLegacySchema),
             canonicalizeLegacySchema && addDefaultInflection);
 
         public override string Path => path;
@@ -2081,6 +2136,36 @@ wordsToNumber:
             }
 
             return HumanizerSourceGenerator.LegacyLocaleMigration.ConvertToCanonicalYaml(localeCode, candidateText);
+        }
+
+        static string AddDefaultDurationEvidence(string candidateText, bool enabled)
+        {
+            if (!enabled)
+            {
+                return candidateText;
+            }
+
+            var lineEnding = candidateText.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+            var marker = $"  durationCases:{lineEnding}    classification: 'not-applicable'{lineEnding}";
+            if (!candidateText.Contains(marker, StringComparison.Ordinal))
+            {
+                return candidateText;
+            }
+
+            var evidence = string.Join(
+                lineEnding,
+                "    reason: 'Synthetic fixture does not exercise duration-case behavior.'",
+                "    sources:",
+                "      fixture:",
+                "        kind: 'grammar'",
+                "        url: 'https://example.invalid/duration-cases'",
+                "        revision: 'synthetic-test-fixture'",
+                "        locator: 'not applicable to this fixture'",
+                "        credit: 'Humanizer test suite'",
+                "    provenance:",
+                "      - fixture",
+                "");
+            return candidateText.Replace(marker, marker + evidence, StringComparison.Ordinal);
         }
 
         static string AddDefaultInflection(string candidateText, bool enabled)

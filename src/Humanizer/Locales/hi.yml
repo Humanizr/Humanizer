@@ -4,6 +4,91 @@ surfaces:
   inflection:
     cardinalRule: 'AmharicLike'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'oblique'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/hi.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
+      oblique:
+        authored:
+          units:
+            millisecond:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            second:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            minute:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 घंटे'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} घंटों'
+                    singular: '{count} घंटे'
+                    dual: '{count} घंटों'
+                    paucal: '{count} घंटों'
+                    plural: '{count} घंटों'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 दिन'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} दिनों'
+                    singular: '{count} दिनों'
+                    dual: '{count} दिनों'
+                    paucal: '{count} दिनों'
+                    plural: '{count} दिनों'
+              provenance:
+                - 'cldr48'
+            week:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 महीने'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} महीनों'
+                    singular: '{count} महीने'
+                    dual: '{count} महीनों'
+                    paucal: '{count} महीनों'
+                    plural: '{count} महीनों'
+              provenance:
+                - 'cldr48'
+            year:
+              sameRenderedAs: 'nominative'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'conjunction'

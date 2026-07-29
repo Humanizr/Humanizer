@@ -4,6 +4,1048 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'absolutive'
+    inventory:
+      - 'absolutive'
+      - 'ergative'
+      - 'dative'
+      - 'genitive'
+      - 'locative'
+      - 'instrumental'
+      - 'partitive'
+      - 'essive'
+      - 'comitative'
+      - 'inessive'
+      - 'allative'
+      - 'ablative'
+      - 'lative'
+      - 'causal'
+      - 'benefactive'
+    sources:
+      grammar:
+        kind: 'grammar'
+        url: 'https://www.euskaltzaindia.eus/dok/euskera/50589.pdf'
+        revision: 'Euskera 2008, document 50589'
+        locator: 'Basque definite, indefinite, quantified-noun, and case-suffix paradigms'
+        credit: 'Euskaltzaindia'
+      corpus:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Basque-BDT/tree/49ca48c5b3b78b03229095cbea3fa94111644c6f'
+        revision: '49ca48c5b3b78b03229095cbea3fa94111644c6f' # DevSkim: ignore DS173237
+        locator: 'duration noun case forms'
+        credit: 'Universal Dependencies Basque BDT contributors'
+    cases:
+      absolutive:
+        authored: 'base-duration'
+        provenance:
+          - 'grammar'
+      ergative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundok'
+                multiple:
+                  forms: '{count} milisegundok'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundok'
+                multiple:
+                  forms: '{count} segundok'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutuk'
+                multiple:
+                  forms: '{count} minutuk'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 orduk'
+                multiple:
+                  forms: '{count} orduk'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunek'
+                multiple:
+                  forms: '{count} egunek'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 astek'
+                multiple:
+                  forms: '{count} astek'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabetek'
+                multiple:
+                  forms: '{count} hilabetek'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urtek'
+                multiple:
+                  forms: '{count} urtek'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundori'
+                multiple:
+                  forms: '{count} milisegundori'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundori'
+                multiple:
+                  forms: '{count} segundori'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuturi'
+                multiple:
+                  forms: '{count} minuturi'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 orduri'
+                multiple:
+                  forms: '{count} orduri'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 eguni'
+                multiple:
+                  forms: '{count} eguni'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 asteri'
+                multiple:
+                  forms: '{count} asteri'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabeteri'
+                multiple:
+                  forms: '{count} hilabeteri'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urteri'
+                multiple:
+                  forms: '{count} urteri'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundoren'
+                multiple:
+                  forms: '{count} milisegundoren'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundoren'
+                multiple:
+                  forms: '{count} segundoren'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuturen'
+                multiple:
+                  forms: '{count} minuturen'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 orduren'
+                multiple:
+                  forms: '{count} orduren'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunen'
+                multiple:
+                  forms: '{count} egunen'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 asteren'
+                multiple:
+                  forms: '{count} asteren'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabeteren'
+                multiple:
+                  forms: '{count} hilabeteren'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urteren'
+                multiple:
+                  forms: '{count} urteren'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundoko'
+                multiple:
+                  forms: '{count} milisegundoko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundoko'
+                multiple:
+                  forms: '{count} segundoko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutuko'
+                multiple:
+                  forms: '{count} minutuko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 orduko'
+                multiple:
+                  forms: '{count} orduko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 eguneko'
+                multiple:
+                  forms: '{count} eguneko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 asteko'
+                multiple:
+                  forms: '{count} asteko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabeteko'
+                multiple:
+                  forms: '{count} hilabeteko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urteko'
+                multiple:
+                  forms: '{count} urteko'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundoz'
+                multiple:
+                  forms: '{count} milisegundoz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundoz'
+                multiple:
+                  forms: '{count} segundoz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minutuz'
+                multiple:
+                  forms: '{count} minutuz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 orduz'
+                multiple:
+                  forms: '{count} orduz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunez'
+                multiple:
+                  forms: '{count} egunez'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 astez'
+                multiple:
+                  forms: '{count} astez'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabetez'
+                multiple:
+                  forms: '{count} hilabetez'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urtez'
+                multiple:
+                  forms: '{count} urtez'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      partitive:
+        notApplicable: 'The Basque partitive is not licensed for an affirmative bare quantitative duration with an overt cardinal.'
+        provenance:
+          - 'grammar'
+      essive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundotzat'
+                multiple:
+                  forms: '{count} milisegundotzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundotzat'
+                multiple:
+                  forms: '{count} segundotzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minututzat'
+                multiple:
+                  forms: '{count} minututzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordutzat'
+                multiple:
+                  forms: '{count} ordutzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 eguntzat'
+                multiple:
+                  forms: '{count} eguntzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 astetzat'
+                multiple:
+                  forms: '{count} astetzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabetetzat'
+                multiple:
+                  forms: '{count} hilabetetzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urtetzat'
+                multiple:
+                  forms: '{count} urtetzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      comitative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundorekin'
+                multiple:
+                  forms: '{count} milisegundorekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundorekin'
+                multiple:
+                  forms: '{count} segundorekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuturekin'
+                multiple:
+                  forms: '{count} minuturekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordurekin'
+                multiple:
+                  forms: '{count} ordurekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunekin'
+                multiple:
+                  forms: '{count} egunekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 asterekin'
+                multiple:
+                  forms: '{count} asterekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabeterekin'
+                multiple:
+                  forms: '{count} hilabeterekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urterekin'
+                multiple:
+                  forms: '{count} urterekin'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      inessive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundotan'
+                multiple:
+                  forms: '{count} milisegundotan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundotan'
+                multiple:
+                  forms: '{count} segundotan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minututan'
+                multiple:
+                  forms: '{count} minututan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordutan'
+                multiple:
+                  forms: '{count} ordutan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunetan'
+                multiple:
+                  forms: '{count} egunetan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 astetan'
+                multiple:
+                  forms: '{count} astetan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabetetan'
+                multiple:
+                  forms: '{count} hilabetetan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urtetan'
+                multiple:
+                  forms: '{count} urtetan'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      allative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundotara'
+                multiple:
+                  forms: '{count} milisegundotara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundotara'
+                multiple:
+                  forms: '{count} segundotara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minututara'
+                multiple:
+                  forms: '{count} minututara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordutara'
+                multiple:
+                  forms: '{count} ordutara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunetara'
+                multiple:
+                  forms: '{count} egunetara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 astetara'
+                multiple:
+                  forms: '{count} astetara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabetetara'
+                multiple:
+                  forms: '{count} hilabetetara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urtetara'
+                multiple:
+                  forms: '{count} urtetara'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      ablative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundotatik'
+                multiple:
+                  forms: '{count} milisegundotatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundotatik'
+                multiple:
+                  forms: '{count} segundotatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minututatik'
+                multiple:
+                  forms: '{count} minututatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordutatik'
+                multiple:
+                  forms: '{count} ordutatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunetatik'
+                multiple:
+                  forms: '{count} egunetatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 astetatik'
+                multiple:
+                  forms: '{count} astetatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabetetatik'
+                multiple:
+                  forms: '{count} hilabetetatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urtetatik'
+                multiple:
+                  forms: '{count} urtetatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      lative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundotarantz'
+                multiple:
+                  forms: '{count} milisegundotarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundotarantz'
+                multiple:
+                  forms: '{count} segundotarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minututarantz'
+                multiple:
+                  forms: '{count} minututarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordutarantz'
+                multiple:
+                  forms: '{count} ordutarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunetarantz'
+                multiple:
+                  forms: '{count} egunetarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 astetarantz'
+                multiple:
+                  forms: '{count} astetarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabetetarantz'
+                multiple:
+                  forms: '{count} hilabetetarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urtetarantz'
+                multiple:
+                  forms: '{count} urtetarantz'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      causal:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundorengatik'
+                multiple:
+                  forms: '{count} milisegundorengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundorengatik'
+                multiple:
+                  forms: '{count} segundorengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuturengatik'
+                multiple:
+                  forms: '{count} minuturengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordurengatik'
+                multiple:
+                  forms: '{count} ordurengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunengatik'
+                multiple:
+                  forms: '{count} egunengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 asterengatik'
+                multiple:
+                  forms: '{count} asterengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabeterengatik'
+                multiple:
+                  forms: '{count} hilabeterengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urterengatik'
+                multiple:
+                  forms: '{count} urterengatik'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
+      benefactive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 milisegundorentzat'
+                multiple:
+                  forms: '{count} milisegundorentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            second:
+              phrase:
+                single:
+                  numeric: '1 segundorentzat'
+                multiple:
+                  forms: '{count} segundorentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 minuturentzat'
+                multiple:
+                  forms: '{count} minuturentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 ordurentzat'
+                multiple:
+                  forms: '{count} ordurentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            day:
+              phrase:
+                single:
+                  numeric: '1 egunentzat'
+                multiple:
+                  forms: '{count} egunentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            week:
+              phrase:
+                single:
+                  numeric: '1 asterentzat'
+                multiple:
+                  forms: '{count} asterentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            month:
+              phrase:
+                single:
+                  numeric: '1 hilabeterentzat'
+                multiple:
+                  forms: '{count} hilabeterentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+            year:
+              phrase:
+                single:
+                  numeric: '1 urterentzat'
+                multiple:
+                  forms: '{count} urterentzat'
+                  countPlacement: none
+              provenance:
+                - 'grammar'
+        provenance:
+          - 'grammar'
 
   list:
     engine: 'conjunction'

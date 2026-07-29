@@ -3,7 +3,7 @@ namespace Humanizer;
 /// <summary>
 /// The default strategy for converting <see cref="TimeSpan"/> values into human-readable text.
 /// </summary>
-public class DefaultTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
+public class DefaultTimeSpanHumanizeStrategy : IGrammaticalCaseTimeSpanHumanizeStrategy
 {
     /// <inheritdoc />
     public string Humanize(
@@ -60,4 +60,33 @@ public class DefaultTimeSpanHumanizeStrategy : ITimeSpanHumanizeStrategy
             maxFractionalDigits,
             roundingMode,
             toSymbols);
+
+    string IGrammaticalCaseTimeSpanHumanizeStrategy.Humanize(
+        TimeSpan timeSpan,
+        int precision,
+        bool countEmptyUnits,
+        CultureInfo? culture,
+        TimeUnit maxUnit,
+        TimeUnit minUnit,
+        string? collectionSeparator,
+        bool toSymbols,
+        GrammaticalCase grammaticalCase)
+    {
+        if (GetType().Assembly != typeof(DefaultTimeSpanHumanizeStrategy).Assembly)
+        {
+            throw new NotSupportedException(
+                $"Custom strategy type '{GetType().FullName}' must explicitly implement {nameof(IGrammaticalCaseTimeSpanHumanizeStrategy)} to support grammatical-case-aware durations.");
+        }
+
+        return TimeSpanHumanizeExtensions.DefaultHumanizeWithCase(
+            timeSpan,
+            precision,
+            countEmptyUnits,
+            culture,
+            maxUnit,
+            minUnit,
+            collectionSeparator,
+            toSymbols,
+            grammaticalCase);
+    }
 }

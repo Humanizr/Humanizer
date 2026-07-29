@@ -4,7 +4,628 @@ surfaces:
   inflection:
     cardinalRule: 'Belarusian'
     disposition: 'selector-only'
-
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - nominative
+      - genitive
+      - dative
+      - accusative
+      - instrumental
+      - locative
+    sources:
+      inventory:
+        kind: 'corpus'
+        url: 'https://github.com/UniversalDependencies/UD_Belarusian-HSE/tree/b16f57824829650a92e20c0d6b64739c0652e329'
+        revision: 'b16f57824829650a92e20c0d6b64739c0652e329' # DevSkim: ignore DS173237
+        locator: 'manually native-annotated Case inventory and quantitative duration examples'
+        credit: 'Olga Lyashevskaya, Angelika Peljak-Lapinska, Daria Petrova, and Yana Shishkina'
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/be.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'Belarusian duration lexemes and cardinal categories'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - inventory
+      genitive:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекунды'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекунд'
+                    singular: '{count} мілісекунды'
+                    dual: '{count} мілісекунд'
+                    paucal: '{count} мілісекунд'
+                    plural: '{count} мілісекунд'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунды'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунд'
+                    singular: '{count} секунды'
+                    dual: '{count} секунд'
+                    paucal: '{count} секунд'
+                    plural: '{count} секунд'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвіліны'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвілін'
+                    singular: '{count} хвіліны'
+                    dual: '{count} хвілін'
+                    paucal: '{count} хвілін'
+                    plural: '{count} хвілін'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 гадзіны'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадзін'
+                    singular: '{count} гадзіны'
+                    dual: '{count} гадзін'
+                    paucal: '{count} гадзін'
+                    plural: '{count} гадзін'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дня'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дзён'
+                    singular: '{count} дня'
+                    dual: '{count} дзён'
+                    paucal: '{count} дзён'
+                    plural: '{count} дзён'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тыдня'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тыдняў'
+                    singular: '{count} тыдня'
+                    dual: '{count} тыдняў'
+                    paucal: '{count} тыдняў'
+                    plural: '{count} тыдняў'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяца'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцаў'
+                    singular: '{count} месяца'
+                    dual: '{count} месяцаў'
+                    paucal: '{count} месяцаў'
+                    plural: '{count} месяцаў'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 года'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадоў'
+                    singular: '{count} года'
+                    dual: '{count} гадоў'
+                    paucal: '{count} гадоў'
+                    plural: '{count} гадоў'
+              provenance:
+                - 'inventory'
+                - 'cldr48'
+        provenance:
+          - 'inventory'
+          - 'cldr48'
+      dative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекундзе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекундам'
+                    singular: '{count} мілісекундзе'
+                    dual: '{count} мілісекундам'
+                    paucal: '{count} мілісекундам'
+                    plural: '{count} мілісекундам'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундзе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секундам'
+                    singular: '{count} секундзе'
+                    dual: '{count} секундам'
+                    paucal: '{count} секундам'
+                    plural: '{count} секундам'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвіліне'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвілінам'
+                    singular: '{count} хвіліне'
+                    dual: '{count} хвілінам'
+                    paucal: '{count} хвілінам'
+                    plural: '{count} хвілінам'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 гадзіне'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадзінам'
+                    singular: '{count} гадзіне'
+                    dual: '{count} гадзінам'
+                    paucal: '{count} гадзінам'
+                    plural: '{count} гадзінам'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дню'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дням'
+                    singular: '{count} дню'
+                    dual: '{count} дням'
+                    paucal: '{count} дням'
+                    plural: '{count} дням'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тыдню'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тыдням'
+                    singular: '{count} тыдню'
+                    dual: '{count} тыдням'
+                    paucal: '{count} тыдням'
+                    plural: '{count} тыдням'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяцу'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцам'
+                    singular: '{count} месяцу'
+                    dual: '{count} месяцам'
+                    paucal: '{count} месяцам'
+                    plural: '{count} месяцам'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 году'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадам'
+                    singular: '{count} году'
+                    dual: '{count} гадам'
+                    paucal: '{count} гадам'
+                    plural: '{count} гадам'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекунд'
+                    singular: '{count} мілісекунду'
+                    dual: '{count} мілісекунды'
+                    paucal: '{count} мілісекунды'
+                    plural: '{count} мілісекунд'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секунду'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секунд'
+                    singular: '{count} секунду'
+                    dual: '{count} секунды'
+                    paucal: '{count} секунды'
+                    plural: '{count} секунд'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвіліну'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвілін'
+                    singular: '{count} хвіліну'
+                    dual: '{count} хвіліны'
+                    paucal: '{count} хвіліны'
+                    plural: '{count} хвілін'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 гадзіну'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадзін'
+                    singular: '{count} гадзіну'
+                    dual: '{count} гадзіны'
+                    paucal: '{count} гадзіны'
+                    plural: '{count} гадзін'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дзень'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} дзён'
+                    singular: '{count} дзень'
+                    dual: '{count} дні'
+                    paucal: '{count} дні'
+                    plural: '{count} дзён'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тыдзень'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тыдняў'
+                    singular: '{count} тыдзень'
+                    dual: '{count} тыдні'
+                    paucal: '{count} тыдні'
+                    plural: '{count} тыдняў'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяц'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцаў'
+                    singular: '{count} месяц'
+                    dual: '{count} месяцы'
+                    paucal: '{count} месяцы'
+                    plural: '{count} месяцаў'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 год'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадоў'
+                    singular: '{count} год'
+                    dual: '{count} гады'
+                    paucal: '{count} гады'
+                    plural: '{count} гадоў'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекундай'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекундамі'
+                    singular: '{count} мілісекундай'
+                    dual: '{count} мілісекундамі'
+                    paucal: '{count} мілісекундамі'
+                    plural: '{count} мілісекундамі'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундай'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секундамі'
+                    singular: '{count} секундай'
+                    dual: '{count} секундамі'
+                    paucal: '{count} секундамі'
+                    plural: '{count} секундамі'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвілінай'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвілінамі'
+                    singular: '{count} хвілінай'
+                    dual: '{count} хвілінамі'
+                    paucal: '{count} хвілінамі'
+                    plural: '{count} хвілінамі'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 гадзінай'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадзінамі'
+                    singular: '{count} гадзінай'
+                    dual: '{count} гадзінамі'
+                    paucal: '{count} гадзінамі'
+                    plural: '{count} гадзінамі'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 днём'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} днямі'
+                    singular: '{count} днём'
+                    dual: '{count} днямі'
+                    paucal: '{count} днямі'
+                    plural: '{count} днямі'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тыднем'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тыднямі'
+                    singular: '{count} тыднем'
+                    dual: '{count} тыднямі'
+                    paucal: '{count} тыднямі'
+                    plural: '{count} тыднямі'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяцам'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцамі'
+                    singular: '{count} месяцам'
+                    dual: '{count} месяцамі'
+                    paucal: '{count} месяцамі'
+                    plural: '{count} месяцамі'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 годам'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадамі'
+                    singular: '{count} годам'
+                    dual: '{count} гадамі'
+                    paucal: '{count} гадамі'
+                    plural: '{count} гадамі'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
+      locative:
+        authored:
+          units:
+            millisecond:
+              phrase:
+                single:
+                  numeric: '1 мілісекундзе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} мілісекундах'
+                    singular: '{count} мілісекундзе'
+                    dual: '{count} мілісекундах'
+                    paucal: '{count} мілісекундах'
+                    plural: '{count} мілісекундах'
+              provenance:
+                - 'inventory'
+            second:
+              phrase:
+                single:
+                  numeric: '1 секундзе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} секундах'
+                    singular: '{count} секундзе'
+                    dual: '{count} секундах'
+                    paucal: '{count} секундах'
+                    plural: '{count} секундах'
+              provenance:
+                - 'inventory'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 хвіліне'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} хвілінах'
+                    singular: '{count} хвіліне'
+                    dual: '{count} хвілінах'
+                    paucal: '{count} хвілінах'
+                    plural: '{count} хвілінах'
+              provenance:
+                - 'inventory'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 гадзіне'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадзінах'
+                    singular: '{count} гадзіне'
+                    dual: '{count} гадзінах'
+                    paucal: '{count} гадзінах'
+                    plural: '{count} гадзінах'
+              provenance:
+                - 'inventory'
+            day:
+              phrase:
+                single:
+                  numeric: '1 дні'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} днях'
+                    singular: '{count} дні'
+                    dual: '{count} днях'
+                    paucal: '{count} днях'
+                    plural: '{count} днях'
+              provenance:
+                - 'inventory'
+            week:
+              phrase:
+                single:
+                  numeric: '1 тыдні'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} тыднях'
+                    singular: '{count} тыдні'
+                    dual: '{count} тыднях'
+                    paucal: '{count} тыднях'
+                    plural: '{count} тыднях'
+              provenance:
+                - 'inventory'
+            month:
+              phrase:
+                single:
+                  numeric: '1 месяцы'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} месяцах'
+                    singular: '{count} месяцы'
+                    dual: '{count} месяцах'
+                    paucal: '{count} месяцах'
+                    plural: '{count} месяцах'
+              provenance:
+                - 'inventory'
+            year:
+              phrase:
+                single:
+                  numeric: '1 годзе'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} гадах'
+                    singular: '{count} годзе'
+                    dual: '{count} гадах'
+                    paucal: '{count} гадах'
+                    plural: '{count} гадах'
+              provenance:
+                - 'inventory'
+        provenance:
+          - 'inventory'
   list:
     engine: 'conjunction'
     value: 'і'

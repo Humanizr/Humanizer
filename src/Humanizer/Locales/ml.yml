@@ -4,6 +4,671 @@ surfaces:
   inflection:
     cardinalRule: 'One'
     disposition: 'selector-only'
+  durationCases:
+    classification: 'distinct'
+    citationCase: 'nominative'
+    inventory:
+      - 'nominative'
+      - 'genitive'
+      - 'dative'
+      - 'accusative'
+      - 'instrumental'
+      - 'locative'
+      - 'sociative'
+    sources:
+      cldr48:
+        kind: 'cldr'
+        url: 'https://github.com/unicode-org/cldr/blob/acd6d88ae493633240e19a87a721076a8a75c310/common/main/ml.xml'
+        revision: 'acd6d88ae493633240e19a87a721076a8a75c310' # DevSkim: ignore DS173237
+        locator: 'long duration-unit case patterns'
+        credit: 'Unicode CLDR contributors'
+    cases:
+      nominative:
+        authored: 'base-duration'
+        provenance:
+          - 'cldr48'
+      genitive:
+        authored:
+          units:
+            millisecond:
+              notApplicable: 'CLDR 48 provides no non-nominative millisecond duration form for Malayalam.'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 സെക്കൻഡിന്റെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} സെക്കൻഡിന്റെ'
+                    singular: '{count} സെക്കൻഡിന്റെ'
+                    dual: '{count} സെക്കൻഡിന്റെ'
+                    paucal: '{count} സെക്കൻഡിന്റെ'
+                    plural: '{count} സെക്കൻഡിന്റെ'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 മിനിറ്റിന്റെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മിനിറ്റിന്റെ'
+                    singular: '{count} മിനിറ്റിന്റെ'
+                    dual: '{count} മിനിറ്റിന്റെ'
+                    paucal: '{count} മിനിറ്റിന്റെ'
+                    plural: '{count} മിനിറ്റിന്റെ'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 മണിക്കൂറിന്റെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മണിക്കൂറിന്റെ'
+                    singular: '{count} മണിക്കൂറിന്റെ'
+                    dual: '{count} മണിക്കൂറിന്റെ'
+                    paucal: '{count} മണിക്കൂറിന്റെ'
+                    plural: '{count} മണിക്കൂറിന്റെ'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ദിവസത്തിന്റെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ദിവസത്തിന്റെ'
+                    singular: '{count} ദിവസത്തിന്റെ'
+                    dual: '{count} ദിവസത്തിന്റെ'
+                    paucal: '{count} ദിവസത്തിന്റെ'
+                    plural: '{count} ദിവസത്തിന്റെ'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ആഴ്ചയുടെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ആഴ്ചയുടെ'
+                    singular: '{count} ആഴ്ചയുടെ'
+                    dual: '{count} ആഴ്ചയുടെ'
+                    paucal: '{count} ആഴ്ചയുടെ'
+                    plural: '{count} ആഴ്ചയുടെ'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 മാസത്തിന്റെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മാസത്തിന്റെ'
+                    singular: '{count} മാസത്തിന്റെ'
+                    dual: '{count} മാസത്തിന്റെ'
+                    paucal: '{count} മാസത്തിന്റെ'
+                    plural: '{count} മാസത്തിന്റെ'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 വർഷത്തിന്റെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} വർഷത്തിന്റെ'
+                    singular: '{count} വർഷത്തിന്റെ'
+                    dual: '{count} വർഷത്തിന്റെ'
+                    paucal: '{count} വർഷത്തിന്റെ'
+                    plural: '{count} വർഷത്തിന്റെ'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      dative:
+        authored:
+          units:
+            millisecond:
+              notApplicable: 'CLDR 48 provides no non-nominative millisecond duration form for Malayalam.'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 സെക്കൻഡിന്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} സെക്കൻഡിന്'
+                    singular: '{count} സെക്കൻഡിന്'
+                    dual: '{count} സെക്കൻഡിന്'
+                    paucal: '{count} സെക്കൻഡിന്'
+                    plural: '{count} സെക്കൻഡിന്'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 മിനിറ്റിന്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മിനിറ്റിന്'
+                    singular: '{count} മിനിറ്റിന്'
+                    dual: '{count} മിനിറ്റിന്'
+                    paucal: '{count} മിനിറ്റിന്'
+                    plural: '{count} മിനിറ്റിന്'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 മണിക്കൂറിന്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മണിക്കൂറിന്'
+                    singular: '{count} മണിക്കൂറിന്'
+                    dual: '{count} മണിക്കൂറിന്'
+                    paucal: '{count} മണിക്കൂറിന്'
+                    plural: '{count} മണിക്കൂറിന്'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ദിവസത്തിന്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ദിവസത്തിന്'
+                    singular: '{count} ദിവസത്തിന്'
+                    dual: '{count} ദിവസത്തിന്'
+                    paucal: '{count} ദിവസത്തിന്'
+                    plural: '{count} ദിവസത്തിന്'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ആഴ്ചയ്ക്ക്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ആഴ്ചയ്ക്ക്'
+                    singular: '{count} ആഴ്ചയ്ക്ക്'
+                    dual: '{count} ആഴ്ചയ്ക്ക്'
+                    paucal: '{count} ആഴ്ചയ്ക്ക്'
+                    plural: '{count} ആഴ്ചയ്ക്ക്'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 മാസത്തിന്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മാസത്തിന്'
+                    singular: '{count} മാസത്തിന്'
+                    dual: '{count} മാസത്തിന്'
+                    paucal: '{count} മാസത്തിന്'
+                    plural: '{count} മാസത്തിന്'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 വർഷത്തിന്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} വർഷത്തിന്'
+                    singular: '{count} വർഷത്തിന്'
+                    dual: '{count} വർഷത്തിന്'
+                    paucal: '{count} വർഷത്തിന്'
+                    plural: '{count} വർഷത്തിന്'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      accusative:
+        authored:
+          units:
+            millisecond:
+              notApplicable: 'CLDR 48 provides no non-nominative millisecond duration form for Malayalam.'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 സെക്കൻഡിനെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} സെക്കൻഡിനെ'
+                    singular: '{count} സെക്കൻഡിനെ'
+                    dual: '{count} സെക്കൻഡിനെ'
+                    paucal: '{count} സെക്കൻഡിനെ'
+                    plural: '{count} സെക്കൻഡിനെ'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 മിനിറ്റിനെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മിനിറ്റിനെ'
+                    singular: '{count} മിനിറ്റിനെ'
+                    dual: '{count} മിനിറ്റിനെ'
+                    paucal: '{count} മിനിറ്റിനെ'
+                    plural: '{count} മിനിറ്റിനെ'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 മണിക്കൂറിനെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മണിക്കൂറിനെ'
+                    singular: '{count} മണിക്കൂറിനെ'
+                    dual: '{count} മണിക്കൂറിനെ'
+                    paucal: '{count} മണിക്കൂറിനെ'
+                    plural: '{count} മണിക്കൂറിനെ'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ദിവസത്തെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ദിവസത്തെ'
+                    singular: '{count} ദിവസത്തെ'
+                    dual: '{count} ദിവസത്തെ'
+                    paucal: '{count} ദിവസത്തെ'
+                    plural: '{count} ദിവസത്തെ'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ആഴ്ചയെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ആഴ്ചയെ'
+                    singular: '{count} ആഴ്ചയെ'
+                    dual: '{count} ആഴ്ചയെ'
+                    paucal: '{count} ആഴ്ചയെ'
+                    plural: '{count} ആഴ്ചയെ'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 മാസത്തെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മാസത്തെ'
+                    singular: '{count} മാസത്തെ'
+                    dual: '{count} മാസത്തെ'
+                    paucal: '{count} മാസത്തെ'
+                    plural: '{count} മാസത്തെ'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 വർഷത്തെ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} വർഷത്തെ'
+                    singular: '{count} വർഷത്തെ'
+                    dual: '{count} വർഷത്തെ'
+                    paucal: '{count} വർഷത്തെ'
+                    plural: '{count} വർഷത്തെ'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      instrumental:
+        authored:
+          units:
+            millisecond:
+              notApplicable: 'CLDR 48 provides no non-nominative millisecond duration form for Malayalam.'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 സെക്കൻഡ് കൊണ്ട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} സെക്കൻഡ് കൊണ്ട്'
+                    singular: '{count} സെക്കൻഡ് കൊണ്ട്'
+                    dual: '{count} സെക്കൻഡ് കൊണ്ട്'
+                    paucal: '{count} സെക്കൻഡ് കൊണ്ട്'
+                    plural: '{count} സെക്കൻഡ് കൊണ്ട്'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 മിനിറ്റ് കൊണ്ട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മിനിറ്റ് കൊണ്ട്'
+                    singular: '{count} മിനിറ്റ് കൊണ്ട്'
+                    dual: '{count} മിനിറ്റ് കൊണ്ട്'
+                    paucal: '{count} മിനിറ്റ് കൊണ്ട്'
+                    plural: '{count} മിനിറ്റ് കൊണ്ട്'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 മണിക്കൂർ കൊണ്ട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മണിക്കൂർ കൊണ്ട്'
+                    singular: '{count} മണിക്കൂർ കൊണ്ട്'
+                    dual: '{count} മണിക്കൂർ കൊണ്ട്'
+                    paucal: '{count} മണിക്കൂർ കൊണ്ട്'
+                    plural: '{count} മണിക്കൂർ കൊണ്ട്'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ദിവസം കൊണ്ട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ദിവസം കൊണ്ട്'
+                    singular: '{count} ദിവസം കൊണ്ട്'
+                    dual: '{count} ദിവസം കൊണ്ട്'
+                    paucal: '{count} ദിവസം കൊണ്ട്'
+                    plural: '{count} ദിവസം കൊണ്ട്'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ആഴ്ച കൊണ്ട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ആഴ്ച കൊണ്ട്'
+                    singular: '{count} ആഴ്ച കൊണ്ട്'
+                    dual: '{count} ആഴ്ച കൊണ്ട്'
+                    paucal: '{count} ആഴ്ച കൊണ്ട്'
+                    plural: '{count} ആഴ്ച കൊണ്ട്'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 മാസം കൊണ്ട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മാസം കൊണ്ട്'
+                    singular: '{count} മാസം കൊണ്ട്'
+                    dual: '{count} മാസം കൊണ്ട്'
+                    paucal: '{count} മാസം കൊണ്ട്'
+                    plural: '{count} മാസം കൊണ്ട്'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 വർഷം കൊണ്ട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} വർഷം കൊണ്ട്'
+                    singular: '{count} വർഷം കൊണ്ട്'
+                    dual: '{count} വർഷം കൊണ്ട്'
+                    paucal: '{count} വർഷം കൊണ്ട്'
+                    plural: '{count} വർഷം കൊണ്ട്'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      locative:
+        authored:
+          units:
+            millisecond:
+              notApplicable: 'CLDR 48 provides no non-nominative millisecond duration form for Malayalam.'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 സെക്കൻഡിൽ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} സെക്കൻഡിൽ'
+                    singular: '{count} സെക്കൻഡിൽ'
+                    dual: '{count} സെക്കൻഡിൽ'
+                    paucal: '{count} സെക്കൻഡിൽ'
+                    plural: '{count} സെക്കൻഡിൽ'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 മിനിറ്റിൽ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മിനിറ്റിൽ'
+                    singular: '{count} മിനിറ്റിൽ'
+                    dual: '{count} മിനിറ്റിൽ'
+                    paucal: '{count} മിനിറ്റിൽ'
+                    plural: '{count} മിനിറ്റിൽ'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 മണിക്കൂറിൽ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മണിക്കൂറിൽ'
+                    singular: '{count} മണിക്കൂറിൽ'
+                    dual: '{count} മണിക്കൂറിൽ'
+                    paucal: '{count} മണിക്കൂറിൽ'
+                    plural: '{count} മണിക്കൂറിൽ'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ദിവസത്തിൽ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ദിവസത്തിൽ'
+                    singular: '{count} ദിവസത്തിൽ'
+                    dual: '{count} ദിവസത്തിൽ'
+                    paucal: '{count} ദിവസത്തിൽ'
+                    plural: '{count} ദിവസത്തിൽ'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ആഴ്ചയിൽ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ആഴ്ചയിൽ'
+                    singular: '{count} ആഴ്ചയിൽ'
+                    dual: '{count} ആഴ്ചയിൽ'
+                    paucal: '{count} ആഴ്ചയിൽ'
+                    plural: '{count} ആഴ്ചയിൽ'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 മാസത്തിൽ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മാസത്തിൽ'
+                    singular: '{count} മാസത്തിൽ'
+                    dual: '{count} മാസത്തിൽ'
+                    paucal: '{count} മാസത്തിൽ'
+                    plural: '{count} മാസത്തിൽ'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 വർഷത്തിൽ'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} വർഷത്തിൽ'
+                    singular: '{count} വർഷത്തിൽ'
+                    dual: '{count} വർഷത്തിൽ'
+                    paucal: '{count} വർഷത്തിൽ'
+                    plural: '{count} വർഷത്തിൽ'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
+      sociative:
+        authored:
+          units:
+            millisecond:
+              notApplicable: 'CLDR 48 provides no non-nominative millisecond duration form for Malayalam.'
+              provenance:
+                - 'cldr48'
+            second:
+              phrase:
+                single:
+                  numeric: '1 സെക്കൻഡിനോട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} സെക്കൻഡിനോട്'
+                    singular: '{count} സെക്കൻഡിനോട്'
+                    dual: '{count} സെക്കൻഡിനോട്'
+                    paucal: '{count} സെക്കൻഡിനോട്'
+                    plural: '{count} സെക്കൻഡിനോട്'
+              provenance:
+                - 'cldr48'
+            minute:
+              phrase:
+                single:
+                  numeric: '1 മിനിറ്റിനോട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മിനിറ്റിനോട്'
+                    singular: '{count} മിനിറ്റിനോട്'
+                    dual: '{count} മിനിറ്റിനോട്'
+                    paucal: '{count} മിനിറ്റിനോട്'
+                    plural: '{count} മിനിറ്റിനോട്'
+              provenance:
+                - 'cldr48'
+            hour:
+              phrase:
+                single:
+                  numeric: '1 മണിക്കൂറിനോട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മണിക്കൂറിനോട്'
+                    singular: '{count} മണിക്കൂറിനോട്'
+                    dual: '{count} മണിക്കൂറിനോട്'
+                    paucal: '{count} മണിക്കൂറിനോട്'
+                    plural: '{count} മണിക്കൂറിനോട്'
+              provenance:
+                - 'cldr48'
+            day:
+              phrase:
+                single:
+                  numeric: '1 ദിവസത്തോട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ദിവസത്തോട്'
+                    singular: '{count} ദിവസത്തോട്'
+                    dual: '{count} ദിവസത്തോട്'
+                    paucal: '{count} ദിവസത്തോട്'
+                    plural: '{count} ദിവസത്തോട്'
+              provenance:
+                - 'cldr48'
+            week:
+              phrase:
+                single:
+                  numeric: '1 ആഴ്ചയോട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} ആഴ്ചയോട്'
+                    singular: '{count} ആഴ്ചയോട്'
+                    dual: '{count} ആഴ്ചയോട്'
+                    paucal: '{count} ആഴ്ചയോട്'
+                    plural: '{count} ആഴ്ചയോട്'
+              provenance:
+                - 'cldr48'
+            month:
+              phrase:
+                single:
+                  numeric: '1 മാസത്തോട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} മാസത്തോട്'
+                    singular: '{count} മാസത്തോട്'
+                    dual: '{count} മാസത്തോട്'
+                    paucal: '{count} മാസത്തോട്'
+                    plural: '{count} മാസത്തോട്'
+              provenance:
+                - 'cldr48'
+            year:
+              phrase:
+                single:
+                  numeric: '1 വർഷത്തോട്'
+                multiple:
+                  countPlacement: none
+                  forms:
+                    default: '{count} വർഷത്തോട്'
+                    singular: '{count} വർഷത്തോട്'
+                    dual: '{count} വർഷത്തോട്'
+                    paucal: '{count} വർഷത്തോട്'
+                    plural: '{count} വർഷത്തോട്'
+              provenance:
+                - 'cldr48'
+        provenance:
+          - 'cldr48'
 
   list:
     engine: 'delimited'

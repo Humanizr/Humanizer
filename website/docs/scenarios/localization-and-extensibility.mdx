@@ -32,6 +32,7 @@ The result is `quarante-deux; BONJOUR`. A per-call transformer is isolated and e
 | A custom truncation rule | `ITruncator` passed to `Truncate` |
 | Relative date thresholds | A date/time strategy assigned once |
 | Application-wide locale component | The matching `LocaliserRegistry<T>` |
+| Case-aware duration policy | `IGrammaticalCaseTimeSpanHumanizeStrategy` and `IGrammaticalCaseTimeSpanFormatter` |
 | Enum metadata property | `UseEnumDescriptionPropertyLocator` at startup |
 
 Registries cover collection formatters, general formatters, number-word converters, ordinalizers, date-ordinal converters, and clock-notation converters. Culture resolution checks the requested culture and its parents before using the registry default.
@@ -55,6 +56,21 @@ a custom time-span strategy that delegates all behavior to
 `DefaultTimeSpanHumanizeStrategy` after limiting output to one part:
 
 <CodeBlock language="csharp" title="Program.cs">{configuration}</CodeBlock>
+
+`HumanizeWithCase` uses a separate optional capability so existing custom
+components remain source- and binary-compatible. A configured strategy must
+implement `IGrammaticalCaseTimeSpanHumanizeStrategy`, and its selected
+formatter must implement `IGrammaticalCaseTimeSpanFormatter`. Otherwise the
+case-aware call throws `NotSupportedException`, including when the requested
+case is `Nominative`. Existing `Humanize` and `HumanizeToSymbols` calls
+continue to use `ITimeSpanHumanizeStrategy` and `IFormatter` unchanged.
+
+The case-aware formatter receives the duration unit, numeric count, and
+grammatical case. It returns a complete locale-authored unit-case phrase:
+singular output may contain a localized one-word or article, while a counted
+form may render the count explicitly or encode it in the unit form. It must
+not add a preposition. Install custom
+strategies and formatters during startup, before registry resolution freezes.
 
 ## Pitfall
 
@@ -83,4 +99,6 @@ behavior.
 - [ICulturedStringTransformer API](../api/Humanizer.ICulturedStringTransformer.md)
 - [ITruncator API](../api/Humanizer.ITruncator.md)
 - [ITimeSpanHumanizeStrategy API](../api/Humanizer.ITimeSpanHumanizeStrategy.md)
+- [IGrammaticalCaseTimeSpanHumanizeStrategy API](../api/Humanizer.IGrammaticalCaseTimeSpanHumanizeStrategy.md)
+- [IGrammaticalCaseTimeSpanFormatter API](../api/Humanizer.IGrammaticalCaseTimeSpanFormatter.md)
 - [DefaultTimeSpanHumanizeStrategy API](../api/Humanizer.DefaultTimeSpanHumanizeStrategy.md)
