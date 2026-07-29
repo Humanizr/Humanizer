@@ -736,22 +736,12 @@ locale: 'zz'
 surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
-    disposition: 'lexicon'
-    lexemes:
-      person:
-        one: 'person'
-        other: 'people'
 """));
         var rightCatalog = CreateCatalog(("zz", """
 locale: 'zz'
 surfaces:
   inflection:
-    cardinalRule: 'EnglishLike'
-    disposition: 'lexicon'
-    lexemes:
-      person:
-        one: 'person'
-        other: 'persons'
+    cardinalRule: 'French'
 """));
 
         Assert.NotEmpty(HumanizerSourceGenerator.LocaleSemanticDiff.Compare(leftCatalog.Locales, rightCatalog.Locales));
@@ -766,11 +756,6 @@ locale: 'en'
 surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
-    disposition: 'lexicon'
-    lexemes:
-      person:
-        one: 'person'
-        other: 'people'
 """),
             ("en-ZZ", """
 locale: 'en-ZZ'
@@ -781,11 +766,6 @@ locale: 'nb'
 surfaces:
   inflection:
     cardinalRule: 'One'
-    disposition: 'lexicon'
-    lexemes:
-      bok:
-        one: 'bok'
-        other: 'bøker'
 """),
             ("nn", """
 locale: 'nn'
@@ -793,7 +773,6 @@ variantOf: 'nb'
 surfaces:
   inflection:
     cardinalRule: 'One'
-    disposition: 'selector-only'
 """));
 
         Assert.Empty(catalog.Diagnostics);
@@ -801,8 +780,10 @@ surfaces:
         var regional = catalog.Locales.Single(static locale => locale.LocaleCode == "en-ZZ");
         var nynorsk = catalog.Locales.Single(static locale => locale.LocaleCode == "nn");
 
-        Assert.True(regional.Inflection!.TryGetValue("lexemes", out _));
-        Assert.False(nynorsk.Inflection!.TryGetValue("lexemes", out _));
+        Assert.True(regional.Inflection!.TryGetValue("cardinalRule", out var regionalRule));
+        Assert.Equal("EnglishLike", Assert.IsType<HumanizerSourceGenerator.SimpleYamlScalar>(regionalRule).Value);
+        Assert.True(nynorsk.Inflection!.TryGetValue("cardinalRule", out var nynorskRule));
+        Assert.Equal("One", Assert.IsType<HumanizerSourceGenerator.SimpleYamlScalar>(nynorskRule).Value);
     }
 
     [Fact]

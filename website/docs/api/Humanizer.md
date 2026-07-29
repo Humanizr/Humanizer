@@ -4,7 +4,6 @@
 | :--- | :--- |
 | [ByteRate](Humanizer.ByteRate.md 'Humanizer\.ByteRate') | Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer |
 | [ByteSizeExtensions](Humanizer.ByteSizeExtensions.md 'Humanizer\.ByteSizeExtensions') | Provides extension methods for ByteSize |
-| [CardinalInflectionForms](Humanizer.CardinalInflectionForms.md 'Humanizer\.CardinalInflectionForms') | Provides authored forms of one common noun for cardinal\-count inflection\. |
 | [CasingExtensions](Humanizer.CasingExtensions.md 'Humanizer\.CasingExtensions') | ApplyCase method to allow changing the case of a sentence easily |
 | [ChineseFinancialNumeralExtensions](Humanizer.ChineseFinancialNumeralExtensions.md 'Humanizer\.ChineseFinancialNumeralExtensions') | Contains extension methods for converting integers to Chinese financial characters\. |
 | [CollectionHumanizeExtensions](Humanizer.CollectionHumanizeExtensions.md 'Humanizer\.CollectionHumanizeExtensions') | Humanizes an IEnumerable into a human readable list |
@@ -79,6 +78,7 @@
 | [OnDate\.October](Humanizer.OnDate.October.md 'Humanizer\.OnDate\.October') | Provides fluent date accessors for October |
 | [OnDate\.September](Humanizer.OnDate.September.md 'Humanizer\.OnDate\.September') | Provides fluent date accessors for September |
 | [OrdinalizeExtensions](Humanizer.OrdinalizeExtensions.md 'Humanizer\.OrdinalizeExtensions') | Ordinalize extensions |
+| [PluralizationForms](Humanizer.PluralizationForms.md 'Humanizer\.PluralizationForms') | Provides authored singular and plural forms of one noun\. |
 | [PrecisionDateOnlyHumanizeStrategy](Humanizer.PrecisionDateOnlyHumanizeStrategy.md 'Humanizer\.PrecisionDateOnlyHumanizeStrategy') | Precision\-based calculator for distance between two times |
 | [PrecisionDateTimeHumanizeStrategy](Humanizer.PrecisionDateTimeHumanizeStrategy.md 'Humanizer\.PrecisionDateTimeHumanizeStrategy') | Precision\-based calculator for distance between two times |
 | [PrecisionDateTimeOffsetHumanizeStrategy](Humanizer.PrecisionDateTimeOffsetHumanizeStrategy.md 'Humanizer\.PrecisionDateTimeOffsetHumanizeStrategy') | Precision\-based calculator for distance between two times |

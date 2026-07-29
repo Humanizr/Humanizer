@@ -3,7 +3,6 @@ locale: 'mt'
 surfaces:
   inflection:
     cardinalRule: 'Maltese'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

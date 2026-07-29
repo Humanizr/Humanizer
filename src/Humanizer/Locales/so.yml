@@ -3,7 +3,6 @@ locale: 'so'
 surfaces:
   inflection:
     cardinalRule: 'One'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'absolutive'

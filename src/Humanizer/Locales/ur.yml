@@ -3,7 +3,6 @@ locale: 'ur'
 surfaces:
   inflection:
     cardinalRule: 'EnglishLike'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

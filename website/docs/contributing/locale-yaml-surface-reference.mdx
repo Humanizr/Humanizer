@@ -77,32 +77,16 @@ The `list` surface is always a mapping. Scalar shorthand is not accepted.
 
 Purpose:
 
-- assigns the locale's Unicode CLDR decimal cardinal selector
-- optionally authors a bounded exact lexicon for common-noun inflection and
-  reverse lemmatization
-- supplies the cardinal-category selector used by caller-authored
-  `CardinalInflectionForms`
+- assigns the locale's Unicode CLDR decimal cardinal rule used by
+  `PluralizationForms`
 
 Fields:
 
-- `cardinalRule`: the checked-in CLDR 48.2 selector used by this locale.
-- `disposition`: `selector-only` when Humanizer supplies category selection
-  but no noun lexicon, or `lexicon` when `lexemes` contains at least one exact
-  noun.
+- `cardinalRule`: the checked-in CLDR 48.2 rule used by this locale.
 - `regionalRules`: optional mapping from a same-language regional culture to a
   different checked-in CLDR cardinal selector. Use this only when CLDR defines
   a regional rule that differs from the neutral locale, such as `pt-PT`.
-- `lexemes`: mapping from a citation-form lemma to its authored
-  `zero`/`one`/`two`/`few`/`many`/`other` forms. A lexicon entry must include
-  every category reachable by its `cardinalRule`, including `other`.
 
-Lexeme keys and forms are normalized to Unicode NFC during generation.
-Runtime matching is ordinal and case-sensitive, and returned text preserves
-authored casing. Reverse matches shared by more than one lemma are ambiguous
-and `TryLemmatize` returns `false`.
-
-CLDR categories select forms for a number; they are not a complete noun
-morphology model. The runtime does not guess suffixes or fall back to English.
 Regional variants may inherit this surface only when they share the exact
 primary language subtag. In particular, Nynorsk `nn` does not inherit Bokmål
 `nb` inflection data.
@@ -113,12 +97,6 @@ Example:
 surfaces:
   inflection:
     cardinalRule: 'Spanish'
-    disposition: 'lexicon'
-    lexemes:
-      persona:
-        one: 'persona'
-        many: 'personas'
-        other: 'personas'
 ```
 
 ### `formatter`

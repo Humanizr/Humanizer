@@ -104,11 +104,11 @@ public class LocalizedInflectionTests
 
     [Theory]
     [MemberData(nameof(ShippedLocaleRows))]
-    public void CallerAuthoredInvariantFormsWorkForEveryShippedLocale(string locale)
+    public void PluralizationFormsWorkForEveryShippedLocale(string locale)
     {
-        var forms = CardinalInflectionForms.Invariant("token");
+        var forms = PluralizationForms.Invariant("token");
 
-        var success = forms.TryInflect(1.0m, new CultureInfo(locale), out var result);
+        var success = forms.TryPluralize(1.0m, new CultureInfo(locale), out var result);
 
         Assert.True(success);
         Assert.Equal("token", result);
@@ -186,14 +186,14 @@ public class LocalizedInflectionTests
     [Fact]
     public void DecimalScaleSuppliesVisibleFractionOperands()
     {
-        var forms = new CardinalInflectionForms(
+        var forms = new PluralizationForms(
             "item",
             "other",
             one: "one");
         var culture = new CultureInfo("en");
 
-        Assert.True(forms.TryInflect(1m, culture, out var integer));
-        Assert.True(forms.TryInflect(1.0m, culture, out var visibleFraction));
+        Assert.True(forms.TryPluralize(1m, culture, out var integer));
+        Assert.True(forms.TryPluralize(1.0m, culture, out var visibleFraction));
         Assert.Equal("one", integer);
         Assert.Equal("other", visibleFraction);
     }
@@ -208,9 +208,9 @@ public class LocalizedInflectionTests
         string locale,
         string quantity)
     {
-        var forms = new CardinalInflectionForms("item", "items");
+        var forms = new PluralizationForms("item", "items");
 
-        var success = forms.TryInflect(
+        var success = forms.TryPluralize(
             decimal.Parse(quantity, CultureInfo.InvariantCulture),
             new CultureInfo(locale),
             out var result);
@@ -230,7 +230,7 @@ public class LocalizedInflectionTests
         string quantity,
         string expected)
     {
-        var forms = new CardinalInflectionForms(
+        var forms = new PluralizationForms(
             "item",
             "items",
             zero: "items",
@@ -239,45 +239,13 @@ public class LocalizedInflectionTests
             few: "items",
             many: "items");
 
-        var success = forms.TryInflect(
+        var success = forms.TryPluralize(
             decimal.Parse(quantity, CultureInfo.InvariantCulture),
             new CultureInfo(locale),
             out var result);
 
         Assert.True(success);
         Assert.Equal(expected, result);
-    }
-
-    [Theory]
-    [InlineData("en", "person", "person", "people")]
-    [InlineData("en-US", "person", "person", "people")]
-    [InlineData("es", "persona", "persona", "personas")]
-    public void ExactBuiltInLexemesInflectAndLemmatize(
-        string locale,
-        string lemma,
-        string singular,
-        string plural)
-    {
-        var culture = new CultureInfo(locale);
-
-        Assert.True(lemma.TryInflect(1m, culture, out var one));
-        Assert.True(lemma.TryInflect(2m, culture, out var other));
-        Assert.True(plural.TryLemmatize(culture, out var resolvedLemma));
-        Assert.Equal(singular, one);
-        Assert.Equal(plural, other);
-        Assert.Equal(lemma, resolvedLemma);
-    }
-
-    [Fact]
-    public void SpanishMillionUsesAuthoredManyForm()
-    {
-        var success = "persona".TryInflect(
-            1_000_000m,
-            new CultureInfo("es"),
-            out var result);
-
-        Assert.True(success);
-        Assert.Equal("personas", result);
     }
 
     [Theory]
@@ -302,69 +270,59 @@ public class LocalizedInflectionTests
         Assert.Equal((CardinalPluralCategory)expected, category);
     }
 
-    [Fact]
-    public void UnknownLexemeDoesNotGuess()
+    [Theory]
+    [InlineData("child")]
+    [InlineData("children")]
+    [InlineData("zero children")]
+    [InlineData("one child")]
+    [InlineData("two children")]
+    [InlineData("few children")]
+    [InlineData("many children")]
+    public void TrySingularizeAcceptsEveryAuthoredForm(string form)
     {
-        var success = "invented".TryInflect(
-            2m,
-            new CultureInfo("en"),
-            out var result);
+        var forms = new PluralizationForms(
+            "child",
+            "children",
+            zero: "zero children",
+            one: "one child",
+            two: "two children",
+            few: "few children",
+            many: "many children");
 
-        Assert.False(success);
-        Assert.Null(result);
+        Assert.True(forms.TrySingularize(form, out var singular));
+        Assert.Equal("child", singular);
     }
 
     [Fact]
-    public void ExactLexiconUsesAbsoluteQuantityAndCaseSensitiveMatching()
+    public void TrySingularizeUsesNfcOrdinalCaseSensitiveMatching()
     {
-        var culture = new CultureInfo("en");
+        var forms = new PluralizationForms("café", "cafés");
 
-        Assert.True("person".TryInflect(-1m, culture, out var result));
-        Assert.Equal("person", result);
-        Assert.False("Person".TryInflect(1m, culture, out result));
-        Assert.Null(result);
-    }
-
-    [Fact]
-    public void ExactLexiconNormalizesUnicodeAndRejectsAmbiguousReverseMatches()
-    {
-        var profile = new LocalizedInflectionProfile(
-            CardinalPluralRuleKind.EnglishLike,
-            new Dictionary<string, CardinalInflectionForms>
-            {
-                ["café"] = new("café", "cafés"),
-                ["coffeehouse"] = new("coffeehouse", "cafés")
-            });
-
-        Assert.True(profile.TryGetForms("cafe\u0301", out var forms));
-        Assert.Equal("café", forms.Lemma);
-        Assert.False(profile.TryGetLemma("cafe\u0301s", out var lemma));
-        Assert.Null(lemma);
+        Assert.True(forms.TrySingularize("cafe\u0301s", out var singular));
+        Assert.Equal("café", singular);
+        Assert.False(forms.TrySingularize("CAFÉS", out singular));
+        Assert.Null(singular);
+        Assert.False(forms.TrySingularize("coffee", out singular));
+        Assert.Null(singular);
     }
 
     [Fact]
     public void UnsupportedCultureDoesNotFallBackToEnglish()
     {
         var culture = new CultureInfo("eo");
-        var forms = CardinalInflectionForms.Invariant("token");
+        var forms = PluralizationForms.Invariant("token");
 
-        Assert.False(forms.TryInflect(1m, culture, out var authoredResult));
-        Assert.False("person".TryInflect(1m, culture, out var catalogResult));
+        Assert.False(forms.TryPluralize(1m, culture, out var authoredResult));
         Assert.Null(authoredResult);
-        Assert.Null(catalogResult);
     }
 
     [Fact]
     public void InvariantCultureIsUnsupported()
     {
-        var forms = CardinalInflectionForms.Invariant("token");
+        var forms = PluralizationForms.Invariant("token");
 
-        Assert.False(forms.TryInflect(1m, CultureInfo.InvariantCulture, out var authoredResult));
-        Assert.False("person".TryInflect(1m, CultureInfo.InvariantCulture, out var catalogResult));
-        Assert.False("people".TryLemmatize(CultureInfo.InvariantCulture, out var lemma));
+        Assert.False(forms.TryPluralize(1m, CultureInfo.InvariantCulture, out var authoredResult));
         Assert.Null(authoredResult);
-        Assert.Null(catalogResult);
-        Assert.Null(lemma);
     }
 
     [Fact]
@@ -379,31 +337,25 @@ public class LocalizedInflectionTests
     [Fact]
     public void ConstructorRejectsMissingRequiredForms()
     {
-        Assert.Throws<ArgumentNullException>(() => new CardinalInflectionForms(null!, "items"));
-        Assert.Throws<ArgumentException>(() => new CardinalInflectionForms("item", " "));
-        Assert.Throws<ArgumentException>(() => new CardinalInflectionForms("item", "items", one: ""));
+        Assert.Throws<ArgumentNullException>(() => new PluralizationForms(null!, "items"));
+        Assert.Throws<ArgumentException>(() => new PluralizationForms("item", " "));
+        Assert.Throws<ArgumentException>(() => new PluralizationForms("item", "items", one: ""));
     }
 
     [Fact]
     public void PublicOperationsRejectNullInputs()
     {
-        CardinalInflectionForms forms = null!;
         string text = null!;
-        var culture = new CultureInfo("en");
 
-        Assert.Throws<ArgumentNullException>(() => forms.TryInflect(1m, culture, out _));
-        Assert.Throws<ArgumentNullException>(() => CardinalInflectionForms.Invariant(null!));
-        Assert.Throws<ArgumentNullException>(() => text.TryInflect(1m, culture, out _));
-        Assert.Throws<ArgumentNullException>(() => text.TryLemmatize(culture, out _));
-        Assert.Throws<ArgumentNullException>(() => CardinalInflectionForms.Invariant("item").TryInflect(1m, null!, out _));
-        Assert.Throws<ArgumentNullException>(() => "person".TryInflect(1m, null!, out _));
-        Assert.Throws<ArgumentNullException>(() => "people".TryLemmatize(null!, out _));
+        Assert.Throws<ArgumentNullException>(() => PluralizationForms.Invariant(null!));
+        Assert.Throws<ArgumentNullException>(() => PluralizationForms.Invariant("item").TryPluralize(1m, null!, out _));
+        Assert.Throws<ArgumentNullException>(() => PluralizationForms.Invariant("item").TrySingularize(text, out _));
     }
 
     [Fact]
     public void TryGetFormRejectsUnknownCategory()
     {
-        var forms = CardinalInflectionForms.Invariant("item");
+        var forms = PluralizationForms.Invariant("item");
 
         Assert.Throws<ArgumentOutOfRangeException>(
             () => forms.TryGetForm((CardinalPluralCategory)99, out _));

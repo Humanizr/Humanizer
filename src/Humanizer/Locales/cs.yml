@@ -3,7 +3,6 @@ locale: 'cs'
 surfaces:
   inflection:
     cardinalRule: 'CzechSlovak'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

@@ -2181,7 +2181,6 @@ wordsToNumber:
             const string inflection = """
   inflection:
     cardinalRule: 'Other'
-    disposition: 'selector-only'
 """;
             var lineEnding = candidateText.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
             var normalizedInflection = inflection

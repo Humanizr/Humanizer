@@ -3,7 +3,6 @@ locale: 'fr'
 surfaces:
   inflection:
     cardinalRule: 'French'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

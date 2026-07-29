@@ -9,7 +9,6 @@ locale: 'km'
 surfaces:
   inflection:
     cardinalRule: 'Other'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

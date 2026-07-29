@@ -47,7 +47,7 @@
     },
     {
       "key": "inflection",
-      "label": "Cardinal category selection",
+      "label": "Cardinal plural rules",
       "optional": false
     },
     {

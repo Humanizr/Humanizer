@@ -3,7 +3,6 @@ locale: 'ku'
 surfaces:
   inflection:
     cardinalRule: 'One'
-    disposition: 'selector-only'
   durationCases:
     classification: 'not-applicable'
     sources:

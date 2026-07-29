@@ -3,7 +3,6 @@ locale: 'sl'
 surfaces:
   inflection:
     cardinalRule: 'Slovenian'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

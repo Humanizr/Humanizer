@@ -3,7 +3,6 @@ locale: 'is'
 surfaces:
   inflection:
     cardinalRule: 'Icelandic'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

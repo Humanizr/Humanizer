@@ -3,7 +3,6 @@ locale: 'da'
 surfaces:
   inflection:
     cardinalRule: 'Danish'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'

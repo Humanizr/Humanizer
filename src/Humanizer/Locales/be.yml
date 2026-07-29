@@ -3,7 +3,6 @@ locale: 'be'
 surfaces:
   inflection:
     cardinalRule: 'Belarusian'
-    disposition: 'selector-only'
   durationCases:
     classification: 'distinct'
     citationCase: 'nominative'
