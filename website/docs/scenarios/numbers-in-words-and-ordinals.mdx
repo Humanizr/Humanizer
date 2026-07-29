@@ -18,7 +18,8 @@ Use `ToWords` for cardinal words, `ToOrdinalWords` for word ordinals, and
 form. `Fractionalize` approximates a decimal as a common fraction.
 `ToChineseFinancialCharacters` emits formal Chinese integer characters. Select
 culture explicitly and add grammatical gender or word form only when the
-selected locale advertises that capability.
+selected locale advertises that capability. Use `ToIndianWords` when Indian
+English output needs an explicit named-scale or crore-based vocabulary.
 
 ## Example
 
@@ -36,11 +37,21 @@ financial characters, and the established number-formatting helpers:
 | `twenty-first` | `21.ToOrdinalWords(culture)` |
 | `21st` | `21.Ordinalize(culture)` |
 | `2147483651st` | `2_147_483_651L.Ordinalize(culture)` |
+| `one hundred crore` | `1_000_000_000L.ToIndianWords(IndianScaleStyle.CroreBased)` |
 | `1 1/4` | `1.25m.Fractionalize(5, 0m)` |
 | `壹拾` | `10.ToChineseFinancialCharacters(simplifiedChinese)` |
 | A locale-specific tuple word | `number.ToTuple(culture)` |
 
 `ToWords` supports `int` and `long` cardinal values. Word ordinals are `int`-based. Some overloads accept `GrammaticalGender`, `WordForm`, or `addAnd`; use named arguments so intent remains clear across overload changes.
+
+### Choose an Indian scale vocabulary
+
+`ToIndianWords` is specific to Indian English and accepts `int` or `long`.
+`IndianScaleStyle.NamedScales` uses names such as `arab`, `kharab`, and
+`padma`; `IndianScaleStyle.CroreBased` uses common expressions such as
+`one hundred crore` and `one lakh crore`, then falls back to named scales
+rather than inventing repeated-crore phrases. This choice is per call and does
+not change `ToWords`, configured converters, or other locales.
 
 ### Format 64-bit ordinals
 
@@ -100,10 +111,10 @@ application already has a number.
 
 The basic number-word and ordinal APIs span the documented corpus, but overloads
 and locale grammar have changed. `Fractionalize`, Chinese financial numerals,
-64-bit numeric ordinals, and the Estonian and Albanian scale corrections
-described above are `main/preview` behavior. The verified source runs against
-the selected package. Historical snapshots link to their own capability data
-and signatures.
+64-bit numeric ordinals, Indian scale vocabulary selection, and the Estonian
+and Albanian scale corrections described above are `main/preview` behavior.
+The verified source runs against the selected package. Historical snapshots
+link to their own capability data and signatures.
 
 ## Related guides and API
 

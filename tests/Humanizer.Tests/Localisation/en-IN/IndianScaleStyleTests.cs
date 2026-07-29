@@ -1,4 +1,4 @@
-namespace Humanizer.Tests.Localisation.enIN;
+namespace Humanizer.Tests.Localisation.en_IN;
 
 public class IndianScaleStyleTests
 {
@@ -6,7 +6,7 @@ public class IndianScaleStyleTests
 
     public static TheoryData<long, string, string> GoldenOutputs { get; } = new()
     {
-        { 0, "", "" },
+        { 0, "zero", "zero" },
         { 10_000_000, "one crore", "one crore" },
         { 999_999_999, "ninety nine crore ninety nine lakh ninety nine thousand nine hundred and ninety nine", "ninety nine crore ninety nine lakh ninety nine thousand nine hundred and ninety nine" },
         { 1_000_000_000, "one arab", "one hundred crore" },
@@ -33,11 +33,15 @@ public class IndianScaleStyleTests
     [MemberData(nameof(GoldenOutputs))]
     public void NamedScales_PreservesLegacyEnglishIndiaOutput(long number, string namedScales, string _)
     {
-        if (number != long.MinValue)
+        if (number is not (0 or long.MinValue))
         {
             Assert.Equal(number.ToWords(EnglishIndia), namedScales);
         }
     }
+
+    [Fact]
+    public void LegacyEnglishIndiaZero_RemainsUnchanged() =>
+        Assert.Equal("", 0.ToWords(EnglishIndia));
 
     [Fact]
     public void IntOverload_UsesSelectedScaleStyle() =>

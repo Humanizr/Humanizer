@@ -7,8 +7,6 @@ namespace Humanizer;
 /// </summary>
 public static class NumberToWordsExtension
 {
-    static readonly CultureInfo EnglishIndia = CultureInfo.GetCultureInfo("en-IN");
-
     static readonly ConjunctionalScale[] CroreBasedIndianScales =
     [
         new(100_000_000_000_000_000, "shankh", "shankh"),
@@ -233,7 +231,7 @@ public static class NumberToWordsExtension
     /// Converts the given value to Indian English cardinal words using the selected large-number vocabulary.
     /// </summary>
     /// <remarks>
-    /// <see cref="IndianScaleStyle.NamedScales"/> matches <c>ToWords</c> with the <c>en-IN</c> culture.
+    /// <see cref="IndianScaleStyle.NamedScales"/> uses the named-scale vocabulary of the <c>en-IN</c> culture.
     /// <see cref="IndianScaleStyle.CroreBased"/> uses common crore-based expressions without changing
     /// the configured converter or the behavior of other locales.
     /// </remarks>
@@ -243,7 +241,7 @@ public static class NumberToWordsExtension
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="scaleStyle"/> is not a defined value.</exception>
     public static string ToIndianWords(this long number, IndianScaleStyle scaleStyle = IndianScaleStyle.NamedScales)
     {
-        var converter = (ConjunctionalScaleNumberToWordsConverter)NumberToWordsProfileCatalog.Resolve("en-IN", EnglishIndia);
+        var converter = (ConjunctionalScaleNumberToWordsConverter)NumberToWordsProfileCatalog.Resolve("en-IN", CultureInfo.InvariantCulture);
         return scaleStyle switch
         {
             IndianScaleStyle.NamedScales => converter.ConvertUsingScales(number, converter.Scales),

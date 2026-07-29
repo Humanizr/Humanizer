@@ -37,6 +37,11 @@ class ConjunctionalScaleNumberToWordsConverter(ConjunctionalScaleNumberToWordsPr
 
     internal string ConvertUsingScales(long number, ConjunctionalScale[] scales)
     {
+        if (number == 0)
+        {
+            return profile.TensMap[0];
+        }
+
         var addAnd = profile.DefaultAddAnd;
         if (number >= 0)
         {
