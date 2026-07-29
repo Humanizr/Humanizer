@@ -698,6 +698,113 @@ The composite byte quantity\.
 [System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 [separator](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.HumanizeComposite(thisHumanizer.ByteSize,int,System.IFormatProvider,string,bool).separator 'Humanizer\.ByteSizeExtensions\.HumanizeComposite\(this Humanizer\.ByteSize, int, System\.IFormatProvider, string, bool\)\.separator') is null\.
 
+<a name='Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool)'></a>
+
+## ByteSizeExtensions\.HumanizeCompositeWithUnitSystem\(this ByteSize, ByteSizeUnitSystem, int, IFormatProvider, string, bool\) Method
+
+Turns a byte quantity into composite human\-readable form using one explicit unit system\.
+
+```csharp
+public static string HumanizeCompositeWithUnitSystem(this Humanizer.ByteSize input, Humanizer.ByteSizeUnitSystem unitSystem, int precision=2, System.IFormatProvider? formatProvider=null, string separator=" ", bool toWords=false);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).input'></a>
+
+`input` [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+The byte quantity to humanize\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system to use\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of non\-zero parts to return\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).formatProvider'></a>
+
+`formatProvider` [System\.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider 'System\.IFormatProvider')
+
+The provider used to format each numeric part and select localized unit words\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).separator'></a>
+
+`separator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator to place between parts\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).toWords'></a>
+
+`toWords` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Uses localized unit words instead of canonical symbols when [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The composite humanized byte quantity\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).unitSystem 'Humanizer\.ByteSizeExtensions\.HumanizeCompositeWithUnitSystem\(this Humanizer\.ByteSize, Humanizer\.ByteSizeUnitSystem, int, System\.IFormatProvider, string, bool\)\.unitSystem') is not defined or [precision](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).precision 'Humanizer\.ByteSizeExtensions\.HumanizeCompositeWithUnitSystem\(this Humanizer\.ByteSize, Humanizer\.ByteSizeUnitSystem, int, System\.IFormatProvider, string, bool\)\.precision') is less than one\.
+
+[System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
+[separator](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.HumanizeCompositeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,int,System.IFormatProvider,string,bool).separator 'Humanizer\.ByteSizeExtensions\.HumanizeCompositeWithUnitSystem\(this Humanizer\.ByteSize, Humanizer\.ByteSizeUnitSystem, int, System\.IFormatProvider, string, bool\)\.separator') is [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null')\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider)'></a>
+
+## ByteSizeExtensions\.HumanizeWithUnitSystem\(this ByteSize, ByteSizeUnitSystem, string, IFormatProvider\) Method
+
+Turns a byte quantity into human\-readable form using an explicit unit system\.
+
+```csharp
+public static string HumanizeWithUnitSystem(this Humanizer.ByteSize input, Humanizer.ByteSizeUnitSystem unitSystem, string? format=null, System.IFormatProvider? formatProvider=null);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).input'></a>
+
+`input` [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+The byte quantity to humanize\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system to use\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format'></a>
+
+`format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The numeric format and optional unit token\. For decimal SI and binary IEC, unit tokens are
+matched case\-insensitively and output uses canonical symbol casing\.
+
+<a name='Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
+
+`formatProvider` [System\.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider 'System\.IFormatProvider')
+
+The provider used to format the numeric value\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The humanized byte quantity\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem 'Humanizer\.ByteSizeExtensions\.HumanizeWithUnitSystem\(this Humanizer\.ByteSize, Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.unitSystem') is not defined\.
+
+[System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
+[format](Humanizer.ByteSizeExtensions.md#Humanizer.ByteSizeExtensions.HumanizeWithUnitSystem(thisHumanizer.ByteSize,Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format 'Humanizer\.ByteSizeExtensions\.HumanizeWithUnitSystem\(this Humanizer\.ByteSize, Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.format') is invalid, or selects a token not supported by the selected non\-legacy system\.
+
 <a name='Humanizer.ByteSizeExtensions.Kilobytes(thisbyte)'></a>
 
 ## ByteSizeExtensions\.Kilobytes\(this byte\) Method

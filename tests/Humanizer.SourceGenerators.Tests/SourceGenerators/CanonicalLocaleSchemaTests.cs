@@ -863,6 +863,40 @@ surfaces:
     }
 
     [Fact]
+    public void CheckedInLocalesResolveCompleteExplicitByteUnitPhrases()
+    {
+        (string Key, string Symbol)[] expectedUnits =
+        [
+            ("decimalKilobyte", "kB"),
+            ("decimalMegabyte", "MB"),
+            ("decimalGigabyte", "GB"),
+            ("decimalTerabyte", "TB"),
+            ("decimalPetabyte", "PB"),
+            ("decimalExabyte", "EB"),
+            ("binaryKibibyte", "KiB"),
+            ("binaryMebibyte", "MiB"),
+            ("binaryGibibyte", "GiB"),
+            ("binaryTebibyte", "TiB"),
+            ("binaryPebibyte", "PiB")
+        ];
+        var catalog = CreateCheckedInLocaleCatalog();
+
+        Assert.Empty(catalog.Diagnostics);
+        Assert.Equal(102, catalog.Locales.Length);
+        foreach (var locale in catalog.Locales)
+        {
+            foreach (var expected in expectedUnits)
+            {
+                Assert.True(
+                    locale.Phrases!.DataUnit.Units.TryGetValue(expected.Key, out var phrase),
+                    $"{locale.LocaleCode} does not resolve {expected.Key}.");
+                Assert.NotNull(phrase.Forms);
+                Assert.Equal(expected.Symbol, phrase.Symbol);
+            }
+        }
+    }
+
+    [Fact]
     public void CalendarSurface_AcceptsHijriMonths()
     {
         var catalog = CreateCatalog(

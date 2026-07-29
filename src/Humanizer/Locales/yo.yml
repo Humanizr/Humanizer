@@ -221,6 +221,61 @@ surfaces:
         forms:
           default: 'tẹ́rábáìtì'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kílóbáìtì'
+          singular: 'kílóbáìtì'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'mẹ́gábáìtì'
+          singular: 'mẹ́gábáìtì'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gígábáìtì'
+          singular: 'gígábáìtì'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'tẹ́rábáìtì'
+          singular: 'tẹ́rábáìtì'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'pẹ́tábáìtì'
+          singular: 'pẹ́tábáìtì'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ẹ́ksábáìtì'
+          singular: 'ẹ́ksábáìtì'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kíbíbáìtì'
+          singular: 'kíbíbáìtì'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mẹ́bíbáìtì'
+          singular: 'mẹ́bíbáìtì'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gíbíbáìtì'
+          singular: 'gíbíbáìtì'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tẹ́bíbáìtì'
+          singular: 'tẹ́bíbáìtì'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pẹ́bíbáìtì'
+          singular: 'pẹ́bíbáìtì'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

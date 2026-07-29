@@ -1005,6 +1005,83 @@ surfaces:
           dual: 'terabajta'
           paucal: 'terabajti'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kilobajtov'
+          singular: 'kilobajt'
+          dual: 'kilobajta'
+          paucal: 'kilobajti'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'megabajtov'
+          singular: 'megabajt'
+          dual: 'megabajta'
+          paucal: 'megabajti'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gigabajtov'
+          singular: 'gigabajt'
+          dual: 'gigabajta'
+          paucal: 'gigabajti'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'terabajtov'
+          singular: 'terabajt'
+          dual: 'terabajta'
+          paucal: 'terabajti'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'petabajtov'
+          singular: 'petabajt'
+          dual: 'petabajta'
+          paucal: 'petabajti'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'eksabajtov'
+          singular: 'eksabajt'
+          dual: 'eksabajta'
+          paucal: 'eksabajti'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kibibajtov'
+          singular: 'kibibajt'
+          dual: 'kibibajta'
+          paucal: 'kibibajti'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mebibajtov'
+          singular: 'mebibajt'
+          dual: 'mebibajta'
+          paucal: 'mebibajti'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gibibajtov'
+          singular: 'gibibajt'
+          dual: 'gibibajta'
+          paucal: 'gibibajti'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tebibajtov'
+          singular: 'tebibajt'
+          dual: 'tebibajta'
+          paucal: 'tebibajti'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pebibajtov'
+          singular: 'pebibajt'
+          dual: 'pebibajta'
+          paucal: 'pebibajti'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

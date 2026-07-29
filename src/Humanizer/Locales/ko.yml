@@ -226,6 +226,50 @@ surfaces:
         forms:
           default: '테라바이트'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: '킬로바이트'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: '메가바이트'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: '기가바이트'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: '테라바이트'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: '페타바이트'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: '엑사바이트'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: '키비바이트'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: '메비바이트'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: '기비바이트'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: '테비바이트'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: '페비바이트'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: '밀리초'

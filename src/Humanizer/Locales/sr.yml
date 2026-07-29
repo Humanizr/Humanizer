@@ -723,6 +723,72 @@ surfaces:
           singular: 'терабајт'
           paucal: 'терабајта'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'килобајтова'
+          singular: 'килобајт'
+          paucal: 'килобајта'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'мегабајтова'
+          singular: 'мегабајт'
+          paucal: 'мегабајта'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'гигабајтова'
+          singular: 'гигабајт'
+          paucal: 'гигабајта'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'терабајтова'
+          singular: 'терабајт'
+          paucal: 'терабајта'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'петабајтова'
+          singular: 'петабајт'
+          paucal: 'петабајта'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ексабајтова'
+          singular: 'ексабајт'
+          paucal: 'ексабајта'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'кибибајтова'
+          singular: 'кибибајт'
+          paucal: 'кибибајта'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'мебибајтова'
+          singular: 'мебибајт'
+          paucal: 'мебибајта'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'гибибајтова'
+          singular: 'гибибајт'
+          paucal: 'гибибајта'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'тебибајтова'
+          singular: 'тебибајт'
+          paucal: 'тебибајта'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'пебибајтова'
+          singular: 'пебибајт'
+          paucal: 'пебибајта'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'мс'

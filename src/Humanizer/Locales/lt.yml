@@ -900,6 +900,71 @@ surfaces:
           singular: 'terabaitas'
           plural: 'terabaitų'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kilobaitai'
+          singular: 'kilobaitas'
+          plural: 'kilobaitų'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'megabaitai'
+          singular: 'megabaitas'
+          plural: 'megabaitų'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gigabaitas'
+          plural: 'gigabaitų'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'terabaitai'
+          singular: 'terabaitas'
+          plural: 'terabaitų'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'petabaitai'
+          singular: 'petabaitas'
+          plural: 'petabaitų'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'eksabaitai'
+          singular: 'eksabaitas'
+          plural: 'eksabaitų'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kibibaitai'
+          singular: 'kibibaitas'
+          plural: 'kibibaitų'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mebibaitai'
+          singular: 'mebibaitas'
+          plural: 'mebibaitų'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gibibaitai'
+          singular: 'gibibaitas'
+          plural: 'gibibaitų'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tebibaitai'
+          singular: 'tebibaitas'
+          plural: 'tebibaitų'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pebibaitai'
+          singular: 'pebibaitas'
+          plural: 'pebibaitų'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

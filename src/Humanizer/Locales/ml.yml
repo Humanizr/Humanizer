@@ -881,6 +881,61 @@ surfaces:
           default: 'ടെറാബൈറ്റ്'
           singular: 'ടെറാബൈറ്റ്'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'കിലോബൈറ്റ്'
+          singular: 'കിലോബൈറ്റ്'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'മെഗാബൈറ്റ്'
+          singular: 'മെഗാബൈറ്റ്'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ഗിഗാബൈറ്റ്'
+          singular: 'ഗിഗാബൈറ്റ്'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'ടെറാബൈറ്റ്'
+          singular: 'ടെറാബൈറ്റ്'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'പെറ്റാബൈറ്റ്'
+          singular: 'പെറ്റാബൈറ്റ്'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'എക്സാബൈറ്റ്'
+          singular: 'എക്സാബൈറ്റ്'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'കിബിബൈറ്റ്'
+          singular: 'കിബിബൈറ്റ്'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'മെബിബൈറ്റ്'
+          singular: 'മെബിബൈറ്റ്'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ഗിബിബൈറ്റ്'
+          singular: 'ഗിബിബൈറ്റ്'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'ടെബിബൈറ്റ്'
+          singular: 'ടെബിബൈറ്റ്'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'പെബിബൈറ്റ്'
+          singular: 'പെബിബൈറ്റ്'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'മില്ലിസെക്കൻഡ്'

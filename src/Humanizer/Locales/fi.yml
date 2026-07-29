@@ -700,6 +700,61 @@ surfaces:
         forms:
           default: 'teratavua'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kilotavua'
+          singular: 'kilotavu'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'megatavua'
+          singular: 'megatavu'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gigatavua'
+          singular: 'gigatavu'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'teratavua'
+          singular: 'teratavu'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'petatavua'
+          singular: 'petatavu'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'eksatavua'
+          singular: 'eksatavu'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kibitavua'
+          singular: 'kibitavu'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mebitavua'
+          singular: 'mebitavu'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gibitavua'
+          singular: 'gibitavu'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tebitavua'
+          singular: 'tebitavu'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pebitavua'
+          singular: 'pebitavu'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

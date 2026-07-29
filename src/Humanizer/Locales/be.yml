@@ -917,6 +917,94 @@ surfaces:
           plural: 'тэрабайтаў'
         symbol: 'ТБ'
         template: '{unit}'
+      decimalKilobyte:
+        forms:
+          default: 'кілабайтаў'
+          singular: 'кілабайт'
+          paucal: 'кілабайты'
+          plural: 'кілабайтаў'
+        symbol: 'kB'
+        template: '{unit}'
+      decimalMegabyte:
+        forms:
+          default: 'мегабайтаў'
+          singular: 'мегабайт'
+          paucal: 'мегабайты'
+          plural: 'мегабайтаў'
+        symbol: 'MB'
+        template: '{unit}'
+      decimalGigabyte:
+        forms:
+          default: 'гігабайтаў'
+          singular: 'гігабайт'
+          paucal: 'гігабайты'
+          plural: 'гігабайтаў'
+        symbol: 'GB'
+        template: '{unit}'
+      decimalTerabyte:
+        forms:
+          default: 'тэрабайтаў'
+          singular: 'тэрабайт'
+          paucal: 'тэрабайты'
+          plural: 'тэрабайтаў'
+        symbol: 'TB'
+        template: '{unit}'
+      decimalPetabyte:
+        forms:
+          default: 'петабайтаў'
+          singular: 'петабайт'
+          paucal: 'петабайты'
+          plural: 'петабайтаў'
+        symbol: 'PB'
+        template: '{unit}'
+      decimalExabyte:
+        forms:
+          default: 'эксабайтаў'
+          singular: 'эксабайт'
+          paucal: 'эксабайты'
+          plural: 'эксабайтаў'
+        symbol: 'EB'
+        template: '{unit}'
+      binaryKibibyte:
+        forms:
+          default: 'кібібайтаў'
+          singular: 'кібібайт'
+          paucal: 'кібібайты'
+          plural: 'кібібайтаў'
+        symbol: 'KiB'
+        template: '{unit}'
+      binaryMebibyte:
+        forms:
+          default: 'мебібайтаў'
+          singular: 'мебібайт'
+          paucal: 'мебібайты'
+          plural: 'мебібайтаў'
+        symbol: 'MiB'
+        template: '{unit}'
+      binaryGibibyte:
+        forms:
+          default: 'гібібайтаў'
+          singular: 'гібібайт'
+          paucal: 'гібібайты'
+          plural: 'гібібайтаў'
+        symbol: 'GiB'
+        template: '{unit}'
+      binaryTebibyte:
+        forms:
+          default: 'тэбібайтаў'
+          singular: 'тэбібайт'
+          paucal: 'тэбібайты'
+          plural: 'тэбібайтаў'
+        symbol: 'TiB'
+        template: '{unit}'
+      binaryPebibyte:
+        forms:
+          default: 'пебібайтаў'
+          singular: 'пебібайт'
+          paucal: 'пебібайты'
+          plural: 'пебібайтаў'
+        symbol: 'PiB'
+        template: '{unit}'
     timeUnits:
       millisecond:
         symbol: 'мс'

@@ -11,6 +11,14 @@ var rate = 3.Megabytes()
     .Per(TimeSpan.FromSeconds(2))
     .Humanize("0.0", TimeUnit.Second, culture);
 var composite = ByteSize.FromBits(81_937);
+var decimalSize = ByteSize.FromBytes(1_000_000);
+var binarySize = ByteSize.FromMebibytes(1);
+var decimalRate = ByteSize.FromDecimalMegabytes(1)
+    .Per(TimeSpan.FromSeconds(1))
+    .HumanizeWithUnitSystem(ByteSizeUnitSystem.DecimalSi, culture: culture);
+var binaryRate = binarySize
+    .Per(TimeSpan.FromSeconds(1))
+    .HumanizeWithUnitSystem(ByteSizeUnitSystem.BinaryIec, culture: culture);
 
 AssertEqual(1536d, parsed.Bytes);
 AssertEqual("2 KB", combined.Humanize("0", culture));
@@ -38,8 +46,15 @@ AssertEqual(
             ByteSize.BytesInTerabyte +
             ByteSize.BytesInGigabyte)
         .HumanizeComposite(precision: 3, formatProvider: culture));
+AssertEqual("1 MB", decimalSize.Format(ByteSizeUnitSystem.DecimalSi, formatProvider: culture));
+AssertEqual("976.56 KiB", decimalSize.Format(ByteSizeUnitSystem.BinaryIec, formatProvider: culture));
+AssertEqual(decimalSize, ByteSize.ParseWithUnitSystem("1 MB", ByteSizeUnitSystem.DecimalSi, culture));
+AssertEqual(binarySize, ByteSize.ParseWithUnitSystem("1 MiB", ByteSizeUnitSystem.BinaryIec, culture));
+AssertEqual(false, ByteSize.TryParseWithUnitSystem("1 MB", ByteSizeUnitSystem.BinaryIec, culture, out _));
+AssertEqual("1 MB/s", decimalRate);
+AssertEqual("1 MiB/s", binaryRate);
 
-Console.WriteLine("1.5 KB; 2 KB; 10 KB 2 B 1 b; 1.5 MB/s");
+Console.WriteLine("1.5 KB; 2 KB; 10 KB 2 B 1 b; 1.5 MB/s; 1 MB; 1 MiB/s");
 
 static void AssertEqual<T>(T expected, T actual)
 {

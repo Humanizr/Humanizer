@@ -76,6 +76,7 @@
     ],
     "scenarios/byte-sizes-and-rates.mdx": [
       "Humanizer.ByteSize.md",
+      "Humanizer.ByteSizeUnitSystem.md",
       "Humanizer.ByteSizeExtensions.md",
       "Humanizer.ByteRate.md"
     ],

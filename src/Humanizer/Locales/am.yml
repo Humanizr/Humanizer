@@ -286,6 +286,61 @@ surfaces:
           singular: 'ቴራባይት'
           default: 'ቴራባይቶች'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          singular: 'ኪሎባይት'
+          default: 'ኪሎባይቶች'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          singular: 'ሜጋባይት'
+          default: 'ሜጋባይቶች'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          singular: 'ጊጋባይት'
+          default: 'ጊጋባይቶች'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          singular: 'ቴራባይት'
+          default: 'ቴራባይቶች'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          singular: 'ፔታ ባይት'
+          default: 'ፔታ ባይቶች'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          singular: 'ኤክሳ ባይት'
+          default: 'ኤክሳ ባይቶች'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          singular: 'ኪቢባይት'
+          default: 'ኪቢባይቶች'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          singular: 'ሜቢባይት'
+          default: 'ሜቢባይቶች'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          singular: 'ጊቢባይት'
+          default: 'ጊቢባይቶች'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          singular: 'ቴቢባይት'
+          default: 'ቴቢባይቶች'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          singular: 'ፔቢባይት'
+          default: 'ፔቢባይቶች'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ሚሊሰከንድ'

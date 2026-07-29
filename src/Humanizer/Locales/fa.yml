@@ -218,6 +218,39 @@ surfaces:
         forms:
           default: 'ترابایت'
         symbol: 'TB'
+      decimalKilobyte:
+        forms: 'کیلوبایت'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms: 'مگابایت'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms: 'گیگابایت'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms: 'ترابایت'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms: 'پتابایت'
+        symbol: 'PB'
+      decimalExabyte:
+        forms: 'اگزابایت'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms: 'کیبی‌بایت'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms: 'مبی‌بایت'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms: 'گیبی‌بایت'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms: 'تبی‌بایت'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms: 'پبی‌بایت'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'میلی‌ثانیه'

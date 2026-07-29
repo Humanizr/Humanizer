@@ -84,3 +84,69 @@ A gibibyte\.
 `Tebibyte` 12
 
 A tebibyte\.
+
+<a name='Humanizer.DataUnit.DecimalKilobyte'></a>
+
+`DecimalKilobyte` 13
+
+A decimal SI kilobyte\.
+
+<a name='Humanizer.DataUnit.DecimalMegabyte'></a>
+
+`DecimalMegabyte` 14
+
+A decimal SI megabyte\.
+
+<a name='Humanizer.DataUnit.DecimalGigabyte'></a>
+
+`DecimalGigabyte` 15
+
+A decimal SI gigabyte\.
+
+<a name='Humanizer.DataUnit.DecimalTerabyte'></a>
+
+`DecimalTerabyte` 16
+
+A decimal SI terabyte\.
+
+<a name='Humanizer.DataUnit.DecimalPetabyte'></a>
+
+`DecimalPetabyte` 17
+
+A decimal SI petabyte\.
+
+<a name='Humanizer.DataUnit.DecimalExabyte'></a>
+
+`DecimalExabyte` 18
+
+A decimal SI exabyte\.
+
+<a name='Humanizer.DataUnit.BinaryKibibyte'></a>
+
+`BinaryKibibyte` 19
+
+A binary IEC kibibyte used by explicit unit\-system formatting\.
+
+<a name='Humanizer.DataUnit.BinaryMebibyte'></a>
+
+`BinaryMebibyte` 20
+
+A binary IEC mebibyte used by explicit unit\-system formatting\.
+
+<a name='Humanizer.DataUnit.BinaryGibibyte'></a>
+
+`BinaryGibibyte` 21
+
+A binary IEC gibibyte used by explicit unit\-system formatting\.
+
+<a name='Humanizer.DataUnit.BinaryTebibyte'></a>
+
+`BinaryTebibyte` 22
+
+A binary IEC tebibyte used by explicit unit\-system formatting\.
+
+<a name='Humanizer.DataUnit.BinaryPebibyte'></a>
+
+`BinaryPebibyte` 23
+
+A binary IEC pebibyte used by explicit unit\-system formatting\.

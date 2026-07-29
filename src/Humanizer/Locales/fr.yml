@@ -261,6 +261,39 @@ surfaces:
         forms:
           default: 'téraoctet'
         symbol: 'To'
+      decimalKilobyte:
+        forms: 'kilooctet'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms: 'mégaoctet'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms: 'gigaoctet'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms: 'téraoctet'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms: 'pétaoctet'
+        symbol: 'PB'
+      decimalExabyte:
+        forms: 'exaoctet'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms: 'kibioctet'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms: 'mébioctet'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms: 'gibioctet'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms: 'tébioctet'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms: 'pébioctet'
+        symbol: 'PiB'
       petabyte:
         forms:
           default: 'pétaoctet'

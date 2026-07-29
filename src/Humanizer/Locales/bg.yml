@@ -237,6 +237,61 @@ surfaces:
           default: 'терабайта'
           singular: 'терабайт'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'килобайта'
+          singular: 'килобайт'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'мегабайта'
+          singular: 'мегабайт'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'гигабайт'
+          plural: 'гигабайта'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'терабайта'
+          singular: 'терабайт'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'петабайта'
+          singular: 'петабайт'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ексабайта'
+          singular: 'ексабайт'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'кибибайта'
+          singular: 'кибибайт'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'мебибайта'
+          singular: 'мебибайт'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'гибибайта'
+          singular: 'гибибайт'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'тебибайта'
+          singular: 'тебибайт'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'пебибайта'
+          singular: 'пебибайт'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'мс.'

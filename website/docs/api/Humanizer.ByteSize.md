@@ -65,6 +65,84 @@ public const string Byte = "byte";
 #### Field Value
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+<a name='Humanizer.ByteSize.BytesInDecimalExabyte'></a>
+
+## ByteSize\.BytesInDecimalExabyte Field
+
+Gets the number of bytes in one decimal SI exabyte\.
+
+```csharp
+public const long BytesInDecimalExabyte = 1000000000000000000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInDecimalGigabyte'></a>
+
+## ByteSize\.BytesInDecimalGigabyte Field
+
+Gets the number of bytes in one decimal SI gigabyte\.
+
+```csharp
+public const long BytesInDecimalGigabyte = 1000000000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInDecimalKilobyte'></a>
+
+## ByteSize\.BytesInDecimalKilobyte Field
+
+Gets the number of bytes in one decimal SI kilobyte\.
+
+```csharp
+public const long BytesInDecimalKilobyte = 1000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInDecimalMegabyte'></a>
+
+## ByteSize\.BytesInDecimalMegabyte Field
+
+Gets the number of bytes in one decimal SI megabyte\.
+
+```csharp
+public const long BytesInDecimalMegabyte = 1000000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInDecimalPetabyte'></a>
+
+## ByteSize\.BytesInDecimalPetabyte Field
+
+Gets the number of bytes in one decimal SI petabyte\.
+
+```csharp
+public const long BytesInDecimalPetabyte = 1000000000000000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
+<a name='Humanizer.ByteSize.BytesInDecimalTerabyte'></a>
+
+## ByteSize\.BytesInDecimalTerabyte Field
+
+Gets the number of bytes in one decimal SI terabyte\.
+
+```csharp
+public const long BytesInDecimalTerabyte = 1000000000000;
+```
+
+#### Field Value
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
+
 <a name='Humanizer.ByteSize.BytesInExabyte'></a>
 
 ## ByteSize\.BytesInExabyte Field
@@ -508,6 +586,84 @@ public readonly double Bytes { get; }
 #### Property Value
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
+<a name='Humanizer.ByteSize.DecimalExabytes'></a>
+
+## ByteSize\.DecimalExabytes Property
+
+Gets this value expressed in decimal SI exabytes\.
+
+```csharp
+public readonly double DecimalExabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.DecimalGigabytes'></a>
+
+## ByteSize\.DecimalGigabytes Property
+
+Gets this value expressed in decimal SI gigabytes\.
+
+```csharp
+public readonly double DecimalGigabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.DecimalKilobytes'></a>
+
+## ByteSize\.DecimalKilobytes Property
+
+Gets this value expressed in decimal SI kilobytes\.
+
+```csharp
+public readonly double DecimalKilobytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.DecimalMegabytes'></a>
+
+## ByteSize\.DecimalMegabytes Property
+
+Gets this value expressed in decimal SI megabytes\.
+
+```csharp
+public readonly double DecimalMegabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.DecimalPetabytes'></a>
+
+## ByteSize\.DecimalPetabytes Property
+
+Gets this value expressed in decimal SI petabytes\.
+
+```csharp
+public readonly double DecimalPetabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='Humanizer.ByteSize.DecimalTerabytes'></a>
+
+## ByteSize\.DecimalTerabytes Property
+
+Gets this value expressed in decimal SI terabytes\.
+
+```csharp
+public readonly double DecimalTerabytes { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
 <a name='Humanizer.ByteSize.Exabytes'></a>
 
 ## ByteSize\.Exabytes Property
@@ -897,6 +1053,90 @@ public override readonly bool Equals(object? value);
 #### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
+<a name='Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider)'></a>
+
+## ByteSize\.Format\(ByteSizeUnitSystem, string, IFormatProvider\) Method
+
+Formats this value with an explicitly selected unit system\.
+
+```csharp
+public readonly string Format(Humanizer.ByteSizeUnitSystem unitSystem, string? format=null, System.IFormatProvider? formatProvider=null);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system to use\.
+
+<a name='Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format'></a>
+
+`format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The numeric format and optional unit token\. For decimal SI and binary IEC, unit tokens are
+matched case\-insensitively and output uses the selected system's canonical symbol casing\.
+
+<a name='Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
+
+`formatProvider` [System\.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider 'System\.IFormatProvider')
+
+The provider used to format the numeric value\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The formatted byte size\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem 'Humanizer\.ByteSize\.Format\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.unitSystem') is not defined\.
+
+[System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
+[format](Humanizer.ByteSize.md#Humanizer.ByteSize.Format(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format 'Humanizer\.ByteSize\.Format\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.format') is invalid, or selects a token not supported by the selected non\-legacy system\.
+
+<a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider)'></a>
+
+## ByteSize\.FormatFullWords\(ByteSizeUnitSystem, string, IFormatProvider\) Method
+
+Formats this value with localized unit words from an explicitly selected unit system\.
+
+```csharp
+public readonly string FormatFullWords(Humanizer.ByteSizeUnitSystem unitSystem, string? format=null, System.IFormatProvider? formatProvider=null);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system to use\.
+
+<a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format'></a>
+
+`format` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The numeric format and optional unit token\. For decimal SI and binary IEC, unit tokens are
+matched case\-insensitively and localized words replace the token selected from the requested system\.
+
+<a name='Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).formatProvider'></a>
+
+`formatProvider` [System\.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider 'System\.IFormatProvider')
+
+The provider used to format the numeric value and select localized unit words\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The formatted byte size using localized unit words\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).unitSystem 'Humanizer\.ByteSize\.FormatFullWords\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.unitSystem') is not defined\.
+
+[System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
+[format](Humanizer.ByteSize.md#Humanizer.ByteSize.FormatFullWords(Humanizer.ByteSizeUnitSystem,string,System.IFormatProvider).format 'Humanizer\.ByteSize\.FormatFullWords\(Humanizer\.ByteSizeUnitSystem, string, System\.IFormatProvider\)\.format') is invalid, or selects a token not supported by the selected non\-legacy system\.
+
 <a name='Humanizer.ByteSize.FromBits(long)'></a>
 
 ## ByteSize\.FromBits\(long\) Method
@@ -928,6 +1168,162 @@ public static Humanizer.ByteSize FromBytes(double value);
 
 #### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+<a name='Humanizer.ByteSize.FromDecimalExabytes(double)'></a>
+
+## ByteSize\.FromDecimalExabytes\(double\) Method
+
+Creates a byte size from a number of decimal SI exabytes\.
+
+```csharp
+public static Humanizer.ByteSize FromDecimalExabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromDecimalExabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The number of decimal SI exabytes\.
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')  
+The equivalent byte size\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[value](Humanizer.ByteSize.md#Humanizer.ByteSize.FromDecimalExabytes(double).value 'Humanizer\.ByteSize\.FromDecimalExabytes\(double\)\.value') is not finite or is outside the range supported by [Bits](Humanizer.ByteSize.md#Humanizer.ByteSize.Bits 'Humanizer\.ByteSize\.Bits')\.
+
+<a name='Humanizer.ByteSize.FromDecimalGigabytes(double)'></a>
+
+## ByteSize\.FromDecimalGigabytes\(double\) Method
+
+Creates a byte size from a number of decimal SI gigabytes\.
+
+```csharp
+public static Humanizer.ByteSize FromDecimalGigabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromDecimalGigabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The number of decimal SI gigabytes\.
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')  
+The equivalent byte size\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[value](Humanizer.ByteSize.md#Humanizer.ByteSize.FromDecimalGigabytes(double).value 'Humanizer\.ByteSize\.FromDecimalGigabytes\(double\)\.value') is not finite or is outside the range supported by [Bits](Humanizer.ByteSize.md#Humanizer.ByteSize.Bits 'Humanizer\.ByteSize\.Bits')\.
+
+<a name='Humanizer.ByteSize.FromDecimalKilobytes(double)'></a>
+
+## ByteSize\.FromDecimalKilobytes\(double\) Method
+
+Creates a byte size from a number of decimal SI kilobytes\.
+
+```csharp
+public static Humanizer.ByteSize FromDecimalKilobytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromDecimalKilobytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The number of decimal SI kilobytes\.
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')  
+The equivalent byte size\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[value](Humanizer.ByteSize.md#Humanizer.ByteSize.FromDecimalKilobytes(double).value 'Humanizer\.ByteSize\.FromDecimalKilobytes\(double\)\.value') is not finite or is outside the range supported by [Bits](Humanizer.ByteSize.md#Humanizer.ByteSize.Bits 'Humanizer\.ByteSize\.Bits')\.
+
+<a name='Humanizer.ByteSize.FromDecimalMegabytes(double)'></a>
+
+## ByteSize\.FromDecimalMegabytes\(double\) Method
+
+Creates a byte size from a number of decimal SI megabytes\.
+
+```csharp
+public static Humanizer.ByteSize FromDecimalMegabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromDecimalMegabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The number of decimal SI megabytes\.
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')  
+The equivalent byte size\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[value](Humanizer.ByteSize.md#Humanizer.ByteSize.FromDecimalMegabytes(double).value 'Humanizer\.ByteSize\.FromDecimalMegabytes\(double\)\.value') is not finite or is outside the range supported by [Bits](Humanizer.ByteSize.md#Humanizer.ByteSize.Bits 'Humanizer\.ByteSize\.Bits')\.
+
+<a name='Humanizer.ByteSize.FromDecimalPetabytes(double)'></a>
+
+## ByteSize\.FromDecimalPetabytes\(double\) Method
+
+Creates a byte size from a number of decimal SI petabytes\.
+
+```csharp
+public static Humanizer.ByteSize FromDecimalPetabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromDecimalPetabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The number of decimal SI petabytes\.
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')  
+The equivalent byte size\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[value](Humanizer.ByteSize.md#Humanizer.ByteSize.FromDecimalPetabytes(double).value 'Humanizer\.ByteSize\.FromDecimalPetabytes\(double\)\.value') is not finite or is outside the range supported by [Bits](Humanizer.ByteSize.md#Humanizer.ByteSize.Bits 'Humanizer\.ByteSize\.Bits')\.
+
+<a name='Humanizer.ByteSize.FromDecimalTerabytes(double)'></a>
+
+## ByteSize\.FromDecimalTerabytes\(double\) Method
+
+Creates a byte size from a number of decimal SI terabytes\.
+
+```csharp
+public static Humanizer.ByteSize FromDecimalTerabytes(double value);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.FromDecimalTerabytes(double).value'></a>
+
+`value` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The number of decimal SI terabytes\.
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')  
+The equivalent byte size\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[value](Humanizer.ByteSize.md#Humanizer.ByteSize.FromDecimalTerabytes(double).value 'Humanizer\.ByteSize\.FromDecimalTerabytes\(double\)\.value') is not finite or is outside the range supported by [Bits](Humanizer.ByteSize.md#Humanizer.ByteSize.Bits 'Humanizer\.ByteSize\.Bits')\.
 
 <a name='Humanizer.ByteSize.FromExabytes(double)'></a>
 
@@ -1192,6 +1588,54 @@ public static Humanizer.ByteSize Parse(string s, System.IFormatProvider? formatP
 #### Returns
 [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
 
+<a name='Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider)'></a>
+
+## ByteSize\.ParseWithUnitSystem\(string, ByteSizeUnitSystem, IFormatProvider\) Method
+
+Parses a byte size using only the tokens defined by the selected unit system\.
+
+```csharp
+public static Humanizer.ByteSize ParseWithUnitSystem(string s, Humanizer.ByteSizeUnitSystem unitSystem, System.IFormatProvider? formatProvider=null);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider).s'></a>
+
+`s` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The text to parse\.
+
+<a name='Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system whose tokens are accepted\.
+
+<a name='Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider).formatProvider'></a>
+
+`formatProvider` [System\.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider 'System\.IFormatProvider')
+
+The provider used to parse the numeric value\.
+
+#### Returns
+[ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')  
+The parsed byte size\.
+
+#### Exceptions
+
+[System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
+[s](Humanizer.ByteSize.md#Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider).s 'Humanizer\.ByteSize\.ParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider\)\.s') is [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null')\.
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider).unitSystem 'Humanizer\.ByteSize\.ParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider\)\.unitSystem') is not defined\.
+
+[System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
+[s](Humanizer.ByteSize.md#Humanizer.ByteSize.ParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider).s 'Humanizer\.ByteSize\.ParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider\)\.s') is not valid for the selected unit system\.
+
+### Remarks
+Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
+the established behavior\.
+
 <a name='Humanizer.ByteSize.Subtract(Humanizer.ByteSize)'></a>
 
 ## ByteSize\.Subtract\(ByteSize\) Method
@@ -1390,6 +1834,186 @@ public static bool TryParse(System.ReadOnlySpan<char> s, System.IFormatProvider?
 
 #### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize)'></a>
+
+## ByteSize\.TryParseSpanWithUnitSystem\(ReadOnlySpan\<char\>, ByteSizeUnitSystem, ByteSize\) Method
+
+Attempts to parse a byte\-size character span using only the tokens defined by the selected unit system\.
+
+```csharp
+public static bool TryParseSpanWithUnitSystem(System.ReadOnlySpan<char> s, Humanizer.ByteSizeUnitSystem unitSystem, out Humanizer.ByteSize result);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).s'></a>
+
+`s` [System\.ReadOnlySpan&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.readonlyspan-1 'System\.ReadOnlySpan\`1')[System\.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char 'System\.Char')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.readonlyspan-1 'System\.ReadOnlySpan\`1')
+
+The character span to parse\.
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system whose tokens are accepted\.
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).result'></a>
+
+`result` [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') if parsing succeeded; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseSpanWithUnitSystem\(System\.ReadOnlySpan\<char\>, Humanizer\.ByteSizeUnitSystem, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
+
+### Remarks
+Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
+the established behavior\.
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize)'></a>
+
+## ByteSize\.TryParseSpanWithUnitSystem\(ReadOnlySpan\<char\>, ByteSizeUnitSystem, IFormatProvider, ByteSize\) Method
+
+Attempts to parse a byte\-size character span using only the tokens defined by the selected unit system\.
+
+```csharp
+public static bool TryParseSpanWithUnitSystem(System.ReadOnlySpan<char> s, Humanizer.ByteSizeUnitSystem unitSystem, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).s'></a>
+
+`s` [System\.ReadOnlySpan&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.readonlyspan-1 'System\.ReadOnlySpan\`1')[System\.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char 'System\.Char')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.readonlyspan-1 'System\.ReadOnlySpan\`1')
+
+The character span to parse\.
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system whose tokens are accepted\.
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).formatProvider'></a>
+
+`formatProvider` [System\.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider 'System\.IFormatProvider')
+
+The provider used to parse the numeric value\.
+
+<a name='Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).result'></a>
+
+`result` [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') if parsing succeeded; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseSpanWithUnitSystem(System.ReadOnlySpan_char_,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseSpanWithUnitSystem\(System\.ReadOnlySpan\<char\>, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
+
+### Remarks
+Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
+the established behavior\.
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize)'></a>
+
+## ByteSize\.TryParseWithUnitSystem\(string, ByteSizeUnitSystem, ByteSize\) Method
+
+Attempts to parse a byte size using only the tokens defined by the selected unit system\.
+
+```csharp
+public static bool TryParseWithUnitSystem(string? s, Humanizer.ByteSizeUnitSystem unitSystem, out Humanizer.ByteSize result);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).s'></a>
+
+`s` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The text to parse\.
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system whose tokens are accepted\.
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).result'></a>
+
+`result` [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') if parsing succeeded; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
+
+### Remarks
+Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
+the established behavior\.
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize)'></a>
+
+## ByteSize\.TryParseWithUnitSystem\(string, ByteSizeUnitSystem, IFormatProvider, ByteSize\) Method
+
+Attempts to parse a byte size using only the tokens defined by the selected unit system\.
+
+```csharp
+public static bool TryParseWithUnitSystem(string? s, Humanizer.ByteSizeUnitSystem unitSystem, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result);
+```
+#### Parameters
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).s'></a>
+
+`s` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The text to parse\.
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).unitSystem'></a>
+
+`unitSystem` [ByteSizeUnitSystem](Humanizer.ByteSizeUnitSystem.md 'Humanizer\.ByteSizeUnitSystem')
+
+The unit system whose tokens are accepted\.
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).formatProvider'></a>
+
+`formatProvider` [System\.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider 'System\.IFormatProvider')
+
+The provider used to parse the numeric value\.
+
+<a name='Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).result'></a>
+
+`result` [ByteSize](Humanizer.ByteSize.md 'Humanizer\.ByteSize')
+
+When this method returns, contains the parsed byte size if parsing succeeded; otherwise, the default value\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+[true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') if parsing succeeded; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+#### Exceptions
+
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
+[unitSystem](Humanizer.ByteSize.md#Humanizer.ByteSize.TryParseWithUnitSystem(string,Humanizer.ByteSizeUnitSystem,System.IFormatProvider,Humanizer.ByteSize).unitSystem 'Humanizer\.ByteSize\.TryParseWithUnitSystem\(string, Humanizer\.ByteSizeUnitSystem, System\.IFormatProvider, Humanizer\.ByteSize\)\.unitSystem') is not defined\.
+
+### Remarks
+Decimal SI and binary IEC unit tokens are matched case\-insensitively\. Legacy parsing preserves
+the established behavior\.
 ### Operators
 
 <a name='Humanizer.ByteSize.op_Addition(Humanizer.ByteSize,Humanizer.ByteSize)'></a>

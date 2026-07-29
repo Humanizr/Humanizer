@@ -705,6 +705,39 @@ surfaces:
         forms:
           default: 'تيرابايت'
         symbol: 'TB'
+      decimalKilobyte:
+        forms: 'كيلوبايت'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms: 'ميجابايت'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms: 'جيجابايت'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms: 'تيرابايت'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms: 'بيتابايت'
+        symbol: 'PB'
+      decimalExabyte:
+        forms: 'إكسابايت'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms: 'كيبيبايت'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms: 'ميبيبايت'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms: 'جيبيبايت'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms: 'تيبيبايت'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms: 'بيبيبايت'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'مللي ثانية'

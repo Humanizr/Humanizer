@@ -194,6 +194,50 @@ surfaces:
         forms: 'テラバイト'
         symbol: 'TB'
         template: '{unit}'
+      decimalKilobyte:
+        forms: 'キロバイト'
+        symbol: 'kB'
+        template: '{unit}'
+      decimalMegabyte:
+        forms: 'メガバイト'
+        symbol: 'MB'
+        template: '{unit}'
+      decimalGigabyte:
+        forms: 'ギガバイト'
+        symbol: 'GB'
+        template: '{unit}'
+      decimalTerabyte:
+        forms: 'テラバイト'
+        symbol: 'TB'
+        template: '{unit}'
+      decimalPetabyte:
+        forms: 'ペタバイト'
+        symbol: 'PB'
+        template: '{unit}'
+      decimalExabyte:
+        forms: 'エクサバイト'
+        symbol: 'EB'
+        template: '{unit}'
+      binaryKibibyte:
+        forms: 'キビバイト'
+        symbol: 'KiB'
+        template: '{unit}'
+      binaryMebibyte:
+        forms: 'メビバイト'
+        symbol: 'MiB'
+        template: '{unit}'
+      binaryGibibyte:
+        forms: 'ギビバイト'
+        symbol: 'GiB'
+        template: '{unit}'
+      binaryTebibyte:
+        forms: 'テビバイト'
+        symbol: 'TiB'
+        template: '{unit}'
+      binaryPebibyte:
+        forms: 'ペビバイト'
+        symbol: 'PiB'
+        template: '{unit}'
     timeUnits:
       millisecond:
         symbol: 'ミリ秒'

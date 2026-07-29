@@ -913,6 +913,61 @@ surfaces:
           default: 'टेराबाइट'
           singular: 'टेराबाइट'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'किलोबाइट'
+          singular: 'किलोबाइट'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'मेगाबाइट'
+          singular: 'मेगाबाइट'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'गिगाबाइट'
+          singular: 'गिगाबाइट'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'टेराबाइट'
+          singular: 'टेराबाइट'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'पेटाबाइट'
+          singular: 'पेटाबाइट'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'एक्साबाइट'
+          singular: 'एक्साबाइट'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'किबिबाइट'
+          singular: 'किबिबाइट'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'मेबिबाइट'
+          singular: 'मेबिबाइट'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'गिबिबाइट'
+          singular: 'गिबिबाइट'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'टेबिबाइट'
+          singular: 'टेबिबाइट'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'पेबिबाइट'
+          singular: 'पेबिबाइट'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'मिलिसेकंद'

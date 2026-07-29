@@ -445,6 +445,61 @@ surfaces:
           default: 'ټېرابایټ'
           singular: 'ټېرابایټ'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'کیلوبایټ'
+          singular: 'کیلوبایټ'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'مېګابایټ'
+          singular: 'مېګابایټ'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ګیګابایټ'
+          singular: 'ګیګابایټ'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'ټېرابایټ'
+          singular: 'ټېرابایټ'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'پېټابایټ'
+          singular: 'پېټابایټ'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'اېکسابایټ'
+          singular: 'اېکسابایټ'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'کیبیبایټ'
+          singular: 'کیبیبایټ'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'مېبیبایټ'
+          singular: 'مېبیبایټ'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ګیبیبایټ'
+          singular: 'ګیبیبایټ'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'ټېبیبایټ'
+          singular: 'ټېبیبایټ'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'پېبیبایټ'
+          singular: 'پېبیبایټ'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ملي ثانیه'

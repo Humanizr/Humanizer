@@ -208,6 +208,12 @@ namespace Humanizer
         public static Humanizer.ByteSize Terabytes(this uint input) { }
         public static Humanizer.ByteSize Terabytes(this ushort input) { }
     }
+    public enum ByteSizeUnitSystem
+    {
+        Legacy = 0,
+        DecimalSi = 1,
+        BinaryIec = 2,
+    }
     public sealed class CardinalInflectionForms
     {
         public CardinalInflectionForms(string lemma, string other, string? zero = null, string? one = null, string? two = null, string? few = null, string? many = null) { }

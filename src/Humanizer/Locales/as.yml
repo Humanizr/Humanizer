@@ -704,6 +704,39 @@ surfaces:
         forms:
           default: 'টেৰাবাইট'
         symbol: 'TB'
+      decimalKilobyte:
+        forms: 'কিলোবাইট'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms: 'মেগাবাইট'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms: 'গিগাবাইট'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms: 'টেৰাবাইট'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms: 'পেটাবাইট'
+        symbol: 'PB'
+      decimalExabyte:
+        forms: 'এক্সাবাইট'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms: 'কিবিবাইট'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms: 'মেবিবাইট'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms: 'গিবিবাইট'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms: 'টেবিবাইট'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms: 'পেবিবাইট'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'মিলিছেকেণ্ড'

@@ -410,6 +410,61 @@ surfaces:
         forms:
           default: 'terabajt'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'kilobajt'
+          singular: 'kilobajt'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'megabajt'
+          singular: 'megabajt'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'gigabajt'
+          singular: 'gigabajt'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'terabajt'
+          singular: 'terabajt'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'petabajt'
+          singular: 'petabajt'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'eksabajt'
+          singular: 'eksabajt'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'kibibajt'
+          singular: 'kibibajt'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'mebibajt'
+          singular: 'mebibajt'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'gibibajt'
+          singular: 'gibibajt'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'tebibajt'
+          singular: 'tebibajt'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'pebibajt'
+          singular: 'pebibajt'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ms'

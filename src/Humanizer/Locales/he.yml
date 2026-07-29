@@ -296,6 +296,61 @@ surfaces:
         forms:
           default: 'טרהבייטים'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'קילובייטים'
+          singular: 'קילובייט'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'מגהבייטים'
+          singular: 'מגהבייט'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'גיגהבייטים'
+          singular: 'גיגהבייט'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'טרהבייטים'
+          singular: 'טרהבייט'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'פטה-בייטים'
+          singular: 'פטה-בייט'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'אקסה-בייטים'
+          singular: 'אקסה-בייט'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'קיביבייטים'
+          singular: 'קיביבייט'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'מביבייטים'
+          singular: 'מביבייט'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'גיביבייטים'
+          singular: 'גיביבייט'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'טביבייטים'
+          singular: 'טביבייט'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'פביבייטים'
+          singular: 'פביבייט'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'מילישנייה'

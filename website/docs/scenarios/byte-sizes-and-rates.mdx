@@ -32,6 +32,21 @@ exabyte values plus explicit binary `Kibibyte`, `Mebibyte`, `Gibibyte`,
 symbols, and `DataUnit` values. `Humanize` chooses the largest whole unit and
 accepts ordinary numeric format strings. `ToFullWords` uses full unit names.
 
+For standards-explicit output, select a unit system per operation:
+
+```csharp
+var size = ByteSize.FromBytes(1_000_000);
+
+size.Format(ByteSizeUnitSystem.DecimalSi);   // 1 MB
+size.Format(ByteSizeUnitSystem.BinaryIec);   // 976.56 KiB
+size.FormatFullWords(ByteSizeUnitSystem.DecimalSi); // 1 megabyte
+```
+
+`DecimalSi` uses `kB`, `MB`, `GB`, `TB`, `PB`, and `EB` with powers of 1000.
+`BinaryIec` uses `KiB`, `MiB`, `GiB`, `TiB`, and `PiB` with powers of 1024.
+`Legacy` deliberately preserves Humanizer's established mixed behavior.
+The choice is explicit and is not stored in `ByteSize`.
+
 ### Decompose exact quantities
 
 On `main/preview`, `HumanizeComposite` walks the existing units from exabytes
@@ -50,9 +65,15 @@ part; zero is `0 b`. Precision must be positive and the separator cannot be
 
 `Parse` throws for invalid input. `TryParse` accepts `string` or `ReadOnlySpan<char>` and returns `false` without throwing. Supply the same format provider used by the input field.
 
+Use `ParseWithUnitSystem`, `TryParseWithUnitSystem`, or
+`TryParseSpanWithUnitSystem` when factors must be unambiguous. Decimal parsing
+accepts SI suffixes, while binary parsing accepts IEC suffixes and rejects
+ambiguous `KB`, `MB`, `GB`, `TB`, `PB`, and `EB` suffixes.
+
 ### Calculate rates
 
 Call `size.Per(interval).Humanize(format, TimeUnit.Second, culture)`. Rate display supports second, minute, and hour units.
+Use `HumanizeWithUnitSystem` on `ByteRate` for explicit SI or IEC rate output.
 
 ## Pitfall
 
@@ -69,6 +90,11 @@ decimal SI, while `TB` and smaller legacy labels use binary multiples. It
 preserves the legacy `KB` through `TB` symbols rather than relabeling them as
 IEC units.
 
+The existing APIs remain legacy APIs even when a value was created with a
+decimal or IEC factory. Pass the unit system again when formatting, parsing,
+humanizing a composite value, or displaying a rate; factory choice does not
+carry formatting provenance.
+
 Construct rates with a positive, nonzero interval. Keep `ByteSize` as the model value; formatted output is not a serialization contract.
 
 ## Version notes
@@ -84,5 +110,6 @@ against the selected package.
 - [Metric numerals](./metric-numerals.mdx)
 - [Numbers in words and ordinals](./numbers-in-words-and-ordinals.mdx)
 - [ByteSize API](../api/Humanizer.ByteSize.md)
+- [ByteSizeUnitSystem API](../api/Humanizer.ByteSizeUnitSystem.md)
 - [ByteSizeExtensions API](../api/Humanizer.ByteSizeExtensions.md)
 - [ByteRate API](../api/Humanizer.ByteRate.md)

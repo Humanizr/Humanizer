@@ -181,6 +181,27 @@ Notes:
 - `relativeDate` owns phrases such as "yesterday", "tomorrow", and tense-sensitive relative-date templates.
 - `duration` owns phrase tables used by duration humanization outside formatter profile selection metadata.
 - `dataUnits` owns localized data-unit phrases.
+- Explicit SI and IEC formatting requires these entries and canonical symbols:
+
+  | Key | Symbol |
+  | --- | --- |
+  | `decimalKilobyte` | `kB` |
+  | `decimalMegabyte` | `MB` |
+  | `decimalGigabyte` | `GB` |
+  | `decimalTerabyte` | `TB` |
+  | `decimalPetabyte` | `PB` |
+  | `decimalExabyte` | `EB` |
+  | `binaryKibibyte` | `KiB` |
+  | `binaryMebibyte` | `MiB` |
+  | `binaryGibibyte` | `GiB` |
+  | `binaryTebibyte` | `TiB` |
+  | `binaryPebibyte` | `PiB` |
+
+  Every non-variant locale must author localized forms for all 11 entries. The
+  current catalog has 90 authoring roots and 12 regional variants. Variants
+  may inherit the entries only through their existing same-language
+  `variantOf` chain. A supported locale must never obtain these words from the
+  default English formatter fallback.
 - `timeUnits` owns localized time-unit phrases.
 - `phrases` is a distinct canonical surface from `formatter`. Do not hide phrase-table ownership under `formatter` just because both influence humanized output.
 

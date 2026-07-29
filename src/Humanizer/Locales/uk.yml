@@ -862,6 +862,72 @@ surfaces:
           paucal: 'терабайти'
           plural: 'терабайтів'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'кілобайт'
+          paucal: 'кілобайти'
+          plural: 'кілобайтів'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'мегабайт'
+          paucal: 'мегабайти'
+          plural: 'мегабайтів'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'гігабайт'
+          paucal: 'гігабайти'
+          plural: 'гігабайтів'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'терабайт'
+          paucal: 'терабайти'
+          plural: 'терабайтів'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'петабайт'
+          paucal: 'петабайти'
+          plural: 'петабайтів'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ексабайт'
+          paucal: 'ексабайти'
+          plural: 'ексабайтів'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'кібібайт'
+          paucal: 'кібібайти'
+          plural: 'кібібайтів'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'мебібайт'
+          paucal: 'мебібайти'
+          plural: 'мебібайтів'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'гібібайт'
+          paucal: 'гібібайти'
+          plural: 'гібібайтів'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'тебібайт'
+          paucal: 'тебібайти'
+          plural: 'тебібайтів'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'пебібайт'
+          paucal: 'пебібайти'
+          plural: 'пебібайтів'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'мс.'

@@ -605,6 +605,39 @@ surfaces:
           default: 'ટેરાબાઇટ'
           singular: 'ટેરાબાઇટ'
         symbol: 'TB'
+      decimalKilobyte:
+        forms: 'કિલોબાઇટ'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms: 'મેગાબાઇટ'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms: 'ગીગાબાઇટ'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms: 'ટેરાબાઇટ'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms: 'પેટાબાઈટ'
+        symbol: 'PB'
+      decimalExabyte:
+        forms: 'એક્સાબાઇટ'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms: 'કિબિબાઇટ'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms: 'મેબિબાઇટ'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms: 'ગિબિબાઇટ'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms: 'ટેબિબાઇટ'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms: 'પેબિબાઇટ'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'મિલિસેકંડ'

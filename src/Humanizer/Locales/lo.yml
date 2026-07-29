@@ -212,6 +212,50 @@ surfaces:
         forms:
           default: 'ເທຣາໄບຕ໌'
         symbol: 'TB'
+      decimalKilobyte:
+        forms:
+          default: 'ກິໂລໄບຕ໌'
+        symbol: 'kB'
+      decimalMegabyte:
+        forms:
+          default: 'ເມກະໄບຕ໌'
+        symbol: 'MB'
+      decimalGigabyte:
+        forms:
+          default: 'ກິກະໄບຕ໌'
+        symbol: 'GB'
+      decimalTerabyte:
+        forms:
+          default: 'ເທຣາໄບຕ໌'
+        symbol: 'TB'
+      decimalPetabyte:
+        forms:
+          default: 'ເພຕາໄບຕ໌'
+        symbol: 'PB'
+      decimalExabyte:
+        forms:
+          default: 'ເອັກຊາໄບຕ໌'
+        symbol: 'EB'
+      binaryKibibyte:
+        forms:
+          default: 'ກິບິໄບຕ໌'
+        symbol: 'KiB'
+      binaryMebibyte:
+        forms:
+          default: 'ເມບິໄບຕ໌'
+        symbol: 'MiB'
+      binaryGibibyte:
+        forms:
+          default: 'ຈິບິໄບຕ໌'
+        symbol: 'GiB'
+      binaryTebibyte:
+        forms:
+          default: 'ເຕບິໄບຕ໌'
+        symbol: 'TiB'
+      binaryPebibyte:
+        forms:
+          default: 'ເພບິໄບຕ໌'
+        symbol: 'PiB'
     timeUnits:
       millisecond:
         symbol: 'ມິນລິວິນາທີ'

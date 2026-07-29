@@ -455,6 +455,28 @@ public static class ByteSizeExtensions
         string.IsNullOrWhiteSpace(format) ? input.ToString(formatProvider) : input.ToString(format, formatProvider);
 
     /// <summary>
+    /// Turns a byte quantity into human-readable form using an explicit unit system.
+    /// </summary>
+    /// <param name="input">The byte quantity to humanize.</param>
+    /// <param name="unitSystem">The unit system to use.</param>
+    /// <param name="format">
+    /// The numeric format and optional unit token. For decimal SI and binary IEC, unit tokens are
+    /// matched case-insensitively and output uses canonical symbol casing.
+    /// </param>
+    /// <param name="formatProvider">The provider used to format the numeric value.</param>
+    /// <returns>The humanized byte quantity.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="unitSystem"/> is not defined.</exception>
+    /// <exception cref="FormatException">
+    /// <paramref name="format"/> is invalid, or selects a token not supported by the selected non-legacy system.
+    /// </exception>
+    public static string HumanizeWithUnitSystem(
+        this ByteSize input,
+        ByteSizeUnitSystem unitSystem,
+        string? format = null,
+        IFormatProvider? formatProvider = null) =>
+        input.Format(unitSystem, format, formatProvider);
+
+    /// <summary>
     /// Turns a byte quantity into a composite human-readable form using descending units, e.g. 10 KB 2 B.
     /// </summary>
     /// <param name="input">The byte quantity to humanize.</param>
@@ -532,6 +554,136 @@ public static class ByteSizeExtensions
             isNegative ? NumberFormatInfo.GetInstance(formatProvider).NegativeSign : null,
             string.Join(separator, parts));
     }
+
+    /// <summary>
+    /// Turns a byte quantity into composite human-readable form using one explicit unit system.
+    /// </summary>
+    /// <param name="input">The byte quantity to humanize.</param>
+    /// <param name="unitSystem">The unit system to use.</param>
+    /// <param name="precision">The maximum number of non-zero parts to return.</param>
+    /// <param name="formatProvider">The provider used to format each numeric part and select localized unit words.</param>
+    /// <param name="separator">The separator to place between parts.</param>
+    /// <param name="toWords">Uses localized unit words instead of canonical symbols when <see langword="true"/>.</param>
+    /// <returns>The composite humanized byte quantity.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="unitSystem"/> is not defined or <paramref name="precision"/> is less than one.
+    /// </exception>
+    /// <exception cref="ArgumentNullException"><paramref name="separator"/> is <see langword="null"/>.</exception>
+    public static string HumanizeCompositeWithUnitSystem(
+        this ByteSize input,
+        ByteSizeUnitSystem unitSystem,
+        int precision = 2,
+        IFormatProvider? formatProvider = null,
+        string separator = " ",
+        bool toWords = false)
+    {
+        if (unitSystem == ByteSizeUnitSystem.Legacy)
+        {
+            return input.HumanizeComposite(precision, formatProvider, separator, toWords);
+        }
+
+        if (unitSystem is < ByteSizeUnitSystem.DecimalSi or > ByteSizeUnitSystem.BinaryIec)
+        {
+            throw new ArgumentOutOfRangeException(nameof(unitSystem), unitSystem, "Unknown byte-size unit system.");
+        }
+
+        if (precision < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(precision), precision, "Precision must be greater than zero.");
+        }
+
+        ArgumentNullException.ThrowIfNull(separator);
+        formatProvider ??= CultureInfo.CurrentCulture;
+        var culture = formatProvider as CultureInfo;
+        if (culture is not null)
+        {
+            formatProvider = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(culture);
+        }
+
+        var formatter = Configurator.GetFormatter(culture);
+        var isNegative = input.Bits < 0;
+        var remainingBits = isNegative
+            ? (ulong)(-(input.Bits + 1)) + 1
+            : (ulong)input.Bits;
+        var units = unitSystem == ByteSizeUnitSystem.DecimalSi ? DecimalCompositeUnits : BinaryCompositeUnits;
+
+        if (remainingBits == 0)
+        {
+            return string.Concat("0 ", toWords
+                ? formatter.DataUnitHumanize(DataUnit.Bit, 0, toSymbol: false)
+                : ByteSize.BitSymbol);
+        }
+
+        var parts = new List<string>(Math.Min(precision, units.Length + 2));
+        foreach (var unit in units)
+        {
+            if (parts.Count >= precision)
+            {
+                break;
+            }
+
+            var bitsPerUnit = (ulong)unit.Bytes * ByteSize.BitsInByte;
+            var count = remainingBits / bitsPerUnit;
+            if (count == 0)
+            {
+                continue;
+            }
+
+            var unitText = toWords
+                ? formatter.DataUnitHumanize(unit.DataUnit, count, toSymbol: false)
+                : unit.Symbol;
+            parts.Add(string.Concat(count.ToString(formatProvider), " ", unitText));
+            remainingBits %= bitsPerUnit;
+        }
+
+        addSmallUnit(ByteSize.BitsInByte, ByteSize.ByteSymbol, DataUnit.Byte);
+        addSmallUnit(1, ByteSize.BitSymbol, DataUnit.Bit);
+
+        return string.Concat(
+            isNegative ? NumberFormatInfo.GetInstance(formatProvider).NegativeSign : null,
+            string.Join(separator, parts));
+
+        void addSmallUnit(ulong bitsPerUnit, string symbol, DataUnit dataUnit)
+        {
+            if (parts.Count >= precision)
+            {
+                return;
+            }
+
+            var count = remainingBits / bitsPerUnit;
+            if (count == 0)
+            {
+                return;
+            }
+
+            parts.Add(string.Concat(
+                count.ToString(formatProvider),
+                " ",
+                toWords ? formatter.DataUnitHumanize(dataUnit, count, toSymbol: false) : symbol));
+            remainingBits %= bitsPerUnit;
+        }
+    }
+
+    static readonly CompositeUnit[] DecimalCompositeUnits =
+    [
+        new(ByteSize.BytesInDecimalExabyte, "EB", DataUnit.DecimalExabyte),
+        new(ByteSize.BytesInDecimalPetabyte, "PB", DataUnit.DecimalPetabyte),
+        new(ByteSize.BytesInDecimalTerabyte, "TB", DataUnit.DecimalTerabyte),
+        new(ByteSize.BytesInDecimalGigabyte, "GB", DataUnit.DecimalGigabyte),
+        new(ByteSize.BytesInDecimalMegabyte, "MB", DataUnit.DecimalMegabyte),
+        new(ByteSize.BytesInDecimalKilobyte, "kB", DataUnit.DecimalKilobyte)
+    ];
+
+    static readonly CompositeUnit[] BinaryCompositeUnits =
+    [
+        new(ByteSize.BytesInPebibyte, "PiB", DataUnit.BinaryPebibyte),
+        new(ByteSize.BytesInTebibyte, "TiB", DataUnit.BinaryTebibyte),
+        new(ByteSize.BytesInGibibyte, "GiB", DataUnit.BinaryGibibyte),
+        new(ByteSize.BytesInMebibyte, "MiB", DataUnit.BinaryMebibyte),
+        new(ByteSize.BytesInKibibyte, "KiB", DataUnit.BinaryKibibyte)
+    ];
+
+    readonly record struct CompositeUnit(long Bytes, string Symbol, DataUnit DataUnit);
 
     /// <summary>
     /// Turns a quantity of bytes in a given interval into a rate that can be manipulated
