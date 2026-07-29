@@ -620,6 +620,52 @@ test('deployment release stays draft until production is verified', () => {
   assert.match(record, /"\$draft" != false[\s\S]*?"\$immutable" != true/);
 });
 
+test('candidate staging tolerates eventual release-list visibility', () => {
+  const sourceSha = '0123456789abcdef0123456789abcdef01234567';
+  const stage = normalizedWorkflow
+    .split('\n  stage-pages-release:\n')[1]
+    .split('\n  deploy:\n')[0];
+  const filter = stage.match(
+    /jq -r --arg tag "\$release_tag" '\n([\s\S]*?)\n\s+'/,
+  )?.[1];
+  assert.ok(filter);
+  assert.match(
+    stage,
+    /for attempt in \{1\.\.10\}; do[\s\S]*?release="\$\(find_candidate_release\)"[\s\S]*?\[\[ -n "\$release" \]\] && break[\s\S]*?sleep 1/,
+  );
+
+  const candidate = {
+    assets: [
+      {name: 'github-pages-100-1.tar.sha256'},
+      {name: 'deployment-200-1.json'},
+      {name: 'github-pages-100-1.tar'},
+    ],
+    draft: true,
+    id: 300,
+    immutable: false,
+    tag_name: 'docs-pages-candidate-v1-200-1',
+    target_commitish: sourceSha,
+  };
+  const select = (pages) =>
+    spawnSync(
+      'jq',
+      ['-r', '--arg', 'tag', candidate.tag_name, filter],
+      {
+        encoding: 'utf8',
+        input: JSON.stringify(pages),
+      },
+    );
+
+  assert.equal(select([[]]).stdout, '');
+  const visible = select([[], [candidate]]);
+  assert.equal(visible.status, 0, visible.stderr);
+  assert.equal(
+    visible.stdout.trimEnd(),
+    `300\ttrue\tfalse\t${sourceSha}\t3\tdeployment-200-1.json,github-pages-100-1.tar,github-pages-100-1.tar.sha256`,
+  );
+  assert.notEqual(select([[candidate, candidate]]).status, 0);
+});
+
 test('immutable releases contain exactly archive, checksum, and manifest', () => {
   assert.doesNotMatch(normalizedWorkflow, /gh release upload/);
   assert.doesNotMatch(normalizedWorkflow, /--method DELETE/);
