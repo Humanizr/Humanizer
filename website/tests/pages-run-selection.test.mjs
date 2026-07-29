@@ -656,8 +656,10 @@ test('candidate staging tolerates eventual release-list visibility', () => {
       },
     );
 
-  assert.equal(select([[]]).stdout, '');
-  const visible = select([[], [candidate]]);
+  const absent = select([[]]);
+  assert.equal(absent.status, 0, absent.stderr);
+  assert.equal(absent.stdout, '');
+  const visible = select([[candidate]]);
   assert.equal(visible.status, 0, visible.stderr);
   assert.equal(
     visible.stdout.trimEnd(),
