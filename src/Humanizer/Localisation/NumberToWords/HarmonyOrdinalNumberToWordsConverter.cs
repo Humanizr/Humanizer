@@ -26,6 +26,14 @@ class HarmonyOrdinalNumberToWordsConverter(HarmonyOrdinalNumberToWordsProfile pr
     /// <returns>The localized cardinal words for <paramref name="input"/>.</returns>
     public override string Convert(long input)
     {
+        if (input > profile.MaximumValue || input < profile.MinimumValue)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(input),
+                input,
+                $"The configured profile supports values from {profile.MinimumValue} through {profile.MaximumValue}.");
+        }
+
         // The cardinal path shares one recursive engine for all supported magnitudes; the
         // profile decides the exact hundred behavior. Keeping the sign outside the magnitude
         // decomposition makes long.MinValue representable without overflowing.

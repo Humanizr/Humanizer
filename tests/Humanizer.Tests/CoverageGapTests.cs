@@ -2225,6 +2225,8 @@ public class CoverageGapTests
 
         var harmony = new HarmonyOrdinalNumberToWordsConverter(CreateHarmonyOrdinalProfile());
         Assert.Equal("two thousand one", harmony.Convert(2001));
+        Assert.Equal("input", Assert.Throws<ArgumentOutOfRangeException>(() => harmony.Convert(-1001)).ParamName);
+        Assert.Equal("input", Assert.Throws<ArgumentOutOfRangeException>(() => harmony.Convert(2002)).ParamName);
 
         var invalidStrategy = new HarmonyOrdinalNumberToWordsConverter(CreateHarmonyOrdinalProfile(ordinalSuffixStrategy: (HarmonyOrdinalSuffixStrategy)42));
         Assert.Throws<InvalidOperationException>(() => invalidStrategy.ConvertToOrdinal(1));
@@ -2791,7 +2793,7 @@ public class CoverageGapTests
 
         return new(
             -1000,
-            2000,
+            2001,
             "minus",
             "hundred",
             HarmonyOrdinalHundredStrategy.AllowExplicitOneInComposite,
