@@ -282,6 +282,8 @@ surfaces:
         const string parentLocale = """
 locale: 'aa'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
@@ -306,6 +308,8 @@ variantOf: 'aa'
         const string locale = """
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   list:
     engine: 'conjunction'
     value: 'and'
@@ -327,6 +331,8 @@ surfaces:
         const string enabledLocale = """
 locale: 'aa'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'selector-only'
@@ -334,6 +340,8 @@ surfaces:
         const string missingLocale = """
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   list:
     engine: 'conjunction'
     value: 'and'
@@ -378,6 +386,8 @@ surfaces:
         var locale = $$"""
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: '{{disposition}}'
@@ -398,6 +408,8 @@ surfaces:
         const string locale = """
 locale: 'zz'
 surfaces:
+  durationCases:
+    classification: 'not-applicable'
   inflection:
     cardinalRule: 'EnglishLike'
     disposition: 'lexicon'
