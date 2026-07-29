@@ -2086,7 +2086,8 @@ wordsToNumber:
         static string AddDefaultInflection(string candidateText, bool enabled)
         {
             if (!enabled ||
-                candidateText.Contains("  inflection:", StringComparison.Ordinal) ||
+                candidateText.Split('\n').Any(
+                    static line => string.Equals(line.TrimEnd('\r'), "  inflection:", StringComparison.Ordinal)) ||
                 candidateText.Contains("variantOf:", StringComparison.Ordinal))
             {
                 return candidateText;

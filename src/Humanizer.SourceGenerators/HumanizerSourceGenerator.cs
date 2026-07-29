@@ -5,6 +5,7 @@ namespace Humanizer.SourceGenerators;
 [Generator]
 public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 {
+    /// <inheritdoc />
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var localeFiles = context.AdditionalTextsProvider
