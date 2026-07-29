@@ -229,6 +229,246 @@ The separator to use when combining humanized time parts\. If null, the default 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form using localized unit symbols and fractional seconds\.
+
+```csharp
+public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).countEmptyUnits'></a>
+
+`countEmptyUnits` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Whether empty time units count toward [precision](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).precision 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this System\.TimeSpan, int, bool, int, System\.MidpointRounding, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string\)\.precision')\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxFractionalDigits'></a>
+
+`maxFractionalDigits` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of fractional\-second digits, from 0 through 7\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).roundingMode'></a>
+
+`roundingMode` [System\.MidpointRounding](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding 'System\.MidpointRounding')
+
+The midpoint rounding mode\. Only [System\.MidpointRounding\.ToEven](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.toeven 'System\.MidpointRounding\.ToEven') and [System\.MidpointRounding\.AwayFromZero](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.awayfromzero 'System\.MidpointRounding\.AwayFromZero') are supported\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, the current culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The human\-readable time span, using seconds as its minimum unit\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeToSymbolsWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form using localized unit symbols and fractional seconds\.
+
+```csharp
+public static string HumanizeToSymbolsWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxFractionalDigits'></a>
+
+`maxFractionalDigits` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of fractional\-second digits, from 0 through 7\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).roundingMode'></a>
+
+`roundingMode` [System\.MidpointRounding](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding 'System\.MidpointRounding')
+
+The midpoint rounding mode\. Only [System\.MidpointRounding\.ToEven](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.toeven 'System\.MidpointRounding\.ToEven') and [System\.MidpointRounding\.AwayFromZero](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.awayfromzero 'System\.MidpointRounding\.AwayFromZero') are supported\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, the current culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeToSymbolsWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The human\-readable time span, using seconds as its minimum unit\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this TimeSpan, int, bool, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form with fractional seconds\.
+
+```csharp
+public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).countEmptyUnits'></a>
+
+`countEmptyUnits` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+Whether empty time units count toward [precision](Humanizer.TimeSpanHumanizeExtensions.md#Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).precision 'Humanizer\.TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this System\.TimeSpan, int, bool, int, System\.MidpointRounding, System\.Globalization\.CultureInfo, Humanizer\.TimeUnit, string\)\.precision')\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxFractionalDigits'></a>
+
+`maxFractionalDigits` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of fractional\-second digits, from 0 through 7\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).roundingMode'></a>
+
+`roundingMode` [System\.MidpointRounding](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding 'System\.MidpointRounding')
+
+The midpoint rounding mode\. Only [System\.MidpointRounding\.ToEven](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.toeven 'System\.MidpointRounding\.ToEven') and [System\.MidpointRounding\.AwayFromZero](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.awayfromzero 'System\.MidpointRounding\.AwayFromZero') are supported\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, the current culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,bool,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The human\-readable time span, using seconds as its minimum unit\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string)'></a>
+
+## TimeSpanHumanizeExtensions\.HumanizeWithFractionalSeconds\(this TimeSpan, int, int, MidpointRounding, CultureInfo, TimeUnit, string\) Method
+
+Turns a [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') into a human\-readable form with fractional seconds\.
+
+```csharp
+public static string HumanizeWithFractionalSeconds(this System.TimeSpan timeSpan, int precision, int maxFractionalDigits, System.MidpointRounding roundingMode, System.Globalization.CultureInfo? culture, Humanizer.TimeUnit maxUnit, string? collectionSeparator=", ");
+```
+#### Parameters
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).timeSpan'></a>
+
+`timeSpan` [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan')
+
+The time span to humanize\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).precision'></a>
+
+`precision` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of time units to return\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxFractionalDigits'></a>
+
+`maxFractionalDigits` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The maximum number of fractional\-second digits, from 0 through 7\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).roundingMode'></a>
+
+`roundingMode` [System\.MidpointRounding](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding 'System\.MidpointRounding')
+
+The midpoint rounding mode\. Only [System\.MidpointRounding\.ToEven](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.toeven 'System\.MidpointRounding\.ToEven') and [System\.MidpointRounding\.AwayFromZero](https://learn.microsoft.com/en-us/dotnet/api/system.midpointrounding.awayfromzero 'System\.MidpointRounding\.AwayFromZero') are supported\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).culture'></a>
+
+`culture` [System\.Globalization\.CultureInfo](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo 'System\.Globalization\.CultureInfo')
+
+Culture to use\. If null, the current culture is used\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).maxUnit'></a>
+
+`maxUnit` [TimeUnit](Humanizer.TimeUnit.md 'Humanizer\.TimeUnit')
+
+The maximum unit of time to output\.
+
+<a name='Humanizer.TimeSpanHumanizeExtensions.HumanizeWithFractionalSeconds(thisSystem.TimeSpan,int,int,System.MidpointRounding,System.Globalization.CultureInfo,Humanizer.TimeUnit,string).collectionSeparator'></a>
+
+`collectionSeparator` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The separator used to combine time parts\. If null, the culture's default collection formatter is used\.
+
+#### Returns
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
+The human\-readable time span, using seconds as its minimum unit\.
+
 <a name='Humanizer.TimeSpanHumanizeExtensions.ToAge(thisSystem.TimeSpan,System.Globalization.CultureInfo,Humanizer.TimeUnit,bool)'></a>
 
 ## TimeSpanHumanizeExtensions\.ToAge\(this TimeSpan, CultureInfo, TimeUnit, bool\) Method

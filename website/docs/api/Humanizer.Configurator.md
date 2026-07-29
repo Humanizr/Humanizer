@@ -176,7 +176,7 @@ public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConv
 
 ## Configurator\.TimeSpanHumanizeStrategy Property
 
-The strategy to be used for TimeSpan\.Humanize and TimeSpan\.HumanizeToSymbols
+The strategy used by the [System\.TimeSpan](https://learn.microsoft.com/en-us/dotnet/api/system.timespan 'System\.TimeSpan') humanization extension methods\.
 
 ```csharp
 public static Humanizer.ITimeSpanHumanizeStrategy TimeSpanHumanizeStrategy { get; set; }

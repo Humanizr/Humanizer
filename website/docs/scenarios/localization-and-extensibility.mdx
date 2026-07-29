@@ -40,9 +40,14 @@ Registries cover collection formatters, general formatters, number-word converte
 
 On `main/preview`, assign `Configurator.TimeSpanHumanizeStrategy` once during
 application startup to route every `TimeSpan.Humanize` and
-`HumanizeToSymbols` call through an application-wide policy. The strategy
-receives the requested precision, empty-unit behavior, culture, unit range,
-separator, word mode, and symbol mode.
+`HumanizeToSymbols` call through an application-wide policy. Fractional-second
+calls use `IFractionalTimeSpanHumanizeStrategy` when the configured strategy
+implements it; integral results remain compatible with legacy strategies.
+Genuinely fractional terminal values likewise require
+`IFractionalTimeSpanFormatter` from a configured custom formatter. Humanizer
+does not bypass either configured component or fall back to English. The
+strategy receives the requested precision, empty-unit behavior, culture, unit
+range, separator, word mode, and symbol mode.
 
 This runnable configuration keeps the built-in date strategy example and adds
 a custom time-span strategy that delegates all behavior to

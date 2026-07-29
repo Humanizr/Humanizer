@@ -19,7 +19,8 @@ Call `TimeSpan.Humanize` for elapsed time and `ToAge` for a human-readable age a
 
 This program shows two-unit precision, locale-aware list punctuation,
 localized compact symbols, invariant duration parsing, and an age rendered
-with number words:
+with number words. It also shows fractional seconds without exposing a
+separate millisecond unit:
 
 <CodeBlock language="csharp" title="Program.cs">{durations}</CodeBlock>
 
@@ -38,6 +39,22 @@ The default maximum unit is `Week`. Ask for `Month` or `Year` explicitly when th
 On `main/preview`, `HumanizeToSymbols` applies the same precision, empty-unit,
 range, culture, and separator controls but emits localized `TimeUnit` symbols
 such as `1h, 3s, 1ms`.
+
+### Keep sub-second precision in seconds
+
+On `main/preview`, use `HumanizeWithFractionalSeconds` or
+`HumanizeToSymbolsWithFractionalSeconds` when milliseconds should appear as a
+fraction of the seconds unit. These APIs always use `Second` as the inclusive
+minimum unit. Supply the precision, maximum unit, maximum fractional digits,
+and either `MidpointRounding.ToEven` or
+`MidpointRounding.AwayFromZero` explicitly.
+
+The entire duration is rounded before it is decomposed, so a value such as
+`59.9996` seconds rounded to three fractional digits becomes `1 minute`.
+The digit count is a maximum from zero through seven; trailing zeros are
+trimmed. Numeric text and CLDR seconds grammar follow the requested culture
+for every supported locale, including same-language parent inheritance.
+Fractional requests never fall back to English.
 
 ### Parse invariant durations
 

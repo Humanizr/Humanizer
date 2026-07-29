@@ -3,7 +3,7 @@ namespace Humanizer;
 /// <summary>
 /// Provides the standard formatter implementation for Humanizer locales.
 /// </summary>
-public class DefaultFormatter : IFormatter
+public class DefaultFormatter : IFormatter, IFractionalTimeSpanFormatter
 {
     static readonly DefaultFormatter EnglishFallback = new(CultureInfo.GetCultureInfo("en"));
     readonly LocalePhraseTable phraseTable;
@@ -64,6 +64,49 @@ public class DefaultFormatter : IFormatter
             : throw new InvalidOperationException($"Missing generated time-span phrase for '{Culture.Name}' and unit '{timeUnit}'.");
 
     /// <inheritdoc/>
+    public virtual string TimeSpanHumanizeWithFractionalSeconds(decimal seconds, bool toSymbols)
+    {
+#if NET8_0_OR_GREATER
+        ArgumentOutOfRangeException.ThrowIfNegative(seconds);
+#else
+        if (seconds < 0)
+            throw new ArgumentOutOfRangeException(nameof(seconds));
+#endif
+
+        var visibleSeconds = decimal.Parse(
+            seconds.ToString("0.#######", CultureInfo.InvariantCulture),
+            CultureInfo.InvariantCulture);
+        var countValue = visibleSeconds.ToString("0.#######", Culture);
+        if (toSymbols)
+        {
+            return string.Concat(countValue, TimeUnitHumanize(TimeUnit.Second));
+        }
+
+        if (!phraseTable.TryGetTimeSpanPhrase(TimeUnit.Second, out var phrase) ||
+            phrase.Multiple is not { } multiple)
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second phrase for '{Culture.Name}'.");
+        }
+
+        if (!LocalizedInflectionCatalog.TrySelectCategory(Culture, visibleSeconds, out var category))
+        {
+            throw new InvalidOperationException($"Missing generated fractional-second grammar for '{Culture.Name}'.");
+        }
+
+        if (visibleSeconds == 1 && phrase.Single is { } single)
+        {
+            return single;
+        }
+
+        var form = GetFractionalTimeSpanPhraseForm(visibleSeconds, category);
+        return RenderCountedPhrase(
+            multiple,
+            ResolveTimeSpanPhraseForms(multiple.Forms, form),
+            countValue,
+            string.Empty);
+    }
+
+    /// <inheritdoc/>
     public virtual string TimeSpanHumanize_Age()
     {
         return phraseTable.TimeSpanAge ?? "{0}";
@@ -114,6 +157,13 @@ public class DefaultFormatter : IFormatter
 
     internal virtual FormatterNumberForm GetTimeSpanPhraseForm(TimeUnit unit, int number, bool toWords) =>
         Math.Abs(number) == 1 ? FormatterNumberForm.Singular : FormatterNumberForm.Default;
+
+    internal virtual FormatterNumberForm GetFractionalTimeSpanPhraseForm(
+        decimal seconds,
+        CardinalPluralCategory category) =>
+        category == CardinalPluralCategory.One
+            ? FormatterNumberForm.Singular
+            : FormatterNumberForm.Default;
 
     internal virtual FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         Math.Abs(count) == 1d ? FormatterNumberForm.Singular : FormatterNumberForm.Default;

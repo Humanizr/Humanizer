@@ -115,6 +115,8 @@
 | [IDateTimeOffsetHumanizeStrategy](Humanizer.IDateTimeOffsetHumanizeStrategy.md 'Humanizer\.IDateTimeOffsetHumanizeStrategy') | Implement this interface to create a new strategy for DateTime\.Humanize and hook it in the Configurator\.DateTimeOffsetHumanizeStrategy |
 | [IDateToOrdinalWordConverter](Humanizer.IDateToOrdinalWordConverter.md 'Humanizer\.IDateToOrdinalWordConverter') | Converts dates into the localized text used by `ToOrdinalWords`\. |
 | [IFormatter](Humanizer.IFormatter.md 'Humanizer\.IFormatter') | Localizes Humanizer's number, date, duration, and unit formatting\. |
+| [IFractionalTimeSpanFormatter](Humanizer.IFractionalTimeSpanFormatter.md 'Humanizer\.IFractionalTimeSpanFormatter') | Extends a formatter with support for fractional\-second duration values\. |
+| [IFractionalTimeSpanHumanizeStrategy](Humanizer.IFractionalTimeSpanHumanizeStrategy.md 'Humanizer\.IFractionalTimeSpanHumanizeStrategy') | Extends a time\-span humanization strategy with fractional\-second support\. |
 | [ILongOrdinalizer](Humanizer.ILongOrdinalizer.md 'Humanizer\.ILongOrdinalizer') | Localizes the ordinal form of a 64\-bit integer\. |
 | [INumberToWordsConverter](Humanizer.INumberToWordsConverter.md 'Humanizer\.INumberToWordsConverter') | Converts numbers into locale\-specific words, ordinals, and tuple names\. |
 | [IOrdinalizer](Humanizer.IOrdinalizer.md 'Humanizer\.IOrdinalizer') | Localizes the ordinal form of a number\. |

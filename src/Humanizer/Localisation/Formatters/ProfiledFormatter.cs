@@ -190,6 +190,57 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
             ? form
             : DetectNumberForm(number, profile.PhraseDetector);
 
+    internal override FormatterNumberForm GetFractionalTimeSpanPhraseForm(
+        decimal seconds,
+        CardinalPluralCategory category) =>
+        profile.PhraseDetector switch
+        {
+            FormatterNumberDetectorKind.SingularPlural =>
+                category == CardinalPluralCategory.One
+                    ? FormatterNumberForm.Singular
+                    : FormatterNumberForm.Plural,
+            FormatterNumberDetectorKind.ArabicLike => category switch
+            {
+                CardinalPluralCategory.Two => FormatterNumberForm.Dual,
+                CardinalPluralCategory.Few => FormatterNumberForm.Plural,
+                CardinalPluralCategory.Many when seconds is >= 3 and <= 10 => FormatterNumberForm.Plural,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Between2And4Paucal => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                CardinalPluralCategory.Many => FormatterNumberForm.Plural,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Polish => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.SouthSlavic or FormatterNumberDetectorKind.Russian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Slovenian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Two => FormatterNumberForm.Dual,
+                CardinalPluralCategory.Few => FormatterNumberForm.Paucal,
+                _ => FormatterNumberForm.Default
+            },
+            FormatterNumberDetectorKind.Lithuanian => category switch
+            {
+                CardinalPluralCategory.One => FormatterNumberForm.Singular,
+                CardinalPluralCategory.Few => FormatterNumberForm.Default,
+                _ => FormatterNumberForm.Plural
+            },
+            _ => base.GetFractionalTimeSpanPhraseForm(seconds, category)
+        };
+
     internal override FormatterNumberForm GetDataUnitPhraseForm(DataUnit dataUnit, double count) =>
         DetectDataUnitForm(count, profile.DataUnitDetector, profile.DataUnitNonIntegralForm);
 

@@ -117,7 +117,7 @@ public static partial class Configurator
     public static IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; } = new DefaultDateTimeOffsetHumanizeStrategy();
 
     /// <summary>
-    /// The strategy to be used for TimeSpan.Humanize and TimeSpan.HumanizeToSymbols
+    /// The strategy used by the <see cref="TimeSpan"/> humanization extension methods.
     /// </summary>
     /// <remarks>
     /// This property should be set only once during application startup before any humanization operations occur.
