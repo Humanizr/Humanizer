@@ -126,20 +126,29 @@ public class ByteSizeUnitSystemLocaleTests
     [Theory]
     [InlineData(ByteSizeUnitSystem.DecimalSi, "kB", "kilobyți")]
     [InlineData(ByteSizeUnitSystem.BinaryIec, "KiB", "kibibyți")]
-    public void RomanianExplicitFullWordsUseDeForOtherCategory(
+    public void RomanianExplicitFullWordsUseDeAtNumericBoundaries(
         ByteSizeUnitSystem unitSystem,
         string symbol,
         string unitWord)
     {
         var culture = CultureInfo.GetCultureInfo("ro");
 
-        foreach (var count in new[] { 20, 21 })
+        foreach (var (count, format, expected) in new[]
+                 {
+                     ("0", "0", $"0 de {unitWord}"),
+                     ("19", "0", $"19 {unitWord}"),
+                     ("20", "0", $"20 de {unitWord}"),
+                     ("21", "0", $"21 de {unitWord}"),
+                     ("101", "0", $"101 {unitWord}"),
+                     ("120", "0", $"120 de {unitWord}"),
+                     ("20.5", "0.0", $"20,5 de {unitWord}")
+                 })
         {
             var size = ByteSize.ParseWithUnitSystem($"{count} {symbol}", unitSystem, CultureInfo.InvariantCulture);
 
             Assert.Equal(
-                $"{count} de {unitWord}",
-                size.FormatFullWords(unitSystem, $"0 {symbol}", culture));
+                expected,
+                size.FormatFullWords(unitSystem, $"{format} {symbol}", culture));
         }
     }
 

@@ -333,7 +333,7 @@ sealed class ProfiledFormatter(CultureInfo culture, FormatterProfile profile) : 
         CardinalPluralCategory category) =>
         profile.PrepositionMode == FormatterPrepositionMode.RomanianDe &&
         dataUnit is >= DataUnit.DecimalKilobyte and <= DataUnit.BinaryPebibyte &&
-        category == CardinalPluralCategory.Other
+        ShouldUseRomanianPreposition(count)
             ? "de "
             : string.Empty;
 
