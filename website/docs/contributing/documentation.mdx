@@ -121,13 +121,15 @@ passes. Failed or abandoned attempts therefore cannot become the current
 rollback source.
 
 To restore a retained artifact, find its successful documentation run ID and
-dispatch the same workflow from `main`:
+exact attempt from the run details, then dispatch the same workflow from
+`main`:
 
 ```console
 gh run list --workflow docs.yml --branch main
+gh run view 123456789 --json databaseId,attempt,conclusion
 gh workflow run docs.yml --ref main \
   -f rollback_run_id=123456789 \
-  -f rollback_run_attempt=1
+  -f rollback_run_attempt=<exact-attempt>
 ```
 
 The rollback run verifies the retained artifact's custom domain, stable,
