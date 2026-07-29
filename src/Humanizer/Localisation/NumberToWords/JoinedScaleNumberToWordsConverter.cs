@@ -21,6 +21,12 @@ class JoinedScaleNumberToWordsConverter(JoinedScaleNumberToWordsProfile profile)
         var magnitude = number == long.MinValue
             ? (ulong)long.MaxValue + 1
             : (ulong)Math.Abs(number);
+        var maximumMagnitude = (ulong)profile.MaximumValue + (profile.AllowLongMinValue ? 1UL : 0UL);
+        if (magnitude > maximumMagnitude)
+        {
+            throw new ArgumentOutOfRangeException(nameof(number), number, $"The configured profile supports magnitudes through {maximumMagnitude}.");
+        }
+
         if (number == 0)
         {
             return profile.ZeroWord;

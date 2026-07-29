@@ -82,6 +82,18 @@ public class JoinedScaleNumberToWordsConverterTests
         Assert.Equal(expected, converter.ConvertToOrdinal(number));
     }
 
+    [Theory]
+    [InlineData(2_000_002)]
+    [InlineData(long.MinValue)]
+    public void RejectsValuesOutsideTheConfiguredProfileRange(long number)
+    {
+        var converter = new JoinedScaleNumberToWordsConverter(CreateProfile([], ["", "hundred"], []));
+
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => converter.Convert(number));
+
+        Assert.Equal("number", exception.ParamName);
+    }
+
     static JoinedScaleNumberToWordsProfile CreateProfile(
         JoinedScale[] scales,
         string[] hundredsMap,
