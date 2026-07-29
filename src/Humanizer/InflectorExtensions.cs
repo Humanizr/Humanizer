@@ -194,14 +194,14 @@ public static partial class InflectorExtensions
     /// </param>
     /// <returns>A PascalCase version of the input.</returns>
     /// <remarks>
-            /// <example>
-    /// <code>
-    ///     "SMS parameter provider".Pascalize(preserveUppercase: true) => "SMSParameterProvider"
-    ///     "HTTP IO module".Pascalize(preserveUppercase: false) => "HttpIoModule"
-    /// </code>
-    /// </example>
     /// Uppercase sequences are split using identifier word boundaries, and casing is culture-invariant.
     /// </remarks>
+    /// <example>
+    /// <code>
+    /// "SMS parameter provider".Pascalize(preserveUppercase: true) => "SMSParameterProvider"
+    /// "HTTP IO module".Pascalize(preserveUppercase: false) => "HttpIoModule"
+    /// </code>
+    /// </example>
     public static string Pascalize(this string input, bool preserveUppercase) =>
         preserveUppercase ? input.Pascalize() : input.Underscore().Pascalize();
 

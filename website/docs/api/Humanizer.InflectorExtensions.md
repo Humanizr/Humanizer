@@ -206,6 +206,13 @@ The string to be pascalized\. Must not be null\.
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A PascalCase version of the input\.
 
+### Example
+
+```csharp
+"SMS parameter provider".Pascalize(preserveUppercase: true) => "SMSParameterProvider"
+"HTTP IO module".Pascalize(preserveUppercase: false) => "HttpIoModule"
+```
+
 ### Remarks
 Uppercase sequences are split using identifier word boundaries, and casing is culture\-invariant\.
 
