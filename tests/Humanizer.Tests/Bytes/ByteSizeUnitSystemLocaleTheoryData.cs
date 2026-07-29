@@ -3,10 +3,10 @@ public static class ByteSizeUnitSystemLocaleTheoryData
     public static TheoryData<string, ByteSizeUnitSystem, string, string, string, string, string> RootWords =>
         new()
         {
-            { "af", ByteSizeUnitSystem.DecimalSi, "kB", "0 kilobyte", "1 kilobyte", "2 kilobytes", "5 kilobytes" },
-            { "af", ByteSizeUnitSystem.DecimalSi, "MB", "0 megabyte", "1 megabyte", "2 megabytes", "5 megabytes" },
-            { "af", ByteSizeUnitSystem.DecimalSi, "GB", "0 gigabyte", "1 gigabyte", "2 gigabytes", "5 gigabytes" },
-            { "af", ByteSizeUnitSystem.DecimalSi, "TB", "0 terabyte", "1 terabyte", "2 terabytes", "5 terabytes" },
+            { "af", ByteSizeUnitSystem.DecimalSi, "kB", "0 kilogreep", "1 kilogreep", "2 kilogreeps", "5 kilogreeps" },
+            { "af", ByteSizeUnitSystem.DecimalSi, "MB", "0 megagreep", "1 megagreep", "2 megagreeps", "5 megagreeps" },
+            { "af", ByteSizeUnitSystem.DecimalSi, "GB", "0 gigagreep", "1 gigagreep", "2 gigagreeps", "5 gigagreeps" },
+            { "af", ByteSizeUnitSystem.DecimalSi, "TB", "0 teragreep", "1 teragreep", "2 teragreeps", "5 teragreeps" },
             { "af", ByteSizeUnitSystem.DecimalSi, "PB", "0 petagreep", "1 petagreep", "2 petagreeps", "5 petagreeps" },
             { "af", ByteSizeUnitSystem.DecimalSi, "EB", "0 eksagreep", "1 eksagreep", "2 eksagreeps", "5 eksagreeps" },
             { "af", ByteSizeUnitSystem.BinaryIec, "KiB", "0 kibigreep", "1 kibigreep", "2 kibigreeps", "5 kibigreeps" },

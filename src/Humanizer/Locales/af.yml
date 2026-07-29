@@ -215,16 +215,16 @@ surfaces:
           default: 'terabyte'
         symbol: 'TB'
       decimalKilobyte:
-        forms: 'kilobyte'
+        forms: 'kilogreep'
         symbol: 'kB'
       decimalMegabyte:
-        forms: 'megabyte'
+        forms: 'megagreep'
         symbol: 'MB'
       decimalGigabyte:
-        forms: 'gigabyte'
+        forms: 'gigagreep'
         symbol: 'GB'
       decimalTerabyte:
-        forms: 'terabyte'
+        forms: 'teragreep'
         symbol: 'TB'
       decimalPetabyte:
         forms: 'petagreep'
