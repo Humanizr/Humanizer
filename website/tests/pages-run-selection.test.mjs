@@ -66,3 +66,8 @@ test('subsequent deployments retain the latest successful documentation run', ()
 test('missing deployment history fails closed', () => {
   assert.equal(selectPrior([]), '');
 });
+
+test('release operations have repository context without a checkout', () => {
+  const workflowEnv = workflow.replaceAll('\r\n', '\n').match(/^env:\n([\s\S]*?)^\S/m)?.[1];
+  assert.match(workflowEnv, /^  GH_REPO: \$\{\{ github\.repository \}\}$/m);
+});
