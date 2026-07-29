@@ -39,6 +39,57 @@ public class LocalizedInflectionTests
         { "cy", 6m, (int)CardinalPluralCategory.Many }
     };
 
+    public static TheoryData<string, decimal, int> ReviewedDecimalRuleCases => new()
+    {
+        { "pa", 0.0m, (int)CardinalPluralCategory.One },
+        { "pa", 1.0m, (int)CardinalPluralCategory.One },
+        { "pa", 0.5m, (int)CardinalPluralCategory.Other },
+        { "lv", 11.0m, (int)CardinalPluralCategory.Zero },
+        { "lv", 19.0m, (int)CardinalPluralCategory.Zero },
+        { "lv", 11.5m, (int)CardinalPluralCategory.Other },
+        { "lv", 11.11m, (int)CardinalPluralCategory.Zero },
+        { "be", 2.0m, (int)CardinalPluralCategory.Few },
+        { "be", 4.0m, (int)CardinalPluralCategory.Few },
+        { "be", 2.5m, (int)CardinalPluralCategory.Other },
+        { "be", 5.0m, (int)CardinalPluralCategory.Many },
+        { "be", 9.0m, (int)CardinalPluralCategory.Many },
+        { "be", 11.0m, (int)CardinalPluralCategory.Many },
+        { "be", 14.0m, (int)CardinalPluralCategory.Many },
+        { "be", 5.5m, (int)CardinalPluralCategory.Other },
+        { "be", 12.5m, (int)CardinalPluralCategory.Other },
+        { "be", 22.0m, (int)CardinalPluralCategory.Few },
+        { "lt", 2.0m, (int)CardinalPluralCategory.Few },
+        { "lt", 9.0m, (int)CardinalPluralCategory.Few },
+        { "lt", 12.0m, (int)CardinalPluralCategory.Other },
+        { "lt", 19.0m, (int)CardinalPluralCategory.Other },
+        { "lt", 22.0m, (int)CardinalPluralCategory.Few },
+        { "lt", 2.5m, (int)CardinalPluralCategory.Many },
+        { "lt", 12.5m, (int)CardinalPluralCategory.Many },
+        { "lt", 22.5m, (int)CardinalPluralCategory.Many },
+        { "mt", 3.0m, (int)CardinalPluralCategory.Few },
+        { "mt", 10.0m, (int)CardinalPluralCategory.Few },
+        { "mt", 3.5m, (int)CardinalPluralCategory.Other },
+        { "mt", 11.0m, (int)CardinalPluralCategory.Many },
+        { "mt", 19.0m, (int)CardinalPluralCategory.Many },
+        { "mt", 11.5m, (int)CardinalPluralCategory.Other },
+        { "ga", 3.0m, (int)CardinalPluralCategory.Few },
+        { "ga", 6.0m, (int)CardinalPluralCategory.Few },
+        { "ga", 3.5m, (int)CardinalPluralCategory.Other },
+        { "ga", 7.0m, (int)CardinalPluralCategory.Many },
+        { "ga", 10.0m, (int)CardinalPluralCategory.Many },
+        { "ga", 7.5m, (int)CardinalPluralCategory.Other },
+        { "ar", 3.0m, (int)CardinalPluralCategory.Few },
+        { "ar", 10.0m, (int)CardinalPluralCategory.Few },
+        { "ar", 3.5m, (int)CardinalPluralCategory.Other },
+        { "ar", 11.0m, (int)CardinalPluralCategory.Many },
+        { "ar", 99.0m, (int)CardinalPluralCategory.Many },
+        { "ar", 11.5m, (int)CardinalPluralCategory.Other },
+        { "ro", 2.5m, (int)CardinalPluralCategory.Few },
+        { "es", 1.0m, (int)CardinalPluralCategory.One },
+        { "es", 1.00m, (int)CardinalPluralCategory.One },
+        { "es", 1.1m, (int)CardinalPluralCategory.Other }
+    };
+
     public static TheoryData<decimal, decimal, decimal, int, int, decimal, decimal> CardinalOperandCases => new()
     {
         { 1m, 1m, 1m, 0, 0, 0m, 0m },
@@ -65,6 +116,22 @@ public class LocalizedInflectionTests
     [Theory]
     [MemberData(nameof(CardinalRuleCases))]
     public void SelectsCLDRCardinalCategories(
+        string locale,
+        decimal quantity,
+        int expected)
+    {
+        var success = LocalizedInflectionCatalog.TrySelectCategory(
+            new CultureInfo(locale),
+            quantity,
+            out var category);
+
+        Assert.True(success);
+        Assert.Equal((CardinalPluralCategory)expected, category);
+    }
+
+    [Theory]
+    [MemberData(nameof(ReviewedDecimalRuleCases))]
+    public void AppliesReviewedCLDRDecimalRuleSemantics(
         string locale,
         decimal quantity,
         int expected)
