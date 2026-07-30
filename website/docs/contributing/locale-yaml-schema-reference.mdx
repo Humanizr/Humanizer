@@ -9,13 +9,11 @@ example: illustrative
 
 # Locale YAML schema and inheritance
 
-## Orientation
-
 Use this reference for file-level rules, merge behavior, lexical table shapes,
 and common authoring patterns. Surface fields and engine-specific values are
 in the linked companion references.
 
-## Example
+## Start with a minimal variant
 
 ```yaml
 locale: 'fr-CA'
@@ -166,17 +164,12 @@ These field-name patterns repeat across engines.
 | `negative*` | Fields used only for negative number rendering or parsing. |
 | `useCulture` | Instructs the generated runtime path to pass the current culture into the shared kernel. |
 
-## Pitfall
+## Preserve merge semantics
 
 Omission is the inheritance signal. Do not use empty mappings, cross-language
 parents, or child sequences that contain only the changed element. Do not use
 numeric-slot mappings merely to avoid writing a dense sequence whose every
 slot is meaningful.
-
-## Version notes
-
-This file schema is for `main/preview`. Historical branches may not contain
-the locale YAML compiler or may accept a different shape.
 
 ## Related guides and API
 

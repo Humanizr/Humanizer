@@ -9,8 +9,6 @@ example: illustrative
 
 # Override platform globalization data
 
-## Orientation
-
 .NET Framework commonly reads Windows NLS data while modern .NET normally
 uses ICU. Month names and numeric punctuation can therefore differ by
 platform, target framework, or globalization-data version.
@@ -19,7 +17,7 @@ Add an override only when a probe demonstrates that platform data is wrong or
 inconsistent for the locale. Locale YAML does not mutate `CultureInfo`; it
 supplies narrow values at documented Humanizer call sites.
 
-### Probe before editing
+## Probe before editing
 
 Run the same culture and values on the affected targets, including Windows
 `net48` and a modern .NET target when the report concerns NLS/ICU drift.
@@ -33,7 +31,7 @@ Record:
 
 Keep the probe with the parity artifact and add exact-output regression tests.
 
-## Example
+## Add the narrowest override
 
 ### Override month names
 
@@ -111,7 +109,7 @@ After authoring an override:
 3. Run the full [locale validation matrix](./validation-and-testing.mdx).
 4. Regenerate supported-culture coverage and review the ownership change.
 
-## Pitfall
+## Override only proven platform drift
 
 Do not copy platform data into YAML merely to make ownership explicit. Absence
 means Humanizer should use platform globalization data. An override becomes a
@@ -120,13 +118,6 @@ maintained compatibility contract and must have a proving regression test.
 Caller-supplied custom format providers remain authoritative. String
 `Ordinalize` overloads parse through the culture's native
 `NumberFormatInfo`; locale overrides do not rewrite arbitrary provider input.
-
-## Version notes
-
-The YAML-backed `calendar` and `number.formatting` surfaces describe
-`main/preview`. Historical versions can rely directly on platform data or have
-different call-site behavior. Probe the package and targets you actually
-ship before backporting an override.
 
 ## Related guides and API
 

@@ -9,13 +9,11 @@ example: illustrative
 
 # Number-to-words engine reference
 
-## Orientation
-
 Choose a rendering engine by the language's composition, scale, gender, and
 ordinal rules. Locale-owned lexicons and switches belong in YAML; reusable
 composition stays in the shared runtime kernel.
 
-## Example
+## Configure a rendering engine
 
 ```yaml
 surfaces:
@@ -946,16 +944,11 @@ Fields:
 - `billions`
 - `useCulture`
 
-## Pitfall
+## Test rule boundaries
 
 Do not select an engine by name resemblance alone or add locale-specific
 branches to a shared kernel. Exact-output tests must cover the rule boundaries,
 not only single-digit examples.
-
-## Version notes
-
-These rendering engines are the accepted `main/preview` contracts.
-Historical branches may use different engines or handwritten converters.
 
 ## Related guides and API
 

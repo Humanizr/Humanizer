@@ -9,8 +9,6 @@ example: illustrative
 
 # Validate locale changes
 
-## Orientation
-
 Locale changes need exact-output proof and broad sweep proof. Put
 culture-specific xUnit tests under
 `tests/Humanizer.Tests/Localisation/<culture>`. Update source-generator tests
@@ -30,7 +28,7 @@ The minimum proof set is:
   changes
 - package and formatting validation
 
-## Example
+## Run the validation matrix
 
 Run the complete locale validation from the repository root:
 
@@ -68,7 +66,7 @@ affected path:
 Record OS, target framework, globalization mode, and result in the parity
 artifact.
 
-## Pitfall
+## Keep generated coverage and platform claims honest
 
 Do not commit a regenerated coverage file without its YAML change, or a YAML
 change without regenerated coverage. `-Check` intentionally fails when those
@@ -80,13 +78,6 @@ concrete assertion for every canonical surface and required subrow.
 Do not run `net48` on non-Windows hosts, and do not claim a cross-platform
 formatting fix from a single ICU or NLS result. Preserve a failing probe and
 the exact regression assertion that replaces it.
-
-## Version notes
-
-These commands target the current repository and therefore `main/preview`.
-Historical maintenance branches can target different frameworks. Use the
-branch's toolchain while preserving exact-output, sweep, and warning-free pack
-gates.
 
 ## Related guides and API
 

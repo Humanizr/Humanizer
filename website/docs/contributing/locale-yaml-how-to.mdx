@@ -9,8 +9,6 @@ example: illustrative
 
 # Locale YAML how-to
 
-## Orientation
-
 Each file under `src/Humanizer/Locales` owns one locale. YAML holds words,
 phrases, lexical tables, formatting overrides, and structural engine choices.
 Reusable algorithms stay in runtime C#; the source generator compiles YAML
@@ -20,7 +18,7 @@ Valid top-level keys are `locale`, optional `variantOf`, and `surfaces`.
 Canonical surfaces are `list`, `formatter`, `phrases`, `inflection`, `number`,
 `ordinal`, `clock`, `compass`, and `calendar`.
 
-## Example
+## Define locale-owned behavior
 
 ```yaml
 locale: 'en-US'
@@ -62,7 +60,7 @@ Follow the complete [platform globalization override recipe](./platform-globaliz
 to capture the cross-target probe, author the narrowest override, and test
 every affected API.
 
-## Pitfall
+## Preserve inheritance and surface boundaries
 
 Omission is the inheritance signal; do not use empty mappings. Do not add a
 block merely to say “default.” The narrow exception is
@@ -74,14 +72,9 @@ grammar metadata). Keep render-side `number.words` aligned with parse-side
 
 If no existing engine fits, use the
 [engine-choice workflow](./choosing-or-extending-a-locale-engine.mdx) before
-adding schema or runtime code.
-
-## Version notes
-
-This authoring contract is for `main/preview`. The exhaustive
-[YAML reference](./locale-yaml-reference.mdx) lists the currently accepted
-engines and fields. Historical branches can have different schema and runtime
-ownership; use their source rather than copying a current block backward.
+adding schema or runtime code. The exhaustive
+[YAML reference](./locale-yaml-reference.mdx) lists the fields and engines
+accepted on `main`.
 
 ## Related guides and API
 

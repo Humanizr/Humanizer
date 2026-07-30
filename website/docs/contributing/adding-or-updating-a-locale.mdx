@@ -9,8 +9,6 @@ example: illustrative
 
 # Add or update a locale
 
-## Orientation
-
 This tutorial takes a neutral locale from a reported gap to a reviewable
 change. The sample language is fictional so that the workflow is complete
 without presenting invented translations as real ones.
@@ -37,7 +35,7 @@ The files used in this tutorial are:
   changes
 - `artifacts/YYYY-MM-DD-<locale>-parity-map.md` for local, gitignored evidence
 
-## Example
+## Add the locale and prove its behavior
 
 Suppose neutral `xy` is missing and the parity map shows that its number-word
 and parsing rules fit existing structural engines.
@@ -169,7 +167,7 @@ gap set, native-reviewed wording where needed, exact-output and sweep proof,
 current generated coverage, and a warning-free package build. The pull request
 can name the exact ownership paths and assertions that establish parity.
 
-## Pitfall
+## Prove every supported surface
 
 Generic fallback, an inherited registration, non-empty output, or a compiling
 YAML file does not prove parity. Keep `formatter` and `phrases` separate, and
@@ -179,13 +177,6 @@ If existing engines cannot express the language, stop before adding flags or
 imperative hooks. Follow [Choose or extend a locale engine](./choosing-or-extending-a-locale-engine.mdx)
 and add a genuinely reusable structural kernel only when the rule family
 requires it.
-
-## Version notes
-
-This generated locale pipeline is the `main/preview` contributor model.
-Published versions through `3.0.10` use version-specific package and source
-shapes. Do not assume a current YAML field or engine exists on a historical
-branch.
 
 ## Related guides and API
 
