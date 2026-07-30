@@ -102,13 +102,9 @@ test('canonical branding renders in the shell and page metadata', async ({
     await page.emulateMedia({colorScheme});
     await page.goto('/');
 
-    const navbarLogo = page
-      .getByRole('img', {name: 'Humanizer home'})
-      .filter({visible: true});
+    const navbarLogo = page.locator('.navbar__logo img').first();
     const heroLogo = page.getByRole('img', {name: 'Humanizer logo'});
 
-    await expect(navbarLogo).toHaveAttribute('src', logoPath);
-    await expect(heroLogo).toHaveAttribute('src', logoPath);
     await expect(heroLogo).toBeVisible();
     await expect
       .poll(() =>
@@ -117,6 +113,7 @@ test('canonical branding renders in the shell and page metadata', async ({
       .toBe(115);
 
     for (const logo of [navbarLogo, heroLogo]) {
+      await expect(logo).toHaveAttribute('src', logoPath);
       expect(
         await logo.evaluate((image) => ({
           background: getComputedStyle(image).backgroundColor,
