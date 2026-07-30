@@ -39,6 +39,8 @@ from Humanizer 4.
 
 ## Maintain a project
 
+- [What's new in Humanizer 4](./whats-new/index.mdx) — review the current release highlights.
+- [Upgrade from Humanizer 3.0.10](./upgrading/version-4-migration.mdx) — migrate packages, APIs, analyzers, and output expectations.
 - [Upgrade from an earlier release](./upgrading/index.mdx) — follow the version-specific migration guidance.
 - [Migrate namespaces with the analyzer](./analyzer/index.mdx) — configure and run the bundled analyzer locally and in CI.
 - [Publish trimmed or Native AOT](./concepts/trimming-and-native-aot.mdx) — choose linker-safe enum APIs and run the publish proof.
