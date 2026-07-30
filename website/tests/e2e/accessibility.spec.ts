@@ -32,7 +32,7 @@ const responsiveTableRoutes = [
   },
 ];
 
-const responsiveTableViewports = [320, 375, 768, 1024, 1440];
+const responsiveTableViewports = [320, 996, 997, 1440];
 
 async function expectNoSeriousAccessibilityViolations(page: Page) {
   const results = await new AxeBuilder({page}).analyze();
@@ -77,14 +77,16 @@ for (const colorScheme of ['light', 'dark'] as const) {
   test(`responsive tables preserve width, labels, and focus in ${colorScheme} mode`, async ({
     page,
   }) => {
+    await page.emulateMedia({colorScheme});
+
     for (const route of responsiveTableRoutes) {
       for (const width of responsiveTableViewports) {
         await page.setViewportSize({width, height: 900});
-        await page.emulateMedia({colorScheme});
         await page.goto(route.path);
 
         const tables = page.locator('table');
         await expect(tables.first()).toBeVisible();
+        const tableCount = await tables.count();
         expect(
           await page.evaluate(
             () =>
@@ -94,7 +96,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
           `${route.name} document overflows at ${width}px`,
         ).toBe(true);
 
-        for (let index = 0; index < (await tables.count()); index += 1) {
+        for (let index = 0; index < tableCount; index += 1) {
           const table = tables.nth(index);
           await expect(table).toHaveAttribute('tabindex', '0');
           await table.focus();

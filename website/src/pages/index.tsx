@@ -113,12 +113,10 @@ export default function Home(): React.JSX.Element {
                 Find an API by task <span aria-hidden="true">→</span>
               </Link>
             </div>
-            <aside
-              aria-label="What’s new in Humanizer 4"
-              className={styles.releaseCue}>
+            <div className={styles.releaseCue}>
               <strong>What’s new in v4</strong>
               <span>Guide coming soon</span>
-            </aside>
+            </div>
             <div className={styles.install}>
               <span>Install from NuGet</span>
               <code>dotnet add package Humanizer</code>

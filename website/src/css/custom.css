@@ -39,8 +39,8 @@
     transparent
   );
   --ifm-navbar-shadow: 0 1px 0 var(--humanizer-rule);
-  --ifm-footer-background-color: #082f49;
-  --ifm-footer-color: #f4fbff;
+  --ifm-footer-background-color: var(--humanizer-panel);
+  --ifm-footer-color: var(--humanizer-panel-ink);
   --ifm-toc-border-color: var(--humanizer-rule);
 }
 
@@ -68,7 +68,6 @@
     var(--humanizer-paper) 94%,
     transparent
   );
-  --ifm-footer-background-color: #03111b;
 }
 
 html {
@@ -476,11 +475,13 @@ html[data-theme='dark'] .prism-code .token.comment {
     font-weight: 800;
   }
 
-  .humanizerResponsiveTable tbody td[data-label=''] {
+  .humanizerResponsiveTable tbody td:is([data-label=''], :not([data-label])) {
     grid-template-columns: 1fr;
   }
 
-  .humanizerResponsiveTable tbody td[data-label='']::before {
+  .humanizerResponsiveTable
+    tbody
+    td:is([data-label=''], :not([data-label]))::before {
     content: none;
   }
 }

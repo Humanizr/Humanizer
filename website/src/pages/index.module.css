@@ -120,11 +120,8 @@
 
 .proof {
   background: var(--humanizer-panel);
-  border-collapse: collapse;
   color: var(--humanizer-panel-ink);
   min-width: 0;
-  table-layout: fixed;
-  width: 100%;
 }
 
 .proofCaption {

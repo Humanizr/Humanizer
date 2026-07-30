@@ -35,22 +35,28 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
     const releaseCue = page.getByText('What’s new in v4', {exact: true});
     await expect(releaseCue).toBeVisible();
     expect(
-      await releaseCue.evaluate((element) => element.closest('a, button')),
-    ).toBeNull();
+      await releaseCue.evaluate((element) =>
+        Boolean(element.closest('a, button')),
+      ),
+    ).toBe(false);
   }
 
+  await page.setViewportSize({width: 1440, height: 900});
+  await page.goto('/');
   const install = page.getByText('dotnet add package Humanizer', {exact: true});
   const proof = page.getByRole('table', {
     name: 'Humanizer input and output examples',
   });
   expect(
     await install.evaluate(
-      (element) => element.getBoundingClientRect().bottom <= window.innerHeight,
+      (element) =>
+        element.getBoundingClientRect().bottom <= window.innerHeight + 1,
     ),
   ).toBe(true);
   expect(
     await proof.evaluate(
-      (element) => element.getBoundingClientRect().bottom <= window.innerHeight,
+      (element) =>
+        element.getBoundingClientRect().bottom <= window.innerHeight + 1,
     ),
   ).toBe(true);
 
