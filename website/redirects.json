@@ -163,6 +163,10 @@
       "to": "/docs/analyzer/"
     },
     {
+      "from": ["/docs/next/upgrading/main-preview"],
+      "to": "/docs/next/upgrading/version-4-migration/"
+    },
+    {
       "from": ["/api", "/api.html", "/api-reference", "/api-reference.html"],
       "to": "/docs/api/"
     }
