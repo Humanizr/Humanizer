@@ -33,8 +33,9 @@ The output should be:
 forty-two
 ```
 
-Run `dotnet list package --include-transitive` to confirm that the project
-resolved Humanizer 4.
+From the application project directory, run
+`dotnet list package --include-transitive` to confirm that the project resolved
+Humanizer 4.
 
 ## Symptoms and actions
 
@@ -43,7 +44,7 @@ resolved Humanizer 4.
 | API page or method is missing | Package version and TFM | Confirm the project resolved Humanizer 4, then check the [API reference](../api/index.md). |
 | `MissingMethodException` or `TypeLoadException` | Direct and transitive Humanizer versions | Align the `Humanizer` version, clean `bin` and `obj`, restore, and rebuild. |
 | Output is English or the wrong regional form | `CurrentCulture`, `CurrentUICulture`, explicit argument, package version | Pass culture directly where possible; otherwise set both ambient cultures at the request or job boundary. If the culture is listed as supported, the wrong language is a bug. |
-| Output differs on Windows, Linux, or macOS | OS, TFM, culture, ICU/NLS mode | Compare .NET globalization data and Humanizer's generated platform-formatting coverage; avoid asserting platform-owned text without an explicit override. |
+| Output differs on Windows, Linux, or macOS | OS, TFM, culture, ICU/NLS mode | Run the same input and culture on each affected OS and TFM, then compare the complete output and .NET globalization settings. Use the [platform formatting guide](../languages/grammar-and-platform-formatting.mdx) to decide whether an override is required; avoid asserting platform-owned text without one. |
 | A parser rejects input | Exact text and culture/provider | Use its `Try` form when available, then inspect the first unrecognized token or unit. |
 | Enum input throws `NoMatchFoundException` | Enum members, metadata, and input | Use an unambiguous label; pass `OnNoMatch.ReturnsNull` when failure is expected. Matching is case-insensitive. |
 | `HUMANIZER001` | Package version and source location | Apply the namespace code fix or configure a narrow intentional exception. |

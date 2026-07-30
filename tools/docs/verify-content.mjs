@@ -95,14 +95,14 @@ for (const area of areas) {
     if (!roles.has(metadata.diataxis)) {
       failures.push(`${relativePage}: diataxis must name one supported role`);
     }
-    if (!metadata.title) {
+    if (!metadata.title || /^(['"])\s*\1$/.test(metadata.title)) {
       failures.push(`${relativePage}: missing title`);
     }
     if (!metadata.persona) {
       failures.push(`${relativePage}: missing primary persona`);
     }
 
-    const hasExampleSection = /^## Example$/m.test(content);
+    const hasExampleSection = /^##[ \t]+Example[ \t]*\r?$/m.test(content);
     const hasExample = /!!raw-loader!.*Program\.cs/.test(content);
     const hasLabeledIllustration = metadata.example === 'illustrative' &&
       /```[a-z]+[\s\S]+?```/.test(content);

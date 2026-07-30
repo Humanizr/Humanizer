@@ -73,6 +73,25 @@ test('content checker requires a page title', async () => {
   });
 });
 
+for (const emptyTitle of ['""', "''", '"   "']) {
+  test(`content checker rejects empty title ${emptyTitle}`, async () => {
+    const page = concisePage.replace(
+      'title: Configure a task',
+      `title: ${emptyTitle}`,
+    );
+
+    await withFixture(page, (cwd) => {
+      const result = spawnSync(process.execPath, [checker, 'sample'], {
+        cwd,
+        encoding: 'utf8',
+      });
+
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /missing title/);
+    });
+  });
+}
+
 test('content checker accepts a related section that ends at EOF', async () => {
   await withFixture(relatedPage, (cwd) => {
     const result = spawnSync(process.execPath, [checker, 'sample'], {
@@ -85,7 +104,9 @@ test('content checker accepts a related section that ends at EOF', async () => {
 });
 
 test('content checker rejects an unlabeled illustrative fragment', async () => {
-  await withFixture(validPage, (cwd) => {
+  const fragment = validPage.replace('## Example', '##   Example  ');
+
+  await withFixture(fragment, (cwd) => {
     const result = spawnSync(process.execPath, [checker, 'sample'], {
       cwd,
       encoding: 'utf8',
