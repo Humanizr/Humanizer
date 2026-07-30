@@ -1,0 +1,21 @@
+changelog:
+  exclude:
+    labels:
+      - no release notes
+      - maintenance
+      - dependencies
+  categories:
+    - title: Breaking changes
+      labels:
+        - breaking change
+    - title: Features
+      labels:
+        - enhancement
+        - perf
+    - title: Fixes
+      labels:
+        - bug
+        - security
+    - title: Documentation
+      labels:
+        - documentation
