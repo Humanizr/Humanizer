@@ -175,6 +175,20 @@ public class WordsToDecimalNumberTests
     }
 
     [Fact]
+    public void MalformedUnicodeUsesTryAndThrowConventions()
+    {
+        const string words = "\uD800";
+
+        Assert.False(words.TryToDecimalNumber(
+            out var parsed,
+            CultureInfo.CurrentCulture,
+            out var unrecognizedWord));
+        Assert.Equal(0m, parsed);
+        Assert.Equal(words, unrecognizedWord);
+        Assert.Throws<FormatException>(() => words.ToDecimalNumber(CultureInfo.CurrentCulture));
+    }
+
+    [Fact]
     public void MalteseParsesNegativeSuffixAfterCompleteDecimalPhrase() =>
         Assert.Equal(
             -1.2m,

@@ -66,7 +66,16 @@ internal sealed class LocalizedWordsToDecimalNumberConverter : IWordsToDecimalNu
             return false;
         }
 
-        var normalizedWords = NormalizeWhitespace(words);
+        string normalizedWords;
+        try
+        {
+            normalizedWords = NormalizeWhitespace(words);
+        }
+        catch (ArgumentException)
+        {
+            return false;
+        }
+
         var negative = StripNegativeAffix(ref normalizedWords);
         var markerIndex = FindDecimalMarker(normalizedWords);
         if (markerIndex < 0)
