@@ -507,6 +507,18 @@ public class MetricNumeralTests
                 decimals: 2));
     }
 
+    [Fact]
+    public void ToMetric_KeepTrailingZeros_PreservesDisplayedScaleForCountForm()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("de-DE"));
+        var formats = MetricNumeralFormats.KeepTrailingZeros |
+                      MetricNumeralFormats.WithSpace |
+                      MetricNumeralFormats.UseScaleWord;
+
+        Assert.Equal("1.0 Milliarden", 1E9.ToMetric(formats, decimals: 1));
+        Assert.Equal("1.0 Milliarden", 1_000_000_000L.ToMetric(formats, decimals: 1));
+    }
+
     [Theory]
     [InlineData(1E+27)]
     [InlineData(1E-27)]

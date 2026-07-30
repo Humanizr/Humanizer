@@ -368,7 +368,8 @@ internal sealed class LocalizedWordsToDecimalNumberConverter : IWordsToDecimalNu
             .Where(static affix => affix.Text.Length > 0)];
 
     static string NormalizeWhitespace(string value) =>
-        string.Join(" ", value.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
+        string.Join(" ", value.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries))
+            .Normalize(NormalizationForm.FormC);
 
     readonly record struct FractionalDigit(string Word, char Value);
 

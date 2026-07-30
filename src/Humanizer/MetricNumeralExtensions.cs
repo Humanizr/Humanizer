@@ -476,7 +476,10 @@ public static class MetricNumeralExtensions
             var representation = keepTrailingZeros
                 ? FormatLongWithTrailingZeros(number, requestedDecimals.GetValueOrDefault(), nfi)
                 : number.ToString(nfi);
-            var unitText = GetUnitText(scale, formats, number);
+            var displayedNumber = decimal.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+                ? parsedNumber
+                : number;
+            var unitText = GetUnitText(scale, formats, displayedNumber);
             return representation + space + unitText;
         }
         else
@@ -552,10 +555,10 @@ public static class MetricNumeralExtensions
         var representation = ShouldKeepTrailingZeros(formats, decimals)
             ? number.ToString($"F{decimals.GetValueOrDefault()}", nfi)
             : number.ToString("G15", nfi);
-        var displayedNumber = double.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+        var displayedNumber = decimal.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
             ? parsedNumber
-            : number;
-        var unitText = GetUnitText(exponent, formats, (decimal)displayedNumber);
+            : (decimal)number;
+        var unitText = GetUnitText(exponent, formats, displayedNumber);
         var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
         return representation + space + unitText;
     }

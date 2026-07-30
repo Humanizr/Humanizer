@@ -165,6 +165,16 @@ public class WordsToDecimalNumberTests
         Assert.Equal(1.2m, words.ToDecimalNumber(new(cultureName)));
 
     [Fact]
+    public void ParsesCanonicallyEquivalentUnicodeWords()
+    {
+        var culture = new CultureInfo("pt");
+        var words = $"{1.ToWords(culture)} vírgula {2.ToWords(culture)}"
+            .Normalize(System.Text.NormalizationForm.FormD);
+
+        Assert.Equal(1.2m, words.ToDecimalNumber(culture));
+    }
+
+    [Fact]
     public void MalteseParsesNegativeSuffixAfterCompleteDecimalPhrase() =>
         Assert.Equal(
             -1.2m,
