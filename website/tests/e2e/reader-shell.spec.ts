@@ -96,7 +96,9 @@ test('canonical branding renders in the shell and page metadata', async ({
     await page.emulateMedia({colorScheme});
     await page.goto('/');
 
-    const navbarLogo = page.getByRole('img', {name: 'Humanizer home'});
+    const navbarLogo = page
+      .getByRole('img', {name: 'Humanizer home'})
+      .filter({visible: true});
     const heroLogo = page.getByRole('img', {name: 'Humanizer logo'});
 
     await expect(navbarLogo).toHaveAttribute('src', logoPath);
