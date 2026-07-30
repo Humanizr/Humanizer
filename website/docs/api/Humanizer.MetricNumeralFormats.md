@@ -37,7 +37,8 @@ Include a space after the numeral\.
 
 Use the scale word authored for [System\.Globalization\.CultureInfo\.CurrentUICulture](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentuiculture 'System\.Globalization\.CultureInfo\.CurrentUICulture')\.
 When that locale has no standalone word for the selected power of 1000, use the SI symbol\.
-Singular and plural forms follow the displayed, scaled numeral\.
+The locale\-authored grammatical count form follows the displayed, scaled numeral\.
+Inverse scale words are used only when the authored singular form applies; other counts use the SI symbol\.
 For example, `1E9` renders as `billion` in `en-US` and `Milliarde` in `de-DE`\.
 
 <a name='Humanizer.MetricNumeralFormats.KeepTrailingZeros'></a>

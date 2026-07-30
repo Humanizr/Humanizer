@@ -53,13 +53,13 @@ public sealed partial class HumanizerSourceGenerator
     readonly struct MetricScaleWordDefinition(
         char symbol,
         string singular,
-        string plural,
+        string? plural,
         string? two = null,
         string? few = null)
     {
         public char Symbol { get; } = symbol;
         public string Singular { get; } = singular;
-        public string Plural { get; } = plural;
+        public string? Plural { get; } = plural;
         public string? Two { get; } = two;
         public string? Few { get; } = few;
     }

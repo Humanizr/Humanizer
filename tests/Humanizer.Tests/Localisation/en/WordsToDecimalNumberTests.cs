@@ -100,6 +100,14 @@ public class WordsToDecimalNumberTests
     }
 
     [Fact]
+    public void DirectConverterRejectsEmptyDecimalMarker() =>
+        Assert.Throws<ArgumentException>(() => new LocalizedWordsToDecimalNumberConverter(
+            CultureInfo.CurrentCulture,
+            " \t ",
+            [],
+            []));
+
+    [Fact]
     public void RejectsFractionBeyondDecimalScale()
     {
         var words = $"zero point {string.Join(" ", Enumerable.Repeat("one", 29))}";
@@ -149,8 +157,10 @@ public class WordsToDecimalNumberTests
     [Theory]
     [InlineData("fr-FR", "un virgule deux")]
     [InlineData("hi-IN", "एक दशमलव दो")]
+    [InlineData("hy", "մեկ ստորակետ երկու")]
     [InlineData("ur-PK", "ایک اعشاریہ دو")]
     [InlineData("zh-CN", "一点二")]
+    [InlineData("zu-ZA", "kanye idesimalikhoma kubili")]
     public void ParsesRepresentativeNativeDecimalPhrases(string cultureName, string words) =>
         Assert.Equal(1.2m, words.ToDecimalNumber(new(cultureName)));
 

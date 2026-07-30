@@ -159,6 +159,10 @@ public sealed partial class HumanizerSourceGenerator
             {
                 singular = RemoveAuthoredOne(singular, profileRoot);
             }
+            else if ((contract.Transform & MetricScaleWordTransform.TrimAuthoredOneSuffix) != 0)
+            {
+                singular = RemoveAuthoredOneSuffix(singular, profileRoot);
+            }
 
             var paucal = contract.PaucalProperty is null
                 ? null
@@ -181,7 +185,9 @@ public sealed partial class HumanizerSourceGenerator
                 TryGetInverseMetricSymbol(value, out var inverseSymbol) &&
                 GetOptionalString(row, contract.InverseSingularProperty)?.Trim() is { Length: > 0 } inverse)
             {
-                words[inverseSymbol] = new(inverseSymbol, inverse, inverse);
+                words[inverseSymbol] = string.Equals(inverse, singular, StringComparison.Ordinal)
+                    ? new(inverseSymbol, inverseSymbol.ToString(), inverseSymbol.ToString())
+                    : new(inverseSymbol, inverse, null);
             }
         }
 
@@ -299,6 +305,22 @@ public sealed partial class HumanizerSourceGenerator
 
             return value.StartsWith(one + " ", StringComparison.Ordinal)
                 ? value.Substring(one.Length + 1).Trim()
+                : value;
+        }
+
+        static string RemoveAuthoredOneSuffix(string value, JsonElement root)
+        {
+            if ((!EngineContractUtilities.TryGetElement(root, "unitsMap", out var units) ||
+                 !TryGetIndexedString(units, 1, out var one)) &&
+                (!EngineContractUtilities.TryGetElement(root, "subHundredMap", out units) ||
+                 !TryGetIndexedString(units, 1, out one)))
+            {
+                return value;
+            }
+
+            var suffix = " " + one;
+            return value.EndsWith(suffix, StringComparison.Ordinal)
+                ? value.Substring(0, value.Length - suffix.Length).Trim()
                 : value;
         }
 

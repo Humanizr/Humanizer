@@ -51,7 +51,7 @@ another operation's output.
 Humanizer's ambient localizer registries, including collection formatting,
 follow `CurrentCulture`; application resources can follow `CurrentUICulture`.
 Setting only one can produce mixed-language output. Also avoid changing
-process-wide culture in a shared request path when an explicit overload exists.
+ambient culture in a shared request path when an explicit overload exists.
 
 Parent fallback is resolution, not parity proof. If `fr-CA` reaches `fr`, that
 only identifies where the data came from. It does not establish that French

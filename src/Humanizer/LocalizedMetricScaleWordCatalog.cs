@@ -2,11 +2,11 @@ namespace Humanizer;
 
 static partial class LocalizedMetricScaleWordCatalog
 {
-    public static bool TryResolve(CultureInfo culture, char symbol, double displayedNumber, out string value)
+    public static bool TryResolve(CultureInfo culture, char symbol, decimal displayedNumber, out string value)
     {
         _ = LocalizedInflectionCatalog.TrySelectCategory(
             culture,
-            (decimal)displayedNumber,
+            displayedNumber,
             out var category);
         var language = culture.TwoLetterISOLanguageName;
         for (var current = culture;

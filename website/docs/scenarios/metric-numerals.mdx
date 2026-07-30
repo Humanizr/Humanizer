@@ -37,7 +37,9 @@ emits an SI prefix name, and parses a symbol:
 - `UseShortScaleWord` emits words such as `billion`.
 - `UseLongScaleWord` emits the selected long-scale equivalent.
 - `UseScaleWord` emits the exact scale term authored for `CurrentUICulture`.
-  It selects the singular or plural term from the displayed, scaled numeral.
+  It selects the locale-authored grammatical count form from the displayed,
+  scaled numeral. Inverse scale words are used only for an authored singular
+  form; other inverse counts keep the invariant SI symbol.
   When the locale has no standalone term for that power of 1000, it keeps the
   invariant SI symbol instead of falling back to an English word.
 - `KeepTrailingZeros` includes exactly the number of fractional digits requested

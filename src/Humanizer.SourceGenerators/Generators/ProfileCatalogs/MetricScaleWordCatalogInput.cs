@@ -75,9 +75,15 @@ public sealed partial class HumanizerSourceGenerator
                 {
                     builder.Append("                    case '");
                     builder.Append(scaleWord.Symbol);
-                    builder.Append("': value = ");
-                    if (scaleWord.Two is not null || scaleWord.Few is not null)
+                    builder.Append("': ");
+                    if (scaleWord.Plural is null)
                     {
+                        builder.Append("if (category != CardinalPluralCategory.One) break; value = ");
+                        builder.Append(QuoteLiteral(scaleWord.Singular));
+                    }
+                    else if (scaleWord.Two is not null || scaleWord.Few is not null)
+                    {
+                        builder.Append("value = ");
                         builder.Append("MetricScaleWordForms.Select(category, ");
                         builder.Append(QuoteLiteral(scaleWord.Singular));
                         builder.Append(", ");
@@ -90,10 +96,12 @@ public sealed partial class HumanizerSourceGenerator
                     }
                     else if (scaleWord.Singular == scaleWord.Plural)
                     {
+                        builder.Append("value = ");
                         builder.Append(QuoteLiteral(scaleWord.Singular));
                     }
                     else
                     {
+                        builder.Append("value = ");
                         builder.Append("category == CardinalPluralCategory.One ? ");
                         builder.Append(QuoteLiteral(scaleWord.Singular));
                         builder.Append(" : ");

@@ -486,7 +486,7 @@ public static class MetricNumeralExtensions
                                  + nfi.NumberDecimalSeparator
                                  + new string(fractionalPartCharacters, 0, decimals.Value)
                                  + (keepTrailingZeros && requestedDecimals > decimals ? new string('0', requestedDecimals.Value - decimals.Value) : string.Empty);
-            var displayedNumber = double.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+            var displayedNumber = decimal.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
                 ? parsedNumber
                 : number;
             var unitText = GetUnitText(scale, formats, displayedNumber);
@@ -555,7 +555,7 @@ public static class MetricNumeralExtensions
         var displayedNumber = double.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
             ? parsedNumber
             : number;
-        var unitText = GetUnitText(exponent, formats, displayedNumber);
+        var unitText = GetUnitText(exponent, formats, (decimal)displayedNumber);
         var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
         return representation + space + unitText;
     }
@@ -563,7 +563,7 @@ public static class MetricNumeralExtensions
     /// <summary>
     /// Get the unit for a power-of-1000 scale.
     /// </summary>
-    static string GetUnitText(int scale, MetricNumeralFormats? formats, double displayedNumber) =>
+    static string GetUnitText(int scale, MetricNumeralFormats? formats, decimal displayedNumber) =>
         Math.Sign(scale) switch
         {
             +1 => GetUnitText(Symbols[0][scale - 1], formats, displayedNumber),
@@ -577,7 +577,7 @@ public static class MetricNumeralExtensions
     /// <param name="symbol">The symbol linked to the unit</param>
     /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
     /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
-    static string GetUnitText(char symbol, MetricNumeralFormats? formats, double displayedNumber)
+    static string GetUnitText(char symbol, MetricNumeralFormats? formats, decimal displayedNumber)
     {
         if (formats.HasValue)
         {

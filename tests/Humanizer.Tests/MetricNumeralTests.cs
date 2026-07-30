@@ -538,8 +538,10 @@ public class MetricNumeralTests
     }
 
     [Theory]
+    [InlineData("eu", 1E6, "1 milioi")]
     [InlineData("hr", 2E9, "2 milijarde")]
     [InlineData("lt", 2E9, "2 milijardai")]
+    [InlineData("mt", 2E9, "2 biljuni")]
     [InlineData("ru", 2E9, "2 миллиарда")]
     [InlineData("sk", 2E9, "2 miliardy")]
     [InlineData("sl", 2E9, "2 milijardi")]
@@ -562,12 +564,34 @@ public class MetricNumeralTests
     }
 
     [Fact]
+    public void ToMetric_UseScaleWord_PreservesDisplayedLongPrecisionForCountForm()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("lt"));
+
+        Assert.Equal(
+            "1.000000000000000001 kvintilijonų",
+            1_000_000_000_000_000_001L.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [Fact]
     public void ToMetric_UseScaleWord_UsesLocaleAuthoredInverseScaleWord()
     {
         using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("am"));
 
         Assert.Equal("1 ሺኛ", 1E-3.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
     }
+
+    [Fact]
+    public void ToMetric_UseScaleWord_DoesNotUseCardinalWordForInverseScale()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("en-IN"));
+
+        Assert.Equal("1 n", 1E-9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [Fact]
+    public void ToMetric_UseScaleWord_UsesSymbolWhenInverseCountFormIsNotAuthored() =>
+        Assert.Equal("2 m", 2E-3.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
 
     [Theory]
     [MemberData(nameof(LocalizedScaleWordData))]

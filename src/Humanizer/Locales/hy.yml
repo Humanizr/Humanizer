@@ -826,7 +826,7 @@ surfaces:
         4: 'չորրորդ'
 
     parse:
-      decimalMarker: 'ստորակել'
+      decimalMarker: 'ստորակետ'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

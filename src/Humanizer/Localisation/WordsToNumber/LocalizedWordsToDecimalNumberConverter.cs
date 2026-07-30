@@ -24,6 +24,9 @@ internal sealed class LocalizedWordsToDecimalNumberConverter : IWordsToDecimalNu
     {
         compareInfo = culture.CompareInfo;
         this.decimalMarker = NormalizeWhitespace(decimalMarker);
+        if (this.decimalMarker.Length == 0)
+            throw new ArgumentException("Decimal marker must not be empty.", nameof(decimalMarker));
+
         integerConverter = Configurator.GetWordsToNumberConverter(culture);
         allowsJoinedTokens = integerConverter is EastAsianPositionalWordsToNumberConverter;
         allowsEnglishOverflowComposition =

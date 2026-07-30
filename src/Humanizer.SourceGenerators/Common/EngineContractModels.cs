@@ -113,7 +113,8 @@ public sealed partial class HumanizerSourceGenerator
         None = 0,
         TrimFirstWord = 1,
         TrimAuthoredOne = 2,
-        StripPluralFormatPlaceholder = 4
+        StripPluralFormatPlaceholder = 4,
+        TrimAuthoredOneSuffix = 8
     }
 
     sealed class MetricScaleWordContract(

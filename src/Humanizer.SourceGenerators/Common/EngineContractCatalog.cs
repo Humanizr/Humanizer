@@ -547,7 +547,13 @@ public sealed partial class HumanizerSourceGenerator
                             Member("optional-string-array", "subHundredMap", null, null, null, null, null, null),
                             Member("nullable-int-string-dictionary", "feminineSubHundredReplacements", null, null, null, null, null, "empty"),
                             Member("nullable-int-string-dictionary", "neuterSubHundredReplacements", null, null, null, null, null, "empty"),
-                            ScaleMember("scales", "joined-scale-array", "value", "name", "pluralName"),
+                            ScaleMember(
+                                "scales",
+                                "joined-scale-array",
+                                "value",
+                                "name",
+                                "pluralName",
+                                MetricScaleWordTransform.TrimAuthoredOneSuffix),
                             Member("nullable-int-string-dictionary", "ordinalExceptions", null, null, null, null, null, null),
                             Member("optional-profile-object", "ordinal", "JoinedScaleOrdinalProfile", null, null, null, null, null,
                                         Member("profile-object", "masculine", "JoinedScaleGenderOrdinalBlock", null, null, null, null, null,
@@ -634,12 +640,12 @@ public sealed partial class HumanizerSourceGenerator
                             Member("string-array", "tensMap", null, null, null, null, null, null),
                             Member("string-array", "hundredsMap", null, null, null, null, null, null),
                             Member("string-array", "prefixMap", null, null, null, null, null, null),
-                            FixedScaleMember("thousandScale", "dual-form-scale", 1_000, dualProperty: "dual"),
-                            FixedScaleMember("millionScale", "dual-form-scale", 1_000_000, dualProperty: "dual"),
-                            FixedScaleMember("billionScale", "dual-form-scale", 1_000_000_000, dualProperty: "dual"),
-                            FixedScaleMember("trillionScale", "dual-form-scale", 1_000_000_000_000, dualProperty: "dual"),
-                            FixedScaleMember("quadrillionScale", "dual-form-scale", 1_000_000_000_000_000, dualProperty: "dual"),
-                            FixedScaleMember("quintillionScale", "dual-form-scale", 1_000_000_000_000_000_000, dualProperty: "dual")
+                            FixedScaleMember("thousandScale", "dual-form-scale", 1_000),
+                            FixedScaleMember("millionScale", "dual-form-scale", 1_000_000),
+                            FixedScaleMember("billionScale", "dual-form-scale", 1_000_000_000),
+                            FixedScaleMember("trillionScale", "dual-form-scale", 1_000_000_000_000),
+                            FixedScaleMember("quadrillionScale", "dual-form-scale", 1_000_000_000_000_000),
+                            FixedScaleMember("quintillionScale", "dual-form-scale", 1_000_000_000_000_000_000)
                         )
             ),
                 ["ordinal-prefix-scale"] = Schema("ordinal-prefix-scale", null,
