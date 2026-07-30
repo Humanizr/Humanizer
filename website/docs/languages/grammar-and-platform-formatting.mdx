@@ -9,8 +9,6 @@ example: illustrative
 
 # Grammar and platform formatting
 
-## Orientation
-
 Humanizer APIs expose grammatical gender, word form, and grammatical case
 where the result needs information that a number or date cannot carry by
 itself. These arguments affect language rules; they are not presentation-only
@@ -18,9 +16,9 @@ labels.
 
 Calendar names and numeric punctuation are a separate layer. .NET Framework
 uses Windows NLS, while modern .NET normally uses ICU. When those sources
-disagree, consult the selected-version language inventory for package-specific
-behavior or overrides, and test the target frameworks and platforms the
-application ships.
+disagree, Humanizer uses an explicit locale-profile override where one is
+defined. Otherwise the runtime globalization data is authoritative. Test the
+target frameworks and platforms the application ships.
 
 ## Example
 
@@ -36,46 +34,45 @@ Console.WriteLine(1.ToWords(
     GrammaticalGender.Masculine,
     spanish));
 
-CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("cs");
-CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
-Console.WriteLine(new DateTime(2026, 7, 27)
-    .ToOrdinalWords(GrammaticalCase.Genitive));
+var czech = CultureInfo.GetCultureInfo("cs");
+Console.WriteLine(TimeSpan.FromDays(1)
+    .HumanizeWithCase(GrammaticalCase.Nominative, culture: czech));
+```
+
+The output is:
+
+```text
+una
+un
+jeden den
 ```
 
 Pass grammar explicitly when the surrounding noun or sentence determines it.
 The default gender or case is a locale convention, not a guess about your
 domain text.
 
-In Humanizer 4, `TimeSpan.HumanizeWithCase` applies case only to a bare
-duration phrase. It does not add a preposition and does not alter the separate
-relative-date or date-ordinal grammar paths. Singular duration forms may be
-complete locale-authored one-word or article phrases; counted forms may write
-the number explicitly or encode it in the unit form.
+`TimeSpan.HumanizeWithCase` applies case only to a bare duration phrase. It
+does not add a preposition and does not alter the separate relative-date or
+date-ordinal grammar paths.
 
-## Pitfall
+## Keep language rules and presentation separate
 
 Not every grammatical option has a distinct natural form in every locale.
 Do not manufacture a gender or case by post-processing Humanizer output.
 Choose a supported overload and test the complete phrase native speakers will
 see.
 
-Caller-supplied custom format providers remain authoritative. Consult the
-selected-version language inventory for any Humanizer-specific calendar or
-number-formatting overrides. When none are documented, calendar names and
-numeric punctuation follow the runtime globalization data for the target
-framework and platform.
+Caller-supplied custom format providers remain authoritative. Without a custom
+provider or a Humanizer locale-profile override, calendar names and numeric
+punctuation follow the runtime globalization data for the target framework and
+platform.
 
 For incorrect grammar or platform-specific output, use the
 [language correction guide](../contributing/report-language-issue.mdx) or
 [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
 
-## Version notes
-
-The selected-version language inventory records package-specific calendar or
-number-formatting behavior available in that release. Runtime globalization
-data can still differ by target framework and platform, so test the selected
-package on the targets you ship. `DateOnly` and `TimeOnly` APIs require a target
-framework on which those types exist.
+`DateOnly` and `TimeOnly` APIs require a target framework on which those types
+exist.
 
 ## Related guides and API
 
@@ -83,4 +80,4 @@ framework on which those types exist.
 - [Supported cultures](./supported-cultures.mdx)
 - [Format durations and ages](../scenarios/durations-and-ages.mdx)
 - [Localization scenarios](../scenarios/localization-and-extensibility.mdx)
-- [Selected-version API reference](../api/index.md)
+- [API reference](../api/index.md)

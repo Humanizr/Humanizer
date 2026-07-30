@@ -9,8 +9,6 @@ example: illustrative
 
 # Choose explicit and ambient cultures
 
-## Orientation
-
 Pass a `CultureInfo` directly when an overload accepts one. It makes the
 language choice visible, keeps concurrent requests isolated, and is easy to
 test. Set `CurrentCulture` and `CurrentUICulture` together at a request,
@@ -28,39 +26,44 @@ using System.Globalization;
 using Humanizer;
 
 var french = CultureInfo.GetCultureInfo("fr-FR");
-
 Console.WriteLine(42.ToWords(french));
-Console.WriteLine(DateTime.UtcNow.AddDays(-1).Humanize(culture: french));
-Console.WriteLine(new[] { "un", "deux", "trois" }.Humanize(french));
+```
 
+The output is `quarante-deux`.
+
+Keep using explicit overloads inside shared services where possible; this
+prevents one concurrent operation from changing another operation's output.
+
+## Establish ambient culture at a boundary
+
+Some APIs use the ambient culture:
+
+```csharp
 CultureInfo.CurrentCulture = french;
 CultureInfo.CurrentUICulture = french;
+
 Console.WriteLine(42.ToWords());
 ```
 
-The first three calls are explicit. The final call uses the ambient culture.
+The output is again `quarante-deux`.
 
-For application code, establish ambient culture once at the request, message,
-or background-job boundary. Keep using explicit overloads inside shared
-services where possible; this prevents one concurrent operation from changing
-another operation's output.
+## Keep both ambient cultures consistent
 
-## Pitfall
-
-`CurrentCulture` and `CurrentUICulture` serve different .NET concerns.
-Humanizer's ambient localizer registries, including collection formatting,
-follow `CurrentCulture`; application resources can follow `CurrentUICulture`.
-Setting only one can produce mixed-language output. Also avoid changing
-ambient culture in a shared request path when an explicit overload exists.
+`CurrentCulture` and `CurrentUICulture` serve different .NET concerns, and
+Humanizer APIs can use either one. Setting only one can produce mixed-language
+output. Avoid changing ambient culture in a shared request path when an
+explicit overload exists.
 
 Parent fallback is resolution, not parity proof. If `fr-CA` reaches `fr`, that
 only identifies where the data came from. It does not establish that French
 Canadian wording matches every neutral-French choice.
 
-In Humanizer 4, use `Configurator.IsCultureSupported(culture)` before choosing
-an application fallback. It checks generated Humanizer locale data through the
-named parent chain and does not return `true` merely because the default English
-localizers could produce output:
+## Choose an application fallback
+
+Use `Configurator.IsCultureSupported(culture)` before choosing an application
+fallback. It checks generated Humanizer locale data through the named parent
+chain and does not return `true` merely because the default English localizers
+could produce output:
 
 ```csharp
 var requested = CultureInfo.GetCultureInfo("fr-FR");
@@ -73,18 +76,10 @@ If inherited or direct output is wrong, follow the
 [language correction guide](../contributing/report-language-issue.mdx) or
 [open a prefilled locale issue](https://github.com/Humanizr/Humanizer/issues/new?title=Locale%3A%20describe%20the%20language%20issue&body=Culture%3A%20%0AHumanizer%20version%3A%20%0AAPI%20call%3A%20%0AExpected%3A%20%0AActual%3A%20%0APlatform%2FTFM%3A%20).
 
-## Version notes
-
-Explicit and ambient `CultureInfo` selection applies across the supported
-documentation corpus. Humanizer 4 ships generated locale data and
-`Configurator.IsCultureSupported` in the consolidated `Humanizer` NuGet
-package. Releases through `3.0.10` use the metapackage and locale-package graph
-documented in their snapshot.
-
 ## Related guides and API
 
 - [Supported cultures](./supported-cultures.mdx)
 - [Culture and global configuration](../concepts/culture-and-configuration.mdx)
 - [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
 - [Package selection](../start/package-selection.md)
-- [Selected-version API reference](../api/index.md)
+- [API reference](../api/index.md)

@@ -4,59 +4,58 @@ title: Culture and global configuration
 sidebar_position: 1
 diataxis: explanation
 persona: application architect
+example: illustrative
 ---
-
-import CodeBlock from '@theme/CodeBlock';
-import localization from '!!raw-loader!../_examples/scenarios-localization/Program.cs';
 
 # Culture and global configuration
 
-## Orientation
+When an API accepts a `CultureInfo`, Humanizer uses it directly. Otherwise the
+API uses `CurrentCulture` or `CurrentUICulture`. A localiser registry then
+walks the selected culture's named parent chain and uses its default only when
+no registered parent matches.
 
-Humanizer chooses language and grammar from one of three places:
-
-1. A `CultureInfo` passed to the operation.
-2. `CultureInfo.CurrentCulture` or `CurrentUICulture`, depending on the API.
-3. A configured registry fallback for a culture that is not listed as supported.
-
-Per-call culture is the narrowest and safest choice. Ambient culture is useful when a request pipeline already establishes it. Global `Configurator` changes are process-wide policy.
+Per-call culture is the narrowest and safest choice. Ambient culture is useful
+when a request pipeline already establishes it. Global `Configurator` changes
+are process-wide policy.
 
 ## Example
 
-The example passes French directly to `ToWords`, establishes French ambient culture for APIs that need it, and keeps the custom transformer local:
+```csharp
+using System.Globalization;
+using Humanizer;
 
-<CodeBlock language="csharp" title="Program.cs">{localization}</CodeBlock>
+var french = CultureInfo.GetCultureInfo("fr-FR");
+Console.WriteLine(42.ToWords(french));
 
-That separation is intentional: select language close to the call, and reserve global configuration for behavior that truly applies to the entire application.
+CultureInfo.CurrentCulture = french;
+CultureInfo.CurrentUICulture = french;
+Console.WriteLine(42.ToWords());
+```
 
-## Why newer registries freeze
+Both calls print `quarante-deux`. The first makes its culture explicit; the
+second relies on the ambient culture established for the current operation.
 
-In Humanizer `3.x` and current builds, `LocaliserRegistry<TLocaliser>` resolves
-and caches components by culture. On first resolution it freezes the
-registration table, making subsequent reads predictable and safe. A later
-`Register` call therefore throws instead of silently changing behavior for
-only some cultures or requests.
+## Configure global behavior once
 
-Date humanization strategies are mutable properties rather than registries,
-but they should still be set once during startup. Enum description-property
-selection has the same startup boundary: in `3.x`, call
-`UseEnumDescriptionPropertyLocator` before any enum humanization; in `2.x`,
-assign `EnumDescriptionPropertyLocator` during startup.
+`LocaliserRegistry<TLocaliser>` resolves and caches components by culture. On
+first resolution it freezes the registration table, making subsequent reads
+predictable and safe. A later `Register` call throws instead of silently
+changing behavior for only some cultures or requests.
 
-## Pitfall
+Date and time humanization strategies are mutable properties rather than
+registries, but they should still be set once during startup. Call
+`UseEnumDescriptionPropertyLocator` before any enum humanization for the same
+reason.
 
-Setting only `CurrentCulture` is not always enough. Collection and enum localization can depend on `CurrentUICulture`, while numeric formatting commonly follows `CurrentCulture`. Set both at a well-defined boundary when you need consistent ambient behavior.
+## Keep ambient cultures aligned
 
-## Version notes
-
-Humanizer `2.x` keeps localization registries mutable and exposes an assignable
-`Configurator.EnumDescriptionPropertyLocator`. Humanizer `3.x` freezes
-registries after first use and replaces direct locator assignment with
-`UseEnumDescriptionPropertyLocator`. Treat the selected package and API
-reference as the authority for a specific release.
+Different Humanizer APIs use `CurrentCulture` or `CurrentUICulture`. Set both
+at a request, message, or job boundary when ambient output must be consistent.
+Prefer an explicit culture inside shared services when the API accepts one.
 
 ## Related guides and API
 
 - [Configuration basics](../start/configuration.mdx)
 - [Localization and extensibility](../scenarios/localization-and-extensibility.mdx)
-- [Selected-version API reference](../api/index.md)
+- [Configurator API](../api/Humanizer.Configurator.md)
+- [LocaliserRegistry API](../api/Humanizer.LocaliserRegistry_TLocaliser_.md)
