@@ -401,14 +401,6 @@ public static class MetricNumeralExtensions
         if (!decimals.HasValue)
             decimals = exponent;
 
-        var unitText =
-            Math.Sign(scale) switch
-            {
-                +1 => GetUnitText(Symbols[0][scale - 1], formats),
-                -1 => GetUnitText(Symbols[1][-scale - 1], formats),
-                _ => string.Empty
-            };
-
         var fractionalPartCharacters = Array.Empty<char>();
 
         if (decimals > 0)
@@ -477,7 +469,6 @@ public static class MetricNumeralExtensions
                 {
                     number /= 1000;
                     scale++;
-                    unitText = GetUnitText(Symbols[0][scale - 1], formats);
                 }
             }
 
@@ -485,18 +476,24 @@ public static class MetricNumeralExtensions
             var representation = keepTrailingZeros
                 ? FormatLongWithTrailingZeros(number, requestedDecimals.GetValueOrDefault(), nfi)
                 : number.ToString(nfi);
+            var displayedNumber = decimal.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+                ? parsedNumber
+                : number;
+            var unitText = GetUnitText(scale, formats, displayedNumber);
             return representation + space + unitText;
         }
         else
         {
             var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
-
-            return number.ToString(nfi)
-                 + nfi.NumberDecimalSeparator
-                 + new string(fractionalPartCharacters, 0, decimals.Value)
-                 + (keepTrailingZeros && requestedDecimals > decimals ? new string('0', requestedDecimals.Value - decimals.Value) : string.Empty)
-                 + space
-                 + unitText;
+            var representation = number.ToString(nfi)
+                                 + nfi.NumberDecimalSeparator
+                                 + new string(fractionalPartCharacters, 0, decimals.Value)
+                                 + (keepTrailingZeros && requestedDecimals > decimals ? new string('0', requestedDecimals.Value - decimals.Value) : string.Empty);
+            var displayedNumber = decimal.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+                ? parsedNumber
+                : number;
+            var unitText = GetUnitText(scale, formats, displayedNumber);
+            return representation + space + unitText;
         }
     }
 
@@ -554,20 +551,28 @@ public static class MetricNumeralExtensions
             exponent += 1;
         }
 
-        var unitText =
-            Math.Sign(exponent) switch
-            {
-                +1 => GetUnitText(Symbols[0][exponent - 1], formats),
-                -1 => GetUnitText(Symbols[1][-exponent - 1], formats),
-                _ => string.Empty
-            };
         var nfi = LocaleNumberFormattingOverrides.GetFormattingNumberFormat(CultureInfo.CurrentCulture);
         var representation = ShouldKeepTrailingZeros(formats, decimals)
             ? number.ToString($"F{decimals.GetValueOrDefault()}", nfi)
             : number.ToString("G15", nfi);
+        var displayedNumber = decimal.TryParse(representation, NumberStyles.Float, nfi, out var parsedNumber)
+            ? parsedNumber
+            : (decimal)number;
+        var unitText = GetUnitText(exponent, formats, displayedNumber);
         var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
         return representation + space + unitText;
     }
+
+    /// <summary>
+    /// Get the unit for a power-of-1000 scale.
+    /// </summary>
+    static string GetUnitText(int scale, MetricNumeralFormats? formats, decimal displayedNumber) =>
+        Math.Sign(scale) switch
+        {
+            +1 => GetUnitText(Symbols[0][scale - 1], formats, displayedNumber),
+            -1 => GetUnitText(Symbols[1][-scale - 1], formats, displayedNumber),
+            _ => string.Empty
+        };
 
     /// <summary>
     /// Get the unit from a symbol of from the symbol's name.
@@ -575,7 +580,7 @@ public static class MetricNumeralExtensions
     /// <param name="symbol">The symbol linked to the unit</param>
     /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
     /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
-    static string GetUnitText(char symbol, MetricNumeralFormats? formats)
+    static string GetUnitText(char symbol, MetricNumeralFormats? formats, decimal displayedNumber)
     {
         if (formats.HasValue)
         {
@@ -597,14 +602,9 @@ public static class MetricNumeralExtensions
 
             if (formatValue.HasFlag(MetricNumeralFormats.UseScaleWord))
             {
-                var culture = CultureInfo.CurrentUICulture;
-                var language = culture.TwoLetterISOLanguageName;
-                var useLongScale = culture.Name != "pt-BR" &&
-                                   (LongScaleLanguages.Contains(language) ||
-                                    (HybridScaleLanguages.Contains(language) && symbol is 'G' or 'n'));
-                return useLongScale
-                    ? UnitPrefixes[symbol].LongScaleWord
-                    : UnitPrefixes[symbol].ShortScaleWord;
+                return LocalizedMetricScaleWordCatalog.TryResolve(CultureInfo.CurrentUICulture, symbol, displayedNumber, out var scaleWord)
+                    ? scaleWord
+                    : symbol.ToString();
             }
         }
 
@@ -648,26 +648,4 @@ public static class MetricNumeralExtensions
         public string ShortScaleWord { get; } = shortScaleWord;
         public readonly string LongScaleWord => longScaleWord ?? ShortScaleWord;
     }
-
-    /// <summary>
-    /// Language codes that use the <a href="https://en.wikipedia.org/wiki/Long_and_short_scales">long scale</a> system.
-    /// In the long scale, <c>1E9</c> is a <c>milliard</c> and <c>1E12</c> is a <c>billion</c>.
-    /// Languages in this set always use long-scale words. Hybrid-scale languages and
-    /// Brazilian Portuguese are handled separately.
-    /// </summary>
-    static readonly HashSet<string> LongScaleLanguages =
-    [
-        "af", "bs", "ca", "cs", "da", "de", "es", "et", "eu", "fa", "fi", "fr", "gl", "hr",
-        "hu", "is", "it", "lb", "mk", "nb", "nl", "nn", "pl", "ps", "pt", "sk", "sl", "sq", "sr", "sv"
-    ];
-
-    /// <summary>
-    /// Language codes that use a milliard-style word at <c>1E9</c>, then short-scale words
-    /// beginning with trillion at <c>1E12</c>.
-    /// </summary>
-    static readonly HashSet<string> HybridScaleLanguages =
-    [
-        "ar", "az", "be", "bg", "he", "hy", "id", "ka", "kk", "ku", "ky", "lt", "lv",
-        "ro", "ru", "tk", "tr", "uk", "uz"
-    ];
 }

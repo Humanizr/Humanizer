@@ -917,6 +917,7 @@ surfaces:
         neuterFallback: 'masculine'
 
     parse:
+      decimalMarker: 'ଦଶମିକ'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'

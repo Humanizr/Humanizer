@@ -681,6 +681,7 @@ surfaces:
       negativeSign: '-'
 
     parse:
+      decimalMarker: 'اعشاریه'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'

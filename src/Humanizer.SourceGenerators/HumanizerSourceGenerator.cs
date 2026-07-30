@@ -51,6 +51,11 @@ public sealed partial class HumanizerSourceGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(numberToWordsProfiles, static (productionContext, input) => input.Emit(productionContext));
 
+        var metricScaleWords = localeCatalog
+            .Select(static (catalog, _) => MetricScaleWordCatalogInput.Create(catalog));
+
+        context.RegisterSourceOutput(metricScaleWords, static (productionContext, input) => input.Emit(productionContext));
+
         var ordinalizerProfiles = localeCatalog
             .Select(static (catalog, _) => OrdinalizerProfileCatalogInput.Create(catalog));
 

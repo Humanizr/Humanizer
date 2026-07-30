@@ -429,6 +429,7 @@ surfaces:
           defaultPrefix: 'ທີ'
           defaultSuffix: ''
     parse:
+      decimalMarker: 'ຈຸດ'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       allowInvariantIntegerInput: true

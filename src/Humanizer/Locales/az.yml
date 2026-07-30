@@ -893,6 +893,7 @@ surfaces:
         'ə': 'inci'
 
     parse:
+      decimalMarker: 'tam'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

@@ -506,6 +506,7 @@ surfaces:
           plural: 'millones'
 
     parse:
+      decimalMarker: 'coma'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

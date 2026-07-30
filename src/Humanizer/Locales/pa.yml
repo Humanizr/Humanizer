@@ -551,6 +551,7 @@ surfaces:
       negativeSign: '-'
 
     parse:
+      decimalMarker: 'ਦਸ਼ਮਲਵ'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'

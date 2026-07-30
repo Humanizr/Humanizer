@@ -32,11 +32,11 @@ The `separator` argument represents the desired conjunction token, such as `or`;
 
 ### Select a culture explicitly
 
-On `main/preview`, pass a non-null `CultureInfo` to select the collection
-formatter without changing `CurrentUICulture`. For example, an `en-GB`
-formatter joins three items without the Oxford comma. The explicit-culture
-overload accepts the collection itself; when items need projection, select the
-display strings first and then call `Humanize(culture)`.
+In Humanizer 4, pass a non-null `CultureInfo` to select the collection formatter
+without changing `CurrentCulture`. For example, an `en-GB` formatter joins
+three items without the Oxford comma. The explicit-culture overload accepts the
+collection itself; when items need projection, select the display strings first
+and then call `Humanize(culture)`.
 
 ### Name a tuple
 
@@ -44,14 +44,18 @@ display strings first and then call `Humanize(culture)`.
 
 ## Pitfall
 
-Collection output follows `CurrentUICulture`; set it at the request or job boundary. The default formatter silently removes null or blank display results, so validate required source data before formatting. A custom formatter can define a different contract. The `collectionSeparator` parameter on `TimeSpan.Humanize` has different literal-separator semantics.
+Collection output follows `CurrentCulture`; set it at the request or job
+boundary. The default formatter silently removes null or blank display results,
+so validate required source data before formatting. A custom formatter can
+define a different contract. The `collectionSeparator` parameter on
+`TimeSpan.Humanize` has different literal-separator semantics.
 
 ## Version notes
 
 Collection humanization and tuple helpers span the documented corpus, while
 punctuation and localized tuple coverage vary by release. The executable
 compiles and runs against the selected package. The explicit-culture
-collection overload is available on `main/preview`.
+collection overload is available in the Humanizer 4 NuGet package.
 
 ## Related guides and API
 

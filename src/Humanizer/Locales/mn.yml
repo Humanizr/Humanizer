@@ -1213,6 +1213,7 @@ surfaces:
         98: 'ерэн наймдугаар'
         99: 'ерэн есдүгээр'
     parse:
+      decimalMarker: 'цэг'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       allowInvariantIntegerInput: true

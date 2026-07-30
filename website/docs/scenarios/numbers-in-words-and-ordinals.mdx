@@ -56,10 +56,10 @@ not change `ToWords`, configured converters, or other locales.
 
 ### Format 64-bit ordinals
 
-On `main/preview`, numeric `Ordinalize` overloads accept the full `long` range
-and retain the selected culture, gender, and `WordForm` rules. String
-`Ordinalize` remains `int`-bounded; parse to `long` first when the input can
-exceed that range.
+In Humanizer 4, numeric `Ordinalize` overloads accept the full `long` range and
+retain the selected culture, gender, and `WordForm` rules. String `Ordinalize`
+remains `int`-bounded; parse to `long` first when the input can exceed that
+range.
 
 Built-in ordinalizers support 64-bit values. A custom ordinalizer registered
 through `Configurator.Ordinalizers` can continue to implement `IOrdinalizer`,
@@ -93,7 +93,7 @@ domain policy separately.
 
 ### Use the full `long` range
 
-On `main/preview`, every built-in number-word locale supports the full signed
+In Humanizer 4, every built-in number-word locale supports the full signed
 `long` range. Estonian follows its authored scale names through `triljon`;
 Albanian uses `miliar`, `bilion`, `biliar`, and `trilion`, with their plural
 forms. The executable above calls `ToWords` for both `long.MaxValue` and
@@ -114,9 +114,9 @@ the numeric overload when the application already has a number.
 The basic number-word and ordinal APIs span the documented corpus, but overloads
 and locale grammar have changed. `Fractionalize`, Chinese financial numerals,
 64-bit numeric ordinals, Indian scale vocabulary selection, and the Estonian
-and Albanian scale corrections described above are `main/preview` behavior.
-The verified source runs against the selected package. Historical snapshots
-link to their own capability data and signatures.
+and Albanian scale corrections described above are available in the Humanizer
+4 NuGet package. The verified source runs against the selected package.
+Historical snapshots link to their own capability data and signatures.
 
 ## Related guides and API
 

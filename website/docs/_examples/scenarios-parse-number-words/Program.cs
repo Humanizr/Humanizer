@@ -20,9 +20,14 @@ var decimalRejected = "one point ten".TryToDecimalNumber(
     out var invalidDecimal,
     culture,
     out var invalidDecimalWord);
-var unsupportedCulture = "one point two".TryToDecimalNumber(
+var frenchCulture = CultureInfo.GetCultureInfo("fr-FR");
+var frenchSucceeded = "un virgule deux".TryToDecimalNumber(
+    out var frenchDecimal,
+    frenchCulture,
+    out var frenchUnrecognized);
+var unsupportedCulture = "aon point dhà".TryToDecimalNumber(
     out var unsupportedDecimal,
-    CultureInfo.GetCultureInfo("fr-FR"),
+    CultureInfo.GetCultureInfo("gd"),
     out var unsupportedPhrase);
 string nullWords = null!;
 var nullRejected = nullWords.TryToDecimalNumber(
@@ -43,17 +48,20 @@ AssertEqual<string?>(null, decimalUnrecognized);
 AssertEqual(false, decimalRejected);
 AssertEqual(0m, invalidDecimal);
 AssertEqual("ten", invalidDecimalWord);
+AssertEqual(true, frenchSucceeded);
+AssertEqual(1.2m, frenchDecimal);
+AssertEqual<string?>(null, frenchUnrecognized);
 AssertEqual(false, unsupportedCulture);
 AssertEqual(0m, unsupportedDecimal);
-AssertEqual("one point two", unsupportedPhrase);
+AssertEqual("aon point dhà", unsupportedPhrase);
 AssertEqual(false, nullRejected);
 AssertEqual(0m, nullDecimal);
 AssertEqual(string.Empty, nullUnrecognized);
 AssertThrows<NotSupportedException>(
-    () => "one point two".ToDecimalNumber(CultureInfo.GetCultureInfo("fr-FR")));
+    () => "aon point dhà".ToDecimalNumber(CultureInfo.GetCultureInfo("gd")));
 AssertThrows<ArgumentNullException>(() => nullWords.ToDecimalNumber(culture));
 
-Console.WriteLine("205; -42; 1.50; rejected at otters and ten");
+Console.WriteLine("205; -42; 1.50; 1,2; rejected at otters and ten");
 
 static void AssertEqual<T>(T expected, T actual)
 {

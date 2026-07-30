@@ -597,6 +597,7 @@ surfaces:
             20: 'e njëzetë'
         neuterFallback: 'masculine'
     parse:
+      decimalMarker: 'presje'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

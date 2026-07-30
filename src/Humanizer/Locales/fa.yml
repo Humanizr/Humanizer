@@ -354,6 +354,7 @@ surfaces:
       negativeSign: '−'
 
     parse:
+      decimalMarker: 'ممیز'
       engine: 'token-map'
       normalizationProfile: 'Persian'
       cardinalMap:

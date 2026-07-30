@@ -543,6 +543,7 @@ surfaces:
         98: 'kejìdílọ́gọ́rùn-ún'
         99: 'kọ̀kàndílọ́gọ́rùn-ún'
     parse:
+      decimalMarker: '.'
       engine: 'linked-vigesimal'
       terminalRemainderJoiner: 'lé'
       words:

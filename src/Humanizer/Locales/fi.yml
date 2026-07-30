@@ -847,6 +847,7 @@ surfaces:
       negativeSign: '−'
 
     parse:
+      decimalMarker: 'pilkku'
       engine: 'suffix-scale'
       cardinalMap:
         nolla: 0

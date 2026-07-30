@@ -98,7 +98,7 @@
 | [TupleizeExtensions](Humanizer.TupleizeExtensions.md 'Humanizer\.TupleizeExtensions') | Convert int to named tuple strings \(1 \-\> 'single', 2\-\> 'double' etc\.\)\. Only values 1\-10, 100, and 1000 have specific names\. All others will return 'n\-tuple'\. |
 | [Vocabularies](Humanizer.Vocabularies.md 'Humanizer\.Vocabularies') | Container for registered vocabularies\. At present, only a single vocabulary is supported: Default\. |
 | [Vocabulary](Humanizer.Vocabulary.md 'Humanizer\.Vocabulary') | A container for custom acronym casing and exceptions to simple pluralization/singularization rules\. Vocabularies\.Default contains an extensive list of rules for US English and supports process\-wide acronym registration\. At this time, multiple vocabularies and removing existing rules are not supported\. |
-| [WordsToDecimalNumberExtension](Humanizer.WordsToDecimalNumberExtension.md 'Humanizer\.WordsToDecimalNumberExtension') | Converts English decimal number words into [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') values\. |
+| [WordsToDecimalNumberExtension](Humanizer.WordsToDecimalNumberExtension.md 'Humanizer\.WordsToDecimalNumberExtension') | Converts localized decimal number words into [System\.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal 'System\.Decimal') values\. |
 | [WordsToNumberExtension](Humanizer.WordsToNumberExtension.md 'Humanizer\.WordsToNumberExtension') | Converts localized number words back into numeric values\. Parsing is culture\-aware, honors locale inheritance, and supports the same natural high\-range forms that the locale authoring data exposes through `number.words` and `number.parse`\. |
 
 | Structs | |

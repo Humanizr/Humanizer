@@ -404,6 +404,7 @@ surfaces:
           ordinalName: 'inkulungwane'
 
     parse:
+      decimalMarker: 'idesimalikhoma'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       useHundredMultiplier: true

@@ -1192,6 +1192,7 @@ surfaces:
             3: 'яе'
 
     parse:
+      decimalMarker: 'коска'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

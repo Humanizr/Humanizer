@@ -47,6 +47,7 @@ public sealed partial class HumanizerSourceGenerator
         string? defaultValue,
         string? fallbackSourcePath,
         string? missingValue,
+        MetricScaleWordContract? metricScaleWords,
         ImmutableArray<EngineContractMember> members)
     {
         /// <summary>
@@ -98,9 +99,45 @@ public sealed partial class HumanizerSourceGenerator
         /// </summary>
         public string? MissingValue { get; } = missingValue;
 
+        public MetricScaleWordContract? MetricScaleWords { get; } = metricScaleWords;
+
         /// <summary>
         /// Gets nested member descriptors for object and builder-style members.
         /// </summary>
         public ImmutableArray<EngineContractMember> Members { get; } = members;
+    }
+
+    [Flags]
+    enum MetricScaleWordTransform
+    {
+        None = 0,
+        TrimFirstWord = 1,
+        TrimAuthoredOne = 2,
+        StripPluralFormatPlaceholder = 4,
+        TrimAuthoredOneSuffix = 8
+    }
+
+    sealed class MetricScaleWordContract(
+        string? valueProperty,
+        string singularProperty,
+        string? pluralProperty,
+        long? fixedValue = null,
+        MetricScaleWordTransform transform = MetricScaleWordTransform.None,
+        bool singularOptional = false,
+        string? paucalProperty = null,
+        string? inverseSingularProperty = null,
+        string? dualProperty = null,
+        string? trialQuadralProperty = null)
+    {
+        public string? ValueProperty { get; } = valueProperty;
+        public string SingularProperty { get; } = singularProperty;
+        public string? PluralProperty { get; } = pluralProperty;
+        public long? FixedValue { get; } = fixedValue;
+        public MetricScaleWordTransform Transform { get; } = transform;
+        public bool SingularOptional { get; } = singularOptional;
+        public string? PaucalProperty { get; } = paucalProperty;
+        public string? InverseSingularProperty { get; } = inverseSingularProperty;
+        public string? DualProperty { get; } = dualProperty;
+        public string? TrialQuadralProperty { get; } = trialQuadralProperty;
     }
 }

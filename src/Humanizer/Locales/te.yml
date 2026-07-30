@@ -1224,6 +1224,7 @@ surfaces:
       groupSeparator: ','
       negativeSign: '-'
     parse:
+      decimalMarker: 'దశాంశ'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       ordinalNumberToWordsKind: 'self'

@@ -1566,6 +1566,12 @@ numberToWords:
     - 'seventy'
     - 'eighty'
     - 'ninety'
+  scales:
+    -
+      value: 1000
+      singular: 'thousand'
+      plural: 'thousand'
+      omitOne: true
 """;
 
         const string triadLocale = """

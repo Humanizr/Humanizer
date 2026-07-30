@@ -416,6 +416,7 @@ surfaces:
           exactOrdinalSuffix: 'l'
 
     parse:
+      decimalMarker: 'virgola'
       engine: 'greedy-compound'
       ordinalNumberToWordsKind: 'self'
       negativePrefixes:

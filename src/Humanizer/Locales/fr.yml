@@ -365,8 +365,36 @@ surfaces:
         - 'soixante'
         - 'quatre-vingt'
         - 'quatre-vingt'
+      scales:
+        -
+          value: 1000000000000000000
+          singular: 'trillion'
+          plural: 'trillions'
+        -
+          value: 1000000000000000
+          singular: 'billiard'
+          plural: 'billiards'
+        -
+          value: 1000000000000
+          singular: 'billion'
+          plural: 'billions'
+        -
+          value: 1000000000
+          singular: 'milliard'
+          plural: 'milliards'
+        -
+          value: 1000000
+          singular: 'million'
+          plural: 'millions'
+        -
+          value: 1000
+          singular: 'mille'
+          plural: 'mille'
+          omitOne: true
+          pluralizeMultiplier: false
 
     parse:
+      decimalMarker: 'virgule'
       engine: 'vigesimal-compound'
       cardinalMap:
         'zéro': 0

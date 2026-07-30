@@ -831,6 +831,7 @@ surfaces:
         3: 'තෙවන'
         4: 'සිව්වන'
     parse:
+      decimalMarker: 'දශම'
       engine: 'stemmed-scale'
       words:
         - 'බිංදුව'

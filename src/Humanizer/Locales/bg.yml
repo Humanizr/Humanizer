@@ -445,6 +445,7 @@ surfaces:
           ordinalStem: 'хиляд'
 
     parse:
+      decimalMarker: 'цяло и'
       engine: 'token-map'
       normalizationProfile: 'LowercaseReplacePeriodsWithSpaces'
       cardinalMap:

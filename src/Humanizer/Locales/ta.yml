@@ -750,6 +750,7 @@ surfaces:
         9: 'ஒன்பதாவது'
         12: 'பனிரெண்டாவது'
     parse:
+      decimalMarker: 'புள்ளி'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

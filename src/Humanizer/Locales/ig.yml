@@ -387,6 +387,7 @@ surfaces:
       groupSeparator: ','
       negativeSign: '-'
     parse:
+      decimalMarker: '.'
       engine: 'greedy-compound'
       ordinalNumberToWordsKind: 'self'
       negativePrefixes:

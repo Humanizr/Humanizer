@@ -757,6 +757,7 @@ surfaces:
         2: 'jübüt'
 
     parse:
+      decimalMarker: ','
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

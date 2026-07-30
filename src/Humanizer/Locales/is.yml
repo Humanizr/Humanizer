@@ -769,6 +769,7 @@ surfaces:
           gender: 'neuter'
 
     parse:
+      decimalMarker: 'komma'
       engine: 'compound-scale'
       cardinalMap:
         'núll': 0

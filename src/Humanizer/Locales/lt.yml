@@ -1123,6 +1123,7 @@ surfaces:
       negativeSign: '−'
 
     parse:
+      decimalMarker: 'ir'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

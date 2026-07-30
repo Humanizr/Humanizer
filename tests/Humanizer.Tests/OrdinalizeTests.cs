@@ -1,6 +1,10 @@
 [UseCulture("en-US")]
 public class OrdinalizeTests
 {
+    public static IEnumerable<object[]> ShippedLocaleRows =>
+        Humanizer.Tests.Localisation.LocaleCoverageData.ShippedLocales
+            .Select(static localeName => new object[] { localeName });
+
     [Theory]
     [InlineData("0", "0th")]
     [InlineData("1", "1st")]
@@ -84,6 +88,15 @@ public class OrdinalizeTests
                 GrammaticalGender.Masculine,
                 new CultureInfo("es-ES"),
                 WordForm.Abbreviation));
+    }
+
+    [Theory]
+    [MemberData(nameof(ShippedLocaleRows))]
+    public void OrdinalizeLongNumberMatchesIntOverloadForEverySupportedLocale(string localeName)
+    {
+        var culture = new CultureInfo(localeName);
+
+        Assert.Equal(21.Ordinalize(culture), 21L.Ordinalize(culture));
     }
 
     [Fact]

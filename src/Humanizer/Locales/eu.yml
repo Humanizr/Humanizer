@@ -1588,6 +1588,7 @@ surfaces:
         1000000000: 'mila milioigarren'
 
     parse:
+      decimalMarker: 'koma'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

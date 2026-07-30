@@ -851,6 +851,7 @@ surfaces:
         1000: 'kiliapla'
 
     parse:
+      decimalMarker: 'egész'
       engine: 'prefixed-tens-scale'
       cardinalMap:
         nulla: 0

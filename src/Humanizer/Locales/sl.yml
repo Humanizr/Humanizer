@@ -1268,6 +1268,7 @@ surfaces:
       negativeSign: '−'
 
     parse:
+      decimalMarker: 'vejica'
       engine: 'inverted-tens'
       cardinalMap:
         'nič': 0

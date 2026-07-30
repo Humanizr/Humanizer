@@ -396,6 +396,7 @@ surfaces:
       leadingOnePreservePrefix: 'een en '
 
     parse:
+      decimalMarker: 'komma'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

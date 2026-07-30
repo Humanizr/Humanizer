@@ -344,6 +344,7 @@ surfaces:
         4: 'tư'
 
     parse:
+      decimalMarker: 'phẩy'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

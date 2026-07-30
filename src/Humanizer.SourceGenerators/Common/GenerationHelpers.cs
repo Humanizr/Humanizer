@@ -1159,6 +1159,17 @@ public sealed partial class HumanizerSourceGenerator
             RequiredStringValue("plural"),
             BooleanValue("usePrefixMapForLowerDigits"));
 
+    static string CreateMacedonianScaleArrayExpression(JsonElement arrayElement)
+        => CreateTypedConstructorArrayExpression(
+            "MacedonianScale",
+            arrayElement,
+            RequiredInt64Value("value", "UL"),
+            RequiredEnumValue("gender", "GrammaticalGender"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            RequiredStringValue("ordinalStem"),
+            BooleanValue("omitOne"));
+
     static string CreateTriadScaleArrayExpression(JsonElement arrayElement)
         => CreateTypedConstructorArrayExpression(
             "TriadScaleNumberToWordsConverter.TriadScale",
@@ -1191,6 +1202,16 @@ public sealed partial class HumanizerSourceGenerator
             RequiredStringValue("singularPrefix"),
             RequiredStringValue("singular"),
             RequiredStringValue("plural"));
+
+    static string CreateVariantDecadeScaleArrayExpression(JsonElement arrayElement)
+        => CreateTypedConstructorArrayExpression(
+            "VariantDecadeScale",
+            arrayElement,
+            RequiredInt64Value("value", "UL"),
+            RequiredStringValue("singular"),
+            RequiredStringValue("plural"),
+            BooleanValue("omitOne"),
+            OptionalBooleanValue("pluralizeMultiplier"));
 
     static string CreateWestSlavicScaleFormsExpression(JsonElement objectElement)
     {

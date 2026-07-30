@@ -426,6 +426,7 @@ surfaces:
         9: 'နဝမ'
         10: 'ဒသမ'
     parse:
+      decimalMarker: 'ဒသမ'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       ordinalAbbreviationSuffixes:

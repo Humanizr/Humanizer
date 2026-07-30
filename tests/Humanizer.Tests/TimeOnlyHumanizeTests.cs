@@ -1,5 +1,7 @@
 #if NET6_0_OR_GREATER
 
+using Humanizer.Tests.Localisation;
+
 [UseCulture("en-US")]
 public class TimeOnlyHumanizeTests
 {
@@ -96,6 +98,17 @@ public class TimeOnlyHumanizeTests
             .Humanize(inputTime, baseTime, CultureInfo.CurrentUICulture);
 
         Assert.Equal(expectedResult, actualResult);
+    }
+
+    [Theory]
+    [MemberData(nameof(LocaleRegistrySweepTests.ShippedLocaleRows), MemberType = typeof(LocaleRegistrySweepTests))]
+    public void Humanize_UsesSpecifiedCulture(string localeName)
+    {
+        var culture = new CultureInfo(localeName);
+        var baseTime = new TimeOnly(13, 0);
+        var expected = Configurator.GetFormatter(culture).DateHumanize(TimeUnit.Minute, Tense.Future, 1);
+
+        Assert.Equal(expected, baseTime.AddMinutes(1).Humanize(baseTime, culture: culture));
     }
 
     [Fact]

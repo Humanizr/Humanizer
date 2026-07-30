@@ -1136,6 +1136,7 @@ surfaces:
           ordinalCountPrefixes: 'jedno|dvije'
 
     parse:
+      decimalMarker: 'zarez'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

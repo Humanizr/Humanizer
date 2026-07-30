@@ -827,6 +827,7 @@ surfaces:
         - 'нчи'
 
     parse:
+      decimalMarker: ','
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

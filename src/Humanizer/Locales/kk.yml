@@ -819,6 +819,7 @@ surfaces:
           value: 1000
           name: 'мың'
     parse:
+      decimalMarker: 'бүтін'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

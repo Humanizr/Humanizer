@@ -923,6 +923,7 @@ surfaces:
         2: 'çift'
 
     parse:
+      decimalMarker: 'virgül'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

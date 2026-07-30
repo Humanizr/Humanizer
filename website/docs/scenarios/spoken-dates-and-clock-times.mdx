@@ -17,33 +17,43 @@ Use date ordinal words when a calendar date should read naturally, and clock not
 
 ## Example
 
-Date ordinal words use ambient culture. `main/preview` can pass a culture
-directly to clock notation; this executable scopes both ambient cultures so
-the same pattern remains clear:
+Date ordinal words use ambient culture. Humanizer 4 can pass a culture directly
+to clock notation; this executable demonstrates that overload while also
+scoping both ambient cultures for the date API:
 
 <CodeBlock language="csharp" title="Program.cs">{spokenDates}</CodeBlock>
 
 ### Date ordinal words
 
-`DateTime.ToOrdinalWords()` and `DateOnly.ToOrdinalWords()` order the day, month, and year for the current UI culture. A `GrammaticalCase` overload is available for locales whose date converter supports case-sensitive wording.
+`DateTime.ToOrdinalWords()` and `DateOnly.ToOrdinalWords()` order the day,
+month, and year for `CurrentCulture`. A `GrammaticalCase` overload is available
+for locales whose date converter supports case-sensitive wording; because date
+words have no culture argument, scope `CurrentCulture` and `CurrentUICulture`
+together at the boundary.
 
 ### Clock notation
 
 `TimeOnly.ToClockNotation()` renders the exact minute.
 `ClockNotationRounding.NearestFiveMinutes` first rounds to the nearest
 five-minute boundary, then selects the phrase. Rounding can cross an hour or
-day-period boundary. On `main/preview`, the overload that also accepts a
-`CultureInfo` avoids changing ambient culture.
+day-period boundary. The Humanizer 4 overload that also accepts a `CultureInfo`
+avoids changing ambient culture.
 
 ## Pitfall
 
-Locale capability is not uniform. A successful number-word conversion does not prove that the same locale supplies date ordinal words, grammatical cases, or clock notation. Check [supported cultures and capabilities](../languages/supported-cultures.mdx) and set ambient culture at the request or job boundary.
+Every culture listed by `Configurator.IsCultureSupported` supplies date ordinal
+words, the grammatical-case overload, and clock notation. A locale whose date
+form does not vary by grammatical case returns the same authored date text.
+Supported same-language descendants inherit their parent locale's behavior;
+no supported non-English culture reaches the English default. Unsupported
+cultures can use a configured registry default, so the completeness guarantee
+applies only when `Configurator.IsCultureSupported` returns `true`.
 
 ## Version notes
 
 `DateTime.ToOrdinalWords` predates the documented corpus. `DateOnly` date words
 begin with its framework support in `2.11.10`. Clock notation appears in
-`2.13.14`; the explicit-culture clock overload is a `main/preview` API.
+`2.13.14`; the explicit-culture clock overload is available in Humanizer 4.
 
 ## Related guides and API
 

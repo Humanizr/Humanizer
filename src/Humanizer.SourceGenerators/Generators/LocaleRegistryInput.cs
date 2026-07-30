@@ -142,8 +142,55 @@ public sealed partial class HumanizerSourceGenerator
                 context.AddSource(helperName + ".g.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
             }
 
+            EmitWordsToDecimalNumberRegistrations(context);
             EmitSupportedCultureApi(context);
             EmitNumberFormattingOverrides(context);
+        }
+
+        void EmitWordsToDecimalNumberRegistrations(SourceProductionContext context)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("using System;");
+            builder.AppendLine();
+            builder.AppendLine("namespace Humanizer;");
+            builder.AppendLine();
+            builder.AppendLine("internal static class WordsToDecimalNumberConverterRegistryRegistrations");
+            builder.AppendLine("{");
+            builder.AppendLine("    internal static void Register(WordsToDecimalNumberConverterRegistry registry)");
+            builder.AppendLine("    {");
+
+            foreach (var locale in locales.OrderBy(static locale => locale.LocaleCode, StringComparer.Ordinal))
+            {
+                if (locale.WordsToNumber is not { } wordsToNumber ||
+                    GetOptionalString(wordsToNumber.ProfileRoot, "decimalMarker") is not { } decimalMarker)
+                {
+                    continue;
+                }
+
+                var root = wordsToNumber.ProfileRoot;
+                var negativePrefixes = root.TryGetProperty("negativePrefixes", out _)
+                    ? CreateOptionalStringArrayExpression(root, "negativePrefixes")
+                    : GetOptionalString(root, "minusWord") is { } minusWord
+                        ? "new string[] { " + QuoteLiteral(minusWord + " ") + " }"
+                        : "Array.Empty<string>()";
+
+                builder.Append("        registry.Register(");
+                builder.Append(QuoteLiteral(locale.LocaleCode));
+                builder.Append(", culture => new LocalizedWordsToDecimalNumberConverter(culture, ");
+                builder.Append(QuoteLiteral(decimalMarker));
+                builder.Append(", ");
+                builder.Append(negativePrefixes);
+                builder.Append(", ");
+                builder.Append(CreateOptionalStringArrayExpression(root, "negativeSuffixes"));
+                builder.AppendLine("));");
+            }
+
+            builder.AppendLine("    }");
+            builder.AppendLine("}");
+
+            context.AddSource(
+                "WordsToDecimalNumberConverterRegistryRegistrations.g.cs",
+                SourceText.From(builder.ToString(), Encoding.UTF8));
         }
 
         void EmitSupportedCultureApi(SourceProductionContext context)

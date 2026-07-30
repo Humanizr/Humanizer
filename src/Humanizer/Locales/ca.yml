@@ -516,6 +516,7 @@ surfaces:
         '999|Feminine': '999a'
 
     parse:
+      decimalMarker: 'coma'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

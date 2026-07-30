@@ -927,6 +927,7 @@ surfaces:
         10000000: 'কোটিতম'
 
     parse:
+      decimalMarker: 'দশমিক'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

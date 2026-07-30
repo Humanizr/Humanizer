@@ -899,6 +899,7 @@ surfaces:
         'а': 'анчы'
 
     parse:
+      decimalMarker: 'бүтүн'
       engine: 'token-map'
       normalizationProfile: 'CollapseWhitespace'
       cardinalMap:

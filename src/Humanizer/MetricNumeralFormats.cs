@@ -27,9 +27,11 @@ public enum MetricNumeralFormats
     WithSpace = 8,
 
     /// <summary>
-    /// Automatically select between <a href="https://en.wikipedia.org/wiki/Long_and_short_scales">long and short scale words</a>
-    /// based on <see cref="System.Globalization.CultureInfo.CurrentUICulture"/>.
-    /// For example, <c>1E9</c> renders as <c>billion</c> in <c>en-US</c> and <c>milliard</c> in <c>de-DE</c>.
+    /// Use the scale word authored for <see cref="System.Globalization.CultureInfo.CurrentUICulture"/>.
+    /// When that locale has no standalone word for the selected power of 1000, use the SI symbol.
+    /// The locale-authored grammatical count form follows the displayed, scaled numeral.
+    /// Inverse scale words are used only when the authored singular form applies; other counts use the SI symbol.
+    /// For example, <c>1E9</c> renders as <c>billion</c> in <c>en-US</c> and <c>Milliarde</c> in <c>de-DE</c>.
     /// </summary>
     UseScaleWord = 16,
 

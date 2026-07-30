@@ -9,6 +9,112 @@ public class MetricNumeralTests
             e
         });
 
+    public static TheoryData<string, string> LocalizedScaleWordData { get; } = new()
+    {
+        { "af", "1 miljard" },
+        { "am", "1 ቢሊዮን" },
+        { "ar", "1 مليار" },
+        { "as", "1 G" },
+        { "az", "1 milyard" },
+        { "be", "1 мільярд" },
+        { "bg", "1 милиард" },
+        { "bn", "1 G" },
+        { "bs", "1 milijarda" },
+        { "ca", "1 G" },
+        { "cs", "1 miliarda" },
+        { "cy", "1 biliwn" },
+        { "da", "1 milliard" },
+        { "de", "1 Milliarde" },
+        { "de-CH", "1 Milliarde" },
+        { "de-LI", "1 Milliarde" },
+        { "el", "1 δισεκατομμύριο" },
+        { "en", "1 billion" },
+        { "en-GB", "1 billion" },
+        { "en-IN", "1 arab" },
+        { "en-US", "1 billion" },
+        { "es", "1 G" },
+        { "et", "1 miljard" },
+        { "eu", "1 mila milioi" },
+        { "fa", "1 میلیارد" },
+        { "fi", "1 miljardi" },
+        { "fil", "1 bilyon" },
+        { "fr", "1 milliard" },
+        { "fr-BE", "1 milliard" },
+        { "fr-CH", "1 milliard" },
+        { "ga", "1 billiún" },
+        { "gl", "1 G" },
+        { "gu", "1 અબજ" },
+        { "ha", "1 biliyan" },
+        { "he", "1 מיליארד" },
+        { "hi", "1 अरब" },
+        { "hr", "1 milijarda" },
+        { "hu", "1 milliárd" },
+        { "hy", "1 միլիարդ" },
+        { "id", "1 miliar" },
+        { "ig", "1 ijeri" },
+        { "is", "1 milljarður" },
+        { "it", "1 miliardo" },
+        { "ja", "1 G" },
+        { "ka", "1 მილიარდი" },
+        { "kk", "1 миллиард" },
+        { "km", "1 G" },
+        { "kn", "1 ಅರಬ್" },
+        { "ko", "1 G" },
+        { "kok", "1 अब्ज" },
+        { "ku", "1 میلیارد" },
+        { "ky", "1 миллиард" },
+        { "lb", "1 Milliard" },
+        { "lo", "1 ຕື້" },
+        { "lt", "1 milijardas" },
+        { "lv", "1 miljards" },
+        { "mk", "1 милијарда" },
+        { "ml", "1 G" },
+        { "mn", "1 тэрбум" },
+        { "mr", "1 अब्ज" },
+        { "ms", "1 bilion" },
+        { "mt", "1 biljun" },
+        { "my", "1 G" },
+        { "nb", "1 milliard" },
+        { "ne", "1 अर्ब" },
+        { "nl", "1 miljard" },
+        { "nn", "1 milliard" },
+        { "or", "1 ଅବ୍ଜ" },
+        { "pa", "1 ਅਰਬ" },
+        { "pa-Arab", "1 ارب" },
+        { "pl", "1 miliard" },
+        { "ps", "1 میلیارد" },
+        { "pt", "1 mil milhões" },
+        { "pt-BR", "1 bilhão" },
+        { "ro", "1 miliard" },
+        { "ru", "1 миллиард" },
+        { "si", "1 G" },
+        { "sk", "1 miliarda" },
+        { "sl", "1 milijarda" },
+        { "so", "1 bilyan" },
+        { "sq", "1 miliar" },
+        { "sr", "1 милијарда" },
+        { "sr-Latn", "1 milijarda" },
+        { "sv", "1 miljard" },
+        { "sw", "1 bilioni" },
+        { "ta", "1 G" },
+        { "te", "1 అరబ్" },
+        { "th", "1 G" },
+        { "tk", "1 milliard" },
+        { "tr", "1 milyar" },
+        { "uk", "1 мільярд" },
+        { "ur", "1 ارب" },
+        { "ur-IN", "1 ارب" },
+        { "ur-PK", "1 ارب" },
+        { "uz-Cyrl-UZ", "1 миллиард" },
+        { "uz-Latn-UZ", "1 milliard" },
+        { "vi", "1 tỉ" },
+        { "yo", "1 bílíọ̀nù" },
+        { "zh-CN", "1 G" },
+        { "zh-Hans", "1 G" },
+        { "zh-Hant", "1 G" },
+        { "zu-ZA", "1 ibhiliyoni" }
+    };
+
     [Theory]
     [InlineData(0, "0")]
     [InlineData(123d, "123")]
@@ -401,6 +507,18 @@ public class MetricNumeralTests
                 decimals: 2));
     }
 
+    [Fact]
+    public void ToMetric_KeepTrailingZeros_PreservesDisplayedScaleForCountForm()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("de-DE"));
+        var formats = MetricNumeralFormats.KeepTrailingZeros |
+                      MetricNumeralFormats.WithSpace |
+                      MetricNumeralFormats.UseScaleWord;
+
+        Assert.Equal("1.0 Milliarden", 1E9.ToMetric(formats, decimals: 1));
+        Assert.Equal("1.0 Milliarden", 1_000_000_000L.ToMetric(formats, decimals: 1));
+    }
+
     [Theory]
     [InlineData(1E+27)]
     [InlineData(1E-27)]
@@ -410,80 +528,91 @@ public class MetricNumeralTests
         Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
 
     [Theory]
+    [InlineData(1E-3, "1 thousandth")]
+    [InlineData(1E-18, "1 quintillionth")]
+    [InlineData(1E-21, "1 z")]
     [InlineData(1E9, "1 billion")]
     [InlineData(1E12, "1 trillion")]
     public void ToMetric_UseScaleWord_ShortScale(double input, string expected) =>
         Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
 
-    [Fact]
-    public void ToMetric_UseScaleWord_UsesCurrentUiCulture()
+    [Theory]
+    [InlineData(1E3, "1 tausend")]
+    [InlineData(1E9, "1 Milliarde")]
+    [InlineData(1_000_000_000.000001, "1 Milliarde")]
+    [InlineData(1.5E9, "1.5 Milliarden")]
+    [InlineData(2E9, "2 Milliarden")]
+    public void ToMetric_UseScaleWord_UsesCurrentUiCultureAndDisplayedQuantity(double input, string expected)
     {
         using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("de-DE"));
 
-        Assert.Equal("1.5 milliard", 1.5E9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
     }
 
     [Theory]
-    [InlineData("et-EE")]
-    [InlineData("mk-MK")]
-    [InlineData("sq-AL")]
-    public void ToMetric_UseScaleWord_LongScale_FromCorrectedLocaleData(string uiCulture)
+    [InlineData("eu", 1E6, "1 milioi")]
+    [InlineData("hr", 2E9, "2 milijarde")]
+    [InlineData("lt", 2E9, "2 milijardai")]
+    [InlineData("mt", 2E9, "2 biljuni")]
+    [InlineData("ru", 2E9, "2 миллиарда")]
+    [InlineData("sk", 2E9, "2 miliardy")]
+    [InlineData("sl", 2E9, "2 milijardi")]
+    [InlineData("sl", 3E9, "3 milijarde")]
+    public void ToMetric_UseScaleWord_UsesLocaleAuthoredCountForm(string uiCulture, double input, string expected)
     {
         using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new(uiCulture));
 
-        Assert.Equal("1 milliard", 1E9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
-        Assert.Equal("1 billion", 1E12.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
-        Assert.Equal("1 billiard", 1E15.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
     }
 
-    [UseCulture("de-DE")]
-    [Theory]
-    [InlineData(1E9, "1 milliard")]
-    [InlineData(1E12, "1 billion")]
-    public void ToMetric_UseScaleWord_LongScale_German(double input, string expected) =>
-        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    [Fact]
+    public void ToMetric_UseScaleWord_UsesLocaleAuthoredCountFormForLong()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("lt"));
 
-    [UseCulture("fr-FR")]
-    [Theory]
-    [InlineData(1E9, "1 milliard")]
-    [InlineData(1E12, "1 billion")]
-    public void ToMetric_UseScaleWord_LongScale_French(double input, string expected) =>
-        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+        Assert.Equal(
+            "2 milijardai",
+            2_000_000_000L.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
 
-    [UseCulture("pt-BR")]
-    [Theory]
-    [InlineData(1E9, "1 billion")]
-    [InlineData(1E12, "1 trillion")]
-    public void ToMetric_UseScaleWord_ShortScale_Brazil(double input, string expected) =>
-        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    [Fact]
+    public void ToMetric_UseScaleWord_PreservesDisplayedLongPrecisionForCountForm()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("lt"));
 
-    [UseCulture("pt-PT")]
-    [Theory]
-    [InlineData(1E9, "1 milliard")]
-    [InlineData(1E12, "1 billion")]
-    public void ToMetric_UseScaleWord_LongScale_Portugal(double input, string expected) =>
-        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+        Assert.Equal(
+            "1.000000000000000001 kvintilijonų",
+            1_000_000_000_000_000_001L.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
 
-    [UseCulture("es-MX")]
-    [Theory]
-    [InlineData(1E9, "1 milliard")]
-    [InlineData(1E12, "1 billion")]
-    public void ToMetric_UseScaleWord_LongScale_LatinAmericanSpanish(double input, string expected) =>
-        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    [Fact]
+    public void ToMetric_UseScaleWord_UsesLocaleAuthoredInverseScaleWord()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("am"));
 
-    [UseCulture("es-ES")]
-    [Theory]
-    [InlineData(1E9, "1 milliard")]
-    [InlineData(1E12, "1 billion")]
-    public void ToMetric_UseScaleWord_LongScale_Spain(double input, string expected) =>
-        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+        Assert.Equal("1 ሺኛ", 1E-3.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
 
-    [UseCulture("ru-RU")]
+    [Fact]
+    public void ToMetric_UseScaleWord_DoesNotUseCardinalWordForInverseScale()
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new("en-IN"));
+
+        Assert.Equal("1 n", 1E-9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
+
+    [Fact]
+    public void ToMetric_UseScaleWord_UsesSymbolWhenInverseCountFormIsNotAuthored() =>
+        Assert.Equal("2 m", 2E-3.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+
     [Theory]
-    [InlineData(1E9, "1 milliard")]
-    [InlineData(1E12, "1 trillion")]
-    public void ToMetric_UseScaleWord_HybridScale(double input, string expected) =>
-        Assert.Equal(expected, input.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    [MemberData(nameof(LocalizedScaleWordData))]
+    public void ToMetric_UseScaleWord_UsesLocaleAuthoredScaleWordOrSymbol(string uiCulture, string expected)
+    {
+        using var _ = new Humanizer.Tests.Localisation.DistinctCultureSwap(new("en-US"), new(uiCulture));
+
+        Assert.Equal(expected, 1E9.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseScaleWord));
+    }
 }
 
 [UseCulture("de-DE")]

@@ -462,6 +462,7 @@ surfaces:
         2: 'ጥንድ'
         3: 'ሶስትዮሽ'
     parse:
+      decimalMarker: 'ነጥብ'
       engine: 'token-map'
       normalizationProfile: 'LowercaseRemovePeriods'
       cardinalMap:

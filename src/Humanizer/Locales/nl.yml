@@ -374,6 +374,7 @@ surfaces:
       ordinalDefaultSuffix: 'de'
 
     parse:
+      decimalMarker: 'komma'
       engine: 'inverted-tens'
       cardinalMap:
         nul: 0
