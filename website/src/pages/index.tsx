@@ -17,6 +17,7 @@ import {
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import {useEffect, useState} from 'react';
+import {ResponsiveTable} from '../theme/MDXComponents';
 import styles from './index.module.css';
 
 const transformations = [
@@ -99,11 +100,10 @@ export default function Home(): React.JSX.Element {
               />
               <span>Humanizer for .NET</span>
             </div>
-            <h1 id="home-title">Turn .NET values into words people understand.</h1>
+            <h1 id="home-title">Human-friendly text for .NET.</h1>
             <p className={styles.lede}>
-              Humanizer adds focused extension methods for readable strings,
-              dates, times, numbers, quantities, enums, and collections—across
-              every supported culture.
+              Humanize strings, dates, numbers, quantities, enums, and
+              collections with culture-aware .NET APIs.
             </p>
             <div className={styles.heroActions}>
               <Link className="button button--primary" to={docsPath('start/quick-start/')}>
@@ -113,13 +113,19 @@ export default function Home(): React.JSX.Element {
                 Find an API by task <span aria-hidden="true">→</span>
               </Link>
             </div>
+            <aside
+              aria-label="What’s new in Humanizer 4"
+              className={styles.releaseCue}>
+              <strong>What’s new in v4</strong>
+              <span>Guide coming soon</span>
+            </aside>
             <div className={styles.install}>
               <span>Install from NuGet</span>
               <code>dotnet add package Humanizer</code>
             </div>
           </div>
 
-          <table className={styles.proof}>
+          <ResponsiveTable className={styles.proof}>
             <caption className={styles.proofCaption}>
               Humanizer input and output examples
             </caption>
@@ -139,7 +145,7 @@ export default function Home(): React.JSX.Element {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </ResponsiveTable>
         </section>
 
         <section className={styles.tasks} aria-labelledby="tasks-title">

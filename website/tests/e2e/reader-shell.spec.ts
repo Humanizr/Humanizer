@@ -26,13 +26,33 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
     expect(pageWidth).toBeLessThanOrEqual(width);
     await expect(
       page.getByRole('heading', {
-        name: 'Turn .NET values into words people understand.',
+        name: 'Human-friendly text for .NET.',
       }),
     ).toBeVisible();
     await expect(
       page.getByRole('table', {name: 'Humanizer input and output examples'}),
     ).toBeVisible();
+    const releaseCue = page.getByText('What’s new in v4', {exact: true});
+    await expect(releaseCue).toBeVisible();
+    expect(
+      await releaseCue.evaluate((element) => element.closest('a, button')),
+    ).toBeNull();
   }
+
+  const install = page.getByText('dotnet add package Humanizer', {exact: true});
+  const proof = page.getByRole('table', {
+    name: 'Humanizer input and output examples',
+  });
+  expect(
+    await install.evaluate(
+      (element) => element.getBoundingClientRect().bottom <= window.innerHeight,
+    ),
+  ).toBe(true);
+  expect(
+    await proof.evaluate(
+      (element) => element.getBoundingClientRect().bottom <= window.innerHeight,
+    ),
+  ).toBe(true);
 
   await page.setViewportSize({width: 320, height: 800});
   await page.goto('/');
@@ -70,18 +90,37 @@ test('navigation remains operable and unclipped at reader breakpoints', async ({
 test('canonical branding renders in the shell and page metadata', async ({
   page,
 }) => {
-  await page.goto('/');
-
   const logoPath = '/img/logo.png';
-  const navbarLogo = page.getByRole('img', {name: 'Humanizer home'});
-  const heroLogo = page.getByRole('img', {name: 'Humanizer logo'});
 
-  await expect(navbarLogo).toHaveAttribute('src', logoPath);
-  await expect(heroLogo).toHaveAttribute('src', logoPath);
-  await expect(heroLogo).toBeVisible();
-  await expect
-    .poll(() => heroLogo.evaluate((image: HTMLImageElement) => image.naturalWidth))
-    .toBe(115);
+  for (const colorScheme of ['light', 'dark'] as const) {
+    await page.emulateMedia({colorScheme});
+    await page.goto('/');
+
+    const navbarLogo = page.getByRole('img', {name: 'Humanizer home'});
+    const heroLogo = page.getByRole('img', {name: 'Humanizer logo'});
+
+    await expect(navbarLogo).toHaveAttribute('src', logoPath);
+    await expect(heroLogo).toHaveAttribute('src', logoPath);
+    await expect(heroLogo).toBeVisible();
+    await expect
+      .poll(() =>
+        heroLogo.evaluate((image: HTMLImageElement) => image.naturalWidth),
+      )
+      .toBe(115);
+
+    for (const logo of [navbarLogo, heroLogo]) {
+      expect(
+        await logo.evaluate((image) => ({
+          background: getComputedStyle(image).backgroundColor,
+          padding: getComputedStyle(image).padding,
+        })),
+      ).toEqual({
+        background: 'rgba(0, 0, 0, 0)',
+        padding: '0px',
+      });
+    }
+  }
+
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
     'href',
     logoPath,
