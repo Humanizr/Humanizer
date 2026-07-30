@@ -1,0 +1,8 @@
+Words: forty-two
+Ordinal words: twenty-first
+Long ordinal: 2147483651st
+Indian scale: one hundred crore
+Fraction: 1 1/4
+Financial: 壹拾
+Estonian scale: triljon
+Roman: XIV

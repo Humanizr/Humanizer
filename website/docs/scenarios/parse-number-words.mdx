@@ -8,26 +8,26 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import parseNumberWords from '!!raw-loader!../_examples/scenarios-parse-number-words/Program.cs';
+import parseNumberWordsOutput from '!!raw-loader!../_examples/scenarios-parse-number-words/expected-output.txt';
 
 # Parse localized number words
 
-## Orientation
-
 Use `TryToNumber` at an input boundary where invalid integer words are expected.
 Use `ToNumber` when invalid text is exceptional and should throw.
-Humanizer 4 adds the corresponding decimal APIs `TryToDecimalNumber` and
+The corresponding decimal APIs are `TryToDecimalNumber` and
 `ToDecimalNumber`. All four require an explicit `CultureInfo`, because the
 same words, magnitude system, and token rules do not mean the same thing in
 every culture.
 
 ## Example
 
-This executable parses positive and negative integers, parses English and
-French decimal words, preserves an authored decimal scale, and verifies the
-unsupported-culture contract. `Convert.ToInt64` keeps the integer assertions
-compatible with the stable `int` result and current `long` result:
+This executable parses positive and negative integers, handles an unrecognized
+word, parses English and French decimal words, and preserves an authored
+decimal scale:
 
 <CodeBlock language="csharp" title="Program.cs">{parseNumberWords}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{parseNumberWordsOutput}</CodeBlock>
 
 ### Handle expected failure
 
@@ -77,24 +77,17 @@ For `null` or empty input, that reported value is an empty string.
 
 ### Convert to a narrower type
 
-Current builds return `long`. If the application requires `int`, use a checked conversion after successful parsing:
+`ToNumber` returns `long`. If the application requires `int`, use a checked conversion after successful parsing:
 
 ```csharp
 var value = checked((int)parsedLong);
 ```
 
-## Pitfall
+## Treat number words as a defined input format
 
-The parsers support only the locales and word forms represented by the selected
-version's generated profiles. They are not general natural-language parsers.
+The parsers support only the locales and word forms represented by Humanizer's
+generated profiles. They are not general natural-language parsers.
 Preserve the explicit culture from the user-input boundary.
-
-## Version notes
-
-Words-to-number begins in Humanizer `3.0.1`; this page is unavailable in `2.x`.
-Releases through `3.0.10` return `int`. Humanizer 4 returns `long`, and its
-analyzer can offer a checked conversion for existing assignments that now fail
-with `CS0029` or `CS0266`. Decimal word parsing is available in Humanizer 4.
 
 ## Related guides and API
 

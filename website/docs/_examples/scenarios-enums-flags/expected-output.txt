@@ -1,0 +1,6 @@
+Flags: Can view and Can edit
+Enum names: Read and Write
+Description: Awaiting reviewer
+Display name: Review required
+Parsed alias: NeedsReview
+Missing: (none)

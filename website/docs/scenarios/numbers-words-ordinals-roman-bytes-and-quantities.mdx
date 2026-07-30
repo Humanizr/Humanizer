@@ -8,10 +8,11 @@ persona: returning developer
 
 import CodeBlock from '@theme/CodeBlock';
 import numbers from '!!raw-loader!../_examples/scenarios-numbers/Program.cs';
+import numbersOutput from '!!raw-loader!../_examples/scenarios-numbers/expected-output.txt';
 
 # Number and data formatting scenarios
 
-## Orientation
+## Choose a focused guide
 
 Choose one operation instead of treating every formatted number as the same kind of string:
 
@@ -26,22 +27,17 @@ Choose one operation instead of treating every formatted number as the same kind
 
 ## Example
 
-This verified survey sets English culture and exercises one representative call from several families:
+This program sets English culture and exercises representative formatting calls:
 
 <CodeBlock language="csharp" title="Program.cs">{numbers}</CodeBlock>
 
+<CodeBlock language="text" title="Output">{numbersOutput}</CodeBlock>
+
 Focused guides separate the typed model, parsing contract, localization behavior, and failure modes. Pass `CultureInfo` directly where an overload permits it; scope both ambient cultures for APIs without a culture argument.
 
-## Pitfall
+## Keep the typed number
 
 Do not persist humanized number text as the numeric source of truth. `ByteSize` uses binary multiples, metric numerals use decimal powers, number-word parsing has locale-specific grammar, and Roman numerals have a strict range. Keep the typed value and choose a parser only for an input format the application explicitly accepts.
-
-## Version notes
-
-The survey’s available calls compile and run against the selected package.
-Number-word parsing begins in `3.0.1` and changes from `int` to `long` on
-`Humanizer 4`. Culture-aware byte-rate formatting begins in `2.13.14`.
-Historical snapshots remove or replace unavailable focused pages.
 
 ## Related guides and API
 

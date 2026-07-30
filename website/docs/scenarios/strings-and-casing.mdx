@@ -8,31 +8,33 @@ persona: returning developer
 
 import CodeBlock from '@theme/CodeBlock';
 import strings from '!!raw-loader!../_examples/scenarios-strings/Program.cs';
+import stringsOutput from '!!raw-loader!../_examples/scenarios-strings/expected-output.txt';
 
 # Transform strings, identifiers, and casing
-
-## Orientation
 
 Use `Humanize` to turn program-shaped identifiers into display text. Use the identifier transformations when code, file, or route naming is the destination. Apply `LetterCasing` or a cultured transformer only after deciding the word boundaries; casing and identifier conversion solve different problems.
 
 ## Example
 
-This verified source covers readable labels, custom acronym casing, ampersands, explicit casing, Pascal/snake/kebab conversion, dehumanization, truncation, and a cultured transformer:
+This source covers readable labels, custom acronym casing, ampersands,
+snake/kebab conversion, dehumanization, and truncation:
 
 <CodeBlock language="csharp" title="Program.cs">{strings}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{stringsOutput}</CodeBlock>
 
 ### Turn an identifier into a label
 
 `Humanize` recognizes PascalCase, camelCase, underscores, dashes, numbers, and common acronym boundaries. Pass `LetterCasing.Sentence`, `Title`, `LowerCase`, or `AllCaps` when the label needs a known presentation case. All-capital input is treated as an acronym and can remain unchanged until a casing operation is requested.
 
-On `Humanizer 4`, `Humanize` preserves ampersands as separate tokens instead
+`Humanize` preserves ampersands as separate tokens instead
 of discarding them with other punctuation. For example,
 `"Research&Development".Humanize()` returns `"Research & development"`.
 Other punctuation such as `+` and `/` is still removed.
 
 ### Preserve domain acronym casing
 
-On `Humanizer 4`, call `Vocabularies.Default.AddAcronym` once during startup
+Call `Vocabularies.Default.AddAcronym` once during startup
 when an acronym has required output casing. Registration matches
 case-insensitively, while the registered spelling supplies the output:
 registering `iOS` makes `"IOSSettings".Humanize()` return `"iOS settings"`.
@@ -55,7 +57,7 @@ tests that change it isolated.
 
 `Dehumanize` is the direct readable-text-to-PascalCase operation. Use the named inflector transformations when the destination convention matters.
 
-`Underscore()` lowercases its output. On `Humanizer 4`, pass
+`Underscore()` lowercases its output. Pass
 `preserveCase: true` to retain the input casing while inserting boundaries:
 `"HTMLParser".Underscore(preserveCase: true)` returns `"HTML_Parser"`.
 
@@ -63,20 +65,11 @@ tests that change it isolated.
 
 `Transform(To.TitleCase)` and its sentence, upper, and lower siblings use cultured string transformers. Pass a `CultureInfo` to the cultured overload. Implement `IStringTransformer` or `ICulturedStringTransformer` for a local reusable rule without changing process-global configuration.
 
-## Pitfall
+## Treat identifier transformations as lossy
 
 Identifier conversions are intentionally lossy. Acronym boundaries, punctuation, whitespace, and Unicode can prevent a round trip. `Dasherize` and `Hyphenate` primarily replace underscores; use `Kebaberize` when the input needs complete word-boundary normalization.
 
 Title and sentence casing use culture-sensitive text operations. Scope culture when output must be deterministic, especially for Turkish and Azerbaijani casing, and do not assume title casing implements a particular editorial style guide.
-
-## Version notes
-
-The verified executable compiles and runs against the selected package. Core
-transformations also exist in `2.x`, but custom acronym registration,
-ampersand preservation, and the case-preserving `Underscore` overload are
-`Humanizer 4` behavior. Humanizer 3 also changes several delimiter and
-no-letter edge cases. Use the selected snapshot when exact legacy behavior
-matters.
 
 ## Related guides and API
 

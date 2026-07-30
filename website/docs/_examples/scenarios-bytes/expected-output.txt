@@ -1,0 +1,8 @@
+Parsed: 1.5 KB
+Combined: 2 KB
+Composite: 10 KB 2 B 1 b
+Rate: 1.5 MB/s
+Decimal SI: 1 MB
+Binary IEC: 1 MiB
+Decimal rate: 1 MB/s
+Binary rate: 1 MiB/s

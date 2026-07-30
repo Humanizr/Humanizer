@@ -13,7 +13,6 @@
       "Humanizer.StringDehumanizeExtensions.md"
     ],
     "scenarios/inflection-and-quantities.mdx": [
-      "Humanizer.PluralizationForms.md",
       "Humanizer.InflectorExtensions.md",
       "Humanizer.ToQuantityExtensions.md",
       "Humanizer.ShowQuantityAs.md",
@@ -159,10 +158,6 @@
     }
   ],
   "unavailable": [
-    {
-      "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
-      "target": "Humanizer.PluralizationForms.md"
-    },
     {
       "versions": ["2.10.1", "2.11.10", "2.13.14", "2.14.1", "3.0.1", "3.0.8", "3.0.10"],
       "target": "Humanizer.ByteSizeUnitSystem.md"

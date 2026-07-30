@@ -1,0 +1,3 @@
+Plural: people
+Quantity: two people
+Custom plural: cactoidae

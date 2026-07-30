@@ -8,10 +8,9 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import durations from '!!raw-loader!../_examples/scenarios-durations/Program.cs';
+import durationsOutput from '!!raw-loader!../_examples/scenarios-durations/expected-output.txt';
 
 # Format durations and ages
-
-## Orientation
 
 Call `TimeSpan.Humanize` for elapsed time and `ToAge` for a human-readable age approximation. Precision controls how many units appear; minimum and maximum units define the allowed range. Keep calendar-sensitive calculations in date types and use this API only after the application has a duration.
 
@@ -23,6 +22,8 @@ with number words. It also shows fractional seconds without exposing a
 separate millisecond unit:
 
 <CodeBlock language="csharp" title="Program.cs">{durations}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{durationsOutput}</CodeBlock>
 
 ### Control the decomposition
 
@@ -36,13 +37,13 @@ The default maximum unit is `Week`. Ask for `Month` or `Year` explicitly when th
 
 ### Use compact symbols
 
-In Humanizer 4, `HumanizeToSymbols` applies the same precision, empty-unit,
+`HumanizeToSymbols` applies the same precision, empty-unit,
 range, culture, and separator controls but emits localized `TimeUnit` symbols
 such as `1h, 3s, 1ms`.
 
 ### Keep sub-second precision in seconds
 
-In Humanizer 4, use `HumanizeWithFractionalSeconds` or
+Use `HumanizeWithFractionalSeconds` or
 `HumanizeToSymbolsWithFractionalSeconds` when milliseconds should appear as a
 fraction of the seconds unit. These APIs always use `Second` as the inclusive
 minimum unit. Supply the precision, maximum unit, maximum fractional digits,
@@ -61,7 +62,7 @@ from the configured formatter. A custom
 
 ### Apply grammatical case
 
-In Humanizer 4, `HumanizeWithCase` selects a locale-authored grammatical
+`HumanizeWithCase` selects a locale-authored grammatical
 case form for each duration unit. A singular form may include a localized word
 or article, and a locale may encode a count in the inflected unit form:
 
@@ -109,7 +110,7 @@ underlying locale-data model.
 
 ### Parse invariant durations
 
-In Humanizer 4, `DehumanizeTimeSpan` and `TryDehumanizeTimeSpan` accept
+`DehumanizeTimeSpan` and `TryDehumanizeTimeSpan` accept
 standard invariant `TimeSpan` text or compact tokens using `ms`, `s`, `m`, `h`,
 `d`, and `w`. Compact tokens may have one leading sign, optional whitespace,
 fractional values that resolve to whole ticks, repeated units, and units in any
@@ -124,21 +125,13 @@ Use `TryDehumanizeTimeSpan` at an input boundary. It returns `false` and
 
 `ToAge` adds the culture’s age phrase to a duration decomposition. It is convenient for an already computed elapsed span, but it is not a birthday calculator.
 
-## Pitfall
+## Keep calendar and parser boundaries explicit
 
 Months and years are approximated from a duration and do not know calendar month length or leap years. Negative `TimeSpan` values are rendered with positive unit counts, so preserve direction elsewhere when it matters. A precision of zero or less returns an empty string.
 
 Compact duration input is intentionally culture-invariant and is not a parser
 for localized humanized output. For example, `1.5h` is valid even under a
 comma-decimal culture, while `1,5h`, `one hour`, and `1 hour` are rejected.
-
-## Version notes
-
-`TimeSpan.Humanize` is available across the documented corpus. `ToAge` begins
-in `3.0.1`; `HumanizeWithCase`, `HumanizeToSymbols`, `DehumanizeTimeSpan`, and
-`TryDehumanizeTimeSpan` are `Humanizer 4` APIs. The verified executable runs
-against the selected package; older snapshots replace or exclude calls they
-do not support.
 
 ## Related guides and API
 

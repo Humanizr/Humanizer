@@ -1,0 +1,5 @@
+Symbol: 123.5k
+Fixed width: 1.00k
+Prefix name: 1 kilo
+Scale word: 1.50 Milliarden
+Parsed: 1500

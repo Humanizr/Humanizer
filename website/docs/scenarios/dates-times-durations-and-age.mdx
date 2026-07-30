@@ -8,10 +8,11 @@ persona: returning developer
 
 import CodeBlock from '@theme/CodeBlock';
 import dates from '!!raw-loader!../_examples/scenarios-dates/Program.cs';
+import datesOutput from '!!raw-loader!../_examples/scenarios-dates/expected-output.txt';
 
 # Date, time, duration, and age scenarios
 
-## Orientation
+## Choose a focused guide
 
 Choose the guide by the meaning of the value and the sentence you need:
 
@@ -24,11 +25,13 @@ Choose the guide by the meaning of the value and the sentence you need:
 
 ## Example
 
-This verified source demonstrates the two most common display boundaries: a relative UTC date with an injected comparison instant and a two-unit elapsed duration:
+This source demonstrates common display boundaries with explicit comparison values and culture:
 
 <CodeBlock language="csharp" title="Program.cs">{dates}</CodeBlock>
 
-It prints `yesterday; 2 hours, 5 minutes`. Follow the focused guides for the full overload contracts.
+<CodeBlock language="text" title="Output">{datesOutput}</CodeBlock>
+
+Follow the focused guides for the full overload contracts.
 
 ### Pick a model before an API
 
@@ -37,13 +40,9 @@ It prints `yesterday; 2 hours, 5 minutes`. Follow the focused guides for the ful
 - Use `TimeOnly` for a wall-clock time without a date.
 - Use `TimeSpan` for elapsed duration, not calendar arithmetic.
 
-## Pitfall
+## Keep clocks and calendars explicit
 
 Reading `Now` inside formatting makes examples, tests, and cache behavior unstable. Inject comparison values and set culture explicitly. A `TimeSpan` has no calendar context, so months, years, and ages are approximations; use date arithmetic when leap years, month length, or birthdays must be exact.
-
-## Version notes
-
-`DateTime`, `DateTimeOffset`, and `TimeSpan` calls span the supported corpus. `DateOnly` and `TimeOnly` humanization begin in `2.11.10`; clock notation begins in `2.13.14`; `ToAge` begins in `3.0.1`. Historical sidebars must omit unavailable focused guides.
 
 ## Related guides and API
 

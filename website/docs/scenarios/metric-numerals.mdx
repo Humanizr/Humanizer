@@ -8,15 +8,14 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import metric from '!!raw-loader!../_examples/scenarios-metric/Program.cs';
+import metricOutput from '!!raw-loader!../_examples/scenarios-metric/expected-output.txt';
 
 # Format and parse metric numerals
-
-## Orientation
 
 Use `ToMetric` for compact decimal magnitudes such as `123.5k`, and
 `FromMetric` when an input follows Humanizer’s metric syntax.
 `MetricNumeralFormats` selects a symbol, SI prefix name, scale word, and
-optional spacing. Humanizer 4 can also preserve a fixed number of fractional
+optional spacing. Humanizer can also preserve a fixed number of fractional
 digits. Numeric text follows `CurrentCulture`; automatic scale-word selection
 follows `CurrentUICulture` and reuses that locale's number-word data.
 
@@ -27,6 +26,8 @@ decimals, preserves a fixed decimal width, automatically selects a scale word,
 emits an SI prefix name, and parses a symbol:
 
 <CodeBlock language="csharp" title="Program.cs">{metric}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{metricOutput}</CodeBlock>
 
 ### Select the representation
 
@@ -67,7 +68,7 @@ zero.
 
 `FromMetric` accepts a numeric value followed by a supported SI symbol or prefix name, with optional whitespace. It returns `double` and throws `ArgumentException` for invalid syntax. Short- and long-scale words produced by `ToMetric` are display forms and do not round-trip through `FromMetric`.
 
-## Pitfall
+## Keep metric and byte units distinct
 
 Metric prefixes are powers of 1000. `ByteSize` uses a mixed unit contract:
 legacy `KB` through `TB` are binary multiples, `PB` and `EB` are decimal SI,
@@ -76,14 +77,6 @@ metric exponent range stops before `10^27` and below `10^-27`; out-of-range
 values throw. Because there is no culture parameter, scope `CurrentCulture`
 when parsing or exact numeric output matters, and scope `CurrentUICulture`
 when `UseScaleWord` must be deterministic.
-
-## Version notes
-
-Metric conversion spans the documented corpus, but Humanizer 3 removed older
-boolean formatting overloads in favor of `MetricNumeralFormats`.
-`UseScaleWord` and `KeepTrailingZeros` are available in Humanizer 4. The
-executable uses the selected version's formatting API and runs against that
-package.
 
 ## Related guides and API
 

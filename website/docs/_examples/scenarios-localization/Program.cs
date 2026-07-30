@@ -5,16 +5,8 @@ var french = CultureInfo.GetCultureInfo("fr-FR");
 CultureInfo.CurrentCulture = french;
 CultureInfo.CurrentUICulture = french;
 
-AssertEqual("quarante-deux", 42.ToWords(french));
-AssertEqual("BONJOUR", "bonjour".Transform(french, new LoudTransformer()));
-
-Console.WriteLine("quarante-deux; BONJOUR");
-
-static void AssertEqual(string expected, string actual)
-{
-    if (actual != expected)
-        throw new InvalidOperationException($"Expected '{expected}', got '{actual}'.");
-}
+Console.WriteLine($"Number: {42.ToWords(french)}");
+Console.WriteLine($"Transformed: {"bonjour".Transform(french, new LoudTransformer())}");
 
 sealed class LoudTransformer : ICulturedStringTransformer
 {

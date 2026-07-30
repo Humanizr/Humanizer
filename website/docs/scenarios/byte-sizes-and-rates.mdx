@@ -8,10 +8,9 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import bytes from '!!raw-loader!../_examples/scenarios-bytes/Program.cs';
+import bytesOutput from '!!raw-loader!../_examples/scenarios-bytes/expected-output.txt';
 
 # Format byte sizes and transfer rates
-
-## Orientation
 
 `ByteSize` keeps a data quantity typed while the application parses, compares, adds, subtracts, and formats it. Numeric extensions create values without manual factors. `ByteRate` combines a size with a measurement interval for display as bytes, kilobytes, or larger units per second, minute, or hour.
 
@@ -23,10 +22,12 @@ transfer rate:
 
 <CodeBlock language="csharp" title="Program.cs">{bytes}</CodeBlock>
 
+<CodeBlock language="text" title="Output">{bytesOutput}</CodeBlock>
+
 ### Create and format sizes
 
 Use numeric extensions through `Terabytes`, or the corresponding
-`ByteSize.From...` factories. `Humanizer 4` also exposes decimal petabyte and
+`ByteSize.From...` factories. Humanizer also exposes decimal petabyte and
 exabyte values plus explicit binary `Kibibyte`, `Mebibyte`, `Gibibyte`,
 `Tebibyte`, and `Pebibyte` factories, properties, format tokens, parsing
 symbols, and `DataUnit` values. `Humanize` chooses the largest whole unit and
@@ -57,7 +58,7 @@ The choice is explicit and is not stored in `ByteSize`.
 
 ### Decompose exact quantities
 
-On `Humanizer 4`, `HumanizeComposite` walks the existing units from exabytes
+`HumanizeComposite` walks the existing units from exabytes
 through bits and returns up to `precision` nonzero parts. It preserves exact
 byte and bit residuals while parts remain available: for example, 81,937 bits
 becomes `10 KB 2 B 1 b` at precision 3. Once the precision is reached, the
@@ -84,10 +85,10 @@ ambiguous `KB`, `MB`, `GB`, `TB`, `PB`, and `EB` suffixes.
 Call `size.Per(interval).Humanize(format, TimeUnit.Second, culture)`. Rate display supports second, minute, and hour units.
 Use `HumanizeWithUnitSystem` on `ByteRate` for explicit SI or IEC rate output.
 
-## Pitfall
+## Choose a unit system before parsing or formatting
 
 Humanizer’s legacy `KB`, `MB`, `GB`, and `TB` values use binary multiples of
-1024, while `PB` and `EB` use decimal SI factors. On `Humanizer 4`, prefer the
+1024, while `PB` and `EB` use decimal SI factors. Prefer the
 explicit IEC symbols `KiB`, `MiB`, `GiB`, `TiB`, and `PiB` when the binary
 meaning must be unambiguous. The symbols `b` and `B` are intentionally
 case-sensitive: lowercase is bits, uppercase is bytes. Other recognized unit
@@ -105,14 +106,6 @@ humanizing a composite value, or displaying a rate; factory choice does not
 carry formatting provenance.
 
 Construct rates with a positive, nonzero interval. Keep `ByteSize` as the model value; formatted output is not a serialization contract.
-
-## Version notes
-
-Core `ByteSize` creation and formatting span the documented corpus. Petabyte,
-exabyte, explicit IEC unit support, and `HumanizeComposite` are `Humanizer 4`
-additions. Culture-aware `ByteRate.Humanize` appears in `2.13.14`; earlier
-snapshots need a reduced example or exclusion. The verified source runs
-against the selected package.
 
 ## Related guides and API
 

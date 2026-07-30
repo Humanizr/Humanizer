@@ -8,10 +8,9 @@ persona: returning developer
 
 import CodeBlock from '@theme/CodeBlock';
 import specialized from '!!raw-loader!../_examples/scenarios-specialized/Program.cs';
+import specializedOutput from '!!raw-loader!../_examples/scenarios-specialized/expected-output.txt';
 
 # Use specialized formatting utilities
-
-## Orientation
 
 Humanizer includes a few focused helpers that do not justify forcing a broader string or number abstraction: compass headings and arrows, Roman numerals, readable numeric multipliers, tuple names, localized time-unit symbols, and English article-aware sorting. Use each only when its narrow input contract matches the task.
 
@@ -20,6 +19,8 @@ Humanizer includes a few focused helpers that do not justify forcing a broader s
 This executable exercises every utility on fixed input:
 
 <CodeBlock language="csharp" title="Program.cs">{specialized}</CodeBlock>
+
+<CodeBlock language="text" title="Output">{specializedOutput}</CodeBlock>
 
 ### Headings and arrows
 
@@ -37,13 +38,9 @@ This executable exercises every utility on fixed input:
 
 `EnglishArticle.AppendArticlePrefix` moves leading `A`, `An`, or `The` to a suffix and returns the transformed array already sorted. Pass that result directly to `PrependArticleSuffix` to restore display titles. This advanced helper is deliberately English-only and throws for an empty array.
 
-## Pitfall
+## Respect each utility's input range
 
 These APIs are not general parsers. Compass quantization loses the original degree and does not validate or normalize negative, `NaN`, or infinite input. Roman conversion has a strict range, multiplier methods can overflow their numeric type, and article sorting recognizes only its exact English pattern. Preserve the original value whenever later logic needs it.
-
-## Version notes
-
-Most utilities span the documented corpus. Localized time-unit symbols appear in `2.13.14`; earlier snapshots need that section removed. Exact locale output is release data, while Roman and invariant tuple examples are stable.
 
 ## Related guides and API
 

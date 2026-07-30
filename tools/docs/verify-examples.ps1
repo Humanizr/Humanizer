@@ -50,8 +50,6 @@ try {
     foreach ($entry in $versions) {
         $entryExamplesRoot = if ($explicitExamplesRoot) {
             $ExamplesRoot
-        } elseif ($requestedAreas.Count -gt 0) {
-            Join-Path $repoRoot "website/docs/_examples"
         } elseif ($entry.published) {
             Join-Path $repoRoot "website/versioned_docs/version-$($entry.version)/_examples"
         } else {
@@ -197,10 +195,38 @@ try {
                 "--artifacts-path", $projectArtifacts,
                 "--no-restore"
             ) + $inputArguments
-            & dotnet @runArguments
-            if ($LASTEXITCODE -ne 0) {
-                throw "Example $($project.Name) failed for $($entry.version)."
+            $actualOutput = @(& dotnet @runArguments)
+            $runExitCode = $LASTEXITCODE
+            if ($runExitCode -ne 0) {
+                throw @"
+Example $($project.Name) failed for $($entry.version).
+$($actualOutput -join "`n")
+"@
             }
+            $actualText = $actualOutput -join "`n"
+            $expectedOutputPath = Join-Path (
+                $project.DirectoryName
+            ) "expected-output.txt"
+            if ($entry.version -eq "current") {
+                if (-not (Test-Path $expectedOutputPath -PathType Leaf)) {
+                    throw "Example $($project.Name) has no expected-output.txt."
+                }
+                $expectedText = @(Get-Content $expectedOutputPath) -join "`n"
+                if (-not [string]::Equals(
+                    $expectedText,
+                    $actualText,
+                    [System.StringComparison]::Ordinal
+                )) {
+                    throw @"
+Example $($project.Name) output differed for $($entry.version).
+Expected:
+$expectedText
+Actual:
+$actualText
+"@
+                }
+            }
+            Write-Host $actualText
         }
 
         Write-Host "Runnable examples passed: $($entry.version)"

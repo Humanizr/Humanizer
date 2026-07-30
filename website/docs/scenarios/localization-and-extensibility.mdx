@@ -8,21 +8,23 @@ persona: application developer
 
 import CodeBlock from '@theme/CodeBlock';
 import localization from '!!raw-loader!../_examples/scenarios-localization/Program.cs';
+import localizationOutput from '!!raw-loader!../_examples/scenarios-localization/expected-output.txt';
 import configuration from '!!raw-loader!../_examples/configuration/Program.cs';
+import configurationOutput from '!!raw-loader!../_examples/configuration/expected-output.txt';
 
 # Localization and extensibility
-
-## Orientation
 
 Start with culture selection, then choose the narrowest extension point. Pass `CultureInfo` per call when possible. Establish `CurrentCulture` and `CurrentUICulture` at a request or job boundary for ambient APIs. Use a local interface implementation for one operation and reserve `Configurator` registries or strategies for process-wide application policy.
 
 ## Example
 
-This verified example produces French number words and supplies a per-call culture-aware transformer:
+This example produces French number words and supplies a per-call culture-aware transformer:
 
 <CodeBlock language="csharp" title="Program.cs">{localization}</CodeBlock>
 
-The result is `quarante-deux; BONJOUR`. A per-call transformer is isolated and easy to test.
+<CodeBlock language="text" title="Output">{localizationOutput}</CodeBlock>
+
+A per-call transformer is isolated and easy to test.
 
 ### Choose an extension point
 
@@ -39,7 +41,7 @@ Registries cover collection formatters, general formatters, number-word converte
 
 ### Set a global time-span policy
 
-On `Humanizer 4`, assign `Configurator.TimeSpanHumanizeStrategy` once during
+Assign `Configurator.TimeSpanHumanizeStrategy` once during
 application startup to route every `TimeSpan.Humanize` and
 `HumanizeToSymbols` call through an application-wide policy. Fractional-second
 calls use `IFractionalTimeSpanHumanizeStrategy` when the configured strategy
@@ -57,6 +59,8 @@ a custom time-span strategy that delegates all behavior to
 
 <CodeBlock language="csharp" title="Program.cs">{configuration}</CodeBlock>
 
+<CodeBlock language="text" title="Output">{configurationOutput}</CodeBlock>
+
 `HumanizeWithCase` uses a separate optional capability so existing custom
 components remain source- and binary-compatible. A configured strategy must
 implement `IGrammaticalCaseTimeSpanHumanizeStrategy`, and its selected
@@ -72,21 +76,11 @@ form may render the count explicitly or encode it in the unit form. It must
 not add a preposition. Install custom
 strategies and formatters during startup, before registry resolution freezes.
 
-## Pitfall
+## Register global behavior before first use
 
-In Humanizer `3.x` and current, localizer registries freeze on first resolution. Register components before any Humanizer call can resolve that registry. Humanizer `2.x` registries remain mutable, but startup registration still prevents request-to-request drift. Do not mutate global strategies per request; concurrent callers can observe the change.
+Localizer registries freeze on first resolution. Register components before any Humanizer call can resolve that registry. Do not mutate global strategies per request; concurrent callers can observe the change.
 
 Parent-culture fallback identifies where behavior was resolved. It does not prove that inherited wording is correct for every region.
-
-## Version notes
-
-The local transformer runs across the supported corpus. Registry immutability
-and enum metadata configuration change in Humanizer 3.
-`TimeSpanHumanizeStrategy`, `ITimeSpanHumanizeStrategy`, and
-`DefaultTimeSpanHumanizeStrategy` are Humanizer 4 APIs. Individual registries
-and supported-culture inventories are selected-version behavior; historical
-snapshots must not present current YAML/generator internals as old package
-behavior.
 
 ## Related guides and API
 

@@ -1,0 +1,6 @@
+Integer: 205
+Negative: -42
+Rejected: otters
+Decimal: 1.50
+Invalid decimal: ten
+French decimal: 1,2

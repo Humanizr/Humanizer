@@ -5,35 +5,8 @@ var culture = CultureInfo.GetCultureInfo("en-US");
 CultureInfo.CurrentCulture = culture;
 CultureInfo.CurrentUICulture = culture;
 
-AssertEqual("people", "person".Pluralize());
-AssertEqual("person", "people".Singularize());
-AssertEqual("two people", "person".ToQuantity(2, ShowQuantityAs.Words));
-
 Vocabularies.Default.AddIrregular("cactoid", "cactoidae", matchEnding: false);
-AssertEqual("cactoidae", "cactoid".Pluralize());
-AssertEqual("cactoid", "cactoidae".Singularize());
 
-var polishForms = new PluralizationForms(
-    singular: "plik",
-    other: "pliku",
-    one: "plik",
-    few: "pliki",
-    many: "plików");
-AssertTrue(polishForms.TryPluralize(5m, CultureInfo.GetCultureInfo("pl"), out var polish));
-AssertEqual("plików", polish);
-AssertTrue(polishForms.TrySingularize("pliki", out var singular));
-AssertEqual("plik", singular);
-
-Console.WriteLine("people; two people; cactoidae; plików; plik");
-
-static void AssertEqual(string expected, string? actual)
-{
-    if (actual != expected)
-        throw new InvalidOperationException($"Expected '{expected}', got '{actual}'.");
-}
-
-static void AssertTrue(bool value)
-{
-    if (!value)
-        throw new InvalidOperationException("Expected success.");
-}
+Console.WriteLine($"Plural: {"person".Pluralize()}");
+Console.WriteLine($"Quantity: {"person".ToQuantity(2, ShowQuantityAs.Words)}");
+Console.WriteLine($"Custom plural: {"cactoid".Pluralize()}");

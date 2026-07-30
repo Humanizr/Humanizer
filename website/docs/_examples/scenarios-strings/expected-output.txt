@@ -1,0 +1,8 @@
+Label: Customer order history
+Acronym: iOS settings
+Ampersand: Research & development
+Snake case: customer_order_history
+Preserved case: HTML_Parser
+Kebab case: customer-order-history
+Identifier: CustomerOrderHistory
+Truncated: Customer…
