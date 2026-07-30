@@ -1,0 +1,118 @@
+---
+id: whats-new
+title: What's new in Humanizer 4
+slug: /whats-new
+diataxis: explanation
+persona: developer evaluating Humanizer 4
+---
+
+# What's new in Humanizer 4
+
+Humanizer 4 gives applications clearer control over localized text, durations,
+data units, numbers, and identifiers. This page highlights the changes that are
+most useful in application code. For compatibility work, follow the
+[Humanizer 4 upgrade guide](../upgrading/version-4-migration.mdx) instead.
+
+## Install one package and reach every supported culture
+
+The `Humanizer` package now contains the runtime, generated locale data, and
+analyzers. There is no separate locale-package graph to assemble. The current
+inventory covers 102 culture entries, and every culture on the supported list
+implements every localized feature that applies to it.
+
+For example, Swahili number words ship with the same package:
+
+```csharp
+var swahili = CultureInfo.GetCultureInfo("sw");
+Console.WriteLine(21.ToWords(swahili)); // ishirini na moja
+```
+
+See [package selection](../start/package-selection.md) for the dependency
+layout and [supported cultures](../languages/supported-cultures.mdx) for the
+generated inventory. Use `Configurator.IsCultureSupported` before selecting an
+application fallback.
+
+## Make durations fit the interface
+
+Duration formatting can use localized compact symbols, retain sub-second values
+as fractional seconds, and select an authored grammatical case. Humanizer can
+also parse invariant `TimeSpan` text and compact input such as `1h 30m 15.25s`.
+`Configurator.TimeSpanHumanizeStrategy` provides one configuration point when
+an application needs a custom duration policy.
+
+Compact output uses the same precision and unit bounds as ordinary
+humanization:
+
+```csharp
+var duration = new TimeSpan(0, 1, 2, 3, 4);
+Console.WriteLine(duration.HumanizeToSymbols(
+    precision: 4,
+    culture: CultureInfo.GetCultureInfo("en-US")));
+// 1h, 2min, 3s, 4ms
+```
+
+The [durations and ages guide](../scenarios/durations-and-ages.mdx) covers
+symbols, fractional seconds, grammatical case, parsing, and custom strategies.
+
+## Choose exactly what a byte unit means
+
+Byte-size operations can now select `DecimalSi` or `BinaryIec` explicitly.
+Decimal SI uses powers of 1000 and symbols such as `MB`; binary IEC uses powers
+of 1024 and symbols such as `MiB`. The choice is available for parsing,
+formatting, composite output, and transfer rates. Existing behavior remains
+available through `Legacy`.
+
+The same stored byte count can therefore be labeled without ambiguity:
+
+```csharp
+var size = ByteSize.FromBytes(1_000_000);
+var culture = CultureInfo.GetCultureInfo("en-US");
+Console.WriteLine(size.Format(ByteSizeUnitSystem.DecimalSi, formatProvider: culture)); // 1 MB
+Console.WriteLine(size.Format(ByteSizeUnitSystem.BinaryIec, formatProvider: culture)); // 976.56 KiB
+```
+
+See [byte sizes and transfer rates](../scenarios/byte-sizes-and-rates.mdx) for
+unit-system parsing, exact composite output, full words, and rates.
+
+## Read and write richer numbers
+
+Every built-in number-word locale now covers the full signed `long` range.
+Number-word input includes localized decimal phrases with preserved scale, and
+the wider number surface adds common fractions, 64-bit numeric ordinals,
+Indian scale styles, Chinese financial numerals, and locale-owned metric scale
+words.
+
+Spoken decimal input retains meaningful trailing zeros:
+
+```csharp
+var value = "one point five zero".ToDecimalNumber(
+    CultureInfo.GetCultureInfo("en-US"));
+Console.WriteLine(value.ToString(CultureInfo.InvariantCulture)); // 1.50
+```
+
+Start with [writing numbers and ordinals](../scenarios/numbers-in-words-and-ordinals.mdx)
+or [parsing number words](../scenarios/parse-number-words.mdx), then use the
+[metric numeral guide](../scenarios/metric-numerals.mdx) when the output needs
+a compact scale.
+
+## Preserve the text that carries meaning
+
+Identifier conversion is less eager to discard information. `Humanize`
+preserves ampersands, registered acronyms can supply their canonical casing,
+and `Underscore(preserveCase: true)` inserts boundaries without forcing the
+result to lowercase. Dots are recognized as identifier boundaries, while
+decimal points survive title casing.
+
+For example, an acronym can remain uppercase while the word boundary becomes
+explicit:
+
+```csharp
+Console.WriteLine("HTMLParser".Underscore(preserveCase: true)); // HTML_Parser
+```
+
+See [strings and casing](../scenarios/strings-and-casing.mdx) for the full set
+of identifier transformations and acronym configuration.
+
+The [GitHub releases page](https://github.com/Humanizr/Humanizer/releases) is
+the canonical home for the complete Humanizer 4 release notes and contributor
+list when the release is published.
