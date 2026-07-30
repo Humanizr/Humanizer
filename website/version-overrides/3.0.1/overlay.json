@@ -17,11 +17,11 @@
     "contributing/report-language-issue.mdx",
     "_examples/scenarios-inflection/Program.cs",
     "_examples/scenarios-numbers/Program.cs",
-    "_examples/scenarios-parse-number-words/Program.cs"
+    "_examples/scenarios-parse-number-words/Program.cs",
+    "whats-new/index.mdx"
   ],
   "exclusions": [
     "upgrading/version-4-migration.mdx",
-    "whats-new/index.mdx",
     "contributing/adding-or-updating-a-locale.mdx",
     "contributing/choosing-or-extending-a-locale-engine.mdx",
     "contributing/locale-yaml-how-to.mdx",

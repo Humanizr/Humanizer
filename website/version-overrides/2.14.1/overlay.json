@@ -33,13 +33,13 @@
     "_examples/scenarios-enums-flags/Program.cs",
     "_examples/scenarios-inflection/Program.cs",
     "_examples/scenarios-numbers/Program.cs",
-    "_examples/scenarios-specialized/Program.cs"
+    "_examples/scenarios-specialized/Program.cs",
+    "whats-new/index.mdx"
   ],
   "exclusions": [
     "scenarios/parse-number-words.mdx",
     "concepts/trimming-and-native-aot.mdx",
     "upgrading/version-4-migration.mdx",
-    "whats-new/index.mdx",
     "_examples/scenarios-parse-number-words/ParseNumberWords.csproj",
     "_examples/scenarios-parse-number-words/Program.cs",
     "_examples/scenarios-aot/Aot.csproj",

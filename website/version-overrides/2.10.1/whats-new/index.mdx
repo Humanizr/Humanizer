@@ -1,0 +1,41 @@
+---
+id: whats-new
+title: What's new in Humanizer 2.10.1
+sidebar_position: 1
+diataxis: explanation
+persona: upgrading developer
+---
+
+# What's new in Humanizer 2.10.1
+
+Humanizer 2.10.1, released May 5, 2021, focused on explicit culture handling
+for byte sizes and string transformations. It also made formatter registration
+more tolerant of cultures that are unavailable on the host operating system.
+
+## Culture-aware byte sizes
+
+`ByteSize` formatting can use localized unit names and symbols. Its `Parse` and
+`TryParse` APIs gained `IFormatProvider` overloads that honor culture-specific
+decimal separators, group separators, and signs. This work shipped through
+[culture-specific units in #1005](https://github.com/Humanizr/Humanizer/pull/1005)
+and [provider-aware parsing in #1062](https://github.com/Humanizr/Humanizer/pull/1062).
+
+## Culture-aware string transformations
+
+The new `ICulturedStringTransformer` interface and
+`Transform(CultureInfo, ...)` overload let callers supply a culture explicitly
+when applying Humanizer's title-, sentence-, upper-, or lower-case
+transformers. See [#1063](https://github.com/Humanizr/Humanizer/pull/1063).
+
+## More resilient formatter registration
+
+Humanizer now skips registration for a culture that the current operating
+system does not support, instead of failing while the formatter registry is
+initialized. See [#1065](https://github.com/Humanizr/Humanizer/pull/1065).
+
+## Full release record
+
+Read the [2.10.1 release notes](https://github.com/Humanizr/Humanizer/releases/tag/v2.10.1)
+for the issue and pull-request list. The
+[v2.9.9 to v2.10.1 comparison](https://github.com/Humanizr/Humanizer/compare/v2.9.9...v2.10.1)
+contains the complete code and contributor history.

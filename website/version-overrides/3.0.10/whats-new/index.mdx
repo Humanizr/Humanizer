@@ -1,0 +1,32 @@
+---
+id: whats-new
+title: What's new in Humanizer 3.0.10
+sidebar_position: 1
+diataxis: explanation
+persona: developer evaluating an upgrade
+---
+
+# What's new in Humanizer 3.0.10
+
+Humanizer `3.0.10` is a focused analyzer-packaging fix. It does not add runtime
+APIs or change humanized output relative to `3.0.8`.
+
+## Analyzer fallback selection
+
+`3.0.8` shipped Roslyn-specific analyzer variants, but build hosts without
+Roslyn component versioning could still select those assets incorrectly.
+`3.0.10` [moves Humanizer's fallback selection into a target](https://github.com/Humanizr/Humanizer/pull/1682)
+that runs before compilation, removes only the Humanizer analyzer variants
+already selected, and then adds the Roslyn 3.8 baseline.
+
+This corrects analyzer-loading regressions for older or non-version-aware build
+hosts without requiring source changes in consuming projects. The release also
+expanded package smoke coverage across several project types and refined the
+[Humanizer 3 migration documentation](https://github.com/Humanizr/Humanizer/pull/1677).
+
+## Full release details
+
+- [Humanizer 3.0.10 release notes](https://github.com/Humanizr/Humanizer/releases/tag/v3.0.10)
+- [Compare v3.0.8 with v3.0.10](https://github.com/Humanizr/Humanizer/compare/v3.0.8...v3.0.10)
+
+The comparison contains the complete commit and contributor history.

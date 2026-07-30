@@ -1,0 +1,41 @@
+---
+id: whats-new
+title: What's new in Humanizer 2.14.1
+sidebar_position: 1
+---
+
+# What's new in Humanizer 2.14.1
+
+Released on January 29, 2022, Humanizer 2.14.1 is primarily a localization
+release. It expands number and ordinal wording and corrects output for several
+existing cultures.
+
+## Spanish and number wording
+
+- Spanish formatting gained broader support for number words, ordinal words,
+  ordinal dates, time spans, and clock notation. The release also added
+  grammatical-gender and abbreviated-word-form options for ordinals
+  ([#1172](https://github.com/Humanizr/Humanizer/pull/1172)).
+- Korean (`ko-KR`) gained a number-to-words converter
+  ([#1158](https://github.com/Humanizr/Humanizer/pull/1158)).
+- Indian English (`en-IN`) gained number-to-words output using the Indian
+  numbering system ([#1164](https://github.com/Humanizr/Humanizer/pull/1164)).
+
+## Localized output fixes
+
+- French ordinal dates and `TimeOnly` clock notation now use French-specific
+  converters ([#1150](https://github.com/Humanizr/Humanizer/pull/1150)).
+- Norwegian Bokmål time spans use digits for singular values unless word output
+  is requested, keeping multi-part results consistent
+  ([#1151](https://github.com/Humanizr/Humanizer/pull/1151)).
+- Croatian relative-date formatting no longer fails when the dual, trial, or
+  quadral form of “days ago” is selected
+  ([#1171](https://github.com/Humanizr/Humanizer/pull/1171)).
+
+Applications that compare localized strings exactly should review the affected
+cultures after upgrading.
+
+See the [2.14.1 release notes](https://github.com/Humanizr/Humanizer/releases/tag/v2.14.1)
+for the full release record. The
+[2.13.14 to 2.14.1 tag comparison](https://github.com/Humanizr/Humanizer/compare/v2.13.14...v2.14.1)
+contains the complete commit and contributor history.
