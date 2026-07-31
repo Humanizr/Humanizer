@@ -174,11 +174,12 @@ public sealed partial class HumanizerSourceGenerator
                 return;
             }
 
+            var builder = new StringBuilder();
             foreach (var locale in locales)
             {
+                builder.Clear();
                 var propertyName = GetTokenMapPropertyName(locale.LocaleCode);
                 var cacheName = propertyName + "_cache";
-                var builder = new StringBuilder();
                 builder.AppendLine("namespace Humanizer;");
                 builder.AppendLine();
                 builder.AppendLine("static partial class TokenMapWordsToNumberConverters");
