@@ -135,11 +135,11 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
 
     /// <inheritdoc />
     public bool Equals(ByteRate? other) =>
-        other is not null && BytesPerSecond.Equals(other.BytesPerSecond);
+        other?.GetType() == GetType() && BytesPerSecond.Equals(other.BytesPerSecond);
 
     /// <inheritdoc />
     public override bool Equals(object? obj) =>
-        obj is ByteRate other && Equals(other);
+        obj?.GetType() == GetType() && Equals((ByteRate)obj);
 
     /// <inheritdoc />
     public override int GetHashCode() =>

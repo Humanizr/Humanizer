@@ -168,6 +168,23 @@ public class ByteRateTests
     }
 
     [Fact]
+    public void ObjectEqualityRequiresMatchingRuntimeTypes()
+    {
+        var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
+        var derivedRate = new DerivedByteRate(ByteSize.FromBytes(800), TimeSpan.FromSeconds(20));
+        var equivalentDerivedRate = new DerivedByteRate(ByteSize.FromBytes(400), TimeSpan.FromSeconds(10));
+
+        Assert.False(rate.Equals(derivedRate));
+        Assert.False(derivedRate.Equals(rate));
+        Assert.False(EqualityComparer<ByteRate>.Default.Equals(rate, derivedRate));
+        Assert.False(EqualityComparer<ByteRate>.Default.Equals(derivedRate, rate));
+        Assert.False(rate.Equals((object)derivedRate));
+        Assert.False(derivedRate.Equals((object)rate));
+        Assert.True(derivedRate.Equals(equivalentDerivedRate));
+        Assert.True(derivedRate.Equals((object)equivalentDerivedRate));
+    }
+
+    [Fact]
     public void DoesNotEqualDifferentOrNullRates()
     {
         var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
@@ -203,4 +220,6 @@ public class ByteRateTests
 
         Assert.Throws<NotSupportedException>(() => dummyRate.Humanize(units));
     }
+
+    sealed class DerivedByteRate(ByteSize size, TimeSpan interval) : ByteRate(size, interval);
 }
