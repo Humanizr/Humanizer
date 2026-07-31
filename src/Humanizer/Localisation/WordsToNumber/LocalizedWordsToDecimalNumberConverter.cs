@@ -268,12 +268,23 @@ internal sealed class LocalizedWordsToDecimalNumberConverter : IWordsToDecimalNu
                 return -1;
             }
 
+            if (markerIndex > words.Length - decimalMarker.Length)
+                return -1;
+
             var markerEnd = markerIndex + decimalMarker.Length;
-            if (allowsJoinedTokens ||
-                ((markerIndex == 0 || char.IsWhiteSpace(words[markerIndex - 1])) &&
-                 (markerEnd == words.Length || char.IsWhiteSpace(words[markerEnd]))))
+            if (allowsJoinedTokens)
             {
                 return markerIndex;
+            }
+
+            var startsAtTokenBoundary = markerIndex == 0 || char.IsWhiteSpace(words[markerIndex - 1]);
+            if (startsAtTokenBoundary)
+            {
+                var endsAtTokenBoundary = markerEnd == words.Length || char.IsWhiteSpace(words[markerEnd]);
+                if (endsAtTokenBoundary)
+                {
+                    return markerIndex;
+                }
             }
 
             startIndex = markerIndex + decimalMarker.Length;
