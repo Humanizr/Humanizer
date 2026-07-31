@@ -39,6 +39,9 @@ prevents one concurrent operation from changing another operation's output.
 Some APIs use the ambient culture:
 
 ```csharp
+using System.Globalization;
+
+var french = CultureInfo.GetCultureInfo("fr-FR");
 CultureInfo.CurrentCulture = french;
 CultureInfo.CurrentUICulture = french;
 
