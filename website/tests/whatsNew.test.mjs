@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import {access, readFile} from 'node:fs/promises';
-import path from 'node:path';
 import test from 'node:test';
 
 const pagePath = new URL('../docs/whats-new/index.mdx', import.meta.url);
@@ -41,5 +40,5 @@ test('Humanizer 4 overview links to current deeper guides', async () => {
 
   assert(localLinks.length >= 8);
   await Promise.all(localLinks.map((link) =>
-    access(path.resolve(path.dirname(pagePath.pathname), link))));
+    access(new URL(link, pagePath))));
 });

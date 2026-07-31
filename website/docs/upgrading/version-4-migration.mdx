@@ -366,10 +366,12 @@ inflection surface covered by #1892.
 
 ### Ambient formatting now follows `CurrentCulture`
 
-When a culture argument is omitted or null, normal formatter and converter
-paths now resolve from `CultureInfo.CurrentCulture`.
+When a culture argument is omitted or null, registry-backed formatter and
+converter paths now resolve from `CultureInfo.CurrentCulture`.
 `LocaliserRegistry.ResolveForUiCulture()` remains explicitly tied to
-`CurrentUICulture`.
+`CurrentUICulture`. So do `ToHeading()` when its culture is omitted and
+`ToMetric(..., MetricNumeralFormats.UseScaleWord)` when selecting a localized
+scale word.
 
 ```csharp
 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
@@ -382,12 +384,12 @@ var words = 1.ToWords();
 
 | Migration detail | What to do |
 | --- | --- |
-| **Affected callers** | Calls without an explicit culture in applications where formatting culture and UI resource culture differ. |
-| **Before** | Default registries resolve normal formatting from `CurrentUICulture`. |
-| **After** | Normal formatting resolves from `CurrentCulture`; only `ResolveForUiCulture()` explicitly uses `CurrentUICulture`. |
+| **Affected callers** | Registry-backed calls without an explicit culture in applications where formatting culture and UI resource culture differ. |
+| **Before** | Default registries resolve formatting from `CurrentUICulture`. |
+| **After** | Registry-backed formatting resolves from `CurrentCulture`; `ResolveForUiCulture()`, culture-omitting `ToHeading()`, and localized `ToMetric` scale words continue to use `CurrentUICulture`. |
 | **Symptom** | Localized output changes language or number formatting even though the call site is unchanged. |
 | **Minimal action** | Pass `CultureInfo` at the call site when output language is part of the contract. Otherwise align both ambient cultures at the request or job boundary. |
-| **Verify** | Set the two ambient cultures to different values and exercise numbers, ordinals, relative dates, durations, collections, and clock notation. |
+| **Verify** | Set the two ambient cultures to different values and exercise registry-backed numbers, ordinals, relative dates, durations, collections, and clock notation. Separately verify headings and localized metric scale words against `CurrentUICulture`. |
 | **Evidence** | The candidate's [registry resolution tests](https://github.com/Humanizr/Humanizer/blob/42b876dd85a882e3ebee377d36be388b2fbb0b34/tests/Humanizer.Tests/Localisation/LocaliserRegistryTests.cs#L16-L59). |
 
 ### Keep same-name custom cultures distinct
@@ -489,9 +491,7 @@ dotnet test <solution>
 
 ## Related guides and API
 
-- **What's New:** the curated Humanizer 4 page is an integration dependency;
-  its route is not present in the audited baseline and must be linked here when
-  that task supplies a verified document ID.
+- [What's new in Humanizer 4](../whats-new/index.mdx)
 - [Full GitHub release history](https://github.com/Humanizr/Humanizer/releases)
 - [Compare `v3.0.10` with the audited candidate](https://github.com/Humanizr/Humanizer/compare/v3.0.10...42b876dd85a882e3ebee377d36be388b2fbb0b34)
 - [Plan an upgrade](./index.mdx)
