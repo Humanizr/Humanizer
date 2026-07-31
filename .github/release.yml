@@ -3,7 +3,6 @@ changelog:
     labels:
       - no release notes
       - maintenance
-      - dependencies
   categories:
     - title: Breaking changes
       labels:
