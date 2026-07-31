@@ -137,9 +137,11 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
             return 1;
 
         var comparison = BytesPerSecond.CompareTo(other.BytesPerSecond);
-        return comparison != 0 || other.GetType() == GetType()
+        var type = GetType();
+        var otherType = other.GetType();
+        return comparison != 0 || otherType == type
             ? comparison
-            : string.CompareOrdinal(GetType().AssemblyQualifiedName, other.GetType().AssemblyQualifiedName);
+            : type.TypeHandle.Value.ToInt64().CompareTo(otherType.TypeHandle.Value.ToInt64());
     }
 
     /// <inheritdoc />
