@@ -491,18 +491,20 @@ public sealed partial class HumanizerSourceGenerator
             var engine = mapping.GetScalar("engine")
                 ?? throw new InvalidOperationException($"Locale '{localeCode}.surfaces.list' must define 'engine'.");
             var pairTemplate = mapping.GetScalar("pairTemplate");
-            var finalTemplate = mapping.GetScalar("finalTemplate") ?? pairTemplate;
+            var finalTemplate = mapping.GetScalar("finalTemplate");
             var serialTemplate = mapping.GetScalar("serialTemplate");
             if (engine == "oxford" && pairTemplate is null && finalTemplate is null)
             {
                 return mapping;
             }
 
-            if (pairTemplate is null || finalTemplate is null)
+            if (pairTemplate is null)
             {
                 throw new InvalidOperationException(
                     $"Locale '{localeCode}.surfaces.list' must define canonical list templates or legacy 'value'.");
             }
+
+            finalTemplate ??= pairTemplate;
 
             var values = ImmutableDictionary.CreateBuilder<string, SimpleYamlValue>(StringComparer.Ordinal);
             var oxfordComma = ReadBoolean(mapping, "oxfordComma");
