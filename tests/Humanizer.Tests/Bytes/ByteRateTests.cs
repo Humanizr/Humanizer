@@ -1,3 +1,10 @@
+#if NET8_0_OR_GREATER
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Runtime.Loader;
+#endif
+
 [UseCulture("en")]
 public class ByteRateTests
 {
@@ -168,6 +175,73 @@ public class ByteRateTests
     }
 
     [Fact]
+    public void EqualityAndComparisonDistinguishRuntimeTypes()
+    {
+        var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
+        var derivedRate = new DerivedByteRate(ByteSize.FromBytes(800), TimeSpan.FromSeconds(20));
+        var equivalentDerivedRate = new DerivedByteRate(ByteSize.FromBytes(400), TimeSpan.FromSeconds(10));
+
+        Assert.False(rate.Equals(derivedRate));
+        Assert.False(derivedRate.Equals(rate));
+        Assert.False(EqualityComparer<ByteRate>.Default.Equals(rate, derivedRate));
+        Assert.False(EqualityComparer<ByteRate>.Default.Equals(derivedRate, rate));
+        Assert.False(rate.Equals((object)derivedRate));
+        Assert.False(derivedRate.Equals((object)rate));
+        var comparison = rate.CompareTo(derivedRate);
+        Assert.NotEqual(0, comparison);
+        Assert.Equal(-Math.Sign(comparison), Math.Sign(derivedRate.CompareTo(rate)));
+        Assert.Equal(comparison, ((IComparable)rate).CompareTo(derivedRate));
+        Assert.Equal(2, new SortedSet<ByteRate> { rate, derivedRate }.Count);
+        Assert.True(derivedRate.Equals(equivalentDerivedRate));
+        Assert.True(derivedRate.Equals((object)equivalentDerivedRate));
+        Assert.Equal(0, derivedRate.CompareTo(equivalentDerivedRate));
+    }
+
+#if NET8_0_OR_GREATER
+    [Fact]
+    [RequiresDynamicCode("Builds derived fixture types in isolated load contexts.")]
+    [RequiresUnreferencedCode("Activates dynamically emitted fixture types.")]
+    public void ComparisonDistinguishesEqualNamedTypesAcrossLoadContexts()
+    {
+        var firstContext = new SharedHumanizerLoadContext();
+        var secondContext = new SharedHumanizerLoadContext();
+        var thirdContext = new SharedHumanizerLoadContext();
+        try
+        {
+            var first = CreateDerivedRate(firstContext);
+            var second = CreateDerivedRate(secondContext);
+            var third = CreateDerivedRate(thirdContext);
+
+            Assert.NotSame(first.GetType(), second.GetType());
+            Assert.NotSame(second.GetType(), third.GetType());
+            Assert.Equal(first.GetType().AssemblyQualifiedName, second.GetType().AssemblyQualifiedName);
+            Assert.Equal(first.GetType().AssemblyQualifiedName, third.GetType().AssemblyQualifiedName);
+            Assert.Same(firstContext, AssemblyLoadContext.GetLoadContext(first.GetType().Assembly));
+            Assert.Same(secondContext, AssemblyLoadContext.GetLoadContext(second.GetType().Assembly));
+            Assert.Same(thirdContext, AssemblyLoadContext.GetLoadContext(third.GetType().Assembly));
+            Assert.False(first.Equals(second));
+
+            var comparison = first.CompareTo(second);
+            Assert.NotEqual(0, comparison);
+            Assert.Equal(-Math.Sign(comparison), Math.Sign(second.CompareTo(first)));
+
+            var rates = new[] { first, second, third };
+            Array.Sort(rates);
+            Assert.True(rates[0].CompareTo(rates[1]) < 0);
+            Assert.True(rates[1].CompareTo(rates[2]) < 0);
+            Assert.True(rates[0].CompareTo(rates[2]) < 0);
+            Assert.Equal(3, new SortedSet<ByteRate>(rates).Count);
+        }
+        finally
+        {
+            firstContext.Unload();
+            secondContext.Unload();
+            thirdContext.Unload();
+        }
+    }
+#endif
+
+    [Fact]
     public void DoesNotEqualDifferentOrNullRates()
     {
         var rate = ByteSize.FromBytes(400).Per(TimeSpan.FromSeconds(10));
@@ -203,4 +277,50 @@ public class ByteRateTests
 
         Assert.Throws<NotSupportedException>(() => dummyRate.Humanize(units));
     }
+
+#if NET8_0_OR_GREATER
+    [RequiresDynamicCode("Builds a derived fixture type in an isolated load context.")]
+    [RequiresUnreferencedCode("Activates a dynamically emitted fixture type.")]
+    static ByteRate CreateDerivedRate(AssemblyLoadContext context)
+    {
+        using var _ = context.EnterContextualReflection();
+        var assembly = AssemblyBuilder.DefineDynamicAssembly(
+            new("Humanizer.ByteRate.LoadContextFixture"),
+            AssemblyBuilderAccess.RunAndCollect);
+        var type = assembly
+            .DefineDynamicModule("Main")
+            .DefineType(
+                "Humanizer.Tests.LoadContextByteRate",
+                TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed,
+                typeof(ByteRate));
+        var constructor = type.DefineConstructor(
+            MethodAttributes.Public,
+            CallingConventions.Standard,
+            [typeof(ByteSize), typeof(TimeSpan)]);
+        var generator = constructor.GetILGenerator();
+        generator.Emit(OpCodes.Ldarg_0);
+        generator.Emit(OpCodes.Ldarg_1);
+        generator.Emit(OpCodes.Ldarg_2);
+        generator.Emit(
+            OpCodes.Call,
+            typeof(ByteRate).GetConstructor([typeof(ByteSize), typeof(TimeSpan)])!);
+        generator.Emit(OpCodes.Ret);
+
+        var runtimeType = type.CreateType()!;
+        return (ByteRate)Activator.CreateInstance(
+            runtimeType,
+            ByteSize.FromBytes(400),
+            TimeSpan.FromSeconds(10))!;
+    }
+
+    sealed class SharedHumanizerLoadContext() : AssemblyLoadContext(isCollectible: true)
+    {
+        protected override Assembly? Load(AssemblyName assemblyName) =>
+            assemblyName.Name == typeof(ByteRate).Assembly.GetName().Name
+                ? typeof(ByteRate).Assembly
+                : null;
+    }
+#endif
+
+    sealed class DerivedByteRate(ByteSize size, TimeSpan interval) : ByteRate(size, interval);
 }

@@ -130,16 +130,32 @@ public class ByteRate(ByteSize size, TimeSpan interval) :
     /// Compares this rate with another rate after normalizing both to bytes per second.
     /// </summary>
     /// <param name="other">The rate to compare with.</param>
-    public int CompareTo(ByteRate? other) =>
-        other is null ? 1 : BytesPerSecond.CompareTo(other.BytesPerSecond);
+    public int CompareTo(ByteRate? other)
+    {
+        if (other is null)
+            return 1;
+
+        var comparison = BytesPerSecond.CompareTo(other.BytesPerSecond);
+        var type = GetType();
+        var otherType = other.GetType();
+        return comparison != 0 || otherType == type
+            ? comparison
+            : type.TypeHandle.Value.ToInt64().CompareTo(otherType.TypeHandle.Value.ToInt64());
+    }
 
     /// <inheritdoc />
+    /// <remarks>
+    /// Equality requires the other instance to have the same runtime type.
+    /// </remarks>
     public bool Equals(ByteRate? other) =>
-        other is not null && BytesPerSecond.Equals(other.BytesPerSecond);
+        other?.GetType() == GetType() && BytesPerSecond.Equals(other.BytesPerSecond);
 
     /// <inheritdoc />
+    /// <remarks>
+    /// Equality requires the other instance to have the same runtime type.
+    /// </remarks>
     public override bool Equals(object? obj) =>
-        obj is ByteRate other && Equals(other);
+        obj?.GetType() == GetType() && Equals((ByteRate)obj);
 
     /// <inheritdoc />
     public override int GetHashCode() =>
