@@ -128,20 +128,14 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile, CultureIn
             return profile.HourTwelveWord;
         }
 
-        string baseWord;
-        if (profile.HourMode == PhraseClockHourMode.Numeric)
-        {
-            baseWord = hourValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
-        }
-        else
-        {
-            baseWord = profile.HourGender switch
+        var baseWord = profile.HourMode == PhraseClockHourMode.Numeric
+            ? hourValue.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            : profile.HourGender switch
             {
                 GrammaticalGender.Feminine => hourValue.ToWords(GrammaticalGender.Feminine, culture),
                 GrammaticalGender.Neuter => hourValue.ToWords(GrammaticalGender.Neuter, culture),
                 _ => hourValue.ToWords(GrammaticalGender.Masculine, culture)
             };
-        }
 
         // Apply hour suffix (singular/paucal/plural variants).
         if (profile.HourSuffixSingular.Length > 0 || profile.HourSuffixPlural.Length > 0)
@@ -184,7 +178,7 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile, CultureIn
         // (e.g., "dvadsaťtri" instead of "dvadsať tri").
         if (profile.CompactMinuteWords)
         {
-            return RemoveSpaces(words);
+            return words.Replace(" ", "");
         }
 
         // Arabic-style conjunction compaction: " و " → " و" (attaches conjunction to the
@@ -207,24 +201,6 @@ class PhraseClockNotationConverter(PhraseClockNotationProfile profile, CultureIn
         return normalizedMinutes is > 0 and < 10 && profile.ZeroFiller.Length > 0
             ? string.Concat(profile.ZeroFiller, profile.CompactMinuteWords ? "" : " ", rawMinuteWords)
             : rawMinuteWords;
-    }
-
-    /// <summary>
-    /// Removes all spaces from <paramref name="input"/> using a stack buffer.
-    /// </summary>
-    static string RemoveSpaces(string input)
-    {
-        Span<char> buf = stackalloc char[input.Length];
-        var pos = 0;
-        foreach (var c in input)
-        {
-            if (c != ' ')
-            {
-                buf[pos++] = c;
-            }
-        }
-
-        return new string(buf[..pos]);
     }
 
     /// <summary>
