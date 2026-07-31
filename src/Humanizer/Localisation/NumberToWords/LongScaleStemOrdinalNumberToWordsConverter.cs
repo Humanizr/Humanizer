@@ -477,10 +477,14 @@ class LongScaleStemOrdinalNumberToWordsConverter(LongScaleStemOrdinalNumberToWor
     /// Determines whether the value matches one of the round-number shapes that needs a stem rewrite.
     /// </summary>
     static bool IsRoundNumber(long number) =>
-        (number % 10000 == 0 && number < 100000)
-        || (number % 100000 == 0 && number < 1000000)
-        || (number % 1000000 == 0 && number < 10000000)
-        || (number % 10000000 == 0 && number < 100000000)
-        || (number % 100000000 == 0 && number < 1000000000)
-        || (number % 1000000000 == 0 && number < int.MaxValue);
+        number switch
+        {
+            < 100_000 => number % 10_000 == 0,
+            < 1_000_000 => number % 100_000 == 0,
+            < 10_000_000 => number % 1_000_000 == 0,
+            < 100_000_000 => number % 10_000_000 == 0,
+            < 1_000_000_000 => number % 100_000_000 == 0,
+            < int.MaxValue => number % 1_000_000_000 == 0,
+            _ => false
+        };
 }
