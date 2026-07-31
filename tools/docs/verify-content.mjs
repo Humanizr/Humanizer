@@ -102,7 +102,7 @@ for (const area of areas) {
       failures.push(`${relativePage}: missing primary persona`);
     }
 
-    const hasExampleSection = /^##[ \t]+Example[ \t]*\r?$/m.test(content);
+    const hasExampleSection = /^##[ \t]+Example(?:[ \t]+\{#[^}\s]+\})?[ \t]*\r?$/m.test(content);
     const hasExample = /!!raw-loader!.*Program\.cs/.test(content);
     const hasLabeledIllustration = metadata.example === 'illustrative' &&
       /```[a-z]+[\s\S]+?```/.test(content);

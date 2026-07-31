@@ -103,8 +103,11 @@ test('content checker accepts a related section that ends at EOF', async () => {
   });
 });
 
-test('content checker rejects an unlabeled illustrative fragment', async () => {
-  const fragment = validPage.replace('## Example', '##   Example  ');
+test('content checker rejects an unlabeled fragment under an anchored example heading', async () => {
+  const fragment = validPage.replace(
+    '## Example',
+    '##   Example {#legacy-example}  ',
+  );
 
   await withFixture(fragment, (cwd) => {
     const result = spawnSync(process.execPath, [checker, 'sample'], {
