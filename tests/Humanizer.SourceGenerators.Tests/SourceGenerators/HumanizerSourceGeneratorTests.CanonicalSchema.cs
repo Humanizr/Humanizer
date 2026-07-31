@@ -1202,7 +1202,7 @@ public static class CompiledUnicodeComparerHarness
 
         Assert.Equal(1_484, mappedCount);
         Assert.Equal(
-            "cd611463181fccee42283bcb523a37bb5364c4dd05028207a45afc288bec61f2",
+            "cd611463181fccee42283bcb523a37bb5364c4dd05028207a45afc288bec61f2", // DevSkim: ignore DS173237
             Convert.ToHexString(foldHash.GetHashAndReset()).ToLowerInvariant());
 
         void AssertComparerParity(

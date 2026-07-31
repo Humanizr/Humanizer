@@ -1760,7 +1760,7 @@ surfaces:
         var actual = Convert.ToHexString(
                 SHA256.HashData(Encoding.UTF8.GetBytes(snapshot)))
             .ToLowerInvariant();
-        const string expected = "091bde3d8176b78ea5ed4dca0100d017699089eb2473cfdfc958f5054f0474ee";
+        const string expected = "091bde3d8176b78ea5ed4dca0100d017699089eb2473cfdfc958f5054f0474ee"; // DevSkim: ignore DS173237
         var substituted = snapshot.Replace(
             "af\taf\tLatn",
             "af\ten\tLatn",

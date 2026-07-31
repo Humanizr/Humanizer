@@ -179,7 +179,7 @@ public class LocalizedInflectionEngineTests
     public void ProductiveOutputIsDefensivelyScriptChecked()
     {
         var bundle = RuleBundle(new InflectionRule(
-            "zz.forward.unsafe-output",
+            "zz.forward.invalid-output",
             InflectionDirection.Forward,
             100,
             prefix: string.Empty,

@@ -1802,7 +1802,7 @@ public sealed partial class HumanizerSourceGenerator
                     normalized.ToUpperInvariant().Length != normalized.Length)
                 {
                     throw new InvalidOperationException(
-                        $"Inflection {subject} has an unsafe casing expansion.");
+                        $"Inflection {subject} has an unsupported casing expansion.");
                 }
 
                 normalized = lower;
