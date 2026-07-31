@@ -221,12 +221,9 @@ public sealed partial class HumanizerSourceGenerator
                     paths.Add(casePath);
                 }
 
-                foreach (var unit in realization.Value.Units)
+                foreach (var unit in realization.Value.Units.Where(static unit => unit.Value.Kind == DurationCaseRealizationKind.Unsupported))
                 {
-                    if (unit.Value.Kind == DurationCaseRealizationKind.Unsupported)
-                    {
-                        paths.Add($"{casePath}.authored.units.{unit.Key}");
-                    }
+                    paths.Add($"{casePath}.authored.units.{unit.Key}");
                 }
             }
 
@@ -364,21 +361,19 @@ public sealed partial class HumanizerSourceGenerator
 
             var casesMapping = ExpectMapping(casesValue, $"{path}.cases");
             var cases = ImmutableDictionary.CreateBuilder<string, DurationCaseOverlay>(StringComparer.Ordinal);
-            foreach (var caseName in casesMapping.Values.Keys.OrderBy(static name => name, StringComparer.Ordinal))
+            foreach (var caseName in casesMapping.Values.Keys
+                         .OrderBy(static name => name, StringComparer.Ordinal)
+                         .Where(caseName => !Cases.Contains(caseName, StringComparer.Ordinal) || caseName == "nominative"))
             {
-                if (!Cases.Contains(caseName, StringComparer.Ordinal) || caseName == "nominative")
-                {
-                    throw new InvalidOperationException(
-                        $"'{path}.cases' defines unsupported non-nominative case '{caseName}'.");
-                }
+                throw new InvalidOperationException(
+                    $"'{path}.cases' defines unsupported non-nominative case '{caseName}'.");
             }
 
-            foreach (var caseName in Cases)
+            foreach (var caseName in Cases
+                         .Where(static caseName => caseName != "nominative")
+                         .Where(casesMapping.Values.ContainsKey))
             {
-                if (caseName != "nominative" && casesMapping.TryGetValue(caseName, out var caseValue))
-                {
-                    cases[caseName] = ParseCase(caseValue, $"{path}.cases.{caseName}");
-                }
+                cases[caseName] = ParseCase(casesMapping.Values[caseName], $"{path}.cases.{caseName}");
             }
 
             if (cases.Count == 0)
@@ -1086,13 +1081,10 @@ public sealed partial class HumanizerSourceGenerator
             ImmutableDictionary<string, DurationCaseSource> sources,
             string path)
         {
-            foreach (var sourceId in provenance)
+            foreach (var sourceId in provenance.Where(sourceId => !sources.ContainsKey(sourceId)))
             {
-                if (!sources.ContainsKey(sourceId))
-                {
-                    throw new InvalidOperationException(
-                        $"'{path}.provenance' references unknown source '{sourceId}'.");
-                }
+                throw new InvalidOperationException(
+                    $"'{path}.provenance' references unknown source '{sourceId}'.");
             }
         }
 
@@ -1209,13 +1201,10 @@ public sealed partial class HumanizerSourceGenerator
 
         static void RejectUnknownKeys(SimpleYamlMapping mapping, string path, IReadOnlyCollection<string> supported)
         {
-            foreach (var key in mapping.Values.Keys)
+            foreach (var key in mapping.Values.Keys.Where(key => !supported.Contains(key)))
             {
-                if (!supported.Contains(key))
-                {
-                    throw new InvalidOperationException(
-                        $"'{path}' defines unsupported property '{key}'. Supported properties: {string.Join(", ", supported)}.");
-                }
+                throw new InvalidOperationException(
+                    $"'{path}' defines unsupported property '{key}'. Supported properties: {string.Join(", ", supported)}.");
             }
         }
     }

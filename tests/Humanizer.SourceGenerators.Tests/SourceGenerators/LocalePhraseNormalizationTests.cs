@@ -688,6 +688,19 @@ surfaces: {}
     }
 
     [Fact]
+    public void DurationCasesRejectUnknownRootProperties()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                """
+                classification: not-applicable
+                unexpected: true
+                """));
+
+        Assert.Contains("'zz.durationCases' defines unsupported property 'unexpected'", exception.Message);
+    }
+
+    [Fact]
     public void DurationCaseOverlayRejectsUnresolvedCldrInheritanceMarkers()
     {
         var exception = Assert.Throws<InvalidOperationException>(
@@ -765,6 +778,33 @@ surfaces: {}
         Assert.Equal(
             HumanizerSourceGenerator.DurationCaseUnitKind.SameAsNominative,
             catalog.Cases["accusative"].Units["day"].Kind);
+    }
+
+    [Fact]
+    public void ExplicitDurationCasesRejectUnknownProvenanceSources()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ParseDurationCases(
+                """
+                classification: invariant
+                citationCase: nominative
+                inventory:
+                  - nominative
+                sources:
+                  grammar:
+                    kind: grammar
+                    url: 'https://example.test/grammar'
+                    revision: 'abc123'
+                    locator: 'duration cases'
+                    credit: 'Example grammar'
+                cases:
+                  nominative:
+                    authored: base-duration
+                    provenance:
+                      - missing
+                """));
+
+        Assert.Contains("references unknown source 'missing'", exception.Message);
     }
 
     [Fact]
