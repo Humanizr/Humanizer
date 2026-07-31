@@ -94,8 +94,10 @@ static partial class LocalizedInflectionCatalog
     {
         if (GeneratedCultureResolver.TryResolve(culture.Name, out var resolution))
         {
-            return TryResolveRuleCore(culture.Name, out rule) ||
-                TryResolveRuleCore(resolution.LocaleProfileOwner, out rule);
+            if (TryResolveRuleCore(culture.Name, out rule))
+                return true;
+
+            return TryResolveRuleCore(resolution.LocaleProfileOwner, out rule);
         }
 
         rule = default;
