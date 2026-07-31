@@ -41,7 +41,7 @@ test('deployed site preserves reader, version, search, and legacy contracts', as
   await page.goto('/');
   await expect(
     page.getByRole('heading', {
-      name: 'Turn .NET values into words people understand.',
+      name: 'Human-friendly text for .NET.',
     }),
   ).toBeVisible();
   await expect(page.getByRole('button', {name: 'All versions'})).toBeVisible();
