@@ -1290,6 +1290,15 @@ surfaces:
     finalTemplate: 'prefix {0}'
 """));
 
+        var missingPairTemplateCatalog = CreateCatalog(
+            ("zz", """
+locale: 'zz'
+surfaces:
+  list:
+    engine: 'conjunction'
+    finalTemplate: '{0} and {1}'
+"""));
+
         Assert.Contains(
             missingTemplatesCatalog.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
@@ -1298,6 +1307,10 @@ surfaces:
             malformedTemplatesCatalog.Diagnostics,
             static diagnostic => diagnostic.Id == "HSG003" &&
                 diagnostic.GetMessage().Contains("must use '{0}' and '{1}'", StringComparison.Ordinal));
+        Assert.Contains(
+            missingPairTemplateCatalog.Diagnostics,
+            static diagnostic => diagnostic.Id == "HSG003" &&
+                diagnostic.GetMessage().Contains("must define canonical list templates", StringComparison.Ordinal));
     }
 
     [Fact]
